@@ -33,7 +33,7 @@ export default function CodeOpenPage(): JSX.Element {
                             <CallToAction type="primary" size="md" to="/code/download">
                                 Download PostHog Desktop
                             </CallToAction>
-                            <CallToAction type="secondary" size="md" to="/docs/posthog-code">
+                            <CallToAction type="secondary" size="md" to="/docs/posthog-desktop">
                                 Read the docs
                             </CallToAction>
                         </div>

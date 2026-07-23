@@ -1,6 +1,5 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import UseCaseSubmission from '../UseCaseSubmission'
 import { SectionComponentProps } from '../types'
 
 const columns = [
@@ -14,7 +13,6 @@ interface UseCasesData {
 }
 
 const UseCases = ({ id, productData }: SectionComponentProps) => {
-    const { name } = productData ?? {}
     const useCases: UseCasesData | undefined = productData?.useCases
     const rows = useCases?.rows ?? []
 
@@ -36,9 +34,6 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
                 width="full"
                 className="@2xl/reader-content-container:max-w-3xl"
             />
-            <div className="mt-4">
-                <UseCaseSubmission productName={name} productSlug={productData?.slug} />
-            </div>
         </section>
     )
 }
