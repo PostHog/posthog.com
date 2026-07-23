@@ -72,7 +72,7 @@ importers:
         specifier: ^2.11.2
         version: 2.11.8
       '@posthog/brand':
-        specifier: ^0.8.0
+        specifier: 0.8.0
         version: 0.8.0(react@18.3.1)
       '@posthog/hedgehog-mode':
         specifier: ^0.0.52
@@ -702,6 +702,9 @@ importers:
       sass-loader:
         specifier: ^12.2.0
         version: 12.6.0(sass@1.92.1)(webpack@5.101.3)
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
       storybook-addon-gatsby:
         specifier: 0.0.2
         version: 0.0.2(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@4.9.5)(webpack-hot-middleware@2.26.1))

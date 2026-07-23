@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import dayjs from 'dayjs'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { PROFILE_COLORS } from 'constants/profileColors'
 
 export type EventGraphicSpeaker = {
@@ -90,7 +90,7 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                             speaker ? '' : 'mt-auto'
                         }`}
                     >
-                        <Logo className="h-[5cqw] w-auto shrink-0" />
+                        <Logo className="h-[5cqw] w-auto shrink-0" width="auto" />
                         {partnerNames.length > 0 && (
                             <>
                                 <span className="font-rounded text-[3cqw] font-semibold uppercase leading-none">

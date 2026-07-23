@@ -1,5 +1,5 @@
 import cntl from 'cntl'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { Link } from 'gatsby'
 import React from 'react'
 
@@ -80,7 +80,8 @@ export default function Breadcrumbs({
                             className="w-5 h-4"
                             variant={linkColor ? 'mono' : 'gradient'}
                             color={linkColor}
-                            wordmark={false}
+                            layout="logomark"
+                            width="auto"
                         />
                     }
                 />

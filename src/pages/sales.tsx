@@ -6,7 +6,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
 import { CallToAction } from 'components/CallToAction'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { motion } from 'framer-motion'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -616,7 +616,8 @@ export default function Sales() {
                     <h2 className="text-4xl !m-0 p-0">
                         <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
                         <span className="inline-flex items-center gap-2 whitespace-nowrap relative top-3">
-                            <Logo wordmark={false} className="h-12 inline-block" /> PostHog
+                            <Logo.Logomark width="auto" className="h-12 inline-block dark:brightness-0 dark:invert" />{' '}
+                            PostHog
                         </span>
                     </h2>
                     <div className="grid @3xl:grid-cols-2 @3xl:gap-8 items-center @3xl:items-start">
@@ -725,7 +726,11 @@ export default function Sales() {
                 <div className="flex-1 px-8 py-8">
                     <div className="max-w-5xl mx-auto">
                         <h2 className="flex justify-center items-center mb-6 text-2xl font-bold">
-                            How <Logo wordmark={false} className="inline-block h-6 w-auto mt-[-2px] ml-2 mr-1.5" />{' '}
+                            How{' '}
+                            <Logo.Logomark
+                                width="auto"
+                                className="inline-block h-6 w-auto mt-[-2px] ml-2 mr-1.5 dark:brightness-0 dark:invert"
+                            />{' '}
                             PostHog does sales
                         </h2>
                         <div className="not-prose">
