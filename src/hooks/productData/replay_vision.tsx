@@ -25,7 +25,7 @@ import PostHogWaySection from 'components/ReplayVision/PostHogWaySection'
 import HowToUseSection from 'components/ReplayVision/HowToUseSection'
 import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
 import WorksWithSection from 'components/ReplayVision/WorksWithSection'
-import PlaceholderSection from 'components/ReplayVision/PlaceholderSection'
+import { PricingTLDR, PricingPlans, PricingCredits } from 'components/ReplayVision/PricingSections'
 import PricingFooterCTASection from 'components/ReplayVision/PricingFooterCTASection'
 import { sessionReplay } from './session_replay'
 import { topFeatures } from './replay_vision/slides'
@@ -172,7 +172,7 @@ export const replayVision = {
     seo: {
         title: 'Replay Vision - PostHog',
         description:
-            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
     },
     /**
      * Sections rendered on the Product surface (`/replay-vision`). Each entry
@@ -235,22 +235,19 @@ export const replayVision = {
         {
             slug: 'pricing-tldr',
             name: 'TL;DR',
-            component: PlaceholderSection,
-            props: { title: 'Pricing TL;DR' },
+            component: PricingTLDR,
             icon: <IconInfo className="size-4" />,
         },
         {
             slug: 'plans',
             name: 'Plans',
-            component: PlaceholderSection,
-            props: { title: 'Plans' },
+            component: PricingPlans,
             icon: <IconCheckCircle className="size-4" />,
         },
         {
             slug: 'calculator',
             name: 'Pricing calculator',
-            component: PlaceholderSection,
-            props: { title: 'Pricing calculator' },
+            component: PricingCredits,
             icon: <IconPieChart className="size-4" />,
         },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
@@ -260,7 +257,7 @@ export const replayVision = {
     overview: {
         title: 'Your product, watching itself',
         description:
-            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem surfaces itself, and so does the patch. You just hit merge.',
+            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
         textColor: 'text-black', // tw
     },
     screenshots: {

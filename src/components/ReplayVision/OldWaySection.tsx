@@ -31,7 +31,7 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             />
 
             <SectionLabel>
-                The <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1" /> old way to use session
+                <InlineIcon icon={StickerTombstone} className="!size-10 !top-3 -rotate-1" /> The old way to use session
                 replay
             </SectionLabel>
 
