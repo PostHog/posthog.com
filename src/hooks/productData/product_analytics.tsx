@@ -9,7 +9,6 @@ import {
     IconPieChart,
     IconCheckCircle,
     IconInfo,
-    IconPlay,
     IconCursorClick,
     IconMagic,
     IconChat,
@@ -67,7 +66,6 @@ export const productAnalytics = {
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
-        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -168,12 +166,6 @@ export const productAnalytics = {
         'sql-editor': {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
             alt: 'SQL editor',
-        },
-    },
-    videos: {
-        overview: {
-            youtube: '',
-            wistia: '0be67lqiau',
         },
     },
     hog: {

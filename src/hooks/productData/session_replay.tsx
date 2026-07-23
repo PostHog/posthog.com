@@ -10,7 +10,6 @@ import {
     IconPieChart,
     IconCheckCircle,
     IconInfo,
-    IconPlay,
     IconCursorClick,
     IconMagic,
     IconChat,
@@ -68,7 +67,6 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
-        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -120,11 +118,6 @@ export const sessionReplay = {
             'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         eli5: "Session Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
-    },
-    videos: {
-        overview: {
-            wistia: 'a1480fky0u',
-        },
     },
     screenshots: {
         overview: {

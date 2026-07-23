@@ -129,7 +129,7 @@ export const sessionReplay = {
 }
 ```
 
-Only the items listed in `productMenu` / `pricingMenu` render as sections — other product-data fields (like `screenshots`, `hog`, `slider`, `videos`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
+Only the items listed in `productMenu` / `pricingMenu` render as sections — other product-data fields (like `screenshots`, `hog`, `slider`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
 
 If a section's slug already matches a key in `templateRegistry` (see `templates/index.ts`), no extra wiring is needed; the registry resolves it automatically. Use `template:` only when the slug differs from the desired template key, or when reusing one template under several anchors.
 
