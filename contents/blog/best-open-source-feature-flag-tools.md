@@ -257,6 +257,21 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## Frequently asked questions
 
 <details>
+<summary>What makes PostHog different from other tools?</summary>
+
+PostHog helps you build [self-driving products](/self-driving), and no, this isn't about cars. Instead of you prompting an agent, the product prompts itself.
+
+It starts with context. Having a ton of developer tools in one place – [product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), and a [data warehouse](/data-stack) – means PostHog sees everything happening in your product. That's the part most other tools can't do: [loop engineering](/newsletter/loops) needs all kinds of signals from your product, and with PostHog, those are all in one place.
+
+Then [scouts](/blog/what-is-a-scout) (small agents on a schedule) read across all of it and decide what's worth knowing and what’s just noise. What clears the bar becomes a report in your inbox, an agent picks it up, roots out the cause, and opens the PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp). Dealer's choice.
+
+Putting your product on self-driving mode means putting things like papercuts and conversion tweaks on cruise control, so you spend your time on the calls that need judgment – which is roughly [what software looks like by 2030](/newsletter/2030-shaped-software), when agents are the primary users and humans mostly approve, prioritize, and decide.
+
+</details>
+
+<details>
   <summary>What is the best free feature flag tool?</summary>
 
 - **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform — its free tier includes 1 million feature flag requests per month. 
