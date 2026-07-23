@@ -665,8 +665,8 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                     />
                     <p className="text-sm text-secondary italic !mb-0">
                         Try{' '}
-                        <Link to="/code" className="underline">
-                            PostHog Code
+                        <Link to="/desktop" className="underline">
+                            PostHog Desktop
                         </Link>{' '}
                         for free. It's very special. Just like you. See for yourself.
                     </p>

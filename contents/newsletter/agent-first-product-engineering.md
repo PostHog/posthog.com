@@ -61,7 +61,7 @@ The result is a set of tool handlers – one file per product area – ready to 
 
 ## 2. Meet agents at their level of abstraction
 
-To build an agent-first experience, you have to find the semantic layer where agents already reason best and meet them there.
+To build an [agent-first experience](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first), you have to find the semantic layer where agents already reason best and meet them there.
 
 This saves a ton of context (a precious resource) but the benefits are more than practical. They're fundamental. The more "raw" your product's agent interface is, the more creative potential you unlock.
 
