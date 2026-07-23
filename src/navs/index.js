@@ -7485,6 +7485,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/distributed-tracing/installation' },
                         { name: 'Node.js', url: '/docs/distributed-tracing/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/distributed-tracing/installation/nextjs' },
                         { name: 'Python', url: '/docs/distributed-tracing/installation/python' },
                         { name: 'Go', url: '/docs/distributed-tracing/installation/go' },
                         { name: 'Java', url: '/docs/distributed-tracing/installation/java' },
