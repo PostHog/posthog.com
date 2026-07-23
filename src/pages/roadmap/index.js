@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IconChevronDown } from '@posthog/icons'
 import Editor from 'components/Editor'
 import OSButton from 'components/OSButton'
@@ -15,6 +15,16 @@ const RoadmapPage = () => {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
     }
+
+    // /wip redirects to /roadmap#teams; the Editor scrolls in its own viewport, so native
+    // anchor navigation doesn't reach the heading — scroll it into view after first paint.
+    useEffect(() => {
+        if (window.location.hash !== '#teams') {
+            return
+        }
+        const timeout = window.setTimeout(scrollToTeamGoals, 100)
+        return () => window.clearTimeout(timeout)
+    }, [])
 
     return (
         <>

@@ -1073,7 +1073,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                             type="button"
                             size="md"
                             variant="secondary"
-                            className="!h-10 shrink-0"
+                            className="shrink-0"
                             onClick={() => openTeam(filterGridTeam.slug)}
                         >
                             View team goals

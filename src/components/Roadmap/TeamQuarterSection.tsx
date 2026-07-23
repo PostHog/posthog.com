@@ -28,7 +28,7 @@ const TeamCard = ({
             aria-haspopup="dialog"
             aria-expanded={active}
             onClick={onClick}
-            className={`flex w-full items-center gap-2.5 rounded-md border border-primary p-2.5 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow ${
+            className={`flex w-full items-center gap-3 rounded-md border border-primary p-3 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red dark:focus-visible:ring-yellow ${
                 active ? 'bg-accent' : 'bg-primary'
             }`}
         >
@@ -70,9 +70,9 @@ const TeamQuarterSection = ({
     onTeamClick: (slug: string) => void
 }): JSX.Element => (
     <section aria-labelledby="teams" className="flex flex-col gap-3">
-        <header className="px-1">
+        <header className="px-2">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h2 id="teams" className="m-0 text-xl text-primary">
+                <h2 id="teams" className="m-0 scroll-mt-4 text-xl text-primary">
                     What teams are working on this quarter
                 </h2>
                 <span className="shrink-0 whitespace-nowrap text-sm text-secondary">
@@ -88,7 +88,7 @@ const TeamQuarterSection = ({
             </p>
         </header>
         {teams.length === 0 ? (
-            <p className="m-0 px-1 text-sm text-muted">No teams match.</p>
+            <p className="m-0 px-2 text-sm text-muted">No teams match.</p>
         ) : (
             <ul className="m-0 grid list-none grid-cols-2 gap-2 p-0 @xl:grid-cols-3 @3xl:grid-cols-4 @5xl:grid-cols-6">
                 {teams.map((team) => (

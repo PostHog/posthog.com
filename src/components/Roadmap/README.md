@@ -1,6 +1,6 @@
 # Roadmap board
 
-`EarlyAccessFeaturesSection` powers `/roadmap`. It presents the same early-access data and enrollment flows as the PostHog app in a compact, changelog-style board, followed by a quarter grid showing what every team is working on (the former `/wip` page, which now redirects here).
+`EarlyAccessFeaturesSection` powers `/roadmap`. It presents the same early-access data and enrollment flows as the PostHog app in a compact, changelog-style board, followed by a quarter grid showing what every team is working on (the former `/wip` page, which now redirects to `/roadmap#teams`; the page shell scrolls the Editor viewport to the grid when it sees that hash, since native anchor navigation doesn't reach into the app's own scroll container).
 
 ## Data ownership
 
