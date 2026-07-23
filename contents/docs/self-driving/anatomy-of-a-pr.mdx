@@ -61,7 +61,7 @@ Because the report is actionable, an implementation agent builds the fix in a sa
 1. It clones your repo and creates a branch like `ai-fix/checkout-discount-null`.
 2. It writes the change: handle the legacy coupon format and add the missing guard, plus a regression test that reproduces the original failure.
 3. It opens a pull request with a written description of the problem, the root cause, and the reasoning, and links back to the report and its evidence.
-4. It suggests a reviewer from git blame, and babysits CI until the checks are green.
+4. It suggests reviewers using relevant code history and recent activity in the affected area, and babysits CI until the checks are green.
 
 The PR reads like it came from a teammate who did the investigation properly, because that's what happened.
 
