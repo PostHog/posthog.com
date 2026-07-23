@@ -158,7 +158,10 @@ interface ProductComparisonTableProps {
 export default function ProductComparisonTable({
     competitors,
     rows,
-    width = 'auto',
+    // Fill the available width by default so small tables (e.g. two-column blog
+    // comparisons) don't collapse to their minimum content width. Wide tables
+    // still overflow and scroll, with an edge fade hinting there's more to see.
+    width = 'full',
     autoExpand = false,
     excludedSections = [],
     requireCompleteData = false,

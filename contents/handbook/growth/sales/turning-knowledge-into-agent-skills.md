@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our documentation is a critical piece of PostHog's **context flywheel** – a system that connects our codebase to our docs, which then feeds into our AI agents, the [Wizard](/handbook/wizard-and-docs/developing-the-wizard), and PostHog Code. When documentation is outdated, the agents that help customers integrate PostHog become outdated too.
+Our documentation is a critical piece of PostHog's **context flywheel** – a system that connects our codebase to our docs, which then feeds into our AI agents, the [Wizard](/handbook/wizard-and-docs/developing-the-wizard), and PostHog Desktop. When documentation is outdated, the agents that help customers integrate PostHog become outdated too.
 
 This means your knowledge directly powers our AI tools. When you write down what you know, it doesn't just help humans – it helps robots help customers faster.
 
