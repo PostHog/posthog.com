@@ -15,7 +15,6 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
-    IconShieldPeople,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
@@ -88,7 +87,6 @@ export const productAnalytics = {
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
         {
             slug: 'installation',
             name: 'Install',

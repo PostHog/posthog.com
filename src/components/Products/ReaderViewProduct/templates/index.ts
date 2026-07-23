@@ -20,7 +20,6 @@ import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
 import Changelog from './Changelog'
 import CommunityQuestions from './CommunityQuestions'
-import Team from './Team'
 
 /**
  * Registry of available section templates, keyed by the `template` string on
@@ -49,7 +48,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     'pricing-cta': PricingFooterCTA,
     changelog: Changelog,
     community: CommunityQuestions,
-    team: Team,
 }
 
 export {
@@ -73,5 +71,4 @@ export {
     PricingFooterCTA,
     Changelog,
     CommunityQuestions,
-    Team,
 }
