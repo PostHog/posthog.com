@@ -22,6 +22,7 @@ import { TeamsSidebar } from 'components/Job/TeamsSidebar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Mark from 'mark.js'
 import { OSInput } from 'components/OSForm'
+import { formatTeamName } from 'lib/utils'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -209,7 +210,7 @@ const LeftSidebarContent = React.memo(
                                                                         : []
                                                                     return teams.length > 1
                                                                         ? 'Multiple teams'
-                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                        : teams.length === 1 && formatTeamName(teams[0])
                                                                 })()}
                                                             </span>
                                                         )}
@@ -260,7 +261,7 @@ const LeftSidebarContent = React.memo(
                                                                         : []
                                                                     return teams.length > 1
                                                                         ? 'Multiple teams'
-                                                                        : teams.length === 1 && `${teams[0]} Team`
+                                                                        : teams.length === 1 && formatTeamName(teams[0])
                                                                 })()}
                                                             </span>
                                                         )}

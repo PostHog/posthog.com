@@ -7,7 +7,6 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/experiment-hog.jpg
 featuredImageType: full
 tags:
-  - Feature management
   - Feature flags
   - Product engineers
 crosspost:

@@ -4,7 +4,7 @@ import { section, SectionHeader } from './Sections'
 import { usePlatform } from '../Platform/usePlatform'
 import useProducts from '../Products'
 import { IconCheck, IconX } from '@posthog/icons'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CTA } from '../Plans'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -102,7 +102,7 @@ const comparison = [
         name: 'PostHog',
         logo: (
             <div className="">
-                <Logo wordmark={false} className="h-6 mx-auto" />
+                <Logo layout="logomark" className="h-6 mx-auto" width="auto" />
             </div>
         ),
         products: {

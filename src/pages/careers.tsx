@@ -1,7 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useRef, useState } from 'react'
 import { CareersHero } from '../components/Careers/CareersHero'
-import { OpenRoles } from '../components/Careers/OpenRoles'
 import { Transparency } from '../components/Careers/Transparency'
 import { SEO } from '../components/seo'
 import MegaQuote from 'components/Careers/MegaQuote'
@@ -161,9 +160,6 @@ const IndexPage = () => {
                         </div>
                         <div id="team-quotes">
                             <TeamQuotes />
-                        </div>
-                        <div id="open-roles">
-                            <OpenRoles />
                         </div>
                     </div>
                 </ScrollArea>

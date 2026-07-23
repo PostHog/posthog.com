@@ -84,6 +84,50 @@
             "destination": "/handbook/:path*.md"
         },
         {
+            "source": "/blog/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/blog/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/blog/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
+            "source": "/newsletter/:path*",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/newsletter/:path*.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
@@ -106,7 +150,7 @@
     ],
     "redirects": [
         { "source": "/papers", "destination": "/research#papers" },
-        { "source": "/desktop", "destination": "/code" },
+        { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
         { "source": "/teams/query-performance", "destination": "/teams/analytics-platform" },
         {
@@ -128,8 +172,8 @@
         },
         { "source": "/docs/site-apps", "destination": "/docs/js-snippets" },
         { "source": "/docs/site-apps/:path*", "destination": "/docs/js-snippets/:path*" },
-        { "source": "/code/download", "destination": "/code#download" },
-        { "source": "/code/download/", "destination": "/code#download" },
+        { "source": "/code/download", "destination": "/desktop#download" },
+        { "source": "/code/download/", "destination": "/desktop#download" },
         {
             "source": "/slack-app",
             "destination": "/slack"
@@ -319,7 +363,7 @@
         },
         {
             "source": "/docs/posthog-code/quick-tour",
-            "destination": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
             "statusCode": 301
         },
         {
@@ -437,6 +481,21 @@
         {
             "source": "/docs/posthog-code/slack",
             "destination": "/docs/slack"
+        },
+        {
+            "source": "/docs/posthog-code/download-posthog-code",
+            "destination": "/docs/posthog-desktop/download-posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/:path*",
+            "destination": "/docs/posthog-desktop/:path*",
+            "statusCode": 301
         },
         {
             "source": "/docs/slack-app",
@@ -917,7 +976,7 @@
         },
         {
             "source": "/handbook/company/branding",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/docs/tutorials/:path*",
@@ -1966,6 +2025,11 @@
         { "source": "/manual/sso", "destination": "/docs/settings/sso" },
         { "source": "/manual/support", "destination": "/docs/support-options" },
         { "source": "/docs/support/zendesk-import", "destination": "/docs/support/imports/zendesk", "statusCode": 301 },
+        {
+            "source": "/docs/support/self-driving",
+            "destination": "/docs/support#how-support-works-with-self-driving",
+            "statusCode": 301
+        },
         { "source": "/manual/glossary", "destination": "/docs/glossary" },
         { "source": "/docs/integrate/browser-extension", "destination": "/docs/advanced/browser-extension" },
         { "source": "/docs/integrate/cdp", "destination": "/docs/advanced/cdp" },
@@ -3339,20 +3403,16 @@
             "destination": "/blog/general"
         },
         {
-            "source": "/product-analytics/pricing",
-            "destination": "/product-analytics#pricing"
-        },
-        {
             "source": "/product-analytics/customers",
-            "destination": "/product-analytics#customers"
+            "destination": "/product-analytics"
         },
         {
             "source": "/product-analytics/comparisons",
-            "destination": "/product-analytics#posthog-vs"
+            "destination": "/product-analytics#feature-comparison"
         },
         {
             "source": "/product-analytics/documentation",
-            "destination": "/product-analytics#docs"
+            "destination": "/docs/product-analytics"
         },
         {
             "source": "/product-analytics/tutorials",
@@ -3360,7 +3420,7 @@
         },
         {
             "source": "/product-analytics/roadmap",
-            "destination": "/product-analytics#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/product-analytics/questions",
@@ -3368,11 +3428,11 @@
         },
         {
             "source": "/session-replay/customers",
-            "destination": "/session-replay#customers"
+            "destination": "/session-replay"
         },
         {
             "source": "/session-replay/comparisons",
-            "destination": "/session-replay#posthog-vs"
+            "destination": "/session-replay#feature-comparison"
         },
         {
             "source": "/session-replay/documentation",
@@ -3384,7 +3444,7 @@
         },
         {
             "source": "/session-replay/roadmap",
-            "destination": "/session-replay#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/session-replay/questions",
@@ -3480,7 +3540,7 @@
         },
         {
             "source": "/logo",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/blog/tags/product-engineer",

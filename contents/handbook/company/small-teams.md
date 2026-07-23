@@ -65,7 +65,7 @@ Team leads also take on a range of broader responsibilities that revolve around 
 
 Setting up support processes is a team lead responsibility, but if you need any assistance just contact the Support team directly.
 
-Team leads are responsible for creating Slack channels for their support function and ensuring integration with Zendesk, so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up SLA and support hero notifications.
+Team leads are responsible for creating a `#support-<team-name>` Slack channel and making sure their team is [set up for support](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support), so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up support hero notifications.
 
 To kick off any org change, run `/org-change` in Slack.
 

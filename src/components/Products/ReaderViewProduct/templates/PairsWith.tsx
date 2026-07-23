@@ -14,7 +14,7 @@ const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Works with other PostHog products</h2>
+            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Works with other PostHog tools</h2>
             <p className="text-base text-secondary leading-relaxed m-0 mb-4">
                 Use {productData?.name} with these other PostHog apps to maximize shareholder value.
             </p>

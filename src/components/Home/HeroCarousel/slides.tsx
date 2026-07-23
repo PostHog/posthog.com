@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { IconFlag, IconLightBulb, IconRocket, IconSearch, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
@@ -402,8 +402,8 @@ const emptyStateActions = [
 
 const PostHogAIEmptyState = () => (
     <div className="@container flex min-h-[242px] w-full flex-col items-center overflow-hidden rounded bg-[#F3F4F0] px-2 pt-5 text-center dark:bg-[#131316] @sm:px-3">
-        <Logo wordmark={false} className="h-7 w-[52px] dark:hidden" />
-        <Logo wordmark={false} variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" />
+        <Logo layout="logomark" className="h-7 w-[52px] dark:hidden" width="auto" />
+        <Logo layout="logomark" variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" width="auto" />
 
         <h3 className="mb-0 mt-5 text-lg font-bold leading-tight @sm:text-xl">Hello, builder!</h3>
 
@@ -486,8 +486,8 @@ export const DebugFixSlide = () => {
             <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                 <p className="text-secondary text-sm my-3">
                     <strong>New:</strong>{' '}
-                    <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                        PostHog Code
+                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                        PostHog Desktop
                     </Link>{' '}
                     proactively finds bugs, fixes them, and creates pull requests automatically.
                 </p>
@@ -554,8 +554,8 @@ export const TestRolloutSlide = () => {
             </p>
             <p className="text-secondary text-sm">
                 And you can build it all with{' '}
-                <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                    PostHog Desktop
                 </Link>
                 , our new AI code editor. It builds new features with the proper PostHog instrumentation and lets you
                 manage AI agents in parallel.

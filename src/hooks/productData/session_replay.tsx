@@ -4,22 +4,17 @@ import {
     IconEye,
     IconSparkles,
     IconList,
-    IconGraph,
     IconConfetti,
     IconRocket,
     IconPieChart,
     IconCheckCircle,
-    IconPeople,
     IconInfo,
-    IconPlay,
     IconCursorClick,
     IconMagic,
     IconChat,
     IconCode,
-    IconMap,
     IconMessage,
     IconNewspaper,
-    IconShieldPeople,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
@@ -56,13 +51,6 @@ export const sessionReplay = {
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'customers',
-            name: 'Who uses it?',
-            hideFromNav: true,
-            group: 'divided',
-            icon: <IconPeople className="size-4" />,
-        },
-        {
             slug: 'eli5',
             name: 'What does it do?',
             hideFromNav: true,
@@ -76,7 +64,6 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
-        { slug: 'demo', name: 'Demo', group: 'divided', icon: <IconPlay className="size-4" /> },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -98,10 +85,14 @@ export const sessionReplay = {
             icon: <IconChat className="size-4" />,
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
         {
             slug: 'installation',
             name: 'Install',
@@ -118,7 +109,6 @@ export const sessionReplay = {
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
         { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
-        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
         // Hidden footer CTA rendered at the bottom of the Pricing surface.
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
@@ -128,11 +118,6 @@ export const sessionReplay = {
             'Session Replay is one of the tools that makes your product self-driving: play back sessions to see exactly why something happened so the fix is obvious. The context agents use to debug UI issues and nuanced user behavior in your product, website, or mobile app.',
         eli5: "Session Replay records what happens in a user's session — clicks, scrolls, form inputs, page views, network requests, console logs — and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
-    },
-    videos: {
-        overview: {
-            wistia: 'a1480fky0u',
-        },
     },
     screenshots: {
         overview: {
@@ -279,24 +264,6 @@ export const sessionReplay = {
             unit: 'mobile recording',
         },
     ],
-    customers: {
-        hasura: {
-            headline: 'improved conversion rates by 10-20%',
-            description: "We wouldn't have noticed that needed fixing without PostHog's session replays.",
-        },
-        elevenlabs: {
-            headline: 'uses replays and surveys when testing ideas',
-            description: 'We watch lots of replays when testing a feature, and love how easy it is to launch surveys',
-        },
-        netdata: {
-            headline: 'reduced back-and-forth in community support',
-            description: 'Session replay in PostHog is so much better than Smartlook, which we used to use.',
-        },
-        pry: {
-            headline: 'improved registrations by 20-30%',
-            description: "We've improved our whole onboarding flow by about 5% too, which is great.",
-        },
-    },
     useCases: {
         intro: 'Session Replay is used across teams depending on your role.',
         rows: [
@@ -477,7 +444,7 @@ export const sessionReplay = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/SESSION_REPLAY_a3ca565731.png',
         imageAlt: 'PostHog AI and session replay',
-        intro: 'Ask PostHog AI to find a specific session or summarize a group of them. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
+        intro: 'Ask PostHog AI to find a specific session or summarize a group of them.',
         groups: [
             {
                 title: 'Find',
@@ -532,8 +499,6 @@ export const sessionReplay = {
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Session Replay lets you see exactly how users interact with your app. You're watching their real session – what they clicked, where they got stuck, what broke. This isn't just for debugging; it's for building empathy. You can see what's intuitive and what isn't, and how it feels to actually use your product. It's often the fastest way to uncover small issues that analytics alone won't catch. Everything is captured automatically—no manual tagging needed.",
-        customers:
-            "Companies like Hasura, Netdata, and ElevenLabs are already using it to make real improvements. Hasura saw a measurable bump in conversion once they started watching user sessions. Netdata uses it to cut down on back-and-forth with their support team. And ElevenLabs watches replays while testing new ideas to quickly figure out what's working. This is the kind of feedback loop that helps teams move faster without relying only on instinct.",
         ai: 'MCP hands the same session replay capabilities to your coding agent. Investigate user-reported bugs, understand how users interact with features, and find specific sessions – without switching to the PostHog app.',
         features:
             "<strong>Event timeline:</strong> The timeline brings together everything from DOM load timing and API calls to console logs and user actions. It gives you full visibility into what happened, when it happened, and what else was going on at the time. You're not flipping between separate tools to reconstruct a bug. It's one unified view, scoped to the exact user session. For teams who care about real- world performance, this is a fast way to correlate frontend behavior with actual user impact. <br /><br /><strong>Console logs:</strong>  One of the most useful parts of replay is being able to see console logs alongside the session. You get full visibility into warnings and errors as they happen. If you're using Sentry, those errors are linked—so you can jump from an exception to a full session replay showing exactly how the error occurred. This shortens the loop between support, product, and engineering. You're not asking users what browser they were using or what they clicked. You just watch it. <br /><br /><strong>Network monitor:</strong> Network requests are captured as part of the session and shown with timing, method, and status code. You can see how slow requests affected load time, whether a backend error disrupted the experience, or which endpoints were called at each step. It's especially helpful when tracking down flakiness that only happens in edge cases or under real - world latency. <br /><br /><strong>Autocapture:</strong> PostHog automatically tracks clicks, form interactions, page views, and other key events without requiring manual instrumentation. You can get up and running quickly and still have meaningful data to explore. When you need more control, you can layer in custom events or define your own capture rules. The point is: you don't have to do everything upfront to start getting value. <br /><br /><strong>Capture form inputs:</strong> Form input capture is turned off by default, but you can opt in to capture specific fields—useful when diagnosing friction in onboarding flows or payment forms. It's granular, so you're not logging everything—only what's needed. And since it integrates with our privacy masking features, sensitive fields can be excluded with a simple config update. <br /><br /><strong>DOM explorer:</strong> During a replay, you can inspect the live DOM snapshot at any point in the session. This helps validate that what the user saw matches your expectations, especially in dynamic apps where the UI may shift based on state or timing. It's helpful for spotting layout shifts, broken styles, or elements that weren't visible when they should've been. <br /><br /><strong>Record by feature flag:</strong> You can choose to only record sessions from users who have a specific feature flag enabled. This is useful for rollout testing, debugging experiments, or validating behavior changes in staging versus production environments. It gives your team a way to focus on just the relevant slice of users without recording everyone. <br /><br /><strong>Supported platforms:</strong> Session replay works across web, iOS, Android, React Native, and Flutter. And we don't treat mobile support as an afterthought—it includes gesture tracking, scrolls, taps, and replay stability that's ready for production. All SDKs are open source, and setup is consistent across environments. This means you can build a single mental model that works whether your app is on the web or mobile. <br /><br /><strong>More features:</strong> <br /><br /><strong>Filter by event:</strong> Narrow down recordings to sessions where specific events or actions were triggered. This is helpful for tracking down bugs related to a new feature or analyzing how people interact with a particular UI element. <br /><br /><strong>Filter by people:</strong> Filter sessions by person properties—country, browser, custom property, even specific users. This becomes really useful when debugging reports from a single customer or testing behavior across user segments. <br /><br /><strong>Block sensitive data:</strong> Sensitive data capture is opt -in and customizable. You can redact fields using simple HTML attributes or define masking rules at the app level. This is especially useful in production environments where you want to balance visibility with privacy. <br /><br /><strong>Minimum duration filter:</strong> You can ignore very short sessions—like bounces or accidental visits—by setting a minimum duration threshold. This keeps your recordings useful and your volume under control. <br /><br /><strong>Sample recorded sessions:</strong> Reduce the percentage of sessions being recorded without losing signal. This is one of the most effective ways to manage costs while still catching meaningful patterns. <br /><br /><strong>Share & embed:</strong> You can share a replay via URL or embed it directly into a support ticket, Slack thread, or internal dashboard.This makes collaboration between support and engineering much faster—especially when you're working across time zones.",

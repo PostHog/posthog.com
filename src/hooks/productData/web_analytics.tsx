@@ -403,7 +403,7 @@ export const webAnalytics = {
                 },
                 {
                     title: 'You want to do more than just web analytics',
-                    subtitle: 'Web Analytics integrates with the entire Product OS ecosystem.',
+                    subtitle: 'Web Analytics integrates with the entire PostHog ecosystem.',
                 },
                 {
                     title: "You don't want to spend weeks setting up dashboards",
