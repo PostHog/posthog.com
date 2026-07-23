@@ -25,6 +25,20 @@ Under the hood, the managed warehouse is built on [DuckDB](https://duckdb.org/),
 3. **Storage** – Data lives as columnar files in S3-compatible object storage with a transactional catalog on top. Storage and compute scale independently, and your data survives any individual machine.
 4. **Querying** – The warehouse speaks the PostgreSQL wire protocol over TLS, so any Postgres client, driver, or BI tool connects without special adapters. DuckDB's analytical SQL (things like `SUMMARIZE` and `QUALIFY`) works too.
 
+## Architecture
+
+A closer look at the pieces PostHog manages for you:
+
+- **A Postgres-compatible front end.** Connections terminate at a control plane that handles TLS, authenticates your database users, and translates PostgreSQL syntax to DuckDB syntax where the two differ. That's why any Postgres tool works unmodified.
+- **Dedicated DuckDB workers.** Queries run on DuckDB workers reserved for your organization, spun up on demand and retired when idle. There's no shared query queue, so a heavy query from another customer never competes with yours.
+- **Open storage.** Tables are columnar Parquet files in object storage, tracked by DuckLake's transactional catalog. Workers come and go; your data doesn't, and it lives in an open format rather than a proprietary store.
+
+## How this fits into PostHog
+
+The managed warehouse doesn't replace ClickHouse or any other part of PostHog. Insights, product analytics, and every other PostHog feature keep running on PostHog's existing query engine, unchanged, and your events keep flowing in exactly as before.
+
+The warehouse is an addition: a dedicated database that receives the same data, where you can run isolated workloads with the benefits of DuckDB and DuckLake built in and managed for you. Point BI dashboards, notebooks, and scheduled jobs at it, build your own tables in it, and none of it competes with the queries powering your PostHog project.
+
 ## What's in your warehouse
 
 Each project in your organization gets its own schema, chosen during setup. Within a project you'll find:
