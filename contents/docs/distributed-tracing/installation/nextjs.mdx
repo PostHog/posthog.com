@@ -33,9 +33,9 @@ You can find your project token in [Project settings](https://app.posthog.com/se
 
 <Step title="Enable instrumentation in Next.js" badge="required">
 
-> **Note:** For Next.js 15 and later, the instrumentation hook is enabled by default. You can skip this step if you're on Next.js 15+.
+> **Note:** This step is only needed on Next.js 13.2–14.x. For Next.js 15 and later, `instrumentation.ts` is enabled by default and the `experimental.instrumentationHook` option is deprecated — remove it from your config if it's set.
 
-Add the following to your `next.config.js` (or `next.config.mjs`) to enable the instrumentation hook:
+On Next.js 14 and earlier, add the following to your `next.config.js` (or `next.config.mjs`) to enable the instrumentation hook:
 
 ```javascript
 /** @type {import('next').NextConfig} */
@@ -87,6 +87,8 @@ export function register() {
 
 > **Note:** The `tracerProvider` is created outside of `register()` so it can be exported and used to flush spans in route handlers. This pattern is necessary because Route Handlers complete execution before batched spans have a chance to be sent to the collector. By exporting the provider, we can manually flush spans at the end of each request.
 
+> **Note:** `@opentelemetry/sdk-trace-node` only works in the Node.js runtime. If parts of your app use the [edge runtime](https://nextjs.org/docs/app/api-reference/edge) (e.g. middleware), the [Next.js OpenTelemetry guide](https://nextjs.org/docs/app/guides/open-telemetry) recommends moving Node-only setup into a separate file that `register()` dynamically imports behind the `NEXT_RUNTIME === 'nodejs'` check.
+
 Alternatively, you can pass the token as a query parameter:
 
 ```typescript
@@ -102,11 +104,11 @@ new OTLPTraceExporter({
 Wrap the operations you want to measure in spans, and attach attributes for context. Then flush the provider before the serverless function freezes.
 
 ```typescript
-import { trace, SpanStatusCode } from '@opentelemetry/api'
+import { SpanStatusCode } from '@opentelemetry/api'
 import { after } from 'next/server'
 import { tracerProvider } from '@/instrumentation'
 
-const tracer = trace.getTracer('my-nextjs-app')
+const tracer = tracerProvider.getTracer('my-nextjs-app')
 
 export async function GET() {
   await tracer.startActiveSpan('handle-request', async (span) => {
@@ -134,6 +136,13 @@ export async function GET() {
 ```
 
 > **Important:** Without calling `forceFlush()`, your spans may not be sent. When deploying to a serverless platform like Vercel, Route Handlers complete execution before the OpenTelemetry batch processor has a chance to export spans, and the function freezes before the batch is flushed. The `after()` function from `next/server` runs code after the response is sent, ensuring spans are flushed before the serverless function freezes.
+
+> **Note:** `after()` is stable in Next.js 15.1+ (available as `unstable_after` in 15.0). On Next.js 14 and earlier, it doesn't exist — flush before returning instead:
+>
+> ```typescript
+> await tracerProvider.forceFlush()
+> return Response.json({ success: true })
+> ```
 
 </Step>
 
