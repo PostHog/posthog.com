@@ -1,6 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -159,7 +159,10 @@ interface ProductComparisonTableProps {
 export default function ProductComparisonTable({
     competitors,
     rows,
-    width = 'auto',
+    // Fill the available width by default so small tables (e.g. two-column blog
+    // comparisons) don't collapse to their minimum content width. Wide tables
+    // still overflow and scroll, with an edge fade hinting there's more to see.
+    width = 'full',
     autoExpand = false,
     excludedSections = [],
     requireCompleteData = false,
@@ -1019,6 +1022,7 @@ export default function ProductComparisonTable({
                                 className="h-5 mx-auto w-auto max-w-full"
                                 variant={isDark ? 'mono' : 'gradient'}
                                 color={isDark ? 'white' : undefined}
+                                width="auto"
                             />
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name

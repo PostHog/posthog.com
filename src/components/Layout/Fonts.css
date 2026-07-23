@@ -20,9 +20,10 @@
     font-style: normal;
 }
 
+/* RoundHog's font files and weight scale come from @posthog/brand. */
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog.woff2') format('woff2');
+    src: url('~@posthog/brand/fonts/RoundHog.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -30,7 +31,7 @@
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-Italic.woff2') format('woff2');
+    src: url('~@posthog/brand/fonts/RoundHog-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -38,7 +39,7 @@
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-Medium.woff2') format('woff2');
+    src: url('~@posthog/brand/fonts/RoundHog-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -46,7 +47,7 @@
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-Medium-Italic.woff2') format('woff2');
+    src: url('~@posthog/brand/fonts/RoundHog-Medium-Italic.woff2') format('woff2');
     font-weight: 500;
     font-style: italic;
     font-display: swap;
@@ -54,32 +55,32 @@
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-SemiBold.woff2') format('woff2');
-    font-weight: 600;
+    src: url('~@posthog/brand/fonts/RoundHog-SemiBold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-SemiBold-Italic.woff2') format('woff2');
-    font-weight: 600;
+    src: url('~@posthog/brand/fonts/RoundHog-SemiBold-Italic.woff2') format('woff2');
+    font-weight: 700;
     font-style: italic;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-Bold.woff2') format('woff2');
-    font-weight: 700;
+    src: url('~@posthog/brand/fonts/RoundHog-Bold.woff2') format('woff2');
+    font-weight: 800;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: 'RoundHog';
-    src: url('https://res.cloudinary.com/dmukukwp6/raw/upload/fonts/RoundHog-Bold-Italic.woff2') format('woff2');
-    font-weight: 700;
+    src: url('~@posthog/brand/fonts/RoundHog-Bold-Italic.woff2') format('woff2');
+    font-weight: 800;
     font-style: italic;
     font-display: swap;
 }

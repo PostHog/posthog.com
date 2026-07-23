@@ -663,7 +663,7 @@ Use `<WizardCommand />` to render a copyable install button for the PostHog wiza
 
 <WizardCommand />
 
-The displayed command is always the clean `npx @posthog/wizard …`; the copied command always pins `-y` and `@latest`. The `--region eu` / `--region us` suffix is added automatically based on the user's feature flags. `<WizardCommand />` is a thin alias for `<PlatformInstall variant="inline" />`.
+The displayed command is always the clean `npx @posthog/wizard …`; the copied command always pins `-y` and `@latest`. The wizard reads the user's region off their auth token, so no `--region` flag is added. `<WizardCommand />` is a thin alias for `<PlatformInstall variant="inline" />`.
 
 **Props:**
 

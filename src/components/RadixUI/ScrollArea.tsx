@@ -1,10 +1,14 @@
 import * as React from 'react'
+import { ScrollArea as RadixScrollArea } from 'radix-ui'
+import { useHorizontalScrollFade, HorizontalScrollFades } from '../../hooks/useHorizontalScrollFade'
 
 interface ScrollAreaProps {
     children: React.ReactNode
     className?: string
     dataScheme?: string
     fadeOverflow?: boolean | number
+    /** Show left/right edge fades that hint at horizontally scrollable content (only appear when the viewport overflows). */
+    fadeX?: boolean
     style?: React.CSSProperties
     fullWidth?: boolean
     viewportClasses?: string
@@ -17,35 +21,52 @@ const ScrollArea = ({
     className = '',
     dataScheme,
     fadeOverflow = false,
+    fadeX = false,
     style,
     fullWidth = false,
     viewportClasses = '',
     viewportRef,
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
+    const { ref: fadeRef, showStart, showEnd } = useHorizontalScrollFade(fadeX)
+
+    // The horizontal fade needs its own ref on the viewport while still
+    // honouring any `viewportRef` the caller passed.
+    const setViewportRef = React.useCallback(
+        (node: HTMLDivElement | null) => {
+            fadeRef.current = node
+            if (typeof viewportRef === 'function') {
+                viewportRef(node)
+            } else if (viewportRef) {
+                const mutableViewportRef = viewportRef as React.MutableRefObject<HTMLDivElement | null>
+                mutableViewportRef.current = node
+            }
+        },
+        [viewportRef]
+    )
+
     return (
-        <div
+        <RadixScrollArea.Root
+            type="scroll"
             data-scheme={dataScheme}
-            className={`relative overflow-hidden h-full flex-1 ${fullWidth ? 'max-w-screen' : ''} ${className}`}
+            className={`app-scroll-area relative overflow-hidden h-full flex-1 [&>div>div]:!block ${
+                fullWidth ? 'max-w-screen' : ''
+            } ${className}`}
             style={style}
         >
-            <div
-                ref={viewportRef}
-                // Kept for backwards-compatibility: many components locate the
-                // scrolling viewport via `.closest('[data-radix-scroll-area-viewport]')`
-                // (virtualization, scroll restoration, scroll-to-element, IO roots).
-                // This is now a native scroller, but the contract is preserved.
-                data-radix-scroll-area-viewport=""
-                className={`app-scroll-viewport size-full overflow-auto ${viewportClasses} ${
-                    fadeHeight ? `pb-${fadeHeight}` : ''
-                }`}
+            <RadixScrollArea.Viewport
+                ref={setViewportRef}
+                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
             >
-                {/* Inner wrapper mirrors the extra node Radix's Viewport used to
-                    render (min-width: 100%, block). Callers target it via
-                    descendant selectors like `[&>div>div]`, so the DOM nesting
-                    (wrapper → viewport → content) must be preserved. */}
-                <div className="block min-w-full">{children}</div>
-            </div>
+                {fullWidth ? <div>{children}</div> : children}
+            </RadixScrollArea.Viewport>
+            <RadixScrollArea.Scrollbar className="app-scrollbar" orientation="vertical">
+                <RadixScrollArea.Thumb className="app-scrollbar-thumb" />
+            </RadixScrollArea.Scrollbar>
+            <RadixScrollArea.Scrollbar className="app-scrollbar" orientation="horizontal">
+                <RadixScrollArea.Thumb className="app-scrollbar-thumb" />
+            </RadixScrollArea.Scrollbar>
+            <RadixScrollArea.Corner className="app-scrollbar-corner" />
             {fadeHeight > 0 && (
                 <div className="block pointer-events-none">
                     <div
@@ -53,7 +74,8 @@ const ScrollArea = ({
                     />
                 </div>
             )}
-        </div>
+            {fadeX && <HorizontalScrollFades showStart={showStart} showEnd={showEnd} />}
+        </RadixScrollArea.Root>
     )
 }
 

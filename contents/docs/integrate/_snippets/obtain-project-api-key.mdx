@@ -1,0 +1,11 @@
+The project API key (sometimes called the project token) is a **public**, client-side key listed in the ["Project variables" section of your project settings](https://us.posthog.com/settings/project#variables). It's the same key you use in your frontend snippet, and it's safe to expose in client-side code such as web apps, mobile apps, and CLI tools.
+
+Unlike the [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key), the project API key doesn't grant access to any sensitive data. It can only be used to send events and to evaluate flags via the public [`/flags` endpoint](/docs/api/flags).
+
+#### How to obtain your project API key
+
+1. Go to the ["Project variables" section of your project settings](https://us.posthog.com/settings/project#variables).
+
+2. Copy the value labeled **Project API key**.
+
+3. Use it to initialize a [client-side SDK](/docs/libraries), or pass it as the `api_key` in requests to the public [`/flags` endpoint](/docs/api/flags).
