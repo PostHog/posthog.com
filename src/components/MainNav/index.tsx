@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
@@ -507,6 +507,7 @@ export const Main = () => {
                                     variant={websiteTheme === 'dark' ? 'mono' : 'gradient'}
                                     color={websiteTheme === 'dark' ? 'white' : undefined}
                                     className="h-[24px] relative px-2 box-content"
+                                    width="auto"
                                 />
                             )}
                         </Link>

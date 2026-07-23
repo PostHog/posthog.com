@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../../context/Toast'
 import { SQUEAK_HOST } from 'lib/strapi'
@@ -58,7 +58,7 @@ const ConnectedAccounts: React.FC<{ hideHeading?: boolean; stacked?: boolean }> 
             <div className={`flex gap-3 @container ${stacked ? 'flex-col' : 'items-center justify-between'}`}>
                 <div className="flex items-center gap-3 min-w-0">
                     <div className="flex items-center justify-center size-10 shrink-0 rounded border border-primary bg-primary">
-                        <Logo noText className="h-5 w-auto" />
+                        <Logo layout="logomark" className="h-5 w-auto" />
                     </div>
                     <div className="min-w-0">
                         <p className="m-0 font-semibold leading-tight">PostHog</p>

@@ -11,7 +11,7 @@ import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
@@ -142,6 +142,7 @@ function Hero(): JSX.Element {
                         className="max-w-[157px]"
                         variant={isDark ? 'mono' : 'gradient'}
                         color={isDark ? 'white' : undefined}
+                        width="auto"
                     />
                 </h1>
 

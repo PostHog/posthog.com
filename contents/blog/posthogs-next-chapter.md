@@ -65,7 +65,7 @@ The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineeri
 
 The momentum feels irresistible now and the data backs that up. Last week, the majority of dashboards were created by agents via PostHog AI, MCP, our API, or our onboarding wizard. That's a huge shift and the trend is accelerating – MCP usage is roughly doubling every month.
 
-This trend is forcing us to rethink everything: our core UX, positioning, marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
+This trend is forcing us to rethink everything: our core UX, [positioning](/blog/repositioning-posthog), marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
 
 ### 1) Making PostHog easier for agents to use
 
@@ -83,7 +83,7 @@ There are a ton of things about to start appearing here, such as proactive agent
 
 We want product development to feel increasingly self-driven by agents that you direct. This requires long-running agents that understand your product and your goals; agents that can take a huge list of problems that need solving and get to work for you, freeing you up to focus on more strategic work.
 
-Our long-running agents will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
+Our [long-running agents](/newsletter/2030-shaped-software#be-everywhere) will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
 
 ## Turning PostHog into a doing company
 

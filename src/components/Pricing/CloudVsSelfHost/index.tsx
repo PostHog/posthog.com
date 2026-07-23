@@ -1,4 +1,4 @@
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import React from 'react'
 
 export const CloudVsSelfHost = ({ className = '' }) => {
@@ -10,7 +10,7 @@ export const CloudVsSelfHost = ({ className = '' }) => {
             <div className="before:my-14 md:before:my-0 before:w-12 before:h-12 before:bg-primary before:rounded-full before:text-white md:before:absolute before:flex before:items-center before:justify-center md:before:left-1/2 md:before:-translate-x-1/2 before:text-2xl before:mx-auto md:before:content-['vs.'] before:content-['vs.']">
                 <h3 className="sm:text-3xl md:mb-16 flex items-center justify-center space-x-2">
                     <span className="flex-grow-0">
-                        <Logo wordmark={false} />
+                        <Logo layout="logomark" width="auto" />
                     </span>
                     <span className="flex-grow-1">PostHog Web</span>
                 </h3>
