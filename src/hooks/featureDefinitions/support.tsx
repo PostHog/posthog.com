@@ -32,7 +32,7 @@ export const supportFeatures = {
         },
         saved_views: {
             name: 'Saved views',
-            description: 'Save filter combinations to switch between common queries',
+            description: 'Save filter combinations to switch between common sets of tickets',
         },
         private_notes: {
             name: 'Private notes',

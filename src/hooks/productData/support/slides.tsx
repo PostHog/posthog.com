@@ -251,11 +251,6 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: {
-            src: '/images/products/support/ticket-sidebar.png',
-            alt: 'A ticket in PostHog Support showing the customer, channel, status, priority, assignee, and tags',
-            maxWidth: 'max-w-md',
-        },
     },
     {
         slug: 'workflows',
@@ -269,8 +264,10 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Workflows are rules you control – no autonomous AI deciding your SLA policy at 3am. They run on
-                    ticket events to handle the repetitive parts:
+                    Support plugs straight into Workflows, so every ticket event – a new ticket, a reply from you or the
+                    customer, a status or assignee change – can trigger the full Workflows toolkit. Update the ticket
+                    itself, or reach beyond it: post to Slack, fire a webhook, run anything Workflows can run. Rules you
+                    control – no autonomous AI deciding your SLA policy at 3am.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -292,6 +289,11 @@ export const topFeatures: CarouselSlide[] = [
                             {
                                 label: 'Reopen on reply',
                                 description: 'A resolved ticket reopens itself when the customer responds.',
+                            },
+                            {
+                                label: 'Notify anywhere',
+                                description:
+                                    'Ping a Slack channel about high-priority tickets, or call a webhook to loop in other tools.',
                             },
                         ]}
                     />
@@ -317,7 +319,7 @@ export const topFeatures: CarouselSlide[] = [
                 </p>
                 <p>
                     Answering customers happens here, in Support. Reviewing and merging fixes happens in the
-                    Self-driving inbox – which means the best support ticket is the one that never gets filed twice.
+                    Self-driving inbox – fix the cause once, instead of answering the same ticket every week.
                 </p>
             </>
         ),
@@ -346,5 +348,10 @@ export const topFeatures: CarouselSlide[] = [
                 <p>Your first day on PostHog Support starts with all the context of your last day on Zendesk.</p>
             </>
         ),
+        image: {
+            src: '/images/products/support/ticket-sidebar.png',
+            alt: 'A ticket imported from Zendesk in PostHog Support, with its original Zendesk ID, channel, status, priority, assignee, and tags intact',
+            maxWidth: 'max-w-md',
+        },
     },
 ]
