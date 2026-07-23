@@ -1,0 +1,42 @@
+{
+    "minWordSizefor1Typo": 4,
+    "minWordSizefor2Typos": 8,
+    "hitsPerPage": 20,
+    "maxValuesPerFacet": 100,
+    "minProximity": 2,
+    "searchableAttributes": [
+        "unordered(path_ranking)",
+        "unordered(title)",
+        "unordered(headings.value)",
+        "unordered(rawBody)",
+        "unordered(slug)",
+        "unordered(excerpt)"
+    ],
+    "numericAttributesToIndex": null,
+    "attributesToRetrieve": null,
+    "distinct": false,
+    "unretrievableAttributes": ["fields.pageViews"],
+    "optionalWords": null,
+    "attributesForFaceting": ["type"],
+    "attributesToSnippet": null,
+    "attributesToHighlight": null,
+    "paginationLimitedTo": 1000,
+    "attributeForDistinct": null,
+    "exactOnSingleWordQuery": "attribute",
+    "ranking": ["asc(path_ranking)", "proximity", "attribute", "exact", "words", "typo", "filters", "custom"],
+    "customRanking": ["desc(fields.pageViews)"],
+    "separatorsToIndex": "",
+    "removeWordsIfNoResults": "none",
+    "queryType": "prefixAll",
+    "highlightPreTag": "<em>",
+    "highlightPostTag": "</em>",
+    "snippetEllipsisText": "",
+    "alternativesAsExact": ["ignorePlurals", "singleWordSynonym"],
+    "renderingContent": {
+        "facetOrdering": {
+            "facets": {
+                "order": ["type"]
+            }
+        }
+    }
+}

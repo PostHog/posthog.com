@@ -1,5 +1,6 @@
 const { createContentDigest } = require('gatsby-core-utils')
 const Slugger = require('github-slugger')
+const settings = require('./algoliaSettings.json')
 const slugger = new Slugger()
 
 const retrievePages = (type, regex) => {
@@ -209,11 +210,8 @@ module.exports = {
                 },
             },
         ],
+        settings,
         chunkSize: 10000,
-        /*settings: {
-            // optional, any index settings
-            // Note: by supplying settings, you will overwrite all existing settings on the index
-        },*/
         mergeSettings: false, // optional, defaults to false. See notes on mergeSettings below
         concurrentQueries: false, // default: true
         dryRun: false, // default: false, only calculate which objects would be indexed, but do not push to Algolia
