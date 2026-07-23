@@ -66,7 +66,7 @@ export default function About({ data }: AboutProps) {
                     description: 'Learn about PostHog',
                 }}
             >
-                <div className="bg-primary min-h-full px-4 @xl:px-8 py-4">
+                <div className="min-h-full px-4 @xl:px-8 py-4">
                     <div className="max-w-3xl mx-auto pb-12">
                         <MDXProvider components={mdxComponents}>
                             <MDXRenderer>{data.mdx.body}</MDXRenderer>

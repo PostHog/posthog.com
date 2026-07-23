@@ -5,5 +5,4 @@ export const internalToolsNav = [
     { name: 'Team', url: '/team-directory' },
     { name: 'HogWatch 3000', url: '/hogwatch' },
     { name: 'Image annotation', url: '/image-annotator' },
-    { name: 'Mesh gradients', url: '/mesh-gradients' },
 ]

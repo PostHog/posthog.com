@@ -3,9 +3,14 @@ import Input from 'components/OSForm/input'
 import OSButton from 'components/OSButton'
 import usePostHog from '../../hooks/usePostHog'
 import useProduct from '../../hooks/useProduct'
+import usePrimeEarlyAccessFeatures from '../../hooks/usePrimeEarlyAccessFeatures'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
+
+// PostHog Code's concept-stage Early Access Feature flag. Its EAF is named
+// "PostHog Code" but the flag key is `twig`.
+const POSTHOG_CODE_FLAG_KEY = 'twig'
 
 interface WaitlistFormProps {
     autoFocus?: boolean
@@ -13,6 +18,8 @@ interface WaitlistFormProps {
     productHandle?: string
     productName?: string
     surveyId?: string
+    /** Feature flag key of the concept-stage Early Access Feature this waitlist belongs to. */
+    flagKey?: string
     showTitle?: boolean
     buttonLabel?: string
     showDiscord?: boolean
@@ -24,6 +31,7 @@ export function WaitlistForm({
     productHandle = 'posthog_code',
     productName = 'PostHog Code',
     surveyId,
+    flagKey,
     showTitle = true,
     buttonLabel = 'Get updates',
     showDiscord = true,
@@ -35,6 +43,14 @@ export function WaitlistForm({
     const [submitted, setSubmitted] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
 
+    // Only default the PostHog Code flag when we're actually collecting for PostHog Code —
+    // callers with their own productHandle (e.g. Replay Vision) must pass flagKey explicitly.
+    const effectiveFlagKey = flagKey ?? (productHandle === 'posthog_code' ? POSTHOG_CODE_FLAG_KEY : undefined)
+
+    // Load the EAF list before submit so the enrollment event carries $early_access_feature_name —
+    // the Customer.io waitlist flow's trigger requires it.
+    usePrimeEarlyAccessFeatures(effectiveFlagKey)
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (!email) return
@@ -45,6 +61,13 @@ export function WaitlistForm({
             })
         }
         posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
+        if (effectiveFlagKey) {
+            // Mirror the in-app coming-soon waitlist: fire $feature_enrollment_update with
+            // $feature_enrollment_stage 'concept' and set $feature_enrollment/<flag> on the person.
+            posthog?.updateEarlyAccessFeatureEnrollment?.(effectiveFlagKey, true, 'concept')
+        }
+        // Set email on the person so downstream flows triggered by the enrollment event can reach them.
+        posthog?.setPersonProperties?.({ email })
         if (confetti) {
             setConfetti(true)
         }

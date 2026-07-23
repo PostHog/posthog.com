@@ -34,7 +34,11 @@ function LazyHeroCarousel({ className }: { className?: string }) {
     useEffect(() => {
         Promise.all([import('components/Home/HeroCarousel'), import('components/Home/HeroCarousel/tabs')]).then(
             ([{ default: HeroCarousel }, { buildTabs }]) => {
-                setContent(() => (props: { className?: string }) => <HeroCarousel tabs={buildTabs} {...props} />)
+                function HeroCarouselContent(props: { className?: string }) {
+                    return <HeroCarousel tabs={buildTabs} {...props} />
+                }
+
+                setContent(() => HeroCarouselContent)
             }
         )
     }, [])
@@ -132,10 +136,7 @@ function Hero(): JSX.Element {
     const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            {/* relative + overflow-x-clip: rough-notation injects an absolutely-positioned, overflow:visible
-                SVG for each highlight; on WebKit/Safari its ink overflow can push the page wider. Make the
-                hero the SVGs' containing block and clip horizontal overspill (leaving the y-axis visible). */}
-            <div className="relative overflow-x-clip text-center @xl:text-left mb-24">
+            <div className="text-center @xl:text-left mb-24 min-w-0">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo
                         className="max-w-[157px]"
@@ -146,12 +147,12 @@ function Hero(): JSX.Element {
 
                 <h1 className="!text-3xl @xl:!text-4xl pt-4">
                     Shift your product into{' '}
-                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
                         self-driving mode
                     </span>
                 </h1>
 
-                <div className="grid grid-cols-1 @xl:grid-cols-2 @xl:gap-8">
+                <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
                     <div className="min-w-0">
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
@@ -207,7 +208,7 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0">
+                    <div className="mt-6 flex flex-col items-center min-w-0 w-full">
                         <PlatformInstall schema={wizardInstallSchema} selfDriving />
                         <SecondaryActions />
                     </div>

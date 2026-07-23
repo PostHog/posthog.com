@@ -1,32 +1,21 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useState, useEffect } from 'react'
-import { FAQs } from 'components/Pricing/FAQs'
+import React, { useCallback } from 'react'
 import { Quote } from 'components/Pricing/Quote'
-import { SEO } from '../seo'
 import cntl from 'cntl'
-import { animateScroll as scroll } from 'react-scroll'
 import SelfHostOverlay from 'components/Pricing/Overlays/SelfHost'
 import { CTA as PlanCTA } from './Plans'
 import Link from 'components/Link'
 import { IconCode, IconHandMoney, IconRocket } from '@posthog/icons'
-import * as Icons from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
-import { graphql, useStaticQuery } from 'gatsby'
-import Tabbed from './PricingCalculator/Tabbed'
 import { PlanColumns } from './Test/PlanColumns'
 import PlanContent from './Test/PlanContent'
-import { section, SectionLayout, SectionHeader, SectionColumns, SectionMainCol, SectionSidebar } from './Test/Sections'
+import { SectionLayout } from './Test/Sections'
 import { PaidPricing } from './Test/PaidPricing'
-import { SimilarProducts } from './Test/SimilarProducts'
-import { Reviews } from './Test/Reviews'
 import ImageSlider from './Test/ImageSlider'
 import Header from './Test/Header'
-import { Link as ScrollLink } from 'react-scroll'
-import PurchasedWith from './Test/PurchasedWith'
-import { PRODUCT_COUNT } from '../../constants'
-import { Calculator } from './Test/Calculator'
 import PricingHero from './Test/PricingHero'
-import CTA from 'components/Home/CTA.js'
+import FreeTier from './Test/FreeTier'
+import { useInView } from 'react-intersection-observer'
+import { scrollToElement } from 'components/ScrollToElement'
 
 export const SidebarList = ({ children }: { children: React.ReactNode }) => (
     <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
@@ -195,29 +184,67 @@ const PricingExperiment = ({
     setCurrentModal,
     billingProducts,
 }: PricingExperimentProps): JSX.Element => {
+    const [freeTierRef, freeTierInView] = useInView({ threshold: 0.2 })
+
+    const handleFreeTierClick = useCallback(() => {
+        setAnimateFreeTiers(true)
+
+        if (!freeTierInView) {
+            scrollToElement('free-tiers', 16, 'smooth', 'end')
+        }
+    }, [freeTierInView, setAnimateFreeTiers])
+
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
 
             <div id="cloud" className="@xl:grid grid-cols-16 mb-6 @5xl:mb-12">
-                <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @5xl:border-b border-primary">
+                <div className="not-prose col-span-8 @5xl:col-span-4 @6xl:row-span-2 mb-4">
                     <div className="@xl:hidden mb-2">
                         <Header />
                     </div>
                     <ImageSlider images={images} showDisclaimer={true} className="aspect-square" id="pricing-slider" />
                 </div>
 
-                <div className="@container col-span-8 @5xl:col-span-7 @6xl:col-span-8 @5xl:border-b border-primary @xl:pl-4 @3xl:pl-6 @4xl:pl-8 @5xl:mr-6 pb-4">
-                    <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
+                <div className="@container col-span-8 @5xl:col-span-7 @6xl:col-span-8 @xl:pl-4 @3xl:pl-6 @4xl:pl-8 @5xl:mr-6">
+                    <PricingHero
+                        activePlan={activePlan}
+                        setActivePlan={setActivePlan}
+                        onFreeTierClick={handleFreeTierClick}
+                    />
                 </div>
 
-                <aside className="hidden @5xl:block not-prose @5xl:col-span-5 @6xl:col-span-4">
+                <aside className="hidden @5xl:block not-prose @5xl:col-span-5 @6xl:col-span-4 @6xl:row-span-2">
                     <div className="bg-light dark:bg-accent rounded-md border border-primary py-4 px-6 h-full">
                         <div className="flex flex-col @xl:grid grid-cols-2 @5xl:flex justify-between h-full">
-                            <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
+                            <PlanContent activePlan={activePlan} onFreeTierClick={handleFreeTierClick} />
                         </div>
                     </div>
                 </aside>
+
+                <div
+                    ref={freeTierRef}
+                    id="free-tiers"
+                    className="not-prose col-span-full @6xl:col-span-8 @6xl:col-start-5 @6xl:border-t @6xl:border-b border-primary @6xl:ml-8 @6xl:mr-6 @6xl:pt-4 pb-4 mt-8"
+                >
+                    <div
+                        className={`transition-all rounded-md border ${
+                            animateFreeTiers
+                                ? 'animate-flash bg-[#FAE9CE] dark:bg-[#463B2A] border-yellow -mx-2 px-2 pt-1'
+                                : 'bg-transparent border-transparent'
+                        }`}
+                        onAnimationEnd={() => setAnimateFreeTiers(false)}
+                    >
+                        <div className="flex items-baseline gap-1 mb-3">
+                            <h4 className="mb-0 text-lg">Free tier on all plans</h4>
+                            <span className="opacity-75 text-sm">(resets monthly)</span>
+                        </div>
+
+                        <div className="grid grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 mb-2 gap-4">
+                            <FreeTier />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <PaidPricing />

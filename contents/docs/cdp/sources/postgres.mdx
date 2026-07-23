@@ -65,6 +65,50 @@ When you add columns to a schema using incremental, append, or CDC sync, PostHog
 
 </CalloutBox>
 
+## Filtering rows
+
+You can filter which rows sync from each table by adding row filter predicates. Each filter is a `{column, operator, value}` condition that is ANDed onto the source query's `WHERE` clause, so only matching rows sync. This reduces sync time and storage costs by scoping large tables down to the data you need.
+
+### Adding row filters
+
+During source setup:
+
+1. Click **Columns** next to any table in the table picker.
+2. Click **Add filter** to add a row filter condition:
+   - **Column** - Select a column from the table
+   - **Operator** - Choose a comparison operator (`>`, `>=`, `<`, `<=`, `=`, `!=`, `IN`, or `NOT IN`)
+   - **Value** - Enter a value that matches the column's type
+3. Add up to 20 filters per table. Multiple filters are ANDed together.
+
+You can also add or edit row filters after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Postgres source.
+2. Click **Configure** next to any schema.
+3. Under **Row filters**, add, edit, or remove filters, then click **Save**.
+
+### Supported column types
+
+Row filters validate the value you enter against the column's data type. Columns with unsupported types (like `json` or `jsonb`) are not filterable.
+
+| Type category | Example Postgres types                           | Value format          |
+| ------------- | ------------------------------------------------ | --------------------- |
+| Integer       | `integer`, `bigint`, `smallint`, `serial`        | `100`                 |
+| Numeric       | `decimal`, `numeric`, `real`, `double precision` | `99.99`               |
+| String        | `varchar`, `text`, `char`, `uuid`                | `active`              |
+| Boolean       | `boolean`                                        | `true` or `false`     |
+| Date          | `date`                                           | `2024-01-15`          |
+| Timestamp     | `timestamp`, `timestamptz`                       | `2024-01-15T10:30:00` |
+
+For `IN` and `NOT IN` operators, enter a comma-separated list of values (e.g. `1, 2, 3` or `'active', 'pending'`).
+
+<CalloutBox icon="IconInfo" title="Row filters and existing data" type="fyi">
+
+Row filters apply on the next sync — they don't remove rows that have already been synced. To apply filters retroactively, delete the synced data and resync.
+
+Row filters are not supported for CDC schemas or direct Postgres sources. They only apply to snapshot-style syncs (incremental, append, or full table).
+
+</CalloutBox>
+
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 PostgreSQL sources created after February 18, 2026 require SSL/TLS encryption for database connections. Ensure your PostgreSQL database supports SSL/TLS connections before linking. Existing sources created before this date are not affected. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.

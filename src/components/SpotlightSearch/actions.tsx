@@ -143,18 +143,18 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                 }),
         },
         {
-            id: 'heater-mode',
-            label: siteSettings.heaterMode ? 'Turn off heater mode' : 'Turn on heater mode',
+            id: 'reduce-transparency',
+            label: siteSettings.reduceTransparency ? 'Turn off reduce transparency' : 'Turn on reduce transparency',
             icon: <IconBolt />,
-            keywords: ['heater', 'heat', 'warm', 'toasty'],
+            keywords: ['transparency', 'blur', 'frosted', 'visual', 'separation', 'accessibility', 'heater'],
             keepOpen: true,
             perform: () => {
-                const next = !siteSettings.heaterMode
-                updateSiteSettings({ ...siteSettings, heaterMode: next })
+                const next = !siteSettings.reduceTransparency
+                updateSiteSettings({ ...siteSettings, reduceTransparency: next })
                 if (next) {
                     toast(
                         <IconBolt className="size-5 inline-block mr-1" />,
-                        'Heater mode on — windows now warm your laptop'
+                        'Reduce transparency on - solid window backgrounds'
                     )
                 }
             },
