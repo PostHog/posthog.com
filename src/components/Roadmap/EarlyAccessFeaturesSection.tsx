@@ -999,6 +999,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             teamFilter === 'all' ? true : teamFilter === 'unassigned' ? false : team.slug === teamFilter
         return matchesQuery && matchesTeamSelect
     })
+    const filterGridTeam = gridTeams.find((team) => team.slug === teamFilter)
 
     const openFeature = (feature: EarlyAccessFeature) => {
         setSelectedFlagKey(feature.flagKey)
@@ -1066,6 +1067,18 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                             className="!h-10 w-full max-w-full overflow-hidden !rounded-[8px] px-3 [&>span]:min-w-0 [&>span]:truncate"
                         />
                     </div>
+                    {filterGridTeam && (
+                        <OSButton
+                            data-roadmap-item=""
+                            type="button"
+                            size="md"
+                            variant="secondary"
+                            className="!h-10 shrink-0"
+                            onClick={() => openTeam(filterGridTeam.slug)}
+                        >
+                            View team goals
+                        </OSButton>
+                    )}
                     <span className="ml-auto shrink-0 whitespace-nowrap text-sm text-secondary">
                         {filteredTotal} of {total} features
                     </span>

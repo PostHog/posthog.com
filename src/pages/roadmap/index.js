@@ -1,10 +1,21 @@
 import React from 'react'
+import { IconChevronDown } from '@posthog/icons'
 import Editor from 'components/Editor'
+import OSButton from 'components/OSButton'
 import SEO from 'components/seo'
 import EarlyAccessFeaturesSection from 'components/Roadmap/EarlyAccessFeaturesSection'
 import { ROADMAP_STAGE_STYLES } from 'components/Roadmap/roadmapStageStyles'
 
 const RoadmapPage = () => {
+    const scrollToTeamGoals = () => {
+        const target = document.getElementById('teams')
+        if (!target) {
+            return
+        }
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+    }
+
     return (
         <>
             <SEO
@@ -32,8 +43,7 @@ const RoadmapPage = () => {
                             <h1 className="m-0 text-2xl @xl:text-3xl">Roadmap</h1>
                             <p className="mb-0 mt-2 max-w-5xl text-base leading-relaxed text-secondary">
                                 Here's what we're building. Betas are ready to enable today, and anything coming soon
-                                has a waitlist. Drop your email and we'll let you know the moment it ships. Further
-                                down, see what every team is working on this quarter.
+                                has a waitlist. Drop your email and we'll let you know the moment it ships.
                             </p>
                             <p className="mb-0 mt-3 max-w-5xl text-sm leading-relaxed text-secondary">
                                 Every feature moves through stages:{' '}
@@ -56,6 +66,17 @@ const RoadmapPage = () => {
                                 </span>{' '}
                                 is ready to try, and then it reaches general availability.
                             </p>
+                            <div className="mt-3">
+                                <OSButton
+                                    type="button"
+                                    size="sm"
+                                    variant="secondary"
+                                    icon={<IconChevronDown />}
+                                    onClick={scrollToTeamGoals}
+                                >
+                                    Jump to this quarter's team goals
+                                </OSButton>
+                            </div>
                         </div>
                         <img
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
