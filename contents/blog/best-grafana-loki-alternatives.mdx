@@ -1,0 +1,771 @@
+---
+title: "The best Grafana Loki alternatives & competitors, compared"
+date: 2026-07-23
+author:
+  - natalia-amorim
+rootpage: /blog
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+category: General
+tags:
+  - Comparisons
+seo:
+  metaTitle: "The best Grafana Loki alternatives & competitors, compared"
+  metaDescription: "The honest guide to Grafana Loki alternatives. PostHog, Datadog, SigNoz, Better Stack, Elastic, New Relic, OpenSearch, and VictoriaLogs compared."
+---
+
+Loki is famously cheap to run because it barely indexes anything. Users accept that searching for one specific value means scanning the whole haystack for a needle. Most days, that's not an issue. During an incident, with a request ID in hand and LogQL churning slowly through compressed chunks, it's the only thing you can see.
+
+Grafana Labs knows. At GrafanaCON 2026 they shipped a major Loki rearchitecture and acquired Logline specifically to make finding request IDs and user IDs faster; but if you just want an easier setup, a managed option, or a life outside the Grafana ecosystem, there are strong options out there.
+
+This guide covers the best Grafana Loki alternatives available today – from [error tracking and monitoring tools](/blog/best-error-tracking-tools) to [full observability platforms](/blog/best-ai-observability-tools), so you can find what actually works for your stack.
+
+## 1. PostHog
+
+- **Founded:** 2020
+- **Similar to:** Grafana Loki, Datadog
+- **Typical users:** Engineers and product teams
+- **Typical customers:** Startups and mid-size B2B companies
+
+https://res.cloudinary.com/dmukukwp6/image/upload/posthog_1_4e7c0908ac.png
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is a developer platform that helps engineers build self-driving products and iterate faster by combining [logs](/logs) with [error tracking](/error-tracking), [session replay](/session-replay), [product analytics](/product-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [AI observability](/ai-observability), and more in one place.
+
+So it's not just a Grafana Loki alternative – it's also an alternative to tools like [Datadog](/blog/best-datadog-alternatives), [Sentry](/blog/posthog-vs-sentry), and [Amplitude](/blog/posthog-vs-amplitude).
+
+PostHog Logs went into [beta](/blog/logs-beta) in December 2025 and [GA](/blog/logs-ga) in January 2026. It's newer than every other tool on this list and built specifically for teams that want logs where the rest of their debugging already lives.
+
+### Key features
+
+- **Logs:** Filter and explore logs by service, severity, or any attribute without scrolling through raw text. Works with your existing OpenTelemetry setup.
+
+- **Error tracking:** [Capture errors and exceptions](/docs/error-tracking/installation). Provide stack traces to debug issues. Jump straight to the session replay and logs from that exact moment.
+
+- **Session replay:** Watch how users move through your product. Includes event timelines, console logs, and network activity.
+
+- **Product analytics:** Funnels, user paths, retention analysis, and custom trends.
+
+- **AI observability:** Keep track of AI product usage, monitor model performance, and debug LLM interactions alongside your logs.
+
+### How does PostHog compare to Grafana Loki?
+
+PostHog Logs is newer than Loki and doesn't match its infrastructure maturity. Loki is the more proven pick for raw log aggregation at scale. What PostHog does differently is treat logs as product data: every log is tied to a user, a plan, a feature flag variant. You can query your logs from Claude, Cursor, or any MCP-compatible AI tool via the [MCP server](/docs/model-context-protocol) without opening a dashboard.
+
+| Feature                                                                              | PostHog | Grafana Loki        |
+| ------------------------------------------------------------------------------------ | ------- | ------------------- |
+| **Self-serve** No need to talk to sales                                              | ✅      | ✅                  |
+| **Free tier** Generous free tier available                                           | ✅      | ✅                  |
+| **Open source** Audit code and self-host for free                                    | ✅      | ✅                  |
+| **Managed cloud option** Fully hosted, no infrastructure to operate                  | ✅      | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                                 | ✅      | ✅                  |
+| **Metrics** System and app performance over time                                     | ❌      | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                     | Alpha   | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels                   | ✅      | Partial             |
+| **High-cardinality indexing** Index fields like `user_id`, `trace_id` without issues | ✅      | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion                | ✅      | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                                 | ✅      | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption                   | ✅      | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior                   | ✅      | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees                   | ✅      | ❌                  |
+
+<details>
+<summary>Main differences between PostHog and Grafana Loki</summary>
+
+- PostHog is a managed SaaS product with no infrastructure to operate. Loki requires running Alloy or Promtail, a storage backend, and Grafana alongside it.
+
+- PostHog connects logs to session replay, error tracking, product analytics, and feature flags in one workspace. Loki needs separate tools for each signal.
+
+- PostHog has no metrics product. Loki can generate metrics from log lines via LogQL.
+
+- Every log in PostHog is tied to a user, their plan, and the feature flag variant they were on. Loki is infrastructure-level and has no concept of who a user is.
+
+</details>
+
+<details>
+<summary>Main similarities between PostHog and Grafana Loki</summary>
+
+- Both are open source and free to self-host (PostHog under MIT, Loki under AGPLv3).
+
+- Both ingest logs natively via OpenTelemetry without requiring proprietary agents or SDKs.
+
+- Both support alerting on log data.
+
+- Both have active open-source communities with public roadmaps.
+
+</details>
+
+### Why do companies use PostHog?
+
+According to [reviews on G2](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
+
+1. **It replaces multiple tools:** PostHog can replace Grafana Loki, [LaunchDarkly](/blog/best-launchdarkly-alternatives), and [Mixpanel](/blog/posthog-vs-mixpanel). This simplifies workflows and keeps all debugging data in one place.
+
+2. **Pricing is transparent and scalable:** Reviewers appreciate how PostHog's pricing scales as they grow. There's a [generous free tier](/pricing) they can use forever, and teams eligible for [PostHog for Startups](/startups) also get $50k in additional free credits.
+
+3. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and improve products. This means going from a log line to the session replay, seeing which feature flag the user was on, and understanding the funnel they were in when something went wrong.
+
+> #### Bottom line
+>
+> PostHog is the best Loki alternative for startups and scale-ups looking for logs, error tracking, AI observability, session replay, and product analytics in a single open-source platform.
+
+<WizardCTA />
+
+## 2. Datadog Logs
+
+- **Founded:** 2010
+- **Similar to:** New Relic
+- **Typical users:** DevOps engineers, SREs, platform engineers
+- **Typical customers:** Mid-market to enterprise cloud-native companies
+
+[Screenshot]
+
+### What is Datadog Logs?
+
+[Datadog](/blog/best-datadog-alternatives) is an observability platform that puts your logs, metrics, traces, and app performance monitoring in one place. DevOps and SRE teams use it to see what's going on across their whole stack – a log, a trace, an infra metric without having to jump between four different tools to figure out what broke.
+
+### Key features
+
+- **Log management:** Aggregate and search logs in real-time to identify issues and understand system performance.
+
+- **APM:** Monitor application performance with end-to-end distributed tracing across services.
+
+- **Infrastructure monitoring:** Get visibility into hosts, containers, and Kubernetes across
+  cloud or hybrid environment.
+
+- **Alerting:** Set threshold and anomaly-based monitors covering logs, metrics, and traces.
+
+- **Session replay:** Capture real user sessions alongside backend observability data.
+
+### How does Datadog compare to Grafana Loki?
+
+The core difference is that Loki is open source – you run it yourself and keep costs low, and Datadog handles all the infrastructure but charges you more: once to ingest logs and again to make them searchable.
+
+| Feature                                                                          | Datadog                                                      | Grafana Loki        |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------ | ------------------- |
+| **Self-serve** No need to talk to sales                                          | ✅                                                           | ✅                  |
+| **Free tier** Generous free tier available                                       | ❌ [(14-day trial only)](https://www.datadoghq.com/pricing/) | ✅                  |
+| **Open source** Audit code and self-host for free                                | ❌                                                           | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate              | ✅                                                           | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                             | ✅                                                           | ✅                  |
+| **Metrics** System and app performance over time                                 | ✅                                                           | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                 | ✅                                                           | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels               | ✅                                                           | Partial             |
+| **High-cardinality indexing** Index fields like user_id, trace_id without issues | ✅                                                           | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion            | Partial (converts to proprietary format)                     | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                             | ✅                                                           | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption               | ✅                                                           | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior               | ✅                                                           | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees               | ✅                                                           | ❌                  |
+
+<details>
+<summary>Main differences between Datadog and Grafana Loki</summary>
+- Datadog is a fully managed SaaS, while Loki is open source and self-hosted (or on Grafana Cloud).
+- Datadog indexes every log event so you can search anything. Loki only indexes labels, which keeps costs low but makes ad-hoc queries slower.
+- Loki is just a log store – you still need Grafana, Tempo, and Mimir alongside it; Datadog ships logs, metrics, traces, and APM together.
+- Loki accepts OTLP but natively runs on Promtail or Grafana Alloy. Datadog converts OpenTelemetry data to its own format.
+- Datadog launched BYOC Logs in late 2025 – a self-hosted log option, but it's still preview-only and logs-only.
+
+</details>
+<details>
+<summary>Main similarities between Datadog and Grafana Loki</summary>
+- Both support live log tailing and real-time streaming.
+- Both let you set threshold-based alerts on log patterns – Datadog through its monitor system, Loki through the Ruler component tied to Alertmanager.
+- Both work with Kubernetes and collect logs via agents (Datadog Agent or Grafana Alloy).
+- Both can ship logs to object storage, such as S3 or GCS, for cheaper long-term retention.
+
+</details>
+
+### Why do companies use Datadog Logs?
+
+According to reviews on G2, companies use Datadog because:
+
+1. **Single source of truth:** Reviewers say Datadog replaced tools like Grafana, ELK, and OpsGenie. Having logs, metrics, APM, and traces in one place means they're not jumping between tabs when something breaks.
+
+2. **Correlation saves time:** It is fast to go from a log to the related trace to the infra metric that spiked without leaving the same screen.
+
+3. **Alerts that don't cry wolf:** Reviewers like that they can set combined alerts for logs, metrics, and anomalies, helping the team focus only on important issues.
+
+> #### Bottom line
+>
+> If you want an all-in-one, fully managed monitoring tool, Datadog is a great Grafana Loki alternative.
+
+## 3. SigNoz
+
+- **Founded:** 2021
+- **Similar to:** Grafana (LGTM stack), Datadog
+- **Typical users:** DevOps engineers, SREs, backend developers
+- **Typical customers:** Startups and mid-size engineering teams building on OpenTelemetry
+
+[Screenshot]
+
+### What is SigNoz?
+
+SigNoz is an open-source observability platform built natively on OpenTelemetry. It brings logs, metrics, and traces into one product so engineering teams can monitor their applications, find what broke, and fix it without stitching together different tools.
+
+### Key features
+
+- **Log management:** Search and filter logs even at high ingest volumes. [ClickHouse](/docs/how-posthog-works/clickhouse) keeps searches fast, even with lots of data.
+
+- **Application performance monitoring:** Trace requests across services with a waterfall view that shows where time went.
+
+- **Metrics:** Monitor infrastructure and application performance with dashboards and alerts.
+
+- **OpenTelemetry native:** Built for OpenTelemetry from the start which makes it easy to send logs, metrics, and traces without changing your existing instrumentation.
+
+- **Alerting:** Catch issues early with threshold-based and anomaly-detection alerts.
+
+### How does SigNoz compare to Grafana Loki?
+
+SigNoz replaces the whole Grafana stack – Loki for logs, Tempo for traces, Mimir for metrics, and Grafana itself with one product. The other big difference is that SigNoz indexes all log fields via ClickHouse while Loki only indexes labels.
+
+| Feature                                                                          | SigNoz                                                   | Grafana Loki        |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------- |
+| **Self-serve** No need to talk to sales                                          | ✅                                                       | ✅                  |
+| **Free tier** Generous free tier available                                       | ❌ [(30-day trial on cloud)](https://signoz.io/pricing/) | ✅                  |
+| **Open source** Audit code and self-host for free                                | ✅                                                       | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate              | ✅ (SigNoz Cloud)                                        | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                             | ✅                                                       | ✅                  |
+| **Metrics** System and app performance over time                                 | ✅                                                       | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                 | ✅                                                       | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels               | ✅                                                       | Partial             |
+| **High-cardinality indexing** Index fields like user_id, trace_id without issues | ✅                                                       | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion            | ✅                                                       | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                             | ✅                                                       | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption               | ❌                                                       | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior               | ❌                                                       | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees               | ✅                                                       | ❌                  |
+
+<details>
+<summary>Main differences between SigNoz and Grafana Loki</summary>
+- SigNoz is a full observability platform while Loki is a log store. You still need Grafana, Tempo, and Mimir around it to get the same coverage.
+
+- SigNoz indexes all log fields via ClickHouse so you can search for anything. Loki only indexes labels, which keeps storage costs down but slows ad-hoc queries on arbitrary fields.
+
+- SigNoz is OTel-native with no proprietary agents and no format conversion. Loki accepts OTLP natively since Loki 3.0, but its traditional ingestion path is Grafana Alloy (Promtail went [EOL in March 2026](https://community.grafana.com/t/promtail-end-of-life-eol-march-2026-how-to-migrate-to-grafana-alloy-for-existing-loki-server-deployments/159636)).
+
+- Loki is AGPLv3; SigNoz's Community Edition is MIT licensed which is more permissive for commercial use and modification.
+
+- SigNoz Cloud starts at $49/month with logs and traces at $0.30/GB. Loki is free to self-host.
+</details>
+<details>
+<summary>Main similarities between SigNoz and Grafana Loki</summary>
+- Both are open source and fully self-hostable at no license cost.
+
+- Both use a log stream concept to group related log lines from the same service instance.
+
+- Both support threshold-based alerting on log data.
+
+- Both have managed cloud options for teams that don't want to run their own infrastructure.
+</details>
+
+### Why do companies use SigNoz?
+
+SigNoz doesn't have a G2 page, but based on Reddit discussions and community feedback, teams use SigNoz because:
+
+1. **Data stays in your own infrastructure:** Teams with compliance or data residency requirements self-host SigNoz so telemetry never leaves their environment.
+
+2. **Everything correlates out of the box:** You can go from a slow trace to the logs from that request in one click. Teams say this cuts down debugging time a lot compared to using separate tools for each signal.
+
+3. **Clean UI that's easy to pick up:** Reviewers mention the interface is straightforward even for engineers who aren't deep into observability. Getting a new team member up to speed doesn't take long.
+
+> #### Bottom line
+>
+> SigNoz is a solid open-source alternative to the full Grafana stack. Worth considering if your team is already on OpenTelemetry and wants logs, traces, and metrics in one place.
+
+## 4. Better Stack
+
+- **Founded:** 2021
+- **Similar to:** Datadog
+- **Typical users:** Developers, SREs, small-to-mid engineering teams
+- **Typical customers:** Startups and SMBs
+
+[Screenshot]
+
+### What is Better Stack?
+
+Better Stack is a managed observability platform with logs, traces, metrics, uptime monitoring, and on-call built in. It's the go-to for teams who want the Grafana Loki feature set without running any infrastructure.
+
+### Key features
+
+- **Log management:** Aggregate logs and query them with the drag-and-drop query builder or SQL and PromQL.
+
+- **Uptime monitoring:** Monitor services from a global network with checks happening as frequently as every 30 seconds. Screenshots and traceroutes are automatically captured on failure.
+
+- **Incident management:** Handle on-call schedules, status pages, and alerts without a separate tool.
+
+- **Distributed tracing:** Auto-instrument your services with eBPF.
+
+- **AI SRE:** Get an AI agent to investigate incidents using logs, traces, and metrics – works in Slack, MS Teams, and via MCP.
+
+### How does Better Stack compare to Grafana Loki?
+
+Better Stack is a fully managed SaaS while Loki is self-hosted open source. The trade-off is operational overhead for cost – Better Stack removes all infrastructure work but bills you for every GB retained while Loki lets you control storage costs at the price of running it yourself.
+
+| Feature                                                                          | Better Stack | Grafana Loki        |
+| -------------------------------------------------------------------------------- | ------------ | ------------------- |
+| **Self-serve** No need to talk to sales                                          | ✅           | ✅                  |
+| **Free tier** Generous free tier available                                       | ✅           | ✅                  |
+| **Open source** Audit code and self-host for free                                | ❌           | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate              | ✅           | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                             | ✅           | ✅                  |
+| **Metrics** System and app performance over time                                 | ✅           | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                 | ✅           | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels               | ✅           | Partial             |
+| **High-cardinality indexing** Index fields like user_id, trace_id without issues | ✅           | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion            | ✅           | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                             | ✅           | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption               | ❌           | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior               | ✅           | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees               | ✅           | ❌                  |
+
+<details>
+<summary>Main differences between Better Stack and Grafana Loki</summary>
+- Better Stack is closed-source SaaS with no self-hosted option. Loki is open source under AGPLv3 and runs on your own infrastructure.
+
+- Better Stack includes tracing, uptime monitoring, and on-call out of the box. Loki is logs-only.
+
+- Better Stack lets you search any log field; Loki only indexes labels by default, so searching arbitrary fields is slower.
+
+- Better Stack has no cardinality limits. Loki slows down when you index too many unique values in a field.
+
+- Loki gives you full control over storage costs since you manage your own infrastructure. Better Stack bills per GB retained.
+</details>
+<details>
+<summary>Main similarities between Better Stack and Grafana Loki</summary>
+- Both ingest OpenTelemetry data natively.
+
+- Both have a free tier – Loki as self-hosted open source, Better Stack with 3 GB of logs on its [free plan](https://betterstack.com/pricing).
+
+- Both support alerting on log data.
+
+- Both are popular with startups and small engineering teams looking for cost-efficient log management.
+</details>
+
+### Why do companies use Better Stack?
+
+According to reviews on G2, companies use Better Stack because:
+
+1. **It's fast to get value from:** Reviewers say setup takes minutes – some users went from zero to a working log dashboard in under a day.
+
+2. **The UI is actually good:** Reviewers call out the dashboards as clean, good-looking out of the box, without needing to configure anything.
+
+3. **The free tier is generous:** Reviewers say the free plan includes things other tools charge for, like custom domain status pages and Slack integration.
+
+> #### Bottom line
+>
+> If you're a startup or small engineering team that wants managed log monitoring with uptime and incident management built in, Better Stack is a great Grafana Loki alternative.
+
+## 5. Elastic Stack (ELK)
+
+- **Founded:** 2012
+- **Similar to:** OpenSearch, SigNoz
+- **Typical users:** Data engineers, security analysts, platform engineers
+- **Typical customers:** Enterprise and mid-market teams, security-heavy orgs
+
+[Screenshot]
+
+### What is Elastic Stack (ELK Stack)?
+
+Elastic Stack (ELK Stack) is a set of tools built on an open-source foundation for ingesting, searching, and visualizing log data. Elasticsearch sits at the core, Kibana handles dashboards and queries, and Logstash and Beats handle data collection.
+
+### Key features
+
+- **Full-text search:** Index and search fields in your logs. Elasticsearch queries return results in milliseconds across large datasets.
+
+- **Kibana dashboards:** Build custom dashboards, save searches, and share query URLs with your team during incidents.
+
+- **APM and distributed tracing:** Trace requests across services and correlate them with logs and infrastructure metrics.
+
+- **Security and SIEM:** Over [1,000+ prebuilt detection rules](https://www.elastic.co/docs/solutions/security/detect-and-alert/install-prebuilt-rules) covering cloud platforms, endpoints, and networks, with biweekly updates from Elastic Security Labs.
+
+- **Flexible deployment:** Run it yourself, on Elastic Cloud, or serverless
+
+### How does Elastic Stack compare to Grafana Loki?
+
+Elastic gives you full-text search across every log field out of the box – something Loki still doesn't do by default. Elastic requires more resources and costs more to scale than Loki's label-based approach.
+
+| Feature                                                                          | Elastic Stack                                       | Grafana Loki        |
+| -------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------- |
+| **Self-serve** No need to talk to sales                                          | ✅                                                  | ✅                  |
+| **Free tier** Generous free tier available                                       | ❌ [(14-day trial)](https://www.elastic.co/pricing) | ✅                  |
+| **Open source** Audit code and self-host for free                                | Partial (Elastic License 2.0)                       | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate              | ✅ (Elastic Cloud)                                  | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                             | ✅                                                  | ✅                  |
+| **Metrics** System and app performance over time                                 | ✅                                                  | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                 | ✅                                                  | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels               | ✅                                                  | Partial             |
+| **High-cardinality indexing** Index fields like user_id, trace_id without issues | Partial (costly at scale)                           | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion            | ✅                                                  | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                             | ✅                                                  | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption               | ❌                                                  | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior               | ❌                                                  | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees               | ✅                                                  | ❌                  |
+
+<details>
+<summary>Main differences between Elastic Stack and Grafana Loki</summary>
+- Elastic indexes every log field by default. Loki only indexes labels, so Elastic is faster for ad-hoc searches but more expensive to run.
+
+- Elastic includes APM, distributed tracing, a built-in SIEM, and LLM observability for monitoring AI apps. Loki handles logs only – metrics and alerting require separate Grafana stack components.
+
+- Elastic's license stops others from offering it as a managed service. Loki is fully open source with no commercial restrictions.
+
+- Elastic has a steeper learning curve and requires more infrastructure to run well. Loki is simpler to operate, especially on Kubernetes.
+</details>
+<details>
+<summary>Main similarities between Elastic Stack and Grafana Loki</summary>
+- Both can be self-hosted and have a managed cloud option.
+
+- Both have active open-source communities and extensive documentation.
+
+- Both are popular with enterprise and mid-market engineering teams.
+</details>
+
+### Why do companies use Elastic Stack?
+
+G2 reviewers are fans of Elastic Stack because:
+
+1. **The search is fast:** Reviewers say Elasticsearch handles millions of log entries and returns results in near real-time, which makes production troubleshooting a lot quicker.
+
+2. **The dashboards are good:** Kibana specifically is easy to build, easy to share, and useful for teams who need a central place to investigate issues.
+
+3. **It all works together:** Reviewers say the integration between Elasticsearch, Kibana, Logstash, and Beats means they spend less time connecting tools and more time actually using them.
+
+> #### Bottom line
+>
+> If you need full-text search across logs and a built-in SIEM, Elastic Stack is worth the operational overhead.
+
+## 6. New Relic Logs
+
+- **Founded:** 2008
+- **Similar to:** Datadog
+- **Typical users:** Full-stack developers, SREs, DevOps engineers
+- **Typical customers:** Small teams to enterprise
+
+[Screenshot]
+
+### What is New Relic?
+
+New Relic is a full-stack observability platform that puts logs, metrics, traces, and APM in one place. Teams that already use New Relic for application monitoring get log management as part of the same platform they're already in.
+
+### Key features
+
+- **Log management:** Search and filter logs in real time. Every log is automatically tied to the APM trace and infra metric from the same request.
+
+- **APM:** Get a full-stack view of application health – response times, error rates, and slow transactions.
+
+- **Infrastructure monitoring:** See what's happening across hosts, containers, and Kubernetes clusters.
+
+- **Alerting:** Set monitors on logs, metrics, and traces and get notified in Slack, PagerDuty, or via webhook when something fires.
+
+- **Session replay:** Watch exactly what a user was doing when something broke with the related logs and traces loaded alongside it.
+
+### How does New Relic compare to Grafana Loki?
+
+With New Relic, your logs show up right inside the APM view – you see the trace, the error, and the relevant logs without switching tabs. Getting that with Loki means wiring up Tempo and Grafana alongside it, which works, but it's on you to set up and maintain.
+
+| Feature                                                                              | New Relic                                        | Grafana Loki        |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------ | ------------------- |
+| **Self-serve** No need to talk to sales                                              | ✅                                               | ✅                  |
+| **Free tier** Generous free tier available                                           | ✅ [(100GB/month)](https://newrelic.com/pricing) | ✅                  |
+| **Open source** Audit code and self-host for free                                    | ❌                                               | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate                  | ✅                                               | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                                 | ✅                                               | ✅                  |
+| **Metrics** System and app performance over time                                     | ✅                                               | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                     | ✅                                               | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels                   | ✅                                               | Partial             |
+| **High-cardinality indexing** Index fields like `user_id`, `trace_id` without issues | ✅                                               | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion                | Partial                                          | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                                 | ✅                                               | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption                   | ❌                                               | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior                   | ✅                                               | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees                   | ✅                                               | ❌                  |
+
+<details>
+<summary>Main differences between New Relic and Grafana Loki</summary>
+- New Relic has no open-source version and no self-hosted option. Loki is fully open source under AGPLv3 – you can run it yourself and audit every line of the code.
+
+- New Relic has a full APM product built in. Loki is a log store; there's no application performance monitoring unless you add it separately.
+
+- New Relic uses NRQL, its own proprietary query language. Loki uses LogQL, which follows the same conventions as PromQL and is easier to pick up if your team already knows Prometheus.
+
+- Loki has a Grafana Cloud free tier (50GB/month). New Relic's free tier is more generous at 100GB/month, but everything runs on New Relic's infrastructure.
+</details>
+<details>
+<summary>Main similarities between New Relic and Grafana Loki</summary>
+- Both have a free tier on managed cloud.
+
+- Both support alerting on log data and integrate with Kubernetes out of the box.
+
+- Both collect logs via lightweight agents and work well with cloud-native, distributed applications.
+
+- Both are built for DevOps and SRE teams, not general-purpose data tools.
+</details>
+
+### Why do companies use New Relic?
+
+According to G2, companies choose New Relic because:
+
+1. **One tool covers the whole stack:** Reviewers say New Relic replaced separate tools for APM, logs, infrastructure, and user monitoring. Everything shows up in one dashboard, so diagnosing an incident doesn't mean switching between four tabs.
+
+2. **It fits almost any stack:** With [780+ integrations](https://newrelic.com/platform), reviewers rarely hit a setup it couldn't handle.
+
+3. **Frontend problems trace back to backend causes:** Reviewers call out being able to see where a user hit an error on the frontend and follow it straight to the slow endpoint or failing transaction that caused it.
+
+> #### Bottom line
+>
+> New Relic's 100GB/month free tier is the most generous on this list, and it includes APM, traces, and session replay, not just logs. Worth a look if you want more than a log store.
+
+## 7. OpenSearch
+
+- **Founded:** 2021
+- **Similar to:** Elastic Stack
+- **Typical users:** DevOps engineers, data engineers
+- **Typical customers:** AWS-centric organizations and enterprise teams
+  [Screenshot]
+
+### What is OpenSearch?
+
+OpenSearch is an open-source search and analytics suite, forked from Elasticsearch in 2021 and now governed by the Linux Foundation. Engineering teams use it to run full-text log search at scale – self-hosted on their own infrastructure or managed through Amazon OpenSearch Service.
+
+### Key features
+
+- **Full-text search:** Find what you're looking for across log fields.
+
+- **OpenSearch Dashboards:** Turn raw log data into charts the whole team can read. Share a saved search with one link during an incident.
+
+- **Trace analytics:** Follow a request across every service it touched. See where it slowed down, where it failed, and why.
+
+- **Alerting:** Know when something goes wrong before a user reports it. Alerts go straight to Slack, PagerDuty, or any webhook.
+
+- **Security analytics:** Spot threats in your logs as they happen.
+
+### How does OpenSearch compare to Grafana Loki?
+
+OpenSearch indexes every log field so you can search anything without planning your label schema ahead of time. Loki's label-based model keeps it cheaper and lighter to run, but you pay for that at query time when you need to search a field you didn't index.
+
+| Feature                                                                              | OpenSearch                     | Grafana Loki        |
+| ------------------------------------------------------------------------------------ | ------------------------------ | ------------------- |
+| **Self-serve** No need to talk to sales                                              | ✅                             | ✅                  |
+| **Free tier** Generous free tier available                                           | ❌                             | ✅                  |
+| **Open source** Audit code and self-host for free                                    | ✅ (Apache 2.0)                | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate                  | ✅ (Amazon OpenSearch Service) | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                                 | ✅                             | ✅                  |
+| **Metrics** System and app performance over time                                     | ✅                             | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                     | ✅                             | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels                   | ✅                             | Partial             |
+| **High-cardinality indexing** Index fields like `user_id`, `trace_id` without issues | ✅                             | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion                | Partial                        | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                                 | ✅                             | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption                   | ❌                             | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior                   | ❌                             | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees                   | ✅                             | ❌                  |
+
+<details>
+<summary>Main differences between OpenSearch and Grafana Loki</summary>
+- Unlike Loki, OpenSearch doesn't stop at logs. Security analytics, dashboards, and trace analytics are all part of the same platform.
+
+- OpenSearch needs significantly more compute and memory to run well, while Loki's whole architecture is built around being lightweight and cheap to operate.
+
+- Teams coming from Elasticsearch can switch to OpenSearch without rewriting a single query. Loki uses LogQL, which is its own query language to learn.
+
+- OpenSearch is Apache 2.0 licensed with no restrictions on commercial use. Loki is AGPLv3, which has stricter terms for teams building services on top of it.
+</details>
+<details>
+<summary>Main similarities between OpenSearch and Grafana Loki</summary>
+- Both are open source and free to self-host under permissive licenses.
+
+- Both support tiered storage so you can move older logs to cheaper storage automatically.
+
+- Both have active open-source communities and public roadmaps you can follow and contribute to.
+
+- Both have native Kubernetes operators that make cluster deployment and management on Kubernetes straightforward.
+</details>
+
+### Why do companies use OpenSearch?
+
+Based on reviews of Amazon OpenSearch Service on G2, teams use OpenSearch because:
+
+1. **Developers and support engineers work from the same data:** Reviewers say having logs, search, and dashboards in one place means fewer back-and-forth conversations between teams during incidents. Everyone looks at the same thing.
+
+2. **It just keeps running:** Reviewers running the managed service say they've gone years without touching the underlying infrastructure.
+
+3. **Non-engineers can read the dashboards too:** Reviewers specifically call out that OpenSearch Dashboards makes operational metrics clear enough for stakeholders outside the engineering team to follow during an incident.
+
+> #### Bottom line
+>
+> OpenSearch is a solid pick as a Grafana Loki alternative for AWS-native teams that want open-source full-text log search without taking on the Elastic license or rebuilding from scratch.
+
+## 8. VictoriaLogs by VictoriaMetrics
+
+- **Founded:** 2018
+- **Similar to:** Grafana Loki, Elastic Stack
+- **Typical users:** SREs, DevOps engineers, platform teams
+- **Typical customers:** Startups and mid-size engineering teams
+
+[Screenshot]
+
+### What is VictoriaLogs?
+
+VictoriaLogs is an open-source log database from VictoriaMetrics, built to store and query logs with significantly less memory and disk usage than most alternatives. It went [GA](https://victoriametrics.com/blog/victoriametrics-efficiently-simplifies-log-complexity-with-victorialogs/) in November 2024 as a standalone product – run it on its own or pair it with VictoriaMetrics and VictoriaTraces for a full observability stack without leaving the same vendor.
+
+### Key features
+
+- **LogsQL:** Search, filter, and aggregate logs without a predefined schema.
+
+- **Agent compatibility:** Works with Promtail, Fluent Bit, Logstash, Filebeat, and Vector out of the box.
+
+- **Low resource usage:** Run the same log volumes on significantly less hardware.
+
+- **MCP server:** Ask questions about your logs directly from any MCP-compatible AI tool.
+
+- **Alerting:** Set threshold-based rules on log data and get notified in Alertmanager or any webhook.
+
+### How does VictoriaLogs compare to Grafana Loki?
+
+VictoriaLogs feels the most familiar if you're coming from Grafana Loki. The difference is the search. Loki requires you to define labels before logs come in and anything you didn't label is slow to find. VictoriaLogs indexes everything, so you can search any field whenever you need to. It's free and open source to self-host; VictoriaMetrics Cloud is [usage-based](https://victoriametrics.com/plans-features/) if you'd rather not run it yourself.
+
+| Feature                                                                              | VictoriaLogs               | Grafana Loki        |
+| ------------------------------------------------------------------------------------ | -------------------------- | ------------------- |
+| **Self-serve** No need to talk to sales                                              | ✅                         | ✅                  |
+| **Free tier** Generous free tier available                                           | ❌                         | ✅                  |
+| **Open source** Audit code and self-host for free                                    | ✅ (Apache 2.0)            | ✅ (AGPLv3)         |
+| **Managed cloud option** Fully hosted, no infrastructure to operate                  | ✅ (VictoriaMetrics Cloud) | ✅ (Grafana Cloud)  |
+| **Log management** Aggregate and query logs at scale                                 | ✅                         | ✅                  |
+| **Metrics** System and app performance over time                                     | ❌                         | ✅ (via LogQL)      |
+| **Traces** Request journey and latency breakdown                                     | ❌                         | ❌ (requires Tempo) |
+| **Full-text search** Search across all log fields, not just labels                   | ✅                         | Partial             |
+| **High-cardinality indexing** Index fields like `user_id`, `trace_id` without issues | ✅                         | ❌                  |
+| **OpenTelemetry native** Natively ingest OTel data without conversion                | ✅                         | Partial             |
+| **Alerting** Threshold, anomaly, and forecast alerts                                 | ✅                         | ✅                  |
+| **Product analytics** Track usage, retention, and feature adoption                   | ❌                         | ❌                  |
+| **Session replay** Watch real user sessions to understand behavior                   | ❌                         | ❌                  |
+| **Transparent pricing** Clear, upfront pricing with no hidden fees                   | ✅                         | ❌                  |
+
+<details>
+<summary>Main differences between VictoriaLogs and Grafana Loki</summary>
+
+- Loki is integrated with the Grafana ecosystem. VictoriaLogs sits in the VictoriaMetrics ecosystem, which has its own separate tools for metrics and traces.
+
+- Loki has a permanent free tier on Grafana Cloud (50GB/month). VictoriaMetrics Cloud has a one-month free trial.
+
+- VictoriaLogs is Apache 2.0 licensed. Loki is AGPLv3, which has stricter terms if you're building a service on top of it.
+
+- VictoriaLogs uses significantly less RAM and disk to run the same log volumes. The gap grows as ingest volume increases.
+
+</details>
+
+<details>
+<summary>Main similarities between VictoriaLogs and Grafana Loki</summary>
+
+- Both are open source and free to self-host.
+
+- Both work with the same ingestion agents – Promtail, Fluent Bit, Logstash, and Vector all support either tool.
+
+- Both are built to be lightweight alternatives to Elasticsearch-style full indexing.
+
+- Both support alerting on log data natively.
+
+</details>
+
+### Why do companies use VictoriaLogs?
+
+VictoriaLogs has no G2 reviews yet. Based on community posts on Dev.to, Habr, and GitHub, here's what engineers consistently say about it:
+
+1. **It's fast to get running:** Engineers say they were ingesting logs and running queries within minutes. Scaling up is the same binary with different flags.
+
+2. **The storage savings are real:** Teams are consistently surprised by how little disk space VictoriaLogs needs. One engineer moved a dataset and said it took up way less space than expected.
+
+3. **Queries are fast, even at volume:** Engineers benchmarking it on real production data consistently rate query speed at the top.
+
+> #### Bottom line
+>
+> VictoriaLogs is worth a look if you want open-source log storage that's cheap to run and quick to set up if you're already using VictoriaMetrics for metrics.
+
+## Which Grafana Loki alternative should you choose?
+
+- Want logs connected to error tracking, session replay, and product analytics in one platform? Go with **PostHog**.
+- Need to replace the entire Grafana stack – Loki, Tempo, Mimir, and Grafana with one open-source product? **SigNoz** covers all three signals.
+- Looking for the most generous free tier on managed observability? **New Relic** gives you 100GB/month.
+- Managed log monitoring with uptime and on-call built in? **Better Stack** is purpose-built for that.
+- Security-heavy team that needs full-text search and a built-in SIEM? **Elastic Stack** is worth the overhead.
+- AWS-native stack wanting open-source full-text search without the Elastic license? **OpenSearch** is the natural fit.
+- Already on Loki and want to keep your agents but search any field without planning labels? **VictoriaLogs** is the closest.
+- Full-stack observability, fully managed, with APM and traces? **Datadog** ties it all together.
+
+## Is PostHog right for you?
+
+We're biased, obviously, but we think PostHog is the best Grafana Loki alternative if:
+
+- You value transparency. We're open source and open core.
+- You want logs next to the rest of your debugging tools like error tracking, session replays, feature flags, and product analytics in one workspace.
+- You're a startup or small engineering team that wants a [generous free tier](/pricing) and no infrastructure to manage.
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or check out [our docs](/docs/logs) to do it yourself.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What is Grafana Loki used for?</summary>
+
+Loki collects and stores logs from your applications and infrastructure. Unlike most log tools, it doesn't index the full content of every log line that keeps it cheap to run. Most teams pair it with Grafana for dashboards, Prometheus for metrics, and Tempo for traces.
+
+</details>
+
+<details>
+<summary>Why look for a Grafana Loki alternative?</summary>
+
+Usually it comes down to one of a few things. You need to search log fields you didn't define as labels upfront. You want someone else to run the infrastructure. You're not tied to the Grafana ecosystem and want something more standalone. Or you want logs sitting next to product analytics and session replay in the same tool.
+
+</details>
+
+<details>
+<summary>Is Grafana Loki still worth using in 2026?</summary>
+
+Yes. Grafana Labs shipped a major rearchitecture at GrafanaCON 2026 and acquired Logline to close the gap on full-text search. If the Grafana ecosystem already fits your stack, there's no compelling reason to leave.
+
+</details>
+
+<details>
+<summary>What's the difference between Loki's label indexing and full-text search?</summary>
+
+With Loki, you decide what to index before logs come in. Anything you didn't label is slow to query because Loki has to scan the raw content to find it. Full-text search tools like **Elastic Stack**, **OpenSearch**, and **VictoriaLogs** index every field automatically. You can search anything, any time, without planning ahead. The downside is it costs more to store and run; full indexing is heavier than Loki's label-only approach.
+
+</details>
+
+<details>
+<summary>Can PostHog replace Grafana Loki?</summary>
+
+For most engineering and product teams, yes. PostHog puts logs next to error tracking, session replay, feature flags, and product analytics in one platform. So when something breaks, you already know who was affected and what they were doing. If that context matters to your team, PostHog is a strong alternative.
+
+</details>
+
+<details>
+<summary>What's the best managed Grafana Loki alternative?</summary>
+
+**PostHog** is fully managed with a generous free tier (50GB of logs/month). **New Relic** has the most generous free tier. **Datadog** and **Better Stack** are both fully managed too. **SigNoz Cloud** is worth looking at if you want a managed OTel-native stack. And **Grafana Cloud** offers managed Loki at 50GB/month free if you want to stay in the ecosystem.
+
+</details>
+
+<details>
+<summary>Which Loki alternative is best for OpenTelemetry?</summary>
+
+**SigNoz** is the most native. It was built on OTel from the start and ingests OTLP without converting anything. **Better Stack**, and **VictoriaLogs** also accept OTLP directly. **Datadog** and **New Relic** both take OTLP in, but convert it to their own formats on the way in. Loki has supported OTLP natively since version 3.0, though it still maps attributes to labels during ingestion.
+
+</details>
+<details>
+<summary>Can I use logs alongside product analytics or session replay?</summary>
+Yes – that's the whole point of **PostHog**. Your logs live in the same workspace as session replay, error tracking, and product analytics, so when something breaks you can go from the log straight to the session, see which feature flag the user was on, and understand what they were doing without opening another tool.
+
+</details>
+<details>
+<summary>Which Loki alternative has the simplest setup?</summary>
+**PostHog** is the easiest to get started with – the [setup wizard](/wizard) walks you through configuration in a few minutes and there's nothing to host or maintain. If you want something self-hosted, **VictoriaLogs** is a single binary with no tuning needed. **Better Stack** is also quick to get running on the managed side.
+
+</details>
+
+<NewsletterForm />
