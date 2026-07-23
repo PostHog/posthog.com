@@ -58,6 +58,10 @@ export const onCreatePage: GatsbyNode['onCreatePage'] = async ({ page, actions }
         page.matchPath = '/next-steps/*'
         createPage(page)
     }
+    if (page.path.match(/^\/teams\//) && !page.path.match(/^\/teams\/new/)) {
+        page.matchPath = '/teams/*'
+        createPage(page)
+    }
     // Add client-side routing for custom presentations
     if (page.path.match(/^\/for\//)) {
         page.matchPath = '/for/*'
@@ -110,7 +114,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
                     'docs',
                     'onboarding'
                 ),
-                'scenes/onboarding/OnboardingDocsContentWrapper': path.resolve(
+                'scenes/onboarding/shared/OnboardingDocsContentWrapper': path.resolve(
                     __dirname,
                     'src',
                     'components',
@@ -120,6 +124,13 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
             },
         },
     })
+
+    if (stage === 'build-javascript' && process.env.EMIT_WEBPACK_STATS === 'true') {
+        const { EmitWebpackGraphPlugin } = require('./gatsby/emitWebpackGraphPlugin')
+        actions.setWebpackConfig({
+            plugins: [new EmitWebpackGraphPlugin(path.resolve(__dirname, 'bundle-report', 'webpack-graph.json'))],
+        })
+    }
 }
 
 exports.createPages = async ({ actions }) => {

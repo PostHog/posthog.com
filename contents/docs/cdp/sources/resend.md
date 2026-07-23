@@ -9,12 +9,6 @@ availability:
 sourceId: Resend
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
-
-This source is currently in **alpha**. The interface and available tables may change.
-
-</CalloutBox>
-
 The Resend connector pulls your Resend data – audiences, broadcasts, contacts, domains, and emails – into the PostHog data warehouse.
 
 ## Adding a data source
@@ -29,16 +23,20 @@ Once the syncs are complete, you can start using Resend data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `audiences` | Contact audiences in your Resend account | Full refresh |
-| `broadcasts` | Broadcasts sent through Resend | Full refresh |
-| `domains` | Sending domains | Full refresh |
-| `emails` | Sent emails | Full refresh |
-| `contacts` | Contacts across each of your audiences | Full refresh |
+| Table        | Description                              | Sync method  |
+| ------------ | ---------------------------------------- | ------------ |
+| `audiences`  | Contact audiences in your Resend account | Full refresh |
+| `broadcasts` | Broadcasts sent through Resend           | Full refresh |
+| `domains`    | Sending domains                          | Full refresh |
+| `emails`     | Sent emails                              | Full refresh |
+| `contacts`   | Contacts across each of your audiences   | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

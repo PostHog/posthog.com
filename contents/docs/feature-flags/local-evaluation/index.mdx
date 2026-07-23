@@ -56,6 +56,8 @@ Notice that PostHog is not involved at evaluation time. The tradeoff: **you are 
 
 Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic request to fetch flag definitions (counted as 10 flag requests each). For high-traffic services, this can significantly reduce your flag usage costs.
 
+Each flag definition includes a `version` number that the SDK uses to detect changes. PostHog increments this version whenever you modify the flag itself. It also increments the version when any [cohort](/docs/data/cohorts) referenced by the flag — directly or through nested cohorts — has its conditions changed. This ensures your SDK cache stays in sync even when the flag's effective definition changes through a cohort update rather than a direct flag edit.
+
 There are 3 steps to enable local evaluation:
 
 ## Step 1: Find your feature flags secure API key

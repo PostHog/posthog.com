@@ -53,7 +53,11 @@ class AppServiceProvider extends ServiceProvider
 
 ## Request context middleware
 
-Client SDKs such as [PostHog JS](/docs/libraries/js) can send tracing headers to your Laravel backend. The PHP SDK can read `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` headers and apply them to events captured during the request. Add middleware like this:
+Client SDKs such as [PostHog JS](/docs/libraries/js) can send tracing headers to your Laravel backend. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Laravel backend hostname so browser requests include the session and distinct ID headers.
+
+The PHP SDK can read `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` headers and apply them to events captured during the request. Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side events or decisions, pass an authenticated `distinctId` explicitly, such as `auth()->id()`. For the lower-level context APIs, see the [PHP request context docs](/docs/libraries/php#request-context).
+
+Add middleware like this:
 
 ```php file=app/Http/Middleware/PostHogRequestContext.php
 <?php
@@ -131,6 +135,18 @@ For older Laravel versions, call `PostHog::captureException()` from your excepti
 ## Long-running processes
 
 In normal PHP request lifecycles, queued events flush when the client is destroyed. In long-running Laravel processes such as queue workers, Horizon, or Octane, call `PostHog::flush()` after capturing important events or at the end of a job/request.
+
+If you prefer immediate delivery in queue workers, configure the PHP SDK with `batch_size` set to `1` for those workers:
+
+```php
+PostHog::init(
+    '<ph_project_token>',
+    [
+        'host' => config('services.posthog.host'),
+        'batch_size' => 1,
+    ]
+);
+```
 
 ## Next steps
 

@@ -9,7 +9,7 @@ availability:
 sourceId: Eventbrite
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -49,3 +49,7 @@ Only `orders` and `attendees` expose a server-side `changed_since` filter, so th
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

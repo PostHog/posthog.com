@@ -24,6 +24,11 @@ export default function WarehouseNative(): JSX.Element {
                 <p className="text-xl font-semibold text-primary mt-2">
                     PostHog and Snowflake's relationship status: It's complicated.
                 </p>
+                <p>
+                    The short version: PostHog is a context warehouse, not just a data warehouse. It stores your product
+                    and business data together and lets your PostHog tools and agents query it directly – no separate
+                    pipeline to maintain.
+                </p>
 
                 <div className="rounded-md border border-primary bg-accent p-4 my-6 not-prose">
                     <p className="font-medium mb-2">tl;dr</p>
@@ -86,11 +91,11 @@ export default function WarehouseNative(): JSX.Element {
 
                 <h2>Why this approach?</h2>
                 <p>
-                    The benefit of using an integrated stack like PostHog is that it gives you a single place for tools
-                    such as product analytics, experiments, and feature targeting without hopping between your warehouse
-                    and a separate product tool. We chose to own the execution environment so we can deliver that
-                    experience consistently, while also offering users a way to eliminate point solutions that need to
-                    be stitched together into complex data stacks.
+                    The benefit of using an integrated platform like PostHog is that it gives you a single place for
+                    tools such as product analytics, experiments, and feature targeting without hopping between your
+                    warehouse and a separate product tool. We chose to own the execution environment so we can deliver
+                    that experience consistently, while also offering users a way to eliminate point solutions that
+                    you&apos;d otherwise stitch together yourself.
                 </p>
                 <p>
                     Companies like{' '}

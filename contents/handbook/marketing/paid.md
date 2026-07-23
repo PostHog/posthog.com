@@ -6,8 +6,6 @@ showTitle: true
 
 Paid ads sit with the <SmallTeam slug="demand-gen" />. As PostHog marketing is incredibly brand- and content-driven, our role is to reach potential users of PostHog that those teams can't. We don't have one specific, over-arching goal - each channel has its own goal.
 
-We also own the definition of what an ICP signup is, and track that overall for PostHog. 
-
 > Ads are expensive, so it is typically only worth running paid ads for individual products once they are generally available, with pricing, and where we feel the feature set is broadly on parity with the main competitors. Earlier than that is usually a waste of money.
 
 This page is for paid ads for PostHog in general. If you're looking for paid ads for our newsletter, see the [newsletter ads guide](/handbook/content/newsletter-ads).
