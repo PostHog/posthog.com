@@ -3,7 +3,7 @@ title: Install Feature Flags with PostHog
 ---
 
 import FeatureFlagsInstallationPlatforms from './_snippets/installation-platforms'
-import ObtainProjectToken from '../../integrate/_snippets/obtain-project-token.mdx'
+import ObtainProjectAPIKey from '../../integrate/_snippets/obtain-project-api-key.mdx'
 import WizardCommand from 'components/WizardCommand'
 
 ## AI wizard
@@ -18,10 +18,10 @@ Wait for it to finish and test the setup once the wizard is complete.
 
 <FeatureFlagsInstallationPlatforms />
 
-## Where to find your project token
+## Where to find your project API key
 
-Most of the code examples in these guides reference your project token as a `<ph_project_token>` placeholder. Here's what that key is and where to find it.
+Most of the code examples below reference your project API key as a `<ph_project_token>` placeholder. Here's what that key is and where to find it.
 
-<ObtainProjectToken />
+<ObtainProjectAPIKey />
 
 > **Server-side or local evaluation?** If you're evaluating flags on your server with [local evaluation](/docs/feature-flags/local-evaluation), you'll also need a separate [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key). That key is secret and must never be exposed in client-side code.

@@ -10,7 +10,7 @@ availability:
 
 > **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs. It requires a [feature flags secure API key](#step-1-find-your-feature-flags-secure-api-key), which is secret and must **not** be used in the frontend or exposed to users.
 
-> **Building a frontend, mobile, or CLI app?** Don't use local evaluation or the secure API key on the client. Instead, evaluate flags with a [client-side SDK](/docs/libraries) or by calling the public [`/flags` endpoint](/docs/api/flags) with your [project token](/docs/feature-flags/installation#where-to-find-your-project-token) — the project token is public and safe to expose to users.
+> **Building a frontend, mobile, or CLI app?** Don't use local evaluation or the secure API key on the client. Instead, evaluate flags with a [client-side SDK](/docs/libraries) or by calling the public [`/flags` endpoint](/docs/api/flags) with your [project API key](/docs/feature-flags/installation#where-to-find-your-project-api-key) — the project API key is public and safe to expose to users.
 
 > **Note:** In edge/lambda environments and stateless PHP applications, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
