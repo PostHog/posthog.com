@@ -61,6 +61,8 @@ Beyond optimization, we offer discounts based on four levers:
 
 **For renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
+- Customer must be actively on a prepaid credit plan at the time of signing. If credits ran out before a new order form is signed and the customer rolled onto pay-as-you-go, the +5% does not apply; this is treated as a re-entry into a credit plan, not an early renewal. The spirit of this discount is to reward customers committing to a new renewal plan earlier than required, often because of recent rapid growth or a planned increase in usage, both of which result in a deeper partnership. 
+
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
 
@@ -128,6 +130,14 @@ You should follow the same [inbound sales process](https://posthog.com/handbook/
 All free credits associated with startup plan roll-offs are one-time only, and should be denoted in the special terms of the contract as "An additional credit in the amount of XXXXX (offered to customers in exchange for rolling off the Startup plan) to be applied to Customer's account upon signature with the same expiration date."
 
 For contracting purposes, these free credits should either be applied before the contract term or included in the 12 month credit amount. If they are being applied before the contract term, adjust the contract date to start 2 months later and the one-time credits can be applied to cover the 2 invoices before the contract start date. In this case, the credits do not need to be called out in the contract, and the opportunity owner can add these credits as a one time credit in billing admin.
+
+#### How to structure free credits in special terms
+
+There are two ways we structure free credits, and it's important to be clear which one applies, because they're added at different times and treated differently at contract start:
+
+1. **Fixed amount included in the 12 month term.** The free credits are part of the contract term and are added to the customer's balance alongside the purchased (prepaid) credits at contract start. Use this when a specific dollar amount of free credit is explicitly called out under Special Terms as part of the term.
+
+2. **Coverage for a specific number of months.** The free credits are *not* part of the contract term. We add enough free credits to cover the promised period (for example, up to the contract start date), top up if the customer comes up short before then, and add the prepaid credits only when the contract actually starts. Any free-credit balance still remaining at contract start is removed at that point. These credits can be added via billing admin as a one time credit and don't need to be called out as part of the term.
 
 ### Margin negative deals
 
@@ -208,12 +218,16 @@ If your customer must pay via credit card, you absolutely _need_ to let Mine (Si
 
 Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
 
+### The guiding principle: The buyout amount needs to make financial sense
+When considering a contract buyout, the goal is to pay a little up front to make more money over the long term. It doesn't make sense to buy out a contract for $60k if the customer is only planning on spending $20k annually with PostHog.
+
 Some rules:
 
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
 -   They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires.
 -   Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
 -   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
+-   Any buyout is subject to team lead approval before it goes on an order form.
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 
@@ -248,7 +262,11 @@ For any of the above scenarios you should use our [discounting principles](contr
 
 ### When they will end the contract term with credit remaining
 
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher annual spend than the original contract.
+If a customer ends a term with unused credits and signs a renewal of equal or higher spend, we roll over part of their _remaining_ (unused) credits into the new term. The [pre-paid plans doc](/docs/billing/pre-paid-plans) is the source of truth for the exact amount and the customer-facing wording, so keep the mechanic there and link to it rather than restating it here (this is where these two pages had drifted).
+
+We scale the rollover to _remaining_ credits rather than the original order form amount. For a customer who underused and renews at equal spend, rolling a share of the original on top of the renewal stacks up more credits than they were ever going to use, which rewards a mis-sized deal with a bigger pile and makes the account harder to expand later. Scaling to what they actually didn't use keeps the balance proportionate.
+
+Where the underuse was outside the customer's control (a PostHog-side incident, a data issue on our side, or a documented disruption on theirs), we can roll over more than the standard amount, up to the full remaining balance, or extend the window to use existing credits. We handle these case by case based on what was logged at the time, so flag it early.
 
 ### When a customer doesn't renew their credit purchase
 When a customer chooses not to renew a prepaid credit contract we automatically remove any remaining credits on the expiry date. Their account will then roll onto our standard monthly plan and they'll be charged for usage. It's the customer's responsibility to stop sending us events or cancel their subscription and downgrade to the free tier if they don't want to keep paying.

@@ -6,6 +6,8 @@ showTitle: true
 
 > **Owner:** Sara Miteva
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Logs is a centralized log search built on OpenTelemetry. Send logs from any OTLP-compatible source (including your existing Datadog Agent) and they're searchable inside the same platform that runs your analytics, session replays, errors, and feature flags. Generous free tier, usage-priced per GB, no per-host or per-user fees.
@@ -133,6 +135,6 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 
 **Follow-up:** What languages and services is the backend running, and what's the daily log volume?
 
-**Answer:** Analytics roots make the company look web-shaped from the outside, but Logs is actually the most backend-focused product in the bundle: OTLP/HTTP ingest works from Node, Python, Go, Java, your existing Datadog Agent, or any HTTP client. Browser console capture via PostHog JS is an *additional* feature, not the primary one. Most of the "web-focused" customer feedback in our research was about historic instrumentation maturity (web SDK shipped first), not about backend logs – the ingest infrastructure is OpenTelemetry-standard and works from any backend.
+**Answer:** Analytics roots make the company look web-shaped from the outside, but Logs is actually the most backend-focused app in the bundle: OTLP/HTTP ingest works from Node, Python, Go, Java, your existing Datadog Agent, or any HTTP client. Browser console capture via PostHog JS is an *additional* feature, not the primary one. Most of the "web-focused" customer feedback in our research was about historic instrumentation maturity (web SDK shipped first), not about backend logs – the ingest infrastructure is OpenTelemetry-standard and works from any backend.
 
-**Proof point:** PostHog uses its own Logs product internally for backend services. The Datadog Agent drop-in means existing backend log pipelines work without rewriting.
+**Proof point:** PostHog uses its own Logs app internally for backend services. The Datadog Agent drop-in means existing backend log pipelines work without rewriting.

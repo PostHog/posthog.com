@@ -88,6 +88,7 @@ export const productOrder: Record<string, string[]> = {
         'web_analytics',
         'product_analytics',
         'ai_observability',
+        'mcp_analytics',
         'custom_dashboards',
         'group_analytics',
         'custom_dashboards',

@@ -9,7 +9,10 @@ posthog.init('<ph_project_token>', {
         // url_ignorelist can be used on its own, or combined with url_allowlist to further filter which URLs are captured
         url_ignorelist: ['posthog.com./docs/.*/secret-section/.*'], // strings or RegExps
         element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
+        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors to capture
+        // List of CSS selectors to ignore. Providing a custom list replaces the defaults,
+        // so include .ph-no-autocapture and [data-ph-no-autocapture] if you still want them ignored.
+        css_selector_ignorelist: ['.ph-no-autocapture', '[data-ph-no-autocapture]', '[data-sensitive]'],
         element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore
     },
 })

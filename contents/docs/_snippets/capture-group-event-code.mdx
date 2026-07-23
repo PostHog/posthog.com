@@ -109,7 +109,7 @@ PostHogSDK.shared.capture("user_signed_up")
 // the `$groups` property to any event you want to associate with
 // the group.
 PostHogSDK.shared.capture(
-    event: "user_signed_up",
+    "user_signed_up",
     properties: [
         "$groups": [
             "company": "company_id_in_your_db"

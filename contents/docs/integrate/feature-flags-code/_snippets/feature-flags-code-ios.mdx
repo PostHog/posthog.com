@@ -35,6 +35,16 @@ if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"),
 }
 ```
 
+### Inspecting all feature flags
+
+You can inspect all currently loaded feature flags with `getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event, so calling it won't affect your experiment results or flag usage analytics:
+
+```swift
+for flag in PostHogSDK.shared.getAllFeatureFlags() ?? [] {
+    print(flag.key, flag.enabled, flag.variant as Any, flag.payload as Any)
+}
+```
+
 ### Reloading feature flags
 
 Feature flag values are cached. If something has changed with your user and you'd like to refetch their flag values, call:

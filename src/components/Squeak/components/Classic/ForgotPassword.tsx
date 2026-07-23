@@ -4,6 +4,7 @@ import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import Wizard from 'components/Wizard'
+import { SQUEAK_HOST } from 'lib/strapi'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
@@ -66,7 +67,7 @@ const ForgotPasswordForm: React.FC = () => {
                     email: values.email,
                 }
 
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/forgot-password`, {
+                const response = await fetch(`${SQUEAK_HOST}/api/auth/forgot-password`, {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
@@ -120,7 +121,7 @@ const ForgotPasswordForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>

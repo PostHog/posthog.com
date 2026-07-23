@@ -11,7 +11,7 @@ import usePlatformList from 'hooks/docs/usePlatformList'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import WizardCTA from 'components/WizardCTA'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import JuiceboxLogo from 'components/CustomerLogos/JuiceboxLogo'
 import ExaLogo from 'components/CustomerLogos/ExaLogo'
@@ -237,9 +237,7 @@ export default function SessionReplayLanding(): JSX.Element {
 
                             <h3>Install in 30 seconds</h3>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <ProductVideo
                                 videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_session_replay_1080_de1089e7aa.mp4"

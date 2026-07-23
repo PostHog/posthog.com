@@ -90,7 +90,7 @@ Like AI, the rise in importance of these tools isn't expected to slow down eithe
 
 ## 3. Trying to use AI on something you know it's not good at
 
-> Claude Code writing Rust is a `while` loop that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
+> Claude Code writing Rust is [a `while` loop](/newsletter/loops) that accelerates climate change - [Nick Best](/community/profiles/33511), Team Ingestion Product Engineer
 
 Using AI most effectively requires piling up a collection of examples of situations where AI is and isn't useful. You can waste a lot of time and energy repeatedly asking it to do something you know it can't do.
 

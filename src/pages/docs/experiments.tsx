@@ -117,8 +117,7 @@ const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
                 buttonText="Roll out your first experiment"
                 buttonLink="/docs/experiments/start-here"
                 imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
-                imageClasses=""
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png"
             />
 
             <AskMax

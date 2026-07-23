@@ -4,7 +4,7 @@ hideRightSidebar: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
 
 > **Note:** Distributed tracing is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
 
@@ -33,7 +33,7 @@ This is a different endpoint from PostHog's AI/LLM tracing (`/i/v0/ai/otel`), wh
 For language-specific setup, follow one of our installation guides:
 
 <CallToAction type="primary" to="/docs/tracing/installation">
-Configure your tracing client
+  Configure your tracing client
 </CallToAction>
 
 </QuestLogItem>
@@ -72,6 +72,7 @@ Once spans are flowing into PostHog, you can:
 - **Search and filter spans** by service, status, duration, and attributes
 - **Follow a trace end to end** as a waterfall to see where time goes
 - **Spot slow and failing operations** across your services
+- **View correlated logs** in the span inspector, scoped to a single span or the whole trace
 
 </QuestLogItem>
 

@@ -8,6 +8,8 @@ import Wizard from 'components/Wizard'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
+import PostHogButton from './PostHogButton'
+import { isPostHogEmail } from 'lib/employee'
 
 const Input = ({
     label,
@@ -71,8 +73,8 @@ const RegisterForm: React.FC = () => {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
-            } else if (values.email.toLowerCase().endsWith('@posthog.com')) {
-                errors.email = 'Your employee account is created automatically. Reset your password to log in.'
+            } else if (isPostHogEmail(values.email)) {
+                errors.email = 'Your employee account is created automatically. Sign in with PostHog instead.'
             }
             if (!values.password) {
                 errors.password = 'Required'
@@ -127,12 +129,18 @@ const RegisterForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
                         <h3 className="text-base font-semibold leading-tight mb-4">Create your PostHog.com account</h3>
+                        <PostHogButton label="Sign up with PostHog" className="mb-2" />
+                        <div className="flex items-center gap-2 text-xs text-muted my-2">
+                            <span className="flex-1 border-t border-border" />
+                            or
+                            <span className="flex-1 border-t border-border" />
+                        </div>
                         <form onSubmit={handleSubmit} className="space-y-2 mb-4">
                             <Input
                                 label="First name"

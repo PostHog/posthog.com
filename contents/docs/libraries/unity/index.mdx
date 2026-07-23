@@ -96,7 +96,7 @@ PostHog.Setup(new PostHogConfig
 ```
 
 Available options:
-- `PersonProfiles.IdentifiedOnly` (default) – Only creates person profiles when `Identify` is called
+- `PersonProfiles.IdentifiedOnly` (default) – Only creates person profiles when `IdentifyAsync` is called
 - `PersonProfiles.Always` – Creates person profiles for all events
 - `PersonProfiles.Never` – Never creates person profiles (anonymous events only)
 
@@ -278,22 +278,22 @@ You can manually start and stop session recording:
 
 ```csharp
 // Check if Session Replay is active
-if (PostHog.IsSessionReplayActive)
+if (PostHogSDK.IsSessionReplayActive)
 {
     // Stop recording
-    PostHog.StopSessionReplay();
+    PostHogSDK.StopSessionReplay();
 }
 
 // Start recording (if not already active)
-PostHog.StartSessionReplay();
+PostHogSDK.StartSessionReplay();
 ```
 
 ### Recording network requests
 
-Network requests are automatically captured when `CaptureNetworkTelemetry` is enabled. For custom HTTP clients, you can manually record requests:
+You can manually record request metadata when `CaptureNetworkTelemetry` is enabled:
 
 ```csharp
-PostHog.RecordNetworkRequest(
+PostHogSDK.RecordNetworkRequest(
     url: "https://api.example.com/data",
     method: "GET",
     statusCode: 200,
