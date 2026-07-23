@@ -88,6 +88,12 @@ export const productAnalytics = {
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
@@ -103,7 +109,6 @@ export const productAnalytics = {
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
         { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
-        { slug: 'feature-comparison', name: 'Feature comparison', icon: <IconGraph className="size-4" /> },
         // Hidden footer CTA rendered at the bottom of the Pricing surface.
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],

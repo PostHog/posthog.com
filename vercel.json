@@ -3393,7 +3393,7 @@
         },
         {
             "source": "/product-analytics/comparisons",
-            "destination": "/product-analytics/pricing#comparison-summary"
+            "destination": "/product-analytics#feature-comparison"
         },
         {
             "source": "/product-analytics/documentation",
@@ -3417,7 +3417,7 @@
         },
         {
             "source": "/session-replay/comparisons",
-            "destination": "/session-replay#posthog-vs"
+            "destination": "/session-replay#feature-comparison"
         },
         {
             "source": "/session-replay/documentation",
