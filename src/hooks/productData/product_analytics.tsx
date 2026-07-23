@@ -385,7 +385,7 @@ export const productAnalytics = {
     ai: {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
         imageAlt: 'PostHog AI and product analytics',
-        intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL. Works in PostHog AI (in-app chat), PostHog Code (our AI code editor), and in your product editor (using the MCP).',
+        intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
         mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [
             {
