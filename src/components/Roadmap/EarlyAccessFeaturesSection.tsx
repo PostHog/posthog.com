@@ -29,6 +29,9 @@ import { EarlyAccessFeature, EarlyAccessFeatureStage } from 'hooks/useEarlyAcces
 import useRoadmapEarlyAccessFeatures from 'hooks/useRoadmapEarlyAccessFeatures'
 import usePostHog from 'hooks/usePostHog'
 import { ROADMAP_STAGE_STYLES } from './roadmapStageStyles'
+import { getCurrentQuarter } from './TeamObjectives'
+import TeamPanel from './TeamPanel'
+import TeamQuarterSection, { QuarterGridTeam } from './TeamQuarterSection'
 
 const featurePreviewUrl = (flagKey: string): string =>
     `https://us.posthog.com/settings/user-feature-previews#${flagKey}`
@@ -91,7 +94,13 @@ interface SqueakTeamNode {
     slug: string
     name: string
     miniCrest?: Parameters<typeof getImage>[0]
+    crest?: { publicId?: string }
+    objectives?: { body?: string } | null
     profiles?: { data?: SqueakProfileNode[] }
+}
+
+interface GridTeam extends QuarterGridTeam {
+    objectivesBody?: string
 }
 
 type ChipSize = 'sm' | 'md'
@@ -154,12 +163,18 @@ const StageChip = ({ stage, size = 'sm' }: { stage: BoardStage; size?: ChipSize 
     )
 }
 
-const roadmapUrl = (search: string, feature?: string): string => {
+/** Canonical URLs carry at most one drawer param: `feature` or `team`. Setting one clears the other. */
+const roadmapUrl = (search: string, drawer: { feature?: string; team?: string } = {}): string => {
     const params = new URLSearchParams(search)
-    if (feature) {
-        params.set('feature', feature)
+    if (drawer.feature) {
+        params.set('feature', drawer.feature)
     } else {
         params.delete('feature')
+    }
+    if (drawer.team) {
+        params.set('team', drawer.team)
+    } else {
+        params.delete('team')
     }
     const query = params.toString()
     return `/roadmap${query ? `?${query}` : ''}`
@@ -169,7 +184,7 @@ const CopyLinkButton = ({ flagKey }: { flagKey: string }): JSX.Element => {
     const [copied, setCopied] = useState(false)
 
     const copy = () => {
-        const url = `${window.location.origin}${roadmapUrl('', flagKey)}`
+        const url = `${window.location.origin}${roadmapUrl('', { feature: flagKey })}`
         navigator.clipboard?.writeText(url).then(() => {
             setCopied(true)
             window.setTimeout(() => setCopied(false), 2000)
@@ -385,6 +400,7 @@ const FeatureCard = ({
     isNew,
     isPopular,
     onClick,
+    showStage = false,
 }: {
     feature: EarlyAccessFeature
     team?: TeamInfo
@@ -393,6 +409,8 @@ const FeatureCard = ({
     isNew: boolean
     isPopular: boolean
     onClick: () => void
+    /** Show the stage chip instead of the team line — for contexts where the team is already known (e.g. the team drawer). */
+    showStage?: boolean
 }): JSX.Element => {
     const crest = team?.miniCrest ? getImage(team.miniCrest) : undefined
 
@@ -410,9 +428,13 @@ const FeatureCard = ({
             <span className="min-w-0 flex-1">
                 <span className="block text-sm font-bold leading-snug text-primary">{feature.name}</span>
                 <span className="mt-1 flex flex-wrap items-center gap-1.5">
-                    <span className="text-xs font-semibold text-secondary">
-                        {team ? `${team.name} Team` : teamSlug ? `${teamSlug} Team` : 'Unassigned'}
-                    </span>
+                    {showStage ? (
+                        <StageChip stage={feature.stage as BoardStage} />
+                    ) : (
+                        <span className="text-xs font-semibold text-secondary">
+                            {team ? `${team.name} Team` : teamSlug ? `${teamSlug} Team` : 'Unassigned'}
+                        </span>
+                    )}
                     <FeatureBadges isNew={isNew} isPopular={isPopular} />
                 </span>
             </span>
@@ -621,12 +643,15 @@ const FeaturePanel = ({
     people,
     isNew,
     isPopular,
+    onTeamClick,
 }: {
     feature: EarlyAccessFeature
     teamSlug?: string
     people: TeamPerson[]
     isNew: boolean
     isPopular: boolean
+    /** Present when the owning team has a card in the quarter grid — swaps the drawer to that team. */
+    onTeamClick?: (slug: string) => void
 }): JSX.Element => (
     <div data-scheme="primary" className="flex h-full min-h-0 flex-col bg-primary">
         <header className="shrink-0 border-b border-primary px-4 py-4 pr-14">
@@ -656,6 +681,18 @@ const FeaturePanel = ({
                     <div>
                         <h3 className="mb-2 mt-0 text-sm">Built by</h3>
                         <SmallTeam slug={teamSlug} />
+                        {onTeamClick && (
+                            <div className="mt-3">
+                                <OSButton
+                                    type="button"
+                                    size="sm"
+                                    variant="secondary"
+                                    onClick={() => onTeamClick(teamSlug)}
+                                >
+                                    View team goals
+                                </OSButton>
+                            </div>
+                        )}
                     </div>
                 )}
                 <TeamRoster people={people} />
@@ -679,6 +716,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const [teamFilter, setTeamFilter] = useState('all')
     const [pitchOpen, setPitchOpen] = useState(false)
     const [selectedFlagKey, setSelectedFlagKey] = useState<string>()
+    const [selectedTeamSlug, setSelectedTeamSlug] = useState<string>()
     const [mounted, setMounted] = useState(false)
     const [overlayContainer, setOverlayContainer] = useState<HTMLElement | null>(null)
 
@@ -692,6 +730,12 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                     name
                     miniCrest {
                         gatsbyImageData(width: 40, height: 40)
+                    }
+                    crest {
+                        publicId
+                    }
+                    objectives {
+                        body
                     }
                     profiles {
                         data {
@@ -733,6 +777,27 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     const allFeatures = useMemo(() => [...grouped.comingSoon, ...grouped.beta], [grouped.beta, grouped.comingSoon])
     const total = allFeatures.length
 
+    // Teams shown in the quarter grid — mirrors the old /wip query filter (crested teams, no Hedgehogs).
+    const gridTeams: GridTeam[] = useMemo(() => {
+        const featureCountBySlug: Record<string, number> = {}
+        allFeatures.forEach((feature) => {
+            const slug = teamForFeature(feature)
+            if (slug) {
+                featureCountBySlug[slug] = (featureCountBySlug[slug] || 0) + 1
+            }
+        })
+        return allSqueakTeam.nodes
+            .filter((node) => node.name !== 'Hedgehogs' && node.crest?.publicId)
+            .map((node) => ({
+                slug: node.slug,
+                name: node.name,
+                miniCrest: node.miniCrest,
+                objectivesBody: node.objectives?.body || undefined,
+                featureCount: featureCountBySlug[node.slug] || 0,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name))
+    }, [allSqueakTeam, allFeatures, teamForFeature])
+
     useEffect(() => {
         if (!roadmapRootRef.current) {
             return
@@ -753,18 +818,24 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 unassigned += 1
             }
         })
-        const teams = Object.entries(counts)
-            .map(([slug, count]) => ({
-                value: slug,
-                label: `${teamInfoBySlug[slug]?.name || slug} (${count})`,
-            }))
-            .sort((a, b) => a.label.localeCompare(b.label))
+        // Every grid team is selectable (zero features allowed) so the Select can filter the
+        // quarter grid too; feature-owning slugs without a grid card are appended.
+        const gridSlugs = new Set(gridTeams.map((team) => team.slug))
+        const teams = [
+            ...gridTeams.map((team) => ({ value: team.slug, label: `${team.name} (${counts[team.slug] || 0})` })),
+            ...Object.entries(counts)
+                .filter(([slug]) => !gridSlugs.has(slug))
+                .map(([slug, count]) => ({
+                    value: slug,
+                    label: `${teamInfoBySlug[slug]?.name || slug} (${count})`,
+                })),
+        ].sort((a, b) => a.label.localeCompare(b.label))
         const options = [{ value: 'all', label: 'All teams' }, ...teams]
         if (unassigned) {
             options.push({ value: 'unassigned', label: `Unassigned (${unassigned})` })
         }
         return options
-    }, [allFeatures, teamForFeature, teamInfoBySlug])
+    }, [allFeatures, gridTeams, teamForFeature, teamInfoBySlug])
 
     const requestedFlagKey = useMemo(
         () => new URLSearchParams(location.search).get('feature') || undefined,
@@ -775,13 +846,59 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         : undefined
     const activeFlagKey = selectedFlagKey ?? requestedFlagKey
     const activeFeature = activeFlagKey ? allFeatures.find((feature) => feature.flagKey === activeFlagKey) : undefined
-    const drawerOpen = pitchOpen || !!activeFeature
+
+    const requestedTeamParam = useMemo(
+        () => new URLSearchParams(location.search).get('team') || undefined,
+        [location.search]
+    )
+    // Accept a slug, or (for legacy inbound links from product pages) a team name.
+    const requestedTeamSlug = useMemo(() => {
+        if (!requestedTeamParam) {
+            return undefined
+        }
+        if (gridTeams.some((team) => team.slug === requestedTeamParam)) {
+            return requestedTeamParam
+        }
+        return gridTeams.find((team) => team.name.toLowerCase() === requestedTeamParam.toLowerCase())?.slug
+    }, [gridTeams, requestedTeamParam])
+    const activeTeamSlug = selectedTeamSlug ?? requestedTeamSlug
+    const activeTeam = activeTeamSlug ? gridTeams.find((team) => team.slug === activeTeamSlug) : undefined
+    const drawerOpen = pitchOpen || !!activeFeature || !!activeTeam
 
     useEffect(() => {
         if (selectedFlagKey && requestedFlagKey === selectedFlagKey) {
             setSelectedFlagKey(undefined)
         }
     }, [requestedFlagKey, selectedFlagKey])
+
+    useEffect(() => {
+        if (selectedTeamSlug && requestedTeamSlug === selectedTeamSlug) {
+            setSelectedTeamSlug(undefined)
+        }
+    }, [requestedTeamSlug, selectedTeamSlug])
+
+    // The URL carries at most one drawer param; `feature` wins when both arrive.
+    useEffect(() => {
+        if (requestedFlagKey && requestedTeamParam) {
+            navigate(roadmapUrl(location.search, { feature: requestedFlagKey }), { replace: true })
+        }
+    }, [location.search, requestedFlagKey, requestedTeamParam])
+
+    // Normalize legacy name-form ?team= links to the slug and filter the board to that team;
+    // strip values that match no team so the board stays usable.
+    useEffect(() => {
+        if (!requestedTeamParam || requestedFlagKey) {
+            return
+        }
+        if (!requestedTeamSlug) {
+            navigate(roadmapUrl(location.search), { replace: true })
+            return
+        }
+        if (requestedTeamSlug !== requestedTeamParam) {
+            setTeamFilter(requestedTeamSlug)
+            navigate(roadmapUrl(location.search, { team: requestedTeamSlug }), { replace: true })
+        }
+    }, [location.search, requestedFlagKey, requestedTeamParam, requestedTeamSlug])
 
     useEffect(() => {
         if (requestedFlagKey || !location.hash || loading) {
@@ -794,7 +911,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             return
         }
         if (allFeatures.some((feature) => feature.flagKey === legacyFlagKey)) {
-            navigate(roadmapUrl(location.search, legacyFlagKey), { replace: true })
+            navigate(roadmapUrl(location.search, { feature: legacyFlagKey }), { replace: true })
         }
     }, [allFeatures, loading, location.hash, location.search, requestedFlagKey])
 
@@ -816,6 +933,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
             }
             setPitchOpen(false)
             setSelectedFlagKey(undefined)
+            setSelectedTeamSlug(undefined)
             navigate(roadmapUrl(location.search), { replace: true })
         }
 
@@ -831,12 +949,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         return new Set(ranked.map((feature) => feature.flagKey))
     }, [allFeatures])
 
-    if (loading && total === 0) {
-        return <p className="m-0 text-sm text-muted">Loading what's new…</p>
-    }
-    if (total === 0) {
-        return null
-    }
+    const { quarter, year } = getCurrentQuarter()
 
     const now = Date.now()
     const isNew = (feature: EarlyAccessFeature): boolean =>
@@ -878,23 +991,53 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
     )
 
     const filteredTotal = STAGES.reduce((count, { stage }) => count + filteredByStage[stage].length, 0)
+
+    const filteredGridTeams = gridTeams.filter((team) => {
+        const value = query.trim().toLowerCase()
+        const matchesQuery = !value || team.name.toLowerCase().includes(value)
+        const matchesTeamSelect =
+            teamFilter === 'all' ? true : teamFilter === 'unassigned' ? false : team.slug === teamFilter
+        return matchesQuery && matchesTeamSelect
+    })
+
     const openFeature = (feature: EarlyAccessFeature) => {
         setSelectedFlagKey(feature.flagKey)
+        setSelectedTeamSlug(undefined)
         setPitchOpen(false)
-        navigate(roadmapUrl(location.search, feature.flagKey), { replace: true })
+        navigate(roadmapUrl(location.search, { feature: feature.flagKey }), { replace: true })
+    }
+    const openTeam = (slug: string) => {
+        setSelectedTeamSlug(slug)
+        setSelectedFlagKey(undefined)
+        setPitchOpen(false)
+        navigate(roadmapUrl(location.search, { team: slug }), { replace: true })
     }
     const openPitch = () => {
         setPitchOpen(true)
         setSelectedFlagKey(undefined)
+        setSelectedTeamSlug(undefined)
         navigate(roadmapUrl(location.search), { replace: true })
     }
     const closeDrawer = () => {
         setPitchOpen(false)
         setSelectedFlagKey(undefined)
+        setSelectedTeamSlug(undefined)
         navigate(roadmapUrl(location.search), { replace: true })
     }
-    const activeTeamSlug = activeFeature ? teamForFeature(activeFeature) : undefined
-    const drawerTitle = pitchOpen ? 'Pitch a roadmap idea' : activeFeature?.name ?? 'Roadmap feature'
+    const activeFeatureTeamSlug = activeFeature ? teamForFeature(activeFeature) : undefined
+    const stageOrder: Record<BoardStage, number> = { beta: 0, alpha: 1, concept: 2 }
+    const activeTeamFeatures = activeTeam
+        ? allFeatures
+              .filter((feature) => teamForFeature(feature) === activeTeam.slug)
+              .sort(
+                  (a, b) =>
+                      (stageOrder[a.stage as BoardStage] ?? 3) - (stageOrder[b.stage as BoardStage] ?? 3) ||
+                      a.name.localeCompare(b.name)
+              )
+        : []
+    const drawerTitle = pitchOpen
+        ? 'Pitch a roadmap idea'
+        : activeFeature?.name ?? (activeTeam ? `${activeTeam.name} Team` : 'Roadmap feature')
 
     return (
         <div ref={roadmapRootRef} className="relative flex min-w-0 flex-col gap-3">
@@ -929,24 +1072,40 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 </div>
             </div>
 
-            <div className="app-scroll-viewport min-w-0 overflow-x-auto">
-                <div className="flex min-w-max snap-x snap-mandatory items-start gap-3 pr-2 @5xl:grid @5xl:min-w-full @5xl:snap-none @5xl:grid-cols-3 @5xl:items-start @5xl:pr-0">
-                    {STAGES.map((definition) => (
-                        <RoadmapLane
-                            key={definition.stage}
-                            definition={definition}
-                            features={filteredByStage[definition.stage]}
-                            activeFlagKey={activeFeature?.flagKey}
-                            teamForFeature={teamForFeature}
-                            teamInfoBySlug={teamInfoBySlug}
-                            isNew={isNew}
-                            isPopular={isPopular}
-                            onFeatureClick={openFeature}
-                            onPitchClick={openPitch}
-                        />
-                    ))}
+            {/* Board area — the team grid below stays useful even while features load or are unavailable. */}
+            {total === 0 ? (
+                <p className="m-0 text-sm text-muted">
+                    {loading ? "Loading what's new…" : 'Roadmap features are unavailable right now.'}
+                </p>
+            ) : (
+                <div className="app-scroll-viewport min-w-0 overflow-x-auto">
+                    <div className="flex min-w-max snap-x snap-mandatory items-start gap-3 pr-2 @5xl:grid @5xl:min-w-full @5xl:snap-none @5xl:grid-cols-3 @5xl:items-start @5xl:pr-0">
+                        {STAGES.map((definition) => (
+                            <RoadmapLane
+                                key={definition.stage}
+                                definition={definition}
+                                features={filteredByStage[definition.stage]}
+                                activeFlagKey={activeFeature?.flagKey}
+                                teamForFeature={teamForFeature}
+                                teamInfoBySlug={teamInfoBySlug}
+                                isNew={isNew}
+                                isPopular={isPopular}
+                                onFeatureClick={openFeature}
+                                onPitchClick={openPitch}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
+
+            <TeamQuarterSection
+                teams={filteredGridTeams}
+                totalTeams={gridTeams.length}
+                quarter={quarter}
+                year={year}
+                activeTeamSlug={activeTeam?.slug}
+                onTeamClick={openTeam}
+            />
 
             <RoadmapOverlayPanel
                 isOpen={drawerOpen}
@@ -959,10 +1118,33 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                 ) : activeFeature ? (
                     <FeaturePanel
                         feature={activeFeature}
-                        teamSlug={activeTeamSlug}
-                        people={activeTeamSlug ? peopleByTeamSlug[activeTeamSlug] || [] : []}
+                        teamSlug={activeFeatureTeamSlug}
+                        people={activeFeatureTeamSlug ? peopleByTeamSlug[activeFeatureTeamSlug] || [] : []}
                         isNew={isNew(activeFeature)}
                         isPopular={isPopular(activeFeature)}
+                        onTeamClick={
+                            activeFeatureTeamSlug && gridTeams.some((team) => team.slug === activeFeatureTeamSlug)
+                                ? openTeam
+                                : undefined
+                        }
+                    />
+                ) : activeTeam ? (
+                    <TeamPanel
+                        team={activeTeam}
+                        objectivesBody={activeTeam.objectivesBody}
+                        quarter={quarter}
+                        year={year}
+                        features={activeTeamFeatures}
+                        renderFeature={(feature) => (
+                            <FeatureCard
+                                feature={feature}
+                                active={false}
+                                isNew={isNew(feature)}
+                                isPopular={isPopular(feature)}
+                                onClick={() => openFeature(feature)}
+                                showStage
+                            />
+                        )}
                     />
                 ) : null}
             </RoadmapOverlayPanel>

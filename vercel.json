@@ -1719,6 +1719,10 @@
             "destination": "/roadmap"
         },
         {
+            "source": "/wip",
+            "destination": "/roadmap"
+        },
+        {
             "source": "/handbook/company/diversity",
             "destination": "/handbook/company/grown-ups"
         },

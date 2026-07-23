@@ -136,7 +136,8 @@ export const Feature = ({ id, title, teams, description, likeCount, onLike, onUp
     useEffect(() => {
         const params = new URLSearchParams(search)
         if (params.get('id')) {
-            navigate(`/wip${search}`)
+            // Legacy Squeak-roadmap deep links; the merged /roadmap page doesn't consume `id`.
+            navigate('/roadmap')
         }
     }, [])
 

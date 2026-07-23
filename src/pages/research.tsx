@@ -961,7 +961,7 @@ function CTASection() {
                         feature previews are currently available to try in the app.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
-                        <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/roadmap" state={{ newWindow: true }} variant="primary" size="md">
                             See what we're working on
                         </OSButton>
                         <OSButton

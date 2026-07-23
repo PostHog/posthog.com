@@ -426,12 +426,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
-                },
-                {
-                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                     icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),

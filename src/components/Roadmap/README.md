@@ -1,13 +1,14 @@
 # Roadmap board
 
-`EarlyAccessFeaturesSection` powers `/roadmap`. It presents the same early-access data and enrollment flows as the PostHog app in a compact, changelog-style board.
+`EarlyAccessFeaturesSection` powers `/roadmap`. It presents the same early-access data and enrollment flows as the PostHog app in a compact, changelog-style board, followed by a quarter grid showing what every team is working on (the former `/wip` page, which now redirects here).
 
 ## Data ownership
 
 - `useEarlyAccessFeatures` owns the feature data. It starts with Gatsby's build-time `EarlyAccessFeature` nodes, then revalidates with PostHog JS in the browser.
 - The hook supplies the feature stage, title, description, documentation URL, flag key, creation date, waitlist count, and waitlist survey payload.
-- `useRoadmapEarlyAccessFeatures` adds the shared feature-to-small-team map to that data. It resolves `roadmapTeamOverrides.ts` first, then `useFeatureOwnership`, and can filter the canonical roadmap to one team for embedded views such as `/ai`.
-- `allSqueakTeam` supplies display names, mini crests, and member profiles. Features without a match remain visible and can be filtered as `Unassigned`.
+- `useRoadmapEarlyAccessFeatures` adds the shared feature-to-small-team map to that data via its `teamForFeature` resolver. It resolves `roadmapTeamOverrides.ts` first, then `useFeatureOwnership`, and can filter the canonical roadmap to one team for embedded views such as `/ai`.
+- `allSqueakTeam` supplies display names, mini crests, crest presence, member profiles, and quarterly objectives. Features without a match remain visible and can be filtered as `Unassigned`.
+- Objectives are freeform MDX at `contents/teams/{slug}/objectives.mdx`, resolved onto `SqueakTeam.objectives` by the schema customization in `gatsby/createSchemaCustomization.ts`. `TeamObjectives.tsx` owns the current-quarter parsing: `getCurrentQuarter` derives the quarter from today's date, and `QuarterObjectives` renders the MDX then hides everything outside the heading matching `Q{quarter} {year}`, collapsing "recap" sections into a native `<details>`.
 
 Do not duplicate this data in the component or add hard-coded feature cards. Update the source early-access feature, shared ownership data, or the roadmap override map instead.
 
@@ -28,9 +29,13 @@ Cards intentionally contain only:
 
 The Concept lane ends with the dashed `Your idea here` card. It opens the shared overlay drawer containing the roadmap pitch form; the form is not duplicated per lane. The Beta lane ends with a matching dashed `What's just shipped?` card that links to `/changelog`, pointing onward from the last pre-release stage.
 
+## Team quarter grid
+
+Below the board, `TeamQuarterSection` renders one compact card per team: mini crest (with an icon fallback), team name, and a muted count of that team's roadmap features when it has any. The team set mirrors the old `/wip` query — crested teams, excluding Hedgehogs — so teams without an objectives file still get a card; their drawer shows the "hasn't set goals yet" state. Cards are alphabetical and are buttons that open the shared drawer, not links. The grid uses container-query columns and never scrolls itself; the Editor window keeps the page's only vertical scrollbar. When filters produce zero cards the grid shows a single muted "No teams match" line (unlike lanes, an empty grid under a heading reads as broken). The board area behaves the same way in reverse: while features load or are unavailable, a single muted line appears in its place and the team grid stays fully usable.
+
 ## Filtering
 
-One search query is applied before grouping into lanes. It matches the title, full description, flag key, and owning team name. Search is cleared directly from the search field. The team selector is applied at the same time, includes an `Unassigned` option when necessary, and resets through its `All teams` option. Neither control adds a redundant filter chip below the toolbar. The toolbar uses the same primary surface as each lane header, and its rounded search and team controls share one height. Counts always reflect both filters. Empty lanes stay visually empty rather than adding a redundant no-results message; their zero count already communicates the state.
+One search query is applied before grouping into lanes. It matches the title, full description, flag key, and owning team name — and, for the team grid, the team name. Search is cleared directly from the search field. The team selector is applied at the same time and filters both surfaces: it lists every grid team (with its feature count, zero allowed) plus any feature-owning slugs without a grid card, includes an `Unassigned` option when necessary (which matches no grid card), and resets through its `All teams` option. Neither control adds a redundant filter chip below the toolbar. The toolbar uses the same primary surface as each lane header, and its rounded search and team controls share one height. Counts always reflect both filters. Empty lanes stay visually empty rather than adding a redundant no-results message; their zero count already communicates the state.
 
 Featured ordering is preserved within each lane: new cards lead, and joinable alpha/concept items lead their stage. There are no stage or sorting controls because the lanes themselves communicate stage.
 
@@ -56,9 +61,9 @@ The drawer animates only when it opens from a closed state or closes. Switching 
 
 The drawer is non-modal. Clicking another feature or idea card replaces its content without closing the shell or replaying the animation. Clicking elsewhere inside the roadmap's Editor surface closes it; clicks within the drawer itself do not. Escape remains disabled, and the standard `OSButton` window close control always dismisses it. This behavior uses one Editor-scoped click listener plus `data-roadmap-item` and `data-roadmap-drawer` markers—do not add a scrim or restore modal outside-click handling.
 
-The drawer contains the full description, documentation link, linked small team, complete avatar roster with tooltips, and the stage-specific action.
+For a feature, the drawer contains the full description, documentation link, linked small team, complete avatar roster with tooltips, and the stage-specific action. For a team (`TeamPanel`), it contains the team's current-quarter objectives and its roadmap features. The two hop symmetrically without a back stack: feature rows inside the team panel swap the drawer to that feature (showing a stage chip instead of the redundant team line), and the feature panel's "View team goals" button swaps back to the team — offered only when the owning team has a grid card.
 
-The canonical URL is `/roadmap?feature=<flagKey>`. Opening a card adds only `feature` with a history replacement, and closing removes only that parameter the same way. This keeps visible URLs shareable without turning browser Back into another drawer-dismiss control. Invalid values leave the board usable and are removed safely after feature data loads.
+The canonical URLs are `/roadmap?feature=<flagKey>` and `/roadmap?team=<slug>`, and the URL carries at most one drawer param — setting one clears the other, and `feature` wins if both arrive. Opening a card adds its param with a history replacement, and closing removes it the same way. This keeps visible URLs shareable without turning browser Back into another drawer-dismiss control. Invalid values leave the board usable and are removed safely after feature data loads. Legacy inbound links pass a team name (`/roadmap?team=Session%20Replay`, from product pages): a case-insensitive name match normalizes the URL to the slug, sets the team filter to that team, and opens its drawer; unresolvable values are stripped.
 
 Legacy `/roadmap#<flagKey>` URLs are supported. A valid hash is normalized to the canonical query URL with a history replacement.
 

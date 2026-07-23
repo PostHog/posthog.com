@@ -9,7 +9,7 @@ const RoadmapPage = () => {
         <>
             <SEO
                 title="Roadmap - PostHog"
-                description="See what we're building next"
+                description="See what we're building next and what every team is working on this quarter"
                 image={`/images/og/roadmap.jpg`}
             />
             <Editor
@@ -20,7 +20,7 @@ const RoadmapPage = () => {
                 maxWidth="100%"
                 bookmark={{
                     title: 'Roadmap',
-                    description: "See what we're building next",
+                    description: "See what we're building next and what every team is working on this quarter",
                 }}
             >
                 <div
@@ -32,7 +32,8 @@ const RoadmapPage = () => {
                             <h1 className="m-0 text-2xl @xl:text-3xl">Roadmap</h1>
                             <p className="mb-0 mt-2 max-w-5xl text-base leading-relaxed text-secondary">
                                 Here's what we're building. Betas are ready to enable today, and anything coming soon
-                                has a waitlist. Drop your email and we'll let you know the moment it ships.
+                                has a waitlist. Drop your email and we'll let you know the moment it ships. Further
+                                down, see what every team is working on this quarter.
                             </p>
                             <p className="mb-0 mt-3 max-w-5xl text-sm leading-relaxed text-secondary">
                                 Every feature moves through stages:{' '}
