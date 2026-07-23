@@ -3405,7 +3405,7 @@
         },
         {
             "source": "/product-analytics/roadmap",
-            "destination": "/product-analytics#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/product-analytics/questions",
@@ -3429,7 +3429,7 @@
         },
         {
             "source": "/session-replay/roadmap",
-            "destination": "/session-replay#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/session-replay/questions",

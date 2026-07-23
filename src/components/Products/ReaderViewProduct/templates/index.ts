@@ -18,7 +18,6 @@ import GettingStarted from './GettingStarted'
 import PricingCalculator from './PricingCalculator'
 import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
-import Roadmap from './Roadmap'
 import Changelog from './Changelog'
 import CommunityQuestions from './CommunityQuestions'
 import Team from './Team'
@@ -48,7 +47,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     calculator: PricingCalculator,
     plans: Plans,
     'pricing-cta': PricingFooterCTA,
-    roadmap: Roadmap,
     changelog: Changelog,
     community: CommunityQuestions,
     team: Team,
@@ -73,7 +71,6 @@ export {
     PricingCalculator,
     Plans,
     PricingFooterCTA,
-    Roadmap,
     Changelog,
     CommunityQuestions,
     Team,
