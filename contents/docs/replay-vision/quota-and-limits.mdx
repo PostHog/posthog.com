@@ -20,7 +20,7 @@ The current cap of 3,000 observations per organization per month is a placeholde
 
 ## Monthly observation cap
 
-During the closed beta, each organization gets **3,000 observations per calendar month**. The counter resets at the start of each calendar month (UTC).
+During the closed beta, each organization gets **3,000 observations per calendar month**. Each observation costs a model-dependent number of credits – the default model costs 5 credits per observation, with cheaper and more capable options available. The counter resets at the start of each calendar month (UTC).
 
 The current month's usage is shown in the Replay Vision app:
 
@@ -75,7 +75,8 @@ If the projection is uncomfortably close to your remaining cap, the cheapest kno
 - **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
 - **Tighten session coverage** – switching from Comprehensive to Balanced or Focused mode filters out low-quality sessions before sampling, so your budget goes toward recordings with meaningful activity.
 - **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the volume.
-- **Combine all three** – a tight filter on the sessions you care most about, plus Focused or Balanced coverage, plus a higher sampling rate, often yields better signal-per-observation than a loose filter with Comprehensive coverage and low sampling.
+- **Choose a more economical model** – Gemini 3.5 Flash Lite costs 2 credits per observation vs. 5 for the default, stretching your budget further.
+- **Combine these** – a tight filter on the sessions you care most about, plus Focused or Balanced coverage, plus a higher sampling rate, often yields better signal-per-observation than a loose filter with Comprehensive coverage and low sampling.
 
 To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
 
