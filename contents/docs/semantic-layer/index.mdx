@@ -1,0 +1,63 @@
+---
+title: Semantic layer
+sidebar: Docs
+showTitle: true
+---
+
+import AlphaCallout from './_snippets/alpha-callout'
+
+Ask three AI tools "what's our MRR?" and you get three different queries and three different numbers. Not because the tools are bad, but because what "MRR" means at your company lives in people's heads. Every agent session reinvents the definition from scratch, and every reinvention is slightly different.
+
+The semantic layer fixes this. It's a per-project catalog of governed definitions that every agent – and every human – reads from the same place. Define MRR once, approve it once, and every session from then on returns the same number.
+
+The guiding principle: **AI generates, a human owns.** Agents can propose metrics, trust marks, and joins all day. Only a human can approve them, and approval is what makes them canonical.
+
+One naming note: the semantic layer is powered by PostHog's data catalog, so you'll see `data-catalog` in MCP tool names (like `data-catalog-metric-run`) and API scopes (`data_catalog`, `data_catalog_approval`).
+
+<AlphaCallout />
+
+## What's in the semantic layer
+
+The catalog holds three kinds of governed facts:
+
+### Metrics
+
+A [metric](/docs/semantic-layer/metrics) is a canonical business measure: a write-once name like `mrr`, a description, a unit, an owner, and a definition that's either an executable query or a set of calculation steps. Metrics move through a `proposed` → `approved` lifecycle, and PostHog detects when an approved definition drifts from the insight it was created from.
+
+### Table certifications
+
+A [certification](/docs/semantic-layer/certifications-and-relationships) is a human-vouched trust mark on a warehouse table or view: `certified` means "prefer this source," `deprecated` means "avoid it." Agents exploring your schema see these marks and pick sources accordingly.
+
+### Relationships
+
+A [relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) is a reviewed join fact between two warehouse tables, proposed with evidence (match rates, sample values) and, once accepted, promoted to a real [data warehouse join](/docs/data-warehouse/join). No more agents guessing join keys.
+
+## How you use it
+
+There's no UI during the alpha. You work with the semantic layer through two surfaces:
+
+**From an AI agent (the main surface).** Connect the [PostHog MCP server](/docs/model-context-protocol) to Claude Code, Cursor, Claude Desktop, or any other MCP client. When the semantic layer is enabled, agents route metric questions through the catalog first: ask `What was our MRR last quarter?` and the agent runs the governed `mrr` metric instead of writing its own SQL. See [MCP tools](/docs/semantic-layer/mcp-tools).
+
+**From SQL.** The catalog is queryable from the [SQL editor](/docs/data-warehouse/query) or the `execute-sql` MCP tool:
+
+```sql
+SELECT name, display_name, description, status, is_drifted
+FROM system.information_schema.metrics
+WHERE name ILIKE '%mrr%'
+```
+
+See the [SQL reference](/docs/semantic-layer/query) for the full schema.
+
+## The trust model in 30 seconds
+
+Everything an agent creates lands as `proposed`. A human promotes it – approving a metric, certifying a table, accepting a join – and every promotion requires literally typing "confirm" in the conversation. Editing an approved metric's definition resets it to `proposed`. If a metric was created from an insight and someone later edits that insight, the metric is flagged as drifted.
+
+The rule agents live by: a result is canonical only when `status = 'approved'` and `is_drifted = false`. Everything else gets labeled noncanonical.
+
+Read more in [governance](/docs/semantic-layer/governance).
+
+## Next steps
+
+- [Get started](/docs/semantic-layer/start-here) – catalog your first metric in a 10-minute agent conversation
+- [Metrics](/docs/semantic-layer/metrics) – definitions, lifecycle, and drift in depth
+- [MCP tools](/docs/semantic-layer/mcp-tools) – the full tool reference and example prompts

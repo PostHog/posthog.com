@@ -486,8 +486,8 @@ export const DebugFixSlide = () => {
             <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                 <p className="text-secondary text-sm my-3">
                     <strong>New:</strong>{' '}
-                    <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                        PostHog Code
+                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                        PostHog Desktop
                     </Link>{' '}
                     proactively finds bugs, fixes them, and creates pull requests automatically.
                 </p>
@@ -554,8 +554,8 @@ export const TestRolloutSlide = () => {
             </p>
             <p className="text-secondary text-sm">
                 And you can build it all with{' '}
-                <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                    PostHog Desktop
                 </Link>
                 , our new AI code editor. It builds new features with the proper PostHog instrumentation and lets you
                 manage AI agents in parallel.

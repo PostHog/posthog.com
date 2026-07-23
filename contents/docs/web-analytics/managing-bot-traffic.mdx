@@ -1,0 +1,47 @@
+---
+title: Managing bot and AI traffic
+---
+
+Bots, crawlers, and AI agents make up a growing share of web traffic, and not all of it is noise. PostHog lets you decide – per type of traffic – whether to welcome it, measure it, or keep it out of your numbers. This guide covers those decisions and where to act on them. For the underlying functions and properties, see [bot and traffic detection](/docs/web-analytics/bot-detection).
+
+## Decide what to keep
+
+The right move depends on the kind of automated traffic. A useful starting point:
+
+| Traffic | Examples | Typical decision |
+| --- | --- | --- |
+| **AI agents** | GPTBot, ClaudeBot, PerplexityBot, ChatGPT-User | Increasingly worth measuring – these visits are how AI tools find and cite your content. Often you want to *see* them, not drop them. |
+| **Search crawlers** | Googlebot, Bingbot | Keep out of human metrics, but worth tracking for SEO. |
+| **SEO and monitoring tools** | AhrefsBot, SemrushBot, Pingdom, UptimeRobot | Usually noise – exclude from analytics. |
+| **HTTP clients and headless browsers** | curl, Python requests, Puppeteer, Selenium | Usually noise – exclude from analytics. |
+
+You don't have to treat every bot the same. Because classification happens at query time, you can exclude monitoring tools from a dashboard while still breaking down AI agent traffic in a separate insight.
+
+## Three places to act
+
+There are three points where you can deal with bots, from most aggressive to most flexible:
+
+1. **Block at capture (client-side).** The [PostHog JavaScript SDK](/docs/libraries/js) blocks known bots before they ever send an event. Lowest effort, but you lose the data entirely, and it only affects traffic that runs JavaScript. See [blocking bots](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers).
+2. **Exclude at query time.** Keep the events and filter them out where you don't want them – add a `$virt_is_bot` is `false` filter to an insight or dashboard. Flexible and reversible: the underlying data stays intact, so you can include or break down bot traffic whenever you want.
+3. **Capture server-side to measure bots.** Most bots and AI agents never run JavaScript, so the SDK never sees them. To measure that traffic, forward your server logs as [`$http_log` events](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) – they carry the user agent and get classified the same way.
+
+## Exclude bots from an insight or dashboard
+
+In any [Product Analytics](/docs/product-analytics) insight or [Web Analytics](/docs/web-analytics/dashboard) view, add a filter where `$virt_is_bot` equals `false`. Your visitor, session, and pageview counts then reflect human traffic only, without changing the stored data.
+
+To exclude a narrower set – say, only automation and HTTP clients while keeping AI agents – filter on `$virt_traffic_type` or `$virt_traffic_category` instead.
+
+## See which bots are hitting you
+
+- **Right now** – open the [Live tab](/docs/web-analytics/live#bot-traffic) and check the bot traffic tile to see which bots are crawling you in real time.
+- **Over time** – build a trend filtered to `$virt_is_bot` is `true` and broken down by `$virt_bot_name`. See [example queries](/docs/web-analytics/bot-detection#example-queries) for the SQL equivalent.
+
+## Measure AI crawler traffic
+
+AI agents are worth watching on their own: they're how assistants and AI search surface your content. To track them, filter to `$virt_traffic_type` equals `AI Agent` and break down by `$virt_bot_name` or `$virt_bot_operator` to see which tools (OpenAI, Anthropic, Perplexity, and others) are reading your site, and which pages they hit most.
+
+## Related
+
+- [Bot and traffic detection](/docs/web-analytics/bot-detection) – the classification functions and virtual properties
+- [Live](/docs/web-analytics/live) – watch bot traffic in real time
+- [Troubleshooting](/docs/web-analytics/troubleshooting) – why your counts differ from other tools

@@ -4,7 +4,7 @@ date: 2026-06-24
 author:
   - edwin-lim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1782746594/context_engineering_hero_7ee47b4915.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/context_engineering_hero_7ee47b4915.png
 featuredImageType: full
 tags:
   - Product engineers
@@ -81,7 +81,7 @@ This lets us generate large libraries of skills that cover our entire platform w
 
 For example, if there's a framework we don't support yet, like serverless Next.js, we load the context into the mill and send it straight to the agent. It's continuous context delivery.
 
-The same pipeline also delivers skills to our [AI plugins](https://github.com/PostHog/ai-plugin), [PostHog Code](/code), and our MCP server.
+The same pipeline also delivers skills to our [AI plugins](https://github.com/PostHog/ai-plugin), [PostHog Code](/desktop), and our MCP server.
 
 **Remember:** "The fastest way to make an agent obsolete is to hardcode its knowledge. Decouple the context from your harness and assemble it from sources of truth."
 
