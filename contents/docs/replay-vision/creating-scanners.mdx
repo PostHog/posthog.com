@@ -100,6 +100,25 @@ Each scanner type has a few extra knobs. The full reference is on the [scanner t
 - **Summarizer** – pick a summary length (short / medium / long).
 - **Monitor** – choose whether the model can return `inconclusive` rather than forcing a yes/no answer.
 
+## Choosing a model
+
+Each scanner runs on a Gemini model. The model you pick affects both quality and cost:
+
+| Model                    | Tier       | Credits per observation |
+| ------------------------ | ---------- | ----------------------- |
+| Gemini 3.5 Flash Lite    | flash lite | 2 (budget)              |
+| Gemini 3 Flash (preview) | flash      | 5 (default)             |
+| Gemini 3.6 Flash         | flash      | 15                      |
+
+The **Gemini 3 Flash (preview)** model is selected by default. It balances cost and capability for most use cases.
+
+**When to change models:**
+
+- **Budget-conscious scanning** – Use Gemini 3.5 Flash Lite at 2 credits if you're scanning high volumes and can tolerate slightly less nuanced results.
+- **Higher accuracy** – Use Gemini 3.6 Flash at 15 credits when you need the most detailed analysis and cost is secondary.
+
+The model choice affects the **per-month estimate** shown in the scanner editor. Lower-credit models let you scan more sessions within your [quota](/docs/replay-vision/quota-and-limits).
+
 ## Filters: scoping the scanner
 
 Recording filters use the same query builder as the rest of [Session Replay](/docs/session-replay/how-to-control-which-sessions-you-record). You can filter by:
