@@ -36,6 +36,16 @@ kotlin {
 }
 ```
 
+If you use a [Gradle version catalog](https://docs.gradle.org/current/userguide/version_catalogs.html), declare it there instead:
+
+```toml file=gradle/libs.versions.toml
+[versions]
+posthog-kmp = "<version>"
+
+[libraries]
+posthog-kmp = { group = "com.posthog", name = "posthog-kmp", version.ref = "posthog-kmp" }
+```
+
 You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-kmp).
 
 ### Configure the SDK
