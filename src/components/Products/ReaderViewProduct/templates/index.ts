@@ -1,7 +1,6 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
 import Overview from './Overview'
-import Customers from './Customers'
 import Eli5 from './Eli5'
 import UseCases from './UseCases'
 import Demo from './Demo'
@@ -33,7 +32,6 @@ import Team from './Team'
  */
 export const templateRegistry: Record<string, React.ComponentType<SectionComponentProps>> = {
     overview: Overview,
-    customers: Customers,
     eli5: Eli5,
     'use-cases': UseCases,
     demo: Demo,
@@ -60,7 +58,6 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
 
 export {
     Overview,
-    Customers,
     Eli5,
     UseCases,
     Demo,

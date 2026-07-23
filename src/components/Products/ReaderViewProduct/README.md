@@ -101,7 +101,6 @@ export const sessionReplay = {
     // …other product data
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        { slug: 'customers', name: 'Who uses it?', group: 'divided', icon: <IconPeople className="size-4" /> },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -197,9 +196,6 @@ interface SectionComponentProps {
     id: string          // from the menu item's slug
     productData: any    // from useProduct({ handle })
     data: any           // pass-through from the page (GraphQL result)
-    customers: any[]
-    customerSlugs: string[]
-    hasCaseStudy: (slug: string) => boolean
     allProducts: any[]
 }
 ```
@@ -211,7 +207,6 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | Template key           | Reads from `productData`                | Summary                                                        |
 | ---------------------- | --------------------------------------- | -------------------------------------------------------------- |
 | `overview`             | `name`, `Icon`, `overview`, `screenshots`, `status` | Hero: title, description, product icon, screenshot. |
-| `customers`            | `customers`                             | Grid of customer cards + optional case-study link.             |
 | `features`             | `features`                              | Vertical list of feature cards (headline, description, images, children, sub-features, labels). |
 | `ai`                   | `ai`, `name`                            | AI skills + prompts + hero image.                              |
 | `posthog-on-posthog`   | `postHogOnPostHog`                      | How PostHog uses this product internally.                      |
@@ -225,7 +220,7 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | `calculator`           | (none yet)                              | Stub — pricing calculator placeholder for the Pricing surface. |
 | `plans`                | (none yet)                              | Stub — plans summary placeholder for the Pricing surface.      |
 
-If a template finds nothing to render (e.g. `customers` for a product with no `customers` data), it returns `null` — the section disappears but the menu item stays.
+If a template finds nothing to render, it returns `null` – the section disappears but the menu item stays.
 
 ### Adding a new template
 

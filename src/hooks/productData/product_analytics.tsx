@@ -8,7 +8,6 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
-    IconPeople,
     IconInfo,
     IconPlay,
     IconCursorClick,
@@ -54,13 +53,6 @@ export const productAnalytics = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        {
-            slug: 'customers',
-            name: 'Who uses it?',
-            hideFromNav: true,
-            group: 'divided',
-            icon: <IconPeople className="size-4" />,
-        },
         {
             slug: 'eli5',
             name: 'What does it do?',
@@ -207,24 +199,6 @@ export const productAnalytics = {
     },
     volume: MILLION,
     worksWith: ['session_replay', 'feature_flags', 'surveys'],
-    customers: {
-        ycombinator: {
-            headline: 'gathers 30% more data than with Google Analytics',
-            description: 'We could autocapture... events using the JS snippet and... configure custom events.',
-        },
-        hasura: {
-            headline: 'improved conversion rates by 10-20%',
-            description: 'we observed drop-offs at very particular stages of our onboarding flow.',
-        },
-        contra: {
-            headline: 'increased registrations by 30%',
-            description: 'From [funnels], we could easily jump to session replays to see the drop-off point.',
-        },
-        speakeasy: {
-            headline: 'manages features and developer relations',
-            description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.',
-        },
-    },
     useCases: {
         intro: 'Product Analytics is used across teams depending on your role.',
         rows: [
@@ -475,8 +449,6 @@ export const productAnalytics = {
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
-        customers:
-            "Y Combinator gets 30% more data than they did with Google Analytics using a reverse proxy. Hasura found drop-offs they'd never seen before and fixed them. Contra watched recordings of users who dropped off and increased registrations by 30%. When you can understand the 'why' behind the numbers, fixing things gets a lot easier.",
         features:
             "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/data-stack'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
         answers:

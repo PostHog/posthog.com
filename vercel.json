@@ -3389,7 +3389,7 @@
         },
         {
             "source": "/product-analytics/customers",
-            "destination": "/product-analytics#customers"
+            "destination": "/product-analytics"
         },
         {
             "source": "/product-analytics/comparisons",
@@ -3413,7 +3413,7 @@
         },
         {
             "source": "/session-replay/customers",
-            "destination": "/session-replay#customers"
+            "destination": "/session-replay"
         },
         {
             "source": "/session-replay/comparisons",
