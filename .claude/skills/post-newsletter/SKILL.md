@@ -136,11 +136,13 @@ upload() {
 Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
 
 The upload response returns a Cloudinary URL in the format:
-`https://res.cloudinary.com/dmukukwp6/image/upload/v.../filename.png`
+`https://res.cloudinary.com/dmukukwp6/image/upload/v1783662227/filename.png`
+
+**Strip the `/v<number>` version segment from the `featuredImage` URL before writing it to frontmatter.** The build derives a Cloudinary public ID from this URL by taking everything after `/upload/` (`gatsby/onCreateNode.ts` → `getPublicID`). If the version segment is left in (`.../upload/v1783662227/filename.png`), the derived public ID becomes `v1783662227/filename` instead of `filename`, which misses the Cloudinary metadata cache — so `gatsbyImageData` resolves to `null` and the hero image silently fails to render (while the direct image URL itself still returns 200). Always write the featured image as `https://res.cloudinary.com/dmukukwp6/image/upload/filename.png` — no `v.../` segment. (This only matters for `featuredImage`, which goes through the image transformer; body images are plain `<img>` tags and render fine with or without the version.)
 
 ### 3d: Update the markdown
 
-Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Match each uploaded image to its placeholder using the quoted anchor text from step 3b — find that exact sentence or heading in the file and insert the image there — never by list position or order. Before moving on, re-read the finished file and confirm each image's description actually matches the paragraph it now sits next to.
+Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Remember to strip the `/v<number>` version segment from the `featuredImage` URL (see 3c). Match each uploaded image to its placeholder using the quoted anchor text from step 3b — find that exact sentence or heading in the file and insert the image there — never by list position or order. Before moving on, re-read the finished file and confirm each image's description actually matches the paragraph it now sits next to.
 
 **Indentation rule:** Example paragraphs and images that follow a numbered tip and illustrate it should be indented as list continuations (3 spaces for tips 1–9, 4 spaces for tips 10+). Checklists inside a tip should be wrapped in a blockquote (`>`).
 

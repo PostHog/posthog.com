@@ -60,9 +60,6 @@ export interface SectionComponentProps {
     /** HTML id applied to the `<section>` element; comes from the menu item's slug. */
     id: string
     productData: any
-    customers: any[]
-    customerSlugs: string[]
-    hasCaseStudy: (slug: string) => boolean
     allProducts: any[]
 }
 

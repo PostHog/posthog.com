@@ -8,7 +8,6 @@ featuredImage: >-
 category: Startups
 tags:
   - Guides
-  - Support
   - AI
 ---
 
@@ -58,7 +57,7 @@ Sometimes the AI gave a perfectly accurate answer and the customer still wrote i
 
 ### 2. Pointing at AI the customer didn't know they had
 
-A surprising number of tickets are answerable by a tool or skill that already exists and the customer just didn't know was there, or one we've only just shipped – since we're constantly building new tools and skills for features across the platform. "You can ask [PostHog AI](/ai) to do that," "there's already a skill for this," or "you can do this directly in [PostHog Code](/code)" are all perfectly reasonable responses and a useful signal that we need to do better at making those capabilities discoverable. A human does both at once: solves it for the person in front of them, and notices it's a pattern worth fixing.
+A surprising number of tickets are answerable by a tool or skill that already exists and the customer just didn't know was there, or one we've only just shipped – since we're constantly building new tools and skills for features across the platform. "You can ask [PostHog AI](/ai) to do that," "there's already a skill for this," or "you can do this directly in [PostHog Code](/desktop)" are all perfectly reasonable responses and a useful signal that we need to do better at making those capabilities discoverable. A human does both at once: solves it for the person in front of them, and notices it's a pattern worth fixing.
 
 ### 3. Diagnosing where the AI fell down
 

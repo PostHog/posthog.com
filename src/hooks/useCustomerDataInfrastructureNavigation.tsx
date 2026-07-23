@@ -1,11 +1,11 @@
 import { navigate } from 'gatsby'
 
 export const customerDataInfrastructureNav = {
-    name: 'PostHog data stack',
+    name: 'PostHog context warehouse',
     url: '/data-stack',
     children: [
         {
-            name: 'PostHog data stack',
+            name: 'PostHog context warehouse',
         },
         {
             name: 'Overview',

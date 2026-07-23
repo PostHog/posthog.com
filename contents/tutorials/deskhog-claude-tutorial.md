@@ -6,8 +6,8 @@ author:
 showTitle: true
 sidebar: Docs
 tags:
-  - AI
-  - DeskHog
+  - ai
+  - deskhog
 ---
 
 [DeskHog](/deskhog) is an open-source developer toy for building your own apps and games from scratch. It’s not just for experienced developers either — AI coding agents like Claude Code enable anyone to start building apps using natural language. 

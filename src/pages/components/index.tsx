@@ -270,8 +270,8 @@ export default function Components(): JSX.Element {
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo code />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
-                                                Use on PostHog Code product surfaces — the Code app, its landing pages,
-                                                and Code-specific marketing.
+                                                Use on PostHog Desktop product surfaces — the Code app, its landing
+                                                pages, and Code-specific marketing.
                                             </p>
                                         </td>
                                     </tr>
@@ -389,8 +389,8 @@ export default function Components(): JSX.Element {
                                         <td className="border border-primary px-4 py-2 align-top">
                                             <code className="text-xs whitespace-pre">{`<Logo stacked code />`}</code>
                                             <p className="mt-2 mb-0 text-xs text-secondary">
-                                                Stacked PostHog Code mark for Code-specific covers, swag, and portrait
-                                                surfaces.
+                                                Stacked PostHog Desktop mark for Code-specific covers, swag, and
+                                                portrait surfaces.
                                             </p>
                                         </td>
                                     </tr>

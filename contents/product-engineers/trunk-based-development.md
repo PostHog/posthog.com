@@ -9,7 +9,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Engineering
-  - Feature management
+  - Feature flags
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.

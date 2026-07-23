@@ -1,6 +1,6 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { docsMenu } from '../../navs'
+import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import Logo from 'components/Logo'
 import { APP_COUNT } from '../../constants'
@@ -20,6 +20,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { useHedgehogMode } from 'components/HedgehogMode'
 import { navigate } from 'gatsby'
+import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 
 interface DocsMenuItem {
     name: string
@@ -31,6 +32,13 @@ interface DocsMenuItem {
 
 interface DocsMenu {
     children: DocsMenuItem[]
+}
+
+const getMenuIcon = (items: DocsMenuItem[], link: string, fallbackIcon: keyof typeof Icons, fallbackColor: string) => {
+    const sourceItem = items.find((item) => item.url === link)
+    const IconComponent = Icons[(sourceItem?.icon || fallbackIcon) as keyof typeof Icons]
+
+    return IconComponent ? <IconComponent className={`size-4 text-${sourceItem?.color || fallbackColor}`} /> : undefined
 }
 
 // Add mobile destinations for docs menu items based on the product data
@@ -176,9 +184,9 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 }
 
 // Prioritized products, ordered to line up with the surfaces under the Products menu
-// (PostHog Code, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
+// (PostHog Desktop, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
 // Everything else falls through to alphabetical order below.
-const DOCS_PRIORITY = ['PostHog Code', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+const DOCS_PRIORITY = ['PostHog Desktop', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
 
 const getDocsMenuItems = () => {
     let items = groupBySectionDividers((docsMenu as DocsMenu).children)
@@ -219,8 +227,8 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
         {
             type: 'item',
-            label: 'PostHog Code',
-            link: '/code',
+            label: 'PostHog Desktop',
+            link: '/desktop',
             icon: <Icons.IconCoffee className="size-4 text-brown" />,
         },
         {
@@ -286,6 +294,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 }
 
 export function useMenuData(): MenuType[] {
+    const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
     const [hedgehogModeEnabled, setHedgehogModeEnabled] = useHedgehogMode()
@@ -303,16 +312,19 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Plans & usage-based pricing',
                     link: '/pricing',
+                    icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
                     label: 'How we do "sales"',
                     link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
                 },
                 {
                     type: 'item',
                     label: 'Startups',
                     link: '/startups',
+                    icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
                 },
                 { type: 'separator' },
                 {
@@ -324,11 +336,13 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Watch a demo',
                     link: '/demo',
+                    icon: getMenuIcon(pricingMenu.children, '/demo', 'IconPlay', 'blue'),
                 },
                 {
                     type: 'item',
                     label: 'Talk to a human',
                     link: '/talk-to-a-human',
+                    icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
                 },
             ],
         },
@@ -390,36 +404,43 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'About',
                     link: '/about',
+                    icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
                 },
                 {
                     type: 'item',
                     label: 'Customers',
                     link: '/customers',
+                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 {
                     type: 'item',
                     label: 'Handbook',
                     link: '/handbook',
+                    icon: getMenuIcon(companyMenu.children, '/handbook', 'IconBook', 'seagreen'),
                 },
                 {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
+                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
                 {
                     type: 'item',
                     label: 'WIP',
                     link: '/wip',
+                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
+                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
                 },
                 {
                     type: 'item',
                     label: 'Media',
                     link: '/media',
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
                 {
                     type: 'separator',
@@ -428,21 +449,26 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'People',
                     link: '/people',
+                    icon: getMenuIcon(companyMenu.children, '/people', 'IconPeople', 'blue'),
                 },
                 {
-                    type: 'item',
+                    type: 'submenu',
                     label: 'Small teams',
                     link: '/small-teams',
+                    items: smallTeamsMenuItems,
+                    icon: getMenuIcon(companyMenu.children, '/small-teams', 'IconShieldPeople', 'teal'),
                 },
                 {
                     type: 'item',
                     label: 'Careers',
                     link: '/careers',
+                    icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
                 },
                 {
                     type: 'item',
                     label: 'Partnerships',
                     link: '/partnerships',
+                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
                 },
                 {
                     type: 'separator',
@@ -450,6 +476,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'submenu',
                     label: 'Like and subscribe',
+                    icon: <Icons.IconMegaphone className="size-4 text-orange" />,
                     mobileDestination: false, // Omit from mobile menu
                     items: [
                         {

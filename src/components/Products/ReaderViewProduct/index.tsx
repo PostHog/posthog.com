@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
-import { useCustomers } from 'hooks/useCustomers'
 import { useProductInterest } from 'hooks/useProductInterest'
 import ProgressBar from 'components/ProgressBar'
 
@@ -77,14 +76,10 @@ export default function ProductReaderView({
 }: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
-    const { getCustomers, hasCaseStudy } = useCustomers()
 
     useProductInterest(productData?.slug)
 
     const sectionsRef = useRef<HTMLDivElement>(null)
-
-    const customerSlugs = productData?.customers ? Object.keys(productData.customers) : []
-    const customers = getCustomers(customerSlugs)
 
     if (!productData) {
         return (
@@ -105,9 +100,6 @@ export default function ProductReaderView({
 
     const sharedSectionProps = {
         productData,
-        customers,
-        customerSlugs,
-        hasCaseStudy,
         allProducts,
     }
 

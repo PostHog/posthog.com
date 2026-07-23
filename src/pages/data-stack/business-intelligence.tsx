@@ -42,7 +42,7 @@ const biFeatures: BIFeature[] = [
     },
     {
         title: 'Product analytics insights',
-        description: 'Leverage built-in product analytics insights for quick access to key metrics.',
+        description: 'Use built-in product analytics insights for quick access to key metrics.',
     },
     {
         title: 'Text-to-SQL with PostHog AI',
@@ -54,15 +54,15 @@ export default function BusinessIntelligence(): JSX.Element {
     return (
         <>
             <SEO
-                title="Business Intelligence (BI) - PostHog data stack"
+                title="Business Intelligence (BI) - PostHog context warehouse"
                 description="Learn about our business intelligence capabilities."
                 image="images/og/cdp.jpg"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Business Intelligence (BI)">
                 <p>
-                    PostHog's business intelligence (BI) capabilities empower product and data teams to derive deep
-                    insights from their data. With integrated BI tools, teams can create interactive dashboards, perform
-                    ad-hoc analyses, and visualize key metrics to drive informed decision-making.
+                    PostHog's business intelligence (BI) capabilities let product and data teams dig into their data.
+                    With integrated BI tools, teams can create interactive dashboards, perform ad-hoc analyses, and
+                    visualize key metrics to drive informed decision-making.
                 </p>
                 <div className="dark:bg-dark bg-accent border border-input p-4 rounded mb-4">
                     <p className="!my-0">

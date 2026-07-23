@@ -1,10 +1,13 @@
 import * as React from 'react'
+import { useHorizontalScrollFade, HorizontalScrollFades } from '../../hooks/useHorizontalScrollFade'
 
 interface ScrollAreaProps {
     children: React.ReactNode
     className?: string
     dataScheme?: string
     fadeOverflow?: boolean | number
+    /** Show left/right edge fades that hint at horizontally scrollable content (only appear when the viewport overflows). */
+    fadeX?: boolean
     style?: React.CSSProperties
     fullWidth?: boolean
     viewportClasses?: string
@@ -17,12 +20,29 @@ const ScrollArea = ({
     className = '',
     dataScheme,
     fadeOverflow = false,
+    fadeX = false,
     style,
     fullWidth = false,
     viewportClasses = '',
     viewportRef,
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
+    const { ref: fadeRef, showStart, showEnd } = useHorizontalScrollFade(fadeX)
+
+    // The horizontal fade needs its own ref on the viewport while still
+    // honouring any `viewportRef` the caller passed.
+    const setViewportRef = React.useCallback(
+        (node: HTMLDivElement | null) => {
+            fadeRef.current = node
+            if (typeof viewportRef === 'function') {
+                viewportRef(node)
+            } else if (viewportRef) {
+                ;(viewportRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+            }
+        },
+        [viewportRef]
+    )
+
     return (
         <div
             data-scheme={dataScheme}
@@ -30,7 +50,7 @@ const ScrollArea = ({
             style={style}
         >
             <div
-                ref={viewportRef}
+                ref={setViewportRef}
                 // Kept for backwards-compatibility: many components locate the
                 // scrolling viewport via `.closest('[data-radix-scroll-area-viewport]')`
                 // (virtualization, scroll restoration, scroll-to-element, IO roots).
@@ -53,6 +73,7 @@ const ScrollArea = ({
                     />
                 </div>
             )}
+            {fadeX && <HorizontalScrollFades showStart={showStart} showEnd={showEnd} />}
         </div>
     )
 }

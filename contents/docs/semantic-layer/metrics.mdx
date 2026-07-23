@@ -1,0 +1,110 @@
+---
+title: Metrics
+sidebar: Docs
+showTitle: true
+---
+
+import AlphaCallout from './_snippets/alpha-callout'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+A metric is a named, governed answer to a business question: one definition, one owner, one source of truth. Instead of every AI session (and every teammate) deriving "MRR" or "activation rate" from scratch, you define it once in the semantic layer and everything downstream runs the same definition.
+
+<AlphaCallout />
+
+## Anatomy of a metric
+
+| Field | What it is |
+|-------|------------|
+| `name` | Identifier-safe handle (`mrr`, `weekly_active_teams`), unique per project. **Write-once and reserved forever**, even after deletion. |
+| `display_name` | Human-friendly label. Mutable, unlike `name`. |
+| `description` | What the metric means and how to interpret it. This is load-bearing text – agents read it to decide whether the metric answers a question. |
+| `unit` | Unit of the result, e.g. `usd`, `percent`, `cents`. |
+| `owner` | The human accountable for the metric. |
+| `definition` | The machine-readable query, or markdown calculation steps. Omit it for a name-and-description-only stub. |
+| `definition_kind` | Query kind of the definition (`HogQLQuery`, `TrendsQuery`, ...), or null for a stub. |
+| `status` | Lifecycle state: `proposed` or `approved`. |
+| `is_drifted` | Whether the definition has drifted from its source insight. Computed at read time, never stored. |
+| `source_insight_short_id` | Set when the metric was created from an insight – the insight's query is snapshotted server-side. Mutually exclusive with `definition`. |
+| `created_source`, `ai_model`, `confidence`, `reasoning` | Provenance: whether a human (`user`) or an agent (`ai_generated`) authored it, and if an agent did, which model, how confident it was, and why. |
+
+<CalloutBox icon="IconInfo" title="Why names are reserved forever" type="fyi">
+
+Agents and integrations store metric names and call them later. If a deleted name could be reused, a stored reference to `mrr` could silently start meaning something else. So names are write-once: deleting a metric retires its name permanently. Treat naming a metric like naming an API route.
+
+</CalloutBox>
+
+## Two kinds of definition
+
+**Executable query.** A `HogQLQuery`, `TrendsQuery`, `FunnelsQuery`, or a bare event node, executed by the same query runner that powers insights – running the metric gives identical results to running the query directly. This is the kind to prefer: deterministic, auditable, and overridable with date ranges at run time.
+
+```json
+{
+  "kind": "HogQLQuery",
+  "query": "SELECT sum(amount) AS mrr FROM stripe_subscriptions WHERE status = 'active'"
+}
+```
+
+**Markdown definition.** Numbered steps that an agent follows to produce the number, for calculations that can't be one query or that need judgment:
+
+```json
+{
+  "kind": "MarkdownDefinition",
+  "markdown": "1. Sum MRR of customers active both this month and 12 months ago.\n2. Divide by those customers' MRR 12 months ago.\n3. Exclude internal and test accounts (email ends in @posthog.com)."
+}
+```
+
+Running a markdown metric doesn't execute anything – the steps come back in the `instructions` field and the agent computes the number, still anchored to the one governed procedure.
+
+Use an executable definition whenever the metric is deterministic. Reach for markdown only when the calculation genuinely can't be a single query.
+
+## Lifecycle: proposed → approved
+
+Every metric lands as `proposed` – whether a human or an agent created it, and even when an existing name is refined (`data-catalog-metric-create` upserts on `name`). A human then approves it, which requires typing "confirm" and the `data_catalog_approval` scope.
+
+Editing an approved metric's definition resets it to `proposed`. A metric is never silently redefined: any change to what the number means goes back through a human.
+
+## Drift
+
+Drift is how the semantic layer notices when a definition goes stale behind your back.
+
+When a metric is created from an insight (via `source_insight_short_id`), PostHog snapshots the insight's query. From then on, `is_drifted` is computed at read time by comparing the snapshot to the insight's current query. Nothing is stored or scanned in the background – drift is always evaluated against the live insight.
+
+A worked example:
+
+1. You create a `signups` metric from your "Weekly signups" insight and approve it.
+2. A teammate edits the insight to exclude a country.
+3. The metric now reports `is_drifted: true`. The approved snapshot no longer matches the insight it came from.
+4. Runs still work, but results are labeled noncanonical, and re-approval is blocked until a human resolves the drift – either update the metric to re-snapshot the new query, or unlink it from the insight.
+
+<CalloutBox icon="IconWarning" title="The canonical rule" type="caution">
+
+A result is canonical only when `status = 'approved'` and `is_drifted = false`. Agents never present a `proposed` or drifted metric's result as canonical – they label it noncanonical instead.
+
+</CalloutBox>
+
+## Running a metric
+
+Agents run metrics with the [`data-catalog-metric-run`](/docs/semantic-layer/mcp-tools#metric-tools) MCP tool. Every run returns a normalized envelope:
+
+| Field | What it is |
+|-------|------------|
+| `status` | Lifecycle state of the metric that produced the results. |
+| `is_drifted` | Whether the definition has drifted. Check this and `status` before trusting the result. |
+| `unit` | Unit of the result. |
+| `kind` | Query kind that was executed. |
+| `results` | The query results, for an executable metric. Null for a markdown metric. |
+| `compiled_query` | The compiled HogQL, when available. |
+| `posthog_url` | Deep link to open the exact query in PostHog – the audit trail for any number an agent hands you. |
+| `instructions` | For a markdown metric, the calculation steps to follow. Null for an executable metric. |
+
+Runs accept optional overrides: `date_from` (e.g. `-7d`), `date_to`, and `interval` reshape the query window without touching the definition. Overrides are rejected for `HogQLQuery` metrics, whose window is fixed in the SQL. A `refresh` parameter controls caching with the same semantics as insights (`blocking`, `async`, `force_blocking`, and friends) – by default a fresh cache hit is served and stale results are recalculated.
+
+## Naming metrics well
+
+Names are an API contract. Choose accordingly:
+
+- Lowercase, terse, unambiguous: `mrr`, `nrr`, `weekly_active_teams`
+- No versions or qualifiers in the name – that's what `description` and the lifecycle are for
+- If two teams mean different things by "activation", make two metrics with honest names (`activation_signup`, `activation_first_insight`) rather than one contested one
+
+The description does the heavy lifting for discovery: agents match questions against it, so write it the way a teammate would ask the question.
