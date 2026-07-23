@@ -77,7 +77,7 @@ export const elastic = {
         },
         pricing: {
             self_serve: true,
-            free_tier: true,
+            free_tier: false,
             transparent_pricing: false,
         },
         tools: {

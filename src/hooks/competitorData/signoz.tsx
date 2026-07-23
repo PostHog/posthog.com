@@ -18,7 +18,7 @@ export const signoz = {
             search: {
                 features: {
                     full_text_search: true,
-                    no_proprietary_query_language: 'SQL / Query builder',
+                    no_proprietary_query_language: true,
                 },
             },
             investigation_workflow: {

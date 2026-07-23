@@ -81,7 +81,6 @@ That breadth is why hundreds of thousands of companies use PostHog, including na
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -119,7 +118,7 @@ According to [G2 user reviews](https://www.g2.com/products/posthog/reviews), tea
 
 > #### Bottom line
 >
-> What Splunk makes hard, PostHog makes default: self-serve instead of a sales cycle, attributes instead of SPL, 10 GB free instead of $100+/GB, and logs connected to the errors, replays, and users they belong to. If your problem is debugging rather than security, PostHog is a great choice.
+> What Splunk makes hard, PostHog makes default: self-serve instead of a sales cycle, attributes instead of SPL, 10 GB free, and logs connected to the errors, replays, and users they belong to. If your problem is debugging rather than security, PostHog is a great choice.
 
 <WizardCTA />
 
@@ -175,7 +174,6 @@ Grafana Cloud offers a managed option with 50 GB of logs free per month and Pro 
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -268,7 +266,6 @@ Their free tier covers personal projects: 10 monitors, a status page, 100K excep
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -363,7 +360,6 @@ There are no per-seat or per-host fees, so costs track data volume, not team siz
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -445,7 +441,6 @@ One thing switching won't fix is the bill. Datadog charges for logs on two axes 
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -535,7 +530,6 @@ Moving from Splunk to Elastic doesn't reduce complexity; it swaps one demanding 
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -621,7 +615,6 @@ And on security, New Relic is the lightest option here: its SIEM capabilities ar
         'logs.debugging_integrations.built_in_session_replay',
         'logs.debugging_integrations.built_in_error_tracking',
         'logs.security_and_compliance.features.siem',
-        'logs.security_and_compliance.features.enterprise_scale_compliance',
         'platform.deployment.open_source',
     ]}
 />
@@ -701,9 +694,9 @@ Cost, complexity, post-Cisco uncertainty, and fit. Ingest pricing scales into si
 <details>
 <summary>Why has Splunk become so expensive?</summary>
 
-Traditional pricing ties cost to daily ingest, roughly $100 to $180 per GB per day at list, plus add-ons like Enterprise Security for SIEM. 
+Splunk's traditional model licenses daily ingest capacity: you buy the right to index a set amount per day, priced on peak volume, negotiated through sales. Add-ons like Enterprise Security for SIEM carry their own licensing on top.
 
-As systems generate more log data, ingest pricing compounds. The workload-based (SVC) option exists but is complex and hard to reverse.
+As systems generate more log data, that capacity license only ratchets up. A workload-based option (SVC pricing) exists, but it's complex, and heavy search workloads can end up costing more than ingest-based plans.
 
 </details>
 
@@ -735,7 +728,7 @@ For debugging-focused teams, often yes. **[PostHog](/logs)** handles log managem
 <details>
 <summary>Which Splunk alternative is best for SIEM?</summary>
 
-**Elastic**, via Elastic Security, pairing full-text search with a real security offering. Most others here, including **PostHog**, **Grafana Loki**, **Better Stack**, and **SigNoz**, aren't SIEMs. For dedicated SIEM, **Splunk** itself is still the benchmark, which is why security and observability are usually separate purchases.
+**Elastic**, via Elastic Security, pairing full-text search with a real security offering. **Datadog** also offers Cloud SIEM as an add-on. Most others here, including **PostHog**, **Grafana Loki**, **Better Stack**, and **SigNoz**, aren't SIEMs. For dedicated SIEM, **Splunk** itself is still the benchmark, which is why security and observability are usually separate purchases.
 
 </details>
 
