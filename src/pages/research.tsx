@@ -12,6 +12,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import {
     StickerBulb,
     StickerELearning,
+    StickerEngineerRatio,
     StickerMicroscope,
     StickerRun,
     StickerUsers,
@@ -33,31 +34,29 @@ import { useWindow } from '../context/Window'
 import MediaPlayer from 'components/MediaPlayer'
 import { useEvents, type Event } from './events'
 import { TeamMember } from 'components/People'
+import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
 
 const RESEARCH_CONTENT_WIDTH = 'max-w-3xl'
 
 // ─────────────────────────────────────────────
-// Section header (sticker + kicker + title + subtitle)
+// Section header (sticker + title + optional subtitle)
 // ─────────────────────────────────────────────
 
 function SectionHeader({
     sticker: Sticker,
-    kicker,
     title,
     subtitle,
 }: {
     sticker: React.ComponentType<{ className?: string }>
-    kicker: string
     title: string
     subtitle?: React.ReactNode
 }) {
     return (
         <div className="mb-6">
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2 mb-2">
                 <Sticker className="size-8 -rotate-3" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-secondary">{kicker}</span>
+                <h2 className="text-2xl m-0">{title}</h2>
             </div>
-            <h2 className="text-2xl m-0 mb-2">{title}</h2>
             {subtitle && <p className="text-secondary m-0">{subtitle}</p>}
         </div>
     )
@@ -107,17 +106,11 @@ function HeroSection({ teamCrestUrl }: { teamCrestUrl?: string }) {
 
             <div className="w-full space-y-3">
                 <p>
-                    PostHog holds one of the richest behavioral datasets anywhere: events, and replays of how real
-                    software gets used. Nobody has trained a foundation model on data like this yet. We're the first.
+                    We hold one of the richest behavioral datasets anywhere — events and replays of how real software
+                    gets used. Nobody has trained a foundation model on data like this. We're the first, starting with
+                    an encoder for the raw stream behind session replay.
                 </p>
-                <p>
-                    We're starting with an encoder for the raw stream behind session replay, and building toward models
-                    that understand and predict user behavior. From there, the work will only become more novel.
-                </p>
-                <p>
-                    We're committed to sharing our work as transparently as we can, through research papers,
-                    conferences, and by publishing our progress.
-                </p>
+                <p>We share the work as we go, through papers, conferences, and published progress.</p>
             </div>
         </section>
     )
@@ -278,9 +271,8 @@ function PublicationsSection() {
         <section id="papers" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerELearning}
-                kicker="Papers"
-                title="Published research"
-                subtitle="Papers, preprints, and technical reports from the team, all linked here."
+                title="Papers"
+                subtitle="Papers, preprints, and technical reports from the team."
             />
 
             {publications.length > 0 ? (
@@ -315,22 +307,20 @@ const ROADMAP_ITEMS: { title: string; description: string }[] = [
     {
         title: 'Training a Replay Encoder model',
         description:
-            'A foundation model pretrained on the raw event stream behind session replay, using novel techniques like a multi-axis RoPE built on additive Euler angles. The labeling suite, replay text renderer, and data prep and sampling pipelines are all components of this run.',
+            'A foundation model pretrained on the raw event stream behind session replay, using a multi-axis RoPE built on additive Euler angles.',
     },
     {
         title: 'Training a replay vision agent',
-        description:
-            'An agent that reads a session the way a human watching the replay would – what the user saw, what they tried, and where it went wrong.',
+        description: 'An agent that reads a session the way a human watching the replay would.',
     },
     {
         title: 'Training a predictive user behavior model',
-        description:
-            'Modeling what users do next from behavioral sequences, so user behavior can be predicted and simulated rather than only observed.',
+        description: 'Modeling what users do next from behavioral sequences.',
     },
     {
         title: 'Tuning a self-driving model',
         description:
-            'Tuning models to run the loop end to end: observe real product usage, diagnose what is broken, and act on it. Evaluated against a benchmark of real product problems.',
+            'Tuning models to observe real product usage, diagnose what is broken, and act on it, benchmarked against real product problems.',
     },
 ]
 
@@ -347,9 +337,8 @@ function RoadmapSection() {
         <section id="pipeline" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerMicroscope}
-                kicker="The research"
-                title="What we're researching right now"
-                subtitle="Exploring user behavior understanding models, in four tracks. Data labeling, prep, and sampling pipelines and eval datasets are components of these goals rather than separate tracks – and every stage will produce papers and technical reports."
+                title="What we're researching"
+                subtitle="Four tracks, each producing papers and technical reports as it goes."
             />
             <ul className="m-0 p-0 list-none divide-y divide-primary mb-6">
                 {ROADMAP_ITEMS.map((item, index) => (
@@ -369,31 +358,72 @@ function RoadmapSection() {
                     </li>
                 ))}
             </ul>
+        </section>
+    )
+}
 
-            <div className="border border-primary rounded bg-accent p-4">
-                <p className="font-semibold m-0 mb-1">We're hiring AI researchers to contribute to this work</p>
-                <p className="text-sm text-secondary m-0 mb-3">
-                    Take these models from whiteboard to arXiv, with the dataset, compute, and freedom to publish.
-                </p>
-                <div className="flex flex-wrap items-center gap-3">
-                    <OSButton
-                        asLink
-                        to="/careers/ai-research-engineer"
-                        state={{ newWindow: true }}
-                        variant="primary"
-                        size="md"
-                    >
-                        AI research engineer role
-                    </OSButton>
-                    <Link
-                        to="/teams/ai-research"
-                        state={{ newWindow: true }}
-                        className="text-sm font-semibold underline"
-                    >
-                        Meet the team
-                    </Link>
+// ─────────────────────────────────────────────
+// Hiring (open AI research engineer roles)
+// ─────────────────────────────────────────────
+
+type AshbyRole = {
+    fields?: { title?: string; slug?: string; locations?: string[] }
+    parent?: { customFields?: { title?: string; value?: string }[] }
+}
+
+function HiringSection({ role }: { role?: AshbyRole }) {
+    // The "Salary" custom field holds a benchmark role key (e.g. "Product Engineer"), not a figure –
+    // resolve it against the SF benchmark, matching how the careers page derives comp.
+    const salaryField = role?.parent?.customFields?.find((field) => field.title === 'Salary')?.value
+    const salaryRole = salaryField || role?.fields?.title
+    const benchmark = salaryRole ? sfBenchmark[salaryRole] : undefined
+    const salary = benchmark ? `$${benchmark.toLocaleString('en-US')} + equity (SF benchmark)` : undefined
+    const locations = role?.fields?.locations ?? []
+    const location = `Remote${locations.length > 0 ? ` (${locations.join(', ')})` : ''}`
+
+    return (
+        <section id="hiring" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
+            <SectionHeader
+                sticker={StickerEngineerRatio}
+                title="We're hiring"
+                subtitle="Come take these models from whiteboard to arXiv, with the dataset, compute, and freedom to publish."
+            />
+            <Link
+                to="/careers/ai-research-engineer"
+                state={{ newWindow: true }}
+                className="group block border border-primary rounded bg-accent p-5 no-underline text-primary hover:-translate-y-0.5 hover:shadow-md transition-all duration-150"
+            >
+                <div className="flex items-start justify-between gap-4 mb-2">
+                    <h3 className="text-lg font-bold m-0 group-hover:underline">AI research engineer</h3>
+                    <span className="inline-block shrink-0 whitespace-nowrap border-2 border-red rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-primary text-red">
+                        2 open roles
+                    </span>
                 </div>
-            </div>
+                <p className="text-sm text-secondary m-0 mb-3">
+                    Train our own deep ML models on petabytes of product data and ship them into a self-driving product.
+                    This is not a Jupyter notebook job.
+                </p>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-secondary mb-4">
+                    <span>{location}</span>
+                    {salary && (
+                        <>
+                            <span className="text-muted">·</span>
+                            <span>{salary}</span>
+                        </>
+                    )}
+                </div>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-red group-hover:underline">
+                    Learn more &amp; apply
+                    <IconArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" />
+                </span>
+            </Link>
+            <p className="text-sm text-secondary mt-4 mb-0">
+                Want the bigger picture first?{' '}
+                <Link to="/teams/ai-research" state={{ newWindow: true }} className="underline">
+                    Meet the AI Research team
+                </Link>
+                .
+            </p>
         </section>
     )
 }
@@ -617,9 +647,8 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
         <section id="blog" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerBulb}
-                kicker="Blog"
-                title="Research in the open"
-                subtitle="We publish what we learn as we go – the big wins, the disastrous errors, the cancelled projects we gave up on along the way. We're not here just to share the glamorous bits."
+                title="Blog"
+                subtitle="What we learn as we go — the wins, the errors, and the projects we cancelled."
             />
             {isCarousel ? (
                 <div className="relative mb-6">
@@ -705,8 +734,7 @@ function PeopleSection({ teamMembers, posts }: { teamMembers: SqueakProfileField
         <section id="team" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerUsers}
-                kicker="The team"
-                title="Who's doing research at PostHog?"
+                title="Team"
                 subtitle="The AI Research team, and the founder who can't stay away."
             />
             <ul className="not-prose list-none mt-0 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 gap-4 @md:gap-x-6 gap-y-12 mt-14">
@@ -836,9 +864,8 @@ function EventsSection() {
         <section id="events" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
                 sticker={StickerRun}
-                kicker="Events"
-                title="Hear it in person"
-                subtitle="Our engineers talk about this work at meetups and conferences."
+                title="Events"
+                subtitle="We talk about this work at meetups and conferences."
             />
 
             {upcomingTalks.length > 0 ? (
@@ -957,8 +984,8 @@ function CTASection() {
                 <div className="relative">
                     <h2 className="text-2xl m-0 mb-2">Put our research into practice</h2>
                     <p className="text-secondary mx-auto mb-6">
-                        Most of what we're working on ships as public betas long before it's polished. Check what
-                        feature previews are currently available to try in the app.
+                        Most of what we build ships as a public beta long before it's polished. See what's available to
+                        try in the app.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
                         <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
@@ -993,10 +1020,12 @@ export default function ResearchPage({
             crest?: { data?: { attributes?: { url?: string } } }
         }
         researchTeamMembers?: { nodes: SqueakProfileFields[] }
+        aiResearchRole?: { nodes: AshbyRole[] }
     }
 }) {
     const teamCrestUrl = data.aiResearchTeam?.crest?.data?.attributes?.url
     const teamMembers = data.researchTeamMembers?.nodes ?? []
+    const aiResearchRole = data.aiResearchRole?.nodes?.[0]
 
     return (
         <>
@@ -1037,6 +1066,8 @@ export default function ResearchPage({
 
                     <div className={`${RESEARCH_CONTENT_WIDTH} mx-auto`}>
                         <RoadmapSection />
+
+                        <HiringSection role={aiResearchRole} />
 
                         <PublicationsSection />
 
@@ -1139,6 +1170,23 @@ export const query = graphql`
                     data {
                         attributes {
                             name
+                        }
+                    }
+                }
+            }
+        }
+        aiResearchRole: allAshbyJobPosting(filter: { fields: { slug: { eq: "ai-research-engineer" } } }) {
+            nodes {
+                fields {
+                    title
+                    slug
+                    locations
+                }
+                parent {
+                    ... on AshbyJob {
+                        customFields {
+                            title
+                            value
                         }
                     }
                 }
