@@ -33,6 +33,8 @@ When linking Klaviyo, you'll need:
 
 The `events` table is append-only, since Klaviyo events are immutable. On the initial sync, only the last 365 days of events are imported.
 
+## List profiles
+
 The opt-in `list_profiles` table maps which profiles belong to which list as `{list_id, profile_id, joined_group_at}` rows. This is disabled by default, but can be toggled on in the schema configuration when setting up or editing your Klaviyo source. It supports incremental sync on `joined_group_at` (the datetime when the profile most recently joined the list). Incremental syncs only pick up new joins and re-joins, and will not account for profiles removed from a list. A full refresh is required if profiles need to be removed. Once synced, you can join it with your profiles table:
 
 ```sql
