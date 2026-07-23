@@ -76,6 +76,19 @@ This is also the fastest way to backfill after broadening a scanner's filters.
 
 You can also trigger an on-demand observation from your editor using the `vision-scanners-scan-session` MCP tool. See [Replay Vision MCP](/docs/replay-vision/mcp) for the full set of tools and example prompts.
 
+## Running summaries on demand
+
+Scanners produce observations; [summaries](/docs/replay-vision/observations) group those observations into a synthesized report. Summaries normally run on a schedule (e.g. the built-in daily digest), but you can trigger one immediately with **Run now**.
+
+The button appears on the daily digest card on the scanner's Observations tab and on every summary's run-history page.
+
+A few things to know:
+
+- **Summaries only.** Alerts check continuously on the background sweep, so there's no on-demand run for them.
+- **Schedule unchanged.** A manual run doesn't advance the next scheduled run. The recurring cadence stays exactly where it was.
+- **Covers recent observations.** The run summarizes everything since the last summary, or the last 24 hours for a fresh scanner — which is exactly the batch you just scanned if you triggered observations on demand first.
+- **Safe to click twice.** If a run is already in progress (scheduled or manual), a second click coalesces onto it rather than starting a duplicate.
+
 ## Ineligible sessions
 
 Some sessions can't be analyzed – there's no recording data, the recording is too short to draw conclusions from, or the user did nothing the model can see. Rather than fail noisily, these come back marked **ineligible**.
