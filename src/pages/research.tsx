@@ -35,6 +35,8 @@ import MediaPlayer from 'components/MediaPlayer'
 import { useEvents, type Event } from './events'
 import { TeamMember } from 'components/People'
 import { sfBenchmark } from 'components/CompensationCalculator/compensation_data/sf_benchmark'
+import SurveySignup from 'components/SurveySignup'
+import useEarlyAccessFeatures from '../hooks/useEarlyAccessFeatures'
 
 const RESEARCH_CONTENT_WIDTH = 'max-w-3xl'
 
@@ -303,24 +305,35 @@ function PublicationsSection() {
 // Research roadmap
 // ─────────────────────────────────────────────
 
-const ROADMAP_ITEMS: { title: string; description: string }[] = [
+// Each track has a concept-stage Early Access Feature in PostHog (flagKey), owned by the
+// AI Research team, so it also appears on /roadmap with the same waitlist survey attached.
+const ROADMAP_ITEMS: { title: string; description: string; flagKey: string; productName: string }[] = [
     {
         title: 'Training a Replay Encoder model',
         description:
             'A foundation model pretrained on the raw event stream behind session replay, using a multi-axis RoPE built on additive Euler angles.',
+        flagKey: 'replay-encoder-model',
+        productName: 'the Replay Encoder model',
     },
     {
-        title: 'Training a replay vision agent',
-        description: 'An agent that reads a session the way a human watching the replay would.',
+        title: 'Training a session replay model',
+        description:
+            "Our current replay vision system uses Gemini to watch session recordings as video. We're building a new model that doesn't rely on computer vision and has access to additional data in PostHog, like logs.",
+        flagKey: 'session-replay-model',
+        productName: 'the session replay model',
     },
     {
         title: 'Training a predictive user behavior model',
         description: 'Modeling what users do next from behavioral sequences.',
+        flagKey: 'predictive-user-behavior-model',
+        productName: 'the predictive user behavior model',
     },
     {
         title: 'Tuning a self-driving model',
         description:
             'Tuning models to observe real product usage, diagnose what is broken, and act on it, benchmarked against real product problems.',
+        flagKey: 'self-driving-model',
+        productName: 'the self-driving model',
     },
 ]
 
@@ -332,7 +345,40 @@ function StatusStamp() {
     )
 }
 
+// Collapsed "Join the waitlist" button that expands into the site-wide SurveySignup form,
+// recording sign-ups against the same waitlist survey the /roadmap card for this feature uses.
+function RoadmapWaitlist({ item, payload }: { item: (typeof ROADMAP_ITEMS)[number]; payload?: Record<string, any> }) {
+    const [open, setOpen] = useState(false)
+
+    // No launched waitlist survey for this flag (yet) — don't render a dead form.
+    if (!payload?.survey_id) return null
+
+    return (
+        <div className="mt-3">
+            {open ? (
+                <SurveySignup
+                    surveyId={payload.survey_id}
+                    surveyQuestionId={payload.survey_question_id}
+                    flagKey={item.flagKey}
+                    productName={item.productName}
+                    buttonLabel="Join the waitlist"
+                    autoFocus
+                    className="max-w-md"
+                />
+            ) : (
+                <OSButton variant="secondary" size="sm" onClick={() => setOpen(true)}>
+                    Join the waitlist
+                </OSButton>
+            )}
+        </div>
+    )
+}
+
 function RoadmapSection() {
+    // Waitlist survey ids arrive on each feature's payload ({ survey_id, survey_question_id }),
+    // joined to the flag key at build time and revalidated client-side.
+    const { features } = useEarlyAccessFeatures()
+
     return (
         <section id="pipeline" className="scroll-mt-16 mb-12 px-4 @xl:px-8">
             <SectionHeader
@@ -353,6 +399,10 @@ function RoadmapSection() {
                                     <StatusStamp />
                                 </div>
                                 <p className="text-sm text-secondary m-0 leading-relaxed">{item.description}</p>
+                                <RoadmapWaitlist
+                                    item={item}
+                                    payload={features.find((feature) => feature.flagKey === item.flagKey)?.payload}
+                                />
                             </div>
                         </div>
                     </li>
