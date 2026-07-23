@@ -1,20 +1,17 @@
 import React from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
 import { CallToAction } from 'components/CallToAction'
 import ResourceItem from 'components/Docs/ResourceItem'
-import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
-import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
-import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
 
 type ProductAnalyticsProps = {
     data: {
@@ -121,9 +118,14 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const ProductAnalytics: React.FC<ProductAnalyticsProps> = ({ data }) => {
+const ProductAnalytics: React.FC<ProductAnalyticsProps> = () => {
+    // PA has no contents/docs/.../index.mdx (unlike session replay), so Handbook
+    // never serves this route – opt into the shared product tabs here instead.
+    const productData = useProduct({ handle: 'product_analytics' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="product_analytics" />}>
             <SEO title="Product analytics - Documentation - PostHog" />
 
             <Content />

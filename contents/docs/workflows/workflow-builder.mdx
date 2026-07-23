@@ -210,11 +210,11 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 | Capture Event            | Trigger a PostHog event. This can be a useful way to chain workflows together, or track the effectiveness of workflows in analytics dashboards. |
 | Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain workflows together.                                      |
 
-## Conversations actions
+## Support actions
 
-If you have [Conversations](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
+If you have [Support](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
 
-| Conversations action | Description                                             | Properties / Options                                                                                               |
+| Support action | Description                                             | Properties / Options                                                                                               |
 | -------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Get ticket           | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source`                                               |
 | Update ticket        | Change a ticket's status, priority, or assignee         | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
@@ -230,7 +230,7 @@ Use these actions together with [conversation events](#conversation-event-trigge
 
 ### Conversation event triggers
 
-When Conversations is enabled, you can trigger workflows using these events:
+When Support is enabled, you can trigger workflows using these events:
 
 | Event                                   | Description                                | Properties                                                                        |
 | --------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------- |

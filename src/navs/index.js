@@ -1427,6 +1427,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'New starter onboarding',
+                        url: '/handbook/forward-deployed-engineering/new-hire-onboarding',
+                    },
+                    {
                         name: 'Working with customers',
                         url: '/handbook/forward-deployed-engineering/working-with-customers',
                     },
@@ -1911,7 +1915,7 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/mdx-and-components',
             },
             {
-                name: 'How to write product docs',
+                name: 'How to write docs',
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
@@ -2263,7 +2267,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Code',
-                    url: '/code',
+                    url: '/desktop',
                 },
                 {
                     name: 'Concepts',
@@ -2571,10 +2575,6 @@ export const docsMenu = {
                         {
                             name: 'Unity',
                             url: '/docs/libraries/unity',
-                            badge: {
-                                title: 'Beta',
-                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -4187,6 +4187,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Managing bot and AI traffic',
+                    url: '/docs/web-analytics/managing-bot-traffic',
+                    icon: 'IconShieldPeople',
+                    color: 'purple',
+                },
+                {
                     name: 'Path cleaning',
                     url: '/docs/web-analytics/path-cleaning',
                     icon: 'IconFilter',
@@ -5300,6 +5306,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/ios',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/error-tracking/upload-source-maps/rust',
+                        },
+                        {
                             name: 'Rollup',
                             url: '/docs/error-tracking/upload-source-maps/rollup',
                         },
@@ -5687,8 +5697,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'PostHog Code',
-                    url: '/docs/support/surfaces/code',
+                    name: 'PostHog Desktop',
+                    url: '/docs/support/surfaces/desktop',
                     icon: 'IconCode',
                     color: 'green',
                 },
@@ -6966,10 +6976,10 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'PostHog Code',
+            name: 'PostHog Desktop',
             icon: 'IconCoffee',
             color: 'yellow',
-            url: '/docs/posthog-code',
+            url: '/docs/posthog-desktop',
             description: 'AI coding environment with deep PostHog integration.',
             children: [
                 {
@@ -6977,14 +6987,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Quick Tour',
-                    url: '/docs/posthog-code',
+                    url: '/docs/posthog-desktop',
                     icon: 'IconRewindPlay',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Download',
-                    url: '/docs/posthog-code/download-posthog-code',
+                    url: '/docs/posthog-desktop/download-posthog-desktop',
                     icon: 'IconDownload',
                     color: 'blue',
                     featured: true,
@@ -6994,73 +7004,73 @@ export const docsMenu = {
                 },
                 {
                     name: 'Any model and any harness',
-                    url: '/docs/posthog-code/use-any-model-and-harness',
+                    url: '/docs/posthog-desktop/use-any-model-and-harness',
                     icon: 'IconGraduationCap',
                     color: 'green',
                 },
                 {
                     name: 'Skills',
-                    url: '/docs/posthog-code/skills',
+                    url: '/docs/posthog-desktop/skills',
                     icon: 'IconMagic',
                     color: 'purple',
                 },
                 {
                     name: 'Command Center',
-                    url: '/docs/posthog-code/command-center',
+                    url: '/docs/posthog-desktop/command-center',
                     icon: 'IconGridMasonry',
                     color: 'orange',
                 },
                 {
                     name: 'Tasks',
-                    url: '/docs/posthog-code/tasks',
+                    url: '/docs/posthog-desktop/tasks',
                     icon: 'IconListCheck',
                     color: 'blue',
                 },
                 {
                     name: 'PostHog integration',
-                    url: '/docs/posthog-code/posthog-integration',
+                    url: '/docs/posthog-desktop/posthog-integration',
                     icon: 'IconSparkles',
                     color: 'seagreen',
                 },
                 {
                     name: 'Git + GitHub integration',
-                    url: '/docs/posthog-code/git-github-integration',
+                    url: '/docs/posthog-desktop/git-github-integration',
                     icon: 'IconGitBranch',
                     color: 'green',
                 },
                 {
                     name: 'Code review',
-                    url: '/docs/posthog-code/code-review',
+                    url: '/docs/posthog-desktop/code-review',
                     icon: 'IconCode',
                     color: 'blue',
                 },
                 {
                     name: 'Environments',
-                    url: '/docs/posthog-code/environments',
+                    url: '/docs/posthog-desktop/environments',
                     icon: 'IconServer',
                     color: 'purple',
                 },
                 {
                     name: 'Cloud runs',
-                    url: '/docs/posthog-code/cloud-runs',
+                    url: '/docs/posthog-desktop/cloud-runs',
                     icon: 'IconCloud',
                     color: 'blue',
                 },
                 {
                     name: 'Worktrees',
-                    url: '/docs/posthog-code/worktrees',
+                    url: '/docs/posthog-desktop/worktrees',
                     icon: 'IconGitRepository',
                     color: 'orange',
                 },
                 {
                     name: 'AI-generated content',
-                    url: '/docs/posthog-code/ai-generated-content',
+                    url: '/docs/posthog-desktop/ai-generated-content',
                     icon: 'IconAI',
                     color: 'purple',
                 },
                 {
                     name: 'Settings',
-                    url: '/docs/posthog-code/settings',
+                    url: '/docs/posthog-desktop/settings',
                     icon: 'IconGear',
                     color: 'seagreen',
                 },
@@ -7069,19 +7079,19 @@ export const docsMenu = {
                 },
                 {
                     name: 'Pricing',
-                    url: '/docs/posthog-code/pricing',
+                    url: '/docs/posthog-desktop/pricing',
                     icon: 'IconPiggyBank',
                     color: 'green',
                 },
                 {
                     name: 'Open source',
-                    url: '/docs/posthog-code/open-source',
+                    url: '/docs/posthog-desktop/open-source',
                     icon: 'IconGithub',
                     color: 'seagreen',
                 },
                 {
                     name: 'Community',
-                    url: '/docs/posthog-code/community',
+                    url: '/docs/posthog-desktop/community',
                     icon: 'IconPeople',
                     color: 'purple',
                 },
