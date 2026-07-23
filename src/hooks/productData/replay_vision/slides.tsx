@@ -15,8 +15,6 @@ import {
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { LabeledList, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
-import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 
 // The "How do I use it?" carousel – four ways to put Replay Vision to work.
 export const applications: CarouselSlide[] = [
@@ -27,19 +25,10 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-purple',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Author, run, and read scanners without leaving your editor',
         description: (
             <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Replay_Vision_Cowork_mockup_fb5c8f714a.png"
-                            className="w-full"
-                            imgClassName="w-full rounded-md"
-                        />
-                    </Glow>
-                </aside>
                 <p>
                     Your AI coding agent can call Replay Vision directly through the PostHog MCP – in Cursor, Claude
                     Code, Codex, VS Code, or any MCP client.
@@ -75,6 +64,9 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+        image: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Replay_Vision_Cowork_mockup_fb5c8f714a.png',
+        },
     },
     {
         slug: 'in-the-app',
@@ -83,7 +75,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Describe it once, let it run',
         description: (
             <>
@@ -130,7 +122,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-green',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Sessions become data you can work with',
         description: (
             <>
@@ -175,7 +167,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: 'From observation to open PR, while you sleep',
         description: (
             <>
@@ -281,7 +273,7 @@ const scannerCards: {
 export const topFeatures: CarouselSlide[] = [
     {
         slug: 'what-it-looks-for',
-        label: 'What it looks for',
+        label: 'Scanners',
         icon: <IconEye className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -322,7 +314,7 @@ export const topFeatures: CarouselSlide[] = [
     },
     {
         slug: 'how-it-runs',
-        label: 'How it runs',
+        label: 'Investigation',
         icon: <IconTrending className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -380,7 +372,7 @@ export const topFeatures: CarouselSlide[] = [
     },
     {
         slug: 'what-you-get-back',
-        label: 'What you get back',
+        label: 'Observations',
         icon: <IconDocument className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
