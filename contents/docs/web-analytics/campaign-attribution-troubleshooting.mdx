@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-This page covers troubleshooting for campaign attribution issues. For general web analytics troubleshooting, see the [main troubleshooting page](/docs/web-analytics/troubleshooting).
+This page covers troubleshooting for campaign attribution issues. For general web analytics troubleshooting, see the [main troubleshooting page](/docs/web-analytics/troubleshooting). If you're using [Marketing Analytics](/docs/web-analytics/marketing-analytics) to tie ad spend to conversions, the same attribution mechanics apply – campaigns are matched to your conversion events via `utm_campaign` and `utm_source`.
 
 ## Have a question? Ask PostHog AI
 
@@ -50,7 +50,7 @@ select
     person_id
 from events
 where timestamp >= today() - 7
-and properties.utm_source = 'linkedin'
+and properties.utm_source = 'linkedin' -- replace with your utm_source
 order by timestamp desc
 limit 100
 ```
@@ -83,6 +83,8 @@ The best fix depends on your specific situation, but it usually involves propaga
 1. Pass UTM parameters through your signup flow (e.g., in hidden form fields or URL parameters)
 2. Identify users as early as possible in the funnel
 3. Use [cross-domain tracking](/tutorials/cross-domain-tracking) if you have separate marketing and app domains
+
+If UTMs and identity look fine but campaigns still don't match in Marketing Analytics, the problem may be a naming mismatch instead: your `utm_campaign` or `utm_source` values don't match what the ad platform reports. Fix this with [UTM campaign manual mappings](/docs/web-analytics/marketing-analytics#utm-campaign-manual-mappings) and [custom source mappings](/docs/web-analytics/marketing-analytics#custom-source-mappings) – for example, mapping `utm_campaign=summer-promo` to the campaign named "Summer Sale 2025", or attributing `utm_source=fb` to Meta Ads.
 
 ## Why does attribution break when users navigate between pages?
 
@@ -124,6 +126,8 @@ Ad platforms often count interactions that aren't website visits:
 
 Not all "clicks" result in a pageview. Expect discrepancies between platform metrics and UTM-based attribution.
 
+Ad platforms also attribute conversions using their own pixel data and attribution windows (e.g., 7-day click, 1-day view), which differ from PostHog's event-based attribution. This is why Marketing Analytics shows both **reported conversions** (from the ad platform) and **PostHog conversion goals** side by side – see [reported vs PostHog conversions](/docs/web-analytics/marketing-analytics-schema#understanding-reported-vs-posthog-conversions) for a full explanation.
+
 ## Why is mobile attribution worse than desktop?
 
 Modern iOS and mobile browsers have privacy restrictions that affect tracking:
@@ -153,7 +157,7 @@ select
     uniq(distinct_id) as distinct_ids
 from events
 where timestamp >= today() - 30
-and properties.utm_source = 'linkedin'
+and properties.utm_source = 'linkedin' -- replace with your utm_source
 group by properties.$ip, properties.$raw_user_agent
 having persons > 1
 limit 100
