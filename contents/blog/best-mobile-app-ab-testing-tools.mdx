@@ -427,13 +427,13 @@ Unlike web A/B testing where you can deploy changes instantly, mobile experiment
 <details>
   <summary>What's the difference between client-side and server-side A/B testing?</summary>
 
-Both approaches make requests to a server to determine which variation a user sees — the difference is where that request happens.
+Both approaches make requests to a server to determine which variation a user sees – the difference is where that request happens.
 
 **Client-side testing** makes the request from the app or browser. It's easier to set up, but can cause "flicker" as the UI updates after the response comes back. Tools like **VWO** offer visual editors for this approach on web.
 
 **Server-side testing** makes the request from your backend (e.g. a Django or Node service) before sending anything to the client, which eliminates flicker. It's better for testing algorithms, pricing logic, API responses, and anything involving backend changes. Tools like **PostHog**, **Statsig**, and **LaunchDarkly** support this approach.
 
-Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites — you need [feature flags](/docs/feature-flags) to control which variation users see without waiting for an app store review. You can also use techniques like [bootstrapping](/docs/feature-flags/bootstrapping) and [local evaluation](/docs/feature-flags/local-evaluation) to reduce latency and avoid flicker on the client side.
+Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites – you need [feature flags](/docs/feature-flags) to control which variation users see without waiting for an app store review. You can also use techniques like [bootstrapping](/docs/feature-flags/bootstrapping) and [local evaluation](/docs/feature-flags/local-evaluation) to reduce latency and avoid flicker on the client side.
 
 </details>
 
