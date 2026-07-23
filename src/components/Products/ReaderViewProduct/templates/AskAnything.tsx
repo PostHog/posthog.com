@@ -1,14 +1,16 @@
 import React, { useMemo, useState } from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import mcpToolsData from '../../../../data/mcp-tools.json'
 import { LabeledList } from '../helpers'
 import type { SectionComponentProps } from '../types'
 
-const REPLAY_FEATURE = 'replay'
-
 const firstLine = (s: string) => s.split('\n')[0]
+
+/** Opens PostHog AI pre-filled (and auto-submitted) with the prompt. */
+const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
 
 interface PromptGroup {
     title: string
@@ -25,31 +27,48 @@ interface McpTool {
 const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const ai = productData?.ai
     const groups: PromptGroup[] = ai?.groups ?? []
+    const mcpFeatures: string[] = ai?.mcpFeatures ?? []
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
 
-    const replayTools: McpTool[] = useMemo(
-        () => (mcpToolsData.categories?.find((c: any) => c.feature === REPLAY_FEATURE)?.tools as McpTool[]) ?? [],
-        []
-    )
+    const productTools: McpTool[] = useMemo(() => {
+        if (!mcpFeatures.length) return []
+        const featureSet = new Set(mcpFeatures)
+        return (mcpToolsData.categories ?? [])
+            .filter((c: any) => featureSet.has(c.feature))
+            .flatMap((c: any) => (c.tools as McpTool[]) ?? [])
+    }, [mcpFeatures])
 
     const filteredTools = useMemo(() => {
         const q = query.trim().toLowerCase()
-        if (!q) return replayTools
-        return replayTools.filter(
+        if (!q) return productTools
+        return productTools.filter(
             (t) =>
                 t.name.toLowerCase().includes(q) ||
                 t.summary.toLowerCase().includes(q) ||
                 t.description.toLowerCase().includes(q)
         )
-    }, [query, replayTools])
+    }, [query, productTools])
 
     if (!groups.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="mb-3">AI prompts</h2>
-            {ai?.intro && <p className="text-base text-secondary mb-4">{ai.intro}</p>}
+            {ai?.intro && (
+                <p className="text-base text-secondary mb-4">
+                    {ai.intro} Works in{' '}
+                    <Link to="/ai" state={{ newWindow: true }} className="font-semibold underline">
+                        PostHog AI
+                    </Link>{' '}
+                    (in-app chat),{' '}
+                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
+                        PostHog Desktop
+                    </Link>{' '}
+                    (our AI code editor), and in your product editor (using the MCP). Already signed in? Click a prompt
+                    to try it.
+                </p>
+            )}
             <ToggleGroup
                 title="View"
                 hideTitle
@@ -89,7 +108,15 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                         </h3>
                                         <ul className="list-none pl-0 m-0 space-y-1 text-sm text-secondary italic leading-relaxed">
                                             {g.prompts.map((p) => (
-                                                <li key={p}>&ldquo;{p}&rdquo;</li>
+                                                <li key={p}>
+                                                    <Link
+                                                        to={maxPromptUrl(p)}
+                                                        externalNoIcon
+                                                        className="text-secondary hover:text-primary underline-offset-2 hover:underline"
+                                                    >
+                                                        &ldquo;{p}&rdquo;
+                                                    </Link>
+                                                </li>
                                             ))}
                                         </ul>
                                     </div>
