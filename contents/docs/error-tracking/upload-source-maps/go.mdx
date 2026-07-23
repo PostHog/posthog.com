@@ -11,8 +11,8 @@ The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-proc
 
 <CalloutBox icon="IconInfo" title="Version requirements" type="action">
 
-- [posthog-go 1.20.0](https://github.com/PostHog/posthog-go/releases) or later, which records the instruction addresses and binary identity server-side symbolication needs. We recommend the latest version.
-- The latest [CLI](/docs/error-tracking/upload-source-maps/cli). Linux binaries work with CLI 0.7.32 or later; uploading macOS Go binaries directly is newer, so update if you have an older install.
+- [posthog-go 1.22.0](https://github.com/PostHog/posthog-go/releases/tag/v1.22.0) or later, which records the instruction addresses and binary identity server-side symbolication needs. We recommend the latest version.
+- [CLI 0.9.1](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.9.1) or later, which uploads macOS Go binaries directly and bundles Go project sources with `--include-source`. Linux binaries without source context work with CLI 0.7.32 or later. As always, we recommend [keeping up with the latest CLI version](/docs/error-tracking/upload-source-maps/cli).
 
 </CalloutBox>
 
