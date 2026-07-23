@@ -57,7 +57,7 @@ const surfaces = [
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
     },
-    // TODO: Desktop (PostHog Code) slots in here once GA
+    // TODO: Desktop (PostHog Desktop) slots in here once GA
 ]
 
 export const DocsIndex = () => {
@@ -69,7 +69,7 @@ export const DocsIndex = () => {
     const { websiteMode } = useApp()
 
     return (
-        <div data-scheme="secondary" className={`${!websiteMode && 'bg-primary'} h-full text-primary`}>
+        <div data-scheme="secondary" className="bg-primary h-full text-primary border-t border-primary">
             <SEO title="Documentation - PostHog" />
             <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
                 <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>

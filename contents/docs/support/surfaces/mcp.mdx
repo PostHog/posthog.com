@@ -1,0 +1,44 @@
+---
+title: Use Support over MCP
+sidebar: Docs
+showTitle: true
+---
+
+import TicketStatuses from '../_snippets/ticket-statuses.mdx'
+
+The PostHog [MCP server](/docs/model-context-protocol) brings Support into Claude Code, Cursor, and other AI tools. If you already work in one of these tools, it keeps ticket context within reach without a trip to the web app.
+
+## Debug without leaving your editor
+
+When a ticket is about the bug you're chasing in Cursor or Claude Code, ask your agent to pull it instead of switching to the web app. It reads the customer's message, linked session, events, and exception in your editor, so you go from report to root cause without breaking flow. Fix it, then resolve the ticket from the same place.
+
+For example:
+
+| Goal | Ask your agent |
+| --- | --- |
+| Find related tickets | `Show the open tickets that mention the checkout error you're investigating` |
+| Read a ticket | `Pull ticket #142 and summarize what the customer ran into` |
+| Resolve a ticket | `Set ticket #142 to resolved once you've merged the fix` |
+
+With your codebase and ticket context in one session, the agent can connect a report to the exact code path and draft the fix.
+
+## What you can do
+
+Through MCP tools, your agent can:
+
+- List and update tickets, so you can pull ticket context into your session or script bulk changes.
+- Manage Self-driving reports, including reading a report and moving it through its states.
+
+For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
+
+## Ticket statuses
+
+When you update a ticket over MCP, you move it between the same statuses you'd use in the web app:
+
+<TicketStatuses />
+
+## Set up
+
+Connect the PostHog MCP server to your AI tool of choice, then grant it access to your project. The [MCP overview](/docs/model-context-protocol) covers install and authentication for each client.
+
+To hold a back-and-forth conversation with a customer, use the [web app](/docs/support/inbox). MCP is for reading ticket context and updating ticket state from inside your AI tool.

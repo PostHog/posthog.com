@@ -4,6 +4,7 @@ packages:
 
 minimumReleaseAge: 10080
 minimumReleaseAgeExclude:
+    - '@posthog/brand'
     - '@posthog/icons'
     - '@posthog/hedgehog-mode'
     - '@typecaast/react'

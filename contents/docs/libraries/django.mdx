@@ -3,6 +3,8 @@ title: Django
 platformLogo: django
 ---
 
+import PythonSdkVersionNote from '../_snippets/python-sdk-version-note.mdx'
+
 import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your Django app. Integrating PostHog enables analytics, custom events capture, feature flags, error tracking, and more.
@@ -11,11 +13,11 @@ This guide walks you through integrating PostHog into your Django app using the 
 
 <AgentIntegrationSection framework="Django" />
 
+> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
+
 ## Installation
 
 To start, run `pip install posthog` to install PostHog’s Python SDK.
-
-> **Note:** Version `7.x` of the PostHog Python SDK requires Python 3.10 or higher.
 
 Then, configure PostHog in your app config so it's initialized when Django starts:
 
@@ -80,3 +82,7 @@ Alternatively, the following tutorials can help you get started:
 
 - [Setting up Django analytics, feature flags, and more](/tutorials/django-analytics)
 - [How to set up A/B tests in Django](/tutorials/django-ab-tests)
+
+## Supported versions
+
+<PythonSdkVersionNote />

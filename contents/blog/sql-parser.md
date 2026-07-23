@@ -11,6 +11,7 @@ tags:
   - Engineering
   - AI
   - Inside PostHog
+  - Research
 ---
 
 After the success of using agents to [improve query performance through autoresearch](/blog/karpathy-autoresearch-query-engine-bug), I wanted to try something more ambitious.

@@ -40,6 +40,8 @@ When linking Langfuse, you'll need:
 
 Traces, observations, scores, sessions, and prompts support incremental sync using Langfuse's creation/start-time filters.
 Each incremental run re-reads a trailing one-hour window to pick up late-arriving updates, such as traces whose aggregated metrics change as observations arrive.
+Prompts also sync incrementally, using the last-updated filter.
+Datasets, dataset items, and models are full refresh only.
 
 ## Configuration
 

@@ -1,0 +1,26 @@
+You can sync data from Snapchat Ads by configuring it as a source in PostHog. The supported data that can be synced includes:
+
+- [Campaigns](https://developers.snap.com/api/marketing-api/Ads-API/campaigns): Campaign metadata and settings
+- [Ad Squads](https://developers.snap.com/api/marketing-api/Ads-API/ad-squads): Ad squad (ad group) metadata
+- [Ads](https://developers.snap.com/api/marketing-api/Ads-API/ads): Individual ad metadata
+- [Campaign Stats Daily](https://developers.snap.com/api/marketing-api/Ads-API/measurement): Daily campaign performance metrics
+- [Ad Squad Stats Daily](https://developers.snap.com/api/marketing-api/Ads-API/measurement): Daily ad squad performance metrics
+- [Ad Stats Daily](https://developers.snap.com/api/marketing-api/Ads-API/measurement): Daily ad performance metrics
+
+Additional reports will be added based on user feedback via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
+
+## Requirements
+
+- A Snapchat Ads account with permission to access data from accounts you want to sync.
+- Your Ad Account ID from the [Snapchat Ads Manager](https://ads.snapchat.com/) – you can find it in the URL when viewing your ad account, e.g., `https://ads.snapchat.com/setup/adaccount/ACCOUNT_ID_HERE`
+
+## Configuring PostHog
+
+Connect PostHog to your Snapchat Ads account. The Snapchat account must have permission to access data.
+
+1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/pipeline/sources)** tab.
+2. Open the **+ New** drop-down menu in the top-right and select **Source**.
+3. Find Snapchat Ads in the sources list and click **Link**.
+4. Enter the **Ad Account ID** of the Snapchat Ads account you want to sync.
+5. Select an existing Snapchat Ads account, or create a new integration to authenticate via OAuth.
+6. (Optional) Add a prefix for the table name.

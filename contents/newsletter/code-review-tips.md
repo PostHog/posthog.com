@@ -4,7 +4,7 @@ date: 2026-07-09
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1783662227/stop_being_the_code_review_bottleneck_hero_a734a37558.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/stop_being_the_code_review_bottleneck_hero_a734a37558.png
 featuredImageType: full
 tags:
   - Product engineers

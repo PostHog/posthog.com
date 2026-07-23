@@ -34,6 +34,22 @@ Because PostHog AI features use third-party LLM providers (see details below), t
 
 </CalloutBox>
 
+## Self-hosted requirements
+
+On PostHog Cloud, PostHog AI works out of the box after org admin approval. On self-hosted (hobby) deployments, PostHog AI runs on your own LLM provider key.
+
+To enable PostHog AI on a self-hosted deployment:
+
+1. Get an API key from [Anthropic's console](https://console.anthropic.com/)
+2. Add `ANTHROPIC_API_KEY=your-key` to your `.env` file
+3. Run `./bin/upgrade-hobby` to apply the change (or restart your PostHog services)
+
+Without the key configured, PostHog AI displays a setup prompt instead of the chat interface.
+
+You can also optionally set `OPENAI_API_KEY` to enable SQL and regex AI assist features.
+
+See the [environment variables documentation](/docs/self-host/configure/environment-variables) for more details.
+
 ## Does PostHog AI have any superpowers compared to ChatGPT and similar agents?
 
 Glad you asked! PostHog AI is deeply connected with your data, and lives inside of the PostHog app.
