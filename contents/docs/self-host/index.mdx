@@ -8,6 +8,12 @@ showTitle: true
 import Disclaimer from './_snippets/disclaimer.mdx'
 import Sunset from '../self-host/_snippets/sunset-disclaimer.mdx'
 
+<CalloutBox icon="IconShieldLock" title="A note on security and CVEs" type="fyi">
+
+We don't publish CVEs for PostHog. A CVE names the affected version(s) and the release that fixes them, but PostHog doesn't have versions: self-hosted deployments are [officially unsupported](/docs/self-host/open-source/disclaimer), and every change, including security fixes, ships continuously from `master` to PostHog Cloud and to the [latest Docker image](https://hub.docker.com/r/posthog/posthog/tags). We recommend running your instance the way we run PostHog Cloud: always on the latest image.
+
+</CalloutBox>
+
 PostHog is open-source and freely available for anyone to host themselves. We offer a free Docker Compose deployment under an MIT license. Essentially, self-hosting PostHog means you run or purchase your own infrastructure, manage deployments, choose your own URLs to expose it on, and deal with any scaling issues yourself.
 
 The self-hosted version is the same exact product we run on PostHog Cloud, though our infrastructure is very, very different to support serious volume. We don't do tagged releases for self-hosted PostHog. All commits go through our standard CI/CD pipeline before they are merged into our cloud deployments and also become available for self-hosted instances.

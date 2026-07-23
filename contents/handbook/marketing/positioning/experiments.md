@@ -4,11 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
-PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types — funnels, trends, retention, ratio metrics — let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
+PostHog Experiments run on top of Feature Flags, so every experiment is a controlled rollout by default. Multiple metric types – funnels, trends, retention, ratio metrics – let you measure what actually matters, not just what's easy to track. Watch session replays of each variant's users. Measure side effects across your entire product. 
 
-For self-driving development, this means enabling PostHog Code to create experiments and re-query the results automatically - making experiments the evaluation layer for agents.
+For self-driving development, this means enabling PostHog Desktop to create experiments and re-query the results automatically - making experiments the evaluation layer for agents.
 
 Most experiment platforms run tests. PostHog runs tests *and* closes the loop from signal to fix to evaluation.
 
@@ -18,7 +20,7 @@ In traditional product development, an A/B test is the last step before shipping
 
 That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy when the agent can measure whether its own work improved the product.
 
-**Experiments are how the autonomy loop knows whether it's working.** Without experiments, agents can ship changes indefinitely without knowing if anything improved. Experiments are the feedback signal that makes self-driving product development trustworthy — not just fast.
+**Experiments are how the autonomy loop knows whether it's working.** Without experiments, agents can ship changes indefinitely without knowing if anything improved. Experiments are the feedback signal that makes self-driving product development trustworthy – not just fast.
 
 ## Who this is for
 
@@ -31,19 +33,19 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 
 ### Who this isn't for
 
-- Teams who need no-code visual editors for landing page and CRO tests — Optimizely Web or VWO handle that better.
+- Teams who need no-code visual editors for landing page and CRO tests – Optimizely Web or VWO handle that better.
 - Marketing teams running experiments outside the product (ad creative, email subject lines, landing pages).
 
 ## Messaging
 
 ### Message 1: Experiments as the evaluation layer for agents
 
-**Problem:** An agent that ships code without measuring impact isn't self-driving — it's just automated code generation. The autonomy loop requires a closed feedback cycle: change made → outcome measured → agent learns. Experiments are part of that.
+**Problem:** An agent that ships code without measuring impact isn't self-driving – it's just automated code generation. The autonomy loop requires a closed feedback cycle: change made → outcome measured → agent learns. Experiments are part of that.
 
-**Solution:** PostHog Code can scaffold experiments end-to-end. The same metric that triggered the fix signal is used as the experiment goal. Post-merge, PostHog Code re-queries the result and evaluates whether the change worked — without human intervention.
+**Solution:** PostHog Desktop can scaffold experiments end-to-end. The same metric that triggered the fix signal is used as the experiment goal. Post-merge, PostHog Desktop re-queries the result and evaluates whether the change worked – without human intervention.
 
 **Supporting features:**
-- PostHog Code skills for full experiment lifecycle management
+- PostHog Desktop skills for full experiment lifecycle management
 - MCP exposes experiment results to agent runtimes for automated evaluation
 - Experiment results queryable alongside all PostHog data via HogQL
 - Automatic re-evaluation after defined exposure periods
@@ -52,11 +54,11 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 
 **Problem:** Running an experiment can require a flag in LaunchDarkly, analytics in Amplitude, and a session tool in FullStory. Alternatively, you rely on a dedicated tool like Optimizely or VWO with a more limited feature set.
 
-**Solution:** PostHog Experiments are built on Feature Flags. Every experiment starts as a flag variant. Every result is visible in PostHog Analytics. Every variant's sessions are watchable in PostHog Replay. Everything is in one place, with one data model - and all available to the PostHog MCP and PostHog Code to facilitate agentic workflows.
+**Solution:** PostHog Experiments are built on Feature Flags. Every experiment starts as a flag variant. Every result is visible in PostHog Analytics. Every variant's sessions are watchable in PostHog Replay. Everything is in one place, with one data model - and all available to the PostHog MCP and PostHog Desktop to facilitate agentic workflows.
 
 **Supporting features:**
 - Experiments and flags share the same 1M/month free tier
-- Multi-metric experiments — measure primary goal plus secondary effects
+- Multi-metric experiments – measure primary goal plus secondary effects
 - Minimum detectable effect calculator and sample size guidance
 - Group analytics: measure experiment impact at the account level
 
@@ -80,8 +82,8 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 
 **Where PostHog wins:**
 - Usage-based pricing vs Optimizely's enterprise contracts
-- Native session replay per variant — Optimizely has no equivalent
-- PostHog Code evaluation loop — Optimizely has no agent integration
+- Native session replay per variant – Optimizely has no equivalent
+- PostHog Desktop evaluation loop – Optimizely has no agent integration
 - Better fit for product engineering experiments vs marketing CRO
 
 ## Objections
@@ -92,10 +94,10 @@ That’s the PostHog-shaped belief: autonomous coding only becomes trustworthy w
 
 ### "We already use LaunchDarkly flags for experiments"
 
-**Answer:** PostHog's experiments use the same flag infrastructure you'd use with LaunchDarkly — but with analytics and session replay built in. You don't have to migrate your flags to start running experiments. Connect PostHog to your event stream, define a goal metric, and you can measure the impact of existing LaunchDarkly flags in PostHog today.
+**Answer:** PostHog's experiments use the same flag infrastructure you'd use with LaunchDarkly – but with analytics and session replay built in. You don't have to migrate your flags to start running experiments. Connect PostHog to your event stream, define a goal metric, and you can measure the impact of existing LaunchDarkly flags in PostHog today.
 
 ## Selling to enterprise
 
 Enterprise experimentation customers get volume discounts, group analytics for account-level experiment analysis, SSO, access controls, EU data residency, and SOC 2. Contracts follow [the four-lever framework](/handbook/growth/sales/contract-rules).
 
-The consolidation pitch is strong: Optimizely or VWO contracts at enterprise are often $50k+/year for a tool that only runs tests. PostHog covers experiments, analytics, session replay, feature flags, and error tracking for a comparable or lower total spend — and adds the agent evaluation loop that no pure experimentation vendor offers.
+The consolidation pitch is strong: Optimizely or VWO contracts at enterprise are often $50k+/year for a tool that only runs tests. PostHog covers experiments, analytics, session replay, feature flags, and error tracking for a comparable or lower total spend – and adds the agent evaluation loop that no pure experimentation vendor offers.

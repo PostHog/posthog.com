@@ -124,3 +124,7 @@ To provide a great customer experience, PostHog employees may occasionally need 
 
 4. **Use good judgment.**  
    If you’re unsure whether impersonation is justified, or if a customer might object, either seek their consent or find another way to get the information (for example, by checking our internal PostHog instance).
+
+### Impersonating users via MCP
+
+The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.

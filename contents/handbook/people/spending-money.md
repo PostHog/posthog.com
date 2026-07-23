@@ -172,7 +172,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
   - Laptop guidelines
     - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M5 Pro, with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM.
     - For sales & CS roles, we buy the Macbook Pro 14-inch M5, with 10-core GPU, 16-core and the 32GB RAM upgrade.
-    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Code.
+    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Desktop.
     - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
     - In the unlikely case that you need to purchase your own laptop:
@@ -211,6 +211,8 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
+- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
+
 ### Travel
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
@@ -225,6 +227,7 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
 - When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
+  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
 
 #### Hub travel budget
 

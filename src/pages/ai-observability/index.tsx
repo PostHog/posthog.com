@@ -315,7 +315,7 @@ const CustomerLogo = ({ customer, className = 'h-8' }: { customer: Customer; cla
     return null
 }
 
-// Custom ProductOS Benefits slide
+// Custom "Context warehouse benefits" slide
 const ProductOSBenefitsSlide = () => {
     return (
         <div
@@ -411,7 +411,7 @@ export default function aiObservability(): JSX.Element {
             },
             {
                 slug: 'product-os-benefits',
-                name: 'Product OS Benefits',
+                name: 'Context warehouse benefits',
                 component: ProductOSBenefitsSlide,
             },
         ],

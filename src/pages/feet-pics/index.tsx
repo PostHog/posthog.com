@@ -66,6 +66,7 @@ export default function FeetPics(): JSX.Element {
                         ),
                     },
                 ]}
+                className="border-t border-primary"
             >
                 <div
                     className={`@md:pl-4 grid ${
@@ -171,6 +172,21 @@ export default function FeetPics(): JSX.Element {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/a_90,h_1000,c_limit,q_auto,f_auto/A004066_R1_19_6_8bd7f1c686.JPG"
                                 alt="employee #30264.jpg"
+                                className="w-full h-full object-cover"
+                                imgClassName="size-24"
+                            />
+                        }
+                        background="bg-primary"
+                        className={`size-24`}
+                        orientation={isListLayout ? 'row' : 'column'}
+                    ></AppLink>
+
+                    <AppLink
+                        label="GO AWAY BEAR.png"
+                        Icon={
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/Clean_Shot_2026_07_23_at_10_11_01_7e640950df.png"
+                                alt="GO AWAY BEAR.png"
                                 className="w-full h-full object-cover"
                                 imgClassName="size-24"
                             />

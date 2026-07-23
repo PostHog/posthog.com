@@ -4,7 +4,7 @@ date: 2026-05-28
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1780424772/how_to_demo_hero_b2c8462dee.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/how_to_demo_hero_b2c8462dee.png
 featuredImageType: full
 tags:
   - Product engineers
@@ -52,7 +52,7 @@ Here's a practical list of what set the S-tier demos apart from the rest.
 
    ![The "Hoggies" Figma file showing the hedgehog illustration organization problem](https://res.cloudinary.com/dmukukwp6/image/upload/v1780424842/how_to_demo_tip5_hoggies_figma_b8c11c13d5.png)
 
-6. Borrow a familiar concept to explain a new one. For example, one hackathon team explored building our own take on [Claude Cowork](/blog/making-claude-cowork-actually-useful) inside [PostHog Code](/code), so they creatively named their project PostHog Work.
+6. Borrow a familiar concept to explain a new one. For example, one hackathon team explored building our own take on [Claude Cowork](/blog/making-claude-cowork-actually-useful) inside [PostHog Code](/desktop), so they creatively named their project PostHog Work.
 
 7. Create a separate demo app, especially if you're showing off a dev tool.
 
@@ -118,7 +118,7 @@ Here's a practical list of what set the S-tier demos apart from the rest.
 
 23. Audio is underrated. One team generated a sea shanty voiceover, while another project that does quick calls for AI-powered [user research](/newsletter/user-research) made their demo fully audio-only.
 
-24. Do more weird. No one asked for clips of [Dylan](https://www.linkedin.com/in/dmarticus) sipping piña coladas in the background, but the [PostHog Code](/code) mobile app team did it anyway. It's also the demo I remember most. 🍹
+24. Do more weird. No one asked for clips of [Dylan](https://www.linkedin.com/in/dmarticus) sipping piña coladas in the background, but the [PostHog Code](/desktop) mobile app team did it anyway. It's also the demo I remember most. 🍹
 
     ![PostHog Code mobile app demo with Dylan's piña colada background clips](https://res.cloudinary.com/dmukukwp6/image/upload/v1780424882/how_to_demo_tip24_posthog_code_acd9e480b0.png)
 

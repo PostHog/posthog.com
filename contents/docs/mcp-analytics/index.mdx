@@ -60,11 +60,11 @@ Your tool handlers are untouched. The only payload change the agent sees is an o
 
 ```mermaid
 graph LR
-    Agent["AI agent"] -->|tools/call| MCP["Your MCP server"]
-    MCP --> Wrapper["@posthog/mcp wrapper"]
-    Wrapper --> Handler["Your tool handler"]
-    Wrapper --> Event["$mcp_tool_call event"]
-    Event --> PostHog["PostHog"]
+Agent["AI agent"] -->|tools/call| MCP["Your MCP server"]
+MCP --> Wrapper["@posthog/mcp wrapper"]
+Wrapper --> Handler["Your tool handler"]
+Wrapper --> Event["$mcp_tool_call event"]
+Event --> PostHog["PostHog"]
 ```
 
 ## Quick install
@@ -81,7 +81,7 @@ import { instrument } from "@posthog/mcp"
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
-  host: "https://us.i.posthog.com",
+host: "https://us.i.posthog.com",
 })
 
 instrument(server, posthog)

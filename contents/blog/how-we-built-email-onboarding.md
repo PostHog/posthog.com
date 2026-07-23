@@ -73,7 +73,7 @@ Based on this high open rate and low unsubscribe rate we felt that users didn't 
 
 Data is important, but I strongly believe it doesn’t tell the whole story. You also need feedback and intuition. Most of the feedback on our emails came in [3.1](https://github.com/PostHog/meta/issues/127), when we started sending personalized recommendations to users from [my personal email](mailto:joe@posthog.com).
 
-How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
+How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about our newsletter, [build mode](https://newsletter.posthog.com/). 
 
 ![Onboarding 3.1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_31.png)
 <Caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</Caption>

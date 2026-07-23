@@ -11,6 +11,8 @@ import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'
+import PostHogButton from './PostHogButton'
+import { isPostHogEmail } from 'lib/employee'
 
 const errorMessages: Record<string, string> = {
     'Invalid identifier or password': 'Invalid email or password',
@@ -37,8 +39,12 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
+            } else if (isPostHogEmail(values.email)) {
+                errors.email = 'PostHog employees sign in with PostHog above.'
             }
-            if (!values.password) {
+            // The password field is hidden for @posthog.com (OAuth-only) emails, so
+            // don't require it — otherwise the form is permanently invalid for them.
+            if (!isPostHogEmail(values.email) && !values.password) {
                 errors.password = 'Required'
             }
             return errors
@@ -86,8 +92,6 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                 }
                 rightNavigation={
                     <div className="flex items-center space-x-2">
-                        {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
-
                         <CallToAction
                             disabled={isSubmitting}
                             type="primary"
@@ -100,16 +104,20 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
                         <img src={SecurityHog} className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
-                        <h3 className="text-base font-semibold leading-tight mb-2">
-                            Enter your email and password to log on to PostHog.com
-                        </h3>
-                        <p className="text-xs text-red dark:text-orange">
-                            Your PostHog.com login is separate from the app's authentication.{' '}
+                        <h3 className="text-base font-semibold leading-tight mb-2">The hedgehogs missed you</h3>
+                        <PostHogButton label="Sign in with PostHog" className="mt-3 mb-2" />
+                        <div className="flex items-center gap-2 text-xs text-muted my-2">
+                            <span className="flex-1 border-t border-border" />
+                            or
+                            <span className="flex-1 border-t border-border" />
+                        </div>
+                        <p className="text-xs text-red dark:text-orange mb-2">
+                            The email and password below are separate from your PostHog app account.{' '}
                             <Link
                                 to="https://app.posthog.com"
                                 external
@@ -139,6 +147,8 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                             />
                             <button type="submit" className="hidden" />
                         </form>
+                        {errorMessage && <p className="text-red text-sm -mt-2 mb-2 font-bold">{errorMessage}</p>}
+
                         <div className="text-sm">
                             No account yet?{' '}
                             <button className="text-red dark:text-yellow font-semibold" onClick={openRegister}>

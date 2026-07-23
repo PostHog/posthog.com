@@ -143,7 +143,7 @@ type TeamPageProps = {
 }
 
 export default function TeamPage(props: TeamPageProps) {
-    const { slug } = props?.params || {}
+    const slug = props?.params?.slug || (props?.params as any)?.['*']
     const [editing, setEditing] = useState(false)
     const [saving, setSaving] = useState(false)
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
@@ -610,10 +610,9 @@ export default function TeamPage(props: TeamPageProps) {
                         <TreeMenu items={teamsNavigation} />
                     </div>
                 }
-                homeURL="/teams"
-                description={`Learn about the ${(team as any)?.name || slug} team at PostHog`}
                 proseSize="sm"
                 rightActionButtons={editing ? editActions : editButton}
+                hideAppOptions
                 showQuestions={false}
                 {...({
                     header: (

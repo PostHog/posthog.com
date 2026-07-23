@@ -5,7 +5,7 @@ author:
     - ian-vanagas
 tags:
     - product analytics
-    - session replays
+    - session replay
 ---
 
 Squarespace offers analytics with a basic set of metrics like visits, pageviews, and bounce rate, but for many, this isn't enough to understand what's going on on your site. PostHog offers a full set of web analytics metrics like session duration, entry and exit pages, sources, retention, and goals along with custom events, insights, session replay, and more.

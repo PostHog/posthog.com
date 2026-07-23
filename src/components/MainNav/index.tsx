@@ -504,8 +504,9 @@ export const Main = () => {
                                 />
                             ) : (
                                 <Logo
-                                    color={websiteTheme === 'dark' && 'white'}
-                                    className="h-[24px] fill-current relative px-2 box-content"
+                                    variant={websiteTheme === 'dark' ? 'mono' : 'gradient'}
+                                    color={websiteTheme === 'dark' ? 'white' : undefined}
+                                    className="h-[24px] relative px-2 box-content"
                                 />
                             )}
                         </Link>
