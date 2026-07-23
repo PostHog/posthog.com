@@ -3,6 +3,7 @@ title: Prompt management
 ---
 
 import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
+import { ProductScreenshot } from "components/ProductScreenshot"
 
 <PromptsAlpha />
 
@@ -136,7 +137,46 @@ One version can hold several labels (for example `production` and `staging` on t
 
 ### Managing labels
 
-Set or move a label via the API:
+#### In the app
+
+Each version in the version history shows the labels pointing at it.
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-versions-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-versions-dark-mode.png"
+  alt="Labels on prompt versions in the version history"
+  classes="rounded"
+/>
+
+To set a label:
+
+1. Open the prompt and find the version in the version history
+2. Click **Add label** on that version
+3. Pick an existing label, or type a name to create a new one
+
+If the label is already on another version, PostHog asks you to confirm the move:
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-move-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-move-dark-mode.png"
+  alt="Confirming a label move"
+  classes="rounded"
+/>
+
+To remove a label, click the **×** on the label and confirm.
+
+The **History** tab on the prompt shows every label change: who created, moved, or removed a label, and when.
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-history-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-history-dark-mode.png"
+  alt="Label history on a prompt"
+  classes="rounded"
+/>
+
+#### With the API
+
+Set or move a label:
 
 ```bash
 curl -X PUT "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/labels/production/" \

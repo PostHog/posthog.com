@@ -1,10 +1,8 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
 import Overview from './Overview'
-import Customers from './Customers'
 import Eli5 from './Eli5'
 import UseCases from './UseCases'
-import Demo from './Demo'
 import Applications from './Applications'
 import TopFeatures from './TopFeatures'
 import Features from './Features'
@@ -20,10 +18,8 @@ import GettingStarted from './GettingStarted'
 import PricingCalculator from './PricingCalculator'
 import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
-import Roadmap from './Roadmap'
 import Changelog from './Changelog'
 import CommunityQuestions from './CommunityQuestions'
-import Team from './Team'
 
 /**
  * Registry of available section templates, keyed by the `template` string on
@@ -33,10 +29,8 @@ import Team from './Team'
  */
 export const templateRegistry: Record<string, React.ComponentType<SectionComponentProps>> = {
     overview: Overview,
-    customers: Customers,
     eli5: Eli5,
     'use-cases': UseCases,
-    demo: Demo,
     applications: Applications,
     'top-features': TopFeatures,
     features: Features,
@@ -52,18 +46,14 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     calculator: PricingCalculator,
     plans: Plans,
     'pricing-cta': PricingFooterCTA,
-    roadmap: Roadmap,
     changelog: Changelog,
     community: CommunityQuestions,
-    team: Team,
 }
 
 export {
     Overview,
-    Customers,
     Eli5,
     UseCases,
-    Demo,
     Applications,
     TopFeatures,
     Features,
@@ -79,8 +69,6 @@ export {
     PricingCalculator,
     Plans,
     PricingFooterCTA,
-    Roadmap,
     Changelog,
     CommunityQuestions,
-    Team,
 }

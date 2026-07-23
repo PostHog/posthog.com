@@ -2,14 +2,14 @@
 title: PostHog Desktop cloud runs
 ---
 
-A **cloud run** is a [task](/docs/posthog-code/tasks) which runs in a sandbox environment instead of on your computer. You can close the app, switch networks, or shut your computer, and the agent keeps going. Reconnect when you're ready to check on progress or hand the task back to your computer.
+A **cloud run** is a [task](/docs/posthog-desktop/tasks) which runs in a sandbox environment instead of on your computer. You can close the app, switch networks, or shut your computer, and the agent keeps going. Reconnect when you're ready to check on progress or hand the task back to your computer.
 
 ## How a cloud run works
 
 When you start a cloud run, PostHog Desktop:
 
 1. Provisions a fresh, isolated workspace for the task.
-2. Applies the [cloud environment](/docs/posthog-code/environments#cloud-environments) you've picked, which sets the network access rules and injects the secrets and environment variables the workspace needs.
+2. Applies the [cloud environment](/docs/posthog-desktop/environments#cloud-environments) you've picked, which sets the network access rules and injects the secrets and environment variables the workspace needs.
 3. Checks out your repo at the branch you started from.
 4. Starts the agent on your prompt.
 
@@ -17,7 +17,7 @@ Once the agent is done, you can pick the work back up locally for review (see [H
 
 ## Configuring cloud for your workflow
 
-Cloud runs use a [cloud environment](/docs/posthog-code/environments#cloud-environments) to control:
+Cloud runs use a [cloud environment](/docs/posthog-desktop/environments#cloud-environments) to control:
 
 - **Secrets and environment variables** injected into the cloud workspace
 - **Network access**, either an allowlist of trusted services, full internet access, or a custom set of domains

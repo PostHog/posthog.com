@@ -36,7 +36,7 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
         ShopifyProduct: {
             imageProducts: {
                 type: ['ShopifyProduct'],
-                resolve(source, args, context, info) {
+                async resolve(source, args, context, info) {
                     const metafields = source.metafields
                     let productIds = []
 
@@ -46,19 +46,25 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
                         }
                     }
 
-                    return productIds.map((shopifyId) => {
-                        return context.nodeModel.runQuery({
-                            query: {
-                                filter: {
-                                    shopifyId: {
-                                        eq: shopifyId,
+                    const products = await Promise.all(
+                        productIds.map((shopifyId) => {
+                            return context.nodeModel.runQuery({
+                                query: {
+                                    filter: {
+                                        shopifyId: {
+                                            eq: shopifyId,
+                                        },
                                     },
                                 },
-                            },
-                            type: 'ShopifyProduct',
-                            firstOnly: true,
+                                type: 'ShopifyProduct',
+                                firstOnly: true,
+                            })
                         })
-                    })
+                    )
+
+                    // Referenced products can be deleted or unpublished in Shopify,
+                    // in which case runQuery resolves to null
+                    return products.filter(Boolean)
                 },
             },
         },
