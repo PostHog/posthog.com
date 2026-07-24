@@ -324,9 +324,10 @@ jobs:
               if: steps.changes.outputs.visual == 'true'
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+                  VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
               run: |
                   node vr-cli/products/visual_review/cli/dist/cli/src/index.js run upload \
-                    --run-id "${{ steps.vr-create.outputs.run-id }}" \
+                    --run-id "$VR_RUN_ID" \
                     --dir .visual-regression/screenshots \
                     --baseline visual-regression/snapshots.yml \
                     --token "$VR_TOKEN"
@@ -335,9 +336,10 @@ jobs:
               if: always() && steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
+                  VR_RUN_ID: ${{ steps.vr-create.outputs.run-id }}
               run: |
                   node vr-cli/products/visual_review/cli/dist/cli/src/index.js run complete \
-                    --run-id "${{ steps.vr-create.outputs.run-id }}" \
+                    --run-id "$VR_RUN_ID" \
                     --baseline visual-regression/snapshots.yml \
                     --token "$VR_TOKEN"
 
