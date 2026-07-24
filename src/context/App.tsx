@@ -1560,9 +1560,6 @@ const appSettings: AppSettings = {
     '/web-analytics': {
         toolbar: true,
     },
-    '/feature-flags': {
-        toolbar: true,
-    },
     '/experiments': {
         toolbar: true,
     },
