@@ -58,4 +58,10 @@ export const ROADMAP_TEAM_OVERRIDES: Record<string, string> = {
     'toolbar-for-mobile': 'growth', // toolbar area
     'ai-api-access': 'ai-gateway',
     'product-tours': 'surveys',
+
+    // AI Research tracks (concept) — the four goals on /research, one EAF each
+    'replay-encoder-model': 'ai-research',
+    'session-replay-model': 'ai-research',
+    'predictive-user-behavior-model': 'ai-research',
+    'self-driving-model': 'ai-research',
 }
