@@ -3475,20 +3475,44 @@
             "destination": "/feature-flags#questions"
         },
         {
+            "source": "/experiments/customers",
+            "destination": "/experiments"
+        },
+        {
+            "source": "/experiments/comparisons",
+            "destination": "/experiments#feature-comparison"
+        },
+        {
+            "source": "/experiments/documentation",
+            "destination": "/docs/experiments"
+        },
+        {
+            "source": "/experiments/tutorials",
+            "destination": "/experiments#tutorials"
+        },
+        {
+            "source": "/experiments/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/experiments/questions",
+            "destination": "/experiments#questions"
+        },
+        {
             "source": "/ab-testing/pricing",
-            "destination": "/experiments#pricing"
+            "destination": "/experiments/pricing"
         },
         {
             "source": "/ab-testing/customers",
-            "destination": "/experiments#customers"
+            "destination": "/experiments"
         },
         {
             "source": "/ab-testing/comparisons",
-            "destination": "/experiments#posthog-vs"
+            "destination": "/experiments#feature-comparison"
         },
         {
             "source": "/ab-testing/documentation",
-            "destination": "/experiments#docs"
+            "destination": "/docs/experiments"
         },
         {
             "source": "/ab-testing/tutorials",
@@ -3496,7 +3520,7 @@
         },
         {
             "source": "/ab-testing/roadmap",
-            "destination": "/experiments#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/ab-testing/questions",
@@ -4037,7 +4061,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/experiments#pricing",
+            "destination": "/experiments/pricing",
             "has": [
                 {
                     "type": "query",
