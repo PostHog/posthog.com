@@ -147,3 +147,25 @@ posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
 ```
 
 `PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+
+### Stateless / multi-pod dispatchers
+
+On a stateless deployment (a fresh server per request, often across pods) there's no connection to carry a session, so `$session_id` fragments and the client name/version — sent only at `initialize` — go missing from later requests. Add the mint middleware to your ASGI app once. It mints a self-encoded token onto the `Mcp-Session-Id` response header at `initialize` and decodes the client's replay on every later request, so every pod recovers the same values with no shared store:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+
+# ...then in your request handler, feed the recovered session into each capture:
+sess = get_mcp_session(request)  # None until the client replays the token
+posthog.capture_tool_call(
+    name,
+    session_id=sess.session_id if sess else None,
+    client_name=sess.client_name if sess else None,
+    client_version=sess.client_version if sess else None,
+    intent=prepared.intent,
+)
+```
+
+The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.
