@@ -75,7 +75,7 @@ export function useProductOSNavigation() {
         const children = Array.isArray(products) ? buildNavigationItems(productOSStructure, products) : []
 
         return {
-            name: 'Product OS',
+            name: 'Context warehouse',
             url: '/products',
             children,
         }
@@ -91,14 +91,22 @@ export function useProductOSNavigation() {
 
 // Static navigation for server-side rendering
 export const productOSNav = {
-    name: 'Product OS',
+    name: 'Context warehouse',
     url: '/products',
     children: [
         // { name: 'Utilities & add-ons' },
         // { name: 'Overview', url: '/products?category=product_os' },
         { name: 'Self-driving products' },
-        { name: 'What is self-driving?', url: '/self-driving' },
-        { name: 'Use PostHog in Slack', url: '/slack' },
+        {
+            name: 'What is self-driving?',
+            url: '/self-driving',
+            badge: { title: 'Beta', className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50' },
+        },
+        {
+            name: 'Use PostHog in Slack',
+            url: '/slack',
+            badge: { title: 'Beta', className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50' },
+        },
         { name: 'Platform tools' },
         { name: 'User activity', url: '/activity' },
         { name: 'User profiles', url: '/profiles' },

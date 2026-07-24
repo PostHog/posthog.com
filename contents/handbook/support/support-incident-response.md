@@ -22,7 +22,7 @@ Once you've raised the incident, you should raise your hand to watch it from a s
 - When an incident is declared, a workflow posts to #team-support asking for someone to raise their hand
 - Whoever raises their hand owns watching that incident from a support perspective:
   - Monitor the incident channel for updates, and ensure the status page has clear messaging
-  - Respond to new and existing tickets related to the incident, creating a macro as needed
+  - Respond to new and existing tickets related to the incident, creating a standardized response as needed
   - Keep the team updated in #team-support with anything relevant
   - Hand over to the next timezone if the incident runs long
 - Don't duplicate comms - coordinate with the Comms Lead and TAMs/CSMs as needed
@@ -46,7 +46,7 @@ Once you've raised your hand and joined the incident channel, you'll be assigned
 - Following the incident channel and keeping up with status updates
 - Ensuring the status page has clear, customer-friendly messaging about the impact
 - Looking through existing tickets in the queue to see if any were opened because of this incident
-- Creating a [macro](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros) (if appropriate) for responding to customers about the incident
+- Creating a standardized response (if appropriate) for responding to customers about the incident
 - Checking for new tickets coming into the support queue during the incident
 - Passing along relevant updates or highlights to the rest of the support team in #team-support
 - Understanding the user impact so the team can respond to tickets accurately
@@ -72,15 +72,11 @@ Unclear status page messaging:
 
 Always link to the status page in ticket responses. Users should be able to check it themselves for updates rather than having to ask us every hour.
 
-## Creating a macro for the incident
+## Creating a standardized response for the incident
 
-If the incident is likely to generate multiple support tickets (most incidents do), create a [macro](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros) so the whole team can respond consistently. To create the macro:
+If the incident is likely to generate multiple support tickets (most incidents do), create a standardized response so the whole team can respond consistently.
 
-1. Clone the [Incident information](https://posthoghelp.zendesk.com/admin/workspaces/agent-workspace/macros/24914978630939) macro as your starting template
-2. Look at the incident number in incident.io (e.g., INC-123)
-3. Add the tag incident/[number] to the macro (e.g., incident/123). This ensures all tickets using this macro are automatically tagged with the incident number for tracking.
-
-The macro should include:
+The response should include:
 - A brief description of what we currently understand about the incident
 - The specific impact to users (what's broken, what's working, what's degraded)
 - A link to the incident on our status page
@@ -88,15 +84,15 @@ The macro should include:
 Keep it simple and factual.
 
 **If there's a Comms Lead assigned:**
-- For major or security incidents, share the macro draft with them before using it. We want to make sure we're saying consistent things across all channels. The Comms Lead should review the macro to ensure the messaging aligns with broader customer communications.
-- For minor incidents, share the macro with them after you've created it so they're aware of what messaging we're using.
+- For major or security incidents, share the draft with them before using it. We want to make sure we're saying consistent things across all channels. The Comms Lead should review the standardized response to ensure the messaging aligns with broader customer communications.
+- For minor incidents, share the standardized response with them after you've created it so they're aware of what messaging we're using.
 
 **If there's no Comms Lead assigned:**
-Use your best judgement to create a clear, factual macro. If you think the incident warrants coordination with Marketing, mention it in the incident channel - but don't let that block you from responding to customers.
+Use your best judgement to create a clear, factual standardized response. If you think the incident warrants coordination with Marketing, mention it in the incident channel - but don't let that block you from responding to customers.
 
-Update the macro if the situation changes significantly. If you do update it, let the Comms Lead know (if there is one). Delete the macro once the incident is resolved.
+Update the standardized response if the situation changes significantly. If you do update it, let the Comms Lead know (if there is one).
 
-Let the team know in #team-support when you've created the macro so they know to use it.
+Let the team know in #team-support (on the thread for the incident) when you've created the standardized response so they know to use it.
 
 ## Handling incoming tickets during an incident
 
@@ -104,12 +100,12 @@ If you're the person who raised your hand to watch the incident, you're also res
 
 Sort your tickets by newest so you can easily spot new tickets coming in. This makes it much easier to catch incident-related issues as they arrive.
 
-Don't send generic "we're working on it" messages. Use the macro if you created one, or link to the status page, explain what we know about the impact, and give them a real timeline if we have one. If we don't have a timeline, say that too.
+Don't send generic "we're working on it" messages. Use the standardized response if you created one, or link to the status page, explain what we know about the impact, and give them a real timeline if we have one. If we don't have a timeline, say that too.
 
 Example response:
 > Hey - yes, we're seeing this too. There's an incident affecting feature flag requests right now. You can follow updates on our [status page](https://status.posthog.com), but the short version is that flags are returning but with higher latency than normal. The team is working on it and we'll update the status page as we know more. I'll be sure to let you know when it's resolved.
 
-**Important:** Always attach incident-related tickets to the open incident using the incident.io app in the right-hand sidebar in Zendesk. This helps us track the user impact and keeps everything organized. Anyone on the support team responding to incident-related tickets should do this, not just the person watching the incident.
+**Important:** Always tag incident-related tickets with `incident/[number]` (e.g. incident/123). This helps us track the user impact and keeps everything organized. Anyone on the support team responding to incident-related tickets should do this, not just the person watching the incident.
 
 If you're seeing the same issue across multiple tickets, drop a note in the incident channel. Sometimes support spots patterns before monitoring does. Also share this in #team-support so the rest of the team knows what to expect.
 
@@ -135,10 +131,10 @@ You don't need to copy every single update from the incident channel. Just share
 For an incident that requires external comms, Marketing will appoint a [Comms Lead](https://posthog.com/handbook/marketing/incident-comms). They own external communication strategy. We don't.
 
 As the support team member watching the incident, you should coordinate with the Comms Lead:
-- Coordinate on macro creation (see 'Creating a macro for the incident' above)
+- Coordinate on phrasing a standardized response (see 'Creating a standardized response for the incident' above)
 - If you're seeing patterns in support tickets that might inform their messaging
 - If you need help with a particularly complex or sensitive customer communication
-- When you update the macro - let them know what changed
+- When you update the standardized response - let them know what changed
 
 If you think external comms are required but there isn't a Comms lead assigned, you can request one by asking in #team-marketing or using the @all-marketers tag in Slack.
 
@@ -146,11 +142,11 @@ If you think external comms are required but there isn't a Comms lead assigned, 
 
 Enterprise customers often have dedicated TAMs (Technical Account Managers) or CSMs (Customer Success Managers) from the Sales/CS team. When these customers reach out about an incident - either through their Slack channels or via tickets - we need to coordinate our response.
 
-For minor incidents, we can usually just respond ourselves. Keep it straightforward and use the macro if you created one.
+For minor incidents, we can usually just respond ourselves. Keep it straightforward and use the standardized response if you created one.
 
-For major incidents, Sales/CS teams may want to handle communication with their customers directly. Check #cs-sales-support to see if they're coordinating a response plan. If you're unsure whether to respond to a particular customer:
-- Check #cs-sales-support to see if there's discussion about the incident
-- Create a side conversation from the Zendesk ticket into #cs-sales-support and ask if they'd prefer to handle the communication with this customer
+For major incidents, Sales/CS teams may want to handle communication with their customers directly. Check #group-cs-sales-support to see if they're coordinating a response plan. If you're unsure whether to respond to a particular customer:
+- Check #group-cs-sales-support to see if there's discussion about the incident
+- Message #group-cs-sales-support and ask if they'd prefer to handle the communication with this customer. Attach a private note to the ticket with a link to the conversation.
 - If nobody responds and the customer is waiting, respond yourself - it's better than leaving them hanging
 
 Remember that TAMs and CSMs work in specific timezones. If an enterprise customer reaches out when their TAM/CSM is offline or on holiday, don't leave them waiting. Respond to their question. You can loop in their TAM/CSM as a heads-up, but the customer should get an answer from someone.
@@ -159,7 +155,7 @@ Remember that TAMs and CSMs work in specific timezones. If an enterprise custome
 
 If an incident is still ongoing when you're about to log off for the day, hand over to someone who's still working or coming online. Try to hand over to someone who has the most working hours ahead of them - this avoids multiple handovers.
 
-Post in #team-support via the original workflow thread with:
+Post in #team-support via the original incident thread with:
 - Current status of the incident (what's broken, what's being done about it)
 - Roughly how many support tickets we've seen related to it
 - Any key information the next person needs to know
@@ -173,9 +169,8 @@ If you're picking up an incident from someone in a previous timezone, read their
 
 Once the customer-facing impact of the incident is resolved:
 
-- Find all incident-related tickets by filtering for the relevant `incident/xxx` tag in Zendesk (these are automatically added when you attach tickets to the incident via the incident.io app in Zendesk)
+- Find all incident-related tickets by filtering for the relevant `incident/xxx` tag in PostHog Support
 - Go back through these tickets and update users that the incident is resolved
 - Check if any docs or help content needs updating based on what happened - if you can ship a quick docs fix or FAQ update, do it now while it's fresh
-- Delete the incident macro you created
 
 For major incidents, there will be a [post-mortem](https://posthog.com/handbook/engineering/operations/post-mortems). Read it. If you have feedback from the support side - things we could have done better, information we were missing, communication that didn't work, patterns you saw in tickets - add it to the post-mortem document or share it in the incident channel. Your perspective on the user impact and customer communication is valuable.

@@ -7,14 +7,14 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_8d5006785b.png
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
   - People
 crosspost:
   - Founders
   - Blog
 ---
 
-_In this issue of Product for Engineers, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
+_In this issue of build mode, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
 
 * * *
 

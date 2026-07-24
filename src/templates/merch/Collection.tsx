@@ -20,7 +20,6 @@ import { useApp } from '../../context/App'
 import OrderHistory from 'components/Merch/OrderHistory'
 import { useUser } from 'hooks/useUser'
 import MobileDrawer from 'components/MobileDrawer'
-import Modal from 'components/RadixUI/Modal'
 import { useCartStore } from './store'
 import Link from 'components/Link'
 
@@ -167,22 +166,18 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
 
     if (Array.isArray(content)) {
         return (
-            <>
-                {content.map((item, index) => (
-                    <Accordion
-                        key={index}
-                        data-scheme="primary"
-                        className=""
-                        defaultValue="item-0"
-                        items={[
-                            {
-                                trigger: item.title,
-                                content: item.content,
-                            },
-                        ]}
-                    />
-                ))}
-            </>
+            <Accordion
+                data-scheme="primary"
+                type="multiple"
+                className="[&>*:first-child_button]:!pt-0"
+                triggerClassName="!text-sm !font-semibold"
+                contentClassName="!text-sm [&_p]:!text-sm"
+                items={content.map((item, index) => ({
+                    value: `item-${index}`,
+                    trigger: item.title,
+                    content: item.content,
+                }))}
+            />
         )
     }
 
@@ -202,7 +197,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const [orders, setOrders] = useState([])
     const { appWindow } = useWindow()
-    const { isMobile: appIsMobile, websiteMode } = useApp()
+    const { isMobile: appIsMobile } = useApp()
     const { getJwt, user } = useUser()
     const isMobile = appIsMobile || (appWindow?.size?.width && appWindow.size.width <= 768)
     const addToCart = useCartStore((state) => state.update)
@@ -431,7 +426,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         [appWindow]
     )
 
-    const MainContainer = useMemo(() => (websiteMode ? React.Fragment : ScrollArea), [websiteMode])
+    const MainContainer = ScrollArea
 
     const fetchOrders = async () => {
         try {
@@ -454,10 +449,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     }, [user])
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
+        <div className="@container w-full h-full flex flex-col min-h-1 border-t border-primary">
             <HeaderBar
-                showBack={!websiteMode}
-                showForward={!websiteMode}
+                showBack
+                showForward
                 showCustomLeft={<h2 className="text-primary">Merch store</h2>}
                 onCartOpen={handleCartOpen}
                 onCartClose={handleCartClose}
@@ -467,62 +462,19 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onOrderHistoryClose={handleOrderHistoryClose}
                 showCart
                 showOrderHistory={orders?.length > 0}
-                showSearch={!websiteMode}
+                showSearch
                 onSearch={handleSearch}
-                className={websiteMode ? 'border-b border-primary' : ''}
             />
-            {!websiteMode && (
-                <AddressBar
-                    selectOptions={selectOptions}
-                    currentPath={currentPath}
-                    handleValueChange={handleValueChange}
-                    selectedCategory={selectedCategory}
-                />
-            )}
+            <AddressBar
+                selectOptions={selectOptions}
+                currentPath={currentPath}
+                handleValueChange={handleValueChange}
+                selectedCategory={selectedCategory}
+            />
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                    {websiteMode && (
-                        <Modal
-                            open={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
-                            onOpenChange={(open) => {
-                                if (!open) {
-                                    if (cartIsOpen) handleCartClose()
-                                    if (selectedProduct) setSelectedProduct(null)
-                                    if (orderHistoryIsOpen) handleOrderHistoryClose()
-                                }
-                            }}
-                            maxWidth={700}
-                            autoHeight
-                        >
-                            <ScrollArea>
-                                <div className="max-h-[90vh] h-full">
-                                    <div className="bg-primary">
-                                        {cartIsOpen ? (
-                                            <Cart className="h-full" />
-                                        ) : orderHistoryIsOpen ? (
-                                            <div className="h-full @container">
-                                                <OrderHistory orders={orders} />
-                                            </div>
-                                        ) : selectedProduct ? (
-                                            <ProductPanel
-                                                product={selectedProduct}
-                                                setIsCart={() => undefined}
-                                                onClick={() => undefined}
-                                                updateURL={handleProductSelect}
-                                                onCartOpen={handleCartOpen}
-                                                className="!p-4 !pt-4"
-                                                containerWidth={500}
-                                            />
-                                        ) : null}
-                                    </div>
-                                </div>
-                            </ScrollArea>
-                        </Modal>
-                    )}
-
-                    {/* Non-website mode: use aside panel */}
-                    {!websiteMode && !isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
+                    {!isMobile && (cartIsOpen || selectedProduct || orderHistoryIsOpen) && (
                         <motion.aside
                             data-scheme="secondary"
                             className="not-prose bg-primary border-l border-primary h-full text-primary relative"
@@ -567,8 +519,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         </motion.aside>
                     )}
 
-                    {/* Non-website mode on mobile: use MobileDrawer */}
-                    {!websiteMode && isMobile && (
+                    {/* Mobile: use MobileDrawer */}
+                    {isMobile && (
                         <MobileDrawer
                             isOpen={cartIsOpen || selectedProduct !== null || orderHistoryIsOpen}
                             onClose={() => {
@@ -630,14 +582,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className={`@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary ${
-                                websiteMode ? 'sticky top-[48px] @3xl:h-[calc(100vh-48px)]' : 'h-full'
-                            }`}
+                            className="@3xl:w-64 w-full bg-primary  @3xl:border-r border-t @3xl:border-t-0 border-primary h-full"
                         >
-                            <ScrollArea className={`p-2`}>
-                                <div className="space-y-3">
-                                    <SidebarContent content={leftSidebarContent} />
-                                </div>
+                            <ScrollArea className={`p-4`}>
+                                <SidebarContent content={leftSidebarContent} />
                             </ScrollArea>
                         </aside>
                     )}

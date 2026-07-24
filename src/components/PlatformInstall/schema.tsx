@@ -50,6 +50,8 @@ export type Platform = PlatformOption & {
 
 export type InstallSchema = {
     title: string
+    /** Optional direct info link shown beside the title */
+    titleInfoAction?: { label: string; to: string; state?: Record<string, unknown> }
     /** Optional (?) tooltip shown next to the title */
     titleTooltip?: React.ReactNode
     /** Header link on the right (replaces the old hardcoded "Learn more") */
@@ -57,8 +59,6 @@ export type InstallSchema = {
     defaultCommand: string
     /** Clipboard override for `defaultCommand` (display shows `defaultCommand`, copy writes this). */
     defaultCopyCommand?: string
-    /** Append `--region <cloud>` (from the user's region) after the command, matching WizardCommand. */
-    appendRegion?: boolean
     /** Line shown below the command, e.g. "Supports Next.js, React, Python, and 21 more" */
     supports?: React.ReactNode
     platforms: Platform[]
@@ -493,6 +493,21 @@ export const mcpInstallSchema: InstallSchema = {
     platforms: installPlatforms,
 }
 
+// Display shows a clean command; the copy pins `-y` (auto-confirm) and `@latest` (freshness).
+const { displayCommand: cliWizardCommand, copyCommand: cliWizardCommandCopy } = buildWizardCommand({
+    subcommand: 'cli add',
+})
+
+export const cliInstallSchema: InstallSchema = {
+    title: 'Install the PostHog CLI',
+    defaultCommand: cliWizardCommand,
+    defaultCopyCommand: cliWizardCommandCopy,
+    supports: <>Installs the CLI and adds instructions to your coding agent</>,
+    // No per-client picker: CLI install is the same global binary everywhere. The manual
+    // npm fallback and per-agent setup live in the surrounding docs.
+    platforms: [],
+}
+
 export const wizardInstallSchema: InstallSchema = {
     title: 'Get started',
     titleTooltip: (
@@ -521,10 +536,8 @@ export const wizardInstallSchema: InstallSchema = {
     },
     // Display shows a clean command; the copy adds `-y` (auto-confirm) and `@latest` (freshness).
     // `self-driving` is intentionally NOT baked in here — it's opt-in via PlatformInstall's `selfDriving` prop.
-    // The user's cloud region (`--region eu|us`) is appended automatically via `appendRegion`.
     defaultCommand: 'npx @posthog/wizard',
     defaultCopyCommand: 'npx -y @posthog/wizard@latest',
-    appendRegion: true,
     supports: supportsFrameworks,
     // Secondary install-methods row hidden for now on the homepage. Restore by
     // uncommenting installPlatforms (or swap in a custom array to diverge from MCP).

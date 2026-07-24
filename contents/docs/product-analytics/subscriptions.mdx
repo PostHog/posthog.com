@@ -214,6 +214,20 @@ When a prompt subscription is paused due to credits:
 - Once credits are available again, the subscription automatically resumes – no manual intervention needed
 - The subscription stays enabled and isn't [disabled](#automatically-disabled-subscriptions)
 
+### Analysis window
+
+The analysis window controls which time range each prompt subscription analyzes. You can configure this when creating or editing a prompt subscription.
+
+There are three modes:
+
+- **Since last report** (default) – analyzes data from the previous successful scheduled delivery until now. This is gap-free, meaning each report picks up exactly where the last one ended. Test and manual deliveries don't move the anchor.
+- **Last N days** – analyzes a fixed trailing window (e.g. the last 7 days) regardless of when the last report was sent.
+- **Between X and Y days ago** – analyzes an explicit historical range. For example, "between 14 and 7 days ago" always looks at the same week-old window.
+
+The analysis window is timezone-aware and uses your [project timezone](/docs/data/timestamps). This means a daily report sent at 4pm captures events from your local "today" rather than UTC midnight boundaries.
+
+For period-over-period comparisons (like week-over-week trends), the AI automatically compares against the equivalent previous period based on your window selection.
+
 ## Next delivery date
 
 Each subscription displays its next scheduled delivery date, so you can see exactly when the next report is sent. This date updates automatically after each delivery.

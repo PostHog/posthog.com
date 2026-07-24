@@ -8,7 +8,9 @@ availability:
   enterprise: full
 ---
 
-> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs.
+> **Note:** Local evaluation is only available in the [Node](/docs/libraries/node), [Ruby](/docs/libraries/ruby), [Go](/docs/libraries/go), [Python](/docs/libraries/python), [C#/.NET](/docs/libraries/dotnet), [PHP](/docs/libraries/php), [Java](/docs/libraries/java), and [Rust](/docs/libraries/rust) SDKs. It requires a [feature flags secure API key](#step-1-find-your-feature-flags-secure-api-key), which is secret and must **not** be used in the frontend or exposed to users.
+
+> **Building a frontend, mobile, or CLI app?** Don't use local evaluation or the secure API key on the client. Instead, evaluate flags with a [client-side SDK](/docs/libraries) or by calling the public [`/flags` endpoint](/docs/api/flags) with your [project API key](/docs/feature-flags/installation#where-to-find-your-project-api-key) — the project API key is public and safe to expose to users.
 
 > **Note:** In edge/lambda environments and stateless PHP applications, local evaluation with the default in-memory cache causes performance issues and inflated costs due to per-request initialization. For these environments, use an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments) to share flag definitions across requests, or use regular flag evaluation instead.
 
@@ -55,6 +57,8 @@ sequenceDiagram
 Notice that PostHog is not involved at evaluation time. The tradeoff: **you are responsible for providing every property the flag's release conditions depend on**. If you forget to pass a property, the SDK can't evaluate the flag locally and will either fall back to a remote request or return `undefined` (depending on your configuration).
 
 Local evaluation is also more cost-effective: with remote evaluation, every flag check is a billable request, whereas local evaluation only bills for the periodic request to fetch flag definitions (counted as 10 flag requests each). For high-traffic services, this can significantly reduce your flag usage costs.
+
+Each flag definition includes a `version` number that the SDK uses to detect changes. PostHog increments this version whenever you modify the flag itself. It also increments the version when any [cohort](/docs/data/cohorts) referenced by the flag — directly or through nested cohorts — has its conditions changed. This ensures your SDK cache stays in sync even when the flag's effective definition changes through a cohort update rather than a direct flag edit.
 
 There are 3 steps to enable local evaluation:
 

@@ -7,7 +7,6 @@ import Link from 'components/Link'
 import { ProductScreenshot } from 'components/ProductScreenshot'
 import { Caption } from 'components/Caption'
 import ChannelPlatforms from '../../../../contents/docs/workflows/_snippets/channel-platforms'
-import PricingTable from '../../../../contents/docs/workflows/_snippets/pricing-table.mdx'
 
 export const Content = () => {
     return (
@@ -78,12 +77,10 @@ export const Content = () => {
                     Pricing
                 </h2>
                 <p>
-                    After our beta period ends, pricing will be based on how many real-time destinations you use and how
-                    many messages you send each month. You'll get 10,000 destinations or messages free each month, with
-                    discounts as your usage grows. We are constantly striving to make pricing the best possible and will
-                    start with the following tiers:
+                    Pricing is based on how many real-time destinations you use and how many messages you send each
+                    month. You get 10,000 destinations or messages free every month, with discounts as your usage grows.
+                    See our <Link to="/pricing">pricing page</Link> for the latest rates.
                 </p>
-                <PricingTable />
             </section>
 
             <section className="mb-8">

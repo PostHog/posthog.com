@@ -42,6 +42,7 @@ Every event below is captured as a standard PostHog event under the recipient's 
 | `$workflows_email_bounced`      | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.).                                                                        |
 | `$workflows_email_blocked`      | The recipient marked the email as spam (a complaint).                                                                                                     |
 | `$workflows_email_failed`       | The send failed for another reason (provider error, malformed request, transient outage).                                                                 |
+| `$workflows_email_unsubscribed` | The recipient unsubscribed from emails via one-click unsubscribe or the preferences page.                                                                 |
 
 `$workflows_email_sent` is recorded when the email is handed off for delivery. The delivery, open, click, bounce, and block events depend on the email provider sending event callbacks back to PostHog, so they only appear once those callbacks arrive.
 
@@ -64,6 +65,22 @@ Each email engagement event carries properties so you can filter and break down 
 - `$email_to` — the recipient address (on every event)
 - `$email_subject` — the email subject (on every event)
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
+
+## Properties on unsubscribe events
+
+The `$workflows_email_unsubscribed` event differs from other email engagement events in a few important ways:
+
+| Property   | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `$email`   | The recipient's email address                                                      |
+| `category` | The message category the recipient unsubscribed from, or `$all` for all categories |
+| `source`   | How the recipient unsubscribed: `one_click` or `preferences_page`                  |
+
+**Key differences from other email engagement events:**
+
+- **No workflow or action ID**: The unsubscribe event is captured at the email-level, not per-send. It does not include `$workflow_id` or `$workflow_action_id` properties because the unsubscribe token only carries the team and recipient identifier.
+- **Distinct ID is the email address**: The `distinct_id` on unsubscribe events is the recipient's email address, which may differ from the tracked distinct ID on other events like opens and clicks.
+- **Transition-only**: The event only fires when a recipient genuinely transitions from opted-in to opted-out. Replayed unsubscribe requests or repeated saves do not emit duplicate events.
 
 ## Relationship to workflow metrics
 
