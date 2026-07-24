@@ -6745,14 +6745,14 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Dashboard',
-                    featured: true,
-                    url: '/docs/revenue-analytics/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
+                    name: 'Concepts',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Revenue metrics',
+                    featured: true,
+                    url: '/docs/revenue-analytics/revenue-metrics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Connect to customers',
