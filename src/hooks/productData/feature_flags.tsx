@@ -8,9 +8,12 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
+    IconInfo,
     IconCursorClick,
+    IconMagic,
     IconChat,
     IconCode,
+    IconMessage,
     IconNewspaper,
 } from '@posthog/icons'
 import Link from 'components/Link'
@@ -25,13 +28,14 @@ export const featureFlags = {
     type: 'feature_flags',
     slug: 'feature-flags',
     teamSlug: 'feature-flags',
-    // forumTopicId: TBD — needed for CommunityQuestions section
+    forumTopicId: 360,
     color: 'seagreen',
     colorSecondary: 'seagreen',
     category: 'product_engineering',
     wizardSupport: 'In development',
     shortDescription: 'Control feature access with precision',
-    // pricingDescription: TBD
+    pricingDescription:
+        'Feature flags are billed on requests – evaluations against your flags. You get 1 million free every month, then pay for what you use. No per-seat charges.',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
@@ -47,8 +51,20 @@ export const featureFlags = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // { slug: 'eli5', name: 'What does it do?', hideFromNav: true, group: 'divided', icon: <IconInfo className="size-4" /> }, // needs overview.eli5
-        // { slug: 'use-cases', name: 'Who is it for?', hideFromNav: true, group: 'divided', icon: <IconMagic className="size-4" /> }, // needs useCases
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -71,7 +87,7 @@ export const featureFlags = {
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> }, // needs forumTopicId
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
@@ -114,7 +130,7 @@ export const featureFlags = {
                 .
             </>
         ),
-        // eli5: TBD — "What does it do?" section
+        eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -157,7 +173,10 @@ export const featureFlags = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
             alt: 'A hedgehog toggling a feature flag',
         },
-        // mobileHog: TBD — dedicated asset for eli5 section (falls back to default)
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
+            alt: 'A hedgehog toggling a feature flag',
+        },
     },
     slider: {
         marks: [1000000, 10000000, 100000000, 1000000000],
@@ -187,7 +206,28 @@ export const featureFlags = {
                 "Feature flags immediately bought a lot of value. What's really elegant is how flags interlink with product analytics.",
         },
     },
-    // useCases: TBD — { intro, rows: [role, useCase][] }
+    useCases: {
+        intro: 'Feature Flags is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship behind a flag, canary to a slice of users, and kill a bad release without a redeploy',
+            ],
+            [
+                'Product Managers',
+                'Control beta access and rollout percentage once engineering wires the flag into the product',
+            ],
+            [
+                'Growth Engineers',
+                'Target cohorts, run multivariate variants, and measure impact next to analytics and replays',
+            ],
+            [
+                'Platform / DevOps',
+                'Gate infrastructure changes and migrations with gradual rollouts and instant rollback',
+            ],
+            ['Support Engineers', 'Enable a fix or workaround for a specific customer without shipping a new build'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -198,7 +238,7 @@ export const featureFlags = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // description: TBD
+        description: 'SDKs for web, mobile, and backend – or evaluate flags over the API.',
         productSlug: 'feature-flags',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
@@ -372,21 +412,70 @@ export const featureFlags = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
         imageAlt: 'PostHog AI and feature flags',
         description: 'roll a change out, watch the impact, and roll it back',
-        // intro: TBD — shown above the AI prompts section
+        intro: 'Ask PostHog AI to create flags, explain targeting, and clean up stale ones.',
         mcpFeatures: ['flags'],
         skills: [
             'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',
             'Identifies stale flags to remove from your codebase',
             'Summarizes rollout rules and targeting in plain english',
         ],
-        // Existing prompts reshaped into groups for AskAnything. Expand/replace as needed.
         groups: [
             {
-                title: 'Example prompts',
+                title: 'Create',
+                tool: 'create-feature-flag',
                 prompts: [
                     'Create a new multivariate feature flag for dark mode',
-                    'Show me which flags are currently active in production',
+                    'Create a flag that rolls out new-checkout to 10% of free users',
+                ],
+            },
+            {
+                title: 'Update',
+                tool: 'update-feature-flag',
+                prompts: [
+                    'Add a release condition so only users with email ending in @acme.com get the flag',
+                    'Update pricing-test so variant_b is 50% of traffic',
+                ],
+            },
+            {
+                title: 'Inspect',
+                tool: 'feature-flag-get-definition',
+                prompts: [
                     'Explain how this flag is configured and who receives each variant',
+                    'What payload does the headline-change flag return?',
+                    'Get the full definition of new-onboarding',
+                ],
+            },
+            {
+                title: 'Test evaluation',
+                tool: 'feature-flags-test-evaluation-create',
+                prompts: [
+                    'Would user_id 12345 get the new-checkout flag with their current properties?',
+                    'Test evaluation for distinct_id demo@example.com against pricing-test',
+                ],
+            },
+            {
+                title: 'Blast radius',
+                tool: 'feature-flags-user-blast-radius-create',
+                prompts: [
+                    "What's the blast radius if I roll new-checkout out to 100%?",
+                    'How many users would a 10% rollout of pricing-test affect?',
+                ],
+            },
+            {
+                title: 'Clean up',
+                tool: 'feature-flags-status-retrieve',
+                prompts: [
+                    'Is new-checkout stale?',
+                    'Check the health status of pricing-test',
+                    'Show me why this flag is marked stale',
+                ],
+            },
+            {
+                title: 'Schedule changes',
+                tool: 'scheduled-changes-create',
+                prompts: [
+                    'Schedule new-checkout to go to 50% tomorrow at 9am UTC',
+                    'Schedule this flag to turn off on Friday',
                 ],
             },
         ],

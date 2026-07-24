@@ -87,7 +87,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                     {tab === 'prompts' && (
                         <>
                             {ai?.image && (
-                                <aside className="w-48 mx-auto mb-4 @lg:ml-4 @lg:mr-0 @lg:float-right @lg:w-32 @xl:w-48 @2xl:w-80 @6xl:w-96 @xl:ml-8 transition-all">
+                                <aside className="w-36 mx-auto mb-4 @lg:ml-4 @lg:mr-0 @lg:float-right @lg:w-28 @xl:w-40 @2xl:w-48 @6xl:w-56 @xl:ml-8 transition-all">
                                     <CloudinaryImage
                                         src={ai.image}
                                         alt={ai.imageAlt || 'Ask PostHog anything'}
