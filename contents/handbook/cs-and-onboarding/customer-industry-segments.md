@@ -30,19 +30,19 @@ Eventually each industry listed above will be linked to its own playbook with de
 ### What they care about (i.e. what is most important to their business success)
 ### Industry terminology
 ### Common software used
-### Important business metrics and data 
+### Important business metrics and data
     #### Metrics
-    #### Data (event taxonomy, person profiles, groups) 
+    #### Data (event taxonomy, person profiles, groups)
 ### PostHog products they should be using
     #### Product
     	##### Best practices
-    	##### Common challenges 
-    	##### Cross product use cases 
+    	##### Common challenges
+    	##### Cross product use cases
 ```
 
-## Segments in Vitally
+## Industry segment
 
-Industry segment is a custom account trait in Vitally. You can find and edit your customer's industry on the side panel of their account page as a pinned trait. You can add a value or edit current value directly on the account page or add the industry segment as a column to any custom tables you have in Vitally.
+Industry segment is a customer property that we use internally at PostHog.
 
 <details>
 
@@ -54,20 +54,20 @@ Companies that exist in different parts of the AI value chain. There is signific
 
 ### Sub-segments
 
-| Sub-Segment             | Examples                           | Description                                        |
+| Sub-segment             | Examples                           | Description                                        |
 |:------------------------|:-----------------------------------|:---------------------------------------------------|
-| Hyperscalers            | AWS, GCP, Oracle, Azure            | AI Services in the cloud                           |
-| Frontier Model Labs     | OpenAI, Anthropic, Cohere, Mistral | Foundation models with proprietary architectures   |
+| Hyperscalers            | AWS, GCP, Oracle, Azure            | AI services in the cloud                           |
+| Frontier model labs     | OpenAI, Anthropic, Cohere, Mistral | Foundation models with proprietary architectures   |
 | Generative              | ElevenLabs, Runware, Runway, Luma  | Product suites around output                       |
 | Inference               | Replicate, fal\.ai, Together\.ai     | Host / serve other models, making them easy to run |
-| AI-Native Applications  | Cursor, Perplexity                 | End-user tools where experience is driven by AI    |
-| Data / Machine Learning | Databricks, Hugging Face           | Orchestration, system management                   |
+| AI-native applications  | Cursor, Perplexity                 | End-user tools where experience is driven by AI    |
+| Data / machine learning | Databricks, Hugging Face           | Orchestration, system management                   |
 
 ### What they care about
 
 They share a developer-centric focus on adoption and retention. The higher-order sub-segments (hyperscalers, frontier model labs, inference) care about competitive parity and platform stickiness. Generative and AI-native application segments care about feature adoption, generation metrics, unit economics, and retention.
 
-The two differ on what counts as output. Generative customers measure the artifact itself, like whether a change increased how often users download an image after generating it. AI-native application customers measure task completion rates and time saved.
+Sub-segments differ on what they track as output. Generative customers measure the artifact itself, like whether a change increased how often users download an image after generating it. AI-native application customers measure task completion rates and time saved.
 
 ### Industry terminology
 
@@ -87,7 +87,7 @@ The two differ on what counts as output. Generative customers measure the artifa
 
 **NLP (Natural Language Processing)** – Branch of AI that enables computers to understand and generate human language.
 
-**Embedding** – Representation of data (text, image, user actions) as vectors used for recommendation, search, and classification. 
+**Embedding** – Representation of data (text, image, user actions) as vectors used for recommendation, search, and classification.
 
 ### Common software used
 
@@ -95,18 +95,18 @@ _Note: This list is incomplete, ongoing, and has overlap. It is meant to serve a
 
 - Observability: LiteLLM, Helicone, Datadog, Langfuse, Splunk
 - RAG: LangChain, Cohere, Haystack, Chroma
-- Feature Stores: Tecton, Databricks, SageMaker, Redis
-- Data Warehouse: Snowflake, Databricks, Firebolt, BigQuery
-- Unit Economics: FinOps tooling, Helicone, LiteLLM, OpenRouter
-- Data Pipeline: Atlan, Alation, dbt, FiveTran, Apache Airflow, Stitch
+- Feature stores: Tecton, Databricks, SageMaker, Redis
+- Data warehouse: Snowflake, Databricks, Firebolt, BigQuery
+- Unit economics: FinOps tooling, Helicone, LiteLLM, OpenRouter
+- Data pipeline: Atlan, Alation, dbt, FiveTran, Apache Airflow, Stitch
 
-Software can be indicative of maturity of the organization. For example, teams using Helicone and Langfuse are likely early-stage, developer-heavy orgs that are in PostHog's ICP. Teams using dbt/Airflow will be very interested in the value of PostHog's warehouse integrations and batch exports. 
+You should make yourself familiar with how each of these products stacks together in a customer's value chain. It's a "current events" practice that will allow you maximum ability to speak to how customers can turn a disparate system of tools into one AI and data centric Howitzer.
 
-### Important business metrics & data
+### Important business metrics and data
 
 #### Metrics
 
-|  Metric | Measurement  | Business Context  |
+|  Metric | Measurement  | Business context  |
 |---|---|---|
 |  Cost per action |  Infrastructure cost to serve a particular user action (cost per image generated, cost per second of video generated, cost per query, API call) | User interaction drives margin  |
 |Feature margin|Revenue against how much it costs to run the feature  |  Can be complex if infrastructure does not support granular definition of feature |
@@ -115,44 +115,51 @@ Software can be indicative of maturity of the organization. For example, teams u
 
 ##### Event taxonomy
 
-AI and data customers should be running AI Observability. It sets the taxonomy: with the SDK you get structured generation, trace, and cost events out of the box. Without it, taxonomy falls back to whatever the customer wires up by hand.
+AI and data customers should be running AI Observability. It sets the taxonomy: with the SDK you get structured generation, trace, and cost events out of the box. Without it, taxonomy falls back to whatever the customer wires up by hand. Those structured events are also what PostHog's agentic products read, so clean instrumentation is the prerequisite for any self-driving analysis on top.
 
 Without the AI Observability SDK:
-- Autocaptured clicks and pageviews on AI features (button presses, route changes)                                  
+- Autocaptured clicks and pageviews on AI features (button presses, route changes)
 - Custom events the customer wired up by hand, like `chat_message_sent` or `prompt_submitted`
 - Whatever properties a customer should choose to attach
 
 With the AI Observability SDK:
-- `$ai_generation` – one row per LLM call with model, input/output tokens, cost, latency, and provider    
+- `$ai_generation` – one row per LLM call with model, input/output tokens, cost, latency, and provider
 - `$ai_trace` and `$ai_span` – parent/child structure for multi-step agents and tool use
 - `$ai_embedding`, `$ai_metric`, `$ai_feedback` – vector ops, eval scores, thumbs up/down
 
 ##### Person profiles
 
-When companies look at their event data in this segment, they're usually trying to answer "who did this?". The person profile should carry a defined `user_role` (`admin`, for example) along with aggregations like `total_api_calls` or `total_tokens_used`.                                                                              
-                  
-**Best practices**
+When companies look at their event data in this segment, they're trying to answer "who did this?" and "who are the power users?". Tie every generation to a person profile, and give that profile a defined `user_role` (`admin`, for example) alongside aggregations like `total_api_calls` or `total_tokens_used`. Without it, you can see that tokens are being burned but not who is burning them.
 
-- Define a stable `$distinct_id` (internal UUID, not email or username) as early as possible.                 
-- Identify immediately after authentication, both client-side and server-side, with the same distinct ID.
-- $set vs $set_once. Use $set_once for immutable values (signup date, acquisition channel). Use $set for mutable values (plan tier, role, last seen feature).                                                                        
-- Set source-of-truth properties server-side from the database, not from client state.                              
-- Capture conversions on initial resource consumption (first API call, first generation). 
+### PostHog products they should be using
+
+Lead with AI Observability. It's the one product built for how these customers make money: it captures every model call as a structured event with cost, latency, tokens, and provider. That event stream is the foundation everything else builds on, from cost analysis to experimentation to the self-driving loop. Get the customer onto it first, then layer the rest.
+
+#### AI Observability
+
+##### Best practices
+
+- Instrument model calls server-side with the AI Observability SDK, where the model actually runs, and identify on the same authenticated request so every `$ai_generation` ties to a person.
+- Attach model, provider, and feature (or prompt version) as properties on the generation, so cost and latency can be sliced by what the customer ships.
+- Capture cost on the generation event itself. Don't reconstruct it later from token counts.
+- Set person properties from the server-side source of truth, not client state. Use `$set_once` for immutable values (signup date, acquisition channel) and `$set` for mutable ones (plan tier, role, last active feature).
 
 ##### Common challenges
 
-- High event volume &rarr; cost aversion; lean on sampling (where relevant), ingestion filters, discipline on `$set`.
-- Most meaningful events occur server-side, which can raise complexity. Make sure to identify on each authenticated request.
-- Environment density (staging, test, development, simulation alongside production) leads to messy data. Use separate projects or strict environment properties.
+- High event volume meets cost sensitivity. LLM apps are chatty and margin-conscious, so ingestion cost gets scrutinized. Lean on sampling, ingestion filters, and dropping high-cardinality properties they'll never query. Don't re-send person properties (`$set`) on every high-volume event, since that inflates ingestion for no analytical gain.
+- The events that matter fire server-side. Client-only instrumentation misses the actual model calls, so identify on each authenticated server request.
+- Environment density. Staging, eval, and simulation traffic pollute production data. Split by project or enforce a strict environment property.
 
 ##### Cross-product use cases
 
 - **AI Observability** – join `$ai_generation` cost back to person properties for cost-per-segment, or to identify which plan or role is burning the most tokens.
 - **Feature Flags and Experiments** – gate new models behind flags, run A/B tests on prompt changes, hold out high-value users from risky rollouts.
 - **Surveys** – trigger feedback prompts after a generation, collect CSAT on AI features, run PMF surveys against power users.
-- **Session Replay** – filter to recordings of users hitting prompt failures or specific $ai_generation errors.
+- **Session Replay** – filter to recordings of users hitting prompt failures or specific `$ai_generation` errors.
+  - **Replay Vision** (closed beta) – run scanners over those recordings to auto-flag dead ends and prompt failures, then query the results back as PostHog events.
 - **Error Tracking** – group exceptions by plan, model, or role to see which segment hits a bug.
-- **Data Warehouse** – sync events for joins against billing or model cost tables, then pipe insights back. 
+- **Data Warehouse** – sync events for joins against billing or model cost tables, then pipe insights back.
+- **Self-driving** – point the self-driving loop at these signals: agents investigate the reports, open pull requests for fixes, and measure whether they worked.
 
 </details>
 
@@ -160,7 +167,7 @@ When companies look at their event data in this segment, they're usually trying 
 
 <summary>E-commerce playbook</summary>
 
-### E-commerce description 
+### E-commerce description
 
 Online retail businesses including direct-to-consumer brands, marketplace platforms, and omnichannel retailers selling physical or digital goods through web and mobile.
 
@@ -202,7 +209,7 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 - **Engagement:** Pages per session, bounce rate by landing page, search-to-purchase rate
 - **Performance:** Page load time correlation with conversion
 
-#### Data 
+#### Data
 
 ##### Event taxonomy
 
@@ -238,4 +245,4 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 - Feature flag for seasonal promotions > Track performance in analytics > Watch customer interactions via replay
 - Identify drop-off points in funnels > Watch those specific sessions > Run Experiments on improvements
 
-</details> 
+</details>
