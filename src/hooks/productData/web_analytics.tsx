@@ -6,7 +6,6 @@ import {
     IconList,
     IconConfetti,
     IconRocket,
-    IconCheckCircle,
     IconInfo,
     IconCursorClick,
     IconMagic,
@@ -34,10 +33,19 @@ export const webAnalytics = {
     colorSecondary: '[#37945D]',
     category: 'analytics',
     wizardSupport: true,
-    billedWith: 'Product analytics',
+    billedWith: 'Product Analytics',
+    billedWithSlug: 'product-analytics',
     shortDescription: 'Privacy-focused web analytics',
     pricingDescription:
         'Web Analytics is billed as Product Analytics events, so you get access to both products for the same price. 1 million events free monthly. Anonymous events cost 10x less than identified. Most sites never pay anything. Even high-traffic sites pay way less than GA 360.',
+    pricingLead:
+        'Web Analytics is billed as Product Analytics events, so you get access to both products for the same price.',
+    pricingHighlights: [
+        '1 million events free every month',
+        'Anonymous events cost 10x less than identified',
+        'Most sites never pay anything',
+    ],
+    pricingFooter: 'Even high-traffic sites pay way less than GA 360.',
     seo: {
         title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
@@ -104,13 +112,16 @@ export const webAnalytics = {
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
-     * Sections rendered on the Pricing surface (`/web-analytics/pricing`).
-     * Same shape as `productMenu`.
+     * Thin pricing surface: billed-with explainer + link to PA pricing.
+     * No Plans/calculator - WA isn't a separate SKU.
      */
     pricingMenu: [
-        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
-        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
-        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        {
+            slug: 'how-pricing-works',
+            name: 'How pricing works',
+            template: 'billed-with',
+            icon: <IconInfo className="size-4" />,
+        },
         // Hidden footer CTA rendered at the bottom of the Pricing surface.
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
@@ -157,6 +168,7 @@ export const webAnalytics = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
         alt: 'A hedgehog looking at web analytics',
         classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
@@ -431,7 +443,7 @@ export const webAnalytics = {
                 PostHog's Web Analytics is billed as Product Analytics events, which means you get access to both
                 products for the same price. 1 million events free monthly. Anonymous events cost 10x less than
                 identified. (
-                <Link state={{ newWindow: true }} to="/events">
+                <Link state={{ newWindow: true }} to="/docs/data/anonymous-vs-identified-events">
                     Learn about the difference between anonymous events and identified events.
                 </Link>
                 ) Most sites never pay anything. Even high-traffic sites pay way less than GA 360.

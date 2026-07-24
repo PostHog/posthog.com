@@ -5,6 +5,7 @@ export type GlowColor =
     | 'blue'
     | 'red'
     | 'green'
+    | 'green-2'
     | 'purple'
     | 'orange'
     | 'teal'
@@ -36,6 +37,7 @@ const colorMap: Record<GlowColor, string> = {
     blue: 'bg-blue',
     red: 'bg-red',
     green: 'bg-green',
+    'green-2': 'bg-green-2',
     purple: 'bg-purple',
     orange: 'bg-orange',
     teal: 'bg-teal',
