@@ -5,7 +5,7 @@ import { calculatePrice, formatUSD } from '../../PricingSlider/pricingSliderLogi
 import { PricingTiers } from '../../Plans'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
-import pluralizeWord from 'pluralize'
+import { pluralizeUnit } from '../../utils'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
     return (
@@ -54,6 +54,11 @@ const SliderRow = ({
     freeAllocationText,
 }) => {
     const [currentVolume, setCurrentVolume] = useState(volume)
+    const scaleMin = sliderConfig.scaleMin ?? Math.max(sliderConfig.min, 1)
+    const minimumVisibleValue = sliderConfig.min > 0 ? sliderConfig.min : scaleMin
+    // Logarithmic sliders cannot represent 0 directly, so 0-volume rows use the left edge of the scale.
+    const sliderValue = Math.max(currentVolume, minimumVisibleValue)
+    const hasFreeAllocationNote = Boolean(freeAllocation || freeAllocationText)
 
     useEffect(() => {
         if (billingTiers) {
@@ -63,7 +68,7 @@ const SliderRow = ({
     }, [currentVolume, billingTiers])
 
     const handleVolumeChange = (newVolume) => {
-        const roundedVolume = Math.round(newVolume)
+        const roundedVolume = Math.max(Math.round(newVolume || 0), 0)
         setCurrentVolume(roundedVolume)
 
         if (billingTiers) {
@@ -72,8 +77,15 @@ const SliderRow = ({
         }
     }
 
+    const handleSliderChange = (value) => {
+        const roundedVolume = Math.round(sliderCurve(value))
+        const newVolume =
+            sliderConfig.min === 0 && roundedVolume <= scaleMin ? 0 : Math.max(roundedVolume, sliderConfig.min)
+        handleVolumeChange(newVolume)
+    }
+
     return (
-        <div className="grid grid-cols-8 mb-4">
+        <div className={`grid grid-cols-8 ${hasFreeAllocationNote ? 'mb-4' : 'mb-10'}`}>
             <div className="col-span-6">
                 <p className="mb-2">
                     <NumericFormat
@@ -83,7 +95,7 @@ const SliderRow = ({
                         onValueChange={({ floatValue }) => handleVolumeChange(floatValue)}
                         customInput={AutosizeInput}
                     />{' '}
-                    <span className="opacity-70 text-sm">{label}s/month</span>
+                    <span className="opacity-70 text-sm">{pluralizeUnit(label, currentVolume || 2)}/month</span>
                 </p>
             </div>
             <div className="col-span-2 text-right pr-3">
@@ -94,12 +106,13 @@ const SliderRow = ({
                     stepsInRange={100}
                     marks={sliderConfig.marks}
                     min={sliderConfig.min}
+                    scaleMin={scaleMin}
                     max={sliderConfig.max}
-                    onChange={(value) => handleVolumeChange(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(currentVolume)}
+                    onChange={handleSliderChange}
+                    value={inverseCurve(sliderValue)}
                 />
             </div>
-            {(freeAllocation || freeAllocationText) && (
+            {hasFreeAllocationNote && (
                 <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
@@ -108,7 +121,7 @@ const SliderRow = ({
                         ) : (
                             <>
                                 First {Math.round(freeAllocation).toLocaleString()}{' '}
-                                {pluralizeWord(unit, Math.round(freeAllocation))} free –&nbsp;
+                                {pluralizeUnit(unit, Math.round(freeAllocation))} free –&nbsp;
                                 <em>every month!</em>
                             </>
                         )}
@@ -290,7 +303,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                     {activeProduct.productVariantName || activeProduct.name}
                                 </h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
-                                    <strong>{mainVolume.toLocaleString()}</strong> {activeProduct.billingData.unit}s
+                                    <strong>{mainVolume.toLocaleString()}</strong>{' '}
+                                    {pluralizeUnit(activeProduct.billingData.unit, mainVolume)}
                                 </p>
                                 <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                     <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
@@ -311,8 +325,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                         <div key={addon.key}>
                                             <h4 className="text-lg m-0">{addon.label}</h4>
                                             <p className="opacity-70 m-0 text-sm mb-2">
-                                                <strong>{addonData[index].volume.toLocaleString()}</strong> {addon.unit}
-                                                s
+                                                <strong>{addonData[index].volume.toLocaleString()}</strong>{' '}
+                                                {pluralizeUnit(addon.unit, addonData[index].volume)}
                                             </p>
                                             <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                                 <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">

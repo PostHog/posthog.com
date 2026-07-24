@@ -883,6 +883,13 @@ export default function SlackAppPage(): JSX.Element {
                                         </Link>
                                     </span>
                                 </div>
+                                <p className="text-sm text-secondary mt-3 mb-0">
+                                    Read our{' '}
+                                    <Link to="/privacy" className="font-bold">
+                                        privacy policy
+                                    </Link>{' '}
+                                    to see how the PostHog Slack app collects, manages, and stores your data.
+                                </p>
                             </div>
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_chat_2_e5993b2331.png"

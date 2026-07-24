@@ -3484,15 +3484,15 @@
         },
         {
             "source": "/feature-flags/customers",
-            "destination": "/feature-flags#customers"
+            "destination": "/feature-flags"
         },
         {
             "source": "/feature-flags/comparisons",
-            "destination": "/feature-flags#posthog-vs"
+            "destination": "/feature-flags#feature-comparison"
         },
         {
             "source": "/feature-flags/documentation",
-            "destination": "/feature-flags#docs"
+            "destination": "/docs/feature-flags"
         },
         {
             "source": "/feature-flags/tutorials",
@@ -3500,7 +3500,7 @@
         },
         {
             "source": "/feature-flags/roadmap",
-            "destination": "/feature-flags#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/feature-flags/questions",
@@ -4561,6 +4561,10 @@
         },
         {
             "source": "/docs/web-analytics/revenue-analytics",
+            "destination": "/docs/revenue-analytics"
+        },
+        {
+            "source": "/docs/revenue-analytics/dashboard",
             "destination": "/docs/revenue-analytics"
         },
         {
