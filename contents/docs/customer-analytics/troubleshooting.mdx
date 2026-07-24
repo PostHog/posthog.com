@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import CustomerAnalyticsBetaWarning from './_snippets/customer-analytics-beta-warning.mdx'
+import CustomerAnalyticsBetaWarning from "./_snippets/customer-analytics-beta-warning.mdx";
 
 <CustomerAnalyticsBetaWarning />
 
@@ -31,18 +31,18 @@ A user is considered active if they triggered at least one `$pageview` event in 
 [Identify users](/docs/product-analytics/identify) when they create an account:
 
 ```js
-posthog.identify('user_123', {
-    email: 'user@example.com',
-    created_at: new Date().toISOString()
-})
+posthog.identify("user_123", {
+  email: "user@example.com",
+  created_at: new Date().toISOString(),
+});
 ```
 
 Send a `signup` event:
 
 ```js
-posthog.capture('signed_up', {
-// Props are optional, but oh, they're so useful!
-})
+posthog.capture("signed_up", {
+  // Props are optional, but oh, they're so useful!
+});
 ```
 
 Then configure this as your signup event in **Settings** > **Customer Analytics**.
@@ -52,10 +52,10 @@ Then configure this as your signup event in **Settings** > **Customer Analytics*
 Capture an event when a user upgrades to a paid plan:
 
 ```js
-posthog.capture('user_subscribed', {
-    plan: 'pro',
-    amount: 2900
-})
+posthog.capture("user_subscribed", {
+  plan: "pro",
+  amount: 2900,
+});
 ```
 
 Configure this event as your paid conversion event in **Settings** > **Customer Analytics**.
@@ -66,7 +66,6 @@ Yes. [Customer profiles](/docs/customer-analytics/customer-profiles) work with b
 The dashboard can also be used in B2B mode, showing the insights for your groups.
 
 See [B2B mode](/docs/customer-analytics/b2b-mode) to learn more about it.
-
 
 ## How do I see support tickets in customer profiles?
 
@@ -79,6 +78,32 @@ Enable [error tracking](/docs/error-tracking) in your project. Errors are automa
 ## How do I see LLM traces in customer profiles?
 
 Enable [LLM observability](/docs/ai-engineering/observability) and instrument your LLM calls. Traces are automatically associated with users and appear in their feeds.
+
+## How do I stream customer events to Slack?
+
+Set up your personal event stream:
+
+1. Go to [**Customer Analytics** > **Configuration** > **Event stream**](https://app.posthog.com/customer_analytics/configuration?tab=customer-analytics-event-stream)
+2. Select the events you want to watch
+3. Connect a Slack workspace and select a channel
+4. Save your configuration
+5. Open an account profile and use the **Include in my event stream** toggle
+
+Each team member configures their own stream — streams are personal, not shared.
+
+## Why aren't events streaming to Slack?
+
+Check these common issues:
+
+1. **Stream not enabled** – Make sure the **Enable event stream** toggle is on in your event stream settings.
+2. **No events selected** – You must select at least one event type to watch.
+3. **Slack not configured** – Verify your Slack workspace and channel are set.
+4. **No accounts in stream** – Add at least one account using the toggle on their profile.
+5. **Missing external ID** – Accounts need an `external_id` for events to be matched. Check the account profile for a warning.
+
+## Why can't I toggle an account into my event stream?
+
+The toggle is disabled until you configure your event stream. Go to [**Customer Analytics** > **Configuration** > **Event stream**](https://app.posthog.com/customer_analytics/configuration?tab=customer-analytics-event-stream) to set up your events and Slack channel first.
 
 ## Is customer analytics free?
 
