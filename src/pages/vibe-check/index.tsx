@@ -4,7 +4,7 @@ import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import SEO from 'components/seo'
 import OSButton from 'components/OSButton'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
@@ -102,7 +102,7 @@ export default function Ick() {
                     {!isFinalSlide && (
                         <header className="pb-4">
                             <h1 className="text-2xl flex items-center justify-center gap-2">
-                                You'll hate <Logo className="relative -top-px h-6 w-auto" /> if...
+                                You'll hate <Logo className="relative -top-px h-6 w-auto" width="auto" /> if...
                             </h1>
                         </header>
                     )}

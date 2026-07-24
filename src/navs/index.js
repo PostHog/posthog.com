@@ -5835,6 +5835,27 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Managed warehouse',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/data-warehouse/managed-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                },
+                {
+                    name: 'Set up your warehouse',
+                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    icon: 'IconListCheck',
+                    color: 'blue',
+                },
+                {
+                    name: 'Connect and query',
+                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Concepts',
                 },
                 {
@@ -5939,6 +5960,80 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Semantic layer',
+            url: '/docs/semantic-layer',
+            color: 'purple',
+            icon: 'IconBook',
+            description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
+            badge: {
+                title: 'Alpha',
+                className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+            },
+            children: [
+                {
+                    name: 'Semantic layer',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/semantic-layer',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/semantic-layer/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Metrics',
+                    url: '/docs/semantic-layer/metrics',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Certifications and relationships',
+                    url: '/docs/semantic-layer/certifications-and-relationships',
+                    icon: 'IconShield',
+                    color: 'purple',
+                },
+                {
+                    name: 'Governance',
+                    url: '/docs/semantic-layer/governance',
+                    icon: 'IconLock',
+                    color: 'red',
+                },
+                {
+                    name: 'Reference',
+                },
+                {
+                    name: 'MCP tools',
+                    url: '/docs/semantic-layer/mcp-tools',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'SQL reference',
+                    url: '/docs/semantic-layer/query',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/semantic-layer/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'gray',
                 },
             ],
         },
@@ -6671,14 +6766,14 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Dashboard',
-                    featured: true,
-                    url: '/docs/revenue-analytics/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
+                    name: 'Concepts',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Revenue metrics',
+                    featured: true,
+                    url: '/docs/revenue-analytics/revenue-metrics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Connect to customers',
