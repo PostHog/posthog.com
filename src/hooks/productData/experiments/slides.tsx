@@ -1,5 +1,16 @@
 import React from 'react'
-import { IconBrowser, IconFlask, IconTarget, IconGraph, IconCode, IconPlug, IconPieChart } from '@posthog/icons'
+import {
+    IconBrowser,
+    IconFlask,
+    IconTarget,
+    IconGraph,
+    IconCode,
+    IconPlug,
+    IconPieChart,
+    IconRocket,
+    IconSearch,
+    IconCheckCircle,
+} from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
@@ -9,7 +20,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Only MCP exists as ready content today – remaining application slides are a content gap.
+ * Capability detail belongs in `topFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -47,6 +58,140 @@ export const applications: CarouselSlide[] = [
                         }))}
                     />
                     <PlatformInstall />
+                </div>
+            </>
+        ),
+    },
+    {
+        slug: 'run',
+        label: 'Run a test',
+        icon: <IconRocket className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Start simple with a clear metric',
+        description: (
+            <>
+                <p>
+                    Create the experiment – which automatically creates a feature flag – then implement the flag check
+                    in your code. Launch to a slice of users and watch probability estimates roll in. Pick funnels like
+                    a signup flow, single events such as revenue, or advanced metrics like ratios.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'A/B & A/B/n tests',
+                                description: f.supported_tests.features.find((item) => item.title === 'A/B testing')
+                                    ?.description,
+                            },
+                            {
+                                label: 'Targeting',
+                                description: f.targeting_rules.headline,
+                            },
+                            {
+                                label: 'Primary & secondary metrics',
+                                description: f.experiment_types.features.find(
+                                    (item) => item.title === 'Primary & secondary metrics'
+                                )?.description,
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'overview',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'analyze',
+        label: 'Analyze',
+        icon: <IconSearch className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Read the numbers, then watch the sessions',
+        description: (
+            <>
+                <p>
+                    Bayesian and frequentist engines give statistically rigorous results so you can decide with
+                    confidence. When you need the why behind a variant, jump into session recordings for that test
+                    group, or dig deeper in product analytics than your primary metric alone.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Bayesian',
+                                description: f.statistical_methods.bayesian.subtitle,
+                            },
+                            {
+                                label: 'Frequentist',
+                                description: f.statistical_methods.frequentist.subtitle,
+                            },
+                            {
+                                label: 'Session Replay',
+                                description:
+                                    "Watch recordings of users in a variant to discover nuances in why they did or didn't complete the goal",
+                            },
+                            {
+                                label: 'Product Analytics',
+                                description:
+                                    'Run analysis based on the value of a test, or build a cohort of users from a test variant',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'home',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'ship',
+        label: 'Ship the winner',
+        icon: <IconCheckCircle className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-seagreen',
+        layout: 'stack',
+        heading: 'Roll out the winner on the same flag',
+        description: (
+            <>
+                <p>
+                    Results live in one platform, so you can check whether a change actually worked and ship the winner.
+                    If the experiment wins, roll it out gradually using the same feature flag – including JSON payloads
+                    for each variant – without jumping between tools.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Feature Flags',
+                                description:
+                                    'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
+                            },
+                            {
+                                label: 'Holdout testing',
+                                description: f.supported_tests.features.find((item) => item.title === 'Holdout testing')
+                                    ?.description,
+                            },
+                            {
+                                label: 'Shared metrics library',
+                                description: 'Create consistent, reusable metrics across all experiments',
+                            },
+                        ]}
+                    />
                 </div>
             </>
         ),
@@ -160,13 +305,47 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>{f.statistical_methods.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.statistical_methods.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
+                <div className="@container space-y-8">
+                    <div>
+                        <h3 className="text-xl font-bold text-purple mb-1">Bayesian</h3>
+                        <p className="text-secondary mb-3">{f.statistical_methods.bayesian.subtitle}</p>
+                        <LabeledList
+                            items={[
+                                ...f.statistical_methods.bayesian.whatItTells.map((item) => ({
+                                    label: item.term,
+                                    description: item.description,
+                                })),
+                                ...f.statistical_methods.bayesian.advantages.map((advantage) => ({
+                                    label: 'Advantage',
+                                    description: advantage,
+                                })),
+                                ...f.statistical_methods.bayesian.bestFor.map((item) => ({
+                                    label: 'Best for',
+                                    description: item,
+                                })),
+                            ]}
+                        />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-blue mb-1">Frequentist</h3>
+                        <p className="text-secondary mb-3">{f.statistical_methods.frequentist.subtitle}</p>
+                        <LabeledList
+                            items={[
+                                ...f.statistical_methods.frequentist.whatItTells.map((item) => ({
+                                    label: item.term,
+                                    description: item.description,
+                                })),
+                                ...f.statistical_methods.frequentist.advantages.map((advantage) => ({
+                                    label: 'Advantage',
+                                    description: advantage,
+                                })),
+                                ...f.statistical_methods.frequentist.bestFor.map((item) => ({
+                                    label: 'Best for',
+                                    description: item,
+                                })),
+                            ]}
+                        />
+                    </div>
                 </div>
             </>
         ),

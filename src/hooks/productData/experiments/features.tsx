@@ -51,7 +51,7 @@ export const features = {
                     'Run a test with no changes between variants to verify your experiment setup is working correctly and not producing false positives.',
             },
             {
-                title: 'A/B/N testing',
+                title: 'A/B/n testing',
                 description:
                     'Run experiments with three or more variants to quickly identify the best-performing option.',
             },
@@ -195,8 +195,51 @@ export const features = {
         description: "Whether you're scrappy or super smart, we've got a statistical method for you.",
         icon: <IconPieChart />,
         color: 'purple',
-        // Condensed from the previous StatisticalMethodsSlide – full advantage/best-for
-        // tables are a content gap if you want them restored as a dedicated section.
+        // Restored from the previous StatisticalMethodsSlide (exact copy).
+        bayesian: {
+            subtitle: 'Popular with tech companies, check results anytime',
+            whatItTells: [
+                {
+                    term: 'Win probability',
+                    description: 'Direct probability that one variant outperforms another',
+                },
+                {
+                    term: 'Credible intervals',
+                    description: 'The likely range of the true effect size',
+                },
+            ],
+            advantages: [
+                'Check results anytime without statistical penalties',
+                'Intuitive interpretation (“Variant A has an 85% chance of being better”)',
+                'Supports continuous monitoring and faster decision-making',
+            ],
+            bestFor: [
+                'Teams wanting flexible experiment duration',
+                'Modern product teams favoring clear, actionable results',
+            ],
+        },
+        frequentist: {
+            subtitle: 'Classical academic approach, fixed analysis',
+            whatItTells: [
+                {
+                    term: 'P-value',
+                    description: 'Probability of observing results if no real difference exists.',
+                },
+                {
+                    term: 'Confidence intervals',
+                    description: 'The likely range of the true effect size',
+                },
+            ],
+            advantages: [
+                'Matches widely used academic and industry standards',
+                'Well understood by data science communities',
+            ],
+            bestFor: [
+                'Teams familiar with p-values and classical statistics',
+                'Organizations needing to align with established methods',
+                'Standardized reporting',
+            ],
+        },
         features: [
             {
                 title: 'Bayesian',
@@ -205,22 +248,6 @@ export const features = {
             {
                 title: 'Frequentist',
                 description: 'Classical academic approach, fixed analysis',
-            },
-            {
-                title: 'Bayesian – win probability',
-                description: 'Direct probability that one variant outperforms another',
-            },
-            {
-                title: 'Bayesian – credible intervals',
-                description: 'The likely range of the true effect size',
-            },
-            {
-                title: 'Frequentist – p-value',
-                description: 'Probability of observing results if no real difference exists.',
-            },
-            {
-                title: 'Frequentist – confidence intervals',
-                description: 'The likely range of the true effect size',
             },
         ],
     },

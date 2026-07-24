@@ -8,9 +8,12 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
+    IconInfo,
     IconCursorClick,
+    IconMagic,
     IconChat,
     IconCode,
+    IconMessage,
     IconNewspaper,
 } from '@posthog/icons'
 import Link from 'components/Link'
@@ -26,12 +29,12 @@ export const experiments = {
     sharesFreeTier: 'feature_flags',
     slug: 'experiments',
     teamSlug: 'experiments',
-    // forumTopicId: /* TODO – needed for community section */,
+    forumTopicId: 350,
     color: 'purple',
     colorSecondary: 'lilac',
     category: 'product_engineering',
     wizardSupport: 'In development',
-    // shortDescription: /* TODO */,
+    shortDescription: 'Test changes with statistical significance',
     // Bundled-with-flags copy from the previous custom pricing slide – not a separate pricing story.
     pricingDescription:
         'Experiments are bundled with Feature Flags and share volume limits. First 1 million requests every month are free (access to both products); after that, usage is billed through Feature Flags requests with Experiments at no additional cost.',
@@ -49,22 +52,20 @@ export const experiments = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // Needs overview.eli5 (+ optional hogs.mobileHog) before enabling:
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // Needs useCases.intro + useCases.rows before enabling:
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -87,8 +88,7 @@ export const experiments = {
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        // Needs forumTopicId before enabling:
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
@@ -128,7 +128,7 @@ export const experiments = {
                 .
             </>
         ),
-        // eli5: /* TODO – see feature_flags.overview.eli5 for shape */,
+        eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -163,7 +163,10 @@ export const experiments = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
             alt: 'Hedgehog experimenting',
         },
-        // mobileHog: /* TODO – used by Eli5 float image; see feature_flags.hogs.mobileHog */,
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
+            alt: 'Hedgehog experimenting',
+        },
     },
     customers: {
         ycombinator: {
@@ -186,7 +189,28 @@ export const experiments = {
             description: 'I feel like, every single week, we discover something new that makes a difference.',
         },
     },
-    // useCases: /* TODO – see feature_flags.useCases for { intro, rows: [role, useCase][] } */,
+    useCases: {
+        intro: 'Experiments is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship a change behind a flag, run an A/B test, and roll out the winner without a separate release pipeline',
+            ],
+            [
+                'Product Managers',
+                'Validate onboarding, pricing, or UI changes with primary and secondary metrics before committing',
+            ],
+            [
+                'Growth Engineers',
+                'Target cohorts or geographies, run multivariate tests, and watch session replays for each variant',
+            ],
+            [
+                'Data Scientists',
+                'Run Bayesian or frequentist analysis with shared metrics, holdouts, and warehouse-backed metrics',
+            ],
+            ['B2B product teams', 'Run group-level experiments so everyone at a company sees the same variant'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -197,7 +221,7 @@ export const experiments = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // description: /* TODO – see feature_flags.installation.description */,
+        description: 'Built on feature flags – SDKs for web, mobile, and backend, plus no-code platforms.',
         productSlug: 'experiments',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks', 'no-code'],
     },
@@ -213,7 +237,7 @@ export const experiments = {
                 description: 'to verify our experiment setup produces no false positives',
             },
             {
-                title: 'A/B/N tests',
+                title: 'A/B/n tests',
                 description: 'to test lots of ideas at once',
             },
             {
@@ -368,25 +392,99 @@ export const experiments = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
         imageAlt: 'PostHog AI and experiments',
         description: 'set up experiments, read the results, and ship the winner',
-        // intro: /* TODO – see feature_flags.ai.intro; presenterNotes.ai has related MCP copy */,
+        intro: 'Ask PostHog AI to set up experiments, read the results, and ship the winner.',
         mcpFeatures: ['experiments'],
         skills: [
             'Configures experiments and variants from natural language',
             'Summarizes results, identifies likely winners, and suggests ideas for follow-up tests',
             'Spots common setup problems that would skew your statistics',
         ],
-        // Existing prompts reshaped into groups; tool names verified against mcp-tools.json.
-        // Full prompt coverage (like feature_flags.ai.groups) is a content gap.
+        // Prompts drawn from existing product copy + skillsData; tools verified in mcp-tools.json.
         groups: [
             {
                 title: 'Create',
                 tool: 'experiment-create',
-                prompts: ['Set up an A/B test with a 70/30 split for a new red button on the homepage'],
+                prompts: [
+                    'Set up an A/B test with a 70/30 split for a new red button on the homepage',
+                    'Set up and launch a homepage hero A/B test with signup as the primary metric',
+                    'Create a simple A/B test to confirm experiments work end to end',
+                ],
+            },
+            {
+                title: 'Launch',
+                tool: 'experiment-launch',
+                prompts: [
+                    'Launch my first experiment and show results',
+                    'Launch a pricing-page A/B test and watch signup conversion',
+                ],
             },
             {
                 title: 'Results',
                 tool: 'experiment-results-get',
-                prompts: ['Summarize experiment results for my latest feature rollout'],
+                prompts: [
+                    'Summarize experiment results for my latest feature rollout',
+                    'Is the new hero winning yet? Pull the experiment results',
+                    'Did the new pricing layout hurt conversion? Pull results',
+                ],
+            },
+            {
+                title: 'Stats',
+                tool: 'experiment-stats',
+                prompts: [
+                    'Is this experiment actually significant, or are we fooling ourselves?',
+                    'Check the stats and time series before we call this a win',
+                    'Confirm this test is valid before we ship',
+                ],
+            },
+            {
+                title: 'Timeseries',
+                tool: 'experiment-timeseries-results',
+                prompts: [
+                    'Show daily results for this experiment — is the lift a novelty effect?',
+                    'Plot the experiment over time, not just the summary',
+                ],
+            },
+            {
+                title: 'Ship winner',
+                tool: 'experiment-ship-variant',
+                prompts: ['Ship the winner and stop the rest'],
+            },
+            {
+                title: 'End losers',
+                tool: 'experiment-end',
+                prompts: [
+                    'Which running experiments are clearly losing? End them',
+                    'Review all experiments and clean up the dead ones',
+                ],
+            },
+            {
+                title: 'Duplicate',
+                tool: 'experiment-duplicate',
+                prompts: [
+                    'That pricing test won — clone it for the mobile flow and launch',
+                    'Duplicate this experiment onto the signup page',
+                ],
+            },
+            {
+                title: 'Archive',
+                tool: 'experiment-archive',
+                prompts: [
+                    'Archive every experiment older than 90 days that’s already shipped or stopped',
+                    'Clean up our experiments list',
+                ],
+            },
+            {
+                title: 'Find',
+                tool: 'experiment-list',
+                prompts: [
+                    'Where would an experiment move the needle most given our traffic and conversion?',
+                    'Suggest the next high-leverage test to run',
+                ],
+            },
+            {
+                title: 'Shared metrics',
+                tool: 'experiment-saved-metrics-create',
+                prompts: ['Create shared saved metrics so every experiment measures activation the same way'],
             },
         ],
     },
