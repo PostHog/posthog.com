@@ -133,7 +133,7 @@ We still use #dev-stamp-exchange when the agent can’t auto-accept or route, bu
 
 ### Steal this
 
-The code for StampHog is available [here](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
+The code for StampHog is available [in the PostHog repo](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
 
 ```llm
 Read https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md and build the equivalent for the repo at <path>. 
