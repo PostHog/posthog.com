@@ -43,8 +43,13 @@ export const better_stack = {
             debugging_integrations: {
                 features: {
                     built_in_error_tracking: true,
+<<<<<<< HEAD
                     built_in_session_replay: false,
                     product_analytics_context: false,
+=======
+                    built_in_session_replay: true,
+                    product_analytics_context: true,
+>>>>>>> master
                 },
             },
             observability: {

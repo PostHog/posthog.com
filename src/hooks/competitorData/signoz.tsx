@@ -18,7 +18,11 @@ export const signoz = {
             search: {
                 features: {
                     full_text_search: true,
+<<<<<<< HEAD
                     no_proprietary_query_language: 'SQL / Query builder',
+=======
+                    no_proprietary_query_language: true,
+>>>>>>> master
                 },
             },
             investigation_workflow: {
