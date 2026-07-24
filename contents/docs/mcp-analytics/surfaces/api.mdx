@@ -1,0 +1,48 @@
+---
+title: MCP Analytics API
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+The MCP Analytics API is in beta and requires the MCP Analytics feature preview to be enabled. Endpoints may change before general availability.
+
+</CalloutBox>
+
+Use the API to pull MCP Analytics data into your own dashboards, reports, or workflows. Reading requires the `mcp_analytics:read` scope; submitting feedback or recomputing clusters requires `mcp_analytics:write`.
+
+For the raw event stream, you can also query `$mcp_*` events directly through the [query API](/docs/api/query) – see [sample queries](/docs/mcp-analytics/queries) for HogQL recipes.
+
+## What's available
+
+**Sessions**
+
+List MCP sessions, then drill into one for its tool calls. You can also generate an intent summary for a session, fetch an intent digest, and pull an activity overview.
+
+**Intent clusters**
+
+Retrieve clustered agent intents with their tool distribution and error rates, or trigger a recompute after new data lands.
+
+**Feedback**
+
+Read and submit feedback about your MCP tools, including the client, session, and trace context it came from.
+
+**Missing capabilities**
+
+Read and submit the capability gaps agents report through the [`get_more_tools`](/docs/mcp-analytics/missing-capability) virtual tool.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) with the scopes above, passed as a bearer token:
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/mcp_sessions/
+```
+
+## Related
+
+- Explore the same data in the [web app](/docs/mcp-analytics/surfaces/web-app).
+- Query it conversationally over [MCP](/docs/mcp-analytics/surfaces/mcp).
+- See the full [PostHog API reference](/docs/api).

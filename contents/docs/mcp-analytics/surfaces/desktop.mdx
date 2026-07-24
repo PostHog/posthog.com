@@ -1,0 +1,44 @@
+---
+title: Fix MCP tools in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review and merge the [Self-driving](/docs/self-driving) work that MCP Analytics generates. Your tool call telemetry doesn't just sit in a dashboard – a scout reads it, finds tools that need fixing, and hands concrete problems to a coding agent that opens a pull request.
+
+## How a tool problem becomes a pull request
+
+A scout watches `$mcp_tool_call` events for tools that need attention:
+
+- **High failure rates** – a tool erroring far more than the rest
+- **Retries and hammering** – agents calling the same tool over and over to get what they need
+- **Slow or bloated responses** – calls that take too long or return so much that they crowd the agent's context
+
+It groups what it finds by tool category and files a report. When the problem is in a server your team owns, the report includes a **fix loop metric** – the number the fix is supposed to move – and auto-starts an implementation task. The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request.
+
+Problems found in PostHog's hosted MCP server that your team doesn't own are filed for human review instead, with no repository attached.
+
+## What you can do here
+
+- **Read the report** – the failing tool, the pattern behind it, and the evidence from real calls.
+- **Ask questions** – start a research task against the report to dig further before acting.
+- **Create a PR** – auto-started for owned servers, or kick one off manually.
+- **Watch the agent work** – follow the live transcript and review the files it changed.
+- **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
+
+Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
+
+## Start a fix yourself
+
+You don't have to wait for the scout. The **Create fix task** button on the [tool quality view](/docs/mcp-analytics/surfaces/web-app#tool-quality) starts the same coding agent run from a specific tool's failures.
+
+## Related
+
+- Explore tool quality in the [web app](/docs/mcp-analytics/surfaces/web-app).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).
