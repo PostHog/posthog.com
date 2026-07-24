@@ -4,6 +4,7 @@ export const logs = {
     name: 'Logs',
     Icon: IconActivity,
     description: 'Search and analyze your logs in PostHog',
+    productVariantName: 'Logs ingestion (14-day retention)',
     handle: 'logs',
     type: 'logs',
     slug: 'logs',
@@ -11,13 +12,43 @@ export const logs = {
     colorSecondary: 'green-2',
     category: 'product_engineering',
     wizardSupport: 'Coming soon',
+    includeAddonRates: true,
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
-        marks: [50, 100, 500, 1000, 5000],
-        min: 50,
+        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        min: 10,
+        scaleMin: 1,
         max: 5000,
     },
-    volume: 50,
+    volume: 10,
+    addonSliders: [
+        {
+            key: 'logs_retention_30d',
+            label: '30-day retention',
+            sliderConfig: {
+                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                min: 0,
+                scaleMin: 1,
+                max: 5000,
+            },
+            volume: 0,
+            unit: 'GB',
+            freeAllocation: 0,
+        },
+        {
+            key: 'logs_retention_90d',
+            label: '90-day retention',
+            sliderConfig: {
+                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                min: 0,
+                scaleMin: 1,
+                max: 5000,
+            },
+            volume: 0,
+            unit: 'GB',
+            freeAllocation: 0,
+        },
+    ],
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
