@@ -5,16 +5,14 @@ import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } 
 import Link from 'components/Link'
 import { Shadow } from '@inkeep/cxkit-react'
 import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 
 export const surveys = {
+    ...getTool('surveys'),
     Icon: IconMessage,
-    name: 'Surveys',
-    handle: 'surveys',
     type: 'surveys',
-    slug: 'surveys',
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',

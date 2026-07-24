@@ -615,6 +615,20 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         unique_users: Int
         unique_orgs: Int
     }
+    type SitePage implements Node {
+        searchContentId: String @proxy(from: "context.id")
+    }
+    type Tool implements Node @dontInfer {
+        handle: String!
+        name: String!
+        description: String
+        searchDescription: String
+        searchTitle: String
+        slug: String
+        category: String
+        status: String
+        aliases: [String!]
+    }
   `)
     createTypes([
         schema.buildObjectType({

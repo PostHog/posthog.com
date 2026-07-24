@@ -2,16 +2,14 @@ import React from 'react'
 import { IconPieChart } from '@posthog/icons'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 
 export const webAnalytics = {
+    ...getTool('web_analytics'),
     Icon: IconPieChart,
-    name: 'Web Analytics',
-    handle: 'web_analytics',
     type: 'product_analytics',
-    slug: 'web-analytics',
     color: 'green-2',
     colorSecondary: '[#37945D]',
-    category: 'analytics',
     wizardSupport: true,
     billedWith: 'Product analytics',
     seo: {

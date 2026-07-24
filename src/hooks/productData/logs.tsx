@@ -1,15 +1,12 @@
 import { IconActivity } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 export const logs = {
-    name: 'Logs',
+    ...getTool('logs'),
     Icon: IconActivity,
-    description: 'Search and analyze your logs in PostHog',
-    handle: 'logs',
     type: 'logs',
-    slug: 'logs',
     color: 'red',
     colorSecondary: 'green-2',
-    category: 'product_engineering',
     wizardSupport: 'Coming soon',
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)

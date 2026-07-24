@@ -2,18 +2,16 @@ import React from 'react'
 import { IconFlask } from '@posthog/icons'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 
 export const experiments = {
+    ...getTool('experiments'),
     Icon: IconFlask,
-    name: 'Experiments',
-    handle: 'experiments',
     type: 'feature_flags',
     billedWith: 'Feature flags',
     sharesFreeTier: 'feature_flags',
-    slug: 'experiments',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     seo: {
         title: 'Experiments – Run tests and validate ideas with PostHog',

@@ -3,17 +3,14 @@ import { IconToggle } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 
 export const featureFlags = {
+    ...getTool('feature_flags'),
     Icon: IconToggle,
-    name: 'Feature Flags',
-    description: 'Control feature access with precision',
-    handle: 'feature_flags',
     type: 'feature_flags',
-    slug: 'feature-flags',
     color: 'seagreen',
     colorSecondary: 'seagreen',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',

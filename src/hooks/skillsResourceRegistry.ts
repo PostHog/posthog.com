@@ -48,7 +48,7 @@ export const SKILL_RESOURCE_ALIASES: Record<string, AliasTarget> = {
     'Reverse ETL': { handle: 'data_out' },
     'LLM Traces': { handle: 'llm_traces' },
     Generations: { handle: 'llm_generations' },
-    Evals: { handle: 'llm_evals' },
+    Evals: { handle: 'ai_observability', label: 'Evals', href: '/docs/ai-evals' },
     Notebooks: { handle: 'notebooks' },
     Cohorts: { handle: 'product_analytics', label: 'Cohorts', href: '/docs/data/cohorts' },
     'Event tracking': {
