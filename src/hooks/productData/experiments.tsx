@@ -25,8 +25,8 @@ export const experiments = {
     name: 'Experiments',
     handle: 'experiments',
     type: 'feature_flags',
-    billedWith: 'Feature flags',
-    sharesFreeTier: 'feature_flags',
+    // Billed as feature flag requests – Plans/calculator resolve against this billing product.
+    billingType: 'feature_flags',
     slug: 'experiments',
     teamSlug: 'experiments',
     forumTopicId: 350,
@@ -34,10 +34,21 @@ export const experiments = {
     colorSecondary: 'lilac',
     category: 'product_engineering',
     wizardSupport: 'In development',
+    billedWith: 'Feature Flags',
+    billedWithSlug: 'feature-flags',
     shortDescription: 'Test changes with statistical significance',
     // Bundled-with-flags copy from the previous custom pricing slide – not a separate pricing story.
     pricingDescription:
         'Experiments are bundled with Feature Flags and share volume limits. First 1 million requests every month are free (access to both products); after that, usage is billed through Feature Flags requests with Experiments at no additional cost.',
+    pricingLead:
+        'Experiments are bundled with Feature Flags and share volume limits, so you get access to both products for the same price.',
+    pricingHighlights: [
+        '1 million requests free every month',
+        'Usage billed as Feature Flags requests after the free tier',
+        'Experiments at no additional cost',
+    ],
+    pricingFooter: 'Same request meter as Feature Flags – no separate Experiments SKU.',
+    pricingEventsLink: false,
     seo: {
         title: 'Experiments – Run tests and validate ideas with PostHog',
         description:
@@ -105,8 +116,8 @@ export const experiments = {
     ],
     /**
      * Sections rendered on the Pricing surface (`/experiments/pricing`).
-     * Billing resolves via `sharesFreeTier: 'feature_flags'` – calculator/plans
-     * load Feature Flags tiers, not a separate Experiments product.
+     * Plans/calculator use Feature Flags billing via `billingType` + pricing copy
+     * (same pattern as Web Analytics → Product Analytics).
      */
     pricingMenu: [
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
@@ -168,6 +179,13 @@ export const experiments = {
             alt: 'Hedgehog experimenting',
         },
     },
+    // Same request volume slider as feature flags (experiments is billed with it).
+    slider: {
+        marks: [1000000, 10000000, 100000000, 1000000000],
+        min: 1000000,
+        max: 1000000000,
+    },
+    volume: 1000000,
     customers: {
         ycombinator: {
             headline: 'boosted community engagement by 40%',
