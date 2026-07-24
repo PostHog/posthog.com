@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { SectionComponentProps } from '../types'
 import CloudinaryImage from 'components/CloudinaryImage'
 
@@ -57,10 +57,11 @@ const ComparisonSummary = ({ id, productData }: SectionComponentProps) => {
                     <h3 className="text-lg font-bold text-primary mt-0 mb-2">
                         Go with{' '}
                         <Logo
-                            wordmark={false}
+                            layout="logomark"
                             variant="mono"
-                            color="primary"
-                            className="h-6 inline-block -mb-1 mx-0.5"
+                            color="currentColor"
+                            className="text-primary h-6 inline-block -mb-1 mx-0.5"
+                            width="auto"
                         />{' '}
                         if...
                     </h3>

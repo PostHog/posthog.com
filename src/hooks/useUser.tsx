@@ -194,8 +194,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
 
     // Shared post-authentication steps once a JWT has been obtained (via password
-    // login or an OAuth provider): hydrate the user, persist the token, and run
-    // the distinct-id link + achievements check.
+    // login or an OAuth provider): hydrate the user and persist the token, then
+    // fire off the distinct-id link + achievements check WITHOUT awaiting them.
     const finalizeLogin = async (token: string): Promise<User> => {
         const user = await fetchUser(token)
 
@@ -206,11 +206,16 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         localStorage.setItem('jwt', token)
         setJwt(token)
 
+        // Fire-and-forget: neither the distinct-id link nor the achievements check
+        // gates sign-in, and awaiting them adds serial round-trips to the
+        // "Signing you in…" spinner. Kick them off and return immediately; the
+        // returned `user` is unaffected (it was fetched above, before these run).
+        // `.catch` keeps a failed request from surfacing as an unhandled rejection.
         try {
             const distinctId = posthog?.get_distinct_id?.()
 
             if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
-                await fetch(`${SQUEAK_HOST}/api/users/${user.id}`, {
+                fetch(`${SQUEAK_HOST}/api/users/${user.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -219,7 +224,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                     body: JSON.stringify({
                         distinctId,
                     }),
-                })
+                }).catch((error) => console.error(error))
             }
 
             fetch(`${SQUEAK_HOST}/api/achievements/check`, {
@@ -233,7 +238,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                         date: new Date(),
                     },
                 }),
-            })
+            }).catch((error) => console.error(error))
         } catch (error) {
             console.error(error)
         }
@@ -535,22 +540,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                 },
                             },
                             avatar: true,
-                            questionSubscriptions: {
-                                filters: {
-                                    $or: [
-                                        {
-                                            archived: {
-                                                $null: true,
-                                            },
-                                        },
-                                        {
-                                            archived: {
-                                                $eq: false,
-                                            },
-                                        },
-                                    ],
-                                },
-                            },
+                            // NOTE: questionSubscriptions, teams, and notifications are
+                            // intentionally NOT populated here. This query runs on every app boot
+                            // (validateUser), and these are the heaviest relations. Nothing reads
+                            // them off the login user object: questionSubscriptions is loaded on
+                            // demand by useSubscribedQuestions (its own /me fetch), teams is never
+                            // read off `user.profile`, and notifications come from the separate
+                            // GET /api/profile/notifications call below. Don't re-add them without
+                            // a consumer that actually reads them off `user` at boot.
                             topicSubscriptions: {
                                 fields: ['slug', 'label'],
                             },
@@ -560,26 +557,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                             roadmapLikes: {
                                 fields: ['id'],
                             },
-                            teams: {
-                                fields: ['id'],
-                            },
-                            notifications: {
-                                populate: {
-                                    question: {
-                                        populate: {
-                                            replies: true,
-                                        },
-                                    },
-                                },
-                            },
                             bookmarks: true,
                             achievements: {
+                                // Only `achievement.id` is read (achieved-status check); the
+                                // rendered achievement icons/images come from a Gatsby static
+                                // query, so we don't populate achievement.image/icon here.
                                 populate: {
                                     achievement: {
-                                        populate: {
-                                            image: true,
-                                            icon: true,
-                                        },
+                                        fields: ['id'],
                                     },
                                 },
                             },

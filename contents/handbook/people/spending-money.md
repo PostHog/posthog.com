@@ -147,7 +147,7 @@ Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Ma
   - Laptop guidelines
     - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M5 Pro, with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM.
     - For sales & CS roles, we buy the Macbook Pro 14-inch M5, with 10-core GPU, 16-core and the 32GB RAM upgrade.
-    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Code.
+    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Desktop.
     - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
     - In the unlikely case that you need to purchase your own laptop:

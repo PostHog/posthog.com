@@ -128,7 +128,7 @@ Read [art and branding requests](/handbook/brand/art-requests) first!
 <details>
 <summary>I need a font, logo, etc.</summary>
 
-See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
+See [Logos, brand, hedgehogs](/handbook/brand/assets)
 </details>
 
 <details>

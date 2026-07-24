@@ -41,7 +41,7 @@ This is a rough guide to ramping up as a product manager in PostHog.
 As well as your day job with specific teams, its important we have PMs having company level impact across the following specialisms too.
 
 ### Analytics
-* You're performing analyics on how customers use our products outside of your team's scope
+* You're performing analytics on how customers use our products outside of your team's scope
 * This analysis defines how the company priorities what to build across product
 * You push the limits of what's possible in PostHog to help us build more advanced tools and you work with SQL to get answers to the most complex queries
 
