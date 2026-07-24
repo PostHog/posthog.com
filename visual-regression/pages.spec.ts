@@ -72,6 +72,28 @@ for (const route of routes) {
                     ])
                 })
             )
+
+            // Gatsby hydration and lazy components can continue changing a full page after
+            // the initial image set has loaded. Require three consecutive stable samples,
+            // while bounding the wait so a dynamic widget cannot stall the whole suite.
+            let stableSamples = 0
+            let previousHeight = 0
+            let previousElements = 0
+            const deadline = Date.now() + 5_000
+
+            while (stableSamples < 3 && Date.now() < deadline) {
+                await new Promise((resolve) => window.setTimeout(resolve, 250))
+                const height = document.documentElement.scrollHeight
+                const elements = document.body.getElementsByTagName('*').length
+
+                if (height === previousHeight && elements === previousElements) {
+                    stableSamples += 1
+                } else {
+                    stableSamples = 0
+                    previousHeight = height
+                    previousElements = elements
+                }
+            }
         })
 
         await mkdir(screenshotDirectory, { recursive: true })

@@ -225,6 +225,7 @@ jobs:
             image: ghcr.io/posthog/playwright:v1.60.0
         permissions:
             contents: read
+            pull-requests: read
 
         steps:
             - name: Checkout
@@ -283,7 +284,7 @@ jobs:
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
               with:
                   repository: PostHog/posthog
-                  ref: master
+                  ref: 8e64b74c5516ee20ba90b937c3446a64a07c6a62
                   path: vr-cli
                   sparse-checkout: |
                       products/visual_review/cli
@@ -327,7 +328,7 @@ jobs:
                     --token "$VR_TOKEN"
 
             - name: Complete Visual Review run
-              if: steps.changes.outputs.visual == 'true'
+              if: always() && steps.changes.outputs.visual == 'true' && steps.vr-create.outputs.run-id != ''
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
               run: |
