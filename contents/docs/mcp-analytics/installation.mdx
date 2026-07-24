@@ -176,6 +176,55 @@ serverMutator: (server) => {
 }
 ```
 
+## Stateless and multi-pod servers
+
+A stateless server keeps nothing between requests — a fresh server instance each time, often on a different pod. Left alone, every request becomes its own `$session_id`, and `$mcp_client_name` / `$mcp_client_version` (only sent at `initialize`) go missing from every event after the handshake.
+
+The SDK handles this with no session store and no sticky routing. At `initialize` it mints the `Mcp-Session-Id` response header as a token carrying the session id and client metadata. Clients replay that header on every subsequent request, so any pod reads the same values back — nothing changes on the client side.
+
+### Streamable HTTP needs `enableJsonResponse: true`
+
+Minting only reaches the wire in JSON mode. In SSE (streaming) mode, `StreamableHTTPServerTransport` builds the response headers *before* your `initialize` handler runs, so the minted header never lands and the SDK silently falls back to a session per request:
+
+```ts
+new StreamableHTTPServerTransport({
+  sessionIdGenerator: undefined, // stateless
+  enableJsonResponse: true,      // lets the SDK mint the session header
+})
+```
+
+Use a fresh transport per request, which stateless mode requires anyway. With [`@rekog/mcp-nest`](https://github.com/rekog-labs/MCP-Nest), set the same option on the module: `streamableHttp: { statelessMode: true, enableJsonResponse: true }`.
+
+### If you must stream (SSE)
+
+Set the header yourself at the HTTP layer with `encodeSessionId`, reading `clientInfo` off the `initialize` body. The SDK decodes it either way:
+
+```ts
+import { MCP_SESSION_HEADER, encodeSessionId, newSessionId } from "@posthog/mcp"
+
+// after parsing the POST body, before flushing response headers:
+if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
+  res.setHeader(
+    MCP_SESSION_HEADER,
+    encodeSessionId({
+      sessionId: newSessionId(),
+      clientName: body.params?.clientInfo?.name,
+      clientVersion: body.params?.clientInfo?.version,
+    })
+  )
+}
+```
+
+### When you can't use a session token
+
+Some frameworks construct the transport for you and don't expose `enableJsonResponse`, and a client that ignores the header falls back to a generated session per request either way. In both cases, group by user with [`identify`](/docs/mcp-analytics/identifying-users) — `distinct_id` groups a person's calls however many requests they span, and it requires nothing from the client. [Conversation IDs](/docs/mcp-analytics/conversation-id) give finer, per-conversation grouping when the agent cooperates.
+
+<CalloutBox icon="IconInfo" title="Python" type="fyi">
+
+Session tokens are TypeScript-only today. A Python server on a stateless deployment gets a session per request — group with `identify` as above.
+
+</CalloutBox>
+
 ## Python
 
 A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the same way [`posthog.ai`](/docs/ai-engineering) does), so there's nothing extra to install:
@@ -303,4 +352,4 @@ As soon as the wrapper is in place, every MCP request handled by the server emit
 - `$mcp_resource_read`, `$mcp_resources_list`, `$mcp_prompt_get`, `$mcp_prompts_list` as applicable
 - `$exception` whenever a tool throws or returns `isError: true`
 
-All events share a `$session_id` derived from the MCP protocol session (so the same connection always maps to the same PostHog session). See the [event reference](/docs/mcp-analytics/events) for the full catalog.
+All events share a `$session_id` derived from the MCP protocol session, so the same connection always maps to the same PostHog session — including on stateless deployments, where the SDK carries the session across pods itself (see [Stateless and multi-pod servers](#stateless-and-multi-pod-servers)). See the [event reference](/docs/mcp-analytics/events) for the full catalog.
