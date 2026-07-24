@@ -127,7 +127,7 @@ export const webAnalytics = {
     overview: {
         title: 'Privacy-focused web analytics',
         description:
-            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
+            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Built to natively work with session replay, feature flags, experiments, and surveys.',
         eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
@@ -204,7 +204,7 @@ export const webAnalytics = {
     useCases: {
         intro: 'Web Analytics is used across teams depending on your role.',
         rows: [
-            ['Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
+            ['Growth Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
             ['Founders', 'Check traffic health on a pre-built dashboard without waiting on a data team'],
             ['Product Engineers', 'Validate deploys – did pageviews, bounce rate, or Web Vitals move after ship?'],
             ['Growth Engineers', 'Find high-bounce pages, scroll drop-off, and campaign paths worth fixing'],

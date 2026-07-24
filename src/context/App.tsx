@@ -1557,12 +1557,6 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/web-analytics': {
-        toolbar: true,
-    },
-    '/feature-flags': {
-        toolbar: true,
-    },
     '/experiments': {
         toolbar: true,
     },
