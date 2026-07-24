@@ -23,7 +23,7 @@ seo:
 
 오늘날 에이전트는 당신의 프로덕트와 유저 사이에서 상호작용하는 하나의 기능이다.
 
-![프로덕트와 유저 사이의 새로운 상호작용 계층으로서의 에이전트](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent0_191d5281bd.png)
+![프로덕트와 유저 사이의 새로운 상호작용 계층으로서의 에이전트](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/agent0_191d5281bd.png)
 
 따라서 에이전트를 핵심 인터페이스로 염두에 두고 개발해야 한다.
 
@@ -128,7 +128,7 @@ AI가 초기에 등장했을 때, 개발자들은 컨텍스트와 기능 부족�
 
 스킬들은 프로덕트가 할 수 있는 것과 에이전트 툴만으로 할 수 있는 것 사이의 갭을 채워준다.
 
-![에이전트를 위한 스킬 작성](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent1_b1e92e5899.png)
+![에이전트를 위한 스킬 작성](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/agent1_b1e92e5899.png)
 
 흔히 저지를 수 있는 실수는 스킬들을 하나하나 일일이 다 일러주는 매뉴얼처럼 작성하는 것이다. 당신이 너무 세세하게 지시한다면 에이전트는 당신의 지시를 너무 철저하게 따르느라 스스로 판단해서 처리할 수 있는 능력을 잃을 것이다. 이에 관해서는 세 번째 규칙에서 설명했다.
 
@@ -172,7 +172,7 @@ PostHog에서는 이를 위해 다음과 같은 습관과 행동을 실천한다
 
 - **헤드리스 도그푸딩.** 에이전트 기능을 테스트할 때, UI보다 CLI를 먼저 사용한다. 에이전트와 같은 환경에 있게 되고, 에이전트가 경험하는 것과 똑같은 오류, 문법, 마찰을 직접 경험할 수 있다. 내부적으로 MCP 툴 설명이 예상보다 더 많은 토큰을 낭비한다는 문제를 발견했다.
 
-![CLI를 통한 헤드리스 도그푸딩](https://res.cloudinary.com/dmukukwp6/image/upload/c_scale,w_0.75,fl_relative/q_auto,f_auto/Frame_10150_e3bde237da.png)
+![CLI를 통한 헤드리스 도그푸딩](https://res.cloudinary.com/dmukukwp6/image/upload/c_scale,w_0.75,fl_relative/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/Frame_10150_e3bde237da.png)
 
 - **수동 추적 리뷰 시간 갖기.** 매주 추적 리뷰 시간을 갖고, 사용자 피드백 평점이 달린 실제 사용자 세션을 검토한다. 예를 들어 PostHog AI가 피처 플래그가 예약 출시를 지원하지 않는다고 자신 있게 말했다가 이를 철회한 케이스를 발견했다. 에이전트가 응답했으니 자동화 테스트로는 파악할 수 없었고, 응답이 틀렸을 뿐이다.
 
