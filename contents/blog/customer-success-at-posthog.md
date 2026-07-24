@@ -2,22 +2,22 @@
 title: "How customer success is different at PostHog"
 date: 2026-06-08
 author:
-    - tyler-crandall
+  - tyler-crandall
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/haha3_c997bbaf98.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/haha3_c997bbaf98.png
 featuredImageType: full
 category: General
 tags:
   - Inside PostHog
   - Guides
 seo:
-    metaTitle: "What does a customer success manager actually do all day?"
-    metaDescription: "Inside what customer success managers and technical account managers do all day at PostHog: debug code, cut bills 20%, ship fixes in 24 hours."
+  metaTitle: "What does a customer success manager actually do all day?"
+  metaDescription: "Inside what customer success managers and technical account managers do all day at PostHog: debug code, cut bills 20%, ship fixes in 24 hours."
 ---
 
-Despite their name, customer success managers at many SaaS companies don’t actually help their customers succeed. They send quarterly business reviews nobody reads, gatekeep engineering access, forward support tickets and call it "advocacy," have titles like "Strategic Customer Success Partner," and LinkedIn bios that say "passionate about driving outcomes."  
+Despite their name, customer success managers at many SaaS companies don’t actually help their customers succeed. They send quarterly business reviews nobody reads, gatekeep engineering access, forward support tickets and call it "advocacy," have titles like "Strategic Customer Success Partner," and LinkedIn bios that say "passionate about driving outcomes."
 
-Besides doing none of these things at PostHog, customer success managers (and technical account managers) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves. 
+Besides doing none of these things at PostHog, customer success managers (and technical account managers) also crochet hedgehogs, hand-deliver donuts to customers around the world, build customer and PostHog emoji mashups, and ship product PRs to fix complaints themselves.
 
 We believe being genuine and being effective aren’t at odds, and our workdays reflect that. Here’s what a day in the life of a PostHog customer success manager (CSM) – and our technical account managers (TAMs) – actually looks like:
 
@@ -27,7 +27,7 @@ I open my laptop and the first thing I see is a message from one of our EU teamm
 
 ![Customer success manager reviewing a churn alert in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_06_08_at_14_18_33_2x_adf2a96fde.png)
 
-It turns out to be a false alarm from a Stripe mapping bug. The customer had two subscriptions, one got cancelled, and our system tracked the wrong one. This was diagnosed in about four minutes. 
+It turns out to be a false alarm from a Stripe mapping bug. The customer had two subscriptions, one got cancelled, and our system tracked the wrong one. This was diagnosed in about four minutes.
 
 His response wasn't to wait for someone to fix the data. His unhinged response was "I could actually use that for my intro to the customer!” because he hadn’t found an in with them yet. So he posted a message in a shared customer channel: “Look I already chased and solved something for you. Hope you don't mind me taking the credit." The customer laughed, we laughed, and it was the start of this customer being more engaged with us.
 
@@ -59,7 +59,7 @@ Render a compact scorecard, not a wall of text:
 - **Products being trialed:** anything with real usage but little or no spend yet.
 - **One headline signal:** the single thing worth reacting to – color-coded as warning / good / risk / neutral.
 
-> One trap worth calling out: being *enrolled* in a product means nothing. Only show a product if there's real spend **or** real usage behind it.
+> One trap worth calling out: being _enrolled_ in a product means nothing. Only show a product if there's real spend **or** real usage behind it.
 
 ## 3. Recommend before listing
 
@@ -73,52 +73,59 @@ Pick the 1–2 highest-leverage paths and state them as a one-line headline with
 - All activity tracing to one person → Broaden the relationship
 - Low health score or no recent activity → Reconnect first, analyze second
 
-If nothing stands out, say so plainly: *"No standout signal – pick a path below."*
+If nothing stands out, say so plainly: _"No standout signal – pick a path below."_
 
 ## 4. Present the menu
 
 After the recommendation, offer the full set so the user can reply with a code (or two):
 
 ### A. Product / use case
+
 - A1. Deep dive on a specific product
 - A2. Deep dive on a specific use case
 - A3. Cross-sell scan (products with fit signals but no spend)
 - A4. "About to graduate" watch (free-tier usage approaching first billable threshold)
 
 ### B. Users
+
 - B1. Top power users
 - B2. Investigate a specific user
 - B3. Single-point-of-failure check (is one person all the activity?)
 - B4. Stakeholder map (admins vs. power users vs. who's actually in the loop)
 
 ### C. Trends & growth
+
 - C1. Revenue trajectory (recent months, current month projected)
 - C2. A specific metric over time
 - C3. Usage / workload change over time
 - C4. Comprehensive workload view (B1 + C1 + C3 stitched into one summary)
 
 ### D. Risk & contract
+
 - D1. Annual conversion fit
 - D2. Credit runway / burn rate
 - D3. Health score drivers (what's pulling it down)
 - D4. Recent calls / notes – "where we left off"
 
 ### E. Action
+
 - E1. Next-step recommendation
 - E2. Draft a customer message
 - E3. Update the account plan note
 - E4. Stub a cross-sell opportunity
 
 ### F. Retro
+
 - F1. Win or risk retro
 ```
+
 </details>
 
 ## 9:00 AM: The part where we try to reduce a customer's bill
 
 This is the part that confuses people from other SaaS companies.
 
-The logic: if we optimize a customer implementation and reduce spend in areas that don't provide real value, they'll spend more over the long haul, adopt more products, and [be stickier](/product-engineers/customer-retention-metrics). 
+The logic: if we optimize a customer implementation and reduce spend in areas that don't provide real value, they'll spend more over the long haul, adopt more products, and [be stickier](/product-engineers/customer-retention-metrics).
 
 I helped an account cut about 20% of their bill by removing [autocapture noise](/docs/product-analytics/autocapture) and tuning their [session replay](/docs/session-replay/how-to-control-which-sessions-you-record) sampling. They were skeptical of us at the time, honestly. They’ve now onboarded three new teams, adopted four more products, and burned through their annual credit commitment eight months early. We re-signed them at roughly double the original contract value, and the conversation was easy because they trusted us. That trust started with "hey, you're overpaying."
 
@@ -128,25 +135,25 @@ We are literally tracking our "anti-revenue" wins over time because we find that
 
 A customer's engineering team pings the shared channel: their experiment results look wrong. Conversion rates are impossibly high in the control group. Could be a bug in PostHog, could be something on their end.
 
-This is not unusual. Most product-led customers (the ones our CSMs and TAMs inherit) self-serve their implementation.  
+This is not unusual. Most product-led customers (the ones our CSMs and TAMs inherit) self-serve their implementation.
 
-So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly. 
+So we spend an hour on a call walking their engineers through it. It's not glamorous work. But this is also a good chunk of what a PostHog customer success account manager or TAM actually does: getting into the technical weeds of someone else's codebase and making sure PostHog is implemented correctly.
 
 ## 11:00 AM: The donut run
 
 We recently had some team members visit customer offices with boxes of donuts, [PostHog merch](/merch), and a hand-written note. Just because it was a Friday. No agenda.
 
-At a ~~normal~~ boring company, visiting a customer office requires a business justification, a travel approval form, and probably a slide deck about the ROI of donuts. Here, the vibe is "I'm nearby and I have hedgehog stickers." Our CSMs [are the drivers](/handbook/values) and it’s up to them to decide what the best way to interact with a customer is. 
+At a ~~normal~~ boring company, visiting a customer office requires a business justification, a travel approval form, and probably a slide deck about the ROI of donuts. Here, the vibe is "I'm nearby and I have hedgehog stickers." Our CSMs [are the drivers](/handbook/values) and it’s up to them to decide what the best way to interact with a customer is.
 
 ## 12:00 PM: Accidentally shipping product
 
 One of our newer TAMs saw a customer complain about a minor papercut in their Slack channel: they couldn’t paste markdown into notebooks. Most TAMs would file a ticket, follow up in a week, and maybe escalate to engineering.
 
-This TAM used [PostHog Code](/desktop) to [open a PR](https://github.com/PostHog/posthog/pull/59142).
+This TAM used [PostHog Desktop](/desktop) to [open a PR](https://github.com/PostHog/posthog/pull/59142).
 
 Within 12 hours, the fix was ready for review. Within 24 hours, it was merged. The customer's response: "I understand why people love PostHog now."
 
-This isn't that unusual here. Our TAMs and CSMs are technical. We hire for it. 
+This isn't that unusual here. Our TAMs and CSMs are technical. We hire for it.
 
 Another CSM got mistaken for a product engineer by one of his customers because he was answering their technical questions with so much depth. His response in our team channel: "chat, am I adding too much value?"
 
@@ -178,11 +185,8 @@ A technical account executive built the quoting and pricing tool we use for gene
 
 A customer shared a screenshot in their Slack channel where [PostHog AI](/ai) tried to cross-sell them on additional products. Not because we coded it for that, but because it understood their usage patterns and connected them to use cases they hadn't explored.
 
-Working at PostHog is a grab bag of weird, fun, intense, goofy, and hard work. All rolled into a single day. Things move really fast here, but not in a 996 type of way. In a “high agency, self-motivated, we care about the product, brand, and customers” type of way. 
+Working at PostHog is a grab bag of weird, fun, intense, goofy, and hard work. All rolled into a single day. Things move really fast here, but not in a 996 type of way. In a “high agency, self-motivated, we care about the product, brand, and customers” type of way.
 
 The weird stuff isn't a distraction from the real work because it’s how we do the real work. Being genuine and being effective aren't at odds. If anything, the customer who got a crocheted hedgehog is probably more likely to take your call about trying that new product we launched than the one who got a quarterly business review PDF.
 
-If you think this sounds like a place you'd want to work, [we're always hiring](/careers/technical-customer-success-manager). 
-
-
-
+If you think this sounds like a place you'd want to work, [we're always hiring](/careers/technical-customer-success-manager).
