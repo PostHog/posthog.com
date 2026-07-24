@@ -389,7 +389,8 @@ export const experiments = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Experiments directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
+        // Distinct from hogs.mobileHog (test-tube hog on Eli5) – flask mascot from the PostHog AI page.
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
         imageAlt: 'PostHog AI and experiments',
         description: 'set up experiments, read the results, and ship the winner',
         intro: 'Ask PostHog AI to set up experiments, read the results, and ship the winner.',
