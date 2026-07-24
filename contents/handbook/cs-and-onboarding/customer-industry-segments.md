@@ -128,6 +128,7 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 
 </details> 
 
+<details> 
 <summary>AI & Data playbook</summary>
 
 ### AI & Data description
