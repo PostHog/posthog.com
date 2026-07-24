@@ -35,7 +35,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 ![Slack thread asking devs how they review agent-generated code, with a joke reply meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662228/stop_being_the_code_review_bottleneck_1_slack_thread_8ca1a6a450.jpg)
 
-The goal is to offload the simpler reviews to agents, and flag if something genuinely needs a human.
+The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-in-a-month#more-prs-means-more-review-but-humans-dont-need-to-do-them-all).
 
 The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of their own blind spots.[^1]
 
@@ -133,7 +133,7 @@ We still use #dev-stamp-exchange when the agent can’t auto-accept or route, bu
 
 ### Steal this
 
-The code for StampHog is available [here](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
+The [code for StampHog](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/) is available in our monorepo. Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
 
 ```llm
 Read https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md and build the equivalent for the repo at <path>. 

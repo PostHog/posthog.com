@@ -56,7 +56,7 @@ By looping back, the LLM is able to execute across dozens of steps, while contin
 
 ## 3. A single loop beats subagents
 
-Even in an agentic loop, it's tempting to organize task execution into specialized subagents. Doesn't it feel so clever to come up with these architectures? "The Widget CEO will delegate work to the Widget Engineer, and then the work will be verified by the Widget Tester, with input from the Widget Product Manager".
+Even in an agentic loop, it's tempting to organize task execution into [specialized subagents](/blog/10k-prs-in-a-month#more-prs-means-more-review-but-humans-dont-need-to-do-them-all). Doesn't it feel so clever to come up with these architectures? "The Widget CEO will delegate work to the Widget Engineer, and then the work will be verified by the Widget Tester, with input from the Widget Product Manager".
 
 While the idea is smart, the results are… dumb. Context is everything for an LLM - when every layer of abstraction introduces loss of context, the ability to string tools together and self-correct course washes away. Subagents still have their place – when you're looking to parallelize work, that's the way to go. What's important is that the delegated tasks are self-contained, and ideally independent.
 

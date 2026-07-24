@@ -49,7 +49,7 @@ Good examples of loops include:
 
 - **Bug fixer.** The goal is to fix the bug. The context is the bug report and error trace. The evaluation is the test suite, snapshots, logs.
 
-- **Flaky test hunter.** The goal is to kill flaky tests. The context is CI history and retry logs. The eval is consecutive green runs.
+- **Flaky test hunter.** The goal is to [kill flaky tests](/blog/10k-prs-in-a-month#battling-the-bottleneck-of-ci). The context is CI history and retry logs. The eval is consecutive green runs.
 
 - **Performance autoresearcher.** The goal is to beat a benchmark. The context is the system, metrics, and budget. The eval is whether it is faster, better, etc. on that metric. We recently used Karpathy's autoresearcher loop and it [fixed a 3-year-old bug in our query engine](/blog/karpathy-autoresearch-query-engine-bug) and increased performance by 11%.
 

@@ -57,6 +57,6 @@ Both of the other PRs landed on the same surface – the taxonomic filter and pr
 
 ## You still decide what ships
 
-To be clear about what "opens a PR on its own" means: the pipeline opens drafts, not merges. A human reviews before anything ships – at the time of writing, one of these three PRs is already merged, the other two are waiting. But everything up to that point, like noticing the struggle, grouping it across sessions, finding the exact line of code, and writing the fix, happened without a human interfering.
+To be clear about what "opens a PR on its own" means: the pipeline opens drafts, not merges. [A human reviews before anything ships](/blog/10k-prs-in-a-month#more-prs-means-more-review-but-humans-dont-need-to-do-them-all) – at the time of writing, one of these three PRs is already merged, the other two are waiting. But everything up to that point, like noticing the struggle, grouping it across sessions, finding the exact line of code, and writing the fix, happened without a human interfering.
 
 Replay Vision is currently in closed beta. Point a scanner at a flow you care about, and let it read the sessions you'd never have time to watch. Join the [Replay Vision waitlist](/replay-vision) and be among the first to know when it's out.
