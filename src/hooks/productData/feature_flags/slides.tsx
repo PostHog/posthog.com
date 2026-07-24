@@ -8,6 +8,7 @@ import {
     IconFlask,
     IconPlug,
     IconRocket,
+    IconSearch,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
@@ -16,6 +17,10 @@ import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall from 'components/PlatformInstall'
 
+/**
+ * Applications = workflows / ways you show up to the product (like session replay's
+ * Editor / Search / Browse). Capability detail belongs in `topFeatures`.
+ */
 export const applications: CarouselSlide[] = [
     {
         slug: 'editor-mcp',
@@ -57,44 +62,22 @@ export const applications: CarouselSlide[] = [
         ),
     },
     {
-        slug: 'rollouts',
-        label: 'Rollouts',
+        slug: 'ship',
+        label: 'Ship',
         icon: <IconRocket className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
         layout: 'stack',
-        heading: 'Ship to a slice of users, then ramp up',
+        heading: 'Wrap the change, start small, then ramp up',
         description: (
             <>
                 <p>
-                    Wrap new code in a flag and release it on your terms. Start at 1-5%, watch metrics and session
-                    replays for that cohort, then increase the percentage when you're confident – or kill the flag
-                    instantly if something breaks.
+                    Open Feature Flags, create a flag, and put it around the new code. Start at 1–5%, watch metrics and
+                    session replays for that cohort, then increase the percentage when you're confident – or turn the
+                    flag off instantly if something breaks. No redeploy required for the kill switch.
                 </p>
-                <div className="@container">
-                    <LabeledList
-                        columns={[1, 2]}
-                        items={[
-                            {
-                                label: 'Phased rollouts',
-                                description: 'Ship to a percentage of traffic, monitor, then gradually increase.',
-                            },
-                            {
-                                label: 'Kill switches',
-                                description: 'Disable a broken feature without redeploying.',
-                            },
-                            {
-                                label: 'Canary releases',
-                                description: 'Validate with a small cohort before everyone else sees it.',
-                            },
-                            {
-                                label: 'Internal testing',
-                                description: "Target your team's emails or an internal users cohort first.",
-                            },
-                        ]}
-                    />
-                </div>
+                <p>Same flow for canaries and internal dogfooding: target your team's emails first, then open it up.</p>
             </>
         ),
         image: {
@@ -105,36 +88,35 @@ export const applications: CarouselSlide[] = [
         },
     },
     {
-        slug: 'targeting',
-        label: 'Targeting',
-        icon: <IconTarget className="size-5" />,
+        slug: 'investigate',
+        label: 'Investigate',
+        icon: <IconSearch className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'Show the right thing to the right people',
+        heading: 'When a rollout looks wrong, dig in',
         description: (
             <>
                 <p>
-                    Target by person or group properties, cohorts, or traffic percentage – including AND/OR logic when
-                    you need it specific. Use the same flags for beta opt-ins, entitlements, and remote config payloads
-                    so you can change copy or behavior without a deploy.
+                    Release a feature to 10% of users, then filter analytics by that flag. Conversion dropped? Watch
+                    session replays for just those users. See the problem, fix it, roll out wider – same person
+                    properties and flag values across the stack.
                 </p>
                 <div className="@container">
                     <LabeledList
                         items={[
                             {
-                                label: f.release_conditions.title,
-                                description: f.release_conditions.description,
+                                label: 'Filter by flag',
+                                description: 'Run insights or funnels limited to a flag value or variant.',
                             },
                             {
-                                label: f.early_access.title,
-                                description: f.early_access.description,
+                                label: 'Watch the cohort',
+                                description: 'Open matching session replays for the people who got the change.',
                             },
                             {
-                                label: f.payloads.title,
-                                description:
-                                    'JSON payloads let you change text, visuals, or behavior from PostHog without a code deploy.',
+                                label: 'Confirm evaluation',
+                                description: 'Check who hit the flag, override locally, or toggle it in the toolbar.',
                             },
                         ]}
                     />
