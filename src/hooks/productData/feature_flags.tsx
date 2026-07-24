@@ -16,7 +16,6 @@ import {
     IconMessage,
     IconNewspaper,
 } from '@posthog/icons'
-import Link from 'components/Link'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
 
@@ -115,21 +114,8 @@ export const featureFlags = {
     ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description: (
-            <>
-                Feature flags are one of the tools that make your product self-driving: the control layer agents use to
-                roll a change out and roll it back. Test changes with small groups of users before rolling out wider,
-                then analyze usage with{' '}
-                <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
-                    Product Analytics
-                </Link>{' '}
-                and{' '}
-                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
-                    Session Replay
-                </Link>
-                .
-            </>
-        ),
+        description:
+            'Feature Flags is one of the tools that makes your product self-driving: the control layer agents use to roll a change out and roll it back. Built to work natively with product analytics, session replay, experiments, and surveys.',
         eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
@@ -377,8 +363,9 @@ export const featureFlags = {
                 "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         },
         {
-            slug: 'product-analytics',
-            description: "User paths: See how a flag's value influenced an intended outcome",
+            slug: 'experiments',
+            description:
+                'Run A/B tests on top of the same flags, with statistical significance tracking for each variant',
         },
         {
             slug: 'session-replay',
