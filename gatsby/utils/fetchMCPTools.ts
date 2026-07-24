@@ -66,7 +66,10 @@ async function fetchExecCommandsMarkdown(): Promise<string | null> {
             throw new Error(`Failed to fetch MCP exec command reference: ${response.status}`)
         }
 
-        return await response.text()
+        const markdown = await response.text()
+        // react-markdown renders raw HTML (like the fragment's generated-file notice) as
+        // literal text, so strip comments before the markdown reaches the page.
+        return markdown.replace(/<!--[\s\S]*?-->\s*/g, '')
     } catch (error) {
         console.error('Error fetching MCP exec command reference:', error)
         return null
