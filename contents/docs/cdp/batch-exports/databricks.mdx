@@ -230,3 +230,22 @@ However, you should use `STRING` if:
 - You're using Databricks Runtime older than 15.3
 - You need to export the data to another system that doesn't support VARIANT
 - You prefer to handle JSON parsing in your application code
+
+
+### Why am I getting a "warehouse is stopped" error?
+
+If your batch export fails with an error like "Failed to execute 'USE CATALOG': warehouse is stopped", it means your Databricks SQL warehouse was not running when PostHog tried to export data.
+
+This error is non-retryable, meaning the batch export fails immediately rather than retrying.
+
+**To fix this:**
+
+1. Go to your Databricks workspace.
+2. Navigate to **SQL Warehouses**.
+3. Find the warehouse configured for your batch export.
+4. Start the warehouse if it's stopped.
+5. Re-run the failed batch export from PostHog.
+
+**To prevent this:**
+
+Consider configuring your SQL warehouse to auto-start when queries arrive, or ensure it's running before scheduled batch exports.
