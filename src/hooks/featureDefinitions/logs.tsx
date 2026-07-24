@@ -24,7 +24,8 @@ export const logsFeatures = {
         features: {
             centralized_log_ingestion_search: {
                 name: 'Centralized log ingestion & search',
-                description: 'Collect logs from applications and infrastructure, then search and filter them in one place',
+                description:
+                    'Collect logs from applications and infrastructure, then search and filter them in one place',
             },
             live_tail_real_time_logs: {
                 name: 'Live tail & real-time logs',
@@ -83,7 +84,8 @@ export const logsFeatures = {
         features: {
             built_in_error_tracking: {
                 name: 'Built-in error tracking',
-                description: 'Group exceptions into issues so teams can triage, assign, and debug errors alongside logs',
+                description:
+                    'Group exceptions into issues so teams can triage, assign, and debug errors alongside logs',
             },
             built_in_session_replay: {
                 name: 'Built-in session replay',
