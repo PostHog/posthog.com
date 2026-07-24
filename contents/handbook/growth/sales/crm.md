@@ -57,11 +57,9 @@ If the submission is clearly a support or billing request, you don’t need to r
 - This automatically creates a Zendesk ticket for the correct team.
 - No manual outreach is needed; automation handles it.
 
-### Zendesk Integration
+### Leads from support tickets
 
-If you add "sf-lead" tag to a ticket in Zendesk, a new lead will be automatically created in Salesforce. This helps streamline the process of converting support questions or tickets into potential sales opportunities directly from Zendesk.
-
-If you see "Zendesk" as the lead source, please review the ticket under the Zendesk widget in Salesforce which allows you to view the full context within salesforce. It will also appear in sales_form_message field for quick review of last request before the Zendesk ticket is converted to a lead.
+If the support team spots a sales opportunity in a support ticket, they post it in #group-cs-sales-support for sales/CS to pick up (see [handling sales leads](/handbook/support/customer-support#handling-sales-leads)). If you pick one up, add it to Salesforce as described in [manual entry](#manual-entry).
 
 ### Forwarding sales opportunities
 
@@ -143,7 +141,7 @@ When you disqualify a task, choose the picklist reason that best matches the sit
 - **No Response – Prospect** — They showed qualifying signals but went dark; create a **follow-up task** with a date (revisit in roughly 3–6 months).
 - **Below Sales Assist Threshold – Pass** — TAE judged under ~$20K potential with no signals worth revisiting.
 - **Below Sales Assist Threshold – Prospect** — Same economic band but signals worth another pass (ICP, growth, usage); create a **follow-up task** (e.g. BDR or named list). If nothing happens within ~90 days, revisit whether this split is useful.
-- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
+- **Using Competitor / Unsolicited RFP** — Locked in or chose a competitor; set a reminder to check in about **9 months** (see [new sales playbook](/handbook/growth/sales/new-sales)).
 - **Other** — Requires a free-text comment when selected; if a large share of disqualifications land here, propose a new reason.
 
 ### Manual entry

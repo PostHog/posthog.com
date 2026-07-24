@@ -45,6 +45,10 @@ Before the quarter starts, review each account and remove those that meet any of
 - **Fully expanded and committed** – if the account has all 3 core products adopted (Session Replay, Feature Flags, Error Tracking), has a discount agreement in place, and has no viable levers for net new revenue, they should go to a CSM
 - **No viable expansion levers** – if there's genuinely no path to growth, it shouldn't be consuming TAM bandwidth.  You need to document what you've tried here so that we know all avenues for growth have been exhausted.
 
+If criteria is met, let the customer know their slack channel will be archived, and direct them to the typical support paths. A warm transition call for more engaged customers is likely preferred. Internally, create a [handover note](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover) against the customer in Vitally with all relevant information, for future team members to pick the account back up if needed. If the customer was previously above $20k and decreased usage significantly, include details on what went wrong (similar to a churn retro).
+
+Team leads should populate the `previous owner` trait in Vitally with the current owner's email.
+
 ### What is NOT a valid reason to hand off
 
 Low engagement or an account being "difficult to work with" is not a reason to pass them off. That's literally your job. Specifically:
@@ -193,7 +197,7 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 - [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
 - [ ] **Product adoption** – which products are they paying for? What's underutilized?
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
-- [ ] **Support history** – recent Zendesk tickets, tags, severity, resolution status
+- [ ] **Support history** – recent tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets), tags, priority, resolution status
 - [ ] **Conversations & notes** – read all Vitally notes, meeting summaries, and conversation history
 - [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
 - [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Vitally.

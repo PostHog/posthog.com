@@ -92,7 +92,7 @@ Our brand is a reflection of us and [how we’re experienced by others](/blog/br
 
 **Words:** Naming products is hard. Same goes for naming events and writing their descriptions. As a prerequisite, read our primer on [writing for developers](/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And then again ask yourself, "would I attend this?" 
 
-**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
+**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/brand/assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
 
 ### Event recaps
 

@@ -1,5 +1,7 @@
 import { GatsbyNode } from 'gatsby'
 
+import fs from 'fs'
+import path from 'path'
 import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
 import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'
@@ -152,68 +154,188 @@ const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>)
     }
 }
 
-export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
-    const { createNode } = actions
+// The API schema endpoint takes ~9s server-side to generate its ~13MB response, which
+// would otherwise be the longest wait in "source and transform nodes". The build script
+// starts scripts/prefetch-api-spec.mjs before gatsby boots; loadApiSpec() consumes its
+// output, waiting briefly on the in-flight marker before falling back to fetching
+// inline. primeApiSpec() is called (not awaited) from onPreBootstrap; sourceApiEndpoints
+// below awaits the same promise, so failures still surface exactly where they used to.
+const API_SPEC_PREFETCH_FILE = path.resolve(__dirname, '../.api-spec-prefetch.json')
+const API_SPEC_PREFETCH_PENDING = `${API_SPEC_PREFETCH_FILE}.pending`
+// Anything older belongs to a previous (crashed) run — ignore it and fetch inline.
+const API_SPEC_PREFETCH_MAX_AGE_MS = 5 * 60 * 1000
 
+const readFreshPrefetchedSpec = (expectedUrl: string): any | null => {
+    try {
+        const stat = fs.statSync(API_SPEC_PREFETCH_FILE)
+        if (Date.now() - stat.mtimeMs < API_SPEC_PREFETCH_MAX_AGE_MS) {
+            const envelope = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_FILE, 'utf-8'))
+            // Only trust a prefetch fetched from the URL this build is configured for — a
+            // leftover from a run against a different POSTHOG_OPEN_API_SPEC_URL (or the
+            // pre-envelope file format) must not leak into this build's api_endpoint nodes.
+            if (envelope?.url === expectedUrl && envelope.spec) {
+                return envelope.spec
+            }
+        }
+    } catch {
+        // Missing or unreadable — caller falls back.
+    }
+    return null
+}
+
+const isPrefetchInFlight = (expectedUrl: string): boolean => {
+    try {
+        const stat = fs.statSync(API_SPEC_PREFETCH_PENDING)
+        if (Date.now() - stat.mtimeMs >= API_SPEC_PREFETCH_MAX_AGE_MS) {
+            return false
+        }
+        const marker = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_PENDING, 'utf-8'))
+        return marker?.url === expectedUrl
+    } catch {
+        return false
+    }
+}
+
+async function loadApiSpec(): Promise<any> {
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
-    const spec = await fetch(openApiSpecUrl, {
+
+    const prefetched = readFreshPrefetchedSpec(openApiSpecUrl)
+    if (prefetched) return prefetched
+
+    // A prefetch for this same URL started alongside this build may still be in
+    // flight — give it a bounded window to land before fetching inline.
+    for (let waited = 0; isPrefetchInFlight(openApiSpecUrl) && waited < 20000; waited += 250) {
+        await new Promise((resolve) => setTimeout(resolve, 250))
+        const spec = readFreshPrefetchedSpec(openApiSpecUrl)
+        if (spec) return spec
+    }
+
+    return fetch(openApiSpecUrl, {
         headers: {
             Accept: 'application/json',
         },
     }).then((res) => res.json())
+}
 
-    const parser = new OpenAPIParser(spec)
-    const menu = MenuBuilder.buildStructure(parser, {} as any)
+let apiSpecPromise: Promise<any> | null = null
+export function primeApiSpec(): void {
+    if (!apiSpecPromise) {
+        apiSpecPromise = loadApiSpec()
+        // Swallow rejections on a side-listener so an early failure doesn't raise an
+        // unhandled rejection before sourceNodes awaits the original promise.
+        apiSpecPromise.catch(() => {})
+    }
+}
 
-    const allSchemas = spec.components?.schemas || {}
+export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
+    const { createNode } = actions
 
-    let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-    const maxEndpointItems = 20
-    all_endpoints = all_endpoints.flatMap((endpoint) => {
-        if (endpoint.items.length > maxEndpointItems) {
-            const chunks = []
-            for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
-                const pos = Math.floor(i / maxEndpointItems)
-                const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
-                const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
-                const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
-                const chunk = {
-                    ...endpoint,
-                    name,
-                    items: endpoint.items.slice(i, i + maxEndpointItems),
-                    next,
-                    previous,
+    const sourceApiEndpoints = async () => {
+        primeApiSpec()
+        const spec = await apiSpecPromise
+
+        const parser = new OpenAPIParser(spec)
+        const menu = MenuBuilder.buildStructure(parser, {} as any)
+
+        const allSchemas = spec.components?.schemas || {}
+
+        let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+        const maxEndpointItems = 20
+        all_endpoints = all_endpoints.flatMap((endpoint) => {
+            if (endpoint.items.length > maxEndpointItems) {
+                const chunks = []
+                for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
+                    const pos = Math.floor(i / maxEndpointItems)
+                    const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
+                    const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
+                    const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
+                    const chunk = {
+                        ...endpoint,
+                        name,
+                        items: endpoint.items.slice(i, i + maxEndpointItems),
+                        next,
+                        previous,
+                    }
+                    chunks.push(chunk)
                 }
-                chunks.push(chunk)
+                return chunks
             }
-            return chunks
-        }
-        return endpoint
-    })
-    all_endpoints.forEach((endpoint) => {
-        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+            return endpoint
+        })
+        all_endpoints.forEach((endpoint) => {
+            const components = findAllReferencedSchemas(endpoint.items, allSchemas)
 
-        const node = {
-            id: createNodeId(`api_endpoint-${endpoint.name}`),
-            internal: {
-                type: `api_endpoint`,
-                contentDigest: createContentDigest({
-                    items: endpoint.items,
-                }),
-            },
-            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
-            components: JSON.stringify(components),
-            url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
-            name: endpoint.name,
-            nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
-            previousURL: (endpoint as any).previous
-                ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
-                : null,
-        }
-        createNode(node)
-    })
+            const node = {
+                id: createNodeId(`api_endpoint-${endpoint.name}`),
+                internal: {
+                    type: `api_endpoint`,
+                    contentDigest: createContentDigest({
+                        items: endpoint.items,
+                    }),
+                },
+                items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+                components: JSON.stringify(components),
+                url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
+                name: endpoint.name,
+                nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
+                previousURL: (endpoint as any).previous
+                    ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
+                    : null,
+            }
+            createNode(node)
+        })
+    }
 
     // --- Begin parallel sourcing of independent data ---
+    const sourceProductUsageStats = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        try {
+            const res = await fetch(
+                'https://us.posthog.com/api/environments/2/endpoints/product_active_usage_30d/run',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+                    },
+                    body: JSON.stringify({}),
+                }
+            )
+            if (res.status !== 200) {
+                console.error('Failed to fetch product_active_usage_30d endpoint:', res.status)
+                return
+            }
+            const body: any = await res.json()
+            const columns: string[] = body.columns || []
+            const productIdx = columns.indexOf('product')
+            const usersIdx = columns.indexOf('unique_users')
+            const orgsIdx = columns.indexOf('unique_orgs')
+            const rows: any[][] = body.results || []
+            rows.forEach((row) => {
+                const product = row[productIdx]
+                if (!product) return
+                const data = {
+                    product,
+                    unique_users: row[usersIdx] ?? null,
+                    unique_orgs: row[orgsIdx] ?? null,
+                }
+                createNode({
+                    id: createNodeId(`product-usage-stats-30d-${product}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'ProductUsageStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        } catch (err) {
+            console.error('Error fetching product_active_usage_30d endpoint:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -241,7 +363,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     }
-    const createRoadmapItems = async (page = 1) => {
+    const fetchRoadmapPage = async (page: number) => {
         const roadmapQuery = qs.stringify(
             {
                 pagination: {
@@ -276,48 +398,58 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         )
         const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
-        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
-        roadmaps.forEach((roadmap) => {
-            const {
-                id,
-                attributes: { image, projectedCompletion, dateCompleted, category, ...other },
-            } = roadmap
+        return await fetch(roadmapsURL).then((res) => res.json())
+    }
+    // Page 1 tells us the page count, then the remaining pages fetch concurrently
+    // instead of one after another (~0.6s per page, 10 pages).
+    const createRoadmapItems = async () => {
+        const firstPage = await fetchRoadmapPage(1)
+        const pageCount = firstPage.meta?.pagination?.pageCount || 1
+        const remainingPages = await Promise.all(
+            Array.from({ length: pageCount - 1 }, (_, i) => fetchRoadmapPage(i + 2))
+        )
+        for (const { data: roadmaps } of [firstPage, ...remainingPages]) {
+            roadmaps.forEach((roadmap) => {
+                const {
+                    id,
+                    attributes: { image, projectedCompletion, dateCompleted, category, ...other },
+                } = roadmap
 
-            const date = dateCompleted || projectedCompletion
-            const year = date && Number(dayjs(date).format('YYYY'))
+                const date = dateCompleted || projectedCompletion
+                const year = date && Number(dayjs(date).format('YYYY'))
 
-            const cloudinaryMedia = {
-                ...image,
-                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                publicId: image?.data?.attributes?.provider_metadata?.public_id,
-                originalHeight: image?.data?.attributes?.height,
-                originalWidth: image?.data?.attributes?.width,
-                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
-            }
+                const cloudinaryMedia = {
+                    ...image,
+                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                    publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                    originalHeight: image?.data?.attributes?.height,
+                    originalWidth: image?.data?.attributes?.width,
+                    originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+                }
 
-            const data = {
-                strapiID: id,
-                date,
-                media: cloudinaryMedia,
-                type: category,
-                year,
-                projectedCompletion,
-                dateCompleted,
-                ...other,
-            }
-            const roadmapNode = {
-                id: createNodeId(`roadmap-${id}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Roadmap`,
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            }
-            createNode(roadmapNode)
-        })
-        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
+                const data = {
+                    strapiID: id,
+                    date,
+                    media: cloudinaryMedia,
+                    type: category,
+                    year,
+                    projectedCompletion,
+                    dateCompleted,
+                    ...other,
+                }
+                const roadmapNode = {
+                    id: createNodeId(`roadmap-${id}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `Roadmap`,
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                }
+                createNode(roadmapNode)
+            })
+        }
     }
     const sourceChangelogVideos = async () => {
         const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
@@ -357,6 +489,95 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
+    }
+
+    const sourceCommunityStats = async () => {
+        const host = process.env.GATSBY_SQUEAK_API_HOST
+        if (!host) {
+            console.warn('GATSBY_SQUEAK_API_HOST not set. Skipping community stats.')
+            return
+        }
+
+        const notArchived = {
+            $or: [{ archived: { $null: true } }, { archived: { $eq: false } }],
+        }
+
+        const fetchTotal = async (path: 'questions' | 'replies', filters: Record<string, any>) => {
+            const query = qs.stringify(
+                {
+                    filters,
+                    fields: ['id'],
+                    pagination: { pageSize: 1, withCount: true },
+                },
+                { encodeValuesOnly: true }
+            )
+            try {
+                const res = await fetch(`${host}/api/${path}?${query}`).then((r) => r.json() as Promise<any>)
+                return res?.meta?.pagination?.total ?? 0
+            } catch (error) {
+                console.warn(`Failed to fetch community stats (${path}):`, error)
+                return 0
+            }
+        }
+
+        const statsFor = async (topicId: number | null) => {
+            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
+            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+
+            const [questions, resolved, replies, helpful] = await Promise.all([
+                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', {
+                    ...notArchived,
+                    ...questionTopicFilter,
+                    resolved: { $eq: true },
+                }),
+                fetchTotal('replies', { ...replyTopicFilter }),
+                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+            ])
+
+            return { questions, resolved, replies, helpful }
+        }
+
+        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        try {
+            const topicsQuery = qs.stringify(
+                {
+                    fields: ['label', 'slug'],
+                    pagination: { pageSize: 200 },
+                },
+                { encodeValuesOnly: true }
+            )
+            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
+            topics = topicsRes?.data ?? []
+        } catch (error) {
+            console.warn('Failed to fetch topics for community stats:', error)
+        }
+
+        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
+            { topicId: null, topicSlug: null, topicLabel: null },
+            ...topics.map((t) => ({
+                topicId: t.id,
+                topicSlug: t.attributes?.slug ?? null,
+                topicLabel: t.attributes?.label ?? null,
+            })),
+        ]
+
+        await Promise.all(
+            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
+                const counts = await statsFor(topicId)
+                const data = { topicId, topicSlug, topicLabel, ...counts }
+                createNode({
+                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: 'CommunityStats',
+                        contentDigest: createContentDigest(data),
+                    },
+                    ...data,
+                })
+            })
+        )
     }
 
     const sourceShopifyNodes = async () => {
@@ -1253,6 +1474,115 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // Early Access Features ("Coming Soon" / betas) from PostHog's public EAF endpoint,
+    // sourced at build time so /roadmap server-renders instantly and is indexable.
+    // Each feature's waitlist survey is joined in from the public surveys endpoint by
+    // matching the survey's linked_flag_key to the feature's flagKey, so the roadmap can
+    // collect sign-ups without any backend coupling. The page still revalidates
+    // client-side via posthog-js for freshness.
+    // Waitlist signups per survey, for the roadmap's "Popular" ranking. Aggregating survey
+    // responses needs a personal API key (query:read scope) — the public project token can't.
+    // Fails soft: without the key (or on any error) no counts attach and the ranking is hidden.
+    const fetchWaitlistCounts = async (): Promise<Record<string, number>> => {
+        const personalKey = process.env.POSTHOG_ROADMAP_API_KEY
+        if (!personalKey) return {}
+        try {
+            const res = await fetch('https://us.posthog.com/api/projects/2/query/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${personalKey}` },
+                body: JSON.stringify({
+                    query: {
+                        kind: 'HogQLQuery',
+                        query: "SELECT properties.$survey_id AS survey_id, count() AS signups FROM events WHERE event = 'survey sent' AND timestamp >= now() - INTERVAL 24 MONTH GROUP BY survey_id",
+                    },
+                }),
+            })
+            if (!res.ok) {
+                console.warn(`Failed to fetch waitlist counts: HTTP ${res.status}`)
+                return {}
+            }
+            const { results } = await res.json()
+            if (!Array.isArray(results)) return {}
+            const counts: Record<string, number> = {}
+            results.forEach(([surveyId, signups]: [string, number]) => {
+                if (surveyId) counts[surveyId] = signups
+            })
+            return counts
+        } catch (error) {
+            console.warn('Failed to fetch waitlist counts:', error)
+            return {}
+        }
+    }
+
+    const sourceEarlyAccessFeatures = async () => {
+        const token = process.env.GATSBY_POSTHOG_API_KEY
+        if (!token) return
+        try {
+            const host = process.env.GATSBY_POSTHOG_API_HOST || 'https://us.i.posthog.com'
+            const [featuresRes, surveysRes, waitlistCounts] = await Promise.all([
+                fetch(`${host}/api/early_access_features/?token=${token}&stage=concept&stage=alpha&stage=beta`),
+                fetch(`${host}/api/surveys/?token=${token}`),
+                fetchWaitlistCounts(),
+            ])
+            if (!featuresRes.ok) {
+                console.warn(`Failed to fetch early access features: HTTP ${featuresRes.status}`)
+                return
+            }
+            const { earlyAccessFeatures } = await featuresRes.json()
+            if (!Array.isArray(earlyAccessFeatures)) return
+
+            // Launched `api` surveys linked to a flag, keyed by that flag — these are the
+            // waitlist surveys for Coming Soon features.
+            const waitlistSurveyByFlagKey: Record<string, { survey_id: string; survey_question_id?: string }> = {}
+            if (surveysRes.ok) {
+                const { surveys } = await surveysRes.json()
+                if (Array.isArray(surveys)) {
+                    surveys
+                        .filter((s) => s?.type === 'api' && s?.linked_flag_key && s?.start_date && !s?.end_date)
+                        .forEach((s) => {
+                            waitlistSurveyByFlagKey[s.linked_flag_key] = {
+                                survey_id: s.id,
+                                survey_question_id: s.questions?.[0]?.id,
+                            }
+                        })
+                }
+            } else {
+                console.warn(`Failed to fetch surveys for waitlist join: HTTP ${surveysRes.status}`)
+            }
+
+            earlyAccessFeatures
+                .filter((feature) => feature?.flagKey)
+                .forEach((feature) => {
+                    // Explicit payload from the feature wins; the flag-key join is the fallback.
+                    const payload = {
+                        ...waitlistSurveyByFlagKey[feature.flagKey],
+                        ...(feature.payload || {}),
+                    }
+                    createNode({
+                        id: createNodeId(`early-access-feature-${feature.flagKey}`),
+                        internal: {
+                            type: 'EarlyAccessFeature',
+                            contentDigest: createContentDigest({ ...feature, payload }),
+                        },
+                        name: feature.name,
+                        description: feature.description,
+                        stage: feature.stage,
+                        documentationUrl: feature.documentationUrl,
+                        flagKey: feature.flagKey,
+                        // The EAF id is a UUIDv7; the roadmap derives a "created" date from it
+                        // (see useEarlyAccessFeatures) to flag/sort recently added features.
+                        featureId: feature.id,
+                        // Signups on the linked waitlist survey — null when unknown (no personal
+                        // API key at build time, or no linked survey).
+                        waitlistCount: payload.survey_id != null ? waitlistCounts[payload.survey_id] ?? null : null,
+                        payload,
+                    })
+                })
+        } catch (error) {
+            console.warn('Failed to fetch early access features:', error)
+        }
+    }
+
     // Self-driving PRs: real pull requests PostHog's self-driving system opened from an
     // Inbox report — both merged PRs (the loop's shipped work) and the open drafts it
     // currently has awaiting human review. They're matched on the Inbox footer every such
@@ -1342,10 +1672,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     await Promise.all([
+        sourceApiEndpoints(),
         createProductDataNode(),
         createRoadmapItems(),
+        sourceEarlyAccessFeatures(),
         sourceChangelogVideos(),
         sourcePostCategories(),
+        sourceCommunityStats(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),

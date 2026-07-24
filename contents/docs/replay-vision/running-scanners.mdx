@@ -17,9 +17,10 @@ There are two ways a scanner produces observations: automatically in the backgro
 Once a scanner is **enabled**, PostHog runs a background sweep every few minutes. The sweep:
 
 1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed.
-2. Applies the sampling rate to that batch (so a 10% rate means roughly one in ten matching sessions get queued).
-3. Queues an observation per session for the model to process.
-4. Records the result – success, failure, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
+2. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-quality-pre-filter) mode to drop low-quality sessions (Focused and Balanced modes filter by surfacing score; Comprehensive keeps all).
+3. Applies the sampling rate to what's left (so a 10% rate means roughly one in ten remaining sessions get queued).
+4. Queues an observation per session for the model to process.
+5. Records the result – success, failure, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
 
 Each `(scanner, session)` pair is only ever observed once. Re-sweeping never produces duplicate observations for the same recording.
 
@@ -81,13 +82,13 @@ Some sessions can't be analyzed – there's no recording data, the recording is 
 
 The taxonomy:
 
-| Ineligible reason | What it means |
-| --- | --- |
-| `no_recording` | The session referenced doesn't have replay data in storage |
-| `too_short` | The recording is below the minimum duration we'll scan |
-| `too_inactive` | The recording is long enough but the user was idle for almost all of it |
-| `too_long` | The recording is above the maximum duration we'll scan |
-| `no_events` | The recording has no analytics events at all |
+| Ineligible reason | What it means                                                           |
+| ----------------- | ----------------------------------------------------------------------- |
+| `no_recording`    | The session referenced doesn't have replay data in storage              |
+| `too_short`       | The recording is below the minimum duration we'll scan                  |
+| `too_inactive`    | The recording is long enough but the user was idle for almost all of it |
+| `too_long`        | The recording is above the maximum duration we'll scan                  |
+| `no_events`       | The recording has no analytics events at all                            |
 
 Ineligible observations:
 

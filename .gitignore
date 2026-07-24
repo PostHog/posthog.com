@@ -2,6 +2,7 @@
 .cache
 node_modules
 .pnp.*
+.pnpm-store*
 
 # Build directory
 /public
@@ -33,6 +34,7 @@ CLAUDE.local.md
 # Generated data files
 src/data/mcp-tools.json
 .cloudinary-resources.json
+.api-spec-prefetch.json*
 
 # Python cache
 __pycache__
@@ -41,3 +43,4 @@ __pycache__
 
 .env*.local
 /.claude/worktrees/
+.env*

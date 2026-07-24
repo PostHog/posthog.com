@@ -1,0 +1,30 @@
+diff --git a/node_modules/gatsby/dist/schema/graphql-engine/bundle-webpack.js b/node_modules/gatsby/dist/schema/graphql-engine/bundle-webpack.js
+index dfbf029c6..6da9c4c55 100644
+--- a/node_modules/gatsby/dist/schema/graphql-engine/bundle-webpack.js
++++ b/node_modules/gatsby/dist/schema/graphql-engine/bundle-webpack.js
+@@ -28,7 +28,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj &&
+ /* eslint-disable @typescript-eslint/naming-convention */
+ const extensions = [`.mjs`, `.js`, `.json`, `.node`, `.ts`, `.tsx`];
+ const outputDir = path.join(process.cwd(), `.cache`, `query-engine`);
+-const cacheLocation = path.join(process.cwd(), `.cache`, `webpack`, `query-engine`);
++// Relocated outside .cache so `gatsby clean` doesn't discard it; webpack revalidates
++// every entry against module contents and buildDependencies, so output is unchanged.
++const cacheLocation = path.join(process.cwd(), `node_modules`, `.cache`, `gatsby-persistent-webpack`, `query-engine`);
+ 
+ function getApisToRemoveForQueryEngine() {
+   const apisToKeep = new Set(_printPlugins.schemaCustomizationAPIs);
+diff --git a/node_modules/gatsby/dist/utils/page-ssr-module/bundle-webpack.js b/node_modules/gatsby/dist/utils/page-ssr-module/bundle-webpack.js
+index 9ea1a6b76..4ebe7148a 100644
+--- a/node_modules/gatsby/dist/utils/page-ssr-module/bundle-webpack.js
++++ b/node_modules/gatsby/dist/utils/page-ssr-module/bundle-webpack.js
+@@ -24,7 +24,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj &&
+ 
+ const extensions = [`.mjs`, `.js`, `.json`, `.node`, `.ts`, `.tsx`];
+ const outputDir = path.join(process.cwd(), `.cache`, `page-ssr`);
+-const cacheLocation = path.join(process.cwd(), `.cache`, `webpack`, `page-ssr`);
++// Relocated outside .cache so `gatsby clean` doesn't discard it; webpack revalidates
++// every entry against module contents and buildDependencies, so output is unchanged.
++const cacheLocation = path.join(process.cwd(), `node_modules`, `.cache`, `gatsby-persistent-webpack`, `page-ssr`);
+ 
+ async function writeQueryContext({
+   staticQueriesByTemplate,

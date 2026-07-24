@@ -127,18 +127,27 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 > **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
 
+### Filter precedence: dashboard vs. tile level
+
+Individual tiles (insights) can have their own filters and date ranges configured separately from dashboard-level overrides. When both are set, **tile-level filters take precedence**:
+
+- **Scalar settings** like breakdown, interval, and filter test accounts: the tile's value completely replaces the dashboard override.
+- **Date ranges:** If a tile has its own `date_from` or `date_to` set, its entire date range is used and the dashboard date override is ignored.
+- **Property filters:** Filters from both levels are combined using AND logic. However, if a tile filter directly contradicts a dashboard filter on the same property key, the tile filter wins and the conflicting dashboard filter is dropped.
+
+The insight card displays a warning when tile filters are merging with or overriding dashboard filters.
+
 ## Dashboard options
 
 ### Editing the layout
 
-You can move and resize all the insights on a dashboard by entering the 'Edit layout' mode.
+If you have edit access to a dashboard, you can resize tiles directly without entering edit mode. Hover near any edge or corner of a tile to reveal resize handles, then drag to resize. Grabbing a handle automatically enters edit mode so the resize takes effect immediately. Corner handles support diagonal resizing.
 
-You can do this in five ways:
+For moving tiles and other layout changes, enter 'Edit layout' mode. You can do this in several ways:
 
 - Tap 'E' on your keyboard
 - Click on the '...' icon at the top of the dashboard and click 'Edit layout'
 - Click on the '...' icon on any insight card and click 'Edit layout'
-- Hover near the edge of any insight card and click when the resize cursor appears
 - Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
 
 Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
@@ -183,7 +192,7 @@ When you copy an insight, it's the same underlying insight appearing on multiple
 
 Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.
 
-Text cards support Markdown formatting for text. You can also drag and drop images.
+Text cards include a rich text editor with a formatting toolbar. You can apply bold, italic, underline, headings, bullet and numbered lists, blockquotes, inline code, code blocks, and links directly from the toolbar. You can also drag and drop images and resize them within the editor.
 
 You can use text cards to annotate your dashboard – useful for adding context for other users of the dashboard. For more in-depth analysis, however, we recommend [creating a notebook](/docs/notebooks).
 
@@ -225,6 +234,8 @@ To add it, click the **Add...** dropdown and select **Recent events** under the 
 
 - **Date range** - The time period to show events from. Default: last 24 hours.
 - **Event** - Scope the widget to a single event. Pick an event from the dropdown, or leave as **All events** to show everything. Default: All events.
+- **Event property filters** - Filter events by event properties such as `Current URL`, `Browser`, or custom event properties.
+- **Person property filters** - Filter events by person properties such as `Email`, `Company name`, or custom person properties.
 - **Limit** - Maximum number of events to display. Default: 25, maximum: 50.
 - **Filter test accounts** - Toggle to exclude internal and test users.
 
@@ -376,7 +387,7 @@ The tooltip on the refresh icon shows when the tile's data was last computed. If
 
 The refresh icon is hidden while the tile is actively refreshing and isn't available on shared or public dashboards. You can also refresh a tile from the **⋯** menu by selecting **Refresh data**, which is useful for touch and keyboard users.
 
--   Choose a theme (light, dark, or system) for shared and embedded dashboards.
+- Choose a theme (light, dark, or system) for shared and embedded dashboards.
 
 ### Auto refresh
 

@@ -45,7 +45,7 @@ In-person onboarding typically happens this week (3-4 days led by your team lead
 - Walking through your book of business with your team lead - prioritisation, where to start, who to reach out to first.
 - Digging into individual customers - what they're using, where they are in the lifecycle, any open issues, recent conversations.
 - Demo practice and feedback.
-- Seeing how the systems we use (Vitally, PostHog data, PostHog Support, Zendesk) come together day-to-day.
+- Seeing how the systems we use (Vitally, PostHog data, PostHog Support) come together day-to-day.
 - A no-stupid-questions session - bring everything you've been wondering about from Week 1.
 - First look at signals - what Vitally tags and alerts are, how the team uses them. You won't be confidently responding to them yet, but that comes over the rest of the month.
 

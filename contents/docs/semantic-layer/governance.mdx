@@ -1,0 +1,72 @@
+---
+title: Governance
+sidebar: Docs
+showTitle: true
+---
+
+import AlphaCallout from './_snippets/alpha-callout'
+
+The semantic layer's whole design reduces to one sentence: **AI generates, a human owns.** This page explains how that principle is enforced – lifecycles, typed confirmations, API scopes, and provenance – and how to run it day to day.
+
+<AlphaCallout />
+
+## AI generates, a human owns
+
+Agents are good at drafting metric definitions, spotting untrusted tables, and finding join keys. They are not accountable for what MRR means at your company – a person is. So the semantic layer splits the work:
+
+- **Agents propose.** Any write an agent makes – a metric, a certification, a relationship – lands in a `proposed` state with zero authority. Proposals are cheap and safe.
+- **Humans promote.** Approving, certifying, accepting, and rejecting are human acts, gated by a separate API scope and a typed confirmation.
+
+The result: your agents build the catalog for you during normal work, and nothing becomes canonical without a person signing it.
+
+## Lifecycle across the catalog
+
+| Primitive | Lands as | Human promotes to | Demoted or terminal |
+|-----------|----------|-------------------|---------------------|
+| [Metric](/docs/semantic-layer/metrics) | `proposed` | `approved` | Editing the definition or drifting from the source insight resets it toward `proposed`; deleted names stay reserved forever |
+| [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications) | `proposed` | `certified` or `deprecated` | Revoking deletes the mark (activity-logged) |
+| [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed |
+
+## Typed confirmations
+
+Every promoting or vetoing tool requires the user to reply with the literal word "confirm" before it executes:
+
+- `data-catalog-metric-approve` – additionally blocked while the metric is drifted
+- `data-catalog-certification-certify`
+- `data-catalog-certification-deprecate`
+- `data-catalog-relationship-accept`
+- `data-catalog-relationship-reject`
+
+The point is simple: an agent can't autocomplete your signature. However agentic your workflow gets, the moment something becomes canonical is always a human typing a word.
+
+## API scopes
+
+Two scopes split proposing from promoting:
+
+| Scope | Grants |
+|-------|--------|
+| `data_catalog` | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
+| `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships |
+
+Practical setup: the API key you hand your MCP server or CI agent gets `data_catalog` only – it can build and use the catalog but never bless anything. Your own key carries both scopes, so approvals happen through you. (`data-catalog-metric-run` also needs `query:read`, and `data-catalog-relationship-accept` needs `warehouse_view:write` to create the join.)
+
+## Provenance
+
+Every AI-authored object records its origin: `created_source: ai_generated`, the `ai_model` that wrote it, a `confidence` score from 0 to 1, and the model's `reasoning`. Reviewers see who proposed what, how sure it was, and why – before signing. Relationship proposals go further and attach sampling evidence, like key match rates from real data.
+
+## Recommended workflow for teams
+
+You don't need a cataloging project. Let the catalog grow out of normal work:
+
+1. **Agents propose as they go.** When an agent derives a number that gets reused, it offers to save the derivation as a proposed metric. When it notices a stale table or an obvious join, it proposes a trust mark.
+2. **A data owner reviews the queue weekly.** The review queue is one query away:
+
+   ```sql
+   SELECT name, display_name, description, confidence, reasoning
+   FROM system.information_schema.metrics
+   WHERE status = 'proposed'
+   ```
+
+3. **Approvals happen with the approval-scoped key.** Run the metric, read the compiled query, then approve with the typed "confirm" – or update the draft and leave it proposed.
+
+Each review is a few minutes; each approval is a decision your whole team (and every future agent session) stops re-making.

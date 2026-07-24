@@ -78,6 +78,36 @@ const REPO_CONFIGS = {
     },
 }
 
+/**
+ * Minimal YAML frontmatter parser for ingested SKILL.md files. They only carry
+ * `name` and `description` (description may be a folded `>-` scalar), so a tiny
+ * line-based parser is enough and avoids adding a gray-matter dependency.
+ */
+function parseSkillFrontmatter(raw: string): { name?: string; description?: string; body: string } {
+    const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/)
+    if (!match) return { body: raw }
+    const [, frontmatter, body] = match
+    const lines = frontmatter.split('\n')
+    const fields: Record<string, string> = {}
+    for (let i = 0; i < lines.length; i++) {
+        const keyMatch = lines[i].match(/^(\w[\w-]*):\s?(.*)$/)
+        if (!keyMatch) continue
+        const [, key, rawValue] = keyMatch
+        let value = rawValue.trim()
+        // Folded/literal block scalar (>- > | |-): gather the indented lines below.
+        if (/^[>|][-+]?$/.test(value) || value === '') {
+            const collected: string[] = []
+            while (i + 1 < lines.length && (/^\s+\S/.test(lines[i + 1]) || lines[i + 1].trim() === '')) {
+                collected.push(lines[i + 1].trim())
+                i++
+            }
+            value = collected.join(' ').trim()
+        }
+        fields[key] = value.replace(/^['"]|['"]$/g, '')
+    }
+    return { name: fields.name, description: fields.description, body }
+}
+
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     if (
         !process.env.CLOUDINARY_API_KEY ||
@@ -136,6 +166,17 @@ function getPublicID(image: string) {
     return imagePath.substring(0, imagePath.lastIndexOf('.'))
 }
 
+// onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The
+// pageviews cache is written once in onPreBootstrap and never changes mid-build, so fetch
+// it at most once here instead of re-reading it from the on-disk cache for every node.
+let pageViewsPromise: Promise<Record<string, number> | undefined> | null = null
+function getPageViews(cache): Promise<Record<string, number> | undefined> {
+    if (!pageViewsPromise) {
+        pageViewsPromise = cache.get(PAGEVIEW_CACHE_KEY)
+    }
+    return pageViewsPromise
+}
+
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node,
     getNode,
@@ -143,8 +184,52 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     store,
     cache,
     createNodeId,
+    createContentDigest,
 }) => {
     const { createNodeField, createNode } = actions
+
+    // Canonical agent skills from the monorepo (products/<product>/skills/<name>/SKILL.md).
+    // These File nodes are blocked from MDX transformation, so we parse them into
+    // typed AgentSkill nodes here. Failures degrade to "skip this file", never break the build.
+    if (
+        node.internal.type === 'File' &&
+        (node as any).sourceInstanceName === 'posthog-main-repo' &&
+        (node as any).name === 'SKILL' &&
+        (((node as any).relativeDirectory as string) || '').includes('/skills/')
+    ) {
+        try {
+            const absolutePath = (node as any).absolutePath as string
+            const relativeDirectory = ((node as any).relativeDirectory as string) || ''
+            const parts = relativeDirectory.split('/') // products/<product>/skills/<skill-name>
+            const product = parts[0] === 'products' ? parts[1] : undefined
+            const skillName = parts[0] === 'products' ? parts[3] : undefined
+            if (product && skillName) {
+                const raw = fs.readFileSync(absolutePath, 'utf-8')
+                const { name, description, body } = parseSkillFrontmatter(raw)
+                const mcpTools = Array.from(
+                    new Set(Array.from(body.matchAll(/posthog:([a-z0-9-]+)/g)).map((m) => m[1]))
+                )
+                const id = createNodeId(`agent-skill-${(node as any).id}`)
+                createNode({
+                    id,
+                    parent: (node as any).id,
+                    children: [],
+                    product,
+                    name: name || skillName,
+                    description: description || '',
+                    sourcePath: relativeDirectory,
+                    mcpTools,
+                    internal: {
+                        type: 'AgentSkill',
+                        contentDigest: createContentDigest({ product, skillName, name, description, mcpTools }),
+                    },
+                })
+            }
+        } catch (err) {
+            console.warn(`Failed to parse agent skill from ${(node as any).absolutePath}:`, err)
+        }
+        return
+    }
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
@@ -214,7 +299,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         })
 
         if (slug) {
-            const pageViews = await cache.get(PAGEVIEW_CACHE_KEY)
+            const pageViews = await getPageViews(cache)
 
             if (pageViews && slug.slice(0, -1) in pageViews) {
                 createNodeField({
