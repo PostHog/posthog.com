@@ -23,11 +23,11 @@ With the PostHog Slack app, you **@PostHog** to "fix this" or "build that". It s
 
 The bot uses your product data as context and follows your repo's rules. It even reacts with [emojis](/docs/slack#emoji-cues) while it works, which makes it feel less like a coding tool and more like chatting with a clever teammate.
 
-Try it yourself → [setup docs](/docs/slack/setup) 
+Try it yourself → [setup docs](/docs/slack/setup)
 
 ## @PostHog in the #papercuts channel
 
-[Paul D'Ambra](/community/profiles/30173) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Code like a good engineer. Now he mentions @PostHog in nearly every thread.
+[Paul D'Ambra](/community/profiles/30173) was the first to fall in love with @PostHog. Among other important [blitzscale](/teams/blitzscale) duties, he owns the `#papercuts` Slack channel, where anyone can post the small bugs and nits they hit in the app. He'd been fixing them with PostHog Desktop like a good engineer. Now he mentions @PostHog in nearly every thread.
 
 ![Paul mentions @PostHog in #papercuts](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_papercuts_1_877de83ae8.png)
 
@@ -41,7 +41,7 @@ Try it yourself → [setup docs](/docs/slack/setup)
 
 ## Real prompts that became actual PRs
 
-It's awesome when a prolific engineer gets even more productive, but what makes @PostHog *really* magical is that it empowers every role. Sales, marketing, customer support – anyone can tag the bot with a bug, a papercut, or a feature idea.
+It's awesome when a prolific engineer gets even more productive, but what makes @PostHog _really_ magical is that it empowers every role. Sales, marketing, customer support – anyone can tag the bot with a bug, a papercut, or a feature idea.
 
 Here's a few examples of @PostHog usage across the org chart:
 
@@ -149,7 +149,7 @@ Despite being a coding agent, it won't answer every @mention with a PR. Every @P
 
 Both classifiers use Claude Haiku (tiny, fast, cheap) and we track latency and cost with [AI Observability](/docs/ai-observability).
 
-This simple routing is why Paul's prompt "*@PostHog can you generate a team photo of team blitzscale as the Spice Girls*" – was correctly classified as non-actionable work.
+This simple routing is why Paul's prompt "_@PostHog can you generate a team photo of team blitzscale as the Spice Girls_" – was correctly classified as non-actionable work.
 
 ![Paul's Spice Girls prompt](https://res.cloudinary.com/dmukukwp6/image/upload/slackbot_paul_2_e5c3312ba5.png)
 
@@ -173,6 +173,7 @@ It's free to install, and free to uninstall when you realize this means you can 
   <summary>Is it free to use?</summary>
 
 The agent that runs behind @PostHog mentions consumes PostHog AI credits for the LLM work it does. This includes tokens used when planning a task, editing files, reasoning about your data. For credit mechanics, the free monthly tier, billing limits, and the live pricing calculator, see [PostHog AI pricing](/docs/posthog-ai/pricing).
+
 </details>
 
 <details>
