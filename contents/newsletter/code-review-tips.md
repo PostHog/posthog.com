@@ -181,13 +181,21 @@ Every PR must ship with its own tests and end with a way to observe it working d
 
 This approach is especially valuable for frontend work since deterministic tests don’t always capture the visual or behavioral functionality you’re looking for.
 
-[Pawel Cebula](/community/profiles/33209) says it’s a huge timesaver to have an agent take screenshots and GIFs for each step, with something like this:
+You can use this prompt to copy the [qa-frontend](https://github.com/PostHog/posthog/blob/master/.agents/skills/qa-frontend/SKILL.md) skill [Pawel Cebula](/community/profiles/33209) created for this. It’s a huge timesaver to have an agent run the code and take screenshots and GIFs for you:
 
 ```llm
-For each PR with frontend work, run the affected screens and capture evidence from the branch's final state: a screenshot of each relevant state (empty, loading, error, populated) and a GIF of the key interaction end to end. Where behavior changes, include before/after. 
+Read https://github.com/PostHog/posthog/blob/master/.agents/skills/qa-frontend/SKILL.md and build the equivalent for the repo at <path>. Copy the architecture and preserve every safety invariant it states exactly.
 
-Attach it all to the PR so the change can be reviewed by observation, not by reading the diff — and re-capture if the code changes after.
+Its file-classification, route-finding, local-stack/login, and evidence-upload rules are calibrated to PostHog — re-derive mine: mine my repo for the diff-pattern → frontend-test-type map, route heuristics, and the "never auto-edit" deny-list (from my high-blast-radius areas). Propose the full config for my sign-off before writing any code.
+
+Ask me whatever you can't derive from the repo — at minimum: which browser MCP to drive, how my local stack starts and on what URL, how the app authenticates locally, and how PR mode checks out PRs and posts comments (platform + CLI/token).
+
+Leave the result as uncommitted files on my working tree.
 ```
+
+<CalloutBox icon="IconInfo" title="Edited on July 24, 2026" type="fyi">
+Updated the prompt and added a link for the new qa-frontend skill.
+</CalloutBox>
 
 <NewsletterForm />
 
