@@ -127,3 +127,99 @@ Online retail businesses including direct-to-consumer brands, marketplace platfo
 - Identify drop-off points in funnels > Watch those specific sessions > Run experiments on improvements
 
 </details> 
+
+<summary>AI & Data playbook</summary>
+
+### AI & Data description
+
+AI-native companies building products powered by LLMs and ML: AI apps and copilots, agent products, AI infrastructure and tooling, and data platforms. Usually technical teams that iterate fast, with a cost base tied directly to model spend, so their unit economics and their product are the same conversation.
+
+### What they care about
+
+- Unit economics: cost per generation and per active user vs revenue (token spend eats margin)
+- Model and prompt quality: eval scores, hallucination rate, output accuracy
+- Latency: time to first token (TTFT) and end-to-end response time
+- Adoption and retention of AI features, and free-to-paid conversion on them
+- Iteration velocity: shipping new prompts and models without breaking production
+- Pipeline reliability: provider outages, rate limits, timeouts
+
+### Industry terminology
+
+- **Token / context window**: unit of text billed by the model, and how much of it the model can consider at once.
+- **TTFT (time to first token)**: latency until the model starts responding; a key perceived-speed metric.
+- **RAG (retrieval-augmented generation)**: injecting retrieved documents into a prompt to ground answers.
+- **Embedding / vector DB**: numeric representation of text and the database used to search it (Pinecone, pgvector).
+- **Eval**: an automated test scoring model output quality.
+- **Hallucination**: confident but wrong model output.
+- **Agent / tool calling**: a model that takes actions by calling functions or tools (often via MCP).
+- **Generation / trace / span**: a single model call, the full request it belongs to, and a sub-step within it.
+
+### Common software used
+
+- **Model providers:** OpenAI, Anthropic, Google, Mistral, open models via Hugging Face
+- **Orchestration:** LangChain, LlamaIndex, Vercel AI SDK
+- **Gateways:** OpenRouter, LiteLLM, Portkey
+- **Vector DBs:** Pinecone, Weaviate, pgvector, Chroma
+- **Competing observability / evals:** Langfuse, LangSmith, Helicone, Arize, Braintrust
+- **Data stack:** Snowflake, Databricks, dbt, Fivetran, BigQuery
+
+### Important business metrics and data
+
+#### Metrics
+
+- **Cost:** cost per generation, cost per active user, total model spend, gross margin
+- **Performance:** TTFT, total latency, throughput, error/timeout rate
+- **Quality:** eval pass rate, hallucination rate, thumbs up/down, regeneration and edit rate
+- **Product:** AI-feature adoption, retention, generations per user, free-to-paid conversion
+
+#### Data
+
+##### Event taxonomy
+
+- **Core events:** `$ai_generation`, `$ai_span`, `$ai_trace` (auto-captured by the PostHog LLM analytics SDKs)
+- **Product events:** `regenerate_clicked`, `feedback_given`, `feature_used`
+- **Key properties:** model, provider, input/output tokens, cost, latency, eval score
+
+##### Person and group profiles
+
+- Often B2B: use [group analytics](/docs/product-analytics/group-analytics) so cost and usage roll up per workspace/org.
+- **Key properties:** `plan_tier`, `model_tier`, `tokens_consumed`, `workspace_id`
+
+### PostHog products they should be using
+
+#### LLM analytics / AI observability
+
+The anchor product for this segment.
+
+##### Best practices
+
+- Instrument with the PostHog LLM SDK wrappers so cost, model, and latency land on every generation.
+- Set up [evaluations](/docs/ai-evals) to track output quality over time, not just volume.
+
+##### Common challenges
+
+- Prompts and responses often contain PII: use [privacy mode](/docs/ai-observability/privacy-mode) / opt out of capturing content.
+- Token-heavy events are high-volume: sample deliberately to control ingestion cost.
+
+##### Cross product use cases
+
+- Every generation links back to the user, session, and replay that produced it.
+- From "this answer was wrong" in a replay, jump straight to the exact trace and prompt.
+
+#### Product analytics
+
+Funnels from signup > first generation > repeat use > paid. Retention curves on the AI feature specifically.
+
+#### Feature flags
+
+Gate model and prompt rollouts, keep a kill switch on a bad model, apply cost guardrails per cohort.
+
+#### Experiments
+
+A/B a cheaper model measuring cost, conversion, *and* eval quality together, not just one axis.
+
+#### Error tracking
+
+Capture API failures, timeouts, and rate limits, and correlate them with provider incidents and conversion drops.
+
+</details>
