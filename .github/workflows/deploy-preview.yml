@@ -293,7 +293,11 @@ jobs:
 
             - name: Install Visual Review CLI
               if: steps.changes.outputs.visual == 'true'
-              run: cd vr-cli/products/visual_review/cli && npm ci && npm run build && npm link
+              run: |
+                  cd vr-cli/products/visual_review/cli
+                  pnpm import
+                  pnpm install --frozen-lockfile
+                  pnpm build
 
             - name: Create Visual Review run
               if: steps.changes.outputs.visual == 'true'
@@ -306,7 +310,7 @@ jobs:
                   VR_PR: ${{ github.event.pull_request.number }}
                   JOB_CHECK_RUN_ID: ${{ job.check_run_id }}
               run: |
-                  RUN_ID=$(vr run create \
+                  RUN_ID=$(node vr-cli/products/visual_review/cli/dist/cli/src/index.js run create \
                     --type playwright \
                     --baseline visual-regression/snapshots.yml \
                     --branch "$VR_BRANCH" \
@@ -321,7 +325,7 @@ jobs:
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
               run: |
-                  vr run upload \
+                  node vr-cli/products/visual_review/cli/dist/cli/src/index.js run upload \
                     --run-id "${{ steps.vr-create.outputs.run-id }}" \
                     --dir .visual-regression/screenshots \
                     --baseline visual-regression/snapshots.yml \
@@ -332,7 +336,7 @@ jobs:
               env:
                   VR_TOKEN: ${{ secrets.VR_API_TOKEN }}
               run: |
-                  vr run complete \
+                  node vr-cli/products/visual_review/cli/dist/cli/src/index.js run complete \
                     --run-id "${{ steps.vr-create.outputs.run-id }}" \
                     --baseline visual-regression/snapshots.yml \
                     --token "$VR_TOKEN"

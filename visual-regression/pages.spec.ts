@@ -10,9 +10,9 @@ const routes = [
     { name: 'blog', path: '/blog/karpathy-autoresearch-query-engine-bug' },
     { name: 'comparison', path: '/blog/posthog-vs-ga4' },
     { name: 'docs', path: '/docs/product-analytics' },
-    { name: 'tutorial', path: '/tutorials/openrouter-observability' },
+    { name: 'surveys', path: '/surveys' },
     { name: 'handbook', path: '/handbook/engineering/posthog-com/technical-architecture' },
-    { name: 'customer', path: '/customers/elevenlabs' },
+    { name: 'customers', path: '/customers' },
 ] as const
 
 const screenshotDirectory = path.resolve(__dirname, '../.visual-regression/screenshots')

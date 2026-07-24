@@ -2,6 +2,8 @@
 
 These tests capture representative pages from a built PostHog.com preview. PostHog Visual Review compares the PNGs with the approved baseline; Playwright itself does not keep a second set of baseline images.
 
+The route set uses page classes that the `GATSBY_MINIMAL` preview actually renders. Direct tutorial and customer-story MDX routes are intentionally excluded because the minimal build maps both through the blog template.
+
 ## Run locally
 
 Start the site, then run:
