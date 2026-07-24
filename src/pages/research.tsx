@@ -1038,7 +1038,7 @@ function CTASection() {
                         try in the app.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
-                        <OSButton asLink to="/roadmap" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/roadmap?team=ai-research" state={{ newWindow: true }} variant="primary" size="md">
                             See what we're working on
                         </OSButton>
                         <OSButton

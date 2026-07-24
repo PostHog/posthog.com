@@ -785,6 +785,16 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
         () => new URLSearchParams(location.search).get('feature') || undefined,
         [location.search]
     )
+    // Let other pages deep-link the board to a single team, e.g. /roadmap?team=ai-research.
+    const requestedTeam = useMemo(
+        () => new URLSearchParams(location.search).get('team') || undefined,
+        [location.search]
+    )
+    useEffect(() => {
+        if (requestedTeam) {
+            setTeamFilter(requestedTeam)
+        }
+    }, [requestedTeam])
     const requestedFeature = requestedFlagKey
         ? allFeatures.find((feature) => feature.flagKey === requestedFlagKey)
         : undefined
