@@ -34,7 +34,6 @@ CLAUDE.local.md
 # Generated data files
 src/data/mcp-tools.json
 .cloudinary-resources.json
-.api-spec-prefetch.json*
 
 # Python cache
 __pycache__

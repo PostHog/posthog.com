@@ -13,261 +13,252 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
     const { createNode } = actions
 
     // Fetch all profiles (active team members + any author with a profile_id)
-    const fetchProfiles = async () => {
-        let page = 1
-        while (true) {
-            let profileQuery = qs.stringify(
-                {
+    let page = 1
+    while (true) {
+        let profileQuery = qs.stringify(
+            {
+                filters: {
+                    $or: [
+                        {
+                            $and: [
+                                {
+                                    startDate: {
+                                        $notNull: true,
+                                    },
+                                },
+                                {
+                                    startDate: {
+                                        $lte: new Date(),
+                                    },
+                                },
+                            ],
+                        },
+                        {
+                            id: {
+                                $in: authorProfileIds,
+                            },
+                        },
+                    ],
+                },
+                pagination: {
+                    page,
+                    pageSize: 100,
+                },
+                populate: ['avatar', 'teams', 'leadTeams', 'quotes', 'color'],
+            },
+            {
+                encodeValuesOnly: true, // prettify URL
+            }
+        )
+
+        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
+
+        for (const profile of profiles.data) {
+            const { avatar, ...profileData } = profile.attributes
+
+            createNode({
+                type: `SqueakProfile`,
+                id: createNodeId(`squeak-profile-${profile.id}`),
+                squeakId: profile.id,
+                internal: {
+                    contentDigest: createContentDigest(profileData),
+                    type: `SqueakProfile`,
+                },
+                avatar: avatar.data?.attributes,
+                ...profileData,
+            })
+
+            /*async function createImageNode(imageURL) {
+                return createRemoteFileNode({
+                    url: imageURL,
+                    parentNodeId: node.id,
+                    createNode,
+                    createNodeId,
+                    cache,
+                    store,
+                }).catch((e) => console.error(e))
+            }
+            if (node.imageURL) {
+                const imageNode = await createImageNode(node.imageURL)
+                node.avatar___NODE = imageNode && imageNode.id
+            }*/
+        }
+
+        if (profiles.meta.pagination.page >= profiles.meta.pagination.pageCount) {
+            break
+        }
+        page++
+    }
+
+    // Fetch all topic groups
+    let query = qs.stringify({
+        populate: {
+            topics: {
+                fields: ['id'],
+            },
+        },
+    })
+
+    const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
+
+    topicGroups.data.forEach((topicGroup) => {
+        const { topics, ...rest } = topicGroup.attributes
+
+        const node = {
+            id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
+            internal: {
+                type: `SqueakTopicGroup`,
+                contentDigest: createContentDigest(topicGroup),
+            },
+            ...rest,
+            topics: topics.data.map((topic) => ({
+                id: createNodeId(`squeak-topic-${topic.id}`),
+            })),
+        }
+        createNode(node)
+    })
+
+    // Fetch all topics
+    let topicQuery = qs.stringify(
+        {
+            pagination: {
+                page: 1,
+                pageSize: 100,
+            },
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
+        }
+    )
+
+    const topics = await fetch(`${apiHost}/api/topics?${topicQuery}`).then((res) => res.json())
+
+    for (const topic of topics.data) {
+        createNode({
+            id: createNodeId(`squeak-topic-${topic.id}`),
+            squeakId: topic.id,
+            internal: {
+                type: `SqueakTopic`,
+                contentDigest: createContentDigest(topic),
+            },
+            ...topic.attributes,
+        })
+    }
+
+    // Fetch all teams
+    let teamQuery = qs.stringify(
+        {
+            pagination: {
+                page: 1,
+                pageSize: 100,
+            },
+            populate: {
+                roadmaps: {
+                    fields: ['id'],
+                },
+                profiles: {
                     filters: {
-                        $or: [
+                        $and: [
                             {
-                                $and: [
-                                    {
-                                        startDate: {
-                                            $notNull: true,
-                                        },
-                                    },
-                                    {
-                                        startDate: {
-                                            $lte: new Date(),
-                                        },
-                                    },
-                                ],
+                                startDate: {
+                                    $notNull: true,
+                                },
                             },
                             {
-                                id: {
-                                    $in: authorProfileIds,
+                                startDate: {
+                                    $lte: new Date(),
                                 },
                             },
                         ],
                     },
-                    pagination: {
-                        page,
-                        pageSize: 100,
-                    },
-                    populate: ['avatar', 'teams', 'leadTeams', 'quotes', 'color'],
+                    populate: '*',
                 },
-                {
-                    encodeValuesOnly: true, // prettify URL
-                }
-            )
-
-            const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
-
-            for (const profile of profiles.data) {
-                const { avatar, ...profileData } = profile.attributes
-
-                createNode({
-                    type: `SqueakProfile`,
-                    id: createNodeId(`squeak-profile-${profile.id}`),
-                    squeakId: profile.id,
-                    internal: {
-                        contentDigest: createContentDigest(profileData),
-                        type: `SqueakProfile`,
+                leadProfiles: {
+                    filters: {
+                        $and: [
+                            {
+                                startDate: {
+                                    $notNull: true,
+                                },
+                            },
+                            {
+                                startDate: {
+                                    $lte: new Date(),
+                                },
+                            },
+                        ],
                     },
-                    avatar: avatar.data?.attributes,
-                    ...profileData,
-                })
-
-                /*async function createImageNode(imageURL) {
-                    return createRemoteFileNode({
-                        url: imageURL,
-                        parentNodeId: node.id,
-                        createNode,
-                        createNodeId,
-                        cache,
-                        store,
-                    }).catch((e) => console.error(e))
-                }
-                if (node.imageURL) {
-                    const imageNode = await createImageNode(node.imageURL)
-                    node.avatar___NODE = imageNode && imageNode.id
-                }*/
-            }
-
-            if (profiles.meta.pagination.page >= profiles.meta.pagination.pageCount) {
-                break
-            }
-            page++
-        }
-    }
-
-    // Fetch all topic groups
-    const fetchTopicGroups = async () => {
-        let query = qs.stringify({
-            populate: {
-                topics: {
-                    fields: ['id'],
+                    fields: 'id',
                 },
+                crest: true,
+                crestOptions: true,
+                miniCrest: true,
+                teamImage: {
+                    populate: {
+                        image: true,
+                    },
+                },
+                tagline: true,
             },
-        })
-
-        const topicGroups = await fetch(`${apiHost}/api/topic-groups?${query}`).then((res) => res.json())
-
-        topicGroups.data.forEach((topicGroup) => {
-            const { topics, ...rest } = topicGroup.attributes
-
-            const node = {
-                id: createNodeId(`squeak-topic-group-${topicGroup.id}`),
-                internal: {
-                    type: `SqueakTopicGroup`,
-                    contentDigest: createContentDigest(topicGroup),
-                },
-                ...rest,
-                topics: topics.data.map((topic) => ({
-                    id: createNodeId(`squeak-topic-${topic.id}`),
-                })),
-            }
-            createNode(node)
-        })
-    }
-
-    // Fetch all topics
-    const fetchTopics = async () => {
-        let topicQuery = qs.stringify(
-            {
-                pagination: {
-                    page: 1,
-                    pageSize: 100,
-                },
-            },
-            {
-                encodeValuesOnly: true, // prettify URL
-            }
-        )
-
-        const topics = await fetch(`${apiHost}/api/topics?${topicQuery}`).then((res) => res.json())
-
-        for (const topic of topics.data) {
-            createNode({
-                id: createNodeId(`squeak-topic-${topic.id}`),
-                squeakId: topic.id,
-                internal: {
-                    type: `SqueakTopic`,
-                    contentDigest: createContentDigest(topic),
-                },
-                ...topic.attributes,
-            })
+        },
+        {
+            encodeValuesOnly: true, // prettify URL
         }
-    }
+    )
 
-    // Fetch all teams
-    const fetchTeams = async () => {
-        let teamQuery = qs.stringify(
-            {
-                pagination: {
-                    page: 1,
-                    pageSize: 100,
-                },
-                populate: {
-                    roadmaps: {
-                        fields: ['id'],
-                    },
-                    profiles: {
-                        filters: {
-                            $and: [
-                                {
-                                    startDate: {
-                                        $notNull: true,
-                                    },
-                                },
-                                {
-                                    startDate: {
-                                        $lte: new Date(),
-                                    },
-                                },
-                            ],
-                        },
-                        populate: '*',
-                    },
-                    leadProfiles: {
-                        filters: {
-                            $and: [
-                                {
-                                    startDate: {
-                                        $notNull: true,
-                                    },
-                                },
-                                {
-                                    startDate: {
-                                        $lte: new Date(),
-                                    },
-                                },
-                            ],
-                        },
-                        fields: 'id',
-                    },
-                    crest: true,
-                    crestOptions: true,
-                    miniCrest: true,
-                    teamImage: {
-                        populate: {
-                            image: true,
-                        },
-                    },
-                    tagline: true,
-                },
-            },
-            {
-                encodeValuesOnly: true, // prettify URL
-            }
-        )
+    const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
 
-        const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
+    for (const team of teams.data) {
+        const { roadmaps, crest, miniCrest, teamImage, ...rest } = team.attributes
 
-        for (const team of teams.data) {
-            const { roadmaps, crest, miniCrest, teamImage, ...rest } = team.attributes
-
-            const cloudinaryTeamImage = {
-                ...teamImage,
-                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                publicId: teamImage?.image?.data?.attributes?.provider_metadata?.public_id,
-                originalHeight: teamImage?.image?.data?.attributes?.height,
-                originalWidth: teamImage?.image?.data?.attributes?.width,
-                originalFormat: (teamImage?.image?.data?.attributes?.ext || '').replace('.', ''),
-            }
-
-            const cloudinaryCrest = {
-                ...crest,
-                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                publicId: crest?.data?.attributes?.provider_metadata?.public_id,
-                originalHeight: crest?.data?.attributes?.height,
-                originalWidth: crest?.data?.attributes?.width,
-                originalFormat: (crest?.data?.attributes?.ext || '').replace('.', ''),
-            }
-
-            const cloudinaryMiniCrest = {
-                ...miniCrest,
-                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                publicId: miniCrest?.data?.attributes?.provider_metadata?.public_id,
-                originalHeight: miniCrest?.data?.attributes?.height,
-                originalWidth: miniCrest?.data?.attributes?.width,
-                originalFormat: (miniCrest?.data?.attributes?.ext || '').replace('.', ''),
-            }
-
-            const node = {
-                id: createNodeId(`squeak-team-${team.id}`),
-                squeakId: team.id,
-                internal: {
-                    type: `SqueakTeam`,
-                    contentDigest: createContentDigest(team),
-                },
-                teamImage: cloudinaryTeamImage,
-                crest: cloudinaryCrest,
-                miniCrest: cloudinaryMiniCrest,
-                ...rest,
-                roadmaps: roadmaps.data.map((roadmap) => ({
-                    id: createNodeId(`squeak-roadmap-${roadmap.id}`),
-                })),
-            }
-
-            createNode(node)
+        const cloudinaryTeamImage = {
+            ...teamImage,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: teamImage?.image?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: teamImage?.image?.data?.attributes?.height,
+            originalWidth: teamImage?.image?.data?.attributes?.width,
+            originalFormat: (teamImage?.image?.data?.attributes?.ext || '').replace('.', ''),
         }
+
+        const cloudinaryCrest = {
+            ...crest,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: crest?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: crest?.data?.attributes?.height,
+            originalWidth: crest?.data?.attributes?.width,
+            originalFormat: (crest?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
+        const cloudinaryMiniCrest = {
+            ...miniCrest,
+            cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+            publicId: miniCrest?.data?.attributes?.provider_metadata?.public_id,
+            originalHeight: miniCrest?.data?.attributes?.height,
+            originalWidth: miniCrest?.data?.attributes?.width,
+            originalFormat: (miniCrest?.data?.attributes?.ext || '').replace('.', ''),
+        }
+
+        const node = {
+            id: createNodeId(`squeak-team-${team.id}`),
+            squeakId: team.id,
+            internal: {
+                type: `SqueakTeam`,
+                contentDigest: createContentDigest(team),
+            },
+            teamImage: cloudinaryTeamImage,
+            crest: cloudinaryCrest,
+            miniCrest: cloudinaryMiniCrest,
+            ...rest,
+            roadmaps: roadmaps.data.map((roadmap) => ({
+                id: createNodeId(`squeak-roadmap-${roadmap.id}`),
+            })),
+        }
+
+        createNode(node)
     }
 
-    // Fetch all roadmaps. Page 1 tells us the page count, then the remaining
-    // pages are fetched concurrently instead of one after another.
-    const fetchRoadmapPage = async (page: number) => {
+    // Fetch all roadmaps
+    const fetchRoadmaps = async (page = 1) => {
         let roadmapQuery = qs.stringify({
             pagination: {
                 page,
@@ -285,10 +276,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
         })
 
-        return await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
-    }
+        const roadmaps = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
 
-    const createRoadmapNodes = async (roadmaps) => {
         for (const roadmap of roadmaps.data) {
             const { teams, githubUrls, image, ...rest } = roadmap.attributes
 
@@ -350,22 +339,12 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
 
             createNode(node)
         }
-    }
-
-    const fetchRoadmaps = async () => {
-        const firstPage = await fetchRoadmapPage(1)
-        const pageCount = firstPage.meta?.pagination?.pageCount || 1
-        const remainingPages = await Promise.all(
-            Array.from({ length: pageCount - 1 }, (_, i) => fetchRoadmapPage(i + 2))
-        )
-        for (const page of [firstPage, ...remainingPages]) {
-            await createRoadmapNodes(page)
+        if (roadmaps.meta.pagination.page < roadmaps.meta.pagination.pageCount) {
+            await fetchRoadmaps(page + 1)
         }
     }
 
-    // The five collections are independent — cross-references between them use
-    // deterministic createNodeId seeds, not fetched data — so fetch them concurrently.
-    await Promise.all([fetchProfiles(), fetchTopicGroups(), fetchTopics(), fetchTeams(), fetchRoadmaps()])
+    await fetchRoadmaps()
 }
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = async ({ actions }) => {
