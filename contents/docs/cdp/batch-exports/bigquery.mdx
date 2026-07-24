@@ -46,9 +46,9 @@ And at the dataset level we require permissions to interact with the dataset and
 - `bigquery.tables.getData`
 - `bigquery.tables.list`
 - `bigquery.tables.updateData`
-- (Required for mutable models) `bigquery.tables.delete`
+- `bigquery.tables.delete`
 
-> **Note:** For mutable models like persons, the batch export also needs to run queries in BigQuery to perform merge operations. For historical reasons, batch exports without query permissions may still work for non-mutable models by falling back to direct loading, but we recommend granting all permissions listed above for all new batch exports.
+> **Note:** For mutable models like persons, the batch export also needs to run queries in BigQuery to perform merge operations, so the batch export will fail if these are not granted. However, for historical reasons, batch exports lacking query permissions may still work for non-mutable models by falling back to direct loading, but we recommend granting all permissions listed above for all new batch exports.
 
 ![Create custom role for batch exports](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-role.png)
 
