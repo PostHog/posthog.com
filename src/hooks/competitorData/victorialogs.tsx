@@ -1,18 +1,18 @@
-export const better_stack = {
-    name: 'Better Stack',
-    key: 'better_stack',
+export const victorialogs = {
+    name: 'VictoriaLogs',
+    key: 'victorialogs',
     assets: {
-        icon: '/images/competitors/betterstack.png',
+        icon: '/images/competitors/victoriametrics.svg',
     },
     products: {
-        error_tracking: {
-            available: true,
-        },
         product_analytics: {
             available: false,
         },
         session_replay: {
-            available: true,
+            available: false,
+        },
+        error_tracking: {
+            available: false,
         },
         ai_observability: {
             available: false,
@@ -25,35 +25,35 @@ export const better_stack = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
-                    high_cardinality_indexing: true,
+                    high_cardinality_indexing: 'Partial',
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Partial',
-                    no_proprietary_query_language: 'SQL',
+                    full_text_search: true,
+                    no_proprietary_query_language: 'LogsQL',
                 },
             },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: true,
                     logs_scoped_by_investigation_context: true,
-                    ai_assisted_log_summaries: true,
+                    ai_assisted_log_summaries: false,
                 },
             },
             debugging_integrations: {
                 features: {
-                    built_in_error_tracking: true,
-                    built_in_session_replay: true,
+                    built_in_error_tracking: false,
+                    built_in_session_replay: false,
                     product_analytics_context: false,
                 },
             },
             observability: {
                 features: {
-                    metrics: true,
-                    traces: true,
+                    metrics: false,
+                    traces: false,
                     alerting: true,
-                    infra_monitoring: true,
+                    infra_monitoring: false,
                 },
             },
             security_and_compliance: {
@@ -73,17 +73,17 @@ export const better_stack = {
     },
     platform: {
         deployment: {
-            self_host: false,
-            open_source: false,
-            managed_cloud: true,
+            self_host: true,
+            open_source: 'Apache 2.0',
+            managed_cloud: 'VictoriaMetrics Cloud',
         },
         pricing: {
             self_serve: true,
-            free_tier: true,
+            free_tier: false,
             transparent_pricing: true,
         },
         tools: {
-            ai_assistant: true,
+            ai_assistant: false,
         },
         security: {
             siem: false,

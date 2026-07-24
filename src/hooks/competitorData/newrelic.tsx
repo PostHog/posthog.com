@@ -47,6 +47,7 @@ export const newrelic = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
                 },
             },
             search: {
@@ -65,11 +66,7 @@ export const newrelic = {
             debugging_integrations: {
                 features: {
                     built_in_error_tracking: true,
-<<<<<<< HEAD
-                    built_in_session_replay: false,
-=======
                     built_in_session_replay: true,
->>>>>>> master
                     product_analytics_context: false,
                 },
             },
@@ -106,6 +103,7 @@ export const newrelic = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
+            managed_cloud: true,
             open_source: false,
             self_host: false,
         },

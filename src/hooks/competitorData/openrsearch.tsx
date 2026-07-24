@@ -1,18 +1,18 @@
-export const better_stack = {
-    name: 'Better Stack',
-    key: 'better_stack',
+export const opensearch = {
+    name: 'OpenSearch',
+    key: 'opensearch',
     assets: {
-        icon: '/images/competitors/betterstack.png',
+        icon: '/images/competitors/opensearch.svg',
     },
     products: {
-        error_tracking: {
-            available: true,
-        },
         product_analytics: {
             available: false,
         },
         session_replay: {
-            available: true,
+            available: false,
+        },
+        error_tracking: {
+            available: false,
         },
         ai_observability: {
             available: false,
@@ -23,28 +23,28 @@ export const better_stack = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: true,
+                    native_open_telemetry_ingest: 'Partial',
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Partial',
-                    no_proprietary_query_language: 'SQL',
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
                 },
             },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: true,
                     logs_scoped_by_investigation_context: true,
-                    ai_assisted_log_summaries: true,
+                    ai_assisted_log_summaries: false,
                 },
             },
             debugging_integrations: {
                 features: {
-                    built_in_error_tracking: true,
-                    built_in_session_replay: true,
+                    built_in_error_tracking: false,
+                    built_in_session_replay: false,
                     product_analytics_context: false,
                 },
             },
@@ -58,35 +58,35 @@ export const better_stack = {
             },
             security_and_compliance: {
                 features: {
-                    siem: false,
-                    enterprise_scale_compliance: false,
+                    siem: true,
+                    enterprise_scale_compliance: true,
                 },
             },
             pricing: {
                 features: {
-                    ingest_only_pricing: true,
-                    no_query_compute_fees: true,
-                    predictable_at_scale: true,
+                    ingest_only_pricing: false,
+                    no_query_compute_fees: false,
+                    predictable_at_scale: false,
                 },
             },
         },
     },
     platform: {
         deployment: {
-            self_host: false,
-            open_source: false,
-            managed_cloud: true,
+            self_host: true,
+            open_source: 'Apache 2.0',
+            managed_cloud: 'Amazon OpenSearch Service',
         },
         pricing: {
             self_serve: true,
-            free_tier: true,
+            free_tier: false,
             transparent_pricing: true,
         },
         tools: {
             ai_assistant: true,
         },
         security: {
-            siem: false,
+            siem: true,
         },
     },
 }

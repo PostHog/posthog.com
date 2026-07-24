@@ -43,33 +43,6 @@ export const logsFeatures = {
         },
     },
     search: {
-<<<<<<< HEAD
-    name: 'Search',
-    features: {
-        full_text_search: {
-            name: 'Full-text search',
-            description: 'Run arbitrary ad-hoc queries across raw log text',
-        },
-        no_proprietary_query_language: {
-            name: 'No proprietary query language',
-            description: 'Use standard SQL or attributes instead of a bespoke vendor-specific query language',
-        },
-    },
-},
-security_and_compliance: {
-    name: 'Security and compliance',
-    features: {
-        siem: {
-            name: 'SIEM',
-            description: 'Security event correlation and threat detection',
-        },
-        enterprise_scale_compliance: {
-            name: 'Compliance / enterprise scale',
-            description: 'Petabyte-scale retention, compliance controls, and enterprise audit workflows',
-        },
-    },
-},
-=======
         name: 'Search',
         features: {
             full_text_search: {
@@ -95,7 +68,6 @@ security_and_compliance: {
             },
         },
     },
->>>>>>> master
     investigation_workflow: {
         name: 'Investigation workflow',
         features: {
