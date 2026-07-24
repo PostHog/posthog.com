@@ -384,7 +384,7 @@ function RoadmapSection() {
             <SectionHeader
                 sticker={StickerMicroscope}
                 title="What we're researching"
-                subtitle="Four tracks, each producing papers and technical reports as it goes."
+                subtitle="Four tracks, each producing papers and technical reports."
             />
             <ul className="m-0 p-0 list-none divide-y divide-primary mb-6">
                 {ROADMAP_ITEMS.map((item, index) => (
@@ -698,7 +698,7 @@ function ResearchPostsSection({ posts }: { posts: ResearchPost[] }) {
             <SectionHeader
                 sticker={StickerBulb}
                 title="Blog"
-                subtitle="What we learn as we go — the wins, the errors, and the projects we cancelled."
+                subtitle="What we learn — the wins, the errors, and the projects we cancelled."
             />
             {isCarousel ? (
                 <div className="relative mb-6">
@@ -1038,7 +1038,7 @@ function CTASection() {
                         try in the app.
                     </p>
                     <div className="flex flex-col @md:flex-row items-center justify-center gap-3">
-                        <OSButton asLink to="/wip" state={{ newWindow: true }} variant="primary" size="md">
+                        <OSButton asLink to="/roadmap" state={{ newWindow: true }} variant="primary" size="md">
                             See what we're working on
                         </OSButton>
                         <OSButton
