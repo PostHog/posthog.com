@@ -4,8 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-import WizardCommand from 'components/WizardCommand'
+import RevAnalyticsBetaWarning from "./_snippets/rev-analytics-beta-warning.mdx";
+import WizardCommand from "components/WizardCommand";
 
 <RevAnalyticsBetaWarning />
 
@@ -27,7 +27,7 @@ customer = stripe.Customer.create(
 ```node
 const customer = await stripe.customers.create({
   email: user.email,
-  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId }, // +
 });
 ```
 
@@ -96,8 +96,8 @@ stripe.Subscription.create(
 ```node
 await stripe.subscriptions.create({
   customer: user.stripeCustomerId,
-  items: [{ price: 'price_xxx' }],
-  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+  items: [{ price: "price_xxx" }],
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId }, // +
 });
 ```
 
@@ -171,9 +171,9 @@ stripe.PaymentIntent.create(
 ```node
 await stripe.paymentIntents.create({
   amount: 1000,
-  currency: 'usd',
+  currency: "usd",
   customer: user.stripeCustomerId,
-  metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+  metadata: { posthog_person_distinct_id: user.posthogDistinctId }, // +
 });
 ```
 
@@ -262,20 +262,20 @@ session = stripe.checkout.Session.create(
 ```node
 // For recurring (subscription) checkout
 const session = await stripe.checkout.sessions.create({
-  mode: 'subscription',
+  mode: "subscription",
   client_reference_id: user.id,
   subscription_data: {
-    metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+    metadata: { posthog_person_distinct_id: user.posthogDistinctId }, // +
   },
   // ... other params
 });
 
 // For one-time payment checkout
 const session = await stripe.checkout.sessions.create({
-  mode: 'payment',
+  mode: "payment",
   client_reference_id: user.id,
   payment_intent_data: {
-    metadata: { posthog_person_distinct_id: user.posthogDistinctId },  // +
+    metadata: { posthog_person_distinct_id: user.posthogDistinctId }, // +
   },
   // ... other params
 });
@@ -413,9 +413,7 @@ var session = await sessionService.CreateAsync(options);
 
 > **How does this work?** PostHog looks for `posthog_person_distinct_id` in the metadata of subscriptions, charges, and invoices tied to each Stripe customer. If the customer object doesn't have the metadata directly, PostHog uses the value from the most recently created child object.
 
-Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
-
-You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is.
+Once this is connected, revenue data will appear on person and group profile pages. You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse), which map `person_id`/`group_key` to their all-time revenue.
 
 ```sql
 -- Count the number of persons with revenue greater than 1,000,000
