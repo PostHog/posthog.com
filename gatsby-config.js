@@ -12,9 +12,7 @@ require('dotenv').config({
 const getQuestionPages = async (base) => {
     const fetchQuestions = async (page) => {
         const questionQuery = qs.stringify({
-            // The sitemap only reads `permalink` from each question; fetching every
-            // populated relation was ~50x the transfer for identical output.
-            fields: ['permalink'],
+            populate: '*',
             pagination: {
                 page,
                 pageSize: 100,
@@ -57,12 +55,6 @@ const getQuestionPages = async (base) => {
 module.exports = {
     flags: {
         DEV_SSR: false,
-        // This site registers ~10 source plugins (5x gatsby-source-filesystem, ashby, squeak,
-        // mapbox-locations, strapi-pages, source-git). Gatsby otherwise runs each plugin's
-        // sourceNodes serially; this runs them concurrently. Node creation is independent of
-        // ordering, so output is unaffected — only wall-clock during "source and transform
-        // nodes" changes.
-        PARALLEL_SOURCING: true,
     },
     siteMetadata: {
         title: 'PostHog',
@@ -136,13 +128,6 @@ module.exports = {
                         node.name === 'SKILL' &&
                         (node.relativeDirectory || '').includes('/skills/')) ||
                         (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
-                // Skip the full MDX→JSX compile + babel pass the default node-creation path
-                // runs per file during sourcing (a CPU profile showed it dominating "source
-                // and transform nodes"). The lighter path extracts frontmatter/imports from a
-                // single remark parse; query-time `body` compilation is unaffected. The only
-                // node-shape change is Mdx.exports (raw statements instead of evaluated
-                // objects), which no query in this site reads.
-                lessBabel: true,
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -421,10 +406,6 @@ module.exports = {
                 // scripts, and unrelated frontend/skills code paths. They never become
                 // pages — see shouldBlockNodeFromTransformation above and onCreateNode.
                 patterns: ['docs/published/**', 'docs/onboarding/**', 'products/*/skills/*/SKILL.md'],
-                // Git sparse-checkout equivalents of `patterns` (non-cone syntax). With these
-                // set, the plugin does a blobless sparse clone that downloads and writes out
-                // only these paths instead of the monorepo's entire working tree.
-                sparsePatterns: ['/docs/published/', '/docs/onboarding/', '/products/*/skills/*/SKILL.md'],
             },
         },
         // {
