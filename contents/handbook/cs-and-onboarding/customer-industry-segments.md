@@ -115,14 +115,14 @@ Software can be indicative of maturity of the organization. For example, teams u
 
 ##### Event taxonomy
 
-AI and data customers should be running LLM Analytics. It sets the taxonomy: with the SDK you get structured generation, trace, and cost events out of the box. Without it, taxonomy falls back to whatever the customer wires up by hand.
+AI and data customers should be running AI Observability. It sets the taxonomy: with the SDK you get structured generation, trace, and cost events out of the box. Without it, taxonomy falls back to whatever the customer wires up by hand.
 
-Without LLM Analytics SDK:
+Without the AI Observability SDK:
 - Autocaptured clicks and pageviews on AI features (button presses, route changes)                                  
 - Custom events the customer wired up by hand, like `chat_message_sent` or `prompt_submitted`
 - Whatever properties a customer should choose to attach
 
-With LLM Analytics SDK:
+With the AI Observability SDK:
 - `$ai_generation` – one row per LLM call with model, input/output tokens, cost, latency, and provider    
 - `$ai_trace` and `$ai_span` – parent/child structure for multi-step agents and tool use
 - `$ai_embedding`, `$ai_metric`, `$ai_feedback` – vector ops, eval scores, thumbs up/down
@@ -147,7 +147,7 @@ When companies look at their event data in this segment, they're usually trying 
 
 ##### Cross-product use cases
 
-- **LLM Analytics** – join `$ai_generation` cost back to person properties for cost-per-segment, or to identify which plan or role is burning the most tokens.
+- **AI Observability** – join `$ai_generation` cost back to person properties for cost-per-segment, or to identify which plan or role is burning the most tokens.
 - **Feature Flags and Experiments** – gate new models behind flags, run A/B tests on prompt changes, hold out high-value users from risky rollouts.
 - **Surveys** – trigger feedback prompts after a generation, collect CSAT on AI features, run PMF surveys against power users.
 - **Session Replay** – filter to recordings of users hitting prompt failures or specific $ai_generation errors.
