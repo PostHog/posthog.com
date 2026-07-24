@@ -5835,6 +5835,27 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Managed warehouse',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/data-warehouse/managed-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                },
+                {
+                    name: 'Set up your warehouse',
+                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    icon: 'IconListCheck',
+                    color: 'blue',
+                },
+                {
+                    name: 'Connect and query',
+                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Concepts',
                 },
                 {
@@ -6745,14 +6766,14 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Dashboard',
-                    featured: true,
-                    url: '/docs/revenue-analytics/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
+                    name: 'Concepts',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Revenue metrics',
+                    featured: true,
+                    url: '/docs/revenue-analytics/revenue-metrics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Connect to customers',
