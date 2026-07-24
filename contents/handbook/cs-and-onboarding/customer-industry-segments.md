@@ -65,11 +65,13 @@ Companies that exist in different parts of the AI value chain. There is signific
 
 ### What they care about
 
-Commonly, they share developer-centric focus on adoption and retention. The higher order sub-segments (hyperscalers, frontier model labs, inference) will primarily focus on competitive parity and platform stickiness. Generative and AI-Native Application segments may primarily focus on feature adoption rates, generation metrics, unit economics, and retention. They'll also differ by output: whereas Generative segment customers may focus on literal output (i.e. how did this change affect how users download images after generating them), AI-Native Application segment customers' focus on output may be around task completion rates, or time savings.
+They share a developer-centric focus on adoption and retention. The higher-order sub-segments (hyperscalers, frontier model labs, inference) care about competitive parity and platform stickiness. Generative and AI-native application segments care about feature adoption, generation metrics, unit economics, and retention.
+
+The two differ on what counts as output. Generative customers measure the artifact itself, like whether a change increased how often users download an image after generating it. AI-native application customers measure task completion rates and time saved.
 
 ### Industry terminology
 
-**Observability** – Monitoring model performance, token use, latency, unit economics, and hallucination rates in environments. Primarily related to teams who ship features that directly interact with human users.
+**Observability** – Monitoring model performance, token use, latency, unit economics, and hallucination rates in production. Most relevant to teams shipping features that interact directly with users.
 
 **Feature store** – Centralized system for serving, storing, and managing machine learning features that are used in training and inference. These are more commonly found with mature data organizations.
 
@@ -113,7 +115,7 @@ Software can be indicative of maturity of the organization. For example, teams u
 
 ##### Event taxonomy
 
-Taxonomy is generally dependent on the use of LLM Analytics. 
+AI and data customers should be running LLM Analytics. It sets the taxonomy: with the SDK you get structured generation, trace, and cost events out of the box. Without it, taxonomy falls back to whatever the customer wires up by hand.
 
 Without LLM Analytics SDK:
 - Autocaptured clicks and pageviews on AI features (button presses, route changes)                                  
@@ -129,7 +131,7 @@ With LLM Analytics SDK:
 
 When companies look at their event data in this segment, they're usually trying to answer "who did this?". The person profile should carry a defined `user_role` (`admin`, for example) along with aggregations like `total_api_calls` or `total_tokens_used`.                                                                              
                   
-**Best Practices**
+**Best practices**
 
 - Define a stable `$distinct_id` (internal UUID, not email or username) as early as possible.                 
 - Identify immediately after authentication, both client-side and server-side, with the same distinct ID.
