@@ -1,9 +1,9 @@
-name: Refresh Cloudinary cache
+name: Warm build caches
 
 on:
     schedule:
-        # Daily — refresh the Cloudinary metadata cache that preview builds restore.
-        # (Preview builds run Gatsby cold, so this no longer seeds a Gatsby build cache.)
+        # Daily — refresh the Cloudinary metadata cache and the persistent build caches
+        # (webpack packs + MDX payloads) that preview builds restore.
         - cron: '0 6 * * *'
     workflow_dispatch:
 
@@ -16,7 +16,7 @@ env:
 
 jobs:
     warm-cache:
-        name: Refresh Cloudinary cache
+        name: Warm build caches
         runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
         permissions:
@@ -38,8 +38,10 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
-            # Build cold (no Gatsby cache) purely to run onPreInit's Cloudinary crawl, which
-            # writes .cloudinary-resources.json for preview builds to restore.
+            # Build cold (no Gatsby .cache) to run onPreInit's Cloudinary crawl (which
+            # writes .cloudinary-resources.json) and to populate the persistent build
+            # caches (node_modules/.cache/gatsby-persistent-webpack + gatsby-mdx-payloads)
+            # that preview builds restore.
             - name: Build site
               run: pnpm build
               env:
@@ -56,3 +58,20 @@ jobs:
               with:
                   path: .cloudinary-resources.json
                   key: cloudinary-${{ github.run_id }}
+
+            # Persistent, content-revalidated build caches: webpack packs (site stages,
+            # gatsby's query-engine/page-ssr engines, the MDX html renderer) plus
+            # gatsby-plugin-mdx's genMDX payload cache. Safe to restore across commits —
+            # webpack revalidates every entry against module contents and build
+            # dependencies, and the MDX payload cache keys on node content digests plus a
+            # compile-config fingerprint, so stale entries miss instead of misresolving.
+            # Keyed on lockfile + patches so dependency or patch changes start fresh; the
+            # run_id suffix keeps daily saves unique, with prefix restore in previews.
+            - name: Save persistent build caches
+              if: success()
+              uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: |
+                      node_modules/.cache/gatsby-persistent-webpack
+                      node_modules/.cache/gatsby-mdx-payloads
+                  key: gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-${{ github.run_id }}
