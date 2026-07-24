@@ -269,7 +269,9 @@ jobs:
 
             - name: Install dependencies
               if: steps.changes.outputs.visual == 'true'
-              run: pnpm install --frozen-lockfile
+              # The preview is already built and the Playwright container includes Chromium.
+              # Avoid unrelated legacy postinstalls (notably PhantomJS, which requires bzip2).
+              run: pnpm install --frozen-lockfile --ignore-scripts
 
             - name: Capture preview pages
               if: steps.changes.outputs.visual == 'true'
