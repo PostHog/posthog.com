@@ -6,6 +6,7 @@ import {
     IconList,
     IconConfetti,
     IconRocket,
+    IconCheckCircle,
     IconInfo,
     IconCursorClick,
     IconMagic,
@@ -112,16 +113,14 @@ export const webAnalytics = {
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
-     * Thin pricing surface: billed-with explainer + link to PA pricing.
-     * No Plans/calculator - WA isn't a separate SKU.
+     * Sections rendered on the Pricing surface (`/web-analytics/pricing`).
+     * Same shape as `productMenu`. Plans/calculator use Product Analytics
+     * billing via `billingType` + `pricingDescription`.
      */
     pricingMenu: [
-        {
-            slug: 'how-pricing-works',
-            name: 'How pricing works',
-            template: 'billed-with',
-            icon: <IconInfo className="size-4" />,
-        },
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
         // Hidden footer CTA rendered at the bottom of the Pricing surface.
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
