@@ -5835,6 +5835,27 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Managed warehouse',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/data-warehouse/managed-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                },
+                {
+                    name: 'Set up your warehouse',
+                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    icon: 'IconListCheck',
+                    color: 'blue',
+                },
+                {
+                    name: 'Connect and query',
+                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Concepts',
                 },
                 {
