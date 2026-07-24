@@ -137,6 +137,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       maintainer: String,
       imageUrl: String,
     }
+    type EarlyAccessFeatureAssignee {
+      type: String,
+      name: String,
+    }
     type EarlyAccessFeature implements Node {
       name: String,
       description: String,
@@ -146,6 +150,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featureId: String,
       waitlistCount: Int,
       payload: JSON,
+      assignee: EarlyAccessFeatureAssignee,
     }
     type Plugin implements Node {
       name: String,

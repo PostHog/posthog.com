@@ -1,7 +1,10 @@
 /**
  * Owning small team per Early Access Feature flag key, for the /roadmap team chips and
- * team filter. Checked before the hand-maintained feature-ownership map (useFeatureOwnership),
- * which only covers a handful of roadmap items.
+ * team filter. See useRoadmapEarlyAccessFeatures for the full resolution order: a role
+ * assignee set on the feature in PostHog takes precedence over this map, this map beats
+ * person assignees (often just the creation default) and the hand-maintained
+ * feature-ownership map (useFeatureOwnership), which only covers a handful of roadmap items.
+ * Once features are assigned to roles in the app, entries here become redundant.
  *
  * Derived 2026-07-20 by cross-referencing each feature flag's creator (project activity log)
  * with current small-team rosters, then correcting for product area where the creator has

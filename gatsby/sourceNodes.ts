@@ -1493,6 +1493,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         // API key at build time, or no linked survey).
                         waitlistCount: payload.survey_id != null ? waitlistCounts[payload.survey_id] ?? null : null,
                         payload,
+                        // Person or role the feature is assigned to in PostHog — {type, name} or
+                        // null. Served by the public EAF endpoint once PostHog/posthog#73466 is
+                        // deployed; null until then. The roadmap maps it to a small team.
+                        assignee: feature.assignee || null,
                     })
                 })
         } catch (error) {

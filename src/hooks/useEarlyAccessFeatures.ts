@@ -24,6 +24,12 @@ export interface EarlyAccessFeature {
      * passes it through at runtime — see PostHog/posthog-js#2642.)
      */
     payload?: Record<string, any>
+    /**
+     * Display name of the person or role the feature is assigned to in PostHog. Served by
+     * the public EAF endpoint once PostHog/posthog#73466 is deployed; null/undefined until
+     * then. The roadmap resolves it to a small team (see useRoadmapEarlyAccessFeatures).
+     */
+    assignee?: { type: 'user' | 'role'; name: string } | null
 }
 
 /**
@@ -102,6 +108,10 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
                     featureId
                     waitlistCount
                     payload
+                    assignee {
+                        type
+                        name
+                    }
                 }
             }
         }
