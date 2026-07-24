@@ -1,0 +1,102 @@
+import {
+    IconActivity,
+    IconCode,
+    IconFlask,
+    IconGraph,
+    IconLlmAnalytics,
+    IconMessage,
+    IconPieChart,
+    IconRewindPlay,
+    IconWarning,
+} from '@posthog/icons'
+import { OverlayProduct, ProductKey } from './types'
+
+// Real PostHog product colors, hard-coded as hex because the chips/dots/pills
+// color dynamically and Tailwind can't JIT `bg-${color}` class names.
+// Provenance: tailwind.config.js palette via src/hooks/productData/*.tsx —
+// product_analytics: blue, web_analytics: green-2, session_replay: yellow,
+// feature_flags: seagreen, error_tracking: orange, surveys: salmon,
+// ai_observability: purple, logs: red. "core" uses the neutral gray token.
+export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
+    core: {
+        key: 'core',
+        name: 'Install & SDKs',
+        short: 'Install',
+        color: '#8F8F8C',
+        textOnColor: '#fff',
+        Icon: IconCode,
+        docsUrl: '/docs/getting-started/install',
+    },
+    web: {
+        key: 'web',
+        name: 'Web analytics',
+        short: 'Web',
+        color: '#36C46F',
+        textOnColor: '#fff',
+        Icon: IconPieChart,
+        docsUrl: '/docs/web-analytics',
+    },
+    product: {
+        key: 'product',
+        name: 'Product analytics',
+        short: 'Product',
+        color: '#2F80FA',
+        textOnColor: '#fff',
+        Icon: IconGraph,
+        docsUrl: '/docs/product-analytics',
+    },
+    replay: {
+        key: 'replay',
+        name: 'Session replay',
+        short: 'Replay',
+        color: '#F7A501',
+        textOnColor: '#000',
+        Icon: IconRewindPlay,
+        docsUrl: '/docs/session-replay',
+    },
+    expflags: {
+        key: 'expflags',
+        name: 'Experiments & flags',
+        short: 'Flags',
+        color: '#30ABC6',
+        textOnColor: '#fff',
+        Icon: IconFlask,
+        docsUrl: '/docs/feature-flags',
+    },
+    error: {
+        key: 'error',
+        name: 'Error tracking',
+        short: 'Errors',
+        color: '#DF6133',
+        textOnColor: '#fff',
+        Icon: IconWarning,
+        docsUrl: '/docs/error-tracking',
+    },
+    surveys: {
+        key: 'surveys',
+        name: 'Surveys',
+        short: 'Surveys',
+        color: '#F35454',
+        textOnColor: '#fff',
+        Icon: IconMessage,
+        docsUrl: '/docs/surveys',
+    },
+    llm: {
+        key: 'llm',
+        name: 'LLM analytics',
+        short: 'LLM',
+        color: '#B62AD9',
+        textOnColor: '#fff',
+        Icon: IconLlmAnalytics,
+        docsUrl: '/docs/llm-analytics',
+    },
+    logs: {
+        key: 'logs',
+        name: 'Logs',
+        short: 'Logs',
+        color: '#F54E00',
+        textOnColor: '#fff',
+        Icon: IconActivity,
+        docsUrl: '/docs/logs',
+    },
+}
