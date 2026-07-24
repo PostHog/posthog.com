@@ -1,0 +1,100 @@
+---
+title: Error tracking
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconRocket, IconWarning, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+Error tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's [session replay](/docs/session-replay), events, and properties attached, so you can see what went wrong instead of trying to reproduce it. Those same exceptions feed [Self-driving](/docs/self-driving), which groups recurring issues and opens pull requests you review and merge.
+
+<OSButton variant="primary" asLink to="/docs/error-tracking/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You triage and resolve issues in the PostHog web app. The other surfaces let you debug and fix issues without leaving your existing tools.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Monitor, assign, and resolve issues, each with the affected user's replay and events in view.</p>
+      <a href="/docs/error-tracking/monitoring" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Monitor issues →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Pull up issues and stack traces and debug them from any MCP client or AI editor.</p>
+      <a href="/docs/error-tracking/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Debug over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review and merge the Self-driving fixes opened from your recurring issues.</p>
+      <a href="/docs/error-tracking/surfaces/code" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix in PostHog Desktop →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Error tracking runs on the exceptions your app sends to PostHog. SDKs capture them automatically, source maps make the stack traces readable, and releases tie each exception back to the deploy that caused it.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SDKs</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Capture exceptions automatically from web, backend, and mobile SDKs across your stack.</p>
+      <a href="/docs/error-tracking/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Install an SDK →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Source maps</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Upload source maps and symbol sets so minified stack traces point back to your real code.</p>
+      <a href="/docs/error-tracking/upload-source-maps" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Upload source maps →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconRocket className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Releases</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Tag exceptions with the release and commit that introduced them to spot regressions fast.</p>
+      <a href="/docs/error-tracking/releases" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Track releases →</a>
+    </div>
+  </div>
+
+</div>
+
+## How error tracking works with Self-driving
+
+Your exceptions are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving): recurring, high-impact issues become reports, and when there's a code fix, a pull request you review and merge.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Exceptions', icon: IconWarning, color: '#F54E00', description: 'Errors captured from every SDK in your stack' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Recurring, high-impact issues surfaced automatically' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related replays and product context' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You triage and resolve issues in the [PostHog web app](/docs/error-tracking/monitoring), and review and merge the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.
