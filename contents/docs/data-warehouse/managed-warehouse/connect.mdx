@@ -23,8 +23,8 @@ Your connection details live in [Data ops](https://app.posthog.com/data-ops) und
 | Host | `<your-warehouse-name>.dw.us.postwh.com` (US) or `<your-warehouse-name>.dw.eu.postwh.com` (EU) |
 | Port | `5432` |
 | Database | `ducklake` – always, regardless of warehouse name |
-| Username | `root`, or a [database user](#database-users) you've created |
-| Password | Shown once at provisioning or user creation; reset it from the app if lost |
+| Username | `root` |
+| Password | Shown once at provisioning; reset it from the Settings tab if lost |
 
 TLS is required, so include `sslmode=require`. A complete `psql` connection looks like:
 
@@ -33,15 +33,6 @@ psql "host=my-warehouse.dw.us.postwh.com port=5432 dbname=ducklake user=root ssl
 ```
 
 The same details work in anything that talks Postgres: pgAdmin, DBeaver, Metabase, Grafana, Superset, Tableau, and the standard drivers (psycopg, pgx, JDBC, node-postgres, SQLAlchemy, and friends).
-
-## Database users
-
-The `root` user is created when you provision the warehouse. Rather than sharing it around, create a user per teammate or per tool from the **DB users** tab in Data ops (organization admins only):
-
-- **Create** a user and share the generated password – it's shown once, at creation.
-- **Reset password** if one is lost or needs rotating. The old password stops working immediately.
-- **Disable** a user to block new connections and end their live sessions, without deleting them.
-- **Delete** a user to remove their access permanently. The root user can't be deleted or disabled.
 
 ## Find your way around
 
@@ -75,7 +66,7 @@ Because the engine is DuckDB, its analytical SQL passes through transparently as
 
 You can also write: `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE`, and `DELETE` are supported, so the warehouse can hold your own derived tables next to the synced data. Keep your own work in tables or schemas you create – the PostHog-managed tables are maintained by sync, and anything you write into them can be overwritten.
 
-A few things a Postgres veteran will notice are absent: server-side functions and triggers (PL/pgSQL), sequences, and `LISTEN`/`NOTIFY` don't exist in DuckDB, and role management happens through database users in the app rather than `CREATE ROLE`.
+A few things a Postgres veteran will notice are absent: server-side functions and triggers (PL/pgSQL), sequences, and `LISTEN`/`NOTIFY` don't exist in DuckDB, and credentials are managed by PostHog rather than through `CREATE ROLE`.
 
 ## Querying from PostHog
 
