@@ -2,11 +2,11 @@
 title: Analyze revenue with PostHog AI
 ---
 
-[PostHog AI](/docs/posthog-ai) tracks revenue trends, builds dashboards, and analyzes your business performance using natural language. Ask about MRR, churn, revenue by segment, or plan comparisons – and PostHog AI queries your [revenue data](/docs/revenue-analytics) to find answers.
+[PostHog AI](/docs/posthog-ai) analyzes revenue trends and business performance using natural language. Ask about MRR, churn, revenue by segment, or plan comparisons – and PostHog AI queries your [revenue data](/docs/revenue-analytics) through HogQL to find answers.
 
 ## How it works
 
-PostHog AI can work with your revenue data to:
+PostHog AI queries your revenue [managed views](/docs/revenue-analytics/managed-views) and properties (`$virt_revenue`, `$virt_mrr`) to:
 
 - **Track revenue over time** – MRR, ARR, total revenue, and growth rates
 - **Break down by dimension** – revenue by product, plan, region, or customer segment
@@ -17,21 +17,21 @@ Revenue data comes from your connected sources (like [Stripe](/docs/data-warehou
 
 ## Revenue metrics PostHog AI can calculate
 
-| Metric | What it measures | Example prompt |
-|--------|-----------------|----------------|
-| **MRR** | Monthly recurring revenue | "Show MRR for the past 12 months" |
-| **ARR** | Annual recurring revenue | "What's our current ARR?" |
-| **ARPU** | Average revenue per user | "Compare ARPU across plans" |
-| **Churn** | Revenue lost from cancellations | "What's our revenue churn rate this quarter?" |
+| Metric        | What it measures                       | Example prompt                                      |
+| ------------- | -------------------------------------- | --------------------------------------------------- |
+| **MRR**       | Monthly recurring revenue              | "Show MRR for the past 12 months"                   |
+| **ARR**       | Annual recurring revenue               | "What's our current ARR?"                           |
+| **ARPU**      | Average revenue per user               | "Compare ARPU across plans"                         |
+| **Churn**     | Revenue lost from cancellations        | "What's our revenue churn rate this quarter?"       |
 | **Expansion** | Revenue growth from existing customers | "How much expansion revenue did we add last month?" |
-| **LTV** | Lifetime value by segment | "What's the average LTV for enterprise customers?" |
+| **LTV**       | Lifetime value by segment              | "What's the average LTV for enterprise customers?"  |
 
 ## Try it
 
 Select a prompt to try it out in the PostHog app:
 
 - [`Show my revenue for the past year`](https://app.posthog.com/#panel=max:Show%20my%20revenue%20for%20the%20past%20year)
-- [`Create a dashboard that breaks down revenue by product`](https://app.posthog.com/#panel=max:Create%20a%20dashboard%20that%20breaks%20down%20revenue%20by%20product)
+- [`What's my MRR breakdown by product?`](https://app.posthog.com/#panel=max:What's%20my%20MRR%20breakdown%20by%20product%3F)
 - [`Compare MRR growth this quarter vs last quarter`](https://app.posthog.com/#panel=max:Compare%20MRR%20growth%20this%20quarter%20vs%20last%20quarter)
 - [`Which customer segments drive the most revenue?`](https://app.posthog.com/#panel=max:Which%20customer%20segments%20drive%20the%20most%20revenue%3F)
 - [`Show revenue trends for enterprise vs self-serve plans`](https://app.posthog.com/#panel=max:Show%20revenue%20trends%20for%20enterprise%20vs%20self-serve%20plans)
