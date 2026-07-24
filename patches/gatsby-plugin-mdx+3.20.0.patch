@@ -1,0 +1,316 @@
+diff --git a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
+index e55874597..3edf39790 100644
+--- a/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
++++ b/node_modules/gatsby-plugin-mdx/utils/gen-mdx.js
+@@ -2,6 +2,85 @@ const babel = require(`@babel/core`)
+ const grayMatter = require(`gray-matter`)
+ const mdx = require(`@mdx-js/mdx`)
+ const objRestSpread = require(`@babel/plugin-proposal-object-rest-spread`)
++const fs = require(`fs`)
++const path = require(`path`)
++const crypto = require(`crypto`)
++const zlib = require(`zlib`)
++
++// Persistent, content-keyed second level for the genMDX payload cache below. Gatsby's
++// own cache lives in .cache and is wiped by `gatsby clean`, forcing every post-clean
++// build to re-run the full MDX compile for every node whose `headings`, `body`, or
++// `html` gets resolved. Entries here are keyed by the node's contentDigest-based cache
++// key PLUS a fingerprint of everything that can change compile output (plugin version,
++// each gatsby remark plugin's entry-file hash and options), so config or plugin changes
++// invalidate naturally and a hit is byte-identical to a fresh compile.
++let persistFingerprint = null
++function getPersistFingerprint(options) {
++  if (persistFingerprint) return persistFingerprint
++  const parts = [`ph-mdx-persist-2`, require(`../package.json`).version]
++  for (const plugin of options.gatsbyRemarkPlugins || []) {
++    const resolve = typeof plugin === `string` ? plugin : plugin.resolve || ``
++    parts.push(resolve)
++    // Normalized sub-plugin entries carry the runtime options as `pluginOptions`
++    // (see get-source-plugins-as-remark-plugins.js); `options` is the raw config
++    // shape. Hash both so an options-only change always rotates the fingerprint.
++    parts.push(
++      JSON.stringify(
++        (plugin && (plugin.pluginOptions || plugin.options)) || null
++      )
++    )
++    try {
++      const entry =
++        (plugin && plugin.modulePath) || require.resolve(resolve)
++      parts.push(
++        crypto.createHash(`sha1`).update(fs.readFileSync(entry)).digest(`hex`)
++      )
++    } catch (e) {
++      parts.push(`unresolved`)
++    }
++  }
++  persistFingerprint = crypto
++    .createHash(`sha1`)
++    .update(parts.join(` `))
++    .digest(`hex`)
++  return persistFingerprint
++}
++
++function persistDir(options) {
++  return path.join(
++    options.root || process.cwd(),
++    `node_modules`,
++    `.cache`,
++    `gatsby-mdx-payloads`
++  )
++}
++
++function persistPath(cacheKey, options) {
++  const hash = crypto
++    .createHash(`sha1`)
++    .update(`${getPersistFingerprint(options)}|${cacheKey}`)
++    .digest(`hex`)
++  return path.join(persistDir(options), `${hash}.json.gz`)
++}
++
++function readPersistedPayload(file) {
++  try {
++    return JSON.parse(zlib.gunzipSync(fs.readFileSync(file)).toString(`utf8`))
++  } catch (e) {
++    return null
++  }
++}
++
++function writePersistedPayload(file, results, options) {
++  try {
++    fs.mkdirSync(persistDir(options), { recursive: true })
++    const tmp = `${file}.${process.pid}.tmp`
++    fs.writeFileSync(tmp, zlib.gzipSync(JSON.stringify(results)))
++    fs.renameSync(tmp, file)
++  } catch (e) {
++    // Persisting is best-effort; the gatsby cache still holds the payload.
++  }
++}
+ 
+ const debug = require(`debug`)(`gatsby-plugin-mdx:gen-mdx`)
+ 
+@@ -65,6 +144,13 @@ async function genMDX(
+     if (cachedPayload) {
+       return cachedPayload
+     }
++    const persisted = readPersistedPayload(
++      persistPath(payloadCacheKey(node), options)
++    )
++    if (persisted) {
++      await cache.set(payloadCacheKey(node), persisted)
++      return persisted
++    }
+   }
+ 
+   const results = {
+@@ -195,6 +281,11 @@ ${code}`
+    * ); */
+   if (!forceDisableCache) {
+     await cache.set(payloadCacheKey(node), results)
++    writePersistedPayload(
++      persistPath(payloadCacheKey(node), options),
++      results,
++      options
++    )
+   }
+   return results
+ }
+@@ -294,6 +385,20 @@ async function findImportsExports({
+ }) {
+   const { data: frontmatter, content } = grayMatter(rawInput, options)
+ 
++  // Fast path: MDX v1 imports/exports are root-level statements, so content with no
++  // line starting with `import`/`export` (markdown allows up to 3 leading spaces)
++  // cannot contain any. Skip the remark parse and return exactly what the full parse
++  // produces for such files. Lines that merely look like statements (e.g. inside
++  // fenced code) only cause a harmless fall-through to the full parse below.
++  if (!/^ {0,3}(import|export)\b/m.test(content)) {
++    return {
++      frontmatter,
++      scopeImports: [`import * as React from 'react'`],
++      scopeExports: [],
++      scopeIdentifiers: [`React`],
++    }
++  }
++
+   const gatsbyRemarkPluginsAsRemarkPlugins =
+     await getSourcePluginsAsRemarkPlugins({
+       gatsbyRemarkPlugins: options.gatsbyRemarkPlugins,
+diff --git a/node_modules/gatsby-plugin-mdx/utils/render-html.js b/node_modules/gatsby-plugin-mdx/utils/render-html.js
+index ab390241b..676f62049 100644
+--- a/node_modules/gatsby-plugin-mdx/utils/render-html.js
++++ b/node_modules/gatsby-plugin-mdx/utils/render-html.js
+@@ -22,64 +22,120 @@ queue.on(`active`, () => {
+   )
+ })
+ 
++// The compiled renderer bundle depends only on the webpack state and the static
++// entry file — never on the MDX bodies, which are passed to renderMdxBody at
++// runtime. Compile it once per process instead of once per DataLoader batch: the
++// html field on hundreds of nodes otherwise triggers dozens of identical webpack
++// compiles, which dominated onPostBuild (RSS feed generation).
++let renderMdxBodyPromise = null
++const compileRenderer = ({ cache, reporter, store }) => {
++  if (renderMdxBodyPromise) {
++    return renderMdxBodyPromise
++  }
++  renderMdxBodyPromise = queue.add(
++    () =>
++      new Promise(resolve => {
++        const webpackConfig = cloneDeep(store.getState().webpack)
++        const outputPath = path.join(cache.directory, `webpack`)
++        // something sets externals, which will cause React to be undefined
++        webpackConfig.externals = undefined
++        webpackConfig.entry = require.resolve(
++          `./wrap-root-render-html-entry.js`
++        )
++        webpackConfig.output = {
++          filename: `output.js`,
++          path: outputPath,
++          libraryTarget: `commonjs`,
++        }
++        webpackConfig.plugins = webpackConfig.plugins || []
++        webpackConfig.externalsPresets = {
++          node: true,
++        }
++        // Give the renderer compile its own persistent filesystem cache instead of
++        // inheriting the build stage's: the entry (every MDX scope file plus the
++        // renderer wrapper) is a near-full app compile, and webpack revalidates all
++        // entries against module contents, so a warm cache is byte-identical and a
++        // stale one degrades to a miss. Gatsby's stage buildDependencies (its webpack
++        // config plus every plugin's gatsby-node closure, which covers site
++        // onCreateWebpackConfig changes like aliases/loaders) are preserved so config
++        // changes still invalidate; this file is added on top.
++        const inheritedCache =
++          webpackConfig.cache && typeof webpackConfig.cache === `object`
++            ? webpackConfig.cache
++            : undefined
++        const inheritedBuildDependencies =
++          (inheritedCache && inheritedCache.buildDependencies) || {}
++        webpackConfig.cache = {
++          type: `filesystem`,
++          name: `mdx-html-renderer`,
++          cacheLocation: path.join(
++            process.cwd(),
++            `node_modules`,
++            `.cache`,
++            `gatsby-persistent-webpack`,
++            `mdx-html-renderer`
++          ),
++          buildDependencies: {
++            ...inheritedBuildDependencies,
++            config: [
++              ...((inheritedBuildDependencies && inheritedBuildDependencies.config) || []),
++              __filename,
++            ],
++          },
++        }
++        const compiler = webpack(webpackConfig)
++
++        compiler.run((err, stats) => {
++          // error handling bonanza
++          if (err) {
++            reporter.error(err.stack || err)
++            if (err.details) {
++              reporter.error(`gatsby-plugin-mdx\n` + err.details)
++            }
++            resolve(undefined)
++            return
++          }
++
++          const info = stats.toJson()
++
++          if (stats.hasErrors()) {
++            reporter.error(`gatsby-plugin-mdx\n` + info.errors)
++          }
++
++          if (stats.hasWarnings()) {
++            reporter.warn(`gatsby-plugin-mdx\n` + info.warnings)
++          }
++
++          const renderMdxBody = require(path.join(
++            outputPath,
++            `output.js`
++          )).default
++
++          // Webpack 5's filesystem cache flushes to disk on compiler.close(), which
++          // gatsby core's own persisted-cache bundlers (query-engine, page-ssr) call
++          // and this loader previously did not — so the cacheLocation above was
++          // otherwise silently a no-op across process restarts.
++          compiler.close(closeErr => {
++            if (closeErr) {
++              reporter.warn(`gatsby-plugin-mdx: error closing renderer compiler: ${closeErr}`)
++            }
++            resolve(renderMdxBody)
++          })
++        })
++      })
++  )
++  return renderMdxBodyPromise
++}
++
+ exports.mdxHTMLLoader = ({ cache, reporter, store }) =>
+   new DataLoader(
+     async keys => {
+-      const webpackConfig = cloneDeep(store.getState().webpack)
+-      const outputPath = path.join(cache.directory, `webpack`)
+-      // something sets externals, which will cause React to be undefined
+-      webpackConfig.externals = undefined
+-      webpackConfig.entry = require.resolve(`./wrap-root-render-html-entry.js`)
+-      webpackConfig.output = {
+-        filename: `output.js`,
+-        path: outputPath,
+-        libraryTarget: `commonjs`,
+-      }
+-      webpackConfig.plugins = webpackConfig.plugins || []
+-      webpackConfig.externalsPresets = {
+-        node: true,
+-      }
+-      const compiler = webpack(webpackConfig)
++      const renderMdxBody = await compileRenderer({ cache, reporter, store })
+ 
+-      return queue.add(
+-        () =>
+-          new Promise(resolve => {
+-            compiler.run((err, stats) => {
+-              // error handling bonanza
+-              if (err) {
+-                reporter.error(err.stack || err)
+-                if (err.details) {
+-                  reporter.error(`gatsby-plugin-mdx\n` + err.details)
+-                }
+-                return
+-              }
+-
+-              const info = stats.toJson()
+-
+-              if (stats.hasErrors()) {
+-                reporter.error(`gatsby-plugin-mdx\n` + info.errors)
+-              }
+-
+-              if (stats.hasWarnings()) {
+-                reporter.warn(`gatsby-plugin-mdx\n` + info.warnings)
+-              }
+-
+-              const renderMdxBody = require(path.join(
+-                outputPath,
+-                `output.js`
+-              )).default
+-
+-              resolve(
+-                keys.map(({ body }) =>
+-                  renderMdxBody
+-                    ? renderMdxBody(body)
+-                    : new Error(
+-                        `renderMdxBody was unavailable when rendering html.`
+-                      )
+-                )
+-              )
+-            })
+-          })
++      return keys.map(({ body }) =>
++        renderMdxBody
++          ? renderMdxBody(body)
++          : new Error(`renderMdxBody was unavailable when rendering html.`)
+       )
+     },
+     { cacheKeyFn: ({ id }) => id }

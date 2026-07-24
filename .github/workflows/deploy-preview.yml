@@ -76,6 +76,24 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
+            # Persistent, content-revalidated build caches saved daily by cache-warmup.yml:
+            # webpack packs (site stages, gatsby's query-engine/page-ssr engines, the MDX
+            # html renderer) plus gatsby-plugin-mdx's genMDX payload cache. Unlike Gatsby's
+            # .cache (see note above), these are safe to restore across differing content:
+            # webpack revalidates every entry against module contents and build
+            # dependencies, and the MDX payload cache keys on node content digests plus a
+            # compile-config fingerprint — stale entries miss instead of misresolving.
+            # Restored after `pnpm install` so package linking can't disturb the files.
+            - name: Restore persistent build caches
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: |
+                      node_modules/.cache/gatsby-persistent-webpack
+                      node_modules/.cache/gatsby-mdx-payloads
+                  key: gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-${{ github.run_id }}
+                  restore-keys: |
+                      gatsby-persistent-${{ hashFiles('pnpm-lock.yaml', 'patches/**') }}-
+
             - name: Build site
               run: pnpm build
               env:
