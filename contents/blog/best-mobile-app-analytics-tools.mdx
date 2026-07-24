@@ -64,7 +64,7 @@ Here's how some of the most popular mobile app analytics tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes product analytics and a whole bunch more, such as [A/B testing](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), [web analytics](/web-analytics), [surveys](/surveys), and [session replays](/session-replay).
+[PostHog](/) (that's us 👋) is an all-in-one platform built to help engineers create better products. It includes product analytics and a whole bunch more, such as [A/B testing](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [LLM observability](/llm-analytics), [web analytics](/web-analytics), [surveys](/surveys), and [session replays](/session-replay).
 
 It's designed for product-minded engineers, growth teams, and product managers who need to move fast and iterate based on reliable, actionable insights.
 
@@ -100,11 +100,7 @@ According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companie
 >
 > For teams looking for all the tools they need to improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to it having a generous free tier.
 
-<p>
-  <CallToAction to="https://posthog.com/docs">
-    Learn more about using PostHog
-  </CallToAction>
-</p>
+<WizardCTA />
 
 ## 2. Mixpanel
 
@@ -362,16 +358,16 @@ We're biased, obviously, but we think you'll love PostHog if:
 -   You want tools to ship, track, and analyze new features – like A/B testing, feature flags, and session replays
 -   You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/product-analytics) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## FAQ
 
 <details>
   <summary>What is mobile app analytics?</summary>
 
-**Mobile app analytics** is the process of collecting, measuring, and analyzing user behavior data from iOS and Android applications. It helps product teams understand how users interact with their app — from which features get the most engagement to where users drop off in key flows. 
+**Mobile app analytics** is the process of collecting, measuring, and analyzing user behavior data from iOS and Android applications. It helps product teams understand how users interact with their app – from which features get the most engagement to where users drop off in key flows. 
 
 Most mobile analytics platforms track events (like button taps, screen views, and purchases), user properties (like device type, OS version, and location), and session data (like session length and frequency). Advanced platforms also include [session replay](/session-replay), [A/B testing](/experiments), and crash analytics to give teams a complete picture of the mobile experience.
 
@@ -389,9 +385,9 @@ Mobile analytics platforms typically track app-specific metrics like crash-free 
 <details>
   <summary>What's the difference between product analytics and marketing analytics for mobile apps?</summary>
 
-Product analytics focuses on what users do *inside* your app — which features they use, where they get stuck, how often they return, and what drives retention. Tools like **PostHog**, **Mixpanel**, and **Amplitude** excel here. 
+Product analytics focuses on what users do *inside* your app – which features they use, where they get stuck, how often they return, and what drives retention. Tools like **PostHog**, **Mixpanel**, and **Amplitude** excel here. 
 
-Marketing analytics (also called attribution or mobile measurement) focuses on how users *found* your app — which ad campaigns drove installs, what the cost per acquisition was, and which channels have the best ROI. **AppsFlyer** is the leading tool for this. 
+Marketing analytics (also called attribution or mobile measurement) focuses on how users *found* your app – which ad campaigns drove installs, what the cost per acquisition was, and which channels have the best ROI. **AppsFlyer** is the leading tool for this. 
 
 Most teams need both: marketing analytics to optimize acquisition spend, and product analytics to understand and improve the in-app experience.
 
@@ -402,14 +398,14 @@ Most teams need both: marketing analytics to optimize acquisition spend, and pro
 
 You need an MMP if you're running paid user acquisition campaigns and want to know which ads, networks, and creatives are driving installs and conversions. MMPs like **AppsFlyer** handle the complex work of attributing installs to specific campaigns across dozens of ad networks (Meta, Google, TikTok, etc.) while navigating iOS privacy restrictions like SKAdNetwork. 
 
-If you're not running paid campaigns or are relying primarily on organic growth, you can skip the MMP and focus on product analytics instead. Many teams use both — an MMP for acquisition data and a product analytics tool like **PostHog** for in-app behavior.
+If you're not running paid campaigns or are relying primarily on organic growth, you can skip the MMP and focus on product analytics instead. Many teams use both – an MMP for acquisition data and a product analytics tool like **PostHog** for in-app behavior.
 
 </details>
 
 <details>
   <summary>How do I choose between self-hosted and cloud-hosted analytics?</summary>
 
-Cloud-hosted analytics (like **Mixpanel**, **Amplitude**, or **PostHog** Cloud) is easier to set up and maintain — you just integrate the SDK and start tracking. Self-hosted analytics gives you complete control over your data, which matters for companies in regulated industries (healthcare, finance, government) or those with strict data residency requirements. 
+Cloud-hosted analytics (like **Mixpanel**, **Amplitude**, or **PostHog** Cloud) is easier to set up and maintain – you just integrate the SDK and start tracking. Self-hosted analytics gives you complete control over your data, which matters for companies in regulated industries (healthcare, finance, government) or those with strict data residency requirements. 
 
 **Countly** specializes in self-hosted deployments. The trade-off is that self-hosting requires infrastructure management and ongoing maintenance. For more options, see our guide to the [best GDPR-compliant analytics tools](/blog/best-gdpr-compliant-analytics-tools).
 
@@ -432,7 +428,7 @@ For most teams, starting with core product analytics (events, funnels, retention
 <details>
   <summary>How do iOS privacy changes (ATT, SKAdNetwork) affect mobile analytics?</summary>
 
-Apple's App Tracking Transparency (ATT) framework requires apps to ask permission before tracking users across other apps and websites. Most users opt out, which significantly impacts marketing attribution — you can no longer reliably track which ad drove an install for users who decline. 
+Apple's App Tracking Transparency (ATT) framework requires apps to ask permission before tracking users across other apps and websites. Most users opt out, which significantly impacts marketing attribution – you can no longer reliably track which ad drove an install for users who decline. 
 
 SKAdNetwork is Apple's privacy-preserving alternative that provides aggregate attribution data with limited granularity and delayed reporting. Product analytics (tracking behavior within your own app) is less affected since it relies on first-party data. However, cross-app user identification and some cohort analysis capabilities are limited. Tools like **AppsFlyer** and **Mixpanel** have built SKAdNetwork support to help marketers adapt to these restrictions.
 
@@ -450,7 +446,7 @@ The main considerations are SDK bloat (each SDK adds to your app size and can im
 <details>
   <summary>What's the best free mobile analytics tool?</summary>
 
-**Firebase** offers the most generous free tier — its analytics is completely free with no event limits. **PostHog**'s free tier includes 1 million events and 2,500 mobile session recordings per month. **Mixpanel** offers 1 million events per month free, including 10,000 session replays. **Countly** Lite is free and open-source if you self-host, though it lacks advanced features like funnels and retention. For pure marketing attribution, **AppsFlyer**'s Zero plan includes 12,000 lifetime conversions free.
+**Firebase** offers the most generous free tier – its analytics is completely free with no event limits. **PostHog**'s free tier includes 1 million events and 2,500 mobile session recordings per month. **Mixpanel** offers 1 million events per month free, including 10,000 session replays. **Countly** Lite is free and open-source if you self-host, though it lacks advanced features like funnels and retention. For pure marketing attribution, **AppsFlyer**'s Zero plan includes 12,000 lifetime conversions free.
 
 The best choice depends on which features matter most to your team.
 
@@ -459,7 +455,7 @@ The best choice depends on which features matter most to your team.
 <details>
   <summary>Which mobile app analytics tool has the best session replay?</summary>
 
-**PostHog** and **UXCam** both offer strong mobile session replay. **UXCam** is purpose-built for mobile and captures gestures like swipes, pinches, and rage taps with dedicated heatmaps. **PostHog** offers session replay as part of a broader platform that includes analytics, feature flags, and A/B testing — so you can jump from a funnel drop-off directly into the replays that show why users are leaving.
+**PostHog** and **UXCam** both offer strong mobile session replay. **UXCam** is purpose-built for mobile and captures gestures like swipes, pinches, and rage taps with dedicated heatmaps. **PostHog** offers session replay as part of a broader platform that includes analytics, feature flags, and A/B testing – so you can jump from a funnel drop-off directly into the replays that show why users are leaving.
 
 **Mixpanel** added session replay in 2024 with a server-side stitching feature that lets you view replays for backend events. **Amplitude** also added replay but it's limited to Growth and Enterprise plans.
 
@@ -470,7 +466,7 @@ For a detailed comparison, see our guide to the [best mobile app session replay 
 <details>
   <summary>How is PostHog different from other mobile analytics tools?</summary>
 
-**PostHog** is more than a mobile analytics tool. It gives developers full context by combining all the tools needed to build a successful product in one platform — with a single SDK for mobile.
+**PostHog** is more than a mobile analytics tool. It gives developers full context by combining all the tools needed to build a successful product in one platform – with a single SDK for mobile.
 
 - **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [workflows](/workflows), and more.
 - **Built for mobile:** Native iOS and Android SDKs with offline event queuing, gesture tracking, and mobile session replay

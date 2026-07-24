@@ -47,7 +47,7 @@ Here's how the most popular open-source feature flag tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) is an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and a lot more in addition to feature flags.
+[PostHog](/) is an all-in-one platform, which means it offers [product analytics](/product-analytics), [session replay](/session-replay), [A/B testing](/experiments), [user surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and a lot more in addition to feature flags.
 
 It's a [popular alternative to LaunchDarkly](/blog/best-launchdarkly-alternatives) and analytics tools like [Amplitude](/blog/best-amplitude-alternatives).
 
@@ -70,6 +70,8 @@ PostHog's free tier includes 1 million feature flag requests per month. After th
 > ### Bottom line
 >
 > PostHog is the best choice if you want feature flags alongside [product analytics](/docs/product-analytics), [session replay](/docs/session-replay), [A/B testing](/experiments), and more in a single platform. Its [generous free tier](/pricing) makes it especially appealing for [startups and scaleups](/startups).
+
+<WizardCTA />
 
 ## 2. GrowthBook
 
@@ -248,16 +250,16 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like feature flags, A/B testing, analytics, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/feature-flags) and [read our docs](/docs/feature-flags) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
+<WizardCTA />
 
 ## Frequently asked questions
 
 <details>
   <summary>What is the best free feature flag tool?</summary>
 
-- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform — its free tier includes 1 million feature flag requests per month. 
+- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform – its free tier includes 1 million feature flag requests per month. 
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a tool that is 100% open source with no paid tiers at all. 
 
@@ -270,7 +272,7 @@ For more options beyond open source, check out our guide to the [best feature fl
 
 [Feature flags](/docs/feature-flags) let you toggle features on or off for specific users without deploying new code. [A/B testing](/docs/experiments) uses feature flags to randomly split users into groups (variants) and then measures which variant performs better against a goal metric. 
 
-In practice, most A/B testing tools — including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
+In practice, most A/B testing tools – including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
 
 To learn more, read our guide on [what is a feature flag (and how it compares to remote config and A/B testing)](/blog/what-is-a-feature-flag).
 

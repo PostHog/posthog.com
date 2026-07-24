@@ -60,7 +60,7 @@ Here's how the most popular mobile app A/B testing tools compare:
 
 ### What is PostHog?
 
-[PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) and a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM analytics](/llm-analytics), and an [AI assistant](/ai).
+[PostHog](/) (that's us!) is an all-in-one developer platform built to help engineers create better products. It includes [experimentation](/experiments) and a whole bunch more, such as [product analytics](/product-analytics), [session replays](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), [error tracking](/error-tracking), [LLM observability](/llm-analytics), and an [AI assistant](/ai).
 
 Because everything lives in a single platform, you can launch an experiment, deploy it behind a feature flag, see how it impacts funnels or retention, and watch session replays of how users in each variant actually behave – without stitching together separate tools or juggling data exports.
 
@@ -92,6 +92,8 @@ PostHog has [transparent pricing](/pricing) based on the usage. It's free to get
 > #### Bottom line
 >
 > For teams looking for all the tools they need to experiment and improve their products, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to its generous free tier.
+
+<WizardCTA />
 
 ## 2. VWO
 
@@ -128,7 +130,7 @@ VWO uses custom, usage-based pricing based on Monthly Tracked Users (MTUs). Web 
 
 > #### Bottom line
 >
-> VWO is great for marketing and product teams who want an easy-to-use visual editor for running experiments without coding. However, its pricing is opaque, and its analytics features are limited compared to dedicated product analytics tools.
+> VWO is great for marketing and product teams who want an easy-to-use visual editor for running experiments without coding. However, its pricing is opaque, and its analytics features are limited compared to [dedicated product analytics tools](/blog/best-product-analytics-tools-for-startups).
 
 ## 3. Optimizely
 
@@ -407,10 +409,9 @@ We're biased, obviously, but we think you'll love PostHog if:
 - You want tools to ship, track, and analyze new features – like A/B testing, feature flags, and session replays
 - You want try before you buy (we're self-serve with a [generous free tier](/pricing))
 
-Check out [our product pages](/experiments) and [read our docs](/docs) to learn more.
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
 
-<ArrayCTA />
-
+<WizardCTA />
 
 ## FAQ
 
@@ -426,13 +427,13 @@ Unlike web A/B testing where you can deploy changes instantly, mobile experiment
 <details>
   <summary>What's the difference between client-side and server-side A/B testing?</summary>
 
-Both approaches make requests to a server to determine which variation a user sees — the difference is where that request happens.
+Both approaches make requests to a server to determine which variation a user sees – the difference is where that request happens.
 
 **Client-side testing** makes the request from the app or browser. It's easier to set up, but can cause "flicker" as the UI updates after the response comes back. Tools like **VWO** offer visual editors for this approach on web.
 
 **Server-side testing** makes the request from your backend (e.g. a Django or Node service) before sending anything to the client, which eliminates flicker. It's better for testing algorithms, pricing logic, API responses, and anything involving backend changes. Tools like **PostHog**, **Statsig**, and **LaunchDarkly** support this approach.
 
-Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites — you need [feature flags](/docs/feature-flags) to control which variation users see without waiting for an app store review. You can also use techniques like [bootstrapping](/docs/feature-flags/bootstrapping) and [local evaluation](/docs/feature-flags/local-evaluation) to reduce latency and avoid flicker on the client side.
+Most mobile teams need server-side testing because mobile apps can't be updated instantly like websites – you need [feature flags](/docs/feature-flags) to control which variation users see without waiting for an app store review. You can also use techniques like [bootstrapping](/docs/feature-flags/bootstrapping) and [local evaluation](/docs/feature-flags/local-evaluation) to reduce latency and avoid flicker on the client side.
 
 </details>
 

@@ -20,7 +20,7 @@ showTitle: true
 - Keep the engineers at PostHog as close to our customers as possible, so they can build new products or improve existing products in ways that are most impactful for them.
 - Maintain low barriers to entry for our customers, so they can see value in PostHog quickly.
 - Ensure transparency around the value we provide to our customers.
-- Tightly couple our success with that of our customers’. The more we can help them succeed, the more we will succeed – e.g. with usage-based pricing.
+- Tightly couple our success with that of our customers’. The more we can help them succeed, the more we will succeed – e.g. with usage-based pricing for resources that scale.
 
 It's important we evaluate all new features, and shifts in our pricing plans, to ensure they align with our pricing values.
 
@@ -30,9 +30,9 @@ Sometimes these principles still leave room for questions – what, if anything,
 
 For these types of questions, we've defined a runbook for deciding which plans, and at what limits, features should be assigned to.
 
-### We should slightly undercut the cheapest competitor
+### We should roughly match the cheapest competitor
 
-In general, we should slightly undercut the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog. To qualify for this, a competitor must be _making actual revenue_ at significant scale - we won't match the pricing random startups or new products at existing competitors offer, since these products and GTMs aren't mature yet.
+In general, we should roughly match the pricing of the cheapest big competitor for that product, so long as the unit economics make sense, to make it a no-brainer to use PostHog. To qualify for this, a competitor must be _making actual revenue_ at significant scale - we won't match the pricing random startups or new products at existing competitors offer, since these products and GTMs aren't mature yet.
 
 We can do this because we can upsell customers multiple of our other products. The total ACV is higher even if the per-product ACV is lower. 
 
@@ -72,15 +72,17 @@ Each product should be usable on its own. For example, session replay can be ena
 
 - Features that need to be experienced in order to demonstrate value should be available on the free plan but with a reasonable limit.
 
-- Features that have the potential to grow our word-of-mouth should be free – e.g. we shouldn't (and don't) charge for extra users in an org. because the more people we get inside PostHog, the better.
+- Features that have the potential to grow our word-of-mouth should be free – e.g. we shouldn't (and don't) charge for extra users in an organization because the more people we get inside PostHog, the better.
 
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
+
+- We shouldn't assume that all products should be usage-based. For some products the engineering time is the most expensive part, and in these cases we should consider tiered fees, monthly flat fees, or seat-based pricing where it makes sense. 
 
 - Unless there is a very good reason not to, we should grandfather existing customers' pricing tiers if they are cheaper than the new pricing to avoid unexpected pricing changes. 
 
 ### Deciding on a free volume, and making changes to it
 
-- When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should slightly undercut our competitors if they offer a free tier. 
+- When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should roughly match our competitors if they offer a free tier. 
 
 - Keep in mind: It's easy to increase the free tier for existing customers, but it's very painful to decrease it (since we don't want existing customers to pay more).
 

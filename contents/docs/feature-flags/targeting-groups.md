@@ -10,9 +10,9 @@ This tutorial shows you how to target these non-user entities in your use of fea
 
 ## Targeting groups, teams, or organizations
 
-If you enabled [group analytics](/docs/product-analytics/group-analytics) and set up group idenitifcation, targeting by groups, teams, or organizations is easy. When creating your feature flag, change the "Match by" value under "Release conditions" your group type name, add any conditions you want, and roll out the flag.
+If you enabled [group analytics](/docs/product-analytics/group-analytics) and set up group identification, targeting by groups, teams, or organizations is easy. When creating your feature flag, make sure **Properties** is selected as the top-level targeting mode under **Release conditions**. Then, on each condition set, use the **Target by** dropdown to select your group type name, add any conditions you want, and roll out the flag.
 
-![Match by organization](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/group-page-machine-flags/org.png)
+![Target by group type](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_1200/Screenshot_2026_06_24_at_3_38_15_PM_4e4128972b.png)
 
 ### Property or cohort filter
 
@@ -91,11 +91,11 @@ from posthog import Posthog
 posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
 posthog.capture(
-  "canada-cloud-1", 
-  "server_identify", 
-  {
-    "server_id": "canada-cloud-1"
-  }
+    "server_identify",
+    distinct_id="canada-cloud-1",
+    properties={
+        "server_id": "canada-cloud-1",
+    },
 )
 ```
 
@@ -108,14 +108,15 @@ from posthog import Posthog
 
 posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
-posthog.feature_enabled('server-rollout', 'canada-cloud-1')
+flags = posthog.evaluate_flags("canada-cloud-1")
+flags.is_enabled("server-rollout")
 ```
 
 Now, you can target your server with feature flags. You can use a similar workflow with services, machines, or devices as well as any of our other [backend SDKs](/docs/libraries) or even our [API](/docs/api).
 
 ### One-time property value
 
-A common pattern we use for many of our site apps is show a feature, set a property on the user once the "business code" executes, and check for that property to not show again. This pattern is useful if you want interactions with features or services to only happen once.
+A common pattern we use for many of our site apps is to show a feature, set a property on the user once the "business code" executes, and check for that property to not show again. This pattern is useful if you want interactions with features or services to only happen once.
 
 > 📖 Read a full implementation of this in "[How to set up one-time feature flags](/tutorials/one-time-feature-flags)."
 
@@ -128,25 +129,22 @@ from posthog import Posthog
 
 posthog = Posthog('<ph_project_token>', host='<ph_client_api_host>')
 
-is_first_interaction = posthog.feature_enabled(
-  'first-interaction', 
-  'ian@posthog.com'
-)
+flags = posthog.evaluate_flags("ian@posthog.com")
+is_first_interaction = flags.is_enabled("first-interaction")
 
-if (is_first_interaction):
-	# Do cool stuff here
-	
-	posthog.capture(
-    'did_cool_stuff',
-    'ian@posthog.com',
-    {
-      'is_first_interaction': False
-    }
-  )
+if is_first_interaction:
+    # Do cool stuff here
 
+    posthog.capture(
+        "did_cool_stuff",
+        distinct_id="ian@posthog.com",
+        properties={
+            "is_first_interaction": False,
+        },
+    )
 ```
 
-The flag now returns `false` meaning the user gets a different experience on all subsequent interactions.
+The flag now returns `false`, meaning the user gets a different experience on all subsequent interactions.
 
 ## Further reading
 

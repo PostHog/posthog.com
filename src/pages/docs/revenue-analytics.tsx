@@ -7,6 +7,7 @@ import ReaderView from 'components/ReaderView'
 import Intro from 'components/Docs/Intro'
 import { docsMenu } from '../../navs'
 import QuickLinks from 'components/QuickLinks'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 type RevenueAnalyticsProps = {
     data: {
@@ -28,9 +29,22 @@ export const Content = ({ quickLinks = true }) => {
                 description="Track and analyze your revenue metrics to understand your business performance and growth."
                 buttonText="Setup guide"
                 buttonLink="/docs/revenue-analytics/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_coin_a6fb991e80.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/money_dollars_rich_5a7f1bf7ce.png"
             />
+
+            <CalloutBox icon="IconWarning" title="Revenue analytics is being deprecated" type="caution">
+                <p>
+                    We'll remove the Revenue analytics dashboard on or after <strong>June 30th, 2026</strong>.
+                </p>
+                <p>
+                    We're not stepping away from revenue in PostHog — we're rethinking how it should work. Instead of
+                    maintaining a single, opinionated Revenue analytics dashboard, we're focusing on exposing revenue
+                    properties on persons and groups so you can use them everywhere: insights, SQL, and persons/groups
+                    profiles. Each use case (ecommerce, SaaS, recurring revenue, one-off, services, multi-tenant) can
+                    then build the dashboard it actually needs — or have PostHog AI and agents via our MCP build it for
+                    you.
+                </p>
+            </CalloutBox>
 
             <AskMax
                 quickQuestions={[
