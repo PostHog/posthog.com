@@ -5,7 +5,6 @@ import fs from 'fs'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { enrichVideos } from './enrichVideos'
-import { primeApiSpec } from './sourceNodes'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -50,9 +49,6 @@ function invalidateGitCacheIfBranchChanged(): void {
 }
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
-    // Start the slow (~9s server-side) API schema fetch now so it resolves during the
-    // pre-sourcing build phases; sourceNodes awaits the same promise.
-    primeApiSpec()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
     // Enrich video data with thumbnails and titles from APIs
