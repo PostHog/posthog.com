@@ -62,10 +62,11 @@ export const TeamMemberLink = ({
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${photo
-                        ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                        : 'border-b border-primary border-dashed'
-                        } ${className}`}
+                    className={`inline-flex items-center ${
+                        photo
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full bg-light text-dark'
+                            : 'border-b border-primary border-dashed'
+                    } ${className}`}
                 >
                     {photo ? (
                         <>
@@ -92,8 +93,9 @@ export const TeamMemberLink = ({
                                     {avatarUrl ? (
                                         <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-dark border border-primary">
                                             <div
-                                                className={`bg-${color ? color : 'red'
-                                                    } rounded-full overflow-hidden w-full aspect-square`}
+                                                className={`bg-${
+                                                    color ? color : 'red'
+                                                } rounded-full overflow-hidden w-full aspect-square`}
                                             >
                                                 <img
                                                     src={avatarUrl}

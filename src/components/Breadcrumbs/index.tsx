@@ -1,5 +1,5 @@
 import cntl from 'cntl'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { Link } from 'gatsby'
 import React from 'react'
 
@@ -72,7 +72,20 @@ export default function Breadcrumbs({
 }: BreadcrumbsProps): JSX.Element {
     return (
         <ul className={`list-none p-0 m-0 flex ${className}`}>
-            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" fill={linkColor} noText />} />}
+            {logo && (
+                <Crumb
+                    url="/"
+                    title={
+                        <Logo
+                            className="w-5 h-4"
+                            variant={linkColor ? 'mono' : 'gradient'}
+                            color={linkColor}
+                            layout="logomark"
+                            width="auto"
+                        />
+                    }
+                />
+            )}
             {children ||
                 (crumbs &&
                     crumbs.map((crumb, index) => {

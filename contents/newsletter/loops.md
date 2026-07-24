@@ -45,7 +45,7 @@ The most basic is using something like Claude Code with a `while true` (aka [Ral
 
 Good examples of loops include:
 
-- **PR babysitter.** The goal is to get a pull request to pass tests and "get CI green." The context is the changes (diff) as well as the testing suite, and the evaluation is done by the CI.
+- **[PR babysitter](/newsletter/code-review-tips#2-delegate-pr-babysitting-to-loops).** The goal is to get a pull request to pass tests and "get CI green." The context is the changes (diff) as well as the testing suite, and the evaluation is done by the CI.
 
 - **Bug fixer.** The goal is to fix the bug. The context is the bug report and error trace. The evaluation is the test suite, snapshots, logs.
 
@@ -87,7 +87,7 @@ And here's the thing, [product engineers](/product-engineer/what-is-a-product-en
 
 4. Repeating constantly
 
-PostHog has helped product engineers complete this loop for years now, so we think we're in a great position to help agents with it too. It's why we're betting on building features that help make your product self-driving, like [our Slack app](/slack), [PostHog Code](/code), and [Replay Vision](/replay-vision). Yes, we're a little AI-pilled.
+PostHog has helped product engineers complete this loop for years now, so we think we're in a great position to help agents with it too. It's why we're betting on building features that help make your product self-driving, like [our Slack app](/slack), [PostHog Code](/desktop), and [Replay Vision](/replay-vision). Yes, we're a little AI-pilled.
 
 There are, of course, limits. Loops aren't about to eliminate all engineering work, but they can put the 1% gains on cruise control: the bugs, UX issues, [paper cuts](/blog/slack-app-beta), and conversion tweaks. The things that drain engineering hours, but rarely need strategic input.
 

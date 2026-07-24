@@ -7,7 +7,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/newsletter-hog.png
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
 crosspost:
   - Founders
   - Blog
@@ -19,7 +19,7 @@ I’d love to hear about mistakes and lessons you’ve learned, too. Just leave 
 
 **This week’s theme is:** Learning from our mistakes
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Waiting too long to hire a product person
 
