@@ -297,9 +297,9 @@ jobs:
               if: steps.changes.outputs.visual == 'true'
               run: |
                   cd vr-cli/products/visual_review/cli
-                  pnpm import
-                  pnpm install --frozen-lockfile
-                  pnpm build
+                  pnpm --ignore-workspace import
+                  pnpm --ignore-workspace install --frozen-lockfile
+                  pnpm --ignore-workspace build
 
             - name: Create Visual Review run
               if: steps.changes.outputs.visual == 'true'
