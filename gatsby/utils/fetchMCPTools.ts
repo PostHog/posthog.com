@@ -4,6 +4,11 @@ import fs from 'fs'
 const MCP_TOOLS_URL =
     'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions-all.json'
 
+// Generated in the main repo by services/mcp/scripts/generate-exec-docs.ts from the same
+// templates the MCP server serves to agents at runtime.
+const MCP_EXEC_COMMANDS_URL =
+    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/exec-command-reference.md'
+
 const MAX_DESCRIPTION_LENGTH = 300
 
 function truncateDescription(text: string): string {
@@ -46,10 +51,30 @@ interface ToolByName {
 export interface MCPToolsData {
     categories: ToolCategory[] | null
     byName: Record<string, ToolByName> | null
+    execCommands: string | null
     error: boolean
 }
 
+async function fetchExecCommandsMarkdown(): Promise<string | null> {
+    try {
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 15000)
+        const response = await fetch(MCP_EXEC_COMMANDS_URL, { signal: controller.signal as any })
+        clearTimeout(timeoutId)
+
+        if (response.status !== 200) {
+            throw new Error(`Failed to fetch MCP exec command reference: ${response.status}`)
+        }
+
+        return await response.text()
+    } catch (error) {
+        console.error('Error fetching MCP exec command reference:', error)
+        return null
+    }
+}
+
 export async function fetchAndProcessMCPTools(): Promise<MCPToolsData> {
+    const execCommands = await fetchExecCommandsMarkdown()
     try {
         const controller = new AbortController()
         const timeoutId = setTimeout(() => controller.abort(), 15000)
@@ -94,6 +119,7 @@ export async function fetchAndProcessMCPTools(): Promise<MCPToolsData> {
         return {
             categories: categoriesArray,
             byName,
+            execCommands,
             error: false,
         }
     } catch (error) {
@@ -101,6 +127,7 @@ export async function fetchAndProcessMCPTools(): Promise<MCPToolsData> {
         return {
             categories: null,
             byName: null,
+            execCommands,
             error: true,
         }
     }
