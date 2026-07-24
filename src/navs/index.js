@@ -5349,59 +5349,47 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
+                    name: 'Web app',
+                    url: '/docs/error-tracking/surfaces/web-app',
+                    icon: 'IconLaptop',
                     color: 'seagreen',
                     featured: true,
-                },
-                {
-                    name: 'Manage and resolve issues',
-                    url: '/docs/error-tracking/managing-issues',
-                    icon: 'IconDashboard',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Assign issues to teammates',
-                    url: '/docs/error-tracking/assigning-issues',
-                    icon: 'IconUser',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Set up integrations',
-                    url: '/docs/error-tracking/integrations',
-                    icon: 'IconApps',
-                    color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Send alerts',
-                    url: '/docs/error-tracking/alerts',
-                    icon: 'IconBell',
-                    color: 'red',
-                    featured: true,
-                },
-                {
-                    name: 'Detect spikes',
-                    url: '/docs/error-tracking/spikes',
-                    icon: 'IconGraph',
-                    color: 'yellow',
-                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/surfaces/web-app',
+                        },
+                        {
+                            name: 'Monitor and search issues',
+                            url: '/docs/error-tracking/monitoring',
+                        },
+                        {
+                            name: 'Manage and resolve issues',
+                            url: '/docs/error-tracking/managing-issues',
+                        },
+                        {
+                            name: 'Assign issues to teammates',
+                            url: '/docs/error-tracking/assigning-issues',
+                        },
+                        {
+                            name: 'Send alerts',
+                            url: '/docs/error-tracking/alerts',
+                        },
+                        {
+                            name: 'Detect spikes',
+                            url: '/docs/error-tracking/spikes',
+                        },
+                        {
+                            name: 'Set up integrations',
+                            url: '/docs/error-tracking/integrations',
+                        },
+                    ],
                 },
                 {
                     name: 'MCP',
                     url: '/docs/error-tracking/surfaces/mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Fix with AI prompts',
-                    url: '/docs/error-tracking/surfaces/fix-with-ai',
-                    icon: 'IconLlmPromptManagement',
-                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -5412,7 +5400,14 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Context',
+                    name: 'Fix with AI prompts',
+                    url: '/docs/error-tracking/surfaces/fix-with-ai',
+                    icon: 'IconLlmPromptManagement',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Exceptions',
                 },
                 {
                     name: 'Capture exceptions',
@@ -5422,30 +5417,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Issues and exceptions',
-                    url: '/docs/error-tracking/issues-and-exceptions',
-                    icon: 'IconWarning',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Fingerprints',
-                    url: '/docs/error-tracking/fingerprints',
-                    icon: 'IconBrackets',
-                    color: 'blue',
-                },
-                {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
                     featured: true,
                 },
                 {
@@ -5466,17 +5441,40 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Releases',
-                    url: '/docs/error-tracking/releases',
-                    icon: 'IconTag',
-                    color: 'orange',
-                },
-                {
                     name: 'Rate limiting',
                     url: '/docs/error-tracking/rate-limiting',
                     icon: 'IconThrottle',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Issues',
+                },
+                {
+                    name: 'Issues and exceptions',
+                    url: '/docs/error-tracking/issues-and-exceptions',
+                    icon: 'IconWarning',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Fingerprints',
+                    url: '/docs/error-tracking/fingerprints',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Resources',
