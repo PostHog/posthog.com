@@ -193,9 +193,7 @@ Ask me whatever you can't derive from the repo — at minimum: which browser MCP
 Leave the result as uncommitted files on my working tree.
 ```
 
-<CalloutBox icon="IconInfo" title="Edited on July 24, 2026" type="fyi">
-Updated the prompt and added a link for the new qa-frontend skill.
-</CalloutBox>
+> ***Edited on July 24, 2026:*** *Updated the prompt and added a link for the new qa-frontend skill.*
 
 <NewsletterForm />
 
