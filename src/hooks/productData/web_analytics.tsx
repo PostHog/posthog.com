@@ -7,9 +7,12 @@ import {
     IconConfetti,
     IconRocket,
     IconCheckCircle,
+    IconInfo,
     IconCursorClick,
+    IconMagic,
     IconChat,
     IconCode,
+    IconMessage,
     IconNewspaper,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
@@ -26,7 +29,7 @@ export const webAnalytics = {
     billingType: 'product_analytics',
     slug: 'web-analytics',
     teamSlug: 'web-analytics',
-    // forumTopicId: TBD – needed for the community section (see content gaps)
+    forumTopicId: 348,
     color: 'green-2',
     colorSecondary: '[#37945D]',
     category: 'analytics',
@@ -49,22 +52,20 @@ export const webAnalytics = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // Needs overview.eli5 — stubbed until copy exists
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // Needs useCases — stubbed until copy exists
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -87,8 +88,7 @@ export const webAnalytics = {
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        // Needs forumTopicId — community template returns null without it
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
@@ -118,7 +118,7 @@ export const webAnalytics = {
         title: 'Privacy-focused web analytics',
         description:
             'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
-        // eli5: '', // CONTENT GAP — see session_replay overview.eli5 for shape
+        eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
     videos: {
@@ -140,6 +140,18 @@ export const webAnalytics = {
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
+        referrers: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png',
+            alt: 'Traffic sources and referrers',
+        },
+        paths: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png',
+            alt: 'Top paths in web analytics',
+        },
     },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
@@ -151,7 +163,10 @@ export const webAnalytics = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
             alt: 'A hedgehog looking at web analytics',
         },
-        // mobileHog: { src: '' }, // CONTENT GAP — used by eli5 template
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png',
+            alt: 'A hedgehog with a web analytics cursor',
+        },
     },
     // Same event volume slider as product analytics (web analytics is billed with it).
     slider: {
@@ -175,7 +190,16 @@ export const webAnalytics = {
             description: 'Web analytics gives us all the metrics we really care about. It is so much better than GA4.',
         },
     },
-    // useCases: { intro: '', rows: [] }, // CONTENT GAP — see session_replay useCases
+    useCases: {
+        intro: 'Web Analytics is used across teams depending on your role.',
+        rows: [
+            ['Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
+            ['Founders', 'Check traffic health on a pre-built dashboard without waiting on a data team'],
+            ['Product Engineers', 'Validate deploys – did pageviews, bounce rate, or Web Vitals move after ship?'],
+            ['Growth Engineers', 'Find high-bounce pages, scroll drop-off, and campaign paths worth fixing'],
+            ['Content & SEO', 'Rank pages by entrances, bounce, and conversion to prioritize what to rewrite'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -186,7 +210,8 @@ export const webAnalytics = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // description: '', // CONTENT GAP — see session_replay installation.description
+        description:
+            'Add a snippet, SDK, or no-code install – then open the pre-built dashboard. Autocapture handles pageviews; cookieless mode is optional.',
         productSlug: 'web-analytics',
         categories: ['web', 'mobile', 'no-code'],
     },
@@ -364,7 +389,16 @@ export const webAnalytics = {
                     "What's the bounce rate on /pricing compared to /docs?",
                 ],
             },
-            // Web vitals group (tool: query-web-vitals) — CONTENT GAP: need prompts
+            {
+                title: 'Web vitals',
+                tool: 'query-web-vitals',
+                prompts: [
+                    'Which pages have the worst LCP at p75 this week?',
+                    'Where is CLS poor on the marketing site?',
+                    'Audit Core Web Vitals and list the pages in the poor band for INP',
+                    "Which paths need LCP improvements after yesterday's deploy?",
+                ],
+            },
             {
                 title: 'Build & save',
                 tool: 'insight-create',

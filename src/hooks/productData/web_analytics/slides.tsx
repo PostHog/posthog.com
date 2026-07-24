@@ -8,7 +8,8 @@ import {
     IconShield,
     IconGlobe,
     IconGraph,
-    IconPlug,
+    IconSearch,
+    IconDashboard,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
@@ -18,6 +19,10 @@ import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall from 'components/PlatformInstall'
 
+/**
+ * Applications = workflows / ways you show up to the product (like session replay's
+ * Editor / Search / Browse). Capability detail belongs in `topFeatures`.
+ */
 export const applications: CarouselSlide[] = [
     {
         slug: 'editor-mcp',
@@ -27,7 +32,7 @@ export const applications: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-green',
         layout: 'stack',
-        heading: f.mcp.headline,
+        heading: 'Check traffic without leaving your editor',
         description: (
             <>
                 <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
@@ -44,21 +49,99 @@ export const applications: CarouselSlide[] = [
                         />
                     </Glow>
                 </aside>
-                <p>{f.mcp.description}</p>
+                <p>
+                    Ask PostHog AI about traffic from Cursor, Claude Code, VS Code, or any MCP-compatible agent – then
+                    keep coding with the answer in context.
+                </p>
                 <div className="@container">
                     <LabeledList
                         className="mb-8"
-                        items={f.mcp.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            {
+                                label: 'Validate deploys',
+                                description: 'Did pageviews or bounce rate move on the pages you just shipped?',
+                            },
+                            {
+                                label: 'Diagnose anomalies',
+                                description: 'Investigate a sudden drop in sessions before you dig into the codebase.',
+                            },
+                            {
+                                label: 'Prioritize what to build',
+                                description: 'See which referrers, UTMs, or channels are driving visits right now.',
+                            },
+                        ]}
                     />
                     <PlatformInstall />
                 </div>
             </>
         ),
     },
-    // Additional applications slides need copy — see content gaps.
+    {
+        slug: 'browse',
+        label: 'Browse',
+        icon: <IconDashboard className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Open the dashboard and skim what matters',
+        description: (
+            <>
+                <p>
+                    Most visits start here: open Web Analytics and the pre-built dashboard already has visitors,
+                    pageviews, sessions, bounce rate, paths, and referrers. No chart-building required for the weekly
+                    check-in.
+                </p>
+                <p>
+                    Click a path, channel, or device breakdown to filter the whole view – same dashboard, narrower
+                    question.
+                </p>
+            </>
+        ),
+        image: {
+            ref: 'home',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'investigate',
+        label: 'Investigate',
+        icon: <IconSearch className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'When a number looks off, dig in',
+        description: (
+            <>
+                <p>
+                    Spikes, dips, and weird bounce rates usually need a second step. Narrow by source, path, or device,
+                    check Web Vitals on the slow pages, then jump into session replay when you need the "why."
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Start from the metric',
+                                description: 'Filter the dashboard to the path, channel, or campaign that moved.',
+                            },
+                            {
+                                label: 'Check performance',
+                                description: 'Use Web Vitals when the drop lines up with a slow or janky page.',
+                            },
+                            {
+                                label: 'Watch the sessions',
+                                description: 'Open matching replays when charts alone cannot explain the behavior.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: { ref: 'referrers', glow: true },
+    },
 ]
 
 export const topFeatures: CarouselSlide[] = [
@@ -112,8 +195,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        // Local static image only (`/images/products/web-analytics/top-referrers.jpg`) —
-        // CarouselSlide uses CloudinaryImage, so omit until a Cloudinary URL exists.
+        image: { ref: 'referrers', glow: true },
     },
     {
         slug: 'web-vitals',
@@ -220,8 +302,6 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        // Local static image only (`/images/products/web-analytics/world-map.jpg`) —
-        // CarouselSlide uses CloudinaryImage, so omit until a Cloudinary URL exists.
     },
     {
         slug: 'product-analytics',
@@ -247,28 +327,5 @@ export const topFeatures: CarouselSlide[] = [
         ),
         image: { ref: 'home', glow: true },
     },
-    {
-        slug: 'mcp',
-        label: 'MCP',
-        icon: <IconPlug className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-green',
-        layout: 'stack',
-        heading: f.mcp.headline,
-        description: (
-            <>
-                <p>{f.mcp.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.mcp.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                    {f.mcp.children}
-                </div>
-            </>
-        ),
-    },
+    // MCP lives under Applications (Editor workflow) – avoid a second nearly-identical slide here.
 ]
