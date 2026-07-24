@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
+import RevAnalyticsBetaWarning from "./_snippets/rev-analytics-beta-warning.mdx";
 
 <RevAnalyticsBetaWarning />
 
@@ -33,6 +33,7 @@ You can choose between sending the minor unit of the currency or the decimal amo
 While we support both, we recommend sending the minor to avoid floating point precision issues.
 
 When sending the minor unit of the currency, we'll treat it as follows:
+
 - `1045` in `USD` (or any other two-decimal currency) is treated as $10.45
 - `1045` in `JPY` (or any other [zero-decimal currency](#zero-decimal-currencies)) is treated as ¥1045
 
@@ -41,26 +42,26 @@ When sending the minor unit of the currency, we'll treat it as follows:
 When you enable "values are in cents" (minor unit), we consider most currencies to be two-decimal currencies unless they are in the following list:
 
 <div className="grid grid-cols-2 gap-2">
-    <ul>
-        <li>BIF</li>
-        <li>CLP</li>
-        <li>DJF</li>
-        <li>GNF</li>
-        <li>JPY</li>
-        <li>KMF</li>
-        <li>KRW</li>
-        <li>MGA</li>
-    </ul>
-    <ul>
-        <li>PYG</li>
-        <li>RWF</li>
-        <li>UGX</li>
-        <li>VND</li>
-        <li>VUV</li>
-        <li>XAF</li>
-        <li>XOF</li>
-        <li>XPF</li>
-    </ul>   
+  <ul>
+    <li>BIF</li>
+    <li>CLP</li>
+    <li>DJF</li>
+    <li>GNF</li>
+    <li>JPY</li>
+    <li>KMF</li>
+    <li>KRW</li>
+    <li>MGA</li>
+  </ul>
+  <ul>
+    <li>PYG</li>
+    <li>RWF</li>
+    <li>UGX</li>
+    <li>VND</li>
+    <li>VUV</li>
+    <li>XAF</li>
+    <li>XOF</li>
+    <li>XPF</li>
+  </ul>
 </div>
 
 There's also one exception to what you'd expect from a zero-decimal currency, and that's the Icelandic Krona (ISK). The Icelandic Krona (ISK) is a zero-decimal currency, but we treat it as a two-decimal currency to keep backwards compatibility with our integration with Stripe.
@@ -69,17 +70,17 @@ There's also one exception to what you'd expect from a zero-decimal currency, an
 
 This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
 
-### Why isn't my revenue appearing in the revenue analytics dashboard?
+### Why isn't my revenue data appearing?
 
-If your revenue isn't appearing in your revenue analytics dashboard, there are a few common issues to check:
+If your revenue data isn't showing up on person/group profiles or in managed views, check the following:
 
-1. **Check the Revenue tab in Data management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
-1. **Make sure Revenue tracking is enabled for your Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
-1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
+1. **Check the Revenue tab in Data management** - Verify your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
+1. **Make sure Revenue tracking is enabled for your Data warehouse source** - Legacy data warehouse sources have revenue tracking disabled by default. Enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
+1. **Wait for managed views to sync** - Revenue properties on persons and groups are computed from [managed views](/docs/revenue-analytics/managed-views). After configuring your sources, wait for the sync job to complete.
 
 ## Why isn't currency being converted in my Trends insight?
 
-Currency conversion only happens automatically within **Revenue Analytics** and in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
+Currency conversion happens automatically within the [managed views](/docs/revenue-analytics/managed-views) and on person/group revenue properties. If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
 
 **Your options:**
 
@@ -107,7 +108,7 @@ Yes, you can query converted rates yourself in SQL using the `convertCurrency` f
 Example:
 
 ```sql
-SELECT 
+SELECT
     *,
     properties.$currency as original_currency,
     properties.value as original_value,
