@@ -1560,9 +1560,6 @@ const appSettings: AppSettings = {
     '/experiments': {
         toolbar: true,
     },
-    '/surveys': {
-        toolbar: true,
-    },
     '/error-tracking': {
         toolbar: true,
     },
