@@ -6,10 +6,10 @@ export default function ImpactCalculator(): JSX.Element {
     const [holes, setHoles] = useState(2)
 
     return (
-        <section className="sn-calc" data-snuffl-id="impact-calc">
+        <section className="un-calc" data-unter-id="impact-calc">
             <div>
-                <h2 className="sn-h2">What one hole does</h2>
-                <p className="sn-lede">
+                <h2 className="un-h2">What one hole does</h2>
+                <p className="un-lede">
                     Drag the slider. The hedgehog numbers come from the ecology literature. The earnings number is
                     exact.
                 </p>
@@ -21,13 +21,13 @@ export default function ImpactCalculator(): JSX.Element {
                     onChange={(e) => setHoles(parseInt(e.target.value, 10))}
                     aria-label="Number of holes"
                 />
-                <div className="sn-slider-label">
+                <div className="un-slider-label">
                     <span>1 hole</span>
                     <span>6 holes (a legend)</span>
                 </div>
             </div>
-            <div className="sn-calc-out">
-                <div className="sn-calc-cell">
+            <div className="un-calc-out">
+                <div className="un-calc-cell">
                     <b>{holes * 7}</b>
                     <span>
                         hedgehogs served
@@ -35,7 +35,7 @@ export default function ImpactCalculator(): JSX.Element {
                         per night
                     </span>
                 </div>
-                <div className="sn-calc-cell">
+                <div className="un-calc-cell">
                     <b>{(holes * 0.4).toFixed(1)}</b>
                     <span>
                         acres of territory
@@ -43,7 +43,7 @@ export default function ImpactCalculator(): JSX.Element {
                         reconnected
                     </span>
                 </div>
-                <div className="sn-calc-cell">
+                <div className="un-calc-cell">
                     <b>£0.00</b>
                     <span>
                         projected earnings,

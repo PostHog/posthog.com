@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { Annotation } from '../types'
 
 export const highwayAnnotations: Annotation[] = [
@@ -6,7 +7,7 @@ export const highwayAnnotations: Annotation[] = [
         id: 'highway/topnav/core',
         page: 'highway',
         target: 'topnav',
-        product: 'core',
+        tool: 'core',
         label: '/ingest proxy',
         dx: 0.5,
         dy: 0.5,
@@ -15,14 +16,14 @@ export const highwayAnnotations: Annotation[] = [
             why: (
                 <>
                     Tracker blockers eat 30–40% of a marketing site's events if you load analytics from a third-party
-                    domain. Snuffl serves <code>posthog-js</code> bundled first-party and proxies ingestion through its
+                    domain. Unter serves <code>posthog-js</code> bundled first-party and proxies ingestion through its
                     own domain.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `posthog.init(token, {
-  api_host: 'https://snuffl.co.uk/ingest',  // proxy
+  api_host: 'https://unter.co.uk/ingest',  // proxy
   ui_host:  'https://eu.posthog.com'
 })
 // CSP stays tight:
@@ -41,7 +42,7 @@ export const highwayAnnotations: Annotation[] = [
         id: 'highway/hw-form/product',
         page: 'highway',
         target: 'hw-form',
-        product: 'product',
+        tool: 'product',
         label: 'highway_signup_completed',
         dx: 0,
         dy: 0.12,
@@ -74,7 +75,7 @@ posthog.capture('highway_signup_completed', {
         id: 'highway/input-postcode/replay',
         page: 'highway',
         target: 'input-postcode',
-        product: 'replay',
+        tool: 'replay',
         label: 'ph-no-capture',
         dx: -0.06,
         dy: 0.5,
@@ -104,7 +105,7 @@ posthog.capture('highway_signup_completed', {
         id: 'highway/btn-start-cutting/logs',
         page: 'highway',
         target: 'btn-start-cutting',
-        product: 'logs',
+        tool: 'logs',
         label: 'OTLP logs',
         dx: 0.5,
         dy: 1.15,
@@ -135,7 +136,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         id: 'highway/survey-pop/surveys',
         page: 'highway',
         target: 'survey-pop',
-        product: 'surveys',
+        tool: 'surveys',
         label: 'popover survey',
         dx: 0.9,
         dy: 0,
@@ -150,7 +151,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
             code: {
                 language: 'js',
                 snippet: `// amount of code shipped for this survey:
-//   (none — configured in the PostHog UI)`,
+//   (none, configured in the PostHog UI)`,
             },
             after: (
                 <>
@@ -165,7 +166,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         id: 'highway/impact-calc/product',
         page: 'highway',
         target: 'impact-calc',
-        product: 'product',
+        tool: 'product',
         label: 'impact_calculated',
         dx: 0.5,
         dy: 0,
@@ -198,7 +199,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         id: 'highway/host-faq/product',
         page: 'highway',
         target: 'host-faq',
-        product: 'product',
+        tool: 'product',
         label: '$autocapture',
         dx: 0.52,
         dy: 0.24,
@@ -227,10 +228,47 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         },
     },
     {
+        id: 'highway/hw-form/selfdriving',
+        page: 'highway',
+        target: 'hw-form',
+        tool: 'selfdriving',
+        label: 'product analytics scout',
+        dx: 1.0,
+        dy: 0.62,
+        title: 'A funnel regression, caught on a schedule',
+        body: {
+            why: (
+                <>
+                    The product analytics scout watches funnels, retention, and paths against their own trailing
+                    baseline. Host signup dropped and it noticed before anyone opened the dashboard.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `INBOX · product analytics scout · high
+Host signup conversion down 18% (7d)
+  breakdown: fence_type = brick_wall
+  those hosts drop at the fence select
+  → pull request open: explain the
+    "we'll talk" option inline`,
+            },
+            after: (
+                <>
+                    Scouts read your data through the same{' '}
+                    <Link to="/docs/model-context-protocol" disablePrefetch externalNoIcon>
+                        PostHog MCP
+                    </Link>{' '}
+                    you can point Claude Code at, and keep a memory between runs, so they dedupe against themselves
+                    instead of re-reporting this every week.
+                </>
+            ),
+        },
+    },
+    {
         id: 'highway/btn-refer/expflags',
         page: 'highway',
         target: 'btn-refer',
-        product: 'expflags',
+        tool: 'expflags',
         label: 'neighbour-referral-copy',
         dx: 0.5,
         dy: 1.18,
@@ -247,12 +285,12 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
                 snippet: `const v = posthog.getFeatureFlag('neighbour-referral-copy')
 // 'control' → "Send a very polite note"
 // 'guilt'   → "Your fence is the reason
-//              Colin walks the long way"`,
+//              Max walks the long way"`,
             },
             after: (
                 <>
                     Goal metric: <code>highway_signup_completed</code> by referred neighbours within 14 days. Guilt is
-                    currently winning by 22%, which says something about Britain that Snuffl chooses not to examine.
+                    currently winning by 22%, which says something about Britain that Unter chooses not to examine.
                 </>
             ),
         },

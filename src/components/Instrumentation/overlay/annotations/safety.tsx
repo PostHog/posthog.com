@@ -6,7 +6,7 @@ export const safetyAnnotations: Annotation[] = [
         id: 'safety/radar-error/error',
         page: 'safety',
         target: 'radar-error',
-        product: 'error',
+        tool: 'error',
         label: '$exception',
         dx: 0.5,
         dy: 0,
@@ -27,7 +27,7 @@ try { loadBadgerLayer() }
 catch (err) {
   posthog.captureException(err, {
     widget: 'badger-radar',
-    tile_host: 'tiles.snuffl.co.uk'
+    tile_host: 'tiles.unter.co.uk'
   })
   showFallback()  // the honest error card you see here
 }`,
@@ -41,10 +41,77 @@ catch (err) {
         },
     },
     {
+        id: 'safety/radar-error/selfdriving',
+        page: 'safety',
+        target: 'radar-error',
+        tool: 'selfdriving',
+        label: 'inbox report',
+        dx: 0.5,
+        dy: 1.0,
+        title: 'Nobody has to notice this',
+        body: {
+            why: (
+                <>
+                    Error tracking is a signal source, so the 412 exceptions from this widget are already feeding the
+                    self-improving loop. Signals get deduplicated and clustered into one report, an agent digs through
+                    the codebase and the data to confirm it, and it comes back with a priority.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `INBOX · high priority
+Badger tile requests failing (403)
+  from  $exception ×412 · tile service logs
+  cause api key expired 366 days ago
+  → pull request open: rotate + calendar
+    the key, fall back to a cached layer`,
+            },
+            after: (
+                <>
+                    Actionable reports arrive as a pull request, built in a sandbox with your CI and code review
+                    attached. The ones that need a human decision wait in your inbox instead. Either way it happened
+                    while everyone was asleep, which is also when the hedgehogs were commuting.
+                </>
+            ),
+        },
+    },
+    {
+        id: 'safety/badger-radar/error',
+        page: 'safety',
+        target: 'badger-radar',
+        tool: 'error',
+        label: 'source maps',
+        dx: 0.08,
+        dy: 0.92,
+        title: 'Why the stack trace is readable',
+        body: {
+            why: (
+                <>
+                    Production JavaScript is minified, so a raw stack trace points at <code>t.exports</code> on line 1
+                    of a bundle. Uploading source maps at build time is what turns it back into your own file and line
+                    numbers.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `# in CI, after the build:
+npx @posthog/wizard upload-source-maps
+# without it:  t.exports @ main.a91f.js:1:24855
+# with it:     loadBadgerLayer @ radar.ts:42:11`,
+            },
+            after: (
+                <>
+                    Same idea as the mobile SDKs' symbol files. Skip this step and error tracking still groups the issue
+                    correctly, you just can't tell what code caused it.
+                </>
+            ),
+        },
+    },
+    {
         id: 'safety/safety-longread/web',
         page: 'safety',
         target: 'safety-longread',
-        product: 'web',
+        tool: 'web',
         label: '$pageleave',
         dx: 1.0,
         dy: 0.15,
@@ -75,7 +142,7 @@ $pageleave  →  time on page, scroll depth
         id: 'safety/btn-radar-retry/replay',
         page: 'safety',
         target: 'btn-radar-retry',
-        product: 'replay',
+        tool: 'replay',
         label: 'rage clicks',
         dx: 1.35,
         dy: 0.5,
@@ -106,7 +173,7 @@ rage_click on #btn-radar-retry   47 sessions
         id: 'safety/badger-radar/logs',
         page: 'safety',
         target: 'badger-radar',
-        product: 'logs',
+        tool: 'logs',
         label: 'tile service logs',
         dx: 0.925,
         dy: 0.07,
@@ -139,7 +206,7 @@ rage_click on #btn-radar-retry   47 sessions
         id: 'safety/page-help/surveys',
         page: 'safety',
         target: 'page-help',
-        product: 'surveys',
+        tool: 'surveys',
         label: 'renderSurvey()',
         dx: 0.5,
         dy: -0.1,

@@ -340,9 +340,9 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'How PostHog works',
-                    link: '/how-posthog-works',
-                    icon: getMenuIcon(pricingMenu.children, '/how-posthog-works', 'IconMagicWand', 'orange'),
+                    label: 'How instrumentation works',
+                    link: '/instrumentation',
+                    icon: getMenuIcon(pricingMenu.children, '/instrumentation', 'IconMagicWand', 'orange'),
                 },
                 {
                     type: 'item',

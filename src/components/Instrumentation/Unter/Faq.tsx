@@ -3,23 +3,23 @@ import React from 'react'
 const QUESTIONS: { q: string; a: string }[] = [
     {
         q: 'Will the hedgehogs pay me?',
-        a: 'No. Payment is in karma and the occasional slug left as a tip, which you will not want.',
+        a: 'No (sorry). They have no money and no way to thank you.',
     },
     {
         q: 'Is 13cm really enough?',
-        a: "It's the official spec. Big enough for any hedgehog, small enough that your dog stays a dog owner's problem.",
+        a: "It's the unofficial, official spec. Big enough for any hedgehog, small enough that it's not too noticeable.",
     },
     {
         q: 'What about my dog?',
-        a: 'If your dog fits through a 13cm gap, that is not a dog. That is a hedgehog, and it already has an account.',
+        a: "If your dog fits through a 13cm gap, that is not your dog. That's a hedgehog.",
     },
     {
         q: 'Do badgers use the gaps?',
-        a: 'Badgers make their own arrangements. They always have.',
+        a: 'Badgers make their own arrangements (they always have).',
     },
     {
         q: 'Can I close the gap in winter?',
-        a: "You can. You won't. By December you'll be leaving out a saucer of water and checking the crossing counts before bed.",
+        a: "Sure? But by December we bet you'll be leaving out a saucer of water and snacks.",
     },
 ]
 
@@ -27,12 +27,12 @@ const QUESTIONS: { q: string; a: string }[] = [
 // points at real <summary> elements, the same thing autocapture would log.
 export default function Faq(): JSX.Element {
     return (
-        <section className="sn-faq" data-snuffl-id="host-faq">
-            <h2 className="sn-h2">Top questions from hosts</h2>
+        <section className="un-faq" data-unter-id="host-faq">
+            <h2 className="un-h2">Top questions from hosts</h2>
             {QUESTIONS.map(({ q, a }) => (
                 <details key={q}>
                     <summary>{q}</summary>
-                    <div className="sn-a">{a}</div>
+                    <div className="un-a">{a}</div>
                 </details>
             ))}
         </section>

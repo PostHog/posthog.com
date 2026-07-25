@@ -1,5 +1,6 @@
 import {
     IconActivity,
+    IconSignal,
     IconCode,
     IconFlask,
     IconGraph,
@@ -9,20 +10,23 @@ import {
     IconRewindPlay,
     IconWarning,
 } from '@posthog/icons'
-import { OverlayProduct, ProductKey } from './types'
+import { Tool, ToolKey } from './types'
 
-// Real PostHog product colors, hard-coded as hex because the chips/dots/pills
-// color dynamically and Tailwind can't JIT `bg-${color}` class names.
-// Provenance: tailwind.config.js palette via src/hooks/productData/*.tsx —
-// product_analytics: blue, web_analytics: green-2, session_replay: yellow,
-// feature_flags: seagreen, error_tracking: orange, surveys: salmon,
-// ai_observability: purple, logs: red. "core" uses the neutral gray token.
-export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
+/*
+ * The PostHog tools instrumented on the demo. "Tools" is the right word: error
+ * tracking, session replay and the rest are tools, while "products" means the
+ * interfaces you reach them through (web, MCP, Slack, desktop).
+ *
+ * Colors are literal hex because markers and icons color dynamically and Tailwind
+ * can't JIT `bg-${color}` class names. Each entry names the src/hooks/productData
+ * token it came from, so drift is checkable rather than a guess; resolve the hex
+ * against the palette in tailwind.config.js.
+ */
+export const TOOLS: Record<ToolKey, Tool> = {
     core: {
         key: 'core',
         name: 'Install & SDKs',
-        short: 'Install',
-        color: '#8F8F8C',
+        color: '#8F8F8C', // gray (no productData entry, neutral by design)
         textOnColor: '#fff',
         Icon: IconCode,
         docsUrl: '/docs/getting-started/install',
@@ -30,8 +34,7 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     web: {
         key: 'web',
         name: 'Web analytics',
-        short: 'Web',
-        color: '#36C46F',
+        color: '#36C46F', // web_analytics: green-2
         textOnColor: '#fff',
         Icon: IconPieChart,
         docsUrl: '/docs/web-analytics',
@@ -39,8 +42,7 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     product: {
         key: 'product',
         name: 'Product analytics',
-        short: 'Product',
-        color: '#2F80FA',
+        color: '#2F80FA', // product_analytics: blue
         textOnColor: '#fff',
         Icon: IconGraph,
         docsUrl: '/docs/product-analytics',
@@ -48,8 +50,7 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     replay: {
         key: 'replay',
         name: 'Session replay',
-        short: 'Replay',
-        color: '#F7A501',
+        color: '#F7A501', // session_replay: yellow
         textOnColor: '#000',
         Icon: IconRewindPlay,
         docsUrl: '/docs/session-replay',
@@ -57,8 +58,7 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     expflags: {
         key: 'expflags',
         name: 'Experiments & flags',
-        short: 'Flags',
-        color: '#30ABC6',
+        color: '#30ABC6', // feature_flags: seagreen
         textOnColor: '#fff',
         Icon: IconFlask,
         docsUrl: '/docs/feature-flags',
@@ -66,17 +66,15 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     error: {
         key: 'error',
         name: 'Error tracking',
-        short: 'Errors',
-        color: '#DF6133',
-        textOnColor: '#fff',
+        color: '#EB9D2A', // error_tracking: orange (the amber token, not burnt-orange)
+        textOnColor: '#000',
         Icon: IconWarning,
         docsUrl: '/docs/error-tracking',
     },
     surveys: {
         key: 'surveys',
         name: 'Surveys',
-        short: 'Surveys',
-        color: '#F35454',
+        color: '#F35454', // surveys: salmon
         textOnColor: '#fff',
         Icon: IconMessage,
         docsUrl: '/docs/surveys',
@@ -84,17 +82,23 @@ export const PRODUCTS: Record<ProductKey, OverlayProduct> = {
     llm: {
         key: 'llm',
         name: 'LLM analytics',
-        short: 'LLM',
-        color: '#B62AD9',
+        color: '#B62AD9', // ai_observability: purple
         textOnColor: '#fff',
         Icon: IconLlmAnalytics,
-        docsUrl: '/docs/llm-analytics',
+        docsUrl: '/docs/ai-observability',
+    },
+    selfdriving: {
+        key: 'selfdriving',
+        name: 'Self-driving',
+        color: '#8567FF', // lilac (no productData entry)
+        textOnColor: '#fff',
+        Icon: IconSignal,
+        docsUrl: '/docs/self-driving',
     },
     logs: {
         key: 'logs',
         name: 'Logs',
-        short: 'Logs',
-        color: '#F54E00',
+        color: '#F54E00', // logs: red
         textOnColor: '#fff',
         Icon: IconActivity,
         docsUrl: '/docs/logs',

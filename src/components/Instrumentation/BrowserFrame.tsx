@@ -7,14 +7,14 @@ interface BrowserFrameProps {
     url?: string
 }
 
-// Fake browser chrome that frames the Snuffl demo site as "someone else's
+// Fake browser chrome that frames the Unter demo site as "someone else's
 // website". The body is the positioning context for the demo's floating
 // widgets and the instrumentation overlay stage.
 export default function BrowserFrame({
     bodyRef,
     className = '',
     children,
-    url = 'snuffl.com',
+    url = 'unter.co.uk',
 }: BrowserFrameProps): JSX.Element {
     return (
         <div className={`flex flex-col rounded-md border border-primary overflow-hidden shadow-xl ${className}`}>
@@ -31,7 +31,7 @@ export default function BrowserFrame({
                 </div>
                 <div className="w-14" aria-hidden />
             </div>
-            <div ref={bodyRef} className="snuffl-frame relative flex-1 min-h-0">
+            <div ref={bodyRef} className="unter-frame relative flex-1 min-h-0">
                 {children}
             </div>
         </div>

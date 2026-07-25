@@ -16,22 +16,22 @@ export default function BadgerRadar(): JSX.Element {
     }
 
     return (
-        <div className="sn-radar" data-snuffl-id="badger-radar">
-            <div className="sn-radar-head">
+        <div className="un-radar" data-unter-id="badger-radar">
+            <div className="un-radar-head">
                 <h3>Live badger radar</h3>
-                <span className="sn-live">LIVE</span>
+                <span className="un-live">LIVE</span>
             </div>
-            <div className="sn-radar-body">
+            <div className="un-radar-body">
                 {loading ? (
-                    <div className="sn-radar-loading">Loading badger layer…</div>
+                    <div className="un-radar-loading">Loading badger layer…</div>
                 ) : (
-                    <div className="sn-radar-error" data-snuffl-id="radar-error">
-                        <b>TileLoadError: 403 (tiles.snuffl.co.uk/badger-layer)</b>
-                        <div className="sn-desc">
+                    <div className="un-radar-error" data-unter-id="radar-error">
+                        <b>TileLoadError: 403 (tiles.unter.co.uk/badger-layer)</b>
+                        <div className="un-desc">
                             The badger layer failed to load. The badgers are still out there. We just can't show you
                             where, which is worse, really.
                         </div>
-                        <button data-snuffl-id="btn-radar-retry" onClick={retry}>
+                        <button data-unter-id="btn-radar-retry" onClick={retry}>
                             Retry
                         </button>
                     </div>

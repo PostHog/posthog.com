@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { Annotation } from '../types'
 
 export const rideAnnotations: Annotation[] = [
@@ -6,7 +7,7 @@ export const rideAnnotations: Annotation[] = [
         id: 'ride/topnav/core',
         page: 'ride',
         target: 'topnav',
-        product: 'core',
+        tool: 'core',
         label: 'posthog-js snippet',
         dx: 0.315,
         dy: 0.5,
@@ -14,14 +15,15 @@ export const rideAnnotations: Annotation[] = [
         body: {
             why: (
                 <>
-                    Everything on this page hangs off one script tag. UK hedgehogs are GDPR animals, so events go to
-                    PostHog's EU Cloud.
+                    One script tag in <code>&lt;head&gt;</code> is what makes every other marker on this page possible.
+                    It captures pageviews, clicks, and errors on its own, and this project points at PostHog's EU Cloud
+                    because the users are in the UK.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `// in <head>, before anything else
-posthog.init('phc_snuffl_******', {
+posthog.init('phc_unter_******', {
   api_host: 'https://eu.i.posthog.com',
   defaults: '2025-05-24',  // sane modern defaults:
   // capture_pageview: 'history_change' (SPA-safe)
@@ -40,7 +42,7 @@ posthog.init('phc_snuffl_******', {
         id: 'ride/hero-headline/expflags',
         page: 'ride',
         target: 'hero-headline',
-        product: 'expflags',
+        tool: 'expflags',
         label: 'hero-headline-test',
         dx: 0.72,
         dy: 0.1,
@@ -69,10 +71,48 @@ heroEl.textContent = COPY[v]`,
         },
     },
     {
+        id: 'ride/input-destination/selfdriving',
+        page: 'ride',
+        target: 'input-destination',
+        tool: 'selfdriving',
+        label: 'session replay scout',
+        dx: 0.88,
+        dy: 0.5,
+        title: 'Friction nobody filed a ticket about',
+        body: {
+            why: (
+                <>
+                    The{' '}
+                    <Link to="/docs/self-driving/scouts" disablePrefetch externalNoIcon>
+                        session replay scout
+                    </Link>{' '}
+                    watches recordings for friction clusters (rage clicks, dead clicks) and groups them by what people
+                    were doing. It found one on the destination field in the recordings this form produces.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `INBOX · session replay scout · medium
+Rage-click cluster: destination field
+  214 sessions over 7 days
+  all outside London, where the gap
+  database has no coverage yet
+  → recordings attached as evidence`,
+            },
+            after: (
+                <>
+                    Nobody complained, because nobody knew who to complain to. Every report is also a{' '}
+                    <code>$scout_report_emitted</code> event, so you can chart or route your scouts' findings like any
+                    other event.
+                </>
+            ),
+        },
+    },
+    {
         id: 'ride/btn-see-prices/product',
         page: 'ride',
         target: 'btn-see-prices',
-        product: 'product',
+        tool: 'product',
         label: 'ride_prices_viewed',
         dx: 0.5,
         dy: 1.0,
@@ -106,16 +146,20 @@ heroEl.textContent = COPY[v]`,
         id: 'ride/ride-form/replay',
         page: 'ride',
         target: 'ride-form',
-        product: 'replay',
+        tool: 'replay',
         label: 'maskAllInputs',
-        dx: -0.045,
+        // Just inside the form's left edge: a negative dx puts the marker over
+        // the browser frame's border once the hero stacks and the form is full width.
+        dx: 0.02,
         dy: 0.22,
         title: 'Replay, with burrows masked',
         body: {
             why: (
                 <>
-                    Session replay records the quote flow so you can watch where hedgehogs abandon it. But pickup and
-                    destination are where an animal sleeps, which is PII by any reasonable reading.
+                    Session replay records this form so you can watch where people abandon it. Input masking is on, so
+                    every value the user types is replaced with asterisks before the recording leaves the browser.
+                    Pickup and destination are location data, which is exactly what you don't want sitting in a
+                    recording.
                 </>
             ),
             code: {
@@ -128,7 +172,7 @@ heroEl.textContent = COPY[v]`,
             after: (
                 <>
                     Masking happens in the browser, so the real values never reach PostHog's servers. A recording still
-                    shows the stall on the destination field. The destination itself stays on Colin's machine.
+                    shows the stall on the destination field. The address itself stays in the visitor's browser.
                 </>
             ),
         },
@@ -137,7 +181,7 @@ heroEl.textContent = COPY[v]`,
         id: 'ride/tier-xl/product',
         page: 'ride',
         target: 'tier-xl',
-        product: 'product',
+        tool: 'product',
         label: 'ride_tier_selected',
         dx: 0.5,
         dy: 0,
@@ -153,7 +197,7 @@ heroEl.textContent = COPY[v]`,
                 language: 'js',
                 snippet: `posthog.capture('ride_tier_selected', {
   tier: 'xl',
-  price_slugs: 5,
+  price_gbp: 5,
   viewed_tiers: ['solo', 'xl']
 })`,
             },
@@ -166,74 +210,34 @@ heroEl.textContent = COPY[v]`,
         },
     },
     {
-        id: 'ride/chat-widget/llm',
+        id: 'ride/tier-xl/replay',
         page: 'ride',
-        target: 'chat-widget',
-        product: 'llm',
-        label: '$ai_generation',
-        dx: 0.12,
-        dy: 0,
-        title: 'Prickles is an LLM. Bill accordingly.',
+        target: 'tier-xl',
+        tool: 'replay',
+        label: 'heatmaps',
+        dx: 0.5,
+        dy: 1.0,
+        title: 'Where people click, including where they cannot',
         body: {
             why: (
                 <>
-                    The concierge runs on an LLM server-side, and every completion is captured as an{' '}
-                    <code>$ai_generation</code> event. Cost, latency, and tokens land in LLM analytics next to the
-                    product data.
-                </>
-            ),
-            code: {
-                language: 'js',
-                snippet: `{
-  event: '$ai_generation',
-  properties: {
-    $ai_model: 'claude-sonnet-5',
-    $ai_provider: 'anthropic',
-    $ai_input_tokens: 214,
-    $ai_output_tokens: 96,
-    $ai_latency: 1.4,        // seconds
-    $ai_total_cost_usd: 0.0031,
-    $ai_trace_id: 'trace_7f2…'
-  }
-}`,
-            },
-            after: (
-                <>
-                    Because it shares person and session with everything else, you can ask whether visitors who talk to
-                    Prickles convert better than ones who don't, and whether that's worth $0.003 a conversation.
-                </>
-            ),
-        },
-    },
-    {
-        id: 'ride/chat-bot-msg/llm',
-        page: 'ride',
-        target: 'chat-bot-msg',
-        product: 'llm',
-        label: '$ai_trace',
-        dx: 0.06,
-        dy: 1.06,
-        title: 'The pipeline behind one answer',
-        body: {
-            why: (
-                <>
-                    Prickles pulled the CD-case rule from the gap docs before answering. The whole pipeline is one{' '}
-                    <code>$ai_trace</code> with child spans, viewable as a tree in LLM analytics.
+                    Heatmaps come from the same autocapture data, so this needed no code either. Open the toolbar on
+                    your own site and it draws clicks, scroll depth, and dead clicks straight onto the page.
                 </>
             ),
             code: {
                 language: 'bash',
-                snippet: `$ai_trace  trace_7f2…
-├─ $ai_span        vector search: gap reviews   112ms
-├─ $ai_span        fetch: gap spec (13cm doc)    38ms
-└─ $ai_generation  claude-sonnet-5              1.4s
-   # $ai_is_error: false`,
+                snippet: `# toolbar → heatmap, on /ride:
+clicks        XL card    1,204
+dead clicks   XL card      312  ← the price
+rageclicks    XL card       47
+# 3 clicks within 30px in one second
+# counts as a rageclick`,
             },
             after: (
                 <>
-                    When an answer comes back wrong or slow, the tree shows which step did it. Either retrieval returned
-                    junk, or retrieval was fine and the model ignored what it was handed. Those are different bugs with
-                    different fixes.
+                    Dead clicks are the useful ones here: 312 hedgehogs tried to click the price expecting a breakdown,
+                    and nothing happened. That's a missing feature nobody filed a ticket for.
                 </>
             ),
         },
@@ -242,7 +246,7 @@ heroEl.textContent = COPY[v]`,
         id: 'ride/garden-map/web',
         page: 'ride',
         target: 'garden-map',
-        product: 'web',
+        tool: 'web',
         label: '$pageview',
         dx: 0.05,
         dy: 0.1,
@@ -271,33 +275,68 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
         },
     },
     {
-        id: 'ride/promo-banner/web',
+        id: 'ride/promo-link/web',
         page: 'ride',
-        target: 'promo-banner',
-        product: 'web',
+        target: 'promo-link',
+        tool: 'web',
         label: 'utm_campaign',
-        dx: 0.58,
-        dy: 0.5,
-        title: 'UTMs on the press links',
+        dx: 0.5,
+        dy: 1.2,
+        title: 'Where the traffic came from',
         body: {
             why: (
                 <>
-                    Every link in the Wild London press push carries UTMs. The snippet reads them off the first{' '}
-                    <code>$pageview</code>. No extra code, no redirect service.
+                    Every link in the funding-round press push carries UTM parameters. The snippet reads them off the
+                    first <code>$pageview</code> (no extra code, no redirect service), and web analytics groups them
+                    into channels for you.
                 </>
             ),
             code: {
                 language: 'bash',
-                snippet: `?utm_source=bbc&utm_medium=pr
-&utm_campaign=wild_london
+                snippet: `?utm_source=techcrunch&utm_medium=pr
+&utm_campaign=series_b
 # web analytics → Channels:
-#   bbc / pr        11,204 visitors  ↑340%
-#   hedgehogstreet   2,911 visitors`,
+#   techcrunch / pr   11,204 visitors
+#   organic search     2,911 visitors`,
             },
             after: (
                 <>
-                    The banner itself is measured by autocapture: clicks on the link vs. sessions that saw it. If the
-                    banner doesn't out-convert the hero, it goes.
+                    The banner itself is measured by autocapture: clicks on the link versus sessions that saw it. If it
+                    doesn't out-convert the hero, it goes.
+                </>
+            ),
+        },
+    },
+    {
+        id: 'ride/btn-signup/product',
+        page: 'ride',
+        target: 'btn-signup',
+        tool: 'product',
+        label: '$set_once',
+        dx: 0.5,
+        dy: 1.6,
+        title: 'Signup is where attribution gets frozen',
+        body: {
+            why: (
+                <>
+                    Two kinds of person property get written here. <code>$set</code> is for things that change, like the
+                    tier someone is on. <code>$set_once</code> is for things that must never be overwritten: where they
+                    came from, and when they joined.
+                </>
+            ),
+            code: {
+                language: 'js',
+                snippet: `posthog.setPersonProperties(
+  { tier: 'solo' },                    // $set
+  { initial_utm_campaign: 'series_b',  // $set_once
+    signed_up_date: '2026-07-25' }
+)`,
+            },
+            after: (
+                <>
+                    Use <code>$set</code> for acquisition data by mistake and every later visit overwrites it, so
+                    everyone looks like they arrived from your own site. That's the bug that quietly ruins a year of
+                    attribution.
                 </>
             ),
         },
@@ -306,7 +345,7 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
         id: 'ride/acct-row/product',
         page: 'ride',
         target: 'acct-row',
-        product: 'product',
+        tool: 'product',
         label: 'identify()',
         dx: 0.028,
         dy: 0.5,
@@ -320,11 +359,11 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
             ),
             code: {
                 language: 'js',
-                snippet: `// on auth success — server fires the event,
+                snippet: `// on auth success, the server fires the event,
 // client links the identity:
 posthog.identify('hog_412', { tier: 'solo' })
 posthog.capture('auth_sign_in_completed')
-// stable, unique, non-PII id — never the email
+// stable, unique, non-PII id (never the email)
 // posthog.reset() ONLY on logout, never on an
 // anonymous page load (that orphans the history)`,
             },
@@ -340,7 +379,7 @@ posthog.capture('auth_sign_in_completed')
         id: 'ride/btn-reserve/expflags',
         page: 'ride',
         target: 'btn-reserve',
-        product: 'expflags',
+        tool: 'expflags',
         label: 'reserve-rollout',
         dx: 0.5,
         dy: 1.15,
@@ -374,7 +413,7 @@ posthog.capture('auth_sign_in_completed')
         id: 'ride/btn-brood/product',
         page: 'ride',
         target: 'btn-brood',
-        product: 'product',
+        tool: 'product',
         label: "group('brood')",
         dx: 0.5,
         dy: 1.15,
@@ -403,10 +442,75 @@ posthog.capture('auth_sign_in_completed')
         },
     },
     {
+        id: 'ride/footer-legal/core',
+        page: 'ride',
+        target: 'footer-legal',
+        tool: 'core',
+        label: 'opt_out_capturing()',
+        // Over the "Privacy" link itself, and inside the frame at every width.
+        dx: 0.04,
+        dy: 0.4,
+        title: 'The opt-out behind the privacy link',
+        body: {
+            why: (
+                <>
+                    The SDK has a real on/off switch for capture, and it persists across reloads. So wiring up a working
+                    "withdraw consent" control behind the privacy link is two calls, not a project.
+                </>
+            ),
+            code: {
+                language: 'js',
+                snippet: `if (!hasConsent) posthog.opt_out_capturing()
+// later, if they change their mind:
+posthog.opt_in_capturing()
+// persistence: 'memory' keeps a session
+// working with no cookie at all`,
+            },
+            after: (
+                <>
+                    Opting out stops capture in the browser, so nothing is sent and then deleted: it's never collected.
+                    Handy given every hedgehog on this network is a UK data subject.
+                </>
+            ),
+        },
+    },
+    {
+        id: 'ride/footer/product',
+        page: 'ride',
+        target: 'footer',
+        tool: 'product',
+        label: 'outbound links',
+        dx: 0.12,
+        dy: 0.12,
+        title: 'Autocapture keeps the link target',
+        body: {
+            why: (
+                <>
+                    The footer sends people to Hedgehog Street and the BBC. Autocapture records each click with the
+                    element's <code>href</code> and text, so leaving the site is measurable without wrapping every
+                    anchor in a handler.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `# $autocapture, grouped by element href:
+hedgehogstreet.org   1,880 clicks
+youtube.com/watch      642
+/careers                 12  ← unpaid, all of them`,
+            },
+            after: (
+                <>
+                    Worth knowing what this <em>doesn't</em> do: an outbound click is the last thing you see from that
+                    session, so treat it as an exit, not a conversion.
+                </>
+            ),
+        },
+    },
+    {
         id: 'ride/app-row/core',
         page: 'ride',
         target: 'app-row',
-        product: 'core',
+        tool: 'core',
         label: 'mobile SDKs',
         dx: 0.5,
         dy: -0.05,
@@ -420,7 +524,7 @@ posthog.capture('auth_sign_in_completed')
             ),
             code: {
                 language: 'bash',
-                snippet: `POSTHOG_PROJECT_TOKEN=phc_snuffl_******
+                snippet: `POSTHOG_PROJECT_TOKEN=phc_unter_******
 POSTHOG_HOST=https://eu.i.posthog.com
 # app calls identify('hog_412') after login →
 # web anon session + app sessions stitch into
