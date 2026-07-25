@@ -8,9 +8,9 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
-    // IconInfo,
+    IconInfo,
     IconCursorClick,
-    // IconMagic,
+    IconMagic,
     IconChat,
     IconCode,
     IconNewspaper,
@@ -26,12 +26,13 @@ export const surveys = {
     type: 'surveys',
     slug: 'surveys',
     teamSlug: 'surveys',
-    // forumTopicId: TBD — CommunityQuestions returns null until set (see content gaps)
+    forumTopicId: 347,
     color: 'salmon',
     colorSecondary: 'red',
     category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
-    // pricingDescription: TBD — see content gaps
+    pricingDescription:
+        'Your first 1500 survey responses are free every month, then pay for what you use. No limits on surveys created or questions asked.',
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
@@ -47,22 +48,20 @@ export const surveys = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // Content gap: overview.eli5 — uncomment when written
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // Content gap: useCases — uncomment when written
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -85,7 +84,6 @@ export const surveys = {
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        // Content gap: forumTopicId — section returns null until set
         { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
             slug: 'feature-comparison',
@@ -116,7 +114,7 @@ export const surveys = {
         title: 'Ask anything with no-code surveys',
         description:
             'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
-        // eli5: TBD — see content gaps
+        eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
     videos: {
@@ -142,13 +140,18 @@ export const surveys = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
         alt: 'A hedgehog looking at survey results',
         classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
             alt: 'A hedgehog looking at survey results',
         },
-        // mobileHog: TBD — see content gaps (Eli5 falls back to default)
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
+            alt: 'A hedgehog taking a survey with a rating scale',
+            className: 'w-44 @lg/reader-content:w-56 @2xl/reader-content:w-72',
+        },
     },
     slider: {
         marks: [1500, 5000, 20000, 100000],
@@ -171,7 +174,19 @@ export const surveys = {
                 'We even use surveys to send a little pop-up to our most active users and ask them to review us on G2.',
         },
     },
-    // useCases: TBD — see content gaps
+    useCases: {
+        intro: 'Surveys is used across teams depending on your role.',
+        rows: [
+            ['Product Managers', 'Run NPS, PMF, and CSAT surveys, or book user interviews from in-app templates'],
+            ['Product Engineers', 'Gather beta feedback tied to feature flags after a rollout'],
+            ['Growth Engineers', 'Ask the right cohort at the right moment – after activation, purchase, or churn'],
+            [
+                'Support Engineers',
+                'Trigger satisfaction surveys after solved tickets and route urgent feedback to Slack',
+            ],
+            ['Founders', 'Collect testimonials and qualitative signal without a separate survey tool'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -182,7 +197,7 @@ export const surveys = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // description: TBD — see content gaps
+        description: 'SDKs for web and mobile – or build a custom UI with the Surveys API.',
         productSlug: 'surveys',
         categories: ['web', 'mobile', 'no-code'],
     },
@@ -290,14 +305,15 @@ export const surveys = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
         imageAlt: 'PostHog AI and surveys',
         description: 'collect what users say and act on the feedback to ship the fix',
-        // intro: TBD — see content gaps
+        intro: 'Ask PostHog AI to create surveys, refine targeting, and summarize responses.',
         mcpFeatures: ['surveys'],
         skills: [
             'Generates complete surveys with display conditions and targeting',
             'Suggests appropriate question types (freeform text, rating scales, multiple choice, etc.) based on your research goals',
             'Analyzes the results and provides insights',
         ],
-        // Reshaped from existing ai.prompts. Tool names verified against src/data/mcp-tools.json.
+        // Prompts reshaped from existing ai.prompts + skillsData survey examples.
+        // Tool names verified against src/data/mcp-tools.json.
         groups: [
             {
                 title: 'Create',
@@ -307,6 +323,44 @@ export const surveys = {
                     'Build a product satisfaction survey with rating questions',
                     'Help me create a survey to understand why users churn',
                     'Generate a post-purchase feedback survey',
+                    'Launch the Sean Ellis PMF survey to engaged users and report the score',
+                    'Launch a one-question poll asking if the new layout is better',
+                ],
+            },
+            {
+                title: 'Update targeting',
+                tool: 'survey-update',
+                prompts: [
+                    'Narrow this survey to only enterprise admins',
+                    'Retarget the running survey to activated users',
+                    'Tighten survey targeting to the cohort that matters',
+                ],
+            },
+            {
+                title: 'Check stats',
+                tool: 'survey-stats',
+                prompts: [
+                    'Aggregate our PMF survey responses by segment',
+                    "What's the response rate and completion rate on our NPS survey?",
+                    'Show me stats for the post-purchase feedback survey this month',
+                ],
+            },
+            {
+                title: 'Summarize',
+                tool: 'surveys-summarize-responses-create',
+                prompts: [
+                    'Spin up a cancel survey for the churn cohort and summarize the reasons',
+                    'What are users most frustrated about this month?',
+                    'Pull NPS, retention, and survey quotes into a one-page PMF report',
+                ],
+            },
+            {
+                title: 'Clean up',
+                tool: 'survey-delete',
+                prompts: [
+                    "Which surveys are stale? Retire the ones nobody's answering",
+                    'Clean up old surveys that are still running',
+                    "Archive the launch survey now that it's done",
                 ],
             },
         ],

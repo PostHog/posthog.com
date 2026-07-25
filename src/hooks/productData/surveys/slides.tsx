@@ -9,6 +9,8 @@ import {
     IconCode,
     IconPhone,
     IconPeople,
+    IconRocket,
+    IconGraph,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
@@ -19,7 +21,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Only MCP exists in source content today – remaining application slides are a content gap.
+ * Capability detail belongs in `topFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -60,6 +62,137 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+    },
+    {
+        slug: 'launch',
+        label: 'Launch',
+        icon: <IconRocket className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Pick a template, ask one good question, ship it',
+        description: (
+            <>
+                <p>
+                    Start from an NPS, PMF, CSAT, or freeform template – or build from scratch. Multiple choice,
+                    ratings, emoji reactions, and free text are all available, and you can end with a link to book a
+                    user interview or send people somewhere else.
+                </p>
+                <p>
+                    No-code popovers and feedback buttons work with PostHog.js. Prefer a custom UI? Use the Surveys API
+                    against the same backend.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Templates',
+                                description: f.templates.description,
+                            },
+                            {
+                                label: 'Question types',
+                                description: f.question_types.description,
+                            },
+                            {
+                                label: 'Presentation',
+                                description: f.presentation_options.description,
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.templates.images[0].src,
+            alt: f.templates.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'target',
+        label: 'Target',
+        icon: <IconTarget className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Ask the right people at the right moment',
+        description: (
+            <>
+                <p>{f.display_conditions.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'URL or person properties',
+                                description: 'Show a survey on a specific page or only to a matching segment.',
+                            },
+                            {
+                                label: 'Feature flags',
+                                description:
+                                    'Connect a survey to a flag so beta users get asked about the change they just saw.',
+                            },
+                            {
+                                label: 'Events & wait periods',
+                                description:
+                                    'Trigger when an event fires, optionally once, and set a delay so you do not annoy new users.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.display_conditions.images[0].src,
+            alt: f.display_conditions.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'analyze',
+        label: 'Analyze',
+        icon: <IconGraph className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-purple',
+        layout: 'stack',
+        heading: 'Read the answers, then dig into context',
+        description: (
+            <>
+                <p>
+                    See feedback summarized and broken down per response, send realtime replies to Slack or a CDP
+                    destination, then jump into Product Analytics or Session Replay for the same people.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Aggregated results',
+                                description:
+                                    'Response distributions, average scores, and trends without exporting CSV.',
+                            },
+                            {
+                                label: 'Partial responses',
+                                description:
+                                    'Log answers to individual questions as they come in – not only on survey completion.',
+                            },
+                            {
+                                label: 'Pairs with Product Analytics & Session Replay',
+                                description:
+                                    'Break down scores over time, or watch the session around the response for full context.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'home',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
     },
 ]
 
