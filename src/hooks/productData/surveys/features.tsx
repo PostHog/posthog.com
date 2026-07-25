@@ -25,7 +25,9 @@ export const features = {
         color: 'salmon',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/question-types.png',
+                // Cropped to the dropdown only (drops empty canvas + leftover title-bar pixels).
+                // Commas keep CloudinaryImage from rewriting the publicId.
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,w_442,h_409,x_207,y_9,f_auto,q_auto/posthog.com/src/components/Product/Surveys/images/question-types.png',
                 alt: 'Question types',
             },
         ],

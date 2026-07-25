@@ -211,6 +211,9 @@ export const topFeatures: CarouselSlide[] = [
             src: f.question_types.images[0].src,
             alt: f.question_types.images[0].alt,
             glow: true,
+            maxWidth: 'max-w-xs',
+            // w-full needed: CloudinaryImage ignores wrapper className when the src has commas.
+            imgClassName: 'w-full p-3',
         },
     },
     {
