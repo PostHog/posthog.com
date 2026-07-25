@@ -286,6 +286,10 @@ export default function MediaPlayer({
     }
 
     const toggleFullscreen = () => {
+        if (source === 'wistia' && typeof playerState.player?.requestFullscreen === 'function') {
+            playerState.player.requestFullscreen()
+            return
+        }
         const iframe = document.getElementById(`video-player-iframe-${videoId}`) as any
         if (iframe?.requestFullscreen) {
             iframe.requestFullscreen()
