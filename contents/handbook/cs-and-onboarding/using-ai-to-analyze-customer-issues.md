@@ -8,7 +8,7 @@ A field guide for customer-facing roles using AI to investigate and explain cust
 
 ## Why this matters now
 
-L1 support might as well be dead. Have you really lived if you've never copy and pasted a customer's question into Claude Code and just typed "debug"? Don't get me wrong – AI is the fastest way to get an understanding of a customer issue. The speed is the point and the trap. We (you, me, us) exist as the human-in-the-loop, where the skill we are exercising is judgment.
+L1 support might as well be dead. Have you really lived if you've never copy and pasted a customer's question into Claude Code and just typed "debug"? Don't get me wrong, AI is the fastest way to get an understanding of a customer issue. The speed is the point and the trap. We (you, me, us) exist as the human-in-the-loop, where the skill we are exercising is judgment.
 
 Whether we realize it or not, a confident and well-formatted `.md` file from Claude is treated like ground truth when it's attached to a ticket or a Slack thread. The risk isn't that AI is wrong sometimes; it's that wrong output is indistinguishable from right output until someone verifies it.
 
@@ -22,17 +22,17 @@ This holds for both audiences below. Internally, we should do our best to explic
 
 ## Internal: separate the analysis from the output
 
-When investigating a customer issue, treat AI output as directional guidance. It is still your responsibility to shoulder the critical thinking around the product with your [investigation workflow](/handbook/cs-and-onboarding/handling-customer-issues#investigating-issues). The model will tell you *where* to look, but your understanding of the trace, the replay, the dashboard, and the query result – this is the analysis.
+When investigating a customer issue, treat AI output as directional guidance. It is still your responsibility to shoulder the critical thinking around the product with your [investigation workflow](/handbook/cs-and-onboarding/handling-customer-issues#investigating-issues). The model will tell you *where* to look, but your understanding of the trace, the replay, the dashboard, and the query result. This is the analysis.
 
-Label anything that is machine-generated, especially in shared notes and tickets. We're all developing a good eye for it, but mark AI output as AI output – a heading, a quote block, a "(AI draft, unverified)" tag. The goal is that a teammate skimming your investigation can instantly tell which lines are confirmed and which are a model's guess.
+Label anything that is machine-generated, especially in shared notes and tickets. We're all developing a good eye for it, but mark AI output as AI output: a heading, a quote block, a "(AI draft, unverified)" tag. The goal is that a teammate skimming your investigation can instantly tell which lines are confirmed and which are a model's guess.
 
-**Watch:** plausibility is not verification. AI is most dangerous when it's fluent and specific about something it can't actually know – a root cause, a customer's intent, an exact number. Torture your keyboard asking for verification steps. Phone a friend if you must.
+**Watch:** plausibility is not verification. AI is most dangerous when it's fluent and specific about something it can't actually know: a root cause, a customer's intent, an exact number. Torture your keyboard asking for verification steps. Phone a friend if you must.
 
 ## External: distill before you share
 
 What goes to a customer should be a short, human-reviewed summary of **verified facts**. Distillation is the value add: you've separated signal from speculation so the customer doesn't have to.
 
-**Share large AI analysis files sparingly, if at all.** A long, marked-down AI analysis is an internal working artifact, not a customer deliverable. Sending the raw file is tempting – it can feel like something the customer might want to see ("I bet they'd love to see this!"). Customer relationships _will_ erode if we are shipping unverified claims, internal reasoning, or speculation from the model that is actually a hallucination.
+**Share large AI analysis files sparingly, if at all.** A long, marked-down AI analysis is an internal working artifact, not a customer deliverable. Sending the raw file is tempting. It can feel like something the customer might want to see ("I bet they'd love to see this!"). Customer relationships _will_ erode if we are shipping unverified claims, internal reasoning, or speculation from the model that is actually a hallucination.
 
 Default to a concise summary; share the full file only when the customer specifically needs the detail and you've reviewed every line in it first. When an issue is resolved, send the customer the confirmed cause and fix in a few sentences. Keep the long AI investigation in the internal ticket, linked for teammates, not pasted into the reply.
 
@@ -42,5 +42,5 @@ Default to a concise summary; share the full file only when the customer specifi
 - **Do** label machine-generated content clearly in shared notes and tickets.
 - **Do** send customers a concise summary of verified facts.
 - **Don't** paste a confident AI summary into a ticket as if it were confirmed analysis.
-- **Don't** forward raw AI analysis files to customers by default – distill first.
+- **Don't** forward raw AI analysis files to customers by default. Distill first.
 - **Don't** put identifiable customer data into AI tools without applying our [data-sensitivity rules](/handbook/company/security#impersonating-users).

@@ -1451,6 +1451,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
+                        name: 'Using AI to analyze customer issues',
+                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
+                    },
+                    {
                         name: 'Lifecycle of CSM engagement',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
@@ -1471,16 +1475,6 @@ export const handbookSidebar = [
                     {
                         name: 'LLM cost optimization',
                         url: '/handbook/cs-and-onboarding/shareable-guides/llm-cost-optimization',
-                    },
-                ],
-            },
-            {
-                name: 'Guides',
-                url: '',
-                children: [
-                    {
-                        name: 'Using AI to analyze customer issues',
-                        url: '/handbook/cs-and-onboarding/guides/using-ai-to-analyze-customer-issues',
                     },
                 ],
             },
