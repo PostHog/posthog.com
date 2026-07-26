@@ -30,7 +30,7 @@ The workflow for these is the same:
 2. Activate the plugin.
 3. Open the plugin's settings and add the PostHog snippet to the header.
 
-You need to activate the plugin before step 3 — its settings screen only appears once it is active.
+You need to activate the plugin before step 3 – its settings screen only appears once it is active.
 
 ### Option 2: Edit your theme's functions file
 
@@ -104,16 +104,16 @@ If the snippet is in place but events aren't appearing in PostHog, two things ca
 
 ### Caching and optimization plugins
 
-Performance plugins — Autoptimize, WP Rocket, LiteSpeed Cache, W3 Total Cache, and similar — rewrite the JavaScript on your pages. Depending on their settings they can minify the snippet, combine it into a bundle that loads later, defer it until the visitor interacts with the page, or strip the inline script entirely.
+Performance plugins – Autoptimize, WP Rocket, LiteSpeed Cache, W3 Total Cache, and similar – rewrite the JavaScript on your pages. Depending on their settings they can minify the snippet, combine it into a bundle that loads later, defer it until the visitor interacts with the page, or strip the inline script entirely.
 
 If you use one:
 
-- Exclude the PostHog snippet from JavaScript minification, combination, and deferral. Most of these plugins accept an exclusion by filename or by a string in the inline script — `posthog` works for both.
+- Exclude the PostHog snippet from JavaScript minification, combination, and deferral. Most of these plugins accept an exclusion by filename or by a string in the inline script – `posthog` works for both.
 - Purge the cache after adding the snippet. Until you do, returning visitors keep getting the cached page from before the change.
 - Check the page source of your live site, not the editor preview, to confirm the snippet is really there.
 
 ### Requests blocked before they reach PostHog
 
-Ad blockers and strict browser privacy modes — including Firefox's Enhanced Tracking Protection and Brave Shields — block requests to known analytics domains. The snippet loads, but the events never arrive, which looks the same as a broken installation.
+Ad blockers and strict browser privacy modes – including Firefox's Enhanced Tracking Protection and Brave Shields – block requests to known analytics domains. The snippet loads, but the events never arrive, which looks the same as a broken installation.
 
 The fix is to [deploy a reverse proxy](/docs/advanced/proxy) so events go through your own subdomain instead. PostHog also offers a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) if you'd rather not run one yourself.
