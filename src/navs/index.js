@@ -1451,16 +1451,16 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: 'Using AI to analyze customer issues',
-                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
-                    },
-                    {
                         name: 'Lifecycle of CSM engagement',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
+                    },
+                    {
+                        name: 'Using AI to analyze customer issues',
+                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
                     },
                     {
                         name: 'Engaging unengaged customers',
