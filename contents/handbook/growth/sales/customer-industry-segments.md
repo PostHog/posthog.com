@@ -13,7 +13,7 @@ These segments can change as our customer data evolves, but the following serve 
 - [AI and data](#ai-and-data-description)
 - Consumer software
 - Developer tools
-- [E-commerce](#ecommerce-description)
+- [E-commerce](#e-commerce-description)
 - Education
 - Enterprise software
 - Finance

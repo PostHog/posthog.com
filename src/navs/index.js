@@ -1704,7 +1704,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Customer industry segments',
-                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                        url: '/handbook/growth/sales/customer-industry-segments',
                     },
                     {
                         name: 'Communications templates',
