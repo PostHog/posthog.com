@@ -10,7 +10,7 @@ We have thousands of customers in PostHog, many of which are in similar industri
 
 These segments can change as our customer data evolves, but the following serve as a starting point:
 
-- [AI and data](#AI-and-data-description)
+- [AI and data](#ai-and-data-description)
 - Consumer software
 - Developer tools
 - [E-commerce](#ecommerce-description)
