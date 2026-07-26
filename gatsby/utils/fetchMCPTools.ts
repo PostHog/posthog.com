@@ -67,9 +67,11 @@ async function fetchExecCommandsMarkdown(): Promise<string | null> {
         }
 
         const markdown = await response.text()
-        // react-markdown renders raw HTML (like the fragment's generated-file notice) as
-        // literal text, so strip comments before the markdown reaches the page.
-        return markdown.replace(/<!--[\s\S]*?-->\s*/g, '')
+        // The fragment opens with an HTML provenance comment, which react-markdown renders as
+        // literal text. Take the document from its first heading rather than stripping the
+        // comment: slicing can't reintroduce the sequence the way a replace can.
+        const bodyStart = markdown.indexOf('## ')
+        return bodyStart === -1 ? markdown : markdown.slice(bodyStart)
     } catch (error) {
         console.error('Error fetching MCP exec command reference:', error)
         return null
