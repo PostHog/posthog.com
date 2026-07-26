@@ -9,15 +9,18 @@ export const rideAnnotations: Annotation[] = [
         target: 'topnav',
         tool: 'core',
         label: 'posthog-js snippet',
-        dx: 0.315,
+        // In the nav's empty middle, beside the $pageview marker: both annotate the
+        // page chrome rather than any one link, and further left this sat on top of
+        // "Open your highway" and hid it.
+        dx: 0.56,
         dy: 0.5,
-        title: 'The snippet: one tag in <head>',
+        title: 'One script tag enables everything else',
         body: {
             why: (
                 <>
                     One script tag in <code>&lt;head&gt;</code> is what makes every other marker on this page possible.
-                    It captures pageviews, clicks, and errors on its own, and this project points at PostHog's EU Cloud
-                    because the users are in the UK.
+                    It captures pageviews and clicks on its own, and this project points at PostHog's EU Cloud because
+                    the users are in the UK.
                 </>
             ),
             code: {
@@ -25,9 +28,9 @@ export const rideAnnotations: Annotation[] = [
                 snippet: `// in <head>, before anything else
 posthog.init('phc_unter_******', {
   api_host: 'https://eu.i.posthog.com',
-  defaults: '2025-05-24',  // sane modern defaults:
+  // one dated bundle of modern defaults, incl.
   // capture_pageview: 'history_change' (SPA-safe)
-  // person_profiles: 'identified_only'
+  defaults: '2025-05-24',
 })`,
             },
             after: (
@@ -39,10 +42,10 @@ posthog.init('phc_unter_******', {
         },
     },
     {
-        id: 'ride/hero-headline/expflags',
+        id: 'ride/hero-headline/experiments',
         page: 'ride',
         target: 'hero-headline',
-        tool: 'expflags',
+        tool: 'experiments',
         label: 'hero-headline-test',
         dx: 0.72,
         dy: 0.1,
@@ -78,7 +81,7 @@ heroEl.textContent = COPY[v]`,
         label: 'session replay scout',
         dx: 0.88,
         dy: 0.5,
-        title: 'Friction nobody filed a ticket about',
+        title: 'Scouts find friction in recordings',
         body: {
             why: (
                 <>
@@ -101,9 +104,9 @@ Rage-click cluster: destination field
             },
             after: (
                 <>
-                    Nobody complained, because nobody knew who to complain to. Every report is also a{' '}
-                    <code>$scout_report_emitted</code> event, so you can chart or route your scouts' findings like any
-                    other event.
+                    None of those 214 people filed a bug, so this would never have reached you any other way. Each
+                    report is also a <code>$scout_report_emitted</code> event, so you can chart or route findings like
+                    anything else PostHog captures.
                 </>
             ),
         },
@@ -116,7 +119,7 @@ Rage-click cluster: destination field
         label: 'ride_prices_viewed',
         dx: 0.5,
         dy: 1.0,
-        title: 'The conversion event',
+        title: 'A named event for the funnel step',
         body: {
             why: (
                 <>
@@ -152,21 +155,23 @@ Rage-click cluster: destination field
         // the browser frame's border once the hero stacks and the form is full width.
         dx: 0.02,
         dy: 0.22,
-        title: 'Replay, with burrows masked',
+        title: 'Recording the form without the addresses',
         body: {
             why: (
                 <>
-                    Session replay records this form so you can watch where people abandon it. Input masking is on, so
-                    every value the user types is replaced with asterisks before the recording leaves the browser.
-                    Pickup and destination are location data, which is exactly what you don't want sitting in a
+                    Session replay records this form so you can watch where people abandon it. Every input is masked by
+                    default, so the values people type are replaced with asterisks before the recording leaves the
+                    browser. Pickup and destination are location data, which is exactly what you don't want sitting in a
                     recording.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `session_recording: {
-  maskAllInputs: true,   // burrow addresses render as ****
-  maskInputOptions: { password: true }
+  // maskAllInputs is already true by default;
+  // shown to make the burrow addresses -> ****
+  // behaviour explicit
+  maskAllInputs: true,
 }`,
             },
             after: (
@@ -185,7 +190,7 @@ Rage-click cluster: destination field
         label: 'ride_tier_selected',
         dx: 0.5,
         dy: 0,
-        title: 'Tier comparison behavior',
+        title: 'Capturing which option people pick',
         body: {
             why: (
                 <>
@@ -203,8 +208,8 @@ Rage-click cluster: destination field
             },
             after: (
                 <>
-                    Insight this feeds: XL selection rate by referrer. (Hedgehog Street traffic skews Solo. Reddit
-                    traffic skews XL. No further comment.)
+                    With the tier and the options they saw on one event, you can ask which traffic sources bring people
+                    who pick the expensive option.
                 </>
             ),
         },
@@ -217,40 +222,44 @@ Rage-click cluster: destination field
         label: 'heatmaps',
         dx: 0.5,
         dy: 1.0,
-        title: 'Where people click, including where they cannot',
+        title: 'Heatmaps need a toggle, not code',
         body: {
             why: (
                 <>
-                    Heatmaps come from the same autocapture data, so this needed no code either. Open the toolbar on
-                    your own site and it draws clicks, scroll depth, and dead clicks straight onto the page.
+                    Heatmaps are one setting rather than any code: turn heatmap capture on (in project settings, or{' '}
+                    <code>capture_heatmaps: true</code>). After that the toolbar draws clicks, scroll depth, and dead
+                    clicks straight onto the page.
                 </>
             ),
             code: {
                 language: 'bash',
-                snippet: `# toolbar → heatmap, on /ride:
+                snippet: `# toolbar -> heatmap, on /ride:
 clicks        XL card    1,204
-dead clicks   XL card      312  ← the price
+dead clicks   XL card      312  # the price
 rageclicks    XL card       47
 # 3 clicks within 30px in one second
 # counts as a rageclick`,
             },
             after: (
                 <>
-                    Dead clicks are the useful ones here: 312 hedgehogs tried to click the price expecting a breakdown,
-                    and nothing happened. That's a missing feature nobody filed a ticket for.
+                    Dead clicks are the useful ones: 312 people clicked the price expecting a breakdown and got nothing.
+                    That's a missing feature, found without anyone reporting it.
                 </>
             ),
         },
     },
     {
-        id: 'ride/garden-map/web',
+        id: 'ride/topnav/web',
         page: 'ride',
-        target: 'garden-map',
+        // Page-level capture, so it belongs on the page chrome. It used to sit on
+        // the map placeholder, which is just a stand-in image and had nothing to
+        // do with pageviews.
+        target: 'topnav',
         tool: 'web',
         label: '$pageview',
-        dx: 0.05,
-        dy: 0.1,
-        title: 'Web analytics: the free layer',
+        dx: 0.62,
+        dy: 0.5,
+        title: 'Web analytics needs no extra code',
         body: {
             why: (
                 <>
@@ -268,8 +277,8 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
             },
             after: (
                 <>
-                    The traffic spike after Wild London aired shows up in this dashboard on its own. Nobody wrote a line
-                    of code to chart the Attenborough bump.
+                    Traffic spikes show up here on their own. It's the layer you get for installing PostHog and doing
+                    nothing else.
                 </>
             ),
         },
@@ -312,31 +321,37 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
         page: 'ride',
         target: 'btn-signup',
         tool: 'product',
-        label: '$set_once',
-        dx: 0.5,
-        dy: 1.6,
-        title: 'Signup is where attribution gets frozen',
+        label: 'user_signed_up',
+        // Left of the button and level with the other two nav markers, so the three
+        // page-chrome annotations read as a set instead of one hanging below.
+        dx: -0.2,
+        dy: 0.5,
+        title: 'The signup event, and who the person is',
         body: {
             why: (
                 <>
-                    Two kinds of person property get written here. <code>$set</code> is for things that change, like the
-                    tier someone is on. <code>$set_once</code> is for things that must never be overwritten: where they
-                    came from, and when they joined.
+                    Signup is the number Unter watches daily and the last step of the funnel that starts on this page,
+                    so it gets its own named event. The same moment is also when you first learn who the person is, so
+                    two kinds of property are written alongside it: <code>$set</code> for anything that can change
+                    later, and <code>$set_once</code> for the facts about how they arrived, which should stay as they
+                    were on day one.
                 </>
             ),
             code: {
                 language: 'js',
-                snippet: `posthog.setPersonProperties(
-  { tier: 'solo' },                    // $set
-  { initial_utm_campaign: 'series_b',  // $set_once
-    signed_up_date: '2026-07-25' }
+                snippet: `posthog.capture('user_signed_up')
+posthog.setPersonProperties(
+  { tier: 'solo' },                    // $set: can change
+  { initial_utm_campaign: 'series_b',  // $set_once: written
+    signed_up_date: '2026-07-25' }     // once, then never
 )`,
             },
             after: (
                 <>
-                    Use <code>$set</code> for acquisition data by mistake and every later visit overwrites it, so
-                    everyone looks like they arrived from your own site. That's the bug that quietly ruins a year of
-                    attribution.
+                    Both halves feed the same chart. Daily signups and the prices-to-signup funnel come from the event,
+                    and splitting either by <code>initial_utm_campaign</code> shows which campaigns bring people who
+                    finish. Use <code>$set</code> for that campaign by mistake and every later visit overwrites it,
+                    until everyone looks like they arrived from your own site.
                 </>
             ),
         },
@@ -349,7 +364,7 @@ Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
         label: 'identify()',
         dx: 0.028,
         dy: 0.5,
-        title: 'identify() at login',
+        title: 'identify() links anonymous events to a person',
         body: {
             why: (
                 <>
@@ -369,74 +384,45 @@ posthog.capture('auth_sign_in_completed')
             },
             after: (
                 <>
-                    Get either rule wrong and one hedgehog turns into four separate users, and the retention chart lies
-                    to you for a quarter before anyone notices.
+                    Get either rule wrong and one person is counted as four, which quietly overstates your user count
+                    and understates retention.
                 </>
             ),
         },
     },
     {
-        id: 'ride/btn-reserve/expflags',
+        id: 'ride/reserve-feature/flags',
         page: 'ride',
-        target: 'btn-reserve',
-        tool: 'expflags',
+        // The whole feature, not just its button: the flag decides whether any of
+        // this section exists for you.
+        target: 'reserve-feature',
+        tool: 'flags',
         label: 'reserve-rollout',
-        dx: 0.5,
-        dy: 1.15,
-        title: 'Reserve ships behind a plain flag',
+        dx: 0,
+        dy: 0.5,
+        title: 'Releasing a risky feature to a few people first',
         body: {
             why: (
                 <>
-                    Reserve is new and touchy (it holds real gaps). It ships behind a plain feature flag, released
-                    borough by borough, starting with 20% of Hackney.
+                    Reserving holds a real gap for someone, so a bug here strands a hedgehog at a fence. The feature is
+                    deployed to everyone but wrapped in a feature flag, which decides who can actually see it: it starts
+                    at 20% of one borough, and widens once the numbers hold up.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `if (posthog.isFeatureEnabled('reserve-rollout')) {
-  showReserveRow()
+  showReserveSection()
 }
-// flag targeting: cohort "Hackney hosts ≥ 90 days"
+// released to: 20% of cohort "Hackney hosts"
 // watch: crossing_reserved conversion
-//        + $exception rate for the new code path`,
+//        + $exception rate in the new code path`,
             },
             after: (
                 <>
-                    Same flag UI as the headline experiment, doing a different job. If <code>$exception</code> rates
-                    climb in the new code path, the flag flips off from the PostHog UI, without a deploy, before anyone
-                    is stranded at a held gap.
-                </>
-            ),
-        },
-    },
-    {
-        id: 'ride/btn-brood/product',
-        page: 'ride',
-        target: 'btn-brood',
-        tool: 'product',
-        label: "group('brood')",
-        dx: 0.5,
-        dy: 1.15,
-        title: 'Broods use group analytics',
-        body: {
-            why: (
-                <>
-                    A brood is a unit of six hedgehogs acting as one household. Group analytics models that directly
-                    instead of stuffing a brood_id property on every event.
-                </>
-            ),
-            code: {
-                language: 'js',
-                snippet: `posthog.group('brood', 'brood_812', {
-  hoglets: 4,
-  borough: 'hackney'
-})
-// now every event is person-level AND brood-level`,
-            },
-            after: (
-                <>
-                    Retention can now be asked at the household level. Does brood_812 still cross in March? Which
-                    boroughs sign up whole families, and which sign up loners who never invite anyone?
+                    The flag is also the off switch. If exceptions climb in the new code path, you flip it off from the
+                    PostHog UI and the feature disappears for everyone within seconds, with no deploy and nobody left
+                    waiting at a gap that was never held.
                 </>
             ),
         },
@@ -450,7 +436,7 @@ posthog.capture('auth_sign_in_completed')
         // Over the "Privacy" link itself, and inside the frame at every width.
         dx: 0.04,
         dy: 0.4,
-        title: 'The opt-out behind the privacy link',
+        title: 'Turning capture off, and back on',
         body: {
             why: (
                 <>
@@ -463,8 +449,8 @@ posthog.capture('auth_sign_in_completed')
                 snippet: `if (!hasConsent) posthog.opt_out_capturing()
 // later, if they change their mind:
 posthog.opt_in_capturing()
-// persistence: 'memory' keeps a session
-// working with no cookie at all`,
+// the choice is remembered, so it holds
+// on the next visit too`,
             },
             after: (
                 <>
@@ -475,14 +461,14 @@ posthog.opt_in_capturing()
         },
     },
     {
-        id: 'ride/footer/product',
+        id: 'ride/footer-links/product',
         page: 'ride',
-        target: 'footer',
+        target: 'footer-links',
         tool: 'product',
         label: 'outbound links',
-        dx: 0.12,
-        dy: 0.12,
-        title: 'Autocapture keeps the link target',
+        dx: 0.22,
+        dy: 0.5,
+        title: 'Autocapture records outbound clicks',
         body: {
             why: (
                 <>
@@ -495,13 +481,45 @@ posthog.opt_in_capturing()
                 language: 'bash',
                 snippet: `# $autocapture, grouped by element href:
 hedgehogstreet.org   1,880 clicks
-youtube.com/watch      642
-/careers                 12  ← unpaid, all of them`,
+youtube.com/watch      642`,
             },
             after: (
                 <>
-                    Worth knowing what this <em>doesn't</em> do: an outbound click is the last thing you see from that
-                    session, so treat it as an exit, not a conversion.
+                    One caveat: an outbound click is the last thing you see in that session, so read it as an exit
+                    rather than a conversion.
+                </>
+            ),
+        },
+    },
+    {
+        id: 'ride/survey-badge/surveys',
+        page: 'ride',
+        target: 'survey-badge',
+        tool: 'surveys',
+        label: 'display conditions',
+        dx: 0.5,
+        dy: 0,
+        title: 'Choosing who sees a survey',
+        body: {
+            why: (
+                <>
+                    A survey doesn't have to go to everyone. You set conditions in PostHog: which URLs it appears on,
+                    which feature flag the person must match, and what share of them to ask.
+                </>
+            ),
+            code: {
+                language: 'bash',
+                snippet: `# conditions on this survey, set in PostHog:
+url contains       unter.co.uk
+feature flag       hedgehog-verified
+sample             25% of matching users
+# and once someone answers, they're not
+# asked again`,
+            },
+            after: (
+                <>
+                    Sampling matters more than it looks. Ask everyone every time and response rates fall, so the answers
+                    you do get come from the people with the strongest opinions.
                 </>
             ),
         },
@@ -514,7 +532,7 @@ youtube.com/watch      642
         label: 'mobile SDKs',
         dx: 0.5,
         dy: -0.05,
-        title: 'Same person, web to app',
+        title: 'The mobile SDKs report to the same project',
         body: {
             why: (
                 <>
@@ -532,9 +550,9 @@ POSTHOG_HOST=https://eu.i.posthog.com
             },
             after: (
                 <>
-                    The stitched timeline reads: arrived from the BBC link, requested a quote, scanned the QR, first
-                    crossing in the app two nights later. All of it on one person record, which is what makes the Wild
-                    London campaign attributable to actual crossings.
+                    One person's timeline then reads across both: arrived from a link, got a quote on the web, scanned
+                    the QR, first crossing in the app two nights later. That's what makes a campaign traceable to what
+                    people actually did.
                 </>
             ),
         },

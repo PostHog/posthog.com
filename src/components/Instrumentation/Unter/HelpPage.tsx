@@ -6,10 +6,10 @@ interface Message {
 }
 
 const INITIAL_MESSAGES: Message[] = [
-    { from: 'user', text: 'is my hedgehog too wide for a standard gap' },
+    { from: 'user', text: 'Is there a hedgehog highway in Toronto?' },
     {
         from: 'bot',
-        text: "Send a photo of him next to a CD case. The standard gap is 13×13cm. If he's wider than the case, book Unter XL and nobody has to say anything.",
+        text: 'Not yet. We cover Greater London and four postcodes in Bristol. Toronto has raccoons, which is a different product.',
     },
 ]
 
@@ -60,8 +60,8 @@ export default function HelpPage(): JSX.Element {
                 <div className="un-help-intro">
                     <h1 className="un-h1">AI support</h1>
                     <p className="un-lede">
-                        Our assistant has read every gap review on the network, which is more than any human has
-                        managed. It answers in about a second and has never once suggested crossing a road.
+                        Ask about routes, gap sizes, or a crossing that didn't happen. It can see your recent trips and
+                        answers in about a second.
                     </p>
                     {/* Not buttons: these are examples of what people ask, not a
                         second way to drive the thread. The input below is the
@@ -76,7 +76,7 @@ export default function HelpPage(): JSX.Element {
                 <div className="un-chat-card" data-unter-id="chat-widget">
                     <div className="un-chat-head">
                         <span className="un-status" /> Unter AI support
-                        <span className="un-chat-meta">typically replies instantly</span>
+                        <span className="un-chat-meta">replies instantly</span>
                     </div>
                     <div className="un-chat-body" ref={threadRef}>
                         {messages.map((message, index) => (
@@ -98,7 +98,7 @@ export default function HelpPage(): JSX.Element {
                     >
                         <input
                             type="text"
-                            placeholder="Ask about gaps, routes, badgers…"
+                            placeholder="Ask a question"
                             value={draft}
                             onChange={(e) => setDraft(e.target.value)}
                         />

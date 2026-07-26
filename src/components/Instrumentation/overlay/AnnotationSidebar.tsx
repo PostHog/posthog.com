@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react'
-import { IconHide, IconSearch } from '@posthog/icons'
+import { IconChevronDown, IconHide, IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -15,6 +15,8 @@ interface AnnotationSidebarProps {
     annotations: Annotation[]
     numbers: Record<string, number>
     pageLabel: string
+    /** Per tool, the other pages that also instrument it, named as the demo's nav does. */
+    elsewhere: Partial<Record<ToolKey, string>>
     inspecting: boolean
     selectedId: string | null
     filter: ToolKey | null
@@ -42,6 +44,7 @@ export default function AnnotationSidebar({
     annotations,
     numbers,
     pageLabel,
+    elsewhere,
     inspecting,
     selectedId,
     filter,
@@ -72,11 +75,12 @@ export default function AnnotationSidebar({
     const wizardNote = (
         <div className="mx-1.5 mb-2 mt-1 p-2.5 rounded bg-accent">
             <p className="text-xs text-secondary m-0 mb-2">
-                Nobody wrote these by hand. The{' '}
+                Run the{' '}
                 <Link to="/wizard" disablePrefetch externalNoIcon className="font-semibold">
                     PostHog wizard
                 </Link>{' '}
-                read the codebase and instrumented it in about eight minutes.
+                on your own app and it installs the SDK and writes the instrumentation for you, in about eight minutes.
+                That's how Unter got all of this.
             </p>
             <WizardCommand slim />
         </div>
@@ -108,8 +112,7 @@ export default function AnnotationSidebar({
                     </p>
                 ) : (
                     <p className="text-xs text-secondary m-0">
-                        {annotations.length} touchpoints on {pageLabel}, using {toolCount} tools
-                        {inspecting ? '. Filter with the tool icons above.' : '.'}
+                        {annotations.length} touchpoints on {pageLabel}, using {toolCount} tools.
                     </p>
                 )}
             </div>
@@ -159,6 +162,11 @@ export default function AnnotationSidebar({
                                         <span className="flex-1 min-w-0 font-code text-xs text-primary truncate">
                                             {annotation.label}
                                         </span>
+                                        <IconChevronDown
+                                            className={`size-4 shrink-0 text-muted transition-transform ${
+                                                isSelected ? 'rotate-180' : ''
+                                            }`}
+                                        />
                                     </button>
                                     {isSelected && (
                                         <div className="px-2 pt-1.5 pb-3">
@@ -198,6 +206,15 @@ export default function AnnotationSidebar({
                             )
                         })}
                     </ul>
+
+                    {/* Sits above the wizard note rather than in the header, where it
+                        would be reporting on the filter you can already see. */}
+                    {filter && elsewhere[filter] && (
+                        <p className="mx-3 mt-1 mb-3 text-xs text-secondary">
+                            {TOOLS[filter].name} is also instrumented on {elsewhere[filter]}. Open a page from Unter's
+                            own nav to see it there.
+                        </p>
+                    )}
 
                     {wizardNote}
                 </ScrollArea>

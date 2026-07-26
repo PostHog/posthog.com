@@ -46,7 +46,7 @@ export const highwayAnnotations: Annotation[] = [
         label: 'highway_signup_completed',
         dx: 0,
         dy: 0.12,
-        title: 'The host acquisition funnel',
+        title: 'One event marks the signup complete',
         body: {
             why: (
                 <>
@@ -79,7 +79,7 @@ posthog.capture('highway_signup_completed', {
         label: 'ph-no-capture',
         dx: -0.06,
         dy: 0.5,
-        title: 'ph-no-capture on the postcode',
+        title: 'Leaving one field out of recordings',
         body: {
             why: (
                 <>
@@ -109,7 +109,7 @@ posthog.capture('highway_signup_completed', {
         label: 'OTLP logs',
         dx: 0.5,
         dy: 1.15,
-        title: 'Server-side: the API call logs to PostHog too',
+        title: 'Backend logs land in the same project',
         body: {
             why: (
                 <>
@@ -133,31 +133,32 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         },
     },
     {
-        id: 'highway/survey-pop/surveys',
+        id: 'highway/survey-badge/surveys',
         page: 'highway',
-        target: 'survey-pop',
+        target: 'survey-badge',
         tool: 'surveys',
-        label: 'popover survey',
-        dx: 0.9,
+        label: 'feedback button survey',
+        dx: 0.5,
         dy: 0,
-        title: 'Popover survey, nothing shipped',
+        title: 'Surveys are built in PostHog, not in your code',
         body: {
             why: (
                 <>
-                    This isn't custom UI. It's a PostHog popover survey, rendered by the snippet itself, targeted at:
-                    URL contains <code>/highway</code>, shown once, only after <code>highway_signup_completed</code>.
+                    Click the badge to open it. This is a PostHog survey, not custom UI: you write the question in
+                    PostHog, point it at a CSS selector, and the snippet renders it. Nothing about it ships in a deploy.
                 </>
             ),
             code: {
                 language: 'js',
-                snippet: `// amount of code shipped for this survey:
-//   (none, configured in the PostHog UI)`,
+                snippet: `// lines of code for this survey: 0
+// in PostHog:  type     feedback button
+//              attach   .un-survey-badge
+//              question "What nearly stopped you?"`,
             },
             after: (
                 <>
-                    Responses land as events on the person who gave them. Filter for everyone who answered "The
-                    neighbour (ongoing situation)", then check whether that cohort finished signup anyway. Most did. The
-                    neighbour was not consulted.
+                    Each answer is captured as an event on the person who gave it, so you can filter to the people who
+                    picked one option and look at what they did next.
                 </>
             ),
         },
@@ -170,7 +171,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         label: 'impact_calculated',
         dx: 0.5,
         dy: 0,
-        title: 'One event per decision',
+        title: 'Capture the result, not every keystroke',
         body: {
             why: (
                 <>
@@ -189,8 +190,8 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
             },
             after: (
                 <>
-                    Dashboard tile it feeds: the median slider position is 2 holes, and the median registration is 1.
-                    Someone in growth now owns the difference between what people drag and what they cut.
+                    The median person drags the slider to 2 holes but registers 1. That gap is measurable now, which is
+                    the first step to closing it.
                 </>
             ),
         },
@@ -203,7 +204,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         label: '$autocapture',
         dx: 0.52,
         dy: 0.24,
-        title: 'The FAQ is an objection ranking',
+        title: 'Autocapture keeps the text people clicked',
         body: {
             why: (
                 <>
@@ -221,8 +222,8 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
             },
             after: (
                 <>
-                    The most-opened question is whatever the landing page failed to answer. "What about my dog?" has
-                    been winning by 3×, so the dog reassurance is about to move up into the hero copy.
+                    The most-opened question is usually the one the page above it failed to answer. Here that's the dog
+                    question by 3x, so the answer is worth moving into the page itself.
                 </>
             ),
         },
@@ -235,7 +236,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         label: 'product analytics scout',
         dx: 1.0,
         dy: 0.62,
-        title: 'A funnel regression, caught on a schedule',
+        title: 'Scouts check your funnels on a schedule',
         body: {
             why: (
                 <>
@@ -265,10 +266,10 @@ Host signup conversion down 18% (7d)
         },
     },
     {
-        id: 'highway/btn-refer/expflags',
+        id: 'highway/btn-refer/experiments',
         page: 'highway',
         target: 'btn-refer',
-        tool: 'expflags',
+        tool: 'experiments',
         label: 'neighbour-referral-copy',
         dx: 0.5,
         dy: 1.18,
@@ -289,8 +290,8 @@ Host signup conversion down 18% (7d)
             },
             after: (
                 <>
-                    Goal metric: <code>highway_signup_completed</code> by referred neighbours within 14 days. Guilt is
-                    currently winning by 22%, which says something about Britain that Unter chooses not to examine.
+                    The goal metric is <code>highway_signup_completed</code> from referred neighbours within 14 days.
+                    Guilt is ahead by 22%, so that's the copy that ships.
                 </>
             ),
         },

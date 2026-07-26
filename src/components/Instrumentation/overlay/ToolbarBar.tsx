@@ -15,6 +15,8 @@ interface ToolbarBarProps {
     onReset: () => void
     /** How many touchpoints each tool has on the page being viewed. */
     counts: Partial<Record<ToolKey, number>>
+    /** Per tool, the other pages that also instrument it, named as the demo's nav does. */
+    elsewhere: Partial<Record<ToolKey, string>>
 }
 
 const BUTTON = 'flex items-center justify-center size-8 rounded-md transition-colors'
@@ -43,6 +45,7 @@ export default function ToolbarBar({
     onFilter,
     onReset,
     counts,
+    elsewhere,
 }: ToolbarBarProps): JSX.Element {
     return (
         <div className="flex items-center flex-wrap gap-0.5 px-1.5 py-1.5 bg-dark shrink-0">
@@ -109,10 +112,14 @@ export default function ToolbarBar({
                             </button>
                         }
                     >
+                        {/* A greyed-out button reads as "not used here" when the truth is
+                            usually "used, but on another page". The tooltip says which. */}
                         {!inspecting
                             ? `${tool.name} (show instrumentation first)`
                             : !count
-                            ? `${tool.name} (nothing on this page)`
+                            ? elsewhere[tool.key]
+                                ? `${tool.name}: nothing here, but it's on ${elsewhere[tool.key]}`
+                                : `${tool.name} (nothing on this page)`
                             : isActive
                             ? `${tool.name}: showing ${count} of them`
                             : `${tool.name}: ${count} here, click to isolate`}
@@ -120,17 +127,23 @@ export default function ToolbarBar({
                 )
             })}
 
+            {/* Sits in the space the wrapped button rows leave over, so the hint is
+                next to the icons it's describing rather than in the column below. */}
+            {inspecting && <span className="ml-1.5 text-xs text-white/40 leading-tight">Click a tool to filter</span>}
+
             <span className={DIVIDER} aria-hidden />
 
-            <Tooltip
-                trigger={
-                    <button type="button" onClick={onReset} aria-label="Reset" className={`${BUTTON} ${IDLE}`}>
-                        <IconRevert className="size-5" />
-                    </button>
-                }
+            {/* Labelled rather than icon-only: it's the one control you reach for when
+                you've filtered and clicked your way somewhere confusing, which is
+                exactly when hunting for it under a hover tooltip is no help. */}
+            <button
+                type="button"
+                onClick={onReset}
+                className={`flex items-center gap-1 h-8 px-2 rounded-md text-xs whitespace-nowrap transition-colors ${IDLE}`}
             >
+                <IconRevert className="size-4" />
                 Reset the demo
-            </Tooltip>
+            </button>
         </div>
     )
 }

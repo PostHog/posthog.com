@@ -10,7 +10,7 @@ export const safetyAnnotations: Annotation[] = [
         label: '$exception',
         dx: 0.5,
         dy: 0,
-        title: 'This widget is broken on purpose',
+        title: 'Exceptions are captured automatically',
         body: {
             why: (
                 <>
@@ -34,8 +34,8 @@ catch (err) {
             },
             after: (
                 <>
-                    Error tracking links each <code>$exception</code> to its session replay. You can watch the radar die
-                    in the recording, then go fix the 403.
+                    Each <code>$exception</code> is linked to its session replay, so you can watch what the user saw
+                    before reading the stack trace.
                 </>
             ),
         },
@@ -48,7 +48,7 @@ catch (err) {
         label: 'inbox report',
         dx: 0.5,
         dy: 1.0,
-        title: 'Nobody has to notice this',
+        title: 'Signals cluster into one report with a fix',
         body: {
             why: (
                 <>
@@ -68,9 +68,8 @@ Badger tile requests failing (403)
             },
             after: (
                 <>
-                    Actionable reports arrive as a pull request, built in a sandbox with your CI and code review
-                    attached. The ones that need a human decision wait in your inbox instead. Either way it happened
-                    while everyone was asleep, which is also when the hedgehogs were commuting.
+                    Reports it can act on arrive as a pull request, built in a sandbox against your CI and code review.
+                    Ones that need a judgement call wait in the inbox instead of guessing.
                 </>
             ),
         },
@@ -83,7 +82,7 @@ Badger tile requests failing (403)
         label: 'source maps',
         dx: 0.08,
         dy: 0.92,
-        title: 'Why the stack trace is readable',
+        title: 'Source maps make stack traces readable',
         body: {
             why: (
                 <>
@@ -101,8 +100,8 @@ npx @posthog/wizard upload-source-maps
             },
             after: (
                 <>
-                    Same idea as the mobile SDKs' symbol files. Skip this step and error tracking still groups the issue
-                    correctly, you just can't tell what code caused it.
+                    Same idea as symbol files on mobile. Skip it and errors still group correctly, you just can't tell
+                    which line caused them.
                 </>
             ),
         },
@@ -115,7 +114,7 @@ npx @posthog/wizard upload-source-maps
         label: '$pageleave',
         dx: 1.0,
         dy: 0.15,
-        title: 'Content engagement, from pageleave',
+        title: 'Time on page and scroll depth, free',
         body: {
             why: (
                 <>
@@ -132,8 +131,8 @@ $pageleave  →  time on page, scroll depth
             },
             after: (
                 <>
-                    71% of readers reach "Why 13 centimetres?", which is a strong case for moving the Hedgehog Street
-                    link above the fold. The content team has been arguing about that link for a month; this settles it.
+                    71% of readers reach "Why 13 centimetres?", so anything below that point is worth moving up. No
+                    tracking code was written to learn this.
                 </>
             ),
         },
@@ -146,7 +145,7 @@ $pageleave  →  time on page, scroll depth
         label: 'rage clicks',
         dx: 1.35,
         dy: 0.5,
-        title: 'Rage clicks, auto-detected',
+        title: 'Session replay tags rage clicks for you',
         body: {
             why: (
                 <>
@@ -163,8 +162,8 @@ rage_click on #btn-radar-retry   47 sessions
             },
             after: (
                 <>
-                    One user clicked it 31 times. The <code>$exception</code> event says what threw, the recording shows
-                    how it felt, and the next pin has the server logs from the same minutes.
+                    One person clicked it 31 times. The <code>$exception</code> says what threw, the recording shows
+                    what they experienced, and the next marker has the server logs from the same minutes.
                 </>
             ),
         },
@@ -177,7 +176,7 @@ rage_click on #btn-radar-retry   47 sessions
         label: 'tile service logs',
         dx: 0.925,
         dy: 0.07,
-        title: "The 403, from the server's side",
+        title: 'Server logs share the timeline',
         body: {
             why: (
                 <>
@@ -195,9 +194,8 @@ rage_click on #btn-radar-retry   47 sessions
             },
             after: (
                 <>
-                    Finding this took one search, because the logs sit on the same timeline as the exceptions and the
-                    recordings. The key expired a year to the day after someone created it. There was never a calendar
-                    invite.
+                    Because logs, exceptions, and recordings share one timeline, the cause was one search away rather
+                    than three tools away.
                 </>
             ),
         },
@@ -210,7 +208,7 @@ rage_click on #btn-radar-retry   47 sessions
         label: 'renderSurvey()',
         dx: 0.5,
         dy: -0.1,
-        title: 'Inline survey, rendered into the page',
+        title: 'Rendering a survey inside the page',
         body: {
             why: (
                 <>
@@ -227,9 +225,9 @@ rage_click on #btn-radar-retry   47 sessions
             },
             after: (
                 <>
-                    Responses land as events, so they cross-reference. "No, and I have opinions" is running 4:1 among
-                    sessions that met the broken badger radar, which means the feedback widget found the outage before
-                    the support inbox did.
+                    Answers are events, so they join up with everything else. "No" is running 4:1 among sessions that
+                    hit the broken radar above, which is the outage showing up in feedback before anyone emailed
+                    support.
                 </>
             ),
         },

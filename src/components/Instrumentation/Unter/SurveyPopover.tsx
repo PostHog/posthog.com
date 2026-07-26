@@ -6,15 +6,15 @@ interface SurveyPopoverProps {
 
 const OPTIONS = [
     'My landlord',
-    "Don't own a jigsaw",
+    "Don't own the tools",
     'The neighbour (ongoing situation)',
     'Nothing. I was born for this',
 ]
 
 /**
- * Styled like a PostHog popover survey. Its own annotation says the real thing is
- * targeted to fire after `highway_signup_completed`, so that's exactly when this
- * one shows up rather than greeting you on arrival.
+ * Styled like a PostHog survey. Opened by the footer's "Quick survey" badge rather
+ * than on arrival, so it never covers the page you're trying to explore. The badge
+ * is also what the survey's annotation points at, so that marker is always there.
  */
 export default function SurveyPopover({ onDismiss }: SurveyPopoverProps): JSX.Element {
     const [answered, setAnswered] = useState(false)

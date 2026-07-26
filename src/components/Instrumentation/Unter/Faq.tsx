@@ -14,10 +14,6 @@ const QUESTIONS: { q: string; a: string }[] = [
         a: "If your dog fits through a 13cm gap, that is not your dog. That's a hedgehog.",
     },
     {
-        q: 'Do badgers use the gaps?',
-        a: 'Badgers make their own arrangements (they always have).',
-    },
-    {
         q: 'Can I close the gap in winter?',
         a: "Sure? But by December we bet you'll be leaving out a saucer of water and snacks.",
     },

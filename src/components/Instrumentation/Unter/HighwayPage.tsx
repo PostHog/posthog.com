@@ -2,7 +2,7 @@ import React from 'react'
 import ImpactCalculator from './ImpactCalculator'
 import Faq from './Faq'
 
-export default function HighwayPage({ onSignupCompleted }: { onSignupCompleted: () => void }): JSX.Element {
+export default function HighwayPage(): JSX.Element {
     return (
         <>
             <div className="un-shell">
@@ -21,7 +21,7 @@ export default function HighwayPage({ onSignupCompleted }: { onSignupCompleted: 
                     </div>
                     <div className="un-hw-form" data-unter-id="hw-form">
                         <h3>Open your highway</h3>
-                        <p className="un-note">Takes 2 minutes. The hole takes 10 with a jigsaw.</p>
+                        <p className="un-note">Takes 2 minutes. Cutting the gap takes about 10 more.</p>
                         <div className="un-field" data-unter-id="input-postcode">
                             <input type="text" placeholder="Postcode" />
                         </div>
@@ -41,7 +41,7 @@ export default function HighwayPage({ onSignupCompleted }: { onSignupCompleted: 
                         <div className="un-field">
                             <input type="email" placeholder="Email address" />
                         </div>
-                        <button className="un-btn-black" data-unter-id="btn-start-cutting" onClick={onSignupCompleted}>
+                        <button className="un-btn-black" data-unter-id="btn-start-cutting">
                             Sign up to host
                         </button>
                         <p className="un-legal">
@@ -54,7 +54,7 @@ export default function HighwayPage({ onSignupCompleted }: { onSignupCompleted: 
 
             <div className="un-shell">
                 <div className="un-specwrap">
-                    <div className="un-ph un-ph-spec">Fence diagram</div>
+                    <div className="un-ph un-ph-spec">Map</div>
                 </div>
 
                 <ImpactCalculator />

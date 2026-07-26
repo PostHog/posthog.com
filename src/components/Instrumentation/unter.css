@@ -353,72 +353,13 @@
     height: 200px;
 }
 .un-ph-map {
-    height: 300px;
+    height: 380px;
 }
 .un-ph-spec {
     height: 160px;
 }
 .un-featart .un-ph {
     height: 220px;
-}
-.un-trip-card {
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 12px 16px 12px 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    line-height: 1.3;
-}
-.un-trip-card.pulse {
-    animation: snCardPulse 0.5s ease;
-}
-@keyframes snCardPulse {
-    50% {
-        transform: scale(1.04);
-    }
-}
-.un-trip-card .un-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-}
-.un-trip-card b {
-    font-size: 14px;
-    display: block;
-}
-.un-trip-card .un-sub {
-    color: #5e5e5e;
-    font-size: 12.5px;
-    margin-top: 2px;
-}
-.un-trip-card .un-eta {
-    margin-left: 10px;
-    background: #f3f3f3;
-    border-radius: 8px;
-    padding: 7px 10px;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 1.1;
-}
-.un-trip-card .un-eta span {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    color: #5e5e5e;
 }
 
 /* ============ account row ============ */
@@ -504,8 +445,8 @@
     position: absolute;
     top: 18px;
     right: 16px;
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     border-radius: 6px;
     background: #e1e1de;
 }
@@ -513,14 +454,14 @@
     margin: 0 0 6px;
     font-size: 18px;
     font-weight: 700;
-    padding-right: 88px;
+    padding-right: 64px;
 }
 .un-tier p {
     margin: 0;
     font-size: 13.5px;
     color: #5e5e5e;
     line-height: 1.5;
-    padding-right: 88px;
+    padding-right: 64px;
     flex: 1;
 }
 .un-tier .un-go {
@@ -558,12 +499,6 @@
         grid-template-columns: 1fr 1fr;
         gap: 64px;
         padding: 56px 0;
-    }
-    .un-featrow.rev .un-ftext {
-        order: 2;
-    }
-    .un-featrow.rev .un-featart {
-        order: 1;
     }
 }
 .un-featrow .un-h2 {
@@ -665,7 +600,10 @@
     font-size: 44px;
     font-weight: 700;
     letter-spacing: -0.02em;
-    margin-bottom: 6px;
+    /* Tight: the inherited 1.5 ratio put 11px of half-leading under a 44px number,
+       which read as a gap the margin can't take back. */
+    line-height: 1.1;
+    margin-bottom: 4px;
 }
 .un-stats span {
     font-size: 14px;
@@ -781,8 +719,13 @@
     background: #000;
     color: #fff;
     border-radius: 8px;
-    width: 38px;
-    height: 38px;
+    /* Stretch, so the button's height always tracks the input's (line-height plus
+       padding, 44px today) instead of the fixed 38px that left it short at the
+       bottom. The width is set to the same 44px to keep it square; `aspect-ratio`
+       can't do that job, since flex resolves the width from content before the
+       stretched height is known and the button collapses to 7px. */
+    align-self: stretch;
+    width: 44px;
     font-size: 14px;
     flex: none;
 }
@@ -1347,6 +1290,35 @@
     color: #a6a6a6;
     padding: 40px 0 48px;
     font-size: 13px;
+    /* Anchors the survey badge to the footer's top edge. */
+    position: relative;
+}
+/* The survey's trigger, sitting on the seam between the page and the footer the
+   way a real feedback button does. Always in the DOM, so its marker is always
+   there to click. */
+.un-survey-badge {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    transform: translateY(-50%);
+    /* Same grey as the image placeholders, which reads as a control against both
+       the white page above it and the black footer below. */
+    background: #ebebe8;
+    color: #000;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+.un-survey-badge:hover {
+    background: #dcdcd8;
+}
+@container unter (min-width: 720px) {
+    .un-survey-badge {
+        right: 40px;
+    }
 }
 .un-footer .un-fbrand {
     font-size: 22px;

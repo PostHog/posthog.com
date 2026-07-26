@@ -3,6 +3,7 @@ import {
     IconSignal,
     IconCode,
     IconFlask,
+    IconToggle,
     IconGraph,
     IconLlmAnalytics,
     IconMessage,
@@ -18,9 +19,10 @@ import { Tool, ToolKey } from './types'
  * interfaces you reach them through (web, MCP, Slack, desktop).
  *
  * Colors are literal hex because markers and icons color dynamically and Tailwind
- * can't JIT `bg-${color}` class names. Each entry names the src/hooks/productData
- * token it came from, so drift is checkable rather than a guess; resolve the hex
- * against the palette in tailwind.config.js.
+ * can't JIT `bg-${color}` class names. Each entry names the token it came from, so
+ * drift is checkable rather than a guess; resolve the hex against the palette in
+ * tailwind.config.js. Icon and color both match the docs nav (src/navs/index.js),
+ * which is the surface people see these tools on most.
  */
 export const TOOLS: Record<ToolKey, Tool> = {
     core: {
@@ -55,12 +57,20 @@ export const TOOLS: Record<ToolKey, Tool> = {
         Icon: IconRewindPlay,
         docsUrl: '/docs/session-replay',
     },
-    expflags: {
-        key: 'expflags',
-        name: 'Experiments & flags',
-        color: '#30ABC6', // feature_flags: seagreen
+    experiments: {
+        key: 'experiments',
+        name: 'Experiments',
+        color: '#B62AD9', // experiments: purple
         textOnColor: '#fff',
         Icon: IconFlask,
+        docsUrl: '/docs/experiments',
+    },
+    flags: {
+        key: 'flags',
+        name: 'Feature flags',
+        color: '#30ABC6', // feature_flags: seagreen
+        textOnColor: '#fff',
+        Icon: IconToggle,
         docsUrl: '/docs/feature-flags',
     },
     error: {

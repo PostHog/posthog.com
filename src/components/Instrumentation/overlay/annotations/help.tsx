@@ -8,9 +8,12 @@ export const helpAnnotations: Annotation[] = [
         target: 'chat-widget',
         tool: 'llm',
         label: '$ai_generation',
-        dx: 0.5,
-        dy: 0,
-        title: 'The assistant is an LLM. Bill accordingly.',
+        // On the card's left edge rather than its header bar, where the marker sat on
+        // top of the "Unter AI support" title. This annotation is about the whole
+        // widget, so the edge reads better than any one part of it anyway.
+        dx: 0,
+        dy: 0.5,
+        title: 'Every LLM call is captured with its cost',
         body: {
             why: (
                 <>
@@ -36,8 +39,8 @@ export const helpAnnotations: Annotation[] = [
             },
             after: (
                 <>
-                    Because it shares person and session with everything else, you can ask whether visitors who use
-                    support convert better than ones who don't, and whether that's worth $0.003 a conversation.
+                    These events share person and session with everything else PostHog captures, so you can compare what
+                    people who used support went on to do against people who didn't, and weigh that against the cost.
                 </>
             ),
         },
@@ -50,11 +53,11 @@ export const helpAnnotations: Annotation[] = [
         label: '$ai_trace',
         dx: 1.0,
         dy: 0.5,
-        title: 'The pipeline behind one answer',
+        title: 'One trace covers the whole pipeline',
         body: {
             why: (
                 <>
-                    The assistant pulled the CD-case rule from the gap docs before answering. The whole pipeline is one{' '}
+                    The assistant looked up the coverage map before answering. The whole pipeline is one{' '}
                     <code>$ai_trace</code> with child spans, viewable as a tree in LLM analytics.
                 </>
             ),
@@ -62,7 +65,7 @@ export const helpAnnotations: Annotation[] = [
                 language: 'bash',
                 snippet: `$ai_trace  trace_7f2…
 ├─ $ai_span        vector search: gap reviews   112ms
-├─ $ai_span        fetch: gap spec (13cm doc)    38ms
+├─ $ai_span        fetch: coverage map           38ms
 └─ $ai_generation  claude-sonnet-5              1.4s
    # $ai_is_error: false`,
             },
@@ -83,7 +86,7 @@ export const helpAnnotations: Annotation[] = [
         label: 'CSAT survey',
         dx: 0.5,
         dy: 1.0,
-        title: 'Did the robot actually help?',
+        title: 'A rating survey after the conversation',
         body: {
             why: (
                 <>
@@ -96,7 +99,7 @@ export const helpAnnotations: Annotation[] = [
                 snippet: `# CSAT by whether the assistant answered:
 resolved by AI         4.4 / 5   (n=1,204)
 escalated to Margaret  4.8 / 5   (n=96)
-# Margaret is better. Margaret does not scale.`,
+# humans score higher, and cost more.`,
             },
             after: (
                 <>

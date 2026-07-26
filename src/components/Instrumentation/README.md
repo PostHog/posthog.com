@@ -6,9 +6,11 @@ The `/instrumentation` page (`src/pages/instrumentation/`): an interactive expla
 
 One screen, never navigating away: **Unter** (a fictional Uber for hedgehogs) inside a fake browser frame, with a docked column of explanations beside it. Unter has four pages switched by React state, not routes, since the OS window system owns the URL.
 
-The column's nav is a mock of the [PostHog toolbar](/docs/toolbar). **Inspect** starts off, so you first see Unter as its users do; turning it on drops numbered markers on the instrumented elements. Each product button filters those markers, and products with nothing on the current page are disabled.
+The column's nav is a mock of the [PostHog toolbar](/docs/toolbar). **Inspect** starts off, so you first see Unter as its users do; turning it on drops numbered markers on the instrumented elements. Each tool button filters those markers, and tools with nothing on the current page are disabled.
 
-Selecting a marker expands its explanation, code, and docs link in the column. Selecting one that lives inside a trigger-based widget (the popover survey, which appears after the host signup form is submitted) opens that widget first so the marker has something to point at. That changes layout without resizing either container, so `index.tsx` bumps a `revision` value to force a re-measure.
+Selecting a marker expands its explanation, code, and docs link in the column. The demo's survey is toggled by a "Quick survey" badge on the footer's top edge, not on a timer, so it never covers what you're reading. Its annotation points at that badge rather than at the popover, which keeps the marker on the page whether the survey is open or not. Opening it changes layout without resizing either container, so `index.tsx` bumps a `revision` value to force a re-measure.
+
+Most tools are instrumented on more than one page, so three hints point at the rest: a line in the browser chrome, the text under a filtered list, and the tooltip on a greyed-out tool button. All three come from one `elsewhere` map in `index.tsx`, which names pages with Unter's own nav labels (`NAV_ITEMS`) so a hint says exactly what there is to click.
 
 ## Structure
 
@@ -41,10 +43,11 @@ overlay/
 
 ## Adding an annotation
 
-1. Put `data-unter-id="my-target"` on the Unter element.
+1. Put `data-unter-id="my-target"` on the Unter element. Target whatever the annotation is really about: if a feature flag hides a whole section, mark the section, not its button, since the selection outline is what shows the scope.
 2. Add an entry to the right `overlay/annotations/*.tsx`:
-   - `target`: that `data-unter-id`. `dx`/`dy`: fractional position within the target's box (0–1; outside that range sits outside the element, e.g. `dy: 1.15` is just below). Avoid negative values on full-width elements, or the marker lands outside the frame.
+   - `target`: that `data-unter-id`. `dx`/`dy`: fractional position within the target's box (0–1; outside that range sits outside the element, e.g. `dy: 1.15` is just below, `dx: 0` straddles the left edge). Avoid negative values on full-width elements, or the marker lands outside the frame. Fractions scale with the box, so on wide targets check the marker at more than one window width: `dx: 0.315` on the nav sat in empty space at one size and on top of a link at another.
    - `tool`: a key from `tools.ts`, which drives color, icon, and docs link.
-   - `body`: `{ why, code?: { language, snippet }, after? }`. The column is ~384px, so keep snippet lines short. Explain the mechanic in `why`; jokes belong in `after`.
+   - `body`: `{ why, code?: { language, snippet }, after? }`. The column is ~384px, so keep snippet lines short.
+3. Write it like docs, not like copy. The `title` should say what the tool does ("Source maps make stack traces readable"), not be oblique about it ("Why the stack trace is readable"). `why` states the mechanic in plain language; `after` gives the practical consequence. A joke is fine once the point has landed, but it can't be doing the explaining.
 
 Marker numbers, sidebar rows, and filter counts all derive from the same array, so ordering is automatic.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { UnterPageId } from '../overlay/types'
 
 export const PersonIcon = (): JSX.Element => (
@@ -9,13 +9,6 @@ export const PersonIcon = (): JSX.Element => (
 )
 
 export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageId) => void }): JSX.Element {
-    const [tripPulse, setTripPulse] = useState(false)
-
-    const pulseTripCard = () => {
-        setTripPulse(true)
-        setTimeout(() => setTripPulse(false), 600)
-    }
-
     return (
         <>
             <div className="un-shell">
@@ -50,26 +43,16 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                                 </div>
                             </div>
                             <div className="un-form-ctas">
-                                <button className="un-btn-black" data-unter-id="btn-see-prices" onClick={pulseTripCard}>
+                                <button className="un-btn-black" data-unter-id="btn-see-prices">
                                     See prices
                                 </button>
-                                <button className="un-btn-gray">Check gap availability</button>
+                                <button className="un-btn-gray">Check availability</button>
                             </div>
                         </div>
                     </div>
 
                     <div className="un-mapwrap" data-unter-id="garden-map">
                         <div className="un-ph un-ph-map">Map</div>
-                        <div className={`un-trip-card${tripPulse ? ' pulse' : ''}`}>
-                            <div className="un-avatar">M</div>
-                            <div>
-                                <b>Max</b>
-                                <div className="un-sub">★ 4.9 · knows the rockery shortcut</div>
-                            </div>
-                            <div className="un-eta">
-                                4<span>min</span>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
@@ -115,41 +98,22 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                     </div>
                 </section>
 
-                <section className="un-featrow">
+                {/* The whole section is the annotation target, not just the button: the
+                    feature flag hides the entire feature, heading included. */}
+                <section className="un-featrow" data-unter-id="reserve-feature">
                     <div className="un-ftext">
                         <h2 className="un-h2">Reserve a dusk crossing</h2>
                         <p className="un-lede">
                             Book up to seven nights ahead. The gap is held until 15 minutes past sunset, then it goes
-                            back in the pool for someone else. Popular for first dates at the compost heap.
+                            back in the pool for someone else. Popular for first dates.
                         </p>
                         <div className="un-ctas">
-                            <button className="un-btn-black" data-unter-id="btn-reserve">
-                                Reserve a crossing
-                            </button>
+                            <button className="un-btn-black">Reserve a crossing</button>
                             <button className="un-btn-gray">Learn more</button>
                         </div>
                     </div>
                     <div className="un-featart">
-                        <div className="un-ph">Image</div>
-                    </div>
-                </section>
-
-                <section className="un-featrow rev">
-                    <div className="un-ftext">
-                        <h2 className="un-h2">Unter for Broods</h2>
-                        <p className="un-lede">
-                            One profile, up to six hoglets, shared arrival pings. Single file is enforced at the
-                            protocol level. They will bicker the whole way, but they'll bicker in a line, and they'll
-                            all turn up.
-                        </p>
-                        <div className="un-ctas">
-                            <button className="un-btn-black" data-unter-id="btn-brood">
-                                Start a brood profile
-                            </button>
-                        </div>
-                    </div>
-                    <div className="un-featart">
-                        <div className="un-ph">Image</div>
+                        <div className="un-ph" aria-hidden />
                     </div>
                 </section>
 
@@ -173,7 +137,10 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         </span>
                         <div>
                             <h3>Unter Host</h3>
-                            <p>For humans with jigsaws. Gap health, crossing counts, and your borough leaderboard.</p>
+                            <p>
+                                For the humans who cut the gaps. Gap health, crossing counts, and your borough
+                                leaderboard.
+                            </p>
                         </div>
                         <span className="un-chev">→</span>
                     </div>

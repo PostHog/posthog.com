@@ -8,18 +8,21 @@ import SafetyPage from './SafetyPage'
 interface UnterSiteProps {
     page: UnterPageId
     onNavigate: (page: UnterPageId) => void
-    /** Fired when the host signup form is submitted, which is the survey's real trigger. */
-    onSignupCompleted: () => void
+    /** Fired by the footer's "Quick survey" badge, the survey's trigger. */
+    onToggleSurvey: () => void
 }
 
-const NAV_ITEMS: { id: UnterPageId; label: string }[] = [
+const SURVEY_BADGE_PAGES: UnterPageId[] = ['ride', 'highway']
+
+/** Exported so the wayfinding hints can name pages exactly as the nav labels them. */
+export const NAV_ITEMS: { id: UnterPageId; label: string }[] = [
     { id: 'ride', label: 'Shuffle' },
-    { id: 'highway', label: 'Open your highway' },
+    { id: 'highway', label: 'Host' },
     { id: 'help', label: 'Help' },
     { id: 'safety', label: 'Safety' },
 ]
 
-export default function UnterSite({ page, onNavigate, onSignupCompleted }: UnterSiteProps): JSX.Element {
+export default function UnterSite({ page, onNavigate, onToggleSurvey }: UnterSiteProps): JSX.Element {
     return (
         <>
             <nav className="un-topnav" data-unter-id="topnav">
@@ -45,12 +48,20 @@ export default function UnterSite({ page, onNavigate, onSignupCompleted }: Unter
 
             <main>
                 {page === 'ride' && <RidePage onNavigate={onNavigate} />}
-                {page === 'highway' && <HighwayPage onSignupCompleted={onSignupCompleted} />}
+                {page === 'highway' && <HighwayPage />}
                 {page === 'help' && <HelpPage />}
                 {page === 'safety' && <SafetyPage />}
             </main>
 
             <footer className="un-footer" data-unter-id="footer">
+                {/* Not on Help or Safety: both already carry their own survey (the CSAT
+                    prompt and the inline "was this helpful", each with its own marker),
+                    so a third one would be noise. */}
+                {SURVEY_BADGE_PAGES.includes(page) && (
+                    <button className="un-survey-badge" data-unter-id="survey-badge" onClick={onToggleSurvey}>
+                        Quick survey
+                    </button>
+                )}
                 <div className="un-shell">
                     <div className="un-fbrand">Unter</div>
                     <div className="un-fcols">
@@ -74,7 +85,7 @@ export default function UnterSite({ page, onNavigate, onSignupCompleted }: Unter
                         </div>
                     </div>
                     <div className="un-fbottom">
-                        <div className="un-real">
+                        <div className="un-real" data-unter-id="footer-links">
                             <b>Unter is made up. The holes are not.</b> Urban hedgehogs commute through 13cm gaps in
                             garden fences every night, and there aren't enough of them. Cut a real one via{' '}
                             <a href="https://www.hedgehogstreet.org" target="_blank" rel="noreferrer">

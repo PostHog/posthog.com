@@ -1,27 +1,29 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import BrowserFrame from './BrowserFrame'
-import UnterSite from './Unter'
+import UnterSite, { NAV_ITEMS } from './Unter'
 import SurveyPopover from './Unter/SurveyPopover'
 import AnnotationSidebar from './overlay/AnnotationSidebar'
 import MarkerLayer from './overlay/MarkerLayer'
 import ToolbarBar from './overlay/ToolbarBar'
 import useAnnotationPositions from './overlay/useAnnotationPositions'
 import { ANNOTATIONS } from './overlay/annotations'
+import { TOOLS } from './overlay/tools'
 import { ToolKey, UnterPageId } from './overlay/types'
 import './unter.css'
 
 const PAGE_LABELS: Record<UnterPageId, string> = {
     ride: 'the Shuffle page',
-    highway: 'the host signup page',
+    highway: 'the Host page',
     help: 'the Help page',
     safety: 'the Safety page',
 }
 
-/** Which demo widget an annotation needs open before its marker can exist. */
-const WIDGET_TARGETS: Record<string, 'survey'> = {
-    'survey-pop': 'survey',
-}
+/** The demo's own nav labels, so a hint names exactly what there is to click. */
+const NAV_LABELS = Object.fromEntries(NAV_ITEMS.map(({ id, label }) => [id, label])) as Record<UnterPageId, string>
+
+const formatList = (items: string[]): string =>
+    items.length < 3 ? items.join(' and ') : `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`
 
 export default function Instrumentation(): JSX.Element {
     const [page, setPage] = useState<UnterPageId>('ride')
@@ -31,8 +33,10 @@ export default function Instrumentation(): JSX.Element {
     const [inspecting, setInspecting] = useState(false)
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [filter, setFilter] = useState<ToolKey | null>(null)
-    // The survey waits for the signup it's supposed to follow, rather than
-    // greeting you on arrival.
+    // The survey is opened by the footer's "Quick survey" badge rather than
+    // appearing on arrival, so it never blocks the page you're exploring. The
+    // badge toggles it: clicking whatever opened a thing is the obvious way to
+    // put it away again.
     const [surveyOpen, setSurveyOpen] = useState(false)
 
     const viewportRef = useRef<HTMLDivElement | null>(null)
@@ -52,8 +56,22 @@ export default function Instrumentation(): JSX.Element {
         return byTool
     }, [pageAnnotations])
 
-    // Opening a widget changes what's on screen without resizing either container,
-    // so the measurement pass needs telling.
+    // Most tools are instrumented on more than one page, and filtering to one of them
+    // otherwise looks like the whole story. Naming the other pages is what tells you
+    // there's more to find, and where.
+    const elsewhere = useMemo(() => {
+        const byTool: Partial<Record<ToolKey, string>> = {}
+        ;(Object.keys(TOOLS) as ToolKey[]).forEach((tool) => {
+            const pages = NAV_ITEMS.filter(
+                ({ id }) => id !== page && ANNOTATIONS.some((a) => a.tool === tool && a.page === id)
+            )
+            if (pages.length) byTool[tool] = formatList(pages.map(({ id }) => NAV_LABELS[id]))
+        })
+        return byTool
+    }, [page])
+
+    // Opening the survey changes what's on screen without resizing either
+    // container, so the measurement pass needs telling.
     const positions = useAnnotationPositions(
         inspecting ? pageAnnotations : [],
         contentRef,
@@ -91,14 +109,10 @@ export default function Instrumentation(): JSX.Element {
         viewportRef.current?.scrollTo({ top: 0 })
     }
 
-    const reveal = (annotation: (typeof ANNOTATIONS)[number]) => {
-        // Picking a widget's touchpoint should reveal the widget it lives in.
-        if (WIDGET_TARGETS[annotation.target] === 'survey') setSurveyOpen(true)
-        // Wait a frame so a just-revealed widget is in the DOM before scrolling to it.
-        requestAnimationFrame(() => {
-            frameBodyRef.current
-                ?.querySelector(`[data-unter-id="${annotation.target}"]`)
-                ?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+    const scrollToTarget = (target: string) => {
+        frameBodyRef.current?.querySelector(`[data-unter-id="${target}"]`)?.scrollIntoView({
+            block: 'center',
+            behavior: 'smooth',
         })
     }
 
@@ -106,7 +120,7 @@ export default function Instrumentation(): JSX.Element {
         setSelectedId(annotationId)
         if (!annotationId) return
         const annotation = pageAnnotations.find((a) => a.id === annotationId)
-        if (annotation) reveal(annotation)
+        if (annotation) scrollToTarget(annotation.target)
     }
 
     const isDimmed = (annotationId: string) => {
@@ -143,7 +157,7 @@ export default function Instrumentation(): JSX.Element {
                                     <UnterSite
                                         page={page}
                                         onNavigate={goToPage}
-                                        onSignupCompleted={() => setSurveyOpen(true)}
+                                        onToggleSurvey={() => setSurveyOpen((open) => !open)}
                                     />
                                 </div>
                                 <MarkerLayer
@@ -158,7 +172,7 @@ export default function Instrumentation(): JSX.Element {
                             </div>
                         </ScrollArea>
                     </div>
-                    {page === 'highway' && surveyOpen && <SurveyPopover onDismiss={() => setSurveyOpen(false)} />}
+                    {surveyOpen && <SurveyPopover onDismiss={() => setSurveyOpen(false)} />}
                     <MarkerLayer
                         key={`frame-${page}`}
                         className="z-30"
@@ -178,11 +192,13 @@ export default function Instrumentation(): JSX.Element {
                             filter={filter}
                             onFilter={setFilter}
                             counts={counts}
+                            elsewhere={elsewhere}
                         />
                     }
                     annotations={pageAnnotations}
                     numbers={numbers}
                     pageLabel={PAGE_LABELS[page]}
+                    elsewhere={elsewhere}
                     inspecting={inspecting}
                     selectedId={selectedId}
                     filter={filter}
