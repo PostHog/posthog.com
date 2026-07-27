@@ -5,8 +5,9 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconBrackets, IconToggle, IconGraph, IconDatabase } from '@posthog/icons'
+import { IconLaptop, IconMagic, IconBrackets, IconCode, IconToggle, IconGraph, IconDatabase, IconPeople, IconWarning, IconNotebook, IconEye, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Experiments let you test a change against a control and find out whether it actually worked. You define variants, pick the metrics you care about, and PostHog randomizes your users, tracks their exposures, and runs the statistics – Bayesian or frequentist – so you get a real answer instead of a hunch.
 
@@ -16,7 +17,7 @@ Because experiments run on the same events and [feature flags](/docs/feature-fla
 
 ## Where you can use it
 
-You design, launch, and analyze experiments in the PostHog web app. The other surfaces let you create and manage them from your editor or your own systems.
+You design, launch, and analyze experiments in the PostHog web app. The other surfaces let you create and manage them from your editor or your own systems, and review the validity problems Self-driving finds in the ones you're running.
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
 
@@ -44,6 +45,15 @@ You design, launch, and analyze experiments in the PostHog web app. The other su
       <p className="m-0 font-bold text-primary">API</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Manage experiments, holdouts, and shared metrics programmatically from your own systems.</p>
       <a href="/docs/experiments/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the validity problems a Self-driving scout finds in your running experiments.</p>
+      <a href="/docs/experiments/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review in PostHog Desktop →</a>
     </div>
   </div>
 
@@ -83,3 +93,21 @@ Experiments don't collect anything new. They read the feature flag that assigns 
   </div>
 
 </div>
+
+## How experiments works with Self-driving
+
+Your experiments are a signal source for [Self-driving](/docs/self-driving). A [scout](/docs/self-driving/scouts) audits the measurement rather than the result: it reads the exposure stream of every running experiment against the split, status, and flag state you configured, and files each confirmed contradiction as a [report](/docs/self-driving/reports) in your [inbox](/docs/self-driving/inbox).
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Exposures', icon: IconPeople, color: '#F54E00', description: 'The variant assignments your running experiments record' },
+    { label: 'Validity threats', icon: IconWarning, color: '#FFA81C', description: 'Skewed splits, contamination, stalls, and mid-run flag edits' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'The experiment, the numbers, and when it started going wrong' },
+    { label: 'You review', icon: IconEye, color: '#A737D2', description: 'A person confirms the threat, not an agent' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Fix the wiring, relaunch, or discount the result' },
+  ]}
+/>
+
+This loop stops at your review on purpose. A validity threat is an investigation rather than a one-line change, so the scout files the evidence and a suggested reviewer instead of drafting a pull request. Once you've confirmed what's wrong and the fix is a code change, you can promote the report into the usual [implementation](/docs/self-driving/inbox/implementation) path, where an agent drafts the PR and you review and merge it.
+
+Which variant is winning stays your call – the scout never comments on results. See [PostHog Desktop](/docs/experiments/surfaces/desktop) for everything it watches, and the [Self-driving docs](/docs/self-driving) for the full picture.

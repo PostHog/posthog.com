@@ -4978,6 +4978,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'PostHog Desktop',
+                    url: '/docs/experiments/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Metrics',
                 },
                 {
