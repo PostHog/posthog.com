@@ -9,7 +9,7 @@ import { IconLaptop, IconMagic, IconCode, IconBrackets, IconServer, IconFilter, 
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
-Logs is an OpenTelemetry-native log store, so there are no PostHog-specific SDKs to adopt – point any OTLP client at PostHog and your log records start arriving. Search them by service, severity, and attribute, or describe what you're after in plain English and let [PostHog AI](/docs/posthog-ai) build the filters.
+Logs is an OpenTelemetry-native log store, so there are no PostHog-specific SDKs to adopt – point any OTLP client at PostHog and your log records start arriving. Search them by service, severity, and attribute, group similar lines into [patterns](/docs/logs/patterns) to see what changed, and open any record to have [PostHog AI](/docs/logs/explain-logs-ai) explain it.
 
 Because your logs live next to the rest of your data, a log line is one click from the [session replay](/docs/session-replay), [person](/docs/data/persons), and [error](/docs/error-tracking) it belongs to. Log alerts also feed [Self-driving](/docs/self-driving), so a recurring failure becomes a report you can act on instead of a page you ignore.
 
@@ -43,7 +43,7 @@ You search and investigate logs in the [web app](/docs/logs/surfaces/web-app). T
     <IconCode className="size-6 shrink-0 text-green mt-0.5" />
     <div>
       <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports and pull requests your firing log alerts generate.</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports your firing alerts and shifting log patterns generate.</p>
       <a href="/docs/logs/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">PostHog Desktop →</a>
     </div>
   </div>
@@ -105,7 +105,7 @@ Everything in Logs is derived from the log records you send over [OTLP](/docs/lo
 
 ## How Logs works with Self-driving
 
-When a [log alert](/docs/logs/alerts) fires, it emits a signal into [Self-driving](/docs/self-driving). Recurring failures get grouped into a report with the logs behind them, and when there's a code fix, a pull request you review.
+When a [log alert](/docs/logs/alerts) fires, it emits a signal into [Self-driving](/docs/self-driving). Recurring failures get grouped into a report with the logs behind them, and when there's a code fix, a pull request you review. PostHog also sweeps your logs for shifts nobody wrote an alert for – new message patterns, volume bursts, severity shifts, and services that go quiet – and writes those up as reports too.
 
 <CustomSelfDrivingLoop
   stages={[

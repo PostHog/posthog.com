@@ -1,0 +1,37 @@
+---
+title: Explain a log with PostHog AI
+---
+
+When a log line doesn't tell you enough on its own, open it and switch to the **Explore with AI** tab. [PostHog AI](/docs/posthog-ai) reads that one record and writes up what it means, what probably caused it, and what to do about it – useful at 2am, or when the log came from a service you don't own.
+
+This is a feature of the log detail view, not a chat you hold with an assistant. It explains the record you have open. To *find* the record in the first place, use the facet rail, filter bar, and free-text [search](/docs/logs/search) in the logs viewer, or query logs from your editor over [MCP](/docs/logs/surfaces/mcp).
+
+## What you get back
+
+The explanation comes back as a structured writeup rather than a paragraph of prose:
+
+- **Headline and severity** – a one-line summary and an assessment of whether this is likely fine, may need attention, is likely an issue, or is likely critical.
+- **Impact summary** – a short statement of what or who is affected.
+- **Probable causes** – up to three ranked hypotheses, each with a confidence level and the reasoning behind it.
+- **Immediate actions** – up to five suggested next steps, each tagged do it now, address soon, or can wait.
+- **Technical explanation** – the longer analysis, for when you want to understand the mechanism rather than just clear the alert.
+- **Key fields** – the fields worth your attention, like a trace ID or an error code, and why each one matters.
+
+## What it reads
+
+PostHog AI only sees the log record you opened: its message body, log and resource attributes, severity, service name, trace and span IDs, and event name. It doesn't search your other logs, and it can't act on them.
+
+Because the input is a single record, the quality of the explanation follows the quality of your logging. Structured attributes and a meaningful `service.name` give it far more to work with than a bare string – see [logging best practices](/docs/logs/best-practices).
+
+## Before you use it
+
+Your organization needs [AI data processing approved](/docs/posthog-ai/allow-access), since the log record is sent to a model to generate the explanation. If your logs may carry sensitive values, turn on [PII scrubbing](/docs/logs/pii-scrubbing) first – it redacts at ingestion, so scrubbed fields never reach storage or the explanation.
+
+Explanations are cached for an hour per log record, so reopening the same line is instant and doesn't re-run the model.
+
+## Related
+
+- Find the log you want to explain with [search and filters](/docs/logs/search).
+- Spot the shapes worth explaining in [log patterns](/docs/logs/patterns).
+- See everything the logs viewer does in [Use Logs in the web app](/docs/logs/surfaces/web-app).
+- Make your logs easier to explain with [logging best practices](/docs/logs/best-practices).

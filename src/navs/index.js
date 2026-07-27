@@ -7448,7 +7448,7 @@ export const docsMenu = {
                         { name: 'Search logs', url: '/docs/logs/search' },
                         { name: 'Log patterns', url: '/docs/logs/patterns' },
                         { name: 'Set up alerts', url: '/docs/logs/alerts' },
-                        { name: 'Search logs with PostHog AI', url: '/docs/logs/search-logs-ai' },
+                        { name: 'Explain a log with PostHog AI', url: '/docs/logs/explain-logs-ai' },
                     ],
                 },
                 {

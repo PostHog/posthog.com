@@ -2090,6 +2090,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/logs/search-logs-ai",
+            "destination": "/docs/logs/explain-logs-ai",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/small-teams/experimentation",
             "destination": "/handbook/small-teams/feature-success"
         },

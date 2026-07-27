@@ -13,10 +13,12 @@ This works in any MCP client – Cursor, Codex, Claude Code, Windsurf, VS Code, 
 Through MCP tools, your agent can:
 
 - **Query and count logs** – filter by severity, service, time range, and free text, and pull counts or sparklines to see how a problem is trending.
-- **Discover what's available** – list log attributes and their values, and list the services sending logs, so it can build a targeted query instead of guessing.
+- **Discover what's available** – list log attributes and their values, and list the services sending logs with their volume and error rate, so it can build a targeted query instead of guessing.
+- **Break counts down by facet** – group matching logs by any attribute to see where a spike is concentrated.
 - **Mine and diff patterns** – group similar log lines into templates, and compare two time ranges to see which patterns are new or spiking.
-- **Manage alerts** – create, read, update, and delete [log alerts](/docs/logs/alerts), so a threshold you agree on in chat becomes a real alert.
-- **Save facets and views** – create the facets and saved searches your team reuses.
+- **Manage alerts** – create, read, update, and delete [log alerts](/docs/logs/alerts), attach or remove Slack, webhook, and Teams destinations, read an alert's event history, and simulate a threshold against historical logs before committing to it.
+
+Saved views, sampling rules, and metric rules aren't exposed over MCP – manage those in the [web app](/docs/logs/surfaces/web-app) or with the [Logs API](/docs/logs/surfaces/api).
 
 For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
 
