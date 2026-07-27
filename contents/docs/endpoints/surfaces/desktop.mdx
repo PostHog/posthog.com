@@ -1,0 +1,38 @@
+---
+title: Use endpoints in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Both Endpoints and PostHog Desktop are in beta.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where endpoints meet the code that calls them. The agent has your repo, your endpoints, and PostHog's [endpoint skills](/docs/posthog-desktop/skills) in one place, so it can build an endpoint and wire it into your app in the same session – and it's where you review the [Self-driving](/docs/self-driving) work that failing endpoints generate.
+
+## What you can do here
+
+- **Build and consume an endpoint in one pass** – the agent creates the endpoint, tests it, then writes the typed client code that calls it.
+- **Audit what you have** – find endpoints nothing calls anymore, or versions still pinned by deployed clients.
+- **Diagnose slow endpoints** – work through execution logs and materialization status to find where the time goes.
+- **Copy endpoints between projects** – recreate the same query in staging or another project.
+- **Review Self-driving reports and pull requests** built from your endpoint failures, next to the agents doing the work.
+
+The agent reaches PostHog through the same [MCP tools](/docs/endpoints/surfaces/mcp) it would use anywhere else, so anything you can do over MCP you can do here.
+
+## How an endpoint failure becomes a report
+
+Endpoints raise a [signal](/docs/self-driving/inbox/sources) in two situations:
+
+- **A run fails.** The signal carries the endpoint name, the version, the executed query, whether it ran materialized or inline, and the error – so the agent can reason about the cause rather than guess at it.
+- **A breakdown hits its limit.** When an insight-based endpoint returns an "Other" bucket, callers are silently seeing aggregated values for the long tail. The signal flags it and suggests a lower-cardinality breakdown or a tighter filter.
+
+From there it's the normal loop: signals become a report, the report becomes a draft pull request when there's a code fix, and you review and merge it. Nothing ships without a human.
+
+## Related
+
+- Review the same work in the [Self-driving inbox](/docs/self-driving/inbox).
+- Do the same actions from any MCP client over [MCP](/docs/endpoints/surfaces/mcp).
+- Understand what the log lines mean in [usage and logs](/docs/endpoints/usage-analytics).
