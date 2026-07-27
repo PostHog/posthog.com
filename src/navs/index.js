@@ -5555,7 +5555,14 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/surveys/start-here',
+                    icon: 'IconListCheck',
+                    color: 'salmon',
+                    featured: true,
                 },
                 {
                     name: 'Installation',
@@ -5585,32 +5592,56 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Creating a survey',
-                    url: '/docs/surveys/creating-surveys',
-                    icon: 'IconTarget',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/surveys/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/surveys/surfaces/web-app',
+                        },
+                        {
+                            name: 'Create a survey',
+                            url: '/docs/surveys/creating-surveys',
+                        },
+                        {
+                            name: 'Create surveys with PostHog AI',
+                            url: '/docs/surveys/create-surveys-ai',
+                        },
+                        {
+                            name: 'Summarize responses with PostHog AI',
+                            url: '/docs/surveys/summarize-responses-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/surveys/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/surveys/surfaces/api',
+                    icon: 'IconBrackets',
                     color: 'yellow',
                     featured: true,
                 },
                 {
-                    name: 'Implementing custom surveys',
-                    url: '/docs/surveys/implementing-custom-surveys',
+                    name: 'PostHog Desktop',
+                    url: '/docs/surveys/surfaces/desktop',
                     icon: 'IconCode',
-                    color: 'salmon',
-                },
-                {
-                    name: 'Viewing results',
-                    url: '/docs/surveys/viewing-results',
-                    icon: 'IconGraph',
-                    color: 'purple',
-                },
-                {
-                    name: 'Concepts',
-                },
-                {
-                    name: 'Destinations',
-                    url: '/docs/surveys/destinations',
-                    icon: 'IconLive',
                     color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Questions and targeting',
                 },
                 {
                     name: 'Conditional questions',
@@ -5620,20 +5651,26 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'PostHog AI',
+                    name: 'Implementing custom surveys',
+                    url: '/docs/surveys/implementing-custom-surveys',
+                    icon: 'IconCode',
+                    color: 'salmon',
                 },
                 {
-                    name: 'Create surveys with PostHog AI',
-                    url: '/docs/surveys/create-surveys-ai',
-                    icon: 'IconSparkles',
+                    name: 'Responses',
+                },
+                {
+                    name: 'Viewing results',
+                    url: '/docs/surveys/viewing-results',
+                    icon: 'IconGraph',
                     color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'Summarize responses with PostHog AI',
-                    url: '/docs/surveys/summarize-responses-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
+                    name: 'Response destinations',
+                    url: '/docs/surveys/destinations',
+                    icon: 'IconLive',
+                    color: 'orange',
                 },
                 {
                     name: 'Resources',
@@ -5652,7 +5689,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'SDK Feature Support',
+                    name: 'SDK feature support',
                     url: '/docs/surveys/sdk-feature-support',
                     icon: 'IconCode',
                     color: 'seagreen',

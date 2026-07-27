@@ -1,0 +1,46 @@
+---
+title: Use Surveys over MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes PostHog's API as function calling tools to any MCP client, so an agent in Cursor, Claude Code, Windsurf, or VS Code can run your surveys for you.
+
+That means you can spin up a survey while you're still writing the feature it asks about, launch it when you ship, and pull the responses back into your editor when they land – without opening the PostHog web app.
+
+## What you can do here
+
+- **Create a survey** – describe the questions, type, targeting, and display conditions, and the agent creates it. Surveys are created as drafts by default, so nothing goes live until you say so.
+- **Update a survey** – change questions, appearance, targeting, or the response limit on an existing survey.
+- **Launch and stop surveys** – start a survey when you're ready and stop it once you have enough responses.
+- **List and fetch surveys** – pull every survey in the project, or one survey's full configuration.
+- **Read responses** – list the raw responses for a survey to inspect what people actually wrote.
+- **Pull survey stats** – per-survey stats or project-wide stats across every survey.
+- **Summarize responses** – have PostHog summarize open-text answers into themes without dumping hundreds of rows into your context.
+- **Delete a survey** – remove a survey you no longer need.
+
+Try these with an MCP-enabled agent:
+
+- `Create a draft NPS survey for users who visited /pricing in the last week.`
+- `What are people saying in my onboarding feedback survey?`
+- `Summarize the open-text responses from the churn survey.`
+- `Launch the checkout feedback survey.`
+- `Stop the PMF survey – we have enough responses.`
+
+## Install the MCP server
+
+Install the MCP server in your preferred MCP client. The recommended way is the [AI wizard](/docs/ai-engineering/ai-wizard), which walks you through setup for Claude, Cursor, Windsurf, VS Code, and more:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also [configure it manually](/docs/model-context-protocol#manual-install). Reading surveys needs the `survey:read` scope; creating, editing, launching, and stopping them needs `survey:write`.
+
+See the [MCP server documentation](/docs/model-context-protocol) for the full setup guide.
+
+## Related
+
+- Build and read surveys in the [web app](/docs/surveys/surfaces/web-app).
+- Manage surveys programmatically with the [API](/docs/surveys/surfaces/api).
+- Ask [PostHog AI](/docs/surveys/create-surveys-ai) to build a survey inside PostHog instead.

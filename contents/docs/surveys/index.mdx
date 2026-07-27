@@ -1,0 +1,111 @@
+---
+title: Surveys
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconMessage, IconTarget, IconGraph, IconThumbsUp, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+Surveys collect qualitative feedback from your users – NPS, product-market fit, churn reasons, or plain open text – and put it next to everything else PostHog already knows about them. Ask the right people at the right moment with targeting built on the same events, properties, cohorts, and [feature flags](/docs/feature-flags) you use everywhere else.
+
+Because responses land as events, every answer carries the respondent's [session replay](/docs/session-replay), events, and person properties, so "the checkout is confusing" comes with the recording that proves it. Those same responses feed [Self-driving](/docs/self-driving), which clusters recurring themes into reports you can act on.
+
+<OSButton variant="primary" asLink to="/docs/surveys/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You build surveys and read responses in the PostHog web app. The other surfaces let you create, launch, and analyze surveys without leaving your editor, your scripts, or your review queue.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Build, target, and launch surveys, then read the results with replays attached.</p>
+      <a href="/docs/surveys/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a survey →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create, launch, stop, and summarize surveys from any MCP client or AI editor.</p>
+      <a href="/docs/surveys/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Run surveys over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-yellow mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Manage surveys and pull responses programmatically from your own tooling.</p>
+      <a href="/docs/surveys/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports built from recurring themes in your responses.</p>
+      <a href="/docs/surveys/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review in PostHog Desktop →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Surveys run on the questions you ask, who you ask them of, and the responses that come back. SDKs render and display surveys in your product, targeting decides who sees what, and every answer is captured as an event you can query like any other.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SDKs</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Show surveys in web, mobile, and framework apps with the SDK you already installed.</p>
+      <a href="/docs/surveys/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Install an SDK →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconTarget className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Questions and targeting</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Branch questions on earlier answers and pick who sees a survey with URLs, events, properties, and flags.</p>
+      <a href="/docs/surveys/conditional-questions" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Design questions →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGraph className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Responses</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Every answer is an event, so you can chart it, query it in SQL, or pipe it to Slack and webhooks.</p>
+      <a href="/docs/surveys/viewing-results" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">View results →</a>
+    </div>
+  </div>
+
+</div>
+
+## How surveys work with Self-driving
+
+Your survey responses are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A dedicated scout watches active surveys for score regressions and abandonment spikes, and clusters open-text answers into recurring themes – five people complaining about the same checkout step becomes one report, not five you never read.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Responses', icon: IconMessage, color: '#F54E00', description: 'Answers captured from every survey you run' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Score regressions and recurring themes surfaced automatically' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with the replays and events behind the feedback' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You write and launch surveys in the [PostHog web app](/docs/surveys/surfaces/web-app), and review the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.

@@ -1,0 +1,30 @@
+---
+title: Use Surveys in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work your survey responses generate. A dedicated scout watches your active surveys, and when it finds something real – a score regression, an abandonment spike, or a theme several people keep raising – it files one report. When there's a code fix, Self-driving opens a draft pull request you review next to the agents working on your product, and nothing ships until you merge.
+
+Surveys are direct user voice, so the bar for a report is deliberately high: a handful of converging open-text answers can outweigh a much larger analytics signal, but a wobble in a small NPS sample is not a report.
+
+{/* TODO: screenshot of a surveys-sourced report and draft PR in PostHog Desktop */}
+
+## What you can do here
+
+- Review reports built from recurring survey themes, with the responses, replays, and events behind them attached.
+- Review reports for NPS, CSAT, and rating regressions, response-volume drops, and abandonment spikes on active surveys.
+- Inspect and edit the draft pull request that acts on a theme before merging.
+- Hand a theme off to an agent to investigate further or draft a fix.
+
+## Related
+
+- [How Self-driving works](/docs/self-driving) – the full report-to-merge loop.
+- [Signal sources](/docs/self-driving/inbox/sources) – everything that can feed the inbox.
+- Read and summarize responses yourself in the [web app](/docs/surveys/surfaces/web-app).
