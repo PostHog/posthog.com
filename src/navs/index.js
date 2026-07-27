@@ -1409,6 +1409,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
+                        name: 'Using AI to analyze customer issues',
+                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
+                    },
+                    {
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
@@ -2796,6 +2800,10 @@ export const docsMenu = {
                         {
                             name: 'Personal API keys',
                             url: '/docs/api/personal-api-keys',
+                        },
+                        {
+                            name: 'Project secret API keys',
+                            url: '/docs/api/project-secret-api-keys',
                         },
                         {
                             name: 'OAuth integration',
