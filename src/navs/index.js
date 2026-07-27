@@ -6370,6 +6370,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'API',
+                    url: '/docs/ai-observability/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Traces and spans',
                 },
                 {
