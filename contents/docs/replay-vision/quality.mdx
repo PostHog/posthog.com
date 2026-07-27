@@ -1,0 +1,130 @@
+---
+title: Improving scanner accuracy
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
+
+Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
+
+</CalloutBox>
+
+Replay Vision scanners are only as good as their configuration. The **Quality** tab on each scanner turns your team's judgment into a better configuration: rate the scanner's results, see accuracy trend across versions, and let PostHog AI recommend (and safely test) improvements to the prompt and every other behavior setting.
+
+Open any scanner and select the **Quality** tab.
+
+<ProductScreenshot
+  imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/5898ffd45f6dde976c631bc94dcb9c2164591950/2026/07/acc7283c-5bb7-4454-8478-b1f42c180df4.png"
+  alt="The quality tab of a Replay Vision scanner"
+  classes="rounded"
+/>
+
+## Rate results
+
+The **Rate results** table lists the scanner's successful [observations](/docs/replay-vision/observations). For each one, tell us whether the scanner got it right:
+
+- **Thumbs up** if the result is correct.
+- **Thumbs down** if it's wrong.
+- Optionally, add written feedback explaining why. Feedback is the highest-signal input for configuration recommendations, so a short note like "user only reached the review step, payment never completed" goes a long way.
+
+Click a session ID to open the full observation in a new tab, or use **View recording** to watch the recording itself before deciding.
+
+<ProductScreenshot
+  imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/531e4ec376a9cfb5a6cedbc13cbb5ae0cae570c2/2026/07/87df6938-f547-400a-b7c8-81961b415bef.png"
+  alt="Rating scanner results with a thumbs up or down"
+  classes="rounded"
+/>
+
+A few things help you rate efficiently:
+
+- The table defaults to **Unrated** results, so it works as a review queue. Switch to **Rated** or **All** at any time.
+- The **Confidence** column shows how sure the scanner was of each result. Rating low-confidence sessions first teaches the scanner the most.
+- The **Version** column shows which configuration version produced each result, so you can focus on results from the current version.
+
+Rating requires edit access on the scanner.
+
+### Feedback themes
+
+Once your team leaves written feedback, PostHog AI summarizes it into recurring failure modes, shown as **Feedback themes** chips above the table. They tell raters what to look out for, and they steer the configuration recommendation. Click a theme to filter the table to the sessions behind it.
+
+<ProductScreenshot
+  imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/5f79b72376d26f9d0d7c7b5c29ed31386431f831/2026/07/1350bdeb-91e7-4d57-b061-9e3e3865cae2.png"
+  alt="Rated results with written feedback and feedback themes"
+  classes="rounded"
+/>
+
+## Track quality over time
+
+The **Ratings over time** chart shows thumbs up and thumbs down per day, with markers for when each configuration version went live. As the configuration improves, thumbs down should trend down.
+
+<ProductScreenshot
+  imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/f2bee36dcd12d40d94c19e10bdc85c1295813218/2026/07/f709e575-f562-4b3a-adf6-884a118e3986.png"
+  alt="Ratings over time with version markers"
+  classes="rounded"
+/>
+
+Two views are available:
+
+- **By session day** places ratings on the day the session was scanned. This shows how scanner quality trends over time and is the default.
+- **By rating day** places ratings on the day they were given. This shows your team's rating activity.
+
+Above the chart, each version gets a chip with its thumbs-up share among rated sessions, for example `v3 · 96% thumbs up (24)`. This is the quickest way to confirm a new version actually improved accuracy. A version shows "no ratings yet" until someone rates results it produced.
+
+## Get a recommendation
+
+Your team's ratings and feedback power the **Recommendation** panel at the top of the tab. PostHog AI reviews the rated sessions, focusing on the ones marked wrong, and proposes changes to the scanner's behavior configuration. That covers every field that shapes results, depending on the [scanner type](/docs/replay-vision/scanner-types):
+
+- The **prompt**, for any scanner type.
+- The **tag vocabulary** of a classifier, including adding, removing, or renaming tags, and the **multiple tags per session** and **freeform tags** settings.
+- The **scale** of a scorer.
+- The **summary length** of a summarizer.
+- Whether a monitor **allows inconclusive verdicts**.
+
+Each recommendation comes with:
+
+- A side-by-side diff of the current and suggested value for every changed field. The suggested side is editable, so you can tweak it before testing or applying.
+- A **Why** section explaining what failure modes the changes address.
+- The ratings it was based on, when it was generated, and against which version.
+
+<ProductScreenshot
+  imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/b746e708d0a92dc0a55e3e6d3d3ef1ff87b5bfd0/2026/07/ade37c9e-07fb-472a-b356-0379fea0318b.png"
+  alt="A configuration recommendation with a diff and rationale"
+  classes="rounded"
+/>
+
+Recommendations refresh automatically about once a day while new ratings come in. A "New ratings since this was generated" tag appears when the recommendation is out of date, and you can **Regenerate** on demand. Sometimes the verdict is "Looks good": the current configuration already handles the rated sessions well and there is nothing to change.
+
+Past recommendations, including dismissed and superseded ones, are kept under **Past recommendations** at the bottom of the panel.
+
+## Test before applying
+
+For monitor and classifier scanners, **Test against rated sessions** re-runs the scanner with the suggested configuration (including your edits) against your most useful rated sessions, so you see what would change before committing:
+
+- **Fixed**: a session rated wrong now gets a different result.
+- **Still wrong**: a session rated wrong is unchanged.
+- **Kept**: a session rated right is unchanged.
+- **Regressed**: a session rated right now gets a different result.
+
+Expand **Per-session results** to compare the current and suggested outcome for every tested session.
+
+You pick how many sessions the test re-runs. Each tested session is charged like a normal observation of the scanner's model, and the panel shows the cost against your monthly [Replay Vision budget](/docs/replay-vision/quota-and-limits) before you run it.
+
+Scorer and summarizer scanners have no discrete right or wrong outcome, so their test shows a raw before-and-after comparison per session instead of verdict tags.
+
+## Apply or dismiss
+
+- **Apply to scanner** writes the suggested configuration (including any edits you made) to the scanner as a new version. The new version shows up as a marker in the ratings chart, so its accuracy is comparable against earlier versions as new ratings come in.
+- **Dismiss** rejects the recommendation without changing the scanner. It stays visible under past recommendations.
+
+Applying never rewrites history: every observation keeps a snapshot of the scanner configuration that produced it, and version accuracy chips always attribute ratings to the version that was live at the time.
+
+## The improvement loop
+
+Putting it together, the quality tab supports a simple loop your team can run continuously:
+
+1. Rate new results as they come in, leaving feedback on the wrong ones.
+2. Watch the feedback themes to see which failure modes recur.
+3. Generate or wait for a configuration recommendation.
+4. Test it against your rated sessions.
+5. Apply it, then keep rating to confirm the new version's accuracy improved.

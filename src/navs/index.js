@@ -4487,6 +4487,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Improving accuracy',
+                    url: '/docs/replay-vision/quality',
+                    icon: 'IconThumbsUp',
+                    color: 'yellow',
+                },
+                {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconPercentage',
