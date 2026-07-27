@@ -154,6 +154,8 @@ export const tools = [
         handle: 'user_interviews',
         name: 'User interviews',
         description: 'Get feedback from users.',
+        // Points at the tool directory as a placeholder. Give this a real slug before removing
+        // WIP status, or search will treat /products as the User Interviews canonical page.
         slug: 'products',
         category: 'communication',
         status: 'WIP',

@@ -24,7 +24,6 @@ export const featureFlags = {
     ...getTool('feature_flags'),
     Icon: IconToggle,
     type: 'feature_flags',
-    slug: 'feature-flags',
     teamSlug: 'feature-flags',
     forumTopicId: 360,
     color: 'seagreen',

@@ -5,7 +5,6 @@ export const logs = {
     ...getTool('logs'),
     Icon: IconActivity,
     productVariantName: 'Logs ingestion (14-day retention)',
-    handle: 'logs',
     type: 'logs',
     color: 'red',
     colorSecondary: 'green-2',

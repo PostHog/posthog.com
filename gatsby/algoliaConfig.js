@@ -395,5 +395,12 @@ module.exports = {
         concurrentQueries: false,
         dryRun: false,
         continueOnFailure: false,
+        algoliasearchOptions: {
+            timeouts: {
+                connect: 20,
+                read: 30,
+                write: 60,
+            },
+        },
     },
 }
