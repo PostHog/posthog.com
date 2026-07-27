@@ -157,14 +157,18 @@ from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
 
 app.add_middleware(PostHogMcpStatelessSessionMiddleware)
 
-# ...then in your request handler, feed the recovered session into each capture:
+# ...then in your request handler, feed the recovered session into each capture.
+# The token carries the client identity too — pass it as $mcp_client_* properties
+# (capture_tool_call takes session_id directly, client name/version via properties):
 sess = get_mcp_session(request)  # None until the client replays the token
 posthog.capture_tool_call(
     name,
     session_id=sess.session_id if sess else None,
-    client_name=sess.client_name if sess else None,
-    client_version=sess.client_version if sess else None,
     intent=prepared.intent,
+    properties={
+        "$mcp_client_name": sess.client_name if sess else None,
+        "$mcp_client_version": sess.client_version if sess else None,
+    },
 )
 ```
 
