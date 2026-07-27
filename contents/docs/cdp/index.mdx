@@ -1,0 +1,91 @@
+---
+title: Data pipelines
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconPlug, IconBrackets, IconDatabase, IconLive, IconWrench } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+Data pipelines is PostHog's customer data platform. It pulls data in from the tools you already use, lets you filter and reshape events as they're ingested, and sends the result wherever it needs to go – in realtime or on a schedule.
+
+Everything runs on the same event stream that powers the rest of PostHog, so the data you send to Slack, your warehouse, or your CRM is the data you analyze. Pipelines are built from [Hog functions](/docs/hog), which you can configure from a template, write yourself, or have [PostHog AI](/docs/cdp/hog-functions-ai) write for you.
+
+<OSButton variant="primary" asLink to="/docs/cdp/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You build and monitor pipelines in the PostHog web app. The other surfaces let you create and debug the same functions from your editor or your own systems.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Configure sources, transformations, and destinations, then watch logs and metrics for each one.</p>
+      <a href="/docs/cdp/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build a pipeline →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPlug className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create, update, test-invoke, and debug pipeline functions from any MCP client or AI editor.</p>
+      <a href="/docs/cdp/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Manage Hog functions and batch exports programmatically, so pipelines live in your own config.</p>
+      <a href="/docs/cdp/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Data pipelines runs on the events and person data already in your PostHog project, plus whatever you connect from outside it. Sources bring data in, transformations reshape it during ingestion, and destinations carry it back out.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconDatabase className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Sources</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Sync data from hundreds of tools, or push it in yourself with an incoming webhook.</p>
+      <a href="/docs/cdp/sources" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Link a source →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconWrench className="size-6 shrink-0 text-yellow mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Transformations</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Add, edit, or drop event properties during ingestion, before anything is stored.</p>
+      <a href="/docs/cdp/transformations" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Transform events →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLive className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Destinations</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send events onward as they happen, or in scheduled batches to your warehouse.</p>
+      <a href="/docs/cdp/destinations" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Send data out →</a>
+    </div>
+  </div>
+
+</div>
+
+## Common use cases
+
+Teams most often use data pipelines to keep a warehouse in sync with product data, to push events into tools like [Slack](/docs/cdp/destinations/slack), [HubSpot](/docs/cdp/destinations/hubspot), or [Intercom](/docs/cdp/destinations/intercom) over [webhooks](/docs/cdp/destinations/webhook), and to enforce a schema at ingestion so bad events never make it into analytics.
+
+Transformations also help you label events on the way in – setting a property like `user_tier` or `page_category` – which makes downstream metrics and [SQL queries](/docs/data-warehouse/sql) much easier to write.

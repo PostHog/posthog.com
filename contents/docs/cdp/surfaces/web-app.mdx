@@ -1,0 +1,37 @@
+---
+title: Data pipelines in the web app
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where you build pipelines and watch them run. Sources, transformations, destinations, and batch exports each get their own section, and every pipeline you create – whether from a template or written by hand – ends up as a [Hog function](/docs/hog) you can open, edit, and test.
+
+{/* TODO: screenshot of the data pipelines section in the web app */}
+
+## What you can do here
+
+### Link sources
+
+Connect an external tool so its data syncs into PostHog on a schedule, or set up an [incoming webhook](/docs/cdp/sources/incoming-webhooks) to push events in yourself. Synced data lands in the [data warehouse](/docs/data-warehouse), where you can join it to events and persons. See [sources](/docs/cdp/sources) for the full list of connectors.
+
+### Transform events during ingestion
+
+[Transformations](/docs/cdp/transformations) run before an event is stored, so they're the right place to enforce a schema, redact a property, label events, or [drop](/docs/cdp/transformations/drop-events) traffic you don't want to pay for. Transformations run in a defined order, which you can rearrange, and a separate event ingestion filtering view lets you block events at the edge without writing code.
+
+### Send data to destinations
+
+[Realtime destinations](/docs/cdp/destinations) fire as events arrive – useful for alerts, CRM syncs, and ad platform conversions. [Batch exports](/docs/cdp/batch-exports) run on a schedule and are built for volume, which is what you want for S3, BigQuery, Snowflake, Postgres, Redshift, Databricks, and Azure Blob Storage. You can [customize any destination](/docs/cdp/destinations/customizing-destinations) by editing its underlying function.
+
+### Test, monitor, and debug
+
+Each function has a test-invoke step that runs it against a real recent event and shows the exact request it would send, without delivering anything. Once it's live, per-function logs and metrics separate successful runs, failures, and events that were filtered out, so you can tell an empty filter apart from a rejecting destination. Event ingestion warnings surface problems that happen upstream of your pipelines.
+
+## Ask PostHog AI
+
+[PostHog AI](/docs/posthog-ai) works inside the pipeline editor – it's an interaction mode here, not a separate surface. Describe the function you want in plain language and it writes the Hog code, generates the input variables, and builds the event filters to go with it. You can then iterate on the result with follow-up instructions. See [writing Hog functions with PostHog AI](/docs/cdp/hog-functions-ai) for prompts that work well.
+
+## Related
+
+- Create and debug the same functions from your editor over [MCP](/docs/cdp/surfaces/mcp).
+- Manage them programmatically with the [API](/docs/cdp/surfaces/api).
+- Fix delivery problems with the [troubleshooting guide](/docs/cdp/troubleshooting).
