@@ -149,6 +149,11 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/experiments/create-experiments-mcp",
+            "destination": "/docs/experiments/surfaces/mcp",
+            "statusCode": 301
+        },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },

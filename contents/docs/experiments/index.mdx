@@ -1,0 +1,85 @@
+---
+title: Experiments
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconBrackets, IconToggle, IconGraph, IconDatabase } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+Experiments let you test a change against a control and find out whether it actually worked. You define variants, pick the metrics you care about, and PostHog randomizes your users, tracks their exposures, and runs the statistics – Bayesian or frequentist – so you get a real answer instead of a hunch.
+
+Because experiments run on the same events and [feature flags](/docs/feature-flags) you already have in PostHog, you don't need new instrumentation to measure a result. Any event, [data warehouse](/docs/data-warehouse) table, or funnel you've already built can become an experiment metric, and every variant is linked to the [session replays](/docs/session-replay) of the people who saw it.
+
+<OSButton variant="primary" asLink to="/docs/experiments/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You design, launch, and analyze experiments in the PostHog web app. The other surfaces let you create and manage them from your editor or your own systems.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create experiments, launch them, and read results with significance, replays, and exposures in view.</p>
+      <a href="/docs/experiments/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Run an experiment →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create experiments, check results, and manage their lifecycle from any MCP client or AI editor.</p>
+      <a href="/docs/experiments/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Manage experiments, holdouts, and shared metrics programmatically from your own systems.</p>
+      <a href="/docs/experiments/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Experiments don't collect anything new. They read the feature flag that assigns each user to a variant, the events those users go on to send, and – if you want – tables you've already loaded into the data warehouse.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconToggle className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Feature flags</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Every experiment is backed by a flag that randomizes users into variants and records their exposure.</p>
+      <a href="/docs/experiments/exposures" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Understand exposures →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGraph className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Events</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Any event you already capture can become a funnel, mean, or ratio metric for an experiment.</p>
+      <a href="/docs/experiments/metrics" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Define metrics →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconDatabase className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Data warehouse</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Measure revenue, subscriptions, or anything else living in a warehouse table you've synced.</p>
+      <a href="/docs/experiments/data-warehouse" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use warehouse tables →</a>
+    </div>
+  </div>
+
+</div>
