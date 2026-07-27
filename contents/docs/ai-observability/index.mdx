@@ -1,0 +1,102 @@
+---
+title: AI Observability
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconCode, IconUserPaths, IconApps, IconMessage, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+AI Observability captures every call your AI product makes to an LLM – the prompt, the response, the tokens, the cost, the latency, and the tools it reached for along the way – and stitches them into traces you can actually read. When something goes wrong, you see the whole conversation instead of a single failed request.
+
+Because it runs on the same events as the rest of PostHog, every trace comes with the user who triggered it, their [session replay](/docs/session-replay), and any [exceptions](/docs/error-tracking) the request threw. That same trace data is what [evaluations](/docs/ai-evals) score and what [Self-driving](/docs/self-driving) reads when it files a report about your AI product's quality.
+
+<OSButton variant="primary" asLink to="/docs/ai-observability/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You explore traces and debug your AI product in the PostHog web app. The other surfaces let you investigate the same data from your editor and act on what Self-driving finds.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Read traces and sessions, watch cost and latency, cluster failures, and test prompts in the playground.</p>
+      <a href="/docs/ai-observability/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Explore traces →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Pull up traces, costs, and errors from any MCP client or AI editor while you're still in the code.</p>
+      <a href="/docs/ai-observability/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Query over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports your trace data produces, and the pull requests that follow.</p>
+      <a href="/docs/ai-observability/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Act on findings →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+AI Observability runs on the LLM events your app sends to PostHog. Most of them come from an SDK wrapping your model provider, but you can also forward traces from another observability tool or attach feedback from your users.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconUserPaths className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Traces and spans</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Generations, spans, and traces captured by the PostHog SDKs across every model provider and framework.</p>
+      <a href="/docs/ai-observability/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Install an SDK →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconApps className="size-6 shrink-0 text-yellow mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Integrations</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Forward traces you already collect in Helicone, Langfuse, Traceloop, or Keywords AI.</p>
+      <a href="/docs/ai-observability/integrations" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect a tool →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-salmon mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">User feedback</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Thumbs up and down, ratings, and comments attached to the exact trace they're about.</p>
+      <a href="/docs/ai-observability/collect-user-feedback" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Collect feedback →</a>
+    </div>
+  </div>
+
+</div>
+
+## How AI Observability works with Self-driving
+
+Your LLM traces are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). [Evaluations](/docs/ai-evals) score them as they land, failing scores and evaluation reports become signals, and the recurring problems come back as a report you can act on.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Traces', icon: IconUserPaths, color: '#F54E00', description: 'Every LLM call captured from your AI product' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Failing evaluations and quality regressions surfaced' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with the traces and user context behind it' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a prompt or code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You read traces in the [PostHog web app](/docs/ai-observability/surfaces/web-app), and review the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox) or [PostHog Desktop](/docs/ai-observability/surfaces/desktop). See the [Self-driving docs](/docs/self-driving) for the full picture.

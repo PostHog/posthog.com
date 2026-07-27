@@ -1,0 +1,33 @@
+---
+title: AI Observability in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work your LLM traces produce. Your traces don't just sit in a dashboard – [evaluations](/docs/ai-evals) score them as they land, and when quality drifts, the problem shows up as a report with the failing traces attached.
+
+## How a bad trace becomes a report
+
+[Evaluations](/docs/ai-evals) run against your traces continuously. When one starts failing – answers getting less accurate, an agent picking the wrong tool, a jump in refusals – that failing result becomes a signal. Scheduled [evaluation reports](/docs/ai-evals) do the same on a slower cadence, summarizing how a scored behavior moved over time.
+
+Self-driving groups those signals into a single report so you get one thing to read rather than a stream of individual failures. When there's a code or prompt fix behind it and your repository is connected, a coding agent can pick the report up and open a draft pull request.
+
+## What you can do here
+
+- **Read the report** – the behavior that regressed, the evaluation that caught it, and the traces behind it.
+- **Ask questions** – start a research task against the report to dig into the traces before you act.
+- **Create a PR** – kick off a coding agent run against your connected repository.
+- **Watch the agent work** – follow the live transcript and review the files it changed.
+- **Merge** – the pull request opens on GitHub, so a human is always the last step.
+
+## Related
+
+- Set up the scoring that produces these signals in [AI Evals](/docs/ai-evals).
+- Read the underlying traces in the [web app](/docs/ai-observability/surfaces/web-app).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).
