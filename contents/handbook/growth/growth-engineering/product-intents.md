@@ -31,6 +31,12 @@ People click around in the UI a fair amount, so generally you want to find somet
 - For data warehouse, when someone actually clicks to set up a source, we consider that an intent. It's a couple pages deep, so people who've gotten there are less likely to just be clicking around.
 - If someone views docs for your product multiple times (you could keep a counter in localstorage), that could be sent as a product intent.
 
+## What if a product has distinct offerings?
+
+Sometimes what looks like one product actually contains distinct offerings that people adopt (and succeed at) separately. When that happens, track each offering as its own product - with its own product key, its own intents, and its own [activation criteria](/handbook/growth/growth-engineering/per-product-activation) - rather than folding it into the parent. Otherwise the funnels blur together and you can't tell which offering is actually working.
+
+For example, "data warehouse" covers both connecting an external source (the intent above is "clicks to set up a source") and the managed warehouse. These are adopted differently, so a managed warehouse should get its own product key and its own intent (e.g. opening the managed warehouse setup, or creating a managed table) rather than reusing the external-source-import intents.
+
 ## Is the onboarding product intent good enough for my product?
 
 Nope. Lots of people join PostHog with a single product in mind - and then later realize that we offer other products they also want to use. Each product should have product intents being recorded somewhere past onboarding, so they aren't missing out on data about these types of post-signup customers. 
