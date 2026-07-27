@@ -182,8 +182,6 @@ A stateless server keeps nothing between requests — a fresh server instance ea
 
 The SDK handles this with no session store and no sticky routing. At `initialize` it mints the `Mcp-Session-Id` response header as a token carrying the session id and client metadata. Clients replay that header on every subsequent request, so any pod reads the same values back — nothing changes on the client side.
 
-The rest of this section covers the TypeScript SDK. **Using Python?** See [Python](#python) below — stateless works out of the box on FastMCP, with no `enableJsonResponse` caveat.
-
 ### Streamable HTTP needs `enableJsonResponse: true`
 
 Minting only reaches the wire in JSON mode. In SSE (streaming) mode, `StreamableHTTPServerTransport` builds the response headers *before* your `initialize` handler runs, so the minted header never lands and the SDK silently falls back to a session per request:
