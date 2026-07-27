@@ -2,15 +2,55 @@ import React, { useEffect } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { CallToAction } from 'components/CallToAction'
+import { HedgehogCodeBubble, HedgehogPuzzle } from '@posthog/brand/hoggies'
 import { Accordion } from 'components/RadixUI/Accordion'
+import OSTable from 'components/OSTable'
+import TabbedCarousel from 'components/TabbedCarousel'
+import type { TabbedCarouselTab } from 'components/TabbedCarousel'
+import { WINDOW_BG } from '../../constants/frostedSurfaces'
+import {
+    IconBolt,
+    IconBrackets,
+    IconCode,
+    IconDatabase,
+    IconDecisionTree,
+    IconDownload,
+    IconFlask,
+    IconGraph,
+    IconMessage,
+    IconNotebook,
+    IconServer,
+    IconShuffle,
+    IconSparkles,
+    IconStack,
+    IconTarget,
+    IconTerminal,
+    IconUpload,
+} from '@posthog/icons'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const sectionHeadingClassName = 'my-6 mt-12 text-2xl font-bold @md/reader-content:text-3xl'
+
+type IconComponent = React.ComponentType<{ className?: string }>
+type CloudinarySrc = `https://res.cloudinary.com/${string}`
+
+// c_crop trims the source PNG down to the database and editor panes: it drops a 1px
+// near-black column on the left edge, the scrollbar and Max AI sidebar on the right,
+// and cuts off partway through the results table.
+const TAB_IMAGE_TRUST: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_2,y_0,w_1180,h_665/w_1600,c_limit,q_auto,f_auto/dw_temp_528efa76a2.png'
+const TAB_IMAGE_ASK: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Post_Hog_ai_response_ed994d3859.png'
+const TAB_IMAGE_SELF_DRIVE: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
+const CTA_HOG_IMAGE: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png'
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
@@ -20,33 +60,274 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
-const dataEngineerBullets = [
-    'Set up CDC pipelines from Postgres, MySQL, and other sources',
-    'Define and version core metrics so every team is working from the same numbers',
-    'Build and manage reverse ETL syncs to keep downstream tools up to date',
-    'Write transformation logic that enriches events with data from other systems',
-    'Query billions of rows without managing a cluster',
-    "Flexibility to use PostHog's full context warehouse or bring your own tools",
+// Icon + text rows, used for the persona cards and the "store"/"act" feature lists.
+const IconList = ({ items }: { items: { Icon: IconComponent; color: string; text: React.ReactNode }[] }) => (
+    <ul className="mt-3 mb-0 list-none space-y-2 pl-0">
+        {items.map(({ Icon, color, text }, index) => (
+            <li key={index} className="flex items-start gap-2 text-sm text-secondary">
+                <Icon className={`size-4 shrink-0 mt-0.5 ${color}`} />
+                <span>{text}</span>
+            </li>
+        ))}
+    </ul>
+)
+
+type TabPanelHighlightColor = 'blue' | 'red' | 'yellow' | 'green'
+
+const tabPanelHighlightClasses: Record<TabPanelHighlightColor, string> = {
+    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
+    red: 'bg-red/10 text-red dark:bg-red/20',
+    yellow: 'bg-yellow/15 text-yellow dark:bg-yellow/20',
+    green: 'bg-green/10 text-green dark:bg-green/20',
+}
+
+const TabPanel = ({
+    title,
+    highlightedTitle,
+    titleSuffix,
+    highlightColor = 'blue',
+    children,
+    image,
+    imageHasChrome = false,
+    illustration,
+}: {
+    title: string
+    highlightedTitle?: string
+    titleSuffix?: string
+    highlightColor?: TabPanelHighlightColor
+    children: React.ReactNode
+    image?: CloudinarySrc
+    /** Set for screenshots that already bake in rounded corners and a drop shadow. */
+    imageHasChrome?: boolean
+    /** Rendered instead of `image` for tabs illustrated with a hedgehog rather than a screenshot. */
+    illustration?: React.ReactNode
+}) => {
+    const fullTitle = [title, highlightedTitle, titleSuffix].filter(Boolean).join(' ')
+
+    // Flat screenshots get rounded top corners and a shadow so they read as a window
+    // rising out of the panel. The wrapper is inset to leave room for that shadow,
+    // and clips it where the image runs off the bottom of the card.
+    const imageWrapperClassName = imageHasChrome
+        ? '-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6'
+        : '-mx-4 -mb-4 mt-4 overflow-hidden rounded-b px-4 pt-3 leading-[0] @xl:-mx-6 @xl:-mb-6 @xl:px-6'
+    const imgClassName = imageHasChrome
+        ? 'w-full block'
+        : 'w-full block rounded-t-md shadow-[0_2px_10px_rgba(0,0,0,0.12)]'
+
+    const copy = (
+        <>
+            <h2 className="mt-0 mb-2 text-2xl font-bold">
+                {title}
+                {highlightedTitle ? (
+                    <>
+                        {' '}
+                        <span className={`rounded-sm px-0.5 ${tabPanelHighlightClasses[highlightColor]}`}>
+                            {highlightedTitle}
+                        </span>
+                        {titleSuffix ? ` ${titleSuffix}` : null}
+                    </>
+                ) : null}
+            </h2>
+            {/* text-[15px] matches the page body copy – the codebase defines .prose-sm as text-[15px] */}
+            <div className="text-secondary text-[15px]">{children}</div>
+        </>
+    )
+
+    // Illustrated tabs sit the hedgehog beside the copy; screenshot tabs run it full
+    // width below, where it bleeds off the bottom of the card.
+    if (illustration) {
+        return (
+            <div className="rounded bg-primary p-4 @xl:p-6">
+                {/* items-start keeps the heading level with the screenshot tabs; the hedgehog is
+                    taller than the copy, so centering the row would push the copy down. */}
+                <div className="grid items-start gap-6 @md:grid-cols-[1fr_240px]">
+                    <div>{copy}</div>
+                    <div className="flex justify-center self-center">{illustration}</div>
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="rounded bg-primary p-4 @xl:p-6">
+            {copy}
+            {image ? (
+                <div className={imageWrapperClassName}>
+                    <CloudinaryImage src={image} alt={fullTitle} imgClassName={imgClassName} />
+                </div>
+            ) : null}
+        </div>
+    )
+}
+
+const dataEngineerBullets: { Icon: IconComponent; color: string; text: string }[] = [
+    {
+        Icon: IconDatabase,
+        color: 'text-blue',
+        text: 'Set up CDC pipelines from Postgres, MySQL, and other sources',
+    },
+    {
+        Icon: IconTarget,
+        color: 'text-red',
+        text: 'Define and version core metrics so every team is working from the same numbers',
+    },
+    {
+        Icon: IconShuffle,
+        color: 'text-purple',
+        text: 'Build and manage reverse ETL syncs to keep downstream tools up to date',
+    },
+    {
+        Icon: IconCode,
+        color: 'text-green',
+        text: 'Write transformation logic that enriches events with data from other systems',
+    },
+    { Icon: IconServer, color: 'text-orange', text: 'Query billions of rows without managing a cluster' },
+    {
+        Icon: IconStack,
+        color: 'text-sky-blue',
+        text: "Flexibility to use PostHog's full context warehouse or bring your own tools",
+    },
 ]
 
-const productEngineerBullets = [
-    'Sync external data sources and query them alongside your product events',
-    'Build experiment cohorts from warehouse data without creating a custom pipeline',
-    "Use PostHog AI to write SQL when you don't want to",
+const productEngineerBullets: { Icon: IconComponent; color: string; text: string }[] = [
+    {
+        Icon: IconShuffle,
+        color: 'text-blue',
+        text: 'Sync external data sources and query them alongside your product events',
+    },
+    {
+        Icon: IconFlask,
+        color: 'text-purple',
+        text: 'Build experiment cohorts from warehouse data without creating a custom pipeline',
+    },
+    { Icon: IconSparkles, color: 'text-red', text: "Use PostHog AI to write SQL when you don't want to" },
 ]
 
-const storeBullets = [
-    'Native connectors for the tools you already use',
-    'Query using AI or our SQL Editor',
-    'Use warehouse data to build cohorts, run experiments, power AI features',
+const togetherBullets: { Icon: IconComponent; color: string; text: string }[] = [
+    { Icon: IconBolt, color: 'text-yellow', text: "Capture an event? It's in your analytics." },
+    { Icon: IconShuffle, color: 'text-purple', text: 'Data from Stripe? Use it with your flags.' },
+    { Icon: IconMessage, color: 'text-sky-blue', text: 'Define a metric? Mention it in Slack.' },
 ]
 
-const actBullets = [
-    'Ask questions in plain English or write SQL directly',
-    'Build dashboards and ad-hoc visualisations in PostHog',
-    'Combine insights, replays, and experiments in a single document',
-    'Sync data back to your CRM, support tools, and marketing platforms',
-    'Automatically open PRs that use data to improve your product',
+const personas: {
+    title: string
+    description: string
+    Icon: IconComponent
+    iconColor: string
+    bullets: { Icon: IconComponent; color: string; text: string }[]
+}[] = [
+    {
+        title: 'Data engineers',
+        description: 'Build complex models and transformations that need your expertise, not plumbing.',
+        Icon: IconDatabase,
+        iconColor: 'text-blue',
+        bullets: dataEngineerBullets,
+    },
+    {
+        title: 'Product engineers',
+        description:
+            'Your data is already in PostHog. Query it, use it in experiments, and ship against it without waiting on the data team.',
+        Icon: IconCode,
+        iconColor: 'text-red',
+        bullets: productEngineerBullets,
+    },
+]
+
+// The four sides of the "Better data in, better AI out" story, presented as carousel tabs.
+const dataInTabs: TabbedCarouselTab[] = [
+    {
+        value: 'data-you-trust',
+        label: 'Data you trust',
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <TabPanel
+                title="Start with"
+                highlightedTitle="data you trust"
+                highlightColor="blue"
+                image={TAB_IMAGE_TRUST}
+            >
+                <p className="m-0">
+                    AI products don't fail because the model is bad. They fail because the data feeding them is
+                    incomplete, inconsistent, or stuck in a tool it can't reach.
+                </p>
+                <p className="m-0 mt-3">
+                    PostHog's context warehouse gives your AI features a foundation that works: clean event data,
+                    business context from your other tools, and full data ownership.
+                </p>
+            </TabPanel>
+        ),
+    },
+    {
+        value: 'ask-posthog',
+        label: 'Ask @PostHog',
+        color: 'bg-red',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <TabPanel title="Ask @PostHog" highlightedTitle="anything" highlightColor="red" image={TAB_IMAGE_ASK}>
+                <p className="m-0">
+                    With all your data in one place, PostHog becomes omniscient about your business. Use PostHog AI or
+                    our Slack app to generate SQL queries, model your data, and get insights about your users' behavior.
+                </p>
+                <p className="m-0 mt-3">
+                    PostHog AI can be used by everyone, product teams can ask questions and get insights without relying
+                    on the data team, freeing them up to build complex data models.
+                </p>
+            </TabPanel>
+        ),
+    },
+    {
+        value: 'self-drive',
+        label: 'Self-drive',
+        color: 'bg-yellow',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        content: (
+            <TabPanel
+                title="Let PostHog"
+                highlightedTitle="self-drive"
+                titleSuffix="your development"
+                highlightColor="yellow"
+                image={TAB_IMAGE_SELF_DRIVE}
+                imageHasChrome
+            >
+                <p className="m-0">
+                    What are you going to do with all those insights? PostHog understands your product. It can identify
+                    usage patterns, triage bugs, and open PRs automatically, self-driving development of your product
+                    based on what it knows your users need.
+                </p>
+            </TabPanel>
+        ),
+    },
+    {
+        value: 'better-together',
+        label: 'Better together',
+        color: 'bg-green',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        content: (
+            <TabPanel
+                title="Good solo,"
+                highlightedTitle="better together"
+                highlightColor="green"
+                illustration={
+                    <HedgehogPuzzle
+                        size={240}
+                        title="Two hedgehogs holding interlocking puzzle pieces"
+                        className="w-full max-w-[240px]"
+                    />
+                }
+            >
+                <p className="m-0">
+                    The modern data stack is a bunch of tools that can barely tolerate each other. But PostHog is a
+                    system that works together.
+                </p>
+                <IconList items={togetherBullets} />
+            </TabPanel>
+        ),
+    },
 ]
 
 const growthColumns = ['Week 1', 'Month 3', 'Year 1'] as const
@@ -78,9 +359,27 @@ const growthRows: { label: string; cells: [string, string, string] }[] = [
     },
 ]
 
+// Leading column is unlabeled – it holds the row's category rather than a timeframe.
+const growthTableColumns = [
+    { name: '', align: 'left' as const, width: 'minmax(5rem,max-content)' },
+    ...growthColumns.map((column) => ({
+        name: column,
+        align: 'left' as const,
+        width: 'minmax(10rem,1fr)',
+    })),
+]
+
+const growthTableRows = growthRows.map((row) => ({
+    key: row.label,
+    cells: [
+        { content: <span className="font-semibold text-primary">{row.label}</span> },
+        ...row.cells.map((cell) => ({ content: <span className="text-secondary">{cell}</span> })),
+    ],
+}))
+
 const catalogSections: {
     title: string
-    items: { name: string; description: string; url: string }[]
+    items: { name: string; description: string; url: string; Icon: IconComponent; iconColor: string }[]
 }[] = [
     {
         title: 'Data Sources',
@@ -90,23 +389,31 @@ const catalogSections: {
                 description:
                     'Regularly sync or bulk import data into your warehouse from databases, ad platforms, SaaS tools, and more.',
                 url: '/data-stack/sources',
+                Icon: IconDownload,
+                iconColor: 'text-blue',
             },
             {
                 name: 'Managed Warehouse',
                 description:
                     'Store, query, and join your product and business data in one place without maintaining any infrastructure.',
                 url: '/data-stack/managed-warehouse',
+                Icon: IconDatabase,
+                iconColor: 'text-purple',
             },
             {
                 name: 'CDP',
                 description:
                     'Ingest, transform, and route data between PostHog and the rest of your stack in real time.',
                 url: '/cdp',
+                Icon: IconShuffle,
+                iconColor: 'text-red',
             },
             {
                 name: 'Batch Exports',
                 description: 'Send PostHog data to your existing warehouse or data lake on a schedule you control.',
                 url: '/data-stack/reverse-etl-export',
+                Icon: IconUpload,
+                iconColor: 'text-green',
             },
         ],
     },
@@ -118,11 +425,15 @@ const catalogSections: {
                 description:
                     'Define your metrics to keep them consistent across PostHog products, update them on a schedule.',
                 url: '/data-stack/data-modeling',
+                Icon: IconDecisionTree,
+                iconColor: 'text-blue',
             },
             {
                 name: 'Endpoints',
                 description: 'Take any insight or SQL query and expose it as a stable API endpoint.',
                 url: '/docs/api/endpoints',
+                Icon: IconBrackets,
+                iconColor: 'text-purple',
             },
         ],
     },
@@ -134,29 +445,39 @@ const catalogSections: {
                 description:
                     'Ask questions about your data in plain English. Generates SQL, builds dashboards, and surfaces insights.',
                 url: '/data-stack/posthog-ai',
+                Icon: IconSparkles,
+                iconColor: 'text-red',
             },
             {
                 name: 'SQL Editor',
                 description:
                     'Write and run HogQL or standard SQL directly against your data. For when you know exactly what you want and just need to ask for it properly.',
                 url: '/data-stack/sql-editor',
+                Icon: IconTerminal,
+                iconColor: 'text-green',
             },
             {
                 name: 'Notebooks',
                 description:
                     "Combine insights, replays, flags, experiment results, and SQL into a single document. For when your analysis has a story and a dashboard isn't the right way to tell it.",
                 url: '/docs/notebooks',
+                Icon: IconNotebook,
+                iconColor: 'text-blue',
             },
             {
                 name: 'Reverse ETL',
                 description:
                     'Send data back to the tools that need it. Keep your CRM, support tools, and marketing platforms in sync.',
                 url: '/data-stack/reverse-etl-export',
+                Icon: IconShuffle,
+                iconColor: 'text-purple',
             },
             {
                 name: 'Business Intelligence',
                 description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
                 url: '/data-stack/business-intelligence',
+                Icon: IconGraph,
+                iconColor: 'text-orange',
             },
         ],
     },
@@ -234,276 +555,170 @@ export default function DataStack(): JSX.Element {
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
                 imageType="absolute"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="context-warehouse.md" hideTitle={true}>
-                <div className="not-prose mb-4 w-full">
-                    <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
-                        Give your agents the <Highlight>full context</Highlight>
-                    </h1>
-                    <p className="mb-0 mt-4 text-base font-semibold leading-relaxed text-primary">
-                        Every feature you ship is downstream of your data.
-                    </p>
-                    <p className="mb-0 mt-2 text-base leading-relaxed text-secondary">
-                        Collect, store, transform, query using your context warehouse, and let PostHog self-drive
-                        development based on customer signals.
-                    </p>
-                </div>
+            <ReaderView
+                leftSidebar={<LeftSidebarContent />}
+                title="context-warehouse.md"
+                hideTitle={true}
+                className="overflow-x-hidden"
+            >
+                <div className="relative z-10">
+                    <div className="max-w-4xl @7xl:max-w-7xl mx-auto">
+                        {/* Hero */}
+                        <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
+                            <div className="grid items-center gap-6 @lg/reader-content:grid-cols-[1fr_280px]">
+                                <div>
+                                    <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                        Give your agents the <Highlight>full context</Highlight>
+                                    </h1>
+                                    <p className="mb-0 mt-5 text-base font-semibold leading-relaxed text-primary @xl/reader-content:text-[17px]">
+                                        Every feature you ship is downstream of your data.
+                                    </p>
+                                    <p className="mb-0 mt-2 max-w-3xl text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
+                                        Collect, store, transform, query using your context warehouse, and let PostHog
+                                        self-drive development based on customer signals.
+                                    </p>
+                                    <div className="mt-6">
+                                        <CallToAction
+                                            to={SIGNUP_URL}
+                                            externalNoIcon
+                                            size="md"
+                                            className="max-w-[175px]"
+                                        >
+                                            Get started
+                                        </CallToAction>
+                                    </div>
+                                </div>
+                                <div className="hidden justify-center @lg/reader-content:flex">
+                                    <HedgehogCodeBubble size={280} className="w-full max-w-[280px]" />
+                                </div>
+                            </div>
+                        </div>
 
-                <CallToAction to={SIGNUP_URL} externalNoIcon size="sm" className="max-w-[175px]">
-                    Get started
-                </CallToAction>
-
-                <h2 className={sectionHeadingClassName}>Built for data engineers, loved by product teams</h2>
-                <div className="not-prose grid grid-cols-1 gap-6 @xl/reader-content:grid-cols-2">
-                    <div className="rounded border border-primary bg-accent p-4 @md/reader-content:p-5">
-                        <h3 className="mt-0 mb-2 text-lg font-bold">Data engineers</h3>
-                        <p className="mt-0 mb-3 text-sm text-secondary">
-                            Build complex models and transformations that need your expertise, not plumbing.
-                        </p>
-                        <ul className="mb-0 list-none space-y-2 pl-0 text-sm text-secondary">
-                            {dataEngineerBullets.map((item) => (
-                                <li key={item} className="relative pl-4">
-                                    <span className="absolute left-0 top-2 size-1.5 rounded-full bg-red dark:bg-yellow" />
-                                    {item}
-                                </li>
+                        {/* Built for data engineers, loved by product teams */}
+                        <h2 className={sectionHeadingClassName}>Built for data engineers, loved by product teams</h2>
+                        <div className="not-prose grid grid-cols-1 gap-4 @xl/reader-content:grid-cols-2">
+                            {personas.map(({ title, description, Icon, iconColor, bullets }) => (
+                                <div
+                                    key={title}
+                                    className="flex min-h-full flex-col rounded-md border border-primary bg-primary p-5 shadow-sm @lg/reader-content:p-6"
+                                >
+                                    <p className="m-0 flex items-center gap-2 text-lg font-bold text-primary">
+                                        <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                                        {title}
+                                    </p>
+                                    <p className="m-0 mt-2 text-sm text-secondary">{description}</p>
+                                    <IconList items={bullets} />
+                                </div>
                             ))}
-                        </ul>
-                    </div>
-                    <div className="rounded border border-primary bg-accent p-4 @md/reader-content:p-5">
-                        <h3 className="mt-0 mb-2 text-lg font-bold">Product engineers</h3>
-                        <p className="mt-0 mb-3 text-sm text-secondary">
-                            Your data is already in PostHog. Query it, use it in experiments, and ship against it
-                            without waiting on the data team.
+                        </div>
+
+                        {/* Better data in, better AI out */}
+                        <h2 className={sectionHeadingClassName}>Better data in, better AI out</h2>
+                        <div className="not-prose my-6">
+                            {/* The screenshot tabs run well past the default min-height anyway;
+                                dropping it stops the illustrated tab from padding out to match. */}
+                            <TabbedCarousel tabs={dataInTabs} slideClassName="!min-h-0" />
+                        </div>
+
+                        {/* Set up in minutes, still useful in three years. */}
+                        <h2 className={sectionHeadingClassName}>Set up in minutes, still useful in three years.</h2>
+                        <p>This context warehouse doesn't change as you grow. It just grows with you.</p>
+                        <div className="not-prose my-6">
+                            <OSTable
+                                columns={growthTableColumns}
+                                rows={growthTableRows}
+                                size="md"
+                                rowAlignment="top"
+                                className="text-sm"
+                                width="full"
+                            />
+                        </div>
+                        <p>
+                            No migration, re-instrumentation, or switching tools because you scaled out of them. If you
+                            really want to, we give you the credentials to directly access your data store to bring your
+                            own tools or export your data.
                         </p>
-                        <ul className="mb-0 list-none space-y-2 pl-0 text-sm text-secondary">
-                            {productEngineerBullets.map((item) => (
-                                <li key={item} className="relative pl-4">
-                                    <span className="absolute left-0 top-2 size-1.5 rounded-full bg-blue" />
-                                    {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
 
-                <h2 className={sectionHeadingClassName}>Better data in, better AI out</h2>
-
-                <h3>Start with data you trust</h3>
-                <p>
-                    AI products don't fail because the model is bad. They fail because the data feeding them is
-                    incomplete, inconsistent, or stuck in a tool it can't reach.
-                </p>
-                <p>
-                    PostHog's context warehouse gives your AI features a foundation that works: clean event data,
-                    business context from your other tools, and full data ownership.
-                </p>
-
-                <h3>Ask @PostHog anything</h3>
-                <p>
-                    With all your data in one place, PostHog becomes omniscient about your business. Use PostHog AI or
-                    our Slack app to generate SQL queries, model your data, and get insights about your users' behavior.
-                </p>
-                <p>
-                    PostHog AI can be used by everyone, product teams can ask questions and get insights without relying
-                    on the data team, freeing them up to build complex data models.
-                </p>
-
-                <h3>Let PostHog self-drive your development</h3>
-                <p>
-                    What are you going to do with all those insights? PostHog understands your product. It can identify
-                    usage patterns, triage bugs, and open PRs automatically, self-driving development of your product
-                    based on what it knows your users need.
-                </p>
-
-                <h3>Good solo, better together</h3>
-                <p>
-                    The modern data stack is a bunch of tools that can barely tolerate each other. But PostHog is a
-                    system that works together.
-                </p>
-                <ul>
-                    <li>Capture an event? It's in your analytics.</li>
-                    <li>Data from Stripe? Use it with your flags.</li>
-                    <li>Define a metric? Mention it in Slack.</li>
-                </ul>
-
-                <h2 className={sectionHeadingClassName}>Pipe data in</h2>
-                <h3>Say goodbye pipeline wrangling</h3>
-                <p>
-                    Collect data from your product, website, and external tools. Filter, transform, and enrich them in
-                    transit. Send them to your warehouse and build a bank of data that knows your business inside out.
-                </p>
-                <p>
-                    It's a CDP, but because it's built into PostHog, everything you collect is immediately available in
-                    your analytics, flags, and experiments. No syncing required.
-                </p>
-                <div className="not-prose grid grid-cols-1 gap-6 @md/reader-content:grid-cols-3 my-6">
-                    <div>
-                        <p className="mb-2 border-b border-primary pb-1 text-sm font-bold text-primary">
-                            Business tools
+                        {/* What's in your context warehouse */}
+                        <h2 id="context-warehouse-catalog" className={sectionHeadingClassName}>
+                            What's in your context warehouse
+                        </h2>
+                        <p>
+                            Use PostHog as the full context layer for your product, or mix and match with your own
+                            tools.
                         </p>
-                        <ul className="mb-0 list-none space-y-1 pl-0 text-sm text-secondary">
-                            <li>Stripe</li>
-                            <li>Google sheets</li>
-                            <li>Hubspot</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="mb-2 border-b border-primary pb-1 text-sm font-bold text-primary">Storage</p>
-                        <ul className="mb-0 list-none space-y-1 pl-0 text-sm text-secondary">
-                            <li>Postgres</li>
-                            <li>Supabase</li>
-                            <li>MongoDB</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <p className="mb-2 border-b border-primary pb-1 text-sm font-bold text-primary">Ad tools</p>
-                        <ul className="mb-0 list-none space-y-1 pl-0 text-sm text-secondary">
-                            <li>Google Ads</li>
-                            <li>Meta Ads</li>
-                            <li>LinkedIn Ads</li>
-                        </ul>
-                    </div>
-                </div>
-                <p>
-                    <Link to="/data-stack/sources" state={{ newWindow: true }}>
-                        See 60+ sources
-                    </Link>
-                </p>
-
-                <h2 className={sectionHeadingClassName}>Store your data</h2>
-                <h3>All your data, finally under the same roof.</h3>
-                <p>
-                    Don't move data between tools or warehouses just to join a revenue column to a signup event. Put it
-                    in PostHog and it never needs to travel.
-                </p>
-                <ul>
-                    {storeBullets.map((item) => (
-                        <li key={item}>{item}</li>
-                    ))}
-                </ul>
-                <CallToAction to="/data-stack/managed-warehouse" state={{ newWindow: true }} size="sm" type="secondary">
-                    Join the Waitlist
-                </CallToAction>
-
-                <h2 className={sectionHeadingClassName}>Give agents access</h2>
-                <h3>
-                    Good data = <Highlight>Great context</Highlight>
-                </h3>
-                <p>
-                    Raw data is messy, data modelling is the fix. Lock in definitions that everyone agrees on so they
-                    mean the same thing in every dashboard, experiment, and AI feature that depends on them.
-                </p>
-                <p>
-                    PostHog pairs this with Endpoints. The models you build become stable APIs your product can call
-                    directly. Power an embedded analytics view for your customers, or give your MCP access so your
-                    customers can get information in the tools they are already using.
-                </p>
-                <CallToAction to="/docs/api/endpoints" state={{ newWindow: true }} size="sm" type="secondary">
-                    Learn more
-                </CallToAction>
-
-                <h2 className={sectionHeadingClassName}>Act on your data</h2>
-                <h3>Turn your data into action.</h3>
-                <p>
-                    Your data is only useful if someone can understand it and act on it. Close the loop from insight to
-                    implementation without leaving PostHog.
-                </p>
-                <p>Analysis without switching tabs. Activation without a separate platform.</p>
-                <ul>
-                    {actBullets.map((item) => (
-                        <li key={item}>{item}</li>
-                    ))}
-                </ul>
-                <p>
-                    <Link to="#context-warehouse-catalog">Explore data tools</Link>
-                </p>
-
-                <h2 className={sectionHeadingClassName}>Set up in minutes, still useful in three years.</h2>
-                <p>This context warehouse doesn't change as you grow. It just grows with you.</p>
-                <div className="not-prose my-6 overflow-x-auto rounded border border-primary">
-                    <table className="w-full min-w-[36rem] border-collapse text-sm">
-                        <thead>
-                            <tr className="border-b border-primary bg-accent">
-                                <th className="px-3 py-2 text-left font-bold text-primary" />
-                                {growthColumns.map((column) => (
-                                    <th key={column} className="px-3 py-2 text-left font-bold text-primary">
-                                        {column}
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {growthRows.map((row) => (
-                                <tr key={row.label} className="border-b border-primary last:border-b-0">
-                                    <th className="px-3 py-2.5 text-left font-semibold text-primary align-top">
-                                        {row.label}
-                                    </th>
-                                    {row.cells.map((cell, index) => (
-                                        <td key={growthColumns[index]} className="px-3 py-2.5 text-secondary align-top">
-                                            {cell}
-                                        </td>
+                        {catalogSections.map((section) => (
+                            <div key={section.title} className="mb-8">
+                                <h3>{section.title}</h3>
+                                <div className="not-prose grid grid-cols-1 gap-3 @xl/reader-content:grid-cols-2">
+                                    {section.items.map(({ name, description, url, Icon, iconColor }) => (
+                                        <Link
+                                            key={name}
+                                            to={url}
+                                            state={{ newWindow: true }}
+                                            className="group flex min-h-full flex-col rounded-md border border-primary bg-primary p-4 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
+                                        >
+                                            <p className="m-0 flex items-center gap-2 text-base font-bold text-primary group-hover:underline">
+                                                <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                                                {name}
+                                            </p>
+                                            <p className="m-0 mt-1.5 text-sm text-secondary">{description}</p>
+                                        </Link>
                                     ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <p>
-                    No migration, re-instrumentation, or switching tools because you scaled out of them. If you really
-                    want to, we give you the credentials to directly access your data store to bring your own tools or
-                    export your data.
-                </p>
+                                </div>
+                            </div>
+                        ))}
 
-                <h2 id="context-warehouse-catalog" className={sectionHeadingClassName}>
-                    What's in your context warehouse
-                </h2>
-                <p>Use PostHog as the full context layer for your product, or mix and match with your own tools.</p>
-                {catalogSections.map((section) => (
-                    <div key={section.title} className="mb-8">
-                        <h3>{section.title}</h3>
-                        <ul className="not-prose list-none space-y-4 pl-0">
-                            {section.items.map((item) => (
-                                <li key={item.name}>
-                                    <Link
-                                        to={item.url}
-                                        state={{ newWindow: true }}
-                                        className="font-semibold text-primary"
-                                    >
-                                        {item.name}
-                                    </Link>
-                                    <p className="mb-0 mt-1 text-sm text-secondary">{item.description}</p>
-                                </li>
-                            ))}
-                        </ul>
+                        {/* Get started */}
+                        <div
+                            className={`not-prose relative my-6 overflow-hidden rounded-md border border-primary p-4 @md/reader-content:p-6 ${WINDOW_BG}`}
+                        >
+                            <div className="grid items-center gap-6 @lg/reader-content:grid-cols-[1fr_190px]">
+                                <div>
+                                    <h3 className="mt-0 mb-3 text-2xl font-bold">Get started</h3>
+                                    <p className="mt-0 mb-4 text-secondary">
+                                        Your first data source is free to connect. So is your second. By the time you've
+                                        connected your third, you'll stop thinking about your stack entirely, which is
+                                        the whole point.
+                                    </p>
+                                    <div className="flex flex-wrap items-center gap-3">
+                                        <CallToAction to={SIGNUP_URL} externalNoIcon size="md">
+                                            Get Connected
+                                        </CallToAction>
+                                        <p className="mb-0 text-sm text-secondary">
+                                            Not using PostHog?{' '}
+                                            <Link
+                                                to={SIGNUP_URL}
+                                                external
+                                                className="font-semibold text-red dark:text-yellow"
+                                            >
+                                                Sign up
+                                            </Link>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="hidden self-end -mb-4 @lg/reader-content:block @md/reader-content:-mb-6">
+                                    <CloudinaryImage
+                                        src={CTA_HOG_IMAGE}
+                                        alt="A hedgehog standing beside a data warehouse"
+                                        className="w-full !block"
+                                        imgClassName="w-full !block"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* FAQ */}
+                        <h2 className={sectionHeadingClassName}>FAQ</h2>
+                        <div className="not-prose mt-4">
+                            <Accordion
+                                type="multiple"
+                                triggerClassName="!px-3 !py-2"
+                                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
+                                items={faqItems}
+                            />
+                        </div>
                     </div>
-                ))}
-
-                <div className="not-prose relative overflow-hidden bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6">
-                    <h3 className="mt-0 mb-3 text-2xl font-bold">Get started</h3>
-                    <p className="mt-0 mb-4 text-secondary">
-                        Your first data source is free to connect. So is your second. By the time you've connected your
-                        third, you'll stop thinking about your stack entirely, which is the whole point.
-                    </p>
-                    <div className="flex flex-wrap items-center gap-3">
-                        <CallToAction to={SIGNUP_URL} externalNoIcon size="md">
-                            Get Connected
-                        </CallToAction>
-                        <p className="mb-0 text-sm text-secondary">
-                            Not using PostHog?{' '}
-                            <Link to={SIGNUP_URL} external className="font-semibold text-red dark:text-yellow">
-                                Sign up
-                            </Link>
-                        </p>
-                    </div>
-                </div>
-
-                <h2 className={sectionHeadingClassName}>FAQ</h2>
-                <div className="not-prose mt-4">
-                    <Accordion
-                        type="multiple"
-                        triggerClassName="!px-3 !py-2"
-                        contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
-                        items={faqItems}
-                    />
                 </div>
             </ReaderView>
         </>
