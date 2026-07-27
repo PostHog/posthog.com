@@ -219,7 +219,7 @@ if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
 
 Some frameworks construct the transport for you and don't expose `enableJsonResponse`, and a client that ignores the header falls back to a generated session per request either way. In both cases, group by user with [`identify`](/docs/mcp-analytics/identifying-users) — `distinct_id` groups a person's calls however many requests they span, and it requires nothing from the client. [Conversation IDs](/docs/mcp-analytics/conversation-id) give finer, per-conversation grouping when the agent cooperates.
 
-In **Python**, `instrument()` handles this automatically on a stateless `FastMCP(stateless_http=True)` server, with no `enableJsonResponse` equivalent to set (it mints from an ASGI layer, so JSON and SSE both work). A custom `PostHogMCP` dispatcher adds [`PostHogMcpStatelessSessionMiddleware`](/docs/mcp-analytics/custom-servers).
+In **Python**, session tokens work with any HTTP MCP server, and there's no `enableJsonResponse` caveat — the token is minted from an ASGI layer, so JSON and SSE both work. On a **FastMCP** server (official `mcp.server.fastmcp` or jlowin's `fastmcp` 2.0) it's zero-config: `instrument()` wraps the server's `streamable_http_app()` / `sse_app()` factories, so just set `stateless_http=True`. When you build the ASGI app yourself — a low-level `Server`, or a custom [`PostHogMCP`](/docs/mcp-analytics/custom-servers) dispatcher — add `PostHogMcpStatelessSessionMiddleware` to that app once.
 
 ## Python
 
