@@ -5857,9 +5857,9 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'SQL clients',
-                    url: '/docs/data-warehouse/managed-warehouse/connect',
-                    icon: 'IconTerminal',
+                    name: 'API',
+                    url: '/docs/data-warehouse/surfaces/api',
+                    icon: 'IconBrackets',
                     color: 'seagreen',
                 },
                 {
@@ -5940,6 +5940,12 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/managed-warehouse/setup',
                     icon: 'IconListCheck',
                     color: 'blue',
+                },
+                {
+                    name: 'Connect and query',
+                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    icon: 'IconTerminal',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Resources',
