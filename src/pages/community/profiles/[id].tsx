@@ -436,7 +436,7 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                             Only visible to moderators
                         </Tooltip>
                     </span>
-                    <a href={`mailto:${email}`} className="truncate text-right">
+                    <a href={`mailto:${email}`} className="truncate text-right underline font-medium">
                         {email}
                     </a>
                 </p>
