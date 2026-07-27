@@ -4964,6 +4964,10 @@
             "destination": "/handbook/brand/foundations"
         },
         {
+            "source": "/handbook/content/brand-message",
+            "destination": "/handbook/brand/foundations"
+        },
+        {
             "source": "/handbook/company/brand-assets",
             "destination": "/handbook/brand/assets"
         },
