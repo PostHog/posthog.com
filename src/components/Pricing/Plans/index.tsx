@@ -12,15 +12,7 @@ import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
-import pluralizeWord from 'pluralize'
-
-// Don't pluralize all-uppercase units like GB, MB, TB
-const pluralizeUnit = (unit: string, count: number): string => {
-    if (unit === unit.toUpperCase()) {
-        return unit
-    }
-    return pluralizeWord(unit, count)
-}
+import { pluralizeUnit } from '../utils'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -84,6 +76,9 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
         return null
     }
 
+    const freeAllocation = plans[0]?.free_allocation
+    const hasFreeAllocation = freeAllocation !== null && freeAllocation !== undefined
+
     const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
 
     useEffect(() => {
@@ -128,7 +123,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 index === 0 && up_to
                                     ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(unit, up_to)}`
                                     : index === 0 && !up_to
-                                    ? `Unlimited ${pluralizeUnit(unit, 2)}`
+                                    ? `${hasFreeAllocation ? 'Unlimited' : 'All'} ${pluralizeUnit(unit, 2)}`
                                     : !up_to
                                     ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                                     : `${
@@ -148,7 +143,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             <Title
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
-                                    plans[0].free_allocation === up_to ? (
+                                    hasFreeAllocation && freeAllocation === up_to ? (
                                         <strong>Free</strong>
                                     ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                         // last row

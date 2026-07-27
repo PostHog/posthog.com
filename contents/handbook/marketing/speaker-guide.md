@@ -86,7 +86,7 @@ A few principles for building out slides:
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
 * Speaking of speaker notes, you will save yourself time and head space if you always have notes.
 
-For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
+For feedback on design or help with navigating the [PostHog brand assets](/handbook/brand/assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
 
 ## **6. Practice out loud. Twice minimum.**
 
@@ -130,4 +130,4 @@ If you receive a question that you believe is off-topic or unfitting for the set
 * Feb 2026 - <TeamMember name="Michael Matloka"/> - [10 learning from launching an agentic AI product at scale](https://www.figma.com/slides/zMNBsNihNxKyS6z7sSwiRK/10-learnings-from-launching-an-agentic-AI-product-at-scale?t=6hlWStUDlHsITOKo-6)  
 * Nov 2025 - <TeamMember name="James Hawkins"/> - [How to build a cult](https://drive.google.com/file/d/1BMgl2y817m5t43D6NCr9hstnGO1kKxJy/view)  
 * Oct 2025 - <TeamMember name="Joshua Snyder"/> - [Code that fixes itself](https://docs.google.com/presentation/d/1sYsmTPugdttQqshPa6yIKQcUu5Rje3-fPMbRGtyrfZg/edit?slide=id.p#slide=id.p)  
-* Oct 2024 - <TeamMember name="Michael Matloka"/> - [Parsing at the speed of light](http://figma.com/slides/y0rMgEaWbYe0nSpEhWkyY6/Parsing-at-the-speed-of-metal?node-id=1-536&t=uiCktez3IWxAKI8D-0) 
+* Oct 2024 - <TeamMember name="Michael Matloka"/> - [Parsing at the speed of light](http://figma.com/slides/y0rMgEaWbYe0nSpEhWkyY6/Parsing-at-the-speed-of-metal?node-id=1-536&t=uiCktez3IWxAKI8D-0)

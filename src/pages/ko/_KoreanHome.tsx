@@ -16,7 +16,7 @@ import {
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -311,7 +311,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -360,7 +365,12 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },

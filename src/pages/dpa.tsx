@@ -787,7 +787,7 @@ function DpaGenerator() {
                                 mode === 'lawyer' && 'hidden'
                             }`}
                         >
-                            <img width={157} src="/brand/posthog-logo.svg" />
+                            <img src="/brand/posthog-logo.svg" alt="PostHog" />
                         </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
