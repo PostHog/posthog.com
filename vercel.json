@@ -4885,6 +4885,10 @@
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-industry-segments",
+            "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
             "source": "/startups/[...slug]",
             "destination": "/startups"
         },
