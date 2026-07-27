@@ -1,6 +1,12 @@
-import React from 'react'
+import { IconArrowLeft, IconArrowRight } from '@posthog/icons'
+import React, { useEffect, useRef } from 'react'
 import { SectionHeader, section } from './Sections'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+
+const CARD_GAP = 16
+const LOOP_COPIES = 5
+const LOOP_MIDDLE_INDEX = Math.floor(LOOP_COPIES / 2)
+const LOOP_RESET_DELAY = 100
 
 const purchasedWith = [
     {
@@ -31,6 +37,73 @@ const purchasedWith = [
 ]
 
 export default function PurchasedWith() {
+    const carouselRef = useRef<HTMLDivElement>(null)
+    const cycleWidthRef = useRef(0)
+
+    useEffect(() => {
+        const carousel = carouselRef.current
+        if (!carousel) return
+
+        let scrollEndTimer: ReturnType<typeof setTimeout> | undefined
+
+        const normalizeLoopPosition = () => {
+            const cycleWidth = cycleWidthRef.current
+            if (!cycleWidth) return
+
+            let nextScrollLeft = carousel.scrollLeft
+            while (nextScrollLeft < cycleWidth) nextScrollLeft += cycleWidth
+            while (nextScrollLeft >= cycleWidth * (LOOP_COPIES - 2)) nextScrollLeft -= cycleWidth
+
+            if (Math.abs(nextScrollLeft - carousel.scrollLeft) > 1) {
+                carousel.scrollLeft = nextScrollLeft
+            }
+        }
+
+        const measureCarousel = () => {
+            const cycleStarts = carousel.querySelectorAll<HTMLElement>('[data-carousel-cycle-start]')
+            if (cycleStarts.length < 2) return
+
+            const nextCycleWidth = cycleStarts[1].offsetLeft - cycleStarts[0].offsetLeft
+            if (nextCycleWidth <= 0) return
+
+            const previousCycleWidth = cycleWidthRef.current
+            carousel.scrollLeft = previousCycleWidth
+                ? (carousel.scrollLeft / previousCycleWidth) * nextCycleWidth
+                : cycleStarts[LOOP_MIDDLE_INDEX].offsetLeft - cycleStarts[0].offsetLeft
+            cycleWidthRef.current = nextCycleWidth
+            normalizeLoopPosition()
+        }
+
+        const handleScroll = () => {
+            if (scrollEndTimer) clearTimeout(scrollEndTimer)
+            scrollEndTimer = setTimeout(normalizeLoopPosition, LOOP_RESET_DELAY)
+        }
+
+        measureCarousel()
+        carousel.addEventListener('scroll', handleScroll, { passive: true })
+
+        const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(measureCarousel)
+        resizeObserver?.observe(carousel)
+        if (carousel.firstElementChild) resizeObserver?.observe(carousel.firstElementChild)
+
+        return () => {
+            if (scrollEndTimer) clearTimeout(scrollEndTimer)
+            carousel.removeEventListener('scroll', handleScroll)
+            resizeObserver?.disconnect()
+        }
+    }, [])
+
+    const scrollByCard = (direction: -1 | 1) => {
+        const carousel = carouselRef.current
+        const card = carousel?.querySelector('li')
+        if (!carousel || !card) return
+
+        carousel.scrollBy({
+            left: direction * (card.getBoundingClientRect().width + CARD_GAP),
+            behavior: 'smooth',
+        })
+    }
+
     return (
         <section className={`not-prose mb-8 @2xl:mb-12 ${section}`}>
             <SectionHeader>
@@ -40,27 +113,72 @@ export default function PurchasedWith() {
                 These are some products that pair well with PostHog to help you find product-market fit and maybe even
                 get to an IPO. (In fact, we use them ourselves!)
             </p>
-            <ScrollArea className="-mx-4">
-                <ul className="mt-4 list-none !px-4 pb-4 gap-4 grid grid-flow-col auto-cols-max scroll-snap-x snap-mandatory">
-                    {purchasedWith.map((product, index) => {
-                        const { name, description, logo } = product
-                        return (
-                            <li
-                                key={index}
-                                className="bg-white dark:bg-accent-dark border border-primary rounded-md w-80 p-4"
-                            >
-                                <div className="flex items-center space-x-2 mb-2">
-                                    <div className="size-8 relative">
-                                        <img className="inset-0 absolute object-contain" src={logo} />
-                                    </div>
-                                    <h5 className="m-0">{name}</h5>
-                                </div>
-                                <p className="m-0 text-[15px] opacity-75 leading-tight">{description}</p>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </ScrollArea>
+            <div className="relative mt-4 overflow-hidden rounded-xl border border-primary bg-accent/70 shadow-lg backdrop-blur-md">
+                <ScrollArea viewportRef={carouselRef} viewportClasses="scrollbar-hide">
+                    <ul
+                        id="purchased-with-carousel"
+                        className="!m-0 list-none !px-4 @md:!px-12 py-4 gap-4 grid grid-flow-col auto-cols-max snap-x snap-mandatory"
+                    >
+                        {Array.from({ length: LOOP_COPIES }, (_, cycleIndex) => (
+                            <React.Fragment key={cycleIndex}>
+                                {purchasedWith.map((product, productIndex) => {
+                                    const { name, description, logo } = product
+                                    return (
+                                        <li
+                                            key={`${cycleIndex}-${name}`}
+                                            data-carousel-cycle-start={productIndex === 0 ? '' : undefined}
+                                            aria-hidden={cycleIndex !== LOOP_MIDDLE_INDEX}
+                                            className="w-72 @xl:w-80 shrink-0 snap-start rounded-lg border border-primary bg-primary/80 p-4 shadow-sm backdrop-blur-sm"
+                                        >
+                                            <div className="flex items-center space-x-2 mb-2">
+                                                <div className="size-8 relative">
+                                                    <img
+                                                        className="inset-0 absolute object-contain"
+                                                        src={logo}
+                                                        alt={`${name} logo`}
+                                                    />
+                                                </div>
+                                                <h5 className="m-0">{name}</h5>
+                                            </div>
+                                            <p className="m-0 text-[15px] text-secondary leading-tight">
+                                                {description}
+                                            </p>
+                                        </li>
+                                    )
+                                })}
+                            </React.Fragment>
+                        ))}
+                    </ul>
+                </ScrollArea>
+
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-accent/95 via-accent/70 to-accent/0"
+                />
+                <button
+                    type="button"
+                    aria-label="Previous products"
+                    aria-controls="purchased-with-carousel"
+                    onClick={() => scrollByCard(-1)}
+                    className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full border border-primary bg-primary/80 p-2 shadow-md backdrop-blur-md transition hover:-translate-y-[calc(50%+1px)] active:-translate-y-1/2"
+                >
+                    <IconArrowLeft className="size-5" />
+                </button>
+
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-accent/95 via-accent/70 to-accent/0"
+                />
+                <button
+                    type="button"
+                    aria-label="Next products"
+                    aria-controls="purchased-with-carousel"
+                    onClick={() => scrollByCard(1)}
+                    className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full border border-primary bg-primary/80 p-2 shadow-md backdrop-blur-md transition hover:-translate-y-[calc(50%+1px)] active:-translate-y-1/2"
+                >
+                    <IconArrowRight className="size-5" />
+                </button>
+            </div>
         </section>
     )
 }

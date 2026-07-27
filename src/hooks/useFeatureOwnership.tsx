@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
+import TeamMember from '../components/TeamMember'
 
 export interface Feature {
     slug: string
@@ -62,7 +63,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -249,6 +250,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
+    'mcp-analytics': {
+        feature: 'MCP analytics',
+        owner: ['mcp-analytics'],
+        label: 'feature/mcp-analytics',
+    },
     'mcp-server': {
         feature: 'MCP server',
         owner: ['self-driving'],
@@ -327,14 +333,24 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
-        feature: 'PostHog Code',
-        owner: ['posthog-code'],
+        feature: 'PostHog Desktop',
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
         label: 'feature/home',
+    },
+    'project-secret-api-keys': {
+        feature: 'Project secret API keys',
+        owner: ['platform-features'],
+        notes: (
+            <>
+                <TeamMember name="Jovan Sakovic" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     'property-filters': {
         feature: 'Property filters',

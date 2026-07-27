@@ -5,6 +5,7 @@ import { ArrayCTA } from './components/ArrayCTA'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { ComparisonTable } from './components/ComparisonTable'
@@ -36,6 +37,7 @@ import TeamMember from './components/TeamMember'
 import WistiaEmbed from './components/WistiaEmbed'
 import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
+import PlatformInstall from './components/PlatformInstall'
 
 // Global MDX components
 export const shortcodes = {
@@ -43,6 +45,7 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -78,4 +81,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    PlatformInstall,
 }

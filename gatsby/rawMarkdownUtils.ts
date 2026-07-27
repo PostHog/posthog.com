@@ -350,8 +350,8 @@ const PLATFORM_ITEMS: PlatformItem[] = [
             'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
     },
     {
-        name: 'PostHog Code',
-        slug: 'code',
+        name: 'PostHog Desktop',
+        slug: 'desktop',
         layer: 'product',
         oneLiner:
             "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",
@@ -387,7 +387,12 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: 'How agents roll a change out and roll it back.',
     },
-    { name: 'Experiments', slug: 'experiments', layer: 'tool', oneLiner: 'The evaluation that proves a change worked.' },
+    {
+        name: 'Experiments',
+        slug: 'experiments',
+        layer: 'tool',
+        oneLiner: 'The evaluation that proves a change worked.',
+    },
     {
         name: 'Error tracking',
         slug: 'error-tracking',
@@ -430,7 +435,12 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: "How your product's context flows out to agents and tools.",
     },
-    { name: 'Workflows', slug: 'workflows', layer: 'tool', oneLiner: 'How agents act — automated actions in the loop.' },
+    {
+        name: 'Workflows',
+        slug: 'workflows',
+        layer: 'tool',
+        oneLiner: 'How agents act — automated actions in the loop.',
+    },
     {
         name: 'PostHog AI',
         slug: 'ai',

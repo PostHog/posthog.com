@@ -33,6 +33,14 @@ For example, if a user makes a purchase before being exposed to your pricing exp
 
 </CalloutBox>
 
+## Metric events don't need a variant property
+
+Only the **exposure event** determines which variant a user belongs to. Once a user is exposed, all of their metric events are attributed to that variant by matching on the user (and falling within the [conversion window](/docs/experiments/metrics#conversion-windows)).
+
+You do **not** need to add `$feature/<flag-key>` or any other flag property to your metric events. The variant tag matters only on the exposure event, and only for [custom exposure events](#custom-exposure-events). This is true for all metric types (mean, funnel, and ratio).
+
+If you've seen experiment results that look wrong, it's worth checking whether the variant on your **exposure** event is correct, see [exposure fired before the flag was ready](/docs/experiments/troubleshooting#my-exposure-event-has-the-wrong-variant-because-the-flag-wasnt-ready-when-it-fired).
+
 ## Exposure visualization
 
 The experiment view displays real-time exposure data to help you monitor participation:
@@ -150,7 +158,7 @@ PostHog automatically calculates SRM once your experiment has at least 100 total
 - **Green checkmark**: Distribution matches your split percentages. The observed difference is within normal random variation.
 - **Yellow warning**: Sample ratio mismatch detected. The distribution is significantly different from expected.
 
-PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-value is displayed alongside the status—a lower p-value indicates stronger evidence of a mismatch.
+PostHog uses a significance threshold of p < 0.001 to flag mismatches. The p-value is displayed alongside the status. A lower p-value indicates stronger evidence of a mismatch.
 
 ### What to do if SRM is detected
 
@@ -193,7 +201,7 @@ You can exclude internal team members and test accounts from your experiment by 
 
 - Verify your feature flag is active and returning variants
 - Check that `$feature_flag_called` events are being sent (or your custom exposure event)
-- Ensure the event includes the correct `$feature/<flag-key>` property
+- Ensure the **exposure event** carries the correct variant value: `$feature_flag_response` on `$feature_flag_called` events (set automatically by PostHog SDKs), or `$feature/<flag-key>` on a custom exposure event (which you must set yourself)
 
 ### Uneven variant distribution
 
@@ -204,5 +212,6 @@ You can exclude internal team members and test accounts from your experiment by 
 ### Metrics not updating
 
 - Remember that only post-exposure events count toward metrics
-- Confirm your metric events include the required variant property
+- Confirm there's a valid exposure event for the person (metric events are matched to a variant through that exposure, not through properties on the metric event itself)
 - Check that events are ordered correctly (exposure must come first)
+- Confirm metric events fall within the [conversion window](/docs/experiments/metrics#conversion-windows) after the first exposure

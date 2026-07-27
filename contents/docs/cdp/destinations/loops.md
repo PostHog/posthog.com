@@ -9,7 +9,7 @@ import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 
-You'll also need access to the relevant Loops account.
+You'll also need access to the relevant Loops account. See the [Loops PostHog integration guide](https://loops.so/docs/integrations/posthog) to configure and test both destination types.
 
 ## Installation
 

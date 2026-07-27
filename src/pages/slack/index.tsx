@@ -9,6 +9,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
+import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import {
     IconBell,
@@ -188,8 +189,12 @@ const featureTabs: TabbedCarouselTab[] = [
                 <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                     <p className="text-secondary text-sm my-3">
                         <strong>Bigger task?</strong>{' '}
-                        <Link to="/code" state={{ newWindow: true }} className="font-semibold text-primary underline">
-                            PostHog Code
+                        <Link
+                            to="/desktop"
+                            state={{ newWindow: true }}
+                            className="font-semibold text-primary underline"
+                        >
+                            PostHog Desktop
                         </Link>{' '}
                         runs parallel agents across repos, and longer-running tasks from a desktop app – the same agent,
                         more room to work.
@@ -306,7 +311,7 @@ const introCards: IntroCardProps[] = [
         icon: IconCode,
         iconColor: 'text-brown dark:text-brown-dark',
         bulletClass: 'bg-brown dark:bg-brown-dark',
-        href: '/code',
+        href: '/desktop',
         title: 'Coding',
         badge: 'Sandboxed',
         description: (
@@ -469,7 +474,7 @@ const compareRows: CompareRow[] = [
     },
     {
         label: 'Where it runs',
-        ai: "None – it's a panel in PostHog Cloud.",
+        ai: "None – it's a panel in PostHog Web.",
         slack: 'PostHog-managed cloud sandbox.',
         code: 'Local, an isolated worktree, or a PostHog-managed cloud sandbox.',
     },
@@ -484,24 +489,24 @@ const compareRows: CompareRow[] = [
 const compareLinks: { label: string; url: string }[] = [
     { label: 'PostHog AI', url: '/ai' },
     { label: 'PostHog Slack app', url: '#try' },
-    { label: 'PostHog Code', url: '/code' },
+    { label: 'PostHog Desktop', url: '/desktop' },
 ]
 
 const faqItems = [
     {
-        trigger: 'Do I need PostHog Code to use the PostHog Slack app?',
+        trigger: 'Do I need PostHog Desktop to use the PostHog Slack app?',
         content: (
             <p>
-                No. The Slack app isn't gated on a{' '}
+                No. The Slack app isn't gated behind{' '}
                 <Link
-                    to="/code"
+                    to="/desktop"
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
-                    PostHog Code
+                    PostHog Desktop
                 </Link>{' '}
-                subscription. They share the same coding agent under the hood – the Slack app is just the front door if
-                you'd rather work from a thread than a desktop app.
+                usage. They share the same coding agent under the hood – the Slack app is just the front door if you'd
+                rather work from a thread than a desktop app.
             </p>
         ),
     },
@@ -547,7 +552,7 @@ const faqItems = [
                     state={{ newWindow: true }}
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
-                    PostHog Code Slack docs
+                    PostHog Desktop Slack docs
                 </Link>{' '}
                 for the full command list.
             </p>
@@ -575,8 +580,8 @@ const faqItems = [
         content: (
             <p>
                 Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
-                <code>Generated-By: PostHog Code</code> line plus a <code>Task-Id</code> so you can trace it back. PRs
-                are authored under your name via your{' '}
+                <code>Generated-By: PostHog Desktop</code> line plus a <code>Task-Id</code> so you can trace it back.
+                PRs are authored under your name via your{' '}
                 <Link
                     to="https://app.posthog.com/settings/user-personal-integrations"
                     external
@@ -671,8 +676,8 @@ const fighterOptions: { icon: IconComponent; iconColor: string; label: React.Rea
         icon: IconCoffee,
         iconColor: 'text-brown dark:text-brown-dark',
         label: (
-            <Link to="/code" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Code
+            <Link to="/desktop" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog Desktop
             </Link>
         ),
         copy: 'For real engineering work – signals from the inbox, parallel agents, anything where you care about the diff before it ships.',
@@ -694,7 +699,7 @@ export default function SlackAppPage(): JSX.Element {
                 })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
-                <div className="max-w-2xl mx-auto">
+                <div>
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
                             Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
@@ -705,13 +710,10 @@ export default function SlackAppPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_update_docs_f0c917f70a.png"
-                        alt="@PostHog updating docs from a Slack thread"
-                        className="w-full !block m-0"
-                        imgClassName="w-full !block"
-                    />
-                    <hr className="border-t border-primary m-0 mb-6" />
+                    <div className="rounded overflow-hidden not-prose m-0">
+                        <WistiaEmbed mediaId="ifyltgbxid" />
+                    </div>
+                    <hr className="border-t border-primary m-0 mb-6 mt-6" />
 
                     <h3>
                         One hog, <Highlight>two jobs</Highlight>
@@ -822,6 +824,7 @@ export default function SlackAppPage(): JSX.Element {
                     <div className="not-prose my-6">
                         <OSTable
                             size="sm"
+                            width="full"
                             rowAlignment="top"
                             className="text-sm"
                             columns={[
@@ -880,6 +883,13 @@ export default function SlackAppPage(): JSX.Element {
                                         </Link>
                                     </span>
                                 </div>
+                                <p className="text-sm text-secondary mt-3 mb-0">
+                                    Read our{' '}
+                                    <Link to="/privacy" className="font-bold">
+                                        privacy policy
+                                    </Link>{' '}
+                                    to see how the PostHog Slack app collects, manages, and stores your data.
+                                </p>
                             </div>
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_chat_2_e5993b2331.png"

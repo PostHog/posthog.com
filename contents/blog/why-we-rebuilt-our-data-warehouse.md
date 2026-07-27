@@ -1,5 +1,5 @@
 ---
-title: Why we rebuilt on data warehouse on DuckDB over ClickHouse
+title: Why we rebuilt our data warehouse on DuckDB over ClickHouse
 date: 2026-06-29
 rootPage: /blog
 sidebar: Blog
@@ -86,7 +86,7 @@ We still support SQL for everything within PostHog. But you're free to connect a
 
 ## Good data = good context for agents
 
-The data warehouse is the context layer for AI-driven product development.
+The data warehouse is [the context layer for AI-driven product development](/blog/what-is-a-context-warehouse).
 
 Your failed queries, error patterns, conversion drops, and user behaviour as well as all your external data from places like Stripe, Postgres, and your CRM become [signals](/docs/self-driving/signals) and [context](/docs/self-driving/context) agents can act on. For agents to be effective, this data must be trustworthy, complete, and in one place. If your product data is in PostHog, your revenue data is in a warehouse, and your user data is somewhere else, any agent working with those signals is working with an incomplete picture or burning tokens to piece it together. 
 

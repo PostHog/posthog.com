@@ -1,53 +1,47 @@
-## Q2 2026 objectives
+## Q3 2026 objectives
 
-### Isolate ingestion Kafka topics
+### Scale PersonHog for person property updates
 
-Kafka infrastructure is shared across ingestion and other teams, making it much harder to maintain ingestion reliability and scale independently.
+Person property updates are the next bottleneck to prepare for scale, and PersonHog should own them end to end.
 
-- Separate Kafka infrastructure for ingestion from other teams
-- Evaluate WarpStream as a full MSK replacement
-- Fall back to multi-MSK cluster setup if WarpStream doesn't pan out
+- Ship the person property update service to handle all person property writes
+- Ship PersonHog Writer to flush the WAL Kafka backlog to Postgres
+- Ship the distinct ID reconciliation service to own distinct ID → person mapping, merges, and splits
+- Build operational tooling for etcd management, write validation, and cache/data validation
+- Validate ingestion team 2's write path against PersonHog
 
-### PersonHog
+### Harden the persons Postgres database
 
-Person processing should be stable and fully handled by PersonHog.
+The persons database needs headroom and consistency before it can scale further.
 
-- Route all reads and writes through PersonHog — no direct DB calls from other services
-- Define and guarantee SLAs for read/write latency and availability
-- Ship the read/write split architecture to production
-- Roll out safely with strong validation of data
+- Eliminate schema drift across prod US, prod EU, and dev
+- Upgrade Postgres to unlock the higher Aurora storage limit (additional 128TB)
+- Migrate integer ID columns nearing their limit to bigint
+- Partition the person distinct ID table
 
-### Redesign the capture contract
+### Faster, more reliable CI/CD
 
-Capture lacks the structure needed for strong rate limiting and efficient downstream processing.
+CI/CD is a recurring blocker to quick, safe iteration.
 
-- Define a new capture contract with a strict schema for all endpoints
-- Include critical metadata in headers so downstream consumers don't need to parse payloads
-- Standardize response and error codes for SDKs
-- Establish the SDK harness as the canonical way to stay on contract
-- Migrate all SDKs to the new contract
-- Enable rate limiting
+- Break ingestion into separate services and isolate ingestion code within the Node.js world
+- Add granular tests for ingestion and expand the e2e testing structure
+- Scope deployments to changed code so ingestion doesn't redeploy on every Node image change
+- Add canary deployments on the team 2 lane, gated by acceptance tests
 
-### Define and commit to ingestion SLAs
+### Add redundancy and fallback to capture
 
-The primary ingestion lane needs consistently low latency, not just high availability.
+We should never drop customer events, even when MSK is degraded.
 
-- Publish metrics and SLAs for all pipelines, especially the general lane
-- Automate monitoring to protect 99.99% of traffic from the 0.01% causing lag
+- Use WarpStream as a fallback for MSK in capture
+- Add a circuit breaker for MSK in capture
+- Define a replay process that preserves ordering guarantees, with runbooks
+- Run a successful failover drill on dev
 
-### Improve per-partition throughput
+### Help users self-troubleshoot ingestion issues
 
-Current per-partition processing speed won't support 10x growth.
+Most missing-data tickets stem from issues on the customer's side and consume valuable engineering time.
 
-- Benchmark and identify per-partition bottlenecks
-- Evaluate alternative languages or architectures
-- Reduce the number of running ingestion pods
-
-### Make ingestion pipelines easy to manage
-
-The ingestion team will own more pipelines over time and needs better tooling to manage them efficiently.
-
-- Make Helm charts easy to configure for deploying new pipelines
-- Provision metrics and alerting automatically with each pipeline
-- Build MCP tooling for interactive pipeline support
-
+- Ship an ingestion MCP for tracing events through the pipeline
+- Add an event ingestion tracker to follow events end to end through the pipeline
+- Improve ingestion warnings and surface them as signals
+- Build skills that let customers diagnose and resolve common ingestion issues themselves

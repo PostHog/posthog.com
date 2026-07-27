@@ -139,6 +139,11 @@ Founders must clearly explain why they couldn’t use the credit in time and pro
 
 If the Slack invite isn't sent or you discover founders did not receive it, you can [manually invite users](https://slack.com/help/articles/201980108-Add-people-to-a-channel) to the [#posthog-founders-club](https://posthog.slack.com/archives/C04J1TJ11UZ) channel. Make sure to select that they are "An external organization" when prompted right after adding their email address. A Slack admin will need to approve them before they're fully added to the channel.
 
-If they did not receive an automated coupon to order the [YC Kit from the merch store]((https://posthog.com/merch?product=posthog-yc-kit)), you can generate a new coupon code manually in the [Shopify admin view](https://admin.shopify.com/store/posthog/discounts/1234895798433). The easiest way to do that is to duplicate an existing coupon, regenerate the coupon code, and save it. You'll have to repeat the process for every founder.
+If they have trouble ordering their startup program merch or the [YC Kit from the merch store](/merch?product=posthog-yc-kit):
 
-Credentials for Zapier, Shoify, etc. are available in the shared 1Password account.
+- If they did not receive the automated coupon email, check the `startup_plan_customer_added` event or Customer.io email history to find which coupon codes were generated or sent, then send those links to the founder.
+- For Shopify access, look up the Shopify credentials in the shared 1Password account.
+- If there is no `startup_plan_customer_added` event or Customer.io email record, open the [Shopify discounts page](https://admin.shopify.com/store/posthog/discounts), pick an active discount for the same merch type, duplicate it, regenerate the coupon code, confirm it is limited to one use, and save it. You'll have to repeat the process for every founder.
+- If they have the codes but they no longer work, the most common issue is that the codes expired. Search for each code from the [Shopify discounts page](https://admin.shopify.com/store/posthog/discounts). If the codes expired and should still work for this founder, extend the end date on those specific codes, for example by another month. If the codes are missing, already used, or should not be reused, follow the same instructions above to create new ones.
+
+Credentials for Zapier, Shopify, etc. are available in the shared 1Password account.

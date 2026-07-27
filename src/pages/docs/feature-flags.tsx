@@ -9,6 +9,8 @@ import { IconCheck, IconLogomark } from '@posthog/icons'
 import FeatureFlagsInstallationPlatforms from '../../../contents/docs/feature-flags/installation/_snippets/installation-platforms'
 import { IconFlask, IconRewindPlay, IconTrends, IconMessage, IconWarning, IconDatabase } from '@posthog/icons'
 import Card from 'components/Card'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
 
 const phFeatures = [
     {
@@ -179,8 +181,13 @@ export const Content = () => {
 }
 
 const FeatureFlags: React.FC = () => {
+    // Feature Flags has no contents/docs/.../index.mdx (unlike session replay), so Handbook
+    // never serves this route – opt into the shared product tabs here instead.
+    const productData = useProduct({ handle: 'feature_flags' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="feature_flags" />}>
             <SEO title="Feature flags - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">

@@ -66,7 +66,7 @@ This iteration is guided by feedback. For us, this means reviewing:
 
 <Caption>Our most unhelpful docs 🙈</Caption>
 
-We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms).
+We take time every week to review these and make improvements to docs. We also benefit from a huge amount of small fixes from [our community](/blog/github-cms). 
 
 It is the repeated little improvements that creates a coveted polished docs experience.
 

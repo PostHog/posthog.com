@@ -61,7 +61,7 @@ The result is a set of tool handlers – one file per product area – ready to 
 
 ## 2. Meet agents at their level of abstraction
 
-To build an agent-first experience, you have to find the semantic layer where agents already reason best and meet them there.
+To build an [agent-first experience](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first), you have to find the semantic layer where agents already reason best and meet them there.
 
 This saves a ton of context (a precious resource) but the benefits are more than practical. They're fundamental. The more "raw" your product's agent interface is, the more creative potential you unlock.
 
@@ -129,7 +129,7 @@ Instead, think of it like onboarding a new employee who's already highly qualifi
 
 A bad manager micromanages every process – do A, then B, never C, and always D. A good manager trusts the hire and only steps in with the specific things they couldn't have known on their own.
 
-That's [what good skills look like](/handbook/engineering/ai/writing-skills).
+That's [what good skills look like](/handbook/engineering/ai/writing-skills). 
 
 They should only contain context that a human can provide since an agent can't discover by itself, such as:
 

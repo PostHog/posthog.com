@@ -175,11 +175,10 @@ const TeamsPage = () => {
                 title="Small teams"
                 hideTitle={false}
                 leftSidebar={<TreeMenu items={teamsNavigation} />}
-                homeURL="/teams"
-                description="PostHog teams and their missions"
                 proseSize="base"
                 onSearch={(query) => setSearchTerm(query)}
                 rightActionButtons={newTeamButton}
+                hideAppOptions
             >
                 <div className="@container">
                     <p className="mt-0">

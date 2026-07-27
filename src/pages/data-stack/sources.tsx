@@ -4,6 +4,7 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
+import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import DWInstallationPlatforms from './dw-installation-platforms'
 
 const LeftSidebarContent = () => {
@@ -14,11 +15,12 @@ export default function Sources(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data sources & import - PostHog data stack"
+                title="Data sources & import - PostHog context warehouse"
                 description="Learn about all the ways to get data into PostHog"
                 image="images/og/cdp.jpg"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Data sources & import (ELT)">
+                <WarehouseWizardHint className="my-4" />
                 <p>
                     Connect your external databases, SaaS tools, ad platforms, and more to sync data in bulk into your
                     PostHog warehouse for analysis and modeling. All events and user data captured via PostHog SDKs are
