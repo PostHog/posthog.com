@@ -1,0 +1,43 @@
+---
+title: Use Logs in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta, so some behaviors may still change.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is the surface for driving parallel agents that improve your product. For Logs, it's where you review and merge the [Self-driving](/docs/self-driving) work that your firing alerts generate. You don't browse raw log lines here – that's the [web app](/docs/logs/surfaces/web-app).
+
+## What you can do here
+
+When a [log alert](/docs/logs/alerts) starts firing, or breaks and auto-disables, it emits a signal into Self-driving. Related signals get grouped into a [report](/docs/self-driving/reports) with the logs behind them, and when there's a code fix, a drafted pull request.
+
+In PostHog Desktop you can:
+
+- Open a report to see the alert that triggered it, the matching logs, and any related errors and replays
+- Merge the pull request when the fix holds up, or steer the agent when it needs more context
+- Take a multi-repo fix over locally and keep going with a full agent
+
+Agents working in PostHog Desktop can also query your logs directly through the [MCP server](/docs/logs/surfaces/mcp), so a report can be investigated further without you switching tools.
+
+## What gets signalled
+
+Not every alert transition is worth waking an agent for. Only two are:
+
+| Transition | Why it's signalled |
+| --- | --- |
+| **Firing** | The threshold was crossed – something is worth investigating now |
+| **Broken** | The alert failed repeatedly and auto-disabled – your monitoring has a hole in it |
+
+Resolving alerts and transient errors are deliberately not signalled, so your Self-driving inbox stays about real problems.
+
+## Related
+
+- Create the alerts that feed this loop in [Set up log alerts](/docs/logs/alerts).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).
+- See what else feeds it in [signal sources](/docs/self-driving/inbox/sources).
+- Investigate the underlying logs in the [web app](/docs/logs/surfaces/web-app).
