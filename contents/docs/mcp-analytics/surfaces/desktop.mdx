@@ -10,33 +10,41 @@ PostHog Desktop is in beta.
 
 </CalloutBox>
 
-[PostHog Desktop](/docs/posthog-desktop) is where you review and merge the [Self-driving](/docs/self-driving) work that MCP Analytics generates. Your tool call telemetry doesn't just sit in a dashboard – a scout reads it, finds tools that need fixing, and hands concrete problems to a coding agent that opens a pull request.
+[PostHog Desktop](/docs/posthog-desktop) is where you act on the [Self-driving](/docs/self-driving) reports MCP Analytics generates. A scout reads your tool call telemetry, finds tools that need fixing, and files a report. Whether that report arrives with a pull request attached depends on who owns the server it's about.
 
-## How a tool problem becomes a pull request
+## Whether you get a pull request depends on who owns the server
 
-A scout watches `$mcp_tool_call` events for tools that need attention:
+The scout can only propose a code fix for code you control, so the same finding takes one of two paths:
+
+- **You own the server.** Your own MCP server, instrumented with the [`@posthog/mcp` SDK](/docs/mcp-analytics/installation). The report carries a **fix loop metric** – the number the fix is supposed to move – and auto-starts an implementation task. The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request.
+- **You don't own the server.** You're analyzing PostHog's hosted MCP server, which is what most projects are doing. The report is filed for human review with no repository attached, and nothing opens a pull request. Read it as an upstream bug report and decide what to do with it.
+
+Even on a server you own, a report that bundles unrelated fixes across several tools goes to a human – there's no single pull request that would cover it. The automatic path is for a concrete, localized change: a schema or description fix, or a bug in one handler.
+
+## What the scout watches
+
+A scout reads `$mcp_tool_call` events for tools that need attention:
 
 - **High failure rates** – a tool erroring far more than the rest
 - **Retries and hammering** – agents calling the same tool over and over to get what they need
 - **Slow or bloated responses** – calls that take too long or return so much that they crowd the agent's context
 
-It groups what it finds by tool category and files a report. When the problem is in a server your team owns, the report includes a **fix loop metric** – the number the fix is supposed to move – and auto-starts an implementation task. The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request.
-
-Problems found in PostHog's hosted MCP server that your team doesn't own are filed for human review instead, with no repository attached.
+It weighs each of these by volume and reach, so a tool failing for one developer in one session doesn't earn a report. What clears the bar gets grouped by the team that owns the tools and filed as a single report.
 
 ## What you can do here
 
 - **Read the report** – the failing tool, the pattern behind it, and the evidence from real calls.
 - **Ask questions** – start a research task against the report to dig further before acting.
-- **Create a PR** – auto-started for owned servers, or kick one off manually.
-- **Watch the agent work** – follow the live transcript and review the files it changed.
+- **Watch the agent work** – when there's an implementation task, follow the live transcript and review the files it changed.
 - **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
 
 Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
 
 ## Start a fix yourself
 
-You don't have to wait for the scout. The **Create fix task** button on the [tool quality view](/docs/mcp-analytics/surfaces/web-app#tool-quality) starts the same coding agent run from a specific tool's failures.
+You don't have to wait for the scout, and you don't need it to have taken the automatic path. The **Create fix task** button on the [tool quality view](/docs/mcp-analytics/surfaces/web-app#tool-quality) starts the same coding agent run from a specific tool's failures.
+
+It needs the GitHub integration connected – the button stays disabled without it – and you pick the repository the agent works in. That's the same constraint as the automatic path, just made explicit: the agent can only fix a codebase you've pointed it at.
 
 ## Related
 
