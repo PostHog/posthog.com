@@ -59,7 +59,7 @@ PostHog should feel:
 
 ## Who we're talking to
 
-Our primary audience is **product engineers** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
+Our primary audience is **AI-pilled builderss** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
 
 We should assume our audience either has to do technical work or wants to, regardless of whether they can code. Most of them are developers, and for the rest, we're the bridge, giving everyone direct access to data and the power to ship.
 
@@ -162,8 +162,8 @@ This is our shared messaging framework. For the full context behind it, see the 
 
 - **Product name and one line description**
   - PostHog makes your product self-driving. Hand off issues, the analysis, and the grunt work, and put your time where it counts - figuring out what customers want and shipping it.
-- **Market category and sub-category**
-  - Market category: Self-driving AI systems. Sub-category: Self-driving software product platforms.
+- **Market category**
+  - Self-driving software product platforms.
 - **Competitive alternatives**
   - Anthropic (with very thin product context via MCP)
   - Snowflake (without the coding)
