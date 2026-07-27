@@ -30,11 +30,15 @@ const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
                 </div>
 
                 {hog?.src && (
-                    <div className="hidden @2xl:block absolute bottom-0 right-0 h-full pointer-events-none select-none">
+                    <div
+                        className={`hidden @2xl:block absolute bottom-0 right-0 w-full pointer-events-none select-none ${
+                            hog.footerClasses || 'max-w-[400px]'
+                        }`}
+                    >
                         <CloudinaryImage
                             src={hog.src}
                             alt={hog.alt || ''}
-                            className="h-full w-auto object-contain object-bottom opacity-80"
+                            className="object-contain object-bottom opacity-80"
                         />
                     </div>
                 )}

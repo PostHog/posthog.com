@@ -98,6 +98,7 @@ interface ReaderViewProps {
     title?: string
     header?: React.ReactNode
     hideTitle?: boolean
+    belowTitle?: React.ReactNode
     tableOfContents?: any
     hideMobileTableOfContents?: boolean
     mdxComponents?: any
@@ -424,6 +425,7 @@ export default function ReaderView({
     title,
     header,
     hideTitle = false,
+    belowTitle,
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
@@ -459,6 +461,7 @@ export default function ReaderView({
                 title={title}
                 header={header}
                 hideTitle={hideTitle}
+                belowTitle={belowTitle}
                 tableOfContents={tableOfContents}
                 hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
@@ -1346,6 +1349,7 @@ function ReaderViewContent({
     title,
     header,
     hideTitle = false,
+    belowTitle,
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
@@ -1593,6 +1597,19 @@ function ReaderViewContent({
                                         >
                                             {title}
                                         </h1>
+                                    )}
+                                    {belowTitle && (
+                                        <div
+                                            className={`my-4 transition-all ${
+                                                fullWidthContent || body?.type !== 'mdx'
+                                                    ? 'max-w-full'
+                                                    : contentMaxWidthClass
+                                                    ? contentMaxWidthClass
+                                                    : 'mx-auto max-w-2xl'
+                                            }`}
+                                        >
+                                            {belowTitle}
+                                        </div>
                                     )}
                                     {(body?.date || body?.contributors || body?.tags) && (
                                         <div

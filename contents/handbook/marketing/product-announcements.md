@@ -85,7 +85,7 @@ For new product announcements we generally apply the following best practices:
 - Ensure the product has at least one tutorial created for it at launch. [example](/docs/feature-flags/tutorials)
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
-- Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" />)
+- Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" /> as part of the product's release)
 - Add a 🚀 annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the launch date, so the launch's impact is visible on dashboards.
 - Submit an [art request](/handbook/brand/art-requests) for any creative assets needed for the email campaign, blog post, social media posts etc...
 
