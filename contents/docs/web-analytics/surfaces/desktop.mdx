@@ -1,5 +1,5 @@
 ---
-title: Act on traffic findings in PostHog Desktop
+title: Review traffic findings in PostHog Desktop
 sidebar: Docs
 showTitle: true
 ---
@@ -10,7 +10,9 @@ PostHog Desktop is in beta. This page is a work in progress.
 
 </CalloutBox>
 
-[PostHog Desktop](/docs/posthog-desktop) is where you review and act on the [Self-driving](/docs/self-driving) work your traffic generates. Your sessions don't just sit in a dashboard – a scout reads them, finds segments that have stepped away from their own baseline, and files each one as a report you can act on.
+[PostHog Desktop](/docs/posthog-desktop) is where you read the [Self-driving](/docs/self-driving) reports your traffic produces. Your sessions don't just sit in a dashboard – a scout reads them, finds segments that have stepped away from their own baseline, and writes each one up for a human.
+
+Unlike [error tracking](/docs/error-tracking), these scouts stop at the report. They don't open a draft pull request – see [why](#why-there-is-usually-no-pull-request) below.
 
 {/* TODO: screenshot of a web-analytics-sourced report in PostHog Desktop */}
 
@@ -22,14 +24,22 @@ A scout watches your `sessions` data for the changes a site-wide total hides:
 - **Attribution breakage** – campaign traffic that didn't disappear but got reclassified into Direct or Unknown because UTM tagging or referrer propagation broke. The tell is paired opposite moves between channels that net to zero in the total.
 - **Site-health steps** – a landing page whose bounce rate steps above its own history, a 404 surface spiking, or an entry path cliffing.
 
-Each finding is compared against the same window 7, 14, 21, and 28 days back, so day-of-week seasonality doesn't get mistaken for a change. A separate scout does the same for [web vitals](/docs/web-analytics/web-vitals) regressions per page.
+Each finding is compared against the same window 7, 14, 21, and 28 days back, so day-of-week seasonality doesn't get mistaken for a change. A second scout does the same for [web vitals](/docs/web-analytics/web-vitals) regressions per page, banding each metric by device and connection rather than averaging fast and slow visitors together.
+
+A report only gets filed when the scout has named the specific segment, dated the onset, and can show that the aggregate held – that last part is what makes a segment-level finding worth your time. A regression it has already reported gets the new window appended to the existing report, so a problem that persists stays one item in your inbox.
+
+## Why there is usually no pull request
+
+Web analytics findings are mostly not code problems, and even when they are, the code usually isn't somewhere PostHog can reach. An SEO drop, a paused ad account, a referrer going dark, or a campaign missing its UTM tags lives in your site, your campaign tooling, or your marketing stack – not in a repository a coding agent can open a pull request against.
+
+So both scouts default to filing the finding as a report for a human reviewer. The rare exception is a finding whose fix is well-localized in a repository the scout can confidently name from your project context – a web vitals regression traced to a specific asset, say. That path exists, but it isn't the default, and you shouldn't plan around it.
 
 ## What you can do here
 
-- **Read the report** – the segment, the date it moved, and the queries behind it.
+- **Read the report** – the segment, the date it moved, the queries behind it, and for a web vitals finding, a cause hypothesis and suggested remediation.
 - **Ask questions** – start a research task against the report to dig further before acting.
-- **Get a pull request** – when the cause is in code your team owns, like missing UTM tagging on a link or a broken redirect, a coding agent opens a draft PR.
-- **Merge** – the pull request opens on GitHub, so a human is always the last step.
+- **See the history** – a divergence that keeps recurring is one report with each window appended, so you can tell whether it's getting worse or recovering.
+- **Decide what happens next** – fix the tagging, restart the ad account, chase the broken redirect, or mark it as expected. It's your call, and nothing happens until you make it.
 
 ## Related
 

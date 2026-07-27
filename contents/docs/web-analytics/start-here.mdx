@@ -6,7 +6,7 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import { IconCursorClick, IconShield, IconGraph, IconNotebook, IconGithub } from '@posthog/icons'
+import { IconCursorClick, IconShield, IconGraph, IconNotebook, IconPerson } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's get your traffic flowing!" lastSpeechBubble="You're ready to read your traffic!">
 
@@ -87,7 +87,7 @@ You don't have to open the app to answer a traffic question. [PostHog AI](/docs/
 
 <QuestLogItem title="Let Self-driving watch it for you" subtitle="Traffic feeds the inbox" icon="IconMagic">
 
-Nobody checks a dashboard every day. Your traffic is a signal source for [Self-driving](/docs/self-driving): a scout compares each channel, entry path, and referrer against its own seasonality-matched baseline and files a report when one steps out of line – an SEO drop, a paused ad account, broken UTM tagging – even when the site-wide total looks fine.
+Nobody checks a dashboard every day. Your traffic is a signal source for [Self-driving](/docs/self-driving): a scout compares each channel, entry path, and referrer against its own seasonality-matched baseline and files a report when one steps out of line – an SEO drop, a paused ad account, broken UTM tagging – even when the site-wide total looks fine. The report goes to a human reviewer, not to a coding agent, because the fix usually lives in your site or campaign tooling rather than a repository.
 
 <div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
   <span className="flex items-center gap-1.5 text-sm text-secondary">
@@ -101,8 +101,8 @@ Nobody checks a dashboard every day. Your traffic is a signal source for [Self-d
   </span>
   <span className="text-muted" aria-hidden="true">→</span>
   <span className="flex items-center gap-1.5 text-sm text-secondary">
-    <IconGithub className="size-5 shrink-0" />
-    Pull request
+    <IconPerson className="size-5 shrink-0" />
+    Human review
   </span>
 </div>
 
