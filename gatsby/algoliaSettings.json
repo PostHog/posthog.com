@@ -1,9 +1,4 @@
 {
-    "minWordSizefor1Typo": 4,
-    "minWordSizefor2Typos": 8,
-    "hitsPerPage": 20,
-    "maxValuesPerFacet": 100,
-    "minProximity": 2,
     "searchableAttributes": [
         "unordered(canonicalTerms)",
         "unordered(title)",
@@ -12,31 +7,9 @@
         "unordered(slug)",
         "unordered(excerpt)"
     ],
-    "numericAttributesToIndex": null,
-    "attributesToRetrieve": null,
-    "distinct": false,
-    "unretrievableAttributes": ["fields.pageViews", "headings", "rawBody"],
-    "optionalWords": null,
-    "attributesForFaceting": ["type"],
-    "attributesToSnippet": null,
-    "attributesToHighlight": null,
-    "paginationLimitedTo": 1000,
-    "attributeForDistinct": null,
-    "exactOnSingleWordQuery": "attribute",
-    "ranking": ["typo", "geo", "words", "filters", "proximity", "attribute", "exact", "custom"],
     "customRanking": ["asc(path_ranking)", "desc(fields.pageViews)"],
-    "separatorsToIndex": "",
-    "removeWordsIfNoResults": "lastWords",
-    "queryType": "prefixLast",
-    "highlightPreTag": "<em>",
-    "highlightPostTag": "</em>",
-    "snippetEllipsisText": "",
-    "alternativesAsExact": ["ignorePlurals", "singleWordSynonym"],
-    "renderingContent": {
-        "facetOrdering": {
-            "facets": {
-                "order": ["type"]
-            }
-        }
-    }
+    "attributesForFaceting": ["type"],
+    "unretrievableAttributes": ["fields.pageViews", "headings", "rawBody"],
+    "minProximity": 2,
+    "removeWordsIfNoResults": "lastWords"
 }

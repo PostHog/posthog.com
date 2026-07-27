@@ -8,7 +8,10 @@ const PATH_RANKING = {
     generic: 10,
 }
 
-const ROUTE_SEARCH_TERMS = {
+// Hand-curated canonical routes. Listing a path here has three effects: it gets top ranking
+// (PATH_RANKING.canonical), it gets canonicalTerms built from its title, and the terms below are
+// indexed as searchable headings. Don't add a path just to give it search terms — that promotes it.
+const CANONICAL_ROUTES = {
     '/': ['Home', 'Homepage', 'PostHog homepage'],
     '/docs': ['Documentation', 'PostHog docs', 'Get started', 'Important links'],
     '/handbook': ['Company', 'How we work', 'People', 'Engineering', 'Design', 'Sales & marketing'],
@@ -77,25 +80,26 @@ const EXCLUDED_PAGE_PATTERNS = [
     /\.[a-z0-9]{2,5}(?:\/|$)/i,
 ]
 
-const ACRONYMS = new Map([
-    ['ai', 'AI'],
-    ['api', 'API'],
-    ['baa', 'BAA'],
-    ['bi', 'BI'],
-    ['cdp', 'CDP'],
-    ['dpa', 'DPA'],
-    ['dw', 'DW'],
-    ['elt', 'ELT'],
-    ['etl', 'ETL'],
-    ['eu', 'EU'],
-    ['llm', 'LLM'],
-    ['mcp', 'MCP'],
-    ['os', 'OS'],
-    ['sdk', 'SDK'],
-    ['sql', 'SQL'],
-    ['sso', 'SSO'],
-    ['ui', 'UI'],
-    ['url', 'URL'],
+// Words uppercased when turning path segments into titles and search terms.
+const ACRONYMS = new Set([
+    'ai',
+    'api',
+    'baa',
+    'bi',
+    'cdp',
+    'dpa',
+    'dw',
+    'elt',
+    'etl',
+    'eu',
+    'llm',
+    'mcp',
+    'os',
+    'sdk',
+    'sql',
+    'sso',
+    'ui',
+    'url',
 ])
 
 const normalizePath = (value) => {
@@ -106,7 +110,7 @@ const normalizePath = (value) => {
 const humanizeSegment = (segment) =>
     segment
         .split('-')
-        .map((word) => ACRONYMS.get(word.toLowerCase()) || word)
+        .map((word) => (ACRONYMS.has(word.toLowerCase()) ? word.toUpperCase() : word))
         .join(' ')
 
 const titleForPath = (path) => {
@@ -125,6 +129,8 @@ const toolPathsFromNodes = (tools) =>
 
 const exactToolForPath = (path, tools) => tools.find(({ path: toolPath }) => path === toolPath)
 
+// The `tools` type is reserved for the one canonical page per tool. Subpages of a tool's path
+// (e.g. /session-replay/pricing, /data-stack/warehouse-native) are slotted into `docs` instead.
 const hasToolAncestor = (path, tools) =>
     tools.some(({ path: toolPath }) => path !== toolPath && path.startsWith(`${toolPath}/`))
 
@@ -139,7 +145,7 @@ const typeForPath = (path, exactTool, toolPaths) => {
 }
 
 const isCanonicalPath = (path, exactTool) =>
-    path === '/' || Boolean(exactTool) || Object.prototype.hasOwnProperty.call(ROUTE_SEARCH_TERMS, path)
+    path === '/' || Boolean(exactTool) || Object.prototype.hasOwnProperty.call(CANONICAL_ROUTES, path)
 
 const canonicalTermsForPath = (path, title, tool) => {
     const names = [title, tool?.name, ...(tool?.aliases || [])].filter(Boolean)
@@ -154,10 +160,12 @@ const canonicalTermsForPath = (path, title, tool) => {
     ].filter(Boolean)
 }
 
-const searchTermsForPath = (path, tool) => [
+// Humanized path segments stand in for headings only on pages with no MDX content — content
+// pages already match via their real title/headings, and segments are searchable via `slug`.
+const searchTermsForPath = (path, tool, { includePathSegments }) => [
     ...new Set([
-        ...path.split('/').filter(Boolean).map(humanizeSegment),
-        ...(ROUTE_SEARCH_TERMS[path] || []),
+        ...(includePathSegments ? path.split('/').filter(Boolean).map(humanizeSegment) : []),
+        ...(CANONICAL_ROUTES[path] || []),
         ...(tool ? [tool.name, ...(tool.aliases || [])] : []),
     ]),
 ]
@@ -206,7 +214,7 @@ const createPageRecord = (page, content, toolPaths) => {
     const exactTool = exactToolForPath(path, toolPaths)
     const title = exactTool?.searchTitle || exactTool?.name || content?.frontmatter.title || titleForPath(path)
     const description = descriptionForTool(exactTool) || content?.excerpt || ''
-    const searchTerms = searchTermsForPath(path, exactTool)
+    const searchTerms = searchTermsForPath(path, exactTool, { includePathSegments: !content })
     const slugger = new Slugger()
     const isCanonical = isCanonicalPath(path, exactTool)
 

@@ -23,6 +23,7 @@ import {
     IconAI,
     IconSupport,
     IconTestTube,
+    IconTarget,
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
@@ -111,6 +112,18 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
+        },
+        // A UI-only product card that shares AI Observability's page, not a canonical tool with its own root page.
+        {
+            name: 'AI Evals',
+            Icon: IconTarget,
+            description: 'Run LLM-as-a-judge evaluations to catch regressions.',
+            handle: 'llm_evals',
+            color: 'blue',
+            colorSecondary: 'blue',
+            category: 'ai',
+            slug: 'ai-observability',
+            status: 'beta',
         },
         // A feature of Experiments used in product UI, not a canonical tool with its own root page.
         {
