@@ -1,0 +1,106 @@
+---
+title: Prometheus scraping installation
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import MetricsNextSteps from "./_snippets/metrics-next-steps.mdx";
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+If your services already expose Prometheus `/metrics` endpoints, the PostHog metrics agent scrapes them and forwards metrics to PostHog as OTLP – no SDK changes, no new instrumentation. Run a single container and your existing counters, gauges, and histograms appear in PostHog within seconds.
+
+Under the hood the agent is a pinned [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) (contrib distribution) with a PostHog-rendered config: prometheus receiver → memory limiter + batch → OTLP/HTTP exporter pointed at PostHog ingestion.
+
+<Steps>
+
+<Step title="Run the agent" badge="required">
+
+Start the agent with Docker, passing your project token and the targets to scrape:
+
+```bash
+docker run -d --name posthog-metrics-agent \
+  -e POSTHOG_API_KEY=<ph_project_token> \
+  -e POSTHOG_HOST=<ph_client_api_host> \
+  -e SCRAPE_TARGETS=your-app:9090,your-worker:9091 \
+  posthog/metrics-agent:latest
+```
+
+Use your **project token** (starts with `phc_`), not a [personal API key](/docs/api#authentication).
+
+EU cloud: set `POSTHOG_HOST=https://eu.i.posthog.com`.
+
+</Step>
+
+<Step title="Configure environment variables" badge="required">
+
+| Variable              | Required | Default                    | Description                                             |
+| --------------------- | -------- | -------------------------- | ------------------------------------------------------- |
+| `POSTHOG_API_KEY`     | yes      | —                          | Project token, sent as `Authorization: Bearer`          |
+| `POSTHOG_HOST`        | no       | `https://us.i.posthog.com` | PostHog ingestion origin                                |
+| `SCRAPE_TARGETS`      | yes\*    | —                          | Comma-separated `host:port` list to scrape              |
+| `SCRAPE_INTERVAL`     | no       | `15s`                      | How often to scrape each target                         |
+| `SCRAPE_METRICS_PATH` | no       | `/metrics`                 | Path on each target that serves metrics                 |
+| `SCRAPE_JOB_NAME`     | no       | `posthog-metrics-agent`    | Prometheus job name – becomes `service_name` in PostHog |
+| `POSTHOG_DEBUG`       | no       | unset                      | Set to `1` or `true` to log exported batches to stdout  |
+
+\* Not required when you mount custom scrape configs (see next step).
+
+</Step>
+
+<Step title="Use custom scrape configs" badge="optional">
+
+The agent checks for config overrides in this order:
+
+1. **Full config override** – mount a complete OpenTelemetry Collector config at `/etc/posthog/config.yaml`. It's used verbatim, but `${env:POSTHOG_API_KEY}`-style references still resolve.
+2. **Custom scrape configs** – mount a YAML list of Prometheus `scrape_configs` at `/etc/posthog/scrape_configs.yaml` to replace the env-generated scrape job while keeping the PostHog exporter wiring.
+3. **Environment variables** – if neither file exists, the scrape job is rendered from `SCRAPE_TARGETS`.
+
+When writing custom scrape configs, add `scrape_protocols` to each job so exemplars are preserved:
+
+```yaml
+- job_name: "my-service"
+  scrape_interval: 15s
+  scrape_protocols: [OpenMetricsText1.0.0, OpenMetricsText0.0.1, PrometheusText0.0.4]
+  static_configs:
+    - targets: ["my-service:9090"]
+```
+
+</Step>
+
+<Step title="Enable exemplars for trace linking" badge="optional">
+
+The agent negotiates OpenMetrics when scraping, so exemplar `trace_id` and `span_id` labels on counters and histogram buckets are converted to OTLP exemplars and linked to traces in PostHog automatically.
+
+For this to work, your application's Prometheus client must be configured to attach exemplars (for example, prom-client's `enableExemplars` or a span-context supplier in Micrometer). If your endpoint only serves classic Prometheus text, metrics still flow but without trace links.
+
+Exemplars exist only on counters and histogram buckets – gauges never have them.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+1. Check container logs for scrape activity: `docker logs posthog-metrics-agent`
+2. Open [**Metrics**](https://app.posthog.com/metrics) in the PostHog sidebar and pick your metric from the name picker
+3. Data points should appear within about 15 seconds (the default scrape interval)
+
+If nothing shows up, check that `POSTHOG_API_KEY` starts with `phc_` and that the target `host:port` is reachable from the container. Set `POSTHOG_DEBUG=1` to log exported batches.
+
+<CallToAction type="primary" to="https://app.posthog.com/metrics">
+  View your metrics in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Important notes" badge="info">
+
+- **One `service_name` per scrape job** – Prometheus `job_name` maps to `service_name` in PostHog. Run one agent (or one mounted scrape job) per logical service if you need distinct service names.
+- **Run a single replica** – two agents scraping the same targets double-count every metric.
+- **Keep label cardinality low** – avoid user IDs, request IDs, or timestamps as label values. Each unique combination creates a new series.
+- **Health endpoint** – the agent exposes a health check at `:13133` for liveness and readiness probes.
+
+</Step>
+
+<MetricsNextSteps />
+
+</Steps>
