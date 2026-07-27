@@ -2802,6 +2802,10 @@ export const docsMenu = {
                             url: '/docs/api/personal-api-keys',
                         },
                         {
+                            name: 'Project secret API keys',
+                            url: '/docs/api/project-secret-api-keys',
+                        },
+                        {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
                         },
