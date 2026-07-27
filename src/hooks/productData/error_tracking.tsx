@@ -220,7 +220,7 @@ export const errorTracking = {
         },
         {
             question: 'How can I reduce error tracking costs?',
-            url: '/docs/error-tracking/cutting-costs',
+            url: '/docs/error-tracking/pricing',
         },
         {
             question: 'How do stack traces work?',
