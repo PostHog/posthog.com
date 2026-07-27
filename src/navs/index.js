@@ -574,10 +574,6 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Brand guidelines and messaging',
-                url: '/handbook/content/brand-message',
-            },
-            {
                 name: 'Video',
                 url: '/handbook/marketing/video',
                 children: [
