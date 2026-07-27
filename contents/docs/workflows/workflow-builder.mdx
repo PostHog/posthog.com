@@ -79,6 +79,8 @@ To set this up:
 Batch triggers let you run a workflow for each person in an audience you define, optionally on a recurring schedule.
 When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person. If the workflow contains an [email dispatch](#dispatches), PostHog automatically deduplicates recipients by email address so each unique address receives only one email.
 
+For a deeper guide to one-time and recurring sends to a whole audience, see [Broadcasts and batch triggers](/docs/workflows/broadcasts).
+
 A batch trigger combines two things:
 
 - **Audience filters** — who should enter the workflow
@@ -179,7 +181,7 @@ Delays help you control the timing of your messages. There are 3 types of delays
 | Wait until condition   | Wait until a specific condition is met (e.g. user has property set to a specific value). |
 | Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                      |
 
-You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
+For a deeper guide to each delay type, including how to use **wait until condition** to build drip campaigns, see [Delays](/docs/workflows/delays). You can also see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
 
 ### Waiting for events
 

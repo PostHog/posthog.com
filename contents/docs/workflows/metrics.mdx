@@ -1,0 +1,58 @@
+---
+title: Metrics
+sidebar: Docs
+showTitle: true
+---
+
+Every workflow has a **Metrics** tab that shows how it's performing, how many people entered it, how many messages were sent and delivered, where things failed, and (if you've set a conversion goal) how many people converted. Metrics are recorded automatically for every enabled workflow, so there's nothing to configure to start seeing them.
+
+Metrics reflect **production traffic only**. [Test sends](/docs/workflows/launch-workflow) from the workflow builder are excluded so your numbers reflect real users, not your own testing.
+
+## What the metrics show
+
+The Metrics tab presents a set of cards and line charts over the date range you select. The exact tiles depend on what your workflow does (a Slack-only workflow won't show email opens, for example), but the common ones are:
+
+| Metric | What it counts |
+| --- | --- |
+| Triggered | Workflow runs that started, i.e. people who entered the workflow |
+| Succeeded | Runs that completed their steps without error |
+| Sent | Emails handed to the provider for delivery |
+| Delivered | Emails accepted by the recipient's mail server |
+| Opened | Emails opened (requires engagement events) |
+| Clicked | Tracked links clicked (requires engagement events) |
+| Bounced | Emails that hard- or soft-bounced |
+| Blocked | Emails marked as spam or otherwise blocked |
+| Failed | Steps that errored for another reason |
+| Converted | People who met the [conversion goal](/docs/workflows/workflow-builder#conversion-goals) |
+| Conversion rate | Converted divided by started runs, capped at 100% |
+
+Open and click metrics depend on [email engagement events](/docs/workflows/engagement-events) being enabled. Without them, you'll still see operational metrics like triggered, sent, delivered, and bounced.
+
+## How to use metrics
+
+Use the Metrics tab to answer questions like:
+
+- **Is the workflow running?** Check **Triggered** and **Succeeded** are climbing after you enable it.
+- **Are messages landing?** Compare **Sent**, **Delivered**, and **Bounced**. A high bounce or block rate points to a deliverability or list-quality problem.
+- **Are people engaging?** Watch **Opened** and **Clicked** to gauge whether your content is resonating.
+- **Is it working?** If you've set a conversion goal, **Converted** and **Conversion rate** tell you whether the workflow is actually moving the metric you care about.
+
+### Drill into individual invocations
+
+The failure tiles are clickable. Click **Bounced** or **Blocked** to jump straight to the **Invocations** tab, filtered to the invocations that experienced that failure within the selected timeframe, so you can debug specific messages. Click **View converted users** on the conversion cards to see the list of people who completed the goal.
+
+## Metrics for batch triggers
+
+For [batch-triggered workflows](/docs/workflows/broadcasts), metrics are **aggregated by run** rather than streamed continuously. Each time the batch executes, whether it's a one-time send or one tick of a recurring schedule, it counts as a run, and the metrics for that run summarize how the whole audience fared: how many people were triggered, how many messages sent and delivered, how many bounced, and how many converted.
+
+This makes it easy to compare one send against another. For a recurring broadcast, you can see at a glance whether last Monday's digest had a better open or conversion rate than this Monday's, because each run rolls its audience up into a single set of numbers instead of blending every send together.
+
+## Metrics vs. workflow events
+
+Metrics are the per-step counters shown inside the Workflows product, ideal for operational monitoring of a single workflow. For cross-product analysis, PostHog also captures [workflow events](/docs/workflows/engagement-events) (like `$workflows_email_opened` and `$workflows_conversion`) as standard events you can use in insights, funnels, retention reports, and dashboards anywhere in PostHog. The two are complementary: metrics for in-product monitoring, events for everything else.
+
+## Further reading
+
+- [Workflow events](/docs/workflows/engagement-events) – measure opens, clicks, and conversions across PostHog
+- [Broadcasts and batch triggers](/docs/workflows/broadcasts) – one-time and recurring sends to an audience
+- [Best practices](/docs/workflows/best-practices) – what to monitor once a workflow is live

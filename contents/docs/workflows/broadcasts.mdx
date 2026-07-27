@@ -1,0 +1,80 @@
+---
+title: Broadcasts and batch triggers
+sidebar: Docs
+showTitle: true
+---
+
+Most workflows start when a single person does something, like an [event trigger](/docs/workflows/workflow-builder#event-triggers) that fires the moment a user signs up. A **batch trigger** works the other way around: instead of reacting to one person at a time, it evaluates an audience you define and runs the workflow once for every matching person. This is what powers **broadcasts**, one-time or recurring sends to a whole segment of users at once.
+
+Use a batch trigger when you want to message a group rather than respond to an individual action, for example a one-time product announcement, a weekly digest, or a monthly re-engagement campaign.
+
+## How a batch trigger works
+
+When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person. Each person then flows through the rest of the workflow, the dispatches, [delays](/docs/workflows/delays), and audience splits, independently, exactly as they would for an event-triggered workflow.
+
+A batch trigger combines two things:
+
+- **Audience filters** – who should enter the workflow
+- **A schedule (optional)** – when the batch should run
+
+## Audience filters
+
+You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **OR** logic, so a person matches if they meet any of them.
+
+For example, you might broadcast to:
+
+- Everyone in a `power users` cohort
+- People whose `plan` person property is `free` (for an upgrade nudge)
+- A specific list of distinct IDs (for a targeted send)
+
+The trigger shows a real-time estimate of how many persons will be affected (e.g. "approximately 1,200 of 50,000 persons") before you enable the workflow. If the audience is too large, you'll see a warning prompting you to add filters to narrow it down. It's good practice to confirm this estimate looks right before launching, since a broadcast sends to everyone who matches at once.
+
+## One-time broadcasts
+
+By default, a batch trigger runs once, when you start it manually. This is the simplest kind of broadcast, send a single message to an audience and you're done.
+
+To run a one-time broadcast, click **Trigger** in the top right of the workflow editor and then **Run workflow**. PostHog evaluates the audience and runs the workflow for each matching person right away.
+
+Use this for sends like:
+
+- A product launch or feature announcement
+- A one-off survey invitation
+- A time-sensitive notice (maintenance window, policy change)
+
+## Recurring broadcasts
+
+Add an optional schedule to run the batch on a recurring basis instead. On each tick, PostHog re-evaluates the audience and runs the workflow for whoever matches at that moment, so a recurring broadcast automatically picks up people who newly enter the segment and drops people who leave it.
+
+Use this for time-based, audience-targeted automations such as a weekly digest email or a monthly re-engagement campaign.
+
+Configure the recurrence with the schedule picker:
+
+| Setting   | Options                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Frequency | Daily, weekly, monthly, or yearly, with an interval (e.g. every 2 weeks)                                                              |
+| Weekly    | Choose which days of the week to run on (e.g. Monday and Wednesday)                                                                   |
+| Monthly   | Run on a specific day of the month (e.g. the 15th), on an ordinal weekday (e.g. the 3rd Wednesday), or on the last day of every month |
+| Start     | The date and time the schedule begins, in a timezone you select                                                                       |
+| Ends      | Never, on a specific date, or after a set number of occurrences                                                                       |
+
+You can also type the recurrence in plain English (e.g. "every week on Monday and Wednesday"), and the picker shows a preview of the next occurrences so you can confirm the schedule before enabling the workflow.
+
+## Batch triggers vs. event triggers
+
+| | Batch trigger (broadcast) | Event trigger |
+| --- | --- | --- |
+| **Who enters** | Everyone matching an audience, evaluated together | One person, when they perform an event |
+| **When it runs** | Manually, once, or on a recurring schedule | In real time, as events arrive |
+| **Best for** | Announcements, digests, re-engagement campaigns | Welcome flows, [drip campaigns](/docs/workflows/email-drip-campaign), lifecycle messaging |
+
+If you want to message people based on what they do, use an event trigger. If you want to message a defined segment all at once, use a batch trigger.
+
+## Tracking broadcast performance
+
+Because broadcasts send through the same dispatch steps as any other workflow, you can measure them with [workflow events](/docs/workflows/engagement-events). Enable email engagement events to chart `$workflows_email_opened` and `$workflows_email_link_clicked` broken down by `$workflow_id`, and add a [conversion goal](/docs/workflows/workflow-builder#conversion-goals) to track who acted on the broadcast.
+
+## Further reading
+
+- [Workflow builder](/docs/workflows/workflow-builder) – all the components you can add to a workflow
+- [Delays](/docs/workflows/delays) – control the timing of messages within a workflow
+- [Workflow events](/docs/workflows/engagement-events) – measure opens, clicks, and conversions

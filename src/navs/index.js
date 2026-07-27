@@ -7310,6 +7310,24 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Broadcasts and batch triggers',
+                    url: '/docs/workflows/broadcasts',
+                    icon: 'IconMegaphone',
+                    color: 'orange',
+                },
+                {
+                    name: 'Delays',
+                    url: '/docs/workflows/delays',
+                    icon: 'IconClock',
+                    color: 'orange',
+                },
+                {
+                    name: 'Metrics',
+                    url: '/docs/workflows/metrics',
+                    icon: 'IconGraph',
+                    color: 'orange',
+                },
+                {
                     name: 'Content library and message templates',
                     url: '/docs/workflows/library',
                     icon: 'IconDatabase',

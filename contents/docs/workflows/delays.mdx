@@ -1,0 +1,63 @@
+---
+title: Delays
+sidebar: Docs
+showTitle: true
+---
+
+Delays control the timing of a workflow. They let you pause a person's journey, either for a set amount of time, until something becomes true about them, or until the right moment in the week, before moving on to the next step. Delays are what turn a sequence of messages into a campaign that unfolds over time rather than firing everything at once.
+
+There are three types of delay:
+
+| Delay type             | Description                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------- |
+| Fixed wait             | Wait for a fixed amount of time (minutes/hours/days).                                    |
+| Wait until condition   | Wait until a specific condition is met (e.g. user has a property set to a specific value). |
+| Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9–5).                      |
+
+## Fixed wait
+
+A fixed wait pauses the person for a set amount of time, then continues to the next step. You choose the duration in minutes, hours, or days.
+
+Use it to space out a sequence so it doesn't all arrive at once, for example wait 3 days between the second and third email in an onboarding series.
+
+## Wait until condition
+
+A wait until condition pauses the person until a condition becomes true, or until a maximum wait time elapses, whichever comes first. It has two branches:
+
+- **Match** – the condition became true within the wait time
+- **No match** – the wait time elapsed without the condition being met
+
+You configure two things on the block:
+
+- **Wait time** – the maximum time to wait for the condition (e.g. 1 day)
+- **Conditions to wait for** – the condition that, once true, moves the person down the **match** branch (e.g. the [person property](/docs/product-analytics/person-properties) `onboarding_completed` is set to `true`)
+
+This is the key step for behavior-based branching. Instead of messaging everyone the same way, you wait to see what each person does and react accordingly, sending a follow-up only to people who *didn't* take the action you were waiting for.
+
+### Using wait until condition for drip campaigns
+
+A [drip campaign](/docs/workflows/email-drip-campaign) is a series of messages sent over time, where later messages depend on what the user has (or hasn't) done. The wait until condition step is what makes a drip "smart": it lets the campaign branch on real behavior rather than blasting every message on a fixed timer.
+
+A typical onboarding drip looks like this:
+
+1. **Trigger** on `user signed up`
+2. Send a **welcome email**
+3. **Wait until condition**: wait up to 1 day for the person property `onboarding_completed` to become `true`
+4. On the **no match** branch (they didn't finish onboarding in time), send a **follow-up email** nudging them to complete it
+5. On the **match** branch (they did finish), let them exit, no nagging needed
+
+Because the people who already converted flow down the **match** branch and exit, only those who still need a nudge get the follow-up. You can chain several wait-until-condition steps to build a multi-day sequence, each one waiting for the next milestone and only escalating when a user stalls.
+
+For a full walkthrough, see [Set up an email drip campaign](/docs/workflows/email-drip-campaign).
+
+## Wait until time window
+
+A wait until time window holds the person until the next allowed time window, then continues. Use it to make sure messages only go out at appropriate times, for example only send on weekdays between 9am and 5pm, so an email triggered at 2am waits until business hours.
+
+This is useful to combine with the other delay types: a fixed wait gets the timing roughly right, and a time window makes sure the message actually lands during waking hours.
+
+## Further reading
+
+- [Set up an email drip campaign](/docs/workflows/email-drip-campaign) – a step-by-step tutorial using wait until condition
+- [Workflow builder](/docs/workflows/workflow-builder) – all the components you can add to a workflow
+- [Broadcasts and batch triggers](/docs/workflows/broadcasts) – send to a whole audience at once
