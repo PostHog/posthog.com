@@ -6,6 +6,8 @@ showTitle: true
 
 > **Owner:** Sara Miteva
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Error Tracking captures unhandled exceptions from web, mobile, and backend code, groups them into issues, and surfaces them alongside session replays, logs, feature flags, and product analytics in the same platform. Source maps, auto-assignment, spike detection, "Fix with AI" prompts, and Slack / Linear / Jira / GitHub alerts all come built-in. Generous free tier, then usage-priced per exception.

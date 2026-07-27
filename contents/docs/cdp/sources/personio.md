@@ -9,7 +9,7 @@ availability:
 sourceId: Personio
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 The Personio connector is currently in alpha. If you encounter any issues, please [report them on GitHub](https://github.com/PostHog/posthog/issues/new?labels=bug&template=bug_report.md).
 

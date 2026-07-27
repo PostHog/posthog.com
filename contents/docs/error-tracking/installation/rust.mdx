@@ -24,9 +24,9 @@ Error tracking ships enabled by default through the `error-tracking` feature. If
 posthog-rs = { version = "*", default-features = false, features = ["error-tracking"] }
 ```
 
-<CalloutBox icon="IconInfo" title="Source context not yet supported" type="fyi">
+<CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
 
-The Rust SDK resolves stack traces in-process, so captured frames include file names, line numbers, and function names without any symbol uploads. Source context (displaying the surrounding lines of code in the error tracking UI) is not yet supported.
+The Rust SDK resolves stack traces in-process, so when the running binary carries debug info (as development builds do), captured frames include file names, line numbers, and function names without any symbol uploads. For resolved stack traces from release builds — which omit debug info by default — plus inlined frame resolution and source context (the surrounding lines of code in the error tracking UI), [upload debug symbols](/docs/error-tracking/upload-source-maps/rust).
 
 </CalloutBox>
 
@@ -81,6 +81,35 @@ if let Err(err) = result {
     client.capture_exception(err.as_ref()).await.unwrap();
 }
 ```
+
+</Step>
+
+<Step title="Capture panics" badge="optional">
+
+Panic autocapture is opt-in and uses the process-global client. Enable `capture_panics` and initialize the global client with `init_global`; the SDK then installs a process-wide `std::panic` hook:
+
+```rust
+use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
+
+let options = ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .error_tracking(
+        ErrorTrackingOptionsBuilder::default()
+            .capture_panics(true)
+            .build()
+            .unwrap(),
+    )
+    .build()
+    .unwrap();
+
+// Installs the panic hook and routes panics through the global client.
+posthog_rs::init_global(options).await.unwrap();
+```
+
+Each panic is captured as a personless `$exception` carrying the panic message, the panic-site location, and a call-site stack trace (subject to `capture_stacktrace`). The previously installed hook still runs afterwards.
+
+Because a panic hook is process-global, panic autocapture pairs with the global client — there is no per-`Client` panic API. Capture routes through the SDK's background worker, so it needs no async runtime, and the flush is bounded to a short timeout (2s) so a slow or unreachable PostHog can't freeze the crashing process. Delivery is best-effort: under sustained backpressure the event may not be sent before the process exits.
 
 </Step>
 

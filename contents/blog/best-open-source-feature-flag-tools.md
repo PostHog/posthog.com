@@ -259,7 +259,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <details>
   <summary>What is the best free feature flag tool?</summary>
 
-- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform — its free tier includes 1 million feature flag requests per month. 
+- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform – its free tier includes 1 million feature flag requests per month. 
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a tool that is 100% open source with no paid tiers at all. 
 
@@ -272,7 +272,7 @@ For more options beyond open source, check out our guide to the [best feature fl
 
 [Feature flags](/docs/feature-flags) let you toggle features on or off for specific users without deploying new code. [A/B testing](/docs/experiments) uses feature flags to randomly split users into groups (variants) and then measures which variant performs better against a goal metric. 
 
-In practice, most A/B testing tools — including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
+In practice, most A/B testing tools – including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
 
 To learn more, read our guide on [what is a feature flag (and how it compares to remote config and A/B testing)](/blog/what-is-a-feature-flag).
 

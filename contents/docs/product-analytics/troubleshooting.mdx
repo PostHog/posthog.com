@@ -228,6 +228,16 @@ Yes, PostHog blocks most known bots by default, including:
 
 Want a bot added to this list? Request it via [the in-app feedback form](http://us.posthog.com/home#supportModal), or raise an issue in the [posthog-js GitHub repo](https://github.com/PostHog/posthog-js/issues).
 
+#### Automated browsers are filtered
+
+The bot filter also drops every capture when the browser looks automated. That means `navigator.webdriver` is true, or the user agent or `navigator.userAgentData.brands` contains `HeadlessChrome`. Playwright, Puppeteer, and Selenium all match by default. The confusing part is that everything else still works. The SDK loads, feature flag requests go out, and `identify()` persists to storage, but event requests never leave the page. If your end-to-end tests see no events in PostHog, check this first.
+
+To confirm, load your page with `?__posthog_debug=true` and look for `[PostHog.js]` console lines mentioning a "likely bot". To test with an automated browser anyway, override all three signals before any page script runs:
+
+- set a real Chrome user agent on the browser context
+- override `navigator.webdriver`
+- override `navigator.userAgentData`
+
 ### Is it ok for my API key to be exposed and public?
 
 import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"

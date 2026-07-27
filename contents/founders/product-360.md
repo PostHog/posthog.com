@@ -9,7 +9,6 @@ featuredImageType: full
 tags:
   - Founders
   - Product
-  - Being a founder
 crosspost:
   - Blog
 ---

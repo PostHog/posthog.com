@@ -1,20 +1,17 @@
-### Q2 2026 Objectives
+### Q3 2026 Objectives
+
+#### APM in GA
+
+* Ship Metrics + Tracing and have paying customers
+* All 3 should feel like complete products, not obvious missing basic features that competitors have
 
 #### Product autonomy
 
-* Can use logs without the UI (e.g. via Max)
-* Detect and send interesting signals, e.g. anomaly detection, spikes, errors
-* APM
-* Traces
-* Metrics
-* Reduce migration blocker feedback to 0
-
-#### Table stakes
-
-* Solid backups
-* Quota limits so complex queries don't impact other users (e.g. searching for "1" in team2)
-* Retention
-* Alerts
-* Saved views / dashboards
-* Context view
-* Archival storage?
+* Headless usage is a (or the?) typical way to use the product (e.g. a significant number of customers use MCP more than UI)
+    * Work on MCP visibility so we can track headless usage
+    * Build a (proactive?) Agent SRE
+    * Expand signals
+        * Anomalies
+        * Spikes
+        * Rate limits
+        * Error logs

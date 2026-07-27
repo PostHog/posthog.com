@@ -1,11 +1,6 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
@@ -14,6 +9,9 @@ import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
+
 type WebAnalyticsProps = {
     data: {
         tutorials: {
@@ -68,9 +66,14 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
+const WebAnalytics: React.FC<WebAnalyticsProps> = () => {
+    // Web analytics has no contents/docs/.../index.mdx (unlike session replay), so Handbook
+    // never serves this route – opt into the shared product tabs here instead.
+    const productData = useProduct({ handle: 'web_analytics' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="web_analytics" />}>
             <SEO title="Web analytics - Docs - PostHog" />
 
             <div className="mx-auto max-w-4xl">
@@ -81,8 +84,7 @@ const WebAnalytics: React.FC<WebAnalyticsProps> = ({ data }) => {
                     buttonText="Installation guide"
                     buttonLink="/docs/web-analytics/installation"
                     imageColumnClasses="mt-4 md:-mt-8"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png"
-                    imageClasses="max-h-48 md:max-h-64"
+                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png"
                 />
 
                 <section className="mb-8">
