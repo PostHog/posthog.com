@@ -5,6 +5,8 @@ import { OSInput, OSTextarea } from 'components/OSForm'
 import OSButton from 'components/OSButton'
 import { graphql, useStaticQuery } from 'gatsby'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
 import { useUser } from 'hooks/useUser'
 import { IconSpinner } from '@posthog/icons'
 import Toggle from 'components/Toggle'
@@ -15,6 +17,10 @@ import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
+import SuggestionDropdown from './SuggestionDropdown'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 type EventFormValues = {
     name: string
@@ -44,6 +50,35 @@ type SelectOption = {
     label: string
     value: any
 }
+
+type LumaEvent = {
+    id: string
+    name: string
+    startAt: string | null
+    endAt: string | null
+    timezone: string | null
+    url: string | null
+    lat: number | null
+    lng: number | null
+    city: string | null
+    cityState: string | null
+    country: string | null
+    venue: string | null
+    fullAddress: string | null
+    online: boolean
+}
+
+type CitySuggestion = {
+    id: string
+    name: string
+    placeFormatted: string
+}
+
+// Session token for Mapbox Search Box API billing semantics
+const newSessionToken = (): string =>
+    typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID()
+        : Math.random().toString(36).slice(2) + Date.now().toString(36)
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().max(60, 'Max 60 characters').required('Name is required'),
@@ -320,6 +355,197 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }
     }
 
+    // Luma event auto-suggest (create mode only) — events are fetched once
+    // through /api/luma-events since Luma's API blocks browser CORS
+    const [lumaEvents, setLumaEvents] = React.useState<LumaEvent[]>([])
+    const [lumaOpen, setLumaOpen] = React.useState(false)
+    const [lumaHighlight, setLumaHighlight] = React.useState(-1)
+    const lumaContainerRef = React.useRef<HTMLDivElement>(null)
+
+    // Mapbox city autocomplete on the location field
+    const [cityQuery, setCityQuery] = React.useState('')
+    const [citySuggestions, setCitySuggestions] = React.useState<CitySuggestion[]>([])
+    const [cityOpen, setCityOpen] = React.useState(false)
+    const [cityHighlight, setCityHighlight] = React.useState(-1)
+    const [citySessionToken, setCitySessionToken] = React.useState(newSessionToken)
+    const cityAbortRef = React.useRef<AbortController | null>(null)
+    const cityContainerRef = React.useRef<HTMLDivElement>(null)
+
+    React.useEffect(() => {
+        if (event) return
+        const controller = new AbortController()
+        fetch('/api/luma-events', { signal: controller.signal })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((json) => {
+                if (json && Array.isArray(json.events)) {
+                    setLumaEvents(json.events)
+                }
+            })
+            .catch(() => {
+                // Proxy unavailable (e.g. plain gatsby dev) — suggestions just don't appear
+            })
+        return () => controller.abort()
+    }, [event])
+
+    const lumaMatches = React.useMemo(() => {
+        const query = formik.values.name.trim().toLowerCase()
+        if (event || query.length < 3 || lumaEvents.length === 0) return []
+        return lumaEvents.filter((lumaEvent) => lumaEvent.name.toLowerCase().includes(query)).slice(0, 5)
+    }, [lumaEvents, formik.values.name, event])
+
+    const handleLumaSelect = (lumaEvent: LumaEvent) => {
+        let start: dayjs.Dayjs | null = null
+        if (lumaEvent.startAt) {
+            try {
+                start = lumaEvent.timezone ? dayjs(lumaEvent.startAt).tz(lumaEvent.timezone) : dayjs(lumaEvent.startAt)
+            } catch {
+                start = dayjs(lumaEvent.startAt)
+            }
+        }
+        formik.setValues({
+            ...formik.values,
+            name: lumaEvent.name,
+            date: start?.isValid() ? start.format('YYYY-MM-DD') : formik.values.date,
+            startTime: start?.isValid() ? start.format('HH:mm') : formik.values.startTime,
+            link: lumaEvent.url || formik.values.link,
+            online: lumaEvent.online,
+            ...(lumaEvent.online
+                ? { locationLabel: '', locationLat: undefined, locationLng: undefined, venueName: '' }
+                : {
+                      locationLabel:
+                          lumaEvent.cityState ||
+                          [lumaEvent.city, lumaEvent.country].filter(Boolean).join(', ') ||
+                          formik.values.locationLabel,
+                      venueName: lumaEvent.venue || '',
+                      locationLat: lumaEvent.lat ?? undefined,
+                      locationLng: lumaEvent.lng ?? undefined,
+                  }),
+        })
+        setLumaOpen(false)
+        setLumaHighlight(-1)
+    }
+
+    // Debounced Mapbox suggest — only fires while the user is typing (cityQuery
+    // is set in onChange, not when the field is populated programmatically)
+    React.useEffect(() => {
+        const token = process.env.GATSBY_MAPBOX_TOKEN
+        const query = cityQuery.trim()
+        if (typeof window === 'undefined' || !token || query.length <= 3) {
+            cityAbortRef.current?.abort()
+            cityAbortRef.current = null
+            setCitySuggestions([])
+            setCityOpen(false)
+            setCityHighlight(-1)
+            return
+        }
+        const controller = new AbortController()
+        cityAbortRef.current = controller
+        const handle = setTimeout(async () => {
+            try {
+                const url = new URL('https://api.mapbox.com/search/searchbox/v1/suggest')
+                url.searchParams.set('q', query)
+                url.searchParams.set('limit', '2')
+                url.searchParams.set('types', 'place')
+                url.searchParams.set('language', 'en')
+                url.searchParams.set('session_token', citySessionToken)
+                url.searchParams.set('access_token', token)
+                const response = await fetch(url.toString(), { signal: controller.signal })
+                const json = await response.json()
+                const suggestions = Array.isArray(json?.suggestions) ? json.suggestions : []
+                setCitySuggestions(
+                    suggestions.map((s: { mapbox_id: string; name: string; place_formatted?: string }) => ({
+                        id: s.mapbox_id,
+                        name: s.name,
+                        placeFormatted: s.place_formatted || '',
+                    }))
+                )
+                setCityOpen(suggestions.length > 0)
+                setCityHighlight(-1)
+            } catch {
+                // Aborted or network error — ignore
+            }
+        }, 200)
+        return () => {
+            clearTimeout(handle)
+            controller.abort()
+        }
+    }, [cityQuery, citySessionToken])
+
+    const handleCitySelect = async (item: CitySuggestion) => {
+        setCityOpen(false)
+        setCityHighlight(-1)
+        setCityQuery('')
+        formik.setFieldValue('locationLabel', [item.name, item.placeFormatted].filter(Boolean).join(', '))
+        const token = process.env.GATSBY_MAPBOX_TOKEN
+        try {
+            if (!token || !item.id) return
+            const url = new URL(`https://api.mapbox.com/search/searchbox/v1/retrieve/${encodeURIComponent(item.id)}`)
+            url.searchParams.set('session_token', citySessionToken)
+            url.searchParams.set('access_token', token)
+            const response = await fetch(url.toString())
+            const json = await response.json()
+            const feature = (Array.isArray(json?.features) && json.features[0]) || null
+            const coords = feature?.geometry?.coordinates || feature?.properties?.coordinates || null
+            let longitude: number | null = null
+            let latitude: number | null = null
+            if (Array.isArray(coords) && coords.length >= 2) {
+                longitude = coords[0]
+                latitude = coords[1]
+            } else if (typeof coords?.longitude === 'number' && typeof coords?.latitude === 'number') {
+                longitude = coords.longitude
+                latitude = coords.latitude
+            }
+            if (longitude != null && latitude != null) {
+                formik.setFieldValue('locationLat', latitude)
+                formik.setFieldValue('locationLng', longitude)
+            }
+        } catch (error) {
+            console.error('Error retrieving city coordinates:', error)
+        } finally {
+            // Start a new session token after selection as per Mapbox session semantics
+            setCitySessionToken(newSessionToken())
+        }
+    }
+
+    // Close suggestion dropdowns on outside click
+    React.useEffect(() => {
+        const onClick = (e: MouseEvent) => {
+            if (lumaContainerRef.current && !lumaContainerRef.current.contains(e.target as Node)) {
+                setLumaOpen(false)
+            }
+            if (cityContainerRef.current && !cityContainerRef.current.contains(e.target as Node)) {
+                setCityOpen(false)
+            }
+        }
+        window.addEventListener('click', onClick)
+        return () => window.removeEventListener('click', onClick)
+    }, [])
+
+    const suggestionKeyDown =
+        (
+            isOpen: boolean,
+            count: number,
+            highlight: number,
+            setHighlight: React.Dispatch<React.SetStateAction<number>>,
+            selectAt: (index: number) => void,
+            close: () => void
+        ) =>
+        (e: React.KeyboardEvent<HTMLInputElement>) => {
+            if (!isOpen || count === 0) return
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                setHighlight((idx) => (idx + 1) % count)
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                setHighlight((idx) => (idx - 1 + count) % count)
+            } else if (e.key === 'Enter') {
+                e.preventDefault()
+                selectAt(highlight >= 0 ? highlight : 0)
+            } else if (e.key === 'Escape') {
+                close()
+            }
+        }
+
     const baseOptions = React.useMemo(
         () => ({
             format,
@@ -368,14 +594,53 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         <div>
             <h2 className="text-xl font-bold mb-1">Add a new event</h2>
             <form onSubmit={formik.handleSubmit} className="space-y-3">
-                <OSInput
-                    label="Name"
-                    required
-                    direction="column"
-                    touched={formik.touched.name}
-                    error={formik.errors.name}
-                    {...formik.getFieldProps('name')}
-                />
+                <div ref={lumaContainerRef} className="relative">
+                    <OSInput
+                        label="Name"
+                        required
+                        direction="column"
+                        autoComplete="off"
+                        touched={formik.touched.name}
+                        error={formik.errors.name}
+                        aria-autocomplete={event ? undefined : 'list'}
+                        aria-expanded={lumaOpen && lumaMatches.length > 0}
+                        aria-controls="luma-event-suggestions"
+                        {...formik.getFieldProps('name')}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            formik.handleChange(e)
+                            if (!event) {
+                                setLumaOpen(e.target.value.trim().length >= 3)
+                                setLumaHighlight(-1)
+                            }
+                        }}
+                        onKeyDown={suggestionKeyDown(
+                            lumaOpen,
+                            lumaMatches.length,
+                            lumaHighlight,
+                            setLumaHighlight,
+                            (idx) => lumaMatches[idx] && handleLumaSelect(lumaMatches[idx]),
+                            () => setLumaOpen(false)
+                        )}
+                    />
+                    {!event && lumaOpen && (
+                        <SuggestionDropdown
+                            id="luma-event-suggestions"
+                            items={lumaMatches.map((lumaEvent) => ({
+                                id: lumaEvent.id,
+                                label: lumaEvent.name,
+                                sublabel: [
+                                    lumaEvent.startAt ? dayjs(lumaEvent.startAt).format('MMM D, YYYY') : null,
+                                    lumaEvent.online ? 'Online' : lumaEvent.cityState || lumaEvent.city,
+                                ]
+                                    .filter(Boolean)
+                                    .join(' · '),
+                            }))}
+                            highlightIndex={lumaHighlight}
+                            onHighlight={setLumaHighlight}
+                            onSelect={(idx) => lumaMatches[idx] && handleLumaSelect(lumaMatches[idx])}
+                        />
+                    )}
+                </div>
                 <div className="grid grid-cols-2 gap-3">
                     <OSInput
                         label="Date"
@@ -413,15 +678,46 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                 </div>
                 {!formik.values.online && (
                     <>
-                        <OSInput
-                            label="Location"
-                            required
-                            direction="column"
-                            placeholder="e.g. Dublin, Ireland"
-                            touched={formik.touched.locationLabel}
-                            error={formik.errors.locationLabel}
-                            {...formik.getFieldProps('locationLabel')}
-                        />
+                        <div ref={cityContainerRef} className="relative">
+                            <OSInput
+                                label="Location"
+                                required
+                                direction="column"
+                                placeholder="e.g. Dublin, Ireland"
+                                autoComplete="off"
+                                touched={formik.touched.locationLabel}
+                                error={formik.errors.locationLabel}
+                                aria-autocomplete="list"
+                                aria-expanded={cityOpen && citySuggestions.length > 0}
+                                aria-controls="city-suggestions"
+                                {...formik.getFieldProps('locationLabel')}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    formik.handleChange(e)
+                                    setCityQuery(e.target.value)
+                                }}
+                                onKeyDown={suggestionKeyDown(
+                                    cityOpen,
+                                    citySuggestions.length,
+                                    cityHighlight,
+                                    setCityHighlight,
+                                    (idx) => citySuggestions[idx] && handleCitySelect(citySuggestions[idx]),
+                                    () => setCityOpen(false)
+                                )}
+                            />
+                            {cityOpen && (
+                                <SuggestionDropdown
+                                    id="city-suggestions"
+                                    items={citySuggestions.map((city) => ({
+                                        id: city.id,
+                                        label: city.name,
+                                        sublabel: city.placeFormatted,
+                                    }))}
+                                    highlightIndex={cityHighlight}
+                                    onHighlight={setCityHighlight}
+                                    onSelect={(idx) => citySuggestions[idx] && handleCitySelect(citySuggestions[idx])}
+                                />
+                            )}
+                        </div>
                         <div className="grid grid-cols-2 gap-3">
                             <OSInput
                                 label="Latitude"
