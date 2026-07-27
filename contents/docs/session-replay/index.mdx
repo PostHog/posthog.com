@@ -5,13 +5,13 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconCode, IconBrackets, IconRewindPlay, IconToggle, IconDashboard, IconShield, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconRewindPlay, IconToggle, IconDashboard, IconShield, IconBolt, IconNotebook, IconPerson, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Session replay records what real users do in your product and plays it back like a DVR, with a synced DevTools panel showing console logs, network requests, and errors at the exact moment they happened. Because PostHog already captures your events, every replay is enriched with the person, their properties, and the feature flags they had, so you can jump from a funnel drop-off or an exception straight to the session behind it.
 
-You can watch replays yourself, ask PostHog AI to find and summarize them, or pull them into your editor over MCP. Those same sessions feed [Self-driving](/docs/self-driving), which clusters the problems users actually hit and opens pull requests you review and merge.
+You can watch replays yourself, ask PostHog AI to find and summarize them, or pull them into your editor over MCP. Those same sessions feed [Self-driving](/docs/self-driving), which clusters the problems users actually hit into reports you can act on.
 
 <OSButton variant="primary" asLink to="/docs/session-replay/start-here">Get started</OSButton>
 
@@ -43,8 +43,8 @@ You watch, filter, and share replays in the PostHog web app. The other surfaces 
     <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
     <div>
       <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving reports built from clustered session problems, and merge the fixes.</p>
-      <a href="/docs/session-replay/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix in PostHog Desktop →</a>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Read the Self-driving reports built from clustered session problems, and decide what to do about them.</p>
+      <a href="/docs/session-replay/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Review findings →</a>
     </div>
   </div>
 
@@ -105,18 +105,20 @@ Session replay runs on recordings captured by your PostHog SDKs. What ends up in
 
 ## How Session Replay works with Self-driving
 
-Your recordings are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). PostHog analyzes sessions for the moments users get stuck – confusion, abandonment, failures, and blocking exceptions – then clusters those moments across sessions so a pattern, not a single unlucky user, becomes a report.
+Your recordings are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). PostHog analyzes sessions for the moments users get stuck – confusion, abandonment, failures, and blocking exceptions – then clusters those moments across sessions so a pattern, not a single unlucky user, becomes a report. The same scout watches for capture cliffs, where recording volume falls away while your traffic holds.
+
+A replay shows the symptom, not the cause. Rage clicks on one button could be a slow request, a confusing label, or a real bug, and telling those apart takes a person – so this scout stops at the report and routes it to a human reviewer rather than starting a pull request.
 
 <CustomSelfDrivingLoop
   stages={[
     { label: 'Sessions', icon: IconRewindPlay, color: '#F54E00', description: 'Recordings captured from web and mobile SDKs' },
     { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Confusion, abandonment, and failures found in sessions' },
     { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Similar problems clustered across many sessions' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'Routed to whoever owns that page or flow' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'What to change, and whether to change anything' },
   ]}
 />
 
-Session replay analysis relies on AI data processing, so your organization has to approve it before the source can be turned on. You review and merge the resulting work in [PostHog Desktop](/docs/session-replay/surfaces/desktop) or the [Self-driving inbox](/docs/self-driving/inbox).
+Session replay analysis relies on AI data processing, so your organization has to approve it before the source can be turned on. You read the resulting reports in [PostHog Desktop](/docs/session-replay/surfaces/desktop) or the [Self-driving inbox](/docs/self-driving/inbox). Other signal sources, like [error tracking](/docs/error-tracking), do open pull requests.
 
 Want AI to watch recordings and turn what it sees into queryable data instead? That's [Replay Vision](/docs/replay-vision), which runs on the same recordings.

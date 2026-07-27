@@ -6,7 +6,7 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import { IconRewindPlay, IconBolt, IconMagic, IconCode, IconPullRequest } from '@posthog/icons'
+import { IconRewindPlay, IconBolt, IconMagic, IconCode, IconPerson } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's record your first session!" lastSpeechBubble="You're ready to watch real users!">
 
@@ -70,9 +70,9 @@ Prefer your editor? The [MCP server](/docs/session-replay/surfaces/mcp) exposes 
 
 </QuestLogItem>
 
-<QuestLogItem title="Turn sessions into fixes" subtitle="Replay feeds Self-driving" icon="IconPullRequest">
+<QuestLogItem title="Let Self-driving watch them for you" subtitle="Replay feeds Self-driving" icon="IconMagic">
 
-Session replay isn't just playback – it's a signal source. PostHog looks for the moments users get stuck, clusters them across sessions, and files a [Self-driving](/docs/self-driving) report. When a code fix is possible, you get a draft pull request to review and merge.
+Session replay isn't just playback – it's a signal source. PostHog looks for the moments users get stuck, clusters them across sessions, and files a [Self-driving](/docs/self-driving) report with the recordings that prove it. The report goes to a human reviewer, not a coding agent, because a replay shows you the symptom and working out the cause takes judgment.
 
 <div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
   <span className="flex items-center gap-1.5 text-sm text-secondary">
@@ -91,8 +91,8 @@ Session replay isn't just playback – it's a signal source. PostHog looks for t
   </span>
   <span className="text-muted" aria-hidden="true">→</span>
   <span className="flex items-center gap-1.5 text-sm text-secondary">
-    <IconPullRequest className="size-5 shrink-0" />
-    Pull request
+    <IconPerson className="size-5 shrink-0" />
+    Human review
   </span>
 </div>
 
