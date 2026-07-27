@@ -10,7 +10,7 @@ Both Endpoints and PostHog Desktop are in beta.
 
 </CalloutBox>
 
-[PostHog Desktop](/docs/posthog-desktop) is where endpoints meet the code that calls them. The agent has your repo, your endpoints, and PostHog's [endpoint skills](/docs/posthog-desktop/skills) in one place, so it can build an endpoint and wire it into your app in the same session – and it's where you review the [Self-driving](/docs/self-driving) work that failing endpoints generate.
+[PostHog Desktop](/docs/posthog-desktop) is where endpoints meet the code that calls them. The agent has your repo, your endpoints, and PostHog's [endpoint skills](/docs/posthog-desktop/skills) in one place, so it can build an endpoint and wire it into your app in the same session.
 
 ## What you can do here
 
@@ -18,21 +18,21 @@ Both Endpoints and PostHog Desktop are in beta.
 - **Audit what you have** – find endpoints nothing calls anymore, or versions still pinned by deployed clients.
 - **Diagnose slow endpoints** – work through execution logs and materialization status to find where the time goes.
 - **Copy endpoints between projects** – recreate the same query in staging or another project.
-- **Review Self-driving reports and pull requests** built from your endpoint failures, next to the agents doing the work.
+- **Read the Self-driving inbox** – endpoint failures land there as signals, and the inbox is available in Desktop like everywhere else.
 
 The agent reaches PostHog through the same [MCP tools](/docs/endpoints/surfaces/mcp) it would use anywhere else, so anything you can do over MCP you can do here.
 
-## How an endpoint failure becomes a report
+## What endpoint failures send to Self-driving
 
-Endpoints raise a [signal](/docs/self-driving/inbox/sources) in two situations:
+Endpoints raises a [signal](/docs/self-driving/signals) in two situations:
 
-- **A run fails.** The signal carries the endpoint name, the version, the executed query, whether it ran materialized or inline, and the error – so the agent can reason about the cause rather than guess at it.
+- **A run fails.** The signal carries the endpoint name, the version, the executed query, whether it ran materialized or inline, and the error – so whatever picks it up can reason about the cause rather than guess at it.
 - **A breakdown hits its limit.** When an insight-based endpoint returns an "Other" bucket, callers are silently seeing aggregated values for the long tail. The signal flags it and suggests a lower-cardinality breakdown or a tighter filter.
 
-From there it's the normal loop: signals become a report, the report becomes a draft pull request when there's a code fix, and you review and merge it. Nothing ships without a human.
+There's no endpoints-specific scout investigating these. They join the same queue as every other [signal source](/docs/self-driving/inbox/sources): the inbox deduplicates them, groups related ones, and turns them into a [report](/docs/self-driving/reports) you read alongside the rest of your work. An endpoint failure doesn't open a pull request on its own – if the report points at a code fix, you're the one who starts it.
 
 ## Related
 
-- Review the same work in the [Self-driving inbox](/docs/self-driving/inbox).
+- Read the reports in the [Self-driving inbox](/docs/self-driving/inbox).
 - Do the same actions from any MCP client over [MCP](/docs/endpoints/surfaces/mcp).
 - Understand what the log lines mean in [usage and logs](/docs/endpoints/usage-analytics).

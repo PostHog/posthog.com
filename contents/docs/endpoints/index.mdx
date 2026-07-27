@@ -5,7 +5,7 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconBrackets, IconMagic, IconCode, IconGraph, IconHogQL, IconDatabase, IconServer, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconBrackets, IconMagic, IconCode, IconGraph, IconHogQL, IconDatabase, IconServer, IconBolt, IconNotebook, IconCheckCircle } from '@posthog/icons'
 import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
@@ -59,7 +59,7 @@ You build and monitor endpoints in the PostHog web app, then call them from your
     <IconCode className="size-6 shrink-0 text-green mt-0.5" />
     <div>
       <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Wire endpoints into your app and review the Self-driving work their failures generate.</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Build endpoints and wire them into your app, with your repo and PostHog side by side.</p>
       <a href="/docs/endpoints/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use endpoints in PostHog Desktop →</a>
     </div>
   </div>
@@ -112,16 +112,15 @@ An endpoint doesn't store data of its own. It serves whatever its query returns,
 
 ## How Endpoints works with Self-driving
 
-Endpoint runs are a signal source for [Self-driving](/docs/self-driving). When an execution fails, or a breakdown returns an "Other" bucket because it hit the breakdown limit, Endpoints raises a signal carrying the query, the version, and the error, so the agent can reason about the cause instead of guessing.
+Endpoint runs are a signal source for [Self-driving](/docs/self-driving). When an execution fails, or a breakdown returns an "Other" bucket because it hit the breakdown limit, Endpoints raises a signal carrying the query, the version, and the error, so whatever picks it up can reason about the cause instead of guessing.
 
 <CustomSelfDrivingLoop
   stages={[
     { label: 'Endpoint runs', icon: IconServer, color: '#F54E00', description: 'Every execution, with its query, version, and timing' },
     { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Failed runs and breakdown limits raised as signals' },
-    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with the query and related errors' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When the fix is in your query or your client code' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Deduplicated and grouped with related signals from other sources' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Read the report and choose what to do about it' },
   ]}
 />
 
-You review and merge that work in the [Self-driving inbox](/docs/self-driving/inbox) or in [PostHog Desktop](/docs/posthog-desktop). See the [Self-driving docs](/docs/self-driving) for the full picture.
+There's no endpoints-specific scout, so these signals fill the inbox rather than trigger an automatic fix. You read the report in the [Self-driving inbox](/docs/self-driving/inbox) or in [PostHog Desktop](/docs/posthog-desktop), and decide from there – an endpoint failure never opens a pull request on its own. See the [Self-driving docs](/docs/self-driving) for the full picture.
