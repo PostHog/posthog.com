@@ -1,0 +1,34 @@
+---
+title: Use the data warehouse in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+[PostHog Desktop](/docs/posthog-desktop) is in beta. [Download it](/docs/posthog-desktop/download-posthog-desktop) to try it out.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you work through the warehouse problems PostHog raises on its own – a materialized view that stopped refreshing, or a source whose sync keeps failing. It's a triage surface, not a place to browse your data.
+
+{/* TODO: screenshot of a materialized view failure report in PostHog Desktop */}
+
+## What you can do here
+
+- **Pick up warehouse signals** – when a materialized view fails to refresh, PostHog raises a [signal](/docs/self-driving/signals) carrying the view name and the underlying error, so a stale dashboard lands in your queue instead of going unnoticed.
+- **Diagnose the failure** – the agent can read the health issue, inspect your warehouse schema, and run the view's query or its upstream tables directly, to work out whether a column was renamed, an upstream source is itself broken, or the query is now too heavy to finish.
+- **Audit view and source health** – PostHog ships [skills](/docs/posthog-desktop/skills) for one-shot warehouse triage: finding failing or unused materialized views, auditing source health, diagnosing failed syncs, tuning incremental sync config, and setting up new sources.
+
+## What you can't do here
+
+You can't edit a view's SQL from PostHog Desktop. A view's definition is stored in PostHog, not in your repository, so the agent diagnoses the failure and proposes the corrected query, and you apply it in the [web app](/docs/data-warehouse/surfaces/web-app). The check clears once a materialization succeeds.
+
+## Related
+
+- [Self-driving](/docs/self-driving) for the full loop
+- [Use the data warehouse over MCP](/docs/data-warehouse/surfaces/mcp) for the same tools in other clients
+- [Materialized views](/docs/data-warehouse/views/materialize)
+- [Troubleshooting](/docs/data-warehouse/troubleshooting)

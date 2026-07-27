@@ -1,0 +1,120 @@
+---
+title: Data warehouse
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconCode, IconTerminal, IconDatabase, IconPlug, IconCalculator, IconServer, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+
+The data warehouse brings your business data into PostHog and puts it next to your product data. Sync Stripe, Postgres, Salesforce, HubSpot, and dozens of other [sources](/docs/data-warehouse/sources), then query them alongside your events, persons, and sessions in one SQL query – no ETL pipeline to build and no second analytics tool to keep in sync.
+
+Once the data is in, you shape it with [views](/docs/data-warehouse/views) and [materialized views](/docs/data-warehouse/views/materialize), chart it in [insights](/docs/data-warehouse/insights), and reach it from your editor over [MCP](/docs/data-warehouse/surfaces/mcp). When a model breaks, it becomes a signal for [Self-driving](/docs/self-driving) instead of a dashboard that quietly goes stale.
+
+<OSButton variant="primary" asLink to="/docs/data-warehouse/start-here">Get started</OSButton>
+
+## Where you can use it
+
+Most warehouse work happens in the [web app](/docs/data-warehouse/surfaces/web-app) – connecting sources, writing SQL, and building views. The other surfaces bring that same data to wherever you already work.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Connect sources, write SQL, build views, and chart the results in insights.</p>
+      <a href="/docs/data-warehouse/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the web app →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Run SQL, manage views, and configure sources from Claude Code, Cursor, or any MCP client.</p>
+      <a href="/docs/data-warehouse/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use it over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review the Self-driving work raised by failing models and broken syncs.</p>
+      <a href="/docs/data-warehouse/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use PostHog Desktop →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconTerminal className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">SQL clients <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Point <code>psql</code>, Metabase, or any Postgres driver at your managed warehouse.</p>
+      <a href="/docs/data-warehouse/managed-warehouse/connect" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Connect a client →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Your warehouse is built from data you sync in and data you model on top of it.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-5 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPlug className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Managed sources</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Stripe, Postgres, Salesforce, HubSpot, and dozens more, synced on a schedule you set.</p>
+      <a href="/docs/data-warehouse/sources" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Link a source →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconDatabase className="size-6 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog data</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Your events, persons, sessions, groups, and query log are queryable by default.</p>
+      <a href="/docs/data-warehouse/sources/posthog" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Query PostHog tables →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconUpload className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Files and object storage</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Upload CSV, JSON, or Parquet, or read straight from S3, GCS, R2, or Azure Blob.</p>
+      <a href="/docs/data-warehouse/sources/file-upload" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Upload a file →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCalculator className="size-6 shrink-0 text-salmon mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Views and materialized views</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Saved queries that join sources together and refresh on a schedule.</p>
+      <a href="/docs/data-warehouse/views" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Model your data →</a>
+    </div>
+  </div>
+
+</div>
+
+## How the data warehouse works with Self-driving
+
+Your models are monitored, not just stored. When a materialized view stops refreshing, the failure becomes a [signal](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving) rather than a dashboard that silently serves stale numbers.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Sources and models', icon: IconDatabase, color: '#F54E00', description: 'Synced sources, views, and materialized views' },
+    { label: 'Health checks', icon: IconServer, color: '#FFA81C', description: 'Failed materializations and broken syncs are detected' },
+    { label: 'Signals', icon: IconBolt, color: '#29DBBB', description: 'Each failure carries the view name and the error' },
+    { label: 'One report', icon: IconNotebook, color: '#A737D2', description: 'Grouped with the upstream data it depends on' },
+    { label: 'You fix and re-run', icon: IconCheckCircle, color: '#47C861', description: 'Nothing changes without a human' },
+  ]}
+/>
+
+Because a view's SQL lives in PostHog rather than your codebase, the fix usually happens in the [web app](/docs/data-warehouse/surfaces/web-app) – but you can diagnose it from [PostHog Desktop](/docs/data-warehouse/surfaces/desktop) or [MCP](/docs/data-warehouse/surfaces/mcp) first. See the [Self-driving docs](/docs/self-driving) for the full picture.
