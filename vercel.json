@@ -149,6 +149,12 @@
         }
     ],
     "redirects": [
+        { "source": "/docs/posthog-ai/overview", "destination": "/docs/posthog-ai", "statusCode": 301 },
+        {
+            "source": "/docs/posthog-ai/platform-and-chat-ui",
+            "destination": "/docs/posthog-ai/surfaces/web-app",
+            "statusCode": 301
+        },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },

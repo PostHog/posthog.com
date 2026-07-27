@@ -1,0 +1,86 @@
+---
+title: Use PostHog AI in the web app
+sidebar: Docs
+showTitle: true
+---
+
+import { IconSparkles } from '@posthog/icons'
+
+The [PostHog web app](https://app.posthog.com) is home base for PostHog AI. It's available on every page, either as a full chat in the right-hand sidebar or as inline entry points built into the features you're already using, so you can hand off a question without losing your place.
+
+Because it runs next to your data, PostHog AI can do more than answer. It reads your events, insights, and warehouse schema, runs queries against them, and then acts – creating dashboards, editing the filters on the page you're on, or writing the SQL you were about to write yourself.
+
+## In-app chat
+
+The primary dedicated interface is an in-app <a href="https://app.posthog.com/#panel=max">AI chat</a> for conventional prompting and conversation-based flows.
+
+When logged in, the PostHog AI chat is always available in the right-hand sidebar of the PostHog app. You can open it at any time by clicking the PostHog AI icon.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/posthog_ai_sidebar_4k_compressed_75af4f4370.mp4" 
+    alt="PostHog AI chat" 
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    autoPlay={true}
+    background={false}
+/>
+
+<Caption>
+The PostHog AI chat is always available in the sidebar
+</Caption>
+
+The in-app chat keeps conversation history, and supports [context, commands, and memory](/docs/posthog-ai/context-and-commands).
+
+## Platform UI
+
+PostHog AI shows up throughout the PostHog platform as inline or ambient UI elements, typically labelled with the <span className="inline-block"><IconSparkles className="h-4 w-4" /> </span> icon, and embedded within other features.
+
+These entrypoints or shortcuts enable you to trigger PostHog AI directly from the PostHog UI.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/posthog_ai_platform_compressed_a7d9048b08.mp4" 
+    alt="PostHog AI platform UI" 
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    autoPlay={true}
+    background={false}
+/>
+
+<Caption>
+PostHog AI can be accessed throughout the platform UI
+</Caption>
+
+## Website chat
+
+PostHog AI is also accessible when logged out of the app and on the website, [posthog.com](/). In this mode it's limited to searching and answering questions about PostHog's documentation – it has no access to your project data.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/website_posthog_ai_compressed_78452d5325.mp4" 
+    alt="PostHog AI website chat" 
+    classes="rounded border border-primary @md:max-w-[80%] mx-auto"
+    background={false}
+    autoPlay={true}
+/>
+
+<Caption>
+You can chat with PostHog AI about documentation when logged out 
+</Caption>
+
+## What you can do here
+
+- **[Try example prompts](/docs/posthog-ai/example-prompts)** – a starting point for each PostHog product, from analytics to surveys to error tracking.
+- **[Write and edit SQL](/docs/posthog-ai/write-and-edit-sql)** – explore your data and iterate on HogQL queries directly in the SQL editor.
+- **[Investigate web traffic](/docs/posthog-ai/investigate-web-traffic)** – build insights and dashboards from your web analytics and session replay data.
+- **[Summarize session replays](/docs/posthog-ai/session-summaries)** – find the recordings that matter and get a written summary instead of watching them.
+- **[Switch modes](/docs/posthog-ai/modes)** – move between product analytics, SQL, session replay, error tracking, surveys, and feature flags without losing the thread.
+- **[Plan before you act](/docs/posthog-ai/plan-mode)** and **[run deep research](/docs/posthog-ai/research-mode)** – for multi-step work you want to review first, or questions worth a long investigation.
+
+## Approving sensitive actions
+
+PostHog AI doesn't quietly run anything destructive. When a step could have real consequences, it pauses and shows you an approval card describing what it's about to do. The run only continues once you approve it, and you can reject a step and redirect PostHog AI instead.
+
+{/* TODO: screenshot of an approval card in the chat */}
+
+## Related
+
+- Get set up in [Start here](/docs/posthog-ai/start-here), and grant access in [Allow access](/docs/posthog-ai/allow-access).
+- See everything PostHog AI can do in [Tools and capabilities](/docs/posthog-ai/tools).
+- Ask from a thread instead in [Slack](/docs/posthog-ai/surfaces/slack).
