@@ -413,8 +413,9 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+    const email = profile?.user?.data?.attributes?.email
 
     // Update showPronounsInput when values.pronouns changes
     useEffect(() => {
@@ -422,6 +423,14 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && email && (
+                <p className="flex justify-between m-0 gap-2">
+                    <span className="font-semibold">Email</span>
+                    <a href={`mailto:${email}`} className="truncate text-right">
+                        {email}
+                    </a>
+                </p>
+            )}
             {!isEditing && profile.reputation != null && (
                 <p className="flex justify-between items-center m-0">
                     <span className="font-semibold">Reputation</span>
@@ -1501,7 +1510,8 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
-                                profile.location) && (
+                                profile.location ||
+                                (isModerator && profile?.user?.data?.attributes?.email)) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
@@ -1510,6 +1520,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
+                                        isModerator={isModerator}
                                     />
                                 </Block>
                             )}
