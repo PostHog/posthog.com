@@ -1,7 +1,7 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { Logo } from '@posthog/brand/logo'
-import { SQUEAK_HOST } from 'lib/strapi'
+import { posthogConnectUrl } from 'lib/strapi'
 
 interface PostHogButtonProps {
     label?: string
@@ -12,7 +12,7 @@ interface PostHogButtonProps {
 // builds the PKCE state and forwards the browser to oauth.posthog.com.
 const PostHogButton: React.FC<PostHogButtonProps> = ({ label = 'Sign in with PostHog', className = '' }) => {
     const handleClick = () => {
-        window.location.href = `${SQUEAK_HOST}/api/connect/posthog`
+        window.location.href = posthogConnectUrl()
     }
 
     return (

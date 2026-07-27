@@ -5,6 +5,9 @@
 // is intentionally NOT affected by this, so it stays on the full-data cloud backend.
 export const SQUEAK_HOST = process.env.GATSBY_SQUEAK_AUTH_HOST || process.env.GATSBY_SQUEAK_API_HOST
 
+export const posthogConnectUrl = (): string =>
+    `${SQUEAK_HOST}/api/connect/posthog?returnTo=${encodeURIComponent(window.location.origin)}`
+
 // Strapi helper types
 export type StrapiResult<T> = StrapiData<T> &
     StrapiMeta & {
