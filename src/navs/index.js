@@ -6620,7 +6620,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -6643,7 +6643,44 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/mcp-analytics/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/mcp-analytics/surfaces/mcp',
+                    icon: 'IconPlug',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/mcp-analytics/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/mcp-analytics/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Events',
+                },
+                {
+                    name: 'Event & property reference',
+                    url: '/docs/mcp-analytics/events',
+                    icon: 'IconList',
+                    color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Capturing agent intent',
@@ -6653,10 +6690,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Conversation IDs',
-                    url: '/docs/mcp-analytics/conversation-id',
-                    icon: 'IconMessage',
-                    color: 'salmon',
+                    name: 'Missing capabilities',
+                    url: '/docs/mcp-analytics/missing-capability',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                },
+                {
+                    name: 'Instrumentation',
                 },
                 {
                     name: 'Identifying users',
@@ -6665,10 +6705,10 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Missing capabilities',
-                    url: '/docs/mcp-analytics/missing-capability',
-                    icon: 'IconWrench',
-                    color: 'orange',
+                    name: 'Conversation IDs',
+                    url: '/docs/mcp-analytics/conversation-id',
+                    icon: 'IconMessage',
+                    color: 'salmon',
                 },
                 {
                     name: 'Custom events & metadata',
@@ -6684,14 +6724,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Reference',
-                },
-                {
-                    name: 'Event & property reference',
-                    url: '/docs/mcp-analytics/events',
-                    icon: 'IconList',
-                    color: 'red',
-                    featured: true,
+                    name: 'Resources',
                 },
                 {
                     name: 'Sample queries',
