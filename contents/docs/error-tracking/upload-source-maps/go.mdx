@@ -7,7 +7,7 @@ import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
 
-The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-process from the Go runtime, so captured frames always include file names, line numbers, and function names. Uploading debug symbols improves on that: PostHog symbolicates frames server-side from the exact build that crashed, resolves inlined calls precisely, and can display the source code around each frame.
+The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-process from the Go runtime, so captured frames already carry file names, line numbers, and function names. Uploading debug symbols gets you more than that. PostHog resolves the frames again server-side against the exact build that crashed, which recovers the full inline call chain and lets the UI show the source code around each frame.
 
 <CalloutBox icon="IconInfo" title="Version requirements" type="action">
 
@@ -32,21 +32,21 @@ The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-proc
 
 <Step title="Build with the right linker flags" badge="required">
 
-Go embeds DWARF debug info in every binary by default, but the SDK and CLI need a little help depending on the platform.
+Go embeds DWARF debug info in every binary by default. What you add on top depends on the platform.
 
-On Linux, add a GNU build ID — the unique identifier PostHog uses to match stack frames to uploaded symbols. Go doesn't emit one by default:
+On Linux, add a GNU build ID. That's the identifier PostHog uses to match stack frames to uploaded symbols, and Go doesn't emit one unless you ask:
 
 ```bash
 go build -ldflags="-B gobuildid" -o my-app .
 ```
 
-On macOS, keep the DWARF uncompressed. Binaries always carry a Mach-O UUID, so there is no build ID step, but Go compresses debug info by default and compressed DWARF can't be used for symbolication yet:
+On macOS there's no build ID step, since every Mach-O binary carries a UUID. Instead, turn off DWARF compression. Go compresses debug info by default, and symbolication can't read the compressed form yet:
 
 ```bash
 go build -ldflags="-compressdwarf=false" -o my-app .
 ```
 
-Watch out for flags that remove what the upload needs: `-ldflags="-w"` or `-ldflags="-s"` strip DWARF entirely, and `-trimpath` rewrites the source paths that `--include-source` relies on.
+Two flags to avoid: `-ldflags="-w"` and `-ldflags="-s"` strip the DWARF entirely, and `-trimpath` rewrites the source paths that `--include-source` reads from.
 
 </Step>
 
@@ -58,9 +58,9 @@ Point the CLI at the directory containing your built binary:
 posthog-cli symbol-sets upload --directory ./bin
 ```
 
-The CLI scans the directory and uploads every executable that carries debug info and an identity, skipping everything else. On macOS the Go binary uploads directly — Go never produces a `.dSYM` bundle, and none is needed. Universal (fat) binaries upload one symbol set per architecture slice. Windows binaries are not supported yet: the SDK sends plain runtime-resolved frames there.
+The CLI scans the directory and uploads every executable that carries debug info and an identity, skipping everything else. On macOS the Go binary uploads directly. Go never produces a `.dSYM` bundle, and it doesn't need one. Universal (fat) binaries upload one symbol set per architecture slice. Windows isn't supported yet, so the SDK falls back to plain runtime-resolved frames there.
 
-Run this as part of the same pipeline that produces your production binary. Each build has its own identity, so symbols must be re-uploaded for every build you deploy.
+Run this in the same pipeline that produces your production binary. Every build gets its own identity, so you need to re-upload for each build you deploy.
 
 </Step>
 
@@ -72,7 +72,7 @@ By default, only debug symbols are uploaded. To also display the source code aro
 posthog-cli symbol-sets upload --directory ./bin --include-source
 ```
 
-This bundles the project source files referenced by the debug info into the upload. It increases upload size, so only enable it if you want source context in the error tracking UI. It also requires building without `-trimpath`, since the CLI reads sources from the paths recorded at compile time.
+This bundles the project source files referenced by the debug info into the upload. Uploads get bigger, so turn it on only if you want source context in the error tracking UI. It also means building without `-trimpath`, since the CLI reads the sources off disk using the paths recorded at compile time.
 
 </Step>
 
@@ -91,9 +91,9 @@ In CI, authenticate with environment variables instead of `posthog-cli login`. F
     POSTHOG_CLI_PROJECT_ID: ${{ secrets.POSTHOG_CLI_PROJECT_ID }}
 ```
 
-Scope the credentials to the upload step only — the build itself doesn't need them.
+Scope the credentials to the upload step. The build itself doesn't need them.
 
-The CLI defaults to US Cloud. If you are on EU Cloud or self-hosted, also set `POSTHOG_CLI_HOST` (for example `https://eu.posthog.com`).
+The CLI defaults to US Cloud. If you're on EU Cloud or self-hosted, also set `POSTHOG_CLI_HOST` (for example `https://eu.posthog.com`).
 
 If your binary is built inside a Dockerfile, run the upload in the build stage right after the build, and pass the credentials in as build secrets so they never reach the runtime image.
 
@@ -116,7 +116,7 @@ client.Enqueue(exception)
 client.Close()
 ```
 
-Run the binary, then check the [error tracking issues view](https://app.posthog.com/error_tracking): the stack trace should resolve against the uploaded symbols, including source context if you uploaded with `--include-source`. A rebuild changes the binary's identity, so if you rebuild, upload again before testing.
+Run the binary, then open the [error tracking issues view](https://app.posthog.com/error_tracking). The stack trace should resolve against the uploaded symbols, with source context if you used `--include-source`. Rebuilding changes the binary's identity, so upload again before you test.
 
 </Step>
 
