@@ -2802,6 +2802,10 @@ export const docsMenu = {
                             url: '/docs/api/personal-api-keys',
                         },
                         {
+                            name: 'Project secret API keys',
+                            url: '/docs/api/project-secret-api-keys',
+                        },
+                        {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
                         },
@@ -4480,6 +4484,12 @@ export const docsMenu = {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Improving accuracy',
+                    url: '/docs/replay-vision/quality',
+                    icon: 'IconThumbsUp',
                     color: 'yellow',
                 },
                 {
@@ -7307,6 +7317,12 @@ export const docsMenu = {
                     name: 'Workflow builder',
                     url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
                     color: 'orange',
                 },
                 {
