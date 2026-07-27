@@ -59,7 +59,7 @@ PostHog should feel:
 
 ## Who we're talking to
 
-Our primary audience is **AI-pilled builderss** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
+Our primary audience is **AI-pilled builders** – product-minded, full-stack engineers with a slight bias toward the frontend – and product-minded builders more broadly. Many of them are technical founders or assume the role. It's incredibly important that we don't alienate them, as they're a driver of word-of-mouth growth.
 
 We should assume our audience either has to do technical work or wants to, regardless of whether they can code. Most of them are developers, and for the rest, we're the bridge, giving everyone direct access to data and the power to ship.
 
@@ -120,9 +120,9 @@ In one line: self-driving is the story, products are how you access it, tools ar
 
 Beyond literally communicating what PostHog is and what it does, we want to [equip developers to build successful products](/handbook/why-does-posthog-exist). We do this by communicating the following:
 
-- There is a lot of hard-earned knowledge in the startup and product space that developers don't know yet because it's not written for them. We've also learned a lot from building PostHog and from our customers. We want to share all this with them.
-- We provide all the tools developers need to build successful products. All of them are powerful, but require expertise to use effectively. Some don't even know these tools exist. We help developers build this expertise by providing world-class docs, tutorials, and technical content.
-- Developers can build successful products. They don't need product managers or data analysts to tell them what to build. They are capable of making product decisions themselves, but need the right tools and knowledge to help them do so.
+- There is a lot of hard-earned knowledge in the startup and product space that builders don't know yet because it's not written for them. We've also learned a lot from building PostHog and from our customers. We want to share all this with them.
+- We provide all the tools developers need to build successful products. All of them are powerful, but require expertise to use effectively. Some don't even know these tools exist. We help build this expertise by providing world-class docs, tutorials, and technical content.
+- Anyone can build successful products. Developers don't need product managers or data analysts to tell them what to build. Formerly "non-technical" people don't need developers to write code for them. With the right tools and knowledge, anyone is capable of making product decisions themselves.
 - Talking to users, shipping what they want fast, debugging and fixing issues, measuring impact, and iterating is the core loop of building successful products.
 - PostHog aims to do "the right thing" for our users. We're self-serve with usage-based pricing. We don't have loss leaders and are in it for the long haul. We don't do sleazy marketing or sales tactics. We're open source and transparent. We don't want to be another boring B2B SaaS company, even if that is "optimal for the creation of shareholder value."
 
@@ -134,7 +134,7 @@ PostHog already has all the data about how people use your product and how your 
 
 This loop turns that data into signals, feeds those signals to an agent running in a sandbox, and automatically opens PRs that improve your product. Both our agents and the user can then use feature flags to roll out new features, experiments to measure impact, surveys to get feedback, and evals as checks.
 
-We have all the tools and context in one. This means less time spent patching these tools together and paying for them all separately. When engineers need a new tool, they can just use PostHog.
+We have all the tools and context in one. This means less time spent patching these tools together and paying for them all separately. When builders (and their agents) need a new tool, they can just use PostHog.
 
 Our team is technical and speaks the language of developers. Our engineers talk with customers to figure out what to build. Our support team are all former engineers and get into the nitty-gritty of issues. Our sales and CS teams are very technical too. They focus more on your use cases and implementation than steak dinners.
 
