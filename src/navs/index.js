@@ -52,6 +52,13 @@ export const dataPipelines = {
             featured: true,
         },
         {
+            name: 'PostHog Desktop',
+            url: '/docs/cdp/surfaces/desktop',
+            icon: 'IconCode',
+            color: 'orange',
+            featured: true,
+        },
+        {
             name: 'API',
             url: '/docs/cdp/surfaces/api',
             icon: 'IconBrackets',

@@ -1,0 +1,51 @@
+---
+title: Fix pipeline failures in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work that data pipelines generates. Pipeline failures are quiet – events keep ingesting and your dashboards stay green while a destination silently stops delivering – so a [scout](/docs/self-driving/scouts) watches delivery for you and files what it finds as a report.
+
+{/* TODO: screenshot of a data pipelines report and draft PR in PostHog Desktop */}
+
+## How a delivery problem becomes a report
+
+A dedicated data pipelines scout runs on a schedule across your destinations, transformations, batch exports, and hog flows. It only cares about the gap between what a pipeline is configured to do and what it's actually doing:
+
+- **Platform interventions** – PostHog's hog watcher degrading or auto-disabling an enabled function after sustained trouble, so delivery stops without anyone being told. A transformation in this state matters most, because it sits in the ingestion path for every event in the project.
+- **Rising failure share** – an enabled destination whose failure rate steps above its own history, including one that has been failing since the day it was created.
+- **Filter starvation** – a destination that stops firing because the event its filter matches was renamed or stopped. It isn't failing, it's starving.
+- **Stalled or failed batch exports** – a terminal failed run, or a schedule that has fallen behind its own interval. Each missed interval is a permanent data gap until someone backfills it.
+- **Flows failing for real people** – an active hog flow erroring for the recipients it triggers on, usually concentrated in one broken step like a dead webhook or a bad template.
+
+Anything you turned off on purpose is baseline, not a finding: paused exports, disabled functions, and draft or archived flows are operator choices, so the scout leaves them alone.
+
+When a finding clears the bar, the scout files a single report in the [Self-driving inbox](/docs/self-driving/inbox) naming the pipeline, quantifying the contradiction against its own baseline, and dating the onset – with the error class pulled from the function's logs or the flow's failed invocations, and a suggested reviewer.
+
+## Two ways a report gets resolved
+
+Most pipeline problems need a person. A broken remote endpoint, an expired credential, or a watcher intervention isn't something a coding agent can fix, so the report is filed for human review with no repository attached and no pull request.
+
+When the fix is an obvious code change in a function or flow your team owns – a dead webhook URL, a bad template – the report is marked immediately actionable and can auto-start an [implementation run](/docs/self-driving/inbox/implementation). The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request. Merging it resolves the report.
+
+## What you can do here
+
+- Read reports built from real delivery data, with the pipeline, the failure numbers, and the error class in view.
+- Ask questions – start a research task against a report to dig further before acting.
+- Review and edit the draft pull request when the fix is code, then merge it on GitHub.
+- Watch the agent work through the live transcript and the files it changed.
+
+Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
+
+## Related
+
+- Build and monitor the same pipelines in the [web app](/docs/cdp/surfaces/web-app).
+- Create and debug pipeline functions from your editor over [MCP](/docs/cdp/surfaces/mcp).
+- Diagnose delivery problems yourself with the [troubleshooting guide](/docs/cdp/troubleshooting).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

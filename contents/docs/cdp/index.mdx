@@ -5,20 +5,21 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconPlug, IconBrackets, IconDatabase, IconLive, IconWrench } from '@posthog/icons'
+import { IconLaptop, IconPlug, IconBrackets, IconDatabase, IconLive, IconWrench, IconCode, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Data pipelines is PostHog's customer data platform. It pulls data in from the tools you already use, lets you filter and reshape events as they're ingested, and sends the result wherever it needs to go – in realtime or on a schedule.
 
-Everything runs on the same event stream that powers the rest of PostHog, so the data you send to Slack, your warehouse, or your CRM is the data you analyze. Pipelines are built from [Hog functions](/docs/hog), which you can configure from a template, write yourself, or have [PostHog AI](/docs/cdp/hog-functions-ai) write for you.
+Everything runs on the same event stream that powers the rest of PostHog, so the data you send to Slack, your warehouse, or your CRM is the data you analyze. Pipelines are built from [Hog functions](/docs/hog), which you can configure from a template, write yourself, or have [PostHog AI](/docs/cdp/hog-functions-ai) write for you. Delivery metrics also feed [Self-driving](/docs/self-driving), which catches pipelines that quietly stop delivering and files a report you act on.
 
 <OSButton variant="primary" asLink to="/docs/cdp/start-here">Get started</OSButton>
 
 ## Where you can use it
 
-You build and monitor pipelines in the PostHog web app. The other surfaces let you create and debug the same functions from your editor or your own systems.
+You build and monitor pipelines in the PostHog web app. The other surfaces let you create and debug the same functions from your editor or your own systems, and review the fixes Self-driving opens when delivery breaks.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
 
   <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
     <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
@@ -35,6 +36,15 @@ You build and monitor pipelines in the PostHog web app. The other surfaces let y
       <p className="m-0 font-bold text-primary">MCP</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Create, update, test-invoke, and debug pipeline functions from any MCP client or AI editor.</p>
       <a href="/docs/cdp/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review Self-driving reports about pipelines that stopped delivering, and merge the fixes they open.</p>
+      <a href="/docs/cdp/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix pipelines in PostHog Desktop →</a>
     </div>
   </div>
 
@@ -89,3 +99,19 @@ Data pipelines runs on the events and person data already in your PostHog projec
 Teams most often use data pipelines to keep a warehouse in sync with product data, to push events into tools like [Slack](/docs/cdp/destinations/slack), [HubSpot](/docs/cdp/destinations/hubspot), or [Intercom](/docs/cdp/destinations/intercom) over [webhooks](/docs/cdp/destinations/webhook), and to enforce a schema at ingestion so bad events never make it into analytics.
 
 Transformations also help you label events on the way in – setting a property like `user_tier` or `page_category` – which makes downstream metrics and [SQL queries](/docs/data-warehouse/sql) much easier to write.
+
+## How data pipelines works with Self-driving
+
+Pipeline delivery is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A scout watches your destinations, transformations, batch exports, and hog flows for the moments delivery stops matching the config – a function the hog watcher disabled, a failure share stepping above its own baseline, a batch export that stalled – and files each validated contradiction as a single report.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Delivery metrics', icon: IconLive, color: '#F54E00', description: 'Function runs, export intervals, and flow invocations' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Watcher interventions, failure shifts, and stalls' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'The pipeline named, quantified, and dated' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When the fix is code your team owns' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+Most pipeline problems – a broken remote endpoint, an expired credential, a watcher intervention – need a person, so the report is filed for human review with no pull request attached. When the fix is an obvious code change in a function or flow your team owns, the report auto-starts a coding run and the merged pull request resolves it. See [PostHog Desktop](/docs/cdp/surfaces/desktop) for how that works, and the [Self-driving docs](/docs/self-driving) for the full picture.
