@@ -186,7 +186,7 @@ You can use this prompt to copy the [qa-frontend](https://github.com/PostHog/pos
 ```llm
 Read https://github.com/PostHog/posthog/blob/master/.agents/skills/qa-frontend/SKILL.md and build the equivalent for the repo at <path>. Copy the architecture and preserve every safety invariant it states exactly.
 
-Its file-classification, route-finding, local-stack/login, and evidence-upload rules are calibrated to PostHog — re-derive mine: mine my repo for the diff-pattern → frontend-test-type map, route heuristics, and the "never auto-edit" deny-list (from my high-blast-radius areas). Propose the full config for my sign-off before writing any code.
+Its file-classification, route-finding, local-stack/login, and evidence-upload rules are calibrated to PostHog — re-derive for me: mine my repo for the diff-pattern → frontend-test-type map, route heuristics, and the "never auto-edit" deny-list (from my high-blast-radius areas). Propose the full config for my sign-off before writing any code.
 
 Ask me whatever you can't derive from the repo — at minimum: which browser MCP to drive, how my local stack starts and on what URL, how the app authenticates locally, and how PR mode checks out PRs and posts comments (platform + CLI/token).
 
