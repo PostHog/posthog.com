@@ -146,8 +146,8 @@ export default function Instrumentation(): JSX.Element {
             <div className="px-4 py-3 border-b border-primary bg-primary shrink-0">
                 <h1 className="text-base font-bold m-0">How instrumentation works</h1>
                 <p className="text-sm text-secondary m-0 max-w-4xl">
-                    Unter is a fake app, instrumented for real. Show the instrumentation, then open any numbered marker
-                    to see what PostHog captures there.
+                    Unter is a fake app, instrumented for real. Open any numbered marker to see what PostHog captures
+                    there.
                 </p>
             </div>
 

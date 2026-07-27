@@ -85,14 +85,19 @@ export default function UnterSite({ page, onNavigate, onToggleSurvey }: UnterSit
                         </div>
                     </div>
                     <div className="un-fbottom">
-                        <div className="un-real" data-unter-id="footer-links">
-                            <b>Unter is made up. The holes are not.</b> Urban hedgehogs commute through 13cm gaps in
-                            garden fences every night, and there aren't enough of them. Cut a real one via{' '}
+                        <div className="un-real">
+                            <b>Unter is made up. Urban hedgehogs are not.</b> They commute through 13cm gaps in garden
+                            fences every night, and there aren't enough of them. Cut a real one via{' '}
                             <a href="https://www.hedgehogstreet.org" target="_blank" rel="noreferrer">
                                 Hedgehog Street
                             </a>
                             , or watch Sir David Attenborough escort a hedgehog through one in{' '}
-                            <a href="https://www.youtube.com/watch?v=Gsd5_xzebH0" target="_blank" rel="noreferrer">
+                            <a
+                                href="https://www.youtube.com/watch?v=Gsd5_xzebH0"
+                                target="_blank"
+                                rel="noreferrer"
+                                data-unter-id="footer-outbound"
+                            >
                                 BBC's Wild London
                             </a>
                             .

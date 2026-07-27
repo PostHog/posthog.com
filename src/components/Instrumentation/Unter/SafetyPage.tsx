@@ -11,8 +11,8 @@ export default function SafetyPage(): JSX.Element {
                 <div className="un-shell">
                     <h2 className="un-h1">Getting small things across a big city.</h2>
                     <p className="un-lede">
-                        Roads ended the old routes, so the network runs through gardens instead. Everything else that
-                        can go wrong out there at night, we have thought about at length.
+                        This is about keeping the hedgehogs safe, not the humans who host them. Here's what happens once
+                        one of them is out at night looking for a gap.
                     </p>
                 </div>
             </section>
@@ -22,8 +22,9 @@ export default function SafetyPage(): JSX.Element {
                         <IconRuler className="un-sicon" />
                         <h3>Verified gaps only</h3>
                         <p>
-                            Every gap on the network is measured on registration. 13cm nominal, no exceptions. An 11cm
-                            gap is how you end up with a stuck hedgehog and a viral video at his expense.
+                            Every gap is measured on registration, and the spec is 13cm with no exceptions. Cut it at
+                            11cm and you don't get a smaller doorway, you get a hedgehog stuck exactly halfway through
+                            it.
                         </p>
                     </div>
                     <div className="un-safe-card">
@@ -31,7 +32,7 @@ export default function SafetyPage(): JSX.Element {
                         <h3>Crossing check-ins</h3>
                         <p>
                             Long crossing? We ping your burrow when you arrive. If you stop moving for more than 40
-                            minutes near a bird bath, we assume you found something to eat and stop worrying.
+                            minutes near a bird bath, we assume you found something to eat.
                         </p>
                     </div>
 
@@ -41,24 +42,25 @@ export default function SafetyPage(): JSX.Element {
                         <IconX className="un-sicon" />
                         <h3>No roads. Ever.</h3>
                         <p>
-                            Unter will never route you across tarmac. If the only way is a road, we cancel the trip and
-                            quietly email three nearby humans about their fences.
+                            Unter will never route you across tarmac. If the only way is a road, we'll call you an Uber.
                         </p>
                     </div>
                     <div className="un-safe-card">
                         <IconStar className="un-sicon" />
                         <h3>Rated by the community</h3>
                         <p>
-                            Gaps get reviews. “Snug but fair.” “Splinter on the left edge, 3 stars.” Hosts fix what
-                            riders flag.
+                            Gaps get star ratings same as anything else you'd book. A host who gets called out for a
+                            splintered edge fixes it fast, because nobody wants to be the two-star gap on their own
+                            street.
                         </p>
                     </div>
                     <div className="un-safe-card">
                         <IconPassword className="un-sicon" />
                         <h3>Scent-PIN verification</h3>
                         <p>
-                            Every crossing gets a scent-PIN. Your hedgehog sniffs the gap post to confirm it's the right
-                            one. Wrong scent, no entry. And yes, they queue to sniff. It's very orderly.
+                            Every hedgehog sniffs the gap post before going through, the network's version of a PIN.
+                            They form an actual queue to do it, unprompted, which is more orderly than most humans
+                            manage at a doorway.
                         </p>
                     </div>
                     <div className="un-safe-card">

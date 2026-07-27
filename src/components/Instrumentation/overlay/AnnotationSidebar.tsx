@@ -89,8 +89,7 @@ export default function AnnotationSidebar({
                 <Link to="/wizard" disablePrefetch externalNoIcon className="font-semibold">
                     PostHog wizard
                 </Link>{' '}
-                on your own app and it installs the SDK and writes the instrumentation for you, in about eight minutes.
-                That's how Unter got all of this.
+                on your own app or website and it sets up instrumentation for you, in about eight minutes.
             </p>
             <WizardCommand slim />
         </div>
@@ -123,7 +122,7 @@ export default function AnnotationSidebar({
                     </p>
                 ) : (
                     <p className="text-xs text-secondary m-0">
-                        {annotations.length} touchpoints on {pageLabel}, using {toolCount} tools.
+                        {annotations.length} touchpoints on {pageLabel}, using {toolCount} PostHog tools.
                     </p>
                 )}
             </div>
@@ -169,7 +168,7 @@ export default function AnnotationSidebar({
                     </OSButton>
                     <p className="text-sm text-secondary m-0">
                         Right now Unter looks the way its users see it. {annotations.length} touchpoints are already
-                        capturing data on this page, and none of them are visible.
+                        capturing data on this page.
                     </p>
                     <div className="-mx-1.5">{wizardNote}</div>
                 </div>

@@ -87,23 +87,24 @@ export default function HighwayPage(): JSX.Element {
 
                 <Faq />
 
-                <section className="un-refer">
+                {/* The whole block is one experiment variant, not just the button:
+                    heading, body, and CTA are swapped together. The annotation on
+                    it explains why that's a deliberate trade. */}
+                <section className="un-refer" data-unter-id="refer-block">
                     <div>
                         <h2 className="un-h2">Two holes make a route</h2>
                         <p>
-                            A gap into a sealed garden is a cul-de-sac. Refer your neighbour and turn it into a
-                            through-road.
+                            A gap into a sealed garden is a dead end for a critter. Refer your neighbour and turn it
+                            into a through-road for the London hedgehog highway.
                         </p>
                     </div>
-                    <button className="un-btn-white" data-unter-id="btn-refer">
-                        Send a very polite note
-                    </button>
+                    <button className="un-btn-white">Send a very polite note</button>
                 </section>
 
                 <div className="un-host-quote">
                     <div className="un-face">M</div>
                     <div>
-                        <blockquote>“Took ten minutes. I'll never meet any of them.”</blockquote>
+                        <blockquote>“Took ten minutes. I like knowing they come through.”</blockquote>
                         <div className="un-who">Margaret, 71 · Host since 2024 · 4,000+ crossings facilitated</div>
                     </div>
                 </div>

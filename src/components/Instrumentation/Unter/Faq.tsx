@@ -11,7 +11,7 @@ const QUESTIONS: { q: string; a: string }[] = [
     },
     {
         q: 'What about my dog?',
-        a: "If your dog fits through a 13cm gap, that is not your dog. That's a hedgehog.",
+        a: "If your dog fits through a 13cm gap, that's not your dog. That's a hedgehog.",
     },
     {
         q: 'Can I close the gap in winter?',
@@ -19,8 +19,11 @@ const QUESTIONS: { q: string; a: string }[] = [
     },
 ]
 
-// Native details/summary on purpose: the overlay's autocapture annotation
-// points at real <summary> elements, the same thing autocapture would log.
+/* Native details/summary on purpose, and `cursor: pointer` in unter.css is what
+   makes the autocapture annotation true: shouldCaptureDomEvent returns early for
+   any element whose computed cursor is `pointer` on a click, before it ever checks
+   the tag name. A <summary> isn't in autocaptureCompatibleElements, so without
+   that style these rows would go uncaptured. */
 export default function Faq(): JSX.Element {
     return (
         <section className="un-faq" data-unter-id="host-faq">

@@ -10,7 +10,7 @@ export const safetyAnnotations: Annotation[] = [
         label: '$web_vitals',
         dx: 0.86,
         dy: 0.5,
-        title: 'How fast the page felt, per page',
+        title: 'How fast each page felt to load',
         body: {
             why: (
                 <>
@@ -57,14 +57,14 @@ $web_vitals_CLS_value  0.31  # layout shift`,
             code: {
                 language: 'js',
                 snippet: `// server-side, where the route is built
-const v2 = await posthog.isFeatureEnabled(
-  'routing-engine-v2-release',
-  distinctId,
+const flags = await posthog.evaluateFlags(distinctId, {
   // pass what the release conditions target, or
   // the SDK has to ask the server instead
-  { personProperties: { borough, staff } }
-)
-return v2 ? routeV2(from, to) : routeV1(from, to)`,
+  personProperties: { borough, staff },
+})
+return flags.isEnabled('routing-engine-v2-release')
+  ? routeV2(from, to)
+  : routeV1(from, to)`,
             },
             after: (
                 <>
@@ -84,7 +84,7 @@ return v2 ? routeV2(from, to) : routeV1(from, to)`,
         label: '$exception',
         dx: 0.5,
         dy: 0,
-        title: 'Exceptions are captured automatically',
+        title: 'Errors are captured automatically',
         body: {
             why: (
                 <>
@@ -108,8 +108,8 @@ catch (err) {
             },
             after: (
                 <>
-                    Each <code>$exception</code> is linked to its session replay, so you can watch what the user saw
-                    before reading the stack trace.
+                    Each <code>$exception</code> is linked to its PostHog session replay, so you can watch what the user
+                    saw before reading the stack trace.
                 </>
             ),
         },
@@ -122,13 +122,13 @@ catch (err) {
         label: 'inbox report',
         dx: 0.5,
         dy: 1.0,
-        title: 'Signals cluster into one report with a fix',
+        title: 'Errors cluster into one report with a fix',
         body: {
             why: (
                 <>
-                    Error tracking is a signal source, so the 412 exceptions from this widget are already feeding the
-                    self-improving loop. Signals get deduplicated and clustered into one report, an agent digs through
-                    the codebase and the data to confirm it, and it comes back with a priority.
+                    PostHog's error tracking is a signal source, so the 412 exceptions from this widget are already
+                    feeding the self-improving loop. Signals get deduplicated and clustered into one report, an agent
+                    digs through the codebase and the data to confirm it, and it comes back with a priority.
                 </>
             ),
             code: {
@@ -156,7 +156,7 @@ Coverage tile requests failing (403)
         label: 'source maps',
         dx: 0.08,
         dy: 0.92,
-        title: 'Source maps make stack traces readable',
+        title: 'Turning minified errors back into your code',
         body: {
             why: (
                 <>

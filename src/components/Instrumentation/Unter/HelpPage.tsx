@@ -9,7 +9,7 @@ const INITIAL_MESSAGES: Message[] = [
     { from: 'user', text: 'Is there a hedgehog highway in Toronto?' },
     {
         from: 'bot',
-        text: 'Not yet. We cover Greater London and four postcodes in Bristol. Toronto has raccoons, which is a different product.',
+        text: 'Not yet. We cover Greater London and four postcodes in Bristol. Toronto has raccoons, but they typically make their own arrangements.',
     },
 ]
 
@@ -60,8 +60,8 @@ export default function HelpPage(): JSX.Element {
                 <div className="un-help-intro">
                     <h2 className="un-h1">AI support</h2>
                     <p className="un-lede">
-                        Ask about routes, gap sizes, or a crossing that didn't happen. It can see your recent trips and
-                        answers in about a second.
+                        Ask Unter AI about the hedgehog highway, or get help with your route. Support hours: 24/7, which
+                        for a nocturnal user base mostly means 11pm to 4am.
                     </p>
                     {/* Not buttons: these are examples of what people ask, not a
                         second way to drive the thread. The input below is the
@@ -114,7 +114,7 @@ export default function HelpPage(): JSX.Element {
                 <div>
                     <h2 className="un-h2">Still stuck?</h2>
                     <p className="un-lede">
-                        A human will read your message eventually. Margaret volunteers on Tuesdays and is very thorough.
+                        A human will read your message eventually. Joe volunteers on Tuesdays and is very thorough.
                     </p>
                 </div>
                 <button className="un-btn-black">Email support</button>

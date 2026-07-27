@@ -1169,28 +1169,6 @@
     font-size: 17px;
     font-weight: 700;
 }
-.un-coverage-head .un-live {
-    font-size: 11px;
-    font-weight: 700;
-    color: #e11900;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    letter-spacing: 0.04em;
-}
-.un-coverage-head .un-live::before {
-    content: '';
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #e11900;
-    animation: snBlink 1.2s infinite;
-}
-@keyframes snBlink {
-    50% {
-        opacity: 0.25;
-    }
-}
 .un-coverage-body {
     min-height: 240px;
     background: repeating-linear-gradient(0deg, transparent 0 47px, rgba(0, 0, 0, 0.04) 47px 48px),

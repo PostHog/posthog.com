@@ -51,13 +51,14 @@ posthog.init('phc_unter_******', {
         // sits on the glyphs, because the headline wraps and fills its box.
         dx: 1.0,
         dy: 1.0,
-        title: 'What makes this an experiment, not a flag',
+        title: 'Testing which homepage headline wins',
         body: {
             why: (
                 <>
-                    Two headlines, split randomly by a flag. What makes it an experiment is the other half: PostHog logs
-                    who saw which variant, ties that to a metric you nominated up front, and tells you when the
-                    difference stops being noise.
+                    This headline is the thing being tested: half of visitors see one version, half see another, split
+                    randomly by a flag. What makes it an experiment rather than just a flag is the other half of the
+                    setup. PostHog logs who saw which headline, ties that to a metric you pick up front (here, whether
+                    they go on to view prices), and tells you when the gap between the two is real rather than noise.
                 </>
             ),
             code: {
@@ -83,7 +84,7 @@ heroEl.textContent = COPY[v]
         label: 'session replay scout',
         dx: 0.88,
         dy: 0.5,
-        title: 'Scouts find friction in recordings',
+        title: 'An AI scout finds friction in recordings',
         body: {
             why: (
                 <>
@@ -121,13 +122,15 @@ Rage-click cluster: destination field
         label: 'ride_prices_viewed',
         dx: 0.5,
         dy: 1.0,
-        title: 'A named event for the funnel step',
+        title: 'A named event for a conversion step',
         body: {
             why: (
                 <>
-                    The click is already in autocapture. The named event exists so the funnel doesn't depend on a CSS
-                    selector surviving the next redesign, and so the properties arrive with a schema someone chose on
-                    purpose.
+                    The click is already in autocapture, but a conversion funnel built on autocapture breaks the day
+                    someone reworks this button: the selector stops matching, the step goes quiet, and the rate looks
+                    like it cratered when behavior never changed. A named event is a stable definition of the step that
+                    survives redesigns, and its properties arrive with a schema someone chose on purpose, so you can
+                    break the conversion down by the things that matter.
                 </>
             ),
             code: {
@@ -161,10 +164,9 @@ Rage-click cluster: destination field
         body: {
             why: (
                 <>
-                    Session replay records this form so you can watch where people abandon it. Every input is masked by
-                    default, so the values people type are replaced with asterisks before the recording leaves the
-                    browser. Pickup and destination are location data, which is exactly what you don't want sitting in a
-                    recording.
+                    Session replay records this form, but the values people type are replaced with asterisks before the
+                    recording leaves the browser. Pickup and destination are location data, which is sensitive data you
+                    don't want sitting in a recording.
                 </>
             ),
             code: {
@@ -371,7 +373,7 @@ posthog.setPersonProperties(
         label: 'identify()',
         dx: 0.028,
         dy: 0.5,
-        title: 'identify() links anonymous events to a person',
+        title: 'Linking anonymous activity to a real person',
         body: {
             why: (
                 <>
@@ -467,37 +469,6 @@ posthog.opt_in_capturing()
         },
     },
     {
-        id: 'ride/footer-links/product',
-        page: 'ride',
-        target: 'footer-links',
-        tool: 'product',
-        label: 'outbound links',
-        dx: 0.22,
-        dy: 0.5,
-        title: 'Autocapture records outbound clicks',
-        body: {
-            why: (
-                <>
-                    The footer sends people to Hedgehog Street and the BBC. Autocapture records each click with the
-                    element's <code>href</code> and text, so leaving the site is measurable without wrapping every
-                    anchor in a handler.
-                </>
-            ),
-            code: {
-                language: 'bash',
-                snippet: `# $autocapture, grouped by element href:
-hedgehogstreet.org   1,880 clicks
-youtube.com/watch      642`,
-            },
-            after: (
-                <>
-                    One caveat: an outbound click is the last thing you see in that session, so read it as an exit
-                    rather than a conversion.
-                </>
-            ),
-        },
-    },
-    {
         id: 'ride/survey-badge/surveys',
         page: 'ride',
         target: 'survey-badge',
@@ -538,12 +509,14 @@ sample             25% of matching users
         label: 'mobile SDKs',
         dx: 0.5,
         dy: -0.05,
-        title: 'The mobile SDKs report to the same project',
+        title: 'The mobile apps report to the same project',
         body: {
             why: (
                 <>
                     The mobile apps run <code>posthog-ios</code> / <code>posthog-android</code> pointed at the same
-                    project, configured from the same env vars the web build uses.
+                    project, configured from the same env vars the web build uses. The shared token is what gets the
+                    events to one place. Calling <code>identify()</code> with the same user id on every platform is what
+                    puts them on one person, and without it you get the same human counted once per device.
                 </>
             ),
             code: {

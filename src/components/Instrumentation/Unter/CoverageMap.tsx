@@ -19,7 +19,6 @@ export default function CoverageMap(): JSX.Element {
         <div className="un-coverage" data-unter-id="coverage-map">
             <div className="un-coverage-head">
                 <h3>Where Unter runs</h3>
-                <span className="un-live">LIVE</span>
             </div>
             <div className="un-coverage-body">
                 {loading ? (
@@ -28,8 +27,8 @@ export default function CoverageMap(): JSX.Element {
                     <div className="un-coverage-error" data-unter-id="coverage-error">
                         <b>TileLoadError: 403 (tiles.unter.co.uk/coverage)</b>
                         <div className="un-desc">
-                            The coverage map didn't load. Unter is still running in every area it was an hour ago. We
-                            just can't show you which ones those are.
+                            The coverage map didn't load. Unter is still running in every area, we just can't show you
+                            where right now.
                         </div>
                         <button data-unter-id="btn-coverage-retry" onClick={retry}>
                             Retry
