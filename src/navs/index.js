@@ -5394,7 +5394,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'PostHog Desktop',
-                    url: '/docs/error-tracking/surfaces/code',
+                    url: '/docs/error-tracking/surfaces/desktop',
                     icon: 'IconCode',
                     color: 'orange',
                     featured: true,
@@ -5405,6 +5405,12 @@ export const docsMenu = {
                     icon: 'IconLlmPromptManagement',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'CLI',
+                    url: '/docs/error-tracking/surfaces/cli',
+                    icon: 'IconTerminal',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Exceptions',
