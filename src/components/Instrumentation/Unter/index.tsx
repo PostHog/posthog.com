@@ -53,7 +53,7 @@ export default function UnterSite({ page, onNavigate, onToggleSurvey }: UnterSit
                 {page === 'safety' && <SafetyPage />}
             </main>
 
-            <footer className="un-footer" data-unter-id="footer">
+            <footer className="un-footer">
                 {/* Not on Help or Safety: both already carry their own survey (the CSAT
                     prompt and the inline "was this helpful", each with its own marker),
                     so a third one would be noise. */}

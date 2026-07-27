@@ -5,8 +5,8 @@ import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import WizardCommand from 'components/WizardCommand'
 import { SingleCodeBlock } from 'components/CodeBlock'
-import { TOOLS } from './tools'
-import { Annotation, ToolKey } from './types'
+import { TOOLS, TOOL_CLASSES } from './tools'
+import { Annotation, ToolKey, UnterPageId } from './types'
 
 interface AnnotationSidebarProps {
     /** The PostHog toolbar mock, docked as this column's nav. */
@@ -17,6 +17,12 @@ interface AnnotationSidebarProps {
     pageLabel: string
     /** Per tool, the other pages that also instrument it, named as the demo's nav does. */
     elsewhere: Partial<Record<ToolKey, string>>
+    /** The demo page being viewed, and the switcher's options. */
+    page: UnterPageId
+    pages: { id: UnterPageId; label: string }[]
+    /** Touchpoint totals per page, shown on the switcher. */
+    pageCounts: Record<UnterPageId, number>
+    onNavigate: (page: UnterPageId) => void
     inspecting: boolean
     selectedId: string | null
     filter: ToolKey | null
@@ -45,6 +51,10 @@ export default function AnnotationSidebar({
     numbers,
     pageLabel,
     elsewhere,
+    page,
+    pages,
+    pageCounts,
+    onNavigate,
     inspecting,
     selectedId,
     filter,
@@ -92,6 +102,7 @@ export default function AnnotationSidebar({
             className={`flex flex-col min-h-0 bg-primary border border-primary rounded-md overflow-hidden ${className}`}
         >
             {toolbar}
+
             <div className="px-3 py-2.5 border-b border-primary shrink-0">
                 <div className="flex items-start gap-2">
                     <h2 className="flex-1 text-sm font-bold text-primary m-0">What PostHog measures here</h2>
@@ -115,6 +126,32 @@ export default function AnnotationSidebar({
                         {annotations.length} touchpoints on {pageLabel}, using {toolCount} tools.
                     </p>
                 )}
+            </div>
+
+            {/* Unter's four pages, each instrumented differently. Duplicating the demo's
+                own nav is deliberate: readers watch this column, and several of them
+                never noticed the fake site had more than one page. Both navs call the
+                same `onNavigate`, so they can't disagree about which page is open. The
+                counts are the part that does the work, since "Help 4" tells you there's
+                something over there without you having to go and look. */}
+            <div className="flex flex-wrap items-center gap-1 px-2 py-1.5 border-b border-primary shrink-0">
+                {pages.map(({ id, label }) => {
+                    const isCurrent = id === page
+                    return (
+                        <button
+                            key={id}
+                            type="button"
+                            onClick={() => onNavigate(id)}
+                            aria-current={isCurrent ? 'page' : undefined}
+                            className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
+                                isCurrent ? 'bg-accent font-bold text-primary' : 'text-secondary hover:bg-accent'
+                            }`}
+                        >
+                            {label}
+                            <span className="text-muted font-normal">{pageCounts[id]}</span>
+                        </button>
+                    )
+                })}
             </div>
 
             {!inspecting ? (
@@ -142,27 +179,29 @@ export default function AnnotationSidebar({
                         {visible.map((annotation) => {
                             const tool = TOOLS[annotation.tool]
                             const { Icon } = tool
+                            const classes = TOOL_CLASSES[tool.color]
                             const isSelected = annotation.id === selectedId
                             return (
                                 <li key={annotation.id} data-annotation-row={annotation.id}>
                                     <button
                                         type="button"
                                         onClick={() => onSelect(isSelected ? null : annotation.id)}
+                                        aria-expanded={isSelected}
                                         className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left transition-colors ${
                                             isSelected ? 'bg-accent' : 'hover:bg-accent'
                                         }`}
                                     >
                                         <span
-                                            className="shrink-0 flex items-center justify-center size-5 rounded-full text-xs font-semibold ring-1 ring-white"
-                                            style={{ background: tool.color, color: tool.textOnColor }}
+                                            className={`shrink-0 flex items-center justify-center size-5 rounded-full text-xs font-semibold ring-1 ring-white ${classes.bg} ${classes.on}`}
                                         >
                                             {numbers[annotation.id]}
                                         </span>
-                                        <Icon className="size-4 shrink-0" style={{ color: tool.color }} />
+                                        <Icon className={`size-4 shrink-0 ${classes.text}`} />
                                         <span className="flex-1 min-w-0 font-code text-xs text-primary truncate">
                                             {annotation.label}
                                         </span>
                                         <IconChevronDown
+                                            aria-hidden
                                             className={`size-4 shrink-0 text-muted transition-transform ${
                                                 isSelected ? 'rotate-180' : ''
                                             }`}
@@ -211,8 +250,7 @@ export default function AnnotationSidebar({
                         would be reporting on the filter you can already see. */}
                     {filter && elsewhere[filter] && (
                         <p className="mx-3 mt-1 mb-3 text-xs text-secondary">
-                            {TOOLS[filter].name} is also instrumented on {elsewhere[filter]}. Open a page from Unter's
-                            own nav to see it there.
+                            {TOOLS[filter].name} is also instrumented on {elsewhere[filter]}.
                         </p>
                     )}
 

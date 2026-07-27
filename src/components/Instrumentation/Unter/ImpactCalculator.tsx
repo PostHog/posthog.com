@@ -26,7 +26,7 @@ export default function ImpactCalculator(): JSX.Element {
                     <span>6 holes (a legend)</span>
                 </div>
             </div>
-            <div className="un-calc-out">
+            <div className="un-calc-out" role="status">
                 <div className="un-calc-cell">
                     <b>{holes * 7}</b>
                     <span>

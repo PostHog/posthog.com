@@ -28,7 +28,7 @@ export const rideAnnotations: Annotation[] = [
                 snippet: `// in <head>, before anything else
 posthog.init('phc_unter_******', {
   api_host: 'https://eu.i.posthog.com',
-  // one dated bundle of modern defaults, incl.
+  // dated defaults bundle. this one sets
   // capture_pageview: 'history_change' (SPA-safe)
   defaults: '2025-05-24',
 })`,
@@ -47,28 +47,30 @@ posthog.init('phc_unter_******', {
         target: 'hero-headline',
         tool: 'experiments',
         label: 'hero-headline-test',
-        dx: 0.72,
-        dy: 0.1,
-        title: 'Headline A/B test',
+        // Bottom-right corner, past the end of the last line. Anywhere further left
+        // sits on the glyphs, because the headline wraps and fills its box.
+        dx: 1.0,
+        dy: 1.0,
+        title: 'What makes this an experiment, not a flag',
         body: {
             why: (
                 <>
-                    The hero copy is an experiment gated by a feature flag. Half of visitors see this; half see{' '}
-                    <i>"The whole city is a garden."</i>
+                    Two headlines, split randomly by a flag. What makes it an experiment is the other half: PostHog logs
+                    who saw which variant, ties that to a metric you nominated up front, and tells you when the
+                    difference stops being noise.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `const v = posthog.getFeatureFlag('hero-headline-test')
-// 'control' → "Go anywhere. Under everything."
-// 'test'    → "The whole city is a garden."
-heroEl.textContent = COPY[v]`,
+heroEl.textContent = COPY[v]
+// exposure logs itself as $feature_flag_called
+// primary metric: ride_prices_viewed (marker 4)`,
             },
             after: (
                 <>
-                    Exposure is logged automatically as <code>$feature_flag_called</code>. The primary metric is{' '}
-                    <code>ride_prices_viewed</code> (the pin on the button below), so the experiment reads directly
-                    against the conversion it's supposed to move.
+                    Nominating the metric first is the part people skip. Pick it afterwards and you will find some
+                    number that moved, because on enough metrics one always has.
                 </>
             ),
         },
@@ -170,7 +172,7 @@ Rage-click cluster: destination field
                 snippet: `session_recording: {
   // maskAllInputs is already true by default;
   // shown to make the burrow addresses -> ****
-  // behaviour explicit
+  // behavior explicit
   maskAllInputs: true,
 }`,
             },
@@ -183,27 +185,28 @@ Rage-click cluster: destination field
         },
     },
     {
-        id: 'ride/tier-xl/product',
+        id: 'ride/tier-solo/product',
         page: 'ride',
-        target: 'tier-xl',
+        target: 'tier-solo',
         tool: 'product',
         label: 'ride_tier_selected',
+        // Bottom edge, level with the heatmap marker on the row below it.
         dx: 0.5,
-        dy: 0,
+        dy: 1.0,
         title: 'Capturing which option people pick',
         body: {
             why: (
                 <>
-                    Which tier do people hover, open, and actually pick? Autocapture gets the clicks; one custom event
-                    captures the decision with context.
+                    Autocapture already records the click on this card, but not what it meant. One custom event names
+                    the decision and carries the context you'd want to group by later.
                 </>
             ),
             code: {
                 language: 'js',
                 snippet: `posthog.capture('ride_tier_selected', {
-  tier: 'xl',
-  price_gbp: 5,
-  viewed_tiers: ['solo', 'xl']
+  tier: 'solo',
+  price_gbp: 3,
+  viewed_tiers: ['solo', 'xl', 'pool']
 })`,
             },
             after: (
@@ -215,11 +218,15 @@ Rage-click cluster: destination field
         },
     },
     {
-        id: 'ride/tier-xl/replay',
+        id: 'ride/tiers/replay',
         page: 'ride',
-        target: 'tier-xl',
+        // The whole row of options, not one card: a heatmap's value here is the
+        // comparison between the three.
+        target: 'tiers',
         tool: 'replay',
         label: 'heatmaps',
+        // Bottom edge, centered under all three cards. On the left edge it sat on the
+        // first card and read as belonging only to that one.
         dx: 0.5,
         dy: 1.0,
         title: 'Heatmaps need a toggle, not code',
@@ -233,17 +240,18 @@ Rage-click cluster: destination field
             ),
             code: {
                 language: 'bash',
-                snippet: `# toolbar -> heatmap, on /ride:
-clicks        XL card    1,204
-dead clicks   XL card      312  # the price
-rageclicks    XL card       47
-# 3 clicks within 30px in one second
-# counts as a rageclick`,
+                snippet: `# toolbar -> heatmap, on this page:
+              clicks   dead clicks
+Solo           1,204           312
+XL               486            18
+Pool             233             9
+# a dead click is a click that changed
+# nothing on the page`,
             },
             after: (
                 <>
-                    Dead clicks are the useful ones: 312 people clicked the price expecting a breakdown and got nothing.
-                    That's a missing feature, found without anyone reporting it.
+                    Dead clicks are the useful ones. 312 people clicked the Solo price expecting a breakdown and got
+                    nothing, which is a missing feature nobody filed a bug about.
                 </>
             ),
         },
@@ -264,8 +272,7 @@ rageclicks    XL card       47
             why: (
                 <>
                     No code on this pin. <code>$pageview</code> / <code>$pageleave</code>, referrers, UTM params,
-                    channel type, device, geo, and Web Vitals are all captured by the snippet and land in a ready-made
-                    dashboard.
+                    channel type, device and geo are all captured by the snippet and land in a ready-made dashboard.
                 </>
             ),
             code: {
@@ -273,7 +280,7 @@ rageclicks    XL card       47
                 snippet: `# what marketing checks each morning, zero setup:
 Channels:  hedgehogstreet.org / organic / social
 UTMs:      utm_campaign=wild_london_bump
-Vitals:    LCP 1.9s · CLS 0.02 · INP 140ms`,
+Devices:   mobile 71% · desktop 28%`,
             },
             after: (
                 <>
@@ -374,11 +381,10 @@ posthog.setPersonProperties(
             ),
             code: {
                 language: 'js',
-                snippet: `// on auth success, the server fires the event,
-// client links the identity:
+                snippet: `// on auth success, from the client:
 posthog.identify('hog_412', { tier: 'solo' })
 posthog.capture('auth_sign_in_completed')
-// stable, unique, non-PII id (never the email)
+// a stable id that never changes for them
 // posthog.reset() ONLY on logout, never on an
 // anonymous page load (that orphans the history)`,
             },

@@ -1,6 +1,6 @@
 import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { TOOLS } from './tools'
+import { TOOLS, TOOL_CLASSES } from './tools'
 import { MarkerPosition } from './useAnnotationPositions'
 
 interface MarkerLayerProps {
@@ -42,20 +42,21 @@ export default function MarkerLayer({
                 but both are bounded by the layer's own stacking level. */}
             {selected && (
                 <div
-                    className="absolute z-0 rounded border-2 transition-all duration-150"
+                    className={`absolute z-0 rounded border-2 transition-all duration-150 ${
+                        TOOL_CLASSES[TOOLS[selected.annotation.tool].color].outline
+                    }`}
                     style={{
                         left: selected.box.left - 4,
                         top: selected.box.top - 4,
                         width: selected.box.width + 8,
                         height: selected.box.height + 8,
-                        borderColor: TOOLS[selected.annotation.tool].color,
-                        backgroundColor: `${TOOLS[selected.annotation.tool].color}14`,
                     }}
                 />
             )}
             {positions.map(({ annotation, x, y }) => {
                 const tool = TOOLS[annotation.tool]
                 const { Icon } = tool
+                const classes = TOOL_CLASSES[tool.color]
                 const isSelected = annotation.id === selectedId
                 const isDimmed = dimmed(annotation.id)
                 return (
@@ -73,11 +74,14 @@ export default function MarkerLayer({
                                 <button
                                     type="button"
                                     onClick={() => onSelect(annotation.id)}
-                                    aria-label={`${annotation.title} (${tool.name})`}
+                                    // Leads with the number, which is the only thing
+                                    // tying a marker to its sidebar row.
+                                    aria-label={`${numbers[annotation.id]}. ${annotation.title} (${tool.name})`}
                                     className={`flex items-center justify-center size-6 rounded-full text-xs font-semibold ring-2 ring-white shadow-md transition-all duration-150 hover:scale-110 ${
-                                        isSelected ? 'scale-110 shadow-lg' : ''
-                                    } ${isDimmed ? 'opacity-25' : ''}`}
-                                    style={{ background: tool.color, color: tool.textOnColor }}
+                                        classes.bg
+                                    } ${classes.on} ${isSelected ? 'scale-110 shadow-lg' : ''} ${
+                                        isDimmed ? 'opacity-25' : ''
+                                    }`}
                                 >
                                     {numbers[annotation.id]}
                                 </button>
@@ -85,7 +89,7 @@ export default function MarkerLayer({
                         >
                             <span className="block">
                                 <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
-                                    <Icon className="size-4" style={{ color: tool.color }} />
+                                    <Icon className={`size-4 ${classes.text}`} />
                                     {tool.name}
                                 </span>
                                 <span className="block mt-1 font-bold">{annotation.title}</span>

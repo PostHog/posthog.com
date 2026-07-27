@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback, useEffect, useState } from 'react'
+import { MutableRefObject, useCallback, useEffect, useMemo, useState } from 'react'
 import { Annotation } from './types'
 
 export interface MarkerPosition {
@@ -10,7 +10,7 @@ export interface MarkerPosition {
     box: { left: number; top: number; width: number; height: number }
 }
 
-export interface AnnotationPositions {
+interface AnnotationPositions {
     /** Targets inside the scrolling site content, which scroll with the page. */
     content: MarkerPosition[]
     /** Targets pinned to the browser frame rather than the scrolling page (the sticky nav, the popover survey). */
@@ -38,7 +38,7 @@ const isStuck = (el: HTMLElement, root: HTMLElement): boolean => {
  * nothing can drift out of sync. Positions are relative to the container's
  * padding box, and re-measured when the layout can have changed: annotations
  * swap (page switch), either container resizes, or the reader interacts with
- * the demo (opening an FAQ row, retrying the badger radar).
+ * the demo (opening an FAQ row, retrying the coverage map).
  */
 export default function useAnnotationPositions(
     annotations: Annotation[],
@@ -116,5 +116,15 @@ export default function useAnnotationPositions(
         }
     }, [measure, contentRef, frameRef, revision])
 
-    return positions
+    // Measurement lands a frame late, so for one paint after a page switch `positions`
+    // still describes the previous page. The caller's marker numbers have already
+    // changed, so those markers would render as empty circles at stale coordinates.
+    // Dropping anything not in the current set is what keeps the two in step.
+    return useMemo(
+        () => ({
+            content: positions.content.filter((p) => annotations.includes(p.annotation)),
+            frame: positions.frame.filter((p) => annotations.includes(p.annotation)),
+        }),
+        [positions, annotations]
+    )
 }

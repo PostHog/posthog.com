@@ -79,6 +79,38 @@ export const helpAnnotations: Annotation[] = [
         },
     },
     {
+        id: 'help/help-suggestions/experiments',
+        page: 'help',
+        target: 'help-suggestions',
+        tool: 'experiments',
+        label: 'help-prompt-examples',
+        dx: 1.0,
+        dy: 0.5,
+        title: 'Testing whether people ask at all',
+        body: {
+            why: (
+                <>
+                    Half of visitors get these example questions and half get an empty box. The flag decides which, and
+                    the thing being tested is whether a prompt gets more people to ask anything, not whether the answer
+                    is any better.
+                </>
+            ),
+            code: {
+                language: 'js',
+                snippet: `const v = posthog.getFeatureFlag('help-prompt-examples')
+if (v === 'examples') renderSuggestions()
+// primary:   support_question_asked
+// secondary: escalated_to_human`,
+            },
+            after: (
+                <>
+                    Examples win the first question comfortably and leave escalations flat, which reads as more people
+                    getting unstuck rather than more people needing Margaret.
+                </>
+            ),
+        },
+    },
+    {
         id: 'help/help-escalate/surveys',
         page: 'help',
         target: 'help-escalate',

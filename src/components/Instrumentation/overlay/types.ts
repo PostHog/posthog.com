@@ -15,18 +15,29 @@ export type ToolKey =
     | 'logs'
     | 'selfdriving'
 
+/** A tailwind.config.js palette token. Resolve classes for it through `TOOL_CLASSES`. */
+export type ToolColor =
+    | 'gray'
+    | 'green-2'
+    | 'blue'
+    | 'yellow'
+    | 'purple'
+    | 'seagreen'
+    | 'orange'
+    | 'salmon'
+    | 'lilac'
+    | 'red'
+
 export interface Tool {
     key: ToolKey
     name: string
-    /** Literal hex, because Tailwind can't JIT dynamic class names, so tool colors are applied via inline styles */
-    color: string
-    textOnColor: '#fff' | '#000'
-    /** `style` is passed, not just `className`, because the color is a literal hex */
-    Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+    /** Token name, not a hex: the classes come from `TOOL_CLASSES` in tools.ts. */
+    color: ToolColor
+    Icon: React.ComponentType<{ className?: string }>
     docsUrl?: string
 }
 
-export interface AnnotationBody {
+interface AnnotationBody {
     /** Prose before the code block */
     why: React.ReactNode
     code?: { language: string; snippet: string }

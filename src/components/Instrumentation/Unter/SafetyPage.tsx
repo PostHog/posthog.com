@@ -1,69 +1,15 @@
 import React, { useState } from 'react'
-import BadgerRadar from './BadgerRadar'
-
-// Safety page card icons
-const safetyIconProps = {
-    className: 'un-sicon',
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    stroke: '#000',
-    strokeWidth: 1.8,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-    'aria-hidden': true,
-}
-
-export const ShieldIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <path d="M12 2 20 5.5 V11 C20 16.5 12 21.5 12 21.5 C12 21.5 4 16.5 4 11 V5.5 Z" />
-        <path d="M8.5 11.5 11 14 15.5 9" />
-    </svg>
-)
-
-export const BellIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <path d="M6 9 a6 6 0 0 1 12 0 c0 5 2 6.5 2 6.5 H4 c0 0 2-1.5 2-6.5" />
-        <path d="M10 19.5 a2.2 2.2 0 0 0 4 0" />
-    </svg>
-)
-
-export const NoRoadIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <circle cx="12" cy="12" r="9" />
-        <line x1="5.5" y1="5.5" x2="18.5" y2="18.5" />
-    </svg>
-)
-
-export const StarIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <path d="M12 3 14.7 8.6 20.8 9.4 16.4 13.7 17.5 19.8 12 16.9 6.5 19.8 7.6 13.7 3.2 9.4 9.3 8.6 Z" />
-    </svg>
-)
-
-export const LockIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <rect x="5" y="10" width="14" height="10" rx="2" />
-        <path d="M8 10 V7 a4 4 0 0 1 8 0 v3" />
-        <circle cx="12" cy="15" r="1.6" fill="#000" stroke="none" />
-    </svg>
-)
-
-export const WarnIcon = (): JSX.Element => (
-    <svg {...safetyIconProps}>
-        <path d="M12 3 21 19 H3 Z" />
-        <line x1="12" y1="10" x2="12" y2="14" />
-        <circle cx="12" cy="16.6" r="0.6" fill="#000" stroke="none" />
-    </svg>
-)
+import { IconBell, IconPassword, IconRuler, IconStar, IconWarning, IconX } from '@posthog/icons'
+import CoverageMap from './CoverageMap'
 
 export default function SafetyPage(): JSX.Element {
     const [helpAnswered, setHelpAnswered] = useState(false)
 
     return (
         <>
-            <section className="un-safety-hero">
+            <section className="un-safety-hero" data-unter-id="safety-hero">
                 <div className="un-shell">
-                    <h1 className="un-h1">Getting small things across a big city.</h1>
+                    <h2 className="un-h1">Getting small things across a big city.</h2>
                     <p className="un-lede">
                         Roads ended the old routes, so the network runs through gardens instead. Everything else that
                         can go wrong out there at night, we have thought about at length.
@@ -73,7 +19,7 @@ export default function SafetyPage(): JSX.Element {
             <div className="un-shell">
                 <section className="un-safe-grid">
                     <div className="un-safe-card">
-                        <ShieldIcon />
+                        <IconRuler className="un-sicon" />
                         <h3>Verified gaps only</h3>
                         <p>
                             Every gap on the network is measured on registration. 13cm nominal, no exceptions. An 11cm
@@ -81,7 +27,7 @@ export default function SafetyPage(): JSX.Element {
                         </p>
                     </div>
                     <div className="un-safe-card">
-                        <BellIcon />
+                        <IconBell className="un-sicon" />
                         <h3>Crossing check-ins</h3>
                         <p>
                             Long crossing? We ping your burrow when you arrive. If you stop moving for more than 40
@@ -89,10 +35,10 @@ export default function SafetyPage(): JSX.Element {
                         </p>
                     </div>
 
-                    <BadgerRadar />
+                    <CoverageMap />
 
-                    <div className="un-safe-card">
-                        <NoRoadIcon />
+                    <div className="un-safe-card" data-unter-id="safe-no-roads">
+                        <IconX className="un-sicon" />
                         <h3>No roads. Ever.</h3>
                         <p>
                             Unter will never route you across tarmac. If the only way is a road, we cancel the trip and
@@ -100,7 +46,7 @@ export default function SafetyPage(): JSX.Element {
                         </p>
                     </div>
                     <div className="un-safe-card">
-                        <StarIcon />
+                        <IconStar className="un-sicon" />
                         <h3>Rated by the community</h3>
                         <p>
                             Gaps get reviews. “Snug but fair.” “Splinter on the left edge, 3 stars.” Hosts fix what
@@ -108,7 +54,7 @@ export default function SafetyPage(): JSX.Element {
                         </p>
                     </div>
                     <div className="un-safe-card">
-                        <LockIcon />
+                        <IconPassword className="un-sicon" />
                         <h3>Scent-PIN verification</h3>
                         <p>
                             Every crossing gets a scent-PIN. Your hedgehog sniffs the gap post to confirm it's the right
@@ -116,7 +62,7 @@ export default function SafetyPage(): JSX.Element {
                         </p>
                     </div>
                     <div className="un-safe-card">
-                        <WarnIcon />
+                        <IconWarning className="un-sicon" />
                         <h3>Blocked-gap reports</h3>
                         <p>
                             New plant pot in front of the hole? Report it in the app. 94% of blockages are cleared by
@@ -149,7 +95,9 @@ export default function SafetyPage(): JSX.Element {
                 <div className="un-page-help" data-unter-id="page-help">
                     <b>Was this page helpful?</b>
                     {helpAnswered ? (
-                        <span className="un-thanks">Thanks. Noted.</span>
+                        <span className="un-thanks" role="status">
+                            Thanks. Noted.
+                        </span>
                     ) : (
                         <div className="un-yn">
                             <button onClick={() => setHelpAnswered(true)}>Yes</button>

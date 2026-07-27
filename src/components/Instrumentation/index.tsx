@@ -9,8 +9,14 @@ import ToolbarBar from './overlay/ToolbarBar'
 import useAnnotationPositions from './overlay/useAnnotationPositions'
 import { ANNOTATIONS } from './overlay/annotations'
 import { TOOLS } from './overlay/tools'
-import { ToolKey, UnterPageId } from './overlay/types'
+import { Annotation, ToolKey, UnterPageId } from './overlay/types'
 import './unter.css'
+
+/* Module-level, so "measure nothing" is a stable reference. An inline `[]` here is a
+   new array on every render, which changes the measuring effect's deps, which
+   re-measures, which sets state, which renders again: a 60fps loop in the state the
+   page loads in. */
+const NO_ANNOTATIONS: Annotation[] = []
 
 const PAGE_LABELS: Record<UnterPageId, string> = {
     ride: 'the Shuffle page',
@@ -19,8 +25,13 @@ const PAGE_LABELS: Record<UnterPageId, string> = {
     safety: 'the Safety page',
 }
 
-/** The demo's own nav labels, so a hint names exactly what there is to click. */
-const NAV_LABELS = Object.fromEntries(NAV_ITEMS.map(({ id, label }) => [id, label])) as Record<UnterPageId, string>
+/* How many touchpoints each page has. Static, so it's computed once at module load.
+   The switcher shows these because the count is what says there's more to find
+   somewhere else, which a bare page name doesn't. */
+const PAGE_COUNTS = NAV_ITEMS.reduce(
+    (acc, { id }) => ({ ...acc, [id]: ANNOTATIONS.filter((a) => a.page === id).length }),
+    {} as Record<UnterPageId, number>
+)
 
 const formatList = (items: string[]): string =>
     items.length < 3 ? items.join(' and ') : `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`
@@ -65,7 +76,7 @@ export default function Instrumentation(): JSX.Element {
             const pages = NAV_ITEMS.filter(
                 ({ id }) => id !== page && ANNOTATIONS.some((a) => a.tool === tool && a.page === id)
             )
-            if (pages.length) byTool[tool] = formatList(pages.map(({ id }) => NAV_LABELS[id]))
+            if (pages.length) byTool[tool] = formatList(pages.map(({ label }) => label))
         })
         return byTool
     }, [page])
@@ -73,16 +84,18 @@ export default function Instrumentation(): JSX.Element {
     // Opening the survey changes what's on screen without resizing either
     // container, so the measurement pass needs telling.
     const positions = useAnnotationPositions(
-        inspecting ? pageAnnotations : [],
+        inspecting ? pageAnnotations : NO_ANNOTATIONS,
         contentRef,
         frameBodyRef,
         surveyOpen ? 1 : 0
     )
 
-    // A marker from another page must never linger.
+    // Nothing from the previous page may linger: not a selection, not a filter, and
+    // not the survey, whose trigger doesn't exist on Help or Safety.
     useEffect(() => {
         setSelectedId(null)
         setFilter(null)
+        setSurveyOpen(false)
     }, [page])
 
     const goToPage = (next: UnterPageId) => {
@@ -98,29 +111,28 @@ export default function Instrumentation(): JSX.Element {
         setFilter(null)
     }
 
-    // Back to how the page loaded, for when you've filtered, selected and
-    // navigated your way somewhere confusing.
-    const reset = () => {
-        setPage('ride')
-        setInspecting(false)
-        setSelectedId(null)
-        setFilter(null)
-        setSurveyOpen(false)
-        viewportRef.current?.scrollTo({ top: 0 })
-    }
-
+    // Scrolls the demo's viewport only. `scrollIntoView` would also scroll every
+    // scrollable ancestor, which in a windowed layout drags the sidebar you're
+    // reading out of view (AnnotationSidebar avoids it for the same reason).
     const scrollToTarget = (target: string) => {
-        frameBodyRef.current?.querySelector(`[data-unter-id="${target}"]`)?.scrollIntoView({
-            block: 'center',
-            behavior: 'smooth',
-        })
+        const viewport = viewportRef.current
+        const el = frameBodyRef.current?.querySelector(`[data-unter-id="${target}"]`)
+        if (!viewport || !el) return
+        const targetBox = el.getBoundingClientRect()
+        const viewportBox = viewport.getBoundingClientRect()
+        const delta = targetBox.top - viewportBox.top - (viewportBox.height - targetBox.height) / 2
+        viewport.scrollTo({ top: viewport.scrollTop + delta, behavior: 'smooth' })
     }
 
     const select = (annotationId: string | null) => {
         setSelectedId(annotationId)
         if (!annotationId) return
         const annotation = pageAnnotations.find((a) => a.id === annotationId)
-        if (annotation) scrollToTarget(annotation.target)
+        if (!annotation) return
+        // Selecting a marker the filter had faded out: show it rather than leaving a
+        // selection outline on the page with no matching row in the sidebar.
+        if (filter && annotation.tool !== filter) setFilter(null)
+        scrollToTarget(annotation.target)
     }
 
     const isDimmed = (annotationId: string) => {
@@ -135,7 +147,7 @@ export default function Instrumentation(): JSX.Element {
                 <h1 className="text-base font-bold m-0">How instrumentation works</h1>
                 <p className="text-sm text-secondary m-0 max-w-4xl">
                     Unter is a fake app, instrumented for real. Show the instrumentation, then open any numbered marker
-                    to see what PostHog captures there and why.
+                    to see what PostHog captures there.
                 </p>
             </div>
 
@@ -188,7 +200,6 @@ export default function Instrumentation(): JSX.Element {
                         <ToolbarBar
                             inspecting={inspecting}
                             onToggleInspect={toggleInspect}
-                            onReset={reset}
                             filter={filter}
                             onFilter={setFilter}
                             counts={counts}
@@ -199,6 +210,10 @@ export default function Instrumentation(): JSX.Element {
                     numbers={numbers}
                     pageLabel={PAGE_LABELS[page]}
                     elsewhere={elsewhere}
+                    page={page}
+                    pages={NAV_ITEMS}
+                    pageCounts={PAGE_COUNTS}
+                    onNavigate={goToPage}
                     inspecting={inspecting}
                     selectedId={selectedId}
                     filter={filter}

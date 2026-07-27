@@ -1,18 +1,12 @@
 import React from 'react'
+import { IconPerson } from '@posthog/icons'
 import { UnterPageId } from '../overlay/types'
-
-export const PersonIcon = (): JSX.Element => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21 C4 16.5 7.5 14 12 14 C16.5 14 20 16.5 20 21" />
-    </svg>
-)
 
 export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageId) => void }): JSX.Element {
     return (
         <>
             <div className="un-shell">
-                <div className="un-promo" data-unter-id="promo-banner">
+                <div className="un-promo">
                     <span className="un-tag">NEWS</span>
                     <span>
                         <b>We raised $40M to cut holes in fences.</b>
@@ -24,22 +18,28 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
 
                 <section className="un-hero">
                     <div>
-                        <h1 className="un-h1" data-unter-id="hero-headline">
+                        <h2 className="un-h1" data-unter-id="hero-headline">
                             Go anywhere. Under everything.
-                        </h1>
+                        </h2>
                         <div data-unter-id="ride-form">
                             <div className="un-stops">
                                 <div className="un-field">
                                     <span className="un-geo-dot" />
                                     <input
                                         type="text"
+                                        aria-label="Pickup point"
                                         placeholder="Pickup point"
                                         defaultValue="Parsons Green Station"
                                     />
                                 </div>
                                 <div className="un-field" data-unter-id="input-destination">
                                     <span className="un-geo-sq" />
-                                    <input type="text" placeholder="Where to?" defaultValue="The HedgeHouse" />
+                                    <input
+                                        type="text"
+                                        aria-label="Destination"
+                                        placeholder="Where to?"
+                                        defaultValue="The HedgeHouse"
+                                    />
                                 </div>
                             </div>
                             <div className="un-form-ctas">
@@ -51,57 +51,64 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         </div>
                     </div>
 
-                    <div className="un-mapwrap" data-unter-id="garden-map">
+                    <div className="un-mapwrap">
                         <div className="un-ph un-ph-map">Map</div>
                     </div>
                 </section>
 
-                <div className="un-acct-row" data-unter-id="acct-row">
+                <button type="button" className="un-acct-row" data-unter-id="acct-row">
                     <span className="un-pic">
-                        <PersonIcon />
+                        <IconPerson />
                     </span>
-                    <div>
-                        <b>Log in to see your recent crossings</b>
-                        <span>View past routes, favourite gaps, and that one incident with the decking.</span>
-                    </div>
+                    <span className="un-acct-text">
+                        <span className="un-acct-title">Log in to see your recent crossings</span>
+                        <span className="un-acct-sub">
+                            View past routes, favourite gaps, and that one incident with the decking.
+                        </span>
+                    </span>
                     <span className="un-chev">→</span>
-                </div>
+                </button>
 
                 <h2 className="un-sec-label">Choose how you cross</h2>
-                <section className="un-tiers">
-                    <div className="un-tier">
+                {/* The section is a target as well as the first card: a heatmap compares
+                    all three options at once, while the named event fires for whichever
+                    one you pick. */}
+                <section className="un-tiers" data-unter-id="tiers">
+                    <button type="button" className="un-tier" data-unter-id="tier-solo">
                         <span className="un-ph un-art" aria-hidden />
-                        <h3>Unter Solo</h3>
-                        <p>One hedgehog, one standard gap. The classic night out.</p>
-                        <div className="un-go">
+                        <span className="un-tier-name">Unter Solo</span>
+                        <span className="un-tier-desc">One hedgehog, one standard gap. The classic night out.</span>
+                        <span className="un-go">
                             <span className="un-price">From £3</span>
                             <span className="un-arrow">→</span>
-                        </div>
-                    </div>
-                    <div className="un-tier" data-unter-id="tier-xl">
+                        </span>
+                    </button>
+                    <button type="button" className="un-tier">
                         <span className="un-ph un-art" aria-hidden />
-                        <h3>Unter XL</h3>
-                        <p>For the unusually round. We route you via the 15cm accessible gaps only.</p>
-                        <div className="un-go">
+                        <span className="un-tier-name">Unter XL</span>
+                        <span className="un-tier-desc">
+                            For the unusually round. We route you via the 15cm accessible gaps only.
+                        </span>
+                        <span className="un-go">
                             <span className="un-price">From £5</span>
                             <span className="un-arrow">→</span>
-                        </div>
-                    </div>
-                    <div className="un-tier">
+                        </span>
+                    </button>
+                    <button type="button" className="un-tier">
                         <span className="un-ph un-art" aria-hidden />
-                        <h3>HighwayPool</h3>
-                        <p>Share the route with hedgehogs heading your way.</p>
-                        <div className="un-go">
+                        <span className="un-tier-name">Unter Pool</span>
+                        <span className="un-tier-desc">Share the route with hedgehogs heading your way.</span>
+                        <span className="un-go">
                             <span className="un-price">From £2</span>
                             <span className="un-arrow">→</span>
-                        </div>
-                    </div>
+                        </span>
+                    </button>
                 </section>
 
                 {/* The whole section is the annotation target, not just the button: the
                     feature flag hides the entire feature, heading included. */}
                 <section className="un-featrow" data-unter-id="reserve-feature">
-                    <div className="un-ftext">
+                    <div>
                         <h2 className="un-h2">Reserve a dusk crossing</h2>
                         <p className="un-lede">
                             Book up to seven nights ahead. The gap is held until 15 minutes past sunset, then it goes
@@ -121,29 +128,31 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                     It's easier in the apps
                 </h2>
                 <section className="un-apps" data-unter-id="app-row">
-                    <div className="un-app-card">
+                    <button type="button" className="un-app-card">
                         <span className="un-qr">
                             <span className="un-ph un-ph-qr">QR</span>
                         </span>
-                        <div>
-                            <h3>Unter app</h3>
-                            <p>For hedgehogs. Scan to download, or sniff the code directly. It's scent-enabled.</p>
-                        </div>
+                        <span className="un-app-text">
+                            <span className="un-app-name">Unter app</span>
+                            <span className="un-app-desc">
+                                For hedgehogs. Scan to download, or sniff the code directly. It's scent-enabled.
+                            </span>
+                        </span>
                         <span className="un-chev">→</span>
-                    </div>
-                    <div className="un-app-card">
+                    </button>
+                    <button type="button" className="un-app-card">
                         <span className="un-qr">
                             <span className="un-ph un-ph-qr">QR</span>
                         </span>
-                        <div>
-                            <h3>Unter Host</h3>
-                            <p>
+                        <span className="un-app-text">
+                            <span className="un-app-name">Unter Host</span>
+                            <span className="un-app-desc">
                                 For the humans who cut the gaps. Gap health, crossing counts, and your borough
                                 leaderboard.
-                            </p>
-                        </div>
+                            </span>
+                        </span>
                         <span className="un-chev">→</span>
-                    </div>
+                    </button>
                 </section>
             </div>
 

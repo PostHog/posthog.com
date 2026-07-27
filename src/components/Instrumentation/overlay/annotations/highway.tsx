@@ -15,9 +15,9 @@ export const highwayAnnotations: Annotation[] = [
         body: {
             why: (
                 <>
-                    Tracker blockers eat 30–40% of a marketing site's events if you load analytics from a third-party
-                    domain. Unter serves <code>posthog-js</code> bundled first-party and proxies ingestion through its
-                    own domain.
+                    Ad blockers keep lists of known analytics domains, so events sent straight to one are the events you
+                    never see. Unter bundles <code>posthog-js</code> first-party and proxies ingestion through its own
+                    domain, which PostHog's docs put at 10-30% more events captured.
                 </>
             ),
             code: {
@@ -26,8 +26,8 @@ export const highwayAnnotations: Annotation[] = [
   api_host: 'https://unter.co.uk/ingest',  // proxy
   ui_host:  'https://eu.posthog.com'
 })
-// CSP stays tight:
-// connect-src 'self' https://*.posthog.com`,
+// CSP stays tight: ingestion is same-origin,
+// so connect-src 'self' covers it`,
             },
             after: (
                 <>
@@ -208,8 +208,9 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         body: {
             why: (
                 <>
-                    No code behind this pin. Autocapture logs every click on every <code>&lt;summary&gt;</code> element,
-                    and it keeps the element's text.
+                    No code behind this pin. Autocapture watches the interactive elements (<code>a</code>,{' '}
+                    <code>button</code>, <code>input</code>, and friends), picks these accordion headers up because
+                    they're styled as pointer targets, and keeps the text of whatever was clicked.
                 </>
             ),
             code: {
@@ -223,7 +224,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
             after: (
                 <>
                     The most-opened question is usually the one the page above it failed to answer. Here that's the dog
-                    question by 3x, so the answer is worth moving into the page itself.
+                    question by a third, so the answer is worth moving into the page itself.
                 </>
             ),
         },
@@ -270,27 +271,27 @@ Host signup conversion down 18% (7d)
         page: 'highway',
         target: 'btn-refer',
         tool: 'experiments',
-        label: 'neighbour-referral-copy',
+        label: 'neighbor-referral-copy',
         dx: 0.5,
         dy: 1.18,
         title: 'Referral copy experiment',
         body: {
             why: (
                 <>
-                    Supply grows fastest neighbour-by-neighbour, so the referral CTA is a proper experiment: does
+                    Supply grows fastest neighbor-by-neighbor, so the referral CTA is a proper experiment: does
                     polite-guilt or civic-pride get more holes cut?
                 </>
             ),
             code: {
                 language: 'js',
-                snippet: `const v = posthog.getFeatureFlag('neighbour-referral-copy')
+                snippet: `const v = posthog.getFeatureFlag('neighbor-referral-copy')
 // 'control' → "Send a very polite note"
 // 'guilt'   → "Your fence is the reason
 //              Max walks the long way"`,
             },
             after: (
                 <>
-                    The goal metric is <code>highway_signup_completed</code> from referred neighbours within 14 days.
+                    The goal metric is <code>highway_signup_completed</code> from referred neighbors within 14 days.
                     Guilt is ahead by 22%, so that's the copy that ships.
                 </>
             ),

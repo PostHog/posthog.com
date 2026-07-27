@@ -1,6 +1,6 @@
 import React from 'react'
 import { Logo } from '@posthog/brand/logo'
-import { IconRevert, IconSearch } from '@posthog/icons'
+import { IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { TOOLS } from './tools'
@@ -11,8 +11,6 @@ interface ToolbarBarProps {
     onToggleInspect: () => void
     filter: ToolKey | null
     onFilter: (filter: ToolKey | null) => void
-    /** Puts the demo back to how it loaded: first page, no filter, nothing selected. */
-    onReset: () => void
     /** How many touchpoints each tool has on the page being viewed. */
     counts: Partial<Record<ToolKey, number>>
     /** Per tool, the other pages that also instrument it, named as the demo's nav does. */
@@ -35,15 +33,13 @@ const DIVIDER = 'w-px h-6 bg-white/15 mx-1'
  * the markers for attention and got lost against the page.
  *
  * Every button does something: the logomark opens the toolbar docs, Inspect toggles
- * the markers, each tool button filters them to what that tool instruments here,
- * and reset puts the demo back to how it loaded.
+ * the markers, and each tool button filters them to what that tool instruments here.
  */
 export default function ToolbarBar({
     inspecting,
     onToggleInspect,
     filter,
     onFilter,
-    onReset,
     counts,
     elsewhere,
 }: ToolbarBarProps): JSX.Element {
@@ -100,19 +96,23 @@ export default function ToolbarBar({
                     <Tooltip
                         key={tool.key}
                         trigger={
+                            /* aria-disabled, not disabled: a disabled button can't be
+                               focused, and the tooltip explaining *why* it's grayed out
+                               ("nothing here, but it's on Help") would then be reachable
+                               by mouse only. */
                             <button
                                 type="button"
-                                disabled={disabled}
+                                aria-disabled={disabled}
                                 aria-pressed={isActive}
                                 aria-label={tool.name}
-                                onClick={() => onFilter(isActive ? null : tool.key)}
+                                onClick={() => !disabled && onFilter(isActive ? null : tool.key)}
                                 className={`${BUTTON} ${disabled ? EMPTY : isActive ? ACTIVE : IDLE}`}
                             >
                                 <Icon className="size-5" />
                             </button>
                         }
                     >
-                        {/* A greyed-out button reads as "not used here" when the truth is
+                        {/* A grayed-out button reads as "not used here" when the truth is
                             usually "used, but on another page". The tooltip says which. */}
                         {!inspecting
                             ? `${tool.name} (show instrumentation first)`
@@ -130,20 +130,6 @@ export default function ToolbarBar({
             {/* Sits in the space the wrapped button rows leave over, so the hint is
                 next to the icons it's describing rather than in the column below. */}
             {inspecting && <span className="ml-1.5 text-xs text-white/40 leading-tight">Click a tool to filter</span>}
-
-            <span className={DIVIDER} aria-hidden />
-
-            {/* Labelled rather than icon-only: it's the one control you reach for when
-                you've filtered and clicked your way somewhere confusing, which is
-                exactly when hunting for it under a hover tooltip is no help. */}
-            <button
-                type="button"
-                onClick={onReset}
-                className={`flex items-center gap-1 h-8 px-2 rounded-md text-xs whitespace-nowrap transition-colors ${IDLE}`}
-            >
-                <IconRevert className="size-4" />
-                Reset the demo
-            </button>
         </div>
     )
 }

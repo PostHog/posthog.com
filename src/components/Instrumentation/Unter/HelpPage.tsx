@@ -15,12 +15,12 @@ const INITIAL_MESSAGES: Message[] = [
 
 const CANNED_REPLIES = [
     'Crossings are charged per route, and the first one is free. Nobody has ever been billed twice.',
-    "Badgers make their own arrangements. I'd rather not be quoted on this.",
+    'A held gap is released 15 minutes after sunset. After that it goes back in the pool for whoever wants it.',
     'Your driver is 4 minutes away. Drivers are always 4 minutes away. Nobody has explained why.',
     'I can see your last three crossings. Two were the compost heap. No judgement.',
 ]
 
-const SUGGESTIONS = ['Can I bring a hoglet?', 'What if a badger is using the gap?', 'Why was my crossing cancelled?']
+const SUGGESTIONS = ['Can I bring a hoglet?', 'Is my area covered?', 'Why was my crossing cancelled?']
 
 /**
  * AI support gets a whole page rather than a floating widget: a chat panel pinned
@@ -58,7 +58,7 @@ export default function HelpPage(): JSX.Element {
         <div className="un-shell">
             <section className="un-help">
                 <div className="un-help-intro">
-                    <h1 className="un-h1">AI support</h1>
+                    <h2 className="un-h1">AI support</h2>
                     <p className="un-lede">
                         Ask about routes, gap sizes, or a crossing that didn't happen. It can see your recent trips and
                         answers in about a second.
@@ -66,7 +66,7 @@ export default function HelpPage(): JSX.Element {
                     {/* Not buttons: these are examples of what people ask, not a
                         second way to drive the thread. The input below is the
                         interactive part. */}
-                    <ul className="un-help-suggestions">
+                    <ul className="un-help-suggestions" data-unter-id="help-suggestions">
                         {SUGGESTIONS.map((suggestion) => (
                             <li key={suggestion}>{suggestion}</li>
                         ))}
@@ -78,7 +78,7 @@ export default function HelpPage(): JSX.Element {
                         <span className="un-status" /> Unter AI support
                         <span className="un-chat-meta">replies instantly</span>
                     </div>
-                    <div className="un-chat-body" ref={threadRef}>
+                    <div className="un-chat-body" role="log" ref={threadRef}>
                         {messages.map((message, index) => (
                             <div
                                 key={index}
@@ -98,6 +98,7 @@ export default function HelpPage(): JSX.Element {
                     >
                         <input
                             type="text"
+                            aria-label="Ask a question"
                             placeholder="Ask a question"
                             value={draft}
                             onChange={(e) => setDraft(e.target.value)}
