@@ -30,6 +30,12 @@ A scout also keeps a durable memory between runs. Each run, it reads back what e
 
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
 
+## When a scout runs
+
+By default, a scout runs on a rolling interval – once a set number of minutes have passed since its last run (every 24 hours by default, and never more often than every 30 minutes). If you'd rather it run at specific times, give it a five-field cron expression instead – like `30 9 * * *` for 9:30am every day, or `0 9 * * 1-5` for 9am on weekdays.
+
+Cron schedules are evaluated in your project's timezone and follow daylight-saving changes, so a 9am schedule stays at 9am local year-round. When a scout has a cron schedule it takes precedence over the rolling interval, and its runs still have to be at least 30 minutes apart – the same floor as the interval.
+
 ## Running a scout on demand
 
 Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
