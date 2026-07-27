@@ -48,9 +48,17 @@ Before linking Cloudflare, create an API token with the required permissions:
 6. Select the tables you want to import.
 7. Click **Import**.
 
-PostHog validates your token against Cloudflare's `/user/tokens/verify` endpoint before starting the sync. If validation fails, check that your token has the required permissions listed above.
+PostHog validates your token against Cloudflare's `/user/tokens/verify` endpoint before starting the sync.
 
 The data warehouse then starts syncing your Cloudflare data. You can see details and progress in the [data pipeline sources tab](https://app.posthog.com/data-management/sources).
+
+## Troubleshooting
+
+If token validation fails when linking Cloudflare, you'll see one of the following messages:
+
+- **"Couldn't reach Cloudflare to verify your API token. Please try again in a moment."** – Cloudflare's API is unreachable due to a network error, timeout, rate limiting (429), or a server error (5xx). Your token may be fine – wait a moment and try again.
+
+- **"Invalid Cloudflare API token. Please check the token has read permissions and hasn't been revoked."** – Cloudflare rejected the token (401, 403, or the verification endpoint returned `success: false`). Verify your token has the [required permissions](#creating-a-cloudflare-api-token) and hasn't been revoked.
 
 ## Available tables
 
