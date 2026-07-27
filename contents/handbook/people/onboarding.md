@@ -24,7 +24,7 @@ The onboarding email is sent by the People team directly. We want to strike a ba
 
 ## Onboarding checklist
 
-Everything you need to do, including the role-specific tasks your team adds, is tracked in one place in our [Ops Platform](https://ops.posthog.dev/welcome). When you first log in, you'll land on a welcome page with a short set of preboarding tasks, and your full checklist lives on your employee profile.
+Once your accounts are set up, you'll get a welcome message in your onboarding channel with a link to the [Ops Platform](https://ops.posthog.dev/welcome) to get started. Everything you need to do, including the role-specific tasks your team adds, is tracked there in one place. When you first log in, you'll land on a welcome page with a short set of preboarding tasks, and your full checklist lives on your employee profile.
 
 ## Onboarding buddy
 
