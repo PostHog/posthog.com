@@ -19,14 +19,15 @@ With MCP, your coding agent can:
 
 The MCP server provides these tools for working with Experiments:
 
-| Tool | Description |
-|------|-------------|
-| `experiment-create` | Create a new Experiment with specified variants, traffic split, and goal metrics. Automatically creates the backing feature flag. |
-| `experiment-get` | Get details for a specific Experiment, including current status and configuration. |
-| `experiment-get-all` | List all Experiments in the current project. |
-| `experiment-results-get` | Get the statistical results of an Experiment, including confidence intervals and significance. |
-| `experiment-update` | Update an Experiment's name, description, or configuration. |
-| `experiment-delete` | Delete an Experiment. |
+| Tool                                               | Description                                                                                                                       |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `experiment-create`                                | Create a new Experiment with specified variants, traffic split, and goal metrics. Automatically creates the backing feature flag. |
+| `experiment-get`                                   | Get details for a specific Experiment, including current status and configuration.                                                |
+| `experiment-get-all`                               | List all Experiments in the current project.                                                                                      |
+| `experiment-metrics-recalculation-latest-retrieve` | Get the current results for an Experiment, including per-variant statistics, confidence intervals, and significance.              |
+| `experiment-metrics-recalculation-create`          | Trigger a fresh calculation of all metrics for an Experiment. Use when results look stale.                                        |
+| `experiment-update`                                | Update an Experiment's name, description, or configuration.                                                                       |
+| `experiment-delete`                                | Delete an Experiment.                                                                                                             |
 
 ## Example prompts
 
@@ -36,6 +37,7 @@ Try these with your MCP-enabled agent:
 - `What are the results of my new-pricing-page Experiment?`
 - `List all running Experiments in this project.`
 - `Is the dark-mode-test Experiment statistically significant yet?`
+- `Recalculate the results for my checkout-flow experiment.`
 - `Archive the old-onboarding Experiment.`
 
 ## Install the MCP server
