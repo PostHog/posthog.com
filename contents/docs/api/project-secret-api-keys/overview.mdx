@@ -1,0 +1,32 @@
+Project secret API keys are server-to-server credentials scoped to a single project. They're the right choice when a backend service needs scoped, project-level access without being tied to anyone's user account.
+
+Unlike a [personal API key](/docs/api/personal-api-keys), a project secret API key doesn't represent a user—it isn't affected when a teammate leaves, and it only has the scopes you grant it. 
+
+Today, they're only supported on a small set of scopes, with more products on the way:
+- Endpoints execution (`endpoint:read` scope)
+
+<CalloutBox icon="IconInfo" title="Migrating from the team secret token" type="fyi">
+
+Project secret API keys will replace the legacy per-team secret token. If you're currently using a team secret token, we'll migrate it to a project secret API key without impacting your application.
+
+</CalloutBox>
+
+## How to obtain a project secret API key
+
+1. Go to the [Project secret API keys](https://app.posthog.com/settings/project-secret-api-keys) section in your project settings.
+2. Click **Create project secret API key**.
+3. Give your key a label to describe its purpose.
+4. Choose the scopes for your key. We recommend selecting only the scopes the service really needs. This is a security best practice.
+5. **Immediately** copy the key's value, as you'll **never** see it again after refreshing the page.
+
+## How to authenticate using the project secret API key
+
+Pass the key in the `Authorization` header using `Bearer` authentication:
+
+```js
+const headers = {
+  Authorization: `Bearer ${POSTHOG_PROJECT_SECRET_API_KEY}`,
+}
+```
+
+PostHog detects the kind of key you sent from its `phs_` prefix and authenticates accordingly.

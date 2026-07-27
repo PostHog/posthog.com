@@ -17,9 +17,10 @@ The API is available for all users and instances. It contains two types of endpo
 
 ## Authentication
 
-Private endpoints require authentication. There are two ways to authenticate, and which one you should use depends on who the integration is for:
+Private endpoints require authentication. There are three ways to authenticate, and which one you should use depends on who the integration is for:
 
 - **[Personal API keys](/docs/api/personal-api-keys)** – Use these when you're using PostHog from your own scripts, automations, or any integration tied to your own account. This is the right choice if you're just building something for your own project.
+- **[Project secret API keys](/docs/api/project-secret-api-keys)** – Use these for server-to-server access that isn't tied to a user, such as a backend service executing [Endpoints](/docs/endpoints). They're scoped to a single project and only have the scopes you grant them.
 - **[OAuth](/docs/api/oauth)** – Use this when you're building an app that other PostHog users will install or connect to. OAuth lets users grant your app scoped access without sharing their personal API key.
 
 ## Rate limiting
@@ -158,7 +159,7 @@ You can then just call the `"next"` URL to get the next set of results.
 PostHog partners with GitHub to automatically detect exposed API keys in public repositories. When GitHub detects a leaked key, we take immediate action:
 
 - **Personal API keys** (`phx_`): The key is automatically rolled and the user is notified via email.
-- **Feature flags secure API keys** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
+- **Project secret API keys and team secret tokens** (`phs_`): Project admins and owners are notified via email so they can rotate the key.
 - **OAuth access tokens** (`pha_`): The key and its associated refresh token are automatically revoked and the user is notified via email.
 - **OAuth refresh tokens** (`phr_`): The key and its associated access token are automatically revoked and the user is notified via email.
 
