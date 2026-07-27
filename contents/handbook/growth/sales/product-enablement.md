@@ -82,7 +82,7 @@ All content should include a "last updated" date so team members know they're wo
 | Data warehouse | Ryan       | - |
 | AI Observability | Leo        | - |
 | Workflows | Phil        | - |
-| PostHog Code | Landon     | - |
+| PostHog Desktop | Landon     | - |
 | Logs | Sean | - |
 | Legal and Compliance | Christophe | - |
 

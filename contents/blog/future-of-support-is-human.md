@@ -8,7 +8,6 @@ featuredImage: >-
 category: Startups
 tags:
   - Guides
-  - Support
   - AI
 ---
 

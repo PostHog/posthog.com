@@ -106,7 +106,7 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                 >
                     {primary ? `Download for ${primary.label}` : 'Download PostHog Desktop'}
                 </TrackedCTA>
-                <CallToAction type="secondary" size="lg" to="/docs/posthog-code" state={{ newWindow: true }}>
+                <CallToAction type="secondary" size="lg" to="/docs/posthog-desktop" state={{ newWindow: true }}>
                     Read the docs
                 </CallToAction>
             </div>

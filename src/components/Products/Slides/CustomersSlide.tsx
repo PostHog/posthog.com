@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
@@ -126,13 +126,13 @@ export default function CustomersSlide({
     return (
         <SlideContainer>
             <ScrollArea className="h-full">
-                <h2 className="text-4xl font-bold text-primary mb-6 text-center">
+                <h2 className="text-3xl @2xl:text-4xl font-bold text-primary mb-6 text-center whitespace-nowrap">
                     Customers who love{' '}
                     <Logo
-                        wordmark={false}
+                        layout="logomark"
                         variant="mono"
-                        color="primary"
-                        className="h-14 inline-block relative -top-1 mx-1"
+                        color="currentColor"
+                        className="text-primary h-8 w-auto inline-block relative -top-1 -right-1 mx-1"
                     />{' '}
                     {productName}
                 </h2>
