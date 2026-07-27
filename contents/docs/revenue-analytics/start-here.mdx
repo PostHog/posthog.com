@@ -9,10 +9,6 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
 
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
-
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to understand your revenue!">
 
 <QuestLogItem
@@ -62,22 +58,15 @@ import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 </QuestLogItem>
 
 <QuestLogItem
-    title="Visit the revenue analytics dashboard"
+    title="Explore your revenue"
     subtitle="Recommended"
     icon="IconGraph"
 >
 
-  Once you've configured your revenue data source, you can visit the [revenue analytics dashboard](/docs/revenue-analytics/dashboard) to better understand your revenue.
+  Once you've configured your revenue data source, your [revenue metrics](/docs/revenue-analytics/revenue-metrics) are available across PostHog. Query them in [product analytics insights](/docs/product-analytics/insights) and the [SQL editor](/docs/data-warehouse/query) using [managed views](/docs/revenue-analytics/managed-views), or ask [PostHog AI](/docs/revenue-analytics/analyze-revenue-ai) to build the analysis you need.
 
-  <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_05_35_288e8e0d6c.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_09_05_at_14_06_29_e4fe61d678.png"
-    alt="Revenue analytics dashboard" 
-    classes="rounded"
-  />
-
-  <OSButton variant="primary" asLink to="/docs/revenue-analytics/dashboard">
-    Visit the revenue analytics dashboard
+  <OSButton variant="primary" asLink to="/docs/revenue-analytics/managed-views">
+    Explore managed views
   </OSButton>
 
 </QuestLogItem>

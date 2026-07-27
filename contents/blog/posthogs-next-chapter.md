@@ -65,7 +65,7 @@ The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineeri
 
 The momentum feels irresistible now and the data backs that up. Last week, the majority of dashboards were created by agents via PostHog AI, MCP, our API, or our onboarding wizard. That's a huge shift and the trend is accelerating – MCP usage is roughly doubling every month.
 
-This trend is forcing us to rethink everything: our core UX, positioning, marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
+This trend is forcing us to rethink everything: our core UX, [positioning](/blog/repositioning-posthog), marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
 
 ### 1) Making PostHog easier for agents to use
 

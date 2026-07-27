@@ -574,10 +574,6 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Brand guidelines and messaging',
-                url: '/handbook/content/brand-message',
-            },
-            {
                 name: 'Video',
                 url: '/handbook/marketing/video',
                 children: [
@@ -1409,6 +1405,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
+                        name: 'Using AI to analyze customer issues',
+                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
+                    },
+                    {
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
@@ -1704,7 +1704,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Customer industry segments',
-                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                        url: '/handbook/growth/sales/customer-industry-segments',
                     },
                     {
                         name: 'Communications templates',
@@ -2796,6 +2796,10 @@ export const docsMenu = {
                         {
                             name: 'Personal API keys',
                             url: '/docs/api/personal-api-keys',
+                        },
+                        {
+                            name: 'Project secret API keys',
+                            url: '/docs/api/project-secret-api-keys',
                         },
                         {
                             name: 'OAuth integration',
@@ -4479,6 +4483,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Improving accuracy',
+                    url: '/docs/replay-vision/quality',
+                    icon: 'IconThumbsUp',
+                    color: 'yellow',
+                },
+                {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconPercentage',
@@ -5839,6 +5849,27 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Managed warehouse',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/data-warehouse/managed-warehouse',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                },
+                {
+                    name: 'Set up your warehouse',
+                    url: '/docs/data-warehouse/managed-warehouse/setup',
+                    icon: 'IconListCheck',
+                    color: 'blue',
+                },
+                {
+                    name: 'Connect and query',
+                    url: '/docs/data-warehouse/managed-warehouse/connect',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
                     name: 'Concepts',
                 },
                 {
@@ -5943,6 +5974,80 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Semantic layer',
+            url: '/docs/semantic-layer',
+            color: 'purple',
+            icon: 'IconBook',
+            description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
+            badge: {
+                title: 'Alpha',
+                className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+            },
+            children: [
+                {
+                    name: 'Semantic layer',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/semantic-layer',
+                    icon: 'IconHome',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/semantic-layer/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Metrics',
+                    url: '/docs/semantic-layer/metrics',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                },
+                {
+                    name: 'Certifications and relationships',
+                    url: '/docs/semantic-layer/certifications-and-relationships',
+                    icon: 'IconShield',
+                    color: 'purple',
+                },
+                {
+                    name: 'Governance',
+                    url: '/docs/semantic-layer/governance',
+                    icon: 'IconLock',
+                    color: 'red',
+                },
+                {
+                    name: 'Reference',
+                },
+                {
+                    name: 'MCP tools',
+                    url: '/docs/semantic-layer/mcp-tools',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'SQL reference',
+                    url: '/docs/semantic-layer/query',
+                    icon: 'IconCode',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Troubleshooting',
+                    url: '/docs/semantic-layer/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'gray',
                 },
             ],
         },
@@ -6675,14 +6780,14 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Dashboard',
-                    featured: true,
-                    url: '/docs/revenue-analytics/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
+                    name: 'Concepts',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Revenue metrics',
+                    featured: true,
+                    url: '/docs/revenue-analytics/revenue-metrics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Connect to customers',
@@ -7212,6 +7317,12 @@ export const docsMenu = {
                     name: 'Workflow builder',
                     url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
                     color: 'orange',
                 },
                 {
