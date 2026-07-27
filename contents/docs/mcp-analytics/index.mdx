@@ -5,16 +5,17 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconPlug, IconCode, IconBrackets, IconBolt, IconList, IconWrench, IconAIText, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconPlug, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import CalloutBox from 'components/Docs/CalloutBox'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 MCP Analytics shows you how AI agents actually use your MCP tools: which ones get called, what the agent was trying to do, where calls fail, and which capabilities agents asked for that you don't offer yet. It works on PostHog's own hosted MCP server and on any server you instrument with the [`@posthog/mcp` SDK](/docs/mcp-analytics/installation).
 
 Every tool invocation lands as a single `$mcp_tool_call` event on your standard events table, so the same data powers the purpose-built MCP Analytics views and anything you build yourself in [product analytics](/docs/product-analytics) or [SQL](/docs/data-warehouse/sql). Those calls also feed [Self-driving](/docs/self-driving), which spots tools that need fixing and files a report – and opens a pull request when the server is one you own.
 
-<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="action">
+<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
 The in-app MCP Analytics views are behind a feature preview – [turn on the MCP Analytics preview](https://app.posthog.com/settings/user-feature-previews#mcp-analytics) to enable them. The `@posthog/mcp` SDK is published as a `0.x` release, so event names, properties, and tracing behavior may change before `1.0`. Pin a version and don't depend on it for production reporting yet.
 
@@ -26,89 +27,49 @@ The in-app MCP Analytics views are behind a feature preview – [turn on the MCP
 
 You explore MCP usage in the PostHog web app. The other surfaces let you query the same data, act on it, and pull it into your own tools.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+<SurfaceCards columns={2}>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary flex items-center gap-1.5">Web app <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Dashboards, session replay for agents, per-tool quality, and intent clustering.</p>
-      <a href="/docs/mcp-analytics/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Explore MCP usage →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconLaptop" color="blue" title="Web app" badge="Beta" url="/docs/mcp-analytics/surfaces/web-app" cta="Explore MCP usage">
+Dashboards, session replay for agents, per-tool quality, and intent clustering.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconPlug className="size-6 shrink-0 text-purple mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">MCP</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Query sessions, tool stats, failures, and intent clusters from any MCP client.</p>
-      <a href="/docs/mcp-analytics/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Query over MCP →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconPlug" color="purple" title="MCP" url="/docs/mcp-analytics/surfaces/mcp" cta="Query over MCP">
+Query sessions, tool stats, failures, and intent clusters from any MCP client.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Read Self-driving reports about failing tools, and merge the fixes for servers you own.</p>
-      <a href="/docs/mcp-analytics/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix tools in PostHog Desktop →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconCode" color="orange" title="PostHog Desktop" badge="Beta" url="/docs/mcp-analytics/surfaces/desktop" cta="Fix tools in PostHog Desktop">
+Read Self-driving reports about failing tools, and merge the fixes for servers you own.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">API</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Pull sessions, tool calls, intent clusters, and feedback into your own systems.</p>
-      <a href="/docs/mcp-analytics/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconBrackets" color="seagreen" title="API" url="/docs/mcp-analytics/surfaces/api" cta="Use the API">
+Pull sessions, tool calls, intent clusters, and feedback into your own systems.
+</SurfaceCard>
 
-</div>
+</SurfaceCards>
 
 ## Where its data comes from
 
 MCP Analytics runs on the events your MCP server sends to PostHog. The [SDK](/docs/mcp-analytics/installation) emits them automatically, and PostHog's hosted MCP server is instrumented the same way.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+<SurfaceCards columns={2}>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconBolt className="size-6 shrink-0 text-orange mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Tool calls</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">The canonical <code>$mcp_tool_call</code> event: tool name, client, latency, errors, and session.</p>
-      <a href="/docs/mcp-analytics/events" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Event reference →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconBolt" color="orange" title="Tool calls" url="/docs/mcp-analytics/events" cta="Event reference">
+The canonical <code>$mcp_tool_call</code> event: tool name, client, latency, errors, and session.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconList className="size-6 shrink-0 text-blue mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Lifecycle and discovery</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Initialize handshakes, <code>tools/list</code>, resource reads, and prompt fetches power client breakdowns.</p>
-      <a href="/docs/mcp-analytics/events" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See all events →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconList" color="blue" title="Lifecycle and discovery" url="/docs/mcp-analytics/events" cta="See all events">
+Initialize handshakes, <code>tools/list</code>, resource reads, and prompt fetches power client breakdowns.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconAIText className="size-6 shrink-0 text-purple mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Agent intent</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">What the agent said it was trying to do, clustered into themes across sessions.</p>
-      <a href="/docs/mcp-analytics/intent" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Capture intent →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconAIText" color="purple" title="Agent intent" url="/docs/mcp-analytics/intent" cta="Capture intent">
+What the agent said it was trying to do, clustered into themes across sessions.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconWrench className="size-6 shrink-0 text-red mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Missing capabilities</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Gaps agents report through the <code>get_more_tools</code> virtual tool when the right tool doesn't exist.</p>
-      <a href="/docs/mcp-analytics/missing-capability" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Track missing capabilities →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconWrench" color="red" title="Missing capabilities" url="/docs/mcp-analytics/missing-capability" cta="Track missing capabilities">
+Gaps agents report through the <code>get_more_tools</code> virtual tool when the right tool doesn't exist.
+</SurfaceCard>
 
-</div>
+</SurfaceCards>
 
 ## How MCP Analytics works with Self-driving
 
