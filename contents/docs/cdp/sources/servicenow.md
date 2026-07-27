@@ -9,7 +9,7 @@ availability:
 sourceId: ServiceNow
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -62,3 +62,7 @@ The account or API key needs **read** access to the tables you want to sync. Thi
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

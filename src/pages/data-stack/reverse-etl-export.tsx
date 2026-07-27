@@ -13,7 +13,7 @@ export default function ReverseETLExport(): JSX.Element {
     return (
         <>
             <SEO
-                title="Reverse ETL & export - PostHog data stack"
+                title="Reverse ETL & export - PostHog context warehouse"
                 description="Learn about all the ways to export data from PostHog"
                 image="images/og/cdp.jpg"
             />

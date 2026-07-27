@@ -33,6 +33,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
         initial: 0,
+        loop: true,
         slideChanged(slider) {
             setCurrentSlide(slider.track.details.rel)
         },
@@ -88,7 +89,6 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
                                 e.stopPropagation()
                                 instanceRef.current?.prev()
                             }}
-                            disabled={currentSlide === 0}
                         />
 
                         <Arrow
@@ -96,7 +96,6 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
                                 e.stopPropagation()
                                 instanceRef.current?.next()
                             }}
-                            disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
                         />
                     </>
                 )}
@@ -124,15 +123,13 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
 
 function Arrow(props: {
     className?: string
-    disabled: boolean
     left?: boolean
     onClick: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void
 }) {
-    const { className, disabled, left } = props
+    const { className, left } = props
 
     const classes = cn(
         'relative absolute h-8 w-8 top-1/2 -translate-y-1/2 cursor-pointer left-auto right-2',
-        disabled && 'opacity-50',
         left && 'left-2 right-auto',
         className
     )

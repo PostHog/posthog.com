@@ -4,6 +4,7 @@ export const logs = {
     name: 'Logs',
     Icon: IconActivity,
     description: 'Search and analyze your logs in PostHog',
+    productVariantName: 'Logs ingestion (14-day retention)',
     handle: 'logs',
     type: 'logs',
     slug: 'logs',
@@ -11,22 +12,39 @@ export const logs = {
     colorSecondary: 'green-2',
     category: 'product_engineering',
     wizardSupport: 'Coming soon',
+    includeAddonRates: true,
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
-        marks: [50, 100, 500, 1000, 5000],
-        min: 50,
+        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        min: 10,
+        scaleMin: 1,
         max: 5000,
     },
-    volume: 50,
+    volume: 10,
+    addonSliders: [
+        {
+            key: 'logs_retention_30d',
+            label: '30-day retention',
+            sliderConfig: {
+                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                min: 0,
+                scaleMin: 1,
+                max: 5000,
+            },
+            volume: 0,
+            unit: 'GB',
+            freeAllocation: 0,
+        },
+    ],
     seo: {
-        title: 'Logs that already know your users',
+        title: 'Logs – Centralized log management with PostHog',
         description:
-            'Works with your existing OTel setup. Backend context, user data, and session replays all in one place.',
+            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
     },
     overview: {
         title: 'Logs that already know your users',
         description:
-            'Works with your existing OTel setup. Events, requests, state changes, and session replays, all in one place.',
+            'Works with your existing OTel setup. Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -127,7 +145,7 @@ export const logs = {
             title: 'Full stack context',
             template: 'splitImage',
             headline: 'Front end and back end context together',
-            description: 'Follow an issue from the browser to the backend in a single tool',
+            description: 'Follow an issue from the browser to the backend so agents can find the bug and ship the fix',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_3_light_4a3138862f.png',
@@ -155,7 +173,7 @@ export const logs = {
     ],
     ai: {
         imageAlt: 'PostHog AI and logs',
-        description: 'search, summarize, and debug your logs using natural language',
+        description: 'find the bug in your logs and ship the fix',
         skills: [
             'Finds the exact log lines you need with natural language – no query syntax required',
             'Summarizes patterns, surfaces anomalies, and explains likely causes from a sea of log entries',
@@ -199,6 +217,9 @@ export const logs = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can act on your logs to find a bug and ship the fix – the context that powers self-driving',
+                },
                 {
                     title: 'You want debugging context to stay connected automatically',
                 },

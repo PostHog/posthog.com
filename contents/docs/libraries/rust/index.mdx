@@ -95,7 +95,7 @@ client.capture_exception_with(
 ).await.unwrap();
 ```
 
-For the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).
+To also capture unhandled panics, enable `capture_panics` and initialize the global client with `init_global`. For that and the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).
 
 ## Observability
 

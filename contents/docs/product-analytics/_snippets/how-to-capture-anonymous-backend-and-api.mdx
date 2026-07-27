@@ -64,7 +64,7 @@ let mut event = Event::new("your_event_name", "distinct_id_of_the_user");
 
 event.insert_prop("$process_person_profile", false).unwrap();
 
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 ```elixir

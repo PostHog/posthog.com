@@ -1,41 +1,46 @@
 
-Objective: Improve pipeline stability and reliability (Estefania)
+Objective: Make the MCP a first-class way to work with warehouse sources (Marcus)
 
 * **Key Results:**
-    * Error handling
-    * Support tooling / making support shifts lighter
-    * DuckDB/ducklake investigation
-    * Logging (ingest logs to users own PostHog instance?)
+    * Bring source setup into the wizard, and into general usage too – when someone asks about data we don't have yet (e.g. "tell me about revenue" without Stripe synced), proactively offer to set up the right source.
+    * Build a context layer for the MCP so it understands the user's data, including the business knowledge we already capture.
+    * Run more user interviews to understand how people actually use the MCP and where it falls short.
+    * Dogfood heavily so we feel the rough edges before users do.
+    * Support editing existing sources from the MCP – not just adding them – including sync schedules and column selection.
+    * Add analytics and insights on MCP usage so we can see what's working and what isn't.
+    * Solve the secrets problem: find a secure way to get users' credentials to the MCP, likely via a Vault, AWS Secrets Manager, or 1Password integration.
 
 
-Objective: Add warehouse data integrations with other PostHog products (Tom)
-
-* **Key Results:**
-    * Warehouse person properties
-    * CDP destinations from warehouse data
-    * MCP integration
-
-
-Objective: Add more sources (Marcus)
+Objective: Improve pipeline stability and scaling (Estefania)
 
 * **Key Results:**
-    * Self-healing sources
-    * Making it faster to implement a source (AI-enabled!)
-    * Custom sources (RESTful/graphql)
-    * Automated documentation from sources (posthog repo => .com)
+    * Ship pipeline v3 to handle larger workloads and scale more reliably.
+    * Reduce the error rate across syncs, with a particular focus on eliminating out-of-memory failures and improving error handling.
+    * Build better support tooling so the team can diagnose and resolve pipeline issues faster.
 
 
-Objective: Improved source config (Daniel)
-
-* **Key Results:**
-    * Visibility of primary keys and incremental field indexes
-    * Configure columns to import from the source
-    * Multi-database/schema support for database sources
-    * Postgres logical replication
-
-
-Objective: Bonus objective
+Objective: Expand and harden our source catalog (Tom)
 
 * **Key Results:**
-    * User error notifications (including disabled due to errors) (Anyone)
-    * Activation, retention metrics (stretch goal) (Anna)
+    * Add more sources to widen the range of data users can bring into PostHog.
+    * Automate more of source healing and creation – including using sample data from production to validate fixes and auto-merge them when they pass.
+    * Improve support tooling to make it easier to triage and fix source issues.
+    * Add more verbose logging so failures are easier to understand and debug.
+    * Write better documentation for sources so users can self-serve.
+
+
+Objective: Integrate warehouse data with more PostHog products (Daniel)
+
+* **Key Results:**
+    * Ship warehouse person properties – a long-standing request from Arthur. Ingestion has concerns, but we believe they're solvable.
+    * Identify which other products could benefit from warehouse data, such as logs and exceptions.
+    * Explore a generic API layer for exposing warehouse source and data-modeling data to other products internally.
+
+
+Objective: Bonus objectives
+
+* **Key Results:**
+    * Establish activation and retention metrics for the product (Anna).
+    * Review and refine pricing (Anna).
+    * Run more user interviews to guide the roadmap (Anna / Marcus).
+    * Publish an engineering blog post about our work (anyone).

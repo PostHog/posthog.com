@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our newsletter is called Product for Engineers. It's owned by Andy. 
+Our newsletter is called build mode. It's owned by Ian. 
 
 Sent and managed via [Substack](https://newsletter.posthog.com/), we put together an issue planning content for each installment of the newsletter. One person writes it and Andy edits and publishes it.
 

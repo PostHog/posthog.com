@@ -60,14 +60,15 @@ export default function PostHogAIDataStack(): JSX.Element {
     return (
         <>
             <SEO
-                title="PostHog AI - PostHog data stack"
+                title="PostHog AI - PostHog context warehouse"
                 description="Learn how to model your data in PostHog"
                 image="images/og/cdp.jpg"
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="PostHog AI, wired all the way through">
                 <p>
-                    PostHog AI is not just an add-on feature; it's completely wired into and throughout our data stack.
-                    It's the sql-writing, code-completing, statistical-minded sidekick that helps you do the grunt work.
+                    PostHog AI is not just an add-on feature; it's completely wired into and throughout our context
+                    warehouse. It's the sql-writing, code-completing, statistical-minded sidekick that helps you do the
+                    grunt work.
                 </p>
                 <p>
                     PostHog queries your data warehouse tables, your clickstream event data, errors, and more to answer

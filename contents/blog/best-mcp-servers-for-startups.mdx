@@ -6,25 +6,25 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
-    - natalia-amorim
+  - natalia-amorim
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
 category: General
 tags:
-    - Comparisons
+  - Comparisons
 seo:
-    {
-        metaTitle: 'The best MCP servers for startups, by workflow',
-        metaDescription: 'A practical guide to the best MCP servers for deve;p[ers at startups, organized by the workflows you actually run.',
-    }
+  {
+    metaTitle: "The best MCP servers for startups, by workflow",
+    metaDescription: "A practical guide to the best MCP servers for deve;p[ers at startups, organized by the workflows you actually run.",
+  }
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
-There are tens of thousands of MCP servers in the wild as of writing this article – [Glama](https://glama.ai/mcp/servers) lists over 22,000, [PulseMCP](https://www.pulsemcp.com/servers) tracks 14,000+, and [mcp.so](https://mcp.so/) and other registries add thousands more. 
+There are tens of thousands of MCP servers in the wild as of writing this article – [Glama](https://glama.ai/mcp/servers) lists over 22,000, [PulseMCP](https://www.pulsemcp.com/servers) tracks 14,000+, and [mcp.so](https://mcp.so/) and other registries add thousands more.
 
-Plugins and connectors have let you use different tools inside an editor for years. The leap with MCP is **composability**: an agent can pull a Linear issue, find the related PR in GitHub, check the deploy in Vercel, and verify the fix in PostHog *in a single prompt*.
+Plugins and connectors have let you use different tools inside an editor for years. The leap with MCP is **composability**: an agent can pull a Linear issue, find the related PR in GitHub, check the deploy in Vercel, and verify the fix in PostHog _in a single prompt_.
 
 A handful of well-chosen MCP servers, composed thoughtfully, will get you further than a stack full of them. Below are the workflows we see startup teams run most often, and the servers that compose well together for each.
 
@@ -43,7 +43,7 @@ The servers:
 - **[GitHub MCP](https://github.com/github/github-mcp-server)** jumps from a stack trace to the code that caused it, finds the PR that introduced the bug, and opens a fix.
 - **[Filesystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)** lets the agent edit your local code directly when you're ready to ship.
 
-A real prompt example for this loop: *"Using PostHog and the Vercel MCP, pull the top error traces for /checkout from yesterday afternoon, find the deploy that went out around 3pm, and use GitHub to show me the diff."*
+A real prompt example for this loop: _"Using PostHog and the Vercel MCP, pull the top error traces for /checkout from yesterday afternoon, find the deploy that went out around 3pm, and use GitHub to show me the diff."_
 
 ### Shipping code
 
@@ -51,7 +51,7 @@ You're writing code and want the agent to help you scaffold it, open the PR, wat
 
 The loop: **write code → open PR → check deploy status → verify it didn't break anything in production.**
 
-*...or you can just use [PostHog Code](/code) (wink).*
+_...or you can just use [PostHog Desktop](/desktop) (wink)._
 
 The servers:
 
@@ -59,7 +59,7 @@ The servers:
 - **A deployment MCP** ([Vercel](https://vercel.com/docs/agent-resources/vercel-mcp), currently in Beta; [Render](https://render.com/docs/mcp-server); or [Cloudflare](https://developers.cloudflare.com/agents/model-context-protocol/)) lets the agent watch the build and confirm it shipped.
 - **[PostHog MCP](/docs/model-context-protocol)** is the verification step. Did errors spike after deploy? Did session replay catch a UI regression? Did the new feature flag actually roll out? Beats frantically refreshing dashboards after every deploy.
 
-A real prompt: *"Add a debounce to the search input in apps/web/components/SearchBar.tsx. Edit the file locally, run the tests, open a PR titled 'Debounce search input', and ping me when Vercel finishes the preview deploy. After it's live in production, use PostHog to check that search-related events still fire and that no new errors are spiking."*
+A real prompt: _"Add a debounce to the search input in apps/web/components/SearchBar.tsx. Edit the file locally, run the tests, open a PR titled 'Debounce search input', and ping me when Vercel finishes the preview deploy. After it's live in production, use PostHog to check that search-related events still fire and that no new errors are spiking."_
 
 ### Understanding user behavior
 
@@ -69,11 +69,11 @@ The loop: **form a hypothesis → query analytics → watch session replays → 
 
 The servers:
 
-- **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/product-analytics/funnels) and [path](/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results. 
+- **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/product-analytics/funnels) and [path](/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results.
 - **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in the customer-facing context: what's the support team hearing? What did sales flag in the deal review channel? Did anyone post about this in #product-feedback?
 - **[Notion MCP](https://developers.notion.com/guides/mcp)** or **[Linear MCP](https://linear.app/docs/mcp)** for any related research docs, customer interview notes, or experiment write-ups.
 
-A real prompt: *"My top-three customer just churned. Use PostHog to pull session replays from their last two weeks and check which feature flags they were exposed to, search Slack #support and #sales for any recent mentions of their account, and find their latest customer interview notes in Notion."*
+A real prompt: _"My top-three customer just churned. Use PostHog to pull session replays from their last two weeks and check which feature flags they were exposed to, search Slack #support and #sales for any recent mentions of their account, and find their latest customer interview notes in Notion."_
 
 This is the workflow where MCPs save the most time. The traditional version is 6+ tabs and lots of patience, but with the right MCP stack, it's one prompt and a coffee break.
 
@@ -90,7 +90,7 @@ The servers:
 - **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in async decisions and threads. Useful for "what did we decide about X" and for drafting status updates that pull from the actual conversations.
 - **[PostHog MCP](/docs/model-context-protocol)** earns a slot when planning is data-informed: which features have low adoption and might be worth cutting, which experiments are inconclusive and need more time, which feature flags can finally be cleaned up.
 
-A real prompt: *"Pull the issues we shipped this sprint from Linear, cross-reference them with the roadmap doc in Notion, check PostHog for which of those features are actually getting used, and grab the highlights from #product-updates in Slack to draft a Friday update for the team."*
+A real prompt: _"Pull the issues we shipped this sprint from Linear, cross-reference them with the roadmap doc in Notion, check PostHog for which of those features are actually getting used, and grab the highlights from #product-updates in Slack to draft a Friday update for the team."_
 
 ### Answering questions about your data (the SQL/warehouse loop)
 
@@ -103,7 +103,7 @@ The servers:
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
 - **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
 
-A real prompt: *"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."*
+A real prompt: _"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."_
 
 The agent queries Postgres for billing data, queries PostHog for product engagement, and joins them in the response.
 
@@ -123,7 +123,7 @@ Not on the same stack as the recommendations above? Here's what to swap in.
 
 **Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/blog/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/blog/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/blog/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability.
 
-*PostHog appears in all of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it.*
+_PostHog appears in all of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it._
 
 **Databases and warehouses:** [MongoDB's official MCP](https://www.mongodb.com/docs/mongodb-mcp-server/) for document stores, [Snowflake's official MCP](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-mcp) or [BigQuery's official MCP](https://cloud.google.com/bigquery/docs/use-bigquery-mcp) for warehouse work, [Redis's official MCP](https://github.com/redis/mcp-redis) for caching and session data.
 

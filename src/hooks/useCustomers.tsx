@@ -37,7 +37,6 @@ import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PaperLogo from '../components/CustomerLogos/PaperLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
-import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import QredLogo from '../components/CustomerLogos/QredLogo'
@@ -66,6 +65,13 @@ import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
 
+export type CustomerLogo =
+    | React.ComponentType<{ className?: string }>
+    | {
+          light: string
+          dark: string
+      }
+
 export interface Customer {
     slug: string
     name: string
@@ -74,12 +80,7 @@ export interface Customer {
     industries?: string[]
     users?: string[]
     notes?: React.ReactNode
-    logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    logo?: CustomerLogo
     height?: number
     quotes?: Record<
         string,
@@ -104,12 +105,7 @@ interface BaseCustomer {
     industries?: string[]
     users?: string[]
     notes?: React.ReactNode
-    logo?:
-        | React.ComponentType<any>
-        | {
-              light: string
-              dark: string
-          }
+    logo?: CustomerLogo
     legacyLogo?: string // Temporary until SVG component created
     legacyLogoDark?: string // Temporary until SVG component created
     height?: number
@@ -489,7 +485,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
             dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
         },
-        height: 8,
+        height: 14,
         quotes: {
             job_rietbergen: {
                 // This is the author handle used in OSQuote
@@ -503,6 +499,33 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     "In other setups, you end up with four different tools–analytics, experiments, recordings,and they don't really talk to each other. With PostHog, you can actually see the full picture.",
                     "PostHog is really the connective tissue behind a lot of what we're doing. So many things depend on it, and it adapts as fast as the product does.",
                     "Everything we do is about speed. PostHog helps us move fast without losing visibility into what's actually happening.",
+                ],
+            },
+        },
+    },
+    'legit-media': {
+        name: 'Legit Media',
+        toolsUsed: ['endpoints', 'product_analytics', 'session_replay', 'feature_flags'],
+        industries: ['News and Media'],
+        users: ['Engineering', 'Marketing'],
+        notes: 'Network of news websites across Africa',
+        featured: false,
+        logo: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/legit_logo_ad1569a0cd.png',
+        },
+        height: 8,
+        quotes: {
+            andrey_tovstonog: {
+                name: 'Andrey Tovstonog',
+                role: 'CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/andrey_headshot_b9a99442ec.png',
+                },
+                quotes: [
+                    "About 1 out of 7 requests was successful. Before switching to Endpoints, during the last few weeks we weren't able to get any reports at all — the API was constantly responding that it was too busy and couldn't process our requests.",
+                    'The requests started to be processed much faster, and the response stability improved significantly.',
+                    'Previously, marketers had to manually gather all this information from different PostHog dashboards. After automation, everything is now consolidated and available in a single place, and they spend their time analyzing the results instead of searching for the right data.',
                 ],
             },
         },
@@ -728,7 +751,10 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'posthog_ai',
         ],
         notes: <>Would it be clever or lame if we included our own company here?</>,
-        logo: PostHogLogo,
+        logo: {
+            light: '/brand/posthog-logo.svg',
+            dark: '/brand/posthog-logo-white.svg',
+        },
         height: 10,
         featured: true,
     },

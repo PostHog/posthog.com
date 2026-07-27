@@ -13,24 +13,27 @@ const appRoot = (overrides = {}) => [
     { entrypoint: 'app', label: 'app', budgetBytes: null, forbidden: [], ...overrides },
 ]
 
-test('static closure excludes modules only reachable through a dynamic import', () => {
+test('eager size counts only shipped modules, not statically-reachable-but-tree-shaken ones', () => {
     const { roots } = measure(graph, appRoot())
     const r = roots[0]
-    // a -> b -> d and a -> c are static; e and f hang off a dynamic import only.
+    // app's eager set is a, b, c, d. `g` is statically imported by a but tree-shaken out of
+    // the output (absent from the eager set), and e/f hang off a dynamic import only — the
+    // old reachability metric would have counted g; the shipped metric does not.
     assert.equal(r.files, 4)
     assert.equal(r.bytes, 100 + 200 + 50 + 1000)
     const names = r.largest.map((l) => l.file)
+    assert.ok(!names.includes('../node_modules/tree-shaken-barrel/index.js'))
     assert.ok(!names.includes('./src/templates/lazy-page.tsx'))
     assert.ok(!names.includes('../node_modules/monaco-editor/editor.js'))
 })
 
-test('overBudget is true only when the closure exceeds a set budget', () => {
+test('overBudget is true only when the shipped set exceeds a set budget', () => {
     assert.equal(measure(graph, appRoot({ budgetBytes: 1000 }))['roots'][0].overBudget, true)
     assert.equal(measure(graph, appRoot({ budgetBytes: 2000 }))['roots'][0].overBudget, false)
     assert.equal(measure(graph, appRoot({ budgetBytes: null }))['roots'][0].overBudget, false)
 })
 
-test('forbidden hits fire for statically-reachable modules and not for dynamic-only ones', () => {
+test('forbidden hits fire for shipped modules and not for tree-shaken or dynamic-only ones', () => {
     const staticHit = measure(graph, appRoot({ forbidden: ['node_modules/heavy/'] }))['roots'][0]
     assert.equal(staticHit.forbiddenHits.length, 1)
     assert.deepEqual(staticHit.forbiddenHits[0].chain, [
@@ -41,6 +44,10 @@ test('forbidden hits fire for statically-reachable modules and not for dynamic-o
 
     const dynamicOnly = measure(graph, appRoot({ forbidden: ['monaco-editor'] }))['roots'][0]
     assert.equal(dynamicOnly.forbiddenHits.length, 0)
+
+    // Statically reachable but tree-shaken out of the shipped set — not an eager ship.
+    const treeShaken = measure(graph, appRoot({ forbidden: ['tree-shaken-barrel'] }))['roots'][0]
+    assert.equal(treeShaken.forbiddenHits.length, 0)
 })
 
 test('a missing entrypoint is recorded as an error, not a crash', () => {

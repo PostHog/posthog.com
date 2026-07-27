@@ -3,15 +3,12 @@ title: Managed views
 sidebar: Docs
 showTitle: true
 ---
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
 
 Revenue analytics works by automatically transforming the data coming from your different revenue sources (Stripe or events) into a standardized set of [managed views](/docs/data-warehouse/views).
 
 These views are automatically created once you [add a revenue source](/docs/revenue-analytics/payment-platforms).
 
-These views are not exclusive to the revenue analytics dashboard: you can query them in the [SQL editor](/docs/data-warehouse/query).
+You can query these views anywhere you work with data in PostHog, including the [SQL editor](/docs/data-warehouse/query) and [product analytics insights](/docs/product-analytics/insights).
 
 > **Note:** These views cannot currently be used in the visual Insights builder (Trends, Funnels, etc.). For currency conversion in Trends, use the `convertCurrency()` HogQL function instead - see [our FAQ](/docs/revenue-analytics/common-questions#why-isnt-currency-being-converted-in-my-trends-insight) for details.
 

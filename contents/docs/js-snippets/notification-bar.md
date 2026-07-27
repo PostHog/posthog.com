@@ -21,7 +21,7 @@ The banner:
 - Optionally remembers when a user dismisses it using `localStorage`, so it won't reappear until you change the message
 - Can be restricted to specific domains using a comma-separated list
 
-<CalloutBox icon="IconInfo" title="JS snippets are in beta" type="fyi">
+<CalloutBox icon="IconFlask" title="JS snippets are in beta" type="action">
 
 JS snippets let you inject code from PostHog into your website via `posthog-js`. You need to opt in by setting `opt_in_site_apps: true` in your posthog-js configuration.
 

@@ -49,7 +49,7 @@ const analyticsHandles = [
     'funnels',
     'user_paths',
     'lifecycle',
-    'llm_traces',
+    'ai_observability',
     'llm_evals',
     'session_replay',
     'heatmaps',
@@ -348,7 +348,7 @@ const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, 
         { handle: 'lifecycle', '@xl': [6, 84], '@2xl': [6, 78], '@3xl': [10, 78] },
         { handle: 'user_paths', '@xl': [12, 96], '@2xl': [8, 96], '@3xl': [6, 96] },
         { handle: 'llm_evals', '@xl': [94, 16], '@2xl': [95, 56], '@3xl': [90, 56] },
-        { handle: 'llm_traces', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
+        { handle: 'ai_observability', '@xl': [94, 82], '@2xl': [92, 74], '@3xl': [86, 74] },
     ]
 
 const ArcProducts = ({ products, translate = identity }: { products: any[]; translate?: TranslateFn }) => {
@@ -462,8 +462,8 @@ export const DebugFixSlide = ({ translate = identity }: { translate?: TranslateF
             <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                 <p className="text-secondary text-sm my-3">
                     <strong>새로운 기능:</strong>{' '}
-                    <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                        PostHog Code
+                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                        PostHog Desktop
                     </Link>{' '}
                     는 버그를 선제적으로 찾아 수정하고 pull request를 자동으로 생성합니다.
                 </p>
@@ -530,11 +530,11 @@ export const TestRolloutSlide = ({ translate = identity }: { translate?: Transla
             </p>
             <p className="text-secondary text-sm">
                 이 모든 것을{' '}
-                <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                    PostHog Desktop
                 </Link>
-                로도 만들 수 있습니다. 새로운 AI 코드 편집기인 PostHog Code는 적절한 PostHog 계측이 포함된 기능을 만들고
-                AI 에이전트를 병렬로 관리할 수 있게 해줍니다.
+                로도 만들 수 있습니다. 새로운 AI 코드 편집기인 PostHog Desktop는 적절한 PostHog 계측이 포함된 기능을
+                만들고 AI 에이전트를 병렬로 관리할 수 있게 해줍니다.
             </p>
 
             <div className="grid grid-cols-1 @sm:grid-cols-2 @xl:grid-cols-3 gap-6 clear-both pt-2">

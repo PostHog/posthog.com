@@ -1,11 +1,12 @@
-# Data at PostHog - Mission
+# ClickHouse at PostHog - Mission
 
-Data Team's mission is to provide a storage and query engine that meets these requirements:
-- Continue to meet the needs of the product today now and in the future
-- Maintain and optimize our current ClickHouse deployment
-- Elastically scale our capacity with little effort
-- Support multiple query quality of service (QOS) guarantees (Real-time, Batch, etc.)
-- Data is stored once and queryable from the appropriate tool
-- Queries are optimized for cost and performance
-- Tunable execution performance to allow trade-offs between cost and performance
-- Storage is durable
+The ClickHouse team's mission is to provide a central data store for PostHog that is **reliable**, **fast**, **cost efficient**, and **secure**.
+
+We run PostHog's self-managed, multi-petabyte ClickHouse fleet.
+
+We provide a platform that is:
+
+- **Reliable** - replicated, durable storage with backups and regularly tested restores, workloads isolated to limit the blast radius of failures, and upgrades and operations that don't cause downtime
+- **Fast** - each workload runs on the right size and class of nodes, with data intelligently tiered across storage
+- **Cost efficient** - data stored compactly and compressed, with a cluster topology that keeps cost in check as we grow
+- **Secure** - access tightly controlled, secrets short-lived and easily rotated, and data protected in transit and at rest

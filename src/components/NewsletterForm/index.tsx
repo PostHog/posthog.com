@@ -49,7 +49,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
             >
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/icon_ae03b6df11.png"
                         objectFit="contain"
                         className="w-full h-full max-w-[200px] @lg:max-w-[250px] mx-auto flex-shrink-0"
                     />
@@ -58,9 +58,9 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                     {!submitted ? (
                         <>
                             <p className="!text-sm opacity-50 !m-0">Subscribe to our newsletter</p>
-                            <h4 className="relative !text-2xl !m-0 !leading-tight">Product for Engineers</h4>
+                            <h4 className="relative !text-2xl !m-0 !leading-tight">build mode</h4>
                             <p className="!m-0 !text-sm @lg:!text-[15px] !leading-normal !pt-1">
-                                Read by 100,000+ founders and builders
+                                Read by 75,000+ founders and builders
                             </p>
                             <div className="">
                                 <form
@@ -75,8 +75,22 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                         className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1"
                                         value={email}
                                     />
-                                    <button className={`${container(undefined, 'md')} -mt-px w-full @md:w-auto`}>
-                                        <span className={child(undefined, undefined, undefined, 'md')}>Subscribe</span>
+                                    <button
+                                        className={`${container(
+                                            undefined,
+                                            'md'
+                                        )} -mt-px w-full @md:w-auto !bg-[#C74816] !border-[#C74816]`}
+                                    >
+                                        <span
+                                            className={child(
+                                                undefined,
+                                                undefined,
+                                                '!bg-[#FF5C1C] !text-white !border-[#C74816]',
+                                                'md'
+                                            )}
+                                        >
+                                            Subscribe
+                                        </span>
                                     </button>
                                 </form>
                                 <p className="!text-sm opacity-50 text-left @lg:text-left !mb-0">
@@ -99,7 +113,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                             <p className="m-0 text-secondary !leading-normal !text-[15px]">
                                 Keep an eye out for our next edition of{' '}
                                 <strong>
-                                    <em>Product for Engineers</em>
+                                    <em>build mode</em>
                                 </strong>{' '}
                                 from Substack in your inbox. Until then,{' '}
                                 <Link href="https://newsletter.posthog.com/" external>
