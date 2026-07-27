@@ -25,7 +25,7 @@ The key idea is that Replay Vision actually *watches the video* of each recordin
 
 Replay Vision is built around two concepts:
 
-- **Scanner** – a configured AI probe scoped to your project. A scanner has a natural-language prompt describing what to look for, a [scanner type](/docs/replay-vision/scanner-types) that determines what kind of output it produces, a set of recording filters that select which sessions it applies to, and a sampling rate.
+- **Scanner** – a configured AI probe scoped to your project. A scanner has a natural-language prompt describing what to look for, a [scanner type](/docs/replay-vision/scanner-types) that determines what kind of output it produces, recording filters that select which sessions it applies to, a session coverage mode and sampling rate that control how many of those get scanned, and a model that sets what each scan [costs](/docs/replay-vision/quota-and-limits).
 - **Observation** – one application of a scanner to a single recording. Each observation runs the scanner against that session and produces a structured result that's persisted and emitted as a queryable [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events).
 
 When a scanner runs against a recording, PostHog:

@@ -19,7 +19,7 @@ Check, in order:
 1. **Is the scanner enabled?** Disabled scanners don't sweep. The toggle is on the scanner list and on the scanner detail page.
 2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
 3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
-4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
+4. **Is the credit budget exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by an exhausted budget will silently produce nothing until credits free up. See [quota and limits](/docs/replay-vision/quota-and-limits).
 5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
 6. **Is your organization over a usage limit?** If Product analytics or Session replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
 7. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
@@ -118,6 +118,12 @@ The model returned a response that didn't match the scanner's expected output sh
 Something else went wrong on PostHog's side. These should be rare.
 
 **What to do:** if you see it more than once, [contact support](/questions) with the observation ID.
+
+### `orphaned`
+
+The scan started but never reached a result – the job died partway through, so PostHog marked the observation failed rather than leaving it stuck as pending or running forever.
+
+**What to do:** retry the observation from its detail page. The retry replaces the failed row with a fresh scan of the same recording. If the same session orphans repeatedly, [contact support](/questions) with the observation ID.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/failed_observation_detail_d3da59138d.png"

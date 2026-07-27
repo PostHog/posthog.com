@@ -10,59 +10,70 @@ Not yet available to everyone – <a href="/replay-vision">join the waitlist</a>
 
 </CalloutBox>
 
-Replay Vision usage is metered per organization, on a monthly cycle. This page covers what the cap is, what counts against it, and what to do when you're approaching it.
+Replay Vision usage is metered per organization in **credits**. This page covers what an observation costs, what counts against your budget, and what to do when you're approaching it.
 
-<CalloutBox icon="IconFlask" title="Closed beta quota will change" type="action">
+## Credits and what an observation costs
 
-The current cap of 3,000 observations per organization per month is a placeholder for the beta period and will change before general availability. The in-app usage meter is the authoritative current number for your organization.
+One credit is $0.01. Each observation spends credits according to the model the scanner runs, so the model you pick is a cost lever as much as a quality one:
 
-</CalloutBox>
+| Model                    | Credits per observation |
+| ------------------------ | ----------------------- |
+| `gemini-3.5-flash-lite`  | 2                       |
+| `gemini-3-flash-preview` | 5 (default)             |
+| `gemini-3.6-flash`       | 15                      |
 
-## Monthly observation cap
+Newer models tend to produce higher-quality observations, but a scanner on the most capable model costs over seven times as much per session as one on the cheapest. Start on the default and move up only when the cheaper tiers demonstrably miss what you're looking for.
 
-During the closed beta, each organization gets **3,000 observations per calendar month**. The counter resets at the start of each calendar month (UTC).
+## Your budget
 
-The current month's usage is shown in the Replay Vision app:
+Budgets are set per organization and reset each billing period. Rather than repeat a number here that may not match your plan, check the in-app meter, which is always authoritative:
+
+- The **Usage** tab in Replay Vision shows your organization's spend over time, daily through yearly.
+- Each scanner's page shows what that scanner has spent this period, so you can see which one is consuming the budget.
+- The scanner editor shows a projected monthly spend for the scanner you're configuring, against what's left.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/quota_meter_ddcc762a43.png"
-  alt="The monthly usage meter: observations used this month against the organization's cap"
+  alt="The Replay Vision usage meter: credits used this period against the organization's budget"
   classes="rounded"
 />
 
-You can also fetch it programmatically – see the `vision-quota-retrieve` MCP tool.
+You can also fetch it programmatically – see the `vision-quota-retrieve` MCP tool, which returns `credit_limit`, `credits_used`, `remaining`, `exhausted`, and the current period's start and end.
 
-## What counts against the cap
+## What counts against your budget
 
-| Observation outcome | Counts against cap? |
-| ------------------- | ------------------- |
-| **Succeeded**       | Yes                 |
-| **Pending**         | Yes                 |
-| **Running**         | Yes                 |
-| **Failed**          | No                  |
-| **Ineligible**      | No                  |
+| Observation outcome     | Counts? |
+| ----------------------- | ------- |
+| **Succeeded**           | Yes     |
+| **Pending**             | Yes     |
+| **Running**             | Yes     |
+| **Failed**              | No      |
+| **Ineligible**          | No      |
 
-Pending and running observations count so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting toward the month's usage.
+Pending and running observations are reserved at their model's price so a burst of concurrent on-demand triggers can't blow past the budget before any of them complete. Once an observation reaches a terminal failed or ineligible state, it stops counting.
 
-In practice this means: **every observation that produces a `$recording_observed` event uses one unit of quota.** Ineligibles and failures don't consume any.
+In practice this means: **every observation that produces a `$recording_observed` event spends its model's credits.** Ineligibles and failures don't cost anything.
 
-## What happens when the cap is reached
+Prompt tests count too. Testing a configuration recommendation on the [Quality tab](/docs/replay-vision/quality#test-before-applying) re-runs the scanner against rated sessions, and each of those is charged like a normal observation. The panel shows the cost before you run it.
+
+## What happens when the budget runs out
 
 Both enforcement paths use the same check:
 
-- **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until quota frees up (next month, or as in-flight observations resolve to ineligible/failed).
+- **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until budget frees up (the next period, or as in-flight observations resolve to ineligible/failed).
 - **On-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response with a `quota_limit_exceeded` code.
 
-A scanner that's been silenced by the cap will resume producing observations automatically once usage drops below the cap (e.g. at the start of the next month).
+A scanner that's been silenced this way resumes producing observations automatically once usage drops below the budget, for example at the start of the next period.
 
-## Sizing scanners against the cap
+## Sizing scanners against your budget
 
-The scanner editor shows a **projected per-month observation count** for the scanner you're configuring, based on:
+The scanner editor shows a **projected monthly spend** for the scanner you're configuring, based on:
 
 - Your project's recent recording volume.
 - The filters you've set.
 - The session coverage mode.
 - The sampling rate.
+- The model, which sets the per-observation price.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
@@ -70,20 +81,21 @@ The scanner editor shows a **projected per-month observation count** for the sca
   classes="rounded"
 />
 
-If the projection is uncomfortably close to your remaining cap, the cheapest knobs are:
+If the projection is uncomfortably close to what's left, the cheapest knobs are:
 
 - **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
 - **Tighten session coverage** – switching from Comprehensive to Balanced or Focused mode filters out low-quality sessions before sampling, so your budget goes toward recordings with meaningful activity.
 - **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the volume.
-- **Combine all three** – a tight filter on the sessions you care most about, plus Focused or Balanced coverage, plus a higher sampling rate, often yields better signal-per-observation than a loose filter with Comprehensive coverage and low sampling.
+- **Pick a cheaper model** – dropping from `gemini-3.6-flash` to the default cuts the per-observation price by two thirds, and to `gemini-3.5-flash-lite` by almost 90%.
+- **Combine them** – a tight filter on the sessions you care most about, plus Focused or Balanced coverage, often yields better signal-per-credit than a loose filter with Comprehensive coverage and low sampling.
 
-To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows.
+To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows, returning both the observation count and the credits it would cost.
 
-## What to do if you're hitting the cap
+## What to do if you're running out
 
 Try these, in order:
 
-1. **Look at which scanner is consuming the most quota.** The Observations tab makes this easy – a scanner producing thousands of observations a month is probably broader than it needs to be.
-2. **Tighten its filters, session coverage, or sampling rate.** Use the editor's projection to find a setting that gives you enough signal without dominating the cap.
+1. **Find the scanner spending the most.** Each scanner shows its spend for the current period, and the Usage tab charts spend over time. A scanner costing far more than the rest is usually broader, or on a pricier model, than it needs to be.
+2. **Tighten its filters, session coverage, sampling rate, or model.** Use the editor's projection to find a setting that gives you enough signal without dominating the budget.
 3. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
-4. **Wait for the cap to reset.** Caps reset at the start of each calendar month in UTC.
+4. **Wait for the period to reset.** Usage resets at the start of each billing period.

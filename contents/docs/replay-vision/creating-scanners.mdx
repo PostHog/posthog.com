@@ -10,13 +10,14 @@ Not yet available to everyone – <a href="/replay-vision">join the waitlist</a>
 
 </CalloutBox>
 
-A scanner is made up of five things you author:
+A scanner is made up of six things you author:
 
 1. A **prompt** describing what to look for.
 2. A **scanner type** that determines the output shape – see [scanner types](/docs/replay-vision/scanner-types).
 3. **Recording filters** that select which sessions the scanner applies to.
 4. A **session coverage** mode that pre-filters by recording quality.
 5. A **sampling rate** that controls how many matching sessions get scanned.
+6. A **model**, which sets what each observation costs.
 
 ## Start from a template
 
@@ -79,7 +80,7 @@ A prompt that reads beautifully on its own can still misfire. The fastest feedba
 4. Adjust the prompt where the model misread something obvious.
 5. Scan another batch of recordings and repeat until the results look right.
 
-Hold off on the automatic background sweep until you trust the scanner's on-demand results – every sweep observation counts against your [monthly quota](/docs/replay-vision/quota-and-limits), and a poorly tuned scanner can burn through it fast on results you'd throw away anyway.
+Hold off on the automatic background sweep until you trust the scanner's on-demand results – every sweep observation spends [credits](/docs/replay-vision/quota-and-limits), and a poorly tuned scanner can burn through your budget fast on results you'd throw away anyway.
 
 ### Drafting prompts with PostHog AI
 
@@ -147,11 +148,18 @@ The scanner editor shows a **per-month estimate** of how many observations the s
   classes="rounded"
 />
 
-If the estimate looks too high, you have three knobs:
+If the estimate looks too high, you have four knobs:
 
 - Narrow the filters.
 - Tighten the session coverage mode (Comprehensive → Balanced → Focused).
 - Lower the sampling rate.
+- Pick a cheaper model.
+
+## Model: quality against cost
+
+The **Model** selector in the configure step picks which Gemini model reads each recording, and it sets the price of every observation the scanner makes: 2 credits on `gemini-3.5-flash-lite`, 5 on `gemini-3-flash-preview` (the default), and 15 on `gemini-3.6-flash`. Newer models tend to produce higher-quality observations, but the top tier costs over seven times as much per session as the cheapest.
+
+Start on the default. If results are close but not quite right, tune the prompt before reaching for a pricier model – a sharper prompt is free, and the [Quality tab](/docs/replay-vision/quality) will tell you whether it worked. See [quota and limits](/docs/replay-vision/quota-and-limits) for how credits are metered.
 
 ## Enabling and disabling
 
@@ -161,12 +169,12 @@ Toggling a scanner to **disabled** stops the background sweep. On-demand trigger
 
 To stop a scanner entirely, delete it. Deleting a scanner also removes all of its observations from the Observations tab. The `$recording_observed` events the scanner produced are ordinary PostHog events in your project's event stream and aren't affected – they stay queryable.
 
-## Handing off to Responder agents
+## Feeding the self-driving loop
 
-Each scanner has a **Hand off to Responder agents** toggle in the configuration step. When enabled, the scanner gains a side mission: during each scan, the model looks for clear, actionable product issues – bugs, broken or confusing flows, errors, or significant UX friction – and reports them as findings.
+The last step of the editor is **Self-driving**, with an **Emit findings as Signals** toggle. When enabled, the scanner gains a side mission: during each scan, the model looks for clear, actionable product issues – bugs, broken or confusing flows, errors, or significant UX friction – and reports them as findings.
 
 The scanner's primary task (monitoring, classifying, scoring, or summarizing) is unaffected. The side mission runs alongside it, and most scans produce no finding at all. The bar is deliberately high: a finding must be self-contained and concrete enough for someone with no session context to act on it.
 
-Findings are emitted as signals to the [self-driving inbox](/docs/self-driving/inbox/sources), where Responder agents can pick them up, research the issue against your codebase and product data, and potentially open a PR.
+Findings are emitted as signals to the [self-driving inbox](/docs/self-driving/inbox/sources), where an agent can pick them up, research the issue against your codebase and product data, and potentially open a PR.
 
-The toggle is the only setup required – there's no additional configuration in PostHog Desktop Inbox for this source.
+The toggle is the only setup required – there's no additional configuration in the inbox for this source.
