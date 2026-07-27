@@ -7,7 +7,9 @@ import CLIDownload from "../_snippets/cli/download.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import StepVerifySymbolSetsUpload from "../_snippets/StepVerifySymbolSetsUpload"
 
-The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-process from the Go runtime, so captured frames already carry file names, line numbers, and function names. Uploading debug symbols gets you more than that. PostHog resolves the frames again server-side against the exact build that crashed, which recovers the full inline call chain and lets the UI show the source code around each frame.
+The [Go SDK](/docs/error-tracking/installation/go) resolves stack traces in-process from the Go runtime, so captured frames already carry file names, line numbers, function names, and inlined calls. What they can't carry is your source code.
+
+That's what uploading debug symbols adds. PostHog resolves the frames again against the exact build that crashed, so the UI can show the lines of code around each frame. It also classifies frames as app or library code from their real source paths, instead of guessing from the function name.
 
 <CalloutBox icon="IconInfo" title="Version requirements" type="action">
 
