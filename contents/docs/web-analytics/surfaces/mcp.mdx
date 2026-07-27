@@ -1,0 +1,49 @@
+---
+title: Query web traffic over MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) lets your AI agent query [web analytics](/docs/web-analytics) data directly from your code editor. Check traffic after a deploy, investigate a drop, audit your UTM tagging, or read a page's heatmap – without switching to the PostHog app.
+
+This works in any MCP client, including Cursor, Codex, Claude Code, Windsurf, and VS Code.
+
+## What you can do here
+
+- **Summarize a site** – `web-analytics-weekly-digest` returns visitors, pageviews, sessions, bounce rate, and average session duration over a 1–90 day window, with period-over-period comparison, plus top pages, top sources, and goal conversions.
+- **Run your own queries** – `query-run` and `query-generate-hogql-from-question` answer anything the digest doesn't, straight against your sessions and events.
+- **Save what you find** – `insight-create-from-query` turns a traffic query into a saved insight on a dashboard.
+- **Diagnose marketing analytics** – `marketing-analytics-diagnose` is the read-only, end-to-end check to run first when campaign data looks wrong. Follow it with `marketing-analytics-data-sources` for sync health, `marketing-analytics-utm-audit` for tagging quality, and `marketing-analytics-suggest-utm-mappings` for `utm_source` values that aren't matching a platform.
+- **Work on conversion goals** – list your goals, explain the events behind one, or get candidate events ranked by volume and UTM coverage.
+- **Read heatmaps** – `heatmaps-list` returns click, rageclick, mousemove, and scroll-depth data for a page with a below-the-fold summary, `heatmaps-events` drills into the sessions behind a hotspot, and the saved-heatmap tools render a page with the data overlaid.
+- **Manage path cleaning** – `path-cleaning-rules-update` appends, inserts, replaces, removes, and reorders [path cleaning rules](/docs/web-analytics/path-cleaning), with a preview step so you can check changes before saving.
+
+The marketing analytics and heatmap tools are behind feature flags, so ask your agent to list its available tools if you don't see them.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `How did the site do last week compared to the week before?`
+- `Did traffic to /pricing change after yesterday's deploy?`
+- `What are the top landing pages by traffic this week?`
+- `Why is my marketing analytics dashboard showing so much non-integrated traffic?`
+- `Which utm_source values aren't mapped to an ad platform yet?`
+- `Show me the rageclick hotspots on our signup page on mobile viewports.`
+- `Create a dashboard showing daily pageviews, top pages, and traffic by source.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#manual-install).
+
+## Related
+
+- Full setup instructions live in the [MCP server docs](/docs/model-context-protocol).
+- Explore the same data in the [web app](/docs/web-analytics/surfaces/web-app).
+- Act on Self-driving traffic reports in [PostHog Desktop](/docs/web-analytics/surfaces/desktop).

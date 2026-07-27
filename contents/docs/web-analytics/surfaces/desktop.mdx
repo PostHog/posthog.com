@@ -1,0 +1,38 @@
+---
+title: Act on traffic findings in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review and act on the [Self-driving](/docs/self-driving) work your traffic generates. Your sessions don't just sit in a dashboard – a scout reads them, finds segments that have stepped away from their own baseline, and files each one as a report you can act on.
+
+{/* TODO: screenshot of a web-analytics-sourced report in PostHog Desktop */}
+
+## How a traffic change becomes a report
+
+A scout watches your `sessions` data for the changes a site-wide total hides:
+
+- **Acquisition divergence** – one channel's session volume stepping away from its own rhythm while overall traffic holds, like an SEO drop, a paused ad account, or a referrer going dark.
+- **Attribution breakage** – campaign traffic that didn't disappear but got reclassified into Direct or Unknown because UTM tagging or referrer propagation broke. The tell is paired opposite moves between channels that net to zero in the total.
+- **Site-health steps** – a landing page whose bounce rate steps above its own history, a 404 surface spiking, or an entry path cliffing.
+
+Each finding is compared against the same window 7, 14, 21, and 28 days back, so day-of-week seasonality doesn't get mistaken for a change. A separate scout does the same for [web vitals](/docs/web-analytics/web-vitals) regressions per page.
+
+## What you can do here
+
+- **Read the report** – the segment, the date it moved, and the queries behind it.
+- **Ask questions** – start a research task against the report to dig further before acting.
+- **Get a pull request** – when the cause is in code your team owns, like missing UTM tagging on a link or a broken redirect, a coding agent opens a draft PR.
+- **Merge** – the pull request opens on GitHub, so a human is always the last step.
+
+## Related
+
+- Explore the same data in the [web app](/docs/web-analytics/surfaces/web-app).
+- Diagnose attribution problems yourself in [campaign attribution troubleshooting](/docs/web-analytics/campaign-attribution-troubleshooting).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

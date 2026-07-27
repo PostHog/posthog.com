@@ -17,11 +17,11 @@ hideAnchor: false
 - Collect on-site feedback (exit intent, NPS, CSAT) and tie it directly to user behavior
 - Let non-technical marketing users ask questions about their data without waiting for an analyst
 
-> **Guidance:** This is probably the most underserved use case in our current motion. We have the products — [Web Analytics](/docs/web-analytics/getting-started), [Marketing Analytics](/docs/web-analytics/marketing-analytics), [Workflows](/docs/workflows/start-here), [Pipelines](/docs/cdp), [Surveys](/docs/surveys/creating-surveys) — but we rarely lead with this story. Marketing teams are spending $10k+/month on Segment, Mixpanel, GA4, and various CDPs to do what PostHog can do in one place. Don't sell individual products here. Sell the consolidation of their marketing data stack.
+> **Guidance:** This is probably the most underserved use case in our current motion. We have the products — [Web Analytics](/docs/web-analytics/start-here), [Marketing Analytics](/docs/web-analytics/marketing-analytics), [Workflows](/docs/workflows/start-here), [Pipelines](/docs/cdp), [Surveys](/docs/surveys/creating-surveys) — but we rarely lead with this story. Marketing teams are spending $10k+/month on Segment, Mixpanel, GA4, and various CDPs to do what PostHog can do in one place. Don't sell individual products here. Sell the consolidation of their marketing data stack.
 
 ## What PostHog products are relevant?
 
-- **[Web Analytics](/docs/web-analytics/getting-started) (core)** — Traffic, referrers, [UTM tracking](/docs/data/utm-segmentation), page performance, bounce rates. The replacement for GA4 that doesn't require a PhD to configure. First-party data collection that actually works with ad blockers. ([Dashboard overview](/docs/web-analytics/dashboard))
+- **[Web Analytics](/docs/web-analytics/start-here) (core)** — Traffic, referrers, [UTM tracking](/docs/data/utm-segmentation), page performance, bounce rates. The replacement for GA4 that doesn't require a PhD to configure. First-party data collection that actually works with ad blockers. ([Dashboard overview](/docs/web-analytics/dashboard))
 - **[Marketing Analytics](/docs/web-analytics/marketing-analytics)** *beta* — Ad campaign attribution, channel performance, ROAS tracking. Connect ad spend to actual product signups and revenue events. Multi-touch attribution across channels.
 - **[Product Analytics](/docs/product-analytics/funnels)** — Conversion [funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention) curves, [cohort](/docs/data/cohorts) analysis, activation metrics. The layer that connects "they visited the site" to "they became a paying customer." [Lifecycle](/docs/product-analytics/lifecycle) analysis to understand where users are in the journey.
 - **[Workflows](/docs/workflows/start-here)** — Automated engagement sequences triggered by user behavior. Lifecycle emails, re-engagement campaigns, onboarding drips, churn prevention. Act on what analytics reveals instead of just reporting on it. ([Email drip campaign guide](/docs/workflows/email-drip-campaign) · [Configure channels](/docs/workflows/configure-channels))
@@ -186,7 +186,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ### Our positioning
 
-- **Full-funnel in one platform.** No other tool connects [web traffic](/docs/web-analytics/getting-started) → [channel attribution](/docs/web-analytics/marketing-analytics) → [conversion funnels](/docs/product-analytics/funnels) → user behavior → [automated engagement](/docs/workflows/start-here) in a single product. GA4 stops at the website. Segment stops at the pipe. Amplitude stops at the dashboard. PostHog goes from first click to lifetime engagement *and* lets you act on it.
+- **Full-funnel in one platform.** No other tool connects [web traffic](/docs/web-analytics/start-here) → [channel attribution](/docs/web-analytics/marketing-analytics) → [conversion funnels](/docs/product-analytics/funnels) → user behavior → [automated engagement](/docs/workflows/start-here) in a single product. GA4 stops at the website. Segment stops at the pipe. Amplitude stops at the dashboard. PostHog goes from first click to lifetime engagement *and* lets you act on it.
 - **First-party data collection that works.** PostHog's first-party tracking isn't blocked by ad blockers the way GA4 and third-party pixels are. More accurate data, better attribution, higher match rates when syncing conversions to ad platforms.
 - **Analytics + automation in the same tool.** Most analytics platforms show you the drop-off. PostHog lets you fix it with [Workflows](/docs/workflows/start-here) to re-engage users. The insight-to-action loop is closed.
 - **Marketing stack consolidation = real cost savings.** Replace GA4 + Segment + CDP + survey tool + experimentation tool with one platform.
@@ -224,7 +224,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ### What does an evaluation look like?
 
-- **Scope:** Instrument their primary acquisition funnel: landing page → signup → activation event → first conversion/payment. Add [UTM tracking](/docs/data/utm-segmentation) and connect [web analytics](/docs/web-analytics/getting-started). If they have paid campaigns, set up [Marketing Analytics](/docs/web-analytics/marketing-analytics).
+- **Scope:** Instrument their primary acquisition funnel: landing page → signup → activation event → first conversion/payment. Add [UTM tracking](/docs/data/utm-segmentation) and connect [web analytics](/docs/web-analytics/start-here). If they have paid campaigns, set up [Marketing Analytics](/docs/web-analytics/marketing-analytics).
 - **Timeline:** 2 to 4 weeks to see meaningful data. Channel attribution and funnel insights start showing value within the first week if traffic is decent. [Experiments](/docs/experiments) need enough traffic for statistical significance, so timeline varies.
 - **Success criteria:** Can you answer: "Which channel drives the most *activated* users (not just signups)?" Can you see the full [funnel](/docs/product-analytics/funnels) from first visit to conversion? Can you tell which campaigns are worth the spend?
 - **PostHog investment:** Web Analytics and Product Analytics free tiers cover a substantial evaluation. Marketing Analytics (beta) is included. Surveys and Experiments have generous free tiers.
@@ -232,7 +232,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ### Onboarding checklist
 
-- [ ] Install PostHog snippet on marketing site and product ([web analytics installation](/docs/web-analytics/getting-started) + autocapture)
+- [ ] Install PostHog snippet on marketing site and product ([web analytics installation](/docs/web-analytics/start-here) + autocapture)
 - [ ] Verify [UTM parameters](/docs/data/utm-segmentation) are being captured on key landing pages
 - [ ] Define and instrument core conversion events: signup, activation, first purchase/upgrade
 - [ ] Build the primary [conversion funnel](/docs/product-analytics/funnels) in Product Analytics
@@ -247,7 +247,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 | Objection | Response |
 |---|---|
-| "We already use GA4 and it's free." | GA4 is great for basic web traffic. But can it show you which channels drive users who *activate and pay*, not just visit? Can it send real conversion events back to your ad platforms? PostHog starts free too, and it goes all the way to revenue. ([Web Analytics](/docs/web-analytics/getting-started) · [Funnels](/docs/product-analytics/funnels)) |
+| "We already use GA4 and it's free." | GA4 is great for basic web traffic. But can it show you which channels drive users who *activate and pay*, not just visit? Can it send real conversion events back to your ad platforms? PostHog starts free too, and it goes all the way to revenue. ([Web Analytics](/docs/web-analytics/start-here) · [Funnels](/docs/product-analytics/funnels)) |
 | "We need Segment for our data pipelines." | What destinations are you sending to? PostHog has built-in [Data Pipelines](/docs/cdp) for the most common ones. You may not need a separate CDP layer if PostHog is already collecting the events. Let's look at your current [destinations](/docs/cdp/destinations) and see what's covered. |
 | "Our marketing team isn't technical enough for PostHog." | That's exactly why we built [PostHog AI](/docs/posthog-ai/allow-access) — your marketing team can ask questions in plain English. [Web Analytics](/docs/web-analytics/dashboard) is also designed to be simple and familiar. We'll set up dashboards during onboarding so they have value from day one. |
 | "Marketing Analytics is beta — can we trust it?" | Fair concern. The core data infrastructure is built on the same battle-tested PostHog platform that handles billions of events. The beta label means we're still adding features, not that the data is unreliable. And your feedback directly shapes the roadmap. |
@@ -269,7 +269,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 ## Internal resources
 
-- **Web Analytics docs:** [Getting started](/docs/web-analytics/getting-started) · [Dashboard](/docs/web-analytics/dashboard)
+- **Web Analytics docs:** [Start here](/docs/web-analytics/start-here) · [Dashboard](/docs/web-analytics/dashboard)
 - **Marketing Analytics docs:** [Marketing Analytics](/docs/web-analytics/marketing-analytics)
 - **Product Analytics docs:** [Funnels](/docs/product-analytics/funnels) · [Retention](/docs/product-analytics/retention) · [Lifecycle](/docs/product-analytics/lifecycle) · [Cohorts](/docs/data/cohorts)
 - **Workflows docs:** [Getting started](/docs/workflows/start-here) · [Email drip campaigns](/docs/workflows/email-drip-campaign) · [Configure channels](/docs/workflows/configure-channels)

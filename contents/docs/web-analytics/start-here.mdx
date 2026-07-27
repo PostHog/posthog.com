@@ -1,0 +1,113 @@
+---
+title: Get started with web analytics
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconCursorClick, IconShield, IconGraph, IconNotebook, IconGithub } from '@posthog/icons'
+
+<QuestLog firstSpeechBubble="Let's get your traffic flowing!" lastSpeechBubble="You're ready to read your traffic!">
+
+<QuestLogItem title="Install PostHog on your site" subtitle="Where the data starts" icon="IconBook">
+
+Web analytics runs on the `$pageview` events the PostHog SDK sends, so the only real setup step is getting PostHog onto your site. There are one-click options for Webflow, Framer, Shopify, WordPress, and GTM, and snippets for every major framework.
+
+In a hurry? The [AI wizard](/docs/web-analytics/installation/ai-wizard) installs and configures PostHog for you in one command.
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/installation">Install PostHog</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Read your dashboard" subtitle="Visitors, pages, and sources" icon="IconDashboard">
+
+Once events arrive, open [Web analytics](https://app.posthog.com/web). The [dashboard](/docs/web-analytics/dashboard) gives you visitors, pageviews, [sessions](/docs/data/sessions), average session duration, and bounce rate, each compared to the previous period, plus your top paths, channels, referrers, UTMs, countries, and devices.
+
+Click any row to filter the whole dashboard to it – then jump into the [session replays](/docs/session-replay) behind that number.
+
+{/* TODO: screenshot of the web analytics dashboard, light + dark */}
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/dashboard">Explore the dashboard</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Add a conversion goal" subtitle="Traffic that actually matters" icon="IconFunnels">
+
+Visitor counts only tell you half the story. A [conversion goal](/docs/web-analytics/conversion-goals) is the action you want people to take – a signup, a demo booking, a subscribe – and adding one puts conversions and conversion rate right next to your traffic numbers.
+
+For signups, capture an explicit `user_signed_up` event rather than relying on autocapture, so the goal survives your next UI change.
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/conversion-goals">Set up a goal</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Clean up your traffic" subtitle="Paths and bots" icon="IconFilter">
+
+Two things make early numbers look messier than they are. [Path cleaning](/docs/web-analytics/path-cleaning) collapses URLs with IDs in them, so `/users/123` and `/users/456` stop competing for space in your top pages list. And [bot and traffic detection](/docs/web-analytics/bot-detection) classifies crawlers, AI agents, and automation at query time, so you can measure them, exclude them, or break them out separately.
+
+<div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconCursorClick className="size-5 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Path cleaning</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Group dynamic URLs into one readable path</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconShield className="size-5 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Bot traffic</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Decide what to keep, per type of bot</p>
+    </div>
+  </div>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/managing-bot-traffic">Manage bot traffic</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Tag your campaigns" subtitle="So channels are right" icon="IconMegaphone">
+
+PostHog derives each session's [channel type](/docs/data/channel-type) at ingestion from its entry referrer, [UTM tags](/docs/data/utm-segmentation), and ad click IDs. Tag your campaign links properly and paid, organic, social, and referral traffic separate themselves automatically. Skip it and that traffic quietly lands in Direct or Unknown.
+
+Running paid ads? [Marketing analytics](/docs/web-analytics/marketing-analytics) (beta) pulls cost, clicks, and impressions from Google, Meta, LinkedIn, TikTok, Reddit, and Bing so you can see CPC and ROAS per campaign next to real conversions.
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/marketing-analytics">Connect ad platforms</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Query traffic from your editor" subtitle="MCP and PostHog AI" icon="IconMagic">
+
+You don't have to open the app to answer a traffic question. [PostHog AI](/docs/web-analytics/investigate-traffic-ai) investigates spikes and drops and builds dashboards from a plain-language question inside the web app, and the [MCP server](/docs/web-analytics/surfaces/mcp) gives your coding agent the same data in Cursor, Claude Code, or VS Code – handy for checking whether a deploy moved a page's traffic.
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/surfaces/mcp">Set up MCP</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Let Self-driving watch it for you" subtitle="Traffic feeds the inbox" icon="IconMagic">
+
+Nobody checks a dashboard every day. Your traffic is a signal source for [Self-driving](/docs/self-driving): a scout compares each channel, entry path, and referrer against its own seasonality-matched baseline and files a report when one steps out of line – an SEO drop, a paused ad account, broken UTM tagging – even when the site-wide total looks fine.
+
+<div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGraph className="size-5 shrink-0" />
+    Sessions
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconNotebook className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGithub className="size-5 shrink-0" />
+    Pull request
+  </span>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/web-analytics/surfaces/desktop">Web analytics and Self-driving</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

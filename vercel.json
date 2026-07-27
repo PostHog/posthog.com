@@ -149,6 +149,16 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/web-analytics/getting-started",
+            "destination": "/docs/web-analytics/start-here",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/query-traffic-mcp",
+            "destination": "/docs/web-analytics/surfaces/mcp",
+            "statusCode": 301
+        },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
