@@ -367,7 +367,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             <p>
                                 Or describe what you want (like{' '}
                                 <em>"users who rage clicked after seeing variant B yesterday"</em>) and{' '}
-                                <Link to="/docs/session-replay/search-replays-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/session-replay/surfaces/mcp" state={{ newWindow: true }}>
                                     PostHog MCP
                                 </Link>{' '}
                                 returns the matching collection in your editor.

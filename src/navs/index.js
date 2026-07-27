@@ -4284,36 +4284,178 @@ export const docsMenu = {
             navStyle: 'listed',
             children: [
                 {
-                    name: 'Session Replay 101',
+                    name: 'Session Replay',
                 },
                 {
-                    name: 'Start here',
+                    name: 'Overview',
                     url: '/docs/session-replay',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Get started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/session-replay/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Integration with PostHog products',
-                    url: '/docs/session-replay/integrations',
-                    icon: 'IconPuzzle',
-                    color: 'blue',
-                },
-                {
-                    name: 'Install & configure',
-                },
-                {
-                    name: 'Install',
+                    name: 'Installation',
                     url: '/docs/session-replay/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/session-replay/installation',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/session-replay/installation/web',
+                        },
+                        {
+                            name: 'HTML snippet',
+                            url: '/docs/session-replay/installation/html-snippet',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/session-replay/installation/react',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/session-replay/installation/nextjs',
+                        },
+                        {
+                            name: 'React Router',
+                            url: '/docs/session-replay/installation/react-router',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/session-replay/installation/remix',
+                        },
+                        {
+                            name: 'Vue',
+                            url: '/docs/session-replay/installation/vue',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/session-replay/installation/nuxt',
+                        },
+                        {
+                            name: 'Svelte',
+                            url: '/docs/session-replay/installation/svelte',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/session-replay/installation/angular',
+                        },
+                        {
+                            name: 'Astro',
+                            url: '/docs/session-replay/installation/astro',
+                        },
+                        {
+                            name: 'Framer',
+                            url: '/docs/session-replay/installation/framer',
+                        },
+                        {
+                            name: 'Webflow',
+                            url: '/docs/session-replay/installation/webflow',
+                        },
+                        {
+                            name: 'Bubble',
+                            url: '/docs/session-replay/installation/bubble',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/session-replay/installation/react-native',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/session-replay/installation/ios',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/session-replay/installation/android',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/session-replay/installation/flutter',
+                        },
+                        {
+                            name: 'Unity',
+                            url: '/docs/session-replay/installation/unity',
+                        },
+                    ],
+                },
+                {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/session-replay/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/session-replay/surfaces/web-app',
+                        },
+                        {
+                            name: 'Watch recordings',
+                            url: '/docs/session-replay/how-to-watch-recordings',
+                        },
+                        {
+                            name: 'Share and embed replays',
+                            url: '/docs/session-replay/sharing',
+                        },
+                        {
+                            name: 'Find replays with PostHog AI',
+                            url: '/docs/session-replay/find-replays-ai',
+                        },
+                        {
+                            name: 'Summarize sessions',
+                            url: '/docs/session-replay/session-summaries-ai',
+                        },
+                        {
+                            name: 'Integrations with PostHog products',
+                            url: '/docs/session-replay/integrations',
+                        },
+                    ],
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/session-replay/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/session-replay/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/session-replay/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Capture',
                 },
                 {
                     name: 'Recording rules',
                     url: '/docs/session-replay/how-to-control-which-sessions-you-record',
                     icon: 'IconToggle',
                     color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Network performance',
@@ -4340,63 +4482,29 @@ export const docsMenu = {
                     color: 'salmon',
                 },
                 {
-                    name: 'Data retention',
-                    url: '/docs/session-replay/recording-retention',
-                    icon: 'IconCalendar',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'AI features',
-                },
-                {
-                    name: 'MCP tools',
-                    url: '/docs/session-replay/search-replays-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                },
-                {
-                    name: 'Session Replay in PostHog AI',
-                    url: '/docs/session-replay/find-replays-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                },
-                {
-                    name: 'Summarize sessions',
-                    url: '/docs/session-replay/session-summaries-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Product manual',
-                },
-                {
-                    name: 'Watch recordings',
-                    url: '/docs/session-replay/how-to-watch-recordings',
-                    icon: 'IconApp',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Sharing & embedding',
-                    url: '/docs/session-replay/sharing',
-                    icon: 'IconShare',
-                    color: 'purple',
-                },
-                {
                     name: 'Mobile recording modes',
                     url: '/docs/session-replay/mobile',
                     icon: 'IconPhone',
                     color: 'blue',
                 },
                 {
+                    name: 'Privacy and retention',
+                },
+                {
                     name: 'Privacy controls',
                     url: '/docs/session-replay/privacy',
                     icon: 'IconShield',
                     color: 'orange',
+                    featured: true,
                 },
                 {
-                    name: 'Helpful links',
+                    name: 'Data retention',
+                    url: '/docs/session-replay/recording-retention',
+                    icon: 'IconCalendar',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Tutorials and guides',
@@ -4410,6 +4518,12 @@ export const docsMenu = {
                     url: '/docs/session-replay/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
+                },
+                {
+                    name: 'Snapshot API',
+                    url: '/docs/session-replay/snapshot-api',
+                    icon: 'IconServer',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Pricing',

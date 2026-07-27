@@ -1,0 +1,41 @@
+---
+title: Use Session Replay in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review and merge the [Self-driving](/docs/self-driving) work that session replay generates. Your recordings don't just sit in a list – PostHog reads them for the moments users get stuck, clusters those moments into a report, and hands the ones with a plausible code fix to a coding agent that opens a draft pull request.
+
+{/* TODO: screenshot of a session-replay-sourced report and draft PR in PostHog Desktop */}
+
+## How a session problem becomes a pull request
+
+Session analysis looks for segments where a user hit a wall:
+
+- **Confusion** – the user clearly couldn't work out what to do next
+- **Abandonment** – they gave up partway through a flow
+- **Failures** – an action didn't do what the user expected
+- **Blocking and non-blocking exceptions** – errors that stopped them, and errors they worked around
+
+Individual bad sessions aren't very actionable, so these get clustered across sessions. A cluster becomes one report with the sessions behind it attached, and when the fix is in code your team owns, an implementation task opens a draft pull request.
+
+Because this analysis is done by AI, it only runs once your organization has approved AI data processing. Until then the session replay signal source stays off. See [signal sources](/docs/self-driving/inbox/sources) for how to turn it on.
+
+## What you can do here
+
+- Read the report – the pattern, how many users hit it, and the replays that prove it.
+- Ask questions – start a research task against the report before deciding to act.
+- Inspect and edit the draft pull request before it goes anywhere.
+- Merge. The merge happens on GitHub, so a human is always the last step.
+
+## Related
+
+- Watch the underlying sessions in the [web app](/docs/session-replay/surfaces/web-app).
+- Pull sessions into your editor over [MCP](/docs/session-replay/surfaces/mcp).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

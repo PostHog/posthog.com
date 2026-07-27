@@ -1,0 +1,111 @@
+---
+title: Get started with Session Replay
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconRewindPlay, IconBolt, IconMagic, IconCode, IconPullRequest } from '@posthog/icons'
+
+<QuestLog firstSpeechBubble="Let's record your first session!" lastSpeechBubble="You're ready to watch real users!">
+
+<QuestLogItem title="Install the SDK and turn on recording" subtitle="Where replays begin" icon="IconBook">
+
+Add a PostHog SDK to your app and enable session recording. Web needs a snippet or the JavaScript SDK; mobile apps use the React Native, iOS, Android, or Flutter SDKs. Recording is a project setting, so you also have to switch it on in [project settings](https://app.posthog.com/settings/project-replay) before anything is captured.
+
+Web has the most complete feature support. Mobile has a few limits, like wireframe-only mode unless you turn on screenshot mode, so check your platform's page.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/installation">Install session replay</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Decide which sessions to record" subtitle="Volume you control" icon="IconToggle">
+
+Recording everything is rarely what you want, and it's the main driver of cost. [Recording rules](/docs/session-replay/how-to-control-which-sessions-you-record) let you sample a percentage of sessions, record only certain URLs or events, gate recording behind a [feature flag](/docs/feature-flags), or record only sessions from a specific cohort.
+
+Set this up early. Rules apply at capture time, so they only affect sessions recorded after you change them.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/how-to-control-which-sessions-you-record">Set recording rules</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Mask sensitive data" subtitle="Privacy before capture" icon="IconShield">
+
+Masking happens on the device, before anything is sent to PostHog. By default inputs are masked; you can also mask all text, mask specific elements with `ph-no-capture`, or unmask elements you know are safe. Mobile SDKs have their own masking rules for screenshots and third-party screens.
+
+Get this right before you record real traffic, because a replay captured unmasked stays unmasked.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/privacy">Configure privacy controls</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Capture console logs and network requests" subtitle="A real debugging environment" icon="IconDashboard">
+
+A replay is far more useful with its DevTools panel filled in. Turn on [console log recording](/docs/session-replay/console-log-recording) to see logs, warnings, and errors on the timeline, and [network performance capture](/docs/session-replay/network-recording) to get the request waterfall, including headers and bodies if you opt into them.
+
+Apps that draw to a `<canvas>` element need [canvas recording](/docs/session-replay/canvas-recording), and apps that embed other PostHog-instrumented pages need [iframe recording](/docs/session-replay/iframes).
+
+<OSButton variant="primary" asLink to="/docs/session-replay/network-recording">Capture performance data</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Watch, filter, and share replays" subtitle="Your team's playback" icon="IconRewindPlay">
+
+Open **Replay** in PostHog and you get a filterable list of sessions plus a player with a synced activity timeline. Filter by rage clicks, exceptions, custom events, person properties, or feature flag variant, then save what you find as a collection and [share or embed](/docs/session-replay/sharing) it.
+
+{/* TODO: screenshot of the replay list and player with the activity panel open */}
+
+<OSButton variant="primary" asLink to="/docs/session-replay/surfaces/web-app">Watch recordings</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Let PostHog AI do the watching" subtitle="You can't watch them all" icon="IconMagic">
+
+Nobody watches every recording. Ask [PostHog AI](/docs/posthog-ai) in the web app to [find replays](/docs/session-replay/find-replays-ai) in plain language – "users who rage clicked on the pricing page" – and to [summarize sessions](/docs/session-replay/session-summaries-ai) so you get the pattern instead of an afternoon of playback.
+
+Prefer your editor? The [MCP server](/docs/session-replay/surfaces/mcp) exposes the same search from Cursor, Claude Code, Codex, and other MCP clients.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/session-summaries-ai">Summarize sessions</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Turn sessions into fixes" subtitle="Replay feeds Self-driving" icon="IconPullRequest">
+
+Session replay isn't just playback – it's a signal source. PostHog looks for the moments users get stuck, clusters them across sessions, and files a [Self-driving](/docs/self-driving) report. When a code fix is possible, you get a draft pull request to review and merge.
+
+<div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconRewindPlay className="size-5 shrink-0" />
+    Sessions
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconBolt className="size-5 shrink-0" />
+    Signals
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconPullRequest className="size-5 shrink-0" />
+    Pull request
+  </span>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/session-replay/surfaces/desktop">Session replay and Self-driving</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Know what's free" subtitle="Usage-based, no per-seat fee" icon="IconPiggyBank">
+
+Session replay is free up to a monthly allowance of web and mobile recordings, then priced per recording with volume discounts. There are no per-seat charges, and you can set a billing limit so a traffic spike can't surprise you. Recording rules and [data retention](/docs/session-replay/recording-retention) are the two biggest levers on your bill.
+
+<OSButton variant="primary" asLink to="/session-replay/pricing">See pricing</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>
