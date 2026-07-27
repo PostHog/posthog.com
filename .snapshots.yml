@@ -5,7 +5,7 @@ config:
     repo: 96b4669c-4c07-4a47-b040-1c008520c312
 snapshots:
     blog--desktop:
-        hash: v1.k54649d6d.95ace8715e7d53b82c4df87f75f4111287db2f2eadc3916f47a8eeeda49918b1.jv_z-AR9JmAxeTeHemNDn4pzU80pA7lojWLcggNuJkM
+        hash: v1.k54649d6d.f6fb366a2e93a67f5c38fe6e386c223382b33e7395723a7e086c4396c4968f14.OTW-lgoIz1FOyJ5lWtfMRF3iqO12Fhal91NHQRYS8hI
     blog--mobile:
         hash: v1.k54649d6d.20c6bacb2771f8e3abe1df80b9a1d30eb107d82cf0a6619e14680c7003eae8ad.rizI19uSKku_Vn7TCrjjUi_rCHYBLPaTREwYDO4ylB0
     comparison--desktop:
@@ -31,7 +31,7 @@ snapshots:
     pricing--desktop:
         hash: v1.k54649d6d.86c2b292ff02e47ad5108af5ba373f2ca35dcfa21f348eb9ea1b42e359738b62.A6B3pTKcyehwxJvuKPSGckDNlu03eMegU-3RiSowieI
     pricing--mobile:
-        hash: v1.k54649d6d.c4a01959d853183f465782d56ce1d0a6bd6f1385f1cd03349430f937c0dc1e59.oJN4qafmXzE03Fl0tudiFZKdSAvyHQHy3TG_tP02q2U
+        hash: v1.k54649d6d.74f5af959d16f3b81ba0578bb04461664251705561627ce1bd51e08705ea77b9.9s6RALWBsT78_0JNvsDbyd9zXyr4FP0tJmXdb_j8XgA
     product-analytics--desktop:
         hash: v1.k54649d6d.93209c9c499bc9651ad6991098a9c7d0deeed55f40b3f72f7c7a835e3177627a.9723yEHo8tmRt44URKU_IitJC9NrSqAVBV9HFb2W2H0
     product-analytics--mobile:
