@@ -28,7 +28,15 @@ if (result?.variant == "variant-key") { // replace "variant-key" with the key of
 
 ### Inspecting all feature flags
 
-You can inspect all currently loaded feature flags with `PostHog.getAllFeatureFlags()`.
+You can inspect all currently loaded feature flags with `PostHog.getAllFeatureFlags()`. It returns each flag's `key`, `enabled` state, `variant`, and `payload`, and does not send a `$feature_flag_called` event, so calling it won't affect your experiment results or flag usage analytics:
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.getAllFeatureFlags()?.forEach { flag ->
+    println("${flag.key} ${flag.enabled} ${flag.variant} ${flag.payload}")
+}
+```
 
 ### Ensuring flags are loaded before usage
 

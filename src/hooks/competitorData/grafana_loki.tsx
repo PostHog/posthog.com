@@ -27,6 +27,12 @@ export const grafana_loki = {
                     vendor_agnostic_sdks: true,
                 },
             },
+            search: {
+                features: {
+                    full_text_search: false,
+                    no_proprietary_query_language: 'LogQL',
+                },
+            },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: false,
@@ -43,10 +49,16 @@ export const grafana_loki = {
             },
             observability: {
                 features: {
-                    metrics: true,
-                    traces: true,
-                    alerting: true,
-                    infra_monitoring: true,
+                    metrics: 'Via stack',
+                    traces: 'Via stack',
+                    alerting: 'Via stack',
+                    infra_monitoring: 'Via stack',
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: true,
                 },
             },
             pricing: {
@@ -61,8 +73,11 @@ export const grafana_loki = {
     platform: {
         deployment: {
             self_host: true,
+            open_source: true,
         },
         pricing: {
+            self_serve: true,
+            free_tier: true,
             transparent_pricing: true,
         },
         tools: {

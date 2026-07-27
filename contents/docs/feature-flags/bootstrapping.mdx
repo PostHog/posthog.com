@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Bootstrapping feature flags is only available in our [JavaScript web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs.
+> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist state on-device, so bootstrapped identity applies on the first launch only. See [behavior on mobile SDKs](#behavior-on-mobile-sdks).
 
 import BootstrappingIntro from "./snippets/bootstrapping-intro.mdx"
 
@@ -53,6 +53,44 @@ export function MyApp() {
         </PostHogProvider>
     )
 }
+```
+
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
+config.bootstrap = PostHogBootstrapConfig(
+    featureFlags: [
+        "flag-1": true,
+        "variant-flag": "control",
+        "other-flag": false
+    ],
+    featureFlagPayloads: nil
+)
+PostHogSDK.shared.setup(config)
+```
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
+config.bootstrap = PostHogBootstrapConfig(
+    featureFlags = mapOf(
+        "flag-1" to true,
+        "variant-flag" to "control",
+        "other-flag" to false
+    )
+)
+PostHogAndroid.setup(this, config)
+```
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+config.bootstrap = PostHogBootstrapConfig(
+  featureFlags: {
+    'flag-1': true,
+    'variant-flag': 'control',
+    'other-flag': false,
+  },
+);
+await Posthog().setup(config);
 ```
 
 </MultiLanguage>
@@ -137,8 +175,63 @@ export function MyApp() {
 }
 ```
 
+```swift
+let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
+config.bootstrap = PostHogBootstrapConfig(
+    distinctId: "distinct_id_of_your_user",
+    isIdentifiedId: true,
+    featureFlags: [
+        "flag-1": true,
+        "variant-flag": "control",
+        "other-flag": false
+    ],
+    featureFlagPayloads: nil
+)
+PostHogSDK.shared.setup(config)
+```
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
+config.bootstrap = PostHogBootstrapConfig(
+    distinctId = "distinct_id_of_your_user",
+    isIdentifiedId = true,
+    featureFlags = mapOf(
+        "flag-1" to true,
+        "variant-flag" to "control",
+        "other-flag" to false
+    )
+)
+PostHogAndroid.setup(this, config)
+```
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+config.bootstrap = PostHogBootstrapConfig(
+  distinctId: 'distinct_id_of_your_user',
+  isIdentifiedId: true,
+  featureFlags: {
+    'flag-1': true,
+    'variant-flag': 'control',
+    'other-flag': false,
+  },
+);
+await Posthog().setup(config);
+```
+
 </MultiLanguage>
 
+## Behavior on mobile SDKs
+
+The iOS, Android, and Flutter SDKs bootstrap through `PostHogBootstrapConfig` and persist identity and flags on the device, so bootstrapping behaves slightly differently than on the web. Assign `config.bootstrap = PostHogBootstrapConfig(...)` before calling `setup()`. Bootstrapping requires iOS SDK `3.66.0`+, Android SDK `3.55.0`+, or Flutter SDK `5.31.0`+.
+
+> **React Native** is also a mobile SDK, but it uses the posthog-js-style `bootstrap` option shown in the examples above (not `PostHogBootstrapConfig`) and follows the [standard behavior](#bootstrapping-with-a-distinct-id).
+
+import MobileBootstrapBehavior from "./snippets/mobile-bootstrap-behavior.mdx"
+
+<MobileBootstrapBehavior />
+
+> **Flutter web:** `bootstrap` is not applied on Flutter web because the web SDK hooks onto an already-initialized `posthog-js` instance. Configure `bootstrap` in your `posthog.init({...})` call instead.
 
 ## Overriding feature flags 
 

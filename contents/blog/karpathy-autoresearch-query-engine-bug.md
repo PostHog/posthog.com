@@ -15,6 +15,7 @@ tags:
   - Engineering
   - AI
   - Inside PostHog
+  - Research
 ---
 
 A few weeks ago at a team offsite in Lisbon, we pointed an AI agent at our query engine, fed it slow queries from production, and let it run overnight.
@@ -25,7 +26,7 @@ This post is about the setup we used, the bug itself, and what we're building no
 
 ## What's autoresearch?
 
-The general idea isn't ours. Andrej Karpathy [packaged it up](https://github.com/karpathy/autoresearch) and gave it a name in March 2026: give an AI agent a small but real system, a benchmark, and a budget, and let it loop; propose a change, run the benchmark, keep what helps, throw away what doesn't.
+The general idea isn't ours. Andrej Karpathy [packaged it up](https://github.com/karpathy/autoresearch) and gave it a name in March 2026: give an AI agent a small but real system, a benchmark, and a budget, and [let it loop](/newsletter/loops); propose a change, run the benchmark, keep what helps, throw away what doesn't.
 
 Karpathy ran it for two days against a depth-12 nanochat training run and found [about 20 changes that improved validation loss](https://x.com/karpathy/status/2031135152349524125), some of which transferred to a bigger model. The shape isn't new (DeepMind's [FunSearch](https://www.nature.com/articles/s41586-023-06924-6) (2023) and [Sakana's AI Scientist](https://sakana.ai/ai-scientist/) (2024) are earlier examples), but Karpathy's repo is small and concrete enough to inspire you to build your own version in an afternoon.
 
@@ -103,7 +104,7 @@ We were hand-feeding slow queries to the agent during the offsite. That doesn't 
 
 1. **Fetch slow queries from `system.query_log`.** The orchestrator that does this lives at [`products/query_performance_ai/orchestrator/slow_queries.py`](https://github.com/PostHog/posthog/blob/master/products/query_performance_ai/orchestrator/slow_queries.py).
 
-2. **Spin up a sandbox per candidate query**, the same sandboxes we use to run [PostHog Code](/code), our coding agent and product editor (currently in beta).
+2. **Spin up a sandbox per candidate query**, the same sandboxes we use to run [PostHog Code](/desktop), our coding agent and product editor (currently in beta).
 
 3. **Run `pi-autoresearch` in each sandbox**, each with its own benchmark target and budget.
 

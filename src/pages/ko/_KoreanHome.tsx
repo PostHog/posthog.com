@@ -16,7 +16,7 @@ import {
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -100,7 +100,7 @@ export const CTAs = ({ t = identity }: { t?: TranslateFn }): JSX.Element => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
@@ -311,7 +311,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -360,7 +365,12 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },

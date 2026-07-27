@@ -36,3 +36,7 @@ Once the syncs are complete, you can start using Resend data in PostHog.
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

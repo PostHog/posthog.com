@@ -1,6 +1,3 @@
-import React from 'react'
-import OSButton from 'components/OSButton'
-
 export const posthog = {
     name: 'PostHog',
     key: 'posthog',
@@ -126,6 +123,18 @@ export const posthog = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: false,
+                    no_proprietary_query_language: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: false,
                 },
             },
             investigation_workflow: {
@@ -528,6 +537,65 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
+                sentiment_classification: 'Beta',
+                privacy_mode: true,
+                agent_tracing: 'Basic',
+                prompt_management: 'Beta',
+                evaluation_datasets: false,
+                human_annotation: false,
+                session_replay: true,
+                product_analytics: true,
+                ai_gateway_proxy: false,
+            },
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    custom_spans: true,
+                    tool_call_tracking: true,
+                    rag_retrieval_tracking: true,
+                    session_grouping: true,
+                    opentelemetry_support: true,
+                    async_ingestion: true,
+                    multi_model_support: true,
+                    session_replay_link: true,
+                    user_profile_context: true,
+                    sql_queries_on_traces: true,
+                    trace_explorer_ui: 'Basic',
+                },
+            },
+            prompt_management: {
+                features: {
+                    prompt_versioning: 'Beta',
+                    template_variables: 'Beta',
+                    prompt_deployment_api: 'Beta',
+                    version_comparison: 'Beta',
+                    prompt_labels: false,
+                    prompt_playground: true,
+                    composable_prompts: false,
+                    mcp_server_for_prompts: 'Beta',
+                    ab_test_prompt_versions: 'Beta',
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    code_evaluators: true,
+                    annotation_queues: false,
+                    datasets: false,
+                    experiment_runs: false,
+                    ab_experiments_on_product_metrics: true,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    cost_by_model: true,
+                    cost_trends: true,
+                    cost_by_user: true,
+                    cost_by_feature: true,
+                    cost_by_cohort: true,
+                },
             },
         },
         workflows: {

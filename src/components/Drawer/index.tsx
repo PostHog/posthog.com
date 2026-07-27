@@ -8,12 +8,14 @@ interface DrawerProps {
     className?: string
     isOpen: boolean
     onClose: () => void
+    /** Accessible dialog name. Omit to preserve existing drawer behavior. */
+    title?: string
     removeScroll?: boolean
     animateOpen?: boolean
 }
 
 export const Drawer = (props: DrawerProps): React.ReactElement => {
-    const { children, className, isOpen, onClose, animateOpen = true } = props
+    const { children, className, isOpen, onClose, title, animateOpen = true } = props
 
     const classes = cn(
         'scrollbar-hide relative min-h-full h-screen w-[600px] max-w-full md:max-w-[90%] shadow-xl',
@@ -47,12 +49,15 @@ export const Drawer = (props: DrawerProps): React.ReactElement => {
                             leaveTo="translate-x-full"
                         >
                             <Dialog.Panel className={classes}>
-                                <div
-                                    className="group absolute top-4 right-4 bg-accent rounded-full p-1 border-primary cursor-pointer z-[50] border-transparent  hover:border"
+                                {title && <Dialog.Title className="sr-only">{title}</Dialog.Title>}
+                                <button
+                                    type="button"
+                                    aria-label="Close drawer"
+                                    className="group absolute top-4 right-4 bg-accent rounded-full p-1 border-primary cursor-pointer z-[50] border border-transparent hover:border-primary"
                                     onClick={onClose}
                                 >
                                     <IconX className="text-primary dark:text-primary-dark w-6 h-6 relative group-hover:top-[-1px] group-hover:scale-[1.05] group-active:top-[0px] group-active:scale-[.99]" />
-                                </div>
+                                </button>
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>

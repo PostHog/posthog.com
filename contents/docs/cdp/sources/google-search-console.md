@@ -42,3 +42,7 @@ Google's Search Analytics API caps results at roughly 50,000 rows per property, 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
