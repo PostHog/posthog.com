@@ -149,6 +149,11 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/feature-flags/create-flags-mcp",
+            "destination": "/docs/feature-flags/surfaces/mcp",
+            "statusCode": 301
+        },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },

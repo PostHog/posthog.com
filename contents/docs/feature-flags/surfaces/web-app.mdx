@@ -1,0 +1,29 @@
+---
+title: Feature flags in the web app
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is home base for feature flags. It's where you create a flag, decide who gets it, watch the rollout, and turn it off when you need to – all without a deploy.
+
+Open **Feature flags** in [PostHog](https://app.posthog.com) to see every flag in the project with its status, type, and last-modified date. Open a flag to edit its release conditions, inspect which users match, test how it evaluates, and see the activity log of who changed what.
+
+{/* TODO: screenshot of the feature flags list and flag detail view */}
+
+## What you can do here
+
+- **[Create feature flags](/docs/feature-flags/creating-feature-flags)** – set up boolean, multivariate, or remote config flags and define their release conditions.
+- **[Add flag code to your app](/docs/feature-flags/adding-feature-flag-code)** – the snippet that reads the flag on the other side, for each SDK.
+- **[Test your flag](/docs/feature-flags/testing)** – check how a flag evaluates for a specific user before you widen the rollout.
+- **[Schedule flag changes](/docs/feature-flags/scheduled-flag-changes)** – queue an enable, disable, or condition change for a future date, including on a recurring schedule.
+- **[Manage early access features](/docs/feature-flags/early-access-feature-management)** – let users opt themselves in and out of a flagged feature.
+- **[Clean up stale flags](/docs/feature-flags/cleaning-up-stale-flags)** – find flags nothing has evaluated recently and retire them along with the dead code.
+- **Manage flags with [PostHog AI](/docs/posthog-ai)** – describe the flag you want and PostHog AI creates or updates it, or ask it which flags have gone stale. It's an interaction mode inside the web app, not a separate surface. See [Manage flags with PostHog AI](/docs/feature-flags/manage-flags-ai).
+
+Before you widen a rollout, the flag detail view also shows the **blast radius** for a release condition – roughly how many users it would affect relative to your total – so a "10% of enterprise accounts" change isn't a guess.
+
+## Related
+
+- Manage the same flags from your editor over [MCP](/docs/feature-flags/surfaces/mcp).
+- Evaluate and manage flags programmatically with the [API](/docs/feature-flags/surfaces/api).
+- Understand how a value gets decided in [server-side local evaluation](/docs/feature-flags/local-evaluation).

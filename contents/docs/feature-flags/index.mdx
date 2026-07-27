@@ -1,0 +1,85 @@
+---
+title: Feature flags
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconLlmPromptEvaluation, IconBrackets, IconBolt, IconPeople, IconGear } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong – no redeploy, no hotfix. The same flags power [experiments](/docs/experiments), [early access programs](/docs/feature-flags/early-access-feature-management), kill switches, and [remote config](/docs/feature-flags/remote-config).
+
+Because PostHog already knows who your users are, targeting is more than a percentage. Roll out by person property, [cohort](/docs/data/cohorts), or [group](/docs/product-analytics/group-analytics), then see the [session replays](/docs/session-replay), events, and [exceptions](/docs/error-tracking) from the people who got the flag – so you find out whether the rollout worked, not just that it happened.
+
+<OSButton variant="primary" asLink to="/docs/feature-flags/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You create and roll out flags in the PostHog web app. The other surfaces let you manage the same flags from your editor or your own systems.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Web app</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create flags, set release conditions, schedule changes, and watch rollouts land.</p>
+      <a href="/docs/feature-flags/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Roll out a flag →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLlmPromptEvaluation className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create, update, schedule, and clean up flags from any MCP client or AI editor.</p>
+      <a href="/docs/feature-flags/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Manage flags over MCP →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Evaluate flags at runtime and manage flag definitions from your own tooling and CI.</p>
+      <a href="/docs/feature-flags/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+A flag is only as good as what it evaluates against. PostHog decides each user's value from the release conditions you set, the person and group properties it already has, and the payload attached to the flag.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBolt className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Evaluation</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Where and how a flag is resolved: local evaluation, bootstrapping, and evaluation contexts.</p>
+      <a href="/docs/feature-flags/local-evaluation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Evaluate flags locally →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPeople className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Targeting</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Person properties, cohorts, and groups decide who matches a release condition.</p>
+      <a href="/docs/feature-flags/user-and-group-targeting" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Target users and groups →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconGear className="size-6 shrink-0 text-green mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Payloads and config</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Ship JSON alongside a flag with remote config, and share flags across projects.</p>
+      <a href="/docs/feature-flags/remote-config" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set up remote config →</a>
+    </div>
+  </div>
+
+</div>
