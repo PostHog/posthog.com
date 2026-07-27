@@ -31,7 +31,7 @@ snapshots:
     pricing--desktop:
         hash: v1.k54649d6d.86c2b292ff02e47ad5108af5ba373f2ca35dcfa21f348eb9ea1b42e359738b62.A6B3pTKcyehwxJvuKPSGckDNlu03eMegU-3RiSowieI
     pricing--mobile:
-        hash: v1.k54649d6d.0960f404d5bac7e7e64fe38f7ff21cadecc89d960074be9725c5fc8dfcb80d1b.GlhFE8hjyRL2xppjOhGeqZ5KhJU3-QPyD0W94lsdlOU
+        hash: v1.k54649d6d.50e343a2027fa80953b73debc3b40a6d7a6e2728601295ebc20babb63a457fd0.ufQXfW6xh-1Ac8FmZxCr5JkT0kn_6zzNRAPoZDm93Xg
     product-analytics--desktop:
         hash: v1.k54649d6d.93209c9c499bc9651ad6991098a9c7d0deeed55f40b3f72f7c7a835e3177627a.9723yEHo8tmRt44URKU_IitJC9NrSqAVBV9HFb2W2H0
     product-analytics--mobile:
@@ -43,4 +43,4 @@ snapshots:
     surveys--desktop:
         hash: v1.k54649d6d.fff1c7652fe7cfc4de61ea6fd8c9821255cefbcfc9d956423f525bcc8a633cc4.SQoHuWZAI_t0dALwUc-xYOqI8CfCuAAjB4REZWt2Rjs
     surveys--mobile:
-        hash: v1.k54649d6d.2acd20522d33552b08343b1592aea313a5e93916f2ea464496c1135b0358d23b.2e34iRp2gp0NlfzFCbVpgbYSyyUYlFdSMH0fSoJ9qXI
+        hash: v1.k54649d6d.fa499a502301a1d93c877a9ac62ca9df2d64fd405e1db502ba1b543b1674b57d.Tz1MqBKasGzORj_prX6kW9JKCdf619Y8Ta2fPiK82nM
