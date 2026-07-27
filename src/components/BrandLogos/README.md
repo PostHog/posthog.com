@@ -7,7 +7,7 @@ can't drift from the library.
 
 Stable public `/brand/*` URLs are maintained separately for external consumers. The
 `scripts/generate-brand-assets.mjs` script materializes those compatibility files from the same
-package and runs automatically before the standard Gatsby start and build commands.
+package and runs automatically before the standard Gatsby build commands.
 
 ## Usage
 

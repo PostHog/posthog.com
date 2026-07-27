@@ -214,7 +214,7 @@ from posthog.ai.prompts import Prompts
 posthog = Posthog(
     '<your_project_api_key>',
     host='https://us.posthog.com',
-    personal_api_key='<your_personal_api_key>'
+    secret_key='<your_personal_api_key>'
 )
 prompts = Prompts(posthog)
 

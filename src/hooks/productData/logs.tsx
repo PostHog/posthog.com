@@ -4,17 +4,36 @@ import { getTool } from '../../data/tools'
 export const logs = {
     ...getTool('logs'),
     Icon: IconActivity,
+    productVariantName: 'Logs ingestion (14-day retention)',
+    handle: 'logs',
     type: 'logs',
     color: 'red',
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
+    includeAddonRates: true,
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
-        marks: [50, 100, 500, 1000, 5000],
-        min: 50,
+        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        min: 10,
+        scaleMin: 1,
         max: 5000,
     },
-    volume: 50,
+    volume: 10,
+    addonSliders: [
+        {
+            key: 'logs_retention_30d',
+            label: '30-day retention',
+            sliderConfig: {
+                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                min: 0,
+                scaleMin: 1,
+                max: 5000,
+            },
+            volume: 0,
+            unit: 'GB',
+            freeAllocation: 0,
+        },
+    ],
     seo: {
         title: 'Logs – Centralized log management with PostHog',
         description:
