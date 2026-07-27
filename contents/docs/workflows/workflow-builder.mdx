@@ -169,6 +169,18 @@ Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog 
 | Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
+### Email dispatch options
+
+Email dispatch steps include a **Track opens and link clicks** toggle in the build panel. This is enabled by default.
+
+When enabled, PostHog injects a tracking pixel and rewrites links so that opens and clicks appear in the workflow's metrics and produce [engagement events](/docs/workflows/engagement-events) like `$workflows_email_opened` and `$workflows_email_link_clicked`.
+
+When disabled, the email is sent without the tracking pixel or link rewriting. No open or click events are captured for these sends. Delivery, bounce, and unsubscribe events are still recorded.
+
+Use this for transactional or deliverability-sensitive emails where tracking isn't needed or could reduce inbox placement.
+
+Marketing emails may also be sent untracked based on your team's email tracking consent setting. See [email tracking consent](/docs/workflows/engagement-events#email-tracking-consent) for details.
+
 ## Delays
 
 Delays help you control the timing of your messages. There are 3 types of delays:
@@ -215,9 +227,9 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 If you have [Support](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
 
 | Support action | Description                                             | Properties / Options                                                                                               |
-| -------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Get ticket           | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source`                                               |
-| Update ticket        | Change a ticket's status, priority, or assignee         | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
+| -------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Get ticket     | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source`                                               |
+| Update ticket  | Change a ticket's status, priority, or assignee         | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
 
 ### Example use cases
 
