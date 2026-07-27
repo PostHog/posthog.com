@@ -43,7 +43,7 @@ function Slide({ card, slideIndex }: { card: any; slideIndex: number }) {
                     <div className="flex-1">
                         <div className="max-w-sm mx-auto">
                             <h2 className="text-3xl font-bold mb-6 text-balance text-light-12">
-                                <span className="underline underline-offset-4 ">
+                                <span className="underline underline-offset-4">
                                     {typeof card.top === 'string' ? card.top : card.top}
                                 </span>
                             </h2>
