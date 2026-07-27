@@ -5,7 +5,7 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconCode, IconBrackets, IconMessage, IconTarget, IconGraph, IconThumbsUp, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconMessage, IconTarget, IconGraph, IconThumbsUp, IconBolt, IconNotebook, IconPerson, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
@@ -98,14 +98,16 @@ Surveys run on the questions you ask, who you ask them of, and the responses tha
 
 Your survey responses are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A dedicated scout watches active surveys for score regressions and abandonment spikes, and clusters open-text answers into recurring themes – five people complaining about the same checkout step becomes one report, not five you never read.
 
+A survey finding is user sentiment, not a defect with a known fix. What to do about "checkout felt confusing" is a product decision – copy, flow, pricing, or nothing – so this scout stops at the report and routes it to a human reviewer rather than starting a pull request.
+
 <CustomSelfDrivingLoop
   stages={[
     { label: 'Responses', icon: IconMessage, color: '#F54E00', description: 'Answers captured from every survey you run' },
     { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Score regressions and recurring themes surfaced automatically' },
     { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with the replays and events behind the feedback' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'Routed to whoever owns that survey' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'What to change, and whether to change anything' },
   ]}
 />
 
-You write and launch surveys in the [PostHog web app](/docs/surveys/surfaces/web-app), and review the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.
+You write and launch surveys in the [PostHog web app](/docs/surveys/surfaces/web-app), and read the reports in [PostHog Desktop](/docs/surveys/surfaces/desktop) or the [Self-driving inbox](/docs/self-driving/inbox). Other signal sources, like [error tracking](/docs/error-tracking), do open pull requests – see the [Self-driving docs](/docs/self-driving) for the full picture.

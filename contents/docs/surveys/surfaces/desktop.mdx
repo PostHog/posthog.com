@@ -1,5 +1,5 @@
 ---
-title: Use Surveys in PostHog Desktop
+title: Review survey findings in PostHog Desktop
 sidebar: Docs
 showTitle: true
 ---
@@ -10,21 +10,37 @@ PostHog Desktop is in beta. This page is a work in progress.
 
 </CalloutBox>
 
-[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work your survey responses generate. A dedicated scout watches your active surveys, and when it finds something real – a score regression, an abandonment spike, or a theme several people keep raising – it files one report. When there's a code fix, Self-driving opens a draft pull request you review next to the agents working on your product, and nothing ships until you merge.
+[PostHog Desktop](/docs/posthog-desktop) is where you read the [Self-driving](/docs/self-driving) reports your survey responses produce. A dedicated scout watches your active surveys, and when it finds something real – a score regression, an abandonment spike, or a theme several people keep raising – it files one report and routes it to a named human reviewer.
+
+Unlike [error tracking](/docs/error-tracking), this scout stops at the report. It doesn't open a draft pull request – see [why](#why-there-is-no-pull-request) below.
+
+{/* TODO: screenshot of a surveys-sourced report in PostHog Desktop */}
+
+## How feedback becomes a report
 
 Surveys are direct user voice, so the bar for a report is deliberately high: a handful of converging open-text answers can outweigh a much larger analytics signal, but a wobble in a small NPS sample is not a report.
 
-{/* TODO: screenshot of a surveys-sourced report and draft PR in PostHog Desktop */}
+- **Recurring themes** – open-text answers clustered into one finding. Five people describing the same checkout step becomes a single report with a few verbatim quotes attached, not five you never read.
+- **Score regressions** – NPS, CSAT, and rating drops measured against that survey's own baseline, with small samples held to a tighter bar than large ones.
+- **Response-volume drops and abandonment spikes** – `survey dismissed` rising as a share of `survey shown`, or impressions stepping away from their usual range.
+
+Every report names the surveys and questions behind it, the response counts, and the score deltas, so you can judge the finding against its own sample rather than taking it on trust. A theme the inbox already covers gets the new responses appended to the existing report instead of being filed again, so a problem that keeps coming up stays one item.
+
+## Why there is no pull request
+
+A survey finding is user sentiment, not a defect with a known fix. Someone telling you checkout felt confusing doesn't tell you whether the answer is different copy, a different flow, a different price, or nothing at all. That's a product decision a person has to make, and it's rarely a mechanical code change a coding agent could make on its own.
+
+Survey responses are also personal data, and the cost of getting a "users hate feature X" report wrong is high. So the scout is built to hand you an investigation with the evidence attached and a reviewer already assigned, and to stop there. Other signal sources, like [error tracking](/docs/error-tracking), do open pull requests.
 
 ## What you can do here
 
-- Review reports built from recurring survey themes, with the responses, replays, and events behind them attached.
-- Review reports for NPS, CSAT, and rating regressions, response-volume drops, and abandonment spikes on active surveys.
-- Inspect and edit the draft pull request that acts on a theme before merging.
-- Hand a theme off to an agent to investigate further or draft a fix.
+- **Read the report** – the theme or regression, the survey and question it came from, the response counts and score deltas, and the replays and events behind the feedback.
+- **Ask questions** – start a research task against the report to dig further before you decide anything.
+- **See the history** – a theme that keeps recurring is one report with each run appended, so you can tell whether it's growing or fading.
+- **Decide what happens next** – change the product, rewrite the copy, ask a follow-up question, or mark it as expected. Nothing happens until you decide.
 
 ## Related
 
-- [How Self-driving works](/docs/self-driving) – the full report-to-merge loop.
+- [How Self-driving works](/docs/self-driving) – the full signal-to-inbox loop.
 - [Signal sources](/docs/self-driving/inbox/sources) – everything that can feed the inbox.
 - Read and summarize responses yourself in the [web app](/docs/surveys/surfaces/web-app).

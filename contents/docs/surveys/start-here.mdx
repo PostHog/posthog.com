@@ -6,7 +6,7 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import { IconMessage, IconTarget, IconGraph, IconMagic, IconPullRequest } from '@posthog/icons'
+import { IconMessage, IconTarget, IconGraph, IconMagic, IconPullRequest, IconPerson } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's ask your users what they think!" lastSpeechBubble="You're listening to your users!">
 
@@ -95,9 +95,9 @@ Hundreds of open-text answers are useless if nobody reads them. [PostHog AI](/do
 
 </QuestLogItem>
 
-<QuestLogItem title="Turn feedback into fixes" subtitle="Surveys feed Self-driving" icon="IconMagic">
+<QuestLogItem title="Let Self-driving read them for you" subtitle="Surveys feed Self-driving" icon="IconMagic">
 
-Surveys aren't just a results tab – they're a signal source. A dedicated [Self-driving](/docs/self-driving) scout watches your active surveys for score regressions and abandonment spikes, and clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox, and when there's a code fix, a pull request you review and merge.
+Surveys aren't just a results tab – they're a signal source. A dedicated [Self-driving](/docs/self-driving) scout watches your active surveys for score regressions and abandonment spikes, and clusters open-text answers into recurring themes. Each validated theme becomes one report in the inbox, routed to a human reviewer rather than a coding agent – what to do about user sentiment is a product decision, not a mechanical code fix.
 
 <div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
   <span className="flex items-center gap-1.5 text-sm text-secondary">
@@ -111,8 +111,8 @@ Surveys aren't just a results tab – they're a signal source. A dedicated [Self
   </span>
   <span className="text-muted" aria-hidden="true">→</span>
   <span className="flex items-center gap-1.5 text-sm text-secondary">
-    <IconPullRequest className="size-5 shrink-0" />
-    Pull request
+    <IconPerson className="size-5 shrink-0" />
+    Human review
   </span>
 </div>
 
