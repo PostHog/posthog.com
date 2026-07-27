@@ -35,6 +35,7 @@ import {
     IconExternal,
     IconPresent,
     IconSparkles,
+    IconShieldLock,
 } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
@@ -424,8 +425,17 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     return (
         <div className="text-sm space-y-3">
             {isModerator && email && (
-                <p className="flex justify-between m-0 gap-2">
-                    <span className="font-semibold">Email</span>
+                <p className="flex justify-between m-0 gap-2 items-center">
+                    <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                        Email
+                        <Tooltip
+                            delay={0}
+                            className="inline-flex items-center text-secondary"
+                            trigger={<IconShieldLock className="size-4" />}
+                        >
+                            Only visible to moderators
+                        </Tooltip>
+                    </span>
                     <a href={`mailto:${email}`} className="truncate text-right">
                         {email}
                     </a>
