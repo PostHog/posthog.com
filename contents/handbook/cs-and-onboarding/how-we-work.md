@@ -104,6 +104,8 @@ The expectation is that this temporary CSM will ensure your customers aren't com
 For longer periods away, Dana may look to reassign some or all of your accounts.
 
 ## Tools we use
+**Vitally:** Vitally is our customer success platform and the system of record for your book of business. Account health scores, usage and billing signals, and indicators for risks and opportunities live here. 
+
 **Gmail**
 We use Gmail for our email and the team uses many different clients from [Superhuman](https://superhuman.com/) to [Spark](https://sparkmailapp.com/) to the default Gmail web interface. Find something that works well for you. To get your own email signature, copy the signature from someone else on the team (like Simon) and then fill in your own details.
 
