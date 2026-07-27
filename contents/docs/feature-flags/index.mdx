@@ -5,8 +5,9 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconLlmPromptEvaluation, IconBrackets, IconBolt, IconPeople, IconGear } from '@posthog/icons'
+import { IconLaptop, IconLlmPromptEvaluation, IconBrackets, IconBolt, IconPeople, IconGear, IconCode, IconToggle, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong – no redeploy, no hotfix. The same flags power [experiments](/docs/experiments), [early access programs](/docs/feature-flags/early-access-feature-management), kill switches, and [remote config](/docs/feature-flags/remote-config).
 
@@ -16,9 +17,9 @@ Because PostHog already knows who your users are, targeting is more than a perce
 
 ## Where you can use it
 
-You create and roll out flags in the PostHog web app. The other surfaces let you manage the same flags from your editor or your own systems.
+You create and roll out flags in the PostHog web app. The other surfaces let you manage the same flags from your editor or your own systems, and review the flag problems Self-driving finds for you.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
 
   <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
     <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
@@ -44,6 +45,15 @@ You create and roll out flags in the PostHog web app. The other surfaces let you
       <p className="m-0 font-bold text-primary">API</p>
       <p className="m-0 mt-0.5 text-sm text-secondary">Evaluate flags at runtime and manage flag definitions from your own tooling and CI.</p>
       <a href="/docs/feature-flags/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconCode className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Review Self-driving reports about broken and stale flags, and merge the fixes they open.</p>
+      <a href="/docs/feature-flags/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix flag issues in PostHog Desktop →</a>
     </div>
   </div>
 
@@ -83,3 +93,21 @@ A flag is only as good as what it evaluates against. PostHog decides each user's
   </div>
 
 </div>
+
+## How feature flags works with Self-driving
+
+Your flags are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A scout watches your flag roster against the `$feature_flag_called` stream and files a report whenever the two contradict each other: an active flag whose calls fall off a cliff, code calling a flag key that no longer exists, a response mix that shifted with no flag edit behind it, or flag debt piling up.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Flag evaluations', icon: IconToggle, color: '#F54E00', description: 'Your flag roster and the calls your code makes against it' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Cliffs, ghost flags, distribution shifts, and flag debt' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'The flag, what contradicts it, and the numbers behind it' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When the fix is an obvious code change' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+Most flag findings go to a human rather than a pull request – whether a dead flag check was deliberate cleanup or a broken deploy is a judgment call, so the report lands in your inbox with no repository attached. Only the obvious code changes, like removing the dead check behind a ghost flag, auto-open a draft PR for you to review and merge.
+
+You create and roll out flags in the [PostHog web app](/docs/feature-flags/surfaces/web-app), and review the Self-driving work in [PostHog Desktop](/docs/feature-flags/surfaces/desktop) or the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.

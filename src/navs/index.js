@@ -4630,6 +4630,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'PostHog Desktop',
+                    url: '/docs/feature-flags/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Evaluation',
                 },
                 {
