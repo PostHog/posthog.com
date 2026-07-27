@@ -18,7 +18,7 @@ A few principles explain almost every case:
 - **In-progress sends complete as prepared.** If a message has already been rendered and queued when you edit it, that copy still sends. The next person to reach that step gets the new version.
 - **Journeys are traceable, not versioned.** No single saved config describes what one person experienced. Instead, each run's [logs and results](/docs/workflows/troubleshooting) show exactly what that person got and when.
 
-You can stage changes to an enabled workflow as a draft and publish them when you're ready. Nothing below happens until you publish. Each publish is recorded in the workflow's **History** tab, where you can see what changed and restore an earlier version.
+You can stage changes to an enabled workflow as a draft and publish them when you're ready. Nothing below happens until you publish. Each publish appears in the workflow's **History** tab, so you can see what changed and when.
 
 Edits propagate to running workers within about 30 seconds, so there's a brief window after you publish where a step may still run against the previous configuration.
 
