@@ -5,7 +5,7 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconPlug, IconCode, IconCursorClick, IconMegaphone, IconGraph, IconShield, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconPlug, IconCode, IconBrackets, IconCursorClick, IconMegaphone, IconGraph, IconShield, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
@@ -17,7 +17,7 @@ Because it runs on the same events as the rest of PostHog, a traffic number is n
 
 ## Where you can use it
 
-You read and explore your traffic in the PostHog web app. The other surfaces let you pull the same numbers into your editor and act on what Self-driving finds.
+You read and explore your traffic in the PostHog web app. The other surfaces let you pull the same numbers into your editor, your own reports, and the fixes Self-driving opens.
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
 
@@ -48,7 +48,18 @@ You read and explore your traffic in the PostHog web app. The other surfaces let
     </div>
   </div>
 
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Send traffic in, and pull visitors, sessions, and heatmap data into your own reports.</p>
+      <a href="/docs/web-analytics/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
 </div>
+
+PostHog also sends traffic *out* on a schedule: a weekly digest of visitors, pageviews, sessions, bounce rate, top pages, and traffic sources arrives by email and as an in-app notification, so the numbers reach you without anyone opening the dashboard.
 
 ## Where its data comes from
 

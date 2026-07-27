@@ -4207,6 +4207,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'API',
+                    url: '/docs/web-analytics/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Sessions and pageviews',
                 },
                 {
