@@ -22,7 +22,7 @@ Companies building for agents often treat them as a bolt-on feature. This is a m
 
 Agents today are more like a new form factor – an interaction layer that sits between your product and your users:
 
-![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent0_191d5281bd.png)
+![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/agent0_191d5281bd.png)
 
 That means you need to build for agents as a *primary* surface, not an afterthought.
 

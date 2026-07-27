@@ -574,10 +574,6 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Brand guidelines and messaging',
-                url: '/handbook/content/brand-message',
-            },
-            {
                 name: 'Video',
                 url: '/handbook/marketing/video',
                 children: [
@@ -1409,6 +1405,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
+                        name: 'Using AI to analyze customer issues',
+                        url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
+                    },
+                    {
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
@@ -1704,7 +1704,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Customer industry segments',
-                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                        url: '/handbook/growth/sales/customer-industry-segments',
                     },
                     {
                         name: 'Communications templates',
@@ -2796,6 +2796,10 @@ export const docsMenu = {
                         {
                             name: 'Personal API keys',
                             url: '/docs/api/personal-api-keys',
+                        },
+                        {
+                            name: 'Project secret API keys',
+                            url: '/docs/api/project-secret-api-keys',
                         },
                         {
                             name: 'OAuth integration',
@@ -4476,6 +4480,12 @@ export const docsMenu = {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Improving accuracy',
+                    url: '/docs/replay-vision/quality',
+                    icon: 'IconThumbsUp',
                     color: 'yellow',
                 },
                 {
@@ -7303,6 +7313,12 @@ export const docsMenu = {
                     name: 'Workflow builder',
                     url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
                     color: 'orange',
                 },
                 {

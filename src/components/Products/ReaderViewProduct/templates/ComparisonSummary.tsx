@@ -54,16 +54,16 @@ const ComparisonSummary = ({ id, productData }: SectionComponentProps) => {
                     <ItemList items={summary.them || []} />
                 </div>
                 <div>
-                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">
-                        Go with{' '}
+                    <h3 className="text-lg font-bold text-primary mt-0 mb-2 flex flex-wrap items-center gap-x-1.5">
+                        <span>Go with</span>
                         <Logo
                             layout="logomark"
                             variant="mono"
                             color="currentColor"
-                            className="text-primary h-6 inline-block -mb-1 mx-0.5"
+                            className="text-primary h-6 w-auto shrink-0"
                             width="auto"
-                        />{' '}
-                        if...
+                        />
+                        <span>if...</span>
                     </h3>
                     <ItemList items={summary.us || []} />
                 </div>

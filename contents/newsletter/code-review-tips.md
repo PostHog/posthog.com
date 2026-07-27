@@ -43,7 +43,7 @@ For the same reason, it’s better to have multiple agents with different instru
 
 Here’s how one of our engineers, [Paul D’Ambra](/community/profiles/30173), makes his own custom agent review system work:
 
-![qa-swarm review-triage agent pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662229/stop_being_the_code_review_bottleneck_1_qa_swarm_diagram_d728ab2551.png)
+![qa-swarm review-triage agent pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/v1783662229/stop_being_the_code_review_bottleneck_1_qa_swarm_diagram_d728ab2551.png)
 
 1. First, **[qa-swarm](https://github.com/pauldambra/dotfiles/tree/main/ai/skills/qa-swarm)** spawns four reviewer agents, each with their own special instructions:
 
