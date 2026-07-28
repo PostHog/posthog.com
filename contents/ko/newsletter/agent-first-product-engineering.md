@@ -23,7 +23,7 @@ seo:
 
 오늘날 에이전트는 당신의 프로덕트와 유저 사이에서 상호작용하는 하나의 기능이다.
 
-![프로덕트와 유저 사이의 새로운 상호작용 계층으로서의 에이전트](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent0_191d5281bd.png)
+![프로덕트와 유저 사이의 새로운 상호작용 계층으로서의 에이전트](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/agent0_191d5281bd.png)
 
 따라서 에이전트를 핵심 인터페이스로 염두에 두고 개발해야 한다.
 
