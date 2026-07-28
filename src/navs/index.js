@@ -5714,19 +5714,19 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/support/inbox',
                     icon: 'IconHeadset',
                     color: 'yellow',
                 },
                 {
-                    name: 'Slack',
+                    name: 'PostHog Slack',
                     url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',
                     color: 'purple',
                 },
                 {
-                    name: 'MCP',
+                    name: 'PostHog MCP',
                     url: '/docs/support/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'blue',
