@@ -75,11 +75,11 @@ AI-pilled software teams at engineering-led companies. Adoption starts bottom-up
 
 **Solution:** PostHog agents work that backlog continuously, so it gets cleared without pulling anyone off what they're already doing. They watch for it, triage it, and ship the fix. No human has to notice the problem first.
 
-**Supporting features:** (this watch-and-triage loop is self-driving; the [Inbox](/handbook/marketing/positioning/inbox) is its billable tool, it lives in the app and pipes to Slack, and Desktop is where you act on what it finds)
+**Supporting features:**
 - Scouts run on a schedule and open a PR when they find something worth fixing, no prompt required
-- Signal sources draw from errors, support tickets, session replays, GitHub issues, Linear, and Zendesk
-- The Inbox ranks incoming reports and PRs by importance and impact
-- Outcome-based pricing: a flat $15 per pull request, with your first three each month free, reports always free, and a default $150 billing limit
+- Signals draw from errors, support tickets, session replays, GitHub issues, Linear, and Zendesk
+- Inbox ranks incoming reports and PRs by importance and impact
+- Usage-based pricing: 100 credits = $1, no markup, with a $20/month free tier and a $50 default billing limit
 
 ## Battle cards
 
