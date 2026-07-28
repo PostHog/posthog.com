@@ -640,9 +640,11 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
 
                     {overviewNode?.body && (
                         <div className="article-content mt-6">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                            </MDXProvider>
+                            <div className="text-primary">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
                             <SectionDivider />
                         </div>
                     )}

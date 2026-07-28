@@ -22,7 +22,6 @@
         "build": "gatsby build",
         "prebuild:minimal": "pnpm generate-brand-assets",
         "build:minimal": "GATSBY_MINIMAL=true gatsby build",
-        "prestart": "pnpm generate-brand-assets",
         "start": "./bin/start",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",

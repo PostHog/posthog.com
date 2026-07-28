@@ -228,6 +228,19 @@ Choosing the right analytics tool depends on what you need it to do. Here's a qu
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>How much do PostHog and Plausible cost?</summary>
 
 **Plausible** starts at $9/month for 10k pageviews on its Starter plan. Key features like funnels, custom properties, and ecommerce tracking require the Business plan ($19/mo+). **PostHog** is [entirely usage-based](/pricing) with a free tier that includes 1 million events/month – 100x more than Plausible's cheapest plan – plus 5,000 session replays, 1 million feature flag requests, and more. All features are available on every tier.

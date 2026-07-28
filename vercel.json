@@ -2116,10 +2116,6 @@
             "destination": "/session-replay"
         },
         {
-            "source": "/web-analytics/features",
-            "destination": "/web-analytics"
-        },
-        {
             "source": "/feature-flags/features",
             "destination": "/feature-flags"
         },
@@ -3455,34 +3451,6 @@
             "destination": "/session-replay#questions"
         },
         {
-            "source": "/web-analytics/customers",
-            "destination": "/web-analytics"
-        },
-        {
-            "source": "/web-analytics/comparisons",
-            "destination": "/web-analytics#feature-comparison"
-        },
-        {
-            "source": "/web-analytics/documentation",
-            "destination": "/docs/web-analytics"
-        },
-        {
-            "source": "/web-analytics/tutorials",
-            "destination": "/web-analytics#tutorials"
-        },
-        {
-            "source": "/web-analytics/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/web-analytics/questions",
-            "destination": "/web-analytics#questions"
-        },
-        {
-            "source": "/feature-flags/pricing",
-            "destination": "/feature-flags#pricing"
-        },
-        {
             "source": "/feature-flags/customers",
             "destination": "/feature-flags"
         },
@@ -3531,20 +3499,44 @@
             "destination": "/surveys#questions"
         },
         {
+            "source": "/experiments/customers",
+            "destination": "/experiments"
+        },
+        {
+            "source": "/experiments/comparisons",
+            "destination": "/experiments#feature-comparison"
+        },
+        {
+            "source": "/experiments/documentation",
+            "destination": "/docs/experiments"
+        },
+        {
+            "source": "/experiments/tutorials",
+            "destination": "/experiments#tutorials"
+        },
+        {
+            "source": "/experiments/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/experiments/questions",
+            "destination": "/experiments#questions"
+        },
+        {
             "source": "/ab-testing/pricing",
-            "destination": "/experiments#pricing"
+            "destination": "/experiments/pricing"
         },
         {
             "source": "/ab-testing/customers",
-            "destination": "/experiments#customers"
+            "destination": "/experiments"
         },
         {
             "source": "/ab-testing/comparisons",
-            "destination": "/experiments#posthog-vs"
+            "destination": "/experiments#feature-comparison"
         },
         {
             "source": "/ab-testing/documentation",
-            "destination": "/experiments#docs"
+            "destination": "/docs/experiments"
         },
         {
             "source": "/ab-testing/tutorials",
@@ -3552,7 +3544,7 @@
         },
         {
             "source": "/ab-testing/roadmap",
-            "destination": "/experiments#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/ab-testing/questions",
@@ -4093,7 +4085,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/experiments#pricing",
+            "destination": "/experiments/pricing",
             "has": [
                 {
                     "type": "query",
@@ -4904,6 +4896,10 @@
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-industry-segments",
+            "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
             "source": "/startups/[...slug]",
             "destination": "/startups"
         },
@@ -4981,6 +4977,10 @@
         },
         {
             "source": "/handbook/strategy/brand",
+            "destination": "/handbook/brand/foundations"
+        },
+        {
+            "source": "/handbook/content/brand-message",
             "destination": "/handbook/brand/foundations"
         },
         {
