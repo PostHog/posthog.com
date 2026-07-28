@@ -8,6 +8,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
 import { HedgehogCodeBubble, HedgehogPuzzle } from '@posthog/brand/hoggies'
 import { Accordion } from 'components/RadixUI/Accordion'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import OSTable from 'components/OSTable'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
@@ -50,8 +51,14 @@ const TAB_IMAGE_SELF_DRIVE: CloudinarySrc =
 const CTA_HOG_IMAGE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png'
 
+// Matches the `highlight` colour token; RoughAnnotation draws its own stroke, so it needs
+// a raw colour rather than a class.
+const HIGHLIGHT_COLOR = 'rgba(235, 157, 42, 0.2)'
+
 const Highlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
+    <RoughAnnotation type="highlight" color={HIGHLIGHT_COLOR} strokeWidth={1} padding={2} delay={300} multiline>
+        <span className="font-bold text-red dark:text-yellow">{children}</span>
+    </RoughAnnotation>
 )
 
 const LeftSidebarContent = () => {
