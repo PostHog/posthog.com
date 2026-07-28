@@ -162,7 +162,7 @@ We're not in the old world of writing some Playwright code by hand to assess a c
 - See if it still works
 - See if it does what it claims to do
 
-<TeamMember name="Pawel Cebula" photo /> built an early version of this with a [qa-frontend skill](https://github.com/PostHog/posthog/pull/72523) that checks out a PR, designs test cases, and drives the actual UI in a browser. The agent's output lands as annotated screenshots, an animated reel inline, and even an optional recorded video.
+[Pawel](/community/profiles/33209) built an early version of this with a [`qa-frontend`](https://github.com/PostHog/posthog/pull/72523) skill that checks out a PR, designs test cases, and drives the actual UI in a browser. The agent's output lands as annotated screenshots, an animated reel inline, and even an optional recorded video.
 
 This makes reviews easier, but it also gives agents a way to escalate and say "I need a human! I don't like it, it doesn't make sense to me, it needs further thought, it isn't good enough, or doesn't work, etc." The agent can also say "hey, I wrote a Playwright test for this because I think it should stay in the application." 
 
