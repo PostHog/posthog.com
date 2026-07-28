@@ -95,7 +95,7 @@ export const support = {
     overview: {
         title: 'One place for every user conversation',
         description:
-            'Whether it arrives as a ticket from your app, an email out of the blue, or a new GitHub issue, Support centralizes it into a single helpdesk and attaches the session replays, events, and errors behind it. Then it feeds those signals into your self-driving inbox, so recurring problems become pull requests instead of repeat tickets.',
+            'Support is one of the tools that makes your product self-driving: a helpdesk where you can solve tickets that arrive with full user context. Agents can turn these tickets into PRs, proposing fixes and improvements for your review.',
         eli5: "Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors attached. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.",
         textColor: 'text-black', // tw
     },
