@@ -62,6 +62,7 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
   - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
     - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
   - Your quota will depend on your OTE
+- A deal counts toward quota in the quarter of its effective date. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
 - Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
   - We want you to secure upfront payment - which helps PostHog and helps you.
     - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.

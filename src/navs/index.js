@@ -529,7 +529,7 @@ export const handbookSidebar = [
                 name: 'Brandbook',
             },
             {
-                name: 'Brand foundations',
+                name: 'Overview',
                 url: '/handbook/brand/foundations',
             },
             {
@@ -4480,6 +4480,12 @@ export const docsMenu = {
                     name: 'Observations',
                     url: '/docs/replay-vision/observations',
                     icon: 'IconList',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Webhooks',
+                    url: '/docs/replay-vision/webhooks',
+                    icon: 'IconWebhooks',
                     color: 'yellow',
                 },
                 {
