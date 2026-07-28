@@ -7046,7 +7046,7 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/posthog-ai/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'blue',
@@ -7075,7 +7075,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Slack',
+                    name: 'PostHog Slack',
                     url: '/docs/posthog-ai/surfaces/slack',
                     icon: 'IconMessage',
                     color: 'red',
