@@ -49,7 +49,7 @@ A reference index to the per-tool pages. Each follows the same shape – unique 
 - [**Endpoints**](/handbook/marketing/positioning/endpoints) – Turn any saved insight or SQL query into a stable, authenticated HTTP endpoint
 - [**LLM analytics**](/handbook/marketing/positioning/llm-analytics) – Knowing why your LLM-powered feature is bleeding money or shipping nonsense
 - [**PostHog AI**](/handbook/marketing/positioning/posthog-ai) – A query interface that already knows your schema (and your users)
-- [**Signals**](/handbook/marketing/positioning/signals) – Scouts watch your context and rank what's worth fixing in the Inbox, in Web and piped to Slack
+- [**Inbox**](/handbook/marketing/positioning/inbox) – The one place self-driving hands work back to you: ranked reports and PRs, in the app and piped to Slack
 - [**PostHog Desktop**](/handbook/marketing/positioning/desktop) – The product editor: where you, your team, and a fleet of agents build together
 
 The **context warehouse** has its own page too, but treat it as the platform everything above is built on – the data warehouse plus modelling, pipelines, and exports – not as a co-equal tool in this list:
