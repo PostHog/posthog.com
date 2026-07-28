@@ -56,44 +56,20 @@ const challenge = base64url(sha256(verifier))
 
 `"none"` makes HogFarm a *public* client, which is all it needs. If you want the GitHub grant endpoints, which hand PostHog a GitHub OAuth code so the user's GitHub tokens stay server-side, you need a *confidential* client instead: set `token_endpoint_auth_method` to `"private_key_jwt"`, publish a `jwks_uri`, and sign a short-lived assertion per request. A CIMD client can never hold a plain client secret, since there's no registration step where PostHog could hand you one.
 
-With the file live, I register it. This is the call that turns the JSON into an OAuth app, and it's the first thing you do:
+With the file live, I register it. That's the call that turns the JSON into an OAuth app, and it's the first thing you do. The [provisioning docs have an interactive version](/docs/integrate/provisioning#register-your-client) where you paste your document URL and it registers for you, which is easier than assembling the call by hand.
 
-```ts
-const res = await fetch(`${HOST}/api/agentic/provisioning/client_registration`, {
-  method: "POST",
-  headers: { "API-Version": "0.1d", "Content-Type": "application/json" },
-  body: JSON.stringify({ client_id: clientId }),
-})
-console.log(await res.json())
-```
+What I'd flag is the response, because it's more useful than a bare success. It reports each check separately, so a broken setup tells you which piece is wrong instead of surfacing later as an opaque `401`, and a `capabilities` block spells out which endpoints you qualify for. Discovering that from a `403` three calls in is much less pleasant.
 
-The response is the useful part. It reports each check separately, so a broken setup tells you which piece is wrong instead of surfacing later as an opaque `401`:
-
-```json
-{
-  "registered": true,
-  "client_type": "public",
-  "token_endpoint_auth_method": "none",
-  "capabilities": { "account_requests": true, "github_grants": false },
-  "checks": [
-    { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
-    { "name": "provisioning_enabled", "ok": true, "detail": "Active" }
-  ]
-}
-```
-
-`capabilities` is the bit I'd have wanted on day one. It says exactly which endpoints I qualify for, which beats discovering it from a `403` three calls later. It's safe to re-run any time and it re-fetches the document, so it doubles as the quickest way to confirm a change landed.
-
-One thing worth knowing: registration is per region. US and EU are separate deployments with separate databases, so if you serve both you register twice, and PostHog won't do the second one for you.
+The one thing worth knowing up front: registration is per region. US and EU are separate deployments with separate databases, so if you serve both you register twice, and PostHog won't do the second one for you.
 
 ## Creating an account the farmer never sees
 
-With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background.
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
   method: "POST",
-  headers: { "API-Version": "0.1d", "Content-Type": "application/json" },
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     id: crypto.randomUUID(),
     email,
@@ -121,7 +97,7 @@ The account exists but it's empty. Two calls fix that: one to trade the code for
 ```ts
 const res = await fetch(`${HOST}/api/agentic/oauth/token`, {
   method: "POST",
-  headers: { "API-Version": "0.1d", "Content-Type": "application/x-www-form-urlencoded" },
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
   body: new URLSearchParams({ grant_type: "authorization_code", code, code_verifier: verifier, client_id: clientId }),
 })
 const { access_token: accessToken, refresh_token: refreshToken } = await res.json()
@@ -133,19 +109,17 @@ The next call provisions a project:
 await fetch(`${HOST}/api/agentic/provisioning/resources`, {
   method: "POST",
   headers: {
-    "API-Version": "0.1d",
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
   body: JSON.stringify({
-    service_id: "free",
     label_prefix: farmName,
     configuration: { project_name: `${farmName} site` },
   }),
 })
 ```
 
-The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away. `service_id: "free"` gives a free-tier project with no card required, which is all HogFarm needs.
+The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away.
 
 Access tokens last an hour, so anything long-lived means holding onto the refresh token. I store both encrypted in Postgres with AES-256-GCM, and the key lives only in the environment, never in the database.
 

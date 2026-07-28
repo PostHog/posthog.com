@@ -78,7 +78,7 @@ async function register(region, host) {
 
     const response = await fetch(`${host}/api/agentic/provisioning/client_registration`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'API-Version': '0.1d' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
     })
     const json = await response.json().catch(() => null)

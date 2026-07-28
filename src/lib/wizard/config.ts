@@ -30,9 +30,6 @@ export const config = {
     mock,
 }
 
-/** Only supported provisioning API version; sent as the `API-Version` header on every call. */
-export const API_VERSION = '0.1d'
-
 /**
  * Scopes requested on account_requests → the scope of the minted partner token.
  *
