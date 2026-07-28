@@ -22,6 +22,7 @@ import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import {
     IconBolt,
     IconBrackets,
+    IconCheck,
     IconCode,
     IconDatabase,
     IconDecisionTree,
@@ -353,7 +354,7 @@ const dataInTabs: TabbedCarouselTab[] = [
     },
 ]
 
-const growthColumns = ['Week 1', 'Month 3', 'Year 1'] as const
+const growthColumns = ['Just launched', 'Getting traction', 'Scaling up'] as const
 
 const growthRows: { label: string; cells: [string, string, string] }[] = [
     {
@@ -362,7 +363,7 @@ const growthRows: { label: string; cells: [string, string, string] }[] = [
     },
     {
         label: 'Storage',
-        cells: ['No warehouse', 'Managed Warehouse, basic queries', 'Managed Warehouse, advanced modeling'],
+        cells: ['Data stored by PostHog', 'Managed Warehouse, basic queries', 'Managed Warehouse, advanced modeling'],
     },
     {
         label: 'Data out',
@@ -604,8 +605,14 @@ const faqItems = [
         trigger: 'How does pricing work?',
         content: (
             <p>
-                Pricing is based on compute usage. You pay for what you use. Right now many of our tools are waiting to
-                be released and pricing will launch when they do.
+                The data warehouse is free for your first 1M rows/month then from $0.000015/row (historical syncs are
+                always free). Data pipelines are free for 10K events then from $0.0005/event, batch exports free for
+                1M rows then from $0.000015/row, and PostHog AI gives 500 free credits then $0.01/credit. See a full
+                breakdown at{' '}
+                <Link to="/pricing" state={{ newWindow: true }}>
+                    posthog.com/pricing
+                </Link>
+                .
             </p>
         ),
     },
@@ -643,6 +650,78 @@ const faqItems = [
             </>
         ),
     },
+    {
+        trigger: 'Do I need to know SQL to use the context warehouse?',
+        content: (
+            <p>
+                No. Ask questions in plain English and{' '}
+                <Link to="/data-stack/posthog-ai" state={{ newWindow: true }}>
+                    PostHog AI
+                </Link>{' '}
+                writes the SQL for you against your schema. If you do know SQL, the editor is right there and supports
+                HogQL or standard SQL. Most product engineers start with plain English and drop into SQL when they
+                want precise control.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I set this up myself, or do I need a data engineer?',
+        content: (
+            <p>
+                You can do it yourself. Connecting a source is a few clicks, and your product events are already in
+                PostHog. Data engineers are great for complex modeling and transformation logic, but you don't need to
+                wait to hire one to sync a source, query it, or use it in a flag.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How fresh is the data, can I use it in flags and experiments right away?',
+        content: (
+            <p>
+                Product events are available immediately, no sync step. Synced sources like Stripe or your CRM
+                refresh on a schedule, so there's a short delay on those. Once data is in the warehouse it can power
+                cohorts, feature flags, and experiments natively without a separate pipeline to build to move it into
+                the product.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I join my external data to product events without building a pipeline?',
+        content: (
+            <p>
+                Yes, sync a source like Stripe or Postgres, and you can join a revenue column to a signup event
+                without moving data between tools or standing up your own ETL. It all lives in one warehouse.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How do agents access the warehouse?',
+        content: (
+            <p>
+                Through the{' '}
+                <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
+                    PostHog MCP
+                </Link>
+                . Point an agent (PostHog's, Claude Code, Cursor, whatever you're running) at the PostHog MCP and it
+                can query your data directly. Or take any model or SQL query and expose it as a stable API endpoint
+                your product or an agent calls, so the warehouse becomes something agents read from, not just a place
+                dashboards pull from.
+            </p>
+        ),
+    },
+    {
+        trigger: 'How do I control what agents and PostHog AI can see?',
+        content: (
+            <p>
+                You set the boundaries. Access follows your{' '}
+                <Link to="/docs/settings/access-control" state={{ newWindow: true }}>
+                    existing PostHog permissions
+                </Link>
+                , and when an agent acts on your data, like opening a PR, you can review it before anything ships.
+                Nothing self-drives past a checkpoint you haven't approved.
+            </p>
+        ),
+    },
 ]
 
 export default function DataStack(): JSX.Element {
@@ -669,19 +748,29 @@ export default function DataStack(): JSX.Element {
                                     <h1 className="m-0 text-3xl font-bold !leading-[1.12] tracking-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                                         Give your agents the <Highlight>full context</Highlight>
                                     </h1>
-                                    <p className="mb-0 mt-5 text-base font-semibold leading-relaxed text-primary @xl/reader-content:text-[17px]">
-                                        Every feature you ship is downstream of your data.
-                                    </p>
-                                    <p className="mb-0 mt-2 max-w-3xl text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
-                                        Collect, store, transform, query using your{' '}
+                                    <p className="mb-0 mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
+                                        Your{' '}
                                         <Link
                                             to="/blog/what-is-a-context-warehouse"
                                             className="underline font-semibold"
                                         >
                                             context warehouse
-                                        </Link>
-                                        , and let PostHog self-drive development based on customer signals.
+                                        </Link>{' '}
+                                        combines data storage and tooling with no pipelines to maintain, optimized for
+                                        agents to use.
                                     </p>
+                                    <ul className="mb-0 mt-4 list-none space-y-1.5 p-0 text-base text-secondary @xl/reader-content:text-[17px]">
+                                        {[
+                                            'Store product and business data',
+                                            'Transform, query, and model',
+                                            'Data-driven self-driving development',
+                                        ].map((item) => (
+                                            <li key={item} className="relative pl-6">
+                                                <IconCheck className="absolute left-0 top-1 size-4 text-green" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
                                     <div className="mt-6">
                                         <CallToAction
                                             to="https://app.posthog.com/data-management/sources"
@@ -729,9 +818,14 @@ export default function DataStack(): JSX.Element {
                             <TabbedCarousel tabs={dataInTabs} slideClassName="!min-h-0" />
                         </div>
 
-                        {/* Set up in minutes, still useful in three years. */}
-                        <h2 className={sectionHeadingClassName}>Set up in minutes, still useful in three years.</h2>
-                        <p>This context warehouse doesn't change as you grow. It just grows with you.</p>
+                        {/* The stack that grows with you, not one you grow out of */}
+                        <h2 className={sectionHeadingClassName}>
+                            The stack that grows with you, not one you grow out of
+                        </h2>
+                        <p>
+                            The data you need on day one looks nothing like the data you need at scale. Start with
+                            what a small team needs and add capability as you grow into it.
+                        </p>
                         <div className="not-prose my-6">
                             <OSTable
                                 columns={growthTableColumns}
@@ -776,7 +870,7 @@ export default function DataStack(): JSX.Element {
                                             externalNoIcon
                                             size="md"
                                         >
-                                            Get Connected
+                                            Get Started
                                         </CallToAction>
                                         <p className="mb-0 text-sm text-secondary">
                                             Not using PostHog?{' '}
