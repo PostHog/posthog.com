@@ -1,32 +1,34 @@
 ---
-title: Fix metric regressions in PostHog Desktop
+title: Review metric regressions in PostHog Desktop
 sidebar: Docs
 showTitle: true
 ---
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
+<CalloutBox icon="IconFlask" title="Open beta" type="fyi">
 
 PostHog Desktop is in beta.
 
 </CalloutBox>
 
-[PostHog Desktop](/docs/posthog-desktop) is where you review and merge the [Self-driving](/docs/self-driving) work that your product analytics data generates. Your insights don't just sit on a dashboard – a scout reads them, finds the ones that regressed, and hands concrete problems to a coding agent that opens a pull request.
+[PostHog Desktop](/docs/posthog-desktop) is where you read the [Self-driving](/docs/self-driving) reports your product analytics data generates. Your insights don't just sit on a dashboard – a scout reads them, finds the ones that regressed, and files what it finds for you to act on.
 
-## How a regression becomes a pull request
+## How a regression becomes a report
 
 A [scout](/docs/self-driving/scouts) watches the funnel, retention, lifecycle, stickiness, and paths insights you've saved, and looks at the rates they produce rather than raw volume. Traffic being down is not a signal. A conversion step that used to convert at 40% and now converts at 22% is.
 
-When it finds one, it files a [report](/docs/self-driving/reports) with the insight, the drop, and the events and [session replays](/docs/session-replay) behind it. If the cause looks like something in your code, the report carries a fix loop metric – the number the fix is supposed to move – and hands off to a coding agent that works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request.
+When it finds one, it files a [report](/docs/self-driving/reports) with the insight, the drop, and the events and [session replays](/docs/session-replay) behind it.
+
+## Why there is no automatic pull request
+
+The scout stops at the report. A conversion drop rarely has one obvious cause: it can be a bug, a pricing change, a bad release, a shift in traffic mix, or plain seasonality. Deciding which of those it is takes someone who knows what shipped and what the number is supposed to do, so these reports are routed to a person rather than handed to a coding agent.
+
+That's the difference from [error tracking](/docs/error-tracking), where a stack trace usually names a specific file and the fix really is mechanical.
 
 ## What you can do here
 
 - **Read the report** – the insight that regressed, when it started, and the evidence behind it.
 - **Ask questions** – start a research task against the report to dig further before acting.
-- **Create a PR** – auto-started when the fix is in a repo you've connected, or kick one off manually.
-- **Watch the agent work** – follow the live transcript and review the files it changed.
-- **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
-
-Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
+- **Decide what happens next** – close it, dig deeper, or start the fix yourself.
 
 ## Related
 
