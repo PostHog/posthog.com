@@ -12,12 +12,12 @@ PostHog Desktop is a product editor for product builders. Context, knowing what'
 
 ## Self-driving, and where Desktop fits (vs web, Slack, and MCP)
 
-The self-driving loop runs anywhere PostHog does, and each interface is a different way to use it. Desktop is the one built for actively building. The other surfaces are for reviewing the loop, or embedding it in tools you already have.
+The self-driving loop runs anywhere PostHog does, and each interface is a different way to use it. Desktop is the one built for working hand-in-hand with agents across everything you do in PostHog. The other surfaces are for reviewing the loop, or embedding it in tools you already have.
 
-- **PostHog Web** is the full app in your browser: review agent work in the Inbox and query with PostHog AI.
-- **PostHog Slack** brings the loop to you: digests, alerts, and quick questions in a thread.
+- **PostHog Web** is the full app in your browser: Query your product data with PostHog AI, chat to kick off cloud coding tasks, and review proactive agent work in the Inbox.
+- **PostHog Slack** brings the loop to you: PRs, reports, alerts, and quick follow-ups in a thread.
 - **PostHog MCP & PostHog CLI** pipes PostHog's context into the agent you already use (Claude Code, Cursor).
-- **PostHog Desktop** is a workbench for building new features, shipping improvements, and steering agents with your team.
+- **PostHog Desktop** is where you build with agents. You hand over whole problem spaces (not just one-off tasks), agents do the heavy lifting, and you build together in real time.
 
 ## The unique belief (in terms of PostHog Desktop)
 
