@@ -162,12 +162,13 @@ Each conversion emits a billable `$workflows_conversion` event. This counts towa
 
 ## Dispatches
 
-Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
+Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:
 
 | Dispatch type    | Description                                                                                                                |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.          |
 | Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.               |
+| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section. |
 | Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
 
