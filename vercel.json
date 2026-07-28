@@ -150,6 +150,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/feature-flags/create-flags-mcp",
+            "destination": "/docs/feature-flags/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/product-analytics/build-insights-mcp",
             "destination": "/docs/product-analytics/surfaces/mcp",
             "statusCode": 301

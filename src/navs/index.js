@@ -4658,7 +4658,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -4698,27 +4698,75 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Creating Feature Flags',
-                    url: '/docs/feature-flags/creating-feature-flags',
-                    icon: 'IconFlag',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
                     name: 'Adding your code',
                     url: '/docs/feature-flags/adding-feature-flag-code',
                     icon: 'IconCode',
                     color: 'salmon',
-                },
-                {
-                    name: 'Testing your flag',
-                    url: '/docs/feature-flags/testing',
-                    icon: 'IconTestTube',
-                    color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/feature-flags/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/feature-flags/surfaces/web-app',
+                        },
+                        {
+                            name: 'Create feature flags',
+                            url: '/docs/feature-flags/creating-feature-flags',
+                        },
+                        {
+                            name: 'Test your flag',
+                            url: '/docs/feature-flags/testing',
+                        },
+                        {
+                            name: 'Schedule flag changes',
+                            url: '/docs/feature-flags/scheduled-flag-changes',
+                        },
+                        {
+                            name: 'Manage early access features',
+                            url: '/docs/feature-flags/early-access-feature-management',
+                        },
+                        {
+                            name: 'Clean up stale flags',
+                            url: '/docs/feature-flags/cleaning-up-stale-flags',
+                        },
+                        {
+                            name: 'Manage flags with PostHog AI',
+                            url: '/docs/feature-flags/manage-flags-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/feature-flags/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/feature-flags/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/feature-flags/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Evaluation',
                 },
                 {
                     name: 'Server-side local evaluation',
@@ -4728,7 +4776,11 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         {
-                            name: 'Local evaluation in distributed or stateless environments',
+                            name: 'Overview',
+                            url: '/docs/feature-flags/local-evaluation',
+                        },
+                        {
+                            name: 'Distributed or stateless environments',
                             url: '/docs/feature-flags/local-evaluation/distributed-environments',
                         },
                     ],
@@ -4759,20 +4811,33 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Guides',
+                    name: 'Override flag properties',
+                    url: '/docs/feature-flags/property-overrides',
+                    icon: 'IconPerson',
+                    color: 'blue',
                 },
                 {
-                    name: 'Best practices',
-                    url: '/docs/feature-flags/best-practices',
-                    icon: 'IconBolt',
+                    name: 'Targeting',
+                },
+                {
+                    name: 'User and group targeting',
+                    url: '/docs/feature-flags/user-and-group-targeting',
+                    icon: 'IconPeople',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Target flags with groups',
+                    url: '/docs/feature-flags/targeting-groups',
+                    icon: 'IconPeople',
                     color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'Clean up stale flags',
-                    url: '/docs/feature-flags/cleaning-up-stale-flags',
-                    icon: 'IconFilter',
-                    color: 'salmon',
+                    name: 'Use feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconListTreeChild',
+                    color: 'purple',
                     featured: true,
                 },
                 {
@@ -4790,18 +4855,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Target flags with groups',
-                    url: '/docs/feature-flags/targeting-groups',
-                    icon: 'IconPeople',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'User and group targeting',
-                    url: '/docs/feature-flags/user-and-group-targeting',
-                    icon: 'IconPeople',
-                    color: 'blue',
-                    featured: true,
+                    name: 'Payloads and config',
                 },
                 {
                     name: 'Set up remote config',
@@ -4811,56 +4865,26 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Use feature flag dependencies',
-                    url: '/docs/feature-flags/dependencies',
-                    icon: 'IconListTreeChild',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Manage early access features',
-                    url: '/docs/feature-flags/early-access-feature-management',
-                    icon: 'IconFeatures',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Schedule flag changes',
-                    url: '/docs/feature-flags/scheduled-flag-changes',
-                    icon: 'IconClock',
-                    color: 'seagreen',
-                    featured: true,
-                },
-                {
                     name: 'Use multi-project flags',
                     url: '/docs/feature-flags/multi-project-feature-flags',
                     icon: 'IconStack',
                     color: 'blue',
                 },
                 {
-                    name: 'Override flag properties',
-                    url: '/docs/feature-flags/property-overrides',
-                    icon: 'IconPerson',
-                    color: 'blue',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Manage flags with PostHog AI',
-                    url: '/docs/feature-flags/manage-flags-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Create flags with MCP',
-                    url: '/docs/feature-flags/create-flags-mcp',
-                    icon: 'IconLlmPromptEvaluation',
+                    name: 'Project-wide settings',
+                    url: '/docs/feature-flags/project-wide-settings',
+                    icon: 'IconWrench',
                     color: 'green',
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Best practices',
+                    url: '/docs/feature-flags/best-practices',
+                    icon: 'IconBolt',
+                    color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Cutting costs',
@@ -4868,12 +4892,6 @@ export const docsMenu = {
                     icon: 'IconPiggyBank',
                     color: 'yellow',
                     featured: true,
-                },
-                {
-                    name: 'Project-wide settings',
-                    url: '/docs/feature-flags/project-wide-settings',
-                    icon: 'IconWrench',
-                    color: 'green',
                 },
                 {
                     name: 'More tutorials',
