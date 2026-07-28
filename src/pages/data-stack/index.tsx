@@ -483,6 +483,58 @@ const catalogSections: {
     },
 ]
 
+type CatalogItem = (typeof catalogSections)[number]['items'][number]
+
+const CatalogItemBody = ({ name, description, Icon, iconColor }: CatalogItem) => (
+    <>
+        <p className="m-0 flex items-center gap-2 text-base font-bold text-primary group-hover:underline">
+            <Icon className={`size-5 shrink-0 ${iconColor}`} />
+            {name}
+        </p>
+        <p className="m-0 mt-1.5 text-sm text-secondary">{description}</p>
+    </>
+)
+
+// One object rather than three cards, with the category names on a shaded left edge so
+// the catalog reads as a single stack of layers. Within a layer the 1px grid gap lets the
+// grid's background show through as the rule between items, and an odd last item spans
+// the pane so there's no empty cell for that colour to pool in.
+const CatalogLayers = () => (
+    <div className="not-prose overflow-hidden rounded-md border border-primary shadow-sm">
+        {catalogSections.map((section, index) => (
+            <div
+                key={section.title}
+                className={`grid grid-cols-1 @xl/reader-content:grid-cols-[minmax(140px,180px)_1fr] ${
+                    index > 0 ? 'border-t border-primary' : ''
+                }`}
+            >
+                <div className="flex items-center border-b border-primary bg-accent px-4 py-3 @xl/reader-content:border-b-0 @xl/reader-content:border-r">
+                    <p className="m-0 text-sm font-bold uppercase tracking-wide text-secondary">{section.title}</p>
+                </div>
+                <div className="grid grid-cols-1 gap-px bg-border @2xl/reader-content:grid-cols-2">
+                    {section.items.map((item, itemIndex) => (
+                        <Link
+                            key={item.name}
+                            to={item.url}
+                            state={{ newWindow: true }}
+                            // Link puts className on the anchor and wraps it in a context-menu
+                            // element, so the column span has to go on that wrapper instead.
+                            wrapperClassName={
+                                itemIndex === section.items.length - 1 && section.items.length % 2 === 1
+                                    ? '@2xl/reader-content:col-span-2'
+                                    : ''
+                            }
+                            className="group flex min-h-full flex-col bg-primary p-4 transition-colors duration-150 hover:bg-accent"
+                        >
+                            <CatalogItemBody {...item} />
+                        </Link>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+)
+
 const faqItems = [
     {
         trigger: "Can I use PostHog's context warehouse with my existing warehouse?",
@@ -648,27 +700,7 @@ export default function DataStack(): JSX.Element {
                             Use PostHog as the full context layer for your product, or mix and match with your own
                             tools.
                         </p>
-                        {catalogSections.map((section) => (
-                            <div key={section.title} className="mb-8">
-                                <h3>{section.title}</h3>
-                                <div className="not-prose grid grid-cols-1 gap-3 @xl/reader-content:grid-cols-2">
-                                    {section.items.map(({ name, description, url, Icon, iconColor }) => (
-                                        <Link
-                                            key={name}
-                                            to={url}
-                                            state={{ newWindow: true }}
-                                            className="group flex min-h-full flex-col rounded-md border border-primary bg-primary p-4 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-secondary hover:shadow-md"
-                                        >
-                                            <p className="m-0 flex items-center gap-2 text-base font-bold text-primary group-hover:underline">
-                                                <Icon className={`size-5 shrink-0 ${iconColor}`} />
-                                                {name}
-                                            </p>
-                                            <p className="m-0 mt-1.5 text-sm text-secondary">{description}</p>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                        <CatalogLayers />
 
                         {/* Get started */}
                         <div
