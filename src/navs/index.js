@@ -1409,6 +1409,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/expansion-strategies',
                     },
                     {
+                        name: "Evaluating an account's growth potential",
+                        url: '/handbook/growth/sales/evaluating-growth-potential',
+                    },
+                    {
                         name: 'TAM Excellence',
                         url: '/handbook/growth/sales/tam-excellence',
                     },
