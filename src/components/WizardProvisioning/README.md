@@ -2,7 +2,7 @@
 
 A provisioning flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-provisioning-rfc.md` at the repo root.
 
-All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **CIMD partner** (client metadata document at `static/.well-known/posthog.com.json`, PKCE auth, no secret). This component is a state machine over those functions' responses.
+All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **confidential CIMD partner**: the client metadata document lives at `static/.well-known/posthog.com.json` and declares `private_key_jwt`, so each partner call carries an assertion signed with the key in `CIMD_CLIENT_PRIVATE_KEY` (see `src/lib/cimd`). PKCE is still used at token exchange. The GitHub grant endpoints require a confidential client, which is why the key exists. This component is a state machine over those functions' responses.
 
 ## Placement
 
@@ -58,7 +58,9 @@ Mirrors the "Error handling on posthog.com" table in the RFC:
 |---|---|
 | `WIZARD_PROVISIONING_STATE_SECRET` | HMAC key for signed cookies + OAuth state (required) |
 | `WIZARD_PROVISIONING_POSTHOG_API_HOST` | Provisioning API host (default `https://us.posthog.com`) |
-| `WIZARD_PROVISIONING_CLIENT_ID` | CIMD document URL, byte-for-byte |
+| `CIMD_CLIENT_ID` | CIMD document URL, byte-for-byte. Owned by `src/lib/cimd`, since it identifies posthog.com to PostHog generally rather than only in this flow. |
+| `CIMD_CLIENT_PRIVATE_KEY` | PEM private key signing client assertions. Generate with `node bin/generate-cimd-key.mjs`. |
+| `CIMD_CLIENT_KEY_ID` | `kid` published in the JWKS and carried in assertion headers (default `posthog-com-1`) |
 | `WIZARD_PROVISIONING_SITE_URL` | Base for redirect URIs (prod: `https://posthog.com`) |
 | `WIZARD_PROVISIONING_GITHUB_APP_CLIENT_ID` / `_SLUG` | GitHub App OAuth client id + install URL slug |
 | `WIZARD_PROVISIONING_MOCK` | `1` → in-memory mock backend, skips github.com |
@@ -93,16 +95,16 @@ All parsing lives in `src/lib/wizard/provisioning.ts`. Reconciled against the mo
 
 - [x] `POST …/github/grants` returns `{grant_id, gh_login, email, expires_in: 3600}` — email fetched server-side (`/user/emails`), `email` is `string | null` (null = GitHub has no verified email; still a usable grant). The account email is collected **inline** in the confirm step (defaulted from this value when present), so `provision` sends the entered address to `account_requests`, not the grant's copy.
 - [x] `email_unavailable` is now a **502** meaning the GitHub App lacks the "Email addresses (read)" permission (PostHog-side misconfig) — handled as a **terminal** error + manual fallback (like `github_unavailable`), NOT the inline-email path. The no-verified-email case is the `email: null` success above, not this.
-- [x] `GET …/github/grants/{id}/repositories` returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. **`installation_id` is a string** (upstream emits it as one) — kept as a string end-to-end, never parsed to a number. Any 404 → restart Phase A.
+- [x] `GET …/github/grants/{id}/repositories` requires a **confidential** client like the create call, and being a `GET` it carries `client_assertion` / `client_assertion_type` as **query parameters** (no body to put them in). Returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. **`installation_id` is a string** (upstream emits it as one) — kept as a string end-to-end, never parsed to a number. Any 404 → restart Phase A.
 - [x] `configuration.wizard` block `{grant_id, installation_id, repository, branch?}`; partial failure is **HTTP 200** with `wizard.error` (bundled-block failure code `run_creation_failed`) alongside `oauth.code` — we branch on presence of `wizard.error`, not status.
 - [x] Retry path: exchange OAuth code → `github_integration` (idempotent) → `wizard_runs`. The `wizard_runs` action returns `{status:"complete", id, wizard_run:{task_id, run_id, status}}` (run nested under `wizard_run`, not `complete`); `github_integration` returns `{status:"complete", id, github_integration:{…}}`. Wizard-run budget is 2/h, 5/day (shared with the bundled path) → exactly one retry, then degraded.
 - [x] `available_teams[0]` is the bootstrap/consented team on the token response.
 
 - [x] **redirect_uri** — this repo serves `/api/wizard/github/callback` (the function lives at `src/api/wizard/github/callback.ts`), matching the slash path registered in the GitHub App console. Byte-identical across the authorize URL, the `github/grants` body, and the console.
-- [x] `oauth-callback` redirect_uri — under CIMD there is **no** separate `OAuthApplication` registration; `redirect_uris` are declared in the metadata document (`static/.well-known/posthog.com.json`). Nothing to register out-of-band. (The RFC's "register OAuthApplication redirect_uris" was from the pre-CIMD HMAC design.)
+- [x] `oauth-callback` redirect_uri — `redirect_uris` are declared in the metadata document (`static/.well-known/posthog.com.json`), not configured out-of-band. Registration itself is now an explicit `POST …/provisioning/client_registration` call, which fetches and validates that document and reports per-check diagnostics; `provisioning.ts` self-heals by calling it once on a 401 that names it.
 
 Still open (ops / cross-repo coordination):
 
 - [ ] Repo-poll budget is 120/grant/rolling-hour; poll interval is 5s (≈60 calls over the 5-min timeout, within budget). A 429 mid-poll currently surfaces as `fetch_failed` and stops polling — it does not honor `Retry-After`.
 - [x] **CIMD verification token** — a real `phvt_` token (created in org settings → CIMD verification tokens) is set in `com.posthog.verification_token` in the metadata document. It links the app to the PostHog org and grants a **higher provisioning rate limit** + identity trail (vs. the default `github/grants` 10/h per partner). The token is embedded in the public CIMD doc by design; PostHog stores only a hash.
-- [x] **Provisioning scopes** — the provisioning flow's resource actions authorize by team-scoping + CIMD partner auth, not OAuth scopes, so no specific scope is required. We request a minimal `["organization:read", "project:read"]` (least privilege) in both `PROVISIONING_SCOPES` (`config.ts`) and `com.posthog.scopes` (CIMD doc); they must stay equal. Both are unprivileged/grantable, so CIMD registration accepts them and the token mints within the app ceiling.
+- [x] **Provisioning scopes** — the provisioning flow's resource actions authorize by team-scoping plus partner client authentication (our `client_type` is confidential, proven per request by assertion), not OAuth scopes, so no specific scope is required. We request a minimal `["organization:read", "project:read"]` (least privilege) in both `PROVISIONING_SCOPES` (`config.ts`) and `com.posthog.scopes` (CIMD doc); they must stay equal. Both are unprivileged/grantable, so CIMD registration accepts them and the token mints within the app ceiling.

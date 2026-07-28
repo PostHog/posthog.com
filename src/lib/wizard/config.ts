@@ -4,6 +4,8 @@
  * client bundle.
  */
 
+import { cimdConfig } from '../cimd/config'
+
 const mock = process.env.WIZARD_PROVISIONING_MOCK === '1'
 
 export const config = {
@@ -12,8 +14,12 @@ export const config = {
         process.env.WIZARD_PROVISIONING_STATE_SECRET || (mock ? 'wizard-provisioning-mock-insecure-secret' : undefined),
     /** PostHog app host serving the agentic provisioning API. Provisioning v1 is US-only. */
     posthogApiHost: process.env.WIZARD_PROVISIONING_POSTHOG_API_HOST || 'https://us.posthog.com',
-    /** CIMD client id — must byte-for-byte equal the URL of static/.well-known/posthog.com.json. */
-    clientId: process.env.WIZARD_PROVISIONING_CLIENT_ID || 'https://posthog.com/.well-known/posthog.com.json',
+    /**
+     * Our CIMD client id, owned by `src/lib/cimd` because it identifies posthog.com to PostHog
+     * generally rather than just in this flow. Re-exported here so wizard code keeps one import,
+     * and shared so it cannot drift from the id the client assertions are signed with.
+     */
+    clientId: cimdConfig.clientId,
     /** Base URL used to build redirect URIs back to this site. */
     siteUrl: process.env.WIZARD_PROVISIONING_SITE_URL || 'http://localhost:8001',
     /** GitHub App OAuth client id (public value, but server-held to keep it out of the bundle). */
