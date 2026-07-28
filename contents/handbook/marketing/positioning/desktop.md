@@ -75,7 +75,7 @@ AI-pilled software teams at engineering-led companies. Adoption starts bottom-up
 
 **Solution:** PostHog agents work that backlog continuously, so it gets cleared without pulling anyone off what they're already doing. They watch for it, triage it, and ship the fix. No human has to notice the problem first.
 
-**Supporting features:**
+**Supporting features:** (the watching-and-triage half is [Signals](/handbook/marketing/positioning/signals), its own tool that lives in Web and pipes to Slack; Desktop is where you act on what it finds)
 - Scouts run on a schedule and open a PR when they find something worth fixing, no prompt required
 - Signals draw from errors, support tickets, session replays, GitHub issues, Linear, and Zendesk
 - Inbox ranks incoming reports and PRs by importance and impact
