@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 
 import { cimdConfig } from './config'
-import { getPrivateKey } from './keys'
+import { getKeyId, getPrivateKey } from './keys'
 
 export const CLIENT_ASSERTION_TYPE_JWT_BEARER = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
 
@@ -22,7 +22,7 @@ const base64url = (value: Record<string, unknown>): string => Buffer.from(JSON.s
  */
 export function createClientAssertion(audience: string): string {
     const now = Math.floor(Date.now() / 1000)
-    const header = { alg: 'RS256', typ: 'JWT', kid: cimdConfig.keyId }
+    const header = { alg: 'RS256', typ: 'JWT', kid: getKeyId() }
     const claims = {
         iss: cimdConfig.clientId,
         sub: cimdConfig.clientId,

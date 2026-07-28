@@ -68,6 +68,17 @@ sequenceDiagram
 
 ## Set up as a partner
 
+Setup is four steps, and you only do them once:
+
+1. **[Decide whether you need to authenticate](#choosing-an-authentication-method).** If you need the GitHub grant endpoints, you do. If not, you can stay a public client and skip step 3.
+2. **[Host a metadata document](#host-a-cimd-metadata-document)** at an HTTPS URL on your domain. That URL becomes your `client_id`. There is no signup form.
+3. **Generate a keypair and publish the public half** at a `jwks_uri`, if you are a confidential client. See [authenticating with a private key](#authenticating-with-a-private-key).
+4. **[Register your client](#register-your-client)** in every region you serve, and check the diagnostics it returns.
+
+Optionally, [link the app to a PostHog organization](#link-your-partner-app-to-a-posthog-organization-optional) to raise your rate limit, and [declare a scope ceiling](#declare-oauth-scopes-for-your-app-optional).
+
+After that, the per-user flow is the three API calls in [onboarding](#onboarding-once-per-user).
+
 ### Host a CIMD metadata document
 
 PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
@@ -108,10 +119,13 @@ Once the document is live, register it:
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
   -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
   -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
 ```
 
 This is the first call you make. Every other endpoint requires an already-registered client and returns `401` naming this one if it does not find yours.
+
+> **Register in every region you serve.** US and EU are separate deployments with separate databases, so registering in one does **not** register you in the other, and we will not do it for you. A client registered only in the US gets a `401` from `eu.posthog.com`. Run the registration against `https://us.posthog.com` and `https://eu.posthog.com` separately, and re-run both whenever you change your metadata document or your keys. The [setup script](#registration-script) below does both.
 
 The response reports each check separately, so a broken setup tells you which part is wrong rather than failing as a bare `401`:
 
@@ -148,6 +162,74 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration
 ```
 
 Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it on a real call.
+
+### Registration script
+
+Save this as `register-posthog-client.mjs` and run it with `node register-posthog-client.mjs`. It registers in both regions, prints every check, and exits non-zero if anything failed, so you can run it from CI or a deploy step.
+
+```js
+#!/usr/bin/env node
+import crypto from 'crypto'
+
+const CLIENT_ID = process.env.POSTHOG_CLIENT_ID // your CIMD document URL
+const PRIVATE_KEY = process.env.POSTHOG_CLIENT_PRIVATE_KEY // omit if you are a public client
+const KEY_ID = process.env.POSTHOG_CLIENT_KEY_ID || 'key-1'
+
+const REGIONS = { us: 'https://us.posthog.com', eu: 'https://eu.posthog.com' }
+const ASSERTION_TYPE = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
+
+function assertion(host) {
+  const now = Math.floor(Date.now() / 1000)
+  const b64 = (o) => Buffer.from(JSON.stringify(o)).toString('base64url')
+  const input =
+    b64({ alg: 'RS256', typ: 'JWT', kid: KEY_ID }) +
+    '.' +
+    b64({
+      iss: CLIENT_ID,
+      sub: CLIENT_ID,
+      // Per region: an assertion minted for one region is not valid at the other.
+      aud: `${host}/api/agentic/oauth/token`,
+      jti: crypto.randomUUID(),
+      iat: now,
+      exp: now + 60,
+    })
+  const sig = crypto.sign('RSA-SHA256', Buffer.from(input), crypto.createPrivateKey(PRIVATE_KEY))
+  return `${input}.${sig.toString('base64url')}`
+}
+
+let ok = true
+for (const [region, host] of Object.entries(REGIONS)) {
+  const body = { client_id: CLIENT_ID }
+  if (PRIVATE_KEY) {
+    body.client_assertion = assertion(host)
+    body.client_assertion_type = ASSERTION_TYPE
+  }
+
+  const res = await fetch(`${host}/api/agentic/provisioning/client_registration`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'API-Version': '0.1d' },
+    body: JSON.stringify(body),
+  })
+  const json = await res.json().catch(() => null)
+
+  console.log(`\n${region.toUpperCase()} ${host}`)
+  for (const check of json?.checks || []) {
+    console.log(`  ${check.ok ? 'ok  ' : 'FAIL'} ${check.name}: ${check.detail}`)
+  }
+  if (!json?.registered) {
+    console.log(`  not registered: ${json?.error?.message || `HTTP ${res.status}`}`)
+    ok = false
+    continue
+  }
+  console.log(`  ${json.client_type} (${json.token_endpoint_auth_method})`)
+  console.log(`  github grants: ${json.capabilities?.github_grants ? 'allowed' : 'not allowed'}`)
+  ok = ok && (json.checks || []).every((c) => c.ok)
+}
+
+process.exit(ok ? 0 : 1)
+```
+
+Re-run it after any change to your metadata document or your keys. It re-fetches everything and re-runs every check, so it is the fastest way to confirm a change took effect.
 
 ### Link your partner app to a PostHog organization (optional)
 
@@ -222,15 +304,32 @@ One thing to be honest about: a credential shipped inside a distributed binary i
 
 ### Authenticating with a private key
 
-Publish your public keys as a JWK Set at your `jwks_uri`:
+Generate an RSA keypair. Keep the private half in your environment or secret manager, never in your repo:
+
+```bash
+node -e "
+const c = require('crypto')
+const { privateKey, publicKey } = c.generateKeyPairSync('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: 'spki', format: 'pem' },
+  privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+})
+console.log(privateKey)
+console.log(JSON.stringify({ keys: [{ ...c.createPublicKey(publicKey).export({ format: 'jwk' }), kid: 'sig-1', use: 'sig', alg: 'RS256' }] }, null, 2))
+"
+```
+
+Publish the public half as a JWK Set at your `jwks_uri`:
 
 ```json
 {
   "keys": [
-    { "kty": "RSA", "n": "...", "e": "AQAB", "kid": "my-key-1", "use": "sig", "alg": "RS256" }
+    { "kty": "RSA", "n": "...", "e": "AQAB", "kid": "sig-1", "use": "sig", "alg": "RS256" }
   ]
 }
 ```
+
+`kid` is an opaque label you choose. It exists so a verifier can pick the right key when your set holds more than one, which is what makes rotation possible. Deriving the JWK Set from your private key at request time, rather than checking a copy into your repo, is worth the small effort: two copies that silently disagree is the most common reason a working setup stops working.
 
 Then send a signed assertion (<a href="https://datatracker.ietf.org/doc/html/rfc7523">RFC 7523</a>) with each request:
 
@@ -273,6 +372,20 @@ Send it as `client_assertion`, alongside `client_assertion_type` set to `urn:iet
 
 > **Each assertion is single use.** PostHog remembers the `jti` until the assertion would have expired, so reusing one gets rejected as a replay. Mint a fresh assertion per request, including on retries.
 
+The `aud` must name the region you are calling. An assertion minted for `us.posthog.com` is not accepted by `eu.posthog.com`.
+
+#### Rotating keys
+
+Rotation is yours to do, and needs an overlap window because PostHog caches your JWK Set for an hour:
+
+1. Generate a new keypair with a new `kid`.
+2. Publish **both** public keys in your JWK Set, and start signing with the new one. Anything holding a cached copy of the old set still verifies your old key, so nothing breaks mid-rotation.
+3. After an hour, drop the old key from the set.
+
+Skipping step 2 means assertions signed with the new key fail against every cached copy of the old set until it expires.
+
+Once your set holds more than one key, the `kid` header becomes mandatory: PostHog will not try each key in turn, so a rotated-out key stops working rather than lingering.
+
 ### Authenticating with a client secret
 
 If PostHog issued you a `client_id` and `client_secret` directly rather than through CIMD, send them either as HTTP Basic credentials:
@@ -288,6 +401,8 @@ or as `client_id` and `client_secret` in the request body. Basic is the only opt
 ## API reference
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
+
+The two regions are separate deployments with separate databases. Your client must be [registered in each region you serve](#register-your-client), tokens issued by one are not valid at the other, and a `client_assertion` must name the region it is sent to in its `aud`.
 
 Every request must include the `API-Version: 0.1d` header.
 
