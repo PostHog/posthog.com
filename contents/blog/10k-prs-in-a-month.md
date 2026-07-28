@@ -1,5 +1,5 @@
 ---
-date: "2026-07-24"
+date: "2026-07-28"
 title: "10,000 PRs a month is easy: How devex is evolving at PostHog"
 author:
   - paul-dambra
@@ -86,7 +86,7 @@ But in reality, there's a lot of stuff that we can't let break. For example, acc
 
 Safety is not quality though, so we have some measures to help us see how things are changing. 
 
-The first is size. Line count is a rough proxy. Past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs but not hugely bigger. Partly that is our engineers driving quality.
+The first is size. Line count is a rough proxy for quality. Less is better as past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs but not hugely bigger. Partly that is our engineers driving quality.
 
 | Percentile | Wk of May 25 (lines) | Wk of Jul 13 (lines) | Change |
 | ---------- | -------------------- | -------------------- | ------ |
@@ -95,7 +95,7 @@ The first is size. Line count is a rough proxy. Past some threshold people stop 
 | p90        | 1,004                | 1,432                | +43%   |
 | p99        | 7,718                | 14,023               | +82%   |
 
-Another way is PR titles since we use conventional commits like `fix`, `feat`, and `revert` to signal the type of work in the PR.
+Another way to judge quality is through PR titles. We use conventional commits like `fix`, `feat`, and `revert` to signal the type of work in the PR.
 
 | Prefix              | May 2025 (count/share) | Nov 2025    | Jun 2026      |
 | ------------------- | ---------------------- | ----------- | ------------- |
@@ -107,7 +107,7 @@ Another way is PR titles since we use conventional commits like `fix`, `feat`, a
 | perf                | 4 / 0.5%               | 5 / 0.4%    | 68 / 1.4%     |
 | revert              | 1 / 0.1%               | 5 / 0.4%    | 9 / 0.2%      |
 
-The composition is stable across the last year or so. Importantly reverts as a proportion of PRs has barely changed. And we are eager to revert whenever we see a need to. So, that's a good signal that production is not breaking more under the load of agentic PRs.
+The distribution of PR types is stable across the last year. AI isn't just creating more fixes or refactors. More importantly, the percentage of reverts have barely changed, and we are eager to revert whenever we need to. This is a sign production isn't breaking more under the load of agentic PRs. 
 
 The ultimate goal is reliability for all of PostHog, which has remained solid:
 
