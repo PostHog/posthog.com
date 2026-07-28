@@ -152,6 +152,9 @@
         {
             "source": "/docs/ai-observability/query-traces-mcp",
             "destination": "/docs/ai-observability/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/product-analytics/build-insights-mcp",
             "destination": "/docs/product-analytics/surfaces/mcp",
             "statusCode": 301
