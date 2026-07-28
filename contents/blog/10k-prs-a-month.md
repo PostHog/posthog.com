@@ -26,15 +26,15 @@ More PRs isn't a good thing in and of itself. It happens as a result of hiring t
 
 Here's how we've increased the volume of engineering work while still delivering reliable systems, and the changes we're making to make sure this remains the case.
 
-## There's no token budget at PostHog
+## Where has this acceleration come from?
+
+The simple answer: people using AI a lot more.
 
 There's no token budget set by some higher-ups at PostHog. We want people to figure out how we _make use of new tools_ and _create new tools_. It's up to them as individuals to use the right amount of tokens, and none of us are going to pretend we know what that amount is. 
 
 This works because it's a big part of our culture to value trust and feedback over process. If we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. Everyone else can learn from that too.
 
-## What being AI-pilled looks like
-
-Everybody's using agents and writing skills, but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we've moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing very fast.
+Everybody's using agents and writing skills, but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing fast.
 
 Speeding up the rate we create PRs doesn't necessarily mean speeding up the rate we can handle them. For that, we're relying on agentic loops getting those PRs ready for human attention. Things like: 
 
@@ -46,13 +46,13 @@ The folks who are pushing the limits of what they can achieve have written their
 
 ## Getting off local machines
 
-The PostHog stack is very heavy for local development, so we've always needed powerful dev machines. This was fine until people started wanting to run multiple copies of the stack to test PRs. We're hitting the limits of what's possible now; there's only so much RAM and disk you can put into a Macbook.
+The PostHog stack is very heavy for local development, so we've always needed powerful dev machines. This was fine until people started wanting to run multiple copies of the stack to test PRs. We're hitting the limits of what's possible now; there's only so much RAM and disk you can put into a MacBook.
 
 So, we're building out cloud dev machines. They're skill-driven so you just ask your agent to start a dev machine with a prompt like: 
 
 > Start a dev box, run this PR in it, and record me a video of the changes that we're making so I can see the output of the test.
 
-This is powered by our [internal developer CLI `hogli`](https://github.com/PostHog/posthog/tree/master/tools/hogli), which also pushes CI checks down into local dev by helping agents better test code locally. It also includes a tool to quickly send feedback to our devex team when something is difficult (for people or agents), which helps [our devex team](/teams/developer-experience) make specific improvements fast.
+This is powered by our internal developer CLI [`hogli`](https://github.com/PostHog/posthog/tree/master/tools/hogli), which also pushes CI checks down into local dev by helping agents better test code locally. It also includes a tool to quickly send feedback to our devex team when something is difficult (for people or agents), which helps [our devex team](/teams/developer-experience) make specific improvements fast.
 
 ## Battling the bottleneck of CI
 
@@ -88,7 +88,7 @@ But in reality, there are many services we can't break. For example, accepting a
 
 Safety is not quality though, so we have some measures to help us see how things are changing. 
 
-The first is size. Line count is a rough proxy for quality. Less is better as past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs, especially at the extremely, but the average PR is not hugely bigger. Partly that is our engineers driving quality.
+The first is size. Line count is a rough proxy for quality. Less is better as past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs, especially at the extreme, but the average PR is not hugely bigger. Partly that is our engineers driving quality.
 
 | Percentile | Wk of May 25 (lines) | Wk of Jul 13 (lines) | Change |
 | ---------- | -------------------- | -------------------- | ------ |
@@ -127,7 +127,7 @@ The ultimate goal is [reliability for all of PostHog](https://www.posthogstatus.
 
 With agents creating more and more of the PRs, [code review](/newsletter/code-review-tips) becomes a bigger part of the work. Engineers spend less time on each review, so we need to find ways of making that safe while maintaining momentum.
 
-We require approvals on all our PRs, but an increasing number of those approvals are coming from StampHog, an agent that runs deterministic safety checks then reviews with an LLM for showstoppers. If it's happy, it approves. If not, it escalates to human review. 
+We require approvals on all our PRs. An increasing number of these approvals are coming from StampHog, an agent that runs deterministic safety checks then reviews with an LLM for showstoppers. If it's happy, it approves. If not, it escalates to human review. 
 
 We built StampHog by looking at:
 
@@ -150,7 +150,7 @@ Simple reviews have become like linting. Humans shouldn't be doing either.
 
 For example, if someone told you 12 months ago that a line should be wrapped at a particular character, you would say, "Hey, I've updated the linter, you can ignore this." Agents can basically do this for logic problems and laziness faster, more effectively, and more consistently than a human.
 
-This means we can have a world where humans review code less. And the code reviews they do need to do are more effective as a result. We're doing a lot of work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
+This means we can have a world where humans review code less. And the code reviews they do are more effective as a result. We're continuing to work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
 
 ## Agents need to test more of the code
 
@@ -162,8 +162,8 @@ We're not in the old world of writing some Playwright code by hand to assess a c
 - See if it still works
 - See if it does what it claims to do
 
-<TeamMember name="Pawel Cebula" photo /> built an early version of this with a [`qa-frontend` skill](https://github.com/PostHog/posthog/pull/72523) that checks out a PR, designs test cases, and drives the actual UI in a browser. The agent's output lands as annotated screenshots, an animated reel inline, and even an optional recorded video.
+<TeamMember name="Pawel Cebula" photo /> built an early version of this with a [qa-frontend skill](https://github.com/PostHog/posthog/pull/72523) that checks out a PR, designs test cases, and drives the actual UI in a browser. The agent's output lands as annotated screenshots, an animated reel inline, and even an optional recorded video.
 
 This makes reviews easier, but it also gives agents a way to escalate and say "I need a human! I don't like it, it doesn't make sense to me, it needs further thought, it isn't good enough, or doesn't work, etc." The agent can also say "hey, I wrote a Playwright test for this because I think it should stay in the application." 
 
-These QA skills are tasks that humans could do themselves, but the point is to reduce the amount of work we do per PR if we're reviewing 2-4x as many as before. If we don't, we'll hit a ceiling – not because we're at the limit of the system, but because humans physically don't have the time. All our efforts here are working to avoid this. That's what we believe makes for good devex in the age of agents.
+Agents are doing tasks that humans could do themselves, but the point is to reduce the amount of work we do per PR if we're reviewing 2-4x as many as before. If we don't, we'll hit a ceiling – not because we're at the limit of the system, but because humans physically don't have the time. All our efforts here are working to avoid this. That's what we believe makes for good devex in the age of agents.
