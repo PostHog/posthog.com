@@ -50,8 +50,8 @@ const featureComparisonRows = [
     ),
     feature(
         'configurable_types',
-        'Configurable scanner types',
-        'Choose how a scanner works – monitor, classifier, scorer, or summarizer – instead of a fixed job.'
+        'Configurable analysis types',
+        'Choose the shape of the output rather than taking a single fixed job.'
     ),
     feature(
         'custom_prompt',
@@ -69,9 +69,14 @@ const featureComparisonRows = [
         'Automatically bucket sessions by intent, outcome, or any label you define.'
     ),
     feature(
-        'friction_score',
-        'Numeric friction / struggle score',
-        'Rate how much friction each session hit on a scale you control.'
+        'friction_score_trained',
+        'Vendor-trained friction score',
+        'A trained, benchmarked numeric score for each session, out of the box.'
+    ),
+    feature(
+        'friction_score_custom',
+        'Score sessions on your own criteria',
+        'Define what gets scored and on what scale, rather than taking a vendor-defined score.'
     ),
     feature(
         'theme_summary',
@@ -80,7 +85,7 @@ const featureComparisonRows = [
     ),
     feature(
         'nl_search',
-        'Natural-language search over sessions',
+        'Natural-language search over recordings',
         'Find the recordings you need by describing them in plain language.'
     ),
     feature(
@@ -111,13 +116,13 @@ const featureComparisonRows = [
     ),
     feature(
         'insights_dashboards',
-        'Build insights / dashboards on AI output',
-        'Chart and monitor what scanners find like any other product metric.'
+        'Chart scanner output values over time',
+        "Chart and monitor the scanner's own output values, not just the underlying behavioural signals."
     ),
     feature(
         'feed_experiments',
-        'Feed experiments / cohorts',
-        'Use scanner output to build cohorts and measure it in experiments.'
+        'Feed experiments and cohorts with scanner output values',
+        "Build cohorts from a scanner's output values and measure them in experiments."
     ),
     feature(
         'proactive_alerts',
@@ -125,16 +130,12 @@ const featureComparisonRows = [
         "Get notified when a scanner's output spikes or crosses a threshold."
     ),
     { type: 'header' as const, label: 'Access and agents' },
-    feature(
-        'mcp_access',
-        'MCP / agent access',
-        'Author, run, and read scanners from any MCP client via the PostHog MCP.'
-    ),
+    feature('mcp_access', 'MCP / agent access', 'Author, run, and read AI analyses of recordings from any MCP client.'),
     feature('rest_api', 'REST API for AI output', 'Pull scanner observations programmatically over a REST API.'),
     feature(
         'self_driving',
         'Feeds the self-driving loop',
-        'Findings raise signals that agents can research and turn into a pull request.'
+        'Findings from recordings raise signals that agents can research and turn into a pull request.'
     ),
     { type: 'header' as const, label: 'Recordings and platform' },
     feature('share_recordings', 'Share recordings', 'Share a link to any recording with your team.'),
