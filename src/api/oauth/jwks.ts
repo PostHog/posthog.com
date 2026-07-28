@@ -10,7 +10,7 @@ import { getPublicJwks, hasSigningKey } from '../../lib/cimd'
  * signing key in env. A static file would be a second copy to keep in sync, and the two silently
  * disagreeing is exactly what breaks assertion verification.
  *
- * Public by design: this is the public half of the keypair, and clients have to be able to fetch
+ * Public by design: this is the public half of the key pair, and clients have to be able to fetch
  * it unauthenticated. PostHog caches it for an hour, so this is not a hot path.
  */
 export default function handler(_req: GatsbyFunctionRequest, res: GatsbyFunctionResponse): void {

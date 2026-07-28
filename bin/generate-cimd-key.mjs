@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generate the RSA keypair backing posthog.com's CIMD client identity.
+ * Generate the RSA key pair backing posthog.com's CIMD client identity.
  *
  * Only the private key is stored, as the `CIMD_CLIENT_PRIVATE_KEY` env var. The public half is
  * derived from it and served at /api/oauth/jwks, so there is nothing to commit and no second
