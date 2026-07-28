@@ -224,7 +224,7 @@ const DOCS_GROUPS: DocsGroup[] = [
             'AI Observability',
             'Error Tracking',
         ],
-        overflow: 'All tools',
+        overflow: 'More tools',
         icon: 'IconApps',
         color: 'blue',
     },
@@ -311,7 +311,11 @@ export const getDocsMenuItems = (): MenuItemType[] => {
         grouped.push(...groupItems)
     })
 
-    return grouped
+    // Icons stay on the top level only; nested levels are noisy and inconsistently sourced.
+    const stripIcons = (menuItems: MenuItemType[]): MenuItemType[] =>
+        menuItems.map(({ icon, ...item }) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
+
+    return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 }
 
 const mergedDocsMenu = (allProducts: any[]) => {
