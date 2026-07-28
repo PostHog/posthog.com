@@ -596,20 +596,21 @@ export default function DataStack(): JSX.Element {
 
                         {/* Built for data engineers, loved by product teams */}
                         <h2 className={sectionHeadingClassName}>Built for data engineers, loved by product teams</h2>
-                        <div className="not-prose grid grid-cols-1 gap-4 @xl/reader-content:grid-cols-2">
-                            {personas.map(({ title, description, Icon, iconColor, bullets }) => (
-                                <div
-                                    key={title}
-                                    className="flex min-h-full flex-col rounded-md border border-primary bg-primary p-5 shadow-sm @lg/reader-content:p-6"
-                                >
-                                    <p className="m-0 flex items-center gap-2 text-lg font-bold text-primary">
-                                        <Icon className={`size-5 shrink-0 ${iconColor}`} />
-                                        {title}
-                                    </p>
-                                    <p className="m-0 mt-2 text-sm text-secondary">{description}</p>
-                                    <IconList items={bullets} />
-                                </div>
-                            ))}
+                        {/* One card split in two, so the shorter column's leftover space reads as
+                            interior whitespace rather than an unfilled box. */}
+                        <div className="not-prose overflow-hidden rounded-md border border-primary bg-primary shadow-sm">
+                            <div className="grid grid-cols-1 divide-y divide-primary @xl/reader-content:grid-cols-2 @xl/reader-content:divide-x @xl/reader-content:divide-y-0">
+                                {personas.map(({ title, description, Icon, iconColor, bullets }) => (
+                                    <div key={title} className="p-5 @lg/reader-content:p-6">
+                                        <p className="m-0 flex items-center gap-2 text-lg font-bold text-primary">
+                                            <Icon className={`size-5 shrink-0 ${iconColor}`} />
+                                            {title}
+                                        </p>
+                                        <p className="m-0 mt-2 text-sm text-secondary">{description}</p>
+                                        <IconList items={bullets} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
                         {/* Better data in, better AI out */}
