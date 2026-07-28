@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
-import { useApp } from '../../context/App'
-import { useWindow } from '../../context/Window'
 import { CallToAction } from 'components/CallToAction'
 import { HedgehogCodeBubble, HedgehogPuzzle } from '@posthog/brand/hoggies'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -60,7 +58,7 @@ const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
 
-// Icon + text rows, used for the persona cards and the "store"/"act" feature lists.
+// Icon + text rows, used for the persona columns and the "Better together" tab.
 const IconList = ({ items }: { items: { Icon: IconComponent; color: string; text: React.ReactNode }[] }) => (
     <ul className="mt-3 mb-0 list-none space-y-2 pl-0">
         {items.map(({ Icon, color, text }, index) => (
@@ -589,20 +587,10 @@ const faqItems = [
 ]
 
 export default function DataStack(): JSX.Element {
-    const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, 'context-warehouse.md')
-        }
-    }, [])
-
     return (
         <>
             <SEO
                 title="Context warehouse - PostHog"
-                updateWindowTitle={false}
                 description="Every feature you ship is downstream of your data. Collect, store, transform, query using your context warehouse, and let PostHog self-drive development based on customer signals."
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/opengraph_3_cf73189604.png"
                 imageType="absolute"
