@@ -28,7 +28,7 @@ export const dataPipelines = {
             name: 'Surfaces',
         },
         {
-            name: 'Web app',
+            name: 'PostHog Web',
             url: '/docs/cdp/surfaces/web-app',
             icon: 'IconLaptop',
             color: 'seagreen',
@@ -45,7 +45,7 @@ export const dataPipelines = {
             ],
         },
         {
-            name: 'MCP',
+            name: 'PostHog MCP',
             url: '/docs/cdp/surfaces/mcp',
             icon: 'IconLlmPromptEvaluation',
             color: 'green',
@@ -112,7 +112,7 @@ export const dataPipelines = {
                     name: 'Destinations',
                 },
                 {
-                    name: 'Slack',
+                    name: 'PostHog Slack',
                     url: '/docs/cdp/destinations/slack',
                     badge: {
                         title: 'Popular',
