@@ -337,6 +337,22 @@ When creating or editing an alert, you can add notification destinations inline:
 
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 
+### Snooze alerts from Slack
+
+When an alert fires to a Slack channel, the notification includes a **Snooze** dropdown that lets you silence the alert directly from Slack without opening PostHog:
+
+1. Click the **Snooze…** dropdown on the alert message.
+2. Select a preset duration: **1 hour**, **6 hours**, **1 day**, or **1 week**.
+3. Alternatively, select **Pick a date & time…** to open a modal where you can choose a specific snooze end time (up to 31 days out).
+
+When you snooze an alert from Slack:
+
+- The alert won't fire again until the snooze period ends.
+- The Slack message updates in place to confirm the snooze.
+- The action is logged in the PostHog [activity log](/docs/data/activity-log).
+
+> **Note:** You must have viewer access to the insight and be a member of the project to snooze alerts from Slack.
+
 ## Advanced options
 
 You can configure alerts to skip checking on weekends.
