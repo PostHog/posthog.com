@@ -641,7 +641,10 @@ export default function DataStack(): JSX.Element {
                                     </div>
                                 </div>
                                 <div className="hidden justify-center @lg/reader-content:flex">
-                                    <HedgehogCodeBubble size={280} className="w-full max-w-[280px]" />
+                                    <HedgehogCodeBubble
+                                        size={280}
+                                        className="w-full max-w-[280px] motion-safe:animate-[context-warehouse-hog-float_9s_ease-in-out_infinite]"
+                                    />
                                 </div>
                             </div>
                         </div>
