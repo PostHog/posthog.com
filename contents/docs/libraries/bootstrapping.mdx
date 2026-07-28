@@ -16,7 +16,7 @@ Bootstrapping is available in the [JavaScript web](/docs/libraries/js), [React N
 
 Pass known state in the SDK's `bootstrap` configuration before initialization:
 
-1. Your app gets the state it needs, such as a signed-in user ID or server-evaluated feature flags.
+1. Your app gets the state it needs, such as a signed-in user ID or server-evaluated Feature Flags.
 2. Your app passes that state to `bootstrap` when it initializes PostHog.
 3. The SDK applies the state immediately.
 4. The SDK persists or replaces each value according to its lifecycle.
@@ -26,7 +26,7 @@ Pass known state in the SDK's `bootstrap` configuration before initialization:
 | Distinct ID | Start the SDK with a known anonymous or identified identity | The SDK applies or reconciles the ID according to the platform's persistence rules |
 | Identified state | Tell the SDK whether the distinct ID belongs to an identified person | The SDK treats the ID as anonymous or identified and merges identities when required |
 | Session ID | Continue the same session across PostHog initializations | The JavaScript web SDK uses it as the active session ID |
-| Feature flags and payloads | Make server-evaluated flags available immediately | The next complete `/flags` response replaces the bootstrapped values |
+| Feature Flags and payloads | Make server-evaluated flags available immediately | The next complete `/flags` response replaces the bootstrapped values |
 
 The JavaScript web SDK uses `distinctID`, `isIdentifiedID`, and `sessionID`. React Native, iOS, Android, and Flutter use `distinctId` and `isIdentifiedId`. Only the JavaScript web SDK supports bootstrapping a session ID.
 
@@ -107,9 +107,9 @@ Use bootstrap when your app knows the signed-in identity before SDK initializati
 
 ## Bootstrap a session ID
 
-Use `sessionID` with the JavaScript web SDK to continue a session across PostHog initializations. This is useful when tracking a session across domains because it preserves one session count and a connected session replay.
+Use `sessionID` with the JavaScript web SDK to continue a session across PostHog initializations. This is useful when tracking a session across domains because it preserves one session count and a connected Session Replay.
 
-Get the current session ID by calling `posthog.get_session_id()` and pass it to the next initialization. The session ID must be a valid UUID v7, unique to the user, timestamped no later than the first event in the session, and no more than 24 hours before the last event in the session.
+Get the current session ID by calling `posthog.get_session_id()` and pass it to the next initialization. The session ID must be a valid UUID v7, unique to the person, timestamped no later than the first event in the session, and no more than 24 hours before the last event in the session.
 
 ```js-web
 posthog.init('<ph_project_token>', {
@@ -123,17 +123,17 @@ posthog.init('<ph_project_token>', {
 
 See the [cross-domain tracking tutorial](/tutorials/cross-domain-tracking) for a complete implementation.
 
-## Bootstrap feature flags
+## Bootstrap Feature Flags
 
 Pass server-evaluated feature flag values and payloads to `bootstrap` to make them available when the SDK initializes. The SDK uses these values until it receives fresh values from PostHog.
 
-See [bootstrapping feature flags](/docs/feature-flags/bootstrapping) for evaluation consistency, flag lifecycle, local evaluation, and implementation examples.
+See [bootstrapping Feature Flags](/docs/feature-flags/bootstrapping) for evaluation consistency, flag lifecycle, local evaluation, and implementation examples.
 
 ## Behavior on mobile SDKs
 
 The iOS, Android, and Flutter SDKs bootstrap through `PostHogBootstrapConfig` and persist identity and flags on the device. Assign `config.bootstrap` before calling `setup()`. Bootstrapping requires iOS SDK `3.66.0`+, Android SDK `3.55.0`+, or Flutter SDK `5.31.0`+.
 
-> **React Native** uses the posthog-js-style `bootstrap` option instead of `PostHogBootstrapConfig`. Bootstrapped identity doesn't overwrite persisted identity. When both bootstrapped and persisted flags exist, persisted values take precedence.
+> **React Native** uses a `bootstrap` option like the JavaScript web SDK instead of `PostHogBootstrapConfig`. Bootstrapped identity doesn't overwrite persisted identity. When both bootstrapped and persisted flags exist, persisted values take precedence.
 
 import MobileBootstrapBehavior from "./_snippets/mobile-bootstrap-behavior.mdx"
 

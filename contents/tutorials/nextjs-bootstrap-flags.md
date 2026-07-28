@@ -10,7 +10,7 @@ tags:
   - feature flags
 ---
 
-[Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap feature flags](/docs/feature-flags/bootstrapping) on page load and make them available immediately without making an additional request. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
+[Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) enables you to run functions between requests and responses. We can use this to [bootstrap Feature Flags](/docs/feature-flags/bootstrapping) on page load and make them available immediately without making an additional request. This is useful for redirecting, showing components without flickering, avoiding layout changes, and more.
 
 In this tutorial, we create a basic Next.js app, set up [feature flags](/docs/feature-flags) with PostHog, write middleware to get those feature flags, and bootstrap them in the client. 
 
