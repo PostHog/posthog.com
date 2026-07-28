@@ -44,7 +44,7 @@ Convex lets you install [components](https://docs.convex.dev/components) — sel
 - **Root component tables** appear with their original name (e.g., `users`, `messages`)
 - **Component tables** appear with a component prefix using dot notation (e.g., `betterAuth.users`, `betterAuth.sessions`)
 
-Existing synced tables are unaffected by this feature — no resync is required.
+To sync components in older Convex sources, you currently need to delete the source and re-add it for PostHog to pick up component tables.
 
 ### How syncing works
 
