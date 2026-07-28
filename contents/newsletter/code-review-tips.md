@@ -35,7 +35,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 ![Slack thread asking devs how they review agent-generated code, with a joke reply meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662228/stop_being_the_code_review_bottleneck_1_slack_thread_8ca1a6a450.jpg)
 
-The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-in-a-month#more-prs-means-more-review-but-humans-dont-need-to-do-them-all).
+The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-a-month#humans-dont-need-to-review-every-pr).
 
 The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of their own blind spots.[^1]
 
