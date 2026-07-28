@@ -416,7 +416,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 Using Product Analytics and PostHog MCP, you can{' '}
-                                <Link to="/docs/product-analytics/build-insights-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/product-analytics/surfaces/mcp" state={{ newWindow: true }}>
                                     build funnels, retention charts, and user paths
                                 </Link>{' '}
                                 from your editor. Then drop straight into a playlist of session replays for the users
