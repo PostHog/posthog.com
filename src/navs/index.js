@@ -15,7 +15,58 @@ export const dataPipelines = {
             color: 'seagreen',
         },
         {
-            name: 'Getting started',
+            name: 'Get started',
+        },
+        {
+            name: 'Start here',
+            url: '/docs/cdp/start-here',
+            icon: 'IconListCheck',
+            color: 'orange',
+            featured: true,
+        },
+        {
+            name: 'Surfaces',
+        },
+        {
+            name: 'PostHog Web',
+            url: '/docs/cdp/surfaces/web-app',
+            icon: 'IconLaptop',
+            color: 'seagreen',
+            featured: true,
+            children: [
+                {
+                    name: 'Overview',
+                    url: '/docs/cdp/surfaces/web-app',
+                },
+                {
+                    name: 'Write Hog functions with PostHog AI',
+                    url: '/docs/cdp/hog-functions-ai',
+                },
+            ],
+        },
+        {
+            name: 'PostHog MCP',
+            url: '/docs/cdp/surfaces/mcp',
+            icon: 'IconLlmPromptEvaluation',
+            color: 'green',
+            featured: true,
+        },
+        {
+            name: 'PostHog Desktop',
+            url: '/docs/cdp/surfaces/desktop',
+            icon: 'IconCode',
+            color: 'orange',
+            featured: true,
+        },
+        {
+            name: 'API',
+            url: '/docs/cdp/surfaces/api',
+            icon: 'IconBrackets',
+            color: 'blue',
+            featured: true,
+        },
+        {
+            name: 'Sources',
         },
         {
             name: 'Link sources',
@@ -39,6 +90,9 @@ export const dataPipelines = {
             ],
         },
         {
+            name: 'Destinations',
+        },
+        {
             name: 'Realtime destinations',
             url: '/docs/cdp/destinations',
             icon: 'IconLive',
@@ -58,7 +112,7 @@ export const dataPipelines = {
                     name: 'Destinations',
                 },
                 {
-                    name: 'Slack',
+                    name: 'PostHog Slack',
                     url: '/docs/cdp/destinations/slack',
                     badge: {
                         title: 'Popular',
@@ -286,6 +340,9 @@ export const dataPipelines = {
         },
         {
             name: 'Transformations',
+        },
+        {
+            name: 'Transformations',
             url: '/docs/cdp/transformations',
             icon: 'IconWrench',
             color: 'yellow',
@@ -311,24 +368,13 @@ export const dataPipelines = {
         },
 
         {
-            name: 'Guides',
+            name: 'Resources',
         },
         {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
             url: '/docs/cdp/fivetran-airbyte',
-        },
-        {
-            name: 'PostHog AI',
-        },
-        {
-            name: 'Write Hog functions with PostHog AI',
-            url: '/docs/cdp/hog-functions-ai',
-            icon: 'IconSparkles',
-            color: 'purple',
-            featured: true,
-        },
-        {
-            name: 'Resources',
+            icon: 'IconBook',
+            color: 'seagreen',
         },
         {
             name: 'Troubleshooting',
