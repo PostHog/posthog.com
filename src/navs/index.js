@@ -5369,7 +5369,7 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/error-tracking/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'seagreen',
@@ -5406,7 +5406,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'MCP',
+                    name: 'PostHog MCP',
                     url: '/docs/error-tracking/surfaces/mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
@@ -5420,7 +5420,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'CLI',
+                    name: 'PostHog CLI',
                     url: '/docs/error-tracking/surfaces/cli',
                     icon: 'IconTerminal',
                     color: 'seagreen',
