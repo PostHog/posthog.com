@@ -14,10 +14,12 @@ import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 ```bash
 cargo add opentelemetry opentelemetry_sdk opentelemetry-appender-tracing tracing
 cargo add tracing-subscriber --features env-filter
-cargo add opentelemetry-otlp --no-default-features --features logs,http-proto,reqwest-blocking-client,reqwest-rustls
+cargo add opentelemetry-otlp --features reqwest-rustls
 ```
 
-> **Important:** `opentelemetry-otlp` doesn't enable a TLS backend by default, so `reqwest-rustls` is required to reach an `https` endpoint. Without it, every export fails immediately with `HTTP export failed: network error`.
+> **Important:** `opentelemetry-otlp` enables no TLS backend by default, so `reqwest-rustls` is required to reach an `https` endpoint. Without it, every export fails immediately with `HTTP export failed: network error`.
+
+This guide targets `opentelemetry*` 0.32 and needs 0.28 or later. Earlier releases use `LoggerProvider` rather than `SdkLoggerProvider`, and a different `Resource` API.
 
 `opentelemetry-appender-tracing` bridges the [`tracing`](https://docs.rs/tracing) ecosystem into OpenTelemetry. If your application uses the [`log`](https://docs.rs/log) crate instead, swap it for `opentelemetry-appender-log`.
 
@@ -35,7 +37,7 @@ You can find your project token in [Project Settings](https://app.posthog.com/se
 
 <Step title="Configure the SDK" badge="required">
 
-Set up the OpenTelemetry SDK to send logs to PostHog.
+Set up the OpenTelemetry SDK to send logs to PostHog. This reads the token from the environment rather than hardcoding it, so the value stays out of your source tree.
 
 ```rust
 use std::collections::HashMap;
@@ -45,14 +47,16 @@ use opentelemetry_otlp::{LogExporter, Protocol, WithExportConfig, WithHttpConfig
 use opentelemetry_sdk::{logs::SdkLoggerProvider, Resource};
 use tracing_subscriber::{prelude::*, EnvFilter};
 
-fn main() {
+fn init_logs() -> SdkLoggerProvider {
+    let token = std::env::var("POSTHOG_PROJECT_TOKEN").expect("POSTHOG_PROJECT_TOKEN not set");
+
     let exporter = LogExporter::builder()
         .with_http()
         .with_endpoint("<ph_client_api_host>/i/v1/logs")
         .with_protocol(Protocol::HttpBinary)
         .with_headers(HashMap::from([(
             "Authorization".to_string(),
-            "Bearer <ph_project_token>".to_string(),
+            format!("Bearer {token}"),
         )]))
         .build()
         .expect("failed to build the OTLP log exporter");
@@ -62,25 +66,45 @@ fn main() {
         .with_batch_exporter(exporter)
         .build();
 
-    // Without these directives the SDK exports its own diagnostics as log lines,
-    // which produce further diagnostics on the next export.
-    let filter = EnvFilter::new("info")
+    // hyper, h2, and reqwest don't propagate OpenTelemetry's suppression context, so
+    // their own logs would loop back through the exporter. opentelemetry=off keeps the
+    // SDK's diagnostics out of your PostHog log volume if you raise this above info.
+    let export_filter = EnvFilter::new("info")
         .add_directive("opentelemetry=off".parse().unwrap())
         .add_directive("hyper=off".parse().unwrap())
+        .add_directive("h2=off".parse().unwrap())
         .add_directive("reqwest=off".parse().unwrap());
 
     tracing_subscriber::registry()
-        .with(OpenTelemetryTracingBridge::new(&provider).with_filter(filter))
-        // Optional, also log to stdout
-        .with(tracing_subscriber::fmt::layer())
+        .with(OpenTelemetryTracingBridge::new(&provider).with_filter(export_filter))
+        // Export failures are only ever reported here, so keep this layer.
+        .with(
+            tracing_subscriber::fmt::layer().with_filter(
+                EnvFilter::new("info").add_directive("opentelemetry=debug".parse().unwrap()),
+            ),
+        )
         .init();
+
+    provider
+}
+
+fn main() {
+    let provider = init_logs();
 
     tracing::info!("Service started");
 
-    // Batched logs are dropped if the process exits without flushing.
-    provider.shutdown().expect("failed to flush logs");
+    // ... run your application here ...
+
+    // Flush on graceful exit. Logs emitted after this are silently dropped.
+    if let Err(err) = provider.shutdown() {
+        eprintln!("failed to flush logs: {err}");
+    }
 }
 ```
+
+Keep `provider` alive for the lifetime of the process and call `shutdown()` only on graceful exit, not at the end of your setup function. Anything logged after `shutdown()` is dropped without an error.
+
+The service name is what you filter on in PostHog, so set it to something you'll recognize. To set it outside your application instead, drop `with_service_name()` and export the standard `OTEL_SERVICE_NAME` environment variable, which `Resource::builder()` picks up on its own.
 
 Alternatively, you can pass the project token as a query parameter instead of a header:
 
@@ -88,9 +112,11 @@ Alternatively, you can pass the project token as a query parameter instead of a 
 .with_endpoint("<ph_client_api_host>/i/v1/logs?token=<ph_project_token>")
 ```
 
-The service name is what you filter on in PostHog, so set it to something you'll recognize. To set it outside your application instead, drop `with_service_name()` and export the standard `OTEL_SERVICE_NAME` environment variable, which `Resource::builder()` picks up on its own.
+Prefer the header where you control the client. Tokens in a URL tend to end up in proxy and CDN access logs.
 
-> **Note:** Use the blocking `reqwest` client even in an async application. The batch log processor exports from its own dedicated thread, so the async client (the `reqwest-client` feature) panics there with `there is no reactor running, must be called from the context of a Tokio 1.x runtime`.
+> **Note:** Use the blocking `reqwest` client even in an async application. The batch log processor exports from its own dedicated thread, so the async client (the `reqwest-client` feature) panics there with `there is no reactor running, must be called from the context of a Tokio 1.x runtime`. Because Cargo unifies features across your dependency graph, and `reqwest-client` takes priority over `reqwest-blocking-client` when both are enabled, another crate turning on `reqwest-client` is enough to trigger this.
+
+> **Note:** On Tokio's current-thread runtime, don't call the blocking `shutdown()` from your main thread, as it can deadlock. Call it from a separate thread or via `tokio::task::spawn_blocking`.
 
 </Step>
 
@@ -104,9 +130,16 @@ tracing::warn!(endpoint = "/old-api", "Deprecated API used");
 tracing::error!(error = "Connection timeout", "Database connection failed");
 ```
 
-`tracing` levels map onto OpenTelemetry severities, so `info!`, `warn!`, and `error!` show up in PostHog as `info`, `warn`, and `error`.
+`tracing` levels map onto OpenTelemetry severities, so `info!`, `warn!`, and `error!` arrive with severity `info`, `warn`, and `error`. `debug!` and `trace!` are excluded by the `info` default in the filter above. Change it to `debug` if you want them in PostHog.
 
-To connect a log line to a person or a session replay, emit `posthogDistinctId` and `sessionId` as fields. See [linking logs to a person](/docs/logs/link-person) and [linking session replay](/docs/logs/link-session-replay).
+To connect a log line to a person or a session replay, emit `posthogDistinctId` and `sessionId` as fields:
+
+```rust
+// These keys are matched exactly. snake_case versions won't link.
+tracing::info!(posthogDistinctId = %user_id, sessionId = %session_id, "Checkout completed");
+```
+
+See [linking logs to a person](/docs/logs/link-person) and [linking session replay](/docs/logs/link-session-replay).
 
 </Step>
 
@@ -117,6 +150,8 @@ Once everything is configured, test that logs are flowing into PostHog:
 1. Send a test log from your application
 2. Check the PostHog Logs interface for your log entries
 3. Verify the logs appear in your project
+
+If nothing arrives, the `fmt` layer above is where the exporter reports itself. A working export logs `HttpClient.ExportStarted` followed by `HttpClient.ExportSucceeded`; a broken one logs `BatchLogProcessor.ExportError`. You can also see a `HttpLogsClient.ResponseParseError` about a Protobuf buffer underflow alongside a successful export, which is harmless: PostHog acknowledges the batch with a JSON body rather than a Protobuf one.
 
 <CallToAction type="primary" to="https://app.posthog.com/logs">
 View your logs in PostHog
