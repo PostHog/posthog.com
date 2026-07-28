@@ -20,7 +20,7 @@ The SmartReach connector syncs your sales engagement data into the PostHog Data 
 
 ## Prerequisites
 
-You need a SmartReach account with access to your API key and team ID.
+You need a SmartReach account with access to your API key and your team ID.
 
 ## Adding a data source
 
@@ -29,6 +29,7 @@ You need a SmartReach account with access to your API key and team ID.
 When linking SmartReach, you'll need:
 
 - **API key** – find it under **Settings → Integrations** in the [SmartReach app](https://app.smartreach.io/). The key is scoped to your user and grants read access to your prospects and campaigns.
+- **Team ID** – required by the current SmartReach API. Find it in your SmartReach team settings.
 - **Team ID** – required for new connections. Find it in your SmartReach team settings. It starts with `team_`.
 
 ## Sync modes
