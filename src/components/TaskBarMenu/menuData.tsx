@@ -204,7 +204,7 @@ type DocsGroup = {
 
 const DOCS_GROUPS: DocsGroup[] = [
     { label: 'Get started', items: ['Install PostHog', 'SDKs & frameworks', 'Self-driving'] },
-    { label: 'Products', items: ['Web app', 'PostHog Desktop', 'Slack app', 'MCP', 'CLI'] },
+    { label: 'Products', items: ['PostHog Web', 'PostHog Desktop', 'PostHog Slack', 'PostHog MCP', 'PostHog CLI'] },
     {
         label: 'Tools',
         items: [

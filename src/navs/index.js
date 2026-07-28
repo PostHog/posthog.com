@@ -2923,21 +2923,21 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Web app',
+            name: 'PostHog Web',
             icon: 'IconGlobe',
             color: 'blue',
             url: '/docs/self-driving/web',
             description: 'Use PostHog in your browser',
         },
         {
-            name: 'MCP',
+            name: 'PostHog MCP',
             icon: 'IconPlug',
             color: 'purple',
             url: '/docs/model-context-protocol',
             description: 'Connect PostHog to Claude, Cursor, and other agents',
         },
         {
-            name: 'CLI',
+            name: 'PostHog CLI',
             icon: 'IconTerminal',
             color: 'seagreen',
             url: '/docs/cli',
@@ -7359,7 +7359,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Slack app',
+            name: 'PostHog Slack',
             icon: 'IconAtSign',
             color: 'purple',
             url: '/docs/slack',
@@ -7370,7 +7370,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'Slack app',
+                    name: 'PostHog Slack',
                 },
                 {
                     name: 'Overview',
