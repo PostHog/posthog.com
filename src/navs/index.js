@@ -529,7 +529,7 @@ export const handbookSidebar = [
                 name: 'Brandbook',
             },
             {
-                name: 'Brand foundations',
+                name: 'Overview',
                 url: '/handbook/brand/foundations',
             },
             {
@@ -572,10 +572,6 @@ export const handbookSidebar = [
             {
                 name: 'Overview',
                 url: '/handbook/content',
-            },
-            {
-                name: 'Brand guidelines and messaging',
-                url: '/handbook/content/brand-message',
             },
             {
                 name: 'Video',
@@ -1708,7 +1704,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Customer industry segments',
-                        url: '/handbook/cs-and-onboarding/customer-industry-segments',
+                        url: '/handbook/growth/sales/customer-industry-segments',
                     },
                     {
                         name: 'Communications templates',
@@ -4523,6 +4519,18 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Webhooks',
+                    url: '/docs/replay-vision/webhooks',
+                    icon: 'IconWebhooks',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Improving accuracy',
+                    url: '/docs/replay-vision/quality',
+                    icon: 'IconThumbsUp',
+                    color: 'yellow',
+                },
+                {
                     name: 'Quota and limits',
                     url: '/docs/replay-vision/quota-and-limits',
                     icon: 'IconPercentage',
@@ -5184,7 +5192,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -5360,6 +5368,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/upload-source-maps/flutter',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/error-tracking/upload-source-maps/go',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/error-tracking/upload-source-maps/ios',
                         },
@@ -5390,36 +5402,67 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
                 },
                 {
-                    name: 'Issues and exceptions',
-                    url: '/docs/error-tracking/issues-and-exceptions',
-                    icon: 'IconWarning',
-                    color: 'yellow',
+                    name: 'Web app',
+                    url: '/docs/error-tracking/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/surfaces/web-app',
+                        },
+                        {
+                            name: 'Monitor and search issues',
+                            url: '/docs/error-tracking/monitoring',
+                        },
+                        {
+                            name: 'Manage and resolve issues',
+                            url: '/docs/error-tracking/managing-issues',
+                        },
+                        {
+                            name: 'Assign issues to teammates',
+                            url: '/docs/error-tracking/assigning-issues',
+                        },
+                        {
+                            name: 'Send alerts',
+                            url: '/docs/error-tracking/alerts',
+                        },
+                        {
+                            name: 'Detect spikes',
+                            url: '/docs/error-tracking/spikes',
+                        },
+                        {
+                            name: 'Set up integrations',
+                            url: '/docs/error-tracking/integrations',
+                        },
+                    ],
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/error-tracking/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
                     featured: true,
                 },
                 {
-                    name: 'Stack traces',
-                    url: '/docs/error-tracking/stack-traces',
+                    name: 'PostHog Desktop',
+                    url: '/docs/error-tracking/surfaces/desktop',
                     icon: 'IconCode',
-                    color: 'purple',
+                    color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Fingerprints',
-                    url: '/docs/error-tracking/fingerprints',
-                    icon: 'IconBrackets',
-                    color: 'blue',
+                    name: 'CLI',
+                    url: '/docs/error-tracking/surfaces/cli',
+                    icon: 'IconTerminal',
+                    color: 'seagreen',
                 },
                 {
-                    name: 'Releases',
-                    url: '/docs/error-tracking/releases',
-                    icon: 'IconTag',
-                    color: 'orange',
-                },
-                {
-                    name: 'Guides',
+                    name: 'Exceptions',
                 },
                 {
                     name: 'Capture exceptions',
@@ -5429,59 +5472,10 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Group exceptions into issues',
-                    url: '/docs/error-tracking/grouping-issues',
-                    icon: 'IconList',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Monitor and search issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconSearch',
-                    color: 'seagreen',
-                    featured: true,
-                },
-                {
-                    name: 'Manage and resolve issues',
-                    url: '/docs/error-tracking/managing-issues',
-                    icon: 'IconDashboard',
+                    name: 'Stack traces',
+                    url: '/docs/error-tracking/stack-traces',
+                    icon: 'IconCode',
                     color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Assign issues to teammates',
-                    url: '/docs/error-tracking/assigning-issues',
-                    icon: 'IconUser',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Set up integrations',
-                    url: '/docs/error-tracking/integrations',
-                    icon: 'IconApps',
-                    color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Send alerts',
-                    url: '/docs/error-tracking/alerts',
-                    icon: 'IconBell',
-                    color: 'red',
-                    featured: true,
-                },
-                {
-                    name: 'Detect spikes',
-                    url: '/docs/error-tracking/spikes',
-                    icon: 'IconGraph',
-                    color: 'yellow',
-                    featured: true,
-                },
-                {
-                    name: 'Rate limiting',
-                    url: '/docs/error-tracking/rate-limiting',
-                    icon: 'IconThrottle',
-                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -5502,21 +5496,40 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Debugging with MCP',
-                    url: '/docs/error-tracking/debug-errors-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
+                    name: 'Rate limiting',
+                    url: '/docs/error-tracking/rate-limiting',
+                    icon: 'IconThrottle',
+                    color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Fix with AI prompts',
-                    url: '/docs/error-tracking/fix-with-ai-prompts',
-                    icon: 'IconLlmPromptManagement',
+                    name: 'Issues',
+                },
+                {
+                    name: 'Issues and exceptions',
+                    url: '/docs/error-tracking/issues-and-exceptions',
+                    icon: 'IconWarning',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Fingerprints',
+                    url: '/docs/error-tracking/fingerprints',
+                    icon: 'IconBrackets',
                     color: 'blue',
+                },
+                {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
                     featured: true,
+                },
+                {
+                    name: 'Releases',
+                    url: '/docs/error-tracking/releases',
+                    icon: 'IconTag',
+                    color: 'orange',
                 },
                 {
                     name: 'Resources',
@@ -6650,7 +6663,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -6673,7 +6686,44 @@ export const docsMenu = {
                     color: 'teal',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'Web app',
+                    url: '/docs/mcp-analytics/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'MCP',
+                    url: '/docs/mcp-analytics/surfaces/mcp',
+                    icon: 'IconPlug',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/mcp-analytics/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/mcp-analytics/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Events',
+                },
+                {
+                    name: 'Event & property reference',
+                    url: '/docs/mcp-analytics/events',
+                    icon: 'IconList',
+                    color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Capturing agent intent',
@@ -6683,10 +6733,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Conversation IDs',
-                    url: '/docs/mcp-analytics/conversation-id',
-                    icon: 'IconMessage',
-                    color: 'salmon',
+                    name: 'Missing capabilities',
+                    url: '/docs/mcp-analytics/missing-capability',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                },
+                {
+                    name: 'Instrumentation',
                 },
                 {
                     name: 'Identifying users',
@@ -6695,10 +6748,10 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Missing capabilities',
-                    url: '/docs/mcp-analytics/missing-capability',
-                    icon: 'IconWrench',
-                    color: 'orange',
+                    name: 'Conversation IDs',
+                    url: '/docs/mcp-analytics/conversation-id',
+                    icon: 'IconMessage',
+                    color: 'salmon',
                 },
                 {
                     name: 'Custom events & metadata',
@@ -6714,14 +6767,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Reference',
-                },
-                {
-                    name: 'Event & property reference',
-                    url: '/docs/mcp-analytics/events',
-                    icon: 'IconList',
-                    color: 'red',
-                    featured: true,
+                    name: 'Resources',
                 },
                 {
                     name: 'Sample queries',
@@ -7347,6 +7393,12 @@ export const docsMenu = {
                     name: 'Workflow builder',
                     url: '/docs/workflows/workflow-builder',
                     icon: 'IconDatabase',
+                    color: 'orange',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
                     color: 'orange',
                 },
                 {

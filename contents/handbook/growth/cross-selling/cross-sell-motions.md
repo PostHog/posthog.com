@@ -85,13 +85,6 @@ Why Now? All good opportunities have this and are timeline driven.
 - Key champion leaves company
 - Data Engineer takes over ownership of PostHog
 
-**Optimal timeline if a customer is on an annual contract:**
-
-- **Months 1-2**: Pure adoption focus, no cross-sell
-- **Months 3-6**: Prime cross-sell window
-- **Months 7-9**: Reinforce value of expanded stack if adopted
-- **Months 10-12**: Focus on "Why stay with PostHog" rather than expansion/cross-sell (it's too late)
-
 ## Hypothetical approach
 
 One way of approaching this that we have seen work is a research -> QBR -> recommended cross-sell 

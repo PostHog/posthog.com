@@ -43,7 +43,7 @@ If a human can do something with your product, agents should be able to do it to
 
 Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B test](/experiments). It creates the [feature flag](/feature-flags), builds the insight, wires up the events, and stops because you never exposed a tool to create the experiment. It now has to ask you to do that part which defeats the purpose of using agents.
 
-![Agent-first infrastructure diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_7820f5d295.jpg)
+![Agent-first infrastructure diagram](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/image_7820f5d295.jpg)
 
 <Caption>Agent-first infrastructure</Caption>
 
