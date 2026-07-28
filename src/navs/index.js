@@ -4806,6 +4806,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Digests and alerts',
+                    url: '/docs/replay-vision/actions',
+                    icon: 'IconBell',
+                    color: 'yellow',
+                },
+                {
                     name: 'Webhooks',
                     url: '/docs/replay-vision/webhooks',
                     icon: 'IconWebhooks',
