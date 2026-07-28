@@ -7869,7 +7869,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7907,13 +7907,77 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/endpoints/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/endpoints/surfaces/web-app',
+                        },
+                        {
+                            name: 'Create SQL-based endpoint with variables',
+                            url: '/docs/endpoints/guide-variables',
+                        },
+                        {
+                            name: 'Create insight-based endpoint with variables',
+                            url: '/docs/endpoints/guide-breakdown',
+                        },
+                    ],
+                },
+                {
+                    name: 'API',
+                    url: '/docs/endpoints/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/endpoints/surfaces/api',
+                        },
+                        {
+                            name: 'Customer-facing analytics',
+                            url: '/docs/endpoints/customer-facing-analytics',
+                        },
+                        {
+                            name: 'Enrich internal tools with PostHog data',
+                            url: '/docs/endpoints/internal-tools',
+                        },
+                        {
+                            name: 'OpenAPI SDK generation',
+                            url: '/docs/endpoints/openapi-sdk-generation',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/endpoints/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/endpoints/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Queries',
                 },
                 {
                     name: 'Endpoint types',
                     url: '/docs/endpoints/endpoint-types',
                     icon: 'IconHogQL',
                     color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Variables',
@@ -7922,10 +7986,20 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Versioning',
+                    url: '/docs/endpoints/versioning',
+                    icon: 'IconGitBranch',
+                    color: 'green',
+                },
+                {
                     name: 'Execution',
+                },
+                {
+                    name: 'How execution works',
                     url: '/docs/endpoints/execution',
                     icon: 'IconBolt',
                     color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Caching',
@@ -7941,54 +8015,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Versioning',
-                    url: '/docs/endpoints/versioning',
-                    icon: 'IconGitBranch',
-                    color: 'green',
-                },
-                {
-                    name: 'Endpoints vs Query API',
-                    url: '/docs/endpoints/endpoints-vs-query-api',
-                    icon: 'IconBook',
-                    color: 'red',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Create SQL-based endpoint with variables',
-                    url: '/docs/endpoints/guide-variables',
-                    icon: 'IconCode',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Create insight-based endpoint with variables',
-                    url: '/docs/endpoints/guide-breakdown',
-                    icon: 'IconCode',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Customer-facing analytics',
-                    url: '/docs/endpoints/customer-facing-analytics',
-                    icon: 'IconPerson',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Enrich internal tools with PostHog data',
-                    url: '/docs/endpoints/internal-tools',
-                    icon: 'IconWrench',
-                    color: 'orange',
-                },
-                {
-                    name: 'OpenAPI SDK generation',
-                    url: '/docs/endpoints/openapi-sdk-generation',
-                    icon: 'IconCode',
-                    color: 'salmon',
-                },
-                {
                     name: 'Usage and logs',
                     url: '/docs/endpoints/usage-analytics',
                     icon: 'IconGraph',
@@ -7996,6 +8022,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Endpoints vs Query API',
+                    url: '/docs/endpoints/endpoints-vs-query-api',
+                    icon: 'IconBook',
+                    color: 'red',
                 },
                 {
                     name: 'Best practices',
