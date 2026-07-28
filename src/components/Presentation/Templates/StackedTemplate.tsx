@@ -1,7 +1,6 @@
 import React from 'react'
 import ParseHtml from '../Utilities/parseHtml'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Logo from 'components/Logo'
 import { IconHeartFilled } from '@posthog/icons'
 import SalesRep from '../Utilities/SalesRep'
 import Logos from '../Utilities/Logos'

@@ -14,6 +14,8 @@ interface Lockup {
     background: string
     /** Preview width in px (height follows the lockup's aspect ratio). */
     previewWidth: number
+    /** Center the unmodified mark on a transparent square canvas. */
+    square?: boolean
 }
 
 const LOCKUPS: Lockup[] = [
@@ -21,13 +23,6 @@ const LOCKUPS: Lockup[] = [
         slug: 'posthog-logo',
         name: 'Standard logo',
         logo: { layout: 'landscape', variant: 'gradient' },
-        background: '#EEEFE9',
-        previewWidth: 180,
-    },
-    {
-        slug: 'posthog-logo-black',
-        name: 'Dark logo',
-        logo: { layout: 'landscape', variant: 'mono', color: '#111' },
         background: '#EEEFE9',
         previewWidth: 180,
     },
@@ -46,6 +41,13 @@ const LOCKUPS: Lockup[] = [
         previewWidth: 180,
     },
     {
+        slug: 'posthog-logo-black',
+        name: 'Dark logo',
+        logo: { layout: 'landscape', variant: 'mono', color: '#111' },
+        background: '#EEEFE9',
+        previewWidth: 180,
+    },
+    {
         slug: 'posthog-logomark',
         name: 'Logomark',
         logo: { layout: 'logomark', variant: 'gradient' },
@@ -58,6 +60,22 @@ const LOCKUPS: Lockup[] = [
         logo: { layout: 'logomark', variant: 'mono', color: '#fff' },
         background: '#111',
         previewWidth: 64,
+    },
+    {
+        slug: 'posthog-logomark-square',
+        name: 'Square logomark',
+        logo: { layout: 'logomark', variant: 'gradient' },
+        background: '#EEEFE9',
+        previewWidth: 64,
+        square: true,
+    },
+    {
+        slug: 'posthog-logomark-square-white',
+        name: 'Light square logomark',
+        logo: { layout: 'logomark', variant: 'mono', color: '#fff' },
+        background: '#111',
+        previewWidth: 64,
+        square: true,
     },
     {
         slug: 'posthog-logo-stacked',
@@ -77,9 +95,10 @@ const LOCKUPS: Lockup[] = [
 
 const PX_PER_UNIT = 6 // rasterized pixels per viewBox unit at 1x (@2x doubles it)
 const PAD_FRACTION = 0.18 // transparent margin, as a fraction of the shorter viewBox side
+const SQUARE_PADDING = 4 // 52-unit-wide logomark centered on the same 60 × 60 canvas as /brand
 
 /** Serialize a rendered <Logo> to a standalone SVG string, optionally with padding. */
-function serializeSvg(source: SVGSVGElement, padded: boolean): string {
+function serializeSvg(source: SVGSVGElement, padded: boolean, square = false): string {
     const svg = source.cloneNode(true) as SVGSVGElement
     // mono lockups draw with `currentColor` + an inline `color`; bake it into an explicit
     // fill so the downloaded file renders correctly on its own.
@@ -92,6 +111,13 @@ function serializeSvg(source: SVGSVGElement, padded: boolean): string {
 
     const vb = source.viewBox.baseVal
     let { x, y, width, height } = vb
+    if (square) {
+        const size = Math.max(width, height) + SQUARE_PADDING * 2
+        x -= (size - width) / 2
+        y -= (size - height) / 2
+        width = size
+        height = size
+    }
     if (padded) {
         const pad = Math.min(width, height) * PAD_FRACTION
         x -= pad
@@ -116,13 +142,19 @@ function triggerDownload(blob: Blob, filename: string): void {
     URL.revokeObjectURL(url)
 }
 
-function downloadSvg(source: SVGSVGElement, slug: string, padded: boolean): void {
-    const svg = serializeSvg(source, padded)
+function downloadSvg(source: SVGSVGElement, slug: string, padded: boolean, square = false): void {
+    const svg = serializeSvg(source, padded, square)
     triggerDownload(new Blob([svg], { type: 'image/svg+xml' }), `${slug}${padded ? '-padded' : ''}.svg`)
 }
 
-async function downloadPng(source: SVGSVGElement, slug: string, scale: number, padded: boolean): Promise<void> {
-    const svg = serializeSvg(source, padded)
+async function downloadPng(
+    source: SVGSVGElement,
+    slug: string,
+    scale: number,
+    padded: boolean,
+    square = false
+): Promise<void> {
+    const svg = serializeSvg(source, padded, square)
     const match = svg.match(/viewBox="([\d.-]+) ([\d.-]+) ([\d.-]+) ([\d.-]+)"/)
     if (!match) return
     const width = Number(match[3])
@@ -176,21 +208,52 @@ function LockupCard({ lockup }: { lockup: Lockup }): JSX.Element {
                 className="flex items-center justify-center rounded p-4 min-h-[96px]"
                 style={{ background: lockup.background }}
             >
-                <Logo {...lockup.logo} ref={ref} size={lockup.previewWidth} title="PostHog logo" />
+                <div
+                    className={
+                        lockup.square
+                            ? 'border border-dashed flex items-center justify-center'
+                            : 'flex items-center justify-center'
+                    }
+                    style={
+                        lockup.square
+                            ? {
+                                  width: lockup.previewWidth,
+                                  height: lockup.previewWidth,
+                                  borderColor: lockup.background === '#111' ? '#ffffff33' : '#11111133',
+                              }
+                            : undefined
+                    }
+                >
+                    <Logo
+                        {...lockup.logo}
+                        ref={ref}
+                        size={lockup.square ? (lockup.previewWidth * 52) / 60 : lockup.previewWidth}
+                        title="PostHog logo"
+                    />
+                </div>
             </div>
             <div>
                 <p className="font-semibold m-0">{lockup.name}</p>
                 <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
-                    <DownloadLink label="SVG" onClick={withRef((s) => downloadSvg(s, lockup.slug, false))} />
-                    <DownloadLink label="PNG" onClick={withRef((s) => downloadPng(s, lockup.slug, 1, false))} />
-                    <DownloadLink label="PNG @2x" onClick={withRef((s) => downloadPng(s, lockup.slug, 2, false))} />
+                    <DownloadLink
+                        label="SVG"
+                        onClick={withRef((s) => downloadSvg(s, lockup.slug, false, lockup.square))}
+                    />
+                    <DownloadLink
+                        label="PNG"
+                        onClick={withRef((s) => downloadPng(s, lockup.slug, 1, false, lockup.square))}
+                    />
+                    <DownloadLink
+                        label="PNG @2x"
+                        onClick={withRef((s) => downloadPng(s, lockup.slug, 2, false, lockup.square))}
+                    />
                     <DownloadLink
                         label="PNG (padded)"
-                        onClick={withRef((s) => downloadPng(s, lockup.slug, 1, true))}
+                        onClick={withRef((s) => downloadPng(s, lockup.slug, 1, true, lockup.square))}
                     />
                     <DownloadLink
                         label="PNG (padded) @2x"
-                        onClick={withRef((s) => downloadPng(s, lockup.slug, 2, true))}
+                        onClick={withRef((s) => downloadPng(s, lockup.slug, 2, true, lockup.square))}
                     />
                 </div>
             </div>

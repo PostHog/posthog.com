@@ -27,3 +27,7 @@ If your iOS project uses Swift Package Manager for native dependencies, you can 
 ```
 
 This path requires `use_frameworks! :linkage => :dynamic` in your `ios/Podfile`. Without `posthog.useSpm`, the default CocoaPods resolution path is unchanged.
+
+## Troubleshooting
+
+- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones, turn on the experimental `sessionReplayConfig.screenshotModeBackgroundCapture` option (iOS only, requires `posthog-react-native` 4.45.0 or higher) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.

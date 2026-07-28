@@ -368,7 +368,7 @@
         },
         {
             "source": "/docs/posthog-code/quick-tour",
-            "destination": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
             "statusCode": 301
         },
         {
@@ -486,6 +486,21 @@
         {
             "source": "/docs/posthog-code/slack",
             "destination": "/docs/slack"
+        },
+        {
+            "source": "/docs/posthog-code/download-posthog-code",
+            "destination": "/docs/posthog-desktop/download-posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code",
+            "destination": "/docs/posthog-desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/:path*",
+            "destination": "/docs/posthog-desktop/:path*",
+            "statusCode": 301
         },
         {
             "source": "/docs/slack-app",
@@ -966,7 +981,7 @@
         },
         {
             "source": "/handbook/company/branding",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/docs/tutorials/:path*",
@@ -2104,6 +2119,10 @@
         {
             "source": "/session-replay/features",
             "destination": "/session-replay"
+        },
+        {
+            "source": "/web-analytics/features",
+            "destination": "/web-analytics"
         },
         {
             "source": "/feature-flags/features",
@@ -3393,20 +3412,16 @@
             "destination": "/blog/general"
         },
         {
-            "source": "/product-analytics/pricing",
-            "destination": "/product-analytics#pricing"
-        },
-        {
             "source": "/product-analytics/customers",
-            "destination": "/product-analytics#customers"
+            "destination": "/product-analytics"
         },
         {
             "source": "/product-analytics/comparisons",
-            "destination": "/product-analytics#posthog-vs"
+            "destination": "/product-analytics#feature-comparison"
         },
         {
             "source": "/product-analytics/documentation",
-            "destination": "/product-analytics#docs"
+            "destination": "/docs/product-analytics"
         },
         {
             "source": "/product-analytics/tutorials",
@@ -3414,7 +3429,7 @@
         },
         {
             "source": "/product-analytics/roadmap",
-            "destination": "/product-analytics#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/product-analytics/questions",
@@ -3422,11 +3437,11 @@
         },
         {
             "source": "/session-replay/customers",
-            "destination": "/session-replay#customers"
+            "destination": "/session-replay"
         },
         {
             "source": "/session-replay/comparisons",
-            "destination": "/session-replay#posthog-vs"
+            "destination": "/session-replay#feature-comparison"
         },
         {
             "source": "/session-replay/documentation",
@@ -3438,11 +3453,35 @@
         },
         {
             "source": "/session-replay/roadmap",
-            "destination": "/session-replay#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/session-replay/questions",
             "destination": "/session-replay#questions"
+        },
+        {
+            "source": "/web-analytics/customers",
+            "destination": "/web-analytics"
+        },
+        {
+            "source": "/web-analytics/comparisons",
+            "destination": "/web-analytics#feature-comparison"
+        },
+        {
+            "source": "/web-analytics/documentation",
+            "destination": "/docs/web-analytics"
+        },
+        {
+            "source": "/web-analytics/tutorials",
+            "destination": "/web-analytics#tutorials"
+        },
+        {
+            "source": "/web-analytics/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/web-analytics/questions",
+            "destination": "/web-analytics#questions"
         },
         {
             "source": "/feature-flags/pricing",
@@ -3450,15 +3489,15 @@
         },
         {
             "source": "/feature-flags/customers",
-            "destination": "/feature-flags#customers"
+            "destination": "/feature-flags"
         },
         {
             "source": "/feature-flags/comparisons",
-            "destination": "/feature-flags#posthog-vs"
+            "destination": "/feature-flags#feature-comparison"
         },
         {
             "source": "/feature-flags/documentation",
-            "destination": "/feature-flags#docs"
+            "destination": "/docs/feature-flags"
         },
         {
             "source": "/feature-flags/tutorials",
@@ -3466,7 +3505,7 @@
         },
         {
             "source": "/feature-flags/roadmap",
-            "destination": "/feature-flags#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/feature-flags/questions",
@@ -3534,7 +3573,7 @@
         },
         {
             "source": "/logo",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/blog/tags/product-engineer",
@@ -4530,6 +4569,10 @@
             "destination": "/docs/revenue-analytics"
         },
         {
+            "source": "/docs/revenue-analytics/dashboard",
+            "destination": "/docs/revenue-analytics"
+        },
+        {
             "source": "/revenue-analytics",
             "destination": "/docs/revenue-analytics"
         },
@@ -4842,6 +4885,10 @@
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-industry-segments",
+            "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
             "source": "/startups/[...slug]",
             "destination": "/startups"
         },
@@ -4919,6 +4966,10 @@
         },
         {
             "source": "/handbook/strategy/brand",
+            "destination": "/handbook/brand/foundations"
+        },
+        {
+            "source": "/handbook/content/brand-message",
             "destination": "/handbook/brand/foundations"
         },
         {

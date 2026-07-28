@@ -23,8 +23,6 @@ We only add a dedicated product marketer when it becomes painful not to have one
 | *PostHog Research*  | n/a    | Joe    | James H    |
 | *PostHog MCP*       | n/a    | Joe    | Raquel      |
 | *PostHog CLI*       | Unassigned | Unassigned | Raquel |
-| *AI Gateway*        | Marco  | n/a    | Ben W      |
-| *Agents*            | n/a    | Danilo | Ben W      |
 
 **Cross-functional areas**
 
@@ -128,7 +126,7 @@ Read [art and branding requests](/handbook/brand/art-requests) first!
 <details>
 <summary>I need a font, logo, etc.</summary>
 
-See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
+See [Logos, brand, hedgehogs](/handbook/brand/assets)
 </details>
 
 <details>
