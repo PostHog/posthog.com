@@ -114,12 +114,15 @@ Because the document is re-read on every refresh, you can switch between `"none"
 
 ### Register your client
 
-Once the document is live, register it:
+Once the document is live, register it. Paste the URL below: this reads the document back so you can see what you actually published, then registers it per region.
+
+<CIMDRegistration />
+
+Or do it yourself:
 
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
 ```
 
@@ -207,7 +210,7 @@ for (const [region, host] of Object.entries(REGIONS)) {
 
   const res = await fetch(`${host}/api/agentic/provisioning/client_registration`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'API-Version': '0.1d' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   })
   const json = await res.json().catch(() => null)
@@ -404,8 +407,6 @@ All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog
 
 The two regions are separate deployments with separate databases. Your client must be [registered in each region you serve](#register-your-client), tokens issued by one are not valid at the other, and a `client_assertion` must name the region it is sent to in its `aud`.
 
-Every request must include the `API-Version: 0.1d` header.
-
 ### Step 1: Create an account
 
 Create a PostHog account for a user by email. If the user is new, PostHog creates the account and returns an authorization code immediately. If the user already exists, the response tells you to redirect them for consent.
@@ -437,7 +438,6 @@ JSON
 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d "$BODY"
 ```
 
@@ -515,7 +515,6 @@ Exchange the authorization code for an access token and refresh token. The token
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
   -d "grant_type=authorization_code&code=abc123...authorization_code&code_verifier=$CODE_VERIFIER&client_id=$CLIENT_ID"
 ```
 
@@ -578,9 +577,7 @@ Use the access token to provision a PostHog project and get credentials.
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
-    "service_id": "analytics",
     "label_prefix": "Acme Co",
     "configuration": {
       "project_name": "My App - Production"
@@ -592,7 +589,6 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
 | `label_prefix` | string | No | Label prefix for the provisioned personal API key, up to 25 characters, used only when a personal API key is issued (off by default). When issued, the key is labeled `{label_prefix} - {team_name}`; if omitted, empty, or whitespace-only, just the team name. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
@@ -602,7 +598,6 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 {
   "status": "complete",
   "id": "12345",
-  "service_id": "analytics",
   "complete": {
     "access_configuration": {
       "api_key": "phc_abc123...",
@@ -629,7 +624,6 @@ For recurring deep links from your application into PostHog – the most common 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
@@ -670,7 +664,6 @@ Rotate the project token for an existing provisioned project:
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "label_prefix": "Acme Co"
   }'
@@ -691,7 +684,6 @@ Access tokens expire after 1 hour. Use the refresh token to get new credentials:
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
   -d "grant_type=refresh_token&refresh_token=phr_def456..."
 ```
 
@@ -723,7 +715,6 @@ Grants are region-local: call the same region that minted the grant.
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/provisioning/github/grants \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d '{
         "code": "github_oauth_code",
         "redirect_uri": "https://yourapp.com/callbacks/github",
@@ -739,7 +730,6 @@ The response carries `grant_id`, `gh_login`, `email`, and `expires_in`. PostHog 
 
 ```bash
 curl "https://us.posthog.com/api/agentic/provisioning/github/grants/$GRANT_ID/repositories?client_id=$CLIENT_ID&client_assertion=$ASSERTION&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" \
-  -H "API-Version: 0.1d"
 ```
 
 This is a `GET`, so there is no body to carry your credentials. Send the assertion as query parameters, or use the Basic header if you authenticate with a client secret. Each assertion is still single use, so mint a fresh one per poll.
@@ -857,8 +847,7 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "API-Version": "0.1d",
-    },
+      },
     body: JSON.stringify({
       id: crypto.randomUUID(),
       email,
@@ -893,8 +882,7 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "API-Version": "0.1d",
-    },
+      },
     body: new URLSearchParams({
       grant_type: "authorization_code",
       code: account.oauth.code,
@@ -919,10 +907,8 @@ async function provisionPostHogAccount(email, name) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${tokens.access_token}`,
-      "API-Version": "0.1d",
-    },
+      },
     body: JSON.stringify({
-      service_id: "analytics",
       label_prefix: "Acme Co",
       configuration: { project_name: "Production" },
     }),
@@ -959,7 +945,6 @@ async function getDeepLinkUrl(accessToken, path) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        'API-Version': '0.1d',
       },
       body: JSON.stringify(path ? { path } : {}),
     }

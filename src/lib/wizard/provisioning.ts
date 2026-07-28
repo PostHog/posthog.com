@@ -14,7 +14,7 @@
  * `getProvisioningClient()` returns the in-memory mock when `WIZARD_PROVISIONING_MOCK=1`.
  */
 import { CLIENT_ASSERTION_TYPE_JWT_BEARER, createClientAssertion } from '../cimd'
-import { API_VERSION, config } from './config'
+import { config } from './config'
 import type {
     AccountRequestBody,
     AccountRequestResponse,
@@ -118,7 +118,7 @@ async function sendOnce(
     path: string,
     { body, bearer, authenticate }: { body?: Record<string, unknown>; bearer?: string; authenticate?: boolean }
 ): Promise<UpstreamResult> {
-    const headers: Record<string, string> = { 'API-Version': API_VERSION }
+    const headers: Record<string, string> = {}
     if (bearer) headers['Authorization'] = `Bearer ${bearer}`
 
     let url = `${config.posthogApiHost}${path}`
