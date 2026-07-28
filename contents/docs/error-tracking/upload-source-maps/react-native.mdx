@@ -111,7 +111,7 @@ If your project has a checked-in `ios/` directory, run or rerun the iOS prebuild
 npx expo prebuild --platform ios
 ```
 
-This reapplies the config plugin to the existing **Bundle React Native code and images** build phase, including automatically migrating previously generated PostHog commands. You do not need to edit `project.pbxproj` manually.
+This reapplies the config plugin to the existing **Bundle React Native code and images** build phase. When upgrading from `posthog-react-native` 4.61.0 or earlier to a newer version, the plugin automatically migrates the previously generated PostHog command. You do not need to edit `project.pbxproj` manually.
 
 The plugin accepts the following options:
 
@@ -193,7 +193,19 @@ android {
 
 3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
 
-To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, and select Bundle React Native code and images. Use the command that matches your installed `posthog-react-native` version.
+
+#### `posthog-react-native` 4.61.0 and earlier
+
+```diff
+
+...
+
+-`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
++/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
+```
+
+#### `posthog-react-native` newer than 4.61.0
 
 ```diff
 
