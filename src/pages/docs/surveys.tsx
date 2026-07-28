@@ -1,10 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
@@ -13,6 +9,8 @@ import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
 import ReaderView from 'components/ReaderView'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
 
 type SurveysProps = {
     data: {
@@ -117,8 +115,11 @@ export const Content = ({ quickLinks = false }) => {
 }
 
 const Surveys: React.FC<SurveysProps> = () => {
+    const productData = useProduct({ handle: 'surveys' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="surveys" />}>
             <SEO title="Surveys - Docs - PostHog" />
 
             <Intro
