@@ -15,12 +15,19 @@ The user will provide a Substack URL: $ARGUMENTS
 
 Run these in parallel:
 
-1. **Fetch the newsletter content** using WebFetch with this prompt:
-   > "Extract the complete text of this newsletter. Include: title, subtitle, all body text verbatim, all links with their href URLs, all image alt text/descriptions, all section headers, and footnotes. Do not summarize — give full verbatim text."
+1. **Fetch the newsletter content from Substack's API**, not with WebFetch. WebFetch routes the page through a summarizing model that will usually refuse to reproduce a full article verbatim ("I can't reproduce the full text verbatim…") and hand back a summary instead — useless when the whole job is copying text exactly. Substack exposes the post as JSON with no auth:
+
+   ```bash
+   curl -sL "https://newsletter.posthog.com/api/v1/posts/{substack-slug}" -o /tmp/post.json
+   ```
+
+   The response includes `title`, `subtitle`, `post_date`, `cover_image`, and `body_html` — the article body as HTML. Write `body_html` to a file and convert it to markdown with a script (unwrap Substack's `<span>` soup, turn `<figure>` blocks into image markers carrying both the `src` and the `<figcaption>`, and convert `<a>` to `[text](href)`). This gives you exact text, exact links, and image positions in one pass, and it doubles as the ground truth for Step 5.
+
+   Keep the JSON and the converted markdown around — Step 3b and Step 5 both reuse them.
 
 2. **Read an existing newsletter** for frontmatter reference. Use a recent one, e.g. `contents/newsletter/building-ai-agents.md` or `contents/newsletter/vibe-designing.md`.
 
-3. **Check for an existing file** at the expected path. The filename should be a kebab-case slug of the article title under `contents/newsletter/`. Use Glob to check.
+3. **Check for an existing file** at the expected path. The filename is **the Substack post's own slug** (the last path segment of the URL), not a slug derived from the article title — the two often differ, e.g. `code-review-tips.md` holds "Stop being the code review bottleneck". Getting this wrong breaks the inbound `/newsletter/{slug}` links other posts already point at. Use Glob to confirm the file doesn't exist yet, and grep `contents/` for `/newsletter/{slug}` to see which posts already link to it.
 
 4. **Check for a suggested-links file** at the repo root — it follows the pattern `suggested-links-{slug}.md`. Read it if it exists.
 
@@ -92,27 +99,47 @@ Ask the user two things:
 
 ### 3b: Get images from Substack
 
-Fetch the Substack URL **once** for images — do not split this into a separate "descriptions" fetch and a separate "raw URLs" fetch. Two independent fetches can disagree on count or order (an image dropped from one but not the other), and zipping them back together by position silently shifts every image after the mismatch onto the wrong caption. This has happened before (PR #18012) and produced a missing image plus a run of wrong images for the rest of the post.
+Read the images out of the `body_html` you already fetched in Step 1 — you do not need another network fetch, and you should not use one. Deriving images from a second, independent fetch can disagree with the first on count or order (an image dropped from one but not the other), and zipping the two back together by position silently shifts every image after the mismatch onto the wrong caption. This has happened before (PR #18012) and produced a missing image plus a run of wrong images for the rest of the post. Taking the `src`, the preceding text, and the `<figcaption>` from a single parse of one `body_html` makes that class of bug impossible.
 
-Use one prompt that returns the URL and its anchor text together, per image:
-> "List every image in the article body, in order of appearance. For each one, give: (1) its exact `src` URL, (2) the sentence or heading immediately before it, quoted verbatim, and (3) a brief description of what it shows. Include only article body images, not avatar or profile images."
+For each `<figure>` in document order, pull: (1) the original image URL — prefer the `<a class="image-link" href="...">` wrapper, which points at the full-size `substack-post-media.s3.amazonaws.com` original, over the resized `substackcdn.com/image/fetch/...` `<img src>`; (2) the text immediately before it; (3) the `<figcaption>`, if any.
 
-Count the images returned against the number of `![PLACEHOLDER: ...]` entries already written in step 2. If the counts don't match, stop and tell the user which section appears to be missing an image instead of guessing.
+Count the images found against the number of `![PLACEHOLDER: ...]` entries already written in step 2. If the counts don't match, stop and tell the user which section appears to be missing an image instead of guessing.
+
+**Look at the images before you place them.** Download each one and Read it — the images are diagrams, and a caption-less diagram is easy to attach to the wrong section. Confirm what each one actually depicts matches the section it's going into. This is also the moment you'll catch text errors rendered into the image itself (a misspelled label, a stale product name); flag those to the user, since they can only be fixed by regenerating the asset.
 
 ### 3c: Authenticate and upload
 
-Ask the user for their **PostHog community credentials** (the account used to sign in at posthog.com/community — not their PostHog app login):
+Uploads go through the posthog.com Strapi backend, which needs a bearer token.
 
-> Please run: `! export SQUEAK_EMAIL=you@posthog.com SQUEAK_PASSWORD=yourpassword`
+**PostHog staff cannot use email/password — ask for a browser token instead.** Strapi refuses the password grant for any `@posthog.com` account, because staff accounts are SSO-only:
 
-Once credentials are set, authenticate and upload all images with a shell script:
+```
+400 BadRequestError: "PostHog employees must log in with PostHog"
+```
+
+There is no password to send, so don't ask for one. Ask the user to hand you the session token the site is already using:
+
+> While logged in to posthog.com, open your browser console and run `localStorage.getItem('jwt')`, then paste the result here.
+
+That's the same token every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key. It's valid for about 30 days, so a token from an earlier session in the same conversation is usually still good.
+
+**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work:
+
+> Please run: `! export SQUEAK_EMAIL=you@example.com SQUEAK_PASSWORD=yourpassword`
+
+Note that `!`-prefixed commands run in the **user's** shell, not yours — the exported variables will NOT be visible to your Bash tool, and `${SQUEAK_EMAIL}` will expand to an empty string. Read the values out of the user's message and pass them inline instead.
+
+Then upload all images with a shell script:
 
 ```bash
-# Authenticate
-JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
-  -H "Content-Type: application/json" \
-  -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
-  | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
+# Staff: use the JWT the user pasted.
+JWT='eyJhbGciOi...'
+
+# Non-staff only: exchange credentials for a JWT.
+# JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
+#   -H "Content-Type: application/json" \
+#   -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
+#   | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
 
 # Upload hero (if local file provided)
 # curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
@@ -128,10 +155,18 @@ upload() {
   curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
     -H "Authorization: Bearer $JWT" \
     -F "files=@${tmpfile};filename=${name}.png" \
-    | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
+    | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+# A failed upload returns an error object, not a list — surface it instead of
+# crashing on d[0], which hides the real cause (usually an expired token).
+print(d[0]['url'] if isinstance(d, list) else 'ERROR ' + json.dumps(d)[:400])
+"
   rm -f "$tmpfile"
 }
 ```
+
+If an upload returns `401 Unauthorized`, the token has expired — ask for a fresh one rather than retrying.
 
 Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
 
@@ -163,8 +198,9 @@ Before reporting to the user, spawn a subagent (via the Agent tool, `subagent_ty
 
 **Ground truth, in order of preference:**
 
-1. If the user provided a saved HTML export of the Substack page (rather than just the URL), use that as ground truth. It's large and mostly boilerplate — instruct the subagent to locate the article body (typically inside a `<div class="body markup">`-style container) and strip tags with a quick script rather than reading the whole file.
-2. Otherwise, have the subagent WebFetch the newsletter URL fresh. Note: WebFetch may refuse to reproduce full verbatim text for a copyrighted article and return only a summary with short quotes — if so, the subagent should say so explicitly and verify what it can (structure, links, image count and placement, footnote count) rather than silently downgrading to a shallow check.
+1. **The `body_html` you saved in Step 1.** This is the preferred ground truth: it comes from Substack's own API, so it's the authoritative source text rather than a model's rendering of the page. Point the subagent at the saved file and tell it to strip tags with a script rather than eyeballing raw HTML. Pass along the API JSON too, so it can check `title` and `post_date` against the frontmatter.
+2. A saved HTML export of the Substack page, if the user provided one. Large and mostly boilerplate — instruct the subagent to locate the article body (typically inside a `<div class="body markup">`-style container) and strip tags with a quick script rather than reading the whole file.
+3. Last resort: have the subagent WebFetch the newsletter URL fresh. Expect this to be weak — WebFetch will usually refuse to reproduce full verbatim text and return only a summary with short quotes. If that happens the subagent should say so explicitly and verify what it can (structure, links, image count and placement, footnote count) rather than silently downgrading to a shallow check.
 
 **Tell the subagent what's allowed to differ** so it doesn't flag intentional transformations as bugs:
 
