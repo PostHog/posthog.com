@@ -25,7 +25,22 @@ export function getPrivateKey(): crypto.KeyObject {
     if (!cimdConfig.privateKeyPem) {
         throw new Error('CIMD_CLIENT_PRIVATE_KEY is not configured, so posthog.com cannot sign client assertions')
     }
-    cachedPrivateKey = crypto.createPrivateKey(cimdConfig.privateKeyPem)
+    // A PEM whose newlines were escaped somewhere in transit (a shell variable, a JSON config, a
+    // CI secret flattened to one line) fails to decode with an opaque OpenSSL error. Repairing it
+    // is safe, since a real PEM never contains a literal backslash.
+    const pem = cimdConfig.privateKeyPem.includes('\\n')
+        ? cimdConfig.privateKeyPem.replace(/\\n/g, '\n')
+        : cimdConfig.privateKeyPem
+
+    try {
+        cachedPrivateKey = crypto.createPrivateKey(pem)
+    } catch (error) {
+        throw new Error(
+            `CIMD_CLIENT_PRIVATE_KEY could not be parsed as a PEM private key. Check it was stored as a real multi-line value, beginning with "-----BEGIN PRIVATE KEY-----". Underlying error: ${
+                (error as Error).message
+            }`
+        )
+    }
     return cachedPrivateKey
 }
 
