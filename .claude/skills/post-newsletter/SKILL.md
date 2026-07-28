@@ -1,11 +1,9 @@
 ---
 name: post-newsletter
-description: Convert a Substack newsletter post into a native posthog.com newsletter file. Fetches the content from a Substack URL, formats it with correct frontmatter and markdown, applies internal links, and writes image placeholders. Omits Substack-specific sections (byline, related texts, job posts). Use when the user provides a newsletter.posthog.com URL and asks to post it natively.
+description: Convert a Substack newsletter post into a native posthog.com newsletter file. Fetches the content from a Substack URL, formats it with correct frontmatter and markdown, applies internal links, and re-hosts its images on Cloudinary. Omits Substack-specific sections (byline, related texts, job posts). Use when the user provides a newsletter.posthog.com URL and asks to post it natively.
 ---
 
 # Post Newsletter Natively
-
-> **Model:** Sonnet is fine for this skill. The steps are fairly programmatic — copy verbatim, apply mechanical link/image transformations, run scripted uploads — and don't require the nuanced judgment that `/suggest-links` (invoked in Step 4) needs, which should still be run on Opus or higher.
 
 Convert a Substack newsletter post into a native posthog.com markdown file under `contents/newsletter/`.
 
@@ -65,7 +63,7 @@ seo:
 - Format section headers as `##` and subsections as `###`. **Do not modify header text** — copy it exactly as it appears in the source, including any numbering format (e.g. `1.`, `2.`, not `Rule 1:`, `Rule 2:`).
 - For quote blocks: Substack sometimes renders pull quotes or highlighted excerpts as italicized text in quotation marks (e.g. `*"Quote text here."*`). Convert these to markdown blockquotes: `> Quote text here.` — drop the surrounding quotation marks and italics.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
-- For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` so the user knows where to upload. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
+- For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` to mark the position. Step 3 replaces each one with a real Cloudinary URL, so none should survive into the finished file. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
 - For image captions (italicized text directly below an image in Substack): use the `<Caption>` component instead of plain markdown italics, e.g. `<Caption>Caption text here</Caption>` — see `contents/newsletter/building-ai-agents.md` for examples. It renders centered by default, unlike bare `*italic*` text. If the caption contains a link, keep it as an inline `<a href="...">` tag inside the component (per "Preserve original links" below) rather than dropping it — this is easy to miss since the caption reads like a quote at first glance.
 - For code blocks: preserve the language and exact content.
 - For footnotes: use markdown footnote syntax — `[^1]` inline, and `[^1]: text` at the bottom.
@@ -217,6 +215,7 @@ Ask the subagent to go section by section and return a clear verdict (match / di
 
 After all edits, report:
 
-1. **Image placeholders** — list each one so the user knows what to upload.
+1. **Images** — confirm every image resolves, and name any still left as a placeholder (e.g. a hero the user never supplied) so it's clear what's outstanding. Flag any text error rendered into an image, since that needs the asset regenerated.
 2. **Sections omitted** — confirm what Substack-only content was removed.
 3. **Author slug** — flag if the author slug may not exist yet in the codebase (check with Grep for the slug in `contents/`).
+4. **Deliberate divergences from the source** — call out anything that intentionally doesn't match Substack (a typo fixed at the author's request, a regenerated image). A reviewer comparing the two versions will otherwise read these as conversion errors.
