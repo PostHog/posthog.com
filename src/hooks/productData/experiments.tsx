@@ -15,8 +15,8 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
+    IconToggle,
 } from '@posthog/icons'
-import Link from 'components/Link'
 import { features } from './experiments/features'
 import { applications, topFeatures } from './experiments/slides'
 
@@ -120,6 +120,7 @@ export const experiments = {
      * (same pattern as Web Analytics → Product Analytics).
      */
     pricingMenu: [
+        { slug: 'billed-with', name: 'Billed with Feature Flags', icon: <IconToggle className="size-4" /> },
         { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
         { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
@@ -128,17 +129,8 @@ export const experiments = {
     ],
     overview: {
         title: 'Test changes with statistical significance',
-        description: (
-            <>
-                Experiments is one of the tools that makes your product self-driving: the evaluation that proves a
-                change actually worked. Run statistically rigorous tests, use precise targeting and exclusion rules, and
-                analyze your groups with{' '}
-                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
-                    Session Replay
-                </Link>
-                .
-            </>
-        ),
+        description:
+            'Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change actually worked. Built to natively work with product analytics, session replay, feature flags, and surveys.',
         eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
