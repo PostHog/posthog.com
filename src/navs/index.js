@@ -7326,7 +7326,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7342,13 +7342,6 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Configure a channel',
-                    url: '/docs/workflows/configure-channels',
-                    icon: 'IconMegaphone',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
                     name: 'Launch your first workflow',
                     url: '/docs/workflows/launch-workflow',
                     icon: 'IconMegaphone',
@@ -7356,45 +7349,92 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
                 },
                 {
-                    name: 'Workflow builder',
-                    url: '/docs/workflows/workflow-builder',
-                    icon: 'IconDatabase',
-                    color: 'orange',
+                    name: 'PostHog Web',
+                    url: '/docs/workflows/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'yellow',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/surfaces/web-app',
+                        },
+                        {
+                            name: 'Workflow builder',
+                            url: '/docs/workflows/workflow-builder',
+                        },
+                        {
+                            name: 'Editing a live workflow',
+                            url: '/docs/workflows/editing-live-workflows',
+                        },
+                        {
+                            name: 'Content library and message templates',
+                            url: '/docs/workflows/library',
+                        },
+                        {
+                            name: 'Create emails with PostHog AI',
+                            url: '/docs/workflows/create-emails-ai',
+                        },
+                    ],
                 },
                 {
-                    name: 'Editing a live workflow',
-                    url: '/docs/workflows/editing-live-workflows',
-                    icon: 'IconPencil',
-                    color: 'orange',
+                    name: 'PostHog MCP',
+                    url: '/docs/workflows/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'purple',
                 },
                 {
-                    name: 'Content library and message templates',
-                    url: '/docs/workflows/library',
-                    icon: 'IconDatabase',
-                    color: 'orange',
+                    name: 'API',
+                    url: '/docs/workflows/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
                 },
                 {
-                    name: 'Guides',
+                    name: 'Channels',
                 },
                 {
-                    name: 'Create a drip campaign',
-                    url: '/docs/workflows/email-drip-campaign',
-                    icon: 'IconDatabase',
-                    color: 'orange',
+                    name: 'Configure a channel',
+                    url: '/docs/workflows/configure-channels',
+                    icon: 'IconMegaphone',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Workflow events',
+                    url: '/docs/workflows/engagement-events',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Opt-outs',
+                },
+                {
+                    name: 'Opt-outs and suppression',
+                    url: '/docs/workflows/opt-outs',
+                    icon: 'IconShieldLock',
+                    color: 'green',
                 },
                 {
                     name: 'Import opt-out lists from Customer.io',
                     url: '/docs/workflows/import-customerio-optouts',
-                    icon: 'IconDatabase',
+                    icon: 'IconUpload',
                     color: 'blue',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Create a drip campaign',
+                    url: '/docs/workflows/email-drip-campaign',
+                    icon: 'IconLetter',
+                    color: 'orange',
                 },
                 {
                     name: 'A/B testing in workflows',
                     url: '/tutorials/workflows-ab-testing',
-                    icon: 'IconDatabase',
+                    icon: 'IconFlask',
                     color: 'orange',
                 },
                 {
@@ -7402,25 +7442,6 @@ export const docsMenu = {
                     url: '/docs/workflows/best-practices',
                     icon: 'IconStar',
                     color: 'red',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Create emails with PostHog AI',
-                    url: '/docs/workflows/create-emails-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Email engagement events',
-                    url: '/docs/workflows/engagement-events',
-                    icon: 'IconGraph',
-                    color: 'yellow',
                 },
                 {
                     name: 'Troubleshooting',
