@@ -367,7 +367,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             <p>
                                 Or describe what you want (like{' '}
                                 <em>"users who rage clicked after seeing variant B yesterday"</em>) and{' '}
-                                <Link to="/docs/session-replay/search-replays-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/session-replay/surfaces/mcp" state={{ newWindow: true }}>
                                     PostHog MCP
                                 </Link>{' '}
                                 returns the matching collection in your editor.
@@ -436,7 +436,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 With Feature Flags, use the MCP to{' '}
-                                <Link to="/docs/feature-flags/create-flags-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/feature-flags/surfaces/mcp" state={{ newWindow: true }}>
                                     flip flags, target rollouts, and filter replays by variant
                                 </Link>{' '}
                                 from Claude Code or Cursor. Roll out fixes to affected users without a full deploy.
