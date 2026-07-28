@@ -5,13 +5,13 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMessage, IconDatabase, IconChat, IconMemory, IconSparkles, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconMessage, IconDatabase, IconChat, IconMemory, IconSparkles, IconCode, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 PostHog AI is an AI product analyst that lives inside PostHog. Ask it a question in plain English and it queries your data, builds the insight, writes the SQL, or finds the session replay – then explains what it found. Because it runs on your project's own events, persons, and schema, its answers are about your product, not a generic dataset.
 
-It also does the work, not just the analysis. PostHog AI creates dashboards, surveys, alerts, and feature flags, edits filters in the UI alongside you, and remembers what it learns about your product between conversations. It's the same agent that executes [Self-driving](/docs/self-driving) tasks, so the thing answering your questions is the thing opening your pull requests.
+It also does the work, not just the analysis. PostHog AI creates dashboards, surveys, alerts, and feature flags, edits filters in the UI alongside you, and remembers what it learns about your product between conversations. When a change belongs in code, it hands the job to a coding agent and reports back on it – see [how that works](#how-posthog-ai-works-with-self-driving) below.
 
 <OSButton variant="primary" asLink to="/docs/posthog-ai/start-here">Get started</OSButton>
 
@@ -78,16 +78,18 @@ PostHog AI answers from your project's data, the context you attach to a convers
 
 ## How PostHog AI works with Self-driving
 
-Most tools feed [Self-driving](/docs/self-driving) as a signal source. PostHog AI sits at the other end of the loop: it's the agent that picks the work up and does it. When a report from your signals needs a code fix, PostHog AI runs it in a sandbox against your connected repo and opens a draft pull request.
+Most tools feed [Self-driving](/docs/self-driving) as a signal source. PostHog AI's relationship to the loop is different: it's how *you* start and follow coding work, rather than a stage the autonomous loop passes through.
+
+Ask PostHog AI to make a change and it creates a coding task, points it at a connected repository, and runs it. The code is written by a coding agent working in a sandbox, which pushes a branch and opens a draft pull request. PostHog AI is the thing you talk to and the thing that reports back – it isn't the agent editing your files.
 
 <CustomSelfDrivingLoop
   stages={[
-    { label: 'Signals', icon: IconBolt, color: '#F54E00', description: 'Problems surfaced from your errors, tickets, and replays' },
-    { label: 'One report', icon: IconNotebook, color: '#FFA81C', description: 'Grouped with the product context behind it' },
-    { label: 'PostHog AI runs it', icon: IconSparkles, color: '#29DBBB', description: 'The same agent you chat with, working in a sandbox' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You ask', icon: IconSparkles, color: '#F54E00', description: 'Describe the change you want in any PostHog AI conversation' },
+    { label: 'A task', icon: IconNotebook, color: '#FFA81C', description: 'Scoped to a repository you have connected' },
+    { label: 'A coding agent', icon: IconCode, color: '#29DBBB', description: 'Writes the code in a sandbox, separate from the chat agent' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'Pushed to a branch for you to review' },
     { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
   ]}
 />
 
-You can start the same kind of run yourself by asking PostHog AI to make a change, and you can follow every run – yours and the autonomous ones – from the task tracker in the [web app](/docs/posthog-ai/surfaces/web-app). See the [Self-driving docs](/docs/self-driving) for the full picture.
+The autonomous path runs the same way at the end – a report becomes a coding task and a draft pull request – but it starts from a [signal report](/docs/self-driving/reports) rather than from a conversation, so PostHog AI isn't involved in picking it up. Either way you can follow every run from the task tracker in the [web app](/docs/posthog-ai/surfaces/web-app). See the [Self-driving docs](/docs/self-driving) for the full picture.
