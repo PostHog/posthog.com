@@ -29,7 +29,6 @@ import {
     IconCursorClick,
     IconChat,
     IconAtSign,
-    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
@@ -1678,12 +1677,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
-        },
-        {
-            ...getTool('replay_vision'),
-            Icon: IconLlmPromptEvaluation,
-            color: 'yellow',
-            colorSecondary: 'yellow',
         },
         mcpAnalytics,
         {
