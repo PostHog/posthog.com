@@ -6658,14 +6658,14 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/mcp-analytics/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'blue',
                     featured: true,
                 },
                 {
-                    name: 'MCP',
+                    name: 'PostHog MCP',
                     url: '/docs/mcp-analytics/surfaces/mcp',
                     icon: 'IconPlug',
                     color: 'purple',
