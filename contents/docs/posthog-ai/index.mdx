@@ -10,7 +10,7 @@ import OSButton from 'components/OSButton'
 
 PostHog AI is an AI product analyst that lives inside PostHog. Ask it a question in plain English and it queries your data, builds the insight, writes the SQL, or finds the session replay – then explains what it found. Because it runs on your project's own events, persons, and schema, its answers are about your product, not a generic dataset.
 
-It also does the work, not just the analysis. PostHog AI creates dashboards, surveys, alerts, and feature flags, edits filters in the UI alongside you, and remembers what it learns about your product between conversations. When a change belongs in code, it hands the job to a coding agent and reports back on it – see [how that works](#how-posthog-ai-works-with-self-driving) below.
+It also does the work, not just the analysis. PostHog AI creates dashboards, surveys, alerts, and feature flags, edits filters in the UI alongside you, and remembers what it learns about your product between conversations. Ask it for a change that belongs in code and it starts a [coding task](/docs/posthog-ai/surfaces/web-app) against a repository you've connected, then reports back when there's a pull request to review.
 
 <OSButton variant="primary" asLink to="/docs/posthog-ai/start-here">Get started</OSButton>
 
@@ -74,11 +74,3 @@ PostHog AI answers from your project's data, the context you attach to a convers
   </div>
 
 </div>
-
-## How PostHog AI works with Self-driving
-
-**PostHog AI is not part of the Self-driving loop.** It doesn't feed it signals, and it isn't what picks up a report and writes the fix. That work runs from a [signal report](/docs/self-driving/reports) to a coding agent without passing through PostHog AI at all – see the [Self-driving docs](/docs/self-driving) for how it actually works.
-
-What PostHog AI does is give you a way in. Ask it to make a change and it creates a coding task against a repository you've connected, then runs it. A coding agent writes the code in a sandbox and opens a draft pull request for you to review. PostHog AI starts the job and reports back on it; it isn't the agent editing your files.
-
-That means the two paths meet at the end and nowhere else. An autonomous report and a change you asked for both become a coding task, and both end in a pull request you review. You can follow either one from the task tracker in the [web app](/docs/posthog-ai/surfaces/web-app).
