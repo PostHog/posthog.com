@@ -2077,7 +2077,26 @@
         },
         {
             "source": "/docs/error-tracking/debugging-with-mcp",
-            "destination": "/docs/error-tracking/debug-errors-mcp"
+            "destination": "/docs/error-tracking/surfaces/mcp"
+        },
+        {
+            "source": "/docs/error-tracking/debug-errors-mcp",
+            "destination": "/docs/error-tracking/surfaces/mcp"
+        },
+        {
+            "source": "/docs/error-tracking/fix-with-ai-prompts",
+            "destination": "/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/code",
+            "destination": "/docs/support/surfaces/desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/error-tracking/surfaces/fix-with-ai",
+            "destination": "/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts",
+            "statusCode": 301
         },
         {
             "source": "/docs/logs/debugging-with-mcp",
