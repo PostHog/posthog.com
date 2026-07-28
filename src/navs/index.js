@@ -2350,15 +2350,12 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Platform',
-            icon: 'IconStack',
+            name: 'Install PostHog',
+            icon: 'IconWrench',
             color: 'salmon',
             url: '/docs/getting-started/install',
-            description: 'The PostHog platform for building and improving your product',
+            description: 'Install PostHog and start sending events',
             children: [
-                {
-                    name: 'Integration',
-                },
                 {
                     name: 'Install and configure',
                     url: '/docs/getting-started/install',
@@ -2390,6 +2387,15 @@ export const docsMenu = {
                         },
                     ],
                 },
+            ],
+        },
+        {
+            name: 'SDKs & frameworks',
+            icon: 'IconBox',
+            color: 'blue',
+            url: '/docs/libraries',
+            description: 'SDKs, framework guides, and service integrations',
+            children: [
                 {
                     name: 'SDKs',
                     url: '/docs/libraries',
@@ -2784,6 +2790,166 @@ export const docsMenu = {
                         },
                     ],
                 },
+            ],
+        },
+        {
+            name: 'New to PostHog',
+            icon: 'IconHardDrive',
+            color: 'teal',
+            url: '/docs/new-to-posthog/getting-hogpilled',
+            description: 'What PostHog is and how to win with it',
+            children: [
+                {
+                    name: 'Getting HogPilled',
+                    url: '/docs/new-to-posthog/getting-hogpilled',
+                    icon: 'IconCrown',
+                },
+                {
+                    name: 'Measuring activation',
+                    url: '/docs/new-to-posthog/activation',
+                    icon: 'IconLightBulb',
+                },
+                {
+                    name: 'Tracking retention',
+                    url: '/docs/new-to-posthog/retention',
+                    icon: 'IconLineGraph',
+                },
+                {
+                    name: 'Capturing revenue',
+                    url: '/docs/new-to-posthog/revenue',
+                    icon: 'IconHandMoney',
+                },
+                {
+                    name: 'Switching to PostHog',
+                    icon: 'IconLeave',
+                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                    children: [
+                        {
+                            name: 'Convincing teammates',
+                            url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
+                        },
+                        {
+                            name: 'Planning your pilot',
+                            url: '/docs/new-to-posthog/switch-guide/planning-your-pilot',
+                        },
+                        {
+                            name: 'What to expect when migrating',
+                            url: '/docs/new-to-posthog/switch-guide/migration-planning',
+                        },
+                    ],
+                },
+                {
+                    name: 'What is PostHog?',
+                    url: '/docs/self-driving',
+                    icon: 'IconFlag',
+                },
+                {
+                    name: 'Data types',
+                    url: '/docs/new-to-posthog/understand-posthog',
+                    icon: 'IconHardDrive',
+                    children: [
+                        {
+                            name: 'Your data in PostHog',
+                            url: '/docs/new-to-posthog/understand-posthog',
+                        },
+                        {
+                            name: 'Events',
+                            url: '/docs/data/events',
+                        },
+                        {
+                            name: 'Anonymous vs identified events',
+                            url: '/docs/data/anonymous-vs-identified-events',
+                        },
+                        {
+                            name: 'Actions',
+                            url: '/docs/data/actions',
+                        },
+                        {
+                            name: 'People',
+                            url: '/docs/data/persons',
+                        },
+                        {
+                            name: 'Cohorts',
+                            url: '/docs/data/cohorts',
+                        },
+                        {
+                            name: 'Sessions',
+                            url: '/docs/data/sessions',
+                        },
+                        {
+                            name: 'Data management',
+                            url: '/docs/data',
+                        },
+                        {
+                            name: 'Properties',
+                            url: '/docs/data/event-spec/ecommerce-events',
+                            children: [
+                                {
+                                    name: 'Ecommerce events spec',
+                                    url: '/docs/data/event-spec/ecommerce-events',
+                                },
+                                {
+                                    name: 'Property filter operators',
+                                    url: '/docs/data/property-filters',
+                                },
+                                {
+                                    name: 'Channel type',
+                                    url: '/docs/data/channel-type',
+                                },
+                                {
+                                    name: 'Timestamps',
+                                    url: '/docs/data/timestamps',
+                                },
+                                {
+                                    name: 'UTM segmentation',
+                                    url: '/docs/data/utm-segmentation',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Query log',
+                            url: '/docs/data/query-log',
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'PostHog Web',
+            icon: 'IconGlobe',
+            color: 'blue',
+            url: '/docs/self-driving/web',
+            description: 'Use PostHog in your browser',
+        },
+        {
+            name: 'PostHog MCP',
+            icon: 'IconPlug',
+            color: 'purple',
+            url: '/docs/model-context-protocol',
+            description: 'Connect PostHog to Claude, Cursor, and other agents',
+        },
+        {
+            name: 'PostHog CLI',
+            icon: 'IconTerminal',
+            color: 'seagreen',
+            url: '/docs/cli',
+            description: 'Use PostHog from your terminal',
+        },
+        {
+            name: 'API',
+            icon: 'IconBrackets',
+            color: 'blue',
+            url: '/docs/api',
+            description: 'REST API reference and authentication',
+            children: [
                 {
                     name: 'API',
                     url: '/docs/api',
@@ -2997,6 +3163,329 @@ export const docsMenu = {
                         },
                     ],
                 },
+            ],
+        },
+        {
+            name: 'Self-host & deploy',
+            icon: 'IconStack',
+            color: 'salmon',
+            url: '/docs/self-host',
+            description: 'Self-hosting, migrations, and reverse proxies',
+            children: [
+                {
+                    name: 'Self-host',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/self-host',
+                        },
+                        {
+                            name: 'Configure',
+                            url: '',
+                            children: [
+                                {
+                                    name: 'Instance settings',
+                                    url: '/docs/self-host/configure/instance-settings',
+                                },
+                                {
+                                    name: 'Environment variables',
+                                    url: '/docs/self-host/configure/environment-variables',
+                                },
+                                {
+                                    name: 'Securing PostHog',
+                                    url: '/docs/self-host/configure/securing-posthog',
+                                },
+                                {
+                                    name: 'Running behind a proxy',
+                                    url: '/docs/self-host/configure/running-behind-proxy',
+                                },
+                                {
+                                    name: 'Session replay storage',
+                                    url: '/docs/self-host/configure/session-replay-storage',
+                                },
+                                {
+                                    name: 'Configuring email',
+                                    url: '/docs/self-host/configure/email',
+                                },
+                                {
+                                    name: 'Configuring Slack',
+                                    url: '/docs/self-host/configure/slack',
+                                },
+                                {
+                                    name: 'Data egress',
+                                    url: '/docs/self-host/configure/egress',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Troubleshooting and FAQs',
+                            url: '/docs/self-host/deploy/troubleshooting',
+                        },
+                        {
+                            name: 'Support',
+                            url: '/docs/self-host/open-source/support',
+                        },
+                        {
+                            name: 'Disclaimer',
+                            url: '/docs/self-host/open-source/disclaimer',
+                        },
+                    ],
+                },
+                {
+                    name: 'Migrate',
+                    url: '/docs/migrate',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/migrate',
+                        },
+                        {
+                            name: 'Managed migrations',
+                            url: '/docs/migrate/managed-migrations',
+                        },
+                        {
+                            name: 'Migrate to PostHog Cloud',
+                            url: '/docs/migrate/migrate-to-cloud',
+                        },
+                        {
+                            name: 'Migrate from Amplitude',
+                            url: '/docs/migrate/migrate-from-amplitude',
+                        },
+                        {
+                            name: 'Migrate from Google Analytics',
+                            url: '/docs/migrate/google-analytics',
+                        },
+                        {
+                            name: 'Migrate from Heap',
+                            url: '/docs/migrate/heap',
+                        },
+                        {
+                            name: 'Migrate from LaunchDarkly',
+                            url: '/docs/migrate/launchdarkly',
+                        },
+                        {
+                            name: 'Migrate from Matomo',
+                            url: '/docs/migrate/matomo',
+                        },
+                        {
+                            name: 'Migrate from Mixpanel',
+                            url: '/docs/migrate/mixpanel',
+                        },
+                        {
+                            name: 'Migrate from Pendo',
+                            url: '/docs/migrate/pendo',
+                        },
+                        {
+                            name: 'Migrate from Plausible',
+                            url: '/docs/migrate/plausible',
+                        },
+                        {
+                            name: 'Migrate from Statsig',
+                            url: '/docs/migrate/statsig',
+                        },
+                    ],
+                },
+                {
+                    name: 'Reverse proxy',
+                    url: '/docs/advanced/proxy',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/advanced/proxy',
+                        },
+                        {
+                            name: 'Managed reverse proxy',
+                            url: '/docs/advanced/proxy/managed-reverse-proxy',
+                        },
+                        {
+                            name: 'AWS CloudFront',
+                            url: '/docs/advanced/proxy/cloudfront',
+                        },
+                        {
+                            name: 'Caddy',
+                            url: '/docs/advanced/proxy/caddy',
+                        },
+                        {
+                            name: 'Cloudflare',
+                            url: '/docs/advanced/proxy/cloudflare',
+                        },
+                        {
+                            name: 'Kubernetes',
+                            url: '/docs/advanced/proxy/kubernetes-ingress-controller',
+                        },
+                        {
+                            name: 'Netlify',
+                            url: '/docs/advanced/proxy/netlify',
+                        },
+                        {
+                            name: 'Next.js rewrites',
+                            url: '/docs/advanced/proxy/nextjs',
+                        },
+                        {
+                            name: 'Next.js proxy file',
+                            url: '/docs/advanced/proxy/nextjs-middleware',
+                        },
+                        {
+                            name: 'nginx',
+                            url: '/docs/advanced/proxy/nginx',
+                        },
+                        {
+                            name: 'Node',
+                            url: '/docs/advanced/proxy/node',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/advanced/proxy/nuxt',
+                        },
+                        {
+                            name: 'Pomerium',
+                            url: '/docs/advanced/proxy/pomerium',
+                        },
+                        {
+                            name: 'Railway',
+                            url: '/docs/advanced/proxy/railway',
+                        },
+                        {
+                            name: 'Remix',
+                            url: '/docs/advanced/proxy/remix',
+                        },
+                        {
+                            name: 'SvelteKit',
+                            url: '/docs/advanced/proxy/sveltekit',
+                        },
+                        {
+                            name: 'Vercel',
+                            url: '/docs/advanced/proxy/vercel',
+                        },
+                        {
+                            name: 'Reference',
+                            url: '/docs/advanced/proxy/proxy-reference',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'Billing',
+            icon: 'IconPiggyBank',
+            color: 'green',
+            url: '/docs/billing/estimating-usage-costs',
+            description: 'Pricing, usage, and spend controls',
+            children: [
+                {
+                    name: 'Billing',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Billing limits and alerts',
+                            url: '/docs/billing/limits-alerts',
+                        },
+                        {
+                            name: 'Estimating usage and costs',
+                            url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'Pre-paid plans',
+                            url: '/docs/billing/pre-paid-plans',
+                        },
+                        {
+                            name: 'Spike detection',
+                            url: '/docs/billing/spike-detection',
+                        },
+                        {
+                            name: 'Common questions about billing',
+                            url: '/docs/billing/common-questions',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'Privacy & GDPR',
+            icon: 'IconShield',
+            color: 'orange',
+            url: '/docs/privacy',
+            description: 'Compliance, data handling, and privacy controls',
+            children: [
+                {
+                    name: 'Privacy',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/privacy',
+                        },
+                        {
+                            name: 'Data collection',
+                            url: '/docs/privacy/data-collection',
+                        },
+                        {
+                            name: 'Data storage',
+                            url: '/docs/privacy/data-storage',
+                        },
+                        {
+                            name: 'GDPR compliance',
+                            url: '/docs/privacy/gdpr-compliance',
+                        },
+
+                        {
+                            name: 'HIPAA guidance',
+                            url: '/docs/privacy/hipaa-compliance',
+                        },
+                        {
+                            name: 'CCPA guidance',
+                            url: '/docs/privacy/ccpa-compliance',
+                        },
+                        {
+                            name: 'SOC 2',
+                            url: '/docs/privacy/soc2',
+                        },
+                        {
+                            name: 'Ad blockers',
+                            url: '/docs/privacy/ad-blockers',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'How PostHog works',
+            icon: 'IconAdvanced',
+            color: 'purple',
+            url: '/docs/how-posthog-works',
+            description: 'Architecture, internals, and contributing',
+            children: [
+                {
+                    name: 'How PostHog works',
+                    url: '',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/how-posthog-works',
+                        },
+                        {
+                            name: 'Data model: fields',
+                            url: '/docs/how-posthog-works/data-model',
+                        },
+                        {
+                            name: 'Ingestion pipeline',
+                            url: '/docs/how-posthog-works/ingestion-pipeline',
+                        },
+                        {
+                            name: 'ClickHouse',
+                            url: '/docs/how-posthog-works/clickhouse',
+                        },
+                        {
+                            name: 'Querying data',
+                            url: '/docs/how-posthog-works/queries',
+                        },
+                        {
+                            name: 'Session Replay',
+                            url: '/docs/how-posthog-works/recordings-ingestion',
+                        },
+                    ],
+                },
                 {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
@@ -3036,6 +3525,37 @@ export const docsMenu = {
                         },
                     ],
                 },
+                {
+                    name: 'Contribute',
+                    url: '/docs/contribute',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/contribute',
+                        },
+                        {
+                            name: 'Code of conduct',
+                            url: '/docs/contribute/code-of-conduct',
+                        },
+                        {
+                            name: 'Recognizing contributions',
+                            url: '/docs/contribute/recognizing-contributions',
+                        },
+                        {
+                            name: 'Badge',
+                            url: '/docs/contribute/badge',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'AI engineering',
+            icon: 'IconLlmPromptEvaluation',
+            color: 'red',
+            url: '/docs/ai-engineering',
+            description: 'Build AI products with PostHog',
+            children: [
                 {
                     name: 'AI engineering',
                     url: '/docs/ai-engineering',
@@ -3140,133 +3660,15 @@ export const docsMenu = {
                         },
                     ],
                 },
-                {
-                    name: 'Winning with PostHog',
-                },
-                {
-                    name: 'Getting HogPilled',
-                    url: '/docs/new-to-posthog/getting-hogpilled',
-                    icon: 'IconCrown',
-                },
-                {
-                    name: 'Measuring activation',
-                    url: '/docs/new-to-posthog/activation',
-                    icon: 'IconLightBulb',
-                },
-                {
-                    name: 'Tracking retention',
-                    url: '/docs/new-to-posthog/retention',
-                    icon: 'IconLineGraph',
-                },
-                {
-                    name: 'Capturing revenue',
-                    url: '/docs/new-to-posthog/revenue',
-                    icon: 'IconHandMoney',
-                },
-                {
-                    name: 'Switching to PostHog',
-                    icon: 'IconLeave',
-                    url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
-                    children: [
-                        {
-                            name: 'Convincing teammates',
-                            url: '/docs/new-to-posthog/switch-guide/switching-to-posthog',
-                        },
-                        {
-                            name: 'Planning your pilot',
-                            url: '/docs/new-to-posthog/switch-guide/planning-your-pilot',
-                        },
-                        {
-                            name: 'What to expect when migrating',
-                            url: '/docs/new-to-posthog/switch-guide/migration-planning',
-                        },
-                    ],
-                },
-                {
-                    name: 'PostHog explained',
-                },
-                {
-                    name: 'What is PostHog?',
-                    url: '/docs/self-driving',
-                    icon: 'IconFlag',
-                },
-                {
-                    name: 'Data types',
-                    url: '/docs/new-to-posthog/understand-posthog',
-                    icon: 'IconHardDrive',
-                    children: [
-                        {
-                            name: 'Your data in PostHog',
-                            url: '/docs/new-to-posthog/understand-posthog',
-                        },
-                        {
-                            name: 'Events',
-                            url: '/docs/data/events',
-                        },
-                        {
-                            name: 'Anonymous vs identified events',
-                            url: '/docs/data/anonymous-vs-identified-events',
-                        },
-                        {
-                            name: 'Actions',
-                            url: '/docs/data/actions',
-                        },
-                        {
-                            name: 'People',
-                            url: '/docs/data/persons',
-                        },
-                        {
-                            name: 'Cohorts',
-                            url: '/docs/data/cohorts',
-                        },
-                        {
-                            name: 'Sessions',
-                            url: '/docs/data/sessions',
-                        },
-                        {
-                            name: 'Data management',
-                            url: '/docs/data',
-                        },
-                        {
-                            name: 'Properties',
-                            url: '/docs/data/event-spec/ecommerce-events',
-                            children: [
-                                {
-                                    name: 'Ecommerce events spec',
-                                    url: '/docs/data/event-spec/ecommerce-events',
-                                },
-                                {
-                                    name: 'Property filter operators',
-                                    url: '/docs/data/property-filters',
-                                },
-                                {
-                                    name: 'Channel type',
-                                    url: '/docs/data/channel-type',
-                                },
-                                {
-                                    name: 'Timestamps',
-                                    url: '/docs/data/timestamps',
-                                },
-                                {
-                                    name: 'UTM segmentation',
-                                    url: '/docs/data/utm-segmentation',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Query log',
-                            url: '/docs/data/query-log',
-                        },
-                        {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
-                            name: 'Replay comments',
-                            url: '/docs/data/comments',
-                        },
-                    ],
-                },
+            ],
+        },
+        {
+            name: 'Toolbar & features',
+            icon: 'IconToolbar',
+            color: 'yellow',
+            url: '/docs/toolbar',
+            description: 'The toolbar, heatmaps, and other built-in tools',
+            children: [
                 {
                     name: 'Tools and features',
                     url: '/docs/toolbar',
@@ -3475,325 +3877,22 @@ export const docsMenu = {
                         },
                     ],
                 },
+            ],
+        },
+        {
+            name: 'Glossary',
+            icon: 'IconBook',
+            color: 'lilac',
+            url: '/docs/glossary',
+            description: 'Terminology and support options',
+            children: [
                 {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Self-host',
-                    url: '',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/self-host',
-                        },
-                        {
-                            name: 'Configure',
-                            url: '',
-                            children: [
-                                {
-                                    name: 'Instance settings',
-                                    url: '/docs/self-host/configure/instance-settings',
-                                },
-                                {
-                                    name: 'Environment variables',
-                                    url: '/docs/self-host/configure/environment-variables',
-                                },
-                                {
-                                    name: 'Securing PostHog',
-                                    url: '/docs/self-host/configure/securing-posthog',
-                                },
-                                {
-                                    name: 'Running behind a proxy',
-                                    url: '/docs/self-host/configure/running-behind-proxy',
-                                },
-                                {
-                                    name: 'Session replay storage',
-                                    url: '/docs/self-host/configure/session-replay-storage',
-                                },
-                                {
-                                    name: 'Configuring email',
-                                    url: '/docs/self-host/configure/email',
-                                },
-                                {
-                                    name: 'Configuring Slack',
-                                    url: '/docs/self-host/configure/slack',
-                                },
-                                {
-                                    name: 'Data egress',
-                                    url: '/docs/self-host/configure/egress',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Troubleshooting and FAQs',
-                            url: '/docs/self-host/deploy/troubleshooting',
-                        },
-                        {
-                            name: 'Support',
-                            url: '/docs/self-host/open-source/support',
-                        },
-                        {
-                            name: 'Disclaimer',
-                            url: '/docs/self-host/open-source/disclaimer',
-                        },
-                    ],
-                },
-                {
-                    name: 'Migrate',
-                    url: '/docs/migrate',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/migrate',
-                        },
-                        {
-                            name: 'Managed migrations',
-                            url: '/docs/migrate/managed-migrations',
-                        },
-                        {
-                            name: 'Migrate to PostHog Cloud',
-                            url: '/docs/migrate/migrate-to-cloud',
-                        },
-                        {
-                            name: 'Migrate from Amplitude',
-                            url: '/docs/migrate/migrate-from-amplitude',
-                        },
-                        {
-                            name: 'Migrate from Google Analytics',
-                            url: '/docs/migrate/google-analytics',
-                        },
-                        {
-                            name: 'Migrate from Heap',
-                            url: '/docs/migrate/heap',
-                        },
-                        {
-                            name: 'Migrate from LaunchDarkly',
-                            url: '/docs/migrate/launchdarkly',
-                        },
-                        {
-                            name: 'Migrate from Matomo',
-                            url: '/docs/migrate/matomo',
-                        },
-                        {
-                            name: 'Migrate from Mixpanel',
-                            url: '/docs/migrate/mixpanel',
-                        },
-                        {
-                            name: 'Migrate from Pendo',
-                            url: '/docs/migrate/pendo',
-                        },
-                        {
-                            name: 'Migrate from Plausible',
-                            url: '/docs/migrate/plausible',
-                        },
-                        {
-                            name: 'Migrate from Statsig',
-                            url: '/docs/migrate/statsig',
-                        },
-                    ],
-                },
-                {
-                    name: 'Reverse proxy',
-                    url: '/docs/advanced/proxy',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/advanced/proxy',
-                        },
-                        {
-                            name: 'Managed reverse proxy',
-                            url: '/docs/advanced/proxy/managed-reverse-proxy',
-                        },
-                        {
-                            name: 'AWS CloudFront',
-                            url: '/docs/advanced/proxy/cloudfront',
-                        },
-                        {
-                            name: 'Caddy',
-                            url: '/docs/advanced/proxy/caddy',
-                        },
-                        {
-                            name: 'Cloudflare',
-                            url: '/docs/advanced/proxy/cloudflare',
-                        },
-                        {
-                            name: 'Kubernetes',
-                            url: '/docs/advanced/proxy/kubernetes-ingress-controller',
-                        },
-                        {
-                            name: 'Netlify',
-                            url: '/docs/advanced/proxy/netlify',
-                        },
-                        {
-                            name: 'Next.js rewrites',
-                            url: '/docs/advanced/proxy/nextjs',
-                        },
-                        {
-                            name: 'Next.js proxy file',
-                            url: '/docs/advanced/proxy/nextjs-middleware',
-                        },
-                        {
-                            name: 'nginx',
-                            url: '/docs/advanced/proxy/nginx',
-                        },
-                        {
-                            name: 'Node',
-                            url: '/docs/advanced/proxy/node',
-                        },
-                        {
-                            name: 'Nuxt',
-                            url: '/docs/advanced/proxy/nuxt',
-                        },
-                        {
-                            name: 'Pomerium',
-                            url: '/docs/advanced/proxy/pomerium',
-                        },
-                        {
-                            name: 'Railway',
-                            url: '/docs/advanced/proxy/railway',
-                        },
-                        {
-                            name: 'Remix',
-                            url: '/docs/advanced/proxy/remix',
-                        },
-                        {
-                            name: 'SvelteKit',
-                            url: '/docs/advanced/proxy/sveltekit',
-                        },
-                        {
-                            name: 'Vercel',
-                            url: '/docs/advanced/proxy/vercel',
-                        },
-                        {
-                            name: 'Reference',
-                            url: '/docs/advanced/proxy/proxy-reference',
-                        },
-                    ],
-                },
-                {
-                    name: 'Billing',
-                    url: '',
-                    children: [
-                        {
-                            name: 'Billing limits and alerts',
-                            url: '/docs/billing/limits-alerts',
-                        },
-                        {
-                            name: 'Estimating usage and costs',
-                            url: '/docs/billing/estimating-usage-costs',
-                        },
-                        {
-                            name: 'Pre-paid plans',
-                            url: '/docs/billing/pre-paid-plans',
-                        },
-                        {
-                            name: 'Spike detection',
-                            url: '/docs/billing/spike-detection',
-                        },
-                        {
-                            name: 'Common questions about billing',
-                            url: '/docs/billing/common-questions',
-                        },
-                    ],
-                },
-                {
-                    name: 'Privacy',
-                    url: '',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/privacy',
-                        },
-                        {
-                            name: 'Data collection',
-                            url: '/docs/privacy/data-collection',
-                        },
-                        {
-                            name: 'Data storage',
-                            url: '/docs/privacy/data-storage',
-                        },
-                        {
-                            name: 'GDPR compliance',
-                            url: '/docs/privacy/gdpr-compliance',
-                        },
-
-                        {
-                            name: 'HIPAA guidance',
-                            url: '/docs/privacy/hipaa-compliance',
-                        },
-                        {
-                            name: 'CCPA guidance',
-                            url: '/docs/privacy/ccpa-compliance',
-                        },
-                        {
-                            name: 'SOC 2',
-                            url: '/docs/privacy/soc2',
-                        },
-                        {
-                            name: 'Ad blockers',
-                            url: '/docs/privacy/ad-blockers',
-                        },
-                    ],
-                },
-                {
-                    name: 'Contribute',
-                    url: '/docs/contribute',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/contribute',
-                        },
-                        {
-                            name: 'Code of conduct',
-                            url: '/docs/contribute/code-of-conduct',
-                        },
-                        {
-                            name: 'Recognizing contributions',
-                            url: '/docs/contribute/recognizing-contributions',
-                        },
-                        {
-                            name: 'Badge',
-                            url: '/docs/contribute/badge',
-                        },
-                    ],
-                },
-                {
-                    name: 'How PostHog works',
-                    url: '',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/how-posthog-works',
-                        },
-                        {
-                            name: 'Data model: fields',
-                            url: '/docs/how-posthog-works/data-model',
-                        },
-                        {
-                            name: 'Ingestion pipeline',
-                            url: '/docs/how-posthog-works/ingestion-pipeline',
-                        },
-                        {
-                            name: 'ClickHouse',
-                            url: '/docs/how-posthog-works/clickhouse',
-                        },
-                        {
-                            name: 'Querying data',
-                            url: '/docs/how-posthog-works/queries',
-                        },
-                        {
-                            name: 'Session Replay',
-                            url: '/docs/how-posthog-works/recordings-ingestion',
-                        },
-                    ],
+                    name: 'Glossary',
+                    url: '/docs/glossary',
                 },
                 {
                     name: 'Support options',
                     url: '/docs/support-options',
-                },
-                {
-                    name: 'Glossary',
-                    url: '/docs/glossary',
                 },
             ],
         },
@@ -6016,7 +6115,7 @@ export const docsMenu = {
             name: 'Semantic layer',
             url: '/docs/semantic-layer',
             color: 'purple',
-            icon: 'IconBook',
+            icon: 'IconListCheck',
             description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
             badge: {
                 title: 'Alpha',
@@ -7294,7 +7393,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'Slack app',
+            name: 'PostHog Slack',
             icon: 'IconAtSign',
             color: 'purple',
             url: '/docs/slack',
@@ -7305,7 +7404,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'Slack app',
+                    name: 'PostHog Slack',
                 },
                 {
                     name: 'Overview',
