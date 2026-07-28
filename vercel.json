@@ -157,6 +157,9 @@
         {
             "source": "/docs/web-analytics/query-traffic-mcp",
             "destination": "/docs/web-analytics/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/product-analytics/build-insights-mcp",
             "destination": "/docs/product-analytics/surfaces/mcp",
             "statusCode": 301
