@@ -2001,6 +2001,11 @@
             "destination": "/docs/session-replay/installation"
         },
         {
+            "source": "/docs/session-replay/search-replays-mcp",
+            "destination": "/docs/session-replay/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/data-retention",
             "destination": "/docs/session-replay/recording-retention"
         },
