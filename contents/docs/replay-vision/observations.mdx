@@ -30,7 +30,7 @@ Observations move through a small state machine:
 - **`failed`** – terminal. The detail view shows an error reason. See [troubleshooting](/docs/replay-vision/troubleshooting#failed-observations) for what each failure kind means.
 - **`ineligible`** – terminal. The session can't be analyzed (no recording, too short, no events, etc.). Doesn't count against your quota. See [running scanners](/docs/replay-vision/running-scanners#ineligible-sessions).
 
-Succeeded, pending, and running observations count against your monthly [budget](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't.
+Succeeded, pending, and running observations spend [credits](/docs/replay-vision/quota-and-limits); failed and ineligible ones don't. A failed observation can be retried from its detail page (or from its card in the replay player), which replaces it with a fresh scan of the same recording.
 
 ## Querying observations as events
 
@@ -45,11 +45,14 @@ Every successful observation is captured as a `$recording_observed` event in you
 | `scanner_type`                   | `monitor`, `classifier`, `scorer`, or `summarizer`                                                                                                  |
 | `scanner_version`                | Version of the scanner config that produced this observation                                                                                        |
 | `session_id`                     | The recording that was observed                                                                                                                     |
-| `triggered_by`                   | `schedule` (background sweep) or `on_demand`                                                                                                        |
-| `triggered_by_user_id`           | The user who triggered an on-demand observation; null for background sweeps                                                                         |
+| `recording_distinct_id`          | Distinct ID of the person in the recorded session (the subject, not whoever triggered the scan)                                                     |
+| `recording_subject_email`        | Email of the recording subject at scan time, when known                                                                                             |
+| `triggered_by`                   | `schedule` (background sweep), `on_demand`, or `retry` (a re-run of a failed observation)                                                           |
+| `triggered_by_user_id`           | The user who triggered an on-demand observation or retry; null for background sweeps                                                                |
 | `model_used`                     | The model that produced the result                                                                                                                  |
 | `provider_used`                  | The LLM provider behind `model_used`                                                                                                                |
-| `credits`                        | What this observation cost, in credits (100 credits = $1), frozen at the price when it ran                                                          |
+| `credits`                        | What this observation cost, in credits (1 credit = $0.01), frozen at the price when it ran                                                          |
+| `emits_signals`                  | Whether the scanner was feeding findings into PostHog Signals when it ran                                                                           |
 | `scanner_output_confidence`      | The model's confidence (0.0 to 1.0)                                                                                                                 |
 | `scanner_output_reasoning`       | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
 | `scanner_output_verdict`         | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"`                                                                                             |
@@ -181,17 +184,17 @@ ORDER BY sessions DESC
 
 ### Cross-scanner: spend by scanner
 
-Each event carries a `credits` property with the observation's cost (100 credits = $1), so spend is just another query. This is the same data behind the **Usage** tab on the Replay Vision home:
+Each event carries a `credits` property with the observation's cost (1 credit = $0.01), so spend is just another query. This is the same data behind the **Usage** tab on the Replay Vision home:
 
 ```sql
 SELECT
     properties.scanner_name AS scanner,
-    sum(toFloat64(properties.credits)) / 100 AS dollars
+    sum(toFloat64(properties.credits)) AS credits
 FROM events
 WHERE event = '$recording_observed'
   AND timestamp > now() - INTERVAL 30 DAY
 GROUP BY scanner
-ORDER BY dollars DESC
+ORDER BY credits DESC
 ```
 
 ### Cross-scanner: filter only high-confidence verdicts

@@ -19,7 +19,7 @@ Check, in order:
 1. **Is the scanner enabled?** Disabled scanners don't sweep. The toggle is on the scanner list and on the scanner detail page.
 2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
 3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
-4. **Is the budget exhausted?** Check the spend tile on the Replay Vision home (the Usage tab breaks spend down per scanner). A scanner whose background sweep is paused by the budget will silently produce nothing until it frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
+4. **Is the credit budget exhausted?** Check the spend tile on the Replay Vision home (the Usage tab breaks spend down per scanner). A scanner whose background sweep is paused by the budget will silently produce nothing until credits free up. See [quota and limits](/docs/replay-vision/quota-and-limits).
 5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
 6. **Is your organization over a usage limit?** If Product analytics or Session replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
 7. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
@@ -94,9 +94,9 @@ Failed observations show an **error reason** on the detail page in the form `kin
 
 ### `provider_transient`
 
-A transient Gemini error – network hiccup, rate limit, model overloaded. This is the one failure kind PostHog retries automatically, on the scanner's next scheduled run.
+A transient Gemini error – network hiccup, rate limit, model overloaded. PostHog retries the provider call automatically during the scan (up to three attempts). An observation only lands here once those retries are exhausted.
 
-**What to do:** a single failure isn't actionable. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
+**What to do:** retry the observation from its detail page. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
 
 ### `provider_rejected`
 
@@ -120,7 +120,7 @@ The model returned a response that didn't match the scanner's expected output sh
 
 The analysis was interrupted before finishing – for example by a deploy or a worker restart – and was cleaned up.
 
-**What to do:** run the scanner on that recording again if you still want the result. Interrupted observations don't cost budget.
+**What to do:** retry the observation from its detail page. The retry replaces the failed row with a fresh scan of the same recording. Interrupted observations don't spend credits. If the same session orphans repeatedly, [contact support](/questions) with the observation ID.
 
 ### `internal_error`
 
