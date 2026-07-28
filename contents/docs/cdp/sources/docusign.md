@@ -24,7 +24,7 @@ You need a DocuSign account and an integration key created in [DocuSign Apps and
 
 For **JWT grant** authentication (recommended), you also need to:
 
-1. Add an RSA keypair to your integration key.
+1. Add an RSA key pair to your integration key.
 2. Grant one-time consent for the user you want to impersonate.
 
 > **Note:** Production integration keys must pass [DocuSign's go-live review](https://developers.docusign.com/docs/esign-rest-api/go-live/) before they work outside the demo environment.
