@@ -606,8 +606,8 @@ const faqItems = [
         content: (
             <p>
                 The data warehouse is free for your first 1M rows/month then from $0.000015/row (historical syncs are
-                always free). Data pipelines are free for 10K events then from $0.0005/event, batch exports free for
-                1M rows then from $0.000015/row, and PostHog AI gives 500 free credits then $0.01/credit. See a full
+                always free). Data pipelines are free for 10K events then from $0.0005/event, batch exports free for 1M
+                rows then from $0.000015/row, and PostHog AI gives 500 free credits then $0.01/credit. See a full
                 breakdown at{' '}
                 <Link to="/pricing" state={{ newWindow: true }}>
                     posthog.com/pricing
@@ -659,8 +659,8 @@ const faqItems = [
                     PostHog AI
                 </Link>{' '}
                 writes the SQL for you against your schema. If you do know SQL, the editor is right there and supports
-                HogQL or standard SQL. Most product engineers start with plain English and drop into SQL when they
-                want precise control.
+                HogQL or standard SQL. Most product engineers start with plain English and drop into SQL when they want
+                precise control.
             </p>
         ),
     },
@@ -678,10 +678,10 @@ const faqItems = [
         trigger: 'How fresh is the data, can I use it in flags and experiments right away?',
         content: (
             <p>
-                Product events are available immediately, no sync step. Synced sources like Stripe or your CRM
-                refresh on a schedule, so there's a short delay on those. Once data is in the warehouse it can power
-                cohorts, feature flags, and experiments natively without a separate pipeline to build to move it into
-                the product.
+                Product events are available immediately, no sync step. Synced sources like Stripe or your CRM refresh
+                on a schedule, so there's a short delay on those. Once data is in the warehouse it can power cohorts,
+                feature flags, and experiments natively without a separate pipeline to build to move it into the
+                product.
             </p>
         ),
     },
@@ -689,8 +689,8 @@ const faqItems = [
         trigger: 'Can I join my external data to product events without building a pipeline?',
         content: (
             <p>
-                Yes, sync a source like Stripe or Postgres, and you can join a revenue column to a signup event
-                without moving data between tools or standing up your own ETL. It all lives in one warehouse.
+                Yes, sync a source like Stripe or Postgres, and you can join a revenue column to a signup event without
+                moving data between tools or standing up your own ETL. It all lives in one warehouse.
             </p>
         ),
     },
@@ -702,9 +702,9 @@ const faqItems = [
                 <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
                     PostHog MCP
                 </Link>
-                . Point an agent (PostHog's, Claude Code, Cursor, whatever you're running) at the PostHog MCP and it
-                can query your data directly. Or take any model or SQL query and expose it as a stable API endpoint
-                your product or an agent calls, so the warehouse becomes something agents read from, not just a place
+                . Point an agent (PostHog's, Claude Code, Cursor, whatever you're running) at the PostHog MCP and it can
+                query your data directly. Or take any model or SQL query and expose it as a stable API endpoint your
+                product or an agent calls, so the warehouse becomes something agents read from, not just a place
                 dashboards pull from.
             </p>
         ),
@@ -823,8 +823,8 @@ export default function DataStack(): JSX.Element {
                             The stack that grows with you, not one you grow out of
                         </h2>
                         <p>
-                            The data you need on day one looks nothing like the data you need at scale. Start with
-                            what a small team needs and add capability as you grow into it.
+                            The data you need on day one looks nothing like the data you need at scale. Start with what
+                            a small team needs and add capability as you grow into it.
                         </p>
                         <div className="not-prose my-6">
                             <OSTable
