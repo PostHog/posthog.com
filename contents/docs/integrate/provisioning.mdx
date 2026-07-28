@@ -72,7 +72,7 @@ Setup is four steps, and you only do them once:
 
 1. **[Decide whether you need to authenticate](#choosing-an-authentication-method).** If you need the GitHub grant endpoints, you do. If not, you can stay a public client and skip step 3.
 2. **[Host a metadata document](#host-a-cimd-metadata-document)** at an HTTPS URL on your domain. That URL becomes your `client_id`. There is no signup form.
-3. **Generate a keypair and publish the public half** at a `jwks_uri`, if you are a confidential client. See [authenticating with a private key](#authenticating-with-a-private-key).
+3. **Generate a key pair and publish the public half** at a `jwks_uri`, if you are a confidential client. See [authenticating with a private key](#authenticating-with-a-private-key).
 4. **[Register your client](#register-your-client)** in every region you serve, and check the diagnostics it returns.
 
 Optionally, [link the app to a PostHog organization](#link-your-partner-app-to-a-posthog-organization-optional) to raise your rate limit, and [declare a scope ceiling](#declare-oauth-scopes-for-your-app-optional).
@@ -381,7 +381,7 @@ The `aud` must name the region you are calling. An assertion minted for `us.post
 
 Rotation is yours to do, and needs an overlap window because PostHog caches your JWK Set for an hour:
 
-1. Generate a new keypair with a new `kid`.
+1. Generate a new key pair with a new `kid`.
 2. Publish **both** public keys in your JWK Set, and start signing with the new one. Anything holding a cached copy of the old set still verifies your old key, so nothing breaks mid-rotation.
 3. After an hour, drop the old key from the set.
 
