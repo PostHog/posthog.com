@@ -456,7 +456,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 Error Tracking + PostHog MCP means your agent can{' '}
-                                <Link to="/docs/error-tracking/debug-errors-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/error-tracking/surfaces/mcp" state={{ newWindow: true }}>
                                     pull the stack trace and session replay together
                                 </Link>
                                 , then write the fix. No reproduction needed, no tab switching.
