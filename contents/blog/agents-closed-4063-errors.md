@@ -144,4 +144,4 @@ Install the MCP server in your preferred client – the AI wizard handles setup 
 npx @posthog/wizard mcp add
 ```
 
-Or [configure it manually](https://posthog.com/docs/model-context-protocol#manual-install).
+Or [configure it manually](https://posthog.com/docs/model-context-protocol#get-started-in-30-seconds).
