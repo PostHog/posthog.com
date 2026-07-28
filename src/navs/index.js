@@ -4156,7 +4156,7 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/web-analytics/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'blue',
@@ -4189,7 +4189,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'MCP',
+                    name: 'PostHog MCP',
                     url: '/docs/web-analytics/surfaces/mcp',
                     icon: 'IconLlmPromptEvaluation',
                     color: 'green',
