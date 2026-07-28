@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We don't have an automated "growth score" for expansion potential, and we probably won't for a while. The signals that matter most are human-judged — depth of buy-in, roadmap fit, whether the champion actually has budget authority — and they don't live in the warehouse. They're hard to represent even heuristically.
+We don't have an automated "growth score" for expansion potential, and we probably won't for a while. The signals that matter most are human-judged (depth of buy-in, roadmap fit, whether the champion actually has budget authority) and they don't live in our data. They're hard to represent even heuristically.
 
 So instead of a model, we have a shared framework. The goal is that two people looking at the same account land in the same ballpark. Your assessment should be reproducible by a teammate, not by a query.
 
@@ -20,15 +20,15 @@ Answer three questions, in order. Calling your own shot matters, but the shot ha
 
 You're looking for **headroom**: the gap between what the account spends today and what a fully-adopted version of this account would spend. Headroom shows up in a few different places, and most accounts only have it in one or two of them.
 
-Don't size it yet. But answering this question with a "yes" implies the opportunity is meaningful — don't keep an account just because you like the people. They're probably great. That isn't headroom.
+Don't size it yet. But answering this question with a "yes" implies the opportunity is meaningful. Don't keep an account just because you like the people. (They're probably great)
 
 ### Where headroom comes from
 
 Most accounts won't have all four of these. One or two is normal.
 
-**1. Use case gaps.** Map their paid products against the [use case framework](/handbook/growth/use-case-selling). Which use cases are they in? Which *applicable* use cases are untouched? A B2C mobile app has no Group Analytics story. A company with no AI features has no LLM analytics story. Only count use cases that plausibly map to who the company actually is externally, not everything that's technically possible. This is a big reason a heuristic model fails here — it needs the human context to make that call.
+**1. Use case gaps.** Map their paid products against the [use case framework](/handbook/growth/use-case-selling). Which use cases are they in? Which *applicable* use cases are untouched? A B2C mobile app has no Group Analytics story. A company with no AI features has no LLM analytics story. Only count use cases that plausibly map to who the company actually is externally, not everything that's technically possible. This is a big reason a heuristic model fails here, because it needs the human context to make that call.
 
-**2. Workloads.** How many apps, products, environments, or business units do they have, and how many are instrumented? One workload fully instrumented at a company with a single product surface is largely saturated. Three business units globally with only one instrumented is an expansion lever. If you don't know the answer — and you often can't get it from LinkedIn or enrichment data alone — that's not a "no", it means you need more discovery.
+**2. Workloads.** How many apps, products, environments, or business units do they have, and how many are instrumented? One workload fully instrumented at a company with a single product surface is largely saturated. Three business units globally with only one instrumented is an expansion lever. If you don't know the answer and you often can't get it from LinkedIn or enrichment data alone, that's not a "no" necessarily, it means you need more discovery.
 
 **3. Free-tier usage below the paid threshold.** Someone may be experimenting with a product area, which is a warm-intent signal. Sometimes they turned on Error Tracking by accident while clicking around. Sometimes they're partway through instrumenting it properly. Either way it's worth a check-in to find out which.
 
@@ -40,14 +40,14 @@ Equally important: know when there's *nothing* there. An account is saturated wh
 
 - All applicable use cases are at meaningful spend and actually leveraged by the customer
 - Single workload, fully instrumented, and no other workloads exist
-- The champion has told you directly there's no roadmap for more ("we're happy, nothing planned") — weak on its own, so pair it with other indicators
+- The champion has told you directly there's no roadmap for more ("we're happy, nothing planned") This is weak on its own, so pair it with other indicators
 - Usage has been flat or declining for 2+ quarters
 - The last two expansion conversations went nowhere, and not because of timing
 - Price sensitivity is the dominant theme of every conversation
 
 A TAM being willing to let go of an account is itself a saturation signal, since TAMs are incentivized to maximize their book outcome. But don't take that at face value either.
 
-Saturated is not a bad thing — quite the opposite. It's a healthy, retained customer who is bought into PostHog at an organizational level. For our purposes here it just means the account doesn't require a TAM. Say so in your account plan and move on. The worst outcome of this exercise is inventing an opportunity to justify keeping an account.
+Saturated is not a bad thing.  Quite the opposite. It's a healthy, retained customer who is bought into PostHog at an organizational level. For our purposes here it just means the account doesn't require a TAM. The worst outcome of this exercise is inventing an opportunity to justify keeping an account.
 
 ---
 
@@ -81,7 +81,7 @@ There's no formula. There is a small set of evidence sources you can reliably bu
 
 **2. What they've told you.** Their current vendor's contract price, their company or product roadmap, their team sizes, their budget cycle. Most estimation problems are actually discovery problems: if you can't size the opportunity, the next step is getting the information that would let you. "What are you paying Sentry today?" and "how much traffic does the other product do?" are sizing questions.
 
-**3. Comparable accounts in your own book.** You have direct visibility into what accounts of similar size, archetype, and vertical spend on the product you're pitching. This is never 1:1 though — similar companies still differ in org structure, product surface area, and how saturated they are across PostHog.
+**3. Comparable accounts in your own book.** You have direct visibility into what accounts of similar size, archetype, and vertical spend on the product you're pitching. This is never 1:1, though similar companies still differ in org structure, product surface area, and how saturated they are across PostHog.
 
 **4. Bottoms-up from their product.** For a new workload or team, estimate from what you know about *that* workload: public traffic, app store presence, team size, and how the equivalent metric compares to the workloads they've already instrumented.
 
