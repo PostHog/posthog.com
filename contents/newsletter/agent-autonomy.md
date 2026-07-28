@@ -50,7 +50,7 @@ Together, these two factors[^1] point you to one of four levels for any task:
 
 You can map these four levels to a very simple decision tree, which you can apply to any task:
 
-![Decision tree for the four agent autonomy levels](https://res.cloudinary.com/dmukukwp6/image/upload/v1785215028/agent_autonomy_decision_tree_a058ef998d.png)
+![Decision tree for the four agent autonomy levels, from least to most autonomous](https://res.cloudinary.com/dmukukwp6/image/upload/v1785255074/agent_autonomy_decision_tree_v3_92a95ccfe1.png)
 
 This helps you make decisions about how much to delegate to your agents, but you still can engineer your pipeline to enable higher autonomy for any specific task.
 
@@ -78,7 +78,7 @@ _When the work is **hard to check** + **cheap to undo**_
 
 This level of agent autonomy is common for tasks that need subjective evaluation since it’s hard to teach agents taste and judgment (for now, at least).
 
-![Level 1: the agent writes code, the human reviews and gives feedback, and the human owns every merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785215029/agent_autonomy_level_1_human_in_the_loop_09d1750587.png)
+![Level 1: the agent writes code, the human reviews and gives feedback, and the human owns every merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785255076/agent_autonomy_level_1_human_in_the_loop_v3_c586e08e71.png)
 
 Human-in-the-loop tasks are considered cheap to undo since the code stays in draft mode and won’t get merged until it’s verified by a human. An undo just means kicking off another iteration.
 
@@ -96,7 +96,7 @@ Human-in-the-loop tasks are considered cheap to undo since the code stays in dra
 
 _When the work is **easy to check** + **costly to undo**_
 
-![Level 2: the human delegates, the agent writes and tests code, and a safety gate stands between the agent and the merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785216765/agent_autonomy_level_2_agent_delegation_v2_80dfa21bc2.png)
+![Level 2: the human delegates, the agent writes and tests code, and a safety gate stands between the agent and the merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785255077/agent_autonomy_level_2_agent_delegation_v3_7e4c330608.png)
 
 This is the level that most developer tasks are today. An agent writes code that can be tested deterministically, but the final act of merging it is gated behind a final safety check.
 
