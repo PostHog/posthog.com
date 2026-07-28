@@ -6,7 +6,13 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
-import { HedgehogCodeBubble, HedgehogPuzzle } from '@posthog/brand/hoggies'
+import {
+    Hedgehog996,
+    HedgehogCaveman,
+    HedgehogCodeBubble,
+    HedgehogFinalEvolution,
+    HedgehogPuzzle,
+} from '@posthog/brand/hoggies'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import OSTable from 'components/OSTable'
@@ -33,7 +39,6 @@ import {
     IconUpload,
 } from '@posthog/icons'
 
-const SIGNUP_URL = 'https://app.posthog.com/signup'
 const sectionHeadingClassName = 'my-6 mt-12 text-2xl font-bold @md/reader-content:text-3xl'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -50,6 +55,9 @@ const TAB_IMAGE_SELF_DRIVE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
 const CTA_HOG_IMAGE: CloudinarySrc =
     'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png'
+// Light-only for now – the diagram is black on white, so it has no dark variant to swap to.
+const ARCHITECTURE_DIAGRAM: CloudinarySrc =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_07_28_T06_10_05_014_Z_d0cdcc0eab.png'
 
 // Matches the `highlight` colour token; RoughAnnotation draws its own stroke, so it needs
 // a raw colour rather than a class.
@@ -273,8 +281,15 @@ const dataInTabs: TabbedCarouselTab[] = [
         content: (
             <TabPanel title="Ask @PostHog" highlightedTitle="anything" highlightColor="red" image={TAB_IMAGE_ASK}>
                 <p className="m-0">
-                    With all your data in one place, PostHog becomes omniscient about your business. Use PostHog AI or
-                    our Slack app to generate SQL queries, model your data, and get insights about your users' behavior.
+                    With all your data in one place, PostHog becomes omniscient about your business. Use{' '}
+                    <Link className="underline font-semibold" to="/data-stack/posthog-ai">
+                        PostHog AI
+                    </Link>{' '}
+                    or our{' '}
+                    <Link className="underline font-semibold" to="/slack">
+                        Slack app
+                    </Link>{' '}
+                    to generate SQL queries, model your data, and get insights about your users' behavior.
                 </p>
                 <p className="m-0 mt-3">
                     PostHog AI can be used by everyone, product teams can ask questions and get insights without relying
@@ -300,8 +315,11 @@ const dataInTabs: TabbedCarouselTab[] = [
             >
                 <p className="m-0">
                     What are you going to do with all those insights? PostHog understands your product. It can identify
-                    usage patterns, triage bugs, and open PRs automatically, self-driving development of your product
-                    based on what it knows your users need.
+                    usage patterns, triage bugs, and open PRs automatically,{' '}
+                    <Link className="underline font-semibold" to="/products">
+                        self-driving development
+                    </Link>{' '}
+                    of your product based on what it knows your users need.
                 </p>
             </TabPanel>
         ),
@@ -364,14 +382,42 @@ const growthRows: { label: string; cells: [string, string, string] }[] = [
     },
 ]
 
+// Stages 2, 4 and 5, so the header row grows up across the timeframes the same way the
+// table says your stack does. The final hog is drawn mid-flight with more empty space in
+// its canvas, so it needs a larger box to read at the same weight as the others.
+const GROWTH_HOG_SLOT = 26
+const growthStageHogs = [
+    { Hog: HedgehogCaveman, size: GROWTH_HOG_SLOT },
+    { Hog: Hedgehog996, size: GROWTH_HOG_SLOT },
+    { Hog: HedgehogFinalEvolution, size: 34 },
+]
+
 // Leading column is unlabeled – it holds the row's category rather than a timeframe.
 const growthTableColumns = [
     { name: '', align: 'left' as const, width: 'minmax(5rem,max-content)' },
-    ...growthColumns.map((column) => ({
-        name: column,
-        align: 'left' as const,
-        width: 'minmax(10rem,1fr)',
-    })),
+    ...growthColumns.map((column, index) => {
+        const { Hog: StageHog, size } = growthStageHogs[index]
+        return {
+            name: (
+                <span className="flex items-center gap-2">
+                    {/* Every header reserves the same slot and centres its hog inside it, out of
+                        flow, so an oversized hog can't set the row height or shift the label. */}
+                    <span
+                        className="relative block shrink-0"
+                        style={{ width: GROWTH_HOG_SLOT, height: GROWTH_HOG_SLOT }}
+                    >
+                        <StageHog
+                            size={size}
+                            className="absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
+                        />
+                    </span>
+                    {column}
+                </span>
+            ),
+            align: 'left' as const,
+            width: 'minmax(10rem,1fr)',
+        }
+    }),
 ]
 
 const growthTableRows = growthRows.map((row) => ({
@@ -579,11 +625,22 @@ const faqItems = [
     {
         trigger: 'How does this connect to the rest of PostHog?',
         content: (
-            <p>
-                Natively. Warehouse data can power cohorts used in experiments and flags. Pipeline data flows directly
-                into analytics. DuckDB queries run on the same dataset your dashboards use. There's no separate sync to
-                set up.
-            </p>
+            <>
+                <p>
+                    Natively. Warehouse data can power cohorts used in experiments and flags. Pipeline data flows
+                    directly into analytics. DuckDB queries run on the same dataset your dashboards use. There's no
+                    separate sync to set up.
+                </p>
+                {/* On a light card in both themes, since the diagram has no dark variant. */}
+                <div className="not-prose mt-4 overflow-hidden rounded-md border border-primary bg-white p-4">
+                    <CloudinaryImage
+                        src={ARCHITECTURE_DIAGRAM}
+                        alt="Warehouse sources and PostHog product events feed the context warehouse – an S3 data lake partitioned per org, a DuckLake catalog, and a single-tenant DuckDB in a Firecracker MicroVM – which in turn serves the Postgres wire protocol, analytics and experiments, AI agents, and endpoints"
+                        className="!block w-full"
+                        imgClassName="!block w-full"
+                    />
+                </div>
+            </>
         ),
     },
 ]
@@ -616,12 +673,18 @@ export default function DataStack(): JSX.Element {
                                         Every feature you ship is downstream of your data.
                                     </p>
                                     <p className="mb-0 mt-2 max-w-3xl text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
-                                        Collect, store, transform, query using your context warehouse, and let PostHog
-                                        self-drive development based on customer signals.
+                                        Collect, store, transform, query using your{' '}
+                                        <Link
+                                            to="/blog/what-is-a-context-warehouse"
+                                            className="underline font-semibold"
+                                        >
+                                            context warehouse
+                                        </Link>
+                                        , and let PostHog self-drive development based on customer signals.
                                     </p>
                                     <div className="mt-6">
                                         <CallToAction
-                                            to={SIGNUP_URL}
+                                            to="https://app.posthog.com/data-management/sources"
                                             externalNoIcon
                                             size="md"
                                             className="max-w-[175px]"
@@ -708,13 +771,17 @@ export default function DataStack(): JSX.Element {
                                         the whole point.
                                     </p>
                                     <div className="flex flex-wrap items-center gap-3">
-                                        <CallToAction to={SIGNUP_URL} externalNoIcon size="md">
+                                        <CallToAction
+                                            to="https://app.posthog.com/data-management/sources"
+                                            externalNoIcon
+                                            size="md"
+                                        >
                                             Get Connected
                                         </CallToAction>
                                         <p className="mb-0 text-sm text-secondary">
                                             Not using PostHog?{' '}
                                             <Link
-                                                to={SIGNUP_URL}
+                                                to="https://app.posthog.com/signup"
                                                 external
                                                 className="font-semibold text-red dark:text-yellow"
                                             >
