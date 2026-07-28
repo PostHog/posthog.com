@@ -11,6 +11,9 @@ export const replayVision = {
     colorSecondary: 'yellow',
     category: 'product_engineering',
     slug: 'replay-vision',
+    // Drop on GA launch day. Pricing itself stays hidden until billing serves the product,
+    // but this label doesn't, so it keeps the product from reading as GA in the meantime.
+    status: 'beta',
     slider: {
         // Values in credits. min doubles as the "first N credits free" copy, so it tracks the free allocation.
         marks: [2500, 10000, 50000, 100000],
