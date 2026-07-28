@@ -4483,6 +4483,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Webhooks',
+                    url: '/docs/replay-vision/webhooks',
+                    icon: 'IconWebhooks',
+                    color: 'yellow',
+                },
+                {
                     name: 'Improving accuracy',
                     url: '/docs/replay-vision/quality',
                     icon: 'IconThumbsUp',
