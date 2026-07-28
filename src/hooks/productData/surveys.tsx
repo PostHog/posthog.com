@@ -113,7 +113,7 @@ export const surveys = {
     overview: {
         title: 'Ask anything with no-code surveys',
         description:
-            'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
+            'Surveys is one of the tools that makes your product self-driving: the user feedback agents use to see what works. Built to natively work with product analytics, session replay, feature flags, and experiments.',
         eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
