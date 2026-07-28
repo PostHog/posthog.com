@@ -19,7 +19,7 @@ cargo add opentelemetry-otlp --features reqwest-rustls
 
 > **Important:** `opentelemetry-otlp` enables no TLS backend by default, so `reqwest-rustls` is required to reach an `https` endpoint. Without it, every export fails immediately with `HTTP export failed: network error`.
 
-This guide targets `opentelemetry*` 0.32 and needs 0.28 or later. `opentelemetry-appender-tracing` bridges the [`tracing`](https://docs.rs/tracing) ecosystem into OpenTelemetry. If your application uses the [`log`](https://docs.rs/log) crate, swap it for `opentelemetry-appender-log`.
+This guide targets `opentelemetry*` 0.32 and needs 0.28 or later. If your application uses the [`log`](https://docs.rs/log) crate rather than [`tracing`](https://docs.rs/tracing), swap `opentelemetry-appender-tracing` for `opentelemetry-appender-log`.
 
 </Step>
 
@@ -48,6 +48,8 @@ use tracing_subscriber::{prelude::*, EnvFilter};
 fn init_logs() -> SdkLoggerProvider {
     let token = std::env::var("POSTHOG_PROJECT_TOKEN").expect("POSTHOG_PROJECT_TOKEN not set");
 
+    // use the blocking client even in an async app, the batch processor exports from
+    // its own thread and the async reqwest-client feature panics there
     let exporter = LogExporter::builder()
         .with_http()
         .with_endpoint("<ph_client_api_host>/i/v1/logs")
@@ -59,13 +61,13 @@ fn init_logs() -> SdkLoggerProvider {
         .build()
         .expect("failed to build the OTLP log exporter");
 
+    // you could also set the service name outside your application, with OTEL_SERVICE_NAME
     let provider = SdkLoggerProvider::builder()
         .with_resource(Resource::builder().with_service_name("my-service").build())
         .with_batch_exporter(exporter)
         .build();
 
-    // The transport crates log through tracing too, so their output would loop
-    // back through the exporter.
+    // the transport crates log through tracing too, so their output would loop back
     let export_filter = EnvFilter::new("info")
         .add_directive("opentelemetry=off".parse().unwrap())
         .add_directive("hyper=off".parse().unwrap())
@@ -74,7 +76,7 @@ fn init_logs() -> SdkLoggerProvider {
 
     tracing_subscriber::registry()
         .with(OpenTelemetryTracingBridge::new(&provider).with_filter(export_filter))
-        // Export failures are only reported here, so keep this layer.
+        // export failures are only reported here, so keep this layer
         .with(
             tracing_subscriber::fmt::layer().with_filter(
                 EnvFilter::new("info").add_directive("opentelemetry=debug".parse().unwrap()),
@@ -86,30 +88,24 @@ fn init_logs() -> SdkLoggerProvider {
 }
 
 fn main() {
+    // keep the provider alive for the lifetime of the process
     let provider = init_logs();
 
-    tracing::info!("Service started");
+    tracing::info!("this is a log line");
 
-    // ... run your application here ...
-
-    // Flush on graceful exit. Logs emitted after this are dropped.
+    // flush on graceful exit, logs emitted after this are dropped. on tokio's
+    // current-thread runtime call this from spawn_blocking, it can deadlock
     if let Err(err) = provider.shutdown() {
         eprintln!("failed to flush logs: {err}");
     }
 }
 ```
 
-Keep `provider` alive for the lifetime of the process. On Tokio's current-thread runtime, call the blocking `shutdown()` from `tokio::task::spawn_blocking` rather than your main thread, which can deadlock.
-
-The service name is what you filter on in PostHog. To set it outside your application, drop `with_service_name()` and export `OTEL_SERVICE_NAME`, which `Resource::builder()` picks up on its own.
-
-Alternatively, you can pass the project token as a query parameter, though it will show up in proxy and CDN access logs:
+Alternatively, you can pass the project token as a query parameter by modifying the URL path, though it will then appear in proxy and CDN access logs:
 
 ```rust
 .with_endpoint("<ph_client_api_host>/i/v1/logs?token=<ph_project_token>")
 ```
-
-> **Note:** Use the blocking `reqwest` client even in an async application. The batch log processor exports from its own dedicated thread, so the async `reqwest-client` feature panics there with `there is no reactor running`.
 
 </Step>
 
@@ -118,15 +114,14 @@ Alternatively, you can pass the project token as a query parameter, though it wi
 Now you can start logging with OpenTelemetry. The message becomes the log body, and structured fields become searchable attributes:
 
 ```rust
+// debug! and trace! are excluded by the info filter above
 tracing::info!(user_id = "123", action = "login", "User action");
 tracing::warn!(endpoint = "/old-api", "Deprecated API used");
 tracing::error!(error = "Connection timeout", "Database connection failed");
 
-// These keys are matched exactly. snake_case versions won't link.
+// these keys are matched exactly, snake_case versions won't link
 tracing::info!(posthogDistinctId = %user_id, sessionId = %session_id, "Checkout completed");
 ```
-
-`debug!` and `trace!` are excluded by the `info` default in the filter above. Change it to `debug` if you want them in PostHog.
 
 </Step>
 
@@ -137,8 +132,6 @@ Once everything is configured, test that logs are flowing into PostHog:
 1. Send a test log from your application
 2. Check the PostHog Logs interface for your log entries
 3. Verify the logs appear in your project
-
-If nothing arrives, check stdout. A working export logs `HttpClient.ExportSucceeded`, and a broken one logs `BatchLogProcessor.ExportError`.
 
 <CallToAction type="primary" to="https://app.posthog.com/logs">
 View your logs in PostHog
