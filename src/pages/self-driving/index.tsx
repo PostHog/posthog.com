@@ -285,7 +285,7 @@ const loopTabs: TabbedCarouselTab[] = [
                     Scouts <Badge>Beta</Badge> run on a schedule and build durable memory of what they've seen.
                 </p>
                 <IconGroupColumns groups={scoutGroups} />
-                <Callout>We run a troop of 35 scouts on the PostHog web app.</Callout>
+                <Callout>We run a troop of 35 scouts – built-in and custom – on the PostHog web app.</Callout>
             </TabPanel>
         ),
     },
@@ -880,10 +880,14 @@ const faqItems = [
         trigger: 'What does it cost?',
         content: (
             <p>
-                Self-driving is in open paid beta. Scouts, reports, and the Inbox are all free. You pay a flat fee per
-                pull request (valuable work actually completed) and there's a free tier to start. See{' '}
-                <Link to="/pricing" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
-                    pricing
+                Self-driving is in open paid beta. Scouts, reports, and the Inbox are all free. You pay a flat $15 per
+                pull request (valuable work completed), and your first 3 PRs each month are free. See{' '}
+                <Link
+                    to="/docs/self-driving/pricing"
+                    state={{ newWindow: true }}
+                    className="text-red dark:text-yellow font-semibold"
+                >
+                    self-driving pricing
                 </Link>{' '}
                 for the latest.
             </p>

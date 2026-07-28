@@ -52,6 +52,8 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 
 Most are specialists that watch one surface in depth; the [general](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) scout is the exception – it watches the seams between surfaces, like a deploy, then an error burst, then a conversion dip, that no single specialist would catch on its own. Browse them all in the [`products/signals/skills`](https://github.com/PostHog/posthog/tree/master/products/signals/skills) directory.
 
+A bigger troop isn't a better troop. Every enabled scout is a recurring scheduled agent run, so the setup wizard defaults to the general scout plus one or two specialists for the products you use most – copy that instinct when enabling more. And if error tracking or session replay are connected as [signal sources](/docs/self-driving/inbox/sources), leave their scouts off: the native sources already deliver the same findings to your inbox, so the scout only duplicates them.
+
 ## Ideas for custom scouts
 
 You can create your own scout for anything you care about. The job is the same each time: pick a surface you wish someone was watching, write down what "worth my attention" means for it in plain English, and let the scout hold that bar for you. Some directions to steal:

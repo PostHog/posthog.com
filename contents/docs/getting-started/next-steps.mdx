@@ -117,3 +117,15 @@ Or tell PostHog AI to:
 </CalloutBox>
 
 To chat with PostHog AI, opt into the beta in the [feature previews menu](https://app.posthog.com/settings/user-feature-previews#artificial-hog).
+
+## 9. Make your product self-driving
+
+Everything above feeds one place: your product's context. [Self-driving](/docs/self-driving) puts it to work – scouts watch your data, findings become reports in your inbox, and actionable ones become pull requests for you to review and merge.
+
+Turning it on takes one command:
+
+```bash
+npx -y @posthog/wizard@latest self-driving
+```
+
+The wizard connects GitHub, enables the signal sources that match your product, and sets up your scouts. Your first reports land in your inbox within about 30 minutes. See the [setup guide](/docs/self-driving/setup) for what it does and how to confirm it's working.

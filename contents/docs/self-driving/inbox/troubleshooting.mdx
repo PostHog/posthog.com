@@ -13,19 +13,56 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-This page covers common issues with inbox reports and agent research.
+This page covers how to tell whether self-driving is working, and what to check when it isn't.
+
+## What a healthy first day looks like
+
+Self-driving doesn't produce value all at once – it climbs a ladder. Knowing which rung you're on tells you whether to wait or to fix something:
+
+1. **A minute or two after setup:** if a source already has data (say, existing error issues), records appear in your inbox.
+2. **Up to 15 minutes:** background research on a new report is deep, so a report can take this long to finish investigating.
+3. **Within ~30 minutes:** your scouts run their first scheduled scan, and their findings start arriving as reports.
+4. **Within a day:** for a typical actionable report, the loop closes end to end – signal, report, pull request, review, merge.
+
+If you're inside these windows, wait. If you're past them, work through the checks below.
 
 ## Reports are not appearing
 
-Background research is deep, so it can take up to fifteen minutes. If you've just connected a [source](/docs/self-driving/inbox/sources), check which case applies.
+Work through these in order – the first three fail silently, so nothing in the inbox tells you they're the problem.
 
-### The source already has data
+### AI data processing is off
 
-If the source already has data to ingest, records should appear in the inbox after a minute or two. For example, this applies when you connect [error tracking](/docs/error-tracking) and already have error issues in PostHog.
+Self-driving requires [AI data processing approval](/docs/posthog-ai/allow-access) at the organization level. Without it, findings are dropped before they reach your inbox – no error, no empty state, just silence. An org admin can turn it on in your organization's AI settings.
+
+### GitHub isn't connected
+
+Agents research and fix issues through PostHog's GitHub integration. If it was never connected (or was disconnected), reports lose their research and implementation path. Check your project's integrations settings for a GitHub connection, or re-run the [setup wizard](/docs/self-driving/setup) – it verifies this for you.
+
+### No source or scout is watching
+
+You're only set up when at least one signal source or scout is enabled. Open your inbox settings and confirm your [sources](/docs/self-driving/inbox/sources) are toggled on, and check the scouts page for at least one enabled [scout](/docs/self-driving/scouts). Scout findings also flow through a signal source of their own – the setup wizard enables it automatically, but if you configured sources by hand and scouts seem silent, re-running the wizard is the fastest fix.
 
 ### The source is empty
 
-If the source is empty, the inbox has nothing to report yet. For example, this applies when you connect error tracking in a blank project. The inbox will surface reports once there are user issues to resolve.
+If the source is enabled but has no data, the inbox has nothing to report yet. For example, this applies when you connect [error tracking](/docs/error-tracking) in a blank project. The inbox will surface reports once there are user issues to resolve. You can verify scouts are running even when they find nothing – see the next section.
+
+### You've hit your billing limit
+
+Self-driving pauses PR generation when you reach your [billing limit](/docs/self-driving/pricing). Reports keep arriving, but nothing ships until the limit resets or you raise it.
+
+## Verify scouts are running
+
+Every scout run that files a report emits a `$scout_report_emitted` event, so you can check activity directly instead of watching the inbox:
+
+```sql
+SELECT properties.skill_name AS scout, properties.title, properties.priority, properties.report_url
+FROM events
+WHERE event = '$scout_report_emitted'
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
+No rows after the first ~30 minutes means scouts aren't running (check the section above). Rows with no inbox reports means findings are being filtered before reaching you – check AI data processing first.
 
 ## Audit the agent
 

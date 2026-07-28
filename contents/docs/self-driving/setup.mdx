@@ -14,11 +14,18 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-Turning on self-driving means connecting the data sources, repositories, and agents that let PostHog ship work for you. The setup wizard handles it all in one command, including installing PostHog if you haven't already. Most teams are set up in a few minutes.
+Setting up self-driving means giving PostHog three things: **eyes** (signal sources and scouts watching your product), **hands** (a GitHub connection so agents can open pull requests), and **permission** (AI data processing approved for your organization). The setup wizard handles all three in one command, including installing PostHog if you haven't already.
+
+Setup takes a few minutes. Your first findings land in your inbox within about 30 minutes.
 
 <CalloutBox icon="IconInfo" title="Before you start" type="fyi">
 
-You'll need a GitHub repository you want agents to work in. If you don't have PostHog installed yet, the wizard sets it up for you as part of the flow.
+You'll need:
+
+- **A GitHub repository** you want agents to work in. The wizard connects PostHog's GitHub integration during setup – this is required, and setup can't finish without it.
+- **AI data processing turned on** for your organization ([how to enable it](/docs/posthog-ai/allow-access)). Self-driving runs on AI, and without this approval, findings are dropped before they reach your inbox. The wizard checks this and tells you how to enable it if it's off.
+
+If you don't have PostHog installed yet, the wizard sets it up for you as part of the flow.
 
 </CalloutBox>
 
@@ -30,29 +37,41 @@ The fastest way to turn on self-driving is our setup wizard:
 
 <WizardCommand command="self-driving" />
 
-The wizard checks whether PostHog is already installed and capturing events. If it isn't, it installs PostHog first, then continues straight into self-driving. From there it enables your signal sources, sets up your scouts, and hands you a link to your inbox.
+The wizard checks whether PostHog is already installed and capturing events. If it isn't, it installs PostHog first, then continues straight into self-driving. From there it:
 
-The signal sources it can turn on include [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and external sources like Jira, Zendesk, GitHub Issues, and Linear. The more you enable, the more PostHog can watch to make your product self-driving.
+- **Connects GitHub**, so agents can research your code and open pull requests. This step is required – if you skip it, setup stops.
+- **Enables your signal sources** based on what your product actually uses: [error tracking](/docs/error-tracking), [session replay](/docs/session-replay), and support by default, plus external sources like GitHub Issues, Linear, and Zendesk if you use them (the wizard asks first).
+- **Tunes your scout troop.** Every scout is a scheduled agent run, so the wizard keeps the troop small and relevant: the general scout plus one or two specialists for the products you use most. You can enable more later from the scouts page – see [scouts](/docs/self-driving/scouts) for the cost tradeoff.
+- **Writes a setup report** to `posthog-self-driving-report.md` in your repo. It lists exactly what was enabled, what was skipped and why, and any follow-ups that need a human. Read it – it's the receipt for your whole setup.
 
-<CalloutBox icon="IconInfo" title="AI data processing required" type="fyi">
-
-Self-driving relies on AI, so your organization needs [AI data processing turned on](/docs/posthog-ai/allow-access). The wizard checks this and tells you how to enable it if it's off.
-
-</CalloutBox>
-
-Prefer to install PostHog manually? Follow the [install guide](/docs/getting-started/install) first, then run the command above.
+Prefer to install PostHog manually? Follow the [install guide](/docs/getting-started/install) first, then run the command above. You can also enable sources by hand from your inbox settings – see [sources](/docs/self-driving/inbox/sources).
 
 </Step>
 
 <Step title="Connect Slack" badge="recommended">
 
-Add the [PostHog Slack app](/docs/slack) so you can summon agents and review their work from your team's channels. You connect your Slack workspace once, and each teammate who wants to ship a pull request connects their own GitHub. PostHog also posts a notification to the **#posthog-inbox** channel whenever a new report lands, so your team sees work as it comes in.
+Add the [PostHog Slack app](/docs/slack) so you can summon agents and review their work from your team's channels. You connect your Slack workspace once, and each teammate who wants to ship a pull request connects their own GitHub account. PostHog also posts a notification to the **#posthog-inbox** channel whenever a new report lands, so your team sees work as it comes in.
 
 </Step>
 
-<Step checkpoint title="Watch your first scout run" badge="required">
+<Step checkpoint title="Confirm it's working" badge="required">
 
-The wizard hands you a link to your [inbox](/docs/self-driving/inbox). From there, scouts run on a schedule and emit [signals](/docs/self-driving/signals), related signals group into [reports](/docs/self-driving/reports), and those reports land in your inbox ranked by priority and ready to act on.
+You're set up when at least one signal source or scout is watching – that's the definition the product itself uses. Here's what to expect, and when:
+
+- **Right away:** the wizard hands you a link to your [inbox](/docs/self-driving/inbox). If sources like error tracking already have data, records appear within a minute or two.
+- **Within ~30 minutes:** your scouts run their first scan and findings start landing in your inbox as [reports](/docs/self-driving/reports), ranked by priority.
+
+Want proof instead of patience? Every scout run that files a report emits a `$scout_report_emitted` event. Query it directly:
+
+```sql
+SELECT properties.skill_name AS scout, properties.title, properties.priority, properties.report_url
+FROM events
+WHERE event = '$scout_report_emitted'
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
+Nothing after 30 minutes? Check the [troubleshooting guide](/docs/self-driving/inbox/troubleshooting) – the usual causes are an empty source, a missing GitHub connection, or AI data processing being off.
 
 </Step>
 
