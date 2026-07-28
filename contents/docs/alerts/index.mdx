@@ -10,13 +10,13 @@ availability:
 
 Alerts enable you to monitor your [insights](/product-analytics) and get notified when something important changes. You can set fixed thresholds (e.g., notify me when unique visitors exceed 5,000) or use [anomaly detection](#anomaly-detection) to automatically flag unusual patterns in your data.
 
-Alerts are supported on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
+Alerts are supported on [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels) (steps and trends views only), and [SQL (HogQL)](/docs/sql) insights.
 
 Free tier organizations can create up to 5 alerts total. [Paid plans](/pricing) have no limit.
 
 ## Use cases
 
-Since alerts work on [trends](/docs/product-analytics/trends), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
+Since alerts work on [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), and [SQL (HogQL)](/docs/sql) insights, you can monitor nearly any metric you track in PostHog. Common use cases include:
 
 - **Monitor traffic spikes** – Get notified when pageviews or unique visitors exceed normal levels. Useful for catching viral content, measuring marketing campaign impact, or detecting unexpected load.
 
@@ -217,7 +217,7 @@ Instead of setting a fixed threshold, anomaly detection uses statistical algorit
 
 ### Creating an anomaly detection alert
 
-1. Open an existing [trend insight](/docs/product-analytics/trends) or [SQL insight](/docs/sql), or create a new one.
+1. Open an existing [trend insight](/docs/product-analytics/trends/overview) or [SQL insight](/docs/sql), or create a new one.
    - For SQL insights, use **last row** or **first row** evaluation mode. Anomaly detection isn't supported with **any row** evaluation because those rows represent individual entities, not a time series.
 2. Click **Actions** in the sidebar and select **Alerts**, then click **New alert**.
 3. Under alert type, select **Anomaly detection** instead of a threshold condition.
