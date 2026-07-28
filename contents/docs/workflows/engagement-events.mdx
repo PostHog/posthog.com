@@ -86,6 +86,7 @@ Because these are standard events, you can use them anywhere PostHog events are 
 - **Retention**: cohort recipients who received an email last week and see how many returned to the product.
 - **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute workflows impact.
 - **Conversion tracking**: measure conversion rates by workflow using `$workflows_conversion` broken down by `$workflow_id`.
+- **Accurate engagement rates**: when tracking consent is enabled, filter `$workflows_email_sent` to `$email_tracking_enabled = true` before calculating open or click rates. Untracked sends can never produce opens or clicks, so including them in the denominator deflates your rates.
 
 ## Properties on email engagement events
 
@@ -95,6 +96,7 @@ Each email engagement event carries properties so you can filter and break down 
 - `$workflow_action_id` — the email step within the workflow that this event belongs to (on every event)
 - `$email_to` — the recipient address (on every event)
 - `$email_subject` — the email subject (on every event)
+- `$email_tracking_enabled` — whether this send included open and click tracking (the tracking pixel and rewritten links), on `$workflows_email_sent` and `$workflows_email_failed` only. Always set, so you can filter or break down by tracking status without handling absent values.
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
 
 ## Properties on unsubscribe events
@@ -135,4 +137,4 @@ Workflow metrics (the per-step success/failure counters you see on the workflow 
 
 Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. If you send a high volume of email or have many converting users, enabling these can meaningfully increase event volume. You can disable email engagement events at any time in [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.
 
-When tracking is disabled for a send — whether via the per-step toggle or recipient consent — the email is sent without a tracking pixel and without rewritten links. Opens and clicks are never recorded for untracked sends. The workflow's **Metrics** tab shows an **Untracked** series so you can see how many sends skipped tracking. Open and click rates are shown against tracked deliveries (delivered minus untracked) to avoid deflating engagement numbers.
+When tracking is disabled for a send — whether via the per-step toggle or recipient consent — the email is sent without a tracking pixel and without rewritten links. Opens and clicks are never recorded for untracked sends. The workflow's **Metrics** tab shows an **Untracked** series so you can see how many sends skipped tracking. Open and click rates are shown against tracked sends (sent minus untracked) to avoid deflating engagement numbers.
