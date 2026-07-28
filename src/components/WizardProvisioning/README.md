@@ -59,13 +59,18 @@ Mirrors the "Error handling on posthog.com" table in the RFC:
 | `WIZARD_PROVISIONING_STATE_SECRET` | HMAC key for signed cookies + OAuth state (required) |
 | `WIZARD_PROVISIONING_POSTHOG_API_HOST` | Provisioning API host (default `https://us.posthog.com`) |
 | `CIMD_CLIENT_ID` | CIMD document URL, byte-for-byte. Owned by `src/lib/cimd`, since it identifies posthog.com to PostHog generally rather than only in this flow. |
-| `CIMD_CLIENT_PRIVATE_KEY` | PEM private key signing client assertions. Generate with `node bin/generate-cimd-key.mjs`. |
-| `CIMD_CLIENT_KEY_ID` | `kid` published in the JWKS and carried in assertion headers (default `posthog-com-1`) |
+| `CIMD_CLIENT_PRIVATE_KEY` | PEM private key signing client assertions. Generate with `node bin/generate-cimd-key.mjs <kid>`. |
+| `CIMD_CLIENT_KEY_ID` | `kid` published in the JWKS and carried in assertion headers. Required, no default: it is the label the key is published under. |
+| `CIMD_CLIENT_PREVIOUS_PRIVATE_KEY` / `_PREVIOUS_KEY_ID` | Optional. Set during a rotation so both keys stay published for one overlap window, since PostHog caches a JWK Set for an hour. |
 | `WIZARD_PROVISIONING_SITE_URL` | Base for redirect URIs (prod: `https://posthog.com`) |
 | `WIZARD_PROVISIONING_GITHUB_APP_CLIENT_ID` / `_SLUG` | GitHub App OAuth client id + install URL slug |
 | `WIZARD_PROVISIONING_MOCK` | `1` → in-memory mock backend, skips github.com |
 
 None are `GATSBY_`-prefixed — they must never reach the client bundle.
+
+Registration is per region and is not automatic: `node bin/register-cimd-client.mjs` registers the
+client against both US and EU and prints each diagnostic check. Re-run it after changing the
+metadata document or the keys.
 
 ## Mock-mode walkthrough
 

@@ -7,14 +7,28 @@
  * copy to keep in sync.
  *
  * Usage:
- *   node bin/generate-cimd-key.mjs [kid]
+ *   node bin/generate-cimd-key.mjs <kid>
  *
- * To rotate: run this with a new kid, add the new key to the env, and let the old one age out of
- * PostHog's JWKS cache (1 hour) before removing it.
+ * The kid is an opaque version label, and only matters for telling two keys apart during a
+ * rotation. To rotate without an outage:
+ *
+ *   1. Generate a new key with a new kid.
+ *   2. Move the current CIMD_CLIENT_PRIVATE_KEY / _KEY_ID to
+ *      CIMD_CLIENT_PREVIOUS_PRIVATE_KEY / CIMD_CLIENT_PREVIOUS_KEY_ID, and set the new one as
+ *      current. Both are then published, so anything holding a cached copy of the old JWK Set
+ *      keeps working while the new key propagates.
+ *   3. After an hour (PostHog's JWKS cache TTL), drop the previous key.
  */
 import crypto from 'crypto'
 
-const kid = process.argv[2] || `posthog-com-${new Date().toISOString().slice(0, 10)}`
+// Required rather than defaulted: the kid is the label this key is published under, and picking
+// it deliberately is what lets you tell two keys apart when you rotate.
+const kid = process.argv[2]
+if (!kid) {
+    console.error('Usage: node bin/generate-cimd-key.mjs <kid>')
+    console.error('The kid is an opaque version label for the key, for example "sig-2026-07" or "sig-2".')
+    process.exit(1)
+}
 
 const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
     modulusLength: 2048,

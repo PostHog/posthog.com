@@ -10,10 +10,22 @@ export const cimdConfig = {
      */
     privateKeyPem: process.env.CIMD_CLIENT_PRIVATE_KEY,
     /**
-     * `kid` published alongside the public key. Assertions carry it in their header so PostHog
-     * picks the right key when more than one is published during a rotation.
+     * `kid` for the signing key. Opaque, and only meaningful as a version label: it is how a
+     * verifier picks the right key out of a JWK Set holding more than one, which is what makes
+     * rotation possible. Not an identifier for us, since `client_id` already is that.
+     *
+     * Deliberately no default. A defaulted kid gets published as the label for a key nobody chose
+     * it for, and the whole point of the value is telling two keys apart during a rotation.
      */
-    keyId: process.env.CIMD_CLIENT_KEY_ID || 'posthog-com-1',
+    keyId: process.env.CIMD_CLIENT_KEY_ID,
+    /**
+     * Optional previous key, kept published through a rotation. PostHog caches a JWK Set for an
+     * hour, so a swap that publishes only the new key leaves anything holding the old cached copy
+     * unable to verify us until it expires. Publishing both for one overlap window avoids that.
+     * Remove once the old key is out of every cache.
+     */
+    previousPrivateKeyPem: process.env.CIMD_CLIENT_PREVIOUS_PRIVATE_KEY,
+    previousKeyId: process.env.CIMD_CLIENT_PREVIOUS_KEY_ID,
     /**
      * Our `client_id`, which must byte-for-byte equal the URL serving the CIMD document.
      */
