@@ -500,24 +500,19 @@ const CatalogItemBody = ({ name, description, Icon, iconColor }: CatalogItem) =>
     </>
 )
 
-// One object rather than three cards, with the category names on a shaded left edge so
-// the catalog reads as a single stack of layers. Within a layer the 1px grid gap lets the
-// grid's background show through as the rule between items, and an odd last item spans
-// the pane so there's no empty cell for that colour to pool in.
+// One object rather than three cards: each category is a shaded strip over its own items,
+// so the catalog reads as a single stack of layers. Within a layer the 1px grid gap lets
+// the grid's background show through as the rule between items, and an odd last item spans
+// the row so there's no empty cell for that colour to pool in.
 const CatalogLayers = () => (
     <div className="not-prose overflow-hidden rounded-md border border-primary shadow-sm">
-        {catalogSections.map((section, index) => (
-            <div
-                key={section.title}
-                className={`grid grid-cols-1 @xl/reader-content:grid-cols-[minmax(140px,180px)_1fr] ${
-                    index > 0 ? 'border-t border-primary' : ''
-                }`}
-            >
-                <div className="flex items-center border-b border-primary bg-accent px-4 py-3 @xl/reader-content:border-b-0 @xl/reader-content:border-r">
-                    <p className="m-0 text-sm font-bold uppercase tracking-wide text-secondary">{section.title}</p>
-                </div>
-                <div className="grid grid-cols-1 gap-px bg-border @2xl/reader-content:grid-cols-2">
-                    {section.items.map((item, itemIndex) => (
+        {catalogSections.map((section) => (
+            <React.Fragment key={section.title}>
+                <p className="m-0 border-y border-primary bg-accent px-4 py-2 text-sm font-bold uppercase tracking-wide text-secondary first:border-t-0">
+                    {section.title}
+                </p>
+                <div className="grid grid-cols-1 gap-px bg-border @xl/reader-content:grid-cols-2">
+                    {section.items.map((item, index) => (
                         <Link
                             key={item.name}
                             to={item.url}
@@ -525,8 +520,8 @@ const CatalogLayers = () => (
                             // Link puts className on the anchor and wraps it in a context-menu
                             // element, so the column span has to go on that wrapper instead.
                             wrapperClassName={
-                                itemIndex === section.items.length - 1 && section.items.length % 2 === 1
-                                    ? '@2xl/reader-content:col-span-2'
+                                index === section.items.length - 1 && section.items.length % 2 === 1
+                                    ? '@xl/reader-content:col-span-2'
                                     : ''
                             }
                             className="group flex min-h-full flex-col bg-primary p-4 transition-colors duration-150 hover:bg-accent"
@@ -535,7 +530,7 @@ const CatalogLayers = () => (
                         </Link>
                     ))}
                 </div>
-            </div>
+            </React.Fragment>
         ))}
     </div>
 )
