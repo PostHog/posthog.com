@@ -1,14 +1,13 @@
 import React from 'react'
 import { IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
-import OSButton from 'components/OSButton'
 import type { SectionComponentProps } from '../types'
 
 /**
  * Thin pricing explainer for products billed through another product's meter
- * (e.g. Web Analytics -> Product Analytics events). Pair with a link out to
- * the parent product's pricing page; skip `plans` / `calculator` so this
- * doesn't look like a separate SKU.
+ * (e.g. Experiments → Feature Flags, Web Analytics → Product Analytics).
+ * Pair with `plans` / `calculator` on the same pricing surface when the parent
+ * meter is reused; the parent product name links through via `billedWithSlug`.
  *
  * Optional productData fields:
  * - `billedWith` / `billedWithSlug` – parent product name + URL slug
@@ -31,7 +30,6 @@ const BilledWithPricing = ({ id, productData, allProducts }: SectionComponentPro
 
     const parent = parentSlug ? allProducts?.find((p: any) => p.slug === parentSlug) : undefined
     const ParentIcon = parent?.Icon
-    const parentPricingUrl = parentSlug ? `/${parentSlug}/pricing` : undefined
 
     const hasStructured = Boolean(pricingLead || pricingHighlights?.length)
 
@@ -75,7 +73,7 @@ const BilledWithPricing = ({ id, productData, allProducts }: SectionComponentPro
                     ) : null}
 
                     {pricingFooter || showEventsLink ? (
-                        <p className="text-sm text-secondary leading-relaxed m-0 mb-6">
+                        <p className="text-sm text-secondary leading-relaxed m-0">
                             {pricingFooter ? <>{pricingFooter} </> : null}
                             {showEventsLink ? (
                                 <Link
@@ -90,15 +88,9 @@ const BilledWithPricing = ({ id, productData, allProducts }: SectionComponentPro
                     ) : null}
                 </>
             ) : overview ? (
-                <div className="text-base text-primary/80 leading-relaxed mb-6 [&_a]:underline [&_a]:font-semibold">
+                <div className="text-base text-primary/80 leading-relaxed [&_a]:underline [&_a]:font-semibold">
                     {overview}
                 </div>
-            ) : null}
-
-            {parentPricingUrl ? (
-                <OSButton variant="secondary" asLink to={parentPricingUrl} size="md">
-                    See {billedWith} pricing
-                </OSButton>
             ) : null}
         </section>
     )

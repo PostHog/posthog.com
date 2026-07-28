@@ -21,6 +21,7 @@ import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
+import { replayVision } from './productData/replay_vision'
 
 const initialProducts = [
     productAnalytics,
@@ -39,6 +40,7 @@ const initialProducts = [
     workflows,
     inbox,
     endpoints,
+    replayVision,
 ]
 
 export default function useProducts() {
