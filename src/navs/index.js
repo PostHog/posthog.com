@@ -6129,6 +6129,11 @@ export const docsMenu = {
                             platformLogo: 'vercel',
                         },
                         {
+                            name: 'Eve',
+                            url: '/docs/ai-observability/installation/eve',
+                            platformLogo: 'vercel',
+                        },
+                        {
                             name: 'LangChain',
                             url: '/docs/ai-observability/installation/langchain',
                             icon: 'IconLangChain',
