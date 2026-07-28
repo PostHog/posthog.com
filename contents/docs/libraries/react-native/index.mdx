@@ -49,7 +49,7 @@ You can further customize how PostHog works through its configuration on initial
 | `defaultOptIn`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                       | If set to false, the SDK will not track until the `optIn()` function is called.                                                                                                                                                                                                                            |
 | `sendFeatureFlagEvent`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                               | Whether to track that `getFeatureFlag` was called (used by experiments).                                                                                                                                                                                                                                   |
 | `preloadFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                                | Whether to load feature flags when initialized or not.                                                                                                                                                                                                                                                     |
-| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                             | An object containing the `distinctId`, `isIdentifiedId`, `featureFlags`, and `featureFlagPayloads` keys. `distinctId` is a string, and `featureFlags` and `featureFlagPayloads` are objects of key-value pairs. Used to ensure data is available as soon as the SDK loads.                                 |
+| `bootstrap`<br/><br/>**Type:** Object<br/>**Default:** `{}`                                             | Seeds identity (`distinctId`, `isIdentifiedId`) and feature flag state (`featureFlags`, `featureFlagPayloads`) during initialization. See [SDK bootstrapping](/docs/libraries/bootstrapping).                                                                                                           |
 | `disableRemoteFeatureFlags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                         | When `true`, the SDK never fetches or evaluates feature flags from PostHog, and `identify()`, `group()`, and `reset()` stop triggering `/flags` requests. Supply flag values yourself via `bootstrap` (at startup) and `updateFlags()` (at runtime). Available in version 4.49.0+.                          |
 | `fetchRetryCount`<br/><br/>**Type:** Number<br/>**Default:** `3`                                        | How many times HTTP requests will be retried.                                                                                                                                                                                                                                                              | 
 | `fetchRetryDelay`<br/><br/>**Type:** Number<br/>**Default:** `3000`                                     | The delay between HTTP request retries.                                                                                                                                                                                                                                                                    |
@@ -373,13 +373,34 @@ import ReactNativeFeatureFlagsCode from "../../integrate/feature-flags-code/_sni
 
 <ReactNativeFeatureFlagsCode />
 
-### Bootstrapping Flags
+### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
 
 <BootstrappingIntro />
 
-For details on how to implement bootstrapping, see our [bootstrapping guide](/docs/feature-flags/bootstrapping).
+Pass `bootstrap` in the initialization options to seed identity and flag values:
+
+```react-native
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    options={{
+        host: '<ph_client_api_host>',
+        bootstrap: {
+            distinctId: 'distinct_id_of_your_user',
+            isIdentifiedId: true,
+            featureFlags: {
+                'flag-1': true,
+                'variant-flag': 'control',
+            },
+        },
+    }}
+>
+    <MyComponent />
+</PostHogProvider>
+```
+
+See [bootstrapping feature flags](/docs/feature-flags/bootstrapping) for server-side evaluation and flag lifecycle, and [SDK bootstrapping](/docs/libraries/bootstrapping) for cross-SDK identity behavior.
 
 ### Supplying flags from your own backend
 
