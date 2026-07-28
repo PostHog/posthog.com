@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist state on-device, so bootstrapped identity applies on the first launch only. See [behavior on mobile SDKs](#behavior-on-mobile-sdks).
+> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist identity on-device, so anonymous bootstrap seeding applies only on the first launch. An identified bootstrap can also reconcile identity on later launches. See [behavior on mobile SDKs](#behavior-on-mobile-sdks).
 
 import BootstrappingIntro from "./snippets/bootstrapping-intro.mdx"
 
@@ -118,17 +118,26 @@ Both approaches avoid flicker and achieve the same outcome as bootstrapping, as 
 
 ## Bootstrapping with a distinct ID
 
-The `bootstrap` object has four optional arguments: `distinctID`, `isIdentifiedID`, `sessionID`, and `featureFlags`.
+The `bootstrap` object accepts identity, session, and feature flag values. The JavaScript web SDK uses `distinctID` and `isIdentifiedID`. Other SDKs use the casing shown in the examples below.
 
-- `distinctID` enables you to set distinct ID of the user during PostHog's initialization. This is useful when you want to ensure the distinct ID on your frontend is the same as the distinct ID that you called `getAllFlags()` with on your server. It is **strongly recommended** to include it.
+- `distinctID` sets the distinct ID during PostHog's initialization. Include the same distinct ID you used to call `getAllFlags()` on your server so server-side and client-side flag evaluations use the same identity.
 
-> **Note:** The only case where you don't want to include `distinctID` is when your user has an existing PostHog session and you have not yet called [`identify()`](/docs/product-analytics/identify) at any point in time to link the anonymous session ID with their identified ID. In this case, bootstrapping `distinctID` will cause PostHog to drop the anonymous session ID and the two sessions will not be linked.
+- `isIdentifiedID` tells the SDK whether `distinctID` belongs to an [identified person](/docs/product-analytics/identify) or an anonymous visitor. Set it to `true` for a signed-in ID, such as a database ID. A previous `$identify` event isn't required. Set it to `false`, or omit it, when supplying a generated anonymous ID.
 
-- `isIdentifiedID` ensures that the `distinctID` is treated as an [identified ID](/docs/product-analytics/identify) in the library. This is helpful as it warns you when you try to do something wrong with this ID, like calling identify again with a different ID. Set this to `true` if you're using a unique ID such as `email` or a database ID. Set this to `false` if you're generating a random anonymous ID.
+When `isIdentifiedID` is `true`, the JavaScript web, iOS, Android, and Flutter SDKs reconcile the bootstrapped ID with any persisted identity:
 
-- `sessionID` enables you to connect sessions across domains. This enables you get an accurate session count and complete session replays. To get the session ID, call `posthog.get_session_id()`.
+- **No persisted identity** – The SDK uses the bootstrapped ID and marks it as identified without emitting `$identify`.
+- **An anonymous identity exists** – If the IDs match, the SDK marks the existing identity as identified without emitting `$identify`. If they differ, the SDK calls `identify()` automatically to link the anonymous activity to the bootstrapped ID. This emits `$identify` when capturing is enabled; while opted out, only the local identity changes.
+- **The same identified identity exists** – The SDK keeps it without emitting a redundant `$identify`.
+- **A different identified identity exists** – The SDK preserves the existing identity and emits a warning. Call `reset()` before initialization when you intend to switch users.
 
-- `featureFlags` enables flag values to be available as soon as PostHog loads. Call `posthog.getAllFlags()` (or equivalent method) in your backend and pass the values to your frontend in the `bootstrap` object.
+The automatic merge follows your person profile settings. If person profiles are set to `never`, the SDK preserves a different anonymous identity instead of calling `identify()`.
+
+Use bootstrap when your app knows the signed-in identity before SDK initialization. If your app loads the identity asynchronously, call `identify()` when it becomes available instead.
+
+- `sessionID` connects sessions across domains so you get an accurate session count and complete session replays. To get the session ID, call `posthog.get_session_id()`.
+
+- `featureFlags` makes flag values available as soon as PostHog loads. Call `posthog.getAllFlags()` (or the equivalent method) on your backend and pass the values to your frontend in the `bootstrap` object.
 
 
 <MultiLanguage>

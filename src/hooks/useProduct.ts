@@ -29,7 +29,6 @@ import {
     IconCursorClick,
     IconChat,
     IconAtSign,
-    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
@@ -1753,17 +1752,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
-        },
-        {
-            name: 'Replay Vision',
-            Icon: IconLlmPromptEvaluation,
-            description: 'AI-powered session replay analysis that watches recordings for you',
-            handle: 'replay_vision',
-            color: 'yellow',
-            colorSecondary: 'yellow',
-            category: 'product_engineering',
-            slug: 'replay-vision',
-            status: 'beta',
         },
         mcpAnalytics,
         {
