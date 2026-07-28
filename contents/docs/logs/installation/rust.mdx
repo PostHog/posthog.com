@@ -37,7 +37,7 @@ You can find your project token in [Project Settings](https://app.posthog.com/se
 
 <Step title="Configure the SDK" badge="required">
 
-Set up the OpenTelemetry SDK to send logs to PostHog. This reads the token from the environment rather than hardcoding it, so the value stays out of your source tree.
+Set up the OpenTelemetry SDK to send logs to PostHog. This reads the token from the environment rather than embedding it in source, so the value stays out of your repository.
 
 ```rust
 use std::collections::HashMap;
