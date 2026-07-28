@@ -39,42 +39,37 @@ It's easy to look at what competitors post on X and feel like we should be slick
 
 ## Types of announcement
 
-We classify announcements using the general guidelines below, with full discretion for doing something different.
+We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier sets the ceiling for how much we do to market something – but it's a guideline, and we have full discretion to do something different.
 
-### Minor announcements
+### Deciding what to market
 
-Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk.
+Before you settle on a tier – or decide whether something is worth marketing at all – work through the questions below. They also shape how you pitch a launch and who you point it at.
 
-We may typically support minor announcements by:
+**Who is this for, and what do we want them to do?** Different audiences need different launches:
 
-- Including them in the weekly changelog update.
-- Writing a short Twitter and/or [LinkedIn post](/handbook/content/linkedin).
+- **Net new** – never heard of PostHog.
+- **Activate** – signed up, but haven't done the thing yet.
+- **Cross-sell** – uses one or two tools, doesn't know about the rest.
+- **Deepen** – uses multiple tools, could use them better.
+- **Defend** – comparing us against someone else.
 
-An example of a minor announcement is the [UUID format change](/changelog?id=1923).
+**Which surface is it for?** Should a user reach for this through MCP, desktop, web, or the Slack app? This is only getting more confusing as we ship across surfaces, so be explicit about where it's most relevant. Related: is this agent-facing or human-facing?
 
-### Medium announcements
+**What can their role actually do with it?** Match the audience to what they're allowed to do. Launches with pricing usually go to owners and admins, since they make the purchase decision. Owners and admins are also the ones who have to turn on integrations – as was the case with the Slack app – unless we build a self-serve flow.
 
-Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
+**What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for the tool or thing you launched – the PMM can ask the PM for this. Watch for actions that carry more decision or risk, like connecting a repo, which need more hand-holding.
 
-We may typically support medium announcements by:
+**How does it fit the self-driving story?** Decide how to pitch it:
 
-- Including them in the weekly changelog update and related emails.
-- Creating an in-app changelog notification.
-- Writing a Twitter and LinkedIn post.
+- This tool got better.
+- This helps you **Ship with PostHog**.
+- This makes your product **self-driving**.
 
-An example of a medium announcement includes the [launch of the NPS survey tool](/changelog?id=1787).
+Remember that existing users have fixed notions of what PostHog is and what it's for. As we attract new users with the "ship with PostHog" and self-driving story, that gap will widen – so be deliberate about which story a given audience is hearing.
 
-### Major announcements
+### Tier 1: New product announcements
 
-Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
-
-We might do anything and everything for a major announcement.
-
-Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
-
-### New product announcements
-
-New product launches are major announcements. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
+New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
 
 For new product announcements we generally apply the following best practices:
 
@@ -92,6 +87,37 @@ For new product announcements we generally apply the following best practices:
 Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
 
 If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
+
+### Tier 2: Major announcements
+
+Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
+
+We might do anything and everything for a major announcement.
+
+Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
+
+### Tier 3: Medium announcements
+
+Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
+
+We may typically support medium announcements by:
+
+- Including them in the weekly changelog update and related emails.
+- Creating an in-app changelog notification.
+- Writing a Twitter and LinkedIn post.
+
+An example of a medium announcement includes the [launch of the NPS survey tool](/changelog?id=1787).
+
+### Tier 4: Minor announcements
+
+Minor announcements involve changes which have no noticeable impact on the experience of most users. They can involve small visual changes, such as UI tweaks, but are more often small bug fixes or back-end changes. They do not require action from users and pose no known risk.
+
+We may typically support minor announcements by:
+
+- Including them in the weekly changelog update.
+- Writing a short Twitter and/or [LinkedIn post](/handbook/content/linkedin).
+
+An example of a minor announcement is the [UUID format change](/changelog?id=1923).
 
 ### PR announcements
 
