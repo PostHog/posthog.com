@@ -213,7 +213,7 @@ export default function PlatformInstall({
 
     return (
         <div
-            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded bg-accent/40 shadow-2xl mb-2 ${className}`}
+            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded-md bg-primary shadow-2xl mb-2 ${className}`}
         >
             <div className="p-3 space-y-2">
                 <div className="flex items-start justify-between gap-2">
