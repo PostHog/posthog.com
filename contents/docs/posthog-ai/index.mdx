@@ -5,9 +5,8 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMessage, IconDatabase, IconChat, IconMemory, IconSparkles, IconCode, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconLaptop, IconMessage, IconDatabase, IconChat, IconMemory } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 PostHog AI is an AI product analyst that lives inside PostHog. Ask it a question in plain English and it queries your data, builds the insight, writes the SQL, or finds the session replay – then explains what it found. Because it runs on your project's own events, persons, and schema, its answers are about your product, not a generic dataset.
 
@@ -78,18 +77,8 @@ PostHog AI answers from your project's data, the context you attach to a convers
 
 ## How PostHog AI works with Self-driving
 
-Most tools feed [Self-driving](/docs/self-driving) as a signal source. PostHog AI's relationship to the loop is different: it's how *you* start and follow coding work, rather than a stage the autonomous loop passes through.
+**PostHog AI is not part of the Self-driving loop.** It doesn't feed it signals, and it isn't what picks up a report and writes the fix. That work runs from a [signal report](/docs/self-driving/reports) to a coding agent without passing through PostHog AI at all – see the [Self-driving docs](/docs/self-driving) for how it actually works.
 
-Ask PostHog AI to make a change and it creates a coding task, points it at a connected repository, and runs it. The code is written by a coding agent working in a sandbox, which pushes a branch and opens a draft pull request. PostHog AI is the thing you talk to and the thing that reports back – it isn't the agent editing your files.
+What PostHog AI does is give you a way in. Ask it to make a change and it creates a coding task against a repository you've connected, then runs it. A coding agent writes the code in a sandbox and opens a draft pull request for you to review. PostHog AI starts the job and reports back on it; it isn't the agent editing your files.
 
-<CustomSelfDrivingLoop
-  stages={[
-    { label: 'You ask', icon: IconSparkles, color: '#F54E00', description: 'Describe the change you want in any PostHog AI conversation' },
-    { label: 'A task', icon: IconNotebook, color: '#FFA81C', description: 'Scoped to a repository you have connected' },
-    { label: 'A coding agent', icon: IconCode, color: '#29DBBB', description: 'Writes the code in a sandbox, separate from the chat agent' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'Pushed to a branch for you to review' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
-  ]}
-/>
-
-The autonomous path runs the same way at the end – a report becomes a coding task and a draft pull request – but it starts from a [signal report](/docs/self-driving/reports) rather than from a conversation, so PostHog AI isn't involved in picking it up. Either way you can follow every run from the task tracker in the [web app](/docs/posthog-ai/surfaces/web-app). See the [Self-driving docs](/docs/self-driving) for the full picture.
+That means the two paths meet at the end and nowhere else. An autonomous report and a change you asked for both become a coding task, and both end in a pull request you review. You can follow either one from the task tracker in the [web app](/docs/posthog-ai/surfaces/web-app).
