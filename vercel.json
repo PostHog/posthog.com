@@ -2115,7 +2115,18 @@
         },
         {
             "source": "/docs/logs/debugging-with-mcp",
-            "destination": "/docs/logs/debug-logs-mcp"
+            "destination": "/docs/logs/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/logs/debug-logs-mcp",
+            "destination": "/docs/logs/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/logs/search-logs-ai",
+            "destination": "/docs/logs/explain-logs-ai",
+            "statusCode": 301
         },
         {
             "source": "/handbook/small-teams/experimentation",

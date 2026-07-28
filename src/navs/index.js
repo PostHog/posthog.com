@@ -7616,10 +7616,10 @@ export const docsMenu = {
                     name: 'Overview',
                     url: '/docs/logs',
                     icon: 'IconHome',
-                    color: 'seagreen',
+                    color: 'blue',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7658,7 +7658,44 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Guides',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/logs/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        { name: 'Overview', url: '/docs/logs/surfaces/web-app' },
+                        { name: 'Search logs', url: '/docs/logs/search' },
+                        { name: 'Log patterns', url: '/docs/logs/patterns' },
+                        { name: 'Set up alerts', url: '/docs/logs/alerts' },
+                        { name: 'Explain a log with PostHog AI', url: '/docs/logs/explain-logs-ai' },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/logs/surfaces/mcp',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/logs/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/logs/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Services and attributes',
                 },
                 {
                     name: 'Logging best practices',
@@ -7667,51 +7704,25 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Search logs',
-                    url: '/docs/logs/search',
-                    icon: 'IconSearch',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
                     name: 'PII scrubbing',
                     url: '/docs/logs/pii-scrubbing',
-                    icon: 'IconSearch',
+                    icon: 'IconShield',
                     color: 'blue',
                 },
                 {
-                    name: 'Link Session Replay',
+                    name: 'Correlated data',
+                },
+                {
+                    name: 'Link session replay',
                     url: '/docs/logs/link-session-replay',
                     icon: 'IconRewindPlay',
-                    color: 'blue',
+                    color: 'red',
                 },
                 {
                     name: 'Link logs to a person',
                     url: '/docs/logs/link-person',
                     icon: 'IconPerson',
                     color: 'blue',
-                },
-                {
-                    name: 'Set up alerts',
-                    url: '/docs/logs/alerts',
-                    icon: 'IconBell',
-                    color: 'red',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Search logs with PostHog AI',
-                    url: '/docs/logs/search-logs-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Debugging with MCP',
-                    url: '/docs/logs/debug-logs-mcp',
-                    icon: 'IconBolt',
-                    color: 'yellow',
                 },
                 {
                     name: 'Resources',
