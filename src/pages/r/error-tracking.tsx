@@ -230,7 +230,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                         >
                             <p>
                                 Connect the PostHog MCP server and let AI agents investigate errors for you. Or copy our{' '}
-                                <Link to="/docs/error-tracking/fix-with-ai-prompts" state={{ newWindow: true }}>
+                                <Link to="/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts" state={{ newWindow: true }}>
                                     premade AI prompts
                                 </Link>{' '}
                                 that include full stack traces and curated instructions so your AI actually knows what
@@ -248,7 +248,7 @@ export default function ErrorTrackingLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/error-tracking/debug-errors-mcp"
+                                    to="/docs/error-tracking/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Explore AI features
