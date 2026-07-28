@@ -1,0 +1,129 @@
+---
+title: Rust logs installation
+platformLogo: rust
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+cargo add opentelemetry opentelemetry_sdk opentelemetry-appender-tracing tracing
+cargo add tracing-subscriber --features env-filter
+cargo add opentelemetry-otlp --no-default-features --features logs,http-proto,reqwest-blocking-client,reqwest-rustls
+```
+
+> **Important:** `opentelemetry-otlp` doesn't enable a TLS backend by default, so `reqwest-rustls` is required to reach an `https` endpoint. Without it, every export fails immediately with `HTTP export failed: network error`.
+
+`opentelemetry-appender-tracing` bridges the [`tracing`](https://docs.rs/tracing) ecosystem into OpenTelemetry. If your application uses the [`log`](https://docs.rs/log) crate instead, swap it for `opentelemetry-appender-log`.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Configure the SDK" badge="required">
+
+Set up the OpenTelemetry SDK to send logs to PostHog.
+
+```rust
+use std::collections::HashMap;
+
+use opentelemetry_appender_tracing::layer::OpenTelemetryTracingBridge;
+use opentelemetry_otlp::{LogExporter, Protocol, WithExportConfig, WithHttpConfig};
+use opentelemetry_sdk::{logs::SdkLoggerProvider, Resource};
+use tracing_subscriber::{prelude::*, EnvFilter};
+
+fn main() {
+    let exporter = LogExporter::builder()
+        .with_http()
+        .with_endpoint("<ph_client_api_host>/i/v1/logs")
+        .with_protocol(Protocol::HttpBinary)
+        .with_headers(HashMap::from([(
+            "Authorization".to_string(),
+            "Bearer <ph_project_token>".to_string(),
+        )]))
+        .build()
+        .expect("failed to build the OTLP log exporter");
+
+    let provider = SdkLoggerProvider::builder()
+        .with_resource(Resource::builder().with_service_name("my-service").build())
+        .with_batch_exporter(exporter)
+        .build();
+
+    // Without these directives the SDK exports its own diagnostics as log lines,
+    // which produce further diagnostics on the next export.
+    let filter = EnvFilter::new("info")
+        .add_directive("opentelemetry=off".parse().unwrap())
+        .add_directive("hyper=off".parse().unwrap())
+        .add_directive("reqwest=off".parse().unwrap());
+
+    tracing_subscriber::registry()
+        .with(OpenTelemetryTracingBridge::new(&provider).with_filter(filter))
+        // Optional, also log to stdout
+        .with(tracing_subscriber::fmt::layer())
+        .init();
+
+    tracing::info!("Service started");
+
+    // Batched logs are dropped if the process exits without flushing.
+    provider.shutdown().expect("failed to flush logs");
+}
+```
+
+Alternatively, you can pass the project token as a query parameter instead of a header:
+
+```rust
+.with_endpoint("<ph_client_api_host>/i/v1/logs?token=<ph_project_token>")
+```
+
+The service name is what you filter on in PostHog, so set it to something you'll recognize. To set it outside your application instead, drop `with_service_name()` and export the standard `OTEL_SERVICE_NAME` environment variable, which `Resource::builder()` picks up on its own.
+
+> **Note:** Use the blocking `reqwest` client even in an async application. The batch log processor exports from its own dedicated thread, so the async client (the `reqwest-client` feature) panics there with `there is no reactor running, must be called from the context of a Tokio 1.x runtime`.
+
+</Step>
+
+<Step title="Use OpenTelemetry logging" badge="required">
+
+Once the subscriber is installed, ordinary `tracing` macros flow to PostHog. The message becomes the log body, and structured fields become searchable attributes:
+
+```rust
+tracing::info!(user_id = "123", action = "login", "User action");
+tracing::warn!(endpoint = "/old-api", "Deprecated API used");
+tracing::error!(error = "Connection timeout", "Database connection failed");
+```
+
+`tracing` levels map onto OpenTelemetry severities, so `info!`, `warn!`, and `error!` show up in PostHog as `info`, `warn`, and `error`.
+
+To connect a log line to a person or a session replay, emit `posthogDistinctId` and `sessionId` as fields. See [linking logs to a person](/docs/logs/link-person) and [linking session replay](/docs/logs/link-session-replay).
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Send a test log from your application
+2. Check the PostHog Logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
