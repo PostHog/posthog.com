@@ -28,7 +28,7 @@ Here’s a simple guide to maximizing agent autonomy, so you can ship fast *with
 
 ## The two factors that set the ceiling
 
-You need ask yourself two questions first:
+You need to ask yourself two questions first:
 
 ### 1. Is it easy to check the agent’s work?
 
@@ -96,7 +96,7 @@ Human-in-the-loop tasks are considered cheap to undo since the code stays in dra
 
 _When the work is **easy to check** + **costly to undo**_
 
-![Level 2: the human delegates, the agent writes and tests code, and a safety gate stands between the agent and the merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785215031/agent_autonomy_level_2_agent_delegation_28c716226c.png)
+![Level 2: the human delegates, the agent writes and tests code, and a safety gate stands between the agent and the merge](https://res.cloudinary.com/dmukukwp6/image/upload/v1785216765/agent_autonomy_level_2_agent_delegation_v2_80dfa21bc2.png)
 
 This is the level that most developer tasks are today. An agent writes code that can be tested deterministically, but the final act of merging it is gated behind a final safety check.
 
