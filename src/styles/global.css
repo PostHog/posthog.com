@@ -3155,6 +3155,22 @@ div[data-radix-popper-content-wrapper] {
     }
 }
 
+@keyframes context-warehouse-hog-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate3d(4px, -6px, 0) rotate(0.8deg);
+    }
+    50% {
+        transform: translate3d(-2px, -10px, 0) rotate(-0.6deg);
+    }
+    75% {
+        transform: translate3d(-5px, -4px, 0) rotate(0.4deg);
+    }
+}
+
 /* Set on <html> by theme-init.js before paint when the hint was previously dismissed. */
 html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint {
     display: none;

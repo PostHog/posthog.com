@@ -39,6 +39,8 @@ There are separate limits for different kinds of resources.
 
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
+- For the `/invites` and `/invites/bulk` endpoints, you can send `50` invites per hour and `100` per day, with up to 20 invites per bulk request. This also applies to invites sent from the PostHog UI.
+
 - For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/flags`), there are no rate limits.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
