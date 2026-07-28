@@ -7347,7 +7347,7 @@ export const docsMenu = {
                     name: 'Surfaces',
                 },
                 {
-                    name: 'Web app',
+                    name: 'PostHog Web',
                     url: '/docs/workflows/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'yellow',
@@ -7375,7 +7375,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'MCP',
+                    name: 'PostHog MCP',
                     url: '/docs/workflows/surfaces/mcp',
                     icon: 'IconMagic',
                     color: 'purple',
