@@ -436,7 +436,7 @@ export default function SessionReplayLanding(): JSX.Element {
                             </h3>
                             <p>
                                 With Feature Flags, use the MCP to{' '}
-                                <Link to="/docs/feature-flags/create-flags-mcp" state={{ newWindow: true }}>
+                                <Link to="/docs/feature-flags/surfaces/mcp" state={{ newWindow: true }}>
                                     flip flags, target rollouts, and filter replays by variant
                                 </Link>{' '}
                                 from Claude Code or Cursor. Roll out fixes to affected users without a full deploy.
