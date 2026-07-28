@@ -85,7 +85,7 @@ Implementing this philosophy (and trunk-based development) means:
 
 5. Pushing code out early. PRs are better than issues, even if they are half-done. This enables more concrete feedback on the approach.
 
-6. Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
+6. Merging whenever. Our testing, reviewing, and [build processes](/blog/10k-prs-a-month) should be good enough that we are confident doing this.
 
 As proof we take this seriously, our median pull request is **just under 8 hours** old when merged. On an average day, our team merges around 20 pull requests in our main repo.
 
