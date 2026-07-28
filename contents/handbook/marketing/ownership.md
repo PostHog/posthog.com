@@ -23,8 +23,6 @@ We only add a dedicated product marketer when it becomes painful not to have one
 | *PostHog Research*  | n/a    | Joe    | James H    |
 | *PostHog MCP*       | n/a    | Joe    | Raquel      |
 | *PostHog CLI*       | Unassigned | Unassigned | Raquel |
-| *AI Gateway*        | Marco  | n/a    | Ben W      |
-| *Agents*            | n/a    | Danilo | Ben W      |
 
 **Cross-functional areas**
 

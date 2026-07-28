@@ -7,7 +7,7 @@ import sharp from 'sharp'
 import { Logo } from '@posthog/brand/logo'
 
 // Materialize stable /brand URLs from the canonical package before Gatsby copies static/ to public/.
-// package.json lifecycle hooks run this automatically for the standard start and build commands.
+// package.json lifecycle hooks run this automatically for the standard build commands.
 const outputDirectory = fileURLToPath(new URL('../static/brand/', import.meta.url))
 
 const scaleDimensions = ([width, height], scale) => [width * scale, height * scale]
