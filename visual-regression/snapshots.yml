@@ -1,6 +1,0 @@
-version: 1
-config:
-    api: https://us.posthog.com
-    team: '2'
-    repo: '96b4669c-4c07-4a47-b040-1c008520c312'
-snapshots: {}
