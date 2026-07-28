@@ -24,7 +24,6 @@ const MODELS: { key: string; label: string; creditsPerObservation: number }[] = 
     { key: 'standard', label: 'Standard', creditsPerObservation: 5 },
     { key: 'premium', label: 'Premium', creditsPerObservation: 15 },
     { key: 'lightweight', label: 'Lightweight', creditsPerObservation: 3 },
-    { key: 'byok', label: 'Bring your own key', creditsPerObservation: 1 },
 ]
 
 const pricingDetails: { headline: React.ReactNode; body: React.ReactNode }[] = [
@@ -42,7 +41,7 @@ const pricingDetails: { headline: React.ReactNode; body: React.ReactNode }[] = [
     },
     {
         headline: 'Choose your model, control your cost.',
-        body: 'Lighter models cost fewer credits per observation; bring your own key and it drops to 1 credit (~$0.01).',
+        body: 'Lighter models cost fewer credits per observation, so you can dial cost against depth of analysis.',
     },
     {
         headline: 'Set a spending limit and never get a surprise bill.',
@@ -102,7 +101,6 @@ const planRows: { label: string; free: PlanValue; paid: PlanValue }[] = [
     { label: 'Monthly volume', free: 'Up to 2,500 credits', paid: 'Unlimited' },
     { label: 'All scanner types', free: true, paid: true },
     { label: 'All AI models', free: true, paid: true },
-    { label: 'Bring your own key', free: true, paid: true },
     { label: 'Custom monthly spending limit', free: true, paid: true },
     { label: 'Deep-link citations & confidence scores', free: true, paid: true },
     { label: 'Observations as queryable events', free: true, paid: true },
