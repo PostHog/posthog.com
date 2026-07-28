@@ -529,7 +529,7 @@ export const handbookSidebar = [
                 name: 'Brandbook',
             },
             {
-                name: 'Brand foundations',
+                name: 'Overview',
                 url: '/handbook/brand/foundations',
             },
             {

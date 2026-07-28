@@ -1,5 +1,5 @@
 ---
-title: Brand foundations
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
