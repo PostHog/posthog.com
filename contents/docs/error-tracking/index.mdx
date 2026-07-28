@@ -5,9 +5,10 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconCode, IconTerminal, IconBrackets, IconRocket, IconWarning, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import { IconWarning, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
 
 Error tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's [session replay](/docs/session-replay), events, and properties attached, so you can see what went wrong instead of trying to reproduce it. Those same exceptions feed [Self-driving](/docs/self-driving), which groups recurring issues and opens pull requests you review and merge.
 
@@ -17,80 +18,45 @@ Error tracking captures exceptions from across your stack and turns them into is
 
 You triage and resolve issues in the PostHog web app. The other surfaces let you debug and fix issues without leaving your existing tools.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+<SurfaceCards columns={2}>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Web app</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Monitor, assign, and resolve issues, each with the affected user's replay and events in view.</p>
-      <a href="/docs/error-tracking/monitoring" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Monitor issues →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconLaptop" color="blue" title="Web app" url="/docs/error-tracking/monitoring" cta="Monitor issues">
+Monitor, assign, and resolve issues, each with the affected user's replay and events in view.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">MCP</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Pull up issues and stack traces and debug them from any MCP client or AI editor.</p>
-      <a href="/docs/error-tracking/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Debug over MCP →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconMagic" color="purple" title="MCP" url="/docs/error-tracking/surfaces/mcp" cta="Debug over MCP">
+Pull up issues and stack traces and debug them from any MCP client or AI agent.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Desktop <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Review and merge the Self-driving fixes opened from your recurring issues.</p>
-      <a href="/docs/error-tracking/surfaces/desktop" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Fix in PostHog Desktop →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconCode" color="green" title="PostHog Desktop" badge="Beta" url="/docs/error-tracking/surfaces/desktop" cta="Fix in PostHog Desktop">
+Review and merge the Self-driving fixes opened from your recurring issues.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconTerminal className="size-6 shrink-0 text-seagreen mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">CLI</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Upload source maps and debug symbols from your build so stack traces stay readable.</p>
-      <a href="/docs/error-tracking/surfaces/cli" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Upload symbols →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconTerminal" color="seagreen" title="CLI" url="/docs/error-tracking/surfaces/cli" cta="Upload symbols">
+Upload source maps and debug symbols from your build so stack traces stay readable.
+</SurfaceCard>
 
-</div>
+</SurfaceCards>
 
 ## Where its data comes from
 
 Error tracking runs on the exceptions your app sends to PostHog. SDKs capture them automatically, source maps make the stack traces readable, and releases tie each exception back to the deploy that caused it.
 
-<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+<SurfaceCards columns={3}>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconBrackets className="size-6 shrink-0 text-blue mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">SDKs</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Capture exceptions automatically from web, backend, and mobile SDKs across your stack.</p>
-      <a href="/docs/error-tracking/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Install an SDK →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconBrackets" color="blue" title="SDKs" url="/docs/error-tracking/installation" cta="Install an SDK">
+Capture exceptions automatically from web, backend, and mobile SDKs across your stack.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconCode className="size-6 shrink-0 text-green mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Source maps</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Upload source maps and symbol sets so minified stack traces point back to your real code.</p>
-      <a href="/docs/error-tracking/upload-source-maps" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Upload source maps →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconCode" color="green" title="Source maps" url="/docs/error-tracking/upload-source-maps" cta="Upload source maps">
+Upload source maps and symbol sets so minified stack traces point back to your real code.
+</SurfaceCard>
 
-  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
-    <IconRocket className="size-6 shrink-0 text-orange mt-0.5" />
-    <div>
-      <p className="m-0 font-bold text-primary">Releases</p>
-      <p className="m-0 mt-0.5 text-sm text-secondary">Tag exceptions with the release and commit that introduced them to spot regressions fast.</p>
-      <a href="/docs/error-tracking/releases" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Track releases →</a>
-    </div>
-  </div>
+<SurfaceCard icon="IconRocket" color="orange" title="Releases" url="/docs/error-tracking/releases" cta="Track releases">
+Tag exceptions with the release and commit that introduced them to spot regressions fast.
+</SurfaceCard>
 
-</div>
+</SurfaceCards>
 
 ## How error tracking works with Self-driving
 

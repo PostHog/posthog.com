@@ -5414,13 +5414,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Fix with AI prompts',
-                    url: '/docs/error-tracking/surfaces/fix-with-ai',
-                    icon: 'IconLlmPromptManagement',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
                     name: 'CLI',
                     url: '/docs/error-tracking/surfaces/cli',
                     icon: 'IconTerminal',

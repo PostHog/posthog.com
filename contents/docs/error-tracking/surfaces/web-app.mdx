@@ -18,6 +18,22 @@ Open **Error tracking** in [PostHog](https://app.posthog.com) to see the issues 
 - **[Set up integrations](/docs/error-tracking/integrations)** – push issues to Linear, GitHub, or GitLab and keep them in sync.
 - **Debug with [PostHog AI](/docs/posthog-ai)** – ask PostHog AI, right here in the web app, to search your issues and root-cause straight from the stack trace. It's an interaction mode inside the web app, not a separate surface.
 
+## Fix with AI prompts
+
+For any issue, PostHog can generate a ready-to-use prompt that helps your coding assistant debug and fix the error. Each prompt includes the issue's stack trace along with prepared instructions for the AI to follow.
+
+Click **Fix with AI** on the issue details page. You choose two things:
+
+1. **What to generate** – a **fix** prompt, an **explain** prompt, or just the raw **stack trace**.
+2. **Where to open it** – directly in PostHog AI in your browser, copied to your clipboard, or via a deeplink that opens it in your editor: PostHog Desktop, Claude Code, Cursor, or Codex.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_40_27_111_Z_9c54a12e40.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_40_46_775_Z_d9b5b26e94.png"
+    alt="Fix with AI prompts"
+    classes="rounded"
+/>
+
 ## Related
 
 - Learn how exceptions become issues in [Issues and exceptions](/docs/error-tracking/issues-and-exceptions).
