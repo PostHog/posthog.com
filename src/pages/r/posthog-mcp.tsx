@@ -333,7 +333,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/error-tracking/debug-errors-mcp"
+                                    to="/docs/error-tracking/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Debug with MCP

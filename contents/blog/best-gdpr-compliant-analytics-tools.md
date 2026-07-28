@@ -362,6 +362,19 @@ GoAccess is open source and has no paid tiers.
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>Is Google Analytics GDPR compliant?</summary>
 
 **Google Analytics** can be configured for GDPR compliance, but it requires effort. You need cookie consent banners, IP anonymization, and data processing agreements. Several EU data protection authorities have ruled against GA4 implementations, making alternatives like PostHog, Plausible, or Matomo safer choices for EU-focused businesses.
