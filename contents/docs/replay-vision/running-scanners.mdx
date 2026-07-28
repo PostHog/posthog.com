@@ -60,11 +60,17 @@ On-demand triggers:
 - Skip the sampling rate – every on-demand trigger produces an observation if the session is eligible.
 - Are attributed to the user who triggered them, so you can tell apart "human spot-check" observations from "background sweep" observations.
 
+### From the scanner's Run tab
+
+Each scanner has a **Run** tab with a built-in recordings picker. The picker prefills its filters from the scanner's trigger query, so it opens scoped to the sessions the scanner already watches. You can adjust the filters to backfill older sessions or scan ones that weren't sampled. The recordings list includes a **Person** column so you can see whose session you're about to scan without opening each one.
+
+Select one or more recordings and click **Scan** to queue an observation for each. Sessions the scanner has already observed are skipped automatically.
+
 ### From the recordings list
 
-To scan a batch in one go, select recordings in the [recordings list](/docs/session-replay/how-to-watch-recordings) and choose **Scan these recordings**, then pick a scanner. Each selected session is queued as its own observation. Sessions the scanner has already observed are skipped automatically, so re-scanning a selection is safe.
+You can also scan a batch from the main [recordings list](/docs/session-replay/how-to-watch-recordings). Select recordings and choose **Scan these recordings**, then pick a scanner. Each selected session is queued as its own observation. Sessions the scanner has already observed are skipped automatically, so re-scanning a selection is safe.
 
-This is also the fastest way to backfill after broadening a scanner's filters.
+This is also a fast way to backfill after broadening a scanner's filters.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bulk_scan_recordings_e2422df8d8.png"
