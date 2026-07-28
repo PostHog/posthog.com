@@ -26,21 +26,23 @@ More PRs isn't a good thing in and of itself. It happens as a result of hiring t
 
 Here's how we've increased the volume of engineering work while still delivering reliable systems, and the changes we're making to make sure this remains the case.
 
-## What being AI-pilled looks like
+## There's no token budget at PostHog
 
 There's no token budget set by some higher-ups at PostHog. We want people to figure out how we _make use of new tools_ and _create new tools_. It's up to them as individuals to use the right amount of tokens, and none of us are going to pretend we know what that amount is. 
 
 This works because it's a big part of our culture to value trust and feedback over process. If we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. Everyone else can learn from that too.
 
+## What being AI-pilled looks like
+
 Everybody's using agents and writing skills, but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we've moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing very fast.
 
 Speeding up the rate we create PRs doesn't necessarily mean speeding up the rate we can handle them. For that, we're relying on agentic loops getting those PRs ready for human attention. Things like: 
 
-- Keeping up to date with trunk
+- Keeping up to date with [trunk](/product-engineers/trunk-based-development)
 - Making sure that CI is passing
 - Making sure that reviews have been acted on
 
-The folk who are pushing the limits of what they can achieve have written their own applications, like review and PR management tools or [`qa-swarm`](https://github.com/pauldambra/dotfiles/tree/main/ai/skills/qa-swarm) and [`babysit-prs`](https://github.com/haacked/dotfiles/blob/main/ai/skills/babysit-prs/SKILL.md) skills. They have maybe 40 PRs open at the same time, but we want to push this further and get more people onboard. Something like 60% of my token spend is burned automating the toil of handling CI and review and I don't regret a single dollar.
+The folks who are pushing the limits of what they can achieve have written their own applications, like [review](/newsletter/code-review-tips) and PR management tools or [`qa-swarm`](https://github.com/pauldambra/dotfiles/tree/main/ai/skills/qa-swarm) and [`babysit-prs`](https://github.com/haacked/dotfiles/blob/main/ai/skills/babysit-prs/SKILL.md) skills. They have maybe 40 PRs open at the same time, but we want to push this further and get more people on board. Something like 60% of my token spend is burned automating the toil of handling CI and review and I don't regret a single dollar.
 
 ## Getting off local machines
 
@@ -50,11 +52,11 @@ So, we're building out cloud dev machines. They're skill-driven so you just ask 
 
 > Start a dev box, run this PR in it, and record me a video of the changes that we're making so I can see the output of the test.
 
-This is powered by our [internal developer CLI `hogli`](https://github.com/PostHog/posthog/tree/master/tools/hogli), which also pushes CI checks down into local dev by helping agents better test code locally. It also includes a tool to quickly send feedback to our devex team when something is difficult (for people or agents), which helps our devex team make specific improvements fast.
+This is powered by our [internal developer CLI `hogli`](https://github.com/PostHog/posthog/tree/master/tools/hogli), which also pushes CI checks down into local dev by helping agents better test code locally. It also includes a tool to quickly send feedback to our devex team when something is difficult (for people or agents), which helps [our devex team](/teams/developer-experience) make specific improvements fast.
 
 ## Battling the bottleneck of CI
 
-Like many companies, CI has always been a challenge at PostHog because of the breadth of our product. That means increasing the number of PRs created by 50% was like spraying a house fire with gasoline. 
+Like many companies, CI has always been a challenge at PostHog because of the breadth of our product. That means increasing the number of PRs created by 50% month over month was like spraying a house fire with gasoline. 
 
 [Depot](https://depot.dev/customers/posthog), the compute infrastructure for our CI, has handled this incredibly well – in June 2026, we used 21,643,653 minutes of CI time. That's 41 _years_ of CI time in a single month.
 
@@ -78,15 +80,15 @@ Alongside all this, we're streaming [GitHub data](/docs/data-warehouse/sources/g
 
 This lets us make targeted improvements on the CI and get PRs to green faster.
 
-## How we validate it isn't breaking
+## How we validate PostHog isn't breaking
 
 We've always cared more about making it easy to quickly fix things rather than avoiding breaking them in the first place. This is especially true when dealing with UI, charts, access, and filters. It's much more important that we find out if the change is actually useful instead of wasting time getting it perfect on the first try.
 
-But in reality, there's a lot of stuff that we can't let break. For example, accepting and displaying your data – it's the core reason many users come to PostHog. Failing at this would be catastrophic, so we rely on a lot of automated testing and validation, including a quarter of a million Python tests for our backend. They're paying off even more now because they give us higher confidence in agent-driven work where validation says it's safe.
+But in reality, there are many services we can't break. For example, accepting and displaying your data – it's the core reason many users come to PostHog. Failing at this would be catastrophic, so we rely on a lot of automated testing and validation, including a quarter of a million Python tests for our backend. They're paying off even more now because they give us higher confidence in agent-driven work where validation says it's safe.
 
 Safety is not quality though, so we have some measures to help us see how things are changing. 
 
-The first is size. Line count is a rough proxy for quality. Less is better as past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs but not hugely bigger. Partly that is our engineers driving quality.
+The first is size. Line count is a rough proxy for quality. Less is better as past some threshold people stop reviewing carefully and quality drops. Agents are writing bigger PRs, especially at the extremely, but the average PR is not hugely bigger. Partly that is our engineers driving quality.
 
 | Percentile | Wk of May 25 (lines) | Wk of Jul 13 (lines) | Change |
 | ---------- | -------------------- | -------------------- | ------ |
@@ -107,9 +109,9 @@ Another way to judge quality is through PR titles. We use conventional commits l
 | perf                | 4 / 0.5%               | 5 / 0.4%    | 68 / 1.4%     |
 | revert              | 1 / 0.1%               | 5 / 0.4%    | 9 / 0.2%      |
 
-The distribution of PR types is stable across the last year. AI isn't just creating more fixes or refactors. More importantly, the percentage of reverts have barely changed, and we are eager to revert whenever we need to. This is a sign production isn't breaking more under the load of agentic PRs. 
+The distribution of PR types is stable across the last year. AI isn't just creating more fixes or refactors. More importantly, the percentage of reverts has barely changed, and we are eager to revert whenever we need to. This is a sign production isn't breaking more under the load of agentic PRs. 
 
-The ultimate goal is reliability for all of PostHog, which has remained solid:
+The ultimate goal is [reliability for all of PostHog](https://www.posthogstatus.com/us), which has remained solid:
 
 | Service                      | Uptime (90d, Apr 26–Jul 24 2026) |
 | ---------------------------- | -------------------------------- |
@@ -144,13 +146,13 @@ Combined, these agentic tools let our engineers concentrate on the genuinely imp
 - "Is this change safe?"
 - "Is this change valuable?"
 
-Simple reviews have become like linting. You shouldn't have humans be doing either.
+Simple reviews have become like linting. Humans shouldn't be doing either.
 
 For example, if someone told you 12 months ago that a line should be wrapped at a particular character, you would say, "Hey, I've updated the linter, you can ignore this." Agents can basically do this for logic problems and laziness faster, more effectively, and more consistently than a human.
 
 This means we can have a world where humans review code less. And the code reviews they do need to do are more effective as a result. We're doing a lot of work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
 
-## What's next
+## Agents need to test more of the code
 
 The next horizon – which I think is something that needs to be solved across the industry and we're really excited to work on – is having agents test as much of the code as possible. 
 
