@@ -48,10 +48,11 @@ In practice this means: **every observation that produces a `$recording_observed
 
 ## What happens when the cap is reached
 
-Both enforcement paths use the same check:
+Each enforcement path handles this differently:
 
 - **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until quota frees up (next month, or as in-flight observations resolve to ineligible/failed).
-- **On-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response with a `quota_limit_exceeded` code.
+- **Single on-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response with a `quota_limit_exceeded` code.
+- **Bulk on-demand scans** – the **Scan N selected** action starts as many scans as the quota and concurrency limits allow, then reports the remaining sessions as `skipped_quota` or `skipped_limit` rather than failing the entire batch.
 
 A scanner that's been silenced by the cap will resume producing observations automatically once usage drops below the cap (e.g. at the start of the next month).
 
