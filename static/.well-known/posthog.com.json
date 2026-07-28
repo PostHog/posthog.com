@@ -4,7 +4,8 @@
     "redirect_uris": ["https://posthog.com/api/wizard/oauth-callback"],
     "grant_types": ["authorization_code"],
     "response_types": ["code"],
-    "token_endpoint_auth_method": "none",
+    "token_endpoint_auth_method": "private_key_jwt",
+    "jwks_uri": "https://posthog.com/api/oauth/jwks",
     "com.posthog": {
         "verification_token": "phvt_t7afwYsZyhYZv8oLZkbYisDkDHSo5JDE4WujpY7WMzVL",
         "scopes": ["organization:read", "project:read"],

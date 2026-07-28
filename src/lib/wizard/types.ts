@@ -21,7 +21,7 @@ export interface AccountRequestBody {
     email: string
     name: string
     scopes: string[]
-    /** 43-128 char base64url; S256 of the PKCE verifier. Always required for CIMD/PKCE partners. */
+    /** 43-128 char base64url; S256 of the PKCE verifier. Required for every client, public or not. */
     code_challenge: string
     code_challenge_method: 'S256'
     configuration: {
@@ -39,15 +39,15 @@ export interface AccountRequestBody {
         }
     }
     orchestrator: { type: string }
-    /** CIMD auth: the client metadata document URL, byte-for-byte. */
+    /** Our CIMD client id: the client metadata document URL, byte-for-byte. */
     client_id: string
 }
 
 /**
- * account_requests uses a `type`-discriminated envelope. The `registering` variant arrives with
- * HTTP 202 on the very first request for an unregistered CIMD client and is retried inside the
- * provisioning client, so callers only ever see the other variants (errors become thrown
- * ProvisioningRequestError / RateLimitedError / GrantExpiredError).
+ * account_requests uses a `type`-discriminated envelope. Errors become thrown
+ * ProvisioningRequestError / RateLimitedError / GrantExpiredError, so callers only ever see the
+ * two success variants. An unregistered client gets a 401 naming the registration endpoint, which
+ * the provisioning client handles by registering once and retrying.
  */
 export type AccountRequestResponse =
     | { id: string; type: 'oauth'; oauth: { code: string }; wizard?: WizardResult }

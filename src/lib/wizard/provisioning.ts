@@ -1,13 +1,19 @@
 /**
- * Typed client for the PostHog agentic provisioning API (CIMD/PKCE partner auth — the
- * `client_id` is our CIMD document URL, no secret; PKCE proof happens at token exchange).
+ * Typed client for the PostHog agentic provisioning API.
+ *
+ * posthog.com authenticates as a confidential CIMD client using `private_key_jwt`: each
+ * partner-authenticated call carries a freshly signed assertion (see `src/lib/cimd`). The GitHub
+ * grant endpoints require this, because they exchange GitHub OAuth codes and read back account
+ * metadata, and a `client_id` anyone can send proves nothing. PKCE is still generated and still
+ * proves the token exchange; the assertion is an additional factor, not a replacement.
  *
  * ALL parsing of upstream responses lives in this file on purpose: the GitHub-grant endpoints,
  * the `configuration.wizard` block, and the `github_integration`/`wizard_runs` resource actions
- * are net-new per `wizard-provisioning-rfc.md`, so this is the single file to reconcile with the monorepo
+ * are net-new, so this is the single file to reconcile with the monorepo
  * contract (see `components/WizardProvisioning/README.md` for the reconciliation checklist).
  * `getProvisioningClient()` returns the in-memory mock when `WIZARD_PROVISIONING_MOCK=1`.
  */
+import { CLIENT_ASSERTION_TYPE_JWT_BEARER, createClientAssertion } from '../cimd'
 import { API_VERSION, config } from './config'
 import type {
     AccountRequestBody,
@@ -60,44 +66,98 @@ export interface ProvisioningClient {
     ): Promise<WizardRunResponse>
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
 type UpstreamResult = { status: number; headers: Headers; json: any }
 
 /**
- * The first-ever request from an unregistered CIMD client returns
- * `202 {type:'registering', retry_after}` while PostHog fetches our metadata document in the
- * background. Retry a couple of times within the function's time budget, then give up.
+ * Assertions are addressed to the token endpoint. PostHog accepts either its own origin or that
+ * path as the audience on every endpoint, so one value works for all of them.
  */
-const MAX_REGISTERING_RETRIES = 2
+const ASSERTION_AUDIENCE_PATH = '/api/agentic/oauth/token'
+
+/** Registration is explicit: every other endpoint refuses an unregistered client and names this. */
+const CLIENT_REGISTRATION_PATH = '/api/agentic/provisioning/client_registration'
+
+/**
+ * A client that has never been registered gets a 401 naming the registration endpoint. Self-heal
+ * once rather than requiring a deploy step, then give up so a genuinely misconfigured client
+ * fails loudly instead of looping.
+ */
+const MAX_REGISTRATION_ATTEMPTS = 2
+
+function looksUnregistered(status: number, json: any): boolean {
+    if (status !== 401) return false
+    const message = typeof json?.error?.message === 'string' ? json.error.message : ''
+    return message.includes('client_registration')
+}
 
 async function request(
     method: 'GET' | 'POST',
     path: string,
-    { body, bearer }: { body?: Record<string, unknown>; bearer?: string } = {}
+    { body, bearer, authenticate }: { body?: Record<string, unknown>; bearer?: string; authenticate?: boolean } = {}
+): Promise<UpstreamResult> {
+    for (let attempt = 0; ; attempt++) {
+        // Minted per attempt on purpose: PostHog treats an assertion's `jti` as single-use, so a
+        // retry that reused one would be rejected as a replay.
+        const result = await sendOnce(method, path, { body, bearer, authenticate })
+        if (attempt + 1 >= MAX_REGISTRATION_ATTEMPTS || !looksUnregistered(result.status, result.json)) {
+            return result
+        }
+        const registered = await sendOnce('POST', CLIENT_REGISTRATION_PATH, {
+            body: { client_id: config.clientId },
+        })
+        if (registered.status < 200 || registered.status >= 300) {
+            // Surface the registration failure rather than the downstream 401: its `checks` array
+            // says which part of our own setup is wrong.
+            return registered
+        }
+    }
+}
+
+async function sendOnce(
+    method: 'GET' | 'POST',
+    path: string,
+    { body, bearer, authenticate }: { body?: Record<string, unknown>; bearer?: string; authenticate?: boolean }
 ): Promise<UpstreamResult> {
     const headers: Record<string, string> = { 'API-Version': API_VERSION }
-    if (body) headers['Content-Type'] = 'application/json'
     if (bearer) headers['Authorization'] = `Bearer ${bearer}`
 
-    for (let attempt = 0; ; attempt++) {
-        const response = await fetch(`${config.posthogApiHost}${path}`, {
-            method,
-            headers,
-            body: body ? JSON.stringify(body) : undefined,
-        })
-        let json: any = null
-        try {
-            json = await response.json()
-        } catch {
-            // Non-JSON body (e.g. gateway error page); callers treat null as an upstream failure.
+    let url = `${config.posthogApiHost}${path}`
+    let payload = body
+
+    if (authenticate) {
+        const assertion = createClientAssertion(`${config.posthogApiHost}${ASSERTION_AUDIENCE_PATH}`)
+        if (method === 'GET') {
+            // A GET has no body to carry the assertion, so it rides the query string. Safe enough
+            // here: an assertion is single-use and expires in a minute, so one that reaches a log
+            // is already spent.
+            const separator = url.includes('?') ? '&' : '?'
+            url += `${separator}${new URLSearchParams({
+                client_assertion: assertion,
+                client_assertion_type: CLIENT_ASSERTION_TYPE_JWT_BEARER,
+            }).toString()}`
+        } else {
+            payload = {
+                ...body,
+                client_assertion: assertion,
+                client_assertion_type: CLIENT_ASSERTION_TYPE_JWT_BEARER,
+            }
         }
-        if (response.status === 202 && json?.type === 'registering' && attempt < MAX_REGISTERING_RETRIES) {
-            await sleep(Math.min(Number(json.retry_after) || 5, 5) * 1000)
-            continue
-        }
-        return { status: response.status, headers: response.headers, json }
     }
+
+    if (payload) headers['Content-Type'] = 'application/json'
+
+    const response = await fetch(url, {
+        method,
+        headers,
+        body: payload ? JSON.stringify(payload) : undefined,
+    })
+    let json: any = null
+    try {
+        json = await response.json()
+    } catch {
+        // Non-JSON body (e.g. gateway error page); callers treat null as an upstream failure.
+    }
+    return { status: response.status, headers: response.headers, json }
 }
 
 function throwIfRateLimited({ status, headers, json }: UpstreamResult): void {
@@ -132,6 +192,7 @@ const realClient: ProvisioningClient = {
     async createGithubGrant({ code, redirect_uri }) {
         const result = await request('POST', '/api/agentic/provisioning/github/grants', {
             body: { code, redirect_uri, client_id: config.clientId },
+            authenticate: true,
         })
         throwIfRateLimited(result)
         const { status, json } = result
@@ -159,7 +220,8 @@ const realClient: ProvisioningClient = {
             'GET',
             `/api/agentic/provisioning/github/grants/${encodeURIComponent(
                 grantId
-            )}/repositories?client_id=${encodeURIComponent(config.clientId)}`
+            )}/repositories?client_id=${encodeURIComponent(config.clientId)}`,
+            { authenticate: true }
         )
         throwIfRateLimited(result)
         const { status, json } = result
@@ -200,6 +262,7 @@ const realClient: ProvisioningClient = {
     async createAccountRequest(body) {
         const result = await request('POST', '/api/agentic/provisioning/account_requests', {
             body: { ...body, client_id: config.clientId },
+            authenticate: true,
         })
         throwIfRateLimited(result)
         const { status, json } = result
@@ -217,6 +280,7 @@ const realClient: ProvisioningClient = {
     async exchangeToken({ code, code_verifier }) {
         const result = await request('POST', '/api/agentic/oauth/token', {
             body: { grant_type: 'authorization_code', code, code_verifier, client_id: config.clientId },
+            authenticate: true,
         })
         throwIfRateLimited(result)
         const { status, json } = result

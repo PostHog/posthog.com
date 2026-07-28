@@ -17,7 +17,7 @@
  * - `mock-dev/rate-limited`          → 429 with a retry-after
  *
  * Other behaviors:
- * - The first `createGithubGrant` call per state file simulates one `202 registering` delay.
+ * - The first `createGithubGrant` call per state file simulates one client-registration delay.
  * - The first two `getGrantRepositories` calls per grant return `installed: false` to exercise
  *   the awaiting-install polling state.
  * - Grants expire after 60 minutes; `forceExpireGrant` powers the `?mock_expire=1` hook.
@@ -27,6 +27,7 @@ import fs from 'fs'
 import os from 'os'
 import path from 'path'
 
+import { createClientAssertion, hasSigningKey } from '../cimd'
 import { config } from './config'
 import { GrantExpiredError, ProvisioningClient, ProvisioningRequestError, RateLimitedError } from './provisioning'
 import type { GrantRepository } from './types'
@@ -103,9 +104,16 @@ export const mockClient: ProvisioningClient = {
     async createGithubGrant({ code }) {
         const state = readState()
         if (!state.registeringSimulated) {
-            // Stand-in for the one-time `202 registering` CIMD registration delay.
+            // Stand-in for the first-call client registration round trip against a real backend.
             state.registeringSimulated = true
             await sleep(1000)
+        }
+        // The mock replaces the HTTP client, so nothing else here exercises the signing path.
+        // Minting one assertion when a key is configured means a malformed key fails locally
+        // rather than only in production, where this endpoint requires a confidential client.
+        // Skipped when no key is set, so mock mode still needs no setup.
+        if (hasSigningKey()) {
+            createClientAssertion(`${config.posthogApiHost}/api/agentic/oauth/token`)
         }
         if (!code.startsWith('mock')) {
             throw new GrantExpiredError('Unknown mock code')
