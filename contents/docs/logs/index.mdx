@@ -5,7 +5,7 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import { IconLaptop, IconMagic, IconCode, IconBrackets, IconServer, IconFilter, IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle, IconWarning } from '@posthog/icons'
+import { IconLaptop, IconMagic, IconCode, IconBrackets, IconServer, IconFilter, IconRewindPlay, IconBolt, IconNotebook, IconPerson, IconCheckCircle, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
@@ -105,16 +105,16 @@ Everything in Logs is derived from the log records you send over [OTLP](/docs/lo
 
 ## How Logs works with Self-driving
 
-When a [log alert](/docs/logs/alerts) fires, it emits a signal into [Self-driving](/docs/self-driving). Recurring failures get grouped into a report with the logs behind them, and when there's a code fix, a pull request you review. PostHog also sweeps your logs for shifts nobody wrote an alert for – new message patterns, volume bursts, severity shifts, and services that go quiet – and writes those up as reports too.
+When a [log alert](/docs/logs/alerts) fires, it emits a signal into [Self-driving](/docs/self-driving). Recurring failures get grouped into a report with the logs behind them. PostHog also sweeps your logs for shifts nobody wrote an alert for – new message patterns, volume bursts, severity shifts, and services that go quiet – and writes those up as reports too.
 
 <CustomSelfDrivingLoop
   stages={[
     { label: 'Log records', icon: IconServer, color: '#F54E00', description: 'Everything your services emit over OTLP' },
     { label: 'Alerts fire', icon: IconBolt, color: '#FFA81C', description: 'A threshold is crossed and a signal is emitted' },
     { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related errors and replays' },
-    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
-    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+    { label: 'A reviewer', icon: IconPerson, color: '#A737D2', description: 'The report is routed to a person, not an agent' },
+    { label: 'You decide', icon: IconCheckCircle, color: '#47C861', description: 'Read the evidence and choose what to do' },
   ]}
 />
 
-You investigate in the [web app](/docs/logs/surfaces/web-app), and review and merge the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox) or [PostHog Desktop](/docs/logs/surfaces/desktop). See the [Self-driving docs](/docs/self-driving) for the full picture.
+The logs scout stops at the report. A log shift is usually an investigation rather than a one-line code change, so it doesn't open a pull request on its own – unlike [error tracking](/docs/error-tracking), where a stack trace often points at a specific file. You investigate in the [web app](/docs/logs/surfaces/web-app) and read the reports in the [Self-driving inbox](/docs/self-driving/inbox) or [PostHog Desktop](/docs/logs/surfaces/desktop). See the [Self-driving docs](/docs/self-driving) for the full picture.
