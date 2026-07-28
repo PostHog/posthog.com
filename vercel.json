@@ -149,6 +149,11 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/product-analytics/build-insights-mcp",
+            "destination": "/docs/product-analytics/surfaces/mcp",
+            "statusCode": 301
+        },
         { "source": "/papers", "destination": "/research#papers" },
         { "source": "/code", "destination": "/desktop" },
         { "source": "/teams/logs", "destination": "/teams/apm" },
@@ -3505,6 +3510,30 @@
             "destination": "/feature-flags#questions"
         },
         {
+            "source": "/surveys/customers",
+            "destination": "/surveys"
+        },
+        {
+            "source": "/surveys/comparisons",
+            "destination": "/surveys#feature-comparison"
+        },
+        {
+            "source": "/surveys/documentation",
+            "destination": "/docs/surveys"
+        },
+        {
+            "source": "/surveys/tutorials",
+            "destination": "/surveys#tutorials"
+        },
+        {
+            "source": "/surveys/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/surveys/questions",
+            "destination": "/surveys#questions"
+        },
+        {
             "source": "/experiments/customers",
             "destination": "/experiments"
         },
@@ -4102,7 +4131,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/surveys#pricing",
+            "destination": "/surveys/pricing",
             "has": [
                 {
                     "type": "query",
