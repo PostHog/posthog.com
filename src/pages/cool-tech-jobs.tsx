@@ -84,6 +84,26 @@ interface ToggleFilter {
     appliesTo: 'company' | 'job'
 }
 
+const isPostHogCompany = (company: Company): boolean => company.attributes.name.trim().toLowerCase() === 'posthog'
+
+const getCompanyLogoUrl = (company: Company, isDark: boolean): string | undefined => {
+    if (isPostHogCompany(company)) {
+        return isDark ? '/brand/posthog-logo-white.svg' : '/brand/posthog-logo.svg'
+    }
+
+    const logoLight = company.attributes.logoLight?.data?.attributes?.url
+    const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+    return isDark && logoDark ? logoDark : logoLight || logoDark
+}
+
+const renderCompanyLogo = (company: Company, isDark: boolean, className: string): React.ReactNode => {
+    const { name } = company.attributes
+    const logo = getCompanyLogoUrl(company, isDark)
+
+    return logo ? <img className={className} src={logo} alt={name} /> : null
+}
+
 const toggleFilters: ToggleFilter[] = [
     {
         icon: <StickerLaptop className="size-7" />,
@@ -238,8 +258,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                     .filter((company) => company.attributes.jobs.data.length > 0)
                     .map((company) => {
                         const { name } = company.attributes
-                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                        const logo = renderCompanyLogo(company, isDark, 'min-h-4 max-h-6 object-contain')
 
                         return (
                             <OSButton
@@ -248,13 +267,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                                 hover="border"
                                 className=""
                             >
-                                {logoLight || logoDark ? (
-                                    <img
-                                        className="min-h-4 max-h-6 object-contain"
-                                        src={logoDark && isDark ? logoDark : logoLight}
-                                        alt={name}
-                                    />
-                                ) : (
+                                {logo || (
                                     <div className="bg-accent rounded flex items-center justify-center">
                                         <span className="text-sm font-semibold text-muted">
                                             {name.charAt(0).toUpperCase()}
@@ -341,8 +354,7 @@ const CompanyRows = ({
             {/* Companies with jobs */}
             {companiesWithJobs.map((company, index) => {
                 const { name } = company.attributes
-                const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
                 const hasJobs = company.attributes.jobs.data.length > 0
 
                 const jobRows = company.attributes.jobs.data.map((job) => {
@@ -399,22 +411,14 @@ const CompanyRows = ({
                     >
                         <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                             <div title={name} className="flex-shrink-0">
-                                {(logoLight || logoDark) && (
+                                {logo && (
                                     <>
                                         {company.attributes.url ? (
                                             <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
-                                                <img
-                                                    className="max-w-40 mb-3 w-full"
-                                                    src={logoDark && isDark ? logoDark : logoLight}
-                                                    alt={name}
-                                                />
+                                                {logo}
                                             </Link>
                                         ) : (
-                                            <img
-                                                className="max-w-40 mb-3 w-full"
-                                                src={logoDark && isDark ? logoDark : logoLight}
-                                                alt={name}
-                                            />
+                                            logo
                                         )}
                                     </>
                                 )}
@@ -497,8 +501,7 @@ const CompanyRows = ({
                     <p className="text-secondary">(Only visible to moderators)</p>
                     {companiesWithoutJobs.map((company, index) => {
                         const { name } = company.attributes
-                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                        const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
 
                         return (
                             <div
@@ -508,25 +511,17 @@ const CompanyRows = ({
                             >
                                 <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                                     <div title={name} className="flex-shrink-0">
-                                        {(logoLight || logoDark) && (
+                                        {logo && (
                                             <>
                                                 {company.attributes.url ? (
                                                     <Link
                                                         to={`${company.attributes.url}?utm_source=posthog`}
                                                         externalNoIcon
                                                     >
-                                                        <img
-                                                            className="max-w-40 mb-3 w-full"
-                                                            src={logoDark && isDark ? logoDark : logoLight}
-                                                            alt={name}
-                                                        />
+                                                        {logo}
                                                     </Link>
                                                 ) : (
-                                                    <img
-                                                        className="max-w-40 mb-3 w-full"
-                                                        src={logoDark && isDark ? logoDark : logoLight}
-                                                        alt={name}
-                                                    />
+                                                    logo
                                                 )}
                                             </>
                                         )}

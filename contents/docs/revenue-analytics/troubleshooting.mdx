@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
-
 This page covers troubleshooting for Revenue Analytics. For setup, see the [installation guides](/docs/revenue-analytics/start-here).
 
 ## Have a question? Ask PostHog AI
@@ -69,17 +65,17 @@ There's also one exception to what you'd expect from a zero-decimal currency, an
 
 This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
 
-### Why isn't my revenue appearing in the revenue analytics dashboard?
+### Why isn't my revenue showing up?
 
-If your revenue isn't appearing in your revenue analytics dashboard, there are a few common issues to check:
+If your revenue isn't appearing in your [managed views](/docs/revenue-analytics/managed-views), insights, or persons/groups profiles, there are a few common issues to check:
 
 1. **Check the Revenue tab in Data management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
 1. **Make sure Revenue tracking is enabled for your Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
-1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
+1. **Check your filters**: when querying your revenue in insights or the SQL editor, make sure your filters and date range include the entries you expect.
 
 ## Why isn't currency being converted in my Trends insight?
 
-Currency conversion only happens automatically within **Revenue Analytics** and in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
+Currency conversion only happens automatically in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
 
 **Your options:**
 

@@ -103,7 +103,7 @@ You can also run [A/B tests](/experiments) using web vitals as goals, track ad s
 PostHog uses simple [usage-based pricing](/pricing) with a generous free tier that includes 1 million events per month, which is enough for most early-stage teams to get real value before paying anything.
 
 <p>
-  <CallToAction to="https://posthog.com/docs/web-analytics/getting-started">
+  <CallToAction to="https://posthog.com/docs/web-analytics/start-here">
     Get started with PostHog Web Analytics – it's free!
   </CallToAction>
 </p>
@@ -114,7 +114,7 @@ PostHog uses simple [usage-based pricing](/pricing) with a generous free tier th
 - [Unified suite of developer tools in one platform](/products)
 - [Developer-friendly setup](/wizard) and [SDKs](/docs/libraries)
 - [PostHog AI](/ai) to query data in natural language and debug issues faster
-- [SQL access](/docs/product-analytics/sql) and raw data ownership
+- [SQL access](/docs/data-warehouse/sql) and raw data ownership
 - [Flexible API](/docs/endpoints) definitions with our endpoints product
 
 **Community:**
@@ -340,6 +340,19 @@ Developers already using Cloudflare who want free, privacy-first website metrics
 ---
 
 ## FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is web analytics, really?</summary>

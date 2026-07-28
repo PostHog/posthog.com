@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { ScrollArea as RadixScrollArea } from 'radix-ui'
 import { useHorizontalScrollFade, HorizontalScrollFades } from '../../hooks/useHorizontalScrollFade'
 
 interface ScrollAreaProps {
@@ -37,35 +38,35 @@ const ScrollArea = ({
             if (typeof viewportRef === 'function') {
                 viewportRef(node)
             } else if (viewportRef) {
-                ;(viewportRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+                const mutableViewportRef = viewportRef as React.MutableRefObject<HTMLDivElement | null>
+                mutableViewportRef.current = node
             }
         },
         [viewportRef]
     )
 
     return (
-        <div
+        <RadixScrollArea.Root
+            type="scroll"
             data-scheme={dataScheme}
-            className={`relative overflow-hidden h-full flex-1 ${fullWidth ? 'max-w-screen' : ''} ${className}`}
+            className={`app-scroll-area relative overflow-hidden h-full flex-1 [&>div>div]:!block ${
+                fullWidth ? 'max-w-screen' : ''
+            } ${className}`}
             style={style}
         >
-            <div
+            <RadixScrollArea.Viewport
                 ref={setViewportRef}
-                // Kept for backwards-compatibility: many components locate the
-                // scrolling viewport via `.closest('[data-radix-scroll-area-viewport]')`
-                // (virtualization, scroll restoration, scroll-to-element, IO roots).
-                // This is now a native scroller, but the contract is preserved.
-                data-radix-scroll-area-viewport=""
-                className={`app-scroll-viewport size-full overflow-auto ${viewportClasses} ${
-                    fadeHeight ? `pb-${fadeHeight}` : ''
-                }`}
+                className={`app-scroll-viewport size-full ${viewportClasses} ${fadeHeight ? `pb-${fadeHeight}` : ''}`}
             >
-                {/* Inner wrapper mirrors the extra node Radix's Viewport used to
-                    render (min-width: 100%, block). Callers target it via
-                    descendant selectors like `[&>div>div]`, so the DOM nesting
-                    (wrapper → viewport → content) must be preserved. */}
-                <div className="block min-w-full">{children}</div>
-            </div>
+                {fullWidth ? <div>{children}</div> : children}
+            </RadixScrollArea.Viewport>
+            <RadixScrollArea.Scrollbar className="app-scrollbar" orientation="vertical">
+                <RadixScrollArea.Thumb className="app-scrollbar-thumb" />
+            </RadixScrollArea.Scrollbar>
+            <RadixScrollArea.Scrollbar className="app-scrollbar" orientation="horizontal">
+                <RadixScrollArea.Thumb className="app-scrollbar-thumb" />
+            </RadixScrollArea.Scrollbar>
+            <RadixScrollArea.Corner className="app-scrollbar-corner" />
             {fadeHeight > 0 && (
                 <div className="block pointer-events-none">
                     <div
@@ -74,7 +75,7 @@ const ScrollArea = ({
                 </div>
             )}
             {fadeX && <HorizontalScrollFades showStart={showStart} showEnd={showEnd} />}
-        </div>
+        </RadixScrollArea.Root>
     )
 }
 

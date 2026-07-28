@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
@@ -428,7 +428,6 @@ const companyBreakdowns = {
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
-    highValue: { col1: "Companies with >1 $B's in their valuations", col2: 'Everyone else (for now)' },
     caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
     easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
     goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
@@ -436,7 +435,7 @@ const companyBreakdowns = {
         col1: 'Companies you can explain to your parents',
         col2: 'Companies your parents will never understand',
     },
-    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
@@ -446,7 +445,6 @@ const companyAttributes = {
     colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
-    highValue: ['airbus', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'mistralai'],
     caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
     easyToYell: ['airbus', 'trust', 'raycast', 'exa', 'heygen', 'posthog'],
     goodBandName: ['elevenlabs', 'lovable', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
@@ -738,6 +736,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                     className="inline-block"
                     variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
                     color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                    width="auto"
                 />
             )
         },

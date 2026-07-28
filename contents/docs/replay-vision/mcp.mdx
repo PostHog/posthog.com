@@ -33,10 +33,10 @@ Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few group
 
 ### Sizing before you create
 
-- `vision-scanners-estimate-create` – project the per-month observation volume of a hypothetical scanner before you commit to it.
-- `vision-quota-retrieve` – check the remaining monthly quota.
+- `vision-scanners-estimate-create` – project a hypothetical scanner's monthly observation volume and credit spend before you commit to it.
+- `vision-quota-retrieve` – check the organization's remaining [credit budget](/docs/replay-vision/quota-and-limits).
 
-Pair these two before calling `vision-scanners-create` to avoid creating a scanner that would immediately blow the budget.
+Pair these two before calling `vision-scanners-create` to avoid creating a scanner that would immediately blow the budget. Compare credits with credits: the estimate returns `estimated_credits_per_month`, and the quota tool returns `remaining`.
 
 ### Triggering an observation on demand
 
@@ -56,6 +56,30 @@ For one scanner (across sessions):
 - `vision-scanners-observations-list` – paginated list of a scanner's observations.
 - `vision-scanners-observations-get` – fetch one of that scanner's observations by ID.
 
+Aggregate stats, rather than the rows themselves:
+
+- `vision-scanners-observations-stats` – one scanner's status mix and success rate, distinct sessions covered, rating totals, and the per-type distributions (monitor verdict counts, classifier tag rankings, scorer score summary and histogram).
+
+### Rating results and improving the scanner
+
+The [quality tab](/docs/replay-vision/quality)'s loop is fully drivable over MCP:
+
+- `vision-observations-label-create` – rate an observation with a thumbs up or down, optionally with written feedback. Same rating the Quality tab records.
+- `vision-observations-label-destroy` – remove a rating.
+- `vision-scanners-prompt-suggestions-current` – read the newest recommendation, whether it's gone stale since new ratings arrived, and how many rated observations back it.
+- `vision-scanners-prompt-suggestions-generate` – generate a fresh recommendation from the current ratings. The model call runs inline, so the request takes a while.
+- `vision-scanners-prompt-suggestions-apply` – apply it to the scanner as a new version.
+- `vision-scanners-prompt-suggestions-dismiss` – dismiss it without changing the scanner.
+
+### Digests and alerts
+
+For scanners with digests or alerts attached:
+
+- `vision-actions-list` – the actions bound to a scanner: digests, group summaries, and alerts.
+- `vision-actions-retrieve` – one action's configuration, including which observations it selects and on what cadence.
+- `vision-actions-runs-list` – that action's run history.
+- `vision-actions-runs-retrieve` – a run's synthesized report, plus the observations it cited. The report references its sources inline as `[obs N]`, so you can check each claim against the observation behind it.
+
 ### Impact and cohorts
 
 - `vision-scanners-impact-retrieve` – get affected sessions and users for a scanner over a trailing window. Monitors count verdict-yes observations. Classifiers require a `tag` parameter. Scorers require `min_score` and/or `max_score`.
@@ -71,7 +95,9 @@ Try these with your MCP-enabled agent:
 - `Scan session abc123 with the "Dead-end pages" scanner and tell me what it found, including the reasoning.`
 - `List the last 20 observations from my "Frustration score" scanner and summarize what's driving high scores.`
 - `Find every Replay Vision observation for session abc123 and give me a one-line summary of each.`
-- `How much Replay Vision quota do we have left this month?`
+- `How many Replay Vision credits do we have left this period, and which scanner is spending the most?`
 - `How many users did my "Dead-end pages" monitor affect in the last 14 days? Save them as a cohort.`
+- `Look at the last 10 observations from my "Dead-end pages" scanner, rate each one right or wrong based on the reasoning, and leave feedback on the wrong ones.`
+- `Generate a configuration recommendation for my "User intent" classifier from the team's ratings and show me what it would change.`
 
 See the [MCP server docs](/docs/model-context-protocol) for client setup, and the [Replay Vision overview](/docs/replay-vision) for product concepts.

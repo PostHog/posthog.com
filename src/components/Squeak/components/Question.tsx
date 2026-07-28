@@ -30,7 +30,7 @@ import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
 import { navigate } from 'gatsby'
-import Logomark from 'components/Home/images/Logomark'
+import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
@@ -281,7 +281,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                        <Logomark className="w-[16px]" />
+                                        <Logo layout="logomark" className="w-[16px]" />
                                     </span>
                                 </div>
                                 <strong>PostHog AI</strong>

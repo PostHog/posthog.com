@@ -47,6 +47,7 @@ Each logo below is rendered live from our [`@posthog/brand`](https://github.com/
 -   On **light backgrounds, prefer the standard logo**, and only reach for the **dark logo** (solid black) when a single-color mark is required.
 -   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradients can't be reproduced.
 -   Use the **logomark** on its own only at small sizes — favicons, app icons — where the full lockup won't fit and the overlapping gradients would get too busy.
+-   Use a **square logomark** for avatars and integrations that require a square image. Its transparent square canvas keeps the logomark's proportions intact — never stretch the standard logomark to fill a square. Use the standard gradient version on light backgrounds, or the light solid-white version on dark backgrounds.
 -   Use the **stacked** logo for portrait or square placements where the standard (landscape) lockup is too wide.
 
 _Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the light logo instead).

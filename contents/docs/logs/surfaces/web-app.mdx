@@ -1,0 +1,39 @@
+---
+title: Use Logs in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com/logs) is home base for Logs. It's where you search log records, narrow them down with facets, mine patterns across services, and set up the alerts that tell you when something changes.
+
+Most investigations start the same way: filter to a service and severity, find the log line that matters, then pivot to the [session replay](/docs/logs/link-session-replay), [person](/docs/logs/link-person), or error attached to it.
+
+## What you can do here
+
+- **[Search and filter](/docs/logs/search)** – narrow logs with the facet rail, the filter bar, or free-text search, and save a filter combination as a view you can switch back to.
+- **[Mine patterns](/docs/logs/patterns)** – group similar log lines into templates to spot noisy logging, new error shapes, and changes in your traffic.
+- **[Set up alerts](/docs/logs/alerts)** – get notified when the volume of logs matching a filter crosses a threshold, with noise-reduction settings so brief spikes don't wake anyone up.
+- **[Explain a log with PostHog AI](/docs/logs/explain-logs-ai)** – open a log record and have PostHog AI write up what it means and what probably caused it.
+
+## Explain a log with PostHog AI
+
+Open any log record and switch to the **Explore with AI** tab, and [PostHog AI](/docs/posthog-ai) explains that line: a severity assessment, ranked probable causes, suggested next steps, and the fields worth your attention. It's handy when the log came from a service you don't own.
+
+This is a feature of the log detail view, not an assistant you can hold a conversation with. It explains the one record you have open – it doesn't search your logs and it can't act on them. Finding the right record is still the job of filters, patterns, and free-text search, or of your coding agent over [MCP](/docs/logs/surfaces/mcp).
+
+See [Explain a log with PostHog AI](/docs/logs/explain-logs-ai) for what it returns and what it reads.
+
+## Configure Logs for your project
+
+A few things are project setup rather than day-to-day investigation, so they live outside the logs viewer.
+
+[PII scrubbing](/docs/logs/pii-scrubbing) is a toggle in [**Settings** → **Environment** → **Logs**](https://app.posthog.com/settings/environment-logs). It redacts emails, bearer tokens, and secret keys at ingestion, before anything is written to storage.
+
+Sampling and drop rules live under **Logs** in the app. They decide what share of high-volume, low-value log records you keep, which is the main lever you have on [cost](/docs/logs/pricing). Set these up once when you onboard a noisy service, not while you're debugging.
+
+## Related
+
+- Get your first logs flowing in [Start here](/docs/logs/start-here).
+- Query logs from your editor over [MCP](/docs/logs/surfaces/mcp).
+- Script alerts and exports with the [Logs API](/docs/logs/surfaces/api).
+- Make your logs worth searching with [logging best practices](/docs/logs/best-practices).
