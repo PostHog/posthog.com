@@ -22,8 +22,8 @@ export const replayVision = {
         <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
             <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
             <p>
-                You pay per observation. One observation is one session recording watched by one scanner, so the
-                credits you use depend on how many sessions your scanners pick up.
+                You pay per observation. One observation is one session recording watched by one scanner, so the credits
+                you use depend on how many sessions your scanners pick up.
             </p>
             <ul>
                 <li>
