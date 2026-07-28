@@ -168,11 +168,11 @@ export const replayVision = {
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
     status: 'beta',
-    shortDescription: 'Let AI watch your session replays for you',
+    shortDescription: 'Let AI watch your session recordings for you',
     seo: {
         title: 'Replay Vision - PostHog',
         description:
-            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
+            'Replay Vision reads through a filtered set of recordings, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
     },
     /**
      * Sections rendered on the Product surface (`/replay-vision`). Each entry
@@ -257,7 +257,7 @@ export const replayVision = {
     overview: {
         title: 'Your product, watching itself',
         description:
-            'Replay Vision reads through a filtered set of replays, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
+            'Replay Vision reads through a filtered set of recordings, tells you in plain language what went wrong, and opens a pull request with the fix. The problem fixes itself for you. You just hit merge.',
         textColor: 'text-black', // tw
     },
     screenshots: {
