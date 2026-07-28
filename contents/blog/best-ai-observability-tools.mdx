@@ -321,6 +321,19 @@ You need compliance, SSO, and on-prem or VPC deployment? **Arize**, **Braintrust
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>What is AI observability?</summary>
 
 AI observability is the practice of monitoring and understanding how your LLM-powered app behaves in production. It captures individual LLM calls (inputs, outputs, latency, token usage), aggregates metrics across requests, and gives you tools to debug issues and improve performance. It's like traditional application observability, but focused on the things that make LLMs different: non-deterministic outputs, high token costs, prompt sensitivity, and the difficulty of judging whether an answer is actually good.
