@@ -435,7 +435,7 @@ const companyBreakdowns = {
         col1: 'Companies you can explain to your parents',
         col2: 'Companies your parents will never understand',
     },
-    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
