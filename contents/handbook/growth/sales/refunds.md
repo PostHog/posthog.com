@@ -112,7 +112,19 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 -   Issue credits if the customer's period hasn't ended yet and the invoice isn't finalized. It is much easier and better for users and us to avoid payment if we can!
 -   If invoice is finalized and this is a first time request, issue a refund via a credit note (do not use the refund button, this is important for correct revenue attribution).
--   If the customer has overdue invoices and needs changes on that, we need to apply credit notes. Escalate such cases to RevOps.
+-   If the customer has overdue (open or uncollectible) invoices that need changes, see [Invoice status and what you can do](#invoice-status-and-what-you-can-do) below before acting, and escalate to RevOps if you're unsure.
+
+### Invoice status and what you can do
+
+What you can do depends on the invoice's status in Stripe:
+
+-   **We no longer void invoices.** Voiding has been replaced entirely by credit notes.
+-   **Credit notes apply to `paid`, `open`, and `uncollectible` invoices.** They can't be applied to `draft` or `void` invoices. The Billing Admin refund flow works on `open` invoices too, not only `paid` ones.
+-   **If Stripe rejects a credit note because the invoice still has a pending payment attempt,** wait for the attempt to resolve, or mark the invoice `uncollectible` in Stripe and retry.
+-   **Marking an invoice `uncollectible` is itself the act of forgiving it.** It stops showing as open, so there's usually nothing left to fix on an uncollectible invoice.
+-   **Subscriptions are auto-cancelled after repeated failed payment attempts** on a small unpaid invoice, which is also when that invoice is marked `uncollectible`. RevOps can cancel manually earlier if needed. Separately, a customer who accumulates two or more `uncollectible` invoices is blocked from subscribing again.
+-   **Churn status in Vitally is not driven by invoice status.** It's set when the Stripe subscription status becomes `canceled` ([config](https://posthog.vitally-eu.io/settings/customer-management/churn)).
+-   Customers can re-subscribe as long as they aren't blocked from doing so.
 
 ## How to issue refunds or credits
 
@@ -127,6 +139,8 @@ If you want more precision when a single event type is inflated, use the 'Event 
 7. Include an optional link in the 'Reference link' field, e.g. support ticket, Slack message link, etc.
 8. Click 'Save and view'
 9. After saving, you'll land on the customer view in Billing Admin — confirm the credit now appears on the customer's balance there. You don't need to check Stripe.
+
+**A note on tax:** tax is applied automatically by Anrok through Stripe. It is not managed in billing and is not part of billing limits, and it applies to US customers only, which is why internationally credited accounts show no tax line and the credit lands cleanly. Tax is also calculated on the full invoice amount before credits are applied. So if a US customer has hit a billing limit and you issue credits equal to that limit expecting a zero bill, they will still be charged the tax on the pre-credit amount. Before issuing the credit, check Stripe for the applied tax amount, and gross the credit up to cover it if the goal is a zero bill.
 
 ### Issuing a refund
 Refunds are now initiated through Billing Admin and finalized in Stripe via a credit note. 
