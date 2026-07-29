@@ -47,7 +47,7 @@ const featureComparisonRows = [
     ),
     feature(
         'configurable_types',
-        'Configurable analysis types',
+        'Configurable scanner types',
         'Choose the shape of the output rather than taking a single fixed job.'
     ),
     feature(
@@ -262,8 +262,7 @@ export const replayVision = {
     },
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_4_1_33ba4bbdb7.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_6_c5824625a7.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_9_69b51af8fd.png',
             alt: 'Replay Vision scanner observations',
         },
     },
@@ -283,19 +282,18 @@ export const replayVision = {
         summary: {
             them: [
                 { title: 'You want self-hosting or more strict data residency' },
-                { title: 'You have strong security requirements that need more robust PII redaction' },
                 { title: 'You want a dedicated UX-research tool with targeted clip capture and studies' },
                 { title: "You're not on PostHog and don't want to move session replay here" },
             ],
             us: [
                 {
-                    title: 'You want to ask any question of any slice of recordings on a schedule – not pick from a fixed menu of AI jobs',
+                    title: 'Point AI at any slice of recordings on a schedule and write the prompt yourself',
                 },
                 {
                     title: 'Findings land as queryable observations next to your analytics, funnels, flags, experiments, and errors',
                 },
                 {
-                    title: "Agents can search and act on what's in your replays via the MCP – the context that powers self-driving",
+                    title: 'What AI sees in your recordings becomes queryable data and signals that feed the self-driving loop, in the same platform as your analytics, flags, and experiments.',
                 },
                 { title: "You'd rather keep sessions on PostHog than pay a second tool to scrape them out" },
             ],

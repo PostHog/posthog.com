@@ -34,7 +34,7 @@ export const posthog = {
                 flag_interlinking: true,
                 product_analytics_platform: true,
                 pii_redaction: true,
-                ai_pricing: 'Usage based',
+                ai_pricing: 'Usage-based',
             },
         },
         heatmaps: {
