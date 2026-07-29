@@ -172,8 +172,9 @@
         {
             "source": "/webhooks",
             "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
         },
-        {  
+        {
             "source": "/why",
             "destination": "/about",
             "statusCode": 301
