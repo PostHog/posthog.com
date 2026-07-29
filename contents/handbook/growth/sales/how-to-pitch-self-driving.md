@@ -18,13 +18,13 @@ The pitch is simple, but the machinery behind it has five parts and customers as
 
 | Part | One-line definition |
 |---|---|
-| **Signal sources** | Built-in pipelines that watch **one stream continuously**, in real time. Error tracking, support conversations, session replay, logs, Replay Vision, and health checks inside PostHog, plus external tools connected through the [data warehouse](/docs/data-warehouse) – Sentry, Zendesk, Linear, Jira, GitHub Issues, Snyk, Canny, and [many more](/docs/self-driving/inbox/sources). You toggle them on. |
-| **Scouts** | Scheduled agents that **explore your data and use judgement**. A scout runs on a schedule, looks across whatever slice of PostHog you point it at, decides whether anything clears the bar you set, and files what it found. Some ship with PostHog, some you write yourself. |
-| **The signals pipeline** | Both of the above emit **signals** – a finding, the evidence behind it, and a suggested action. The pipeline deduplicates and groups related signals so one real problem becomes one item, not five. |
-| **Reports and the inbox** | A grouped set of signals becomes a **report** in your [inbox](/docs/self-driving/inbox), available in the web app, [PostHog Desktop](/docs/posthog-desktop), and Slack. This is the surface a human actually looks at. |
-| **Research and PRs** | From a report, a research agent connects it to the codebase and marks it **actionable** when a code fix is possible. From there an implementation agent can open a PR. Nothing merges without a human. |
+| **[Signal sources](/docs/self-driving/inbox/sources)** | Built-in pipelines that watch **one stream continuously**, in real time. Error tracking, support conversations, session replay, logs, Replay Vision, and health checks inside PostHog, plus external tools connected through the [data warehouse](/docs/data-warehouse) – Sentry, Zendesk, Linear, Jira, GitHub Issues, Snyk, Canny, and [many more](/docs/self-driving/inbox/sources). You toggle them on. |
+| **[Scouts](/docs/self-driving/scouts)** | Scheduled agents that **explore your data and use judgement**. A scout runs on a schedule, looks across whatever slice of PostHog you point it at, decides whether anything clears the bar you set, and files what it found. Some ship with PostHog, some you write yourself. |
+| **The [signals](/docs/self-driving/signals) pipeline** | Both of the above emit **signals** – a finding, the evidence behind it, and a suggested action. The pipeline deduplicates and groups related signals so one real problem becomes one item, not five. |
+| **[Reports](/docs/self-driving/reports) and the [inbox](/docs/self-driving/inbox)** | A grouped set of signals becomes a **report** in your inbox, available in the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop), and Slack. This is the surface a human actually looks at. |
+| **[Research](/docs/self-driving/inbox/research) and [PRs](/docs/self-driving/anatomy-of-a-pr)** | From a report, a research agent connects it to the codebase and marks it **actionable** when a code fix is possible. From there an implementation agent can open a PR. Nothing merges without a human. |
 
-The chain in one breath: **something watches (source or scout) → it emits signals → the pipeline groups them into a report → the inbox researches it → an agent can open a PR.**
+The chain in one breath: **something watches (source or scout) → it emits signals → the pipeline groups them into a report → the inbox researches it → an agent can open a PR.** The docs walk the same chain in order, so [the self-improving loop](/docs/self-driving/self-improving-loop) is the page to send anyone who wants the whole thing end to end.
 
 > **The mistake to avoid.** Whichever of the two you personally understand best is the one you'll reach for on every call, and that's what makes a pitch feel generic. Sources and scouts are different tools with genuinely different strengths – neither is the premium version of the other. Pick based on what the customer told you in discovery, not on which one you find easier to explain.
 
@@ -109,7 +109,7 @@ When the customer starts planning their instrumentation rollout unprompted and i
 - They describe the use case back to you in their own words, using their own product as the example
 - They name the thing they'd want watched before you offer to build it
 - They ask who else on their team should see this
-- The question shifts from "what is it?" to "how would we set this up?"
+- The question shifts from "what is it?" to "how would we set this up?" (when it does, [setup](/docs/self-driving/setup) is the page to walk them through)
 
 If none of these happen, you probably pitched the machinery instead of their problem. Go back to what they told you in discovery and re-anchor.
 
@@ -211,7 +211,7 @@ Getting these right up front is what stops a great first call becoming a rough s
 | "How is this different from alerts we already have?" | Alerts fire on thresholds. Scouts hold judgement, remember what they already said, and weigh how much something matters. And if an alert genuinely solves it, say so. |
 | "Can it watch _X_?" (something not in PostHog) | If it can land in PostHog – warehouse table, connector, Slack relay – yes. If it can't, say so plainly. "Get it into PostHog first" is a real answer, and it's the flywheel. |
 | "What's it actually doing in there?" | Every canonical scout is a readable markdown skill in our public repo, and every run records its full reasoning. Show them, especially with engineering buyers. |
-| "What does it cost to run?" | Runs come out of a project's daily run budget, and the schedule is the main dial. Frame it honestly: a tighter cadence mostly pays to re-confirm nothing changed. Slow a chatty scout down before turning it off. |
+| "What does it cost to run?" | Runs come out of a project's daily run budget, and the schedule is the main dial. Frame it honestly: a tighter cadence mostly pays to re-confirm nothing changed. Slow a chatty scout down before turning it off. See [self-driving pricing](/docs/self-driving/pricing) for the current numbers – check it rather than quoting from memory, it's still moving. |
 | "Can we try it without it doing anything?" | Yes – [dry run](/docs/self-driving/scouts#dry-runs) mode runs the scout and records everything it would have filed without writing to the inbox. Great for cautious or high-stakes teams. |
 
 Things not to promise: that it replaces anyone, that it catches everything, that reports always become PRs, or that it's finished. It's in open beta, it's improving fast, and saying so builds more credibility than pretending otherwise.
@@ -243,6 +243,7 @@ For the five minutes before a call.
 - **Best close:** one concrete thing pointed at one thing they care about.
 - **Never promise:** auto-merge, total coverage from a scout, or a PR from every report.
 - **Links to leave behind:** [What is a scout?](/blog/what-is-a-scout), [scout examples](/docs/self-driving/scout-examples), [self-driving docs](/docs/self-driving).
+- **Have open in another tab:** [the FAQ](/docs/self-driving/faq) for anything you get asked cold, and [pricing](/docs/self-driving/pricing) so you never guess at a number.
 
 ## Iterating on this page
 
