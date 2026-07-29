@@ -109,6 +109,7 @@ export default function ProductReaderView({
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                windowTitle={productData?.name}
             />
             <ReaderView
                 title={productData?.name}
