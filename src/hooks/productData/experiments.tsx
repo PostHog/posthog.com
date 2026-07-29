@@ -79,13 +79,6 @@ export const experiments = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'use-case-ramp',
-            name: 'Ramp to self-driving',
-            template: 'use-case-ramp',
-            group: 'divided',
-            icon: <IconRefresh className="size-4" />,
-        },
-        {
             slug: 'applications',
             name: 'How do I use it?',
             group: 'divided',
@@ -98,6 +91,13 @@ export const experiments = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -230,22 +230,147 @@ export const experiments = {
         ],
     },
     useCaseRamp: {
-        rungs: [
+        columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                body: 'Pick a metric, split traffic 70/30 behind a flag, and read the result – the chance each variant is winning, plus a warning if the split came out lopsided enough to distrust.',
+                driver: 'You set the test up and call the winner yourself.',
+                useCases: [
+                    {
+                        title: 'Prove which version works better',
+                        icon: 'IconSplitTesting',
+                        surfaces: ['web'],
+                        steps: [
+                            'Pick the number that settles it, like completed purchases',
+                            'Show the current version to most people and the new one to the rest',
+                            'PostHog tells you which won and how sure it is',
+                        ],
+                    },
+                    {
+                        title: "Spot a test you can't trust",
+                        icon: 'IconBalance',
+                        surfaces: ['web'],
+                        steps: [
+                            'Check roughly the intended share of people saw each version',
+                            'A lopsided split usually means something is misconfigured',
+                            'Wait for enough people before believing the result',
+                        ],
+                    },
+                    {
+                        title: 'Roll out the version that won',
+                        icon: 'IconRocket',
+                        surfaces: ['web'],
+                        steps: [
+                            'Confirm the result is still holding',
+                            'Switch everyone over to the winning version',
+                            'Stop showing the one that lost',
+                        ],
+                    },
+                    {
+                        title: 'See whether your changes added up',
+                        icon: 'IconPeople',
+                        surfaces: ['web'],
+                        steps: [
+                            'Create a holdout – a small group kept out of every test',
+                            'Compare them against everyone else over time',
+                            'See the combined effect of everything you shipped',
+                        ],
+                    },
+                ],
             },
             {
                 level: 'Ask an agent',
-                surfaces: ['ai', 'mcp'],
-                body: 'Say "set up an A/B test with a 70/30 split for the new checkout flow, using purchase_completed as the goal metric" and the agent builds it, flag included. Later, ask "is this significant yet, or are we fooling ourselves?" and ship the winner.',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You describe the test you want to run, and an agent sets it up and reports back.',
+                useCases: [
+                    {
+                        title: 'Describe the test you want to run',
+                        icon: 'IconMagicWand',
+                        surfaces: ['ai', 'mcp'],
+                        steps: [
+                            'Open PostHog AI in the web app',
+                            'Say "test the new checkout, 70/30, measure purchases"',
+                            'It sets up the test and the switch behind it',
+                        ],
+                    },
+                    {
+                        title: 'Ask whether a test is winning, in Slack',
+                        icon: 'IconAtSign',
+                        surfaces: ['slack'],
+                        steps: [
+                            'Tag @PostHog with "is the checkout test significant yet?"',
+                            'It answers in the thread with the numbers behind it',
+                            'Decide together without anyone opening PostHog',
+                        ],
+                    },
+                    {
+                        title: 'Check a running test from your editor',
+                        icon: 'IconPlug',
+                        surfaces: ['mcp'],
+                        steps: [
+                            'Connect PostHog to Cursor or Claude Code once',
+                            'Ask for the results of the test you are working on',
+                            'Ship the winner from the same conversation',
+                        ],
+                    },
+                    {
+                        title: 'Reach PostHog from a script or CI',
+                        icon: 'IconTerminal',
+                        surfaces: ['cli'],
+                        steps: [
+                            'Sign in once with posthog-cli login',
+                            'Call posthog-cli api – the same tool catalog the agents use',
+                            'Run it from a local script or a CI pipeline',
+                        ],
+                    },
+                ],
             },
             {
-                level: 'Self-driving',
-                surfaces: ['inbox'],
-                body: 'The experiments scout reviews running tests on a schedule and files a report when one has stopped being trustworthy – a lopsided split, or a test still running long after it settled. You find out without going to check.',
-                tools: ['feature_flags', 'product_analytics'],
+                level: 'Ship with PostHog',
+                surfaces: ['inbox', 'slack'],
+                driver: 'PostHog checks your running tests without being asked, and brings you anything wrong.',
+                useCases: [
+                    {
+                        title: 'Get warned before you trust a bad result',
+                        icon: 'IconWarning',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog reviews your running tests on a schedule, unprompted',
+                            'It reports when the split is skewed enough to invalidate the result',
+                            'You hear about it before you act on a wrong answer',
+                        ],
+                    },
+                    {
+                        title: 'Close tests that finished long ago',
+                        icon: 'IconArchive',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog spots tests still running after they had already settled',
+                            'It reports them along with the result they reached',
+                            'You end them and free the traffic for the next test',
+                        ],
+                    },
+                    {
+                        title: "Prove an agent's change worked",
+                        icon: 'IconGraph',
+                        surfaces: ['desktop'],
+                        steps: [
+                            'Ask for the fix to go out as a test rather than to everyone',
+                            'The number decides whether it stays or goes',
+                            'The outcome feeds into what PostHog looks at next',
+                        ],
+                    },
+                    {
+                        title: 'Get test alerts in Slack',
+                        icon: 'IconAtSign',
+                        surfaces: ['slack'],
+                        steps: [
+                            'Point the scout at one of your channels',
+                            'Reports post there as soon as they are found',
+                            'Reply with @PostHog to have it look into one',
+                        ],
+                    },
+                ],
             },
         ],
     },

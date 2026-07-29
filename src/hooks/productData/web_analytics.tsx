@@ -77,13 +77,6 @@ export const webAnalytics = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'use-case-ramp',
-            name: 'Ramp to self-driving',
-            template: 'use-case-ramp',
-            group: 'divided',
-            icon: <IconRefresh className="size-4" />,
-        },
-        {
             slug: 'applications',
             name: 'How do I use it?',
             group: 'divided',
@@ -96,6 +89,13 @@ export const webAnalytics = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -220,22 +220,147 @@ export const webAnalytics = {
         ],
     },
     useCaseRamp: {
-        rungs: [
+        columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                body: "Open the prebuilt dashboard to see visitors, top pages, bounce rate, and which channels sent them. Check whether yesterday's deploy changed traffic to a page you touched.",
+                driver: 'You read the traffic dashboard yourself.',
+                useCases: [
+                    {
+                        title: 'See who visits and where they came from',
+                        icon: 'IconGlobe',
+                        surfaces: ['web'],
+                        steps: [
+                            'Open the dashboard – it is ready with nothing to configure',
+                            'Read visitors, most-viewed pages, and traffic sources',
+                            'Break it down by search, social, or ad campaign',
+                        ],
+                    },
+                    {
+                        title: "Check a release didn't hurt your site",
+                        icon: 'IconPulse',
+                        surfaces: ['web'],
+                        steps: [
+                            'Compare traffic to a page before and after you shipped',
+                            'See whether more people now leave immediately',
+                            'Check whether the page got slower to load',
+                        ],
+                    },
+                    {
+                        title: 'Decide which page to rewrite first',
+                        icon: 'IconPencil',
+                        surfaces: ['web'],
+                        steps: [
+                            'Sort pages by how many people leave without doing anything',
+                            'Check how far down the worst ones people actually scroll',
+                            'Fix the page losing you the most visitors',
+                        ],
+                    },
+                    {
+                        title: 'Watch a launch land in real time',
+                        icon: 'IconLive',
+                        surfaces: ['web'],
+                        steps: [
+                            'Open live traffic',
+                            'See visitors arriving as it happens',
+                            'Confirm your announcement is actually reaching people',
+                        ],
+                    },
+                ],
             },
             {
                 level: 'Ask an agent',
-                surfaces: ['ai', 'mcp'],
-                body: 'Ask "did traffic to /pricing change after yesterday\'s deploy?" or "which pages have the worst LCP this week?". From your editor, pull the weekly digest over MCP before you write the changelog.',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You ask about your traffic in plain English, and an agent runs the numbers for you.',
+                useCases: [
+                    {
+                        title: 'Ask about your traffic in plain English',
+                        icon: 'IconMagicWand',
+                        surfaces: ['ai', 'mcp'],
+                        steps: [
+                            'Open PostHog AI in the web app',
+                            'Ask "did traffic to /pricing change after we shipped yesterday?"',
+                            'It runs the comparison and shows you what moved',
+                        ],
+                    },
+                    {
+                        title: 'Get a traffic answer in a Slack thread',
+                        icon: 'IconAtSign',
+                        surfaces: ['slack'],
+                        steps: [
+                            "Tag @PostHog with a question about last week's traffic",
+                            'It answers in the thread',
+                            'Marketing and engineering end up looking at the same number',
+                        ],
+                    },
+                    {
+                        title: 'Pull traffic data into your editor',
+                        icon: 'IconPlug',
+                        surfaces: ['mcp'],
+                        steps: [
+                            'Connect PostHog to Cursor or Claude Code once',
+                            'Ask for the weekly summary while you write the changelog',
+                            'Paste the numbers straight in',
+                        ],
+                    },
+                    {
+                        title: 'Reach PostHog from a script or CI',
+                        icon: 'IconTerminal',
+                        surfaces: ['cli'],
+                        steps: [
+                            'Sign in once with posthog-cli login',
+                            'Call posthog-cli api – the same tool catalog the agents use',
+                            'Run it from a local script or a CI pipeline',
+                        ],
+                    },
+                ],
             },
             {
-                level: 'Self-driving',
+                level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                body: 'The web analytics scout compares each channel and page to its own seasonality-matched baseline and files a report when traffic or site health drifts – a referral channel that fell off a cliff. It goes to a person, since a traffic problem usually lives outside the repo.',
-                tools: ['product_analytics', 'session_replay'],
+                driver: 'PostHog watches your traffic without being asked, and brings you anything unusual.',
+                useCases: [
+                    {
+                        title: 'Hear about traffic changes that matter',
+                        icon: 'IconActivity',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog compares each source against its normal pattern for the time of year',
+                            'It reports real changes and ignores the usual ups and downs',
+                            'You stop checking the dashboard every morning',
+                        ],
+                    },
+                    {
+                        title: "Know when the problem isn't in your code",
+                        icon: 'IconPeople',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'A referral source drying up is usually not a bug',
+                            'PostHog sends that to you rather than writing code',
+                            'You take it to whoever owns that channel',
+                        ],
+                    },
+                    {
+                        title: 'Get a slow page fixed',
+                        icon: 'IconStethoscope',
+                        surfaces: ['slack'],
+                        steps: [
+                            'PostHog reports which pages became slow, and what is causing it',
+                            'Reply with @PostHog to have it work on the page',
+                            'Review the pull request it opens',
+                        ],
+                    },
+                    {
+                        title: 'Get the weekly summary without asking',
+                        icon: 'IconCalendar',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog sends it on a schedule',
+                            'Traffic, sources, and conversions compared with last week',
+                            'Skim it instead of building it',
+                        ],
+                    },
+                ],
             },
         ],
     },

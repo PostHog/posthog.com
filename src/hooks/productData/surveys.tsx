@@ -64,13 +64,6 @@ export const surveys = {
             icon: <IconMagic className="size-4" />,
         },
         {
-            slug: 'use-case-ramp',
-            name: 'Ramp to self-driving',
-            template: 'use-case-ramp',
-            group: 'divided',
-            icon: <IconRefresh className="size-4" />,
-        },
-        {
             slug: 'applications',
             name: 'How do I use it?',
             group: 'divided',
@@ -83,6 +76,13 @@ export const surveys = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -196,22 +196,147 @@ export const surveys = {
         ],
     },
     useCaseRamp: {
-        rungs: [
+        columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                body: 'Launch an NPS or churn-reason survey to people who visited your pricing page last week. Answers arrive as events, so you can chart the score next to everything else you track.',
+                driver: 'You write the questions, choose who sees them, and read the answers.',
+                useCases: [
+                    {
+                        title: 'Ask users a question at the right moment',
+                        icon: 'IconMessage',
+                        surfaces: ['web'],
+                        steps: [
+                            'Pick a template like "how likely are you to recommend us?"',
+                            'Choose who sees it, such as people who visited pricing last week',
+                            'Launch it – it appears in your product with no code to write',
+                        ],
+                    },
+                    {
+                        title: 'Compare answers with your other metrics',
+                        icon: 'IconGraph',
+                        surfaces: ['web'],
+                        steps: [
+                            'Each answer is stored as an event, like a click or a pageview',
+                            'Chart the score over time next to your other metrics',
+                            'Split it by plan, country, or any group you already track',
+                        ],
+                    },
+                    {
+                        title: 'See what someone was doing when they complained',
+                        icon: 'IconRewindPlay',
+                        surfaces: ['web'],
+                        steps: [
+                            'Open a response you want to understand',
+                            "Jump to the recording of that person's visit",
+                            'Watch the moment that caused the complaint',
+                        ],
+                    },
+                    {
+                        title: 'Track whether opinion improves',
+                        icon: 'IconCalendar',
+                        surfaces: ['web'],
+                        steps: [
+                            'Set the survey to repeat every quarter',
+                            'Each round is kept separate from the last',
+                            "Compare this quarter's score against the previous one",
+                        ],
+                    },
+                ],
             },
             {
                 level: 'Ask an agent',
-                surfaces: ['ai', 'mcp'],
-                body: 'Ask for "a draft NPS survey for users who visited /pricing" – it stays a draft until you launch it. Once answers come in, ask it to summarize the open text into themes instead of reading three hundred rows yourself.',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You describe the survey you want, and an agent drafts it and summarizes the answers.',
+                useCases: [
+                    {
+                        title: 'Get the survey drafted for you',
+                        icon: 'IconMagicWand',
+                        surfaces: ['ai', 'mcp'],
+                        steps: [
+                            'Open PostHog AI in the web app',
+                            'Ask for a satisfaction survey for people who visited pricing',
+                            'It writes the questions and targeting; you edit and launch',
+                        ],
+                    },
+                    {
+                        title: 'Ask what people said, in Slack',
+                        icon: 'IconAtSign',
+                        surfaces: ['slack'],
+                        steps: [
+                            'Tag @PostHog with "what are people saying in the churn survey?"',
+                            'It summarizes the answers in the thread',
+                            'The whole team reads the same summary',
+                        ],
+                    },
+                    {
+                        title: 'Group the answers from your editor',
+                        icon: 'IconPlug',
+                        surfaces: ['mcp'],
+                        steps: [
+                            'Connect PostHog to Cursor or Claude Code once',
+                            'Ask it to sort the written answers into themes',
+                            'Fix the thing people keep mentioning',
+                        ],
+                    },
+                    {
+                        title: 'Reach PostHog from a script or CI',
+                        icon: 'IconTerminal',
+                        surfaces: ['cli'],
+                        steps: [
+                            'Sign in once with posthog-cli login',
+                            'Call posthog-cli api – the same tool catalog the agents use',
+                            'Run it from a local script or a CI pipeline',
+                        ],
+                    },
+                ],
             },
             {
-                level: 'Self-driving',
+                level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                body: 'The surveys scout groups open-text answers into themes on a schedule and files a report when a score drops or people start abandoning the survey. It goes to a person rather than a pull request, because sentiment is not a defect with a known fix.',
-                tools: ['session_replay', 'product_analytics'],
+                driver: 'PostHog reads the responses without being asked, and brings you the recurring themes.',
+                useCases: [
+                    {
+                        title: 'Learn what users keep complaining about',
+                        icon: 'IconStack',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog groups written answers into themes on a schedule, unprompted',
+                            'It reports when a theme grows or a score falls',
+                            'Nobody had to read the raw responses to spot it',
+                        ],
+                    },
+                    {
+                        title: 'Decide what to do about unhappy users',
+                        icon: 'IconPeople',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'Feedback is an opinion, not a bug with an obvious fix',
+                            'So PostHog sends it to you rather than writing code',
+                            'You judge whether it is worth changing something',
+                        ],
+                    },
+                    {
+                        title: 'Turn a complaint into a code change',
+                        icon: 'IconPullRequest',
+                        surfaces: ['slack'],
+                        steps: [
+                            'Post the report into a Slack channel',
+                            'Reply with @PostHog describing the change you want',
+                            'Review the pull request it opens',
+                        ],
+                    },
+                    {
+                        title: 'Spot people abandoning your survey',
+                        icon: 'IconThumbsDown',
+                        surfaces: ['inbox'],
+                        steps: [
+                            'PostHog tracks who starts answering but never finishes',
+                            'It reports when that drop-off jumps',
+                            'Cut the questions nobody is getting through',
+                        ],
+                    },
+                ],
             },
         ],
     },
