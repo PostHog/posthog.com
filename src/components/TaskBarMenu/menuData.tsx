@@ -12,6 +12,7 @@ import {
     IconLinkedIn,
     IconGithub,
     IconInstagram,
+    IconDictator,
     IconSparksJoy,
 } from 'components/OSIcons'
 import { useAppSettings } from '../../context/App'
@@ -964,20 +965,20 @@ export const SparksJoyItems = {
         {
             label: 'Hedgehog mode',
             link: '/sparks-joy/hedgehog-mode',
-            iconName: 'games' as AppIconName,
+            iconName: 'hedgehog_mode' as AppIconName,
             customIcon: null,
         },
         {
             label: 'HogWars',
             link: '/sparks-joy/hogwars',
-            iconName: 'games' as AppIconName,
+            iconName: 'hogwars' as AppIconName,
             customIcon: null,
         },
         {
             label: 'Dictator or tech bro?',
             link: '/sparks-joy/dictator-or-tech-bro',
-            iconName: 'games' as AppIconName,
-            customIcon: null,
+            iconName: null,
+            customIcon: <IconDictator />,
         },
         {
             label: 'BrickHog',

@@ -10,7 +10,7 @@ export default function BrickHog(): JSX.Element {
                 description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
-            <Explorer template="generic" slug="brickhog" title="BrickHog" fullScreen>
+            <Explorer template="generic" slug="brickhog" title="BrickHog" showAddressBar={false} fullScreen>
                 <iframe src="https://brickbreak-ebon.vercel.app/" className="w-full h-full border-0" />
             </Explorer>
         </>

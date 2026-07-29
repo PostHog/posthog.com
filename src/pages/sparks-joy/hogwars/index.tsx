@@ -18,6 +18,7 @@ export default function HogWars(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
+                showAddressBar={false}
                 fullScreen
             >
                 <iframe src="https://hogwars.vercel.app/" className="w-full h-full border-0" />
