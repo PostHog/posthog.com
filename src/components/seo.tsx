@@ -15,8 +15,6 @@ interface SEOProps {
     noindex?: boolean
     imageType?: 'absolute' | 'relative'
     updateWindowTitle?: boolean
-    /** Title to show in the OS window bar. Defaults to `title` (the meta/tab title) when omitted. */
-    windowTitle?: string
     lang?: string
     languageAlternates?: LanguageAlternate[]
     /** schema.org JSON-LD object(s) emitted as <script type="application/ld+json"> */
@@ -41,7 +39,6 @@ export const SEO = ({
     noindex,
     imageType = 'relative',
     updateWindowTitle = true,
-    windowTitle,
     lang,
     languageAlternates,
     structuredData,
@@ -71,13 +68,11 @@ export const SEO = ({
         url: `${siteUrl}${pathname}`,
     }
 
-    const resolvedWindowTitle = windowTitle || seo.title
-
     useEffect(() => {
-        if (updateWindowTitle && resolvedWindowTitle && appWindow) {
-            setWindowTitle(appWindow, resolvedWindowTitle)
+        if (updateWindowTitle && seo.title && appWindow) {
+            setWindowTitle(appWindow, seo.title)
         }
-    }, [resolvedWindowTitle])
+    }, [seo.title])
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>
