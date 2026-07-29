@@ -946,7 +946,7 @@ export default function SelfDrivingPage({
                     <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
                         <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
                             <div className="relative z-20 p-5 pb-6 @md/reader-content:p-7 @xl/reader-content:p-10">
-                                <h1 className="m-0 mb-5 text-3xl !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                <h1 className="m-0 mb-5 text-3xl font-bold !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
                                     Shift your product into <Highlight>self-driving</Highlight> mode
                                 </h1>
                                 <p className="m-0 text-[15px] text-secondary @xl/reader-content:text-[17px]">
