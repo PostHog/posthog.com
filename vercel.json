@@ -150,6 +150,31 @@
     ],
     "redirects": [
         {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/getting-started",
             "destination": "/docs/web-analytics/start-here",
             "statusCode": 301

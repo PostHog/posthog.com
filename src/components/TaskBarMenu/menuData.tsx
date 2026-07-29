@@ -412,9 +412,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'Plans & usage-based pricing',
+                    label: 'Usage-based pricing',
                     link: '/pricing',
                     icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
+                },
+                {
+                    type: 'item',
+                    label: 'Platform packages',
+                    link: '/platform-packages',
+                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
                 },
                 {
                     type: 'item',
@@ -1065,7 +1071,8 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
                 { value: 'sales', label: 'How we do "sales"' },
                 { value: 'startups', label: 'Startups' },
             ],
