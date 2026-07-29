@@ -20,7 +20,13 @@ const CANNED_REPLIES = [
     'I can see your last three crossings. Two were the compost heap. No judgement.',
 ]
 
-const SUGGESTIONS = ['Can I bring a hoglet?', 'Is my area covered?', 'Why was my crossing cancelled?']
+const SUGGESTIONS = [
+    'Can I bring a hoglet?',
+    'Is my area covered?',
+    'Why was my crossing cancelled?',
+    'Is my route safe?',
+    'Can I use it in winter?',
+]
 
 /**
  * AI support gets a whole page rather than a floating widget: a chat panel pinned
@@ -59,10 +65,7 @@ export default function HelpPage(): JSX.Element {
             <section className="un-help">
                 <div className="un-help-intro">
                     <h2 className="un-h1">AI support</h2>
-                    <p className="un-lede">
-                        Ask Unter AI about the hedgehog highway, or get help with your route. To talk to a human, just
-                        ring Joe or Cleo.
-                    </p>
+                    <p className="un-lede">Ask Unter AI about the hedgehog highway, or get help with your route.</p>
                     {/* Not buttons: these are examples of what people ask, not a
                         second way to drive the thread. The input below is the
                         interactive part. */}
@@ -114,7 +117,7 @@ export default function HelpPage(): JSX.Element {
                 <div>
                     <h2 className="un-h2">Still stuck?</h2>
                     <p className="un-lede">
-                        A human will read your message eventually. Joe volunteers on Tuesdays and is very thorough.
+                        A human will read your message eventually. Joe volunteers on Fridays and is very thorough.
                     </p>
                 </div>
                 <button className="un-btn-black">Email support</button>

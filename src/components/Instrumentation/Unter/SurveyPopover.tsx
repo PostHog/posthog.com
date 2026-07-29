@@ -1,15 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { UnterPageId } from '../overlay/types'
 
 interface SurveyPopoverProps {
+    /** Which page's badge opened it: the survey copy is page-specific. */
+    page: UnterPageId
     onDismiss: () => void
 }
 
-const OPTIONS = [
-    'My landlord',
-    "Don't own the tools",
-    'The neighbour (ongoing situation)',
-    'Nothing. I was born for this',
-]
+interface Survey {
+    question: string
+    options: string[]
+    thanks: string
+}
+
+/**
+ * One survey per page, so the question fits what the visitor is doing there. Keep
+ * these in step with each page's survey annotation, whose DATA table lists these
+ * same options (highway.tsx / ride.tsx). RIDE_SURVEY doubles as the fallback, so
+ * `page` never needs a non-null assertion.
+ */
+const RIDE_SURVEY: Survey = {
+    question: 'Quick one: what would make Unter better?',
+    options: ['Better route options', 'Slower is fine', 'Not enough gaps nearby'],
+    thanks: 'Thanks. Passed to the routing team.',
+}
+
+const SURVEYS: Partial<Record<UnterPageId, Survey>> = {
+    ride: RIDE_SURVEY,
+    highway: {
+        question: 'Quick one: what would stop you from cutting a hedgehog hole?',
+        options: [
+            'My landlord',
+            "Don't own the tools",
+            'The neighbour (ongoing situation)',
+            'Nothing. I was born for this',
+        ],
+        thanks: 'Thanks. The neighbour will never know you said that.',
+    },
+}
 
 /**
  * Styled like a PostHog survey. Opened by the footer's "Quick survey" badge rather
@@ -20,9 +48,10 @@ const OPTIONS = [
  * doesn't trap focus or block the page behind it. It does need the two things a
  * keyboard user will reach for, though, which is Escape and a way in.
  */
-export default function SurveyPopover({ onDismiss }: SurveyPopoverProps): JSX.Element {
+export default function SurveyPopover({ page, onDismiss }: SurveyPopoverProps): JSX.Element {
     const [answered, setAnswered] = useState(false)
     const rootRef = useRef<HTMLDivElement | null>(null)
+    const survey = SURVEYS[page] ?? RIDE_SURVEY
 
     // Focus moves in on open, so the options are the next thing you tab to rather
     // than something buried after the whole page.
@@ -43,7 +72,7 @@ export default function SurveyPopover({ onDismiss }: SurveyPopoverProps): JSX.El
             {answered ? (
                 <>
                     <p className="un-sq" role="status">
-                        Thanks. The neighbour will never know you said that.
+                        {survey.thanks}
                     </p>
                     <button className="un-opt" onClick={onDismiss}>
                         Close
@@ -51,8 +80,8 @@ export default function SurveyPopover({ onDismiss }: SurveyPopoverProps): JSX.El
                 </>
             ) : (
                 <>
-                    <p className="un-sq">Quick one: what nearly stopped you from cutting the hole?</p>
-                    {OPTIONS.map((option) => (
+                    <p className="un-sq">{survey.question}</p>
+                    {survey.options.map((option) => (
                         <button key={option} className="un-opt" onClick={() => setAnswered(true)}>
                             {option}
                         </button>

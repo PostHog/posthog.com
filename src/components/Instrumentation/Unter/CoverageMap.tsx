@@ -20,7 +20,7 @@ export default function CoverageMap(): JSX.Element {
             <div className="un-coverage-head">
                 <h3>Where Unter runs</h3>
             </div>
-            <div className="un-coverage-body">
+            <div className="un-coverage-body" aria-live="polite">
                 {loading ? (
                     <div className="un-coverage-loading">Loading service areas…</div>
                 ) : (

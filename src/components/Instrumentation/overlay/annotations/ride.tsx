@@ -71,10 +71,10 @@ posthog.init('phc_unter_******', {
         body: {
             why: (
                 <>
-                    This headline is the thing being tested: half of visitors see one version, half see another, split
-                    randomly by a flag. What makes it an experiment rather than just a flag is the other half of the
-                    setup. PostHog logs who saw which headline, ties that to a metric you pick up front (here, whether
-                    they go on to view prices), and tells you when the gap between the two is real rather than noise.
+                    This headline is being tested: half of visitors see one version, half see another, split randomly by
+                    a flag. What makes it an experiment, not just a flag, is the rest of the setup. PostHog logs who saw
+                    which headline, ties that to a metric you pick up front (here, whether they view prices), and tells
+                    you when the gap is real rather than noise.
                 </>
             ),
             input: {
@@ -180,9 +180,9 @@ heroEl.textContent = COPY[v]
                 <>
                     The click is already in autocapture, but a conversion funnel built on autocapture breaks the day
                     someone reworks this button: the selector stops matching, the step goes quiet, and the rate looks
-                    like it cratered when behavior never changed. A named event is a stable definition of the step that
-                    survives redesigns, and its properties arrive with a schema someone chose on purpose, so you can
-                    break the conversion down by the things that matter.
+                    like it cratered when behavior never changed. A named event is a stable definition that survives
+                    redesigns. Its properties are ones you chose, so you can break the conversion down by tier,
+                    distance, or gaps on the route.
                 </>
             ),
             input: {
@@ -491,11 +491,10 @@ capture_heatmaps: true`,
         body: {
             why: (
                 <>
-                    Signup is the number Unter watches daily and the last step of the funnel that starts on this page,
-                    so it gets its own named event. The same moment is also when you first learn who the person is, so
-                    two kinds of property are written alongside it: <code>$set</code> for anything that can change
-                    later, and <code>$set_once</code> for the facts about how they arrived, which should stay as they
-                    were on day one.
+                    Signup is the last step of the funnel, so it gets its own named event. It's also the first time you
+                    know who the person is. You set two kinds of property here: <code>$set</code> for things that can
+                    change later, and <code>$set_once</code> for facts about how they arrived, which should never be
+                    overwritten.
                 </>
             ),
             input: {

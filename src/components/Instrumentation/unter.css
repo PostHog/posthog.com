@@ -181,6 +181,14 @@
         display: block;
     }
 }
+/* Below 559px the full row (wordmark + 4 links + Sign up) overflows and clips the
+   Sign up pill (an annotation target). Drop the page links; the sidebar's page
+   switcher covers navigation. */
+@container unter (max-width: 559px) {
+    .un-nlink {
+        display: none;
+    }
+}
 .un-topnav .un-spacer {
     flex: 1;
 }
@@ -241,15 +249,12 @@
     align-items: center;
     padding: 24px 0 56px;
 }
-/* 2-up at 760px, not 860: it pairs with the 800px type-scale bump, so the big
-   headline never sits alone in a narrow single column, and the layout holds down
-   to roughly a 1170px viewport rather than snapping to stacked when the window is
-   a little smaller. minmax lets the two columns share width at the threshold
-   instead of overflowing. */
-@container unter (min-width: 760px) {
+/* 2-up as soon as the columns fit (620px); minmax lets them share width rather
+   than overflow, so the form and map stay side by side on smaller windows too. */
+@container unter (min-width: 620px) {
     .un-hero {
-        grid-template-columns: minmax(340px, 400px) minmax(240px, 1fr);
-        gap: 64px;
+        grid-template-columns: minmax(300px, 400px) minmax(220px, 1fr);
+        gap: 48px;
         padding: 40px 0 64px;
     }
 }
@@ -775,12 +780,12 @@
     align-items: center;
     padding: 24px 0 56px;
 }
-/* Matches .un-hero: 2-up at 760px with fluid columns, so the host hero holds its
-   copy-beside-form layout at smaller windows instead of stacking early. */
-@container unter (min-width: 760px) {
+/* Matches .un-hero: 2-up at 620px with fluid columns, so the copy and signup form
+   stay side by side on smaller windows instead of stacking early. */
+@container unter (min-width: 620px) {
     .un-hw-hero {
-        grid-template-columns: minmax(240px, 1fr) minmax(340px, 420px);
-        gap: 64px;
+        grid-template-columns: minmax(220px, 1fr) minmax(320px, 420px);
+        gap: 48px;
         padding: 40px 0 56px;
     }
 }
@@ -812,6 +817,11 @@
     color: #9b9b9b;
     line-height: 1.5;
     margin-top: 8px;
+}
+/* Fake T&C link: looks clickable, goes nowhere, like the rest of Unter's chrome. */
+.un-hw-form .un-legal a {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .un-specwrap {

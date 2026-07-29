@@ -142,7 +142,19 @@ export default function Instrumentation(): JSX.Element {
     }
 
     return (
-        <div className="@container flex flex-col h-full">
+        <div className="@container relative flex flex-col h-full">
+            {/* Too-small overlay. Shown below @3xl, the same width where the layout
+                would otherwise stack the frame and sidebar into an unusable column. */}
+            <div className="@3xl:hidden absolute inset-0 z-50 flex items-center justify-center bg-primary p-8 text-center">
+                <div className="max-w-xs">
+                    <h2 className="text-lg font-bold text-primary m-0 mb-2">Open this on a bigger screen</h2>
+                    <p className="text-sm text-secondary m-0">
+                        This demo puts a fake app next to a panel explaining what PostHog captures in it, which needs
+                        more width than this. It looks a bit janky here, so grab a laptop for the full thing.
+                    </p>
+                </div>
+            </div>
+
             <div className="px-4 py-3 border-b border-primary bg-primary shrink-0">
                 <h1 className="text-base font-bold m-0">How instrumentation works</h1>
                 <p className="text-sm text-secondary m-0 max-w-4xl">
@@ -184,7 +196,7 @@ export default function Instrumentation(): JSX.Element {
                             </div>
                         </ScrollArea>
                     </div>
-                    {surveyOpen && <SurveyPopover onDismiss={() => setSurveyOpen(false)} />}
+                    {surveyOpen && <SurveyPopover page={page} onDismiss={() => setSurveyOpen(false)} />}
                     <MarkerLayer
                         key={`frame-${page}`}
                         className="z-30"

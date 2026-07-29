@@ -14,14 +14,13 @@ export default function HighwayPage(): JSX.Element {
                             Change everything.
                         </h2>
                         <p className="un-lede">
-                            Your fence is a wall across someone's commute, and a 13cm hole (about the size of a CD case)
-                            turns it into a junction. Traffic peaks while you're asleep (hedgehogs are nocturnal), so
-                            the impact to effort ratio is hard to say no to.
+                            Your fence is a wall across someone's commute, and a small hole turns it into a
+                            through-road. Traffic peaks while you're asleep (hedgehogs are nocturnal), so really, it's a
+                            no brainer to help out here.
                         </p>
                     </div>
                     <div className="un-hw-form" data-unter-id="hw-form">
-                        <h2 className="un-form-title">Open your highway</h2>
-                        <p className="un-note">Takes 2 minutes. Cutting the gap takes about 10 more.</p>
+                        <h2 className="un-form-title">Open your hedgehog highway</h2>
                         <div className="un-field" data-unter-id="input-postcode">
                             <input type="text" aria-label="Postcode" placeholder="Postcode" />
                         </div>
@@ -45,19 +44,18 @@ export default function HighwayPage(): JSX.Element {
                             Sign up to host
                         </button>
                         <p className="un-legal">
-                            By continuing, you agree that the hole is permanent, the traffic is nocturnal, and the
-                            gratitude is theoretical.
+                            By continuing, you agree to our <a>terms and conditions</a>.
                         </p>
                     </div>
                 </section>
             </div>
 
             <div className="un-shell">
+                <ImpactCalculator />
+
                 <div className="un-specwrap">
                     <div className="un-ph un-ph-spec">Map</div>
                 </div>
-
-                <ImpactCalculator />
 
                 <section className="un-hiw">
                     <h2 className="un-h2">How it works</h2>

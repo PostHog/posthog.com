@@ -70,10 +70,9 @@ export const highwayAnnotations: Annotation[] = [
         body: {
             why: (
                 <>
-                    Host signup is the supply side of the marketplace, so each step gets its own named event and the
-                    funnel gets real steps to stand on. The answers people gave on the way through ride along as
-                    properties, and that's what lets you split the funnel by any of them afterwards without going back
-                    to add tracking.
+                    Host signup is the supply side of the marketplace, so each step gets its own named event. The
+                    answers people gave ride along as properties, so you can split the funnel by fence type or borough
+                    later without adding tracking.
                 </>
             ),
             input: {
@@ -206,6 +205,53 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
         },
     },
     {
+        id: 'highway/btn-start-cutting/error',
+        page: 'highway',
+        target: 'btn-start-cutting',
+        tool: 'error',
+        label: 'source maps',
+        // Above the submit button; the backend-logs marker sits below it, so the two
+        // read as the client and server halves of one failed submit.
+        dx: 0.5,
+        dy: -0.55,
+        title: 'Turning minified errors back into your code',
+        body: {
+            why: (
+                <>
+                    If this form's client code throws, the raw stack trace points at <code>t.exports</code> on line 1 of
+                    a minified bundle. Two commands in CI, after the build, turn it back into your own file and line
+                    numbers.
+                </>
+            ),
+            input: {
+                kind: 'code',
+                language: 'bash',
+                context: 'in CI, after the build',
+                snippet: `posthog-cli sourcemap inject --directory ./dist
+posthog-cli sourcemap upload --directory ./dist
+# deploy the injected assets, not a
+# pre-inject copy, or the upload can't match`,
+            },
+            output: {
+                context: 'a stack frame, resolved',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'State' }, { label: 'Top frame' }],
+                    rows: [
+                        ['Minified', <code>t.exports @ main.a91f.js:1:24855</code>],
+                        ['Resolved', <code>submitHostForm @ signup.ts:88:5</code>],
+                    ],
+                },
+            },
+            after: (
+                <>
+                    Grouping depends on this too. Without resolved stack traces the fingerprint falls back to minified
+                    frames, and those change every build, so one bug arrives as a fresh issue each release.
+                </>
+            ),
+        },
+    },
+    {
         id: 'highway/survey-badge/surveys',
         page: 'highway',
         target: 'survey-badge',
@@ -228,7 +274,7 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
                     { field: 'Lines of code', value: '0' },
                     { field: 'Type', value: 'Feedback button' },
                     { field: 'Attach', value: <code>.un-survey-badge</code> },
-                    { field: 'Question', value: '"What nearly stopped you?"' },
+                    { field: 'Question', value: '"What would stop you from cutting a hedgehog hole?"' },
                 ],
             },
             output: {
@@ -237,9 +283,10 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
                     kind: 'columns',
                     columns: [{ label: 'Answer' }, { label: 'Responses', align: 'right' }],
                     rows: [
-                        ['The postcode question', '88'],
-                        ['Not sure about neighbours', '64'],
-                        ['Took too long', '41'],
+                        ['The neighbour (ongoing situation)', '71'],
+                        ['My landlord', '52'],
+                        ["Don't own the tools", '44'],
+                        ['Nothing. I was born for this', '26'],
                     ],
                 },
                 footnote: <>193 answers.</>,
@@ -310,11 +357,10 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
         body: {
             why: (
                 <>
-                    Autocapture records the click and keeps the text of what was clicked, for links, buttons, form
+                    Autocapture records every click and keeps the text of what was clicked, for links, buttons, form
                     fields, and anything styled as clickable (these FAQ rows are <code>summary</code> elements with{' '}
-                    <code>cursor: pointer</code>, which is enough). So any repeated set of choices in your own product,
-                    whether that's FAQ rows, nav items, filter chips, or docs links in a sidebar, can be ranked by
-                    demand without shipping a line of tracking code.
+                    <code>cursor: pointer</code>). So any repeated set of choices (FAQ rows, nav items, filter chips)
+                    can be ranked by demand without shipping tracking code.
                 </>
             ),
             input: {
@@ -431,9 +477,9 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
         body: {
             why: (
                 <>
-                    A variant doesn't have to be one string. Here the flag returns which pitch to make, and the heading,
-                    the body copy, and the button text are all read from that one answer, so civic pride and polite
-                    guilt each get a coherent version of the whole section instead of a mismatched pairing.
+                    A variant doesn't have to be one string. Here, the flag controls the heading, body copy, and button
+                    text a website visitor sees. Unter is currently testing whether civic pride or guilt gets more
+                    people to click.
                 </>
             ),
             input: {
@@ -467,9 +513,8 @@ const { heading, body, cta } = REFERRAL_COPY[variant]
             },
             after: (
                 <>
-                    The trade is that you learn which version won, not which sentence did. That's the right trade when
-                    you want a decision and the wrong one when you want a rule about wording, so change one thing at a
-                    time only once the bundle has proven there's something there. The goal metric is{' '}
+                    The trade: you learn which version won, not which sentence did. That's fine for making a decision,
+                    but if you want to know which words matter, test one change at a time. The goal metric is{' '}
                     <code>highway_signup_completed</code> from referred neighbors within 14 days.
                 </>
             ),

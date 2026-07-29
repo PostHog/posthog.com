@@ -130,8 +130,9 @@ posthog.capture('$ai_span', {
         target: 'help-suggestions',
         tool: 'experiments',
         label: 'help-prompt-examples',
-        dx: 1.0,
-        dy: 0.5,
+        // Bottom-center of the list, so it doesn't crowd the chat card to its right.
+        dx: 0.5,
+        dy: 1.0,
         title: 'Testing whether example questions help',
         body: {
             why: (
@@ -229,6 +230,64 @@ posthog.capture('support_question_asked', { source: variant })
                 <>
                     PostHog's surveys scout watches for CSAT regressions and recurring themes in the free-text answers,
                     so six people describing the same broken flow becomes one finding rather than six.
+                </>
+            ),
+        },
+    },
+    {
+        id: 'help/chat-widget/replay',
+        page: 'help',
+        target: 'chat-widget',
+        tool: 'replay',
+        docsUrl: '/docs/replay-vision',
+        docsLabel: 'Replay Vision docs',
+        label: 'Replay Vision',
+        // Below the chat card, clear of the $ai_generation marker on its left edge.
+        dx: 0.5,
+        dy: 1.05,
+        title: 'An AI watches the support sessions and summarizes them',
+        body: {
+            why: (
+                <>
+                    The LLM metrics say what a session cost. Replay Vision (in closed beta) says what happened in it.
+                    You write a scanner as a prompt, and PostHog sends a sped-up video of each support recording, plus
+                    its events, to a vision model and saves the answer as an observation. No instrumentation code, since
+                    it runs on recordings you already capture.
+                </>
+            ),
+            input: {
+                kind: 'config',
+                context: 'a scanner, set in PostHog',
+                rows: [
+                    { field: 'Type', value: 'Summarizer' },
+                    { field: 'Prompt', value: '"Did the AI resolve it, or did they give up?"' },
+                    { field: 'Runs on', value: 'Recordings of the support chat' },
+                    { field: 'Sampling', value: '20% of matching sessions' },
+                ],
+            },
+            output: {
+                context: 'observation · $recording_observed',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Intent', value: 'Ask whether their area is covered' },
+                        { field: 'Outcome', value: 'AI answered, no escalation' },
+                        { field: 'Friction', value: 'Re-asked the same question twice' },
+                        { field: 'Confidence', value: '0.79' },
+                    ],
+                },
+                footnote: (
+                    <>
+                        Each observation is a <code>$recording_observed</code> event, with citations that jump the
+                        player to the moment it saw.
+                    </>
+                ),
+            },
+            after: (
+                <>
+                    It's the qualitative side of the same session the <code>$ai_generation</code> events measure: read
+                    the summary first, open the recording only when it's worth it. High-confidence findings can hand off
+                    to the self-driving inbox as signals.
                 </>
             ),
         },

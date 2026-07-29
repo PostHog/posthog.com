@@ -225,50 +225,6 @@ catch (err) {
         },
     },
     {
-        id: 'safety/coverage-map/error',
-        page: 'safety',
-        target: 'coverage-map',
-        tool: 'error',
-        label: 'source maps',
-        dx: 0.08,
-        dy: 0.92,
-        title: 'Turning minified errors back into your code',
-        body: {
-            why: (
-                <>
-                    Production JavaScript is minified, so a raw stack trace points at <code>t.exports</code> on line 1
-                    of a bundle. Two commands in CI, after the build, turn it back into your own file and line numbers.
-                </>
-            ),
-            input: {
-                kind: 'code',
-                language: 'bash',
-                context: 'in CI, after the build',
-                snippet: `posthog-cli sourcemap inject --directory ./dist
-posthog-cli sourcemap upload --directory ./dist
-# deploy the injected assets, not a
-# pre-inject copy, or the upload can't match`,
-            },
-            output: {
-                context: 'a stack frame, resolved',
-                table: {
-                    kind: 'columns',
-                    columns: [{ label: 'State' }, { label: 'Top frame' }],
-                    rows: [
-                        ['Minified', <code>t.exports @ main.a91f.js:1:24855</code>],
-                        ['Resolved', <code>loadCoverageTiles @ tiles.ts:42:11</code>],
-                    ],
-                },
-            },
-            after: (
-                <>
-                    Grouping depends on this too. Without resolved stack traces the fingerprint falls back to minified
-                    frames, and those change every build, so one bug arrives as a fresh issue each release.
-                </>
-            ),
-        },
-    },
-    {
         id: 'safety/safety-longread/web',
         page: 'safety',
         target: 'safety-longread',

@@ -42,11 +42,7 @@ export default function ImpactCalculator(): JSX.Element {
                 </div>
                 <div className="un-calc-cell">
                     <b>£0.00</b>
-                    <span>
-                        projected earnings,
-                        <br />
-                        regardless of slider position
-                    </span>
+                    <span>projected earnings</span>
                 </div>
             </div>
         </section>
