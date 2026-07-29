@@ -337,21 +337,22 @@ When creating or editing an alert, you can add notification destinations inline:
 
 You can add multiple notification destinations to a single alert. Each destination appears in the list with its status.
 
-### Snooze alerts from Slack
+## Snooze an alert
 
-When an alert fires to a Slack channel, the notification includes a **Snooze** dropdown that lets you silence the alert directly from Slack without opening PostHog:
+A noisy alert doesn't have to mean opening PostHog on your phone. Snoozing silences an alert until a time you pick, then checks resume on their own.
 
-1. Click the **Snooze…** dropdown on the alert message.
-2. Select a preset duration: **1 hour**, **6 hours**, **1 day**, or **1 week**.
-3. Alternatively, select **Pick a date & time…** to open a modal where you can choose a specific snooze end time (up to 31 days out).
+To snooze in PostHog, open the **Alerts** tab on the insight and edit the alert. While an alert is firing, a **Snooze until** picker appears at the bottom of the modal, offering **Tomorrow**, **One week from now**, or a custom date up to 31 days out. Once snoozed, the same spot shows **Clear snooze** to end it early.
 
-When you snooze an alert from Slack:
+### Snooze from a Slack notification
 
-- The alert won't fire again until the snooze period ends.
-- The Slack message updates in place to confirm the snooze.
-- The action is logged in the PostHog [activity log](/docs/data/activity-log).
+Alerts delivered to Slack carry a **Snooze…** dropdown on the message itself, so you can snooze one without leaving Slack.
 
-> **Note:** You must have viewer access to the insight and be a member of the project to snooze alerts from Slack.
+1. Open the **Snooze…** dropdown on the alert message.
+2. Pick **For 1 hour**, **For 6 hours**, **For 1 day**, or **For 1 week**. To set an exact time instead, pick **Pick a date & time…**, then choose a date and time up to 31 days out.
+
+The alert stops firing until the snooze expires, the Slack message updates in place to confirm it, and the change is recorded in the [activity log](/docs/settings/activity-logs) under your PostHog account. Snoozing needs access to the insight and membership of its project, so a Slack user with no matching PostHog account can't snooze anything.
+
+The dropdown only appears on Slack destinations added after this feature shipped. If an older alert posts a message without it, delete the alert's Slack destination and add it again to pick up the new message format.
 
 ## Advanced options
 
