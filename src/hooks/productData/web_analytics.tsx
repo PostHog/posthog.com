@@ -14,6 +14,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
+    IconRefresh,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
@@ -74,6 +75,13 @@ export const webAnalytics = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'applications',
@@ -209,6 +217,26 @@ export const webAnalytics = {
             ['Product Engineers', 'Validate deploys – did pageviews, bounce rate, or Web Vitals move after ship?'],
             ['Growth Engineers', 'Find high-bounce pages, scroll drop-off, and campaign paths worth fixing'],
             ['Content & SEO', 'Rank pages by entrances, bounce, and conversion to prioritize what to rewrite'],
+        ],
+    },
+    useCaseRamp: {
+        rungs: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                body: "Open the prebuilt dashboard to see visitors, top pages, bounce rate, and which channels sent them. Check whether yesterday's deploy changed traffic to a page you touched.",
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'mcp'],
+                body: 'Ask "did traffic to /pricing change after yesterday\'s deploy?" or "which pages have the worst LCP this week?". From your editor, pull the weekly digest over MCP before you write the changelog.',
+            },
+            {
+                level: 'Self-driving',
+                surfaces: ['inbox', 'slack'],
+                body: 'The web analytics scout compares each channel and page to its own seasonality-matched baseline and files a report when traffic or site health drifts – a referral channel that fell off a cliff. It goes to a person, since a traffic problem usually lives outside the repo.',
+                tools: ['product_analytics', 'session_replay'],
+            },
         ],
     },
     features,

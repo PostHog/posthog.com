@@ -15,6 +15,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
+    IconRefresh,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
@@ -63,6 +64,13 @@ export const productAnalytics = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'applications',
@@ -206,6 +214,26 @@ export const productAnalytics = {
             ['Growth Engineers', 'Find conversion leaks, measure experiments, and track activation end to end'],
             ['Founders', 'Monitor KPIs on a shared dashboard without waiting on a data team'],
             ['Support Engineers', 'Pull the events behind a customer report and jump into the matching session replay'],
+        ],
+    },
+    useCaseRamp: {
+        rungs: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                body: 'Build a funnel from signup to activation, see which step loses the most people, and save it to a dashboard. Set an alert so you hear about it the next time that rate drops.',
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'mcp'],
+                body: 'Ask PostHog AI "why did signups drop 12% last Tuesday?" and it builds and runs the insight for you. Or query that same funnel from Cursor or Claude Code, so you can check it while you are in the code that owns it.',
+            },
+            {
+                level: 'Self-driving',
+                surfaces: ['inbox', 'slack'],
+                body: 'The product analytics scout checks your funnels and retention on a schedule and files a report when a rate regresses – posted to whichever Slack channel you point it at. Nobody asked it to look. From that thread you can tag @PostHog to dig into the cause.',
+                tools: ['session_replay', 'feature_flags', 'experiments'],
+            },
         ],
     },
     features,

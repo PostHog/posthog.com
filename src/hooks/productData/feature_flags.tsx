@@ -15,6 +15,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
+    IconRefresh,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
@@ -63,6 +64,13 @@ export const featureFlags = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'applications',
@@ -212,6 +220,26 @@ export const featureFlags = {
                 'Gate infrastructure changes and migrations with gradual rollouts and instant rollback',
             ],
             ['Support Engineers', 'Enable a fix or workaround for a specific customer without shipping a new build'],
+        ],
+    },
+    useCaseRamp: {
+        rungs: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                body: 'Wrap a risky change in a flag and roll it out to 10% of users on the pro plan. Check the blast radius before you widen – how many users the condition would affect – and switch it off without a redeploy if something looks wrong.',
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'mcp'],
+                body: 'From your editor, say "create a flag called new-checkout rolled out to 20% of pro users" and the agent creates it. Ask "would user 12345 get this flag?" to test the targeting, or "is new-checkout stale?" before you tear the code out.',
+            },
+            {
+                level: 'Self-driving',
+                surfaces: ['inbox', 'desktop'],
+                body: 'The feature flags scout watches your flag roster on a schedule and files a report when a rollout shows a cliff or a flag has gone stale. The obvious cleanups – a dead check behind a fully rolled-out flag – arrive as a draft pull request for you to review.',
+                tools: ['experiments', 'error_tracking'],
+            },
         ],
     },
     features,

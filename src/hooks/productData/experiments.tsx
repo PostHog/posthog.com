@@ -16,6 +16,7 @@ import {
     IconMessage,
     IconNewspaper,
     IconToggle,
+    IconRefresh,
 } from '@posthog/icons'
 import { features } from './experiments/features'
 import { applications, topFeatures } from './experiments/slides'
@@ -76,6 +77,13 @@ export const experiments = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'applications',
@@ -219,6 +227,26 @@ export const experiments = {
                 'Run Bayesian or frequentist analysis with shared metrics, holdouts, and warehouse-backed metrics',
             ],
             ['B2B product teams', 'Run group-level experiments so everyone at a company sees the same variant'],
+        ],
+    },
+    useCaseRamp: {
+        rungs: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                body: 'Pick a metric, split traffic 70/30 behind a flag, and read the result – the chance each variant is winning, plus a warning if the split came out lopsided enough to distrust.',
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'mcp'],
+                body: 'Say "set up an A/B test with a 70/30 split for the new checkout flow, using purchase_completed as the goal metric" and the agent builds it, flag included. Later, ask "is this significant yet, or are we fooling ourselves?" and ship the winner.',
+            },
+            {
+                level: 'Self-driving',
+                surfaces: ['inbox'],
+                body: 'The experiments scout reviews running tests on a schedule and files a report when one has stopped being trustworthy – a lopsided split, or a test still running long after it settled. You find out without going to check.',
+                tools: ['feature_flags', 'product_analytics'],
+            },
         ],
     },
     features,

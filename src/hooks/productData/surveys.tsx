@@ -14,6 +14,7 @@ import {
     IconChat,
     IconCode,
     IconNewspaper,
+    IconRefresh,
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
@@ -61,6 +62,13 @@ export const surveys = {
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconRefresh className="size-4" />,
         },
         {
             slug: 'applications',
@@ -185,6 +193,26 @@ export const surveys = {
                 'Trigger satisfaction surveys after solved tickets and route urgent feedback to Slack',
             ],
             ['Founders', 'Collect testimonials and qualitative signal without a separate survey tool'],
+        ],
+    },
+    useCaseRamp: {
+        rungs: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                body: 'Launch an NPS or churn-reason survey to people who visited your pricing page last week. Answers arrive as events, so you can chart the score next to everything else you track.',
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'mcp'],
+                body: 'Ask for "a draft NPS survey for users who visited /pricing" – it stays a draft until you launch it. Once answers come in, ask it to summarize the open text into themes instead of reading three hundred rows yourself.',
+            },
+            {
+                level: 'Self-driving',
+                surfaces: ['inbox', 'slack'],
+                body: 'The surveys scout groups open-text answers into themes on a schedule and files a report when a score drops or people start abandoning the survey. It goes to a person rather than a pull request, because sentiment is not a defect with a known fix.',
+                tools: ['session_replay', 'product_analytics'],
+            },
         ],
     },
     features,

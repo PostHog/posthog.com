@@ -10,6 +10,9 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import WizardCommand from 'components/WizardCommand'
 import { SignalsCallout } from 'components/Code/SignalsCallout'
+import OSTable from 'components/OSTable'
+import { ToolChips } from 'components/ToolChip'
+import useProduct from 'hooks/useProduct'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import {
     IconArrowRight,
@@ -918,6 +921,123 @@ const faqItems = [
     },
 ]
 
+const rampLayers: { step: string; title: string; body: React.ReactNode; tools?: string[] }[] = [
+    {
+        step: '1',
+        title: 'Lay the context',
+        body: 'Run on the events you already send. Dashboards on day one, nothing to review yet.',
+        tools: ['product_analytics', 'web_analytics'],
+    },
+    {
+        step: '2',
+        title: 'Add the signals',
+        body: 'These produce findings directly – a rage click, a dead click, an exception, a log spike, a churn reason.',
+        tools: ['session_replay', 'error_tracking', 'logs', 'surveys'],
+    },
+    {
+        step: '3',
+        title: 'Add the controls',
+        body: 'Flags give every change a kill switch and a blast radius you can see before you widen. Experiments give it a pass/fail result. Skeptics start here.',
+        tools: ['feature_flags', 'experiments'],
+    },
+    {
+        step: '4',
+        title: 'Turn on the loop',
+        body: 'Scouts read the layers above through the same MCP you would connect to Cursor or Claude Code. Reports land in your inbox, an agent opens a pull request for the actionable ones, and PostHog checks whether the metric moved.',
+    },
+]
+
+const rampFeedColumns = [
+    { name: 'Tool', width: 'minmax(170px,auto)', align: 'left' as const },
+    { name: 'Role', width: 'minmax(150px,auto)', align: 'left' as const },
+    { name: 'Feeds', width: 'minmax(auto,1fr)', align: 'left' as const },
+]
+
+const rampFeeds: { tools: string[]; role: string; feeds: string }[] = [
+    {
+        tools: ['product_analytics'],
+        role: 'Context an agent reads',
+        feeds: 'Product analytics scout – funnel, retention, and lifecycle regressions',
+    },
+    {
+        tools: ['web_analytics'],
+        role: 'Context an agent reads',
+        feeds: 'Web analytics scout – acquisition and site-health drift',
+    },
+    {
+        tools: ['session_replay'],
+        role: 'Signal source',
+        feeds: 'Replay source and scout – rage- and dead-click clusters, UX friction',
+    },
+    {
+        tools: ['error_tracking', 'logs'],
+        role: 'Signal source',
+        feeds: 'Error and log signal sources',
+    },
+    {
+        tools: ['surveys'],
+        role: 'Signal source',
+        feeds: 'Surveys scout – open-text themes and score regressions',
+    },
+    {
+        tools: ['feature_flags'],
+        role: 'Control the blast radius',
+        feeds: 'Feature flags scout – cliffs, ghost flags, flag debt',
+    },
+    {
+        tools: ['experiments'],
+        role: 'Verify with a measured result',
+        feeds: 'Experiments scout – sample-ratio mismatch, zombie experiments',
+    },
+]
+
+const RampMap = (): JSX.Element => {
+    const allProducts = useProduct() as any[]
+
+    return (
+        <>
+            <h3 id="ramp-map" className={sectionHeadingClassName}>
+                Which tools to turn on, and <FlowingGradientHighlight>in what order</FlowingGradientHighlight>
+            </h3>
+            <p className="m-0 text-secondary text-[15px] @xl/reader-content:text-[17px]">
+                Every tool is useful on its own. Turned on in order, each one makes the next obvious – and the more
+                context PostHog has, the sharper the pull requests get.
+            </p>
+            <div className="not-prose my-6 grid grid-cols-1 gap-4 @md/reader-content:grid-cols-2 @2xl/reader-content:grid-cols-4">
+                {rampLayers.map((layer) => (
+                    <div
+                        key={layer.step}
+                        className="flex flex-col gap-2 rounded-md border border-primary bg-primary p-4"
+                    >
+                        <span className="flex size-7 items-center justify-center rounded-full bg-highlight text-sm font-bold text-red dark:text-yellow">
+                            {layer.step}
+                        </span>
+                        <p className="m-0 text-base font-bold text-primary">{layer.title}</p>
+                        <p className="m-0 text-sm leading-snug text-secondary">{layer.body}</p>
+                        <ToolChips handles={layer.tools} products={allProducts} className="mt-auto pt-1" />
+                    </div>
+                ))}
+            </div>
+            <div className="not-prose my-6">
+                <OSTable
+                    columns={rampFeedColumns}
+                    rows={rampFeeds.map((row) => ({
+                        key: row.tools.join('-'),
+                        cells: [
+                            { content: <ToolChips handles={row.tools} products={allProducts} /> },
+                            { content: row.role },
+                            { content: row.feeds },
+                        ],
+                    }))}
+                    size="sm"
+                    rowAlignment="top"
+                    width="full"
+                />
+            </div>
+        </>
+    )
+}
+
 export default function SelfDrivingPage({
     data,
 }: {
@@ -1353,6 +1473,9 @@ export default function SelfDrivingPage({
                                 </div>
                             </div>
                         </div>
+
+                        {/* Cross-tool ramp map */}
+                        <RampMap />
 
                         {/* FAQ */}
                         <h3>FAQ</h3>
