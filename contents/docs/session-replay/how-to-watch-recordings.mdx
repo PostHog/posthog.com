@@ -39,7 +39,7 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
 
 5. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
 
-6. Click **View heatmap** to use the HTML from the session recording as the background for your heatmap data. This generates a screenshot of your site that can be used when [creating a new heatmap](/docs/toolbar/heatmaps).
+6. Click **View heatmap** to open the [heatmap view](/docs/toolbar/heatmaps) using the recording's HTML as the background. When viewing a heatmap from a recording, you can enable a clickmap overlay that shows element-anchored click counts directly on elements in the snapshot. This is particularly useful when screenshot-based or iframe-based heatmaps fail due to auth walls or embedding restrictions.
 
 7. Change the playback speed. To enable **Skip inactivity**, which skips parts of the recording where the user was inactive on the page, open the **...** (more options) menu in the player controls and toggle it there
 
@@ -213,6 +213,46 @@ Both features are available in the bottom right corner of the recording player a
 />
 
 <Caption>Screen capture and clip capture features in session replay</Caption>
+
+## Kiosk mode
+
+Kiosk mode plays recordings continuously in fullscreen without user interaction – ideal for office displays or team dashboards. Go to [**Session Replay** > **Kiosk**](https://app.posthog.com/replay/kiosk) to open the setup screen.
+
+Before playback begins, you can configure optional filters:
+
+- **Visited page** – only play recordings that visited a specific URL
+- **Date range** – limit recordings to a time window (e.g. last 7 days)
+- **Minimum active duration** – skip short recordings below a threshold in seconds
+- **Feature flag** – only play recordings where a specific feature flag has a specific value
+
+Test accounts are always filtered out. Click **Start** to begin playback.
+
+### Bookmarkable kiosk URLs
+
+Add query params to skip the setup screen and start playback automatically:
+
+```
+https://app.posthog.com/replay/kiosk?visited_page=/welcome&date_from=-7d&min_duration=10&feature_flag=new-checkout&feature_flag_value=true&play=1
+```
+
+| Parameter | Description | Example |
+|-----------|-------------|----------|
+| `visited_page` | Filter by visited URL path | `/welcome` |
+| `date_from` | Start of date range | `-7d`, `-24h` |
+| `min_duration` | Minimum active seconds | `10` |
+| `feature_flag` | Feature flag key to filter by | `new-checkout` |
+| `feature_flag_value` | Required value for the feature flag | `true`, `control`, `variant-a` |
+| `play` | Skip setup and start immediately | `1` |
+
+### Playback behavior
+
+- Recordings play back-to-back automatically
+- Every 10 recordings, fresh results are fetched from the API
+- If no new recordings are available, existing ones loop
+- Every 50 recordings, the page reloads to free memory
+- On network failure, playback retries after a 5-second delay
+
+Press **Escape** to exit kiosk mode.
 
 ## Further reading
 

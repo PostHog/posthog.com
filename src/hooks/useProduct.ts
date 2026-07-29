@@ -29,10 +29,10 @@ import {
     IconCursorClick,
     IconChat,
     IconAtSign,
-    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
+import { traces } from './productData/traces'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -58,6 +58,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
+        traces,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -79,23 +80,22 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
             category: 'communication',
             slug: 'docs/support',
-            status: 'beta',
         },
         {
-            name: 'PostHog Code',
+            name: 'PostHog Desktop',
             Icon: IconCoffee,
-            description: 'AI code editor that knows how people use your product',
+            description: 'A desktop app for steering coding agents – and editing your product, not just your code',
             handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
             category: 'automation',
-            slug: 'code',
+            slug: 'desktop',
             status: 'beta',
             screenshots: {
                 home: {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
                     srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
-                    alt: 'PostHog Code screenshot',
+                    alt: 'PostHog Desktop screenshot',
                     imgClasses: 'w-full rounded shadow-xl border border-primary',
                 },
             },
@@ -1752,17 +1752,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
-        },
-        {
-            name: 'Replay Vision',
-            Icon: IconLlmPromptEvaluation,
-            description: 'AI-powered session replay analysis that watches recordings for you',
-            handle: 'replay_vision',
-            color: 'yellow',
-            colorSecondary: 'yellow',
-            category: 'product_engineering',
-            slug: 'replay-vision',
-            status: 'beta',
         },
         mcpAnalytics,
         {

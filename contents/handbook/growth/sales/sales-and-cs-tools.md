@@ -28,16 +28,27 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
    - Once connected, Gong automatically joins and records your Zoom calls into the shared library.
 3. **Granola** – Install the [Granola](https://www.granola.ai/) app and connect it to your calendar. It runs on your laptop and transcribes whatever call you're in (including your Zoom calls), so you get notes and a transcript without adding another bot to the meeting.
 
+### AI investigation tools
+
+The fastest way to dig into an account is an AI agent wired into our tools. Not mandated, but many of us lean on it daily, and setting it up early will speed things up.
+
+- **PostHog Desktop** – PostHog's agent workspace. Runs coding agents on top of product data with PostHog skills built in.
+- **Claude Code** – a terminal agent you point at customer data, tickets, and repos. Install the PostHog plugin with `claude plugin install posthog@claude-plugins-official`.
+- **MCPs** – connect the following MCPs to your AI agent:
+  - PostHog MCP
+  - Slack
+  - GitHub
+  - Granola
+
 ### Tools through Google and Single Sign-On (SSO)
 
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances. Login to both as this is needed for admin access
   - [PostHog App + Website](https://us.posthog.com/project/2) reference within PostHog US instance
-- [Pylon](https://usepylon.com/) - use Slack SSO
 - [QuoteHog](https://quote.posthog.net/)
 - [Salesforce](https://posthog.lightning.force.com/)
 - [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
-- [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
+- [PostHog Support](https://us.posthog.com/project/2/support/tickets)
 - [Zoom](https://zoom.com/)
 - *Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 

@@ -46,10 +46,11 @@ And because [experiments](/experiments) aren't limited to prompts, you can take 
 
 Because PostHog holds the full context of your product (traces, events, replays, errors, flags...), agents can use that context to find issues and ship improvements, not just surface them. You can steer this from wherever you already work:
 
+- In the app [(PostHog AI)](/ai) – ask questions in plain English, build dashboards, and dig into traces or replays without writing SQL.
 - In [Slack](/slack) – tag @PostHog to ask a data question ("which model is driving our token costs this week?") or kick off a fix.
 - In your editor [(via MCP)](/mcp) – wire PostHog's live product context into Claude Code, Codex, or your own agent so it can pull real data and act on it.
-- On the desktop [(PostHog Code)](/code) – run coding agents on top of your product data, with signals turned into a ranked inbox.
-- In the app [(PostHog AI)](/ai) – ask questions in plain English, build dashboards, and dig into traces or replays without writing SQL.
+- In your terminal [(via CLI)](/docs/cli) – query your product data and drive agents from the command line, and wire PostHog into your scripts and CI.
+- On the desktop [(PostHog Code)](/desktop) – run coding agents on top of your product data, with signals turned into a ranked inbox.
 
 <WizardCTA />
 
@@ -235,6 +236,19 @@ The platform you choose for LLM or AI observability will depend on your current 
 - **PostHog or Langfuse** – You can use Langfuse for the LLM engineering team's inner loop (prompt iteration, evals, dataset management, quality assurance). And add PostHog for the product team so that they can measure business outcomes after shipping the feature. They solve different problems for different people in the organization. 
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What's the main difference between PostHog and Langfuse?</summary>

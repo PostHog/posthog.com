@@ -25,7 +25,7 @@ At the end of each quarter we will review your accounts and look to hand off som
 
 #### TAM Territory Review
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
+In addition to the weekly sprint planning meeting on a Monday, we do a [weekly territory review standup](/blog/customer-success-at-posthog#200-pm-team-account-review) on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
 
 1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
 2. What's your next step with that customer (annual plan, cross-sell etc).
@@ -58,7 +58,7 @@ If the answer to any of the above questions is 'no' then it's likely that there 
 - 100% quota attainment leads to a 50/50 of OTE and Commission split
 - TAMs cover 5x their OTE with their quota
 
-> This plan, including the OTE to quota ratio, may change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission.
+> This plan, including the OTE to quota ratio, is likely to change as we scale up the size and complexity of our sales machine! For example, the rate plan will be reviewed when median book cash exceeds 5x OTE. This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. 
 
 **How we calculate**
 - Quota is calculated annually, and is paid out quarterly
@@ -104,7 +104,8 @@ Deals a previous owner signed (including ones with a future-dated start that lan
 5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
 6. Nominally, you should have 15 accounts/around $1.5m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
-8. If you actively work to reduce a customer's spend with us by optimizing their usage, we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
+8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
+9. We want you to ensure the customer has paid, and we don't want AMs to throw invoice chasing to a finance person. This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay. You should make the [failed/late payment process](/handbook/growth/sales/billing#failedlate-payments) clear to your customer, especially in the case of a severely delayed payment.
 
 > We have a bunch of accounts where they are declining for reasons that have nothing to do with a TAM’s actions. We also have a bunch where they are growing in the same way. These even each other out in the bigger picture of hundreds of accounts, if anything in favor of the latter.  If they fit the criteria for having a TAM assigned, you should be prepared to continue to manage both types of customers in your book, as churn prevention is a key part of the TAM role too.
 
@@ -155,13 +156,13 @@ You will run into questions that you don't know the answer to from time to time 
 
 - Try to solve your own problems. Deep dive the docs, ask PostHog AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
-- If you open a ticket in Zendesk and know which team the ticket needs to go to, make sure to select "escalated" on the ticket so that it will bypass support and go straight to that team.
+- If you open a ticket in PostHog Support and know which team the ticket needs to go to, [assign the ticket to that team](/handbook/support/posthog-support#escalating-a-ticket) so that it bypasses support and goes straight to them.
 
 ## Working with customers in Slack
 
 Most of our customers use Slack, and it's a great way for us to be responsive to them. Qualifying customers and prospects can get a [shared Slack channel](/handbook/growth/sales/slack-channels), and you should set one up as early as it makes sense in your relationship with them.
 
-We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into Zendesk so our Support and Engineering teams can work on customer issues in a familiar context.
+We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into [PostHog Support](/handbook/support/posthog-support) so our Support and Engineering teams can work on customer issues in a familiar context.
 
 See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 

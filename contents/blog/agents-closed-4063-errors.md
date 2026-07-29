@@ -13,6 +13,7 @@ tags:
   - AI
   - Error tracking
   - Engineering
+  - Research
 ---
 
 Last month, our customers deployed AI agents to PostHog projects to try and solve 6,124 errors in their products. They resolved 4,063 issues. They suppressed 1,751 more. They routed 310 to the right team. Almost none of those agents opened the PostHog UI to do it.
@@ -143,4 +144,4 @@ Install the MCP server in your preferred client – the AI wizard handles setup 
 npx @posthog/wizard mcp add
 ```
 
-Or [configure it manually](https://posthog.com/docs/model-context-protocol#manual-install).
+Or [configure it manually](https://posthog.com/docs/model-context-protocol#get-started-in-30-seconds).

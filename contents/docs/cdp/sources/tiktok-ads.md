@@ -24,13 +24,6 @@ Additional reports will be added based on user feedback we receive via our [in-a
 ## Requirements
 
 - A TikTok Ads account with permission to access data from accounts you want to sync.
-- Your account ID from the [ads manager](https://ads.tiktok.com/i18n/dashboard) > in the top right it's your account > open the dropdown > check your ad account ID or check the dashboard url, e.g `https://ads.tiktok.com/i18n/dashboard?aadvid=ID_HERE`
-
-<ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_09_30_at_11_25_16_AM_ab70c4f7c4.png"
-    classes="rounded"
-    alt="Tiktok account ID"
-/>
 
 ## Configuring PostHog
 
@@ -38,9 +31,9 @@ Connect PostHog to your TikTok Ads account. The TikTok account must have permiss
 
 1. In PostHog, go to the **[Data pipelines](https://app.posthog.com/data-management/sources)** tab.
 2. Open the **+ New** drop-down menu in the top-right and select **Source**.
-3. Find Tiktok Ads in the sources list and click **Link**.
-4. Enter the **Account ID** of the Tiktok Ads account you want to sync.
-5. Select an existing TikTok Ads account, or create a new integration.
+3. Find TikTok Ads in the sources list and click **Link**.
+4. Select an existing TikTok Ads integration, or create a new one by clicking **Connect**.
+5. Select the advertiser account you want to sync from the dropdown.
 6. (Optional) Add a prefix for the table name.
 
 ## Configuration
@@ -50,3 +43,19 @@ Connect PostHog to your TikTok Ads account. The TikTok account must have permiss
 ## Supported tables
 
 <SourceTables />
+
+## Troubleshooting
+
+### Finding your account ID manually
+
+If the advertiser account dropdown in step 5 doesn't load, you can find your account ID manually in TikTok Ads Manager:
+
+1. Go to the [TikTok Ads Manager dashboard](https://ads.tiktok.com/i18n/dashboard).
+2. Click your account name in the top right and open the dropdown.
+3. Find your ad account ID, or check the dashboard URL, e.g. `https://ads.tiktok.com/i18n/dashboard?aadvid=ID_HERE`
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_09_30_at_11_25_16_AM_ab70c4f7c4.png"
+    classes="rounded"
+    alt="TikTok account ID"
+/>

@@ -33,7 +33,7 @@ In this guide, we'll compare the best Langfuse alternatives and look at where ea
 
 ### What is PostHog?
 
-**[PostHog](/)** is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more.
+**[PostHog](/)** is the leading platform for building self-driving products. You can use our [web](/products), [Slack](/slack), [MCP](/mcp), [CLI](/docs/cli), and desktop ([Code](/desktop)) products to leverage tools like [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more.
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time. 
 
@@ -44,7 +44,7 @@ The free tier includes 100K AI observability events per month, with usage-based 
 <details>
 <summary>What sets PostHog apart from Langfuse?</summary>
 
-PostHog is the only tool here where AI observability is one piece of a full product stack (analytics, replay, error tracking, flags, experiments, and more) so you can tie an AI change to a real product metric, not just a model metric. Set up takes minutes [with the wizard](/wizard), and agents (in [PostHog Code](/code) and beyond) can act on that context to help make your product self-driving.
+PostHog is the only tool here where AI observability is one piece of a full product stack (analytics, replay, error tracking, flags, experiments, and more) so you can tie an AI change to a real product metric, not just a model metric. Set up takes minutes [with the wizard](/wizard), and agents (in [PostHog Code](/desktop) and beyond) can act on that context to help make your product self-driving.
 
 PostHog ships new AI observability features fast, including prompt management (beta) for versioning and experimenting with prompts without redeploying code, plus sentiment classification and trace summarization that Langfuse has no direct equivalent for.
 
@@ -489,6 +489,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What is Langfuse used for?</summary>

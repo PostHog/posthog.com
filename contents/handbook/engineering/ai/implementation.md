@@ -8,7 +8,7 @@ This page provides implementation guidance for building AI features at PostHog. 
 
 ## How PostHog AI works across surfaces
 
-PostHog AI isn't a single product – it's a platform that works wherever customers work. Through a combination of MCP tools and skills, PostHog AI is available across any agent of the customer's choice: PostHog AI in the web, PostHog Code, Claude Code, Cursor, Codex, and others.
+PostHog AI isn't a single product – it's a platform that works wherever customers work. Through a combination of MCP tools and skills, PostHog AI is available across any agent of the customer's choice: PostHog AI in the web, PostHog Desktop, Claude Code, Cursor, Codex, and others.
 
 All of these surfaces share the same underlying capabilities. The MCP server exposes PostHog's API as atomic tools, and skills teach agents how to compose those tools into workflows. When a product team adds a new MCP tool or writes a new skill, every surface benefits automatically.
 
@@ -22,9 +22,9 @@ PostHog AI in the web is a sandboxed coding agent built on the Agents SDK (Claud
 - **User-created custom skills and capabilities** – customers can create their own skills to teach the agent domain-specific workflows.
 - **Generative UI for complex needs** – for the most complex UI requirements, the agent can generate custom visualizations and interfaces on the fly.
 
-### PostHog Code
+### PostHog Desktop
 
-PostHog Code is a desktop agent that turns PostHog signals into shipped code. It watches PostHog for problems (errors, frustration patterns, user feedback) and automatically creates tasks, generates fixes, and opens pull requests with human oversight at key decision points.
+PostHog Desktop is a desktop agent that turns PostHog signals into shipped code. It watches PostHog for problems (errors, frustration patterns, user feedback) and automatically creates tasks, generates fixes, and opens pull requests with human oversight at key decision points.
 
 ### Third-party agents
 
@@ -98,13 +98,13 @@ So that users can learn how to use PostHog without worrying about being charged,
 
 ### How users should think about our products
 
-**PostHog AI** is the main PostHog product for AI interactions. You can use it in the web for the richest experience, through PostHog Code for code-generation workflows, or through any third-party agent via MCP. The web UX is best for sharing, navigation, and linking between AI results and PostHog artifacts. PostHog AI is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
+**PostHog AI** is the main PostHog product for AI interactions. You can use it in the web for the richest experience, through PostHog Desktop for code-generation workflows, or through any third-party agent via MCP. The web UX is best for sharing, navigation, and linking between AI results and PostHog artifacts. PostHog AI is also trained on PostHog-specific patterns and your actual usage data, so it provides higher quality, more contextual results than a general-purpose AI.
 
 **Deep research** is a feature available within PostHog AI, but also accessible through its own dedicated UI if you want to jump straight into research. Use it for open-ended investigative work where you're trying to understand a complex problem.
 
 **Session summaries** is callable from PostHog AI and Deep research, and also has its own UI. Use it when you need to analyze many session recordings and extract patterns or issues.
 
-**PostHog Code** is a desktop product for single-engineer use. It's separate from PostHog AI because the workflow is different – you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
+**PostHog Desktop** is a desktop product for single-engineer use. It's separate from PostHog AI because the workflow is different – you're not asking questions, you're letting an AI agent watch PostHog for problems and automatically fix them in your codebase. Think of it as an AI assistant that lives in your development environment.
 
 **MCP** is for users who prefer to work in third-party tools like Claude Code, Cursor, or Codex. You get access to PostHog's data and can combine it with other MCP servers (like Hubspot or Zendesk). The trade-off is you don't get PostHog AI's polished UX or PostHog-specific optimizations.
 
@@ -114,7 +114,7 @@ So that users can learn how to use PostHog without worrying about being charged,
 2. **Write YAML configs and skills.** Use the monorepo Claude Code skills to scaffold tool definitions and write skills (TODO: dedicated skill for this).
 3. **Build skills and dump them locally.** Run `hogli build:skills` to render all skills, then unzip them into `.agents/skills/` so Claude Code can pick them up during local testing: `unzip -o products/posthog_ai/dist/skills.zip -d .agents/skills/`.
 4. **Test with headless agents, not UIs.** Forget about UIs – that's for humans. Test your tools and skills by talking to Claude Code or another headless agent. If the agent can accomplish the job, the capability works.
-5. **Test with PostHog Code.** Sign in to a local environment in PostHog Code and verify the end-to-end workflow.
+5. **Test with PostHog Desktop.** Sign in to a local environment in PostHog Desktop and verify the end-to-end workflow.
 6. **Alternatively, add the local MCP server to Claude Code.** Run `claude mcp add --transport http posthog-local http://localhost:8787/mcp` to point Claude Code at your local MCP server.
 
 
@@ -122,11 +122,11 @@ So that users can learn how to use PostHog without worrying about being charged,
 
 ### Third-party context integration
 
-We want to connect PostHog AI to third-party tools for additional context. Imagine PostHog AI analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for PostHog Code – if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal to investigate and potentially fix automatically.
+We want to connect PostHog AI to third-party tools for additional context. Imagine PostHog AI analyzing data across PostHog, Slack messages, and Zendesk tickets to understand not just what users are doing, but what they're saying and reporting. This data could also generate signals for PostHog Desktop – if users are complaining about a bug in Slack and PostHog sees errors in the same area, that's a strong signal to investigate and potentially fix automatically.
 
 ### Continuous instrumentation
 
-The Wizard's future evolution involves continuous instrumentation – watching your codebase and suggesting event tracking for new features, filling gaps in existing tracking, and standardizing event patterns. This could integrate with PostHog Code to automatically handle PostHog instrumentation when generating code.
+The Wizard's future evolution involves continuous instrumentation – watching your codebase and suggesting event tracking for new features, filling gaps in existing tracking, and standardizing event patterns. This could integrate with PostHog Desktop to automatically handle PostHog instrumentation when generating code.
 
 ### Research improvements
 

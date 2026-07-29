@@ -92,7 +92,7 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
 
     return (
         <div className={className}>
-            <h1 className="text-3xl mb-3 !mt-0">Download PostHog Code</h1>
+            <h1 className="text-3xl mb-3 !mt-0">Download PostHog Desktop</h1>
             <p className="mb-8 text-base leading-relaxed">
                 We’ve picked the build that matches your device. Grab it below, or choose another platform.
             </p>
@@ -104,9 +104,9 @@ export function DownloadContent({ className }: { className?: string }): JSX.Elem
                     size="lg"
                     to={primary?.url || DOWNLOAD_URL}
                 >
-                    {primary ? `Download for ${primary.label}` : 'Download PostHog Code'}
+                    {primary ? `Download for ${primary.label}` : 'Download PostHog Desktop'}
                 </TrackedCTA>
-                <CallToAction type="secondary" size="lg" to="/docs/posthog-code" state={{ newWindow: true }}>
+                <CallToAction type="secondary" size="lg" to="/docs/posthog-desktop" state={{ newWindow: true }}>
                     Read the docs
                 </CallToAction>
             </div>

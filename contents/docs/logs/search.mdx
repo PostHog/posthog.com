@@ -78,9 +78,15 @@ To search log bodies, pick the **Message** field from the filter bar. Message su
 
 ## Filter from the facet rail
 
-The facet rail is a sidebar on the left of the logs page that displays available log fields grouped by category. Click any facet value to add it as a filter — the logs list updates immediately to show only matching logs.
+The facet rail is a sidebar on the left of the logs page that displays available log fields grouped by category. Each facet group shows the available values for that field along with their counts, helping you explore your log data at a glance.
 
-Each facet group shows the available values for that field along with their counts. This helps you explore your log data and quickly narrow down to specific services, severity levels, or custom attributes.
+Clicking a facet value cycles through three states:
+
+1. **Unchecked** → **Included** – shows only logs matching that value.
+2. **Included** → **Excluded** – hides logs matching that value.
+3. **Excluded** → **Unchecked** – clears the filter.
+
+The **Level** facet and resource-attribute facets (like Environment and Namespace) support this tri-state cycle. You can include one severity level while excluding another in the same query — for example, include `error` to focus on errors while excluding `debug` to remove noise.
 
 ### Search facets
 
@@ -91,6 +97,19 @@ The facet search:
 - Matches field titles and group names (case-insensitive)
 - Persists in the URL so you can bookmark or share your filtered view
 - Clears when you remove the search text
+
+## Pivot from patterns to matching logs
+
+The Patterns view mines your logs into recurring message templates. When you expand a pattern, click **View matching logs** to pivot to the Logs view filtered to lines matching that pattern.
+
+The pivot applies a message filter based on the pattern's template:
+
+- **Regex filter** – when the pattern has a validated regex, it lands as a `matches regex` message filter. The regex is compiled from the template's structure and validated against the pattern's own examples before it ships.
+- **Contains filter** – when the regex can't be validated (e.g. examples diverge from the template), the pivot falls back to a `contains` filter using the pattern's longest literal text.
+
+The applied filter appears in the filter bar as a visible, removable chip — it behaves like any filter you'd add manually. Your existing date range, service, and severity selections are preserved so the pivot stays inside your investigation context.
+
+When the pattern's sample is unambiguous (a single service or severity), the pivot also scopes by those values to narrow the scan.
 
 ## Tips
 

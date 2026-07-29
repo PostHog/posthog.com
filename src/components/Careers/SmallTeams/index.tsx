@@ -57,7 +57,7 @@ export const SmallTeams = () => {
                 </div>
             </div>
 
-            <fieldset>
+            <fieldset className="rounded [&_legend]:!bg-transparent">
                 <legend>Our small teams</legend>
                 <div className="@xl:columns-2 @3xl:columns-3 text-center -mx-4 md:mx-0 md:gap-x-8">
                     {allTeams.nodes

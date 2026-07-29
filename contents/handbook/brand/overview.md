@@ -27,7 +27,7 @@ For example, we should [refund](/handbook/growth/sales/refunds) customers when t
 
 ## Pavlovian merch response
 
-[Give it out](/handbook/company/merch-store#how-do-we-give-away-merch-for-free) to people who say nice things about us. That'll create an army of developer warriors fighting for PostHog on the internet!
+[Give it out](/handbook/company/merch-store#merch-giveaways) to people who say nice things about us. That'll create an army of developer warriors fighting for PostHog on the internet!
 
 ## Breaking bad news
 
@@ -42,6 +42,6 @@ Be helpful to other companies. We are here to increase the number of successful 
 ## Things you're probably looking for
 
 - [Brand assets (logos, downloads)](/handbook/brand/assets)
-- [Content & messaging guidelines](/handbook/content/brand-message)
+- [Brand foundations](/handbook/brand/foundations)
 - [Requesting artwork](/handbook/brand/art-requests)
 - [Writing for PostHog](/handbook/content/writing-for-posthog)

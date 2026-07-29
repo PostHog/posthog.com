@@ -63,7 +63,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -242,6 +242,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
@@ -333,8 +338,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
-        feature: 'PostHog Code',
-        owner: ['posthog-code'],
+        feature: 'PostHog Desktop',
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {

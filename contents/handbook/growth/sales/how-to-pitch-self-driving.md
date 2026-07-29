@@ -4,15 +4,17 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a living page for how we pitch PostHog as a self-driving product. It covers the core pitch, how to run it, and a [reverse demo](#the-reverse-demo) format that lets the customer experience self-driving on their own data. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
+This is a living page for how we pitch PostHog making _your_ product self-driving. It covers the core pitch, how to run it, and a [reverse demo](#the-reverse-demo) format that lets the customer experience self-driving on their own data. We're still early, so treat this as a starting point and iterate on it as we practice the pitch and learn what lands.
+
+This pitch sits on top of our [brand story](/handbook/brand/foundations#how-we-describe-posthog), so keep it consistent with how we describe PostHog everywhere else. Two things carry through from there: **self-driving is the story** (the narrative everything sits under), and the customer's product stays the subject – we make _your_ product self-driving, PostHog isn't "a self-driving product" itself. Write it lowercase and hyphenated.
 
 ### The core pitch
 
 Keep it simple. Something like this:
 
-> PostHog already has all the behavioral data about how people use your product. We turn that data into signals, feed those signals to an agent running in a sandbox, and it automatically opens PRs that improve your product. That's a self-driving product, and the more you put into PostHog, the better the signals get.
+> PostHog already has all the behavioral data about how people use your product. We turn that data into signals, feed those signals to an agent running in a sandbox, and it automatically opens PRs that improve your product. That's your product, self-driving – and the more you put into PostHog, the better the signals get.
 
-That last line is the flywheel line. Every event, flag, and replay you capture sharpens the signals the agent works from, so more data in means better PRs out.
+That last line is the flywheel line. Every event, flag, and replay you capture sharpens the signals the agent works from, so more data in means better PRs out. In brand terms this is [context – the fuel](/handbook/brand/foundations#how-we-describe-posthog) for the self-driving loop, which is why "put more into PostHog" and "get better PRs out" are the same sentence.
 
 ### Why it works
 
@@ -40,14 +42,14 @@ The honest catch for us is that a reverse demo only works once there's enough cl
 The whole demo depends on there being real signals to work from, so set that up before the call:
 
 - Ask them to turn on error tracking and session replays for a window of time ahead of the call, so the agent has fresh, real signals to act on by the time you meet.
-- Have them get PostHog Code downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
+- Have them get PostHog Desktop downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
 - Frame the cost honestly: offer to credit any usage on errors and replays during the demo window, since you need them on to show it at its best, and they can turn them back off after. If it wows them, they'll want to keep them on anyway, and that's the flywheel starting.
 
 #### Running it
 
 Let them drive the whole way. You narrate, they click.
 
-1. Have them open the PostHog Code inbox.
+1. Have them open the PostHog Desktop inbox.
 2. Walk them through what they're seeing in the reports and PRs tabs, using their own data.
 3. Have them pick a report to inspect and kick off a PR from it themselves.
 4. Explain the self-driving part: they can set it up to handle bugfix and maintenance PRs automatically, while humans still drive product decisions and new features. (This is the same line as "robots do maintenance, humans do creative work" below, made concrete.)

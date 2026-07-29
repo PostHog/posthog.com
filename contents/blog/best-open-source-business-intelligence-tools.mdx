@@ -92,7 +92,7 @@ PostHog has the flexibility of a business intelligence tool, while including a f
 
 For example, not only can you analyze [A/B tests from warehouse data](/docs/experiments/data-warehouse) in PostHog, but you can actually set up and run them natively using our experimentation and feature flag products. You don't need to set up four different products, just PostHog.
 
-[PostHog AI](/ai) can also generate and fix SQL queries, answer questions about your data, and more. The [MCP server](/docs/model-context-protocol) enables your [AI agents](/newsletter/building-ai-agents) and tools to directly interact with PostHog's products.
+[PostHog AI](/ai) can also generate and fix SQL queries, answer questions about your data, and more. The [MCP server](/docs/model-context-protocol) and [CLI](/docs/cli) enable your [AI agents](/newsletter/building-ai-agents) and tools to directly interact with PostHog's products.
 
 PostHog comes with 1 million events and 1 million rows synced for free every month, and has [transparent and usage-based pricing](/pricing).
 
@@ -101,6 +101,19 @@ You can use the [setup wizard](/wizard) to get started in minutes – no credit 
 <WizardCTA />
 
 #### FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What tools does PostHog replace?</summary>

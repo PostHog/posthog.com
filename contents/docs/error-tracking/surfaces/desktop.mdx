@@ -1,0 +1,28 @@
+---
+title: Use Error Tracking in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="fyi">
+
+PostHog Desktop is in beta. This page is a work in progress.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review and merge the [Self-driving](/docs/self-driving) work that error tracking generates. When recurring exceptions are grouped into a report and a code fix is possible, Self-driving opens a draft pull request. You review it in PostHog Desktop, next to the agents improving your product, and nothing ships until you merge.
+
+## Start at the inbox
+
+Reports don't come looking for you – they queue up in the [Self-driving inbox](/docs/self-driving/inbox), so checking it is the habit that makes this surface worth anything. The inbox holds everything Self-driving has found across every source, error tracking included, with the highest-priority reports first. Open one to see the issue behind it, the evidence, and any pull request it opened.
+
+## What you can do here
+
+- Review Self-driving reports built from recurring issues, with the related stack traces, [session replays](/docs/session-replay), and events attached.
+- Inspect and edit the draft pull request that fixes an issue before merging.
+- Hand issues off to an agent to investigate or draft a fix.
+
+## Related
+
+- [Debug over PostHog MCP](/docs/error-tracking/surfaces/mcp) – pull issues and stack traces into any MCP client or AI agent.
+- [How Self-driving works](/docs/self-driving) – the full report-to-merge loop.
