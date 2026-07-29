@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IconEye, IconGraph, IconBell, IconPullRequest, IconCheckCircle } from '@posthog/icons'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -33,7 +33,11 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             <SectionLabel>
                 The{' '}
                 <IconPop>
-                    <Logo wordmark={false} className="inline-block align-middle w-10 relative top-1 -rotate-2" />
+                    <Logo
+                        layout="logomark"
+                        width="auto"
+                        className="inline-block align-middle w-10 relative top-1 -rotate-2"
+                    />
                 </IconPop>{' '}
                 PostHog way
             </SectionLabel>
