@@ -56,7 +56,7 @@ fn init_logs() -> SdkLoggerProvider {
         .with_protocol(Protocol::HttpBinary)
         .with_headers(HashMap::from([(
             "Authorization".to_string(),
-            format!("Bearer {token}"),
+            format!("Bearer <ph_project_token>"),
         )]))
         .build()
         .expect("failed to build the OTLP log exporter");
