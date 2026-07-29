@@ -1,0 +1,41 @@
+---
+title: Call endpoints from your app
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Endpoints is in beta and free to use while it is. [Send us feedback](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue) in app.
+
+</CalloutBox>
+
+The API is where endpoints earn their keep. Your app makes one authenticated request to a named route, and PostHog runs the saved query and returns the rows – no query construction in client code, and no analytics logic spread across your services.
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer $POSTHOG_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"variables": {"customer_id": "cust_123"}}' \
+  "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
+```
+
+## What you can do here
+
+- **Parameterize the query** – pass [variables](/docs/endpoints/variables) so one endpoint serves many customers, date ranges, or breakdowns.
+- **Page through results** – use `limit` and `offset` for large result sets.
+- **Pin to a version** – target a specific [version](/docs/endpoints/versioning) so a query change doesn't break a deployed client.
+- **Generate a typed client** – each endpoint publishes an OpenAPI 3.0 spec you can feed to `openapi-generator` or `@hey-api/openapi-ts`. See [OpenAPI SDK generation](/docs/endpoints/openapi-sdk-generation).
+
+## Authentication
+
+Requests use either a [project secret API key](/docs/api/project-secret-api-keys) or a [personal API key](/docs/api/personal-api-keys), both scoped to `endpoint:read`. Project secret keys are the right choice for backend services since they aren't tied to a user account.
+
+Never ship either key in client-side code. For [customer-facing analytics](/docs/endpoints/customer-facing-analytics), proxy the request through your own backend and pass the customer identifier as a variable.
+
+## Related
+
+- Worked examples in cURL, Python, Node.js, TypeScript, and Go: [retrieve your data](/docs/endpoints/start-here/retrieve-data).
+- What happens between your request and the response: [how execution works](/docs/endpoints/execution).
+- How many requests you can make: [rate limits](/docs/endpoints/rate-limits).
+- When to use an endpoint instead of a raw query: [endpoints vs the query API](/docs/endpoints/endpoints-vs-query-api).

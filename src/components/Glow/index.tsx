@@ -10,6 +10,7 @@ export type GlowColor =
     | 'orange'
     | 'teal'
     | 'seagreen'
+    | 'salmon'
     | 'black'
     | 'white'
 export type GlowSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -42,6 +43,7 @@ const colorMap: Record<GlowColor, string> = {
     orange: 'bg-orange',
     teal: 'bg-teal',
     seagreen: 'bg-seagreen',
+    salmon: 'bg-salmon',
     black: 'bg-black',
     white: 'bg-white',
 }

@@ -9,7 +9,7 @@ availability:
 sourceId: Cloudflare
 ---
 
-The Cloudflare connector syncs your Cloudflare configuration data into PostHog, including accounts, zones, and DNS records.
+The Cloudflare connector syncs your Cloudflare configuration, security, and usage data into PostHog.
 
 <CalloutBox icon="IconFlask" title="Beta release" type="action">
 
@@ -27,11 +27,17 @@ Before linking Cloudflare, create an API token with the required permissions:
 4. Give your token a descriptive name (e.g. "PostHog Data Warehouse").
 5. Under **Permissions**, add the following with **Read** access:
 
-| Resource         | Permission |
-| ---------------- | ---------- |
-| Account Settings | Read       |
-| Zone             | Read       |
-| DNS              | Read       |
+| Resource                  | Permission | Description                                                                                     |
+| ------------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| Account Settings          | Read       | Required for accounts, billing, and audit data                                                  |
+| Zone                      | Read       | Required for zones and zone-scoped configuration                                                |
+| DNS                       | Read       | Required for dns_records and dns_analytics_report                                               |
+| Firewall Services         | Read       | Required for firewall_rules, filters, rulesets, rate_limits, bot_management, page_shield tables |
+| Logs                      | Read       | Required for audit_logs and logpush_jobs                                                        |
+| Workers Routes            | Read       | Required for workers_routes and workers_scripts                                                 |
+| Access: Apps and Policies | Read       | Required for access_apps, access_policies, access_groups, access_users                          |
+
+Grant only the permissions for the tables you want to sync. Zones and accounts the token can't access are skipped.
 
 6. Under **Account Resources**, select the accounts you want to sync.
 7. Under **Zone Resources**, select the zones you want to sync. Choose **All zones** to sync DNS records from every zone.
@@ -72,9 +78,9 @@ DNS records are synced from every zone the token can access. Each DNS record row
 
 ## Sync modes
 
-Cloudflare tables support **full refresh** syncing only. Each sync re-imports all records from Cloudflare.
+Most Cloudflare tables use **full refresh** syncing, re-importing all records on each sync.
 
-Incremental and append-only syncs aren't available because Cloudflare's v4 REST API doesn't expose updated-since filters for these resources. Since these are small configuration tables, full refresh syncs complete quickly.
+The `audit_logs` table supports **incremental** syncing using the `when` timestamp field. On incremental syncs, only new audit events are fetched.
 
 ## Configuration
 
