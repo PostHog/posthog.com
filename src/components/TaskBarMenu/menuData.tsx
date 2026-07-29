@@ -3,7 +3,6 @@ import React from 'react'
 import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -376,18 +375,11 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'separator',
         },
         {
-            type: 'item',
-            label: `Browse all tools (${APP_COUNT})`,
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search tools',
+            label: 'Browse all tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconSearch className="size-4 text-gray" />,
+            icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
