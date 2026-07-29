@@ -1174,6 +1174,10 @@
             "destination": "/product-analytics"
         },
         {
+            "source": "/trends",
+            "destination": "/product-analytics"
+        },
+        {
             "source": "/product/user-paths",
             "destination": "/product-analytics"
         },
