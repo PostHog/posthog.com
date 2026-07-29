@@ -150,6 +150,11 @@
     ],
     "redirects": [
         {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/getting-started",
             "destination": "/docs/web-analytics/start-here",
             "statusCode": 301
