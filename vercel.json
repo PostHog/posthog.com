@@ -308,7 +308,7 @@
         },
         {
             "source": "/product-toolkit",
-            "destination": "/product-analytics"
+            "destination": "/products"
         },
         {
             "source": "/handbook/growth/marketing",
@@ -1146,6 +1146,10 @@
         },
         {
             "source": "/product/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/trends",
             "destination": "/product-analytics"
         },
         {
@@ -2398,10 +2402,6 @@
         },
         {
             "source": "/products/product-analytics",
-            "destination": "/product-analytics"
-        },
-        {
-            "source": "/products",
             "destination": "/product-analytics"
         },
         {
