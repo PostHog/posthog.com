@@ -450,6 +450,8 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
+            // Mobile skips the menu — the docs homepage covers the same ground with more room
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
