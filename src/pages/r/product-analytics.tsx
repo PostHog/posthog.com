@@ -297,7 +297,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/product-analytics/build-insights-mcp"
+                                    to="/docs/product-analytics/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Explore AI features
