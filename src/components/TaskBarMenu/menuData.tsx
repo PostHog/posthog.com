@@ -376,7 +376,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'submenu' as const,
-            label: 'Browse all tools',
+            label: 'Browse tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconApps className="size-4 text-red" />,
