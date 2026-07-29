@@ -261,6 +261,11 @@
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
         },
         {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
+        },
+        {
             "source": "/handbook/marketing/how-we-position-and-sell",
             "destination": "/handbook/marketing/positioning",
             "statusCode": 301
