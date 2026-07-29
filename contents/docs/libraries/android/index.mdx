@@ -492,6 +492,48 @@ config.addBeforeSend { event ->
 }
 ```
 
+# Push notifications
+
+The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push), so the Firebase project on that channel must match your app.
+
+## Automatic registration and open tracking (default)
+
+Both behaviors are on by default. When `firebase-messaging` is on your classpath, the SDK registers this device's FCM token with PostHog, and it auto-captures a `$push_notification_opened` event when a user opens the app from a notification tray tap.
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    capturePushNotificationSubscriptions = true // register the FCM token with PostHog
+    capturePushNotificationOpened = true         // capture `$push_notification_opened`
+}
+PostHogAndroid.setup(context, config)
+```
+
+Firebase delivers rotated tokens through `onNewToken`, which the SDK can't observe on its own — forward it so the registered token stays current:
+
+```kotlin
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onNewToken(token: String) {
+        PostHog.registerPushNotificationToken(token, appId = "your-firebase-project-id")
+    }
+}
+```
+
+## Manual registration
+
+```kotlin
+// Register a device token (appId = your Firebase project id):
+PostHog.registerPushNotificationToken(token, appId = "your-firebase-project-id")
+
+// Unregister when a user signs out:
+PostHog.unregisterPushNotificationToken()
+```
+
+Calling `PostHog.reset()` on logout unregisters the token for the signed-out user and re-registers it under the new anonymous id.
+
+## Identity verification
+
+Identity verification (a signed token that proves *who* a device belongs to when registering) is **not yet available in the Android SDK** — it currently ships only in iOS. If your push channel is set to **Required**, Android device registration will be rejected until Android support lands, so keep the channel on **Disabled** or **Optional** for Android users in the meantime.
+
 # FAQ
 
 ## What Android API level is required?
