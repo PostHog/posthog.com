@@ -424,12 +424,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
-                },
-                {
-                    type: 'item',
                     label: 'Startups',
                     link: '/startups',
                     icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
@@ -451,6 +445,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Talk to a human',
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
                 },
             ],
         },
@@ -1073,7 +1073,7 @@ export function useMenuSelectOptions() {
             items: [
                 { value: 'pricing', label: 'Usage-based pricing' },
                 { value: 'platform-packages', label: 'Platform packages' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
