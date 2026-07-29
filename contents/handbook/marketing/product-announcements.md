@@ -59,7 +59,33 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
 
-For new product announcements we generally apply the following best practices:
+Here are some activities your Tier 1 launch could include:
+
+- New product page 
+- Sales enablement doc
+- Competitive comparison (can be added to the tool page)
+- A case study
+- Blog announcement
+- Social media brief for Liam 
+- Demo video
+- Email announcement (or multiple, if you want to segment users and personalize your message)
+- Custom designs for blog covers, social posts, etc. 
+- [Memes](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoglitos?node-id=3962-6)
+
+Some other things we've done for launches: 
+
+- Having a messaging doc is very useful for bigger launches because it can be used by different content-producing teams, and it brings alignment on how we want to communicate the product.
+- Initiate communication with the billing team so you're on top of billing changes and schedule your announcements accordingly.
+- Meet with the related PM regularly to stay informed about changes and get their input on what you're writing. More about collab with PMs [here](/blog/pm-pmm-collaboration).
+- Create a separate Slack channel and communicate all updates there. Add all relevant stakeholders and make sure it's active. Post a weekly/bi-weekly update of the progress.
+- Create a canvas in your Slack channel where you'll be dropping all relevant links to things published, your launch plan, Figma files, etc. This makes it easier for engineers, PMs, and other stakeholders to find what you've been working on. 
+- If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
+- If the product has been free for a while and it's becoming paid with the launch, make sure to plan to notify free customers in advance and clearly communicate pricing. 
+
+As an example, here's the issue of the [Tier 1 launch for Replay Vision](https://github.com/PostHog/requests-for-comments-public/issues/562).
+
+_Note: All of these are suggestions, not must-haves. It's likely that not all of these things can be ready for launch. A case study, for example, can follow a few weeks after._
+
 
 - Ensure the product has a product page added to the website.
 - Ensure the product team has implemented [intent](/handbook/growth/growth-engineering/product-intents) and [activation](/handbook/growth/growth-engineering/per-product-activation) signals for the product.
@@ -80,7 +106,13 @@ If the product is moving from free beta to paid general availability (GA) you mi
 
 Major announcements involve changes which have a noticeable impact on the experience of most users, or require specific action from affected users. They may introduce new features, require product downtime, or include opt-in betas for upcoming work.
 
-We might do anything and everything for a major announcement.
+Some examples of stuff you could do: 
+
+- Email announcement
+- Artwork to use for social posts or a blog cover
+- Blog announcement 
+- In-app modal
+
 
 Examples of major announcements include [the surveys beta](/changelog?id=1945) or [the analytics pricing change](/changelog?id=1907).
 
