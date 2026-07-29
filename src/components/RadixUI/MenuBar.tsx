@@ -63,64 +63,10 @@ const MenuItemContent = (item: MenuItemType, forceIconIndent?: boolean) => {
     )
 }
 
-// Process menu items for mobile display - truncate nesting to 2 levels max
-const processMobileMenuItem = (item: MenuItemType): MenuItemType | null => {
-    // Skip items marked for mobile omission
-    if (item.mobileDestination === false) {
-        return null
-    }
-
-    // If item has a mobile destination, convert submenu to simple link
-    if (item.mobileDestination && item.type === 'submenu') {
-        return {
-            ...item,
-            type: 'item' as const,
-            link: item.mobileDestination,
-            items: undefined, // Remove nested items on mobile
-        }
-    }
-
-    // For submenus without explicit mobile destination, limit depth
-    if (item.type === 'submenu' && item.items) {
-        // If the submenu has a link, make it a simple link on mobile
-        if (item.link) {
-            return {
-                ...item,
-                type: 'item' as const,
-                items: undefined,
-            }
-        }
-
-        // Otherwise, process children but make them all leaf nodes
-        if (Array.isArray(item.items)) {
-            const processedItems = item.items
-                .map((subItem: MenuItemType) => {
-                    // Convert all nested submenus to simple items
-                    if (subItem.type === 'submenu') {
-                        return {
-                            ...subItem,
-                            type: 'item' as const,
-                            link:
-                                subItem.link ||
-                                subItem.mobileDestination ||
-                                subItem.items?.find((subItem) => !!subItem?.link)?.link ||
-                                '#',
-                            items: undefined,
-                        }
-                    }
-                    return subItem
-                })
-                .filter(Boolean) as MenuItemType[]
-
-            return {
-                ...item,
-                items: processedItems,
-            }
-        }
-    }
-
-    return item
-}
+// Mobile keeps the full tree — submenus expand in place rather than opening a flyout, so
+// nothing is dropped. Only omission is honoured here.
+const processMobileMenuItem = (item: MenuItemType): MenuItemType | null =>
+    item.mobileDestination === false ? null : item
 
 const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
     const processedItems: MenuItemType[] = []
@@ -146,17 +92,66 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
     return processedItems
 }
 
-// Components
-const MenuItem: React.FC<{
+type MenuItemProps = {
     portalContainer: HTMLElement | null
     appContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
     onCloseMenu?: () => void
-}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu }) => {
+}
+
+// Mobile has no room for a sideways flyout, so a submenu expands underneath itself instead.
+// Chevron rotates 90° when open, matching the docs sidebar (TreeMenu).
+const MobileSubmenuItem: React.FC<MenuItemProps> = (props) => {
+    const { item, forceIconIndent } = props
+    const [open, setOpen] = React.useState(false)
+
+    return (
+        <>
+            <RadixMenubar.Item
+                className={ItemClasses}
+                onSelect={(e) => {
+                    // Keep the menu open — this row toggles rather than navigates
+                    e.preventDefault()
+                    setOpen((wasOpen) => !wasOpen)
+                }}
+            >
+                <span className="px-2.5 flex w-full items-center gap-2">
+                    {item.icon ? (
+                        item.icon
+                    ) : forceIconIndent ? (
+                        <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} />
+                    ) : null}
+                    <span className="flex-1 text-left">{item.label}</span>
+                    <IconChevronRight
+                        className={`size-4 shrink-0 transition-transform duration-150 ${open ? 'rotate-90' : ''}`}
+                        aria-hidden
+                    />
+                </span>
+            </RadixMenubar.Item>
+            {open && Array.isArray(item.items) && (
+                <div className="ml-4 border-l border-primary pl-1">
+                    {item.items.map((child, index) => (
+                        <MenuItem {...props} key={index} item={child} forceIconIndent={false} />
+                    ))}
+                </div>
+            )}
+        </>
+    )
+}
+
+// Components
+const MenuItem: React.FC<MenuItemProps> = (props) => {
+    const { item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu } = props
+    const { isMobile } = useAppSettings()
+
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
+    }
+
+    if (isMobile && item.type === 'submenu' && Array.isArray(item.items) && item.items.length > 0) {
+        return <MobileSubmenuItem {...props} />
     }
 
     if (item.type === 'label') {
