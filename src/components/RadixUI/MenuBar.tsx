@@ -18,6 +18,7 @@ export type MenuItemType = {
     onClick?: () => void
     node?: React.ReactNode // Allow embedding a React node
     external?: boolean // Whether the link should open in a new window with external styling
+    disablePrefetch?: boolean // Force a full-page navigation (e.g. to a static, non-Gatsby route) instead of client-side routing
     active?: boolean
     mobileDestination?: string | false // Mobile-specific destination URL or false to omit from mobile menu
 }
@@ -258,6 +259,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
                     to={item.link}
                     state={{ newWindow: true }}
                     externalNoIcon={item.external}
+                    disablePrefetch={item.disablePrefetch}
                     className="w-full min-h-[25px] h-full px-2.5 flex items-center gap-2 no-underline text-primary"
                     onClick={() => onCloseMenu?.()}
                 >

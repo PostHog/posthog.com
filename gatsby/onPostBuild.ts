@@ -18,6 +18,7 @@ import {
     generatePlatformMd,
     generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
+import { generatePlainDocsPages } from './plainDocsUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import blogTemplate from '../src/templates/OG/blog.js'
@@ -597,6 +598,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Only include docs pages in llms.txt (not handbook)
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
+
+    // Plain black-and-white HTML portal ("for agents or boring humans"), rendered from
+    // the docs markdown generated just above. See gatsby/plainDocsUtils.ts.
+    generatePlainDocsPages(docsPages)
 
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()

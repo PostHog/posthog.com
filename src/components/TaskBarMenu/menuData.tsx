@@ -946,6 +946,15 @@ export const DocsItemsEnd = [
         link: '/tutorials',
         icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
     },
+    { type: 'separator' as const },
+    {
+        type: 'item' as const,
+        label: 'Boring docs',
+        link: '/docs/plain',
+        // Static, non-Gatsby route (generated in onPostBuild) — needs a full-page load, not client-side routing.
+        disablePrefetch: true,
+        icon: <Icons.IconNewspaper className="size-4 text-primary" />,
+    },
 ]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
