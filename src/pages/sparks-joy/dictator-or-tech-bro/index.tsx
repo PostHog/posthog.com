@@ -19,6 +19,7 @@ export default function DictatorOrTechBro(): JSX.Element {
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
                 showAddressBar={false}
+                headerBarOptions={[]}
                 fullScreen
             >
                 <iframe src="https://dictatorortechbro.com" className="w-full h-full border-0" />
