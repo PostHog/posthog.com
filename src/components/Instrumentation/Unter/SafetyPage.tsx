@@ -11,8 +11,8 @@ export default function SafetyPage(): JSX.Element {
                 <div className="un-shell">
                     <h2 className="un-h1">Getting small things across a big city.</h2>
                     <p className="un-lede">
-                        This is about keeping the hedgehogs safe, not the humans who host them. Here's what happens once
-                        one of them is out at night looking for a gap.
+                        Urban hedgehogs are solitary creatures. They don't often congregate – unless for a hackathon –
+                        but we can keep them safe with a simple act of kindness (cutting a small hole in your fence).
                     </p>
                 </div>
             </section>
@@ -23,8 +23,7 @@ export default function SafetyPage(): JSX.Element {
                         <h3>Verified gaps only</h3>
                         <p>
                             Every gap is measured on registration, and the spec is 13cm with no exceptions. Cut it at
-                            11cm and you don't get a smaller doorway, you get a hedgehog stuck exactly halfway through
-                            it.
+                            11cm and a hedgehog might get stuck halfway (not good).
                         </p>
                     </div>
                     <div className="un-safe-card">
@@ -48,19 +47,14 @@ export default function SafetyPage(): JSX.Element {
                     <div className="un-safe-card">
                         <IconStar className="un-sicon" />
                         <h3>Rated by the community</h3>
-                        <p>
-                            Gaps get star ratings same as anything else you'd book. A host who gets called out for a
-                            splintered edge fixes it fast, because nobody wants to be the two-star gap on their own
-                            street.
-                        </p>
+                        <p>Fence gaps get star ratings. Nobody wants to be the two-star gap on their own street.</p>
                     </div>
                     <div className="un-safe-card">
                         <IconPassword className="un-sicon" />
-                        <h3>Scent-PIN verification</h3>
+                        <h3>PIN verification</h3>
                         <p>
-                            Every hedgehog sniffs the gap post before going through, the network's version of a PIN.
-                            They form an actual queue to do it, unprompted, which is more orderly than most humans
-                            manage at a doorway.
+                            Just kidding. It's a hole in a fence, there's no PIN pad. But hedgehogs are more orderly
+                            than most humans.
                         </p>
                     </div>
                     <div className="un-safe-card">
@@ -68,7 +62,7 @@ export default function SafetyPage(): JSX.Element {
                         <h3>Blocked-gap reports</h3>
                         <p>
                             New plant pot in front of the hole? Report it in the app. 94% of blockages are cleared by
-                            the host before sunrise, usually with an apology note.
+                            the host before sunrise.
                         </p>
                     </div>
                 </section>
@@ -90,7 +84,7 @@ export default function SafetyPage(): JSX.Element {
                         <a href="https://www.youtube.com/watch?v=Gsd5_xzebH0" target="_blank" rel="noreferrer">
                             Wild London
                         </a>
-                        . He did not call it "Unter". We respect his restraint.
+                        .
                     </p>
                 </section>
 

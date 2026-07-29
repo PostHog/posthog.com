@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key -- table cells here are data, not rendered lists; keys are applied per row/column by ColumnsTable/FieldValueTable in InstrumentationBlocks.tsx */
 import React from 'react'
 import Link from 'components/Link'
 import { Annotation } from '../types'
@@ -20,14 +21,33 @@ export const highwayAnnotations: Annotation[] = [
                     domain, which PostHog's docs put at 10-30% more events captured.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'in posthog.init()',
                 snippet: `posthog.init(token, {
   api_host: 'https://unter.co.uk/ingest',  // proxy
   ui_host:  'https://eu.posthog.com'
 })
 // CSP stays tight: ingestion is same-origin,
 // so connect-src 'self' covers it`,
+            },
+            output: {
+                context: 'events captured, by setup',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Ingestion' }, { label: 'Captured (7d)', align: 'right' }],
+                    rows: [
+                        ['Direct to a known analytics domain', '39,400'],
+                        [
+                            <>
+                                First-party via <code>/ingest</code>
+                            </>,
+                            <strong>48,210</strong>,
+                        ],
+                    ],
+                },
+                footnote: <>The +22% here lands in the 10-30% range PostHog's docs cite for a first-party proxy.</>,
             },
             after: (
                 <>
@@ -56,14 +76,37 @@ export const highwayAnnotations: Annotation[] = [
                     to add tracking.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `posthog.capture('highway_signup_started')
 posthog.capture('highway_signup_completed', {
   fence_type: 'timber_panel',
   borough: 'hackney',   // postcode → borough, server-side
   has_neighbour_consent: false  // they always say false
 })`,
+            },
+            output: {
+                context: 'funnel, host signup (14d)',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Fence type' },
+                        { label: 'Completed', align: 'right' },
+                        { label: 'Rate', align: 'right' },
+                    ],
+                    rows: [
+                        [<code>timber_panel</code>, '1,402', '61%'],
+                        [<code>hedge</code>, '604', '44%'],
+                        [<code>brick_wall</code>, '38', <strong>4%</strong>],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Split by <code>fence_type</code>, a property that rode along on the event, not a second query.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -91,16 +134,29 @@ posthog.capture('highway_signup_completed', {
                     name does. Those are the ones to exclude outright rather than mask.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'html',
+                context: 'the postcode field',
                 snippet: `<div class="field ph-no-capture">
   <input id="input-postcode" … />
 </div>`,
             },
+            output: {
+                context: 'a recording of this form',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Postcode field', value: 'excluded, a blank block' },
+                        { field: 'Autocapture', value: 'skips it too' },
+                        { field: 'Still visible', value: 'that the field was filled' },
+                    ],
+                },
+            },
             after: (
                 <>
-                    Playback shows an empty block of the same size where the field sits, so the interaction is still
-                    visible in recordings. The postcode itself never leaves the browser.
+                    Playback shows an empty block where the field sits, so you keep the interaction and lose the
+                    postcode. It never leaves the browser.
                 </>
             ),
         },
@@ -121,12 +177,25 @@ posthog.capture('highway_signup_completed', {
                     OpenTelemetry (OTLP), meaning no vendor SDK, just an endpoint and the project token.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'bash',
-                snippet: `# backend log stream, same project as the analytics
-INFO  highway.registered  gap_id=g_9241  borough=hackney
-WARN  gap.measure  nominal=13cm measured=11.8cm
-      → flagged for re-measure  # stuck-hedgehog risk`,
+                context: 'backend, no vendor SDK',
+                snippet: `# OTLP exporter → PostHog, standard OpenTelemetry
+OTEL_EXPORTER_OTLP_ENDPOINT=https://eu.i.posthog.com/i/v1/logs
+OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
+            },
+            output: {
+                context: 'logs · POST /api/highways',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Level' }, { label: 'Message' }],
+                    rows: [
+                        ['INFO', <code>highway.registered gap_id=g_9241</code>],
+                        ['WARN', <code>gap.measure 11.8cm, re-measure</code>],
+                    ],
+                },
+                footnote: <>A logs table, not a plaintext dump: filter by level, search the message.</>,
             },
             after: (
                 <>
@@ -152,12 +221,28 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
                     PostHog, point it at a CSS selector, and the snippet renders it. Nothing about it ships in a deploy.
                 </>
             ),
-            code: {
-                language: 'js',
-                snippet: `// lines of code for this survey: 0
-// in PostHog:  type     feedback button
-//              attach   .un-survey-badge
-//              question "What nearly stopped you?"`,
+            input: {
+                kind: 'config',
+                context: 'built in PostHog, not shipped',
+                rows: [
+                    { field: 'Lines of code', value: '0' },
+                    { field: 'Type', value: 'Feedback button' },
+                    { field: 'Attach', value: <code>.un-survey-badge</code> },
+                    { field: 'Question', value: '"What nearly stopped you?"' },
+                ],
+            },
+            output: {
+                context: 'responses, last 30d',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Answer' }, { label: 'Responses', align: 'right' }],
+                    rows: [
+                        ['The postcode question', '88'],
+                        ['Not sure about neighbours', '64'],
+                        ['Took too long', '41'],
+                    ],
+                },
+                footnote: <>193 answers.</>,
             },
             after: (
                 <>
@@ -183,8 +268,10 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
                     events a day, so it captures once, past tense, when the hand comes off.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: "on 'change', not 'input'",
                 snippet: `slider.addEventListener('change', () =>  // not 'input'
   posthog?.capture('impact_calculated', {
     holes: 3,
@@ -192,10 +279,21 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
   })
 )`,
             },
+            output: {
+                context: 'impact_calculated (7d)',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Events/day', value: '1,840 (one per person, not per tick)' },
+                        { field: 'Median dragged to', value: '2 holes' },
+                        { field: 'Median registered', value: '1 hole' },
+                    ],
+                },
+            },
             after: (
                 <>
-                    The median person drags the slider to 2 holes but registers 1. That gap is measurable now, which is
-                    the first step to closing it.
+                    The median person drags to 2 holes but registers 1. You can only see that gap because the event
+                    fires on release, not per tick.
                 </>
             ),
         },
@@ -208,7 +306,7 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
         label: '$autocapture',
         dx: 0.52,
         dy: 0.24,
-        title: 'Ranking what people click, with no code',
+        title: 'Ranking clicks with autocapture',
         body: {
             why: (
                 <>
@@ -219,19 +317,45 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
                     demand without shipping a line of tracking code.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# insight: $autocapture clicks, grouped by
-# element text, on /highway:
-"What about my dog?"        1,204  ← top objection
-"Will the hedgehogs pay me?"  892
-"Can I close it in winter?"   347`,
+            input: {
+                kind: 'config',
+                context: 'no code, autocapture',
+                rows: [
+                    { field: 'Lines of code', value: '0' },
+                    {
+                        field: 'Source',
+                        value: (
+                            <>
+                                <code>$autocapture</code> (click + text)
+                            </>
+                        ),
+                    },
+                    {
+                        field: 'Elements',
+                        value: (
+                            <>
+                                FAQ <code>&lt;summary&gt;</code> rows
+                            </>
+                        ),
+                    },
+                ],
+            },
+            output: {
+                context: '$autocapture clicks, /highway (7d)',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'FAQ row' }, { label: 'Clicks', align: 'right' }],
+                    rows: [
+                        ['"What about my dog?"', <strong>1,204</strong>],
+                        ['"Will the hedgehogs pay me?"', '892'],
+                        ['"Can I close it in winter?"', '347'],
+                    ],
+                },
             },
             after: (
                 <>
-                    A ranking like this is a list of what your page failed to say, ordered by how many people went
-                    looking. The top row here beats the next by a third, which is the argument for answering it in the
-                    page instead of behind a click.
+                    "What about my dog?" gets a third more clicks than the next question. When one question outranks the
+                    rest like this, answer it on the page instead of behind a click.
                 </>
             ),
         },
@@ -252,14 +376,34 @@ WARN  gap.measure  nominal=13cm measured=11.8cm
                     baseline. Host signup dropped and it noticed before anyone opened the dashboard.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `INBOX · product analytics scout · high
-Host signup conversion down 18% (7d)
-  breakdown: fence_type = brick_wall
-  those hosts drop at the fence select
-  → pull request open: explain the
-    "we'll talk" option inline`,
+            input: {
+                kind: 'config',
+                context: 'no code, a signal source',
+                rows: [
+                    { field: 'Source', value: 'Funnels, retention, paths' },
+                    { field: 'Baseline', value: 'Its own trailing 7 days' },
+                    { field: 'Memory', value: 'Dedupes against past runs' },
+                ],
+            },
+            output: {
+                context: 'product analytics scout · high',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Finding', value: 'Host signup conversion down 18% (7d)' },
+                        {
+                            field: 'Breakdown',
+                            value: (
+                                <>
+                                    <code>fence_type = brick_wall</code>
+                                </>
+                            ),
+                        },
+                        { field: 'Where', value: 'Those hosts drop at the fence select' },
+                        { field: 'Action', value: 'PR open to explain the "we\'ll talk" option inline' },
+                    ],
+                },
+                footnote: <>Caught before anyone opened the dashboard.</>,
             },
             after: (
                 <>
@@ -292,8 +436,10 @@ Host signup conversion down 18% (7d)
                     guilt each get a coherent version of the whole section instead of a mismatched pairing.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `const variant = posthog.getFeatureFlag('neighbor-referral-copy')
 const { heading, body, cta } = REFERRAL_COPY[variant]
 // 'control'      civic pride:  "Two holes make a route"
@@ -301,6 +447,23 @@ const { heading, body, cta } = REFERRAL_COPY[variant]
 //                               the route ends"
 // reading the flag logs $feature_flag_called, and that
 // exposure is what PostHog splits the results on`,
+            },
+            output: {
+                context: 'neighbor-referral-copy',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Variant' },
+                        { label: 'Exposed', align: 'right' },
+                        { label: 'Referred', align: 'right' },
+                        { label: 'Rate', align: 'right' },
+                    ],
+                    rows: [
+                        ['control', '4,210', '168', '4.0%'],
+                        ['polite_guilt', '4,188', '251', <strong>6.0%</strong>],
+                    ],
+                },
+                footnote: <>Running · 9 days · 96% significance.</>,
             },
             after: (
                 <>
@@ -333,17 +496,31 @@ const { heading, body, cta } = REFERRAL_COPY[variant]
                     provider is already measurable without wrapping any of those anchors in a handler.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# $autocapture, grouped by element href:
-hedgehogstreet.org   1,880 clicks
-youtube.com/watch      642`,
+            input: {
+                kind: 'config',
+                context: 'no code, autocapture',
+                rows: [
+                    { field: 'Captured by', value: <code>$autocapture</code> },
+                    { field: 'Kept', value: 'element href + text' },
+                    { field: 'Wrapping needed', value: 'none' },
+                ],
+            },
+            output: {
+                context: '$autocapture by href (7d)',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Destination' }, { label: 'Clicks', align: 'right' }],
+                    rows: [
+                        [<code>hedgehogstreet.org</code>, '1,880'],
+                        [<code>youtube.com/watch</code>, '642'],
+                    ],
+                },
             },
             after: (
                 <>
-                    Read these as exits rather than conversions. The click is usually the last thing in the session, and
-                    whatever happened on the other domain isn't yours to see, which is the argument for sending people
-                    somewhere you've instrumented when the next step actually matters.
+                    Read these as exits, not conversions. The click is usually the last thing in the session, and what
+                    happened on the other domain isn't yours to see. If the next step matters, send people somewhere
+                    you've instrumented.
                 </>
             ),
         },

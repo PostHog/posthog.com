@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key -- table cells here are data, not rendered lists; keys are applied per row/column by ColumnsTable/FieldValueTable in InstrumentationBlocks.tsx */
 import React from 'react'
 import { Annotation } from '../types'
 
@@ -22,20 +23,30 @@ export const helpAnnotations: Annotation[] = [
                     the product data.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
-                snippet: `{
-  event: '$ai_generation',
-  properties: {
-    $ai_model: 'claude-sonnet-5',
-    $ai_provider: 'anthropic',
-    $ai_input_tokens: 214,
-    $ai_output_tokens: 96,
-    $ai_latency: 1.4,        // seconds
-    $ai_total_cost_usd: 0.0031,
-    $ai_trace_id: 'trace_7f2…'
-  }
-}`,
+                context: 'server-side',
+                snippet: `// server-side, wrapping the completion
+posthog.capture('$ai_generation', {
+  $ai_model: 'claude-sonnet-5',
+  $ai_provider: 'anthropic',
+  $ai_input_tokens, $ai_output_tokens,
+  $ai_latency, $ai_total_cost_usd,
+  $ai_trace_id
+})`,
+            },
+            output: {
+                context: 'LLM analytics · today',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Generations', value: '2,141' },
+                        { field: 'Model', value: <code>claude-sonnet-5</code> },
+                        { field: 'Total cost', value: '$6.62 · median latency 1.4s' },
+                        { field: 'CSAT gap', value: 'AI 4.4 · human 4.8' },
+                    ],
+                },
             },
             after: (
                 <>
@@ -61,13 +72,48 @@ export const helpAnnotations: Annotation[] = [
                     <code>$ai_trace</code> with child spans, viewable as a tree in PostHog's LLM analytics.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `$ai_trace  trace_7f2…
-├─ $ai_span        vector search: gap reviews   112ms
-├─ $ai_span        fetch: coverage map           38ms
-└─ $ai_generation  claude-sonnet-5              1.4s
-   # $ai_is_error: false`,
+            input: {
+                kind: 'code',
+                language: 'js',
+                context: 'server-side',
+                snippet: `// each step reports under one trace id
+posthog.capture('$ai_span', {
+  $ai_trace_id, $ai_span_name: 'vector search'
+})
+// the final completion is an $ai_generation
+// on the same $ai_trace_id`,
+            },
+            output: {
+                context: '$ai_trace · trace_7f2…',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Step' }, { label: 'Duration', align: 'right' }],
+                    rows: [
+                        [
+                            <>
+                                <code>$ai_span</code> vector search
+                            </>,
+                            '112ms',
+                        ],
+                        [
+                            <>
+                                <code>$ai_span</code> fetch coverage map
+                            </>,
+                            '38ms',
+                        ],
+                        [
+                            <>
+                                <code>$ai_generation</code> claude-sonnet-5
+                            </>,
+                            '1.4s',
+                        ],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Shown as a tree in LLM analytics. <code>$ai_is_error</code> flags the step that failed.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -95,8 +141,10 @@ export const helpAnnotations: Annotation[] = [
                     off support conversations at all, not whether the AI's answers are any better.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `const variant = posthog.getFeatureFlag('help-prompt-examples')
 if (variant === 'examples') renderSuggestions()
 // whoever asks something, from a prompt or typed themselves:
@@ -105,10 +153,30 @@ posthog.capture('support_question_asked', { source: variant })
 // PostHog computes the split and significance from there —
 // no extra code, and nothing to calculate by hand`,
             },
+            output: {
+                context: 'help-prompt-examples',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Variant' },
+                        { label: 'Asked a Q', align: 'right' },
+                        { label: 'Escalated', align: 'right' },
+                    ],
+                    rows: [
+                        ['control (image)', '38%', '11%'],
+                        ['examples', <strong>51%</strong>, '11%'],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Primary metric <code>support_question_asked</code>; secondary <code>escalated_to_human</code>.
+                    </>
+                ),
+            },
             after: (
                 <>
                     Examples win the first question comfortably and leave escalations flat, which reads as more people
-                    getting unstuck rather than more people needing Joe.
+                    getting unstuck rather than more people escalating to a human.
                 </>
             ),
         },
@@ -121,7 +189,7 @@ posthog.capture('support_question_asked', { source: variant })
         label: 'CSAT survey',
         dx: 0.5,
         dy: 1.0,
-        title: 'Rating the AI right before someone gives up on it',
+        title: 'Triggering a survey at a chosen moment',
         body: {
             why: (
                 <>
@@ -131,12 +199,31 @@ posthog.capture('support_question_asked', { source: variant })
                     replies.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# CSAT by whether the assistant answered:
-resolved by AI         4.4 / 5   (n=1,204)
-escalated to Joe       4.8 / 5   (n=96)
-# humans score higher, and cost more.`,
+            input: {
+                kind: 'config',
+                context: 'targeting, set in PostHog',
+                rows: [
+                    { field: 'Type', value: 'Rating (1-5)' },
+                    { field: 'Trigger', value: 'On reaching the escalate box' },
+                    { field: 'Question', value: '"How well did that answer you?"' },
+                    { field: 'Frequency', value: 'once per conversation' },
+                ],
+            },
+            output: {
+                context: 'CSAT, last 30d',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Resolved by' },
+                        { label: 'Score', align: 'right' },
+                        { label: 'n', align: 'right' },
+                    ],
+                    rows: [
+                        ['AI', '4.4 / 5', '1,204'],
+                        ['Human agent', '4.8 / 5', '96'],
+                    ],
+                },
+                footnote: <>Humans score higher, and cost more.</>,
             },
             after: (
                 <>

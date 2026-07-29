@@ -9,10 +9,7 @@ export default function ImpactCalculator(): JSX.Element {
         <section className="un-calc" data-unter-id="impact-calc">
             <div>
                 <h2 className="un-h2">What one hole does</h2>
-                <p className="un-lede">
-                    Drag the slider. The hedgehog numbers come from the ecology literature. The earnings number is
-                    exact.
-                </p>
+                <p className="un-lede">Drag the slider. The hedgehog numbers come from the ecology literature.</p>
                 <input
                     type="range"
                     min={1}

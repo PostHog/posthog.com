@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key -- table cells here are data, not rendered lists; keys are applied per row/column by ColumnsTable/FieldValueTable in InstrumentationBlocks.tsx */
 import React from 'react'
 import { Annotation } from '../types'
 
@@ -10,28 +11,40 @@ export const safetyAnnotations: Annotation[] = [
         label: '$web_vitals',
         dx: 0.86,
         dy: 0.5,
-        title: 'How fast each page felt to load',
+        title: 'Measuring load speed with web vitals',
         body: {
             why: (
                 <>
-                    Turning on web vitals autocapture in project settings starts a <code>$web_vitals</code> event on
-                    every page load, carrying the four web vitals PostHog tracks. Nobody adds timing code, and it's a
-                    separate switch from autocapture, so you can have one without the other.
+                    Enable web vitals in project settings and posthog-js emits a <code>$web_vitals</code> event on every
+                    page load, reading LCP, FCP, INP, and CLS from the browser's Performance API. You don't implement
+                    the measurement, and it's a separate switch from autocapture, so you can run one without the other.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `$web_vitals  # properties on one event:
-$web_vitals_LCP_value  2840  # ms, largest paint
-$web_vitals_FCP_value  1210  # ms, first paint
-$web_vitals_INP_value    64  # ms, responsiveness
-$web_vitals_CLS_value  0.31  # layout shift`,
+            input: {
+                kind: 'code',
+                language: 'js',
+                context: 'one setting',
+                snippet: `// project settings → "web vitals"
+// or in posthog.init():
+capture_performance: { web_vitals: true }`,
+            },
+            output: {
+                context: 'web vitals · this page',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'LCP', value: '2.84s · largest paint' },
+                        { field: 'FCP', value: '1.21s · first paint' },
+                        { field: 'INP', value: '64ms · responsiveness' },
+                        { field: 'CLS', value: <strong>0.31 · layout shift</strong> },
+                    ],
+                },
+                footnote: <>Google rates CLS over 0.25 as poor; this page sits at 0.31.</>,
             },
             after: (
                 <>
-                    This page's LCP is the hero you're reading, and its layout shift is the coverage map below loading
-                    late and pushing everything down. The toolbar shows both for whatever page you're on, so slow pages
-                    are a fact rather than a hunch.
+                    This page's LCP is the hero you're reading; its layout shift is the coverage map below loading late
+                    and pushing everything down. The toolbar shows both for whatever page you're on.
                 </>
             ),
         },
@@ -54,8 +67,10 @@ $web_vitals_CLS_value  0.31  # layout shift`,
                     the server SDK this evaluates in-process, so a flag check per route costs nothing.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'server-side',
                 snippet: `// server-side, where the route is built
 const flags = await posthog.evaluateFlags(distinctId, {
   // pass what the release conditions target, or
@@ -66,12 +81,33 @@ return flags.isEnabled('routing-engine-v2-release')
   ? routeV2(from, to)
   : routeV1(from, to)`,
             },
+            output: {
+                context: 'routing-engine-v2-release',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Release condition' },
+                        { label: 'Rollout', align: 'right' },
+                        { label: 'Users', align: 'right' },
+                    ],
+                    rows: [
+                        [
+                            <>
+                                Cohort <code>Internal team</code>
+                            </>,
+                            '100%',
+                            '24',
+                        ],
+                        ['Riders', '5%', '1,610'],
+                        ['Everyone else', '0%', '30,540'],
+                    ],
+                },
+            },
             after: (
                 <>
-                    Rolling forward is a percentage, and rolling back is the same switch. If <code>$exception</code>{' '}
-                    rates climb on the new path, or a route comes back with a road in it, you turn the flag off and
-                    every request is on the old engine seconds later. No deploy, no revert commit, nobody sent across
-                    tarmac while you find out.
+                    Rolling forward is a percentage; rolling back is the same switch. If <code>$exception</code> rates
+                    climb on the new path, or a route comes back with a road in it, you turn the flag off and every
+                    request is on the old engine seconds later. No deploy, no revert commit.
                 </>
             ),
         },
@@ -94,8 +130,10 @@ return flags.isEnabled('routing-engine-v2-release')
                     tonight.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'autocapture + the handled path',
                 snippet: `// and the handled path, captured manually:
 try { await loadCoverageTiles() }
 catch (err) {
@@ -105,6 +143,18 @@ catch (err) {
   })
   showFallback()  // the honest error card you see here
 }`,
+            },
+            output: {
+                context: 'error tracking · this issue',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Issue', value: 'Coverage tiles failing (403)' },
+                        { field: 'Occurrences', value: <strong>412 tonight</strong> },
+                        { field: 'First seen', value: '2 hours ago, still climbing' },
+                        { field: 'Session replay', value: 'linked to each occurrence' },
+                    ],
+                },
             },
             after: (
                 <>
@@ -131,14 +181,40 @@ catch (err) {
                     digs through the codebase and the data to confirm it, and it comes back with a priority.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `INBOX · high priority
-Coverage tile requests failing (403)
-  from  $exception ×412 · tile service logs
-  cause api key expired 366 days ago
-  → pull request open: rotate + calendar
-    the key, fall back to a cached layer`,
+            input: {
+                kind: 'config',
+                context: 'no code, a signal source',
+                rows: [
+                    {
+                        field: 'Source',
+                        value: (
+                            <>
+                                <code>$exception</code> events + service logs
+                            </>
+                        ),
+                    },
+                    { field: 'Clusters', value: 'Dedupes and groups related signals' },
+                    { field: 'Acts via', value: 'A PR in a sandbox against your CI' },
+                ],
+            },
+            output: {
+                context: 'inbox · high priority',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Report', value: 'Coverage tile requests failing (403)' },
+                        {
+                            field: 'From',
+                            value: (
+                                <>
+                                    <code>$exception</code> ×412 · tile service logs
+                                </>
+                            ),
+                        },
+                        { field: 'Cause', value: 'API key expired 366 days ago' },
+                        { field: 'Action', value: 'PR open: rotate + calendar the key, fall back to a cached layer' },
+                    ],
+                },
             },
             after: (
                 <>
@@ -164,14 +240,25 @@ Coverage tile requests failing (403)
                     of a bundle. Two commands in CI, after the build, turn it back into your own file and line numbers.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'bash',
+                context: 'in CI, after the build',
                 snippet: `posthog-cli sourcemap inject --directory ./dist
 posthog-cli sourcemap upload --directory ./dist
-# then deploy the injected assets, not a
-# pre-inject copy, or the upload can't match
-# without it:  t.exports @ main.a91f.js:1:24855
-# with it:     loadCoverageTiles @ tiles.ts:42:11`,
+# deploy the injected assets, not a
+# pre-inject copy, or the upload can't match`,
+            },
+            output: {
+                context: 'a stack frame, resolved',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'State' }, { label: 'Top frame' }],
+                    rows: [
+                        ['Minified', <code>t.exports @ main.a91f.js:1:24855</code>],
+                        ['Resolved', <code>loadCoverageTiles @ tiles.ts:42:11</code>],
+                    ],
+                },
             },
             after: (
                 <>
@@ -189,7 +276,7 @@ posthog-cli sourcemap upload --directory ./dist
         label: '$pageleave',
         dx: 1.0,
         dy: 0.15,
-        title: 'Time on page and scroll depth, free',
+        title: 'How far people scroll, and how long they stay',
         body: {
             why: (
                 <>
@@ -198,19 +285,26 @@ posthog-cli sourcemap upload --directory ./dist
                     extra code.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# per-page, out of the box:
-$pageleave  →  time on page, scroll depth
-# web analytics: /safety avg 2:41,
-# 71% reach "Why 13 centimetres?"`,
+            input: {
+                kind: 'code',
+                language: 'js',
+                context: 'no extra code',
+                snippet: `// nothing. $pageleave carries time on page
+// and scroll depth while autocapture is on,
+// and web analytics charts both per page`,
             },
-            after: (
-                <>
-                    71% of readers reach "Why 13 centimetres?", so anything below that point is worth moving up. No
-                    tracking code was written to learn this.
-                </>
-            ),
+            output: {
+                context: 'web analytics · /safety (7d)',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Avg time on page', value: '2:41' },
+                        { field: 'Reach "Why 13 centimetres?"', value: <strong>71%</strong> },
+                        { field: 'Bounce at the hero', value: '12%' },
+                    ],
+                },
+            },
+            after: <>71% of readers reach "Why 13 centimetres?", so anything below that point is worth moving up.</>,
         },
     },
     {
@@ -225,16 +319,45 @@ $pageleave  →  time on page, scroll depth
         body: {
             why: (
                 <>
-                    Nobody clicks Retry once. posthog-js tags a rapid cluster of clicks as <code>$rageclick</code> on
-                    its own, so the recordings of this exact button being hammered are one filter away in replay.
+                    When something doesn't respond, people click it again and again. posthog-js tags three fast clicks
+                    on the same element as a <code>$rageclick</code>, so the recordings of this button being hammered
+                    are one filter away in replay.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# replay → filters:
-$rageclick on #btn-coverage-retry  47 sessions
-# avg 6.2 clicks per session. one user: 31.
-# each recording is linked to its $exception`,
+            input: {
+                kind: 'config',
+                context: 'no code, auto-tagged',
+                rows: [
+                    { field: 'Lines of code', value: '0' },
+                    {
+                        field: 'Tagged by',
+                        value: (
+                            <>
+                                <code>$rageclick</code> (rapid click cluster)
+                            </>
+                        ),
+                    },
+                    { field: 'Filter in', value: 'Session replay' },
+                ],
+            },
+            output: {
+                context: 'session replay · #btn-coverage-retry',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Rage-click sessions', value: '47 over 7 days' },
+                        { field: 'Avg clicks / session', value: '6.2' },
+                        { field: 'Worst', value: <strong>one user, 31 clicks</strong> },
+                        {
+                            field: 'Each recording',
+                            value: (
+                                <>
+                                    linked to its <code>$exception</code>
+                                </>
+                            ),
+                        },
+                    ],
+                },
             },
             after: (
                 <>
@@ -261,13 +384,30 @@ $rageclick on #btn-coverage-retry  47 sessions
                     the same project) explain it.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'bash',
-                snippet: `ERROR tile.fetch upstream=coverage status=403
-      cause=api_key_expired  key_age_days=366
-# same timestamps as the $exception spike.
-# the map died of an annual key rotation
-# nobody calendared.`,
+                context: 'backend, via OTLP',
+                snippet: `# tile service → PostHog over OpenTelemetry
+OTEL_EXPORTER_OTLP_ENDPOINT=https://eu.i.posthog.com/i/v1/logs
+OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer phc_unter_******`,
+            },
+            output: {
+                context: 'logs · tile service',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Level' }, { label: 'Message' }],
+                    rows: [
+                        ['ERROR', <code>tile.fetch upstream=coverage status=403</code>],
+                        ['ERROR', <code>cause=api_key_expired key_age_days=366</code>],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Same timestamps as the <code>$exception</code> spike. The map died of an annual key rotation
+                        nobody calendared.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -294,12 +434,26 @@ $rageclick on #btn-coverage-retry  47 sessions
                     than an interruption.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
-                snippet: `posthog.displaySurvey(surveyId, {
+                context: 'client-side, into the layout',
+                snippet: `// single yes/no question: "Did this page help?"
+posthog.displaySurvey(surveyId, {
   displayType: DisplaySurveyType.Inline,
   selector: '#page-help'
 })`,
+            },
+            output: {
+                context: 'responses, last 30d',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Segment' }, { label: 'Yes', align: 'right' }, { label: 'No', align: 'right' }],
+                    rows: [
+                        ['All sessions', '61%', '39%'],
+                        ['Saw the broken map', '20%', <strong>80%</strong>],
+                    ],
+                },
             },
             after: (
                 <>

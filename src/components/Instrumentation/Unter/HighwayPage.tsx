@@ -14,9 +14,9 @@ export default function HighwayPage(): JSX.Element {
                             Change everything.
                         </h2>
                         <p className="un-lede">
-                            Your fence is a wall across someone's commute, and a 13cm hole (about a CD case) turns it
-                            into a junction. Nobody will pay you, and the traffic comes while you're asleep. Margaret,
-                            further down, describes the feeling better than we can.
+                            Your fence is a wall across someone's commute, and a 13cm hole (about the size of a CD case)
+                            turns it into a junction. Traffic peaks while you're asleep (hedgehogs are nocturnal), so
+                            the impact to effort ratio is hard to say no to.
                         </p>
                     </div>
                     <div className="un-hw-form" data-unter-id="hw-form">
@@ -70,7 +70,7 @@ export default function HighwayPage(): JSX.Element {
                         <div className="un-step">
                             <span className="un-n">02</span>
                             <h3>Cut the gap</h3>
-                            <p>13×13cm at ground level. A CD case is the official measuring device of the movement.</p>
+                            <p>13×13cm at ground level.</p>
                         </div>
                         <div className="un-step">
                             <span className="un-n">03</span>
@@ -95,7 +95,7 @@ export default function HighwayPage(): JSX.Element {
                         <h2 className="un-h2">Two holes make a route</h2>
                         <p>
                             A gap into a sealed garden is a dead end for a critter. Refer your neighbour and turn it
-                            into a through-road for the London hedgehog highway.
+                            into a through-road.
                         </p>
                     </div>
                     <button className="un-btn-white">Send a very polite note</button>

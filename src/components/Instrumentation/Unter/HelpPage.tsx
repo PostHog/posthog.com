@@ -60,8 +60,8 @@ export default function HelpPage(): JSX.Element {
                 <div className="un-help-intro">
                     <h2 className="un-h1">AI support</h2>
                     <p className="un-lede">
-                        Ask Unter AI about the hedgehog highway, or get help with your route. Support hours: 24/7, which
-                        for a nocturnal user base mostly means 11pm to 4am.
+                        Ask Unter AI about the hedgehog highway, or get help with your route. To talk to a human, just
+                        ring Joe or Cleo.
                     </p>
                     {/* Not buttons: these are examples of what people ask, not a
                         second way to drive the thread. The input below is the

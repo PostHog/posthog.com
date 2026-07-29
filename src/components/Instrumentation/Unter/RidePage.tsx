@@ -79,7 +79,7 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         <span className="un-tier-name">Unter Solo</span>
                         <span className="un-tier-desc">One hedgehog, one standard gap. The classic night out.</span>
                         <span className="un-go">
-                            <span className="un-price">From £3</span>
+                            <span className="un-price">£0</span>
                             <span className="un-arrow">→</span>
                         </span>
                     </button>
@@ -90,7 +90,7 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                             For the unusually round. We route you via the 15cm accessible gaps only.
                         </span>
                         <span className="un-go">
-                            <span className="un-price">From £5</span>
+                            <span className="un-price">£0</span>
                             <span className="un-arrow">→</span>
                         </span>
                     </button>
@@ -99,7 +99,7 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         <span className="un-tier-name">Unter Pool</span>
                         <span className="un-tier-desc">Share the route with hedgehogs heading your way.</span>
                         <span className="un-go">
-                            <span className="un-price">From £2</span>
+                            <span className="un-price">£0</span>
                             <span className="un-arrow">→</span>
                         </span>
                     </button>
@@ -112,7 +112,7 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         <h2 className="un-h2">Reserve a dusk crossing</h2>
                         <p className="un-lede">
                             Book up to seven nights ahead. The gap is held until 15 minutes past sunset, then it goes
-                            back in the pool for someone else. Popular for first dates.
+                            back in the pool for someone else.
                         </p>
                         <div className="un-ctas">
                             <button className="un-btn-black">Reserve a crossing</button>
@@ -147,8 +147,8 @@ export default function RidePage({ onNavigate }: { onNavigate: (page: UnterPageI
                         <span className="un-app-text">
                             <span className="un-app-name">Unter Host</span>
                             <span className="un-app-desc">
-                                For the humans who cut the gaps. Gap health, crossing counts, and your borough
-                                leaderboard.
+                                For the humans willing to cut holes in their fences. Check crossing counts and your
+                                borough leaderboard.
                             </span>
                         </span>
                         <span className="un-chev">→</span>

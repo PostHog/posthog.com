@@ -241,9 +241,14 @@
     align-items: center;
     padding: 24px 0 56px;
 }
-@container unter (min-width: 860px) {
+/* 2-up at 760px, not 860: it pairs with the 800px type-scale bump, so the big
+   headline never sits alone in a narrow single column, and the layout holds down
+   to roughly a 1170px viewport rather than snapping to stacked when the window is
+   a little smaller. minmax lets the two columns share width at the threshold
+   instead of overflowing. */
+@container unter (min-width: 760px) {
     .un-hero {
-        grid-template-columns: 400px 1fr;
+        grid-template-columns: minmax(340px, 400px) minmax(240px, 1fr);
         gap: 64px;
         padding: 40px 0 64px;
     }
@@ -770,9 +775,11 @@
     align-items: center;
     padding: 24px 0 56px;
 }
-@container unter (min-width: 860px) {
+/* Matches .un-hero: 2-up at 760px with fluid columns, so the host hero holds its
+   copy-beside-form layout at smaller windows instead of stacking early. */
+@container unter (min-width: 760px) {
     .un-hw-hero {
-        grid-template-columns: 1fr 420px;
+        grid-template-columns: minmax(240px, 1fr) minmax(340px, 420px);
         gap: 64px;
         padding: 40px 0 56px;
     }

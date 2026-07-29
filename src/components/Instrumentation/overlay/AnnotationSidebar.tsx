@@ -4,7 +4,7 @@ import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import WizardCommand from 'components/WizardCommand'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import { InputBlock, OutputBlock } from './InstrumentationBlocks'
 import { TOOLS, TOOL_CLASSES } from './tools'
 import { Annotation, ToolKey, UnterPageId } from './types'
 
@@ -33,6 +33,8 @@ interface AnnotationSidebarProps {
     className?: string
 }
 
+// The inline-<code> styling here is the CHIP class applied via a `[&_code]:` variant.
+// Spelled out literally (not composed from CHIP) because Tailwind's JIT scans source text.
 const PROSE =
     'text-sm text-secondary [&_code]:font-code [&_code]:text-xs [&_code]:bg-accent [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded'
 
@@ -180,6 +182,7 @@ export default function AnnotationSidebar({
                             const { Icon } = tool
                             const classes = TOOL_CLASSES[tool.color]
                             const isSelected = annotation.id === selectedId
+                            const docsHref = annotation.docsUrl || tool.docsUrl
                             return (
                                 <li key={annotation.id} data-annotation-row={annotation.id}>
                                     <button
@@ -215,27 +218,23 @@ export default function AnnotationSidebar({
                                                 {annotation.title}
                                             </h3>
                                             <div className={PROSE}>{annotation.body.why}</div>
-                                            {annotation.body.code && (
-                                                <div className="mt-2 [&_pre]:text-xs">
-                                                    <SingleCodeBlock
-                                                        language={annotation.body.code.language}
-                                                        showLabel={false}
-                                                    >
-                                                        {annotation.body.code.snippet}
-                                                    </SingleCodeBlock>
-                                                </div>
+                                            {annotation.body.input && (
+                                                <InputBlock input={annotation.body.input} tool={tool} />
+                                            )}
+                                            {annotation.body.output && (
+                                                <OutputBlock output={annotation.body.output} tool={tool} />
                                             )}
                                             {annotation.body.after && (
                                                 <div className={`mt-2 ${PROSE}`}>{annotation.body.after}</div>
                                             )}
-                                            {tool.docsUrl && (
+                                            {docsHref && (
                                                 <Link
-                                                    to={tool.docsUrl}
+                                                    to={docsHref}
                                                     disablePrefetch
                                                     externalNoIcon
                                                     className="inline-block mt-2 text-sm font-semibold"
                                                 >
-                                                    {tool.name} docs →
+                                                    {annotation.docsLabel || `${tool.name} docs`} →
                                                 </Link>
                                             )}
                                         </div>

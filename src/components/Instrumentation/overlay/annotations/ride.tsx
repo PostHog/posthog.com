@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key -- table cells here are data, not rendered lists; keys are applied per row/column by ColumnsTable/FieldValueTable in InstrumentationBlocks.tsx */
 import React from 'react'
 import Link from 'components/Link'
 import { Annotation } from '../types'
@@ -23,8 +24,10 @@ export const rideAnnotations: Annotation[] = [
                     the users are in the UK.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'in <head>',
                 snippet: `// in <head>, before anything else
 posthog.init('phc_unter_******', {
   api_host: 'https://eu.i.posthog.com',
@@ -32,6 +35,19 @@ posthog.init('phc_unter_******', {
   // capture_pageview: 'history_change' (SPA-safe)
   defaults: '2025-05-24',
 })`,
+            },
+            output: {
+                context: 'events, last 7 days',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Event' }, { label: 'Count', align: 'right' }],
+                    rows: [
+                        [<code>$pageview</code>, '48,210'],
+                        [<code>$autocapture</code>, '132,940'],
+                        [<code>$pageleave</code>, '41,006'],
+                    ],
+                },
+                footnote: <>All captured by the snippet alone, before a line of custom code.</>,
             },
             after: (
                 <>
@@ -61,12 +77,35 @@ posthog.init('phc_unter_******', {
                     they go on to view prices), and tells you when the gap between the two is real rather than noise.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `const v = posthog.getFeatureFlag('hero-headline-test')
 heroEl.textContent = COPY[v]
 // exposure logs itself as $feature_flag_called
 // primary metric: ride_prices_viewed (marker 4)`,
+            },
+            output: {
+                context: 'hero-headline-test',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Variant' },
+                        { label: 'Exposed', align: 'right' },
+                        { label: 'Converted', align: 'right' },
+                        { label: 'Rate', align: 'right' },
+                    ],
+                    rows: [
+                        ['control', '12,410', '1,204', '9.7%'],
+                        ['variant', '12,388', '1,381', <strong>11.1%</strong>],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Running · 6 days · 92% significance. Primary metric <code>ride_prices_viewed</code>.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -96,14 +135,27 @@ heroEl.textContent = COPY[v]
                     were doing. It found one on the destination field in the recordings this form produces.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `INBOX · session replay scout · medium
-Rage-click cluster: destination field
-  214 sessions over 7 days
-  all outside London, where the gap
-  database has no coverage yet
-  → recordings attached as evidence`,
+            input: {
+                kind: 'config',
+                context: 'no code, a signal source',
+                rows: [
+                    { field: 'Source', value: 'Session recordings' },
+                    { field: 'Scans for', value: 'Rage-click and dead-click clusters' },
+                    { field: 'Schedule', value: 'Continuous' },
+                ],
+            },
+            output: {
+                context: 'session replay scout · medium',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Finding', value: 'Rage-click cluster on the destination field' },
+                        { field: 'Sessions', value: '214 over 7 days' },
+                        { field: 'Common trait', value: 'All outside London, where gap coverage is empty' },
+                        { field: 'Evidence', value: 'Recordings attached' },
+                    ],
+                },
+                footnote: <>Ranked medium: enough sessions to act on, all sharing one cause.</>,
             },
             after: (
                 <>
@@ -133,14 +185,37 @@ Rage-click cluster: destination field
                     break the conversion down by the things that matter.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `posthog.capture('ride_prices_viewed', {
   distance_m: 42,
   gaps_on_route: 2,
   tier_preselected: 'solo',
   passenger_weight_class: 'standard'
 })`,
+            },
+            output: {
+                context: 'funnel, /ride (7d)',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Step' },
+                        { label: 'Count', align: 'right' },
+                        { label: 'Conv.', align: 'right' },
+                    ],
+                    rows: [
+                        [<code>$pageview</code>, '12,410', '—'],
+                        [<code>ride_prices_viewed</code>, '4,882', '39%'],
+                        [<code>ride_requested</code>, '1,204', '25%'],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Broken down by <code>tier_preselected</code>: solo 15% · xl 8% · pool 11%.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -160,7 +235,7 @@ Rage-click cluster: destination field
         // the browser frame's border once the hero stacks and the form is full width.
         dx: 0.02,
         dy: 0.22,
-        title: 'Recording the form without the addresses',
+        title: 'Masking sensitive inputs in session replay',
         body: {
             why: (
                 <>
@@ -169,8 +244,10 @@ Rage-click cluster: destination field
                     don't want sitting in a recording.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'posthog.init()',
                 snippet: `session_recording: {
   // maskAllInputs is already true by default;
   // shown to make the burrow addresses -> ****
@@ -178,10 +255,22 @@ Rage-click cluster: destination field
   maskAllInputs: true,
 }`,
             },
+            output: {
+                context: 'a recording of this form',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Pickup field', value: <code>••••••••</code> },
+                        { field: 'Destination field', value: <code>••••••••</code> },
+                        { field: 'Still visible', value: 'hesitation, corrections, time on field' },
+                    ],
+                },
+                footnote: <>The stall on the field is visible in replay. The address itself is not.</>,
+            },
             after: (
                 <>
-                    Masking happens in the browser, so the real values never reach PostHog's servers. A recording still
-                    shows the stall on the destination field. The address itself stays in the visitor's browser.
+                    Masking happens in the browser, so the real values never reach PostHog's servers, only the fact that
+                    someone hesitated here.
                 </>
             ),
         },
@@ -203,13 +292,36 @@ Rage-click cluster: destination field
                     the decision and carries the context you'd want to group by later.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `posthog.capture('ride_tier_selected', {
   tier: 'solo',
-  price_gbp: 3,
+  price_gbp: 0,
   viewed_tiers: ['solo', 'xl', 'pool']
 })`,
+            },
+            output: {
+                context: 'breakdown, ride_tier_selected (7d)',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Tier' },
+                        { label: 'Selected', align: 'right' },
+                        { label: 'Share', align: 'right' },
+                    ],
+                    rows: [
+                        ['solo', '3,204', '66%'],
+                        ['xl', '892', '18%'],
+                        ['pool', '786', '16%'],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Grouped by <code>utm_source</code>: paid social brings the most people who pick solo.
+                    </>
+                ),
             },
             after: (
                 <>
@@ -220,40 +332,60 @@ Rage-click cluster: destination field
         },
     },
     {
-        id: 'ride/tiers/replay',
+        id: 'ride/tiers/product',
         page: 'ride',
         // The whole row of options, not one card: a heatmap's value here is the
         // comparison between the three.
         target: 'tiers',
-        tool: 'replay',
+        // Heatmaps live in the toolbar and draw on autocapture click data, so they're
+        // grouped with product analytics here; the docs link points at the toolbar page.
+        tool: 'product',
+        docsUrl: '/docs/toolbar/heatmaps',
+        docsLabel: 'Heatmaps docs',
         label: 'heatmaps',
         // Bottom edge, centered under all three cards. On the left edge it sat on the
         // first card and read as belonging only to that one.
         dx: 0.5,
         dy: 1.0,
-        title: 'Heatmaps need a toggle, not code',
+        title: 'Heatmaps show where people click and scroll',
         body: {
             why: (
                 <>
                     Heatmaps are one setting rather than any code: turn heatmap capture on (in project settings, or{' '}
-                    <code>capture_heatmaps: true</code>). After that the toolbar draws clicks, scroll depth, and dead
-                    clicks straight onto the page.
+                    <code>capture_heatmaps: true</code>). The toolbar overlay then draws four things onto the live page:
+                    where people click, how far they scroll, rage clicks, and dead clicks (clicks on something that
+                    looked interactive but wasn't).
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# toolbar -> heatmap, on this page:
-              clicks   dead clicks
-Solo           1,204           312
-XL               486            18
-Pool             233             9
-# a dead click is a click that changed
-# nothing on the page`,
+            input: {
+                kind: 'code',
+                language: 'js',
+                context: 'one setting',
+                snippet: `// project settings → "capture heatmaps"
+// or in posthog.init():
+capture_heatmaps: true`,
+            },
+            output: {
+                context: 'toolbar · clickmap, this page',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Tier' },
+                        { label: 'Clicks', align: 'right' },
+                        { label: 'Share', align: 'right' },
+                    ],
+                    rows: [
+                        ['Solo', '1,204', <strong>62%</strong>],
+                        ['XL', '486', '25%'],
+                        ['Pool', '233', '13%'],
+                    ],
+                },
             },
             after: (
                 <>
-                    Dead clicks are the useful ones. 312 people clicked the Solo price expecting a breakdown and got
-                    nothing, which is a missing feature nobody filed a bug about.
+                    The clickmap counts clicks per element from autocapture: Solo takes 62%, XL and Pool split the rest.
+                    These cards register no dead clicks because they're real <code>&lt;button&gt;</code> elements;
+                    posthog-js only flags a dead click when a click is followed by no change on the page.
                 </>
             ),
         },
@@ -269,27 +401,34 @@ Pool             233             9
         label: '$pageview',
         dx: 0.62,
         dy: 0.5,
-        title: 'Web analytics needs no extra code',
+        title: 'Traffic sources and devices from the base snippet',
         body: {
             why: (
                 <>
-                    No code on this pin. <code>$pageview</code> / <code>$pageleave</code>, referrers, UTM params,
-                    channel type, device and geo are all captured by the snippet and land in a ready-made dashboard.
+                    The base snippet captures <code>$pageview</code> / <code>$pageleave</code>, referrers, UTM params,
+                    channel type, device, and geo with no extra instrumentation, and they land in a ready-made web
+                    analytics dashboard.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# what marketing checks each morning, zero setup:
-Channels:  hedgehogstreet.org / organic / social
-UTMs:      utm_campaign=wild_london_bump
-Devices:   mobile 71% · desktop 28%`,
+            input: {
+                kind: 'code',
+                language: 'js',
+                context: 'no extra code',
+                snippet: `// nothing. $pageview, $pageleave, referrers,
+// UTMs, channel, device and geo are all captured
+// by the posthog-js snippet already on the page`,
             },
-            after: (
-                <>
-                    Traffic spikes show up here on their own. It's the layer you get for installing PostHog and doing
-                    nothing else.
-                </>
-            ),
+            output: {
+                context: 'web analytics · today',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Channels', value: 'hedgehogstreet.org · organic · social' },
+                        { field: 'Top UTM', value: <code>utm_campaign=wild_london_bump</code> },
+                        { field: 'Devices', value: 'mobile 71% · desktop 28%' },
+                    ],
+                },
+            },
         },
     },
     {
@@ -300,7 +439,7 @@ Devices:   mobile 71% · desktop 28%`,
         label: 'utm_campaign',
         dx: 0.5,
         dy: 1.2,
-        title: 'Where the traffic came from',
+        title: 'Attributing visits to campaigns with UTMs',
         body: {
             why: (
                 <>
@@ -309,13 +448,26 @@ Devices:   mobile 71% · desktop 28%`,
                     into channels for you.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `?utm_source=techcrunch&utm_medium=pr
-&utm_campaign=series_b
-# web analytics → Channels:
-#   techcrunch / pr   11,204 visitors
-#   organic search     2,911 visitors`,
+            input: {
+                kind: 'config',
+                context: 'UTM tags on the press links',
+                rows: [
+                    { field: <code>utm_source</code>, value: 'techcrunch' },
+                    { field: <code>utm_medium</code>, value: 'pr' },
+                    { field: <code>utm_campaign</code>, value: 'series_b' },
+                ],
+            },
+            output: {
+                context: 'web analytics · channels (7d)',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Source / medium' }, { label: 'Visitors', align: 'right' }],
+                    rows: [
+                        ['techcrunch / pr', '11,204'],
+                        ['organic search', '2,911'],
+                        ['direct', '1,455'],
+                    ],
+                },
             },
             after: (
                 <>
@@ -346,14 +498,27 @@ Devices:   mobile 71% · desktop 28%`,
                     were on day one.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `posthog.capture('user_signed_up')
 posthog.setPersonProperties(
   { tier: 'solo' },                    // $set: can change
   { initial_utm_campaign: 'series_b',  // $set_once: written
     signed_up_date: '2026-07-25' }     // once, then never
 )`,
+            },
+            output: {
+                context: 'person, hog_412',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: <code>tier</code>, value: <>solo · $set, can change</> },
+                        { field: <code>initial_utm_campaign</code>, value: <>series_b · $set_once</> },
+                        { field: <code>signed_up_date</code>, value: <>2026-07-25 · $set_once</> },
+                    ],
+                },
             },
             after: (
                 <>
@@ -381,14 +546,35 @@ posthog.setPersonProperties(
                     At login, one call merges the whole pre-login journey into the person.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'on auth success',
                 snippet: `// on auth success, from the client:
 posthog.identify('hog_412', { tier: 'solo' })
 posthog.capture('auth_sign_in_completed')
 // a stable id that never changes for them
 // posthog.reset() ONLY on logout, never on an
 // anonymous page load (that orphans the history)`,
+            },
+            output: {
+                context: 'person timeline, hog_412',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Before', value: '7 anonymous events, no name' },
+                        {
+                            field: <code>identify()</code>,
+                            value: (
+                                <>
+                                    merges them into <code>hog_412</code>
+                                </>
+                            ),
+                        },
+                        { field: 'After', value: 'one person, web + app on one timeline' },
+                    ],
+                },
+                footnote: <>One merge call, and the anonymous history is no longer orphaned.</>,
             },
             after: (
                 <>
@@ -417,20 +603,45 @@ posthog.capture('auth_sign_in_completed')
                     at 20% of one borough, and widens once the numbers hold up.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'client-side',
                 snippet: `if (posthog.isFeatureEnabled('reserve-rollout')) {
   showReserveSection()
-}
-// released to: 20% of cohort "Hackney hosts"
-// watch: crossing_reserved conversion
-//        + $exception rate in the new code path`,
+}`,
+            },
+            output: {
+                context: 'reserve-rollout',
+                table: {
+                    kind: 'columns',
+                    columns: [
+                        { label: 'Release condition' },
+                        { label: 'Rollout', align: 'right' },
+                        { label: 'Users', align: 'right' },
+                    ],
+                    rows: [
+                        [
+                            <>
+                                Cohort <code>Hackney hosts</code>
+                            </>,
+                            '20%',
+                            '1,204',
+                        ],
+                        ['Everyone else', '0%', '4,816'],
+                    ],
+                },
+                footnote: (
+                    <>
+                        Watching <code>crossing_reserved</code> (target ≥ 5%) and <code>$exception</code> rate in the
+                        new path.
+                    </>
+                ),
             },
             after: (
                 <>
-                    The flag is also the off switch. If exceptions climb in the new code path, you flip it off from the
-                    PostHog UI and the feature disappears for everyone within seconds, with no deploy and nobody left
-                    waiting at a gap that was never held.
+                    The flag is also the off switch. If <code>$exception</code> rates climb in the new code path, you
+                    turn it off in the PostHog UI and every user is back on the old path in seconds, without a deploy.
                 </>
             ),
         },
@@ -452,18 +663,31 @@ posthog.capture('auth_sign_in_completed')
                     "withdraw consent" control behind the privacy link is two calls, not a project.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'js',
+                context: 'behind the privacy link',
                 snippet: `if (!hasConsent) posthog.opt_out_capturing()
 // later, if they change their mind:
 posthog.opt_in_capturing()
 // the choice is remembered, so it holds
 // on the next visit too`,
             },
+            output: {
+                context: 'capture state, this browser',
+                table: {
+                    kind: 'fieldValue',
+                    rows: [
+                        { field: 'Consent', value: 'Withdrawn' },
+                        { field: 'Capturing', value: 'Off, and it holds across reloads' },
+                        { field: 'Sent then deleted', value: 'Nothing, it was never collected' },
+                    ],
+                },
+            },
             after: (
                 <>
-                    Opting out stops capture in the browser, so nothing is sent and then deleted: it's never collected.
-                    Handy given every hedgehog on this network is a UK data subject.
+                    Capture stops in the browser, so nothing is sent – it's never collected in the first place. Handy
+                    when every hedgehog on this network is a UK data subject.
                 </>
             ),
         },
@@ -484,14 +708,37 @@ posthog.opt_in_capturing()
                     which feature flag the person must match, and what share of them to ask.
                 </>
             ),
-            code: {
-                language: 'bash',
-                snippet: `# conditions on this survey, set in PostHog:
-url contains       unter.co.uk
-feature flag       hedgehog-verified
-sample             25% of matching users
-# and once someone answers, they're not
-# asked again`,
+            input: {
+                kind: 'config',
+                context: 'targeting, set in PostHog',
+                rows: [
+                    { field: 'Type', value: 'Feedback button (popover)' },
+                    { field: 'Question', value: '"What would make Unter better?"' },
+                    {
+                        field: 'URL',
+                        value: (
+                            <>
+                                contains <code>unter.co.uk</code>
+                            </>
+                        ),
+                    },
+                    { field: 'Feature flag', value: <code>hedgehog-verified</code> },
+                    { field: 'Sample', value: '25% of matching users' },
+                    { field: 'Frequency', value: 'once per person, then never' },
+                ],
+            },
+            output: {
+                context: 'responses, last 30d',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'Answer' }, { label: 'Responses', align: 'right' }],
+                    rows: [
+                        ['Better route options', '412'],
+                        ['Slower is fine', '218'],
+                        ['Not enough gaps nearby', '189'],
+                    ],
+                },
+                footnote: <>819 responses · a 23% response rate among the 25% who were asked.</>,
             },
             after: (
                 <>
@@ -509,7 +756,7 @@ sample             25% of matching users
         label: 'mobile SDKs',
         dx: 0.5,
         dy: -0.05,
-        title: 'The mobile apps report to the same project',
+        title: 'One person across web and mobile',
         body: {
             why: (
                 <>
@@ -519,19 +766,35 @@ sample             25% of matching users
                     puts them on one person, and without it you get the same human counted once per device.
                 </>
             ),
-            code: {
+            input: {
+                kind: 'code',
                 language: 'bash',
+                context: 'shared by web + mobile builds',
                 snippet: `POSTHOG_PROJECT_TOKEN=phc_unter_******
-POSTHOG_HOST=https://eu.i.posthog.com
-# app calls identify('hog_412') after login →
-# web anon session + app sessions stitch into
-# one person, one timeline`,
+POSTHOG_HOST=https://eu.i.posthog.com`,
+            },
+            output: {
+                context: 'person timeline, hog_412',
+                table: {
+                    kind: 'columns',
+                    columns: [{ label: 'When' }, { label: 'Platform' }, { label: 'Event' }],
+                    rows: [
+                        ['Tue', 'Web', 'got a quote'],
+                        ['Tue', 'Web', <code>user_signed_up</code>],
+                        ['Thu', 'iOS', 'first crossing'],
+                    ],
+                },
+                footnote: (
+                    <>
+                        <code>identify('hog_412')</code> on every platform puts them on one person. Without it, one
+                        human counts once per device.
+                    </>
+                ),
             },
             after: (
                 <>
                     One person's timeline then reads across both: arrived from a link, got a quote on the web, scanned
-                    the QR, first crossing in the app two nights later. That's what makes a campaign traceable to what
-                    people actually did.
+                    the QR, first crossing in the app two nights later.
                 </>
             ),
         },
