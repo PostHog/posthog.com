@@ -12,7 +12,7 @@ const HowToUseSection = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">How do I use it?</h2>
+            <h2 className="mb-3">How do I use it?</h2>
             <p>There are a few ways to put Replay Vision to work.</p>
             <TabbedCarousel
                 tabs={applications.map((s) => ({

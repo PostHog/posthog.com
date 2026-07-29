@@ -275,7 +275,7 @@ export const replayVision = {
         rows: [
             ['Product Engineers', "Scan sessions in bulk for the failure you can't reproduce locally"],
             ['PMs & Designers', 'Score friction and spot dead ends across a release without watching a replay'],
-            ['Growth', 'Find where users bleed out of onboarding and signup funnels'],
+            ['Growth Engineers', 'Find where users bleed out of onboarding and signup funnels'],
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
