@@ -13,7 +13,7 @@ type ProductGridProps = {
     selectedProduct?: ShopifyProduct | null
 }
 
-export default function ProductGrid(props: ProductGridProps): React.ReactElement {
+function ProductGrid(props: ProductGridProps): React.ReactElement {
     const { className, products, onProductClick, selectedProduct } = props
     const [sidePanels, setSidePanels] = useState<{
         isOpen: boolean
@@ -94,3 +94,11 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
         </>
     )
 }
+
+// Memoized so the product grid (and the Wistia video embed inside it) is not
+// re-rendered when unrelated Collection state changes — e.g. opening/closing
+// the cart or order history, or dragging the resizable side panel. Combined
+// with a stable `onProductClick` (useCallback) and referentially stable
+// `products`/`selectedProduct` props, the heavy grid only re-renders when the
+// filtered products or the selected product actually change.
+export default React.memo(ProductGrid)
