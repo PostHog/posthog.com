@@ -44,7 +44,10 @@ interface FileColumnProps {
 const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) => {
     return (
         <ScrollArea.Root className="h-full w-64 border-r border-primary flex-shrink-0">
-            <ScrollArea.Viewport className="h-full w-full rounded-lg p-1">
+            {/* overflowY set here so the SSR'd markup scrolls before hydration — see
+                ScrollArea.tsx. overflowX is left to Radix (`hidden`), since only a
+                vertical scrollbar is rendered. */}
+            <ScrollArea.Viewport className="h-full w-full rounded-lg p-1" style={{ overflowY: 'scroll' }}>
                 <RadioGroup.Root
                     value={selectedId?.toString() ?? ''}
                     onValueChange={onSelect}
