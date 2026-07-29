@@ -301,7 +301,14 @@ const faqStructuredData = [
 ]
 
 export default function StudentProgram(): JSX.Element {
-    const selectOptions = useMenuSelectOptions()
+    const menuSelectOptions = useMenuSelectOptions()
+    // Page-local address-bar entry so the bar reads "Students" here without adding /students to the
+    // global nav (soft launch). Move into useMenuSelectOptions when the program properly launches.
+    const selectOptions = menuSelectOptions.map((group) =>
+        group.label === 'Pricing'
+            ? { ...group, items: [...group.items, { value: 'students', label: 'Students' }] }
+            : group
+    )
 
     return (
         <>
@@ -417,8 +424,8 @@ export default function StudentProgram(): JSX.Element {
                 padding={false}
             >
                 <div className="@container h-full bg-[#EFF0EB] dark:bg-dark">
-                    {/* Same dark banner treatment as /startups, minus the rocket — students art doesn't exist yet. */}
-                    <div className="bg-[#122030] text-white p-8 relative min-h-96 flex flex-col justify-center w-full">
+                    {/* Same hero treatment as /startups. TODO(students): swap the rocket for student art when it exists. */}
+                    <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center w-full">
                         <div className="absolute inset-0 bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/stars_24a6a0b509.png)] bg-cover" />
                         <div className="hidden dark:block h-60 bg-gradient-to-b from-[#EFF0EB] to-transparent -bottom-60 left-0 w-full absolute" />
 
@@ -457,6 +464,8 @@ export default function StudentProgram(): JSX.Element {
                         </div>
                     </div>
 
+                    {/* Perk cards reuse the /startups images so the grid keeps its proportions.
+                        TODO(students): swap for student-program art when it exists. */}
                     <div className="not-prose grid grid-cols-2 @lg:grid-cols-3 @5xl:grid-cols-6 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage
@@ -470,26 +479,6 @@ export default function StudentProgram(): JSX.Element {
                         </div>
                         <div className="bg-[#9BBEC2] p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_laptop_2afc8d8955.png"
-                                alt="$30 per month in AI credits for PostHog Desktop"
-                            />
-                            <h3 className="text-base my-1 leading-tight">$30/month in AI credits</h3>
-                            <p className="text-sm mb-0">
-                                For building with agents in PostHog Desktop — beta access included.
-                            </p>
-                        </div>
-                        <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_cash_64f561fac6.png"
-                                alt="$100 build grant at in-person events"
-                            />
-                            <h3 className="text-base my-1 leading-tight">$100 build grant</h3>
-                            <p className="text-sm mb-0">
-                                A one-off grant for whatever you're building. Claim it at any in-person event.
-                            </p>
-                        </div>
-                        <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
-                            <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png"
                                 alt="Student merch and event kits"
                             />
@@ -498,9 +487,29 @@ export default function StudentProgram(): JSX.Element {
                                 You can never have too many laptop stickers. Ambassadors get kits to give out, too.
                             </p>
                         </div>
+                        <div className="bg-[#E6B2F8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_perk_2_f6a6b9d058.png"
+                                alt="$30 per month in AI credits for PostHog Desktop"
+                            />
+                            <h3 className="text-base my-1 leading-tight">$30/month in AI credits</h3>
+                            <p className="text-sm mb-0">
+                                For building with agents in PostHog Desktop — beta access included.
+                            </p>
+                        </div>
+                        <div className="bg-[#C4D9FF] -rotate-2 p-4 text-black @2xl:p-2 @3xl:p-4">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_sdks_25358b1af4.png"
+                                alt="$100 build grant at in-person events"
+                            />
+                            <h3 className="text-base my-1 leading-tight">$100 build grant</h3>
+                            <p className="text-sm mb-0">
+                                A one-off grant for whatever you're building. Claim it at any in-person event.
+                            </p>
+                        </div>
                         <div className="bg-[#C4D9FF] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_search_3ecaae1574.png"
                                 alt="Direct access to the PostHog team on Discord"
                             />
                             <h3 className="text-base my-1 leading-tight">Direct access on Discord</h3>
@@ -510,7 +519,7 @@ export default function StudentProgram(): JSX.Element {
                         </div>
                         <div className="bg-[#b8e0d8] rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/flag_flags_toggle_celebrate_e2224e0723.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/598171862_7fff97b6_15e5_4ff8_8f7c_46148f81efa1_515ee89918.png"
                                 alt="Campus ambassador status"
                             />
                             <h3 className="text-base my-1 leading-tight">Campus ambassador status</h3>
@@ -672,7 +681,7 @@ export default function StudentProgram(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
+                    <div className="m-4 @3xl:m-8 max-w-6xl">
                         <h2 className="mb-4">FAQs</h2>
                         <Accordion data-scheme="primary" className="" defaultValue="" items={faqItems} />
                     </div>
