@@ -39,33 +39,21 @@ It's easy to look at what competitors post on X and feel like we should be slick
 
 ## Types of announcement
 
-We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier sets the ceiling for how much we do to market something – but it's a guideline, and we have full discretion to do something different.
+We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier defines how much we do to market something. It's a guideline, but PMMs have free rein to do something different.
 
 ### Deciding what to market
 
-Before you settle on a tier – or decide whether something is worth marketing at all – work through the questions below. They also shape how you pitch a launch and who you point it at.
+Before you settle on a launch tier, work through the questions below. They shape how you pitch a launch and who you point it at.
 
-**Who is this for, and what do we want them to do?** Different audiences need different launches:
+- **Who is this for, and what do they expect from us?** Remember that existing users have fixed notions of what PostHog is and what it's for. As we attract new users with the self-driving story, that gap will widen – so be deliberate about which story a given audience is expecting and how this launch relates.
 
-- **Net new** – never heard of PostHog.
-- **Activate** – signed up, but haven't done the thing yet.
-- **Cross-sell** – uses one or two tools, doesn't know about the rest.
-- **Deepen** – uses multiple tools, could use them better.
-- **Defend** – comparing us against someone else.
+**Which surface is it for?** Should a user reach for this new thing through MCP, desktop, web, or the Slack app? Be explicit about where it's most relevant to the user based on the interface(s) they're engaged, or which interface you want them to adopt. 
 
-**Which surface is it for?** Should a user reach for this through MCP, desktop, web, or the Slack app? This is only getting more confusing as we ship across surfaces, so be explicit about where it's most relevant. Related: is this agent-facing or human-facing?
+**What can their role actually do with it?** Match the audience to their permissions. Launches with pricing usually target owners and admins, since they make a purchase decision when enabling the new thing. Owners and admins are also the ones who have to turn on integrations before the rest of the team can use the new tool or feature (as was the case with the Slack app launch). 
 
-**What can their role actually do with it?** Match the audience to what they're allowed to do. Launches with pricing usually go to owners and admins, since they make the purchase decision. Owners and admins are also the ones who have to turn on integrations – as was the case with the Slack app – unless we build a self-serve flow.
+**How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
-**What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for the tool or thing you launched – the PMM can ask the PM for this. Watch for actions that carry more decision or risk, like connecting a repo, which need more hand-holding.
-
-**How does it fit the self-driving story?** Decide how to pitch it:
-
-- This tool got better.
-- This helps you **Ship with PostHog**.
-- This makes your product **self-driving**.
-
-Remember that existing users have fixed notions of what PostHog is and what it's for. As we attract new users with the "ship with PostHog" and self-driving story, that gap will widen – so be deliberate about which story a given audience is hearing.
+- **What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for thing that's launching (the PMM can ask the PM for this). Actions that carry more decision or risk, like connecting a GitHub account to enable self-driving, will typically have lower conversion and need more follow-ups emails and marketing.
 
 ### Tier 1: New product announcements
 
@@ -98,7 +86,7 @@ Examples of major announcements include [the surveys beta](/changelog?id=1945) o
 
 ### Tier 3: Medium announcements
 
-Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, such as adding a chart type, but do not introduce wholly new features. They do not require action from users and pose no known risk.
+Medium announcements involve changes which have a noticeable impact on the experience of some users, but not the majority. They are likely to involve visual or functional changes, but do not introduce wholly new features. They do not require action from users and pose no known risk.
 
 We may typically support medium announcements by:
 
