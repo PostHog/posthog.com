@@ -256,7 +256,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog Code',
+            label: 'PostHog Desktop',
             description: 'Diagnoses issues and opens PRs from production signals',
             link: '/code',
             icon: <Icons.IconCoffee className="size-4 text-brown" />,
