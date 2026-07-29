@@ -32,6 +32,7 @@ List of ingestion warnings:
 - [An event was sent more than 23 hours in the future](#an-event-was-sent-more-than-23-hours-in-the-future)
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
+- [Skipped person profile processing for a high-volume distinct ID](#skipped-person-profile-processing-for-a-high-volume-distinct-id)
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
 - [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
@@ -74,6 +75,12 @@ PostHog discards events exceeding 1 megabyte in size after processing. The two c
 ## Event ingestion has overflowed capacity
 
 This warning indicates PostHog is receiving more events for a single `distinct_id` than it can process in the main [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline). These events are still safe and ingested but through a slower overflow pipeline. This is often a sign of an instrumentation bug such as a loop sending the same event.
+
+## Skipped person profile processing for a high-volume distinct ID
+
+One distinct ID sent events much faster than expected, so PostHog skipped [person processing](/docs/how-posthog-works/ingestion-pipeline#2-person-processing) for those events. The events are still ingested. They just don't create or update a person profile while the limit is active.
+
+This usually means one distinct ID is shared by many users or machines. See [rate limiting high-volume distinct IDs](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) for how to fix it.
 
 ## Replay event timestamp is invalid
 

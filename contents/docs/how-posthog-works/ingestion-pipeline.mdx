@@ -46,6 +46,8 @@ If a `(project, distinct ID)` stream exceeds roughly 5,000 events per minute sus
 
 Events are still ingested and stored. Nothing is dropped, and the capture API still returns a normal `200` response, so there is no rate-limit error to handle in your SDK or integration.
 
+PostHog logs an [ingestion warning](/docs/data/ingestion-warnings) each time this happens, so you can see which distinct IDs are affected.
+
 This almost always affects distinct IDs that stand in for many users or machines rather than a single person, such as a shared server identifier (`backend`, `system`), an anonymous placeholder, or a bot.
 The [identity resolution](/docs/product-analytics/identity-resolution#catch-all-distinct-ids) guide explains how to avoid it: give each real user a stable, unique distinct ID, and send server or system events with [person processing disabled](/docs/product-analytics/capture-events#how-to-capture-anonymous-events).
 If you have a legitimate high-volume identifier that must keep strict ordering and person processing, [contact support](https://posthog.com/talk-to-a-human).
