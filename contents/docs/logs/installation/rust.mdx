@@ -46,8 +46,6 @@ use opentelemetry_sdk::{logs::SdkLoggerProvider, Resource};
 use tracing_subscriber::{prelude::*, EnvFilter};
 
 fn init_logs() -> SdkLoggerProvider {
-    let token = std::env::var("POSTHOG_PROJECT_TOKEN").expect("POSTHOG_PROJECT_TOKEN not set");
-
     // use the blocking client even in an async app, the batch processor exports from
     // its own thread and the async reqwest-client feature panics there
     let exporter = LogExporter::builder()
@@ -56,7 +54,7 @@ fn init_logs() -> SdkLoggerProvider {
         .with_protocol(Protocol::HttpBinary)
         .with_headers(HashMap::from([(
             "Authorization".to_string(),
-            format!("Bearer <ph_project_token>"),
+            "Bearer <ph_project_token>".to_string(),
         )]))
         .build()
         .expect("failed to build the OTLP log exporter");
