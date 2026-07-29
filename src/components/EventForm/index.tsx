@@ -17,7 +17,7 @@ import EventGraphic, { type EventGraphicSpeaker } from 'components/EventGraphic'
 import { useToast } from '../../context/Toast'
 import { Event } from '../../pages/events'
 import CreatableMultiSelect from 'components/CreatableMultiSelect'
-import SuggestionDropdown from './SuggestionDropdown'
+import SuggestionDropdown, { suggestionOptionId } from './SuggestionDropdown'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -605,6 +605,11 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                         aria-autocomplete={event ? undefined : 'list'}
                         aria-expanded={lumaOpen && lumaMatches.length > 0}
                         aria-controls="luma-event-suggestions"
+                        aria-activedescendant={
+                            lumaOpen && lumaHighlight >= 0
+                                ? suggestionOptionId('luma-event-suggestions', lumaHighlight)
+                                : undefined
+                        }
                         {...formik.getFieldProps('name')}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             formik.handleChange(e)
@@ -690,6 +695,11 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                                 aria-autocomplete="list"
                                 aria-expanded={cityOpen && citySuggestions.length > 0}
                                 aria-controls="city-suggestions"
+                                aria-activedescendant={
+                                    cityOpen && cityHighlight >= 0
+                                        ? suggestionOptionId('city-suggestions', cityHighlight)
+                                        : undefined
+                                }
                                 {...formik.getFieldProps('locationLabel')}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     formik.handleChange(e)

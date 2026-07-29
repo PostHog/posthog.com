@@ -6,7 +6,7 @@ const MAX_PAGES = 5
 // This proxy fetches upcoming events from the PostHog Luma calendar and
 // returns a trimmed payload for the event form's auto-suggest.
 const handler = async (req, res) => {
-    const token = process.env.GATSBY_LUMA_TOKEN
+    const token = process.env.LUMA_TOKEN
     if (!token) {
         return res.status(500).json({ error: 'Missing Luma API token' })
     }

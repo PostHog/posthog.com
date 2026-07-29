@@ -14,8 +14,9 @@ type SuggestionDropdownProps = {
     onSelect: (index: number) => void
 }
 
-// Absolutely-positioned listbox rendered inside a `relative` wrapper around an
-// input. Keyboard navigation stays with the input that owns the dropdown.
+// Exported so the owning input can point aria-activedescendant at the highlighted row
+export const suggestionOptionId = (listId: string, index: number): string => `${listId}-option-${index}`
+
 export default function SuggestionDropdown({
     id,
     items,
@@ -29,16 +30,16 @@ export default function SuggestionDropdown({
         <ul
             id={id}
             role="listbox"
-            className="absolute mt-1 max-h-72 w-full overflow-auto rounded border border-primary bg-primary shadow-2xl z-20"
+            className="absolute top-full mt-1 max-h-72 w-full overflow-auto rounded border border-primary bg-primary shadow-2xl z-20"
         >
             {items.map((item, idx) => (
                 <li
                     key={item.id}
+                    id={suggestionOptionId(id, idx)}
                     role="option"
                     aria-selected={highlightIndex === idx}
                     className={`px-3 py-2 cursor-pointer ${highlightIndex === idx ? 'bg-accent' : ''}`}
                     onMouseEnter={() => onHighlight(idx)}
-                    onMouseLeave={() => onHighlight(-1)}
                     onClick={() => onSelect(idx)}
                     title={item.sublabel || item.label}
                 >

@@ -53,6 +53,19 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
+    // Luma's API blocks browser CORS, so the events form fetches /api/luma-events.
+    // In production Vercel serves api/luma-events.js; mirror that route here so
+    // the form also works under `gatsby develop`. Dev server only — no effect on builds.
+    developMiddleware: (app) => {
+        app.use('/api/luma-events', async (req, res) => {
+            try {
+                await require('./api/luma-events')(req, res)
+            } catch (error) {
+                console.error('luma-events dev middleware error:', error)
+                res.status(500).json({ error: 'Failed to fetch Luma events' })
+            }
+        })
+    },
     flags: {
         DEV_SSR: false,
     },
