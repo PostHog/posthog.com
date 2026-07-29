@@ -116,15 +116,12 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 ### Invoice status and what you can do
 
-What you can do depends on the invoice's status in Stripe:
+You don't void invoices or create Stripe credit notes by hand. Both refunds and corrections to unpaid invoices go through the same Billing Admin refund flow, which issues the Stripe credit note for you automatically. What that flow can do depends on the invoice's status in Stripe:
 
--   **We no longer void invoices.** Voiding has been replaced entirely by credit notes.
--   **Credit notes apply to `paid`, `open`, and `uncollectible` invoices.** They can't be applied to `draft` or `void` invoices. The Billing Admin refund flow works on `open` invoices too, not only `paid` ones.
--   **If Stripe rejects a credit note because the invoice still has a pending payment attempt,** wait for the attempt to resolve, or mark the invoice `uncollectible` in Stripe and retry.
--   **Marking an invoice `uncollectible` is itself the act of forgiving it.** It stops showing as open, so there's usually nothing left to fix on an uncollectible invoice.
--   **Subscriptions are auto-cancelled after repeated failed payment attempts** on a small unpaid invoice, which is also when that invoice is marked `uncollectible`. RevOps can cancel manually earlier if needed. Separately, a customer who accumulates two or more `uncollectible` invoices is blocked from subscribing again.
--   **Churn status in Vitally is not driven by invoice status.** It's set when the Stripe subscription status becomes `canceled` ([config](https://posthog.vitally-eu.io/settings/customer-management/churn)).
--   Customers can re-subscribe as long as they aren't blocked from doing so.
+-   **It works on `paid`, `open`, and `uncollectible` invoices**, but not on `draft` or `void` ones. For a `paid` invoice the refund goes back to the payment method and/or customer balance; for an `open` or `uncollectible` invoice it reduces the amount still due.
+-   **If the flow errors that the invoice has a pending payment attempt,** wait for that attempt to resolve and retry, or mark the invoice `uncollectible` in Stripe first. The refund flow won't mark invoices uncollectible for you.
+-   **Small unpaid invoices are handled automatically.** After Stripe's repeated failed payment attempts on a small invoice (below the threshold where CS steps in, and for customers without a high trust score), billing marks it `uncollectible` and cancels the subscription. RevOps can cancel earlier if needed.
+-   **Two or more `uncollectible` invoices block a customer from subscribing again.** They're unblocked automatically once they no longer have any uncollectible invoices, so clearing those invoices is what lets them re-subscribe.
 
 ## How to issue refunds or credits
 
