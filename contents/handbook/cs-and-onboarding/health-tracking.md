@@ -179,7 +179,9 @@ Applied if the Owner role has been added to a user in the last 14 days. This is 
 
 > This section is a work in progress as we migrate from Vitally to PostHog Customer Analytics.  Trending of materialized views isn't currently supported in PostHog, so whilst the computed score will be more accurate than Vitally, we can't yet see historic trends of customer health.
 
-When looking at an account in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts), you can 
+When looking at an account in [Customer Analytics](https://us.posthog.com/project/2/customer_analytics/accounts), you can access the `account_health_scores` view in the column selector.
+
+> We purposefully haven't included any data volume increase / shrinkage in this scoring.  These are captured elsewhere by spike alerts and should be treated differently versus a health score trend (ie. immediate action is needed)
 
 ### Implementation
 
