@@ -85,11 +85,10 @@ There's no formula. There is a small set of evidence sources you can reliably bu
 
 **4. Bottoms-up from their product.** For a new workload or team, estimate from what you know about *that* workload: public traffic, app store presence, team size, and how the equivalent metric compares to the workloads they've already instrumented.
 
-Every estimate in an account plan should name its source: "arithmetic from their volume", "customer-stated", "comparable: [accounts]", or "bottoms-up from [evidence]". If you can't name one, you're back to discovery.
 
 ---
 
-## Verdict: grow, nurture, or release
+## Grow, nurture, or release
 
 - **Grow** — there's a real, qualified expansion opportunity. This account gets proactive TAM work this quarter.
 - **Nurture** — a real opportunity that isn't workable yet, because it's waiting on a funding event, a champion hire, or a roadmap item. If it's already a TAM account, it's fine to keep. If it isn't, it can wait for a TAM to be assigned.
