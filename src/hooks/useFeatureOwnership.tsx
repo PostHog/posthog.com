@@ -242,6 +242,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
