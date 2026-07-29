@@ -26,10 +26,7 @@ export default function SkillsOutcomeSkillsColumn({
         <SkillsColumnShell widthClassName={widthClassName} showBorder={showBorder}>
             {mobileNav ? <SkillsMobileNav {...mobileNav} /> : null}
             <ScrollArea.Root className="flex-1 min-h-0 overflow-hidden">
-                {/* overflowY set here so the SSR'd markup scrolls before hydration — see
-                    components/RadixUI/ScrollArea.tsx. overflowX is left to Radix (`hidden`),
-                    since only a vertical scrollbar is rendered. */}
-                <ScrollArea.Viewport className="h-full w-full p-1" style={{ overflowY: 'scroll' }}>
+                <ScrollArea.Viewport className="h-full w-full p-1">
                     <RadioGroup.Root
                         value={selectedSkillId ?? ''}
                         onValueChange={(value) => {

@@ -1,6 +1,32 @@
 import * as React from 'react'
 import { ScrollArea as RadixScrollArea } from 'radix-ui'
 import { useHorizontalScrollFade, HorizontalScrollFades } from '../../hooks/useHorizontalScrollFade'
+import { useAppSettings } from '../../context/App'
+
+// There is no media query for scrollbar visibility, so the OS preference has to be measured:
+// overlay scrollbars reserve no space, classic ones do. The probe lives in a shadow root because
+// Blink puts an element into custom-scrollbar mode — always classic, never overlay — as soon as any
+// author `::-webkit-scrollbar` rule matches it, and ours match `*`. Shadow encapsulation keeps those
+// rules out so the measurement sees the real native scrollbar. Probed once per session.
+let systemScrollbarsVisible: boolean | null = null
+
+const detectSystemScrollbars = (): boolean => {
+    if (systemScrollbarsVisible !== null) return systemScrollbarsVisible
+    if (typeof document === 'undefined') return false
+
+    const host = document.createElement('div')
+    host.style.cssText = 'position:absolute;top:-9999px;left:-9999px;width:100px;height:100px'
+    document.body.appendChild(host)
+
+    const probe = document.createElement('div')
+    // scrollbar-width/-color inherit across the shadow boundary, so reset them here too.
+    probe.style.cssText = 'width:100px;height:100px;overflow:scroll;scrollbar-width:auto;scrollbar-color:auto'
+    host.attachShadow({ mode: 'open' }).appendChild(probe)
+
+    systemScrollbarsVisible = probe.offsetWidth - probe.clientWidth > 0
+    host.remove()
+    return systemScrollbarsVisible
+}
 
 interface ScrollAreaProps {
     children: React.ReactNode
@@ -29,6 +55,15 @@ const ScrollArea = ({
 }: ScrollAreaProps) => {
     const fadeHeight = fadeOverflow === true ? 8 : fadeOverflow || 0
     const { ref: fadeRef, showStart, showEnd } = useHorizontalScrollFade(fadeX)
+    const { siteSettings } = useAppSettings()
+    const scrollbars = siteSettings.scrollbars ?? 'auto'
+    const [systemVisible, setSystemVisible] = React.useState(() => systemScrollbarsVisible ?? false)
+
+    React.useEffect(() => {
+        if (scrollbars === 'system') {
+            setSystemVisible(detectSystemScrollbars())
+        }
+    }, [scrollbars])
 
     // The horizontal fade needs its own ref on the viewport while still
     // honouring any `viewportRef` the caller passed.
@@ -47,7 +82,10 @@ const ScrollArea = ({
 
     return (
         <RadixScrollArea.Root
-            type="scroll"
+            // Radix `auto` keeps the rail visible while content overflows; `scroll` fades it out
+            // once scrolling stops. Never `always`, which mounts a hit-testable rail even on
+            // containers that don't overflow.
+            type={scrollbars === 'show' || (scrollbars === 'system' && systemVisible) ? 'auto' : 'scroll'}
             data-scheme={dataScheme}
             className={`app-scroll-area relative overflow-hidden h-full flex-1 [&>div>div]:!block ${
                 fullWidth ? 'max-w-screen' : ''

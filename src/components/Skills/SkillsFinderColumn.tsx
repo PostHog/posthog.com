@@ -42,10 +42,7 @@ export default function SkillsFinderColumn<T extends { id: string; name: string 
             {browseHeader ? <SkillsBrowseHeader {...browseHeader} /> : null}
             {mobileNav ? <SkillsMobileNav {...mobileNav} /> : null}
             <ScrollArea.Root className="flex-1 min-h-0 overflow-hidden">
-                {/* overflowY set here so the SSR'd markup scrolls before hydration — see
-                    components/RadixUI/ScrollArea.tsx. overflowX is left to Radix (`hidden`),
-                    since only a vertical scrollbar is rendered. */}
-                <ScrollArea.Viewport className="h-full w-full p-1" style={{ overflowY: 'scroll' }}>
+                <ScrollArea.Viewport className="h-full w-full p-1">
                     {items.length === 0 && emptyLabel ? (
                         <p className="text-sm text-secondary px-2 py-4 m-0">{emptyLabel}</p>
                     ) : null}
