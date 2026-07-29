@@ -8,10 +8,8 @@ import {
     IconList,
     IconChat,
     IconConfetti,
-    IconMap,
     IconNewspaper,
     IconMessage,
-    IconShieldPeople,
     IconCode,
     IconRocket,
     IconInfo,
@@ -161,8 +159,8 @@ export const replayVision = {
     handle: 'replay_vision',
     type: 'replay_vision',
     slug: 'replay-vision',
-    // Built by the same team as Session Replay, so the team-driven sections
-    // (roadmap, changelog, questions, team) pull from the same sources.
+    // Built by the same team as Session Replay, so changelog / questions pull
+    // from the same sources.
     teamSlug: 'replay',
     forumTopicId: 377,
     color: 'yellow',
@@ -221,10 +219,8 @@ export const replayVision = {
             component: WorksWithSection,
             icon: <IconConfetti className="size-4" />,
         },
-        { slug: 'roadmap', name: 'Roadmap', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', icon: <IconMessage className="size-4" /> },
-        { slug: 'team', name: 'Team', icon: <IconShieldPeople className="size-4" /> },
         { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
