@@ -81,6 +81,24 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Drop exceptions captured from local dev servers (localhost, loopback, *.local)
+    // so fast-refresh / HMR overlay errors don't spawn noise in the production
+    // error-tracking project. Production traffic is unaffected.
+    before_send: function (event) {
+        if (event && event.event === '$exception') {
+            var host = window.location.hostname
+            if (
+                host === 'localhost' ||
+                host === '127.0.0.1' ||
+                host === '0.0.0.0' ||
+                host === '[::1]' ||
+                host.endsWith('.local')
+            ) {
+                return null
+            }
+        }
+        return event
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
