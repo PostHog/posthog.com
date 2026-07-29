@@ -15,9 +15,12 @@ interface Product {
 
 interface SearchableProductMenuProps {
     products: Product[]
+    // Injected by MenuBar so selecting a product closes the whole menu, matching
+    // the behavior of regular menu items.
+    onCloseMenu?: () => void
 }
 
-const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products }) => {
+const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products, onCloseMenu }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -115,6 +118,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
                                     key={`${product.slug}-${index}-${searchTerm}`}
                                     to={`/${product.slug}`}
                                     state={{ newWindow: true }}
+                                    onClick={() => onCloseMenu?.()}
                                     className="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-accent text-primary no-underline group"
                                 >
                                     <span
