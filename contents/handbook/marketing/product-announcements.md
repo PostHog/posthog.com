@@ -40,7 +40,7 @@ It's easy to look at what competitors post on X and feel like we should be slick
 ## Types of announcement
 
 We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier defines how much we do to market something. It's a guideline, but PMMs have free rein to do something different.
-
+> This framework helps us manage expectations with other teams. When a team lead or PM tells us about a launch, we use the context they give us (plus our own judgement) to decide which tier it falls into. Share that back with the team so they know what marketing will deliver.
 ### Deciding what to market
 
 Before you settle on a launch tier, work through the questions below. They shape how you pitch a launch and who you point it at.
