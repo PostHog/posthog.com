@@ -76,7 +76,7 @@ Some other things we've done for launches:
 
 - Having a messaging doc is very useful for bigger launches because it can be used by different content-producing teams, and it brings alignment on how we want to communicate the product.
 - Initiate communication with the billing team so you're on top of billing changes and schedule your announcements accordingly.
-- Meet with the related PM regularly to stay informed about changes and get their input on what you're writing. More about collab with PMs [here](/blog/pm-pmm-collaboration).
+- Meet with the related PM regularly to stay informed about changes and get their input on what you're writing. Read more about [how PMs and PMMs collaborate](/blog/pm-pmm-collaboration).
 - Create a separate Slack channel and communicate all updates there. Add all relevant stakeholders and make sure it's active. Post a weekly/bi-weekly update of the progress.
 - Create a canvas in your Slack channel where you'll be dropping all relevant links to things published, your launch plan, Figma files, etc. This makes it easier for engineers, PMs, and other stakeholders to find what you've been working on. 
 - If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
