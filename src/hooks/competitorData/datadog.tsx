@@ -76,21 +76,27 @@ export const datadog = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Converts to proprietary format',
+                    native_open_telemetry_ingest: 'Partial',
                     vendor_agnostic_sdks: true,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
                 },
             },
             investigation_workflow: {
                 features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
                     ai_assisted_log_summaries: true,
                 },
             },
             debugging_integrations: {
                 features: {
                     built_in_error_tracking: true,
-                    built_in_session_replay: false,
+                    built_in_session_replay: true,
                     product_analytics_context: false,
                 },
             },
@@ -100,6 +106,12 @@ export const datadog = {
                     traces: true,
                     alerting: true,
                     infra_monitoring: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: 'Add-on',
+                    enterprise_scale_compliance: true,
                 },
             },
             pricing: {
@@ -125,7 +137,7 @@ export const datadog = {
             self_host: false,
         },
         pricing: {
-            free_tier: 'Free trial',
+            free_tier: 'Trial',
             self_serve: true,
             transparent_pricing: true,
             usage_based_pricing: true,

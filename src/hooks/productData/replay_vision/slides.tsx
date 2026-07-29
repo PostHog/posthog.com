@@ -65,7 +65,9 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Replay_Vision_Cowork_mockup_fb5c8f714a.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Replay_Vision_Cowork_mockup_33b6517a42.png',
+            // Drop the float layout's default border; the asset already has a window chrome.
+            frameless: true,
         },
     },
     {

@@ -18,7 +18,7 @@ tags:
   - Culture
 ---
 
-Let's say a competitor copies your feature. They lift your positioning, write a misleading comparison post, or just take a cheap shot at you on X. And let's say you're 'right' – they actually did the thing, and it's actually annoying.
+Let's say a competitor copies your feature. They lift your [positioning](/blog/repositioning-posthog), write a misleading comparison post, or just take a cheap shot at you on X. And let's say you're 'right' – they actually did the thing, and it's actually annoying.
 
 Still don't do it.
 

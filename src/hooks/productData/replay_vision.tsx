@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    IconLlmPromptEvaluation,
     IconEye,
     IconWarning,
     IconSparkles,
@@ -9,10 +8,8 @@ import {
     IconList,
     IconChat,
     IconConfetti,
-    IconMap,
     IconNewspaper,
     IconMessage,
-    IconShieldPeople,
     IconCode,
     IconRocket,
     IconInfo,
@@ -157,17 +154,21 @@ const featureComparisonRows = [
 ]
 
 export const replayVision = {
-    Icon: IconLlmPromptEvaluation,
+    Icon: IconEye,
     name: 'Replay Vision',
+    description: 'AI-powered session replay analysis that watches recordings for you',
     handle: 'replay_vision',
+    type: 'replay_vision',
     slug: 'replay-vision',
-    // Built by the same team as Session Replay, so the team-driven sections
-    // (roadmap, changelog, questions, team) pull from the same sources.
+    // Built by the same team as Session Replay, so changelog / questions pull
+    // from the same sources.
     teamSlug: 'replay',
     forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
+    // TODO: drop this on GA launch day (2026-08-03). Pricing stays hidden until billing serves the
+    // product, but this label doesn't, so it stops the product reading as GA in the meantime.
     status: 'beta',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {
@@ -177,8 +178,8 @@ export const replayVision = {
     },
     /**
      * Sections rendered on the Product surface (`/replay-vision`). Each entry
-     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`.
-     * Only the hero (`overview`) is shipped for now – more sections get added here.
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
@@ -219,18 +220,16 @@ export const replayVision = {
             component: WorksWithSection,
             icon: <IconConfetti className="size-4" />,
         },
-        { slug: 'roadmap', name: 'Roadmap', icon: <IconMap className="size-4" /> },
         { slug: 'changelog', name: 'Changelog', icon: <IconNewspaper className="size-4" /> },
         { slug: 'community', name: 'Questions?', icon: <IconMessage className="size-4" /> },
-        { slug: 'team', name: 'Team', icon: <IconShieldPeople className="size-4" /> },
         { slug: 'installation', name: 'Install', icon: <IconCode className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', icon: <IconRocket className="size-4" /> },
     ],
     /**
-     * Sections rendered on the Pricing surface (`/replay-vision/pricing`).
-     * Replay Vision isn't priced yet, so the pricing-specific sections (TL;DR,
-     * plans, calculator, feature comparison) are placeholders. Only the
-     * "Replay Vision vs..." comparison is built out.
+     * Sections rendered on the Pricing surface (`/replay-vision/pricing`). These
+     * use Replay Vision's own credit-denominated components rather than the shared
+     * calculator template; `slider`, `volume`, and `customPricingContent` below
+     * serve the shared `/pricing` calculator instead.
      */
     pricingMenu: [
         {
@@ -273,7 +272,7 @@ export const replayVision = {
         rows: [
             ['Product Engineers', "Scan sessions in bulk for the failure you can't reproduce locally"],
             ['PMs & Designers', 'Score friction and spot dead ends across a release without watching a replay'],
-            ['Growth', 'Find where users bleed out of onboarding and signup funnels'],
+            ['Growth Engineers', 'Find where users bleed out of onboarding and signup funnels'],
             ['Support & UX Research', 'Classify what users were actually trying to do, at scale'],
             ['Founders', 'Skim a one-line summary of every session instead of spending hours watching them'],
         ],
@@ -312,4 +311,35 @@ export const replayVision = {
         // Feature pages don't render platform sections; our rows are already scoped.
         excluded_sections: ['platform'],
     },
+    slider: {
+        // Values in credits. min doubles as the "first N credits free" copy, so it tracks the free allocation.
+        marks: [2500, 10000, 50000, 100000],
+        min: 2500,
+        max: 100000,
+    },
+    volume: 2500,
+    customPricingContent: (
+        <div data-scheme="secondary" className="prose prose-sm text-lg mt-8 mb-12 leading-normal text-primary">
+            <h3 className="text-xl font-bold text-primary mb-4">How credits work</h3>
+            <p>
+                You pay per observation. One observation is one session recording watched by one scanner, so the credits
+                you use depend on how many sessions your scanners pick up.
+            </p>
+            <ul>
+                <li>
+                    <strong className="text-primary">An observation costs 2, 5, or 15 credits</strong> depending on
+                    which model the scanner runs. You choose the model per scanner and see its price next to each
+                    option.
+                </li>
+                <li>
+                    <strong className="text-primary">1 credit is $0.01</strong>, so 100 credits cost $1. The first 2,500
+                    credits each month are free, which covers 500 sessions on the default model.
+                </li>
+            </ul>
+            <p>
+                Before you turn a scanner on, PostHog estimates how many sessions it will match each month and what that
+                costs. Set a billing limit if you want a hard cap on spend.
+            </p>
+        </div>
+    ),
 }

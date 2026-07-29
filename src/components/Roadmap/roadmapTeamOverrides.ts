@@ -31,6 +31,11 @@ export const ROADMAP_TEAM_OVERRIDES: Record<string, string> = {
     discussions: 'platform-features', // comments/discussions area
 
     // Alpha / concept
+    'self-driving-model': 'ai-research', // Tuning a self-driving model
+    'predictive-user-behavior-model': 'ai-research', // Training a predictive user behavior model
+    'session-replay-model': 'ai-research', // Training a session replay model
+    'replay-encoder-model': 'ai-research', // Training a Replay Encoder model
+    'semantic-layer': 'data-modeling', // Semantic layer
     tracing: 'apm',
     metrics: 'apm',
     'customer-success-platform': 'customer-analytics',
@@ -53,4 +58,10 @@ export const ROADMAP_TEAM_OVERRIDES: Record<string, string> = {
     'toolbar-for-mobile': 'growth', // toolbar area
     'ai-api-access': 'ai-gateway',
     'product-tours': 'surveys',
+
+    // AI Research tracks (concept) — the four goals on /research, one EAF each
+    'replay-encoder-model': 'ai-research',
+    'session-replay-model': 'ai-research',
+    'predictive-user-behavior-model': 'ai-research',
+    'self-driving-model': 'ai-research',
 }

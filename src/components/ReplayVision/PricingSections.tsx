@@ -192,7 +192,7 @@ const formatCompactNumber = (n: number) =>
 
 export const PricingCredits = ({ id }: SectionComponentProps) => {
     const [modelKey, setModelKey] = useState('standard')
-    const [observations, setObservations] = useState(5000)
+    const [observations, setObservations] = useState(500)
 
     const model = MODELS.find((m) => m.key === modelKey) ?? MODELS[0]
 

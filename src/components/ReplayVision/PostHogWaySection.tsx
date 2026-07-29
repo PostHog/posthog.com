@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IconEye, IconGraph, IconBell, IconPullRequest, IconCheckCircle } from '@posthog/icons'
-import Logo from 'components/Logo'
-import { ChoppyReveal } from 'components/Code/ChoppyReveal'
+import { Logo } from '@posthog/brand/logo'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { IconPop } from 'components/Code/IconPop'
 import { FlowDiagram, type FlowStep } from 'components/Code/FlowDiagram'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { SectionLabel, KeyBadge } from './sectionHelpers'
@@ -19,8 +17,6 @@ const steps: FlowStep[] = [
 ]
 
 const PostHogWaySection = ({ id }: SectionComponentProps) => {
-    const [p1Done, setP1Done] = useState(false)
-
     return (
         <section id={id} className="scroll-mt-20 not-prose @container relative">
             <FlowDiagram
@@ -30,48 +26,32 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
                 headerRight="(cir. 2026–)"
             />
 
-            <SectionLabel>
-                The{' '}
-                <IconPop>
-                    <Logo wordmark={false} className="inline-block align-middle w-10 relative top-1 -rotate-2" />
-                </IconPop>{' '}
-                PostHog way
+            <SectionLabel className="flex items-baseline gap-2">
+                The <Logo layout="logomark" width="auto" className="inline-block w-10" /> PostHog way
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                <ChoppyReveal wordDelay={40} onComplete={() => setP1Done(true)}>
-                    <strong>Replay Vision</strong>
-                    {' watches your session recordings for you. Describe what to look for once, and a scanner reads '}
-                    {'every matching session, video and events, and turns what it sees into '}
-                    <RoughAnnotation
-                        type="highlight"
-                        color="rgba(48, 164, 108, 0.2)"
-                        strokeWidth={1}
-                        padding={2}
-                        multiline
-                    >
-                        <strong>structured observations</strong>
-                    </RoughAnnotation>
-                    {' you can query, chart, and alert on.'}
-                </ChoppyReveal>
+                <strong>Replay Vision</strong> watches your session recordings for you. Describe what to look for once,
+                and a scanner reads every matching session, video and events, and turns what it sees into{' '}
+                <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} multiline>
+                    <strong>structured observations</strong>
+                </RoughAnnotation>{' '}
+                you can query, chart, and alert on.
             </p>
 
             <FlowDiagram className="mb-5 @xl:hidden" steps={steps} headerLeft="The loop" headerRight="(cir. 2026–)" />
 
             <p className="text-base leading-loose">
-                <ChoppyReveal wordDelay={40} initialDelay={p1Done ? 0 : 999999}>
-                    {"The friction you'd never have watched becomes a signal in your "}
-                    <strong>Inbox</strong>
-                    {' – where an agent picks it up and '}
-                    <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                        <em>opens the pull request</em>
-                    </RoughAnnotation>
-                    {'. You just hit '}
-                    <KeyBadge>
-                        Merge <span className="relative top-px">↵</span>
-                    </KeyBadge>
-                    {'.'}
-                </ChoppyReveal>
+                The friction you'd never have watched becomes a signal in your <strong>Inbox</strong> – where an agent
+                picks it up and{' '}
+                <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
+                    <em>opens the pull request</em>
+                </RoughAnnotation>
+                . You just hit{' '}
+                <KeyBadge>
+                    Merge <span className="relative top-px">↵</span>
+                </KeyBadge>
+                .
             </p>
         </section>
     )

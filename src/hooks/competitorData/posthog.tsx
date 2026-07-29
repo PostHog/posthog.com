@@ -157,6 +157,18 @@ export const posthog = {
                     vendor_agnostic_sdks: true,
                 },
             },
+            search: {
+                features: {
+                    full_text_search: false,
+                    no_proprietary_query_language: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: false,
+                },
+            },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: true,

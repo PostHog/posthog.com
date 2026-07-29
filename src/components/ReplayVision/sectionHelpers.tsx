@@ -5,8 +5,8 @@ import { IconPop } from 'components/Code/IconPop'
 // ("The old way", "The PostHog way"). Mirrors the inline helpers used on the
 // PostHog Code marketing page.
 
-export function SectionLabel({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-2xl mb-4">{children}</h2>
+export function SectionLabel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+    return <h2 className={`text-2xl mb-4 ${className}`}>{children}</h2>
 }
 
 // Inline icon that sits in the text flow (e.g. the tombstone / logomark in a heading).

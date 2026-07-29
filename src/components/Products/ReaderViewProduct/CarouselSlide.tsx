@@ -93,7 +93,8 @@ interface CarouselSlideProps {
  *
  * - `float`: at narrow container sizes the image stacks above the prose; at
  *   `@2xl/reader-content`+ it floats right and the prose flows around it. Glow halo
- *   is opt-in via `image.glow: true | GlowColor`.
+ *   is opt-in via `image.glow: true | GlowColor`. Set `image.frameless: true` to
+ *   skip the default border around the floated image.
  *
  * All defaults are overridable via `slide.className`, `image.containerClassName`,
  * and `image.imgClassName`.
@@ -172,7 +173,11 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                     }`}
                 >
                     {showGlow ? (
-                        <Glow color={glowColor} intensity="soft" className="rounded border border-secondary">
+                        <Glow
+                            color={glowColor}
+                            intensity="soft"
+                            className={image.frameless ? 'rounded' : 'rounded border border-secondary'}
+                        >
                             <CloudinaryImage
                                 src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
                                 alt={image.alt || productData?.name}
@@ -184,7 +189,7 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                         <CloudinaryImage
                             src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
                             alt={image.alt || productData?.name}
-                            className="w-full rounded border border-secondary"
+                            className={image.frameless ? 'w-full' : 'w-full rounded border border-secondary'}
                             imgClassName={`h-auto${image.imgClassName ? ` ${image.imgClassName}` : ''}`}
                         />
                     )}

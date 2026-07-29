@@ -1,0 +1,46 @@
+---
+title: Manage data pipelines over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) gives AI agents and MCP clients direct access to your pipelines. Because pipeline functions are just code plus configuration, this is one of the places MCP pays off most – an agent can write a transformation, test it against a real event, read the failure, and fix it, all without you opening the web app.
+
+## What you can do here
+
+**Build and edit functions.** Create a destination, transformation, source webhook, or web script from scratch or from a template, then update it in place. Agents can generate the Hog code, the input schema, and the event filters together.
+
+**Browse templates.** List the available function templates and retrieve one to see its inputs before building on top of it.
+
+**Test before shipping.** Test-invoke a function against a real recent event and read back the request it would have sent. Nothing is delivered, so it's safe to iterate.
+
+**Debug what's already running.** Pull a function's logs and metrics to see successes, failures, and filtered events, then patch the function based on what you find.
+
+**Control ordering and state.** Reorder transformation execution, and enable or disable a function without deleting it.
+
+**Manage batch exports.** List, create, update, and delete batch exports, and request file downloads for exported data.
+
+## Example prompts
+
+- `List my active destinations and tell me which ones are failing.`
+- `Create a transformation that drops events where test_mode is true.`
+- `Test-invoke my Slack destination against a recent event and show me the payload.`
+- `Show me the logs for my HubSpot destination from the last hour.`
+- `Move my PII redaction transformation to run before everything else.`
+- `Disable the destination that's erroring the most.`
+
+## Install the MCP server
+
+The recommended way is the [AI wizard](/docs/ai-engineering/ai-wizard), which supports Claude, Cursor, Windsurf, VS Code, and more:
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds). See the [MCP server documentation](/docs/model-context-protocol) for the full tool list and scopes.
+
+## Related
+
+- Build and monitor the same pipelines in the [web app](/docs/cdp/surfaces/web-app).
+- Manage them from your own systems with the [API](/docs/cdp/surfaces/api).
+- Learn the language behind pipeline functions in the [Hog reference](/docs/hog).

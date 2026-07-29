@@ -91,7 +91,7 @@ export const useProductLinks = () => {
 
 export const apps: AppItem[] = [
     {
-        label: 'Why PostHog?',
+        label: 'About us',
         Icon: <GlassIcon path={WHY_POSTHOG_SILHOUETTE} />,
         url: '/about',
         source: 'desktop',

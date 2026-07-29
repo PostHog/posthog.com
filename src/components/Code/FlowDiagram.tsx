@@ -85,7 +85,7 @@ export function FlowDiagram({
                         <step.icon className="size-5 text-primary shrink-0" />
                         <span className="text-sm leading-tight min-w-0">
                             <span className="text-primary font-medium whitespace-pre-line">
-                                {step.label.replace('\n', ' ')}
+                                {step.label.replaceAll('\n', ' ')}
                             </span>
                             {step.description && <span className="text-secondary"> {step.description}</span>}
                         </span>

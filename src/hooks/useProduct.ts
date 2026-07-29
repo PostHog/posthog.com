@@ -29,12 +29,10 @@ import {
     IconCursorClick,
     IconChat,
     IconAtSign,
-    IconLlmPromptEvaluation,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
-import { replayVision } from './productData/replay_vision'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -61,7 +59,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     slug: 'product-analytics',
         // },
         traces,
-        replayVision,
         {
             name: 'User interviews',
             Icon: IconThoughtBubble,
@@ -1755,17 +1752,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 },
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
-        },
-        {
-            name: 'Replay Vision',
-            Icon: IconLlmPromptEvaluation,
-            description: 'AI-powered session replay analysis that watches recordings for you',
-            handle: 'replay_vision',
-            color: 'yellow',
-            colorSecondary: 'yellow',
-            category: 'product_engineering',
-            slug: 'replay-vision',
-            status: 'beta',
         },
         mcpAnalytics,
         {

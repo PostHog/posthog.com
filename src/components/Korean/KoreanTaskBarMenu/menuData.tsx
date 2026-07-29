@@ -3,9 +3,10 @@ import React from 'react'
 import { docsMenu, handbookSidebar } from '../../../navs'
 import * as Icons from '@posthog/icons'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
+import { getDocsMenuItems } from '../../TaskBarMenu/menuData'
 import {
     categoryOrder,
     categoryDisplayNames,
@@ -182,19 +183,6 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 
     // If the item only has a name, it's a section divider (handled in grouping)
     return null
-}
-
-const getDocsMenuItems = () => {
-    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
-
-    // Remove any item (submenu or section divider) with label 'Docs'
-    items = items.filter((item) => {
-        // Remove if submenu with label 'Docs'
-        if (item.type === 'submenu' && item.label === 'Docs') return false
-        return true
-    })
-
-    return items
 }
 
 const mergedDocsMenu = (allProducts: any[]) => {
@@ -883,8 +871,19 @@ export function useMenuData(): MenuType[] {
             trigger: (
                 <>
                     <div className="flex items-center">
-                        <Logo noText className="2xs:hidden md:block size-8 md:size-6" fill="primary" classic />
-                        <Logo className="hidden 2xs:flex md:hidden w-auto h-5" fill="primary" classic />
+                        <Logo
+                            layout="logomark"
+                            variant="mono"
+                            color="currentColor"
+                            className="text-primary 2xs:hidden md:block size-8 md:size-6"
+                            width="auto"
+                        />
+                        <Logo
+                            variant="mono"
+                            color="currentColor"
+                            className="text-primary hidden 2xs:flex md:hidden w-auto h-5"
+                            width="auto"
+                        />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
