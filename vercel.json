@@ -171,9 +171,9 @@
         },
         {
             "source": "/webhooks",
-            "destination": "/docs/cdp/destinations/webhook",
+            "destination": "/docs/cdp/destinations/webhook"
         },
-        {  
+        {
             "source": "/why",
             "destination": "/about",
             "statusCode": 301
@@ -5480,6 +5480,11 @@
         {
             "source": "/docs/logs/search-logs-ai",
             "destination": "/docs/logs/explain-logs-ai",
+            "statusCode": 301
+        },
+        {
+            "source": "/wizard",
+            "destination": "/docs/ai-engineering/ai-wizard",
             "statusCode": 301
         }
     ]
