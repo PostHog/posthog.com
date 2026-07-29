@@ -1,0 +1,33 @@
+---
+title: Endpoints in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Endpoints is in beta and free to use while it is. [Send us feedback](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue) in app.
+
+</CalloutBox>
+
+The [PostHog web app](https://app.posthog.com/endpoints) is where endpoints get built. You define the query, name it, test it against real parameter values, and then watch how it behaves once your app starts calling it.
+
+Open **Endpoints** in [PostHog](https://app.posthog.com/endpoints) to see every endpoint in the project, with its current version and whether it's materialized. The **New endpoint** menu starts from either a SQL query in the SQL editor or a new or existing insight – see [endpoint types](/docs/endpoints/endpoint-types) for how the two differ once they're live.
+
+## What you can do here
+
+- **[Create a SQL-based endpoint with variables](/docs/endpoints/guide-variables)** – write the query, parameterize it, and publish it.
+- **[Create an insight-based endpoint with breakdowns](/docs/endpoints/guide-breakdown)** – publish a saved insight and expose its breakdown as a parameter.
+- **Test in the playground** – run the endpoint with real variable values and read the response before you write any client code.
+- **Read execution logs** – one entry per run, with duration, row count, cache hit or miss, and the error if it failed. See [usage and logs](/docs/endpoints/usage-analytics).
+- **Manage versions** – every query change saves a [new version](/docs/endpoints/versioning) you can inspect, compare, and pin clients to.
+- **Tune performance** – toggle [materialization](/docs/endpoints/materialization) and set data freshness on the **Configuration** tab.
+- **Fix materialization with [PostHog AI](/docs/posthog-ai)** – when a SQL query isn't eligible for materialization, ask PostHog AI to rewrite it into an equivalent query that is. The rewrite is validated against the live eligibility checks before you see it, and nothing saves until you apply it. It's an interaction mode inside the web app, not a separate surface, and it needs your organization's AI data processing approval.
+
+Each endpoint's page is split into tabs – **Query**, **Configuration**, **Versions**, **Playground**, **Logs**, and **History** – and the **Usage** tab on the Endpoints list aggregates executions, bytes read, CPU time, and error rate across all of them.
+
+## Related
+
+- Build your first endpoint end to end in [Start here](/docs/endpoints/start-here).
+- Call the endpoint from your app over the [API](/docs/endpoints/surfaces/api).
+- Do the same things from your editor over [MCP](/docs/endpoints/surfaces/mcp).
