@@ -3,7 +3,6 @@ import React from 'react'
 import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -376,18 +375,11 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'separator',
         },
         {
-            type: 'item',
-            label: `Browse all tools (${APP_COUNT})`,
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search tools',
+            label: 'Browse tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconSearch className="size-4 text-gray" />,
+            icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
@@ -412,15 +404,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'Plans & usage-based pricing',
+                    label: 'Usage-based pricing',
                     link: '/pricing',
                     icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                    label: 'Platform packages',
+                    link: '/platform-packages',
+                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
                 },
                 {
                     type: 'item',
@@ -446,10 +438,18 @@ export function useMenuData(): MenuType[] {
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
                 },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                },
             ],
         },
         {
             trigger: 'Docs',
+            // Mobile skips the menu — the docs homepage covers the same ground with more room
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -850,25 +850,8 @@ export function useMenuData(): MenuType[] {
                         continue
                     }
 
-                    // Convert submenus with mobileDestination to simple items
-                    if (item.type === 'submenu' && item.mobileDestination) {
-                        filteredItems.push({
-                            ...item,
-                            type: 'item' as const,
-                            link: item.mobileDestination,
-                            items: undefined,
-                        })
-                    }
-                    // Convert submenus with links to simple items
-                    else if (item.type === 'submenu' && item.link) {
-                        filteredItems.push({
-                            ...item,
-                            type: 'item' as const,
-                            items: undefined,
-                        })
-                    } else {
-                        filteredItems.push(item)
-                    }
+                    // Submenus keep their children — MenuBar expands them in place on mobile
+                    filteredItems.push(item)
                 }
 
                 const processedItems = filteredItems
@@ -1065,8 +1048,9 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },

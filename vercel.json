@@ -150,6 +150,36 @@
     ],
     "redirects": [
         {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/getting-started",
             "destination": "/docs/web-analytics/start-here",
             "statusCode": 301
@@ -230,6 +260,11 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
+        {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -1146,6 +1181,10 @@
         },
         {
             "source": "/product/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/trends",
             "destination": "/product-analytics"
         },
         {
