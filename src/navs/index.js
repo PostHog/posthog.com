@@ -2456,6 +2456,10 @@ export const docsMenu = {
                             url: '/docs/libraries',
                         },
                         {
+                            name: 'SDK bootstrapping',
+                            url: '/docs/libraries/bootstrapping',
+                        },
+                        {
                             name: 'JavaScript Web',
                             url: '/docs/libraries/js',
                             badge: {
@@ -4992,7 +4996,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Client-side bootstrapping',
+                    name: 'Bootstrapping feature flags',
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
