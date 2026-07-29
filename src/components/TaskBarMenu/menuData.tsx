@@ -448,8 +448,6 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            // Mobile skips the menu — the docs homepage covers the same ground with more room
-            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -850,8 +848,25 @@ export function useMenuData(): MenuType[] {
                         continue
                     }
 
-                    // Submenus keep their children — MenuBar expands them in place on mobile
-                    filteredItems.push(item)
+                    // Convert submenus with mobileDestination to simple items
+                    if (item.type === 'submenu' && item.mobileDestination) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            link: item.mobileDestination,
+                            items: undefined,
+                        })
+                    }
+                    // Convert submenus with links to simple items
+                    else if (item.type === 'submenu' && item.link) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            items: undefined,
+                        })
+                    } else {
+                        filteredItems.push(item)
+                    }
                 }
 
                 const processedItems = filteredItems
