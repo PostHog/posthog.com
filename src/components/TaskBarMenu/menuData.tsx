@@ -404,15 +404,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'Plans & usage-based pricing',
+                    label: 'Usage-based pricing',
                     link: '/pricing',
                     icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                    label: 'Platform packages',
+                    link: '/platform-packages',
+                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
                 },
                 {
                     type: 'item',
@@ -437,6 +437,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Talk to a human',
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
                 },
             ],
         },
@@ -1057,8 +1063,9 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
