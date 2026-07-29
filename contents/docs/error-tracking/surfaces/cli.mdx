@@ -1,0 +1,28 @@
+---
+title: Use Error Tracking from the CLI
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog CLI](/docs/cli) is how error tracking gets what it needs from your build. Stack traces arrive minified or stripped, so the CLI uploads the debug symbols that turn them back into real file names, functions, and line numbers – and tags each upload with the release that produced it.
+
+This is a build-time and CI surface rather than a place you read issues. You triage and resolve issues in the [web app](/docs/error-tracking/surfaces/web-app) or over [MCP](/docs/error-tracking/surfaces/mcp).
+
+## What you can do here
+
+- **Upload source maps** – inject and upload JavaScript source maps so minified frames resolve to your real code. See [Upload source maps with the CLI](/docs/error-tracking/upload-source-maps/cli).
+- **Upload native debug symbols** – Apple dSYM, Hermes for React Native, and Proguard/R8 mappings for Android, so native and mobile crashes symbolicate too. See [Android mappings](/docs/error-tracking/upload-mappings/android).
+- **Manage symbol sets** – list and download the symbol sets already uploaded to your project.
+- **Tag releases** – uploads made with `posthog-cli sourcemap upload` automatically create [release](/docs/error-tracking/releases) information, so you can tie an exception back to the deploy that introduced it.
+
+Uploads need a personal API key with the `error_tracking:write` scope. See the [CLI docs](/docs/cli) for installation and authentication.
+
+## Run it in CI
+
+Symbol upload belongs in your build pipeline, so every deploy ships readable stack traces. There's a ready-made [GitHub Action](/docs/error-tracking/upload-source-maps/github-actions), and framework integrations for [Next.js](/docs/error-tracking/upload-source-maps/nextjs) and [Nuxt](/docs/error-tracking/upload-source-maps/nuxt) handle the upload step for you.
+
+## Related
+
+- [PostHog CLI](/docs/cli) – installation, authentication, and the full command reference
+- [Stack traces](/docs/error-tracking/stack-traces) – how symbolication works and why uploads matter
+- [Releases](/docs/error-tracking/releases) – tying exceptions to the deploy that caused them

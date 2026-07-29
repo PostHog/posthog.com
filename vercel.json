@@ -976,7 +976,7 @@
         },
         {
             "source": "/handbook/company/branding",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/docs/tutorials/:path*",
@@ -2077,7 +2077,26 @@
         },
         {
             "source": "/docs/error-tracking/debugging-with-mcp",
-            "destination": "/docs/error-tracking/debug-errors-mcp"
+            "destination": "/docs/error-tracking/surfaces/mcp"
+        },
+        {
+            "source": "/docs/error-tracking/debug-errors-mcp",
+            "destination": "/docs/error-tracking/surfaces/mcp"
+        },
+        {
+            "source": "/docs/error-tracking/fix-with-ai-prompts",
+            "destination": "/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/support/surfaces/code",
+            "destination": "/docs/support/surfaces/desktop",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/error-tracking/surfaces/fix-with-ai",
+            "destination": "/docs/error-tracking/surfaces/web-app#fix-with-ai-prompts",
+            "statusCode": 301
         },
         {
             "source": "/docs/logs/debugging-with-mcp",
@@ -3451,20 +3470,16 @@
             "destination": "/session-replay#questions"
         },
         {
-            "source": "/feature-flags/pricing",
-            "destination": "/feature-flags#pricing"
-        },
-        {
             "source": "/feature-flags/customers",
-            "destination": "/feature-flags#customers"
+            "destination": "/feature-flags"
         },
         {
             "source": "/feature-flags/comparisons",
-            "destination": "/feature-flags#posthog-vs"
+            "destination": "/feature-flags#feature-comparison"
         },
         {
             "source": "/feature-flags/documentation",
-            "destination": "/feature-flags#docs"
+            "destination": "/docs/feature-flags"
         },
         {
             "source": "/feature-flags/tutorials",
@@ -3472,27 +3487,75 @@
         },
         {
             "source": "/feature-flags/roadmap",
-            "destination": "/feature-flags#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/feature-flags/questions",
             "destination": "/feature-flags#questions"
         },
         {
+            "source": "/surveys/customers",
+            "destination": "/surveys"
+        },
+        {
+            "source": "/surveys/comparisons",
+            "destination": "/surveys#feature-comparison"
+        },
+        {
+            "source": "/surveys/documentation",
+            "destination": "/docs/surveys"
+        },
+        {
+            "source": "/surveys/tutorials",
+            "destination": "/surveys#tutorials"
+        },
+        {
+            "source": "/surveys/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/surveys/questions",
+            "destination": "/surveys#questions"
+        },
+        {
+            "source": "/experiments/customers",
+            "destination": "/experiments"
+        },
+        {
+            "source": "/experiments/comparisons",
+            "destination": "/experiments#feature-comparison"
+        },
+        {
+            "source": "/experiments/documentation",
+            "destination": "/docs/experiments"
+        },
+        {
+            "source": "/experiments/tutorials",
+            "destination": "/experiments#tutorials"
+        },
+        {
+            "source": "/experiments/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/experiments/questions",
+            "destination": "/experiments#questions"
+        },
+        {
             "source": "/ab-testing/pricing",
-            "destination": "/experiments#pricing"
+            "destination": "/experiments/pricing"
         },
         {
             "source": "/ab-testing/customers",
-            "destination": "/experiments#customers"
+            "destination": "/experiments"
         },
         {
             "source": "/ab-testing/comparisons",
-            "destination": "/experiments#posthog-vs"
+            "destination": "/experiments#feature-comparison"
         },
         {
             "source": "/ab-testing/documentation",
-            "destination": "/experiments#docs"
+            "destination": "/docs/experiments"
         },
         {
             "source": "/ab-testing/tutorials",
@@ -3500,7 +3563,7 @@
         },
         {
             "source": "/ab-testing/roadmap",
-            "destination": "/experiments#roadmap"
+            "destination": "/roadmap"
         },
         {
             "source": "/ab-testing/questions",
@@ -3540,7 +3603,7 @@
         },
         {
             "source": "/logo",
-            "destination": "/handbook/company/brand-assets"
+            "destination": "/handbook/brand/assets"
         },
         {
             "source": "/blog/tags/product-engineer",
@@ -4041,7 +4104,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/experiments#pricing",
+            "destination": "/experiments/pricing",
             "has": [
                 {
                     "type": "query",
@@ -4052,7 +4115,7 @@
         },
         {
             "source": "/pricing",
-            "destination": "/surveys#pricing",
+            "destination": "/surveys/pricing",
             "has": [
                 {
                     "type": "query",
@@ -4536,6 +4599,10 @@
             "destination": "/docs/revenue-analytics"
         },
         {
+            "source": "/docs/revenue-analytics/dashboard",
+            "destination": "/docs/revenue-analytics"
+        },
+        {
             "source": "/revenue-analytics",
             "destination": "/docs/revenue-analytics"
         },
@@ -4848,6 +4915,10 @@
             "destination": "/handbook/growth/cross-selling/how-we-upsell-and-cross-sell"
         },
         {
+            "source": "/handbook/cs-and-onboarding/customer-industry-segments",
+            "destination": "/handbook/growth/sales/customer-industry-segments"
+        },
+        {
             "source": "/startups/[...slug]",
             "destination": "/startups"
         },
@@ -4925,6 +4996,10 @@
         },
         {
             "source": "/handbook/strategy/brand",
+            "destination": "/handbook/brand/foundations"
+        },
+        {
+            "source": "/handbook/content/brand-message",
             "destination": "/handbook/brand/foundations"
         },
         {

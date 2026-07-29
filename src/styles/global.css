@@ -611,10 +611,107 @@ hr {
     }
 }
 
-/* App window + taskbar menu scrollbars — leave rail sizing to the browser so
-   overlay scrollbars can follow the OS visibility preference, while visually
-   floating the thumb clear of rounded corners. MenuBar portals into
-   [data-menu-container] (taskbar), which sits outside AppWindow. */
+/* Shared app scrollbars use Radix-rendered overlay rails so their geometry and
+   scroll-only visibility stay consistent across browsers and OS preferences. */
+
+.app-scrollbar {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    touch-action: none;
+    user-select: none;
+    padding: 2px;
+
+    &[data-orientation='vertical'] {
+        top: 6px !important;
+        right: 2px !important;
+        bottom: 6px !important;
+        width: 10px;
+    }
+
+    &[data-orientation='horizontal'] {
+        right: 6px !important;
+        bottom: 2px !important;
+        left: 6px !important;
+        height: 10px;
+        flex-direction: column;
+    }
+
+    &[data-state='visible'] {
+        animation: app-scrollbar-fade-in 160ms ease-out;
+    }
+
+    &[data-state='hidden'] {
+        animation: app-scrollbar-fade-out 240ms ease-in forwards;
+    }
+}
+
+/* Keep top-level window scrollbars clear of toolbar-less window controls. */
+[data-app='AppWindow']
+    .app-scroll-area:not(.app-scroll-area .app-scroll-area)
+    > .app-scrollbar[data-orientation='vertical'] {
+    top: 32px !important;
+}
+
+@keyframes app-scrollbar-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes app-scrollbar-fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .app-scrollbar {
+        animation-duration: 1ms !important;
+    }
+}
+
+.app-scrollbar-thumb {
+    position: relative;
+    flex: 1;
+    border-radius: 9999px;
+    background-color: rgb(var(--text-primary) / 0.28);
+
+    &:hover {
+        background-color: rgb(var(--text-primary) / 0.4);
+    }
+
+    &:active {
+        background-color: rgb(var(--text-primary) / 0.5);
+    }
+
+    &::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        min-width: 44px;
+        min-height: 44px;
+        content: '';
+        transform: translate(-50%, -50%);
+    }
+}
+
+.app-scrollbar-corner {
+    background: transparent;
+}
+
+/* Native fallback for overflow containers that do not use the shared
+   ScrollArea. MenuBar portals into [data-menu-container] outside AppWindow. */
 
 [data-app='AppWindow'] *::-webkit-scrollbar-track,
 [data-menu-container] *::-webkit-scrollbar-track {
@@ -670,6 +767,10 @@ hr {
 }
 
 @media (forced-colors: active) {
+    .app-scrollbar-thumb {
+        background-color: CanvasText;
+    }
+
     [data-app='AppWindow'] *,
     [data-menu-container] * {
         scrollbar-color: auto;
@@ -3051,6 +3152,22 @@ div[data-radix-popper-content-wrapper] {
     }
     75% {
         transform: translate(calc(-50% + 1.5px), calc(-50% + 1px));
+    }
+}
+
+@keyframes context-warehouse-hog-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate3d(4px, -6px, 0) rotate(0.8deg);
+    }
+    50% {
+        transform: translate3d(-2px, -10px, 0) rotate(-0.6deg);
+    }
+    75% {
+        transform: translate3d(-5px, -4px, 0) rotate(0.4deg);
     }
 }
 

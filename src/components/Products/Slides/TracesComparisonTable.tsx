@@ -1,6 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 
 // Small building blocks for the comparison cells
@@ -38,7 +38,13 @@ export default function TracesComparisonTable(): JSX.Element {
             width: '1fr',
         },
         {
-            name: <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />,
+            name: (
+                <Logo
+                    className="h-5 mx-auto w-auto max-w-full"
+                    variant={isDark ? 'mono' : 'gradient'}
+                    color={isDark ? 'white' : undefined}
+                />
+            ),
             align: 'center' as const,
             width: '1fr',
         },
@@ -55,49 +61,56 @@ export default function TracesComparisonTable(): JSX.Element {
     })
 
     // Feature row: label + one cell per competitor (Better Stack, Datadog, Sentry, PostHog)
-    const featureRow = (label: React.ReactNode, values: React.ReactNode[]) => ({
-        cells: [{ content: label, className: '!items-start text-left font-semibold' }, ...values.map((content) => ({ content }))],
+    const featureRow = (label: React.ReactNode, ...values: React.ReactNode[]) => ({
+        cells: [
+            { content: label, className: '!items-start text-left font-semibold' },
+            ...values.map((content) => ({ content })),
+        ],
     })
 
     const rows = [
         sectionRow('Tracing'),
-        featureRow('Distributed trace waterfall', [<Check />, <Check />, <Check />, <Check />]),
-        featureRow('Service / dependency map', [<Check />, <Check />, <Cross />, <Cross />]),
-        featureRow('Code-level profiling (flame graphs)', [<Cross />, <Check />, <Check />, <Cross />]),
-        featureRow('Sampling & retention controls', [
+        featureRow('Distributed trace waterfall', <Check />, <Check />, <Check />, <Check />),
+        featureRow('Service / dependency map', <Check />, <Check />, <Cross />, <Cross />),
+        featureRow('Code-level profiling (flame graphs)', <Cross />, <Check />, <Check />, <Cross />),
+        featureRow(
+            'Sampling & retention controls',
             <Check />,
             <Check />,
             <span>Head sampling only</span>,
-            <span>Via OTel SDK</span>,
-        ]),
+            <span>Via OTel SDK</span>
+        ),
         sectionRow('Standards & setup'),
-        featureRow('Native OpenTelemetry ingestion', [
+        featureRow(
+            'Native OpenTelemetry ingestion',
             <Check />,
             <CheckWith note="maps to its own model" />,
             <CheckWith note="beta" />,
-            <Check />,
-        ]),
-        featureRow('No proprietary SDK required', [<Check />, <span>Partial</span>, <span>Partial</span>, <Check />]),
-        featureRow('Instrumentation', [
+            <Check />
+        ),
+        featureRow('No proprietary SDK required', <Check />, <span>Partial</span>, <span>Partial</span>, <Check />),
+        featureRow(
+            'Instrumentation',
             <span>eBPF</span>,
             <span>Agent</span>,
             <span>SDK</span>,
-            <span>OpenTelemetry</span>,
-        ]),
+            <span>OpenTelemetry</span>
+        ),
         sectionRow('One platform'),
-        featureRow('Errors, logs & session replay alongside traces', [<Check />, <Check />, <Check />, <Check />]),
+        featureRow('Errors, logs & session replay alongside traces', <Check />, <Check />, <Check />, <Check />),
         sectionRow('AI & self-driving'),
-        featureRow('AI opens a code fix PR', [<Cross />, <Cross />, <CheckWith note="beta" />, <Check />]),
-        featureRow('Fix a bug and open a PR from Slack', [<Cross />, <Cross />, <CheckWith note="beta" />, <Check />]),
+        featureRow('AI opens a code fix PR', <Cross />, <Cross />, <CheckWith note="beta" />, <Check />),
+        featureRow('Fix a bug and open a PR from Slack', <Cross />, <Cross />, <CheckWith note="beta" />, <Check />),
         sectionRow('Pricing & licensing'),
-        featureRow('Pricing model', [
+        featureRow(
+            'Pricing model',
             <span>Per GB ingested</span>,
             <span>Per host + per span</span>,
             <span>Per span</span>,
-            <span>Usage-based, no per-host fee</span>,
-        ]),
-        featureRow('Free tier', [<Check />, <span>Trial only</span>, <Check />, <Check />]),
-        featureRow('Open source', [<Cross />, <Cross />, <span>Source-available (FSL)</span>, <Check />]),
+            <span>Usage-based, no per-host fee</span>
+        ),
+        featureRow('Free tier', <Check />, <span>Trial only</span>, <Check />, <Check />),
+        featureRow('Open source', <Cross />, <Cross />, <span>Source-available (FSL)</span>, <Check />),
     ]
 
     return (

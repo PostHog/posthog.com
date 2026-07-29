@@ -16,14 +16,14 @@ import { QuestLog, QuestLogItem } from "components/Docs/QuestLog";
     icon="IconCode"
 >
 
-There are two ways to get metrics into PostHog, and both take a few minutes.
+There are three ways to get metrics into PostHog, and all take just a few minutes.
 
 If [posthog-js](/docs/libraries/js) is already running on your site, record metrics directly with the `posthog.metrics` API. No new packages, no extra authentication:
 
 ```js
-posthog.metrics.count('checkout.completed')
-posthog.metrics.gauge('cart.items', 3)
-posthog.metrics.histogram('api.request.duration', 187, { unit: 'ms' })
+posthog.metrics.count("checkout.completed");
+posthog.metrics.gauge("cart.items", 3);
+posthog.metrics.histogram("api.request.duration", 187, { unit: "ms" });
 ```
 
 If you use OpenTelemetry anywhere else (backend services, infrastructure, an existing Collector), point your OTLP metrics exporter at PostHog. No PostHog packages are required:
@@ -32,6 +32,13 @@ If you use OpenTelemetry anywhere else (backend services, infrastructure, an exi
 OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="<ph_client_api_host>/i/v1/metrics"
 OTEL_EXPORTER_OTLP_METRICS_HEADERS="Authorization=Bearer <ph_project_token>"
 OTEL_SERVICE_NAME="my-app"
+```
+
+If you run **Kubernetes** and your pods already expose Prometheus metrics, install the PostHog metrics agent Helm chart to scrape and forward them automatically:
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.apiKey=<ph_project_token>
 ```
 
 `<ph_client_api_host>` and `<ph_project_token>` are filled in with your project's values when you're logged in. Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication).
