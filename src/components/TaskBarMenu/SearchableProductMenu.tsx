@@ -28,6 +28,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
         'web_analytics',
         'ai_observability',
         'session_replay',
+        'replay_vision',
         'feature_flags',
         'experiments',
         'error_tracking',
