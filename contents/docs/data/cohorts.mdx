@@ -84,7 +84,7 @@ Groups require additional code in your app to set up, while cohorts are created 
 
 ## How to create a cohort
 
-Once you've captured identified events, there are three ways to create a new cohort:
+Once you've captured identified events, there are several ways to create a new cohort:
 
 ### Method 1: Create a new cohort directly from an insight
 
@@ -132,6 +132,18 @@ Example prompts:
 
 See the [MCP documentation](/docs/model-context-protocol) for setup instructions and the full list of available tools.
 
+### Method 4: Create a cohort from Replay Vision scanner results
+
+If you use [Replay Vision](/docs/replay-vision), you can save the users affected by a scanner's findings as a static cohort. This is useful for targeting those users with surveys, checking their retention, or excluding them from experiments.
+
+1. Go to [Replay Vision](https://app.posthog.com/replay-vision) and open any scanner.
+
+2. In the impact panel, click **Save as cohort** (for monitors) or click the cohort button next to a specific tag (for classifiers).
+
+The cohort is a dated snapshot: it captures the users matched in the trailing window (default 30 days) and won't live-update as new observations come in. Calling it again creates a new cohort. See [scanner types](/docs/replay-vision/scanner-types) for details on what counts as "affected" for each type.
+
+> **Note:** Cohort creation from scanners is capped at 10,000 users per request. Scorers require a score threshold, and summarizers don't support impact cohorts.
+
 ## Static and dynamic cohorts
 
 You have two options when creating a cohort:
@@ -142,7 +154,7 @@ You have two options when creating a cohort:
 
 ### Static cohorts
 
-Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, or by defining criteria for a one-time snapshot.
+Static cohorts are created from insights, by uploading a CSV of users, by selecting users individually, by duplicating a dynamic cohort, by defining criteria for a one-time snapshot, or from [Replay Vision](/docs/replay-vision) scanner results.
 
 When creating cohorts from CSVs, the [person profile](/docs/data/persons) associated with each row must already exist in PostHog.
 

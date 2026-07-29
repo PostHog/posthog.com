@@ -7,7 +7,7 @@ export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/im
 
 <IOSInstall />
 
-> - Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
+> - Requires PostHog iOS SDK version >= [3.6.0](https://github.com/PostHog/posthog-ios/releases), and it's recommended to always use [the latest version](/docs/health-checks/sdk-health).
 > - Session replay is currently only available on iOS. For future macOS support, please follow and upvote [this GitHub issue](https://github.com/PostHog/posthog-ios/issues/200).
 
 <CalloutBox title="Xcode 26" type="caution" icon="IconWarning">
@@ -74,6 +74,14 @@ config.sessionReplayConfig.captureNetworkTelemetry = true
 // The screenshot may contain sensitive information, so use with caution
 config.sessionReplayConfig.screenshotMode = true
 
+// Experimental. Only has an effect when `screenshotMode` is enabled.
+// Moves screenshot capture off the main thread to a background queue, reducing
+// jank on high-refresh-rate (120Hz ProMotion) displays.
+// May trigger Xcode's Main Thread Checker warnings and briefly freeze the app
+// on the first captured screenshot. Default is false.
+// Requires SDK version 3.58.1 or higher.
+config.sessionReplayConfig.screenshotModeBackgroundCapture = false
+
 // Sets the minimum time interval (in seconds) between session replay snapshots.
 // A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
 // Note: Previously known as `debouncerDelay` before version 3.21.0
@@ -100,3 +108,4 @@ config.sessionReplayConfig.sampleRate = nil
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
     - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
     - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).
+- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones when `screenshotMode` is enabled, turn on `config.sessionReplayConfig.screenshotModeBackgroundCapture` (experimental, requires SDK 3.58.1 or higher) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.

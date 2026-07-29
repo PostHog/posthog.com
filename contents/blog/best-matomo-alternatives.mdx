@@ -57,7 +57,7 @@ This means it's not only an alternative to [Matomo](/blog/posthog-vs-matomo) but
 
 Both PostHog and Matomo are multi-product platforms. The big difference between them is that Matomo focuses on websites and content, while PostHog focuses on apps and products.
 
-Another big difference is pricing. Matomo's session replay, heatmaps, and A/B testing are paid add-ons in On-Premise, and heavily capped in Cloud. PostHog includes all of these for free – plus feature flags, error tracking, LLM analytics, and more that Matomo doesn't offer at all.
+Another big difference is pricing. Matomo's session replay, heatmaps, and A/B testing are paid add-ons in On-Premise, and heavily capped in Cloud. PostHog includes all of these for free – plus feature flags, error tracking, AI Observability, and more that Matomo doesn't offer at all.
 
 <p>
 <ProductComparisonTable
@@ -739,6 +739,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 
 ## Frequently asked questions
  
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
 <details>
 <summary>What is Matomo used for?</summary>
 

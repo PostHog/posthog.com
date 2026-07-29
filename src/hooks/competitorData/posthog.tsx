@@ -1,8 +1,3 @@
-import React from 'react'
-import { IconPiggyBank } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import Link from 'components/Link'
-
 export const posthog = {
     name: 'PostHog',
     key: 'posthog',
@@ -46,7 +41,7 @@ export const posthog = {
             monitoring: {
                 features: {
                     cron_monitoring: false,
-                    distributed_tracing: false,
+                    distributed_tracing: 'Alpha',
                     release_tracking: true,
                     performance_monitoring: true,
                 },
@@ -130,6 +125,18 @@ export const posthog = {
                     vendor_agnostic_sdks: true,
                 },
             },
+            search: {
+                features: {
+                    full_text_search: false,
+                    no_proprietary_query_language: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: false,
+                },
+            },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: true,
@@ -147,7 +154,7 @@ export const posthog = {
             observability: {
                 features: {
                     metrics: false,
-                    traces: false,
+                    traces: 'Alpha',
                     infra_monitoring: false,
                     alerting: false,
                 },
@@ -190,15 +197,7 @@ export const posthog = {
                 historical_trends: true,
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
-                monetization_analytics: (
-                    <>
-                        Via{' '}
-                        <Link to="/revenue-analytics" className="group !no-underline" state={{ newWindow: true }}>
-                            <IconPiggyBank className="size-4 inline-block text-green" />{' '}
-                            <span className="group-hover:!underline">Revenue Analytics</span>
-                        </Link>
-                    </>
-                ),
+                monetization_analytics: true,
                 predictive_insights: false,
                 private_insights: true,
                 project_level_permissions: true,
@@ -522,7 +521,7 @@ export const posthog = {
                 built_in_analytics: true,
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
             features: {
                 alerting: true,
@@ -538,6 +537,65 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
+                sentiment_classification: 'Beta',
+                privacy_mode: true,
+                agent_tracing: 'Basic',
+                prompt_management: 'Beta',
+                evaluation_datasets: false,
+                human_annotation: false,
+                session_replay: true,
+                product_analytics: true,
+                ai_gateway_proxy: false,
+            },
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    custom_spans: true,
+                    tool_call_tracking: true,
+                    rag_retrieval_tracking: true,
+                    session_grouping: true,
+                    opentelemetry_support: true,
+                    async_ingestion: true,
+                    multi_model_support: true,
+                    session_replay_link: true,
+                    user_profile_context: true,
+                    sql_queries_on_traces: true,
+                    trace_explorer_ui: 'Basic',
+                },
+            },
+            prompt_management: {
+                features: {
+                    prompt_versioning: 'Beta',
+                    template_variables: 'Beta',
+                    prompt_deployment_api: 'Beta',
+                    version_comparison: 'Beta',
+                    prompt_labels: false,
+                    prompt_playground: true,
+                    composable_prompts: false,
+                    mcp_server_for_prompts: 'Beta',
+                    ab_test_prompt_versions: 'Beta',
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    code_evaluators: true,
+                    annotation_queues: false,
+                    datasets: false,
+                    experiment_runs: false,
+                    ab_experiments_on_product_metrics: true,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    cost_by_model: true,
+                    cost_trends: true,
+                    cost_by_user: true,
+                    cost_by_feature: true,
+                    cost_by_cohort: true,
+                },
             },
         },
         workflows: {

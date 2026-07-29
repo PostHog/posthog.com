@@ -1,9 +1,5 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
-import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
 import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
@@ -12,6 +8,8 @@ import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import AskMax from 'components/AskMax'
 import ReaderView from 'components/ReaderView'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
 
 export const quickLinks = [
     {
@@ -105,36 +103,42 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const Experiments: React.FC<ExperimentsProps> = ({ data }) => {
+const Experiments: React.FC<ExperimentsProps> = () => {
+    const productData = useProduct({ handle: 'experiments' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="experiments" />}>
             <SEO title="Experiments - Docs - PostHog" />
 
-            <Intro
-                subheader="Getting started"
-                title="Experiments"
-                description="Test different variations of your product and measure the impact."
-                buttonText="Roll out your first experiment"
-                buttonLink="/docs/experiments/start-here"
-                imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/ab-testing-hog.png"
-                imageClasses=""
-            />
+            <div className="mx-auto max-w-4xl">
+                <section className="mb-6">
+                    <Intro
+                        subheader="Getting started"
+                        title="Experiments"
+                        description="Test different variations of your product and measure the impact."
+                        buttonText="Roll out your first experiment"
+                        buttonLink="/docs/experiments/start-here"
+                        imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                        imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png"
+                    />
+                </section>
 
-            <AskMax
-                quickQuestions={[
-                    'How can I watch recordings of users in my experiment?',
-                    'Can I override a release condition?',
-                    "How do I know if I've reached statistical significance?",
-                ]}
-            />
+                <AskMax
+                    quickQuestions={[
+                        'How can I watch recordings of users in my experiment?',
+                        'Can I override a release condition?',
+                        "How do I know if I've reached statistical significance?",
+                    ]}
+                />
 
-            <Content />
+                <Content />
 
-            <div className="">
-                <CallToAction to="/docs/experiments/start-here" width="full">
-                    Visit the manual
-                </CallToAction>
+                <div>
+                    <CallToAction to="/docs/experiments/start-here" width="full">
+                        Visit the manual
+                    </CallToAction>
+                </div>
             </div>
         </ReaderView>
     )

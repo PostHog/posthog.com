@@ -14,7 +14,7 @@ export const better_stack = {
         session_replay: {
             available: false,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         logs: {
@@ -27,18 +27,24 @@ export const better_stack = {
                     vendor_agnostic_sdks: true,
                 },
             },
+            search: {
+                features: {
+                    full_text_search: 'Partial',
+                    no_proprietary_query_language: 'SQL',
+                },
+            },
             investigation_workflow: {
                 features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
-                    ai_assisted_log_summaries: false,
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
+                    ai_assisted_log_summaries: true,
                 },
             },
             debugging_integrations: {
                 features: {
-                    built_in_error_tracking: false,
-                    built_in_session_replay: false,
-                    product_analytics_context: false,
+                    built_in_error_tracking: true,
+                    built_in_session_replay: true,
+                    product_analytics_context: true,
                 },
             },
             observability: {
@@ -47,6 +53,12 @@ export const better_stack = {
                     traces: true,
                     alerting: true,
                     infra_monitoring: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: false,
                 },
             },
             pricing: {
@@ -61,8 +73,11 @@ export const better_stack = {
     platform: {
         deployment: {
             self_host: false,
+            open_source: false,
         },
         pricing: {
+            self_serve: true,
+            free_tier: true,
             transparent_pricing: true,
         },
         tools: {

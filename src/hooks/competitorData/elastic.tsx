@@ -24,6 +24,12 @@ export const elastic = {
                     vendor_agnostic_sdks: true,
                 },
             },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
+                },
+            },
             investigation_workflow: {
                 features: {
                     click_to_pivot_investigations: false,
@@ -46,23 +52,32 @@ export const elastic = {
                     infra_monitoring: true,
                 },
             },
+            security_and_compliance: {
+                features: {
+                    siem: true,
+                    enterprise_scale_compliance: true,
+                },
+            },
             pricing: {
                 features: {
                     ingest_only_pricing: false,
                     no_query_compute_fees: false,
-                    predictable_at_scale: false,
+                    predictable_at_scale: 'Tiered',
                 },
             },
         },
-        llm_analytics: {
+        ai_observability: {
             available: true,
         },
     },
     platform: {
         deployment: {
             self_host: true,
+            open_source: 'AGPL / source available',
         },
         pricing: {
+            self_serve: true,
+            free_tier: false,
             transparent_pricing: false,
         },
         tools: {

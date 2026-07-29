@@ -167,7 +167,7 @@ According to [reviews on G2](https://www.g2.com/products/posthog/reviews), compa
   <summary>Main differences between Rollbar and Sentry</summary>
 
 * Sentry includes built-in performance monitoring and distributed tracing; Rollbar focuses purely on error tracking.
-* Sentry offers a self-hosted open-source option; Rollbar is cloud-only and proprietary.
+* Sentry offers a self-hostable, source-available option (its main web app uses the FSL, which converts to Apache-2.0 after two years); Rollbar is cloud-only and proprietary.
 * Sentry's UI is built for large teams managing multiple projects; Rollbar's simplicity suits smaller setups.
 * Sentry has a larger free tier (5k errors vs Rollbar's limited free plan).
 
@@ -648,6 +648,19 @@ It's completely free to get started – no credit card required. Our [AI setup w
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What is Sentry used for?</summary>
 
 **Sentry** is an error tracking and performance monitoring platform that helps developers detect, diagnose, and fix bugs in production. It captures exceptions with detailed stack traces, groups similar errors, and integrates with developer tools like GitHub and Slack for streamlined workflows.
@@ -671,7 +684,7 @@ Common reasons include: needing more context around errors, wanting a more gener
 <details>
   <summary>Which Sentry alternatives are open source?</summary>
 
-**PostHog** is fully open source under the MIT license with a public roadmap. **Sentry** itself is also open source (with a more restrictive license) and offers self-hosting. Most other alternatives like **Rollbar**, **Raygun**, **LogRocket**, and **AppSignal** are proprietary and cloud-only.
+**PostHog** is fully open source under the MIT license with a public roadmap. **Sentry** itself is self-hostable and source-available; its main web app uses the Functional Source License (FSL) and converts to Apache-2.0 after two years. Most other alternatives like **Rollbar**, **Raygun**, **LogRocket**, and **AppSignal** are proprietary and cloud-only.
 
 </details>
 

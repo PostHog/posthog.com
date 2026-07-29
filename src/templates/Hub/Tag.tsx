@@ -29,10 +29,7 @@ const rootOptions = {
 const Post = ({ post }: { post: any }) => {
     const { title, slug, excerpt } = post.attributes
     const { addBookmark, user } = useUser()
-    const isBookmarked = useMemo(
-        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === slug),
-        [user, slug]
-    )
+    const isBookmarked = useMemo(() => user?.profile?.bookmarks?.some((b) => b.url === slug), [user, slug])
     return (
         <li key={post.id}>
             <OSButton asLink to={slug} size="md" width="full" className="justify-between" hover="background">

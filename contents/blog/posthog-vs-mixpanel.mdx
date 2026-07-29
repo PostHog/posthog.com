@@ -73,7 +73,7 @@ As an all-in-one-platform, PostHog isn't just [an alternative to Mixpanel](/blog
         { product: 'experiments' },
         { product: 'surveys' },
         { product: 'error_tracking' },
-        { product: 'llm_analytics' },
+        { product: 'ai_observability' },
         { product: 'cdp' },
         { product: 'data_warehouse' },
         {
@@ -455,7 +455,7 @@ See our docs for full lists of [destinations](/docs/cdp) and [data warehouse sou
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-A Business Associate Agreement for HIPAA compliance is available for customers with our [platforms add-ons](/platform-packages). The add-on also includes priority support, SSO and 2FA enforcement, numerous collaboration features, and support for multiple environments within projects so you can separate dev and production data, but use the same insights and dashboards across them all.
+A Business Associate Agreement for HIPAA compliance is available for customers with one of our [platform packages](/platform-packages). The packages also include priority support, SSO and 2FA enforcement, numerous collaboration features, and support for multiple environments within projects so you can separate dev and production data, but use the same insights and dashboards across them all.
 
 </CalloutBox>
 
@@ -497,6 +497,19 @@ Choosing the right product analytics platform depends on your team's needs and t
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
     <summary>What's the difference between PostHog and Mixpanel?</summary>

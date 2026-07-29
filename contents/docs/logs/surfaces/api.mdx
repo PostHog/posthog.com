@@ -1,0 +1,32 @@
+---
+title: Use the Logs API
+sidebar: Docs
+showTitle: true
+---
+
+The Logs API is the surface for anything you want to script or wire into your own tooling: pulling log records into a dashboard you already run, provisioning alerts alongside the rest of your infrastructure, or keeping sampling rules in version control.
+
+It's a project-scoped REST API and uses the same [authentication](/docs/api) as the rest of PostHog. Note that this is for reading and managing logs – to *send* logs to PostHog you use an [OpenTelemetry client](/docs/logs/installation), not this API.
+
+## What you can do here
+
+| Endpoint | What it's for |
+| --- | --- |
+| `/api/projects/:project_id/logs/` | Query log records with filters |
+| `/api/projects/:project_id/logs/alerts/` | Manage [log alerts](/docs/logs/alerts) |
+| `/api/projects/:project_id/logs/views/` | Manage saved views |
+| `/api/projects/:project_id/logs/sampling_rules/` | Manage sampling and drop rules |
+| `/api/projects/:project_id/logs/metric_rules/` | Manage metric rules derived from log volume |
+
+Each collection supports the usual list, retrieve, create, update, and delete operations. See the [API reference](/docs/api) for request and response shapes.
+
+## When to use the API instead of MCP
+
+Both let you work with logs outside the web app, but they're for different jobs. Use the API when something needs to run repeatably and unattended – a nightly export, an alert defined in Terraform, a status page. Use [MCP](/docs/logs/surfaces/mcp) when you're the one investigating and want an agent to do the querying for you.
+
+## Related
+
+- Explore the same data in the [web app](/docs/logs/surfaces/web-app).
+- Query it conversationally over [MCP](/docs/logs/surfaces/mcp).
+- See the full [PostHog API reference](/docs/api).
+- Send logs in with an [OpenTelemetry client](/docs/logs/installation).
