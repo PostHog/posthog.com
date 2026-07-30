@@ -150,6 +150,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/webhooks",
+            "destination": "/docs/replay-vision/actions#webhooks",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/ai-observability/query-traces-mcp",
             "destination": "/docs/ai-observability/surfaces/mcp",
             "statusCode": 301
