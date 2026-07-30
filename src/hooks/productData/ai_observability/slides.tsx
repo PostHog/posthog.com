@@ -85,7 +85,7 @@ const IntegrationGrid = () => (
                     <Link
                         to={integration.link}
                         state={{ newWindow: true }}
-                        className="flex h-16 items-center justify-center rounded border border-primary bg-primary px-3 text-center hover:border-button"
+                        className="flex h-16 items-center justify-center rounded border border-input bg-primary px-3 text-center hover:border-primary"
                     >
                         {integration.isManualCapture ? (
                             <span className="text-sm font-semibold text-primary">&lt;/&gt; Manual capture</span>
@@ -409,12 +409,6 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: {
-            src: f.analysis.images[0].src,
-            alt: f.analysis.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
-        },
     },
     {
         slug: 'integrations',

@@ -5,8 +5,10 @@ import {
     IconConfetti,
     IconCursorClick,
     IconEye,
+    IconInfo,
     IconList,
     IconLlmAnalytics,
+    IconMagic,
     IconMessage,
     IconNewspaper,
     IconPieChart,
@@ -34,8 +36,8 @@ export const aiObservability = {
     colorSecondary: 'green-2',
     category: 'analytics',
     wizardSupport: 'Coming soon',
-    // TODO: `pricingDescription` – the one-paragraph pricing summary shown next to the
-    // calculator on /ai-observability/pricing. No existing copy to migrate.
+    pricingDescription:
+        'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
         title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
@@ -50,24 +52,20 @@ export const aiObservability = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // The commented-out items below need their icons added to the import above
-        // (IconInfo, IconMagic, IconCode) when they're enabled.
-        // TODO: needs `overview.eli5` copy before enabling.
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // TODO: needs a `useCases` block (intro + role/use-case rows) before enabling.
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -97,16 +95,10 @@ export const aiObservability = {
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
-        // TODO: the shared install taxonomy has no LLM provider category, so the
-        // `installation` section would list generic web/backend SDKs instead of the
+        // No `installation` section: the shared install taxonomy has no LLM provider
+        // category, so it would list generic web/backend SDKs instead of the
         // per-provider guides. The provider grid lives in the Integrations slide of
         // `top-features` until the taxonomy gains an LLM category.
-        // {
-        //     slug: 'installation',
-        //     name: 'Install',
-        //     group: 'divided',
-        //     icon: <IconCode className="size-4" />,
-        // },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -125,7 +117,7 @@ export const aiObservability = {
         title: 'Observe and debug AI in production',
         description:
             'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features – the context agents use to fix LLM behavior.',
-        // TODO: `eli5` – plain-language "what does it do?" paragraph (see session_replay).
+        eli5: "AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Calls that belong to the same conversation or agent run are stitched together into a trace, so a multi-step interaction reads as one story instead of a pile of unrelated requests. It's all captured as regular PostHog events, which is why your LLM data sits next to your product analytics, replays, and errors instead of in a separate tool.",
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -151,6 +143,12 @@ export const aiObservability = {
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
+    // Rendered in the Pricing surface footer CTA. The Product surface uses `hogs` below.
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
+        alt: 'A robot hedgehog',
+        footerClasses: 'max-w-[220px]',
+    },
     hogs: {
         // Reused from the /docs/ai-observability hero – AI Observability has no
         // dedicated product hog yet.
@@ -158,7 +156,10 @@ export const aiObservability = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
             alt: 'A hedgehog with a robot',
         },
-        // TODO: `mobileHog` – the smaller hog used by the "What does it do?" section.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+            alt: 'A hedgehog inspecting a trace with a magnifying glass',
+        },
     },
     slider: {
         marks: [100000, 1000000, 10000000, 100000000],
@@ -183,7 +184,16 @@ export const aiObservability = {
                 'We use our own AI observability product to attribute costs, monitor latency and errors, compare models, and iterate on prompts in production.',
         },
     },
-    // TODO: `useCases` – { intro, rows: [[role, use case], …] } (see session_replay).
+    useCases: {
+        intro: 'AI Observability is used across teams depending on your role.',
+        rows: [
+            ['AI Engineers', 'Debug traces span by span and compare models on cost, latency, and quality'],
+            ['Product Engineers', 'Tie failed generations and latency spikes back to the users who hit them'],
+            ['PMs', 'See which AI features people actually use, and whether using them changes retention'],
+            ['Finance & leadership', 'Attribute token spend to models, features, and individual customers'],
+            ['Support Engineers', 'Read the exact conversation behind a ticket, then watch the session it happened in'],
+        ],
+    },
     features,
     postHogOnPostHog: {
         title: 'How PostHog uses AI Observability',
@@ -319,10 +329,9 @@ export const aiObservability = {
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     ai: {
-        // TODO: `image` / `imageAlt` – the PostHog AI hero art for the AI prompts
-        // section (session replay uses a product-specific illustration).
-        // TODO: `intro` – one sentence above the prompt list ("Ask PostHog AI to …").
-        // TODO: `skills` – bullet list of what PostHog AI can do with this product.
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
+        imageAlt: 'PostHog AI and AI Observability',
+        intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
         mcpFeatures: ['llm_analytics'],
         // Prompts lifted from contents/docs/ai-observability/query-traces-mcp.mdx.
         // Tool names verified against src/data/mcp-tools.json; groups without a
