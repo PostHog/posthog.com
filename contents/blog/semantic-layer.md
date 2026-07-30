@@ -28,7 +28,7 @@ The problem is that "MRR", what it means at PostHog, which table holds it, and h
 
 Humans have this problem too. Every new analyst re-learns which revenue table is the real one and how Stripe is connected each time they join a new company. Agents just amplify the issue by answering confidently and hallucinating to fill the gaps in their knowledge, and nobody thinks to double check it.
 
-You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR" means the same thing on every call. That place is the semantic layer, and this is the story of building it into PostHog's context warehouse.
+You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR" means the same thing on every call. That place is the semantic layer, and this is the story of building it into [PostHog's context warehouse.](/blog/what-is-a-context-warehouse)
 
 <!-- SCREENSHOT: the same "what was our MRR last month?" question producing different SQL / different answers across two agents --> ![What was our MRR last month](XX)
 
