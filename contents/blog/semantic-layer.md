@@ -6,15 +6,17 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 author:
+    - thiago-rocha-salvatore
     - lizzie-epton
-featuredImageType: full
+featuredImageType: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/semantic_layer_blog_header_a19ba93b69.png
 category: General
 tags:
-    - Data warehouse
-    - PostHog news
+    - Context Warehouse
+    - Data Modeling
 seo:
     metaTitle: Our context warehouse knows your data, the semantic layer tells it what to trust
-    metaDescription: "A semantic layer is a governed catalog of definitions that sits on top of your existing data and tells agents and people what to trust. Here's how we built one into PostHog's context warehouse."
+    metaDescription: A semantic layer is a governed catalog of definitions that sits on top of your existing data and tells agents and people what to trust. Here's how we built one into PostHog's context warehouse.
 ---
 
 Ask Claude, Cursor, and PostHog's own AI the same question: "what was our MRR last month?", and you'll get three different queries and three different numbers.
@@ -27,7 +29,8 @@ Humans have this problem too. Every new analyst re-learns which revenue table is
 
 You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR" means the same thing on every call. That place is the semantic layer, and this is the story of building it into PostHog's context warehouse.
 
-<!-- SCREENSHOT: the same "what was our MRR last month?" question producing different SQL / different answers across two agents -->
+<!-- SCREENSHOT: the same "what was our MRR last month?" question producing different SQL / different answers across two agents --> ![What was our MRR last month](XX)
+
 
 ## What is a semantic layer?
 
@@ -58,7 +61,7 @@ The design decision that integrates the semantic layer so fully is that **the ca
 
 The reason three tools gave three MRR numbers is that each had to invent an answer. Now the first thing any agent does is check the catalog: is there an approved metric? If so, it runs the governed definition instead of writing its own SQL. Same question, same number, every time.
 
-<!-- SCREENSHOT: the typed-confirm approval flow in an MCP client — agent proposes, human types "confirm" -->
+<!-- SCREENSHOT: the typed-confirm approval flow in an MCP client — agent proposes, human types "confirm" -->![What was our MRR last month](XX)
 
 ## AI generates, a human owns
 
