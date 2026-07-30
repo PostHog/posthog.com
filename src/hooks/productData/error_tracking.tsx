@@ -1,16 +1,14 @@
 import React from 'react'
 import { IconWarning } from '@posthog/icons'
 import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 
 export const errorTracking = {
+    ...getTool('error_tracking'),
     Icon: IconWarning,
-    name: 'Error Tracking',
-    slug: 'error-tracking',
-    handle: 'error_tracking',
     type: 'error_tracking',
     color: 'orange',
     colorSecondary: 'red',
-    category: 'product_engineering',
     wizardSupport: true,
     shortDescription: 'Catch and fix issues with full context',
     seo: {
