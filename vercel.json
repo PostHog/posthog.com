@@ -150,6 +150,36 @@
     ],
     "redirects": [
         {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/web-analytics/getting-started",
             "destination": "/docs/web-analytics/start-here",
             "statusCode": 301
@@ -230,6 +260,11 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
+        },
+        {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -1146,6 +1181,10 @@
         },
         {
             "source": "/product/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/trends",
             "destination": "/product-analytics"
         },
         {
@@ -2464,6 +2503,10 @@
             "destination": "/questions/topic/session-replay"
         },
         {
+            "source": "/questions/topic/ai-observability",
+            "destination": "/questions/topic/llm-analytics"
+        },
+        {
             "source": "/blog/customer-churn-analysis-guide",
             "destination": "/blog/churn-rate-vs-retention-rate"
         },
@@ -2486,6 +2529,10 @@
         {
             "source": "/ab-testing/features",
             "destination": "/experiments"
+        },
+        {
+            "source": "/ai-observability/features",
+            "destination": "/ai-observability#top-features"
         },
         {
             "source": "/product-os/features",
@@ -3970,6 +4017,34 @@
         {
             "source": "/ab-testing/questions",
             "destination": "/experiments#questions"
+        },
+        {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
         },
         {
             "source": "/handbook/what-is-posthog",

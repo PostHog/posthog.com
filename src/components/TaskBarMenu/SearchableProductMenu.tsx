@@ -1,8 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
-import { APP_COUNT } from '../../constants'
-import * as Icons from '@posthog/icons'
 
 interface Product {
     name: string
@@ -17,19 +15,32 @@ interface Product {
 
 interface SearchableProductMenuProps {
     products: Product[]
+    // Injected by MenuBar so selecting a product closes the whole menu, matching
+    // the behavior of regular menu items.
+    onCloseMenu?: () => void
 }
 
-const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products }) => {
+const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products, onCloseMenu }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 
-    // Slugs to hide from the searchable menu
-    const hiddenSlugs = [
-        'ai',
-        'data-stack/sources',
-        'data-stack/reverse-etl-export',
-        'data-stack/data-modeling',
-        'data-stack',
+    // The curated set of tools to show, in this exact order. Identified by `handle`
+    // so display labels come straight from the product data (already correctly cased).
+    const orderedHandles = [
+        'product_analytics',
+        'web_analytics',
+        'ai_observability',
+        'session_replay',
+        'replay_vision',
+        'feature_flags',
+        'experiments',
+        'error_tracking',
+        'logs',
+        'endpoints',
+        'workflows_emails',
+        'surveys',
+        'heatmaps',
+        'group_analytics',
     ]
 
     // Custom labels for specific products
@@ -46,8 +57,10 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
 
     // Simple fuzzy search - matches if all characters appear in order (case insensitive)
     const filteredProducts = useMemo(() => {
-        // First filter out hidden products and products without categories (already filtered out from browsed navigation and products)
-        let filtered = products.filter((product) => !hiddenSlugs.includes(product.slug) && product.category)
+        // Build the curated list in the specified order
+        let filtered = orderedHandles
+            .map((handle) => products.find((product) => product.handle === handle))
+            .filter((product): product is Product => Boolean(product))
 
         if (searchTerm.trim()) {
             const searchLower = searchTerm.toLowerCase()
@@ -66,12 +79,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
             })
         }
 
-        // Sort alphabetically by display name
-        return [...filtered].sort((a, b) => {
-            const aName = customLabels[a.slug] || a.name
-            const bName = customLabels[b.slug] || b.name
-            return aName.localeCompare(bName)
-        })
+        return filtered
     }, [products, searchTerm])
 
     return (
@@ -110,6 +118,7 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
                                     key={`${product.slug}-${index}-${searchTerm}`}
                                     to={`/${product.slug}`}
                                     state={{ newWindow: true }}
+                                    onClick={() => onCloseMenu?.()}
                                     className="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-accent text-primary no-underline group"
                                 >
                                     <span
@@ -122,24 +131,10 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products 
                                         <div className="font-medium truncate">
                                             {customLabels[product.slug] || product.name}
                                         </div>
-                                        {product.description && (
-                                            <div className="text-xs text-muted truncate">{product.description}</div>
-                                        )}
                                     </div>
                                 </Link>
                             )
                         })}
-
-                        <div className="border-t border-border mt-2 pt-2">
-                            <Link
-                                to="/products"
-                                state={{ newWindow: true }}
-                                className="flex items-center gap-2 px-2 py-1.5 text-sm rounded hover:bg-accent-2 text-primary no-underline font-medium"
-                            >
-                                <Icons.IconApps className="size-4 text-red" />
-                                Browse all tools ({APP_COUNT})
-                            </Link>
-                        </div>
                     </>
                 ) : (
                     <div className="text-center py-4 text-muted text-sm">No tools found for "{searchTerm}"</div>

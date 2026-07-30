@@ -9,6 +9,7 @@ import {
     IconGraph,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { getTool } from '../../data/tools'
 
 // MCP Analytics is an alpha product (@posthog/mcp on npm) with a dedicated scene in the app
 // gated behind the `mcp-analytics` early access feature. Copy here is sourced from the docs in
@@ -18,21 +19,14 @@ import OSButton from 'components/OSButton'
 // opt-in links to the early access feature in the app (identity isn't shared with the website).
 
 export const mcpAnalytics = {
-    name: 'MCP Analytics',
+    ...getTool('mcp_analytics'),
     Icon: IconPlug,
-    description: 'See how agents actually use your MCP server',
-    handle: 'mcp_analytics',
     type: 'mcp_analytics',
-    slug: 'mcp-analytics',
     color: 'blue',
     colorSecondary: 'sky-blue',
-    category: 'analytics',
     // Wizard install (`npx @posthog/wizard mcp-analytics`) ships via a context-mill
     // release. Flip to `true` once that release is live; 'In development' until then.
     wizardSupport: 'In development',
-    // Alpha, gated behind the `mcp-analytics` early access feature. 'beta' renders the badge on
-    // the overview slide and keeps the product clickable in nav (only 'WIP' is disabled).
-    status: 'beta',
     seo: {
         title: 'MCP Analytics – See how agents use your MCP server in PostHog',
         description:
