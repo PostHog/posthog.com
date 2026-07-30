@@ -1,6 +1,6 @@
 # WizardProvisioning
 
-A provisioning flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The full architecture (including the monorepo side) is documented in `wizard-provisioning-rfc.md` at the repo root.
+A provisioning flow that takes over the `/wizard` hero: a visitor connects GitHub, picks a repository, and PostHog provisions them an account in the background, runs the setup wizard in the cloud, and opens an instrumentation pull request on their repo. The partner-facing side of the API this calls is documented at [/docs/integrate/github-grants](https://posthog.com/docs/integrate/github-grants); the implementation is `ee/api/agentic_provisioning/` in the monorepo.
 
 All server work happens in the `src/api/wizard/*` Gatsby Functions, which talk to the PostHog agentic provisioning API as a **confidential CIMD partner**: the client metadata document lives at `static/.well-known/posthog.com.json` and declares `private_key_jwt`, so each partner call carries an assertion signed with the key in `CIMD_CLIENT_PRIVATE_KEY` (see `src/lib/cimd`). PKCE is still used at token exchange. The GitHub grant endpoints require a confidential client, which is why the key exists. This component is a state machine over those functions' responses.
 
@@ -25,7 +25,7 @@ Because the hero mounts `<WizardProvisioning />` only when enabled, the componen
 ## State machine
 
 ```
-idle ── Connect GitHub ──▶ connecting ──(redirect)──▶ github-start → GitHub OAuth → github/callback
+idle ── Connect GitHub ──▶ connecting ──(redirect)──▶ github/start → GitHub OAuth → github/callback
                                                                         │ ?wizard=connected
 loading ◀───────────────────────────────────────────────────────────────┘
    │ session → repos
@@ -44,7 +44,7 @@ Redirect legs land on `/wizard?wizard=connected|done|degraded|error&code=…`; t
 
 ## Error handling
 
-Mirrors the "Error handling on posthog.com" table in the RFC:
+Every error code the server functions can redirect with, and what the UI does with it:
 
 - **Restartable** (`github_denied`, `github_auth`, `grant_exchange`, `grant_expired`, `resume_expired`, `install_timeout`, `no_repos`, `fetch_failed`): specific copy + "Connect GitHub" (or inline retry for `fetch_failed`) + manual fallback.
 - **Terminal, no account created** (`provisioning_failed`, `rate_limited`, `consent_denied`, `consent_failed`): manual-signup fallback is the primary action; consent variants state "No changes were made".
@@ -68,9 +68,13 @@ Mirrors the "Error handling on posthog.com" table in the RFC:
 
 None are `GATSBY_`-prefixed — they must never reach the client bundle.
 
-Registration is per region and is not automatic: `node bin/register-cimd-client.mjs` registers the
-client against both US and EU and prints each diagnostic check. Re-run it after changing the
-metadata document or the keys.
+Registration is per region (US and EU are separate deployments with separate databases), but it
+is not a deploy step here: `provisioning.ts` self-heals by calling
+`POST /api/agentic/provisioning/client_registration` once on a 401 that names it, and that call
+re-fetches the metadata document and re-runs every check. To register or re-check by hand (after
+changing the document or rotating the keys), use the interactive registration on
+[the provisioning docs](https://posthog.com/docs/integrate/provisioning#register-your-client),
+which reports each region's diagnostics.
 
 ## Mock-mode walkthrough
 
@@ -90,7 +94,7 @@ Magic repositories drive every scenario (state resets when the dev server restar
 | `mock-dev/existing-user` | `requires_auth` → interstitial → local consent round trip → `?wizard=done` |
 | `mock-dev/rate-limited` | 429 → rate-limit error panel |
 
-Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange simulates the one-time CIMD `202 registering` delay, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github/callback?error=access_denied` renders the denial error, and each `/wizard?wizard=error&code=…` URL renders its copy directly.
+Also exercisable: the first two repo polls return "not installed" (awaiting-install state), the first grant exchange sleeps to stand in for the one-time client-registration round trip, `/api/wizard/repos?mock_expire=1` force-expires the grant, `/api/wizard/github/callback?error=access_denied` renders the denial error, and each `/wizard?wizard=error&code=…` URL renders its copy directly.
 
 The confirm step always shows an editable email field, defaulted from the GitHub-supplied address (empty when GitHub exposes none); the entered value is what `provision` sends to `account_requests`.
 
@@ -100,7 +104,7 @@ All parsing lives in `src/lib/wizard/provisioning.ts`. Reconciled against the mo
 
 - [x] `POST …/github/grants` returns `{grant_id, gh_login, email, expires_in: 3600}` — email fetched server-side (`/user/emails`), `email` is `string | null` (null = GitHub has no verified email; still a usable grant). The account email is collected **inline** in the confirm step (defaulted from this value when present), so `provision` sends the entered address to `account_requests`, not the grant's copy.
 - [x] `email_unavailable` is now a **502** meaning the GitHub App lacks the "Email addresses (read)" permission (PostHog-side misconfig) — handled as a **terminal** error + manual fallback (like `github_unavailable`), NOT the inline-email path. The no-verified-email case is the `email: null` success above, not this.
-- [x] `GET …/github/grants/{id}/repositories` requires a **confidential** client like the create call, and being a `GET` it carries `client_assertion` / `client_assertion_type` as **query parameters** (no body to put them in). Returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. **`installation_id` is a string** (upstream emits it as one) — kept as a string end-to-end, never parsed to a number. Any 404 → restart Phase A.
+- [x] `GET …/github/grants/{id}/repositories` requires a **confidential** client like the create call, and being a `GET` it carries `client_assertion` / `client_assertion_type` as **query parameters** (no body to put them in). Returns `{gh_login, installations: [{id, account_login, repository_selection}], repositories: [{installation_id, full_name, default_branch, private}]}` — no `installed` flag (installed iff `installations` non-empty); repos capped at 300/installation (never treated as exhaustive); each repo carries its own `installation_id`. **`installation_id` is a string** (upstream emits it as one) — kept as a string end-to-end, never parsed to a number. Any 404 → the grant is gone, so restart from the GitHub connect step.
 - [x] `configuration.wizard` block `{grant_id, installation_id, repository, branch?}`; partial failure is **HTTP 200** with `wizard.error` (bundled-block failure code `run_creation_failed`) alongside `oauth.code` — we branch on presence of `wizard.error`, not status.
 - [x] Retry path: exchange OAuth code → `github_integration` (idempotent) → `wizard_runs`. The `wizard_runs` action returns `{status:"complete", id, wizard_run:{task_id, run_id, status}}` (run nested under `wizard_run`, not `complete`); `github_integration` returns `{status:"complete", id, github_integration:{…}}`. Wizard-run budget is 2/h, 5/day (shared with the bundled path) → exactly one retry, then degraded.
 - [x] `available_teams[0]` is the bootstrap/consented team on the token response.
