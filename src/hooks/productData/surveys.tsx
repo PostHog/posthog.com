@@ -1,4 +1,5 @@
 import React from 'react'
+import { getTool } from '../../data/tools'
 import {
     IconMessage,
     IconEye,
@@ -18,6 +19,7 @@ import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
 
 export const surveys = {
+    ...getTool('surveys'),
     Icon: IconMessage,
     name: 'Surveys',
     description: 'Ask users anything with no-code surveys',
@@ -28,7 +30,6 @@ export const surveys = {
     forumTopicId: 347,
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
     pricingDescription:
         'Your first 1500 survey responses are free every month, then pay for what you use. No limits on surveys created or questions asked.',

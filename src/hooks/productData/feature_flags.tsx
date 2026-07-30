@@ -17,19 +17,16 @@ import {
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
+import { getTool } from '../../data/tools'
 
 export const featureFlags = {
+    ...getTool('feature_flags'),
     Icon: IconToggle,
-    name: 'Feature Flags',
-    description: 'Control feature access with precision',
-    handle: 'feature_flags',
     type: 'feature_flags',
-    slug: 'feature-flags',
     teamSlug: 'feature-flags',
     forumTopicId: 360,
     color: 'seagreen',
     colorSecondary: 'seagreen',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     shortDescription: 'Control feature access with precision',
     pricingDescription:

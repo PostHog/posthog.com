@@ -17,19 +17,17 @@ import {
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
+import { getTool } from '../../data/tools'
 
 export const sessionReplay = {
+    ...getTool('session_replay'),
     Icon: IconRewindPlay,
-    name: 'Session Replay',
     label: 'Web recordings',
-    handle: 'session_replay',
     type: 'session_replay',
-    slug: 'session-replay',
     teamSlug: 'replay',
     forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
-    category: 'product_engineering',
     wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',

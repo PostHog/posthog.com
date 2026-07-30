@@ -15,26 +15,23 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, topFeatures } from './ai_observability/slides'
 
 export const aiObservability = {
-    name: 'AI Observability',
+    ...getTool('ai_observability'),
     Icon: IconLlmAnalytics,
-    description: 'Track costs, performance, and usage of your AI features',
-    handle: 'ai_observability',
     type: 'ai_observability',
     // The billing service still exposes this product under its original type
     // (`llm_analytics`) from before the "AI Observability" rename. Billing data is
     // joined on this value so pricing/calculator surfaces can find it.
     billingType: 'llm_analytics',
-    slug: 'ai-observability',
     teamSlug: 'ai-observability',
     // Community topic is still labelled `llm-analytics` in the forum.
     forumTopicId: 390,
     color: 'purple',
     colorSecondary: 'green-2',
-    category: 'analytics',
     wizardSupport: 'Coming soon',
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
