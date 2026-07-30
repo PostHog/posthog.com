@@ -252,7 +252,7 @@ export const productAnalytics = {
                     surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It counts how many people reached each step – landing page, signup form, first project – and compares every step against last week',
+                        'It counts how many people reached each step (landing page, signup form, first project) and compares those counts against last week',
                         'It names the step that fell, and you go fix it',
                     ],
                     outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
