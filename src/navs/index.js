@@ -4826,8 +4826,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Improving accuracy',
-                    url: '/docs/replay-vision/quality',
+                    name: 'Calibration',
+                    url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
                 },

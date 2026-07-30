@@ -150,6 +150,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/replay-vision/quality",
+            "destination": "/docs/replay-vision/calibration",
+            "statusCode": 301
+        },
+        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
