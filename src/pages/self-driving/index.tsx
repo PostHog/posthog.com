@@ -209,7 +209,7 @@ const loopTabs: TabbedCarouselTab[] = [
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/report_177cacd2dd.png"
             >
                 <p className="m-0">
-                    A signal is a single observation about your product. Signal sources are the pipes that produce them:
+                    A signal is a single observation about your product.
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-x-4 gap-y-3 @sm:grid-cols-2">
                     {signalSources.map(({ Icon, color, name, description }) => (
@@ -240,7 +240,7 @@ const loopTabs: TabbedCarouselTab[] = [
                 image={LOOP_SCOUTS_IMAGE}
             >
                 <p className="m-0">
-                    Scouts <Badge>Beta</Badge> run on a schedule and build durable memory of what they've seen.
+                    Scouts run on a schedule and build durable memory of what they've seen.
                 </p>
                 <IconGroupColumns groups={scoutGroups} />
             </TabPanel>
@@ -261,9 +261,7 @@ const loopTabs: TabbedCarouselTab[] = [
                 image={LOOP_INBOX_IMAGE}
             >
                 <p className="m-0">
-                    The Inbox <Badge>Beta</Badge> clusters related findings into researched reports, ranked by priority.
-                    Reviewers are suggested from git blame (whoever last touched that bit of code) – add your own if
-                    someone else should take a look.
+                    Your Inbox clusters related findings into researched reports, ranked by priority.
                 </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-4 @sm:grid-cols-3">
                     <div>
