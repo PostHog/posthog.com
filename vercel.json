@@ -3919,6 +3919,30 @@
             "destination": "/session-replay#questions"
         },
         {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
             "source": "/feature-flags/customers",
             "destination": "/feature-flags"
         },

@@ -1,26 +1,115 @@
 import React from 'react'
-import { IconWarning } from '@posthog/icons'
-import MCPInstall from 'components/Products/MCPInstall'
+import {
+    IconWarning,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconConfetti,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
+    IconCursorClick,
+    IconChat,
+    IconCode,
+} from '@posthog/icons'
+import { features } from './error_tracking/features'
+import { applications, topFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
 
 export const errorTracking = {
     ...getTool('error_tracking'),
     Icon: IconWarning,
     type: 'error_tracking',
+    teamSlug: 'error-tracking',
+    // forumTopicId: unknown – community section stubbed until verified
     color: 'orange',
     colorSecondary: 'red',
     wizardSupport: true,
     shortDescription: 'Catch and fix issues with full context',
+    // pricingDescription: gap – see content gaps list
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
             'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
+    /**
+     * Sections rendered on the Product surface (`/error-tracking`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        // Content gaps – uncomment when copy lands:
+        // {
+        //     slug: 'eli5',
+        //     name: 'What does it do?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconInfo className="size-4" />,
+        // },
+        // {
+        //     slug: 'use-cases',
+        //     name: 'Who is it for?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconMagic className="size-4" />,
+        // },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        // Community stubbed until forumTopicId is verified:
+        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/error-tracking/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Track errors and resolve issues',
         description:
             'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix.',
+        // eli5: gap – see content gaps list
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -48,8 +137,6 @@ export const errorTracking = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_impact_light_2c8fd5ef48.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_impact_dark_586d389b43.png',
             alt: 'Error impact',
-            // classes: 'justify-end items-end pl-4 @lg:pl-6',
-            // imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
     videos: {
@@ -62,6 +149,13 @@ export const errorTracking = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
         alt: 'Just another hedgehog',
         classes: 'absolute bottom-0 right-0 max-w-[250px]',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
+            alt: 'Just another hedgehog',
+        },
+        // mobileHog: gap – see content gaps list
     },
     slider: {
         marks: [100000, 1000000, 10000000, 50000000],
@@ -81,128 +175,47 @@ export const errorTracking = {
                 "We ditched our previous error tracking SaaS so we could manage errors, see session replays, and do analytics all in one place. It's exactly what we were looking for.",
         },
     },
-    features: [
-        {
-            title: 'Stack traces',
-            headline: 'Stack traces',
-            description:
-                "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',
-                    alt: 'Stack traces',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Alerts',
-            headline: 'Alerts',
-            description: 'Get notified in real time by email, Slack, or webhook when issues occur',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_54_2x_81605f7812.png',
-                    alt: 'Alert',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Monitor issues',
-            headline: 'Monitor issues',
-            description: 'Stay on top of issues as they happen based on event triggers, filters, and trends',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgre_98426bdbdb.png',
-                    alt: 'Triage',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Manage and organize',
-            headline: 'Manage and organize',
-            description: 'Merge issues, sort by frequency or recency, and group issues with custom rules',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_organize_94b4d00ea2.png',
-                    alt: 'Organize and prioritize',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Assign and triage',
-            headline: 'Assign and triage',
-            description: 'Auto-assign issues to individuals or groups',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png',
-                    alt: 'Assign and triage',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Investigate and resolve',
-            headline: 'Investigate and resolve',
-            description:
-                'Use PostHog session replay to investigate and resolve issues with the complete customer context an agent needs to ship the fix',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_session_replay_investigate_da4ee40642.gif',
-                    alt: 'Investigate and resolve',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Target affected users',
-            headline: 'Target affected users',
-            description: 'Revert feature flag roll out to users who are affected by an issue',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png',
-                    alt: 'Target affected users',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Debug errors from your editor',
-            description:
-                'Triage issues, inspect stack traces, and generate fixes from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            features: [
-                {
-                    title: 'Inspect error details',
-                    description: 'Give your agent access to full stack traces, error messages, and relevant metadata.',
-                },
-                {
-                    title: 'Reproduce errors',
-                    description:
-                        'Identify failure points and perform root cause analysis using the captured stack trace context.',
-                },
-                {
-                    title: 'Debug and create fixes',
-                    description: 'Prompt your agent to generate code fixes based on the error details.',
-                },
-                {
-                    title: 'Update issue status',
-                    description:
-                        'Mark issues as resolved, archived, suppressed, or pending release directly from your code editor.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
+    // useCases: gap – see content gaps list
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Debug errors from your editor',
+        description:
+            'Triage issues, inspect stack traces, and generate fixes from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        // description: gap – see content gaps list
+        productSlug: 'error-tracking',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
+    postHogOnPostHog: {
+        title: 'How PostHog uses Error Tracking',
+        benefits: [
+            {
+                title: 'Track errors',
+                description: 'and identify spikes in exception events',
+            },
+            {
+                title: 'Investigate root causes',
+                description: 'using stack traces and session replays',
+            },
+            {
+                title: 'Triage issues',
+                description: 'by filtering based on severity and impact',
+            },
+            {
+                title: 'Find out when things go wrong',
+                description: 'by setting up alerts for critical errors',
+            },
+            {
+                title: 'Dodge blame',
+                description: 'by assigning errors to someone else',
+            },
+        ],
+    },
+    answersDescription: 'Track and resolve errors and exceptions in your application',
     questions: [
         {
             question: 'How can I analyze error patterns?',
@@ -218,7 +231,7 @@ export const errorTracking = {
         },
         {
             question: 'How can I reduce error tracking costs?',
-            url: '/docs/error-tracking/cutting-costs',
+            url: '/docs/error-tracking/pricing',
         },
         {
             question: 'How do stack traces work?',
@@ -299,31 +312,6 @@ export const errorTracking = {
         rows: ['error_tracking'],
         excluded_sections: ['platform.libraries'],
     },
-    postHogOnPostHog: {
-        title: 'How PostHog uses Error Tracking',
-        benefits: [
-            {
-                title: 'Track errors',
-                description: 'and identify spikes in exception events',
-            },
-            {
-                title: 'Investigate root causes',
-                description: 'using stack traces and session replays',
-            },
-            {
-                title: 'Triage issues',
-                description: 'by filtering based on severity and impact',
-            },
-            {
-                title: 'Find out when things go wrong',
-                description: 'by setting up alerts for critical errors',
-            },
-            {
-                title: 'Dodge blame',
-                description: 'by assigning errors to someone else',
-            },
-        ],
-    },
     integrations: ['ab_experiments', 'product_analytics', 'session_replays'],
     pairsWith: [
         {
@@ -343,15 +331,25 @@ export const errorTracking = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
         imageAlt: 'PostHog AI and error tracking',
         description: 'investigate the exception and ship the fix',
+        // intro: gap – see content gaps list
+        mcpFeatures: ['error_tracking'],
         skills: [
             'Finds specific errors and affected users with natural language',
             'Summarizes stack traces, explains likely causes (and likely fixes)',
             'Surfaces exceptions worth prioritizing based on impact and downstream metrics',
         ],
-        prompts: [
-            'Find the most common frontend errors this week',
-            'Which errors impact user sign-ups the most?',
-            'Summarize new issues introduced after the latest release',
+        // Existing prompts reshaped into groups; tool names verified against mcp-tools.json.
+        // Do not invent additional prompts here.
+        groups: [
+            {
+                title: 'Find',
+                tool: 'query-error-tracking-issues-list',
+                prompts: [
+                    'Find the most common frontend errors this week',
+                    'Which errors impact user sign-ups the most?',
+                    'Summarize new issues introduced after the latest release',
+                ],
+            },
         ],
     },
     presenterNotes: {
