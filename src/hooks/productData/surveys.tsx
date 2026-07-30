@@ -195,8 +195,8 @@ export const surveys = {
         ],
     },
     useCaseRamp: {
-        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog code.',
-        scenario: 'Dozens of users ask for the same feature: exporting their data to CSV',
+        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog work proactively.',
+        scenario: 'Dozens of users ask for the same missing feature: a way to export their data',
         columns: [
             {
                 level: 'Do it yourself',

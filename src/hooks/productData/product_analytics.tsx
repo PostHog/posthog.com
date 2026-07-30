@@ -213,7 +213,7 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog code.',
+        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively.',
         scenario: 'Fewer people are finishing signup than last week',
         columns: [
             {
@@ -252,7 +252,7 @@ export const productAnalytics = {
                     surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It queries the same funnel you would have built by hand and compares each step against last week',
+                        'It counts how many people reached each step – landing page, signup form, first project – and compares every step against last week',
                         'It names the step that fell, and you go fix it',
                     ],
                     outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
@@ -292,9 +292,9 @@ export const productAnalytics = {
                         body: 'The scout reads the same funnels and events you built by hand. That data is what turns "something changed" into a clear cause and a pull request you can trust.',
                     },
                     {
-                        title: 'More data, sharper fixes',
+                        title: 'More data, better fixes',
                         icon: 'IconTrends',
-                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise.",
+                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise. Pipe in a source like HubSpot or Gong and your deals, tickets, and sales calls sit alongside that behavior, so a report can name which accounts a drop actually cost you.",
                     },
                 ],
             },

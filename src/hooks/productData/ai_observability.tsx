@@ -198,7 +198,7 @@ export const aiObservability = {
         ],
     },
     useCaseRamp: {
-        intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent what your AI features cost and how fast they are, or let PostHog code.',
+        intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent what your AI features cost and how fast they are, or let PostHog work proactively.',
         scenario: 'Your model spend doubles overnight and nobody knows why',
         columns: [
             {
