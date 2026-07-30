@@ -1560,9 +1560,6 @@ const appSettings: AppSettings = {
     '/error-tracking': {
         toolbar: true,
     },
-    '/logs': {
-        toolbar: true,
-    },
     '/workflows': {
         toolbar: true,
     },
