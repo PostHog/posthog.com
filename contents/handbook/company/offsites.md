@@ -131,6 +131,22 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
+## Other London recommendations
+
+Visiting the Hedge House from out of town? Here are some local spots the team recommends for food, drinks, and things to do:
+
+- [Fare](https://www.farelondon.com/). Good Italian food and drinks in a relaxed atmosphere, 2 minutes walk from the Hedge House.
+- [Space Talk](https://www.spacetalklondon.com/). A hi-fi cocktail bar with a cosy vibe, 2 minutes walk from the Hedge House.
+- [The Slaughtered Lamb](https://www.urbanpubsandbars.com/venues/slaughtered-lamb). A busy London pub suitable for large groups, next door to the Hedge House.
+- [The Holy Tavern](https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d23938423-Reviews-The_Holy_Tavern-London_England.html). One of the UK's oldest pubs and a PostHog favourite during summer, 7 minutes walk from the Hedge House.
+- [Gazette](https://www.gazettebrasserie.co.uk/clerkenwell). French restaurant inside the Marrable's Hotel, just 3 minutes walk from the Hedge House.
+- [Flight Club](https://flightclubdarts.com/uk/london-shoreditch/). Social darts, food and drinks for large groups, many locations.
+- [The Bill Murray](https://www.angelcomedy.co.uk/bill-murray/). North London comedy club with regular shows, good for small groups.
+- [West End shows](https://www.londontheatre.co.uk/). Wide variety of shows, with ticket prices much lower than in the US.
+- [Museums](https://www.visitlondon.com/things-to-do/sightseeing/london-attraction/museum). London has a wide variety of free museums, many with late-night events.
+
+For more, check the [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) — it has a canvas with further details for visitors, including how to use the Hedge House music system.
+
 ## Border Control
 
 Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
