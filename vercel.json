@@ -149,55 +149,9 @@
         }
     ],
     "redirects": [
-        { "source": "/docs/posthog-ai/overview", "destination": "/docs/posthog-ai", "statusCode": 301 },
         {
-            "source": "/docs/posthog-ai/platform-and-chat-ui",
-            "destination": "/docs/posthog-ai/surfaces/web-app",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/replay-vision/quality",
-            "destination": "/docs/replay-vision/calibration",
-            "statusCode": 301
-        },
-        {
-            "source": "/activity",
-            "destination": "/docs/activity",
-            "statusCode": 301
-        },
-        {
-            "source": "/profiles",
-            "destination": "/docs/data/anonymous-vs-identified-events",
-            "statusCode": 301
-        },
-        {
-            "source": "/notebooks",
-            "destination": "/docs/notebooks",
-            "statusCode": 301
-        },
-        {
-            "source": "/toolbar",
-            "destination": "/docs/toolbar",
-            "statusCode": 301
-        },
-        {
-            "source": "/webhooks",
-            "destination": "/docs/cdp/destinations/webhook",
-            "statusCode": 301
-        },
-        {
-            "source": "/why",
-            "destination": "/about",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/web-analytics/getting-started",
-            "destination": "/docs/web-analytics/start-here",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/web-analytics/query-traffic-mcp",
-            "destination": "/docs/web-analytics/surfaces/mcp",
+            "source": "/docs/ai-observability/query-traces-mcp",
+            "destination": "/docs/ai-observability/surfaces/mcp",
             "statusCode": 301
         },
         {
@@ -271,11 +225,6 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
-        },
-        {
-            "source": "/r/posthog-observability",
-            "destination": "/r/observability",
-            "permanent": true
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -1192,10 +1141,6 @@
         },
         {
             "source": "/product/trends",
-            "destination": "/product-analytics"
-        },
-        {
-            "source": "/trends",
             "destination": "/product-analytics"
         },
         {
@@ -2248,11 +2193,6 @@
             "destination": "/docs/session-replay/installation"
         },
         {
-            "source": "/docs/session-replay/search-replays-mcp",
-            "destination": "/docs/session-replay/surfaces/mcp",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/session-replay/data-retention",
             "destination": "/docs/session-replay/recording-retention"
         },
@@ -2514,10 +2454,6 @@
             "destination": "/questions/topic/session-replay"
         },
         {
-            "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
-        },
-        {
             "source": "/blog/customer-churn-analysis-guide",
             "destination": "/blog/churn-rate-vs-retention-rate"
         },
@@ -2540,10 +2476,6 @@
         {
             "source": "/ab-testing/features",
             "destination": "/experiments"
-        },
-        {
-            "source": "/ai-observability/features",
-            "destination": "/ai-observability#top-features"
         },
         {
             "source": "/product-os/features",
@@ -3930,30 +3862,6 @@
             "destination": "/session-replay#questions"
         },
         {
-            "source": "/error-tracking/customers",
-            "destination": "/error-tracking"
-        },
-        {
-            "source": "/error-tracking/comparisons",
-            "destination": "/error-tracking#feature-comparison"
-        },
-        {
-            "source": "/error-tracking/documentation",
-            "destination": "/docs/error-tracking"
-        },
-        {
-            "source": "/error-tracking/tutorials",
-            "destination": "/error-tracking#tutorials"
-        },
-        {
-            "source": "/error-tracking/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/error-tracking/questions",
-            "destination": "/error-tracking#questions"
-        },
-        {
             "source": "/feature-flags/customers",
             "destination": "/feature-flags"
         },
@@ -4076,58 +3984,6 @@
         {
             "source": "/ab-testing/questions",
             "destination": "/experiments#questions"
-        },
-        {
-            "source": "/ai-observability/customers",
-            "destination": "/ai-observability"
-        },
-        {
-            "source": "/ai-observability/comparisons",
-            "destination": "/ai-observability#feature-comparison"
-        },
-        {
-            "source": "/ai-observability/documentation",
-            "destination": "/docs/ai-observability"
-        },
-        {
-            "source": "/ai-observability/tutorials",
-            "destination": "/docs/ai-observability/tutorials"
-        },
-        {
-            "source": "/ai-observability/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/ai-observability/questions",
-            "destination": "/ai-observability#community"
-        },
-        {
-            "source": "/llm-analytics/pricing",
-            "destination": "/ai-observability/pricing"
-        },
-        {
-            "source": "/endpoints/customers",
-            "destination": "/endpoints"
-        },
-        {
-            "source": "/endpoints/comparisons",
-            "destination": "/endpoints#feature-comparison"
-        },
-        {
-            "source": "/endpoints/documentation",
-            "destination": "/docs/endpoints"
-        },
-        {
-            "source": "/endpoints/tutorials",
-            "destination": "/docs/endpoints"
-        },
-        {
-            "source": "/endpoints/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/endpoints/questions",
-            "destination": "/endpoints#community"
         },
         {
             "source": "/handbook/what-is-posthog",
@@ -5612,6 +5468,159 @@
             "source": "/docs/logs/search-logs-ai",
             "destination": "/docs/logs/explain-logs-ai",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/overview",
+            "destination": "/docs/posthog-ai",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/platform-and-chat-ui",
+            "destination": "/docs/posthog-ai/surfaces/web-app",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/quality",
+            "destination": "/docs/replay-vision/calibration",
+            "statusCode": 301
+        },
+        {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/getting-started",
+            "destination": "/docs/web-analytics/start-here",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/query-traffic-mcp",
+            "destination": "/docs/web-analytics/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
+        },
+        {
+            "source": "/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/docs/session-replay/search-replays-mcp",
+            "destination": "/docs/session-replay/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/questions/topic/ai-observability",
+            "destination": "/questions/topic/llm-analytics"
+        },
+        {
+            "source": "/ai-observability/features",
+            "destination": "/ai-observability#top-features"
+        },
+        {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/endpoints/customers",
+            "destination": "/endpoints"
+        },
+        {
+            "source": "/endpoints/comparisons",
+            "destination": "/endpoints#feature-comparison"
+        },
+        {
+            "source": "/endpoints/documentation",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/tutorials",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/endpoints/questions",
+            "destination": "/endpoints#community"
         }
     ]
 }
