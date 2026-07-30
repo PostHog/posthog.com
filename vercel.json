@@ -4130,6 +4130,30 @@
             "destination": "/endpoints#community"
         },
         {
+            "source": "/workflows/customers",
+            "destination": "/workflows"
+        },
+        {
+            "source": "/workflows/comparisons",
+            "destination": "/workflows#feature-comparison"
+        },
+        {
+            "source": "/workflows/documentation",
+            "destination": "/docs/workflows"
+        },
+        {
+            "source": "/workflows/tutorials",
+            "destination": "/workflows#tutorials"
+        },
+        {
+            "source": "/workflows/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/workflows/questions",
+            "destination": "/workflows"
+        },
+        {
             "source": "/handbook/what-is-posthog",
             "destination": "/handbook/why-does-posthog-exist"
         },
@@ -4692,6 +4716,17 @@
                     "type": "query",
                     "key": "product",
                     "value": "logs"
+                }
+            ]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/workflows/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "workflows"
                 }
             ]
         },
