@@ -155,7 +155,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 - **Query across everything with HogQL.** Join PostHog events with Stripe revenue data, HubSpot contacts, or your Postgres database in a single SQL query. No separate BI tool required for many use cases.
 - **Built into the analytics platform.** The Data Warehouse isn't a separate product. It's integrated with Product Analytics, dashboards, cohorts, and every other PostHog feature. External data becomes first-class data.
 - **Lightweight warehouse for early-stage teams.** Teams without Snowflake/BigQuery get warehouse capabilities as part of PostHog. No separate vendor, no separate setup.
-- **Bidirectional data flow.** Data Warehouse brings external data *into* PostHog. Batch Exports and Pipelines push PostHog data *out*. Two-way integration with the customer's data stack, not just one direction.
+- **Bidirectional data flow.** Data Warehouse brings external data *into* PostHog. Batch Exports and Pipelines push PostHog data *out*. Two-way integration with the customer's data stack.
  
 ### Competitor quick reference
  

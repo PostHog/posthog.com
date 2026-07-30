@@ -11,7 +11,7 @@ hideAnchor: false
 
 - Catch exceptions and regressions before users report them
 - See the user's actual experience when an error occurred, not just a stack trace
-- Understand the *business impact* of incidents (which users were affected, what revenue was at risk), not just the technical impact
+- Understand the *business impact* of incidents: which users were affected, what revenue was at risk
 - Centralize log collection and search alongside error data, and follow a slow request across services
 - Triage incidents faster with natural language queries
 
@@ -135,7 +135,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 - Reduced MTTR (mean time to resolution) from instant session replay access on errors
 - Fewer user-reported bugs (proactive error detection + alerting)
-- Better incident prioritization based on business impact, not just error count
+- Better incident prioritization based on business impact
 - Observability cost reduction through consolidation (replace Sentry + separate logging)
 - Engineering leadership gets business-impact reporting on reliability, not just technical metrics
 

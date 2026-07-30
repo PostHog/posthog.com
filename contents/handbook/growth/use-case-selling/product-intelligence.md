@@ -155,7 +155,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 **TAM-facing:**
 
 - Customer expands from Product Analytics-only to multi-product (Session Replay, Surveys, Experiments)
-- Multiple product team members (PMs, designers) are active, not just engineers
+- Multiple product team members (PMs, designers) are active
 - Experiment usage grows (indicates the product team is using PostHog for decisions, not just reporting)
 - Workflow usage starts (they're closing the insight-to-action loop)
 

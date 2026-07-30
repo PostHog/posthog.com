@@ -12,7 +12,7 @@ hideAnchor: false
 - Track model performance: latency, cost per query, token usage, error rates across providers and models
 - Evaluate AI output quality and detect regressions after prompt or model changes
 - Understand how users actually interact with AI-generated output (not just whether the model responded)
-- A/B test prompts, models, and parameters against real user behavior metrics, not just model-level metrics
+- A/B test prompts, models, and parameters against real user behavior metrics
 - Monitor cost attribution by user, organization, or feature so you know where your OpenAI bill is going
 - Catch model failures, hallucinations, and timeouts alongside traditional application errors
 
@@ -49,7 +49,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 
 - AI Observability → AI Evals: They can see model performance metrics (latency, cost, tokens). They need to know if the output is actually *good*. Evals score quality and detect regressions after changes.
 - AI Evals → Product Analytics: They know the model is performing well technically. But are users actually getting value from the AI features? Product Analytics tracks how users interact with AI output: acceptance rates, regeneration rates, downstream conversion.
-- Product Analytics → Experiments: They've identified differences in AI feature performance. Now they want to test improvements: different prompts, different models, different parameters. Experiments lets them A/B test with real user behavior as the success metric, not just model benchmarks.
+- Product Analytics → Experiments: They've identified differences in AI feature performance. Now they want to test improvements: different prompts, different models, different parameters. Experiments lets them A/B test with real user behavior as the success metric.
 - Experiments → Error Tracking: They're iterating on AI features. Error Tracking catches model failures, rate limit errors, and timeouts. Combined with AI Observability, they get the full picture: exception + model context.
 - Error Tracking → Session Replay: They're catching errors and measuring metrics. Session Replay shows them *how users experience* AI features, especially in ambiguous cases where the model didn't error but the output wasn't helpful.
 
@@ -124,7 +124,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 - One platform for model performance, output quality, user behavior, and business outcomes
 - Cost attribution by user, organization, and feature so the team knows where the AI budget goes
 - Automated quality evaluation after every prompt or model change
-- A/B testing of prompts and models measured against real user behavior, not just model benchmarks
+- A/B testing of prompts and models measured against real user behavior
 - AI errors caught proactively alongside traditional application errors
 - The full picture: model trace → output quality score → user interaction → business outcome, all connected
 

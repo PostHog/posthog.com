@@ -83,7 +83,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 | Persona | Role Examples | What They Care About | How They Evaluate |
 |---|---|---|---|
 | Growth Engineer | Growth Eng, PLG Engineer, GTM Engineer | Conversion funnels, activation metrics, experiment velocity, pipeline reliability | "Can I build a full-funnel view from ad click to paid conversion in one tool?" |
-| Marketing Lead | Head of Marketing, VP Demand Gen, Marketing Ops | Channel attribution, ROAS, campaign performance, cost per acquisition | "Can I see which campaigns actually drive revenue, not just clicks?" |
+| Marketing Lead | Head of Marketing, VP Demand Gen, Marketing Ops | Channel attribution, ROAS, campaign performance, cost per acquisition | "Can I see which campaigns actually drive revenue?" |
 | CRO / Growth PM | Growth PM, CRO Specialist, Head of Growth | Conversion rate optimization, experiment velocity, activation rates. Needs engineering to implement experiments, making this persona the key multithreading catalyst. | "Can I run experiments on our signup flow and measure revenue impact? How fast can engineering implement a test?" |
 | Founding Growth | Founder, first growth hire at early-stage startup | All of the above. Wearing all hats. Speed, simplicity, not paying for 5 tools | "How fast can I set this up and how many tools does it replace?" |
 | Marketing Analyst | Marketing Analyst, Data Analyst (Marketing) | Data accuracy, attribution modeling, cohort analysis, reporting | "Can I trust this data? Can I build reports without engineering help?" |
@@ -231,7 +231,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 - **Scope:** Instrument their primary acquisition funnel: landing page → signup → activation event → first conversion/payment. Add [UTM tracking](/docs/data/utm-segmentation) and connect [web analytics](/docs/web-analytics/start-here). If they have paid campaigns, set up [Marketing Analytics](/docs/web-analytics/marketing-analytics).
 - **Timeline:** 2 to 4 weeks to see meaningful data. Channel attribution and funnel insights start showing value within the first week if traffic is decent. [Experiments](/docs/experiments) need enough traffic for statistical significance, so timeline varies.
-- **Success criteria:** Can you answer: "Which channel drives the most *activated* users (not just signups)?" Can you see the full [funnel](/docs/product-analytics/funnels) from first visit to conversion? Can you tell which campaigns are worth the spend?
+- **Success criteria:** Can you answer: "Which channel drives the most *activated* users?" Can you see the full [funnel](/docs/product-analytics/funnels) from first visit to conversion? Can you tell which campaigns are worth the spend?
 - **PostHog investment:** Web Analytics and Product Analytics free tiers cover a substantial evaluation. Marketing Analytics (beta) is included. Surveys and Experiments have generous free tiers.
 - **Key requirement:** They need to instrument key conversion events (signup, activation, purchase/upgrade) with proper [UTM parameters](/docs/data/utm-segmentation). If they want Pipelines, they need API credentials for their ad platforms or CRM. See the [performance marketing tutorial](/tutorials/performance-marketing) for a step-by-step walkthrough.
 

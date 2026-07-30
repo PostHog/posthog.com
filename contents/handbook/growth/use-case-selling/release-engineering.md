@@ -114,7 +114,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 ### Desired state
 
 - Every feature ships behind a flag with gradual rollout and instant kill switch capability
-- Every release is measured against real business metrics, not just error rates
+- Every release is measured against real business metrics
 - When a user reports a bug in a new feature, engineers can watch their exact session filtered by flag variant
 - Growth team experiments and engineering rollouts use the same infrastructure
 - Flag, experiment, and analytics data live in one platform, so the full picture is visible without switching tools
