@@ -29,10 +29,9 @@ export const workflows = {
     color: 'teal',
     colorSecondary: 'green-2',
     includeAddonRates: true,
-    // From the previous CustomPricingSlide on /workflows (marketing page).
-    // Docs pricing-table.mdx has slightly different tier rates — verify before publishing.
+    // Matches billing API / pricing page (Emails + Destinations free tiers + first paid tiers).
     pricingDescription:
-        'First 10,000 messages free per channel each month. Then starts at $0.005/message for email, $0.02/message for SMS, $0.0015/message for push, and $0.00075/event for CDP destinations — with volume discounts as usage grows.',
+        'First 10,000 emails and 10,000 destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
         title: 'Workflows – Automate workflows with product data',
         description:
@@ -166,7 +165,10 @@ export const workflows = {
                 'Product Marketers',
                 'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
             ],
-            ['Growth', 'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior'],
+            [
+                'Growth Engineers',
+                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+            ],
             [
                 'Product Engineers',
                 'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',

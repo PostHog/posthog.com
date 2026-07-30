@@ -194,7 +194,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.workflow_builder.images[0].src,
             alt: f.workflow_builder.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -222,7 +221,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.messaging.images[0].src,
             alt: f.messaging.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -250,7 +248,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.flow_logic.images[0].src,
             alt: f.flow_logic.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -278,7 +275,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.channels.images[0].src,
             alt: f.channels.images[0].alt,
-            glow: true,
         },
     },
     {
