@@ -8,17 +8,18 @@ import {
     IconPeople,
     IconRewindPlay,
     IconToggle,
+    IconTrends,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
-import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
+import { LabeledList, InlineCode } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Only MCP exists in current error-tracking content; other application slides are a content gap.
+ * Copy reshaped from the old ProductOS benefits slide, feature blurbs, and docs surfaces.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -59,6 +60,97 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+    },
+    {
+        slug: 'investigate',
+        label: 'Investigate',
+        icon: <IconRewindPlay className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'See exactly how an error happened',
+        description: (
+            <>
+                <p>
+                    Open an issue, inspect the stack trace, then jump into the matching session replay so you can
+                    reproduce what the user did – not guess from a support ticket.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Session replay',
+                                description:
+                                    'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue.',
+                            },
+                            {
+                                label: 'Stack traces',
+                                description: f.stack_traces.description,
+                            },
+                            {
+                                label: 'User profiles',
+                                description: (
+                                    <>
+                                        See all <InlineCode>$exception</InlineCode> events for specific users in their
+                                        event history log and find which feature flags were enabled at the time an error
+                                        occurred.
+                                    </>
+                                ),
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.investigate_resolve.images[0].src,
+            alt: f.investigate_resolve.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'prioritize',
+        label: 'Prioritize & fix',
+        icon: <IconTrends className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Decide what to fix – then ship the fix safely',
+        description: (
+            <>
+                <p>
+                    Sure you can use error tracking solo, but it's better with other PostHog products – graph impact,
+                    then roll back or canary a fix without a full redeploy.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Product analytics',
+                                description: (
+                                    <>
+                                        Graph your <InlineCode>$exception</InlineCode> events, use filters and
+                                        breakdowns to determine where errors happen and what to prioritize.
+                                    </>
+                                ),
+                            },
+                            {
+                                label: 'Feature flags',
+                                description:
+                                    'Test fixes by rolling out code changes only to affected users – or revert a rollout when an issue spikes.',
+                            },
+                            {
+                                label: 'Alerts',
+                                description: f.alerts.description,
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: { ref: 'impact', glow: true },
     },
 ]
 

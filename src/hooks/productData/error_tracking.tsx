@@ -8,9 +8,12 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
+    IconInfo,
     IconCursorClick,
+    IconMagic,
     IconChat,
     IconCode,
+    IconMessage,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
 import { applications, topFeatures } from './error_tracking/slides'
@@ -21,12 +24,13 @@ export const errorTracking = {
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
-    // forumTopicId: unknown – community section stubbed until verified
+    forumTopicId: 389,
     color: 'orange',
     colorSecondary: 'red',
     wizardSupport: true,
     shortDescription: 'Catch and fix issues with full context',
-    // pricingDescription: gap – see content gaps list
+    pricingDescription:
+        'Error Tracking is billed on $exception events ingested. You get 100k free every month, then pay for what you use – no per-seat charges.',
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
@@ -42,21 +46,20 @@ export const errorTracking = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // Content gaps – uncomment when copy lands:
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -89,8 +92,7 @@ export const errorTracking = {
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
-        // Community stubbed until forumTopicId is verified:
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
@@ -109,7 +111,7 @@ export const errorTracking = {
         title: 'Track errors and resolve issues',
         description:
             'Error tracking is one of the tools that makes your product self-driving: every exception is tied to the user who hit it, so agents have the context to ship the fix.',
-        // eli5: gap – see content gaps list
+        eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it. Those same exceptions feed Self-driving, which groups recurring issues and can open pull requests you review and merge.",
         textColor: 'text-black', // tw
     },
     screenshots: {
@@ -155,7 +157,11 @@ export const errorTracking = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
             alt: 'Just another hedgehog',
         },
-        // mobileHog: gap – see content gaps list
+        // Reuses the Error Tracking AI hog art (same pattern as feature flags / product analytics).
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
+            alt: 'A hedgehog investigating an error',
+        },
     },
     slider: {
         marks: [100000, 1000000, 10000000, 50000000],
@@ -175,7 +181,24 @@ export const errorTracking = {
                 "We ditched our previous error tracking SaaS so we could manage errors, see session replays, and do analytics all in one place. It's exactly what we were looking for.",
         },
     },
-    // useCases: gap – see content gaps list
+    useCases: {
+        intro: 'Error Tracking is used across teams depending on your role.',
+        rows: [
+            [
+                'Product & Growth Engineers',
+                'Get notified when new issues happen, identify impact, and have the context to ship the fix',
+            ],
+            [
+                'Founders',
+                'Know when early users hit any exception – especially valuable when shipping multiple times a week',
+            ],
+            [
+                'Support Engineers',
+                'Pull quick context on user-reported errors to triage severity and share details with product engineers',
+            ],
+            ['DevOps / SRE', 'Control cost, track releases, and group high-volume exceptions (coverage still growing)'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -186,7 +209,7 @@ export const errorTracking = {
     installation: {
         title: 'Install',
         headline: 'Install',
-        // description: gap – see content gaps list
+        description: 'SDKs for web, mobile, and backend – then upload source maps so stack traces stay readable.',
         productSlug: 'error-tracking',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
@@ -331,24 +354,54 @@ export const errorTracking = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/ERROR_TRACKING_2f807c123b.png',
         imageAlt: 'PostHog AI and error tracking',
         description: 'investigate the exception and ship the fix',
-        // intro: gap – see content gaps list
+        intro: 'Ask PostHog AI to find issues, inspect stack traces, and help ship the fix.',
         mcpFeatures: ['error_tracking'],
         skills: [
             'Finds specific errors and affected users with natural language',
             'Summarizes stack traces, explains likely causes (and likely fixes)',
             'Surfaces exceptions worth prioritizing based on impact and downstream metrics',
         ],
-        // Existing prompts reshaped into groups; tool names verified against mcp-tools.json.
-        // Do not invent additional prompts here.
+        // Prompts from product data + /docs/error-tracking/surfaces/mcp.
+        // Tool names verified against mcp-tools.json.
         groups: [
             {
                 title: 'Find',
                 tool: 'query-error-tracking-issues-list',
                 prompts: [
                     'Find the most common frontend errors this week',
+                    'Show me my most common errors.',
                     'Which errors impact user sign-ups the most?',
+                    'Which error is causing the most crashes in production?',
                     'Summarize new issues introduced after the latest release',
                 ],
+            },
+            {
+                title: 'Inspect',
+                tool: 'query-error-tracking-issue-events',
+                prompts: [
+                    "What's the full stack trace for the most recent error?",
+                    'Create a fix and show me how to reproduce the error with the highest severity.',
+                ],
+            },
+            {
+                title: 'Update status',
+                tool: 'error-tracking-issues-partial-update',
+                prompts: ['Mark this issue as resolved.', 'Set all high-severity errors from today to suppressed.'],
+            },
+            {
+                title: 'Assignment rules',
+                tool: 'error-tracking-assignment-rules-create',
+                prompts: ['Create an assignment rule that assigns all TypeError exceptions to the backend team.'],
+            },
+            {
+                title: 'Grouping rules',
+                tool: 'error-tracking-grouping-rules-update',
+                prompts: ['Update the filters on my grouping rule to also match NullPointerException errors.'],
+            },
+            {
+                title: 'External issues',
+                tool: 'error-tracking-external-references-create',
+                prompts: ['Create a Jira issue for the top error and link it to the PostHog issue.'],
             },
         ],
     },
