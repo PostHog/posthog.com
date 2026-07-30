@@ -4,21 +4,22 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
-import WizardCommand from 'components/WizardCommand'
-import { SignalsCallout } from 'components/Code/SignalsCallout'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
+import useProduct from 'hooks/useProduct'
+import { useApp } from '../../context/App'
 import {
-    IconArrowRight,
+    IconArrowUpRight,
     IconAtSign,
     IconBolt,
     IconCheckCircle,
     IconCode,
     IconCoffee,
     IconCompass,
+    IconDashboard,
+    IconDatabase,
     IconLock,
     IconPeople,
     IconPlug,
@@ -28,7 +29,6 @@ import {
     IconShieldLock,
     IconSparkles,
     IconStack,
-    IconTarget,
     IconTerminal,
     IconWarning,
 } from '@posthog/icons'
@@ -46,18 +46,8 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-const coloredHighlightClasses = {
-    blue: 'bg-blue/10 text-blue dark:bg-blue/20',
-    purple: 'bg-purple/10 text-purple dark:bg-purple/20',
-}
-
-const ColoredHighlight = ({ children, color }: { children: React.ReactNode; color: 'blue' | 'purple' }) => (
-    <span className={`rounded-sm px-0.5 ${coloredHighlightClasses[color]}`}>{children}</span>
-)
-
 const flowingGradientClasses = {
     default: 'from-yellow via-green to-blue',
-    chill: 'from-red-2 via-purple/70 to-blue-2',
 }
 
 const FlowingGradientHighlight = ({
@@ -89,10 +79,6 @@ const IconList = ({ items }: { items: { Icon: IconComponent; color: string; text
             </li>
         ))}
     </ul>
-)
-
-const Callout = ({ children }: { children: React.ReactNode }) => (
-    <div className="mt-3 rounded border border-yellow bg-yellow/10 px-3 py-2 text-sm text-secondary">{children}</div>
 )
 
 // Titled columns of icon + label, like the Slack app "ship a fix" slide.
@@ -161,8 +147,7 @@ const TabPanel = ({
                     </>
                 ) : null}
             </h2>
-            {/* text-[15px] matches the page body copy – the codebase defines .prose-sm as text-[15px] */}
-            <div className="text-secondary text-[15px]">{children}</div>
+            <div className="text-secondary">{children}</div>
             <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
                 <CloudinaryImage src={image} alt={fullTitle} imgClassName="w-full block" />
             </div>
@@ -249,17 +234,6 @@ const loopTabs: TabbedCarouselTab[] = [
                         </div>
                     ))}
                 </div>
-                <Callout>
-                    On their own, raw signals are noisy. Grouped into a{' '}
-                    <Link
-                        to="/docs/self-driving/reports"
-                        state={{ newWindow: true }}
-                        className="font-semibold text-red dark:text-yellow"
-                    >
-                        report
-                    </Link>
-                    , they become a single thing you can act on.
-                </Callout>
             </TabPanel>
         ),
     },
@@ -281,7 +255,6 @@ const loopTabs: TabbedCarouselTab[] = [
                     Scouts <Badge>Beta</Badge> run on a schedule and build durable memory of what they've seen.
                 </p>
                 <IconGroupColumns groups={scoutGroups} />
-                <Callout>We run a troop of 35 scouts on the PostHog web app.</Callout>
             </TabPanel>
         ),
     },
@@ -383,104 +356,10 @@ const loopTabs: TabbedCarouselTab[] = [
                         </p>
                     </div>
                 </div>
-                <Callout>
-                    <strong className="text-primary">Best part:</strong> the agents babysit CI and rerun flaky jobs
-                    until the PR is actually mergeable.
-                </Callout>
             </TabPanel>
         ),
     },
 ]
-
-const slackReports: { label: string; src: CloudinarySrc }[] = [
-    { label: 'P0', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P0_report_in_slack_21ed6fa69a.png' },
-    {
-        label: 'P1 · Replay',
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P1_report_in_slack_replay_5fcf5aac7d.png',
-    },
-    {
-        label: 'P1 · Zendesk',
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P1_report_in_slack_zendesk_316671edcb.png',
-    },
-    { label: 'P2', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P2_report_in_slack_b35af9738a.png' },
-    { label: 'P3', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P3_report_in_slack_97d9c6d8d4.png' },
-    { label: 'P4', src: 'https://res.cloudinary.com/dmukukwp6/image/upload/P4_report_in_slack_7119174383.png' },
-]
-
-// Scattered, tilted report screenshots in an infinite, centered loop – like the PostHog AI prompt cards.
-const SlackReportsRow = (): JSX.Element => {
-    const railRef = React.useRef<HTMLDivElement>(null)
-    // Three copies so the user can scroll endlessly in either direction.
-    const loopReports = [...slackReports, ...slackReports, ...slackReports]
-
-    const copyWidth = (rail: HTMLDivElement): number => {
-        const cards = rail.children
-        if (cards.length <= slackReports.length) return 0
-        return (cards[slackReports.length] as HTMLElement).offsetLeft - (cards[0] as HTMLElement).offsetLeft
-    }
-
-    const centerCard = (rail: HTMLDivElement, index: number) => {
-        const card = rail.children[index] as HTMLElement | undefined
-        if (card) rail.scrollLeft = card.offsetLeft - (rail.clientWidth - card.clientWidth) / 2
-    }
-
-    React.useEffect(() => {
-        const rail = railRef.current
-        if (rail) centerCard(rail, slackReports.length)
-    }, [])
-
-    const recenter = () => {
-        const rail = railRef.current
-        if (!rail) return
-        const one = copyWidth(rail)
-        if (!one) return
-        if (rail.scrollLeft < one * 0.5) rail.scrollLeft += one
-        else if (rail.scrollLeft > one * 1.5) rail.scrollLeft -= one
-    }
-
-    const scrollByCards = (dir: number) => {
-        const rail = railRef.current
-        if (!rail) return
-        // Measure one card + gap rather than hard-coding a width that breaks at the @lg card size.
-        const stride =
-            rail.children.length > 1
-                ? (rail.children[1] as HTMLElement).offsetLeft - (rail.children[0] as HTMLElement).offsetLeft
-                : rail.clientWidth
-        rail.scrollBy({ left: dir * stride, behavior: 'smooth' })
-    }
-
-    return (
-        <div className="not-prose relative">
-            <div ref={railRef} onScroll={recenter} className="flex snap-x gap-8 overflow-x-auto pb-8 pt-8">
-                {loopReports.map(({ label, src }, i) => (
-                    <CloudinaryImage
-                        key={`${label}-${i}`}
-                        src={src}
-                        alt={`A ${label} self-driving report delivered to a Slack channel`}
-                        className="w-[280px] flex-shrink-0 snap-center odd:-rotate-3 even:rotate-3 @lg/reader-content:w-[320px]"
-                        imgClassName="w-full rounded shadow-md"
-                    />
-                ))}
-            </div>
-            <button
-                type="button"
-                aria-label="Previous report"
-                onClick={() => scrollByCards(-1)}
-                className="absolute left-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-primary bg-primary shadow-md hover:bg-accent"
-            >
-                <IconArrowRight className="size-4 rotate-180 text-primary" />
-            </button>
-            <button
-                type="button"
-                aria-label="Next report"
-                onClick={() => scrollByCards(1)}
-                className="absolute right-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full border border-primary bg-primary shadow-md hover:bg-accent"
-            >
-                <IconArrowRight className="size-4 text-primary" />
-            </button>
-        </div>
-    )
-}
 
 type SelfDrivingPR = {
     prNumber: number
@@ -635,6 +514,15 @@ const SelfDrivingTicker = ({ prs }: { prs: SelfDrivingPR[] }): JSX.Element | nul
     )
 }
 
+type Product = {
+    handle: string
+    name: string
+    slug?: string
+    Icon?: IconComponent
+    color?: string
+    status?: string
+}
+
 const workSurfaces: {
     Icon: IconComponent
     iconColor: string
@@ -645,7 +533,7 @@ const workSurfaces: {
     {
         Icon: IconBolt,
         iconColor: 'text-red',
-        label: <span className="font-bold text-primary">PostHog web app</span>,
+        label: <span className="font-bold text-primary">PostHog Web</span>,
         copy: 'The full product in your browser. Explore your data, review proposed work, and dig into the evidence.',
         cta: (
             <CallToAction to="https://app.posthog.com/signup" externalNoIcon type="primary" size="md">
@@ -654,17 +542,47 @@ const workSurfaces: {
         ),
     },
     {
+        Icon: IconSparkles,
+        iconColor: 'text-purple',
+        label: (
+            <Link to="/ai" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog AI
+            </Link>
+        ),
+        copy: 'Ask questions, explore data, and give agents the product context they need before they touch your code.',
+        cta: (
+            <CallToAction to="/ai" state={{ newWindow: true }} type="secondary" size="md">
+                Ask anything
+            </CallToAction>
+        ),
+    },
+    {
         Icon: IconAtSign,
         iconColor: 'text-sky-blue',
         label: (
             <Link to="/slack" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Slack app
+                PostHog Slack
             </Link>
         ),
-        copy: '@PostHog brings PostHog into Slack channels. Route reports to the ones each team already watches (hedgehog mode not included).',
+        copy: '@PostHog brings reports, data answers, and agent work into the channels each team already watches.',
         cta: (
             <CallToAction to="/slack" state={{ newWindow: true }} type="secondary" size="md">
                 Add to Slack
+            </CallToAction>
+        ),
+    },
+    {
+        Icon: IconCode,
+        iconColor: 'text-brown dark:text-brown-dark',
+        label: (
+            <Link to="/desktop" state={{ newWindow: true }} className="font-bold text-primary">
+                PostHog Code
+            </Link>
+        ),
+        copy: 'A coding-agent surface for editing your product with the same data PostHog uses to understand users.',
+        cta: (
+            <CallToAction to="/desktop" state={{ newWindow: true }} type="secondary" size="md">
+                Get the app
             </CallToAction>
         ),
     },
@@ -676,7 +594,7 @@ const workSurfaces: {
                 PostHog MCP
             </Link>
         ),
-        copy: 'Look ma, no hands! Pull self-driving context into other tools, and pull context from your other tools into self-driving.',
+        copy: 'Pull self-driving context into other tools, and pull context from your other tools into PostHog.',
         cta: (
             <CallToAction to="/mcp" state={{ newWindow: true }} type="secondary" size="md">
                 Hook it up
@@ -719,6 +637,188 @@ const workSurfaces: {
         ),
     },
 ]
+
+const automaticToolingGroups: {
+    label: string
+    columns?: string[][]
+    handles?: string[]
+    colSpan?: 2
+}[] = [
+    {
+        label: 'Understand product usage',
+        colSpan: 2,
+        columns: [
+            ['web_analytics', 'product_analytics', 'trends'],
+            ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
+            ['ai_observability', 'llm_evals', 'activity'],
+        ],
+    },
+    {
+        label: 'Debug & fix issues',
+        handles: ['error_tracking', 'logs', 'session_replay', 'profiles'],
+    },
+    {
+        label: 'Ship features & get feedback',
+        colSpan: 2,
+        columns: [
+            ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access', 'endpoints', 'webhooks'],
+            ['workflows_emails', 'surveys', 'support', 'user_interviews'],
+        ],
+    },
+]
+
+const ProductRow = ({ product }: { product: Product }): JSX.Element => {
+    const Icon = product.Icon
+    const isWIP = product.status === 'WIP'
+
+    return (
+        <Link
+            to={`/${product.slug}`}
+            state={{ newWindow: true }}
+            className={`group flex w-full items-center gap-2 py-0.5 text-left ${
+                isWIP ? 'pointer-events-none opacity-60' : ''
+            }`}
+        >
+            {Icon && <Icon className={`size-6 shrink-0 text-${product.color || 'gray'}`} />}
+            <span className="text-base font-medium text-primary group-hover:underline group-hover:underline-offset-2">
+                {product.name}
+            </span>
+            {product.status && (
+                <span
+                    className={`size-1.5 shrink-0 rounded-full ${
+                        product.status === 'beta' ? 'bg-yellow' : product.status === 'alpha' ? 'bg-orange' : 'bg-red'
+                    }`}
+                />
+            )}
+        </Link>
+    )
+}
+
+const ProductRows = ({
+    handles,
+    productsByHandle,
+}: {
+    handles: string[]
+    productsByHandle: Record<string, Product>
+}) => (
+    <div className="space-y-1.5">
+        {handles.map((handle) => {
+            const product = productsByHandle[handle]
+            if (!product?.slug) return null
+            return <ProductRow key={handle} product={product} />
+        })}
+    </div>
+)
+
+const AutomaticToolingSection = (): JSX.Element => {
+    const allProducts = useProduct() as Product[]
+    const productsByHandle = React.useMemo(
+        () =>
+            allProducts.reduce<Record<string, Product>>((acc, product) => {
+                acc[product.handle] = product
+                return acc
+            }, {}),
+        [allProducts]
+    )
+
+    return (
+        <section className="not-prose my-12 space-y-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0">
+                <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">Automatic tooling</h2>
+                <p className="mt-2 mb-0 w-full text-base leading-relaxed text-secondary">
+                    PostHog gives your product the context it needs to become self-driving: usage, errors, replays,
+                    flags, experiments, feedback, logs, and the tools agents use to act on what they learn.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-x-8 gap-y-6 @lg/reader-content:grid-cols-2 @2xl/reader-content:grid-cols-3">
+                {automaticToolingGroups.map((group, groupIndex) => {
+                    const isFirstGroup = groupIndex === 0
+                    const spanClass =
+                        group.colSpan === 2
+                            ? isFirstGroup
+                                ? '@lg/reader-content:col-span-2 @2xl/reader-content:col-span-3'
+                                : '@lg/reader-content:col-span-2'
+                            : ''
+
+                    return (
+                        <div key={group.label} className={spanClass}>
+                            <h3 className="mb-1.5 text-sm font-semibold uppercase text-secondary">{group.label}</h3>
+                            {group.columns ? (
+                                <div
+                                    className={`grid gap-x-4 gap-y-1 @lg/reader-content:gap-x-8 ${
+                                        isFirstGroup
+                                            ? '@lg/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3'
+                                            : '@lg/reader-content:grid-cols-2'
+                                    }`}
+                                >
+                                    {group.columns.map((column, columnIndex) => (
+                                        <ProductRows
+                                            key={columnIndex}
+                                            handles={column}
+                                            productsByHandle={productsByHandle}
+                                        />
+                                    ))}
+                                </div>
+                            ) : (
+                                <ProductRows handles={group.handles ?? []} productsByHandle={productsByHandle} />
+                            )}
+                        </div>
+                    )
+                })}
+            </div>
+        </section>
+    )
+}
+
+const ContextWarehouseSection = (): JSX.Element => (
+    <section className="not-prose my-12">
+        <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">
+            What's in your{' '}
+            <span className="rounded-sm bg-blue/10 px-1 text-blue dark:bg-blue/20">context warehouse</span>
+        </h2>
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-secondary">
+            Self-driving only works when agents can see the same context your team uses to make decisions. PostHog puts
+            it in one place so humans, dashboards, and AI agents can query it directly.
+        </p>
+        <div className="mt-5 grid gap-3 @md/reader-content:grid-cols-2">
+            {[
+                {
+                    Icon: IconDatabase,
+                    title: 'Warehouse data',
+                    copy: 'Product events, external sources like Stripe and HubSpot, SQL, BI, and data visualization.',
+                    color: 'text-blue',
+                },
+                {
+                    Icon: IconDashboard,
+                    title: 'Product evidence',
+                    copy: 'Replays, errors, logs, funnels, experiments, surveys, and user activity from every PostHog tool.',
+                    color: 'text-green',
+                },
+                {
+                    Icon: IconPlug,
+                    title: 'Connected systems',
+                    copy: 'APIs, webhooks, data pipelines, destinations, and integrations with the rest of your stack.',
+                    color: 'text-purple',
+                },
+                {
+                    Icon: IconSparkles,
+                    title: 'Agent context',
+                    copy: 'The raw material PostHog uses to spot work, research the root cause, and open a useful PR.',
+                    color: 'text-orange',
+                },
+            ].map(({ Icon, title, copy, color }) => (
+                <div key={title} className="rounded-md border border-primary bg-primary p-4">
+                    <div className="flex items-center gap-2">
+                        <Icon className={`size-5 shrink-0 ${color}`} />
+                        <p className="m-0 text-base font-bold text-primary">{title}</p>
+                    </div>
+                    <p className="m-0 mt-2 text-base text-secondary">{copy}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+)
 
 type WorkMode = {
     tag: string
@@ -789,134 +889,83 @@ const humanRoles: HumanRole[] = [
     },
 ]
 
-const faqItems = [
-    {
-        trigger: 'What is a self-driving product?',
-        content: (
-            <p>
-                A product that improves itself without waiting to be prompted. PostHog watches how people actually use
-                your product, finds what's broken or worth changing, writes the fix, and opens a pull request (in a
-                never-ending loop).
-            </p>
-        ),
-    },
-    {
-        trigger: "We're a tiny team – is this overkill?",
-        content: (
-            <p>
-                The opposite. The whole point is that a small team can ship like a much bigger one. Self-driving is
-                basically founder mode for your product (sweat the details, focus on the work, get involved where you
-                are needed).
-            </p>
-        ),
-    },
-    {
-        trigger: "Won't it just flood my codebase with AI slop?",
-        content: (
-            <p>
-                That's the failure mode (we're not selling you a slop-cannon). PostHog self-driving handles detection,
-                instrumentation, and low-risk iteration, but every change is a pull request a human reviews and merges.
-                The code is good because we're using the same AI models you are.
-            </p>
-        ),
-    },
-    {
-        trigger: "Why can't I just run this in Cursor, Claude Code, or Devin?",
-        content: (
-            <p>
-                Those are great at the coding half, but they start from a ticket or prompt and see only your repo. They
-                can't originate work from vague signals like "users are struggling here." Self-driving can, because the
-                signals live in your product data. You can still bring that context into your own agent via{' '}
-                <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
-                    PostHog MCP
-                </Link>
-                .
-            </p>
-        ),
-    },
-    {
-        trigger: 'How is this different from PostHog Desktop and PostHog AI?',
-        content: (
-            <p>
-                Same brain, different doors.{' '}
-                <Link to="/ai" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
-                    PostHog AI
-                </Link>{' '}
-                answers data questions inside the app.{' '}
-                <Link to="/desktop" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
-                    PostHog Desktop
-                </Link>{' '}
-                is the desktop coding agent you edit your product with. Self-driving is what happens when you point that
-                agent at your product data and let it work on its own.
-            </p>
-        ),
-    },
-    {
-        trigger: 'What are signal sources and Scouts?',
-        content: (
-            <p>
-                The two ways work shows up in your Inbox. <strong>Signal sources</strong> are raw inputs (like errors,
-                support tickets, and replays). They trigger a reactive investigation. <strong>Scouts</strong> are
-                proactive agents that wake on a schedule. They search for slow leaks no single event reveals (and have
-                memory across runs so they're not silly goldfish).
-            </p>
-        ),
-    },
-    {
-        trigger: 'Does it really open pull requests on its own?',
-        content: (
-            <p>
-                You betcha. When a fix is well-researched and clear, an agent opens a real PR with a written description
-                and a suggested reviewer. It even babysits CI until the PR is mergeable. What it doesn't do is merge it
-                (that's your job).
-            </p>
-        ),
-    },
-    {
-        trigger: 'What does it cost?',
-        content: (
-            <p>
-                Self-driving is in open paid beta. Scouts, reports, and the Inbox are all free. You pay a flat fee per
-                pull request (valuable work actually completed) and there's a free tier to start. See{' '}
-                <Link to="/pricing" state={{ newWindow: true }} className="text-red dark:text-yellow font-semibold">
-                    pricing
-                </Link>{' '}
-                for the latest.
-            </p>
-        ),
-    },
-    {
-        trigger: 'What can it watch, and can I control it?',
-        content: (
-            <p>
-                Anything you already send to PostHog (errors, session replays, logs, funnels, flags, experiments,
-                revenue) plus external sources like GitHub issues, Linear, Zendesk. You can toggle them on and off at
-                any time to control costs.
-            </p>
-        ),
-    },
-    {
-        trigger: 'How does setup work, and what does the wizard do?',
-        content: (
-            <p>
-                Setup is a single command with the PostHog wizard. The wizard reads your codebase and product, detects
-                the services you run, and enables only the sources and scouts relevant to what it finds. It checks your
-                GitHub connection, that the PostHog SDK is installed, and that AI data processing is approved, then
-                hands back a setup report showing exactly what was and wasn't enabled, and why. Your first reports land
-                in ~20–30 minutes – just enough time to build the cache and ingest from your first sources.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Is my code safe?',
-        content: (
-            <p>
-                Your code stays in your repo and your data stays in PostHog. Agents work in isolated sandboxes, and you
-                can read the full log of everything they did before you merge a thing.
-            </p>
-        ),
-    },
-]
+const HomepageCTASection = (): JSX.Element => (
+    <section className="not-prose my-12 rounded-md border border-primary bg-accent p-5 @md/reader-content:p-6">
+        <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">Try PostHog for free</h2>
+        <p className="mt-3 mb-5 max-w-2xl text-base text-secondary">
+            Start collecting the product context your team and agents need. You can install with AI, connect your data,
+            and work from there.
+        </p>
+        <div className="flex flex-col items-start gap-3 @sm/reader-content:flex-row">
+            <CallToAction
+                to="https://app.posthog.com/signup"
+                size="md"
+                state={{ newWindow: true, initialTab: 'signup' }}
+            >
+                Get started - free
+            </CallToAction>
+            <CallToAction to="/docs/getting-started/install" state={{ newWindow: true }} type="secondary" size="md">
+                Install with AI
+            </CallToAction>
+        </div>
+    </section>
+)
+
+const QuestionsSection = (): JSX.Element => {
+    const { openNewChat } = useApp()
+
+    return (
+        <section className="not-prose my-12">
+            <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">Questions?</h2>
+            <div className="mt-4 max-w-2xl">
+                <h3 className="mb-2 text-lg font-semibold text-secondary">Answers</h3>
+                <p className="mb-6 text-base leading-relaxed text-secondary">
+                    There are a few ways you can get answers to specific questions about self-driving products.
+                </p>
+                <ol className="space-y-4 pl-6">
+                    <li className="list-decimal">
+                        <Link to="/docs/self-driving" state={{ newWindow: true }} className="font-bold underline">
+                            Check the docs
+                        </Link>
+                        <p className="m-0 mt-1 text-base text-secondary">
+                            Read how Inbox, signal sources, scouts, reports, and pull requests fit together.
+                        </p>
+                    </li>
+                    <li className="list-decimal">
+                        <Link
+                            to="#"
+                            onClick={() =>
+                                openNewChat({
+                                    path: 'ask-max-/self-driving',
+                                    context: [
+                                        {
+                                            type: 'page',
+                                            value: { path: '/self-driving', label: 'Self-driving' },
+                                        },
+                                    ],
+                                })
+                            }
+                            className="font-bold underline"
+                        >
+                            Ask PostHog AI <IconArrowUpRight className="inline-block size-4 opacity-75" />
+                        </Link>
+                        <p className="m-0 mt-1 text-base text-secondary">
+                            Ask about the product, docs, examples, or how this fits your own workflow.
+                        </p>
+                    </li>
+                    <li className="list-decimal">
+                        <Link to="/talk-to-a-human" className="font-bold underline" state={{ newWindow: true }}>
+                            Talk to a human <IconArrowUpRight className="inline-block size-4 opacity-75" />
+                        </Link>
+                        <p className="m-0 mt-1 text-base text-secondary">
+                            Useful for questions about setup, terms, volume, or whether self-driving fits your team.
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    )
+}
 
 export default function SelfDrivingPage({
     data,
@@ -928,11 +977,12 @@ export default function SelfDrivingPage({
     return (
         <>
             <SEO
-                title="Self-driving mode from PostHog"
-                description="PostHog watches your product, finds what's worth fixing, writes the code, and opens the pull request. You review and merge. A product that develops itself – now in open beta."
+                title="What if your product built itself? - PostHog"
+                description="PostHog is the context warehouse and product toolkit that helps humans and AI agents understand, improve, and ship better products."
                 image="/images/og/default.png"
             />
             <ReaderView
+                proseSize="lg"
                 hideLeftSidebar
                 showQuestions={false}
                 title="self-driving.md"
@@ -941,116 +991,66 @@ export default function SelfDrivingPage({
             >
                 <div className="relative z-10">
                     <div className="not-prose mb-8 pt-2 @lg/reader-content:pt-6 @3xl:mb-12">
-                        <section className="relative mx-auto max-w-5xl overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
-                            <div className="relative z-20 p-5 pb-6 @md/reader-content:p-7 @xl/reader-content:p-10">
-                                <h1 className="m-0 mb-5 text-3xl !leading-[1.2] @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
-                                    Shift your product into <Highlight>self-driving</Highlight> mode
+                        <section className="mx-auto grid max-w-6xl gap-6 @3xl/reader-content:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.9fr)] @3xl/reader-content:items-center">
+                            <div>
+                                <h1 className="m-0 text-3xl font-bold !leading-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                    What if your product <Highlight>built itself?</Highlight>
                                 </h1>
-                                <p className="m-0 text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                    <strong className="text-primary">
-                                        You have a new pull request ready for review.
-                                    </strong>{' '}
-                                    <em>(Yep, really.)</em>
+                                <p className="mt-5 mb-0 max-w-3xl text-lg leading-relaxed text-secondary">
+                                    PostHog is the context warehouse and toolkit for teams building products with AI. It
+                                    understands your customers, your usage data, and your product surfaces.
                                 </p>
-                                <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                    While you slept, PostHog dug through your product data, found what was worth fixing,
-                                    and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
-                                </p>
-                                <p className="mb-0 mt-6 text-sm text-secondary">
-                                    <span className="inline-block">Unlimited reports.</span>{' '}
-                                    <span className="inline-block">Priced by pull request.</span>{' '}
-                                    <span className="inline-block">3 free each month.</span>
+                                <p className="mt-4 mb-0 max-w-3xl text-lg leading-relaxed text-secondary">
+                                    That context lets PostHog spot problems, research what matters, and open pull
+                                    requests that you review and merge.
                                 </p>
                                 <div className="mt-6 flex flex-col items-start gap-3 @sm/reader-content:flex-row @sm/reader-content:items-center">
-                                    <CallToAction to="/docs/self-driving/inbox" state={{ newWindow: true }} size="md">
-                                        Learn about inbox
+                                    <CallToAction to="/docs/self-driving" state={{ newWindow: true }} size="md">
+                                        Read the docs
                                     </CallToAction>
-                                    <span className="whitespace-nowrap text-[13px] text-secondary">
-                                        New to PostHog?{' '}
-                                        <Link to="https://app.posthog.com/signup" external>
-                                            Sign up
-                                        </Link>
-                                    </span>
+                                    <CallToAction
+                                        to="https://app.posthog.com/signup"
+                                        state={{ newWindow: true }}
+                                        type="secondary"
+                                        size="md"
+                                    >
+                                        Get started - free
+                                    </CallToAction>
                                 </div>
                             </div>
 
-                            <div className="relative z-10 mx-4 h-64 overflow-hidden rounded-t border border-b-0 border-primary bg-accent @sm/reader-content:h-72 @md/reader-content:mx-7 @xl/reader-content:mx-10 @xl/reader-content:h-80">
+                            <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
+                                <div className="h-64 overflow-hidden bg-accent @sm/reader-content:h-72 @xl/reader-content:h-80">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
+                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
+                                        className="dark:hidden w-full"
+                                        imgClassName="block w-full"
+                                    />
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
+                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
+                                        className="hidden dark:block w-full"
+                                        imgClassName="block w-full"
+                                    />
+                                </div>
                                 <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
-                                    alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
-                                    className="dark:hidden w-full"
-                                    imgClassName="block w-full"
-                                />
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
-                                    alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
-                                    className="hidden dark:block w-full"
-                                    imgClassName="block w-full"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
+                                    alt=""
+                                    aria-hidden
+                                    imgClassName="pointer-events-none absolute inset-x-0 bottom-0 z-30 block w-full max-w-none"
                                 />
                             </div>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
-                                alt=""
-                                aria-hidden
-                                imgClassName="pointer-events-none absolute inset-x-0 bottom-0 z-30 block w-full max-w-none"
-                            />
                         </section>
                     </div>
 
-                    <div className="max-w-4xl @7xl:max-w-7xl mx-auto">
+                    <div className="mx-auto max-w-6xl">
                         {/* How a product develops itself */}
                         <p id="how" className={sectionHeadingClassName}>
-                            How a product <FlowingGradientHighlight>improves itself</FlowingGradientHighlight>
+                            How to make your product <FlowingGradientHighlight>self-driving</FlowingGradientHighlight>
                         </p>
                         <div className="not-prose my-6">
-                            <TabbedCarousel tabs={loopTabs} />
-                        </div>
-
-                        {/* …then it loops */}
-                        <div
-                            data-scheme="secondary"
-                            className="not-prose my-8 grid grid-cols-1 items-center gap-5 rounded-md border border-primary bg-primary p-4 @md/reader-content:p-6 @2xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(12rem,17rem)] @2xl/reader-content:gap-8"
-                        >
-                            <div className="col-start-1 row-start-2 @2xl/reader-content:row-start-1">
-                                <h3 className="m-0 mb-3 text-2xl font-bold text-primary @md/reader-content:text-3xl">
-                                    …then it{' '}
-                                    <span className="rounded-sm bg-purple/10 px-0.5 text-purple dark:bg-purple/20">
-                                        loops
-                                    </span>
-                                </h3>
-                                <p className="m-0 text-sm text-secondary">
-                                    Every change ships with the instrumentation to measure it – the agent adds the
-                                    events, feature flags, and experiments as it goes. After it merges, PostHog checks
-                                    whether the metric actually moved. If it didn't, that's a new signal (and the change
-                                    can be rolled back).
-                                </p>
-                            </div>
-                            <div className="col-start-1 row-start-1 flex justify-center @2xl/reader-content:col-start-2 @2xl/reader-content:justify-end">
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144036_1_9ce78ec4c5.svg"
-                                    alt="A hedgehog illustrating the self-improving product loop"
-                                    imgClassName="block w-full max-w-[230px] @2xl/reader-content:max-w-[270px]"
-                                />
-                            </div>
-                            <div
-                                className="col-start-1 row-start-3 w-full pt-2 @2xl/reader-content:row-start-2 @2xl/reader-content:pt-0"
-                                style={{ gridColumn: '1 / -1' }}
-                            >
-                                <Link
-                                    to="/docs/self-driving/self-improving-loop"
-                                    state={{ newWindow: true }}
-                                    className="flex w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm font-semibold"
-                                >
-                                    {['Signal', 'Research', 'Report', 'PR', 'Ship', 'Measure'].map((step, i) => (
-                                        <React.Fragment key={step}>
-                                            {i > 0 && <IconArrowRight className="size-4 shrink-0 text-secondary" />}
-                                            <span className="text-primary">{step}</span>
-                                        </React.Fragment>
-                                    ))}
-                                    <IconArrowRight className="size-4 shrink-0 text-secondary" />
-                                    <span className="text-red underline dark:text-yellow">The self-improving loop</span>
-                                </Link>
-                            </div>
+                            <TabbedCarousel tabs={loopTabs} variant="hero" />
                         </div>
 
                         {/* PostHog agents run on their own, but don't run wild */}
@@ -1148,27 +1148,17 @@ export default function SelfDrivingPage({
                             </div>
                         )}
 
-                        {/* It runs on the data you already have */}
-                        <h3 className={sectionHeadingClassName}>
-                            It runs on the data you <ColoredHighlight color="blue">already have</ColoredHighlight>
-                        </h3>
-                        <p>
-                            Your product is a context goldmine. Self-driving puts that data to work. The more sources
-                            PostHog can see, the sharper the fixes get.
-                        </p>
-                        <div className="not-prose mt-6 mb-12 flex justify-center">
-                            <SignalsCallout className="max-w-md" />
-                        </div>
+                        <AutomaticToolingSection />
+                        <ContextWarehouseSection />
 
                         {/* Works in your workflow */}
                         <h3 className={sectionHeadingClassName}>
-                            Works in <ColoredHighlight color="purple">your workflow</ColoredHighlight>
+                            Works in <Highlight>your workflow</Highlight>
                         </h3>
                         <p className="mb-0">
-                            <span className="block">The same Inbox and agents show up across five surfaces</span>
-                            <em className="mt-1 block">(everywhere you go, there's PostHog).</em>
+                            <span className="block">The same Inbox and agents show up wherever your team works.</span>
                         </p>
-                        <div className="not-prose mt-8 mb-12 grid gap-4 @md/reader-content:grid-cols-2">
+                        <div className="not-prose mt-8 mb-12 grid gap-4 @md/reader-content:grid-cols-2 @4xl/reader-content:grid-cols-3">
                             {workSurfaces.map(({ Icon, iconColor, label, copy, cta }, index) => (
                                 <div
                                     key={index}
@@ -1183,49 +1173,6 @@ export default function SelfDrivingPage({
                                 </div>
                             ))}
                         </div>
-
-                        {/* Steer it from Slack */}
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Inbox_in_slack_229d1d3693.png"
-                            alt="Steering a self-driving report from a Slack thread"
-                            className="w-full !block m-0"
-                            imgClassName="w-full !block"
-                        />
-
-                        <h3 className={sectionHeadingClassName}>
-                            Build in public (with <Highlight>the whole team</Highlight>)
-                        </h3>
-                        <p>
-                            Self-driving isn't only autonomous. Some fixes are better hashed out by three people in a
-                            thread.
-                        </p>
-                        <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 my-6">
-                            <div className="border border-primary rounded-md p-4 bg-primary">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <IconPeople className="size-5 shrink-0 text-purple" />
-                                    <span className="font-bold text-primary">Solve it together</span>
-                                </div>
-                                <p className="m-0 text-sm text-secondary">
-                                    Work through a report or PR with collaborators in Slack. Add context, steer the
-                                    agent, and decide what ships.
-                                </p>
-                            </div>
-                            <div className="border border-primary rounded-md p-4 bg-primary">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <IconTarget className="size-5 shrink-0 text-red" />
-                                    <span className="font-bold text-primary">Sorted by priority</span>
-                                </div>
-                                <p className="m-0 text-sm text-secondary">
-                                    Each report arrives tagged P0–P4 by impact, so the channel sees what needs attention
-                                    now and what can wait.
-                                </p>
-                            </div>
-                        </div>
-                        <SlackReportsRow />
-                        <p className={sectionHeadingClassName}>
-                            <FlowingGradientHighlight palette="chill">Suspiciously chill</FlowingGradientHighlight> for
-                            how much it's doing
-                        </p>
 
                         {/* You prompt it → it works on its own */}
                         <div className="not-prose my-6">
@@ -1317,53 +1264,8 @@ export default function SelfDrivingPage({
                             ))}
                         </div>
 
-                        {/* CTA */}
-                        <div className="not-prose relative overflow-hidden bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6">
-                            <div className="grid @lg/reader-content:grid-cols-[1fr_170px] gap-6 items-end">
-                                <div>
-                                    <h3 className="mt-0 mb-3 inline-flex items-center gap-2 text-2xl font-bold">
-                                        Set up your Inbox
-                                        <Badge>Beta</Badge>
-                                    </h3>
-                                    <p className="mt-0 mb-4 text-secondary">
-                                        Install PostHog, then run the wizard – it turns on your signal sources, connects
-                                        GitHub, and sets up your scouts. Your first reports start landing in ~20–30
-                                        minutes.
-                                    </p>
-                                    <WizardCommand command="self-driving" />
-                                    <p className="mt-4 mb-0 text-sm text-secondary">
-                                        New to all this? Read the{' '}
-                                        <Link
-                                            to="/docs/self-driving"
-                                            state={{ newWindow: true }}
-                                            className="text-red dark:text-yellow font-semibold underline"
-                                        >
-                                            self-driving docs
-                                        </Link>
-                                        .
-                                    </p>
-                                </div>
-                                <div className="hidden @lg/reader-content:block self-end -mb-4 @md/reader-content:-mb-6">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_hanging_from_sign_83184d5f0a.png"
-                                        alt="A hog clinging to a signpost"
-                                        className="w-full !block"
-                                        imgClassName="w-full !block"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* FAQ */}
-                        <h3>FAQ</h3>
-                        <div className="not-prose mt-4">
-                            <Accordion
-                                type="multiple"
-                                triggerClassName="!px-3 !py-2"
-                                contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
-                                items={faqItems}
-                            />
-                        </div>
+                        <HomepageCTASection />
+                        <QuestionsSection />
                     </div>
                 </div>
             </ReaderView>
