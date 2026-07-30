@@ -4097,7 +4097,7 @@
         },
         {
             "source": "/endpoints/questions",
-            "destination": "/endpoints"
+            "destination": "/endpoints#community"
         },
         {
             "source": "/handbook/what-is-posthog",

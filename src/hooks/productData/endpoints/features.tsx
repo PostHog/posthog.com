@@ -1,12 +1,12 @@
 import React from 'react'
-import { IconDashboard, IconPlug, IconTerminal, IconTrends } from '@posthog/icons'
+import { IconBrackets, IconCode, IconDashboard, IconLaptop, IconPlug, IconTerminal, IconTrends } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MCPInstall from 'components/Products/MCPInstall'
 
 /**
- * Feature content lifted from the previous Slides-era `endpoints.tsx` features
- * array, plus MCP copy from `contents/docs/endpoints/surfaces/mcp.mdx`.
- * Do not invent blurbs here – fill gaps in the parent hook / menu stubs.
+ * Feature content from the previous Slides-era endpoints.tsx features array,
+ * plus surface copy from contents/docs/endpoints/surfaces/*.mdx and the
+ * docs landing page.
  */
 export const features = {
     dashboards: {
@@ -34,7 +34,7 @@ export const features = {
                     'Endpoints run the exact insight or SQL query defined in PostHog, including filters, breakdowns, and time range.',
             },
             {
-                title: 'Designed to be called over and over ',
+                title: 'Designed to be called over and over',
                 description:
                     'Endpoints are intended to be called regularly by dashboards, with higher rate limits than standard API queries.',
             },
@@ -59,7 +59,7 @@ export const features = {
             {
                 title: 'Predefined aggregate queries',
                 description:
-                    'Create endpoints for queries like “top selling products for this week” or “most active users”.',
+                    'Create endpoints for queries like "top selling products for this week" or "most active users".',
             },
             {
                 title: 'Stable URLs your app can keep calling',
@@ -95,9 +95,79 @@ export const features = {
             </div>
         ),
     },
+    web_app: {
+        title: 'PostHog Web',
+        headline: 'Build and monitor endpoints in the web app',
+        description:
+            'Create endpoints, test them in the playground, and watch usage and execution logs – all in PostHog.',
+        icon: <IconLaptop />,
+        color: 'blue',
+        features: [
+            {
+                title: 'Create from SQL or insights',
+                description: 'Start from a SQL query in the editor or a new or existing insight.',
+            },
+            {
+                title: 'Test in the playground',
+                description:
+                    'Run the endpoint with real variable values and read the response before writing client code.',
+            },
+            {
+                title: 'Versions, logs, and performance',
+                description:
+                    'Inspect versions, read execution logs, and tune materialization and data freshness on the Configuration tab.',
+            },
+        ],
+    },
+    api: {
+        title: 'API',
+        headline: 'Call a named route from your app',
+        description:
+            'Your app makes one authenticated request to a named route. PostHog runs the saved query and returns the rows – no query construction in client code.',
+        icon: <IconBrackets />,
+        color: 'seagreen',
+        features: [
+            {
+                title: 'Parameterize the query',
+                description: 'Pass variables so one endpoint serves many customers, date ranges, or breakdowns.',
+            },
+            {
+                title: 'Pin to a version',
+                description: "Target a specific version so a query change doesn't break a deployed client.",
+            },
+            {
+                title: 'Generate a typed client',
+                description:
+                    'Each endpoint publishes an OpenAPI 3.0 spec you can feed to openapi-generator or @hey-api/openapi-ts.',
+            },
+        ],
+    },
+    desktop: {
+        title: 'PostHog Desktop',
+        headline: 'Build endpoints next to the code that calls them',
+        description:
+            'The agent has your repo, your endpoints, and PostHog endpoint skills in one place – create an endpoint and wire it into your app in the same session.',
+        icon: <IconCode />,
+        color: 'green',
+        features: [
+            {
+                title: 'Build and consume in one pass',
+                description: 'Create the endpoint, test it, then write the typed client code that calls it.',
+            },
+            {
+                title: 'Audit and diagnose',
+                description:
+                    'Find unused endpoints, check pinned versions, and work through execution logs and materialization status.',
+            },
+            {
+                title: 'Self-driving inbox',
+                description: 'Endpoint failures land as signals you can read alongside the rest of your work.',
+            },
+        ],
+    },
     /**
-     * Capability bullets adapted from contents/docs/endpoints/surfaces/mcp.mdx
-     * ("What you can do here") – not invented marketing copy.
+     * Capability bullets from contents/docs/endpoints/surfaces/mcp.mdx
+     * ("What you can do here").
      */
     mcp: {
         title: 'MCP',
@@ -124,7 +194,7 @@ export const features = {
             {
                 title: 'Materialization and OpenAPI',
                 description:
-                    'Preview materialization, check status, ask for a rewrite when a query isn’t eligible, and fetch an OpenAPI spec.',
+                    "Preview materialization, check status, ask for a rewrite when a query isn't eligible, and fetch an OpenAPI spec.",
             },
         ],
         children: <MCPInstall />,

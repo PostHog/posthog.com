@@ -5,7 +5,10 @@ import {
     IconCursorClick,
     IconEndpoints,
     IconEye,
+    IconInfo,
     IconList,
+    IconMagic,
+    IconMessage,
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
@@ -19,12 +22,21 @@ export const endpoints = {
     type: 'endpoints',
     // Beta in product/docs; no billing product yet (free during beta).
     status: 'beta',
+    teamSlug: 'data-modeling',
+    // Squeak topic: /questions/topic/endpoints (squeakId from page-data).
+    forumTopicId: 393,
     color: 'teal',
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',
-    // Existing “coming soon” pricing slide + docs pricing.mdx framing.
     pricingDescription:
-        'Pricing is coming soon. We’ll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid products. Endpoints is free to use during beta.',
+        'Endpoints is free during beta. When pricing ships, it will be usage-based with a generous monthly free tier – billed on compute time and data scanned, like the rest of PostHog.',
+    // Same "How pricing works" section chrome as Experiments (`BilledWithPricing`).
+    pricingLead: 'Pricing is coming soon.',
+    pricingHighlights: [
+        "We'll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid products.",
+    ],
+    pricingFooter: 'Endpoints is free during beta.',
+    pricingEventsLink: false,
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
@@ -37,22 +49,20 @@ export const endpoints = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // TODO: needs overview.eli5 (see session_replay.overview.eli5)
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // TODO: needs useCases.intro + useCases.rows (see session_replay.useCases)
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -73,49 +83,42 @@ export const endpoints = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        // TODO: needs installation.description + categories that fit Endpoints
-        // (shared install taxonomy is web/mobile/no-code – not a great match).
-        // {
-        //     slug: 'installation',
-        //     name: 'Install',
-        //     group: 'divided',
-        //     icon: <IconCode className="size-4" />,
-        // },
+        // No `installation` section: Endpoints isn't an SDK install product.
+        // Getting started is create-an-endpoint → call the URL (see docs start-here).
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
-        // TODO: needs forumTopicId (numeric Discourse topic id) for community section
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
-     * Pricing surface (`/endpoints/pricing`). Endpoints has no billing product
-     * yet, so Plans/calculator are omitted (they'd render empty). comparison-summary
-     * still has real content from the old slides. When billing ships, restore:
+     * Pricing surface (`/endpoints/pricing`). No billing product yet – Plans /
+     * calculator omitted until billing ships. Uses the same BilledWithPricing
+     * section as Experiments for the coming-soon copy, then comparison-summary.
+     * When billing ships, replace `billed-with` with:
      *   { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
      *   { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
      */
     pricingMenu: [
+        { slug: 'billed-with', name: 'How pricing works', icon: <IconInfo className="size-4" /> },
         { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
         description:
-            'Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product’s context flows out to the agents and tools that make it self-driving.',
-        // TODO: overview.eli5 — string, see session_replay.overview.eli5
+            "Use them to build embedded analytics, data feeds, and more – no backend required. Endpoints are how your product's context flows out to the agents and tools that make it self-driving.",
+        eli5: 'Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP URL. You define the query once in PostHog – filters, breakdowns, variables, and all – and your app, agent, or internal tool fetches the results over HTTP. No custom analytics backend, no CSV exports on Monday, no Query API spaghetti. Versioning, caching, materialization, and an OpenAPI spec come with it.',
         textColor: 'text-black',
         layout: 'overlay',
     },
-    videos: {
-        overview: {
-            wistia: 'bl174kpxu8',
-        },
-    },
+    // Previous wistia ID was shared with AI Observability – likely a copy-paste.
+    // Add a real Endpoints overview video when one exists.
+    // videos: { overview: { wistia: '...' } },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
@@ -125,8 +128,14 @@ export const endpoints = {
             classesMobile: '',
             imgClassesMobile: '',
         },
-        // NOTE: previous `home` screenshot pointed at AI Observability assets –
-        // omitted until a real Endpoints home screenshot exists.
+        // Full hero composition (scientist hog + SQL → dashboard). No separate
+        // hogs.default – the hog is already in the art; Overview hog overlay is optional.
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
+            alt: 'Endpoints: turn a PostHog query into an API that powers your analytics',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
         dashboards: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_dashboard_a1e300960b.png',
             alt: 'A dashboard powered by endpoints',
@@ -140,24 +149,34 @@ export const endpoints = {
             alt: 'Create an endpoint',
         },
     },
-    // TODO: hog / hogs.default / hogs.mobileHog — Cloudinary assets (see session_replay.hogs)
-    // hog: { ... },
-    // hogs: { default: { ... }, mobileHog: { ... } },
-    // TODO: useCases — { intro: string, rows: [role, useCase][] } (see session_replay.useCases)
+    // Pricing footer CTA only – reuse the hero composite.
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/endpoints_desktop_5ea67ee88c.png',
+        alt: 'Endpoints: turn a PostHog query into an API that powers your analytics',
+        footerClasses: 'max-w-[550px]',
+    },
+    useCases: {
+        intro: 'Endpoints is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship customer-facing analytics or data feeds without building and owning an analytics API',
+            ],
+            ['PMs & ops', 'Turn a saved insight into a production URL – no ticket to data engineering required'],
+            ['AI / agent builders', 'Give MCP clients and agent runtimes stable HTTP access to live product context'],
+            [
+                'Growth & marketing',
+                'Automate reports and rankings that used to mean CSV exports or brittle Query API calls',
+            ],
+            ['Data teams', 'Stop being the bottleneck on getting numbers out of PostHog and into other tools'],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
         headline: features.mcp.headline,
         description: features.mcp.description,
     },
-    // TODO: installation — { title, headline, description, productSlug, categories }
-    // TODO: postHogOnPostHog — { title, benefits: [{ title, description }] }
-    // TODO: questions / answersHeadline — for an answers section if desired
-    /**
-     * Customers block previously held AI Observability quotes (copy-paste
-     * leftovers). Omitted rather than shipping incorrect testimonials.
-     * TODO: real Endpoints customers when available.
-     */
     comparison: {
         summary: {
             them: [
@@ -166,24 +185,24 @@ export const endpoints = {
                     subtitle: 'and are happy managing data separately',
                 },
                 {
-                    title: 'You’re building analytics directly from raw event data',
+                    title: "You're building analytics directly from raw event data",
                 },
                 {
-                    title: 'You don’t need dashboards, insights, or product context',
+                    title: "You don't need dashboards, insights, or product context",
                 },
                 {
-                    title: 'You’re okay duplicating analytics logic outside PostHog',
+                    title: "You're okay duplicating analytics logic outside PostHog",
                 },
             ],
             us: [
                 {
-                    title: 'Agents and tools can pull your product’s context through a stable API – the data that powers self-driving',
+                    title: "Agents and tools can pull your product's context through a stable API – the data that powers self-driving",
                 },
                 {
                     title: 'Reuse existing insights or SQL queries already in PostHog',
                 },
                 {
-                    title: 'You’re building on PostHog data',
+                    title: "You're building on PostHog data",
                     subtitle: 'like customer-facing dashboards or internal tools',
                 },
                 {
@@ -221,39 +240,63 @@ export const endpoints = {
         {
             slug: 'data-stack/managed-warehouse',
             description:
-                'Combine product analytics data with other datasets using SQL in PostHog’s data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.',
+                "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
+            className: '!size-6',
         },
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     /**
-     * AI prompts reshaped from contents/docs/endpoints/surfaces/mcp.mdx
-     * example table. Tool names verified against src/data/mcp-tools.json.
-     * TODO: ai.intro, ai.image / imageAlt, and any additional prompt groups.
+     * Prompts from contents/docs/endpoints/surfaces/mcp.mdx plus additional
+     * prompts that map 1:1 to verified MCP tools in src/data/mcp-tools.json.
+     * TODO: ai.image / imageAlt once an Endpoints AI hero asset exists.
      */
     ai: {
-        // TODO: ai.image + ai.imageAlt (hero for AskAnything section)
-        // TODO: ai.intro — short sentence before the prompts (see session_replay.ai.intro)
+        intro: 'Ask PostHog AI to create, run, debug, and materialize endpoints.',
         mcpFeatures: ['endpoints'],
         groups: [
             {
                 title: 'Create',
                 tool: 'endpoint-create',
-                prompts: ['Create an endpoint called weekly-signups from this SQL query'],
+                prompts: [
+                    'Create an endpoint called weekly-signups from this SQL query',
+                    'Create an endpoint from my daily active users insight',
+                ],
+            },
+            {
+                title: 'List',
+                tool: 'endpoints-get-all',
+                prompts: ['List every endpoint in this project', "Which endpoints haven't been called recently?"],
             },
             {
                 title: 'Test',
                 tool: 'endpoint-run',
-                prompts: ['Run weekly-signups with customer_id set to cust_123 and show me the rows'],
+                prompts: [
+                    'Run weekly-signups with customer_id set to cust_123 and show me the rows',
+                    'Call my top-products endpoint for the last 7 days and summarize the results',
+                ],
             },
             {
                 title: 'Debug',
                 tool: 'endpoint-logs',
-                prompts: ['Pull the error logs for weekly-signups from the last hour and tell me what broke'],
+                prompts: [
+                    'Pull the error logs for weekly-signups from the last hour and tell me what broke',
+                    'Show ERROR logs for weekly-signups from the last 24 hours',
+                ],
             },
             {
                 title: 'Materialize',
                 tool: 'endpoint-materialization-suggestion',
                 prompts: ["weekly-signups can't be materialized – suggest a rewrite that can"],
+            },
+            {
+                title: 'Versions',
+                tool: 'endpoint-versions',
+                prompts: ['List every version of weekly-signups with the last execution time'],
+            },
+            {
+                title: 'OpenAPI',
+                tool: 'endpoint-openapi-spec',
+                prompts: ['Fetch the OpenAPI spec for weekly-signups so I can generate a typed client'],
             },
         ],
     },

@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
-import { IconBrowser, IconChevronDown, IconDashboard, IconPlay, IconTerminal, IconTrends } from '@posthog/icons'
+import {
+    IconBrackets,
+    IconBrowser,
+    IconChevronDown,
+    IconCode,
+    IconDashboard,
+    IconLaptop,
+    IconPlay,
+    IconTerminal,
+    IconTrends,
+} from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
@@ -11,7 +21,7 @@ import { features as f } from './features'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Only slides with existing content – more applications need product copy.
+ * Copy sourced from contents/docs/endpoints/surfaces/*.mdx and the docs landing page.
  */
 const PlaygroundSlideBody = () => {
     const [selectedScenarioId, setSelectedScenarioId] = useState(scenarios[0].id)
@@ -19,7 +29,8 @@ const PlaygroundSlideBody = () => {
     const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId) || scenarios[0]
 
     return (
-        <>
+        <div className="w-full max-w-3xl mx-auto">
+            <h3 className="mb-2 text-xl @md/reader-content:text-3xl text-center">From HogQL to URL</h3>
             <div className="text-center mb-6">
                 <p className="text-lg inline">
                     <span>Create an endpoint for</span>{' '}
@@ -65,10 +76,8 @@ const PlaygroundSlideBody = () => {
                     </span>
                 </p>
             </div>
-            <div className="w-full max-w-3xl mx-auto">
-                <EndpointsPlayground scenarioId={selectedScenarioId} />
-            </div>
-        </>
+            <EndpointsPlayground scenarioId={selectedScenarioId} />
+        </div>
     )
 }
 
@@ -113,17 +122,96 @@ export const applications: CarouselSlide[] = [
         ),
     },
     {
+        slug: 'web-app',
+        label: 'Web app',
+        icon: <IconLaptop className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: f.web_app.headline,
+        description: (
+            <>
+                <p>{f.web_app.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.web_app.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'overview',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'api',
+        label: 'API',
+        icon: <IconBrackets className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-seagreen',
+        layout: 'stack',
+        heading: f.api.headline,
+        description: (
+            <>
+                <p>{f.api.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.api.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'create_builder',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'desktop',
+        label: 'Desktop',
+        icon: <IconCode className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: f.desktop.headline,
+        description: (
+            <>
+                <p>{f.desktop.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.desktop.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+    },
+    {
         slug: 'playground',
         label: 'Playground',
         icon: <IconPlay className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
-        progressBar: 'bg-blue',
+        progressBar: 'bg-orange',
         layout: 'stack',
-        heading: 'From HogQL to URL',
         description: <PlaygroundSlideBody />,
     },
-    // TODO: more applications slides (web app, API client, Desktop, etc.) need product copy
 ]
 
 export const topFeatures: CarouselSlide[] = [
@@ -152,7 +240,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.dashboards.images[0].src,
             alt: f.dashboards.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -180,7 +267,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.use_cases.images[0].src,
             alt: f.use_cases.images[0].alt,
-            glow: true,
         },
     },
     {
