@@ -25,13 +25,7 @@ Alternatively, you can [disable autocapture](/docs/product-analytics/autocapture
 
 ## Only call `identify()` once per session
 
-It's only necessary to [identify](/docs/product-analytics/identify) a user once per session. To prevent sending unnecessary events, check `posthog._isIdentified()` before calling `identify()`:
-
-```js
-if (!posthog._isIdentified()) {
-    posthog.identify('distinct_id') // Replace 'distinct_id' with your user's unique identifier
-}
-```
+It's only necessary to [identify](/docs/product-analytics/identify) a user once per session, and you don't need to add your own checks to prevent duplicate calls. If the user is already identified, calling `identify()` again with the same distinct ID doesn't capture another `$identify` event. Instead it captures a `$set` event when the person properties you pass have changed.
 
 ## Only call `group()` once per session
 
