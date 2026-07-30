@@ -120,7 +120,7 @@ Currently, resource access controls are available for:
 
 Resource access controls limit access to resources in the PostHog UI and API, but they do **not** yet limit access to the underlying data. We don't currently support restricting:
 
-- **Querying data** – any project member can query events, data warehouse tables, and other data via SQL/HogQL, including through the [PostHog AI assistant](/docs/posthog-ai) and the API. For example, a user with "No access" to data warehouse sources can't open the SQL editor, but can still ask PostHog AI to query those tables on their behalf.
+- **Querying data** – any project member can query events and other data via SQL/HogQL, including through the [PostHog AI assistant](/docs/posthog-ai) and the API. Data warehouse tables synced from external sources respect access controls from both the table and the source (see [Data warehouse table access fallback](#data-warehouse-table-access-fallback)).
 - **Viewing session replays**
 - **Accessing person and group profiles**
 
@@ -191,9 +191,21 @@ When determining what a user can access for a specific resource object, PostHog 
 
 1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X)
 2. **Resource type permissions** - Access set for all resources of a type (e.g., Customer Support role can view all Notebooks)
-3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
+3. **Fallback parent object permissions** - For resources linked to a parent (e.g., a synced warehouse table linked to its source), permissions set on the parent object
+4. **Fallback parent resource type permissions** - Access set for all resources of the parent type (e.g., all data warehouse sources)
+5. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
 
 **Note**: Resource creators and organization admins always have full access, regardless of these precedence rules.
+
+### Data warehouse table access fallback
+
+Data warehouse tables synced from external sources (such as Stripe, Postgres, or HubSpot connectors) have a parent relationship with their source. When no specific table-level or "Data warehouse tables & views" resource-level rule applies, PostHog **falls back to the source's access control** — both object-level rules on that source and the "Data warehouse sources" resource-level setting.
+
+This means restricting a source to "No access" now effectively prevents access to all tables synced from that source, unless a more specific table-level rule overrides it.
+
+**Self-managed tables** (such as S3 buckets, file uploads, or direct database connections) do **not** fall back to source permissions, since they have no associated source. These tables are governed only by table-level and "Data warehouse tables & views" resource-level rules.
+
+> **Example:** If you set the Stripe source to "Viewer" access and don't configure any specific table rules, all tables synced from Stripe inherit "Viewer" access. However, if you set a specific table (like `stripe_customers`) to "Editor", that table uses "Editor" access while other Stripe tables remain "Viewer".
 
 ## Common use cases
 
