@@ -22,12 +22,13 @@ Each use case has a full playbook with discovery questions, competitive position
 | [Growth & Marketing](/handbook/growth/use-case-selling/growth-and-marketing) | "Help me understand what drives acquisition, conversion, and revenue." | Growth engineers, marketing leads, CRO, GTM engineers |
 | [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) | "Help me understand how my AI features perform, what they cost, and how users interact with them." | AI/ML engineers, AI PMs, AI founders | 
 | [Data Infrastructure](/handbook/growth/use-case-selling/data-infrastructure) | "Help me unify product data with business data and get it where it needs to go." | Data engineers, analytics engineers, product ops | 
-| [Customer Experience](/handbook/growth/use-case-selling/customer-experience) | "Help me quickly understand what happened, identify the problem, and verify a fix." | Support leaders, engineering leads, CS leaders |
+| [Customer Experience](/handbook/growth/use-case-selling/customer-experience) | "Help me handle customer conversations in one place, understand what happened, and ship the fix." | Support leaders, engineering leads, CS leaders |
  
 ## Product coverage matrix
  
 | Product | Primary use case | Secondary use cases |
 |---|---|---|
+| Support | Customer Experience | |
 | Product Analytics | Product Intelligence | Growth & Marketing, AI/LLM Obs, Customer Experience |
 | Session Replay | Product Intelligence | Release Engineering, Observability, AI/LLM Obs, Customer Experience |
 | Heatmaps | Product Intelligence | Growth & Marketing, Customer Experience |
@@ -38,7 +39,7 @@ Each use case has a full playbook with discovery questions, competitive position
 | Web Analytics | Growth & Marketing | |
 | Marketing Analytics *beta* | Growth & Marketing | |
 | Customer Analytics | Growth & Marketing | Product Intelligence |
-| Workflows | Growth & Marketing | Product Intelligence |
+| Workflows | Growth & Marketing | Product Intelligence, Customer Experience |
 | AI Observability | AI/LLM Obs | Customer Experience |
 | AI Evals | AI/LLM Obs | Product Intelligence, Release Engineering |
 | Prompt management | AI/LLM Obs | |
