@@ -18,14 +18,16 @@ Most companies don't have a customer experience system. They have tickets in one
 
 ## What PostHog products are relevant?
 
-- **[Product Analytics](https://posthog.com/docs/product-analytics) (core)** — Understand what a user was trying to do before something broke. Identify patterns in drop-offs, error frequency, and issue clustering across users or accounts.
-- **[Session Replay](https://posthog.com/docs/session-replay)** — See exactly what the user did, not what they think they did. Capture console logs and network calls alongside the visual recording. The single most impactful product for support and debugging workflows.
-- **[Error Tracking](https://posthog.com/docs/error-tracking)** — Capture frontend and backend exceptions tied to users and releases. See whether other users have been experiencing the same issue. Structured, queryable error data instead of ad hoc log searches.
-- **[Group Analytics](https://posthog.com/docs/product-analytics/group-analytics) + [Person Profiles](https://posthog.com/docs/data/persons)** — Give support and CS a clean, holistic view of a user or account. See all events, replays, errors, and properties for a specific person or organization.
-- **Logging** *beta* — Inspect structured backend logs connected to the same user session. When replay and error tracking show what happened on the frontend, logs show what happened on the server.
-- **[LLM Observability](https://posthog.com/docs/ai-engineering)** — See prompts, outputs, latency, and token usage for AI-powered workflows. When an AI feature misbehaves, trace it back to the specific generation.
-- **[Surveys](https://posthog.com/docs/surveys)** — Capture frustration signals (NPS, CSAT) and tie them directly to broken flows. When someone leaves a low score, you can click through to their session and see what went wrong.
-- **[Experiments](https://posthog.com/docs/experiments)** — Validate that fixes actually improved the experience. After resolving a class of issues, measure whether user satisfaction and completion rates improved.
+- **[Product Analytics](/docs/product-analytics) (core)** — Understand what a user was trying to do before something broke. Identify patterns in drop-offs, error frequency, and issue clustering across users or accounts.
+- **[Session Replay](/docs/session-replay)** — See exactly what the user did, not what they think they did. Capture console logs and network calls alongside the visual recording. The single most impactful product for support and debugging workflows.
+- **[Error Tracking](/docs/error-tracking)** — Capture frontend and backend exceptions tied to users and releases. See whether other users have been experiencing the same issue. Structured, queryable error data instead of ad hoc log searches.
+- **[Group Analytics](/docs/product-analytics/group-analytics) + [Person Profiles](/docs/data/persons)** — Give support and CS a clean, holistic view of a user or account. See all events, replays, errors, and properties for a specific person or organization.
+- **[Logs](/docs/logs)** — Inspect structured backend logs connected to the same user session. When replay and error tracking show what happened on the frontend, logs show what happened on the server, and a log line [links straight back to the replay](/docs/logs/link-session-replay) it came from.
+- **[AI Observability](/docs/ai-observability)** — See prompts, outputs, latency, and token usage for AI-powered workflows. When an AI feature misbehaves, trace it back to the specific generation.
+- **[Surveys](/docs/surveys)** — Capture frustration signals (NPS, CSAT) and tie them directly to broken flows. When someone leaves a low score, you can click through to their session and see what went wrong.
+- **[Experiments](/docs/experiments)** — Validate that fixes actually improved the experience. After resolving a class of issues, measure whether user satisfaction and completion rates improved.
+- **[Replay Vision](/docs/replay-vision)** *closed beta* — The support-scale version of session replay. Instead of a human watching recordings one at a time, a scanner reads all of them and tags what happened: task completed, abandoned, blocked by an error. For a support team, that turns "we think a few customers hit this" into a number. Findings land as queryable events. [Waitlist](/replay-vision).
+- **[self-driving](/docs/self-driving)** — Support conversations, error tracking, session replay, and logs are all [signal sources](/docs/self-driving/inbox/sources), and external helpdesks (Zendesk, Front, Intercom-likes, Gorgias, Plain) can feed the same inbox. A recurring ticket theme becomes an investigated report with a pull request, so the fix happens instead of the ticket being closed with a workaround.
 
 ## Adoption path and expansion path
 
@@ -38,14 +40,14 @@ Usually **Session Replay** or **Product Analytics**. Common entry scenarios:
 
 ### Primary expansion path
 
-**Product Analytics → + Session Replay → + Error Tracking → + Logs / LLM Observability → + Surveys**
+**Product Analytics → + Session Replay → + Error Tracking → + Logs / AI Observability → + Surveys**
 
 **The logic of each step:**
 
 - Product Analytics → Session Replay: They know *what* happened (drop-offs, error rates). They need to see *why*. Session Replay provides the qualitative context behind the quantitative signal.
 - Session Replay → Error Tracking: Seeing something break visually isn't enough. They want structured, queryable errors tied to users and releases. Error Tracking makes debugging systematic instead of ad hoc.
-- Error Tracking → Logs / LLM Observability: Now they want to see what happened server-side or inside AI workflows. Logs provide backend context. LLM Observability traces AI-specific issues (hallucinations, prompt regressions, latency spikes).
-- Logs / LLM Observability → Surveys: After stabilizing debugging, they want a simple way to detect frustration and measure whether reliability improvements are being felt by users. Surveys close the feedback loop.
+- Error Tracking → Logs / AI Observability: Now they want to see what happened server-side or inside AI workflows. Logs provide backend context. AI Observability traces AI-specific issues (hallucinations, prompt regressions, latency spikes).
+- Logs / AI Observability → Surveys: After stabilizing debugging, they want a simple way to detect frustration and measure whether reliability improvements are being felt by users. Surveys close the feedback loop.
 
 This expansion happens naturally because each step removes a layer of uncertainty.
 
@@ -61,7 +63,7 @@ This expansion happens naturally because each step removes a layer of uncertaint
 
 **Revenue protection.** When enterprise customers report issues, speed and clarity matter. Being able to say "here's exactly what happened and here's the fix" builds trust. Slow, unclear debugging erodes it.
 
-**AI risk mitigation.** For AI-powered products, LLM Observability catches the things that would otherwise go unnoticed: hallucinations that are hard to trace, prompt regressions, and latency spikes. Without it, product credibility degrades quietly.
+**AI risk mitigation.** For AI-powered products, AI Observability catches the things that would otherwise go unnoticed: hallucinations that are hard to trace, prompt regressions, and latency spikes. Without it, product credibility degrades quietly.
 
 ## Personas to target
 
@@ -160,7 +162,7 @@ This expansion happens naturally because each step removes a layer of uncertaint
 
 **Where we are strongest:** We win when teams want behavioral and technical context in one place, engineering and product collaborate closely, AI is part of the product, and speed and simplicity matter more than enterprise ceremony.
 
-**Where we are weaker:** We're not the right fit when deep distributed tracing or advanced APM is required, enterprise ITSM workflows (ServiceNow, Jira Service Management) dominate the support stack, or security policies prohibit session replay. In those cases, we complement rather than replace.
+**Where we are weaker:** We're not the right fit when mature distributed tracing, profiling, or infrastructure monitoring is required, enterprise ITSM workflows (ServiceNow, Jira Service Management) dominate the support stack, or security policies prohibit session replay. In those cases, we complement rather than replace.
 
 ### Competitor quick reference
 
@@ -168,25 +170,25 @@ This expansion happens naturally because each step removes a layer of uncertaint
 | --- | --- | --- | --- |
 | FullStory | Session replay + digital experience analytics | Error tracking, logs, AI observability, experiments all in one platform; developer-first; better pricing | More mature DXP features; enterprise CX tooling; dedicated support workflow integrations |
 | LogRocket | Session replay + error tracking + performance monitoring | Broader product suite (analytics, flags, experiments, surveys); AI observability; consolidation story | Purpose-built for debugging workflows; tighter Jira/Zendesk integrations out of the box |
-| Hotjar | Session replay + heatmaps + surveys | Full analytics platform; error tracking; feature flags; engineering-grade tooling | Simpler UX for non-technical users; lower barrier to entry for marketing/UX teams |
+| Hotjar | Session replay + heatmaps + surveys | Full analytics platform; error tracking; feature flags; engineering-grade tooling; we ship [heatmaps](/docs/toolbar/heatmaps) too | Simpler UX for non-technical users; lower barrier to entry for marketing/UX teams |
 | Sentry | Error tracking + performance monitoring + session replay | Deeper product analytics; session replay tied to behavior data; AI observability; surveys | More mature error tracking; broader language/framework support; larger install base |
 | Datadog | Full observability: APM, logs, metrics, errors, RUM | Product analytics integration; session replay depth; significantly cheaper | Complete observability stack (APM, traces, metrics); enterprise-grade; massive ecosystem |
 
 **Honest assessment:** Our strongest position is against teams already using PostHog for analytics or feature flags who are paying separately for a replay/debugging tool. The consolidation pitch is concrete and saves money. We're weaker against teams with deeply embedded ITSM workflows (ServiceNow, PagerDuty integrations) or teams that need enterprise-grade distributed tracing. Our sweet spot is product-led companies where engineering, product, and support are closely aligned and want one platform for the full debugging loop.
 
-### Pain points & known limitations
+## Pain points & known limitations
 
 | Pain Point | Impact | Workaround / Solution |
 | --- | --- | --- |
 | No native ticketing system integration | Support teams using Zendesk/Intercom can't auto-link replays to tickets | Share replay URLs manually in tickets. Data Pipelines can push events to external tools. Webhook integrations available for some platforms. |
-| Logging is beta | Teams expecting production-grade centralized logging may find gaps | Set expectations on maturity. For teams with existing logging (ELK, Papertrail), PostHog logging complements rather than replaces initially. |
-| Session replay privacy controls require configuration | Sensitive data in replays may block adoption for regulated industries | PostHog has extensive [privacy controls](https://posthog.com/docs/session-replay/privacy) including masking, blocking, and network payload filtering. Requires upfront configuration. |
-| Distributed tracing is alpha; no full APM | Can't fully replace backend performance monitoring for complex microservice architectures | Be honest about the roadmap. Distributed tracing is in alpha (usable today, still maturing). Position PostHog as the user-facing debugging layer. Heavy backend APM stays in their existing tool (Datadog, New Relic) for now. |
-| Mobile replay limitations | Mobile session replay is newer and less mature than web | Check [mobile replay docs](https://posthog.com/docs/session-replay) for current platform support. Set expectations on feature parity with web replay. |
+| Log retention is 14 days by default | Teams with compliance-driven long-tail retention needs will ask | [Logs](/docs/logs) is generally available and billed per GB, with a 30-day retention add-on. There's no multi-month archival tier — for that, batch export to their own storage. |
+| Session replay privacy controls require configuration | Sensitive data in replays may block adoption for regulated industries | PostHog has extensive [privacy controls](/docs/session-replay/privacy) including masking, blocking, and network payload filtering. Requires upfront configuration. |
+| Distributed tracing and metrics are alpha | Can't fully replace backend performance monitoring for complex microservice architectures | Be honest: [tracing](/docs/distributed-tracing) and [metrics](/docs/metrics) are alpha and free during alpha, with no service map and no profiling. Position PostHog as the user-facing debugging layer; heavy backend monitoring stays in their existing tool for now. See the [Observability playbook](/handbook/growth/use-case-selling/observability) for the full gap list. |
+| Mobile replay limitations | Mobile session replay is newer and less mature than web | Check [mobile replay docs](/docs/session-replay) for current platform support. Set expectations on feature parity with web replay. |
 
 **Exceptions / edge cases:**
 
-- **Healthcare/regulated with strict PHI requirements:** Session replay may require significant masking configuration or may not be feasible. Recommend focusing on Error Tracking + Logs + Analytics without replay, or ensure their compliance team reviews PostHog's [privacy controls](https://posthog.com/docs/session-replay/privacy) and HIPAA BAA (available with Boost package).
+- **Healthcare/regulated with strict PHI requirements:** Session replay may require significant masking configuration or may not be feasible. Recommend focusing on Error Tracking + Logs + Analytics without replay, or ensure their compliance team reviews PostHog's [privacy controls](/docs/session-replay/privacy) and HIPAA BAA (available with Boost package).
 - **Large enterprise with ServiceNow-centric workflows:** If their entire support operation routes through ServiceNow with complex escalation rules, PostHog is a complement (providing the debugging context), not a replacement for their ITSM platform.
 
 ## Getting a customer started
@@ -201,17 +203,17 @@ This expansion happens naturally because each step removes a layer of uncertaint
 
 ### Onboarding checklist
 
-- [ ] Enable [Session Replay](https://posthog.com/docs/session-replay) with user identification configured
-- [ ] Enable [Error Tracking](https://posthog.com/docs/error-tracking) in the SDK configuration
-- [ ] Set up [Person Profiles](https://posthog.com/docs/data/persons) so support can search for individual users
-- [ ] Configure [privacy controls](https://posthog.com/docs/session-replay/privacy) for any sensitive fields (forms, PII)
+- [ ] Enable [Session Replay](/docs/session-replay) with user identification configured
+- [ ] Enable [Error Tracking](/docs/error-tracking) in the SDK configuration
+- [ ] Set up [Person Profiles](/docs/data/persons) so support can search for individual users
+- [ ] Configure [privacy controls](/docs/session-replay/privacy) for any sensitive fields (forms, PII)
 - [ ] Walk support through finding a user's session and errors (training session)
 - [ ] Build a "Customer Health" dashboard: error trends by account, replay volume, NPS scores
 - [ ] Set up alerts for error spikes or new error types
-- [ ] If applicable, enable Logging (beta) for backend context alongside replays
-- [ ] If applicable, connect [Surveys](https://posthog.com/docs/surveys) (NPS/CSAT) and tie responses to session data
+- [ ] Enable [Logs](/docs/logs/start-here) for backend context alongside replays, and show the log-line-to-replay link
+- [ ] If applicable, connect [Surveys](/docs/surveys) (NPS/CSAT) and tie responses to session data
 
-### Objection handling
+## Objection handling
 
 | Objection | Response |
 | --- | --- |
@@ -226,32 +228,37 @@ This expansion happens naturally because each step removes a layer of uncertaint
 | If Using... | They Might Need... | Why | Conversation Starter |
 | --- | --- | --- | --- |
 | Session Replay only | Error Tracking | They're watching replays to find bugs. Structured error data makes this systematic instead of manual. | "You're watching sessions to find bugs. What if errors were automatically captured and grouped so you could see which ones affect the most users?" |
-| Session Replay + Error Tracking | Logging | They have frontend context but need backend visibility when debugging server-side issues. | "You can see the user's session and the error. But what was happening on the server at the same time?" |
+| Session Replay + Error Tracking | Logs | They have frontend context but need backend visibility when debugging server-side issues. | "You can see the user's session and the error. But what was happening on the server at the same time?" |
 | Session Replay + Error Tracking | Product Intelligence (for the product team) | Support and engineering are in PostHog for debugging. The product team would benefit from the same analytics for feature development. | "Your support team is using PostHog to debug issues. Has your product team seen what they can do with funnels and retention in the same platform?" |
 | Replay + Errors + Analytics | Surveys (NPS/CSAT) | They're debugging reactively. Surveys let them detect frustration proactively and tie it to specific sessions. | "You're great at debugging reported issues. But how do you find the frustrated users who never file a ticket?" |
-| Replay + Errors (debugging AI features) | LLM Observability | Traditional debugging misses AI-specific issues: prompt quality, hallucinations, latency. | "You're catching errors in your AI features. But are you seeing when the model gives a bad answer that isn't technically an error?" |
+| Replay + Errors (debugging AI features) | AI Observability | Traditional debugging misses AI-specific issues: prompt quality, hallucinations, latency. | "You're catching errors in your AI features. But are you seeing when the model gives a bad answer that isn't technically an error?" |
+| High ticket volume, support watching replays by hand | Replay Vision *closed beta* | Support can only watch a sample; a scanner reads every session | "How many tickets say 'it didn't work' with no detail? A scanner can read those sessions and tell you what actually happened in each one." |
+| Zendesk/Front/Jira alongside PostHog | self-driving | Their helpdesk is already a supported signal source; recurring tickets can become PRs | "Your recurring tickets are a to-do list nobody has time for. What if each one arrived investigated, with a fix attached?" |
 | Replay + Errors (engineering in PostHog) | Release Engineering (Feature Flags) | Engineering is in PostHog for debugging. Feature flags for safe releases is a natural add. | "You're tracking bugs after releases. What if you could gate features behind flags and roll back without a deploy?" |
 | Group Analytics + Person Profiles | Data Infrastructure (Data Warehouse) | They want to combine PostHog user/account data with CRM or billing data for a complete customer view. | "You're looking at users in PostHog. What if you could see their Stripe revenue and HubSpot status alongside their product behavior?" |
 
 ## Internal resources
 
-- **Session Replay docs:** [Session Replay](https://posthog.com/docs/session-replay)
-- **Error Tracking docs:** [Error Tracking](https://posthog.com/docs/error-tracking)
-- **Product Analytics docs:** [Product Analytics](https://posthog.com/docs/product-analytics)
-- **Person Profiles docs:** [Persons](https://posthog.com/docs/data/persons)
-- **Group Analytics docs:** [Group Analytics](https://posthog.com/docs/product-analytics/group-analytics)
-- **Surveys docs:** [Surveys](https://posthog.com/docs/surveys)
-- **LLM Observability docs:** [AI Engineering](https://posthog.com/docs/ai-engineering)
-- **Privacy controls:** [Session Replay Privacy](https://posthog.com/docs/session-replay/privacy)
-- **PostHog AI docs:** [Enable PostHog AI](https://posthog.com/docs/posthog-ai/allow-access) · [Example prompts](https://posthog.com/docs/posthog-ai/example-prompts)
+- **Session Replay docs:** [Session Replay](/docs/session-replay)
+- **Error Tracking docs:** [Error Tracking](/docs/error-tracking)
+- **Product Analytics docs:** [Product Analytics](/docs/product-analytics)
+- **Person Profiles docs:** [Persons](/docs/data/persons)
+- **Group Analytics docs:** [Group Analytics](/docs/product-analytics/group-analytics)
+- **Surveys docs:** [Surveys](/docs/surveys)
+- **AI Observability docs:** [AI Observability](/docs/ai-observability)
+- **Logs docs:** [Start here](/docs/logs/start-here) · [Link to session replay](/docs/logs/link-session-replay)
+- **Replay Vision docs:** [Overview](/docs/replay-vision) · [Waitlist](/replay-vision)
+- **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Signal sources](/docs/self-driving/inbox/sources)
+- **Privacy controls:** [Session Replay Privacy](/docs/session-replay/privacy)
+- **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
 - **Competitive battlecard:** *To be added: FullStory / LogRocket / Hotjar competitive positioning*
 
 ## Appendix: Company archetype considerations
 
 | Archetype + Stage | Framing | Key Products | Buyer |
 | --- | --- | --- | --- |
-| AI Native — Early | "Your AI features will break in ways that aren't exceptions. PostHog lets support see the user's session, engineering sees the error, and you can trace the LLM call that caused it. All in one place, free tier included." | Session Replay, Error Tracking, LLM Observability | CTO, founding engineer |
-| AI Native — Scaled | "Support escalates AI issues to engineering because they can't see what the model did. PostHog gives support replay + LLM traces so they can triage without pulling engineers off the roadmap." Bridge to AI/LLM Observability and Product Intelligence. | Session Replay, Error Tracking, LLM Observability, Logging, Surveys | VP Eng, Head of Support, AI Lead |
+| AI Native — Early | "Your AI features will break in ways that aren't exceptions. PostHog lets support see the user's session, engineering sees the error, and you can trace the LLM call that caused it. All in one place, free tier included." | Session Replay, Error Tracking, AI Observability | CTO, founding engineer |
+| AI Native — Scaled | "Support escalates AI issues to engineering because they can't see what the model did. PostHog gives support replay + LLM traces so they can triage without pulling engineers off the roadmap." Bridge to AI/LLM Observability and Product Intelligence. | Session Replay, Error Tracking, AI Observability, Logs, Surveys | VP Eng, Head of Support, AI Lead |
 | Cloud Native — Early | "Stop asking users to send screenshots. Session Replay shows you exactly what happened. Error Tracking catches it automatically. Support and engineering share the same context." | Session Replay, Error Tracking, Person Profiles | CTO, Head of Support, founding engineer |
-| Cloud Native — Scaled | "Your support team escalates everything because they can't see errors or logs. PostHog gives them replay + errors + backend logs so they can resolve more issues without pulling in engineering." Consolidation pitch: replace FullStory/LogRocket + Sentry with one platform. | Session Replay, Error Tracking, Logging, Group Analytics, Surveys | VP Eng, Head of Support, VP CS |
+| Cloud Native — Scaled | "Your support team escalates everything because they can't see errors or logs. PostHog gives them replay + errors + backend logs so they can resolve more issues without pulling in engineering." Consolidation pitch: replace FullStory/LogRocket + Sentry with one platform. | Session Replay, Error Tracking, Logs, Group Analytics, Surveys | VP Eng, Head of Support, VP CS |
 | Cloud Native — Enterprise | "Multiple teams, multiple products, and debugging context spread across 5 tools. PostHog gives support, engineering, and product a shared view: replay, errors, logs, and satisfaction data tied to the same user and account. Fewer escalations, faster resolution, better customer trust." | Full CX stack + Enterprise package (RBAC, SSO, dedicated support) | VP Eng, VP CS, Director of Support, CTO |

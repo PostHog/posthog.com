@@ -29,7 +29,11 @@ hideAnchor: false
 - **[Surveys](/docs/surveys/creating-surveys)** – On-site feedback, exit-intent surveys, NPS, CSAT, post-purchase surveys. Capture qualitative signal at key moments in the funnel and tie responses to user behavior data.
 - **[Experiments](/docs/experiments)** – A/B test landing pages, pricing pages, onboarding flows, checkout experiences, and activation sequences against real conversion and revenue metrics. This is a key stickiness driver: once a growth team is running experiments, they need engineering to implement the variants, which pulls engineering into PostHog and creates a cross-team dependency.
 - **[Feature Flags](/docs/feature-flags/start-here)** – The implementation layer for experiments. Growth/CRO defines the test; engineering implements it via feature flags. Also used for targeted rollouts to specific user segments, geo-targeting, and progressive delivery of growth initiatives. Feature Flags are the bridge product that connects the growth team's use case to the engineering team's workflow, and opens the door to the [Release Engineering](/handbook/growth/use-case-selling/release-engineering) use case.
+- **[Heatmaps](/docs/toolbar/heatmaps)** – Clickmaps, scrollmaps, and rageclick detection on any page. The CRO table stakes that marketing teams expect from Hotjar, included on every plan. Pair with Experiments to go from "nobody scrolls to the CTA" to a tested fix.
+- **[Customer Analytics](/docs/customer-analytics)** – Customer profiles, journeys, and usage metrics, with a B2B mode. Where Product Analytics answers "what did users do," this answers "how is this account doing" – the view a growth team at a B2B company actually needs for expansion and churn plays.
+- **[Web vitals](/docs/web-analytics/web-vitals)** – Core Web Vitals captured automatically. Page performance is an SEO and conversion input, and GA4's version of this is a separate tool.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** – Natural language querying for non-technical marketing users. "Which campaign drove the most signups last month?" without needing HogQL or analyst support. ([Example prompts](/docs/posthog-ai/example-prompts))
+- **[self-driving](/docs/self-driving)** – Web analytics, product analytics, and session replay all feed the [self-driving](/docs/self-driving) loop, and there are scouts watching web analytics, web vitals, surveys, and customer analytics. For a growth team, the honest framing is conversion-path maintenance: broken funnels, dead links, regressed page performance. It will not write your positioning.
 
 ## Adoption path and expansion path
 
@@ -147,7 +151,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 - Marketing team can self-serve answers about channel performance, ROAS, and conversion without waiting for analysts
 - Conversion events automatically flow to ad platforms and CRMs – no custom pipelines to maintain
 - Onboarding, re-engagement, and lifecycle campaigns fire automatically based on real user behavior
-- In-app nudges guide users through activation at exactly the right moment
+- Behavior-triggered messaging re-engages users at exactly the right moment
 - Every experiment is measured against real business metrics, and the same feature flags used for experiments can be reused for progressive rollouts
 - Growth and engineering collaborate through a shared platform: growth defines the hypothesis, engineering implements the flag, both see the results
 - Revenue is attributable to specific channels, campaigns, and user cohorts
@@ -198,10 +202,11 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 |---|---|---|---|
 | GA4 | Web analytics, basic attribution, Google Ads integration | Full-funnel beyond the website; first-party data; product analytics depth | Deepest Google Ads integration; free tier is very generous; universal adoption |
 | Segment | CDP – collects events and routes them to destinations | We're the analytics platform *and* the pipe; no need for a separate CDP layer | More destination integrations; more mature data governance |
-| Amplitude | Product analytics with some marketing analytics features | Broader product coverage (flags, replay, surveys, workflows); better pricing | More mature marketing-specific features (audiences, campaign impact) |
+| Amplitude | Product analytics with some marketing analytics features | Broader product coverage (flags, replay, heatmaps, surveys, workflows); [Customer Analytics](/docs/customer-analytics) for account-level views; better pricing | More mature marketing-specific features (audiences, campaign impact); larger enterprise motion |
 | Mixpanel | Product analytics focused on funnels and retention | Broader platform (web analytics, flags, replay, workflows); no sampling | Deeper mobile analytics; some marketing teams prefer the UX |
 | HubSpot Marketing Hub | Marketing automation, email, CRM, basic analytics | Engineering-grade analytics; deeper funnel analysis; experiments | Native CRM integration; better email deliverability; non-technical UX |
 | Heap | Auto-capture product analytics | We also auto-capture, plus flags, experiments, replay, surveys, workflows | Retroactive analytics (virtual events) is a strong pitch for non-technical teams |
+| Hotjar | Heatmaps, replay, on-site surveys | Full analytics platform underneath; experiments; we ship [heatmaps](/docs/toolbar/heatmaps) and surveys too | Simpler, more opinionated UX for non-technical CRO teams |
 
 **Honest assessment:** Our strongest position is against teams using 3+ tools to do what PostHog does in one. The consolidation pitch is genuine. We're weaker against teams deeply embedded in the Google ecosystem (GA4 + Google Ads + Looker) where switching cost is high. We're also weaker against HubSpot where marketing automation is the primary need. Our sweet spot is technical growth teams and PLG companies where the growth engineer is the buyer.
 
@@ -278,6 +283,9 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 - **Experiments docs:** [Experiments](/docs/experiments) · [Exposures](/docs/experiments/exposures)
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
+- **Heatmaps docs:** [Heatmaps](/docs/toolbar/heatmaps)
+- **Customer Analytics docs:** [Customer Analytics](/docs/customer-analytics)
+- **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving)
 - **UTM tracking:** [UTM segmentation](/docs/data/utm-segmentation)
 - **Tutorial:** [How to track performance marketing](/tutorials/performance-marketing)
 - **Competitive battlecard:** *To be added: GA4 / Segment / CDP competitive positioning*

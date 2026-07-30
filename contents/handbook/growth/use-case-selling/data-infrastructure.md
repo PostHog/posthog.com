@@ -14,6 +14,8 @@ hideAnchor: false
 - Export PostHog data to existing warehouses (Snowflake, BigQuery, Redshift) so it's part of the company's data stack
 - Feed enriched data to downstream tools: BI platforms, ad platforms, CRMs, marketing tools
  
+**Naming note:** the current positioning for this whole area is the **context warehouse** — the managed warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
+
 This is the "stickiness" use case. Once PostHog is part of a company's data infrastructure, receiving data from Stripe, HubSpot, and databases AND feeding data out to their BI layer, it becomes very hard to rip out. This also makes their product data more valuable as it is enriched with additional business context. Data infrastructure customers also tend to have the highest retention rates.
  
 However, this is also the hardest use case to sell into. Data teams are skeptical of analytics tools playing in the data engineering space. Product maturity matters a lot here.
@@ -23,6 +25,9 @@ However, this is also the hardest use case to sell into. Data teams are skeptica
 - **[Data Warehouse](/docs/data-warehouse) (core)** — Bring external data into PostHog. Connect Stripe, HubSpot, Salesforce, Postgres, MySQL, Snowflake, BigQuery, and [many more sources](/docs/cdp/sources). Query across PostHog events and external data using HogQL. Build unified dashboards that combine product behavior with revenue, CRM, and business data.
 - **[Data Pipelines / Batch Exports](/docs/cdp) (core)** — Send PostHog data out to external destinations. [Batch exports](/docs/cdp/batch-exports) to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, Azure Blob. [Realtime destinations](/docs/cdp/destinations) to Slack, HubSpot, Salesforce, ad platforms, and more. [Transformations](/docs/cdp/transformations) to clean, enrich, or filter data before it lands.
 - **[Product Analytics](/docs/product-analytics)** — The query engine for unified data. Once external data is in the Data Warehouse, Product Analytics becomes the interface for querying across all of it. HogQL gives SQL access to everything. Dashboards combine product events with business metrics.
+- **[Endpoints](/docs/endpoints)** — Turn any saved insight or SQL query into a stable, authenticated, cached HTTP endpoint. This is the answer to "we need this data inside our own product / internal tool / customer-facing dashboard" — previously a custom backend job. Optionally materialize for latency. ([Positioning](/handbook/marketing/positioning/endpoints))
+- **[Semantic layer](/docs/semantic-layer)** — Define metrics and dimensions once so every query, dashboard, and agent uses the same definition. The governance answer for data teams who've been burned by six versions of "active user."
+- **[self-driving](/docs/self-driving)** — Scouts watch the data infrastructure itself: failing warehouse syncs, broken materialized views, data pipeline errors, ingestion warnings. This is a genuinely good fit for a data team, because pipeline breakage is exactly the kind of unglamorous maintenance that sits in a backlog for weeks. External sources also connect *through* the warehouse, so a data team that's wired up their sources has also wired up the inbox.
  
 ## Adoption path and expansion path
  
@@ -202,10 +207,16 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 | Data Pipelines to CRM | Growth & Marketing | They're pushing data to HubSpot/Salesforce. The growth team could use more of the marketing analytics stack. | "You're syncing data to your CRM. Has the marketing team seen Web Analytics and Marketing Analytics for attribution?" |
 | Data Warehouse + Product Analytics | Product Intelligence (for the product team) | They're doing unified data analysis. The product team should be using the full analytics suite. | "Your data team is doing advanced queries. Are your PMs using funnels, retention, and session replay for product decisions?" |
 | Data team in PostHog | Any use case for other teams | Data team is in PostHog and advocates for it. Expand to product, engineering, or growth. | "Your data team loves PostHog. Which other teams could benefit? Product? Engineering? Growth?" |
+| Warehouse + insights, hand-rolled internal APIs | Endpoints | They've built a backend service to serve saved queries to another app | "Who maintains the API that serves these numbers to your internal tool? Endpoints does that without the service." |
+| Warehouse sources connected | self-driving | Sources are already the hard part of setup, and failing syncs are a real recurring pain | "When a sync breaks, how long before someone notices? There's a scout that watches for exactly that and files it with the fix." |
  
 ## Internal resources
  
-- **Data Warehouse docs:** [Data Warehouse](/docs/data-warehouse) · [Sources](/docs/cdp/sources) · [HogQL](/docs/product-analytics/sql)
+- **Data Warehouse docs:** [Data Warehouse](/docs/data-warehouse) · [Sources](/docs/cdp/sources) · [SQL](/docs/data-warehouse/sql)
+- **Endpoints docs:** [Endpoints](/docs/endpoints) · [Positioning](/handbook/marketing/positioning/endpoints)
+- **Semantic layer docs:** [Semantic layer](/docs/semantic-layer)
+- **Context warehouse positioning:** [Handbook](/handbook/marketing/positioning/data-warehouse) · [What is a context warehouse?](/blog/what-is-a-context-warehouse)
+- **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving)
 - **Data Pipelines docs:** [CDP overview](/docs/cdp) · [Batch exports](/docs/cdp/batch-exports) · [Realtime destinations](/docs/cdp/destinations) · [Transformations](/docs/cdp/transformations)
 - **External data source guides:** [Stripe](/docs/cdp/sources/stripe) · [HubSpot](/docs/cdp/sources/hubspot) · [Salesforce](/docs/cdp/sources/salesforce) · [Postgres](/docs/cdp/sources/postgres)
 - **Batch export guides:** [S3](/docs/cdp/batch-exports/s3) · [Snowflake](/docs/cdp/batch-exports/snowflake) · [BigQuery](/docs/cdp/batch-exports/bigquery)

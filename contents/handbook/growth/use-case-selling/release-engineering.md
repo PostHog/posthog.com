@@ -21,7 +21,9 @@ hideAnchor: false
 - **[Feature Flags](/docs/feature-flags) (core)** — Controlled rollouts, percentage-based releases, targeted delivery to specific users/groups, kill switches. The foundation of safe shipping. Engineering teams use flags to decouple deployment from release: code ships to production but features are gated behind flags. ([Getting started](/docs/feature-flags/start-here) · [Multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags))
 - **[Experiments](/docs/experiments)** — A/B testing tied directly to releases. "We shipped a new checkout flow behind a flag. Did it actually improve conversion, or just look better in the demo?" Experiments are billed with Feature Flags, so customers with flags already have access. ([Creating experiments](/docs/experiments/creating-an-experiment))
 - **[Session Replay](/docs/session-replay)** — Reproduce bugs from the user's actual perspective during rollout. When a user reports "the new feature is broken," you don't need to guess. Filter replays by feature flag variant and watch exactly what happened. Also useful for rollout validation: watch how real users interact with the new feature before expanding the rollout.
-- **AI Evals** — For products with AI features: detect quality regressions after prompt or model changes. Traditional error tracking won't catch a model that starts producing lower-quality output. Evals compare output quality before and after a change, catching regressions that look "fine" from an error rate perspective but degrade user experience.
+- **[AI Evals](/docs/ai-evals)** — For products with AI features: detect quality regressions after prompt or model changes. Traditional error tracking won't catch a model that starts producing lower-quality output. Evals compare output quality before and after a change, catching regressions that look "fine" from an error rate perspective but degrade user experience.
+- **[self-driving](/docs/self-driving)** — Release engineering is where self-driving converts best, because the work is mostly maintenance: a regression after a deploy has a right answer, so an agent can investigate it and open a pull request. Scouts watch feature flags (including [stale ones](/docs/self-driving/scout-examples)), experiments, error tracking, and CI. Billed at $15 per pull request, first three each month free; reports are always free. ([How to pitch it](/handbook/growth/sales/how-to-pitch-self-driving))
+- **[PostHog Desktop](/docs/posthog-desktop)** *beta* — Where engineers review and merge the work self-driving proposes. Its [enricher](/docs/posthog-desktop/posthog-integration) parses the local codebase and annotates PostHog SDK calls inline with live data: what percentage a flag is rolled out to, whether it's stale, whether the experiment behind it is still running. For a team drowning in flags, that's the flag-hygiene feature LaunchDarkly charges for. ([Positioning](/handbook/marketing/positioning/desktop))
 
 ## Adoption path and expansion path
 
@@ -155,19 +157,24 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 | Competitor | What They Do | Our Advantage | Their Advantage |
 |---|---|---|---|
 | LaunchDarkly | Feature flags, targeting, enterprise flag management | Experiments included; analytics integration; session replay; far better pricing | More mature enterprise flag management; larger feature set for complex targeting rules; bigger enterprise install base |
-| Statsig | Feature flags + experimentation + analytics | Broader platform (replay, surveys, workflows); open source | Purpose-built for experimentation; strong warehouse-native story; more advanced statistical methods |
-| Eppo | Warehouse-native experimentation | Broader platform; doesn't require a data warehouse; integrated replay | Warehouse-native means they use your existing data; more advanced statistical methodology |
+| Statsig | Feature flags + experimentation + analytics | Broader platform (replay, surveys, workflows); open source; we also ship frequentist, CUPED, and holdouts | Purpose-built for experimentation; deeper warehouse-native motion. Note their team went to OpenAI in 2025 and Amplitude took on the brand and customers in 2026 — worth raising as a continuity risk if a prospect is mid-evaluation |
+| Eppo | Warehouse-native experimentation | Broader platform; doesn't require a data warehouse; integrated replay; we support [warehouse-backed experiment metrics](/docs/experiments/data-warehouse) too | Purpose-built for warehouse-native teams with an established dbt/Snowflake practice |
 | Split.io | Feature flags + experimentation | Broader platform; better pricing; integrated analytics | More mature enterprise integrations |
 
-**Honest assessment:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch is genuine and saves money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength) or teams that want warehouse-native experimentation (Eppo's pitch). Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, all in one tool.
+**Honest assessment:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch is genuine and saves money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength).
+
+One correction to older versions of this page: **do not concede statistical methodology.** We ship frequentist and Bayesian, CUPED, holdouts, and warehouse-backed metrics. If a rep is still saying "they're more advanced on stats," they're reading a stale battlecard and giving away a deal we can win.
+
+Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, and increasingly have an agent open the follow-up fix — all in one tool.
 
 ## Pain points & known limitations
 
 | Pain Point | Impact | Workaround / Solution |
 |---|---|---|
 | Flag management UX is simpler than LaunchDarkly's | Enterprise teams with hundreds of flags may want more organizational features | PostHog flags work well at scale. For very complex targeting, review the [multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags) and [payloads](/docs/feature-flags/payloads) documentation. |
-| No built-in flag approval workflows | Some enterprise teams want PR-style review before a flag goes live | Use existing code review processes (flags are in code). PostHog [audit logs](/docs/data/audit-logs) track changes. |
-| Statistical methodology is Bayesian | Teams preferring frequentist methods may push back | Bayesian is faster to reach conclusions and easier to interpret. For teams that insist on frequentist, this is a real limitation. |
+| No built-in flag approval workflows | Some enterprise teams want PR-style review before a flag goes live | Use existing code review processes (flags are in code). PostHog [activity logs](/docs/settings/activity-logs) track changes. |
+| Choosing between Bayesian and frequentist | Teams arrive with a strong preference and expect you to have picked wrong | Not a limitation any more — we ship [both](/docs/experiments/statistics-frequentist), selectable per experiment, alongside [CUPED](/docs/experiments/cuped) variance reduction and [holdouts](/docs/experiments/holdouts). Ask which they use and match it. |
+| Stale flags accumulate in the codebase | Every flag-heavy team ends up with dead flags nobody dares delete | [Stale flag cleanup](/docs/feature-flags/cleaning-up-stale-flags) plus the PostHog Desktop [enricher](/docs/posthog-desktop/posthog-integration), which annotates flag calls in the editor with live rollout and staleness. There's also a scout that watches for them. |
 
 ## Getting a customer started
 
@@ -189,6 +196,8 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 - [ ] Enable [Session Replay](/docs/session-replay) and filter replays by flag variant to debug an issue
 - [ ] Review experiment results and use them to make a ship/no-ship decision
 - [ ] Plan second experiment to establish the workflow as a team habit
+- [ ] Point out [frequentist vs Bayesian](/docs/experiments/statistics-frequentist) early if they have a stats opinion — it defuses the most common objection before it's raised
+- [ ] For flag-heavy teams, install [PostHog Desktop](/docs/posthog-desktop) and show the enricher annotating their own flag calls with live rollout data
 
 ## Cross-sell pathways from this use case
 
@@ -200,12 +209,17 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 | Feature Flags (for growth experiments) | Growth & Marketing (for the growth team) | Growth team initiated the experiments, engineering implemented the flags. Expand the growth side. | "Your growth team started the experiments. Have they explored Web Analytics and Marketing Analytics for attribution?" |
 | Feature Flags + Experiments | Error Tracking / Observability | They're catching issues via experiments but want proactive error detection | "You're catching regressions through experiments. Error Tracking would catch exceptions before they show up in your metrics." |
 | AI product releasing prompt/model changes | AI/LLM Observability | They need to detect quality regressions that error tracking won't catch | "After your last prompt change, did output quality hold up? AI Evals would tell you automatically." |
+| Flags + Experiments + Error Tracking all active | self-driving | They have every signal source the loop needs and are still triaging by hand | "You're already catching regressions after a rollout. Want the agent to investigate and open the PR while you sleep?" |
+| Hundreds of flags, unclear which are dead | PostHog Desktop | Flag debt is invisible in the editor, which is where engineers actually live | "Your engineers can't tell which flags are still doing anything without leaving their editor. The enricher annotates every flag call with its live rollout inline." |
 
 ## Internal resources
 
 - **Feature Flags docs:** [Getting started](/docs/feature-flags/start-here) · [Feature Flags](/docs/feature-flags) · [Multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags) · [Payloads](/docs/feature-flags/payloads)
 - **Experiments docs:** [Experiments](/docs/experiments) · [Creating experiments](/docs/experiments/creating-an-experiment) · [Exposures](/docs/experiments/exposures)
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
+- **Experiment statistics:** [Frequentist](/docs/experiments/statistics-frequentist) · [Bayesian](/docs/experiments/statistics-bayesian) · [CUPED](/docs/experiments/cuped) · [Holdouts](/docs/experiments/holdouts) · [Warehouse metrics](/docs/experiments/data-warehouse)
+- **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving) · [Anatomy of a PR](/docs/self-driving/anatomy-of-a-pr)
+- **PostHog Desktop:** [Positioning](/handbook/marketing/positioning/desktop) · [Docs](/docs/posthog-desktop) · [Enricher](/docs/posthog-desktop/posthog-integration)
 - **Competitive battlecard:** *To be added: LaunchDarkly competitive positioning*
 
 ## Appendix: Company archetype considerations
