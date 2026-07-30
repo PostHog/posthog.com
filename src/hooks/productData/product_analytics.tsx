@@ -14,24 +14,21 @@ import {
     IconChat,
     IconCode,
     IconMessage,
-    IconNewspaper,
     IconArrowUpRight,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
+import { getTool } from '../../data/tools'
 
 export const productAnalytics = {
+    ...getTool('product_analytics'),
     Icon: IconGraph,
-    name: 'Product Analytics',
-    handle: 'product_analytics',
     type: 'product_analytics',
-    slug: 'product-analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     color: 'blue',
     colorSecondary: 'sky-blue',
-    category: 'analytics',
     wizardSupport: true,
     shortDescription: 'Understand how people use your product',
     pricingDescription:
@@ -92,21 +89,20 @@ export const productAnalytics = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -217,7 +213,7 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog code.',
+        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
         scenario: 'Fewer people are finishing signup than last week',
         columns: [
             {
@@ -256,7 +252,7 @@ export const productAnalytics = {
                     surfaces: ['ai', 'slack'],
                     steps: [
                         'You ask PostHog AI: "why did signup conversion drop this week?"',
-                        'It queries the same funnel you would have built by hand and compares each step against last week',
+                        'It counts how many people reached each step (landing page, signup form, first project) and compares those counts against last week',
                         'It names the step that fell, and you go fix it',
                     ],
                     outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
@@ -265,7 +261,7 @@ export const productAnalytics = {
                     {
                         title: 'Agents read what you built',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. Better data in, better answers out.',
+                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. An agent can only tell you why signups dropped if something in your product is called a signup.',
                     },
                     {
                         title: 'The full prompt list is below',
@@ -296,9 +292,9 @@ export const productAnalytics = {
                         body: 'The scout reads the same funnels and events you built by hand. That data is what turns "something changed" into a clear cause and a pull request you can trust.',
                     },
                     {
-                        title: 'More data, sharper fixes',
+                        title: 'More data, better fixes',
                         icon: 'IconTrends',
-                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise.",
+                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise. Pipe in a source like HubSpot or Gong and your deals, tickets, and sales calls sit alongside that behavior, so a report can name which accounts a drop actually cost you.",
                     },
                 ],
             },

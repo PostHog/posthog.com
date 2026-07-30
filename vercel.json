@@ -2503,6 +2503,10 @@
             "destination": "/questions/topic/session-replay"
         },
         {
+            "source": "/questions/topic/ai-observability",
+            "destination": "/questions/topic/llm-analytics"
+        },
+        {
             "source": "/blog/customer-churn-analysis-guide",
             "destination": "/blog/churn-rate-vs-retention-rate"
         },
@@ -2525,6 +2529,10 @@
         {
             "source": "/ab-testing/features",
             "destination": "/experiments"
+        },
+        {
+            "source": "/ai-observability/features",
+            "destination": "/ai-observability#top-features"
         },
         {
             "source": "/product-os/features",
@@ -3911,6 +3919,30 @@
             "destination": "/session-replay#questions"
         },
         {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
             "source": "/feature-flags/customers",
             "destination": "/feature-flags"
         },
@@ -4009,6 +4041,34 @@
         {
             "source": "/ab-testing/questions",
             "destination": "/experiments#questions"
+        },
+        {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
         },
         {
             "source": "/handbook/what-is-posthog",

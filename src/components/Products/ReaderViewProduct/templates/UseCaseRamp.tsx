@@ -135,8 +135,9 @@ interface UseCaseRampData {
     intro?: string
     /**
      * Title of the one incident traced through every level, e.g. 'Signup
-     * conversion drops eight points'. Named here once; each column carries its
-     * level's version of the story in `scenario`.
+     * conversion drops eight points'. Named here once and rendered on each
+     * column's scenario card, where the column supplies its level's version of
+     * the story in `scenario`. Deliberately not repeated in the intro.
      */
     scenario?: string
     columns?: RampColumn[]
@@ -213,13 +214,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
             <LetPostHogScroller className="mb-2 text-2xl font-bold tracking-tight text-primary @xl:text-3xl" />
             <p className="m-0 mb-4 text-[15px] text-secondary">
                 {ramp?.intro ??
-                    `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog code.`}
-                {ramp?.scenario && (
-                    <>
-                        {' '}
-                        For example: <strong className="text-primary">{ramp.scenario.toLowerCase()}</strong>.
-                    </>
-                )}
+                    `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog work proactively with your data.`}
             </p>
             <Tabs.Root defaultValue={slugify(defaultColumn.level)}>
                 <Tabs.List

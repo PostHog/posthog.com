@@ -1,4 +1,5 @@
 import React from 'react'
+import { getTool } from '../../data/tools'
 import {
     IconMessage,
     IconEye,
@@ -13,13 +14,13 @@ import {
     IconMagic,
     IconChat,
     IconCode,
-    IconNewspaper,
     IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
 
 export const surveys = {
+    ...getTool('surveys'),
     Icon: IconMessage,
     name: 'Surveys',
     description: 'Ask users anything with no-code surveys',
@@ -30,7 +31,6 @@ export const surveys = {
     forumTopicId: 347,
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
     pricingDescription:
         'Your first 1500 survey responses are free every month, then pay for what you use. No limits on surveys created or questions asked.',
@@ -90,21 +90,20 @@ export const surveys = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -196,7 +195,7 @@ export const surveys = {
         ],
     },
     useCaseRamp: {
-        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog code.',
+        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog work proactively with your data.',
         scenario: 'Dozens of users ask for the same feature: exporting their data to CSV',
         columns: [
             {
@@ -244,7 +243,7 @@ export const surveys = {
                     {
                         title: 'Agents read what came back',
                         icon: 'IconSearch',
-                        body: 'Summaries and themes come from the responses you already collected by hand. More answers in, clearer themes out.',
+                        body: 'Summaries and themes come from the same responses you would otherwise read yourself. Every answer stays tied to the person who gave it, so an agent can also tell you whether the people asking for a feature are the ones paying you.',
                     },
                     {
                         title: 'The full prompt list is below',
