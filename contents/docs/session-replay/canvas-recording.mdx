@@ -22,7 +22,7 @@ Canvas elements are recorded at a rate of **4 frames per second** which may lead
 
 An application that knows where sensitive content sits inside its canvas can supply mask regions via `session_recording.canvasCapture.maskRegionsFn` in `posthog.init`. The returned regions (CSS pixels, relative to the canvas) are painted black inside the capture pipeline before frames are encoded — masked pixels never leave the browser. Returning `null` skips that canvas's frame entirely rather than recording it unmasked.
 
-**Flutter web** uses this to apply its full masking configuration (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) inside the CanvasKit canvas — see [masking in session replay](/docs/session-replay/privacy) under the Flutter tab for setup.
+**Flutter web** (PostHog Flutter SDK 5.34.0+) uses this to apply its full masking configuration (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) inside the CanvasKit canvas — see [masking in session replay](/docs/session-replay/privacy) under the Flutter tab for setup.
 
 <ProductScreenshot
     imageLight={ImgReplayCanvasLight} 

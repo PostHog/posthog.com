@@ -294,7 +294,7 @@ If you use [canvas masking on Flutter Web](/docs/session-replay/privacy) and con
 
 - Check your app is wrapped in `PostHogWidget` — without it, canvas frames are skipped entirely (blank canvas) rather than recorded unmasked, and a console warning explains the fix.
 - Frames captured between page load and Flutter booting are only covered when `session_recording.canvasCapture.maskRegionsFn` is declared in `posthog.init` — without the declaration, masking starts at the first `PostHogMaskWidget` mount and the recording restarts once at that point (the replay shows a split).
-- Canvas masking requires posthog-js 1.408.0+ — on older versions frames record unmasked and the plugin logs a console warning telling you to upgrade.
+- Canvas masking requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+ — on an older posthog-js, frames record unmasked and the plugin logs a console warning telling you to upgrade.
 
 ## Angular performance
 
