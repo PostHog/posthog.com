@@ -49,6 +49,7 @@ export const tools = [
         description: 'Custom API endpoints powered by your PostHog data.',
         slug: 'endpoints',
         category: 'product_engineering',
+        status: 'beta',
         aliases: ['Query API endpoint'],
     },
     {
