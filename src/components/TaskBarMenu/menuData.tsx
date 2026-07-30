@@ -380,7 +380,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: false, // Omit from mobile menu; desktop-only search
+            mobileDestination: '/products', // Desktop shows the searchable submenu; mobile links to the tools list
         },
     ]
 
