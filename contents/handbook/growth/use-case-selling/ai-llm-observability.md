@@ -157,7 +157,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 ### Our positioning
 
 - **Model performance + user behavior in one platform.** Langfuse traces your LLM calls. PostHog traces your LLM calls AND shows you how users interact with the output AND lets you A/B test improvements AND catches errors. No one else connects the full stack.
-- **Real user outcomes, not just model metrics.** Other AI observability tools optimize for model performance (latency, cost, perplexity). PostHog lets you optimize for user outcomes: did the user accept the suggestion? Did they convert? Did they come back?
+- **Model performance measured against user outcomes.** Other AI observability tools optimize for model performance (latency, cost, perplexity). PostHog lets you optimize for user outcomes: did the user accept the suggestion? Did they convert? Did they come back?
 - **Experiments on prompts/models measured by business metrics.** A/B test GPT-4o vs. Claude measured not by BLEU score but by user conversion and retention. This is what actually matters for AI product decisions.
 - **AI observability + traditional observability.** Error Tracking catches model failures. Session Replay shows the user experience. Product Analytics measures business impact. It's one platform, not AI observability siloed from everything else.
 

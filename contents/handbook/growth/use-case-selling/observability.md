@@ -159,7 +159,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 ### Our positioning
 
 - **Errors + replay in one platform.** See the stack trace and the user's actual session. No other error tracking tool offers this depth of user context. Sentry shows you the error. PostHog shows you the experience.
-- **Business impact, not just error count.** Connect errors to user behavior and revenue with Product Analytics. "This error caused 200 users to abandon checkout" is a different conversation than "this error fired 500 times."
+- **Errors tied to revenue and user behavior.** Connect errors to user behavior and revenue with Product Analytics. "This error caused 200 users to abandon checkout" is a different conversation than "this error fired 500 times."
 - **Consolidation for existing PostHog users.** If they're already using PostHog for analytics or flags, adding Error Tracking means one fewer vendor. Same data platform, one less tool to manage.
 - **Logs completes the picture.** Errors, user sessions, and backend logs in one place. No switching between Sentry, Papertrail, and Amplitude to understand an incident.
 - **OpenTelemetry-native, no proprietary SDK.** Logs, traces, and metrics all ingest over standard OTLP. There's nothing to rip out if they leave, which matters to a platform team that's been locked into an agent-based vendor. One OTel setup covers all three pillars.

@@ -164,10 +164,10 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 ### Our positioning
 
 - **Quantitative + qualitative in one platform.** Product Analytics and Session Replay together. No switching between Amplitude and Hotjar. Filter replays by funnel drop-off, cohort, or event.
-- **Insight to action, not just insight.** Most analytics tools stop at the dashboard. PostHog lets you act on what you find with [Workflows](/docs/workflows/start-here) and [Experiments](/docs/experiments).
+- **Insight you can act on.** Most analytics tools stop at the dashboard. PostHog lets you act on what you find with [Workflows](/docs/workflows/start-here) and [Experiments](/docs/experiments).
 - **Experiments built into the analytics workflow.** See a drop-off in a funnel, right-click to create an experiment, measure the result in the same tool. No separate experimentation platform.
 - **[PostHog AI](/docs/posthog-ai/allow-access) makes analytics accessible.** PMs who aren't comfortable with SQL can ask questions in plain English.
-- **AI on replay that produces data, not a summary.** Most competitors now ship some flavor of AI-over-session-replay. The differentiator isn't that we watch recordings — it's that [Replay Vision](/docs/replay-vision) emits a normal PostHog event, so "sessions where the user hit a dead end" becomes a funnel breakdown, a cohort you can survey, or an experiment exclusion. Everyone else's AI findings stay inside their AI panel.
+- **AI on replay that produces queryable data.** Most competitors now ship some flavor of AI-over-session-replay. The differentiator is that [Replay Vision](/docs/replay-vision) emits a normal PostHog event, so "sessions where the user hit a dead end" becomes a funnel breakdown, a cohort you can survey, or an experiment exclusion. Everyone else's AI findings stay inside their AI panel.
 
 ### Competitor quick reference
 

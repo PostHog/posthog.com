@@ -20,7 +20,7 @@ Most companies don't have a customer experience system. They have tickets in one
 
 [Support](/docs/support) is what makes this a system rather than a collection of tools. It's our customer support product — a chat widget, a shared inbox, and email, Slack, and GitHub channels — and because PostHog already captured what happened in the product, each ticket arrives with the sender's session replay, recent events, and exceptions attached.
 
-**Support is the anchor, not a prerequisite.** Plenty of good-fit accounts have a helpdesk they aren't replacing this quarter, and the use case still works: they keep tickets in Zendesk or Intercom, and PostHog becomes the context and debugging layer their agents open alongside it. Their helpdesk is also already a [self-driving signal source](/docs/self-driving/inbox/sources), so recurring tickets can become PRs without moving the inbox at all. Lead with Support where the helpdesk is in play, and lead with Session Replay where it isn't.
+**You can sell this use case without moving their helpdesk.** Plenty of good-fit accounts have a helpdesk they aren't replacing this quarter, and the use case still works: they keep tickets in Zendesk or Intercom, and PostHog becomes the context and debugging layer their agents open alongside it. Their helpdesk is also already a [self-driving signal source](/docs/self-driving/inbox/sources), so recurring tickets can become PRs without moving the inbox at all. Lead with Support where the helpdesk is in play, and lead with Session Replay where it isn't.
 
 ## What PostHog products are relevant?
 
@@ -78,7 +78,7 @@ This expansion happens naturally because each step removes a layer of uncertaint
 
 **Helpdesk cost consolidation.** Per-seat helpdesk pricing is one of the easier line items to attack. Support's core is free with no per-seat charge, so a growing support team stops paying more every time it hires. Combined with replacing a separate replay tool and a separate error tracker, this is often the clearest hard-dollar case in any use case we sell.
 
-**Fixes actually ship.** The usual failure mode isn't slow triage, it's the same ticket coming back because nobody prioritized the underlying bug. Recurring conversations become investigated reports with PRs, which converts support volume into product improvement.
+**Fixes actually ship.** The usual failure mode is the same ticket coming back because nobody prioritized the underlying bug. Recurring conversations become investigated reports with PRs, which converts support volume into product improvement.
 
 **Revenue protection.** When enterprise customers report issues, speed and clarity matter. Being able to say "here's exactly what happened and here's the fix" builds trust. Slow, unclear debugging erodes it.
 
