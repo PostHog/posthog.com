@@ -377,7 +377,7 @@ export const webAnalytics = {
             'Investigates traffic spikes, dips, and other anomalies',
             'Analyzes Core Web Vitals to identify performance bottlenecks',
         ],
-        // Reshaped from existing ai.prompts + contents/docs/web-analytics/query-traffic-mcp.mdx examples.
+        // Reshaped from existing ai.prompts + contents/docs/web-analytics/surfaces/mcp.mdx examples.
         // Tool names verified against src/data/mcp-tools.json.
         groups: [
             {
