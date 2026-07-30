@@ -145,11 +145,11 @@ If Max is drawn in color he should always have a beige body with brown spines, a
 
 He should be outlined with a strong, black monoline with consistent thickness. He should always face left, right, or straight-on but shouldn't be drawn with a side profile or from behind as he's self-conscious.
 
-> A more detailed version of this guide is <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">available on Figma</PrivateLink> for team members.
+> A more detailed version of this guide is [available on Figma](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1).
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">in this Figma file</PrivateLink>. This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
 
 Here's how:
 
