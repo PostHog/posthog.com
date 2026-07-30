@@ -46,7 +46,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **A high ceiling beats a high floor.** Tech moves fast, but PostHog moves faster. We ship more in a quarter than most teams ship in a year and the strategy changes under us while we work. It's important to be adaptable and to understand how iteration beats polish. It's often better to get many things done to a 7/10 standard than one thing to a 10/10.
 
-> What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her superday better prepared than others with 10 years' experience behind them — and without the limitation of a tired playbook.
+> What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them — and without the limitation of a tired playbook.
 
 **Someone who's excited about something.** I ask most candidates what environment they need to do their best work, and what their favorite project has been. It tells me how they want to work and what they value, and I like watching people talk about something they're into. If they can't name anything they've enjoyed, that's the biggest red flag in the process.
 
