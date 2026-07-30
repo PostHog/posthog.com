@@ -38,15 +38,15 @@ Each use case has a full playbook with discovery questions, competitive position
 | Surveys | Product Intelligence | Growth & Marketing, Customer Experience |
 | Web Analytics | Growth & Marketing | |
 | Marketing Analytics *beta* | Growth & Marketing | |
-| Customer Analytics | Growth & Marketing | Product Intelligence |
+| Customer Analytics *beta* (B2B mode requires Group Analytics add-on) | Growth & Marketing | Product Intelligence |
 | Workflows | Growth & Marketing | Product Intelligence, Customer Experience |
 | AI Observability | AI/LLM Obs | Customer Experience |
 | AI Evals | AI/LLM Obs | Product Intelligence, Release Engineering |
-| Prompt management | AI/LLM Obs | |
+| Prompt management *beta* | AI/LLM Obs | |
 | Data Warehouse | Data Infrastructure | |
 | Data Pipelines / Batch Exports | Data Infrastructure | Growth & Marketing |
-| Endpoints | Data Infrastructure | |
-| Semantic layer | Data Infrastructure | |
+| Endpoints *beta* | Data Infrastructure | |
+| Semantic layer *alpha* | Data Infrastructure | |
 | Logs | Observability | Customer Experience |
 | Distributed tracing *alpha* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |

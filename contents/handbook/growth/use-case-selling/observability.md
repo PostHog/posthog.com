@@ -169,7 +169,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 | Competitor | What They Do | Our Advantage | Their Advantage |
 |---|---|---|---|
-| Sentry | Error tracking, performance monitoring, session replay | Deeper product analytics integration; business impact context; flag/experiment connection; better pricing | More mature error tracking features; broader language support; larger install base; code-level profiling; larger install base |
+| Sentry | Error tracking, performance monitoring, session replay | Deeper product analytics integration; business impact context; flag/experiment connection; better pricing | More mature error tracking features; broader language support; larger install base; code-level profiling |
 | Datadog | Full observability: APM, logs, metrics, infrastructure | Product analytics integration; session replay depth; OTel-native with no agent; usage-based instead of per-host | Service maps, profiling, infra and k8s monitoring, synthetic monitoring; enterprise-grade; massive ecosystem |
 | New Relic | Full observability: APM, logs, errors, distributed tracing | Product analytics integration; session replay; simpler pricing | Far more mature APM; complete infra coverage |
 | Better Stack | OTel-native logs, traces, uptime | Product analytics and session replay alongside; self-driving loop | Service map; more mature tracing; uptime/status pages |
