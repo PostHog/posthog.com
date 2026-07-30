@@ -34,7 +34,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **Make the plan, then do the plan.** There are no hands-off roles at PostHog and no purely strategic seats. You don't need engineering experience, but you do need to be someone who ships a fix when they hit a problem, rather than someone who asks someone else to read your Powerpoint deck. Product marketers are the hardest role we hire for and this is why.
 
-> What good looks like: <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance.
+> What good looks like: <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance. Not many influencer managers will actually ship their own tooling.
 
 **Strong opinions.** Our brand is one of PostHog's most valuable marketing assets and the fastest way to wreck it is hiring people who tell us what we want to hear or who don't have a strong sense of taste to rely on. For us, safe takes are worse than wrong ones.
 
