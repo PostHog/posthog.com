@@ -8,12 +8,12 @@ import {
     IconRocket,
     IconPieChart,
     IconCheckCircle,
-    // IconInfo, // uncomment with eli5 menu item
+    IconInfo,
     IconCursorClick,
-    // IconMagic, // uncomment with use-cases menu item
+    IconMagic,
     IconChat,
     IconCode,
-    // IconMessage, // uncomment with community menu item once forumTopicId exists
+    IconMessage,
 } from '@posthog/icons'
 import { features } from './workflows/features'
 import { applications, topFeatures } from './workflows/slides'
@@ -24,8 +24,8 @@ export const workflows = {
     productVariantName: 'Emails',
     Icon: IconDecisionTree,
     type: 'workflows_emails',
-    // teamSlug: 'workflows', // verify against small-teams slug before enabling
-    // forumTopicId: /* create/find topic, then uncomment community menu item below */,
+    teamSlug: 'workflows',
+    forumTopicId: 392, // /questions/topic/workflows squeakId
     color: 'teal',
     colorSecondary: 'green-2',
     includeAddonRates: true,
@@ -47,22 +47,20 @@ export const workflows = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // Needs overview.eli5 — see content gaps.
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // Needs useCases — see content gaps.
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -95,8 +93,7 @@ export const workflows = {
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
-        // Needs forumTopicId once a Workflows community topic exists.
-        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
@@ -115,7 +112,8 @@ export const workflows = {
         title: 'Automate workflows with product data',
         description:
             'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
-        // eli5: /* write — see session_replay.overview.eli5 for shape */,
+        // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
+        eli5: "Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to your users. You decide when a workflow is triggered, who it reaches, and what happens at each step – triggers, delays, audience splits, message sends, and PostHog actions. Because workflows run on the same events and person properties you already send to PostHog, you can act on real product behavior instead of a separate marketing dataset. Any real-time destination in PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and automation.",
         textColor: 'text-black',
         layout: 'overlay',
     },
@@ -135,6 +133,13 @@ export const workflows = {
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
+        // From contents/docs/workflows/start-here.mdx
+        builder: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_light_a9f00e201e.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_dark_83291e0b1c.png',
+            alt: 'How to create a workflow in PostHog',
+        },
     },
     customers: {
         grantable: {
@@ -149,10 +154,29 @@ export const workflows = {
                 'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
         },
     },
-    // useCases: {
-    //     intro: /* write — see feature_flags.useCases */,
-    //     rows: [/* [role, description], … */],
-    // },
+    // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
+    useCases: {
+        intro: 'Workflows is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Leads / Technical PMs',
+                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
+            ],
+            [
+                'Product Marketers',
+                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
+            ],
+            ['Growth', 'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior'],
+            [
+                'Product Engineers',
+                'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',
+            ],
+            [
+                'Automation-minded teams',
+                'Zapier/n8n-style flows triggered by product events, with destinations and basic workflow logic in one place',
+            ],
+        ],
+    },
     features,
     mcp: {
         title: features.mcp.title,
@@ -168,8 +192,32 @@ export const workflows = {
         productSlug: 'workflows',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },
-    // Previous questions[] were LLM-analytics leftovers and are omitted (answers
-    // was excluded from the old Slides config too). Write real Workflows Qs if needed.
+    questions: [
+        {
+            question: 'How do I set up an email drip campaign?',
+            url: '/docs/workflows/email-drip-campaign',
+        },
+        {
+            question: 'How do I create emails with PostHog AI?',
+            url: '/docs/workflows/create-emails-ai',
+        },
+        {
+            question: 'How do I configure email, Slack, or other channels?',
+            url: '/docs/workflows/configure-channels',
+        },
+        {
+            question: 'How do I run A/B tests inside workflows?',
+            url: '/tutorials/workflows-ab-testing',
+        },
+        {
+            question: 'How do teams use Workflows for customer journeys?',
+            url: '/tutorials/complete-workflows-guide',
+        },
+        {
+            question: 'How do I manage opt-outs and suppressions?',
+            url: '/docs/workflows/opt-outs',
+        },
+    ],
     comparison: {
         summary: {
             them: [
@@ -255,7 +303,8 @@ export const workflows = {
         imageAlt: 'A hedgehog automating workflows',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
-        // intro: /* write — see feature_flags.ai.intro */,
+        // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
+        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
         mcpFeatures: ['workflows'],
         skills: [
             'Generates email templates for your content library',
@@ -326,7 +375,11 @@ export const workflows = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
             alt: 'the automator hedgehog',
         },
-        // mobileHog: /* asset + alt — see session_replay.hogs.mobileHog */,
+        // Same art as ai.image – used as the Eli5 float-right hog.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+            alt: 'A hedgehog automating workflows',
+        },
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {

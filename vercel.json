@@ -4151,7 +4151,7 @@
         },
         {
             "source": "/workflows/questions",
-            "destination": "/workflows"
+            "destination": "/workflows#community"
         },
         {
             "source": "/handbook/what-is-posthog",
