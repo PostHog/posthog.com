@@ -68,7 +68,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: 'See exactly how an error happened',
         description: (
             <>
@@ -106,7 +106,6 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.investigate_resolve.images[0].src,
             alt: f.investigate_resolve.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -116,7 +115,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Decide what to fix – then ship the fix safely',
         description: (
             <>
@@ -150,7 +149,7 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'impact', glow: true },
+        image: { ref: 'impact' },
     },
 ]
 
@@ -162,13 +161,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-orange',
-        layout: 'float',
+        layout: 'stack',
         heading: f.stack_traces.headline,
         description: <p>{f.stack_traces.description}</p>,
         image: {
             src: f.stack_traces.images[0].src,
             alt: f.stack_traces.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -178,13 +176,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-red',
-        layout: 'float',
+        layout: 'stack',
         heading: f.alerts.headline,
         description: <p>{f.alerts.description}</p>,
         image: {
             src: f.alerts.images[0].src,
             alt: f.alerts.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -194,13 +191,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-orange',
-        layout: 'float',
+        layout: 'stack',
         heading: f.monitor_issues.headline,
         description: <p>{f.monitor_issues.description}</p>,
         image: {
             src: f.monitor_issues.images[0].src,
             alt: f.monitor_issues.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -210,13 +206,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
-        layout: 'float',
+        layout: 'stack',
         heading: f.manage_organize.headline,
         description: <p>{f.manage_organize.description}</p>,
         image: {
             src: f.manage_organize.images[0].src,
             alt: f.manage_organize.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -226,13 +221,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-purple',
-        layout: 'float',
+        layout: 'stack',
         heading: f.assign_triage.headline,
         description: <p>{f.assign_triage.description}</p>,
         image: {
             src: f.assign_triage.images[0].src,
             alt: f.assign_triage.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -242,13 +236,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
-        layout: 'float',
+        layout: 'stack',
         heading: f.investigate_resolve.headline,
         description: <p>{f.investigate_resolve.description}</p>,
         image: {
             src: f.investigate_resolve.images[0].src,
             alt: f.investigate_resolve.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -258,13 +251,12 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-seagreen',
-        layout: 'float',
+        layout: 'stack',
         heading: f.target_affected_users.headline,
         description: <p>{f.target_affected_users.description}</p>,
         image: {
             src: f.target_affected_users.images[0].src,
             alt: f.target_affected_users.images[0].alt,
-            glow: true,
         },
     },
     // MCP lives under Applications (Editor workflow) – avoid a second nearly-identical slide here.
