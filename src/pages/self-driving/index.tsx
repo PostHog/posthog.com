@@ -962,6 +962,10 @@ export default function SelfDrivingPage({
                                     </strong>{' '}
                                     <em>(Yep, really.)</em>
                                 </p>
+                                <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
+                                    While you slept, PostHog dug through your product data, found what was worth fixing,
+                                    and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
+                                </p>
                                 <GetStarted selfDriving />
                             </div>
 
