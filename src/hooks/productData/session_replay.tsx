@@ -327,7 +327,7 @@ export const sessionReplay = {
                     {
                         title: 'Agents search what you record',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would scroll through by hand. Turn on error tracking too and an agent can work backwards from an exception to the session that produced it.',
+                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would open yourself. Turn on error tracking too and an agent can work backwards from an exception to the session that produced it.',
                     },
                     {
                         title: 'The full prompt list is below',
@@ -339,7 +339,7 @@ export const sessionReplay = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'A scout watches for friction building up on one page or element, and reports it before anyone files a ticket.',
+                driver: 'A scout watches for friction or weird user behavior, and reports it before anyone files a ticket.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'slack'],
@@ -349,18 +349,18 @@ export const sessionReplay = {
                         'The report links the recordings behind it, so you can watch the failure before deciding anything',
                         'You reply @PostHog to fix it, and it opens a draft pull request against the code behind that button',
                     ],
-                    outcome: 'No ticket, no searching. The report arrived with the recordings already attached.',
+                    outcome: 'This time nothing prompted you. The report arrived with the recordings already attached.',
                 },
                 points: [
                     {
                         title: 'Your recordings are the evidence',
                         icon: 'IconBrain',
-                        body: 'The scout reads the same sessions you would watch by hand, which is why a report names one button on one page instead of guessing. Those recordings are also how you check the fix worked afterwards.',
+                        body: 'The scout reads sessions at a volume nobody has time for, which is why a report can name one button on one page instead of guessing. Those same recordings are how you check the fix worked afterwards.',
                     },
                     {
-                        title: 'It also notices when recording stops',
-                        icon: 'IconShield',
-                        body: 'If your recording volume falls while traffic holds steady, the scout flags it as its own problem. Sessions you failed to capture cannot be recovered later, so this is the one it wants you to see immediately.',
+                        title: 'Replay Vision does the watching',
+                        icon: 'IconEye',
+                        body: 'Describe what to look for once and Replay Vision, in beta, watches the video of each session for it, catching hesitation and dead ends that clicks alone never show. Its findings land as events you can chart, so a pattern across hundreds of sessions shows up without anyone watching them.',
                     },
                 ],
             },
