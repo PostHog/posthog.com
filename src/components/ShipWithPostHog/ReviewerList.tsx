@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { IconCheckCircle, IconExternal, IconPlus } from '@posthog/icons'
+import { IconCheckCircle, IconPlus } from '@posthog/icons'
 import Link from 'components/Link'
-import Tooltip from 'components/RadixUI/Tooltip'
 import { Popover } from 'components/RadixUI/Popover'
+import { Hint } from './prose'
 import type { Reviewer } from './inboxData'
 
 interface ProfileNode {
@@ -24,7 +24,7 @@ const normalizeName = (name: string): string => name.toLowerCase().replace(/[‘
 // Rows offered by the "Add" menu. Chrome – the replica doesn't assign anyone.
 const SUGGESTED_ADDITIONS = ['Ben White', 'Tom Owers', 'Robbie Coomber']
 
-const Monogram = ({ name, className = 'size-8' }: { name: string; className?: string }): JSX.Element => (
+const Monogram = ({ name, className = 'size-6' }: { name: string; className?: string }): JSX.Element => (
     <span
         className={`inline-flex shrink-0 items-center justify-center rounded-full border border-primary bg-accent text-xs font-semibold text-secondary ${className}`}
     >
@@ -36,9 +36,9 @@ const Monogram = ({ name, className = 'size-8' }: { name: string; className?: st
  * Suggested reviewers on a report, with the rationale for each.
  *
  * Names are matched against the real team directory at build time via
- * `allSqueakProfile`, so avatars and profile links are genuine. The commit SHAs and
- * the rationale beside them are illustrative – see the note on `Reviewer` in
- * `inboxData.tsx`.
+ * `allSqueakProfile`, so avatars and profile links are genuine. The commits and the
+ * rationale beside them come from the report's own `suggested_reviewers` artefact –
+ * see the note on `Reviewer` in `inboxData.tsx`.
  */
 export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): JSX.Element {
     const {
@@ -72,13 +72,13 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
         )
 
     return (
-        <ul className="m-0 flex list-none flex-col gap-3 p-0">
+        <ul className="m-0 flex list-none flex-col gap-2.5 p-0">
             {reviewers.map((reviewer) => {
                 const profile = profileFor(reviewer.name)
                 const avatarUrl = profile?.avatar?.formats?.thumbnail?.url
 
                 const avatar = avatarUrl ? (
-                    <img src={avatarUrl} alt="" className="size-8 shrink-0 rounded-full bg-accent object-cover" />
+                    <img src={avatarUrl} alt="" className="size-6 shrink-0 rounded-full bg-accent object-cover" />
                 ) : (
                     <Monogram name={reviewer.name} />
                 )
@@ -86,11 +86,11 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                 return (
                     <li key={reviewer.name}>
                         <div className="flex items-center gap-2">
-                            <Tooltip trigger={avatar}>
+                            <Hint trigger={avatar}>
                                 {profile?.companyRole
                                     ? `${reviewer.name} – ${profile.companyRole}`
                                     : `${reviewer.name} isn't in the team directory, so this falls back to an initial.`}
-                            </Tooltip>
+                            </Hint>
                             <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
                                 {/* An unmatched name still renders, just without a link. */}
                                 {profile?.squeakId ? (
@@ -104,29 +104,33 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                                 ) : (
                                     <strong className="text-sm text-primary">{reviewer.name}</strong>
                                 )}
-                                <span className="flex flex-wrap items-center gap-x-1 font-mono text-xs text-secondary">
+                                {/*
+                                 * `externalNoIcon`, not `external`: the latter wraps children in
+                                 * its own bold-underlined span with an arrow glyph, which at this
+                                 * size wrapped onto a second line under every sha.
+                                 */}
+                                <span className="font-mono text-xs text-secondary">
                                     {reviewer.commits.map((commit, index) => (
-                                        <Tooltip
-                                            key={commit.sha}
-                                            trigger={
-                                                <Link
-                                                    to={commit.url}
-                                                    external
-                                                    hideExternalIcon
-                                                    className="inline-flex items-center gap-0.5 text-secondary hover:text-primary hover:underline"
-                                                >
-                                                    {commit.sha}
-                                                    <IconExternal className="size-3" />
-                                                    {index < reviewer.commits.length - 1 && ','}
-                                                </Link>
-                                            }
-                                        >
-                                            The commit the blame walk landed on. Opens the real diff on GitHub.
-                                        </Tooltip>
+                                        <React.Fragment key={commit.sha}>
+                                            {index > 0 && ', '}
+                                            <Hint
+                                                trigger={
+                                                    <Link
+                                                        to={commit.url}
+                                                        externalNoIcon
+                                                        className="text-secondary hover:text-primary hover:underline"
+                                                    >
+                                                        {commit.sha}
+                                                    </Link>
+                                                }
+                                            >
+                                                The commit the blame walk landed on. Opens the real diff on GitHub.
+                                            </Hint>
+                                        </React.Fragment>
                                     ))}
                                 </span>
                                 {reviewer.approved && (
-                                    <Tooltip
+                                    <Hint
                                         trigger={
                                             <span className="inline-flex items-center gap-1 rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 text-xs font-semibold text-green">
                                                 <IconCheckCircle className="size-3" />
@@ -136,12 +140,12 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                                     >
                                         PostHog suggested this person, and they went on to actually approve the pull
                                         request.
-                                    </Tooltip>
+                                    </Hint>
                                 )}
                             </div>
                         </div>
                         {/* Indented to sit under the name, not the avatar. */}
-                        <p className="m-0 mt-1 pl-10 text-xs leading-snug text-secondary">{reviewer.reason}</p>
+                        <p className="m-0 mt-1 pl-8 text-xs leading-snug text-secondary">{reviewer.reason}</p>
                     </li>
                 )
             })}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconCode } from '@posthog/icons'
-import Tooltip from 'components/RadixUI/Tooltip'
+import { Hint } from './prose'
 import { EVIDENCE_SOURCE_META, type EvidenceItem, type EvidenceTag, type TagTone } from './inboxData'
 
 /**
@@ -34,13 +34,12 @@ const Tag = ({ tag }: { tag: EvidenceTag }): JSX.Element => {
             {tag.label}
         </span>
     )
-    return tag.tooltip ? <Tooltip trigger={pill}>{tag.tooltip}</Tooltip> : pill
+    return tag.tooltip ? <Hint trigger={pill}>{tag.tooltip}</Hint> : pill
 }
 
 /**
  * One evidence finding behind a report: which source saw it, what it saw, and the repo
- * files the agent read to work it out. The source and title share a line, truncating
- * the title, so a long list of findings stays skimmable.
+ * files the agent read to work it out.
  *
  * Bodies are re-worded from the stored findings for privacy; the code paths under them
  * are verbatim. See the note above `INBOX_ITEMS` in `inboxData.tsx`.
@@ -50,23 +49,18 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
     const SourceIcon = source.Icon
 
     return (
-        <div className="rounded-md border border-primary bg-accent p-3">
-            <div className="flex items-start justify-between gap-2">
-                {/*
-                 * `overflow-hidden` is load-bearing: the source and kind labels are
-                 * shrink-0, so without it they overflow this row in a narrow column and
-                 * collide with the tags instead of letting the title truncate.
-                 */}
-                <p className="m-0 flex min-w-0 flex-1 items-center gap-1.5 overflow-hidden text-xs">
-                    <Tooltip trigger={<SourceIcon className={`size-4 shrink-0 ${source.color}`} />}>
+        <div className="rounded-md border border-primary bg-accent p-2.5">
+            {/*
+             * Source and tags share the top line; the title gets its own. Sharing one
+             * line meant the shrink-0 source label and tags left the title around 150px
+             * in this column, which truncated every one of them to a few words.
+             */}
+            <div className="flex items-center justify-between gap-2">
+                <p className="m-0 flex min-w-0 items-center gap-1.5 text-xs text-secondary">
+                    <Hint trigger={<SourceIcon className={`size-4 shrink-0 ${source.color}`} />}>
                         {source.label} fed this finding into the report
-                    </Tooltip>
-                    <span className="shrink-0 text-secondary">{source.label}</span>
-                    <span aria-hidden className="shrink-0 text-secondary">
-                        ·
-                    </span>
-                    <span className="shrink-0 text-secondary">{item.kind}</span>
-                    <span className="truncate font-semibold text-primary">{item.title}</span>
+                    </Hint>
+                    <span className="truncate">{source.label}</span>
                 </p>
                 <span className="flex shrink-0 items-center gap-1">
                     {item.tags.map((tag) => (
@@ -74,10 +68,11 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
                     ))}
                 </span>
             </div>
-            <p className="m-0 mt-1.5 text-xs leading-snug text-secondary">{item.body}</p>
+            <p className="m-0 mt-1 text-xs font-semibold leading-snug text-primary">{item.title}</p>
+            <p className="m-0 mt-1 text-xs leading-snug text-secondary">{item.body}</p>
             {!!item.codePaths?.length && (
-                <div className="mt-2.5 border-t border-primary pt-2">
-                    <Tooltip
+                <div className="mt-2 border-t border-primary pt-1.5">
+                    <Hint
                         trigger={
                             <p className="m-0 mb-1 inline-flex items-center gap-1 text-xs font-semibold text-secondary">
                                 <IconCode className="size-3.5" />
@@ -87,10 +82,10 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
                     >
                         The files the agent opened while working this finding out. Straight from the report, and the
                         most concrete evidence that it read the code rather than guessed.
-                    </Tooltip>
+                    </Hint>
                     <ul className="m-0 list-none p-0">
                         {item.codePaths.map((path) => (
-                            <li key={path} className="truncate font-mono text-xs leading-relaxed text-secondary">
+                            <li key={path} className="truncate font-mono text-xs leading-snug text-secondary">
                                 {path}
                             </li>
                         ))}

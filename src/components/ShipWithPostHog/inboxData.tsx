@@ -140,9 +140,7 @@ export interface EvidenceTag {
 export interface EvidenceItem {
     id: string
     source: EvidenceSource
-    /** Sub-label after the source name, e.g. "Signal finding". */
-    kind: string
-    /** Shares a line with the source, and truncates – keep it short. */
+    /** One line summarizing what this source saw. Gets its own line, so it can wrap. */
     title: string
     /**
      * What this signal observed. Written from the real `signal_finding` artefact but
@@ -284,8 +282,8 @@ export const INBOX_ITEMS: InboxItem[] = [
     {
         id: 'error-tracking',
         commitType: 'fix',
-        scope: 'query',
-        title: 'make per-team cache size lookup fail-soft on Postgres timeouts',
+        scope: 'insights',
+        title: "don't fail queries when the cache size lookup errors",
         summary:
             '172 insight queries failed in three minutes even though the queries had already succeeded – a bookkeeping read in the cache write path took the response down with it.',
         priority: 'P1',
@@ -317,15 +315,10 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             <Code>QueryCache.store_result()</Code> writes the result, then asks{' '}
-                            <Code>get_team_cache_limit()</Code> for the team's cache cap. That helper hits Postgres just
-                            to read an optional override, and only catches <Code>Team.DoesNotExist</Code>. When the
-                            connection pooler saturates it raises <Code>OperationalError</Code> instead, and nothing
-                            wraps the call – so a successful ClickHouse query becomes a 500 over a config value that has
-                            a perfectly good default.
-                        </>,
-                        <>
-                            The memoizer re-raises without storing anything, so every retry hammers the database again
-                            rather than serving the stale value it already holds.
+                            <Code>get_team_cache_limit()</Code> for the team's cache cap. That helper reads an optional
+                            override from Postgres and only catches <Code>Team.DoesNotExist</Code>, so when the
+                            connection pooler saturates and raises <Code>OperationalError</Code> a successful ClickHouse
+                            query becomes a 500 over a config value that has a perfectly good default.
                         </>,
                     ],
                 },
@@ -334,9 +327,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             172 exceptions in three minutes, each one a query someone paid for and didn't get back. It
-                            had been silent for the preceding ten days, because it only fires when Postgres is already
-                            under pressure – which makes it an amplifier on database incidents rather than a constant
-                            drip.
+                            only fires when Postgres is already under pressure, so it amplifies database incidents
+                            rather than dripping constantly.
                         </>,
                     ],
                 },
@@ -380,7 +372,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'exception-burst',
                     source: 'error_tracking',
-                    kind: 'Signal finding',
                     title: '172 events in a three-minute window',
                     body: (
                         <>
@@ -435,7 +426,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         id: 'replay-vision',
         commitType: 'fix',
         scope: 'cohorts',
-        title: 'validate negation at root level, not subgroup level',
+        title: 'validate negation against sibling groups under outer AND',
         summary:
             "A valid cohort couldn't be saved when a negation sat in its own group, and the obvious workaround silently built a different cohort.",
         priority: 'P2',
@@ -469,10 +460,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                             group makes that group entirely negated, so the check fires and throws – it never looks at
                             the positive criterion in a sibling group, or at the top-level AND.
                         </>,
-                        <>
-                            It's easy to fall into, because new subgroups default to "any", and the error text never
-                            says the fix is to flip that dropdown to "all".
-                        </>,
                     ],
                 },
                 {
@@ -480,13 +467,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             Three independent recordings caught this across two regions over about three weeks, so it's
-                            a recurring trap rather than a one-off. There's no server-side event to count, because
-                            validation blocks the save before any request is made.
-                        </>,
-                        <>
-                            It's a correctness trap, not just a papercut: people either delete the negation they wanted,
-                            or switch the group to "any" to get past the error and{' '}
-                            <strong>silently build a different cohort</strong>.
+                            a recurring trap. People either delete the negation they wanted, or switch the group to
+                            "any" to get past the error and <strong>silently build a different cohort</strong>.
                         </>,
                     ],
                 },
@@ -505,7 +487,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'vision-1',
                     source: 'replay_vision',
-                    kind: 'Signal finding',
                     title: 'Traced the error text to the validator',
                     body: 'Confirmed from a recording plus the code that new subgroups default to the "any" operator, that the negation check fires for any non-AND group, and that the message matches the client-side error constant exactly. Blame put all of it in the original cohort filters commit.',
                     tags: [{ label: 'Verified', tone: 'green' }],
@@ -520,7 +501,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'vision-2',
                     source: 'replay_vision',
-                    kind: 'Signal finding',
                     title: 'A second session reproduced it',
                     body: 'Another observed session hit the same block, and the described reproduction matched the traced code path exactly. Two regions, three weeks apart.',
                     tags: [{ label: 'Verified', tone: 'green' }],
@@ -563,7 +543,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         id: 'conversations',
         commitType: 'fix',
         scope: 'integrations',
-        title: 'attach OAuth integration to the initiating project, not @current',
+        title: 'land OAuth integration on the initiating project',
         summary:
             'Connecting Slack from one project landed the integration on a different one, and it looked like it had worked.',
         priority: 'P2',
@@ -596,12 +576,9 @@ export const INBOX_ITEMS: InboxItem[] = [
                         <>
                             <Code>authorize_url</Code> puts only <Code>{'{next, token}'}</Code> in the OAuth{' '}
                             <Code>state</Code> and sends Slack to a callback that isn't project-scoped. That full-page
-                            round-trip reloads the app, so the current team re-resolves to the user's persisted default.
-                            The create call then writes against <Code>@current</Code>.
-                        </>,
-                        <>
-                            <Code>state.next</Code> bounces the UI back to the right project afterwards, which is
-                            exactly why it looks like it worked.
+                            round-trip reloads the app, so the current team re-resolves to the user's persisted default
+                            and the create call writes against <Code>@current</Code>. <Code>state.next</Code> then
+                            bounces the UI back to the right project, which is exactly why it looks like it worked.
                         </>,
                     ],
                 },
@@ -610,8 +587,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             Hits any multi-project customer wiring up Slack, or any other OAuth integration – they share
-                            the flow. Slack is by a wide margin the highest-volume integration kind. There's a
-                            workaround (switch default project first), so it's contained, but it's a confusing
+                            the flow. There's a workaround (switch default project first), but it's a confusing
                             onboarding snag that generates support tickets.
                         </>,
                     ],
@@ -621,8 +597,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             Carry the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and create
-                            against that team. The GitHub flow already does exactly this, so the fix extends an existing
-                            pattern and keeps the fixed redirect URI intact.
+                            against that team, as the GitHub flow already does.
                         </>,
                     ],
                 },
@@ -631,7 +606,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'conv-1',
                     source: 'conversations',
-                    kind: 'Signal finding',
                     title: 'Repeat connect attempts collapsing onto one project',
                     body: 'Queried the integration-created events: Slack is the highest-volume integration kind by a wide margin over 60 days, across thousands of distinct projects. Several people show three or four Slack connect attempts in a single day that all resolve to exactly one project – including on the day it was reported.',
                     tags: [{ label: 'Verified', tone: 'green' }],
@@ -647,7 +621,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'conv-2',
                     source: 'conversations',
-                    kind: 'Signal finding',
                     title: 'Confirmed from the code path alone',
                     body: 'The affected rows live in Postgres rather than in queryable event data, so this one rests on the code: the create call resolves its team from @current, and the callback that is not project-scoped re-resolves to the persisted default team.',
                     tags: [
@@ -705,8 +678,8 @@ export const INBOX_ITEMS: InboxItem[] = [
     {
         id: 'ai-observability',
         commitType: 'fix',
-        scope: 'ai-observability',
-        title: 'stop eval summary from timing out at the 30s gateway limit',
+        scope: 'aio',
+        title: 'chunk eval summary to avoid ai-gateway 30s timeout',
         summary:
             'Generating an AI eval summary failed about two-thirds of the time, because one slow LLM call ran into a hard gateway timeout.',
         priority: 'P1',
@@ -747,9 +720,9 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Impact',
                     paragraphs: [
                         <>
-                            16 of the last 24 generations failed with a 502, all pinned at about 30s latency – a{' '}
-                            <strong>67% failure rate</strong> – while the 8 that succeeded squeaked under the cliff at
-                            up to 29.3s. A paid feature failing more often than it worked.
+                            16 of the last 24 generations failed with a 502, all pinned at about 30s latency (a{' '}
+                            <strong>67% failure rate</strong>), while the 8 that succeeded squeaked under the cliff at
+                            up to 29.3s.
                         </>,
                     ],
                 },
@@ -757,9 +730,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Get the work out from under the race: summarize as a bounded concurrent map-reduce so no
-                            single gateway request approaches the timeout, chunking the run set instead of sending one
-                            enormous prompt.
+                            Summarize as a bounded concurrent map-reduce, chunking the run set so no single gateway
+                            request approaches the timeout.
                         </>,
                     ],
                 },
@@ -768,7 +740,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'aio-1',
                     source: 'ai_observability',
-                    kind: 'Signal finding',
                     title: 'Every failure pinned to the 30s boundary',
                     body: (
                         <>
@@ -819,7 +790,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         id: 'session-replay',
         commitType: 'fix',
         scope: 'settings',
-        title: 'redirect the legacy project-toolbar URL to stop a 404',
+        title: 'redirect removed toolbar section to web analytics',
         summary:
             'A removed settings route showed "Setting not found" while the sidebar still highlighted it as the current page.',
         priority: 'P2',
@@ -872,7 +843,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                     paragraphs: [
                         <>
                             Add the removed section to the legacy map so the router redirects to where the settings
-                            actually live now, using the same mechanism that already handles the earlier rename.
+                            actually live now.
                         </>,
                     ],
                 },
@@ -911,7 +882,6 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     id: 'settings-1',
                     source: 'replay_vision',
-                    kind: 'Signal finding',
                     title: 'Not-found events across 20+ projects',
                     body: (
                         <>
