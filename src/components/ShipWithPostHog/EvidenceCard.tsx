@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconExternal, IconPlayFilled } from '@posthog/icons'
+import { IconCode } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { EVIDENCE_SOURCE_META, type EvidenceItem, type EvidenceTag, type TagTone } from './inboxData'
 
@@ -38,12 +38,12 @@ const Tag = ({ tag }: { tag: EvidenceTag }): JSX.Element => {
 }
 
 /**
- * One evidence finding behind a report: which product saw it, what it saw, and how
- * bad it looked. The source and title share a line, truncating the title, so a long
- * list of findings stays skimmable.
+ * One evidence finding behind a report: which source saw it, what it saw, and the repo
+ * files the agent read to work it out. The source and title share a line, truncating
+ * the title, so a long list of findings stays skimmable.
  *
- * The "View replay" button and the footer link are chrome – this is a replica, there's
- * no recording or issue to open.
+ * Bodies are re-worded from the stored findings for privacy; the code paths under them
+ * are verbatim. See the note above `INBOX_ITEMS` in `inboxData.tsx`.
  */
 export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Element {
     const source = EVIDENCE_SOURCE_META[item.source]
@@ -75,45 +75,26 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
                 </span>
             </div>
             <p className="m-0 mt-1.5 text-xs leading-snug text-secondary">{item.body}</p>
-            {item.hasReplay && (
-                <Tooltip
-                    trigger={
-                        <button
-                            type="button"
-                            className="mt-2.5 inline-flex items-center gap-1.5 rounded border border-primary bg-primary px-2 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
-                        >
-                            View replay
-                            <IconPlayFilled className="size-3" />
-                        </button>
-                    }
-                >
-                    Opens the recording at this moment, so you watch the failure rather than read about it.
-                </Tooltip>
-            )}
-            {item.footer && (
-                <div className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-primary pt-2 text-xs text-secondary">
-                    <Tooltip trigger={<span className="font-mono">{item.footer.id}</span>}>
-                        {item.footer.timing
-                            ? 'The session this came from. Every finding keeps a link back to its source.'
-                            : 'The issue this came from. Every finding keeps a link back to its source.'}
+            {!!item.codePaths?.length && (
+                <div className="mt-2.5 border-t border-primary pt-2">
+                    <Tooltip
+                        trigger={
+                            <p className="m-0 mb-1 inline-flex items-center gap-1 text-xs font-semibold text-secondary">
+                                <IconCode className="size-3.5" />
+                                {item.codePaths.length} files read
+                            </p>
+                        }
+                    >
+                        The files the agent opened while working this finding out. Straight from the report, and the
+                        most concrete evidence that it read the code rather than guessed.
                     </Tooltip>
-                    {item.footer.timing && (
-                        <>
-                            <span aria-hidden>·</span>
-                            <Tooltip trigger={<span className="tabular-nums">{item.footer.timing}</span>}>
-                                Where in the session it happened, and how long the person was actually active.
-                            </Tooltip>
-                        </>
-                    )}
-                    {item.footer.link && (
-                        <button
-                            type="button"
-                            className="ml-auto inline-flex items-center gap-1 font-semibold text-red hover:underline dark:text-yellow"
-                        >
-                            {item.footer.link}
-                            <IconExternal className="size-3" />
-                        </button>
-                    )}
+                    <ul className="m-0 list-none p-0">
+                        {item.codePaths.map((path) => (
+                            <li key={path} className="truncate font-mono text-xs leading-relaxed text-secondary">
+                                {path}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             )}
         </div>

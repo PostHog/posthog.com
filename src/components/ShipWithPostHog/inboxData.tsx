@@ -1,38 +1,106 @@
 import React from 'react'
-import { IconWarning, IconRewindPlay, IconEye, IconList, IconCompass, IconSparkles, IconSupport } from '@posthog/icons'
+import {
+    IconWarning,
+    IconRewindPlay,
+    IconEye,
+    IconList,
+    IconCompass,
+    IconSparkles,
+    IconSupport,
+    IconGraph,
+} from '@posthog/icons'
 import { Code } from './prose'
 
 /**
- * Data for the /ship-with-posthog inbox replica: six pull requests, one per tool,
- * each opening into a replica of the app's report → pull request detail view.
+ * Data for the /ship-with-posthog inbox replica.
  *
- * Item 1 is the fully authored one – it carries the whole detail payload (prose
- * summary, CI checks, suggested reviewers, evidence, and a diff) and is the
- * reference for what a finished item looks like. Items 2–6 carry a short summary
- * only, so they render header + summary and skip the panels they have no data for.
+ * Every item is a real report that produced a real merged pull request on
+ * PostHog/posthog. Nothing here is invented – see the note above `INBOX_ITEMS` for
+ * where each field comes from and the two places the wording departs from the stored
+ * data for privacy reasons.
  *
- * Items 2 and 3 link real PRs on the public repo. Every other PR number, commit
- * SHA, and reviewer rationale on this page is illustrative – see the note on
- * `Reviewer` before adding more.
+ * The items are grouped by *discovery channel* rather than by product, because that's
+ * what the reports actually record: a cohorts bug found by Replay Vision, an
+ * integrations bug found by a support conversation, a query bug found by error
+ * tracking. Which tool spotted it is the interesting axis; the tool it happened to be
+ * in is not.
  */
 
-export type SourceKey = 'error_tracking' | 'session_replay' | 'replay_vision' | 'logs' | 'traces' | 'ai_observability'
+/**
+ * The signal sources a report can come from. These are *discovery channels* – how
+ * PostHog found the problem – not the product the bug turned out to live in. That
+ * distinction matters: a bug in cohorts was found by Replay Vision, and a bug in
+ * integrations was found by a support conversation.
+ */
+export type SourceKey =
+    | 'error_tracking'
+    | 'session_replay'
+    | 'replay_vision'
+    | 'conversations'
+    | 'logs'
+    | 'traces'
+    | 'ai_observability'
+    | 'analytics'
 
 interface SourceMeta {
     label: string
     Icon: React.ComponentType<{ className?: string }>
     /** Icon tint on the row meta line. Literal classes so Tailwind JIT keeps them. */
     color: string
+    /** How this source found the problem, for the row's tooltip. */
+    found?: string
 }
 
 // Icon + tint per source product, mirroring the app's sourceProductIcons.
 export const SOURCE_META: Record<SourceKey, SourceMeta> = {
-    error_tracking: { label: 'Error tracking', Icon: IconWarning, color: 'text-red' },
-    session_replay: { label: 'Session replay', Icon: IconRewindPlay, color: 'text-orange' },
-    replay_vision: { label: 'Replay Vision', Icon: IconEye, color: 'text-orange' },
-    logs: { label: 'Logs', Icon: IconList, color: 'text-secondary' },
-    traces: { label: 'Traces', Icon: IconCompass, color: 'text-blue' },
-    ai_observability: { label: 'AI observability', Icon: IconSparkles, color: 'text-purple' },
+    error_tracking: {
+        label: 'Error tracking',
+        Icon: IconWarning,
+        color: 'text-red',
+        found: 'An exception spiked, and every occurrence carried a stack trace.',
+    },
+    session_replay: {
+        label: 'Session replay',
+        Icon: IconRewindPlay,
+        color: 'text-orange',
+        found: 'Recordings showed people hitting the problem.',
+    },
+    replay_vision: {
+        label: 'Replay Vision',
+        Icon: IconEye,
+        color: 'text-orange',
+        found: 'A vision model watched the recordings and described what went wrong.',
+    },
+    conversations: {
+        label: 'Conversations',
+        Icon: IconSupport,
+        color: 'text-green',
+        found: 'Someone wrote in about it, and the ticket became a signal.',
+    },
+    logs: {
+        label: 'Logs',
+        Icon: IconList,
+        color: 'text-secondary',
+        found: 'A log line repeated far more than it should.',
+    },
+    traces: {
+        label: 'Traces',
+        Icon: IconCompass,
+        color: 'text-blue',
+        found: 'A span got slower than its usual pattern.',
+    },
+    ai_observability: {
+        label: 'AI observability',
+        Icon: IconSparkles,
+        color: 'text-purple',
+        found: 'An evaluation or a model call started failing.',
+    },
+    analytics: {
+        label: 'Product analytics',
+        Icon: IconGraph,
+        color: 'text-blue',
+        found: 'The numbers moved against their own baseline.',
+    },
 }
 
 export type Priority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
@@ -54,8 +122,8 @@ export interface ProseSection {
     paragraphs: React.ReactNode[]
 }
 
-/** Evidence reaches beyond the six signal products – support tools feed it too. */
-export type EvidenceSource = SourceKey | 'zendesk'
+/** Evidence sources are the same set of signal sources a report can come from. */
+export type EvidenceSource = SourceKey
 
 /** Status tag hue on an evidence card. Semantic tokens, not stock Tailwind. */
 export type TagTone = 'red' | 'orange' | 'yellow' | 'blue' | 'green'
@@ -72,36 +140,46 @@ export interface EvidenceTag {
 export interface EvidenceItem {
     id: string
     source: EvidenceSource
-    /** Sub-label after the source name, e.g. "Problem segment", "Ticket", "Issue". */
+    /** Sub-label after the source name, e.g. "Signal finding". */
     kind: string
     /** Shares a line with the source, and truncates – keep it short. */
     title: string
-    body: React.ReactNode
-    /** Usually one; a scanner finding pairs its verdict with a confidence score. */
-    tags: EvidenceTag[]
-    /** Renders a "View replay" button. Inert – it's chrome, there's no recording. */
-    hasReplay?: boolean
     /**
-     * Footer line: a session or issue id, replay timings when there are any, and an
-     * optional link label ("View issue", "Open ticket").
+     * What this signal observed. Written from the real `signal_finding` artefact but
+     * deliberately re-worded: the stored prose carries customer session ids, asset
+     * ids, and team numbers that can't go on a public page.
      */
-    footer?: { id: string; timing?: string; link?: string }
+    body: React.ReactNode
+    tags: EvidenceTag[]
+    /**
+     * The repo files the agent read for this finding, verbatim from the artefact's
+     * `relevant_code_paths`. Public paths, so these are safe to publish as-is – and
+     * they're the most concrete evidence that it actually read the code.
+     */
+    codePaths?: string[]
+    /** The artefact's own `verified` flag: whether the finding was confirmed in data. */
+    verified?: boolean
 }
 
 /**
- * A suggested reviewer. `name` is matched against the real team directory at build
- * time so the avatar and profile link are genuine.
+ * A suggested reviewer, taken verbatim from the report's newest `suggested_reviewers`
+ * artefact – real people, real commits, real rationale. `name` is matched against the
+ * team directory at build time for the avatar and profile link.
  *
- * The commit SHAs and the rationale are illustrative – written to demonstrate the
- * shape of a blame-based suggestion, not derived from anyone's actual commits.
- * Keep it that way, or make it real; don't let it read as real while being invented.
+ * Reviewers whose only stated reason is activity boilerplate ("recently active in
+ * frontend/src") are left out rather than dressed up, which is why some reports here
+ * carry no reviewers at all.
  */
 export interface Reviewer {
     name: string
-    /** Short SHAs the blame walk landed on. Display only. */
-    commits: string[]
-    /** Why the agent suggested them, naming what it blamed. */
+    /** GitHub handle, shown when the person isn't in the team directory. */
+    githubLogin: string
+    /** The commits the blame walk landed on, with links to the real diffs. */
+    commits: { sha: string; url: string }[]
+    /** The artefact's own rationale for suggesting them. */
     reason: React.ReactNode
+    /** True when this person went on to actually approve the pull request. */
+    approved?: boolean
 }
 
 export type CheckStatus = 'success' | 'skipped' | 'pending' | 'failed'
@@ -140,14 +218,21 @@ export interface DiffFile {
 export interface ReportDetail {
     /** Green pill on the meta row, e.g. "Actionable". */
     status: string
-    /** Authored relative strings – nothing here is computed from a real clock. */
+    /** Real dates from the report, rendered as-is. */
     firstSeen: string
     lastUpdated: string
-    /** Branch chip in the tab strip. */
+    /** The real branch the agent worked on. */
     branch: string
-    /** Drives the meta row's source cluster, e.g. "Support + 2". */
+    /** The report's own `source_products` – how PostHog found this. */
     contributingSources: EvidenceSource[]
     summary: ProseSection[]
+    /**
+     * Real whole-PR totals from the GitHub API, so the tab strip doesn't have to be
+     * summed from the single hunk shown under Files changed.
+     */
+    stats?: { added: number; removed: number; files: number; commits: number }
+    /** GitHub handles that actually approved the pull request. */
+    approvers?: string[]
     ci?: CiChecks
     reviewers?: Reviewer[]
     evidence?: EvidenceItem[]
@@ -176,35 +261,54 @@ export interface InboxItem {
     detail?: ReportDetail
 }
 
+/**
+ * Five real reports that produced real merged pull requests on PostHog/posthog.
+ *
+ * Everything here is genuine: the PR numbers, titles, branches, diff totals, and
+ * approvers come from the GitHub API; the priority, signal counts, discovery channel,
+ * summary prose, suggested reviewers, commit rationale, and the code paths under each
+ * finding come from the reports themselves in project 2.
+ *
+ * Two deliberate departures from the stored data, both for privacy:
+ *   - Evidence bodies are re-worded. The real `signal_finding` prose carries customer
+ *     session ids, export asset ids, team numbers, and in places an end user's name.
+ *     The code paths beside them are verbatim, because repo paths are public.
+ *   - Nothing carries the reports' internal dollar-value impact estimates, reviewer
+ *     email addresses, or user ids.
+ *
+ * To refresh or add an item, see README.md – the GitHub half can be re-fetched from
+ * the public API, the report half needs project 2 access.
+ */
 export const INBOX_ITEMS: InboxItem[] = [
-    // 1 — Error tracking. The fully authored item: this is the one that opens into a
-    // complete detail view, and the reference for what a finished report looks like.
+    // 1 — PostHog/posthog#75725. Found by error tracking.
     {
         id: 'error-tracking',
         commitType: 'fix',
-        scope: 'insights',
-        title: 'keep unsaved edits when a breakdown refresh lands mid-save',
+        scope: 'query',
+        title: 'make per-team cache size lookup fail-soft on Postgres timeouts',
         summary:
-            'Saving an insight while its breakdown is still refreshing throws away the edits and leaves the old query on screen.',
+            '172 insight queries failed in three minutes even though the queries had already succeeded – a bookkeeping read in the cache write path took the response down with it.',
         priority: 'P1',
-        // Matches the four evidence findings below, so the row and the detail agree.
-        signalCount: 4,
-        timeAgo: '2h ago',
+        signalCount: 1,
+        timeAgo: 'Merged Jul 30',
         origin: { kind: 'signal', product: 'error_tracking' },
-        // Illustrative: there's no public PR to link, so the header offers the repo instead.
-        prNumber: 71284,
+        prUrl: 'https://github.com/PostHog/posthog/pull/75725',
+        prNumber: 75725,
         detail: {
             status: 'Actionable',
-            firstSeen: 'a month ago',
-            lastUpdated: '3 hours ago',
-            branch: 'posthog-code/fix-insight-save-race',
-            contributingSources: ['zendesk', 'error_tracking', 'session_replay'],
+            firstSeen: 'Jul 30, 2026',
+            lastUpdated: 'Jul 30, 2026',
+            branch: 'posthog-code/query-cache-failsoft-team-limit',
+            contributingSources: ['error_tracking'],
+            stats: { added: 39, removed: 3, files: 4, commits: 4 },
+            approvers: ['andyzzhao'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            Saving an insight while its breakdown is still loading throws the edits away.{' '}
-                            <strong>412 people hit this in 30 days</strong>, and the save looks like it worked.
+                            <strong>172 insight queries failed in a three-minute window</strong> even though the queries
+                            themselves had already succeeded. A Postgres bookkeeping read in the query cache write path
+                            blew up and took the response with it.
                         </>,
                     ],
                 },
@@ -212,13 +316,27 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            <Code>saveInsight()</Code> reads <Code>values.filters</Code> at{' '}
-                            <Code>insightLogic.ts:612</Code>, <strong>after</strong> awaiting the query. If a refresh
-                            lands during that await, the PATCH is built from the server's copy instead of the user's.
+                            <Code>QueryCache.store_result()</Code> writes the result, then asks{' '}
+                            <Code>get_team_cache_limit()</Code> for the team's cache cap. That helper hits Postgres just
+                            to read an optional override, and only catches <Code>Team.DoesNotExist</Code>. When the
+                            connection pooler saturates it raises <Code>OperationalError</Code> instead, and nothing
+                            wraps the call – so a successful ClickHouse query becomes a 500 over a config value that has
+                            a perfectly good default.
                         </>,
                         <>
-                            The <Code>TypeError</Code> is swallowed by the error boundary, so nothing surfaces. The save
-                            button just goes quiet, which is why this sat for a month.
+                            The memoizer re-raises without storing anything, so every retry hammers the database again
+                            rather than serving the stale value it already holds.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            172 exceptions in three minutes, each one a query someone paid for and didn't get back. It
+                            had been silent for the preceding ten days, because it only fires when Postgres is already
+                            under pressure – which makes it an amplifier on database incidents rather than a constant
+                            drip.
                         </>,
                     ],
                 },
@@ -226,255 +344,120 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Snapshot the filters <strong>before</strong> the await, and add a regression test that
-                            resolves a refresh mid-save.
+                            Catch <Code>DatabaseError</Code> and fall back to the default limit, and wrap the
+                            bookkeeping call in <Code>store_result()</Code> so cache accounting can never fail a query
+                            that already ran.
                         </>,
-                        <>One for a human, not this change: the error boundary hiding this is its own bug.</>,
                     ],
                 },
             ],
-            ci: {
-                successful: 93,
-                skipped: 80,
-                checks: [
-                    { name: 'Frontend tests', status: 'success' },
-                    { name: 'ESLint', status: 'success' },
-                    { name: 'TypeScript', status: 'success' },
-                    { name: 'Visual regression', status: 'skipped' },
-                ],
-            },
             reviewers: [
                 {
-                    name: "Paul D'Ambra",
-                    commits: ['a3f91c2', '7e0b4d8'],
+                    name: 'Andy Zhao',
+                    githubLogin: 'andyzzhao',
+                    approved: true,
+                    commits: [
+                        {
+                            sha: 'a93db7e',
+                            url: 'https://github.com/PostHog/posthog/commit/a93db7eb3e11bce139529b57baa550330f64e412',
+                        },
+                        {
+                            sha: 'dd25283',
+                            url: 'https://github.com/PostHog/posthog/commit/dd25283cd3a812b26299f6eddcf5ba2d737c483b',
+                        },
+                    ],
                     reason: (
                         <>
-                            Authored the <Code>loadResultsSuccess</Code> reducer that overwrites <Code>filters</Code> –
-                            the write that makes the race possible.
-                        </>
-                    ),
-                },
-                {
-                    name: 'Michael Matloka',
-                    commits: ['c81ae55'],
-                    reason: (
-                        <>
-                            Moved <Code>saveInsight()</Code> to an async flow, adding the await that line{' '}
-                            <Code>612</Code> now reads across.
+                            Introduced <Code>get_team_cache_limit()</Code>, which put a synchronous Postgres read into
+                            the ClickHouse result-cache write path – the call that raises in the reported traceback.
+                            Also authored the current <Code>store_result()</Code>, the frame that lets a bookkeeping
+                            failure escape and fail an already-successful query.
                         </>
                     ),
                 },
             ],
             evidence: [
                 {
-                    id: 'exception',
+                    id: 'exception-burst',
                     source: 'error_tracking',
-                    kind: 'Issue',
-                    title: "TypeError: undefined 'breakdown'",
+                    kind: 'Signal finding',
+                    title: '172 events in a three-minute window',
                     body: (
                         <>
-                            Thrown from <Code>saveInsight()</Code>. 1,204 times, 412 users, always inside a save.
+                            Queried <Code>$exception</Code> events: the timeout arrives in project-wide bursts, then
+                            goes near-silent for about ten days. Narrowed to this path, 172 events land inside three
+                            minutes, 171 of them as <Code>OperationalError</Code> with <Code>ProtocolViolation</Code>. A
+                            GitHub search confirmed nobody had an open branch on either file.
                         </>
                     ),
                     tags: [
                         {
-                            label: 'Blocking exception',
-                            tone: 'red',
-                            tooltip: 'Stops the thing the person was trying to do, rather than degrading it.',
+                            label: 'Verified',
+                            tone: 'green',
+                            tooltip: 'The finding was confirmed against event data, not just inferred from the code.',
                         },
                     ],
-                    footer: { id: 'a1f2c9de', link: 'View issue' },
-                },
-                {
-                    id: 'replay-confusion',
-                    source: 'session_replay',
-                    kind: 'Problem segment',
-                    title: 'Re-applied the same breakdown three times',
-                    body: 'Saved, watched the chart stay on the old query, and tried the identical breakdown twice more before leaving.',
-                    tags: [
-                        {
-                            label: 'Confusion',
-                            tone: 'orange',
-                            tooltip:
-                                'Repeating an action that already succeeded is how a silent failure looks from outside.',
-                        },
+                    verified: true,
+                    codePaths: [
+                        'posthog/query_cache/size_tracker.py',
+                        'posthog/query_cache/cache.py',
+                        'posthog/cache_utils.py',
+                        'posthog/hogql_queries/query_runner.py',
+                        'posthog/settings/schedules.py',
                     ],
-                    hasReplay: true,
-                    footer: { id: '019f2198–1…', timing: '02:35 — 27:03 · 4m 32s active' },
-                },
-                {
-                    id: 'vision',
-                    source: 'replay_vision',
-                    kind: 'Scanner finding',
-                    title: 'Save button gives no feedback',
-                    body: 'Nine clicks on Save in four seconds, with no toast, spinner, or inline error in response to any of them.',
-                    tags: [
-                        { label: 'Bug', tone: 'red', tooltip: 'The scanner classified what it watched as a defect.' },
-                        {
-                            label: '90% confidence',
-                            tone: 'blue',
-                            tooltip: 'How sure the vision model is. Low-confidence findings stay out of reports.',
-                        },
-                    ],
-                    hasReplay: true,
-                    footer: { id: 'tuZvEiDGjp…', timing: '05:44 — 05:53 · 27m 48s active' },
-                },
-                {
-                    id: 'ticket',
-                    source: 'zendesk',
-                    kind: 'Ticket',
-                    title: 'My insight keeps reverting when I save it',
-                    body: '"I change the breakdown and save, and it goes back. No error, it just doesn\'t take." Nobody had linked it to the exception.',
-                    tags: [
-                        {
-                            label: 'Pending',
-                            tone: 'yellow',
-                            dot: true,
-                            tooltip: 'Still open with support. Merging this is what lets them close it.',
-                        },
-                    ],
-                    footer: { id: '#61622', link: 'Open ticket' },
                 },
             ],
             files: [
                 {
-                    path: 'frontend/src/scenes/insights/insightLogic.ts',
-                    added: 31,
+                    path: 'posthog/query_cache/cache.py',
+                    added: 12,
                     removed: 3,
-                    hunk: '@@ -604,7 +604,20 @@',
+                    hunk: '@@ -4,6 +4,8 @@',
                     lines: [
-                        { kind: 'context', text: '    saveInsight: async ({ redirectToViewMode }) => {' },
-                        { kind: 'context', text: '        const insightNumericId = values.insight.id' },
-                        {
-                            kind: 'add',
-                            text: '        // Snapshot the filters before awaiting: a breakdown refresh can land',
-                        },
-                        {
-                            kind: 'add',
-                            text: '        // mid-save and replace values.filters with the server copy.',
-                        },
-                        { kind: 'add', text: '        const editedFilters = { ...values.filters }' },
+                        { kind: 'context', text: 'from django.conf import settings' },
                         { kind: 'context', text: '' },
-                        { kind: 'context', text: '        await breakpoint(300)' },
-                        { kind: 'context', text: '' },
-                        { kind: 'remove', text: '        const savedInsight = await api.update(endpoint, {' },
-                        { kind: 'remove', text: '            ...values.insight,' },
-                        { kind: 'remove', text: '            filters: values.filters,' },
-                        { kind: 'add', text: '        const savedInsight = await api.update(endpoint, {' },
-                        { kind: 'add', text: '            ...values.insight,' },
-                        { kind: 'add', text: '            filters: editedFilters,' },
-                        { kind: 'context', text: '            derived_name: values.derivedName,' },
-                        { kind: 'context', text: '        })' },
-                    ],
-                },
-                {
-                    path: 'frontend/src/scenes/insights/insightLogic.test.ts',
-                    added: 67,
-                    removed: 0,
-                    hunk: '@@ -1287,3 +1287,70 @@',
-                    lines: [
-                        { kind: 'context', text: "    describe('saveInsight', () => {" },
-                        {
-                            kind: 'add',
-                            text: "        it('keeps edits when a refresh resolves mid-save', async () => {",
-                        },
-                        { kind: 'add', text: "            logic.actions.setFilters({ breakdown: '$browser' })" },
-                        { kind: 'add', text: '            const save = logic.actions.saveInsight()' },
-                        { kind: 'add', text: '            logic.actions.loadResultsSuccess(serverInsight)' },
-                        { kind: 'add', text: '            await save' },
+                        { kind: 'add', text: 'import structlog' },
                         { kind: 'add', text: '' },
+                        { kind: 'context', text: 'from posthog.cache_utils import OrjsonJsonSerializer' },
                         {
-                            kind: 'add',
-                            text: '            expect(api.update).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({',
+                            kind: 'context',
+                            text: 'from posthog.query_cache.size_tracker import TeamCacheSizeTracker',
                         },
-                        {
-                            kind: 'add',
-                            text: "                filters: expect.objectContaining({ breakdown: '$browser' }),",
-                        },
-                        { kind: 'add', text: '            }))' },
-                        { kind: 'add', text: '        })' },
+                        { kind: 'context', text: '' },
+                        { kind: 'add', text: 'logger = structlog.get_logger(__name__)' },
                     ],
                 },
             ],
         },
     },
-    // 2 — Session replay (real: PostHog/posthog#60829)
-    {
-        id: 'session-replay',
-        commitType: 'fix',
-        scope: 'sdk-doctor',
-        title: 'handle chunk load failures and surface API errors',
-        summary: 'A failed chunk load left users staring at a blank SDK doctor screen with no error to act on.',
-        priority: 'P2',
-        signalCount: 8,
-        timeAgo: '5h ago',
-        origin: { kind: 'signal', product: 'session_replay' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/60829',
-        prNumber: 60829,
-        // TODO(use-cases): only the summary is authored. Add evidence, reviewers, CI, and
-        // a diff to bring this up to item 1's fidelity.
-        detail: {
-            status: 'Actionable',
-            firstSeen: '3 weeks ago',
-            lastUpdated: '5 hours ago',
-            branch: 'posthog-code/sdk-doctor-chunk-load',
-            contributingSources: ['session_replay'],
-            summary: [
-                {
-                    paragraphs: [
-                        <>
-                            A run of sessions dead-ends on the SDK doctor screen after a chunk fails to load. Replay
-                            clustered the sessions and filed a report.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Problem',
-                    paragraphs: [
-                        <>
-                            The recordings show a blank screen after a failed dynamic import. The chunk load error was
-                            swallowed rather than surfaced, so there was nothing on screen to act on.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Solution',
-                    paragraphs: [
-                        <>
-                            Catch the chunk load failure and surface the underlying API error to the user instead of
-                            rendering an empty state.
-                        </>,
-                    ],
-                },
-            ],
-        },
-    },
-    // 3 — Replay Vision (real, merged: PostHog/posthog#72007)
+    // 2 — PostHog/posthog#72382. Found by Replay Vision.
     {
         id: 'replay-vision',
         commitType: 'fix',
         scope: 'cohorts',
-        title: 'sync cohort name validation state on create/save',
-        summary: 'The cohort name field kept showing a validation error after a valid name was entered.',
+        title: 'validate negation at root level, not subgroup level',
+        summary:
+            "A valid cohort couldn't be saved when a negation sat in its own group, and the obvious workaround silently built a different cohort.",
         priority: 'P2',
-        signalCount: 6,
-        timeAgo: '1d ago',
+        signalCount: 3,
+        timeAgo: 'Merged Jul 29',
         origin: { kind: 'signal', product: 'replay_vision' },
-        prUrl: 'https://github.com/PostHog/posthog/pull/72007',
-        prNumber: 72007,
-        // TODO(use-cases): summary only – see the note on item 2.
+        prUrl: 'https://github.com/PostHog/posthog/pull/72382',
+        prNumber: 72382,
         detail: {
             status: 'Actionable',
-            firstSeen: '2 weeks ago',
-            lastUpdated: 'a day ago',
-            branch: 'posthog-code/cohort-name-validation-sync',
+            firstSeen: 'Jul 6, 2026',
+            lastUpdated: 'Jul 29, 2026',
+            branch: 'posthog-code/fix-cohort-negation-sibling-group',
             contributingSources: ['replay_vision'],
+            stats: { added: 89, removed: 9, files: 3, commits: 2 },
+            approvers: ['gustavohstrassburger'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            Replay Vision flagged a cluster of sessions where the cohort name field shows a validation
-                            error even after a valid name is typed, and filed a report with the frames attached.
+                            A "did not complete event" negation in its own criteria group made a valid cohort
+                            unsaveable, even with the top-level operator set to match all criteria.
                         </>,
                     ],
                 },
@@ -482,9 +465,28 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            Lining the flagged frames up against the form code shows the validation state isn't
-                            re-synced on create or save, so a stale error sticks around after the input is already
-                            valid.
+                            <Code>validateGroup</Code> checks negation one group at a time. A negation alone in its
+                            group makes that group entirely negated, so the check fires and throws – it never looks at
+                            the positive criterion in a sibling group, or at the top-level AND.
+                        </>,
+                        <>
+                            It's easy to fall into, because new subgroups default to "any", and the error text never
+                            says the fix is to flip that dropdown to "all".
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            Three independent recordings caught this across two regions over about three weeks, so it's
+                            a recurring trap rather than a one-off. There's no server-side event to count, because
+                            validation blocks the save before any request is made.
+                        </>,
+                        <>
+                            It's a correctness trap, not just a papercut: people either delete the negation they wanted,
+                            or switch the group to "any" to get past the error and{' '}
+                            <strong>silently build a different cohort</strong>.
                         </>,
                     ],
                 },
@@ -492,38 +494,99 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Sync the validation state on both create and save. This one shipped – the linked frames show
-                            the before and after.
+                            Make negation validation reason about the whole cohort instead of each group in isolation:
+                            when the outer operator is AND, a negation in one group is satisfied by a positive criterion
+                            in any sibling group.
                         </>,
+                    ],
+                },
+            ],
+            evidence: [
+                {
+                    id: 'vision-1',
+                    source: 'replay_vision',
+                    kind: 'Signal finding',
+                    title: 'Traced the error text to the validator',
+                    body: 'Confirmed from a recording plus the code that new subgroups default to the "any" operator, that the negation check fires for any non-AND group, and that the message matches the client-side error constant exactly. Blame put all of it in the original cohort filters commit.',
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: [
+                        'frontend/src/scenes/cohorts/cohortUtils.tsx',
+                        'frontend/src/scenes/cohorts/CohortFilters/constants.tsx',
+                        'frontend/src/scenes/cohorts/CohortFilters/types.ts',
+                        'frontend/src/scenes/cohorts/cohortEditLogic.ts',
+                    ],
+                },
+                {
+                    id: 'vision-2',
+                    source: 'replay_vision',
+                    kind: 'Signal finding',
+                    title: 'A second session reproduced it',
+                    body: 'Another observed session hit the same block, and the described reproduction matched the traced code path exactly. Two regions, three weeks apart.',
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: [
+                        'frontend/src/scenes/cohorts/cohortUtils.tsx',
+                        'frontend/src/scenes/cohorts/cohortEditLogic.ts',
+                    ],
+                },
+            ],
+            files: [
+                {
+                    path: 'frontend/src/scenes/cohorts/cohortUtils.tsx',
+                    added: 24,
+                    removed: 7,
+                    hunk: '@@ -182,8 +182,22 @@',
+                    lines: [
+                        { kind: 'add', text: '/** Whether a group contributes at least one positive criterion. */' },
+                        { kind: 'add', text: 'function hasPositiveCriterion(group): boolean {' },
+                        { kind: 'add', text: '    if (!isCohortCriteriaGroup(group)) {' },
+                        { kind: 'add', text: '        return !group.negation' },
+                        { kind: 'add', text: '    }' },
+                        {
+                            kind: 'add',
+                            text: '    return group.values.filter((g) => !isCohortCriteriaGroup(g)).some(...)',
+                        },
+                        { kind: 'add', text: '}' },
+                        { kind: 'context', text: '' },
+                        { kind: 'context', text: 'export function validateGroup(' },
+                        { kind: 'remove', text: '    group: CohortCriteriaGroupFilter | AnyCohortCriteriaType' },
+                        { kind: 'add', text: '    group: CohortCriteriaGroupFilter | AnyCohortCriteriaType,' },
+                        { kind: 'add', text: '    outerOperator?: FilterLogicalOperator,' },
                     ],
                 },
             ],
         },
     },
-    // 4 — Logs (illustrative, no PR link)
+    // 3 — PostHog/posthog#73901. Found by a support conversation.
     {
-        id: 'logs',
+        id: 'conversations',
         commitType: 'fix',
-        scope: 'worker',
-        title: 'stop the retry loop hammering a dead webhook',
-        summary: 'A worker retried a webhook that’s been returning 410 for a day, thousands of times an hour.',
+        scope: 'integrations',
+        title: 'attach OAuth integration to the initiating project, not @current',
+        summary:
+            'Connecting Slack from one project landed the integration on a different one, and it looked like it had worked.',
         priority: 'P2',
-        signalCount: 31,
-        timeAgo: '3h ago',
-        origin: { kind: 'signal', product: 'logs' },
-        // TODO(use-cases): summary only – see the note on item 2.
+        signalCount: 2,
+        timeAgo: 'Merged Jul 30',
+        origin: { kind: 'signal', product: 'conversations' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/73901',
+        prNumber: 73901,
         detail: {
             status: 'Actionable',
-            firstSeen: '4 days ago',
-            lastUpdated: '3 hours ago',
-            branch: 'posthog-code/webhook-retry-backoff',
-            contributingSources: ['logs'],
+            firstSeen: 'Jul 27, 2026',
+            lastUpdated: 'Jul 30, 2026',
+            branch: 'posthog-code/fix-oauth-integration-lands-on-wrong-project',
+            contributingSources: ['conversations'],
+            stats: { added: 89, removed: 9, files: 6, commits: 4 },
+            approvers: ['andrewm4894'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            A worker logged the same webhook delivery failure thousands of times an hour, retrying an
-                            endpoint that had been dead for a day. The spike filed a report.
+                            People with more than one project who connect Slack end up with the integration on the wrong
+                            project, because the OAuth callback creates it against their default team rather than the
+                            project they started from.
                         </>,
                     ],
                 },
@@ -531,9 +594,25 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            The retry loop has no backoff and no give-up, and the target has returned{' '}
-                            <Code>410 Gone</Code> since yesterday. Every attempt fails identically and immediately
-                            retries.
+                            <Code>authorize_url</Code> puts only <Code>{'{next, token}'}</Code> in the OAuth{' '}
+                            <Code>state</Code> and sends Slack to a callback that isn't project-scoped. That full-page
+                            round-trip reloads the app, so the current team re-resolves to the user's persisted default.
+                            The create call then writes against <Code>@current</Code>.
+                        </>,
+                        <>
+                            <Code>state.next</Code> bounces the UI back to the right project afterwards, which is
+                            exactly why it looks like it worked.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            Hits any multi-project customer wiring up Slack, or any other OAuth integration – they share
+                            the flow. Slack is by a wide margin the highest-volume integration kind. There's a
+                            workaround (switch default project first), so it's contained, but it's a confusing
+                            onboarding snag that generates support tickets.
                         </>,
                     ],
                 },
@@ -541,87 +620,116 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Add capped exponential backoff, and dead-letter the delivery after a fixed number of
-                            attempts.
+                            Carry the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and create
+                            against that team. The GitHub flow already does exactly this, so the fix extends an existing
+                            pattern and keeps the fixed redirect URI intact.
                         </>,
+                    ],
+                },
+            ],
+            evidence: [
+                {
+                    id: 'conv-1',
+                    source: 'conversations',
+                    kind: 'Signal finding',
+                    title: 'Repeat connect attempts collapsing onto one project',
+                    body: 'Queried the integration-created events: Slack is the highest-volume integration kind by a wide margin over 60 days, across thousands of distinct projects. Several people show three or four Slack connect attempts in a single day that all resolve to exactly one project – including on the day it was reported.',
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: [
+                        'frontend/src/lib/integrations/integrationsLogic.ts',
+                        'posthog/models/integration.py',
+                        'posthog/api/integration.py',
+                        'frontend/src/scenes/IntegrationsRedirect/IntegrationsRedirect.tsx',
+                        'posthog/api/github_callback/types.py',
+                    ],
+                },
+                {
+                    id: 'conv-2',
+                    source: 'conversations',
+                    kind: 'Signal finding',
+                    title: 'Confirmed from the code path alone',
+                    body: 'The affected rows live in Postgres rather than in queryable event data, so this one rests on the code: the create call resolves its team from @current, and the callback that is not project-scoped re-resolves to the persisted default team.',
+                    tags: [
+                        {
+                            label: 'Code analysis',
+                            tone: 'blue',
+                            tooltip:
+                                'The finding could not be confirmed in event data, and the report says so rather than overstating it.',
+                        },
+                    ],
+                    verified: false,
+                    codePaths: [
+                        'frontend/src/lib/integrations/integrationsLogic.ts',
+                        'posthog/models/integration.py',
+                        'posthog/api/integration.py',
+                    ],
+                },
+            ],
+            files: [
+                {
+                    path: 'frontend/src/lib/integrations/integrationsLogic.ts',
+                    added: 14,
+                    removed: 5,
+                    hunk: '@@ -858,7 +858,7 @@',
+                    lines: [
+                        { kind: 'context', text: 'handleOauthCallback: async ({ kind, searchParams }) => {' },
+                        {
+                            kind: 'remove',
+                            text: '    const { next, token, source, server_id } = fromParamsGivenUrl(state)',
+                        },
+                        {
+                            kind: 'add',
+                            text: '    const { next, token, source, server_id, team_id } = fromParamsGivenUrl(state)',
+                        },
+                        { kind: 'context', text: '' },
+                        { kind: 'remove', text: '    const integration = await api.integrations.create({' },
+                        { kind: 'remove', text: '        kind: resolvedKind,' },
+                        { kind: 'remove', text: '        config: { state, code },' },
+                        { kind: 'remove', text: '    })' },
+                        {
+                            kind: 'add',
+                            text: '    // The callback URL is not project-scoped, so after this full-page',
+                        },
+                        {
+                            kind: 'add',
+                            text: "    // round-trip the SPA may have re-resolved to the user's default team.",
+                        },
+                        { kind: 'add', text: '    // Target the team that started the flow instead.' },
                     ],
                 },
             ],
         },
     },
-    // 5 — Traces (illustrative, no PR link) — reuses the exact /traces N+1 checkout copy
-    {
-        id: 'traces',
-        commitType: 'fix',
-        scope: 'checkout',
-        title: 'batch the inventory lookups behind /api/checkout',
-        summary: 'Checkout latency crept up as the inventory service fired one query per cart item.',
-        priority: 'P2',
-        signalCount: 9,
-        timeAgo: '6h ago',
-        origin: { kind: 'scout', product: 'traces', scout: 'APM' },
-        // TODO(use-cases): summary only – see the note on item 2. Copy mirrors /traces.
-        detail: {
-            status: 'Actionable',
-            firstSeen: '9 days ago',
-            lastUpdated: '6 hours ago',
-            branch: 'posthog-code/batch-inventory-lookups',
-            contributingSources: ['traces'],
-            summary: [
-                {
-                    paragraphs: [
-                        <>
-                            Latency on <Code>GET /api/checkout</Code> started climbing. The APM scout caught it on a
-                            scheduled pass and filed a report. Nobody had to notice first.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Problem',
-                    paragraphs: [
-                        <>
-                            Lining the slow traces up against the fast ones isolates the span they share: the inventory
-                            service firing one database query per cart item. A classic N+1, so the latency scales with
-                            basket size.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Solution',
-                    paragraphs: [
-                        <>
-                            Batch the lookups into a single query, and keep the instrumentation that measures whether it
-                            worked.
-                        </>,
-                    ],
-                },
-            ],
-        },
-    },
-    // 6 — AI observability (illustrative, no PR link)
+    // 4 — PostHog/posthog#70918. Found by a support conversation.
     {
         id: 'ai-observability',
         commitType: 'fix',
-        scope: 'assistant',
-        title: 'stop citing a refund policy we don’t have',
-        summary: 'The assistant confidently cited a 30-day refund policy the product doesn’t offer.',
-        priority: 'P2',
-        signalCount: 5,
-        timeAgo: '30m ago',
-        origin: { kind: 'scout', product: 'ai_observability', scout: 'Evals' },
-        // TODO(use-cases): summary only – see the note on item 2.
+        scope: 'ai-observability',
+        title: 'stop eval summary from timing out at the 30s gateway limit',
+        summary:
+            'Generating an AI eval summary failed about two-thirds of the time, because one slow LLM call ran into a hard gateway timeout.',
+        priority: 'P1',
+        signalCount: 1,
+        timeAgo: 'Merged Jul 29',
+        origin: { kind: 'signal', product: 'conversations' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/70918',
+        prNumber: 70918,
         detail: {
             status: 'Actionable',
-            firstSeen: '5 days ago',
-            lastUpdated: '30 minutes ago',
-            branch: 'posthog-code/ground-refund-answers',
-            contributingSources: ['ai_observability'],
+            firstSeen: 'Jul 14, 2026',
+            lastUpdated: 'Jul 29, 2026',
+            branch: 'posthog-code/eval-summary-chunked-map-reduce',
+            contributingSources: ['conversations', 'ai_observability'],
+            stats: { added: 997, removed: 94, files: 13, commits: 12 },
+            approvers: ['Radu-Raicea'],
             summary: [
                 {
                     paragraphs: [
                         <>
-                            The grounding eval started failing on a cluster of chats where the assistant cites a 30-day
-                            refund policy that doesn't exist. The eval scout filed a report.
+                            Generating an AI eval summary failed <strong>roughly two-thirds of the time</strong>,
+                            because the request ran as one slow synchronous LLM call that the internal gateway killed at
+                            30 seconds.
                         </>,
                     ],
                 },
@@ -629,8 +737,19 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            The failing traces show the model inventing a policy when the docs are silent, which pins it
-                            to a prompt that invites a confident guess rather than an admission of ignorance.
+                            The endpoint fires a single blocking completion analysing up to 250 runs in one prompt. That
+                            takes 20 to 30+ seconds, and the call routes through a gateway with a hard ~30s timeout. The
+                            Python-side 120s timeout never applies, because the gateway aborts first and returns a 502.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            16 of the last 24 generations failed with a 502, all pinned at about 30s latency – a{' '}
+                            <strong>67% failure rate</strong> – while the 8 that succeeded squeaked under the cliff at
+                            up to 29.3s. A paid feature failing more often than it worked.
                         </>,
                     ],
                 },
@@ -638,9 +757,207 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Tighten the prompt to answer from retrieved docs only and abstain otherwise, and add an eval
-                            case for the refund question so it can't regress.
+                            Get the work out from under the race: summarize as a bounded concurrent map-reduce so no
+                            single gateway request approaches the timeout, chunking the run set instead of sending one
+                            enormous prompt.
                         </>,
+                    ],
+                },
+            ],
+            evidence: [
+                {
+                    id: 'aio-1',
+                    source: 'ai_observability',
+                    kind: 'Signal finding',
+                    title: 'Every failure pinned to the 30s boundary',
+                    body: (
+                        <>
+                            Queried <Code>$ai_generation</Code> events for this feature over 30 days, grouped by error
+                            state and HTTP status with average and max latency: 16 errors, all 502, max latency 30.0s
+                            and average 29.1s, against 8 successes up to 29.3s. Failures clustered at the boundary
+                            rather than spread out, which points at a hard timeout instead of variable model slowness.
+                        </>
+                    ),
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: [
+                        'products/ai_observability/backend/summarization/llm/evaluation_summary.py',
+                        'products/ai_observability/backend/api/evaluation_summary.py',
+                        'posthog/llm/gateway_client.py',
+                        'products/ai_observability/backend/summarization/constants.py',
+                    ],
+                },
+            ],
+            files: [
+                {
+                    path: 'products/ai_observability/backend/summarization/constants.py',
+                    added: 10,
+                    removed: 0,
+                    hunk: '@@ -11,3 +11,13 @@',
+                    lines: [
+                        { kind: 'context', text: '# Evaluation summary limits' },
+                        { kind: 'context', text: 'EVALUATION_SUMMARY_MAX_RUNS = 250' },
+                        { kind: 'add', text: '' },
+                        {
+                            kind: 'add',
+                            text: '# Large or verbose inputs are summarized as a bounded concurrent map-reduce so no',
+                        },
+                        {
+                            kind: 'add',
+                            text: '# individual ai-gateway request approaches its ~30s hard timeout.',
+                        },
+                        { kind: 'add', text: 'EVALUATION_SUMMARY_CHUNK_SIZE = 20' },
+                        { kind: 'add', text: 'EVALUATION_SUMMARY_PROMPT_MAX_CHARS = 20_000' },
+                        { kind: 'add', text: 'EVALUATION_SUMMARY_MAX_CONCURRENT_MAP_CALLS = 5' },
+                    ],
+                },
+            ],
+        },
+    },
+    // 5 — PostHog/posthog#67019. Found by Replay Vision.
+    {
+        id: 'session-replay',
+        commitType: 'fix',
+        scope: 'settings',
+        title: 'redirect the legacy project-toolbar URL to stop a 404',
+        summary:
+            'A removed settings route showed "Setting not found" while the sidebar still highlighted it as the current page.',
+        priority: 'P2',
+        signalCount: 3,
+        timeAgo: 'Merged Jul 28',
+        origin: { kind: 'signal', product: 'replay_vision' },
+        prUrl: 'https://github.com/PostHog/posthog/pull/67019',
+        prNumber: 67019,
+        detail: {
+            status: 'Actionable',
+            firstSeen: 'Jun 29, 2026',
+            lastUpdated: 'Jul 28, 2026',
+            branch: 'posthog-code/fix-dead-settings-and-alerts-routes',
+            contributingSources: ['replay_vision', 'session_replay'],
+            stats: { added: 57, removed: 0, files: 3, commits: 3 },
+            approvers: ['rafaeelaudibert'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            Opening the old toolbar settings URL gave a "Setting not found" page, while the sidebar went
+                            on highlighting Toolbar as though you were on it.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            The section was removed when toolbar configuration folded into web analytics. The settings
+                            router canonicalizes old section ids through a legacy map, but that map only covered one
+                            earlier rename – so this id falls through, the selected section resolves to null, and the
+                            scene renders its not-found state.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            A papercut rather than a hard block, since the sidebar link itself still works. But it's
+                            broad: not-found events on that exact path appear across{' '}
+                            <strong>more than 20 distinct projects over 90 days</strong>, so something stale is still
+                            linking to it.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Add the removed section to the legacy map so the router redirects to where the settings
+                            actually live now, using the same mechanism that already handles the earlier rename.
+                        </>,
+                    ],
+                },
+            ],
+            reviewers: [
+                {
+                    name: 'Rafael Audibert',
+                    githubLogin: 'rafaeelaudibert',
+                    approved: true,
+                    commits: [
+                        {
+                            sha: '93e6bdf',
+                            url: 'https://github.com/PostHog/posthog/commit/93e6bdff54a3e28ef0683796afc6f135f62c39c6',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Removed the Toolbar settings section and its authorized-URL setting during the web analytics
+                            revamp, which is what left this URL with no matching section. Causative.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Marius Andra',
+                    githubLogin: 'mariusandra',
+                    commits: [
+                        {
+                            sha: '8a8fe72',
+                            url: 'https://github.com/PostHog/posthog/commit/8a8fe725455bcb59421003e8891d18377ee381d2',
+                        },
+                    ],
+                    reason: <>Restructured the routes and tabs mapping that decides which paths resolve to a scene.</>,
+                },
+            ],
+            evidence: [
+                {
+                    id: 'settings-1',
+                    source: 'replay_vision',
+                    kind: 'Signal finding',
+                    title: 'Not-found events across 20+ projects',
+                    body: (
+                        <>
+                            Counted <Code>not_found_shown</Code> events over 90 days for that path: it appears across
+                            more than twenty distinct projects in both regions, with multiple distinct users each,
+                            confirming a widespread and reproducible "Setting not found".
+                        </>
+                    ),
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: [
+                        'frontend/src/scenes/settings/settingsSceneLogic.ts',
+                        'frontend/src/scenes/settings/SettingsMap.tsx',
+                        'frontend/src/scenes/settings/Settings.tsx',
+                        'frontend/src/lib/components/NotFound/index.tsx',
+                    ],
+                },
+            ],
+            files: [
+                {
+                    path: 'frontend/src/scenes/settings/settingsSceneLogic.ts',
+                    added: 25,
+                    removed: 0,
+                    hunk: '@@ -17,10 +17,16 @@',
+                    lines: [
+                        {
+                            kind: 'add',
+                            text: "const WEB_ANALYTICS_SETTINGS_SECTION: SettingSectionId = 'project-web-analytics'",
+                        },
+                        { kind: 'context', text: '' },
+                        {
+                            kind: 'context',
+                            text: 'const LEGACY_SETTINGS_SECTIONS: Record<string, SettingSectionId> = {',
+                        },
+                        {
+                            kind: 'context',
+                            text: "    'project-llm-analytics': AI_OBSERVABILITY_SETTINGS_SECTION,",
+                        },
+                        {
+                            kind: 'add',
+                            text: '    // The dedicated Toolbar section was removed; its authorized-URL',
+                        },
+                        { kind: 'add', text: '    // config now lives under Web analytics.' },
+                        { kind: 'add', text: "    'environment-toolbar': WEB_ANALYTICS_SETTINGS_SECTION," },
+                        { kind: 'add', text: "    'project-toolbar': WEB_ANALYTICS_SETTINGS_SECTION," },
+                        { kind: 'context', text: '}' },
                     ],
                 },
             ],
@@ -680,10 +997,12 @@ export const EVIDENCE_SOURCE_META: Record<EvidenceSource, SourceMeta & { groupLa
 export const findingsCount = (item: InboxItem): number => item.detail?.evidence?.length ?? item.signalCount
 
 /**
- * The "−3 +98" on the tab strip, summed from the per-file whole-file totals rather
- * than stored, so the stat can't drift from the files listed under it.
+ * The diff stat on the tab strip. Prefers the real whole-PR totals from GitHub, and
+ * falls back to summing the listed files – the hunks shown under Files changed are
+ * excerpts of one file each, so they undercount a multi-file pull request.
  */
 export const diffStat = (detail: ReportDetail): { added: number; removed: number } =>
+    detail.stats ??
     (detail.files ?? []).reduce(
         (acc, file) => ({ added: acc.added + file.added, removed: acc.removed + file.removed }),
         { added: 0, removed: 0 }

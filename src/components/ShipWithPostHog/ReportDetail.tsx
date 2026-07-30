@@ -34,6 +34,9 @@ import {
 // Rows in the "Discuss" menu. Chrome – nothing is wired up behind them.
 const DISCUSS_ACTIONS = ['Comment on the pull request', 'Share to Slack', 'Open a Linear issue']
 
+// Real reports often have a single signal, so "1 findings" shows up without this.
+const plural = (count: number, noun: string): string => `${count} ${noun}${count === 1 ? '' : 's'}`
+
 // What each priority means, for the badge's tooltip.
 const PRIORITY_HINT: Record<Priority, string> = {
     P0: 'Critical. Something is broken for everyone, right now.',
@@ -116,9 +119,15 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
     const hasFiles = !!detail?.files?.length
     const activeTab = hasFiles ? tab : 'overview'
 
-    // "Support + 2" – the first contributing source by name, then a count of the rest.
+    /*
+     * The contributing-source cluster, e.g. "Conversations + 1". Suppressed when it
+     * would only repeat the origin beside it – most reports have a single source, and
+     * that source IS the origin, so rendering both reads as "Error tracking · Error
+     * tracking".
+     */
     const sources = detail?.contributingSources ?? []
-    const firstSource = sources.length ? EVIDENCE_SOURCE_META[sources[0]] : null
+    const redundant = sources.length === 1 && item.origin.kind === 'signal' && sources[0] === item.origin.product
+    const firstSource = sources.length && !redundant ? EVIDENCE_SOURCE_META[sources[0]] : null
     const sourceLabel = firstSource
         ? `${firstSource.groupLabel ?? firstSource.label}${sources.length > 1 ? ` + ${sources.length - 1}` : ''}`
         : null
@@ -204,7 +213,7 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                         input" and wait for you instead.
                     </Tooltip>
                 )}
-                <Tooltip trigger={<span>{findingsCount(item)} findings</span>}>
+                <Tooltip trigger={<span>{plural(findingsCount(item), 'finding')}</span>}>
                     Separate signals that turned out to describe the same problem. Grouping them is what turns noise
                     into one piece of work.
                 </Tooltip>
@@ -419,7 +428,7 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                                         you don't trust the diff.
                                     </Tooltip>
                                 }
-                                meta={<span>{detail.evidence.length} findings</span>}
+                                meta={<span>{plural(detail.evidence.length, 'finding')}</span>}
                             >
                                 <div className="flex flex-col gap-2.5">
                                     {detail.evidence.map((evidence) => (

@@ -19,8 +19,8 @@ export default function ShipWithPostHog(): JSX.Element {
     return (
         <>
             <SEO
-                title="Ship with PostHog – six tools, one loop"
-                description="Six pull requests, one per PostHog tool, and none of them started with a ticket. Open each one to read the write-up, the evidence behind it, and the diff it proposes."
+                title="Ship with PostHog – real pull requests PostHog opened"
+                description="Real merged pull requests on PostHog/posthog, each found by a different part of PostHog: an exception, a session recording, a support conversation. Open one to read the evidence behind it and the diff that shipped."
                 image="/images/og/default.png"
             />
             <div data-scheme="secondary" className="@container h-full w-full bg-primary text-primary">
@@ -41,22 +41,27 @@ export default function ShipWithPostHog(): JSX.Element {
                                 />
                             </h1>
                             <p className="mx-auto mt-4 max-w-2xl text-base text-secondary @2xl:text-lg">
-                                Each one started in a different PostHog tool – an error, a session, a log line, a slow
-                                trace, a failing eval. None of them started with a ticket. Open one to read what it
-                                found, the evidence behind it, and the diff it wants to ship.
+                                These are real merged pull requests on{' '}
+                                <Link to="https://github.com/PostHog/posthog" external>
+                                    PostHog/posthog
+                                </Link>
+                                . Each one was found by a different part of PostHog – an exception, a session, a support
+                                conversation – and written up, reviewed, and merged. Open one to read the evidence
+                                behind it and the diff that shipped.
                             </p>
                         </div>
 
                         {/* The Inbox */}
                         <InboxReplica />
 
-                        {/* Six tools, one loop */}
+                        {/* One loop, many ways in */}
                         <div className="mx-auto mt-14 max-w-2xl text-center @md:mt-20">
-                            <h2 className="text-2xl font-bold @md:text-3xl">Six tools, one loop</h2>
+                            <h2 className="text-2xl font-bold @md:text-3xl">One loop, many ways in</h2>
                             <p className="mt-3 text-secondary @2xl:text-lg">
-                                The loop never changes – watch, catch, investigate, fix, merge. The only thing that
-                                changes is which tool opens its eyes first. Turn on more of them and more of your
-                                product comes into view.
+                                The loop never changes – watch, catch, investigate, fix, merge. What changes is which
+                                part of PostHog notices first. A cohorts bug came from a session recording, an
+                                integrations bug came from a support conversation, a query bug came from an exception.
+                                Turn on more sources and more of your product comes into view.
                             </p>
                             <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-semibold">
                                 <Link

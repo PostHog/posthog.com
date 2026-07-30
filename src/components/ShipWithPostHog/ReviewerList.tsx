@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { IconExternal, IconPlus } from '@posthog/icons'
+import { IconCheckCircle, IconExternal, IconPlus } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Popover } from 'components/RadixUI/Popover'
@@ -104,22 +104,40 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                                 ) : (
                                     <strong className="text-sm text-primary">{reviewer.name}</strong>
                                 )}
-                                <Tooltip
-                                    trigger={
-                                        <span className="flex flex-wrap items-center gap-x-1 font-mono text-xs text-secondary">
-                                            {reviewer.commits.map((sha, index) => (
-                                                <span key={sha} className="inline-flex items-center gap-0.5">
-                                                    {sha}
+                                <span className="flex flex-wrap items-center gap-x-1 font-mono text-xs text-secondary">
+                                    {reviewer.commits.map((commit, index) => (
+                                        <Tooltip
+                                            key={commit.sha}
+                                            trigger={
+                                                <Link
+                                                    to={commit.url}
+                                                    external
+                                                    hideExternalIcon
+                                                    className="inline-flex items-center gap-0.5 text-secondary hover:text-primary hover:underline"
+                                                >
+                                                    {commit.sha}
                                                     <IconExternal className="size-3" />
                                                     {index < reviewer.commits.length - 1 && ','}
-                                                </span>
-                                            ))}
-                                        </span>
-                                    }
-                                >
-                                    The commits the blame walk landed on. Illustrative here – on a real report these
-                                    link to the diffs that put this person on the list.
-                                </Tooltip>
+                                                </Link>
+                                            }
+                                        >
+                                            The commit the blame walk landed on. Opens the real diff on GitHub.
+                                        </Tooltip>
+                                    ))}
+                                </span>
+                                {reviewer.approved && (
+                                    <Tooltip
+                                        trigger={
+                                            <span className="inline-flex items-center gap-1 rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 text-xs font-semibold text-green">
+                                                <IconCheckCircle className="size-3" />
+                                                Approved it
+                                            </span>
+                                        }
+                                    >
+                                        PostHog suggested this person, and they went on to actually approve the pull
+                                        request.
+                                    </Tooltip>
+                                )}
                             </div>
                         </div>
                         {/* Indented to sit under the name, not the avatar. */}
