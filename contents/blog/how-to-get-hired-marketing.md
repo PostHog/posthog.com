@@ -32,7 +32,7 @@ For both these reasons I wanted to explain what makes good candidates stand out,
 
 This is my favorite question to get asked. It changes by role, but a few things hold across every marketing hire...
 
-**Make the plan, then do the plan.** There are no hands-off roles at PostHog and no purely strategic seats. You don't need engineering experience, but you do need to be someone who ships a fix when they hit a problem, rather than someone who asks someone else to read your Powerpoint deck. Product marketers are the hardest role we hire for and this is why.
+**Make the plan, then do the plan.** There are no hands-off roles at PostHog and no purely strategic seats. You don't need engineering experience, but you do need to be someone who ships a fix when they hit a problem, rather than ask someone else to read your Powerpoint deck. Product marketers are the hardest role we hire for and this is why.
 
 > What good looks like: <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance. Not many influencer managers will actually ship their own tooling.
 
