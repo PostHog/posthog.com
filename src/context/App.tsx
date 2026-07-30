@@ -1557,13 +1557,7 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/error-tracking': {
-        toolbar: true,
-    },
     '/workflows': {
-        toolbar: true,
-    },
-    '/endpoints': {
         toolbar: true,
     },
     '/ai': {

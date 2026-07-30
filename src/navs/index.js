@@ -3641,7 +3641,7 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/use-cases',
                                 },
                                 {
-                                    name: 'Tools reference',
+                                    name: 'MCP tools reference',
                                     url: '/docs/model-context-protocol/tools',
                                 },
                                 {
@@ -4826,8 +4826,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Improving accuracy',
-                    url: '/docs/replay-vision/quality',
+                    name: 'Calibration',
+                    url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
                 },
@@ -7423,7 +7423,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7440,38 +7440,60 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Edit memory',
-                    url: '/docs/posthog-ai/edit-memory',
-                    icon: 'IconMemory',
-                    color: 'purple',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/posthog-ai/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/posthog-ai/surfaces/web-app',
+                        },
+                        {
+                            name: 'Example prompts',
+                            url: '/docs/posthog-ai/example-prompts',
+                        },
+                        {
+                            name: 'Write and edit SQL',
+                            url: '/docs/posthog-ai/write-and-edit-sql',
+                        },
+                        {
+                            name: 'Investigate web traffic',
+                            url: '/docs/posthog-ai/investigate-web-traffic',
+                        },
+                        {
+                            name: 'Summarize session replays',
+                            url: '/docs/posthog-ai/session-summaries',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog Slack',
+                    url: '/docs/posthog-ai/surfaces/slack',
+                    icon: 'IconMessage',
+                    color: 'red',
                     featured: true,
                 },
                 {
-                    name: 'Features',
-                },
-                {
-                    name: 'Platform and chat UI',
-                    url: '/docs/posthog-ai/platform-and-chat-ui',
-                    icon: 'IconLlmPromptManagement',
-                    color: 'orange',
-                },
-                {
-                    name: 'Context and commands',
-                    url: '/docs/posthog-ai/context-and-commands',
-                    icon: 'IconChat',
-                    color: 'seagreen',
+                    name: 'Modes and tools',
                 },
                 {
                     name: 'Tools and capabilities',
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Modes',
                     url: '/docs/posthog-ai/modes',
                     icon: 'IconToggle',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Plan mode',
@@ -7486,31 +7508,21 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Session summaries',
-                    url: '/docs/posthog-ai/session-summaries',
-                    icon: 'IconEye',
+                    name: 'Memory and context',
+                },
+                {
+                    name: 'Context and commands',
+                    url: '/docs/posthog-ai/context-and-commands',
+                    icon: 'IconChat',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Edit memory',
+                    url: '/docs/posthog-ai/edit-memory',
+                    icon: 'IconMemory',
                     color: 'purple',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Example prompts',
-                    url: '/docs/posthog-ai/example-prompts',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Write and edit SQL',
-                    url: '/docs/posthog-ai/write-and-edit-sql',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Investigate web traffic',
-                    url: '/docs/posthog-ai/investigate-web-traffic',
-                    icon: 'IconShield',
-                    color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Resources',
@@ -7518,20 +7530,20 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/posthog-ai/pricing',
-                    icon: 'IconShield',
-                    color: 'red',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/posthog-ai/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
                 {
                     name: 'Changelog',
                     url: '/docs/posthog-ai/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
-                },
-                {
-                    name: 'FAQ',
-                    url: '/docs/posthog-ai/faq',
-                    icon: 'IconShield',
-                    color: 'red',
                 },
             ],
         },

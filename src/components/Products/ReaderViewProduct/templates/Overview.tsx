@@ -24,20 +24,23 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                             className="w-full"
                             imgClassName="h-auto rounded-lg transition-all duration-300"
                         />
-                        <div className="absolute bottom-0 -right-4">
-                            {HogComponent ? (
-                                <HogComponent
-                                    className="h-36 @2xl/reader-content:h-48 w-auto transition-all duration-300"
-                                    title={hogs.default.alt || name}
-                                />
-                            ) : hogs?.default?.src ? (
-                                <CloudinaryImage
-                                    src={hogs.default.src as `https://res.cloudinary.com/${string}`}
-                                    alt={hogs.default.alt || name}
-                                    imgClassName="h-36 @2xl/reader-content:h-48 transition-all duration-300"
-                                />
-                            ) : null}
-                        </div>
+                        {/* Optional – composite heroes (hog already in the art) skip this. */}
+                        {(HogComponent || hogs?.default?.src) && (
+                            <div className="absolute bottom-0 -right-4">
+                                {HogComponent ? (
+                                    <HogComponent
+                                        className="h-36 @2xl/reader-content:h-48 w-auto transition-all duration-300"
+                                        title={hogs.default.alt || name}
+                                    />
+                                ) : (
+                                    <CloudinaryImage
+                                        src={hogs.default.src as `https://res.cloudinary.com/${string}`}
+                                        alt={hogs.default.alt || name}
+                                        imgClassName="h-36 @2xl/reader-content:h-48 transition-all duration-300"
+                                    />
+                                )}
+                            </div>
+                        )}
                     </Glow>
                 )}
 

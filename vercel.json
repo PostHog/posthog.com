@@ -149,6 +149,17 @@
         }
     ],
     "redirects": [
+        { "source": "/docs/posthog-ai/overview", "destination": "/docs/posthog-ai", "statusCode": 301 },
+        {
+            "source": "/docs/posthog-ai/platform-and-chat-ui",
+            "destination": "/docs/posthog-ai/surfaces/web-app",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/quality",
+            "destination": "/docs/replay-vision/calibration",
+            "statusCode": 301
+        },
         {
             "source": "/activity",
             "destination": "/docs/activity",
@@ -3919,6 +3930,30 @@
             "destination": "/session-replay#questions"
         },
         {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
             "source": "/feature-flags/customers",
             "destination": "/feature-flags"
         },
@@ -4069,6 +4104,30 @@
         {
             "source": "/llm-analytics/pricing",
             "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/endpoints/customers",
+            "destination": "/endpoints"
+        },
+        {
+            "source": "/endpoints/comparisons",
+            "destination": "/endpoints#feature-comparison"
+        },
+        {
+            "source": "/endpoints/documentation",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/tutorials",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/endpoints/questions",
+            "destination": "/endpoints#community"
         },
         {
             "source": "/handbook/what-is-posthog",
