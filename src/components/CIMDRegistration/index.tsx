@@ -179,7 +179,7 @@ export default function CIMDRegistration(): JSX.Element {
                     id="cimd-url"
                     type="url"
                     className={`flex-1 px-3 py-2 rounded border border-light dark:border-dark bg-white dark:bg-dark ${CODE}`}
-                    placeholder="https://yourapp.com/.well-known/posthog-client.json"
+                    placeholder="https://yourapp.com/.well-known/oauth-client.json"
                     value={url}
                     onChange={(event) => setUrl(event.target.value)}
                     onKeyDown={(event) => {

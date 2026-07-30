@@ -39,6 +39,7 @@ import WizardCommand from './components/WizardCommand'
 import WizardCTA from './components/WizardCTA'
 import PlatformInstall from './components/PlatformInstall'
 import CIMDRegistration from './components/CIMDRegistration'
+import LiveJSON from './components/LiveJSON'
 
 // Global MDX components
 export const shortcodes = {
@@ -84,4 +85,5 @@ export const shortcodes = {
     WizardCTA,
     PlatformInstall,
     CIMDRegistration,
+    LiveJSON,
 }
