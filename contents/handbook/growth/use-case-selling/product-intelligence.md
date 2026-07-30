@@ -69,7 +69,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 
 **This is the use case with the largest existing install base.** Most PostHog accounts start with Product Analytics. The expansion opportunity isn't convincing them to adopt PostHog. It's convincing them to go beyond a single product and use the full Product Intelligence stack.
 
-**The Workflows close-the-loop story is powerful.** You identify a drop-off point (analytics), you understand why users leave (session replay, surveys), and now you can re-engage users when they disengage (workflows). That's a complete insight-to-action cycle that no competitor offers in one platform.
+**Workflows close the loop from insight to action.** You identify a drop-off point (analytics), you understand why users leave (session replay, surveys), and now you can re-engage users when they disengage (workflows). That's a complete insight-to-action cycle that no competitor offers in one platform.
 
 **Product Intelligence creates demand for other use cases.** Once the product team is deep in PostHog, they pull in the growth team (Growth & Marketing use case) for acquisition and activation. Once they're running experiments, engineering gets involved in rollouts (Release Engineering). This is the gateway use case.
 

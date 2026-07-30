@@ -56,7 +56,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 
 **Feature Flags in the codebase are sticky.** Once feature flags are integrated into the release workflow and embedded in production code, they're very hard to rip out. This isn't a dashboard someone stops logging into. It's infrastructure that engineering depends on for every deploy. This makes Release Engineering accounts among the most defensible in our book.
 
-**The tight integration between flags and experiments is genuinely differentiated.** LaunchDarkly has flags but weak experimentation. Standalone experimentation tools (Statsig, Eppo) have experiments but aren't integrated with the broader analytics platform. PostHog connects flags → experiments → product analytics → session replay in one tool.
+**Flags and experiments are tightly integrated.** LaunchDarkly has flags but weak experimentation. Standalone experimentation tools (Statsig, Eppo) have experiments but aren't integrated with the broader analytics platform. PostHog connects flags → experiments → product analytics → session replay in one tool.
 
 **Experiments + Feature Flags create the multithreading bridge.** When growth wants to experiment and engineering implements the flags, both teams are in PostHog. This is one of the best ways to get multithreaded in an account if you aren't already.
 
@@ -161,7 +161,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 | Eppo | Warehouse-native experimentation | Broader platform; doesn't require a data warehouse; integrated replay; we support [warehouse-backed experiment metrics](/docs/experiments/data-warehouse) too | Purpose-built for warehouse-native teams with an established dbt/Snowflake practice |
 | Split.io | Feature flags + experimentation | Broader platform; better pricing; integrated analytics | More mature enterprise integrations |
 
-**Where PostHog stands:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch is genuine and saves money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength). Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, and increasingly have an agent open the follow-up fix — all in one tool.
+**Where PostHog stands:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch saves them money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength). Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, and increasingly have an agent open the follow-up fix — all in one tool.
 
 ## Pain points & known limitations
 

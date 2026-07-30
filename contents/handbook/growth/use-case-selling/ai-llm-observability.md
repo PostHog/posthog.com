@@ -63,7 +63,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 
 **AI-native companies are the fastest growing customer segment.** Getting in early with AI Observability means PostHog becomes the default platform as these companies scale. AI-native startups that adopt PostHog at seed stage often grow into significant accounts.
 
-**The cross-sell opportunity is uniquely strong.** AI products sit at the intersection of multiple PostHog use cases: model observability (AI/LLM Obs), user behavior analytics (Product Intelligence), release management for prompt/model changes (Release Engineering), and error tracking for model failures (Observability). One AI customer can reasonably adopt products from 4+ use cases.
+**AI products touch several use cases at once.** AI products sit at the intersection of multiple PostHog use cases: model observability (AI/LLM Obs), user behavior analytics (Product Intelligence), release management for prompt/model changes (Release Engineering), and error tracking for model failures (Observability). One AI customer can reasonably adopt products from 4+ use cases.
 
 **No one else has this combination.** Langfuse and Helicone do LLM tracing. Amplitude does product analytics. Sentry does error tracking. No one connects model performance → output quality → user behavior → business outcomes in one platform. That's PostHog's pitch.
 

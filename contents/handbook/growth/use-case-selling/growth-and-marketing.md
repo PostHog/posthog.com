@@ -70,7 +70,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 
 **The buyer is different from other use cases.** Growth and Marketing targets growth engineers, marketing leads, demand gen managers, CRO specialists, and GTM engineers. In most organizations, these are separate from the product analytics buyer (PM) and the engineering buyer (EM/platform). They often have their own budget and their own stack. Winning this buyer opens a parallel revenue stream within the same account.
 
-**Marketing stack consolidation is a real, quantifiable cost savings.** Companies routinely spend $10k+/month across GA4, Segment, Mixpanel, Amplitude, CDPs, and various point solutions. The consolidation argument is concrete: fewer vendor contracts, fewer integrations to maintain, one source of truth for conversion data.
+**Marketing stack consolidation cuts hard costs.** Companies routinely spend $10k+/month across GA4, Segment, Mixpanel, Amplitude, CDPs, and various point solutions. Consolidating means fewer vendor contracts, fewer integrations to maintain, and one source of truth for conversion data.
 
 **This use case gives newer products a reason to exist.** Workflows and Marketing Analytics are relatively new PostHog products with lower attach rates. Without a use case frame, they're standalone features looking for a buyer. Within Growth and Marketing, each one has a clear role and a natural "next step" in the conversation.
 
@@ -208,7 +208,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 | Heap | Auto-capture product analytics | We also auto-capture, plus flags, experiments, replay, surveys, workflows | Retroactive analytics (virtual events) is a strong pitch for non-technical teams |
 | Hotjar | Heatmaps, replay, on-site surveys | Full analytics platform underneath; experiments; we ship [heatmaps](/docs/toolbar/heatmaps) and surveys too | Simpler, more opinionated UX for non-technical CRO teams |
 
-**Where PostHog stands:** Our strongest position is against teams using 3+ tools to do what PostHog does in one. The consolidation pitch is genuine. We're weaker against teams deeply embedded in the Google ecosystem (GA4 + Google Ads + Looker) where switching cost is high. We're also weaker against HubSpot where marketing automation is the primary need. Our sweet spot is technical growth teams and PLG companies where the growth engineer is the buyer.
+**Where PostHog stands:** Our strongest position is against teams using 3+ tools to do what PostHog does in one. We're weaker against teams deeply embedded in the Google ecosystem (GA4 + Google Ads + Looker) where switching cost is high. We're also weaker against HubSpot where marketing automation is the primary need. Our sweet spot is technical growth teams and PLG companies where the growth engineer is the buyer.
 
 ## Pain points & known limitations
 
