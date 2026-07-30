@@ -82,7 +82,7 @@ A prompt that reads beautifully on its own can still misfire. The fastest feedba
 
 Hold off on the automatic background sweep until you trust the scanner's on-demand results – every sweep observation spends [credits](/docs/replay-vision/quota-and-limits), and a poorly tuned scanner can burn through your budget fast on results you'd throw away anyway.
 
-Once the scanner is running, the tuning loop moves to its [quality tab](/docs/replay-vision/quality): rate results with a thumbs up or down, and PostHog AI turns your team's ratings and feedback into configuration recommendations you can test against the rated sessions before applying.
+Once the scanner is running, the tuning loop moves to its [calibration tab](/docs/replay-vision/calibration): rate results with a thumbs up or down, and PostHog AI turns your team's ratings and feedback into configuration recommendations you can test against the rated sessions before applying.
 
 ### Drafting prompts with PostHog AI
 
@@ -103,7 +103,7 @@ Each scanner type has a few extra knobs. The full reference is on the [scanner t
 - **Summarizer** – pick a summary length (short / medium / long). The core summarizer prompt is built in, so the prompt field becomes **Additional context**: use it for product context or steering, like what the ideal user flow looks like.
 - **Monitor** – choose whether the model can return `inconclusive` rather than forcing a yes/no answer.
 
-The editor also has a **model** picker, which sets the price of every observation the scanner makes: 2 credits on Gemini 3.5 Flash Lite, 5 on Gemini 3 Flash (the default), and 15 on Gemini 3.6 Flash. Newer models tend to produce higher-quality observations, but the top tier costs over seven times as much per session as the cheapest. Start on the default. If results are close but not quite right, tune the prompt before reaching for a pricier model, since a sharper prompt is free and the [quality tab](/docs/replay-vision/quality) will tell you whether it worked. See [quota and limits](/docs/replay-vision/quota-and-limits) for how credits are metered.
+The editor also has a **model** picker, which sets the price of every observation the scanner makes: 2 credits on Gemini 3.5 Flash Lite, 5 on Gemini 3 Flash (the default), and 15 on Gemini 3.6 Flash. Newer models tend to produce higher-quality observations, but the top tier costs over seven times as much per session as the cheapest. Start on the default. If results are close but not quite right, tune the prompt before reaching for a pricier model, since a sharper prompt is free and the [calibration tab](/docs/replay-vision/calibration) will tell you whether it worked. See [quota and limits](/docs/replay-vision/quota-and-limits) for how credits are metered.
 
 ## Filters: scoping the scanner
 
