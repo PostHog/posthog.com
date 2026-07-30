@@ -3978,6 +3978,30 @@
             "destination": "/feature-flags#questions"
         },
         {
+            "source": "/logs/customers",
+            "destination": "/logs"
+        },
+        {
+            "source": "/logs/comparisons",
+            "destination": "/logs#feature-comparison"
+        },
+        {
+            "source": "/logs/documentation",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/tutorials",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/logs/questions",
+            "destination": "/logs"
+        },
+        {
             "source": "/surveys/customers",
             "destination": "/surveys"
         },
@@ -4657,6 +4681,17 @@
                     "type": "query",
                     "key": "product",
                     "value": "surveys"
+                }
+            ]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/logs/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "logs"
                 }
             ]
         },

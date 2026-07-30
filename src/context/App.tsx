@@ -1557,9 +1557,6 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/logs': {
-        toolbar: true,
-    },
     '/workflows': {
         toolbar: true,
     },
