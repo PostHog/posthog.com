@@ -279,7 +279,7 @@ export const sessionReplay = {
         ],
     },
     useCaseRamp: {
-        intro: 'Session replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively.',
+        intro: 'Session replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog work proactively with your data.',
         scenario: 'Users keep clicking the same button and nothing happens',
         columns: [
             {

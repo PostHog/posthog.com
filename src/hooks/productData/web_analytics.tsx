@@ -217,7 +217,7 @@ export const webAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Web analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog work proactively.',
+        intro: 'Web analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog work proactively with your data.',
         scenario: 'Referral traffic suddenly drops',
         columns: [
             {

@@ -208,7 +208,7 @@ export const errorTracking = {
         ],
     },
     useCaseRamp: {
-        intro: 'Error tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively.',
+        intro: 'Error tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog work proactively with your data.',
         scenario: 'A deploy starts throwing an error nobody has seen before',
         columns: [
             {

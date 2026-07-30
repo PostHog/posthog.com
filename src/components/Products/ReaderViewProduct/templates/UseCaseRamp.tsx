@@ -135,8 +135,9 @@ interface UseCaseRampData {
     intro?: string
     /**
      * Title of the one incident traced through every level, e.g. 'Signup
-     * conversion drops eight points'. Named here once; each column carries its
-     * level's version of the story in `scenario`.
+     * conversion drops eight points'. Named here once and rendered on each
+     * column's scenario card, where the column supplies its level's version of
+     * the story in `scenario`. Deliberately not repeated in the intro.
      */
     scenario?: string
     columns?: RampColumn[]
@@ -168,17 +169,6 @@ const levelTabIcon: Record<string, { Icon: React.ComponentType<{ className?: str
 }
 
 const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
-
-/**
- * `scenario` is authored as a title but rendered mid-sentence in the intro, so it's
- * lowercased and gets a full stop. Scenarios phrased as a question already end in
- * their own punctuation – appending to those would render '...actually work?.'.
- * Avoid acronyms in `scenario`: lowercasing turns 'CSV' into 'csv'.
- */
-const asClause = (scenario: string): string => {
-    const lowered = scenario.toLowerCase()
-    return /[.?!]$/.test(lowered) ? lowered : `${lowered}.`
-}
 
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
 
@@ -224,8 +214,7 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
             <LetPostHogScroller className="mb-2 text-2xl font-bold tracking-tight text-primary @xl:text-3xl" />
             <p className="m-0 mb-4 text-[15px] text-secondary">
                 {ramp?.intro ??
-                    `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog work proactively.`}
-                {ramp?.scenario && <> For example: {asClause(ramp.scenario)}</>}
+                    `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog work proactively with your data.`}
             </p>
             <Tabs.Root defaultValue={slugify(defaultColumn.level)}>
                 <Tabs.List

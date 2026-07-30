@@ -213,7 +213,7 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
-        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively.',
+        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog work proactively with your data.',
         scenario: 'Fewer people are finishing signup than last week',
         columns: [
             {

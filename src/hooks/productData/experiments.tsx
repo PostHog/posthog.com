@@ -228,7 +228,7 @@ export const experiments = {
         ],
     },
     useCaseRamp: {
-        intro: 'Experiments work at three levels. You can set up and read a test yourself, ask an agent to scaffold one for you, or let PostHog work proactively.',
+        intro: 'Experiments work at three levels. You can set up and read a test yourself, ask an agent to scaffold one for you, or let PostHog work proactively with your data.',
         scenario: 'Does the new onboarding actually work?',
         columns: [
             {

@@ -218,7 +218,7 @@ export const featureFlags = {
         ],
     },
     useCaseRamp: {
-        intro: 'Feature flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively.',
+        intro: 'Feature flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog work proactively with your data.',
         scenario: 'Shipping a risky checkout rewrite',
         columns: [
             {
