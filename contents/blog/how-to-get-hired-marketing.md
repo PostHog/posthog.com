@@ -58,6 +58,8 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 ## How to make your application stand out
 
+Let's say you tick all these boxes. How do you make sure you communicate that and make sure you get an interview?
+
 The conventional wisdom on LinkedIn seems to be that if you're interested in a job then you should message the hiring manager directly and ask for 10 minutes to "just chat about the role".
 
 That is a bad idea and it often actively works against you. It's a good idea to reach out if you have a specific question about the role, but as a hiring manager I don't want to hop on a quick call without an agenda and I don't want to frustrate our existing hiring process. It isn't fair to other candidates and, in my experience, it's often the lowest-effort candidates that ask for it anyway.
