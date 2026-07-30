@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconArchive, IconPullRequest } from '@posthog/icons'
 import PriorityBadge from './PriorityBadge'
-import { originMeta, type InboxItem } from './inboxData'
+import { originMeta, formatAgo, type InboxItem } from './inboxData'
 
 interface ReportRowProps {
     item: InboxItem
@@ -14,9 +14,12 @@ interface ReportRowProps {
 // a mono commit-scope tag, a bold title, a two-line summary, an origin line
 // (source-product name for signal sources, "Scout · <category>" for scouts), and a
 // right rail with the PR badge, Archive/Review actions, and a relative timestamp.
+// The whole card is clickable – Archive/Review are visual affordances, since every
+// action in the demo opens the story behind the PR.
 export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRowProps): JSX.Element {
     const origin = originMeta(item)
     const OriginIcon = origin.Icon
+    const timeAgo = formatAgo(item.createdMinutesAgo)
 
     const PrBadge = (): JSX.Element | null =>
         item.prNumber ? (
@@ -30,10 +33,22 @@ export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRo
         ) : null
 
     return (
-        <div className="relative rounded-md border border-primary bg-primary p-3 @md:p-4">
+        <div
+            role="button"
+            tabIndex={0}
+            onClick={onOpen}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    onOpen()
+                }
+            }}
+            aria-label={`Review ${item.commitType}(${item.scope}): ${item.title}`}
+            className="group relative cursor-pointer rounded-md border border-primary bg-primary p-3 transition-colors hover:border-secondary hover:bg-accent focus-visible:border-secondary focus-visible:outline-none @md:p-4"
+        >
             <div className="flex items-start gap-3">
-                {/* Clickable main content */}
-                <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 items-start gap-3 text-left">
+                {/* Main content */}
+                <div className="flex min-w-0 flex-1 items-start gap-3">
                     <PriorityBadge priority={item.priority} />
                     <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -67,30 +82,25 @@ export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRo
                             {/* PR badge + time inline on mobile, where the right rail is hidden */}
                             <span className="flex items-center gap-2 @md:hidden">
                                 <PrBadge />
-                                <span className="tabular-nums">{item.timeAgo}</span>
+                                <span className="tabular-nums">{timeAgo}</span>
                             </span>
                         </div>
                     </div>
-                </button>
+                </div>
 
                 {/* Right rail: PR badge, actions, timestamp */}
                 <div className="hidden shrink-0 flex-col items-end justify-between gap-2 self-stretch border-l border-primary pl-3 @md:flex">
                     <PrBadge />
                     <div className="flex items-center gap-2">
-                        {/* Archive is chrome only – the demo's action is Review. */}
                         <span className="inline-flex items-center gap-1 rounded border border-primary px-2 py-1 text-xs font-semibold text-secondary">
                             <IconArchive className="size-3.5" />
                             Archive
                         </span>
-                        <button
-                            type="button"
-                            onClick={onOpen}
-                            className="rounded border border-secondary bg-primary px-2.5 py-1 text-xs font-semibold text-primary transition-colors hover:bg-accent"
-                        >
+                        <span className="rounded border border-secondary bg-primary px-2.5 py-1 text-xs font-semibold text-primary transition-colors group-hover:bg-accent">
                             Review
-                        </button>
+                        </span>
                     </div>
-                    <span className="text-xs tabular-nums text-secondary">{item.timeAgo}</span>
+                    <span className="text-xs tabular-nums text-secondary">{timeAgo}</span>
                 </div>
             </div>
         </div>

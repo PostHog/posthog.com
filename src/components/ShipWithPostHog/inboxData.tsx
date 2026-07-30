@@ -50,7 +50,10 @@ export interface InboxItem {
     summary: string
     priority: Priority
     signalCount: number
-    timeAgo: string
+    /** Minutes since the report was created – drives "Newest"/"Oldest" sort and the row timestamp. */
+    createdMinutesAgo: number
+    /** Minutes since last activity – drives "Last updated first" sort. */
+    updatedMinutesAgo: number
     origin: Origin
     /** Real merged/open PR on the public repo, when the item is real. */
     prUrl?: string
@@ -77,7 +80,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'Deeply nested queries hit Python’s recursion limit and 500 instead of returning a clean query error.',
         priority: 'P1',
         signalCount: 12,
-        timeAgo: '2h ago',
+        createdMinutesAgo: 120,
+        updatedMinutesAgo: 50,
         origin: { kind: 'signal', product: 'error_tracking' },
         prUrl: 'https://github.com/PostHog/posthog/pull/70470',
         prNumber: 70470,
@@ -119,7 +123,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'A failed chunk load left users staring at a blank SDK doctor screen with no error to act on.',
         priority: 'P2',
         signalCount: 8,
-        timeAgo: '5h ago',
+        createdMinutesAgo: 300,
+        updatedMinutesAgo: 300,
         origin: { kind: 'signal', product: 'session_replay' },
         prUrl: 'https://github.com/PostHog/posthog/pull/60829',
         prNumber: 60829,
@@ -161,7 +166,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'The cohort name field kept showing a validation error after a valid name was entered.',
         priority: 'P2',
         signalCount: 6,
-        timeAgo: '1d ago',
+        createdMinutesAgo: 1440,
+        updatedMinutesAgo: 600,
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/72007',
         prNumber: 72007,
@@ -203,7 +209,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'A worker retried a webhook that’s been returning 410 for a day, thousands of times an hour.',
         priority: 'P2',
         signalCount: 31,
-        timeAgo: '3h ago',
+        createdMinutesAgo: 180,
+        updatedMinutesAgo: 10,
         origin: { kind: 'signal', product: 'logs' },
         steps: [
             {
@@ -243,7 +250,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'Checkout latency crept up as the inventory service fired one query per cart item.',
         priority: 'P2',
         signalCount: 9,
-        timeAgo: '6h ago',
+        createdMinutesAgo: 360,
+        updatedMinutesAgo: 200,
         origin: { kind: 'scout', product: 'traces', scout: 'APM' },
         steps: [
             {
@@ -277,7 +285,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary: 'The assistant confidently cited a 30-day refund policy the product doesn’t offer.',
         priority: 'P2',
         signalCount: 5,
-        timeAgo: '30m ago',
+        createdMinutesAgo: 30,
+        updatedMinutesAgo: 15,
         origin: { kind: 'scout', product: 'ai_observability', scout: 'Evals' },
         steps: [
             {
@@ -326,4 +335,94 @@ export const originMeta = (item: InboxItem): OriginMeta => {
         return { Icon: IconCompass, color: source.color, primary: 'Scout', secondary: item.origin.scout }
     }
     return { Icon: source.Icon, color: source.color, primary: source.label }
+}
+
+// Short relative timestamp, e.g. "30m ago" / "2h ago" / "1d ago".
+export const formatAgo = (minutes: number): string => {
+    if (minutes < 60) return `${minutes}m ago`
+    const hours = Math.floor(minutes / 60)
+    if (hours < 24) return `${hours}h ago`
+    return `${Math.floor(hours / 24)}d ago`
+}
+
+// ---- Sort ----
+// The four sort choices the real Inbox offers (there is no signal-count sort).
+export type SortValue = 'priority' | 'updated' | 'newest' | 'oldest'
+export const SORT_OPTIONS: { value: SortValue; label: string }[] = [
+    { value: 'priority', label: 'Priority first' },
+    { value: 'updated', label: 'Last updated first' },
+    { value: 'newest', label: 'Newest first' },
+    { value: 'oldest', label: 'Oldest first' },
+]
+export const DEFAULT_SORT: SortValue = 'priority'
+
+const PRIORITY_RANK: Record<Priority, number> = { P0: 0, P1: 1, P2: 2, P3: 3, P4: 4 }
+
+// ---- Priority filter ----
+// All five priorities are shown (as in the real Inbox), with the meaning label and
+// the accent-dot color the app uses for the filter rows.
+export const PRIORITY_OPTIONS: Priority[] = ['P0', 'P1', 'P2', 'P3', 'P4']
+export const PRIORITY_MEANING: Record<Priority, { label: string; dot: string }> = {
+    P0: { label: 'Critical', dot: '#e5484d' },
+    P1: { label: 'High', dot: '#f76b15' },
+    P2: { label: 'Medium', dot: '#ffc53d' },
+    P3: { label: 'Low', dot: '#3b9eff' },
+    P4: { label: 'Minimal', dot: '#8f8f8f' },
+}
+
+// ---- Source filter (with nested scouts) ----
+// The distinct signal-source products and scouts present in the data, preserving
+// item order – the Source popover lists sources, then scouts under a "Scout" group.
+export const SIGNAL_SOURCES: SourceKey[] = INBOX_ITEMS.reduce<SourceKey[]>((acc, item) => {
+    if (item.origin.kind === 'signal' && !acc.includes(item.origin.product)) acc.push(item.origin.product)
+    return acc
+}, [])
+export const SCOUTS: string[] = INBOX_ITEMS.reduce<string[]>((acc, item) => {
+    if (item.origin.kind === 'scout' && !acc.includes(item.origin.scout)) acc.push(item.origin.scout)
+    return acc
+}, [])
+
+export interface InboxFilters {
+    sort: SortValue
+    sources: SourceKey[]
+    scouts: string[]
+    priorities: Priority[]
+}
+
+export const EMPTY_FILTERS: InboxFilters = { sort: DEFAULT_SORT, sources: [], scouts: [], priorities: [] }
+
+// True when any narrowing filter is active (sort is excluded, matching the app's hasActiveFilters).
+export const hasActiveFilters = (f: InboxFilters): boolean =>
+    f.sources.length > 0 || f.scouts.length > 0 || f.priorities.length > 0
+
+// Apply the filters, then order by the chosen sort. Priority sort puts P0 first and
+// breaks ties by most-recent activity, mirroring the app's priority+recency ordering.
+export const selectItems = (f: InboxFilters): InboxItem[] => {
+    const narrowing = f.sources.length > 0 || f.scouts.length > 0
+    const filtered = INBOX_ITEMS.filter((item) => {
+        if (f.priorities.length && !f.priorities.includes(item.priority)) return false
+        if (narrowing) {
+            if (item.origin.kind === 'signal') return f.sources.includes(item.origin.product)
+            return f.scouts.includes(item.origin.scout)
+        }
+        return true
+    })
+
+    const sorted = [...filtered]
+    sorted.sort((a, b) => {
+        switch (f.sort) {
+            case 'updated':
+                return a.updatedMinutesAgo - b.updatedMinutesAgo
+            case 'newest':
+                return a.createdMinutesAgo - b.createdMinutesAgo
+            case 'oldest':
+                return b.createdMinutesAgo - a.createdMinutesAgo
+            case 'priority':
+            default:
+                return (
+                    PRIORITY_RANK[a.priority] - PRIORITY_RANK[b.priority] || a.updatedMinutesAgo - b.updatedMinutesAgo
+                )
+        }
+    })
+    return sorted
 }

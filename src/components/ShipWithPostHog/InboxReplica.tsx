@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-    IconArrowLeft,
-    IconChevronDown,
-    IconSearch,
-    IconSort,
-    IconCompass,
-    IconFlag,
-    IconRefresh,
-    IconNotification,
-    IconPullRequest,
-} from '@posthog/icons'
+import { IconArrowLeft, IconChevronDown, IconNotification, IconPullRequest } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import WizardCommand from 'components/WizardCommand'
@@ -17,26 +7,21 @@ import Link from 'components/Link'
 import SelfDrivingStory from 'components/SelfDrivingStory'
 import ReportRow from './ReportRow'
 import PriorityBadge from './PriorityBadge'
-import { INBOX_ITEMS, originMeta, type InboxItem } from './inboxData'
+import InboxFilterBar from './InboxFilterBar'
+import { INBOX_ITEMS, originMeta, selectItems, EMPTY_FILTERS, type InboxItem, type InboxFilters } from './inboxData'
 
 const TOTAL = INBOX_ITEMS.length
 
-const nextUnmerged = (merged: Set<string>, fromIndex: number): string | null => {
-    for (let step = 1; step <= TOTAL; step++) {
-        const item = INBOX_ITEMS[(fromIndex + step) % TOTAL]
-        if (!merged.has(item.id)) return item.id
+// Next unmerged item after `fromIndex`, walking the current visible order so merging
+// auto-advances to whatever the reader sees next.
+const nextUnmerged = (order: InboxItem[], merged: Set<string>, currentId: string): string | null => {
+    const from = order.findIndex((i) => i.id === currentId)
+    for (let step = 1; step <= order.length; step++) {
+        const item = order[(from + step) % order.length]
+        if (item && !merged.has(item.id)) return item.id
     }
     return null
 }
-
-// A quiet, non-interactive filter chip mirroring the real Inbox filter bar.
-const FilterChip = ({ icon, label }: { icon: React.ReactNode; label: string }): JSX.Element => (
-    <span className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary">
-        {icon}
-        {label}
-        <IconChevronDown className="size-3.5 text-secondary/70" />
-    </span>
-)
 
 const Tab = ({
     label,
@@ -154,6 +139,9 @@ export default function InboxReplica(): JSX.Element {
     const [mergedIds, setMergedIds] = useState<Set<string>>(new Set())
     const [openedIds, setOpenedIds] = useState<Set<string>>(new Set())
     const [openId, setOpenId] = useState<string | null>(null)
+    const [filters, setFilters] = useState<InboxFilters>(EMPTY_FILTERS)
+
+    const visibleItems = selectItems(filters)
 
     // Deep-link: open whichever item the URL hash points at on mount.
     useEffect(() => {
@@ -184,8 +172,7 @@ export default function InboxReplica(): JSX.Element {
     const mergeItem = (id: string): void => {
         const merged = new Set(mergedIds).add(id)
         setMergedIds(merged)
-        const index = INBOX_ITEMS.findIndex((i) => i.id === id)
-        const next = nextUnmerged(merged, index)
+        const next = nextUnmerged(visibleItems, merged, id)
         if (next) {
             setOpenId(next)
             setOpenedIds((prev) => new Set(prev).add(next))
@@ -242,32 +229,34 @@ export default function InboxReplica(): JSX.Element {
                     </div>
 
                     {/* Filter bar */}
-                    <div className="flex flex-wrap items-center gap-2 px-4 py-3 @md:px-6">
-                        <span className="inline-flex h-8 min-w-[200px] flex-1 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary @md:max-w-sm">
-                            <IconSearch className="size-3.5" />
-                            Search by title or description.
-                        </span>
-                        <div className="ml-auto flex items-center gap-2">
-                            <FilterChip icon={<IconSort className="size-3.5" />} label="Sort" />
-                            <FilterChip icon={<IconCompass className="size-3.5" />} label="Scout" />
-                            <FilterChip icon={<IconFlag className="size-3.5" />} label="Priority" />
-                            <span className="inline-flex size-8 items-center justify-center rounded border border-primary bg-primary text-secondary">
-                                <IconRefresh className="size-3.5" />
-                            </span>
-                        </div>
+                    <div className="px-4 py-3 @md:px-6">
+                        <InboxFilterBar filters={filters} onChange={setFilters} />
                     </div>
 
                     {/* List */}
                     <div className="mx-auto flex max-w-4xl flex-col gap-2.5 px-4 pb-5 @md:px-6">
-                        {INBOX_ITEMS.map((item) => (
-                            <ReportRow
-                                key={item.id}
-                                item={item}
-                                isMerged={mergedIds.has(item.id)}
-                                isUnread={!openedIds.has(item.id)}
-                                onOpen={() => openItem(item.id)}
-                            />
-                        ))}
+                        {visibleItems.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center gap-1 py-14 text-center">
+                                <p className="m-0 font-semibold text-primary">No pull requests match these filters.</p>
+                                <button
+                                    type="button"
+                                    onClick={() => setFilters(EMPTY_FILTERS)}
+                                    className="text-sm font-semibold text-red hover:underline dark:text-yellow"
+                                >
+                                    Clear filters
+                                </button>
+                            </div>
+                        ) : (
+                            visibleItems.map((item) => (
+                                <ReportRow
+                                    key={item.id}
+                                    item={item}
+                                    isMerged={mergedIds.has(item.id)}
+                                    isUnread={!openedIds.has(item.id)}
+                                    onOpen={() => openItem(item.id)}
+                                />
+                            ))
+                        )}
                     </div>
                 </>
             )}
