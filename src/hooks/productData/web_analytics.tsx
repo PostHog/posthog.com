@@ -14,7 +14,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
-    IconRefresh,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
@@ -95,7 +95,7 @@ export const webAnalytics = {
             name: 'Ramp to self-driving',
             template: 'use-case-ramp',
             group: 'divided',
-            icon: <IconRefresh className="size-4" />,
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -221,7 +221,7 @@ export const webAnalytics = {
     },
     useCaseRamp: {
         intro: 'Web analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog code.',
-        scenario: 'A traffic channel falls off a cliff',
+        scenario: 'Referral traffic suddenly drops',
         columns: [
             {
                 level: 'Do it yourself',

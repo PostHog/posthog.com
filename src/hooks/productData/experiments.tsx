@@ -16,7 +16,7 @@ import {
     IconMessage,
     IconNewspaper,
     IconToggle,
-    IconRefresh,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './experiments/features'
 import { applications, topFeatures } from './experiments/slides'
@@ -97,7 +97,7 @@ export const experiments = {
             name: 'Ramp to self-driving',
             template: 'use-case-ramp',
             group: 'divided',
-            icon: <IconRefresh className="size-4" />,
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',

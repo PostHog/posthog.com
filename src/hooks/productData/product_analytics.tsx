@@ -15,7 +15,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
-    IconRefresh,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
@@ -84,7 +84,7 @@ export const productAnalytics = {
             name: 'Ramp to self-driving',
             template: 'use-case-ramp',
             group: 'divided',
-            icon: <IconRefresh className="size-4" />,
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -218,7 +218,7 @@ export const productAnalytics = {
     },
     useCaseRamp: {
         intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog code.',
-        scenario: 'Signup conversion drops eight points',
+        scenario: 'Fewer people are finishing signup than last week',
         columns: [
             {
                 level: 'Do it yourself',

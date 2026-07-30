@@ -15,7 +15,7 @@ import {
     IconCode,
     IconMessage,
     IconNewspaper,
-    IconRefresh,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
 import { applications, topFeatures } from './feature_flags/slides'
@@ -84,7 +84,7 @@ export const featureFlags = {
             name: 'Ramp to self-driving',
             template: 'use-case-ramp',
             group: 'divided',
-            icon: <IconRefresh className="size-4" />,
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',

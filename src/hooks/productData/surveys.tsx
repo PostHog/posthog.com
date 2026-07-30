@@ -14,7 +14,7 @@ import {
     IconChat,
     IconCode,
     IconNewspaper,
-    IconRefresh,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
@@ -82,7 +82,7 @@ export const surveys = {
             name: 'Ramp to self-driving',
             template: 'use-case-ramp',
             group: 'divided',
-            icon: <IconRefresh className="size-4" />,
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',

@@ -5,8 +5,10 @@ import {
     IconAtSign,
     IconBolt,
     IconCoffee,
+    IconCursorClick,
     IconNotification,
     IconPlug,
+    IconRocket,
     IconSparkles,
     IconTerminal,
 } from '@posthog/icons'
@@ -152,6 +154,19 @@ const levelMode: Record<string, string> = {
     'Ship with PostHog': 'Self-driving',
 }
 
+/**
+ * Tab icon + color, keyed by `level` – deliberately independent of the surface
+ * icons/colors used elsewhere (the "PostHog Web"/"PostHog AI" pills), since the
+ * tab needs to tell its own story: a hands-on click, then AI, then autonomous.
+ * Color ramps blue → purple → red across the three tabs to read as escalating
+ * intensity, distinct from any one product's brand color.
+ */
+const levelTabIcon: Record<string, { Icon: React.ComponentType<{ className?: string }>; color: string }> = {
+    'Do it yourself': { Icon: IconCursorClick, color: 'text-blue' },
+    'Ask an agent': { Icon: IconSparkles, color: 'text-purple' },
+    'Ship with PostHog': { Icon: IconRocket, color: 'text-red' },
+}
+
 const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
@@ -189,6 +204,10 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
 
     if (!columns.length) return null
 
+    // Opens on "Ask an agent" rather than the first tab: it's the middle rung, and the
+    // one most likely to make someone curious enough to also check the other two.
+    const defaultColumn = columns.find((column) => column.level === 'Ask an agent') ?? columns[0]
+
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <LetPostHogScroller className="mb-2 text-2xl font-bold tracking-tight text-primary @xl:text-3xl" />
@@ -202,25 +221,29 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                     </>
                 )}
             </p>
-            <Tabs.Root defaultValue={slugify(columns[0].level)}>
+            <Tabs.Root defaultValue={slugify(defaultColumn.level)}>
                 <Tabs.List
                     className="flex flex-wrap @md/reader-content:flex-nowrap"
                     aria-label={`Ways to use ${productData?.name}`}
                 >
                     {columns.map((column) => {
                         const primary = resolveSurfaces(column.surfaces)[0]
+                        const tabIcon = levelTabIcon[column.level]
+                        const TabIcon = tabIcon?.Icon ?? primary?.Icon
+                        const tabColor = tabIcon?.color ?? primary?.color
+                        const tabAccent = tabIcon ? tabIcon.color.replace('text-', 'bg-') : primary?.accent
                         return (
                             <Tabs.Trigger
                                 key={column.level}
                                 value={slugify(column.level)}
                                 className="group relative flex min-w-[calc(50%-0.25rem)] flex-1 cursor-pointer select-none flex-col items-center gap-1 rounded-t-md px-3 py-2.5 text-sm font-semibold text-secondary transition-colors hover:text-primary data-[state=active]:bg-light data-[state=active]:text-primary @md/reader-content:min-w-0 dark:data-[state=active]:bg-dark"
                             >
-                                {primary?.Icon && <primary.Icon className={`size-5 shrink-0 ${primary.color}`} />}
+                                {TabIcon && <TabIcon className={`size-5 shrink-0 ${tabColor}`} />}
                                 <span className="text-balance text-center">{column.level}</span>
                                 <span
                                     aria-hidden="true"
                                     className={`absolute inset-x-0 bottom-0 h-0.5 rounded-full opacity-0 group-data-[state=active]:opacity-100 ${
-                                        primary?.accent ?? 'bg-blue'
+                                        tabAccent ?? 'bg-blue'
                                     }`}
                                 />
                             </Tabs.Trigger>
