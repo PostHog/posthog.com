@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Customer Success Managers (CSMs) help customers get more value out of PostHog so they stick around. That means helping them onboard, train their team, work through support issues, find cost savings, and advocate for them inside PostHog.
+Customer Success Managers (CSMs) help customers get the most efficient use and value out of PostHog so they stay with us and tell their friends about it. That means helping them onboard, train their team, work through support issues, find cost savings, and advocate for them inside PostHog.
 
 ## Principles
 
@@ -22,7 +22,7 @@ Our primary goal is retention, and the team target is 120% NRR (see [how we work
 
 A big part of the work is spotting customers who need help before they ask. The loudest ones will find us anyway. The ones quietly struggling won't, and those are the ones where a well-timed outreach, a usage pattern in Vitally, or just reading between the lines on a ticket makes the difference.
 
-No two accounts need the same thing. Some need deep ticket involvement, some need strategic time, some just need a catch-up call every quarter.
+No two accounts need the same thing. Some need deep ticket and usage involvement, some need strategic time, some just need a catch-up call every quarter.
 
 ## The levers we have
 
