@@ -9,15 +9,17 @@ import {
     IconCheckCircle,
     IconCursorClick,
     IconChat,
-    // IconInfo,
-    // IconMagic,
-    // IconCode,
-    // IconMessage,
-    // IconConfetti,
+    IconInfo,
+    IconMagic,
+    IconCode,
+    IconConfetti,
 } from '@posthog/icons'
+import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
 import { applications, topFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
+
+const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 
 export const logs = {
     ...getTool('logs'),
@@ -25,7 +27,8 @@ export const logs = {
     productVariantName: 'Logs ingestion (14-day retention)',
     type: 'logs',
     teamSlug: 'apm',
-    // forumTopicId: /* TODO: community topic ID for /questions/topic/logs */,
+    // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
+    // forumTopicId: /* create topic, then uncomment community menu item below */,
     color: 'red',
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
@@ -47,22 +50,20 @@ export const logs = {
      */
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        // CONTENT GAP: needs overview.eli5 (see session_replay.overview.eli5)
-        // {
-        //     slug: 'eli5',
-        //     name: 'What does it do?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconInfo className="size-4" />,
-        // },
-        // CONTENT GAP: needs useCases { intro, rows: [role, useCase][] }
-        // {
-        //     slug: 'use-cases',
-        //     name: 'Who is it for?',
-        //     hideFromNav: true,
-        //     group: 'divided',
-        //     icon: <IconMagic className="size-4" />,
-        // },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -83,24 +84,21 @@ export const logs = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        // CONTENT GAP: needs installation.description (+ confirm categories;
-        // taxonomy slug mismatches for javascript→web and ruby-on-rails→rails)
-        // {
-        //     slug: 'installation',
-        //     name: 'Install',
-        //     group: 'divided',
-        //     icon: <IconCode className="size-4" />,
-        // },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
-        // CONTENT GAP: needs forumTopicId for CommunityQuestions
+        // Needs forumTopicId once a Logs community topic exists.
         // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        // CONTENT GAP: pairsWith was commented out on the old page – write descriptions first
-        // { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -118,7 +116,8 @@ export const logs = {
         title: 'Logs that already know your users',
         description:
             'Works with your existing OTel setup. Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
-        // eli5: /* TODO: plain-language explanation – see session_replay.overview.eli5 */,
+        // Reshaped from contents/docs/logs/index.mdx + basics.mdx
+        eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it. Because logs live next to the rest of your data, a log line is one click from the session replay, person, and error behind it – the backend signal agents use to find a bug and ship the fix.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -131,18 +130,21 @@ export const logs = {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
         alt: 'A hedgehog perusing some logs',
         classes: 'hidden @2xl:block max-w-sm',
+        footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
             alt: 'A hedgehog perusing some logs',
         },
-        // mobileHog: /* TODO: hog used by Eli5 float – see session_replay.hogs.mobileHog */,
+        mobileHog: {
+            Component: HedgehogMagnifyingGlass,
+            alt: logsHogAlt,
+        },
     },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_overview_5408b3bed3.png',
-            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
             alt: 'Logs overview',
             classes: 'max-w-5xl mt-auto',
             imgClasses: '',
@@ -186,14 +188,33 @@ export const logs = {
             description: '',
         },
     },
-    // useCases: {
-    //     intro: 'Logs is used across teams depending on your role.',
-    //     rows: [
-    //         ['Product Engineers', '…'],
-    //         ['Support', '…'],
-    //         // see session_replay.useCases for shape
-    //     ],
-    // },
+    // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
+    // and link-person / link-session-replay docs.
+    useCases: {
+        intro: 'Logs is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                "Debug production issues that analytics and error tracking alone can't explain – cache misses, third-party lag, silent parse failures",
+            ],
+            [
+                'Support Engineers',
+                'Jump from a person profile or session replay to every backend log written while that user was active',
+            ],
+            [
+                'Platform / DevOps',
+                'Alert on error volume by service, mine patterns after a deploy, and catch services that go quiet',
+            ],
+            [
+                'Backend Engineers',
+                'Inspect background jobs and request paths with no UI – the only window when something vanishes into a black box',
+            ],
+            [
+                'AI-assisted teams',
+                'Let coding agents query structured logs over MCP to find the bug and draft the fix without leaving the editor',
+            ],
+        ],
+    },
     features,
     mcp: {
         title: 'MCP',
@@ -201,16 +222,15 @@ export const logs = {
         description:
             'Let your coding agent query logs, mine patterns, and manage alerts from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
     },
-    // installation: {
-    //     title: 'Install',
-    //     headline: 'Install',
-    //     description: /* TODO: one-liner – see session_replay.installation.description */,
-    //     productSlug: 'logs',
-    //     // Docs exist for: nodejs, python, go, java, nextjs, javascript, react-native,
-    //     // ios, android, flutter, ruby-on-rails, datadog, other.
-    //     // Taxonomy mismatches: javascript ≠ web, ruby-on-rails ≠ rails.
-    //     categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
-    // },
+    // Description from contents/docs/logs/installation/index.mdx
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            "PostHog Logs works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages – just use standard OpenTelemetry libraries.",
+        productSlug: 'logs',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Logs',
         benefits: [
@@ -265,7 +285,6 @@ export const logs = {
             {
                 name: 'Grafana (Loki)',
                 key: 'grafana_loki',
-                // link: '/blog/posthog-vs-langfuse',
             },
             {
                 name: 'Better Stack',
@@ -274,12 +293,10 @@ export const logs = {
             {
                 name: 'Datadog',
                 key: 'datadog',
-                // link: '/blog/posthog-vs-langsmith',
             },
             {
                 name: 'Elastic',
                 key: 'elastic',
-                // link: '/blog/posthog-vs-elastic',
             },
             {
                 name: 'PostHog',
@@ -289,30 +306,34 @@ export const logs = {
         rows: ['logs', 'logs.pricing.features'],
         excluded_sections: ['platform', 'pricing'],
     },
-    // pairsWith: [
-    //     {
-    //         slug: 'product-analytics',
-    //         description: 'Correlate AI usage with user behavior and business metrics',
-    //     },
-    //     {
-    //         slug: 'dashboards',
-    //         description: 'Build custom dashboards combining LLM and product metrics',
-    //     },
-    //     {
-    //         slug: 'session-replay',
-    //         description: 'Watch how users interact with AI features in real sessions',
-    //     },
-    //     {
-    //         slug: 'feature-flags',
-    //         description: 'Roll out AI features gradually and test different models',
-    //     },
-    // ],
-    // worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+    // Descriptions reshaped from contents/docs/logs/basics.mdx + link-session-replay / link-person
+    pairsWith: [
+        {
+            slug: 'session-replay',
+            description:
+                'Navigate from a log entry directly to the session replay to see what the user was doing when the backend failed',
+        },
+        {
+            slug: 'error-tracking',
+            description: 'See Error Tracking issues that occurred during the same session directly in the log details',
+        },
+        {
+            slug: 'product-analytics',
+            description:
+                'Go from a log line to product analytics for the same user – what they did, which path they took, and what broke in between',
+        },
+        {
+            slug: 'feature-flags',
+            description:
+                'Include flag variants in log context so you can see which experiment or rollout a failing request was on',
+        },
+    ],
+    worksWith: ['session_replay', 'error_tracking', 'product_analytics', 'feature_flags'],
     ai: {
-        // image: /* TODO: dedicated AI/hog art – AskAnything falls back if omitted */,
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
         imageAlt: 'PostHog AI and logs',
         description: 'find the bug in your logs and ship the fix',
-        // intro: /* TODO: one sentence before example prompts – see session_replay.ai.intro */,
+        intro: 'Ask PostHog AI to find error logs, mine patterns, and explain what changed.',
         mcpFeatures: ['logs'],
         skills: [
             'Finds the exact log lines you need with natural language – no query syntax required',
@@ -355,8 +376,4 @@ export const logs = {
             },
         ],
     },
-    // presenterNotes: {
-    //     overview:
-    //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
-    // },
 }

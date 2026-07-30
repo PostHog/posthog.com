@@ -3964,7 +3964,7 @@
         },
         {
             "source": "/logs/questions",
-            "destination": "/logs#community"
+            "destination": "/logs"
         },
         {
             "source": "/surveys/customers",

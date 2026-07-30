@@ -1,7 +1,17 @@
 import React from 'react'
-import { IconBrowser, IconSearch, IconServer, IconStack, IconPlug } from '@posthog/icons'
+import {
+    IconBrowser,
+    IconSearch,
+    IconServer,
+    IconStack,
+    IconPlug,
+    IconLaptop,
+    IconRewindPlay,
+    IconBell,
+} from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
+import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
@@ -9,8 +19,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Only MCP is shipped from existing docs content; other application slides
- * need copy before they can be added.
+ * Copy reshaped from contents/docs/logs (surfaces, link-session-replay, patterns, alerts).
  */
 export const applications: CarouselSlide[] = [
     {
@@ -55,6 +64,152 @@ export const applications: CarouselSlide[] = [
             </>
         ),
     },
+    {
+        slug: 'web-app',
+        label: 'Web app',
+        icon: <IconLaptop className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-blue',
+        layout: 'stack',
+        heading: 'Search, filter, and mine patterns in PostHog',
+        description: (
+            <>
+                <p>
+                    The{' '}
+                    <Link
+                        to="/docs/logs/surfaces/web-app"
+                        state={{ newWindow: true }}
+                        className="underline font-semibold"
+                    >
+                        PostHog web app
+                    </Link>{' '}
+                    is home base for Logs. Most investigations start the same way: filter to a service and severity,
+                    find the log line that matters, then pivot to the session replay, person, or error attached to it.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Search and filter',
+                                description:
+                                    'Narrow logs with the facet rail, the filter bar, or free-text search, and save a filter combination as a view.',
+                            },
+                            {
+                                label: 'Mine patterns',
+                                description:
+                                    'Group similar log lines into templates to spot noisy logging, new error shapes, and changes in your traffic.',
+                            },
+                            {
+                                label: 'Explain a log with PostHog AI',
+                                description:
+                                    'Open a log record and have PostHog AI write up what it means and what probably caused it.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            ref: 'home',
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'investigate',
+        label: 'Investigate',
+        icon: <IconRewindPlay className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'Jump from a log line to the user who hit it',
+        description: (
+            <>
+                <p>
+                    Because your logs live next to the rest of your data, a log line is one click from the session
+                    replay, person, and error it belongs to. Add a session ID and distinct ID and each log line links to
+                    the replay and person behind it.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'See the full user journey',
+                                description:
+                                    'Navigate from a log entry directly to the session replay to see what the user was doing.',
+                            },
+                            {
+                                label: 'Debug a specific user',
+                                description:
+                                    "Jump from the person's profile straight to every backend log written while they were active.",
+                            },
+                            {
+                                label: 'View related errors',
+                                description:
+                                    'See Error Tracking issues that occurred during the same session directly in the log details.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.full_stack_context.images[0].src,
+            alt: f.full_stack_context.images[0].alt,
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
+    {
+        slug: 'alerts',
+        label: 'Alerts',
+        icon: <IconBell className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-orange',
+        layout: 'stack',
+        heading: 'Get notified when log volume crosses a threshold',
+        description: (
+            <>
+                <p>
+                    Log alerts notify you when the volume of logs matching specific filters crosses a threshold. Use
+                    them to catch spikes in errors, drops in expected traffic, or unusual patterns across your services
+                    – with noise-reduction settings so brief spikes don't wake anyone up.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Filter by severity, service, and attributes',
+                                description: 'Scope the alert to the exact slice of log traffic you care about.',
+                            },
+                            {
+                                label: 'Simulate before you commit',
+                                description:
+                                    'Preview which logs would have matched your filters and threshold against recent historical data.',
+                            },
+                            {
+                                label: 'Feed Self-driving',
+                                description:
+                                    'When a log alert fires, it emits a signal into Self-driving so recurring failures become a report you can act on.',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.queryable_logs.images[0].src,
+            alt: f.queryable_logs.images[0].alt,
+            maxWidth: 'max-w-none',
+            containerClassName: 'pb-0 leading-[0]',
+            imgClassName: 'border-b-0 rounded-b-none',
+        },
+    },
 ]
 
 export const topFeatures: CarouselSlide[] = [
@@ -83,7 +238,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.queryable_logs.images[0].src,
             alt: f.queryable_logs.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -111,7 +265,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.opentelemetry.images[0].src,
             alt: f.opentelemetry.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -139,7 +292,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.full_stack_context.images[0].src,
             alt: f.full_stack_context.images[0].alt,
-            glow: true,
         },
     },
     {
