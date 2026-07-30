@@ -293,7 +293,7 @@ export const webAnalytics = {
                     {
                         title: 'Your history is the baseline',
                         icon: 'IconBrain',
-                        body: 'The scout tells drift from noise only because months of your traffic taught it what normal looks like. More history, fewer false alarms.',
+                        body: 'The scout tells drift from noise only because months of your traffic taught it what normal looks like. A site you launched last week has nothing to compare against yet.',
                     },
                     {
                         title: 'One stream, many readers',

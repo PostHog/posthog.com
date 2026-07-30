@@ -243,7 +243,7 @@ export const surveys = {
                     {
                         title: 'Agents read what came back',
                         icon: 'IconSearch',
-                        body: 'Summaries and themes come from the responses you already collected by hand. More answers in, clearer themes out.',
+                        body: 'Summaries and themes come from the responses you already collected by hand. Every answer stays tied to the person who gave it, so an agent can also tell you whether the people asking for a feature are the ones paying you.',
                     },
                     {
                         title: 'The full prompt list is below',

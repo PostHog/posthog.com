@@ -261,7 +261,7 @@ export const productAnalytics = {
                     {
                         title: 'Agents read what you built',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. Better data in, better answers out.',
+                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. An agent can only tell you why signups dropped if something in your product is called a signup.',
                     },
                     {
                         title: 'The full prompt list is below',

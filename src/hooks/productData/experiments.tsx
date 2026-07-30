@@ -276,7 +276,7 @@ export const experiments = {
                     {
                         title: 'Agents build on your metrics',
                         icon: 'IconSearch',
-                        body: 'The test an agent scaffolds is wired to the events and metrics you already track. The better your analytics, the sharper the experiment.',
+                        body: 'The test an agent scaffolds is wired to the events and metrics you already track, so a well-instrumented product gives it a real metric to decide on instead of a rough proxy.',
                     },
                     {
                         title: 'The full prompt list is below',

@@ -327,7 +327,7 @@ export const sessionReplay = {
                     {
                         title: 'Agents search what you record',
                         icon: 'IconSearch',
-                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would scroll through by hand. The more sessions you capture, the better the chance the one that explains the bug is among them.',
+                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would scroll through by hand. Turn on error tracking too and an agent can work backwards from an exception to the session that produced it.',
                     },
                     {
                         title: 'The full prompt list is below',
