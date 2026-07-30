@@ -62,7 +62,7 @@ A monitor returns a yes/no verdict for whether the condition in your prompt occu
 
 ### Impact and cohorts
 
-Monitors track how many sessions and users matched the verdict-yes condition over a trailing window (default 30 days). The scanner overview shows these impact counts, and you can save the affected users as a static [cohort](/docs/data/cohorts) with one click.
+Monitors track how many sessions and users matched the verdict-yes condition over a trailing window (default 30 days). The scanner's **Overview** tab shows these impact counts alongside the verdict mix, and you can save the affected users as a static [cohort](/docs/data/cohorts) with one click.
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
@@ -78,7 +78,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 **Type-specific config**
 
-- **Tag vocabulary** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below).
+- **Tag vocabulary** – the set of allowed tag names. The vocabulary itself is just names – put a short definition of each tag in the prompt so the model knows what it means (see the example below). The editor can also **suggest tags with PostHog AI** based on your prompt, your product, and what's been seen in recordings.
 - **Allow multiple tags** – whether the model can pick more than one per session.
 - **Allow freeform tags** – whether the model can invent new tags outside the vocabulary.
 
@@ -107,7 +107,7 @@ A classifier assigns one or more **tags** from a vocabulary you define. You can 
 
 ### Impact and cohorts
 
-Classifiers track impact per tag: how many sessions and users were assigned each tag in the trailing window. Each tag panel in the scanner overview has a button to save that tag's affected users as a static [cohort](/docs/data/cohorts).
+Classifiers track impact per tag: how many sessions and users were assigned each tag in the trailing window. Each tag panel on the scanner's **Overview** tab has a button to save that tag's affected users as a static [cohort](/docs/data/cohorts).
 
 The cohort is a snapshot at creation time and doesn't live-update. Use it anywhere cohorts work: funnel breakdowns, retention analysis, survey targeting, or experiment exclusion.
 
@@ -123,7 +123,7 @@ A scorer assigns a **numeric score** on a scale you define – e.g. 0 to 10 for 
 
 **Type-specific config**
 
-- **Scale** – minimum and maximum values (integers).
+- **Scale** – minimum and maximum values. Any numbers will do (decimals included) as long as the minimum is lower, though whole numbers are easier to reason about when you're reading scores later.
 - **Scale label** – optional short description of what the scale represents (e.g. "0 = no friction, 10 = severe friction").
 
 **When to use it**
@@ -162,7 +162,8 @@ A summarizer produces a short prose summary of what happened in the session, plu
 
 **Type-specific config**
 
-- **Summary length** – short, medium, or long. Controls roughly how many sentences the model writes.
+- **Additional context** – the core summarizer prompt is built in, so instead of a full prompt you add product context or steering – for example, what the ideal user flow looks like.
+- **Summary length** – short (1-2 sentences), medium (1 paragraph), or long (3-5 paragraphs).
 
 **When to use it**
 
@@ -170,9 +171,9 @@ A summarizer produces a short prose summary of what happened in the session, plu
 - Triage queues where humans need a one-line preview before clicking in
 - Feeding into a downstream analytics or retrieval pipeline
 
-**Example prompt**
+**Example context**
 
-> _Summarize what the user did in this session: which pages they visited, what they tried to accomplish, and any notable moments like errors, confusion, or successful completions. Be concrete and don't speculate._
+> _Our product is a B2B file-sharing app. The happy path is signing up, creating a workspace, then uploading a first file. Call out where sessions deviate from that flow, and name the exact page where any error appears._
 
 **On `$recording_observed`** – `scanner_output_title` and `scanner_output_summary` carry the title and summary; the facets land as `scanner_output_intent`, `scanner_output_outcome`, `scanner_output_friction_points`, and `scanner_output_keywords`. See [observations](/docs/replay-vision/observations#querying-observations-as-events).
 
@@ -197,6 +198,6 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 
 ## Confidence and citations
 
-Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee.
+Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee. For actual ground truth, rate results on the scanner's [calibration tab](/docs/replay-vision/calibration) – your team's ratings measure accuracy per configuration version and power AI configuration recommendations.
 
 Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding _why_ a model returned what it did.

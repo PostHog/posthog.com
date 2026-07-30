@@ -1,5 +1,5 @@
 ---
-title: Improving scanner accuracy
+title: Calibration
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
@@ -10,13 +10,13 @@ Not yet available to everyone – <a href="/replay-vision">join the waitlist</a>
 
 </CalloutBox>
 
-Replay Vision scanners are only as good as their configuration. The **Quality** tab on each scanner turns your team's judgment into a better configuration: rate the scanner's results, see accuracy trend across versions, and let PostHog AI recommend (and safely test) improvements to the prompt and every other behavior setting.
+Replay Vision scanners are only as good as their configuration. The **Calibration** tab on each scanner turns your team's judgment into a better configuration: rate the scanner's results, see accuracy trend across versions, and let PostHog AI recommend (and safely test) improvements to the prompt and every other behavior setting.
 
-Open any scanner and select the **Quality** tab.
+Open any scanner and select the **Calibration** tab.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/quality_tab_overview_fbe89921b9.png"
-  alt="The quality tab of a Replay Vision scanner"
+  alt="The calibration tab of a Replay Vision scanner"
   classes="rounded"
 />
 
@@ -54,7 +54,7 @@ Once your team leaves written feedback, PostHog AI summarizes it into recurring 
   classes="rounded"
 />
 
-## Track quality over time
+## Track accuracy over time
 
 The **Ratings over time** chart shows thumbs up and thumbs down per day, with markers for when each configuration version went live. As the configuration improves, thumbs down should trend down.
 
@@ -121,7 +121,7 @@ Applying never rewrites history: every observation keeps a snapshot of the scann
 
 ## The improvement loop
 
-Putting it together, the quality tab supports a simple loop your team can run continuously:
+Putting it together, the calibration tab supports a simple loop your team can run continuously:
 
 1. Rate new results as they come in, leaving feedback on the wrong ones.
 2. Watch the feedback themes to see which failure modes recur.

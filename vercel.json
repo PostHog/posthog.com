@@ -5438,6 +5438,130 @@
             "source": "/docs/logs/search-logs-ai",
             "destination": "/docs/logs/explain-logs-ai",
             "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/overview",
+            "destination": "/docs/posthog-ai",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/platform-and-chat-ui",
+            "destination": "/docs/posthog-ai/surfaces/web-app",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/quality",
+            "destination": "/docs/replay-vision/calibration",
+            "statusCode": 301
+        },
+        {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/getting-started",
+            "destination": "/docs/web-analytics/start-here",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/query-traffic-mcp",
+            "destination": "/docs/web-analytics/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
+        },
+        {
+            "source": "/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/questions/topic/ai-observability",
+            "destination": "/questions/topic/llm-analytics"
+        },
+        {
+            "source": "/ai-observability/features",
+            "destination": "/ai-observability#top-features"
+        },
+        {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
         }
     ]
 }

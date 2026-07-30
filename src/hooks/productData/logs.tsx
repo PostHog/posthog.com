@@ -1,16 +1,13 @@
 import { IconActivity } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 export const logs = {
-    name: 'Logs',
+    ...getTool('logs'),
     Icon: IconActivity,
-    description: 'Search and analyze your logs in PostHog',
     productVariantName: 'Logs ingestion (14-day retention)',
-    handle: 'logs',
     type: 'logs',
-    slug: 'logs',
     color: 'red',
     colorSecondary: 'green-2',
-    category: 'product_engineering',
     wizardSupport: 'Coming soon',
     includeAddonRates: true,
     slider: {
