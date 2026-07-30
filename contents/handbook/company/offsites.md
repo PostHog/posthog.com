@@ -136,9 +136,9 @@ If hotel prices are above £200 per night, it is worth quickly looking for alter
 Visiting the Hedge House from out of town? Here are some local spots the team recommends for food, drinks, and things to do:
 
 - [Fare](https://www.farelondon.com/). Good Italian food and drinks in a relaxed atmosphere, 2 minutes walk from the Hedge House.
-- [Space Talk](https://www.spacetalklondon.com/). A hi-fi cocktail bar with a cosy vibe, 2 minutes walk from the Hedge House.
+- [Space Talk](https://www.spacetalklondon.com/). A hi-fi cocktail bar with a cozy vibe, 2 minutes walk from the Hedge House.
 - [The Slaughtered Lamb](https://www.urbanpubsandbars.com/venues/slaughtered-lamb). A busy London pub suitable for large groups, next door to the Hedge House.
-- [The Holy Tavern](https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d23938423-Reviews-The_Holy_Tavern-London_England.html). One of the UK's oldest pubs and a PostHog favourite during summer, 7 minutes walk from the Hedge House.
+- [The Holy Tavern](https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d23938423-Reviews-The_Holy_Tavern-London_England.html). One of the UK's oldest pubs and a PostHog favorite during summer, 7 minutes walk from the Hedge House.
 - [Gazette](https://www.gazettebrasserie.co.uk/clerkenwell). French restaurant inside the Marrable's Hotel, just 3 minutes walk from the Hedge House.
 - [Whitecross Market](https://www.whitecross-street-market.co.uk/). Lots of food options, open every day for lunch, 5 minutes walk from the Hedge House.
 - [Flight Club](https://flightclubdarts.com/uk/london-shoreditch/). Social darts, food and drinks for large groups, many locations.
@@ -146,7 +146,7 @@ Visiting the Hedge House from out of town? Here are some local spots the team re
 - [West End shows](https://www.londontheatre.co.uk/). Wide variety of shows, with ticket prices much lower than in the US.
 - [Museums](https://www.visitlondon.com/things-to-do/sightseeing/london-attraction/museum). London has a wide variety of free museums, many with late-night events.
 
-For more, check the [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) — it has a canvas with further details for visitors, including how to use the Hedge House music system.
+For more, check the [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) – it has a canvas with further details for visitors, including how to use the Hedge House music system.
 
 ## Border Control
 
