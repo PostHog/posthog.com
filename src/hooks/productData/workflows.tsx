@@ -13,18 +13,15 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import { IconEnvelope, IconLink, IconMessages } from 'components/OSIcons'
+import { getTool } from '../../data/tools'
 
 export const workflows = {
-    name: 'Workflows',
+    ...getTool('workflows_emails'),
     productVariantName: 'Emails',
     Icon: IconDecisionTree,
-    description: 'Automate workflows with your product data',
-    handle: 'workflows_emails',
     type: 'workflows_emails',
-    slug: 'workflows',
     color: 'teal',
     colorSecondary: 'green-2',
-    category: 'automation',
     includeAddonRates: true,
     slider: {
         marks: [10000, 50000, 100000, 1000000, 10000000],
