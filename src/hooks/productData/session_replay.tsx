@@ -14,7 +14,6 @@ import {
     IconChat,
     IconCode,
     IconMessage,
-    IconNewspaper,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
@@ -90,7 +89,6 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
-        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
@@ -99,7 +97,7 @@ export const sessionReplay = {
         },
         { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/session-replay/pricing`).
