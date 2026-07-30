@@ -297,15 +297,22 @@ with:
 
 Immediately after that `CalloutBox`, add:
 
+Note the `{dedent`...`}` wrapper: a bare `<` in JSX children is a parse error, so the `posthog<6.0.0` text must live inside a template literal, with inline backticks escaped. This matches the convention already used elsewhere in this file.
+
 ```tsx
                     <CalloutBox type="caution" icon="IconWarning" title="PostHog SDK version">
                         <Markdown>
-                            CrewAI installs `chromadb`, which pins `posthog<6.0.0`. If you also use
-                            `posthog.ai.langchain` or `posthog.ai.otel` elsewhere in the same environment,
-                            pin `posthog>=6.0.0` explicitly — those modules do not exist in 5.x.
+                            {dedent`
+                                CrewAI installs \`chromadb\`, which pins \`posthog<6.0.0\`. The AI observability
+                                wrappers and the LangChain handler work on 5.x, so CrewAI tracing is unaffected.
+                                But \`posthog.ai.otel\` was added in 7.12.0, so the OpenTelemetry integration
+                                cannot be installed alongside CrewAI unless you override chromadb's pin.
+                            `}
                         </Markdown>
                     </CalloutBox>
 ```
+
+Accuracy note, verified by bisecting published wheels (sdists omit `posthog/ai/otel` from their manifest and will mislead you): `posthog.ai.langchain` ships in 5.4.0 and importing it fails only without `langchain-core` — an optional-dependency gate, not a version gate. `posthog.ai.otel` is absent through 7.11.0 and first appears in **7.12.0**, which conflicts with chromadb's `<6.0.0` ceiling.
 
 - [ ] **Step 6: Flip the test toggle and re-run**
 

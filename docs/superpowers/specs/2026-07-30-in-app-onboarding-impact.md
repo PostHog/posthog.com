@@ -53,7 +53,7 @@ Anyone who completed onboarding for these three has an empty AI Observability ta
 
 **Version dependency.** The `openai-agents` guidance depends on three unmerged PRs (posthog-python#819, posthog-js#4335, posthog-js#4336). Published `@posthog/ai` is 8.5.0 and has none of them. Those pages must state minimum versions, or land after release. Every other change is independent.
 
-**Dependency conflict.** `chromadb` pins `posthog>=2.4.0,<6.0.0`, and CrewAI pulls chromadb. Those environments get posthog 5.4.0, where `posthog.ai.langchain` and `posthog.ai.otel` do not exist. Affected pages need a version floor.
+**Dependency conflict.** `chromadb` pins `posthog>=2.4.0,<6.0.0`, and CrewAI pulls chromadb, so those environments resolve to posthog 5.4.0. Verified by bisecting published wheels: `posthog.ai.otel` first appears in **7.12.0**, so it cannot coexist with CrewAI unless chromadb's pin is overridden. The wrappers and `posthog.ai.langchain` do work on 5.x, so CrewAI tracing itself is unaffected — only the OpenTelemetry integration is blocked.
 
 **Existing users are unaffected.** Nothing here changes ingestion or event schemas. Users who already completed onboarding keep working; the change only affects what new users are told to install.
 

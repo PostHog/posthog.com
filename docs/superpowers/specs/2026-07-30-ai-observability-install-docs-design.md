@@ -25,9 +25,13 @@ Everything below was confirmed by running code, unless marked otherwise. Test sc
 |---|---|---|
 | crewai | CrewAI 1.15.9 defaults to its native `OpenAICompletion` client and bypasses LiteLLM entirely, so `litellm.success_callback = ["posthog"]` never fires. **Zero events.** | `LLM(model=..., is_litellm=True)` |
 | mirascope | Documented `from mirascope.core import ...` is v1; mirascope 2.5.0 exposes only `mirascope.llm`. And v2 routes through the OpenAI **Responses API**, which `OpenAIInstrumentor` does not wrap — it covers only `chat.completions.{Completions,AsyncCompletions}.create` plus the two embeddings methods. **Zero spans even with correct v2 code.** | `llm.register_provider("openai:completions")` plus v2 imports |
-| llamaindex | `opentelemetry-instrumentation-llamaindex` 0.62.1 with llama-index 0.14.23 installs and runs without error but emits **no spans at all**, including with the documented `VectorStoreIndex` + `query_engine` shape. | Swap to `opentelemetry-instrumentation-openai-v2` |
+| llamaindex | `opentelemetry-instrumentation-llamaindex` 0.62.1 with llama-index 0.14.23 emits **17 junk spans and zero generations** — `SentenceSplitter.task`, `MockEmbedding.workflow` and similar, carrying no model, tokens, or messages. All 17 pass PostHog's filter because they carry `traceloop.*` attributes, so noise is shipped with no product value. | Swap to `opentelemetry-instrumentation-openai-v2` |
 
 For llamaindex, the alternative `llama-index-observability-otel` was evaluated and rejected: it emits 19 spans that are bare Python class-method traces with **zero attributes** — no model, tokens, or messages — so they carry nothing useful and PostHog correctly filters them. It also fights for ownership of the TracerProvider.
+
+**Measurement caveat, learned the hard way:** the Traceloop instrumentor's output depends on import order. Importing `llama_index` *after* `LlamaIndexInstrumentor().instrument()` yields 0 spans; importing it first — as any real script does, with imports at the top — yields the 17. Any future check of this page must import the framework before instrumenting, or it will measure an artifact of the test harness rather than user reality.
+
+**Related SDK observation, out of scope:** PostHog's `is_ai_span` filter forwards any span carrying a `traceloop.*`-prefixed attribute regardless of content, which is why 17 contentless spans were shipped. Worth a follow-up issue.
 
 ### Working, verified by execution
 
@@ -45,7 +49,18 @@ Verified by reading ingestion source: Vercel AI SDK — `STRING_AI_METADATA_KEYS
 
 ### Dependency and version hazards
 
-- `chromadb` pins `posthog>=2.4.0,<6.0.0`. CrewAI pulls chromadb, so those environments get posthog 5.4.0, where `posthog.ai.langchain` and `posthog.ai.otel` do not exist. Pages need a version floor.
+- `chromadb` pins `posthog>=2.4.0,<6.0.0`. CrewAI pulls chromadb, so those environments resolve to posthog 5.4.0.
+
+  Verified by bisecting published wheels — note that sdists omit `posthog/ai/otel` from their manifest and will mislead you:
+
+  | posthog | `posthog.ai.openai` / `.anthropic` / `.gemini` / `.langchain` | `posthog.ai.otel` |
+  |---|---|---|
+  | 5.4.0, 6.0.0, 6.3.0, 7.0.0, 7.11.0 | present | **absent** |
+  | 7.12.0 and later | present | present |
+
+  So `posthog.ai.langchain` **does** work on 5.x — importing it fails only when the separate `langchain-core` package is missing, which is an optional-dependency gate, not a version gate. Only `posthog.ai.otel` is affected, and it needs **7.12.0 or later**.
+
+  Because 7.12.0 conflicts with chromadb's `<6.0.0` ceiling, `posthog.ai.otel` cannot be installed alongside CrewAI at all unless the pin is overridden. Wrapper and LangChain-handler tracing are unaffected.
 - All three breakages were version drift. Pages should state tested versions: crewai 1.15.9, mirascope 2.5.0, llama-index 0.14.23.
 
 ## Design decisions
