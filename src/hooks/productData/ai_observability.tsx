@@ -10,7 +10,6 @@ import {
     IconLlmAnalytics,
     IconMagic,
     IconMessage,
-    IconNewspaper,
     IconPieChart,
     IconRocket,
     IconSparkles,
@@ -84,14 +83,13 @@ export const aiObservability = {
             icon: <IconChat className="size-4" />,
         },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         {
             slug: 'feature-comparison',
             name: 'Feature comparison',
             group: 'divided',
             icon: <IconList className="size-4" />,
         },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         // No `installation` section: the shared install taxonomy has no LLM provider
         // category, so it would list generic web/backend SDKs instead of the
         // per-provider guides. The provider grid lives in the Integrations slide of
