@@ -5562,6 +5562,30 @@
         {
             "source": "/llm-analytics/pricing",
             "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/endpoints/customers",
+            "destination": "/endpoints"
+        },
+        {
+            "source": "/endpoints/comparisons",
+            "destination": "/endpoints#feature-comparison"
+        },
+        {
+            "source": "/endpoints/documentation",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/tutorials",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/endpoints/questions",
+            "destination": "/endpoints#community"
         }
     ]
 }
