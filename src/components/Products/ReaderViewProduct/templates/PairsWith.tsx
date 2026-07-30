@@ -6,6 +6,8 @@ import { SectionComponentProps } from '../types'
 interface PairItem {
     slug: string
     description: string
+    /** Optional className passed to AppIcon when parentIcon is used (e.g. "!size-6"). */
+    className?: string
 }
 
 const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
@@ -35,9 +37,9 @@ const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
                                     }`}
                                 >
                                     {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
-                                        <AppIcon name={productDetails.parentIcon} />
+                                        <AppIcon name={productDetails.parentIcon} className={pair.className} />
                                     ) : (
-                                        productDetails.Icon && <productDetails.Icon />
+                                        productDetails.Icon && <productDetails.Icon className={pair.className} />
                                     )}
                                 </span>
                                 <h3 className="!text-lg font-bold text-primary underline">{productDetails.name}</h3>

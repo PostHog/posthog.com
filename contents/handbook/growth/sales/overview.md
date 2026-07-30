@@ -34,6 +34,8 @@ We're not one big Sales team. We're several small teams, each owning a different
 
 Each team has its own Slack channel for day-to-day work: [`#team-new-business-sales`](https://posthog.slack.com/archives/C09677WV1GW), [`#team-product-led-sales`](https://posthog.slack.com/archives/C093XHYMGBE), [`#team-customer-success`](https://posthog.slack.com/archives/C08M011SBCM), and [`#team-onboarding`](https://posthog.slack.com/archives/C098D86DZDZ). Anything that spans all of us goes to [`#group-cs-sales-support`](https://posthog.slack.com/archives/C090RCG671C).
 
+> **Not on one of these teams but need to reach the humans who look after a customer?** Post in [`#group-cs-sales-support`](https://posthog.slack.com/archives/C090RCG671C). It's the cross-team channel for everyone who owns customers, so someone will pick it up or point you to the right person.
+
 ## Our vision
 
 ### Things we want to be great at

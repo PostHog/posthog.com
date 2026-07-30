@@ -253,7 +253,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/ai-observability/query-traces-mcp"
+                                    to="/docs/ai-observability/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     MCP docs
