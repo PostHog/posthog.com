@@ -21,17 +21,7 @@ const FilterChip = ({ icon, label }: { icon: React.ReactNode; label: string }): 
     </span>
 )
 
-const Tab = ({
-    label,
-    count,
-    active,
-    staff,
-}: {
-    label: string
-    count?: number
-    active?: boolean
-    staff?: boolean
-}): JSX.Element => (
+const Tab = ({ label, count, active }: { label: string; count?: number; active?: boolean }): JSX.Element => (
     <span
         className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap pb-2 ${
             active
@@ -41,11 +31,6 @@ const Tab = ({
     >
         {label}
         {typeof count === 'number' && <span className="text-xs tabular-nums text-secondary">{count}</span>}
-        {staff && (
-            <span className="rounded-full border border-primary px-1.5 text-[10px] font-semibold text-secondary">
-                Staff
-            </span>
-        )}
     </span>
 )
 
@@ -103,9 +88,6 @@ export default function InboxReplica(): JSX.Element {
                         <div className="flex items-end gap-4 overflow-x-auto text-sm">
                             <Tab label="Pull requests" count={INBOX_ITEMS.length} active />
                             <Tab label="Reports" count={254} />
-                            <Tab label="Not actionable" count={0} staff />
-                            <Tab label="Runs" />
-                            <Tab label="Archive" count={30} />
                         </div>
                         <div className="mb-1.5 hidden shrink-0 items-center overflow-hidden rounded border border-primary text-xs @md:flex">
                             <span className="px-2 py-1 text-secondary">For you</span>

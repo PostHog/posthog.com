@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { IconPlus } from '@posthog/icons'
+import { IconExternal, IconPlus } from '@posthog/icons'
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { Popover } from 'components/RadixUI/Popover'
 import type { Reviewer } from './inboxData'
 
@@ -76,19 +77,20 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                 const profile = profileFor(reviewer.name)
                 const avatarUrl = profile?.avatar?.formats?.thumbnail?.url
 
+                const avatar = avatarUrl ? (
+                    <img src={avatarUrl} alt="" className="size-8 shrink-0 rounded-full bg-accent object-cover" />
+                ) : (
+                    <Monogram name={reviewer.name} />
+                )
+
                 return (
                     <li key={reviewer.name}>
                         <div className="flex items-center gap-2">
-                            {avatarUrl ? (
-                                <img
-                                    src={avatarUrl}
-                                    alt=""
-                                    title={profile?.companyRole ?? undefined}
-                                    className="size-8 shrink-0 rounded-full bg-accent object-cover"
-                                />
-                            ) : (
-                                <Monogram name={reviewer.name} />
-                            )}
+                            <Tooltip trigger={avatar}>
+                                {profile?.companyRole
+                                    ? `${reviewer.name} – ${profile.companyRole}`
+                                    : `${reviewer.name} isn't in the team directory, so this falls back to an initial.`}
+                            </Tooltip>
                             <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
                                 {/* An unmatched name still renders, just without a link. */}
                                 {profile?.squeakId ? (
@@ -102,14 +104,26 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                                 ) : (
                                     <strong className="text-sm text-primary">{reviewer.name}</strong>
                                 )}
-                                <span className="flex flex-wrap items-center gap-x-1.5 font-mono text-xs text-secondary">
-                                    {reviewer.commits.map((sha) => (
-                                        <span key={sha}>{sha}</span>
-                                    ))}
-                                </span>
+                                <Tooltip
+                                    trigger={
+                                        <span className="flex flex-wrap items-center gap-x-1 font-mono text-xs text-secondary">
+                                            {reviewer.commits.map((sha, index) => (
+                                                <span key={sha} className="inline-flex items-center gap-0.5">
+                                                    {sha}
+                                                    <IconExternal className="size-3" />
+                                                    {index < reviewer.commits.length - 1 && ','}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    }
+                                >
+                                    The commits the blame walk landed on. Illustrative here – on a real report these
+                                    link to the diffs that put this person on the list.
+                                </Tooltip>
                             </div>
                         </div>
-                        <p className="m-0 mt-1.5 text-xs leading-snug text-secondary">{reviewer.reason}</p>
+                        {/* Indented to sit under the name, not the avatar. */}
+                        <p className="m-0 mt-1 pl-10 text-xs leading-snug text-secondary">{reviewer.reason}</p>
                     </li>
                 )
             })}
@@ -125,6 +139,7 @@ export const AddReviewerMenu = (): JSX.Element => (
         trigger={
             <button
                 type="button"
+                title="Add someone the blame walk missed"
                 className="inline-flex items-center gap-1 rounded border border-primary bg-primary px-1.5 py-0.5 text-xs font-semibold text-secondary transition-colors hover:text-primary"
             >
                 <IconPlus className="size-3" />
@@ -133,7 +148,7 @@ export const AddReviewerMenu = (): JSX.Element => (
         }
     >
         <div className="w-48">
-            <p className="m-0 px-2 py-1 text-xs text-secondary">Suggested from blame</p>
+            <p className="m-0 px-2 py-1 text-xs text-secondary">Also touched these lines</p>
             {SUGGESTED_ADDITIONS.map((name) => (
                 <button
                     key={name}

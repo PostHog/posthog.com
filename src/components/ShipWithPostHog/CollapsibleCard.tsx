@@ -44,6 +44,8 @@ export default function CollapsibleCard({
                     />
                     {icon}
                     <span className="truncate text-sm font-semibold text-primary group-hover:underline">{title}</span>
+                    {/* Fills the gap to the right-hand controls, as the app's panel headers do. */}
+                    <span aria-hidden className="ml-1 h-px min-w-4 flex-1 bg-border" />
                 </button>
                 {meta && <div className="flex shrink-0 items-center gap-2 text-xs text-secondary">{meta}</div>}
             </div>

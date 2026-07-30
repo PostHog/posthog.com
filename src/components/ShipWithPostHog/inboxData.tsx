@@ -65,6 +65,8 @@ export interface EvidenceTag {
     tone: TagTone
     /** Prefix a small filled dot, as the app does for in-flight states. */
     dot?: boolean
+    /** Explains what the tag means on hover. */
+    tooltip?: string
 }
 
 export interface EvidenceItem {
@@ -72,13 +74,18 @@ export interface EvidenceItem {
     source: EvidenceSource
     /** Sub-label after the source name, e.g. "Problem segment", "Ticket", "Issue". */
     kind: string
+    /** Shares a line with the source, and truncates – keep it short. */
     title: string
     body: React.ReactNode
-    tag: EvidenceTag
+    /** Usually one; a scanner finding pairs its verdict with a confidence score. */
+    tags: EvidenceTag[]
     /** Renders a "View replay" button. Inert – it's chrome, there's no recording. */
     hasReplay?: boolean
-    /** Footer line: a session or issue id, plus replay timings when there are any. */
-    footer?: { id: string; timing?: string }
+    /**
+     * Footer line: a session or issue id, replay timings when there are any, and an
+     * optional link label ("View issue", "Open ticket").
+     */
+    footer?: { id: string; timing?: string; link?: string }
 }
 
 /**
@@ -180,8 +187,8 @@ export const INBOX_ITEMS: InboxItem[] = [
         summary:
             'Saving an insight while its breakdown is still refreshing throws away the edits and leaves the old query on screen.',
         priority: 'P1',
-        // Matches the six evidence findings below, so the row and the detail agree.
-        signalCount: 6,
+        // Matches the four evidence findings below, so the row and the detail agree.
+        signalCount: 4,
         timeAgo: '2h ago',
         origin: { kind: 'signal', product: 'error_tracking' },
         // Illustrative: there's no public PR to link, so the header offers the repo instead.
@@ -196,9 +203,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                 {
                     paragraphs: [
                         <>
-                            Users lose their work when they save an insight while its breakdown is still loading.{' '}
-                            <strong>412 people hit this in the last 30 days</strong>, and the save looks like it
-                            succeeded – the edits are gone and the old query is still on screen.
+                            Saving an insight while its breakdown is still loading throws the edits away.{' '}
+                            <strong>412 people hit this in 30 days</strong>, and the save looks like it worked.
                         </>,
                     ],
                 },
@@ -206,33 +212,13 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Problem',
                     paragraphs: [
                         <>
-                            It's a race, and everything traces back to one function. <Code>saveInsight()</Code> in{' '}
-                            <Code>frontend/src/scenes/insights/insightLogic.ts</Code> reads <Code>values.filters</Code>{' '}
-                            at line <Code>612</Code>, <strong>after</strong> it awaits the in-flight query. If a
-                            breakdown refresh resolves during that await, <Code>loadResultsSuccess</Code> has already
-                            swapped <Code>filters</Code> for the server's copy, so the PATCH is built from an object
-                            that never contained the user's edits.
+                            <Code>saveInsight()</Code> reads <Code>values.filters</Code> at{' '}
+                            <Code>insightLogic.ts:612</Code>, <strong>after</strong> awaiting the query. If a refresh
+                            lands during that await, the PATCH is built from the server's copy instead of the user's.
                         </>,
                         <>
-                            The window is small but it's hit constantly, because changing a breakdown is what triggers
-                            both the refresh and the urge to save. The resulting <Code>TypeError</Code> is caught by the
-                            insight scene's error boundary, so <strong>nothing surfaces to the user</strong> – no toast,
-                            no inline error. The save button simply goes quiet, which is why this sat for a month.
-                        </>,
-                    ],
-                },
-                {
-                    heading: 'Impact',
-                    paragraphs: [
-                        <>
-                            1,204 exceptions from 412 users over 30 days, all on <Code>PATCH /api/insight</Code>. The
-                            replays are consistent: someone edits a breakdown, hits save, sees nothing happen, and tries
-                            again. Three sessions show the same person re-applying an identical breakdown three times
-                            before leaving the page.
-                        </>,
-                        <>
-                            One support ticket has been open since the 12th describing it as "my insight keeps reverting
-                            when I save it", which nobody had connected to the exception until now.
+                            The <Code>TypeError</Code> is swallowed by the error boundary, so nothing surfaces. The save
+                            button just goes quiet, which is why this sat for a month.
                         </>,
                     ],
                 },
@@ -240,14 +226,10 @@ export const INBOX_ITEMS: InboxItem[] = [
                     heading: 'Solution',
                     paragraphs: [
                         <>
-                            Capture the filters <strong>before</strong> the await instead of reading them after it, so
-                            the PATCH is built from what the user actually had on screen. The added regression test
-                            resolves a breakdown refresh mid-save and asserts the edits survive.
+                            Snapshot the filters <strong>before</strong> the await, and add a regression test that
+                            resolves a refresh mid-save.
                         </>,
-                        <>
-                            One thing to hand to a human rather than fix here: the error boundary swallowing this
-                            silently is its own bug. Worth a follow-up, but it isn't this change.
-                        </>,
+                        <>One for a human, not this change: the error boundary hiding this is its own bug.</>,
                     ],
                 },
             ],
@@ -267,8 +249,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                     commits: ['a3f91c2', '7e0b4d8'],
                     reason: (
                         <>
-                            Authored the <Code>loadResultsSuccess</Code> reducer that replaces <Code>filters</Code> with
-                            the server response – the write that makes the race possible. Still unchanged on master.
+                            Authored the <Code>loadResultsSuccess</Code> reducer that overwrites <Code>filters</Code> –
+                            the write that makes the race possible.
                         </>
                     ),
                 },
@@ -277,9 +259,8 @@ export const INBOX_ITEMS: InboxItem[] = [
                     commits: ['c81ae55'],
                     reason: (
                         <>
-                            Moved <Code>saveInsight()</Code> to an async flow, which introduced the await that{' '}
-                            <Code>values.filters</Code> is now read across. The line ordering at <Code>612</Code> dates
-                            from that change.
+                            Moved <Code>saveInsight()</Code> to an async flow, adding the await that line{' '}
+                            <Code>612</Code> now reads across.
                         </>
                     ),
                 },
@@ -289,69 +270,70 @@ export const INBOX_ITEMS: InboxItem[] = [
                     id: 'exception',
                     source: 'error_tracking',
                     kind: 'Issue',
-                    title: "TypeError: Cannot read properties of undefined (reading 'breakdown')",
+                    title: "TypeError: undefined 'breakdown'",
                     body: (
                         <>
-                            Thrown from <Code>saveInsight()</Code> at <Code>insightLogic.ts:612</Code>. 1,204
-                            occurrences across 412 users in 30 days, every one of them inside a save.
+                            Thrown from <Code>saveInsight()</Code>. 1,204 times, 412 users, always inside a save.
                         </>
                     ),
-                    tag: { label: 'Blocking exception', tone: 'red' },
-                    footer: { id: 'a1f2c9de' },
+                    tags: [
+                        {
+                            label: 'Blocking exception',
+                            tone: 'red',
+                            tooltip: 'Stops the thing the person was trying to do, rather than degrading it.',
+                        },
+                    ],
+                    footer: { id: 'a1f2c9de', link: 'View issue' },
                 },
                 {
                     id: 'replay-confusion',
                     source: 'session_replay',
                     kind: 'Problem segment',
                     title: 'Re-applied the same breakdown three times',
-                    body: 'Edited the breakdown, saved, and watched the chart stay on the old query. Re-applied the identical breakdown twice more, then left without the insight ever saving.',
-                    tag: { label: 'Confusion', tone: 'orange' },
+                    body: 'Saved, watched the chart stay on the old query, and tried the identical breakdown twice more before leaving.',
+                    tags: [
+                        {
+                            label: 'Confusion',
+                            tone: 'orange',
+                            tooltip:
+                                'Repeating an action that already succeeded is how a silent failure looks from outside.',
+                        },
+                    ],
                     hasReplay: true,
-                    footer: { id: '019f2198–1…', timing: '02:35 — 27:03 · 4m 32s active / 32m 4s total' },
+                    footer: { id: '019f2198–1…', timing: '02:35 — 27:03 · 4m 32s active' },
                 },
                 {
-                    id: 'replay-rage',
-                    source: 'session_replay',
-                    kind: 'Rage click',
-                    title: 'Nine clicks on Save in four seconds',
-                    body: 'The save button gives no feedback when the PATCH fails, so the click reads as unregistered. Rage clicks on this button are up 6× on the 30-day mean.',
-                    tag: { label: 'Friction', tone: 'orange' },
+                    id: 'vision',
+                    source: 'replay_vision',
+                    kind: 'Scanner finding',
+                    title: 'Save button gives no feedback',
+                    body: 'Nine clicks on Save in four seconds, with no toast, spinner, or inline error in response to any of them.',
+                    tags: [
+                        { label: 'Bug', tone: 'red', tooltip: 'The scanner classified what it watched as a defect.' },
+                        {
+                            label: '90% confidence',
+                            tone: 'blue',
+                            tooltip: 'How sure the vision model is. Low-confidence findings stay out of reports.',
+                        },
+                    ],
                     hasReplay: true,
-                    footer: { id: 'pPy33qMuuL…', timing: '01:31 — 02:17 · 2m 24s active / 2m 37s total' },
+                    footer: { id: 'tuZvEiDGjp…', timing: '05:44 — 05:53 · 27m 48s active' },
                 },
                 {
                     id: 'ticket',
                     source: 'zendesk',
                     kind: 'Ticket',
                     title: 'My insight keeps reverting when I save it',
-                    body: 'Open since the 12th. "Every time I change the breakdown and save, it goes back to what it was before. No error, it just doesn\'t take." Nobody had linked it to the exception.',
-                    tag: { label: 'Pending', tone: 'yellow', dot: true },
-                    footer: { id: '#61622' },
-                },
-                {
-                    id: 'api-error',
-                    source: 'error_tracking',
-                    kind: 'Issue',
-                    title: '400 Bad Request on PATCH /api/insight',
-                    body: (
-                        <>
-                            The correlated server-side rejection: the request body arrives without{' '}
-                            <Code>filters.breakdown</Code>, so validation fails. Rises and falls with the{' '}
-                            <Code>TypeError</Code> above.
-                        </>
-                    ),
-                    tag: { label: 'Blocking exception', tone: 'red' },
-                    footer: { id: 'c7d0e41b' },
-                },
-                {
-                    id: 'replay-stale',
-                    source: 'session_replay',
-                    kind: 'Problem segment',
-                    title: 'Saved insight reloaded with the previous breakdown',
-                    body: 'Reloaded the page to check whether the save had worked. It had not – the insight came back with the breakdown from before the edit.',
-                    tag: { label: 'Confusion', tone: 'orange' },
-                    hasReplay: true,
-                    footer: { id: 't4HQhDQzqM…', timing: '03:57 — 08:51 · 4m 57s active / 14m 8s total' },
+                    body: '"I change the breakdown and save, and it goes back. No error, it just doesn\'t take." Nobody had linked it to the exception.',
+                    tags: [
+                        {
+                            label: 'Pending',
+                            tone: 'yellow',
+                            dot: true,
+                            tooltip: 'Still open with support. Merging this is what lets them close it.',
+                        },
+                    ],
+                    footer: { id: '#61622', link: 'Open ticket' },
                 },
             ],
             files: [
