@@ -28,7 +28,7 @@ For both these reasons I wanted to explain what makes good candidates stand out,
 
 > If you're interested in a role, apply directly. Every posting says [where we hire](/handbook/people/hiring-process#countries-where-we-employ-people) and [what the process looks like](/handbook/people/hiring-process#hiring-process). Hiring managers won't take a 10 minute chat before you apply.
 
-## What we look for in marketing roles
+## What do we look for in marketing roles?
 
 This is my favorite question to get asked. It changes by role, but a few things hold across every marketing hire...
 
