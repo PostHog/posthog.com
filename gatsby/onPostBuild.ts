@@ -17,6 +17,7 @@ import {
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
+    generateSelfDrivingTemplatesCatalog,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -590,6 +591,28 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                         filters {
                             type
                         }
+                        subtitle
+                        question
+                        premise
+                        discriminator {
+                            speaksUp
+                            staysQuiet
+                            why
+                        }
+                        watches {
+                            name
+                            detail
+                        }
+                        requires {
+                            label
+                            level
+                        }
+                        scout {
+                            name
+                            description
+                            body
+                            schedule
+                        }
                     }
                 }
             }
@@ -610,11 +633,14 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Self-driving scout templates are written as agent context as much as marketing pages, so
     // they belong in the index an agent reads. The dashboard/survey templates stay out — they'd
     // be noise. See components/SelfDrivingInbox/README.md.
-    const selfDrivingTemplateSlugs = new Set(
-        docsQuery.data.allMdx.nodes
-            .filter((node) => node.frontmatter?.filters?.type?.some((t) => t?.toLowerCase() === 'self-driving'))
-            .map((node) => node.fields.slug)
+    const selfDrivingTemplateNodes = docsQuery.data.allMdx.nodes.filter((node) =>
+        node.frontmatter?.filters?.type?.some((t) => t?.toLowerCase() === 'self-driving')
     )
+    const selfDrivingTemplateSlugs = new Set(selfDrivingTemplateNodes.map((node) => node.fields.slug))
+
+    // The same templates, as a single machine-readable catalog the wizard's `template` command
+    // reads to create a scout. Shares the filter above so the two can't drift apart.
+    generateSelfDrivingTemplatesCatalog(selfDrivingTemplateNodes)
 
     // Docs pages plus self-driving templates in llms.txt (not handbook, not blog)
     const docsPages = filteredPages.filter(

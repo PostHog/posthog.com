@@ -537,6 +537,162 @@ For features, screenshots, and details, see ${pageLinkFor(item)}.
     }
 }
 
+interface SelfDrivingTemplateNode {
+    fields: { slug: string }
+    frontmatter: {
+        title?: string
+        subtitle?: string
+        question?: string
+        premise?: string
+        discriminator?: { speaksUp?: string; staysQuiet?: string; why?: string }
+        watches?: Array<{ name?: string; detail?: string }>
+        requires?: Array<{ label?: string; level?: string }>
+        scout?: { name?: string; description?: string; body?: string; schedule?: string }
+    }
+}
+
+// The fields the catalog carries, in a fixed order so the output is stable across builds.
+const CATALOG_FIELDS = [
+    'title',
+    'subtitle',
+    'question',
+    'premise',
+    'discriminator',
+    'watches',
+    'requires',
+    'scout',
+] as const
+
+/**
+ * Minimal YAML scalar emitter for the catalog's known field shapes.
+ *
+ * Single-line strings become double-quoted scalars (YAML accepts JSON's escapes, so
+ * JSON.stringify is a safe encoder). Multi-line strings become literal block scalars, which
+ * preserve `scout.body` — a markdown document — byte for byte. Rolling this by hand rather
+ * than adding a YAML dependency is deliberate: the shapes here are fixed and shallow.
+ */
+const yamlScalar = (value: string, indent: string): string => {
+    // Trailing whitespace on a line inside a block scalar is not round-trippable, and a
+    // trailing newline changes the scalar's chomping. Normalize both before choosing a form.
+    const normalized = value.replace(/[ \t]+$/gm, '').replace(/\n+$/, '')
+    if (!normalized.includes('\n')) return JSON.stringify(normalized)
+
+    const body = normalized
+        .split('\n')
+        .map((line) => (line.length > 0 ? `${indent}  ${line}` : ''))
+        .join('\n')
+    return `|-\n${body}`
+}
+
+const yamlField = (key: string, value: unknown, indent = ''): string | null => {
+    if (value == null) return null
+
+    if (typeof value === 'string') {
+        if (value.trim().length === 0) return null
+        return `${indent}${key}: ${yamlScalar(value, indent)}`
+    }
+
+    if (Array.isArray(value)) {
+        const items = value
+            .map((item) => {
+                const pairs = Object.entries(item as Record<string, unknown>)
+                    .map(([k, v]) => yamlField(k, v, `${indent}    `))
+                    .filter((line): line is string => line !== null)
+                if (pairs.length === 0) return null
+                // First pair joins the `- ` marker; the rest align under it.
+                return `${indent}  - ${pairs[0].trimStart()}\n${pairs.slice(1).join('\n')}`.replace(/\n$/, '')
+            })
+            .filter((item): item is string => item !== null)
+        return items.length > 0 ? `${indent}${key}:\n${items.join('\n')}` : null
+    }
+
+    const pairs = Object.entries(value as Record<string, unknown>)
+        .map(([k, v]) => yamlField(k, v, `${indent}  `))
+        .filter((line): line is string => line !== null)
+    return pairs.length > 0 ? `${indent}${key}:\n${pairs.join('\n')}` : null
+}
+
+const slugFor = (node: SelfDrivingTemplateNode): string =>
+    node.fields.slug.split('/').filter(Boolean).pop() || node.fields.slug
+
+/**
+ * Generate /templates/self-driving-catalog.md — the machine-readable catalog of every
+ * self-driving scout template, one section per template with its frontmatter inline.
+ *
+ * This exists for agents, not people: the PostHog wizard's `template` command reads it to
+ * offer a template, check whether the project emits the events the scout needs, and create
+ * the scout verbatim. Humans get the inbox at /templates/self-driving.
+ *
+ * One aggregate file rather than per-slug files on purpose — the wizard's context-mill
+ * pipeline enumerates explicit URLs with no glob support, so a single stable URL means new
+ * templates flow through without anyone editing a config. Output is deterministic (no
+ * timestamps) because it is fetched into a content-addressed build cache downstream.
+ */
+export const generateSelfDrivingTemplatesCatalog = (nodes: SelfDrivingTemplateNode[]) => {
+    if (nodes.length === 0) {
+        console.log('No self-driving templates found, skipping self-driving-catalog.md')
+        return
+    }
+
+    const publicPath = path.resolve(__dirname, '../public')
+    const outputPath = path.join(publicPath, 'templates', 'self-driving-catalog.md')
+    const templates = [...nodes].sort((a, b) => slugFor(a).localeCompare(slugFor(b)))
+
+    const summaryRows = templates.map((node) => {
+        const requiredCount = (node.frontmatter.requires || []).filter(
+            (r) => (r?.level || 'required').toLowerCase() === 'required'
+        ).length
+        const cells = [
+            slugFor(node),
+            node.frontmatter.title || '',
+            node.frontmatter.scout?.schedule || 'Daily',
+            String(requiredCount),
+        ]
+        return `| ${cells.map((cell) => cell.replace(/\|/g, '\\|')).join(' | ')} |`
+    })
+
+    const sections = templates.map((node) => {
+        const yaml = CATALOG_FIELDS.map((field) => yamlField(field, node.frontmatter[field]))
+            .filter((line): line is string => line !== null)
+            .join('\n')
+
+        return `## ${slugFor(node)}
+
+Page: https://posthog.com/${node.fields.slug.replace(/^\//, '')}
+
+\`\`\`yaml
+${yaml}
+\`\`\``
+    })
+
+    const content = `# Self-driving scout templates
+
+Machine-readable catalog of every self-driving scout template on PostHog. One section per
+template, with that template's frontmatter inline as YAML.
+
+Each template describes a named question a self-driving product watches for. \`scout\` is the
+scout itself — pass \`scout.name\`, \`scout.description\`, and \`scout.body\` to PostHog to create
+it. \`requires\` lists what the scout needs to produce useful findings; a scout whose required
+prerequisites are unmet will run on schedule and find nothing, so check them before creating it.
+
+Fields carried: ${CATALOG_FIELDS.join(', ')}.
+Presentational fields (the example report, images, filters) are deliberately omitted — do not
+look for them here. The human-readable version of each template, including its example report,
+is linked above each section.
+
+| slug | title | schedule | required prerequisites |
+| --- | --- | --- | --- |
+${summaryRows.join('\n')}
+
+${sections.join('\n\n')}
+`
+
+    const dirPath = path.dirname(outputPath)
+    if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
+    fs.writeFileSync(outputPath, content, 'utf8')
+    console.log(`Generated: templates/self-driving-catalog.md (${templates.length} templates)`)
+}
+
 export const generateLlmsTxt = (pages) => {
     console.log('Generating llms.txt file...')
 
