@@ -1,4 +1,22 @@
-import { IconActivity } from '@posthog/icons'
+import React from 'react'
+import {
+    IconActivity,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
+    IconCursorClick,
+    IconChat,
+    // IconInfo,
+    // IconMagic,
+    // IconCode,
+    // IconMessage,
+    // IconConfetti,
+} from '@posthog/icons'
+import { features } from './logs/features'
+import { applications, topFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
 
 export const logs = {
@@ -6,10 +24,139 @@ export const logs = {
     Icon: IconActivity,
     productVariantName: 'Logs ingestion (14-day retention)',
     type: 'logs',
+    teamSlug: 'apm',
+    // forumTopicId: /* TODO: community topic ID for /questions/topic/logs */,
     color: 'red',
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
     includeAddonRates: true,
+    // From contents/docs/logs/pricing.mdx
+    pricingDescription:
+        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; extend newly ingested logs to 30 days with an add-on.',
+    seo: {
+        title: 'Logs – Centralized log management with PostHog',
+        description:
+            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
+    },
+    /**
+     * Sections rendered on the Product surface (`/logs`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        // CONTENT GAP: needs overview.eli5 (see session_replay.overview.eli5)
+        // {
+        //     slug: 'eli5',
+        //     name: 'What does it do?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconInfo className="size-4" />,
+        // },
+        // CONTENT GAP: needs useCases { intro, rows: [role, useCase][] }
+        // {
+        //     slug: 'use-cases',
+        //     name: 'Who is it for?',
+        //     hideFromNav: true,
+        //     group: 'divided',
+        //     icon: <IconMagic className="size-4" />,
+        // },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        // CONTENT GAP: needs installation.description (+ confirm categories;
+        // taxonomy slug mismatches for javascript→web and ruby-on-rails→rails)
+        // {
+        //     slug: 'installation',
+        //     name: 'Install',
+        //     group: 'divided',
+        //     icon: <IconCode className="size-4" />,
+        // },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        // CONTENT GAP: needs forumTopicId for CommunityQuestions
+        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        // CONTENT GAP: pairsWith was commented out on the old page – write descriptions first
+        // { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/logs/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
+    overview: {
+        title: 'Logs that already know your users',
+        description:
+            'Works with your existing OTel setup. Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
+        // eli5: /* TODO: plain-language explanation – see session_replay.overview.eli5 */,
+        textColor: 'text-white',
+        layout: 'overlay',
+    },
+    videos: {
+        overview: {
+            wistia: 'm67tqy5vs8',
+        },
+    },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
+        alt: 'A hedgehog perusing some logs',
+        classes: 'hidden @2xl:block max-w-sm',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
+            alt: 'A hedgehog perusing some logs',
+        },
+        // mobileHog: /* TODO: hog used by Eli5 float – see session_replay.hogs.mobileHog */,
+    },
+    screenshots: {
+        overview: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_overview_5408b3bed3.png',
+            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
+            alt: 'Logs overview',
+            classes: 'max-w-5xl mt-auto',
+            imgClasses: '',
+            classesMobile: '',
+            imgClassesMobile: '',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_light_ed58d98928.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_dark_7f8310925f.png',
+            alt: 'Logs screenshot',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
+    },
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
         marks: [0, 10, 50, 100, 500, 1000, 5000],
@@ -33,155 +180,37 @@ export const logs = {
             freeAllocation: 0,
         },
     ],
-    seo: {
-        title: 'Logs – Centralized log management with PostHog',
-        description:
-            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
-    },
-    overview: {
-        title: 'Logs that already know your users',
-        description:
-            'Works with your existing OTel setup. Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
-        textColor: 'text-white',
-        layout: 'overlay',
-    },
-    videos: {
-        overview: {
-            wistia: 'm67tqy5vs8',
-        },
-    },
-    hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
-        alt: 'A hedgehog perusing some logs',
-        classes: 'hidden @2xl:block max-w-sm',
-    },
-    screenshots: {
-        overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_overview_5408b3bed3.png',
-            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
-            alt: 'Logs overview',
-            classes: 'max-w-5xl mt-auto',
-            imgClasses: '',
-            classesMobile: '',
-            imgClassesMobile: '',
-        },
-        home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_light_ed58d98928.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_dark_7f8310925f.png',
-            alt: 'Logs screenshot',
-            classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-md shadow-2xl',
-        },
-    },
     customers: {
         key: {
             headline: '',
             description: '',
         },
     },
-    features: [
-        {
-            title: 'Queryable logs',
-            headline: 'Logs you can actually query',
-            template: 'splitImage',
-            description:
-                'Filter, aggregate, and explore logs by attributes instead of scrolling text. No need to learn another query language',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_1_light_40dd0d8b26.png',
-                    alt: 'Queryable logs',
-                    className: 'justify-center items-center mt-12',
-                },
-            ],
-            features: [
-                {
-                    title: 'Fast, reactive filtering',
-                    description: 'Slice by surface, severity, or attributes and see patterns update instantly',
-                },
-                {
-                    title: 'Visual feedback as you search',
-                    description: 'Sparklines respond in real time so spikes and anomalies stand out immediately',
-                },
-                {
-                    title: 'Attribute-driven navigation',
-                    description:
-                        'Pivot the entire log view around IDs and attributes instead of scrolling line by line',
-                },
-            ],
-        },
-        {
-            title: 'Built on OpenTelemetry',
-            template: 'splitImage',
-            headline: 'Built on OpenTelemetry',
-            description: 'Built on the standard your team has already invested in',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_2_light_160af6be32.png',
-                    alt: 'Built on OpenTelemetry',
-                    className: 'justify-center items-center mt-12',
-                },
-            ],
-            features: [
-                {
-                    title: 'OTLP-compatible ingestion',
-                    description: 'Send logs using standard OpenTelemetry SDKs. No proprietary agents required.',
-                },
-                {
-                    title: 'No lock-in',
-                    description: 'No migration, no ripping out your existing setup. And no extra vendor to pay for.',
-                },
-                {
-                    title: 'Logs where your context already is',
-                    description:
-                        'Logs behave like your typical log tool. Having them right inside PostHog just adds the missing context and removes the separate bill.',
-                },
-            ],
-        },
-
-        {
-            title: 'Full stack context',
-            template: 'splitImage',
-            headline: 'Front end and back end context together',
-            description: 'Follow an issue from the browser to the backend so agents can find the bug and ship the fix',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_3_light_4a3138862f.png',
-                    alt: 'Full stack context',
-                    className: 'justify-center items-center mt-12',
-                },
-            ],
-            features: [
-                {
-                    title: 'Browser logs captured automatically',
-                    description:
-                        'Frontend logs from PostHog JS are ingested alongside backend logs – no extra setup required',
-                },
-                {
-                    title: 'Linked to real users and sessions',
-                    description:
-                        'Frontend log entries are automatically associated with user IDs and session replays. Click on the user ID when debugging and immediately watch the session replay.',
-                },
-                {
-                    title: 'One investigation, not four tools',
-                    description: 'Session replay, errors, analytics, and logs stay connected as you debug',
-                },
-            ],
-        },
-    ],
-    ai: {
-        imageAlt: 'PostHog AI and logs',
-        description: 'find the bug in your logs and ship the fix',
-        skills: [
-            'Finds the exact log lines you need with natural language – no query syntax required',
-            'Summarizes patterns, surfaces anomalies, and explains likely causes from a sea of log entries',
-            'Connects log entries to related session replays, errors, and analytics for full debugging context',
-        ],
-        prompts: [
-            'Show me all error-level logs from the payments service in the last hour',
-            "Summarize the most common errors users hit yesterday and what's causing them",
-            'Find logs related to the spike in 500 errors after the latest deploy',
-        ],
+    // useCases: {
+    //     intro: 'Logs is used across teams depending on your role.',
+    //     rows: [
+    //         ['Product Engineers', '…'],
+    //         ['Support', '…'],
+    //         // see session_replay.useCases for shape
+    //     ],
+    // },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Debug logs from your editor',
+        description:
+            'Let your coding agent query logs, mine patterns, and manage alerts from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
     },
+    // installation: {
+    //     title: 'Install',
+    //     headline: 'Install',
+    //     description: /* TODO: one-liner – see session_replay.installation.description */,
+    //     productSlug: 'logs',
+    //     // Docs exist for: nodejs, python, go, java, nextjs, javascript, react-native,
+    //     // ios, android, flutter, ruby-on-rails, datadog, other.
+    //     // Taxonomy mismatches: javascript ≠ web, ruby-on-rails ≠ rails.
+    //     categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    // },
     postHogOnPostHog: {
         title: 'How PostHog uses Logs',
         benefits: [
@@ -279,6 +308,53 @@ export const logs = {
     //     },
     // ],
     // worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
+    ai: {
+        // image: /* TODO: dedicated AI/hog art – AskAnything falls back if omitted */,
+        imageAlt: 'PostHog AI and logs',
+        description: 'find the bug in your logs and ship the fix',
+        // intro: /* TODO: one sentence before example prompts – see session_replay.ai.intro */,
+        mcpFeatures: ['logs'],
+        skills: [
+            'Finds the exact log lines you need with natural language – no query syntax required',
+            'Summarizes patterns, surfaces anomalies, and explains likely causes from a sea of log entries',
+            'Connects log entries to related session replays, errors, and analytics for full debugging context',
+        ],
+        // Groups reshape the old `prompts` plus example prompts from
+        // contents/docs/logs/surfaces/mcp.mdx. Tool names verified against mcp-tools.json.
+        groups: [
+            {
+                title: 'Query',
+                tool: 'query-logs',
+                prompts: [
+                    'Show me all error-level logs from the payments service in the last hour',
+                    'Show me all error logs from the last hour',
+                    'Find logs related to the spike in 500 errors after the latest deploy',
+                    'Find logs related to trace ID abc123',
+                    'Show me warning and error logs from the last 24 hours, excluding debug noise',
+                ],
+            },
+            {
+                title: 'Patterns',
+                tool: 'logs-patterns',
+                prompts: ["Summarize the most common errors users hit yesterday and what's causing them"],
+            },
+            {
+                title: 'Compare windows',
+                tool: 'logs-patterns-diff',
+                prompts: ["Compare log patterns from today against yesterday and show me what's new"],
+            },
+            {
+                title: 'Explore schema',
+                tool: 'logs-attributes-list',
+                prompts: ['What log attributes are available? Show me the values for service.name'],
+            },
+            {
+                title: 'Services',
+                tool: 'logs-services-create',
+                prompts: ['What services are logging errors? Search for error logs from the payments service'],
+            },
+        ],
+    },
     // presenterNotes: {
     //     overview:
     //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
