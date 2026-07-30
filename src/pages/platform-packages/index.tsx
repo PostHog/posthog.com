@@ -4,13 +4,7 @@ import SEO from 'components/seo'
 import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import OSTable from 'components/OSTable'
 import { IconCheck } from '@posthog/icons'
-import { TreeMenu } from 'components/TreeMenu'
-import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Link } from 'gatsby'
-
-const LeftSidebarContent = () => {
-    return <TreeMenu items={productOSNav.children} />
-}
 
 export default function PlatformPackages() {
     // Get platform data from usePlatform hook
@@ -82,7 +76,7 @@ export default function PlatformPackages() {
                 description="Our platform packages are designed to help you manage your teams securely and efficiently on PostHog as you grow."
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />}>
+            <ReaderView hideLeftSidebar>
                 <div className="space-y-8">
                     <div>
                         <h1>Platform packages</h1>

@@ -17,7 +17,7 @@ There are two ways a scanner produces observations: automatically in the backgro
 Once a scanner is **enabled**, PostHog runs a background sweep every few minutes. The sweep:
 
 1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed.
-2. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-quality-pre-filter) mode to drop low-quality sessions (Focused and Balanced modes filter by surfacing score; Comprehensive keeps all).
+2. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-filtering-by-quality) mode to drop low-activity sessions ("Highest activity only" and "Skip lowest activity" filter by relevance score; "All recordings" keeps everything).
 3. Applies the sampling rate to what's left (so a 10% rate means roughly one in ten remaining sessions get queued).
 4. Queues an observation per session for the model to process.
 5. Records the result – success, failure, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.
@@ -43,6 +43,13 @@ Changing a scanner's filters affects which **new** sessions match going forward.
 Disabling stops the background sweep. Existing in-flight observations finish; no new ones get queued. On-demand triggers continue to work.
 
 ## On-demand on recordings you pick
+
+### From the scanner's On-demand tab
+
+Every scanner has an **On-demand** tab with two ways to trigger a scan:
+
+- **Scan a session by ID** – paste a recording's session ID and run the scanner against it right now.
+- **Pick from your recordings** – filter your session recordings inline and scan one at a time, or select several and scan them together. The filters start from the scanner's own trigger query, so the list opens scoped to the sessions it already watches, and a **Person** column shows whose session each one is. Sessions the scanner has already observed show their status instead of a scan button, so you can't double-scan.
 
 ### From the replay player
 
@@ -82,13 +89,14 @@ Some sessions can't be analyzed – there's no recording data, the recording is 
 
 The taxonomy:
 
-| Ineligible reason | What it means                                                           |
-| ----------------- | ----------------------------------------------------------------------- |
-| `no_recording`    | The session referenced doesn't have replay data in storage              |
-| `too_short`       | The recording is below the minimum duration we'll scan                  |
-| `too_inactive`    | The recording is long enough but the user was idle for almost all of it |
-| `too_long`        | The recording is above the maximum duration we'll scan                  |
-| `no_events`       | The recording has no analytics events at all                            |
+| Ineligible reason | What it means                                                                 |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `no_recording`    | The session referenced doesn't have replay data in storage                    |
+| `too_short`       | The recording is below the minimum duration we'll scan                        |
+| `too_inactive`    | The recording is long enough but the user was idle for almost all of it       |
+| `too_long`        | The recording is above the maximum duration we'll scan                        |
+| `no_events`       | The recording has no analytics events at all                                  |
+| `no_ai_consent`   | AI data processing is turned off for your organization, so nothing is scanned |
 
 Ineligible observations:
 
