@@ -9,7 +9,7 @@ author:
     - thiago-rocha-salvatore
     - lizzie-epton
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/semantic_layer_blog_header_a19ba93b69.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/semantic_layer_blog_header_a19ba93b69.png
 featuredImageType: full
 category: General
 tags:
