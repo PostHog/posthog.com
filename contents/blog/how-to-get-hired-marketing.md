@@ -20,7 +20,7 @@ seo:
   metaDescription: "What actually decides marketing hires at PostHog, after 350+ hours of interviews — and what to do about it if you're a non-traditional candidate."
 ---
 
-Marketing roles at PostHog are competitive to a degree that surprises people. I posted on LinkedIn that we're hiring another [Developer Marketer](/careers/developer-marketer) and had dozens of DMs within an hour, for a role that already had over 7,000 applications.
+Marketing roles at PostHog are competitive to a degree that surprises people. I posted on LinkedIn that we're hiring another [Developer Marketer](/careers/developer-marketer) and had dozens of DMs within an hour, for a role that already had over 715 applications.
 
 Hiring here is also time consuming. I've spent more than 350 hours in interviews over the last 12 months, roughly 3x more than any other marketing hiring manager at PostHog.
 
