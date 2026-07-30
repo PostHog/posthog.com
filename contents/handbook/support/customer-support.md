@@ -176,9 +176,9 @@ For bug reports from normal and high priority users (assuming you've confirmed i
 Steps for feature requests from normal and high priority users are pretty much the same, but [use this form](https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml) instead. If you find that there's already a matching feature request open, reply with a link to the feature request, and let them know they can upvote it by adding a "`+1`" comment.
 
 
-#### Handling sales leads
+#### Reaching the sales / CS / onboarding teams
 
-If a support ticket should be handled by one of the sales / CS / onboarding teams, message #group-cs-sales-support to let the teams know.
+If you need to reach the humans who look after a customer — for example, a support ticket should be handled by one of the sales / CS / onboarding teams, or you've spotted a sales lead — message [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C) to let the teams know. It's the cross-team channel for everyone who owns customers.
 
 
 #### How should I handle self-hosted setups?
