@@ -33,7 +33,7 @@ export class ProvisioningRequestError extends Error {
     }
 }
 
-/** The server-side GitHub grant is gone (expired, consumed, or unknown) — restart Phase A. */
+/** The server-side GitHub grant is gone (expired, consumed, or unknown), so reconnect GitHub. */
 export class GrantExpiredError extends Error {
     constructor(message = 'GitHub grant expired') {
         super(message)
@@ -53,17 +53,13 @@ export interface ProvisioningClient {
     getGrantRepositories(grantId: string): Promise<GrantRepositoriesResponse>
     createAccountRequest(body: AccountRequestBody): Promise<AccountRequestResponse>
     exchangeToken(input: { code: string; code_verifier: string }): Promise<TokenResponse>
-    createResource(bearer: string, body: { service_id: 'free' }): Promise<ResourceCreateResponse>
+    createResource(bearer: string): Promise<ResourceCreateResponse>
     createGithubIntegration(
         bearer: string,
         teamId: number,
         body: { grant_id: string; installation_id: string }
     ): Promise<void>
-    createWizardRun(
-        bearer: string,
-        teamId: number,
-        body: { repository: string; branch?: string }
-    ): Promise<WizardRunResponse>
+    createWizardRun(bearer: string, teamId: number, body: { repository: string }): Promise<WizardRunResponse>
 }
 
 type UpstreamResult = { status: number; headers: Headers; json: any }
@@ -246,7 +242,6 @@ const realClient: ProvisioningClient = {
                 )
                 .map((repo: any) => ({
                     full_name: repo.full_name,
-                    default_branch: repo.default_branch,
                     installation_id: String(repo.installation_id),
                     private: repo.private,
                 }))
@@ -295,8 +290,10 @@ const realClient: ProvisioningClient = {
         )
     },
 
-    async createResource(bearer, body) {
-        const result = await request('POST', '/api/agentic/provisioning/resources', { body, bearer })
+    async createResource(bearer) {
+        // No body: every field the endpoint takes (`project_id`, `configuration.project_name`,
+        // `label_prefix`) is optional and we want the defaults.
+        const result = await request('POST', '/api/agentic/provisioning/resources', { bearer })
         throwIfRateLimited(result)
         const { status, json } = result
         if (status >= 200 && status < 300 && json?.status === 'complete') {
@@ -338,7 +335,10 @@ const realClient: ProvisioningClient = {
         // wizard_run:{task_id, run_id, status}}` envelope; also accept a `complete` envelope or a
         // flat body defensively.
         const payload = json?.wizard_run ?? json?.complete ?? json
-        if (status >= 200 && status < 300 && payload?.task_id && payload?.run_id) {
+        // `run_id` is tested for presence, not truth: upstream sends `""` when the run exists but
+        // its row is not materialized yet, which is a success. Requiring a truthy value here would
+        // reject it, spend the one retry, and report degraded with a run actually in flight.
+        if (status >= 200 && status < 300 && payload?.task_id && typeof payload.run_id === 'string') {
             return { task_id: payload.task_id, run_id: payload.run_id }
         }
         throw new ProvisioningRequestError(

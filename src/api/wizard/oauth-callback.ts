@@ -60,7 +60,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     try {
         await client.createWizardRun(accessToken, teamId, {
             repository: resume.repository,
-            branch: resume.branch,
         })
     } catch (error) {
         console.error('wizard provisioning: wizard run failed after consent', error)
@@ -68,7 +67,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
     }
 
     try {
-        await client.createResource(accessToken, { service_id: 'free' })
+        await client.createResource(accessToken)
     } catch (error) {
         console.error('wizard provisioning: non-fatal resource create failed', error)
     }

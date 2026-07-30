@@ -1,7 +1,7 @@
 /**
- * File-backed mock ProvisioningClient (`WIZARD_PROVISIONING_MOCK=1`) so the entire provisioning flow — including
- * every failure branch in the RFC's error table — is walkable locally without the monorepo
- * endpoints existing.
+ * File-backed mock ProvisioningClient (`WIZARD_PROVISIONING_MOCK=1`) so the entire provisioning
+ * flow, including every failure branch the UI has copy for, is walkable locally without hitting
+ * a real PostHog instance.
  *
  * State lives in a JSON file under os.tmpdir() rather than module memory because Gatsby bundles
  * each function separately: the github/callback bundle (which creates grants) and the repos /
@@ -104,7 +104,8 @@ export const mockClient: ProvisioningClient = {
     async createGithubGrant({ code }) {
         const state = readState()
         if (!state.registeringSimulated) {
-            // Stand-in for the first-call client registration round trip against a real backend.
+            // Stand-in for the one-time client_registration round trip a real backend forces on
+            // the first call. Registration is synchronous upstream, so this is only latency.
             state.registeringSimulated = true
             await sleep(1000)
         }
@@ -184,7 +185,6 @@ export const mockClient: ProvisioningClient = {
         return {
             status: 'complete',
             id: 2,
-            service_id: 'free',
             complete: { access_configuration: { api_key: 'phc_mock', host: config.posthogApiHost } },
         }
     },

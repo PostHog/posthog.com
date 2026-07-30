@@ -20,22 +20,21 @@ export type ResumeCookie = {
     grant_id: string
     installation_id: string
     repository: string
-    branch?: string
 }
 
 /** Sanity check only; the provisioning API is the authoritative email validator. */
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 /**
- * Phase C of the provisioning flow (RFC "End-to-end flow"): one confirm click provisions the account and
- * starts the wizard run via the bundled `configuration.wizard` block on account_requests.
+ * `POST /api/wizard/provision` is the confirm step: one call to `account_requests` creates the
+ * account and starts the wizard run via the bundled `configuration.wizard` block, falling back to
+ * the granular `github_integration` + `wizard_runs` actions if that block fails.
  *
- * Response semantics mirror the RFC's error-handling table:
- * - `requires_auth`: existing PostHog account — the browser must complete login + consent; the
- *   PKCE verifier and repo selection are parked in the signed `resume` cookie for oauth-callback.
- * - `degraded`: the account was created but no wizard run exists (bundled block failed AND the
- *   granular retry failed). Never an `error` — "sign up manually" would be wrong advice here.
- * - `error`: nothing was created; the UI can safely offer manual signup.
+ * - `requires_auth`: email already has an account, so the browser must consent. The PKCE verifier
+ *   and repo selection are parked in the `resume` cookie for `oauth-callback`.
+ * - `degraded`: account created, no wizard run. Not an `error`, because the UI offers manual
+ *   signup on `error` and that is wrong advice for someone who now has an account.
+ * - `error`: nothing was created, so manual signup is safe to offer.
  */
 const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) => {
     res.setHeader('Cache-Control', 'no-store')
@@ -62,7 +61,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             ? String(body.installation_id)
             : ''
     const repository = typeof body.repository === 'string' ? body.repository : ''
-    const branch = typeof body.branch === 'string' && body.branch ? body.branch : undefined
     // Email is collected inline in the provisioning UI (defaulted from GitHub) and always sent explicitly,
     // so it comes from the browser rather than the grant — the grant's copy may be absent.
     const email = typeof body.email === 'string' ? body.email.trim() : ''
@@ -83,11 +81,11 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             code_challenge: pkce.challenge,
             code_challenge_method: 'S256',
             configuration: {
+                // Hardcoded on purpose: this flow is US-only, matching `config.posthogApiHost`.
                 region: 'US',
                 organization_name: grant.gh_login,
-                wizard: { grant_id: grant.grant_id, installation_id: installationId, repository, branch },
+                wizard: { grant_id: grant.grant_id, installation_id: installationId, repository },
             },
-            orchestrator: { type: 'posthog_website' },
             client_id: config.clientId,
         })
     } catch (error) {
@@ -111,7 +109,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
                 grant_id: grant.grant_id,
                 installation_id: installationId,
                 repository,
-                branch,
             }),
             COOKIE_MAX_AGE.resume
         )
@@ -130,7 +127,6 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
             grant_id: grant.grant_id,
             installation_id: installationId,
             repository,
-            branch,
         })
         clearCookie(res, COOKIES.grant)
         return respond({ status: 'success', task_id: run.task_id, run_id: run.run_id })
@@ -145,7 +141,7 @@ const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) 
 async function completeProvisioningTail(client: ProvisioningClient, code: string, verifier: string): Promise<void> {
     try {
         const token = await client.exchangeToken({ code, code_verifier: verifier })
-        await client.createResource(token.access_token, { service_id: 'free' })
+        await client.createResource(token.access_token)
     } catch (error) {
         console.error('wizard provisioning: non-fatal provisioning tail failed', error)
     }
@@ -169,10 +165,9 @@ async function retryWizardGranularly(
     })
     const run = await client.createWizardRun(token.access_token, teamId, {
         repository: wizard.repository,
-        branch: wizard.branch,
     })
     try {
-        await client.createResource(token.access_token, { service_id: 'free' })
+        await client.createResource(token.access_token)
     } catch (error) {
         console.error('wizard provisioning: non-fatal resource create failed', error)
     }

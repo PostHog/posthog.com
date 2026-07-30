@@ -1,18 +1,16 @@
 /**
  * TypeScript contract for the wizard provisioning flow.
  *
- * Upstream (PostHog app) shapes come from two sources:
- * 1. Existing agentic provisioning endpoints (`account_requests`, `oauth/token`, `resources`) —
- *    transcribed from `ee/api/agentic_provisioning/views.py` in the monorepo.
- * 2. Net-new endpoints defined by the RFC (`wizard-provisioning-rfc.md` at the repo root): the GitHub
- *    grant store and the `configuration.wizard` block. These are reconciled against the monorepo
- *    implementation; all parsing lives in `provisioning.ts` (the single parsing point). See the
- *    reconciliation checklist in `components/WizardProvisioning/README.md` for the open coordination items.
+ * Upstream (PostHog app) shapes are transcribed from `ee/api/agentic_provisioning/` in the
+ * monorepo. The GitHub grant store and the `configuration.wizard` block are the newest parts of
+ * that API, so they are the ones most worth re-checking; all parsing lives in `provisioning.ts`
+ * (the single parsing point), and `components/WizardProvisioning/README.md` holds the
+ * reconciliation checklist and the open coordination items.
  */
 
 export type ProvisioningError = { code: string; message: string }
 
-/** `configuration.wizard` result attached to an account_requests response (net-new). */
+/** `configuration.wizard` result attached to an account_requests response. */
 export type WizardResult = { task_id: string; run_id: string } | { error: ProvisioningError }
 
 export interface AccountRequestBody {
@@ -25,9 +23,10 @@ export interface AccountRequestBody {
     code_challenge: string
     code_challenge_method: 'S256'
     configuration: {
+        /** Narrowed to the one region this flow serves. */
         region: 'US'
         organization_name: string
-        /** Net-new bundled link + run block (RFC Phase C step 5). */
+        /** Bundled block: links the GitHub install to the new team and starts the wizard run. */
         wizard: {
             grant_id: string
             // GitHub installation id, carried as a string end-to-end: the upstream repositories
@@ -35,10 +34,8 @@ export interface AccountRequestBody {
             // coerce with `str(...)`, so we never treat it as a number.
             installation_id: string
             repository: string
-            branch?: string
         }
     }
-    orchestrator: { type: string }
     /** Our CIMD client id: the client metadata document URL, byte-for-byte. */
     client_id: string
 }
@@ -65,7 +62,6 @@ export interface TokenResponse {
 export type ResourceCreateResponse = {
     status: 'complete'
     id: number
-    service_id?: string
     complete: { access_configuration: { api_key: string; host: string } }
 }
 
@@ -84,7 +80,6 @@ export type GithubGrant = { grant_id: string; gh_login: string; email: string | 
  */
 export type GrantRepository = {
     full_name: string
-    default_branch?: string
     /** GitHub installation id as a string — the upstream listing emits it as a string. */
     installation_id: string
     private?: boolean
