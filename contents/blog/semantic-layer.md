@@ -8,8 +8,9 @@ hideAnchor: true
 author:
     - thiago-rocha-salvatore
     - lizzie-epton
-featuredImageType: >-
+featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/semantic_layer_blog_header_a19ba93b69.png
+featuredImageType: full
 category: General
 tags:
     - Context Warehouse
@@ -42,20 +43,20 @@ What it's really fixing is three kinds of knowledge that only exists as tribal m
 
 * **What our metrics are:** MRR isn't just "revenue", it's a specific calculation over a specific source.
 * **Which tables to trust (and which tables to avoid):** A mature project imports dozens of sources and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid as much as possible.
-* **How the data joins together:** The Stripe customer id maps to an organization property, but only after a format cast, and nothing tells you that except the analyst who figured it out last time.
+* **How the data joins together:** The Stripe customer ID maps to an organization property, but only after a format cast, and nothing tells you that except the analyst who figured it out last time.
 
 If you're a small company with a handful of tables, you probably know where everything is. But, as you grow you add more data sources and more models, that number you used to understand stops being obvious to anyone, least of all to an AI agent seeing your schema for the first time.
 
-> **Semantic layer** /sɪˈmæntɪk ˈleɪə/ — *noun*. A governed catalog of definitions that sits on top of your existing data and tells people and machines what it means: what each metric is, which tables to trust, and how sources connect. It describes the data; it doesn't copy or move it.
+> **Semantic layer** /sɪˈmæntɪk ˈleɪə/ – *noun*. A governed catalog of definitions that sits on top of your existing data and tells people and machines what it means: what each metric is, which tables to trust, and how sources connect. It describes the data; it doesn't copy or move it.
 >
 > **Glossary**
 > * **Catalog:** the structured, queryable inventory the semantic layer maintains.
 > * **Metric:** a named, governed definition of a business measure, like MRR.
 > * **Governed:** nothing becomes official until a human approves it.
 
-## Where this lives: the Context Warehouse
+## Where this lives: the context warehouse
 
-The [Context Warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your Stripe data, and data models, into one place, optimised for agents to use. The semantic layer is a key part of that stack making sure agents have the context of what your data means to be able to interpret it correctly.
+The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your Stripe data, and data models, into one place, optimized for agents to use. The semantic layer is a key part of that stack making sure agents have the context of what your data means to be able to interpret it correctly.
 
 The design decision that integrates the semantic layer so fully is that **the catalog is just SQL**. Everything the layer knows shows up as ordinary tables. Metrics are a table. There's no bespoke "catalog API" for an agent to learn; if it can run `execute-sql`, it already knows how to read the entire semantic layer. Discovery is a query, not an integration.
 
@@ -72,7 +73,7 @@ So everything an agent creates lands as `proposed`. Nothing an agent touches is 
 * Edit an approved metric's definition and it drops straight back to `proposed`. Changing what a number means re-opens the question of whether it's right.
 * If a metric was built from an existing insight and someone later edits that insight, the metric gets flagged as **drifted**. It's a signal that the definition it was born from has moved and a human should re-review.
 
-Which gives agents one simple rule to live by: a result is canonical only when `status = 'approved'` and `is_drifted = false`. Everything else including proposed, drifted, and archived, gets labelled noncanonical, and a well-trained agent will tell you so rather than passing it off as gospel.
+Which gives agents one simple rule to live by: a result is canonical only when `status = 'approved'` and `is_drifted = false`. Everything else including proposed, drifted, and archived, gets labeled non-canonical, and a well-trained agent will tell you so rather than passing it off as gospel.
 
 ## The design decisions we made (and the ones we didn't)
 
@@ -88,7 +89,7 @@ Storing the metric as the same funnel definition the insight uses, and running i
 
 ### "Why not write definitions in plain English?"
 
-We took the good part of it, a metric can be defined using a markdown structure, where the user defines, step by step, how the agent should calculate the given metric. However, it has limitations compared to other types of metrics as it is less deterministic compared to insight-backed and sql-backed metrics.
+We took the good part of it, a metric can be defined using a Markdown structure, where the user defines, step by step, how the agent should calculate the given metric. However, it has limitations compared to other types of metrics as it is less deterministic compared to insight-backed and SQL-backed metrics.
 
 ### "Why not just point a metric at an existing insight?"
 
