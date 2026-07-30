@@ -131,6 +131,13 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
+## Travel administration forms
+
+When traveling with PostHog, you may need to complete various travel administration forms ahead of your trip. These often ask for details that don't map neatly onto a remote-first company, so here's some guidance:
+
+- **Business or company address:** you can use the Hogpatch address – 2360 3rd St, San Francisco, CA 94107, United States. For more on the space, see the [Hogpatch operations](/handbook/people/hogpatch-operations) page.
+- **Where you'll be staying / contact details:** you can use the details of the hotel or accommodation you've booked, or leave the field blank if it's optional.
+
 ## Border Control
 
 Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
