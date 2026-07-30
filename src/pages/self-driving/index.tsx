@@ -53,25 +53,6 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
-const flowingGradientClasses = {
-    default: 'from-yellow via-green to-blue',
-}
-
-const FlowingGradientHighlight = ({
-    children,
-    palette = 'default',
-}: {
-    children: React.ReactNode
-    palette?: keyof typeof flowingGradientClasses
-}) => (
-    <em
-        className={`inline bg-gradient-to-r ${flowingGradientClasses[palette]} bg-[length:200%_200%] bg-clip-text not-italic text-transparent animate-gradient-rotate motion-reduce:animate-none`}
-        style={{ animationDuration: '12s' }}
-    >
-        {children}
-    </em>
-)
-
 const Badge = ({ children }: { children: React.ReactNode }) => (
     <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">{children}</span>
 )
@@ -674,7 +655,7 @@ const AutomaticToolingSection = (): JSX.Element => {
         <section className="not-prose my-12 space-y-4">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0">
                 <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">
-                    Give <em>your agents</em> the tools they need
+                    Give your agents the tools they need
                 </h2>
                 <p className="mt-2 mb-0 w-full text-base leading-relaxed text-secondary">
                     PostHog gives your product the context it needs to become self-driving: usage, errors, replays,
@@ -849,10 +830,7 @@ const CatalogLayers = () => (
 const ContextWarehouseSection = (): JSX.Element => (
     <section className="not-prose my-12">
         <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">
-            Everything lives in your{' '}
-            <em className="inline bg-gradient-to-r from-yellow via-green to-blue bg-[length:200%_200%] bg-clip-text not-italic text-transparent animate-gradient-rotate motion-reduce:animate-none">
-                context warehouse
-            </em>
+            Everything lives in your context warehouse
         </h2>
         <p className="mt-3 max-w-3xl text-base leading-relaxed text-secondary">
             Use PostHog as the full context layer for your product, or mix and match with your own tools.
@@ -888,17 +866,6 @@ const humanRoles: HumanRole[] = [
         alt: 'A hedgehog working at a laptop',
     },
 ]
-
-const HomepageCTASection = (): JSX.Element => (
-    <section className="not-prose my-12 rounded-md border border-primary bg-accent p-5 @md/reader-content:p-6">
-        <h2 className="m-0 text-2xl font-bold @md/reader-content:text-3xl">Try PostHog for free</h2>
-        <p className="mt-3 mb-0 max-w-2xl text-base text-secondary">
-            Start collecting the product context your team and agents need. You can install with AI, connect your data,
-            and work from there.
-        </p>
-        <GetStarted selfDriving />
-    </section>
-)
 
 const QuestionsSection = (): JSX.Element => {
     const { openNewChat } = useApp()
@@ -983,15 +950,17 @@ export default function SelfDrivingPage({
                         <section className="mx-auto grid max-w-6xl gap-6 @3xl/reader-content:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.9fr)] @3xl/reader-content:items-center">
                             <div>
                                 <h1 className="m-0 text-3xl font-bold !leading-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
-                                    What if your product <Highlight>built itself?</Highlight>
+                                    What if your product
+                                    <br />
+                                    <span className="whitespace-nowrap">
+                                        <Highlight>built itself?</Highlight>
+                                    </span>
                                 </h1>
                                 <p className="mt-5 mb-0 max-w-3xl text-lg leading-relaxed text-secondary">
-                                    PostHog is the context warehouse and toolkit for teams building products with AI. It
-                                    understands your customers, your usage data, and your product surfaces.
-                                </p>
-                                <p className="mt-4 mb-0 max-w-3xl text-lg leading-relaxed text-secondary">
-                                    That context lets PostHog spot problems, research what matters, and open pull
-                                    requests that you review and merge.
+                                    <strong className="text-primary">
+                                        You have a new pull request ready for review.
+                                    </strong>{' '}
+                                    <em>(Yep, really.)</em>
                                 </p>
                                 <GetStarted selfDriving />
                             </div>
@@ -1024,8 +993,7 @@ export default function SelfDrivingPage({
                     <div className="mx-auto max-w-6xl">
                         {/* How a product develops itself */}
                         <p id="how" className={sectionHeadingClassName}>
-                            How PostHog makes your product{' '}
-                            <FlowingGradientHighlight>self-driving</FlowingGradientHighlight>
+                            How PostHog makes your product self-driving
                         </p>
                         <div className="not-prose my-6">
                             <TabbedCarousel tabs={loopTabs} variant="hero" />
@@ -1038,9 +1006,7 @@ export default function SelfDrivingPage({
                             className="@lg/reader-content:float-right @lg/reader-content:max-w-[220px] @lg/reader-content:ml-6 mb-4 mt-2"
                             imgClassName="w-full"
                         />
-                        <h3 className={sectionHeadingClassName}>
-                            PostHog agents run on their own, but <Highlight>don't run wild</Highlight>
-                        </h3>
+                        <h3 className={sectionHeadingClassName}>PostHog agents run on their own, but don't run wild</h3>
                         <p>
                             Self-driving is autonomy from instruction, not from you. Agents work in the background
                             without you prompting them to make progress, but nothing ships on autopilot.
@@ -1127,9 +1093,7 @@ export default function SelfDrivingPage({
                         )}
 
                         {/* Works in your workflow */}
-                        <h3 className={sectionHeadingClassName}>
-                            Works in <Highlight>your workflow</Highlight>
-                        </h3>
+                        <h3 className={sectionHeadingClassName}>Works in your workflow</h3>
                         <p className="mb-0">
                             <span className="block">The same Inbox and agents show up wherever your team works.</span>
                         </p>
@@ -1153,9 +1117,7 @@ export default function SelfDrivingPage({
                         <ContextWarehouseSection />
 
                         {/* So, what's left for you? */}
-                        <h3 className={sectionHeadingClassName}>
-                            So, what's <Highlight>left for you?</Highlight>
-                        </h3>
+                        <h3 className={sectionHeadingClassName}>So, what's left for you?</h3>
                         <p className="max-w-xl">
                             Work lands while you sleep. You wake up to diffs and reports waiting for review.{' '}
                             <em>Then what?</em>
@@ -1168,7 +1130,7 @@ export default function SelfDrivingPage({
                                 >
                                     <div className="p-4">
                                         <p className="m-0 text-base font-bold text-primary">{heading}</p>
-                                        <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
+                                        <p className="m-0 mt-1 text-base text-secondary">{copy}</p>
                                     </div>
                                     <div className="mt-auto px-6 @md/reader-content:px-8">
                                         <CloudinaryImage
@@ -1182,7 +1144,6 @@ export default function SelfDrivingPage({
                             ))}
                         </div>
 
-                        <HomepageCTASection />
                         <QuestionsSection />
                     </div>
                 </div>
