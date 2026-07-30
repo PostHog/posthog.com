@@ -80,7 +80,7 @@ PostHog is an all-in-one developer platform that combines business intelligence 
 
 Its business intelligence stack contains three key pieces:
 
-1. A [data warehouse](/data-stack) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
+1. A [data warehouse](/context-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
 
 2. [Product analytics](/docs/product-analytics) which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
 
@@ -528,7 +528,7 @@ For most teams, a managed cloud option (PostHog Cloud, Metabase Cloud, Grafana C
 <details>
   <summary>Can I use PostHog as a BI tool?</summary>
 
-Yes. PostHog includes a [data warehouse](/data-stack) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
+Yes. PostHog includes a [data warehouse](/context-warehouse) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
 
 You can query this data alongside your product events using PostHog's [SQL editor](/docs/data-warehouse/query), build dashboards, and share insights across your team – all from the same platform where you run product analytics, session replay, and feature flags.
 

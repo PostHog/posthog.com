@@ -5429,20 +5429,28 @@
             "destination": "/startups"
         },
         {
+            "source": "/data-stack",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-stack/:path*",
+            "destination": "/context-warehouse/:path*"
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/data-stack"
+            "destination": "/context-warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/data-stack"
+            "destination": "/context-warehouse"
         },
         {
             "source": "/sql",
-            "destination": "/data-stack/sql-editor"
+            "destination": "/context-warehouse/sql-editor"
         },
         {
             "source": "/bi",
-            "destination": "/data-stack/business-intelligence"
+            "destination": "/context-warehouse/business-intelligence"
         },
         {
             "source": "/docs/error-tracking/common-questions",
