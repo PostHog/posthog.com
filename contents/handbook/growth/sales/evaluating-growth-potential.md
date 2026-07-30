@@ -30,7 +30,7 @@ Most accounts won't have all four of these. One or two is normal.
 
 **2. Workloads.** How many apps, products, environments, or business units do they have, and how many are instrumented? One workload fully instrumented at a company with a single product surface is largely saturated. Three business units globally with only one instrumented is an expansion lever. If you don't know the answer and you often can't get it from LinkedIn or enrichment data alone, that's not a "no" necessarily, it means you need more discovery.
 
-**3. Free-tier usage below the paid threshold.** Someone may be experimenting with a product area, which is a warm-intent signal. Sometimes they turned on Error Tracking by accident while clicking around. Sometimes they're partway through instrumenting it properly. Either way it's worth a check-in to find out which.
+**3. Free-tier usage below the paid threshold.** Someone may be experimenting with a product area, which is a warm-intent signal. Sometimes a billing spike is just someone clicking around who turned something on by accident. Sometimes they're partway through instrumenting it properly. Either way it's worth a check-in: at best it's warm intent, and even if it's accidental it's a chance to get them right-sized. Their attention is worth having regardless.
 
 **4. Commercial levers.** The easiest to name and size. Credit conversions, renewals, and mapping org size and use-case fit to add-on packages.
 
@@ -40,9 +40,9 @@ Equally important: know when there's *nothing* there. An account is saturated wh
 
 - All applicable use cases are at meaningful spend and actually leveraged by the customer
 - Single workload, fully instrumented, and no other workloads exist
-- The champion has told you directly there's no roadmap for more ("we're happy, nothing planned") This is weak on its own, so pair it with other indicators
+- The champion has told you directly there's no roadmap for more ("we're happy, nothing planned") This is weak on its own, so pair it with other indicators. It can also just mean you need a new champion, which is context dependent. At a small company there's no point sidestepping them, they likely know the full truth. At a medium-to-large company it's worth trying to connect with other people and create new champions
 - Usage has been flat or declining for 2+ quarters
-- The last two expansion conversations went nowhere, and not because of timing
+- The last two expansion conversations went nowhere, and not for any of the "check back later and nurture for now" reasons — timing wasn't right, no discernible reason, other blockers, external company factors, and the like
 - Price sensitivity is the dominant theme of every conversation
 
 A TAM being willing to let go of an account is itself a saturation signal, since TAMs are incentivized to maximize their book outcome. But don't take that at face value either.
