@@ -6,6 +6,8 @@ export interface SlotMachineTextProps {
     words: string[]
     /** Static content rendered before the scroller (e.g. an icon + label). */
     prefix?: React.ReactNode
+    /** Static content rendered after the scroller, for a mid-sentence word (e.g. "Ship {word} with PostHog"). */
+    suffix?: React.ReactNode
     /** ms each word rests before scrolling to the next. */
     interval?: number
     /** ms the final word is held before the reel loops back to the start. */
@@ -28,6 +30,7 @@ export interface SlotMachineTextProps {
 export function SlotMachineText({
     words,
     prefix,
+    suffix,
     interval = 1200,
     holdDuration = 2400,
     transitionDuration = 550,
@@ -86,6 +89,7 @@ export function SlotMachineText({
             <span className={`inline-flex items-center gap-2 ${className}`}>
                 {prefix}
                 <span className={wordClassName}>{lastWord}</span>
+                {suffix}
             </span>
         )
     }
@@ -117,6 +121,7 @@ export function SlotMachineText({
             </span>
             {/* Static word for assistive tech (the animated reel above is aria-hidden). */}
             <span className="sr-only">{lastWord}</span>
+            {suffix}
         </span>
     )
 }

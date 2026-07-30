@@ -31,6 +31,7 @@ import posthogIcon from '../images/posthog-icon-white.svg'
 | -------------------- | ----------------- | ------- | ---------------------------------------------------------------------------- |
 | `words`              | `string[]`        | —       | Words cycled in order. The **last** word is held longer before looping.      |
 | `prefix`             | `React.ReactNode` | —       | Static content before the scroller (icon + label, etc.).                     |
+| `suffix`             | `React.ReactNode` | —       | Static content after the scroller, for a mid-sentence word (e.g. "Ship {word} with PostHog"). |
 | `interval`           | `number`          | `1200`  | ms each word rests before scrolling to the next.                             |
 | `holdDuration`       | `number`          | `2400`  | ms the final word is held before the reel loops.                             |
 | `transitionDuration` | `number`          | `550`   | ms the scroll between words takes.                                           |
