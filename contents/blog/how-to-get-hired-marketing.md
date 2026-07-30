@@ -36,7 +36,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 > What good looks like: <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance. Not many influencer managers will actually ship their own tooling.
 
-**Strong opinions.** Our brand is one of PostHog's most valuable marketing assets and the fastest way to wreck it is hiring people who tell us what we want to hear or who don't have a strong sense of taste to rely on. For us, safe takes are worse than wrong ones.
+**Strong opinions.** Our brand is one of PostHog's most valuable marketing assets and the fastest way to wreck it is hiring people who tell us what we want to hear or who don't have a strong sense of taste to rely on. For us, safe takes are worse than wrong ones so we look for people with hot, spicy takes.
 
 > What good looks like: Hiring our first event marketer, we spoke to dozens of candidates whose strategy was essentially just "do hackathons". <TeamMember name="Daniel Zaltsman" showOnlyFirstName photo /> said PostHog is "a 1 to N tool, not a 0 to 1 tool" and that hackathons were a bad idea. He held that line under pushback and proved everyone else wrong once he got the job.
 
