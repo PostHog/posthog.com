@@ -4,13 +4,13 @@ import {
     IconDashboard,
     IconLightBulb,
     IconListTreeConnected,
-    IconLlmPromptEvaluation,
     IconMagicWand,
     IconPiggyBank,
     IconPlug,
     IconSparkles,
     IconTrends,
     IconUser,
+    IconWarning,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
@@ -192,6 +192,63 @@ export const applications: CarouselSlide[] = [
             imgClassName: 'w-full border-b-0 rounded-b-none',
         },
     },
+    {
+        slug: 'debug',
+        label: 'Debug',
+        icon: <IconWarning className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'stack',
+        heading: 'When a generation goes wrong, follow it end to end',
+        description: (
+            <>
+                <p>
+                    Open the trace, find the generation that failed or stalled, and read the exact prompt, response,
+                    model parameters, and metadata behind it. From there, jump to the recording of the session it
+                    happened in to see what the user was doing at the time.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            { label: f.errors.title, description: f.errors.description },
+                            { label: f.sessions.title, description: f.sessions.description },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.errors.images[0].src,
+            alt: f.errors.images[0].alt,
+            maxWidth: 'max-w-none',
+            imgClassName: 'w-full',
+        },
+    },
+    {
+        slug: 'iterate',
+        label: 'Iterate',
+        icon: <IconMagicWand className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-seagreen',
+        layout: 'stack',
+        heading: 'Change the prompt without shipping a deploy',
+        description: (
+            <>
+                <p>{f.playground.description}</p>
+                <div className="@container">
+                    <LabeledList items={[{ label: f.evaluations.title, description: f.evaluations.description }]} />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.playground.images[0].src,
+            alt: f.playground.images[0].alt,
+            maxWidth: 'max-w-none',
+            imgClassName: 'w-full',
+        },
+    },
 ]
 
 export const topFeatures: CarouselSlide[] = [
@@ -312,54 +369,10 @@ export const topFeatures: CarouselSlide[] = [
         progressBar: 'bg-red',
         layout: 'stack',
         heading: f.users.headline,
-        description: (
-            <>
-                <p>{f.users.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={[
-                            { label: f.errors.title, description: f.errors.description },
-                            { label: f.sessions.title, description: f.sessions.description },
-                        ]}
-                    />
-                </div>
-            </>
-        ),
+        description: <p>{f.users.description}</p>,
         image: {
             src: f.users.images[0].src,
             alt: f.users.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
-        },
-    },
-    {
-        slug: 'playground',
-        label: 'Playground',
-        icon: <IconMagicWand className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-seagreen',
-        layout: 'stack',
-        heading: f.playground.headline,
-        description: (
-            <>
-                <p>{f.playground.description}</p>
-                <h3 className="mt-8 mb-2 flex items-center gap-2">
-                    <IconLlmPromptEvaluation className="size-6 text-blue" />
-                    {f.evaluations.headline}
-                </h3>
-                <p>{f.evaluations.description}</p>
-                <CloudinaryImage
-                    src={f.evaluations.images[0].src as `https://res.cloudinary.com/${string}`}
-                    alt={f.evaluations.images[0].alt}
-                    className="w-full"
-                    imgClassName="h-auto w-full rounded-md border border-secondary"
-                />
-            </>
-        ),
-        image: {
-            src: f.playground.images[0].src,
-            alt: f.playground.images[0].alt,
             maxWidth: 'max-w-none',
             imgClassName: 'w-full',
         },

@@ -280,7 +280,7 @@ export const features = {
             {
                 title: 'Funnel analysis',
                 description:
-                    'Track users through the entire product journey. Pinpoint where they drop off, and how AI was involved — latency, output quality, or UX.',
+                    'Track users through the entire product journey. Pinpoint where they drop off, and how AI was involved – latency, output quality, or UX.',
             },
             {
                 title: 'Cohort analysis',
