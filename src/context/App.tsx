@@ -1563,9 +1563,6 @@ const appSettings: AppSettings = {
     '/workflows': {
         toolbar: true,
     },
-    '/endpoints': {
-        toolbar: true,
-    },
     '/ai': {
         toolbar: true,
     },
