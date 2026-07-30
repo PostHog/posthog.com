@@ -51,11 +51,14 @@ type SelectOption = {
     value: any
 }
 
-type LumaEvent = {
+// Shared shape from both /api proxies: Luma has coordinates, Notion the editorial fields
+type SuggestedEvent = {
     id: string
+    source: string
     name: string
     startAt: string | null
     endAt: string | null
+    allDay?: boolean
     timezone: string | null
     url: string | null
     lat: number | null
@@ -66,12 +69,137 @@ type LumaEvent = {
     venue: string | null
     fullAddress: string | null
     online: boolean
+    description?: string | null
+    category?: string | null
+    primaryPurpose?: string | null
+    attendees?: number | null
+    speakerNames?: string[]
+}
+
+const DEFAULT_AUDIENCE = 'Builders'
+
+// Notion's Category is mostly a format signal and Primary purpose a business goal, so only
+// the values that imply who an event is for are mapped; the rest fall back to the default.
+const AUDIENCE_BY_NOTION_VALUE: Record<string, string> = {
+    students: 'Students',
+    'community building': 'Builders',
+    'brand awareness': 'Builders',
+}
+
+// Reuse an existing option's casing so prefilling can't add near-duplicate values
+const canonicalAudience = (value: string, options: SelectOption[]): string =>
+    options.find((option) => option.label.toLowerCase() === value.toLowerCase())?.value ?? value
+
+const audienceFromNotion = (suggestion: SuggestedEvent, options: SelectOption[]): string[] => {
+    const mapped = [suggestion.category, suggestion.primaryPurpose]
+        .map((value) => (value ? AUDIENCE_BY_NOTION_VALUE[value.trim().toLowerCase()] : undefined))
+        .filter((value): value is string => Boolean(value))
+    return [...new Set((mapped.length > 0 ? mapped : [DEFAULT_AUDIENCE]).map((v) => canonicalAudience(v, options)))]
+}
+
+const normalizeName = (name: string): string => name.toLowerCase().replace(/[.'’]/g, '').replace(/\s+/g, ' ').trim()
+
+// Notion speakers are free text ("Andy M") but the form stores squeakIds. Only an
+// unambiguous single match is accepted — the wrong person is worse than none.
+const matchSpeakerOption = (name: string, options: SelectOption[]): string | null => {
+    const target = normalizeName(name)
+    if (!target) return null
+    const unique = (matches: SelectOption[]) => (matches.length === 1 ? matches[0].value : null)
+
+    const exact = unique(options.filter((option) => normalizeName(option.label) === target))
+    if (exact) return exact
+
+    // "Andy M" — first name plus a last-name initial
+    const initial = target.match(/^(\S+)\s+(\S)$/)
+    if (initial) {
+        const [, first, letter] = initial
+        return unique(
+            options.filter((option) => {
+                const [optionFirst, ...rest] = normalizeName(option.label).split(' ')
+                return optionFirst === first && rest.join(' ').startsWith(letter)
+            })
+        )
+    }
+
+    // Bare first name — only when it's unambiguous across profiles
+    return unique(options.filter((option) => normalizeName(option.label).split(' ')[0] === target))
+}
+
+const SOURCE_LABELS: Record<string, string> = { luma: 'Luma', notion: 'Notion' }
+
+const sourceLabel = (source: string): string =>
+    source
+        .split('+')
+        .map((part) => SOURCE_LABELS[part.trim()] || part.trim())
+        .join(' + ')
+
+// Collapse the same event from both systems on name + day, preferring the copy with coordinates
+const mergeSuggestedEvents = (lists: SuggestedEvent[][]): SuggestedEvent[] => {
+    const byKey = new Map<string, SuggestedEvent>()
+    for (const suggestion of lists.flat()) {
+        const key = `${suggestion.name.trim().toLowerCase()}|${(suggestion.startAt || '').slice(0, 10)}`
+        const existing = byKey.get(key)
+        if (!existing) {
+            byKey.set(key, suggestion)
+            continue
+        }
+        const [primary, secondary] = existing.lat != null ? [existing, suggestion] : [suggestion, existing]
+        byKey.set(key, {
+            ...secondary,
+            ...primary,
+            venue: primary.venue || secondary.venue,
+            url: primary.url || secondary.url,
+            description: primary.description || secondary.description,
+            category: primary.category || secondary.category,
+            // Spelled out so they survive if the other source starts sending the key as null
+            primaryPurpose: primary.primaryPurpose || secondary.primaryPurpose,
+            speakerNames: primary.speakerNames?.length ? primary.speakerNames : secondary.speakerNames,
+            attendees: primary.attendees ?? secondary.attendees,
+            source: [...new Set([existing.source, suggestion.source])].join(' + '),
+        })
+    }
+    return [...byKey.values()]
+}
+
+// Luma sends UTC instants with a timezone; Notion sends the wall clock as typed. Decide
+// from the value's shape so merged suggestions work either way.
+const suggestedDateTime = (suggestion: SuggestedEvent): { date: string; startTime: string } | null => {
+    const { startAt, timezone } = suggestion
+    if (!startAt) return null
+    if (!startAt.includes('T')) return { date: startAt.slice(0, 10), startTime: '' }
+    if (timezone) {
+        try {
+            const zoned = dayjs(startAt).tz(timezone)
+            if (zoned.isValid()) return { date: zoned.format('YYYY-MM-DD'), startTime: zoned.format('HH:mm') }
+        } catch {
+            // Unknown zone — fall through to the literal wall clock
+        }
+    }
+    return { date: startAt.slice(0, 10), startTime: startAt.slice(11, 16) }
 }
 
 type CitySuggestion = {
     id: string
     name: string
     placeFormatted: string
+}
+
+// Notion has no coordinates. Geocoding API rather than Search Box — no interactive session here.
+const geocodeLocation = async (query: string): Promise<{ lat: number; lng: number } | null> => {
+    const token = process.env.GATSBY_MAPBOX_TOKEN
+    if (!token || !query.trim()) return null
+    try {
+        const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
+        url.searchParams.set('q', query.trim())
+        url.searchParams.set('limit', '1')
+        url.searchParams.set('access_token', token)
+        const response = await fetch(url.toString())
+        const json = await response.json()
+        const coords = json?.features?.[0]?.geometry?.coordinates
+        return Array.isArray(coords) && coords.length >= 2 ? { lng: coords[0], lat: coords[1] } : null
+    } catch {
+        return null
+    }
 }
 
 // Session token for Mapbox Search Box API billing semantics
@@ -355,9 +483,8 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }
     }
 
-    // Luma event auto-suggest (create mode only) — events are fetched once
-    // through /api/luma-events since Luma's API blocks browser CORS
-    const [lumaEvents, setLumaEvents] = React.useState<LumaEvent[]>([])
+    // Auto-suggest (create mode only) — via /api proxies; neither API allows browser calls
+    const [lumaEvents, setLumaEvents] = React.useState<SuggestedEvent[]>([])
     const [lumaOpen, setLumaOpen] = React.useState(false)
     const [lumaHighlight, setLumaHighlight] = React.useState(-1)
     const lumaContainerRef = React.useRef<HTMLDivElement>(null)
@@ -374,55 +501,96 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
     React.useEffect(() => {
         if (event) return
         const controller = new AbortController()
-        fetch('/api/luma-events', { signal: controller.signal })
-            .then((response) => (response.ok ? response.json() : null))
-            .then((json) => {
-                if (json && Array.isArray(json.events)) {
-                    setLumaEvents(json.events)
-                }
-            })
-            .catch(() => {
-                // Proxy unavailable (e.g. plain gatsby dev) — suggestions just don't appear
-            })
+        // Sources fail independently — one unavailable proxy doesn't lose the other's results
+        const load = (path: string, source: string): Promise<SuggestedEvent[]> =>
+            fetch(path, { signal: controller.signal })
+                .then((response) => (response.ok ? response.json() : null))
+                .then((json) =>
+                    Array.isArray(json?.events)
+                        ? json.events.map((suggestion: SuggestedEvent) => ({ ...suggestion, source }))
+                        : []
+                )
+                .catch(() => [])
+
+        Promise.all([load('/api/luma-events', 'luma'), load('/api/notion-events', 'notion')]).then((lists) =>
+            setLumaEvents(mergeSuggestedEvents(lists))
+        )
         return () => controller.abort()
     }, [event])
 
     const lumaMatches = React.useMemo(() => {
         const query = formik.values.name.trim().toLowerCase()
         if (event || query.length < 3 || lumaEvents.length === 0) return []
-        return lumaEvents.filter((lumaEvent) => lumaEvent.name.toLowerCase().includes(query)).slice(0, 5)
+        const today = dayjs().format('YYYY-MM-DD')
+        // Upcoming soonest-first, then recent past. Must sort before slicing, or the cap
+        // keeps an arbitrary five.
+        const bucket = (date: string) => (!date ? 2 : date >= today ? 0 : 1)
+        return lumaEvents
+            .filter((suggestion) => suggestion.name.toLowerCase().includes(query))
+            .map((suggestion) => ({ suggestion, date: suggestedDateTime(suggestion)?.date || '' }))
+            .sort((a, b) =>
+                bucket(a.date) !== bucket(b.date)
+                    ? bucket(a.date) - bucket(b.date)
+                    : bucket(a.date) === 1
+                    ? b.date.localeCompare(a.date)
+                    : a.date.localeCompare(b.date)
+            )
+            .slice(0, 5)
+            .map(({ suggestion }) => suggestion)
     }, [lumaEvents, formik.values.name, event])
 
-    const handleLumaSelect = (lumaEvent: LumaEvent) => {
-        let start: dayjs.Dayjs | null = null
-        if (lumaEvent.startAt) {
-            try {
-                start = lumaEvent.timezone ? dayjs(lumaEvent.startAt).tz(lumaEvent.timezone) : dayjs(lumaEvent.startAt)
-            } catch {
-                start = dayjs(lumaEvent.startAt)
-            }
-        }
+    const handleLumaSelect = async (suggestion: SuggestedEvent) => {
+        const when = suggestedDateTime(suggestion)
+        const locationLabel =
+            suggestion.cityState ||
+            [suggestion.city, suggestion.country].filter(Boolean).join(', ') ||
+            formik.values.locationLabel
+
+        // External speakers, and profiles missing a team/avatar, are dropped
+        const matchedSpeakers = [
+            ...new Set(
+                (suggestion.speakerNames || [])
+                    .map((speakerName) => matchSpeakerOption(speakerName, speakers))
+                    .filter((squeakId): squeakId is string => Boolean(squeakId))
+            ),
+        ]
+
         formik.setValues({
             ...formik.values,
-            name: lumaEvent.name,
-            date: start?.isValid() ? start.format('YYYY-MM-DD') : formik.values.date,
-            startTime: start?.isValid() ? start.format('HH:mm') : formik.values.startTime,
-            link: lumaEvent.url || formik.values.link,
-            online: lumaEvent.online,
-            ...(lumaEvent.online
+            name: suggestion.name,
+            date: when?.date || formik.values.date,
+            startTime: when?.startTime || formik.values.startTime,
+            link: suggestion.url || formik.values.link,
+            online: suggestion.online,
+            description: suggestion.description || formik.values.description,
+            // Category maps onto Format; seeded only while empty, never overwriting a selection
+            format:
+                suggestion.category && formik.values.format.length === 0 ? [suggestion.category] : formik.values.format,
+            attendees: suggestion.attendees ?? formik.values.attendees,
+            speakers: formik.values.speakers.length === 0 ? matchedSpeakers : formik.values.speakers,
+            // Required field, so this always resolves to at least the default
+            audience:
+                formik.values.audience.length === 0 ? audienceFromNotion(suggestion, audience) : formik.values.audience,
+            ...(suggestion.online
                 ? { locationLabel: '', locationLat: undefined, locationLng: undefined, venueName: '' }
                 : {
-                      locationLabel:
-                          lumaEvent.cityState ||
-                          [lumaEvent.city, lumaEvent.country].filter(Boolean).join(', ') ||
-                          formik.values.locationLabel,
-                      venueName: lumaEvent.venue || '',
-                      locationLat: lumaEvent.lat ?? undefined,
-                      locationLng: lumaEvent.lng ?? undefined,
+                      locationLabel,
+                      venueName: suggestion.venue || '',
+                      locationLat: suggestion.lat ?? undefined,
+                      locationLng: suggestion.lng ?? undefined,
                   }),
         })
         setLumaOpen(false)
         setLumaHighlight(-1)
+
+        // Notion carries no coordinates — resolve them from the venue/city text
+        if (!suggestion.online && suggestion.lat == null) {
+            const coords = await geocodeLocation([suggestion.venue, locationLabel].filter(Boolean).join(', '))
+            if (coords) {
+                formik.setFieldValue('locationLat', coords.lat)
+                formik.setFieldValue('locationLng', coords.lng)
+            }
+        }
     }
 
     // Debounced Mapbox suggest — only fires while the user is typing (cityQuery
@@ -590,9 +758,35 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
         }
     }
 
+    // resetForm() alone leaves a stale city query that re-opens its dropdown. In edit mode
+    // this reverts to the saved event rather than emptying the form.
+    const clearForm = () => {
+        formik.resetForm()
+        setCityQuery('')
+        setCitySuggestions([])
+        setCityOpen(false)
+        setCityHighlight(-1)
+        setCitySessionToken(newSessionToken())
+        setLumaOpen(false)
+        setLumaHighlight(-1)
+    }
+
     return (
         <div>
-            <h2 className="text-xl font-bold mb-1">Add a new event</h2>
+            {/* pr-10 keeps this clear of the card's absolutely-positioned close button */}
+            <div className="flex items-center justify-between gap-2 mb-1 pr-10">
+                <h2 className="text-xl font-bold mb-0">Add a new event</h2>
+                <OSButton
+                    size="sm"
+                    variant="secondary"
+                    type="button"
+                    disabled={submitting}
+                    tooltip={event ? 'Revert to the saved event' : 'Clear all fields'}
+                    onClick={clearForm}
+                >
+                    {event ? 'Revert' : 'Clear'}
+                </OSButton>
+            </div>
             <form onSubmit={formik.handleSubmit} className="space-y-3">
                 <div ref={lumaContainerRef} className="relative">
                     <OSInput
@@ -630,12 +824,15 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                     {!event && lumaOpen && (
                         <SuggestionDropdown
                             id="luma-event-suggestions"
-                            items={lumaMatches.map((lumaEvent) => ({
-                                id: lumaEvent.id,
-                                label: lumaEvent.name,
+                            items={lumaMatches.map((suggestion) => ({
+                                id: suggestion.id,
+                                label: suggestion.name,
                                 sublabel: [
-                                    lumaEvent.startAt ? dayjs(lumaEvent.startAt).format('MMM D, YYYY') : null,
-                                    lumaEvent.online ? 'Online' : lumaEvent.cityState || lumaEvent.city,
+                                    suggestedDateTime(suggestion)
+                                        ? dayjs(suggestedDateTime(suggestion)!.date).format('MMM D, YYYY')
+                                        : null,
+                                    suggestion.online ? 'Online' : suggestion.cityState || suggestion.city,
+                                    sourceLabel(suggestion.source),
                                 ]
                                     .filter(Boolean)
                                     .join(' · '),
@@ -957,13 +1154,7 @@ export default function EventForm({ onSuccess, event }: { onSuccess?: () => void
                             'Add event'
                         )}
                     </OSButton>
-                    <OSButton
-                        disabled={submitting}
-                        variant="default"
-                        size="md"
-                        type="button"
-                        onClick={() => formik.resetForm()}
-                    >
+                    <OSButton disabled={submitting} variant="default" size="md" type="button" onClick={clearForm}>
                         Reset
                     </OSButton>
                 </div>
