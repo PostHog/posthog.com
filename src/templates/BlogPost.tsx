@@ -236,7 +236,7 @@ export const getSortOption = (root?: string) =>
 const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
     return activeMenu?.children?.length > 0 ? (
         <div className="mb-1 flex items-center justify-between sticky top-0 z-10 pl-1.5">
-            <h5 className="m-0 text-sm font-semibold">{activeMenu?.name}</h5>
+            <h5 className="m-0 text-sm font-semibold text-muted">{activeMenu?.name}</h5>
             <div className="flex items-center">
                 <MenuBar
                     menus={[

@@ -13,6 +13,8 @@ config.sessionReplayConfig.maskAllTexts = false;
 config.sessionReplayConfig.maskAllImages = false;
 ```
 
+These settings apply on iOS, Android, and — with [canvas masking](#masking-on-flutter-web) enabled — Flutter Web.
+
 ### Masking in Flutter
 
 - You can manually mark a Widget for masking using the `PostHogMaskWidget` Widget:
@@ -22,6 +24,43 @@ config.sessionReplayConfig.maskAllImages = false;
     const PostHogMaskWidget(child: Text('Sensitive!'))
 ...
 ```
+
+### Masking on Flutter Web
+
+> Requires PostHog Flutter SDK version >= [5.34.0](https://github.com/PostHog/posthog-flutter/releases) and posthog-js version >= [1.408.0](https://github.com/PostHog/posthog-js/releases) in your `web/index.html`.
+
+On Flutter web, session replay records your app as pixels inside the CanvasKit canvas, where DOM-based masking cannot see your widgets. Canvas masking applies the same rules inside the canvas: `maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`, and obscured text fields (like passwords) are honored with the same semantics as iOS and Android.
+
+To enable it, declare a mask-region provider in the `posthog.init` call in your `web/index.html`, alongside enabling canvas capture:
+
+```html file=web/index.html
+<script>
+  posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    session_recording: {
+      captureCanvas: {
+        recordCanvas: true,
+      },
+      canvasCapture: {
+        // The PostHog Flutter plugin replaces this once your app starts.
+        // Until then, canvas frames are skipped rather than recorded unmasked.
+        maskRegionsFn: () => null,
+      },
+    },
+  })
+</script>
+```
+
+Mounting a `PostHogMaskWidget` also switches canvas masking on by itself, without the `posthog.init` declaration. Prefer the declaration when you can edit `web/index.html`: it covers the frames captured before Flutter boots (they are skipped instead of recorded unmasked), and it avoids a one-time recording restart at the moment masking switches on.
+
+Things to know:
+
+- Your app must be wrapped in `PostHogWidget`. Without it, canvas frames are skipped rather than recorded unmasked, and a console warning explains the fix.
+- On a posthog-js older than 1.408.0, canvas frames are **not** masked — a console warning tells you to upgrade.
+- If your project configures a `blockSelector` in the replay project settings, list it in `posthog.init` too: the client-side value (which the plugin extends to exclude Flutter's accessibility DOM) takes precedence over the project-level one.
+- Platform views (`HtmlElementView`) are DOM elements, not canvas pixels — they follow posthog-js's DOM masking rules, and `PostHogMaskWidget` does not mask them on web.
+- Text painted by a custom `CustomPainter` is not in the widget tree, so `maskAllTexts` cannot find it — wrap it in `PostHogMaskWidget`.
+- On a page embedding multiple Flutter views, canvases belonging to other Flutter views are skipped entirely (not recorded).
 
 ### Masking platform views
 

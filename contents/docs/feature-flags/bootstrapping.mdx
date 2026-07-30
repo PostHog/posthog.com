@@ -1,5 +1,5 @@
 ---
-title: Client-side bootstrapping
+title: Bootstrap Feature Flags
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,13 +8,15 @@ availability:
     enterprise: full
 ---
 
-> **Note:** Bootstrapping feature flags is available in our [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs. Mobile SDKs persist identity on-device, so anonymous bootstrap seeding applies only on the first launch. An identified bootstrap can also reconcile identity on later launches. See [behavior on mobile SDKs](#behavior-on-mobile-sdks).
+Bootstrapping Feature Flags makes precomputed flag values available as soon as a client-side PostHog SDK initializes. This prevents flicker and enables startup logic, such as redirects, to use flags before the SDK finishes its first `/flags` request.
 
-import BootstrappingIntro from "./snippets/bootstrapping-intro.mdx"
+This page covers feature flag-specific behavior. See [bootstrapping PostHog SDKs](/docs/libraries/bootstrapping) for identity, session, persistence, and cross-SDK behavior.
 
-<BootstrappingIntro />
+> **Note:** Feature flag bootstrapping is available in the [JavaScript web](/docs/libraries/js), [React Native](/docs/libraries/react-native), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and [Flutter](/docs/libraries/flutter) SDKs.
 
-To bootstrap PostHog with feature flags, use the `bootstrap` key in the initialization config and add feature flag values to it:
+## Bootstrap flag values
+
+Pass known flag values to `bootstrap.featureFlags` during SDK initialization:
 
 <MultiLanguage>
 
@@ -24,44 +26,36 @@ posthog.init('<ph_project_token>', {
     defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
         featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
+            'new-checkout': true,
+            'checkout-variant': 'test',
         },
     },
 })
 ```
 
 ```react-native
-// App.(js|ts)
-import { usePostHog, PostHogProvider } from 'posthog-react-native'
-
-export function MyApp() {
-    return (
-        <PostHogProvider apiKey="<ph_project_token>" options={{
-            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
-            bootstrap: {
-                featureFlags: {
-                    'flag-1': true,
-                    'variant-flag': 'control',
-                    'other-flag': false
-                }
-            }
-        }}>
-            <MyComponent />
-        </PostHogProvider>
-    )
-}
+<PostHogProvider
+    apiKey="<ph_project_token>"
+    options={{
+        host: '<ph_client_api_host>',
+        bootstrap: {
+            featureFlags: {
+                'new-checkout': true,
+                'checkout-variant': 'test',
+            },
+        },
+    }}
+>
+    <MyApp />
+</PostHogProvider>
 ```
 
 ```swift
 let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
 config.bootstrap = PostHogBootstrapConfig(
     featureFlags: [
-        "flag-1": true,
-        "variant-flag": "control",
-        "other-flag": false
+        "new-checkout": true,
+        "checkout-variant": "test"
     ],
     featureFlagPayloads: nil
 )
@@ -72,9 +66,8 @@ PostHogSDK.shared.setup(config)
 val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
 config.bootstrap = PostHogBootstrapConfig(
     featureFlags = mapOf(
-        "flag-1" to true,
-        "variant-flag" to "control",
-        "other-flag" to false
+        "new-checkout" to true,
+        "checkout-variant" to "test"
     )
 )
 PostHogAndroid.setup(this, config)
@@ -85,9 +78,8 @@ final config = PostHogConfig('<ph_project_token>');
 config.host = '<ph_client_api_host>';
 config.bootstrap = PostHogBootstrapConfig(
   featureFlags: {
-    'flag-1': true,
-    'variant-flag': 'control',
-    'other-flag': false,
+    'new-checkout': true,
+    'checkout-variant': 'test',
   },
 );
 await Posthog().setup(config);
@@ -95,177 +87,100 @@ await Posthog().setup(config);
 
 </MultiLanguage>
 
-## Setting the correct flag values
-
-To ensure you are bootstrapping PostHog with the correct flag values, we recommend fetching the flags values from your server alongside the page load request, and then passing them to your frontend.
-
-You can do this by:
-
-1. When receiving a frontend request, fetch all the feature flags for the user on the backend by calling [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#fetching-all-flags-for-a-user).
-2. Return the frontend request with the flags values in the response.
-3. On the frontend, get the flag values from the response and add them to the `bootstrap` key in the PostHog initialization.
-
-> **Tip:** to ensure your request is as quick as possible, use [local evaluation](/docs/feature-flags/local-evaluation) on your server.
-
-### Bootstrapping in single-page apps
-
-In environments where `posthog.init` only runs once during a session (for example, SPAs like Next.js using `instrumentation-client`), you have two options:
-
-- **Server-side pre-evaluation**: Evaluate flags before the app renders, then pass the values into your app and add them to `bootstrap` or use them directly.
-- **Client-side pre-evaluation**: Evaluate the flag in an earlier page/state than the one where you need the value, then store and reuse it immediately when required.
-
-Both approaches avoid flicker and achieve the same outcome as bootstrapping, as long as you use the same `distinct_id` across client and server.
-
-## Bootstrapping with a distinct ID
-
-The `bootstrap` object accepts identity, session, and feature flag values. The JavaScript web SDK uses `distinctID` and `isIdentifiedID`. Other SDKs use the casing shown in the examples below.
-
-- `distinctID` sets the distinct ID during PostHog's initialization. Include the same distinct ID you used to call `getAllFlags()` on your server so server-side and client-side flag evaluations use the same identity.
-
-- `isIdentifiedID` tells the SDK whether `distinctID` belongs to an [identified person](/docs/product-analytics/identify) or an anonymous visitor. Set it to `true` for a signed-in ID, such as a database ID. A previous `$identify` event isn't required. Set it to `false`, or omit it, when supplying a generated anonymous ID.
-
-When `isIdentifiedID` is `true`, the JavaScript web, iOS, Android, and Flutter SDKs reconcile the bootstrapped ID with any persisted identity:
-
-- **No persisted identity** – The SDK uses the bootstrapped ID and marks it as identified without emitting `$identify`.
-- **An anonymous identity exists** – If the IDs match, the SDK marks the existing identity as identified without emitting `$identify`. If they differ, the SDK calls `identify()` automatically to link the anonymous activity to the bootstrapped ID. This emits `$identify` when capturing is enabled; while opted out, only the local identity changes.
-- **The same identified identity exists** – The SDK keeps it without emitting a redundant `$identify`.
-- **A different identified identity exists** – The SDK preserves the existing identity and emits a warning. Call `reset()` before initialization when you intend to switch users.
-
-The automatic merge follows your person profile settings. If person profiles are set to `never`, the SDK preserves a different anonymous identity instead of calling `identify()`.
-
-Use bootstrap when your app knows the signed-in identity before SDK initialization. If your app loads the identity asynchronously, call `identify()` when it becomes available instead.
-
-- `sessionID` connects sessions across domains so you get an accurate session count and complete session replays. To get the session ID, call `posthog.get_session_id()`.
-
-- `featureFlags` makes flag values available as soon as PostHog loads. Call `posthog.getAllFlags()` (or the equivalent method) on your backend and pass the values to your frontend in the `bootstrap` object.
-
-
-<MultiLanguage>
+You can also seed JSON-serializable payloads with `featureFlagPayloads`:
 
 ```js-web
 posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
-        distinctID: 'distinct_id_of_your_user',
+        featureFlags: {
+            'checkout-variant': 'test',
+        },
+        featureFlagPayloads: {
+            'checkout-variant': {
+                buttonText: 'Try the new checkout',
+            },
+        },
+    },
+})
+```
+
+## Get the correct values from your server
+
+For web apps, evaluate flags on your server as part of the page request, then pass the results to the client:
+
+1. Get or create the distinct ID the client uses.
+2. Call [`getAllFlags()`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#fetching-all-flags-for-a-user) for that distinct ID on your server.
+3. Include the flag values and distinct ID in the response that renders the page.
+4. Pass both values to `bootstrap` when the client initializes PostHog.
+
+Use `posthog-node`'s `getAllFlagsAndPayloads()` instead when you also need payloads. Use [server-side local evaluation](/docs/feature-flags/local-evaluation) to avoid a network request to PostHog while handling the page request.
+
+For mobile apps, get the server-evaluated values before SDK setup and pass them to `PostHogBootstrapConfig`.
+
+### Use the same distinct ID on the server and client
+
+Percentage rollout and variant assignment are deterministic for a distinct ID. If the server evaluates flags with one ID and the client initializes with another, the client can receive a different value when it fetches flags. Keep person properties, group properties, and [evaluation contexts](/docs/feature-flags/evaluation-contexts) consistent too when your flag uses them.
+
+Bootstrap the same ID you used for server-side evaluation:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    bootstrap: {
+        distinctID: 'distinct_id_used_on_the_server',
         isIdentifiedID: true,
-        sessionID: 'session_id_of_user_session',
-        featureFlags: {
-            'flag-1': true,
-            'variant-flag': 'control',
-            'other-flag': false,
-        },
+        featureFlags: serverEvaluatedFlags,
     },
 })
 ```
 
-```react-native
-// App.(js|ts)
-import { usePostHog, PostHogProvider } from 'posthog-react-native'
+See [bootstrapping an identity](/docs/libraries/bootstrapping#bootstrap-an-identity) for anonymous IDs, identified IDs, and persisted identity reconciliation.
 
-export function MyApp() {
-    return (
-        <PostHogProvider apiKey="<ph_project_token>" options={{
-            // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-            host: '<ph_client_api_host>', // TIP: host is optional if you use https://us.i.posthog.com
-            bootstrap: {
-                distinctId: 'distinct_id_of_your_user',
-                isIdentifiedId: true,
-                featureFlags: {
-                    'flag-1': true,
-                    'variant-flag': 'control',
-                    'other-flag': false
-                }
-            }
-        }}>
-            <MyComponent />
-        </PostHogProvider>
-    )
-}
-```
+## Understand the flag lifecycle
 
-```swift
-let config = PostHogConfig(projectToken: "<ph_project_token>", host: "<ph_client_api_host>")
-config.bootstrap = PostHogBootstrapConfig(
-    distinctId: "distinct_id_of_your_user",
-    isIdentifiedId: true,
-    featureFlags: [
-        "flag-1": true,
-        "variant-flag": "control",
-        "other-flag": false
-    ],
-    featureFlagPayloads: nil
-)
-PostHogSDK.shared.setup(config)
-```
+Bootstrapped flags seed the SDK's initial state. They don't permanently override values from PostHog.
 
-```kotlin
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
-config.bootstrap = PostHogBootstrapConfig(
-    distinctId = "distinct_id_of_your_user",
-    isIdentifiedId = true,
-    featureFlags = mapOf(
-        "flag-1" to true,
-        "variant-flag" to "control",
-        "other-flag" to false
-    )
-)
-PostHogAndroid.setup(this, config)
-```
+- The SDK serves bootstrapped values immediately.
+- The next complete `/flags` response replaces the complete set of bootstrapped values. Keys that only exist in the bootstrap configuration are removed.
+- A partial or errored response updates the flags it computed and preserves previous values for the others.
+- Calling `reset()` clears bootstrapped flags.
+- If you disable automatic feature flag requests, no `/flags` response replaces the bootstrapped values. Use `updateFlags()` to supply new values at runtime in SDKs that support it.
 
-```dart
-final config = PostHogConfig('<ph_project_token>');
-config.host = '<ph_client_api_host>';
-config.bootstrap = PostHogBootstrapConfig(
-  distinctId: 'distinct_id_of_your_user',
-  isIdentifiedId: true,
-  featureFlags: {
-    'flag-1': true,
-    'variant-flag': 'control',
-    'other-flag': false,
-  },
-);
-await Posthog().setup(config);
-```
+Bootstrapping only seeds enabled flags. Use `true` for a boolean flag or a non-empty string for a multivariate flag. The SDK drops `false` and empty values. See [mobile SDK bootstrapping behavior](/docs/libraries/bootstrapping#behavior-on-mobile-sdks) for persistence and first-launch behavior.
 
-</MultiLanguage>
+## Bootstrap flags in single-page apps
 
-## Behavior on mobile SDKs
+In environments where `posthog.init()` runs once during a session, such as a single-page app using Next.js `instrumentation-client`, choose one of these approaches:
 
-The iOS, Android, and Flutter SDKs bootstrap through `PostHogBootstrapConfig` and persist identity and flags on the device, so bootstrapping behaves slightly differently than on the web. Assign `config.bootstrap = PostHogBootstrapConfig(...)` before calling `setup()`. Bootstrapping requires iOS SDK `3.66.0`+, Android SDK `3.55.0`+, or Flutter SDK `5.31.0`+.
+- **Server-side pre-evaluation** – Evaluate flags before the app renders, then pass the values into the app and add them to `bootstrap` or use them directly.
+- **Client-side pre-evaluation** – Evaluate the flag in an earlier page or state than the one where you need it, then store and reuse it.
 
-> **React Native** is also a mobile SDK, but it uses the posthog-js-style `bootstrap` option shown in the examples above (not `PostHogBootstrapConfig`) and follows the [standard behavior](#bootstrapping-with-a-distinct-id).
+Both approaches prevent flicker as long as the server and client use the same distinct ID.
 
-import MobileBootstrapBehavior from "./snippets/mobile-bootstrap-behavior.mdx"
+## Override flags instead of bootstrapping
 
-<MobileBootstrapBehavior />
-
-> **Flutter web:** `bootstrap` is not applied on Flutter web because the web SDK hooks onto an already-initialized `posthog-js` instance. Configure `bootstrap` in your `posthog.init({...})` call instead.
-
-## Overriding feature flags 
-
-Bootstrapped feature flag values are temporary and are disregarded after PostHog fetches flag values. If you are trying to override feature flag values in a persistent manner, some PostHog SDKs support overriding flags:
-
+Use overrides when you need to replace flag values after initialization or keep a value from being replaced by `/flags`. Bootstrapping is for initial state, not persistent overrides.
 
 <MultiLanguage selector="tabs">
 
 ```node
-posthog.overrideFeatureFlags({ 'my-feature-flag': true })
+posthog.overrideFeatureFlags({ 'new-checkout': true })
 ```
 
 ```js-web
-posthog.featureFlags.overrideFeatureFlags({flags: {'my-feature-flag': 'variant-1', 'other-feature': true}})
-
-// you can also override feature flag payloads
-posthog.featureFlags.overrideFeatureFlags({flags: {'my-feature-flag': 'variant-1'}, payloads: {'my-feature-flag': {someData: true}}})
+posthog.featureFlags.overrideFeatureFlags({
+    flags: { 'checkout-variant': 'test' },
+    payloads: { 'checkout-variant': { buttonText: 'Try the new checkout' } },
+})
 ```
 
 </MultiLanguage>
-
 
 ## Examples
 
 - [How to bootstrap feature flags in React and Express](/tutorials/bootstrap-feature-flags-react)
 - [How to use Next.js middleware to bootstrap feature flags](/tutorials/nextjs-bootstrap-flags)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
-- [How to set up cross-domain tracking](/tutorials/cross-domain-tracking)

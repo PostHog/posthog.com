@@ -1409,6 +1409,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/expansion-strategies',
                     },
                     {
+                        name: "Evaluating an account's growth potential",
+                        url: '/handbook/growth/sales/evaluating-growth-potential',
+                    },
+                    {
                         name: 'TAM Excellence',
                         url: '/handbook/growth/sales/tam-excellence',
                     },
@@ -2450,6 +2454,10 @@ export const docsMenu = {
                         {
                             name: 'SDK comparison',
                             url: '/docs/libraries',
+                        },
+                        {
+                            name: 'SDK bootstrapping',
+                            url: '/docs/libraries/bootstrapping',
                         },
                         {
                             name: 'JavaScript Web',
@@ -3633,7 +3641,7 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/use-cases',
                                 },
                                 {
-                                    name: 'Tools reference',
+                                    name: 'MCP tools reference',
                                     url: '/docs/model-context-protocol/tools',
                                 },
                                 {
@@ -4281,7 +4289,14 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/web-analytics/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Installation',
@@ -4319,47 +4334,76 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Start here',
-                    url: '/docs/web-analytics/getting-started',
-                    icon: 'IconGraduationCap',
-                    color: 'salmon',
+                    name: 'Surfaces',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'PostHog Web',
+                    url: '/docs/web-analytics/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/web-analytics/surfaces/web-app',
+                        },
+                        {
+                            name: 'Dashboard',
+                            url: '/docs/web-analytics/dashboard',
+                        },
+                        {
+                            name: 'Conversion goals',
+                            url: '/docs/web-analytics/conversion-goals',
+                        },
+                        {
+                            name: 'Live',
+                            url: '/docs/web-analytics/live',
+                        },
+                        {
+                            name: 'Web vitals',
+                            url: '/docs/web-analytics/web-vitals',
+                        },
+                        {
+                            name: 'Investigate traffic with PostHog AI',
+                            url: '/docs/web-analytics/investigate-traffic-ai',
+                        },
+                    ],
                 },
                 {
-                    name: 'Dashboard',
-                    url: '/docs/web-analytics/dashboard',
-                    icon: 'IconDashboard',
+                    name: 'PostHog MCP',
+                    url: '/docs/web-analytics/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/web-analytics/surfaces/desktop',
+                    icon: 'IconCode',
                     color: 'orange',
+                    featured: true,
                 },
                 {
-                    name: 'Live',
-                    url: '/docs/web-analytics/live',
-                    icon: 'IconLive',
-                    color: 'red',
-                    badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
-                    },
-                },
-                {
-                    name: 'Conversion goals',
-                    url: '/docs/web-analytics/conversion-goals',
-                    icon: 'IconFunnels',
-                    color: 'purple',
-                },
-                {
-                    name: 'Web vs Product Analytics',
-                    url: '/docs/web-analytics/web-vs-product-analytics',
-                    icon: 'IconGraph',
-                    color: 'red',
-                },
-                {
-                    name: 'Web vitals',
-                    url: '/docs/web-analytics/web-vitals',
-                    icon: 'IconWrench',
+                    name: 'API',
+                    url: '/docs/web-analytics/surfaces/api',
+                    icon: 'IconBrackets',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Sessions and pageviews',
+                },
+                {
+                    name: 'Sessions',
+                    url: '/docs/data/sessions',
+                    icon: 'IconClock',
+                    color: 'blue',
+                },
+                {
+                    name: 'Path cleaning',
+                    url: '/docs/web-analytics/path-cleaning',
+                    icon: 'IconFilter',
+                    color: 'orange',
+                    featured: true,
                 },
                 {
                     name: 'Bot and traffic detection',
@@ -4374,16 +4418,36 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Path cleaning',
-                    url: '/docs/web-analytics/path-cleaning',
-                    icon: 'IconFilter',
-                    color: 'orange',
+                    name: 'Channels and campaigns',
+                },
+                {
+                    name: 'Channel type',
+                    url: '/docs/data/channel-type',
+                    icon: 'IconMegaphone',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'UTM segmentation',
+                    url: '/docs/data/utm-segmentation',
+                    icon: 'IconTarget',
+                    color: 'blue',
+                },
+                {
+                    name: 'Campaign attribution troubleshooting',
+                    url: '/docs/web-analytics/campaign-attribution-troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'red',
+                },
+                {
+                    name: 'Ad platform sources',
                 },
                 {
                     name: 'Marketing analytics',
                     url: '/docs/web-analytics/marketing-analytics',
                     icon: 'IconGraph',
                     color: 'blue',
+                    featured: true,
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -4400,23 +4464,13 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Investigate traffic with PostHog AI',
-                    url: '/docs/web-analytics/investigate-traffic-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Query traffic with MCP',
-                    url: '/docs/web-analytics/query-traffic-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                },
-                {
                     name: 'Resources',
+                },
+                {
+                    name: 'Web vs product analytics',
+                    url: '/docs/web-analytics/web-vs-product-analytics',
+                    icon: 'IconGraph',
+                    color: 'red',
                 },
                 {
                     name: 'Troubleshooting',
@@ -4424,16 +4478,6 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'blue',
                     featured: true,
-                    children: [
-                        {
-                            name: 'General',
-                            url: '/docs/web-analytics/troubleshooting',
-                        },
-                        {
-                            name: 'Campaign attribution',
-                            url: '/docs/web-analytics/campaign-attribution-troubleshooting',
-                        },
-                    ],
                 },
                 {
                     name: 'Changelog',
@@ -4770,14 +4814,20 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Digests and alerts',
+                    url: '/docs/replay-vision/actions',
+                    icon: 'IconBell',
+                    color: 'yellow',
+                },
+                {
                     name: 'Webhooks',
                     url: '/docs/replay-vision/webhooks',
                     icon: 'IconWebhooks',
                     color: 'yellow',
                 },
                 {
-                    name: 'Improving accuracy',
-                    url: '/docs/replay-vision/quality',
+                    name: 'Calibration',
+                    url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
                 },
@@ -4946,7 +4996,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Client-side bootstrapping',
+                    name: 'Bootstrapping feature flags',
                     url: '/docs/feature-flags/bootstrapping',
                     icon: 'IconLaptop',
                     color: 'salmon',
@@ -7393,7 +7443,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7410,38 +7460,60 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Edit memory',
-                    url: '/docs/posthog-ai/edit-memory',
-                    icon: 'IconMemory',
-                    color: 'purple',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/posthog-ai/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/posthog-ai/surfaces/web-app',
+                        },
+                        {
+                            name: 'Example prompts',
+                            url: '/docs/posthog-ai/example-prompts',
+                        },
+                        {
+                            name: 'Write and edit SQL',
+                            url: '/docs/posthog-ai/write-and-edit-sql',
+                        },
+                        {
+                            name: 'Investigate web traffic',
+                            url: '/docs/posthog-ai/investigate-web-traffic',
+                        },
+                        {
+                            name: 'Summarize session replays',
+                            url: '/docs/posthog-ai/session-summaries',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog Slack',
+                    url: '/docs/posthog-ai/surfaces/slack',
+                    icon: 'IconMessage',
+                    color: 'red',
                     featured: true,
                 },
                 {
-                    name: 'Features',
-                },
-                {
-                    name: 'Platform and chat UI',
-                    url: '/docs/posthog-ai/platform-and-chat-ui',
-                    icon: 'IconLlmPromptManagement',
-                    color: 'orange',
-                },
-                {
-                    name: 'Context and commands',
-                    url: '/docs/posthog-ai/context-and-commands',
-                    icon: 'IconChat',
-                    color: 'seagreen',
+                    name: 'Modes and tools',
                 },
                 {
                     name: 'Tools and capabilities',
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Modes',
                     url: '/docs/posthog-ai/modes',
                     icon: 'IconToggle',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Plan mode',
@@ -7456,31 +7528,21 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Session summaries',
-                    url: '/docs/posthog-ai/session-summaries',
-                    icon: 'IconEye',
+                    name: 'Memory and context',
+                },
+                {
+                    name: 'Context and commands',
+                    url: '/docs/posthog-ai/context-and-commands',
+                    icon: 'IconChat',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Edit memory',
+                    url: '/docs/posthog-ai/edit-memory',
+                    icon: 'IconMemory',
                     color: 'purple',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Example prompts',
-                    url: '/docs/posthog-ai/example-prompts',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Write and edit SQL',
-                    url: '/docs/posthog-ai/write-and-edit-sql',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Investigate web traffic',
-                    url: '/docs/posthog-ai/investigate-web-traffic',
-                    icon: 'IconShield',
-                    color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Resources',
@@ -7488,20 +7550,20 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/posthog-ai/pricing',
-                    icon: 'IconShield',
-                    color: 'red',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/posthog-ai/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
                 {
                     name: 'Changelog',
                     url: '/docs/posthog-ai/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
-                },
-                {
-                    name: 'FAQ',
-                    url: '/docs/posthog-ai/faq',
-                    icon: 'IconShield',
-                    color: 'red',
                 },
             ],
         },
