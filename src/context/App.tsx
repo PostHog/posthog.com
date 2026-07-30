@@ -1557,9 +1557,6 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/surveys': {
-        toolbar: true,
-    },
     '/error-tracking': {
         toolbar: true,
     },
@@ -1573,9 +1570,6 @@ const appSettings: AppSettings = {
         toolbar: true,
     },
     '/ai': {
-        toolbar: true,
-    },
-    '/ai-observability': {
         toolbar: true,
     },
     '/mcp-analytics': {
