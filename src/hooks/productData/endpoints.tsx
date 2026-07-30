@@ -238,7 +238,7 @@ export const endpoints = {
                 'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'data-stack/managed-warehouse',
+            slug: 'context-warehouse/managed-warehouse',
             description:
                 "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
             className: '!size-6',
