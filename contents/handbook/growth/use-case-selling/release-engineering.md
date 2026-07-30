@@ -161,11 +161,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 | Eppo | Warehouse-native experimentation | Broader platform; doesn't require a data warehouse; integrated replay; we support [warehouse-backed experiment metrics](/docs/experiments/data-warehouse) too | Purpose-built for warehouse-native teams with an established dbt/Snowflake practice |
 | Split.io | Feature flags + experimentation | Broader platform; better pricing; integrated analytics | More mature enterprise integrations |
 
-**Honest assessment:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch is genuine and saves money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength).
-
-One correction to older versions of this page: **do not concede statistical methodology.** We ship frequentist and Bayesian, CUPED, holdouts, and warehouse-backed metrics. If a rep is still saying "they're more advanced on stats," they're reading a stale battlecard and giving away a deal we can win.
-
-Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, and increasingly have an agent open the follow-up fix — all in one tool.
+**Where PostHog stands:** Our strongest position is against teams paying LaunchDarkly prices for flags alone and not getting experiments included. The "flags + experiments + analytics in one platform" pitch is genuine and saves money. We're weaker against teams that need very complex flag management at enterprise scale (LaunchDarkly's core strength). Our sweet spot is engineering teams that want the full loop: flag a feature, measure its impact, debug issues with replay, and increasingly have an agent open the follow-up fix — all in one tool.
 
 ## Pain points & known limitations
 
@@ -196,7 +192,7 @@ Our sweet spot is engineering teams that want the full loop: flag a feature, mea
 - [ ] Enable [Session Replay](/docs/session-replay) and filter replays by flag variant to debug an issue
 - [ ] Review experiment results and use them to make a ship/no-ship decision
 - [ ] Plan second experiment to establish the workflow as a team habit
-- [ ] Point out [frequentist vs Bayesian](/docs/experiments/statistics-frequentist) early if they have a stats opinion — it defuses the most common objection before it's raised
+- [ ] Point out [frequentist vs Bayesian](/docs/experiments/statistics-frequentist) early if they have a stats opinion
 - [ ] For flag-heavy teams, install [PostHog Desktop](/docs/posthog-desktop) and show the enricher annotating their own flag calls with live rollout data
 
 ## Cross-sell pathways from this use case

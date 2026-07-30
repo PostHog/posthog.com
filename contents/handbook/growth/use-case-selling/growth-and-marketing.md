@@ -208,7 +208,7 @@ Usually **Web Analytics**, **Product Analytics**, or **Experiments**. Three comm
 | Heap | Auto-capture product analytics | We also auto-capture, plus flags, experiments, replay, surveys, workflows | Retroactive analytics (virtual events) is a strong pitch for non-technical teams |
 | Hotjar | Heatmaps, replay, on-site surveys | Full analytics platform underneath; experiments; we ship [heatmaps](/docs/toolbar/heatmaps) and surveys too | Simpler, more opinionated UX for non-technical CRO teams |
 
-**Honest assessment:** Our strongest position is against teams using 3+ tools to do what PostHog does in one. The consolidation pitch is genuine. We're weaker against teams deeply embedded in the Google ecosystem (GA4 + Google Ads + Looker) where switching cost is high. We're also weaker against HubSpot where marketing automation is the primary need. Our sweet spot is technical growth teams and PLG companies where the growth engineer is the buyer.
+**Where PostHog stands:** Our strongest position is against teams using 3+ tools to do what PostHog does in one. The consolidation pitch is genuine. We're weaker against teams deeply embedded in the Google ecosystem (GA4 + Google Ads + Looker) where switching cost is high. We're also weaker against HubSpot where marketing automation is the primary need. Our sweet spot is technical growth teams and PLG companies where the growth engineer is the buyer.
 
 ## Pain points & known limitations
 

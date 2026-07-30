@@ -59,7 +59,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 
 **Health checks as the zero-effort entry:** Health checks need no new instrumentation at all — they inspect the PostHog setup the customer already has. For an account that's stalled, this is a way to demonstrate proactive value without asking for an integration.
 
-**Observability → self-driving:** This is the strongest expansion in the playbook and the one most reps miss. Error tracking, logs, health checks, and session replay are all [signal sources](/docs/self-driving/inbox/sources) for [self-driving](/docs/self-driving), and there are scouts watching traces, logs, error tracking, web vitals, and observability gaps. An SRE team that has already instrumented for observability has, without meaning to, done all the setup work self-driving needs. See [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
+**Observability → self-driving:** This is the strongest expansion in the playbook. Error tracking, logs, health checks, and session replay are all [signal sources](/docs/self-driving/inbox/sources) for [self-driving](/docs/self-driving), and there are scouts watching traces, logs, error tracking, web vitals, and observability gaps. An SRE team that has already instrumented for observability has, without meaning to, done all the setup work self-driving needs. See [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
 
 ## Business impact of solving the problem
 
@@ -175,7 +175,7 @@ Usually **Error Tracking**. Team wants to catch exceptions and regressions. Comm
 | Better Stack | OTel-native logs, traces, uptime | Product analytics and session replay alongside; self-driving loop | Service map; more mature tracing; uptime/status pages |
 | Grafana (Loki/Tempo) | Open-source logs and traces you run yourself | Managed, no infra to operate; user context and business impact | Self-hostable at any scale; huge dashboarding ecosystem |
 
-**Honest assessment:** Our Observability story is materially stronger than it was, and it's still narrower than Datadog's. Error Tracking, Logs, and Web vitals are production-ready; Distributed tracing and Metrics are alpha; there's no service map, no profiling, no infrastructure or Kubernetes monitoring, and no synthetic monitoring. So we are not a Datadog replacement for a team whose job is infrastructure. We *are* a credible replacement for Sentry, and increasingly for a logs vendor, and the honest frame is: "we cover the application and the user; we don't cover your hosts." Where we're differentiated rather than just cheaper is the two ends nobody else joins up — the business impact of an incident on one side, and an agent that opens the fix on the other.
+**Where PostHog stands:** Our Observability story is materially stronger than it was, and it's still narrower than Datadog's. Error Tracking, Logs, and Web vitals are production-ready; Distributed tracing and Metrics are alpha; there's no service map, no profiling, no infrastructure or Kubernetes monitoring, and no synthetic monitoring. So we are not a Datadog replacement for a team whose job is infrastructure. We *are* a credible replacement for Sentry, and increasingly for a logs vendor, and the honest frame is: "we cover the application and the user; we don't cover your hosts." Where we're differentiated rather than just cheaper is the two ends nobody else joins up — the business impact of an incident on one side, and an agent that opens the fix on the other.
 
 ## Pain points & known limitations
 

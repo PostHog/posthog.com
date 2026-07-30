@@ -28,7 +28,7 @@ The buyer persona is distinct: AI engineers care about model-level metrics (late
 - **[Experiments](/docs/experiments)** — A/B test prompts, models, and parameters against real user behavior metrics. "Does GPT-4o produce better outcomes than Claude for this use case?" measured not by model benchmarks but by user conversion, retention, and satisfaction.
 - **[Error Tracking](/docs/error-tracking)** — Catch model failures, hallucinations (if detectable), timeouts, rate limit errors. Traditional error tracking applied to the AI layer. When combined with AI Observability, you get both the exception and the model-level context.
 - **[Session Replay](/docs/session-replay)** — See the user experience of AI features. Watch how users interact with AI-generated content: do they read it? Copy it? Regenerate? Leave? This qualitative layer is especially valuable because AI feature UX is hard to quantify with events alone.
-- **[Prompt management](/docs/prompt-management)** — Version, store, and roll out prompts from PostHog rather than hardcoding them, then tie a prompt version to the generations it produced. This closes what used to be our most-conceded gap against Langfuse.
+- **[Prompt management](/docs/prompt-management)** — Version, store, and roll out prompts from PostHog rather than hardcoding them, then tie a prompt version to the generations it produced.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Query model performance data in natural language. "Which prompts have the highest latency and cost?" or "Show me the error rate by model this week." Useful for AI engineers who want fast answers about their own AI infrastructure. ([Example prompts](/docs/posthog-ai/example-prompts))
 - **[self-driving](/docs/self-driving)** — An AI-observability scout watches generations for cost spikes, latency regressions, and quality drops on a schedule, and files an investigated report. For a team whose AI feature is the product, this is the loop applied to the thing they care most about.
 
@@ -170,7 +170,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 | Braintrust | LLM evals, logging, prompt playground | Broader platform; user behavior metrics; production monitoring not just offline evals; we ship [LLM-as-a-judge, code-based, and online evals](/docs/ai-evals) | Better prompt playground and offline iteration workflow; deeper dataset tooling |
 | Datadog LLM Monitoring | LLM tracing as part of broader APM | Product analytics integration; user behavior; better pricing for AI-native startups | Full APM stack; enterprise-grade; part of existing Datadog deployment for bigger companies |
 
-**Honest assessment:** Our strongest position is with AI-native startups and teams building AI features inside existing products. The pitch is "one platform for everything" instead of Langfuse + Amplitude + Sentry + a flag tool. We're weaker against enterprise teams already embedded in Datadog. Our sweet spot is AI teams that want model performance connected to user outcomes in one place, without managing four vendors.
+**Where PostHog stands:** Our strongest position is with AI-native startups and teams building AI features inside existing products. The pitch is "one platform for everything" instead of Langfuse + Amplitude + Sentry + a flag tool. We're weaker against enterprise teams already embedded in Datadog. Our sweet spot is AI teams that want model performance connected to user outcomes in one place, without managing four vendors.
 
 ## Pain points & known limitations
 
@@ -196,7 +196,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 - [ ] Verify traces are capturing: model, inputs, outputs, token counts, latency, cost
 - [ ] Set up a cost attribution dashboard: cost by model, by feature, by user/organization
 - [ ] Configure [AI Evals](/docs/ai-evals) for output quality scoring on the primary AI feature
-- [ ] If they're versioning prompts in code, show [prompt management](/docs/prompt-management) — it's the fastest way to kill the Langfuse comparison
+- [ ] If they're versioning prompts in code, show [prompt management](/docs/prompt-management)
 - [ ] Build a "Model Health" dashboard: latency, cost, error rates, quality scores
 - [ ] Enable [Error Tracking](/docs/error-tracking) for model failures, timeouts, and rate limit errors
 - [ ] Set up [Product Analytics](/docs/product-analytics) tracking for AI feature user interactions (accept, reject, regenerate, downstream actions)

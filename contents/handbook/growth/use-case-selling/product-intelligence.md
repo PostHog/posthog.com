@@ -36,7 +36,7 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 
 [self-driving](/docs/self-driving) cuts across all seven use cases, but it lands differently here than it does in Observability or Release Engineering. An error has an obvious right answer, so it converts into a merged pull request quickly. A product-intelligence finding — "users hesitate on the plan picker" — usually needs a human judgment call about what the product *should* do, so it more often arrives as a **needs input** report than as code.
 
-That's not a weakness, and reports are free (you're only billed $15 per pull request, first three each month free). But pitch it honestly: to a PM, self-driving's value here is a prioritized queue of investigated problems with the evidence attached, not an agent that redesigns your onboarding. Say "robots do the maintenance so your team does the creative work" and you'll be believed; overclaim and you won't. Full guidance in [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
+That's not a weakness, and reports are free (you're only billed $15 per pull request, first three each month free). To a PM, self-driving's value here is a prioritized queue of investigated problems with the evidence attached, not an agent that redesigns your onboarding. Full guidance in [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
 
 Write it lowercase and hyphenated, and keep the customer's product as the subject — we make *their* product self-driving. It's a capability, not a SKU you can add to an order form.
 
@@ -182,7 +182,7 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Contentsquare / Heap | Behavioral analytics, Sense Analyst (autonomous analysis agent) | One platform through to shipping the fix; better pricing | Sense Analyst is further along than our replay AI; deep enterprise CX tooling |
 | LogRocket | Replay, product analytics, Galileo AI (issue severity, Ask Galileo) | Broader platform; our signals feed an agent that opens PRs in your repo | Galileo is GA and dispatches Cursor agents today; strong frontend debugging |
 
-**Honest assessment:** Our strongest position is the breadth of the platform. No competitor offers analytics + replay + heatmaps + surveys + experiments + workflows in one tool. We're weaker against Amplitude in very large enterprises where their ML features and enterprise sales motion are more mature. We're weaker against Hotjar/Pendo for non-technical product teams who want a simpler, more opinionated UX.
+**Where PostHog stands:** Our strongest position is the breadth of the platform. No competitor offers analytics + replay + heatmaps + surveys + experiments + workflows in one tool. We're weaker against Amplitude in very large enterprises where their ML features and enterprise sales motion are more mature. We're weaker against Hotjar/Pendo for non-technical product teams who want a simpler, more opinionated UX.
 
 On AI specifically, be careful not to oversell: nearly every competitor shipped an AI analyst in the last year, several are GA while Replay Vision is still closed beta, and a customer who has seen Fullstory's or LogRocket's demo will not be impressed by "we have AI too." The defensible claims are narrower and better: the AI output is a first-class event you can join to the rest of your data, and the loop doesn't stop at an insight — it continues into a pull request. Our sweet spot is technical product teams at companies with engineers who value depth, flexibility, and not paying for 5 separate tools.
 
@@ -217,7 +217,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 - [ ] Introduce [PostHog AI](/docs/posthog-ai/allow-access) to PMs for self-serve querying
 - [ ] Set up one [Survey](/docs/surveys/creating-surveys) at a key friction point (post-signup NPS, feature feedback)
 - [ ] Plan first [Experiment](/docs/experiments) targeting a known drop-off point
-- [ ] Show [heatmaps](/docs/toolbar/heatmaps) on their highest-traffic page — fastest way to make replay feel concrete to a designer
+- [ ] Show [heatmaps](/docs/toolbar/heatmaps) on their highest-traffic page
 - [ ] If they're a fit for [Replay Vision](/replay-vision), get them on the waitlist early rather than at the point of need
 
 ## Cross-sell pathways from this use case
