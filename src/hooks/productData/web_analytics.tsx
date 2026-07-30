@@ -16,22 +16,21 @@ import {
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'
 import { applications, topFeatures } from './web_analytics/slides'
 
 export const webAnalytics = {
+    ...getTool('web_analytics'),
     Icon: IconPieChart,
-    name: 'Web Analytics',
-    handle: 'web_analytics',
     type: 'product_analytics',
     // Billed as product analytics events – Plans/calculator resolve against this billing product.
     billingType: 'product_analytics',
-    slug: 'web-analytics',
     teamSlug: 'web-analytics',
     forumTopicId: 348,
     color: 'green-2',
     colorSecondary: '[#37945D]',
-    category: 'analytics',
     wizardSupport: true,
     billedWith: 'Product Analytics',
     billedWithSlug: 'product-analytics',

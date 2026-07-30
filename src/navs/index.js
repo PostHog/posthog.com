@@ -3641,7 +3641,7 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/use-cases',
                                 },
                                 {
-                                    name: 'Tools reference',
+                                    name: 'MCP tools reference',
                                     url: '/docs/model-context-protocol/tools',
                                 },
                                 {
@@ -4826,8 +4826,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Improving accuracy',
-                    url: '/docs/replay-vision/quality',
+                    name: 'Calibration',
+                    url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
                 },

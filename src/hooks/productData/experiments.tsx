@@ -1,4 +1,5 @@
 import React from 'react'
+import { getTool } from '../../data/tools'
 import {
     IconFlask,
     IconEye,
@@ -20,10 +21,10 @@ import { features } from './experiments/features'
 import { applications, topFeatures } from './experiments/slides'
 
 export const experiments = {
+    ...getTool('experiments'),
     Icon: IconFlask,
-    name: 'Experiments',
-    handle: 'experiments',
     type: 'feature_flags',
+    sharesFreeTier: 'feature_flags',
     // Billed as feature flag requests – Plans/calculator resolve against this billing product.
     billingType: 'feature_flags',
     slug: 'experiments',
@@ -31,7 +32,6 @@ export const experiments = {
     forumTopicId: 350,
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     billedWith: 'Feature Flags',
     billedWithSlug: 'feature-flags',

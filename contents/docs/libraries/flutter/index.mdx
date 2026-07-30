@@ -197,6 +197,8 @@ To set up [session replay web](/docs/session-replay) or [mobile session replay](
 If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).
 This is needed as Flutter renders your app using a browser canvas element.
 
+On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) applies inside that canvas too — declare `session_recording.canvasCapture.maskRegionsFn` in the `posthog.init` call in your `web/index.html` to enable it (requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+). See [masking on Flutter Web](/docs/session-replay/privacy) under the Flutter tab.
+
 ## Surveys
 
 > **Note:** Surveys are supported in Flutter for **Web**, **iOS**, and **Android** platforms.

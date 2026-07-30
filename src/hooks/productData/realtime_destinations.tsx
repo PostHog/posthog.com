@@ -1,11 +1,10 @@
 import { IconDecisionTree } from '@posthog/icons'
 
 export const realtimeDestinations = {
+    handle: 'realtime_destinations',
     name: 'Realtime destinations',
     Icon: IconDecisionTree,
     type: 'realtime_destinations',
-    handle: 'realtime_destinations',
-    slug: 'realtime-destinations',
     color: 'seagreen',
     colorSecondary: 'green-2',
     // category: 'data', // Not set on purpose - this ensures it's hidden from navigation and products

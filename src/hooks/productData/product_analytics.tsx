@@ -18,18 +18,16 @@ import {
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
 import { applications, topFeatures } from './product_analytics/slides'
+import { getTool } from '../../data/tools'
 
 export const productAnalytics = {
+    ...getTool('product_analytics'),
     Icon: IconGraph,
-    name: 'Product Analytics',
-    handle: 'product_analytics',
     type: 'product_analytics',
-    slug: 'product-analytics',
     teamSlug: 'product-analytics',
     forumTopicId: 349,
     color: 'blue',
     colorSecondary: 'sky-blue',
-    category: 'analytics',
     wizardSupport: true,
     shortDescription: 'Understand how people use your product',
     pricingDescription:

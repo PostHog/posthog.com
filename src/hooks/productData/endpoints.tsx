@@ -16,17 +16,14 @@ import {
 } from '@posthog/icons'
 
 import CloudinaryImage from 'components/CloudinaryImage'
+import { getTool } from '../../data/tools'
 
 export const endpoints = {
-    name: 'Endpoints',
+    ...getTool('endpoints'),
     Icon: IconEndpoints,
-    description: 'Custom API endpoints powered by your PostHog data.',
-    handle: 'endpoints',
     type: 'endpoints',
     color: 'teal',
     colorSecondary: 'teal',
-    category: 'product_engineering',
-    slug: 'endpoints',
 
     // slider: {
     //     marks: [100000, 1000000, 10000000, 100000000],
