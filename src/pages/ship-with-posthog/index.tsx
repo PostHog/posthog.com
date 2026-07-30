@@ -20,7 +20,7 @@ export default function ShipWithPostHog(): JSX.Element {
         <>
             <SEO
                 title="Ship with PostHog – six tools, one loop"
-                description="Six pull requests, one per PostHog tool, and none of them started with a ticket. Open each one to see how your product fixes itself – then hit merge."
+                description="Six pull requests, one per PostHog tool, and none of them started with a ticket. Open each one to read the write-up, the evidence behind it, and the diff it proposes."
                 image="/images/og/default.png"
             />
             <div data-scheme="secondary" className="@container h-full w-full bg-primary text-primary">
@@ -42,8 +42,8 @@ export default function ShipWithPostHog(): JSX.Element {
                             </h1>
                             <p className="mx-auto mt-4 max-w-2xl text-base text-secondary @2xl:text-lg">
                                 Each one started in a different PostHog tool – an error, a session, a log line, a slow
-                                trace, a failing eval. None of them started with a ticket. Open one to see how it got
-                                here, then hit merge.
+                                trace, a failing eval. None of them started with a ticket. Open one to read what it
+                                found, the evidence behind it, and the diff it wants to ship.
                             </p>
                         </div>
 

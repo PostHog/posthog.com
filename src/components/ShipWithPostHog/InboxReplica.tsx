@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {
-    IconArrowLeft,
     IconChevronDown,
     IconSearch,
     IconSort,
@@ -8,26 +7,10 @@ import {
     IconFlag,
     IconRefresh,
     IconNotification,
-    IconPullRequest,
 } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { CallToAction } from 'components/CallToAction'
-import WizardCommand from 'components/WizardCommand'
-import Link from 'components/Link'
-import SelfDrivingStory from 'components/SelfDrivingStory'
 import ReportRow from './ReportRow'
-import PriorityBadge from './PriorityBadge'
-import { INBOX_ITEMS, originMeta, type InboxItem } from './inboxData'
-
-const TOTAL = INBOX_ITEMS.length
-
-const nextUnmerged = (merged: Set<string>, fromIndex: number): string | null => {
-    for (let step = 1; step <= TOTAL; step++) {
-        const item = INBOX_ITEMS[(fromIndex + step) % TOTAL]
-        if (!merged.has(item.id)) return item.id
-    }
-    return null
-}
+import ReportDetail from './ReportDetail'
+import { INBOX_ITEMS } from './inboxData'
 
 // A quiet, non-interactive filter chip mirroring the real Inbox filter bar.
 const FilterChip = ({ icon, label }: { icon: React.ReactNode; label: string }): JSX.Element => (
@@ -66,92 +49,7 @@ const Tab = ({
     </span>
 )
 
-const ReadingPane = ({
-    item,
-    merged,
-    onMerge,
-    onBack,
-}: {
-    item: InboxItem
-    merged: boolean
-    onMerge: () => void
-    onBack: () => void
-}): JSX.Element => {
-    const origin = originMeta(item)
-    const OriginIcon = origin.Icon
-
-    return (
-        <div className="p-4 @md:p-6">
-            <button
-                type="button"
-                onClick={onBack}
-                className="mb-4 inline-flex items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
-            >
-                <IconArrowLeft className="size-4" />
-                Back to inbox
-            </button>
-            <div className="flex items-start gap-3">
-                <PriorityBadge priority={item.priority} />
-                <div className="min-w-0 flex-1">
-                    <p className="m-0 font-mono text-xs text-secondary">
-                        {item.commitType}({item.scope})
-                    </p>
-                    <h3 className="m-0 mt-0.5 text-lg font-bold leading-snug text-primary @md:text-xl">{item.title}</h3>
-                    <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-secondary">
-                        <span className="font-mono">PostHog/posthog</span>
-                        <span aria-hidden>·</span>
-                        <span className="inline-flex items-center gap-1">
-                            <OriginIcon className={`size-3.5 ${origin.color}`} />
-                            {origin.primary}
-                            {origin.secondary && <span>· {origin.secondary}</span>}
-                        </span>
-                        <span aria-hidden>·</span>
-                        <span>{item.signalCount} signals</span>
-                        {item.prUrl && (
-                            <>
-                                <span aria-hidden>·</span>
-                                <Link
-                                    to={item.prUrl}
-                                    external
-                                    className="inline-flex items-center gap-1 font-mono font-semibold text-red dark:text-yellow"
-                                >
-                                    <IconPullRequest className="size-3.5" />#{item.prNumber}
-                                </Link>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
-            <div className="mt-5">
-                <SelfDrivingStory steps={item.steps} onMerge={onMerge} merged={merged} />
-            </div>
-        </div>
-    )
-}
-
-const InboxZero = (): JSX.Element => (
-    <div className="flex flex-col items-center justify-center gap-4 px-6 py-16 text-center">
-        <CloudinaryImage
-            src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_head_popcorn_82aa11ea69.png"
-            alt="A hedgehog eating popcorn"
-            imgClassName="w-32"
-        />
-        <h3 className="m-0 text-2xl font-bold text-primary">Inbox zero.</h3>
-        <p className="m-0 max-w-md text-secondary">
-            Six pull requests, six tools, one loop – and not one of them started with a ticket. This is a demo, but the
-            loop is real. Point it at your product and wake up to your own.
-        </p>
-        <div className="mt-2 w-full max-w-md">
-            <WizardCommand command="self-driving" />
-        </div>
-        <CallToAction to="/docs/self-driving/inbox" state={{ newWindow: true }} size="md">
-            Set up your Inbox
-        </CallToAction>
-    </div>
-)
-
 export default function InboxReplica(): JSX.Element {
-    const [mergedIds, setMergedIds] = useState<Set<string>>(new Set())
     const [openedIds, setOpenedIds] = useState<Set<string>>(new Set())
     const [openId, setOpenId] = useState<string | null>(null)
 
@@ -181,35 +79,12 @@ export default function InboxReplica(): JSX.Element {
         setHash(null)
     }
 
-    const mergeItem = (id: string): void => {
-        const merged = new Set(mergedIds).add(id)
-        setMergedIds(merged)
-        const index = INBOX_ITEMS.findIndex((i) => i.id === id)
-        const next = nextUnmerged(merged, index)
-        if (next) {
-            setOpenId(next)
-            setOpenedIds((prev) => new Set(prev).add(next))
-            setHash(next)
-        } else {
-            setHash(null)
-        }
-    }
-
-    const remaining = TOTAL - mergedIds.size
-    const allMerged = remaining === 0
     const openItemData = openId ? INBOX_ITEMS.find((i) => i.id === openId) ?? null : null
 
     return (
         <div className="@container overflow-hidden rounded-lg border border-primary bg-accent shadow-xl">
-            {allMerged ? (
-                <InboxZero />
-            ) : openItemData ? (
-                <ReadingPane
-                    item={openItemData}
-                    merged={mergedIds.has(openItemData.id)}
-                    onMerge={() => mergeItem(openItemData.id)}
-                    onBack={closeItem}
-                />
+            {openItemData ? (
+                <ReportDetail item={openItemData} onBack={closeItem} />
             ) : (
                 <>
                     {/* Scene header */}
@@ -226,7 +101,7 @@ export default function InboxReplica(): JSX.Element {
                     {/* Tab bar + scope picker */}
                     <div className="mt-3 flex items-end justify-between gap-2 border-b border-primary px-4 @md:px-6">
                         <div className="flex items-end gap-4 overflow-x-auto text-sm">
-                            <Tab label="Pull requests" count={remaining} active />
+                            <Tab label="Pull requests" count={INBOX_ITEMS.length} active />
                             <Tab label="Reports" count={254} />
                             <Tab label="Not actionable" count={0} staff />
                             <Tab label="Runs" />
@@ -263,7 +138,6 @@ export default function InboxReplica(): JSX.Element {
                             <ReportRow
                                 key={item.id}
                                 item={item}
-                                isMerged={mergedIds.has(item.id)}
                                 isUnread={!openedIds.has(item.id)}
                                 onOpen={() => openItem(item.id)}
                             />

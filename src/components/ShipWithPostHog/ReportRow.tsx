@@ -5,7 +5,6 @@ import { originMeta, type InboxItem } from './inboxData'
 
 interface ReportRowProps {
     item: InboxItem
-    isMerged: boolean
     isUnread: boolean
     onOpen: () => void
 }
@@ -14,17 +13,13 @@ interface ReportRowProps {
 // a mono commit-scope tag, a bold title, a two-line summary, an origin line
 // (source-product name for signal sources, "Scout · <category>" for scouts), and a
 // right rail with the PR badge, Archive/Review actions, and a relative timestamp.
-export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRowProps): JSX.Element {
+export default function ReportRow({ item, isUnread, onOpen }: ReportRowProps): JSX.Element {
     const origin = originMeta(item)
     const OriginIcon = origin.Icon
 
     const PrBadge = (): JSX.Element | null =>
         item.prNumber ? (
-            <span
-                className={`inline-flex items-center gap-1 rounded-full border px-1.5 py-0.5 font-mono text-xs font-semibold ${
-                    isMerged ? 'border-purple/40 bg-purple/10 text-purple' : 'border-green/40 bg-green/10 text-green'
-                }`}
-            >
+            <span className="inline-flex items-center gap-1 rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-green">
                 <IconPullRequest className="size-3" />#{item.prNumber}
             </span>
         ) : null
@@ -37,17 +32,11 @@ export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRo
                     <PriorityBadge priority={item.priority} />
                     <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                            {isUnread && !isMerged && (
-                                <span aria-label="Unread" className="size-2 shrink-0 rounded-full bg-blue" />
-                            )}
+                            {isUnread && <span aria-label="Unread" className="size-2 shrink-0 rounded-full bg-blue" />}
                             <span className="shrink-0 rounded border border-primary bg-accent px-1.5 py-0.5 font-mono text-xs text-secondary">
                                 {item.commitType}({item.scope})
                             </span>
-                            <span
-                                className={`min-w-0 text-sm font-semibold leading-snug ${
-                                    isMerged ? 'text-secondary line-through' : 'text-primary'
-                                }`}
-                            >
+                            <span className="min-w-0 text-sm font-semibold leading-snug text-primary">
                                 {item.title}
                             </span>
                         </div>
@@ -59,11 +48,6 @@ export default function ReportRow({ item, isMerged, isUnread, onOpen }: ReportRo
                                 {origin.primary}
                                 {origin.secondary && <span className="text-secondary/80">· {origin.secondary}</span>}
                             </span>
-                            {isMerged && (
-                                <span className="inline-flex items-center rounded-full bg-purple/15 px-1.5 py-0.5 font-semibold text-purple">
-                                    Merged
-                                </span>
-                            )}
                             {/* PR badge + time inline on mobile, where the right rail is hidden */}
                             <span className="flex items-center gap-2 @md:hidden">
                                 <PrBadge />

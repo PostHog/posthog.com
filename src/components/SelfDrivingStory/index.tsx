@@ -6,9 +6,8 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 /**
  * SelfDrivingStory – the "Scout → Signal → Investigate → PR → Merge" walkthrough,
  * generalized from the "Your product, fixing itself" section on /traces
- * (`TracesSelfHealing.tsx`) into a data-driven component so any product page (or
- * the /ship-with-posthog inbox) can tell the same five-beat story with its own
- * copy and screenshots.
+ * (`TracesSelfHealing.tsx`) into a data-driven component so any product page can
+ * tell the same five-beat story with its own copy and screenshots.
  *
  * The five stages – their labels, colors, and progress-bar styling – are fixed
  * so the story reads the same everywhere. A step may override the first stage's
