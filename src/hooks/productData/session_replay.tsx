@@ -14,6 +14,7 @@ import {
     IconChat,
     IconCode,
     IconMessage,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
@@ -74,6 +75,13 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -268,6 +276,94 @@ export const sessionReplay = {
             ['PMs & Designers', 'Spot friction, dead ends, and rage clicks'],
             ['Growth', 'Investigate funnel drop-off and onboarding bleed'],
             ['QA', 'Validating releases by watching real users instead of staged flows'],
+        ],
+    },
+    useCaseRamp: {
+        intro: 'Session replay works at three levels. You can watch recordings yourself, ask an agent to find and summarize them for you, or let PostHog code.',
+        scenario: 'Users keep clicking the same button and nothing happens',
+        columns: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                driver: "You pick which recordings to watch, and you're the one who spots the problem.",
+                scenario: {
+                    icon: 'IconRewindPlay',
+                    surfaces: ['web'],
+                    steps: [
+                        "A support ticket points you at one user's recording, and you watch them click the button six times and give up",
+                        'You filter for other recordings on the same page and find it happening to other people too',
+                        'You file the bug with a link to a recording, so nobody argues about whether it is real',
+                    ],
+                    outcome: 'You saw the exact problem, but only because a ticket pointed you at it.',
+                },
+                points: [
+                    {
+                        title: 'Finding them is on you',
+                        icon: 'IconHandwave',
+                        body: "You choose which sessions to watch, and there are always more of them than you have time for. Nothing here tells you which recording matters unless you already know what you're looking for.",
+                    },
+                    {
+                        title: 'Point an agent at your recordings instead',
+                        icon: 'IconSparkles',
+                        body: 'Every session you record becomes something PostHog can act on. Point an agent at them and it will read across thousands at once, catching a pattern you would otherwise only spot if you happened to open the right recording.',
+                    },
+                ],
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: "You describe the session you're looking for, and an agent finds it and tells you what happened in it.",
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI for sessions where someone clicked the checkout button more than once',
+                        'It returns the matching recordings and summarizes what they have in common',
+                        'You watch one to confirm, then send the summary to whoever owns checkout',
+                    ],
+                    outcome: 'You skipped the searching, but you still had to know to ask.',
+                },
+                points: [
+                    {
+                        title: 'Agents search what you record',
+                        icon: 'IconSearch',
+                        body: 'PostHog AI, Slack, and your editor through MCP all search the same recordings you would scroll through by hand. The more sessions you capture, the better the chance the one that explains the bug is among them.',
+                    },
+                    {
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: finding sessions, summarizing them, clustering drop-offs, and building playlists.',
+                    },
+                ],
+            },
+            {
+                level: 'Ship with PostHog',
+                surfaces: ['inbox', 'slack'],
+                driver: 'A scout watches for friction building up on one page or element, and reports it before anyone files a ticket.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'slack'],
+                    steps: [
+                        "A session replay scout compares clicks on each page against that page's own normal, so a spike on one button stands out",
+                        'It checks the pattern holds across enough separate people to rule out one frustrated user, then files a report in your Inbox',
+                        'The report links the recordings behind it, so you can watch the failure before deciding anything',
+                        'You reply @PostHog to fix it, and it opens a draft pull request against the code behind that button',
+                    ],
+                    outcome: 'No ticket, no searching. The report arrived with the recordings already attached.',
+                },
+                points: [
+                    {
+                        title: 'Your recordings are the evidence',
+                        icon: 'IconBrain',
+                        body: 'The scout reads the same sessions you would watch by hand, which is why a report names one button on one page instead of guessing. Those recordings are also how you check the fix worked afterwards.',
+                    },
+                    {
+                        title: 'It also notices when recording stops',
+                        icon: 'IconShield',
+                        body: 'If your recording volume falls while traffic holds steady, the scout flags it as its own problem. Sessions you failed to capture cannot be recovered later, so this is the one it wants you to see immediately.',
+                    },
+                ],
+            },
         ],
     },
     features,

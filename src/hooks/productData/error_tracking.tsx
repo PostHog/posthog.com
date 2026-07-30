@@ -14,6 +14,7 @@ import {
     IconChat,
     IconCode,
     IconMessage,
+    IconArrowUpRight,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
 import { applications, topFeatures } from './error_tracking/slides'
@@ -73,6 +74,13 @@ export const errorTracking = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -197,6 +205,95 @@ export const errorTracking = {
                 'Pull quick context on user-reported errors to triage severity and share details with product engineers',
             ],
             ['DevOps / SRE', 'Control cost, track releases, and group high-volume exceptions (coverage still growing)'],
+        ],
+    },
+    useCaseRamp: {
+        intro: 'Error tracking works at three levels. You can triage exceptions yourself, ask an agent to investigate one for you, or let PostHog code.',
+        scenario: 'A deploy starts throwing an error nobody has seen before',
+        columns: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                driver: 'You watch the issue list, decide which exceptions are worth your time, and read the stack traces yourself.',
+                scenario: {
+                    icon: 'IconBug',
+                    surfaces: ['web'],
+                    steps: [
+                        'An alert tells you a new issue is spiking, and you open it in the issue list',
+                        'The stack trace points at a file, and the session replay attached to it shows what the user did to trigger it',
+                        'You write the fix, ship it, and mark the issue resolved',
+                    ],
+                    outcome:
+                        'You had everything you needed to fix it. Noticing it in the first place was still on you.',
+                },
+                points: [
+                    {
+                        title: 'Triage is on you',
+                        icon: 'IconHandwave',
+                        body: 'Every exception lands in one list, and you decide which of them are worth an afternoon. A rare crash that breaks checkout for your biggest customer looks a lot like noise until somebody reads it.',
+                    },
+                    {
+                        title: 'Point an agent at your exceptions instead',
+                        icon: 'IconSparkles',
+                        body: 'Every exception you capture becomes something PostHog can act on, stack trace and affected user included. Point an agent at your issue list and it will read all of them, and it can already tell which file to open.',
+                    },
+                ],
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You describe the error you care about, and an agent finds it, explains the cause, and drafts the fix.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['mcp', 'slack'],
+                    steps: [
+                        'From your editor you ask which errors are new since the last deploy',
+                        'It pulls the stack trace, explains the likely cause, and writes the fix in the file you already have open',
+                        'Once it ships, you tag @PostHog in Slack to mark the issue resolved',
+                    ],
+                    outcome: 'You never left your editor, but you still had to ask which errors were new.',
+                },
+                points: [
+                    {
+                        title: 'Agents read the trace and the user',
+                        icon: 'IconSearch',
+                        body: 'An agent gets the same stack trace, session replay, and person properties you would, so it can name the line rather than guess at the cause.',
+                    },
+                    {
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: finding errors, inspecting traces, changing status, and routing issues to the right team.',
+                    },
+                ],
+            },
+            {
+                level: 'Ship with PostHog',
+                surfaces: ['inbox', 'desktop'],
+                driver: 'Every exception feeds the loop as it happens, and a scout decides which ones are worth acting on. When the trace points at one file, it writes the fix itself.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'desktop'],
+                    steps: [
+                        'Exceptions enter the loop the moment they are captured, so nobody has to notice the new error first',
+                        'An error tracking scout ties it to the deploy that introduced it and confirms it is hitting many people, rather than one client retrying',
+                        'The stack trace names a file in a repo PostHog knows, so it opens a draft pull request with the fix and a regression test',
+                        'You review and merge. Errors that need a judgment call land as a report in your Inbox instead',
+                    ],
+                    outcome: 'PostHog got from exception to pull request without anyone asking it to.',
+                },
+                points: [
+                    {
+                        title: 'A stack trace is the clearest place to start',
+                        icon: 'IconBrain',
+                        body: 'Most reports need a person to decide what to do about them. An exception is unusual: it names a file, a line, and the user who hit it, which is enough for PostHog to write a fix and let you check its work.',
+                    },
+                    {
+                        title: 'It catches fixes that did not hold',
+                        icon: 'IconRefresh',
+                        body: 'When an issue you marked resolved starts firing again, the scout raises it as a regression instead of filing it as something new. That check is also how PostHog verifies its own pull requests worked.',
+                    },
+                ],
+            },
         ],
     },
     features,

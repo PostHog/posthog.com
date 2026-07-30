@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    IconArrowUpRight,
     IconChat,
     IconCheckCircle,
     IconConfetti,
@@ -75,6 +76,13 @@ export const aiObservability = {
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
             props: { slides: topFeatures },
+        },
+        {
+            slug: 'use-case-ramp',
+            name: 'Ramp to self-driving',
+            template: 'use-case-ramp',
+            group: 'divided',
+            icon: <IconArrowUpRight className="size-4" />,
         },
         {
             slug: 'ask-anything',
@@ -187,6 +195,94 @@ export const aiObservability = {
             ['PMs', 'See which AI features people actually use, and whether using them changes retention'],
             ['Finance & leadership', 'Attribute token spend to models, features, and individual customers'],
             ['Support Engineers', 'Read the exact conversation behind a ticket, then watch the session it happened in'],
+        ],
+    },
+    useCaseRamp: {
+        intro: 'AI Observability works at three levels. You can read the traces yourself, ask an agent what your AI features cost and how fast they are, or let PostHog code.',
+        scenario: 'Your model spend doubles overnight and nobody knows why',
+        columns: [
+            {
+                level: 'Do it yourself',
+                surfaces: ['web'],
+                driver: 'You open the dashboard, read through traces, and work out which feature is spending the money.',
+                scenario: {
+                    icon: 'IconLlmAnalytics',
+                    surfaces: ['web'],
+                    steps: [
+                        'The invoice from your model provider comes in higher than last month, so you open the cost dashboard',
+                        'You break spend down by model, then by feature, and find one prompt sending far more tokens than you expected',
+                        'You open a trace from that feature, read the prompt that went in, and trim it',
+                    ],
+                    outcome: 'You found it in an afternoon, a month after it started costing you.',
+                },
+                points: [
+                    {
+                        title: 'Reading traces is on you',
+                        icon: 'IconHandwave',
+                        body: 'A trace tells you exactly what one call cost and why. Picking which one to read, out of the thousands your product made this week, is the slow part.',
+                    },
+                    {
+                        title: 'Point an agent at your traces instead',
+                        icon: 'IconSparkles',
+                        body: 'Every generation you capture becomes something PostHog can act on, with its model, latency, token count, and cost attached. Point an agent at them and it will compare all of it at once, instead of waiting for you to choose a starting point.',
+                    },
+                ],
+            },
+            {
+                level: 'Ask an agent',
+                surfaces: ['ai', 'slack', 'mcp', 'cli'],
+                driver: 'You ask what your AI features cost or how fast they are, and an agent runs the comparison.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI what you spent this week, broken down by model',
+                        'It names the model whose spend jumped, then pulls the most expensive individual calls behind it',
+                        'In Slack you ask whether a cheaper model would be slower, and it compares latency for you',
+                    ],
+                    outcome: 'Minutes instead of an afternoon, once you thought to check the bill.',
+                },
+                points: [
+                    {
+                        title: 'Agents read every generation',
+                        icon: 'IconSearch',
+                        body: 'Cost, latency, tokens, and errors are captured as ordinary PostHog events, so an agent can query them next to your product analytics. Tag your calls by feature and the answers get specific enough to act on.',
+                    },
+                    {
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: checking costs, finding expensive traces, catching errors, and comparing models.',
+                    },
+                ],
+            },
+            {
+                level: 'Ship with PostHog',
+                surfaces: ['inbox', 'slack'],
+                driver: 'A scout measures your cost, latency, errors, and evaluation scores against your own recent history, and reports what moved.',
+                scenario: {
+                    icon: 'IconHandMoney',
+                    surfaces: ['inbox', 'slack'],
+                    steps: [
+                        'An AI observability scout tracks spend against your own baseline, so it needs no budget threshold to tell that this is unusual',
+                        'It narrows the jump to one model and one feature, and attaches the traces it sampled as evidence',
+                        'The report lands in your Inbox and Slack, routed to whoever owns that feature',
+                        'Rewriting a prompt is a product decision, so it asks rather than opening a pull request. Reply in the thread and it will write the change',
+                    ],
+                    outcome: 'A month of overspending became a same-week report.',
+                },
+                points: [
+                    {
+                        title: 'Your own history is the threshold',
+                        icon: 'IconBrain',
+                        body: 'The scout compares this week to your weeks, not to a number somebody picked in advance. That is what lets it flag a latency drift on a single model without treating every busy afternoon as an incident.',
+                    },
+                    {
+                        title: 'It watches your evaluations too',
+                        icon: 'IconLlmPromptEvaluation',
+                        body: 'Cost and latency are easy to put on a dashboard. A scoring evaluation drifting downward, or one that broke and has been passing everything since, is the kind of thing a scout is there to catch.',
+                    },
+                ],
+            },
         ],
     },
     features,
