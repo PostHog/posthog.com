@@ -33,7 +33,7 @@ The **Bots** tab in [Web Analytics](/docs/web-analytics/dashboard) is a dedicate
 - **Crawlers** – every bot that hit you in the selected period, with its category, request count, and when it was last seen.
 - **Most crawled paths** – the pages bots request most, and how many different crawlers hit each one.
 
-The tab reads `$pageview`, `$screen`, and [`$http_log`](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) events, so forwarded server logs show up alongside anything the JavaScript SDK captured. Classification is based on the user agent, so events without one are excluded from this tab – another reason to forward server logs, which always carry it.
+The tab reads `$pageview`, `$screen`, and [`$http_log`](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) events, so forwarded server logs show up alongside anything the JavaScript SDK captured. Classification is based on the user agent, and events without one are excluded from this tab – so when forwarding logs, make sure each event sets `$raw_user_agent`.
 
 > **Note:** The Bots tab is in alpha and rolling out gradually – it may not be enabled for your project yet. The `$virt_*` properties and classification functions are available to everyone today.
 
@@ -59,10 +59,10 @@ AI traffic is worth measuring on its own: these visits are how AI tools discover
 To track them:
 
 1. **Capture the traffic.** Most AI bots don't run JavaScript, so the SDK never sees them. Forward your server or CDN logs as [`$http_log` events](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) – without this, you only measure the small slice of AI traffic that executes your snippet.
-2. **See who's reading your site.** Open the [Bots tab](#see-bots-in-the-bots-tab) and switch the trend to the **Category** breakdown, or build a trend filtered to `$virt_traffic_type` equals `AI Agent` and broken down by `$virt_bot_name` or `$virt_bot_operator` to compare OpenAI, Anthropic, Perplexity, and others.
+2. **See who's reading your site.** Open the [Bots tab](#see-bots-in-the-bots-tab) and switch the trend to the **Category** breakdown, or build a trend on the `$pageview` and `$http_log` events (a `$pageview`-only trend misses the server-side traffic you set up in step 1), filtered to `$virt_traffic_type` equals `AI Agent` and broken down by `$virt_bot_name` or `$virt_bot_operator` to compare OpenAI, Anthropic, Perplexity, and others.
 3. **See what they're reading.** Check **Most crawled paths** in the Bots tab, or break the same trend down by `$pathname`, to find which content AI tools hit most.
 
-Assistant traffic deserves particular attention: each `ai_assistant` request has a person on the other end asking about your content right now, even though the request itself is automated. A rise in assistant traffic to a page is a signal that AI tools are citing it.
+Assistant traffic deserves particular attention: each `ai_assistant` request has a person on the other end asking about your content right now, even though the request itself is automated. A rise in assistant traffic to a page means AI tools are reading it on users' behalf.
 
 ## Related
 
