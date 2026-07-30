@@ -69,6 +69,6 @@ Notes:
 
 **TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
-**TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. 
+**TAE handoff goes to CSM, always** (above threshold). Optionally, the TAE can retain the account to expand it when there is a specific opportunity that justifies the retention across a 12 month window. 
 
 **BDRs feed the funnel, they don't own the deal.** BDRs own top-of-funnel sourcing at Exploring and hand off to the TAE at Evaluating. Coverage ends at the handoff; the TAE owns the account from there.
