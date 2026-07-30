@@ -54,9 +54,17 @@ const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
-`"none"` makes HogFarm a *public* client, which is all it needs. If you want the GitHub grant endpoints, which hand PostHog a GitHub OAuth code so the user's GitHub tokens stay server-side, you need a *confidential* client instead: set `token_endpoint_auth_method` to `"private_key_jwt"`, publish a `jwks_uri`, and sign a short-lived assertion per request. A CIMD client can never hold a plain client secret, since there's no registration step where PostHog could hand you one.
+`"none"` makes HogFarm a *public* client, and PKCE is all it needs.
 
-With the file live, I register it. That's the call that turns the JSON into an OAuth app, and it's the first thing you do. The [provisioning docs have an interactive version](/docs/integrate/provisioning#register-your-client) where you paste your document URL and it registers for you, which is easier than assembling the call by hand.
+With the file live, I register it. That's the call that turns the JSON into an OAuth app, and it's the first thing you do. It's one request with nothing in it but the document URL:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -d '{"client_id": "https://hogfarm-guava-tri.vercel.app/.well-known/posthog-client-v6.json"}'
+```
+
+The [provisioning docs have an interactive version](/docs/integrate/provisioning#register-your-client) that does the same thing in the browser, if you'd rather paste a URL than assemble the call.
 
 What I'd flag is the response, because it's more useful than a bare success. It reports each check separately, so a broken setup tells you which piece is wrong instead of surfacing later as an opaque `401`, and a `capabilities` block spells out which endpoints you qualify for. Discovering that from a `403` three calls in is much less pleasant.
 
@@ -214,7 +222,7 @@ I drop that URL in an iframe and the farmer watches real visitors move through t
 
 These are the things that weren't obvious until I hit them:
 
-- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and registration just failed. PostHog couldn't fetch the metadata document through the SSO gate. The registration endpoint tells you this directly now, as a failed `metadata_document` check, but if you're staring at one, open the `.well-known` URL in an incognito window and make sure it loads.
+- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and registration just failed. PostHog couldn't fetch the metadata document through the SSO gate. The registration endpoint tells you this directly, as a failed `metadata_document` check, but if you're staring at one, open the `.well-known` URL in an incognito window and make sure it loads.
 - **Register in both regions if you serve both.** US and EU are separate deployments with separate databases. Registering against `us.posthog.com` does nothing for `eu.posthog.com`, and PostHog won't do it for you. I only serve US, so I register once, but the day I add EU it's a second call.
 - **Don't reach for `historical_migration` to seed backdated events.** I seed a week of demo pageviews so a new farm's dashboard isn't empty on day one, and my first instinct was the `historical_migration` flag since the timestamps are in the past. That flag routes the batch to a throttled ingestion pipeline that can take many minutes to become queryable, so the dashboard sat empty right after provisioning, the opposite of what I wanted. The regular capture pipeline takes backdated timestamps fine (it stores the event timestamp, not arrival time) and they show up in seconds. For a week-old seed, skip the flag.
 
