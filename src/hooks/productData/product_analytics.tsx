@@ -217,145 +217,88 @@ export const productAnalytics = {
         ],
     },
     useCaseRamp: {
+        intro: 'Product analytics works at three levels. You can build funnels and dashboards yourself, ask an agent to build them for you, or let PostHog code.',
+        scenario: 'Signup conversion drops eight points',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You build the funnels and dashboards, and read the answers yourself.',
-                useCases: [
+                driver: "You build the funnels and dashboards, and you're the one who checks them.",
+                scenario: {
+                    icon: 'IconFunnels',
+                    surfaces: ['web'],
+                    steps: [
+                        'You happen to open your signup dashboard and the number looks wrong',
+                        'You dig through paths and recordings to find the step where people now leave',
+                        'You file the bug, and the fix ships whenever someone picks it up',
+                    ],
+                    outcome: 'You caught it, but only because you happened to look.',
+                },
+                points: [
                     {
-                        title: 'See where people drop out of signup',
-                        icon: 'IconFunnels',
-                        surfaces: ['web'],
-                        steps: [
-                            'Build a funnel – the ordered steps from landing on your site to signing up',
-                            'PostHog shows how many people fall out at each step',
-                            'Open the biggest drop and watch a recording of someone who left',
-                        ],
+                        title: 'Checking it is on you',
+                        icon: 'IconHandwave',
+                        body: "You built this funnel, so it's on you to remember to check it. Nothing here flags a problem unless you go looking for one.",
                     },
                     {
-                        title: 'Keep your key numbers on one screen',
-                        icon: 'IconDashboard',
-                        surfaces: ['web'],
-                        steps: [
-                            'Save the funnel so you can come back to it',
-                            'Pin it to a dashboard alongside your other metrics',
-                            'Have it emailed to you weekly so you actually look at it',
-                        ],
-                    },
-                    {
-                        title: 'Get alerted when a number drops',
-                        icon: 'IconBell',
-                        surfaces: ['web'],
-                        steps: [
-                            'Set an alert on your signup rate',
-                            'Choose the level that means something is wrong',
-                            'PostHog messages you when it drops past that point',
-                        ],
-                    },
-                    {
-                        title: 'Answer a question no chart covers',
-                        icon: 'IconCode',
-                        surfaces: ['web'],
-                        steps: [
-                            'Open the SQL editor and query your raw event data',
-                            'Pull in person or company details if you need them',
-                            "Save the query so you don't rewrite it next month",
-                        ],
+                        title: 'Point an agent at it instead',
+                        icon: 'IconSparkles',
+                        body: "The same events and insights become something PostHog can act on. Point an agent at your data and it will watch every funnel you have, not just the one you happened to check, and catch drops you'd never think to look for.",
                     },
                 ],
             },
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe what you want to know, and an agent builds the query and hands you the answer.',
-                useCases: [
+                driver: 'You describe what you want to know, and an agent runs the query for you.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI: "why did signup conversion drop this week?"',
+                        'It queries the same funnel you would have built by hand and compares each step against last week',
+                        'It names the step that fell, and you go fix it',
+                    ],
+                    outcome: 'It takes minutes instead of an afternoon, but you still had to ask.',
+                },
+                points: [
                     {
-                        title: 'Ask for a chart in plain English',
-                        icon: 'IconMagicWand',
-                        surfaces: ['ai', 'mcp'],
-                        steps: [
-                            'Open PostHog AI in the web app',
-                            'Describe what you want: "daily active users, split by plan"',
-                            'It builds and runs the insight, and you save the useful ones',
-                        ],
+                        title: 'Agents read what you built',
+                        icon: 'IconSearch',
+                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the events and insights you already have. Better data in, better answers out.',
                     },
                     {
-                        title: 'Ask a data question in a Slack thread',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Tag @PostHog with "why did EU signups drop last week?"',
-                            'It answers in the thread, so the whole channel sees it',
-                            'Keep replying to dig further',
-                        ],
-                    },
-                    {
-                        title: 'Save what an agent builds, so you stop re-asking',
-                        icon: 'IconDashboard',
-                        surfaces: ['mcp'],
-                        steps: [
-                            'Ask your coding agent to save the chart, not just show it',
-                            'It creates the insight or dashboard, same as if you had clicked save',
-                            'Come back to it next time instead of asking again',
-                        ],
-                    },
-                    {
-                        title: 'Pull numbers into a script or CI job',
-                        icon: 'IconTerminal',
-                        surfaces: ['cli'],
-                        steps: [
-                            'Sign in once with posthog-cli login',
-                            'Call posthog-cli api – the same tool catalog the agents use',
-                            'Run SQL against your data without opening a browser',
-                        ],
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask from PostHog AI, Slack, your editor, or the CLI.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'PostHog watches your metrics without being asked, and brings you anything worth knowing.',
-                useCases: [
+                driver: 'Scouts scan your analytics on a schedule and flag what they find, often with a pull request attached.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'slack'],
+                    steps: [
+                        'A product analytics scout holds a baseline for your signup funnel, so it notices the drop before you do',
+                        'The report lands in your Inbox and Slack, naming the step that fell and the likely cause',
+                        'You tell PostHog to fix it. It writes the code and opens a pull request for you to review',
+                        'After you merge, PostHog re-checks the funnel to confirm the number recovered',
+                    ],
+                    outcome: 'PostHog spotted the drop before you did. Fixing it took one review.',
+                },
+                points: [
                     {
-                        title: 'Hear about a drop you missed',
-                        icon: 'IconPulse',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'A scout checks your funnels and retention on a schedule, unprompted',
-                            'It reports any rate that falls outside its normal range',
-                            'The report lands in your inbox with the most urgent first',
-                        ],
+                        title: 'PostHog reads what you built',
+                        icon: 'IconBrain',
+                        body: 'The scout reads the same funnels and events you built by hand. That data is what turns "something changed" into a clear cause and a pull request you can trust.',
                     },
                     {
-                        title: 'Get findings in your Slack channel',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Point the scout at one of your Slack channels',
-                            'Each report posts there as soon as it is found',
-                            'Reply with @PostHog to ask it to dig into the cause',
-                        ],
-                    },
-                    {
-                        title: 'Turn a finding into a pull request',
-                        icon: 'IconPullRequest',
-                        surfaces: ['desktop'],
-                        steps: [
-                            'Ask PostHog to act on the report',
-                            'It investigates, writes the code, and opens a pull request',
-                            'Nothing reaches your users until you merge it',
-                        ],
-                    },
-                    {
-                        title: 'Confirm the fix moved the number',
-                        icon: 'IconRefresh',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'You merge, and the change goes live',
-                            'PostHog re-checks the metric the fix was meant to improve',
-                            "If it didn't help, that becomes the next thing it flags",
-                        ],
+                        title: 'More data, sharper fixes',
+                        icon: 'IconTrends',
+                        body: "The more of your product's behavior you track in PostHog, the better the scout gets at telling a real problem from normal noise.",
                     },
                 ],
             },

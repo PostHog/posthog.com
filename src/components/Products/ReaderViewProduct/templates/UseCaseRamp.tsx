@@ -11,6 +11,7 @@ import {
     IconTerminal,
 } from '@posthog/icons'
 import Link from 'components/Link'
+import LetPostHogScroller from 'components/LetPostHogScroller'
 import { SectionComponentProps } from '../types'
 
 interface Surface {
@@ -46,22 +47,44 @@ const surfaces: Record<string, Surface> = {
     desktop: { name: 'PostHog Desktop', to: '/desktop', Icon: IconCoffee, color: 'text-brown', accent: 'bg-brown' },
 }
 
-interface RampUseCase {
-    title: string
+/**
+ * The section's one running scenario, as it plays out at a single level. The
+ * scenario itself (its title) is named once in `UseCaseRampData.scenario` and
+ * repeated on every tab – following the same incident through all three levels
+ * is what teaches the ramp, so each level only supplies its own version of the
+ * story, not a new topic.
+ */
+interface RampScenario {
     /**
      * An `@posthog/icons` export name, e.g. `'IconFunnels'`. Resolved at render
      * time the same way `components/MainNav` does it, so the data stays free of
      * JSX and per-hook icon imports. An unknown name renders no icon.
      */
     icon?: string
+    steps: string[]
     /**
-     * Keys into `surfaces`. Names which product(s) this use case happens in, so a
-     * reader can tell PostHog AI from Slack from an editor agent. Usually one, but
-     * some actions are identical from more than one entry point – e.g. asking a
-     * question in plain English works the same from PostHog AI or an MCP client.
+     * One-line takeaway contrasting this level with the others – what the reader
+     * gains (or still has to do) here. Rendered set off from the steps.
+     */
+    outcome?: string
+    /**
+     * Keys into `surfaces`. Names which product(s) this version of the story
+     * happens in, so a reader can tell PostHog AI from Slack from an editor agent.
      */
     surfaces?: string[]
-    steps: string[]
+}
+
+/**
+ * A card explaining what this level means for the ramp – why the manual work
+ * above the section is also fuel for the next level, what the scout actually
+ * reads, where the full prompt list lives. Prose, not steps: the steps belong
+ * to the scenario.
+ */
+interface RampPoint {
+    title: string
+    /** An `@posthog/icons` export name, resolved like `RampScenario.icon`. */
+    icon?: string
+    body: string
 }
 
 const UseCaseIcon = ({ name, color }: { name?: string; color?: string }): JSX.Element | null => {
@@ -95,10 +118,25 @@ interface RampColumn {
      * a shared sentence ends up describing the wrong tool's work.
      */
     driver?: string
-    useCases: RampUseCase[]
+    /** The running scenario as it plays out at this level. */
+    scenario?: RampScenario
+    /** What this level means for the ramp – usually two cards. */
+    points?: RampPoint[]
 }
 
 interface UseCaseRampData {
+    /**
+     * Frames the section against the rest of the page: the manual tool above is
+     * level one, and this is how the same data climbs to agents and self-driving.
+     * Tool-specific, like `driver`.
+     */
+    intro?: string
+    /**
+     * Title of the one incident traced through every level, e.g. 'Signup
+     * conversion drops eight points'. Named here once; each column carries its
+     * level's version of the story in `scenario`.
+     */
+    scenario?: string
     columns?: RampColumn[]
 }
 
@@ -111,7 +149,7 @@ interface UseCaseRampData {
 const levelMode: Record<string, string> = {
     'Do it yourself': 'Hands-on',
     'Ask an agent': 'Agent-assisted',
-    'Ship with PostHog': 'Autonomous',
+    'Ship with PostHog': 'Self-driving',
 }
 
 const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
@@ -119,19 +157,17 @@ const slugify = (value: string): string => value.toLowerCase().replace(/[^a-z0-9
 const resolveSurfaces = (keys?: string[]): Surface[] => (keys ?? []).map((key) => surfaces[key]).filter(Boolean)
 
 /**
- * Which product(s) a use case happens in, tagged at the bottom of its card. Every
- * use case carries at least one, so the who's-driving sentence above doesn't have
- * to list them all.
+ * Which product(s) the scenario happens in, tagged top-right of its card
+ * alongside the title. Every scenario carries at least one, so the who's-driving
+ * sentence above doesn't have to list them all.
  */
 const SurfaceTags = ({ keys }: { keys?: string[] }): JSX.Element | null => {
     const resolved = resolveSurfaces(keys)
     if (!resolved.length) return null
 
     // `bg-light` against the card's `bg-accent` is what stops the tag disappearing.
-    // `mt-auto` sits it on the card's bottom edge regardless of how many steps
-    // come before it, so tags line up across a row of cards.
     return (
-        <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
+        <div className="flex shrink-0 flex-wrap items-center justify-end gap-1.5">
             {resolved.map((surface) => (
                 <Link
                     key={surface.name}
@@ -155,9 +191,16 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-2">Ramp to self-driving</h2>
+            <LetPostHogScroller className="mb-2 text-2xl font-bold tracking-tight text-primary @xl:text-3xl" />
             <p className="m-0 mb-4 text-[15px] text-secondary">
-                Three ways to use {productData?.name}, from hands-on to hands-off the wheel.
+                {ramp?.intro ??
+                    `${productData?.name} works at three levels. Do it yourself, ask an agent to do it for you, or let PostHog code.`}
+                {ramp?.scenario && (
+                    <>
+                        {' '}
+                        For example: <strong className="text-primary">{ramp.scenario.toLowerCase()}</strong>.
+                    </>
+                )}
             </p>
             <Tabs.Root defaultValue={slugify(columns[0].level)}>
                 <Tabs.List
@@ -212,43 +255,57 @@ const UseCaseRamp = ({ id, productData }: SectionComponentProps): JSX.Element | 
                                 {column.driver && (
                                     <p className="m-0 text-[15px] leading-relaxed text-secondary">{column.driver}</p>
                                 )}
-                                {/*
-                                 * Only on this level, and only text – not a link. This section now sits directly
-                                 * above "AI prompts", which already has the full, clickable, tool-grouped prompt
-                                 * catalog. Say so instead of re-listing a smaller version of the same prompts.
-                                 */}
-                                {column.level === 'Ask an agent' && (
-                                    <p className="m-0 text-[13px] text-secondary">
-                                        For the full list of things you can ask, see AI prompts just below.
-                                    </p>
-                                )}
                             </div>
-                            <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
-                                {column.useCases.map((useCase) => (
-                                    <li
-                                        key={useCase.title}
-                                        className="flex h-full flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
-                                    >
-                                        <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                            <UseCaseIcon name={useCase.icon} color={productData?.color} />
-                                            {useCase.title}
+                            {column.scenario && (
+                                <div className="flex flex-col rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4">
+                                    {/*
+                                     * Same title on every tab (from `ramp.scenario`) – the repetition is the point.
+                                     * The "Example:" label makes clear this is one scenario among many, not the
+                                     * only thing this level is good for.
+                                     */}
+                                    <div className="mb-1 flex flex-wrap items-start justify-between gap-x-3 gap-y-1.5">
+                                        <p className="m-0 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                            <UseCaseIcon name={column.scenario.icon} color={productData?.color} />
+                                            <span className="font-normal text-secondary">Example:</span>{' '}
+                                            {ramp?.scenario}
                                         </p>
-                                        {/*
-                                         * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
-                                         * `list-style-type: none` directly on `.not-prose ol li`, which beats a
-                                         * value inherited from the ol.
-                                         */}
-                                        <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
-                                            {useCase.steps.map((step) => (
-                                                <li key={step} className="mt-1 list-decimal">
-                                                    {step}
-                                                </li>
-                                            ))}
-                                        </ol>
-                                        <SurfaceTags keys={useCase.surfaces} />
-                                    </li>
-                                ))}
-                            </ul>
+                                        <SurfaceTags keys={column.scenario.surfaces} />
+                                    </div>
+                                    {/*
+                                     * `list-decimal` sits on the li, not the ol: the `not-prose` layer sets
+                                     * `list-style-type: none` directly on `.not-prose ol li`, which beats a
+                                     * value inherited from the ol.
+                                     */}
+                                    <ol className="m-0 pl-5 text-[13px] leading-snug text-secondary">
+                                        {column.scenario.steps.map((step) => (
+                                            <li key={step} className="mt-1 list-decimal">
+                                                {step}
+                                            </li>
+                                        ))}
+                                    </ol>
+                                    {column.scenario.outcome && (
+                                        <p className="m-0 mt-3 border-t border-primary pt-2 text-[13px] font-semibold italic text-primary">
+                                            {column.scenario.outcome}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                            {!!column.points?.length && (
+                                <ul className="m-0 grid list-none gap-3 p-0 @md/reader-content:grid-cols-2">
+                                    {column.points.map((point) => (
+                                        <li
+                                            key={point.title}
+                                            className="rounded-md border border-primary bg-accent p-3 @md/reader-content:p-4"
+                                        >
+                                            <p className="m-0 mb-1 flex items-center gap-1.5 text-sm font-bold text-primary">
+                                                <UseCaseIcon name={point.icon} color={productData?.color} />
+                                                {point.title}
+                                            </p>
+                                            <p className="m-0 text-[13px] leading-snug text-secondary">{point.body}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </Tabs.Content>
                 ))}

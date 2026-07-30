@@ -196,145 +196,89 @@ export const surveys = {
         ],
     },
     useCaseRamp: {
+        intro: 'Surveys work at three levels. You can write the questions and read the answers yourself, ask an agent to summarize what came back, or let PostHog code.',
+        scenario: 'Dozens of users ask for the same feature: exporting their data to CSV',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You write the questions, choose who sees them, and read the answers.',
-                useCases: [
+                driver: 'You write the questions, choose who sees them, and read the answers yourself.',
+                scenario: {
+                    icon: 'IconMessage',
+                    surfaces: ['web'],
+                    steps: [
+                        'You launch an open-text survey asking what feature people miss most',
+                        'You read a few hundred responses and keep seeing the same request: export to CSV',
+                        'You file it, argue for it in planning, and eventually someone builds it',
+                    ],
+                    outcome: 'The demand was in there. You just had to read everything to find it.',
+                },
+                points: [
                     {
-                        title: 'Ask users a question at the right moment',
-                        icon: 'IconMessage',
-                        surfaces: ['web'],
-                        steps: [
-                            'Pick a template like "how likely are you to recommend us?"',
-                            'Choose who sees it, such as people who visited pricing last week',
-                            'Launch it – it appears in your product with no code to write',
-                        ],
+                        title: 'Reading them is on you',
+                        icon: 'IconHandwave',
+                        body: "You wrote the question, so you're the one reading every answer. That works fine until there are hundreds of them.",
                     },
                     {
-                        title: 'Compare answers with your other metrics',
-                        icon: 'IconGraph',
-                        surfaces: ['web'],
-                        steps: [
-                            'Each answer is stored as an event, like a click or a pageview',
-                            'Chart the score over time next to your other metrics',
-                            'Split it by plan, country, or any group you already track',
-                        ],
-                    },
-                    {
-                        title: 'See what someone was doing when they complained',
-                        icon: 'IconRewindPlay',
-                        surfaces: ['web'],
-                        steps: [
-                            'Open a response you want to understand',
-                            "Jump to the recording of that person's visit",
-                            'Watch the moment that caused the complaint',
-                        ],
-                    },
-                    {
-                        title: 'Track whether opinion improves',
-                        icon: 'IconCalendar',
-                        surfaces: ['web'],
-                        steps: [
-                            'Set the survey to repeat every quarter',
-                            'Each round is kept separate from the last',
-                            "Compare this quarter's score against the previous one",
-                        ],
+                        title: 'Point an agent at the answers instead',
+                        icon: 'IconSparkles',
+                        body: "Every response becomes something PostHog can act on. Point an agent at your survey and it will read every answer as it lands, catching a theme building before you'd ever finish reading them yourself.",
                     },
                 ],
             },
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the survey you want, and an agent drafts it and summarizes the answers.',
-                useCases: [
+                driver: 'You describe the survey you want, and an agent drafts it and summarizes what came back.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI for a survey asking what feature people want most',
+                        'It drafts the questions and targeting. You edit and launch',
+                        'In Slack you ask what people are asking for, and it summarizes the requests in the thread',
+                    ],
+                    outcome: 'Nobody read four hundred raw responses, but somebody still had to ask.',
+                },
+                points: [
                     {
-                        title: 'Get the survey drafted for you',
-                        icon: 'IconMagicWand',
-                        surfaces: ['ai', 'mcp'],
-                        steps: [
-                            'Open PostHog AI in the web app',
-                            'Ask for a satisfaction survey for people who visited pricing',
-                            'It writes the questions and targeting; you edit and launch',
-                        ],
+                        title: 'Agents read what came back',
+                        icon: 'IconSearch',
+                        body: 'Summaries and themes come from the responses you already collected by hand. More answers in, clearer themes out.',
                     },
                     {
-                        title: 'Ask what people said, in Slack',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Tag @PostHog with "what are people saying in the churn survey?"',
-                            'It summarizes the answers in the thread',
-                            'The whole team reads the same summary',
-                        ],
-                    },
-                    {
-                        title: 'Group the answers from your editor',
-                        icon: 'IconPlug',
-                        surfaces: ['mcp'],
-                        steps: [
-                            'Connect PostHog to Cursor or Claude Code once',
-                            'Ask it to sort the written answers into themes',
-                            'Fix the thing people keep mentioning',
-                        ],
-                    },
-                    {
-                        title: 'Reach PostHog from a script or CI',
-                        icon: 'IconTerminal',
-                        surfaces: ['cli'],
-                        steps: [
-                            'Sign in once with posthog-cli login',
-                            'Call posthog-cli api – the same tool catalog the agents use',
-                            'Run it from a local script or a CI pipeline',
-                        ],
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: drafting surveys, checking results, summarizing answers.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'PostHog reads the responses without being asked, and brings you the recurring themes.',
-                useCases: [
+                driver: 'A scout reads your responses on a schedule and flags what it finds, often with a pull request attached.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'slack'],
+                    steps: [
+                        'A surveys scout clusters the open-text answers on a schedule and sees CSV export requested again and again',
+                        'The report lands in your Inbox with the count and a few quotes from people asking for it',
+                        'You reply in the Slack thread telling PostHog to build it, and it opens a pull request',
+                        'You ship it, and the next round of responses stops mentioning it',
+                    ],
+                    outcome:
+                        'You never had to read every response yourself. The scout counted the requests, and shipping the most-wanted feature was one Slack reply away.',
+                },
+                points: [
                     {
-                        title: 'Learn what users keep complaining about',
-                        icon: 'IconStack',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog groups written answers into themes on a schedule, unprompted',
-                            'It reports when a theme grows or a score falls',
-                            'Nobody had to read the raw responses to spot it',
-                        ],
+                        title: 'Every request comes with a count',
+                        icon: 'IconBrain',
+                        body: "The scout doesn't just spot a request, it tracks how often it comes up. That's what turns a stray comment into a feature worth building.",
                     },
                     {
-                        title: 'Decide what to do about unhappy users',
+                        title: 'You stay in the loop',
                         icon: 'IconPeople',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'Feedback is an opinion, not a bug with an obvious fix',
-                            'So PostHog sends it to you rather than writing code',
-                            'You judge whether it is worth changing something',
-                        ],
-                    },
-                    {
-                        title: 'Turn a complaint into a code change',
-                        icon: 'IconPullRequest',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Post the report into a Slack channel',
-                            'Reply with @PostHog describing the change you want',
-                            'Review the pull request it opens',
-                        ],
-                    },
-                    {
-                        title: 'Spot people abandoning your survey',
-                        icon: 'IconThumbsDown',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog tracks who starts answering but never finishes',
-                            'It reports when that drop-off jumps',
-                            'Cut the questions nobody is getting through',
-                        ],
+                        body: 'Building a feature is a product decision, not an automatic fix, so the scout sends it to a person instead of writing code straight away. The pull request only happens once you ask for it, in the same thread.',
                     },
                 ],
             },

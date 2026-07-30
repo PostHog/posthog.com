@@ -230,145 +230,88 @@ export const experiments = {
         ],
     },
     useCaseRamp: {
+        intro: 'Experiments work at three levels. You can set up and read a test yourself, ask an agent to scaffold one for you, or let PostHog code.',
+        scenario: 'Does the new onboarding actually work?',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You set the test up and call the winner yourself.',
-                useCases: [
+                driver: 'You set the test up, ship the variant behind a flag, and call the winner yourself.',
+                scenario: {
+                    icon: 'IconSplitTesting',
+                    surfaces: ['web'],
+                    steps: [
+                        'You ship the new onboarding to half of users behind a flag, measuring activation',
+                        'You check back for two weeks and wait for the result to settle',
+                        'The new version wins, so you roll it out and retire the old one',
+                    ],
+                    outcome: "It's a real answer instead of a guess, and you earned it by hand.",
+                },
+                points: [
                     {
-                        title: 'Prove which version works better',
-                        icon: 'IconSplitTesting',
-                        surfaces: ['web'],
-                        steps: [
-                            'Pick the number that settles it, like completed purchases',
-                            'Show the current version to most people and the new one to the rest',
-                            'PostHog tells you which won and how sure it is',
-                        ],
+                        title: 'One test at a time',
+                        icon: 'IconHandwave',
+                        body: 'You pick the metric, ship the variant, and wait for the result. One test at a time, on your own schedule.',
                     },
                     {
-                        title: "Spot a test you can't trust",
-                        icon: 'IconBalance',
-                        surfaces: ['web'],
-                        steps: [
-                            'Check roughly the intended share of people saw each version',
-                            'A lopsided split usually means something is misconfigured',
-                            'Wait for enough people before believing the result',
-                        ],
-                    },
-                    {
-                        title: 'Roll out the version that won',
-                        icon: 'IconRocket',
-                        surfaces: ['web'],
-                        steps: [
-                            'Confirm the result is still holding',
-                            'Switch everyone over to the winning version',
-                            'Stop showing the one that lost',
-                        ],
-                    },
-                    {
-                        title: 'See whether your changes added up',
-                        icon: 'IconPeople',
-                        surfaces: ['web'],
-                        steps: [
-                            'Create a holdout – a small group kept out of every test',
-                            'Compare them against everyone else over time',
-                            'See the combined effect of everything you shipped',
-                        ],
+                        title: 'Point an agent at your results instead',
+                        icon: 'IconSparkles',
+                        body: 'Every test you have run becomes something PostHog can act on. Point an agent at your experiments and it will watch every one at once, catching a skewed split before you trust a bad result.',
                     },
                 ],
             },
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the test you want to run, and an agent sets it up and reports back.',
-                useCases: [
+                driver: 'You describe the test you want, and an agent scaffolds it and reports the results.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI: "test the new onboarding, 50/50, measure activation"',
+                        'It creates the experiment and the flag behind it, wired to your metric',
+                        'A week later you ask in Slack whether it is significant yet, and it answers with the numbers',
+                    ],
+                    outcome: 'The mechanics are handled, but you still decide what to test.',
+                },
+                points: [
                     {
-                        title: 'Describe the test you want to run',
-                        icon: 'IconMagicWand',
-                        surfaces: ['ai', 'mcp'],
-                        steps: [
-                            'Open PostHog AI in the web app',
-                            'Say "test the new checkout, 70/30, measure purchases"',
-                            'It sets up the test and the switch behind it',
-                        ],
+                        title: 'Agents build on your metrics',
+                        icon: 'IconSearch',
+                        body: 'The test an agent scaffolds is wired to the events and metrics you already track. The better your analytics, the sharper the experiment.',
                     },
                     {
-                        title: 'Ask whether a test is winning, in Slack',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Tag @PostHog with "is the checkout test significant yet?"',
-                            'It answers in the thread with the numbers behind it',
-                            'Decide together without anyone opening PostHog',
-                        ],
-                    },
-                    {
-                        title: 'Check a running test from your editor',
-                        icon: 'IconPlug',
-                        surfaces: ['mcp'],
-                        steps: [
-                            'Connect PostHog to Cursor or Claude Code once',
-                            'Ask for the results of the test you are working on',
-                            'Ship the winner from the same conversation',
-                        ],
-                    },
-                    {
-                        title: 'Reach PostHog from a script or CI',
-                        icon: 'IconTerminal',
-                        surfaces: ['cli'],
-                        steps: [
-                            'Sign in once with posthog-cli login',
-                            'Call posthog-cli api – the same tool catalog the agents use',
-                            'Run it from a local script or a CI pipeline',
-                        ],
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: creating tests, checking results, shipping winners.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
-                surfaces: ['inbox', 'slack'],
-                driver: 'PostHog checks your running tests without being asked, and brings you anything wrong.',
-                useCases: [
+                surfaces: ['inbox', 'desktop'],
+                driver: 'A scout checks your running tests on a schedule and flags what it finds before you trust a bad result.',
+                scenario: {
+                    icon: 'IconGraph',
+                    surfaces: ['inbox', 'desktop'],
+                    steps: [
+                        'PostHog proposes an onboarding fix from a report, and you ask for it to ship as a test rather than to everyone',
+                        'The change goes out behind a flag with activation as the deciding metric',
+                        'An experiments scout watches the running test for skewed splits, so a broken result cannot fool you',
+                        'The number decides whether the change stays, and the outcome feeds what PostHog looks at next',
+                    ],
+                    outcome: 'Every change PostHog makes on its own comes with proof that it worked.',
+                },
+                points: [
                     {
-                        title: 'Get warned before you trust a bad result',
-                        icon: 'IconWarning',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog reviews your running tests on a schedule, unprompted',
-                            'It reports when the split is skewed enough to invalidate the result',
-                            'You hear about it before you act on a wrong answer',
-                        ],
+                        title: 'Experiments close the loop',
+                        icon: 'IconRefresh',
+                        body: "A pull request is a guess about what will help. An experiment tells you whether the guess was right, so nobody has to take PostHog's word for it.",
                     },
                     {
-                        title: 'Close tests that finished long ago',
-                        icon: 'IconArchive',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog spots tests still running after they had already settled',
-                            'It reports them along with the result they reached',
-                            'You end them and free the traffic for the next test',
-                        ],
-                    },
-                    {
-                        title: "Prove an agent's change worked",
-                        icon: 'IconGraph',
-                        surfaces: ['desktop'],
-                        steps: [
-                            'Ask for the fix to go out as a test rather than to everyone',
-                            'The number decides whether it stays or goes',
-                            'The outcome feeds into what PostHog looks at next',
-                        ],
-                    },
-                    {
-                        title: 'Get test alerts in Slack',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Point the scout at one of your channels',
-                            'Reports post there as soon as they are found',
-                            'Reply with @PostHog to have it look into one',
-                        ],
+                        title: 'The scout catches bad tests too',
+                        icon: 'IconShield',
+                        body: 'On its own, the scout flags a test whose traffic split looks wrong, and tests that finished weeks ago but are still running. That way, every number PostHog acts on is one you can trust.',
                     },
                 ],
             },

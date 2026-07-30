@@ -223,145 +223,89 @@ export const featureFlags = {
         ],
     },
     useCaseRamp: {
+        intro: 'Feature flags work at three levels. You can create and roll out flags yourself, ask an agent to do it for you, or let PostHog code.',
+        scenario: 'Shipping a risky checkout rewrite',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You create the flags and decide who sees each change.',
-                useCases: [
+                driver: 'You create the flags, decide who sees each change, and flip the switches yourself.',
+                scenario: {
+                    icon: 'IconToggle',
+                    surfaces: ['web'],
+                    steps: [
+                        'You wrap the new checkout in a flag and turn it on for 10% of users',
+                        'You watch the dashboards, widen to half, then to everyone',
+                        'Months later the flag is still in your code, long after everyone has it',
+                    ],
+                    outcome: "It's a safe rollout, but the cleanup is on you, and it rarely happens.",
+                },
+                points: [
                     {
-                        title: 'Release a change to a few users first',
-                        icon: 'IconToggle',
-                        surfaces: ['web'],
-                        steps: [
-                            'Create a flag – a switch in PostHog that your code checks',
-                            'Wrap the new code in it so it only runs when the flag is on',
-                            'Turn it on for 10% of users, watch, then widen it',
-                        ],
+                        title: 'Cleanup is on you',
+                        icon: 'IconHandwave',
+                        body: "You're the one deciding what to roll out, to whom, and when to widen it. You're also the one who has to remember to clean it up once everyone has it.",
                     },
                     {
-                        title: 'Check how many people a change will reach',
-                        icon: 'IconTarget',
-                        surfaces: ['web'],
-                        steps: [
-                            'Write the rule for who gets it, like "pro plan only"',
-                            'PostHog shows how many of your users match that rule',
-                            'Tighten the rule if that number is bigger than you expected',
-                        ],
-                    },
-                    {
-                        title: 'Switch a broken feature off without deploying',
-                        icon: 'IconToggleOff',
-                        surfaces: ['web'],
-                        steps: [
-                            'Flip the flag off in PostHog',
-                            'The new code stops running for everyone within seconds',
-                            'Fix it properly later instead of rushing a hotfix',
-                        ],
-                    },
-                    {
-                        title: 'Give one customer early access',
-                        icon: 'IconPeople',
-                        surfaces: ['web'],
-                        steps: [
-                            'Add a rule matching that company or email domain',
-                            'Only they see the feature; everyone else gets the current version',
-                            'No separate build and no long-lived branch to maintain',
-                        ],
+                        title: 'Point an agent at your flags instead',
+                        icon: 'IconSparkles',
+                        body: 'Every flag you create becomes something PostHog can act on. Point an agent at your flag roster and it will watch the whole thing, catching the ones nobody remembers turning off.',
                     },
                 ],
             },
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You describe the flag you want, and an agent creates and targets it for you.',
-                useCases: [
+                driver: 'You describe the flag or rollout you want, and an agent makes the change.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['mcp', 'slack'],
+                    steps: [
+                        'From your editor, you ask your coding agent for the flag while you write the code that checks it',
+                        'It creates the flag with the targeting you described, ready to roll out at 10%',
+                        'Later you tag @PostHog in Slack: "widen new-checkout to half of users"',
+                    ],
+                    outcome: 'You never left your editor or Slack, but you still drove every step.',
+                },
+                points: [
                     {
-                        title: 'Describe the flag you want',
-                        icon: 'IconMagicWand',
-                        surfaces: ['ai', 'mcp'],
-                        steps: [
-                            'Open PostHog AI in the web app',
-                            'Say "roll new-checkout out to 20% of pro users"',
-                            'It creates the flag and the targeting for you to check',
-                        ],
+                        title: 'Flags are how agents ship safely',
+                        icon: 'IconShield',
+                        body: "An agent that wraps its change in a flag ships with a kill switch built in. That's what makes it safe to let PostHog ship changes on its own at the next level.",
                     },
                     {
-                        title: 'Roll a flag out from a Slack thread',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            'Tag @PostHog with "roll the new dashboard flag out to 25%"',
-                            'It makes the change and replies in the thread',
-                            'Everyone in the channel sees what changed',
-                        ],
-                    },
-                    {
-                        title: 'Create a flag from Cursor or Claude Code',
-                        icon: 'IconPlug',
-                        surfaces: ['mcp'],
-                        steps: [
-                            'Connect PostHog to your coding agent once',
-                            'Ask for the flag while you write the code that checks it',
-                            'Drop the flag name straight into your branch',
-                        ],
-                    },
-                    {
-                        title: 'Reach PostHog from a script or CI',
-                        icon: 'IconTerminal',
-                        surfaces: ['cli'],
-                        steps: [
-                            'Sign in once with posthog-cli login',
-                            'Call posthog-cli api – the same tool catalog the agents use',
-                            'Run it from a local script or a CI pipeline',
-                        ],
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: creating, rolling out, inspecting, and cleaning up flags.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'desktop'],
-                driver: 'PostHog audits your flags without being asked, and brings you the tidying-up.',
-                useCases: [
+                driver: 'A scout audits your flag roster on a schedule and flags what it finds, often with a pull request attached.',
+                scenario: {
+                    icon: 'IconPullRequest',
+                    surfaces: ['inbox', 'desktop'],
+                    steps: [
+                        'A feature flags scout reviews your roster on a schedule and finds new-checkout fully rolled out for months',
+                        'The old code path is dead, so it opens a draft pull request removing the check and the unused branch',
+                        'Flags that need a human call land as a report in your Inbox instead',
+                        'You merge the cleanup, and the codebase ends the week simpler than it started',
+                    ],
+                    outcome:
+                        'You never had to notice the old flag yourself. PostHog found it and opened the pull request to remove it.',
+                },
+                points: [
                     {
-                        title: 'Find old flags cluttering your code',
-                        icon: 'IconPulse',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'A scout reviews every flag you have on a schedule, unprompted',
-                            'It reports the ones rolled out long ago that now do nothing',
-                            'You clear them out before they confuse the next person',
-                        ],
+                        title: 'Your flag roster is the context',
+                        icon: 'IconBrain',
+                        body: "The scout looks at every flag you and your agents have created, and how long each has been rolled out. That's how it tells old dead code from a rollout that quietly broke.",
                     },
                     {
-                        title: 'Have dead code deleted for you',
-                        icon: 'IconPullRequest',
-                        surfaces: ['desktop'],
-                        steps: [
-                            'A flag left on for everyone means the old path is dead code',
-                            'PostHog opens a pull request removing the check and the unused branch',
-                            'You read the diff and merge it',
-                        ],
-                    },
-                    {
-                        title: 'Control the blast radius',
-                        icon: 'IconShield',
-                        surfaces: ['desktop'],
-                        steps: [
-                            'Ask for the fix to ship behind a flag',
-                            'The new code only runs once you switch the flag on',
-                            'If it misbehaves, switch it off instead of reverting a deploy',
-                        ],
-                    },
-                    {
-                        title: 'Catch a rollout that stopped working',
-                        icon: 'IconBug',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog watches which users actually receive each flag',
-                            'It reports when that changes sharply – nobody getting it, say',
-                            'You find out before your customers tell you',
-                        ],
+                        title: 'The safety rail for autonomous changes',
+                        icon: 'IconToggleOff',
+                        body: 'When PostHog ships a fix from a report, it goes out behind a flag. Nothing runs until you switch it on, and turning it off again takes one click, no redeploy needed.',
                     },
                 ],
             },

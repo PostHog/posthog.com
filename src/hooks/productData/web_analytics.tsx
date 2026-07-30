@@ -220,145 +220,88 @@ export const webAnalytics = {
         ],
     },
     useCaseRamp: {
+        intro: 'Web analytics works at three levels. You can read the dashboard yourself, ask an agent about your traffic, or let PostHog code.',
+        scenario: 'A traffic channel falls off a cliff',
         columns: [
             {
                 level: 'Do it yourself',
                 surfaces: ['web'],
-                driver: 'You read the traffic dashboard yourself.',
-                useCases: [
+                driver: 'You open the dashboard and do the watching yourself.',
+                scenario: {
+                    icon: 'IconGlobe',
+                    surfaces: ['web'],
+                    steps: [
+                        'Monday morning you open the dashboard and referral traffic looks low',
+                        'You compare each channel against last month to see how long it has been falling',
+                        'You take it to whoever owns that channel',
+                    ],
+                    outcome: 'You caught it, three weeks after it started.',
+                },
+                points: [
                     {
-                        title: 'See who visits and where they came from',
-                        icon: 'IconGlobe',
-                        surfaces: ['web'],
-                        steps: [
-                            'Open the dashboard – it is ready with nothing to configure',
-                            'Read visitors, most-viewed pages, and traffic sources',
-                            'Break it down by search, social, or ad campaign',
-                        ],
+                        title: 'Noticing it is on you',
+                        icon: 'IconHandwave',
+                        body: "You're the one opening the dashboard and comparing this week to last. Nothing here notices a change unless you go looking.",
                     },
                     {
-                        title: "Check a release didn't hurt your site",
-                        icon: 'IconPulse',
-                        surfaces: ['web'],
-                        steps: [
-                            'Compare traffic to a page before and after you shipped',
-                            'See whether more people now leave immediately',
-                            'Check whether the page got slower to load',
-                        ],
-                    },
-                    {
-                        title: 'Decide which page to rewrite first',
-                        icon: 'IconPencil',
-                        surfaces: ['web'],
-                        steps: [
-                            'Sort pages by how many people leave without doing anything',
-                            'Check how far down the worst ones people actually scroll',
-                            'Fix the page losing you the most visitors',
-                        ],
-                    },
-                    {
-                        title: 'Watch a launch land in real time',
-                        icon: 'IconLive',
-                        surfaces: ['web'],
-                        steps: [
-                            'Open live traffic',
-                            'See visitors arriving as it happens',
-                            'Confirm your announcement is actually reaching people',
-                        ],
+                        title: 'Point an agent at your traffic instead',
+                        icon: 'IconSparkles',
+                        body: 'Every session becomes something PostHog can act on. Point an agent at your traffic and it will hold a baseline for every channel, catching a drop the moment it starts.',
                     },
                 ],
             },
             {
                 level: 'Ask an agent',
                 surfaces: ['ai', 'slack', 'mcp', 'cli'],
-                driver: 'You ask about your traffic in plain English, and an agent runs the numbers for you.',
-                useCases: [
+                driver: 'You ask about your traffic in plain English, and an agent runs the numbers.',
+                scenario: {
+                    icon: 'IconMagicWand',
+                    surfaces: ['ai', 'slack'],
+                    steps: [
+                        'You ask PostHog AI: "which channels dropped in the last 30 days?"',
+                        'It compares each source against its usual pattern and names the one that fell',
+                        'You share the answer in Slack, so marketing and engineering read the same number',
+                    ],
+                    outcome: 'The comparison took seconds, once you thought to ask.',
+                },
+                points: [
                     {
-                        title: 'Ask about your traffic in plain English',
-                        icon: 'IconMagicWand',
-                        surfaces: ['ai', 'mcp'],
-                        steps: [
-                            'Open PostHog AI in the web app',
-                            'Ask "did traffic to /pricing change after we shipped yesterday?"',
-                            'It runs the comparison and shows you what moved',
-                        ],
+                        title: 'Agents read the same stream',
+                        icon: 'IconSearch',
+                        body: 'PostHog AI, the Slack app, and your editor through MCP all answer using the same traffic history you already have.',
                     },
                     {
-                        title: 'Get a traffic answer in a Slack thread',
-                        icon: 'IconAtSign',
-                        surfaces: ['slack'],
-                        steps: [
-                            "Tag @PostHog with a question about last week's traffic",
-                            'It answers in the thread',
-                            'Marketing and engineering end up looking at the same number',
-                        ],
-                    },
-                    {
-                        title: 'Pull traffic data into your editor',
-                        icon: 'IconPlug',
-                        surfaces: ['mcp'],
-                        steps: [
-                            'Connect PostHog to Cursor or Claude Code once',
-                            'Ask for the weekly summary while you write the changelog',
-                            'Paste the numbers straight in',
-                        ],
-                    },
-                    {
-                        title: 'Reach PostHog from a script or CI',
-                        icon: 'IconTerminal',
-                        surfaces: ['cli'],
-                        steps: [
-                            'Sign in once with posthog-cli login',
-                            'Call posthog-cli api – the same tool catalog the agents use',
-                            'Run it from a local script or a CI pipeline',
-                        ],
+                        title: 'The full prompt list is below',
+                        icon: 'IconMessage',
+                        body: 'AI prompts, right below this section, lists everything you can ask: traffic questions, comparisons, weekly summaries.',
                     },
                 ],
             },
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'slack'],
-                driver: 'PostHog watches your traffic without being asked, and brings you anything unusual.',
-                useCases: [
+                driver: 'A scout scans your traffic on a schedule and flags what it finds. It opens a pull request when the cause is on your site.',
+                scenario: {
+                    icon: 'IconPulse',
+                    surfaces: ['inbox', 'slack'],
+                    steps: [
+                        'A web analytics scout compares each channel to its usual pattern for the time of year, unprompted',
+                        'It catches the referral drop in week one, and the report lands in your Inbox',
+                        'A traffic problem usually lives outside your code, so it routes to you rather than opening a pull request',
+                        'When the cause is your site, like a page that went slow, you reply @PostHog and review the pull request it opens',
+                    ],
+                    outcome: 'A three-week blind spot became a day-one report.',
+                },
+                points: [
                     {
-                        title: 'Hear about traffic changes that matter',
-                        icon: 'IconActivity',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog compares each source against its normal pattern for the time of year',
-                            'It reports real changes and ignores the usual ups and downs',
-                            'You stop checking the dashboard every morning',
-                        ],
+                        title: 'Your history is the baseline',
+                        icon: 'IconBrain',
+                        body: 'The scout tells drift from noise only because months of your traffic taught it what normal looks like. More history, fewer false alarms.',
                     },
                     {
-                        title: "Know when the problem isn't in your code",
-                        icon: 'IconPeople',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'A referral source drying up is usually not a bug',
-                            'PostHog sends that to you rather than writing code',
-                            'You take it to whoever owns that channel',
-                        ],
-                    },
-                    {
-                        title: 'Get a slow page fixed',
-                        icon: 'IconStethoscope',
-                        surfaces: ['slack'],
-                        steps: [
-                            'PostHog reports which pages became slow, and what is causing it',
-                            'Reply with @PostHog to have it work on the page',
-                            'Review the pull request it opens',
-                        ],
-                    },
-                    {
-                        title: 'Get the weekly summary without asking',
-                        icon: 'IconCalendar',
-                        surfaces: ['inbox'],
-                        steps: [
-                            'PostHog sends it on a schedule',
-                            'Traffic, sources, and conversions compared with last week',
-                            'Skim it instead of building it',
-                        ],
+                        title: 'One stream, many readers',
+                        icon: 'IconStack',
+                        body: "The same events power product analytics too, so a traffic signal connects to the in-product behavior behind it. That's useful context for the next report.",
                     },
                 ],
             },
