@@ -26,7 +26,7 @@ Hiring here is also time consuming. I've spent more than 350 hours in interviews
 
 For both these reasons I wanted to explain what makes good candidates stand out, and also because the usual signals stop working at these volumes. "Six years of B2B SaaS experience" describes several hundred people in the pile and isn't much of a differentiator. So here's what actually makes candidates stand out in a good way, and what to do about it if you're a non-traditional candidate.
 
-> If you're interested in a role, apply directly. Every posting says [where we hire](/handbook/people/hiring-process#countries-where-we-employ-people) and [what the process looks like](/handbook/people/hiring-process#hiring-process). Hiring managers won't take a 10 minute chat before you apply.
+> If you're interested in a role, apply directly. Every job post says [where we hire](/handbook/people/hiring-process#countries-where-we-employ-people) and [what the process looks like](/handbook/people/hiring-process#hiring-process).
 
 ## What do we look for in marketing roles?
 
