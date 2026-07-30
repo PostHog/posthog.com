@@ -1557,9 +1557,6 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/error-tracking': {
-        toolbar: true,
-    },
     '/logs': {
         toolbar: true,
     },
