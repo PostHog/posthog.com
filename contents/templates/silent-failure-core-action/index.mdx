@@ -1,0 +1,82 @@
+---
+title: Silent failure in your core action
+subtitle: 'Where does your most important flow fail without telling anyone?'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png
+showTitle: true
+badge: beta
+filters:
+  type:
+    - self-driving
+  maintainer: official
+question: Where does your most important flow fail without telling anyone?
+premise: >-
+  Every product has one action that is the whole point: checkout, publish, send, deploy. When it
+  fails loudly, you hear about it. This watches for the failure you never hear about – the user
+  clicks, something half-happens, and they leave without telling you.
+discriminator:
+  speaksUp: Completions fall below their recent norm while attempts hold steady.
+  staysQuiet: Attempts and completions fall together – that's traffic, not breakage.
+  why: >-
+    Steady demand with falling success is the shape of a silent failure. Separating the two is
+    what keeps this from crying wolf every time traffic dips.
+watches:
+  - name: Error tracking
+    detail: The failures that throw – exceptions in the flow, grouped and triaged by users affected.
+  - name: Session replay
+    detail: The failures that don't – rage clicks, dead clicks, and abandonment inside the flow.
+  - name: Your product events
+    detail: The attempt/completion pair for your core action, compared against its recent norm.
+requires:
+  - label: A core action with a start and finish event
+    level: required
+  - label: Session replay
+    level: recommended
+scout:
+  name: signals-scout-silent-failure
+  description: >-
+    Watches the core action funnel for silent failures – completions falling while attempts hold
+    steady – and reports the likely cause.
+  schedule: Daily
+  body: |
+    # Silent failure in the core action
+
+    Watch the product's core action for failures that never surface as errors.
+
+    ## Discriminator
+
+    Speak up when completions of the core action fall below their recent norm **while attempts
+    hold steady**. Stay quiet when attempts and completions fall together – that is a traffic
+    change, not breakage.
+
+    ## Explore
+
+    1. Compare the attempt and completion event counts for the core action against the trailing
+       two-week norm, bucketed daily.
+    2. If completions diverged, check for a deploy in the window.
+    3. Look for new or spiking error-tracking issues on the same code path, including handled
+       exceptions.
+    4. Check session replays of failed attempts for stalls, rage clicks, or abandonment.
+
+    ## Disqualifiers
+
+    - Both attempts and completions moved together.
+    - The change is within normal weekday/weekend variance.
+    - A known, announced maintenance window covers the period.
+report:
+  title: Publish completions down 34% while attempts hold steady
+  priority: P1
+  source: Scout · core action funnel
+  receivedAgo: 2h
+  affected: 47 users affected
+  body: >-
+    Since the 14:02 deploy, publish attempts are flat but completions dropped from a 92% to a
+    61% success rate. Replay shows users clicking **Publish**, watching the spinner, and
+    leaving after ~8 seconds. Error tracking shows a new timeout, swallowed by the retry
+    wrapper, so no error page was shown.
+  suggestedAction: >-
+    Surface the timeout to the user and fix the silent-swallow path.
+  actionNote: An agent opens the pull request; you review and merge.
+---

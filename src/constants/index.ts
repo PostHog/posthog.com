@@ -1,5 +1,7 @@
-// Paths that have raw markdown available for copying/downloading
-export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook', '/blog', '/newsletter'] as const
+// Paths that have raw markdown available for copying/downloading.
+// `/templates` is here so self-driving scout templates are fetchable as agent context – the
+// same file powers the UI and the .md mirror. See components/SelfDrivingInbox/README.md.
+export const MARKDOWN_CONTENT_PATHS = ['/docs', '/handbook', '/blog', '/newsletter', '/templates'] as const
 export const isMarkdownContentPath = (path: string) =>
     MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))
 

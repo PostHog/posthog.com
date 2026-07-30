@@ -73,9 +73,45 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterReport {
+      title: String
+      priority: String
+      source: String
+      receivedAgo: String
+      body: String
+      suggestedAction: String
+      actionNote: String
+      affected: String
+    }
+    type FrontmatterDiscriminator {
+      speaksUp: String
+      staysQuiet: String
+      why: String
+    }
+    type FrontmatterWatches {
+      name: String
+      detail: String
+    }
+    type FrontmatterRequires {
+      label: String
+      level: String
+    }
+    type FrontmatterScout {
+      name: String
+      description: String
+      body: String
+      schedule: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      report: FrontmatterReport
+      question: String
+      premise: String
+      discriminator: FrontmatterDiscriminator
+      watches: [FrontmatterWatches]
+      requires: [FrontmatterRequires]
+      scout: FrontmatterScout
       seo: FrontmatterSEO
       featureFlag: String
       hideFromIndex: Boolean

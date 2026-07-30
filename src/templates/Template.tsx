@@ -15,6 +15,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import TemplateCTAs from 'components/TemplateCTAs'
+import SelfDrivingInboxPage from 'components/SelfDrivingInbox/Page'
 
 const A = (props) => <Link {...props} />
 
@@ -38,6 +39,9 @@ export default function Template({ data }) {
     const surveyTemplates = allTemplates.filter((t) =>
         t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'survey')
     )
+    const selfDrivingTemplates = allTemplates.filter((t) =>
+        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'self-driving')
+    )
     const workflows = workflowTemplates?.nodes || []
 
     const templatesMenu = [
@@ -57,6 +61,17 @@ export default function Template({ data }) {
                   {
                       name: 'Surveys',
                       children: surveyTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
+                          name: title,
+                          url: slug,
+                      })),
+                  },
+              ]
+            : []),
+        ...(selfDrivingTemplates.length > 0
+            ? [
+                  {
+                      name: 'Self-driving',
+                      children: selfDrivingTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
                           name: title,
                           url: slug,
                       })),
@@ -93,6 +108,24 @@ export default function Template({ data }) {
         Section,
     }
 
+    // Self-driving templates have no page of their own: the inbox is the entire surface, so
+    // /templates/<slug> renders the same UI with that report pre-selected. Everything it needs
+    // lives in frontmatter, which is why these MDX bodies are empty.
+    // See components/SelfDrivingInbox/README.md.
+    if (templateType === 'self-driving') {
+        const templateSlug = slug.replace(/^\/templates\//, '').replace(/\/$/, '')
+        return (
+            <>
+                <SEO
+                    image={`/images/templates/${slug.split('/')[2]}.png`}
+                    title={`${title} – self-driving template - PostHog`}
+                    description={pageData?.frontmatter?.subtitle || description || excerpt}
+                />
+                <SelfDrivingInboxPage initialSlug={templateSlug} />
+            </>
+        )
+    }
+
     return (
         <>
             <SEO
@@ -122,18 +155,35 @@ export default function Template({ data }) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                     <div className="mb-12">
-                        <TemplateCTAs
-                            urls={{
-                                primary:
-                                    templateType === 'survey'
-                                        ? `https://app.posthog.com/surveys/guided/new`
-                                        : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
-                                secondary:
-                                    templateType === 'survey'
-                                        ? `https://app.posthog.com/surveys/guided/new`
-                                        : `https://app.posthog.com/dashboards`,
-                            }}
-                        />
+                        {templateType === 'self-driving' ? (
+                            <TemplateCTAs
+                                urls={{
+                                    // /inbox/config is the inbox's Configuration tab, where the
+                                    // scout fleet and its create button live (see InboxTabKey in
+                                    // posthog/posthog). No prefill support exists yet – when the
+                                    // app grows a ?createScout=<slug> param, point this there.
+                                    primary: `https://app.posthog.com/inbox/config`,
+                                    secondary: `/docs/self-driving/setup`,
+                                }}
+                                labels={{
+                                    primary: 'Open your scout fleet',
+                                    secondary: 'Set up self-driving',
+                                }}
+                            />
+                        ) : (
+                            <TemplateCTAs
+                                urls={{
+                                    primary:
+                                        templateType === 'survey'
+                                            ? `https://app.posthog.com/surveys/guided/new`
+                                            : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
+                                    secondary:
+                                        templateType === 'survey'
+                                            ? `https://app.posthog.com/surveys/guided/new`
+                                            : `https://app.posthog.com/dashboards`,
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
             </ReaderView>
@@ -158,8 +208,19 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
+                subtitle
                 filters {
                     type
+                }
+                report {
+                    title
+                    priority
+                    source
+                    receivedAgo
+                    body
+                    suggestedAction
+                    actionNote
+                    affected
                 }
             }
             parent {

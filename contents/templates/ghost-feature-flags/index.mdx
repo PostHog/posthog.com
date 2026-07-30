@@ -1,0 +1,82 @@
+---
+title: Ghost feature flags
+subtitle: 'Which flags are still evaluating for code you already deleted?'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png
+showTitle: true
+badge: beta
+filters:
+  type:
+    - self-driving
+  maintainer: official
+question: Which feature flags are still evaluating for code you already deleted?
+premise: >-
+  Every flag was a decision you already made. The rollout finished, the losing branch got
+  deleted, and the flag stayed – still evaluating, still branching, still something a new
+  engineer has to reason about. This finds the flags nobody remembers and writes the pull
+  request that removes them.
+discriminator:
+  speaksUp: >-
+    A flag is still evaluated in production but its key no longer appears anywhere in the
+    codebase, or it has sat at 100% or 0% for months with nothing changing.
+  staysQuiet: The flag is mid-rollout – percentage moving, or recently edited.
+  why: >-
+    Both signals mean the decision is over and the code is still asking the question. A flag
+    that's actively rolling out is doing its job.
+watches:
+  - name: Your feature flags
+    detail: Which flags still evaluate, how often, at what rollout, and how long they've sat there.
+  - name: Your codebase
+    detail: Your repo is a signal source too. If the flag key isn't in the code, the flag is a ghost.
+requires:
+  - label: GitHub connected
+    level: required
+  - label: Feature flags in use
+    level: required
+scout:
+  name: signals-scout-flag-debt
+  description: >-
+    Finds feature flags still evaluating in production whose keys no longer appear in the
+    codebase, or that have sat at a terminal rollout for months.
+  schedule: Weekly
+  body: |
+    # Ghost feature flags
+
+    Find flags that are still evaluated in production but no longer branch any code.
+
+    ## Discriminator
+
+    Speak up when a flag is still evaluated **and** either (a) its key does not appear anywhere
+    in the connected repository, or (b) it has been at 100% or 0% with no edits for 60+ days.
+    Stay quiet for any flag whose rollout percentage changed recently or that was edited in the
+    last 30 days – that flag is mid-rollout and doing its job.
+
+    ## Explore
+
+    1. List flags with recent evaluations, their rollout percentage, and last-modified date.
+    2. For each candidate, search the connected repository for the flag key (string literal and
+       any constant that resolves to it).
+    3. Confirm the evaluation volume so the report can state the cost of leaving it.
+    4. Group findings into one report rather than filing one per flag.
+
+    ## Disqualifiers
+
+    - The key appears in the repo, even only in tests or config.
+    - The flag was edited recently or its percentage is between 1 and 99.
+    - The flag is used for a kill switch or ops toggle (check the description for intent).
+report:
+  title: 3 flags still evaluating for code that no longer branches on them
+  priority: P3
+  source: Scout · flag debt
+  receivedAgo: 1d
+  body: >-
+    `new-checkout-flow` has been at 100% for four months and its key hasn't appeared in the
+    repo since the cleanup that removed the old path. It's still evaluated ~40,000 times a
+    day. `beta-nav` has been at 0% for five months. `legacy-export` is at 100% with its key
+    absent from the codebase.
+  suggestedAction: >-
+    Delete all three flags and remove the dead conditionals.
+  actionNote: The diff is three files; the flag definitions go with it.
+---

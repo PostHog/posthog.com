@@ -43,7 +43,7 @@ interface UnifiedTemplate {
     id: string
     name: string
     description: string
-    type: 'dashboard' | 'survey' | 'workflow'
+    type: 'dashboard' | 'survey' | 'workflow' | 'self-driving'
     tags: string[]
     image_url?: string
     url: string
@@ -61,6 +61,7 @@ const templateTags: Record<string, string[]> = {
     'Customer churn rate (CCR) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer effort score (CES) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer satisfaction (CSAT) survey': ['Surveys & Feedback', 'Product'],
+    'Ghost feature flags': ['Self-driving', 'Engineering'],
     'Growth analytics dashboard': ['Analytics', 'Marketing'],
     'Hubspot starter report template': ['Sales', 'Marketing'],
     'Landing page report': ['Marketing', 'Analytics'],
@@ -74,6 +75,7 @@ const templateTags: Record<string, string[]> = {
     'Product analytics dashboard': ['Analytics', 'Product'],
     'Product health metrics': ['Product', 'Analytics'],
     'Product-market fit (PMF) survey': ['Surveys & Feedback', 'Product'],
+    'Silent failure in your core action': ['Self-driving', 'Engineering'],
     'Real time analytics dashboard': ['Analytics', 'Ops'],
     'Stripe starter report template': ['Billing & Revenue', 'Sales'],
     'Trial started → upgrade nudge': ['Sales', 'Billing & Revenue'],
@@ -97,6 +99,7 @@ const categories = [
     'Billing & Revenue',
     'Surveys & Feedback',
     'AI',
+    'Self-driving',
 ]
 
 const categoryColors: Record<string, string> = {
@@ -111,6 +114,7 @@ const categoryColors: Record<string, string> = {
     'Billing & Revenue': 'bg-orange/15 text-orange',
     'Surveys & Feedback': 'bg-green/15 text-green',
     AI: 'bg-purple/15 text-purple',
+    'Self-driving': 'bg-red/15 text-red',
     Other: 'bg-light-yellow/15 text-light-yellow',
 }
 
@@ -281,7 +285,9 @@ export default function TemplatesLibrary(): JSX.Element {
     const sortedTemplates = [...filteredTemplates].sort((a, b) => a.name.localeCompare(b.name))
 
     return (
-        <div className="@container">
+        // not-prose: Editor wraps its children in prose styles, which underline every link –
+        // including each card's title and badge. Cards supply their own type styling.
+        <div className="@container not-prose">
             {/* Hero */}
             <div className="text-center mb-8">
                 <h1 className="text-4xl @xl:text-5xl font-bold text-primary mb-3">
@@ -340,6 +346,26 @@ export default function TemplatesLibrary(): JSX.Element {
                     ))}
                 </div>
             </div>
+
+            {/* Self-driving templates read better as an inbox than as cards, since the thing they
+                produce is a report. Point at that experience rather than duplicating it here. */}
+            {categoryFilter === 'Self-driving' && (
+                <Link
+                    to="/templates/self-driving"
+                    state={{ newWindow: true }}
+                    className="not-prose mb-6 flex items-center justify-between gap-4 rounded-lg border border-primary bg-accent px-5 py-4 no-underline hover:border-yellow"
+                >
+                    <span>
+                        <span className="block text-[15px] font-semibold text-primary">
+                            These are best read as an inbox
+                        </span>
+                        <span className="block text-sm text-secondary">
+                            Browse the reports these scouts file, the way they'd land for you.
+                        </span>
+                    </span>
+                    <span className="shrink-0 text-sm font-semibold text-red dark:text-yellow">Open the inbox →</span>
+                </Link>
+            )}
 
             {/* Card grid */}
             <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-4">
