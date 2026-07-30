@@ -57,8 +57,10 @@ Anyone who completed onboarding for these three has an empty AI Observability ta
 
 **Existing users are unaffected.** Nothing here changes ingestion or event schemas. Users who already completed onboarding keep working; the change only affects what new users are told to install.
 
-## Open question for the reviewer
+## Resolved: depth stays website-only
 
-In-app users get the corrected integration but not the complete session-tree examples, since depth is website-only by design. That means an in-app user still ends up capturing generations without sessions or spans unless they visit the docs.
+In-app users get the corrected integration but not the complete session-tree examples, since depth is website-only by design. An in-app user therefore still captures generations without sessions or spans unless they visit the docs.
 
-If that is not the desired outcome, the alternative is adding sessions and spans as explicitly `optional` in-app steps — more wizard length in exchange for a complete tree by default. This was deliberately deferred, not overlooked, and is worth an explicit decision.
+This was raised and accepted: both in-app onboarding and the docs are expected to move to the wizard command as the primary install recommendation, so the in-app step content becomes less load-bearing over time. No `optional` in-app steps for sessions and spans will be added in this pass.
+
+Worth noting for whoever picks up the wizard work: the design's page matrix is the same information the wizard needs to emit a correct instrumentation, since it records, per integration, which session mechanism exists and whether tool spans are automatic or need manual capture.
