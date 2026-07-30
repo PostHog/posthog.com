@@ -1,4 +1,5 @@
 import React from 'react'
+import { getTool } from '../../data/tools'
 import {
     IconFlask,
     IconEye,
@@ -14,7 +15,6 @@ import {
     IconChat,
     IconCode,
     IconMessage,
-    IconNewspaper,
     IconToggle,
     IconArrowUpRight,
 } from '@posthog/icons'
@@ -22,10 +22,10 @@ import { features } from './experiments/features'
 import { applications, topFeatures } from './experiments/slides'
 
 export const experiments = {
+    ...getTool('experiments'),
     Icon: IconFlask,
-    name: 'Experiments',
-    handle: 'experiments',
     type: 'feature_flags',
+    sharesFreeTier: 'feature_flags',
     // Billed as feature flag requests – Plans/calculator resolve against this billing product.
     billingType: 'feature_flags',
     slug: 'experiments',
@@ -33,7 +33,6 @@ export const experiments = {
     forumTopicId: 350,
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product_engineering',
     wizardSupport: 'In development',
     billedWith: 'Feature Flags',
     billedWithSlug: 'feature-flags',
@@ -105,21 +104,20 @@ export const experiments = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**

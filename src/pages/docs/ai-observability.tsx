@@ -8,6 +8,8 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
+import { buildProductMenuTabs, ProductSwitcher } from 'components/Products/ReaderViewProduct'
+import useProduct from 'hooks/useProduct'
 
 export const Content = ({ quickLinks = false }) => {
     const { compact } = useLayoutData()
@@ -56,8 +58,11 @@ export const Content = ({ quickLinks = false }) => {
 }
 
 const AIObservability: React.FC = () => {
+    const productData = useProduct({ handle: 'ai_observability' })
+    const menuTabs = buildProductMenuTabs({ productData, activeSurface: 'docs' })
+
     return (
-        <ReaderView>
+        <ReaderView menuTabs={menuTabs} productSelect={<ProductSwitcher activeHandle="ai_observability" />}>
             <SEO title="AI Observability - Documentation - PostHog" />
 
             <Intro
