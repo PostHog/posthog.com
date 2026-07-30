@@ -141,6 +141,13 @@ export default function OSButton({
         xl: 'size-6',
     }
 
+    // @posthog/icons ship as width="100%" with no height, so they take their size from
+    // whatever box contains them. A bare inline span ignores width/height, which left the
+    // icon free to fill the container any time an ancestor wasn't blockifying the wrapper.
+    const iconWrapperClasses = `inline-flex shrink-0 ${iconSizeClasses[size]}${
+        iconClassName ? ` ${iconClassName}` : ''
+    }`
+
     // Label and chip sizes relative to button text
     const labelSizeClasses = {
         xs: 'text-[10px]',
@@ -182,9 +189,7 @@ export default function OSButton({
                         width === 'full' ? fullWidthChildClasses[size] : ''
                     }`}
                 >
-                    {icon && iconPosition === 'left' && (
-                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
-                    )}
+                    {icon && iconPosition === 'left' && <span className={iconWrapperClasses}>{icon}</span>}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
                     {external && !hideExternalIcon ? (
@@ -199,15 +204,11 @@ export default function OSButton({
                             {chip}
                         </span>
                     )}
-                    {icon && iconPosition === 'right' && (
-                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
-                    )}
+                    {icon && iconPosition === 'right' && <span className={iconWrapperClasses}>{icon}</span>}
                 </span>
             ) : (
                 <>
-                    {icon && iconPosition === 'left' && (
-                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
-                    )}
+                    {icon && iconPosition === 'left' && <span className={iconWrapperClasses}>{icon}</span>}
                     {children}
                     {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
                     {external && !hideExternalIcon ? (
@@ -222,9 +223,7 @@ export default function OSButton({
                             {chip}
                         </span>
                     )}
-                    {icon && iconPosition === 'right' && (
-                        <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
-                    )}
+                    {icon && iconPosition === 'right' && <span className={iconWrapperClasses}>{icon}</span>}
                 </>
             )}
         </>

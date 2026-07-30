@@ -59,7 +59,13 @@ export const ListItem = ({
                 >
                     <span className="flex items-center space-x-2">
                         {image && (
-                            <img className={`icon size-8 rounded-sm ${getDarkClassForLogo(image)}`} src={image} />
+                            <img
+                                className={`size-8 shrink-0 object-contain rounded-sm ${getDarkClassForLogo(image)}`}
+                                src={image}
+                                width={32}
+                                height={32}
+                                alt=""
+                            />
                         )}
                         {Icon && <Icon className={`size-8 ${iconColor ? `text-${iconColor}` : ``} shrink-0`} />}
 
