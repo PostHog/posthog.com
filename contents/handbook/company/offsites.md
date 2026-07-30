@@ -140,6 +140,7 @@ Visiting the Hedge House from out of town? Here are some local spots the team re
 - [The Slaughtered Lamb](https://www.urbanpubsandbars.com/venues/slaughtered-lamb). A busy London pub suitable for large groups, next door to the Hedge House.
 - [The Holy Tavern](https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d23938423-Reviews-The_Holy_Tavern-London_England.html). One of the UK's oldest pubs and a PostHog favourite during summer, 7 minutes walk from the Hedge House.
 - [Gazette](https://www.gazettebrasserie.co.uk/clerkenwell). French restaurant inside the Marrable's Hotel, just 3 minutes walk from the Hedge House.
+- [Whitecross Market](https://www.whitecross-street-market.co.uk/). Lots of food options, open every day for lunch, 5 minutes walk from the Hedge House.
 - [Flight Club](https://flightclubdarts.com/uk/london-shoreditch/). Social darts, food and drinks for large groups, many locations.
 - [The Bill Murray](https://www.angelcomedy.co.uk/bill-murray/). North London comedy club with regular shows, good for small groups.
 - [West End shows](https://www.londontheatre.co.uk/). Wide variety of shows, with ticket prices much lower than in the US.
