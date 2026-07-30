@@ -67,8 +67,8 @@ type View =
 /**
  * The provisioning flow, rendered inside the wizard hero: connect GitHub → pick a repo → we provision a
  * PostHog account and open an instrumentation PR from a cloud wizard run. See README.md for the
- * state diagram and wizard-provisioning-rfc.md (repo root) for the architecture. All server work happens in
- * the /api/wizard/* Gatsby Functions; this component is a state machine over their responses.
+ * state diagram. All server work happens in the /api/wizard/* Gatsby Functions; this component is a
+ * state machine over their responses.
  *
  * The `posthog-com-wizard-provisioning` experiment gate lives in the hero (`useWizardProvisioningEnabled`), which mounts this
  * component only for the `test` variant, so this component assumes it's enabled and never self-hides.
@@ -211,7 +211,7 @@ export default function WizardProvisioning(): JSX.Element {
     const connect = useCallback(() => {
         capture('wizard github connect clicked')
         setView({ kind: 'connecting' })
-        window.location.assign('/api/wizard/github-start')
+        window.location.assign('/api/wizard/github/start')
     }, [capture])
 
     const startOver = useCallback(async () => {
