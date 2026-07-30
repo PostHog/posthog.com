@@ -167,9 +167,6 @@ export const replayVision = {
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product_engineering',
-    // TODO: drop this on GA launch day (2026-08-03). Pricing stays hidden until billing serves the
-    // product, but this label doesn't, so it stops the product reading as GA in the meantime.
-    status: 'beta',
     shortDescription: 'Let AI watch your session recordings for you',
     seo: {
         title: 'Replay Vision - PostHog',
