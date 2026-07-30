@@ -11,6 +11,8 @@ import { CalloutBox } from "components/Docs/CalloutBox";
 
 Managed migrations provide an automated way to migrate your historical data into PostHog.
 
+Imported events run on a separate historical ingestion pipeline, so they aren't subject to the [per-distinct-ID ingestion rate limit](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) that applies to live event capture. Your migration is ingested at full volume even when many events share the same distinct ID.
+
 With managed migrations, you can import data from multiple sources:
 
 - **Direct imports**: Connect directly to Mixpanel or Amplitude using your API credentials
