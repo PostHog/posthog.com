@@ -170,11 +170,7 @@ Usually **AI Observability** or **Product Analytics**. Two common patterns:
 | Braintrust | LLM evals, logging, prompt playground | Broader platform; user behavior metrics; production monitoring not just offline evals; we ship [LLM-as-a-judge, code-based, and online evals](/docs/ai-evals) | Better prompt playground and offline iteration workflow; deeper dataset tooling |
 | Datadog LLM Monitoring | LLM tracing as part of broader APM | Product analytics integration; user behavior; better pricing for AI-native startups | Full APM stack; enterprise-grade; part of existing Datadog deployment for bigger companies |
 
-**Honest assessment:** Our strongest position is with AI-native startups and teams building AI features inside existing products. The pitch is "one platform for everything" instead of Langfuse + Amplitude + Sentry + a flag tool.
-
-Two corrections to older versions of this page: **we ship prompt management and we ship evals.** Both used to be conceded outright in this table. If a rep is still saying "Langfuse is better at prompt management, we're just broader," they're handing over the exact objection we built the product to answer. The honest framing is that Langfuse and Braintrust have a longer track record in this specific niche and better offline iteration workflows — not that we don't have the feature.
-
-We're still weaker against enterprise teams already embedded in Datadog. Our sweet spot is AI teams that want model performance connected to user outcomes in one place, without managing 4 vendors.
+**Honest assessment:** Our strongest position is with AI-native startups and teams building AI features inside existing products. The pitch is "one platform for everything" instead of Langfuse + Amplitude + Sentry + a flag tool. We're weaker against enterprise teams already embedded in Datadog. Our sweet spot is AI teams that want model performance connected to user outcomes in one place, without managing four vendors.
 
 ## Pain points & known limitations
 
