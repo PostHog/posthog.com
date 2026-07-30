@@ -50,7 +50,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **Someone who's excited about something.** I ask most candidates what environment they need to do their best work, and what their favorite project has been. It tells me how they want to work and what they value, and I like watching people talk about something they're into. If they can't name anything they've enjoyed, that's the biggest red flag in the process.
 
-> What good looks like: With 8 years marketing experience and half of it in devtools, <TeamMember name="Sara Miteva" showOnlyFirstName photo /> was already a strong candidate. What made her essential hire though was the way she talked about her own writing, and the self-awareness with which she said she wanted a high-trust workplace where bureaucracy wouldn't slow her down.
+> What good looks like: With 8 years of marketing experience and half of it in devtools, <TeamMember name="Sara Miteva" showOnlyFirstName photo /> was already a strong candidate. What made her an essential hire though was the way she talked about her own writing, and the self-awareness with which she said she wanted a high-trust workplace where bureaucracy wouldn't slow her down.
 
 **Low ego.** Being opinionated isn't the same as being difficult. We look for people who can disagree and commit, take feedback well, ask stupid questions, and give away their legos when needed.
 
