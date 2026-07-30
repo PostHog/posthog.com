@@ -115,6 +115,14 @@ Spin up flags, multivariate tests, and full A/B experiments without leaving your
   prompt="Create an early access feature called 'Dark Mode' in draft stage."
   outcome="Creates the feature and auto-links a dark-mode feature flag."
 />
+<PromptExample
+  prompt="What are the latest results for my checkout-flow experiment?"
+  outcome="Returns per-variant statistics including confidence intervals and statistical significance."
+/>
+<PromptExample
+  prompt="Recalculate the metrics for my pricing-page experiment and tell me if it's significant."
+  outcome="Triggers a fresh calculation, waits for completion, and summarizes statistical significance."
+/>
 
 ### Run SQL and HogQL queries
 
@@ -310,6 +318,11 @@ Ship a new feature, measure its impact, and gate it behind opt-in access for ear
   step={4}
   prompt="Create a dashboard called 'Onboarding launch' with the experiment results, daily active users, and the onboarding funnel."
   outcome="Builds a launch dashboard you can share with the team."
+/>
+<PromptExample
+  step={5}
+  prompt="Check the latest results for the new-onboarding-flow experiment and summarize whether it's performing better than control."
+  outcome="Retrieves the current experiment results and interprets the statistical findings."
 />
 
 ### Diagnose a conversion drop
