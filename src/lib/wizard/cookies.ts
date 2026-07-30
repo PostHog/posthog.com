@@ -3,8 +3,11 @@
  *
  * Format: `base64url(JSON payload) + "." + base64url(HMAC-SHA256(payload, WIZARD_PROVISIONING_STATE_SECRET))`.
  * Every payload gets an `iat` (unix seconds) stamped at signing time; `verify` enforces a max age.
- * Nothing sensitive beyond the opaque grant id ever goes in a cookie, so signing (not encryption)
- * is sufficient.
+ *
+ * Signed, not encrypted, so the payload is readable by anything that can read the cookie. That is
+ * fine for what goes in one today, but note the `resume` cookie carries the PKCE verifier, which
+ * is a secret: it is protected by HttpOnly + Secure + the path scope, not by the signature. Weigh
+ * that before putting anything else secret in here.
  *
  * SameSite=Lax is safe for all legs of the flow: the two cross-site returns (github.com OAuth
  * callback and the us.posthog.com consent callback) are top-level GET navigations, which Lax
