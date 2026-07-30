@@ -235,7 +235,7 @@ export const errorTracking = {
                     {
                         title: 'Point an agent at your exceptions instead',
                         icon: 'IconSparkles',
-                        body: 'Every exception you capture becomes something PostHog can act on, stack trace and affected user included. Point an agent at your issue list and it will read all of them, and it can already tell which file to open.',
+                        body: 'Every exception you capture becomes something PostHog can act on, stack trace and affected user included. Point an agent at your issue list and it will read all of them and tell you which file to open.',
                     },
                 ],
             },
@@ -269,28 +269,28 @@ export const errorTracking = {
             {
                 level: 'Ship with PostHog',
                 surfaces: ['inbox', 'desktop'],
-                driver: 'Every exception feeds the loop as it happens, and a scout decides which ones are worth acting on. When the trace points at one file, it writes the fix itself.',
+                driver: 'Error tracking feeds the loop directly: every exception is a signal, with no scout needed to spot it. When the stack trace points at one file, PostHog writes the fix.',
                 scenario: {
                     icon: 'IconPullRequest',
                     surfaces: ['inbox', 'desktop'],
                     steps: [
-                        'Exceptions enter the loop the moment they are captured, so nobody has to notice the new error first',
-                        'An error tracking scout ties it to the deploy that introduced it and confirms it is hitting many people, rather than one client retrying',
-                        'The stack trace names a file in a repo PostHog knows, so it opens a draft pull request with the fix and a regression test',
-                        'You review and merge. Errors that need a judgment call land as a report in your Inbox instead',
+                        'The new error is a signal the second it fires, so nothing waits for a scheduled check',
+                        'Signals for the same crash group into one report, tied to the deploy that introduced it',
+                        'The trace names a file in a repo PostHog knows, so it opens a draft pull request with the fix and a regression test',
+                        'You review and merge. Anything needing a judgment call lands in your Inbox instead',
                     ],
-                    outcome: 'PostHog got from exception to pull request without anyone asking it to.',
+                    outcome: 'This is the shortest path PostHog has from a problem to a fix.',
                 },
                 points: [
                     {
-                        title: 'A stack trace is the clearest place to start',
+                        title: 'A stack trace is enough to act on',
                         icon: 'IconBrain',
-                        body: 'Most reports need a person to decide what to do about them. An exception is unusual: it names a file, a line, and the user who hit it, which is enough for PostHog to write a fix and let you check its work.',
+                        body: 'Most reports need a person to decide what to do. An exception names a file, a line, and the user who hit it, which is enough for PostHog to write the fix and let you check its work.',
                     },
                     {
-                        title: 'It catches fixes that did not hold',
+                        title: 'Scouts watch the patterns',
                         icon: 'IconRefresh',
-                        body: 'When an issue you marked resolved starts firing again, the scout raises it as a regression instead of filing it as something new. That check is also how PostHog verifies its own pull requests worked.',
+                        body: 'The source catches each exception. A scout spots what only shows up across them, like an issue you marked resolved firing again, which is also how PostHog checks its own fixes held.',
                     },
                 ],
             },
