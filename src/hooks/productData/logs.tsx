@@ -161,15 +161,20 @@ export const logs = {
     slider: {
         // Values in GB (display_friendly=true converts MB to GB)
         marks: [0, 10, 50, 100, 500, 1000, 5000],
-        min: 10,
+        min: 0,
         scaleMin: 1,
         max: 5000,
     },
     volume: 10,
+    freeAllocationText: 'First 10 GB free – every month!',
     addonSliders: [
         {
             key: 'logs_retention_30d',
             label: '30-day retention',
+            // Billing meters all ingested GB (any retention) on the base logs product, then bills
+            // 30-day GB again at the add-on rate as a storage premium.
+            countsTowardParentVolume: true,
+            note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
             sliderConfig: {
                 marks: [0, 10, 50, 100, 500, 1000, 5000],
                 min: 0,
