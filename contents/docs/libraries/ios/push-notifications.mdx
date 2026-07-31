@@ -9,6 +9,8 @@ platformLogo: ios
 
 The iOS SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. Sends go out through the FCM or APNs channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push).
 
+Available in version 3.69.0 and newer.
+
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
 
 The SDK registers the device token with PostHog and captures opens. You still set up remote notifications and request notification permission in your app as usual — the SDK doesn't do that for you.
@@ -32,7 +34,9 @@ config.capturePushNotificationOpened = true        // capture `$push_notificatio
 PostHogSDK.shared.setup(config)
 ```
 
-With these enabled you only need to register for remote notifications; the SDK picks up the token and open events automatically. Locally-scheduled notifications are ignored — capture those manually (below).
+With these enabled you only need to register for remote notifications; the SDK picks up the token and open events automatically. The token is registered under the current distinct ID, so it follows the user across `identify()`. Locally-scheduled notifications are ignored — capture those manually (below).
+
+Automatic registration and open capture require `config.enableSwizzling` to be `true` (the default). If you disable swizzling or manage your own delegates, use the manual APIs below.
 
 ## Manual registration
 
@@ -56,7 +60,9 @@ Unregister the token when a user signs out so it isn't left bound to them:
 PostHogSDK.shared.unregisterPushNotificationToken()
 ```
 
-Calling `PostHogSDK.shared.reset()` on logout also unregisters the token for the signed-out user.
+Calling `PostHogSDK.shared.reset()` on logout also unregisters the token for the signed-out user and re-registers it under the new anonymous id.
+
+Registration and unregistration are durable – if the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
 
 ## Capturing opens
 
@@ -77,17 +83,13 @@ There's also a fully manual variant if you don't have a `UNNotificationResponse`
 PostHogSDK.shared.capturePushNotificationOpened(title: "...", body: "...", payload: [:], action: "...")
 ```
 
+The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog – opens of other notifications are still captured, but without title, subtitle, or body.
+
 ## Identity verification
-
-<CalloutBox icon="IconWarning" title="Requires an in-progress SDK release" type="caution">
-
-The `pushIdentityProvider` hook ships in [posthog-ios #735](https://github.com/PostHog/posthog-ios/pull/735) — confirm your SDK version includes it before relying on this. Identity verification is not yet available in the Android SDK.
-
-</CalloutBox>
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
-Your **backend** mints that token — the SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
+Your **backend** mints that token — the SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, the channel's app id as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
 
 ```swift
 config.pushIdentityProvider = { distinctId, appId, completion in
@@ -105,6 +107,6 @@ Notes:
 
 | Issue | Check |
 | --- | --- |
-| Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. |
+| Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off – use the manual APIs. |
 | Push doesn't arrive | Confirm the channel's APNs environment (Production/Sandbox) matches your build, and the bundle id matches. |
 | Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time — see [Identity verification](#identity-verification). |
