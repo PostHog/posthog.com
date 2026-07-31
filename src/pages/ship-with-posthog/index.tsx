@@ -5,6 +5,7 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import WizardCommand from 'components/WizardCommand'
 import InboxReplica from 'components/ShipWithPostHog/InboxReplica'
+import SignalsToInbox from 'components/ShipWithPostHog/SignalsToInbox'
 import SlotMachineText from 'components/SlotMachineText'
 
 // Words cycled through the "Ship {word} with PostHog" headline. "code" rests last (held
@@ -42,13 +43,18 @@ export default function ShipWithPostHog(): JSX.Element {
                             </h1>
                             <p className="mx-auto mt-4 max-w-2xl text-base text-secondary @2xl:text-lg">
                                 Each one started in a different PostHog tool – an error, a session, a log line, a slow
-                                trace, a failing eval. None of them started with a ticket. Open one to see how it got
-                                here, then hit merge.
+                                trace, a failing eval. None of them started with a ticket. Review one and hit merge –
+                                then see how each signal got here below.
                             </p>
                         </div>
 
                         {/* The Inbox */}
                         <InboxReplica />
+
+                        {/* How different signals get to your Inbox */}
+                        <div className="mt-14 @md:mt-20">
+                            <SignalsToInbox />
+                        </div>
 
                         {/* Six tools, one loop */}
                         <div className="mx-auto mt-14 max-w-2xl text-center @md:mt-20">

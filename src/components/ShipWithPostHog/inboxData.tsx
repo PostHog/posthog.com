@@ -48,6 +48,8 @@ export interface InboxItem {
     /** Human title after the type(scope): prefix. */
     title: string
     summary: string
+    /** One-line lead-in shown above this signal's walkthrough in the signals section. */
+    intro?: React.ReactNode
     priority: Priority
     signalCount: number
     /** Minutes since the report was created – drives "Newest"/"Oldest" sort and the row timestamp. */
@@ -121,6 +123,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         scope: 'sdk-doctor',
         title: 'handle chunk load failures and surface API errors',
         summary: 'A failed chunk load left users staring at a blank SDK doctor screen with no error to act on.',
+        intro: 'Some bugs never throw an exception. Replay is how self-driving catches the ones users only feel.',
         priority: 'P2',
         signalCount: 8,
         createdMinutesAgo: 300,
@@ -128,32 +131,27 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'session_replay' },
         prUrl: 'https://github.com/PostHog/posthog/pull/60829',
         prNumber: 60829,
+        // Four beats: this signal source leads with Signal (no Scout tab).
         steps: [
             {
-                // TODO(use-cases): confirm against the real report behind PostHog/posthog#60829
-                label: 'Source',
-                copy: 'Session replay records real sessions – every click, scroll, and stall – and flags friction like rage clicks and dead clicks as it goes. The stream never stops, so a new pattern surfaces the moment it happens.',
-                imagePlaceholder: ph.source('Session replay'),
+                stage: 'signal',
+                copy: 'Rage clicks, dead ends, blocking errors: the signal source flags them in every new recording, and scouts hunt where you point them, on a schedule. When the same wall keeps showing up, it becomes a report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_30_at_15_24_02_2x_1_1054be2650.png',
             },
             {
-                // TODO(use-cases)
-                copy: 'A run of sessions dead-ends on the SDK doctor screen after a chunk fails to load. Replay clusters the sessions and files a report.',
-                imagePlaceholder: ph.signal,
+                stage: 'investigate',
+                copy: 'The agent watches the flagged sessions, sizes the damage, and traces it to the responsible code. The replays go in as evidence.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Session_replay_c67c6ef4d4.png',
             },
             {
-                // TODO(use-cases)
-                copy: 'The agent watches the recordings, sees the blank screen after a failed dynamic import, and traces it to a chunk load error that was swallowed instead of surfaced.',
-                imagePlaceholder: ph.investigate,
+                stage: 'pr',
+                copy: 'A replay shows the symptom, so the report waits for your call. You decide the fix; the agent opens the PR.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Session_replay_4207c634ad.png',
             },
             {
-                // TODO(use-cases)
-                copy: 'The agent catches the chunk load failure, surfaces the underlying API error to the user, and opens a pull request with the fix.',
-                imagePlaceholder: ph.pr,
-            },
-            {
-                // TODO(use-cases)
-                copy: 'You watch one of the linked sessions, confirm the dead end, and merge.',
-                imagePlaceholder: ph.merge,
+                stage: 'merge',
+                copy: 'You review the diff next to the replays that earned it. Merge, or dismiss with a reason the scout learns from.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Session_replay_c1198f45ea.png',
             },
         ],
     },

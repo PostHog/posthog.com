@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { IconArrowLeft, IconChevronDown, IconNotification, IconPullRequest } from '@posthog/icons'
+import { IconArrowLeft, IconCheckCircle, IconChevronDown, IconNotification, IconPullRequest } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
-import SelfDrivingStory from 'components/SelfDrivingStory'
 import ReportRow from './ReportRow'
 import PriorityBadge from './PriorityBadge'
 import InboxFilterBar from './InboxFilterBar'
@@ -107,8 +106,29 @@ const ReadingPane = ({
                     </div>
                 </div>
             </div>
+            {/* Empty for now – detailed PR content goes here later. The story of how this
+                report reached the inbox lives in the "How different signals get to your
+                Inbox" section below. TODO(use-cases): fill this pane. */}
+            <div className="mt-5 flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-primary bg-accent/40 p-8 text-center text-sm text-secondary">
+                Detailed PR view coming soon.
+            </div>
             <div className="mt-5">
-                <SelfDrivingStory steps={item.steps} onMerge={onMerge} merged={merged} />
+                {merged ? (
+                    <div className="inline-flex items-center gap-2 rounded-md bg-purple/10 px-3 py-2 text-sm font-semibold text-purple">
+                        <IconPullRequest className="size-4" />
+                        Merged
+                    </div>
+                ) : (
+                    <button
+                        type="button"
+                        onClick={onMerge}
+                        // GitHub-green merge button.
+                        className="inline-flex items-center gap-2 rounded-md bg-[#1f883d] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1a7f37]"
+                    >
+                        <IconCheckCircle className="size-4" />
+                        Merge pull request
+                    </button>
+                )}
             </div>
         </div>
     )
