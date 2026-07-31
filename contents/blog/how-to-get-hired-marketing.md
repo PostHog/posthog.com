@@ -45,9 +45,9 @@ This is my favorite question to get asked. It changes by role, but a few things 
 > What good looks like: Artistic ability wasn't on our list of product marketer requirements. Then <TeamMember name="Cleo Lant" showOnlyFirstName photo /> turned up with a degree in illustration and a portfolio of fine art. She channelled those abilities into her superday, then immediately made plans for some of our most conceptually creative launches.
 
 <figure>
-  <div className="flex gap-2">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_godzilla_9a6675c5ff.png" alt="Illustration of a Godzilla-style monster" className="w-1/2" />
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_slop_blob_468af85ec4.png" alt="Illustration of a slop blob" className="w-1/2" />
+  <div className="grid grid-cols-2 gap-2">
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_godzilla_9a6675c5ff.png" alt="Illustration of a Godzilla-style monster" className="w-full" />
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_slop_blob_468af85ec4.png" alt="Illustration of a slop blob" className="w-full" />
   </div>
   <figcaption>Cleo stood out for her illustration background, which she channels into visually creative launches</figcaption>
 </figure>
@@ -56,7 +56,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 > What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them – and without the limitation of a tired, familiar playbook to hold her back.
 
 <figure>
-  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/image_29f0fad508.png" alt="Hiring funnel showing pass rates from application through to hire" />
+  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_07_31_at_12_12_53_547d3bcb68.png" alt="Hiring funnel showing pass rates from application through to hire" />
   <figcaption>We hold as high a bar for marketers as we do for engineers, hiring less than 0.4% of candidates. For Lizzie's role over 218 people applied.</figcaption>
 </figure>
 
