@@ -1096,8 +1096,12 @@ export default function ProductComparisonTable({
                     </div>
                 ),
             },
+            // Cells are flex containers (OSTable rowAlignment="center"), so the column's
+            // text-center is inert on the rendered span and values pack left. Center them on
+            // the main axis so string values and ✓/✗ glyphs align the same way as the headers.
             ...competitors.map((key, index) => ({
                 content: renderCell(key, row, index),
+                className: 'justify-center',
             })),
         ]
 
