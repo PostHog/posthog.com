@@ -8,7 +8,7 @@ If you're actively thinking about churn prevention in response to a customer chu
 
 Churn prevention is best done from early, and often, risk mitigation practices.
 
-We should default to flagging "at risk" accounts using the "Churn Risk" segment in Vitally well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
+We should default to flagging "at risk" accounts by adding the "Churn Risk" tag in PostHog Customer Analytics well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
 
 There are a few risk-mitigation strategies you'll want to incorporate that serve as early detection and proactive mitigation, as well as a process for what to do when an account is actively at risk.
 
@@ -140,7 +140,7 @@ When an account is actively at risk (they've told you they're evaluating alterna
 
 ### When to flag an account as at risk
 
-Add the account to the **Churn Risk** segment in Vitally if any of the following are true:
+Add the **Churn Risk** tag to the account in PostHog Customer Analytics if any of the following are true:
 
 - Customer explicitly mentions evaluating alternatives or considering churning
 - Usage has dropped 30%+ with no seasonal explanation
@@ -155,9 +155,9 @@ Add the account to the **Churn Risk** segment in Vitally if any of the following
 
 ### Internal process
 
-**1. Add churn risk segment in Vitally**
+**1. Add the Churn Risk tag in PostHog Customer Analytics**
 
-When you flag an account as at risk, add a note in vitally  with:
+When you flag an account as at risk, add the **Churn Risk** tag to the account in PostHog Customer Analytics, and add a note on the account with:
 
 - Account name and ARR
 - What triggered the risk flag
@@ -165,11 +165,11 @@ When you flag an account as at risk, add a note in vitally  with:
 - What help you need (if any)
 - What you are doing to mitigate the churn
 
-The churn risk bot should automatically post this in the #customer-churn slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
+Adding the tag triggers a PostHog workflow that automatically posts to the #customer-churn Slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
 **2. Weekly at-risk account review**
 
-We hold a weekly team meeting to review all accounts in the Churn Risk segment in Vitally. Come prepared to:
+We hold a weekly team meeting to review all accounts tagged **Churn Risk** in PostHog Customer Analytics. Come prepared to:
 
 - Give a 60-second status update on each at-risk account you own
 - Share what you've tried and what's working or not

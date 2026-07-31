@@ -414,6 +414,8 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -519,11 +521,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
                 },
                 {
                     type: 'item',

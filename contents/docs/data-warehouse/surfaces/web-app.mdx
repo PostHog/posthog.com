@@ -1,0 +1,28 @@
+---
+title: The data warehouse in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is home base for the data warehouse. It's where you link sources, watch them sync, write SQL across everything at once, save the useful queries as views, and turn the results into insights the rest of your team can read.
+
+Open the [SQL editor](https://us.posthog.com/sql) to see the schema browser: your PostHog tables, every synced source table, and your saved views, all queryable together. It's also the only surface where you can change a view's SQL, because a view's definition lives in PostHog rather than in your repository.
+
+## What you can do here
+
+- **[Link sources](/docs/data-warehouse/sources)** – connect Stripe, Postgres, Salesforce, HubSpot, and dozens more, pick which tables to sync, and re-run or reset a table when a sync goes wrong.
+- **[Query with SQL](/docs/data-warehouse/query)** – run [HogQL](/docs/data-warehouse/sql) against your events, persons, and sessions alongside every synced source table.
+- **[Join data across sources](/docs/data-warehouse/join)** – connect a source table to your PostHog data so product and business data answer the same question.
+- **[Create views](/docs/data-warehouse/views)** – save a query as a view and reference it from other queries.
+- **[Materialize views](/docs/data-warehouse/views/materialize)** – refresh a view on a schedule instead of recomputing it on every read.
+- **[Visualize with insights](/docs/data-warehouse/insights)** – turn any query into a SQL insight and put it on a dashboard.
+- **Fix a query with [PostHog AI](/docs/posthog-ai)** – when a query in the SQL editor errors, PostHog AI can [repair it](/docs/data-warehouse/write-sql-ai) with your real schema in context. It's an interaction mode inside the SQL editor, not a separate surface, and it's the only place PostHog AI touches the warehouse.
+
+## Related
+
+- Start with [Get started with the data warehouse](/docs/data-warehouse/start-here).
+- Run the same queries from your editor over [MCP](/docs/data-warehouse/surfaces/mcp).
+- Automate the same work with the [API](/docs/data-warehouse/surfaces/api).
+- Work through failing models and syncs in [PostHog Desktop](/docs/data-warehouse/surfaces/desktop).
+- Point `psql`, Metabase, or any Postgres driver at your [managed warehouse](/docs/data-warehouse/managed-warehouse/connect).
+- Check [troubleshooting](/docs/data-warehouse/troubleshooting) when a query or sync misbehaves.

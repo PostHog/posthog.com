@@ -34,6 +34,27 @@ Signals come from two kinds of source, which you can turn on independently:
 
 Both feed signals into the same pipeline. A single problem usually shows up as several signals from several sources, so the loop deduplicates and groups them, and you act on the problem, not the noise. (A scout that finishes its research with a complete finding can also skip the grouping step and file a [report](/docs/self-driving/reports) directly – its evidence still lands as signals backing the report.)
 
+## Sources or scouts?
+
+Neither is the upgrade from the other, and most projects run both. They make a real trade against each other, and knowing which way it runs is what tells you where to point each one.
+
+**A signal source is deterministic and exhaustive.** Turn on error tracking as a source and every qualifying signal in that stream gets processed, continuously, as it happens. Nothing is skipped because an agent weighed it and decided it wasn't interesting. You can reason about coverage: the behavior is the same today and next month, and there's no bar for something to clear.
+
+**A scout trades some of that determinism for judgement.** It runs on a schedule rather than continuously, explores rather than following a fixed stream, and decides what clears the bar you set – so it can weigh, rank, cluster, and stay quiet on a quiet day, but it isn't exhaustive by design and it's making a call each run.
+
+| | **Signal sources** | **Scouts** |
+|---|---|---|
+| **Coverage** | Exhaustive – every qualifying item in the stream | Selective – what clears the bar, holding the rest |
+| **Timing** | Continuous, as events arrive | Scheduled, from every 30 minutes to every 30 days |
+| **Behavior** | Predictable and repeatable | Uses judgement each run; ranks, clusters, and weighs |
+| **Scope** | One stream, deeply | Across surfaces, or any slice you point it at |
+| **Setup** | Toggle it on | Authored – you describe what's worth your attention |
+| **Tuning** | Configuration | Steerable in plain English, and it learns between runs |
+
+So: reach for a **source** when the stream is well-defined and missing an item would be unacceptable. Reach for a **scout** when everything in the stream is technically "something" and you need judgement applied, when the interesting thing spans several surfaces, or when "worth knowing" is a matter of opinion only your team can define.
+
+They also compose. If a detector already exists, a scout can sit on top of it rather than replace it – the source keeps its deterministic coverage while the scout bundles related items, weighs who's affected, and flags what nobody actioned.
+
 ## From signals to reports
 
 On their own, signals are just a stream of findings. Grouped into a [report](/docs/self-driving/reports), they become a single thing you can act on.
