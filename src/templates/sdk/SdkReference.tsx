@@ -161,6 +161,10 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
         return fullReference.id.replace(`${currentReferenceId}-`, '')
     }
 
+    // Mirror the slugPrefix used when type pages are created in gatsby/createPages.ts
+    // (latest → referenceId, versioned → id) so cross-links resolve to real pages.
+    const typeSlugPrefix = fullReference.version.includes('latest') ? fullReference.referenceId : fullReference.id
+
     // Pre-transform classes with sorted functions
     const sortedClasses = fullReference.classes.map((classData) => ({
         ...classData,
@@ -360,7 +364,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        slugPrefix={typeSlugPrefix}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -369,7 +373,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        slugPrefix={typeSlugPrefix}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />
