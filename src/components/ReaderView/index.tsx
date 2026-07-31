@@ -1308,26 +1308,13 @@ const FloatingTOC = ({ isTocVisible, toggleToc, tableOfContents, contentRef }: F
                 hasMounted ? 'transition-[width] duration-300' : ''
             } overflow-hidden ${isTocVisible ? 'w-[250px]' : 'w-12'} `}
         >
-            {isTocVisible ? (
-                <div className="flex-1 min-h-0 flex flex-col w-[250px]">
+            <div className="flex-1 min-h-0 flex flex-col w-[250px]">
+                {isTocVisible && (
                     <ScrollArea className="px-2 pb-2 pt-8 flex-1 min-h-0">
                         <TableOfContents tableOfContents={tableOfContents} contentRef={contentRef} />
                     </ScrollArea>
-                </div>
-            ) : (
-                /* Collapsed: the rail names itself and is clickable along its whole
-                   height, so it reads as a shut panel rather than an empty gutter.
-                   Without this the strip is blank except for the toggle parked at
-                   the bottom, which looks like a rendering bug. */
-                <button
-                    type="button"
-                    onClick={toggleToc}
-                    aria-label="Show table of contents"
-                    className="flex-1 min-h-0 w-12 flex items-start justify-center pt-8 text-secondary hover:text-primary hover:bg-accent transition-colors"
-                >
-                    <span className="[writing-mode:vertical-rl] text-sm font-semibold">Contents</span>
-                </button>
-            )}
+                )}
+            </div>
             <div className="flex-shrink-0 border-t border-primary py-1 px-2.5 flex items-center">
                 <Tooltip
                     trigger={
