@@ -134,16 +134,89 @@ Minimal example for `posthog` content type (one line per event):
 
 - S3 region
 - S3 bucket name
-- AWS access key ID
-- AWS secret access key
+- Credentials – either an [IAM role](#iam-role-recommended) (recommended) or an [access key ID and secret access key](#access-keys)
 - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
 - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
 
+### S3 authentication
+
+You can authenticate with either **IAM role assumption** (recommended) or **access keys**.
+
+#### IAM role (recommended)
+
+With IAM role assumption, PostHog uses AWS STS to assume a role in your AWS account and obtain short-lived credentials. This avoids sharing long-lived access keys.
+
+To set up IAM role authentication:
+
+1. In the import setup modal, select the **IAM role** option and copy the **External ID** shown there. It's unique to your project – use it exactly as displayed.
+2. Create an IAM role in your AWS account with a trust policy that allows PostHog's role to assume it. The PostHog role ARN depends on your cloud region:
+   - **US Cloud** – `arn:aws:iam::309986977637:role/posthog-external-managed-migrations`
+   - **EU Cloud** – `arn:aws:iam::623789312881:role/posthog-external-managed-migrations`
+3. Add an `sts:ExternalId` condition to the trust policy, set to the External ID from step 1. Imports fail without it.
+4. Attach a permissions policy to the role granting `s3:GetObject` on your bucket and prefix, and `s3:ListBucket` on the bucket. If the bucket uses KMS encryption, also grant `kms:Decrypt` on the key.
+5. Paste the role ARN (e.g. `arn:aws:iam::123456789012:role/posthog-managed-migrations`) into the **IAM role ARN** field in the setup modal.
+
+The trust policy goes on the **IAM role** you create, not on the S3 bucket. Here's an example:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::309986977637:role/posthog-external-managed-migrations"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "<external_id_from_setup_modal>"
+        }
+      }
+    }
+  ]
+}
+```
+
+And an example permissions policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetObject"],
+      "Resource": "arn:aws:s3:::your-bucket-name/your-prefix/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::your-bucket-name"
+    }
+  ]
+}
+```
+
+`s3:ListBucket` is required as well as `s3:GetObject` – PostHog lists the keys under your prefix before reading any of them.
+
+PostHog checks the role when you create the import, so a missing role, an incorrect trust policy, or a mismatched External ID is reported immediately rather than part-way through the migration.
+
+> **Note:** Self-hosted users should check with their instance administrator for the correct PostHog role ARN to trust.
+
+#### Access keys
+
+With access keys, you provide an AWS Access Key ID and Secret Access Key that PostHog stores encrypted. This works, but uses long-lived credentials – prefer IAM role assumption where you can.
+
+The IAM user associated with these keys needs `s3:GetObject` and `s3:ListBucket` permissions on your bucket. Access keys are also the only option for [S3-compatible storage](#s3-compatible-storage).
+
 ### S3-compatible storage
 
 You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
+
+S3-compatible storage must use [access keys](#access-keys). IAM role assumption is only available for AWS S3.
 
 #### Cloudflare R2
 
