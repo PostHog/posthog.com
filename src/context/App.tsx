@@ -1563,9 +1563,6 @@ const appSettings: AppSettings = {
     '/ai': {
         toolbar: true,
     },
-    '/mcp-analytics': {
-        toolbar: true,
-    },
     '/hog': {
         toolbar: true,
     },
