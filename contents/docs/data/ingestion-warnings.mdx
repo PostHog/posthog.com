@@ -89,7 +89,7 @@ This usually means one distinct ID is shared by many users or machines. See [rat
 
 ## Ingested event after shortening its distinct ID to the 200 character limit
 
-PostHog shortens any `distinct_id` longer than 200 characters to its first 200 characters and ingests the event under the shortened ID.
+PostHog shortens any `distinct_id` longer than 200 characters to its first 200 characters and ingests the event under the shortened ID. The same limit applies to [session replay](/docs/session-replay) events, which are ingested under the shortened ID without a warning.
 
 A distinct ID this long usually means something other than a user ID, like a token or a serialized object, was passed as the distinct ID. Fix the `capture` or `identify` call to send a real user ID. Until then, events keep landing under the shortened ID.
 
