@@ -4000,6 +4000,82 @@
             "destination": "/experiments#questions"
         },
         {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/endpoints/customers",
+            "destination": "/endpoints"
+        },
+        {
+            "source": "/endpoints/comparisons",
+            "destination": "/endpoints#feature-comparison"
+        },
+        {
+            "source": "/endpoints/documentation",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/tutorials",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/endpoints/questions",
+            "destination": "/endpoints#community"
+        },
+        {
+            "source": "/workflows/customers",
+            "destination": "/workflows"
+        },
+        {
+            "source": "/workflows/comparisons",
+            "destination": "/workflows#feature-comparison"
+        },
+        {
+            "source": "/workflows/documentation",
+            "destination": "/docs/workflows"
+        },
+        {
+            "source": "/workflows/tutorials",
+            "destination": "/workflows#tutorials"
+        },
+        {
+            "source": "/workflows/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/workflows/questions",
+            "destination": "/workflows#community"
+        },
+        {
             "source": "/handbook/what-is-posthog",
             "destination": "/handbook/why-does-posthog-exist"
         },
@@ -4551,6 +4627,28 @@
                     "type": "query",
                     "key": "product",
                     "value": "surveys"
+                }
+            ]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/logs/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "logs"
+                }
+            ]
+        },
+        {
+            "source": "/pricing",
+            "destination": "/workflows/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "workflows"
                 }
             ]
         },

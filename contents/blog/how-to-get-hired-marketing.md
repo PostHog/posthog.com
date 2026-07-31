@@ -34,39 +34,43 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **Make the plan, then do the plan.** There are no hands-off roles at PostHog and no purely strategic seats. You don't need engineering experience, but you do need to be someone who ships a fix when they hit a problem, rather than ask someone else to read your Powerpoint deck. Product marketers are the hardest role we hire for and this is why.
 
-> What good looks like: <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance. Not many influencer managers will actually ship their own tooling.
+> **What good looks like:** <TeamMember name="Adlet Smykov" showOnlyFirstName photo /> isn't an engineer, but he impressed us in his interviews by explaining how he'd built himself a tool for calculating influencer pay rates, just because he'd found that to be a regular annoyance. Not many influencer managers will actually ship their own tooling.
 
 **Strong opinions.** Our brand is one of PostHog's most valuable marketing assets and the fastest way to wreck it is hiring people who tell us what we want to hear or who don't have a strong sense of taste to rely on. For us, safe takes are worse than wrong ones so we look for people with hot, spicy takes.
 
-> What good looks like: Hiring our first event marketer, we spoke to dozens of candidates whose strategy was essentially just "do hackathons". <TeamMember name="Daniel Zaltsman" showOnlyFirstName photo /> said PostHog is "a 1 to N tool, not a 0 to 1 tool" and that hackathons were a bad idea. He then created a event strategy so unique that PostHog engineers actually _want_ to host events without being asked – and so successful it led to a whole new events team.
+> **What good looks like:** Hiring our first event marketer, we spoke to dozens of candidates whose strategy was essentially just "do hackathons". <TeamMember name="Daniel Zaltsman" showOnlyFirstName photo /> said PostHog is "a 1 to N tool, not a 0 to 1 tool" and that hackathons were a bad idea. He then created a event strategy so unique that PostHog engineers actually _want_ to host events without being asked – and so successful it led to a whole new events team.
 
 **Exceptional at one thing, good at lots.** Marketers at PostHog work across a huge breadth of things. Nurture emails, launches, merch, events, etc. so we look for people who are decent at most of it and exceptional at one thing in particular. The more unusual that thing is, and the more it shows up in the rest of the work, the better.
 
-> What good looks like: Artistic ability wasn't on our list of product marketer requirements. Then <TeamMember name="Cleo Lant" showOnlyFirstName photo /> turned up with a degree in illustration and a portfolio of fine art. She channelled those abilities into her superday, then immediately made plans for some of our most conceptually creative launches.
+> **What good looks like:** Artistic ability wasn't on our list of product marketer requirements. Then <TeamMember name="Cleo Lant" showOnlyFirstName photo /> turned up with a degree in illustration and a portfolio of fine art. She channelled those abilities into her superday, then immediately made plans for some of our most conceptually creative launches.
 
 <figure>
   <div className="grid grid-cols-2 gap-2">
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_godzilla_9a6675c5ff.png" alt="Illustration of a Godzilla-style monster" className="w-full" />
-    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_slop_blob_468af85ec4.png" alt="Illustration of a slop blob" className="w-full" />
+    <div className="overflow-hidden" style={{ aspectRatio: '2 / 3' }}>
+      <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_godzilla_9a6675c5ff.png" alt="Illustration of a Godzilla-style monster" className="w-full h-full object-cover" />
+    </div>
+    <div className="overflow-hidden" style={{ aspectRatio: '2 / 3' }}>
+      <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_slop_blob_468af85ec4.png" alt="Illustration of a slop blob" className="w-full h-full object-cover" />
+    </div>
   </div>
-  <figcaption>Cleo stood out for her illustration background, which she channels into visually creative launches</figcaption>
+  <figcaption className="text-center">Cleo stood out for her illustration background, which she channels into visually creative launches</figcaption>
 </figure>
 
 **A high ceiling beats a high floor.** Tech moves fast, but PostHog moves faster. It's better for us to get many things done to a 7/10 standard than one thing to a 10/10. We ship more in a quarter than most teams ship in a year and the strategy changes under us while we work. It's important to be adaptable and to understand how iteration beats polish. 
-> What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them – and without the limitation of a tired, familiar playbook to hold her back.
+> **What good looks like:** <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them – and without the limitation of a tired, familiar playbook to hold her back.
 
 <figure>
   <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_07_31_at_12_12_53_547d3bcb68.png" alt="Hiring funnel showing pass rates from application through to hire" />
-  <figcaption>We hold as high a bar for marketers as we do for engineers, hiring less than 0.4% of candidates. For Lizzie's role over 218 people applied.</figcaption>
+  <figcaption className="text-center">We hold as high a bar for marketers as we do for engineers, hiring less than 0.4% of candidates. For Lizzie's role over 218 people applied.</figcaption>
 </figure>
 
 **Someone who's excited about something.** I ask most candidates what environment they need to do their best work, and what their favorite project has been. It tells me how they want to work and what they value, and I like watching people talk about something they're into. If they can't name anything they've enjoyed, that's the biggest red flag in the process.
 
-> What good looks like: With 8 years of marketing experience and half of it in devtools, <TeamMember name="Sara Miteva" showOnlyFirstName photo /> was already a strong candidate. What made her an essential hire though was the way she talked about her own writing, and the self-awareness with which she said she wanted a high-trust workplace where bureaucracy wouldn't slow her down.
+> **What good looks like:** With 8 years of marketing experience and half of it in devtools, <TeamMember name="Sara Miteva" showOnlyFirstName photo /> was already a strong candidate. What made her an essential hire though was the way she talked about her own writing, and the self-awareness with which she said she wanted a high-trust workplace where bureaucracy wouldn't slow her down.
 
 **Low ego.** Being opinionated isn't the same as being difficult. We look for people who can disagree and commit, take feedback well, ask stupid questions, and give away their legos when needed.
 
-> What good looks like: During his first week <TeamMember name="Brian Young" showOnlyFirstName photo /> misread a quirk in how we handle cookies. As a result, we had to apologize to a few thousand users who'd been served more cookies than promised. That wasn't great, but he took responsibility calmly, drove the work to fix it, and immediately took the feedback into his next project without ego or complaint.
+> **What good looks like:** During his first week <TeamMember name="Brian Young" showOnlyFirstName photo /> misread a quirk in how we handle cookies. As a result, we had to apologize to a few thousand users who'd been served more cookies than promised. That wasn't great, but he took responsibility calmly, drove the work to fix it, and immediately took the feedback into his next project without ego or complaint.
 
 ## How to make your application stand out
 

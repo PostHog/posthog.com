@@ -29,7 +29,7 @@ const Eli5 = ({ id, productData }: SectionComponentProps) => {
                     )}
                 </div>
             )}
-            <p>{eli5}</p>
+            {typeof eli5 === 'string' ? <p>{eli5}</p> : eli5}
         </section>
     )
 }
