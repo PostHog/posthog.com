@@ -5136,7 +5136,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -5284,87 +5284,77 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Analyzing results',
-                    url: '/docs/experiments/analyzing-results',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/experiments/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/experiments/surfaces/web-app',
+                        },
+                        {
+                            name: 'Analyzing results',
+                            url: '/docs/experiments/analyzing-results',
+                        },
+                        {
+                            name: 'Managing lifecycle',
+                            url: '/docs/experiments/managing-lifecycle',
+                        },
+                        {
+                            name: 'No-code web experiments',
+                            url: '/docs/experiments/no-code-web-experiments',
+                        },
+                        {
+                            name: 'Analyze with PostHog AI',
+                            url: '/docs/experiments/analyze-experiments-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/experiments/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/experiments/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/experiments/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Experiment metrics',
+                    url: '/docs/experiments/metrics',
                     icon: 'IconGraph',
                     color: 'purple',
-                },
-                {
-                    name: 'Managing lifecycle',
-                    url: '/docs/experiments/managing-lifecycle',
-                    icon: 'IconRewind',
-                    color: 'green',
-                },
-                {
-                    name: 'No-code experiments',
-                    url: '/docs/experiments/no-code-web-experiments',
-                    icon: 'IconToolbar',
-                    color: 'yellow',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Concepts',
-                },
-                {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPercentage',
-                    color: 'blue',
                 },
                 {
                     name: 'Exposures',
                     url: '/docs/experiments/exposures',
                     icon: 'IconPerson',
                     color: 'red',
+                    featured: true,
                 },
                 {
-                    name: 'Metrics',
-                    url: '/docs/experiments/metrics',
-                    icon: 'IconGraph',
-                    color: 'purple',
-                },
-                {
-                    name: 'Running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconCalculator',
-                    color: 'orange',
-                },
-                {
-                    name: 'Bayesian statistics',
-                    url: '/docs/experiments/statistics-bayesian',
-                    icon: 'IconFlask',
-                    color: 'purple',
-                },
-                {
-                    name: 'Frequentist statistics',
-                    url: '/docs/experiments/statistics-frequentist',
-                    icon: 'IconBook',
-                    color: 'blue',
-                },
-                {
-                    name: 'CUPED',
-                    url: '/docs/experiments/cuped',
-                    icon: 'IconCalculator',
-                    color: 'orange',
-                },
-                {
-                    name: 'Holdouts',
-                    url: '/docs/experiments/holdouts',
-                    icon: 'IconPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'A/B testing prompts',
-                    url: '/docs/experiments/llm-prompt-experiments',
-                    icon: 'IconFlask',
+                    name: 'Data warehouse metrics',
+                    url: '/docs/experiments/data-warehouse',
+                    icon: 'IconDatabase',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
@@ -5378,91 +5368,69 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Statistics',
+                },
+                {
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Running time and sample size',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'CUPED variance reduction',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
+                {
+                    name: 'Legacy methodology',
+                    url: '/docs/experiments/legacy-methodology',
+                    icon: 'IconRewind',
+                    color: 'red',
+                },
+                {
+                    name: 'Targeting & rollout',
+                },
+                {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPercentage',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'green',
+                    featured: true,
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
                     color: 'orange',
                 },
                 {
-                    name: 'Experiments without Feature Flags',
+                    name: 'Experiments without feature flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
                     color: 'red',
-                },
-                {
-                    name: 'New user experiments',
-                    url: '/tutorials/new-user-experiments',
-                    icon: 'IconPerson',
-                    color: 'blue',
-                },
-                {
-                    name: 'A/A testing',
-                    url: '/tutorials/aa-testing',
-                    icon: 'IconBalance',
-                    color: 'orange',
-                },
-                {
-                    name: 'A/B/n testing',
-                    url: '/tutorials/abn-testing',
-                    icon: 'IconSplitTesting',
-                    color: 'purple',
-                },
-                {
-                    name: 'Holdout testing',
-                    url: '/tutorials/holdout-testing',
-                    icon: 'IconShieldPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'Redirect testing',
-                    url: '/tutorials/redirect-testing',
-                    icon: 'IconArrowRight',
-                    color: 'red',
-                },
-                {
-                    name: 'Fake door test',
-                    url: '/tutorials/fake-door-test',
-                    icon: 'IconCursorClick',
-                    color: 'blue',
-                },
-                {
-                    name: 'LLM A/B tests',
-                    url: '/tutorials/llm-ab-tests',
-                    icon: 'IconAI',
-                    color: 'orange',
-                },
-
-                {
-                    name: 'Data Warehouse experiments',
-                    url: '/docs/experiments/data-warehouse',
-                    icon: 'IconDatabase',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Tutorials and framework guides',
-                    url: '/docs/experiments/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Analyze experiments with PostHog AI',
-                    url: '/docs/experiments/analyze-experiments-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Create experiments with MCP',
-                    url: '/docs/experiments/create-experiments-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
                 },
                 {
                     name: 'Resources',
@@ -5472,6 +5440,7 @@ export const docsMenu = {
                     url: '/docs/experiments/best-practices',
                     icon: 'IconStar',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting',
@@ -5479,6 +5448,22 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/experiments/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'green',
                 },
                 {
                     name: 'Changelog',

@@ -150,13 +150,8 @@
     ],
     "redirects": [
         {
-            "source": "/docs/replay-vision/webhooks",
-            "destination": "/docs/replay-vision/actions#webhooks",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/ai-observability/query-traces-mcp",
-            "destination": "/docs/ai-observability/surfaces/mcp",
+            "source": "/docs/experiments/create-experiments-mcp",
+            "destination": "/docs/experiments/surfaces/mcp",
             "statusCode": 301
         },
         {
@@ -3891,30 +3886,6 @@
             "destination": "/feature-flags#questions"
         },
         {
-            "source": "/logs/customers",
-            "destination": "/logs"
-        },
-        {
-            "source": "/logs/comparisons",
-            "destination": "/logs#feature-comparison"
-        },
-        {
-            "source": "/logs/documentation",
-            "destination": "/docs/logs"
-        },
-        {
-            "source": "/logs/tutorials",
-            "destination": "/docs/logs"
-        },
-        {
-            "source": "/logs/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/logs/questions",
-            "destination": "/logs"
-        },
-        {
             "source": "/surveys/customers",
             "destination": "/surveys"
         },
@@ -4542,17 +4513,6 @@
                     "type": "query",
                     "key": "product",
                     "value": "surveys"
-                }
-            ]
-        },
-        {
-            "source": "/pricing",
-            "destination": "/logs/pricing",
-            "has": [
-                {
-                    "type": "query",
-                    "key": "product",
-                    "value": "logs"
                 }
             ]
         },
@@ -5355,28 +5315,20 @@
             "destination": "/startups"
         },
         {
-            "source": "/data-stack",
-            "destination": "/context-warehouse"
-        },
-        {
-            "source": "/data-stack/:path*",
-            "destination": "/context-warehouse/:path*"
-        },
-        {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/context-warehouse"
+            "destination": "/data-stack"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/context-warehouse"
+            "destination": "/data-stack"
         },
         {
             "source": "/sql",
-            "destination": "/context-warehouse/sql-editor"
+            "destination": "/data-stack/sql-editor"
         },
         {
             "source": "/bi",
-            "destination": "/context-warehouse/business-intelligence"
+            "destination": "/data-stack/business-intelligence"
         },
         {
             "source": "/docs/error-tracking/common-questions",
@@ -5468,6 +5420,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/session-replay/search-replays-mcp",
+            "destination": "/docs/session-replay/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/logs/debugging-with-mcp",
             "destination": "/docs/logs/surfaces/mcp",
             "statusCode": 301
@@ -5545,11 +5502,6 @@
         {
             "source": "/trends",
             "destination": "/product-analytics"
-        },
-        {
-            "source": "/docs/session-replay/search-replays-mcp",
-            "destination": "/docs/session-replay/surfaces/mcp",
-            "statusCode": 301
         },
         {
             "source": "/questions/topic/ai-observability",
@@ -5634,6 +5586,75 @@
         {
             "source": "/endpoints/questions",
             "destination": "/endpoints#community"
+        },
+        {
+            "source": "/docs/replay-vision/webhooks",
+            "destination": "/docs/replay-vision/actions#webhooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/query-traces-mcp",
+            "destination": "/docs/ai-observability/surfaces/mcp",
+            "statusCode": 301
+        },
+        {
+            "source": "/logs/customers",
+            "destination": "/logs"
+        },
+        {
+            "source": "/logs/comparisons",
+            "destination": "/logs#feature-comparison"
+        },
+        {
+            "source": "/logs/documentation",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/tutorials",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/logs/questions",
+            "destination": "/logs"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/logs/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "logs"
+                }
+            ]
+        },
+        {
+            "source": "/data-stack",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-stack/:path*",
+            "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/customer-data-infrastructure/:path*",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-warehouse",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/sql",
+            "destination": "/context-warehouse/sql-editor"
+        },
+        {
+            "source": "/bi",
+            "destination": "/context-warehouse/business-intelligence"
         }
     ]
 }
