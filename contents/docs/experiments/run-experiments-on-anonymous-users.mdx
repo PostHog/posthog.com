@@ -1,0 +1,283 @@
+---
+title: Run experiments on anonymous users
+sidebar: Docs
+showTitle: true
+---
+
+This guide shows how to run a PostHog experiment for anonymous users in a Next.js App Router app, including the first page load before the PostHog JavaScript SDK has created its cookie.
+
+Use this pattern when:
+
+- You need to render an experiment variant on the server.
+- The visitor may not be logged in yet.
+- You want the server-side exposure and client-side events to use the same `distinct_id`.
+- You want to evaluate the experiment flag with [server-side local evaluation](/docs/feature-flags/local-evaluation).
+
+If you can wait until `posthog-js` initializes in the browser, let the client SDK own the anonymous ID and evaluate the flag client-side instead. The extra work in this guide is only needed when the server must know the variant before the page renders.
+
+## How it works
+
+On a returning visit, your server can read the PostHog cookie named `ph_<project_token>_posthog` and use the `distinct_id` from it.
+
+On a first visit, that cookie does not exist yet. The browser SDK creates it after the page loads, which is too late for server-rendered experiment code.
+
+To solve this:
+
+1. A Next.js Proxy creates or reuses an anonymous ID before the page renders.
+2. The Proxy passes that ID to the server component in a request header.
+3. The Proxy also sets a bootstrap cookie that the browser can read.
+4. The server component evaluates the experiment flag with the same ID.
+5. `instrumentation-client.ts` bootstraps `posthog-js` with the same ID, so client-side events join the same anonymous user.
+
+## Prerequisites
+
+You need:
+
+- A Next.js App Router app.
+- `posthog-js` and `posthog-node` installed.
+- A PostHog experiment with a feature flag key, such as `anonymous-homepage`.
+- A [feature flags secure API key](/docs/feature-flags/local-evaluation#step-1-find-your-feature-flags-secure-api-key) for local evaluation.
+
+If the experiment starts before login and continues after signup or login, set the experiment flag's release condition to [match by device](/docs/feature-flags/device-bucketing). This keeps the variant stable when the user changes from anonymous to identified on the same browser.
+
+Add these environment variables:
+
+```shell file=.env.local
+NEXT_PUBLIC_POSTHOG_TOKEN=<ph_project_token>
+NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+POSTHOG_FEATURE_FLAGS_SECURE_API_KEY=<ph_feature_flags_secure_api_key>
+```
+
+Keep `POSTHOG_FEATURE_FLAGS_SECURE_API_KEY` server-side only. Do not expose it with a `NEXT_PUBLIC_` prefix.
+
+## Step 1: Create a server-side PostHog client
+
+Create a singleton `posthog-node` client. The SDK option is still named `personalApiKey`, but you should pass your feature flags secure API key.
+
+```ts file=src/lib/posthog-server.ts
+import { PostHog } from "posthog-node"
+
+let posthogClient: PostHog | null = null
+
+export function getPostHogServer() {
+    if (!posthogClient) {
+        posthogClient = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
+            host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+            flushAt: 1,
+            flushInterval: 0,
+            personalApiKey: process.env.POSTHOG_FEATURE_FLAGS_SECURE_API_KEY,
+        })
+    }
+
+    return posthogClient
+}
+```
+
+`personalApiKey` enables the SDK to fetch feature flag definitions in the background and evaluate flags locally. `flushAt` and `flushInterval` keep exposure events from sitting in a queue on short-lived serverless requests.
+
+## Step 2: Bootstrap an anonymous ID before render
+
+In Next.js 16 and later, create `proxy.ts`. In Next.js 15 and earlier, create `middleware.ts` instead and rename the exported function from `proxy` to `middleware`.
+
+The Proxy checks for the native PostHog cookie. If it does not exist, it creates or reuses a bootstrap ID, passes it to the server component through `x-ph-bootstrap-id`, and writes it to a browser-readable cookie.
+
+```ts file=proxy.ts
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+
+const BOOTSTRAP_COOKIE_NAME = "ph_bootstrap_id"
+const BOOTSTRAP_HEADER_NAME = "x-ph-bootstrap-id"
+
+export function proxy(request: NextRequest) {
+    const posthogCookieName = `ph_${process.env.NEXT_PUBLIC_POSTHOG_TOKEN}_posthog`
+
+    if (request.cookies.has(posthogCookieName)) {
+        return NextResponse.next()
+    }
+
+    const bootstrapCookie = request.cookies.get(BOOTSTRAP_COOKIE_NAME)
+    const distinctId = bootstrapCookie?.value ?? crypto.randomUUID()
+
+    const requestHeaders = new Headers(request.headers)
+    requestHeaders.set(BOOTSTRAP_HEADER_NAME, distinctId)
+
+    const response = NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    })
+
+    response.cookies.set(BOOTSTRAP_COOKIE_NAME, distinctId, {
+        path: "/",
+        maxAge: 365 * 24 * 60 * 60,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+    })
+
+    return response
+}
+
+export const config = {
+    matcher: ["/"],
+}
+```
+
+Add every route that evaluates experiment flags server-side to `matcher`.
+
+The custom request header matters because setting a cookie in Proxy does not make that cookie available to `cookies()` during the same server render. Passing a request header through `NextResponse.next({ request: { headers } })` makes the ID available immediately.
+
+## Step 3: Evaluate the experiment on the server
+
+Read identity from the native PostHog cookie on returning visits. On first visits, fall back to the bootstrap header.
+
+```tsx file=src/app/page.tsx
+import { cookies, headers } from "next/headers"
+import { getPostHogServer } from "@/lib/posthog-server"
+
+const BOOTSTRAP_HEADER_NAME = "x-ph-bootstrap-id"
+const EXPERIMENT_FLAG_KEY = "anonymous-homepage"
+
+type PostHogIdentityCookie = {
+    distinct_id?: string
+    $device_id?: string
+}
+
+function parsePostHogCookie(value: string): PostHogIdentityCookie {
+    try {
+        return JSON.parse(value)
+    } catch {
+        try {
+            return JSON.parse(decodeURIComponent(value))
+        } catch {
+            return {}
+        }
+    }
+}
+
+async function getExperimentIdentity() {
+    const [cookieStore, headerStore] = await Promise.all([cookies(), headers()])
+    const posthogCookieName = `ph_${process.env.NEXT_PUBLIC_POSTHOG_TOKEN}_posthog`
+    const posthogCookie = cookieStore.get(posthogCookieName)
+
+    if (posthogCookie?.value) {
+        const parsedCookie = parsePostHogCookie(posthogCookie.value)
+
+        if (parsedCookie.distinct_id) {
+            return {
+                distinctId: parsedCookie.distinct_id,
+                deviceId: parsedCookie.$device_id ?? parsedCookie.distinct_id,
+            }
+        }
+    }
+
+    const bootstrapId = headerStore.get(BOOTSTRAP_HEADER_NAME)
+
+    if (bootstrapId) {
+        return {
+            distinctId: bootstrapId,
+            deviceId: bootstrapId,
+        }
+    }
+
+    return null
+}
+
+export default async function Page() {
+    const identity = await getExperimentIdentity()
+    let variant = "control"
+
+    if (identity) {
+        const posthog = getPostHogServer()
+        const flags = await posthog.evaluateFlags(identity.distinctId, {
+            personProperties: {
+                $device_id: identity.deviceId,
+            },
+        })
+
+        variant = flags.getFlag(EXPERIMENT_FLAG_KEY) ?? "control"
+        await posthog.flush()
+    }
+
+    return variant === "test" ? <TestPage /> : <ControlPage />
+}
+```
+
+`flags.getFlag()` records the `$feature_flag_called` exposure event that PostHog uses to include the user in experiment results. `posthog.flush()` makes sure that exposure event is sent before the request finishes.
+
+`$device_id` is required when your experiment flag matches by device. For anonymous users on first load, the bootstrap ID is both the `distinct_id` and `$device_id`. On returning visits, read both values from the native PostHog cookie so the device stays stable after `identify()`.
+
+By default, `posthog-node` tries to evaluate the flag locally and falls back to a remote request if local flag definitions are not loaded yet. If you need this path to stay fully local, add `onlyEvaluateLocally: true` and keep the `control` fallback.
+
+## Step 4: Bootstrap the browser SDK with the same ID
+
+In `instrumentation-client.ts`, read the bootstrap cookie and pass it to `posthog.init()` as `bootstrap.distinctID`.
+
+```ts file=instrumentation-client.ts
+import posthog from "posthog-js"
+
+function getBootstrapDistinctId(): string | undefined {
+    const match = document.cookie.match(/(?:^|;\s*)ph_bootstrap_id=([^;]*)/)
+    return match ? decodeURIComponent(match[1]) : undefined
+}
+
+const bootstrapDistinctId = getBootstrapDistinctId()
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_TOKEN!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    defaults: "<ph_posthog_js_defaults>",
+    ...(bootstrapDistinctId
+        ? {
+              bootstrap: {
+                  distinctID: bootstrapDistinctId,
+                  isIdentifiedID: false,
+              },
+          }
+        : {}),
+})
+```
+
+The bootstrap cookie must be readable by the browser, so don't set it as `httpOnly`.
+
+The `bootstrap.distinctID` value is only used when the browser SDK has no existing PostHog state. On returning visits, `posthog-js` uses its existing cookie and localStorage state.
+
+If client components also need the experiment variant immediately, pass the server-evaluated variant into those components. Avoid evaluating the same experiment again in the browser before the SDK has loaded its state.
+
+## Verify the setup
+
+After visiting the page, check the `$feature_flag_called` event in PostHog.
+
+Confirm that:
+
+1. `locally_evaluated` is `true` for requests resolved through local evaluation.
+2. `$lib` is `posthog-node`.
+3. The `distinct_id` matches client-side events from the same visit, such as `$pageview`.
+4. Users don't appear in multiple variants unless they use multiple browsers or devices.
+
+## Common issues
+
+### No exposure event appears
+
+Make sure you read the variant with `flags.getFlag()`. Payload-only or bulk flag access does not count as an experiment exposure.
+
+Also make sure you call `await posthog.flush()` before the server request finishes.
+
+### Server and client events have different IDs
+
+Check that `instrumentation-client.ts` reads `ph_bootstrap_id` and passes it as `bootstrap.distinctID`. Do not generate a new fallback UUID inside the server component.
+
+### Local evaluation is not used
+
+Local evaluation may not have loaded flag definitions yet, or the flag may depend on properties you did not pass. Use a shared flag definition cache if you run in a distributed or serverless environment and need to avoid remote fallback during cold starts.
+
+### Device-bucketed flags return `undefined`
+
+Pass `$device_id` in `personProperties` when evaluating the flag. For anonymous first visits, use the bootstrap ID. For returning visits, read `$device_id` from the PostHog cookie.
+
+## Further reading
+
+- [Experiments overview](/docs/experiments)
+- [Adding experiment code](/docs/experiments/adding-experiment-code)
+- [Exposures](/docs/experiments/exposures)
+- [Device bucketing](/docs/feature-flags/device-bucketing)
+- [Client-side bootstrapping](/docs/feature-flags/bootstrapping)
+- [Server-side local evaluation](/docs/feature-flags/local-evaluation)
