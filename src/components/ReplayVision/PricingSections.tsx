@@ -16,7 +16,8 @@ import type { SectionComponentProps } from 'components/Products/ReaderViewProduc
  */
 
 const CREDIT_PRICE = 0.01 // USD per credit
-const FREE_CREDITS = 2500 // per org, per month
+const FREE_CREDITS = 2500 // per org, per month – 5x the standard tier for a limited time at launch
+const STANDARD_FREE_CREDITS = 500 // the regular free tier, kept visible (struck through) next to the boosted one
 
 // Observation cost by model, in credits. Names are abstracted from the internal
 // model list for the public page.
@@ -28,8 +29,13 @@ const MODELS: { key: string; label: string; creditsPerObservation: number }[] = 
 
 const pricingDetails: { headline: React.ReactNode; body: React.ReactNode }[] = [
     {
-        headline: `${FREE_CREDITS.toLocaleString()} credits free every month.`,
-        body: 'Worth ~$25 – roughly 500 observations on the standard model. Only add a card when you scan more.',
+        headline: (
+            <>
+                <s className="opacity-60">{STANDARD_FREE_CREDITS.toLocaleString()}</s> {FREE_CREDITS.toLocaleString()}{' '}
+                credits free every month.
+            </>
+        ),
+        body: '5x the free tier for a limited time! Worth ~$25 – roughly 500 observations on the standard model. Only add a card when you scan more.',
     },
     {
         headline: 'Pay per use, not per seat.',
@@ -68,13 +74,16 @@ export const PricingTLDR = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose @container">
         <h2 className="text-3xl font-bold text-primary mt-0 mb-6">TL;DR:</h2>
         <p className="text-3xl leading-snug font-normal text-primary mb-3">
-            <strong className="font-bold">{FREE_CREDITS.toLocaleString()} credits free</strong> every month,{' '}
-            <br className="hidden @xl:block" />
+            <strong className="font-bold">
+                <s className="opacity-60">{STANDARD_FREE_CREDITS.toLocaleString()}</s> {FREE_CREDITS.toLocaleString()}{' '}
+                credits free
+            </strong>{' '}
+            every month, <br className="hidden @xl:block" />
             then <strong className="font-bold tabular-nums">${CREDIT_PRICE.toFixed(2)}/credit</strong>
         </p>
         <p className="text-lg text-primary/50 mb-4">
-            1 credit = $0.01. That's ~500 free observations a month on the standard model – you only pay for what your
-            scanners run.
+            5x the free tier for a limited time! 1 credit = $0.01. That's ~500 free observations a month on the standard
+            model – you only pay for what your scanners run.
         </p>
         <div className="flex flex-wrap items-center gap-3 mt-6">
             <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
@@ -94,11 +103,18 @@ const ROW_GRID = 'grid grid-cols-2 @xl:grid-cols-[minmax(0,1.5fr)_minmax(0,2fr)_
 const LABEL_CELL = 'col-span-2 @xl:col-span-1'
 const ROW_PADDING = 'py-3'
 
-type PlanValue = string | boolean
+type PlanValue = React.ReactNode
+
+// Rendered in both plan columns: the standard tier struck through next to the launch boost.
+const boostedFreeCredits = (
+    <>
+        <s className="opacity-60">{STANDARD_FREE_CREDITS.toLocaleString()}</s> {FREE_CREDITS.toLocaleString()}
+    </>
+)
 
 const planRows: { label: string; free: PlanValue; paid: PlanValue }[] = [
-    { label: 'Monthly free credits', free: '2,500', paid: '2,500' },
-    { label: 'Monthly volume', free: 'Up to 2,500 credits', paid: 'Unlimited' },
+    { label: 'Monthly free credits', free: boostedFreeCredits, paid: boostedFreeCredits },
+    { label: 'Monthly volume', free: `Up to ${FREE_CREDITS.toLocaleString()} credits`, paid: 'Unlimited' },
     { label: 'All scanner types', free: true, paid: true },
     { label: 'All AI models', free: true, paid: true },
     { label: 'Custom monthly spending limit', free: true, paid: true },
