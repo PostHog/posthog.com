@@ -886,7 +886,7 @@ export function useMenuData(): MenuType[] {
         ? [
               {
                   type: 'item' as const,
-                  label: 'home.mdx',
+                  label: 'Home',
                   link: '/',
               },
               { type: 'separator' as const },
