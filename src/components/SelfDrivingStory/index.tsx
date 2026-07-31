@@ -10,9 +10,10 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
  * tell the same five-beat story with its own copy and screenshots.
  *
  * The five stages – their labels, colors, and progress-bar styling – are fixed
- * so the story reads the same everywhere. A step may override the first stage's
- * label (e.g. "Source" for a signal-source origin instead of "Scout"); the copy
- * and image/placeholder are always per-step.
+ * so the story reads the same everywhere. A story renders one tab per step, and
+ * a step picks its stage via `stage` (else positional order), so a signal source
+ * can run four beats (Signal → Investigate → PR → Merge) and skip Scout. Copy and
+ * image/placeholder are always per-step.
  */
 
 export type StoryStage = 'scout' | 'signal' | 'investigate' | 'pr' | 'merge'
@@ -27,27 +28,41 @@ interface StageChrome {
 
 // Same colors and order as the /traces carousel. bg-yellow (Merge) uses dark text.
 const WHITE_PROGRESS = 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]'
-const STAGES: StageChrome[] = [
-    { stage: 'scout', label: 'Scout', color: 'bg-blue', activeText: 'text-white', progressBar: WHITE_PROGRESS },
-    { stage: 'signal', label: 'Signal', color: 'bg-red', activeText: 'text-white', progressBar: WHITE_PROGRESS },
-    {
+const STAGE_CHROME: Record<StoryStage, StageChrome> = {
+    scout: { stage: 'scout', label: 'Scout', color: 'bg-blue', activeText: 'text-white', progressBar: WHITE_PROGRESS },
+    signal: {
+        stage: 'signal',
+        label: 'Signal',
+        color: 'bg-red',
+        activeText: 'text-white',
+        progressBar: WHITE_PROGRESS,
+    },
+    investigate: {
         stage: 'investigate',
         label: 'Investigate',
         color: 'bg-purple',
         activeText: 'text-white',
         progressBar: WHITE_PROGRESS,
     },
-    { stage: 'pr', label: 'PR', color: 'bg-green', activeText: 'text-white', progressBar: WHITE_PROGRESS },
-    {
+    pr: { stage: 'pr', label: 'PR', color: 'bg-green', activeText: 'text-white', progressBar: WHITE_PROGRESS },
+    merge: {
         stage: 'merge',
         label: 'Merge',
         color: 'bg-yellow',
         activeText: 'text-black',
         progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
     },
-]
+}
+// Default stage order when a step doesn't name its own stage – the full five-beat story.
+const DEFAULT_STAGE_ORDER: StoryStage[] = ['scout', 'signal', 'investigate', 'pr', 'merge']
 
 export interface SelfDrivingStoryStep {
+    /**
+     * Which stage this step is. Omit to fall back to positional order
+     * (scout, signal, investigate, PR, merge). Set it to render a subset –
+     * e.g. a signal-source story that skips Scout and leads with Signal.
+     */
+    stage?: StoryStage
     /** Copy for this stage. Keep it to one or two sentences. */
     copy: React.ReactNode
     /** Cloudinary (or other) screenshot URL. Takes precedence over `imagePlaceholder`. */
@@ -59,7 +74,7 @@ export interface SelfDrivingStoryStep {
 }
 
 export interface SelfDrivingStoryProps {
-    /** Exactly five steps, in stage order: scout/source, signal, investigate, PR, merge. */
+    /** One entry per tab, in display order. Up to five (scout, signal, investigate, PR, merge). */
     steps: SelfDrivingStoryStep[]
     /** Optional section headline (rendered as an h2). Omitted inside the inbox reading pane. */
     headline?: string
@@ -143,8 +158,11 @@ export default function SelfDrivingStory({
     merged,
     className,
 }: SelfDrivingStoryProps): JSX.Element {
-    const tabs: TabbedCarouselTab[] = STAGES.map((stage, index) => {
-        const step = steps[index] ?? { copy: '' }
+    // One tab per step, in the order given. Each step's chrome comes from its own
+    // `stage` when set, else the positional default – so a story can run the full
+    // five beats or a subset (e.g. Signal → Investigate → PR → Merge).
+    const tabs: TabbedCarouselTab[] = steps.map((step, index) => {
+        const stage = STAGE_CHROME[step.stage ?? DEFAULT_STAGE_ORDER[index] ?? 'signal']
         return {
             value: stage.stage,
             label: step.label ?? stage.label,

@@ -3,7 +3,13 @@ import { IconChevronDown, IconSearch, IconNotification } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import ReportRow from './ReportRow'
 import ReportDetail from './ReportDetail'
-import InboxFilterBar, { applyFilters, sourcesInUse, DEFAULT_FILTERS, type InboxFilterState } from './InboxFilters'
+import InboxFilterBar, {
+    applyFilters,
+    sourcesInUse,
+    scoutsInUse,
+    DEFAULT_FILTERS,
+    type InboxFilterState,
+} from './InboxFilters'
 import { INBOX_ITEMS, REPORT_ITEMS } from './inboxData'
 import { Hint } from './prose'
 
@@ -68,6 +74,7 @@ export default function InboxReplica(): JSX.Element {
     const visibleItems = useMemo(() => applyFilters(activeTab.items, filters), [activeTab, filters])
     // Derived from the active tab's data, so every option in the menu returns at least one row.
     const sources = useMemo(() => sourcesInUse(activeTab.items), [activeTab])
+    const scouts = useMemo(() => scoutsInUse(activeTab.items), [activeTab])
 
     // Deep-link: open whichever item the URL hash points at on mount, and select the tab
     // it lives on so backing out of the detail view lands on the right list.
@@ -165,7 +172,7 @@ export default function InboxReplica(): JSX.Element {
                             Search by title or description.
                         </span>
                         <div className="ml-auto">
-                            <InboxFilterBar filters={filters} onChange={setFilters} sources={sources} />
+                            <InboxFilterBar filters={filters} onChange={setFilters} sources={sources} scouts={scouts} />
                         </div>
                     </div>
 

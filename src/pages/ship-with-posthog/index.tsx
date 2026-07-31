@@ -6,6 +6,7 @@ import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import WizardCommand from 'components/WizardCommand'
 import InboxReplica from 'components/ShipWithPostHog/InboxReplica'
+import SignalsToInbox from 'components/ShipWithPostHog/SignalsToInbox'
 import SlotMachineText from 'components/SlotMachineText'
 
 // Words cycled through the "Ship {word} with PostHog" headline. "code" rests last (held
@@ -63,6 +64,11 @@ export default function ShipWithPostHog(): JSX.Element {
 
                         {/* The Inbox */}
                         <InboxReplica />
+
+                        {/* Per-PR walkthroughs of the five beats between signal and merge */}
+                        <div className="mt-14 @md:mt-20">
+                            <SignalsToInbox />
+                        </div>
 
                         {/* One loop, many ways in */}
                         <div className="mx-auto mt-14 max-w-2xl text-center @md:mt-20">

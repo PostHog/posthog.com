@@ -10,6 +10,7 @@ import {
     IconGraph,
 } from '@posthog/icons'
 import { Code } from './prose'
+import type { SelfDrivingStoryStep } from 'components/SelfDrivingStory'
 
 /**
  * Data for the /ship-with-posthog inbox replica.
@@ -264,6 +265,30 @@ export interface InboxItem {
     prNumber?: number
     /** The detail view's payload. */
     detail?: ReportDetail
+    /**
+     * One-line lead-in above this item's walkthrough in `SignalsToInbox`. Optional so an
+     * item can appear in the inbox without appearing in that section.
+     */
+    intro?: React.ReactNode
+    /**
+     * The Scout → Signal → Investigate → PR → Merge walkthrough for `SignalsToInbox`.
+     * Optional for the same reason: only items with steps show up in the selector, so an
+     * item added to the inbox never breaks that section by having nothing to narrate.
+     */
+    steps?: SelfDrivingStoryStep[]
+}
+
+/*
+ * Placeholder screenshot labels, so a later content pass knows which image each slot
+ * wants. `SelfDrivingStory` renders these as labeled dashed boxes until real captures
+ * land, and `image` takes precedence over `imagePlaceholder` once one does.
+ */
+const ph = {
+    source: (source: string) => `Screenshot: ${source} in PostHog`,
+    signal: 'Screenshot: the report in your Inbox',
+    investigate: 'Screenshot: the agent tracing the root cause',
+    pr: (n: number) => `Screenshot: pull request #${n} on GitHub`,
+    merge: (n: number) => `Screenshot: #${n} merged`,
 }
 
 /**
@@ -299,6 +324,43 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'error_tracking' },
         prUrl: 'https://github.com/PostHog/posthog/pull/75725',
         prNumber: 75725,
+        intro: 'An exception burst that pointed at the wrong culprit until an agent read the write path.',
+        steps: [
+            {
+                label: 'Source',
+                copy: 'Error tracking groups every exception your app throws into issues with a running count. It watches continuously, so a burst registers the moment it starts.',
+                imagePlaceholder: ph.source('Error tracking'),
+            },
+            {
+                copy: 'Insight queries start returning 500s in project-wide bursts, then go near-silent for about ten days. Narrowed to this path, 172 exceptions land inside three minutes, 171 of them the same database error.',
+                imagePlaceholder: ph.signal,
+            },
+            {
+                copy: (
+                    <>
+                        The agent finds the queries had already succeeded. <Code>store_result()</Code> asks{' '}
+                        <Code>get_team_cache_limit()</Code> for the team's cache cap, and that helper reads an optional
+                        override from Postgres while only catching <Code>Team.DoesNotExist</Code> – so a saturated
+                        connection pooler fails a query over a config value that has a good default.
+                    </>
+                ),
+                imagePlaceholder: ph.investigate,
+            },
+            {
+                copy: (
+                    <>
+                        The fix catches <Code>DatabaseError</Code>, falls back to the default limit, and wraps the
+                        bookkeeping call so cache accounting can never fail a query that already ran. 39 lines added
+                        across four files.
+                    </>
+                ),
+                imagePlaceholder: ph.pr(75725),
+            },
+            {
+                copy: 'The agent suggested Andy Zhao, who wrote the cache-limit helper in the first place. He reviewed it, approved it, and it merged the same day.',
+                imagePlaceholder: ph.merge(75725),
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 30, 2026',
@@ -442,6 +504,37 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/72382',
         prNumber: 72382,
+        intro: 'Three recordings, three weeks apart, all stuck on the same validation error.',
+        steps: [
+            {
+                label: 'Source',
+                copy: 'Replay Vision watches session recordings and flags friction as it happens – rage clicks, dead ends, and people retrying the same action.',
+                imagePlaceholder: ph.source('Replay Vision'),
+            },
+            {
+                copy: 'Someone builds a cohort with a "did not complete event" criterion, hits save, and gets an error. Three independent recordings catch the same block across two regions over about three weeks.',
+                imagePlaceholder: ph.signal,
+            },
+            {
+                copy: (
+                    <>
+                        The agent matches the error text to its client-side constant, then finds{' '}
+                        <Code>validateGroup</Code> checking negation one group at a time. A negation alone in its group
+                        makes that group entirely negated, so the check throws without ever looking at the positive
+                        criterion in a sibling group.
+                    </>
+                ),
+                imagePlaceholder: ph.investigate,
+            },
+            {
+                copy: 'The fix makes negation validation reason about the whole cohort: under a top-level AND, a negation in one group is satisfied by a positive criterion in any sibling group.',
+                imagePlaceholder: ph.pr(72382),
+            },
+            {
+                copy: 'Worth merging for the workaround alone – people were switching the group to "any" to get past the error, which silently built a different cohort than the one they wanted.',
+                imagePlaceholder: ph.merge(72382),
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 6, 2026',
@@ -559,6 +652,43 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'conversations' },
         prUrl: 'https://github.com/PostHog/posthog/pull/73901',
         prNumber: 73901,
+        intro: 'A support thread about Slack that turned out to be an OAuth bug hiding behind a successful-looking redirect.',
+        steps: [
+            {
+                label: 'Source',
+                copy: 'Conversations reads your support inbox. A thread that describes a reproducible product problem becomes a signal, without anyone filing a ticket for it.',
+                imagePlaceholder: ph.source('Conversations'),
+            },
+            {
+                copy: 'A customer with several projects connects Slack and the integration lands on a different project. Querying integration-created events shows people making three or four Slack connect attempts in one day that all resolve to the same single project.',
+                imagePlaceholder: ph.signal,
+            },
+            {
+                copy: (
+                    <>
+                        The agent finds <Code>authorize_url</Code> putting only <Code>{'{next, token}'}</Code> in the
+                        OAuth <Code>state</Code>, with a callback that isn't project-scoped. The full-page round-trip
+                        re-resolves the current team to the user's saved default, so the integration is created against
+                        the wrong one – then <Code>state.next</Code> bounces the UI back, which is why it looks like it
+                        worked.
+                    </>
+                ),
+                imagePlaceholder: ph.investigate,
+            },
+            {
+                copy: (
+                    <>
+                        The fix carries the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and
+                        creates against that team, matching what the GitHub flow already did.
+                    </>
+                ),
+                imagePlaceholder: ph.pr(73901),
+            },
+            {
+                copy: 'One report, but it affects every multi-project customer wiring up any OAuth integration, since they all share this flow. Approved and merged three days after it was first seen.',
+                imagePlaceholder: ph.merge(73901),
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 27, 2026',
@@ -695,6 +825,36 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'conversations' },
         prUrl: 'https://github.com/PostHog/posthog/pull/70918',
         prNumber: 70918,
+        intro: 'A feature that failed two times in three, with every failure landing on the same suspicious number.',
+        steps: [
+            {
+                label: 'Source',
+                copy: 'Conversations picked this one up, and LLM analytics had the numbers to confirm it – every generation your app makes is already tracked with its latency and error state.',
+                imagePlaceholder: ph.source('Conversations'),
+            },
+            {
+                copy: (
+                    <>
+                        Generating an AI eval summary mostly fails. Querying <Code>$ai_generation</Code> events over 30
+                        days: 16 errors, all 502, average latency 29.1s and max 30.0s, against 8 successes topping out
+                        at 29.3s.
+                    </>
+                ),
+                imagePlaceholder: ph.signal,
+            },
+            {
+                copy: 'Failures clustered on the boundary rather than spread out, which points at a hard timeout instead of a slow model. The endpoint ran one blocking completion over as many as 250 runs, taking 20 to 30+ seconds through a gateway that aborts at about 30 – so the generous Python-side timeout never got a chance to apply.',
+                imagePlaceholder: ph.investigate,
+            },
+            {
+                copy: 'The fix summarizes as a bounded concurrent map-reduce, chunking the run set so no single gateway request approaches the timeout. The largest of these five by a distance: 997 lines added across 13 files.',
+                imagePlaceholder: ph.pr(70918),
+            },
+            {
+                copy: 'Approved and merged, taking a 67% failure rate to zero without raising a single limit.',
+                imagePlaceholder: ph.merge(70918),
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 14, 2026',
@@ -806,6 +966,36 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/67019',
         prNumber: 67019,
+        intro: 'The smallest bug of the five, and the one showing up in the most projects.',
+        steps: [
+            {
+                label: 'Source',
+                copy: 'Replay Vision watches recordings for friction, and the recordings here were backed up by plain event data.',
+                imagePlaceholder: ph.source('Replay Vision'),
+            },
+            {
+                copy: (
+                    <>
+                        Opening the old toolbar settings URL gives a "Setting not found" page while the sidebar goes on
+                        highlighting Toolbar as the current page. Counting <Code>not_found_shown</Code> events for that
+                        path over 90 days turns up more than twenty distinct projects, in both regions.
+                    </>
+                ),
+                imagePlaceholder: ph.signal,
+            },
+            {
+                copy: 'The section had been removed when toolbar configuration folded into web analytics. The settings router canonicalizes old section ids through a legacy map, but that map only covered one earlier rename, so this id falls through and the scene renders its not-found state.',
+                imagePlaceholder: ph.investigate,
+            },
+            {
+                copy: 'The fix adds the removed section to the legacy map so the router redirects to where those settings actually live now. 57 lines added, nothing removed.',
+                imagePlaceholder: ph.pr(67019),
+            },
+            {
+                copy: 'A papercut, not a hard block – but it was live for a month across twenty-plus projects, and the agent found the person who removed the section to review it.',
+                imagePlaceholder: ph.merge(67019),
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jun 29, 2026',

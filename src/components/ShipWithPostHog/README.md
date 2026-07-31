@@ -27,9 +27,10 @@ there so renaming is a folder move plus a `vercel.json` redirect.
 | `EvidenceCard.tsx`    | One evidence finding: the source and a tinted status tag on one line, then the title, what the signal observed, and the repo files the agent read to work it out. |
 | `ReviewerList.tsx`    | Suggested reviewers and the "Add" menu. Matches names against the real team directory at build time (`allSqueakProfile`), so avatars and profile links are genuine; an unmatched name degrades to an initial monogram rather than disappearing. |
 | `FilesChanged.tsx`    | The Files-changed tab: per-file stat line plus one excerpted hunk, with add/remove tinting. |
-| `InboxFilters.tsx`    | The Sort / Source / Priority filter bar and the sort + filter logic (`applyFilters`). All three menus really filter the list. |
+| `InboxFilters.tsx`    | The Sort / Source / Priority filter bar and the sort + filter logic (`applyFilters`). All three menus really filter the list. Sort is single-select; Source and Priority are multi-select and stay open while you pick. |
+| `SignalsToInbox.tsx`  | The "How signals get to your Inbox" section below the inbox: a selector across the merged PRs, each showing its Scout → Signal → Investigate → PR → Merge walkthrough via `SelfDrivingStory`. Read-only – reviewing happens up in the inbox. |
 | `PriorityBadge.tsx`   | The tinted-square priority chip (P0–P4), plus `PRIORITY_META` – the hue and name per level, shared with the priority filter menu so the two can't drift. |
-| `inboxData.tsx`       | `INBOX_ITEMS` (the five merged PRs) and `REPORT_ITEMS` (the three open reports) with their detail payloads, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
+| `inboxData.tsx`       | `INBOX_ITEMS` (the five merged PRs) and `REPORT_ITEMS` (the three open reports) with their detail payloads and walkthrough steps, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
 | `prose.tsx`           | The subdued inline-`Code` used in detail prose, and `Hint` – the width-capped tooltip the hover annotations use. Its own module so `inboxData.tsx` can import it without a cycle through the components. |
 
 ## The items are real
@@ -46,6 +47,7 @@ into a PR. Nothing is invented. Where each field comes from:
 | Suggested reviewers, commit SHAs, rationale | The report's newest `suggested_reviewers` artefact |
 | Evidence code paths | Each `signal_finding`'s `relevant_code_paths`, verbatim |
 | Evidence bodies | **Re-worded** from `signal_finding` – see below |
+| Walkthrough steps (`intro`, `steps`) | Written from that item's own report and PR – the counts, latencies, branch names, and reviewer rationale are the real ones |
 
 They're grouped by **discovery channel** rather than by product, because that's what the reports
 record. `source_products` says how PostHog found the problem (a support conversation, an exception, a
@@ -79,18 +81,28 @@ notes above before publishing anything new.
 ## Notes
 
 Genuinely interactive: the Sort / Source / Priority filter bar, the Overview / Files changed tabs,
-and the collapsible panels. The PR, commit, and reviewer-profile links all go to real places.
+the collapsible panels, and the signal selector in `SignalsToInbox`. The PR, commit, and
+reviewer-profile links all go to real places.
+
+The Source menu has a nested **Scout** group, rendered only when the active tab actually holds
+scout-authored items (`scoutsInUse`). Every report on the page today was found by a signal source, so
+the group is currently hidden rather than empty. Sources and scouts are two halves of one facet, so
+they union rather than intersect — picking a source and a scout shows both.
+
+Walkthrough steps are optional on `InboxItem`, and `SignalsToInbox` renders only items that have
+them. Adding a report to the inbox therefore can't leave a selector button that opens nothing. Its
+screenshots are still `imagePlaceholder` labels; `image` takes precedence once real captures land.
 
 Chrome that looks interactive but isn't: the search box, and the Discuss / Archive / Refund / Create-PR
 buttons. Each of those carries a `Hint` tooltip explaining what it would do, as do the two tabs and the
 For-you/Entire-project scope picker. The reviewer "Add" menu opens and lists real options, but nothing
 is wired behind it.
 
-The filter menus are single-select, and picking the active option again clears it, and switching tabs
-resets them (the two tabs have different sources). Source lists only the sources present in the active
-tab's data, so no option there dead-ends; priority lists all of P0–P4 because that scale is part of the
-product, which means several levels match nothing. That plus any source/priority combination is what
-the list's empty state is for.
+Picking a selected option again clears it, switching tabs resets all three menus (the two tabs have
+different sources), and the reset button beside the bar clears everything at once. Source lists only
+the sources present in the active tab's data, so no option there dead-ends; priority lists all of
+P0–P4 because that scale is part of the product, which means several levels match nothing. That plus
+any source/priority combination is what the list's empty state is for.
 
 Everything is responsive by container query, not viewport – the detail body goes two-column at `@3xl`,
 and the right column is its own `@container` so the evidence footers can respond to their own width.

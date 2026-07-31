@@ -8,6 +8,7 @@ import {
     IconClock,
     IconCalendar,
     IconRefresh,
+    IconCompass,
 } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import { PRIORITIES, PRIORITY_META } from './PriorityBadge'
@@ -17,20 +18,29 @@ import { SOURCE_META, type InboxItem, type Priority, type SourceKey } from './in
  * The Inbox filter bar: sort, source, and priority, mirroring the real product's
  * controls. All three actually filter the list – see `applyFilters`.
  *
- * Each menu is single-select and selecting the active option again clears it, so a
- * visitor can always get back to the full list without a separate reset control.
+ * Sort is single-select. Source and priority are multi-select, matching the real Inbox:
+ * clicking an option toggles it and leaves the menu open so several can be picked in one
+ * go. Clearing every option in a menu returns it to "off", and the reset button beside
+ * the bar clears all three at once.
  */
 
 export type SortKey = 'priority' | 'updated' | 'newest' | 'oldest'
 
 export interface InboxFilterState {
     sort: SortKey
-    /** The discovery channel that found the report, not the product it lives in. */
-    source: SourceKey | null
-    priority: Priority | null
+    /** Discovery channels that found the report, not the products it lives in. Empty = all. */
+    sources: SourceKey[]
+    /** Scout categories, the other half of the Source menu. Empty = all. */
+    scouts: string[]
+    /** Empty = all. */
+    priorities: Priority[]
 }
 
-export const DEFAULT_FILTERS: InboxFilterState = { sort: 'priority', source: null, priority: null }
+export const DEFAULT_FILTERS: InboxFilterState = { sort: 'priority', sources: [], scouts: [], priorities: [] }
+
+/** Add or remove `value`, so a menu row can toggle its own selection. */
+const toggle = <T,>(list: T[], value: T): T[] =>
+    list.includes(value) ? list.filter((entry) => entry !== value) : [...list, value]
 
 const SORT_OPTIONS: { key: SortKey; label: string; Icon: React.ComponentType<{ className?: string }> }[] = [
     { key: 'priority', label: 'Priority first', Icon: IconSort },
@@ -65,10 +75,16 @@ const priorityRank = (item: InboxItem): number => Number(item.priority.slice(1))
  * Returns a new array; `items` is untouched.
  */
 export const applyFilters = (items: InboxItem[], filters: InboxFilterState): InboxItem[] => {
+    // Sources and scouts are two halves of one menu, so they union rather than intersect –
+    // picking "Replay Vision" and the "Cohorts" scout shows both, not neither.
+    const sourceFacetOff = !filters.sources.length && !filters.scouts.length
+    const matchesSource = (item: InboxItem): boolean =>
+        sourceFacetOff ||
+        filters.sources.includes(item.origin.product) ||
+        (item.origin.kind === 'scout' && filters.scouts.includes(item.origin.scout))
+
     const matching = items.filter(
-        (item) =>
-            (!filters.source || item.origin.product === filters.source) &&
-            (!filters.priority || item.priority === filters.priority)
+        (item) => matchesSource(item) && (!filters.priorities.length || filters.priorities.includes(item.priority))
     )
 
     const sorted = [...matching]
@@ -97,6 +113,19 @@ export const sourcesInUse = (items: InboxItem[]): SourceKey[] => {
     const seen: SourceKey[] = []
     items.forEach((item) => {
         if (!seen.includes(item.origin.product)) seen.push(item.origin.product)
+    })
+    return seen
+}
+
+/**
+ * The scout categories present in the data, for the Source menu's nested Scout group.
+ * Currently empty – every real report on this page was found by a signal source rather
+ * than a scout – so the group renders only once scout-authored items exist.
+ */
+export const scoutsInUse = (items: InboxItem[]): string[] => {
+    const seen: string[] = []
+    items.forEach((item) => {
+        if (item.origin.kind === 'scout' && !seen.includes(item.origin.scout)) seen.push(item.origin.scout)
     })
     return seen
 }
@@ -181,13 +210,29 @@ export default function InboxFilterBar({
     filters,
     onChange,
     sources,
+    scouts = [],
 }: {
     filters: InboxFilterState
     onChange: (next: InboxFilterState) => void
     sources: SourceKey[]
+    /** Scout categories in the active tab's data. Omitted or empty hides the Scout group. */
+    scouts?: string[]
 }): JSX.Element {
     const activeSort = SORT_OPTIONS.find((option) => option.key === filters.sort) ?? SORT_OPTIONS[0]
-    const SourceIcon = filters.source ? SOURCE_META[filters.source].Icon : IconFilter
+
+    // The chip reads as the single selection when there's one, and a count beyond that.
+    const sourceCount = filters.sources.length + filters.scouts.length
+    const onlySource = filters.sources.length === 1 && !filters.scouts.length ? filters.sources[0] : null
+    const SourceIcon = onlySource ? SOURCE_META[onlySource].Icon : IconFilter
+    const sourceLabel = onlySource
+        ? SOURCE_META[onlySource].label
+        : sourceCount === 1
+        ? `Scout · ${filters.scouts[0]}`
+        : sourceCount > 1
+        ? `${sourceCount} sources`
+        : 'Source'
+
+    const priorityLabel = filters.priorities.length ? [...filters.priorities].sort().join(', ') : 'Priority'
 
     return (
         <div className="flex items-center gap-2">
@@ -213,38 +258,55 @@ export default function InboxFilterBar({
                 }
             </FilterMenu>
 
+            {/* Source and Priority are multi-select, so neither closes on pick. */}
             <FilterMenu
                 name="Source"
-                icon={<SourceIcon className={`size-3.5 ${filters.source ? SOURCE_META[filters.source].color : ''}`} />}
-                label={filters.source ? SOURCE_META[filters.source].label : 'Source'}
-                active={!!filters.source}
+                icon={<SourceIcon className={`size-3.5 ${onlySource ? SOURCE_META[onlySource].color : ''}`} />}
+                label={sourceLabel}
+                active={sourceCount > 0}
             >
-                {(close) =>
-                    sources.map((key) => {
-                        const { label, Icon, color } = SOURCE_META[key]
-                        return (
-                            <MenuItem
-                                key={key}
-                                icon={<Icon className={`size-4 ${color}`} />}
-                                label={label}
-                                selected={filters.source === key}
-                                onSelect={() => {
-                                    onChange({ ...filters, source: filters.source === key ? null : key })
-                                    close()
-                                }}
-                            />
-                        )
-                    })
-                }
+                {() => (
+                    <>
+                        {sources.map((key) => {
+                            const { label, Icon, color } = SOURCE_META[key]
+                            return (
+                                <MenuItem
+                                    key={key}
+                                    icon={<Icon className={`size-4 ${color}`} />}
+                                    label={label}
+                                    selected={filters.sources.includes(key)}
+                                    onSelect={() => onChange({ ...filters, sources: toggle(filters.sources, key) })}
+                                />
+                            )
+                        })}
+                        {/* Only rendered when scout-authored items exist, so it can't dead-end. */}
+                        {scouts.length > 0 && (
+                            <>
+                                <p className="m-0 mt-1 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-secondary">
+                                    Scout
+                                </p>
+                                {scouts.map((scout) => (
+                                    <MenuItem
+                                        key={scout}
+                                        icon={<IconCompass className="size-4 text-secondary" />}
+                                        label={scout}
+                                        selected={filters.scouts.includes(scout)}
+                                        onSelect={() => onChange({ ...filters, scouts: toggle(filters.scouts, scout) })}
+                                    />
+                                ))}
+                            </>
+                        )}
+                    </>
+                )}
             </FilterMenu>
 
             <FilterMenu
                 name="Priority"
                 icon={<IconFlag className="size-3.5" />}
-                label={filters.priority ?? 'Priority'}
-                active={!!filters.priority}
+                label={priorityLabel}
+                active={filters.priorities.length > 0}
             >
-                {(close) =>
+                {() =>
                     PRIORITIES.map((key) => {
                         const { color, label } = PRIORITY_META[key]
                         return (
@@ -262,11 +324,8 @@ export default function InboxFilterBar({
                                         {key} <span className="text-secondary">· {label}</span>
                                     </>
                                 }
-                                selected={filters.priority === key}
-                                onSelect={() => {
-                                    onChange({ ...filters, priority: filters.priority === key ? null : key })
-                                    close()
-                                }}
+                                selected={filters.priorities.includes(key)}
+                                onSelect={() => onChange({ ...filters, priorities: toggle(filters.priorities, key) })}
                             />
                         )
                     })
