@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction } from "components/CallToAction";
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -53,9 +53,36 @@ On-demand runs count against the same daily run budget as scheduled runs, so rep
 
 ### Dry runs
 
-A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it *would* have filed, tune it, then switch it to writing for real.
+A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it _would_ have filed, tune it, then switch it to writing for real.
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
+
+## When a scout goes quiet
+
+A scout that produces nothing anyone uses wastes run budget. Rather than leaving it running forever, PostHog automatically warns and then pauses inactive scouts so the budget goes to scouts that are earning their runs.
+
+The lifecycle works in two steps:
+
+1. **Warning** – A daily sweep checks every enabled scout's last 14 days. If a scout produced nothing in that window and ran at least five times, it's marked **Quiet** on the fleet page. The scout keeps running.
+2. **Pause** – If the scout is still quiet seven days after the warning, it's paused and stops running. The fleet page shows it as **Paused**.
+
+A scout counts as productive if either of these is true over the 14-day window:
+
+- **Output** – It emitted at least one finding or report.
+- **Engagement** – Someone acted on a report the scout produced earlier – left a note, dismissed it, resolved it, or otherwise engaged with it.
+
+If a scout surfaces something or someone engages with one of its reports while it's warned, the warning clears automatically and the scout stays active.
+
+### Re-enabling a paused scout
+
+Re-enabling is one click: turn the scout back on. When you do, two things happen:
+
+- The scout gets a fresh 14-day grace period before it can be evaluated again.
+- It's automatically marked exempt from future auto-pauses, so the sweep never overrules you twice. You can clear the exemption later if you change your mind.
+
+### Keeping a scout running while quiet
+
+Some scouts are supposed to stay quiet – a health-check watchdog or an inbox-validation scout is doing its job when it finds nothing. For those, turn on **Keep running while quiet** in the scout's settings. This exempts the scout from the inactivity sweep so silence is never treated as waste.
 
 ## Steering a scout with a note
 
@@ -69,7 +96,7 @@ A note can address one scout by name or the whole fleet, and you can give it an 
 
 Notes are advisory. They direct a scout's attention, but they don't lower its evidence bar or force it to file anything – a note saying "report X" still gets an honest investigation. Each run says which notes it acted on and how, and folds anything durable into its memory.
 
-A note is the right tool for steering *this project, right now*, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
+A note is the right tool for steering _this project, right now_, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
 
 ### Your inbox feedback steers scouts too
 
@@ -102,6 +129,8 @@ LIMIT 20
 ```
 
 Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
+
+The inactivity sweep also emits events you can track the same way: `signals_scout_auto_pause_warned` when a scout enters the warning state, `signals_scout_auto_paused` when it's paused, and `signals_scout_auto_pause_reverted` when someone re-enables an auto-paused scout. The revert event includes `hours_since_pause`, so you can spot false positives – a re-enable within a day of the pause means the sweep paused something someone still wanted.
 
 ## Built-in and custom scouts
 
