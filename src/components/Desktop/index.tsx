@@ -56,7 +56,7 @@ export const useProductLinks = () => {
             {
                 label: 'Context warehouse',
                 Icon: <GlassIcon path={CONTEXT_WAREHOUSE_SILHOUETTE} />,
-                url: '/data-stack',
+                url: '/context-warehouse',
                 source: 'desktop',
             },
             {

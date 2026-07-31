@@ -2530,7 +2530,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         {
             handle: 'posthog_ai_data_stack',
             name: 'PostHog AI for your data',
-            slug: 'data-stack/posthog-ai',
+            slug: 'context-warehouse/posthog-ai',
             category: 'data',
             parentIcon: 'ai',
             Icon: IconAI,
