@@ -35,31 +35,19 @@ import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
-import { getProseClasses, isMarkdownContentPath } from '../../constants'
+import { getProseClasses } from '../../constants'
 import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
-import CopyMarkdownActionsDropdown, { useMarkdownUrlExists } from 'components/MarkdownActionsDropdown'
+import MarkdownActions from 'components/MarkdownActions'
 import CustomerMetadata from './CustomerMetadata'
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 
 dayjs.extend(relativeTime)
-
-// Wrapper component that conditionally renders CopyMarkdownActionsDropdown based on whether the markdown URL exists
-const ConditionalMarkdownDropdown = ({ pageUrl }: { pageUrl: string | undefined }) => {
-    const isAllowedPath = pageUrl && isMarkdownContentPath(pageUrl)
-    const markdownExists = useMarkdownUrlExists(isAllowedPath ? pageUrl : '')
-
-    if (!isAllowedPath || markdownExists !== true) {
-        return null
-    }
-
-    return <CopyMarkdownActionsDropdown pageUrl={pageUrl} />
-}
 
 /**
  * A swappable menu tab for the LeftSidebar. When `menuTabs` is provided to
@@ -809,7 +797,6 @@ interface LeftSidebarProps {
     filePath?: string
     sourceInstanceName?: string
     commits?: any[]
-    pageUrl: string | undefined
     rightActionButtons?: React.ReactNode
     hideAppOptions?: boolean
     productSelect?: React.ReactNode
@@ -963,7 +950,6 @@ const LeftSidebar = ({
     filePath,
     sourceInstanceName,
     commits,
-    pageUrl,
     rightActionButtons,
     hideAppOptions = false,
     productSelect,
@@ -1287,7 +1273,6 @@ const LeftSidebar = ({
                     </Tooltip>
                     {displayExpanded && (
                         <div className="ml-auto flex items-center gap-px">
-                            <ConditionalMarkdownDropdown pageUrl={pageUrl} />
                             <EditHistoryPopover commits={commits || []} />
                             <EditOnGitHubButton filePath={filePath} sourceInstanceName={sourceInstanceName} />
                             {!hideAppOptions && <AppOptionsButton isMdx={isMdx} />}
@@ -1379,7 +1364,7 @@ function ReaderViewContent({
 }: ReaderViewProps) {
     const { compact } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
-    const { hash } = useLocation()
+    const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
 
@@ -1463,6 +1448,15 @@ function ReaderViewContent({
         .filter(Boolean)
         .join(' ')
 
+    // Width of the article's readable column. Repeated inline throughout the content below;
+    // hoisted here so anything added to the column stays aligned with the title and prose.
+    const contentWidthClass =
+        fullWidthContent || body?.type !== 'mdx'
+            ? 'max-w-full'
+            : contentMaxWidthClass
+            ? contentMaxWidthClass
+            : 'mx-auto max-w-2xl'
+
     return (
         <SearchProvider>
             <div
@@ -1481,7 +1475,6 @@ function ReaderViewContent({
                         filePath={filePath}
                         sourceInstanceName={sourceInstanceName}
                         commits={commits}
-                        pageUrl={appWindow?.path}
                         rightActionButtons={rightActionButtons}
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
@@ -1585,6 +1578,14 @@ function ReaderViewContent({
                                             )}
                                         </div>
                                     )}
+                                    {/* Raw markdown actions, for readers handing this page to an LLM.
+                                        Self-hides on pages with no generated .md counterpart —
+                                        see components/MarkdownActions/README.md. */}
+                                    <MarkdownActions
+                                        pageUrl={appWindow?.path ?? pathname}
+                                        isMdx={body?.type === 'mdx'}
+                                        className={`mb-2 transition-all ${contentWidthClass}`}
+                                    />
                                     {title && !hideTitle && (
                                         <h1
                                             className={`transition-all ${
