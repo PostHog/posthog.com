@@ -84,7 +84,7 @@ This is not what most people want to hear, but these are the things that actuall
 
 **Use PostHog, then tell us about it.** We like hiring people who use the product and we like it more when they arrive with capital T thoughts. Applying for a product marketing role? Tell us what you'd change about our positioning. Applying for a lifecycle marketer role? Critique our onboarding.
 
-**Get weird with it.** AI made building things cheap, so more marketers can ship as well as plan. We've had vibecoded video games about our brand, musical cover letters, and personal portfolios that would take your breath away. PostHog is full of weirdos and we'd like to stay that way, so let your freak flag fly.
+**Get weird with it.** AI made building things cheap, so more marketers can ship as well as plan. We've had vibecoded video games about our brand, musical cover letters, and interviews where people turn up in costumes. PostHog is full of weirdos and we'd like to stay that way, so let your freak flag fly.
 
 ## Further reading
 
