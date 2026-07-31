@@ -6185,7 +6185,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -6195,10 +6195,66 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/data-warehouse/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/surfaces/web-app',
+                        },
+                        {
+                            name: 'Query with SQL',
+                            url: '/docs/data-warehouse/query',
+                        },
+                        {
+                            name: 'Join data across sources',
+                            url: '/docs/data-warehouse/join',
+                        },
+                        {
+                            name: 'Visualize with insights',
+                            url: '/docs/data-warehouse/insights',
+                        },
+                        {
+                            name: 'Write SQL with PostHog AI',
+                            url: '/docs/data-warehouse/write-sql-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/data-warehouse/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/data-warehouse/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/data-warehouse/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Sources',
+                },
+                {
                     name: 'Link sources',
                     url: '/docs/data-warehouse/sources',
-                    icon: 'IconBook',
+                    icon: 'IconPlug',
                     color: 'blue',
+                    featured: true,
                     dynamicChildren: 'data-warehouse-sources',
                     children: [
                         {
@@ -6215,16 +6271,44 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Query with SQL',
-                    url: '/docs/data-warehouse/query',
+                    name: 'Modeling',
+                },
+                {
+                    name: 'Views',
+                    url: '/docs/data-warehouse/views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
+                    name: 'Materializing views',
+                    url: '/docs/data-warehouse/views/materialize',
+                    icon: 'IconCalculator',
+                    color: 'yellow',
+                },
+                {
+                    name: 'SQL commands',
+                    url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Accessing data with SQL',
+                    url: '/docs/data-warehouse/sql/data-access',
+                    icon: 'IconDatabase',
                     color: 'green',
                 },
                 {
-                    name: 'Visualize with insights',
-                    url: '/docs/data-warehouse/insights',
-                    icon: 'IconGraph',
-                    color: 'red',
+                    name: 'SQL functions',
+                    url: '/docs/data-warehouse/sql/useful-functions',
+                    icon: 'IconStar',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Variables',
+                    url: '/docs/data-warehouse/sql/variables',
+                    icon: 'IconGear',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Managed warehouse',
@@ -6244,81 +6328,24 @@ export const docsMenu = {
                 {
                     name: 'Connect and query',
                     url: '/docs/data-warehouse/managed-warehouse/connect',
-                    icon: 'IconCode',
-                    color: 'orange',
+                    icon: 'IconTerminal',
+                    color: 'seagreen',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Resources',
                 },
                 {
                     name: 'Integrated warehouse',
                     url: '/docs/data-warehouse/integrated-warehouse',
-                },
-                {
-                    name: 'SQL commands',
-                    url: '/docs/data-warehouse/sql',
-                    icon: 'IconCode',
-                    color: 'purple',
-                },
-                {
-                    name: 'SQL functions',
-                    url: '/docs/data-warehouse/sql/useful-functions',
-                    icon: 'IconStar',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Variables',
-                    url: '/docs/data-warehouse/sql/variables',
-                    icon: 'IconGear',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Views',
-                    url: '/docs/data-warehouse/views',
-                    icon: 'IconCalculator',
-                    color: 'salmon',
-                    featured: true,
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Accessing data',
-                    url: '/docs/data-warehouse/sql/data-access',
-                    icon: 'IconDatabase',
-                    color: 'green',
-                },
-                {
-                    name: 'Joining data',
-                    url: '/docs/data-warehouse/join',
-                    icon: 'IconList',
+                    icon: 'IconStack',
                     color: 'blue',
+                },
+                {
+                    name: 'Under the hood',
+                    url: '/docs/data-warehouse/under-the-hood',
+                    icon: 'IconMagicWand',
+                    color: 'seagreen',
                     featured: true,
-                },
-                {
-                    name: 'Materializing views',
-                    url: '/docs/data-warehouse/views/materialize',
-                    icon: 'IconCalculator',
-                    color: 'yellow',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Write SQL with PostHog AI',
-                    url: '/docs/data-warehouse/write-sql-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Run SQL with MCP',
-                    url: '/docs/data-warehouse/run-sql-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                },
-                {
-                    name: 'Resources',
                 },
                 {
                     name: 'Cutting costs',
@@ -6339,13 +6366,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'green',
-                },
-                {
-                    name: 'Under the hood',
-                    url: '/docs/data-warehouse/under-the-hood',
-                    icon: 'IconMagicWand',
-                    color: 'seagreen',
-                    featured: true,
                 },
                 {
                     name: 'Changelog',

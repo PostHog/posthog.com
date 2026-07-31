@@ -150,8 +150,8 @@
     ],
     "redirects": [
         {
-            "source": "/docs/experiments/create-experiments-mcp",
-            "destination": "/docs/experiments/surfaces/mcp",
+            "source": "/docs/data-warehouse/run-sql-mcp",
+            "destination": "/docs/data-warehouse/surfaces/mcp",
             "statusCode": 301
         },
         {
@@ -5655,6 +5655,11 @@
         {
             "source": "/bi",
             "destination": "/context-warehouse/business-intelligence"
+        },
+        {
+            "source": "/docs/experiments/create-experiments-mcp",
+            "destination": "/docs/experiments/surfaces/mcp",
+            "statusCode": 301
         }
     ]
 }
