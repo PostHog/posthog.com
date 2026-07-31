@@ -188,8 +188,8 @@ const Row = ({
                 columns?.[cellIndex]?.align === 'right'
                     ? 'text-right'
                     : columns?.[cellIndex]?.align === 'center'
-                      ? 'text-center'
-                      : ''
+                    ? 'text-center'
+                    : ''
             } ${cell.className || ''}`}
                             style={cell.style}
                         >

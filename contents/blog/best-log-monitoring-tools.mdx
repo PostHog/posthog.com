@@ -62,7 +62,7 @@ That's what makes the debugging flow work: a backend error traces to the user wh
 
 Ingestion is plain OTLP – you point any standard OpenTelemetry client at PostHog's endpoint, no re-instrumentation required. 
 
-Once logs are in, you can query them with SQL alongside product metrics, drop them onto dashboards, search them in natural language with [PostHog AI](/ai), or debug straight from your editor: coding agents can [search and correlate production logs via MCP](/docs/logs/debug-logs-mcp) without leaving the IDE.
+Once logs are in, you can query them with SQL alongside product metrics, drop them onto dashboards, search them in natural language with [PostHog AI](/ai), or debug straight from your editor: coding agents can [search and correlate production logs via MCP](/docs/logs/surfaces/mcp) without leaving the IDE.
 
 **Strengths:**
 
@@ -77,7 +77,7 @@ Once logs are in, you can query them with SQL alongside product metrics, drop th
 
 <CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
 
-Developers who want modern log monitoring without legacy baggage: OTel-native ingestion, natural-language search with no query language to learn, [debugging from your editor via MCP](/docs/logs/debug-logs-mcp), and 10 GB free per month – with session replay, error tracking, analytics, and more one click from any log line.
+Developers who want modern log monitoring without legacy baggage: OTel-native ingestion, natural-language search with no query language to learn, [debugging from your editor via MCP](/docs/logs/surfaces/mcp), and 10 GB free per month – with session replay, error tracking, analytics, and more one click from any log line.
 
 </CalloutBox>
 
@@ -276,6 +276,19 @@ Teams that want a simple operational platform combining logs, uptime monitoring,
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 

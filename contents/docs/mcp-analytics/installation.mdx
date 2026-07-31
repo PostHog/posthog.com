@@ -5,7 +5,7 @@ title: Installing the MCP Analytics SDK
 import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
 
-<CalloutBox icon="IconFlask" title="Beta SDK" type="action">
+<CalloutBox icon="IconFlask" title="Beta SDK" type="fyi">
 
 `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – until `v1`, so pin a version while we iterate.
 
@@ -219,12 +219,6 @@ if (body?.method === "initialize" && !req.headers[MCP_SESSION_HEADER]) {
 
 Some frameworks construct the transport for you and don't expose `enableJsonResponse`, and a client that ignores the header falls back to a generated session per request either way. In both cases, group by user with [`identify`](/docs/mcp-analytics/identifying-users) — `distinct_id` groups a person's calls however many requests they span, and it requires nothing from the client. [Conversation IDs](/docs/mcp-analytics/conversation-id) give finer, per-conversation grouping when the agent cooperates.
 
-<CalloutBox icon="IconInfo" title="Python" type="fyi">
-
-Session tokens are TypeScript-only today. A Python server on a stateless deployment gets a session per request — group with `identify` as above.
-
-</CalloutBox>
-
 ## Python
 
 A Python SDK ships inside the [`posthog`](/docs/libraries/python) package (the same way [`posthog.ai`](/docs/ai-engineering) does), so there's nothing extra to install:
@@ -285,6 +279,26 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `before_send` | `(event) -> event \| None` | — | Inspect/modify/drop each event before send. |
 | `event_properties` | `(request, extra) -> dict` | — | Properties merged onto every event. |
 | `logger` | `(message: str) -> None` | no-op | STDIO-safe log sink. |
+
+### Stateless and multi-pod servers
+
+Same problem as [above](#stateless-and-multi-pod-servers) — a stateless deployment fragments `$session_id` and loses the client name/version after `initialize`. Python fixes it with the same self-encoded session token (minted onto the `Mcp-Session-Id` header, replayed by the client), but from an ASGI layer, so there's **no `enableJsonResponse` caveat** — JSON and SSE both work.
+
+On a **FastMCP** server (official `mcp.server.fastmcp` or jlowin's `fastmcp` 2.0) it's zero-config: `instrument()` wraps the server's `streamable_http_app()` / `sse_app()` factories (which `run()` uses too), so just make the server stateless:
+
+```python
+server = FastMCP("my-server", stateless_http=True)
+instrument(server, posthog)
+server.run(transport="streamable-http")  # or: app = server.streamable_http_app()
+```
+
+When you build the ASGI app yourself — a low-level `Server`, or a custom [`PostHogMCP`](/docs/mcp-analytics/custom-servers) dispatcher — add the middleware to that app once:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+```
 
 ### Flushing on exit
 

@@ -603,7 +603,10 @@ export const posthog = {
             available: true,
             features: {
                 visual_builder: true,
-                ai_assistant: false,
+                // PostHog AI + MCP: create/edit workflows and email templates via natural language
+                // https://posthog.com/docs/workflows/surfaces/mcp
+                // https://posthog.com/docs/workflows/create-emails-ai
+                ai_assistant: true,
                 campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
