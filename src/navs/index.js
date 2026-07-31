@@ -3303,6 +3303,10 @@ export const docsMenu = {
                             url: '/docs/migrate/migrate-to-cloud',
                         },
                         {
+                            name: 'Move or split data between projects',
+                            url: '/docs/migrate/split-or-merge-projects',
+                        },
+                        {
                             name: 'Migrate from Amplitude',
                             url: '/docs/migrate/migrate-from-amplitude',
                         },
