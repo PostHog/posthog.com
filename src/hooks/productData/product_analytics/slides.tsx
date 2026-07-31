@@ -305,7 +305,7 @@ export const topFeatures: CarouselSlide[] = [
     },
     {
         slug: 'mcp-analytics',
-        label: 'MCP analytics',
+        label: 'MCP Analytics',
         icon: <IconPlug className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',

@@ -339,37 +339,57 @@ export const features = {
         children: <MCPInstall />,
     },
     mcp_analytics: {
-        title: 'MCP analytics',
-        headline: 'See how agents use your MCP server',
+        title: 'MCP Analytics',
+        headline: 'See how agents use your MCP tools',
         description:
-            'If you ship an MCP server, wrap it in one line and every tool call becomes a normal PostHog event – so trends, funnels, dashboards, and SQL all work on agent traffic too.',
+            "Wrap the MCP server you ship in a single instrument() call and every agent invocation lands as an event on your standard events table – so trends, funnels, dashboards, and SQL all work on agent traffic too. PostHog's own hosted MCP server is instrumented the same way.",
         icon: <IconPlug />,
         color: 'blue',
         features: [
             {
-                title: 'Every tool call as an event',
+                title: 'Every tool call',
                 description:
-                    'See what the agent sent, what came back, how long it took, and whether it failed – then build insights on top.',
+                    'One event per invocation, with the parameters, response, duration, and error state – then build insights on top.',
             },
             {
                 title: 'Agent intent',
-                description: 'Capture the goal behind each call, so you can tell a useful request from a confused one.',
+                description:
+                    'What the agent said it was trying to do, clustered into themes across sessions, so you can tell a useful request from a confused one.',
             },
             {
                 title: 'Advertised vs called',
-                description: 'Find the tools you advertise but agents never touch, and cut what nobody uses.',
+                description:
+                    'Every tools/list is captured too, so you can find the tools you advertise but agents never touch.',
             },
             {
-                title: 'Capability gaps',
+                title: 'Missing capabilities',
                 description:
-                    "Let agents tell you what they wanted but you don't offer yet – a roadmap written by your users' agents.",
+                    "Gaps agents report when the right tool doesn't exist – a roadmap written by your users' agents.",
+            },
+            {
+                title: 'Fixes, not just charts',
+                description: (
+                    <>
+                        Tool calls feed{' '}
+                        <Link to="/docs/self-driving" state={{ newWindow: true }}>
+                            Self-driving
+                        </Link>
+                        , which reports failing or slow tools and drafts a pull request when you own the server.
+                    </>
+                ),
             },
         ],
         children: (
             <p className="mb-0">
+                MCP Analytics is in beta.{' '}
                 <Link to="/docs/mcp-analytics" state={{ newWindow: true }}>
-                    Read the MCP analytics docs
+                    Read the docs
+                </Link>{' '}
+                or{' '}
+                <Link to="/docs/mcp-analytics/start-here" state={{ newWindow: true }}>
+                    instrument your server
                 </Link>
+                .
             </p>
         ),
     },
