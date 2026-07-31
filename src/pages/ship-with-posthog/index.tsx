@@ -1,4 +1,5 @@
 import React from 'react'
+import { IconArrowUpRight } from '@posthog/icons'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Link from 'components/Link'
@@ -26,29 +27,38 @@ export default function ShipWithPostHog(): JSX.Element {
             <div data-scheme="secondary" className="@container h-full w-full bg-primary text-primary">
                 <ScrollArea className="h-full">
                     <div className="mx-auto max-w-5xl px-4 py-8 @md:py-12">
-                        {/* Hero – the inbox is the centerpiece */}
-                        <div className="mx-auto mb-6 max-w-3xl text-center @md:mb-8">
-                            <p className="m-0 text-sm font-bold uppercase tracking-wider text-red dark:text-yellow">
-                                Self-driving use cases
-                            </p>
-                            <h1 className="mt-3 flex justify-center">
+                        {/* Hero – the inbox is the centerpiece. Two columns so the headline stays left
+                            aligned: the scrolling word changes width every step, and a centered line would
+                            shift sideways under it. "with PostHog" sits on its own line for the same reason. */}
+                        <div className="mb-6 grid grid-cols-1 gap-4 @md:mb-8 @2xl:grid-cols-[auto_1fr] @2xl:items-start @2xl:gap-6">
+                            <h1 className="whitespace-nowrap text-3xl font-bold !leading-[1.15] tracking-tight @md:text-4xl @2xl:text-5xl">
                                 <SlotMachineText
-                                    className="text-3xl font-bold !leading-[1.15] tracking-tight @md:text-4xl @2xl:text-5xl"
                                     words={SHIP_WORDS}
                                     wordClassName="text-red dark:text-yellow"
                                     prefix={<span>Ship</span>}
-                                    suffix={<span>with PostHog</span>}
                                 />
+                                <span className="block">with PostHog</span>
                             </h1>
-                            <p className="mx-auto mt-4 max-w-2xl text-base text-secondary @2xl:text-lg">
-                                These are real merged pull requests on{' '}
-                                <Link to="https://github.com/PostHog/posthog" external>
-                                    PostHog/posthog
-                                </Link>
-                                . Each one was found by a different part of PostHog – an exception, a session, a support
-                                conversation – and written up, reviewed, and merged. Open one to read the evidence
-                                behind it and the diff that shipped.
-                            </p>
+                            <div className="max-w-2xl @2xl:border-l @2xl:border-primary @2xl:pl-6 @2xl:pt-1">
+                                <p className="m-0 text-sm text-secondary @2xl:text-base">
+                                    These are real merged pull requests on{' '}
+                                    <Link to="https://github.com/PostHog/posthog" external>
+                                        PostHog/posthog
+                                    </Link>
+                                    . Open one to read the evidence behind it and the diff that shipped.
+                                </p>
+                                <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                                    <WizardCommand command="self-driving" slim />
+                                    <Link
+                                        to="/docs/self-driving/inbox"
+                                        state={{ newWindow: true }}
+                                        className="group inline-flex items-center gap-1 text-sm font-semibold text-red dark:text-yellow"
+                                    >
+                                        Set up your Inbox
+                                        <IconArrowUpRight className="size-3.5 opacity-75 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
 
                         {/* The Inbox */}

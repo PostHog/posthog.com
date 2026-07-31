@@ -50,11 +50,14 @@ export function SlotMachineText({
     const reel = [...words, words[0] ?? '']
 
     // Measure one word's rendered height so the reel translates exactly one line per step,
-    // and keep it accurate across responsive font-size changes.
+    // and keep it accurate across responsive font-size changes. Measured with
+    // getBoundingClientRect so the step keeps its subpixel fraction – offsetHeight rounds to
+    // whole pixels, and that error multiplies by the word index, eventually sliding the
+    // neighbouring word into view at the edge of the mask.
     useEffect(() => {
         const measure = () => {
             const first = listRef.current?.children[0] as HTMLElement | undefined
-            if (first) setStep(first.offsetHeight)
+            if (first) setStep(first.getBoundingClientRect().height)
         }
         measure()
         if (typeof ResizeObserver === 'undefined' || !listRef.current) return

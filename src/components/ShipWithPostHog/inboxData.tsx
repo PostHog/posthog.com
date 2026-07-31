@@ -37,6 +37,7 @@ export type SourceKey =
     | 'session_replay'
     | 'replay_vision'
     | 'conversations'
+    | 'zendesk'
     | 'logs'
     | 'traces'
     | 'ai_observability'
@@ -76,6 +77,12 @@ export const SOURCE_META: Record<SourceKey, SourceMeta> = {
         Icon: IconSupport,
         color: 'text-green',
         found: 'Someone wrote in about it, and the ticket became a signal.',
+    },
+    zendesk: {
+        label: 'Zendesk',
+        Icon: IconSupport,
+        color: 'text-green',
+        found: 'A support ticket landed, and the conversation became a signal.',
     },
     logs: {
         label: 'Logs',
@@ -935,6 +942,623 @@ export const INBOX_ITEMS: InboxItem[] = [
     },
 ]
 
+/**
+ * Three real reports that have **not** become pull requests – the other half of the
+ * Inbox, and the state every item in `INBOX_ITEMS` passed through first.
+ *
+ * A report is what the loop produces before anyone commits to a fix: the evidence is
+ * gathered, the code is read, reviewers are worked out, and a write-up exists – but no
+ * branch has been merged. Two here are `immediately_actionable`, meaning an agent could
+ * open the pull request today; the third is `requires_human_input`, where the agent
+ * investigated, disproved its own first diagnosis, and stopped rather than shipping a
+ * fix it couldn't stand behind. That last one is the honest case, so it's included.
+ *
+ * Sourced exactly like `INBOX_ITEMS` – `inbox-reports-retrieve` and
+ * `inbox-report-artefacts-list` on project 2 – with the same privacy rules: evidence
+ * bodies are re-worded to drop customer project ids, ticket numbers, session ids, and
+ * email addresses, while repo paths and commit SHAs stay verbatim because they're public.
+ *
+ * None of them carry `stats` or `files`: without a merged pull request there is no
+ * authoritative diff to publish, so the detail view degrades to Overview rather than
+ * showing invented numbers.
+ */
+export const REPORT_ITEMS: InboxItem[] = [
+    // 1 — Report 019f21c4. Found by Replay Vision, corroborated by a support ticket.
+    {
+        id: 'mcp-analytics',
+        commitType: 'fix',
+        scope: 'mcp-analytics',
+        title: 'Stop access-control denials crashing the view',
+        summary:
+            'MCP analytics went generally available, but its two access gates disagree with each other, so users are shown the product and then hit a hard error instead of data.',
+        priority: 'P1',
+        signalCount: 3,
+        timeAgo: 'Updated a day ago',
+        origin: { kind: 'signal', product: 'replay_vision' },
+        detail: {
+            status: 'Actionable',
+            firstSeen: 'Jul 2, 2026',
+            lastUpdated: 'Jul 30, 2026',
+            branch: 'posthog-code/mcp-analytics-beta-gate',
+            contributingSources: ['replay_vision', 'session_replay', 'zendesk'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            MCP analytics went generally available, but its two access gates disagree with each other,
+                            so users are shown the product and then hit a hard error instead of data.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            There are now <strong>two independent gates on MCP analytics that don't agree</strong>. The
+                            dashboard's tile queries go through <Code>validate_mcp_analytics_access</Code>, which raises
+                            on both a false <Code>mcp-analytics</Code> flag eval <em>and</em> a failed RBAC check. The
+                            sessions list was left on flag-only <Code>PostHogFeatureFlagPermission</Code>, so{' '}
+                            <strong>the two halves of the product can give the same user different answers</strong>.
+                            Worse, both gates <em>raise</em> rather than degrade, so one denied tile query escalates
+                            through the scene error boundary and takes the whole view down instead of showing that one
+                            tile as unavailable.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            This used to be contained to a handful of allow-listed beta users. It isn't anymore:{' '}
+                            <strong>
+                                the flag went to a single unconditional 100% group and the feature is now marked
+                                generally available
+                            </strong>
+                            , so everyone can reach the product. Denials have not stopped –{' '}
+                            <Code>query access control error</Code> still fires every day, 42 times on one day and 15
+                            the next. A support ticket already came from someone who couldn't compute insights or see
+                            sessions while their colleague could, and a session recording shows the failure as a{' '}
+                            <strong>full-page crash on entry</strong>.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Make the two gates agree and make failure local. Move the sessions viewset onto the same{' '}
+                            <Code>mcp_analytics</Code> RBAC resource the query runners use, so a user who can see the
+                            dashboard can see its sessions. Then{' '}
+                            <strong>stop treating a not-yet-propagated flag eval as an access denial</strong>, and have
+                            the overview loader fail the individual tile rather than throwing to the scene error
+                            boundary. Two open pull requests are already reworking that loader's error handling, so new
+                            work should stay on the backend gating and leave those files alone.
+                        </>,
+                    ],
+                },
+            ],
+            reviewers: [
+                {
+                    name: "Paul D'Ambra",
+                    githubLogin: 'pauldambra',
+                    commits: [
+                        {
+                            sha: '30bcca5',
+                            url: 'https://github.com/PostHog/posthog/commit/30bcca5c8fe4e6ef53e6981204c722b3f2b5e8d0',
+                        },
+                        {
+                            sha: 'acfeb19',
+                            url: 'https://github.com/PostHog/posthog/commit/acfeb1904b77f3c820ae2e12a1a82712a5b37b46',
+                        },
+                        {
+                            sha: '5e90103',
+                            url: 'https://github.com/PostHog/posthog/commit/5e901039705419d3841ab89d0f2532059dd5bd0c',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Introduced <Code>validate_mcp_analytics_access</Code>, whose first branch raises{' '}
+                            <Code>UserAccessControlError</Code> when the <Code>mcp-analytics</Code> flag evaluates false
+                            server-side – still a live failure path when the eval fails or hasn't propagated. Also
+                            authored the session-selection button behind the reported dead click.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Reece Jones',
+                    githubLogin: 'reecejones',
+                    commits: [
+                        {
+                            sha: '06830fd',
+                            url: 'https://github.com/PostHog/posthog/commit/06830fd80993a7aba0be6d7b68f79c3a5724eeba',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Added the RBAC assertion to the query runners and registered <Code>mcp_analytics</Code> in{' '}
+                            <Code>ACCESS_CONTROL_RESOURCES</Code>. This is now the live mechanism by which one colleague
+                            can see MCP analytics and another cannot – it replaced the beta email allow-list as the
+                            differing-access cause, and it's the layer any fix has to address.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Samuel Pennington',
+                    githubLogin: 'sampennington',
+                    commits: [
+                        {
+                            sha: '632567f',
+                            url: 'https://github.com/PostHog/posthog/commit/632567f7384d6084202de66f118ba896041753de',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Set <Code>PostHogFeatureFlagPermission</Code> on the MCP analytics viewsets – the
+                            sessions-list gate that 403s a non-enabled user. That gate is still flag-only and was never
+                            moved onto the RBAC model, which is exactly why it and the query runners can now disagree.
+                        </>
+                    ),
+                },
+            ],
+            evidence: [
+                {
+                    id: 'mcp-vision',
+                    source: 'replay_vision',
+                    title: 'A full-page crash on entry to the dashboard',
+                    body: (
+                        <>
+                            A recording shows someone enable MCP Analytics in settings, open the dashboard, and hit an
+                            access-control error, then explore its dashboards, sessions, and tool-quality metrics – with
+                            one dead click when trying to select a session. The view failed as a whole-scene error
+                            rather than a single unavailable tile, with a scout configuration panel stuck mid-load
+                            behind it.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Failure',
+                            tone: 'red',
+                            tooltip: 'The vision scanner classified this segment as an outright failure, not friction.',
+                        },
+                    ],
+                    verified: true,
+                    codePaths: [
+                        'products/mcp_analytics/frontend/mcpDashboardOverviewLogic.ts',
+                        'products/mcp_analytics/frontend/MCPAnalyticsDashboardOverview.tsx',
+                        'products/mcp_analytics/backend/hogql_queries/base.py',
+                        'frontend/src/layout/ErrorBoundary/ErrorBoundary.tsx',
+                        'products/mcp_analytics/frontend/MCPAnalyticsScene.tsx',
+                    ],
+                },
+                {
+                    id: 'mcp-ticket',
+                    source: 'zendesk',
+                    title: "One colleague can see the product, another can't",
+                    body: (
+                        <>
+                            A support ticket from someone who couldn't compute insights or see sessions while a
+                            colleague on the same team could. At the time the flag was an email allow-list, which
+                            explained it – but the allow-list is gone and the asymmetry isn't, which is what pointed at
+                            a second, independent gate.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Pending',
+                            tone: 'orange',
+                            dot: true,
+                            tooltip: 'The ticket is still open at the time this report was last updated.',
+                        },
+                    ],
+                    codePaths: [
+                        'products/mcp_analytics/backend/presentation/views.py',
+                        'posthog/rbac/user_access_control.py',
+                        'posthog/permissions.py',
+                    ],
+                },
+                {
+                    id: 'mcp-denials',
+                    source: 'session_replay',
+                    title: 'Denials continue after the flag went to 100%',
+                    body: (
+                        <>
+                            Queried <Code>query access control error</Code> events: they still fire every day – 42 on
+                            one day, 15 the next, between 1 and 42 a day across a month – and they carried on{' '}
+                            <em>after</em> the flag opened to everyone. That's what rules out the flag as the remaining
+                            cause and points at the RBAC gate added later.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Verified',
+                            tone: 'green',
+                            tooltip: 'The finding was confirmed against event data, not just inferred from the code.',
+                        },
+                    ],
+                    verified: true,
+                    codePaths: [
+                        'products/mcp_analytics/backend/hogql_queries/harness_breakdown.py',
+                        'products/mcp_analytics/frontend/sessions/mcpSessionsLogic.ts',
+                    ],
+                },
+            ],
+        },
+    },
+
+    // 2 — Report 019f24a4. Seven customer sessions across seven projects in four weeks.
+    {
+        id: 'replay-drilldowns',
+        commitType: 'fix',
+        scope: 'replay',
+        title: 'Repair broken filters on drill-downs into recordings',
+        summary:
+            "Users clicking through to session recordings from Web analytics rows or an insight's persons modal land on an empty or endlessly-loading replay list even when the thing they clicked says recordings exist.",
+        priority: 'P2',
+        signalCount: 8,
+        timeAgo: 'Updated a day ago',
+        origin: { kind: 'signal', product: 'replay_vision' },
+        detail: {
+            status: 'Actionable',
+            firstSeen: 'Jul 2, 2026',
+            lastUpdated: 'Jul 30, 2026',
+            branch: 'posthog-code/web-analytics-replay-path-cleaning',
+            contributingSources: ['replay_vision', 'session_replay'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            Users clicking through to session recordings from Web analytics rows or an insight's persons
+                            modal land on an empty or endlessly-loading replay list even when the thing they clicked
+                            says recordings exist.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            Three separate defects break the same drill-down. First, the cross-sell button{' '}
+                            <strong>
+                                always emits an event-scoped <Code>$pathname</Code> filter with{' '}
+                                <Code>PropertyOperator.Exact</Code>
+                            </strong>
+                            : when path cleaning is on, the row shows a cleaned value but the backend matches literally
+                            against the raw stored path, so nothing matches. <Code>webAnalyticsLogic.tsx</Code> already
+                            rewrites these to <Code>IsCleanedPathExact</Code> for dashboard filters, but the button
+                            never got that treatment – and <Code>WebAnalyticsTile.tsx</Code>{' '}
+                            <strong>forwards the web analytics date range verbatim</strong> with no clamping to
+                            recording retention, so a range predating retention forces a guaranteed-empty list plus a
+                            misleading ad-blocker warning.
+                        </>,
+                        <>
+                            Second, when the filter is the high-traffic root path, the events subquery runs a{' '}
+                            <strong>DISTINCT-session_id scan capped at 1,000,000 rows</strong>, which hung one session
+                            for <strong>100+ seconds</strong> on a blank screen before the user gave up.
+                        </>,
+                        <>
+                            Third, and separate from web analytics entirely: the persons-modal path emits a{' '}
+                            <Code>session_ids</Code>-only filter with no date range, and the playlist logic then quietly
+                            substitutes the <Code>-3d</Code> default. In one signal the two recordings the user picked
+                            were <strong>only about 3.4 days old</strong>, just outside that window, so an explicit
+                            session-ID lookup returned nothing.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            This quietly{' '}
+                            <strong>blocks the drill-down from aggregate numbers into watching real sessions</strong>,
+                            on two of the most discoverable, high-intent paths in the product. Confirmed across{' '}
+                            <strong>
+                                seven independent customer sessions in seven distinct projects over four weeks
+                            </strong>
+                            : users hit either the "No matching recordings" empty state with a retention warning or a
+                            100+ second white-screen load, then bounced. It's a contained papercut with a manual
+                            workaround, not a core-flow break, but it wastes the moment where someone is most motivated
+                            to watch a recording.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Mirror what the dashboard filters already do: use{' '}
+                            <strong>
+                                <Code>IsCleanedPathExact</Code> for path-type keys when path cleaning is enabled
+                            </strong>{' '}
+                            instead of always <Code>Exact</Code>, and handle URL-encoded pathname values so they still
+                            match. Guard the forwarded date range so a range that predates recording retention doesn't
+                            silently produce an empty list, and surface the forwarded test-account and property filters
+                            so the narrowing is visible. In the persons-modal path,{' '}
+                            <strong>
+                                skip the <Code>-3d</Code> default whenever <Code>session_ids</Code> are present
+                            </strong>{' '}
+                            – an explicit ID lookup shouldn't be date-bounded at all.
+                        </>,
+                    ],
+                },
+            ],
+            reviewers: [
+                {
+                    name: 'Rafael Audibert',
+                    githubLogin: 'rafaeelaudibert',
+                    commits: [
+                        {
+                            sha: '6e9a6ee',
+                            url: 'https://github.com/PostHog/posthog/commit/6e9a6ee8b668d41f4c049b96e2d654c787416d84',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            The cross-sell cell in <Code>WebAnalyticsTile.tsx</Code> forwards the web analytics date
+                            range verbatim into the replay button with no clamping against recording retention. A 90-day
+                            range therefore reaches replay unchanged even though recordings for most plans expire well
+                            before 90 days – the concrete reason the list is empty while the table shows visitors.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Kim Dugan',
+                    githubLogin: 'ksvat',
+                    commits: [
+                        {
+                            sha: '83035c5',
+                            url: 'https://github.com/PostHog/posthog/commit/83035c5bd3a103652f29eb86d3cc9bf439db5769',
+                        },
+                        {
+                            sha: '61c82ff',
+                            url: 'https://github.com/PostHog/posthog/commit/61c82ff2828dc76cfd7de005f89bff6de063f95d',
+                        },
+                        {
+                            sha: 'f1ce606',
+                            url: 'https://github.com/PostHog/posthog/commit/f1ce606dde9c9e9b36b3e5e8d8599290ad6f1ab2',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Created the replay cross-sell flow that builds recording filters from web analytics rows,
+                            with no fallback or explanatory state when zero recordings match. Also authored the events
+                            subquery whose million-row DISTINCT scan is the mechanism behind the 100+ second spinner,
+                            and the <Code>session_ids</Code> short-circuit in the persons modal.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Lucas Ricoy',
+                    githubLogin: 'lricoy',
+                    commits: [
+                        {
+                            sha: '52663cb',
+                            url: 'https://github.com/PostHog/posthog/commit/52663cbf06d1f7286be889abca8ff7238c4ae5df',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Added forwarding of the web analytics properties and <Code>filter_test_accounts</Code> into
+                            the replay button. Replay defaults test-account filtering to off, so this forwarding narrows
+                            the recordings population in a way the user never chose on the replay page.
+                        </>
+                    ),
+                },
+            ],
+            evidence: [
+                {
+                    id: 'drill-empty-list',
+                    source: 'session_replay',
+                    title: 'Recording list loads empty from a Web analytics row',
+                    body: (
+                        <>
+                            From the Web analytics dashboard, the user tried to view recordings for a specific path. The
+                            recording list loaded empty, and they went on clicking inactive player elements before
+                            giving up.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Confusion',
+                            tone: 'orange',
+                            tooltip: 'The segment was classified as the user being confused rather than blocked.',
+                        },
+                    ],
+                    codePaths: [
+                        'frontend/src/scenes/web-analytics/CrossSellButtons/ReplayButton.tsx',
+                        'frontend/src/scenes/web-analytics/tiles/WebAnalyticsTile.tsx',
+                        'posthog/session_recordings/queries/sub_queries/events_subquery.py',
+                    ],
+                },
+                {
+                    id: 'drill-scanner',
+                    source: 'replay_vision',
+                    title: 'Dozens of visitors in the table, no recordings on the drill-down',
+                    body: (
+                        <>
+                            Clicking the "View recordings" icon for a specific path navigates to an empty session replay
+                            list, even though the analytics table shows dozens of visitors for that path in the selected
+                            range. The page shows "No matching recordings" and warns that recordings might be outside
+                            the retention period, blocking the drill-down into the sessions behind the number the user
+                            was looking at.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Bug',
+                            tone: 'red',
+                            tooltip: 'The vision scanner rated this a bug at 85% confidence.',
+                        },
+                    ],
+                    verified: true,
+                    codePaths: [
+                        'frontend/src/scenes/trends/persons-modal/personsModalLogic.ts',
+                        'frontend/src/scenes/session-recordings/playlist/sessionRecordingsPlaylistLogic.ts',
+                    ],
+                },
+            ],
+        },
+    },
+
+    // 3 — Report 019effdb. The agent disproved its own first diagnosis and stopped.
+    {
+        id: 'trends-refresh',
+        commitType: 'fix',
+        scope: 'insights',
+        title: 'Trends editor empty/error chart until manual refresh',
+        summary:
+            'Users editing trend insights sometimes land on an empty chart or a 500 error that only clears after a manual Refresh, seen across at least 3 sessions in 3 different projects.',
+        priority: 'P2',
+        signalCount: 3,
+        timeAgo: 'Updated 24 days ago',
+        origin: { kind: 'signal', product: 'replay_vision' },
+        detail: {
+            status: 'Needs input',
+            firstSeen: 'Jun 25, 2026',
+            lastUpdated: 'Jul 7, 2026',
+            branch: 'posthog-code/trends-editor-refresh',
+            contributingSources: ['replay_vision', 'session_replay'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            Users editing trend insights sometimes land on an empty chart or a 500 error that only
+                            clears after a manual Refresh, seen across at least 3 sessions in 3 different projects.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            Three session-replay observations show the trends insight editor failing right after a
+                            config change and forcing a manual reload. The original diagnosis blamed a{' '}
+                            <strong>stale-cache short-circuit</strong> in <Code>dataNodeLogic</Code> on breakdown/date
+                            edits, but on closer inspection that doesn't hold in the new-insight editor:{' '}
+                            <Code>props.cachedResults</Code> is undefined there, so both short-circuits are gated off
+                            and <Code>loadData</Code> always runs, and the server hashes the full query, so a breakdown
+                            edit is a <strong>cache miss that recomputes fresh</strong>. One signal is a different,
+                            concrete failure: a genuine <strong>transient Internal Server Error</strong> on an expensive
+                            multi-breakdown query, surfaced through <Code>InsightErrorState</Code>, whose own code
+                            comment says it's built for intermittent errors that complete on retry.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            This lives in the <strong>core product-analytics editing flow</strong>, which is high
+                            traffic. Evidence is 3 individual sessions across 3 projects, and there's a real workaround
+                            (hit Refresh). The aggregate blast radius isn't quantifiable from here – the recordings and
+                            error events for those projects were cross-region and unreachable from this environment – so
+                            this reads as recurring, annoying friction rather than a confirmed broken flow.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Solution',
+                    paragraphs: [
+                        <>
+                            Don't ship the originally-proposed fix blindly: it would be a{' '}
+                            <strong>no-op in the editor</strong> and just add redundant recomputes. Instead, a human
+                            with insight-editor access should confirm the true cause first – candidates are{' '}
+                            <strong>expensive multi-breakdown queries timing out or OOMing in ClickHouse</strong>, an
+                            aborted-query race, or genuinely-empty data for the chosen breakdown and date window. If
+                            it's query cost, the real fix is optimizing that path or adding smarter auto-retry so users
+                            don't have to click Refresh.
+                        </>,
+                    ],
+                },
+            ],
+            reviewers: [
+                {
+                    name: 'Georgiy Tarasov',
+                    githubLogin: 'skoob13',
+                    commits: [
+                        {
+                            sha: '7a3e849',
+                            url: 'https://github.com/PostHog/posthog/commit/7a3e849521e55a860cfc1adbb10e244817221b0c',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Introduced multi-column breakdown query construction in trends. A two-property breakdown
+                            combined with <Code>unique_session</Code> aggregation greatly expands the query's cost,
+                            making ClickHouse timeouts and memory errors – surfaced as a 500 – far more likely than a
+                            single breakdown.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Robbie Coomber',
+                    githubLogin: 'robbie-c',
+                    commits: [
+                        {
+                            sha: '6e1338c',
+                            url: 'https://github.com/PostHog/posthog/commit/6e1338ccc699ea8c3ff7c5ab60ea2256a168273f',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Reworked the <Code>loadData</Code> error handling that captures the backend 500 and drives
+                            the reducers feeding <Code>InsightErrorState</Code> – the component the user actually sees
+                            when this fails.
+                        </>
+                    ),
+                },
+                {
+                    name: 'Tim Glaser',
+                    githubLogin: 'timgl',
+                    commits: [
+                        {
+                            sha: '9dcabab',
+                            url: 'https://github.com/PostHog/posthog/commit/9dcababa93e07c69fa9dbbbca0aa38a299d99547',
+                        },
+                        {
+                            sha: 'ef7abcc',
+                            url: 'https://github.com/PostHog/posthog/commit/ef7abcc9ad9affd3e07396a8bf56b9d82bac1cff',
+                        },
+                    ],
+                    reason: (
+                        <>
+                            Introduced the refresh-type distinction and the cached-results short-circuit that lets a
+                            stale or empty cached response be served without a fresh server query – the mechanism the
+                            first diagnosis blamed, and the one this investigation ruled out for the new-insight editor.
+                        </>
+                    ),
+                },
+            ],
+            evidence: [
+                {
+                    id: 'trends-scanner',
+                    source: 'replay_vision',
+                    title: 'Reload clicked twice before the chart populates',
+                    body: (
+                        <>
+                            After adding a breakdown to a trend insight, the chart area shows a "nothing matching query
+                            results" message and a Reload button. The user clicks it twice before the chart eventually
+                            populates – a failure to handle the initial loading state gracefully, or a query timeout
+                            that needs manual intervention.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'UX friction',
+                            tone: 'yellow',
+                            tooltip: 'The vision scanner rated this UX friction at 80% confidence.',
+                        },
+                    ],
+                    codePaths: [
+                        'frontend/src/queries/nodes/DataNode/dataNodeLogic.ts',
+                        'frontend/src/scenes/insights/InsightErrorState.tsx',
+                        'posthog/hogql_queries/insights/trends/breakdown.py',
+                    ],
+                },
+            ],
+        },
+    },
+]
+
 interface OriginMeta {
     Icon: React.ComponentType<{ className?: string }>
     color: string
@@ -960,7 +1584,7 @@ export const originMeta = (item: InboxItem): OriginMeta => {
  */
 export const EVIDENCE_SOURCE_META: Record<EvidenceSource, SourceMeta & { groupLabel?: string }> = {
     ...SOURCE_META,
-    zendesk: { label: 'Zendesk', Icon: IconSupport, color: 'text-green', groupLabel: 'Support' },
+    zendesk: { ...SOURCE_META.zendesk, groupLabel: 'Support' },
 }
 
 /** Findings count on the meta row, from the evidence actually authored. */

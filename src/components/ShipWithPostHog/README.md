@@ -1,9 +1,17 @@
 # ShipWithPostHog
 
 Components for the `/ship-with-posthog` page – a recreation of the PostHog Inbox scene, pre-loaded
-with five pull requests. The inbox is the page's hero. Visitors open an item and get a
-replica of the app's report → pull request detail view: the agent's write-up on the left, and its
+with five merged pull requests and three open reports. The inbox is the page's hero. Visitors open an
+item and get a replica of the app's report detail view: the agent's write-up on the left, and its
 working on the right – CI checks, the reviewers it suggests, and the evidence it reasoned from.
+
+The two tabs are the two halves of the real Inbox, and the same report at two stages of its life:
+
+- **Pull requests** – reports an agent already took all the way to a merged PR. Badged with `#<number>`,
+  and their detail view has diff stats, a Files-changed tab, and an "Open in GitHub" action.
+- **Reports** – researched and written up, but no pull request yet. Badged with the judgment that
+  decides what happens next (green **Actionable**, orange **Needs input**), and their detail view swaps
+  "Open in GitHub" for **Create PR**. They carry no `stats` and no `files`, because there's no diff yet.
 
 The page lives at `src/pages/ship-with-posthog/index.tsx`; its slug is exported as `SLUG`
 there so renaming is a folder move plus a `vercel.json` redirect.
@@ -13,26 +21,27 @@ there so renaming is a folder move plus a `vercel.json` redirect.
 | File                  | What it is                                                                                     |
 | --------------------- | ---------------------------------------------------------------------------------------------- |
 | `InboxReplica.tsx`    | The main event: the Inbox scene – header + subtitle, the tab bar (Pull requests / Reports) with the For-you/Entire-project scope picker, the filter bar, the centered list with its empty state, and a full-width detail takeover for the open item. Owns the filter state, which item is open, which have been read, and the `#<id>` deep link. All state is in React memory – no localStorage. |
-| `ReportRow.tsx`       | One report/PR card. Priority chip, mono commit-scope tag, two-line summary, an origin line (source-product name for signal sources, "Scout · <category>" for scouts), and a right rail with the PR badge, Archive/Review actions, and a timestamp. |
-| `ReportDetail.tsx`    | The detail view: back link, header (priority, `type(scope)`, title, and the Open in GitHub / Discuss / Archive / Refund actions), the meta row, the Overview / Files changed tab strip, and the two-column body. Panels render only when the item has data for them. |
+| `ReportRow.tsx`       | One report/PR card. Priority chip, mono commit-scope tag, two-line summary, an origin line (source-product name for signal sources, "Scout · <category>" for scouts), and a right rail with the badge (PR number, or the Actionable/Needs-input status for an item with no PR), Archive/Review actions, and a timestamp. |
+| `ReportDetail.tsx`    | The detail view: back link, header (priority, `type(scope)`, title, and the Open in GitHub -or- Create PR / Discuss / Archive / Refund actions, all sharing one pill style), the meta row, the Overview / Files changed tab strip, and the two-column body. Panels render only when the item has data for them. |
 | `CollapsibleCard.tsx` | The bordered chevron-collapsible panel the detail view is built from, with an optional right-aligned slot in the header for counts and controls. |
 | `EvidenceCard.tsx`    | One evidence finding: the source and a tinted status tag on one line, then the title, what the signal observed, and the repo files the agent read to work it out. |
 | `ReviewerList.tsx`    | Suggested reviewers and the "Add" menu. Matches names against the real team directory at build time (`allSqueakProfile`), so avatars and profile links are genuine; an unmatched name degrades to an initial monogram rather than disappearing. |
 | `FilesChanged.tsx`    | The Files-changed tab: per-file stat line plus one excerpted hunk, with add/remove tinting. |
 | `InboxFilters.tsx`    | The Sort / Source / Priority filter bar and the sort + filter logic (`applyFilters`). All three menus really filter the list. |
 | `PriorityBadge.tsx`   | The tinted-square priority chip (P0–P4), plus `PRIORITY_META` – the hue and name per level, shared with the priority filter menu so the two can't drift. |
-| `inboxData.tsx`       | The five items and their detail payloads, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
+| `inboxData.tsx`       | `INBOX_ITEMS` (the five merged PRs) and `REPORT_ITEMS` (the three open reports) with their detail payloads, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
 | `prose.tsx`           | The subdued inline-`Code` used in detail prose, and `Hint` – the width-capped tooltip the hover annotations use. Its own module so `inboxData.tsx` can import it without a cycle through the components. |
 
 ## The items are real
 
-All five are real reports that produced **real merged pull requests** on `PostHog/posthog`. Nothing
-is invented. Where each field comes from:
+All eight are real reports in project 2. The five on the Pull requests tab produced **real merged pull
+requests** on `PostHog/posthog`; the three on the Reports tab are real reports that haven't been turned
+into a PR. Nothing is invented. Where each field comes from:
 
 | Data | Source |
 | ---- | ------ |
 | PR number, title, URL, branch, diff totals, approvers | GitHub REST API (public, unauthenticated) |
-| Priority, signal count, discovery channel, dates | The report in project 2 |
+| Priority, signal count, discovery channel, dates, status | The report in project 2 |
 | Summary prose (Problem / Impact / Solution) | The report's own `summary`, tightened for length |
 | Suggested reviewers, commit SHAs, rationale | The report's newest `suggested_reviewers` artefact |
 | Evidence code paths | Each `signal_finding`'s `relevant_code_paths`, verbatim |
@@ -72,14 +81,16 @@ notes above before publishing anything new.
 Genuinely interactive: the Sort / Source / Priority filter bar, the Overview / Files changed tabs,
 and the collapsible panels. The PR, commit, and reviewer-profile links all go to real places.
 
-Chrome that looks interactive but isn't: the search box and the For-you/Entire-project scope picker,
-the Archive and Refund buttons (both carry a tooltip explaining what they would do), and the Discuss
-and Add menus (they open and list real options, but nothing is wired behind them).
+Chrome that looks interactive but isn't: the search box, and the Discuss / Archive / Refund / Create-PR
+buttons. Each of those carries a `Hint` tooltip explaining what it would do, as do the two tabs and the
+For-you/Entire-project scope picker. The reviewer "Add" menu opens and lists real options, but nothing
+is wired behind it.
 
-The filter menus are single-select, and picking the active option again clears it. Source lists only
-the sources present in the data, so no option there dead-ends; priority lists all of P0–P4 because
-that scale is part of the product, which means three of the five levels match nothing. That plus any
-source/priority combination is what the list's empty state is for.
+The filter menus are single-select, and picking the active option again clears it, and switching tabs
+resets them (the two tabs have different sources). Source lists only the sources present in the active
+tab's data, so no option there dead-ends; priority lists all of P0–P4 because that scale is part of the
+product, which means several levels match nothing. That plus any source/priority combination is what
+the list's empty state is for.
 
 Everything is responsive by container query, not viewport – the detail body goes two-column at `@3xl`,
 and the right column is its own `@container` so the evidence footers can respond to their own width.

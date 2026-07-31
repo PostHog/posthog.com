@@ -45,7 +45,14 @@ import posthogIcon from '../images/posthog-icon-white.svg'
   that duplicate scrolls one more step in the same direction, then the position snaps back to the real
   first word **without** a transition — so the loop is seamless and always scrolls downward.
 - One word's rendered height is measured (and re-measured via `ResizeObserver`) so the reel translates
-  exactly one line per step at any font size.
+  exactly one line per step at any font size. The measurement keeps its subpixel fraction on purpose —
+  rounding it to whole pixels leaves an error that multiplies by the word index, and a few words in the
+  neighbouring word starts peeking past the edge of the mask.
+- The reel is shrink-to-fit around its **widest** word, so its width never changes as words cycle. That
+  keeps the line from jittering, but it means a short word leaves visible slack before whatever follows
+  it: with `suffix`, "Ship code ______ with PostHog" gets a gap as wide as the difference between "code"
+  and the longest word. Put the trailing copy on its own line (or left-align the line) when the words
+  differ a lot in length — see `/ship-with-posthog` for that treatment.
 
 ## Accessibility
 

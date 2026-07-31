@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
     IconArchive,
     IconArrowLeft,
-    IconChevronDown,
+    IconArrowUpRight,
     IconCheckCircle,
     IconCircleDashed,
     IconComment,
@@ -12,8 +12,7 @@ import {
     IconReceipt,
     IconSearch,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import { Popover } from 'components/RadixUI/Popover'
+import Link from 'components/Link'
 import { Hint } from './prose'
 import PriorityBadge from './PriorityBadge'
 import CollapsibleCard from './CollapsibleCard'
@@ -31,8 +30,10 @@ import {
     type ProseSection,
 } from './inboxData'
 
-// Rows in the "Discuss" menu. Chrome – nothing is wired up behind them.
-const DISCUSS_ACTIONS = ['Comment on the pull request', 'Share to Slack', 'Open a Linear issue']
+// Shared look for the title row's actions (Open in GitHub, Discuss, Archive, Refund) – one
+// bordered pill so the row reads as a single toolbar instead of four different button styles.
+const ACTION_BUTTON_CLASS =
+    'inline-flex items-center gap-1.5 rounded border border-primary bg-primary px-2 py-1 text-sm font-semibold text-primary transition-colors hover:bg-accent'
 
 // Real reports often have a single signal, so "1 findings" shows up without this.
 const plural = (count: number, noun: string): string => `${count} ${noun}${count === 1 ? '' : 's'}`
@@ -70,35 +71,6 @@ const Summary = ({ sections }: { sections: ProseSection[] }): JSX.Element => (
             </div>
         ))}
     </div>
-)
-
-const DiscussMenu = (): JSX.Element => (
-    <Popover
-        dataScheme="secondary"
-        contentClassName="border border-primary"
-        trigger={
-            <button
-                type="button"
-                className="inline-flex items-center gap-1.5 rounded border border-primary bg-primary px-2 py-1 text-sm font-semibold text-primary transition-colors hover:bg-accent"
-            >
-                <IconComment className="size-4 text-secondary" />
-                Discuss
-                <IconChevronDown className="size-3 text-secondary" />
-            </button>
-        }
-    >
-        <div className="w-52">
-            {DISCUSS_ACTIONS.map((action) => (
-                <button
-                    key={action}
-                    type="button"
-                    className="flex w-full items-center gap-2 rounded px-2 py-1 text-left text-sm text-primary transition-colors hover:bg-accent"
-                >
-                    {action}
-                </button>
-            ))}
-        </div>
-    </Popover>
 )
 
 /**
@@ -169,32 +141,69 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                     </div>
                 </div>
                 <div className="flex flex-wrap items-center justify-end gap-2">
-                    <OSButton
-                        asLink
-                        external
-                        to={item.prUrl ?? 'https://github.com/PostHog/posthog'}
-                        size="sm"
-                        variant="secondary"
-                        icon={<IconGithub />}
-                        tooltip={item.prUrl ? undefined : 'This pull request is illustrative. Opens the repo instead.'}
-                    >
-                        Open in GitHub
-                    </OSButton>
-                    <DiscussMenu />
+                    {/*
+                     * A merged item links out to its pull request; a report hasn't got one, so it
+                     * offers the action that would create it – which is what the real Inbox does.
+                     */}
+                    {item.prNumber ? (
+                        (() => {
+                            const githubLink = (
+                                <Link
+                                    to={item.prUrl ?? 'https://github.com/PostHog/posthog'}
+                                    externalNoIcon
+                                    className={ACTION_BUTTON_CLASS}
+                                >
+                                    <IconGithub className="size-4 text-secondary" />
+                                    Open in GitHub
+                                    <IconArrowUpRight className="size-3.5 text-secondary" />
+                                </Link>
+                            )
+                            return item.prUrl ? (
+                                githubLink
+                            ) : (
+                                <Hint trigger={githubLink}>
+                                    This pull request is illustrative. Opens the repo instead.
+                                </Hint>
+                            )
+                        })()
+                    ) : (
+                        <Hint
+                            trigger={
+                                <button type="button" className={ACTION_BUTTON_CLASS}>
+                                    <IconPullRequest className="size-4 text-secondary" />
+                                    Create PR
+                                </button>
+                            }
+                        >
+                            Hands the report to an agent to write the fix and open a pull request against your repo.
+                        </Hint>
+                    )}
                     <Hint
                         trigger={
-                            <OSButton size="sm" icon={<IconArchive />}>
+                            <button type="button" className={ACTION_BUTTON_CLASS}>
+                                <IconComment className="size-4 text-secondary" />
+                                Discuss
+                            </button>
+                        }
+                    >
+                        You can ask an agent about any report.
+                    </Hint>
+                    <Hint
+                        trigger={
+                            <button type="button" className={ACTION_BUTTON_CLASS}>
+                                <IconArchive className="size-4 text-secondary" />
                                 Archive
-                            </OSButton>
+                            </button>
                         }
                     >
                         Clears the report without merging.
                     </Hint>
                     <Hint
                         trigger={
-                            <OSButton size="sm" icon={<IconReceipt />}>
+                            <button type="button" className={ACTION_BUTTON_CLASS}>
+                                <IconReceipt className="size-4 text-secondary" />
                                 Refund
-                            </OSButton>
+                            </button>
                         }
                     >
                         Pull requests cost $15. If one isn't useful, refund it and you're not charged.
@@ -207,13 +216,20 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                 {detail && (
                     <Hint
                         trigger={
-                            <span className="inline-flex items-center rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 font-semibold text-green">
+                            <span
+                                className={`inline-flex items-center rounded-full border px-1.5 py-0.5 font-semibold ${
+                                    detail.status === 'Actionable'
+                                        ? 'border-green/40 bg-green/10 text-green'
+                                        : 'border-orange/40 bg-orange/10 text-orange'
+                                }`}
+                            >
                                 {detail.status}
                             </span>
                         }
                     >
-                        The agent found a fix it can write itself. Reports needing a judgment call are marked "needs
-                        input" and wait for you instead.
+                        {detail.status === 'Actionable'
+                            ? 'The agent found a fix it can write itself. Reports needing a judgment call are marked "needs input" and wait for you instead.'
+                            : 'The agent investigated but wouldn’t stand behind a fix, so it stopped and handed the call back to you rather than shipping a guess.'}
                     </Hint>
                 )}
                 <Hint trigger={<span>{plural(findingsCount(item), 'finding')}</span>}>

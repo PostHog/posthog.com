@@ -17,12 +17,32 @@ export default function ReportRow({ item, isUnread, onOpen }: ReportRowProps): J
     const origin = originMeta(item)
     const OriginIcon = origin.Icon
 
-    const PrBadge = (): JSX.Element | null =>
-        item.prNumber ? (
-            <span className="inline-flex items-center gap-1 rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-green">
-                <IconPullRequest className="size-3" />#{item.prNumber}
+    /*
+     * A merged item is badged with its PR number; a report has no pull request yet, so
+     * it's badged with the judgment that decides what happens to it next – "Actionable"
+     * means an agent could open the PR today, "Needs input" means it's waiting on a human.
+     */
+    const PrBadge = (): JSX.Element | null => {
+        if (item.prNumber) {
+            return (
+                <span className="inline-flex items-center gap-1 rounded-full border border-green/40 bg-green/10 px-1.5 py-0.5 font-mono text-xs font-semibold text-green">
+                    <IconPullRequest className="size-3" />#{item.prNumber}
+                </span>
+            )
+        }
+        const status = item.detail?.status
+        if (!status) return null
+        const actionable = status === 'Actionable'
+        return (
+            <span
+                className={`inline-flex items-center rounded-full border px-1.5 py-0.5 text-xs font-semibold ${
+                    actionable ? 'border-green/40 bg-green/10 text-green' : 'border-orange/40 bg-orange/10 text-orange'
+                }`}
+            >
+                {status}
             </span>
-        ) : null
+        )
+    }
 
     return (
         <div className="relative rounded-md border border-primary bg-primary p-3 @md:p-4">
