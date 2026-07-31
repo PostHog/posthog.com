@@ -81,7 +81,8 @@ jobs:
               env:
                   # Previews build minimal by default (fast; skips API-sourced pages such as SDK
                   # references, so those 404 in the preview). Add the `full-preview` label to a PR
-                  # to build the full site and render those pages. Re-labeling re-triggers this job.
+                  # to build the full site and render those pages. Adding (or re-adding) the label
+                  # re-triggers this job; removing it does not (there's no `unlabeled` trigger).
                   GATSBY_MINIMAL: ${{ contains(github.event.pull_request.labels.*.name, 'full-preview') && 'false' || 'true' }}
                   # Emit the static/dynamic module graph so the eager-graph check below can
                   # measure the app shell. Reuses this single PR build — no second build.
