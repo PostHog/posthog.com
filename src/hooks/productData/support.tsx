@@ -8,10 +8,7 @@ import {
     IconInfo,
     IconList,
     IconMagic,
-    IconMap,
-    IconNewspaper,
     IconRocket,
-    IconShieldPeople,
     IconSparkles,
     IconSupport,
 } from '@posthog/icons'
@@ -87,9 +84,6 @@ export const support = {
             group: 'divided',
             icon: <IconGraph className="size-4" />,
         },
-        { slug: 'roadmap', name: 'Roadmap', group: 'divided', icon: <IconMap className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'team', name: 'Team', group: 'divided', icon: <IconShieldPeople className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     overview: {
