@@ -359,7 +359,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {

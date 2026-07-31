@@ -120,7 +120,7 @@ export default function WarehouseNative(): JSX.Element {
                     warehouse. The focus is on expanding what integrates with our integrated warehouse, making it easier
                     to use PostHog as your primary data platform without needing to stitch together multiple tools. If
                     you&apos;re interested in finding out more, we suggest{' '}
-                    <Link to="/data-stack/managed-warehouse">
+                    <Link to="/context-warehouse/managed-warehouse">
                         joining the waitlist for the managed DuckDB warehouse
                     </Link>
                     .
