@@ -154,6 +154,35 @@
     ],
     "redirects": [
         {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook"
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
             "source": "/mcp-analytics",
             "destination": "/docs/mcp-analytics",
             "statusCode": 301
@@ -5668,6 +5697,11 @@
         {
             "source": "/docs/experiments/create-experiments-mcp:ext(\\.md)?",
             "destination": "/docs/experiments/surfaces/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/wizard",
+            "destination": "/docs/ai-engineering/ai-wizard",
             "statusCode": 301
         }
     ]
