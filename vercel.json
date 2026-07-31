@@ -132,6 +132,10 @@
             "destination": "/community/profiles/[id]/index.html"
         },
         {
+            "source": "/teams/:path*",
+            "destination": "/teams/[slug]/index.html"
+        },
+        {
             "source": "/next-steps/(.*)",
             "destination": "/next-steps/index.html"
         },
