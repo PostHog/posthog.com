@@ -95,7 +95,9 @@ export interface SelfDrivingStoryProps {
 
 const StageImage = ({ image, label, alt }: { image?: string; label?: string; alt: string }): JSX.Element | null => {
     if (image) {
-        return <img src={image} alt={alt} className="mt-6 block w-full rounded-md border border-primary shadow-lg" />
+        // No border or shadow: these are screenshots that already carry their own window
+        // chrome, so framing them again reads as a box inside a box.
+        return <img src={image} alt={alt} className="mt-6 block w-full rounded-md" />
     }
     if (label) {
         return (

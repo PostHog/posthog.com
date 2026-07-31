@@ -21,8 +21,8 @@ export default function ShipWithPostHog(): JSX.Element {
     return (
         <>
             <SEO
-                title="Ship with PostHog – real pull requests PostHog opened"
-                description="Real merged pull requests on PostHog/posthog, each found by a different part of PostHog: an exception, a session recording, a support conversation. Open one to read the evidence behind it and the diff that shipped."
+                title="Ship with PostHog – self-driving pull requests, already merged"
+                description="Self-driving PostHog watches your product, investigates what it catches, and opens the pull request. These are real merged PRs on PostHog/posthog – open one to read the evidence behind it and the diff that shipped."
                 image="/images/og/default.png"
             />
             <div data-scheme="secondary" className="@container h-full w-full bg-primary text-primary">
@@ -70,36 +70,6 @@ export default function ShipWithPostHog(): JSX.Element {
                             <SignalsToInbox />
                         </div>
 
-                        {/* One loop, many ways in */}
-                        <div className="mx-auto mt-14 max-w-2xl text-center @md:mt-20">
-                            <h2 className="text-2xl font-bold @md:text-3xl">One loop, many ways in</h2>
-                            <p className="mt-3 text-secondary @2xl:text-lg">
-                                The loop never changes – watch, catch, investigate, fix, merge. What changes is which
-                                part of PostHog notices first. A cohorts bug came from a session recording, an
-                                integrations bug came from a support conversation, a query bug came from an exception.
-                                Turn on more sources and more of your product comes into view.
-                            </p>
-                            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-semibold">
-                                <Link
-                                    to="/self-driving"
-                                    state={{ newWindow: true }}
-                                    className="text-red dark:text-yellow"
-                                >
-                                    How self-driving works
-                                </Link>
-                                <span aria-hidden className="text-secondary">
-                                    ·
-                                </span>
-                                <Link
-                                    to="/docs/self-driving"
-                                    state={{ newWindow: true }}
-                                    className="text-red dark:text-yellow"
-                                >
-                                    Read the docs
-                                </Link>
-                            </div>
-                        </div>
-
                         {/* CTA */}
                         <div className="mx-auto mt-12 max-w-2xl rounded-lg border border-primary bg-accent p-6 @md:mt-16 @md:p-8">
                             <h2 className="mt-0 text-2xl font-bold">Set up your Inbox</h2>
@@ -120,6 +90,26 @@ export default function ShipWithPostHog(): JSX.Element {
                                         Sign up
                                     </Link>
                                 </span>
+                            </div>
+                            {/* The page's only routes to the overview and the docs root. */}
+                            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-primary pt-4 text-sm font-semibold">
+                                <Link
+                                    to="/self-driving"
+                                    state={{ newWindow: true }}
+                                    className="text-red dark:text-yellow"
+                                >
+                                    How self-driving works
+                                </Link>
+                                <span aria-hidden className="text-secondary">
+                                    ·
+                                </span>
+                                <Link
+                                    to="/docs/self-driving"
+                                    state={{ newWindow: true }}
+                                    className="text-red dark:text-yellow"
+                                >
+                                    Read the docs
+                                </Link>
                             </div>
                         </div>
                     </div>
