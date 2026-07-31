@@ -4,10 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
-
 This page covers troubleshooting for Revenue Analytics. For setup, see the [installation guides](/docs/revenue-analytics/start-here).
 
 ## Have a question? Ask PostHog AI
@@ -24,7 +20,23 @@ This ensures that your revenue data is converted using recent exchange rates, ba
 
 ## Which currencies do you support?
 
-PostHog supports a wide range of global currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for a complete list.
+PostHog supports a wide range of global fiat currencies for revenue tracking. See our [currencies.py file](https://github.com/PostHog/posthog/blob/master/posthog/models/exchange_rate/currencies.py) for the complete, authoritative list.
+
+Bitcoin (BTC) is the only cryptocurrency we support. Ether (ETH), Tether (USDT), and other tokens are not supported, and broader cryptocurrency support is not planned. If you receive revenue in crypto, see [How do I track crypto revenue?](#how-do-i-track-crypto-revenue) below.
+
+## How do I track crypto revenue?
+
+Since Bitcoin is the only supported cryptocurrency, send your crypto revenue events with the value already converted to a supported currency, and set that currency on the event. USD is usually the simplest choice. You already need conversion rates to get a normalized figure, so converting to USD before sending the event costs you nothing extra.
+
+Keep the original transaction details as custom event properties so you can still break revenue down by asset in Trends. For example:
+
+```
+crypto_currency: "ETH"
+crypto_amount: 0.05
+payment_type: "crypto"
+```
+
+This matters because sending a raw crypto ticker as the currency does not fail loudly. As covered in [What if you don't support the currency on my revenue event?](#what-if-you-dont-support-the-currency-on-my-revenue-event), an unsupported currency is tracked as `0` value, so a revenue event sent with a currency like `ETH` silently shows zero revenue instead of raising an error.
 
 ## What "currency's minor unit" means?
 
@@ -69,17 +81,17 @@ There's also one exception to what you'd expect from a zero-decimal currency, an
 
 This is unlikely given the large range of currencies we support, but in this event we'd track that revenue event as if it had `0` value. We welcome [feature requests](https://github.com/PostHog/posthog/issues/new?assignees=&labels=feature&template=feature_request.md&title=) for currencies you'd like us to support.
 
-### Why isn't my revenue appearing in the revenue analytics dashboard?
+### Why isn't my revenue showing up?
 
-If your revenue isn't appearing in your revenue analytics dashboard, there are a few common issues to check:
+If your revenue isn't appearing in your [managed views](/docs/revenue-analytics/managed-views), insights, or persons/groups profiles, there are a few common issues to check:
 
 1. **Check the Revenue tab in Data management**: First, verify if your revenue events are being captured correctly by checking the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management.
 1. **Make sure Revenue tracking is enabled for your Data warehouse source**: Legacy data warehouse sources have revenue tracking disabled by default. Make sure you enable them in the [Revenue tab](https://app.posthog.com/data-management/revenue) in data management. Also, make sure they've finished syncing for the first time.
-1. **Check your filters**: you can choose to filter revenue events in the Revenue analytics dashboard filter, make sure you have selected the desired entries.
+1. **Check your filters**: when querying your revenue in insights or the SQL editor, make sure your filters and date range include the entries you expect.
 
 ## Why isn't currency being converted in my Trends insight?
 
-Currency conversion only happens automatically within **Revenue Analytics** and in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
+Currency conversion only happens automatically in the [managed views](/docs/revenue-analytics/managed-views). If you're using Product Analytics (Trends, Funnels, Experiments) with "Sum of Revenue", the raw values are summed without any currency conversion.
 
 **Your options:**
 

@@ -96,7 +96,7 @@ export const support = {
         title: 'One place for every user conversation',
         description:
             'Support is one of the tools that makes your product self-driving: a helpdesk where you can solve tickets that arrive with full user context. Agents can turn these tickets into PRs, proposing fixes and improvements for your review.',
-        eli5: "Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.",
+        eli5: 'Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.',
         textColor: 'text-black', // tw
     },
     hogs: {
@@ -119,7 +119,7 @@ export const support = {
     },
     ai: {
         intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
-        mcpToolsFeature: 'conversations',
+        mcpFeatures: ['conversations'],
         groups: [
             {
                 title: 'Triage',

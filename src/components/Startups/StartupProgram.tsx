@@ -32,7 +32,7 @@ import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
@@ -177,7 +177,7 @@ const toolkit: {
     { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/blog/posthog-vs-optimizely' }, // prettier-ignore
     { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/blog/posthog-vs-sentry' }, // prettier-ignore
     { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/blog/best-langfuse-alternatives' }, // prettier-ignore
-    { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/data-stack' }, // prettier-ignore
+    { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/context-warehouse' }, // prettier-ignore
     { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/blog/best-sprig-alternatives' }, // prettier-ignore
     { Icon: IconCursorClick, color: 'text-red', product: 'Heatmaps', prefix: 'like ', linkText: 'Hotjar', href: '/blog/posthog-vs-hotjar' }, // prettier-ignore
     { Icon: IconPlug, color: 'text-sky-blue', product: 'CDP', prefix: 'like ', linkText: 'Segment', href: '/blog/best-customer-data-platforms-for-developers' }, // prettier-ignore
@@ -503,12 +503,22 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             {/* Partner variants show the "PostHog X Partner" co-brand lockup above the heading. */}
                             {partnerConfig ? (
                                 <div className="flex items-center gap-2.5 mb-3">
-                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
+                                    <Logo
+                                        layout="logomark"
+                                        variant="mono"
+                                        className="h-8 w-auto relative -top-px"
+                                        color="white"
+                                    />
                                     {partnerConfig.title}
                                 </div>
                             ) : (
                                 <h1 className="flex items-center gap-2.5 mb-0 text-2xl @md:text-3xl">
-                                    <Logo wordmark={false} className="h-8 relative -top-px" color="white" />
+                                    <Logo
+                                        layout="logomark"
+                                        variant="mono"
+                                        className="h-8 w-auto relative -top-px"
+                                        color="white"
+                                    />
                                     <span>
                                         PostHog <span className="text-yellow">for startups</span>
                                     </span>

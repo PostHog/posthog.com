@@ -4,6 +4,7 @@ import SEO from 'components/seo'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
 import SourceConfiguration from 'components/Product/Sources/Configuration'
+import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import { getProseClasses } from '../constants'
 
 interface SourceField {
@@ -43,6 +44,7 @@ export default function DataWarehouseSource({
                         <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue/10 text-blue">Beta</span>
                     )}
                 </div>
+                <WarehouseWizardHint className="my-4" />
                 <div className={getProseClasses('base')}>
                     <p>
                         Connect {name} to PostHog to sync your data into the PostHog data warehouse for analysis and

@@ -11,7 +11,7 @@ import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
@@ -136,12 +136,13 @@ function Hero(): JSX.Element {
     const isDark = siteSettings.theme === 'dark'
     return (
         <>
-            <div className="text-center @xl:text-left mb-24 min-w-0">
+            <div className="text-center @xl:text-left min-w-0">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo
                         className="max-w-[157px]"
                         variant={isDark ? 'mono' : 'gradient'}
                         color={isDark ? 'white' : undefined}
+                        width="auto"
                     />
                 </h1>
 

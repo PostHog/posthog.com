@@ -2087,7 +2087,7 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Desktop is a{' '}
-                    <a href="/docs/posthog-code" className="underline">
+                    <a href="/docs/posthog-desktop" className="underline">
                         desktop coding agent
                     </a>{' '}
                     that understands your product and business, not just your source code. It picks up work from product
@@ -2096,15 +2096,15 @@ const FAQ_ITEMS = [
                 </p>
                 <p>
                     You can also drive it manually like a regular coding agent: open a{' '}
-                    <a href="/docs/posthog-code/tasks" className="underline">
+                    <a href="/docs/posthog-desktop/tasks" className="underline">
                         task
                     </a>
                     , describe what you want, and watch it work. Run tasks locally, in an isolated{' '}
-                    <a href="/docs/posthog-code/worktrees" className="underline">
+                    <a href="/docs/posthog-desktop/worktrees" className="underline">
                         worktree
                     </a>
                     , or in a{' '}
-                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
                         PostHog-managed cloud sandbox
                     </a>
                     .
@@ -2180,7 +2180,7 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Desktop is built on top of two{' '}
-                    <a href="/docs/posthog-code/use-any-model-and-harness" className="underline">
+                    <a href="/docs/posthog-desktop/use-any-model-and-harness" className="underline">
                         harnesses
                     </a>
                     : Claude Code and Codex. You can pick the harness, model, and reasoning effort per task.
@@ -2232,19 +2232,19 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    <a href="/docs/posthog-code/tasks" className="underline">
+                    <a href="/docs/posthog-desktop/tasks" className="underline">
                         Three modes
                     </a>
                     , picked per task:
                 </p>
                 <p>
                     <strong>Local</strong> runs in your current branch and working directory.{' '}
-                    <a href="/docs/posthog-code/worktrees" className="underline">
+                    <a href="/docs/posthog-desktop/worktrees" className="underline">
                         <strong>Worktree</strong>
                     </a>{' '}
                     creates an isolated git worktree per task, so you can run several agents in parallel without
                     stepping on each other.{' '}
-                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
                         <strong>Cloud</strong>
                     </a>{' '}
                     runs in a PostHog-managed sandbox that survives app restarts, sleeps, and network changes.
@@ -2266,12 +2266,12 @@ const FAQ_ITEMS = [
                 </p>
                 <p>
                     The local{' '}
-                    <a href="/docs/posthog-code/posthog-integration" className="underline">
+                    <a href="/docs/posthog-desktop/posthog-integration" className="underline">
                         enricher
                     </a>{' '}
                     uses tree-sitter to detect PostHog SDK calls right on your machine – no source code is uploaded for
                     that.{' '}
-                    <a href="/docs/posthog-code/cloud-runs" className="underline">
+                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
                         Cloud tasks
                     </a>{' '}
                     run in a PostHog-managed sandbox with configurable network rules (trusted allowlist, full internet,
@@ -2317,7 +2317,7 @@ const FAQ_ITEMS = [
                     Every organization gets a $20/month free tier to explore, plus a default $50 billing limit so you
                     don't rack up costs by accident (customize it anytime). Simple tasks use very few credits; larger,
                     multi-file work uses more. See the{' '}
-                    <a href="/docs/posthog-code/pricing" className="underline">
+                    <a href="/docs/posthog-desktop/pricing" className="underline">
                         pricing docs
                     </a>{' '}
                     for the full breakdown.
@@ -2332,7 +2332,7 @@ const FAQ_ITEMS = [
         trigger: 'Is it open source?',
         content: (
             <p>
-                <a href="/docs/posthog-code/open-source" className="underline">
+                <a href="/docs/posthog-desktop/open-source" className="underline">
                     Yes – MIT licensed
                 </a>
                 , with the monorepo{' '}

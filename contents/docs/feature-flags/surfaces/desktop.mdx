@@ -1,0 +1,43 @@
+---
+title: Fix flag issues in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work that feature flags generate. A scout reads your flag roster against the `$feature_flag_called` stream, finds places where the flags in your PostHog project no longer match the flag checks in your code, and files what it finds as a report you can act on.
+
+## What the flags scout watches for
+
+The scout is auditing the wiring between the flag UI and your code, not judging which features should be on. A flag whose evaluation stream matches its configured state is left alone, however its volume trends. What it looks for instead:
+
+- **Evaluation cliffs** – an active, healthy flag whose call volume falls off a cliff. Deactivating a flag doesn't stop `$feature_flag_called` events, so a cliff means the *code* call disappeared: a deploy removed the check, or an SDK path broke. If the flag was gating something users can see, they lost the feature.
+- **Ghost flags** – code calling a flag key with nothing behind it, because the flag was deleted or the key was typo'd. The SDK returns `false` without erroring, so shipped code can run the fallback path for months and nothing in the flag UI ever shows it.
+- **Response-distribution shifts** – a flag's mix of responses moving with no matching edit in its activity log. That usually means condition drift: a person property, group property, or [cohort](/docs/data/cohorts) a release condition targets changed underneath the flag.
+- **Flag debt** – stale flags, fully rolled-out flags still checked in hot paths, and deactivated or 0%-rollout flags still taking heavy call volume, all bundled into one cleanup report rather than one report per flag.
+
+Flags attached to an [experiment](/docs/experiments) are the experiments scout's territory, so this one skips them.
+
+## How a finding reaches you
+
+Most flag findings are an investigation rather than a one-line change, so the scout files a report for a human and stops there – no pull request, no repository attached. A dead check that a cliff exposed might be intentional cleanup or a broken deploy, and only someone who knows the feature can tell which.
+
+When the fix *is* an obvious code change – a ghost flag whose dead check just needs deleting, for example – the scout marks the report immediately actionable against your connected repository, and a coding agent opens a draft pull request. You review it in PostHog Desktop and merge it on GitHub, so a human is still the last step.
+
+## What you can do here
+
+- **Read the report** – the flag key, what contradicts its configured state, and the numbers behind it: baseline versus current call volume, reach, and the date the change started.
+- **Ask questions** – start a research task against a report to dig into a flag before you decide anything.
+- **Review the draft pull request** – inspect and edit the change before it goes anywhere.
+- **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
+
+## Related
+
+- Create and roll out flags in the [web app](/docs/feature-flags/surfaces/web-app).
+- Work through a retirement with [cleaning up stale flags](/docs/feature-flags/cleaning-up-stale-flags).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

@@ -4,24 +4,24 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a rough articulation of the stages a paid and "sales sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each stage. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's stage and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
+This is a rough articulation of the phases a paid and "sales-sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each phase. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's phase and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
 
-## The stages
+## The phases
 
 ### Presales
 
-| Stage          | Definition                                                               |
+| Phase          | Definition                                                               |
 | -------------- | ------------------------------------------------------------------------ |
 | **Exploring**  | Signed up, sending events, free tier or trivial spend. No buying signal. |
 | **Evaluating** | Actively comparing us against alternatives or against not buying.        |
 | **Proving**    | Running a structured POC with success criteria, ours or theirs.          |
 | **Buying**     | Commercial negotiation. Quote out, annual terms in discussion.           |
 
-> In a PLG motion most customers move through the presales stages invisibly and without contact. Our process and system should be able to capture and identify the right accounts to work with at the right time based on signals and stages. Exploring, Evaluating, and Proving are inferred from product signals unless sales is engaged. The presales stages only need to be as granular as the routing decision they drive, which is binary: automation, or a human from new biz.
+> In a PLG motion most customers move through the presales phases invisibly and without contact. Our process and system should be able to capture and identify the right accounts to work with at the right time based on signals and phases. Exploring, Evaluating, and Proving are inferred from product signals unless sales is engaged. The presales phases only need to be as granular as the routing decision they drive, which is binary: automation, or a human from new biz.
 
 ### Postsales
 
-| Stage            | Definition                                                                                                                                                                                                          |
+| Phase            | Definition                                                                                                                                                                                                          |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Implementing** | Delivering a closed deal. Posthog instrumentation, onboarding and success plan, stakeholder map.                                                                                                                    |
 | **Ramping**      | Usage growing, account below full TAM threshold or still climbing toward committed volume or otherwise just not at fully implemented production volume. Generally takes longer for larger or more traditional orgs. |
@@ -30,28 +30,38 @@ This is a rough articulation of the stages a paid and "sales sized" customer mov
 
 > Edge case worth noting: a pure self-serve account that crosses $20k ARR with no sales involvement skips Implementing entirely.  They enter at whatever their adoption or usage indicates, usually Ramping or Expanding. This is important, though, because an account that's been self-serve and steady state in prod for 2 years doesn't need the same tactic and approach as a sales-driven "implementation" account, and our process shouldn't treat them the same.
 
-### At risk is a status, not a stage
+### At risk is a status, not a phase
 
-An account in any postsales stage can be at risk. At risk does not change the stage or reassign the account. The current owner runs the churn save. 
+An account in any postsales phase can be at risk. At risk does not change the phase or reassign the account. The current owner runs the churn save. 
 
 ## Coverage map
 
-Who covers the account at each stage. 
+Who covers the account at each phase. Phases run top to bottom in the order a customer moves through them; roles run across.
 
-| Ownership                                                 | Exploring | Evaluating | Proving | Buying | Implementing | Ramping | Expanding | Steady |
-| --------------------------------------------------------- | :-------: | :--------: | :-----: | :----: | :----------: | :-----: | :-------: | :----: |
-| **New biz (TAE)**, if ICP qualified                       |           |     ✓      |    ✓    |   ✓    |              |         |           |        |
-| **CSM base layer**, all accounts >$20k ARR                |           |            |         |  (✓)   |      ✓       |    ✓    |     ✓     |   ✓    |
-| **TAM overlay**, >$20k, while there's expansion to be had |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
-| **Growth TAM**, pooled, $500 to $1,667 MRR                |           |            |         |        |     (✓)      |    ✓    |     ✓     |        |
-| **Onboarding team**                                       |    (✓)    |    (✓)     |   (✓)   |  (✓)   |     (✓)      |   (✓)   |           |        |
+✅ active coverage &nbsp;·&nbsp; 🟡 conditional (see notes) &nbsp;·&nbsp; blank = not involved
+
+| Phase            | BDR | TAE | CSM | TAM | Growth TAM | FDE | Onboarding |
+| ---------------- | :-: | :-: | :-: | :-: | :--------: | :-: | :--------: |
+| **Exploring**    | ✅  |     |     |     |            |     |     🟡     |
+| **Evaluating**   | 🟡  | ✅  |     |     |            |     |     🟡     |
+| **Proving**      |     | ✅  |     |     |            | 🟡  |     🟡     |
+| **Buying**       |     | ✅  | 🟡  |     |            |     |     🟡     |
+| **Implementing** |     |     | ✅  | 🟡  |     🟡     | 🟡  |     🟡     |
+| **Ramping**      |     |     | ✅  | ✅  |     ✅     | 🟡  |     🟡     |
+| **Expanding**    |     |     | ✅  | ✅  |     ✅     | 🟡  |            |
+| **Steady state** |     |     | ✅  |     |            | 🟡    |            |
+
 
 Notes:
 
 - Automation is the base level everywhere a direct human coverage isn't needed. Below-$500 MRR accounts and sub-$20k steady-state accounts have no human owner by design.
--  TAM allocation can start during Implementing when a deal closed with a known expansion path.
+- TAM allocation can start during Implementing when a deal closed with a qualified expansion opp.
 - Growth TAM pickup can happen during Implementing for a fast-ramping sub-$20k account.
-- The onboarding team's lane is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
+- The onboarding team's coverage is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
+- BDR coverage is top-of-funnel only: BDRs source and qualify accounts at Exploring (primarily via cold outbound to accounts with no inbound buying signal) and hand off to the TAE at Evaluating. They don't carry the account past that handoff.
+- FDE coverage is conditional where TAM, CSM, or TAE sell an FDE engagement to a customer account and then an FDE runs a short-term, hands-on technical engagement where the implementation need is more than a TAM or CSM can deliver. 
+  - The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect. 
+  - The 🟡 at Steady state is for a churn prevention play where an FDE has been brought in to fix issues with a customer implementation.
 
 ## Ownership rules
 
@@ -59,4 +69,6 @@ Notes:
 
 **TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
-**TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. 
+**TAE handoff goes to CSM, always** (above threshold). Optionally, the TAE can retain the account to expand it when there is a specific opportunity that justifies the retention across a 12 month window. 
+
+**BDRs feed the funnel, they don't own the deal.** BDRs own top-of-funnel sourcing at Exploring and hand off to the TAE at Evaluating. Coverage ends at the handoff; the TAE owns the account from there.

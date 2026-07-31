@@ -42,6 +42,7 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
   bigquery.tables.list
   bigquery.tables.getData
   bigquery.tables.create
+  bigquery.tables.update
   bigquery.tables.updateData
   bigquery.tables.delete
   ```

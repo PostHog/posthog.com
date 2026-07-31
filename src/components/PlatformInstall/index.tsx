@@ -4,7 +4,6 @@ import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
 import ZoomHover from 'components/ZoomHover'
-import useCloud from 'hooks/useCloud'
 import IconButton from './IconButton'
 import { CopyableCommand } from './CopyableCommand'
 import { InlineCommand } from './InlineCommand'
@@ -185,13 +184,12 @@ export default function PlatformInstall({
     }
 
     // `selfDriving` is shorthand for the `self-driving` subcommand; `command` is the escape hatch.
-    const cloud = useCloud()
     const subcommand = selfDriving ? 'self-driving' : command || undefined
 
     // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
     // from flags via the shared builder so display/copy semantics can never drift from the card.
     if (variant === 'inline') {
-        const inline = buildWizardCommand({ subcommand, cloud })
+        const inline = buildWizardCommand({ subcommand })
         return (
             <InlineCommand
                 displayCommand={inline.displayCommand}
@@ -205,19 +203,17 @@ export default function PlatformInstall({
         )
     }
 
-    // Card variant: append the subcommand + the user's cloud region (when the schema opts in) to the
-    // schema's base command(s), e.g. `npx @posthog/wizard self-driving --region eu`.
+    // Card variant: append the subcommand to the schema's base command(s), e.g.
+    // `npx @posthog/wizard self-driving`.
     const { displayCommand, copyCommand } = buildSchemaCommand({
         base: schema.defaultCommand,
         copyBase: schema.defaultCopyCommand,
         subcommand,
-        appendRegion: schema.appendRegion,
-        cloud,
     })
 
     return (
         <div
-            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded bg-accent/40 shadow-2xl mb-2 ${className}`}
+            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded-md bg-primary shadow-2xl mb-2 ${className}`}
         >
             <div className="p-3 space-y-2">
                 <div className="flex items-start justify-between gap-2">
