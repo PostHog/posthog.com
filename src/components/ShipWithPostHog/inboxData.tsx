@@ -255,7 +255,7 @@ export interface InboxItem {
     prUrl?: string
     /** Shown as a badge on the row. Illustrative unless `prUrl` is set too. */
     prNumber?: number
-    /** The detail view's payload. Only item 1 is fully authored so far. */
+    /** The detail view's payload. */
     detail?: ReportDetail
 }
 

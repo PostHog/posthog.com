@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import {
-    IconChevronDown,
-    IconSearch,
-    IconSort,
-    IconCompass,
-    IconFlag,
-    IconRefresh,
-    IconNotification,
-} from '@posthog/icons'
+import React, { useEffect, useMemo, useState } from 'react'
+import { IconChevronDown, IconSearch, IconNotification } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 import ReportRow from './ReportRow'
 import ReportDetail from './ReportDetail'
+import InboxFilterBar, { applyFilters, sourcesInUse, DEFAULT_FILTERS, type InboxFilterState } from './InboxFilters'
 import { INBOX_ITEMS } from './inboxData'
-
-// A quiet, non-interactive filter chip mirroring the real Inbox filter bar.
-const FilterChip = ({ icon, label }: { icon: React.ReactNode; label: string }): JSX.Element => (
-    <span className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded border border-primary bg-primary px-2.5 text-sm text-secondary">
-        {icon}
-        {label}
-        <IconChevronDown className="size-3.5 text-secondary/70" />
-    </span>
-)
 
 const Tab = ({ label, count, active }: { label: string; count?: number; active?: boolean }): JSX.Element => (
     <span
@@ -37,6 +22,11 @@ const Tab = ({ label, count, active }: { label: string; count?: number; active?:
 export default function InboxReplica(): JSX.Element {
     const [openedIds, setOpenedIds] = useState<Set<string>>(new Set())
     const [openId, setOpenId] = useState<string | null>(null)
+    const [filters, setFilters] = useState<InboxFilterState>(DEFAULT_FILTERS)
+
+    const visibleItems = useMemo(() => applyFilters(INBOX_ITEMS, filters), [filters])
+    // Derived from the data, so every option in the menu returns at least one row.
+    const sources = useMemo(() => sourcesInUse(INBOX_ITEMS), [])
 
     // Deep-link: open whichever item the URL hash points at on mount.
     useEffect(() => {
@@ -104,26 +94,37 @@ export default function InboxReplica(): JSX.Element {
                             <IconSearch className="size-3.5" />
                             Search by title or description.
                         </span>
-                        <div className="ml-auto flex items-center gap-2">
-                            <FilterChip icon={<IconSort className="size-3.5" />} label="Sort" />
-                            <FilterChip icon={<IconCompass className="size-3.5" />} label="Scout" />
-                            <FilterChip icon={<IconFlag className="size-3.5" />} label="Priority" />
-                            <span className="inline-flex size-8 items-center justify-center rounded border border-primary bg-primary text-secondary">
-                                <IconRefresh className="size-3.5" />
-                            </span>
+                        <div className="ml-auto">
+                            <InboxFilterBar filters={filters} onChange={setFilters} sources={sources} />
                         </div>
                     </div>
 
                     {/* List */}
                     <div className="mx-auto flex max-w-4xl flex-col gap-2.5 px-4 pb-5 @md:px-6">
-                        {INBOX_ITEMS.map((item) => (
-                            <ReportRow
-                                key={item.id}
-                                item={item}
-                                isUnread={!openedIds.has(item.id)}
-                                onOpen={() => openItem(item.id)}
-                            />
-                        ))}
+                        {visibleItems.length ? (
+                            visibleItems.map((item) => (
+                                <ReportRow
+                                    key={item.id}
+                                    item={item}
+                                    isUnread={!openedIds.has(item.id)}
+                                    onOpen={() => openItem(item.id)}
+                                />
+                            ))
+                        ) : (
+                            <div className="rounded-md border border-primary bg-primary px-4 py-8 text-center">
+                                <p className="m-0 text-sm font-semibold text-primary">
+                                    No pull requests match these filters
+                                </p>
+                                <p className="m-0 mt-1 text-sm text-secondary">
+                                    These five are the real ones we merged, so not every combination has a result.
+                                </p>
+                                <div className="mt-3 flex justify-center">
+                                    <OSButton size="sm" variant="secondary" onClick={() => setFilters(DEFAULT_FILTERS)}>
+                                        Clear filters
+                                    </OSButton>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </>
             )}

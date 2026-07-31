@@ -158,6 +158,8 @@ export const AddReviewerMenu = (): JSX.Element => (
     <Popover
         dataScheme="secondary"
         contentClassName="border border-primary"
+        align="end"
+        arrow={false}
         trigger={
             <button
                 type="button"

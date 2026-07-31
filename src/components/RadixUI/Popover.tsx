@@ -15,6 +15,10 @@ interface PopoverProps {
     side?: 'top' | 'right' | 'bottom' | 'left'
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    /** Edge to line up with the trigger. Menus usually want `start`. */
+    align?: 'start' | 'center' | 'end'
+    /** Set false for dropdown menus, which conventionally have no pointer. */
+    arrow?: boolean
 }
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
@@ -31,6 +35,8 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
             side = 'bottom',
             open,
             onOpenChange,
+            align = 'center',
+            arrow = true,
         },
         ref
     ) => {
@@ -58,7 +64,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                         data-scheme={dataScheme}
                         className={`rounded p-1 bg-primary text-primary shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] will-change-[transform,opacity] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_rgba(255,255,255,0.2)] data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade max-w-[100vw] ${contentClassName}`}
                         sideOffset={sideOffset}
-                        align="center"
+                        align={align}
                         side={side}
                     >
                         <div className="flex flex-col gap-2.5 h-full">
@@ -78,7 +84,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                                 <ScrollArea className="h-full">{children}</ScrollArea>
                             </div>
                         </div>
-                        <RadixPopover.Arrow className="fill-white" />
+                        {arrow && <RadixPopover.Arrow className="fill-white" />}
                     </RadixPopover.Content>
                 </RadixPopover.Portal>
             </RadixPopover.Root>
