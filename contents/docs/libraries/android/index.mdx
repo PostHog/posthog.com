@@ -498,7 +498,7 @@ Available in version 3.58.0 and newer.
 
 <CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
 
-Push is a beta feature of [PostHog Workflows](/docs/workflows). We'd love your feedback — [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+Push is a beta feature of [PostHog Workflows](/docs/workflows). It's rolling out gradually and isn't available in every project yet. To request access or send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
 </CalloutBox>
 
 The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push), so the Firebase project on that channel must match your app.
@@ -523,7 +523,7 @@ PostHogAndroid.setup(context, config)
 
 **Initialize the SDK in your `Application.onCreate`, not an Activity.** The SDK installs its open-tracking hook during `setup()`, so it has to run before the launching Activity is created. If you initialize inside an Activity, a cold-start tap on a notification won't be captured.
 
-Firebase delivers rotated tokens through `onNewToken`, which the SDK can't observe on its own — forward it so the registered token stays current:
+Firebase delivers rotated tokens through `onNewToken`, which the SDK can't observe on its own, so forward it to keep the registered token current:
 
 ```kotlin
 class MyFirebaseMessagingService : FirebaseMessagingService() {

@@ -13,12 +13,12 @@ Available in version 3.69.0 and newer.
 
 <CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
 
-Push is a beta feature of [PostHog Workflows](/docs/workflows). We'd love your feedback — [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+Push is a beta feature of [PostHog Workflows](/docs/workflows). It's rolling out gradually and isn't available in every project yet. To request access or send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
 
-The SDK registers the device token with PostHog and captures opens. You still set up remote notifications and request notification permission in your app as usual — the SDK doesn't do that for you.
+The SDK registers the device token with PostHog and captures opens. You still set up remote notifications and request notification permission in your app as usual. The SDK doesn't do that for you.
 
 </CalloutBox>
 
@@ -33,13 +33,13 @@ By default the SDK registers the device token and captures opens for you, by hoo
 
 ```swift
 let config = PostHogConfig(apiKey: "<ph_project_api_key>")
-// Both default to true — shown here for clarity:
+// Both default to true, shown here for clarity:
 config.capturePushNotificationSubscriptions = true // register the device token with PostHog
 config.capturePushNotificationOpened = true        // capture `$push_notification_opened` on tap
 PostHogSDK.shared.setup(config)
 ```
 
-With these enabled you only need to register for remote notifications; the SDK picks up the token and open events automatically. The token is registered under the current distinct ID, so it follows the user across `identify()`. Locally-scheduled notifications are ignored — capture those manually (below).
+With these enabled you only need to register for remote notifications; the SDK picks up the token and open events automatically. The token is registered under the current distinct ID, so it follows the user across `identify()`. Locally-scheduled notifications are ignored. Capture those manually (below).
 
 Automatic registration and open capture require `config.enableSwizzling` to be `true` (the default). If you disable swizzling or manage your own delegates, use the manual APIs below.
 
@@ -94,7 +94,7 @@ The `$push_notification_opened` event includes `$notification_title`, `$notifica
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
-Your **backend** mints that token — the SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, the channel's app id as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
+Your **backend** mints that token. The SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, the channel's app id as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
 
 ```swift
 config.pushIdentityProvider = { distinctId, appId, completion in
@@ -112,6 +112,6 @@ Notes:
 
 | Issue | Check |
 | --- | --- |
-| Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off – use the manual APIs. |
+| Token never registers | Confirm you call `registerForRemoteNotifications()` and the user granted notification permission. If you set `config.enableSwizzling = false`, automatic registration and open capture are off. Use the manual APIs. |
 | Push doesn't arrive | Confirm the channel's APNs environment (Production/Sandbox) matches your build, and the bundle id matches. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time — see [Identity verification](#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](#identity-verification). |
