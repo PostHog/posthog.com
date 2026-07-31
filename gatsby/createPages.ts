@@ -41,8 +41,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
-    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
-    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
 
     const result = (await graphql(`
         {
@@ -1088,76 +1086,85 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
+    // Build every SDK reference page (latest + versioned) from the sourced nodes.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: result.data.allSdkReferences.nodes,
+        typeNodes: result.data.allSdkTypes.nodes,
+    })
+}
+
+// Create SDK reference pages and their type sub-pages from already-sourced `SdkReferences`
+// nodes. Shared by the full build and the minimal (preview) build. `latestOnly` restricts
+// output to the `latest` rows, keeping the minimal preview deploy small (Cloudflare Pages caps
+// deployments at 20k files) while still rendering /docs/references/* for review.
+function createSdkReferencePages({
+    createPage,
+    referenceNodes,
+    typeNodes,
+    latestOnly = false,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    referenceNodes: any[]
+    typeNodes: any[]
+    latestOnly?: boolean
+}) {
+    const SdkReferenceTemplate = path.resolve(`src/templates/sdk/SdkReference.tsx`)
+    const SdkTypeTemplate = path.resolve(`src/templates/sdk/SdkType.tsx`)
+
     // Grab types available for each SDK and version
-    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
+    const sdkTypesByReference = typeNodes.reduce((acc, node) => {
         const { referenceId, version, ...types } = node
 
         if (!acc[referenceId]) {
             acc[referenceId] = {}
         }
 
-        acc[referenceId][version] = types.types.map(({ name }) => name)
+        acc[referenceId][version] = types.types.map(({ name }: { name: string }) => name)
 
         return acc
     }, {} as Record<string, Record<string, any>>)
 
-    result.data.allSdkReferences.nodes.forEach((node) => {
-        if (node.version.includes('latest')) {
-            createPage({
-                path: `/docs/references/${node.referenceId}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.referenceId}`,
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        } else {
-            createPage({
-                path: `/docs/references/${node.id}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.id}`,
-                    // Null checks, only affects type crosslinking, won't break build
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
+    referenceNodes.forEach((node) => {
+        const isLatest = node.version.includes('latest')
+        if (latestOnly && !isLatest) {
+            return
         }
+        // latest → referenceId (no version in URL); versioned → id (embeds the version)
+        const pagePath = isLatest ? `/docs/references/${node.referenceId}` : `/docs/references/${node.id}`
+        createPage({
+            path: pagePath,
+            component: SdkReferenceTemplate,
+            context: {
+                name: node.info.title,
+                description: node.info.description,
+                fullReference: node,
+                regex: pagePath,
+                // Null checks, only affects type crosslinking, won't break build
+                types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+            },
+        })
     })
 
-    result.data.allSdkTypes.nodes.forEach((node) => {
-        node.types?.forEach((type) => {
+    typeNodes.forEach((node) => {
+        const isLatest = node.version.includes('latest')
+        if (latestOnly && !isLatest) {
+            return
+        }
+        node.types?.forEach((type: any) => {
             if (type.id && (type.properties || type.example)) {
-                if (node.version.includes('latest')) {
-                    createPage({
-                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.referenceId,
-                        },
-                    })
-                } else {
-                    createPage({
-                        path: `/docs/references/${node.id}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.id,
-                        },
-                    })
-                }
+                const slugPrefix = isLatest ? node.referenceId : node.id
+                createPage({
+                    path: `/docs/references/${slugPrefix}/types/${type.id}`,
+                    component: SdkTypeTemplate,
+                    context: {
+                        typeData: type,
+                        version: node.version,
+                        id: node.id,
+                        types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
+                        slugPrefix,
+                    },
+                })
             }
         })
     })
@@ -1252,6 +1259,81 @@ async function createMinimalPages({
                     }
                 }
             }
+            allSdkReferences {
+                nodes {
+                    info {
+                        description
+                        id
+                        specUrl
+                        slugPrefix
+                        title
+                        version
+                    }
+                    referenceId
+                    hogRef
+                    id
+                    categories
+                    classes {
+                        description
+                        functions {
+                            category
+                            description
+                            details
+                            examples {
+                                code
+                                name
+                                id
+                            }
+                            id
+                            params {
+                                description
+                                isOptional
+                                name
+                                type
+                            }
+                            path
+                            releaseTag
+                            showDocs
+                            returnType {
+                                id
+                                name
+                            }
+                            title
+                        }
+                        id
+                        title
+                    }
+                    version
+                }
+            }
+            allSdkTypes: allSdkReferences {
+                nodes {
+                    id
+                    version
+                    referenceId
+                    info {
+                        description
+                        id
+                        slugPrefix
+                        specUrl
+                        title
+                        version
+                    }
+                    hogRef
+                    categories
+                    types {
+                        example
+                        id
+                        name
+                        path
+                        properties {
+                            description
+                            name
+                            type
+                        }
+                    }
+                }
+            }
         }
     `)
 
@@ -1336,6 +1418,8 @@ async function createMinimalPages({
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
         localizedNewsletter: { nodes: any[] }
+        allSdkReferences: { nodes: any[] }
+        allSdkTypes: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
@@ -1362,5 +1446,14 @@ async function createMinimalPages({
                 localizedRoot: 'newsletter',
             },
         })
+    })
+
+    // Render SDK reference pages (latest only) so /docs/references/* is reviewable in previews
+    // without the full site's file count exceeding Cloudflare Pages' 20k-file deploy limit.
+    createSdkReferencePages({
+        createPage,
+        referenceNodes: data.allSdkReferences.nodes,
+        typeNodes: data.allSdkTypes.nodes,
+        latestOnly: true,
     })
 }
