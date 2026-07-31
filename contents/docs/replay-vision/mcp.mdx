@@ -62,9 +62,9 @@ Aggregate stats, rather than the rows themselves:
 
 ### Rating results and improving the scanner
 
-The [quality tab](/docs/replay-vision/quality)'s loop is fully drivable over MCP:
+The [calibration tab](/docs/replay-vision/calibration)'s loop is fully drivable over MCP:
 
-- `vision-observations-label-create` – rate an observation with a thumbs up or down, optionally with written feedback. Same rating the Quality tab records.
+- `vision-observations-label-create` – rate an observation with a thumbs up or down, optionally with written feedback. Same rating the calibration tab records.
 - `vision-observations-label-destroy` – remove a rating.
 - `vision-scanners-prompt-suggestions-current` – read the newest recommendation, whether it's gone stale since new ratings arrived, and how many rated observations back it.
 - `vision-scanners-prompt-suggestions-generate` – generate a fresh recommendation from the current ratings. The model call runs inline, so the request takes a while.

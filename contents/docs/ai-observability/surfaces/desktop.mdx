@@ -1,0 +1,46 @@
+---
+title: AI Observability in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you read the [Self-driving](/docs/self-driving) reports your LLM traces produce. A scout watches your trace data, and when a slice of it regresses, it writes up what it found and puts it in front of a human.
+
+Unlike [error tracking](/docs/error-tracking), this scout stops at the report. It does not open a draft pull request – see [why](#why-there-is-no-automatic-pull-request) below.
+
+## How a regression becomes a report
+
+The scout looks for five kinds of change, sliced by the dimensions it finds in your data – model, provider, feature, product area, and any custom properties you attach:
+
+- **Cost** – spend on a model or feature stepping above its own baseline.
+- **Latency** – a per-model latency band widening, rather than an aggregate that averages fast and slow models together.
+- **Errors** – a rise in failed calls, or a new error class appearing.
+- **Volume** – generation counts moving in a way the user count doesn't explain.
+- **Evaluation performance** – a scored behavior getting worse, which [evaluations](/docs/ai-evals) catch as they run.
+
+It only files a report when it has localized the change to a specific slice and can show the numbers behind it. A regression it has already reported gets a note appended to the existing report rather than a new one, so a problem that persists across runs stays one item in your inbox.
+
+## Why there is no automatic pull request
+
+A cost step, a latency band, or a failing evaluation is an investigation, not a known fix. The cause might be a model change, a prompt, a retry loop, a new customer with unusual inputs, or nothing wrong at all. There's no safe code change to guess at.
+
+So this scout files each finding as an investigation report and routes it to a reviewer – the person who owns that model, feature, or evaluation – rather than kicking off a coding agent. You decide what, if anything, to change.
+
+## What you can do here
+
+- **Read the report** – the slice that regressed, when it moved, and the traces, generations, and query results behind it.
+- **Ask questions** – start a research task against the report to dig into the traces before you act.
+- **See the history** – a regression that keeps recurring is one report with each window appended, so you can see whether it's getting worse or recovering.
+- **Decide what happens next** – change a prompt, roll back a model, adjust an evaluation, or mark it as expected. It's your call, and nothing happens until you make it.
+
+## Related
+
+- Set up the scoring that catches quality regressions in [AI Evals](/docs/ai-evals).
+- Read the underlying traces in the [web app](/docs/ai-observability/surfaces/web-app).
+- Learn how the loop works in the [Self-driving docs](/docs/self-driving).

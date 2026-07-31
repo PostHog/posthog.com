@@ -101,7 +101,15 @@ export const productOrder: Record<string, string[]> = {
 
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
-export const nonProductPages = {}
+export const nonProductPages = {
+    // MCP Analytics has no marketing page – the nav entry points straight at the docs.
+    mcpAnalytics: {
+        slug: 'mcp-analytics',
+        url: '/docs/mcp-analytics',
+        icon: 'IconPlug',
+        color: 'blue',
+    },
+}
 
 // Helper function to get products for a category in the correct order
 export function getProductsForCategory(category: string, allProducts: any[]): any[] {

@@ -14,23 +14,20 @@ import {
     IconChat,
     IconCode,
     IconMessage,
-    IconNewspaper,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
 import { applications, topFeatures } from './session_replay/slides'
+import { getTool } from '../../data/tools'
 
 export const sessionReplay = {
+    ...getTool('session_replay'),
     Icon: IconRewindPlay,
-    name: 'Session Replay',
     label: 'Web recordings',
-    handle: 'session_replay',
     type: 'session_replay',
-    slug: 'session-replay',
     teamSlug: 'replay',
     forumTopicId: 377,
     color: 'yellow',
     colorSecondary: '[#B56C00]',
-    category: 'product_engineering',
     wizardSupport: true,
     includeAddonRates: true,
     shortDescription: 'Watch people use your product',
@@ -84,21 +81,20 @@ export const sessionReplay = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**

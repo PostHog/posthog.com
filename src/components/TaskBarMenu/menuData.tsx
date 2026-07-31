@@ -359,7 +359,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
@@ -448,7 +448,7 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
-            // Mobile skips the menu — the docs homepage covers the same ground with more room
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
@@ -525,12 +525,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Roadmap',
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
@@ -850,8 +844,25 @@ export function useMenuData(): MenuType[] {
                         continue
                     }
 
-                    // Submenus keep their children — MenuBar expands them in place on mobile
-                    filteredItems.push(item)
+                    // Convert submenus with mobileDestination to simple items
+                    if (item.type === 'submenu' && item.mobileDestination) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            link: item.mobileDestination,
+                            items: undefined,
+                        })
+                    }
+                    // Convert submenus with links to simple items
+                    else if (item.type === 'submenu' && item.link) {
+                        filteredItems.push({
+                            ...item,
+                            type: 'item' as const,
+                            items: undefined,
+                        })
+                    } else {
+                        filteredItems.push(item)
+                    }
                 }
 
                 const processedItems = filteredItems

@@ -71,7 +71,7 @@ PostHog is especially helpful for engineers and product teams that want to under
 - An [all-in-one developer tool suite](/products)
 - [EU data hosting available](/blog/posthog-cloud-eu)
 - [Feature flags](/docs/feature-flags), [A/B testing](/docs/experiments), [heatmaps](/docs/toolbar/heatmaps), [session recording(/docs/session-replay) and more
-- A [Data Warehouse](/data-stack) and [CDP](/cdp)
+- A [Data Warehouse](/context-warehouse) and [CDP](/cdp)
 - Unlimited ability to scale
 - Open source, via MIT license
 

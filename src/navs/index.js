@@ -3641,7 +3641,7 @@ export const docsMenu = {
                                     url: '/docs/model-context-protocol/use-cases',
                                 },
                                 {
-                                    name: 'Tools reference',
+                                    name: 'MCP tools reference',
                                     url: '/docs/model-context-protocol/tools',
                                 },
                                 {
@@ -4820,14 +4820,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Webhooks',
-                    url: '/docs/replay-vision/webhooks',
-                    icon: 'IconWebhooks',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Improving accuracy',
-                    url: '/docs/replay-vision/quality',
+                    name: 'Calibration',
+                    url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
                     color: 'yellow',
                 },
@@ -5142,7 +5136,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -5290,87 +5284,77 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Analyzing results',
-                    url: '/docs/experiments/analyzing-results',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/experiments/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/experiments/surfaces/web-app',
+                        },
+                        {
+                            name: 'Analyzing results',
+                            url: '/docs/experiments/analyzing-results',
+                        },
+                        {
+                            name: 'Managing lifecycle',
+                            url: '/docs/experiments/managing-lifecycle',
+                        },
+                        {
+                            name: 'No-code web experiments',
+                            url: '/docs/experiments/no-code-web-experiments',
+                        },
+                        {
+                            name: 'Analyze with PostHog AI',
+                            url: '/docs/experiments/analyze-experiments-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/experiments/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/experiments/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/experiments/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                },
+                {
+                    name: 'Metrics',
+                },
+                {
+                    name: 'Experiment metrics',
+                    url: '/docs/experiments/metrics',
                     icon: 'IconGraph',
                     color: 'purple',
-                },
-                {
-                    name: 'Managing lifecycle',
-                    url: '/docs/experiments/managing-lifecycle',
-                    icon: 'IconRewind',
-                    color: 'green',
-                },
-                {
-                    name: 'No-code experiments',
-                    url: '/docs/experiments/no-code-web-experiments',
-                    icon: 'IconToolbar',
-                    color: 'yellow',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Concepts',
-                },
-                {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPercentage',
-                    color: 'blue',
                 },
                 {
                     name: 'Exposures',
                     url: '/docs/experiments/exposures',
                     icon: 'IconPerson',
                     color: 'red',
+                    featured: true,
                 },
                 {
-                    name: 'Metrics',
-                    url: '/docs/experiments/metrics',
-                    icon: 'IconGraph',
-                    color: 'purple',
-                },
-                {
-                    name: 'Running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconCalculator',
-                    color: 'orange',
-                },
-                {
-                    name: 'Bayesian statistics',
-                    url: '/docs/experiments/statistics-bayesian',
-                    icon: 'IconFlask',
-                    color: 'purple',
-                },
-                {
-                    name: 'Frequentist statistics',
-                    url: '/docs/experiments/statistics-frequentist',
-                    icon: 'IconBook',
-                    color: 'blue',
-                },
-                {
-                    name: 'CUPED',
-                    url: '/docs/experiments/cuped',
-                    icon: 'IconCalculator',
-                    color: 'orange',
-                },
-                {
-                    name: 'Holdouts',
-                    url: '/docs/experiments/holdouts',
-                    icon: 'IconPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'A/B testing prompts',
-                    url: '/docs/experiments/llm-prompt-experiments',
-                    icon: 'IconFlask',
+                    name: 'Data warehouse metrics',
+                    url: '/docs/experiments/data-warehouse',
+                    icon: 'IconDatabase',
                     color: 'purple',
                     badge: {
                         title: 'Beta',
@@ -5384,91 +5368,69 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Statistics',
+                },
+                {
+                    name: 'Bayesian statistics',
+                    url: '/docs/experiments/statistics-bayesian',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Frequentist statistics',
+                    url: '/docs/experiments/statistics-frequentist',
+                    icon: 'IconBook',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Running time and sample size',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'CUPED variance reduction',
+                    url: '/docs/experiments/cuped',
+                    icon: 'IconCalculator',
+                    color: 'orange',
+                },
+                {
+                    name: 'Legacy methodology',
+                    url: '/docs/experiments/legacy-methodology',
+                    icon: 'IconRewind',
+                    color: 'red',
+                },
+                {
+                    name: 'Targeting & rollout',
+                },
+                {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPercentage',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Holdouts',
+                    url: '/docs/experiments/holdouts',
+                    icon: 'IconPeople',
+                    color: 'green',
+                    featured: true,
+                },
+                {
                     name: 'Changing distribution after rollout',
                     url: '/docs/experiments/changing-distribution-after-rollout',
                     icon: 'IconGraph',
                     color: 'orange',
                 },
                 {
-                    name: 'Experiments without Feature Flags',
+                    name: 'Experiments without feature flags',
                     url: '/docs/experiments/running-experiments-without-feature-flags',
                     icon: 'IconWrench',
                     color: 'red',
-                },
-                {
-                    name: 'New user experiments',
-                    url: '/tutorials/new-user-experiments',
-                    icon: 'IconPerson',
-                    color: 'blue',
-                },
-                {
-                    name: 'A/A testing',
-                    url: '/tutorials/aa-testing',
-                    icon: 'IconBalance',
-                    color: 'orange',
-                },
-                {
-                    name: 'A/B/n testing',
-                    url: '/tutorials/abn-testing',
-                    icon: 'IconSplitTesting',
-                    color: 'purple',
-                },
-                {
-                    name: 'Holdout testing',
-                    url: '/tutorials/holdout-testing',
-                    icon: 'IconShieldPeople',
-                    color: 'green',
-                },
-                {
-                    name: 'Redirect testing',
-                    url: '/tutorials/redirect-testing',
-                    icon: 'IconArrowRight',
-                    color: 'red',
-                },
-                {
-                    name: 'Fake door test',
-                    url: '/tutorials/fake-door-test',
-                    icon: 'IconCursorClick',
-                    color: 'blue',
-                },
-                {
-                    name: 'LLM A/B tests',
-                    url: '/tutorials/llm-ab-tests',
-                    icon: 'IconAI',
-                    color: 'orange',
-                },
-
-                {
-                    name: 'Data Warehouse experiments',
-                    url: '/docs/experiments/data-warehouse',
-                    icon: 'IconDatabase',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Tutorials and framework guides',
-                    url: '/docs/experiments/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Analyze experiments with PostHog AI',
-                    url: '/docs/experiments/analyze-experiments-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Create experiments with MCP',
-                    url: '/docs/experiments/create-experiments-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
                 },
                 {
                     name: 'Resources',
@@ -5478,6 +5440,7 @@ export const docsMenu = {
                     url: '/docs/experiments/best-practices',
                     icon: 'IconStar',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting',
@@ -5485,6 +5448,22 @@ export const docsMenu = {
                     icon: 'IconQuestion',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'A/B testing prompts',
+                    url: '/docs/experiments/llm-prompt-experiments',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Tutorials and guides',
+                    url: '/docs/experiments/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'green',
                 },
                 {
                     name: 'Changelog',
@@ -6206,7 +6185,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -6216,10 +6195,66 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/data-warehouse/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/surfaces/web-app',
+                        },
+                        {
+                            name: 'Query with SQL',
+                            url: '/docs/data-warehouse/query',
+                        },
+                        {
+                            name: 'Join data across sources',
+                            url: '/docs/data-warehouse/join',
+                        },
+                        {
+                            name: 'Visualize with insights',
+                            url: '/docs/data-warehouse/insights',
+                        },
+                        {
+                            name: 'Write SQL with PostHog AI',
+                            url: '/docs/data-warehouse/write-sql-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/data-warehouse/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/data-warehouse/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/data-warehouse/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Sources',
+                },
+                {
                     name: 'Link sources',
                     url: '/docs/data-warehouse/sources',
-                    icon: 'IconBook',
+                    icon: 'IconPlug',
                     color: 'blue',
+                    featured: true,
                     dynamicChildren: 'data-warehouse-sources',
                     children: [
                         {
@@ -6236,16 +6271,44 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Query with SQL',
-                    url: '/docs/data-warehouse/query',
+                    name: 'Modeling',
+                },
+                {
+                    name: 'Views',
+                    url: '/docs/data-warehouse/views',
+                    icon: 'IconCalculator',
+                    color: 'salmon',
+                    featured: true,
+                },
+                {
+                    name: 'Materializing views',
+                    url: '/docs/data-warehouse/views/materialize',
+                    icon: 'IconCalculator',
+                    color: 'yellow',
+                },
+                {
+                    name: 'SQL commands',
+                    url: '/docs/data-warehouse/sql',
                     icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Accessing data with SQL',
+                    url: '/docs/data-warehouse/sql/data-access',
+                    icon: 'IconDatabase',
                     color: 'green',
                 },
                 {
-                    name: 'Visualize with insights',
-                    url: '/docs/data-warehouse/insights',
-                    icon: 'IconGraph',
-                    color: 'red',
+                    name: 'SQL functions',
+                    url: '/docs/data-warehouse/sql/useful-functions',
+                    icon: 'IconStar',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Variables',
+                    url: '/docs/data-warehouse/sql/variables',
+                    icon: 'IconGear',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Managed warehouse',
@@ -6265,81 +6328,24 @@ export const docsMenu = {
                 {
                     name: 'Connect and query',
                     url: '/docs/data-warehouse/managed-warehouse/connect',
-                    icon: 'IconCode',
-                    color: 'orange',
+                    icon: 'IconTerminal',
+                    color: 'seagreen',
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Resources',
                 },
                 {
                     name: 'Integrated warehouse',
                     url: '/docs/data-warehouse/integrated-warehouse',
-                },
-                {
-                    name: 'SQL commands',
-                    url: '/docs/data-warehouse/sql',
-                    icon: 'IconCode',
-                    color: 'purple',
-                },
-                {
-                    name: 'SQL functions',
-                    url: '/docs/data-warehouse/sql/useful-functions',
-                    icon: 'IconStar',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Variables',
-                    url: '/docs/data-warehouse/sql/variables',
-                    icon: 'IconGear',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Views',
-                    url: '/docs/data-warehouse/views',
-                    icon: 'IconCalculator',
-                    color: 'salmon',
-                    featured: true,
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Accessing data',
-                    url: '/docs/data-warehouse/sql/data-access',
-                    icon: 'IconDatabase',
-                    color: 'green',
-                },
-                {
-                    name: 'Joining data',
-                    url: '/docs/data-warehouse/join',
-                    icon: 'IconList',
+                    icon: 'IconStack',
                     color: 'blue',
+                },
+                {
+                    name: 'Under the hood',
+                    url: '/docs/data-warehouse/under-the-hood',
+                    icon: 'IconMagicWand',
+                    color: 'seagreen',
                     featured: true,
-                },
-                {
-                    name: 'Materializing views',
-                    url: '/docs/data-warehouse/views/materialize',
-                    icon: 'IconCalculator',
-                    color: 'yellow',
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Write SQL with PostHog AI',
-                    url: '/docs/data-warehouse/write-sql-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Run SQL with MCP',
-                    url: '/docs/data-warehouse/run-sql-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                },
-                {
-                    name: 'Resources',
                 },
                 {
                     name: 'Cutting costs',
@@ -6360,13 +6366,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'green',
-                },
-                {
-                    name: 'Under the hood',
-                    url: '/docs/data-warehouse/under-the-hood',
-                    icon: 'IconMagicWand',
-                    color: 'seagreen',
-                    featured: true,
                 },
                 {
                     name: 'Changelog',
@@ -6468,7 +6467,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -6720,20 +6719,73 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Concepts',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/ai-observability/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-observability/surfaces/web-app',
+                        },
+                        {
+                            name: 'Analyze LLM performance',
+                            url: '/docs/ai-observability/dashboard',
+                        },
+                        {
+                            name: 'Playground',
+                            url: '/docs/ai-observability/playground',
+                        },
+                        {
+                            name: 'Clusters',
+                            url: '/docs/ai-observability/clusters',
+                        },
+                        {
+                            name: 'Sentiment',
+                            url: '/docs/ai-observability/sentiment',
+                        },
+                        {
+                            name: 'Trace summarization',
+                            url: '/docs/ai-observability/summarization',
+                        },
+                        {
+                            name: 'Analyze traces with PostHog AI',
+                            url: '/docs/ai-observability/analyze-traces-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/ai-observability/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog Desktop',
+                    url: '/docs/ai-observability/surfaces/desktop',
+                    icon: 'IconCode',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/ai-observability/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Traces and spans',
                 },
                 {
                     name: 'Basics',
                     url: '/docs/ai-observability/basics',
                     icon: 'IconBook',
                     color: 'red',
-                },
-                {
-                    name: 'Generations',
-                    url: '/docs/ai-observability/generations',
-                    icon: 'IconAIText',
-                    color: 'seagreen',
-                    featured: true,
                 },
                 {
                     name: 'Traces',
@@ -6747,6 +6799,13 @@ export const docsMenu = {
                     url: '/docs/ai-observability/spans',
                     icon: 'IconBrackets',
                     color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'Generations',
+                    url: '/docs/ai-observability/generations',
+                    icon: 'IconAIText',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
@@ -6778,6 +6837,103 @@ export const docsMenu = {
                     url: '/docs/ai-observability/embeddings',
                     icon: 'IconDatabase',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Tracking custom properties',
+                    url: '/docs/ai-observability/custom-properties',
+                    icon: 'IconGear',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
+                    icon: 'IconBrackets',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Data retention',
+                    url: '/docs/ai-observability/data-retention',
+                    icon: 'IconDatabase',
+                    color: 'blue',
+                },
+                {
+                    name: 'Integrations',
+                },
+                {
+                    name: 'Third-party integrations',
+                    url: '/docs/ai-observability/integrations',
+                    icon: 'IconApps',
+                    featured: true,
+                    color: 'yellow',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-observability/integrations',
+                        },
+                        {
+                            name: 'Helicone',
+                            url: '/docs/ai-observability/integrations/helicone-posthog',
+                        },
+                        {
+                            name: 'Langfuse',
+                            url: '/docs/ai-observability/integrations/langfuse-posthog',
+                        },
+                        {
+                            name: 'Traceloop',
+                            url: '/docs/ai-observability/integrations/traceloop-posthog',
+                        },
+                        {
+                            name: 'Keywords AI',
+                            url: '/docs/ai-observability/integrations/keywords-ai-posthog',
+                        },
+                    ],
+                },
+                {
+                    name: 'Link Session Replay',
+                    url: '/docs/ai-observability/link-session-replay',
+                    icon: 'IconRewindPlay',
+                    color: 'blue',
+                },
+                {
+                    name: 'Link Error Tracking',
+                    url: '/docs/ai-observability/link-error-tracking',
+                    icon: 'IconWarning',
+                    color: 'red',
+                },
+                {
+                    name: 'User feedback',
+                },
+                {
+                    name: 'Collect user feedback',
+                    url: '/docs/ai-observability/collect-user-feedback',
+                    icon: 'IconMessage',
+                    color: 'salmon',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'React integration with useThumbSurvey',
+                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
+                        },
+                        {
+                            name: 'Manual event capture',
+                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
+                        },
+                    ],
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Calculating LLM costs',
+                    url: '/docs/ai-observability/calculating-costs',
+                    icon: 'IconBalance',
+                    color: 'green',
                     featured: true,
                 },
                 {
@@ -6823,134 +6979,17 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Calculating LLM costs',
-                    url: '/docs/ai-observability/calculating-costs',
-                    icon: 'IconBalance',
-                    color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Analyze LLM performance',
-                    url: '/docs/ai-observability/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
-                },
-                {
-                    name: 'Tracking custom properties',
-                    url: '/docs/ai-observability/custom-properties',
-                    icon: 'IconGear',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Link Session Replay',
-                    url: '/docs/ai-observability/link-session-replay',
-                    icon: 'IconRewindPlay',
-                    color: 'blue',
-                },
-                {
-                    name: 'Link Error Tracking',
-                    url: '/docs/ai-observability/link-error-tracking',
-                    icon: 'IconWarning',
-                    color: 'red',
-                },
-                {
-                    name: 'Collect user feedback',
-                    url: '/docs/ai-observability/collect-user-feedback',
-                    icon: 'IconMessage',
-                    color: 'salmon',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'React integration with useThumbSurvey',
-                            url: '/docs/ai-observability/user-feedback/use-thumb-survey',
-                        },
-                        {
-                            name: 'Manual event capture',
-                            url: '/docs/ai-observability/user-feedback/manual-event-capture',
-                        },
-                    ],
-                },
-                {
-                    name: 'PostHog AI',
-                },
-                {
-                    name: 'Analyze traces with PostHog AI',
-                    url: '/docs/ai-observability/analyze-traces-ai',
-                    icon: 'IconSparkles',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Query traces with MCP',
-                    url: '/docs/ai-observability/query-traces-mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                },
-                {
-                    name: 'Playground',
-                    url: '/docs/ai-observability/playground',
-                    icon: 'IconFlask',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Trace summarization',
-                    url: '/docs/ai-observability/summarization',
-                    icon: 'IconAI',
-                    color: 'blue',
-                    badge: {
-                        title: 'Alpha',
-                        className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
-                    },
-                },
-                {
-                    name: 'Clusters',
-                    url: '/docs/ai-observability/clusters',
-                    icon: 'IconGraph',
-                    color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Sentiment',
-                    url: '/docs/ai-observability/sentiment',
-                    icon: 'IconThumbsUp',
-                    color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Custom parsers',
-                    url: '/docs/ai-observability/custom-parser',
-                    icon: 'IconBrackets',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
                     name: 'Demos & examples',
                     url: '/docs/ai-observability/demos',
                     icon: 'IconFlask',
                     color: 'seagreen',
                 },
                 {
-                    name: 'Data retention',
-                    url: '/docs/ai-observability/data-retention',
-                    icon: 'IconDatabase',
+                    name: 'More tutorials',
+                    url: '/docs/ai-observability/tutorials',
+                    icon: 'IconGraduationCap',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting',
@@ -6963,42 +7002,6 @@ export const docsMenu = {
                     url: '/docs/ai-observability/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
-                },
-                {
-                    name: 'More tutorials',
-                    url: '/docs/ai-observability/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Third-party integrations',
-                    url: '/docs/ai-observability/integrations',
-                    icon: 'IconApps',
-                    featured: true,
-                    color: 'yellow',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/ai-observability/integrations',
-                        },
-                        {
-                            name: 'Helicone',
-                            url: '/docs/ai-observability/integrations/helicone-posthog',
-                        },
-                        {
-                            name: 'Langfuse',
-                            url: '/docs/ai-observability/integrations/langfuse-posthog',
-                        },
-                        {
-                            name: 'Traceloop',
-                            url: '/docs/ai-observability/integrations/traceloop-posthog',
-                        },
-                        {
-                            name: 'Keywords AI',
-                            url: '/docs/ai-observability/integrations/keywords-ai-posthog',
-                        },
-                    ],
                 },
             ],
         },
@@ -7423,7 +7426,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Getting started',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7440,38 +7443,60 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Edit memory',
-                    url: '/docs/posthog-ai/edit-memory',
-                    icon: 'IconMemory',
-                    color: 'purple',
+                    name: 'Surfaces',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/posthog-ai/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/posthog-ai/surfaces/web-app',
+                        },
+                        {
+                            name: 'Example prompts',
+                            url: '/docs/posthog-ai/example-prompts',
+                        },
+                        {
+                            name: 'Write and edit SQL',
+                            url: '/docs/posthog-ai/write-and-edit-sql',
+                        },
+                        {
+                            name: 'Investigate web traffic',
+                            url: '/docs/posthog-ai/investigate-web-traffic',
+                        },
+                        {
+                            name: 'Summarize session replays',
+                            url: '/docs/posthog-ai/session-summaries',
+                        },
+                    ],
+                },
+                {
+                    name: 'PostHog Slack',
+                    url: '/docs/posthog-ai/surfaces/slack',
+                    icon: 'IconMessage',
+                    color: 'red',
                     featured: true,
                 },
                 {
-                    name: 'Features',
-                },
-                {
-                    name: 'Platform and chat UI',
-                    url: '/docs/posthog-ai/platform-and-chat-ui',
-                    icon: 'IconLlmPromptManagement',
-                    color: 'orange',
-                },
-                {
-                    name: 'Context and commands',
-                    url: '/docs/posthog-ai/context-and-commands',
-                    icon: 'IconChat',
-                    color: 'seagreen',
+                    name: 'Modes and tools',
                 },
                 {
                     name: 'Tools and capabilities',
                     url: '/docs/posthog-ai/tools',
                     icon: 'IconWrench',
                     color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Modes',
                     url: '/docs/posthog-ai/modes',
                     icon: 'IconToggle',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Plan mode',
@@ -7486,31 +7511,21 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Session summaries',
-                    url: '/docs/posthog-ai/session-summaries',
-                    icon: 'IconEye',
+                    name: 'Memory and context',
+                },
+                {
+                    name: 'Context and commands',
+                    url: '/docs/posthog-ai/context-and-commands',
+                    icon: 'IconChat',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Edit memory',
+                    url: '/docs/posthog-ai/edit-memory',
+                    icon: 'IconMemory',
                     color: 'purple',
-                },
-                {
-                    name: 'Guides',
-                },
-                {
-                    name: 'Example prompts',
-                    url: '/docs/posthog-ai/example-prompts',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Write and edit SQL',
-                    url: '/docs/posthog-ai/write-and-edit-sql',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-                {
-                    name: 'Investigate web traffic',
-                    url: '/docs/posthog-ai/investigate-web-traffic',
-                    icon: 'IconShield',
-                    color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Resources',
@@ -7518,20 +7533,20 @@ export const docsMenu = {
                 {
                     name: 'Pricing',
                     url: '/docs/posthog-ai/pricing',
-                    icon: 'IconShield',
-                    color: 'red',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'FAQ',
+                    url: '/docs/posthog-ai/faq',
+                    icon: 'IconQuestion',
+                    color: 'blue',
                 },
                 {
                     name: 'Changelog',
                     url: '/docs/posthog-ai/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
-                },
-                {
-                    name: 'FAQ',
-                    url: '/docs/posthog-ai/faq',
-                    icon: 'IconShield',
-                    color: 'red',
                 },
             ],
         },
@@ -7887,6 +7902,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: 'Rust', url: '/docs/logs/installation/rust' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
                         { name: 'React Native', url: '/docs/logs/installation/react-native' },
