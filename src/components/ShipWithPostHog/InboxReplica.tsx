@@ -33,7 +33,7 @@ const TABS: { key: TabKey; label: string; items: typeof INBOX_ITEMS; hint: strin
         label: 'Reports',
         items: REPORT_ITEMS,
         hint: 'Researched and written up, but no pull request yet – this is the stage every merged one passed through first.',
-        empty: 'These three are real open reports, so not every combination has a result.',
+        empty: 'These four are real open reports, so not every combination has a result.',
     },
 ]
 

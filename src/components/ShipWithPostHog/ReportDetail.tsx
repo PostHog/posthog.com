@@ -24,6 +24,7 @@ import {
     EVIDENCE_SOURCE_META,
     findingsCount,
     originMeta,
+    sourceKeyOf,
     type CheckStatus,
     type InboxItem,
     type Priority,
@@ -103,7 +104,7 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
      * tracking".
      */
     const sources = detail?.contributingSources ?? []
-    const redundant = sources.length === 1 && item.origin.kind === 'signal' && sources[0] === item.origin.product
+    const redundant = sources.length === 1 && sources[0] === sourceKeyOf(item)
     const firstSource = sources.length && !redundant ? EVIDENCE_SOURCE_META[sources[0]] : null
     const sourceLabel = firstSource
         ? `${firstSource.groupLabel ?? firstSource.label}${sources.length > 1 ? ` + ${sources.length - 1}` : ''}`
@@ -117,7 +118,8 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                 className="mb-3 inline-flex items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
             >
                 <IconArrowLeft className="size-4" />
-                Pull requests
+                {/* Names the tab this item came from – closing returns to that list. */}
+                {item.prNumber ? 'Pull requests' : 'Reports'}
             </button>
 
             {/* Title + actions */}
@@ -342,7 +344,8 @@ export default function ReportDetail({ item, onBack }: { item: InboxItem; onBack
                         {fileCount === 1 ? 'one file' : `${fileCount} files`}.
                     </Hint>
                 )}
-                {detail && (
+                {/* No branch until an agent picks the report up, so this can be absent. */}
+                {detail?.branch && (
                     <Hint
                         trigger={
                             <span className="mb-1.5 hidden min-w-0 items-center gap-1 rounded border border-primary bg-accent px-1.5 py-0.5 font-mono text-xs text-secondary @md:flex">

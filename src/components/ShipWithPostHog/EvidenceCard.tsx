@@ -76,7 +76,7 @@ export default function EvidenceCard({ item }: { item: EvidenceItem }): JSX.Elem
                         trigger={
                             <p className="m-0 mb-1 inline-flex items-center gap-1 text-xs font-semibold text-secondary">
                                 <IconCode className="size-3.5" />
-                                {item.codePaths.length} files read
+                                {item.codePaths.length} {item.codePaths.length === 1 ? 'file' : 'files'} read
                             </p>
                         }
                     >

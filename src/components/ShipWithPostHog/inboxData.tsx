@@ -43,6 +43,13 @@ export type SourceKey =
     | 'traces'
     | 'ai_observability'
     | 'analytics'
+    /**
+     * Scout-authored reports. This really is a `source_product` in the API rather than a
+     * modifier on another one – a scout report comes back as
+     * `source_products: ['signals_scout']`, with the scout's domain living on its skill
+     * name (`signals-scout-instrumentation-gaps`) instead.
+     */
+    | 'signals_scout'
 
 interface SourceMeta {
     label: string
@@ -109,13 +116,26 @@ export const SOURCE_META: Record<SourceKey, SourceMeta> = {
         color: 'text-blue',
         found: 'The numbers moved against their own baseline.',
     },
+    signals_scout: {
+        label: 'Scout',
+        Icon: IconCompass,
+        color: 'text-purple',
+        found: 'A scout went looking on a schedule, rather than waiting for something to break.',
+    },
 }
 
 export type Priority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
 
-// Signal-source reports show the source product's icon + name. Scout-authored reports
-// show "Scout · <category>", exactly as the real Inbox attributes them.
-type Origin = { kind: 'signal'; product: SourceKey } | { kind: 'scout'; product: SourceKey; scout: string }
+/**
+ * Signal-source reports show the source product's icon and name. Scout-authored reports
+ * show "Scout · <domain>".
+ *
+ * The scout variant carries no second product on purpose: in the API a scout report's
+ * `source_products` is exactly `['signals_scout']`, so pairing it with another product
+ * would show an origin the Inbox never emits. The domain comes from the scout's skill
+ * name – `signals-scout-instrumentation-gaps` reads as "Instrumentation gaps".
+ */
+type Origin = { kind: 'signal'; product: SourceKey } | { kind: 'scout'; scout: string }
 
 /* ── Detail-view types ─────────────────────────────────────────────────────── */
 
@@ -180,8 +200,12 @@ export interface Reviewer {
     name: string
     /** GitHub handle, shown when the person isn't in the team directory. */
     githubLogin: string
-    /** The commits the blame walk landed on, with links to the real diffs. */
-    commits: { sha: string; url: string }[]
+    /**
+     * The commits the blame walk landed on, with links to the real diffs. Optional: the
+     * artefact can name a reason without pinning specific commits, and then there are
+     * no shas to render.
+     */
+    commits?: { sha: string; url: string }[]
     /** The artefact's own rationale for suggesting them. */
     reason: React.ReactNode
     /** True when this person went on to actually approve the pull request. */
@@ -227,8 +251,11 @@ export interface ReportDetail {
     /** Real dates from the report, rendered as-is. */
     firstSeen: string
     lastUpdated: string
-    /** The real branch the agent worked on. */
-    branch: string
+    /**
+     * The real branch the agent worked on. Absent when no agent has picked the report up
+     * yet – a report waiting on human input often has no branch at all.
+     */
+    branch?: string
     /** The report's own `source_products` – how PostHog found this. */
     contributingSources: EvidenceSource[]
     summary: ProseSection[]
@@ -1747,6 +1774,127 @@ export const REPORT_ITEMS: InboxItem[] = [
             ],
         },
     },
+    /*
+     * 4 — the one scout-authored report here. Worth keeping one: a scout goes looking on a
+     * schedule instead of waiting for something to break, so it finds gaps that no
+     * exception, recording, or support ticket would ever surface. This one noticed a
+     * shipped feature that forgot to emit an analytics event – nothing is broken for
+     * anyone, which is exactly why no signal source would have caught it.
+     */
+    {
+        id: 'catalog-instrumentation',
+        commitType: 'feat',
+        scope: 'data-catalog',
+        title: 'Instrument warehouse join deletion',
+        summary:
+            'The new Data Catalog join deletion flow ships without an analytics event, so joins can be removed without anything measuring it.',
+        priority: 'P3',
+        signalCount: 3,
+        timeAgo: 'Updated Jul 31',
+        origin: { kind: 'scout', scout: 'Instrumentation gaps' },
+        detail: {
+            status: 'Needs input',
+            firstSeen: 'Jul 31, 2026',
+            lastUpdated: 'Jul 31, 2026',
+            contributingSources: ['signals_scout'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            The Data Catalog's warehouse-join deletion flow is not product-instrumented: the delete
+                            succeeds without a capture, and no matching event exists in the live vocabulary.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Problem',
+                    paragraphs: [
+                        <>
+                            <Code>relationshipsLogic.tsx</Code> deletes a join through <Code>deleteWithUndo</Code> and
+                            then stops – there's no <Code>posthog.capture</Code> on that path. The shared join modal
+                            already captures <Code>join created</Code> and <Code>join updated</Code>, so the codebase
+                            has a settled idiom for this; deletion is simply the one that didn't get it.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Impact',
+                    paragraphs: [
+                        <>
+                            Nothing is broken for anyone – this is a measurement gap, not a defect. The cost is that
+                            warehouse-join cleanup can't be measured at all, so there's no way to see whether people
+                            build joins and keep them, or build them and immediately undo them.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Why it needs input',
+                    paragraphs: [
+                        <>
+                            The change itself is a few lines, but the event name and its properties are a contract that
+                            outlives the patch. The agent stopped rather than guess a schema: the Data Catalog owner
+                            should confirm the shape before anyone writes it.
+                        </>,
+                    ],
+                },
+            ],
+            reviewers: [
+                {
+                    name: 'Thiago Salvatore',
+                    githubLogin: 'thiagosalvatore',
+                    reason: (
+                        <>
+                            Authored the merged commit that added the Relationships-tab join management flow, which is
+                            where the uninstrumented delete action lives.
+                        </>
+                    ),
+                },
+            ],
+            evidence: [
+                {
+                    id: 'scout-code',
+                    source: 'signals_scout',
+                    title: 'The delete path has no capture',
+                    body: (
+                        <>
+                            The user-facing Delete action landed in commit <Code>c0b14ee2</Code> and calls{' '}
+                            <Code>deleteWithUndo</Code> against the warehouse view-link endpoint. Searched that path for{' '}
+                            <Code>posthog.capture</Code>, <Code>report_user_action</Code>, and the other capture helpers
+                            used in this repo – none of them appear.
+                        </>
+                    ),
+                    tags: [
+                        {
+                            label: 'Verified',
+                            tone: 'green',
+                            tooltip: 'Checked against the merged commit, not inferred from the feature description.',
+                        },
+                    ],
+                    verified: true,
+                    codePaths: [
+                        'products/data_catalog/frontend/relationshipsLogic.tsx',
+                        'frontend/src/scenes/data-warehouse/viewLinkLogic.tsx',
+                    ],
+                },
+                {
+                    id: 'scout-vocabulary',
+                    source: 'signals_scout',
+                    title: 'No deletion event in the live vocabulary',
+                    body: (
+                        <>
+                            Searched the event schema for <Code>join deleted</Code> and its near-synonyms. It carries{' '}
+                            <Code>join created</Code>, <Code>join updated</Code>, and two data-catalog relationship
+                            events, but nothing for deletion – confirming the gap from the data side as well as the code
+                            side.
+                        </>
+                    ),
+                    tags: [{ label: 'Verified', tone: 'green' }],
+                    verified: true,
+                    codePaths: ['products/data_catalog/frontend/relationshipsLogic.tsx'],
+                },
+            ],
+        },
+    },
 ]
 
 interface OriginMeta {
@@ -1760,11 +1908,21 @@ interface OriginMeta {
 
 // Resolves how an item's origin renders on the row and in the detail header: a source
 // product's icon + name for signal sources, or a compass + "Scout · <category>" for scouts.
+/**
+ * The item's source product, as the API would report it: a scout report's product is
+ * `signals_scout`, not whatever area the scout happened to be looking at. Filtering and
+ * the Source menu both go through this so a scout item can't slip out of either.
+ */
+export const sourceKeyOf = (item: InboxItem): SourceKey =>
+    item.origin.kind === 'scout' ? 'signals_scout' : item.origin.product
+
 export const originMeta = (item: InboxItem): OriginMeta => {
-    const source = SOURCE_META[item.origin.product]
     if (item.origin.kind === 'scout') {
-        return { Icon: IconCompass, color: source.color, primary: 'Scout', secondary: item.origin.scout }
+        // Scouts are their own source product, so the chrome comes from signals_scout.
+        const scout = SOURCE_META.signals_scout
+        return { Icon: scout.Icon, color: scout.color, primary: scout.label, secondary: item.origin.scout }
     }
+    const source = SOURCE_META[item.origin.product]
     return { Icon: source.Icon, color: source.color, primary: source.label }
 }
 

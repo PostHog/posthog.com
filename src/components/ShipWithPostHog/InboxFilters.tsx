@@ -12,7 +12,7 @@ import {
 } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import { PRIORITIES, PRIORITY_META } from './PriorityBadge'
-import { SOURCE_META, type InboxItem, type Priority, type SourceKey } from './inboxData'
+import { SOURCE_META, sourceKeyOf, type InboxItem, type Priority, type SourceKey } from './inboxData'
 
 /**
  * The Inbox filter bar: sort, source, and priority, mirroring the real product's
@@ -80,7 +80,7 @@ export const applyFilters = (items: InboxItem[], filters: InboxFilterState): Inb
     const sourceFacetOff = !filters.sources.length && !filters.scouts.length
     const matchesSource = (item: InboxItem): boolean =>
         sourceFacetOff ||
-        filters.sources.includes(item.origin.product) ||
+        filters.sources.includes(sourceKeyOf(item)) ||
         (item.origin.kind === 'scout' && filters.scouts.includes(item.origin.scout))
 
     const matching = items.filter(
@@ -108,11 +108,19 @@ export const applyFilters = (items: InboxItem[], filters: InboxFilterState): Inb
     return sorted
 }
 
-/** The sources present in the data, so no option in the menu leads to an empty list. */
+/**
+ * The signal sources present in the data, so no option in the menu leads to an empty list.
+ *
+ * `signals_scout` is deliberately excluded: scouts get their own group below, listed by
+ * name, and a flat "Scout" row beside that group would be a second control for the same
+ * thing – the menu rendered "Scout" twice. Matching the product, where the scout filter
+ * takes skill names rather than the bare source product.
+ */
 export const sourcesInUse = (items: InboxItem[]): SourceKey[] => {
     const seen: SourceKey[] = []
     items.forEach((item) => {
-        if (!seen.includes(item.origin.product)) seen.push(item.origin.product)
+        const key = sourceKeyOf(item)
+        if (key !== 'signals_scout' && !seen.includes(key)) seen.push(key)
     })
     return seen
 }

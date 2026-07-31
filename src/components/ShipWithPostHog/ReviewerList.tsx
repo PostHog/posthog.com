@@ -110,7 +110,7 @@ export default function ReviewerList({ reviewers }: { reviewers: Reviewer[] }): 
                                  * size wrapped onto a second line under every sha.
                                  */}
                                 <span className="font-mono text-xs text-secondary">
-                                    {reviewer.commits.map((commit, index) => (
+                                    {(reviewer.commits ?? []).map((commit, index) => (
                                         <React.Fragment key={commit.sha}>
                                             {index > 0 && ', '}
                                             <Hint

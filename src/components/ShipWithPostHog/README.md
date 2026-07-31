@@ -1,7 +1,7 @@
 # ShipWithPostHog
 
 Components for the `/ship-with-posthog` page – a recreation of the PostHog Inbox scene, pre-loaded
-with five merged pull requests and three open reports. The inbox is the page's hero. Visitors open an
+with five merged pull requests and four open reports. The inbox is the page's hero. Visitors open an
 item and get a replica of the app's report detail view: the agent's write-up on the left, and its
 working on the right – CI checks, the reviewers it suggests, and the evidence it reasoned from.
 
@@ -30,13 +30,13 @@ there so renaming is a folder move plus a `vercel.json` redirect.
 | `InboxFilters.tsx`    | The Sort / Source / Priority filter bar and the sort + filter logic (`applyFilters`). All three menus really filter the list. Sort is single-select; Source and Priority are multi-select and stay open while you pick. |
 | `SignalsToInbox.tsx`  | The "How signals get to your Inbox" section below the inbox: a selector across the merged PRs, each showing its Scout → Signal → Investigate → PR → Merge walkthrough via `SelfDrivingStory`. Read-only – reviewing happens up in the inbox. |
 | `PriorityBadge.tsx`   | The tinted-square priority chip (P0–P4), plus `PRIORITY_META` – the hue and name per level, shared with the priority filter menu so the two can't drift. |
-| `inboxData.tsx`       | `INBOX_ITEMS` (the five merged PRs) and `REPORT_ITEMS` (the three open reports) with their detail payloads and walkthrough steps, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
+| `inboxData.tsx`       | `INBOX_ITEMS` (the five merged PRs) and `REPORT_ITEMS` (the four open reports) with their detail payloads and walkthrough steps, the detail-view types, per-source labels/icons/colors, and the `originMeta` / `findingsCount` / `diffStat` helpers. |
 | `prose.tsx`           | The subdued inline-`Code` used in detail prose, and `Hint` – the width-capped tooltip the hover annotations use. Its own module so `inboxData.tsx` can import it without a cycle through the components. |
 
 ## The items are real
 
-All eight are real reports in project 2. The five on the Pull requests tab produced **real merged pull
-requests** on `PostHog/posthog`; the three on the Reports tab are real reports that haven't been turned
+All nine are real reports in project 2. The five on the Pull requests tab produced **real merged pull
+requests** on `PostHog/posthog`; the four on the Reports tab are real reports that haven't been turned
 into a PR. Nothing is invented. Where each field comes from:
 
 | Data | Source |
@@ -85,9 +85,23 @@ the collapsible panels, and the signal selector in `SignalsToInbox`. The PR, com
 reviewer-profile links all go to real places.
 
 The Source menu has a nested **Scout** group, rendered only when the active tab actually holds
-scout-authored items (`scoutsInUse`). Every report on the page today was found by a signal source, so
-the group is currently hidden rather than empty. Sources and scouts are two halves of one facet, so
-they union rather than intersect — picking a source and a scout shows both.
+scout-authored items (`scoutsInUse`) — so it shows on Reports and stays hidden on Pull requests.
+Sources and scouts are two halves of one facet, so they union rather than intersect: picking a source
+and a scout shows both. `sourcesInUse` deliberately drops `signals_scout` from the flat list, because
+the group below already covers it by name and the menu otherwise rendered "Scout" twice.
+
+### Scouts are a source product, not a modifier
+
+In the API a scout-authored report comes back as `source_products: ['signals_scout']` — the scout is
+its own discovery channel, not a scout attached to some other product. The scout's domain lives on its
+skill name instead (`signals-scout-instrumentation-gaps` reads as "Instrumentation gaps"). `Origin`'s
+scout variant therefore carries no second product, and `sourceKeyOf()` maps any scout item to
+`signals_scout` so filtering and the Source menu can't disagree with the row's own origin line.
+
+Only one item here is scout-authored, and that's a sampling artifact rather than a statement about
+scouts: the merged five were found by searching GitHub for merged self-driving PRs, and scout output
+skews toward docs and small classification fixes that often land on `posthog.com` or `PostHog/code`
+instead. Project 2 has 28 scout reports with a pull request if more are wanted.
 
 Walkthrough steps are optional on `InboxItem`, and `SignalsToInbox` renders only items that have
 them. Adding a report to the inbox therefore can't leave a selector button that opens nothing. Its
