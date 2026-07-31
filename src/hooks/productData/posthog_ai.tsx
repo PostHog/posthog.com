@@ -14,19 +14,16 @@ import {
     IconPlug,
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
+import { getTool } from '../../data/tools'
 
 export const posthog_ai = {
-    name: 'PostHog AI',
+    ...getTool('posthog_ai'),
     parentIcon: 'aiMax',
     Icon: IconSparkles,
-    description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
-    handle: 'posthog_ai',
     type: 'posthog_ai',
     color: 'blue',
     colorSecondary: 'lilac',
-    category: 'automation',
-    slug: 'ai',
     slider: {
         marks: [500, 3000, 10000, 50000, 100000],
         min: 500,

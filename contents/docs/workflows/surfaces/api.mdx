@@ -1,0 +1,26 @@
+---
+title: Workflows API
+sidebar: Docs
+showTitle: true
+---
+
+Workflows are stored as **hog flows**, and every one of them is available over the PostHog [REST API](/docs/api). Use it when you want workflows under version control, generated from your own system, or created as part of a deploy.
+
+## What you can do here
+
+- **Manage workflows.** `/api/projects/:project_id/hog_flows/` lists, creates, reads, updates, and deletes workflows, including their trigger, graph of actions, and enabled state.
+- **Reuse templates.** `/api/projects/:project_id/hog_flow_templates/` covers the workflow templates in your project.
+- **Check blast radius before you publish.** The API can report how many people a workflow's audience filters would match, so you don't accidentally message everyone.
+- **Inspect runs.** Batch job status endpoints report on workflows triggered against a batch audience.
+
+A workflow's graph is validated on write. If a trigger, action, or template reference is invalid, the API rejects it with a message naming the offending action rather than saving a broken workflow.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) scoped to the project you're writing to, and send it as a bearer token. Treat the key like a password – it can create and enable workflows that send real messages, so keep it in a secret store, never in client-side code.
+
+## Related
+
+- [PostHog API overview](/docs/api) – authentication, rate limits, and pagination
+- [Use Workflows over PostHog MCP](/docs/workflows/surfaces/mcp) – the same operations from an AI tool
+- [Workflow builder](/docs/workflows/workflow-builder) – what the graph you're writing actually means

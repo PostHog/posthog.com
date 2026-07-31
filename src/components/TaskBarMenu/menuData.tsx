@@ -3,7 +3,6 @@ import React from 'react'
 import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -158,6 +157,8 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
         // FLATTEN: If the first child is a submenu with the same label, bring its children up one level
         if (grouped.length > 0 && grouped[0].type === 'submenu' && grouped[0].label === item.name) {
             grouped = [...grouped[0].items, ...grouped.slice(1)]
+        } else if (grouped.length === 1 && grouped[0].type === 'submenu' && Array.isArray(grouped[0].items)) {
+            grouped = grouped[0].items
         }
         baseItem.items = grouped
         return baseItem
@@ -183,37 +184,137 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
-// Prioritized products, ordered to line up with the surfaces under the Products menu
-// (PostHog Desktop, Research, Slack, MCP, Context Warehouse) mapped to their docs categories.
-// Everything else falls through to alphabetical order below.
-const DOCS_PRIORITY = ['PostHog Desktop', 'PostHog AI', 'Slack app', 'MCP Analytics', 'Data Warehouse']
+type DocsSubGroup = {
+    label: string
+    items: string[]
+    icon?: keyof typeof Icons
+    color?: string
+}
 
-const getDocsMenuItems = () => {
-    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
+type DocsGroup = {
+    label: string
+    items: (string | DocsSubGroup)[]
+    overflow?: string
+    collapse?: boolean
+    catchAll?: boolean
+    icon?: keyof typeof Icons
+    color?: string
+}
 
-    // Remove any item (submenu or section divider) with label 'Docs'
-    items = items.filter((item) => {
-        // Remove if submenu with label 'Docs'
-        if (item.type === 'submenu' && item.label === 'Docs') return false
-        return true
+const DOCS_GROUPS: DocsGroup[] = [
+    { label: 'Get started', items: ['Install PostHog', 'SDKs & frameworks', 'Self-driving'] },
+    { label: 'Products', items: ['PostHog Web', 'PostHog Desktop', 'PostHog Slack', 'PostHog MCP', 'PostHog CLI'] },
+    {
+        label: 'Tools',
+        items: [
+            {
+                label: 'Analytics',
+                icon: 'IconGraph',
+                color: 'blue',
+                items: [
+                    'Product Analytics',
+                    'Web Analytics',
+                    'Customer Analytics',
+                    'Revenue Analytics',
+                    'MCP Analytics',
+                ],
+            },
+            'Session Replay',
+            'AI Observability',
+            'Error Tracking',
+        ],
+        overflow: 'More tools',
+        icon: 'IconApps',
+        color: 'blue',
+    },
+    { label: 'Context', items: ['Data Warehouse', 'Data pipelines', 'Semantic layer'] },
+    {
+        label: 'Reference',
+        collapse: true,
+        icon: 'IconBook',
+        color: 'lilac',
+        items: [
+            'API',
+            'New to PostHog',
+            'AI engineering',
+            'Toolbar & features',
+            'Self-host & deploy',
+            'Billing',
+            'Privacy & GDPR',
+            'How PostHog works',
+            'Glossary',
+        ],
+    },
+]
+
+export const getDocsMenuItems = (): MenuItemType[] => {
+    const items = groupBySectionDividers((docsMenu as DocsMenu).children)
+        // Remove any item (submenu or section divider) with label 'Docs'
+        .filter((item) => !(item.type === 'submenu' && item.label === 'Docs'))
+        // Drop nav-derived separators; grouping below supplies its own
+        .filter((item) => item.type !== 'separator' && item.label)
+
+    const byLabel = new Map<string, MenuItemType>(items.map((item) => [item.label as string, item]))
+    const explicitlyGrouped = new Set(
+        DOCS_GROUPS.flatMap((group) => group.items).flatMap((entry) =>
+            typeof entry === 'string' ? entry : entry.items
+        )
+    )
+    const byLabelAsc = (a: MenuItemType, b: MenuItemType) =>
+        (a.label as string).localeCompare(b.label as string, undefined, { sensitivity: 'base' })
+
+    const iconFor = (source: { icon?: keyof typeof Icons; color?: string }) => {
+        const IconComponent = source.icon && Icons[source.icon]
+        return IconComponent ? <IconComponent className={`text-${source.color || 'gray'} size-4`} /> : undefined
+    }
+
+    const resolve = (entry: string | DocsSubGroup): MenuItemType | undefined => {
+        if (typeof entry === 'string') return byLabel.get(entry)
+        const children = entry.items.map((label) => byLabel.get(label)).filter(Boolean) as MenuItemType[]
+        if (children.length === 0) return undefined
+        return { type: 'submenu' as const, label: entry.label, icon: iconFor(entry), items: children }
+    }
+
+    const grouped: MenuItemType[] = []
+
+    const unclaimed = () => items.filter((item) => !explicitlyGrouped.has(item.label as string)).sort(byLabelAsc)
+
+    DOCS_GROUPS.forEach((group) => {
+        const named = group.catchAll ? unclaimed() : (group.items.map(resolve).filter(Boolean) as MenuItemType[])
+
+        if (group.collapse) {
+            if (named.length === 0) return
+            if (grouped.length > 0) grouped.push({ type: 'separator' as const })
+            grouped.push({ type: 'submenu' as const, label: group.label, icon: iconFor(group), items: named })
+            return
+        }
+
+        const groupItems = [...named]
+
+        if (group.overflow) {
+            const rest = unclaimed()
+            if (rest.length > 0) {
+                groupItems.push({
+                    type: 'submenu' as const,
+                    label: group.overflow,
+                    icon: iconFor(group),
+                    items: rest,
+                })
+            }
+        }
+
+        if (groupItems.length === 0) return
+
+        if (grouped.length > 0) grouped.push({ type: 'separator' as const })
+        grouped.push({ type: 'label' as const, label: group.label })
+        grouped.push(...groupItems)
     })
 
-    // Keep only real product entries (drop separators) so we can present one clean list:
-    // prioritized products first, then everything else alphabetically.
-    items = items
-        .filter((item) => item.type !== 'separator' && item.label)
-        .sort((a, b) => {
-            const aPriority = DOCS_PRIORITY.indexOf(a.label)
-            const bPriority = DOCS_PRIORITY.indexOf(b.label)
-            if (aPriority !== -1 || bPriority !== -1) {
-                if (aPriority === -1) return 1
-                if (bPriority === -1) return -1
-                return aPriority - bPriority
-            }
-            return a.label.localeCompare(b.label, undefined, { sensitivity: 'base' })
-        })
+    // Icons stay on the top level only; nested levels are noisy and inconsistently sourced.
+    const stripIcons = (menuItems: MenuItemType[]): MenuItemType[] =>
+        menuItems.map(({ icon, ...item }) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 
-    return items
+    return grouped.map((item) => (item.items ? { ...item, items: stripIcons(item.items) } : item))
 }
 
 const mergedDocsMenu = (allProducts: any[]) => {
@@ -258,7 +359,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
@@ -274,18 +375,11 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'separator',
         },
         {
-            type: 'item',
-            label: `Browse all tools (${APP_COUNT})`,
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search tools',
+            label: 'Browse tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconSearch className="size-4 text-gray" />,
+            icon: <Icons.IconApps className="size-4 text-red" />,
             mobileDestination: false, // Omit from mobile menu; desktop-only search
         },
     ]
@@ -310,15 +404,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'Plans & usage-based pricing',
+                    label: 'Usage-based pricing',
                     link: '/pricing',
                     icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                    label: 'Platform packages',
+                    link: '/platform-packages',
+                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
                 },
                 {
                     type: 'item',
@@ -344,10 +438,18 @@ export function useMenuData(): MenuType[] {
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
                 },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                },
             ],
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -423,12 +525,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Roadmap',
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
@@ -846,7 +942,7 @@ export const DocsItemsStart = [
         type: 'item' as const,
         label: 'Overview',
         link: '/docs',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
+        icon: <Icons.IconHome className="size-4 text-purple" />,
     },
     {
         type: 'separator' as const,
@@ -859,7 +955,7 @@ export const DocsItemsEnd = [
         type: 'item' as const,
         label: 'Tutorials',
         link: '/tutorials',
-        icon: <Icons.IconBook className="size-4 text-purple" />,
+        icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
     },
 ]
 
@@ -963,8 +1059,9 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
