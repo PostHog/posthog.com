@@ -338,4 +338,39 @@ export const features = {
         ],
         children: <MCPInstall />,
     },
+    mcp_analytics: {
+        title: 'MCP analytics',
+        headline: 'See how agents use your MCP server',
+        description:
+            'If you ship an MCP server, wrap it in one line and every tool call becomes a normal PostHog event – so trends, funnels, dashboards, and SQL all work on agent traffic too.',
+        icon: <IconPlug />,
+        color: 'blue',
+        features: [
+            {
+                title: 'Every tool call as an event',
+                description:
+                    'See what the agent sent, what came back, how long it took, and whether it failed – then build insights on top.',
+            },
+            {
+                title: 'Agent intent',
+                description: 'Capture the goal behind each call, so you can tell a useful request from a confused one.',
+            },
+            {
+                title: 'Advertised vs called',
+                description: 'Find the tools you advertise but agents never touch, and cut what nobody uses.',
+            },
+            {
+                title: 'Capability gaps',
+                description:
+                    "Let agents tell you what they wanted but you don't offer yet – a roadmap written by your users' agents.",
+            },
+        ],
+        children: (
+            <p className="mb-0">
+                <Link to="/docs/mcp-analytics" state={{ newWindow: true }}>
+                    Read the MCP analytics docs
+                </Link>
+            </p>
+        ),
+    },
 }
