@@ -1,0 +1,47 @@
+---
+title: Use endpoints over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Endpoints is in beta and free to use while it is. [Send us feedback](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue) in app.
+
+</CalloutBox>
+
+The PostHog [MCP server](/docs/model-context-protocol) brings endpoints into Claude Code, Cursor, and other AI tools. Because the agent writing the code that calls your endpoint can also create and test that endpoint, you go from "I need this number in my app" to a working request without leaving your editor.
+
+## What you can do here
+
+Through MCP tools, your agent can:
+
+- **Create and update endpoints** from a SQL or insight query, and list what already exists in the project.
+- **Run an endpoint** with real variables and read the rows back, to check the response shape before writing client code.
+- **Manage versions**, listing every saved version with its query snapshot and last execution time.
+- **Read execution logs**, filtered by level, time range, or text, to work out why a run failed, timed out, or missed cache.
+- **Work on materialization**, previewing the transform, checking status, and asking PostHog AI for a rewrite when a query isn't eligible.
+- **Fetch an endpoint's OpenAPI spec**, to generate a typed client.
+
+For example:
+
+| Goal | Ask your agent |
+| --- | --- |
+| Create an endpoint | `Create an endpoint called weekly-signups from this SQL query` |
+| Test it | `Run weekly-signups with customer_id set to cust_123 and show me the rows` |
+| Debug a failure | `Pull the error logs for weekly-signups from the last hour and tell me what broke` |
+| Speed it up | `weekly-signups can't be materialized – suggest a rewrite that can` |
+
+Reads need the `endpoint:read` scope and writes need `endpoint:write`. Deleting an endpoint is a soft delete, and it cleans up the materialized views behind it.
+
+For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
+
+## Set up
+
+Connect the PostHog MCP server to your AI tool, then grant it access to your project. The [MCP overview](/docs/model-context-protocol) covers install and authentication for each client.
+
+## Related
+
+- Do the same things with a UI in the [web app](/docs/endpoints/surfaces/web-app).
+- Build endpoints next to the code that calls them in [PostHog Desktop](/docs/endpoints/surfaces/desktop).
+- Understand the log lines you get back in [usage and logs](/docs/endpoints/usage-analytics).

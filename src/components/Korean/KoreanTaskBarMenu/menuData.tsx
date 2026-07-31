@@ -6,6 +6,7 @@ import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
 import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
+import { getDocsMenuItems } from '../../TaskBarMenu/menuData'
 import {
     categoryOrder,
     categoryDisplayNames,
@@ -182,19 +183,6 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
 
     // If the item only has a name, it's a section divider (handled in grouping)
     return null
-}
-
-const getDocsMenuItems = () => {
-    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
-
-    // Remove any item (submenu or section divider) with label 'Docs'
-    items = items.filter((item) => {
-        // Remove if submenu with label 'Docs'
-        if (item.type === 'submenu' && item.label === 'Docs') return false
-        return true
-    })
-
-    return items
 }
 
 const mergedDocsMenu = (allProducts: any[]) => {
@@ -426,6 +414,8 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -531,11 +521,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
                 },
                 {
                     type: 'item',

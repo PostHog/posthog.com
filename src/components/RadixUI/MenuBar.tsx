@@ -8,7 +8,7 @@ import { useAppSettings } from '../../context/App'
 
 // Types
 export type MenuItemType = {
-    type: 'item' | 'submenu' | 'separator'
+    type: 'item' | 'submenu' | 'separator' | 'label'
     label?: string
     link?: string
     shortcut?: string | string[] // Support both string and array of keys
@@ -34,6 +34,8 @@ const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
 const ItemClasses =
     'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
+const LabelClasses =
+    'select-none px-2.5 pt-1.5 pb-1 text-[11px] font-semibold uppercase tracking-wide leading-none text-muted'
 const SubTriggerClasses =
     'hover:bg-accent group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const ContentClasses =
@@ -157,6 +159,10 @@ const MenuItem: React.FC<{
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
 
+    if (item.type === 'label') {
+        return <RadixMenubar.Label className={LabelClasses}>{item.label}</RadixMenubar.Label>
+    }
+
     if (item.node) {
         return (
             <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
@@ -226,7 +232,7 @@ const MenuItem: React.FC<{
                         ) : forceIconIndent ? (
                             <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
                         ) : null}
-                        {item.label}
+                        <span>{item.label}</span>
                         <div className={ShortcutClasses}>
                             <IconChevronRight className="size-4" />
                         </div>
@@ -238,7 +244,7 @@ const MenuItem: React.FC<{
                             alignOffset={-5}
                             data-scheme="primary"
                         >
-                            {item.items}
+                            {React.cloneElement(item.items as unknown as React.ReactElement, { onCloseMenu })}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
                 </RadixMenubar.Sub>
