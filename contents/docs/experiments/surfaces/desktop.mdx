@@ -1,0 +1,44 @@
+---
+title: Use experiments in PostHog Desktop
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog Desktop is in beta, so some behaviors may still change.
+
+</CalloutBox>
+
+[PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work your experiments generate. A [scout](/docs/self-driving/scouts) audits your running experiments for problems with the measurement itself – a skewed split, a stalled exposure stream, a flag edited mid-run – and files each confirmed problem as a [report](/docs/self-driving/reports) in your [inbox](/docs/self-driving/inbox). You don't design, launch, or analyze experiments here, that happens in the [web app](/docs/experiments/surfaces/web-app).
+
+## What you can do here
+
+- Open a validity report to see the experiment, its [feature flag](/docs/feature-flags) key, and the numbers behind the finding – observed versus expected split, exposure counts, days dormant, and when the problem started.
+- Confirm what's actually wrong and decide the fix, whether that's a flag change, an SDK correction, or relaunching the test on clean data.
+- Hand a report to an agent as an [implementation task](/docs/self-driving/inbox/implementation) when the fix does turn out to be a code change, then review the pull request it drafts.
+- Work the reports alongside every other Self-driving report, since the same inbox lives in PostHog Desktop and the web app.
+
+## What the experiments scout watches
+
+The scout audits the measurement machinery, not the outcome. Which variant is winning is your decision, and it never comments on that. What it checks is whether a running experiment is still measuring what its configuration promised:
+
+- **Sample ratio mismatch** – variants aren't receiving the traffic split you configured. PostHog runs a chi-squared test over exposures, and the scout only calls it at healthy volume, so a wobble across a few hundred exposures won't be reported as one.
+- **Multiple-variant contamination** – users who saw more than one variant, usually from identity fragmentation, a session reset, cross-device use, or a mid-run rebucket. These users are typically dropped from results, and on an uneven split dropping them biases the answer.
+- **Exposure stalls** – a running experiment that stops accruing exposures after a healthy baseline, or one that never recorded a single exposure. Common causes are the flag call being removed from code, an SDK method that doesn't record exposure, or a custom exposure event that isn't firing.
+- **Mid-run flag edits** – changes to the backing flag after the experiment started, like a redistributed split, a tightened release condition, or a renamed variant. All of them rebucket users and mix pre-edit and post-edit data.
+- **Broken metric machinery** – a primary metric whose query fails or returns nothing in any arm, so the experiment is burning calendar time measuring nothing.
+- **Lifecycle drift** – zombie experiments running long past their useful life, experiments with a clear sustained answer still collecting data, and ended experiments whose flags still serve random variants.
+
+## Reports here are yours to confirm
+
+The experiments scout only writes reports. It doesn't open pull requests.
+
+That's deliberate. A validity threat is an investigation rather than a one-line change – the right fix might be a flag correction, an instrumentation change, a decision to relaunch, or nothing at all – so the scout files the evidence and routes it to a suggested reviewer instead of drafting code. Once you've confirmed the problem and know what needs to change, you can promote the report into the standard [implementation](/docs/self-driving/inbox/implementation) path, where an agent drafts the pull request and you review and merge it.
+
+## Related
+
+- Design and analyze the same experiments in the [web app](/docs/experiments/surfaces/web-app).
+- Manage experiments from your editor over [MCP](/docs/experiments/surfaces/mcp).
+- Read about [scouts](/docs/self-driving/scouts) and how [Self-driving](/docs/self-driving) turns findings into work you review.
+- Debug the same problems yourself with the experiments [troubleshooting guide](/docs/experiments/troubleshooting).

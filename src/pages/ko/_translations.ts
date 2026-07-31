@@ -332,7 +332,7 @@ const koTranslations: Record<string, string> = {
     'Could be mistaken for pharmaceuticals': '의약품처럼 들릴 수 있는 이름',
     'Companies you can explain to your parents': '부모님께 설명할 수 있는 회사',
     'Companies your parents will never understand': '부모님이 절대 이해하지 못할 회사',
-    'Names with 7 letters or less': '7글자 이하의 이름',
+    'Names with 7 letters or fewer': '7글자 이하의 이름',
     'Names you can easily mistype': '오타 내기 쉬운 이름',
     'Real words': '실제 단어',
     'Not real words': '실제 단어가 아닌 이름',

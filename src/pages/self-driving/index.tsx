@@ -4,8 +4,6 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { TreeMenu } from 'components/TreeMenu'
-import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
@@ -80,8 +78,6 @@ const FlowingGradientHighlight = ({
 const Badge = ({ children }: { children: React.ReactNode }) => (
     <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">{children}</span>
 )
-
-const LeftSidebarContent = () => <TreeMenu items={productOSNav.children} />
 
 // Icon + text rows for enriching carousel slides (à la the Slack app carousel).
 const IconList = ({ items }: { items: { Icon: IconComponent; color: string; text: React.ReactNode }[] }) => (
@@ -937,7 +933,8 @@ export default function SelfDrivingPage({
                 image="/images/og/default.png"
             />
             <ReaderView
-                leftSidebar={<LeftSidebarContent />}
+                hideLeftSidebar
+                showQuestions={false}
                 title="self-driving.md"
                 hideTitle
                 className="overflow-x-hidden"
