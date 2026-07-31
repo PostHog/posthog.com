@@ -44,6 +44,14 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 > What good looks like: Artistic ability wasn't on our list of product marketer requirements. Then <TeamMember name="Cleo Lant" showOnlyFirstName photo /> turned up with a degree in illustration and a portfolio of fine art. She channelled those abilities into her superday, then immediately made plans for some of our most conceptually creative launches.
 
+<figure>
+  <div className="flex gap-2">
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_godzilla_9a6675c5ff.png" alt="Illustration of a Godzilla-style monster" className="w-1/2" />
+    <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_slop_blob_468af85ec4.png" alt="Illustration of a slop blob" className="w-1/2" />
+  </div>
+  <figcaption>Cleo stood out for her illustration background, which she channels into visually creative launches</figcaption>
+</figure>
+
 **A high ceiling beats a high floor.** Tech moves fast, but PostHog moves faster. It's better for us to get many things done to a 7/10 standard than one thing to a 10/10. We ship more in a quarter than most teams ship in a year and the strategy changes under us while we work. It's important to be adaptable and to understand how iteration beats polish. 
 > What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them – and without the limitation of a tired, familiar playbook to hold her back.
 
