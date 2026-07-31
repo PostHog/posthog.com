@@ -342,7 +342,7 @@ export const features = {
         title: 'MCP Analytics',
         headline: 'See how agents use your MCP tools',
         description:
-            "Wrap the MCP server you ship in a single instrument() call and every agent invocation lands as an event on your standard events table – so trends, funnels, dashboards, and SQL all work on agent traffic too. Our MCP server is instrumented the same way!",
+            'Wrap your MCP server in a single instrument() call and every agent invocation lands as an event on your standard events table – so trends, funnels, dashboards, and SQL all work on agent traffic too. Our MCP server is instrumented the same way!',
         icon: <IconPlug />,
         color: 'blue',
         features: [
