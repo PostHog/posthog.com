@@ -108,7 +108,7 @@ export default function ReverseETLExport(): JSX.Element {
                 </ul>
 
                 <h2 id="integrations-library">Integrations library</h2>
-                <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
+                <Link to="/context-warehouse/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
         </>
     )
