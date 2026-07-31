@@ -31,8 +31,8 @@ export default function SignalsToInbox(): JSX.Element | null {
             <div className="mx-auto mb-6 max-w-3xl text-center">
                 <h2 className="text-2xl font-bold @md:text-3xl">How signals get to your Inbox</h2>
                 <p className="mt-3 text-secondary @2xl:text-lg">
-                    Every one of these took the same five steps – something watches, something gets caught, an agent
-                    investigates, it opens the pull request, and someone merges it. Pick one to see how it played out.
+                    Every one of these took the same four steps – something gets caught, an agent investigates, it opens
+                    the pull request, and someone merges it. Pick one to see how it played out.
                 </p>
             </div>
 

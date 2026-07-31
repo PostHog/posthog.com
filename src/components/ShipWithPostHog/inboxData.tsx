@@ -308,10 +308,10 @@ export interface InboxItem {
 /*
  * Placeholder screenshot labels, so a later content pass knows which image each slot
  * wants. `SelfDrivingStory` renders these as labeled dashed boxes until real captures
- * land, and `image` takes precedence over `imagePlaceholder` once one does.
+ * land, and `image` takes precedence over `imagePlaceholder` once one does – the
+ * session-replay walkthrough already has all four for real.
  */
 const ph = {
-    source: (source: string) => `Screenshot: ${source} in PostHog`,
     signal: 'Screenshot: the report in your Inbox',
     investigate: 'Screenshot: the agent tracing the root cause',
     pr: (n: number) => `Screenshot: pull request #${n} on GitHub`,
@@ -354,15 +354,12 @@ export const INBOX_ITEMS: InboxItem[] = [
         intro: 'An exception burst that pointed at the wrong culprit until an agent read the write path.',
         steps: [
             {
-                label: 'Source',
-                copy: 'Error tracking groups every exception your app throws into issues with a running count. It watches continuously, so a burst registers the moment it starts.',
-                imagePlaceholder: ph.source('Error tracking'),
-            },
-            {
-                copy: 'Insight queries start returning 500s in project-wide bursts, then go near-silent for about ten days. Narrowed to this path, 172 exceptions land inside three minutes, 171 of them the same database error.',
+                stage: 'signal',
+                copy: 'Error tracking groups every exception into an issue with a running count, so a burst registers the moment it starts. Insight queries begin returning 500s in project-wide bursts – 172 exceptions inside three minutes, 171 of them the same database error.',
                 imagePlaceholder: ph.signal,
             },
             {
+                stage: 'investigate',
                 copy: (
                     <>
                         The agent finds the queries had already succeeded. <Code>store_result()</Code> asks{' '}
@@ -374,6 +371,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                 imagePlaceholder: ph.investigate,
             },
             {
+                stage: 'pr',
                 copy: (
                     <>
                         The fix catches <Code>DatabaseError</Code>, falls back to the default limit, and wraps the
@@ -384,6 +382,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                 imagePlaceholder: ph.pr(75725),
             },
             {
+                stage: 'merge',
                 copy: 'The agent suggested Andy Zhao, who wrote the cache-limit helper in the first place. He reviewed it, approved it, and it merged the same day.',
                 imagePlaceholder: ph.merge(75725),
             },
@@ -534,15 +533,12 @@ export const INBOX_ITEMS: InboxItem[] = [
         intro: 'Three recordings, three weeks apart, all stuck on the same validation error.',
         steps: [
             {
-                label: 'Source',
-                copy: 'Replay Vision watches session recordings and flags friction as it happens – rage clicks, dead ends, and people retrying the same action.',
-                imagePlaceholder: ph.source('Replay Vision'),
-            },
-            {
-                copy: 'Someone builds a cohort with a "did not complete event" criterion, hits save, and gets an error. Three independent recordings catch the same block across two regions over about three weeks.',
+                stage: 'signal',
+                copy: 'Replay Vision watches recordings and flags friction as it happens. Someone builds a cohort with a "did not complete event" criterion, hits save, and gets an error – three independent recordings catch the same block across two regions over about three weeks.',
                 imagePlaceholder: ph.signal,
             },
             {
+                stage: 'investigate',
                 copy: (
                     <>
                         The agent matches the error text to its client-side constant, then finds{' '}
@@ -554,10 +550,12 @@ export const INBOX_ITEMS: InboxItem[] = [
                 imagePlaceholder: ph.investigate,
             },
             {
+                stage: 'pr',
                 copy: 'The fix makes negation validation reason about the whole cohort: under a top-level AND, a negation in one group is satisfied by a positive criterion in any sibling group.',
                 imagePlaceholder: ph.pr(72382),
             },
             {
+                stage: 'merge',
                 copy: 'Worth merging for the workaround alone – people were switching the group to "any" to get past the error, which silently built a different cohort than the one they wanted.',
                 imagePlaceholder: ph.merge(72382),
             },
@@ -682,15 +680,12 @@ export const INBOX_ITEMS: InboxItem[] = [
         intro: 'A support thread about Slack that turned out to be an OAuth bug hiding behind a successful-looking redirect.',
         steps: [
             {
-                label: 'Source',
-                copy: 'Conversations reads your support inbox. A thread that describes a reproducible product problem becomes a signal, without anyone filing a ticket for it.',
-                imagePlaceholder: ph.source('Conversations'),
-            },
-            {
-                copy: 'A customer with several projects connects Slack and the integration lands on a different project. Querying integration-created events shows people making three or four Slack connect attempts in one day that all resolve to the same single project.',
+                stage: 'signal',
+                copy: 'Conversations reads your support inbox, so a thread describing a reproducible problem becomes a signal without anyone filing a ticket. A customer with several projects connects Slack and it lands on a different one – and integration-created events show people making three or four attempts in a day that all resolve to the same project.',
                 imagePlaceholder: ph.signal,
             },
             {
+                stage: 'investigate',
                 copy: (
                     <>
                         The agent finds <Code>authorize_url</Code> putting only <Code>{'{next, token}'}</Code> in the
@@ -703,6 +698,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                 imagePlaceholder: ph.investigate,
             },
             {
+                stage: 'pr',
                 copy: (
                     <>
                         The fix carries the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and
@@ -712,6 +708,7 @@ export const INBOX_ITEMS: InboxItem[] = [
                 imagePlaceholder: ph.pr(73901),
             },
             {
+                stage: 'merge',
                 copy: 'One report, but it affects every multi-project customer wiring up any OAuth integration, since they all share this flow. Approved and merged three days after it was first seen.',
                 imagePlaceholder: ph.merge(73901),
             },
@@ -855,29 +852,28 @@ export const INBOX_ITEMS: InboxItem[] = [
         intro: 'A feature that failed two times in three, with every failure landing on the same suspicious number.',
         steps: [
             {
-                label: 'Source',
-                copy: 'Conversations picked this one up, and LLM analytics had the numbers to confirm it – every generation your app makes is already tracked with its latency and error state.',
-                imagePlaceholder: ph.source('Conversations'),
-            },
-            {
+                stage: 'signal',
                 copy: (
                     <>
-                        Generating an AI eval summary mostly fails. Querying <Code>$ai_generation</Code> events over 30
-                        days: 16 errors, all 502, average latency 29.1s and max 30.0s, against 8 successes topping out
-                        at 29.3s.
+                        Conversations picked this one up, and LLM analytics had the numbers to confirm it. Generating an
+                        AI eval summary mostly fails: over 30 days of <Code>$ai_generation</Code> events, 16 errors, all
+                        502, averaging 29.1s against 8 successes topping out at 29.3s.
                     </>
                 ),
                 imagePlaceholder: ph.signal,
             },
             {
+                stage: 'investigate',
                 copy: 'Failures clustered on the boundary rather than spread out, which points at a hard timeout instead of a slow model. The endpoint ran one blocking completion over as many as 250 runs, taking 20 to 30+ seconds through a gateway that aborts at about 30 – so the generous Python-side timeout never got a chance to apply.',
                 imagePlaceholder: ph.investigate,
             },
             {
+                stage: 'pr',
                 copy: 'The fix summarizes as a bounded concurrent map-reduce, chunking the run set so no single gateway request approaches the timeout. The largest of these five by a distance: 997 lines added across 13 files.',
                 imagePlaceholder: ph.pr(70918),
             },
             {
+                stage: 'merge',
                 copy: 'Approved and merged, taking a 67% failure rate to zero without raising a single limit.',
                 imagePlaceholder: ph.merge(70918),
             },
@@ -993,34 +989,32 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/67019',
         prNumber: 67019,
-        intro: 'The smallest bug of the five, and the one showing up in the most projects.',
+        intro: 'Some bugs never throw an exception. Replay is how self-driving catches the ones users only feel.',
+        /*
+         * The built-out walkthrough, and the only one with real screenshots rather than
+         * placeholder boxes. Its copy is about how a replay-sourced report moves through the
+         * loop rather than about this specific 404, which is why the captures are reusable.
+         */
         steps: [
             {
-                label: 'Source',
-                copy: 'Replay Vision watches recordings for friction, and the recordings here were backed up by plain event data.',
-                imagePlaceholder: ph.source('Replay Vision'),
+                stage: 'signal',
+                copy: 'Rage clicks, dead ends, blocking errors: the signal source flags them in every new recording, and scouts hunt where you point them, on a schedule. When the same wall keeps showing up, it becomes a report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_30_at_15_24_02_2x_1_1054be2650.png',
             },
             {
-                copy: (
-                    <>
-                        Opening the old toolbar settings URL gives a "Setting not found" page while the sidebar goes on
-                        highlighting Toolbar as the current page. Counting <Code>not_found_shown</Code> events for that
-                        path over 90 days turns up more than twenty distinct projects, in both regions.
-                    </>
-                ),
-                imagePlaceholder: ph.signal,
+                stage: 'investigate',
+                copy: 'The agent watches the flagged sessions, sizes the damage, and traces it to the responsible code. The replays go in as evidence.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Session_replay_c67c6ef4d4.png',
             },
             {
-                copy: 'The section had been removed when toolbar configuration folded into web analytics. The settings router canonicalizes old section ids through a legacy map, but that map only covered one earlier rename, so this id falls through and the scene renders its not-found state.',
-                imagePlaceholder: ph.investigate,
+                stage: 'pr',
+                copy: 'A replay shows the symptom, so the report waits for your call. You decide the fix; the agent opens the PR.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Session_replay_4207c634ad.png',
             },
             {
-                copy: 'The fix adds the removed section to the legacy map so the router redirects to where those settings actually live now. 57 lines added, nothing removed.',
-                imagePlaceholder: ph.pr(67019),
-            },
-            {
-                copy: 'A papercut, not a hard block – but it was live for a month across twenty-plus projects, and the agent found the person who removed the section to review it.',
-                imagePlaceholder: ph.merge(67019),
+                stage: 'merge',
+                copy: 'You review the diff next to the replays that earned it. Merge, or dismiss with a reason the scout learns from.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Session_replay_c1198f45ea.png',
             },
         ],
         detail: {

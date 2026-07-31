@@ -47,7 +47,7 @@ into a PR. Nothing is invented. Where each field comes from:
 | Suggested reviewers, commit SHAs, rationale | The report's newest `suggested_reviewers` artefact |
 | Evidence code paths | Each `signal_finding`'s `relevant_code_paths`, verbatim |
 | Evidence bodies | **Re-worded** from `signal_finding` – see below |
-| Walkthrough steps (`intro`, `steps`) | Written from that item's own report and PR – the counts, latencies, branch names, and reviewer rationale are the real ones |
+| Walkthrough steps (`intro`, `steps`) | Written from that item's own report and PR – the counts, latencies, branch names, and reviewer rationale are the real ones. The screenshots on the session-replay walkthrough are the exception: design mocks, see Notes |
 
 They're grouped by **discovery channel** rather than by product, because that's what the reports
 record. `source_products` says how PostHog found the problem (a support conversation, an exception, a
@@ -104,8 +104,20 @@ skews toward docs and small classification fixes that often land on `posthog.com
 instead. Project 2 has 28 scout reports with a pull request if more are wanted.
 
 Walkthrough steps are optional on `InboxItem`, and `SignalsToInbox` renders only items that have
-them. Adding a report to the inbox therefore can't leave a selector button that opens nothing. Its
-screenshots are still `imagePlaceholder` labels; `image` takes precedence once real captures land.
+them. Adding a report to the inbox therefore can't leave a selector button that opens nothing. Every
+walkthrough runs four beats — Signal → Investigate → PR → Merge — by naming its own `stage` and
+skipping Scout, since all of these were found by a signal source rather than a scout.
+
+`Replay Vision · settings` is the built-out one: four real screenshots on Cloudinary. The rest still
+render `imagePlaceholder` dashed boxes, and `image` takes precedence once real captures land.
+
+**The walkthrough screenshots are design mocks, not captures of these reports.** The four Cloudinary
+assets depict an invented example bug ("Lift the consent overlay off the buy button") with invented
+counts, and their filenames say `Mock`. That's the one place on the page where something shown isn't
+real, and it's deliberate: the copy beside them describes how any replay-sourced report moves through
+the loop, not this specific 404, which is why the same captures suit whichever item they sit under.
+Worth knowing before anyone cites them as evidence of a real PR, and worth replacing with genuine
+captures of PR #67019 if the "nothing is invented" promise should hold across the whole page.
 
 Chrome that looks interactive but isn't: the search box, and the Discuss / Archive / Refund / Create-PR
 buttons. Each of those carries a `Hint` tooltip explaining what it would do, as do the two tabs and the
