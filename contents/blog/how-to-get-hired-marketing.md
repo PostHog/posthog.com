@@ -55,6 +55,11 @@ This is my favorite question to get asked. It changes by role, but a few things 
 **A high ceiling beats a high floor.** Tech moves fast, but PostHog moves faster. It's better for us to get many things done to a 7/10 standard than one thing to a 10/10. We ship more in a quarter than most teams ship in a year and the strategy changes under us while we work. It's important to be adaptable and to understand how iteration beats polish. 
 > What good looks like: <TeamMember name="Lizzie Epton" showOnlyFirstName photo /> had never worked on data infrastructure when we hired her to market our data stack products, which on paper made her a weaker candidate. But her ability to learn quickly meant that she turned up to her [superday](/handbook/people/hiring-process#4-posthog-superday) better prepared than others with 10 years' experience behind them – and without the limitation of a tired, familiar playbook to hold her back.
 
+<figure>
+  <img src="https://res.cloudinary.com/dmukukwp6/image/upload/image_29f0fad508.png" alt="Hiring funnel showing pass rates from application through to hire" />
+  <figcaption>We hold as high a bar for marketers as we do for engineers, hiring less than 0.4% of candidates. For Lizzie's role over 218 people applied.</figcaption>
+</figure>
+
 **Someone who's excited about something.** I ask most candidates what environment they need to do their best work, and what their favorite project has been. It tells me how they want to work and what they value, and I like watching people talk about something they're into. If they can't name anything they've enjoyed, that's the biggest red flag in the process.
 
 > What good looks like: With 8 years of marketing experience and half of it in devtools, <TeamMember name="Sara Miteva" showOnlyFirstName photo /> was already a strong candidate. What made her an essential hire though was the way she talked about her own writing, and the self-awareness with which she said she wanted a high-trust workplace where bureaucracy wouldn't slow her down.
