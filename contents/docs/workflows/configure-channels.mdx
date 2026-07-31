@@ -94,7 +94,7 @@ Push is the newest workflows channel and is in beta. It's rolling out gradually,
 
 <CalloutBox icon="IconInfo" title="Device tokens come from the mobile SDK" type="fyi">
 
-Push delivery requires your app to register each user's device token with PostHog through the mobile SDK. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
+Push delivery requires your app to register each user's device token with PostHog through the mobile SDK ([iOS](/docs/libraries/ios/push-notifications), [Android](/docs/libraries/android#push-notifications)), which is also where you implement identity verification if you enable it below. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
 </CalloutBox>
 
 **Firebase Cloud Messaging (FCM)**
