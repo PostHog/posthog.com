@@ -149,60 +149,19 @@
         }
     ],
     "redirects": [
-        { "source": "/docs/posthog-ai/overview", "destination": "/docs/posthog-ai", "statusCode": 301 },
         {
-            "source": "/docs/posthog-ai/platform-and-chat-ui",
-            "destination": "/docs/posthog-ai/surfaces/web-app",
+            "source": "/mcp-analytics",
+            "destination": "/docs/mcp-analytics",
             "statusCode": 301
         },
         {
-            "source": "/docs/replay-vision/quality",
-            "destination": "/docs/replay-vision/calibration",
+            "source": "/docs/data-warehouse/run-sql-mcp:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/surfaces/mcp:ext?",
             "statusCode": 301
         },
         {
-            "source": "/activity",
-            "destination": "/docs/activity",
-            "statusCode": 301
-        },
-        {
-            "source": "/profiles",
-            "destination": "/docs/data/anonymous-vs-identified-events",
-            "statusCode": 301
-        },
-        {
-            "source": "/notebooks",
-            "destination": "/docs/notebooks",
-            "statusCode": 301
-        },
-        {
-            "source": "/toolbar",
-            "destination": "/docs/toolbar",
-            "statusCode": 301
-        },
-        {
-            "source": "/webhooks",
-            "destination": "/docs/cdp/destinations/webhook",
-            "statusCode": 301
-        },
-        {
-            "source": "/why",
-            "destination": "/about",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/web-analytics/getting-started",
-            "destination": "/docs/web-analytics/start-here",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/web-analytics/query-traffic-mcp",
-            "destination": "/docs/web-analytics/surfaces/mcp",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/product-analytics/build-insights-mcp",
-            "destination": "/docs/product-analytics/surfaces/mcp",
+            "source": "/docs/product-analytics/build-insights-mcp:ext(\\.md)?",
+            "destination": "/docs/product-analytics/surfaces/mcp:ext?",
             "statusCode": 301
         },
         {
@@ -226,13 +185,13 @@
             "destination": "/teams/analytics-platform/:path*"
         },
         {
-            "source": "/docs/sdk-doctor/keeping-sdks-current",
-            "destination": "/docs/health-checks/keeping-sdks-current",
+            "source": "/docs/sdk-doctor/keeping-sdks-current:ext(\\.md)?",
+            "destination": "/docs/health-checks/keeping-sdks-current:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/sdk-doctor",
-            "destination": "/docs/health-checks/sdk-health",
+            "source": "/docs/sdk-doctor:ext(\\.md)?",
+            "destination": "/docs/health-checks/sdk-health:ext?",
             "statusCode": 301
         },
         {
@@ -244,13 +203,13 @@
             "destination": "/teams/customer-success-eu/:path*"
         },
         {
-            "source": "/docs/prompt-management/skills-store",
-            "destination": "/docs/ai-engineering/skills-store",
+            "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
+            "destination": "/docs/ai-engineering/skills-store:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/site-apps",
-            "destination": "/docs/js-snippets"
+            "source": "/docs/site-apps:ext(\\.md)?",
+            "destination": "/docs/js-snippets:ext?"
         },
         {
             "source": "/docs/site-apps/:path*",
@@ -271,11 +230,6 @@
         {
             "source": "/blog/autoresearch-query-bug",
             "destination": "/blog/karpathy-autoresearch-query-engine-bug"
-        },
-        {
-            "source": "/r/posthog-observability",
-            "destination": "/r/observability",
-            "permanent": true
         },
         {
             "source": "/handbook/marketing/how-we-position-and-sell",
@@ -303,8 +257,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/start-here",
-            "destination": "/docs/self-driving",
+            "source": "/docs/start-here:ext(\\.md)?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
@@ -313,33 +267,33 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/product-os",
-            "destination": "/docs/self-driving",
+            "source": "/docs/product-os:ext(\\.md)?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/self-driving/responders",
-            "destination": "/docs/self-driving/inbox",
+            "source": "/docs/self-driving/responders:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/self-driving/guardrails",
-            "destination": "/docs/self-driving",
+            "source": "/docs/self-driving/guardrails:ext(\\.md)?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/self-driving/autonomy-loop",
-            "destination": "/docs/self-driving/self-improving-loop",
+            "source": "/docs/self-driving/autonomy-loop:ext(\\.md)?",
+            "destination": "/docs/self-driving/self-improving-loop:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/product-analytics/sampling",
-            "destination": "/docs/product-analytics",
+            "source": "/docs/product-analytics/sampling:ext(\\.md)?",
+            "destination": "/docs/product-analytics:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/api/product-tours",
-            "destination": "/docs/api",
+            "source": "/docs/api/product-tours:ext(\\.md)?",
+            "destination": "/docs/api:ext?",
             "statusCode": 301
         },
         {
@@ -478,8 +432,8 @@
             "destination": "/docs/session-replay/:path*"
         },
         {
-            "source": "/docs/tracing",
-            "destination": "/docs/distributed-tracing",
+            "source": "/docs/tracing:ext(\\.md)?",
+            "destination": "/docs/distributed-tracing:ext?",
             "statusCode": 301
         },
         {
@@ -488,8 +442,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/posthog-code/inbox/triage",
-            "destination": "/docs/self-driving/inbox/implementation",
+            "source": "/docs/posthog-code/inbox/triage:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox/implementation:ext?",
             "statusCode": 301
         },
         {
@@ -498,8 +452,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/posthog-code/inbox",
-            "destination": "/docs/self-driving/inbox",
+            "source": "/docs/posthog-code/inbox:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox:ext?",
             "statusCode": 301
         },
         {
@@ -508,139 +462,139 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/self-driving/first-task",
-            "destination": "/docs/self-driving/inbox",
+            "source": "/docs/self-driving/first-task:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/posthog-code/quick-tour",
-            "destination": "/docs/posthog-desktop",
+            "source": "/docs/posthog-code/quick-tour:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/integrations/android-integration",
-            "destination": "/docs/libraries/android"
+            "source": "/docs/integrations/android-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?"
         },
         {
-            "source": "/docs/integrations/community",
-            "destination": "/docs/libraries/community"
+            "source": "/docs/integrations/community:ext(\\.md)?",
+            "destination": "/docs/libraries/community:ext?"
         },
         {
-            "source": "/docs/integrations/docusaurus-integration",
-            "destination": "/docs/libraries/docusaurus"
+            "source": "/docs/integrations/docusaurus-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/docusaurus:ext?"
         },
         {
-            "source": "/docs/integrations/elixir-integration",
-            "destination": "/docs/libraries/elixir"
+            "source": "/docs/integrations/elixir-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/elixir:ext?"
         },
         {
-            "source": "/docs/integrations/flutter-integration",
-            "destination": "/docs/libraries/flutter"
+            "source": "/docs/integrations/flutter-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?"
         },
         {
-            "source": "/docs/integrations/gatsby-integration",
-            "destination": "/docs/libraries/gatsby"
+            "source": "/docs/integrations/gatsby-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/gatsby:ext?"
         },
         {
-            "source": "/docs/integrations/go-integration",
-            "destination": "/docs/libraries/go"
+            "source": "/docs/integrations/go-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?"
         },
         {
-            "source": "/docs/integrations/ios-integration",
-            "destination": "/docs/libraries/ios"
+            "source": "/docs/integrations/ios-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
-            "source": "/docs/integrations/javascript-integration",
-            "destination": "/docs/libraries/js"
+            "source": "/docs/integrations/javascript-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?"
         },
         {
-            "source": "/docs/integrations/js-integration",
-            "destination": "/docs/libraries/js"
+            "source": "/docs/integrations/js-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?"
         },
         {
-            "source": "/docs/integrations/message-formatting",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrations/message-formatting:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/libraries/message-formatting",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/libraries/message-formatting:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/libraries/microsoft-teams",
-            "destination": "/docs/integrate/webhooks/microsoft-teams"
+            "source": "/docs/libraries/microsoft-teams:ext(\\.md)?",
+            "destination": "/docs/integrate/webhooks/microsoft-teams:ext?"
         },
         {
-            "source": "/docs/integrate/webhooks/message-formatting",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrate/webhooks/message-formatting:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/webhooks/message-formatting",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/webhooks/message-formatting:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/integrate/webhooks/microsoft-teams",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrate/webhooks/microsoft-teams:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/integrate/webhooks/discord",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrate/webhooks/discord:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/integrate/webhooks/slack",
-            "destination": "/docs/cdp/destinations/slack"
+            "source": "/docs/integrate/webhooks/slack:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/slack:ext?"
         },
         {
-            "source": "/docs/integrations/microsoft-teams",
-            "destination": "/docs/libraries/microsoft-teams"
+            "source": "/docs/integrations/microsoft-teams:ext(\\.md)?",
+            "destination": "/docs/libraries/microsoft-teams:ext?"
         },
         {
-            "source": "/docs/integrations/node-integration",
-            "destination": "/docs/libraries/node"
+            "source": "/docs/integrations/node-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?"
         },
         {
-            "source": "/docs/integrations/php-integration",
-            "destination": "/docs/libraries/php"
+            "source": "/docs/integrations/php-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/php:ext?"
         },
         {
-            "source": "/docs/integrations/python-integration",
-            "destination": "/docs/libraries/python"
+            "source": "/docs/integrations/python-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?"
         },
         {
-            "source": "/docs/integrations/react-native-integration",
-            "destination": "/docs/libraries/react-native"
+            "source": "/docs/integrations/react-native-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?"
         },
         {
-            "source": "/docs/integrations/ruby-integration",
-            "destination": "/docs/libraries/ruby"
+            "source": "/docs/integrations/ruby-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/ruby:ext?"
         },
         {
-            "source": "/docs/integrations/rudderstack-integration",
-            "destination": "/docs/libraries/rudderstack"
+            "source": "/docs/integrations/rudderstack-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/rudderstack:ext?"
         },
         {
-            "source": "/docs/integrations/segment-integration",
-            "destination": "/docs/libraries/segment"
+            "source": "/docs/integrations/segment-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/segment:ext?"
         },
         {
-            "source": "/docs/integrations/sentry-integration",
-            "destination": "/docs/error-tracking"
+            "source": "/docs/integrations/sentry-integration:ext(\\.md)?",
+            "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/integrations/slack",
-            "destination": "/docs/libraries/slack"
+            "source": "/docs/integrations/slack:ext(\\.md)?",
+            "destination": "/docs/libraries/slack:ext?"
         },
         {
-            "source": "/docs/posthog-code/slack",
-            "destination": "/docs/slack"
+            "source": "/docs/posthog-code/slack:ext(\\.md)?",
+            "destination": "/docs/slack:ext?"
         },
         {
-            "source": "/docs/posthog-code/download-posthog-code",
-            "destination": "/docs/posthog-desktop/download-posthog-desktop",
+            "source": "/docs/posthog-code/download-posthog-code:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/download-posthog-desktop:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/posthog-code",
-            "destination": "/docs/posthog-desktop",
+            "source": "/docs/posthog-code:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop:ext?",
             "statusCode": 301
         },
         {
@@ -649,8 +603,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/slack-app",
-            "destination": "/docs/slack"
+            "source": "/docs/slack-app:ext(\\.md)?",
+            "destination": "/docs/slack:ext?"
         },
         {
             "source": "/handbook/company/structure",
@@ -685,124 +639,124 @@
             "destination": "/handbook/people/team-structure/core-experience"
         },
         {
-            "source": "/docs/plugins/build/overview",
-            "destination": "/docs/apps/build"
+            "source": "/docs/plugins/build/overview:ext(\\.md)?",
+            "destination": "/docs/apps/build:ext?"
         },
         {
-            "source": "/docs/plugins/types",
-            "destination": "/docs/apps/build/types"
+            "source": "/docs/plugins/types:ext(\\.md)?",
+            "destination": "/docs/apps/build/types:ext?"
         },
         {
-            "source": "/docs/developing-locally",
-            "destination": "/handbook/engineering/developing-locally"
+            "source": "/docs/developing-locally:ext(\\.md)?",
+            "destination": "/handbook/engineering/developing-locally:ext?"
         },
         {
-            "source": "/docs/contributing/developing-locally",
-            "destination": "/handbook/engineering/developing-locally"
+            "source": "/docs/contributing/developing-locally:ext(\\.md)?",
+            "destination": "/handbook/engineering/developing-locally:ext?"
         },
         {
-            "source": "/docs/project-structure",
-            "destination": "/docs/contributing/project-structure"
+            "source": "/docs/project-structure:ext(\\.md)?",
+            "destination": "/docs/contributing/project-structure:ext?"
         },
         {
-            "source": "/docs/recognizing-contributions",
-            "destination": "/docs/contributing/recognizing-contributions"
+            "source": "/docs/recognizing-contributions:ext(\\.md)?",
+            "destination": "/docs/contributing/recognizing-contributions:ext?"
         },
         {
-            "source": "/docs/stack",
-            "destination": "/docs/contributing/stack"
+            "source": "/docs/stack:ext(\\.md)?",
+            "destination": "/docs/contributing/stack:ext?"
         },
         {
-            "source": "/docs/updating-documentation",
-            "destination": "/docs/contributing/updating-documentation"
+            "source": "/docs/updating-documentation:ext(\\.md)?",
+            "destination": "/docs/contributing/updating-documentation:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/scaling-posthog",
-            "destination": "/docs/self-host"
+            "source": "/docs/configuring-posthog/scaling-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/self-host/overview",
-            "destination": "/docs/self-host"
+            "source": "/docs/self-host/overview:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/deployment",
-            "destination": "/docs/self-host"
+            "source": "/docs/deployment:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/self-host/configure",
-            "destination": "/docs/self-host"
+            "source": "/docs/self-host/configure:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/configuring-posthog",
-            "destination": "/docs/self-host/configure"
+            "source": "/docs/configuring-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host/configure:ext?"
         },
         {
-            "source": "/docs/features/log-in-with-github-gitlab",
-            "destination": "/docs/user-guides/sso"
+            "source": "/docs/features/log-in-with-github-gitlab:ext(\\.md)?",
+            "destination": "/docs/user-guides/sso:ext?"
         },
         {
-            "source": "/docs/contributing",
-            "destination": "/docs/contribute"
+            "source": "/docs/contributing:ext(\\.md)?",
+            "destination": "/docs/contribute:ext?"
         },
         {
-            "source": "/docs/contributing/project-structure",
-            "destination": "/docs/contribute/project-structure"
+            "source": "/docs/contributing/project-structure:ext(\\.md)?",
+            "destination": "/docs/contribute/project-structure:ext?"
         },
         {
-            "source": "/docs/contributing/recognizing-contributions",
-            "destination": "/docs/contribute/recognizing-contributions"
+            "source": "/docs/contributing/recognizing-contributions:ext(\\.md)?",
+            "destination": "/docs/contribute/recognizing-contributions:ext?"
         },
         {
-            "source": "/docs/contributing/stack",
-            "destination": "/docs/contribute/stack"
+            "source": "/docs/contributing/stack:ext(\\.md)?",
+            "destination": "/docs/contribute/stack:ext?"
         },
         {
-            "source": "/docs/contributing/updating-documentation",
-            "destination": "/docs/contribute/updating-documentation"
+            "source": "/docs/contributing/updating-documentation:ext(\\.md)?",
+            "destination": "/docs/contribute/updating-documentation:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-gtm",
-            "destination": "/docs/integrate/google-tag-manager"
+            "source": "/docs/tutorials/1-minute/integrate-with-gtm:ext(\\.md)?",
+            "destination": "/docs/integrate/google-tag-manager:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-metabase",
-            "destination": "/docs/integrate/metabase"
+            "source": "/docs/tutorials/1-minute/integrate-with-metabase:ext(\\.md)?",
+            "destination": "/docs/integrate/metabase:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js",
-            "destination": "/docs/integrate/nuxt-js"
+            "source": "/docs/tutorials/1-minute/integrate-with-nuxt-js:ext(\\.md)?",
+            "destination": "/docs/integrate/nuxt-js:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-retool",
-            "destination": "/docs/integrate/retool"
+            "source": "/docs/tutorials/1-minute/integrate-with-retool:ext(\\.md)?",
+            "destination": "/docs/integrate/retool:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-shopify",
-            "destination": "/docs/integrate/shopify"
+            "source": "/docs/tutorials/1-minute/integrate-with-shopify:ext(\\.md)?",
+            "destination": "/docs/integrate/shopify:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/integrate-with-wordpress",
-            "destination": "/docs/integrate/wordpress"
+            "source": "/docs/tutorials/1-minute/integrate-with-wordpress:ext(\\.md)?",
+            "destination": "/docs/integrate/wordpress:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/email",
-            "destination": "/docs/self-host/configure/email"
+            "source": "/docs/configuring-posthog/email:ext(\\.md)?",
+            "destination": "/docs/self-host/configure/email:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/environment-variables",
-            "destination": "/docs/self-host/configure/environment-variables"
+            "source": "/docs/configuring-posthog/environment-variables:ext(\\.md)?",
+            "destination": "/docs/self-host/configure/environment-variables:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/running-behind-proxy",
-            "destination": "/docs/self-host/configure/running-behind-proxy"
+            "source": "/docs/configuring-posthog/running-behind-proxy:ext(\\.md)?",
+            "destination": "/docs/self-host/configure/running-behind-proxy:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/securing-posthog",
-            "destination": "/docs/self-host/configure/securing-posthog"
+            "source": "/docs/configuring-posthog/securing-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host/configure/securing-posthog:ext?"
         },
         {
-            "source": "/docs/configuring-posthog/upgrading-posthog",
-            "destination": "/docs/self-host/configure/upgrading-posthog"
+            "source": "/docs/configuring-posthog/upgrading-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host/configure/upgrading-posthog:ext?"
         },
         {
             "source": "/docs/deployment/:path*",
@@ -813,132 +767,132 @@
             "destination": "/docs/self-host"
         },
         {
-            "source": "/docs/configuring-posthog/deleting-data",
-            "destination": "/docs/tutorials/deleting-data"
+            "source": "/docs/configuring-posthog/deleting-data:ext(\\.md)?",
+            "destination": "/docs/tutorials/deleting-data:ext?"
         },
         {
-            "source": "/docs/features/actions",
-            "destination": "/docs/data/actions"
+            "source": "/docs/features/actions:ext(\\.md)?",
+            "destination": "/docs/data/actions:ext?"
         },
         {
-            "source": "/docs/features/annotations",
-            "destination": "/docs/user-guides/annotations"
+            "source": "/docs/features/annotations:ext(\\.md)?",
+            "destination": "/docs/user-guides/annotations:ext?"
         },
         {
-            "source": "/docs/application-settings",
-            "destination": "/docs/user-guides/application-settings"
+            "source": "/docs/application-settings:ext(\\.md)?",
+            "destination": "/docs/user-guides/application-settings:ext?"
         },
         {
-            "source": "/docs/features/cohorts",
-            "destination": "/docs/user-guides/cohorts"
+            "source": "/docs/features/cohorts:ext(\\.md)?",
+            "destination": "/docs/user-guides/cohorts:ext?"
         },
         {
-            "source": "/docs/features/dashboards",
-            "destination": "/docs/user-guides/dashboards"
+            "source": "/docs/features/dashboards:ext(\\.md)?",
+            "destination": "/docs/user-guides/dashboards:ext?"
         },
         {
-            "source": "/docs/features/events",
-            "destination": "/docs/user-guides/events"
+            "source": "/docs/features/events:ext(\\.md)?",
+            "destination": "/docs/user-guides/events:ext?"
         },
         {
-            "source": "/docs/features/funnels",
-            "destination": "/docs/user-guides/funnels"
+            "source": "/docs/features/funnels:ext(\\.md)?",
+            "destination": "/docs/user-guides/funnels:ext?"
         },
         {
-            "source": "/docs/features/organizations",
-            "destination": "/docs/user-guides/organizations"
+            "source": "/docs/features/organizations:ext(\\.md)?",
+            "destination": "/docs/user-guides/organizations:ext?"
         },
         {
-            "source": "/docs/features/paths",
-            "destination": "/docs/user-guides/paths"
+            "source": "/docs/features/paths:ext(\\.md)?",
+            "destination": "/docs/user-guides/paths:ext?"
         },
         {
-            "source": "/docs/features/plugins",
-            "destination": "/docs/apps"
+            "source": "/docs/features/plugins:ext(\\.md)?",
+            "destination": "/docs/apps:ext?"
         },
         {
-            "source": "/docs/features/projects",
-            "destination": "/docs/user-guides/projects"
+            "source": "/docs/features/projects:ext(\\.md)?",
+            "destination": "/docs/user-guides/projects:ext?"
         },
         {
-            "source": "/docs/features/retention",
-            "destination": "/docs/user-guides/retention"
+            "source": "/docs/features/retention:ext(\\.md)?",
+            "destination": "/docs/user-guides/retention:ext?"
         },
         {
-            "source": "/docs/features/session-recording",
-            "destination": "/docs/user-guides/session-recording"
+            "source": "/docs/features/session-recording:ext(\\.md)?",
+            "destination": "/docs/user-guides/session-recording:ext?"
         },
         {
-            "source": "/docs/features/sessions",
-            "destination": "/blog/sessions-removal"
+            "source": "/docs/features/sessions:ext(\\.md)?",
+            "destination": "/blog/sessions-removal:ext?"
         },
         {
-            "source": "/docs/features/toolbar",
-            "destination": "/docs/user-guides/toolbar"
+            "source": "/docs/features/toolbar:ext(\\.md)?",
+            "destination": "/docs/user-guides/toolbar:ext?"
         },
         {
-            "source": "/docs/features/trends",
-            "destination": "/docs/user-guides/trends"
+            "source": "/docs/features/trends:ext(\\.md)?",
+            "destination": "/docs/user-guides/trends:ext?"
         },
         {
-            "source": "/docs/features/users",
-            "destination": "/docs/user-guides/users"
+            "source": "/docs/features/users:ext(\\.md)?",
+            "destination": "/docs/user-guides/users:ext?"
         },
         {
-            "source": "/docs/tutorials/overview",
-            "destination": "/docs/tutorials"
+            "source": "/docs/tutorials/overview:ext(\\.md)?",
+            "destination": "/docs/tutorials:ext?"
         },
         {
-            "source": "/docs/features",
-            "destination": "/docs/user-guides"
+            "source": "/docs/features:ext(\\.md)?",
+            "destination": "/docs/user-guides:ext?"
         },
         {
-            "source": "/docs/tutorials/1-minute/survey",
-            "destination": "/docs/tutorials/survey"
+            "source": "/docs/tutorials/1-minute/survey:ext(\\.md)?",
+            "destination": "/docs/tutorials/survey:ext?"
         },
         {
             "source": "/features",
             "destination": "/product"
         },
         {
-            "source": "/docs/integrate/overview",
-            "destination": "/docs/integrate"
+            "source": "/docs/integrate/overview:ext(\\.md)?",
+            "destination": "/docs/integrate:ext?"
         },
         {
-            "source": "/docs/integrations",
-            "destination": "/docs/integrate"
+            "source": "/docs/integrations:ext(\\.md)?",
+            "destination": "/docs/integrate:ext?"
         },
         {
             "source": "/signup",
             "destination": "https://app.posthog.com/signup"
         },
         {
-            "source": "/docs/tutorials/actions",
-            "destination": "/docs/tutorials/event-tracking-guide"
+            "source": "/docs/tutorials/actions:ext(\\.md)?",
+            "destination": "/docs/tutorials/event-tracking-guide:ext?"
         },
         {
-            "source": "/docs/plugins/overview",
-            "destination": "/docs/apps"
+            "source": "/docs/plugins/overview:ext(\\.md)?",
+            "destination": "/docs/apps:ext?"
         },
         {
-            "source": "/docs/api/overview",
-            "destination": "/docs/api"
+            "source": "/docs/api/overview:ext(\\.md)?",
+            "destination": "/docs/api:ext?"
         },
         {
-            "source": "/docs/api/post-only-endpoints",
-            "destination": "/docs/api/capture"
+            "source": "/docs/api/post-only-endpoints:ext(\\.md)?",
+            "destination": "/docs/api/capture:ext?"
         },
         {
-            "source": "/docs/contribute/overview",
-            "destination": "/docs/contribute"
+            "source": "/docs/contribute/overview:ext(\\.md)?",
+            "destination": "/docs/contribute:ext?"
         },
         {
-            "source": "/docs/user-guides/overview",
-            "destination": "/docs/user-guides"
+            "source": "/docs/user-guides/overview:ext(\\.md)?",
+            "destination": "/docs/user-guides:ext?"
         },
         {
-            "source": "/docs/user-guides/log-in-with-sso",
-            "destination": "/docs/user-guides/sso"
+            "source": "/docs/user-guides/log-in-with-sso:ext(\\.md)?",
+            "destination": "/docs/user-guides/sso:ext?"
         },
         {
             "source": "/handbook/people/hiring-process/hiring-process",
@@ -949,20 +903,20 @@
             "destination": "/handbook/people/hogpatch"
         },
         {
-            "source": "/docs/integrate/client/ios/index",
-            "destination": "/docs/libraries/ios"
+            "source": "/docs/integrate/client/ios/index:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
-            "source": "/docs/integrate/client/ios",
-            "destination": "/docs/libraries/ios"
+            "source": "/docs/integrate/client/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
-            "source": "/docs/integrate/client/js/index",
-            "destination": "/docs/libraries/js"
+            "source": "/docs/integrate/client/js/index:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?"
         },
         {
-            "source": "/docs/integrate/client/js",
-            "destination": "/docs/libraries/js"
+            "source": "/docs/integrate/client/js:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/handbook/people/hiring-process/index",
@@ -973,12 +927,12 @@
             "destination": "/handbook/people/team-structure/growth"
         },
         {
-            "source": "/docs/user-guides/projects",
-            "destination": "/docs/settings/organizations"
+            "source": "/docs/user-guides/projects:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?"
         },
         {
-            "source": "/docs/user-guides/organizations",
-            "destination": "/docs/settings/projects"
+            "source": "/docs/user-guides/organizations:ext(\\.md)?",
+            "destination": "/docs/settings/projects:ext?"
         },
         {
             "source": "/handbook/engineering/enterprise-prioritization",
@@ -1005,28 +959,28 @@
             "destination": "/docs/how-posthog-works/ingestion-pipeline"
         },
         {
-            "source": "/docs/user-guides/session-recording",
-            "destination": "/docs/user-guides/recordings"
+            "source": "/docs/user-guides/session-recording:ext(\\.md)?",
+            "destination": "/docs/user-guides/recordings:ext?"
         },
         {
             "source": "/blog/sessions-deprecation",
             "destination": "/blog/sessions-removal"
         },
         {
-            "source": "/docs/self-host/runbook/overview",
-            "destination": "/docs/self-host/runbook"
+            "source": "/docs/self-host/runbook/overview:ext(\\.md)?",
+            "destination": "/docs/self-host/runbook:ext?"
         },
         {
-            "source": "/docs/user-guides/users",
-            "destination": "/docs/user-guides/persons"
+            "source": "/docs/user-guides/users:ext(\\.md)?",
+            "destination": "/docs/user-guides/persons:ext?"
         },
         {
-            "source": "/docs/integrations/api",
-            "destination": "/docs/api"
+            "source": "/docs/integrations/api:ext(\\.md)?",
+            "destination": "/docs/api:ext?"
         },
         {
-            "source": "/docs/features/sso",
-            "destination": "/docs/user-guides/sso"
+            "source": "/docs/features/sso:ext(\\.md)?",
+            "destination": "/docs/user-guides/sso:ext?"
         },
         {
             "source": "/request_demo",
@@ -1045,8 +999,8 @@
             "destination": "/handbook/strategy/overview"
         },
         {
-            "source": "/docs/contribute/updating-documentation",
-            "destination": "/docs/contribute"
+            "source": "/docs/contribute/updating-documentation:ext(\\.md)?",
+            "destination": "/docs/contribute:ext?"
         },
         {
             "source": "/handbook/growth/marketing/messaging_framework",
@@ -1069,32 +1023,32 @@
             "destination": "/contact-sales"
         },
         {
-            "source": "/docs/integrate/third-party",
-            "destination": "/docs/integrate"
+            "source": "/docs/integrate/third-party:ext(\\.md)?",
+            "destination": "/docs/integrate:ext?"
         },
         {
-            "source": "/docs/integrated",
-            "destination": "/docs/integrate"
+            "source": "/docs/integrated:ext(\\.md)?",
+            "destination": "/docs/integrate:ext?"
         },
         {
-            "source": "/docs/scaling-posthog",
-            "destination": "/docs/self-host/deploy/configuration"
+            "source": "/docs/scaling-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host/deploy/configuration:ext?"
         },
         {
             "source": "/handbook/growth/sales/",
             "destination": "/handbook/growth/sales/overview"
         },
         {
-            "source": "/docs/api/api",
-            "destination": "/docs/api"
+            "source": "/docs/api/api:ext(\\.md)?",
+            "destination": "/docs/api:ext?"
         },
         {
-            "source": "/docs/code-of-conduct",
-            "destination": "/docs/contribute/code-of-conduct"
+            "source": "/docs/code-of-conduct:ext(\\.md)?",
+            "destination": "/docs/contribute/code-of-conduct:ext?"
         },
         {
-            "source": "/docs/self-host/docs/self-host/postgres-vs-clickhouse",
-            "destination": "/docs/self-host/postgres-vs-clickhouse"
+            "source": "/docs/self-host/docs/self-host/postgres-vs-clickhouse:ext(\\.md)?",
+            "destination": "/docs/self-host/postgres-vs-clickhouse:ext?"
         },
         {
             "source": "/handbook/people/team-structure/design",
@@ -1195,10 +1149,6 @@
             "destination": "/product-analytics"
         },
         {
-            "source": "/trends",
-            "destination": "/product-analytics"
-        },
-        {
             "source": "/product/user-paths",
             "destination": "/product-analytics"
         },
@@ -1240,24 +1190,24 @@
             "destination": "/tutorials/:path*"
         },
         {
-            "source": "/docs/self-host/hobby-deployment",
-            "destination": "/docs/self-host/deploy/hobby"
+            "source": "/docs/self-host/hobby-deployment:ext(\\.md)?",
+            "destination": "/docs/self-host/deploy/hobby:ext?"
         },
         {
             "source": "/handbook/engineering/ee-setup",
             "destination": "/handbook/engineering/developing-locally"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
-            "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"
+            "source": "/docs/self-host/runbook/clickhouse/vertical_scaling:ext(\\.md)?",
+            "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling:ext?"
         },
         {
-            "source": "/docs/privacy/overview",
-            "destination": "/docs/privacy"
+            "source": "/docs/privacy/overview:ext(\\.md)?",
+            "destination": "/docs/privacy:ext?"
         },
         {
-            "source": "/docs/integrate/gdpr",
-            "destination": "/docs/privacy/gdpr-compliance"
+            "source": "/docs/integrate/gdpr:ext(\\.md)?",
+            "destination": "/docs/privacy/gdpr-compliance:ext?"
         },
         {
             "source": "/blog/hipaa-compliant-analytics",
@@ -1268,36 +1218,36 @@
             "destination": "/handbook/engineering/cloud-providers"
         },
         {
-            "source": "/docs/contribute/coding-conventions",
-            "destination": "/handbook/engineering/conventions/frontend-coding"
+            "source": "/docs/contribute/coding-conventions:ext(\\.md)?",
+            "destination": "/handbook/engineering/conventions/frontend-coding:ext?"
         },
         {
             "source": "/handbook/engineering/mdx",
             "destination": "/handbook/engineering/posthog-com/mdx-setup"
         },
         {
-            "source": "/docs/contribute/project-structure",
-            "destination": "/handbook/engineering/project-structure"
+            "source": "/docs/contribute/project-structure:ext(\\.md)?",
+            "destination": "/handbook/engineering/project-structure:ext?"
         },
         {
-            "source": "/docs/contribute/stack",
-            "destination": "/handbook/engineering/stack"
+            "source": "/docs/contribute/stack:ext(\\.md)?",
+            "destination": "/handbook/engineering/stack:ext?"
         },
         {
             "source": "/tutorials/categories/session-recordings",
             "destination": "/tutorials/categories/session-replay"
         },
         {
-            "source": "/docs/contribute/contribute-to-website",
-            "destination": "/handbook/engineering/posthog-com/developing-the-website"
+            "source": "/docs/contribute/contribute-to-website:ext(\\.md)?",
+            "destination": "/handbook/engineering/posthog-com/developing-the-website:ext?"
         },
         {
             "source": "/sso",
             "destination": "/docs/user-guides/sso"
         },
         {
-            "source": "/docs/api/people",
-            "destination": "/docs/api/persons"
+            "source": "/docs/api/people:ext(\\.md)?",
+            "destination": "/docs/api/persons:ext?"
         },
         {
             "source": "/handbook/engineering/k8s-overview",
@@ -1308,20 +1258,20 @@
             "destination": "/blog/best-open-source-session-replay-tools"
         },
         {
-            "source": "/docs/plugins/build/reference",
-            "destination": "/docs/apps/build/reference"
+            "source": "/docs/plugins/build/reference:ext(\\.md)?",
+            "destination": "/docs/apps/build/reference:ext?"
         },
         {
-            "source": "/docs/plugins/build/types",
-            "destination": "/docs/apps/build/types"
+            "source": "/docs/plugins/build/types:ext(\\.md)?",
+            "destination": "/docs/apps/build/types:ext?"
         },
         {
-            "source": "/docs/plugins/enabling",
-            "destination": "/docs/apps/enabling"
+            "source": "/docs/plugins/enabling:ext(\\.md)?",
+            "destination": "/docs/apps/enabling:ext?"
         },
         {
-            "source": "/docs/plugins",
-            "destination": "/docs/apps"
+            "source": "/docs/plugins:ext(\\.md)?",
+            "destination": "/docs/apps:ext?"
         },
         {
             "source": "/integrations",
@@ -1332,8 +1282,8 @@
             "destination": "/apps/:path*"
         },
         {
-            "source": "/docs/user-guides/plugins",
-            "destination": "/docs/apps"
+            "source": "/docs/user-guides/plugins:ext(\\.md)?",
+            "destination": "/docs/apps:ext?"
         },
         {
             "source": "/support",
@@ -1444,8 +1394,8 @@
             "destination": "/?utm_source=influencer&utm_medium=youtube&utm_campaign=jsmastery"
         },
         {
-            "source": "/docs/self-host/migrate-to-cloud",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/self-host/migrate-to-cloud:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
             "source": "/tutorials/categories/plugins",
@@ -1668,120 +1618,120 @@
             "destination": "/handbook/small-teams/experimentation"
         },
         {
-            "source": "/docs/self-host/configure/async-migrations",
-            "destination": "/docs/runbook/async-migrations"
+            "source": "/docs/self-host/configure/async-migrations:ext(\\.md)?",
+            "destination": "/docs/runbook/async-migrations:ext?"
         },
         {
             "source": "/tutorials/spa",
             "destination": "/tutorials/single-page-app-pageviews"
         },
         {
-            "source": "/docs/self-host/configure/async-migrations/0001-events-sample-by",
-            "destination": "/docs/runbook/async-migrations/0001-events-sample-by"
+            "source": "/docs/self-host/configure/async-migrations/0001-events-sample-by:ext(\\.md)?",
+            "destination": "/docs/runbook/async-migrations/0001-events-sample-by:ext?"
         },
         {
-            "source": "/docs/self-host/configure/async-migrations/0002-events-sample-by",
-            "destination": "/docs/runbook/async-migrations/0002-events-sample-by"
+            "source": "/docs/self-host/configure/async-migrations/0002-events-sample-by:ext(\\.md)?",
+            "destination": "/docs/runbook/async-migrations/0002-events-sample-by:ext?"
         },
         {
-            "source": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2",
-            "destination": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2"
+            "source": "/docs/self-host/configure/async-migrations/0003-fill-person-distinct-id2:ext(\\.md)?",
+            "destination": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2:ext?"
         },
         {
-            "source": "/docs/self-host/configure/async-migrations/overview",
-            "destination": "/docs/runbook/async-migrations"
+            "source": "/docs/self-host/configure/async-migrations/overview:ext(\\.md)?",
+            "destination": "/docs/runbook/async-migrations:ext?"
         },
         {
-            "source": "/docs/self-host/disaster-recovery",
-            "destination": "/docs/runbook/disaster-recovery"
+            "source": "/docs/self-host/disaster-recovery:ext(\\.md)?",
+            "destination": "/docs/runbook/disaster-recovery:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/backup",
-            "destination": "/docs/runbook/services/clickhouse/backup"
+            "source": "/docs/self-host/runbook/clickhouse/backup:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/backup:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse",
-            "destination": "/docs/runbook/services/clickhouse"
+            "source": "/docs/self-host/runbook/clickhouse:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/kafka-engine",
-            "destination": "/docs/runbook/services/clickhouse/kafka-engine"
+            "source": "/docs/self-host/runbook/clickhouse/kafka-engine:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/kafka-engine:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/resize-disk",
-            "destination": "/docs/runbook/services/clickhouse/resize-disk"
+            "source": "/docs/self-host/runbook/clickhouse/resize-disk:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/resize-disk:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/restore",
-            "destination": "/docs/runbook/services/clickhouse/restore"
+            "source": "/docs/self-host/runbook/clickhouse/restore:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/restore:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/sharding-and-replication",
-            "destination": "/docs/runbook/services/clickhouse/sharding-and-replication"
+            "source": "/docs/self-host/runbook/clickhouse/sharding-and-replication:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/sharding-and-replication:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/clickhouse/vertical-scaling",
-            "destination": "/docs/runbook/services/clickhouse/vertical-scaling"
+            "source": "/docs/self-host/runbook/clickhouse/vertical-scaling:ext(\\.md)?",
+            "destination": "/docs/runbook/services/clickhouse/vertical-scaling:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/kafka",
-            "destination": "/docs/runbook/services/kafka"
+            "source": "/docs/self-host/runbook/kafka:ext(\\.md)?",
+            "destination": "/docs/runbook/services/kafka:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/kafka/log-retention",
-            "destination": "/docs/runbook/services/kafka/log-retention"
+            "source": "/docs/self-host/runbook/kafka/log-retention:ext(\\.md)?",
+            "destination": "/docs/runbook/services/kafka/log-retention:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/kafka/resize-disk",
-            "destination": "/docs/runbook/services/kafka/resize-disk"
+            "source": "/docs/self-host/runbook/kafka/resize-disk:ext(\\.md)?",
+            "destination": "/docs/runbook/services/kafka/resize-disk:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/minio",
-            "destination": "/docs/runbook/services/minio"
+            "source": "/docs/self-host/runbook/minio:ext(\\.md)?",
+            "destination": "/docs/runbook/services/minio:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/plugin-server/diagrams/async-server",
-            "destination": "/docs/runbook/services/plugin-server/diagrams/async-server"
+            "source": "/docs/self-host/runbook/plugin-server/diagrams/async-server:ext(\\.md)?",
+            "destination": "/docs/runbook/services/plugin-server/diagrams/async-server:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/plugin-server/diagrams/event-flow",
-            "destination": "/docs/runbook/services/plugin-server/diagrams/event-flow"
+            "source": "/docs/self-host/runbook/plugin-server/diagrams/event-flow:ext(\\.md)?",
+            "destination": "/docs/runbook/services/plugin-server/diagrams/event-flow:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/plugin-server/diagrams/ingestion-server",
-            "destination": "/docs/runbook/services/plugin-server/diagrams/ingestion-server"
+            "source": "/docs/self-host/runbook/plugin-server/diagrams/ingestion-server:ext(\\.md)?",
+            "destination": "/docs/runbook/services/plugin-server/diagrams/ingestion-server:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/plugin-server/diagrams/plugin-server",
-            "destination": "/docs/runbook/services/plugin-server/diagrams/plugin-server"
+            "source": "/docs/self-host/runbook/plugin-server/diagrams/plugin-server:ext(\\.md)?",
+            "destination": "/docs/runbook/services/plugin-server/diagrams/plugin-server:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/plugin-server",
-            "destination": "/docs/runbook/services/plugin-server"
+            "source": "/docs/self-host/runbook/plugin-server:ext(\\.md)?",
+            "destination": "/docs/runbook/services/plugin-server:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/postgresql",
-            "destination": "/docs/runbook/services/postgresql"
+            "source": "/docs/self-host/runbook/postgresql:ext(\\.md)?",
+            "destination": "/docs/runbook/services/postgresql:ext?"
         },
         {
-            "source": "/docs/self-host/postgres-upgrade-migrations",
-            "destination": "/docs/runbook/services/postgresql/long-migrations"
+            "source": "/docs/self-host/postgres-upgrade-migrations:ext(\\.md)?",
+            "destination": "/docs/runbook/services/postgresql/long-migrations:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/postgresql/resize-disk",
-            "destination": "/docs/runbook/services/postgresql/resize-disk"
+            "source": "/docs/self-host/runbook/postgresql/resize-disk:ext(\\.md)?",
+            "destination": "/docs/runbook/services/postgresql/resize-disk:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/redis",
-            "destination": "/docs/runbook/services/redis"
+            "source": "/docs/self-host/runbook/redis:ext(\\.md)?",
+            "destination": "/docs/runbook/services/redis:ext?"
         },
         {
-            "source": "/docs/self-host/runbook/zookeeper",
-            "destination": "/docs/runbook/services/zookeeper"
+            "source": "/docs/self-host/runbook/zookeeper:ext(\\.md)?",
+            "destination": "/docs/runbook/services/zookeeper:ext?"
         },
         {
-            "source": "/docs/self-host/configure/upgrading-posthog",
-            "destination": "/docs/runbook/upgrading-posthog"
+            "source": "/docs/self-host/configure/upgrading-posthog:ext(\\.md)?",
+            "destination": "/docs/runbook/upgrading-posthog:ext?"
         },
         {
             "source": "/tutorials/aarrr-framework",
@@ -1792,32 +1742,32 @@
             "destination": "/blog/aarrr-pirate-funnel"
         },
         {
-            "source": "/docs/cloud/proxy",
-            "destination": "/docs/integrate/proxy"
+            "source": "/docs/cloud/proxy:ext(\\.md)?",
+            "destination": "/docs/integrate/proxy:ext?"
         },
         {
-            "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/self-host/migrate/migrate-between-cloud-and-self-hosted:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/self-host/migrate/migrate-from-amplitude",
-            "destination": "/docs/migrate/migrate-from-amplitude"
+            "source": "/docs/self-host/migrate/migrate-from-amplitude:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-from-amplitude:ext?"
         },
         {
-            "source": "/docs/self-host/migrate-from-postgres-to-clickhouse",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/self-host/migrate-from-postgres-to-clickhouse:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/self-host/migrate/migrate-to-another-self-hosted-instance:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/migrate/migrate-to-another-self-hosted-instance",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/migrate/migrate-to-another-self-hosted-instance:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/migrate/migrate-between-cloud-and-self-hosted",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/migrate/migrate-between-cloud-and-self-hosted:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
             "source": "/handbook/product/pm-rampup",
@@ -1828,16 +1778,16 @@
             "destination": "/handbook/people/team-structure/why-small-teams"
         },
         {
-            "source": "/docs/plugins/build",
-            "destination": "/docs/apps/build"
+            "source": "/docs/plugins/build:ext(\\.md)?",
+            "destination": "/docs/apps/build:ext?"
         },
         {
-            "source": "/docs/data-model",
-            "destination": "/docs/how-posthog-works/data-model"
+            "source": "/docs/data-model:ext(\\.md)?",
+            "destination": "/docs/how-posthog-works/data-model:ext?"
         },
         {
-            "source": "/docs/self-host/architecture",
-            "destination": "/docs/how-posthog-works"
+            "source": "/docs/self-host/architecture:ext(\\.md)?",
+            "destination": "/docs/how-posthog-works:ext?"
         },
         {
             "source": "/handbook/engineering/app-east",
@@ -1852,8 +1802,8 @@
             "destination": "/handbook/small-teams/app-east"
         },
         {
-            "source": "/docs/integrate/client/browser-extension",
-            "destination": "/docs/integrate/browser-extension"
+            "source": "/docs/integrate/client/browser-extension:ext(\\.md)?",
+            "destination": "/docs/integrate/browser-extension:ext?"
         },
         {
             "source": "/handbook/company/website-design-process",
@@ -1956,8 +1906,8 @@
             "destination": "/handbook/small-teams/product-analytics"
         },
         {
-            "source": "/docs/self-host/postgres-vs-clickhouse",
-            "destination": "/blog/clickhouse-vs-postgres"
+            "source": "/docs/self-host/postgres-vs-clickhouse:ext(\\.md)?",
+            "destination": "/blog/clickhouse-vs-postgres:ext?"
         },
         {
             "source": "/handbook/people/team-structure/team-structure",
@@ -1980,16 +1930,16 @@
             "destination": "/handbook/company/grown-ups"
         },
         {
-            "source": "/docs/architecture/ingestion-pipeline",
-            "destination": "/docs/how-posthog-works/ingestion-pipeline"
+            "source": "/docs/architecture/ingestion-pipeline:ext(\\.md)?",
+            "destination": "/docs/how-posthog-works/ingestion-pipeline:ext?"
         },
         {
             "source": "/blog/using-posting",
             "destination": "/blog/using-posthog"
         },
         {
-            "source": "/docs/integrate/client/snippet-installation",
-            "destination": "/docs/integrate"
+            "source": "/docs/integrate/client/snippet-installation:ext(\\.md)?",
+            "destination": "/docs/integrate:ext?"
         },
         {
             "source": "/tutorials/posthog-for-vuejs",
@@ -2044,148 +1994,148 @@
             "destination": "/blog/categories/startups"
         },
         {
-            "source": "/docs/integrate/badge",
-            "destination": "/docs/contribute/badge"
+            "source": "/docs/integrate/badge:ext(\\.md)?",
+            "destination": "/docs/contribute/badge:ext?"
         },
         {
             "source": "/blog/introduction-to-customer-retention",
             "destination": "/blog/customer-churn-analysis-guide"
         },
         {
-            "source": "/docs/getting-started/cloud",
-            "destination": "/docs/getting-started/install"
+            "source": "/docs/getting-started/cloud:ext(\\.md)?",
+            "destination": "/docs/getting-started/install:ext?"
         },
         {
-            "source": "/docs/getting-started/start-here",
-            "destination": "/docs/getting-started/install"
+            "source": "/docs/getting-started/start-here:ext(\\.md)?",
+            "destination": "/docs/getting-started/install:ext?"
         },
         {
-            "source": "/docs/integrate/ingest-live-data",
-            "destination": "/docs/getting-started/send-events"
+            "source": "/docs/integrate/ingest-live-data:ext(\\.md)?",
+            "destination": "/docs/getting-started/send-events:ext?"
         },
         {
-            "source": "/docs/self-host/open-source/deployment",
-            "destination": "/docs/self-host"
+            "source": "/docs/self-host/open-source/deployment:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/integrate/android",
-            "destination": "/docs/libraries/android"
+            "source": "/docs/integrate/android:ext(\\.md)?",
+            "destination": "/docs/libraries/android:ext?"
         },
         {
-            "source": "/docs/integrate/api",
-            "destination": "/docs/libraries/api"
+            "source": "/docs/integrate/api:ext(\\.md)?",
+            "destination": "/docs/libraries/api:ext?"
         },
         {
-            "source": "/docs/integrate/curl",
-            "destination": "/docs/libraries/curl"
+            "source": "/docs/integrate/curl:ext(\\.md)?",
+            "destination": "/docs/libraries/curl:ext?"
         },
         {
-            "source": "/docs/integrate/elixir",
-            "destination": "/docs/libraries/elixir"
+            "source": "/docs/integrate/elixir:ext(\\.md)?",
+            "destination": "/docs/libraries/elixir:ext?"
         },
         {
-            "source": "/docs/integrate/flutter",
-            "destination": "/docs/libraries/flutter"
+            "source": "/docs/integrate/flutter:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter:ext?"
         },
         {
-            "source": "/docs/integrate/go",
-            "destination": "/docs/libraries/go"
+            "source": "/docs/integrate/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go:ext?"
         },
         {
-            "source": "/docs/integrate/ios",
-            "destination": "/docs/libraries/ios"
+            "source": "/docs/integrate/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
-            "source": "/docs/integrate/java",
-            "destination": "/docs/libraries/java"
+            "source": "/docs/integrate/java:ext(\\.md)?",
+            "destination": "/docs/libraries/java:ext?"
         },
         {
-            "source": "/docs/integrate/js",
-            "destination": "/docs/libraries/js"
+            "source": "/docs/integrate/js:ext(\\.md)?",
+            "destination": "/docs/libraries/js:ext?"
         },
         {
-            "source": "/docs/integrate/node",
-            "destination": "/docs/libraries/node"
+            "source": "/docs/integrate/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node:ext?"
         },
         {
-            "source": "/docs/integrate/php",
-            "destination": "/docs/libraries/php"
+            "source": "/docs/integrate/php:ext(\\.md)?",
+            "destination": "/docs/libraries/php:ext?"
         },
         {
-            "source": "/docs/integrate/python",
-            "destination": "/docs/libraries/python"
+            "source": "/docs/integrate/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?"
         },
         {
-            "source": "/docs/integrate/react",
-            "destination": "/docs/libraries/react"
+            "source": "/docs/integrate/react:ext(\\.md)?",
+            "destination": "/docs/libraries/react:ext?"
         },
         {
-            "source": "/docs/integrate/react-native",
-            "destination": "/docs/libraries/react-native"
+            "source": "/docs/integrate/react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native:ext?"
         },
         {
-            "source": "/docs/integrate/ruby",
-            "destination": "/docs/libraries/ruby"
+            "source": "/docs/integrate/ruby:ext(\\.md)?",
+            "destination": "/docs/libraries/ruby:ext?"
         },
         {
-            "source": "/docs/integrate/rust",
-            "destination": "/docs/libraries/rust"
+            "source": "/docs/integrate/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust:ext?"
         },
         {
-            "source": "/docs/integrate/identifying-users",
-            "destination": "/docs/product-analytics/identify"
+            "source": "/docs/integrate/identifying-users:ext(\\.md)?",
+            "destination": "/docs/product-analytics/identify:ext?"
         },
         {
-            "source": "/docs/integrate/user-properties",
-            "destination": "/docs/product-analytics/user-properties"
+            "source": "/docs/integrate/user-properties:ext(\\.md)?",
+            "destination": "/docs/product-analytics/user-properties:ext?"
         },
         {
-            "source": "/docs/data/user-properties",
-            "destination": "/docs/product-analytics/user-properties"
+            "source": "/docs/data/user-properties:ext(\\.md)?",
+            "destination": "/docs/product-analytics/user-properties:ext?"
         },
         {
-            "source": "/docs/product-analytics/user-properties",
-            "destination": "/docs/product-analytics/person-properties"
+            "source": "/docs/product-analytics/user-properties:ext(\\.md)?",
+            "destination": "/docs/product-analytics/person-properties:ext?"
         },
         {
-            "source": "/docs/product-analytics/start",
-            "destination": "/docs/getting-started/send-events"
+            "source": "/docs/product-analytics/start:ext(\\.md)?",
+            "destination": "/docs/getting-started/send-events:ext?"
         },
         {
-            "source": "/docs/product-analytics/web-vitals",
-            "destination": "/docs/web-analytics/web-vitals"
+            "source": "/docs/product-analytics/web-vitals:ext(\\.md)?",
+            "destination": "/docs/web-analytics/web-vitals:ext?"
         },
         {
-            "source": "/docs/getting-started/user-properties",
-            "destination": "/docs/getting-started/person-properties"
+            "source": "/docs/getting-started/user-properties:ext(\\.md)?",
+            "destination": "/docs/getting-started/person-properties:ext?"
         },
         {
-            "source": "/docs/feature-flags/multivariate-flags",
-            "destination": "/docs/feature-flags/creating-feature-flags"
+            "source": "/docs/feature-flags/multivariate-flags:ext(\\.md)?",
+            "destination": "/docs/feature-flags/creating-feature-flags:ext?"
         },
         {
             "source": "/docs/feature-flags/libraries",
             "destination": "/docs/feature-flags/"
         },
         {
-            "source": "/docs/feature-flags/manual",
-            "destination": "/docs/feature-flags/installation"
+            "source": "/docs/feature-flags/manual:ext(\\.md)?",
+            "destination": "/docs/feature-flags/installation:ext?"
         },
         {
-            "source": "/docs/feature-flags/rollout-strategies",
-            "destination": "/docs/feature-flags/creating-feature-flags"
+            "source": "/docs/feature-flags/rollout-strategies:ext(\\.md)?",
+            "destination": "/docs/feature-flags/creating-feature-flags:ext?"
         },
         {
-            "source": "/docs/feature-flags/payloads",
-            "destination": "/docs/feature-flags/creating-feature-flags"
+            "source": "/docs/feature-flags/payloads:ext(\\.md)?",
+            "destination": "/docs/feature-flags/creating-feature-flags:ext?"
         },
         {
-            "source": "/docs/feature-flags/evaluation-tags",
-            "destination": "/docs/feature-flags/evaluation-contexts"
+            "source": "/docs/feature-flags/evaluation-tags:ext(\\.md)?",
+            "destination": "/docs/feature-flags/evaluation-contexts:ext?"
         },
         {
-            "source": "/docs/feature-flags/evaluation-environments",
-            "destination": "/docs/feature-flags/evaluation-contexts"
+            "source": "/docs/feature-flags/evaluation-environments:ext(\\.md)?",
+            "destination": "/docs/feature-flags/evaluation-contexts:ext?"
         },
         {
             "source": "/tutorials/evaluation-runtimes-and-tags",
@@ -2196,113 +2146,108 @@
             "destination": "/tutorials/evaluation-runtimes-and-contexts"
         },
         {
-            "source": "/docs/integrate",
-            "destination": "/docs/getting-started/install"
+            "source": "/docs/integrate:ext(\\.md)?",
+            "destination": "/docs/getting-started/install:ext?"
         },
         {
-            "source": "/docs/integrate/ingest-historic-data",
-            "destination": "/docs/migrate/ingest-historic-data"
+            "source": "/docs/integrate/ingest-historic-data:ext(\\.md)?",
+            "destination": "/docs/migrate/ingest-historic-data:ext?"
         },
         {
-            "source": "/docs/migrate/ingest-historic-data",
-            "destination": "/docs/migrate"
+            "source": "/docs/migrate/ingest-historic-data:ext(\\.md)?",
+            "destination": "/docs/migrate:ext?"
         },
         {
             "source": "/blog/categories/hogmail",
             "destination": "/blog/categories/newsletter"
         },
         {
-            "source": "/docs/integrate/third-party/docusaurus",
-            "destination": "/docs/libraries/docusaurus"
+            "source": "/docs/integrate/third-party/docusaurus:ext(\\.md)?",
+            "destination": "/docs/libraries/docusaurus:ext?"
         },
         {
-            "source": "/docs/integrate/third-party/gatsby",
-            "destination": "/docs/libraries/gatsby"
+            "source": "/docs/integrate/third-party/gatsby:ext(\\.md)?",
+            "destination": "/docs/libraries/gatsby:ext?"
         },
         {
-            "source": "/docs/integrate/third-party/google-tag-manager",
-            "destination": "/docs/libraries/google-tag-manager"
+            "source": "/docs/integrate/third-party/google-tag-manager:ext(\\.md)?",
+            "destination": "/docs/libraries/google-tag-manager:ext?"
         },
         {
-            "source": "/docs/experiments/manual",
-            "destination": "/docs/experiments/start-here"
+            "source": "/docs/experiments/manual:ext(\\.md)?",
+            "destination": "/docs/experiments/start-here:ext?"
         },
         {
-            "source": "/docs/experiments/new-experimentation-engine",
-            "destination": "/docs/experiments/start-here"
+            "source": "/docs/experiments/new-experimentation-engine:ext(\\.md)?",
+            "destination": "/docs/experiments/start-here:ext?"
         },
         {
-            "source": "/docs/experiments/under-the-hood",
-            "destination": "/docs/experiments/experiment-significance"
+            "source": "/docs/experiments/under-the-hood:ext(\\.md)?",
+            "destination": "/docs/experiments/experiment-significance:ext?"
         },
         {
-            "source": "/docs/experiments/significance",
-            "destination": "/docs/experiments/experiment-significance"
+            "source": "/docs/experiments/significance:ext(\\.md)?",
+            "destination": "/docs/experiments/experiment-significance:ext?"
         },
         {
-            "source": "/docs/experiments/statistics",
-            "destination": "/docs/experiments/statistics-bayesian"
+            "source": "/docs/experiments/statistics:ext(\\.md)?",
+            "destination": "/docs/experiments/statistics-bayesian:ext?"
         },
         {
-            "source": "/docs/session-replay/manual",
-            "destination": "/docs/session-replay/installation"
+            "source": "/docs/session-replay/manual:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation:ext?"
         },
         {
-            "source": "/docs/session-replay/search-replays-mcp",
-            "destination": "/docs/session-replay/surfaces/mcp",
-            "statusCode": 301
+            "source": "/docs/session-replay/data-retention:ext(\\.md)?",
+            "destination": "/docs/session-replay/recording-retention:ext?"
         },
         {
-            "source": "/docs/session-replay/data-retention",
-            "destination": "/docs/session-replay/recording-retention"
+            "source": "/docs/session-replay/_snippets/react-native-installation:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation/react-native:ext?"
         },
         {
-            "source": "/docs/session-replay/_snippets/react-native-installation",
-            "destination": "/docs/session-replay/installation/react-native"
+            "source": "/docs/features/feature-flags:ext(\\.md)?",
+            "destination": "/docs/feature-flags:ext?"
         },
         {
-            "source": "/docs/features/feature-flags",
-            "destination": "/docs/feature-flags"
+            "source": "/docs/user-guides/feature-flags:ext(\\.md)?",
+            "destination": "/docs/feature-flags:ext?"
         },
         {
-            "source": "/docs/user-guides/feature-flags",
-            "destination": "/docs/feature-flags"
-        },
-        {
-            "source": "/docs/feature-flags/manual",
-            "destination": "/docs/feature-flags"
+            "source": "/docs/feature-flags/manual:ext(\\.md)?",
+            "destination": "/docs/feature-flags:ext?"
         },
         {
             "source": "/manual/group-analytics",
             "destination": "/docs/product-analytics/group-analytics"
         },
         {
-            "source": "/docs/product-analytics/hogql",
-            "destination": "/docs/hogql"
+            "source": "/docs/product-analytics/hogql:ext(\\.md)?",
+            "destination": "/docs/hogql:ext?"
         },
         {
-            "source": "/docs/hogql/guide",
-            "destination": "/docs/product-analytics/sql"
+            "source": "/docs/hogql/guide:ext(\\.md)?",
+            "destination": "/docs/product-analytics/sql:ext?"
         },
         {
             "source": "/docs/hogql/:path*",
             "destination": "/docs/sql/:path*"
         },
         {
-            "source": "/docs/product-analytics/sql",
-            "destination": "/docs/data-warehouse/sql"
+            "source": "/docs/product-analytics/sql:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/sql:ext?"
         },
         {
-            "source": "/docs/sql/variables",
-            "destination": "/docs/data-warehouse/sql/variables"
+            "source": "/docs/sql/variables:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/sql/variables:ext?"
         },
         {
             "source": "/manual/toolbar",
             "destination": "/docs/toolbar"
         },
         {
-            "source": "/docs/product-analytics/toolbar",
-            "destination": "/docs/toolbar"
+            "source": "/docs/product-analytics/toolbar:ext(\\.md)?",
+            "destination": "/docs/toolbar:ext?"
         },
         {
             "source": "/manual/application-settings",
@@ -2365,8 +2310,8 @@
             "destination": "/docs/support-options"
         },
         {
-            "source": "/docs/support/zendesk-import",
-            "destination": "/docs/support/imports/zendesk",
+            "source": "/docs/support/zendesk-import:ext(\\.md)?",
+            "destination": "/docs/support/imports/zendesk:ext?",
             "statusCode": 301
         },
         {
@@ -2379,36 +2324,36 @@
             "destination": "/docs/glossary"
         },
         {
-            "source": "/docs/integrate/browser-extension",
-            "destination": "/docs/advanced/browser-extension"
+            "source": "/docs/integrate/browser-extension:ext(\\.md)?",
+            "destination": "/docs/advanced/browser-extension:ext?"
         },
         {
-            "source": "/docs/integrate/cdp",
-            "destination": "/docs/advanced/cdp"
+            "source": "/docs/integrate/cdp:ext(\\.md)?",
+            "destination": "/docs/advanced/cdp:ext?"
         },
         {
-            "source": "/docs/integrate/proxy",
-            "destination": "/docs/advanced/proxy"
+            "source": "/docs/integrate/proxy:ext(\\.md)?",
+            "destination": "/docs/advanced/proxy:ext?"
         },
         {
-            "source": "/docs/advanced/proxy/managed-reverse-proxy",
-            "destination": "/docs/advanced/proxy"
+            "source": "/docs/advanced/proxy/managed-reverse-proxy:ext(\\.md)?",
+            "destination": "/docs/advanced/proxy:ext?"
         },
         {
-            "source": "/docs/advanced/proxy/troubleshooting",
-            "destination": "/docs/advanced/proxy/proxy-reference"
+            "source": "/docs/advanced/proxy/troubleshooting:ext(\\.md)?",
+            "destination": "/docs/advanced/proxy/proxy-reference:ext?"
         },
         {
-            "source": "/docs/integrate/badge",
-            "destination": "/docs/contribute/badge"
+            "source": "/docs/integrate/badge:ext(\\.md)?",
+            "destination": "/docs/contribute/badge:ext?"
         },
         {
-            "source": "/docs/integrate/libraries",
-            "destination": "/docs/libraries"
+            "source": "/docs/integrate/libraries:ext(\\.md)?",
+            "destination": "/docs/libraries:ext?"
         },
         {
-            "source": "/docs/data/notifications-and-alerts",
-            "destination": "/docs/product-analytics/subscriptions"
+            "source": "/docs/data/notifications-and-alerts:ext(\\.md)?",
+            "destination": "/docs/product-analytics/subscriptions:ext?"
         },
         {
             "source": "/handbook/engineering/oncall-rotation",
@@ -2419,32 +2364,32 @@
             "destination": "/handbook/engineering/on-call-rotation"
         },
         {
-            "source": "/docs/integrate/next-js",
-            "destination": "/docs/libraries/next-js"
+            "source": "/docs/integrate/next-js:ext(\\.md)?",
+            "destination": "/docs/libraries/next-js:ext?"
         },
         {
-            "source": "/docs/integrate/sentry",
-            "destination": "/docs/error-tracking"
+            "source": "/docs/integrate/sentry:ext(\\.md)?",
+            "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/integrate/rudderstack",
-            "destination": "/docs/libraries/rudderstack"
+            "source": "/docs/integrate/rudderstack:ext(\\.md)?",
+            "destination": "/docs/libraries/rudderstack:ext?"
         },
         {
-            "source": "/docs/integrate/segment",
-            "destination": "/docs/libraries/segment"
+            "source": "/docs/integrate/segment:ext(\\.md)?",
+            "destination": "/docs/libraries/segment:ext?"
         },
         {
-            "source": "/docs/sdks/ios",
-            "destination": "/docs/libraries/ios"
+            "source": "/docs/sdks/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios:ext?"
         },
         {
             "source": "/signup/cloud/enterprise",
             "destination": "/contact-sales"
         },
         {
-            "source": "/docs/feature-flags/bootstrapping-and-local-evaluation",
-            "destination": "/docs/feature-flags/bootstrapping"
+            "source": "/docs/feature-flags/bootstrapping-and-local-evaluation:ext(\\.md)?",
+            "destination": "/docs/feature-flags/bootstrapping:ext?"
         },
         {
             "source": "/products/product-analytics",
@@ -2459,24 +2404,24 @@
             "destination": "/docs/session-replay/manual"
         },
         {
-            "source": "/docs/session-recording",
-            "destination": "/docs/session-replay"
+            "source": "/docs/session-recording:ext(\\.md)?",
+            "destination": "/docs/session-replay:ext?"
         },
         {
-            "source": "/docs/session-replay/configure",
-            "destination": "/docs/session-replay/manual"
+            "source": "/docs/session-replay/configure:ext(\\.md)?",
+            "destination": "/docs/session-replay/manual:ext?"
         },
         {
-            "source": "/docs/session-replay/cutting-costs",
-            "destination": "/docs/session-replay/how-to-control-which-sessions-you-record"
+            "source": "/docs/session-replay/cutting-costs:ext(\\.md)?",
+            "destination": "/docs/session-replay/how-to-control-which-sessions-you-record:ext?"
         },
         {
-            "source": "/docs/error-tracking/debugging-with-mcp",
-            "destination": "/docs/error-tracking/surfaces/mcp"
+            "source": "/docs/error-tracking/debugging-with-mcp:ext(\\.md)?",
+            "destination": "/docs/error-tracking/surfaces/mcp:ext?"
         },
         {
-            "source": "/docs/error-tracking/debug-errors-mcp",
-            "destination": "/docs/error-tracking/surfaces/mcp"
+            "source": "/docs/error-tracking/debug-errors-mcp:ext(\\.md)?",
+            "destination": "/docs/error-tracking/surfaces/mcp:ext?"
         },
         {
             "source": "/docs/error-tracking/fix-with-ai-prompts",
@@ -2484,8 +2429,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/support/surfaces/code",
-            "destination": "/docs/support/surfaces/desktop",
+            "source": "/docs/support/surfaces/code:ext(\\.md)?",
+            "destination": "/docs/support/surfaces/desktop:ext?",
             "statusCode": 301
         },
         {
@@ -2494,8 +2439,8 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/logs/debugging-with-mcp",
-            "destination": "/docs/logs/debug-logs-mcp"
+            "source": "/docs/logs/debugging-with-mcp:ext(\\.md)?",
+            "destination": "/docs/logs/debug-logs-mcp:ext?"
         },
         {
             "source": "/handbook/small-teams/experimentation",
@@ -2512,10 +2457,6 @@
         {
             "source": "/questions/topic/session-recording",
             "destination": "/questions/topic/session-replay"
-        },
-        {
-            "source": "/questions/topic/ai-observability",
-            "destination": "/questions/topic/llm-analytics"
         },
         {
             "source": "/blog/customer-churn-analysis-guide",
@@ -2542,16 +2483,12 @@
             "destination": "/experiments"
         },
         {
-            "source": "/ai-observability/features",
-            "destination": "/ai-observability#top-features"
-        },
-        {
             "source": "/product-os/features",
             "destination": "/product-os"
         },
         {
-            "source": "/docs/integrate/webhooks",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrate/webhooks:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
             "source": "/roadmap/changelog",
@@ -2578,8 +2515,8 @@
             "destination": "/changelog"
         },
         {
-            "source": "/docs/integrate/webhooks",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/integrate/webhooks:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
             "source": "/apps/advanced-geoip",
@@ -2834,80 +2771,80 @@
             "destination": "/templates/user-interview"
         },
         {
-            "source": "/docs/apps/replicator",
-            "destination": "/docs/cdp/replicator"
+            "source": "/docs/apps/replicator:ext(\\.md)?",
+            "destination": "/docs/cdp/replicator:ext?"
         },
         {
-            "source": "/docs/apps/advanced-geoip",
-            "destination": "/docs/cdp/geoip-enrichment"
+            "source": "/docs/apps/advanced-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/geoip-enrichment:ext?"
         },
         {
-            "source": "/docs/cdp/advanced-geoip",
-            "destination": "/docs/cdp/geoip-enrichment"
+            "source": "/docs/cdp/advanced-geoip:ext(\\.md)?",
+            "destination": "/docs/cdp/geoip-enrichment:ext?"
         },
         {
-            "source": "/docs/apps/airbyte-export",
-            "destination": "/docs/cdp/airbyte-export"
+            "source": "/docs/apps/airbyte-export:ext(\\.md)?",
+            "destination": "/docs/cdp/airbyte-export:ext?"
         },
         {
-            "source": "/docs/apps/amazon-kinesis",
-            "destination": "/docs/cdp/amazon-kinesis"
+            "source": "/docs/apps/amazon-kinesis:ext(\\.md)?",
+            "destination": "/docs/cdp/amazon-kinesis:ext?"
         },
         {
-            "source": "/docs/apps/automatic-cohort-creator",
-            "destination": "/docs/product-analytics/group-analytics"
+            "source": "/docs/apps/automatic-cohort-creator:ext(\\.md)?",
+            "destination": "/docs/product-analytics/group-analytics:ext?"
         },
         {
-            "source": "/docs/apps/avo-inspector",
-            "destination": "/docs/cdp/avo-inspector"
+            "source": "/docs/apps/avo-inspector:ext(\\.md)?",
+            "destination": "/docs/cdp/avo-inspector:ext?"
         },
         {
-            "source": "/docs/apps/bigquery-export",
-            "destination": "/docs/cdp/bigquery-export"
+            "source": "/docs/apps/bigquery-export:ext(\\.md)?",
+            "destination": "/docs/cdp/bigquery-export:ext?"
         },
         {
-            "source": "/docs/apps/bitbucket-release-tracker",
-            "destination": "/docs/cdp/bitbucket-release-tracker"
+            "source": "/docs/apps/bitbucket-release-tracker:ext(\\.md)?",
+            "destination": "/docs/cdp/bitbucket-release-tracker:ext?"
         },
         {
-            "source": "/docs/apps/currency-normalization",
-            "destination": "/docs/cdp"
+            "source": "/docs/apps/currency-normalization:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/apps/customer-io",
-            "destination": "/docs/cdp/customer-io"
+            "source": "/docs/apps/customer-io:ext(\\.md)?",
+            "destination": "/docs/cdp/customer-io:ext?"
         },
         {
             "source": "/docs/apps/databricks",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/downsampling",
-            "destination": "/docs/cdp/downsampling"
+            "source": "/docs/apps/downsampling:ext(\\.md)?",
+            "destination": "/docs/cdp/downsampling:ext?"
         },
         {
             "source": "/docs/apps/email-scoring",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/engage-connector",
-            "destination": "/docs/cdp/engage-connector"
+            "source": "/docs/apps/engage-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/engage-connector:ext?"
         },
         {
-            "source": "/docs/apps/event-sequence-timer",
-            "destination": "/docs/cdp/event-sequence-timer"
+            "source": "/docs/apps/event-sequence-timer:ext(\\.md)?",
+            "destination": "/docs/cdp/event-sequence-timer:ext?"
         },
         {
-            "source": "/docs/apps/filter-out",
-            "destination": "/docs/cdp/filter-out"
+            "source": "/docs/apps/filter-out:ext(\\.md)?",
+            "destination": "/docs/cdp/filter-out:ext?"
         },
         {
-            "source": "/docs/apps/first-time-event-tracker",
-            "destination": "/docs/cdp/first-time-event-tracker"
+            "source": "/docs/apps/first-time-event-tracker:ext(\\.md)?",
+            "destination": "/docs/cdp/first-time-event-tracker:ext?"
         },
         {
-            "source": "/docs/apps/geoip-enrichment",
-            "destination": "/docs/cdp/geoip-enrichment"
+            "source": "/docs/apps/geoip-enrichment:ext(\\.md)?",
+            "destination": "/docs/cdp/geoip-enrichment:ext?"
         },
         {
             "source": "/docs/apps/github-release-tracker",
@@ -2922,164 +2859,164 @@
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/google-cloud-export",
-            "destination": "/docs/cdp/google-cloud-export"
+            "source": "/docs/apps/google-cloud-export:ext(\\.md)?",
+            "destination": "/docs/cdp/google-cloud-export:ext?"
         },
         {
-            "source": "/docs/apps/google-pub-sub-connector",
-            "destination": "/docs/cdp/google-pub-sub-connector"
+            "source": "/docs/apps/google-pub-sub-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/google-pub-sub-connector:ext?"
         },
         {
             "source": "/docs/apps/heartbeat",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/hubspot-connector",
-            "destination": "/docs/cdp/hubspot-connector"
+            "source": "/docs/apps/hubspot-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/hubspot-connector:ext?"
         },
         {
             "source": "/docs/apps/ingestion-alert",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/intercom",
-            "destination": "/docs/cdp/intercom"
+            "source": "/docs/apps/intercom:ext(\\.md)?",
+            "destination": "/docs/cdp/intercom:ext?"
         },
         {
-            "source": "/docs/apps/laudspeaker-connector",
-            "destination": "/docs/cdp/laudspeaker-connector"
+            "source": "/docs/apps/laudspeaker-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/laudspeaker-connector:ext?"
         },
         {
-            "source": "/docs/apps/memphis-exporter",
-            "destination": "/docs/cdp/memphis-exporter"
+            "source": "/docs/apps/memphis-exporter:ext(\\.md)?",
+            "destination": "/docs/cdp/memphis-exporter:ext?"
         },
         {
-            "source": "/docs/apps/n8n",
-            "destination": "/docs/cdp/n8n"
+            "source": "/docs/apps/n8n:ext(\\.md)?",
+            "destination": "/docs/cdp/n8n:ext?"
         },
         {
             "source": "/docs/apps/orbit",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/outfunnel-exporter",
-            "destination": "/docs/cdp/outfunnel-exporter"
+            "source": "/docs/apps/outfunnel-exporter:ext(\\.md)?",
+            "destination": "/docs/cdp/outfunnel-exporter:ext?"
         },
         {
-            "source": "/docs/apps/pace-integration",
-            "destination": "/docs/cdp/pace-integration"
+            "source": "/docs/apps/pace-integration:ext(\\.md)?",
+            "destination": "/docs/cdp/pace-integration:ext?"
         },
         {
-            "source": "/docs/apps/pagerduty-connector",
-            "destination": "/docs/cdp"
+            "source": "/docs/apps/pagerduty-connector:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/docs/apps/patterns-connector",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/postgres-export",
-            "destination": "/docs/cdp/postgres-export"
+            "source": "/docs/apps/postgres-export:ext(\\.md)?",
+            "destination": "/docs/cdp/postgres-export:ext?"
         },
         {
-            "source": "/docs/apps/property-filter",
-            "destination": "/docs/cdp/property-filter"
+            "source": "/docs/apps/property-filter:ext(\\.md)?",
+            "destination": "/docs/cdp/property-filter:ext?"
         },
         {
             "source": "/docs/apps/property-flattener",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/redshift-export",
-            "destination": "/docs/cdp/redshift-export"
+            "source": "/docs/apps/redshift-export:ext(\\.md)?",
+            "destination": "/docs/cdp/redshift-export:ext?"
         },
         {
-            "source": "/docs/apps/replicator",
-            "destination": "/docs/cdp/replicator"
+            "source": "/docs/apps/replicator:ext(\\.md)?",
+            "destination": "/docs/cdp/replicator:ext?"
         },
         {
-            "source": "/docs/apps/route-censor",
-            "destination": "/docs/cdp/route-censor"
+            "source": "/docs/apps/route-censor:ext(\\.md)?",
+            "destination": "/docs/cdp/route-censor:ext?"
         },
         {
-            "source": "/docs/apps/rudderstack-export",
-            "destination": "/docs/cdp/rudderstack-export"
+            "source": "/docs/apps/rudderstack-export:ext(\\.md)?",
+            "destination": "/docs/cdp/rudderstack-export:ext?"
         },
         {
-            "source": "/docs/apps/rudderstack-import",
-            "destination": "/docs/cdp/rudderstack-import"
+            "source": "/docs/apps/rudderstack-import:ext(\\.md)?",
+            "destination": "/docs/cdp/rudderstack-import:ext?"
         },
         {
-            "source": "/docs/apps/s3-export",
-            "destination": "/docs/cdp/s3-export"
+            "source": "/docs/apps/s3-export:ext(\\.md)?",
+            "destination": "/docs/cdp/s3-export:ext?"
         },
         {
-            "source": "/docs/apps/salesforce-connector",
-            "destination": "/docs/cdp/salesforce-connector"
+            "source": "/docs/apps/salesforce-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/salesforce-connector:ext?"
         },
         {
-            "source": "/docs/apps/schema-enforcer",
-            "destination": "/docs/cdp/schema-enforcer"
+            "source": "/docs/apps/schema-enforcer:ext(\\.md)?",
+            "destination": "/docs/cdp/schema-enforcer:ext?"
         },
         {
-            "source": "/docs/apps/segment",
-            "destination": "/docs/cdp/segment"
+            "source": "/docs/apps/segment:ext(\\.md)?",
+            "destination": "/docs/cdp/segment:ext?"
         },
         {
-            "source": "/docs/apps/semver-flattener",
-            "destination": "/docs/cdp/semver-flattener"
+            "source": "/docs/apps/semver-flattener:ext(\\.md)?",
+            "destination": "/docs/cdp/semver-flattener:ext?"
         },
         {
-            "source": "/docs/apps/sendgrid-connector",
-            "destination": "/docs/cdp/sendgrid-connector"
+            "source": "/docs/apps/sendgrid-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/sendgrid-connector:ext?"
         },
         {
-            "source": "/docs/apps/sentry-connector",
-            "destination": "/docs/error-tracking"
+            "source": "/docs/apps/sentry-connector:ext(\\.md)?",
+            "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/apps/shopify",
-            "destination": "/docs/cdp"
+            "source": "/docs/apps/shopify:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/apps/snowflake-export",
-            "destination": "/docs/cdp/snowflake-export"
+            "source": "/docs/apps/snowflake-export:ext(\\.md)?",
+            "destination": "/docs/cdp/snowflake-export:ext?"
         },
         {
-            "source": "/docs/apps/stripe-connector",
-            "destination": "/docs/cdp/stripe-connector"
+            "source": "/docs/apps/stripe-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/stripe-connector:ext?"
         },
         {
-            "source": "/docs/apps/taxonomy-standardizer",
-            "destination": "/docs/cdp/taxonomy-standardizer"
+            "source": "/docs/apps/taxonomy-standardizer:ext(\\.md)?",
+            "destination": "/docs/cdp/taxonomy-standardizer:ext?"
         },
         {
-            "source": "/docs/apps/timestamp-parser",
-            "destination": "/docs/cdp/timestamp-parser"
+            "source": "/docs/apps/timestamp-parser:ext(\\.md)?",
+            "destination": "/docs/cdp/timestamp-parser:ext?"
         },
         {
-            "source": "/docs/apps/twitter-followers",
-            "destination": "/docs/cdp/twitter-followers"
+            "source": "/docs/apps/twitter-followers:ext(\\.md)?",
+            "destination": "/docs/cdp/twitter-followers:ext?"
         },
         {
             "source": "/docs/apps/unduplicator",
             "destination": "/docs/cdp/"
         },
         {
-            "source": "/docs/apps/url-normalizer",
-            "destination": "/docs/cdp/url-normalizer"
+            "source": "/docs/apps/url-normalizer:ext(\\.md)?",
+            "destination": "/docs/cdp/url-normalizer:ext?"
         },
         {
-            "source": "/docs/apps/url-query",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+            "source": "/docs/apps/url-query:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
         },
         {
-            "source": "/docs/apps/user-agent-populator",
-            "destination": "/docs/cdp/user-agent-populator"
+            "source": "/docs/apps/user-agent-populator:ext(\\.md)?",
+            "destination": "/docs/cdp/user-agent-populator:ext?"
         },
         {
-            "source": "/docs/apps/variance-connector",
-            "destination": "/docs/cdp/variance-connector"
+            "source": "/docs/apps/variance-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/variance-connector:ext?"
         },
         {
             "source": "/docs/apps/zapier-connector",
@@ -3090,8 +3027,8 @@
             "destination": "/docs/product-analytics/identify"
         },
         {
-            "source": "/docs/data/identify",
-            "destination": "/docs/product-analytics/identify"
+            "source": "/docs/data/identify:ext(\\.md)?",
+            "destination": "/docs/product-analytics/identify:ext?"
         },
         {
             "source": "/questions/how-do-i-trigger-custom-pageview",
@@ -3102,36 +3039,36 @@
             "destination": "/docs/data/events"
         },
         {
-            "source": "/docs/data/data-warehouse",
-            "destination": "/docs/data-warehouse"
+            "source": "/docs/data/data-warehouse:ext(\\.md)?",
+            "destination": "/docs/data-warehouse:ext?"
         },
         {
-            "source": "/docs/apps/zendesk-connector",
-            "destination": "/docs/cdp/zendesk-connector"
+            "source": "/docs/apps/zendesk-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/zendesk-connector:ext?"
         },
         {
-            "source": "/docs/data/autocapture",
-            "destination": "/docs/product-analytics/autocapture"
+            "source": "/docs/data/autocapture:ext(\\.md)?",
+            "destination": "/docs/product-analytics/autocapture:ext?"
         },
         {
-            "source": "/docs/apps/enabling",
-            "destination": "/docs/apps"
+            "source": "/docs/apps/enabling:ext(\\.md)?",
+            "destination": "/docs/apps:ext?"
         },
         {
-            "source": "/docs/integrations",
-            "destination": "/docs/frameworks"
+            "source": "/docs/integrations:ext(\\.md)?",
+            "destination": "/docs/frameworks:ext?"
         },
         {
             "source": "/blog/how-to-product-market-fit",
             "destination": "/blog/product-market-fit-game"
         },
         {
-            "source": "/docs/cdp/zapier-connector",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/zapier-connector:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/cdp/amazon-kinesis",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/amazon-kinesis:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/docs/cdp/github-release-tracker",
@@ -3142,20 +3079,20 @@
             "destination": "/tutorials/github-star-tracker"
         },
         {
-            "source": "/docs/cdp/twitter-followers",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/twitter-followers:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/cdp/gitlab-release-tracker",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/gitlab-release-tracker:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/handbook/growth/marketing/Customer-personas",
             "destination": "/handbook/marketing"
         },
         {
-            "source": "/docs/cdp/bitbucket-release-tracker",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/bitbucket-release-tracker:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/handbook/company/strategy",
@@ -3170,12 +3107,12 @@
             "destination": "/handbook/story"
         },
         {
-            "source": "/docs/product-direction",
-            "destination": "/handbook/which-products"
+            "source": "/docs/product-direction:ext(\\.md)?",
+            "destination": "/handbook/which-products:ext?"
         },
         {
-            "source": "/docs/posthog-direction",
-            "destination": "/handbook/story"
+            "source": "/docs/posthog-direction:ext(\\.md)?",
+            "destination": "/handbook/story:ext?"
         },
         {
             "source": "/guides",
@@ -3250,8 +3187,8 @@
             "destination": "/tutorials/embedded-analytics"
         },
         {
-            "source": "/docs/cdp/shopify",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/shopify:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/james",
@@ -3350,32 +3287,32 @@
             "destination": "/community/profiles/30206"
         },
         {
-            "source": "/docs/surveys/manual",
-            "destination": "/docs/surveys"
+            "source": "/docs/surveys/manual:ext(\\.md)?",
+            "destination": "/docs/surveys:ext?"
         },
         {
-            "source": "/docs/surveys/setup",
-            "destination": "/docs/surveys/installation"
+            "source": "/docs/surveys/setup:ext(\\.md)?",
+            "destination": "/docs/surveys/installation:ext?"
         },
         {
-            "source": "/docs/surveys/new",
-            "destination": "/docs/surveys/creating-surveys"
+            "source": "/docs/surveys/new:ext(\\.md)?",
+            "destination": "/docs/surveys/creating-surveys:ext?"
         },
         {
-            "source": "/docs/surveys/targeting",
-            "destination": "/docs/surveys/creating-surveys"
+            "source": "/docs/surveys/targeting:ext(\\.md)?",
+            "destination": "/docs/surveys/creating-surveys:ext?"
         },
         {
-            "source": "/docs/surveys/events",
-            "destination": "/docs/surveys/implementing-custom-surveys"
+            "source": "/docs/surveys/events:ext(\\.md)?",
+            "destination": "/docs/surveys/implementing-custom-surveys:ext?"
         },
         {
-            "source": "/docs/error-tracking/filter-and-search-issues",
-            "destination": "/docs/error-tracking/managing-issues"
+            "source": "/docs/error-tracking/filter-and-search-issues:ext(\\.md)?",
+            "destination": "/docs/error-tracking/managing-issues:ext?"
         },
         {
-            "source": "/docs/error-tracking/external-tracking",
-            "destination": "/docs/error-tracking/integrations"
+            "source": "/docs/error-tracking/external-tracking:ext(\\.md)?",
+            "destination": "/docs/error-tracking/integrations:ext?"
         },
         {
             "source": "/blog/how-we-do-hiring-and-hr-at-posthog",
@@ -3386,8 +3323,8 @@
             "destination": "/docs/api"
         },
         {
-            "source": "/docs/data/subscriptions",
-            "destination": "/docs/product-analytics/subscriptions"
+            "source": "/docs/data/subscriptions:ext(\\.md)?",
+            "destination": "/docs/product-analytics/subscriptions:ext?"
         },
         {
             "source": "/docs/apps/feedback-widget",
@@ -3402,36 +3339,36 @@
             "destination": "/templates/user-interview"
         },
         {
-            "source": "/docs/getting-started/estimating-usage-costs",
-            "destination": "/docs/billing/estimating-usage-costs"
+            "source": "/docs/getting-started/estimating-usage-costs:ext(\\.md)?",
+            "destination": "/docs/billing/estimating-usage-costs:ext?"
         },
         {
-            "source": "/docs/getting-started/actions-and-insights",
-            "destination": "/docs/data/actions"
+            "source": "/docs/getting-started/actions-and-insights:ext(\\.md)?",
+            "destination": "/docs/data/actions:ext?"
         },
         {
-            "source": "/docs/getting-started/person-properties",
-            "destination": "/docs/data/persons"
+            "source": "/docs/getting-started/person-properties:ext(\\.md)?",
+            "destination": "/docs/data/persons:ext?"
         },
         {
-            "source": "/docs/getting-started/group-analytics",
-            "destination": "/docs/product-analytics/group-analytics"
+            "source": "/docs/getting-started/group-analytics:ext(\\.md)?",
+            "destination": "/docs/product-analytics/group-analytics:ext?"
         },
         {
-            "source": "/docs/data/data-management",
-            "destination": "/docs/data"
+            "source": "/docs/data/data-management:ext(\\.md)?",
+            "destination": "/docs/data:ext?"
         },
         {
-            "source": "/docs/batch-exports",
-            "destination": "/docs/cdp/batch-exports"
+            "source": "/docs/batch-exports:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports:ext?"
         },
         {
-            "source": "/docs/batch-exports/s3",
-            "destination": "/docs/cdp/batch-exports/s3"
+            "source": "/docs/batch-exports/s3:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/s3:ext?"
         },
         {
-            "source": "/docs/batch-exports/snowflake",
-            "destination": "/docs/cdp/batch-exports/snowflake"
+            "source": "/docs/batch-exports/snowflake:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
         },
         {
             "source": "/blog/startup-golioth",
@@ -3450,8 +3387,8 @@
             "destination": "/spotlight/startup-inlang"
         },
         {
-            "source": "/docs/cdp/automatic-cohort-creator",
-            "destination": "/docs/product-analytics/group-analytics"
+            "source": "/docs/cdp/automatic-cohort-creator:ext(\\.md)?",
+            "destination": "/docs/product-analytics/group-analytics:ext?"
         },
         {
             "source": "/blog/asynchronous-remote-companies",
@@ -3466,48 +3403,48 @@
             "destination": "/founders/ceo-diary-4"
         },
         {
-            "source": "/docs/billing",
-            "destination": "/docs/billing/estimating-usage-costs"
+            "source": "/docs/billing:ext(\\.md)?",
+            "destination": "/docs/billing/estimating-usage-costs:ext?"
         },
         {
-            "source": "/docs/billing-and-payments",
-            "destination": "/docs/billing/estimating-usage-costs"
+            "source": "/docs/billing-and-payments:ext(\\.md)?",
+            "destination": "/docs/billing/estimating-usage-costs:ext?"
         },
         {
-            "source": "/docs/billing/annual-plans",
-            "destination": "/docs/billing/pre-paid-plans"
+            "source": "/docs/billing/annual-plans:ext(\\.md)?",
+            "destination": "/docs/billing/pre-paid-plans:ext?"
         },
         {
             "source": "/legal",
             "destination": "/terms"
         },
         {
-            "source": "/docs/getting-started/actions-and-insights",
-            "destination": "/docs/data/actions"
+            "source": "/docs/getting-started/actions-and-insights:ext(\\.md)?",
+            "destination": "/docs/data/actions:ext?"
         },
         {
-            "source": "/docs/getting-started/person-properties",
-            "destination": "/docs/data/persons"
+            "source": "/docs/getting-started/person-properties:ext(\\.md)?",
+            "destination": "/docs/data/persons:ext?"
         },
         {
-            "source": "/docs/getting-started/group-analytics",
-            "destination": "/docs/product-analytics/group-analytics"
+            "source": "/docs/getting-started/group-analytics:ext(\\.md)?",
+            "destination": "/docs/product-analytics/group-analytics:ext?"
         },
         {
-            "source": "/docs/data/data-management",
-            "destination": "/docs/data"
+            "source": "/docs/data/data-management:ext(\\.md)?",
+            "destination": "/docs/data:ext?"
         },
         {
-            "source": "/docs/batch-exports",
-            "destination": "/docs/cdp/batch-exports"
+            "source": "/docs/batch-exports:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports:ext?"
         },
         {
-            "source": "/docs/batch-exports/s3",
-            "destination": "/docs/cdp/batch-exports/s3"
+            "source": "/docs/batch-exports/s3:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/s3:ext?"
         },
         {
-            "source": "/docs/batch-exports/snowflake",
-            "destination": "/docs/cdp/batch-exports/snowflake"
+            "source": "/docs/batch-exports/snowflake:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
         },
         {
             "source": "/blog/startup-golioth",
@@ -3526,8 +3463,8 @@
             "destination": "/spotlight/startup-inlang"
         },
         {
-            "source": "/docs/cdp/automatic-cohort-creator",
-            "destination": "/docs/product-analytics/group-analytics"
+            "source": "/docs/cdp/automatic-cohort-creator:ext(\\.md)?",
+            "destination": "/docs/product-analytics/group-analytics:ext?"
         },
         {
             "source": "/blog/asynchronous-remote-companies",
@@ -3786,8 +3723,8 @@
             "destination": "/product-engineers/sql-for-analytics"
         },
         {
-            "source": "/docs/cdp/unduplicator",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/unduplicator:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/cdp/unduplicator",
@@ -3846,8 +3783,8 @@
             "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
-            "source": "/docs/migrate/migrate-broken-self-hosted",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/migrate/migrate-broken-self-hosted:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
             "source": "/docs/migrate/export-events",
@@ -3928,30 +3865,6 @@
         {
             "source": "/session-replay/questions",
             "destination": "/session-replay#questions"
-        },
-        {
-            "source": "/error-tracking/customers",
-            "destination": "/error-tracking"
-        },
-        {
-            "source": "/error-tracking/comparisons",
-            "destination": "/error-tracking#feature-comparison"
-        },
-        {
-            "source": "/error-tracking/documentation",
-            "destination": "/docs/error-tracking"
-        },
-        {
-            "source": "/error-tracking/tutorials",
-            "destination": "/error-tracking#tutorials"
-        },
-        {
-            "source": "/error-tracking/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/error-tracking/questions",
-            "destination": "/error-tracking#questions"
         },
         {
             "source": "/feature-flags/customers",
@@ -4054,34 +3967,6 @@
             "destination": "/experiments#questions"
         },
         {
-            "source": "/ai-observability/customers",
-            "destination": "/ai-observability"
-        },
-        {
-            "source": "/ai-observability/comparisons",
-            "destination": "/ai-observability#feature-comparison"
-        },
-        {
-            "source": "/ai-observability/documentation",
-            "destination": "/docs/ai-observability"
-        },
-        {
-            "source": "/ai-observability/tutorials",
-            "destination": "/docs/ai-observability/tutorials"
-        },
-        {
-            "source": "/ai-observability/roadmap",
-            "destination": "/roadmap"
-        },
-        {
-            "source": "/ai-observability/questions",
-            "destination": "/ai-observability#community"
-        },
-        {
-            "source": "/llm-analytics/pricing",
-            "destination": "/ai-observability/pricing"
-        },
-        {
             "source": "/handbook/what-is-posthog",
             "destination": "/handbook/why-does-posthog-exist"
         },
@@ -4126,156 +4011,156 @@
             "destination": "/founders/culture"
         },
         {
-            "source": "/docs/runbook/upgrading-posthog",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/upgrading-posthog:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/upgrade-notes",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/upgrade-notes:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/async-migrations",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/async-migrations:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/async-migrations/0001-events-sample-by",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/async-migrations/0001-events-sample-by:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/async-migrations/0002-events-sample-by",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/async-migrations/0002-events-sample-by:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/async-migrations/0003-fill-person-distinct-id2:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/backup",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/backup:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/debug-hanging-freezing-process:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/sharding-and-replication",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/sharding-and-replication:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/kafka-engine",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/kafka-engine:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/resize-disk",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/resize-disk:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/restore",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/restore:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/vertical-scaling",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/vertical-scaling:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/clickhouse/debugging-load",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/clickhouse/debugging-load:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/kafka",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/kafka:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/kafka/resize-disk",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/kafka/resize-disk:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/kafka/log-retention",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/kafka/log-retention:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/postgresql",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/postgresql:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/postgresql/resize-disk",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/postgresql/resize-disk:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/postgresql/long-migrations",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/postgresql/long-migrations:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/plugin-server",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/plugin-server:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/plugin-server/jobs",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/plugin-server/jobs:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/plugin-server/scheduled-tasks",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/plugin-server/scheduled-tasks:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/minio",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/minio:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/redis",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/redis:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/services/zookeeper",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/services/zookeeper:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/runbook/disaster-recovery",
-            "destination": "/docs/self-host"
+            "source": "/docs/runbook/disaster-recovery:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/self-host/configure/monitoring-with-grafana",
-            "destination": "/docs/self-host"
+            "source": "/docs/self-host/configure/monitoring-with-grafana:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/self-host/configure/using-altinity-cloud",
-            "destination": "/docs/self-host"
+            "source": "/docs/self-host/configure/using-altinity-cloud:ext(\\.md)?",
+            "destination": "/docs/self-host:ext?"
         },
         {
-            "source": "/docs/cdp/first-time-event-tracker",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/first-time-event-tracker:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/cdp/first-time-event-tracker",
             "destination": "/docs/cdp"
         },
         {
-            "source": "/docs/cdp/bigquery-export",
-            "destination": "/docs/cdp/batch-exports/bigquery"
+            "source": "/docs/cdp/bigquery-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/bigquery:ext?"
         },
         {
-            "source": "/docs/cdp/postgres-export",
-            "destination": "/docs/cdp/batch-exports/postgres"
+            "source": "/docs/cdp/postgres-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/postgres:ext?"
         },
         {
-            "source": "/docs/cdp/s3-export",
-            "destination": "/docs/cdp/batch-exports/s3"
+            "source": "/docs/cdp/s3-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/s3:ext?"
         },
         {
-            "source": "/docs/cdp/snowflake-export",
-            "destination": "/docs/cdp/batch-exports/snowflake"
+            "source": "/docs/cdp/snowflake-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/snowflake:ext?"
         },
         {
-            "source": "/docs/cdp/redshift-export",
-            "destination": "/docs/cdp/batch-exports/redshift"
+            "source": "/docs/cdp/redshift-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports/redshift:ext?"
         },
         {
             "source": "/cdp/redshift-export",
@@ -4286,36 +4171,36 @@
             "destination": "/docs/migrate/migrate-to-cloud"
         },
         {
-            "source": "/docs/cdp/replicator",
-            "destination": "/docs/migrate/migrate-to-cloud"
+            "source": "/docs/cdp/replicator:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
-            "source": "/docs/cdp/segment",
-            "destination": "/docs/libraries/segment"
+            "source": "/docs/cdp/segment:ext(\\.md)?",
+            "destination": "/docs/libraries/segment:ext?"
         },
         {
-            "source": "/docs/cdp/sentry-connector",
-            "destination": "/docs/error-tracking"
+            "source": "/docs/cdp/sentry-connector:ext(\\.md)?",
+            "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/cdp/n8n",
-            "destination": "/docs/libraries/n8n"
+            "source": "/docs/cdp/n8n:ext(\\.md)?",
+            "destination": "/docs/libraries/n8n:ext?"
         },
         {
-            "source": "/docs/cdp/zendesk",
-            "destination": "/docs/libraries/zendesk"
+            "source": "/docs/cdp/zendesk:ext(\\.md)?",
+            "destination": "/docs/libraries/zendesk:ext?"
         },
         {
-            "source": "/docs/cdp/rudderstack-import",
-            "destination": "/docs/libraries/rudderstack"
+            "source": "/docs/cdp/rudderstack-import:ext(\\.md)?",
+            "destination": "/docs/libraries/rudderstack:ext?"
         },
         {
             "source": "/cdp/zendesk-connector",
             "destination": "/docs/cdp"
         },
         {
-            "source": "/docs/libraries/zendesk",
-            "destination": "/docs/cdp"
+            "source": "/docs/libraries/zendesk:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
             "source": "/cdp/snowflake-export",
@@ -4386,8 +4271,8 @@
             "destination": "/docs/cdp/build#types"
         },
         {
-            "source": "/docs/apps/build/tutorial",
-            "destination": "/docs/cdp/build/tutorial"
+            "source": "/docs/apps/build/tutorial:ext(\\.md)?",
+            "destination": "/docs/cdp/build/tutorial:ext?"
         },
         {
             "source": "/docs/apps/build/testing",
@@ -4398,44 +4283,44 @@
             "destination": "/docs/cdp/build/reference#writing-tests"
         },
         {
-            "source": "/docs/apps/build/reference",
-            "destination": "/docs/cdp/build/reference"
+            "source": "/docs/apps/build/reference:ext(\\.md)?",
+            "destination": "/docs/cdp/build/reference:ext?"
         },
         {
-            "source": "/docs/apps/build",
-            "destination": "/docs/cdp/build"
+            "source": "/docs/apps/build:ext(\\.md)?",
+            "destination": "/docs/cdp/build:ext?"
         },
         {
-            "source": "/docs/cdp/build/api",
-            "destination": "/docs/cdp/build"
+            "source": "/docs/cdp/build/api:ext(\\.md)?",
+            "destination": "/docs/cdp/build:ext?"
         },
         {
-            "source": "/docs/cdp/build/jobs",
-            "destination": "/docs/cdp/build"
+            "source": "/docs/cdp/build/jobs:ext(\\.md)?",
+            "destination": "/docs/cdp/build:ext?"
         },
         {
-            "source": "/docs/cdp/enabling",
-            "destination": "/docs/cdp/build"
+            "source": "/docs/cdp/enabling:ext(\\.md)?",
+            "destination": "/docs/cdp/build:ext?"
         },
         {
             "source": "/docs/cdp/build/types",
             "destination": "/docs/cdp/build#types"
         },
         {
-            "source": "/docs/apps",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/apps:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/build/reference",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/build/reference:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/build",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/build:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/build/tutorial",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/build/tutorial:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
             "source": "/blog/learnings-from-elon",
@@ -4446,20 +4331,20 @@
             "destination": "/docs"
         },
         {
-            "source": "/docs/data/organizations-and-projects",
-            "destination": "/docs/settings/organizations"
+            "source": "/docs/data/organizations-and-projects:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?"
         },
         {
-            "source": "/docs/data/role-based-access",
-            "destination": "/docs/settings/role-based-access"
+            "source": "/docs/data/role-based-access:ext(\\.md)?",
+            "destination": "/docs/settings/role-based-access:ext?"
         },
         {
-            "source": "/docs/data/sso",
-            "destination": "/docs/settings/sso"
+            "source": "/docs/data/sso:ext(\\.md)?",
+            "destination": "/docs/settings/sso:ext?"
         },
         {
-            "source": "/docs/ab-testing",
-            "destination": "/docs/experiments"
+            "source": "/docs/ab-testing:ext(\\.md)?",
+            "destination": "/docs/experiments:ext?"
         },
         {
             "source": "/handbook/small-teams/product-analytics",
@@ -4554,16 +4439,16 @@
             "destination": "/blog/best-gdpr-compliant-analytics-tools"
         },
         {
-            "source": "/docs/product-analytics/llms",
-            "destination": "/docs/ai-observability"
+            "source": "/docs/product-analytics/llms:ext(\\.md)?",
+            "destination": "/docs/ai-observability:ext?"
         },
         {
-            "source": "/docs/ai-engineering/llms",
-            "destination": "/docs/ai-observability"
+            "source": "/docs/ai-engineering/llms:ext(\\.md)?",
+            "destination": "/docs/ai-observability:ext?"
         },
         {
-            "source": "/docs/product-analytics/trends",
-            "destination": "/docs/product-analytics/trends/overview"
+            "source": "/docs/product-analytics/trends:ext(\\.md)?",
+            "destination": "/docs/product-analytics/trends/overview:ext?"
         },
         {
             "source": "/docs/product-analytics/calendar-heatmap",
@@ -4654,104 +4539,104 @@
             "destination": "/teams/feature-flags"
         },
         {
-            "source": "/docs/cdp/airbyte-export",
-            "destination": "/docs/cdp/batch-exports"
+            "source": "/docs/cdp/airbyte-export:ext(\\.md)?",
+            "destination": "/docs/cdp/batch-exports:ext?"
         },
         {
-            "source": "/docs/cdp/avo-inspector",
-            "destination": "/docs/cdp/destinations/avo"
+            "source": "/docs/cdp/avo-inspector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/avo:ext?"
         },
         {
-            "source": "/docs/cdp/customer-io",
-            "destination": "/docs/cdp/destinations/customerio"
+            "source": "/docs/cdp/customer-io:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/customerio:ext?"
         },
         {
-            "source": "/docs/cdp/engage-connector",
-            "destination": "/docs/cdp/destinations/engage"
+            "source": "/docs/cdp/engage-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/engage:ext?"
         },
         {
-            "source": "/docs/cdp/google-pub-sub-connector",
-            "destination": "/docs/cdp/destinations/google-pubsub"
+            "source": "/docs/cdp/google-pub-sub-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/google-pubsub:ext?"
         },
         {
-            "source": "/docs/cdp/google-cloud-export",
-            "destination": "/docs/cdp/destinations/google-cloud-storage"
+            "source": "/docs/cdp/google-cloud-export:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/google-cloud-storage:ext?"
         },
         {
-            "source": "/docs/cdp/hubspot-connector",
-            "destination": "/docs/cdp/destinations/hubspot"
+            "source": "/docs/cdp/hubspot-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/hubspot:ext?"
         },
         {
-            "source": "/docs/cdp/intercom",
-            "destination": "/docs/cdp/destinations/intercom"
+            "source": "/docs/cdp/intercom:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/intercom:ext?"
         },
         {
-            "source": "/docs/cdp/laudspeaker-connector",
-            "destination": "/docs/cdp/destinations/laudspeaker"
+            "source": "/docs/cdp/laudspeaker-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/laudspeaker:ext?"
         },
         {
-            "source": "/docs/cdp/rudderstack-export",
-            "destination": "/docs/cdp/destinations/rudderstack"
+            "source": "/docs/cdp/rudderstack-export:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/rudderstack:ext?"
         },
         {
-            "source": "/docs/cdp/salesforce-connector",
-            "destination": "/docs/cdp/destinations/salesforce"
+            "source": "/docs/cdp/salesforce-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/salesforce:ext?"
         },
         {
-            "source": "/docs/cdp/sendgrid-connector",
-            "destination": "/docs/cdp/destinations/sendgrid"
+            "source": "/docs/cdp/sendgrid-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/sendgrid:ext?"
         },
         {
-            "source": "/docs/cdp/variance-connector",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/variance-connector:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/pace-integration",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/pace-integration:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/memphis-exporter",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/memphis-exporter:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/outfunnel-exporter",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/cdp/outfunnel-exporter:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/cdp/route-censor",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/route-censor:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/cdp/semver-flattener",
-            "destination": "/docs/cdp"
+            "source": "/docs/cdp/semver-flattener:ext(\\.md)?",
+            "destination": "/docs/cdp:ext?"
         },
         {
-            "source": "/docs/experiments/experiment-significance",
-            "destination": "/docs/experiments/statistics"
+            "source": "/docs/experiments/experiment-significance:ext(\\.md)?",
+            "destination": "/docs/experiments/statistics:ext?"
         },
         {
-            "source": "/docs/experiments/frequentist-method",
-            "destination": "/docs/experiments/statistics-frequentist"
+            "source": "/docs/experiments/frequentist-method:ext(\\.md)?",
+            "destination": "/docs/experiments/statistics-frequentist:ext?"
         },
         {
             "source": "/handbook/product/in-app-prompts",
             "destination": "/docs/surveys"
         },
         {
-            "source": "/docs/webhooks",
-            "destination": "/docs/cdp/destinations"
+            "source": "/docs/webhooks:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations:ext?"
         },
         {
-            "source": "/docs/webhooks/slack",
-            "destination": "/docs/cdp/destinations/slack"
+            "source": "/docs/webhooks/slack:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/slack:ext?"
         },
         {
-            "source": "/docs/webhooks/microsoft-teams",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/webhooks/microsoft-teams:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
-            "source": "/docs/webhooks/discord",
-            "destination": "/docs/cdp/destinations/webhook"
+            "source": "/docs/webhooks/discord:ext(\\.md)?",
+            "destination": "/docs/cdp/destinations/webhook:ext?"
         },
         {
             "source": "/teams/website-docs",
@@ -4766,16 +4651,16 @@
             "destination": "/docs/product-analytics/identify#how-to-merge-users"
         },
         {
-            "source": "/docs/session-replay/android",
-            "destination": "/docs/session-replay/installation/android"
+            "source": "/docs/session-replay/android:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation/android:ext?"
         },
         {
             "source": "/questions/how-to-get-current-user-identity",
             "destination": "/docs/product-analytics/identify#get-the-current-users-distinct-id"
         },
         {
-            "source": "/docs/session-replay/ios",
-            "destination": "/docs/session-replay/installation/ios"
+            "source": "/docs/session-replay/ios:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation/ios:ext?"
         },
         {
             "source": "/questions/how-to-group-events",
@@ -4790,24 +4675,24 @@
             "destination": "/docs/feature-flags/best-practices"
         },
         {
-            "source": "/docs/feature-flags/production-ready",
-            "destination": "/docs/feature-flags/best-practices"
+            "source": "/docs/feature-flags/production-ready:ext(\\.md)?",
+            "destination": "/docs/feature-flags/best-practices:ext?"
         },
         {
             "source": "/product-engineers/5-ways-to-improve-analytics-data",
             "destination": "/docs/product-analytics/best-practices"
         },
         {
-            "source": "/docs/session-replay/react-native",
-            "destination": "/docs/session-replay/installation/react-native"
+            "source": "/docs/session-replay/react-native:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation/react-native:ext?"
         },
         {
             "source": "/teams/comms",
             "destination": "/teams/support"
         },
         {
-            "source": "/docs/session-replay/flutter",
-            "destination": "/docs/session-replay/installation/flutter"
+            "source": "/docs/session-replay/flutter:ext(\\.md)?",
+            "destination": "/docs/session-replay/installation/flutter:ext?"
         },
         {
             "source": "/teams/customer-comms",
@@ -4823,80 +4708,80 @@
             "statusCode": 302
         },
         {
-            "source": "/docs/data-warehouse/setup/azure-blob",
-            "destination": "/docs/cdp/sources/azure-blob"
+            "source": "/docs/data-warehouse/setup/azure-blob:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/azure-blob:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/azure-db",
-            "destination": "/docs/cdp/sources/azure-db"
+            "source": "/docs/data-warehouse/setup/azure-db:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/azure-db:ext?"
         },
         {
-            "source": "/docs/data-warehouse/sources/azure-db",
-            "destination": "/docs/data-warehouse/sources/microsoft-sql-server"
+            "source": "/docs/data-warehouse/sources/azure-db:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/sources/microsoft-sql-server:ext?"
         },
         {
-            "source": "/docs/cdp/sources/azure-db",
-            "destination": "/docs/cdp/sources/microsoft-sql-server"
+            "source": "/docs/cdp/sources/azure-db:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/microsoft-sql-server:ext?"
         },
         {
-            "source": "/docs/data-warehouse/sources/temporal",
-            "destination": "/docs/data-warehouse/sources/temporalio"
+            "source": "/docs/data-warehouse/sources/temporal:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/sources/temporalio:ext?"
         },
         {
-            "source": "/docs/cdp/sources/temporal",
-            "destination": "/docs/cdp/sources/temporalio"
+            "source": "/docs/cdp/sources/temporal:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/temporalio:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/chargebee",
-            "destination": "/docs/cdp/sources/chargebee"
+            "source": "/docs/data-warehouse/setup/chargebee:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/chargebee:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/gcs",
-            "destination": "/docs/cdp/sources/gcs"
+            "source": "/docs/data-warehouse/setup/gcs:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/gcs:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/hubspot",
-            "destination": "/docs/cdp/sources/hubspot"
+            "source": "/docs/data-warehouse/setup/hubspot:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/hubspot:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/index",
-            "destination": "/docs/cdp/sources"
+            "source": "/docs/data-warehouse/setup/index:ext(\\.md)?",
+            "destination": "/docs/cdp/sources:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/mysql",
-            "destination": "/docs/cdp/sources/mysql"
+            "source": "/docs/data-warehouse/setup/mysql:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/mysql:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/postgres",
-            "destination": "/docs/cdp/sources/postgres"
+            "source": "/docs/data-warehouse/setup/postgres:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/postgres:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/r2",
-            "destination": "/docs/cdp/sources/r2"
+            "source": "/docs/data-warehouse/setup/r2:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/r2:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/s3",
-            "destination": "/docs/cdp/sources/s3"
+            "source": "/docs/data-warehouse/setup/s3:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/s3:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/salesforce",
-            "destination": "/docs/cdp/sources/salesforce"
+            "source": "/docs/data-warehouse/setup/salesforce:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/salesforce:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/snowflake",
-            "destination": "/docs/cdp/sources/snowflake"
+            "source": "/docs/data-warehouse/setup/snowflake:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/snowflake:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/stripe",
-            "destination": "/docs/cdp/sources/stripe"
+            "source": "/docs/data-warehouse/setup/stripe:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/stripe:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/vitally",
-            "destination": "/docs/cdp/sources/vitally"
+            "source": "/docs/data-warehouse/setup/vitally:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/vitally:ext?"
         },
         {
-            "source": "/docs/data-warehouse/setup/zendesk",
-            "destination": "/docs/cdp/sources/zendesk"
+            "source": "/docs/data-warehouse/setup/zendesk:ext(\\.md)?",
+            "destination": "/docs/cdp/sources/zendesk:ext?"
         },
         {
             "source": "/docs/data-warehouse/setup/",
@@ -4963,12 +4848,12 @@
             "destination": "/docs/self-host"
         },
         {
-            "source": "/docs/settings/organizations-and-projects",
-            "destination": "/docs/settings/organizations"
+            "source": "/docs/settings/organizations-and-projects:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?"
         },
         {
-            "source": "/docs/settings/role-based-access",
-            "destination": "/docs/settings/access-control"
+            "source": "/docs/settings/role-based-access:ext(\\.md)?",
+            "destination": "/docs/settings/access-control:ext?"
         },
         {
             "source": "/community/profiles/59",
@@ -5059,60 +4944,60 @@
             "destination": "/docs/self-host"
         },
         {
-            "source": "/docs/settings/organizations-and-projects",
-            "destination": "/docs/settings/organizations"
+            "source": "/docs/settings/organizations-and-projects:ext(\\.md)?",
+            "destination": "/docs/settings/organizations:ext?"
         },
         {
-            "source": "/docs/settings/role-based-access",
-            "destination": "/docs/settings/access-control"
+            "source": "/docs/settings/role-based-access:ext(\\.md)?",
+            "destination": "/docs/settings/access-control:ext?"
         },
         {
             "source": "/community/profiles/59",
             "destination": "/community/profiles/29070"
         },
         {
-            "source": "/docs/cdp/geoip-enrichment",
-            "destination": "/docs/cdp/transformations/posthog-plugin-geoip"
+            "source": "/docs/cdp/geoip-enrichment:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/posthog-plugin-geoip:ext?"
         },
         {
-            "source": "/docs/cdp/timestamp-parser",
-            "destination": "/docs/cdp/transformations/timestamp-parser-plugin"
+            "source": "/docs/cdp/timestamp-parser:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/timestamp-parser-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/url-normalizer",
-            "destination": "/docs/cdp/transformations/posthog-url-normalizer-plugin"
+            "source": "/docs/cdp/url-normalizer:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/posthog-url-normalizer-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/user-agent-populator",
-            "destination": "/docs/cdp/transformations/user-agent-plugin"
+            "source": "/docs/cdp/user-agent-populator:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/user-agent-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/property-filter",
-            "destination": "/docs/cdp/transformations/property-filter-plugin"
+            "source": "/docs/cdp/property-filter:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/property-filter-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/taxonomy-standardizer",
-            "destination": "/docs/cdp/transformations/taxonomy-plugin"
+            "source": "/docs/cdp/taxonomy-standardizer:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/taxonomy-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/downsampling",
-            "destination": "/docs/cdp/transformations/downsampling-plugin"
+            "source": "/docs/cdp/downsampling:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/downsampling-plugin:ext?"
         },
         {
-            "source": "/docs/cdp/filter-out",
-            "destination": "/docs/cdp/transformations/posthog-filter-out-plugin"
+            "source": "/docs/cdp/filter-out:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/posthog-filter-out-plugin:ext?"
         },
         {
-            "source": "/docs/web-analytics/revenue-tracking",
-            "destination": "/docs/revenue-analytics"
+            "source": "/docs/web-analytics/revenue-tracking:ext(\\.md)?",
+            "destination": "/docs/revenue-analytics:ext?"
         },
         {
-            "source": "/docs/web-analytics/revenue-analytics",
-            "destination": "/docs/revenue-analytics"
+            "source": "/docs/web-analytics/revenue-analytics:ext(\\.md)?",
+            "destination": "/docs/revenue-analytics:ext?"
         },
         {
-            "source": "/docs/revenue-analytics/dashboard",
-            "destination": "/docs/revenue-analytics"
+            "source": "/docs/revenue-analytics/dashboard:ext(\\.md)?",
+            "destination": "/docs/revenue-analytics:ext?"
         },
         {
             "source": "/revenue-analytics",
@@ -5159,8 +5044,8 @@
             "destination": "/ai"
         },
         {
-            "source": "/docs/surveys/webhook",
-            "destination": "/docs/surveys/destinations"
+            "source": "/docs/surveys/webhook:ext(\\.md)?",
+            "destination": "/docs/surveys/destinations:ext?"
         },
         {
             "source": "/heysf",
@@ -5175,12 +5060,12 @@
             "destination": "/customers/headshotpro"
         },
         {
-            "source": "/docs/api/user",
-            "destination": "/docs/api/users"
+            "source": "/docs/api/user:ext(\\.md)?",
+            "destination": "/docs/api/users:ext?"
         },
         {
-            "source": "/docs/api/decide",
-            "destination": "/docs/api/flags"
+            "source": "/docs/api/decide:ext(\\.md)?",
+            "destination": "/docs/api/flags:ext?"
         },
         {
             "source": "/docs/privacy/data-deletion",
@@ -5235,96 +5120,96 @@
             "destination": "/docs/product-analytics/trends"
         },
         {
-            "source": "/docs/cdp/url-query",
-            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+            "source": "/docs/cdp/url-query:ext(\\.md)?",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties:ext?"
         },
         {
             "source": "/teams/cs-onboarding",
             "destination": "/teams/customer-success"
         },
         {
-            "source": "/docs/error-tracking/issues",
-            "destination": "/docs/error-tracking/issues-and-exceptions"
+            "source": "/docs/error-tracking/issues:ext(\\.md)?",
+            "destination": "/docs/error-tracking/issues-and-exceptions:ext?"
         },
         {
-            "source": "/docs/error-tracking/nextjs",
-            "destination": "/docs/error-tracking/installation/nextjs"
+            "source": "/docs/error-tracking/nextjs:ext(\\.md)?",
+            "destination": "/docs/error-tracking/installation/nextjs:ext?"
         },
         {
-            "source": "/docs/error-tracking/installation/nuxt",
-            "destination": "/docs/error-tracking/installation/nuxt-3-7"
+            "source": "/docs/error-tracking/installation/nuxt:ext(\\.md)?",
+            "destination": "/docs/error-tracking/installation/nuxt-3-7:ext?"
         },
         {
-            "source": "/docs/ai-engineering/observability",
-            "destination": "/docs/ai-observability/start-here"
+            "source": "/docs/ai-engineering/observability:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
-            "source": "/docs/ai-engineering/llm-insights",
-            "destination": "/docs/ai-observability/start-here"
+            "source": "/docs/ai-engineering/llm-insights:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
-            "source": "/docs/ai-engineering/tutorials",
-            "destination": "/docs/ai-observability/tutorials"
+            "source": "/docs/ai-engineering/tutorials:ext(\\.md)?",
+            "destination": "/docs/ai-observability/tutorials:ext?"
         },
         {
-            "source": "/docs/ai-engineering/traces-generations",
-            "destination": "/docs/ai-observability/generations"
+            "source": "/docs/ai-engineering/traces-generations:ext(\\.md)?",
+            "destination": "/docs/ai-observability/generations:ext?"
         },
         {
-            "source": "/docs/ai-engineering/dashboard",
-            "destination": "/docs/ai-observability/dashboard"
+            "source": "/docs/ai-engineering/dashboard:ext(\\.md)?",
+            "destination": "/docs/ai-observability/dashboard:ext?"
         },
         {
-            "source": "/docs/ai-engineering/langfuse-posthog",
-            "destination": "/docs/ai-observability/integrations/langfuse-posthog"
+            "source": "/docs/ai-engineering/langfuse-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/integrations/langfuse-posthog:ext?"
         },
         {
-            "source": "/docs/ai-engineering/helicone-posthog",
-            "destination": "/docs/ai-observability/integrations/helicone-posthog"
+            "source": "/docs/ai-engineering/helicone-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/integrations/helicone-posthog:ext?"
         },
         {
-            "source": "/docs/ai-engineering/keywords-ai-posthog",
-            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog"
+            "source": "/docs/ai-engineering/keywords-ai-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog:ext?"
         },
         {
-            "source": "/docs/ai-engineering/traceloop-posthog",
-            "destination": "/docs/ai-observability/integrations/traceloop-posthog"
+            "source": "/docs/ai-engineering/traceloop-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/integrations/traceloop-posthog:ext?"
         },
         {
-            "source": "/docs/llm-analytics/manual-capture",
-            "destination": "/docs/ai-observability/installation/manual-capture"
+            "source": "/docs/llm-analytics/manual-capture:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/manual-capture:ext?"
         },
         {
-            "source": "/docs/ai-evals/evaluations",
-            "destination": "/docs/ai-evals"
+            "source": "/docs/ai-evals/evaluations:ext(\\.md)?",
+            "destination": "/docs/ai-evals:ext?"
         },
         {
-            "source": "/docs/prompt-management/prompts",
-            "destination": "/docs/prompt-management"
+            "source": "/docs/prompt-management/prompts:ext(\\.md)?",
+            "destination": "/docs/prompt-management:ext?"
         },
         {
-            "source": "/docs/llm-analytics/evaluations",
-            "destination": "/docs/ai-evals"
+            "source": "/docs/llm-analytics/evaluations:ext(\\.md)?",
+            "destination": "/docs/ai-evals:ext?"
         },
         {
-            "source": "/docs/llm-analytics/trace-reviews",
-            "destination": "/docs/ai-observability/trace-reviews"
+            "source": "/docs/llm-analytics/trace-reviews:ext(\\.md)?",
+            "destination": "/docs/ai-observability/trace-reviews:ext?"
         },
         {
-            "source": "/docs/llm-analytics/prompts",
-            "destination": "/docs/prompt-management"
+            "source": "/docs/llm-analytics/prompts:ext(\\.md)?",
+            "destination": "/docs/prompt-management:ext?"
         },
         {
-            "source": "/docs/llm-analytics/skills-store",
-            "destination": "/docs/ai-engineering/skills-store"
+            "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
+            "destination": "/docs/ai-engineering/skills-store:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",
             "destination": "/docs/ai-observability/:path*"
         },
         {
-            "source": "/docs/llm-analytics",
-            "destination": "/docs/ai-observability"
+            "source": "/docs/llm-analytics:ext(\\.md)?",
+            "destination": "/docs/ai-observability:ext?"
         },
         {
             "source": "/llm-analytics",
@@ -5379,12 +5264,12 @@
             "destination": "/teams/posthog-desktop/:path*"
         },
         {
-            "source": "/docs/max-ai",
-            "destination": "/docs/posthog-ai"
+            "source": "/docs/max-ai:ext(\\.md)?",
+            "destination": "/docs/posthog-ai:ext?"
         },
         {
-            "source": "/docs/libraries/js/features",
-            "destination": "/docs/libraries/js/usage"
+            "source": "/docs/libraries/js/features:ext(\\.md)?",
+            "destination": "/docs/libraries/js/usage:ext?"
         },
         {
             "source": "/handbook/engineering/on-call-rotation",
@@ -5451,40 +5336,40 @@
             "destination": "/data-stack/business-intelligence"
         },
         {
-            "source": "/docs/error-tracking/common-questions",
-            "destination": "/docs/error-tracking/troubleshooting"
+            "source": "/docs/error-tracking/common-questions:ext(\\.md)?",
+            "destination": "/docs/error-tracking/troubleshooting:ext?"
         },
         {
-            "source": "/docs/web-analytics/faq",
-            "destination": "/docs/web-analytics/troubleshooting"
+            "source": "/docs/web-analytics/faq:ext(\\.md)?",
+            "destination": "/docs/web-analytics/troubleshooting:ext?"
         },
         {
-            "source": "/docs/feature-flags/common-questions",
-            "destination": "/docs/feature-flags/troubleshooting"
+            "source": "/docs/feature-flags/common-questions:ext(\\.md)?",
+            "destination": "/docs/feature-flags/troubleshooting:ext?"
         },
         {
-            "source": "/docs/experiments/common-questions",
-            "destination": "/docs/experiments/troubleshooting"
+            "source": "/docs/experiments/common-questions:ext(\\.md)?",
+            "destination": "/docs/experiments/troubleshooting:ext?"
         },
         {
-            "source": "/docs/cdp/common-questions",
-            "destination": "/docs/cdp/troubleshooting"
+            "source": "/docs/cdp/common-questions:ext(\\.md)?",
+            "destination": "/docs/cdp/troubleshooting:ext?"
         },
         {
-            "source": "/docs/data-warehouse/common-questions",
-            "destination": "/docs/data-warehouse/troubleshooting"
+            "source": "/docs/data-warehouse/common-questions:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/troubleshooting:ext?"
         },
         {
-            "source": "/docs/revenue-analytics/common-questions",
-            "destination": "/docs/revenue-analytics/troubleshooting"
+            "source": "/docs/revenue-analytics/common-questions:ext(\\.md)?",
+            "destination": "/docs/revenue-analytics/troubleshooting:ext?"
         },
         {
-            "source": "/docs/customer-analytics/faq",
-            "destination": "/docs/customer-analytics/troubleshooting"
+            "source": "/docs/customer-analytics/faq:ext(\\.md)?",
+            "destination": "/docs/customer-analytics/troubleshooting:ext?"
         },
         {
-            "source": "/docs/error-tracking/cutting-costs",
-            "destination": "/docs/error-tracking/pricing"
+            "source": "/docs/error-tracking/cutting-costs:ext(\\.md)?",
+            "destination": "/docs/error-tracking/pricing:ext?"
         },
         {
             "source": "/blog/what-is-a-product-engineer",
@@ -5503,8 +5388,8 @@
             "destination": "/"
         },
         {
-            "source": "/docs/session-replay/start-here",
-            "destination": "/docs/session-replay"
+            "source": "/docs/session-replay/start-here:ext(\\.md)?",
+            "destination": "/docs/session-replay:ext?"
         },
         {
             "source": "/handbook/strategy/brand",
@@ -5535,23 +5420,250 @@
             "destination": "https://app.posthog.com/login"
         },
         {
-            "source": "/docs/feature-flags/create-flags-mcp",
-            "destination": "/docs/feature-flags/surfaces/mcp",
+            "source": "/docs/feature-flags/create-flags-mcp:ext(\\.md)?",
+            "destination": "/docs/feature-flags/surfaces/mcp:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/logs/debugging-with-mcp",
-            "destination": "/docs/logs/surfaces/mcp",
+            "source": "/docs/session-replay/search-replays-mcp:ext(\\.md)?",
+            "destination": "/docs/session-replay/surfaces/mcp:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/logs/debug-logs-mcp",
-            "destination": "/docs/logs/surfaces/mcp",
+            "source": "/docs/logs/debugging-with-mcp:ext(\\.md)?",
+            "destination": "/docs/logs/surfaces/mcp:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/logs/search-logs-ai",
-            "destination": "/docs/logs/explain-logs-ai",
+            "source": "/docs/logs/debug-logs-mcp:ext(\\.md)?",
+            "destination": "/docs/logs/surfaces/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/logs/search-logs-ai:ext(\\.md)?",
+            "destination": "/docs/logs/explain-logs-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/overview:ext(\\.md)?",
+            "destination": "/docs/posthog-ai:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/platform-and-chat-ui:ext(\\.md)?",
+            "destination": "/docs/posthog-ai/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/replay-vision/quality:ext(\\.md)?",
+            "destination": "/docs/replay-vision/calibration:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/activity",
+            "destination": "/docs/activity",
+            "statusCode": 301
+        },
+        {
+            "source": "/profiles",
+            "destination": "/docs/data/anonymous-vs-identified-events",
+            "statusCode": 301
+        },
+        {
+            "source": "/notebooks",
+            "destination": "/docs/notebooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/toolbar",
+            "destination": "/docs/toolbar",
+            "statusCode": 301
+        },
+        {
+            "source": "/webhooks",
+            "destination": "/docs/cdp/destinations/webhook",
+            "statusCode": 301
+        },
+        {
+            "source": "/why",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/getting-started:ext(\\.md)?",
+            "destination": "/docs/web-analytics/start-here:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/query-traffic-mcp:ext(\\.md)?",
+            "destination": "/docs/web-analytics/surfaces/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/r/posthog-observability",
+            "destination": "/r/observability",
+            "permanent": true
+        },
+        {
+            "source": "/trends",
+            "destination": "/product-analytics"
+        },
+        {
+            "source": "/questions/topic/ai-observability",
+            "destination": "/questions/topic/llm-analytics"
+        },
+        {
+            "source": "/ai-observability/features",
+            "destination": "/ai-observability#top-features"
+        },
+        {
+            "source": "/error-tracking/customers",
+            "destination": "/error-tracking"
+        },
+        {
+            "source": "/error-tracking/comparisons",
+            "destination": "/error-tracking#feature-comparison"
+        },
+        {
+            "source": "/error-tracking/documentation",
+            "destination": "/docs/error-tracking"
+        },
+        {
+            "source": "/error-tracking/tutorials",
+            "destination": "/error-tracking#tutorials"
+        },
+        {
+            "source": "/error-tracking/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/error-tracking/questions",
+            "destination": "/error-tracking#questions"
+        },
+        {
+            "source": "/ai-observability/customers",
+            "destination": "/ai-observability"
+        },
+        {
+            "source": "/ai-observability/comparisons",
+            "destination": "/ai-observability#feature-comparison"
+        },
+        {
+            "source": "/ai-observability/documentation",
+            "destination": "/docs/ai-observability"
+        },
+        {
+            "source": "/ai-observability/tutorials",
+            "destination": "/docs/ai-observability/tutorials"
+        },
+        {
+            "source": "/ai-observability/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/ai-observability/questions",
+            "destination": "/ai-observability#community"
+        },
+        {
+            "source": "/llm-analytics/pricing",
+            "destination": "/ai-observability/pricing"
+        },
+        {
+            "source": "/endpoints/customers",
+            "destination": "/endpoints"
+        },
+        {
+            "source": "/endpoints/comparisons",
+            "destination": "/endpoints#feature-comparison"
+        },
+        {
+            "source": "/endpoints/documentation",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/tutorials",
+            "destination": "/docs/endpoints"
+        },
+        {
+            "source": "/endpoints/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/endpoints/questions",
+            "destination": "/endpoints#community"
+        },
+        {
+            "source": "/docs/replay-vision/webhooks",
+            "destination": "/docs/replay-vision/actions#webhooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/query-traces-mcp:ext(\\.md)?",
+            "destination": "/docs/ai-observability/surfaces/mcp:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/logs/customers",
+            "destination": "/logs"
+        },
+        {
+            "source": "/logs/comparisons",
+            "destination": "/logs#feature-comparison"
+        },
+        {
+            "source": "/logs/documentation",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/tutorials",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/logs/questions",
+            "destination": "/logs"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/logs/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "logs"
+                }
+            ]
+        },
+        {
+            "source": "/data-stack",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-stack/:path*",
+            "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/customer-data-infrastructure/:path*",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-warehouse",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/sql",
+            "destination": "/context-warehouse/sql-editor"
+        },
+        {
+            "source": "/bi",
+            "destination": "/context-warehouse/business-intelligence"
+        },
+        {
+            "source": "/docs/experiments/create-experiments-mcp:ext(\\.md)?",
+            "destination": "/docs/experiments/surfaces/mcp:ext?",
             "statusCode": 301
         }
     ]

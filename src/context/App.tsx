@@ -873,7 +873,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/data-stack': {
+    '/context-warehouse': {
         size: {
             min: {
                 width: 750,
@@ -1557,19 +1557,10 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/logs': {
-        toolbar: true,
-    },
     '/workflows': {
         toolbar: true,
     },
-    '/endpoints': {
-        toolbar: true,
-    },
     '/ai': {
-        toolbar: true,
-    },
-    '/mcp-analytics': {
         toolbar: true,
     },
     '/hog': {
