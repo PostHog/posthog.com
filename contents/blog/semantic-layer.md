@@ -54,9 +54,9 @@ If you're a small company with a handful of tables, you probably know where ever
 > * **Metric:** a named, governed definition of a business measure, like MRR.
 > * **Governed:** nothing becomes official until a human approves it.
 
-## Where this lives: the Context Warehouse
+## Where this lives: The context warehouse
 
-The [Context Warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your Stripe data, and data models, into one place, optimized for agents to use. The semantic layer is a key part of that stack making sure agents have the context of what your data means to be able to interpret it correctly.
+The [context warehouse](/blog/what-is-a-context-warehouse) is where PostHog pulls together everything an agent needs to answer questions. That includes product events, imported sources like your Stripe data, and data models, into one place, optimized for agents to use. The semantic layer is a key part of that stack making sure agents have the context of what your data means to be able to interpret it correctly.
 
 The design decision that integrates the semantic layer so fully is that **the catalog is just SQL**. Everything the layer knows shows up as ordinary tables. Metrics are a table. There's no bespoke "catalog API" for an agent to learn; if it can run `execute-sql`, it already knows how to read the entire semantic layer. Discovery is a query, not an integration.
 
