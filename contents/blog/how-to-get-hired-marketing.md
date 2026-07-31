@@ -38,7 +38,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **Strong opinions.** Our brand is one of PostHog's most valuable marketing assets and the fastest way to wreck it is hiring people who tell us what we want to hear or who don't have a strong sense of taste to rely on. For us, safe takes are worse than wrong ones so we look for people with hot, spicy takes.
 
-> What good looks like: Hiring our first event marketer, we spoke to dozens of candidates whose strategy was essentially just "do hackathons". <TeamMember name="Daniel Zaltsman" showOnlyFirstName photo /> said PostHog is "a 1 to N tool, not a 0 to 1 tool" and that hackathons were a bad idea. He held that line under pushback and proved everyone else wrong once he got the job.
+> What good looks like: Hiring our first event marketer, we spoke to dozens of candidates whose strategy was essentially just "do hackathons". <TeamMember name="Daniel Zaltsman" showOnlyFirstName photo /> said PostHog is "a 1 to N tool, not a 0 to 1 tool" and that hackathons were a bad idea. He then created a event strategy so unique that PostHog engineers actually _want_ to host events without being asked – and so successful it led to a whole new events team.
 
 **Exceptional at one thing, good at lots.** Marketers at PostHog work across a huge breadth of things. Nurture emails, launches, merch, events, etc. so we look for people who are decent at most of it and exceptional at one thing in particular. The more unusual that thing is, and the more it shows up in the rest of the work, the better.
 
