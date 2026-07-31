@@ -496,6 +496,11 @@ config.addBeforeSend { event ->
 
 Available in version 3.58.0 and newer.
 
+<CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
+
+Push is a beta feature of [PostHog Workflows](/docs/workflows). We'd love your feedback — [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+</CalloutBox>
+
 The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push), so the Firebase project on that channel must match your app.
 
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
