@@ -105,6 +105,8 @@ import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
 import { weave } from '../../hooks/competitorData/weave'
 import { zapier } from '../../hooks/competitorData/zapier'
+import { zendesk } from '../../hooks/competitorData/zendesk'
+import { intercom } from '../../hooks/competitorData/intercom'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
 import { brevo } from '../../hooks/competitorData/brevo'
@@ -129,6 +131,7 @@ import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { supportFeatures } from 'hooks/featureDefinitions/support'
 import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -187,6 +190,7 @@ export default function ProductComparisonTable({
         web_analytics: webAnalyticsFeatures,
         workflows: workflowsFeatures,
         logs: logsFeatures,
+        support: supportFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -716,6 +720,8 @@ export default function ProductComparisonTable({
         whatfix,
         weave,
         zapier,
+        zendesk,
+        intercom,
         make,
         customer_io,
         brevo,
