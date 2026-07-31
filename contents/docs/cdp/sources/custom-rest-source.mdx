@@ -29,6 +29,16 @@ This is useful when:
 4. Click **Next**. PostHog validates the configuration, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
 5. Configure sync settings (sync method, frequency) for each stream, then start syncing.
 
+## Preview and validate configuration
+
+Before creating a source, you can preview sample rows from any stream to verify that your **Records JSONPath**, **Primary key**, and **Cursor JSONPath** are correct. The preview fetches a single page of live data from the API and returns up to 50 rows (default 10), along with inferred column names and types.
+
+This helps catch misconfigured `data_selector` paths that would otherwise silently ingest zero or malformed rows on the first sync.
+
+The preview is available through the [PostHog API](/docs/api) and the [MCP server](/docs/data-warehouse/run-sql-mcp). It uses the same manifest assembly, SSRF validation, and REST engine as a full sync, but is bounded to a single page per resource with short timeouts and no redirects.
+
+If the manifest, validation, or URL check fails, the API returns a `400` error. If the live fetch itself fails (e.g. the host is unreachable or returns an auth error), the API returns a `200` with the `error` field set and empty `rows` – so you can iterate on the configuration without re-submitting.
+
 ## Configuration reference
 
 ### Base URL

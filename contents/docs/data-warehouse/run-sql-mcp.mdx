@@ -49,16 +49,17 @@ The MCP server also provides tools for managing [Data Warehouse views](/docs/dat
 
 These tools manage [Data Warehouse](/docs/data-warehouse) import sources – external databases and services that sync data into PostHog:
 
-| Tool                                    | Description                                                                                                                      |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `external-data-sources-list`            | List all configured import sources in the project with connection status and sync details.                                       |
-| `external-data-sources-retrieve`        | Get a single source by ID with full details including all table schemas.                                                         |
-| `external-data-sources-create`          | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields. |
-| `external-data-sources-partial-update`  | Update a source's prefix, description, or connection credentials.                                                                |
-| `external-data-sources-destroy`         | Delete a source and all its synced data. This can't be undone.                                                                   |
-| `external-data-sources-reload`          | Trigger a sync for all enabled tables in a source.                                                                               |
-| `external-data-sources-refresh-schemas` | Fetch the latest table list from the remote database and add any new tables.                                                     |
-| `external-data-sources-wizard`          | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                  |
+| Tool                                     | Description                                                                                                                                                                                                                                          |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `external-data-sources-list`             | List all configured import sources in the project with connection status and sync details.                                                                                                                                                           |
+| `external-data-sources-retrieve`         | Get a single source by ID with full details including all table schemas.                                                                                                                                                                             |
+| `external-data-sources-create`           | Create a new source connection. Use `external-data-sources-wizard` first to discover available source types and required fields.                                                                                                                     |
+| `external-data-sources-partial-update`   | Update a source's prefix, description, or connection credentials.                                                                                                                                                                                    |
+| `external-data-sources-destroy`          | Delete a source and all its synced data. This can't be undone.                                                                                                                                                                                       |
+| `external-data-sources-reload`           | Trigger a sync for all enabled tables in a source.                                                                                                                                                                                                   |
+| `external-data-sources-refresh-schemas`  | Fetch the latest table list from the remote database and add any new tables.                                                                                                                                                                         |
+| `external-data-sources-wizard`           | Get configuration metadata for all supported source types (required fields, OAuth flows, etc.).                                                                                                                                                      |
+| `external-data-sources-preview-resource` | Preview sample rows for one resource of a [Custom REST source](/docs/cdp/sources/custom-rest-source) to verify `data_selector`, `primary_key`, and `cursor_path` against live data before creating the source. Only Custom source type is supported. |
 
 ## Schema management tools
 
@@ -133,6 +134,7 @@ For source management:
 - `What tables are available in my Stripe source?`
 - `Trigger a sync for my Postgres source.`
 - `Show me the sync status for all my import schemas.`
+- `Preview sample rows from my Custom REST source to verify the data_selector is correct.`
 - `Cancel the running sync on the hubspot_contacts table.`
 
 For column annotations:
