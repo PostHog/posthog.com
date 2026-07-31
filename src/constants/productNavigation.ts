@@ -1,6 +1,30 @@
 import React from 'react'
 import * as Icons from '@posthog/icons'
 
+/**
+ * Curated product/tool handles shown in the taskbar "Browse tools" menu and
+ * the product-page sidebar switcher, in display order.
+ *
+ * Labels and icons come from product data via `useProduct()` — this list only
+ * controls membership and order.
+ */
+export const BROWSE_TOOLS_HANDLES = [
+    'product_analytics',
+    'web_analytics',
+    'ai_observability',
+    'session_replay',
+    'replay_vision',
+    'feature_flags',
+    'experiments',
+    'error_tracking',
+    'logs',
+    'endpoints',
+    'workflows_emails',
+    'surveys',
+    'heatmaps',
+    'group_analytics',
+] as const
+
 // Popular products to highlight in the menu
 export const popularProducts = [
     'posthog_ai',

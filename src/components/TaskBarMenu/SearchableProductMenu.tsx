@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { IconSearch } from '@posthog/icons'
 import Link from 'components/Link'
+import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 
 interface Product {
     name: string
@@ -24,25 +25,6 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products,
     const [searchTerm, setSearchTerm] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 
-    // The curated set of tools to show, in this exact order. Identified by `handle`
-    // so display labels come straight from the product data (already correctly cased).
-    const orderedHandles = [
-        'product_analytics',
-        'web_analytics',
-        'ai_observability',
-        'session_replay',
-        'replay_vision',
-        'feature_flags',
-        'experiments',
-        'error_tracking',
-        'logs',
-        'endpoints',
-        'workflows_emails',
-        'surveys',
-        'heatmaps',
-        'group_analytics',
-    ]
-
     // Custom labels for specific products
     const customLabels: Record<string, string> = {
         // 'cdp': 'CDP'
@@ -57,10 +39,10 @@ const SearchableProductMenu: React.FC<SearchableProductMenuProps> = ({ products,
 
     // Simple fuzzy search - matches if all characters appear in order (case insensitive)
     const filteredProducts = useMemo(() => {
-        // Build the curated list in the specified order
-        let filtered = orderedHandles
-            .map((handle) => products.find((product) => product.handle === handle))
-            .filter((product): product is Product => Boolean(product))
+        // Build the curated list in the specified order (shared with ProductSwitcher)
+        let filtered = BROWSE_TOOLS_HANDLES.map((handle) =>
+            products.find((product) => product.handle === handle)
+        ).filter((product): product is Product => Boolean(product))
 
         if (searchTerm.trim()) {
             const searchLower = searchTerm.toLowerCase()
