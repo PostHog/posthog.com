@@ -6,6 +6,7 @@ contentMaxWidthClass: max-w-5xl
 
 import AlphaCallout from './_snippets/alpha-callout'
 import { CalloutBox } from 'components/Docs/CalloutBox'
+import PlatformInstall from 'components/PlatformInstall'
 
 In this guide you'll take a metric that only exists in people's heads – MRR – and turn it into a governed definition every AI session agrees on. The whole thing is one agent conversation: the agent proposes, you approve, and from then on every client that asks about MRR gets the same number.
 
@@ -14,9 +15,11 @@ In this guide you'll take a metric that only exists in people's heads – MRR �
 ## Prerequisites
 
 - The semantic layer alpha enabled for your organization
-- The [PostHog MCP server](/docs/model-context-protocol) connected to your agent (Claude Code, Cursor, Claude Desktop, or any MCP client)
 - An API key with the `data_catalog` scope – add `data_catalog_approval` too, since you'll approve a metric in this guide (see [governance](/docs/semantic-layer/governance#api-scopes) for why they're separate)
 - Some revenue-ish data in your [data warehouse](/docs/data-warehouse), like a synced `stripe_subscriptions` table
+- The [PostHog MCP server](/docs/model-context-protocol) connected to your agent (Claude Code, Cursor, Claude Desktop, or any MCP client)
+
+<PlatformInstall />
 
 ## Step 1: See the problem
 

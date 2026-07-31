@@ -101,7 +101,7 @@ The loop: **define the question → find the right data source → run the query
 The servers:
 
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
-- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/data-stack), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/context-warehouse), or analyze [LLM traces and costs](/llm-analytics). Good for "users who did X and then Y" queries.
 
 A real prompt: _"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."_
 
