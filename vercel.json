@@ -5586,6 +5586,70 @@
         {
             "source": "/endpoints/questions",
             "destination": "/endpoints#community"
+        },
+        {
+            "source": "/docs/replay-vision/webhooks",
+            "destination": "/docs/replay-vision/actions#webhooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/logs/customers",
+            "destination": "/logs"
+        },
+        {
+            "source": "/logs/comparisons",
+            "destination": "/logs#feature-comparison"
+        },
+        {
+            "source": "/logs/documentation",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/tutorials",
+            "destination": "/docs/logs"
+        },
+        {
+            "source": "/logs/roadmap",
+            "destination": "/roadmap"
+        },
+        {
+            "source": "/logs/questions",
+            "destination": "/logs"
+        },
+        {
+            "source": "/pricing",
+            "destination": "/logs/pricing",
+            "has": [
+                {
+                    "type": "query",
+                    "key": "product",
+                    "value": "logs"
+                }
+            ]
+        },
+        {
+            "source": "/data-stack",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-stack/:path*",
+            "destination": "/context-warehouse/:path*"
+        },
+        {
+            "source": "/customer-data-infrastructure/:path*",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/data-warehouse",
+            "destination": "/context-warehouse"
+        },
+        {
+            "source": "/sql",
+            "destination": "/context-warehouse/sql-editor"
+        },
+        {
+            "source": "/bi",
+            "destination": "/context-warehouse/business-intelligence"
         }
     ]
 }

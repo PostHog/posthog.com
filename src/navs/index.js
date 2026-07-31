@@ -4820,12 +4820,6 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'Webhooks',
-                    url: '/docs/replay-vision/webhooks',
-                    icon: 'IconWebhooks',
-                    color: 'yellow',
-                },
-                {
                     name: 'Calibration',
                     url: '/docs/replay-vision/calibration',
                     icon: 'IconThumbsUp',
