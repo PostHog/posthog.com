@@ -359,7 +359,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
@@ -380,7 +380,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
             icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: false, // Omit from mobile menu; desktop-only search
+            mobileDestination: '/products', // Desktop shows the searchable submenu; mobile links to the tools list
         },
     ]
 
@@ -525,12 +525,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Roadmap',
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
@@ -892,7 +886,7 @@ export function useMenuData(): MenuType[] {
         ? [
               {
                   type: 'item' as const,
-                  label: 'home.mdx',
+                  label: 'Home',
                   link: '/',
               },
               { type: 'separator' as const },

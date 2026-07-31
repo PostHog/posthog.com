@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This is a rough articulation of the phases a paid and "sales sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each phase. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's phase and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
+This is a rough articulation of the phases a paid and "sales-sized" customer moves through PostHog, from first signup to steady state, and which role covers them at each phase. The purpose of mapping this out is creating a shared understanding so we can better standardize how we think of and approach accounts, as well as account allocation. When you know a customer's phase and ARR band, you know who should be working with the account. For the operational process (book planning, allocation cadence, handover mechanics), see [Account allocation and handover](/handbook/growth/sales/account-allocation), which holds the allocation rules.
 
 ## The phases
 
@@ -49,7 +49,7 @@ Who covers the account at each phase. Phases run top to bottom in the order a cu
 | **Implementing** |     |     | ✅  | 🟡  |     🟡     | 🟡  |     🟡     |
 | **Ramping**      |     |     | ✅  | ✅  |     ✅     | 🟡  |     🟡     |
 | **Expanding**    |     |     | ✅  | ✅  |     ✅     | 🟡  |            |
-| **Steady state** |     |     | ✅  |     |            |     |            |
+| **Steady state** |     |     | ✅  |     |            | 🟡    |            |
 
 
 Notes:
@@ -59,7 +59,9 @@ Notes:
 - Growth TAM pickup can happen during Implementing for a fast-ramping sub-$20k account.
 - The onboarding team's coverage is wide because its trigger is first payment, which can land anywhere from Exploring through Ramping.
 - BDR coverage is top-of-funnel only: BDRs source and qualify accounts at Exploring (primarily via cold outbound to accounts with no inbound buying signal) and hand off to the TAE at Evaluating. They don't carry the account past that handoff.
-- FDE coverage is conditional where TAM, CSM, or TAE sell an FDE engagement to a customer accoun and then an FDE runs a short-term, hands-on technical engagement where the implementation need is more than a TAM or CSM can deliver. The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect
+- FDE coverage is conditional where TAM, CSM, or TAE sell an FDE engagement to a customer account and then an FDE runs a short-term, hands-on technical engagement where the implementation need is more than a TAM or CSM can deliver. 
+  - The 🟡 at Proving covers the case where an FDE helps prove technical fit during a POC with a top prospect. 
+  - The 🟡 at Steady state is for a churn prevention play where an FDE has been brought in to fix issues with a customer implementation.
 
 ## Ownership rules
 
@@ -67,8 +69,6 @@ Notes:
 
 **TAM coverage is the exception, not the default.** A TAM is added to an account only when a clear expansion or cross-sell opportunity justifies it, and released when the opportunity is exhausted. 
 
-**TAE handoff goes to CSM, always** (above threshold). Optionally the TAE also hands to a TAM, but only when the handoff doc names the specific opportunity that justifies the layer. "Still ramping" is not a justification. 
+**TAE handoff goes to CSM, always** (above threshold). Optionally, the TAE can retain the account to expand it when there is a specific opportunity that justifies the retention across a 12 month window. 
 
 **BDRs feed the funnel, they don't own the deal.** BDRs own top-of-funnel sourcing at Exploring and hand off to the TAE at Evaluating. Coverage ends at the handoff; the TAE owns the account from there.
-
-**FDE is a conditional technical layer, like TAM.** An FDE is added to an account only when a high-spend or technically complex implementation justifies dedicated engineering beyond what a TAM or CSM can deliver, and released when the engagement is done.
