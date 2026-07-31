@@ -67,7 +67,7 @@ PostHogSDK.shared.unregisterPushNotificationToken()
 
 Calling `PostHogSDK.shared.reset()` on logout also unregisters the token for the signed-out user and re-registers it under the new anonymous id.
 
-Registration and unregistration are durable – if the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
+Registration and unregistration are durable. If the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
 
 ## Capturing opens
 
@@ -88,7 +88,7 @@ There's also a fully manual variant if you don't have a `UNNotificationResponse`
 PostHogSDK.shared.capturePushNotificationOpened(title: "...", body: "...", payload: [:], action: "...")
 ```
 
-The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog – opens of other notifications are still captured, but without title, subtitle, or body.
+The `$push_notification_opened` event includes `$notification_title`, `$notification_subtitle`, and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title, subtitle, or body.
 
 ## Identity verification
 

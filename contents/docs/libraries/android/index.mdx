@@ -505,7 +505,7 @@ The Android SDK can register a device for [Workflows](/docs/workflows) push noti
 
 <CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
 
-The SDK registers the device token with PostHog and captures opens. You still own the platform setup – set up Firebase Cloud Messaging and request the `POST_NOTIFICATIONS` runtime permission from the user (required on Android 13+) so the system can show notifications. The SDK doesn't do that for you.
+The SDK registers the device token with PostHog and captures opens. You still own the platform setup. Set up Firebase Cloud Messaging and request the `POST_NOTIFICATIONS` runtime permission from the user (required on Android 13+) so the system can show notifications. The SDK doesn't do that for you.
 
 </CalloutBox>
 
@@ -545,7 +545,7 @@ PostHog.unregisterPushNotificationToken()
 
 Calling `PostHog.reset()` on logout unregisters the token for the signed-out user and re-registers it under the new anonymous id.
 
-Registration and unregistration are durable – if the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
+Registration and unregistration are durable. If the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
 
 ## Capturing opens
 
@@ -559,13 +559,13 @@ PostHog.capturePushNotificationOpened(
 )
 ```
 
-The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog – opens of other notifications are still captured, but without title or body.
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
 
 ## Identity verification
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
-Your **backend** mints that token – the SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, the channel's app id as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
+Your **backend** mints that token. The SDK never signs one itself. Sign an HS256 JWT with your project's secret API key, with the user's `distinct_id` as `sub`, the channel's app id as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
 
 ```kotlin
 config.pushIdentityProvider = { distinctId, appId, completion ->
@@ -585,7 +585,7 @@ Notes:
 | --- | --- |
 | Token never registers | Confirm `firebase-messaging` is on the classpath and your Firebase setup (`google-services.json`) is in place, and that you forward rotated tokens from `onNewToken`. |
 | Push doesn't arrive | Confirm the Firebase project on your Workflows channel matches your app, and the user granted the `POST_NOTIFICATIONS` permission. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time – see [Identity verification](#identity-verification). |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](#identity-verification). |
 
 # FAQ
 
