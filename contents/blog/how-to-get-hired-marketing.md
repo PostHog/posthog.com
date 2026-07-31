@@ -66,7 +66,7 @@ This is my favorite question to get asked. It changes by role, but a few things 
 
 **Low ego.** Being opinionated isn't the same as being difficult. We look for people who can disagree and commit, take feedback well, ask stupid questions, and give away their legos when needed.
 
-> What good looks like: During his first week <TeamMember name="Brian Young" showOnlyFirstName photo /> misread a quirk in how we handle cookies. As a result, we had to apologize to a few thousand users who'd been served more cookies than promised. That wasn't great, but he took responsibility calmly, drove the work to fix it, and immediately took the feedback into his next project.
+> What good looks like: During his first week <TeamMember name="Brian Young" showOnlyFirstName photo /> misread a quirk in how we handle cookies. As a result, we had to apologize to a few thousand users who'd been served more cookies than promised. That wasn't great, but he took responsibility calmly, drove the work to fix it, and immediately took the feedback into his next project without ego or complaint.
 
 ## How to make your application stand out
 
