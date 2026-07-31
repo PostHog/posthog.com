@@ -35,7 +35,7 @@ His response wasn't to wait for someone to fix the data. His unhinged response w
 
 With the fake crisis averted, it’s time to look over some data to start the day. We usually start in PostHog, very meta.
 
-I query our [data warehouse](/data-stack) to [check how accounts are doing](/blog/analytics-tips-for-customer-success-teams). Event volumes, product adoption, SDK usage, power users. We wrote Claude skills for the [PostHog MCP](/docs/model-context-protocol) that assist with most of this: I can ask "explore [account name]" and get a snapshot of their health, spend trajectory, product adoption matrix, and a list of their most active users with LinkedIn profiles attached. It’s not unusual to discover new contacts and create new champions starting with this workflow.
+I query our [data warehouse](/context-warehouse) to [check how accounts are doing](/blog/analytics-tips-for-customer-success-teams). Event volumes, product adoption, SDK usage, power users. We wrote Claude skills for the [PostHog MCP](/docs/model-context-protocol) that assist with most of this: I can ask "explore [account name]" and get a snapshot of their health, spend trajectory, product adoption matrix, and a list of their most active users with LinkedIn profiles attached. It’s not unusual to discover new contacts and create new champions starting with this workflow.
 
 <details>
   <summary>What the Account Explorer skill looks like</summary>
