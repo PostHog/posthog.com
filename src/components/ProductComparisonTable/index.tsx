@@ -1009,8 +1009,7 @@ export default function ProductComparisonTable({
         return null
     }
 
-    const { siteSettings, location: appLocation } = useApp()
-    const isDark = siteSettings.theme === 'dark'
+    const { location: appLocation } = useApp()
 
     const currentPathname = appLocation?.pathname || ''
     // Build columns
@@ -1024,12 +1023,15 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo
-                                className="h-5 mx-auto w-auto max-w-full"
-                                variant={isDark ? 'mono' : 'gradient'}
-                                color={isDark ? 'white' : undefined}
-                                width="auto"
-                            />
+                            <>
+                                <Logo className="h-5 mx-auto w-auto max-w-full dark:hidden" width="auto" />
+                                <Logo
+                                    className="hidden h-5 mx-auto w-auto max-w-full dark:block"
+                                    variant="mono"
+                                    color="white"
+                                    width="auto"
+                                />
+                            </>
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (
