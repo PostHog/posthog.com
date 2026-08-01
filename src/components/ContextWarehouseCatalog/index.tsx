@@ -26,7 +26,7 @@ const catalogSections: {
                 name: 'Sources & Import (ELT)',
                 description:
                     'Regularly sync or bulk import data into your warehouse from databases, ad platforms, SaaS tools, and more.',
-                url: '/data-stack/sources',
+                url: '/context-warehouse/sources',
                 Icon: IconDownload,
                 iconColor: 'text-blue',
             },
@@ -34,7 +34,7 @@ const catalogSections: {
                 name: 'Managed Warehouse',
                 description:
                     'Store, query, and join your product and business data in one place without maintaining any infrastructure.',
-                url: '/data-stack/managed-warehouse',
+                url: '/context-warehouse/managed-warehouse',
                 Icon: IconDatabase,
                 iconColor: 'text-purple',
             },
@@ -49,7 +49,7 @@ const catalogSections: {
             {
                 name: 'Batch Exports',
                 description: 'Send PostHog data to your existing warehouse or data lake on a schedule you control.',
-                url: '/data-stack/reverse-etl-export',
+                url: '/context-warehouse/reverse-etl-export',
                 Icon: IconUpload,
                 iconColor: 'text-green',
             },
@@ -62,7 +62,7 @@ const catalogSections: {
                 name: 'Models',
                 description:
                     'Define your metrics to keep them consistent across PostHog products, update them on a schedule.',
-                url: '/data-stack/data-modeling',
+                url: '/context-warehouse/data-modeling',
                 Icon: IconDecisionTree,
                 iconColor: 'text-blue',
             },
@@ -82,7 +82,7 @@ const catalogSections: {
                 name: 'PostHog AI',
                 description:
                     'Ask questions about your data in plain English. Generates SQL, builds dashboards, and surfaces insights.',
-                url: '/data-stack/posthog-ai',
+                url: '/context-warehouse/posthog-ai',
                 Icon: IconSparkles,
                 iconColor: 'text-red',
             },
@@ -90,7 +90,7 @@ const catalogSections: {
                 name: 'SQL Editor',
                 description:
                     'Write and run HogQL or standard SQL directly against your data. For when you know exactly what you want and just need to ask for it properly.',
-                url: '/data-stack/sql-editor',
+                url: '/context-warehouse/sql-editor',
                 Icon: IconTerminal,
                 iconColor: 'text-green',
             },
@@ -106,14 +106,14 @@ const catalogSections: {
                 name: 'Reverse ETL',
                 description:
                     'Send data back to the tools that need it. Keep your CRM, support tools, and marketing platforms in sync.',
-                url: '/data-stack/reverse-etl-export',
+                url: '/context-warehouse/reverse-etl-export',
                 Icon: IconShuffle,
                 iconColor: 'text-purple',
             },
             {
                 name: 'Business Intelligence',
                 description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
-                url: '/data-stack/business-intelligence',
+                url: '/context-warehouse/business-intelligence',
                 Icon: IconGraph,
                 iconColor: 'text-orange',
             },

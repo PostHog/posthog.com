@@ -74,7 +74,7 @@ See the [Event transformations](#event-transformations) section for full mapping
 
 <CalloutBox icon="IconWarning" title="Caveat" type="caution">
 
-Direct imports are currently less reliable than S3 imports for some datasets and customers. Rate limits and data export size limits vary by customer and by Amplitude/Mixpanel account, making it hard to gracefully handle the full range of API export failure modes. We’re actively improving the robustness of direct imports, but if you encounter issues, consider using an [S3 import](#s3-imports).
+Direct imports are currently less reliable than S3 imports for some datasets and customers. Rate limits and data export size limits vary by customer and by Amplitude/Mixpanel account, making it hard to gracefully handle the full range of API export failure modes. We're actively improving the robustness of direct imports, but if you encounter issues, consider using an [S3 import](#s3-imports).
 
 </CalloutBox>
 
@@ -82,7 +82,7 @@ Direct imports are currently less reliable than S3 imports for some datasets and
 
 S3 imports are the most reliable and flexible way to migrate your data to PostHog.
 
-You can upload JSONL files in either uncompressed (`.jsonl`) or gzip-compressed (`.jsonl.gz`) format using any supported content type — `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don't have to — if you upload Amplitude or Mixpanel exports and select the matching content type, we'll apply the same mappings as direct imports.
+You can upload JSONL files in either uncompressed (`.jsonl`) or gzip-compressed (`.jsonl.gz`) format using any supported content type – `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don't have to – if you upload Amplitude or Mixpanel exports and select the matching content type, we'll apply the same mappings as direct imports.
 
 This method gives you full control while still benefiting from automated ingestion. It is ideal when:
 
@@ -95,9 +95,9 @@ If you upload Amplitude or Mixpanel events to S3, select the matching content ty
 
 ### Supported content types
 
-- `amplitude`: Upload JSONL events that match Amplitude’s export schema. The [event transformations](#event-transformations) for Amplitude are applied during import.
-- `mixpanel`: Upload JSONL events that match Mixpanel’s export schema. The [event transformations](#event-transformations) for Mixpanel are applied during import.
-- `posthog`: Upload JSONL events that match PostHog’s event schema. Events are ingested as-is without source-specific remapping. Use this if you’ve already run your own transformation to produce PostHog-shaped events.
+- `amplitude`: Upload JSONL events that match Amplitude's export schema. The [event transformations](#event-transformations) for Amplitude are applied during import.
+- `mixpanel`: Upload JSONL events that match Mixpanel's export schema. The [event transformations](#event-transformations) for Mixpanel are applied during import.
+- `posthog`: Upload JSONL events that match PostHog's event schema. Events are ingested as-is without source-specific remapping. Use this if you've already run your own transformation to produce PostHog-shaped events.
 
 ### File format and compression
 
@@ -107,12 +107,12 @@ If you upload Amplitude or Mixpanel events to S3, select the matching content ty
 
 ### Custom event transformations with S3
 
-“Custom transformations” means you can run your own script over your source data to reshape it exactly how you want before importing:
+"Custom transformations" means you can run your own script over your source data to reshape it exactly how you want before importing:
 
 1. Export your events from your source.
 2. Transform them with your own script or pipeline.
    - Option A: Output PostHog-shaped events and choose the `posthog` content type (no additional mapping is applied by PostHog).
-   - Option B: Output events in the original Amplitude or Mixpanel export schema and choose the matching content type to reuse PostHog’s built-in mappings described in [Event transformations](#event-transformations).
+   - Option B: Output events in the original Amplitude or Mixpanel export schema and choose the matching content type to reuse PostHog's built-in mappings described in [Event transformations](#event-transformations).
 3. Save as JSONL (`.jsonl` or `.jsonl.gz`) and upload to S3.
 
 Minimal example for `posthog` content type (one line per event):
@@ -134,16 +134,89 @@ Minimal example for `posthog` content type (one line per event):
 
 - S3 region
 - S3 bucket name
-- AWS access key ID
-- AWS secret access key
+- Credentials – either an [IAM role](#iam-role-recommended) (recommended) or an [access key ID and secret access key](#access-keys)
 - Content Type (choose one of: `amplitude`, `mixpanel`, or `posthog`; your files must match this schema)
 - Endpoint URL (optional – only needed for [S3-compatible storage](#s3-compatible-storage))
 
 When using the `amplitude` content type, you can also configure the same Amplitude-specific options available for [direct imports](#direct-imports-mixpanel-amplitude), including whether to import events, generate identify events, and generate group identify events.
 
+### S3 authentication
+
+You can authenticate with either **IAM role assumption** (recommended) or **access keys**.
+
+#### IAM role (recommended)
+
+With IAM role assumption, PostHog uses AWS STS to assume a role in your AWS account and obtain short-lived credentials. This avoids sharing long-lived access keys.
+
+To set up IAM role authentication:
+
+1. In the import setup modal, select the **IAM role** option and copy the **External ID** shown there. It's unique to your project – use it exactly as displayed.
+2. Create an IAM role in your AWS account with a trust policy that allows PostHog's role to assume it. The PostHog role ARN depends on your cloud region:
+   - **US Cloud** – `arn:aws:iam::309986977637:role/posthog-external-managed-migrations`
+   - **EU Cloud** – `arn:aws:iam::623789312881:role/posthog-external-managed-migrations`
+3. Add an `sts:ExternalId` condition to the trust policy, set to the External ID from step 1. Imports fail without it.
+4. Attach a permissions policy to the role granting `s3:GetObject` on your bucket and prefix, and `s3:ListBucket` on the bucket. If the bucket uses KMS encryption, also grant `kms:Decrypt` on the key.
+5. Paste the role ARN (e.g. `arn:aws:iam::123456789012:role/posthog-managed-migrations`) into the **IAM role ARN** field in the setup modal.
+
+The trust policy goes on the **IAM role** you create, not on the S3 bucket. Here's an example:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::309986977637:role/posthog-external-managed-migrations"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "StringEquals": {
+          "sts:ExternalId": "<external_id_from_setup_modal>"
+        }
+      }
+    }
+  ]
+}
+```
+
+And an example permissions policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetObject"],
+      "Resource": "arn:aws:s3:::your-bucket-name/your-prefix/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::your-bucket-name"
+    }
+  ]
+}
+```
+
+`s3:ListBucket` is required as well as `s3:GetObject` – PostHog lists the keys under your prefix before reading any of them.
+
+PostHog checks the role when you create the import, so a missing role, an incorrect trust policy, or a mismatched External ID is reported immediately rather than part-way through the migration.
+
+> **Note:** Self-hosted users should check with their instance administrator for the correct PostHog role ARN to trust.
+
+#### Access keys
+
+With access keys, you provide an AWS Access Key ID and Secret Access Key that PostHog stores encrypted. This works, but uses long-lived credentials – prefer IAM role assumption where you can.
+
+The IAM user associated with these keys needs `s3:GetObject` and `s3:ListBucket` permissions on your bucket. Access keys are also the only option for [S3-compatible storage](#s3-compatible-storage).
+
 ### S3-compatible storage
 
 You can source data from any S3-compatible blob storage by providing an **Endpoint URL**. The endpoint must resolve to a public address – internal or private IPs aren't allowed.
+
+S3-compatible storage must use [access keys](#access-keys). IAM role assumption is only available for AWS S3.
 
 #### Cloudflare R2
 
@@ -189,11 +262,11 @@ If an unexpected error occurs during a migration, the job will be paused and the
 
 If the error indicates your job is attempting to import too much data (for example, exceeding export size limits), consider switching to an [S3 import](#s3-imports), which is better suited for large migrations.
 
-A job can also pause if a single part of your import is too large to process at once — for direct imports this is one date range, and for S3 imports it is one file. When this happens, the pause message will say the part is too large. To fix it, split the import into smaller date ranges (direct imports) or smaller files (S3 imports) and run them as separate jobs. Because [managed migrations do not deduplicate events](#limitations), only re-run the date ranges or files that haven't already been imported.
+A job can also pause if a single part of your import is too large to process at once – for direct imports this is one date range, and for S3 imports it is one file. When this happens, the pause message will say the part is too large. To fix it, split the import into smaller date ranges (direct imports) or smaller files (S3 imports) and run them as separate jobs. Because [managed migrations do not deduplicate events](#limitations), only re-run the date ranges or files that haven't already been imported.
 
 ## Event transformations
 
-When you use direct imports, PostHog transforms events from your source (Amplitude or Mixpanel) into PostHog’s schema. Below is an overview of what changes.
+When you use direct imports, PostHog transforms events from your source (Amplitude or Mixpanel) into PostHog's schema. Below is an overview of what changes.
 
 ### Amplitude → PostHog
 
@@ -265,7 +338,7 @@ Example (simplified):
     - or is only uppercase letters, digits, and dashes
   - If no ID remains and you choose to skip events without IDs, the event is dropped; otherwise a UUID is generated
 - **Timestamp**
-  - `properties.time` is treated as seconds unless it’s > 10,000,000,000 (then it’s milliseconds). An optional offset can be applied if your data needs it
+  - `properties.time` is treated as seconds unless it's > 10,000,000,000 (then it's milliseconds). An optional offset can be applied if your data needs it
 - **Property cleanup and enrichment**
   - Always adds: `historical_migration: true`, `analytics_source: "mixpanel"`
   - Geo mapping: `$city` → `$geoip_city_name`, `$region` → `$geoip_subdivision_1_name`, `mp_country_code` → `$geoip_country_code` and derived `$geoip_country_name`

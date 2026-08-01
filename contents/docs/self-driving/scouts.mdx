@@ -57,6 +57,12 @@ A scout writes its findings to your inbox by default, which is usually what you 
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
 
+<CalloutBox icon="IconInfo" title="When a scout pauses itself" type="fyi">
+
+If a scout fails five runs in a row, PostHog pauses it automatically so a broken configuration does not keep consuming runs on its normal schedule. It retries once a day. A successful retry resumes the scout automatically; you can also enable the scout again after checking its configuration.
+
+</CalloutBox>
+
 ## Steering a scout with a note
 
 Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
