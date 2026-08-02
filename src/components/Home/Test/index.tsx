@@ -132,6 +132,7 @@ export const CTAs = () => {
 }
 
 function Hero(): JSX.Element {
+    const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
@@ -204,7 +205,36 @@ function Hero(): JSX.Element {
                     </div>
 
                     <div className="mt-6 flex flex-col items-center min-w-0 w-full">
-                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
+                        <div className="@container">
+                            <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                                <CallToAction
+                                    to="https://app.posthog.com/signup"
+                                    size="lg"
+                                    state={{ newWindow: true, initialTab: 'signup' }}
+                                >
+                                    Get started - free
+                                </CallToAction>
+                                <CallToAction
+                                    type="secondary"
+                                    size="lg"
+                                    onClick={() => setShowIntegrationPrompt((current) => !current)}
+                                >
+                                    Install with AI
+                                </CallToAction>
+                            </div>
+                        </div>
+                        <motion.div
+                            className="overflow-hidden"
+                            initial={{ height: 0 }}
+                            animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
+                        >
+                            <div
+                                data-scheme="secondary"
+                                className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
+                            >
+                                <IntegrationPrompt />
+                            </div>
+                        </motion.div>
                         <SecondaryActions />
                     </div>
                 </div>
