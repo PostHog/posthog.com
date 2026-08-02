@@ -205,8 +205,8 @@ function Hero(): JSX.Element {
                     </div>
 
                     <div className="mt-6 flex flex-col items-center min-w-0 w-full">
-                        <div className="@container">
-                            <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                        <div className="@container w-full">
+                            <div className="flex flex-col items-center @xs:flex-row @xs:justify-center gap-3 @sm:gap-2">
                                 <CallToAction
                                     to="https://app.posthog.com/signup"
                                     size="lg"
@@ -224,11 +224,11 @@ function Hero(): JSX.Element {
                             </div>
                         </div>
                         <motion.div
-                            className="overflow-hidden"
+                            className="overflow-hidden w-full"
                             initial={{ height: 0 }}
                             animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
                         >
-                            <div className="mt-4">
+                            <div className="mt-4 flex justify-center">
                                 <PlatformInstall schema={wizardInstallSchema} selfDriving />
                             </div>
                         </motion.div>
