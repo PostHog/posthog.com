@@ -228,11 +228,8 @@ function Hero(): JSX.Element {
                             initial={{ height: 0 }}
                             animate={{ height: showIntegrationPrompt ? 'auto' : 0 }}
                         >
-                            <div
-                                data-scheme="secondary"
-                                className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
-                            >
-                                <IntegrationPrompt />
+                            <div className="mt-4">
+                                <PlatformInstall schema={wizardInstallSchema} selfDriving />
                             </div>
                         </motion.div>
                         <SecondaryActions />
