@@ -29,6 +29,7 @@ import {
     IconShieldLock,
     IconSparkles,
     IconStack,
+    IconSupport,
     IconTerminal,
     IconWarning,
 } from '@posthog/icons'
@@ -133,30 +134,34 @@ const TabPanel = ({
 }
 
 // Signal sources shown on the carousel's first slide, à la the homepage "debug and fix" slide.
-const signalSources: { Icon: IconComponent; color: string; name: string; description: string }[] = [
+const signalSources: { Icon: IconComponent; color: string; name: string; description: string; href: string }[] = [
     {
         Icon: IconWarning,
         color: 'text-yellow',
         name: 'Error tracking',
         description: 'Exceptions and stack traces grouped into issues',
+        href: '/error-tracking',
     },
     {
         Icon: IconRewindPlay,
         color: 'text-orange',
         name: 'Session replay',
         description: 'Dead clicks, quick backs, long stalls',
+        href: '/session-replay',
     },
     {
-        Icon: IconCompass,
+        Icon: IconSupport,
         color: 'text-blue',
-        name: 'Scouts',
-        description: 'Scheduled agents with durable memory',
+        name: 'Support',
+        description: 'Tickets and conversations from your users',
+        href: '/support',
     },
     {
         Icon: IconPlug,
         color: 'text-purple',
         name: 'External tools',
         description: 'Zendesk, Linear, GitHub issues',
+        href: '/docs/self-driving/signals',
     },
 ]
 
@@ -199,11 +204,19 @@ const loopTabs: TabbedCarouselTab[] = [
             >
                 <p className="m-0">A signal is a single observation about your product.</p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-x-4 gap-y-3 @sm:grid-cols-2">
-                    {signalSources.map(({ Icon, color, name, description }) => (
+                    {signalSources.map(({ Icon, color, name, description, href }) => (
                         <div key={name} className="flex items-start gap-2">
                             <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
                             <div>
-                                <p className="m-0 text-base font-bold text-primary">{name}</p>
+                                <p className="m-0 text-base font-bold">
+                                    <Link
+                                        to={href}
+                                        state={{ newWindow: true }}
+                                        className="text-primary underline underline-offset-2 hover:text-red dark:hover:text-yellow"
+                                    >
+                                        {name}
+                                    </Link>
+                                </p>
                                 <p className="m-0 text-sm leading-snug text-secondary">{description}</p>
                             </div>
                         </div>

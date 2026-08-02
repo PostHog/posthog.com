@@ -165,7 +165,7 @@ export const tools = [
         handle: 'support',
         name: 'Support',
         description: 'Built-in customer support with chat widget and unified inbox.',
-        slug: 'docs/support',
+        slug: 'support',
         category: 'communication',
         aliases: ['PostHog support', 'Customer support'],
     },
