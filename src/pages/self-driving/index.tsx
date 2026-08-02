@@ -134,18 +134,20 @@ const TabPanel = ({
 }
 
 // Signal sources shown on the carousel's first slide, à la the homepage "debug and fix" slide.
-const signalSources: { Icon: IconComponent; color: string; name: string; description: string; href?: string }[] = [
+const signalSources: { Icon: IconComponent; color: string; name: string; description: string; href: string }[] = [
     {
         Icon: IconWarning,
         color: 'text-yellow',
         name: 'Error tracking',
         description: 'Exceptions and stack traces grouped into issues',
+        href: '/error-tracking',
     },
     {
         Icon: IconRewindPlay,
         color: 'text-orange',
         name: 'Session replay',
         description: 'Dead clicks, quick backs, long stalls',
+        href: '/session-replay',
     },
     {
         Icon: IconSupport,
@@ -159,6 +161,7 @@ const signalSources: { Icon: IconComponent; color: string; name: string; descrip
         color: 'text-purple',
         name: 'External tools',
         description: 'Zendesk, Linear, GitHub issues',
+        href: '/docs/self-driving/signals',
     },
 ]
 
@@ -205,18 +208,14 @@ const loopTabs: TabbedCarouselTab[] = [
                         <div key={name} className="flex items-start gap-2">
                             <Icon className={`mt-0.5 size-5 shrink-0 ${color}`} />
                             <div>
-                                <p className="m-0 text-base font-bold text-primary">
-                                    {href ? (
-                                        <Link
-                                            to={href}
-                                            state={{ newWindow: true }}
-                                            className="text-primary hover:underline"
-                                        >
-                                            {name}
-                                        </Link>
-                                    ) : (
-                                        name
-                                    )}
+                                <p className="m-0 text-base font-bold">
+                                    <Link
+                                        to={href}
+                                        state={{ newWindow: true }}
+                                        className="text-primary underline underline-offset-2 hover:text-red dark:hover:text-yellow"
+                                    >
+                                        {name}
+                                    </Link>
                                 </p>
                                 <p className="m-0 text-sm leading-snug text-secondary">{description}</p>
                             </div>
