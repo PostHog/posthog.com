@@ -9,6 +9,14 @@ PostHog is now available on AWS Marketplace for SaaS products. The way we've cho
 
 AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team members set the price as a lump sum credit purchase for **annual pre-payment only**. Down the road, if we change our listing to public on the marketplace, we could set up usage-based billing through AWS (but that's future state).
 
+## Default to Stripe
+
+**Stripe is our default billing method. Only use AWS Marketplace when the customer specifically asks for it.**
+
+Stripe charges a flat fee per bank transfer regardless of deal size, and the cash lands with us straight away. AWS Marketplace takes a percentage cut on new contracts and disburses on its own schedule, so we get paid less and later, with more admin along the way.
+
+That said, we don't want to block customers from buying the way that's easiest for them. If procuring through their existing AWS spend is what unblocks the deal, use AWS Marketplace — it's available, we're just not promoting it. Don't offer it unprompted.
+
 ## Why this matters
 
 1. **Our ICP lives in AWS** - Product engineers already have AWS access and budget. Adding PostHog to their AWS bill just makes sense since we're part of their product infrastructure stack
