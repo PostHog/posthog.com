@@ -1,5 +1,5 @@
 ---
-title: Our context warehouse knows your data, the semantic layer tells it what to trust
+title: Building a semantic layer: What it is and how we did it at PostHog
 date: 2026-07-30
 rootPage: /blog
 sidebar: Blog
@@ -28,7 +28,7 @@ The problem is that "MRR", what it means at PostHog, which table holds it, and h
 
 Humans have this problem too. Every new analyst re-learns which revenue table is the real one and how Stripe is connected each time they join a new company. Agents just amplify the issue by answering confidently and hallucinating to fill the gaps in their knowledge, and nobody thinks to double check it.
 
-You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR" means the same thing on every call. That place is the [semantic layer](/docs/semantic-layer), and this is the story of building it into [PostHog's context warehouse](/blog/what-is-a-context-warehouse).
+You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR", and every other metric you want to define, means the same thing on every call. That place is the [semantic layer](/docs/semantic-layer), and this is the story of building it into [PostHog's context warehouse](/blog/what-is-a-context-warehouse).
 
 <!-- SCREENSHOT: the same "what was our MRR last month?" question producing different SQL / different answers across two agents --> ![What was our MRR last month](XX)
 
@@ -42,7 +42,7 @@ The most important thing to understand about it is what it doesn't do. It doesn'
 What it's really fixing is three kinds of knowledge that only exists as tribal memory:
 
 * **What our metrics are:** MRR isn't just "revenue", it's a specific calculation over a specific source.
-* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-warehouse/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid as much as possible.
+* **Which tables to trust (and which tables to avoid):** A mature project imports dozens of [sources](/docs/data-warehouse/sources) and builds hundreds of data models. Plenty of them could answer "revenue." Only one is current and blessed as accurate by the finance team. Others can be useful too, but there might be tables that we should avoid as much as possible, e.g. they have been deprecated. 
 * **How the data joins together:** The Stripe customer ID maps to an organization property, but only after it's reformatted, and nothing tells you that except the analyst who figured it out last time.
 
 If you're a small company with a handful of tables, you probably know where everything is. But, as you grow you add more data sources and models, the meaning of those tables stop being obvious, least of all to an AI agent seeing your schema for the first time.
@@ -66,7 +66,7 @@ The reason three tools gave three MRR numbers is that each had to invent an answ
 
 ## AI generated, human owned
 
-Agents are genuinely good at proposing improvements to your data governance. Point one at your schema and it'll happily draft metric definitions, suggest which tables look canonical, and spot likely joins from column names and sample data. Doing the tedious first pass is useful, but giving an agent edit access to your data widens the gap between trusting your data and not being sure.
+Agents are genuinely good at proposing improvements to your data governance. Point one at your schema and it'll happily draft metric definitions, suggest which tables look canonical, and spot likely joins from column names and sample data. Letting agents do the first pass is useful, but going further are letting it edit doesn't improve trust, it muddles it further.  
 
 So everything an agent creates lands as `proposed`. Nothing an agent touches is ever canonical on its own. A human promotes it, approving a metric, certifying a table, accepting a join. We added two guardrails to verify any definition changes even after approval:
 
@@ -93,7 +93,9 @@ A good part of it is. Users can define how the agent should calculate a given me
 
 ### "Why not just point a metric at an existing insight?"
 
-Insights already blend SQL, funnels, and trends, and pointing at one would keep the metric and the dashboard in lockstep. The problem is that insights are shared objects that people edit all day, and "editing the definition resets approval" is impossible to enforce on something everyone's mutating. So instead of pointing at the insight, `metric-create` takes the insight, snapshots its query, and remembers where it came from. You get lockstep awareness with the drift flag, without handing governance to an object anyone can change on a whim.
+Insights already blend SQL, funnels, and trends. Pointing at one would keep the metric and the dashboard in lockstep. The problem is that insights are shared objects that people edit all day. "Editing the definition resets approval" is impossible to enforce on something everyone's mutating. 
+
+Instead of pointing at the insight, `metric-create` takes the insight, snapshots its query, and remembers where it came from. You get lockstep awareness with the drift flag, without handing governance to an object anyone can change on a whim.
 
 ### "Why not build a semantic query language, like dbt?"
 
@@ -115,4 +117,4 @@ We're measuring success around this by checking:
 
 As more of what [we build becomes agent-driven](/newsletter/2030-shaped-software), reliable data is the difference between an AI you can trust and one you can't.
 
-The semantic layer is in beta. Want access, or hit a bug? Let me know!
+The semantic layer is in beta. Get started with [these instructions](https://posthog.com/docs/semantic-layer/start-here), or setup the [PostHog MCP](https://posthog.com/mcp) and ask your agent to recommend a new semantic layer catalog.

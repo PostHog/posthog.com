@@ -83,7 +83,7 @@ Once app performance starts to suffer and you're writing enough SQL to fill a bo
 
 “Single source of truth” is a tired cliché, but the underlying problem is real: without a shared layer, everyone ends up building their own version of the truth. A warehouse, on the other hand, gives you a place to define things factually and without subjective bias.
 
-That can include not just what data should be referenced, but also metric definitions, canonical tables or models, query versions, and more. Most importantly it also gives you a paper trail: when the CEO asks where a number came from then you have a comprehensible source to reference. 
+That can include not just what data should be referenced, but also [metric definitions](blog/semantic-layer), canonical tables or models, query versions, and more. Most importantly it also gives you a paper trail: when the CEO asks where a number came from then you have a comprehensible source to reference. 
 
 ### 4. Governance, unfortunately
 
