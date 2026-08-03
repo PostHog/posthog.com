@@ -158,12 +158,9 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 **Keeping up with what we ship**
 
-We recommend everyone at PostHog joins these two channels to stay current on what's shipped and what's coming:
+We recommend everyone at PostHog joins [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) to stay current on what's shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updates constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) — what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs). Updates constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) — what's shipping soon. Owned by the [Marketing team](/teams/marketing). Posts a daily digest.
-
-Both channels are powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into the relevant channel. PR authors can opt in or out manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for more detail.
+The channel is powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into it. PR authors can opt in or out manually via the *Publish to changelog?* checkbox on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for more detail.
 
 **Slack etiquette**
 

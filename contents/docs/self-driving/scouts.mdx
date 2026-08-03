@@ -57,9 +57,11 @@ A scout writes its findings to your inbox by default, which is usually what you 
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
 
-<CalloutBox icon="IconInfo" title="When a scout pauses itself" type="fyi">
+<CalloutBox icon="IconInfo" title="When PostHog flags or pauses a scout" type="fyi">
 
-If a scout fails five runs in a row, PostHog pauses it automatically so a broken configuration does not keep consuming runs on its normal schedule. It retries once a day. A successful retry resumes the scout automatically; you can also enable the scout again after checking its configuration.
+PostHog checks whether a scout's output is being used. A scout that stays quiet is flagged for review but keeps running, because a quiet watchdog may be doing its job. If a scout has established reports that nobody acts on, PostHog warns you first and pauses it after a week unless someone engages with its reports.
+
+An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
 
 </CalloutBox>
 

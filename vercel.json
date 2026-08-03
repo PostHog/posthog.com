@@ -1319,10 +1319,6 @@
             "destination": "/docs/apps:ext?"
         },
         {
-            "source": "/support",
-            "destination": "/questions"
-        },
-        {
             "source": "/handbook/company/1-1s",
             "destination": "/handbook/company/management"
         },

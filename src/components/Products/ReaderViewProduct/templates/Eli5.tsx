@@ -17,7 +17,7 @@ const Eli5 = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">What does it do?</h2>
+            <h2 className="mb-3">What does it do?</h2>
             {(HogComponent || hogSrc) && (
                 <div
                     className={`float-right ml-4 @2xl/reader-content:ml-8 @5xl/reader-content:-mt-8 max-w-full ${hogSizeClasses}`}

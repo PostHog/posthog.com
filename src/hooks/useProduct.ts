@@ -21,7 +21,6 @@ import {
     IconStickiness,
     IconAsterisk,
     IconAI,
-    IconSupport,
     IconTestTube,
     IconTarget,
     IconArrowUpRight,
@@ -33,6 +32,7 @@ import {
 import useProducts from './useProducts'
 import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
+import { support } from './productData/support'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -66,12 +66,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             color: 'purple',
             colorSecondary: 'purple',
         },
-        {
-            ...getTool('support'),
-            Icon: IconSupport,
-            color: 'blue',
-            colorSecondary: 'blue',
-        },
+        support,
         {
             ...getTool('posthog_code'),
             Icon: IconCoffee,
