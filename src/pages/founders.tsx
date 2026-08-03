@@ -6,22 +6,31 @@ import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import SidebarExplorer from 'components/BlogLanding/variants/SidebarExplorer'
 
-// Boolean kill-switch flag for the founders-hub redesign. Rolled out to 100% — everyone gets the
-// new SidebarExplorer layout. Disable the flag in PostHog to instantly revert everyone to the
-// old icon-grid Hub (no deploy needed).
-export const FOUNDERS_REDESIGN_FLAG = 'founders-hub-redesign'
+// Kill switch, not an A/B test: disabling it in PostHog reverts everyone to the old hub.
+const REDESIGN_FLAG = 'founders-hub-redesign'
+
+const intro = (
+    <>
+        <p>We've curated the best advice to build a successful company.</p>
+        <p>
+            Some are lessons we've heard from fellow founders, others are from first-hand experience building PostHog to
+            product-market fit and beyond.
+        </p>
+    </>
+)
+
+const productEngineersLink = (
+    <Link to="/product-engineers" className="underline font-medium">
+        Product engineer's hub
+    </Link>
+)
 
 export const Sidebar = () => {
     return (
         <>
             <h6 className="mb-2">About Founder's hub</h6>
 
-            <p>We've curated the best advice to build a successful company.</p>
-
-            <p>
-                Some are lessons we've heard from fellow founders, others are from first-hand experience in building
-                PostHog to product-market fit and beyond.
-            </p>
+            {intro}
 
             <hr className="my-4" />
 
@@ -38,32 +47,20 @@ export const Sidebar = () => {
 
             <hr className="my-4" />
 
-            <p>
-                You might also be interested in our{' '}
-                <Link to="/product-engineers" className="underline font-medium">
-                    Product engineer's hub
-                </Link>
-            </p>
+            <p>You might also be interested in our {productEngineersLink}</p>
         </>
     )
 }
 
-const foundersIntro = (
+const explorerIntro = (
     <>
-        <p>We've curated the best advice to build a successful company.</p>
-        <p>
-            Some are lessons we've heard from fellow founders, others are from first-hand experience building PostHog to
-            product-market fit and beyond. You might also like our{' '}
-            <Link to="/product-engineers" className="underline font-medium">
-                Product engineer's hub
-            </Link>
-            .
-        </p>
+        {intro}
+        <p>You might also like our {productEngineersLink}.</p>
     </>
 )
 
 const ControlHub = () => <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
-const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founder's hub" intro={foundersIntro} />
+const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founder's hub" intro={explorerIntro} />
 
 export default function Founders() {
     const posthog = usePostHog()
@@ -72,15 +69,13 @@ export default function Founders() {
         <>
             <SEO title="Founder's hub - PostHog" />
             {/*
-              Kill switch: show the new layout by default (it's the 100% experience) and only fall
-              back to the old Hub when the flag is explicitly disabled. Rendering the new layout as
-              the placeholder means no flash while flags load, and if PostHog is unreachable users
-              still get the intended new layout.
+              Rendering the redesign as the placeholder too means no flash while flags load, and
+              keeps the intended layout if PostHog is unreachable.
             */}
             <RenderInClient
                 placeholder={<RedesignedHub />}
                 render={() =>
-                    posthog?.isFeatureEnabled?.(FOUNDERS_REDESIGN_FLAG) === false ? <ControlHub /> : <RedesignedHub />
+                    posthog?.isFeatureEnabled?.(REDESIGN_FLAG) === false ? <ControlHub /> : <RedesignedHub />
                 }
             />
         </>

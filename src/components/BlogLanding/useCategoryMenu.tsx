@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import slugify from 'slugify'
-import * as Icons from '@posthog/icons'
 import { getParams } from 'components/Edition/Posts'
-import { tagOptions } from './CategoryGrid'
+import { DEFAULT_TAG_ICON, getTagIcon } from './tagOptions'
 import { useCategoryTags } from './useCategoryTags'
 
 export interface CategoryMenuItem {
@@ -21,6 +20,8 @@ interface PostNode {
     }
 }
 
+const PAGE_SIZE = 100
+
 // Strapi caps pageSize at 100, so fetch every page and concatenate.
 const fetchAllPosts = async (folder: string): Promise<PostNode[]> => {
     const { filters } = getParams(folder, undefined, ['date:desc'])
@@ -30,14 +31,14 @@ const fetchAllPosts = async (folder: string): Promise<PostNode[]> => {
                 fields: ['title', 'slug'],
                 populate: ['post_tags'],
                 sort: 'date:desc',
-                pagination: { page, pageSize: 100 },
+                pagination: { page, pageSize: PAGE_SIZE },
                 filters,
             },
             { encodeValuesOnly: true }
         )
     const first = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(1)}`).then((r) => r.json())
     const pageCount = first?.meta?.pagination?.pageCount || 1
-    // allSettled so a single flaky page doesn't drop every post (which would empty the whole nav).
+    // allSettled so a single flaky page doesn't drop every post, which would empty the whole nav.
     const rest = await Promise.allSettled(
         Array.from({ length: Math.max(0, pageCount - 1) }, (_, i) =>
             fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/posts?${buildQuery(i + 2)}`).then((r) => r.json())
@@ -48,12 +49,9 @@ const fetchAllPosts = async (folder: string): Promise<PostNode[]> => {
 }
 
 /**
- * Builds a handbook-style nested `TreeMenu` tree for a folder: each category is a collapsible
- * parent with its articles listed as children. Sourced from the same tag API as `CategoryGrid`
- * plus a fetch of every post in the folder (grouped by tag). Categories with no articles are
- * omitted — otherwise `TreeMenu` renders them as a childless link that navigates away when
- * clicked (breaking the expand-in-place UX). Returns `loading` so the caller can mount
- * `TreeMenu` only once the data is present (it memoizes its items on first render).
+ * Builds a nested `TreeMenu` tree for a folder: each category is a collapsible parent with its
+ * articles as children. Categories with no articles are omitted, otherwise `TreeMenu` renders
+ * them as a childless link that navigates away instead of expanding in place.
  */
 export function useCategoryMenu(folder: string): { items: CategoryMenuItem[]; loading: boolean } {
     const { tags, loading: tagsLoading } = useCategoryTags(folder)
@@ -75,25 +73,27 @@ export function useCategoryMenu(folder: string): { items: CategoryMenuItem[]; lo
         }
     }, [folder])
 
-    const items = tags
-        .map((tag) => {
-            const label = tag.attributes.label
-            const iconName = tagOptions[label as keyof typeof tagOptions]?.icon || 'IconApps'
-            const Icon = Icons[iconName as keyof typeof Icons] as any
+    const items = useMemo(
+        () =>
+            tags
+                .map((tag) => {
+                    const label = tag.attributes.label
+                    const Icon = getTagIcon(label) || DEFAULT_TAG_ICON
 
-            const children = posts
-                .filter((post) => post.attributes.post_tags?.data?.some((t) => t.attributes.label === label))
-                .map((post) => ({ name: post.attributes.title, url: post.attributes.slug }))
-
-            return {
-                name: label,
-                url: `/${folder}/${slugify(label, { lower: true, strict: true })}`,
-                icon: <Icon className="size-4 opacity-60" />,
-                children,
-            }
-        })
-        // Hide categories with no articles (e.g. duplicate/empty tags like "Finance & ops").
-        .filter((item) => item.children.length > 0)
+                    return {
+                        name: label,
+                        url: `/${folder}/${slugify(label, { lower: true, strict: true })}`,
+                        icon: <Icon className="size-4 opacity-60" />,
+                        children: posts
+                            .filter((post) =>
+                                post.attributes.post_tags?.data?.some((t) => t.attributes.label === label)
+                            )
+                            .map((post) => ({ name: post.attributes.title, url: post.attributes.slug })),
+                    }
+                })
+                .filter((item) => item.children.length > 0),
+        [tags, posts, folder]
+    )
 
     return { items, loading: tagsLoading || postsLoading }
 }

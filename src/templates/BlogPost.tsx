@@ -379,11 +379,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     setPostID(posts.data[0].id)
                 }
             })
-            .catch(() => {
-                // Non-fatal: postID only feeds the like button, so leave it unset if the
-                // lookup fails (e.g. a transient/aborted request in local dev) rather than
-                // throwing an unhandled promise rejection.
-            })
+            // postID only feeds the like button, so leave it unset if the lookup fails.
+            .catch(() => undefined)
     }, [pathname])
 
     useEffect(() => {

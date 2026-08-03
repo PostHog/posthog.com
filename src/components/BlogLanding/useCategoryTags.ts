@@ -7,15 +7,14 @@ export interface CategoryTag {
     }
 }
 
-/**
- * Fetches the post-tags for a folder from the Squeak/Strapi API. Shared by `CategoryGrid`
- * (tile/row rendering) and `useCategoryMenu` (handbook-style TreeMenu items).
- */
+/** Fetches a folder's post-tags. Shared by `CategoryGrid` and `useCategoryMenu`. */
 export function useCategoryTags(folder: string): { tags: CategoryTag[]; loading: boolean } {
     const [tags, setTags] = useState<CategoryTag[]>([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        let cancelled = false
+        setLoading(true)
         const query = qs.stringify(
             {
                 pagination: { pageSize: 100 },
@@ -33,10 +32,14 @@ export function useCategoryTags(folder: string): { tags: CategoryTag[]; loading:
         fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/post-tags?${query}`)
             .then((response) => response.json())
             .then((data) => {
+                if (cancelled) return
                 setTags(data.data || [])
                 setLoading(false)
             })
-            .catch(() => setLoading(false))
+            .catch(() => !cancelled && setLoading(false))
+        return () => {
+            cancelled = true
+        }
     }, [folder])
 
     return { tags, loading }

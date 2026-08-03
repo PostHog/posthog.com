@@ -11,19 +11,17 @@ import { LandingVariantProps } from '../types'
 
 type SortValue = 'recent' | 'popular'
 
+const CATEGORY_SKELETON_COUNT = 10
+
 /**
- * Sidebar explorer, built on the handbook's `ReaderView` shell so it inherits the exact chrome:
- * the darker `secondary`-scheme sub-toolbar + left nav rail, with bright `primary`-scheme main
- * content. Categories render through the shared `TreeMenu` in `expandOnly` mode (collapsible,
- * expand-in-place). The main column shows the hero (most popular) via the shared `FeaturedPost`
- * plus a 2-up feed toggled between Recent and Popular.
+ * Sidebar explorer, built on the handbook's `ReaderView` shell so it inherits the same chrome:
+ * a `secondary`-scheme sub-toolbar and left nav rail against `primary`-scheme content. The main
+ * column shows the highest-scoring post as a hero plus a feed toggled between Recent and Popular.
  */
 export default function SidebarExplorer({ folder, title, intro }: LandingVariantProps) {
     const { hero, popular, recent, isLoading } = useLandingPosts(folder)
     const { items: categoryItems, loading: categoriesLoading } = useCategoryMenu(folder)
     const [sort, setSort] = useState<SortValue>('recent')
-
-    const posts = sort === 'recent' ? recent : popular
 
     const leftSidebar = (
         <div className="space-y-5 py-2">
@@ -35,43 +33,33 @@ export default function SidebarExplorer({ folder, title, intro }: LandingVariant
                 <div className="text-muted text-sm font-medium px-1.5 py-0.5">Categories</div>
                 {categoriesLoading ? (
                     <div className="space-y-px">
-                        {Array.from({ length: 10 }).map((_, i) => (
+                        {Array.from({ length: CATEGORY_SKELETON_COUNT }).map((_, i) => (
                             <div key={i} className="h-7 bg-accent rounded animate-pulse" />
                         ))}
                     </div>
                 ) : (
-                    // Keyed on load so it mounts once the items are present (TreeMenu memoizes items on
-                    // first render). expandOnly = category rows toggle in place instead of navigating.
-                    <TreeMenu key="loaded" items={categoryItems} watchPath={false} expandOnly />
+                    // Rendered only once loaded because TreeMenu memoizes its items on first render.
+                    <TreeMenu items={categoryItems} watchPath={false} expandOnly />
                 )}
             </div>
         </div>
     )
 
     return (
-        <ReaderView
-            title={title}
-            hideTitle
-            homeURL={`/${folder}`}
-            description="The best advice for building a successful company."
-            leftSidebar={leftSidebar}
-            hideRightSidebar
-            proseSize="base"
-        >
+        <ReaderView title={title} hideTitle leftSidebar={leftSidebar} hideRightSidebar proseSize="base">
             <div className="not-prose space-y-8">
                 <FeaturedPost
                     {...hero?.attributes}
-                    // Keep the skeleton until a hero exists, so an empty/partial folder never
-                    // renders a broken "Invalid Date" card with an undefined link.
+                    // Keep the skeleton until a hero exists, so an empty or partial folder never
+                    // renders a card with an invalid date and an undefined link.
                     isLoading={isLoading || !hero}
                     containerStack
                     titleClassName="text-xl @2xl:text-2xl"
                 />
                 <PostSection
                     title={sort === 'recent' ? 'Most recent' : 'Most popular'}
-                    posts={posts}
+                    posts={sort === 'recent' ? recent : popular}
                     isLoading={isLoading}
-                    columns={3}
                     action={
                         <ToggleGroup
                             title="Sort by"

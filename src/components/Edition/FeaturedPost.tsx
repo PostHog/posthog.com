@@ -32,25 +32,19 @@ export default function FeaturedPost({
     titleClassName,
 }) {
     const ctx = useContext(PostsContext)
-    // Callers outside the Edition provider tree (e.g. the founders landing) pass `isLoading`
-    // directly; the blog keeps reading it from context, so its behavior is unchanged.
+    // Callers outside the Edition provider tree (e.g. the founders landing) pass `isLoading` in.
     const isLoading = isLoadingProp ?? ctx?.isLoading
     const postDate = dayjs(date || publishedAt).format('MMM D, YYYY')
     const imageURL = featuredImage?.image?.data?.attributes?.url || featuredImage?.url
 
-    // `containerStack` opts into @container-relative stacking (for resizable window columns);
-    // the default keeps the blog's viewport-breakpoint layout untouched.
-    // containerStack: the image always stays 16:9 (never cropped/stretched). While the column is
-    // narrow the text stacks *under* the image; it only moves beside the image once there's room
-    // (@3xl), so it never leaves a big empty gap next to a tall image. Blog default untouched.
+    // containerStack stacks on the container instead of the viewport, and only splits into
+    // columns at @3xl, so a resizable window column never leaves a gap beside the image.
     const sectionClasses = containerStack
         ? 'grid @3xl:grid-cols-2 gap-6 @3xl:gap-8 items-center rounded-md border border-input p-5 bg-accent'
         : 'grid md:grid-cols-2 gap-6 md:gap-8 items-center rounded-md border border-input p-5 md:mx-4 bg-accent'
     const imageWrapperClasses = containerStack
         ? 'w-full aspect-video rounded-md overflow-hidden'
         : 'w-full aspect-[600/315] rounded-md overflow-hidden'
-    const linkClasses = ''
-    const textClasses = ''
 
     const section = (
         <section className={sectionClasses}>
@@ -59,11 +53,11 @@ export default function FeaturedPost({
             ) : (
                 <>
                     <div className={imageWrapperClasses}>
-                        <Link to={slug} className={linkClasses}>
+                        <Link to={slug}>
                             <img className="w-full h-full object-cover" src={imageURL || '/images/og/default.png'} />
                         </Link>
                     </div>
-                    <div className={textClasses}>
+                    <div>
                         <p className="m-0 text-[15px] opacity-75">{postDate}</p>
                         <h2 className={`mt-2 mb-3 ${titleClassName || 'text-3xl lg:text-4xl'}`}>
                             <Link

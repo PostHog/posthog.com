@@ -1,9 +1,6 @@
 import React from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import CategoryGrid, { tagOptions } from 'components/BlogLanding/CategoryGrid'
-
-// Re-exported for backwards compatibility (e.g. templates/Hub/Tag.tsx imports it from here).
-export { tagOptions }
+import CategoryGrid from 'components/BlogLanding/CategoryGrid'
 
 export default function Hub({ folder, sidebar, title }: { folder: string; sidebar?: React.ReactNode; title: string }) {
     return (

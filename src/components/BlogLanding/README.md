@@ -18,13 +18,14 @@ and `/newsletter` by passing a different `folder`.
 
 | File | Purpose |
 |---|---|
-| `useLandingPosts.ts` | Hook. Fetches `popular` (`score:desc`) and `recent` (`date:desc`) posts for a folder via the shared `usePosts` + `getParams`/`sortOptions` from `components/Edition/Posts`. Returns `{ hero, popular, recent, isLoading }` where `hero` is the top-scoring post and `popular` excludes it. |
+| `useLandingPosts.ts` | Hook. Fetches `popular` (`score:desc`) and `recent` (`date:desc`) posts for a folder via the shared `usePosts` + `getParams`/`sortOptions` from `components/Edition/Posts`. Returns `{ hero, popular, recent, isLoading }` where `hero` is the top-scoring post and both feeds exclude it. |
 | `useCategoryTags.ts` | Hook. Fetches a folder's `post-tags` from Squeak/Strapi. Shared source for `CategoryGrid` and `useCategoryMenu`. |
 | `useCategoryMenu.tsx` | Hook. Builds a nested category tree for a folder: each category (`{ name, url, icon }`) with its articles as `children`, from the tag API + a one-shot posts fetch grouped by tag. Returns `{ items, loading }`, shaped for the shared `TreeMenu`. |
-| `CategoryGrid.tsx` | The category tiles as an auto-fit grid, sourced via `useCategoryTags`. Used by the founders `Hub`. Owns the `tagOptions` tag→icon map (re-exported from `components/Hub` for backwards compatibility). |
-| `PostSection.tsx` | A labeled grid of `PostCard`s (reuses `components/Edition/PostCard`) with loading skeleton + empty state. Grid reflows via `@container` queries. Optional `action` slot (e.g. a sort toggle) and `columns` (2 or 3). |
+| `tagOptions.ts` | The category label → icon map, plus `getTagIcon()` (case-insensitive lookup) and `DEFAULT_TAG_ICON`. Used by `CategoryGrid`, `useCategoryMenu`, and `templates/Hub/Tag.tsx`. |
+| `CategoryGrid.tsx` | The category tiles as an auto-fit grid, sourced via `useCategoryTags`. Used by the founders `Hub`. |
+| `PostSection.tsx` | A labeled grid of `PostCard`s (reuses `components/Edition/PostCard`) with loading skeleton + empty state. Grid reflows via `@container` queries. Optional `action` slot for a sort toggle. |
 | `types.ts` | `LandingVariantProps` (`folder`, `title`, `intro`). |
-| `variants/SidebarExplorer.tsx` | The landing layout. Built on the handbook's `ReaderView` shell (`components/ReaderView`) so it inherits the darker `secondary`-scheme sub-toolbar + nav rail and bright `primary`-scheme main content. Categories render via the shared `TreeMenu` in `expandOnly` mode (collapsible, expand-in-place). Main column = hero via shared `FeaturedPost` (`containerStack`) + one 2-up feed toggled Recent/Popular via shared `ToggleGroup`. |
+| `variants/SidebarExplorer.tsx` | The landing layout. Built on the handbook's `ReaderView` shell (`components/ReaderView`) so it inherits the darker `secondary`-scheme sub-toolbar + nav rail and bright `primary`-scheme main content. Categories render via the shared `TreeMenu` in `expandOnly` mode (collapsible, expand-in-place). Main column = hero via shared `FeaturedPost` (`containerStack`) + one feed toggled Recent/Popular via shared `ToggleGroup`. |
 
 ## Reused from elsewhere (not rebuilt here)
 
