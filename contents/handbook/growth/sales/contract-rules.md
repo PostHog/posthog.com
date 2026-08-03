@@ -285,15 +285,9 @@ We also sometimes receive unsolicited requests to vary our terms. In these insta
 
 ### How customers should suggest requested terms
 
-The customer should redline the current .docx version of the document in question. Always pull that copy fresh from the master template in Google Drive at the moment you send it:
+The customer should redline the current .docx version of the document in question. You can find the latest versions of the templates in the Legal Documents tab in the <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink> Slack channel, or here — <PrivateLink url="https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit">MSA</PrivateLink>, <PrivateLink url="https://docs.google.com/document/d/1z1so_nF9f6GS0uOtf-q_Mt7LZFQCukht/edit">DPA</PrivateLink>, <PrivateLink url="https://docs.google.com/document/d/1K-1ErUrHbvNs8ed8CXSQIuA0xJdg55sC/edit">NDA</PrivateLink> (do not save versions locally).
 
--   <PrivateLink url="https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit">MSA</PrivateLink>
--   <PrivateLink url="https://docs.google.com/document/d/1K-1ErUrHbvNs8ed8CXSQIuA0xJdg55sC/edit">NDA</PrivateLink>
--   [DPA](/dpa) (generated from the site, so it's always current)
-
-These are also pinned to the canvas at the top of the #team-sales Slack channel.
-
-> **Never send a template from a local copy, a previous deal, or a forwarded thread.** The templates are revised regularly and sometimes materially — most recently the MSA changed substantially at the end of June 2026. Sending a stale template means negotiating from terms we no longer offer, and it's a lot of wasted legal time to unwind.
+> **Never send a template from a local copy, a previous deal, or a forwarded thread.** The templates are revised regularly and sometimes materially. Sending a stale template means negotiating from terms we no longer offer, and it's a lot of wasted legal time to unwind.
 
 > We don't accept redlines on our standard terms of service and if a customer has proposed this you should share the correct templates with them before involving legal.
 

@@ -169,8 +169,6 @@ Occasionally, customers will want to sign an MSA instead of referencing our term
 
 Sometimes large customers will ask for changes to our MSA. We have a list of the kinds of changes we will/won't consider in a private repo in the [company-internal sales contract changes directory](https://github.com/PostHog/company-internal/blob/master/finance/sales%20contract%20changes) that you can generally agree to without the Ops team reviewing. However, if you are ever in doubt, ask in `#legal` in Slack
 
-> **The MSA was materially revised at the end of June 2026** to add a license covering model training on customer data. Customers signed onto an earlier version of the MSA don't have that license at all — so they can't be opted in to AI training, and the option should be disabled on their account rather than left available for them to switch on. Check which version of the template a customer signed before answering questions about AI training.
-
 ## Business Associate Agreement (BAA)
 
 We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform packages which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
