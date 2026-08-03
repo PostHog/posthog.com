@@ -23,9 +23,6 @@ We're not a ticket-routing operation. We genuinely care about making our users' 
 
 ## Slack channels to stay current
 
-To answer customer questions well we need to know what's just shipped and what's about to land. Two internal channels keep this in front of you — every member of the Support team should join both:
+To answer customer questions well we need to know what's just shipped. The [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) internal channel keeps this in front of you — every member of the Support team should join it. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
-
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the channel. Engineers can opt a PR in or out via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
+The channel is populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into it. Engineers can opt a PR in or out via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
