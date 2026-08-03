@@ -24,8 +24,10 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
+import HeroCTA, { HeroCtaProvider, useHeroCtaVariant } from 'components/Home/HeroCTA'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { cn } from '../../../utils'
 
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
 function LazyHeroCarousel({ className }: { className?: string }) {
@@ -132,6 +134,20 @@ export const CTAs = () => {
 }
 
 function Hero(): JSX.Element {
+    // Some CTA variants start at the top of the layout, level with the headline rather than below it.
+    // For those, the headline moves into the left grid column so the CTA column can begin alongside it
+    // – matching `pt-4` on both keeps their text tops on the same line. The logo stays put either way.
+    const { alignsWithHeadline } = useHeroCtaVariant()
+
+    const headline = (
+        <h1 className="!text-3xl @xl:!text-4xl pt-4 mt-0">
+            Shift your product into{' '}
+            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
+                self-driving mode
+            </span>
+        </h1>
+    )
+
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
@@ -140,15 +156,11 @@ function Hero(): JSX.Element {
                     <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
                 </h1>
 
-                <h1 className="!text-3xl @xl:!text-4xl pt-4">
-                    Shift your product into{' '}
-                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-                        self-driving mode
-                    </span>
-                </h1>
+                {alignsWithHeadline ? null : headline}
 
                 <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
                     <div className="min-w-0">
+                        {alignsWithHeadline ? headline : null}
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
@@ -203,9 +215,19 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full">
-                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
-                        <SecondaryActions />
+                    {/* CTA variant comes from the `homepage-cta` experiment – see
+                        components/Home/HeroCTA/README.md. Falls back to the control (the wizard
+                        install card) until flags resolve. The MCP / demo / talk-to-a-human row that
+                        used to sit under this was removed from the hero; `SecondaryActions` is still
+                        used by `GetStarted` and `CTAs`. */}
+                    <div
+                        className={cn(
+                            'flex flex-col items-center min-w-0 w-full',
+                            // pt-4 mirrors the headline's own top padding so the two line up exactly.
+                            alignsWithHeadline ? '@xl:pt-4 mt-6 @xl:mt-0' : 'mt-6'
+                        )}
+                    >
+                        <HeroCTA />
                     </div>
                 </div>
             </div>
@@ -229,7 +251,9 @@ export default function HomeTest() {
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
             <div className="space-y-12">
-                <Hero />
+                <HeroCtaProvider>
+                    <Hero />
+                </HeroCtaProvider>
                 <Customers />
                 <DataStackSection />
                 <PricingSection />
