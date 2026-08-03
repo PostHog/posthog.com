@@ -179,6 +179,40 @@ The last few are worth calling out because they surprise people: a scout can wat
 
 For customer-shaped ideas across verticals, and the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) behind them, send them to [scout examples](/docs/self-driving/scout-examples). For a deep dive with two real scouts traced end to end and a walkthrough video, [What is a scout?](/blog/what-is-a-scout) is the best single link to leave behind.
 
+## The AI observability play
+
+More of our accounts are AI products every month, and they're one of the easiest self-driving pitches we have: the customer already knows their agent misbehaves in production, and already knows nobody is reading every trace. Two signal types turn [AI observability](/docs/ai-observability/start-here) data into inbox reports. They set up differently, so it's worth knowing both by name rather than gesturing at "we watch your LLM stuff."
+
+### Signal: AI observability
+
+The chain: **their agent makes calls → traces land in AI observability → an [evaluation](/docs/ai-evals) scores those traces → an [evaluation report](/docs/ai-evals#evaluation-reports) summarizes the results → an inbox report is created.**
+
+Three steps to start emitting it:
+
+1. [Ingest AI observability events](/docs/ai-observability/start-here) into PostHog.
+2. Create an [online evaluation](/docs/ai-evals) that scores those events – LLM-as-a-judge, code-based Hog, or sentiment.
+3. Turn on [evaluation reports](/docs/ai-evals#evaluation-reports). Instead of a human reading every eval result, an agent reads a batch of them and writes up what it found, and that summary is the signal.
+
+Step three is the one reps skip. An evaluation on its own is a quality dashboard, and dashboards are exactly the thing self-driving is supposed to replace. The report is what closes the loop, and it's a toggle. This signal type is rolled out to everyone, so pitch it without caveats.
+
+### Signal: product analytics
+
+The chain: **their agent makes calls → traces land in AI observability → [anomaly detection](/docs/alerts#anomaly-detection) spots something → an agent investigates it → real anomalies become an inbox report.**
+
+1. Ingest AI observability events (same first step).
+2. Create an [anomaly detection alert](/docs/alerts#anomaly-detection) on an AI observability insight – AI errors, latency, and cost are the three that earn their keep.
+3. Enable agent investigation on the alert. Rather than telling you a number moved, the agent goes and checks whether the anomaly is real, digs through the data, and writes a notebook with what it found. Only true positives get sent to self-driving.
+
+This one is still in alpha. Say so on the call.
+
+### How to pitch these
+
+- **The anomaly investigation is the sharpest version of "a scout is not an alert" we have.** These customers already have a latency alert and a cost alert, and they already ignore both. "It checks whether the spike is real before it interrupts you, and shows you its work" is a difference they feel immediately.
+- **Be straight about the free tier.** The first 100k LLM events a month are free and each evaluation run counts as one of those events, so a customer can stand up an eval and a report without paying us anything – and a customer running evals at real volume will reach paid sooner than they expect. Say both halves. Someone who works out the second half on their own invoice trusts you less.
+- **Anchor on one failure mode, not "AI quality."** Ask what their agent gets wrong that makes support tickets, then write the eval for that. Same rule as everywhere else on this page: "it monitors your LLM quality" makes a buyer stop listening, "it'll tell you when the agent starts confidently citing docs that don't exist" doesn't.
+
+Scouts that explore AI observability data directly are in progress. Until they land, these two are what you sell.
+
 ## Run one on your own accounts first
 
 The best preparation for pitching a scout is having one. You'll explain it better, you'll have a screenshot, and you'll know where the rough edges are before a customer finds them.
@@ -241,6 +275,7 @@ For the five minutes before a call.
 - **The question that separates the two:** "Should everything in that stream get worked, or does someone need to decide what matters first?"
 - **Best demo move:** toggle a source and watch the queue fill, or make a scout on their data and run it on demand, live.
 - **Best close:** one concrete thing pointed at one thing they care about.
+- **On an AI account:** eval + [evaluation report](/docs/ai-evals#evaluation-reports) is the generally available play; anomaly detection with agent investigation is the alpha one. Both start with getting [AI observability](/docs/ai-observability/start-here) events in.
 - **Never promise:** auto-merge, total coverage from a scout, or a PR from every report.
 - **Links to leave behind:** [What is a scout?](/blog/what-is-a-scout), [scout examples](/docs/self-driving/scout-examples), [self-driving docs](/docs/self-driving).
 - **Have open in another tab:** [the FAQ](/docs/self-driving/faq) for anything you get asked cold, and [pricing](/docs/self-driving/pricing) so you never guess at a number.
