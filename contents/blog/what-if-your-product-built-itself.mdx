@@ -55,7 +55,7 @@ So we group signals, and assign weights to something we call a report. When a re
 
 When it comes to this grouping, our first instinct was the obvious one: embed every signal and cluster on those embeddings to find related ones. It worked poorly.
 
-Say you've got an error from checkout, an error from onboarding, and a Slack message about onboarding breaking. The two onboarding signals are the same problem and should land together. But an off-the-shelf embedding model groups text that is **structurally similar**, instead of using it's **meaning**, so it files the two errors together (both are stack traces) and leaves the Slack message off on its own.
+Say you've got an error from checkout, an error from onboarding, and a Slack message about onboarding breaking. The two onboarding signals are the same problem and should land together. But an off-the-shelf embedding model groups text that is **structurally similar**, instead of using its **meaning**, so it files the two errors together (both are stack traces) and leaves the Slack message off on its own.
 
 ![filtering and normalization](https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_pipeline_technical_diagram_ingestion_f0a54bfc0c.png)
 
@@ -121,4 +121,4 @@ So, signals come in from product data, get grouped into reports, and turn into P
 
 We also want to get good at learning from every outcome. You reject a PR, a deploy goes sideways, an error clears in production after a fix – all of it should make the next PR better.
 
-That's what we're pointing PostHog at: the data you already collect turning into [shipped code](/code).
+That's what we're pointing PostHog at: the data you already collect turning into [shipped code](/desktop).

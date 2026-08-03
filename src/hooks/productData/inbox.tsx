@@ -1,11 +1,12 @@
-import { IconSparkles } from '@posthog/icons'
+import { IconNotification } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 export const inbox = {
-    name: 'Inbox',
-    Icon: IconSparkles,
-    handle: 'inbox',
+    ...getTool('inbox'),
+    Icon: IconNotification,
     type: 'inbox',
     color: 'blue',
+    pricingBadge: 'Beta',
     // No category or slug yet: keep this visible on pricing surfaces, not product/app navigation.
     slider: {
         marks: [3, 10, 50, 100],

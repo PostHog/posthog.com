@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
+import TeamMember from '../components/TeamMember'
 
 export interface Feature {
     slug: string
@@ -62,7 +63,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -93,11 +94,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'cache-warming': {
         feature: 'Cache warming',
-        owner: ['query-performance'],
+        owner: ['analytics-platform'],
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking'],
+        owner: ['error-tracking', 'self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
+                symbolication/upload pipeline and symbol/sourcemap upload internals.
+            </>
+        ),
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -170,7 +177,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'embedding-worker': {
         feature: 'Embedding worker',
-        owner: ['signals'],
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Oliver Browne" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     'early-access-features': {
@@ -197,7 +209,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'github-integration': {
         feature: 'GitHub integration',
-        owner: ['signals'],
+        owner: ['self-driving'],
     },
     'group-analytics': {
         feature: 'Group analytics',
@@ -241,6 +253,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
@@ -249,10 +266,30 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Marketing analytics',
         owner: ['web-analytics'],
     },
+    'mcp-analytics': {
+        feature: 'MCP analytics',
+        owner: ['mcp-analytics'],
+        label: 'feature/mcp-analytics',
+    },
     'mcp-server': {
         feature: 'MCP server',
-        owner: ['signals'],
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/mcp',
+    },
+    'mcp-store': {
+        feature: 'MCP store',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     notebooks: {
         feature: 'Notebooks',
@@ -318,23 +355,38 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'PostHog.com': {
         feature: 'PostHog.com',
-        owner: ['brand'],
+        owner: ['website'],
         label: false,
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
-        owner: ['signals'],
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
-        feature: 'PostHog Code',
-        owner: ['posthog-code'],
+        feature: 'PostHog Desktop',
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
         label: 'feature/home',
+    },
+    'project-secret-api-keys': {
+        feature: 'Project secret API keys',
+        owner: ['platform-features'],
+        notes: (
+            <>
+                <TeamMember name="Jovan Sakovic" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     'property-filters': {
         feature: 'Property filters',
@@ -348,7 +400,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'query-performance': {
         feature: 'Query performance',
-        owner: ['query-performance'],
+        owner: ['analytics-platform'],
         label: 'feature/insights',
     },
     'quota-limiting': {
@@ -403,7 +455,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     security: {
         feature: 'Security',
-        owner: ['infrastructure'],
+        owner: ['security'],
         notes: <>It's every team's job to consider and react to security issues.</>,
     },
     'self-hosting': {
@@ -432,8 +484,8 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Signals',
-        owner: ['signals'],
+        feature: 'Inbox',
+        owner: ['self-driving'],
         label: 'feature/signals',
     },
     signup: {
@@ -443,7 +495,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'slack-app': {
         feature: 'Slack app',
-        owner: ['signals'],
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Vojta Bartoš" /> is the point owner.
+            </>
+        ),
         label: 'feature/slack-app',
     },
     settings: {
@@ -537,7 +594,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     wizard: {
         feature: 'Wizard',
-        owner: ['docs-wizard'],
+        owner: ['wizard-and-docs'],
     },
 }
 

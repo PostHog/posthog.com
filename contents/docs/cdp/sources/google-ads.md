@@ -46,6 +46,10 @@ Connect PostHog to your Google Ads account using a Google account. The Google ac
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Manager (MCC) accounts
 
 If you use a [Google Ads manager account](https://support.google.com/google-ads/answer/6139186) (also called an MCC account) to manage multiple client accounts, you need to configure the source differently. Google Ads doesn't return metrics for manager accounts directly – you must query each client account individually.

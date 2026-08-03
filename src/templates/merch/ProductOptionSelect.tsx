@@ -51,7 +51,7 @@ export function ProductOptionSelect(props: ProductOptionSelectProps): React.Reac
                                     <>
                                         <RadioGroup.Label
                                             as="span"
-                                            className={`z-10 ${checked ? 'font-bold' : 'font-medium'}`}
+                                            className={`z-10 text-primary ${checked ? 'font-bold' : 'font-medium'}`}
                                         >
                                             {optionValue.replace(/\(.*?\)/g, '')}
                                         </RadioGroup.Label>

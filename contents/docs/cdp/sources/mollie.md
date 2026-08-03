@@ -39,3 +39,7 @@ Mollie only supports **full refresh** syncs. Incremental syncs aren't available 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

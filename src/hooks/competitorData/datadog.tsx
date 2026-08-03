@@ -5,6 +5,38 @@ export const datadog = {
         icon: '/images/competitors/datadog.svg',
     },
     products: {
+        replay_vision: {
+            available: true,
+            features: {
+                point_scanner: false,
+                configurable_types: 'Fixed job',
+                custom_prompt: false,
+                yes_no_monitors: false,
+                classify_tag: false,
+                friction_score_trained: false,
+                friction_score_custom: 'Custom metrics, not AI',
+                theme_summary: false,
+                nl_search: 'Telemetry only',
+                scheduled_runs: 'Fixed job',
+                sampling_controls: false,
+                deep_link_citations: true,
+                mobile_replay_ai: false,
+                findings_events: false,
+                insights_dashboards: false,
+                feed_experiments: false,
+                proactive_alerts: false,
+                mcp_access: 'RUM events only',
+                rest_api: false,
+                self_driving: false,
+                share_recordings: true,
+                embed_recordings: 'Datadog notebooks only',
+                export_recordings: 'Segments via API',
+                flag_interlinking: true,
+                product_analytics_platform: true,
+                pii_redaction: true,
+                ai_pricing: 'Per 1k sessions',
+            },
+        },
         error_tracking: {
             available: true,
             features: {
@@ -44,21 +76,27 @@ export const datadog = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: 'Converts to proprietary format',
+                    native_open_telemetry_ingest: 'Partial',
                     vendor_agnostic_sdks: true,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
                 },
             },
             investigation_workflow: {
                 features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
                     ai_assisted_log_summaries: true,
                 },
             },
             debugging_integrations: {
                 features: {
                     built_in_error_tracking: true,
-                    built_in_session_replay: false,
+                    built_in_session_replay: true,
                     product_analytics_context: false,
                 },
             },
@@ -68,6 +106,12 @@ export const datadog = {
                     traces: true,
                     alerting: true,
                     infra_monitoring: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: 'Add-on',
+                    enterprise_scale_compliance: true,
                 },
             },
             pricing: {
@@ -93,7 +137,7 @@ export const datadog = {
             self_host: false,
         },
         pricing: {
-            free_tier: 'Free trial',
+            free_tier: 'Trial',
             self_serve: true,
             transparent_pricing: true,
             usage_based_pricing: true,

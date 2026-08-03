@@ -106,7 +106,6 @@ export default function Template({ data }) {
                 }}
                 title={title}
                 filePath={filePath}
-                homeURL="/templates"
                 leftSidebar={<TreeMenu items={templatesMenu} />}
                 hideRightSidebar
                 hideTitle

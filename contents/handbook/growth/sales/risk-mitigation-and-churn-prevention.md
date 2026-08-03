@@ -8,7 +8,7 @@ If you're actively thinking about churn prevention in response to a customer chu
 
 Churn prevention is best done from early, and often, risk mitigation practices.
 
-We should default to flagging "at risk" accounts using the "Churn Risk" segment in Vitally well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
+We should default to flagging "at risk" accounts by adding the "Churn Risk" tag in PostHog Customer Analytics well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
 
 There are a few risk-mitigation strategies you'll want to incorporate that serve as early detection and proactive mitigation, as well as a process for what to do when an account is actively at risk.
 
@@ -20,54 +20,31 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this weekly with your manager.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every managed account should have an Account Plan note created in PostHog Customer Analytics, on the account's profile, once per quarter. You should also review this regularly with your manager and update it as needed. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+
+The plan can be broken into two parts: the quarterly plan and ongoing updates.
+
+#### Quarterly plan
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
-Use the Account Plan template in Vitally, which auto-populates key fields from the account record. The template covers:
+Add the plan as an account note in PostHog Customer Analytics on the account's profile. For each account, work through these seven questions:
 
-**Account overview**
+1. **What type of opportunities (opps) are there this quarter?** Name each one – conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) – so you're clear on what you're actually driving toward.
+2. **What are the customer's business objectives?** Capture what they're trying to achieve with PostHog and how it connects to their broader goals so it's clear what they are – and if you don't know, say so, so the gap is visible.
+3. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, Error Tracking adopted) so success is measurable rather than vague.
+4. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
+5. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
+6. **Link to the SFDC opp.** Drop in the Salesforce opportunity link so anyone reviewing can jump straight to the deal.
+7. **Who are the key players?** List the stakeholders – champions, budget holders, technical evaluators, and end-users – and where you stand with each.
 
-- ARR, business description, website, HQ location
-- Business type (B2B SaaS, E-commerce, Marketplace, Developer Tools, Fintech, Healthcare, etc.)
-- Key metrics relevant to their business model
-- Business stage and funding
+#### Ongoing updates
+1. What did you do with them last week.
+2. Any risks to flag or opportunities you are working
+3. Who are you talking to
+4. What are you working on with them this week
 
-**Business objectives**
-
-- What they're trying to achieve with PostHog (specific goals, not vague "analytics")
-- How PostHog connects to their larger business objectives
-- Whether value aligns with their expectations
-- Obstacles they're facing, both in using PostHog and in their broader goals
-- Upcoming constraints (budget freezes, code freezes, migrations, seasonality)
-- Future needs over 6-18 months
-
-**Stakeholders and users**
-
-- Admin emails and total user count
-- Percentage of active users (30 days)
-- Key contacts with their priorities, goals, and preferred communication
-- Multithreading status: do we have two-way dialogue with technical stakeholders, budget holders, and end-users?
-- Record of multithreading attempts and progress
-
-**Current usage and cross-sell**
-
-- Products adopted (Product Analytics, Feature Flags, Group Analytics, Error Tracking, Session Replay, Surveys, Data Warehouse)
-- Usage notes on how they're actually using each product
-- Cross-sell opportunities with specific use cases, next steps, and relevant content to share
-- Optimization opportunities for existing products (underused features, configuration improvements)
-
-**Risks**
-
-- Document each risk with: the challenge, what's at stake, plan of action, and next key date
-
-**Action items**
-
-- Multithreading: who, why, progress, anyone at PostHog who can help
-- Finding new opportunity: what are you doing to find new revenue?
-- Mitigating risk: what are you doing to uncover and mitigate risk?
-
-If you can't fill out most of this template, that's a signal you need to dig deeper into the account. An incomplete account plan usually means incomplete understanding of the customer.
+This can largely mirror what goes in our sprint planning, and shouldn't be duplicate work.
 
 ### Early warning signals
 
@@ -163,7 +140,7 @@ When an account is actively at risk (they've told you they're evaluating alterna
 
 ### When to flag an account as at risk
 
-Add the account to the **Churn Risk** segment in Vitally if any of the following are true:
+Add the **Churn Risk** tag to the account in PostHog Customer Analytics if any of the following are true:
 
 - Customer explicitly mentions evaluating alternatives or considering churning
 - Usage has dropped 30%+ with no seasonal explanation
@@ -178,9 +155,9 @@ Add the account to the **Churn Risk** segment in Vitally if any of the following
 
 ### Internal process
 
-**1. Add churn risk segment in Vitally**
+**1. Add the Churn Risk tag in PostHog Customer Analytics**
 
-When you flag an account as at risk, add a note in vitally  with:
+When you flag an account as at risk, add the **Churn Risk** tag to the account in PostHog Customer Analytics, and add a note on the account with:
 
 - Account name and ARR
 - What triggered the risk flag
@@ -188,11 +165,11 @@ When you flag an account as at risk, add a note in vitally  with:
 - What help you need (if any)
 - What you are doing to mitigate the churn
 
-The churn risk bot should automatically post this in the #customer-churn slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
+Adding the tag triggers a PostHog workflow that automatically posts to the #customer-churn Slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
 **2. Weekly at-risk account review**
 
-We hold a weekly team meeting to review all accounts in the Churn Risk segment in Vitally. Come prepared to:
+We hold a weekly team meeting to review all accounts tagged **Churn Risk** in PostHog Customer Analytics. Come prepared to:
 
 - Give a 60-second status update on each at-risk account you own
 - Share what you've tried and what's working or not
@@ -236,7 +213,7 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 
 | Activity | Cadence |
 |----------|---------|
-| Account Plan note in Vitally | Quarterly |
+| Account Plan note in PostHog Customer Analytics | Quarterly |
 | Implementation health check | At onboarding + annually |
 | Early warning signal monitoring | Ongoing |
 | Behavioral product adoption push | Ongoing (especially for warehouse-heavy accounts) |

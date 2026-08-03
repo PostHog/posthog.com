@@ -96,6 +96,7 @@ const titleMap: Record<string, string> = {
     datasets: 'Datasets',
     early_access_feature: 'Early access features',
     environments: 'Environments',
+    error_tracking: 'Error tracking',
     evaluation_runs: 'Evaluation runs',
     evaluations: 'Evaluations',
     event_definitions: 'Event definitions',
@@ -314,8 +315,8 @@ function Security({ item }) {
 
 function RequestBody({ item, objects }) {
     const objectKey =
-        item.requestBody?.content?.['application/json']?.schema['$ref'].split('/').at(-1) ||
-        item.requestBody?.content?.['application/json']?.schema.items?.['$ref'].split('/').at(-1)
+        item.requestBody?.content?.['application/json']?.schema?.['$ref']?.split('/').at(-1) ||
+        item.requestBody?.content?.['application/json']?.schema?.items?.['$ref']?.split('/').at(-1)
     if (!objectKey) return null
     const object = objects.schemas[objectKey]
     if (!object?.properties) return null
@@ -582,7 +583,8 @@ interface ApiEndpointData {
 export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.Element {
     const { allMdx } = data
     const name = data.data.name
-    const title = titleMap[name] || humanReadableName(name)
+    const baseName = name.replace(/-\d+$/, '')
+    const title = titleMap[baseName] || humanReadableName(baseName)
     const nextURL = data.data.nextURL
     const previousURL = data.data.previousURL
     const paths = {}
@@ -638,9 +640,11 @@ export default function ApiEndpoint({ data }: { data: ApiEndpointData }): JSX.El
 
                     {overviewNode?.body && (
                         <div className="article-content mt-6">
-                            <MDXProvider components={components}>
-                                <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                            </MDXProvider>
+                            <div className="text-primary">
+                                <MDXProvider components={components}>
+                                    <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                                </MDXProvider>
+                            </div>
                             <SectionDivider />
                         </div>
                     )}

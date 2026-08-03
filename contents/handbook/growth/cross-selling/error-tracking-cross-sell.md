@@ -157,5 +157,5 @@ You can also help create dashboards to help your customer understand the value o
 
 - Error tracking for the web is significantly less useful without proper sourcemaps. You can see under "Symbol sets" in the configuration menu if the required files are being uploaded correctly.
 - Encourage customers to set up roles so that issues can be assigned internally to the right people.
-- Use the SDK Doctor to make sure they're on the latest SDK versions.
+- Use the SDK health check to make sure they're on the latest SDK versions.
 

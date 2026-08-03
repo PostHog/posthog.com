@@ -49,9 +49,19 @@ const UploadSymbolSetsPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg',
         },
         {
+            label: 'Go',
+            url: '/docs/error-tracking/upload-source-maps/go',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/go.svg',
+        },
+        {
             label: 'iOS',
             url: '/docs/error-tracking/upload-source-maps/ios',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg',
+        },
+        {
+            label: 'Rust',
+            url: '/docs/error-tracking/upload-source-maps/rust',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg',
         },
         {
             label: 'Rollup',
