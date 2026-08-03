@@ -111,13 +111,13 @@ import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-
 
 <LocalEvaluationIntro />
 
-To load feature flag definitions for local evaluation, initialize the SDK with your secret API key as `personalAPIKey`:
+To load feature flag definitions for local evaluation, initialize the SDK with your feature flags secure API key as `personalAPIKey`:
 
 ```php
 PostHog::init(
     '<ph_project_token>',
     ['host' => '<ph_client_api_host>'],
-    personalAPIKey: 'your secret API key'
+    personalAPIKey: 'your feature flags secure API key'
 );
 ```
 

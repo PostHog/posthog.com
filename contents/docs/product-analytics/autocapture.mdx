@@ -224,9 +224,20 @@ const MyForm = () => {
 
 #### Rage clicks autocapture
 
-A rage click is when a user clicks a button multiple times in quick succession, specifically more than 3 clicks in 1 second.
+A rage click is captured when a user clicks three times in rapid succession in roughly the same spot. Specifically, PostHog fires a `$rageclick` event once it sees three clicks that are each within **30 pixels** and **1 second** of the previous one. All three thresholds (click count, pixel distance, and timeout) are configurable – see [Configuring rageclick](/docs/libraries/js/config#configuring-rageclick).
 
-The event is captured as a `$rageclick` event. You can use this event to identify opportunities to improve your UI, as it shows where users are frustrated with your product.
+The event is captured as a `$rageclick` event. You can use it to identify opportunities to improve your UI, as it often points to where users are frustrated with your product.
+
+<details>
+<summary>Reducing rage click false positives</summary>
+
+Rage click detection is a proximity-and-timing heuristic – it doesn't know whether the clicks were productive, so legitimate patterns like double-click-to-select in a text field, rapid quantity steppers, or fast pagination can trip it once they hit the third click within the window.
+
+With the latest SDK [`defaults`](/docs/libraries/js/config), PostHog automatically ignores the most common culprits: navigation controls (`next`, `previous`, `>`, `<`), quantity steppers (`+`, `-`), and repeated clicks on text-selection surfaces (inputs, textareas, and `contenteditable` elements). You can tune this with [`content_ignorelist` and `ignore_text_selection`](/docs/libraries/js/config#configuring-rageclick), or exclude specific elements with the `.ph-no-rageclick` class or a `css_selector_ignorelist`.
+
+We recommend confirming rage clicks against [session replays](/docs/session-replay) before treating them as a hard frustration signal.
+
+</details>
 
 </Tab.Panel>
 <Tab.Panel>

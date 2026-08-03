@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-To celebrate 50k subscribers to Product for Engineers, here are the 50 most important lessons we've learned about building successful products:
+To celebrate 50k subscribers to build mode, here are the 50 most important lessons we've learned about building successful products:
 
 1. [Small teams](https://newsletter.posthog.com/i/145504867/they-need-to-be-genuinely-small) (6 people or fewer) can build great products, but they need to be given autonomy to set their own goals, prioritize their roadmap, pick metrics, talk to users, and ship code fast.  
 

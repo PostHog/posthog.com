@@ -257,9 +257,22 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What is the best free feature flag tool?</summary>
 
-- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform — its free tier includes 1 million feature flag requests per month. 
+- **PostHog** is the best option for product teams that want feature flags alongside [a full suite of developer tools](/products) in one platform – its free tier includes 1 million feature flag requests per month. 
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a tool that is 100% open source with no paid tiers at all. 
 
@@ -272,7 +285,7 @@ For more options beyond open source, check out our guide to the [best feature fl
 
 [Feature flags](/docs/feature-flags) let you toggle features on or off for specific users without deploying new code. [A/B testing](/docs/experiments) uses feature flags to randomly split users into groups (variants) and then measures which variant performs better against a goal metric. 
 
-In practice, most A/B testing tools — including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
+In practice, most A/B testing tools – including **PostHog**, **GrowthBook**, and **FeatBit** – are built on top of a feature flagging engine. The distinction matters because tools like Unleash, Flagsmith, and Flipt are primarily feature flag tools that can be _used_ for basic split testing, while PostHog and GrowthBook provide end-to-end experimentation with built-in statistical analysis.
 
 To learn more, read our guide on [what is a feature flag (and how it compares to remote config and A/B testing)](/blog/what-is-a-feature-flag).
 

@@ -5,6 +5,14 @@
 
 # Brands and companies
 PostHog
+Alation
+Atlan
+Contentsquare
+Firebolt
+[Hh]elicone
+Luma
+Runware
+Tecton
 ABsmartly
 Accoil
 [Aa]coustic
@@ -31,6 +39,7 @@ Auth0
 Avo
 AWS
 [Aa]zure
+[Bb]abelforce
 Balsamiq
 [Bb]amboo
 Bazel
@@ -59,6 +68,7 @@ Cloudflare
 Cloudwatch
 Codecov
 CodeSandbox
+Coevera
 Cognito
 [Cc]ohere
 Coinbase
@@ -66,10 +76,12 @@ Coinbase
 Contentful
 [Cc]onvex
 Crazy Egg
+Cronitor
 Crossplane
 Crowdin
 [Cc]ursor
 Customer\.io
+Customerly
 Databricks
 Datadog
 DBeaver
@@ -128,6 +140,7 @@ Hyperengage
 InKeep
 Inleads
 [Ii]nsider
+Instana
 [Ii]ntercom
 Istio
 [Ii]terable
@@ -144,6 +157,7 @@ Knative
 [Kk]oala
 Kubernetes
 Kudosity
+[Ll]angfuse
 LaunchDarkly
 [Ll]aunchpad
 Lightdash
@@ -188,11 +202,13 @@ Opsgenie
 Optimizely
 OTel
 Outfunnel
+Pabbly
 Pendo
 [Pp]erplexity
 Phabricator
 Pinterest
 Pipedrive
+Pipeliner
 Pixar
 PlanetScale
 PlayerZero
@@ -246,6 +262,7 @@ Substack
 Supabase
 [Ss]uperhuman
 [Ss]uperset
+Swarmia
 Synthesia
 Tailscale
 Temporal\.io
@@ -293,6 +310,15 @@ mprocs
 Turborepo
 
 # Acronyms, languages, frameworks, protocols, etc.
+CSMs
+[Hh]yperscalers
+[Oo]mnichannel
+[Rr]emarketing
+[Rr]etargeting
+ecomm
+eval
+orgs
+wishlist
 A/A
 A/B
 ACLs

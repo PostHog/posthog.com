@@ -4,6 +4,7 @@ platformLogo: nuxt
 ---
 
 import NuxtApiKeysSecurity from "../integrate/_snippets/nuxt-api-keys-security.mdx"
+import TracingHeaders from "../_snippets/tracing-headers.mdx"
 
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
@@ -63,6 +64,8 @@ plugins: [
     { src: './plugins/posthog', mode: 'client' }
   ],
 ```
+
+<TracingHeaders />
 
 ## Usage
 

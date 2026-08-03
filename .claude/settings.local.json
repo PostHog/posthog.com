@@ -1,1 +1,30 @@
-{}
+{
+    "permissions": {
+        "allow": [
+            "Bash(git stash *)",
+            "Bash(npx prettier *)",
+            "Bash(grep -rniE \"free.{0,30}\\(gb|logs\\)|\\(gb|logs\\).{0,30}free\" contents/docs/logs/pricing.mdx contents/docs/logs/start-here.mdx)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/2025_MG_Logo_Full_9fdb693543.png\" -o mg.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha mg.png)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/fireworks_ai_logo_e5bc7f4a1e.png\" -o fwl.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha fwl.png)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/fireworks_ai_6f8e372605.png\" -o fw2.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha fw2.png)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/e_trim/fireworks_ai_6f8e372605.png\" -o fw_trim.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha fw_trim.png)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,e_make_transparent/fireworks_ai_6f8e372605.png\" -o fw_tt.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha fw_tt.png)",
+            "Bash(curl -sL \"https://res.cloudinary.com/dmukukwp6/image/upload/e_trim/e_make_transparent/q_auto,f_auto/fireworks_ai_6f8e372605.png\" -o fw_final.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha fw_final.png)",
+            "Bash(python3 -)",
+            "WebSearch",
+            "WebFetch(domain:brandfetch.com)",
+            "Bash(curl -sL --max-time 25 -A \"Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\)\" https://fireworks.ai -o fw_home.html)",
+            "Bash(qlmanage -t -s 800 -o . lh_fireworks-text.svg)",
+            "Bash(sips -g pixelWidth -g pixelHeight lh_fireworks-text.svg.png)",
+            "Bash(curl -sL --max-time 20 \"https://cdn.sanity.io/images/pv37i0yn/production/46d329cfd46294a5986218e94752d5d283cbe16c-343x44.svg?fm=png&w=800\" -o header.png)",
+            "Bash(sips -g pixelWidth -g pixelHeight -g hasAlpha header.png)",
+            "Bash(curl -sL --max-time 20 \"https://cdn.sanity.io/images/pv37i0yn/production/46d329cfd46294a5986218e94752d5d283cbe16c-343x44.svg\" -o fw_official.svg)"
+        ]
+    }
+}

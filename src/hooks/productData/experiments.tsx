@@ -1,38 +1,135 @@
 import React from 'react'
-import { IconFlask } from '@posthog/icons'
-import Link from 'components/Link'
-import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
+import {
+    IconFlask,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconConfetti,
+    IconRocket,
+    IconPieChart,
+    IconCheckCircle,
+    IconInfo,
+    IconCursorClick,
+    IconMagic,
+    IconChat,
+    IconCode,
+    IconMessage,
+    IconToggle,
+} from '@posthog/icons'
+import { features } from './experiments/features'
+import { applications, topFeatures } from './experiments/slides'
 
 export const experiments = {
+    ...getTool('experiments'),
     Icon: IconFlask,
-    name: 'Experiments',
-    handle: 'experiments',
     type: 'feature_flags',
-    billedWith: 'Feature flags',
     sharesFreeTier: 'feature_flags',
+    // Billed as feature flag requests – Plans/calculator resolve against this billing product.
+    billingType: 'feature_flags',
     slug: 'experiments',
+    teamSlug: 'experiments',
+    forumTopicId: 350,
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product_engineering',
     wizardSupport: 'In development',
+    billedWith: 'Feature Flags',
+    billedWithSlug: 'feature-flags',
+    shortDescription: 'Test changes with statistical significance',
+    // Bundled-with-flags copy from the previous custom pricing slide – not a separate pricing story.
+    pricingDescription:
+        'Experiments are bundled with Feature Flags and share volume limits. First 1 million requests every month are free (access to both products); after that, usage is billed through Feature Flags requests with Experiments at no additional cost.',
+    pricingLead:
+        'Experiments are bundled with Feature Flags and share volume limits, so you get access to both products for the same price.',
+    pricingHighlights: [
+        '1 million requests free every month',
+        'Usage billed as Feature Flags requests after the free tier',
+        'Experiments at no additional cost',
+    ],
+    pricingFooter: 'Same request meter as Feature Flags – no separate Experiments SKU.',
+    pricingEventsLink: false,
     seo: {
         title: 'Experiments – Run tests and validate ideas with PostHog',
         description:
             'Run A/B tests, multivariate tests, and other experiments to see if a change worked – the results agents use to validate impact and make your product self-driving.',
     },
+    /**
+     * Sections rendered on the Product surface (`/experiments`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/experiments/pricing`).
+     * Plans/calculator use Feature Flags billing via `billingType` + pricing copy
+     * (same pattern as Web Analytics → Product Analytics).
+     */
+    pricingMenu: [
+        { slug: 'billed-with', name: 'Billed with Feature Flags', icon: <IconToggle className="size-4" /> },
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Test changes with statistical significance',
-        description: (
-            <>
-                Experiments is one of the tools that makes your product self-driving: the evaluation that proves a
-                change actually worked. Run statistically rigorous tests, use precise targeting and exclusion rules, and
-                analyze your groups with{' '}
-                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
-                    Session Replay
-                </Link>
-                .
-            </>
-        ),
+        description:
+            'Experiments is one of the tools that makes your product self-driving: the evaluation that proves a change actually worked. Built to natively work with product analytics, session replay, feature flags, and surveys.',
+        eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -62,6 +159,23 @@ export const experiments = {
         alt: 'Hedgehog experimenting',
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
+            alt: 'Hedgehog experimenting',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
+            alt: 'Hedgehog experimenting',
+        },
+    },
+    // Same request volume slider as feature flags (experiments is billed with it).
+    slider: {
+        marks: [1000000, 10000000, 100000000, 1000000000],
+        min: 1000000,
+        max: 1000000000,
+    },
+    volume: 1000000,
     customers: {
         ycombinator: {
             headline: 'boosted community engagement by 40%',
@@ -83,215 +197,42 @@ export const experiments = {
             description: 'I feel like, every single week, we discover something new that makes a difference.',
         },
     },
-    features: [
-        {
-            title: 'Experiment types',
-            headline: 'Choose the right metric for your goal and track side effects across your product.',
-            description:
-                'Supports conversion funnels, count-based trends, value-based metrics, retention metrics, and ratio metrics',
-            features: [
-                {
-                    title: 'Funnel metrics',
-                    description: 'Track conversion rates across multi-step journeys, like signup flows or checkout.',
-                },
-                {
-                    title: 'Count & value metrics',
-                    description:
-                        'Measure totals such as pageviews or clicks, or capture values like revenue, order size, or time spent.',
-                },
-                {
-                    title: 'Ratio metrics',
-                    description: 'Test ratios such as percentage of positive feedback to capture deeper insights.',
-                },
-                {
-                    title: 'Primary & secondary metrics',
-                    description: 'Monitor main goals while watching for negative side effects',
-                },
-                {
-                    title: 'Shared metrics library',
-                    description:
-                        'Create reusable metrics across experiments for consistency and easy experiment setup.',
-                },
+    useCases: {
+        intro: 'Experiments is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship a change behind a flag, run an A/B test, and roll out the winner without a separate release pipeline',
             ],
-        },
-        {
-            title: 'Supported tests',
-            headline: 'Run a variety of tests depending on your needs',
-            features: [
-                {
-                    title: 'A/B testing',
-                    description:
-                        'Compare two versions of a feature or flow using count, value, funnel, or ratio metrics. The standard way to see what works best.',
-                },
-                {
-                    title: 'A/A testing',
-                    description:
-                        'Run a test with no changes between variants to verify your experiment setup is working correctly and not producing false positives.',
-                },
-                {
-                    title: 'A/B/N testing',
-                    description:
-                        'Run experiments with three or more variants to quickly identify the best-performing option.',
-                },
-                {
-                    title: 'Holdout testing',
-                    description:
-                        "Reserve a group of users who don't see any changes, so you can measure long-term impact against a true baseline.",
-                },
-                {
-                    title: 'Fake door testing',
-                    description:
-                        'Measure interest in a potential feature by exposing users to a “coming soon” entry point before building it.',
-                },
-                {
-                    title: 'Redirect testing',
-                    description:
-                        'Send users to different versions of a page or flow (like a signup path) to test changes at the navigation level.',
-                },
+            [
+                'Product Managers',
+                'Validate onboarding, pricing, or UI changes with primary and secondary metrics before committing',
             ],
-        },
-        {
-            title: 'Targeting rules',
-            headline: 'Target by user properties, cohorts, geographic location, or custom conditions',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Cohort integration',
-                    description: 'Target specific user segments or behavioral cohorts.',
-                },
-                {
-                    title: 'Geographic targeting',
-                    description: 'Limit experiments to certain countries or regions to account for local differences.',
-                },
-                {
-                    title: 'Percentage rollouts',
-                    description:
-                        'Start with a small slice of users (e.g. 5%) and gradually expand once results look good.',
-                },
-                {
-                    title: 'Group-level experiments',
-                    description: 'Run tests at the organization, account, or team level – ideal for B2B products.',
-                },
-                {
-                    title: 'Holdouts',
-                    description:
-                        'Set aside a random group of users who never see the change, giving you a clean baseline for long-term measurement.',
-                },
+            [
+                'Growth Engineers',
+                'Target cohorts or geographies, run multivariate tests, and watch session replays for each variant',
             ],
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/us_posthog_com_project_2_feature_flags_160557_cc3f425138.png',
-                    alt: 'Targeting rules',
-                    // stylize: true,
-                    shadow: true,
-                },
+            [
+                'Data Scientists',
+                'Run Bayesian or frequentist analysis with shared metrics, holdouts, and warehouse-backed metrics',
             ],
-        },
-        {
-            title: 'Customizable metrics',
-            headline: 'Customizable metrics',
-            description:
-                'Conversion funnels or trends, secondary metrics, and range for statistical significance. You can also use a primary or secondary metric from a data warehouse table.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_02_at_09_41_55_b0364113d7.png',
-                    alt: 'Customizable metrics',
-                    // stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        // {
-        //     title: 'Auto recommendations',
-        //     headline: 'Built-in guidance for successful experiments',
-        //     description:
-        //         'Get automatic recommendations for sample size, test duration, and minimum detectable effects based on your data',
-        //     layout: 'columns',
-        //     images: [
-        //         {
-        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
-        //             alt: 'Smart recommendations',
-        //             stylize: true,
-        //             shadow: true,
-        //         },
-        //     ],
-        //     features: [
-        //         {
-        //             title: 'Sample size calculator',
-        //             description: 'Know how many users you need based on your minimum detectable effect',
-        //         },
-        //         {
-        //             title: 'Duration estimates',
-        //             description: 'Get recommendations on how long to run your test',
-        //         },
-        //         {
-        //             title: 'Pre-launch checklist',
-        //             description: 'Ensure your experiment is set up correctly before launch',
-        //         },
-        //         {
-        //             title: 'Health monitoring',
-        //             description: 'Automatic alerts for sample ratio mismatch and other issues',
-        //         },
-        //     ],
-        // },
-        {
-            title: 'Developer-friendly implementation',
-            headline: 'Simple integration with powerful capabilities',
-            description: 'Built on our feature flag infrastructure with all major SDKs supported',
-            features: [
-                {
-                    title: 'Feature flag foundation',
-                    description:
-                        "Experiments run on PostHog's battle-tested feature flag infrastructure, with full support across all major SDKs.",
-                },
-                {
-                    title: 'JSON payloads',
-                    description:
-                        'Pass structured data to variants, letting you dynamically configure and change user experiences without redeploys.',
-                },
-                {
-                    title: 'Multivariate testing',
-                    description:
-                        'Run tests with up to 9 variants plus a control, giving you the flexibility to explore multiple approaches at once.',
-                },
-                {
-                    title: 'Local evaluation',
-                    description: 'Zero latency with flag values evaluated on your server.',
-                },
-                {
-                    title: 'Cross-platform SDKs',
-                    description:
-                        'Web, mobile, backend, and server-side SDKs make it easy to run consistent experiments anywhere in your stack.',
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Run experiments from your editor',
-            description:
-                'Create A/B tests, check statistical significance, and manage the full experiment lifecycle from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            features: [
-                {
-                    title: 'Create experiments alongside your code',
-                    description: "Set up an A/B test for a feature you're building without leaving your editor.",
-                },
-                {
-                    title: 'Check results before shipping',
-                    description: 'Ask "what are the results of the checkout experiment?" to decide whether to merge.',
-                },
-                {
-                    title: 'Manage experiment lifecycle',
-                    description: 'Update targeting, adjust traffic splits, or archive completed experiments.',
-                },
-                {
-                    title: 'Validate implementation',
-                    description:
-                        'Check that you correctly configured your feature flag before launching an experiment.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
+            ['B2B product teams', 'Run group-level experiments so everyone at a company sees the same variant'],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Run experiments from your editor',
+        description:
+            'Create A/B tests, check statistical significance, and manage the full experiment lifecycle from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description: 'Built on feature flags – SDKs for web, mobile, and backend, plus no-code platforms.',
+        productSlug: 'experiments',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks', 'no-code'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Experiments',
         benefits: [
@@ -304,7 +245,7 @@ export const experiments = {
                 description: 'to verify our experiment setup produces no false positives',
             },
             {
-                title: 'A/B/N tests',
+                title: 'A/B/n tests',
                 description: 'to test lots of ideas at once',
             },
             {
@@ -456,17 +397,104 @@ export const experiments = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Experiments directly from your code editor. Set up A/B tests, check results, and manage Experiment lifecycle – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/EXPERIMENTS_f9f880f1b2.png',
+        // Distinct from hogs.mobileHog (test-tube hog on Eli5) – flask mascot from the PostHog AI page.
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
         imageAlt: 'PostHog AI and experiments',
         description: 'set up experiments, read the results, and ship the winner',
+        intro: 'Ask PostHog AI to set up experiments, read the results, and ship the winner.',
+        mcpFeatures: ['experiments'],
         skills: [
             'Configures experiments and variants from natural language',
             'Summarizes results, identifies likely winners, and suggests ideas for follow-up tests',
             'Spots common setup problems that would skew your statistics',
         ],
-        prompts: [
-            'Set up an A/B test with a 70/30 split for a new red button on the homepage',
-            'Summarize experiment results for my latest feature rollout',
+        // Prompts drawn from existing product copy + skillsData; tools verified in mcp-tools.json.
+        groups: [
+            {
+                title: 'Create',
+                tool: 'experiment-create',
+                prompts: [
+                    'Set up an A/B test with a 70/30 split for a new red button on the homepage',
+                    'Set up and launch a homepage hero A/B test with signup as the primary metric',
+                    'Create a simple A/B test to confirm experiments work end to end',
+                ],
+            },
+            {
+                title: 'Launch',
+                tool: 'experiment-launch',
+                prompts: [
+                    'Launch my first experiment and show results',
+                    'Launch a pricing-page A/B test and watch signup conversion',
+                ],
+            },
+            {
+                title: 'Results',
+                tool: 'experiment-results-get',
+                prompts: [
+                    'Summarize experiment results for my latest feature rollout',
+                    'Is the new hero winning yet? Pull the experiment results',
+                    'Did the new pricing layout hurt conversion? Pull results',
+                ],
+            },
+            {
+                title: 'Stats',
+                tool: 'experiment-stats',
+                prompts: [
+                    'Is this experiment actually significant, or are we fooling ourselves?',
+                    'Check the stats and time series before we call this a win',
+                    'Confirm this test is valid before we ship',
+                ],
+            },
+            {
+                title: 'Timeseries',
+                tool: 'experiment-timeseries-results',
+                prompts: [
+                    'Show daily results for this experiment — is the lift a novelty effect?',
+                    'Plot the experiment over time, not just the summary',
+                ],
+            },
+            {
+                title: 'Ship winner',
+                tool: 'experiment-ship-variant',
+                prompts: ['Ship the winner and stop the rest'],
+            },
+            {
+                title: 'End losers',
+                tool: 'experiment-end',
+                prompts: [
+                    'Which running experiments are clearly losing? End them',
+                    'Review all experiments and clean up the dead ones',
+                ],
+            },
+            {
+                title: 'Duplicate',
+                tool: 'experiment-duplicate',
+                prompts: [
+                    'That pricing test won — clone it for the mobile flow and launch',
+                    'Duplicate this experiment onto the signup page',
+                ],
+            },
+            {
+                title: 'Archive',
+                tool: 'experiment-archive',
+                prompts: [
+                    'Archive every experiment older than 90 days that’s already shipped or stopped',
+                    'Clean up our experiments list',
+                ],
+            },
+            {
+                title: 'Find',
+                tool: 'experiment-list',
+                prompts: [
+                    'Where would an experiment move the needle most given our traffic and conversion?',
+                    'Suggest the next high-leverage test to run',
+                ],
+            },
+            {
+                title: 'Shared metrics',
+                tool: 'experiment-saved-metrics-create',
+                prompts: ['Create shared saved metrics so every experiment measures activation the same way'],
+            },
         ],
     },
 }

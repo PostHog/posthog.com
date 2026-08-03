@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[DemoHog](https://demohog.vercel.app) is an internal tool for spinning up a PostHog project filled with realistic, made-up event data. Describe an app in plain English, and it generates events, dashboards, insights, cohorts, Surveys, Feature Flags, Experiments, and (optionally) a hosted demo site wired for Session Replay.
+<PrivateLink url="https://demohog.vercel.app">DemoHog</PrivateLink> is an internal tool for spinning up a PostHog project filled with realistic, made-up event data. Describe an app in plain English, and it generates events, dashboards, insights, cohorts, Surveys, Feature Flags, Experiments, and (optionally) a hosted demo site wired for Session Replay.
 
 ## When to use it
 
@@ -28,7 +28,7 @@ If you do hand one over, frame it as a tour, not a trial.
 
 ## The four-step wizard
 
-Open [demohog.vercel.app](https://demohog.vercel.app) and click **Start wizard** (`/wizard`). The home page also lists past demos under **Scheduled** and **Sandboxes** so you can resume or extend a run.
+Open <PrivateLink url="https://demohog.vercel.app">DemoHog</PrivateLink> and click **Start wizard** (`/wizard`). The home page also lists past demos under **Scheduled** and **Sandboxes** so you can resume or extend a run.
 
 ### 1. Describe your app
 

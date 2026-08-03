@@ -350,8 +350,8 @@ const PLATFORM_ITEMS: PlatformItem[] = [
             'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
     },
     {
-        name: 'PostHog Code',
-        slug: 'code',
+        name: 'PostHog Desktop',
+        slug: 'desktop',
         layer: 'product',
         oneLiner:
             "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",

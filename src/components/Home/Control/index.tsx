@@ -16,7 +16,7 @@ import {
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
@@ -30,8 +30,6 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
 import HeroCarousel from 'components/Home/HeroCarousel'
-import { Customers, getSharedDescriptors } from '../shared'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const AppCount = () => <span className="text-xs font-normal">{APP_COUNT} apps</span>
 
@@ -278,7 +276,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     { name: 'CTAs', kind: 'flow', props: [], Editor: () => <CTAs /> },
     { name: 'HeroCarousel', kind: 'flow', props: [], Editor: () => <HeroCarousel /> },
     { name: 'HomeHitCounter', kind: 'flow', props: [], Editor: () => <HomeHitCounter /> },
-    { name: 'Customers', kind: 'flow', props: [], Editor: () => <Customers tableClassName="bg-white dark:bg-dark" /> },
     {
         name: 'Logo',
         kind: 'flow',
@@ -287,7 +284,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -302,12 +304,11 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog data stack.md</Button>,
     },
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },
     { name: 'ButtonAbout', kind: 'flow', props: [], Editor: () => <Button url="/about">Read more about us</Button> },
-    ...getSharedDescriptors(),
 ]
 
 export default function HomeTest() {

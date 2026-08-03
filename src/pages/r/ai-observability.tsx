@@ -12,7 +12,6 @@ import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
-import PostHogLogo from 'components/CustomerLogos/PostHogLogo'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -149,7 +148,16 @@ export default function AIObservabilityLanding(): JSX.Element {
                             alt="Kilo Code"
                             imgClassName="object-contain max-w-full h-10 w-auto"
                         />
-                        <PostHogLogo className="fill-current object-contain max-w-full h-10" />
+                        <img
+                            src="/brand/posthog-logo.svg"
+                            alt="PostHog"
+                            className="object-contain max-w-full h-10 w-auto dark:hidden"
+                        />
+                        <img
+                            src="/brand/posthog-logo-white.svg"
+                            alt="PostHog"
+                            className="hidden object-contain max-w-full h-10 w-auto dark:block"
+                        />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">AI teams using PostHog AI Observability in production.</span>
@@ -244,7 +252,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/ai-observability/query-traces-mcp"
+                                    to="/docs/ai-observability/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     MCP docs

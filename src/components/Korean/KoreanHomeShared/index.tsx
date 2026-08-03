@@ -14,7 +14,8 @@ import { AccordionContent, AccordionItem, AccordionTrigger } from 'components/Ra
 import Tooltip from 'components/RadixUI/Tooltip'
 import SmallTeam from 'components/SmallTeam'
 import { heading } from 'components/Home/classes'
-import { COL1, COL2, companyAttributes, companyBreakdowns, Image } from 'components/Home/shared'
+import { COL1, COL2, companyAttributes, companyBreakdowns } from 'components/Home/Customers'
+import { Image } from 'components/Home/Decorations'
 import usePostHog from 'hooks/usePostHog'
 import useProducts from 'hooks/useProducts'
 import { useCustomers } from 'hooks/useCustomers'
@@ -125,7 +126,7 @@ export function KoreanCustomers({
     translate?: TranslateFn
 }): JSX.Element {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = React.useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = React.useState('colorful')
     const [isAnimating, setIsAnimating] = React.useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 

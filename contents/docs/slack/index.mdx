@@ -10,12 +10,12 @@ The PostHog Slack app is in beta. Commands, scopes, and behavior are still movin
 
 `@PostHog` brings PostHog into any Slack channel or thread. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol).
 
-Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Code](/code), just summoned from where your team already chats.
+Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), just summoned from where your team already chats.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
 classes="rounded"
-alt="A PostHog Code task running in a Slack thread"
+alt="A PostHog Desktop task running in a Slack thread"
 />
 
 Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup).You'll need to connect:
@@ -30,7 +30,7 @@ Mention the bot with what you want done:
 @PostHog rename the auth middleware to AuthGuard and update all imports
 ```
 
-You can ask for things that mix code and product data because PostHog Code has your PostHog project wired up, so feature flags, experiments, events, and live metrics are all in the agent's context:
+You can ask for things that mix code and product data because PostHog Desktop has your PostHog project wired up, so feature flags, experiments, events, and live metrics are all in the agent's context:
 
 ```
 @PostHog add a feature flag to the new checkout page and roll it out
@@ -56,9 +56,9 @@ Anyone in the thread can send follow-ups. Each message is forwarded to the runni
 
 Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub integration is the one wired up – so a teammate's follow-up edits land under the original requester's name. If you want the PR credited to you, start your own task.
 
-## See Slack tasks in PostHog Code
+## See Slack tasks in PostHog Desktop
 
-Tasks you kick off from Slack show up in [PostHog Code](/docs/posthog-code) alongside the ones you started in the app. They're marked with a Slack icon (instead of the usual chat bubble) so you can tell where each task came from at a glance. Open one to read the full conversation, take over locally, or keep steering the run from your desktop.
+Tasks you kick off from Slack show up in [PostHog Desktop](/docs/posthog-desktop) alongside the ones you started in the app. They're marked with a Slack icon (instead of the usual chat bubble) so you can tell where each task came from at a glance. Open one to read the full conversation, take over locally, or keep steering the run from your desktop.
 
 ## Emoji cues
 
@@ -74,7 +74,7 @@ The bot reacts to your `@PostHog` message as it works through your request, so y
 
 ## Link unfurling
 
-When you paste a PostHog insight or dashboard URL in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. Unfurling respects PostHog access permissions. Only teammates with at least viewer access on the item will see the preview. See [Slack link unfurling](/docs/libraries/slack #link-unfurling) for details.
+When you paste a PostHog insight or dashboard URL in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. Unfurling respects PostHog access permissions. Only teammates with at least viewer access on the item will see the preview. See [Slack link unfurling](/docs/libraries/slack#link-unfurling) for details.
 
 ## Related
 
@@ -82,6 +82,6 @@ When you paste a PostHog insight or dashboard URL in a channel the bot is invite
 - [Commands](/docs/slack/commands) – full command reference and limitations
 - [Pricing](/docs/slack/pricing) – how Slack app usage bills
 - [PostHog Slack app overview](/slack) – the product page
-- [PostHog Code](/code) – the desktop app for longer-running, multi-repo agent work
+- [PostHog Desktop](/desktop) – the desktop app for longer-running, multi-repo agent work
 - [Slack integration in PostHog](/docs/libraries/slack) – subscriptions, link unfurl, generic Slack setup
 - [Slack as a Data Pipeline destination](/docs/cdp/destinations/slack) – send event-driven messages

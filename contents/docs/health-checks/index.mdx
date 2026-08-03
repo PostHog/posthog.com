@@ -6,7 +6,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Health checks continuously inspect your PostHog setup for problems that quietly degrade your data – a missing SDK, traffic that bypasses your reverse proxy, a broken materialized view, and more. When a check finds an issue, PostHog surfaces it in the relevant **Health** section of the app, can notify you through alerts, and – if you use [PostHog Code](/docs/posthog-code) – can investigate and fix it for you automatically.
+Health checks continuously inspect your PostHog setup for problems that quietly degrade your data – a missing SDK, traffic that bypasses your reverse proxy, a broken materialized view, and more. When a check finds an issue, PostHog surfaces it in the relevant **Health** section of the app, can notify you through alerts, and – if you use [PostHog Desktop](/docs/posthog-desktop) – can investigate and fix it for you automatically.
 
 <CalloutBox icon="IconInfo" title="Health checks are in beta" type="fyi">
   The set of checks below is expanding over time. If there's a problem you'd like PostHog to catch, <a href="https://github.com/PostHog/posthog/issues/new?assignees=&labels=enhancement%2C+feature&projects=&template=feature_request.yml">let us know</a>.
@@ -47,11 +47,11 @@ Every issue links straight to the place you fix it – a project setting, the da
 
 When an issue fires or resolves, PostHog emits `$health_check_issue_firing` and `$health_check_issue_resolved` events. Route these to Slack, email, or a webhook with [destinations](/docs/cdp/destinations) so the right team hears about problems without watching the Health pages.
 
-### 3. Let PostHog Fix it automatically with the Inbox and PostHog Code
+### 3. Let PostHog Fix it automatically with the Inbox and PostHog Desktop
 
 This is the most powerful option. Most health checks emit a [Signal](/docs/self-driving/inbox/sources) into the [**Inbox**](/docs/self-driving/inbox). If you've connected your repository to PostHog, an agent can take the issue from detection all the way to a pull request:
 
-1. **Enable health checks as a signal source.** In PostHog Code, open **Inbox → Configure sources** and turn on health checks. See [signal sources](/docs/self-driving/inbox/sources).
+1. **Enable health checks as a signal source.** In PostHog Desktop, open **Inbox → Configure sources** and turn on health checks. See [signal sources](/docs/self-driving/inbox/sources).
 2. **The agent researches the issue.** It reads the issue, queries your data with the [PostHog MCP](/docs/model-context-protocol), and locates the cause in your codebase. See [research tasks](/docs/self-driving/inbox/research).
 3. **It applies the fix.** Where the fix lives in your code – an SDK config flag, a dependency bump, a proxy route – the [implementation agent](/docs/self-driving/inbox/implementation) opens a PR for you to review. Where the fix is a PostHog setting or data model, it uses the MCP tools to apply it directly.
 

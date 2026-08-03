@@ -4,12 +4,6 @@ title: Replay Vision
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
 The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
@@ -37,6 +31,8 @@ When a scanner runs against a recording, PostHog:
 
 Each observation snapshots the scanner's configuration at the time it ran, so editing a scanner later doesn't change past observations.
 
+Because Vision runs entirely on ingested data, it stops producing observations if events or recordings stop arriving. See [troubleshooting](/docs/replay-vision/troubleshooting#events-or-recordings-arent-coming-in) for what to check.
+
 ## What you can do with it
 
 A few examples of what teams use Replay Vision for:
@@ -54,6 +50,8 @@ Each of these maps to a [scanner type](/docs/replay-vision/scanner-types).
 - **Picking the right scanner type?** Read the [scanner types reference](/docs/replay-vision/scanner-types).
 - **Authoring a scanner?** See [creating scanners](/docs/replay-vision/creating-scanners) for prompt patterns, filters, and sampling.
 - **Already have observations?** Learn how to [read them and query them as events](/docs/replay-vision/observations) to build insights, dashboards, and alerts.
+- **Is the scanner getting it right?** Rate results and apply AI configuration recommendations on the [calibration tab](/docs/replay-vision/calibration).
+- **Want to be notified?** Set up scheduled [digests and alerts](/docs/replay-vision/actions) that push a scanner's findings to Slack or a webhook.
 - **Hit a snag?** Check [troubleshooting](/docs/replay-vision/troubleshooting).
 
 ## Further reading

@@ -46,7 +46,9 @@ And at the dataset level we require permissions to interact with the dataset and
 - `bigquery.tables.getData`
 - `bigquery.tables.list`
 - `bigquery.tables.updateData`
-- (Optional, for mutable models) `bigquery.tables.delete`
+- `bigquery.tables.delete`
+
+> **Note:** For mutable models like persons, the batch export also needs to run queries in BigQuery to perform merge operations, so the batch export will fail if these are not granted. However, for historical reasons, batch exports lacking query permissions may still work for non-mutable models by falling back to direct loading, but we recommend granting all permissions listed above for all new batch exports.
 
 ![Create custom role for batch exports](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/create-role.png)
 
@@ -267,7 +269,7 @@ Exporting a mutable model can be divided into new rows that have to be inserted,
 
 The operation the PostHog batch export executes in BigQuery roughly involves the following steps:
 
-1. Creating a stage table.
+1. Creating a stage table (with a 1-week expiration as a safety net).
 2. Inserting new data into stage table.
 3. Execute a merge operation between existing table and stage table.
    a. Any rows that match in the final table and for which any of the stage table's version fields is higher are updated.
@@ -277,6 +279,10 @@ The operation the PostHog batch export executes in BigQuery roughly involves the
 ### Why are additional permissions required to export the persons model?
 
 The merge operation described above explains why a mutable export requires additional permissions beyond the permissions required for exporting the events model: Since we need to clean-up a stage table, `bigquery.tables.delete` is required.
+
+### What happens to stage tables if a batch export fails?
+
+Stage tables used during merge operations are automatically created with a 1-week expiration. If a batch export crashes before it can clean up its stage table, BigQuery will automatically delete it after that period. You don't need to manually clean up orphaned stage tables.
 
 ### Which jobs does the batch export run in BigQuery?
 

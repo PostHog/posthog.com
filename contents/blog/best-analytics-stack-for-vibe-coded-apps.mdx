@@ -285,11 +285,24 @@ If you want to take it for a spin, you can [start free](/) – no credit card ne
 
 <WizardCTA />
 
-And if you want your product to *drive itself* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/code). 
+And if you want your product to *drive itself* (aka pick up signals from errors, session replays, surveys, and product analytics and automatically turn them into actionable PRs), take a look at [PostHog Code](/desktop). 
 
 It's the next step beyond reactive analytics: instead of waiting for you to notice a bug or churn signal, it proactively spots them and opens a pull request to fix it.
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Do I really need analytics if I'm just shipping a weekend project?</summary>
