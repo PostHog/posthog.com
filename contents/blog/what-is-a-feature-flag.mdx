@@ -135,7 +135,7 @@ The reason PostHog bundles all three capabilities is that they're most useful wh
 
 Here's what that looks like in practice:
 
-**Single SDK, single data pipeline.** You install one SDK and get flags, config, and experiments. Every flag evaluation, config fetch, and experiment assignment flows into the same [data warehouse](/data-stack) alongside your analytics events, session recordings, and [error tracking](/error-tracking) data.
+**Single SDK, single data pipeline.** You install one SDK and get flags, config, and experiments. Every flag evaluation, config fetch, and experiment assignment flows into the same [data warehouse](/context-warehouse) alongside your analytics events, session recordings, and [error tracking](/error-tracking) data.
 
 **Experiments inherit flag targeting.** Because PostHog experiments are built on feature flags, you get all the same targeting capabilities: person and group properties, cohorts, percentage rollouts. And you can go from "rolling out a feature" to "running an experiment on that feature" by adding experiment tracking to an existing flag.
 

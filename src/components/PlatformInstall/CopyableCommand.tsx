@@ -45,7 +45,7 @@ export function CopyableCommand({
     return (
         <div
             className={cn(
-                'group flex items-start gap-2 bg-primary border border-primary rounded px-2 py-1.5',
+                'group flex items-start gap-2 bg-accent/30 border border-primary rounded-md px-2 py-1.5',
                 className
             )}
         >

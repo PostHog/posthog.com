@@ -9,6 +9,7 @@ import type {
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
+import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -290,6 +291,20 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     }
+
+    tools.forEach((tool) => {
+        createNode({
+            ...tool,
+            id: createNodeId(`tool-${tool.handle}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: 'Tool',
+                contentDigest: createContentDigest(tool),
+            },
+        })
+    })
+
     const createRoadmapItems = async (page = 1) => {
         const roadmapQuery = qs.stringify(
             {

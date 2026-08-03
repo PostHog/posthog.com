@@ -7,6 +7,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
+    const HogComponent = hogs?.default?.Component
 
     return (
         <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-9xl mx-auto w-full">
@@ -31,13 +32,21 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                                 imgClassName="h-auto rounded-lg transition-all duration-300"
                             />
                         )}
-                        {hogs?.default?.src && (
+                        {/* Optional – composite heroes (hog already in the art) skip this. */}
+                        {(HogComponent || hogs?.default?.src) && (
                             <div className="absolute bottom-0 -right-4">
-                                <CloudinaryImage
-                                    src={hogs.default.src as `https://res.cloudinary.com/${string}`}
-                                    alt={hogs.default.alt || name}
-                                    imgClassName="h-36 @2xl/reader-content:h-48 transition-all duration-300"
-                                />
+                                {HogComponent ? (
+                                    <HogComponent
+                                        className="h-36 @2xl/reader-content:h-48 w-auto transition-all duration-300"
+                                        title={hogs.default.alt || name}
+                                    />
+                                ) : (
+                                    <CloudinaryImage
+                                        src={hogs.default.src as `https://res.cloudinary.com/${string}`}
+                                        alt={hogs.default.alt || name}
+                                        imgClassName="h-36 @2xl/reader-content:h-48 transition-all duration-300"
+                                    />
+                                )}
                             </div>
                         )}
                     </Glow>

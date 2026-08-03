@@ -634,7 +634,10 @@ export const posthog = {
             available: true,
             features: {
                 visual_builder: true,
-                ai_assistant: false,
+                // PostHog AI + MCP: create/edit workflows and email templates via natural language
+                // https://posthog.com/docs/workflows/surfaces/mcp
+                // https://posthog.com/docs/workflows/create-emails-ai
+                ai_assistant: true,
                 campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
@@ -731,6 +734,29 @@ export const posthog = {
                 real_time_analytics: false,
                 general_purpose_analytics_db: false,
                 no_separate_ingestion: true,
+            },
+        },
+        support: {
+            available: true,
+            features: {
+                unified_helpdesk: true,
+                in_app_widget: true,
+                email_channel: true,
+                slack_channel: true,
+                github_issues: true,
+                javascript_api: true,
+                saved_views: true,
+                private_notes: true,
+                workflow_automation: true,
+                sla_tracking: true,
+                historical_import: 'Zendesk (beta)',
+                ai_reply_agent: 'Coming soon',
+                session_replay_attached: true,
+                events_attached: true,
+                errors_attached: true,
+                previous_tickets: true,
+                analytics_correlation: true,
+                auto_fix_prs: 'Via Self-driving',
             },
         },
     },
