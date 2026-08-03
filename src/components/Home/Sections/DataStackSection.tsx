@@ -40,7 +40,7 @@ Combine everything in PostHog's context warehouse so that you, your agents, and 
 
 The data your agents need to make good decisions is already here. Ready to turn "tell me what happened" into "here's what to fix next."`}</Markdown>
 
-        <Link to="/data-stack/sources" state={{ newWindow: true }}>
+        <Link to="/context-warehouse/sources" state={{ newWindow: true }}>
             Connect your first data source
         </Link>
     </div>

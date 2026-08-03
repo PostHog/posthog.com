@@ -35,8 +35,9 @@ export const replayVision = {
                     option.
                 </li>
                 <li>
-                    <strong className="text-primary">1 credit is $0.01</strong>, so 100 credits cost $1. The first 2,500
-                    credits each month are free, which covers 500 sessions on the default model.
+                    <strong className="text-primary">1 credit is $0.01</strong>, so 100 credits cost $1. The first{' '}
+                    <s>500</s> 2,500 credits each month are free (5x the free tier for a limited time), which covers 500
+                    sessions on the default model.
                 </li>
             </ul>
             <p>

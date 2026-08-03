@@ -46,3 +46,38 @@ jobs:
             - name: Push changes
               run: |
                   git push
+
+    md_redirects:
+        name: Docs .md redirects
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+              with:
+                  node-version: lts/*
+
+            - name: Configure Git
+              run: |
+                  git config user.name PostHog Bot
+                  git config user.email hey@posthog.com
+
+            # Docs .md files are separate from the HTML pages and vercel.json
+            # matches redirects literally, so a plain /docs/a/b redirect doesn't
+            # cover /docs/a/b.md. This rewrites new docs redirects to accept an
+            # optional .md, so adding one stays a one-line change.
+            - name: Make docs redirects cover .md
+              run: |
+                  node scripts/generate-md-redirects.js
+                  git add vercel.json
+                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Make docs redirects cover .md"
+
+            - name: Push changes
+              run: |
+                  git push
