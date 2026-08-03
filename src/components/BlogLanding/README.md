@@ -20,8 +20,8 @@ and `/newsletter` by passing a different `folder`.
 |---|---|
 | `useLandingPosts.ts` | Hook. Fetches `popular` (`score:desc`) and `recent` (`date:desc`) posts for a folder via the shared `usePosts` + `getParams`/`sortOptions` from `components/Edition/Posts`. Returns `{ hero, popular, recent, isLoading }` where `hero` is the top-scoring post and both feeds exclude it. |
 | `useCategoryTags.ts` | Hook. Fetches a folder's `post-tags` from Squeak/Strapi. Shared source for `CategoryGrid` and `useCategoryMenu`. |
-| `useCategoryMenu.tsx` | Hook. Builds a nested category tree for a folder: each category (`{ name, url, icon }`) with its articles as `children`, from the tag API + a one-shot posts fetch grouped by tag. Returns `{ items, loading }`, shaped for the shared `TreeMenu`. |
-| `tagOptions.ts` | The category label → icon map, plus `getTagIcon()` (case-insensitive lookup) and `DEFAULT_TAG_ICON`. Used by `CategoryGrid`, `useCategoryMenu`, and `templates/Hub/Tag.tsx`. |
+| `useCategoryMenu.ts` | Hook. Builds a nested category tree for a folder: each category (`{ name, url }`) with its articles as `children`, from the tag API + a one-shot posts fetch grouped by tag. Returns `{ items, loading }`, shaped for the shared `TreeMenu`. The rail is text-only — no icons. |
+| `tagOptions.ts` | The category label → icon map, plus `getTagIcon()` (case-insensitive lookup) and `DEFAULT_TAG_ICON`. Used by `CategoryGrid` and `templates/Hub/Tag.tsx`. |
 | `CategoryGrid.tsx` | The category tiles as an auto-fit grid, sourced via `useCategoryTags`. Used by the founders `Hub`. |
 | `PostSection.tsx` | A labeled grid of `PostCard`s (reuses `components/Edition/PostCard`) with loading skeleton + empty state. Grid reflows via `@container` queries. Optional `action` slot for a sort toggle. |
 | `types.ts` | `LandingVariantProps` (`folder`, `title`, `intro`). |
@@ -33,7 +33,7 @@ and `/newsletter` by passing a different `folder`.
 - `components/Edition/Posts` – `getParams`, `sortOptions`.
 - `components/Edition/FeaturedPost` – the hero slot. Opts into `containerStack` (@container stacking) + `isLoading`/`titleClassName` props (additive; the blog's default render is unchanged).
 - `components/Edition/PostCard` – the feed cards (via `PostSection`).
-- `components/TreeMenu` – the category rail, rendered in `expandOnly` mode (additive prop: parents toggle in place and show their icon; existing nav is unchanged).
+- `components/TreeMenu` – the category rail, rendered in `expandOnly` mode (additive prop: parents toggle in place instead of navigating; existing nav is unchanged).
 - `components/RadixUI/ToggleGroup` – the Recent/Popular segmented control.
 - `components/ReaderView` – the handbook layout shell (SidebarExplorer). Its scheme treatment (dark `secondary` rail, bright `primary` content) is what the category rail visually matches.
 - `components/NewsletterForm`.

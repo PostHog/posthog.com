@@ -1,14 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import qs from 'qs'
 import slugify from 'slugify'
 import { getParams } from 'components/Edition/Posts'
-import { DEFAULT_TAG_ICON, getTagIcon } from './tagOptions'
 import { useCategoryTags } from './useCategoryTags'
 
 export interface CategoryMenuItem {
     name: string
     url: string
-    icon?: React.ReactNode
     children?: { name: string; url: string }[]
 }
 
@@ -78,12 +76,10 @@ export function useCategoryMenu(folder: string): { items: CategoryMenuItem[]; lo
             tags
                 .map((tag) => {
                     const label = tag.attributes.label
-                    const Icon = getTagIcon(label) || DEFAULT_TAG_ICON
 
                     return {
                         name: label,
                         url: `/${folder}/${slugify(label, { lower: true, strict: true })}`,
-                        icon: <Icon className="size-4 opacity-60" />,
                         children: posts
                             .filter((post) =>
                                 post.attributes.post_tags?.data?.some((t) => t.attributes.label === label)

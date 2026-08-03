@@ -62,8 +62,8 @@ interface TreeMenuProps {
     activeUrl?: string
     /**
      * When true, parent (collapsible) rows only toggle open/closed on click instead of
-     * navigating, and their `icon` renders like leaf rows. For landing sidebars that want
-     * expand-in-place categories. Only applies to the `listed` variant.
+     * navigating. For landing sidebars that want expand-in-place categories. Only applies to
+     * the `listed` variant.
      */
     expandOnly?: boolean
 }
@@ -655,7 +655,6 @@ function TreeMenuItem({
                     }`}
                     active={activeItem === item}
                     {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
-                    icon={expandOnly && typeof item.icon !== 'string' ? item.icon : undefined}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
