@@ -42,16 +42,14 @@ Create a discount code in <PrivateLink url="https://admin.shopify.com/store/post
 To log into Shopify using 1Password:
 
 1. Sign in with the email from 1Password
-2. When the saved passkey pop-up appears, use the passkey — this is the preferred way to log in
-3. You're logged in!
+2. Ignore the saved passkey pop-up — you'll use the passkey later, after entering the password
+3. Click "Log in using a different method"
+4. Click "Continue with password"
+5. Use the password from 1Password and click "Log in"
+6. On the "Use your passkey" screen, use the passkey from 1Password — this is the preferred way to log in
+7. You're logged in!
 
-Only if the passkey doesn't work (for example, you don't have access to it) fall back to the password and authentication code:
-
-1. Click "Log in using a different method"
-2. Click "Continue with password"
-3. Use the password from 1Password and click "Log in"
-4. On the "Use your passkey" screen, click "Use the authentication app" — you can then use 1Password to enter the authentication code
-5. You're logged in!
+If you aren't prompted to use the passkey, click "Use the authentication app" instead — you can then use 1Password to enter the authentication code.
 
 When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $30, $50, or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". 
 
