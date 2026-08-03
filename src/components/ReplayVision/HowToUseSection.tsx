@@ -1,21 +1,21 @@
 import React from 'react'
 import TabbedCarousel from 'components/TabbedCarousel'
-import CarouselSlide from '../CarouselSlide'
-import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '../types'
+import CarouselSlide from 'components/Products/ReaderViewProduct/CarouselSlide'
+import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
+import { applications } from 'hooks/productData/replay_vision/slides'
 
-interface ApplicationsProps extends SectionComponentProps {
-    slides?: CarouselSlideType[]
-}
-
-const Applications = ({ id, productData, slides = [] }: ApplicationsProps) => {
-    if (!slides.length) return null
+// "How do I use it?" – renders the applications carousel in the shared
+// TabbedCarousel format (same primitives as the Applications template), with
+// Replay Vision's own heading and intro copy.
+const HowToUseSection = ({ id, productData }: SectionComponentProps) => {
+    if (!applications.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="mb-3">How do I use it?</h2>
-            <p>There are a few ways to explore {productData.name}.</p>
+            <p>There are a few ways to put Replay Vision to work.</p>
             <TabbedCarousel
-                tabs={slides.map((s) => ({
+                tabs={applications.map((s) => ({
                     value: s.slug,
                     label: s.label,
                     icon: s.icon,
@@ -33,4 +33,4 @@ const Applications = ({ id, productData, slides = [] }: ApplicationsProps) => {
     )
 }
 
-export default Applications
+export default HowToUseSection
