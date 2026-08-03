@@ -20,7 +20,7 @@ AWS Marketplace lets vendors use their own terms and MSA. For now, PostHog team 
 
 For now, we're keeping it simple:
 - **Annual contracts only** (upfront payment)
-- **Minimum $100k deal size** (this is flexible, but let's start here)
+- **No minimum deal size beyond our usual [sales-assist threshold](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr)** – there's no extra overhead in selling this way, so if a customer wants to procure via AWS Marketplace, go ahead
 
 ## Using Clazar for private offers
 
