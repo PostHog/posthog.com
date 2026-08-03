@@ -240,16 +240,32 @@ You can also create an opportunity directly from scratch, but make sure to conne
 -   Fill in Opportunity Details:
 -   Opportunity Name
 -   Close Date: Choose the estimated date when the opportunity is expected to close.
--   Term (Months): Default is 12, update for multi year deals.
--   Total Credit Amount: Total value of the contract before discounts.
--   Discount (%): Percent discount applied to the total.
--   ARR Discounted: Automatically calculated annualized revenue after discount.
+-   Term (Months): Default is 12, update for multi year deals. For contract buyouts, this already includes the buyout period (e.g. 24 standard + 6 month buyout = 30 month term), see [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   Total Credit Amount: Standard, discountable credit the customer is paying for. Does not include one-time/free credit, buyout or startup rolloff credits are tracked separately (see below).
+-   Discount (%): Contracted discount rate applied to Total Credit Amount, this is what goes on the order form. Excludes any one-time credit, that's never a discount lever.
+-   ARR Discounted: Automatically calculated annualized revenue after discount. Excludes any one-time credit and buyout period.
 -   Contract Start Date: Date the contract begins.
 -   Contract End Date: Automatically calculated based on Start Date + Term.
+-   One-Time Credit Amount: Only for deals with a buyout, startup rolloff, or other one-off free credit. See [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   One-Time Credit Type: Buyout, Startup Rolloff, or Other. Only used when One-Time Credit Amount is populated.
+-   Buyout Period Months: Only for Buyout type, how many months of Term (Months) the buyout credit covers. Leave at 0 otherwise.
+-   Effective Discount Rate: Automatically calculated, internal only, see below.
 -   Stage: Select the current stage of the opportunity in the sales process.
 -   Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
 -   Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.
 -   Connect to a Contact: link any specific contact you're in touch with regarding this opportunity by adding them to the "Contact Roles" list.
+
+### Contract buyouts and one-time credits
+
+Some deals include a one-time free credit that isn't part of the standard, paid credit purchase, most commonly a [contract buyout](/handbook/growth/sales/contract-rules#contract-buyouts) or a [startup plan rolloff](/handbook/growth/sales/contract-rules#startup-plan-discounts). Three fields track this on the Opportunity:
+
+-   **One-Time Credit Amount** - the free credit itself, in dollars.
+-   **One-Time Credit Type** - Buyout, Startup Rolloff, or Other.
+-   **Buyout Period Months** - only for Buyout: how many months of the term this credit covers. Term (Months) already includes this (a 2 year deal with a 6 month buyout is a 30 month term), don't add it again on top.
+
+New business renewal credits are a separate case and don't use these fields. They're a deliberate discount lever, sized to hit a target total discount against a competitor's quote, so they belong in Total Credit Amount and Discount (%) as usual, see [new business renewal credits](/handbook/growth/sales/contract-rules#new-business-renewal-credits).
+
+Total Credit Amount, Discount (%), and ARR Discounted are all based on the standard, paid credit only, they never include the one-time credit. Effective Discount Rate is the only field that blends both together (amount paid ÷ total credit including the one-time credit), and it's for internal reference only, never quote it to a customer or put it on the order form.
 
 ### Opportunity stages
 
