@@ -111,7 +111,8 @@
                 @apply px-8;
             }
 
-            p {
+            p,
+            small {
                 @apply pt-0 pb-2 px-8 m-0;
             }
 
