@@ -12,6 +12,7 @@ features:
   groupAnalytics: true
   surveys: false
   aiObservability: false
+  errorTracking: true
 ---
 
 This is an optional library you can install if you're working with server-side Java applications. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -337,6 +338,26 @@ if ("neural_network".equals(variant)) {
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
+
+## Error tracking
+
+You can capture exceptions with the Java SDK. `captureException` sends a `Throwable` to PostHog as an `$exception` event with a full stack trace, cause chain, and any suppressed exceptions:
+
+```java
+try {
+    riskyOperation();
+} catch (Throwable e) {
+    // Captured personlessly
+    posthog.captureException(e);
+
+    // Or associated with a person, with optional properties
+    posthog.captureException(e, "user_distinct_id");
+}
+```
+
+Inside a request scope, exceptions are automatically attributed using the [request context](#request-context) distinct ID, so you don't need to pass one. You can also capture logged errors automatically with the Logback appender, and opt in to capturing uncaught JVM exceptions.
+
+For the full setup guide — including request context, in-app frame configuration, the Logback appender, uncaught-exception capture, and deobfuscating ProGuard/R8 builds — see the [Java error tracking installation docs](/docs/error-tracking/installation/java).
 
 ## GeoIP properties
 
