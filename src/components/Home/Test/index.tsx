@@ -133,34 +133,34 @@ export const CTAs = () => {
     )
 }
 
+const Headline = ({ className }: { className?: string }) => (
+    <h1 className={cn('!text-3xl @xl:!text-4xl pt-4 mt-0', className)}>
+        Shift your product into{' '}
+        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
+            self-driving mode
+        </span>
+    </h1>
+)
+
 function Hero(): JSX.Element {
     // Some CTA variants start at the top of the layout, level with the headline rather than below it.
     // For those, the headline moves into the left grid column so the CTA column can begin alongside it
     // – matching `pt-4` on both keeps their text tops on the same line. The logo stays put either way.
     const { alignsWithHeadline } = useHeroCtaVariant()
 
-    const headline = (
-        <h1 className="!text-3xl @xl:!text-4xl pt-4 mt-0">
-            Shift your product into{' '}
-            <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-                self-driving mode
-            </span>
-        </h1>
-    )
-
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
-                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
                     <Logo className="max-w-[157px] dark:hidden" width="auto" />
                     <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
-                </h1>
+                </div>
 
-                {alignsWithHeadline ? null : headline}
+                {alignsWithHeadline ? null : <Headline />}
 
                 <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
                     <div className="min-w-0">
-                        {alignsWithHeadline ? headline : null}
+                        {alignsWithHeadline ? <Headline /> : null}
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
