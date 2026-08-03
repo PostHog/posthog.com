@@ -133,11 +133,14 @@ function TemplateCard({ template }: { template: UnifiedTemplate }) {
             className="group flex flex-col rounded-lg border border-primary bg-primary p-4 hover:border-yellow transition-colors no-underline"
         >
             <div className="flex items-start justify-between gap-2 mb-3">
-                {template.image_url ? (
-                    <img src={template.image_url} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
-                ) : (
-                    <div className="w-10 h-10 rounded bg-accent shrink-0" />
-                )}
+                {/* Self-driving templates share one generic thumbnail, so it carries no
+                    information – the other types keep their own. */}
+                {template.type !== 'self-driving' &&
+                    (template.image_url ? (
+                        <img src={template.image_url} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
+                    ) : (
+                        <div className="w-10 h-10 rounded bg-accent shrink-0" />
+                    ))}
                 <span
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full shrink-0 ${
                         categoryColors[primaryTag] || categoryColors.Other
@@ -355,24 +358,6 @@ export default function TemplatesLibrary(): JSX.Element {
 
             {/* Self-driving templates read better as an inbox than as cards, since the thing they
                 produce is a report. Point at that experience rather than duplicating it here. */}
-            {categoryFilter === 'Self-driving' && (
-                <Link
-                    to="/templates/self-driving"
-                    state={{ newWindow: true }}
-                    className="not-prose mb-6 flex items-center justify-between gap-4 rounded-lg border border-primary bg-accent px-5 py-4 no-underline hover:border-yellow"
-                >
-                    <span>
-                        <span className="block text-[15px] font-semibold text-primary">
-                            These are best read as an inbox
-                        </span>
-                        <span className="block text-sm text-secondary">
-                            Browse the reports these scouts file, the way they'd land for you.
-                        </span>
-                    </span>
-                    <span className="shrink-0 text-sm font-semibold text-red dark:text-yellow">Open the inbox →</span>
-                </Link>
-            )}
-
             {/* Card grid */}
             <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-4">
                 {sortedTemplates.map((template) => (
