@@ -139,9 +139,8 @@ There are three ways we structure free credits, and it's important to be clear w
 
 2. **Coverage for a specific number of months.** The free credits are *not* part of the contract term. We add enough free credits to cover the promised period (for example, up to the contract start date), top up if the customer comes up short before then, and add the prepaid credits only when the contract actually starts. Any free-credit balance still remaining at contract start is removed at that point. These credits can be added via billing admin as a one time credit and don't need to be called out as part of the term.
 
-3. **Fixed amount included in an extended term (contract buyouts).** The free credits are part of the contract term, but the term itself is longer than standard because it absorbs the buyout period — 12 months of paid usage plus a 6 month buyout becomes an 18 month term. Use this whenever we're buying a customer out of a competitor contract. See [contract buyouts](#contract-buyouts) for how to build the order form.
+3. **Fixed amount included in an extended term (contract buyouts).** The free credits are part of the contract term, but the term itself is longer than standard because it absorbs the buyout period: 12 months of paid usage plus a 6 month buyout becomes an 18 month term. Use this whenever we're buying a customer out of a competitor contract. See [contract buyouts](#contract-buyouts) for how to build the order form. **Note that this means you won't be able to top up free credits if customer uses them faster than originally planned. If you think this may be the case, default to option 2.**
 
-Prefer option 3 over option 2 for customers who are already paying us, so the free period doesn't show up as a gap in retention.
 
 ### Margin negative deals
 
