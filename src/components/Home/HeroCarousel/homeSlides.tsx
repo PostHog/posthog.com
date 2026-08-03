@@ -24,6 +24,7 @@ const MAX_CAROUSEL_HOLD_MS = 30000
 // Shared height for every Typecaast embed in the hero carousel — one value so all slides
 // match and the carousel doesn't jump in height between tabs.
 const CAROUSEL_EMBED_HEIGHT = 'h-[400px]'
+const INBOX_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png'
 
 const CarouselTypecaast = ({ onEnded, ...props }: TypecaastPlayerProps): JSX.Element => {
     const [ended, setEnded] = useState(false)
@@ -121,7 +122,7 @@ export const PullRequestSlide = () => {
 }
 
 export const FixBugsSlide = () => {
-    const [view, setView] = useState<'slack' | 'code'>('slack')
+    const [view, setView] = useState<'web' | 'code' | 'slack'>('web')
     const allProducts = useProduct() as any[]
     const codeProduct = Array.isArray(allProducts)
         ? allProducts.find((p: any) => p.handle === 'posthog_code')
@@ -137,15 +138,24 @@ export const FixBugsSlide = () => {
                     title="View"
                     hideTitle
                     options={[
+                        { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
+                        { label: <span className="whitespace-nowrap">Desktop</span>, value: 'code' },
                         { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
-                        { label: <span className="whitespace-nowrap">PostHog Desktop</span>, value: 'code' },
                     ]}
                     value={view}
-                    onValueChange={(v) => v && setView(v as 'slack' | 'code')}
+                    onValueChange={(v) => v && setView(v as 'web' | 'code' | 'slack')}
                 />
             </div>
             <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center">
-                {view === 'slack' ? (
+                {view === 'web' ? (
+                    <div className="flex overflow-hidden rounded border border-primary">
+                        <CloudinaryImage
+                            src={INBOX_IMAGE}
+                            alt="The PostHog Inbox showing prioritized reports and pull requests"
+                            imgClassName="w-full"
+                        />
+                    </div>
+                ) : view === 'slack' ? (
                     <CarouselTypecaast
                         config={slackSignalsLoading}
                         height={CAROUSEL_EMBED_HEIGHT}
@@ -164,7 +174,29 @@ export const FixBugsSlide = () => {
                 ) : (
                     <div />
                 )}
-                {view === 'slack' ? (
+                {view === 'web' ? (
+                    <div className="flex flex-col gap-3">
+                        <div className="space-y-2">
+                            <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
+                                <IconSparkles className="size-4" /> PostHog Inbox
+                            </p>
+                            <h2 className="text-2xl font-bold m-0">Improvements, ready for review</h2>
+                        </div>
+                        <p className="text-secondary m-0">
+                            Your Inbox clusters related findings into researched reports, ranked by priority. Review
+                            proposed improvements and pull requests, then decide what ships.
+                        </p>
+                        <OSButton
+                            to="/docs/self-driving/inbox"
+                            state={{ newWindow: true }}
+                            variant="secondary"
+                            size="md"
+                            asLink
+                        >
+                            Explore Inbox
+                        </OSButton>
+                    </div>
+                ) : view === 'slack' ? (
                     <div className="flex flex-col gap-3">
                         <div className="space-y-2">
                             <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
@@ -213,7 +245,7 @@ export const FixBugsSlide = () => {
 }
 
 export const AskAnythingSlide = () => {
-    const [view, setView] = useState<'slack' | 'web'>('slack')
+    const [view, setView] = useState<'slack' | 'web'>('web')
     const allProducts = useProduct() as any[]
     const aiProduct = Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === 'posthog_ai') : undefined
     const { siteSettings } = useApp()
@@ -227,8 +259,8 @@ export const AskAnythingSlide = () => {
                     title="View"
                     hideTitle
                     options={[
-                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
                         { label: <span className="whitespace-nowrap">Web</span>, value: 'web' },
+                        { label: <span className="whitespace-nowrap">Slack</span>, value: 'slack' },
                     ]}
                     value={view}
                     onValueChange={(v) => v && setView(v as 'slack' | 'web')}
