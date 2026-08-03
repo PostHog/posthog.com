@@ -24,7 +24,7 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
-import HeroCTA, { HeroCtaProvider, useHeroCtaVariant } from 'components/Home/HeroCTA'
+import HeroCTA from 'components/Home/HeroCTA'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { cn } from '../../../utils'
@@ -134,7 +134,7 @@ export const CTAs = () => {
 }
 
 const Headline = ({ className }: { className?: string }) => (
-    <h1 className={cn('!text-3xl @xl:!text-4xl pt-4 mt-0', className)}>
+    <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
         Shift your product into{' '}
         <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
             self-driving mode
@@ -143,24 +143,18 @@ const Headline = ({ className }: { className?: string }) => (
 )
 
 function Hero(): JSX.Element {
-    // Some CTA variants start at the top of the layout, level with the headline rather than below it.
-    // For those, the headline moves into the left grid column so the CTA column can begin alongside it
-    // – matching `pt-4` on both keeps their text tops on the same line. The logo stays put either way.
-    const { alignsWithHeadline } = useHeroCtaVariant()
-
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
-                <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-12 pt-2">
                     <Logo className="max-w-[157px] dark:hidden" width="auto" />
                     <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
                 </div>
 
-                {alignsWithHeadline ? null : <Headline />}
+                <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
+                    <Headline className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1" />
 
-                <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
-                    <div className="min-w-0">
-                        {alignsWithHeadline ? <Headline /> : null}
+                    <div className="min-w-0 @xl:row-start-2 @xl:col-start-1">
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
@@ -215,18 +209,7 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    {/* CTA variant comes from the `homepage-cta` experiment – see
-                        components/Home/HeroCTA/README.md. Falls back to the control (the wizard
-                        install card) until flags resolve. The MCP / demo / talk-to-a-human row that
-                        used to sit under this was removed from the hero; `SecondaryActions` is still
-                        used by `GetStarted` and `CTAs`. */}
-                    <div
-                        className={cn(
-                            'flex flex-col items-center min-w-0 w-full',
-                            // pt-4 mirrors the headline's own top padding so the two line up exactly.
-                            alignsWithHeadline ? '@xl:pt-4 mt-6 @xl:mt-0' : 'mt-6'
-                        )}
-                    >
+                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:mt-0">
                         <HeroCTA />
                     </div>
                 </div>
@@ -251,9 +234,7 @@ export default function HomeTest() {
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
             <div className="space-y-12">
-                <HeroCtaProvider>
-                    <Hero />
-                </HeroCtaProvider>
+                <Hero />
                 <Customers />
                 <DataStackSection />
                 <PricingSection />
