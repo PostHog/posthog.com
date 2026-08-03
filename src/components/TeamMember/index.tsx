@@ -64,7 +64,7 @@ export const TeamMemberLink = ({
                 <span
                     className={`inline-flex items-center ${
                         photo
-                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full bg-light text-dark'
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full text-primary'
                             : 'border-b border-primary border-dashed'
                     } ${className}`}
                 >
