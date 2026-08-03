@@ -3,8 +3,6 @@ import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import { TreeMenu } from 'components/TreeMenu'
-import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
@@ -55,8 +53,6 @@ type IconGroup = {
     title: string
     items: IconItem[]
 }
-
-const LeftSidebarContent = () => <TreeMenu items={productOSNav.children} />
 
 const IconChipRow = ({ items }: { items: IconItem[] }) => (
     <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
@@ -698,7 +694,7 @@ export default function SlackAppPage(): JSX.Element {
                     slug: 'slack-app',
                 })}
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="posthog-slack-app.md" hideTitle={true}>
+            <ReaderView hideLeftSidebar showQuestions={false} title="posthog-slack-app.md" hideTitle={true}>
                 <div>
                     <div className="text-center mb-4">
                         <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">

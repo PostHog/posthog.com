@@ -41,7 +41,7 @@ There are separate limits for different kinds of resources.
 
 - For the `/invites` and `/invites/bulk` endpoints, you can send `50` invites per hour and `200` per day, with up to 20 invites per bulk request. This also applies to invites sent from the PostHog UI.
 
-- For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/flags`), there are no rate limits.
+- Public POST-only endpoints such as event capture (`/e`, `/i/v0/e`) and feature flag evaluation (`/flags`) have no request-level rate limits. Event capture still returns `200` when your project is over its billing quota, and names the limited resources in the `quota_limited` field of the response body. It also applies a [per-distinct-ID ingestion protection](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids): if a single distinct ID sends a high, sustained volume of events (roughly 5,000 per minute), those events are still accepted with a `200` response but are processed without strict ordering and without person profile updates for the duration of the spike. PostHog logs an [ingestion warning](/docs/data/ingestion-warnings) when this happens.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 

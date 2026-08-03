@@ -52,9 +52,9 @@ function LazyHeroCarousel({ className }: { className?: string }) {
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
     <p
-        className={`!text-sm flex flex-wrap items-center gap-2 ${
+        className={`!text-sm mt-4 mb-0 flex w-full max-w-md flex-wrap items-center gap-2 ${
             justify === 'start' ? 'justify-start' : 'justify-center'
-        } @xl:min-w-96 @xl:max-w-md`}
+        }`}
     >
         <Link
             to="/docs/model-context-protocol"
@@ -132,18 +132,12 @@ export const CTAs = () => {
 }
 
 function Hero(): JSX.Element {
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
                 <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
-                    <Logo
-                        className="max-w-[157px]"
-                        variant={isDark ? 'mono' : 'gradient'}
-                        color={isDark ? 'white' : undefined}
-                        width="auto"
-                    />
+                    <Logo className="max-w-[157px] dark:hidden" width="auto" />
+                    <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
                 </h1>
 
                 <h1 className="!text-3xl @xl:!text-4xl pt-4">

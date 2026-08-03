@@ -244,7 +244,7 @@ const MenuItem: React.FC<{
                             alignOffset={-5}
                             data-scheme="primary"
                         >
-                            {item.items}
+                            {React.cloneElement(item.items as unknown as React.ReactElement, { onCloseMenu })}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
                 </RadixMenubar.Sub>

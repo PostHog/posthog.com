@@ -1,0 +1,42 @@
+---
+title: Use the data warehouse over the API
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog API](/docs/api) covers the warehouse end to end – the sources you import from, the tables that data lands in, and the models you build on top of it. Reach for it when the warehouse needs to be part of something you already run: provisioning a source from a deploy script, checking sync health from your own monitoring, or keeping view definitions in step with a system outside PostHog.
+
+Every warehouse endpoint is project-scoped and authenticates with a [personal API key](/docs/api#authentication). See the [API reference](/docs/api) for the exact paths, request shapes, scopes, and rate limits.
+
+## What you can do here
+
+**Manage sources and schemas**
+
+Create, update, and delete [external data sources](/docs/data-warehouse/sources), and read the per-table schemas underneath them. You can trigger a re-sync, pull the latest table list from the remote database, change a table's sync type or frequency, pause or resume syncing, and read sync status so you can tell whether an import is keeping up with its schedule.
+
+**Manage warehouse tables**
+
+List, create, update, and delete the tables in your warehouse – including ones backed by files in object storage – and read the column schema PostHog inferred for each one.
+
+**Manage saved queries and views**
+
+Create, update, and delete [views](/docs/data-warehouse/views), turn [materialization](/docs/data-warehouse/views/materialize) on or off, set a refresh frequency, trigger a run, and read the run history behind each one.
+
+**Manage view links**
+
+Define the [joins](/docs/data-warehouse/join) that connect a warehouse table to your PostHog data, so a query can cross from events into your business data without anyone writing the join by hand.
+
+**Read the modeling DAG**
+
+Walk the dependency graph across your sources, tables, and views to see what a model is built from and what goes stale downstream when it fails.
+
+**Read and write query tab state**
+
+Read or update the saved state of the SQL editor's tabs. This one is mostly useful if you're building tooling around the editing experience rather than around the data itself.
+
+## Related
+
+- Do the same work by hand in the [web app](/docs/data-warehouse/surfaces/web-app).
+- Drive it conversationally from your editor over [MCP](/docs/data-warehouse/surfaces/mcp).
+- Run SQL against your warehouse with the [query API](/docs/api/queries).
+- See the full [PostHog API reference](/docs/api).

@@ -4,12 +4,6 @@ title: Scanner types
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
 The scanner type determines the shape of the structured output the model returns. It's chosen when you create a scanner and **can't be changed afterwards** – to switch types, create a new scanner.
 
 There are four types:
@@ -198,6 +192,6 @@ If you find yourself encoding a number range as classifier tags ("low / medium /
 
 ## Confidence and citations
 
-Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee. For actual ground truth, rate results on the scanner's [quality tab](/docs/replay-vision/quality) – your team's ratings measure accuracy per configuration version and power AI configuration recommendations.
+Confidence is the model's self-reported certainty. It's useful as a filter (e.g. "only alert when confidence > 0.7") but not as ground truth – treat it as a signal, not a guarantee. For actual ground truth, rate results on the scanner's [calibration tab](/docs/replay-vision/calibration) – your team's ratings measure accuracy per configuration version and power AI configuration recommendations.
 
 Citations are emitted inline in the model's free-text output (the `reasoning` field for monitors, classifiers, and scorers; the `summary` field for summarizers) and rendered as clickable links in the observation detail view. They jump the embedded player to the timestamp the model points at. They're the single best tool for understanding _why_ a model returned what it did.
