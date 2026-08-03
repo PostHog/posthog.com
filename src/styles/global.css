@@ -111,7 +111,8 @@
                 @apply px-8;
             }
 
-            p {
+            p,
+            small {
                 @apply pt-0 pb-2 px-8 m-0;
             }
 
@@ -122,6 +123,15 @@
             ul,
             ol {
                 @apply pl-12 pr-4 mt-0 mb-4;
+            }
+
+            /* Markdown tables come out of MDX as a direct child of <details>, so
+               without this they sit flush against the panel edge (unlike the
+               indented paragraphs and lists) and bleed past it in narrow windows.
+               display: block + w-max lets a wide table scroll inside the panel
+               instead of overflowing it. */
+            > table {
+                @apply block w-max max-w-[calc(100%-4rem)] mx-8 mt-0 mb-4 overflow-x-auto;
             }
         }
 
