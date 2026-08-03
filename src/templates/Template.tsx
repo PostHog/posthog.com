@@ -14,10 +14,32 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import TemplateCTAs from 'components/TemplateCTAs'
+import TemplateCTA, { CtaSpec } from 'components/TemplateCTA'
 import SelfDrivingInboxPage from 'components/SelfDrivingInbox/Page'
 
 const A = (props) => <Link {...props} />
+
+/** Until every template declares a `cta`, keep deriving one from its type. */
+function legacyCta(templateType?: string, title?: string): CtaSpec | null {
+    if (templateType === 'self-driving') {
+        return { kind: 'url', value: 'https://app.posthog.com/inbox/config', label: 'Open your scout fleet' }
+    }
+    if (templateType === 'survey') {
+        // No `?template=` here: the app matches an exact enum value, which only the frontmatter knows.
+        return { kind: 'url', value: 'https://app.posthog.com/surveys/guided/new', label: 'Create a survey' }
+    }
+    return title ? { kind: 'dashboard', value: title } : null
+}
+
+function legacySecondary(templateType?: string): { href: string; label: string } | null {
+    if (templateType === 'self-driving') {
+        return { href: '/docs/self-driving/setup', label: 'Set up self-driving' }
+    }
+    if (templateType === 'survey') {
+        return { href: '/docs/surveys', label: 'Read the surveys docs' }
+    }
+    return { href: 'https://app.posthog.com/dashboards', label: 'Go to dashboards' }
+}
 
 export default function Template({ data }) {
     const { pageData, templates, workflowTemplates } = data
@@ -27,7 +49,7 @@ export default function Template({ data }) {
         fields: { slug },
         parent,
     } = pageData
-    const { title, featuredImage, description, filters } = pageData?.frontmatter
+    const { title, featuredImage, description, filters, cta } = pageData?.frontmatter
     const templateType = filters?.type?.[0]?.toLowerCase()
     const filePath = parent?.relativePath
 
@@ -155,35 +177,10 @@ export default function Template({ data }) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                     <div className="mb-12">
-                        {templateType === 'self-driving' ? (
-                            <TemplateCTAs
-                                urls={{
-                                    // /inbox/config is the inbox's Configuration tab, where the
-                                    // scout fleet and its create button live (see InboxTabKey in
-                                    // posthog/posthog). No prefill support exists yet – when the
-                                    // app grows a ?createScout=<slug> param, point this there.
-                                    primary: `https://app.posthog.com/inbox/config`,
-                                    secondary: `/docs/self-driving/setup`,
-                                }}
-                                labels={{
-                                    primary: 'Open your scout fleet',
-                                    secondary: 'Set up self-driving',
-                                }}
-                            />
-                        ) : (
-                            <TemplateCTAs
-                                urls={{
-                                    primary:
-                                        templateType === 'survey'
-                                            ? `https://app.posthog.com/surveys/guided/new`
-                                            : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
-                                    secondary:
-                                        templateType === 'survey'
-                                            ? `https://app.posthog.com/surveys/guided/new`
-                                            : `https://app.posthog.com/dashboards`,
-                                }}
-                            />
-                        )}
+                        <TemplateCTA
+                            cta={cta ?? legacyCta(templateType, title)}
+                            secondary={legacySecondary(templateType)}
+                        />
                     </div>
                 </div>
             </ReaderView>
@@ -211,6 +208,12 @@ export const query = graphql`
                 subtitle
                 filters {
                     type
+                }
+                cta {
+                    kind
+                    value
+                    label
+                    fallback
                 }
                 report {
                     title

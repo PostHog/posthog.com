@@ -96,9 +96,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       label: String
       level: String
     }
+    type FrontmatterCTA {
+      kind: String
+      value: String
+      label: String
+      fallback: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      # A template's one-touch app link. Declared rather than inferred: it's sparse across
+      # nodes, and Gatsby can't infer a shape it only sees on some of them.
+      cta: FrontmatterCTA
       report: FrontmatterReport
       question: String
       premise: String
