@@ -22,17 +22,17 @@ A PostHog skill follows the [Agent Skills specification](https://agentskills.io/
 
 The MCP server exposes the skills store through a dedicated family of tools:
 
-| Tool                | Purpose                                                                           |
-| ------------------- | --------------------------------------------------------------------------------- |
-| `skill-list`        | List all available skills (name + description only)                               |
-| `skill-get`         | Fetch a skill by name — returns the body and a manifest of bundled files          |
-| `skill-file-get`    | Fetch a single bundled file by path (on demand)                                   |
-| `skill-create`      | Store a new skill, optionally with bundled files                                  |
-| `skill-update`      | Publish a new version — provide full `body`, incremental `edits`, or `file_edits` |
-| `skill-file-create` | Add one bundled file to a skill (publishes a new version)                         |
-| `skill-file-delete` | Remove one bundled file from a skill                                              |
-| `skill-file-rename` | Rename one bundled file (move without rewriting content)                          |
-| `skill-duplicate`   | Duplicate an existing skill under a new name                                      |
+| Tool                | Purpose                                                                                              |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| `skill-list`        | List all available skills (name + description only)                                                  |
+| `skill-get`         | Fetch a skill by name — returns the body, file manifest, and paging metadata for truncation recovery |
+| `skill-file-get`    | Fetch a single bundled file by path (on demand)                                                      |
+| `skill-create`      | Store a new skill, optionally with bundled files                                                     |
+| `skill-update`      | Publish a new version — provide full `body`, incremental `edits`, or `file_edits`                    |
+| `skill-file-create` | Add one bundled file to a skill (publishes a new version)                                            |
+| `skill-file-delete` | Remove one bundled file from a skill                                                                 |
+| `skill-file-rename` | Rename one bundled file (move without rewriting content)                                             |
+| `skill-duplicate`   | Duplicate an existing skill under a new name                                                         |
 
 Agents use these with progressive disclosure: discover by description, fetch the body only when relevant, and pull individual files on demand — rather than loading everything up front.
 
@@ -181,6 +181,36 @@ instructions to write release notes for the changes in my current branch.
 The agent calls `skill-get` with `skill_name: "hog-release-notes"`, receives the body + file manifest, reads the body as its system instructions, and gets to work — fetching any referenced bundled files via `skill-file-get` on demand.
 
 This works identically in Claude Code, Cursor, Codex, or any other MCP-connected agent. The skill lives in PostHog, not in any particular tool.
+
+### Handling large skill bodies
+
+Most skills fit in a single response. However, some MCP clients cap the size of tool responses, which can silently truncate a large skill body. `skill-get` includes paging metadata so agents can detect and recover from this.
+
+Every `skill-get` response includes `body_total_length` — the full body length in characters. If the `body` you received is shorter than `body_total_length`, it was truncated in transit. Use `body_offset` and `body_length` to page through the body, and continue from `body_next_offset` until it is `null`:
+
+```json
+// First page — request 4000 characters
+{ "skill_name": "my-large-skill", "body_offset": 0, "body_length": 4000 }
+
+// Response includes paging metadata before the body
+{
+  "body_total_length": 12000,
+  "body_next_offset": 4000,
+  "body": "... first 4000 characters ..."
+}
+
+// Next page — continue from body_next_offset
+{ "skill_name": "my-large-skill", "body_offset": 4000, "body_length": 4000 }
+
+// Final page — body_next_offset is null when you've reached the end
+{
+  "body_total_length": 12000,
+  "body_next_offset": null,
+  "body": "... last characters ..."
+}
+```
+
+When no paging params are passed, the full body is returned as before — existing consumers are unaffected.
 
 ## Step 3: Set up a bridge skill (optional shortcut)
 
