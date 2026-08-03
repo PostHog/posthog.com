@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { IconArrowRight, IconAtSign, IconCheck, IconCoffee, IconSparkles } from '@posthog/icons'
 import { IconSlack } from 'components/OSIcons'
 import OSButton from 'components/OSButton'
+import { SignupCTA } from 'components/SignupCTA'
 import CloudinaryImage from 'components/CloudinaryImage'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../../context/App'
@@ -78,7 +79,7 @@ export const PullRequestSlide = () => {
                 />
             </div>
             */}
-            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center">
+            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
                 <CarouselTypecaast
                     config={slackBrokenLink}
                     height={CAROUSEL_EMBED_HEIGHT}
@@ -96,7 +97,7 @@ export const PullRequestSlide = () => {
                         ever leaving Slack. Triage and build with your team in the tools you already use.
                     </p>
                     <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" size="md" asLink>
-                        Learn more
+                        Explore PostHog Slack
                     </OSButton>
                 </div>
                 {/* Web view — re-add alongside the toggle when multi-player supports web:
@@ -146,13 +147,14 @@ export const FixBugsSlide = () => {
                     onValueChange={(v) => v && setView(v as 'web' | 'code' | 'slack')}
                 />
             </div>
-            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center">
+            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
                 {view === 'web' ? (
-                    <div className="flex overflow-hidden rounded border border-primary">
+                    <div className={`flex overflow-hidden rounded border border-primary ${CAROUSEL_EMBED_HEIGHT}`}>
                         <CloudinaryImage
                             src={INBOX_IMAGE}
                             alt="The PostHog Inbox showing prioritized reports and pull requests"
-                            imgClassName="w-full"
+                            className="h-full w-full"
+                            imgClassName="h-full w-full object-cover object-top"
                         />
                     </div>
                 ) : view === 'slack' ? (
@@ -208,8 +210,8 @@ export const FixBugsSlide = () => {
                             PostHog Signals runs analysis on errors, logs, and summarized session recordings to detect
                             and fix bugs without any human prompting.
                         </p>
-                        <OSButton to="/self-driving" state={{ newWindow: true }} variant="secondary" size="md" asLink>
-                            Learn more
+                        <OSButton to="/slack" state={{ newWindow: true }} variant="secondary" size="md" asLink>
+                            Explore PostHog Slack
                         </OSButton>
                     </div>
                 ) : (
@@ -266,7 +268,7 @@ export const AskAnythingSlide = () => {
                     onValueChange={(v) => v && setView(v as 'slack' | 'web')}
                 />
             </div>
-            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center">
+            <div className="grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-start">
                 {view === 'slack' ? (
                     <CarouselTypecaast
                         config={slackAskPostHog}
@@ -300,8 +302,8 @@ export const AskAnythingSlide = () => {
                             Pipe in third party data to analyze alongside customer usage data for a more complete
                             picture of product usage.
                         </p>
-                        <OSButton to="/ai" state={{ newWindow: true }} size="md" variant="secondary" asLink>
-                            Explore PostHog AI
+                        <OSButton to="/slack" state={{ newWindow: true }} size="md" variant="secondary" asLink>
+                            Explore PostHog Slack
                         </OSButton>
                     </div>
                 ) : (
@@ -320,9 +322,7 @@ export const AskAnythingSlide = () => {
                             Pipe in third party data to analyze alongside customer usage data for a more complete
                             picture of product usage.
                         </p>
-                        <OSButton to="/ai" state={{ newWindow: true }} size="md" variant="secondary" asLink>
-                            Explore PostHog AI
-                        </OSButton>
+                        <SignupCTA size="md" state={{ initialTab: 'signup' }} />
                     </div>
                 )}
             </div>
