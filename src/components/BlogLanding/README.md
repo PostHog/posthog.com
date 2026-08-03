@@ -23,9 +23,10 @@ and `/newsletter` by passing a different `folder`.
 | `useCategoryMenu.ts` | Hook. Builds a nested category tree for a folder: each category (`{ name, url }`) with its articles as `children`, from the tag API + a one-shot posts fetch grouped by tag. Returns `{ items, loading }`, shaped for the shared `TreeMenu`. The rail is text-only — no icons. |
 | `tagOptions.ts` | The category label → icon map, plus `getTagIcon()` (case-insensitive lookup) and `DEFAULT_TAG_ICON`. Used by `CategoryGrid` and `templates/Hub/Tag.tsx`. |
 | `CategoryGrid.tsx` | The category tiles as an auto-fit grid, sourced via `useCategoryTags`. Used by the founders `Hub`. |
+| `CategorySidebar.tsx` | The landing page's left rail: heading, intro, and the folder's categories as an expand-in-place `TreeMenu`. Owns its own data via `useCategoryMenu`. Wrapped in `React.memo` so main-column state (the sort toggle) doesn't re-render the category tree. |
 | `PostSection.tsx` | A labeled grid of `PostCard`s (reuses `components/Edition/PostCard`) with loading skeleton + empty state. Grid reflows via `@container` queries. Optional `action` slot for a sort toggle. |
 | `types.ts` | `LandingVariantProps` (`folder`, `title`, `intro`). |
-| `variants/SidebarExplorer.tsx` | The landing layout. Built on the handbook's `ReaderView` shell (`components/ReaderView`) so it inherits the darker `secondary`-scheme sub-toolbar + nav rail and bright `primary`-scheme main content. Categories render via the shared `TreeMenu` in `expandOnly` mode (collapsible, expand-in-place). Main column = hero via shared `FeaturedPost` (`containerStack`) + one feed toggled Recent/Popular via shared `ToggleGroup`. |
+| `variants/SidebarExplorer.tsx` | The landing layout. Built on the handbook's `ReaderView` shell (`components/ReaderView`) so it inherits the darker `secondary`-scheme sub-toolbar + nav rail and bright `primary`-scheme main content. Passes `CategorySidebar` as the `leftSidebar`. Main column = hero via shared `FeaturedPost` (`containerStack`) + one feed toggled Recent/Popular via shared `ToggleGroup`. |
 
 ## Reused from elsewhere (not rebuilt here)
 
