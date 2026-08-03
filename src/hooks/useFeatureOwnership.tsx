@@ -98,7 +98,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking'],
+        owner: ['error-tracking', 'self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
+                symbolication/upload pipeline and symbol/sourcemap upload internals.
+            </>
+        ),
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -274,6 +280,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             </>
         ),
         label: 'feature/mcp',
+    },
+    'mcp-store': {
+        feature: 'MCP store',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     notebooks: {
         feature: 'Notebooks',
