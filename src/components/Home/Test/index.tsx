@@ -52,9 +52,9 @@ function LazyHeroCarousel({ className }: { className?: string }) {
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
     <p
-        className={`!text-sm flex flex-wrap items-center gap-2 ${
+        className={`!text-sm mt-4 mb-0 flex w-full max-w-md flex-wrap items-center gap-2 ${
             justify === 'start' ? 'justify-start' : 'justify-center'
-        } @xl:min-w-96 @xl:max-w-md`}
+        }`}
     >
         <Link
             to="/docs/model-context-protocol"
