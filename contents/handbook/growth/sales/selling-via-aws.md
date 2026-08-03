@@ -24,7 +24,7 @@ For now, we're keeping it simple:
 
 ## Using Clazar for private offers
 
-Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage this. Clazar ties private offers directly to Salesforce (something AWS doesn't do natively). Future state: would be nice if QuoteHog could create these directly too!
+Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage this. Clazar can tie private offers directly to Salesforce (something AWS doesn't do natively), but that integration isn't configured on our side yet – for now, create offers in Clazar itself. Future state: would be nice if QuoteHog could create these directly too!
 
 ### Initial setup
 
@@ -35,28 +35,7 @@ Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage th
 
 ### Creating a private offer via Clazar
 
-#### Option 1: Direct from Salesforce (recommended)
-
-1. **Open the opportunity** in Salesforce
-2. **Navigate to the AWS Private Offers widget** (should be on the opportunity page)
-3. **Click "Create Private Offer"** - Clazar pre-fills most fields from the opportunity
-4. **Fill in the required fields:**
-   - **Buyer AWS Account ID** (critical - double check this and it should be their management/root account ID)
-   - **Offer Name** - Something clear like "PostHog Annual - [Company Name] - MM/YYYY"
-   - **Contract Duration** - 12 months (we're annual only right now)
-   - **Expiration Date** - Expiry on the offer itself. Usually 30 days out is fine.
-5. **Configure pricing:**
-   - Set as **upfront payment** (non-FPS offer)
-   - Enter the negotiated price
-   - Currency: USD (can do EUR, GBP, JPY if needed)
-6. **Choose EULA type:**
-   - Use **Standard Contract for AWS Marketplace** unless legal says otherwise
-   - If custom EULA needed, upload the PDF (max 5 docs)
-7. **Review and submit** - Takes ~45 minutes to generate in AWS (yes, really takes that long sometimes)
-
-#### Option 2: Via Clazar platform
-
-If you need more control or Salesforce isn't cooperating:
+Create the offer in Clazar directly:
 
 1. **Log into Clazar** at app.clazar.io
 2. **Navigate to Private Offers** in the main menu
