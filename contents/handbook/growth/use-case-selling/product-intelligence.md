@@ -28,7 +28,7 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 - **[Workflows](/docs/workflows/start-here)** — Onboarding sequences, activation nudges, lifecycle engagement. The action layer: once you've identified a drop-off in analytics, Workflows lets you do something about it automatically. ([Email drip campaigns](/docs/workflows/email-drip-campaign))
 - **AI Evals** — For products with AI features: proactively surface where users are struggling based on AI output quality. This is product intelligence driven by AI observability. A bridge product to the [AI/LLM Observability](/handbook/growth/use-case-selling/ai-llm-observability) use case.
 - **[PostHog AI](/docs/posthog-ai/allow-access)** — Natural language querying and insight discovery. Lowers the bar for non-technical product stakeholders to self-serve. A PM asks "why did retention drop last week?" instead of building a custom query. ([Example prompts](/docs/posthog-ai/example-prompts))
-- **[Replay Vision](/docs/replay-vision)** *closed beta* — AI scanners that watch session recordings for you and turn what they see into queryable events. Point a scanner at a set of recordings and it flags dead ends, scores frustration, tags intent, or summarizes what happened — with citations that jump to the exact moment. The output lands as a `$recording_observed` event, so a finding becomes a funnel breakdown or a cohort, not a note in a vendor's AI panel. Requires [joining the waitlist](/replay-vision); see the caveats under pain points before promising it. ([Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations))
+- **[Replay Vision](/docs/replay-vision)** — AI scanners that watch session recordings for you and turn what they see into queryable events. Point a scanner at a set of recordings and it flags dead ends, scores frustration, tags intent, or summarizes what happened — with citations that jump to the exact moment. The output lands as a `$recording_observed` event, so a finding becomes a funnel breakdown or a cohort, not a note in a vendor's AI panel. See the caveats under pain points before promising it. ([Scanner types](/docs/replay-vision/scanner-types) · [Observations](/docs/replay-vision/observations))
 - **[Heatmaps](/docs/toolbar/heatmaps)** — Clickmaps, scrollmaps, and rageclick detection via the [toolbar](/docs/toolbar). Available on every plan. The thing UX teams ask for by name when comparing us to Hotjar.
 - **[self-driving](/docs/self-driving)** — Session replay and product analytics are [signal sources](/docs/self-driving/inbox/sources) for the self-driving loop, so a friction pattern can arrive as an investigated report with a pull request attached rather than a ticket for someone to write. Be careful how you frame this one for a product audience — see the self-driving section below.
 
@@ -178,13 +178,13 @@ Usually **Product Analytics**. Customer starts tracking events, builds dashboard
 | Hotjar | Session replay, heatmaps, basic surveys | Engineering-grade analytics alongside replay; experiments; flags; we ship heatmaps too | Simpler UX for non-technical users; purpose-built for UX research |
 | Heap | Auto-capture product analytics, session replay | Also auto-capture, plus flags, experiments, surveys, workflows | Retroactive analytics (virtual events) is a strong pitch |
 | Pendo | Product analytics + in-app guides | Deeper analytics; experiments; open source; better pricing | More mature in-app guides; stronger enterprise PM workflow features |
-| Fullstory | Autocapture, replay, StoryAI (session summaries, friction "Opportunities") | AI findings become queryable events, not panel-only insights; flags and experiments in the same tool | More mature enterprise DXA motion; StoryAI is GA where Replay Vision is closed beta |
+| Fullstory | Autocapture, replay, StoryAI (session summaries, friction "Opportunities") | AI findings become queryable events, not panel-only insights; flags and experiments in the same tool | More mature enterprise DXA motion; StoryAI has been GA longer and is more established in enterprise deals |
 | Contentsquare / Heap | Behavioral analytics, Sense Analyst (autonomous analysis agent) | One platform through to shipping the fix; better pricing | Sense Analyst is further along than our replay AI; deep enterprise CX tooling |
 | LogRocket | Replay, product analytics, Galileo AI (issue severity, Ask Galileo) | Broader platform; our signals feed an agent that opens PRs in your repo | Galileo is GA and dispatches Cursor agents today; strong frontend debugging |
 
 **Where PostHog stands:** Our strongest position is the breadth of the platform. No competitor offers analytics + replay + heatmaps + surveys + experiments + workflows in one tool. We're weaker against Amplitude in very large enterprises where their ML features and enterprise sales motion are more mature. We're weaker against Hotjar/Pendo for non-technical product teams who want a simpler, more opinionated UX.
 
-On AI specifically, be careful not to oversell: nearly every competitor shipped an AI analyst in the last year, several are GA while Replay Vision is still closed beta, and a customer who has seen Fullstory's or LogRocket's demo will not be impressed by "we have AI too." The defensible claims are narrower and better: the AI output is a first-class event you can join to the rest of your data, and the loop doesn't stop at an insight — it continues into a pull request. Our sweet spot is technical product teams at companies with engineers who value depth, flexibility, and not paying for 5 separate tools.
+On AI specifically, be careful not to oversell: nearly every competitor shipped an AI analyst in the last year, several of them GA for longer than Replay Vision, and a customer who has seen Fullstory's or LogRocket's demo will not be impressed by "we have AI too." The defensible claims are narrower and better: the AI output is a first-class event you can join to the rest of your data, and the loop doesn't stop at an insight — it continues into a pull request. Our sweet spot is technical product teams at companies with engineers who value depth, flexibility, and not paying for 5 separate tools.
 
 ## Pain points & known limitations
 
@@ -192,7 +192,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 |---|---|---|
 | No native in-app guides or tooltips | Teams with complex in-app onboarding needs may hit walls | For tooltip/modal UX, keep a dedicated tool (Appcues, Pendo) and use PostHog for analytics + experimentation. |
 | Workflows is new, less mature than dedicated engagement tools | Teams expecting Braze-level email sequencing will find gaps | Position as behavior-driven automation, not a full lifecycle marketing replacement. Complement with existing tools via [Data Pipelines](/docs/cdp/destinations). |
-| Replay Vision is closed beta and quota-limited | You can't promise it on a timeline, and a broad scanner can burn the monthly allowance fast | [Join the waitlist](/replay-vision) rather than committing to access. During beta there's a fixed monthly observation cap per organization (an explicit placeholder — pricing isn't set), scanners sample by default, and it's Gemini-only. Scope scanners narrowly to one flow while tuning. |
+| Replay Vision is quota-limited | A broad scanner can burn the monthly credit budget fast | Usage is metered in credits against a monthly budget per organization, scanners sample by default, and it's Gemini-only. Scope scanners narrowly to one flow while tuning — see [quota and limits](/docs/replay-vision/quota-and-limits). |
 | Replay Vision output is a model's judgment, not ground truth | A PM who treats one observation as fact will get burned | Every observation carries a confidence score and citations that link to the exact moment — coach customers to spot-check before acting, and to look for a pattern across sessions rather than trusting a single scan. |
 | Learning curve for non-technical PMs | PMs used to Amplitude's guided UX may find PostHog's flexibility overwhelming initially | Lead with [PostHog AI](/docs/posthog-ai/allow-access) for querying. Build pre-configured dashboards during onboarding. Start with simple funnels and retention, not HogQL. |
 
@@ -218,7 +218,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 - [ ] Set up one [Survey](/docs/surveys/creating-surveys) at a key friction point (post-signup NPS, feature feedback)
 - [ ] Plan first [Experiment](/docs/experiments) targeting a known drop-off point
 - [ ] Show [heatmaps](/docs/toolbar/heatmaps) on their highest-traffic page
-- [ ] If they're a fit for [Replay Vision](/replay-vision), get them on the waitlist early rather than at the point of need
+- [ ] If they're a fit for [Replay Vision](/docs/replay-vision), get a first scanner running on a flow they care about
 
 ## Cross-sell pathways from this use case
 
@@ -226,7 +226,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 |---|---|---|---|
 | Product Analytics only | Session Replay | They see the numbers but not the *why* | "You can see 40% drop off at step 3. Want to watch what's actually happening?" |
 | Product Analytics + Session Replay | Surveys | They're forming hypotheses from replays and want direct user input | "You're watching sessions and seeing confusion. Want to ask users directly what's tripping them up?" |
-| High Session Replay volume, low viewing rate | Replay Vision *closed beta* | They're paying to record sessions nobody has time to watch | "You recorded 40,000 sessions last month. How many did anyone actually watch? What if a scanner read all of them and tagged the ones where people got stuck?" |
+| High Session Replay volume, low viewing rate | Replay Vision | They're paying to record sessions nobody has time to watch | "You recorded 40,000 sessions last month. How many did anyone actually watch? What if a scanner read all of them and tagged the ones where people got stuck?" |
 | Watching replays and filing tickets manually | self-driving | The triage between "we saw the problem" and "someone fixed it" is all manual | "You've found the friction. Who writes the fix, and how long does it sit in the backlog first?" |
 | Product Analytics + Surveys | Experiments | They've identified problems and want to validate fixes | "You know the problem. Let's test whether your proposed fix actually works before building it fully." |
 | Analytics + Experiments mature | Workflows | They know what works and want to operationalize it | "You proved the new onboarding flow works. Now let's automatically nudge every new user toward it." |
@@ -245,7 +245,7 @@ On AI specifically, be careful not to oversell: nearly every competitor shipped 
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
 - **Group Analytics docs:** [Group Analytics](/docs/product-analytics/group-analytics)
 - **Heatmaps docs:** [Heatmaps](/docs/toolbar/heatmaps)
-- **Replay Vision docs:** [Overview](/docs/replay-vision) · [Scanner types](/docs/replay-vision/scanner-types) · [Creating scanners](/docs/replay-vision/creating-scanners) · [Observations](/docs/replay-vision/observations) · [Waitlist](/replay-vision)
+- **Replay Vision docs:** [Overview](/docs/replay-vision) · [Scanner types](/docs/replay-vision/scanner-types) · [Creating scanners](/docs/replay-vision/creating-scanners) · [Observations](/docs/replay-vision/observations) · [Quota and limits](/docs/replay-vision/quota-and-limits)
 - **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving) · [Pricing](/docs/self-driving/pricing)
 
 ## Appendix: Company archetype considerations
