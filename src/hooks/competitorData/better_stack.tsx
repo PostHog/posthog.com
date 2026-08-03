@@ -12,7 +12,7 @@ export const better_stack = {
             available: false,
         },
         session_replay: {
-            available: false,
+            available: true,
         },
         ai_observability: {
             available: false,
@@ -25,6 +25,7 @@ export const better_stack = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
                 },
             },
             search: {
@@ -44,7 +45,7 @@ export const better_stack = {
                 features: {
                     built_in_error_tracking: true,
                     built_in_session_replay: true,
-                    product_analytics_context: true,
+                    product_analytics_context: false,
                 },
             },
             observability: {
@@ -74,6 +75,7 @@ export const better_stack = {
         deployment: {
             self_host: false,
             open_source: false,
+            managed_cloud: true,
         },
         pricing: {
             self_serve: true,

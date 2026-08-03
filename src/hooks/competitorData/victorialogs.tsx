@@ -1,8 +1,8 @@
-export const grafana_loki = {
-    name: 'Grafana Loki',
-    key: 'grafana_loki',
+export const victorialogs = {
+    name: 'VictoriaLogs',
+    key: 'victorialogs',
     assets: {
-        icon: '/images/competitors/grafana-loki.png',
+        icon: '/images/competitors/victoriametrics.svg',
     },
     products: {
         product_analytics: {
@@ -12,7 +12,7 @@ export const grafana_loki = {
             available: false,
         },
         error_tracking: {
-            available: true,
+            available: false,
         },
         ai_observability: {
             available: false,
@@ -25,19 +25,19 @@ export const grafana_loki = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
-                    high_cardinality_indexing: false,
+                    high_cardinality_indexing: 'Partial',
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Partial',
-                    no_proprietary_query_language: 'LogQL',
+                    full_text_search: true,
+                    no_proprietary_query_language: 'LogsQL',
                 },
             },
             investigation_workflow: {
                 features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
                     ai_assisted_log_summaries: false,
                 },
             },
@@ -50,16 +50,16 @@ export const grafana_loki = {
             },
             observability: {
                 features: {
-                    metrics: 'Via LogQL',
-                    traces: 'Requires Tempo',
+                    metrics: false,
+                    traces: false,
                     alerting: true,
-                    infra_monitoring: 'Via stack',
+                    infra_monitoring: false,
                 },
             },
             security_and_compliance: {
                 features: {
                     siem: false,
-                    enterprise_scale_compliance: true,
+                    enterprise_scale_compliance: false,
                 },
             },
             pricing: {
@@ -74,16 +74,16 @@ export const grafana_loki = {
     platform: {
         deployment: {
             self_host: true,
-            open_source: true,
-            managed_cloud: 'Grafana Cloud',
+            open_source: 'Apache 2.0',
+            managed_cloud: 'VictoriaMetrics Cloud',
         },
         pricing: {
             self_serve: true,
-            free_tier: true,
-            transparent_pricing: false,
+            free_tier: false,
+            transparent_pricing: true,
         },
         tools: {
-            ai_assistant: true,
+            ai_assistant: false,
         },
         security: {
             siem: false,

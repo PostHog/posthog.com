@@ -155,11 +155,12 @@ export const posthog = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
                 },
             },
             search: {
                 features: {
-                    full_text_search: false,
+                    full_text_search: 'Attribute search',
                     no_proprietary_query_language: true,
                 },
             },
@@ -188,7 +189,7 @@ export const posthog = {
                     metrics: false,
                     traces: 'Alpha',
                     infra_monitoring: false,
-                    alerting: false,
+                    alerting: true,
                 },
             },
             pricing: {
