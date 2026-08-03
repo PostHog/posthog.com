@@ -9,10 +9,7 @@ interface PriorityDotProps {
     className?: string
 }
 
-/**
- * Priority indicator for a report. The dot alone carries no meaning for screen readers, so the
- * label is always present — visually hidden when `showLabel` is false.
- */
+/** The dot means nothing to a screen reader, so the label is always present, just hidden. */
 export default function PriorityDot({ priority, showLabel = false, className = '' }: PriorityDotProps): JSX.Element {
     const styles = PRIORITY_STYLES[priority]
 

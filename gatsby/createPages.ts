@@ -657,6 +657,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         const plainSlug = node.fields?.slug || node.slug
         if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
+        // `_`-prefixed template directories are starters to copy from, not pages. They carry a
+        // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
+        // above doesn't exclude them the way it excludes sibling SKILL.md files.
+        if (plainSlug?.startsWith('/templates/_') || plainSlug?.startsWith('templates/_')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -968,6 +972,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
+        // Not every markdown file under contents/templates is a page. A self-driving template
+        // authors its scout as a sibling SKILL.md, and `_`-prefixed directories are starters to
+        // copy from — both would otherwise get a URL of their own, since the templates query
+        // filters on the slug prefix alone.
+        if (slug.endsWith('/SKILL') || slug.startsWith('/templates/_')) {
+            return
+        }
         createPage({
             path: slug,
             component: DashboardTemplate,

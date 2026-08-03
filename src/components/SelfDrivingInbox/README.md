@@ -13,6 +13,34 @@ identical report.
 
 ---
 
+## Adding a template
+
+**Copy `contents/templates/_starter/` and rename it.** It's a commented skeleton of both files,
+kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow — you
+should not need to reverse-engineer an existing template.
+
+A template is two files:
+
+```
+contents/templates/<slug>/
+├── index.mdx    everything a human reads
+└── SKILL.md     the scout itself
+```
+
+`SKILL.md` is a **real file, not a string**. It carries the same frontmatter as the canonical
+scouts in the monorepo (`products/signals/skills/signals-scout-*/SKILL.md`), so you can paste one
+in or lift one out without reformatting. It gets syntax highlighting, markdownlint, and Vale,
+none of which reach a markdown document flattened into a YAML block scalar.
+
+The page renders it verbatim via `rawBody`, frontmatter included — nothing is reassembled, so the
+code block on the page is byte-for-byte what you wrote. `scoutInstructions()` in
+`scoutDeepLink.ts` strips the frontmatter for the deep link's Instructions field, since the app
+takes name and description as separate form fields.
+
+Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
+`gatsby/createPages.ts` skips slugs ending `/SKILL` or starting `/templates/_`, and the two
+gallery queries (`index.tsx` here, `TemplatesLibrary/index.tsx`) filter the same way.
+
 ## Authoring a template's report
 
 The report lives in the template's **frontmatter**, not its MDX body. Add a `report` block to
@@ -57,6 +85,31 @@ renders this block for you. Two copies drift.
 | `actionNote` | no | One line on what happens next, rendered dimmed. |
 | `affected` | no | Impact, e.g. `47 users affected`. |
 | `receivedAgo` | no | A static string like `2h`. See "no fake liveness" below. |
+
+### The discriminator — the field that matters most
+
+```yaml
+discriminator:
+  writesToInbox: Cost per conversation breaks from its recent norm while volume holds steady.
+  writesNothing: Usage went up too, so cost per conversation is flat – that's growth.
+  why: The ratio is the signal; the total is just the weather.
+```
+
+A scout runs on a schedule, and **every run ends one of two ways: it writes a report to the inbox,
+or it writes nothing.** The discriminator is the rule that decides which.
+
+Two things follow, and both are easy to get wrong:
+
+- **"Writes nothing" is the common case, and it is not the scout being off.** The run happened, it
+  queried your data, it cost a full agent run, and it decided you didn't need to hear about it. A
+  scout that reports every day is one you'll mute inside a week.
+- **The quiet half is the harder half to write, and the more valuable one.** If you can't say
+  crisply what would make this scout stay silent, the template isn't ready — you've described a
+  metric, not a discriminator. "Completions fell" is a metric. "Completions fell *while attempts
+  held steady*" is a discriminator, because it names what it ignores.
+
+The field names mirror the app's own toggle for this behavior, labeled **"Write findings to the
+inbox"**, so someone who turns the scout on meets the same words twice.
 
 ### Writing a report that earns trust
 

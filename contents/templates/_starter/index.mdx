@@ -1,0 +1,126 @@
+---
+# A starter for a self-driving scout template. Copy this whole directory to
+# contents/templates/<your-slug>/ and replace every value below.
+#
+# A template is two files:
+#   index.mdx  – this file, everything a human reads
+#   SKILL.md   – the scout itself, a real file you could paste into the monorepo
+#
+# Directories starting with `_` never become pages, so this one is safe to leave here.
+# Full authoring guide: src/components/SelfDrivingInbox/README.md
+
+# --- Card metadata: how this looks in the /templates gallery -------------------------
+
+title: Starter scout template
+subtitle: 'A one-line version of the question, phrased as a question.'
+thumbnail: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png
+showTitle: true
+badge: beta
+
+# `type: self-driving` is what routes this to the inbox UI. Without it you get a
+# plain dashboard-template page instead.
+filters:
+  type:
+    - self-driving
+  maintainer: official
+
+# --- The teaching half --------------------------------------------------------------
+
+# The headline question, in the reader's words. Often the same as `subtitle`.
+question: What question does this scout answer for you?
+
+# Two or three sentences on why this is worth watching. Write for someone who has
+# never heard of scouts. This is the most-read prose on the page – make it earn it.
+premise: >-
+  What goes wrong, why nobody notices it today, and what this scout does about it.
+
+# The most important block on the page. Every scheduled run ends one of two ways:
+# a report in the inbox, or nothing at all. Say which, crisply.
+#
+# The quiet half is the harder one to write and the more valuable one. If you can't
+# say what would keep this scout silent, you've described a metric, not a
+# discriminator. "Completions fell" is a metric. "Completions fell *while attempts
+# held steady*" is a discriminator, because it names what it ignores.
+discriminator:
+  writesToInbox: The specific shape in the data that means something is wrong.
+  writesNothing: The lookalike shape that means nothing is wrong – the false positive you're ruling out.
+  why: >-
+    Optional. One or two sentences on the generalizable lesson – the thing a reader can
+    apply to a scout you haven't written. Markdown renders here.
+
+# The signal sources this scout reads. Two or three. Each gets an icon matched by
+# keyword on `name`, so "Error tracking", "Session replay", "Your codebase" and
+# similar resolve automatically.
+watches:
+  - name: Your product events
+    detail: What specifically it reads from this source, and what that buys the report.
+  - name: Your codebase
+    detail: Deploys, so a change can be tied to the commit that caused it rather than a timestamp.
+
+# What someone needs set up before this scout can work. `level` is required,
+# recommended, or optional, and renders as a colored badge.
+#
+# Keep the vocabulary matched to `watches` above: if `watches` says "Your codebase",
+# say "Your codebase connected via GitHub" here, not just "GitHub connected".
+requires:
+  - label: The thing that must exist for this scout to have anything to read
+    level: required
+  - label: The thing that makes its reports better but isn't strictly needed
+    level: recommended
+
+# The product surface this template belongs to, e.g. "Error tracking", "Session replay",
+# "Data warehouse". Drives which category it files under in the inbox rail.
+#
+# The rail derives its categories from whatever templates declare, so a new one just works –
+# there is no central list to edit. Match an existing category's wording when one fits, or the
+# same product will show up twice under two spellings.
+category: Product analytics
+
+# Display only – the app owns the real schedule. Default across the fleet is Daily.
+# If you choose something else, say why in SKILL.md.
+schedule: Daily
+
+# --- The sample report ---------------------------------------------------------------
+#
+# A realistic example of what this scout would file. This is the first thing anyone
+# sees, so it does more persuading than any other block.
+#
+# Name evidence, not vibes: numbers, event names, deploy times, replay behavior –
+# things a reader could go verify. The best reports triangulate across sources,
+# because that's what a single dashboard can't do.
+report:
+  # State the finding as a claim with its evidence in it, not a topic.
+  # Good: "Publish completion rate down 31 points while attempts hold steady"
+  # Bad:  "Checkout issues"
+  title: The finding, with the number and the disqualifier in one line
+
+  # P0-P4. Be honest – an inbox where everything is P1 teaches nothing.
+  priority: P2
+
+  # What surfaced it. `·` is the house separator.
+  source: Scout · your scout name
+
+  # An authored static string, never a computed relative time.
+  receivedAgo: 1d
+
+  # Optional impact line, rendered bold. The number that decides whether this is
+  # worth someone's afternoon.
+  affected: The scale of it
+
+  # 2-4 sentences. Markdown renders: **bold**, `code`, and links.
+  # Lead with the observation, then the corroborating evidence from other sources.
+  # A blank line between paragraphs needs TWO blank lines inside a `>-` block.
+  body: >-
+    What moved, by how much, over what window. Then the evidence from a second source
+    that explains why. Then what rules out the obvious innocent explanation.
+
+  # Optional. What the agent proposes doing about it.
+  suggestedAction: >-
+    The specific change, scoped to one pull request.
+
+  # Optional. One line on what happens next, rendered dimmed.
+  actionNote: An agent opens the pull request – you review and merge.
+---

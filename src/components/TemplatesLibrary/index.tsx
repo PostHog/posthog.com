@@ -54,6 +54,7 @@ interface UnifiedTemplate {
 const templateTags: Record<string, string[]> = {
     'AARRR pirate metrics': ['Analytics', 'Product'],
     'Advertising dashboard': ['Marketing', 'Analytics'],
+    'AI spend that jumps overnight': ['Self-driving', 'AI'],
     'Announce a new feature': ['Marketing', 'Product'],
     'B2B metrics template': ['Analytics', 'Product'],
     'B2C metrics template': ['Analytics', 'Product'],
@@ -61,7 +62,7 @@ const templateTags: Record<string, string[]> = {
     'Customer churn rate (CCR) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer effort score (CES) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer satisfaction (CSAT) survey': ['Surveys & Feedback', 'Product'],
-    'Ghost feature flags': ['Self-driving', 'Engineering'],
+    'Feature flag debt': ['Self-driving', 'Engineering'],
     'Growth analytics dashboard': ['Analytics', 'Marketing'],
     'Hubspot starter report template': ['Sales', 'Marketing'],
     'Landing page report': ['Marketing', 'Analytics'],
@@ -203,22 +204,27 @@ export default function TemplatesLibrary(): JSX.Element {
         }
     `)
 
-    const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || []).map((t: MdxTemplate) => {
-        const types = t.frontmatter.filters?.type || []
-        const type = types[0]
+    const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || [])
+        // Not every markdown file under contents/templates is a template: a self-driving one
+        // authors its scout as a sibling SKILL.md, and `_`-prefixed directories are starters to
+        // copy from. Neither has a page, so neither belongs in the gallery.
+        .filter((t: MdxTemplate) => !t.fields.slug.endsWith('/SKILL') && !t.fields.slug.startsWith('/templates/_'))
+        .map((t: MdxTemplate) => {
+            const types = t.frontmatter.filters?.type || []
+            const type = types[0]
 
-        return {
-            id: t.id,
-            name: t.frontmatter.title,
-            description: t.frontmatter.subtitle || '',
-            type,
-            tags: getTagsForTemplate(t.frontmatter.title),
-            image_url: t.frontmatter.thumbnail?.publicURL,
-            url: t.fields.slug,
-            badge: t.frontmatter.badge,
-            author: t.frontmatter.filters?.maintainer,
-        }
-    })
+            return {
+                id: t.id,
+                name: t.frontmatter.title,
+                description: t.frontmatter.subtitle || '',
+                type,
+                tags: getTagsForTemplate(t.frontmatter.title),
+                image_url: t.frontmatter.thumbnail?.publicURL,
+                url: t.fields.slug,
+                badge: t.frontmatter.badge,
+                author: t.frontmatter.filters?.maintainer,
+            }
+        })
 
     const workflowTemplates: UnifiedTemplate[] = (data.workflowTemplates?.nodes || []).map((t: WorkflowTemplate) => {
         const isNew = t.created_at ? dayjs(t.created_at).isAfter(dayjs().subtract(30, 'day')) : false

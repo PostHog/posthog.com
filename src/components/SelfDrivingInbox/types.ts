@@ -1,15 +1,9 @@
 /**
- * The self-driving template report contract.
- *
- * A scout template's report is authored as structured frontmatter (not MDX body) so it can be
- * rendered in two places from one source: the inbox gallery at /templates/self-driving and the
- * template's own page. See README.md for the authoring guide.
+ * The self-driving template contract. Authored as structured frontmatter, not MDX body, so the
+ * gallery and the template's own page render from one source. See README.md to author one.
  */
 
-/**
- * Report priority, matching the research agent's P0–P4 scale in the product.
- * P0/P1 are urgent, P2 is notable, P3/P4 are informational.
- */
+/** Matches the product's P0–P4 scale: P0/P1 urgent, P2 notable, P3/P4 informational. */
 export type ReportPriority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
 
 export interface SelfDrivingReport {
@@ -30,10 +24,13 @@ export interface SelfDrivingReport {
     affected?: string
 }
 
-/** How a scout tells a real finding from noise – the most teachable idea in the product. */
+/**
+ * How a scout tells a real finding from noise. Both halves get named because "writes nothing" is
+ * the common case, and unexplained silence reads as a broken scout.
+ */
 export interface Discriminator {
-    speaksUp: string
-    staysQuiet: string
+    writesToInbox: string
+    writesNothing: string
     why?: string
 }
 
@@ -51,20 +48,28 @@ export interface Requirement {
 }
 
 /**
- * What actually gets created in PostHog. Powers the `#createScout=` deep link, which prefills
- * the app's "Create a scout" modal – name, description, and instructions only.
+ * What gets created in PostHog, and what the `#createScout=` deep link prefills. Sourced from a
+ * sibling `SKILL.md`: a scout is a real file in the monorepo, so it's authored as one here too.
  */
 export interface ScoutSpec {
     name: string
     description: string
-    /** Markdown instructions executed on every run. Optional; prefills the Instructions field. */
-    body?: string
-    /** Display-only, e.g. "Daily" – the app owns the real schedule. */
+    /** The verbatim SKILL.md, frontmatter included, so the page shows the file and not a copy. */
+    raw?: string
+    /** Display-only, e.g. "Daily" – the app owns the real schedule. Lives in index.mdx. */
     schedule?: string
 }
 
+/** Fallback rail label for a template that hasn't declared a category yet. */
+export const UNCATEGORIZED = 'Other'
+
+/** The product the rail is filtering by, or null for everything. */
+export type InboxFilter = string | null
+
 /** One row in the inbox: a template, reduced to its report plus everything the pane teaches. */
 export interface InboxTemplate {
+    /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */
+    category: string
     /** Route to the template page, e.g. /templates/silent-failure-core-action */
     url: string
     /** The template's own title, e.g. "Silent failure in your core action" */

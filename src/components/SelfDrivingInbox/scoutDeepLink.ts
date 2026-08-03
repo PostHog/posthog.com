@@ -1,16 +1,10 @@
+import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
+
 import { ScoutSpec } from './types'
 
 /**
- * Builds the `#createScout=` deep link that opens PostHog's "Create a scout" modal with this
- * template prefilled.
- *
- * The payload is URL-safe base64 in the URL *fragment*, so it never reaches server logs. It
- * carries name, description, and instructions only — the app deliberately refuses to accept
- * scheduling or emit posture from a URL, and nothing is created until the user reviews the form
- * and submits it themselves.
- *
- * Mirrors the decoder in posthog/posthog at
- * `frontend/src/scenes/inbox/utils/scoutTemplateDeepLink.ts`. Keep the two in sync.
+ * Builds the `#createScout=` deep link that prefills PostHog's "Create a scout" modal, with the
+ * payload in the fragment so it never reaches logs. Mirrors the app's `scoutTemplateDeepLink.ts`.
  */
 
 const INBOX_CONFIG_URL = 'https://app.posthog.com/inbox/config'
@@ -29,19 +23,30 @@ function base64UrlEncode(value: string): string {
 }
 
 /**
- * Returns the full deep link, or the bare inbox config URL when the template has no scout spec
- * — landing on the scout troop is a reasonable degrade, and better than a broken payload.
+ * A SKILL.md's body, for the app's Instructions field. Stripped here rather than at the query
+ * because the page itself renders the complete file.
  */
+export function scoutInstructions(raw?: string): string {
+    if (!raw) {
+        return ''
+    }
+    const match = raw.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n/)
+    return (match ? raw.slice(match[0].length) : raw).trim()
+}
+
+/** Falls back to the bare inbox URL – landing on the troop beats a broken payload. */
 export function buildScoutDeepLink(scout?: ScoutSpec): string {
     if (!scout?.name || !scout?.description) {
         return INBOX_CONFIG_URL
     }
 
+    const body = scoutInstructions(scout.raw)
+
     const payload = base64UrlEncode(
         JSON.stringify({
             name: scout.name,
             description: scout.description,
-            ...(scout.body ? { body: scout.body } : {}),
+            ...(body ? { body } : {}),
         })
     )
 
@@ -49,9 +54,9 @@ export function buildScoutDeepLink(scout?: ScoutSpec): string {
 }
 
 /**
- * The command that sets up self-driving from scratch. Kept here as a single source so swapping
- * in a future per-template command (`npx @posthog/wizard template <name>`) is a one-line change.
+ * The command that sets up self-driving. Delegates to `buildWizardCommand` so the display stays
+ * clean and the copy stays pinned, matching every other wizard command on the site.
  */
-export function buildWizardCommand(): string {
-    return 'npx -y @posthog/wizard@latest self-driving'
+export function buildSelfDrivingCommand(): { displayCommand: string; copyCommand: string } {
+    return buildWizardCommand({ subcommand: 'self-driving' })
 }

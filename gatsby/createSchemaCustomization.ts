@@ -84,8 +84,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       affected: String
     }
     type FrontmatterDiscriminator {
-      speaksUp: String
-      staysQuiet: String
+      writesToInbox: String
+      writesNothing: String
       why: String
     }
     type FrontmatterWatches {
@@ -96,12 +96,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       label: String
       level: String
     }
-    type FrontmatterScout {
-      name: String
-      description: String
-      body: String
-      schedule: String
-    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
@@ -111,8 +105,16 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       discriminator: FrontmatterDiscriminator
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
-      scout: FrontmatterScout
+      # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
+      # inbox's category rail; the list of categories is derived from the templates that
+      # declare one, never hardcoded, so adding a template is a content-only change.
+      category: String
+      schedule: String
       seo: FrontmatterSEO
+      # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
+      # are declared here rather than left to inference – see components/SelfDrivingInbox.
+      name: String
+      allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
       lang: String

@@ -7,19 +7,12 @@ import { DEFAULT_PRIORITY, isReportPriority, SelfDrivingReport } from './types'
 
 interface ReportCardProps {
     report: SelfDrivingReport
-    /**
-     * `page` — standalone on a template page, inside its own bordered card.
-     * `preview` — filling the inbox's preview pane, where the pane provides the frame.
-     */
+    /** `page` brings its own border; `preview` lets the inbox pane provide the frame. */
     variant?: 'page' | 'preview'
     className?: string
 }
 
-/**
- * A self-driving report, rendered identically wherever it appears. The inbox gallery and the
- * template page share this component deliberately: seeing the same artifact in both places is
- * the teaching device, and two hand-synced copies would drift.
- */
+/** One report, shared by the gallery and the template page – seeing the same artifact teaches. */
 export default function ReportCard({ report, variant = 'page', className = '' }: ReportCardProps): JSX.Element {
     const priority = isReportPriority(report.priority) ? report.priority : DEFAULT_PRIORITY
     const isPage = variant === 'page'
@@ -49,7 +42,9 @@ export default function ReportCard({ report, variant = 'page', className = '' }:
 
             <Markdown className="text-[15px] text-primary [&>p]:mb-2 [&>p:last-child]:mb-0">{report.body}</Markdown>
 
-            {report.affected && <p className="mt-2 mb-0 text-[15px] text-secondary">{report.affected}</p>}
+            {/* The impact claim, not a footnote – it's the number that decides whether this report
+                is worth anyone's afternoon, so it gets weight rather than muted secondary text. */}
+            {report.affected && <p className="mt-3 mb-0 text-[15px] font-bold text-primary">{report.affected}</p>}
 
             {report.suggestedAction && (
                 <div className="mt-4 border-t border-light pt-3 dark:border-dark">

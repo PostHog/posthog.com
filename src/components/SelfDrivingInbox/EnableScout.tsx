@@ -1,16 +1,15 @@
 import React from 'react'
 
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
+import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 
-import { buildScoutDeepLink, buildWizardCommand } from './scoutDeepLink'
+import { productSource } from './sources'
+
+import { buildScoutDeepLink, buildSelfDrivingCommand } from './scoutDeepLink'
 import { Requirement, RequirementLevel, ScoutSpec } from './types'
 
-/**
- * The persistent shortcut to the same action the full block offers, pinned to the bottom of the
- * detail pane. The page teaches top-to-bottom, so the full enable block comes last — this keeps
- * "one touch" literally one touch for anyone who already knows what they want.
- */
+/** Pinned shortcut to the enable block, which sits last because the page teaches top-to-bottom. */
 export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 'scout' | 'templateTitle'>) {
     return (
         <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
@@ -42,32 +41,50 @@ const REQUIREMENT_BADGE: Record<RequirementLevel, { text: string; color: string 
 const badgeClasses = (color: string) =>
     `bg-${color}/10 text-${color} dark:text-white dark:bg-${color}/50 text-xs font-medium rounded-sm px-1 py-0.5 inline-block`
 
+/** Links the tool a requirement names to its setup page, so "not set up yet" has somewhere to go. */
+function RequirementLabel({ label }: { label: string }): JSX.Element {
+    const { label: tool, install, docs } = productSource(label)
+    const href = install ?? docs
+    const at = href ? label.toLowerCase().indexOf(tool.toLowerCase()) : -1
+    if (at < 0 || !href) {
+        return <>{label}</>
+    }
+    return (
+        <>
+            {label.slice(0, at)}
+            <Link to={href} state={{ newWindow: true }} className="underline">
+                {label.slice(at, at + tool.length)}
+            </Link>
+            {label.slice(at + tool.length)}
+        </>
+    )
+}
+
 /**
- * A faithful mock of the scout as it appears in your troop, next to the action that puts it
- * there. The mock is doing double duty: it's the enablement affordance *and* the clearest
- * answer to "what even is a scout", which no amount of prose delivers as fast.
- *
- * Kept honest against the real product UI (posthog/posthog
- * `frontend/src/scenes/inbox/components/config/scouts/ScoutRowCard.tsx`): a scout row shows the
- * name, the schedule as a muted subtitle, an origin pill, and a bare switch with no text label.
- * The product has no "install" concept — the deep link opens a prefilled "Create a scout" form.
+ * A mock of the scout row as it appears in your troop, next to the action that puts it there.
+ * Kept honest against posthog/posthog `scenes/inbox/components/config/scouts/ScoutRowCard.tsx`.
  */
 export default function EnableScout({ scout, requires, templateTitle }: EnableScoutProps): JSX.Element {
     const deepLink = buildScoutDeepLink(scout)
     const hasScout = Boolean(scout?.name && scout?.description)
+    const selfDrivingCommand = buildSelfDrivingCommand()
 
+    // No card chrome or heading of its own: TemplateDetail renders this as the last numbered
+    // section, so the gutter and label come from there. Boxing it again put a bordered block
+    // straight after the bordered code block, and left it as the one unnumbered thing on a
+    // numbered page.
     return (
-        <section className="rounded border border-primary bg-primary p-4">
-            <h3 className="mt-0 mb-1 text-base font-bold text-primary">Add this to your scout troop</h3>
-            <p className="mb-4 text-sm text-secondary">
-                This is how it appears once it's running – a scheduled agent that files a report when it finds
-                something.
+        <div>
+            <p className="mb-4 text-[15px] text-secondary">
+                This is how the scout appears in PostHog once it's running – a scheduled agent that files a report when
+                it finds something.
             </p>
 
-            {/* The mock scout row. Presentational only: the switch is decorative and disabled. */}
+            {/* Labeled and inert: a toggle in its on state otherwise reads as a live control. */}
+            <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-secondary">Preview</p>
             <div
                 aria-hidden="true"
-                className="mb-4 flex items-center gap-3 rounded border border-light bg-accent px-3 py-2.5 dark:border-dark dark:bg-accent-dark"
+                className="pointer-events-none mb-4 flex select-none items-center gap-3 rounded border border-light bg-accent px-3 py-2.5 dark:border-dark dark:bg-accent-dark"
             >
                 <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-2">
@@ -82,9 +99,7 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
                         {scout?.schedule || 'Daily'} · writes findings to your inbox
                     </span>
                 </span>
-                {/* A static picture of the product's toggle in its on state. Deliberately not
-                    RadixUI/Switch: that renders a real <form> and a visible label, neither of
-                    which belongs in a decorative mock. Dimensions match the real control. */}
+                {/* Not RadixUI/Switch – that renders a real form and label, wrong for a mock. */}
                 <span className="relative block h-[27px] w-[44px] shrink-0 rounded-full border border-primary bg-green">
                     <span className="absolute top-1/2 left-[19px] block size-[21px] -translate-y-1/2 rounded-full bg-white" />
                 </span>
@@ -95,9 +110,14 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
                     {requires.map((requirement) => {
                         const badge = REQUIREMENT_BADGE[requirement.level || 'required']
                         return (
-                            <li key={requirement.label} className="flex items-start gap-2 text-sm text-primary">
-                                <span className={`${badgeClasses(badge.color)} mt-0.5 shrink-0`}>{badge.text}</span>
-                                <span>{requirement.label}</span>
+                            <li key={requirement.label} className="flex items-start gap-2 text-[15px] text-primary">
+                                {/* Fixed width, not `shrink-0`: three badge widths left a ragged left edge. */}
+                                <span className="mt-0.5 w-[104px] shrink-0">
+                                    <span className={badgeClasses(badge.color)}>{badge.text}</span>
+                                </span>
+                                <span>
+                                    <RequirementLabel label={requirement.label} />
+                                </span>
                             </li>
                         )
                     })}
@@ -115,13 +135,17 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
                 </span>
             </div>
 
-            <div className="mt-4 border-t border-light pt-4 dark:border-dark">
-                <p className="mb-2 text-sm text-secondary">
-                    Not set up yet? One command installs PostHog, connects GitHub, and sets up your troop – including
-                    something like <span className="text-primary">{templateTitle.toLowerCase()}</span>.
+            {/* Demoted: as a second primary CTA the command competed with "Add this scout". */}
+            <div className="mt-4 border-t border-light pt-3 dark:border-dark">
+                <p className="mb-2 text-xs text-secondary">
+                    Not set up yet? One command installs PostHog, connects GitHub, and turns on a default troop of
+                    scouts. That troop doesn't include this one – add it above once you're set up.
                 </p>
-                <CopyableCommand command={buildWizardCommand()} />
+                <CopyableCommand
+                    command={selfDrivingCommand.displayCommand}
+                    copyCommand={selfDrivingCommand.copyCommand}
+                />
             </div>
-        </section>
+        </div>
     )
 }
