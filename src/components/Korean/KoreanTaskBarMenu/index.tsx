@@ -20,6 +20,7 @@ import { useApp } from '../../../context/App'
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
+import PrimaryCTA from '../../TaskBarMenu/PrimaryCTA'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
@@ -61,7 +62,6 @@ export default function TaskBarMenu() {
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
-        posthogInstance,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const [rendered, setRendered] = useState(false)
@@ -326,21 +326,7 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                        <div className="relative mr-1">
-                            <OSButton
-                                variant="primary"
-                                size="md"
-                                asLink
-                                to={
-                                    posthogInstance
-                                        ? posthogInstance.replace(/"/g, '')
-                                        : 'https://app.posthog.com/signup'
-                                }
-                                className=""
-                            >
-                                {posthogInstance ? translateKo('Open PostHog') : translateKo('Get started – free')}
-                            </OSButton>
-                        </div>
+                        <PrimaryCTA translate={translateKo} />
                         <Tooltip
                             trigger={
                                 <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">

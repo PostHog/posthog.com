@@ -16,7 +16,7 @@ export default function usePostHogInstance(): string | undefined {
             ?.filter((row) => row.startsWith('ph_current_instance='))
             ?.map((c) => c.split('=')?.[1])?.[0]
         if (instanceCookie) {
-            setInstance(instanceCookie)
+            setInstance(instanceCookie.replace(/"/g, ''))
         }
     }, [])
 

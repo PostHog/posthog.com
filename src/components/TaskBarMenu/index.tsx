@@ -17,7 +17,7 @@ import {
     IconPinFilled,
     IconBadge,
 } from '@posthog/icons'
-import { useAppActions, useAppSettings } from '../../context/App'
+import { useAppActions } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -26,6 +26,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
+import PrimaryCTA from './PrimaryCTA'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -42,7 +43,6 @@ function TaskBarMenu() {
         taskbarRef,
         updateTaskbarHeight,
     } = useAppActions()
-    const { posthogInstance } = useAppSettings()
     const [isAnimating, setIsAnimating] = useState(false)
 
     const { user, notifications, logout, isModerator } = useUser()
@@ -357,21 +357,7 @@ function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                            <div className="relative mr-1">
-                                <OSButton
-                                    variant="primary"
-                                    size="md"
-                                    asLink
-                                    to={
-                                        posthogInstance
-                                            ? posthogInstance.replace(/"/g, '')
-                                            : 'https://app.posthog.com/signup'
-                                    }
-                                    className=""
-                                >
-                                    {posthogInstance ? 'Open PostHog' : 'Get started – free'}
-                                </OSButton>
-                            </div>
+                            <PrimaryCTA />
                             <Tooltip
                                 trigger={
                                     <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">

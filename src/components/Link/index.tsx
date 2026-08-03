@@ -1,7 +1,7 @@
 import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
@@ -144,6 +144,11 @@ export default function Link({
             return false
         }
     }, [url, isPostHogAppUrl])
+    // isSignupUrl/external/externalNoIcon all render as target="_blank" below.
+    // The active tab never changes on click, so give it a brief visible pulse
+    // instead of looking like the click did nothing.
+    const opensInNewTab = Boolean(isSignupUrl || external || externalNoIcon)
+    const [justOpened, setJustOpened] = useState(false)
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl && !posthogInstance) {
@@ -153,6 +158,10 @@ export default function Link({
             posthog.capture(event)
         }
         onClick && onClick(e)
+        if (opensInNewTab && !internal) {
+            setJustOpened(true)
+            setTimeout(() => setJustOpened(false), 600)
+        }
         if (compact && url && !internal) {
             e.preventDefault()
             if (/(eu|us|app)\.posthog\.com/.test(url)) {
@@ -221,8 +230,8 @@ export default function Link({
                     onClick={handleClick}
                     {...other}
                     href={url}
-                    className={`${className} group`}
-                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
+                    className={`${className} group ${justOpened ? 'animate-pulse' : ''}`}
+                    target={opensInNewTab ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">
@@ -274,8 +283,8 @@ export default function Link({
                     onClick={handleClick}
                     {...other}
                     href={url}
-                    className={`${className} group`}
-                    target={isSignupUrl || external || externalNoIcon ? '_blank' : ''}
+                    className={`${className} group ${justOpened ? 'animate-pulse' : ''}`}
+                    target={opensInNewTab ? '_blank' : ''}
                 >
                     {external ? (
                         <span className="inline-flex justify-center items-center group">
