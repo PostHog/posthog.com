@@ -14,7 +14,7 @@ import OSButton from 'components/OSButton'
 
 const rootOptions = {
     founders: {
-        title: 'Founders Hub',
+        title: 'Founders hub',
         sidebar: <FoundersSidebar />,
     },
     'product-engineers': {

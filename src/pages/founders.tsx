@@ -59,15 +59,15 @@ const explorerIntro = (
     </>
 )
 
-const ControlHub = () => <Hub title="Founders Hub" folder="founders" sidebar={<Sidebar />} />
-const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founders Hub" intro={explorerIntro} />
+const ControlHub = () => <Hub title="Founders hub" folder="founders" sidebar={<Sidebar />} />
+const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founders hub" intro={explorerIntro} />
 
 export default function Founders() {
     const posthog = usePostHog()
 
     return (
         <>
-            <SEO title="Founders Hub - PostHog" />
+            <SEO title="Founders hub - PostHog" />
             {/*
               Rendering the redesign as the placeholder too means no flash while flags load, and
               keeps the intended layout if PostHog is unreachable.
