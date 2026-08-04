@@ -147,8 +147,10 @@ export interface PlatformInstallProps {
     bordered?: boolean
     /** Inline only: "Learn more" link target (default `/wizard`). */
     secondaryTo?: string
-    /** Copy callback (inline). */
+    /** Fired when the main command is copied, in either variant. */
     onCopy?: () => void
+    /** Fired when the schema's `secondaryAction` link is clicked. Card only. */
+    onSecondaryAction?: () => void
 }
 
 export default function PlatformInstall({
@@ -161,6 +163,7 @@ export default function PlatformInstall({
     bordered = false,
     secondaryTo,
     onCopy,
+    onSecondaryAction,
 }: PlatformInstallProps): JSX.Element {
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [lastSelected, setLastSelected] = useState<Platform | null>(null)
@@ -251,6 +254,7 @@ export default function PlatformInstall({
                         <Link
                             to={schema.secondaryAction.to}
                             state={schema.secondaryAction.state}
+                            onClick={onSecondaryAction}
                             className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
                         >
                             {schema.secondaryAction.label}
@@ -259,7 +263,7 @@ export default function PlatformInstall({
                     ) : null}
                 </div>
 
-                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate />
+                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate onCopy={onCopy} />
 
                 {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
             </div>
