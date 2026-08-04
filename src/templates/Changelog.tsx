@@ -412,8 +412,8 @@ const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
         <ScrollArea className="h-full">
             <div className="max-w-3xl mx-auto px-4 pb-8">
                 <p className="text-sm text-secondary">
-                    Also available as <Link to="/changelog.md">Markdown</Link> and{' '}
-                    <Link to="/changelog.rss">RSS</Link>.
+                    Also available as <a href="/changelog.md">Markdown</a> and{' '}
+                    <a href="/changelog.rss">RSS</a>.
                 </p>
                 {byMonth.map(([month, items]) => {
                     const fullDetail = fullDetailCutoff ? !dayjs.utc(month).isBefore(fullDetailCutoff) : true
