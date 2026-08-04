@@ -309,25 +309,10 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         return Array.from(uniqueRoles.values()).reduce((sum, count) => sum + count, 0)
     }, [allJobs])
 
-    if (!allJobs?.length) {
-        return null
-    }
-
     const [selectedJob, setSelectedJob] = useState(allJobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
-    const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
-    const teams = teamsField
-        ? JSON.parse(teamsField.value).filter((teamName: string) =>
-              allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
-          )
-        : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
-
-    // Compute the current team name - either the selected one or default to first team
-    const currentTeamName = selectedTeamName || teams[0] || ''
-    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === currentTeamName.toLowerCase())
-
     const [isLoading, setIsLoading] = useState(true)
 
     // Handle search input
@@ -377,6 +362,8 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     }
 
     useEffect(() => {
+        if (!selectedJob) return
+
         const parser = new DOMParser()
         const doc = parser.parseFromString(selectedJob.fields.html, 'text/html')
 
@@ -441,6 +428,21 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
         updateLeftColHeight()
     }, [selectedJob, appWindow?.size])
 
+    if (!allJobs?.length || !selectedJob) {
+        return null
+    }
+
+    const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+    const teams = teamsField
+        ? JSON.parse(teamsField.value).filter((teamName: string) =>
+              allTeams.some((team: any) => team.name.toLowerCase() === teamName.toLowerCase())
+          )
+        : []
+
+    // Compute the current team name - either the selected one or default to first team
+    const currentTeamName = selectedTeamName || teams[0] || ''
+    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === currentTeamName.toLowerCase())
+
     const imagePositioning =
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
 
@@ -463,6 +465,7 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                             Select a role
                         </label>
                         <select
+                            id="job-select"
                             className="block @2xl:hidden w-full p-2 bg-primary text-primary border border-primary rounded text-xl font-bold relative z-10 mb-2"
                             value={selectedJob.fields.title}
                             onChange={(e) => {
