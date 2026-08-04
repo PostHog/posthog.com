@@ -26,12 +26,12 @@ const sections = [
         title: 'Context warehouse',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
-        link: { label: 'Data stack README', url: '/data-stack' },
+        link: { label: 'Data stack README', url: '/context-warehouse' },
         groups: [
             {
                 label: 'Data I/O',
                 handles: ['data_in', 'data_out'],
-                afterLink: { label: 'View all integrations', url: '/data-stack/integrations-library' },
+                afterLink: { label: 'View all integrations', url: '/context-warehouse/integrations-library' },
             },
             {
                 label: 'Manage & query',

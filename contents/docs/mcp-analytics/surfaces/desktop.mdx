@@ -12,6 +12,11 @@ PostHog Desktop is in beta.
 
 [PostHog Desktop](/docs/posthog-desktop) is where you act on the [Self-driving](/docs/self-driving) reports MCP Analytics generates. A scout reads your tool call telemetry, finds tools that need fixing, and files a report. Whether that report arrives with a pull request attached depends on who owns the server it's about.
 
+## Before you start
+
+1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## Whether you get a pull request depends on who owns the server
 
 The scout can only propose a code fix for code you control, so the same finding takes one of two paths:

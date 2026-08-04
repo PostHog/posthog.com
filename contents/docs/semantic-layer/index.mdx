@@ -34,9 +34,11 @@ A [relationship](/docs/semantic-layer/certifications-and-relationships#relations
 
 ## How you use it
 
-There's no UI during the alpha. You work with the semantic layer through two surfaces:
+You work with the semantic layer through three surfaces:
 
-**From an AI agent (the main surface).** Connect the [PostHog MCP server](/docs/model-context-protocol) to Claude Code, Cursor, Claude Desktop, or any other MCP client. When the semantic layer is enabled, agents route metric questions through the catalog first: ask `What was our MRR last quarter?` and the agent runs the governed `mrr` metric instead of writing its own SQL. See [MCP tools](/docs/semantic-layer/mcp-tools).
+**From the Data Catalog UI.** Open the command palette (`Cmd/Ctrl + K`) and search for **Data Catalog** to manage your metrics, certifications, and relationships from the app: browse the catalog, review what agents have proposed, and approve, certify, or accept them by hand.
+
+**From an AI agent.** Connect the [PostHog MCP server](/docs/model-context-protocol) to Claude Code, Cursor, Claude Desktop, or any other MCP client. When the semantic layer is enabled, agents route metric questions through the catalog first: ask `What was our MRR last quarter?` and the agent runs the governed `mrr` metric instead of writing its own SQL. See [MCP tools](/docs/semantic-layer/mcp-tools).
 
 **From SQL.** The catalog is queryable from the [SQL editor](/docs/data-warehouse/query) or the `execute-sql` MCP tool:
 

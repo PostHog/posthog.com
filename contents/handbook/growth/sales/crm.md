@@ -240,12 +240,16 @@ You can also create an opportunity directly from scratch, but make sure to conne
 -   Fill in Opportunity Details:
 -   Opportunity Name
 -   Close Date: Choose the estimated date when the opportunity is expected to close.
--   Term (Months): Default is 12, update for multi year deals.
--   Total Credit Amount: Total value of the contract before discounts.
--   Discount (%): Percent discount applied to the total.
+-   Term (Months): Default is 12, update for multi year deals. For contract buyouts, this already includes the buyout period (e.g. 12 standard + 6 month buyout = 18 month term), see [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   Total Credit Amount: Standard, discountable credit the customer is paying for. Does not include one-time/free credit, buyout or startup rolloff credits are tracked separately (see below).
+-   Discount (%): Contracted discount rate applied to Total Credit Amount, this is what goes on the order form. Excludes any one-time credit.
 -   ARR Discounted: Automatically calculated annualized revenue after discount.
 -   Contract Start Date: Date the contract begins.
 -   Contract End Date: Automatically calculated based on Start Date + Term.
+-   One-Time Credit Amount: For deals with a buyout, startup rolloff, or other one-off free credit listed under Special Terms on contract. See [contract buyouts and one-time credits](#contract-buyouts-and-one-time-credits) below.
+-   One-Time Credit Type: Buyout, Startup Rolloff, or Other. Only used when One-Time Credit Amount is populated.
+-   Buyout Period Months: Only for Buyout type, how many months of Term (Months) the buyout credit covers. Leave at 0 otherwise.
+-   Effective Discount Rate: Automatically calculated (amount paid ÷ total credit including the one-time credit)
 -   Stage: Select the current stage of the opportunity in the sales process.
 -   Type: If you know whether they're interested in paying on a monthly or an annual basis (if blank this will be Monthly by default)
 -   Connect to an Account: In the "Account Name" field, search for and select the account associated with the opportunity. If the account does not exist, create a new account first.

@@ -24,6 +24,8 @@ A scout runs on a schedule. Each run, it looks at one slice of your data, decide
 
 Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
 
+A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
+
 A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you can connect to Claude Code or Cursor, so it can see anything in PostHog out of the box – events, [data warehouse](/docs/data-warehouse) tables, insights, dashboards – with nothing to wire up per scout. Because any source you land in PostHog becomes queryable, a scout isn't limited to product analytics: a Slack channel, a billing system, or a support inbox synced to your warehouse is fair game too.
 
 A scout also keeps a durable memory between runs. Each run, it reads back what earlier runs learned and recorded – what's normal, what it's already surfaced, what it decided to hold – so it dedupes against itself and gets sharper over time instead of starting cold. That memory is what makes a scout a long-running agent rather than a one-shot check.
@@ -54,6 +56,14 @@ On-demand runs count against the same daily run budget as scheduled runs, so rep
 A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it *would* have filed, tune it, then switch it to writing for real.
 
 A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
+
+<CalloutBox icon="IconInfo" title="When PostHog flags or pauses a scout" type="fyi">
+
+PostHog checks whether a scout's output is being used. A scout that stays quiet is flagged for review but keeps running, because a quiet watchdog may be doing its job. If a scout has established reports that nobody acts on, PostHog warns you first and pauses it after a week unless someone engages with its reports.
+
+An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
+
+</CalloutBox>
 
 ## Steering a scout with a note
 
@@ -119,7 +129,9 @@ Built-in scouts don't do this. Their instructions are maintained by PostHog and 
 
 Scouts aren't the only thing that emits [signals](/docs/self-driving/signals). PostHog also has **signal sources**: built-in pipelines that watch one specific stream continuously, like error tracking, session replay, Zendesk, GitHub Issues, and Linear.
 
-The difference is how they look. A signal source watches a single stream in real time; a scout runs on a schedule and explores your product data more holistically. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with.
+The difference is how they look, and what you get for it. A signal source watches a single stream continuously and processes every qualifying item in it – deterministic and exhaustive, with no bar to clear. A scout runs on a schedule, explores more holistically, and decides what's worth surfacing – judgement and steerability, at the cost of being selective rather than exhaustive.
+
+Neither is the upgrade from the other and most projects run both. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with. For a side-by-side breakdown and when to reach for which, see [sources or scouts?](/docs/self-driving/signals#sources-or-scouts).
 
 ## Next step
 

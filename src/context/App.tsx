@@ -358,6 +358,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -445,6 +446,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -873,7 +875,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/data-stack': {
+    '/context-warehouse': {
         size: {
             min: {
                 width: 750,
@@ -1557,31 +1559,7 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/experiments': {
-        toolbar: true,
-    },
-    '/surveys': {
-        toolbar: true,
-    },
-    '/error-tracking': {
-        toolbar: true,
-    },
-    '/logs': {
-        toolbar: true,
-    },
-    '/workflows': {
-        toolbar: true,
-    },
-    '/endpoints': {
-        toolbar: true,
-    },
     '/ai': {
-        toolbar: true,
-    },
-    '/ai-observability': {
-        toolbar: true,
-    },
-    '/mcp-analytics': {
         toolbar: true,
     },
     '/hog': {
@@ -1605,6 +1583,7 @@ export interface SiteSettings {
     reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -1622,6 +1601,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1652,6 +1632,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
