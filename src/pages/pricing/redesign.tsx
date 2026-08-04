@@ -56,7 +56,7 @@ export default function PricingRedesign(): JSX.Element {
                 <SectionHeader>
                     <h2 className="text-2xl mb-0">Free vs. pay-as-you-go</h2>
                     <p className="text-[15px] text-secondary mb-0 mt-1">
-                        There's one signup and one product. A card just raises the ceiling.
+                        There's one signup and one product - you can add a card whenever you need higher limits.
                     </p>
                 </SectionHeader>
                 <PricingJourney />
