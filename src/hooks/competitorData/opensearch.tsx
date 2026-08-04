@@ -1,8 +1,8 @@
-export const grafana_loki = {
-    name: 'Grafana Loki',
-    key: 'grafana_loki',
+export const opensearch = {
+    name: 'OpenSearch',
+    key: 'opensearch',
     assets: {
-        icon: '/images/competitors/grafana-loki.png',
+        icon: '/images/competitors/opensearch.svg',
     },
     products: {
         product_analytics: {
@@ -12,7 +12,7 @@ export const grafana_loki = {
             available: false,
         },
         error_tracking: {
-            available: true,
+            available: false,
         },
         ai_observability: {
             available: false,
@@ -23,21 +23,21 @@ export const grafana_loki = {
                 features: {
                     centralized_log_ingestion_search: true,
                     live_tail_real_time_logs: true,
-                    native_open_telemetry_ingest: true,
+                    native_open_telemetry_ingest: 'Partial',
                     vendor_agnostic_sdks: true,
-                    high_cardinality_indexing: false,
+                    high_cardinality_indexing: true,
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Partial',
-                    no_proprietary_query_language: 'LogQL',
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
                 },
             },
             investigation_workflow: {
                 features: {
-                    click_to_pivot_investigations: false,
-                    logs_scoped_by_investigation_context: false,
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
                     ai_assisted_log_summaries: false,
                 },
             },
@@ -50,23 +50,23 @@ export const grafana_loki = {
             },
             observability: {
                 features: {
-                    metrics: 'Via LogQL',
-                    traces: 'Requires Tempo',
+                    metrics: true,
+                    traces: true,
                     alerting: true,
-                    infra_monitoring: 'Via stack',
+                    infra_monitoring: true,
                 },
             },
             security_and_compliance: {
                 features: {
-                    siem: false,
+                    siem: true,
                     enterprise_scale_compliance: true,
                 },
             },
             pricing: {
                 features: {
-                    ingest_only_pricing: true,
-                    no_query_compute_fees: true,
-                    predictable_at_scale: true,
+                    ingest_only_pricing: false,
+                    no_query_compute_fees: false,
+                    predictable_at_scale: false,
                 },
             },
         },
@@ -74,19 +74,19 @@ export const grafana_loki = {
     platform: {
         deployment: {
             self_host: true,
-            open_source: true,
-            managed_cloud: 'Grafana Cloud',
+            open_source: 'Apache 2.0',
+            managed_cloud: 'Amazon OpenSearch Service',
         },
         pricing: {
             self_serve: true,
-            free_tier: true,
-            transparent_pricing: false,
+            free_tier: false,
+            transparent_pricing: true,
         },
         tools: {
             ai_assistant: true,
         },
         security: {
-            siem: false,
+            siem: true,
         },
     },
 }

@@ -54,7 +54,7 @@ export const ROADMAP_TEAM_OVERRIDES: Record<string, string> = {
     'b2b-analytics': 'customer-analytics',
     'cookie-banner-product': 'web-analytics',
     'customer-support-product': 'conversations',
-    'code-editor': 'posthog-code',
+    'code-editor': 'posthog-desktop',
     'toolbar-for-mobile': 'growth', // toolbar area
     'ai-api-access': 'ai-gateway',
     'product-tours': 'surveys',

@@ -68,6 +68,7 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opensearch } from '../../hooks/competitorData/opensearch'
 import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
@@ -100,6 +101,7 @@ import { userpilot } from '../../hooks/competitorData/userpilot'
 import { userflow } from '../../hooks/competitorData/userflow'
 import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
+import { victorialogs } from 'hooks/competitorData/victorialogs'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
@@ -683,6 +685,7 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opensearch,
         opik,
         optimizely,
         pendo,
@@ -715,6 +718,7 @@ export default function ProductComparisonTable({
         userflow,
         uxcam,
         vercel_analytics,
+        victorialogs,
         vwo,
         walkme,
         whatfix,
@@ -1100,8 +1104,12 @@ export default function ProductComparisonTable({
                     </div>
                 ),
             },
+            // Cells are flex containers (OSTable rowAlignment="center"), so the column's
+            // text-center is inert on the rendered span and values pack left. Center them on
+            // the main axis so string values and ✓/✗ glyphs align the same way as the headers.
             ...competitors.map((key, index) => ({
                 content: renderCell(key, row, index),
+                className: 'justify-center',
             })),
         ]
 
