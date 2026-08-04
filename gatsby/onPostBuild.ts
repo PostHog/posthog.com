@@ -180,8 +180,10 @@ const createOGImages = async (data) => {
         const { title } = post.frontmatter
         const { timeToRead, excerpt, fields, parent } = post
         const lastUpdated = parent && parent.fields && parent.fields.lastUpdated
-        if (!title || !timeToRead || !excerpt || !lastUpdated || !fields?.contributors) continue
-        const contributors = fields?.contributors.map((contributor) => {
+        // Contributors are optional – pages missing them still get an OG image, just without the
+        // contributors column (the template already handles an empty list).
+        if (!title || !timeToRead || !excerpt || !lastUpdated) continue
+        const contributors = (fields?.contributors || []).map((contributor) => {
             const { avatar, username } = contributor
             return {
                 username,
