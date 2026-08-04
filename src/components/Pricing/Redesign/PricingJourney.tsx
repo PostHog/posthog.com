@@ -58,7 +58,9 @@ export default function PricingJourney(): JSX.Element {
                     <StepBadge number={1} label="Start here" tone="now" />
 
                     <h3 className="text-lg mb-0.5">Free</h3>
-                    <p className="text-sm text-secondary mb-4">No credit card, not a trial. This is most companies.</p>
+                    <p className="text-sm text-secondary mb-4">
+                        No credit card, not a trial. This is <strong className="text-primary">97% of companies</strong>.
+                    </p>
 
                     <ul className="list-none p-0 m-0 space-y-2 mb-4">
                         {freeIncludes.map((item) => (

@@ -85,7 +85,8 @@ export default function CustomerLogos(): JSX.Element {
                 <div className="shrink-0 @2xl:max-w-[13rem]">
                     <p className="text-[15px] font-bold leading-tight mb-0.5">60,000+ companies</p>
                     <p className="text-sm text-secondary leading-tight mb-1">from side projects to public companies</p>
-                    <Link to="/customers" state={{ newWindow: true }} className="text-sm font-semibold">
+                    {/* This text should be the same color as all other links */}
+                    <Link to="/customers" state={{ newWindow: true }} className="text-sm font-semibold   underline">
                         Customer stories
                     </Link>
                 </div>
