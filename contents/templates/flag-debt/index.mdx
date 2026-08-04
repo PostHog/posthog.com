@@ -11,7 +11,6 @@ filters:
   type:
     - self-driving
   maintainer: official
-question: Which feature flags are still evaluating for decisions you already made?
 premise: >-
   Every flag is a decision you already made. The rollout finished, the losing branch deleted, and the flag stayed. It's still evaluating, branching, and something a new engineer has to reason about. This scout finds the flags you forgot, works out which ones are safe to remove, and opens the pull request that removes the check.
 discriminator:
@@ -40,7 +39,6 @@ category: Feature Flags
 schedule: Weekly
 report:
   title: 3 flags at a terminal rollout for 4+ months, still evaluated
-  priority: P3
   source: Scout · flag debt
   receivedAgo: 1d
   affected: 3 flags · ~52,000 evaluations/day

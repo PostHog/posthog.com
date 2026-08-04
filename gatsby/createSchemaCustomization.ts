@@ -75,7 +75,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type FrontmatterReport {
       title: String
-      priority: String
       source: String
       receivedAgo: String
       body: String
@@ -109,7 +108,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # nodes, and Gatsby can't infer a shape it only sees on some of them.
       cta: FrontmatterCTA
       report: FrontmatterReport
-      question: String
       premise: String
       discriminator: FrontmatterDiscriminator
       watches: [FrontmatterWatches]

@@ -1,10 +1,13 @@
 ---
-# A starter for a self-driving scout template. Copy this whole directory to
+# A starter for a self-driving field guide. Copy this whole directory to
 # contents/templates/<your-slug>/ and replace every value below.
 #
-# A template is two files:
+# A guide is two files:
 #   index.mdx  – this file, everything a human reads
 #   SKILL.md   – the scout itself, a real file you could paste into the monorepo
+#
+# The page reads in four steps, in this order: the report in your inbox, the pull
+# request you merge, the scout itself, the schedule it runs on. Then one button.
 #
 # Directories starting with `_` never become pages, so this one is safe to leave here.
 # Full authoring guide: src/components/SelfDrivingInbox/README.md
@@ -29,21 +32,20 @@ filters:
 
 # --- The teaching half --------------------------------------------------------------
 
-# The headline question, in the reader's words. Often the same as `subtitle`.
-question: What question does this scout answer for you?
-
 # Two or three sentences on why this is worth watching. Write for someone who has
 # never heard of scouts. This is the most-read prose on the page – make it earn it.
 premise: >-
   What goes wrong, why nobody notices it today, and what this scout does about it.
 
-# The most important block on the page. Every scheduled run ends one of two ways:
-# a report in the inbox, or nothing at all. Say which, crisply.
+# NOT RENDERED on the guide page – that section was cut, because how a scout decides
+# is docs territory. Still worth writing: it's the thinking that makes SKILL.md good,
+# and it's where this content goes when it moves to /docs/self-driving.
 #
-# The quiet half is the harder one to write and the more valuable one. If you can't
-# say what would keep this scout silent, you've described a metric, not a
-# discriminator. "Completions fell" is a metric. "Completions fell *while attempts
-# held steady*" is a discriminator, because it names what it ignores.
+# Every scheduled run ends one of two ways: a report in the inbox, or nothing at all.
+# The quiet half is harder to write and more valuable. If you can't say what would keep
+# this scout silent, you've described a metric, not a discriminator. "Completions fell"
+# is a metric. "Completions fell *while attempts held steady*" is a discriminator,
+# because it names what it ignores.
 discriminator:
   writesToInbox: The specific shape in the data that means something is wrong.
   writesNothing: The lookalike shape that means nothing is wrong – the false positive you're ruling out.
@@ -79,8 +81,9 @@ requires:
 # same product will show up twice under two spellings.
 category: Product analytics
 
-# Display only – the app owns the real schedule. Default across the fleet is Daily.
-# If you choose something else, say why in SKILL.md.
+# Rendered as "This one runs <schedule> by default" in the schedule section. Display
+# only – the app owns the real schedule. Fleet default is Daily; if you choose something
+# else, say why in SKILL.md.
 schedule: Daily
 
 # --- The sample report ---------------------------------------------------------------
@@ -96,9 +99,6 @@ report:
   # Good: "Publish completion rate down 31 points while attempts hold steady"
   # Bad:  "Checkout issues"
   title: The finding, with the number and the disqualifier in one line
-
-  # P0-P4. Be honest – an inbox where everything is P1 teaches nothing.
-  priority: P2
 
   # What surfaced it. `·` is the house separator.
   source: Scout · your scout name

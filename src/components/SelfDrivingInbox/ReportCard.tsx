@@ -2,8 +2,7 @@ import React from 'react'
 
 import Markdown from 'components/Markdown'
 
-import PriorityDot from './PriorityDot'
-import { DEFAULT_PRIORITY, isReportPriority, SelfDrivingReport } from './types'
+import { SelfDrivingReport } from './types'
 
 interface ReportCardProps {
     report: SelfDrivingReport
@@ -14,7 +13,6 @@ interface ReportCardProps {
 
 /** One report, shared by the gallery and the template page – seeing the same artifact teaches. */
 export default function ReportCard({ report, variant = 'page', className = '' }: ReportCardProps): JSX.Element {
-    const priority = isReportPriority(report.priority) ? report.priority : DEFAULT_PRIORITY
     const isPage = variant === 'page'
 
     return (
@@ -24,9 +22,8 @@ export default function ReportCard({ report, variant = 'page', className = '' }:
             } ${className}`}
         >
             <header className="mb-3">
+                {/* No priority dot – see ReportRow. */}
                 <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-secondary">
-                    <PriorityDot priority={priority} showLabel />
-                    <span aria-hidden="true">·</span>
                     <span>{report.source}</span>
                     {report.receivedAgo && (
                         <>

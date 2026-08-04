@@ -2,8 +2,7 @@ import React from 'react'
 
 import Link from 'components/Link'
 
-import PriorityDot from './PriorityDot'
-import { DEFAULT_PRIORITY, InboxTemplate, isReportPriority } from './types'
+import { InboxTemplate } from './types'
 
 interface ReportRowProps {
     template: InboxTemplate
@@ -15,7 +14,6 @@ interface ReportRowProps {
 /** One inbox row. Always a real anchor, so the list works with JavaScript disabled. */
 export default function ReportRow({ template, selected = false, onSelect }: ReportRowProps): JSX.Element {
     const { report } = template
-    const priority = isReportPriority(report.priority) ? report.priority : DEFAULT_PRIORITY
 
     return (
         <Link
@@ -26,9 +24,9 @@ export default function ReportRow({ template, selected = false, onSelect }: Repo
             aria-current={selected ? 'true' : undefined}
             onClick={onSelect}
         >
+            {/* No priority dot: P0–P4 is inbox vocabulary, and a bare colour is the same jargon
+                with the key thrown away. Severity still sorts the list, it just isn't drawn. */}
             <span className="mb-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-secondary">
-                <PriorityDot priority={priority} showLabel />
-                <span aria-hidden="true">·</span>
                 <span className="truncate">{report.source}</span>
                 {report.receivedAgo && (
                     <>

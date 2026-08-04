@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 
-import { IconInfo, IconMinus, IconNotification, IconPlus } from '@posthog/icons'
+import { IconMinus, IconPlus } from '@posthog/icons'
 
 import { SingleCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
-import Markdown from 'components/Markdown'
 
 import EnableScout from './EnableScout'
 import ReportCard from './ReportCard'
@@ -112,160 +111,133 @@ function Section({
  * comes last. Vocabulary is explained by `<Term>` hover cards, not by any template's own copy.
  */
 export default function TemplateDetail({ template }: TemplateDetailProps): JSX.Element {
-    const { question, premise, discriminator, watches, requires, scout, report, templateTitle } = template
+    const { premise, watches, requires, scout, report, templateTitle } = template
 
     // Built as a list rather than inline conditionals so the numbering stays correct when a
     // template omits an optional section – a gap in the sequence reads as a missing step.
     const sections: { title: string; content: JSX.Element }[] = []
 
     sections.push({
-        title: "What you'd receive",
+        title: 'The report in your inbox',
         content: (
             <>
                 <p className="mb-3 text-[15px] text-secondary">
-                    This template sets up one <Term name="scout" />, a scheduled agent that watches for the question
-                    above. When the scout finds something, it files a <Term name="report" /> in your{' '}
-                    <Term name="inbox" />. Here's a report it might send you – yours would name your events, your
-                    deploys, and your users.
+                    A <Term name="scout" /> files a <Term name="report" /> when it finds this. Yours would name your
+                    events, your deploys, your users.
                 </p>
                 <ReportCard report={report} variant="page" />
             </>
         ),
     })
 
-    if (discriminator) {
-        sections.push({
-            title: 'How the scout tells a real problem from noise',
-            content: (
-                <>
-                    {/* An empty inbox reads as broken until someone is told quiet is normal. */}
-                    <p className="mb-3 text-[15px] text-secondary">
-                        The scout runs on a schedule, and most runs write nothing – that's good! It means your product
-                        is working. When it creates an inbox report, this is a signal your product isn't working as
-                        expected.
-                    </p>
-                    {/* Equal weight: muted, the quiet case read as a footnote rather than the point. */}
-                    <div className="grid gap-3 @[560px]:grid-cols-2">
-                        <div className="rounded border border-light bg-accent p-4 dark:border-dark dark:bg-accent-dark">
-                            <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                <IconNotification className="size-4 shrink-0 text-red" aria-hidden="true" />
-                                Writes to your inbox
-                            </p>
-                            <p className="m-0 text-[15px] text-primary">{discriminator.writesToInbox}</p>
-                        </div>
-                        <div className="rounded border border-light bg-accent p-4 dark:border-dark dark:bg-accent-dark">
-                            <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-primary">
-                                {/* "Nothing", not "success" – a check mark implied the quiet run
-                                    passed a test, when it simply produced no output. */}
-                                <IconMinus className="size-4 shrink-0 text-secondary" aria-hidden="true" />
-                                Writes nothing
-                            </p>
-                            <p className="m-0 text-[15px] text-primary">{discriminator.writesNothing}</p>
-                        </div>
-                    </div>
-                    {discriminator.why && (
-                        <p className="mt-3 mb-0 text-[15px] text-secondary">
-                            <Markdown className="inline [&>p]:m-0 [&>p]:inline">{discriminator.why}</Markdown>
-                        </p>
-                    )}
-                    {/* Why a quiet run isn't wasted. Same tokens as the docs' `fyi` CalloutBox,
-                        minus its docs-scale title – as plain text it got lost between two cards. */}
-                    <div className="mt-3 flex items-start gap-2 rounded border border-primary bg-accent p-3">
-                        <IconInfo className="mt-0.5 size-4 shrink-0 text-secondary" aria-hidden="true" />
-                        <p className="m-0 text-[15px] text-primary">
-                            Quiet runs still count: scouts keep durable memory, so each one records what it learned and
-                            won't re-raise a finding you've already seen.
-                        </p>
-                    </div>
-                </>
-            ),
-        })
-    }
+    sections.push({
+        title: 'The pull request you merge',
+        content: (
+            <>
+                <p className="mb-2 text-[15px] text-secondary">
+                    An agent opens the pull request on its own branch, with the evidence attached. You review and merge
+                    it like any other. Nothing merges without you.
+                </p>
+                {/* Naming the price is a credibility move, most of all on a template about spend. */}
+                <p className="m-0 text-[15px] text-secondary">
+                    Reports are free. Pull requests are <strong>$15 each</strong>, and your first three every month are
+                    free – see{' '}
+                    <Link to="/docs/self-driving/pricing" state={{ newWindow: true }} className="underline">
+                        Pricing
+                    </Link>
+                    .
+                </p>
+            </>
+        ),
+    })
 
-    if (watches && watches.length > 0) {
+    // The sources it reads live here rather than in a section of their own: they describe the
+    // scout, and as a separate step they read as a third thing to learn before the payoff.
+    if (scout?.raw || (watches && watches.length > 0)) {
         sections.push({
-            title: 'What the scout reads',
+            title: 'The scout itself',
             content: (
                 <>
                     <p className="mb-3 text-[15px] text-secondary">
-                        The scout checks more than one <Term name="signal source" />, so the report can name a likely
-                        cause instead of just a number that moved.
+                        A scout is instructions an agent follows on a schedule. Worth reading before you let anything
+                        open pull requests against your code.
                     </p>
-                    {/* House row pattern from src/pages/self-driving. One column – an odd count
-                        left an empty grid cell that read as something missing. */}
-                    <ul className="m-0 list-none space-y-3 p-0">
-                        {watches.map((source) => {
-                            const { Icon, token, docs } = productSource(source.name)
-                            return (
-                                <li key={source.name} className="flex items-start gap-2">
-                                    <Icon className={`mt-0.5 size-5 shrink-0 text-${token}`} aria-hidden="true" />
-                                    <div>
-                                        {/* Underlined explicitly: `fullScreen` drops Explorer's
-                                            prose wrapper, so nothing styles links here. */}
-                                        <p className="m-0 text-[15px] font-bold text-primary">
-                                            {docs ? (
-                                                <Link to={docs} state={{ newWindow: true }} className="underline">
-                                                    {source.name}
-                                                </Link>
-                                            ) : (
-                                                source.name
-                                            )}
-                                        </p>
-                                        <p className="m-0 text-[15px] leading-snug text-secondary">{source.detail}</p>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    {watches && watches.length > 0 && (
+                        <>
+                            <p className="mb-2 text-[15px] text-secondary">
+                                It reads more than one <Term name="signal source" />, so the report can name a likely
+                                cause instead of a number that moved.
+                            </p>
+                            {/* House row pattern from src/pages/self-driving. One column – an odd
+                                count left an empty grid cell that read as something missing. */}
+                            <ul className="mb-4 mt-0 list-none space-y-3 p-0">
+                                {watches.map((source) => {
+                                    const { Icon, token, docs } = productSource(source.name)
+                                    return (
+                                        <li key={source.name} className="flex items-start gap-2">
+                                            <Icon
+                                                className={`mt-0.5 size-5 shrink-0 text-${token}`}
+                                                aria-hidden="true"
+                                            />
+                                            <div>
+                                                {/* Underlined explicitly: `fullScreen` drops
+                                                    Explorer's prose wrapper, so nothing styles
+                                                    links here. */}
+                                                <p className="m-0 text-[15px] font-bold text-primary">
+                                                    {docs ? (
+                                                        <Link
+                                                            to={docs}
+                                                            state={{ newWindow: true }}
+                                                            className="underline"
+                                                        >
+                                                            {source.name}
+                                                        </Link>
+                                                    ) : (
+                                                        source.name
+                                                    )}
+                                                </p>
+                                                <p className="m-0 text-[15px] leading-snug text-secondary">
+                                                    {source.detail}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </>
+                    )}
+                    {scout?.raw && <ScoutFile scout={scout} />}
                 </>
             ),
         })
     }
 
     sections.push({
-        title: 'What happens after',
+        title: 'The schedule it runs on',
         content: (
             <>
                 <p className="mb-2 text-[15px] text-secondary">
-                    An actionable report becomes a pull request an agent opens for you – sandboxed, on its own branch,
-                    with the evidence attached. You review and merge it like any other PR, and PostHog re-measures the
-                    number afterward to check the fix held. Nothing merges without you.
+                    {scout?.schedule ? (
+                        <>
+                            This one runs <strong>{scout.schedule.toLowerCase()}</strong> by default.
+                        </>
+                    ) : (
+                        <>You pick how often it runs.</>
+                    )}{' '}
+                    Hourly, daily, weekly, at a set time, or only when you run it by hand.
                 </p>
-                {/* Naming the price is a credibility move, most of all on a template about
-                    controlling spend. */}
+                {/* An empty inbox reads as broken until someone is told quiet is normal. The
+                    mechanics of how it decides are docs territory – link, don't explain. */}
                 <p className="m-0 text-[15px] text-secondary">
-                    Reports are free. You pay <strong>$15 per pull request</strong>, and your first three PRs each month
-                    are free. See{' '}
-                    <Link to="/docs/self-driving/pricing" state={{ newWindow: true }} className="underline">
-                        Pricing
-                    </Link>{' '}
-                    for more information.
+                    Most runs find nothing and write nothing. That's the scout working, not a scout that's broken –{' '}
+                    <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
+                        how scouts decide
+                    </Link>
+                    .
                 </p>
             </>
         ),
     })
-
-    // Last before the call to action, deliberately. The prose sections above are the doc; this is
-    // the appendix that backs them. Placed higher, the reader met the discriminator three times –
-    // prose, sources, then the file restating both – before reaching what happens next.
-    //
-    // Heading is not "What this scout actually does": four of five started with "What", and that
-    // phrasing implied the preceding sections were something other than what it does.
-    if (scout?.raw) {
-        sections.push({
-            title: 'The scout itself',
-            content: (
-                <>
-                    <p className="mb-3 text-[15px] text-secondary">
-                        A scout is just instructions an agent follows on a schedule. This is the file for this scout,
-                        start to finish – worth reading before you enable anything that can open pull requests against
-                        your code.
-                    </p>
-                    <ScoutFile scout={scout} />
-                </>
-            ),
-        })
-    }
 
     sections.push({
         title: 'Add this to your scout troop',
@@ -275,9 +247,11 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
     return (
         <article className="@container mx-auto max-w-2xl p-6">
             <header className="mb-8">
-                <p className="mb-1 text-xs font-bold uppercase tracking-wide text-secondary">The question</p>
+                <p className="mb-1 text-xs font-bold uppercase tracking-wide text-secondary">The loop</p>
+                {/* The job, named – not the question it answers. A question-shaped headline read
+                    as open-ended and contemplative where this wants to be boring and active. */}
                 <h2 className="mt-0 mb-2 text-xl font-bold leading-tight text-primary @[560px]:text-2xl">
-                    {question || templateTitle}
+                    {templateTitle}
                 </h2>
                 {premise && <p className="m-0 text-[15px] text-secondary">{premise}</p>}
             </header>

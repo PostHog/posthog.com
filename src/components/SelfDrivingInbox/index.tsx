@@ -8,7 +8,7 @@ import { EnableScoutBar } from './EnableScout'
 import { isTool, productLabel, productSource } from './sources'
 import ReportRow from './ReportRow'
 import TemplateDetail from './TemplateDetail'
-import { DEFAULT_PRIORITY, InboxFilter, InboxTemplate, isReportPriority, PRIORITY_ORDER, UNCATEGORIZED } from './types'
+import { InboxFilter, InboxTemplate, UNCATEGORIZED } from './types'
 
 /** Slug of the template a row points at, used as the `?report=` value. */
 function slugOf(url: string): string {
@@ -57,8 +57,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         filters {
                             type
                         }
-                        question
                         premise
+                        # Authored but no longer rendered: the guide page dropped its mechanics
+                        # section. Kept so the content survives the move to /docs/self-driving.
                         discriminator {
                             writesToInbox
                             writesNothing
@@ -76,7 +77,6 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         schedule
                         report {
                             title
-                            priority
                             source
                             receivedAgo
                             body
@@ -114,44 +114,46 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
             (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
         )
 
-        return nodes
-            .filter((node: any) => {
-                const types = node.frontmatter?.filters?.type || []
-                // `_`-prefixed directories are starter files to copy, not templates to browse.
-                if (node.fields.slug.startsWith('/templates/_')) {
-                    return false
-                }
-                // A template without a report can't appear in an inbox – it has nothing to show.
-                return types.some((t: string) => t?.toLowerCase() === 'self-driving') && node.frontmatter?.report?.title
-            })
-            .map((node: any) => {
-                const scoutNode = scoutsByTemplate.get(node.fields.slug)
-                return {
-                    url: node.fields.slug,
-                    category: node.frontmatter.category || UNCATEGORIZED,
-                    templateTitle: node.frontmatter.title,
-                    templateSubtitle: node.frontmatter.subtitle,
-                    report: node.frontmatter.report,
-                    question: node.frontmatter.question,
-                    premise: node.frontmatter.premise,
-                    discriminator: node.frontmatter.discriminator,
-                    watches: node.frontmatter.watches,
-                    requires: node.frontmatter.requires,
-                    scout: scoutNode
-                        ? {
-                              name: scoutNode.frontmatter?.name,
-                              description: scoutNode.frontmatter?.description,
-                              raw: scoutNode.rawBody,
-                              schedule: node.frontmatter.schedule,
-                          }
-                        : undefined,
-                }
-            })
-            .sort((a: InboxTemplate, b: InboxTemplate) => {
-                const pa = isReportPriority(a.report.priority) ? a.report.priority : DEFAULT_PRIORITY
-                const pb = isReportPriority(b.report.priority) ? b.report.priority : DEFAULT_PRIORITY
-                return PRIORITY_ORDER[pa] - PRIORITY_ORDER[pb] || a.report.title.localeCompare(b.report.title)
-            })
+        return (
+            nodes
+                .filter((node: any) => {
+                    const types = node.frontmatter?.filters?.type || []
+                    // `_`-prefixed directories are starter files to copy, not templates to browse.
+                    if (node.fields.slug.startsWith('/templates/_')) {
+                        return false
+                    }
+                    // A template without a report can't appear in an inbox – it has nothing to show.
+                    return (
+                        types.some((t: string) => t?.toLowerCase() === 'self-driving') &&
+                        node.frontmatter?.report?.title
+                    )
+                })
+                .map((node: any) => {
+                    const scoutNode = scoutsByTemplate.get(node.fields.slug)
+                    return {
+                        url: node.fields.slug,
+                        category: node.frontmatter.category || UNCATEGORIZED,
+                        templateTitle: node.frontmatter.title,
+                        templateSubtitle: node.frontmatter.subtitle,
+                        report: node.frontmatter.report,
+                        premise: node.frontmatter.premise,
+                        discriminator: node.frontmatter.discriminator,
+                        watches: node.frontmatter.watches,
+                        requires: node.frontmatter.requires,
+                        scout: scoutNode
+                            ? {
+                                  name: scoutNode.frontmatter?.name,
+                                  description: scoutNode.frontmatter?.description,
+                                  raw: scoutNode.rawBody,
+                                  schedule: node.frontmatter.schedule,
+                              }
+                            : undefined,
+                    }
+                })
+                // Alphabetical by headline. Severity used to sort this list, but a rank nobody can
+                // see is a rank nobody can question – so the ordering is one a reader can predict.
+                .sort((a: InboxTemplate, b: InboxTemplate) => a.report.title.localeCompare(b.report.title))
+        )
     }, [data])
 }
 
@@ -185,7 +187,7 @@ export default function SelfDrivingInbox({
     // The detail pane is `hidden @[700px]:flex`, so below that width selecting a row has nothing
     // to render into. The click handler can't see a container query, so measure the container and
     // mirror the breakpoint here. Starts false, which is also the right pre-hydration answer.
-    // Searches the report headline, the template's own question, its category and its signal
+    // Searches the report headline, the guide's title and subtitle, its category and signal
     // sources — the things someone actually remembers about a template they saw once.
     const [query, setQuery] = useState('')
 
@@ -207,7 +209,7 @@ export default function SelfDrivingInbox({
         initialSlug ?? (templates.length > 0 ? slugOf(templates[0].url) : null)
     )
 
-    // Grouped by subject, always: a product view spans several, and a flat priority sort at two
+    // Grouped by subject, always: a product view spans several, and a flat alphabetical sort at two
     // dozen templates is a wall of P1s with nothing to navigate by.
     const groups = useMemo(() => {
         const needle = query.trim().toLowerCase()
@@ -215,7 +217,13 @@ export default function SelfDrivingInbox({
             .filter((t) => matchesFilter(t, activeFilter))
             .filter((t) =>
                 needle
-                    ? [t.report.title, t.templateTitle, t.question, t.category, ...(t.watches || []).map((w) => w.name)]
+                    ? [
+                          t.report.title,
+                          t.templateTitle,
+                          t.templateSubtitle,
+                          t.category,
+                          ...(t.watches || []).map((w) => w.name),
+                      ]
                           .filter(Boolean)
                           .some((field) => (field as string).toLowerCase().includes(needle))
                     : true
@@ -324,7 +332,7 @@ export default function SelfDrivingInbox({
     if (templates.length === 0) {
         return (
             <div className="p-8 text-center text-secondary">
-                <p className="m-0 text-[15px]">No self-driving templates yet.</p>
+                <p className="m-0 text-[15px]">No self-driving field guides yet.</p>
             </div>
         )
     }
@@ -334,10 +342,10 @@ export default function SelfDrivingInbox({
             {/* Explorer drops its own `title` under `fullScreen`, which the panes need for
                 scrolling – so the heading lives here. */}
             <header className="border-b border-light px-4 py-3 dark:border-dark">
-                <h1 className="m-0 text-base font-bold text-primary @[700px]:text-lg">Self-driving templates</h1>
+                <h1 className="m-0 text-base font-bold text-primary @[700px]:text-lg">Self-driving field guides</h1>
                 {/* No hover cards in chrome – dotted underlines in a caption read as clutter. */}
                 <p className="m-0 text-sm text-secondary">
-                    Use cases a scout can watch for, each shown as the report it would file.
+                    What a scout watches for, and the report it files when it finds it.
                 </p>
             </header>
             <div className="flex min-h-0 flex-1 flex-col @[700px]:flex-row">
@@ -358,8 +366,8 @@ export default function SelfDrivingInbox({
                                 type="search"
                                 value={query}
                                 onChange={(event) => setQuery(event.target.value)}
-                                placeholder={`Search ${templates.length} templates`}
-                                aria-label="Search templates"
+                                placeholder={`Search ${templates.length} guides`}
+                                aria-label="Search field guides"
                                 className="w-full rounded border border-light bg-accent px-2 py-1 text-sm text-primary placeholder:text-secondary dark:border-dark dark:bg-accent-dark"
                             />
                         )}
@@ -369,10 +377,10 @@ export default function SelfDrivingInbox({
                             <select
                                 value={activeFilter ?? ''}
                                 onChange={(event) => onFilterChange?.(event.target.value || null)}
-                                aria-label="Filter templates by tool"
+                                aria-label="Filter field guides by tool"
                                 className="w-full rounded border border-light bg-accent px-2 py-1 text-sm text-primary @[700px]:hidden dark:border-dark dark:bg-accent-dark"
                             >
-                                <option value="">All templates ({templates.length})</option>
+                                <option value="">All guides ({templates.length})</option>
                                 {tools.map(({ name, count }) => (
                                     <option key={name} value={name}>
                                         {name} ({count})
@@ -381,8 +389,8 @@ export default function SelfDrivingInbox({
                             </select>
                         )}
                         <p className="m-0 text-sm text-secondary">
-                            {visibleCount} {visibleCount === 1 ? 'report' : 'reports'}
-                            {activeFilter ? ` in ${activeFilter}` : ' · ranked by priority'}
+                            {visibleCount} {visibleCount === 1 ? 'guide' : 'guides'}
+                            {activeFilter ? ` in ${activeFilter}` : ''}
                         </p>
                     </div>
                     <ScrollArea className="min-h-0 flex-1">
@@ -392,7 +400,7 @@ export default function SelfDrivingInbox({
                                 <section key={group.name}>
                                     {/* Sticky, so the category stays named while you scroll. Color
                                     alone carries it, borrowing the /desktop tab treatment – an
-                                    icon competed with the priority dot in every row below. */}
+                                    icon made every row below it busier without saying more. */}
                                     <h3
                                         className={`sticky top-0 z-10 m-0 flex items-center gap-1.5 border-b-2 bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-${token} border-${token}`}
                                     >

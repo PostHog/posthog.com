@@ -3,13 +3,9 @@
  * gallery and the template's own page render from one source. See README.md to author one.
  */
 
-/** Matches the product's P0–P4 scale: P0/P1 urgent, P2 notable, P3/P4 informational. */
-export type ReportPriority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
-
 export interface SelfDrivingReport {
     /** The finding, stated as a headline with its evidence in it. Not a topic – a claim. */
     title: string
-    priority: ReportPriority
     /** What surfaced it, e.g. "Scout · core action funnel" or "Error tracking". */
     source: string
     /** Authored static string like "2h". Never computed – see README on why. */
@@ -76,34 +72,9 @@ export interface InboxTemplate {
     templateTitle: string
     templateSubtitle?: string
     report: SelfDrivingReport
-    question?: string
     premise?: string
     discriminator?: Discriminator
     watches?: WatchedSource[]
     requires?: Requirement[]
     scout?: ScoutSpec
-}
-
-/** Priority ordering for the inbox list – lower sorts first. */
-export const PRIORITY_ORDER: Record<ReportPriority, number> = {
-    P0: 0,
-    P1: 1,
-    P2: 2,
-    P3: 3,
-    P4: 4,
-}
-
-export const DEFAULT_PRIORITY: ReportPriority = 'P2'
-
-/** Project color tokens only – never stock Tailwind colors. */
-export const PRIORITY_STYLES: Record<ReportPriority, { dot: string; label: string }> = {
-    P0: { dot: 'bg-red', label: 'text-red' },
-    P1: { dot: 'bg-red', label: 'text-red' },
-    P2: { dot: 'bg-orange', label: 'text-orange' },
-    P3: { dot: 'bg-blue', label: 'text-blue' },
-    P4: { dot: 'bg-secondary', label: 'text-secondary' },
-}
-
-export function isReportPriority(value: unknown): value is ReportPriority {
-    return typeof value === 'string' && value in PRIORITY_ORDER
 }

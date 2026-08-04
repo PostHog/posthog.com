@@ -75,10 +75,10 @@ function ToolRail({ active, onSelect }: { active: InboxFilter; onSelect: (produc
     }
 
     return (
-        <nav aria-label="Filter templates by tool">
+        <nav aria-label="Filter field guides by tool">
             <p className="mb-1.5 px-2 text-xs font-bold uppercase tracking-wide text-secondary">Tools</p>
             <ul className="m-0 list-none space-y-0.5 p-0">
-                {row(null, 'All templates', templates.length)}
+                {row(null, 'All guides', templates.length)}
                 {tools.map(({ name, count }) => row(name, name, count))}
             </ul>
         </nav>
@@ -128,21 +128,21 @@ export default function SelfDrivingInboxPage({ initialSlug }: SelfDrivingInboxPa
                         defaultValue="item-0"
                         items={[
                             {
-                                trigger: <span className="flex-1">How to use these templates</span>,
+                                trigger: <span className="flex-1">How to use these guides</span>,
                                 content: (
                                     <div className="space-y-2 text-sm">
                                         <p className="mb-0">
-                                            Each template is an example of a report a scout would file for you. They're
-                                            designed to look and feel like the reports that land in your inbox once
-                                            self-driving is running.
+                                            Each guide is one job a scout does for you, shown as the report it would
+                                            file. They look like the reports that land in your inbox once self-driving
+                                            is running.
                                         </p>
                                         <p className="mb-0">
-                                            Open one to see the use case it covers, how scouts spot a real problem from
-                                            noise, and add it to your scout troop in a click.
+                                            Open one to see the report, the pull request it becomes, and add the scout
+                                            to your troop in a click.
                                         </p>
                                         <p className="mb-0">
                                             <Link to="/templates" state={{ newWindow: true }}>
-                                                All templates
+                                                All guides
                                             </Link>
                                         </p>
                                     </div>

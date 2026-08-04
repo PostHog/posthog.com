@@ -55,7 +55,6 @@ filters:
     - self-driving
 report:
   title: Publish completions down 34% while attempts hold steady
-  priority: P1
   source: Scout · core action funnel
   receivedAgo: 2h
   affected: 47 users affected
@@ -78,7 +77,6 @@ renders this block for you. Two copies drift.
 | Field | Required | Notes |
 |---|---|---|
 | `title` | yes | The finding as a **claim with its evidence in it**, not a topic. "Publish completions down 34% while attempts hold steady" — not "Checkout issues". This is the single most important line you write; in the gallery it's often all someone reads. |
-| `priority` | yes | `P0`–`P4`. P0/P1 urgent, P2 notable, P3/P4 informational. Drives sort order and the dot color. Be honest — an inbox where everything is P1 teaches nothing. |
 | `source` | yes | What surfaced it: `Scout · core action funnel`, `Error tracking`, `Support · ticket clustering`. The `·` separator is the house style. |
 | `body` | yes | 2–4 sentences. Markdown: `**bold**`, `` `code` ``, and links render. Lead with the observation, then the corroborating evidence from other sources. |
 | `suggestedAction` | no | What the agent proposes doing. Markdown. |
@@ -118,8 +116,6 @@ inbox"**, so someone who turns the scout on meets the same words twice.
 - **Corroborate across sources.** The most convincing reports triangulate: the metric moved,
   replay shows the behavior, error tracking has the cause. That's what a single dashboard
   can't do, and it's the whole argument for self-driving.
-- **Match the priority to the stakes.** A ghost feature flag is not a P0. Inflating priorities
-  is the fastest way to make the whole inbox read as noise.
 - **Keep it the length of a thing someone actually reads.** If the body needs a fifth
   sentence, the finding probably isn't sharp enough yet.
 
@@ -184,10 +180,9 @@ Don't retry the reuse; extract a shared shell from both only if a third consumer
 | File | Responsibility |
 |---|---|
 | `index.tsx` | The gallery: data query, selection state, two-pane layout |
-| `ReportRow.tsx` | One inbox row — priority dot, title, source, time |
+| `ReportRow.tsx` | One inbox row — title, source, time |
 | `ReportCard.tsx` | The report body. `variant: 'preview' \| 'page'`. Shared with `Template.tsx` |
-| `PriorityDot.tsx` | Priority → token + label |
-| `types.ts` | `SelfDrivingReport`, `InboxTemplate`, priority tables |
+| `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
 It's explicit rather than inferred because the field exists on only a handful of the ~30
