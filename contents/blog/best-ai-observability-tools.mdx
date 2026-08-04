@@ -267,7 +267,7 @@ The exception is **per-trace pricing** (LangSmith): one trace covers a whole req
 
 Let's see how much this would cost, across different platforms:
 
-- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a $0.00006 per-event rate with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; you'd pay for the ~600,000 above the free tier = ~$36.
+- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a volume-tiered rate that starts at $35 per 100,000 events and falls to $6 per 100,000 at the highest volumes, with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; the ~600,000 above the free tier works out to ~$76.
 
 - **LangSmith (per seat + per trace):** one trace typically represents an entire user request, regardless of how many spans or model calls happen inside it. In this example, 100,000 requests produce 100,000 billable traces. With five seats at $39/month (Plus plan), that's $195 in seat costs. After the 10,000 included traces (Plus plan), the remaining 90,000 traces cost about $225 in overages ($0.0025/trace), bringing the total to roughly $420/month. The important thing is that the bill grows with request volume, not with the number of spans inside each request.
 
