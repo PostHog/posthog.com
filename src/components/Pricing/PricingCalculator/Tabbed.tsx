@@ -367,7 +367,7 @@ export default function Tabbed() {
         <div className="w-full flex-1">
             <div className="grid grid-cols-12 mb-1">
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
-                    <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Products</h4>
+                    <h4 className="m-0 md:pl-3 pb-1 font-normal text-sm opacity-70">Tools</h4>
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(
                             ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
