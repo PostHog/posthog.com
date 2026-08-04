@@ -179,7 +179,7 @@ const SignupCard = ({ actions, footer }: { actions: React.ReactNode; footer?: Re
 
 const CommandPanel = () => (
     <div className="border-t border-primary bg-accent px-4 py-3 rounded-b space-y-1.5">
-        <p className="!text-xs text-secondary m-0">Already know what you want? Skip the browser:</p>
+        <p className="!text-xs text-secondary m-0">Happier in the terminal? Skip the browser:</p>
         <ClickableCommand />
     </div>
 )

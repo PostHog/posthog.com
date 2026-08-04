@@ -209,7 +209,7 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:mt-0">
+                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:mt-0 @xl:justify-center @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:justify-start">
                         <HeroCTA />
                     </div>
                 </div>
