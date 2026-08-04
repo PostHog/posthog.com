@@ -25,6 +25,8 @@ Releases and launches can happen together or separately, so the clearer you are 
 
 Every product should have [activation criteria](/handbook/growth/growth-engineering/per-product-activation) – the qualifying events that tell us a user has actually got value from a product. Setting these is the **PM's** job, working with the product team, but they're just as useful to you.
 
+Currently, activation criteria must occur at the _person_ level, not the _org_ level. This is due to limitations in how we map profiles in Customer.io. 
+
 Because activation criteria define what "success" looks like for a product, they're the natural foundation for your go-to-market plan and campaign goals. When you set the "now what?" goal metric for a launch in Customer.io, tie it to the product's activation criteria rather than a vanity metric like clicks. Ask your PM what the activation criteria are early – if they aren't defined yet, that's a signal worth flagging, because a launch that drives signups but not activation isn't really working.
 
 ## Tap into growth reviews, not just launches
