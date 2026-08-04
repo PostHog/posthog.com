@@ -469,7 +469,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Founders Hub',
+                    label: 'Founders hub',
                     link: '/founders',
                     icon: <Icons.IconRocket className="size-4 text-purple" />,
                 },
