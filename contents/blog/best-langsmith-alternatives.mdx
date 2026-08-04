@@ -635,7 +635,7 @@ This table is great, but broken for me. You might need to use HTML components to
 | 1M | ~$2,670 | ~$450 |
 | 5M | ~$12,670 | ~$2,030 |
 
-Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.39-$0.48 per 1K requests' worth of PostHog events, depending on volume). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
+Three things drive the gap. LangSmith's per-request rate is higher ($2.50 per 1K traces versus roughly $0.39-$0.48 per 1K requests' worth of PostHog events). Seats add a fixed floor that grows with your team – a 10-person team starts at $390/month before a single trace. And LangSmith's base rate only buys 14-day retention; extended retention (400 days) doubles the trace rate to $5 per 1K, while PostHog's free plan retains data for a year.
 
 The honest caveats: PostHog's event count scales with instrumentation depth, so a simple one-call-per-request app emits fewer events (cheaper), while a complex agent emits more (the gap narrows but doesn't close – even at 40 events per request, PostHog is ~$12K at 5M requests, comparable to LangSmith *before* extended retention or extra seats). And LangSmith's included traces (10K on Plus) matter at very low volumes, where both tools are effectively free.
 
