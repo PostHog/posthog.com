@@ -27,13 +27,17 @@ Alternatively, you can [disable autocapture](/docs/product-analytics/autocapture
 
 It's only necessary to [identify](/docs/product-analytics/identify) a user once per session, and you don't need to add your own checks to prevent duplicate calls. If the user is already identified, calling `identify()` again with the same distinct ID doesn't capture another `$identify` event. Instead, it captures a `$set` event only when the person properties you pass have changed. 
 
-## Only call `group()` once per session
+## Only pass group properties when they change
 
 In client-side SDKs, it's only necessary to call [`group()`](/docs/product-analytics/group-analytics) once per session. Prevent calling it multiple times to send fewer events and reduce costs.
 
+The JavaScript Web SDK already deduplicates for you, but only if you don't pass properties. `posthog.group('company', id)` captures a `$groupidentify` the first time the browser sees that key and nothing afterwards, while `posthog.group('company', id, { plan: 'pro' })` captures one on every call — even when the group is already identified and the properties haven't changed. An empty object counts as properties too, so `posthog.group('company', id, {})` sends an event every call.
+
+So pass properties only where they're loaded or updated, and use the bare `posthog.group(type, key)` form everywhere else. Server-side SDKs always send the event, so call their group identify methods only when something changes.
+
 To see where duplicate `$groupidentify` events are being generated, you can use the following SQL:
 
-```
+```sql
 SELECT properties.$lib AS lib, count() AS groupidentify_event_count
 FROM events
 WHERE event = '$groupidentify'
@@ -41,21 +45,8 @@ WHERE event = '$groupidentify'
     SELECT $session_id
     FROM events
     WHERE event = '$groupidentify'
-      ```
-SELECT properties.$lib AS lib, count() AS groupidentify_event_count
-FROM events
-WHERE event = '$groupidentify'
-  AND $session_id IN (
-    SELECT $session_id
-    FROM events
-    WHERE event = '$groupidentify'
-      AND timestamp &gt;= now() - INTERVAL 30 DAY
-      AND timestamp &lt; now()
-    GROUP BY $session_id
-    HAVING count() &gt; 1
-  )
-GROUP BY lib
-ORDER BY groupidentify_event_count DESC
+      AND timestamp >= now() - INTERVAL 30 DAY
+      AND timestamp < now()
     GROUP BY $session_id
     HAVING count() > 1
   )

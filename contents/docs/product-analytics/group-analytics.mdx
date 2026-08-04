@@ -134,6 +134,37 @@ import SettingGroupPropertiesSnippet from "../_snippets/setting-group-properties
 
 <SettingGroupPropertiesSnippet />
 
+### When `$groupidentify` is sent
+
+In the JavaScript Web SDK, `posthog.group()` doesn't always capture a `$groupidentify` event. It captures one when either:
+
+- the group key is new or has changed compared to the key stored in the browser, or
+- you pass properties in the call.
+
+This means the two forms behave differently on repeat calls:
+
+```js-web
+// Sends $groupidentify only the first time this key is seen in the browser.
+// Later calls with the same key send nothing.
+posthog.group('company', 'company_id_in_your_db')
+
+// Sends $groupidentify every time, even if the group is already
+// identified and the properties haven't changed.
+posthog.group('company', 'company_id_in_your_db', { plan: 'pro' })
+```
+
+An empty object counts as properties, so `posthog.group('company', id, {})` also captures a `$groupidentify` on every call. Use the bare two-argument form instead.
+
+To keep your event volume down, pass properties only where they're actually loaded or updated — for example, after fetching the organization or when the user changes a setting — and call `posthog.group(type, key)` without properties everywhere else. See [cutting costs](/docs/product-analytics/cutting-costs) for more.
+
+<CalloutBox icon="IconWarning" title="Older versions of posthog-js" type="caution">
+
+Before posthog-js 1.364.7, `posthog.group()` without properties never captured a `$groupidentify`, so a group called this way was never created in PostHog. If you're on an older version, upgrade before switching to the bare two-argument form.
+
+</CalloutBox>
+
+Server-side SDKs have no browser state to compare against, so their group identify methods always send the event. Call them only when the group or its properties change.
+
 ### Link events to groups
 
 How you link events to individual groups depends on your SDK:
