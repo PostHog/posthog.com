@@ -149,6 +149,15 @@ Each product should have a changelog page in their docs
 | Feature Flags | [/docs/feature-flags/changelog](/docs/feature-flags/changelog) |
 | ... | ... |
 
+#### Adding a changelog page for a new product
+
+These pages filter the main changelog by Strapi labels, so adding one takes three changes in the [posthog.com repo](https://github.com/PostHog/posthog.com) — all three are required:
+
+1. Add `contents/docs/<product>/changelog.mdx` rendering `<ProductChangelog product="Your product" />`.
+2. Add a `/docs/<product>/changelog` link to the product's sidebar in `src/navs/index.js`.
+3. Add an entry for the product to `productConfigMap` in `src/components/Docs/ProductChangelog.tsx`, mapping it to the topic and team names used in Strapi.
+
+Step 3 is the one people forget, so CI fails if a page is missing it. The same applies when a topic or team is renamed in Strapi — update `productConfigMap` to match, or the page goes empty.
 
 ## Links and resources
 
