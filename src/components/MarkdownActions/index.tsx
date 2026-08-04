@@ -48,9 +48,10 @@ const resolveMarkdownExists = (pageUrl: string): Promise<boolean> => {
 }
 
 /**
- * Returns `null` until the HEAD check resolves. Callers should treat `null` as "unknown"
- * and fall back to their own render-time guess, so the control can ship in the static
- * HTML instead of popping in after hydration.
+ * Returns `null` until the HEAD check resolves, then `true`/`false`. The check can only run
+ * after hydration, so callers must treat `null` as "not yet known" and reserve space rather
+ * than guessing — showing the control and then removing it on a `false` tears it out of the
+ * DOM under the reader, dropdown and all.
  */
 export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
     const [exists, setExists] = useState<boolean | null>(() => existsCache.get(pageUrl) ?? null)
@@ -68,8 +69,12 @@ export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
         }
 
         // The .md files are written in onPostBuild, so they don't exist under `gatsby develop`.
-        // Skip verification there and let the optimistic gate stand.
-        if (process.env.NODE_ENV === 'development') return
+        // Assume they're there rather than verifying, so the control is still reachable in dev —
+        // the copy action itself will 404 there. See README.
+        if (process.env.NODE_ENV === 'development') {
+            setExists(true)
+            return
+        }
 
         let cancelled = false
         resolveMarkdownExists(pageUrl).then((result) => {
@@ -87,11 +92,6 @@ export const useMarkdownUrlExists = (pageUrl: string): boolean | null => {
 interface MarkdownActionsProps {
     /** Current page path, e.g. `/docs/product-analytics/installation` */
     pageUrl?: string
-    /**
-     * True when the caller is rendering MDX. Used as the optimistic, render-time gate so the
-     * control is present in the static HTML — see the visibility note below.
-     */
-    isMdx?: boolean
     /** Layout classes from the caller (ReaderView passes the prose column's width). */
     className?: string
 }
@@ -101,7 +101,7 @@ interface MarkdownActionsProps {
  * handing it to an LLM. Renders on any page with a generated `.md` counterpart (see
  * `gatsby/rawMarkdownUtils.ts`) and returns null everywhere else.
  */
-export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, isMdx = false, className = '' }) => {
+export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, className = '' }) => {
     const [copied, setCopied] = useState(false)
     const [popoverOpen, setPopoverOpen] = useState(false)
 
@@ -132,15 +132,17 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, isMdx
         }
     }
 
-    // Optimistic while the HEAD check is unresolved, so MDX pages ship the control in their
-    // static HTML. A resolved `true` still reveals it on non-MDX pages that do have a .md
-    // (SDK references); a resolved `false` hides it.
-    const visible = isAllowedPath && (exists === true || (exists === null && isMdx))
-    if (!visible) return null
+    // The HEAD check can only answer after hydration, so the buttons stay hidden — but their
+    // space stays reserved — until it does. Showing them optimistically and hiding them on a
+    // 404 deleted the control, and any open dropdown, out from under the reader. Keeping the
+    // slot mounted in every state means nothing below this shifts, and nothing that has been
+    // shown is ever taken away. `invisible` also keeps the buttons out of the tab order and
+    // the accessibility tree while unresolved.
+    if (!isAllowedPath) return null
 
     return (
         <div className={`not-prose flex justify-end ${className}`}>
-            <div className="flex items-center gap-px">
+            <div className={`flex items-center gap-px ${exists === true ? '' : 'invisible'}`}>
                 <OSButton
                     size="md"
                     icon={copied ? <IconCheck className="text-green" /> : <IconCopy />}

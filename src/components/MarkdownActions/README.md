@@ -6,7 +6,7 @@ LLM, reading as plain text, or handing straight to ChatGPT/Claude.
 ```tsx
 import MarkdownActions from 'components/MarkdownActions'
 
-<MarkdownActions pageUrl="/docs/feature-flags" isMdx className="mb-2 mx-auto max-w-2xl" />
+<MarkdownActions pageUrl="/docs/feature-flags" className="mb-2 mx-auto max-w-2xl" />
 ```
 
 It renders as two grouped buttons: a primary **Copy page** (copies the `.md` contents to the clipboard,
@@ -18,11 +18,9 @@ flipping to a green check + "Copied" for 2s) and a chevron that opens a `Popover
 | Prop | Type | Default | Notes |
 | --- | --- | --- | --- |
 | `pageUrl` | `string` | — | The current page path, e.g. `/docs/product-analytics/installation`. |
-| `isMdx` | `boolean` | `false` | The caller's render-time hint that this page is MDX. Drives the optimistic gate below. |
 | `className` | `string` | `''` | Layout/width classes for the wrapper. The component supplies `not-prose flex justify-end`. |
 
-The component owns its own visibility and its own wrapper element, returning `null` when hidden — callers
-never need to guard it, and no empty spacer is left behind.
+The component owns its own visibility and its own wrapper element — callers never need to guard it.
 
 ## Where the markdown comes from
 
@@ -36,25 +34,37 @@ never need to guard it, and no empty spacer is left behind.
 Everything else under `/docs` (API endpoint pages, CDP destinations, warehouse sources, the hand-written
 `src/pages/docs/*.tsx` pages) has no `.md` at all.
 
-## Visibility: why the gate is tri-state
+## Visibility: reserve the slot, then reveal
 
-```
-visible = isMarkdownContentPath(pageUrl) && (exists === true || (exists === null && isMdx))
-```
+`useMarkdownUrlExists` does a `HEAD` request, so it cannot answer until after hydration and returns `null`
+until it does. The component reserves the control's space for the whole time, and only makes the buttons
+visible once the answer is `true`:
 
-`useMarkdownUrlExists` does a `HEAD` request, so it can only answer after hydration and returns `null` until
-then. If we waited for it, the button would never appear in the static HTML and would pop in — a visible
-layout shift right above the page title.
+- `isMarkdownContentPath(pageUrl)` is false → render nothing at all.
+- `exists === null` → wrapper mounted, buttons `invisible`. Space is held, so nothing below shifts.
+- `exists === true` → buttons visible.
+- `exists === false` → wrapper stays mounted, buttons stay `invisible`.
 
-So `null` falls back to `isMdx`, which is known at render time. But `isMdx` alone is **not** a superset of
-"has a `.md`": SDK reference pages have one and are not MDX. Hence the three states —
+The point of holding the slot in *every* state is that the control can never be taken away after being
+shown. An earlier version rendered the buttons optimistically from a render-time `isMdx` hint and removed
+them when the `HEAD` came back 404. That produced a control which appeared on load and deleted itself about
+a second later — and if the dropdown happened to be open, it was torn out of the DOM mid-interaction, which
+read as the panel flashing and vanishing.
 
-- `exists === true` → show, even if `isMdx` is false (catches SDK references).
-- `exists === null` → show if `isMdx` (optimistic; ships in static HTML).
-- `exists === false` → hide.
+The cost of this shape is a reserved empty slot (roughly one button's height, right-aligned above the title)
+on pages under a markdown path that have no generated `.md` — in production that is the `excludeTerms` set,
+e.g. `/handbook/teams/*`. That is deliberate: dead space is a much cheaper failure than a control that
+disappears while you are clicking it.
 
-The one accepted cost is a page that is MDX under a markdown path but excluded from generation
-(`/handbook/teams/*`): the button appears, then disappears when the HEAD resolves.
+`invisible` is `visibility: hidden`, which also takes the buttons out of the tab order and the accessibility
+tree while unresolved, so nothing is focusable before it is usable.
+
+### In preview builds the control never appears
+
+`.md` generation runs in `onPostBuild`, which returns early on `GATSBY_MINIMAL === 'true'`
+(`gatsby/onPostBuild.ts`). Preview deploys are minimal builds, so **no `.md` files exist there at all** and
+every `HEAD` 404s — the control stays invisible for every page. This is expected, not a bug: there is no
+markdown to copy in a preview. Verify this control in a full local build or in production.
 
 `HEAD` results are cached in module-level `Map`s, so each URL is checked once per session rather than once
 per mount. Under `gatsby develop` no `.md` files exist, so the check is skipped entirely and the optimistic

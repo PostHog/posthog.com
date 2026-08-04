@@ -1583,7 +1583,6 @@ function ReaderViewContent({
                                         see components/MarkdownActions/README.md. */}
                                     <MarkdownActions
                                         pageUrl={appWindow?.path ?? pathname}
-                                        isMdx={body?.type === 'mdx'}
                                         className={`mb-2 transition-all ${contentWidthClass}`}
                                     />
                                     {title && !hideTitle && (
