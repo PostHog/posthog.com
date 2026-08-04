@@ -148,7 +148,7 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, isMdx
                     aria-label="Copy this page as Markdown"
                     tooltip="Copy this page as Markdown"
                 >
-                    <span className="hidden @sm/reader-content:inline">{copied ? 'Copied' : 'Copy page'}</span>
+                    <span className="hidden text-secondary  @sm/reader-content:inline">{copied ? 'Copied' : 'Copy page'}</span>
                 </OSButton>
 
                 <Popover
