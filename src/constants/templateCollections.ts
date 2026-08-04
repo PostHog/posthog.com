@@ -20,16 +20,6 @@ export interface TemplateCollection {
 
 export const TEMPLATE_COLLECTIONS: TemplateCollection[] = [
     {
-        id: 'self-driving',
-        title: 'Self-driving',
-        description: 'Scouts that watch your data and open a pull request when something breaks.',
-        owner: 'self-driving',
-        legacyType: 'self-driving',
-        featured: true,
-        hasStaticPage: true,
-        token: 'orange',
-    },
-    {
         id: 'dashboards',
         title: 'Dashboards',
         description: 'Describe what you want to track and PostHog AI builds the dashboard.',

@@ -48,8 +48,8 @@ function ToolRail({ active, onSelect }: { active: InboxFilter; onSelect: (produc
                 <Link
                     to={
                         name
-                            ? `/templates/self-driving?${TOOL_PARAM}=${encodeURIComponent(name)}`
-                            : '/templates/self-driving'
+                            ? `/field-guides/self-driving?${TOOL_PARAM}=${encodeURIComponent(name)}`
+                            : '/field-guides/self-driving'
                     }
                     className={rowClasses(active === name)}
                     onClick={(event: React.MouseEvent) => {
@@ -94,7 +94,7 @@ export default function SelfDrivingInboxPage({ initialSlug }: SelfDrivingInboxPa
     return (
         <Explorer
             template="generic"
-            slug="templates/self-driving"
+            slug="field-guides/self-driving"
             title="What self-driving watches for"
             // No address bar: its category select has no templates value, so it renders empty.
             showAddressBar={false}
@@ -131,7 +131,7 @@ export default function SelfDrivingInboxPage({ initialSlug }: SelfDrivingInboxPa
                                             to your troop in a click.
                                         </p>
                                         <p className="mb-0">
-                                            <Link to="/templates" state={{ newWindow: true }}>
+                                            <Link to="/field-guides" state={{ newWindow: true }}>
                                                 All guides
                                             </Link>
                                         </p>

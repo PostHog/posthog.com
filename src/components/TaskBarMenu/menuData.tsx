@@ -959,10 +959,17 @@ export const DocsItemsEnd = [
     },
     {
         type: 'item' as const,
+        label: 'Field guides',
+        link: '/field-guides',
+        // Orange matches volume one's token in src/constants/fieldGuides.ts.
+        icon: <Icons.IconCompass className="size-4 text-orange" />,
+    },
+    {
+        type: 'item' as const,
         label: 'Templates',
         link: '/templates',
         // Matches the Templates entry in src/navs/index.js.
-        icon: <Icons.IconMagic className="size-4 text-orange" />,
+        icon: <Icons.IconMagic className="size-4 text-purple" />,
     },
 ]
 

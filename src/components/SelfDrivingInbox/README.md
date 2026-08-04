@@ -1,28 +1,28 @@
 # SelfDrivingInbox
 
-Renders self-driving scout templates as a **live inbox**: instead of browsing template
+Renders volume one of the field guides as a **live inbox**: instead of browsing guide
 descriptions, a visitor reads a queue of real-shaped reports — the same artifact self-driving
-would deliver to them. Clicking a report opens the template behind it.
+would deliver to them. Clicking a report opens the guide behind it.
 
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Used by `/templates/self-driving` (`src/pages/templates/self-driving.tsx`), and its
-`ReportCard` is shared with `src/templates/Template.tsx` so each template page shows the
+Used by `/field-guides/self-driving` (`src/pages/field-guides/self-driving.tsx`), and its
+`ReportCard` is shared with `src/templates/Template.tsx` so each guide page shows the
 identical report.
 
 ---
 
 ## Adding a template
 
-**Copy `contents/templates/_starter/` and rename it.** It's a commented skeleton of both files,
+**Copy `contents/field-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
 kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow — you
 should not need to reverse-engineer an existing template.
 
 A template is two files:
 
 ```
-contents/templates/<slug>/
+contents/field-guides/<volume>/<slug>/
 ├── index.mdx    everything a human reads
 └── SKILL.md     the scout itself
 ```
@@ -38,13 +38,13 @@ code block on the page is byte-for-byte what you wrote. `scoutInstructions()` in
 takes name and description as separate form fields.
 
 Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
-`gatsby/createPages.ts` skips slugs ending `/SKILL` or starting `/templates/_`, and the two
+`gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the two
 gallery queries (`index.tsx` here, `TemplatesLibrary/index.tsx`) filter the same way.
 
 ## Authoring a template's report
 
 The report lives in the template's **frontmatter**, not its MDX body. Add a `report` block to
-`contents/templates/<slug>/index.mdx`:
+`contents/field-guides/<volume>/<slug>/index.mdx`:
 
 ```yaml
 ---
@@ -132,11 +132,11 @@ elsewhere on the site (see `suppressHydrationWarning` in `src/pages/self-driving
 ## These files are agent context too
 
 A scout template is read by two audiences from one source. Humans get the inbox UI; agents get a
-markdown mirror of the same page at `https://posthog.com/templates/<slug>.md`.
+markdown mirror of the same page at `https://posthog.com/field-guides/<volume>/<slug>.md`.
 
 That mirror is produced by the site's existing pipeline, not a bespoke exporter:
 `generateRawMarkdownPages()` in `gatsby/rawMarkdownUtils.ts` converts the **built HTML** of every
-page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/templates`)
+page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/field-guides`)
 with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/robots.txt` blocks
 `/*.md$` from search crawlers, so the mirror exists for agents specifically.
 `context-mill/context/docs.yaml` already consumes posthog.com `.md` URLs this way to feed the

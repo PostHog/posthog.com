@@ -130,14 +130,14 @@ export default function Template({ data }) {
         Section,
     }
 
-    // Field guides have no page of their own: /templates/<slug> is the inbox, pre-selected.
+    // Field guides have no page of their own: the volume's inbox is the surface, pre-selected.
     if (templateType === 'self-driving') {
-        const templateSlug = slug.replace(/^\/templates\//, '').replace(/\/$/, '')
+        const templateSlug = slug.replace(/^\/field-guides\/self-driving\//, '').replace(/\/$/, '')
         return (
             <>
                 <SEO
-                    image={`/images/templates/${slug.split('/')[2]}.png`}
-                    title={`${title} – self-driving template - PostHog`}
+                    image={`/images/templates/${slug.split('/')[3]}.png`}
+                    title={`${title} – a PostHog field guide`}
                     description={pageData?.frontmatter?.subtitle || description || excerpt}
                 />
                 <SelfDrivingInboxPage initialSlug={templateSlug} />

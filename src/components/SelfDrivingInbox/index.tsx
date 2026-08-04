@@ -12,7 +12,7 @@ import { InboxFilter, InboxTemplate, UNCATEGORIZED } from './types'
 
 /** Slug of the template a row points at, used as the `?report=` value. */
 function slugOf(url: string): string {
-    return url.replace(/^\/templates\//, '').replace(/\/$/, '')
+    return url.replace(/^\/field-guides\/self-driving\//, '').replace(/\/$/, '')
 }
 
 /** Read on a cold load only, so a filtered view is still a shareable link. See `Page.tsx`. */
@@ -42,7 +42,7 @@ export function matchesFilter(template: InboxTemplate, filter: InboxFilter): boo
 export function useSelfDrivingTemplates(): InboxTemplate[] {
     const data = useStaticQuery(graphql`
         query SelfDrivingInboxQuery {
-            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/(?!.*/docs).*/" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/field-guides/self-driving//" } } }) {
                 nodes {
                     id
                     fields {
@@ -98,9 +98,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
     `)
 
     return useMemo(() => {
-        const nodes = data?.templates?.nodes || []
+        const nodes = data?.guides?.nodes || []
 
-        // Keyed by the template slug that owns each scout: /templates/x/SKILL -> /templates/x
+        // Keyed by the guide slug that owns each scout: /field-guides/x/SKILL -> /field-guides/x
         const scoutsByTemplate = new Map<string, any>(
             (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
         )
@@ -110,7 +110,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                 .filter((node: any) => {
                     const types = node.frontmatter?.filters?.type || []
                     // `_`-prefixed directories are starter files to copy, not templates to browse.
-                    if (node.fields.slug.startsWith('/templates/_')) {
+                    if (/\/_/.test(node.fields.slug)) {
                         return false
                     }
                     // A template without a report can't appear in an inbox – it has nothing to show.
@@ -415,7 +415,7 @@ export default function SelfDrivingInbox({
                     <div className={`min-h-0 flex-1 flex-col @[700px]:flex ${onTemplateRoute ? 'flex' : 'hidden'}`}>
                         <ScrollArea className="min-h-0 flex-1">
                             <Link
-                                to="/templates/self-driving"
+                                to="/field-guides/self-driving"
                                 className="mx-6 mt-4 inline-block text-sm text-secondary @[700px]:hidden"
                             >
                                 ‹ All templates

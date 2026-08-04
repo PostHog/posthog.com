@@ -50,7 +50,7 @@ export type InboxFilter = string | null
 export interface InboxTemplate {
     /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */
     category: string
-    /** Route to the template page, e.g. /templates/silent-failure-core-action */
+    /** Route to the guide page, e.g. /field-guides/self-driving/silent-failure-core-action */
     url: string
     /** The template's own title, e.g. "Silent failure in your core action" */
     templateTitle: string
