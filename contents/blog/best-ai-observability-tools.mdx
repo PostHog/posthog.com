@@ -271,7 +271,7 @@ Let's see how much this would cost, across different platforms:
 
 - **LangSmith (per seat + per trace):** one trace typically represents an entire user request, regardless of how many spans or model calls happen inside it. In this example, 100,000 requests produce 100,000 billable traces. With five seats at $39/month (Plus plan), that's $195 in seat costs. After the 10,000 included traces (Plus plan), the remaining 90,000 traces cost about $225 in overages ($0.0025/trace), bringing the total to roughly $420/month. The important thing is that the bill grows with request volume, not with the number of spans inside each request.
 
-- **Braintrust (flat fee, no seats):** the free Starter tier includes 1GB of processed data (roughly 1 million spans at typical payload sizes), so this ~700,000-span workload still fits inside the free tier at $0. If you outgrow it, Pro is a flat $249 a month with unlimited users and data-based overages. Adding engineers costs nothing.
+- **Braintrust (flat fee, no seats):** the free Starter tier includes 1GB of processed data (roughly 70,000 spans at typical payload sizes), so this ~700,000-span workload runs about $38 a month in overages. Pro is a flat $249 a month with unlimited users and 5GB included, plus ~$17 in overages, for about $266 a month. Adding engineers costs nothing.
 
 - **Langfuse cloud (per observation):** a note on terminology first – Langfuse's billable unit is anything you send it: traces, observations (spans, generations), and scores. If 100,000 user requests create 100,000 traces and about 700,000 observations, the workload is about 800,000 billable units. On the Core plan, that means $29 for the first 100,000 units, plus $56 for the remaining 700,000 units, or about $85/month.
 
