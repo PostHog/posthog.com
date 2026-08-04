@@ -25,10 +25,7 @@ export function toolsOf(template: InboxTemplate): string[] {
     return [...new Set(names.filter(isTool).map(productLabel))]
 }
 
-/**
- * Tools in rail order, derived from the templates rather than a hardcoded map –
- * `TemplatesLibrary` keys its 34 entries by title, so nobody can add one without editing it.
- */
+/** Derived from the guides, not a hardcoded map – adding one needs no code edit. */
 export function toolsInUse(templates: InboxTemplate[]): { name: string; count: number }[] {
     const counts = new Map<string, number>()
     templates.forEach((template) => toolsOf(template).forEach((n) => counts.set(n, (counts.get(n) ?? 0) + 1)))
@@ -58,13 +55,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                             type
                         }
                         premise
-                        # Authored but no longer rendered: the guide page dropped its mechanics
-                        # section. Kept so the content survives the move to /docs/self-driving.
-                        discriminator {
-                            writesToInbox
-                            writesNothing
-                            why
-                        }
+                        tldr
                         watches {
                             name
                             detail
@@ -137,7 +128,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         templateSubtitle: node.frontmatter.subtitle,
                         report: node.frontmatter.report,
                         premise: node.frontmatter.premise,
-                        discriminator: node.frontmatter.discriminator,
+                        tldr: node.frontmatter.tldr,
                         watches: node.frontmatter.watches,
                         requires: node.frontmatter.requires,
                         scout: scoutNode
@@ -150,8 +141,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                             : undefined,
                     }
                 })
-                // Alphabetical by headline. Severity used to sort this list, but a rank nobody can
-                // see is a rank nobody can question – so the ordering is one a reader can predict.
+                // Alphabetical: severity sorted this once, but a rank nobody can see is unpredictable.
                 .sort((a: InboxTemplate, b: InboxTemplate) => a.report.title.localeCompare(b.report.title))
         )
     }, [data])
@@ -166,10 +156,7 @@ interface SelfDrivingInboxProps {
     onFilterChange?: (filter: InboxFilter) => void
 }
 
-/**
- * Self-driving templates browsed as an inbox – see README.md. Static-first: the list renders at
- * build time, and selection, the preview pane, and keyboard navigation are enhancement on top.
- */
+/** Field guides browsed as an inbox. Static-first: the list is built HTML, the rest is enhancement. */
 export default function SelfDrivingInbox({
     initialSlug,
     activeFilter = null,
@@ -184,13 +171,10 @@ export default function SelfDrivingInbox({
     const [interactive, setInteractive] = useState(false)
     useEffect(() => setInteractive(true), [])
 
-    // The detail pane is `hidden @[700px]:flex`, so below that width selecting a row has nothing
-    // to render into. The click handler can't see a container query, so measure the container and
-    // mirror the breakpoint here. Starts false, which is also the right pre-hydration answer.
-    // Searches the report headline, the guide's title and subtitle, its category and signal
-    // sources — the things someone actually remembers about a template they saw once.
+    // Searches headline, title, subtitle, category and sources – what someone half-remembers.
     const [query, setQuery] = useState('')
 
+    // The click handler can't read a container query, so mirror the 700px breakpoint in JS.
     const [detailPaneVisible, setDetailPaneVisible] = useState(false)
     useEffect(() => {
         const element = containerRef.current
@@ -202,15 +186,12 @@ export default function SelfDrivingInbox({
         return () => observer.disconnect()
     }, [])
 
-    // Seeded from `initialSlug` (falling back to the top report) so a selection exists during
-    // SSR, not just after mount. That matters twice over: these pages are what search engines
-    // and the .md agent mirror actually read, and both take the built HTML.
+    // Seeded before mount so a selection exists in the built HTML that search and agents read.
     const [selectedSlug, setSelectedSlug] = useState<string | null>(
         initialSlug ?? (templates.length > 0 ? slugOf(templates[0].url) : null)
     )
 
-    // Grouped by subject, always: a product view spans several, and a flat alphabetical sort at two
-    // dozen templates is a wall of P1s with nothing to navigate by.
+    // Always grouped by subject: a flat list at two dozen guides has nothing to navigate by.
     const groups = useMemo(() => {
         const needle = query.trim().toLowerCase()
         const visible = templates
@@ -252,20 +233,13 @@ export default function SelfDrivingInbox({
         return templates.some((t) => slugOf(t.url) === fromPath) ? fromPath : initialSlug ?? null
     }, [location.pathname, templates, initialSlug])
 
-    // Below 700px the two panes become one, picked by route: the list on /templates/self-driving,
-    // the template on its own URL. Stacking both buried every template under the list.
+    // Below 700px the two panes become one, picked by route – stacking buried every guide.
     const onTemplateRoute = Boolean(routeSlug)
 
-    /**
-     * Select in place: the window shell keeps its tree mounted, so navigating leaves the pane on
-     * the previous template. Under 700px the pane is hidden, so let the row behave as a link.
-     */
+    /** The window shell stays mounted, so navigating would leave the pane on the previous guide. */
     const canSelectInPlace = interactive && detailPaneVisible
 
-    /**
-     * `?report=` beats the route's own template, which beats the first report so the pane is
-     * never empty. Without that order a per-template route snapped back on every row click.
-     */
+    /** `?report=` beats the route, which beats the first guide, so the pane is never empty. */
     useEffect(() => {
         const params = new URLSearchParams(location.search)
         const requested = params.get('report')
@@ -289,8 +263,7 @@ export default function SelfDrivingInbox({
 
     const select = useCallback(
         (template: InboxTemplate) => {
-            // Keyboard navigation routes through here too, so it has to honour the same rule as
-            // a click – otherwise j/k would silently move a selection nobody can see.
+            // Keyboard nav routes through here too, or j/k would move a selection nobody can see.
             if (!canSelectInPlace) {
                 navigate(template.url)
                 return

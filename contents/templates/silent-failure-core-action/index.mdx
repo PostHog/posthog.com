@@ -1,27 +1,17 @@
 ---
 title: Silent failure in your core action
 subtitle: 'Where does your most important flow fail without telling anyone?'
-thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png
-showTitle: true
 badge: beta
 filters:
   type:
     - self-driving
   maintainer: official
 premise: >-
-  Every product has one action that matters more than the rest: checkout, publish, send, or deploy. When
-  it fails loudly, you hear about it. This scout watches for the failure you never hear about – the one where nobody saw an error or filed a ticket.
-discriminator:
-  writesToInbox: >-
-    Fewer of the people who start your core action are finishing it than usual.
-  writesNothing: >-
-    Fewer people started it too, so the same share still finish. That's just normal traffic.
-  why: >-
-    A drop in finishes might just mean fewer people showed up. A drop in the share can't be
-    explained that way, which is what lets the scout decide on its own.
+  Every product has one action that matters more than the rest: checkout, publish, send, or deploy.
+  When it fails loudly, you hear about it. When it fails quietly, nobody sees an error and nobody
+  files a ticket.
+tldr: >-
+  This scout watches your most important flow and catches the failures nobody reports.
 watches:
   - name: Your product events
     detail: How many people start your core action and how many finish, compared with the last two weeks.

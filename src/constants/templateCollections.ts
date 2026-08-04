@@ -1,10 +1,4 @@
-/**
- * The collections `/templates` is a home for.
- *
- * Data only – no React – because `gatsby/createPages.ts` imports this at build time to create
- * each collection's route. Components live in `components/TemplateCollection/layouts.tsx`; keep
- * them out of here or the Node build pulls in browser modules and fails confusingly.
- */
+/** Data only, no React: `gatsby/createPages.ts` imports this in Node at build time. */
 
 export interface TemplateCollection {
     /** URL segment: /templates/<id>. Must not collide with an existing template slug. */

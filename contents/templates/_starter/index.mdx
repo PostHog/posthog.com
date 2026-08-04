@@ -13,14 +13,13 @@
 # Full authoring guide: src/components/SelfDrivingInbox/README.md
 
 # --- Card metadata: how this looks in the /templates gallery -------------------------
+#
+# No thumbnail or featuredImage: field guides don't use them, and the gallery skips the
+# image slot for this type rather than showing an empty square.
 
 title: Starter scout template
-subtitle: 'A one-line version of the question, phrased as a question.'
-thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png
-showTitle: true
+# Not shown on the page – it's the meta description for search and link previews.
+subtitle: 'One line on what this guide is, for search results.'
 badge: beta
 
 # `type: self-driving` is what routes this to the inbox UI. Without it you get a
@@ -33,25 +32,15 @@ filters:
 # --- The teaching half --------------------------------------------------------------
 
 # Two or three sentences on why this is worth watching. Write for someone who has
-# never heard of scouts. This is the most-read prose on the page – make it earn it.
+# never heard of scouts. Set up the problem only – the scout's own line comes next.
 premise: >-
-  What goes wrong, why nobody notices it today, and what this scout does about it.
+  What goes wrong, and why nobody notices it today.
 
-# NOT RENDERED on the guide page – that section was cut, because how a scout decides
-# is docs territory. Still worth writing: it's the thinking that makes SKILL.md good,
-# and it's where this content goes when it moves to /docs/self-driving.
-#
-# Every scheduled run ends one of two ways: a report in the inbox, or nothing at all.
-# The quiet half is harder to write and more valuable. If you can't say what would keep
-# this scout silent, you've described a metric, not a discriminator. "Completions fell"
-# is a metric. "Completions fell *while attempts held steady*" is a discriminator,
-# because it names what it ignores.
-discriminator:
-  writesToInbox: The specific shape in the data that means something is wrong.
-  writesNothing: The lookalike shape that means nothing is wrong – the false positive you're ruling out.
-  why: >-
-    Optional. One or two sentences on the generalizable lesson – the thing a reader can
-    apply to a scout you haven't written. Markdown renders here.
+# The takeaway, on its own line under the premise. Always starts "This scout…" and
+# always says what you get, not what it inspects. If someone reads one sentence on
+# this page, it's this one – so don't bury it as the last clause of `premise`.
+tldr: >-
+  This scout watches <the thing> and <the outcome you get>.
 
 # The signal sources this scout reads. Two or three. Each gets an icon matched by
 # keyword on `name`, so "Error tracking", "Session replay", "Your codebase" and
@@ -81,9 +70,11 @@ requires:
 # same product will show up twice under two spellings.
 category: Product analytics
 
-# Rendered as "This one runs <schedule> by default" in the schedule section. Display
-# only – the app owns the real schedule. Fleet default is Daily; if you choose something
-# else, say why in SKILL.md.
+# Rendered as the selected value in the schedule section. Display only – the app owns the
+# real schedule. Must be one the app actually offers, from RUN_INTERVAL_OPTIONS in
+# posthog/posthog: Every 30 minutes, Hourly, Every 2 hours, Every 3 hours, Every 6 hours,
+# Every 12 hours, Daily, or Daily at a set time. There is no weekly. Fleet default is
+# Daily; if you choose something else, say why in SKILL.md.
 schedule: Daily
 
 # --- The sample report ---------------------------------------------------------------

@@ -136,8 +136,7 @@ function TemplateCard({ template }: { template: UnifiedTemplate }) {
             className="group flex flex-col rounded-lg border border-primary bg-primary p-4 hover:border-yellow transition-colors no-underline"
         >
             <div className="flex items-start justify-between gap-2 mb-3">
-                {/* Self-driving templates share one generic thumbnail, so it carries no
-                    information – the other types keep their own. */}
+                {/* Field guides declare no thumbnail; the placeholder square would say nothing. */}
                 {template.type !== 'self-driving' &&
                     (template.image_url ? (
                         <img src={template.image_url} alt="" className="w-10 h-10 rounded object-cover shrink-0" />

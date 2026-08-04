@@ -1,26 +1,17 @@
 ---
 title: Feature flag debt
 subtitle: 'Which flags are still evaluating for decisions you already made?'
-thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png
-showTitle: true
 badge: beta
 filters:
   type:
     - self-driving
   maintainer: official
 premise: >-
-  Every flag is a decision you already made. The rollout finished, the losing branch deleted, and the flag stayed. It's still evaluating, branching, and something a new engineer has to reason about. This scout finds the flags you forgot, works out which ones are safe to remove, and opens the pull request that removes the check.
-discriminator:
-  writesToInbox: >-
-    The flag still evaluates, but the decision behind it is over – it has sat at 100% or 0% for
-    months with no edits, or its key no longer appears in any repo you've connected.
-  writesNothing: The flag is still mid-rollout with percentages moving, or it was recently edited.
-  why: >-
-    Searching your repo proves a flag key is there. It can't prove nothing calls it – so the scout
-    reports a key it can't find as something to check, not something to delete.
+  Every flag is a decision you already made. The rollout finished, the losing branch deleted, and
+  the flag stayed. It's still evaluating, still branching, and still something a new engineer has
+  to reason about.
+tldr: >-
+  This scout finds the flags you forgot and opens the pull request that takes them out.
 watches:
   - name: Your feature flags
     detail: Which flags still evaluate, how often, at what rollout, and how long they've sat there.
@@ -36,7 +27,7 @@ requires:
       one. A repo the scout can't see looks exactly like code that no longer exists.
     level: required
 category: Feature Flags
-schedule: Weekly
+schedule: Daily
 report:
   title: 3 flags at a terminal rollout for 4+ months, still evaluated
   source: Scout · flag debt

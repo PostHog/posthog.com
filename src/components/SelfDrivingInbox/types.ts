@@ -1,7 +1,4 @@
-/**
- * The self-driving template contract. Authored as structured frontmatter, not MDX body, so the
- * gallery and the template's own page render from one source. See README.md to author one.
- */
+/** The field guide contract: structured frontmatter, so list and page render from one source. */
 
 export interface SelfDrivingReport {
     /** The finding, stated as a headline with its evidence in it. Not a topic – a claim. */
@@ -20,16 +17,6 @@ export interface SelfDrivingReport {
     affected?: string
 }
 
-/**
- * How a scout tells a real finding from noise. Both halves get named because "writes nothing" is
- * the common case, and unexplained silence reads as a broken scout.
- */
-export interface Discriminator {
-    writesToInbox: string
-    writesNothing: string
-    why?: string
-}
-
 /** One evidence source the scout reads. */
 export interface WatchedSource {
     name: string
@@ -43,10 +30,7 @@ export interface Requirement {
     level?: RequirementLevel
 }
 
-/**
- * What gets created in PostHog, and what the `#createScout=` deep link prefills. Sourced from a
- * sibling `SKILL.md`: a scout is a real file in the monorepo, so it's authored as one here too.
- */
+/** What `#createScout=` prefills, sourced from the sibling SKILL.md. */
 export interface ScoutSpec {
     name: string
     description: string
@@ -73,7 +57,8 @@ export interface InboxTemplate {
     templateSubtitle?: string
     report: SelfDrivingReport
     premise?: string
-    discriminator?: Discriminator
+    /** The one-line takeaway, always on its own line under the premise. Starts "This scout…". */
+    tldr?: string
     watches?: WatchedSource[]
     requires?: Requirement[]
     scout?: ScoutSpec

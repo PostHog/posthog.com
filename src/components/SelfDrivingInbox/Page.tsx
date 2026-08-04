@@ -30,10 +30,7 @@ interface SelfDrivingInboxPageProps {
     initialSlug?: string
 }
 
-/**
- * The mailbox list: how the surface holds a couple dozen templates without a redesign.
- * One row per tool, matching templates that are about it or that read it.
- */
+/** One row per tool – how the surface holds a couple dozen guides without a redesign. */
 function ToolRail({ active, onSelect }: { active: InboxFilter; onSelect: (product: InboxFilter) => void }) {
     const templates = useSelfDrivingTemplates()
     const tools = toolsInUse(templates)
@@ -89,8 +86,7 @@ function ToolRail({ active, onSelect }: { active: InboxFilter; onSelect: (produc
 export default function SelfDrivingInboxPage({ initialSlug }: SelfDrivingInboxPageProps): JSX.Element {
     const location = useLocation()
 
-    // State, not the URL: the window shell keeps its tree mounted across route changes, so a
-    // URL-driven filter silently did nothing. Read once on mount so shared links still work.
+    // State, not the URL: the shell stays mounted, so a URL-driven filter did nothing.
     const [activeFilter, setActiveFilter] = useState<InboxFilter>(() =>
         new URLSearchParams(location.search).get(TOOL_PARAM)
     )
@@ -100,17 +96,11 @@ export default function SelfDrivingInboxPage({ initialSlug }: SelfDrivingInboxPa
             template="generic"
             slug="templates/self-driving"
             title="What self-driving watches for"
-            // No address bar: its category select only knows top-level site destinations
-            // (products, pricing, docs…). There is no "templates" value, so it renders
-            // permanently empty, and a whole-site jump list is noise inside a focused surface.
+            // No address bar: its category select has no templates value, so it renders empty.
             showAddressBar={false}
-            // Back/forward only. Explorer's default header also renders a search button, which
-            // (a) isn't wired to this list so it searches nothing useful, and (b) overlaps the
-            // window's own controls in the top-right corner.
+            // Back/forward only: Explorer's search button isn't wired here and overlaps the chrome.
             headerBarOptions={['showBack', 'showForward']}
-            // fullScreen hands us the raw main element: no ambient ScrollArea and no prose
-            // wrapper (which would underline every row). Each pane owns its scroll and padding,
-            // per the house pattern in src/pages/art-library.tsx.
+            // fullScreen drops the prose wrapper and ambient scroll – each pane owns its own.
             fullScreen
             leftSidebarContent={
                 <div className="space-y-4">

@@ -130,10 +130,7 @@ export default function Template({ data }) {
         Section,
     }
 
-    // Self-driving templates have no page of their own: the inbox is the entire surface, so
-    // /templates/<slug> renders the same UI with that report pre-selected. Everything it needs
-    // lives in frontmatter, which is why these MDX bodies are empty.
-    // See components/SelfDrivingInbox/README.md.
+    // Field guides have no page of their own: /templates/<slug> is the inbox, pre-selected.
     if (templateType === 'self-driving') {
         const templateSlug = slug.replace(/^\/templates\//, '').replace(/\/$/, '')
         return (
@@ -217,7 +214,6 @@ export const query = graphql`
                 }
                 report {
                     title
-                    priority
                     source
                     receivedAgo
                     body

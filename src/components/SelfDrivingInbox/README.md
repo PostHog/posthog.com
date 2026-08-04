@@ -84,13 +84,17 @@ renders this block for you. Two copies drift.
 | `affected` | no | Impact, e.g. `47 users affected`. |
 | `receivedAgo` | no | A static string like `2h`. See "no fake liveness" below. |
 
-### The discriminator — the field that matters most
+### The discriminator — the part of `SKILL.md` that matters most
 
-```yaml
-discriminator:
-  writesToInbox: Cost per conversation breaks from its recent norm while volume holds steady.
-  writesNothing: Usage went up too, so cost per conversation is flat – that's growth.
-  why: The ratio is the signal; the total is just the weather.
+Not frontmatter. It lives in the scout file, under `## Discriminator`, and the guide page shows it
+as part of "The scout itself":
+
+```markdown
+## Discriminator
+
+Emit a report when cost per conversation rises above its trailing 14-day norm **while conversation
+volume stays within its own normal range**. Write nothing when total cost rose but cost per
+conversation is flat – that is usage growth.
 ```
 
 A scout runs on a schedule, and **every run ends one of two ways: it writes a report to the inbox,
@@ -102,12 +106,9 @@ Two things follow, and both are easy to get wrong:
   queried your data, it cost a full agent run, and it decided you didn't need to hear about it. A
   scout that reports every day is one you'll mute inside a week.
 - **The quiet half is the harder half to write, and the more valuable one.** If you can't say
-  crisply what would make this scout stay silent, the template isn't ready — you've described a
+  crisply what would make this scout stay silent, the guide isn't ready — you've described a
   metric, not a discriminator. "Completions fell" is a metric. "Completions fell *while attempts
   held steady*" is a discriminator, because it names what it ignores.
-
-The field names mirror the app's own toggle for this behavior, labeled **"Write findings to the
-inbox"**, so someone who turns the scout on meets the same words twice.
 
 ### Writing a report that earns trust
 

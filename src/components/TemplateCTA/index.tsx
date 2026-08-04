@@ -8,13 +8,7 @@ interface SecondaryCta {
     label: string
 }
 
-/**
- * A template's call to action, built from frontmatter.
- *
- * Replaces `components/TemplateCTAs`, which returned null unless both buttons were present – so a
- * template with one honest CTA rendered none. Here the primary stands alone, and an unbuildable
- * primary drops to the secondary rather than taking the whole block down with it.
- */
+/** The call to action, from frontmatter. Unlike `TemplateCTAs`, the primary stands alone. */
 export default function TemplateCTA({
     cta,
     secondary,

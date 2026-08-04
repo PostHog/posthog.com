@@ -11,21 +11,14 @@ import Term from './terms'
 import { productSource } from './sources'
 import { InboxTemplate, ScoutSpec } from './types'
 
-/**
- * The scout's SKILL.md, clipped until you ask for the rest.
- *
- * Clipped with `max-height`, not with CodeBlock's own `focusOnLines`: that drops the hidden lines
- * from the DOM, and the full file has to stay in the built HTML for the .md agent mirror. Styled
- * to match CodeBlock's "Show full example" affordance anyway. See README.md.
- */
+/** Clipped with `max-height`, not `focusOnLines`, which drops lines the .md mirror needs. */
 function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element {
     const [expanded, setExpanded] = useState(false)
     const code = (scout.raw ?? '').trim()
 
     return (
         <div>
-            {/* CodeBlock's `whitespace-pre` scrolls long lines off a pane this narrow, and this is
-                the one block we tell people to read. Wrap locally, not globally. */}
+            {/* Wrap locally: `whitespace-pre` scrolls long lines off a pane this narrow. */}
             <div
                 className={`relative overflow-hidden [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words ${
                     expanded ? '' : 'max-h-[15rem]'
@@ -47,8 +40,7 @@ function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element {
                     />
                 )}
             </div>
-            {/* Plus/minus, the same affordance RadixUI/Accordion uses for expand and collapse –
-                the label alone didn't read as a control. */}
+            {/* Plus/minus, as RadixUI/Accordion does – the label alone didn't read as a control. */}
             <button
                 type="button"
                 onClick={() => setExpanded(!expanded)}
@@ -69,10 +61,7 @@ interface TemplateDetailProps {
     template: InboxTemplate
 }
 
-/**
- * One numbered section – a lighter `components/Docs/Steps.tsx`, whose docs-scale treatment would
- * overpower a reading pane. Container query, not Steps' `lg:` media query: this pane resizes.
- */
+/** A lighter `Docs/Steps.tsx`. Container query, not media: this pane resizes. */
 function Section({
     number,
     title,
@@ -86,8 +75,7 @@ function Section({
 }) {
     return (
         <section className="relative pb-8 last:pb-0 @[300px]:pl-8">
-            {/* The connector stops at the last marker, so the line reads as joining sections
-                rather than trailing off into the call to action. */}
+            {/* Stops at the last marker, so the line joins sections instead of trailing off. */}
             {!isLast && (
                 <span
                     aria-hidden="true"
@@ -106,15 +94,11 @@ function Section({
     )
 }
 
-/**
- * One scout template, in one pane. The order teaches before it asks, so the offer to add it
- * comes last. Vocabulary is explained by `<Term>` hover cards, not by any template's own copy.
- */
+/** One guide, in one pane. The order teaches before it asks, so the offer comes last. */
 export default function TemplateDetail({ template }: TemplateDetailProps): JSX.Element {
-    const { premise, watches, requires, scout, report, templateTitle } = template
+    const { premise, tldr, watches, requires, scout, report, templateTitle } = template
 
-    // Built as a list rather than inline conditionals so the numbering stays correct when a
-    // template omits an optional section – a gap in the sequence reads as a missing step.
+    // A list, not inline conditionals: an omitted section would leave a gap in the numbering.
     const sections: { title: string; content: JSX.Element }[] = []
 
     sections.push({
@@ -151,8 +135,7 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
         ),
     })
 
-    // The sources it reads live here rather than in a section of their own: they describe the
-    // scout, and as a separate step they read as a third thing to learn before the payoff.
+    // Sources live here, not in their own section: they describe the scout rather than a step.
     if (scout?.raw || (watches && watches.length > 0)) {
         sections.push({
             title: 'The scout itself',
@@ -168,8 +151,7 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
                                 It reads more than one <Term name="signal source" />, so the report can name a likely
                                 cause instead of a number that moved.
                             </p>
-                            {/* House row pattern from src/pages/self-driving. One column – an odd
-                                count left an empty grid cell that read as something missing. */}
+                            {/* One column: an odd count left an empty grid cell reading as missing. */}
                             <ul className="mb-4 mt-0 list-none space-y-3 p-0">
                                 {watches.map((source) => {
                                     const { Icon, token, docs } = productSource(source.name)
@@ -180,9 +162,7 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
                                                 aria-hidden="true"
                                             />
                                             <div>
-                                                {/* Underlined explicitly: `fullScreen` drops
-                                                    Explorer's prose wrapper, so nothing styles
-                                                    links here. */}
+                                                {/* Explicit underline: `fullScreen` drops the prose wrapper. */}
                                                 <p className="m-0 text-[15px] font-bold text-primary">
                                                     {docs ? (
                                                         <Link
@@ -216,20 +196,11 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
         title: 'The schedule it runs on',
         content: (
             <>
-                <p className="mb-2 text-[15px] text-secondary">
-                    {scout?.schedule ? (
-                        <>
-                            This one runs <strong>{scout.schedule.toLowerCase()}</strong> by default.
-                        </>
-                    ) : (
-                        <>You pick how often it runs.</>
-                    )}{' '}
-                    Hourly, daily, weekly, at a set time, or only when you run it by hand.
-                </p>
-                {/* An empty inbox reads as broken until someone is told quiet is normal. The
-                    mechanics of how it decides are docs territory – link, don't explain. */}
+                {/* Range is the app's real one from RUN_INTERVAL_OPTIONS – no weekly, no manual run. */}
                 <p className="m-0 text-[15px] text-secondary">
-                    Most runs find nothing and write nothing. That's the scout working, not a scout that's broken –{' '}
+                    Runs <strong>{(scout?.schedule || 'Daily').toLowerCase()}</strong> by default, and you can change it
+                    to anything from every 30 minutes to once a day, or a set time each day. It only writes when
+                    something is wrong, so most days you won't hear from it –{' '}
                     <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
                         how scouts decide
                     </Link>
@@ -248,12 +219,13 @@ export default function TemplateDetail({ template }: TemplateDetailProps): JSX.E
         <article className="@container mx-auto max-w-2xl p-6">
             <header className="mb-8">
                 <p className="mb-1 text-xs font-bold uppercase tracking-wide text-secondary">The loop</p>
-                {/* The job, named – not the question it answers. A question-shaped headline read
-                    as open-ended and contemplative where this wants to be boring and active. */}
+                {/* The job, named – a question-shaped headline read as open-ended, not active. */}
                 <h2 className="mt-0 mb-2 text-xl font-bold leading-tight text-primary @[560px]:text-2xl">
                     {templateTitle}
                 </h2>
-                {premise && <p className="m-0 text-[15px] text-secondary">{premise}</p>}
+                {premise && <p className="mb-3 text-[15px] text-secondary">{premise}</p>}
+                {/* Its own line, never the premise's last sentence: it's the one-thing takeaway. */}
+                {tldr && <p className="m-0 text-[15px] text-secondary">{tldr}</p>}
             </header>
 
             {sections.map((section, index) => (

@@ -3,13 +3,7 @@ import React from 'react'
 
 import { TEMPLATE_COLLECTIONS, TemplateCollection } from '../../constants/templateCollections'
 
-/**
- * The collections that lead `/templates`.
- *
- * The hub's job is to answer "what kind of thing am I here for" before it shows a card wall.
- * Counts come from the templates actually present, so a collection that loses its content says
- * so rather than advertising an empty room.
- */
+/** The collections that lead `/templates`. Counts are live, so none advertises an empty room. */
 
 interface CollectionCardsProps {
     /** How many templates each collection holds, keyed by collection id. */
@@ -38,8 +32,7 @@ function CollectionCard({
         </>
     )
 
-    // Only self-driving has a route of its own today; the rest filter the library in place until
-    // their collection pages land.
+    // Only self-driving has its own route today; the rest filter the library in place.
     const className = `block rounded border-b-2 border-${collection.token} bg-primary p-4 text-left transition-colors hover:bg-accent`
 
     if (collection.hasStaticPage) {

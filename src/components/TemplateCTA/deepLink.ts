@@ -1,9 +1,4 @@
-/**
- * Builds the one-touch app link a template declares in frontmatter.
- *
- * Every builder returns null rather than a link the app would ignore, so a template with a
- * malformed CTA renders nothing instead of a dead button. See README.md for the authoring shape.
- */
+/** The one-touch app link. Builders return null rather than a link the app would ignore. */
 
 const APP = 'https://app.posthog.com'
 
@@ -24,10 +19,7 @@ export interface CtaSpec {
 export interface ResolvedCta {
     href: string
     label: string
-    /**
-     * Whether the link lands on the thing itself. False for kinds that only run a search, which
-     * changes the wording: promising enablement the app doesn't deliver costs more than it gains.
-     */
+    /** Lands on the thing itself, vs only runs a search – drives the wording. */
     precise: boolean
 }
 
@@ -35,9 +27,7 @@ type Builder = (value: string) => string | null
 
 const search = (path: string, param: string, hash: string): Builder => {
     return (value) =>
-        value.length >= MIN_SEARCH_LENGTH
-            ? `${APP}${path}?${param}=${encodeURIComponent(value)}#${hash}=modal`
-            : null
+        value.length >= MIN_SEARCH_LENGTH ? `${APP}${path}?${param}=${encodeURIComponent(value)}#${hash}=modal` : null
 }
 
 const BUILDERS: Record<CtaKind, Builder> = {
@@ -71,17 +61,13 @@ const DEFAULT_LABELS: Record<CtaKind, string> = {
     url: 'Open in PostHog',
 }
 
-/**
- * Null means render no button at all. Three ways to get there: no kind, a builder that refused
- * its value, and no fallback to fall back to.
- */
+/** Null renders no button: no kind, a builder that refused, or no fallback left. */
 export function buildCta(spec?: CtaSpec | null): ResolvedCta | null {
     if (!spec?.kind) {
         return null
     }
 
-    // An unrecognised kind – a typo, or a kind added after this deploy – takes the fallback below
-    // rather than dropping the button, same as a builder that refused its value.
+    // An unrecognised kind takes the fallback below, same as a builder that refused.
     const build = BUILDERS[spec.kind]
     const href = build && spec.value ? build(spec.value) : null
     if (href) {

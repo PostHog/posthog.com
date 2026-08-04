@@ -82,11 +82,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       actionNote: String
       affected: String
     }
-    type FrontmatterDiscriminator {
-      writesToInbox: String
-      writesNothing: String
-      why: String
-    }
     type FrontmatterWatches {
       name: String
       detail: String
@@ -109,7 +104,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       cta: FrontmatterCTA
       report: FrontmatterReport
       premise: String
-      discriminator: FrontmatterDiscriminator
+      tldr: String
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
       # The product surface a scout template belongs to, e.g. "Error tracking". Drives the

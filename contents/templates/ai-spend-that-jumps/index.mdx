@@ -1,11 +1,6 @@
 ---
 title: AI spend that jumps overnight
 subtitle: 'Did your AI feature get more expensive without more usage?'
-thumbnail: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/scouts_8fe0af6de1.png
-featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/4_merge_ffb549df4a.png
-showTitle: true
 badge: beta
 filters:
   type:
@@ -14,13 +9,10 @@ filters:
 premise: >-
   An LLM bill moves for one of two reasons: more conversations, or more cost per conversation. The
   first is growth. The second is a regression, and it compounds – a prompt grew, a model changed, a
-  cache prefix stopped hitting, or a retry looped. This scout tells you which one you're looking at.
-discriminator:
-  writesToInbox: Cost per conversation breaks from its recent norm while conversation volume holds steady.
-  writesNothing: Usage went up too, so cost per conversation is flat. That's growth, not a regression.
-  why: >-
-    A bigger bill might just mean more customers. A bigger bill per conversation can't be
-    explained that way, which is what lets the scout decide on its own.
+  cache prefix stopped hitting, or a retry looped.
+tldr: >-
+  This scout watches your LLM traces and makes your AI features and agents faster, cheaper, and
+  more reliable.
 watches:
   - name: AI Observability
     detail: Cost, tokens, model, cache reads, and error flags on every generation – enough to spot the change and attribute it.
