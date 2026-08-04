@@ -46,7 +46,7 @@ interface UnifiedTemplate {
     id: string
     name: string
     description: string
-    type: 'dashboard' | 'survey' | 'workflow' | 'self-driving'
+    type: 'dashboard' | 'survey' | 'workflow'
     tags: string[]
     image_url?: string
     url: string
@@ -57,7 +57,6 @@ interface UnifiedTemplate {
 const templateTags: Record<string, string[]> = {
     'AARRR pirate metrics': ['Analytics', 'Product'],
     'Advertising dashboard': ['Marketing', 'Analytics'],
-    'AI spend that jumps overnight': ['Self-driving', 'AI'],
     'Announce a new feature': ['Marketing', 'Product'],
     'B2B metrics template': ['Analytics', 'Product'],
     'B2C metrics template': ['Analytics', 'Product'],
@@ -65,7 +64,6 @@ const templateTags: Record<string, string[]> = {
     'Customer churn rate (CCR) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer effort score (CES) survey': ['Surveys & Feedback', 'Customer Success'],
     'Customer satisfaction (CSAT) survey': ['Surveys & Feedback', 'Product'],
-    'Feature flag debt': ['Self-driving', 'Engineering'],
     'Growth analytics dashboard': ['Analytics', 'Marketing'],
     'Hubspot starter report template': ['Sales', 'Marketing'],
     'Landing page report': ['Marketing', 'Analytics'],
@@ -79,7 +77,6 @@ const templateTags: Record<string, string[]> = {
     'Product analytics dashboard': ['Analytics', 'Product'],
     'Product health metrics': ['Product', 'Analytics'],
     'Product-market fit (PMF) survey': ['Surveys & Feedback', 'Product'],
-    'Silent failure in your core action': ['Self-driving', 'Engineering'],
     'Real time analytics dashboard': ['Analytics', 'Ops'],
     'Stripe starter report template': ['Billing & Revenue', 'Sales'],
     'Trial started → upgrade nudge': ['Sales', 'Billing & Revenue'],
@@ -103,7 +100,6 @@ const categories = [
     'Billing & Revenue',
     'Surveys & Feedback',
     'AI',
-    'Self-driving',
 ]
 
 const categoryColors: Record<string, string> = {
@@ -118,7 +114,6 @@ const categoryColors: Record<string, string> = {
     'Billing & Revenue': 'bg-orange/15 text-orange',
     'Surveys & Feedback': 'bg-green/15 text-green',
     AI: 'bg-purple/15 text-purple',
-    'Self-driving': 'bg-red/15 text-red',
     Other: 'bg-light-yellow/15 text-light-yellow',
 }
 
@@ -136,13 +131,11 @@ function TemplateCard({ template }: { template: UnifiedTemplate }) {
             className="group flex flex-col rounded-lg border border-primary bg-primary p-4 hover:border-yellow transition-colors no-underline"
         >
             <div className="flex items-start justify-between gap-2 mb-3">
-                {/* Field guides declare no thumbnail; the placeholder square would say nothing. */}
-                {template.type !== 'self-driving' &&
-                    (template.image_url ? (
-                        <img src={template.image_url} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
-                    ) : (
-                        <div className="w-10 h-10 rounded bg-accent shrink-0" />
-                    ))}
+                {template.image_url ? (
+                    <img src={template.image_url} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
+                ) : (
+                    <div className="w-10 h-10 rounded bg-accent shrink-0" />
+                )}
                 <span
                     className={`text-xs font-semibold px-2 py-0.5 rounded-full shrink-0 ${
                         categoryColors[primaryTag] || categoryColors.Other
@@ -210,9 +203,7 @@ export default function TemplatesLibrary(): JSX.Element {
     `)
 
     const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || [])
-        // Not every markdown file under contents/templates is a template: a self-driving one
-        // authors its scout as a sibling SKILL.md, and `_`-prefixed directories are starters to
-        // copy from. Neither has a page, so neither belongs in the gallery.
+        // `_`-prefixed directories are starters to copy from, and have no page.
         .filter((t: MdxTemplate) => !t.fields.slug.endsWith('/SKILL') && !t.fields.slug.startsWith('/templates/_'))
         .map((t: MdxTemplate) => {
             const types = t.frontmatter.filters?.type || []
@@ -390,8 +381,6 @@ export default function TemplatesLibrary(): JSX.Element {
                 </div>
             </div>
 
-            {/* Self-driving templates read better as an inbox than as cards, since the thing they
-                produce is a report. Point at that experience rather than duplicating it here. */}
             {/* Card grid */}
             <div className="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 gap-4">
                 {sortedTemplates.map((template) => (

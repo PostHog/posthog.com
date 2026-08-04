@@ -21,9 +21,6 @@ const A = (props) => <Link {...props} />
 
 /** Until every template declares a `cta`, keep deriving one from its type. */
 function legacyCta(templateType?: string, title?: string): CtaSpec | null {
-    if (templateType === 'self-driving') {
-        return { kind: 'url', value: 'https://app.posthog.com/inbox/config', label: 'Open your scout fleet' }
-    }
     if (templateType === 'survey') {
         // No `?template=` here: the app matches an exact enum value, which only the frontmatter knows.
         return { kind: 'url', value: 'https://app.posthog.com/surveys/guided/new', label: 'Create a survey' }
@@ -32,9 +29,6 @@ function legacyCta(templateType?: string, title?: string): CtaSpec | null {
 }
 
 function legacySecondary(templateType?: string): { href: string; label: string } | null {
-    if (templateType === 'self-driving') {
-        return { href: '/docs/self-driving/setup', label: 'Set up self-driving' }
-    }
     if (templateType === 'survey') {
         return { href: '/docs/surveys', label: 'Read the surveys docs' }
     }
@@ -61,9 +55,6 @@ export default function Template({ data }) {
     const surveyTemplates = allTemplates.filter((t) =>
         t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'survey')
     )
-    const selfDrivingTemplates = allTemplates.filter((t) =>
-        t.frontmatter.filters?.type?.some((type) => type.toLowerCase() === 'self-driving')
-    )
     const workflows = workflowTemplates?.nodes || []
 
     const templatesMenu = [
@@ -83,17 +74,6 @@ export default function Template({ data }) {
                   {
                       name: 'Surveys',
                       children: surveyTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
-                          name: title,
-                          url: slug,
-                      })),
-                  },
-              ]
-            : []),
-        ...(selfDrivingTemplates.length > 0
-            ? [
-                  {
-                      name: 'Self-driving',
-                      children: selfDrivingTemplates.map(({ frontmatter: { title }, fields: { slug } }) => ({
                           name: title,
                           url: slug,
                       })),

@@ -43,7 +43,7 @@ export default function FieldGuidesPage(): JSX.Element {
         <>
             <SEO
                 title="Field guides - PostHog"
-                description="One PostHog use case per guide. See what it looks like in a real product, then set it up in one click."
+                description="A field guide tells you what you're looking at in the wild. Ours tell you what you're looking at in your product, and then help you fix it."
                 image="/images/og/default.png"
             />
             {/* showTitle false: the page owns its heading, and Explorer's would be a second h1. */}
@@ -53,17 +53,20 @@ export default function FieldGuidesPage(): JSX.Element {
                 title="Field guides"
                 showTitle={false}
                 showAddressBar={false}
+                // Explorer's <main> hardcodes bg-primary, so the ground has to be recoloured from
+                // here – a child can't fill a parent whose height is content-driven.
+                className="[&_main]:bg-accent dark:[&_main]:bg-accent-dark"
             >
                 {/* not-prose: Explorer wraps children in prose, which underlines every cover link. */}
-                <div className="@container not-prose -m-4 min-h-full bg-accent p-6 @xl:p-10 dark:bg-accent-dark">
+                <div className="@container not-prose p-2 @xl:p-6">
                     <div className="mx-auto max-w-5xl">
                         <header className="mb-10 max-w-2xl">
                             <h1 className="m-0 text-4xl font-bold leading-tight text-primary @xl:text-5xl">
                                 Field guides
                             </h1>
                             <p className="mt-3 mb-0 text-base leading-relaxed text-secondary @xl:text-lg">
-                                One PostHog use case per guide. See what it looks like in a real product, then set it up
-                                in one click.
+                                A field guide tells you what you're looking at in the wild. Ours tell you what you're
+                                looking at in your product, and then help you fix it.
                             </p>
                         </header>
 
@@ -76,44 +79,6 @@ export default function FieldGuidesPage(): JSX.Element {
                                 </li>
                             ))}
                         </ul>
-
-                        {/* The shelf is thin, so say what a volume holds rather than leave the
-                            ground empty under it. */}
-                        <section className="mt-12 max-w-2xl border-t border-primary pt-6">
-                            <h2 className="m-0 mb-3 font-squeak text-sm uppercase tracking-wider text-secondary">
-                                What's in a volume
-                            </h2>
-                            <dl className="m-0 grid gap-x-8 gap-y-4 @xl:grid-cols-2">
-                                <div>
-                                    <dt className="m-0 text-[15px] font-bold text-primary">One guide per job</dt>
-                                    <dd className="m-0 mt-1 text-[15px] leading-snug text-secondary">
-                                        One thing worth catching, shown as the report you'd get when it happens.
-                                    </dd>
-                                </div>
-                                <div>
-                                    <dt className="m-0 text-[15px] font-bold text-primary">
-                                        A real example, not a sketch
-                                    </dt>
-                                    <dd className="m-0 mt-1 text-[15px] leading-snug text-secondary">
-                                        Real numbers and real event names, from a product shaped like yours.
-                                    </dd>
-                                </div>
-                                <div>
-                                    <dt className="m-0 text-[15px] font-bold text-primary">One click at the end</dt>
-                                    <dd className="m-0 mt-1 text-[15px] leading-snug text-secondary">
-                                        A scout, a query, a workflow – whatever the job needs, already written.
-                                    </dd>
-                                </div>
-                                <div>
-                                    <dt className="m-0 text-[15px] font-bold text-primary">
-                                        Written by whoever owns it
-                                    </dt>
-                                    <dd className="m-0 mt-1 text-[15px] leading-snug text-secondary">
-                                        Each volume comes from the team that knows the subject, not from a docs queue.
-                                    </dd>
-                                </div>
-                            </dl>
-                        </section>
                     </div>
                 </div>
             </Explorer>

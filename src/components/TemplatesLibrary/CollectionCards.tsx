@@ -32,7 +32,7 @@ function CollectionCard({
         </>
     )
 
-    // Only self-driving has its own route today; the rest filter the library in place.
+    // No collection has its own route yet; each one filters the library in place.
     const className = `block rounded border-b-2 border-${collection.token} bg-primary p-4 text-left transition-colors hover:bg-accent`
 
     if (collection.hasStaticPage) {
