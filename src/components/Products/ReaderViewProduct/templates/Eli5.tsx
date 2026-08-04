@@ -2,6 +2,7 @@ import React from 'react'
 import { SectionComponentProps } from '../types'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { AnchorIcon } from 'components/MdxAnchorHeaders/AnchorIcon'
 
 const Eli5 = ({ id, productData }: SectionComponentProps) => {
     const eli5 = productData?.overview?.eli5
@@ -17,7 +18,16 @@ const Eli5 = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-3">What does it do?</h2>
+            <h2 className="mb-3 relative inline-flex items-center group">
+                <a
+                    href={`#${id}`}
+                    aria-label="Anchor link to this section"
+                    className="absolute -left-5 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                    <AnchorIcon />
+                </a>
+                What does it do?
+            </h2>
             {(HogComponent || hogSrc) && (
                 <div
                     className={`float-right ml-4 @2xl/reader-content:ml-8 @5xl/reader-content:-mt-8 max-w-full ${hogSizeClasses}`}

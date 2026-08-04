@@ -4,6 +4,7 @@ import { SectionComponentProps } from '../types'
 import Glow from 'components/Glow'
 import { CTAs } from 'components/CTAs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { AnchorIcon } from 'components/MdxAnchorHeaders/AnchorIcon'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}
@@ -65,7 +66,16 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         )}
                     </div>
                     <div>
-                        <h2 className="text-4xl font-bold leading-tight">{overview?.title || name}</h2>
+                        <h2 className="text-4xl font-bold leading-tight relative inline-flex items-center group">
+                            <a
+                                href={`#${id}`}
+                                aria-label="Anchor link to this section"
+                                className="absolute -left-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                                <AnchorIcon />
+                            </a>
+                            {overview?.title || name}
+                        </h2>
                         <p className="leading-relaxed">{overview?.description}</p>
                     </div>
                     <div>
