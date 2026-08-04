@@ -49,9 +49,6 @@ export type QuestionData = {
     activeAt: string
     pinnedTopics: StrapiData<TopicData[]>
     slugs: { is: number; slug: string }[]
-    escalated: boolean
-    zendeskTicketID: number
-    autoLinkedToZendesk: boolean
 }
 
 export type AvatarData = {
