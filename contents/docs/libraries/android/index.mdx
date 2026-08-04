@@ -565,7 +565,7 @@ The `$push_notification_opened` event includes `$notification_title` and `$notif
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
-Your **backend** mints that token. The SDK never signs one itself. Sign an HS256 JWT with your project's **Feature flags secure API key** (Settings → Feature flags), with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. Then supply it through `pushIdentityProvider`:
+Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control. Then supply the token through `pushIdentityProvider`:
 
 ```kotlin
 config.pushIdentityProvider = { distinctId, appId, completion ->
@@ -576,7 +576,8 @@ config.pushIdentityProvider = { distinctId, appId, completion ->
 
 Notes:
 
-- Sign with the **Feature flags secure API key** (Settings → Feature flags) specifically, not a scoped Project secret API key. Registration verifies the token against that key only, so a token signed with any other key is rejected with a 401.
+- Registration verifies the token against the public key you registered, so a token signed with any other private key is rejected with a 401.
+- If you leave the **Public key** field blank, registration instead verifies the token against your project's Feature flags secure API key (Settings → Feature flags) using HS256, a shared secret you sign with directly. The public key flow is preferred because the signing key stays on your backend.
 - The SDK calls your provider when it needs a token and caches the result in memory per `(distinctId, appId)`, re-requesting on identity change and when a request is rejected. Always call `completion` exactly once.
 - If your provider doesn't respond in time, the SDK falls back to sending without a token. On a channel set to **Required** that request is rejected, so make sure your provider reliably returns a token before switching the channel to Required.
 
