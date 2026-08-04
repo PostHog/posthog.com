@@ -143,14 +143,21 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
     return (
         <div className={`not-prose flex justify-end ${className}`}>
             <div className={`flex items-center gap-px ${exists === true ? '' : 'invisible'}`}>
+                {/* `iconClassName` rather than the button's own className: OSButton's base classes
+                    already set `text-primary` on the button, and two competing color utilities on one
+                    element resolve by stylesheet order, not by which is written last. Setting the
+                    color on the icon wrapper keeps both icons matched to the secondary label. */}
                 <OSButton
                     size="md"
                     icon={copied ? <IconCheck className="text-green" /> : <IconCopy />}
+                    iconClassName="text-secondary"
                     onClick={handleCopyMarkdown}
                     aria-label="Copy this page as Markdown"
                     tooltip="Copy this page as Markdown"
                 >
-                    <span className="hidden text-secondary  @sm/reader-content:inline">{copied ? 'Copied' : 'Copy page'}</span>
+                    <span className="hidden text-secondary  @sm/reader-content:inline">
+                        {copied ? 'Copied' : 'Copy page'}
+                    </span>
                 </OSButton>
 
                 <Popover
@@ -160,7 +167,12 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
                     onOpenChange={setPopoverOpen}
                     trigger={
                         <span>
-                            <OSButton size="md" aria-label="More Markdown actions" icon={<IconChevronDown />} />
+                            <OSButton
+                                size="md"
+                                aria-label="More Markdown actions"
+                                icon={<IconChevronDown />}
+                                iconClassName="text-secondary"
+                            />
                         </span>
                     }
                 >
