@@ -94,7 +94,16 @@ The `$push_notification_opened` event includes `$notification_title`, `$notifica
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
 
-Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id`, `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control. Then supply the token through `pushIdentityProvider`:
+Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id` (your Firebase project ID or APNs bundle ID), `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control.
+
+Generate the key pair once with any standard tool, for example openssl:
+
+```bash
+openssl ecparam -name prime256v1 -genkey -noout -out push-identity-private.pem   # keep this on your backend
+openssl ec -in push-identity-private.pem -pubout -out push-identity-public.pem   # paste this into the Public key field
+```
+
+Then supply the token through `pushIdentityProvider`:
 
 ```swift
 config.pushIdentityProvider = { distinctId, appId, completion in
