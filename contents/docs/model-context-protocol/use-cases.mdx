@@ -116,6 +116,27 @@ Spin up flags, multivariate tests, and full A/B experiments without leaving your
   outcome="Creates the feature and auto-links a dark-mode feature flag."
 />
 
+### Manage change request approvals
+
+Review and act on pending [approval requests](/docs/settings/approvals) without leaving your editor. Available to organizations with the approvals entitlement.
+
+<PromptExample
+  prompt="What change requests are waiting for my approval?"
+  outcome="Lists pending requests where you're an eligible approver who hasn't voted yet."
+/>
+<PromptExample
+  prompt="Show me the details of change request #42."
+  outcome="Returns the full intent, policy snapshot, and current approval status for the request."
+/>
+<PromptExample
+  prompt="Approve change request #42."
+  outcome="Casts your approval vote after you type 'confirm'. If quorum is reached, the change is applied immediately."
+/>
+<PromptExample
+  prompt="Reject change request #15 because the rollout is too aggressive for production."
+  outcome="Records your rejection with the reason and notifies the requester."
+/>
+
 ### Run SQL and HogQL queries
 
 Drop into raw queries when you need precision. See the [SQL guide](/docs/data-warehouse/surfaces/mcp).
