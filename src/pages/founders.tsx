@@ -19,16 +19,16 @@ const intro = (
     </>
 )
 
-const productEngineersLink = (
-    <Link to="/product-engineers" className="underline font-medium">
-        Product engineer's hub
+const startupPlanLink = (
+    <Link to="https://posthog.com/startups" className="underline font-medium">
+        startup plan
     </Link>
 )
 
 export const Sidebar = () => {
     return (
         <>
-            <h6 className="mb-2">About Founder's hub</h6>
+            <h6 className="mb-2">About Founders Hub</h6>
 
             {intro}
 
@@ -47,7 +47,7 @@ export const Sidebar = () => {
 
             <hr className="my-4" />
 
-            <p>You might also be interested in our {productEngineersLink}</p>
+            <p>Raised &lt;$5m? Check out our {startupPlanLink}.</p>
         </>
     )
 }
@@ -55,19 +55,19 @@ export const Sidebar = () => {
 const explorerIntro = (
     <>
         {intro}
-        <p>You might also like our {productEngineersLink}.</p>
+        <p>Raised &lt;$5m? Check out our {startupPlanLink}.</p>
     </>
 )
 
-const ControlHub = () => <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
-const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founder's hub" intro={explorerIntro} />
+const ControlHub = () => <Hub title="Founders Hub" folder="founders" sidebar={<Sidebar />} />
+const RedesignedHub = () => <SidebarExplorer folder="founders" title="Founders Hub" intro={explorerIntro} />
 
 export default function Founders() {
     const posthog = usePostHog()
 
     return (
         <>
-            <SEO title="Founder's hub - PostHog" />
+            <SEO title="Founders Hub - PostHog" />
             {/*
               Rendering the redesign as the placeholder too means no flash while flags load, and
               keeps the intended layout if PostHog is unreachable.
