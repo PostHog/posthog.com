@@ -10,6 +10,87 @@ const markdownLinkExtractor = require('markdown-link-extractor')
 
 const isMinimalBuild = process.env.GATSBY_MINIMAL === 'true'
 
+// GraphQL selection shared by the full and minimal builds so the fields
+// createSdkReferencePages() reads stay in sync across both query sites. Interpolated into the
+// runtime graphql() template literals below (not a statically extracted page query).
+const SDK_REFERENCE_QUERY_FIELDS = `
+    allSdkReferences {
+        nodes {
+            info {
+                description
+                id
+                specUrl
+                slugPrefix
+                title
+                version
+            }
+            referenceId
+            hogRef
+            id
+            categories
+            classes {
+                description
+                functions {
+                    category
+                    description
+                    details
+                    examples {
+                        code
+                        name
+                        id
+                    }
+                    id
+                    params {
+                        description
+                        isOptional
+                        name
+                        type
+                    }
+                    path
+                    releaseTag
+                    showDocs
+                    returnType {
+                        id
+                        name
+                    }
+                    title
+                }
+                id
+                title
+            }
+            version
+        }
+    }
+    allSdkTypes: allSdkReferences {
+        nodes {
+            id
+            version
+            referenceId
+            info {
+                description
+                id
+                slugPrefix
+                specUrl
+                title
+                version
+            }
+            hogRef
+            categories
+            types {
+                example
+                id
+                name
+                path
+                properties {
+                    description
+                    name
+                    type
+                }
+            }
+        }
+    }
+`
+
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
@@ -429,81 +510,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            allSdkReferences {
-                nodes {
-                    info {
-                        description
-                        id
-                        specUrl
-                        slugPrefix
-                        title
-                        version
-                    }
-                    referenceId
-                    hogRef
-                    id
-                    categories
-                    classes {
-                        description
-                        functions {
-                            category
-                            description
-                            details
-                            examples {
-                                code
-                                name
-                                id
-                            }
-                            id
-                            params {
-                                description
-                                isOptional
-                                name
-                                type
-                            }
-                            path
-                            releaseTag
-                            showDocs
-                            returnType {
-                                id
-                                name
-                            }
-                            title
-                        }
-                        id
-                        title
-                    }
-                    version
-                }
-            }
-            allSdkTypes: allSdkReferences {
-                nodes {
-                    id
-                    version
-                    referenceId
-                    info {
-                        description
-                        id
-                        slugPrefix
-                        specUrl
-                        title
-                        version
-                    }
-                    hogRef
-                    categories
-                    types {
-                        example
-                        id
-                        name
-                        path
-                        properties {
-                            description
-                            name
-                            type
-                        }
-                    }
-                }
-            }
+            ${SDK_REFERENCE_QUERY_FIELDS}
         }
     `)) as GatsbyContentResponse
 
@@ -1114,24 +1121,31 @@ function createSdkReferencePages({
 
     // Grab types available for each SDK and version
     const sdkTypesByReference = typeNodes.reduce((acc, node) => {
-        const { referenceId, version, ...types } = node
+        const { referenceId, version, types } = node
 
         if (!acc[referenceId]) {
             acc[referenceId] = {}
         }
 
-        acc[referenceId][version] = types.types.map(({ name }: { name: string }) => name)
+        acc[referenceId][version] = types.map(({ name }: { name: string }) => name)
 
         return acc
     }, {} as Record<string, Record<string, any>>)
 
+    // In latest-only (minimal preview) builds, the reference template's version picker still reads
+    // every sourced version from the node store, but only `latest` pages exist here — so choosing
+    // another version 404s in the preview. Accepted preview-only limitation; the full build emits
+    // every version.
     referenceNodes.forEach((node) => {
         const isLatest = node.version.includes('latest')
         if (latestOnly && !isLatest) {
             return
         }
-        // latest → referenceId (no version in URL); versioned → id (embeds the version)
-        const pagePath = isLatest ? `/docs/references/${node.referenceId}` : `/docs/references/${node.id}`
+        // latest → referenceId (no version in URL); versioned → id (embeds the version). The
+        // template links type cross-references under this same prefix (passed via page context),
+        // so both sides derive routing from one place.
+        const slugPrefix = isLatest ? node.referenceId : node.id
+        const pagePath = `/docs/references/${slugPrefix}`
         createPage({
             path: pagePath,
             component: SdkReferenceTemplate,
@@ -1140,6 +1154,7 @@ function createSdkReferencePages({
                 description: node.info.description,
                 fullReference: node,
                 regex: pagePath,
+                slugPrefix,
                 // Null checks, only affects type crosslinking, won't break build
                 types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
             },
@@ -1259,81 +1274,7 @@ async function createMinimalPages({
                     }
                 }
             }
-            allSdkReferences {
-                nodes {
-                    info {
-                        description
-                        id
-                        specUrl
-                        slugPrefix
-                        title
-                        version
-                    }
-                    referenceId
-                    hogRef
-                    id
-                    categories
-                    classes {
-                        description
-                        functions {
-                            category
-                            description
-                            details
-                            examples {
-                                code
-                                name
-                                id
-                            }
-                            id
-                            params {
-                                description
-                                isOptional
-                                name
-                                type
-                            }
-                            path
-                            releaseTag
-                            showDocs
-                            returnType {
-                                id
-                                name
-                            }
-                            title
-                        }
-                        id
-                        title
-                    }
-                    version
-                }
-            }
-            allSdkTypes: allSdkReferences {
-                nodes {
-                    id
-                    version
-                    referenceId
-                    info {
-                        description
-                        id
-                        slugPrefix
-                        specUrl
-                        title
-                        version
-                    }
-                    hogRef
-                    categories
-                    types {
-                        example
-                        id
-                        name
-                        path
-                        properties {
-                            description
-                            name
-                            type
-                        }
-                    }
-                }
-            }
+            ${SDK_REFERENCE_QUERY_FIELDS}
         }
     `)
 
