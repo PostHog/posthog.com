@@ -358,6 +358,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -445,6 +446,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -1581,6 +1583,7 @@ export interface SiteSettings {
     reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -1598,6 +1601,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1628,6 +1632,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)

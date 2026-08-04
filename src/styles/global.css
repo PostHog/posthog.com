@@ -600,25 +600,8 @@ hr {
     }
 }
 
-*:not(
-        [data-app='AppWindow'],
-        [data-app='AppWindow'] *,
-        [data-menu-container],
-        [data-menu-container] *
-    )::-webkit-scrollbar {
+*::-webkit-scrollbar {
     @apply h-2.5 w-2.5;
-}
-
-::-webkit-scrollbar-track {
-    @apply bg-accent shadow-[inset_1px_0_0_#D0D1C9] dark:shadow-[inset_1px_0_0_#4A4C52];
-}
-
-::-webkit-scrollbar-thumb {
-    @apply bg-black/20 dark:bg-white/20 rounded-full;
-
-    &:hover {
-        @apply bg-black/30 dark:bg-white/30;
-    }
 }
 
 /* Shared app scrollbars use Radix-rendered overlay rails so their geometry and
@@ -721,15 +704,14 @@ hr {
 }
 
 /* Native fallback for overflow containers that do not use the shared
-   ScrollArea. MenuBar portals into [data-menu-container] outside AppWindow. */
+   ScrollArea. These scrollbar preferences apply site-wide so native scrollbars
+   match app and menu scrollbars. */
 
-[data-app='AppWindow'] *::-webkit-scrollbar-track,
-[data-menu-container] *::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     @apply bg-transparent shadow-none;
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-track:vertical,
-[data-menu-container] *::-webkit-scrollbar-track:vertical {
+*::-webkit-scrollbar-track:vertical {
     margin-block: 6px 6px;
 }
 
@@ -739,38 +721,32 @@ hr {
     margin-block-start: 32px;
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-track:horizontal,
-[data-menu-container] *::-webkit-scrollbar-track:horizontal {
+*::-webkit-scrollbar-track:horizontal {
     margin-inline: 6px;
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-thumb,
-[data-menu-container] *::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: rgb(var(--text-primary) / 0.28);
     background-clip: padding-box;
     border: 2px solid transparent;
     border-radius: 9999px;
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-thumb:hover,
-[data-menu-container] *::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
     background-color: rgb(var(--text-primary) / 0.4);
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-thumb:active,
-[data-menu-container] *::-webkit-scrollbar-thumb:active {
+*::-webkit-scrollbar-thumb:active {
     background-color: rgb(var(--text-primary) / 0.5);
 }
 
-[data-app='AppWindow'] *::-webkit-scrollbar-corner,
-[data-menu-container] *::-webkit-scrollbar-corner {
+*::-webkit-scrollbar-corner {
     background: transparent;
 }
 
 /* Firefox exposes color and width, but not the detailed WebKit geometry above. */
 @supports (-moz-appearance: none) {
-    [data-app='AppWindow'] *,
-    [data-menu-container] * {
+    * {
         scrollbar-color: rgb(var(--text-primary) / 0.28) transparent;
         scrollbar-width: thin;
     }
@@ -781,20 +757,15 @@ hr {
         background-color: CanvasText;
     }
 
-    [data-app='AppWindow'] *,
-    [data-menu-container] * {
+    * {
         scrollbar-color: auto;
         scrollbar-width: auto;
     }
 
-    [data-app='AppWindow'] *::-webkit-scrollbar,
-    [data-app='AppWindow'] *::-webkit-scrollbar-track,
-    [data-app='AppWindow'] *::-webkit-scrollbar-thumb,
-    [data-app='AppWindow'] *::-webkit-scrollbar-corner,
-    [data-menu-container] *::-webkit-scrollbar,
-    [data-menu-container] *::-webkit-scrollbar-track,
-    [data-menu-container] *::-webkit-scrollbar-thumb,
-    [data-menu-container] *::-webkit-scrollbar-corner {
+    *::-webkit-scrollbar,
+    *::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-thumb,
+    *::-webkit-scrollbar-corner {
         all: revert;
     }
 }
