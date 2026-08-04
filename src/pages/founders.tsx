@@ -28,7 +28,7 @@ const startupPlanLink = (
 export const Sidebar = () => {
     return (
         <>
-            <h6 className="mb-2">About Founders Hub</h6>
+            <h6 className="mb-2">About Founders hub</h6>
 
             {intro}
 
