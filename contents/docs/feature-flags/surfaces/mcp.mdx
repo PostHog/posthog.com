@@ -23,6 +23,7 @@ With MCP, your coding agent can:
 - **Update rollout rules** – "Roll out `dark-mode` to 50%" or "add the beta-testers cohort to the `new-dashboard` flag"
 - **Schedule future flag changes** – "Schedule the `new-checkout` flag to enable at midnight" or "Set up a recurring weekly disable for maintenance windows"
 - **Bulk operations** – "Delete all flags tagged 'deprecated'" or "Add the 'production' tag to these flags" to manage flags in bulk
+- **Test flag evaluation** – "Test how `new-checkout-flow` evaluates for user abc123" to debug targeting rules without deploying
 
 ## Feature flag tools
 
@@ -99,6 +100,12 @@ Try these with your MCP-enabled agent:
 - `Delete all feature flags tagged 'deprecated' in this project.`
 - `Add the 'production' tag to flags 123, 456, and 789.`
 - `What are the keys for flag IDs 101, 102, and 103?`
+
+### Testing prompts
+
+- `Test how the new-checkout-flow flag evaluates for user with distinct ID abc123.`
+- `Why doesn't the dark-mode flag match for user john@example.com?`
+- `Show me the evaluation details for the beta-features flag for person ID xyz789.`
 
 ### Scheduling prompts
 
