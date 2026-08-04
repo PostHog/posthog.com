@@ -58,7 +58,7 @@ Every AI-authored object records its origin: `created_source: ai_generated`, the
 
 You don't need a cataloging project. Let the catalog grow out of normal work:
 
-1. **Agents propose as they go.** When an agent derives a number that gets reused, it offers to save the derivation as a proposed metric. When it notices a stale table or an obvious join, it proposes a trust mark.
+1. **Agents propose as they go.** When an agent derives a number that gets reused, it offers to save the derivation as a proposed metric. When it notices a stale table it proposes deprecating it, and when it spots an obvious join it proposes the relationship with evidence.
 2. **A data owner reviews the queue weekly.** The review queue is one query away:
 
    ```sql
