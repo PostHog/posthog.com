@@ -14,6 +14,8 @@ export interface FieldGuideVolume {
     volume: number
     /** A hand-written src/pages file owns this route, so don't generate one. */
     hasStaticPage?: boolean
+    /** Announced but unwritten – renders as a cover with a sash and no link. */
+    comingSoon?: boolean
 }
 
 export const FIELD_GUIDE_VOLUMES: FieldGuideVolume[] = [
@@ -25,6 +27,24 @@ export const FIELD_GUIDE_VOLUMES: FieldGuideVolume[] = [
         token: 'orange',
         volume: 1,
         hasStaticPage: true,
+    },
+    {
+        id: 'data-warehouse',
+        title: 'Data warehouse',
+        description: 'Getting your other systems into PostHog, and asking questions across all of it.',
+        owner: 'data warehouse',
+        token: 'blue',
+        volume: 2,
+        comingSoon: true,
+    },
+    {
+        id: 'workflows',
+        title: 'Workflows',
+        description: 'Automations that fire when someone does – or stops doing – something.',
+        owner: 'CDP',
+        token: 'seagreen',
+        volume: 3,
+        comingSoon: true,
     },
 ]
 
