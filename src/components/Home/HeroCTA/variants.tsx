@@ -1,15 +1,19 @@
 import React, { useRef, useState } from 'react'
 import { IconCheck } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { CallToAction } from 'components/CallToAction'
+import { CallToAction, TrackedCTA } from 'components/CallToAction'
 import PlatformInstall, { CopyableCommand, wizardInstallSchema } from 'components/PlatformInstall'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
+import usePostHog from '../../../hooks/usePostHog'
 import { cn } from '../../../utils'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const SIGNUP_STATE = { newWindow: true, initialTab: 'signup' }
+
+const COPY_EVENT = 'homepagecta-copy-clicked'
+const WEB_SIGNUP_EVENT = 'homepagecta-websignup-clicked'
 
 function useWindowEntrance(): string {
     return usePrefersReducedMotion() ? '' : 'animate-window-pop-in'
@@ -40,9 +44,16 @@ const SignupButton = ({
     width?: string
     childClassName?: string
 }) => (
-    <CallToAction to={SIGNUP_URL} size={size} width={width} state={SIGNUP_STATE} childClassName={childClassName}>
+    <TrackedCTA
+        to={SIGNUP_URL}
+        size={size}
+        width={width}
+        state={SIGNUP_STATE}
+        childClassName={childClassName}
+        event={{ name: WEB_SIGNUP_EVENT }}
+    >
         <>{children}</>
-    </CallToAction>
+    </TrackedCTA>
 )
 
 const CheckList = ({ items }: { items: React.ReactNode[] }) => (
@@ -66,10 +77,17 @@ const ClickableCommand = ({
     animate?: boolean
 }) => {
     const fieldRef = useRef<HTMLDivElement>(null)
+    const posthog = usePostHog()
     const { displayCommand, copyCommand } = buildWizardCommand({ subcommand: 'self-driving' })
 
     const copyFromAnywhere = (event: React.MouseEvent) => {
-        if ((event.target as HTMLElement).closest('button')) return
+        // Every copy passes through the button – either clicked directly, or via the forwarded click
+        // below, which bubbles back into this handler with the button as its target. Counting only
+        // that case means one event per copy, however it was triggered.
+        if ((event.target as HTMLElement).closest('button')) {
+            posthog?.capture(COPY_EVENT)
+            return
+        }
         fieldRef.current?.querySelector('button')?.click()
     }
 
@@ -108,7 +126,18 @@ const CommandOrSignup = () => (
  * small secondary link in the card header.
  * ---------------------------------------------------------------------------------------------- */
 
-const VariantControl = () => <PlatformInstall schema={wizardInstallSchema} selfDriving />
+const VariantControl = () => {
+    const posthog = usePostHog()
+
+    return (
+        <PlatformInstall
+            schema={wizardInstallSchema}
+            selfDriving
+            onCopy={() => posthog?.capture(COPY_EVENT)}
+            onSecondaryAction={() => posthog?.capture(WEB_SIGNUP_EVENT)}
+        />
+    )
+}
 
 const SIGNUP_CARD_POINTS = [
     '97% of users pay us $0',
