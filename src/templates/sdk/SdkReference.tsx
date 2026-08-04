@@ -73,6 +73,9 @@ export interface SdkReferenceData {
 export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
+    // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
+    // referenceId, versioned → id). Passed in so the template never re-derives page routing.
+    slugPrefix: string
 }
 
 export interface VersionsData {
@@ -132,7 +135,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 }
 
 export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
-    const { fullReference } = pageContext
+    const { fullReference, slugPrefix } = pageContext
     const location = useLocation()
 
     // Get the language for this SDK reference
@@ -160,10 +163,6 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     const getCurrentVersion = () => {
         return fullReference.id.replace(`${currentReferenceId}-`, '')
     }
-
-    // Mirror the slugPrefix used when type pages are created in gatsby/createPages.ts
-    // (latest → referenceId, versioned → id) so cross-links resolve to real pages.
-    const typeSlugPrefix = fullReference.version.includes('latest') ? fullReference.referenceId : fullReference.id
 
     // Pre-transform classes with sorted functions
     const sortedClasses = fullReference.classes.map((classData) => ({
@@ -364,7 +363,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={typeSlugPrefix}
+                                                        slugPrefix={slugPrefix}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -373,7 +372,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={typeSlugPrefix}
+                                                        slugPrefix={slugPrefix}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />
