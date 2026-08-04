@@ -395,6 +395,16 @@
             "destination": "/teams/wizard-and-docs"
         },
         {
+            "source": "/handbook/wizard-and-docs/changelog",
+            "destination": "/handbook/wizard-and-docs/how-to-publish-changelog",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/docs-and-wizard/changelog",
+            "destination": "/handbook/wizard-and-docs/how-to-publish-changelog",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/docs-and-wizard",
             "destination": "/handbook/wizard-and-docs",
             "statusCode": 301
