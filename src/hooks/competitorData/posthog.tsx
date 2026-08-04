@@ -602,6 +602,7 @@ export const posthog = {
                     template_variables: true,
                     prompt_deployment_api: true,
                     version_comparison: true,
+                    prompt_config: true,
                     prompt_labels: true,
                     prompt_playground: true,
                     composable_prompts: false,
