@@ -370,6 +370,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             key={menuIndex}
                             to={menu.link}
                             state={{ newWindow: true }}
+                            contextMenu={false}
                             className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
                                 customTriggerClasses || ''
                             }`}
@@ -386,6 +387,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             key={menuIndex}
                             to={menu.mobileLink}
                             state={{ newWindow: true }}
+                            contextMenu={false}
                             className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
                                 customTriggerClasses || ''
                             }`}
