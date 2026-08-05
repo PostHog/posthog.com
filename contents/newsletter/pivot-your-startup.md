@@ -4,11 +4,11 @@ date: 2024-03-25
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1710126230/posthog.com/contents/images/blog/story-about-pivots.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
 tags:
   - Product-market fit
-  - Being a founder
+  - Founders
 crosspost:
   - Founders
   - Blog
@@ -22,7 +22,7 @@ At PostHog, we’ve pivoted more than most. It took us six pivots ([count ‘em]
 
 **This week’s theme is: How, and when, to pivot your startup.**
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. If you’re going to pivot, make it big
 

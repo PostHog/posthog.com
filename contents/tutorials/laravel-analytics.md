@@ -177,7 +177,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         PostHog::init(
-            '<ph_project_api_key>',
+            '<ph_project_token>',
             [
                 'host' => '<ph_client_api_host>'
             ]

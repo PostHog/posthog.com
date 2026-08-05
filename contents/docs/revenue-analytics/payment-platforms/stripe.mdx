@@ -7,7 +7,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-When using revenue analytics, you can connect Stripe to PostHog as a source of revenue data. Revenue analytics will automatically use the data from Stripe to build your [revenue dashboard](/docs/revenue-analytics/dashboard).
+When using revenue analytics, you can connect Stripe to PostHog as a source of revenue data. PostHog will automatically use the data from Stripe to compute your [revenue metrics](/docs/revenue-analytics/revenue-metrics).
 
 <CalloutBox icon="IconInfo" title="Already have a Stripe-connected source?" type="fyi">
 
@@ -22,13 +22,13 @@ If you already have a Stripe-connected source, you can access the [revenue analy
 
 </CalloutBox>
 
-import Stripe from '../../cdp/sources/_snippets/source-stripe.mdx'
+import StripeSource from '../../cdp/sources/stripe.md'
 
-<Stripe />
+<StripeSource />
 
 ## How is the data stored?
 
-Your data will be imported and transformed into a set of [managed views](/docs/revenue-analytics/managed-views). Revenue analytics will use these views to build your [revenue dashboard](/docs/revenue-analytics/dashboard) automatically.
+Your data will be imported and transformed into a set of [managed views](/docs/revenue-analytics/managed-views). PostHog will use these views to compute your [revenue metrics](/docs/revenue-analytics/revenue-metrics) automatically.
 
 You can also use these views in the [SQL editor](/docs/data-warehouse/query) to run custom queries and visualize the data.
 

@@ -1,0 +1,41 @@
+---
+title: Retrieve data from your endpoint
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import RetrieveDataPlatforms from '../_snippets/retrieve-data-platforms'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<Steps>
+
+<Step title="Create an API key" badge="required">
+
+Endpoints support two kinds of keys, both with the `endpoint:read` scope.
+
+- **[Project secret API key](/docs/api/project-secret-api-keys)** (recommended for backend services): a project-scoped, server-to-server credential that isn't tied to a user. Create one in [Project secret API keys](https://app.posthog.com/settings/project-secret-api-keys).
+- **[Personal API key](/docs/api/personal-api-keys)**: scoped to your user account, useful for interactive or one-off scripts. Create one in [Personal API keys](https://app.posthog.com/settings/user-api-keys).
+
+To create a key:
+
+1. Open the relevant settings page above
+2. Click **Create key**
+3. Give it a name (e.g., "Endpoints")
+4. Select the `endpoint:read` scope
+5. Click **Create key** and copy it somewhere safe
+
+<CalloutBox icon="IconWarning" title="API keys are secret!" type="caution">
+Store your API key securely. Never expose it in client-side code or commit it to version control.
+</CalloutBox>
+
+</Step>
+
+<Step title="Choose your language" badge="required">
+
+Select your language or framework to see how to call your endpoint.
+
+<RetrieveDataPlatforms />
+
+</Step>
+
+</Steps>

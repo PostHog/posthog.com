@@ -22,8 +22,8 @@ It can also be useful when you want more granular control over _bundled_ autocap
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Transformations](https://us.posthog.com/pipeline/transformations) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/transformations) tab in the left sidebar.
+2. Click the [Transformations](https://app.posthog.com/data-management/transformations) tab.
 3. Search for **Drop events** and click **+ Create**.
 4. Configure your filters to target the events you want to drop.
 5. Press **Create & Enable** to start dropping matching events.
@@ -103,7 +103,7 @@ Before enabling your drop events transformation in production, use the built-in 
 
 ### Is the source code for this transformation available?
 
-PostHog is open-source and so are all the transformations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/drop_events/template_drop_events.py) is available on GitHub.
+PostHog is open-source and so are all the transformations on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_transformations/drop-events/drop-events.template.ts) is available on GitHub.
 
 ### What happens to dropped events?
 

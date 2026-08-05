@@ -51,7 +51,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 
 To start, make sure [Composer](https://getcomposer.org/) is installed. Then run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](/docs/libraries/php).
 
-Then, initialize PostHog at the top of `index.php` using your project API key and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Then, initialize PostHog at the top of `index.php` using your project token and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
 ```php file=index.php
 <?php
@@ -59,7 +59,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PostHog\PostHog;
 
 PostHog::init(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   ['host' => '<ph_client_api_host>']
 );
 
@@ -74,7 +74,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PostHog\PostHog;
 
 PostHog::init(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   ['host' => '<ph_client_api_host>']
 );
 
@@ -131,7 +131,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use PostHog\PostHog;
 
 PostHog::init(
-  '<ph_project_api_key>',
+  '<ph_project_token>',
   ['host' => '<ph_client_api_host>']
 );
 

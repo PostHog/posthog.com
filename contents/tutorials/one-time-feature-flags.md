@@ -54,14 +54,14 @@ Next, install PostHog through the [Node SDK](/docs/libraries/node) as Express is
 npm i posthog-node
 ```
 
-Add `posthog-node` to your Express app and set up the PostHog client with your project API key and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
+Add `posthog-node` to your Express app and set up the PostHog client with your project token and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)
 
 ```js
 // server.js
 //...
 const { PostHog } = require('posthog-node');
 const client = new PostHog(
-    '<ph_project_api_key>',
+    '<ph_project_token>',
     { host: '<ph_client_api_host>'}
 )
 //...

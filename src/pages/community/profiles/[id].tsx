@@ -24,17 +24,18 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
+import { PROFILE_COLORS } from 'constants/profileColors'
 import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
     IconArrowUpRight,
-    IconPencil,
     IconUpload,
     IconX,
     IconCheck,
     IconExternal,
     IconPresent,
     IconSparkles,
+    IconShieldLock,
 } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
@@ -47,9 +48,11 @@ import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
+import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
@@ -378,20 +381,7 @@ const AvatarBlock = ({
                     <div>
                         <label className="text-[15px]">Favorite color</label>
                         <ul className="list-none m-0 p-0 flex space-x-1 mt-1">
-                            {[
-                                'lime-green',
-                                'blue',
-                                'orange',
-                                'teal',
-                                'purple',
-                                'seagreen',
-                                'salmon',
-                                'yellow',
-                                'red',
-                                'green',
-                                'lilac',
-                                'sky-blue',
-                            ].map((color) => {
+                            {PROFILE_COLORS.map((color) => {
                                 const active = values.color === color
                                 return (
                                     <li key={color} onClick={() => setFieldValue('color', color)}>
@@ -424,8 +414,9 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+    const email = profile?.user?.data?.attributes?.email
 
     // Update showPronounsInput when values.pronouns changes
     useEffect(() => {
@@ -433,6 +424,29 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && email && (
+                <p className="flex justify-between m-0 gap-2 items-center">
+                    <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                        Email
+                        <Tooltip
+                            delay={0}
+                            className="inline-flex items-center text-secondary"
+                            trigger={<IconShieldLock className="size-4" />}
+                        >
+                            Only visible to moderators
+                        </Tooltip>
+                    </span>
+                    <a href={`mailto:${email}`} className="truncate text-right underline font-medium">
+                        {email}
+                    </a>
+                </p>
+            )}
+            {!isEditing && profile.reputation != null && (
+                <p className="flex justify-between items-center m-0">
+                    <span className="font-semibold">Reputation</span>
+                    <LevelBadge points={profile.reputation} />
+                </p>
+            )}
             {!isEditing && (
                 <p className="flex justify-between m-0">
                     {isTeamMember ? (
@@ -541,9 +555,110 @@ function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
 }
 
+// Also defined in src/pages/team-directory.tsx — update both if changed
+const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
+const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
+
+const unisexSizeDataIn = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['26.25', '27.50', '28.50', '29.50', '30.50', '31.50'] },
+        { label: 'Width', values: ['18.00', '19.50', '21.00', '22.50', '24.00', '25.50'] },
+        { label: 'Sleeve', values: ['16.00', '16.875', '17.75', '18.625', '19.50', '20.375'] },
+    ],
+}
+
+const unisexSizeDataCm = {
+    sizes: unisexSizes,
+    rows: [
+        { label: 'Length', values: ['66', '69', '72', '74', '77', '80'] },
+        { label: 'Width', values: ['45', '49', '53', '57', '60', '64'] },
+        { label: 'Sleeve', values: ['40', '42', '45', '47', '49', '51'] },
+    ],
+}
+
+const womensSizeDataUS = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['2-6', '6-10', '10-14', '14-18', '18-22', '23-27'] }],
+}
+
+const womensSizeDataUK = {
+    sizes: femaleSizes,
+    rows: [{ label: 'Fits Sizes', values: ['6-10', '10-14', '14-18', '18-22', '22-26', '27-31'] }],
+}
+
+const UnisexSizeChart = () => {
+    const [unit, setUnit] = useState('in')
+    return (
+        <div className="w-[380px]">
+            <ToggleGroup
+                title="Unit"
+                hideTitle
+                options={[
+                    { label: 'in', value: 'in' },
+                    { label: 'cm', value: 'cm' },
+                ]}
+                value={unit}
+                onValueChange={(value) => value && setUnit(value)}
+                className="mb-2"
+            />
+            <SizeTable data={unit === 'cm' ? unisexSizeDataCm : unisexSizeDataIn} />
+        </div>
+    )
+}
+
+const WomensSizeChart = () => {
+    const [region, setRegion] = useState('US')
+    return (
+        <div>
+            <ToggleGroup
+                title="Region"
+                hideTitle
+                options={[
+                    { label: 'US', value: 'US' },
+                    { label: 'UK', value: 'UK' },
+                ]}
+                value={region}
+                onValueChange={(value) => value && setRegion(value)}
+                className="mb-2"
+            />
+            <SizeTable data={region === 'UK' ? womensSizeDataUK : womensSizeDataUS} />
+        </div>
+    )
+}
+
+const SizeTable = ({ data }: { data: typeof unisexSizeDataIn }) => (
+    <table className="text-xs text-left border-collapse w-full">
+        <thead>
+            <tr>
+                <th className="pr-3 py-1 font-semibold" />
+                {data.sizes.map((s) => (
+                    <th key={s} className="px-2 py-1 font-semibold text-center">
+                        {s}
+                    </th>
+                ))}
+            </tr>
+        </thead>
+        <tbody>
+            {data.rows.map((row) => (
+                <tr key={row.label} className="border-t border-primary">
+                    <td className="pr-3 py-1 font-semibold whitespace-nowrap">{row.label}</td>
+                    {row.values.map((v, i) => (
+                        <td key={i} className="px-2 py-1 text-center">
+                            {v}
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+)
+
 const ModeratorFields = ({ setFieldValue, values, errors }) => {
     const [heightUnit, setHeightUnit] = useState('in')
     const [height, setHeight] = useState(values.height)
+    const tShirt = values.tShirt || { fit: null, size: null, additionalInfo: null }
+    const availableSizes = tShirt.fit === 'female' ? femaleSizes : tShirt.fit === 'unisex' ? unisexSizes : []
 
     useEffect(() => {
         setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
@@ -616,6 +731,79 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                     ]}
                     value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
                     onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+            <div>
+                <ToggleGroup
+                    title="T-shirt fit"
+                    options={[
+                        { label: 'Unisex', value: 'unisex' },
+                        { label: 'Female', value: 'female' },
+                    ]}
+                    value={tShirt.fit || undefined}
+                    onValueChange={(value) => {
+                        if (!value) return
+                        const newSizes = value === 'female' ? femaleSizes : unisexSizes
+                        setFieldValue('tShirt', {
+                            ...tShirt,
+                            fit: value,
+                            size: newSizes.includes(tShirt.size) ? tShirt.size : null,
+                        })
+                    }}
+                />
+            </div>
+            {tShirt.fit && (
+                <div>
+                    <label className="text-[15px] flex items-center gap-2 mb-1">
+                        T-shirt size
+                        {tShirt.fit === 'unisex' ? (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Unisex size guide
+                                    </span>
+                                }
+                            >
+                                <UnisexSizeChart />
+                            </Tooltip>
+                        ) : (
+                            <Tooltip
+                                delay={0}
+                                side="right"
+                                trigger={
+                                    <span className="text-xs text-secondary hover:text-primary underline cursor-help">
+                                        Women's size guide
+                                    </span>
+                                }
+                            >
+                                <WomensSizeChart />
+                            </Tooltip>
+                        )}
+                    </label>
+                    <ToggleGroup
+                        title="T-shirt size"
+                        hideTitle
+                        options={availableSizes.map((size) => ({ label: size, value: size }))}
+                        value={tShirt.size || undefined}
+                        onValueChange={(value) => {
+                            if (!value) return
+                            setFieldValue('tShirt', { ...tShirt, size: value })
+                        }}
+                    />
+                </div>
+            )}
+            <div>
+                <label className="text-[15px] block mb-1">T-shirt additional info</label>
+                <textarea
+                    className="bg-primary text-primary border border-input rounded px-3 py-1.5 text-[15px] placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-orange/50 w-full resize-y"
+                    name="tShirtAdditionalInfo"
+                    value={tShirt.additionalInfo || ''}
+                    data-scheme="primary"
+                    onChange={(e) => setFieldValue('tShirt', { ...tShirt, additionalInfo: e.target.value })}
+                    placeholder="Any additional notes about t-shirt preferences"
+                    rows={3}
                 />
             </div>
         </div>
@@ -795,110 +983,107 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
         }
     }, [posts])
 
-    const tabs = useMemo(
-        () => [
-            {
-                value: 'bio',
-                label: 'Bio',
-                content: isEditing ? (
-                    <BodyEditor
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        bodyKey="biography"
-                        initialValue={profile.biography}
+    const tabs = [
+        {
+            value: 'bio',
+            label: 'Bio',
+            content: isEditing ? (
+                <BodyEditor
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    bodyKey="biography"
+                    initialValue={profile.biography}
+                />
+            ) : (
+                <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
+            ),
+        },
+        ...((isModerator && isEditing) || profile.readme
+            ? [
+                  {
+                      value: 'readme',
+                      label: 'README',
+                      content: isEditing ? (
+                          <BodyEditor
+                              values={values}
+                              setFieldValue={setFieldValue}
+                              bodyKey="readme"
+                              initialValue={profile.readme}
+                              maxLength={10000}
+                          />
+                      ) : (
+                          <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
+                      ),
+                  },
+              ]
+            : []),
+        {
+            value: 'discussions',
+            label: 'Discussions',
+            content: (
+                <>
+                    <Questions
+                        profileId={id}
+                        disclaimer={false}
+                        showForm={false}
+                        noQuestionsMessage={
+                            <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
+                                {firstName} hasn't participated in any discussions yet
+                            </p>
+                        }
                     />
-                ) : (
-                    <Markdown className="">{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>
-                ),
-            },
-            ...((isModerator && isEditing) || profile.readme
-                ? [
-                      {
-                          value: 'readme',
-                          label: 'README',
-                          content: isEditing ? (
-                              <BodyEditor
-                                  values={values}
-                                  setFieldValue={setFieldValue}
-                                  bodyKey="readme"
-                                  initialValue={profile.readme}
-                                  maxLength={10000}
-                              />
-                          ) : (
-                              <Markdown className="prose dark:prose-invert prose-sm">{profile.readme}</Markdown>
-                          ),
-                      },
-                  ]
-                : []),
-            {
-                value: 'discussions',
-                label: 'Discussions',
-                content: (
-                    <>
-                        <Questions
-                            profileId={id}
-                            disclaimer={false}
-                            showForm={false}
-                            noQuestionsMessage={
-                                <p className="prose dark:prose-invert prose-sm max-w-full text-primary m-0">
-                                    {firstName} hasn't participated in any discussions yet
-                                </p>
-                            }
-                        />
-                    </>
-                ),
-            },
-            ...(hasPosts
-                ? [
-                      {
-                          value: 'posts',
-                          label: 'Posts',
-                          content: (
-                              <>
-                                  <div className="flex justify-between items-center mb-4">
-                                      <h4 className="text-lg font-bold m-0">All posts</h4>
-                                      <Select
-                                          groups={[
-                                              {
-                                                  items: sortOptions.map((option) => ({
-                                                      label: option.label,
-                                                      value: option.label,
-                                                  })),
-                                                  label: 'Sort by',
-                                              },
-                                          ]}
-                                          value={sort}
-                                          onValueChange={(value) => setSort(value)}
-                                      />
-                                  </div>
-                                  <PostsTable {...posts} />
-                              </>
-                          ),
-                      },
-                  ]
-                : []),
-            ...(user?.profile?.id === id
-                ? [
-                      {
-                          value: 'likes',
-                          label: 'Liked posts',
-                          content: (
-                              <>
-                                  <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
-                                  <LikedPosts profileID={id} />
-                              </>
-                          ),
-                      },
-                      {
-                          value: 'points',
-                          label: 'Points',
-                          content: <Points />,
-                      },
-                  ]
-                : []),
-        ],
-        []
-    )
+                </>
+            ),
+        },
+        ...(hasPosts
+            ? [
+                  {
+                      value: 'posts',
+                      label: 'Posts',
+                      content: (
+                          <>
+                              <div className="flex justify-between items-center mb-4">
+                                  <h4 className="text-lg font-bold m-0">All posts</h4>
+                                  <Select
+                                      groups={[
+                                          {
+                                              items: sortOptions.map((option) => ({
+                                                  label: option.label,
+                                                  value: option.label,
+                                              })),
+                                              label: 'Sort by',
+                                          },
+                                      ]}
+                                      value={sort}
+                                      onValueChange={(value) => setSort(value)}
+                                  />
+                              </div>
+                              <PostsTable {...posts} />
+                          </>
+                      ),
+                  },
+              ]
+            : []),
+        ...(user?.profile?.id === id
+            ? [
+                  {
+                      value: 'likes',
+                      label: 'Liked posts',
+                      content: (
+                          <>
+                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
+                              <LikedPosts profileID={id} />
+                          </>
+                      ),
+                  },
+                  {
+                      value: 'points',
+                      label: 'Points',
+                      content: <Points />,
+                  },
+              ]
+            : []),
+    ]
 
     const initialTab = useMemo(() => {
         const params = new URLSearchParams(appWindow?.location?.search)
@@ -961,6 +1146,11 @@ export default function ProfilePage({ params }: PageProps) {
                             populate: {
                                 image: true,
                                 icon: true,
+                                achievement_group: {
+                                    populate: {
+                                        icon: true,
+                                    },
+                                },
                             },
                         },
                     },
@@ -974,6 +1164,7 @@ export default function ProfilePage({ params }: PageProps) {
                         crest: true,
                     },
                 },
+                tShirt: true,
                 ...(isModerator
                     ? {
                           user: true,
@@ -1131,6 +1322,7 @@ export default function ProfilePage({ params }: PageProps) {
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
             amaEnabled: profile?.amaEnabled,
+            tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {
@@ -1296,197 +1488,9 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary">
+        <div data-scheme="secondary" className="pt-4 h-full bg-primary text-primary flex flex-col">
             <SEO title={`${name}'s profile - PostHog`} />
-            <div className="border-b border-primary">
-                <HeaderBar
-                    rightActionButtons={
-                        isEditing ? (
-                            <div className="flex gap-1">
-                                <OSButton
-                                    size="md"
-                                    variant="secondary"
-                                    onClick={() => {
-                                        setIsEditing(false)
-                                        resetForm()
-                                    }}
-                                >
-                                    Cancel
-                                </OSButton>
-                                <OSButton size="md" variant="primary" onClick={submitForm} disabled={isSubmitting}>
-                                    {isSubmitting ? 'Saving...' : 'Save'}
-                                </OSButton>
-                            </div>
-                        ) : (
-                            <>
-                                {isModerator && (
-                                    <div className="flex gap-px border-r border-secondary pr-2 mr-2">
-                                        <Popover
-                                            dataScheme="primary"
-                                            open={giftPopoverOpen}
-                                            onOpenChange={setGiftPopoverOpen}
-                                            trigger={
-                                                <span>
-                                                    <OSButton
-                                                        asLink
-                                                        size="md"
-                                                        tooltip={<>Gift this user points</>}
-                                                        icon={<IconPresent />}
-                                                        iconClassName="size-5"
-                                                    />
-                                                </span>
-                                            }
-                                            contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
-                                        >
-                                            <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="bg-yellow/30 rounded-full p-2">
-                                                        <IconPresent className="size-5 text-orange" />
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="text-sm font-bold m-0 flex items-center gap-1">
-                                                            Gift points to {firstName}
-                                                            <IconSparkles className="size-3.5 text-yellow" />
-                                                        </h4>
-                                                        <p className="text-xs text-secondary m-0">
-                                                            Reward great contributions
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="p-4 pt-2 space-y-2">
-                                                <div>
-                                                    <label
-                                                        htmlFor="gift-amount"
-                                                        className="text-xs font-semibold text-secondary block mb-1"
-                                                    >
-                                                        Points
-                                                    </label>
-                                                    <OSInput
-                                                        id="gift-amount"
-                                                        direction="column"
-                                                        showLabel={false}
-                                                        label="Points"
-                                                        type="number"
-                                                        min={1}
-                                                        value={giftAmount}
-                                                        onChange={(e) =>
-                                                            setGiftAmount(e.target.value ? Number(e.target.value) : '')
-                                                        }
-                                                        placeholder="How many points?"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <label
-                                                        htmlFor="gift-reason"
-                                                        className="text-xs font-semibold  text-secondary block mb-1"
-                                                    >
-                                                        Reason
-                                                    </label>
-                                                    <OSInput
-                                                        id="gift-reason"
-                                                        direction="column"
-                                                        showLabel={false}
-                                                        label="Reason"
-                                                        type="text"
-                                                        value={giftNote}
-                                                        onChange={(e) => setGiftNote(e.target.value)}
-                                                        placeholder="What's this gift for?"
-                                                    />
-                                                </div>
-                                                {giftConfirming ? (
-                                                    <div className="space-y-2">
-                                                        <p className="text-sm text-secondary text-center">
-                                                            Send{' '}
-                                                            <span className="font-bold">
-                                                                {giftAmount} point{giftAmount === 1 ? '' : 's'}
-                                                            </span>{' '}
-                                                            to {profile?.firstName}?
-                                                        </p>
-                                                        <div className="flex gap-2">
-                                                            <OSButton
-                                                                size="md"
-                                                                variant="secondary"
-                                                                onClick={() => setGiftConfirming(false)}
-                                                                disabled={giftSubmitting}
-                                                                width="full"
-                                                            >
-                                                                Cancel
-                                                            </OSButton>
-                                                            <OSButton
-                                                                size="md"
-                                                                variant="primary"
-                                                                onClick={handleGift}
-                                                                disabled={giftSubmitting}
-                                                                width="full"
-                                                            >
-                                                                {giftSubmitting ? 'Sending...' : 'Confirm'}
-                                                            </OSButton>
-                                                        </div>
-                                                    </div>
-                                                ) : (
-                                                    <OSButton
-                                                        size="md"
-                                                        variant="primary"
-                                                        onClick={() => setGiftConfirming(true)}
-                                                        disabled={!giftAmount || !giftNote?.trim()}
-                                                        width="full"
-                                                    >
-                                                        Send gift
-                                                    </OSButton>
-                                                )}
-                                            </div>
-                                        </Popover>
-                                        <OSButton
-                                            asLink
-                                            size="md"
-                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
-                                            tooltip={
-                                                <>
-                                                    View in Strapi{' '}
-                                                    <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
-                                                </>
-                                            }
-                                            icon={<IconStrapi />}
-                                            iconClassName="size-5"
-                                            external
-                                        />
 
-                                        <OSButton
-                                            size="md"
-                                            tooltip={
-                                                profile?.user?.data?.attributes?.blocked
-                                                    ? 'Unblock user?'
-                                                    : 'Block user'
-                                            }
-                                            icon={
-                                                profile?.user?.data?.attributes?.blocked ? (
-                                                    <IconNoEntry />
-                                                ) : (
-                                                    <IconNoEntry />
-                                                )
-                                            }
-                                            iconClassName="size-5"
-                                            className={`${
-                                                profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
-                                            }`}
-                                            onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
-                                        />
-                                    </div>
-                                )}
-                                {(isCurrentUser || (isModerator && user?.webmaster)) && (
-                                    <OSButton
-                                        size="md"
-                                        icon={<IconPencil />}
-                                        iconClassName="size-5"
-                                        onClick={() => setIsEditing(true)}
-                                    />
-                                )}
-                            </>
-                        )
-                    }
-                />
-            </div>
             <ScrollArea
                 className="min-h-0 h-full"
                 style={
@@ -1513,9 +1517,11 @@ export default function ProfilePage({ params }: PageProps) {
                             />
 
                             {(isEditing ||
+                                profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
-                                profile.location) && (
+                                profile.location ||
+                                (isModerator && profile?.user?.data?.attributes?.email)) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
@@ -1524,6 +1530,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
+                                        isModerator={isModerator}
                                     />
                                 </Block>
                             )}
@@ -1546,26 +1553,58 @@ export default function ProfilePage({ params }: PageProps) {
 
                             {profile.achievements?.length > 0 && (
                                 <Block title="Achievements" url={`/community/achievements`}>
-                                    <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
-                                        {profile.achievements.map(({ achievement, hidden, id }) => (
-                                            <li key={id} className="flex justify-center">
-                                                <Achievement
-                                                    {...achievement.data.attributes}
-                                                    id={id}
-                                                    hidden={hidden}
-                                                    profile={profile}
-                                                    mutate={mutate}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <AchievementsGrid
+                                        achievements={profile.achievements}
+                                        profile={profile}
+                                        mutate={mutate}
+                                    />
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditing && isCurrentUser && (
+                                <Block title="Connected accounts">
+                                    <ConnectedAccounts hideHeading stacked />
+                                </Block>
+                            )}
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
+                            )}
+                            {(isCurrentUser || (isModerator && user?.webmaster)) && (
+                                <div className="flex gap-2 mt-4">
+                                    {isEditing ? (
+                                        <>
+                                            <OSButton
+                                                size="md"
+                                                variant="secondary"
+                                                onClick={() => {
+                                                    setIsEditing(false)
+                                                    resetForm()
+                                                }}
+                                            >
+                                                Cancel
+                                            </OSButton>
+                                            <OSButton
+                                                size="md"
+                                                variant="primary"
+                                                onClick={submitForm}
+                                                disabled={isSubmitting}
+                                            >
+                                                {isSubmitting ? 'Saving...' : 'Save'}
+                                            </OSButton>
+                                        </>
+                                    ) : (
+                                        <OSButton
+                                            size="md"
+                                            variant="secondary"
+                                            width="full"
+                                            onClick={() => setIsEditing(true)}
+                                        >
+                                            Edit profile
+                                        </OSButton>
+                                    )}
+                                </div>
                             )}
                         </div>
 
@@ -1639,6 +1678,163 @@ export default function ProfilePage({ params }: PageProps) {
                     </div>
                 </div>
             </ScrollArea>
+            <div className="border-primary sticky border-t bottom-0">
+                <HeaderBar
+                    rightActionButtons={
+                        <>
+                            {isModerator && (
+                                <div className="flex gap-px">
+                                    <Popover
+                                        dataScheme="primary"
+                                        open={giftPopoverOpen}
+                                        onOpenChange={setGiftPopoverOpen}
+                                        trigger={
+                                            <span>
+                                                <OSButton
+                                                    asLink
+                                                    size="md"
+                                                    tooltip={<>Gift this user points</>}
+                                                    icon={<IconPresent />}
+                                                    iconClassName="size-5"
+                                                />
+                                            </span>
+                                        }
+                                        contentClassName="w-80 !p-0 overflow-hidden border border-primary rounded-md"
+                                    >
+                                        <div className="bg-gradient-to-br from-yellow/20 via-orange/10 to-red/10 p-4 border-b border-primary">
+                                            <div className="flex items-center gap-2">
+                                                <div className="bg-yellow/30 rounded-full p-2">
+                                                    <IconPresent className="size-5 text-orange" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-sm font-bold m-0 flex items-center gap-1">
+                                                        Gift points to {firstName}
+                                                        <IconSparkles className="size-3.5 text-yellow" />
+                                                    </h4>
+                                                    <p className="text-xs text-secondary m-0">
+                                                        Reward great contributions
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="p-4 pt-2 space-y-2">
+                                            <div>
+                                                <label
+                                                    htmlFor="gift-amount"
+                                                    className="text-xs font-semibold text-secondary block mb-1"
+                                                >
+                                                    Points
+                                                </label>
+                                                <OSInput
+                                                    id="gift-amount"
+                                                    direction="column"
+                                                    showLabel={false}
+                                                    label="Points"
+                                                    type="number"
+                                                    min={1}
+                                                    value={giftAmount}
+                                                    onChange={(e) =>
+                                                        setGiftAmount(e.target.value ? Number(e.target.value) : '')
+                                                    }
+                                                    placeholder="How many points?"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    htmlFor="gift-reason"
+                                                    className="text-xs font-semibold  text-secondary block mb-1"
+                                                >
+                                                    Reason
+                                                </label>
+                                                <OSInput
+                                                    id="gift-reason"
+                                                    direction="column"
+                                                    showLabel={false}
+                                                    label="Reason"
+                                                    type="text"
+                                                    value={giftNote}
+                                                    onChange={(e) => setGiftNote(e.target.value)}
+                                                    placeholder="What's this gift for?"
+                                                />
+                                            </div>
+                                            {giftConfirming ? (
+                                                <div className="space-y-2">
+                                                    <p className="text-sm text-secondary text-center">
+                                                        Send{' '}
+                                                        <span className="font-bold">
+                                                            {giftAmount} point{giftAmount === 1 ? '' : 's'}
+                                                        </span>{' '}
+                                                        to {profile?.firstName}?
+                                                    </p>
+                                                    <div className="flex gap-2">
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="secondary"
+                                                            onClick={() => setGiftConfirming(false)}
+                                                            disabled={giftSubmitting}
+                                                            width="full"
+                                                        >
+                                                            Cancel
+                                                        </OSButton>
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="primary"
+                                                            onClick={handleGift}
+                                                            disabled={giftSubmitting}
+                                                            width="full"
+                                                        >
+                                                            {giftSubmitting ? 'Sending...' : 'Confirm'}
+                                                        </OSButton>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <OSButton
+                                                    size="md"
+                                                    variant="primary"
+                                                    onClick={() => setGiftConfirming(true)}
+                                                    disabled={!giftAmount || !giftNote?.trim()}
+                                                    width="full"
+                                                >
+                                                    Send gift
+                                                </OSButton>
+                                            )}
+                                        </div>
+                                    </Popover>
+                                    <OSButton
+                                        asLink
+                                        size="md"
+                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile?.user?.data?.id}`}
+                                        tooltip={
+                                            <>
+                                                View in Strapi{' '}
+                                                <IconExternal className="size-4 text-secondary inline-block relative -top-px" />
+                                            </>
+                                        }
+                                        icon={<IconStrapi />}
+                                        iconClassName="size-5"
+                                        external
+                                    />
+
+                                    <OSButton
+                                        size="md"
+                                        tooltip={
+                                            profile?.user?.data?.attributes?.blocked ? 'Unblock user?' : 'Block user'
+                                        }
+                                        icon={
+                                            profile?.user?.data?.attributes?.blocked ? <IconNoEntry /> : <IconNoEntry />
+                                        }
+                                        iconClassName="size-5"
+                                        className={`${
+                                            profile?.user?.data?.attributes?.blocked ? '!bg-red !text-white' : ''
+                                        }`}
+                                        onClick={() => handleBlock(!profile?.user?.data?.attributes?.blocked)}
+                                    />
+                                </div>
+                            )}
+                        </>
+                    }
+                />
+            </div>
         </div>
     )
 }
@@ -1646,7 +1842,9 @@ export default function ProfilePage({ params }: PageProps) {
 const TeamMembersList = ({ self, team }) => {
     const selfTeammate = team.attributes.profiles.data.find((teammate) => teammate.id === self.id)
     const otherTeammates = team.attributes.profiles.data.filter((teammate) => teammate.id !== self.id)
-    const teammates = [selfTeammate, ...otherTeammates].filter(Boolean)
+    const teammates = [selfTeammate, ...otherTeammates].filter(
+        (teammate) => teammate?.attributes?.startDate && new Date(teammate.attributes.startDate) <= new Date()
+    )
 
     return (
         <>
@@ -1677,6 +1875,116 @@ const TeamMembersList = ({ self, team }) => {
                 )
             })}
         </>
+    )
+}
+
+const AchievementTooltipContent = ({ icon, title, description, iconSize = 'size-16' }) => (
+    <>
+        <div className="flex justify-center -mx-1.5 -mt-1 mb-2 py-2 bg-accent/50 rounded">
+            <img className={iconSize} src={icon} />
+        </div>
+        <h4 className="text-lg m-0">{title}</h4>
+        {description && <p className="m-0 mt-1 text-sm">{description}</p>}
+    </>
+)
+
+const AchievementGrouped = ({ items, profile, mutate }) => {
+    const groupData = items[0].achievement.data.attributes.achievement_group.data.attributes
+
+    if (groupData.tiered && items.length === 1) {
+        const { achievement, hidden, id } = items[0]
+        return (
+            <Achievement {...achievement.data.attributes} id={id} hidden={hidden} profile={profile} mutate={mutate} />
+        )
+    }
+
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <span className="relative">
+                    <img className="w-full" src={groupData.icon?.data?.attributes?.url} />
+                    {items.length > 1 && (
+                        <span className="absolute -top-1 -right-1 bg-accent text-primary text-[10px] font-bold rounded-full size-4 flex items-center justify-center border border-primary">
+                            x{items.length}
+                        </span>
+                    )}
+                </span>
+            }
+        >
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent
+                    icon={groupData.icon?.data?.attributes?.url}
+                    title={groupData.Title}
+                    description={groupData.description}
+                    iconSize="size-24"
+                />
+                <div className="border-t border-primary mt-3 pt-2.5">
+                    <p className="text-xs font-semibold opacity-50 m-0 mb-2">Unlocked by</p>
+                    <ul className="m-0 p-0 list-none flex flex-col gap-2">
+                        {items.map(({ achievement, id }, index) => (
+                            <li key={id} className="relative flex items-center gap-2">
+                                <div className="size-7 flex-shrink-0 relative">
+                                    {index < items.length - 1 && (
+                                        <div className="absolute w-px h-full left-1/2 -translate-x-1/2 bg-border dark:bg-border-dark bottom-0 translate-y-1/2" />
+                                    )}
+                                    <img
+                                        className="size-full relative"
+                                        src={achievement.data.attributes.icon?.data?.attributes?.url}
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-xs font-semibold m-0 leading-tight">
+                                        {achievement.data.attributes.title}
+                                    </p>
+                                    {achievement.data.attributes.description && (
+                                        <p className="text-xs opacity-60 m-0 leading-tight mt-0.5">
+                                            {achievement.data.attributes.description}
+                                        </p>
+                                    )}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </Tooltip>
+    )
+}
+
+const AchievementsGrid = ({ achievements, profile, mutate }) => {
+    const groups = useMemo(() => {
+        const grouped = achievements.filter((item) => item.achievement?.data?.attributes?.achievement_group?.data)
+        return Object.groupBy(grouped, (item) => item.achievement.data.attributes.achievement_group.data.id)
+    }, [achievements])
+
+    return (
+        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+            {achievements.map(({ achievement, hidden, id }) => {
+                if (!achievement?.data) return null
+                const group = achievement.data.attributes?.achievement_group?.data
+                if (group) {
+                    if (groups[group.id][0].id !== id) return null
+                    return (
+                        <li key={`group-${group.id}`} className="flex justify-center">
+                            <AchievementGrouped items={groups[group.id]} profile={profile} mutate={mutate} />
+                        </li>
+                    )
+                }
+                return (
+                    <li key={id} className="flex justify-center">
+                        <Achievement
+                            {...achievement.data.attributes}
+                            id={id}
+                            hidden={hidden}
+                            profile={profile}
+                            mutate={mutate}
+                        />
+                    </li>
+                )
+            })}
+        </ul>
     )
 }
 
@@ -1740,12 +2048,8 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
                 </ImageContainer>
             }
         >
-            <div className="max-w-[250px] text-left">
-                <div className="mb-4 -mx-2 -mt-2">
-                    <img src={image?.data?.attributes?.url} />
-                </div>
-                <h4 className="text-lg m-0">{title}</h4>
-                <p className="m-0 mt-1 text-sm mb-2">{description}</p>
+            <div className="max-w-[220px] text-left">
+                <AchievementTooltipContent icon={icon?.data?.attributes?.url} title={title} description={description} />
             </div>
         </Tooltip>
     )

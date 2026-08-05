@@ -32,7 +32,7 @@ If that sounds familiar, this guide is for you: we'll break down the best Conten
 
 ### 1. PostHog
 
-PostHog is an all-in-one developer platform that combines [**product analytics**](/product-analytics), [**web analytics**](/web-analytics), [**session replay**](/session-replay), [**error tracking**](/error-tracking), [**feature flags**](/feature-flags), [**experiments**](/experiments), [**surveys**](/surveys), [**LLM analytics**](/llm-analytics), and more. Instead of stitching together five or six tools, you get everything in one place.
+PostHog is an all-in-one developer platform that combines [**product analytics**](/product-analytics), [**web analytics**](/web-analytics), [**session replay**](/session-replay), [**error tracking**](/error-tracking), [**feature flags**](/feature-flags), [**experiments**](/experiments), [**surveys**](/surveys), [**AI Observability**](/llm-analytics), and more. Instead of stitching together five or six tools, you get everything in one place.
 
 The advantage of using PostHog is context. You're not just watching a session recording, you're connecting it to funnels, flags, experiments, errors, user properties, and long-term retention. You can see exactly what a user clicked, what test variants they were exposed to, what errors they hit, and how it all may have impacted your product metrics.
 
@@ -334,6 +334,19 @@ Like Contentsquare and Glassbox, Quantum Metric is built for the enterprise worl
 ## FAQ
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What is Contentsquare used for?</summary>
 
 **Contentsquare** is a digital experience analytics platform that helps teams understand how users behave across websites and mobile apps. It combines four main products: Experience Analytics (session replay, heatmaps, journeys), Product Analytics (funnels, user paths, web analytics), Voice of Customer (feedback surveys and user testing), and Experience Monitoring (error tracking, frustration signals, performance monitoring).
@@ -373,7 +386,7 @@ Many teams want something easier to implement, faster to understand, or far more
 <details>
   <summary>Which alternatives work best for engineering teams?</summary>
 
-**PostHog** is purpose-built for [product engineers](/blog/what-is-a-product-engineer) – it combines analytics, replay, feature flags, and experiments in one platform with a data warehouse, so you're not juggling multiple tools. **FullStory** and **Quantum Metric** are also strong alternatives, but are more geared toward product managers and analysts.
+**PostHog** is purpose-built for [product engineers](/product-engineer/what-is-a-product-engineer) – it combines analytics, replay, feature flags, and experiments in one platform with a data warehouse, so you're not juggling multiple tools. **FullStory** and **Quantum Metric** are also strong alternatives, but are more geared toward product managers and analysts.
 </details>
 
 <details>

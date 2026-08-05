@@ -4,6 +4,11 @@ export const brevo = {
         workflows: {
             available: true,
             features: {
+                visual_builder: true,
+                // Aura: generate automations from a natural-language description
+                // https://help.brevo.com/hc/en-us/articles/34804478408850
+                ai_assistant: true,
+                campaign_tracking: true,
                 real_time_triggers: true,
                 email_editor: true,
                 cohort_targeting: true,
@@ -17,6 +22,23 @@ export const brevo = {
                 webhook_actions: true,
                 run_based_pricing: false,
             },
+            channels: {
+                features: {
+                    email: true,
+                    sms: true,
+                    push: 'Professional',
+                    webhooks: true,
+                    whatsapp: 'Professional',
+                },
+            },
+        },
+    },
+    platform: {
+        pricing: {
+            free_tier: true,
+        },
+        deployment: {
+            open_source: false,
         },
     },
 }

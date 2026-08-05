@@ -15,13 +15,13 @@ Compared to other tools, Plausible is easy to get data out of, but it is difficu
 
 This means we can try to convert data, but it won't be 100% accurate. For example, Plausible data tells there is a certain number of visitors, pageviews, and visits, but it doesn't tell you which user did what event at what time. We need break down this data to generate individual events that create an equivalent aggregation.
 
-This guide aims to convert aggregate data into events where possible and capture them in PostHog. 
+This guide aims to convert aggregate data into events where possible and capture them in PostHog.
 
 > **Terminology differences:** Although pageviews, custom events, and many properties are the same between Plausible and PostHog, there are two major terminology differences:
 > 1. Plausible uses **visitors** to represent the users behind pageviews and custom events. In PostHog, these are called [persons](/docs/data/persons).
 > 2. Plausible uses **visit** to represent a single use of your product or visit to your site. In PostHog, these are called [sessions](/docs/data/sessions).
 
-> Want us to take care of the migration for you?  Our [Forward Deployed Engineers](/professional-services) can get you up and running in super quick time.
+> Want us to take care of the migration for you? Our [forward-deployed engineers](/services) can get you up and running in super quick time.
 
 ## 1. Export data from Plausible
 
@@ -38,7 +38,7 @@ To export data from Plausible, go to your site settings and click on the **Impor
 > 4. Custom events
 > 5. Entry or exit pages
 
-Once you have your exported data, you can run the following script to convert it to PostHog's schema and capture pageviews. This script randomly generates `$distinct_id` values for each visitor and randomly assigns them pageviews. It requires the names and locations of your exported data as well as your Plausible **Site Timezone** which you can find in your site settings. 
+Once you have your exported data, you can run the following script to convert it to PostHog's schema and capture pageviews. This script randomly generates `$distinct_id` values for each visitor and randomly assigns them pageviews. It requires the names and locations of your exported data as well as your Plausible **Site Timezone** which you can find in your site settings.
 
 ```python
 import csv
@@ -57,90 +57,89 @@ pages_filename = 'plausible-export/imported_pages_20241001_20241008.csv'
 utc = 'US/Pacific'
 
 posthog = Posthog(
-  '<ph_client_api_key>', 
-  host='<ph_client_api_host>',
-  debug=True,
-  historical_migration=True
+'<ph_client_api_key>',
+host='<ph_client_api_host>',
+debug=True,
+historical_migration=True
 )
 
 def generate_distinct_id(date):
-    ns_since_epoch = int(date.timestamp() * 1e9)
-    return str(uuid7(ns=ns_since_epoch))
+ns_since_epoch = int(date.timestamp() * 1e9)
+return str(uuid7(ns=ns_since_epoch))
 
 def convert_date_to_timestamp(date):
-    date_obj = datetime.strptime(date, '%Y-%m-%d')
-    local_datetime = date_obj.replace(hour=0, minute=random.randint(0, 59), second=random.randint(0, 59), tzinfo=ZoneInfo(utc))
-    utc_datetime = local_datetime.astimezone(ZoneInfo("UTC"))
-    
-    return utc_datetime
+date_obj = datetime.strptime(date, '%Y-%m-%d')
+local_datetime = date_obj.replace(hour=0, minute=random.randint(0, 59), second=random.randint(0, 59), tzinfo=ZoneInfo(utc))
+utc_datetime = local_datetime.astimezone(ZoneInfo("UTC"))
+
+return utc_datetime
 
 def distribute_pageviews(visitors, total_pageviews):
-    # Ensure each visitor has at least 1 pageview
-    min_pageviews = np.ones(visitors, dtype=int)
-    remaining_pageviews = total_pageviews - visitors
+# Ensure each visitor has at least 1 pageview
+min_pageviews = np.ones(visitors, dtype=int)
+remaining_pageviews = total_pageviews - visitors
 
-    if remaining_pageviews > 0:
-        # Distribute remaining pageviews
-        weights = np.random.dirichlet(np.ones(visitors)) * remaining_pageviews
-        additional_pageviews = np.round(weights).astype(int)
-        pageviews_per_visitor = min_pageviews + additional_pageviews
-    else:
-        # If total_pageviews <= visitors, each visitor gets 1 pageview
-        pageviews_per_visitor = min_pageviews
+if remaining_pageviews > 0:
+# Distribute remaining pageviews
+weights = np.random.dirichlet(np.ones(visitors)) * remaining_pageviews
+additional_pageviews = np.round(weights).astype(int)
+pageviews_per_visitor = min_pageviews + additional_pageviews
+else:
+# If total_pageviews <= visitors, each visitor gets 1 pageview
+pageviews_per_visitor = min_pageviews
 
-    # Adjust for any rounding discrepancies
-    difference = total_pageviews - pageviews_per_visitor.sum()
-    for _ in range(abs(int(difference))):
-        if difference > 0:
-            pageviews_per_visitor[np.argmin(pageviews_per_visitor)] += 1
-        else:
-            pageviews_per_visitor[np.argmax(pageviews_per_visitor)] -= 1
+# Adjust for any rounding discrepancies
+difference = total_pageviews - pageviews_per_visitor.sum()
+for _ in range(abs(int(difference))):
+if difference > 0:
+pageviews_per_visitor[np.argmin(pageviews_per_visitor)] += 1
+else:
+pageviews_per_visitor[np.argmax(pageviews_per_visitor)] -= 1
 
-    return pageviews_per_visitor.tolist()
-
+return pageviews_per_visitor.tolist()
 
 with open(visitors_filename, 'r') as visitors_file:
-   visitors_reader = csv.DictReader(visitors_file)
-   for visitor_row in visitors_reader:
-        date = visitor_row['date']
+visitors_reader = csv.DictReader(visitors_file)
+for visitor_row in visitors_reader:
+date = visitor_row['date']
 
-        # Create persons with distinct IDs
-        persons = []
-        visitors = int(visitor_row['visitors'])
-        pageviews_distribution = distribute_pageviews(visitors, int(visitor_row['pageviews']))
-        for i in range(visitors):
-            timestamp = convert_date_to_timestamp(date)
-            persons.append({
-                'distinct_id': generate_distinct_id(timestamp),
-                'pageviews': pageviews_distribution[i]
-            })
+# Create persons with distinct IDs
+persons = []
+visitors = int(visitor_row['visitors'])
+pageviews_distribution = distribute_pageviews(visitors, int(visitor_row['pageviews']))
+for i in range(visitors):
+timestamp = convert_date_to_timestamp(date)
+persons.append({
+'distinct_id': generate_distinct_id(timestamp),
+'pageviews': pageviews_distribution[i]
+})
 
-        # Generate pageviews from pages and persons
-        with open(pages_filename, 'r') as pages_file:
-            pages_reader = csv.DictReader(pages_file)
-            counter = 0
-            for page_row in pages_reader:
-                if page_row['date'] != date:
-                    continue
+# Generate pageviews from pages and persons
+with open(pages_filename, 'r') as pages_file:
+pages_reader = csv.DictReader(pages_file)
+counter = 0
+for page_row in pages_reader:
+if page_row['date'] != date:
+continue
 
-                for i in range(int(page_row['pageviews'])):
-                    person = random.choice(persons)
+for i in range(int(page_row['pageviews'])):
+person = random.choice(persons)
 
-                    posthog.capture(
-                        distinct_id=person['distinct_id'],
-                        event='$pageview',
-                        properties={
-                            '$current_url': f"https://{page_row['hostname']}{page_row['page']}",
-                            '$host': page_row['hostname'],
-                            '$pathname': page_row['page']
-                        },
-                        timestamp=convert_date_to_timestamp(date)
-                    )
-                    if person['pageviews'] == 1:
-                        persons.remove(person)
-                    else:
-                        person['pageviews'] -= 1
-                    counter += 1
+posthog.capture(
+distinct_id=person['distinct_id'],
+event='$pageview',
+properties={
+'$current_url': f"https://{page_row['hostname']}{page_row['page']}",
+'$host': page_row['hostname'],
+'$pathname': page_row['page']
+},
+timestamp=convert_date_to_timestamp(date)
+)
+if person['pageviews'] == 1:
+persons.remove(person)
+else:
+person['pageviews'] -= 1
+counter += 1
 ```
 
 Once you've run the script successfully, you should see data in PostHog. You can then continue your PostHog setup by installing [the snippet](/docs/getting-started/install) or a [library](/docs/getting-started/install?tab=sdks).

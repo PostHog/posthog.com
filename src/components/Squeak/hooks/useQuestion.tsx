@@ -43,7 +43,7 @@ const query = (id: string | number, isModerator: boolean) =>
                     select: ['id'],
                 },
                 profile: {
-                    select: ['id', 'firstName', 'lastName', 'color'],
+                    select: ['id', 'firstName', 'lastName', 'color', 'reputation'],
                     populate: {
                         avatar: {
                             select: ['id', 'url'],
@@ -81,7 +81,16 @@ const query = (id: string | number, isModerator: boolean) =>
                             fields: ['id'],
                         },
                         profile: {
-                            fields: ['id', 'firstName', 'lastName', 'gravatarURL', 'pronouns', 'color', 'startDate'],
+                            fields: [
+                                'id',
+                                'firstName',
+                                'lastName',
+                                'gravatarURL',
+                                'pronouns',
+                                'color',
+                                'startDate',
+                                'reputation',
+                            ],
                             populate: {
                                 avatar: {
                                     fields: ['id', 'url'],
@@ -235,6 +244,66 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
+    const voteReply = async (replyId: number, type: 'up' | 'down') => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+
+        if (questionData) {
+            const profileRef = { id: profileID }
+            const replies = questionData.attributes.replies?.data || []
+            const optimisticReplies = replies.map((r) => {
+                if (r.id !== replyId) return r
+                const upvotes = r.attributes.upvoteProfiles?.data || []
+                const downvotes = r.attributes.downvoteProfiles?.data || []
+                const alreadyUp = upvotes.some((p) => p.id === profileID)
+                const alreadyDown = downvotes.some((p) => p.id === profileID)
+                return {
+                    ...r,
+                    attributes: {
+                        ...r.attributes,
+                        upvoteProfiles: {
+                            data:
+                                type === 'up'
+                                    ? alreadyUp
+                                        ? upvotes.filter((p) => p.id !== profileID)
+                                        : [...upvotes, profileRef]
+                                    : upvotes.filter((p) => p.id !== profileID),
+                        },
+                        downvoteProfiles: {
+                            data:
+                                type === 'down'
+                                    ? alreadyDown
+                                        ? downvotes.filter((p) => p.id !== profileID)
+                                        : [...downvotes, profileRef]
+                                    : downvotes.filter((p) => p.id !== profileID),
+                        },
+                    },
+                }
+            })
+            mutate(
+                {
+                    ...questionData,
+                    attributes: { ...questionData.attributes, replies: { data: optimisticReplies } },
+                } as StrapiRecord<QuestionData>,
+                false
+            )
+        }
+
+        try {
+            const jwt = await getJwt()
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${replyId}/${type}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+            })
+            await mutate()
+        } catch {
+            await mutate()
+        }
+    }
+
     const handlePublishReply = async (published: boolean, id: number) => {
         try {
             posthog?.capture('squeak publish reply start', {
@@ -242,6 +311,28 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 replyId: id,
                 published,
             })
+
+            if (questionData) {
+                const replies = questionData.attributes.replies?.data || []
+                const optimisticReplies = replies.map((r) =>
+                    r.id === id
+                        ? {
+                              ...r,
+                              attributes: {
+                                  ...r.attributes,
+                                  publishedAt: published ? null : new Date().toISOString(),
+                              },
+                          }
+                        : r
+                )
+                mutate(
+                    {
+                        ...questionData,
+                        attributes: { ...questionData.attributes, replies: { data: optimisticReplies } },
+                    } as StrapiRecord<QuestionData>,
+                    false
+                )
+            }
 
             const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
                 method: 'PUT',
@@ -279,6 +370,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 error: JSON.stringify(error),
             })
 
+            await mutate()
+
             throw error
         }
     }
@@ -290,6 +383,20 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 resolved,
                 resolvedBy,
             })
+
+            if (questionData) {
+                mutate(
+                    {
+                        ...questionData,
+                        attributes: {
+                            ...questionData.attributes,
+                            resolved,
+                            resolvedBy: resolvedBy ? { data: { id: resolvedBy } } : null,
+                        },
+                    } as StrapiRecord<QuestionData>,
+                    false
+                )
+            }
 
             const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
                 method: 'PUT',
@@ -327,6 +434,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 error: JSON.stringify(error),
             })
 
+            await mutate()
+
             throw error
         }
     }
@@ -337,6 +446,21 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 questionId: questionID,
                 replyId: id,
             })
+
+            if (questionData) {
+                mutate(
+                    {
+                        ...questionData,
+                        attributes: {
+                            ...questionData.attributes,
+                            replies: {
+                                data: questionData.attributes.replies?.data?.filter((r) => r.id !== id) || [],
+                            },
+                        },
+                    },
+                    false
+                )
+            }
 
             const replyRes = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies/${id}`, {
                 method: 'DELETE',
@@ -365,64 +489,108 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 error: JSON.stringify(error),
             })
 
+            await mutate()
+
             throw error
         }
     }
 
     const addTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                data: {
-                    topics: {
-                        connect: [topic.id],
+        if (questionData) {
+            const currentTopics = questionData.attributes.topics?.data || []
+            mutate(
+                {
+                    ...questionData,
+                    attributes: {
+                        ...questionData.attributes,
+                        topics: { data: [...currentTopics, topic] },
                     },
                 },
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+                false
+            )
+        }
 
-        mutate()
+        try {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    data: {
+                        topics: {
+                            connect: [topic.id],
+                        },
+                    },
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            await mutate()
+        } catch {
+            await mutate()
+        }
     }
 
     const removeTopic = async (topic: StrapiRecord<TopicData>): Promise<void> => {
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-            method: 'PUT',
-            body: JSON.stringify({
-                data: {
-                    topics: {
-                        disconnect: [topic.id],
+        if (questionData) {
+            const currentTopics = questionData.attributes.topics?.data || []
+            mutate(
+                {
+                    ...questionData,
+                    attributes: {
+                        ...questionData.attributes,
+                        topics: { data: currentTopics.filter((t) => t.id !== topic.id) },
                     },
                 },
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+                false
+            )
+        }
 
-        mutate()
+        try {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    data: {
+                        topics: {
+                            disconnect: [topic.id],
+                        },
+                    },
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            await mutate()
+        } catch {
+            await mutate()
+        }
     }
 
-    const archive = async (archive: boolean) => {
-        const body = JSON.stringify({
-            data: {
-                archived: archive,
-            },
-        })
-        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
-            method: 'PUT',
-            body,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${await getJwt()}`,
-            },
-        })
+    const archive = async (shouldArchive: boolean) => {
+        if (questionData) {
+            mutate(
+                {
+                    ...questionData,
+                    attributes: { ...questionData.attributes, archived: shouldArchive },
+                },
+                false
+            )
+        }
 
-        mutate()
+        try {
+            await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionID}`, {
+                method: 'PUT',
+                body: JSON.stringify({ data: { archived: shouldArchive } }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            await mutate()
+        } catch {
+            await mutate()
+        }
     }
 
     const escalate = async (message?: string) => {
@@ -471,6 +639,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        voteReply,
         addTopic,
         removeTopic,
         archive,

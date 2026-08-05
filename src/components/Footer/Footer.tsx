@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
 import { GitHub, LinkedIn, YouTube, Twitter } from 'components/Icons/Icons'
@@ -48,7 +48,7 @@ const linklist: IProps[] = [
                 url: '/surveys',
             },
             {
-                title: 'Product OS',
+                title: 'Context warehouse',
                 url: '/product-os',
             },
             {
@@ -82,8 +82,8 @@ const linklist: IProps[] = [
         ],
     },
     {
-        title: 'Product OS',
-        url: '/docs/product-os',
+        title: 'Platform',
+        url: '/docs/data',
         items: [
             {
                 title: 'New? Start here.',
@@ -253,7 +253,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Marketing',
-                url: '/handbook/growth/marketing',
+                url: '/handbook/marketing',
             },
         ],
     },
@@ -402,7 +402,7 @@ export function Footer(): JSX.Element {
                     className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded bg-light dark:bg-dark px-2 pt-1.5 pb-1 mb-1 border border-b-3 border-primary hover:bg-accent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                 >
                     <span className="inline-block">
-                        <Logo noText />
+                        <Logo layout="logomark" width="auto" />
                     </span>
                 </Link>
             </div>

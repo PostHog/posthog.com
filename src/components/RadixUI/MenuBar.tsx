@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
-import { IconChevronRight } from '@posthog/icons'
+import { IconChevronDown, IconChevronRight } from '@posthog/icons'
 import Link from 'components/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 
 // Types
 export type MenuItemType = {
-    type: 'item' | 'submenu' | 'separator'
+    type: 'item' | 'submenu' | 'separator' | 'label'
     label?: string
     link?: string
     shortcut?: string | string[] // Support both string and array of keys
@@ -27,13 +27,15 @@ export type MenuType = {
     bold?: boolean
     items: MenuItemType[]
     mobileLink?: string // Direct link for the menu trigger on mobile
+    hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
 }
 
 const RootClasses = 'flex gap-px py-0.5 h-full'
-const TriggerClasses =
-    'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
+const TriggerClasses = `group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent`
 const ItemClasses =
     'hover:bg-accent group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted [&>span]:inline-flex [&>span]:w-full'
+const LabelClasses =
+    'select-none px-2.5 pt-1.5 pb-1 text-[11px] font-semibold uppercase tracking-wide leading-none text-muted'
 const SubTriggerClasses =
     'hover:bg-accent group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const ContentClasses =
@@ -146,12 +148,19 @@ const processMobileMenuItems = (items: MenuItemType[]): MenuItemType[] => {
 
 // Components
 const MenuItem: React.FC<{
+    portalContainer: HTMLElement | null
+    appContainer: HTMLElement | null
     item: MenuItemType
     forceIconIndent?: boolean
     menuIndex: number
-}> = ({ item, forceIconIndent, menuIndex }) => {
+    onCloseMenu?: () => void
+}> = ({ item, forceIconIndent, menuIndex, portalContainer, appContainer, onCloseMenu }) => {
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
+    }
+
+    if (item.type === 'label') {
+        return <RadixMenubar.Label className={LabelClasses}>{item.label}</RadixMenubar.Label>
     }
 
     if (item.node) {
@@ -174,7 +183,10 @@ const MenuItem: React.FC<{
                             state={{ newWindow: true }}
                             externalNoIcon={item.external}
                             className="no-underline"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                                e.stopPropagation()
+                                onCloseMenu?.()
+                            }}
                         >
                             <RadixMenubar.SubTrigger className={SubTriggerClasses}>
                                 {MenuItemContent(item, forceIconIndent)}
@@ -185,15 +197,23 @@ const MenuItem: React.FC<{
                             {MenuItemContent(item, forceIconIndent)}
                         </RadixMenubar.SubTrigger>
                     )}
-                    <RadixMenubar.Portal>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
-                            <ScrollArea className="max-h-screen !overflow-y-auto">
+                    <RadixMenubar.Portal container={portalContainer || undefined}>
+                        <RadixMenubar.SubContent
+                            collisionBoundary={appContainer}
+                            className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                        >
+                            <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
                                 {item.items.map((subItem, subIndex) => (
                                     <MenuItem
                                         key={`${subItem.link}-${subIndex}`}
                                         item={subItem}
                                         forceIconIndent={anyChildHasIcon}
                                         menuIndex={menuIndex}
+                                        portalContainer={portalContainer}
+                                        appContainer={appContainer}
+                                        onCloseMenu={onCloseMenu}
                                     />
                                 ))}
                             </ScrollArea>
@@ -212,14 +232,19 @@ const MenuItem: React.FC<{
                         ) : forceIconIndent ? (
                             <span style={{ display: 'inline-block', width: 16, minWidth: 16 }} className="mr-2" />
                         ) : null}
-                        {item.label}
+                        <span>{item.label}</span>
                         <div className={ShortcutClasses}>
                             <IconChevronRight className="size-4" />
                         </div>
                     </RadixMenubar.SubTrigger>
-                    <RadixMenubar.Portal>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
-                            {item.items}
+                    <RadixMenubar.Portal container={portalContainer || undefined}>
+                        <RadixMenubar.SubContent
+                            collisionBoundary={appContainer}
+                            className={ContentClasses}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                        >
+                            {React.cloneElement(item.items as unknown as React.ReactElement, { onCloseMenu })}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
                 </RadixMenubar.Sub>
@@ -239,6 +264,7 @@ const MenuItem: React.FC<{
                     state={{ newWindow: true }}
                     externalNoIcon={item.external}
                     className="w-full min-h-[25px] h-full px-2.5 flex items-center gap-2 no-underline text-primary"
+                    onClick={() => onCloseMenu?.()}
                 >
                     {item.icon ? (
                         item.icon
@@ -291,7 +317,21 @@ export interface MenuBarProps {
 }
 
 const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
-    const { isMobile } = useApp()
+    const { isMobile } = useAppSettings()
+
+    const [openMenuIndex, setOpenMenuIndex] = React.useState<number | null>(null)
+    const rootRef = React.useRef<HTMLDivElement | null>(null)
+    const [portalContainer, setPortalContainer] = React.useState<HTMLElement | null>(null)
+    const appContainer: HTMLElement | null = null
+
+    React.useEffect(() => {
+        if (!rootRef.current) {
+            setPortalContainer(null)
+            return
+        }
+        const container = rootRef.current.closest('[data-menu-container]')
+        setPortalContainer(container instanceof HTMLElement ? container : null)
+    }, [])
 
     // Process menus for mobile if needed
     const processedMenus = React.useMemo(() => {
@@ -310,8 +350,18 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
         })
     }, [menus, isMobile])
 
+    const closeMenu = React.useCallback(() => {
+        setOpenMenuIndex(null)
+    }, [])
+
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
+        <RadixMenubar.Root
+            ref={rootRef}
+            data-scheme="tertiary"
+            className={`${RootClasses} ${className || ''}`}
+            value={openMenuIndex !== null ? String(openMenuIndex) : ''}
+            onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
+        >
             {processedMenus.map((menu, menuIndex) => {
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isMobile && menu.mobileLink) {
@@ -325,12 +375,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             }`}
                         >
                             {menu.trigger}
+                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </Link>
                     )
                 }
 
                 return (
-                    <RadixMenubar.Menu key={menuIndex} data-scheme="primary">
+                    <RadixMenubar.Menu key={menuIndex} value={String(menuIndex)} data-scheme="primary">
                         <RadixMenubar.Trigger
                             asChild={triggerAsChild}
                             className={`${triggerAsChild ? '' : TriggerClasses} ${
@@ -338,18 +389,29 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             } ${customTriggerClasses}`}
                         >
                             {menu.trigger}
+                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </RadixMenubar.Trigger>
-                        <RadixMenubar.Portal>
+                        <RadixMenubar.Portal container={portalContainer || undefined}>
                             <RadixMenubar.Content
-                                className={ContentClasses}
+                                collisionBoundary={appContainer}
+                                className={`${ContentClasses} max-h-[calc(var(--radix-menubar-content-available-height)-0.75rem)] overflow-hidden flex flex-col`}
                                 align="start"
                                 sideOffset={5}
                                 alignOffset={-3}
                                 data-scheme="primary"
                             >
-                                {menu.items.map((item, itemIndex) => (
-                                    <MenuItem key={`${menuIndex}-${itemIndex}`} item={item} menuIndex={menuIndex} />
-                                ))}
+                                <ScrollArea className="min-h-0 !overflow-y-auto overscroll-contain">
+                                    {menu.items.map((item, itemIndex) => (
+                                        <MenuItem
+                                            key={`${menuIndex}-${itemIndex}`}
+                                            item={item}
+                                            menuIndex={menuIndex}
+                                            portalContainer={portalContainer}
+                                            appContainer={appContainer}
+                                            onCloseMenu={closeMenu}
+                                        />
+                                    ))}
+                                </ScrollArea>
                             </RadixMenubar.Content>
                         </RadixMenubar.Portal>
                     </RadixMenubar.Menu>

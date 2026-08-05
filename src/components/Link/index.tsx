@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
-import { useApp } from '../../context/App'
+import { useAppSettings } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
 // Helper function to create standard context menu items
@@ -21,6 +21,17 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
             ) : (
                 <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
                     Open in new PostHog window
+                </Link>
+            ),
+        },
+        {
+            type: 'item',
+            disabled: isExternal,
+            children: isExternal ? (
+                <span>Open in side by side view</span>
+            ) : (
+                <Link to={url} state={{ ...state, newWindow: true, sideBySide: 'right' }} contextMenu={false}>
+                    Open in side by side view
                 </Link>
             ),
         },
@@ -111,11 +122,12 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { appWindow } = useWindow()
-    const { posthogInstance, compact } = useApp()
+    const { posthogInstance, compact } = useAppSettings()
     const posthog = usePostHog()
     const locationHref = appWindow?.element?.props?.location?.href
     const initialUrl = to || href
     const url = resolveRelativeLink(initialUrl, locationHref)
+    const linkState = state?.newWindow && state?.preventScroll === undefined ? { ...state, preventScroll: true } : state
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =
@@ -194,12 +206,12 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )
@@ -247,12 +259,12 @@ export default function Link({
                             />
                         )}
                     >
-                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                             {children || null}
                         </GatsbyLink>
                     </Tooltip>
                 ) : (
-                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                    <GatsbyLink {...other} to={url} className={className} state={linkState} onClick={handleClick}>
                         {children}
                     </GatsbyLink>
                 )

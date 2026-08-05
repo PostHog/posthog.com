@@ -15,7 +15,7 @@ export const openreplay = {
                 chat_with_recordings: false, // No AI chat feature
                 clickmaps: true, // With heatmaps
                 conditional_recording: true, // Yes, via filtering
-                crash_reports: true, // Yes, crash detection
+                crash_reports: false, // Only mentioned here but vague: https://docs.openreplay.com/en/tutorials/issues/
                 event_timeline: true, // Yes
                 export_to_json: false, // Not mentioned
                 export_to_video: false, // Not mentioned

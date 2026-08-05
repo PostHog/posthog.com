@@ -1,10 +1,12 @@
 import { replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
-import fetch from 'node-fetch'
+
 import GitUrlParse from 'git-url-parse'
 import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
+import fs from 'fs'
+import path from 'path'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
 
 require('dotenv').config({
@@ -51,12 +53,59 @@ exports.onPreInit = async function (_, options) {
 }
 
 const cloudinaryCache = {}
+// Persisted copy of the Cloudinary resource list. Produced by the master cache-warmup job and
+// restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this
+// lets preview builds skip the multi-minute Cloudinary crawl in onPreInit below.
+const CLOUDINARY_CACHE_FILE = path.resolve(__dirname, '../.cloudinary-resources.json')
+
+let templateListPromise: Promise<any[]> | null = null
+async function getTemplateList() {
+    if (!templateListPromise) {
+        templateListPromise = fetch('https://us.posthog.com/api/public_hog_function_templates?limit=350/')
+            .then((res) => {
+                if (res.status !== 200) throw `Got status code ${res.status}`
+                return res.json()
+            })
+            .then((body) => body.results)
+    }
+    return templateListPromise
+}
 
 const REPO_CONFIGS = {
     'posthog-main-repo': {
         stripPrefix: '/docs/published/',
-        pathPrefix: '/handbook/engineering',
+        pathPrefix: '',
     },
+}
+
+/**
+ * Minimal YAML frontmatter parser for ingested SKILL.md files. They only carry
+ * `name` and `description` (description may be a folded `>-` scalar), so a tiny
+ * line-based parser is enough and avoids adding a gray-matter dependency.
+ */
+function parseSkillFrontmatter(raw: string): { name?: string; description?: string; body: string } {
+    const match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/)
+    if (!match) return { body: raw }
+    const [, frontmatter, body] = match
+    const lines = frontmatter.split('\n')
+    const fields: Record<string, string> = {}
+    for (let i = 0; i < lines.length; i++) {
+        const keyMatch = lines[i].match(/^(\w[\w-]*):\s?(.*)$/)
+        if (!keyMatch) continue
+        const [, key, rawValue] = keyMatch
+        let value = rawValue.trim()
+        // Folded/literal block scalar (>- > | |-): gather the indented lines below.
+        if (/^[>|][-+]?$/.test(value) || value === '') {
+            const collected: string[] = []
+            while (i + 1 < lines.length && (/^\s+\S/.test(lines[i + 1]) || lines[i + 1].trim() === '')) {
+                collected.push(lines[i + 1].trim())
+                i++
+            }
+            value = collected.join(' ').trim()
+        }
+        fields[key] = value.replace(/^['"]|['"]$/g, '')
+    }
+    return { name: fields.name, description: fields.description, body }
 }
 
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
@@ -68,16 +117,35 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         console.warn('Cloudinary credentials not found')
         return
     }
+
+    // Reuse a previously fetched resource list when available. The crawl below paginates the
+    // entire Cloudinary library (~2 min over the network), so skipping it greatly speeds up
+    // preview builds. A missing entry only omits image dimensions in onCreateNode (logged as a
+    // warning), so a stale cache degrades gracefully.
+    if (fs.existsSync(CLOUDINARY_CACHE_FILE)) {
+        try {
+            const cached = JSON.parse(fs.readFileSync(CLOUDINARY_CACHE_FILE, 'utf-8'))
+            Object.assign(cloudinaryCache, cached)
+            console.log(`Loaded ${Object.keys(cached).length} Cloudinary resources from cache`)
+            return
+        } catch {
+            // Corrupted/unreadable cache file — fall through to a fresh crawl
+        }
+    }
+
     console.log('Fetching cloudinary data')
+
+    const cloudinaryAuth = `Basic ${Buffer.from(
+        `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
+    ).toString('base64')}`
 
     const fetchCloudinaryImages = async (nextCursor = null) => {
         const { resources, next_cursor } = await fetch(
-            `https://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@api.cloudinary.com/v1_1/${
+            `https://api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`
-        )
-            .then((res) => res.json())
-            .catch((e) => console.error(e))
+            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
+            { headers: { Authorization: cloudinaryAuth } }
+        ).then((res) => res.json())
         resources.forEach((resource) => {
             cloudinaryCache[resource.public_id] = resource
         })
@@ -88,6 +156,9 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     }
 
     await fetchCloudinaryImages()
+
+    // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
+    fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
 }
 
 function getPublicID(image: string) {
@@ -102,8 +173,52 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     store,
     cache,
     createNodeId,
+    createContentDigest,
 }) => {
     const { createNodeField, createNode } = actions
+
+    // Canonical agent skills from the monorepo (products/<product>/skills/<name>/SKILL.md).
+    // These File nodes are blocked from MDX transformation, so we parse them into
+    // typed AgentSkill nodes here. Failures degrade to "skip this file", never break the build.
+    if (
+        node.internal.type === 'File' &&
+        (node as any).sourceInstanceName === 'posthog-main-repo' &&
+        (node as any).name === 'SKILL' &&
+        (((node as any).relativeDirectory as string) || '').includes('/skills/')
+    ) {
+        try {
+            const absolutePath = (node as any).absolutePath as string
+            const relativeDirectory = ((node as any).relativeDirectory as string) || ''
+            const parts = relativeDirectory.split('/') // products/<product>/skills/<skill-name>
+            const product = parts[0] === 'products' ? parts[1] : undefined
+            const skillName = parts[0] === 'products' ? parts[3] : undefined
+            if (product && skillName) {
+                const raw = fs.readFileSync(absolutePath, 'utf-8')
+                const { name, description, body } = parseSkillFrontmatter(raw)
+                const mcpTools = Array.from(
+                    new Set(Array.from(body.matchAll(/posthog:([a-z0-9-]+)/g)).map((m) => m[1]))
+                )
+                const id = createNodeId(`agent-skill-${(node as any).id}`)
+                createNode({
+                    id,
+                    parent: (node as any).id,
+                    children: [],
+                    product,
+                    name: name || skillName,
+                    description: description || '',
+                    sourcePath: relativeDirectory,
+                    mcpTools,
+                    internal: {
+                        type: 'AgentSkill',
+                        contentDigest: createContentDigest({ product, skillName, name, description, mcpTools }),
+                    },
+                })
+            }
+        } catch (err) {
+            console.warn(`Failed to parse agent skill from ${(node as any).absolutePath}:`, err)
+        }
+        return
+    }
 
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
@@ -240,16 +355,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             const templateIds = node.frontmatter.templateId
 
             try {
+                const results = await getTemplateList()
                 const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
                 for (const templateId of templateIds) {
-                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
-
-                    if (res.status !== 200) {
-                        throw `Got status code ${res.status}`
-                    }
-
-                    const body = await res.json()
-                    const config = body.results.find((template: { id: string }) => template?.id === templateId)
+                    const config = results.find((template: { id: string }) => template?.id === templateId)
                     const inputs_schema = config?.inputs_schema
                     const name = config?.name
                     const type = config?.type
@@ -420,5 +529,13 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 createNodeField({ node, name: 'localFile', value: local.id })
             }
         }
+    }
+    if (node.internal.type === 'PostHogWorkflowTemplate') {
+        const slug = slugify(node.name, { lower: true, strict: true })
+        createNodeField({
+            node,
+            name: 'slug',
+            value: slug,
+        })
     }
 }

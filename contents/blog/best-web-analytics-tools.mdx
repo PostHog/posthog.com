@@ -1,6 +1,6 @@
 ---
 title: The best web analytics tools for developers, compared
-date: 2025-01-15
+date: 2026-01-15
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -54,6 +54,7 @@ The best web analytics tools are actually platforms that go further and give you
 
 Here's how some of the most popular web analytics tools compare:
 
+<p>
 <ProductComparisonTable
     competitors={['posthog', 'plausible', 'fathom', 'matomo', 'mixpanel', 'cloudflare']}
     rows={[
@@ -75,10 +76,11 @@ Here's how some of the most popular web analytics tools compare:
         'platform.deployment.open_source',
     ]}
 />
+</p>
 
 *Hey competitors 👋 We try our best to keep up with what you're shipping, but if we got something wrong or this looks outdated, feel free to open a PR and we'll fix it.*
 
-You might notice one obvious omission: [Google Analytics 4](blog/ga4-alternatives). That's intentional. GA4 is powerful and widely used, but it's also opinionated, complex, and fundamentally built for a different audience. 
+You might notice one obvious omission: [Google Analytics 4](/blog/ga4-alternatives). That's intentional. GA4 is powerful and widely used, but it's also opinionated, complex, and fundamentally built for a different audience. 
 
 Rather than rehash the same frustrations, this guide focuses on tools that are easier to reason about, more developer-friendly, or better aligned with modern product workflows.
 
@@ -90,7 +92,7 @@ Rather than rehash the same frustrations, this guide focuses on tools that are e
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/Posthog_web_analytics_679d394b35.png)
 
-PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM analytics](/llm-analytics) in one place.
+PostHog is an all-in-one developer platform that combines [web analytics](/web-analytics) with [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and [LLM observability](/llm-analytics) in one place.
 
 Unlike standalone web analytics tools, PostHog lets you follow a visitor's journey from their first pageview through to product usage; you still get the fundamentals, but they're directly connected to how users actually behave in your product. Every pageview can be tied to events, users, recordings, flag variants, errors, and more. 
 
@@ -101,7 +103,7 @@ You can also run [A/B tests](/experiments) using web vitals as goals, track ad s
 PostHog uses simple [usage-based pricing](/pricing) with a generous free tier that includes 1 million events per month, which is enough for most early-stage teams to get real value before paying anything.
 
 <p>
-  <CallToAction to="https://posthog.com/docs/web-analytics/getting-started">
+  <CallToAction to="https://posthog.com/docs/web-analytics/start-here">
     Get started with PostHog Web Analytics – it's free!
   </CallToAction>
 </p>
@@ -110,9 +112,9 @@ PostHog uses simple [usage-based pricing](/pricing) with a generous free tier th
 
 - Complete visitor-to-user journey tracking
 - [Unified suite of developer tools in one platform](/products)
-- [Developer-friendly setup](/docs/ai-engineering/ai-wizard) and [SDKs](/docs/libraries)
+- [Developer-friendly setup](/wizard) and [SDKs](/docs/libraries)
 - [PostHog AI](/ai) to query data in natural language and debug issues faster
-- [SQL access](/docs/product-analytics/sql) and raw data ownership
+- [SQL access](/docs/data-warehouse/sql) and raw data ownership
 - [Flexible API](/docs/endpoints) definitions with our endpoints product
 
 **Community:**
@@ -340,6 +342,19 @@ Developers already using Cloudflare who want free, privacy-first website metrics
 ## FAQ
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What is web analytics, really?</summary>
 
 **Web analytics** is the art and science of understanding how people find your site, what they do on it, and what happens next. At its simplest, that means tracking pageviews and referrers. At its most useful, [it means understanding behavior, friction, and outcomes](/newsletter/misconceptions-about-analytics).
@@ -382,7 +397,7 @@ That's why many modern tools pair pageviews with [events](/docs/product-analytic
 
 Yes, especially tools that rely entirely on client-side JavaScript. Privacy-first tools, server-side collection, or edge-based analytics (like Cloudflare's) tend to be more resilient, but no analytics setup is 100% immune. You can also [set up a reverse proxy](/docs/advanced/proxy) to route analytics through your own domain, or combine client-side and server-side tracking to fill in gaps.
 
-Even then, it's best to treat web analytics as directionally accurate and focus on trends and patterns — not exact counts.
+Even then, it's best to treat web analytics as directionally accurate and focus on trends and patterns – not exact counts.
 
 </details>
 
@@ -419,7 +434,7 @@ Watch for how tools measure usage. Some charge by pageviews, others by events, o
 <details>
   <summary>Do I need session replay with web analytics?</summary>
 
-Not always — but it's extremely useful when debugging issues or understanding drop-offs. Tools like **PostHog** link analytics directly to [session replay](/blog/best-session-replay-tools), so you can see exactly what users did instead of guessing from charts.
+Not always – but it's extremely useful when debugging issues or understanding drop-offs. Tools like **PostHog** link analytics directly to [session replay](/blog/best-session-replay-tools), so you can see exactly what users did instead of guessing from charts.
 
 </details>
 

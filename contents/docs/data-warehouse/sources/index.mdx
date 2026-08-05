@@ -2,7 +2,7 @@
 title: Data warehouse sources
 ---
 
-import { ManagedSources, SelfHostedSources } from '../../_snippets/data-sources'
+import { ManagedSources, SelfHostedSources } from "../../_snippets/data-sources";
 
 ## PostHog data
 
@@ -16,8 +16,8 @@ Provide your credentials and PostHog handles the entire extract and load process
 
 ## Self-hosted sources
 
-Upload CSV or Parquet files to your own object storage and link them as a source. PostHog reads directly from your storage on every query. You control data freshness and can store as much data as you want.
+Upload a CSV, JSON, or Parquet file directly to PostHog, or link files in your own object storage (S3, GCS, R2, Azure Blob). PostHog reads directly from storage on every query.
 
 <SelfHostedSources />
 
-You can also learn more about sources in the [data pipeline docs](/docs/cdp/sources).
+For detailed setup instructions, IP allowlisting, custom sources, and sync configuration, see the [data pipeline source docs](/docs/cdp/sources).
