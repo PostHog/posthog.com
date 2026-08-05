@@ -28,7 +28,7 @@ You need a Netlify account and a personal access token. The token has full acces
 
 You need a Netlify personal access token. Create one under **User settings > Applications > Personal access tokens** in the [Netlify UI](https://app.netlify.com/user/applications).
 
-> **Note:** Netlify invalidates tokens on password reset. SAML SSO teams must opt tokens in during generation.
+> **Note:** Netlify invalidates tokens on password reset. If your team requires SAML SSO, select **Allow access to my SAML-based Netlify team** when generating the token, otherwise Netlify denies the token access to that team's data.
 
 ## Sync modes
 
@@ -44,8 +44,13 @@ All Netlify tables are full refresh only, since the API exposes no server-side t
 
 <SourceTables />
 
+The `sites` table includes every site the token can access, across all of your teams. The `builds`, `deploys`, `forms`, and `submissions` tables are fetched per site, and `members` is fetched per account.
+
 ## Troubleshooting
 
 - If the connection fails with an access-denied error, your token may be invalid or revoked (Netlify invalidates tokens on password reset). Create a new token and reconnect.
+- If syncs complete but tables stay empty, the token likely can't access the team that owns your sites. For SAML SSO teams, generate a new token with **Allow access to my SAML-based Netlify team** selected, then reconnect.
+- The `builds`, `deploys`, `forms`, and `submissions` tables stay empty until the `sites` table syncs at least one row, since they're fetched per site.
+- The `dns_zones` table is only populated if your team manages DNS through Netlify.
 
 <TroubleshootingLink />

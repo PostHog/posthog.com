@@ -128,6 +128,28 @@
             "destination": "/newsletter/:path*.md"
         },
         {
+            "source": "/changelog/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/changelog.md"
+        },
+        {
+            "source": "/changelog",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/changelog.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
