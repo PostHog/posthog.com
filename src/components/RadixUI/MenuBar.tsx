@@ -26,6 +26,7 @@ export type MenuType = {
     trigger: React.ReactNode
     bold?: boolean
     items: MenuItemType[]
+    link?: string // Direct link for the menu trigger instead of opening a menu
     mobileLink?: string // Direct link for the menu trigger on mobile
     hideChevron?: boolean // Hide the chevron down icon for this menu in website mode
 }
@@ -363,6 +364,21 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
             onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
         >
             {processedMenus.map((menu, menuIndex) => {
+                if (menu.link) {
+                    return (
+                        <Link
+                            key={menuIndex}
+                            to={menu.link}
+                            state={{ newWindow: true }}
+                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
+                                customTriggerClasses || ''
+                            }`}
+                        >
+                            {menu.trigger}
+                        </Link>
+                    )
+                }
+
                 // On mobile, if menu has mobileLink, make it a direct link
                 if (isMobile && menu.mobileLink) {
                     return (

@@ -1,6 +1,6 @@
 import { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
 import React from 'react'
-import { companyMenu, docsMenu, pricingMenu } from '../../navs'
+import { companyMenu, docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import SearchableProductMenu from './SearchableProductMenu'
@@ -401,50 +401,9 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Pricing',
-            items: [
-                {
-                    type: 'item',
-                    label: 'Usage-based pricing',
-                    link: '/pricing',
-                    icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'Platform packages',
-                    link: '/platform-packages',
-                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
-                },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                    icon: getMenuIcon(pricingMenu.children, '/startups', 'IconRocket', 'purple'),
-                },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Learn more',
-                    disabled: true,
-                },
-                {
-                    type: 'item',
-                    label: 'Watch a demo',
-                    link: '/demo',
-                    icon: getMenuIcon(pricingMenu.children, '/demo', 'IconPlay', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'Talk to a human',
-                    link: '/talk-to-a-human',
-                    icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
-                },
-                {
-                    type: 'item',
-                    label: 'How we do sales',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
-                },
-            ],
+            link: '/pricing',
+            items: [],
+            hideChevron: true,
         },
         {
             trigger: 'Docs',
@@ -480,6 +439,12 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
                 { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                    icon: <Icons.IconPresent className="size-4 text-purple" />,
+                },
                 {
                     type: 'item',
                     label: 'Merch store',
@@ -817,8 +782,15 @@ export function useMenuData(): MenuType[] {
         const mobileItems: MenuItemType[] = []
 
         mainNavItems.forEach((menu) => {
+            if (menu.link) {
+                mobileItems.push({
+                    type: 'item' as const,
+                    label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
+                    link: menu.link,
+                })
+            }
             // If menu has mobileLink, convert to simple item
-            if (menu.mobileLink) {
+            else if (menu.mobileLink) {
                 mobileItems.push({
                     type: 'item' as const,
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
