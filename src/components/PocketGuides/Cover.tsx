@@ -1,29 +1,24 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { HedgehogDataThief, HedgehogImTheDriver, HedgehogWorkflows } from '@posthog/brand/hoggies'
+import { HedgehogDataThief, HedgehogImTheDriver } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
-import { FieldGuideVolume } from '../../constants/fieldGuides'
+import { PocketGuideVolume } from '../../constants/pocketGuides'
 
 /** Cover art per volume, so a new volume picks an existing hoggie instead of commissioning one. */
 const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     'self-driving': HedgehogImTheDriver,
     'data-warehouse': HedgehogDataThief,
-    workflows: HedgehogWorkflows,
 }
 
 interface CoverProps {
-    volume: FieldGuideVolume
-    /** Guides inside it, printed the way a series prints its contents count. */
+    volume: PocketGuideVolume
+    /** Guides inside it (the 101 isn't counted), printed the way a series prints its contents. */
     count: number
 }
 
-/**
- * The series frame, borrowing the three devices that make a Peterson cover recognisable: a
- * coloured spine down the left edge, the series name set larger than the subject, and the
- * specimen floating on an empty ground. No body copy – covers don't have paragraphs.
- */
+/** The series frame: colored spine, series name above the subject, specimen on empty ground. */
 function Frame({ token, children }: { token: string; children: React.ReactNode }): JSX.Element {
     return (
         <article className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark">
@@ -36,10 +31,9 @@ function Frame({ token, children }: { token: string; children: React.ReactNode }
 function Masthead({ title }: { title: string }): JSX.Element {
     return (
         <header>
-            {/* Wordmark only – the logomark is a second illustration competing with the specimen.
-                Pinned black: the cover is white stock in both themes, like printed stock. */}
+            {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
             <Logo.Wordmark color="black" className="h-5 w-auto @[240px]:h-6" />
-            <p className="m-0 mt-1.5 text-[11px] uppercase tracking-[0.14em] text-gray">Field guide to</p>
+            <p className="m-0 mt-1.5 text-[11px] uppercase tracking-[0.14em] text-gray">Pocket guide to</p>
             <h3 className="m-0 mt-1.5 text-2xl font-bold leading-tight text-black @[240px]:text-3xl">{title}</h3>
         </header>
     )
@@ -64,20 +58,19 @@ function CoverBody({ volume, count }: CoverProps): JSX.Element {
             {volume.comingSoon && <ComingSoonSash />}
             <Masthead title={volume.title} />
             {Art && (
+                // min-h-0 lets the art shrink when a long title wraps, instead of clipping the footer.
                 <div
                     aria-hidden="true"
-                    className={`flex flex-1 items-center justify-center py-2 ${
+                    className={`flex min-h-0 flex-1 items-center justify-center py-2 ${
                         volume.comingSoon ? 'opacity-40 grayscale' : ''
                     }`}
                 >
-                    <Art size={190} />
+                    <Art size={140} className="h-full max-h-[140px] w-auto max-w-full" />
                 </div>
             )}
-            <footer className="flex items-baseline justify-between gap-2 text-[11px] uppercase tracking-wider text-gray">
+            <footer className="flex shrink-0 items-baseline justify-between gap-2 text-[11px] uppercase tracking-wider text-gray">
                 <span>Vol. {volume.volume}</span>
-                {volume.comingSoon ? (
-                    <span>{volume.owner} team</span>
-                ) : (
+                {!volume.comingSoon && (
                     <span className="tabular-nums">
                         {count} {count === 1 ? 'guide' : 'guides'}
                     </span>
@@ -95,11 +88,16 @@ export default function Cover({ volume, count }: CoverProps): JSX.Element {
 
     return (
         <Link
-            to={`/field-guides/${volume.id}`}
+            to={`/pocket-guides/${volume.id}`}
             state={{ newWindow: true }}
-            className="block no-underline transition-transform hover:-translate-y-1"
+            // Perspective lives on the link so the hover tilt reads as picking the book up.
+            className="group block no-underline [perspective:1200px]"
         >
-            <CoverBody volume={volume} count={count} />
+            {/* Hinged at the spine: the fore-edge lifts toward you like a cover opening, and the
+                spine edge stays planted instead of foreshortening away. */}
+            <div className="transition-transform duration-300 ease-out [transform-origin:left_center] [transform-style:preserve-3d] motion-safe:group-hover:[transform:rotateY(-9deg)_translateY(-4px)] motion-safe:group-hover:drop-shadow-2xl">
+                <CoverBody volume={volume} count={count} />
+            </div>
         </Link>
     )
 }

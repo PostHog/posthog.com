@@ -11,8 +11,20 @@ import TemplateDetail from './TemplateDetail'
 import { InboxFilter, InboxTemplate, UNCATEGORIZED } from './types'
 
 /** Slug of the template a row points at, used as the `?report=` value. */
-function slugOf(url: string): string {
-    return url.replace(/^\/field-guides\/self-driving\//, '').replace(/\/$/, '')
+export function slugOf(url: string): string {
+    return url.replace(/^\/pocket-guides\/self-driving\//, '').replace(/\/$/, '')
+}
+
+/** Numbered dot for the annotated exhibit – the legend under the figure explains each one. */
+function AnnotationMarker({ number, className }: { number: number; className: string }): JSX.Element {
+    return (
+        <span
+            aria-hidden="true"
+            className={`pointer-events-none absolute z-20 flex size-5 items-center justify-center rounded-full bg-orange text-[11px] font-bold text-white shadow-md ${className}`}
+        >
+            {number}
+        </span>
+    )
 }
 
 /** Read on a cold load only, so a filtered view is still a shareable link. See `Page.tsx`. */
@@ -42,7 +54,7 @@ export function matchesFilter(template: InboxTemplate, filter: InboxFilter): boo
 export function useSelfDrivingTemplates(): InboxTemplate[] {
     const data = useStaticQuery(graphql`
         query SelfDrivingInboxQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/field-guides/self-driving//" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides/self-driving//" } } }) {
                 nodes {
                     id
                     fields {
@@ -50,6 +62,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                     }
                     frontmatter {
                         title
+                        shortTitle
                         subtitle
                         filters {
                             type
@@ -100,7 +113,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
     return useMemo(() => {
         const nodes = data?.guides?.nodes || []
 
-        // Keyed by the guide slug that owns each scout: /field-guides/x/SKILL -> /field-guides/x
+        // Keyed by the guide slug that owns each scout: /pocket-guides/x/SKILL -> /pocket-guides/x
         const scoutsByTemplate = new Map<string, any>(
             (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
         )
@@ -125,6 +138,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         url: node.fields.slug,
                         category: node.frontmatter.category || UNCATEGORIZED,
                         templateTitle: node.frontmatter.title,
+                        templateShortTitle: node.frontmatter.shortTitle,
                         templateSubtitle: node.frontmatter.subtitle,
                         report: node.frontmatter.report,
                         premise: node.frontmatter.premise,
@@ -150,17 +164,19 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
 interface SelfDrivingInboxProps {
     /** Pre-selected slug, so a per-template route and the gallery render the same screen. */
     initialSlug?: string
-    /** Owned by `Page.tsx`, since the rail lives in the Explorer sidebar. */
     activeFilter?: InboxFilter
-    /** Lets the narrow-width select drive the same state the sidebar rail owns. */
+    /** Lets the narrow-width select drive the same state a parent filter owns. */
     onFilterChange?: (filter: InboxFilter) => void
+    /** Numbered markers over the panes, for use inside a captioned figure with a legend. */
+    annotate?: boolean
 }
 
-/** Field guides browsed as an inbox. Static-first: the list is built HTML, the rest is enhancement. */
+/** The inbox, live. Static-first: the list is built HTML, the rest is enhancement. */
 export default function SelfDrivingInbox({
     initialSlug,
     activeFilter = null,
     onFilterChange,
+    annotate = false,
 }: SelfDrivingInboxProps = {}): JSX.Element {
     const templates = useSelfDrivingTemplates()
     const location = useLocation()
@@ -305,17 +321,16 @@ export default function SelfDrivingInbox({
     if (templates.length === 0) {
         return (
             <div className="p-8 text-center text-secondary">
-                <p className="m-0 text-[15px]">No self-driving field guides yet.</p>
+                <p className="m-0 text-[15px]">No self-driving pocket guides yet.</p>
             </div>
         )
     }
 
     return (
         <div ref={containerRef} className="@container flex h-full min-h-0 flex-col">
-            {/* Explorer drops its own `title` under `fullScreen`, which the panes need for
-                scrolling – so the heading lives here. */}
+            {/* A `p`, not a heading: this renders inside pages that own their own heading tree. */}
             <header className="border-b border-light px-4 py-3 dark:border-dark">
-                <h1 className="m-0 text-base font-bold text-primary @[700px]:text-lg">Self-driving field guides</h1>
+                <p className="m-0 text-base font-bold text-primary @[700px]:text-lg">The inbox</p>
                 {/* No hover cards in chrome – dotted underlines in a caption read as clutter. */}
                 <p className="m-0 text-sm text-secondary">
                     What a scout watches for, and the report it files when it finds it.
@@ -327,10 +342,11 @@ export default function SelfDrivingInbox({
                     ref={listRef}
                     role="list"
                     onKeyDown={onKeyDown}
-                    className={`min-h-0 flex-col border-light @[700px]:flex @[700px]:w-[380px] @[700px]:shrink-0 @[700px]:border-r dark:border-dark ${
+                    className={`relative min-h-0 flex-col border-light @[700px]:flex @[700px]:w-[380px] @[700px]:shrink-0 @[700px]:border-r dark:border-dark ${
                         onTemplateRoute ? 'hidden' : 'flex'
                     }`}
                 >
+                    {annotate && <AnnotationMarker number={1} className="right-2 top-2" />}
                     <div className="space-y-2 border-b border-light px-4 py-2 dark:border-dark">
                         {/* Progressive enhancement, like the rest of the pane: with JS off the
                             full list is still there and still navigable. */}
@@ -340,17 +356,17 @@ export default function SelfDrivingInbox({
                                 value={query}
                                 onChange={(event) => setQuery(event.target.value)}
                                 placeholder={`Search ${templates.length} guides`}
-                                aria-label="Search field guides"
+                                aria-label="Search pocket guides"
                                 className="w-full rounded border border-light bg-accent px-2 py-1 text-sm text-primary placeholder:text-secondary dark:border-dark dark:bg-accent-dark"
                             />
                         )}
-                        {/* Explorer stacks its sidebar below the content on narrow, so the rail
-                            lands after everything it filters. Same data, a select instead. */}
-                        {interactive && tools.length > 0 && (
+                        {/* Only when a parent owns filter state – a select wired to nothing
+                            would read as broken. */}
+                        {interactive && tools.length > 0 && onFilterChange && (
                             <select
                                 value={activeFilter ?? ''}
                                 onChange={(event) => onFilterChange?.(event.target.value || null)}
-                                aria-label="Filter field guides by tool"
+                                aria-label="Filter pocket guides by tool"
                                 className="w-full rounded border border-light bg-accent px-2 py-1 text-sm text-primary @[700px]:hidden dark:border-dark dark:bg-accent-dark"
                             >
                                 <option value="">All guides ({templates.length})</option>
@@ -412,17 +428,25 @@ export default function SelfDrivingInbox({
                 {/* Renders server-side: the built HTML is what search engines and the .md
                     agent mirror read, so the teaching content has to be in it. */}
                 {selected && (
-                    <div className={`min-h-0 flex-1 flex-col @[700px]:flex ${onTemplateRoute ? 'flex' : 'hidden'}`}>
+                    <div
+                        className={`relative min-h-0 flex-1 flex-col @[700px]:flex ${
+                            onTemplateRoute ? 'flex' : 'hidden'
+                        }`}
+                    >
+                        {annotate && <AnnotationMarker number={2} className="right-2 top-2" />}
                         <ScrollArea className="min-h-0 flex-1">
                             <Link
-                                to="/field-guides/self-driving"
+                                to="/pocket-guides/self-driving"
                                 className="mx-6 mt-4 inline-block text-sm text-secondary @[700px]:hidden"
                             >
-                                ‹ All templates
+                                ‹ All guides
                             </Link>
                             <TemplateDetail template={selected} />
                         </ScrollArea>
-                        <EnableScoutBar scout={selected.scout} templateTitle={selected.templateTitle} />
+                        <div className="relative">
+                            {annotate && <AnnotationMarker number={3} className="-top-2 right-2" />}
+                            <EnableScoutBar scout={selected.scout} templateTitle={selected.templateTitle} />
+                        </div>
                     </div>
                 )}
             </div>

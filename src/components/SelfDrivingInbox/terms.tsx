@@ -12,7 +12,7 @@ export interface TermDefinition {
     title: string
     /** One or two sentences, quoted from the owning docs page. */
     description: string
-    /** The docs page that owns this concept; becomes the card's "Continue reading" link. */
+    /** The docs page that owns this concept; becomes the card's "Read the docs" link. */
     slug: string
 }
 
@@ -62,14 +62,22 @@ interface TermProps {
 export default function Term({ name, children, className = '' }: TermProps): JSX.Element {
     const definition = TERMS[name]
 
+    // Fail soft on unknown names – an author typo prints plain text instead of crashing the page.
+    if (!definition) {
+        return <>{children ?? name}</>
+    }
+
     return (
         <Link
             to={definition.slug}
             state={{ newWindow: true }}
-            preview={definition}
-            // The dotted underline is the affordance – without it nobody knows to hover. The
-            // pane is otherwise underline-free, so this reads as "defined term", not "link".
-            className={`underline decoration-dotted decoration-from-font underline-offset-4 ${className}`}
+            // "Read the docs", not "Continue reading": the reader IS reading – this link leaves
+            // the pocket guide for the docs page that owns the term.
+            preview={{ ...definition, ctaLabel: 'Read the docs' }}
+            // Orange dotted + help cursor is the "defined term" affordance; navigation links keep
+            // a solid text-color underline. Color is what separates the two at body size – the
+            // orange matches the book's other teaching apparatus (figure markers, the spine).
+            className={`cursor-help underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`}
         >
             {children ?? name}
         </Link>

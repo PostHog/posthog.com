@@ -1,28 +1,29 @@
 # SelfDrivingInbox
 
-Renders volume one of the field guides as a **live inbox**: instead of browsing guide
-descriptions, a visitor reads a queue of real-shaped reports — the same artifact self-driving
-would deliver to them. Clicking a report opens the guide behind it.
+Renders the self-driving inbox as a **live exhibit**: a queue of real-shaped reports — the same
+artifact self-driving would deliver — with the guide behind each one readable in place.
 
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Used by `/field-guides/self-driving` (`src/pages/field-guides/self-driving.tsx`), and its
-`ReportCard` is shared with `src/templates/Template.tsx` so each guide page shows the
-identical report.
+Since the pocket-guide redesign this is no longer page chrome. Guides render as book spreads
+(`components/PocketGuides/BookPage.tsx`), where the inbox appears as a figure via
+`components/PocketGuides/InboxFigure.tsx` – this folder's `ReportRow` and `ReportCard` compose
+it. The full master-detail component in `index.tsx` currently has no page of its own; it and
+`TemplateDetail` are kept for reuse while the design settles.
 
 ---
 
 ## Adding a template
 
-**Copy `contents/field-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
+**Copy `contents/pocket-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
 kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow — you
 should not need to reverse-engineer an existing template.
 
 A template is two files:
 
 ```
-contents/field-guides/<volume>/<slug>/
+contents/pocket-guides/<volume>/<slug>/
 ├── index.mdx    everything a human reads
 └── SKILL.md     the scout itself
 ```
@@ -44,7 +45,7 @@ gallery queries (`index.tsx` here, `TemplatesLibrary/index.tsx`) filter the same
 ## Authoring a template's report
 
 The report lives in the template's **frontmatter**, not its MDX body. Add a `report` block to
-`contents/field-guides/<volume>/<slug>/index.mdx`:
+`contents/pocket-guides/<volume>/<slug>/index.mdx`:
 
 ```yaml
 ---
@@ -132,11 +133,11 @@ elsewhere on the site (see `suppressHydrationWarning` in `src/pages/self-driving
 ## These files are agent context too
 
 A scout template is read by two audiences from one source. Humans get the inbox UI; agents get a
-markdown mirror of the same page at `https://posthog.com/field-guides/<volume>/<slug>.md`.
+markdown mirror of the same page at `https://posthog.com/pocket-guides/<volume>/<slug>.md`.
 
 That mirror is produced by the site's existing pipeline, not a bespoke exporter:
 `generateRawMarkdownPages()` in `gatsby/rawMarkdownUtils.ts` converts the **built HTML** of every
-page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/field-guides`)
+page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/pocket-guides`)
 with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/robots.txt` blocks
 `/*.md$` from search crawlers, so the mirror exists for agents specifically.
 `context-mill/context/docs.yaml` already consumes posthog.com `.md` URLs this way to feed the
@@ -162,8 +163,7 @@ agent reading the mirror can create the scout verbatim instead of translating it
   (Same contract as `components/LiveSelfDrivingLoop`.)
 - **Container queries, never media queries.** Every page on this site is a resizable window, so
   breakpoints are `@[700px]:`-style and keyed to the container, not the viewport.
-- **Project color tokens only.** Priority colors live in `PRIORITY_STYLES` in `types.ts`
-  (`bg-red`, `bg-orange`, `bg-blue`, `bg-secondary`). Never stock Tailwind colors.
+- **Project color tokens only.** Never stock Tailwind colors.
 - **Reduced motion** collapses pane transitions to instant.
 
 ## Why `components/Inbox` is not reused
@@ -180,9 +180,11 @@ Don't retry the reuse; extract a shared shell from both only if a third consumer
 
 | File | Responsibility |
 |---|---|
-| `index.tsx` | The gallery: data query, selection state, two-pane layout |
+| `index.tsx` | The inbox exhibit: data query, selection state, two-pane layout, annotations |
 | `ReportRow.tsx` | One inbox row — title, source, time |
-| `ReportCard.tsx` | The report body. `variant: 'preview' \| 'page'`. Shared with `Template.tsx` |
+| `ReportCard.tsx` | The report body. `variant: 'preview' \| 'page'` |
+| `TemplateDetail.tsx` | One guide's sections. `embedded` for the exhibit pane, book page otherwise |
+| `EnableScout.tsx` | The "add to your troop" CTA, plus the exhibit's bottom bar |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).

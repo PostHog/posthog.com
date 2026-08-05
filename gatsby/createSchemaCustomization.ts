@@ -105,6 +105,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       report: FrontmatterReport
       premise: String
       tldr: String
+      # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.
+      shortTitle: String
+      # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
+      # pages in sequence. Declared so a book page can exist without a report block.
+      bookOrder: Int
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
       # The product surface a scout template belongs to, e.g. "Error tracking". Drives the

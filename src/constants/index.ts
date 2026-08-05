@@ -1,4 +1,4 @@
-// Paths that have raw markdown available for copying/downloading. `/field-guides` is here so a
+// Paths that have raw markdown available for copying/downloading. `/pocket-guides` is here so a
 // scout's SKILL.md is fetchable as agent context – see components/SelfDrivingInbox/README.md.
 export const MARKDOWN_CONTENT_PATHS = [
     '/docs',
@@ -6,7 +6,7 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/blog',
     '/newsletter',
     '/templates',
-    '/field-guides',
+    '/pocket-guides',
 ] as const
 export const isMarkdownContentPath = (path: string) =>
     MARKDOWN_CONTENT_PATHS.some((p) => path === p || path.startsWith(`${p}/`))

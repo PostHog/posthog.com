@@ -182,7 +182,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            templates: allMdx(filter: { fields: { slug: { regex: "/^/(templates|field-guides)//" } } }) {
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/(templates|pocket-guides)//" } } }) {
                 nodes {
                     id
                     fields {
@@ -660,7 +660,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         // `_`-prefixed template directories are starters to copy from, not pages. They carry a
         // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
         // above doesn't exclude them the way it excludes sibling SKILL.md files.
-        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|field-guides)/.test(plainSlug ?? '')) return
+        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides)/.test(plainSlug ?? '')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,

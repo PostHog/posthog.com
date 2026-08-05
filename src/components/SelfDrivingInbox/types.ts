@@ -1,4 +1,4 @@
-/** The field guide contract: structured frontmatter, so list and page render from one source. */
+/** The pocket guide contract: structured frontmatter, so list and page render from one source. */
 
 export interface SelfDrivingReport {
     /** The finding, stated as a headline with its evidence in it. Not a topic – a claim. */
@@ -50,10 +50,12 @@ export type InboxFilter = string | null
 export interface InboxTemplate {
     /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */
     category: string
-    /** Route to the guide page, e.g. /field-guides/self-driving/silent-failure-core-action */
+    /** Route to the guide page, e.g. /pocket-guides/self-driving/silent-failure-core-action */
     url: string
     /** The template's own title, e.g. "Silent failure in your core action" */
     templateTitle: string
+    /** Short name for tight surfaces like the index tabs. Fall back to `templateTitle`. */
+    templateShortTitle?: string
     templateSubtitle?: string
     report: SelfDrivingReport
     premise?: string

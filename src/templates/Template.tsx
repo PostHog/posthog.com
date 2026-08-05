@@ -15,7 +15,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import TemplateCTA, { CtaSpec } from 'components/TemplateCTA'
-import SelfDrivingInboxPage from 'components/SelfDrivingInbox/Page'
+import BookPage from 'components/PocketGuides/BookPage'
 
 const A = (props) => <Link {...props} />
 
@@ -110,17 +110,17 @@ export default function Template({ data }) {
         Section,
     }
 
-    // Field guides have no page of their own: the volume's inbox is the surface, pre-selected.
-    if (templateType === 'self-driving') {
-        const templateSlug = slug.replace(/^\/field-guides\/self-driving\//, '').replace(/\/$/, '')
+    // Every page of a pocket guide is an MDX file rendered into the book layout – the volume's
+    // front matter, its chapters, and its use cases all take this branch.
+    if (slug.startsWith('/pocket-guides/')) {
         return (
             <>
                 <SEO
-                    image={`/images/templates/${slug.split('/')[3]}.png`}
-                    title={`${title} – a PostHog field guide`}
+                    title={`${title} – Self-driving pocket guide`}
                     description={pageData?.frontmatter?.subtitle || description || excerpt}
+                    image="/images/og/default.png"
                 />
-                <SelfDrivingInboxPage initialSlug={templateSlug} />
+                <BookPage slug={slug} body={body} />
             </>
         )
     }

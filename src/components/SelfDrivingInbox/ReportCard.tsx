@@ -45,10 +45,11 @@ export default function ReportCard({ report, variant = 'page', className = '' }:
 
             {report.suggestedAction && (
                 <div className="mt-4 border-t border-light pt-3 dark:border-dark">
-                    <p className="m-0 text-[15px] text-primary">
+                    {/* A div, not a p: Markdown renders block elements, and a p can't hold them. */}
+                    <div className="m-0 text-[15px] text-primary">
                         <strong>Suggested action:</strong>{' '}
                         <Markdown className="inline [&>p]:m-0 [&>p]:inline">{report.suggestedAction}</Markdown>
-                    </p>
+                    </div>
                     {report.actionNote && <p className="mt-1 mb-0 text-sm text-secondary">{report.actionNote}</p>}
                 </div>
             )}
