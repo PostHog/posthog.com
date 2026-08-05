@@ -662,9 +662,14 @@ const heroBullets = [
 
 const HeroSection = () => (
     <section className="not-prose w-full tracking-[-0.0125em]">
+        {/* Cross out the first @, then highlight the second – "not this, this" */}
         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-            Don't @ <em>me,</em>{' '}
-            <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
+            Don't{' '}
+            <RoughAnnotation type="strike-through" color="#F54E00" strokeWidth={2} delay={300}>
+                @ <em>me</em>
+            </RoughAnnotation>
+            ,{' '}
+            <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={1100}>
                 @PostHog
             </RoughAnnotation>
         </h1>
