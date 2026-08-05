@@ -6,7 +6,6 @@ export const MARKDOWN_CONTENT_PATHS = [
     '/blog',
     '/newsletter',
     '/changelog',
-    '/templates',
     '/pocket-guides',
 ] as const
 export const isMarkdownContentPath = (path: string) =>

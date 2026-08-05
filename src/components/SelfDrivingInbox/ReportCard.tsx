@@ -22,7 +22,6 @@ export default function ReportCard({ report, variant = 'page', className = '' }:
             } ${className}`}
         >
             <header className="mb-3">
-                {/* No priority dot – see ReportRow. */}
                 <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-secondary">
                     <span>{report.source}</span>
                     {report.receivedAgo && (

@@ -4,9 +4,6 @@ import Link from 'components/Link'
 import { IconSearch } from '@posthog/icons'
 import dayjs from 'dayjs'
 
-import { collectionOfType, TEMPLATE_COLLECTIONS, TemplateCollection } from '../../constants/templateCollections'
-import CollectionCards from './CollectionCards'
-
 interface MdxTemplate {
     id: string
     fields: {
@@ -202,25 +199,22 @@ export default function TemplatesLibrary(): JSX.Element {
         }
     `)
 
-    const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || [])
-        // `_`-prefixed directories are starters to copy from, and have no page.
-        .filter((t: MdxTemplate) => !t.fields.slug.endsWith('/SKILL') && !t.fields.slug.startsWith('/templates/_'))
-        .map((t: MdxTemplate) => {
-            const types = t.frontmatter.filters?.type || []
-            const type = types[0]
+    const mdxTemplates: UnifiedTemplate[] = (data.mdxTemplates?.nodes || []).map((t: MdxTemplate) => {
+        const types = t.frontmatter.filters?.type || []
+        const type = types[0]
 
-            return {
-                id: t.id,
-                name: t.frontmatter.title,
-                description: t.frontmatter.subtitle || '',
-                type,
-                tags: getTagsForTemplate(t.frontmatter.title),
-                image_url: t.frontmatter.thumbnail?.publicURL,
-                url: t.fields.slug,
-                badge: t.frontmatter.badge,
-                author: t.frontmatter.filters?.maintainer,
-            }
-        })
+        return {
+            id: t.id,
+            name: t.frontmatter.title,
+            description: t.frontmatter.subtitle || '',
+            type,
+            tags: getTagsForTemplate(t.frontmatter.title),
+            image_url: t.frontmatter.thumbnail?.publicURL,
+            url: t.fields.slug,
+            badge: t.frontmatter.badge,
+            author: t.frontmatter.filters?.maintainer,
+        }
+    })
 
     const workflowTemplates: UnifiedTemplate[] = (data.workflowTemplates?.nodes || []).map((t: WorkflowTemplate) => {
         const isNew = t.created_at ? dayjs(t.created_at).isAfter(dayjs().subtract(30, 'day')) : false
@@ -243,13 +237,6 @@ export default function TemplatesLibrary(): JSX.Element {
     const allTemplates: UnifiedTemplate[] = [...mdxTemplates, ...workflowTemplates]
 
     const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
-    /** Which collection the library is scoped to, by collection id. Null shows everything. */
-    const [collectionFilter, setCollectionFilter] = useState<string | null>(null)
-
-    const selectCollection = (collection: TemplateCollection): void => {
-        setCollectionFilter(collection.id)
-        setCategoryFilter(null)
-    }
 
     // Hydrate category filter from URL on mount
     useEffect(() => {
@@ -276,24 +263,9 @@ export default function TemplatesLibrary(): JSX.Element {
         }
     }, [categoryFilter])
 
-    /** How many templates each collection holds, so the hub never advertises an empty room. */
-    const collectionCounts = allTemplates.reduce<Record<string, number>>((counts, template) => {
-        const id = collectionOfType(template.type)?.id
-        if (id) {
-            counts[id] = (counts[id] ?? 0) + 1
-        }
-        return counts
-    }, {})
-
-    const activeCollection = TEMPLATE_COLLECTIONS.find((c) => c.id === collectionFilter)
-
-    const filteredByCollection = activeCollection
-        ? allTemplates.filter((t) => t.type?.toLowerCase() === activeCollection.legacyType)
-        : allTemplates
-
     const filteredByCategory = categoryFilter
-        ? filteredByCollection.filter((t) => t.tags.includes(categoryFilter))
-        : filteredByCollection
+        ? allTemplates.filter((t) => t.tags.includes(categoryFilter))
+        : allTemplates
 
     const filteredTemplates = searchQuery
         ? filteredByCategory.filter((template) => {
@@ -309,51 +281,39 @@ export default function TemplatesLibrary(): JSX.Element {
     const sortedTemplates = [...filteredTemplates].sort((a, b) => a.name.localeCompare(b.name))
 
     return (
-        // not-prose: Editor wraps its children in prose styles, which underline every link –
-        // including each card's title and badge. Cards supply their own type styling.
-        <div className="@container not-prose">
+        <div className="@container">
             {/* Hero */}
-            <div className="mb-8">
-                <h1 className="mb-2 text-4xl font-bold text-primary @xl:text-5xl">Templates</h1>
-                <p className="mb-6 max-w-xl text-secondary">
-                    Use cases you can ship today. Every one ends in a button that does the thing in PostHog, not a page
-                    telling you how.
+            <div className="text-center mb-8">
+                <h1 className="text-4xl @xl:text-5xl font-bold text-primary mb-3">
+                    {allTemplates.length.toLocaleString()} Templates
+                </h1>
+                <p className="text-secondary max-w-lg mx-auto mb-6">
+                    Discover ready-made workflows to understand your users better. Built by product engineers, for
+                    product engineers.
                 </p>
 
-                <div className="relative max-w-xl">
-                    <IconSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+                <div className="relative max-w-xl mx-auto mb-6">
+                    <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                     <input
                         type="text"
-                        placeholder="Search templates"
+                        placeholder="Search workflows, use cases, products, etc."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full rounded-lg border border-primary bg-primary py-2.5 pl-10 pr-4 text-primary placeholder:text-muted"
+                        className="w-full pl-10 pr-4 py-2.5 border border-primary rounded-lg bg-primary text-primary placeholder:text-muted"
                     />
                 </div>
-            </div>
 
-            <CollectionCards counts={collectionCounts} onSelect={selectCollection} />
+                <p className="text-sm text-muted">
+                    <span className="text-yellow font-semibold">{allTemplates.length.toLocaleString()}</span> templates
+                    created by the community
+                </p>
+            </div>
 
             {/* Filters + count */}
             <div className="mb-6">
-                <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h2 className="text-2xl font-bold text-primary">
-                        {activeCollection ? activeCollection.title : 'All templates'}
-                    </h2>
-                    <span className="text-sm text-muted tabular-nums">
-                        {sortedTemplates.length.toLocaleString()}{' '}
-                        {sortedTemplates.length === 1 ? 'template' : 'templates'}
-                    </span>
-                    {activeCollection && (
-                        <button
-                            type="button"
-                            onClick={() => setCollectionFilter(null)}
-                            className="text-sm text-secondary underline"
-                        >
-                            Show all
-                        </button>
-                    )}
-                </div>
+                <h2 className="text-2xl font-bold text-primary mb-3">
+                    {sortedTemplates.length.toLocaleString()} {sortedTemplates.length === 1 ? 'Template' : 'Templates'}
+                </h2>
                 <div className="flex flex-wrap gap-2">
                     <button
                         onClick={() => setCategoryFilter(null)}

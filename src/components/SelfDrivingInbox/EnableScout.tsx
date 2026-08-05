@@ -69,10 +69,7 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
     const hasScout = Boolean(scout?.name && scout?.description)
     const selfDrivingCommand = buildSelfDrivingCommand()
 
-    // No card chrome or heading of its own: TemplateDetail renders this as the last numbered
-    // section, so the gutter and label come from there. Boxing it again put a bordered block
-    // straight after the bordered code block, and left it as the one unnumbered thing on a
-    // numbered page.
+    // No card chrome or heading of its own: the page hosting it owns the gutter and label.
     return (
         <div>
             <p className="mb-4 text-[15px] text-secondary">

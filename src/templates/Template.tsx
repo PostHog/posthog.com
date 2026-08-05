@@ -14,26 +14,10 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import TemplateCTA, { CtaSpec } from 'components/TemplateCTA'
+import TemplateCTAs from 'components/TemplateCTAs'
 import BookPage from 'components/PocketGuides/BookPage'
 
 const A = (props) => <Link {...props} />
-
-/** Until every template declares a `cta`, keep deriving one from its type. */
-function legacyCta(templateType?: string, title?: string): CtaSpec | null {
-    if (templateType === 'survey') {
-        // No `?template=` here: the app matches an exact enum value, which only the frontmatter knows.
-        return { kind: 'url', value: 'https://app.posthog.com/surveys/guided/new', label: 'Create a survey' }
-    }
-    return title ? { kind: 'dashboard', value: title } : null
-}
-
-function legacySecondary(templateType?: string): { href: string; label: string } | null {
-    if (templateType === 'survey') {
-        return { href: '/docs/surveys', label: 'Read the surveys docs' }
-    }
-    return { href: 'https://app.posthog.com/dashboards', label: 'Go to dashboards' }
-}
 
 export default function Template({ data }) {
     const { pageData, templates, workflowTemplates } = data
@@ -43,7 +27,7 @@ export default function Template({ data }) {
         fields: { slug },
         parent,
     } = pageData
-    const { title, featuredImage, description, filters, cta } = pageData?.frontmatter
+    const { title, featuredImage, description, filters } = pageData?.frontmatter
     const templateType = filters?.type?.[0]?.toLowerCase()
     const filePath = parent?.relativePath
 
@@ -154,9 +138,17 @@ export default function Template({ data }) {
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
                     <div className="mb-12">
-                        <TemplateCTA
-                            cta={cta ?? legacyCta(templateType, title)}
-                            secondary={legacySecondary(templateType)}
+                        <TemplateCTAs
+                            urls={{
+                                primary:
+                                    templateType === 'survey'
+                                        ? `https://app.posthog.com/surveys/guided/new`
+                                        : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
+                                secondary:
+                                    templateType === 'survey'
+                                        ? `https://app.posthog.com/surveys/guided/new`
+                                        : `https://app.posthog.com/dashboards`,
+                            }}
                         />
                     </div>
                 </div>
@@ -185,21 +177,6 @@ export const query = graphql`
                 subtitle
                 filters {
                     type
-                }
-                cta {
-                    kind
-                    value
-                    label
-                    fallback
-                }
-                report {
-                    title
-                    source
-                    receivedAgo
-                    body
-                    suggestedAction
-                    actionNote
-                    affected
                 }
             }
             parent {

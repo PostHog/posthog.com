@@ -1,16 +1,17 @@
 # SelfDrivingInbox
 
-Renders the self-driving inbox as a **live exhibit**: a queue of real-shaped reports — the same
-artifact self-driving would deliver — with the guide behind each one readable in place.
+The data layer and shared pieces behind the self-driving **pocket guides**: the
+`useSelfDrivingTemplates()` hook that turns each guide's frontmatter + `SKILL.md` into an
+`InboxTemplate`, plus the report card, scout file, and "Add this scout" components the guides
+compose into figures and CTAs.
 
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Since the pocket-guide redesign this is no longer page chrome. Guides render as book spreads
-(`components/PocketGuides/BookPage.tsx`), where the inbox appears as a figure via
-`components/PocketGuides/InboxFigure.tsx` – this folder's `ReportRow` and `ReportCard` compose
-it. The full master-detail component in `index.tsx` currently has no page of its own; it and
-`TemplateDetail` are kept for reuse while the design settles.
+Guides render as book spreads (`components/PocketGuides/BookPage.tsx`); the report appears as a
+figure via `components/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
+The old standalone master-detail inbox view was deleted when the pocket guides became the whole
+direction – if a browse-all surface returns, build it on the hook, not from git archaeology.
 
 ---
 
@@ -39,8 +40,8 @@ code block on the page is byte-for-byte what you wrote. `scoutInstructions()` in
 takes name and description as separate form fields.
 
 Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
-`gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the two
-gallery queries (`index.tsx` here, `TemplatesLibrary/index.tsx`) filter the same way.
+`gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the
+query in `index.tsx` here filters the same way.
 
 ## Authoring a template's report
 
@@ -143,11 +144,11 @@ with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/ro
 `context-mill/context/docs.yaml` already consumes posthog.com `.md` URLs this way to feed the
 setup wizard.
 
-**The consequence that bites: anything not in the built HTML doesn't reach agents.** The detail
-pane therefore renders server-side rather than waiting for hydration, and `scout.body` is
-rendered on the page (inside a `<details>`) rather than only encoded into the deep-link payload.
-If you gate content behind `interactive` or move it into a click-only surface, it silently
-disappears from both the agent mirror and search engines.
+**The consequence that bites: anything not in the built HTML doesn't reach agents.** The guide
+pages therefore render their teaching content server-side, and the scout file is rendered on the
+page rather than only encoded into the deep-link payload. If you gate content behind a
+post-mount flag or move it into a click-only surface, it silently disappears from both the agent
+mirror and search engines.
 
 The scout block is rendered in the canonical `SKILL.md` shape the monorepo uses
 (`products/signals/skills/signals-scout-*/SKILL.md`; contract in
@@ -157,34 +158,25 @@ agent reading the mirror can create the scout verbatim instead of translating it
 
 ## Rendering contract
 
-- **Static-first.** The full list renders from `useStaticQuery` at build time and every row is
-  a real `<Link>` anchor. With JavaScript disabled you get a readable, navigable list of
-  reports. The preview pane, selection, and keyboard navigation are progressive enhancement.
-  (Same contract as `components/LiveSelfDrivingLoop`.)
+- **Static-first.** Everything renders from `useStaticQuery` at build time; with JavaScript
+  disabled the guides are still fully readable. (Same contract as
+  `components/LiveSelfDrivingLoop`.)
 - **Container queries, never media queries.** Every page on this site is a resizable window, so
-  breakpoints are `@[700px]:`-style and keyed to the container, not the viewport.
+  breakpoints are keyed to the container, not the viewport.
 - **Project color tokens only.** Never stock Tailwind colors.
-- **Reduced motion** collapses pane transitions to instant.
-
-## Why `components/Inbox` is not reused
-
-`src/components/Inbox/index.tsx` looks like the obvious thing to reuse — it's an Outlook-style
-resizable 3-pane shell. It isn't reusable: it's welded to the Questions/Squeak product
-(`useQuestions`, Strapi records, Algolia search, `QuestionForm`) and has no generic list/detail
-API. This component mirrors its *layout patterns* (`ScrollArea`, `ToggleGroup` pane switcher,
-framer-motion resize) without depending on it.
-
-Don't retry the reuse; extract a shared shell from both only if a third consumer appears.
+- **Reduced motion** collapses transitions to instant.
 
 ## Files
 
 | File | Responsibility |
 |---|---|
-| `index.tsx` | The inbox exhibit: data query, selection state, two-pane layout, annotations |
-| `ReportRow.tsx` | One inbox row — title, source, time |
+| `index.tsx` | `useSelfDrivingTemplates()` – frontmatter + SKILL.md into `InboxTemplate` |
 | `ReportCard.tsx` | The report body. `variant: 'preview' \| 'page'` |
-| `TemplateDetail.tsx` | One guide's sections. `embedded` for the exhibit pane, book page otherwise |
-| `EnableScout.tsx` | The "add to your troop" CTA, plus the exhibit's bottom bar |
+| `ScoutFile.tsx` | The SKILL.md, shown verbatim as a code block |
+| `EnableScout.tsx` | The "add this scout" CTA, plus the book's pinned bottom bar |
+| `scoutDeepLink.ts` | Builds the `#createScout=` deep link from a `ScoutSpec` |
+| `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
+| `terms.tsx` | `<Term>` glossary hover links for self-driving vocabulary |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).

@@ -588,39 +588,15 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                     }
                     frontmatter {
                         title
-                        filters {
-                            type
-                        }
                     }
                 }
             }
         }
-    `)) as {
-        data: {
-            allMdx: {
-                nodes: Array<{
-                    fields: { slug: string }
-                    frontmatter: { title: string; filters?: { type?: string[] } }
-                }>
-            }
-        }
-    }
+    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
     const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-
-    // Self-driving scout templates are written as agent context as much as marketing pages, so
-    // they belong in the index an agent reads. The dashboard/survey templates stay out — they'd
-    // be noise. See components/SelfDrivingInbox/README.md.
-    const selfDrivingTemplateSlugs = new Set(
-        docsQuery.data.allMdx.nodes
-            .filter((node) => node.frontmatter?.filters?.type?.some((t) => t?.toLowerCase() === 'self-driving'))
-            .map((node) => node.fields.slug)
-    )
-
-    // Docs pages plus self-driving templates in llms.txt (not handbook, not blog)
-    const docsPages = filteredPages.filter(
-        (page) => page.fields.slug.startsWith('/docs') || selfDrivingTemplateSlugs.has(page.fields.slug)
-    )
+    // Only include docs pages in llms.txt (not handbook)
+    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
 
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents

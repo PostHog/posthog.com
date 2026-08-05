@@ -43,9 +43,6 @@ export interface ScoutSpec {
 /** Fallback rail label for a template that hasn't declared a category yet. */
 export const UNCATEGORIZED = 'Other'
 
-/** The product the rail is filtering by, or null for everything. */
-export type InboxFilter = string | null
-
 /** One row in the inbox: a template, reduced to its report plus everything the pane teaches. */
 export interface InboxTemplate {
     /** Product surface, e.g. "Error Tracking". Authored in frontmatter, never mapped from title. */

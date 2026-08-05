@@ -972,10 +972,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
-        // Not every markdown file under contents/templates is a page. A self-driving template
-        // authors its scout as a sibling SKILL.md, and `_`-prefixed directories are starters to
-        // copy from — both would otherwise get a URL of their own, since the templates query
-        // filters on the slug prefix alone.
+        // A pocket guide's sibling SKILL.md and `_`-prefixed starter directories are files to
+        // copy, not pages – the query filters on slug prefix alone, so skip them here.
         if (slug.endsWith('/SKILL') || /\/_/.test(slug)) {
             return
         }
