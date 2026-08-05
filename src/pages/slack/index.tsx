@@ -484,7 +484,7 @@ const compareRows: CompareRow[] = [
     {
         label: 'Models',
         ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
-        slack: 'Auto-picked from OpenAI and Anthropic.',
+        slack: 'Opus 5 by default. Name any model PostHog Desktop supports in your message to override it.',
         code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
     },
 ]
@@ -571,9 +571,9 @@ const faqItems = [
                     context, or answer a question the agent asked.
                 </p>
                 <p>
-                    Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub
-                    integration is the one wired up – so a teammate's follow-up edits land under the original
-                    requester's name. If you want the PR credited to you, start your own task.
+                    It's properly multiplayer: the bot switches to the GitHub and PostHog identity of whoever sent each
+                    message, so a teammate's follow-up runs under their own integration rather than the person who
+                    started the thread. Commits and PRs land under the name of the person who actually asked for them.
                 </p>
             </>
         ),
@@ -584,7 +584,8 @@ const faqItems = [
             <p>
                 Branches get a <code>posthog-code/</code> prefix, and each commit includes a{' '}
                 <code>Generated-By: PostHog Desktop</code> line plus a <code>Task-Id</code> so you can trace it back.
-                PRs are authored under your name via your{' '}
+                Each turn runs under the identity of the person who sent it, so work is authored under your name via
+                your{' '}
                 <Link
                     to="https://app.posthog.com/settings/user-personal-integrations"
                     external
@@ -594,6 +595,29 @@ const faqItems = [
                 </Link>
                 , which every teammate connects once before they can ship code.
             </p>
+        ),
+    },
+    {
+        trigger: 'Can I pick which model runs my task?',
+        content: (
+            <>
+                <p>
+                    Yes. Tasks run on Opus 5 by default, but you can name a model in the message itself – "
+                    <code>@PostHog fix the pricing page typo, use Fable for it</code>". Any model{' '}
+                    <Link
+                        to="/docs/posthog-desktop/use-any-model-and-harness"
+                        state={{ newWindow: true }}
+                        className="text-red dark:text-yellow font-semibold hover:underline"
+                    >
+                        PostHog Desktop supports
+                    </Link>{' '}
+                    works here too, and the "Working on task..." message tells you which one it picked.
+                </p>
+                <p>
+                    This only applies to the message that starts the task – follow-ups stay on the model the task
+                    started with. Model selection is still rolling out, so it may not be enabled for your workspace yet.
+                </p>
+            </>
         ),
     },
     {
@@ -816,7 +840,7 @@ export default function SlackAppPage(): JSX.Element {
                         <li>It opens a draft PR with a detailed description, and links it back into the thread.</li>
                         <li>
                             It iterates on follow-up messages from anyone in the thread, so teammates can steer the run
-                            together.
+                            together – each turn runs under the sender's own GitHub and PostHog identity.
                         </li>
                         <li>
                             It watches CI, reruns failed jobs that look environmental, and doesn't touch workflow files.
