@@ -22,9 +22,10 @@ At PostHog, we rely on engineers to make product decisions. They set their roadm
 
 **This week’s theme:** What we look for in (product) engineers.
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Always prototyping and experimenting
+
 You can plan and polish a feature to death. We prefer to ship early and iterate. This means engineers must be comfortable:
 
 - Building functional MVPs and proofs of concept.
@@ -46,7 +47,7 @@ He’s since figured out the right visuals, added scroll depth to autocapture, a
 
 The work it took to reach the current beta phase has required skills across the stack.  
 
-> **What to look for:** People who have built products or projects from scratch, done hackathons, have an eye for UX and design, and understand system design.
+> **What to look for:** People who have built products or projects from scratch, done [hackathons](/newsletter/hackathons), have an eye for UX and design, and understand system design.
 
 ## 2. Comfortable writing
 
@@ -64,6 +65,8 @@ Good writing is vital for all the above. It demonstrates clear thinking and enab
 To do this async with multiple teams involved, [Ted](/ted) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
 
 > **What to look for:** People who communicate well throughout the hiring process, have a blog, or come from a writing-heavy culture.
+
+<NewsletterForm />
 
 ## 3. A genuine love for building
 
@@ -86,7 +89,7 @@ Because engineers shape the direction of every product, having this trait ensure
 
 ## 4. Customer obsessed
 
-To uncover the real problems users have (and value), [product engineers](/blog/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
+To uncover the real problems users have (and value), [product engineers](/product-engineer/what-is-a-product-engineer) at PostHog interact with them much more often than regular engineers do. This includes:
 
 - [Talking to users](/product-engineers/10x-engineers-do-user-interviews), doing user interviews.
 - Recruiting testers for new features and collecting feedback.

@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import { PlaceType, PlaceItem } from './types'
 import { useUser } from '../../hooks/useUser'
 import { useUserLocation } from '../../hooks/useUserLocation'
 import SearchBar, { createSearchMarker } from './SearchBar'
 import { usePlacesMapData, Coordinates } from './PlacesLayer'
 import { renderToString } from 'react-dom/server'
-import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope } from '@posthog/icons'
+import { IconBuilding, IconBed, IconBurger, IconCoffee, IconLaptop, IconTelescope, IconFlask } from '@posthog/icons'
 import {
     computeOffsets,
     getMapbox,
+    loadMapbox,
     ensureClusterSource,
     ensureClusterLayers,
     setClusterVisibility,
@@ -31,6 +31,8 @@ export const getPlaceIcon = (type: string, size = 'size-4'): { icon: JSX.Element
             return { icon: <IconBed className={size} />, colorClass: 'bg-purple text-white' }
         case PlaceType.CO_WORKING:
             return { icon: <IconLaptop className={size} />, colorClass: 'bg-green text-white' }
+        case PlaceType.BAR:
+            return { icon: <IconFlask className={size} />, colorClass: 'bg-teal text-white' }
         case PlaceType.OFFSITE:
             return { icon: <IconTelescope className={size} />, colorClass: 'bg-orange text-white' }
         default:
@@ -59,11 +61,20 @@ export default function PlacesMap({
     onPlacesLoaded?: (places: PlaceItem[]) => void
 }): JSX.Element {
     const [isClient, setIsClient] = useState(false)
+    const [mapboxReady, setMapboxReady] = useState(false)
     const { isModerator, getJwt } = useUser()
     const { location: userLocation, isLoading: isLocationLoading } = useUserLocation()
 
     useEffect(() => {
         setIsClient(true)
+    }, [])
+
+    useEffect(() => {
+        loadMapbox().then((m) => {
+            if (m) {
+                setMapboxReady(true)
+            }
+        })
     }, [])
 
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
@@ -313,7 +324,7 @@ export default function PlacesMap({
                 mapRef.current = null
             }
         }
-    }, [isClient, token, styleUrl, isLocationLoading, userLocation])
+    }, [isClient, mapboxReady, token, styleUrl, isLocationLoading, userLocation])
 
     useEffect(() => {
         return setupMap()

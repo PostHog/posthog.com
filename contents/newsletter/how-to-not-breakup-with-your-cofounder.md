@@ -7,14 +7,14 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/james_and_tim_8d5006785b.png
 featuredImageType: full
 tags:
-  - Being a founder
+  - Founders
   - People
 crosspost:
   - Founders
   - Blog
 ---
 
-_In this issue of Product for Engineers, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
+_In this issue of build mode, James Hawkins shares how he and [PostHog](https://posthog.com/) cofounder Tim Glaser keep their relationship healthy._
 
 * * *
 
@@ -38,6 +38,8 @@ Most startups fail because the cofounders break up – more so than failing to f
 Therefore, I’d argue you should just minimize the risk of you and your cofounder breaking up. Anything that could cause resentment, like a lack of evenness at the outset, should be avoided.
 
 Despite our differences in experience, I frequently feel I’m underperforming relative to Tim and need to remind myself how effective we’ve been together.
+
+<NewsletterForm />
 
 ## 2. Good relationships aren’t set and forget
 
@@ -77,7 +79,7 @@ For example, [I owned sales](/founders/startup-sales-strategy) when we were an e
 
 Right now, we split our responsibilities around the products we care most about, and are uniquely qualified to help progress:
 
-  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM analytics](/docs/llm-analytics). He’s great at execution and understands the ins and outs of these products better than I.
+  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [AI Observability](/docs/ai-observability). He’s great at execution and understands the ins and outs of these products better than I.
 
   * I’m focused on marketing, and AI-first products and features like [PostHog AI](/docs/posthog-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
 
@@ -155,4 +157,4 @@ It’s more fun, too.
 
  _Words by James Hawkins, Pizza Margherita fundamentalist._
 
-<NewsletterForm />
+ <NewsletterForm />

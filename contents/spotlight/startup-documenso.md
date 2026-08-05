@@ -78,4 +78,4 @@ The team uses cash incentives and branded merchandise to incentivize and reward 
 **More success stories from PostHog for Startups**
 - [How Golioth designs new software and drives product development](//startup-golioth)
 - [How Bugprove uses influencer marketing to grow word of mouth](/spotlight/startup-bugprove)
-- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](spotlight/startup-before-sunset-ai)
+- [How BeforeSunset AI achieved 'Product of the Month' on Product Hunt](/spotlight/startup-before-sunset-ai)

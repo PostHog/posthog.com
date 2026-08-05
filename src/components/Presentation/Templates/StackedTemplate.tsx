@@ -1,7 +1,6 @@
 import React from 'react'
 import ParseHtml from '../Utilities/parseHtml'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Logo from 'components/Logo'
 import { IconHeartFilled } from '@posthog/icons'
 import SalesRep from '../Utilities/SalesRep'
 import Logos from '../Utilities/Logos'
@@ -104,6 +103,7 @@ export default function StackedTemplate({
                                 image ? '' : '@2xl:max-w-xl'
                             }`}
                             dangerouslySetInnerHTML={{
+                                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - presentation content from CMS, not user input
                                 __html: title.replace('{companyName}', companyName || ''),
                             }}
                         />

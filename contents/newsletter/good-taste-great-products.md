@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-When we talk about how to be a good [product engineer](/blog/what-is-a-product-engineer), we often focus on how you need to ship fast, be customer obsessed, and [take extreme ownership of ideas](/founders/cracked-manifesto). 
+When we talk about how to be a good [product engineer](/product-engineer/what-is-a-product-engineer), we often focus on how you need to ship fast, be customer obsessed, and [take extreme ownership of ideas](/founders/cracked-manifesto). 
 
 But one important quality is subjective: taste.
 
@@ -78,6 +78,8 @@ Make a list of all the affordances you observe in software you use frequently. D
 The more you do this, the more you’ll instinctively build them into your work, thus making your software feel effortless and familiar. 
 
 > **Recommended reading:** [_Design is Storytelling_](https://www.amazon.com/Design-Storytelling-Ellen-Lupton/dp/194230319X) by Ellen Upton is a fun treatise on the power of narrative to help software communicate with users.
+
+<NewsletterForm />
 
 * * *
 

@@ -12,9 +12,17 @@ export const ImgReplayCanvasLight = "https://res.cloudinary.com/dmukukwp6/image/
 
 PostHog can capture canvas elements from your application. It works in both 2D and WebGL environments. 
 
-As canvas elements can contain sensitive information and there is **no way to mask canvas elements right now**, we do not capture these automatically. Once you are sure they are free of PII, you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).
+As canvas elements can contain sensitive information and are **not covered by DOM-based masking**, we do not capture these automatically. Once you are sure they are free of PII (or you have set up [canvas masking](#masking-canvas-content)), you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay).
 
 Canvas elements are recorded at a rate of **4 frames per second** which may lead to some perceptual differences during playback.
+
+## Masking canvas content
+
+> Requires posthog-js version >= [1.408.0](https://github.com/PostHog/posthog-js/releases).
+
+An application that knows where sensitive content sits inside its canvas can supply mask regions via `session_recording.canvasCapture.maskRegionsFn` in `posthog.init`. The returned regions (CSS pixels, relative to the canvas) are painted black inside the capture pipeline before frames are encoded — masked pixels never leave the browser. Returning `null` skips that canvas's frame entirely rather than recording it unmasked.
+
+**Flutter web** (PostHog Flutter SDK 5.34.0+) uses this to apply its full masking configuration (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) inside the CanvasKit canvas — see [masking in session replay](/docs/session-replay/privacy) under the Flutter tab for setup.
 
 <ProductScreenshot
     imageLight={ImgReplayCanvasLight} 
@@ -29,7 +37,7 @@ Canvas recording normally has no impact on your site, but it does need to captur
 You can override the frequency the image is captured and the quality of the captured image when initializing PostHog on your site:
 
 ```
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
   defaults: '<ph_posthog_js_defaults>',
   session_recording: {

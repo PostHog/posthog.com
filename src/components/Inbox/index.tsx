@@ -1,29 +1,19 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react'
+import React, { useEffect, useRef, useState, useMemo, lazy, Suspense } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
-import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question, QuestionForm } from 'components/Squeak'
 import OSButton from 'components/OSButton'
-import {
-    IconSidePanel,
-    IconBottomPanel,
-    IconChevronDown,
-    IconNotification,
-    IconSearch,
-    IconPin,
-    IconCheck,
-} from '@posthog/icons'
+import { IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification, IconPin, IconCheck } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'
-import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import hourglassAnimationWhite from 'images/icons8-hourglass-white.json'
 import { useInView } from 'react-intersection-observer'
@@ -33,12 +23,16 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
 import { flattenStrapiResponse } from '../../utils'
-import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../context/App'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
+import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
+import { InlineSearch, AlgoliaSearchResults } from 'components/Search/InlineSearch'
 dayjs.extend(relativeTime)
+
+// lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
+const Lottie = typeof window !== 'undefined' ? lazy(() => import('lottie-react')) : () => null
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
     const { user } = useUser()
@@ -100,6 +94,57 @@ const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => 
     )
 }
 
+const SidebarContent = ({
+    onMenuValueChange,
+    onSubmitQuestion,
+}: {
+    onMenuValueChange: (value: string) => void
+    onSubmitQuestion: () => void
+}) => {
+    const { addWindow } = useApp()
+    const { searchQuery } = useSearch()
+    const isSearching = searchQuery.length >= 2
+
+    return (
+        <div className="flex flex-col h-full">
+            <div className="border-b border-primary">
+                <div className="px-2 mt-2 pb-2">
+                    <OSButton
+                        variant="primary"
+                        size="md"
+                        width="full"
+                        onClick={() =>
+                            addWindow(
+                                <AskAQuestion
+                                    newWindow
+                                    location={{ pathname: `ask-a-question` }}
+                                    key={`ask-a-question`}
+                                    onSubmit={onSubmitQuestion}
+                                />
+                            )
+                        }
+                    >
+                        Ask a question
+                    </OSButton>
+                </div>
+            </div>
+            <ScrollArea className="h-full">
+                <InlineSearch
+                    placeholder="Search questions..."
+                    className="p-2 @2xl:pb-0 @2xl:border-b-0 border-b border-primary"
+                />
+                {isSearching ? (
+                    <div className="p-2">
+                        <AlgoliaSearchResults facetFilters={['type:question']} />
+                    </div>
+                ) : (
+                    <Menu onValueChange={onMenuValueChange} />
+                )}
+            </ScrollArea>
+        </div>
+    )
+}
+
 const SIDE_WIDTH_DEFAULT = 600
 
 interface QuestionRowProps {
@@ -122,7 +167,9 @@ const QuestionRow = ({
     pinned = false,
 }: QuestionRowProps) => {
     const { subject, numReplies, activeAt, replies, profile, permalink, resolved } = question
-    const latestAuthor = replies?.data?.[replies.data.length - 1]?.profile || profile
+    const replyList = Array.isArray(replies?.data) ? replies.data : Object.values(replies ?? {})
+    const lastReply = replyList[replyList.length - 1]
+    const latestAuthor = lastReply?.profile || lastReply?.attributes?.profile || profile
     const active = `/questions/${permalink}` === appWindowPath
 
     return (
@@ -196,14 +243,148 @@ const layoutOptions = [
     {
         label: 'Stacked view',
         value: 'stacked',
-        icon: <IconBottomPanel className="size-5" />,
+        icon: <IconBottomPanel className="size-4" />,
     },
     {
         label: 'Side-by-side view',
         value: 'side-by-side',
-        icon: <IconSidePanel className="size-5" />,
+        icon: <IconSidePanel className="size-4" />,
     },
 ]
+
+interface QuestionToolbarProps {
+    containerRef: React.RefObject<HTMLDivElement>
+    bottomContainerRef: React.RefObject<HTMLDivElement>
+    setBottomHeight: (height: number) => void
+    question: StrapiRecord<QuestionData> | undefined
+    user: any
+    notificationsEnabled: boolean
+    setNotificationsEnabled: (enabled: boolean) => void
+    setSubscription: (params: { contentType: 'topic' | 'question'; id: string | number; subscribe: boolean }) => void
+    addToast: (toast: any) => void
+    sideBySide: boolean
+    handleSideBySide: (sideBySide: boolean) => void
+    expandable: boolean
+    expandOrCollapse: (expandable: boolean) => void
+    isMobile: boolean
+    menuValue: string
+}
+
+const QuestionToolbar = ({
+    containerRef,
+    bottomContainerRef,
+    setBottomHeight,
+    question,
+    user,
+    notificationsEnabled,
+    setNotificationsEnabled,
+    setSubscription,
+    addToast,
+    sideBySide,
+    handleSideBySide,
+    expandable,
+    expandOrCollapse,
+    isMobile,
+    menuValue,
+}: QuestionToolbarProps) => {
+    return (
+        <div className="bg-accent border-t border-primary px-4 py-2 flex gap-2 items-center sticky bottom-0 z-10">
+            <OSButton
+                variant="secondary"
+                size="xs"
+                onClick={() => {
+                    if (!containerRef.current) return
+                    const containerHeight = containerRef.current.getBoundingClientRect().height
+                    setBottomHeight(containerHeight)
+                    document.getElementById('question-form-button')?.click()
+                    setTimeout(() => {
+                        const viewport = bottomContainerRef.current?.querySelector('[data-radix-scroll-area-viewport]')
+                        viewport?.scrollTo({
+                            top: viewport.scrollHeight,
+                            behavior: 'smooth',
+                        })
+                    }, 300)
+                }}
+            >
+                Reply
+            </OSButton>
+            <div className="ml-auto flex space-x-2">
+                {question?.id && user && (
+                    <Switch
+                        checked={notificationsEnabled}
+                        onChange={(checked) => {
+                            setNotificationsEnabled(checked)
+                            setSubscription({
+                                contentType: 'question',
+                                id: question.id,
+                                subscribe: checked,
+                            })
+                            addToast({
+                                description: checked
+                                    ? "You'll be notified of replies by email."
+                                    : "You won't receive notifications for this thread.",
+                                title: checked ? 'Thread notifications enabled' : 'Thread notifications disabled',
+                                onUndo: () => {
+                                    setNotificationsEnabled(!checked)
+                                    setSubscription({
+                                        contentType: 'question',
+                                        id: question.id,
+                                        subscribe: !checked,
+                                    })
+                                },
+                            })
+                        }}
+                        label="Thread notifications"
+                    />
+                )}
+
+                <div className="ml-2 pl-2 border-l border-primary flex items-center gap-1">
+                    <ToggleGroup
+                        title="Layout"
+                        hideTitle={true}
+                        options={layoutOptions}
+                        onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
+                        value={sideBySide ? 'side-by-side' : 'stacked'}
+                        size="sm"
+                    />
+                    <Tooltip
+                        trigger={
+                            <span>
+                                <OSButton
+                                    size="sm"
+                                    className="relative"
+                                    style={{ width: 26, height: 26 }}
+                                    icon={
+                                        <IconChevronDown
+                                            className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                sideBySide
+                                                    ? expandable
+                                                        ? 'rotate-90'
+                                                        : '-rotate-90'
+                                                    : expandable
+                                                    ? 'rotate-180'
+                                                    : ''
+                                            }`}
+                                        />
+                                    }
+                                    onClick={() => {
+                                        if (isMobile && sideBySide) {
+                                            navigate(menuValue)
+                                        } else {
+                                            expandOrCollapse(expandable)
+                                        }
+                                    }}
+                                />
+                            </span>
+                        }
+                    >
+                        {expandable ? 'Expand' : 'Collapse'}
+                    </Tooltip>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
     const { addToast } = useToast()
@@ -220,22 +401,14 @@ const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
                 showTopicSelector
                 onSubmit={(_values, _type, data) => {
                     onSubmit()
-                    addToast({
-                        title: 'Question posted',
-                        description: (
-                            <>
-                                Your question has been posted.
-                                <br />
-                                <Link
-                                    className="text-red dark:text-yellow font-semibold"
-                                    to={`/questions/${data.attributes.permalink}`}
-                                >
-                                    View it here
-                                </Link>
-                            </>
-                        ),
-                    })
                     closeWindow(appWindow)
+                    if (data?.attributes?.permalink) {
+                        setTimeout(() => {
+                            navigate(`/questions/${data.attributes.permalink}`, {
+                                state: { askMax: true },
+                            })
+                        }, 0)
+                    }
                 }}
                 initialView="question-form"
                 slug="/questions"
@@ -268,7 +441,6 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const { addWindow, openSearch } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -391,58 +563,18 @@ export default function Inbox(props) {
             <SEO title={(permalink && question?.attributes.subject) || data?.topic?.label || 'Forums'} />
             {ready ? (
                 <div className="@container w-full h-full flex flex-col">
-                    <HeaderBar
-                        homeURL="/questions"
-                        showBack
-                        showForward
-                        showSearch
-                        rightActionButtons={
-                            <div className="flex items-center gap-2 flex-wrap">
-                                <OSButton icon={<IconSearch />} onClick={() => openSearch('questions')} />
-                                <CallToAction
-                                    size="sm"
-                                    onClick={() =>
-                                        addWindow(
-                                            <AskAQuestion
-                                                newWindow
-                                                location={{ pathname: `ask-a-question` }}
-                                                key={`ask-a-question`}
-                                                onSubmit={refresh}
-                                            />
-                                        )
-                                    }
-                                >
-                                    Ask a question
-                                </CallToAction>
-                                {permalink ? (
-                                    <ToggleGroup
-                                        title="Layout"
-                                        hideTitle={true}
-                                        options={layoutOptions}
-                                        onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
-                                        value={sideBySide ? 'side-by-side' : 'stacked'}
-                                        className="-my-1"
-                                    />
-                                ) : null}
-                            </div>
-                        }
-                    />
-
-                    <div
-                        data-scheme="secondary"
-                        className="flex @2xl:flex-row flex-col flex-grow border-t border-primary min-h-0"
-                    >
+                    <div data-scheme="secondary" className={`flex @2xl:flex-row flex-col flex-grow min-h-0`}>
                         <aside
                             data-scheme="secondary"
-                            className="w-full @2xl:w-64 bg-primary @2xl:border-r border-primary @2xl:h-full flex-shrink-0"
+                            className="w-full @2xl:w-64 bg-primary flex-shrink-0 @2xl:border-r border-primary @2xl:h-full"
                         >
-                            <ScrollArea className="h-full">
-                                <Menu onValueChange={setMenuValue} />
-                            </ScrollArea>
+                            <SearchProvider>
+                                <SidebarContent onMenuValueChange={setMenuValue} onSubmitQuestion={refresh} />
+                            </SearchProvider>
                         </aside>
                         <main
                             data-scheme="primary"
-                            className="flex-1 bg-primary overflow-hidden @2xl:border-none border-t border-primary"
+                            className="flex-1 bg-primary overflow-hidden border-primary @2xl:border-none border-t"
                         >
                             <div
                                 ref={containerRef}
@@ -490,7 +622,7 @@ export default function Inbox(props) {
                                                 />
                                             ))}
                                             {!isLoading && (!questions.data || questions.data.length === 0) && (
-                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                                                <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-primary">
                                                     <div className="text-lg mb-2 font-semibold">No questions found</div>
                                                     <div className="text-secondary text-sm">
                                                         {props.path === '/questions/subscriptions'
@@ -501,17 +633,18 @@ export default function Inbox(props) {
                                             )}
                                             {isLoading && (
                                                 <div className="flex items-center justify-center py-8 h-full">
-                                                    <Lottie
-                                                        animationData={hourglassAnimation}
-                                                        className="size-6 opacity-75 text-secondary"
-                                                        className="size-6 opacity-75 dark:hidden"
-                                                        title="Loading questions..."
-                                                    />
-                                                    <Lottie
-                                                        animationData={hourglassAnimationWhite}
-                                                        className="size-6 opacity-75 hidden dark:block"
-                                                        title="Loading questions..."
-                                                    />
+                                                    <Suspense fallback={null}>
+                                                        <Lottie
+                                                            animationData={hourglassAnimation}
+                                                            className="size-6 opacity-75 dark:hidden"
+                                                            title="Loading questions..."
+                                                        />
+                                                        <Lottie
+                                                            animationData={hourglassAnimationWhite}
+                                                            className="size-6 opacity-75 hidden dark:block"
+                                                            title="Loading questions..."
+                                                        />
+                                                    </Suspense>
                                                 </div>
                                             )}
                                         </div>
@@ -523,7 +656,9 @@ export default function Inbox(props) {
                                             ref={bottomContainerRef}
                                             className={`flex-none relative min-h-0 min-w-0 ${
                                                 !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                            } ${sideBySide ? '@4xl:border-l border-primary' : ''}`}
+                                            } ${
+                                                sideBySide ? '@4xl:border-l border-primary' : 'border-t border-primary'
+                                            }`}
                                             initial={{
                                                 width: 0,
                                             }}
@@ -571,102 +706,6 @@ export default function Inbox(props) {
                                                 />
                                             )}
 
-                                            <div
-                                                className={`bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10 ${
-                                                    sideBySide ? 'border-t-0' : ''
-                                                }`}
-                                            >
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="xs"
-                                                    onClick={() => {
-                                                        if (!containerRef.current) return
-                                                        const containerHeight =
-                                                            containerRef.current.getBoundingClientRect().height
-                                                        setBottomHeight(containerHeight)
-                                                        document.getElementById('question-form-button')?.click()
-                                                        setTimeout(() => {
-                                                            const viewport = bottomContainerRef.current?.querySelector(
-                                                                '[data-radix-scroll-area-viewport]'
-                                                            )
-                                                            viewport?.scrollTo({
-                                                                top: viewport.scrollHeight,
-                                                                behavior: 'smooth',
-                                                            })
-                                                        }, 300)
-                                                    }}
-                                                >
-                                                    Reply
-                                                </OSButton>
-                                                <div className="ml-auto flex space-x-4">
-                                                    {question?.id && user && (
-                                                        <Switch
-                                                            checked={notificationsEnabled}
-                                                            onChange={(checked) => {
-                                                                setNotificationsEnabled(checked)
-                                                                setSubscription({
-                                                                    contentType: 'question',
-                                                                    id: question.id,
-                                                                    subscribe: checked,
-                                                                })
-                                                                addToast({
-                                                                    description: checked
-                                                                        ? "You'll be notified of replies by email."
-                                                                        : "You won't receive notifications for this thread.",
-                                                                    title: checked
-                                                                        ? 'Thread notifications enabled'
-                                                                        : 'Thread notifications disabled',
-                                                                    onUndo: () => {
-                                                                        setNotificationsEnabled(!checked)
-                                                                        setSubscription({
-                                                                            contentType: 'question',
-                                                                            id: question.id,
-                                                                            subscribe: !checked,
-                                                                        })
-                                                                    },
-                                                                })
-                                                            }}
-                                                            label="Thread notifications"
-                                                        />
-                                                    )}
-
-                                                    <div className="ml-1 pl-1 border-l border-primary">
-                                                        <Tooltip
-                                                            trigger={
-                                                                <span>
-                                                                    <OSButton
-                                                                        size="sm"
-                                                                        className="relative"
-                                                                        style={{ width: 26, height: 26 }}
-                                                                        icon={
-                                                                            <IconChevronDown
-                                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                    sideBySide
-                                                                                        ? expandable
-                                                                                            ? 'rotate-90'
-                                                                                            : '-rotate-90'
-                                                                                        : expandable
-                                                                                        ? 'rotate-180'
-                                                                                        : ''
-                                                                                }`}
-                                                                            />
-                                                                        }
-                                                                        onClick={() => {
-                                                                            if (isMobile && sideBySide) {
-                                                                                navigate(menuValue)
-                                                                            } else {
-                                                                                expandOrCollapse(expandable)
-                                                                            }
-                                                                        }}
-                                                                    />
-                                                                </span>
-                                                            }
-                                                        >
-                                                            {expandable ? 'Expand' : 'Collapse'}
-                                                        </Tooltip>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <ScrollArea>
                                                 <div className="pb-[64px]">
                                                     <Question
@@ -680,6 +719,23 @@ export default function Inbox(props) {
                                                     />
                                                 </div>
                                             </ScrollArea>
+                                            <QuestionToolbar
+                                                containerRef={containerRef}
+                                                bottomContainerRef={bottomContainerRef}
+                                                setBottomHeight={setBottomHeight}
+                                                question={question}
+                                                user={user}
+                                                notificationsEnabled={notificationsEnabled}
+                                                setNotificationsEnabled={setNotificationsEnabled}
+                                                setSubscription={setSubscription}
+                                                addToast={addToast}
+                                                sideBySide={sideBySide}
+                                                handleSideBySide={handleSideBySide}
+                                                expandable={expandable}
+                                                expandOrCollapse={expandOrCollapse}
+                                                isMobile={isMobile}
+                                                menuValue={menuValue}
+                                            />
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

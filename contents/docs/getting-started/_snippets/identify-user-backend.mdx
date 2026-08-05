@@ -11,9 +11,9 @@ client.identify({
 ```
 
 ```python
-posthog.identify(
-    'distinct_id',
-    {
+posthog.set(
+    distinct_id='distinct_id',
+    properties={
         'name': 'Max Hedgehog',
         'email': 'max@hedgehogmail.com'
     }
@@ -21,13 +21,13 @@ posthog.identify(
 ```
 
 ```php
-PostHog::identify(array(
+PostHog::identify([
   'distinctId' => 'distinct_id',
-  'properties' => array(
+  'properties' => [
     'name' => 'Max Hedgehog'
     'email' => 'max@hedgehogmail.com',
-  )
-));
+  ]
+]);
 ```
 
 ```ruby

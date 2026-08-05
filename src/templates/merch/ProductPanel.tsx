@@ -97,10 +97,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             setIsCart(true)
             setIsAdding(false)
             setJustAdded(true)
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                setJustAdded(false)
-            }, 5000)
         }, 500)
     }
 
@@ -109,7 +105,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         setJustAdded(false)
     }
 
-    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto', className)
+    const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto text-primary', className)
 
     return (
         <div className={classes}>
@@ -248,6 +244,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         <div className="text-secondary">Description</div>
                         <div
                             className="col-span-3 product-description"
+                            // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - product description from Shopify, not user input
                             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                         />
                     </>
@@ -261,7 +258,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         You may have spotted these other fine PostHog products in the photos above.
                     </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
-                        {product.imageProducts?.map((product) => {
+                        {product.imageProducts?.filter(Boolean).map((product) => {
                             const { handle } = product
                             const featuredImage = (product as any).featuredImage
                             return (

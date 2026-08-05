@@ -22,7 +22,7 @@ We’ve interviewed 1,400 people in over three years, we hired 62 of them, and w
 
 **This week’s theme is:** Hiring bar raisers
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Define your culture before you start hiring
 
@@ -43,6 +43,8 @@ On the call, James G explained Uber (where he worked) had built a bunch of inter
 He’s still a core member of the team three years later.
 
 **Why is this important?** People who show a strong interest in your product in its infancy likely understand the problem you’re trying to solve, either because they have it now or have experienced it in the past. That’s valuable knowledge when you’re trying to find product-market fit.
+
+<NewsletterForm />
 
 ## 3. Make your job ads weirdly transparent
 
@@ -85,8 +87,6 @@ As Charles Cook, our head of ops and a veteran of multiple startups, [explains](
 >“If you are struggling to hire for a role, first ask yourself 'am I spending 20% of my time recruiting?' If the answer is yes, then go complain to your recruiter.”
 
 **Why is this important?** Managers need to properly own hiring. Those that don’t end up hiring average people and blaming their recruiters.
-
-<NewsletterForm />
 
 ## 6. Good people are always in demand
 

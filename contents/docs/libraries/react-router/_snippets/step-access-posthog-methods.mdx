@@ -1,0 +1,15 @@
+<UsageWarning />
+
+On the client-side, you can access the PostHog client using the `usePostHog` hook. This hook returns the initialized PostHog client, which you can use to call PostHog methods. For example:
+
+```tsx
+import { usePostHog } from '@posthog/react'
+
+function App() {
+  const posthog = usePostHog()
+  return <button onClick={() => posthog?.capture('button_clicked')}>Click me</button>
+}
+```
+
+For a complete list of available methods, see the [posthog-js documentation](/docs/libraries/js).
+

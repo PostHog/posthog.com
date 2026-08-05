@@ -1,10 +1,22 @@
 import React from 'react'
-import Control from '../components/Home/Control'
+import SEO from 'components/seo'
 import Test from '../components/Home/Test'
-import usePostHog from '../hooks/usePostHog'
 
 export default function Home() {
-    const posthog = usePostHog()
-
-    return posthog?.getFeatureFlag?.('homepage-test') === 'test' ? <Test /> : <Control />
+    return (
+        <>
+            <SEO
+                title="PostHog – We make your product self-driving"
+                updateWindowTitle={false}
+                description="PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it."
+                image="/images/og/default.png"
+                languageAlternates={[
+                    { hrefLang: 'en', href: '/' },
+                    { hrefLang: 'ko', href: '/ko' },
+                    { hrefLang: 'x-default', href: '/' },
+                ]}
+            />
+            <Test />
+        </>
+    )
 }

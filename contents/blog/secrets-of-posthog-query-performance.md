@@ -13,7 +13,6 @@ author:
 category: Engineering
 tags:
   - Product updates
-  - Launch week
 ---
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.
@@ -170,7 +169,7 @@ Some features coming in PostHog 1.34.0 (releasing on Thursday) which affect perf
 
 ## What’s next?
 
-Performance work is never complete and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
+Performance work is [never complete](/blog/autoresearch-found-a-3-year-old-clickhouse-bug) and PostHog has a lot of work ahead of us to make answering questions about your product fast, no matter your scale.
 
 Some projects currently in the pipeline are:
 

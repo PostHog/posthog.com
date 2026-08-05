@@ -2,6 +2,18 @@ import React from 'react'
 import Fuse from 'fuse.js'
 import Markdown from 'markdown-to-jsx'
 
+// HTML escape function to prevent XSS
+const escapeHtml = (text: string): string => {
+    const htmlEscapes: Record<string, string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+    }
+    return text.replace(/[&<>"']/g, (char) => htmlEscapes[char])
+}
+
 // Utility to prepare a preview of text by truncating it
 export const preparePreviewText = (text: string, limit: number): string => {
     // Replace line breaks with spaces for the preview
@@ -32,9 +44,9 @@ export const generateHighlightedText = (
     indices: readonly [number, number][],
     searchTerm: string
 ): string => {
-    if (!indices || indices.length === 0) return text
+    if (!indices || indices.length === 0) return escapeHtml(text)
 
-    // If we have a search term, try to find matches
+    // If we have a search term, try to find whole-word matches first
     if (searchTerm && searchTerm.length > 1) {
         // Escape regex special characters in the search term
         const escapedSearchTerm = searchTerm.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -45,12 +57,24 @@ export const generateHighlightedText = (
                 ? new RegExp(`(${escapedSearchTerm})`, 'gi')
                 : new RegExp(`\\b${escapedSearchTerm}\\b`, 'gi')
 
-        // Use standard <strong> tags for highlighting
-        const wholeWordResult = text.replace(regex, (match) => `<strong>${match}</strong>`)
+        // Find all matches and their positions
+        const matches: { start: number; end: number }[] = []
+        let match: RegExpExecArray | null
+        while ((match = regex.exec(text)) !== null) {
+            matches.push({ start: match.index, end: match.index + match[0].length - 1 })
+        }
 
-        // If we found matches, return this result
-        if (wholeWordResult !== text) {
-            return wholeWordResult
+        // If we found matches, build escaped result with highlights
+        if (matches.length > 0) {
+            let result = ''
+            let lastIndex = 0
+            matches.forEach(({ start, end }) => {
+                result += escapeHtml(text.substring(lastIndex, start))
+                result += `<strong>${escapeHtml(text.substring(start, end + 1))}</strong>`
+                lastIndex = end + 1
+            })
+            result += escapeHtml(text.substring(lastIndex))
+            return result
         }
     }
 
@@ -65,13 +89,13 @@ export const generateHighlightedText = (
           })
         : indices
 
-    if (filteredIndices.length === 0) return text
+    if (filteredIndices.length === 0) return escapeHtml(text)
 
     // Sort indices to ensure proper order
     const sortedIndices = [...filteredIndices].sort((a, b) => a[0] - b[0])
 
     // Check if there are any indices to process
-    if (sortedIndices.length === 0) return text
+    if (sortedIndices.length === 0) return escapeHtml(text)
 
     // Merge overlapping or adjacent indices
     const mergedIndices: [number, number][] = []
@@ -100,15 +124,15 @@ export const generateHighlightedText = (
     let lastIndex = 0
 
     mergedIndices.forEach(([start, end]) => {
-        // Add text before match
-        result += text.substring(lastIndex, start)
-        // Add highlighted match with standard strong tag
-        result += `<strong>${text.substring(start, end + 1)}</strong>`
+        // Add text before match (escaped)
+        result += escapeHtml(text.substring(lastIndex, start))
+        // Add highlighted match with standard strong tag (escaped)
+        result += `<strong>${escapeHtml(text.substring(start, end + 1))}</strong>`
         lastIndex = end + 1
     })
 
-    // Add remaining text
-    result += text.substring(lastIndex)
+    // Add remaining text (escaped)
+    result += escapeHtml(text.substring(lastIndex))
 
     return result
 }
@@ -186,6 +210,7 @@ export const HighlightedText: React.FC<HighlightedTextProps> = ({ text, highligh
     }
 
     // Add highlights
+    // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - highlights are escaped via escapeHtml, not raw user input
     return <span dangerouslySetInnerHTML={{ __html: highlights }} />
 }
 

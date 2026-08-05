@@ -30,7 +30,7 @@ export const newrelic = {
             },
             integrations: {
                 product_analytics: false,
-                session_replay: false,
+                session_replay: true,
             },
         },
         product_analytics: {
@@ -38,6 +38,62 @@ export const newrelic = {
         },
         session_replay: {
             available: true,
+        },
+        logs: {
+            available: true,
+            core_logging_and_ingestion: {
+                features: {
+                    centralized_log_ingestion_search: true,
+                    live_tail_real_time_logs: true,
+                    native_open_telemetry_ingest: true,
+                    vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'NRQL',
+                },
+            },
+            investigation_workflow: {
+                features: {
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
+                    ai_assisted_log_summaries: true,
+                },
+            },
+            debugging_integrations: {
+                features: {
+                    built_in_error_tracking: true,
+                    built_in_session_replay: true,
+                    product_analytics_context: false,
+                },
+            },
+            observability: {
+                features: {
+                    metrics: true,
+                    traces: true,
+                    alerting: true,
+                    infra_monitoring: true,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: 'Limited',
+                    enterprise_scale_compliance: 'Limited',
+                },
+            },
+            pricing: {
+                features: {
+                    ingest_only_pricing: false,
+                    no_query_compute_fees: false,
+                    predictable_at_scale: 'Usage',
+                },
+            },
+        },
+        ai_observability: {
+            available: false,
         },
         surveys: {
             available: false,
@@ -47,6 +103,7 @@ export const newrelic = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
+            managed_cloud: true,
             open_source: false,
             self_host: false,
         },
@@ -58,7 +115,7 @@ export const newrelic = {
         },
         developer: {
             api: true,
-            collaboration: false,
+            collaboration: true,
             mobile_sdks: true,
             native_data_sources: true,
             proxies: false,
@@ -68,8 +125,9 @@ export const newrelic = {
         },
         tools: {
             cms: '',
-            notebooks: false,
+            notebooks: true,
             project_management_tools: '',
+            ai_assistant: true,
         },
         integrations: {
             azure_blob: true,
@@ -115,12 +173,13 @@ export const newrelic = {
             reverse_proxy: false,
             role_based_access_control: true,
             saml_sso: true,
+            siem: false,
             soc2_certified: true,
             two_factor_auth: true,
             user_privacy_options: true,
         },
         analytics_integration: {
-            built_in_analytics: false,
+            built_in_analytics: true,
         },
     },
     pricing: {

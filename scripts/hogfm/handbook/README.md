@@ -333,9 +333,9 @@ s3://your-bucket/handbook/
 ├── values.elevenlabs-input.txt
 ├── values.cost.json
 ├── product/
-│   ├── releasing-as-beta.mp3
-│   ├── releasing-as-beta.elevenlabs-input.txt
-│   ├── releasing-as-beta.cost.json
+│   ├── releasing-new-products-and-features.mp3
+│   ├── releasing-new-products-and-features.elevenlabs-input.txt
+│   ├── releasing-new-products-and-features.cost.json
 │   └── metrics.mp3
 ├── engineering/
 │   ├── posthog-com/

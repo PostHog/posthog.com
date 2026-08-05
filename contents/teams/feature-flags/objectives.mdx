@@ -1,67 +1,56 @@
-### Q4 2025 Objectives
-This quarter we're making feature flags faster, more reliable, and way more automated. That means better (and more!) SDKs, more powerful local evaluation, supporting real-time use cases, and using AI to handle the tedious stuff. We're also talking to a bunch of users to figure out what to build next, fixing the foundations so nothing breaks, and shipping features that make flags easier to wrangle when you have thousands of them.
+### Q3 2026 Objectives
 
-#### Awesome documentation 🚧 <TeamMember name="Dylan Martin" photo /> driving, shared across the team
+#### Real-time cohorts  — <TeamMember name="Gustavo Henrique Strassburger" />
 
-**Status: In progress** — Improved usage docs, but new how-to guides still needed
+This is our most-requested feature. Dynamic cohorts today are computed on a delay, which makes them useless for real-time targeting decisions like "user did X in the last 5 minutes." If we can make cohort membership evaluate in real-time at the point of flag evaluation, we collapse a whole category of custom targeting logic people currently build themselves.
 
-Our docs should be as good as the <SmallTeam slug="experiment" />'s. We're partnering with the <SmallTeam slug="content" /> to refresh everything, writing real-world walkthroughs, and making it easier to jump from the app to the right docs.
+**What we'll ship:**
 
-#### Make local evaluation the default server-side evaluation strategy 🔄 <TeamMember name="Phil Haack" photo />
+- Real-time cohorts starting with person properties
+- Behavioral data as a follow-up
+- Migration path from existing dynamic cohorts
 
-**Status: Partially complete** — Stretch goal: ETag support and better docs/guides
+#### AI Native — <TeamMember name="Phil Haack" />
 
-Local eval means faster, cheaper, and more reliable flags. We want to make it the default for server-side SDKs by:
-- Finishing HyperCache integration to decouple `/local_evaluation` from Postgres
-- Rewriting the endpoint in Rust for better performance
-- Adding ETag support for efficient caching
-- Writing better docs and guides; specifically around best practices for including relevant properties alongside the flag when calling e.g. `getFeatureFlag` or `isFeatureEnabled`
+Feature flags will feature heavily in self-driving products. We want first-time founders as well as experienced engineers to be able to use our product.
 
-#### Ship a Java SDK ✅ <TeamMember name="Dustin Byrne" photo />
+**What we'll ship:**
 
-**Status: Complete**
+- Signal (stale flags, proactive flags)
+- A complete MCP
+- Skills
 
-Java developers need an official SDK. We're shipping one and iterating based on feedback.
+#### Dedicated Persons Store — <TeamMember name="Matheus Batista" photo />
 
-#### Improve SDK standardization 🚧 <TeamMember name="Dustin Byrne" photo />
+In order to make pre-computed flags a reality (as well as to improve reliability and isolation of our service), we need a dedicated persons store.
 
-**Status: In progress**
+**What we'll ship:**
 
-Inconsistent SDKs lead to bugs. We're burning down the [SDK standardization meta-issue](https://github.com/PostHog/posthog/issues/31425) to create a consistent experience across the stack.
+- A streaming dedicated persons store
 
-#### Mature the Cohorts UI/UX ✅ <TeamMember name="Gustavo Henrique Strassburger" photo />
+#### Improved Customer Visibility — <TeamMember name="Patricio Tarantino" photo />
 
-**Status: Complete**
+Customers don't have visibility into how their users are using flags, billing, what SDKs are making requests, how many `$feature_flag_called` events they raise.
 
-Cohorts has been neglected. We're clearing the backlog and fixing UI bugs so cohorts is actually pleasant to use by end of Q4.
+**What we'll ship:**
 
-#### Real-time feature flags 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+- A breakdown of `/flags` requests by SDK and other parameters.
+- Public latency metrics
 
-**Status: In progress**
+#### Standardize on Infrastructure — <TeamMember name="Matheus Batista" photo />
 
-Some use cases need instant flag updates without refreshes or restarts. We're adding WebSocket/SSE-based real-time updates to key SDKs.
+We are a special snowflake, but not that special. We should adopt company standards for infrastructure and ops and port any custom work over.
 
-#### Finish behavioral cohort targeting 🚧 <TeamMember name="Gustavo Henrique Strassburger" photo />
+**What we'll ship:**
 
-**Status: In progress**
+- Golden charts
 
-We started building a system to track behavioral cohort membership in a fast data store. We're finishing it so you can target flags based on behavioral cohorts.
+### Improved Experiments 
 
-#### Natural language flag creation ✅ <TeamMember name="Phil Haack" photo />
+Support the Experiments team's goals to make experiments built on flags more flexible and useful.
 
-**Status: Complete**
+**What we'll ship:**
 
-Building flags with AI. You describe what you want in plain English, Max builds the flag.
-
-#### Platform improvements 🚧 <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Phil Haack" photo />
-
-**Status: In progress**
-
-Fixing the foundations:
-- Finishing the persons database split (shared with ingestion team)
-- Move our deployment progress from a rollout (this experience was buggy at scale) to a k8s deployment
-- Right-size our k8s infrastructure with better alerting on nodepool usage and CPU utilization
-- Decouple the flags service from the production redis so that we can have 100% redis usage for flag/team reads AND we can isolate flags redis usage from main app redis usage (useful for any future incidents; minimizes the blast radius)
-- Decoupling `/flags` from the writer database so flags stay up even when the database is down
-- Rewriting `/evaluation_reasons` in Rust
-- Deprecating the legacy `/decide` endpoint
+- Boolean flag experiments
+- Multiple experiments on a single flag
+- Dedicated exposure event

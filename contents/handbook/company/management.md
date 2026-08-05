@@ -38,7 +38,7 @@ However, management tasks do come _first_, as giving context to your team tends 
 
 Management is intentionally spread thin at PostHog. This is a forcing function for making sure that teams and ICs continue to have high levels of autonomy. Bored managers are micromanagers. By working across several teams, people like #team-blitzscale and product managers are forced to only give their attention where it's truly needed, and give space & autonomy everywhere else.
 
-> You'll sometimes hear us use the term "team lead". A team lead is the leader of a small team. By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
+> You'll sometimes hear us use the term "team lead". [A team lead is the leader of a small team](/handbook/company/small-teams#what-is-the-role-of-the-team-lead). By default they also manage the individuals that are part of their team, though very occasionally they don't, such as when a new small team has just been created.
 
 ## How do I set context?
 
@@ -104,11 +104,13 @@ As PostHog grows, it's increasingly important that all team leads help us keep t
 
 That form will be shared with the relevant team Blitzscale member, so they can help where necessary.
 
+Feedback also flows the other way. Direct reports are periodically asked to give feedback on their manager through an automated form, rating them against what we expect managers to focus on and explaining why. This keeps the bar for managers high too, and gives them honest signal on how they're doing.
+
 > Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
 
 ### Weave
 
-We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see how their numbers compare to averages across the company. 
+We use a tool called [Weave](https://workweave.dev/) to collect stats for engineers. Engineers can log in to see their numbers and those of other engineers. 
 
 We understand that all the work an engineer does can't be properly represented in a tool that just looks at PR output. Data in Weave is _not_ the decision-maker for whether someone is succeeding in their role at PostHog. It can be, however, a part of the conversation.
 

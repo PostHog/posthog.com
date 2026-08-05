@@ -4,7 +4,7 @@ date: 2024-03-11
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711412696/posthog.com/contents/images/blog/misconceptions-about-analytics/analytics.webp
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/misconceptions-about-analytics/analytics.webp
 featuredImageType: full
 tags:
   - Product engineers
@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-Regular readers will know we think engineers today need to [get involved in product decisions](/blog/what-is-a-product-engineer), talk to users, and analyze usage data. It’s a core part of how we [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
+Regular readers will know we think engineers today need to [get involved in product decisions](/product-engineer/what-is-a-product-engineer), talk to users, and analyze usage data. It’s a core part of how we [designed our company for speed](https://newsletter.posthog.com/p/how-to-design-your-company-for-speed).
 
 But not all engineers are totally comfortable with using analytics data day-to-day. Often it’s due to working at companies where data is distorted as evidence for bad decisions, or frustration at dealing with overly complex implementations.
 
@@ -22,7 +22,7 @@ Whatever the reasons, these are some of the most common complaints we hear and h
 
 **This week’s theme is:** Getting over your fear of data.
 
-> This article was first published in our newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This article was first published in our newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. “It’s too early for analytics”
 

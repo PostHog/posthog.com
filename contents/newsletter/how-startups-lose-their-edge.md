@@ -67,6 +67,8 @@ It’s not that people are bad at their jobs or don’t care. It’s that cultur
 
 Across enough managers and interpretations, the culture becomes distorted. The edges get sanded down, the things that made you special start to feel risky or off-brand. Suddenly, you’re optimizing for what feels safe rather than what actually works.
 
+<NewsletterForm />
+
 ## Playing not to lose
 
 There’s a scarcity mindset that creeps in [as you scale](/newsletter/building-a-startup-that-scales), often without anyone noticing it’s happening. You become afraid of:

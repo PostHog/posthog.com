@@ -1,19 +1,12 @@
 import React from 'react'
-import Explorer from 'components/Explorer'
+import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
 import { explorerGridColumns } from '../../constants'
-import { explorerLayoutOptions } from '../../constants/explorerLayoutOptions'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
-import { useExplorerLayout } from '../../hooks/useExplorerLayout'
-import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 
 export default function Trash(): JSX.Element {
-    const { isListLayout, setLayoutValue, currentLayout } = useExplorerLayout('grid')
-    const selectOptions = useMenuSelectOptions()
-
     return (
         <>
             <SEO
@@ -21,40 +14,12 @@ export default function Trash(): JSX.Element {
                 description="PostHog is the only developer platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/default.png`}
             />
-            <Explorer
-                template="generic"
-                slug="trash"
-                title="Trash"
-                showTitle={false}
-                selectOptions={selectOptions}
-                selectedCategory="trash"
-                rightActionButtons={
-                    <ToggleGroup
-                        title="Layout"
-                        hideTitle={true}
-                        options={explorerLayoutOptions}
-                        onValueChange={setLayoutValue}
-                        value={currentLayout}
-                        className="-my-1 ml-2"
-                    />
-                }
-                // options below only needed to override matching the slug
-                // teamName="product-analytics"
-                // roadmapCategory="product-analytics"
-                // changelogCategory="product-analytics"
-
-                leftSidebarContent={[
-                    {
-                        title: 'Trash',
-                        content: (
-                            <>
-                                <p className="text-sm mb-0">
-                                    Files will never actually be deleted permanently because Internet Archive.
-                                </p>
-                            </>
-                        ),
-                    },
-                ]}
+            <ReaderView
+                className="border-t border-primary"
+                hideAppOptions
+                hideRightSidebar
+                hideLeftSidebar
+                showQuestions={false}
             >
                 {(() => {
                     // Static data for trash items
@@ -159,14 +124,13 @@ export default function Trash(): JSX.Element {
 
                                 return (
                                     <Accordion
-                                        skin={false}
                                         key={category}
-                                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:gap-2 [&>span]:after:h-0.5 [&>span]:after:flex-1 [&>span]:after:bg-border [&>span]:after:content-['']"
                                         items={[
                                             {
                                                 value: category,
                                                 trigger: (
-                                                    <span className="bg-primary pr-2 relative z-10">
+                                                    <span>
                                                         {categoryDisplayNames[category] ||
                                                             category.charAt(0).toUpperCase() + category.slice(1)}{' '}
                                                         ({count})
@@ -174,11 +138,7 @@ export default function Trash(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${isListLayout
-                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3 gap-y-4'
-                                                                : explorerGridColumns +
-                                                                ' gap-y-4 items-start justify-items-center'
-                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                        className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {items.map((item) => {
                                                             const appLink = (
@@ -186,9 +146,7 @@ export default function Trash(): JSX.Element {
                                                                     label={item.name}
                                                                     url={item.url}
                                                                     Icon={<AppIcon name={item.icon} />}
-                                                                    background="bg-primary"
                                                                     className={`size-12 [&_.bg-front]:fill-${item.color} [&_.bg-rear]:fill-${item.color}`}
-                                                                    orientation={isListLayout ? 'row' : 'column'}
                                                                 ></AppLink>
                                                             )
 
@@ -197,11 +155,7 @@ export default function Trash(): JSX.Element {
                                                                 return (
                                                                     <ZoomHover
                                                                         key={item.slug}
-                                                                        className={
-                                                                            isListLayout
-                                                                                ? 'w-full justify-start'
-                                                                                : 'w-28 justify-center'
-                                                                        }
+                                                                        className="w-28 justify-center"
                                                                     >
                                                                         {appLink}
                                                                     </ZoomHover>
@@ -212,11 +166,7 @@ export default function Trash(): JSX.Element {
                                                             return (
                                                                 <div
                                                                     key={item.slug}
-                                                                    className={
-                                                                        isListLayout
-                                                                            ? 'w-full justify-start'
-                                                                            : 'w-28 justify-center mx-auto'
-                                                                    }
+                                                                    className="w-28 justify-center mx-auto"
                                                                 >
                                                                     {appLink}
                                                                 </div>
@@ -233,7 +183,7 @@ export default function Trash(): JSX.Element {
                         </div>
                     )
                 })()}
-            </Explorer>
+            </ReaderView>
         </>
     )
 }

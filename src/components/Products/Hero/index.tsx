@@ -24,9 +24,11 @@ export const Hero = ({ color, icon, beta, product, title, description }: HeroPro
                     </span>
                 )}
             </div>
+            {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - hero content from CMS, not user input */}
             <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance" dangerouslySetInnerHTML={{ __html: title }} />
             <p
                 className="text-lg font-semibold text-center text-opacity-75 mb-5"
+                // nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - hero content from CMS, not user input
                 dangerouslySetInnerHTML={{ __html: description }}
             />
             <div className="flex justify-center gap-2 mb-12">

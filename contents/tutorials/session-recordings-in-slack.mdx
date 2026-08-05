@@ -21,7 +21,7 @@ You'll need:
 
 ## Data pipeline realtime destinations
 
-We'll be using [PostHog's data pipelines](/docs/cdp) to react to events in realtime, sending messages to destinations like [Slack](https://us.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://us.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
+We'll be using [PostHog's data pipelines](/docs/cdp) to react to events in realtime, sending messages to destinations like [Slack](https://app.posthog.com/pipeline/new/destination/hog-template-slack), [Airtable](https://app.posthog.com/pipeline/new/destination/hog-template-airtable), and many more.
 
 This enables us to send an event to PostHog from a user's browser when we detect a recording that we want to act on and have that converted to a message to a Slack channel.
 
@@ -32,7 +32,7 @@ When you start `posthog-js`, we can add code once the library is loaded to watch
 Here we'll wait until a recording has been idle for 5 minutes, but you might wait for some time after starting or use the `onCapture` hook to send a Slack message when a user experiences a `$exception` event.
 
 ```js
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     loaded: (ph) => {

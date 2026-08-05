@@ -57,6 +57,7 @@ interface IProps {
     }
     type: 'lead' | 'contact'
     source?: string
+    initialValues?: Record<string, any>
 }
 
 export interface Field {
@@ -298,7 +299,7 @@ const CTAButton = ({ location, width, size, variant, icon, label, rowPadding }: 
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement> & { className?: string }) => {
     const { name, placeholder, required, className } = props
     if (!name) return null
-    const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
+    const { errors, validateField, setFieldValue, values } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
 
     return (
@@ -316,6 +317,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement> & { className?
                     onBlur={() => {
                         validateField(name)
                     }}
+                    value={values[name] || ''}
                     className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full resize-none ${
                         error ? 'border-red' : 'border-primary'
                     } ${className ?? ''}`}
@@ -332,7 +334,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder, required } = props
     if (!name) return null
     const type = props.type
-    const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
+    const { errors, validateField, setFieldValue, values } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
     return (
         <>
@@ -351,6 +353,7 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     className={`outline-none text-sm rounded border bg-primary ring-0 focus:ring-0 w-full ${
                         error ? 'border-red' : 'border-primary'
                     }`}
+                    value={values[name] || ''}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                     type={props.type === 'date' ? 'date' : type || 'text'}
@@ -369,6 +372,7 @@ export default function SalesforceForm({
     form,
     type = 'lead',
     source,
+    initialValues: initialValuesProp,
 }: IProps) {
     const { setConfetti } = useApp()
     const posthog = usePostHog()
@@ -406,6 +410,7 @@ export default function SalesforceForm({
         submitted ? (
             <>
                 <div className="bg-primary text-primary border border-green p-4 rounded flex justify-center items-center">
+                    {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - form message from Salesforce API, not external user input */}
                     {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>
@@ -438,9 +443,12 @@ export default function SalesforceForm({
                     )
                 )}
                 validateOnChange={false}
-                initialValues={Object.fromEntries(
-                    form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
-                )}
+                initialValues={{
+                    ...Object.fromEntries(
+                        form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
+                    ),
+                    ...initialValuesProp,
+                }}
                 onSubmit={handleSubmit}
             >
                 <Form className={formOptions?.className}>

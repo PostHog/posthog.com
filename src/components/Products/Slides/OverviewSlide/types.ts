@@ -24,4 +24,5 @@ export interface OverviewSlideProps {
         classes?: string
     }
     status?: string
+    className?: string
 }

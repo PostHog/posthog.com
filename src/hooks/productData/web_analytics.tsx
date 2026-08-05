@@ -1,31 +1,136 @@
 import React from 'react'
-import { IconPieChart } from '@posthog/icons'
+import {
+    IconPieChart,
+    IconEye,
+    IconSparkles,
+    IconList,
+    IconConfetti,
+    IconRocket,
+    IconCheckCircle,
+    IconInfo,
+    IconCursorClick,
+    IconMagic,
+    IconChat,
+    IconCode,
+    IconMessage,
+} from '@posthog/icons'
+import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
+import { features } from './web_analytics/features'
+import { applications, topFeatures } from './web_analytics/slides'
 
 export const webAnalytics = {
+    ...getTool('web_analytics'),
     Icon: IconPieChart,
-    name: 'Web Analytics',
-    handle: 'web_analytics',
     type: 'product_analytics',
-    slug: 'web-analytics',
+    // Billed as product analytics events – Plans/calculator resolve against this billing product.
+    billingType: 'product_analytics',
+    teamSlug: 'web-analytics',
+    forumTopicId: 348,
     color: 'green-2',
     colorSecondary: '[#37945D]',
-    category: 'analytics',
-    billedWith: 'Product analytics',
+    wizardSupport: true,
+    billedWith: 'Product Analytics',
+    billedWithSlug: 'product-analytics',
+    shortDescription: 'Privacy-focused web analytics',
+    pricingDescription:
+        'Web Analytics is billed as Product Analytics events, so you get access to both products for the same price. 1 million events free monthly. Anonymous events cost 10x less than identified. Most sites never pay anything. Even high-traffic sites pay way less than GA 360.',
+    pricingLead:
+        'Web Analytics is billed as Product Analytics events, so you get access to both products for the same price.',
+    pricingHighlights: [
+        '1 million events free every month',
+        'Anonymous events cost 10x less than identified',
+        'Most sites never pay anything',
+    ],
+    pricingFooter: 'Even high-traffic sites pay way less than GA 360.',
     seo: {
         title: 'Web Analytics – Track and measure traffic with PostHog',
         description:
-            'Track traffic and performance with Web Analytics. Get privacy-friendly insights, a pre-built dashboard, real-time data, and no sampling.',
+            'Track traffic and performance with Web Analytics – the lightweight measurement layer that feeds your agents the context to make your product self-driving.',
     },
+    /**
+     * Sections rendered on the Product surface (`/web-analytics`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/web-analytics/pricing`).
+     * Same shape as `productMenu`. Plans/calculator use Product Analytics
+     * billing via `billingType` + `pricingDescription`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Privacy-focused web analytics',
         description:
-            'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
+            'Web analytics is one of the tools that makes your product self-driving: the lightweight measurement layer that feeds agents traffic context. Built to natively work with session replay, feature flags, experiments, and surveys.',
+        eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
     videos: {
         overview: {
-            wistia: 'x05zb7x023',
+            wistia: '092mo7cump',
         },
     },
     screenshots: {
@@ -42,7 +147,42 @@ export const webAnalytics = {
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
+        referrers: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-light.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580002/posthog.com/contents/images/docs/web-analytics/dashboard/referrers-dark.png',
+            alt: 'Traffic sources and referrers',
+        },
+        paths: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580005/posthog.com/contents/images/docs/web-analytics/dashboard/paths-light.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/v1711580004/posthog.com/contents/images/docs/web-analytics/dashboard/paths-dark.png',
+            alt: 'Top paths in web analytics',
+        },
     },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
+        alt: 'A hedgehog looking at web analytics',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
+            alt: 'A hedgehog looking at web analytics',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png',
+            alt: 'A hedgehog with a web analytics cursor',
+        },
+    },
+    // Same event volume slider as product analytics (web analytics is billed with it).
+    slider: {
+        marks: [MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
+        min: MILLION,
+        max: MAX_PRODUCT_ANALYTICS,
+    },
+    volume: MILLION,
     customers: {
         ycombinator: {
             headline: 'gets 30% more data than with GA4',
@@ -58,230 +198,31 @@ export const webAnalytics = {
             description: 'Web analytics gives us all the metrics we really care about. It is so much better than GA4.',
         },
     },
-    features: [
-        {
-            title: 'Core metrics',
-            headline: 'Track visitors. Cookies not required.',
-            description:
-                "If you're privacy-focused, our cookieless option means you don't need to add a cookie banner just for your web analytics.",
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
-                    alt: 'Web analytics dashboard',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-            features: [
-                {
-                    title: 'Visitors & pageviews',
-                    description: 'Track unique visitors and total page views with real-time updates',
-                },
-                {
-                    title: 'Sessions & duration',
-                    description: 'Monitor visit frequency and how long users stay engaged',
-                },
-                {
-                    title: 'Bounce rate',
-                    description: 'See what percentage of users leave after viewing one page',
-                },
-                {
-                    title: 'Entry & exit paths',
-                    description: 'Understand where users start and end their journeys',
-                },
-            ],
-        },
-        {
-            title: 'Traffic sources',
-            headline: 'Check your sources',
-            description:
-                'Track channels, referrers, UTMs, and create custom attribution channels for comprehensive source analysis.',
-            images: [
-                {
-                    src: '/images/products/web-analytics/top-referrers.jpg',
-                    alt: 'Traffic sources',
-                    shadow: true,
-                },
-            ],
-            imagesClasses: '-mr-8',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Channel attribution',
-                    description: 'Automatic categorization into Direct, Organic, Paid, Social, etc.',
-                },
-                {
-                    title: 'Referrer tracking',
-                    description: 'See which websites send you the most valuable traffic',
-                },
-                {
-                    title: 'UTM parameters',
-                    description: 'Full support for campaign, source, medium, content, and term',
-                },
-                {
-                    title: 'Custom channels',
-                    description: 'Define your own channels like AI, partners, or affiliates',
-                },
-                {
-                    title: 'Session explorer',
-                    description: 'Deep dive into individual session attribution details',
-                },
-            ],
-        },
-        {
-            title: 'Core Web Vitals',
-            headline: 'Monitor Core Web Vitals',
-            description: (
-                <>
-                    Track LCP, FCP, INP, and CLS for performance optimization. Also available in PostHog Toolbar.{' '}
-                    <div className="text-base">
-                        <Link state={{ newWindow: true }} to="/docs/web-analytics/web-vitals">
-                            What do all these silly acronyms mean?
-                        </Link>
-                    </div>
-                </>
-            ),
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/web_vitals_4704da6644.png',
-                    alt: 'Web vitals',
-                    shadow: true,
-                },
-            ],
-            features: [
-                {
-                    title: 'Graph changes over time',
-                    description: 'Monitor changes to your performance optimization metrics',
-                },
-                {
-                    title: 'Find which paths have good and bad performance',
-                    description: 'See paths broken down by load time',
-                },
-                {
-                    title: 'Filtering options',
-                    description: 'Analyze by domain, path, device type, and user properties',
-                },
-                {
-                    title: 'Analyze by performance percentile',
-                    description: 'Start with p90 or optimize even further',
-                },
-            ],
-        },
-        {
-            title: 'Advanced analytics',
-            headline: 'Go beyond basic metrics with powerful insights',
-            description: 'Track scroll depth, conversions, and revenue directly in your web analytics.',
-            features: [
-                {
-                    title: 'Scroll depth tracking',
-                    description: 'See how far users scroll and what content they actually read',
-                },
-                {
-                    title: 'Conversion goals',
-                    description: 'Set up and track multiple conversion events',
-                },
-                {
-                    title: 'Revenue tracking',
-                    description: 'Connect revenue data from events or payment platforms',
-                },
-                {
-                    title: 'Active hours heatmap',
-                    description: 'Visualize when your users are most active',
-                },
-            ],
-        },
-        {
-            title: 'Privacy & compliance',
-            headline: 'Analytics that respects user privacy',
-            description:
-                'GDPR compliant, cookieless options, and ad blocker resilient tracking for better data coverage.',
-            features: [
-                {
-                    title: 'Cookieless tracking',
-                    description: 'Option to track without cookies for strict privacy requirements',
-                },
-                {
-                    title: 'Anonymous mode',
-                    description: 'Significantly reduce costs with anonymous visitor tracking',
-                },
-                {
-                    title: 'GDPR compliant',
-                    description: 'Built with privacy regulations in mind from the start',
-                },
-                {
-                    title: 'Ad blocker resilient',
-                    description: 'Reverse proxy option reduces blocking by 70%+',
-                },
-                {
-                    title: 'Data residency',
-                    description: 'Choose between US and EU cloud hosting',
-                },
-            ],
-        },
-        {
-            title: 'Device & demographics',
-            headline: 'Know your audience',
-            description: 'Break down traffic by device, browser, OS, and location to optimize for your users.',
-            images: [
-                {
-                    src: '/images/products/web-analytics/world-map.jpg',
-                    alt: 'Demographics',
-                    shadow: true,
-                },
-            ],
-            imagesClasses: '-mr-8',
-            layout: 'columns',
-            features: [
-                {
-                    title: 'Device types',
-                    description: 'Desktop vs mobile vs tablet breakdown',
-                },
-                {
-                    title: 'Browsers & OS',
-                    description: 'See which browsers and operating systems to support',
-                },
-                {
-                    title: 'Geographic data',
-                    description: 'Country and city-level visitor location data',
-                },
-                {
-                    title: 'Screen sizes',
-                    description: 'Optimize for your most common screen resolutions',
-                },
-                {
-                    title: 'Bot detection',
-                    description: 'Automatic filtering of crawler and bot traffic',
-                },
-            ],
-        },
-        {
-            title: 'Works with product analytics',
-            headline: 'More than just web analytics',
-            description: 'Seamlessly switch between web and product analytics, all in one platform.',
-            features: [
-                {
-                    title: 'Unified platform',
-                    description: 'Web analytics + product analytics + session replay + more',
-                },
-                {
-                    title: 'Shared events',
-                    description: 'Same events power multiple features, no duplicate tracking',
-                },
-                {
-                    title: 'Cross-domain tracking',
-                    description: 'Track users across multiple domains and subdomains',
-                },
-                {
-                    title: 'Backend integration',
-                    description: 'Connect server-side events with frontend sessions',
-                },
-                {
-                    title: 'Cost efficient',
-                    description: 'No additional cost beyond event usage',
-                },
-            ],
-        },
-    ],
+    useCases: {
+        intro: 'Web Analytics is used across teams depending on your role.',
+        rows: [
+            ['Growth Marketers', 'See which channels, UTMs, and landing pages drive visits and conversions'],
+            ['Founders', 'Check traffic health on a pre-built dashboard without waiting on a data team'],
+            ['Product Engineers', 'Validate deploys – did pageviews, bounce rate, or Web Vitals move after ship?'],
+            ['Growth Engineers', 'Find high-bounce pages, scroll drop-off, and campaign paths worth fixing'],
+            ['Content & SEO', 'Rank pages by entrances, bounce, and conversion to prioritize what to rewrite'],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Query traffic from your editor',
+        description:
+            'Check traffic, investigate anomalies, and build traffic dashboards from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            'Add a snippet, SDK, or no-code install – then open the pre-built dashboard. Autocapture handles pageviews; cookieless mode is optional.',
+        productSlug: 'web-analytics',
+        categories: ['web', 'mobile', 'no-code'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Web Analytics',
         benefits: [
@@ -307,6 +248,8 @@ export const webAnalytics = {
             },
         ],
     },
+    answersHeadline: "Here's what you can do with Web Analytics",
+    answersDescription: 'Plus some helpful reading for no-code platforms',
     questions: [
         {
             question: 'Find broken links (404s)',
@@ -360,7 +303,6 @@ export const webAnalytics = {
                 },
                 {
                     title: 'You need to migrate data from GA4',
-                    // subtitle: 'Most tools have delays or limited real-time capabilities',
                 },
                 {
                     title: 'You actually really like GA4 🤡',
@@ -369,8 +311,11 @@ export const webAnalytics = {
             ],
             us: [
                 {
+                    title: 'Agents can query your traffic and act on it – the context that powers self-driving',
+                },
+                {
                     title: 'You want to do more than just web analytics',
-                    subtitle: 'Web Analytics integrates with the entire Product OS ecosystem.',
+                    subtitle: 'Web Analytics integrates with the entire PostHog ecosystem.',
                 },
                 {
                     title: "You don't want to spend weeks setting up dashboards",
@@ -418,6 +363,69 @@ export const webAnalytics = {
                 'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
         },
     ],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+        imageAlt: 'PostHog AI and web analytics',
+        imageClasses: 'w-96',
+        // Reshaped from presenterNotes.ai (existing MCP blurb)
+        intro: 'Query web analytics data to check traffic trends, investigate anomalies, and build dashboards.',
+        mcpFeatures: ['web_analytics', 'insights', 'product_analytics', 'dashboards'],
+        skills: [
+            'Filters web traffic by path, geography, device, or referrer',
+            'Investigates traffic spikes, dips, and other anomalies',
+            'Analyzes Core Web Vitals to identify performance bottlenecks',
+        ],
+        // Reshaped from existing ai.prompts + contents/docs/web-analytics/surfaces/mcp.mdx examples.
+        // Tool names verified against src/data/mcp-tools.json.
+        groups: [
+            {
+                title: 'Traffic overview',
+                tool: 'query-web-overview',
+                prompts: [
+                    'How many pageviews did we get today vs yesterday?',
+                    'There was an odd traffic spike yesterday – find the root cause',
+                    'Which countries are driving the most traffic?',
+                ],
+            },
+            {
+                title: 'Breakdowns',
+                tool: 'query-web-stats',
+                prompts: [
+                    'Which landing pages have the highest bounce rate this month?',
+                    'What are the top landing pages by traffic this week?',
+                    'Show me traffic broken down by referral source for the past 30 days.',
+                    "What's the bounce rate on /pricing compared to /docs?",
+                ],
+            },
+            {
+                title: 'Web vitals',
+                tool: 'query-web-vitals',
+                prompts: [
+                    'Which pages have the worst LCP at p75 this week?',
+                    'Where is CLS poor on the marketing site?',
+                    'Audit Core Web Vitals and list the pages in the poor band for INP',
+                    "Which paths need LCP improvements after yesterday's deploy?",
+                ],
+            },
+            {
+                title: 'Build & save',
+                tool: 'insight-create',
+                prompts: [
+                    'Create a dashboard showing web traffic by source and campaign',
+                    'Create a dashboard showing daily pageviews, top pages, and traffic by source.',
+                ],
+            },
+            {
+                title: 'Weekly digest',
+                tool: 'web-analytics-weekly-digest',
+                prompts: [
+                    'Write me a Monday exec digest: growth, retention, errors, and what shipped',
+                    'Summarize last week across the business into one notebook',
+                    'What moved this week and what should I worry about?',
+                ],
+            },
+        ],
+    },
     presenterNotes: {
         overview:
             "<strong>Presenter notes:</strong> Google took something great (GA3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",
@@ -431,14 +439,14 @@ export const webAnalytics = {
                 PostHog's Web Analytics is billed as Product Analytics events, which means you get access to both
                 products for the same price. 1 million events free monthly. Anonymous events cost 10x less than
                 identified. (
-                <Link state={{ newWindow: true }} to="/events">
+                <Link state={{ newWindow: true }} to="/docs/data/anonymous-vs-identified-events">
                     Learn about the difference between anonymous events and identified events.
                 </Link>
                 ) Most sites never pay anything. Even high-traffic sites pay way less than GA 360.
             </>
         ),
         'comparison-summary':
-            "GA4 is free but also really hard to use. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics - it's integrated with everything else. If you liked GA3, you'll love this. If you like GA4, please seek medical attention immediately. (But spoiler: doctors orders will likely be to try PostHog Web Analytics.)",
+            "GA4 is free but also really hard to use. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics – it's integrated with everything else, so agents can act on your traffic context directly rather than just reading a dashboard. That's what makes your product self-driving. If you liked GA3, you'll love this. If you like GA4, please seek medical attention immediately. (But spoiler: doctors orders will likely be to try PostHog Web Analytics.)",
         'feature-comparison':
             "We have mostly everything the others have plus: scroll depth, custom channels, no sampling, ad blocker resilience, and integrated product analytics. You're welcome.",
         docs: "Setup takes minutes. Add our snippet, see data. We document every metric clearly. Common questions like 'unique vs returning visitors' explained simply. Migration guides from GA4 and others included.",
@@ -446,5 +454,6 @@ export const webAnalytics = {
             "See traffic spike? Click through to session replays of those visitors. Run surveys on specific traffic sources. Build custom analytics beyond the dashboard. It all connects because it's one platform.",
         'getting-started':
             "Add our snippet. Data flows immediately. The pre-built dashboard has everything most people need. Later, customize with product analytics if you want deeper insights. But if you're just looking for a web analytics, the defaults are probably enough.",
+        ai: 'The PostHog MCP server lets your AI coding agent query web analytics data directly from your code editor. Check traffic trends, investigate anomalies, and build dashboards – without switching to the PostHog app.',
     },
 }

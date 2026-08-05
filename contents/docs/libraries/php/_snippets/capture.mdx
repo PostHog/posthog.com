@@ -1,10 +1,10 @@
 ```php
-PostHog::capture(array(
+PostHog::capture([
   'distinctId' => 'distinct_id_of_the_user',
   'event' => 'movie_played',
-  'properties' => array(
+  'properties' => [
     'movie_id' => '123',
     'category' => 'romcom'
-  )
-));
+  ]
+]);
 ```

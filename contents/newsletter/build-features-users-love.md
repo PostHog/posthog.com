@@ -24,9 +24,10 @@ These are some of life’s greatest questions, and in this issue, we answer one 
 
 **This week’s theme is:** Launching successful new features
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 🛠️ How we build new features users love
+
 At PostHog, a new feature is successful if it:
 
 1. Solves a real user problem.
@@ -50,6 +51,7 @@ Here’s that process in more detail:
 5. **Continued development post-launch.** If a feature continues to show success after launch, it may warrant further work. What success looks like here is continued growth in usage metrics, recommendations, public praise, and potentially, revenue.
 
 ### Why it works
+
 There are 3 key takeaways:
 
 1. **It’s lean.** It’s about building, testing, shipping, and learning quickly.
@@ -60,7 +62,10 @@ There are 3 key takeaways:
 
 In [How we build features users love (really fast)](/blog/measuring-feature-success), we go deeper into this process using a real-world example – our data sampling feature created by Yakko to solve the pain points of some of our largest users.
 
+<NewsletterForm />
+
 ## 🎵 What Spotify learned from Discover Weekly
+
 Discover Weekly was a huge success for Spotify. There’s plenty to learn from the how and why it was a success, and how they validated that success.
 
 ### 1. Inspiration

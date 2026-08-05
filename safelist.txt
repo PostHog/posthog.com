@@ -325,6 +325,7 @@ lg:my-0
 line-clamp-1
 line-clamp-2
 line-clamp-3
+max-h-14
 max-w-2xl
 max-w-3xl
 max-w-4xl
@@ -623,3 +624,11 @@ data-[highlighted]:bg-text-secondary
 @5xl/app-reader:block
 @6xl/app-reader:block
 @7xl/app-reader:block
+
+bg-trace-monitoring
+bg-cost-analysis
+bg-performance-monitoring
+
+bg-blue
+bg-lilac
+animate-hogfather-jump

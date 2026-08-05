@@ -28,7 +28,7 @@ In this guide, we'll take a closer look at some of the best Rollbar alternatives
 
 ### 1. PostHog
 
-PostHog is a developer platform that goes far beyond just [error tracking](/error-tracking). It combines [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [LLM analytics](/llm-analytics), [surveys](/surveys), and more, giving developers visibility into what went wrong and why.
+PostHog is a developer platform that goes far beyond just [error tracking](/error-tracking). It combines [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/experiments), [LLM observability](/llm-analytics), [surveys](/surveys), and more, giving developers visibility into what went wrong and why.
 
 Instead of showing only stack traces, PostHog links errors to real user sessions. You can replay the exact actions that caused the issue, see what users did before the crash, and trace frontend behavior back to backend exceptions.
 
@@ -190,7 +190,7 @@ LogRocket doesn't cover backend or server-side error tracking, so you'll still n
 
 ### 4. Datadog
 
-Datadog is a full observability platform combining application performance monitoring (APM), logs, metrics, traces, and error tracking. Its Real User Monitoring (RUM) connects frontend sessions with backend traces to show the full blast radius of a crash or slowdown.
+[Datadog](/blog/best-datadog-alternatives) is a full observability platform combining application performance monitoring (APM), logs, metrics, traces, and error tracking. Its Real User Monitoring (RUM) connects frontend sessions with backend traces to show the full blast radius of a crash or slowdown.
 
 While Datadog's depth and integrations are unmatched, its complexity and cost make it more suited to enterprise-scale teams than startups. Still, it does a great job at providing a single pane of glass across infrastructure, application performance, and user behavior.
 
@@ -360,6 +360,19 @@ Airbrake lacks features like session replay or performance monitoring, but its s
 * Small team or early-stage startup? **Airbrake** keeps things simple and affordable.
 
 ## FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What is Rollbar used for?</summary>

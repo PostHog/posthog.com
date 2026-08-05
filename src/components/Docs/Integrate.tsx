@@ -1,9 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
-import CheckIcon from '../../images/check.svg'
-import XIcon from '../../images/x.svg'
 import List from 'components/List'
+import { getLogo } from '../../constants/logos'
 
 type LibraryNode = {
     fields: {
@@ -11,7 +9,8 @@ type LibraryNode = {
     }
     frontmatter: {
         title: string
-        icon: {
+        platformLogo?: string
+        icon?: {
             publicURL: string
         }
         features: LibraryFeatures | null
@@ -24,7 +23,9 @@ type FrameworkNode = {
     }
     frontmatter: {
         title: string
-        icon: {
+        sidebarTitle?: string
+        platformLogo?: string
+        icon?: {
             publicURL: string
         }
     }
@@ -38,7 +39,7 @@ type LibraryFeatures = {
     sessionRecording: boolean
     userIdentification: boolean
     surveys: boolean
-    llmAnalytics: boolean
+    aiObservability: boolean
     errorTracking: boolean
 }
 
@@ -57,10 +58,10 @@ export const SDKs = () => {
     return (
         <List
             className="grid @sm:grid-cols-2 @xl:grid-cols-3"
-            items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
+            items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, platformLogo, icon } }) => ({
                 label: title,
                 url: slug,
-                image: icon?.publicURL,
+                image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
             }))}
         />
     )
@@ -72,11 +73,13 @@ export const Frameworks = () => {
     return (
         <List
             className="grid @sm:grid-cols-2 @xl:grid-cols-3"
-            items={frameworks.nodes.map(({ fields: { slug }, frontmatter: { title, icon } }) => ({
-                label: title,
-                url: slug,
-                image: icon?.publicURL,
-            }))}
+            items={frameworks.nodes.map(
+                ({ fields: { slug }, frontmatter: { title, sidebarTitle, platformLogo, icon } }) => ({
+                    label: sidebarTitle || title,
+                    url: slug,
+                    image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
+                })
+            )}
         />
     )
 }
@@ -95,13 +98,16 @@ const query = graphql`
                             "/docs/libraries/go"
                             "/docs/libraries/ios"
                             "/docs/libraries/java"
+                            "/docs/libraries/kmp"
                             "/docs/libraries/node"
                             "/docs/libraries/php"
                             "/docs/libraries/python"
                             "/docs/libraries/react"
                             "/docs/libraries/react-native"
+                            "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
                             "/docs/libraries/rust"
+                            "/docs/libraries/unity"
                         ]
                     }
                 }
@@ -159,6 +165,8 @@ const query = graphql`
         }
         frontmatter {
             title
+            sidebarTitle
+            platformLogo
             icon {
                 publicURL
             }
@@ -171,6 +179,7 @@ const query = graphql`
         }
         frontmatter {
             title
+            platformLogo
             icon {
                 publicURL
             }
@@ -182,7 +191,7 @@ const query = graphql`
                 featureFlags
                 groupAnalytics
                 surveys
-                llmAnalytics
+                aiObservability
                 errorTracking
             }
         }

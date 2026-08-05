@@ -4,14 +4,14 @@ date: 2025-09-16
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bolt_c70d0ec00f.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/bolt_c70d0ec00f.jpg
 featuredImageType: full
 tags:
   - Product
   - Product-market fit
   - Engineering
 crosspost:
-  - Product for Engineers
+  - Product engineers
   - Founders
   - Blog
 ---
@@ -55,6 +55,8 @@ WebContainer is Bolt’s superpower. Most AI app builders spin up a fresh contai
 “The big win is latency. It feels as if you’re developing on localhost,” says founding engineer [Dominic Elm](https://x.com/elmd_). “Plus it has security benefits. With remote compute you get abuse like people trying to run bitcoin miners. With WebContainer, if someone tries, they’re just using their own CPU.”
 
 ![webcontainer runtime](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/webcontainer22_dd15ae34e8.png)
+
+<NewsletterForm />
 
 ## Why squeezing Node.js into a browser tab is hard – and how Bolt pulled it off
 

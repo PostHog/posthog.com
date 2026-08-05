@@ -23,7 +23,11 @@ Above everything else, if you are going above and beyond for PostHog and you're 
 
 ## Intellectual property
 
-Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. As a rule, anything from PostHog that is explicitly MIT-licensed is fine to use, anything else is not.
+Just to reassure you, PostHog won't try to claim ownership of any intellectual property (IP) you create in your personal time, e.g. if you are contributing to another open source project as a hobby. Side projects built on your own time using your own resources do not require permission, review or approval from PostHog. Go forth and build. However, you need to be _really_ careful that you do not introduce any of PostHog's non-open source IP into any project that you work on - this can cause serious legal headaches. As a rule, anything from PostHog that is explicitly MIT-licensed is fine to use, anything else is not.
+
+### Projects that start at PostHog
+
+If a project is born from work you have done inside PostHog – that is, using work time, PostHog code, PostHog data, or other PostHog tools and infrastructure – these projects belong to PostHog and should live in PostHog repos. If you want to develop these projects further on the side, you will need explicit permission.
 
 If you are ever worried about this, please talk to Fraser and he can help you figure out the best solution here, especially if what you are working on directly competes with something PostHog has built or is on our roadmap. 
 

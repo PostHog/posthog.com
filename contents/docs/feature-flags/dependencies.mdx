@@ -60,6 +60,12 @@ Here's a common pattern where you want to enable a new feature only for users in
 
 When the dependent flag is evaluated using any of the [evaluation methods](/docs/feature-flags/adding-feature-flag-code), PostHog automatically evaluates the base flag first. This ensures the new dashboard is only shown to beta program participants.
 
+Because every dependent flag references the same base flag, they all activate for the *same* 10% of users resulting in one consistent beta cohort across every feature. This behavior is because PostHog uses a deterministic hash of `{flag_key}.{distinct_id}` to determine rollout assigment. The `beta_program` base flag hashes each user to a stable position and enables the flag for the 10% below the threshold. Since each dependent flag rolls out at 100% to users where `beta_program` equals `true`, they all inherit that same 10% of users.
+
+If you instead rolled out each feature to 10% on its own, you'd get a *different* 10% for each one. The flag key is part of the hash, so `new_dashboard.{distinct_id}` and `new_feature.{distinct_id}` would bucket the same user to different positions.  In other words, this means that they could be in one flag's rollout but not another's. Gating everything on a shared base flag is what ensures a single group of users see all your beta features.
+
+For more on how rollout hashing works, see [how the hash works](/docs/feature-flags/best-practices#how-the-hash-works).
+
 ## Supported dependency types
 
 Feature flag dependencies support several condition types:

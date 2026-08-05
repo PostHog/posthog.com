@@ -90,7 +90,7 @@ If it’s not a “hair on fire” problem for them, or they’re not excited to
 
 If you can see people are desperate for a solution, and you’re excited to work on the problem, then you’re ready to move on to Step 2.
 
-## Common failure modes
+### Common failure modes
 
 - **Just asking people if they like your idea:** Most people will just say “yes” or “it’s interesting” to get you to stop talking to them. This doesn’t equal validation. You need to know if they’ve encountered the problem and tried to solve it.
 
@@ -101,6 +101,8 @@ If you can see people are desperate for a solution, and you’re excited to work
 - **Doing big business validation:** You don’t need to run focus groups, [start product managing](/newsletter/product-management-is-broken), build a pitch deck, or spend weeks on competitor research. Validating your problem exists isn’t like writing an academic research paper.
 
 - **Going slow:** James once said “the quicker you are, the worse you can be at product. If you are bad at product and slow, you are doomed.” Don’t worry about looking dumb because you are dead by default.
+
+<NewsletterForm />
 
 ## Step 2: Validate users want your solution
 
@@ -122,7 +124,7 @@ Articulating the problem is only half the battle. You need to articulate your so
 
 If you do this well, you might not need to do anything else. Many startups have built huge waitlists before their product even launches, validating demand.
 
-A classic example is Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything.
+A classic example is Dropbox, whose [viral demo video](https://www.alexanderjarvis.com/dropbox-doing-things-that-dont-scale/) led to thousands of signups before they built anything — a reminder that [how you tell the story matters as much as what you built](/newsletter/how-to-demo#storytelling-tactics).
 
 ### Problem #2: You lack credibility
 

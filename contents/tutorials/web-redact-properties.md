@@ -63,7 +63,7 @@ Then, you can initialize PostHog with your `before_send` function.
 ```js
 import { beforeSend } from './beforeSend'
 
-posthog.init('<ph_project_api_key>', {
+posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
   defaults: '<ph_posthog_js_defaults>', 
   before_send: beforeSend
@@ -87,6 +87,6 @@ You can also disable capturing for specific UI elements for [product analytics](
 - [Product analytics privacy controls](/docs/product-analytics/privacy)
 - [Product analytics autocapture controls](/docs/product-analytics/autocapture#configuring-autocapture)
 - [Session replay privacy controls](/docs/session-replay/privacy)
-- [LLM analytics](/docs/llm-analytics/privacy-mode)
+- [AI Observability](/docs/ai-observability/privacy-mode)
 - [Privacy compliance](/docs/privacy)
 - [Property Filter app](/tutorials/property-filter)

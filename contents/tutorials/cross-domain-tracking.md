@@ -6,7 +6,6 @@ author:
 tags:
  - configuration
  - persons
- - sessions
  - product analytics
 ---
 
@@ -74,7 +73,7 @@ const hashParams = new URLSearchParams(window.location.hash.substring(1))
 const distinct_id = hashParams.get('distinct_id')
 const session_id = hashParams.get('session_id')
 
-posthog.init("<ph_project_api_key>", {
+posthog.init("<ph_project_token>", {
   api_host: "<ph_client_api_host>",
   bootstrap: {
     sessionID: session_id,

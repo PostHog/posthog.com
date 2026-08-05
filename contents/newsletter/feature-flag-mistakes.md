@@ -17,7 +17,7 @@ crosspost:
 
 Here are two important, related facts:
 
-1. [Product engineers](/blog/what-is-a-product-engineer) succeed when they ship quickly, understand if a change is working, and iterate.
+1. [Product engineers](/product-engineer/what-is-a-product-engineer) succeed when they ship quickly, understand if a change is working, and iterate.
 
 2. You need [feature flags](/feature-flags) to do so because they let you ship, deploy, and release software safely, and quickly, at scale.
 
@@ -97,6 +97,8 @@ With this, each pricing strategy can have its own set of tests, and there are fe
 Ideally, use flags in as few places as possible and abstract as much as possible behind a single flag. This creates a clear separation and isolation of flag-related code, which limits complexity and improves maintainability.
 
 Good goals for avoiding this mistake are to only use the feature flag in a single spot and making it easy to remove. Achieving both keeps your code well-structured.
+
+<NewsletterForm />
 
 ## 2. Being surprised when flags are turned off
 

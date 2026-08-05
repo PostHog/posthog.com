@@ -1,35 +1,21 @@
 import React from 'react'
 import { MdxCodeBlock } from '../../CodeBlock'
 
-type ConfigVariant = 'cursor' | 'claude-desktop' | 'windsurf' | 'vscode' | 'claude-code' | 'zed'
+type ConfigVariant = 'cursor' | 'claude-desktop' | 'windsurf' | 'vscode' | 'claude-code' | 'zed' | 'codex'
 
 interface MCPConfigSnippetProps {
     variant?: ConfigVariant
 }
 
-const API_KEY_PLACEHOLDER = '{INSERT_YOUR_PERSONAL_API_KEY_HERE}// HIGHLIGHT'
-
 // Native HTTP config for clients that support it (Cursor, VS Code, Zed)
 const MCP_SERVER_CONFIG_NATIVE = {
     url: 'https://mcp.posthog.com/mcp',
-    headers: {
-        Authorization: `Bearer ${API_KEY_PLACEHOLDER}`,
-    },
 }
 
 // mcp-remote config for clients without native HTTP support (Claude Desktop, Windsurf)
 const MCP_SERVER_CONFIG_LEGACY = {
     command: 'npx',
-    args: [
-        '-y',
-        'mcp-remote@latest',
-        'https://mcp.posthog.com/sse',
-        '--header',
-        'Authorization:${POSTHOG_AUTH_HEADER}',
-    ],
-    env: {
-        POSTHOG_AUTH_HEADER: `Bearer ${API_KEY_PLACEHOLDER}`,
-    },
+    args: ['-y', 'mcp-remote@latest', 'https://mcp.posthog.com/mcp'],
 }
 
 const EDITOR_CONFIGS = {
@@ -47,19 +33,20 @@ const EDITOR_CONFIGS = {
     },
     vscode: {
         language: 'json',
-        content: () =>
-            JSON.stringify({ servers: { posthog: { type: 'http', ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
+        content: () => JSON.stringify({ servers: { posthog: { type: 'http', ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
     },
     'claude-code': {
         language: 'bash',
-        content: () =>
-            `claude mcp add --transport http posthog https://mcp.posthog.com/mcp \\
-  --header "Authorization: Bearer ${API_KEY_PLACEHOLDER}" -s user`,
+        content: () => `claude mcp add --transport http posthog https://mcp.posthog.com/mcp -s user`,
     },
     zed: {
         language: 'json',
         content: () =>
             JSON.stringify({ context_servers: { posthog: { enabled: true, ...MCP_SERVER_CONFIG_NATIVE } } }, null, 2),
+    },
+    codex: {
+        language: 'bash',
+        content: () => `codex mcp add posthog --url https://mcp.posthog.com/mcp`,
     },
 } as const
 

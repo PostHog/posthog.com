@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { SlideContainer } from './SlidesTemplate'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Customer {
     slug: string
@@ -29,9 +28,16 @@ interface CustomersSlideProps {
     customers: Customer[]
     customerData: Record<string, CustomerData>
     hasCaseStudy: (slug: string) => boolean
+    belowContent?: React.ReactNode
 }
 
-export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
+export default function CustomersSlide({
+    productName,
+    customers,
+    customerData,
+    hasCaseStudy,
+    belowContent = null,
+}: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
         { name: '', width: 'minmax(auto,80px)', align: 'center' as const },
@@ -120,8 +126,14 @@ export default function CustomersSlide({ productName, customers, customerData, h
     return (
         <SlideContainer>
             <ScrollArea className="h-full">
-                <h2 className="text-4xl font-bold text-primary mb-6 text-center">
-                    Customers who love <Logo noText fill="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
+                <h2 className="text-3xl @2xl:text-4xl font-bold text-primary mb-6 text-center whitespace-nowrap">
+                    Customers who love{' '}
+                    <Logo
+                        layout="logomark"
+                        variant="mono"
+                        color="currentColor"
+                        className="text-primary h-8 w-auto inline-block relative -top-1 -right-1 mx-1"
+                    />{' '}
                     {productName}
                 </h2>
 
@@ -213,6 +225,8 @@ export default function CustomersSlide({ productName, customers, customerData, h
                         width="full"
                     />
                 </div>
+
+                {belowContent}
             </ScrollArea>
         </SlideContainer>
     )

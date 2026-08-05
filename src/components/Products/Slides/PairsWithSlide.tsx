@@ -6,6 +6,8 @@ import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 interface PairItem {
     slug: string
     description: string
+    /** Optional className passed to AppIcon when parentIcon is used (e.g. "!size-8"). */
+    className?: string
 }
 
 interface PairsWithSlideProps {
@@ -21,7 +23,15 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
             <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
                 {productName} pairs with other products to give you a complete picture of your product.
             </p>
-            <div className="grid grid-cols-1 @2xl:grid-cols-3 gap-4">
+            <div
+                className={`grid grid-cols-1 gap-4 ${
+                    pairsWith.length <= 1
+                        ? '@2xl:grid-cols-1'
+                        : pairsWith.length === 2
+                        ? '@2xl:grid-cols-2'
+                        : '@2xl:grid-cols-3'
+                }`}
+            >
                 {pairsWith.map((pair: PairItem) => {
                     // Find the product details by slug
                     const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
@@ -42,9 +52,9 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                                     }`}
                                 >
                                     {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
-                                        <AppIcon name={productDetails.parentIcon} />
+                                        <AppIcon name={productDetails.parentIcon} className={pair.className} />
                                     ) : (
-                                        productDetails.Icon && <productDetails.Icon />
+                                        productDetails.Icon && <productDetails.Icon className={pair.className} />
                                     )}
                                 </span>
                                 <h3 className="text-2xl font-bold text-primary mb-2">{productDetails.name}</h3>

@@ -26,6 +26,7 @@ export const lucky_orange = {
                 free_tier: '100/mo',
             },
             features: {
+                ai_summaries: false,
                 canvas_recording: false,
                 event_timeline: true,
             },

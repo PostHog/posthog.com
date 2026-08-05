@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/353483136_5f00599e_346c_44d4_a94c_2cd85c9031a0_3c65d69b45.jpg
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - People
 crosspost:
@@ -78,6 +79,8 @@ This doesn’t mean you should randomly spam people on LinkedIn for an intro (th
 People talk to each other. And, who knows, one day maybe they’ll talk about you and be really nice.
 
 **Further reading: [What recruiters actually see when you apply](/founders/what-recruiters-see)**
+
+<NewsletterForm />
 
 ## 2) Be genuinely curious
 
@@ -164,6 +167,6 @@ Be honest about your availability up front – and, if you can, be available wit
 
 _Words by James Temperton, who hates LinkedIn._
 
-[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest [feedback](/newsletter/how-to-give-feedback), which can obscure problems. It’s why we [value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.
-
 <NewsletterForm />
+
+[^1]: Being a great human doesn’t mean being an effervescent personality – you don’t need to be the life and soul of the party. Being reliable and easy to work with is way less common than you might imagine. If you struggle getting referrals from former colleagues, be really honest about why that could be. More companies don’t have a culture of direct, honest [feedback](/newsletter/how-to-give-feedback), which can obscure problems. It’s why we [value trust and feedback](https://posthog.com/handbook/values#4-trust-and-feedback-over-process) so much.

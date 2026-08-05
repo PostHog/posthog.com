@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
     IconSearch,
     IconChatHelp,
@@ -12,8 +11,13 @@ import {
     IconUpload,
     IconCode,
     IconFeatures,
+    IconPlay,
+    IconPencil,
+    IconPeople,
+    IconPinFilled,
+    IconBadge,
 } from '@posthog/icons'
-import { useApp } from '../../context/App'
+import { useAppActions, useAppSettings } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
@@ -25,22 +29,21 @@ import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
 
-export default function TaskBarMenu() {
+function TaskBarMenu() {
     const {
-        windows,
         openSearch,
         openSignIn,
-        siteSettings,
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
         addWindow,
         taskbarRef,
-        posthogInstance,
-    } = useApp()
+        updateTaskbarHeight,
+    } = useAppActions()
+    const { posthogInstance } = useAppSettings()
     const [isAnimating, setIsAnimating] = useState(false)
-    const totalWindows = windows.length
 
     const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()
@@ -68,6 +71,19 @@ export default function TaskBarMenu() {
             }
         }
     }, [])
+
+    const handleTaskbarRef = useCallback(
+        (node: HTMLDivElement | null) => {
+            if (taskbarRef) {
+                const ref = taskbarRef as React.MutableRefObject<HTMLDivElement | null>
+                ref.current = node
+            }
+            if (node) {
+                updateTaskbarHeight()
+            }
+        },
+        [taskbarRef, updateTaskbarHeight]
+    )
 
     const handleActiveWindowsClick = () => {
         setIsActiveWindowsPanelOpen(true)
@@ -191,9 +207,39 @@ export default function TaskBarMenu() {
                                 },
                                 {
                                     type: 'item' as const,
+                                    label: 'Art library',
+                                    link: '/art-library',
+                                    icon: <IconPencil className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
                                     label: 'Feature matrix',
                                     link: '/feature-matrix',
                                     icon: <IconFeatures className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Team directory',
+                                    link: '/team-directory',
+                                    icon: <IconPeople className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Community directory',
+                                    link: '/community/directory',
+                                    icon: <IconBadge className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'HogWatch 3000',
+                                    link: '/hogwatch',
+                                    icon: <IconPlay className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Image annotation',
+                                    link: '/image-annotator',
+                                    icon: <IconPinFilled className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
@@ -210,19 +256,6 @@ export default function TaskBarMenu() {
                 : [
                       {
                           type: 'item' as const,
-                          label: 'Community',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in to PostHog.com',
-                          onClick: handleSignInClick,
-                      },
-                      {
-                          type: 'separator' as const,
-                      },
-                      {
-                          type: 'item' as const,
                           label: 'Go to...',
                           disabled: true,
                       },
@@ -233,24 +266,67 @@ export default function TaskBarMenu() {
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
                           external: true,
                       },
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in to the community',
+                          onClick: handleSignInClick,
+                      },
                   ],
         },
     ]
 
     return (
         <>
-            <div
-                ref={taskbarRef}
-                id="taskbar"
-                data-scheme="primary"
-                className="w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
-            >
-                <MenuBar
-                    menus={menuData}
-                    className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
-                />
-                <aside className="flex items-center gap-0.5 py-1">
-                    {/* <MenuBar
+            <div className="z-50">
+                <div
+                    ref={handleTaskbarRef}
+                    id="taskbar"
+                    data-scheme="primary"
+                    data-menu-container
+                    style={{
+                        transformOrigin: '50% 50%',
+                        transformStyle: 'preserve-3d',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                    }}
+                    className={`${TASKBAR_BG} ${
+                        isAnimating ? MOTION_LAYER : ''
+                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded pl-0.5 pr-2 shadow-2xl`}
+                >
+                    {/* Top and bottom edges of the 3D box — visible during rotation */}
+                    <div
+                        aria-hidden="true"
+                        className="absolute top-0 left-0 right-0 bg-accent pointer-events-none"
+                        style={{
+                            height: '20px',
+                            transform: 'rotateX(-90deg)',
+                            transformOrigin: '50% 0%',
+                        }}
+                    />
+                    <div
+                        aria-hidden="true"
+                        className="absolute bottom-0 left-0 right-0 bg-accent pointer-events-none"
+                        style={{
+                            height: '20px',
+                            transform: 'rotateX(90deg)',
+                            transformOrigin: '50% 100%',
+                        }}
+                    />
+                    <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
+                        <MenuBar
+                            menus={menuData}
+                            className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                        />
+                        <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
+                            {/* <MenuBar
                         menus={[
                             {
                                 trigger: <span className="text-red font-semibold">Get started - free</span>,
@@ -281,139 +357,62 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                    <div className="relative mr-1">
-                        <OSButton
-                            variant="primary"
-                            size="md"
-                            asLink
-                            to={posthogInstance ? posthogInstance.replace(/"/g, '') : 'https://app.posthog.com/signup'}
-                            className=""
-                        >
-                            {posthogInstance ? 'Dashboard' : 'Get started – free'}
-                        </OSButton>
-                    </div>
-                    <Tooltip
-                        trigger={
-                            <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
-                                <IconSearch className="size-5" />
-                            </OSButton>
-                        }
-                    >
-                        <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Search</p>
-                            <KeyboardShortcut text="/" size="sm" />
-                        </div>
-                    </Tooltip>
-                    <Tooltip
-                        trigger={
-                            <OSButton
-                                onClick={() => openNewChat({ path: `ask-max` })}
-                                size="sm"
-                                className="relative top-px"
-                            >
-                                <IconChatHelp className="size-5" />
-                            </OSButton>
-                        }
-                    >
-                        <div className="flex flex-col items-center gap-1">
-                            <p className="text-sm mb-0">Ask PostHog AI</p>
-                            <div className="flex items-center gap-1">
-                                <KeyboardShortcut text="Shift" size="sm" />
-                                <KeyboardShortcut text="?" size="sm" />
+                            <div className="relative mr-1">
+                                <OSButton
+                                    variant="primary"
+                                    size="md"
+                                    asLink
+                                    to={
+                                        posthogInstance
+                                            ? posthogInstance.replace(/"/g, '')
+                                            : 'https://app.posthog.com/signup'
+                                    }
+                                    className=""
+                                >
+                                    {posthogInstance ? 'Open PostHog' : 'Get started – free'}
+                                </OSButton>
                             </div>
-                        </div>
-                    </Tooltip>
-                    {siteSettings.experience === 'posthog' && (
-                        <motion.div
-                            animate={
-                                isAnimating
-                                    ? {
-                                          scale: [1, 1.2, 1],
-                                          rotate: [0, -5, 5, -5, 5, 0],
-                                      }
-                                    : {}
-                            }
-                            transition={{
-                                duration: 0.5,
-                                ease: 'easeInOut',
-                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                            }}
-                        >
-                            {totalWindows <= 0 ? (
-                                <Tooltip
-                                    trigger={
-                                        <button
-                                            onClick={handleActiveWindowsClick}
-                                            disabled={totalWindows <= 0}
-                                            data-scheme="primary"
-                                            data-active-windows
-                                            className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
-                                            border-[1.5px] 
-                                            border-t-4 
-                                            
-                                             
-                                            dark:hover:bg-dark 
-                                            hover:bg-light
-
-                                            text-secondary
-                                            dark:text-primary
-                                            hover:text-primary
-
-                                            ${
-                                                totalWindows > 1
-                                                    ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                                    : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                            }
-                                        `}
-                                        >
-                                            <span className="text-[13px] font-semibold relative -top-px">
-                                                {totalWindows}
-                                            </span>
-                                        </button>
-                                    }
-                                    delay={0}
-                                >
-                                    <div className="max-w-48 text-center">
-                                        <p className="text-sm mb-0">You have no open windows</p>
-                                        <p className="text-[13px] text-secondary mb-0 leading-normal text-balance">
-                                            (But if you did, you could manage them here!)
-                                        </p>
+                            <Tooltip
+                                trigger={
+                                    <OSButton onClick={() => openSearch()} size="sm" className="relative top-px">
+                                        <IconSearch className="size-5" />
+                                    </OSButton>
+                                }
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <p className="text-sm mb-0">Search</p>
+                                    <KeyboardShortcut text="/" size="sm" />
+                                </div>
+                            </Tooltip>
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        onClick={() => openNewChat({ path: `ask-max` })}
+                                        size="sm"
+                                        className="relative top-px"
+                                    >
+                                        <IconChatHelp className="size-5" />
+                                    </OSButton>
+                                }
+                            >
+                                <div className="flex flex-col items-center gap-1">
+                                    <p className="text-sm mb-0">Ask Max</p>
+                                    <div className="flex items-center gap-1">
+                                        <KeyboardShortcut text="Shift" size="sm" />
+                                        <KeyboardShortcut text="?" size="sm" />
                                     </div>
-                                </Tooltip>
-                            ) : (
-                                <button
-                                    onClick={handleActiveWindowsClick}
-                                    disabled={totalWindows <= 0}
-                                    data-scheme="primary"
-                                    data-active-windows
-                                    className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
-                                    border-[1.5px] 
-                                    border-t-4 
-                                    
-                                     
-                                    dark:hover:bg-dark 
-                                    hover:bg-light
-
-                                    text-secondary
-                                    dark:text-primary
-                                    hover:text-primary
-
-                                    ${
-                                        totalWindows > 1
-                                            ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                            : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                    }
-                                `}
-                                >
-                                    <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
-                                </button>
-                            )}
-                        </motion.div>
-                    )}
-                    <MenuBar menus={accountMenu} className="[&_button]:px-2" />
-                </aside>
+                                </div>
+                            </Tooltip>
+                            <MenuBar menus={accountMenu} className="[&_button]:px-2" />
+                        </aside>
+                    </div>
+                </div>
             </div>
             <ActiveWindowsPanel />
         </>
     )
 }
+
+// Memoized so it survives Wrapper re-renders (e.g. the navigate() on window
+// open/close); it still updates when it reads changed context.
+export default React.memo(TaskBarMenu)

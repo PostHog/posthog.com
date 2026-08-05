@@ -5,7 +5,7 @@ author:
     - ian-vanagas
 tags:
     - product analytics
-    - session replays
+    - session replay
 ---
 
 Squarespace offers analytics with a basic set of metrics like visits, pageviews, and bounce rate, but for many, this isn't enough to understand what's going on on your site. PostHog offers a full set of web analytics metrics like session duration, entry and exit pages, sources, retention, and goals along with custom events, insights, session replay, and more.
@@ -18,7 +18,7 @@ First, you need a Squarespace site to add PostHog to. Sign up, go through the tu
 
 ## Add PostHog to your Squarespace site
 
-In PostHog, get your HTML install snippet with your project API key and instance from [your project settings](https://us.posthog.com/settings/project). It looks like this:
+In PostHog, get your HTML install snippet with your project token and instance from [your project settings](https://us.posthog.com/settings/project). It looks like this:
 
 <Snippet />
 
