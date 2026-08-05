@@ -39,12 +39,12 @@ It also has minimal overhead in terms of memory used and allows us to always tem
 Kafka engine tables act as Kafka consumers in a given [consumer group](https://docs.confluent.io/platform/current/clients/consumer.html#concepts).
 Selecting from that table advances the consumer offsets.
 
-A Kafka table on its own does nothing beyond allowing querying data from Kafka - it needs to be paired with other tables for ingestion
+A Kafka table on its own does nothing beyond allowing querying data from Kafka – it needs to be paired with other tables for ingestion
 to work.
 
 > **Important note:** Given Kafka engine tables operate like consumers, querying data from them moves the offsets for the consumer group forward. Doing this while ingesting data may cause data loss, and has been disallowed by default on the latest ClickHouse versions.
 
-Example kafka engine table:
+Example Kafka engine table:
 
 ```sql runInPostHog=false
 CREATE TABLE kafka_ingestion_warnings
@@ -67,12 +67,12 @@ of `kafka_skip_broken_messages`, breaking ingestion.
 ## Materialized views
 
 [Materialized views](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized-view) in ClickHouse
-can be thought of as triggers - they react to new blocks being INSERTed into source tables and allow transforming and piping
+can be thought of as triggers – they react to new blocks being INSERTed into source tables and allow transforming and piping
 that data to other tables.
 
 Materialized views come with a lot of gotchas. A great resource for learning more about them is [this presentation](https://den-crane.github.io/Everything_you_should_know_about_materialized_views_commented.pdf).
 
-## Example schema - reading and writing ingestion events
+## Example schema – reading and writing ingestion events
 
 Consider the following sharded table schema together with `kafka_ingestion_warnings`:
 
