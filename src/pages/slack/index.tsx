@@ -9,11 +9,17 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
+import SlotMachineText from 'components/SlotMachineText'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { IconSlack } from 'components/OSIcons/Icons'
+import posthogIcon from '../../images/posthog-icon-white.svg'
 import {
+    IconArrowUpRight,
     IconBell,
     IconBolt,
     IconCalendar,
     IconChat,
+    IconCheck,
     IconCode,
     IconCoffee,
     IconCursorClick,
@@ -32,6 +38,7 @@ import {
 } from '@posthog/icons'
 
 const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
+const SLACK_MARKETPLACE_URL = 'https://slack.com/marketplace/A03M3FN0RSQ-posthog'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -606,7 +613,7 @@ const faqItems = [
                 resolve user profiles to match Slack accounts to PostHog accounts. It does not read messages from
                 channels it isn't in. See the full list on the PostHog app's{' '}
                 <Link
-                    to="https://slack.com/marketplace/A03M3FN0RSQ-posthog"
+                    to={SLACK_MARKETPLACE_URL}
                     external
                     className="text-red dark:text-yellow font-semibold hover:underline"
                 >
@@ -680,6 +687,87 @@ const fighterOptions: { icon: IconComponent; iconColor: string; label: React.Rea
     },
 ]
 
+const heroBullets = [
+    'Answer product data questions in-thread',
+    'Turn a message into a draft PR',
+    'No editor, no context switch, no laptop',
+]
+
+const LetPostHogScroller = () => (
+    <SlotMachineText
+        className="text-lg @xl/reader-content:text-2xl font-bold tracking-tight"
+        words={['analyze', 'debug', 'instrument', 'ship', 'experiment', 'query', 'flag', 'code']}
+        holdDuration={4000}
+        wordClassName="text-red dark:text-yellow"
+        prefix={
+            <span className="inline-flex items-center gap-2">
+                <span>Let</span>
+                <img src={posthogIcon} alt="" aria-hidden className="size-6 rounded-md @xl/reader-content:size-7" />
+                <span>PostHog</span>
+            </span>
+        }
+    />
+)
+
+const HeroSection = () => (
+    <section className="not-prose w-full tracking-[-0.0125em]">
+        {/* Title strip – mirrors the header bar on /desktop */}
+        <div className="mb-6 flex items-center justify-between gap-4 border-b border-primary pb-3">
+            <LetPostHogScroller />
+            <Link
+                className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
+                to={SLACK_MARKETPLACE_URL}
+                externalNoIcon
+            >
+                <IconSlack className="size-5" />
+                <span className="group-hover:underline">Slack marketplace</span>
+                <IconArrowUpRight className="size-4 inline-block invisible group-hover:visible" />
+            </Link>
+        </div>
+
+        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
+            Don't @ <em>me,</em>{' '}
+            <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
+                @PostHog
+            </RoughAnnotation>
+        </h1>
+
+        <div className="flex flex-col items-start gap-6 @4xl/reader-content:flex-row @4xl/reader-content:gap-8">
+            <div className="@4xl/reader-content:flex-[0_0_280px]">
+                <p className="mt-0 mb-4">
+                    All the PostHog you already use, plus a coding agent that lives in your Slack. Ask about your
+                    product data, debug issues, and generate PRs without leaving the thread.
+                </p>
+                <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
+                    {heroBullets.map((item) => (
+                        <li key={item} className="relative pl-5">
+                            <IconCheck className="absolute left-0 top-1 size-4 text-green" />
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+                <div className="flex flex-wrap items-center gap-3">
+                    <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
+                        Connect Slack
+                    </CallToAction>
+                    <span className="text-sm text-secondary">
+                        Not using PostHog?{' '}
+                        <Link to="https://app.posthog.com/signup" external>
+                            Sign up
+                        </Link>
+                    </span>
+                </div>
+            </div>
+
+            <div className="w-full min-w-0 @4xl/reader-content:flex-1">
+                <div className="overflow-hidden rounded-md shadow-xl">
+                    <WistiaEmbed mediaId="ifyltgbxid" />
+                </div>
+            </div>
+        </div>
+    </section>
+)
+
 export default function SlackAppPage(): JSX.Element {
     return (
         <>
@@ -696,20 +784,8 @@ export default function SlackAppPage(): JSX.Element {
             />
             <ReaderView hideLeftSidebar showQuestions={false} title="posthog-slack-app.md" hideTitle={true}>
                 <div>
-                    <div className="text-center mb-4">
-                        <h1 className="text-3xl @md/reader-content-container:text-4xl font-bold m-0 mb-2">
-                            Don't @ <em>me,</em> <Highlight>@PostHog</Highlight>
-                        </h1>
-                        <p className="text-secondary text-base @md/reader-content-container:text-lg max-w-lg mx-auto m-0">
-                            PostHog now lives in Slack. Ask about your product data, debug issues, and generate PRs
-                            without leaving the thread.
-                        </p>
-                    </div>
-
-                    <div className="rounded overflow-hidden not-prose m-0">
-                        <WistiaEmbed mediaId="ifyltgbxid" />
-                    </div>
-                    <hr className="border-t border-primary m-0 mb-6 mt-6" />
+                    <HeroSection />
+                    <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
                     <h3>
                         One hog, <Highlight>two jobs</Highlight>
@@ -718,18 +794,7 @@ export default function SlackAppPage(): JSX.Element {
                         The PostHog Slack app is a single agent that reads your product data and writes your code. Ask
                         "why did EU signups drop?", then have it open the PR that fixes it (without leaving Slack).
                     </p>
-                    <div className="not-prose flex flex-wrap items-center gap-3 mb-6">
-                        <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
-                            Connect Slack
-                        </CallToAction>
-                        <span className="text-sm text-secondary">
-                            Not using PostHog?{' '}
-                            <Link to="https://app.posthog.com/signup" external>
-                                Sign up
-                            </Link>
-                        </span>
-                    </div>
-                    <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6">
+                    <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-4 mb-6 mt-6">
                         {introCards.map((card) => (
                             <IntroCard key={card.title} {...card} />
                         ))}
