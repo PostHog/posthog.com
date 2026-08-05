@@ -27,7 +27,7 @@ As things progress, [update the renewal opportunity](/handbook/growth/sales/crm#
 
 ## Renewal timeline
 
-Starting 3 months out isn't only about giving the customer time to decide. It's about leaving room for signature to slip without creating a billing mess: once a billing period has been invoiced, we can't backdate a contract start date into it, so a renewal that lands late leaves the customer with a separate invoice the new credits can't cover.
+Starting 3 months out gives the customer time to decide and also leaves room for signature to slip without creating a billing mess: once a billing period has been invoiced, we can't backdate a contract start date into it, so a renewal that lands late leaves the customer with a separate invoice the new credits can't cover.
 
 Work back from the end of the customer's current billing period, not from the anniversary date:
 
