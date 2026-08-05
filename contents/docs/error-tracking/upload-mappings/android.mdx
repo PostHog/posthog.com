@@ -71,7 +71,18 @@ posthog {
 }
 ```
 
-When enabled, the Gradle plugin's `uploadPostHogNativeSymbols<Variant>` task reads the variant's unstripped native libraries and uploads every one carrying debug info and a build ID, automatically after `assemble`, `install`, or `bundle`, for minified and non-minified builds alike. This covers native code you build with the NDK as well as `.so` files bundled from `jniLibs` or dependencies. You can also run the task explicitly without enabling the automatic upload:
+When enabled, the Gradle plugin's `uploadPostHogNativeSymbols<Variant>` task reads the variant's unstripped native libraries and uploads every one carrying debug info and a build ID, automatically after `assemble`, `install`, or `bundle`. This covers native code you build with the NDK as well as `.so` files bundled from `jniLibs` or dependencies, for minified and non-minified builds alike. Debuggable variants are skipped, so day-to-day debug builds don't upload symbols.
+
+To include source context around resolved crash frames, also bundle the project sources referenced by the debug info:
+
+```kotlin
+posthog {
+    uploadNativeSymbols.set(true)
+    includeNativeSymbolSources.set(true)
+}
+```
+
+You can also run the upload task explicitly, for any variant, without enabling the automatic upload:
 
 ```bash
 ./gradlew uploadPostHogNativeSymbolsRelease
