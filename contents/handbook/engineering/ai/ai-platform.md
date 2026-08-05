@@ -72,7 +72,7 @@ These are the AI features users interact with directly:
 - **[PostHog AI](/handbook/engineering/ai/products#posthog-ai)**: In-app conversational agent for interacting with PostHog
 - **[Deep research](/handbook/engineering/ai/products#deep-research)**: Automated investigative research for complex, open-ended problems
 - **[Session summaries](/handbook/engineering/ai/products#session-summaries)**: Batch analysis of session recordings to find patterns
-- **[PostHog Code](/handbook/engineering/ai/products#posthog-code)**: Agent development environment that gives each task its own isolated workspace
+- **[PostHog Desktop](/handbook/engineering/ai/products#posthog-desktop)**: Agent development environment that gives each task its own isolated workspace
 - **[Wizard](/handbook/engineering/ai/products#wizard)**: CLI tool for automated PostHog installation and setup
 - **[MCP Server](/handbook/engineering/ai/products#mcp)**: Protocol integration for third-party AI tools like Claude Code
 
@@ -88,8 +88,8 @@ The shared components that power all products:
 
 How everything connects together:
 - Products share the same agent features through the MCP server
-- Task generation systems (from Deep Research, Session Summaries, PostHog signals) feed PostHog Code
-- The Wizard and PostHog Code consume MCP tools to interact with PostHog
+- Task generation systems (from Deep Research, Session Summaries, PostHog signals) feed PostHog Desktop
+- The Wizard and PostHog Desktop consume MCP tools to interact with PostHog
 
 For a detailed technical overview, see [AI platform architecture](/handbook/engineering/ai/architecture).
 
@@ -119,13 +119,13 @@ Analyze hundreds of session recordings in minutes instead of hours. Session summ
 
 [Learn more →](/handbook/engineering/ai/products#session-summaries)
 
-### PostHog Code [Beta]
+### PostHog Desktop [Beta]
 An agent development environment that solves the messy workflow problem of engineering with coding agents. Each task gets its own isolated workspace where an agent works — you can guide the agent, review changes, and switch between workspaces, with everything related to a task in one place instead of across your terminal, editor, and GitHub.
 
 **Best for**: Product engineers who work on multiple tasks simultaneously and already use agents heavily
 **Status**: Beta | **Pricing**: Usage-based (AI credits, no markup) with free tier
 
-[Learn more →](/handbook/engineering/ai/products#posthog-code)
+[Learn more →](/handbook/engineering/ai/products#posthog-desktop)
 
 ### Wizard [General availability]
 Get PostHog set up in minutes instead of hours. The Wizard detects your tech stack, generates integration code, verifies the installation, and gets you collecting data with minimal manual work.
@@ -168,7 +168,7 @@ For a list of key concepts definitions, see the [Glossary](/handbook/engineering
 The AI platform is actively evolving. Major initiatives include:
 
 - **Third-party context integration**: Connect PostHog AI to Slack, Zendesk, and other tools for richer context
-- **PostHog Code expansion**: Moving from alpha dogfooding to broader availability
+- **PostHog Desktop expansion**: Moving from alpha dogfooding to broader availability
 - **Deep research refinement**: Improving research strategies and denoising algorithms
 - **Mode expansion**: Adding more specialized agent modes as product teams identify needs
 

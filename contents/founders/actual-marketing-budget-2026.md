@@ -70,7 +70,7 @@ Our typical monthly marketing spend looks like this.
 
 ### Some notes
 
-- We are in the middle of repositioning PostHog as the platform that makes your product [self-driving](/blog/what-if-your-product-built-itself). This means we are thinking a lot more about awareness, especially as we've seen our [ICP](/handbook/who-we-build-for) changing. 
+- We are in the middle of [repositioning PostHog](/blog/repositioning-posthog) as the platform that makes your product [self-driving](/blog/what-if-your-product-built-itself). This means we are thinking a lot more about awareness, especially as we've seen our [ICP](/handbook/who-we-build-for) changing. 
 
 - We do a lot of things in-house that other companies would probably use freelancers for. We're not _averse_ to freelancers, but given how important brand marketing is to PostHog, it has been worth it for us to over-invest here. 
 

@@ -85,97 +85,97 @@ A very powerful way to engage the customer and provide value is to run an accoun
 <details>
 <summary>Account audit prompt</summary>
 
-You are auditing this customer's PostHog account to produce a notebook they will read directly. Use the last 30 days of data unless noted. The customer will see this output, so write it for them, not for an internal PostHog reviewer.
+Audit this customer's PostHog account and write a notebook for the customer. Last 30 days. Switch to SQL mode.
 
-**Internal analysis (do NOT output)**
+Rules:
 
-Before writing the notebook, infer for yourself:
-- Customer's business and product type (from event names, URLs, person properties)
-- Stack (SDKs, frameworks)
-- Approximate scale and product maturity
-- Likely cost drivers
+- Batch independent queries, run them in parallel.
+- Discover schema on demand: `SELECT * FROM <table> LIMIT 3`, or `system.information_schema.tables` / `columns`.
+- Always verify: if a table errors or looks empty when you expected data, check `system.information_schema.columns` before concluding.
+- Filter bots: `AND getBotName(properties.$raw_user_agent) = ''` on every events query. Never `isLikelyBot` or `$virt_is_bot`: they flag every non-browser SDK and drop whole mobile and backend products.
+- Internal and test users: apply `test_account_filters` from `SELECT * FROM system.teams` (an array of `{key, type, value, operator}`; `type: event` maps to `properties.<key>`, `type: person` to `person.properties.<key>`). If empty, say internal traffic cannot be separated.
+- Count people with `uniqExact(person_id)`, never distinct_id.
+- `system.*` entity tables return deleted and archived rows. Filter every count: `deleted = 0` for actions, cohorts, dashboards, feature_flags; `deleted = 0 AND saved = 1` for insights; `archived = 0` for experiments; surveys have no flag, judge by start_date and end_date.
+- `LIMIT 10` on any top-N. Apply bot and test filters to non-events tables only where those fields exist.
+- Where things live: `events` by default, except replay → `raw_session_replay_events` (on/off state); heatmaps → `heatmaps`; logs → `logs`; LLM prompt/response bodies → `posthog.ai_events`. Billing and delivery meters → `app_metrics` (`app_source` + `metric_name` + `count`). Ingestion problems → `system.ingestion_warnings`. Warehouse syncs → `system.source_sync_jobs` joined to `system.source_schemas`. Query volume → `query_log`. Everything the customer created → `system.*`.
+- Always consider billing ([posthog.com/pricing](/pricing)) for each area's optimization.
 
-Use this context to sharpen recommendations. Do NOT write these inferences into the notebook. The customer knows their business.
+Snapshot first:
 
-**Notebook structure**
+```sql
+SELECT
+ count() AS total_events,
+ countIf(event = '$pageview') AS pageviews,
+ countIf(event = '$pageleave') AS pageleaves,
+ countIf(event = '$autocapture') AS autocapture,
+ countIf(event = '$exception') AS exceptions,
+ countIf(event LIKE '$ai_%') AS ai_events,
+ countIf(event = '$feature_flag_called') AS flag_evals,
+ countIf(event = 'survey sent') AS survey_sends,
+ countIf(event = '$identify') AS identify_events,
+ countIf(event = '$set') AS set_events,
+ countIf(event = '$groupidentify') AS groupidentify_events,
+ countIf(event = '$web_vitals') AS web_vitals,
+ countIf(person_mode IN ('full', 'force_upgrade')) AS identified_events,
+ uniqExact(person_id) AS people,
+ uniqExact(properties.$session_id) AS sessions,
+ uniqExact(properties.$lib) AS sdk_count,
+ groupUniqArray(10)(properties.$lib) AS sdks
+FROM events
+WHERE timestamp >= now() - INTERVAL 30 DAY
+ AND getBotName(properties.$raw_user_agent) = ''
+```
 
-Open with a brief summary, 2 to 3 lines in plain language:
-- A one-line headline that names the most important finding or finding count.
-- One or two more lines highlighting what the customer should know first.
+Analyze each area. Each carries a value read (getting the most from it) and a cost read (what it costs, how to cut). Prefix each finding subheading :large_green_circle: working well, :large_yellow_circle: worth attention, or :red_circle: needs action. If an area is unused, consider how it might be used in this project. State each finding only once. Always inline link to documentation:
 
-Then the audit, then recommendations, then untapped opportunities. No "Step 1" or "Phase N" labels in headings.
+1. Instrumentation: SDKs and versions (`properties.$lib`, `$lib_version`; old versions miss cost controls like replay minimum duration and flag bootstrapping); autocapture vs named-event share; identified vs anonymous (`person_mode`); `identify()`/`$set`/`$groupidentify` each about once per session (compare totals to sessions). Ingestion warnings (`system.ingestion_warnings` type and timestamp; `cannot_merge_already_identified` means identify ran on already-identified users, spending events for nothing). Custom events no saved insight references (they bill but are never analyzed; cross-check flags, cohorts, experiments before suggesting removal). Dev or staging leakage (`properties.$host` localhost or staging domains billing here means point them at a separate project). If autocapture is a large share with few named actions, name the potential specific actions or custom events to create that don't already exist (actions apply retroactively).
+2. Product analytics: top events, paths, week-over-week retention, drop-off, spikes, DAU/WAU, dashboards, alerts, subscriptions, gaps in measurement. Which event names and libraries drive the most billable volume.
+3. Web analytics: enabled, data flowing, conversion goals, core web vitals.
+4. Session replay. Three-state read:
 
-**Audit**
+```sql
+SELECT
+ uniqExactIf(session_id, min_first_timestamp >= now() - INTERVAL 30 DAY) AS recordings_30d,
+ uniqExact(session_id) AS recordings_all_time,
+ minIf(min_first_timestamp, min_first_timestamp >= '2015-01-01') AS first_recording,
+ maxIf(max_last_timestamp, max_last_timestamp <= now()) AS latest_recording
+FROM raw_session_replay_events
+```
 
-Run checks across every PostHog product below. Checks are exhaustive; output is filtered. Surface a finding only if it is (a) actionable, (b) notably healthy, or (c) anomalous. Skip dimensions where nothing stands out.
+30d > 0: recording now. all-time > 0 but 30d = 0: stopped, give the last date and name candidates. Both 0: never recorded. `latest_recording` will show if it was turned off and when. When replay is active, assess the minimum-duration lever from `session_replay_events` (`session_id`, `dateDiff('second', start_time, end_time)`, `console_error_count`) if its count roughly matches the read above: a high share under 2 to 5 seconds is bounce recordings they pay for.
 
-For every product dimension (everything except Instrumentation health and Cost drivers): if the product is not in use, evaluate whether the customer would benefit from it given the business and stage you inferred. If yes, surface as a finding (🟡 "could help" or 🔴 "major gap" depending on severity). This makes "should they adopt this?" a first-class question for every product. One exception: Revenue analytics is a retired PostHog product, so never recommend adopting it; when revenue tracking is the gap, recommend connecting a billing source (Stripe, etc.) as a data warehouse source and building custom insights or SQL queries that join revenue with product data.
+5. Heatmaps: group by type so the real values surface. See total, active vs stale. Run:
 
-Prefix every finding with:
-- 🟢 Working well
-- 🟡 Worth attention
-- 🔴 Needs action
+```sql
+SELECT type, count() AS interactions, count(DISTINCT current_url) AS urls
+FROM heatmaps WHERE timestamp >= now() - INTERVAL 30 DAY
+GROUP BY type ORDER BY interactions DESC
+```
 
-**Common pitfalls (verify before reporting)**
+6. Feature flags: total, active vs stale (created before the window with zero `$feature_flag_called` in it, but server local-eval flags may not emit the event, so caveat it), evaluation distribution by `$feature_flag` key and `$lib`, server vs client, at 100% for 30+ days, flag-shaped cases that should be experiments. Cost is per `/flags` request, not per flag: the lever is cutting request volume (local evaluation, polling cadence, bootstrapping), not archiving individual flags.
+7. Experiments: running (`system.experiments`: `start_date` set, `end_date` null, `archived = 0`) and how long; one running for months is usually decided, ship the winner and stop it. Sample sizes, statistical health.
+8. Surveys: running (`system.surveys`), response rate per survey (`survey shown` vs `survey sent`, grouped by `properties.$survey_name`), targeting, response limits. Always-on surveys quietly accrue billable responses.
+9. Error tracking: capturing exceptions, grouping, assignment, alerts. Top exception types come from `$exception_list`, not `$exception_type` (that scalar is null ~80% of the time and fakes a null-type flood); extract the first with `JSONExtractString(arrayElement(JSONExtractArrayRaw(JSONExtractString(properties, '$exception_list')), 1), 'type')`. Ingested vs rate-limited (`app_metrics`, `app_source = 'exceptions'`). Suppression rules drop matches before they bill.
+10. LLM observability: `$ai_generation`/`$ai_span`/`$ai_trace`/`$ai_embedding` volume, generations, traces, cost by model (`properties.$ai_model`, `sum(toFloat(properties.$ai_total_cost_usd))`), latency. Deeply instrumented agents emit far more spans and traces than generations. Confirm senders are real users, not PostHog AI usage by admins.
+11. Data warehouse: external sources, sync health, joins with events. Rank schemas by total `rows_synced` over the window. Look for `full_refresh` vs sync frequency (`system.source_sync_jobs`: `rows_synced`, `status`; join `system.source_schemas` on `schema_id = id` for `name`, `sync_type`). `full_refresh` on a large table re-bills every row each sync.
+12. CDP, destinations, transformations, workflows: enabled inventory (`system.hog_functions`: type, enabled, deleted). Destination deliveries and batch-export rows (`app_metrics`, `app_source` `'hog_function'` and `'batch_export'`); the billed meter is `metric_name = 'billable_invocation'`, not `failed`/`succeeded`/`triggered` (those are delivery outcomes), so size cost from that and read a 100%-failure rate as a delivery problem to fix, not a bill. Workflows (`system.hog_flows`, filter by `status`). Transformations act on future events only; a filtered delivery is skipped by its own filters, which is free and good. only metric_name = 'billable_invocation' bills; failed, filtered, triggered, and fetch do not (a 100%-failing destination shows zero billable_invocation). A dead destination is a delivery fix, never a cost saving: do not rank it as one.
+13. Platform, queries and logs: query volume app vs personal API key (`query_log`, `is_personal_api_key_request`; an API spike usually means an automation polling too often). Logs GB ingested and dropped (`app_metrics`, `app_source = 'logs'`).
+14. Revenue: billing connected and joined to usage. If not, connect Stripe or Chargebee as a warehouse source and join to events in SQL.
+15. Cohorts: count, static vs dynamic, usage. Dynamic cohorts with behavioral or lifecycle criteria can't target feature flags, experiments, or surveys; flag any that do and recommend a static duplicate or a person property to target instead.
+16. What they're not using yet: one inventory across `system.*` shows coverage and the best untapped plays (saved insights, dashboards, notebooks, actions, cohorts, annotations, saved SQL views `data_modeling_views`, feature flags, running experiments, early access features, running surveys, recording collections `session_recording_playlists`, error suppression rules, warehouse sources, active batch exports, enabled `hog_functions` and `hog_flows`, insight alerts `alerts` and log alerts `logs_alerts`, integrations). Count with the right filter per table. A zero is an opportunity, not a failure.
 
-- **Sessions vs session recordings**: The `sessions` table contains every user session regardless of whether session replay is enabled. Session recordings only exist when replay is explicitly turned on. Before reporting any volume as "recordings," verify session replay is enabled on the project (check `session_recording_opt_in` on the team, or confirm `session_recording` data actually exists). NEVER describe `sessions` table counts as "recordings."
-- **Events vs actions**: Events are raw; actions are named/filtered groupings of events. Do not conflate. Absence of Actions is NOT absence of events; it is an autocapture-optimization opportunity (flag only if autocapture is a significant % of volume AND zero Actions are defined).
-- **`distinct_id` vs `person_id`**: A single person can have many distinct_ids (post-identify merge). When counting "users," confirm which level the query is returning.
-- **Identified vs anonymous persons**: Anonymous persons are still persons in PostHog's data model. "Total persons" includes both. ALSO: backend and server-side SDKs always create identified events by design, and logged-in product subdomains will be near-100% identified. Only flag a "low anonymous ratio" as a problem for web SDK traffic on public or marketing sites; do not flag it for backend SDKs or logged-in apps.
-- **Internal and test users inflate everything**: Most customers have an internal or test cohort (e.g. `$internal_or_test_user = true`, or email-domain filtering). Before reporting DAU/WAU, engagement, top events, or per-user metrics, exclude internal/test traffic if such a cohort exists. If unclear, check whether the top distinct_ids look like company-domain emails.
-- **Bot traffic**: PostHog auto-excludes known bots from billing, but raw event tables (`events`, `sessions`) still contain them. For "unique users," DAU, or engagement counts, apply the same bot exclusion the project uses (`bot_user_agents` team setting plus the standard `$browser` check) before reporting numbers.
-- **Billing limits cap volumes**: If a product is at or near its billing limit, observed event/recording volume is artificially capped. Events past the limit are DROPPED, not queued. Check whether the team has `billing_limits` set before describing observed volume as "natural" or recommending optimizations against an already-capped baseline.
-- **Session replay sampling**: If `sampleRate` is below 1.0, recording counts are a sample of total sessions, not all of them. Always report the sample rate alongside recording-volume claims, or you will understate true session activity.
-- **`$ai_*` events have multiple sources**: `$ai_generation`, `$ai_span`, and `$ai_trace` fire from (a) the customer instrumenting LLM observability on their own product, AND (b) anyone using PostHog AI or Max inside the project (including admins running ad-hoc queries). Confirm the events come from real product users (check distinct_ids, not just volume) before reporting them as "customer AI feature adoption."
-- **Low-volume events are not always broken**: Some events (payment failures, deletion confirmations, rare admin actions) fire infrequently by design. Do not flag a custom event as "deprecated" based purely on volume; check the event-name pattern first.
+## Write the notebook
 
-**Dimensions to check (14 total, covering every PostHog product)**
-
-1. **Instrumentation health**: SDKs in use, autocapture vs custom event ratio, duplicate or redundant events, low-volume events that may be broken (cross-check with the pitfalls list), identified vs anonymous ratio (apply the backend-SDK caveat), person property update frequency, `identify()` call patterns (anti-pattern: called on every page load instead of only on auth), group analytics (for B2B).
-2. **Product analytics**: top events, common paths, week-over-week retention, drop-off points, DAU/WAU, dashboards, alerts, subscriptions.
-3. **Web analytics**: enabled, data flowing, conversion goals, core web vitals.
-4. **Session replay and heatmaps**: First confirm session replay is actually enabled (see Common pitfalls). Then: recording volume (note sample rate if set), average duration, minimum duration filter, rage and dead clicks, heatmap usage.
-5. **Feature flags**: total, active vs stale, evaluation distribution, server vs client, flags at 100% for over 30 days, flag-shaped use cases that should be experiments. Note: unused flags still bill until archived in the PostHog UI (removing from code alone is not enough). Local-evaluation polling can be a silent billing driver; check polling cadence.
-6. **Experiments**: in use, sample sizes, statistical health.
-7. **Surveys**: in use, response rates, targeting.
-8. **Error tracking**: capturing exceptions, grouping, issue assignment, alerts.
-9. **LLM observability**: `$ai_generation`, `$ai_trace` events (apply the multi-source caveat), generations, traces, cost and latency tracking for AI features.
-10. **Data warehouse**: external sources connected (Stripe, Postgres, etc.), sync health, joins with event data.
-11. **CDP / Data pipelines (destinations)**: events exported to BigQuery, Snowflake, Hubspot, Salesforce, etc.; Hog functions and transformations in use. Note: transformations only affect future events; past data is unchanged.
-12. **Revenue tracking**: is billing or revenue data connected and joined to product usage? Do NOT recommend the retired Revenue analytics product. The play is to connect a billing source (Stripe, Chargebee, etc.) as a data warehouse source, then build custom insights or SQL queries that join revenue with event data (MRR/ARR by feature, expansion, churn signals). Check whether a billing source is connected, syncing, and joined to product data.
-13. **Cohorts**: count, static vs dynamic, used in flags/experiments/surveys/insights. Anti-pattern: dynamic cohorts targeted at experiments, flags, or surveys do not work (the cohort must be duplicated as static first).
-14. **Cost drivers**: which products, events, or patterns drive the most volume on THIS account. Reference findings from other sections rather than repeating them. Diagnose from the data, not from generic rules. Account for billing limits and sampling when computing "true" volumes.
-
-Each finding appears in exactly ONE section. No duplication across dimensions.
-
-**Recommendations**
-
-Single numbered list, ranked by impact then effort. Top 5 only. For each:
-- The specific action, named.
-- Why it matters, in plain language.
-- Estimated impact in numbers (event count, % reduction, etc.) ONLY when you can compute it from the data. If you cannot, skip the number; do not guess.
-- Link to the relevant PostHog docs page.
-
-No P0/P1/P2 labels. No category headers like "Billing reduction" or "Activation lift." One tight paragraph per recommendation, 3 sentences maximum.
-
-**Untapped opportunities**
-
-3 to 5 strategic plays the customer should consider next, given the business and stage you inferred. Forward-looking and creative, NOT a recap of products already flagged as missing in the audit. Examples: a specific funnel worth measuring, an experiment worth running on a key flow, a cohort definition that would unlock churn prediction, a data warehouse join that would expose revenue-by-feature. One to two sentences each on what and why. Link to docs.
-
-**Output rules**
-
-- Plain markdown. H2 per section, H3 per sub-area.
-- Embed PostHog insights (trends, funnels, retention, etc.) inline where data benefits from visualization.
-- Include the full HogQL query under any non-trivial finding so the customer can re-run or customize it. Do NOT save these as named PostHog insights.
-- Bullets only, max 5 per section. Max 3 sentences per bullet. If more detail is needed, split into nested sub-bullets, not longer prose.
-- No markdown tables (notebooks do not render them). For comparisons, use bold-labeled bullets.
-- Use blank lines to separate sections. Do NOT use horizontal rule dividers (three hyphens in a row).
-- NO EM DASHES anywhere in the output. Em dashes (the long dash typographic character) and double-hyphen sequences used as dashes are both forbidden. Use commas, colons, parentheses, or full stops instead. This is critical: em dashes make writing read as AI-generated.
-- No "Step 1:" or "Phase N:" prefixes in headings.
-- No internal-to-PostHog framing. Do not write things like "PostHog adoption is 2 months old" or "the setup is sophisticated for an account this size." The customer knows their setup. Focus on what they should do, not commentary on what they have.
-- VERIFY before describing data. When a check might conflate two similar things (see Common pitfalls in the Audit section), confirm which one the query is actually returning before writing the finding. If unsure, say so explicitly rather than guessing.
-- HogQL specifics: `team_id` is a reserved keyword (alias to `team` instead); cast functions are HogQL-flavoured (`toInt(...)` not `toInt64(...)`); timestamps are UTC by default (be explicit about timezone if business hours matter).
-- Be concise everywhere. Cut every sentence that does not add information.
+- Renders only: h1-3 headings, bold, inline code (but not in bolded sentences), fenced code blocks, bullets, links, emojis. Anything needing alignment goes in a code block.
+- Open with an `## At a glance` space-aligned table (columns: Area, Main Finding, Next Step). Each area is separated by underlined of `─`.
+- Embed all relevant data as a table in fenced code blocks. Do not embed insights directly. Format every table as a simple table: space-aligned columns with the header underlined by a line of `─`, never pipe-delimited.
+- Use headings for hierarchy. Each subheading states primary finding (":large_yellow_circle: Autocapture is 60% of your events, turn it into actions").
+- Recommendations: 5 h3 headings ordered by impact, each with the action, why, and a docs link.
+- Untapped opportunities: 3 to 5 h3 headings forward-looking plays. has to be something new that wasn't covered before.
+- Frame cost findings as efficiency and savings, not waste or blame. Rank recommendations purely by impact; give fewer than five rather than pad.
+- At the end of the notebook, add all the SQL queries used in separate code blocks for each area.
+- Sentence case, no em dashes or en dashes. Never use `---` or any dividers between sections; separate them with 2 blank lines and the next heading only. Output as one continuous block.
+- After drafting the notebook, validate that all formatting rules in this section have been met. Fix, and only then save the notebook.
 
 </details>
 
@@ -297,7 +297,11 @@ Follow-up with: Now go look at their business and domain. What should they be do
 - **Introduce our beta features** (if relevant). Encourage customers to use them and share feedback. It can positively impact adoption before the feature becomes a paid product. 
 - **If growth signals are strong, plant the seed early**. If the account is on a positive trajectory, introduce the idea of prepaid credits coming with [a discount](https://posthog.com/handbook/growth/sales/contract-rules) and the option of a dedicated PostHog human. 
 
-## Email Follow-up
+## Email & Notebook Follow-up
+
+Given how successful Notebooks have been with our customers, we’re experimenting with creating a concise post-meeting Notebook that includes the same resources you would normally share in your follow-up email, along with the Gong recording.
+
+The goal is to make the information accessible to a wider audience within the customer’s organization. You would send meeting participants a follow-up email containing the relevant resources and a link to the Notebook, while the Notebook would make the same information available to other users within their PostHog instance.
 
 - Send it the same day. Use the momentum!
 - Include the public Gong recording link.

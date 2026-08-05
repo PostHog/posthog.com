@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/cdp_vs_dw_06a0b878d6.png
 featuredImageType: full
 tags:
- - data warehouse
- - data pipelines
+ - Data warehouse
+ - Data pipelines
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'

@@ -383,6 +383,19 @@ Choosing the right analytics platform depends on your team's priorities and tech
 ## Frequently Asked Questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>What are the main differences between PostHog and Amplitude?</summary>
 
 - **Pricing model:** PostHog uses usage-based pricing (pay per event/replay); Amplitude uses MTU-based pricing (pay per tracked user)
@@ -449,7 +462,7 @@ No. Amplitude does not offer error tracking. If you need error tracking alongsid
 <details>
 <summary>Does Amplitude have LLM observability?</summary>
 
-No. Amplitude does not offer LLM observability or analytics. PostHog includes [LLM observability](/docs/ai-observability) for tracking AI product usage, monitoring model performance, and analyzing costs—all connected to your existing user data.
+No. Amplitude does not offer LLM observability or analytics. PostHog includes [LLM observability](/docs/ai-observability) for tracking AI product usage, monitoring model performance, and analyzing costs–all connected to your existing user data.
 
 </details>
 
@@ -492,7 +505,7 @@ No. Amplitude does not offer LLM observability or analytics. PostHog includes [L
 - You don&apos;t have a data warehouse yet or want to simplify your stack
 - You want transparent, usage-based pricing
 
-PostHog provides a complete product analytics platform with warehouse capabilities built in. If you use PostHog as your integrated warehouse, data stays in PostHog and is accessible across many PostHog tools — eliminating the need to stitch multiple vendors together.
+PostHog provides a complete product analytics platform with warehouse capabilities built in. If you use PostHog as your integrated warehouse, data stays in PostHog and is accessible across many PostHog tools – eliminating the need to stitch multiple vendors together.
 
 </details>
 

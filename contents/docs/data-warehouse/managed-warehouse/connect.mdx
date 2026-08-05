@@ -1,0 +1,73 @@
+---
+title: Connecting to the managed warehouse
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+
+Need access first? [Join the waitlist](/context-warehouse/managed-warehouse), then [set up your warehouse](/docs/data-warehouse/managed-warehouse/setup).
+
+</CalloutBox>
+
+The managed warehouse speaks the PostgreSQL wire protocol, so you connect with the same clients, drivers, and BI tools you'd point at any Postgres database. No PostHog-specific SDK involved.
+
+## Connection details
+
+Your connection details live in [Data ops](https://app.posthog.com/data-ops) under the **Settings** tab once the warehouse is ready:
+
+| Field | Value |
+|---|---|
+| Host | `<your-warehouse-name>.dw.us.postwh.com` (US) or `<your-warehouse-name>.dw.eu.postwh.com` (EU) |
+| Port | `5432` |
+| Database | `ducklake` – always, regardless of warehouse name |
+| Username | `root` |
+| Password | Shown once at provisioning; reset it from the Settings tab if lost |
+
+TLS is required, so include `sslmode=require`. A complete `psql` connection looks like:
+
+```bash
+psql "host=my-warehouse.dw.us.postwh.com port=5432 dbname=ducklake user=root sslmode=require"
+```
+
+The same details work in anything that talks Postgres: pgAdmin, DBeaver, Metabase, Grafana, Superset, Tableau, and the standard drivers (psycopg, pgx, JDBC, node-postgres, SQLAlchemy, and friends).
+
+## Find your way around
+
+Your first stop after connecting should be discovering what's there:
+
+```sql
+-- List schemas and tables
+\dn
+\dt
+
+-- DuckDB's DESCRIBE and SUMMARIZE work too
+DESCRIBE events_prod;
+SUMMARIZE persons_prod;
+```
+
+With a project schema named `prod`, the layout looks like:
+
+```sql
+-- Your PostHog events and persons
+SELECT count(*) FROM events_prod;
+
+-- Imported source tables live in a per-project imports schema
+SELECT * FROM posthog_data_imports_prod.stripe_charge LIMIT 10;
+```
+
+## What SQL works
+
+Standard PostgreSQL queries work as-is: `SELECT`, joins, CTEs, window functions, prepared statements, transactions, and `COPY ... TO STDOUT` for bulk export (including `\copy` in `psql`).
+
+Because the engine is DuckDB, its analytical SQL passes through transparently as well – `DESCRIBE`, `SUMMARIZE`, `QUALIFY`, `SELECT * EXCLUDE (...)`, `FROM`-first queries, and `ASOF` joins all work. You get DuckDB's full function library on top of the Postgres compatibility layer.
+
+You can also write: `CREATE TABLE`, `CREATE VIEW`, `INSERT`, `UPDATE`, and `DELETE` are supported, so the warehouse can hold your own derived tables next to the synced data. Keep your own work in tables or schemas you create – the PostHog-managed tables are maintained by sync, and anything you write into them can be overwritten.
+
+A few things a Postgres veteran will notice are absent: server-side functions and triggers (PL/pgSQL), sequences, and `LISTEN`/`NOTIFY` don't exist in DuckDB, and credentials are managed by PostHog rather than through `CREATE ROLE`.
+
+## Querying from PostHog
+
+You don't need an external client to use the warehouse. Once provisioned, it's available in PostHog's [SQL editor](/docs/data-warehouse/query) alongside your other sources, and PostHog's AI features can use it as context. External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, or ad-hoc `psql` sessions.

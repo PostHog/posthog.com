@@ -20,7 +20,7 @@ Active users are the people who currently use your product. A user who becomes i
 A related user account. In PostHog, aliases can be used to connect two user accounts (and their data). For example, combining the data of an anonymous user with their signed up account. See more in [identifying users](/docs/integrate/identifying-users).
 
 #### Annotation 🦔
-Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations it to add them shared charts and mark important events, such as feature releases or new marketing activiity. [Find out more about annotations in PostHog](/manual/annotations). 
+Annotations are short text notes you can apply to your data to help you understand context at a later point, or to signal important context to others. A common use for annotations is to add them to shared charts and mark important events, such as feature releases or new marketing activity. [Find out more about annotations in PostHog](/manual/annotations). 
 
 #### App 🦔
 Apps are additional features or functionality built on top of PostHog. They are commonly used to integrate PostHog with other platforms, modify events or enhance PostHog's functionality. Apps may be built by the PostHog team, or by the community. You can [browse the app library](/apps) to see what's available, or [find out more in the docs](/docs/apps). Formerly known as plugins. 
@@ -83,8 +83,11 @@ Context is everything your agents need to know about your product, tied together
 #### Context warehouse 🦔
 The platform self-driving is built on: your [data warehouse](/docs/data-warehouse) plus the full context-ingestion pipeline (data pipelines, batch exports, and so on) that brings all of your [context](/manual/glossary#context) together in one place.
 
+#### CDP
+Customer Data Platform. A CDP collects, unifies, and routes customer data from multiple sources to other tools and destinations. PostHog includes a built-in CDP for [importing data from external sources](/docs/cdp/sources) and [exporting data to destinations](/docs/cdp/destinations).
+
 #### Compliance
-The act of complying with laws or regulations such as [HIPAA](/manual/glossary#HIPAA) or [GDPR](](/manual/glossary#GDPR). [Find out more about how to use PostHog in compliance with common regulations](/docs/privacy).
+The act of complying with laws or regulations such as [HIPAA](/manual/glossary#HIPAA) or [GDPR](/manual/glossary#GDPR). [Find out more about how to use PostHog in compliance with common regulations](/docs/privacy).
 
 #### CPA 
 Cost per Acquisition. How much it costs you to acquire users through an advertising campaign using the formula `Cost of the campaign / number of successful conversions`. \
@@ -108,6 +111,9 @@ A data warehouse is a system for storing processed data. The data that's stored 
 
 #### DAU 
 Daily Active Users. Basically, how many [active users](/manual/glossary#active-users) you have each day. [You can track this in PostHog using a simple trends chart.](/manual/trends)
+
+#### Distinct ID 🦔
+A unique identifier used to track a specific user in PostHog. Every event captured in PostHog is associated with a distinct ID. When a user is anonymous, PostHog automatically generates a random distinct ID. When a user is identified, their distinct ID is typically set to a value from your own system, such as a user ID or email address. [Find out more about identifying users](/docs/product-analytics/identify).
 
 #### Dormant user
 In PostHog's [lifecycle insight](/manual/lifecycle) a dormant user is one who did not complete the specified action within the currently viewed period, but had completed it in the previous period.  
@@ -155,6 +161,9 @@ Heatmaps enable you to visualize user activity as an overlay on top of the page,
 
 #### Hedgehog
 Incredibly cute creatures which are sadly becoming increasingly rare around the world. Hedgehogs are recognisable for their prickly backs, dislike of badgers and [ever-changing fashion habits](/blog/drawing-hedgehogs). PostHog's mascot is [a hedgehog called Max](/max), who was designed by [our Graphic Designer, Lottie](/blog/posthog-first-five#4-lottie-coxon).
+
+#### HogQL 🦔
+PostHog's SQL dialect, built on top of ClickHouse SQL. HogQL lets you query your PostHog data directly using SQL commands, with additional shortcuts for accessing event and person properties. It powers the [SQL insight](/docs/product-analytics/sql) and is used throughout PostHog's query interface. [Find out more about HogQL](/docs/sql).
 
 #### HIPAA
 Health Insurance Portability and Accountability Act. It's a piece of legislation in the US which covers, among other things, how [personal health information](/manual/glossary#PHI) must be handled. [Find out more about how to use PostHog in a which complies with HIPAA regulations](/docs/privacy/hipaa-compliance). 
@@ -309,6 +318,9 @@ The ability to host and manage software yourself (on your own servers). PostHog 
 #### Session 
 A period of time when users are [engaged](/manual/glossary#engagement) and interacting with your product. PostHog enables you to [capture sessions directly, as recordings](/manual/recordings).
 
+#### Session replay 🦔
+Session replay enables you to record and play back individual user sessions, so you can watch exactly how real users navigate your product. Replays capture clicks, scrolls, inputs, and page transitions. [Find out more about session replay](/docs/session-replay).
+
 #### SQL
 Structured Query Language (pronounced "sequel"). A programming language for designing, building, and querying relational database management systems.
 
@@ -327,7 +339,7 @@ Every time you visit a website or view content from a website, you are served a 
 A tool is one of PostHog's functional capabilities – product analytics, session replay, feature flags, experiments, error tracking, surveys, web analytics, and so on. Tools are accessed through PostHog's products (Web, Slack, MCP, CLI, and Code) and the data they capture becomes the [context](/manual/glossary#context) that powers [self-driving](/manual/glossary#self-driving). (We used to call these "apps.")
 
 #### Toolbar 🦔
-In PostHog, the toolbar is a widget in your browser that contains easy access to useful actions or information. PostHog's toolbar lets you easily inspect elements, view page [heatmaps]((/manual/glossary#heatmap), create [actions](/manual/glossary#actions), and toggle [feature flags](/manual/glossary#feature-flag). [Find out more about using the toolbar](/manual/toolbar).
+In PostHog, the toolbar is a widget in your browser that contains easy access to useful actions or information. PostHog's toolbar lets you easily inspect elements, view page [heatmaps](/manual/glossary#heatmap), create [actions](/manual/glossary#actions), and toggle [feature flags](/manual/glossary#feature-flag). [Find out more about using the toolbar](/manual/toolbar).
 
 #### Trend 🦔
 In PostHog, a trend [insight](/manual/glossary#insight) is the default insight type and enables you to plot data from PostHog onto a [chart](/manual/glossary#chart). There are many different [chart types](/manual/trends#chart-types) and options which can be used when creating trend insights, including [formula](/manual/glossary#formula). Find out more about trend insights in PostHog. 
