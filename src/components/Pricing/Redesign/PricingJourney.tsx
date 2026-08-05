@@ -1,6 +1,8 @@
 import React from 'react'
 import { IconArrowRight, IconCheck, IconCreditCard } from '@posthog/icons'
 import SignupBlock from './SignupBlock'
+import { useApp } from '../../../context/App'
+import FreeTierModal, { FREE_TIER_MODAL_KEY } from './FreeTierModal'
 
 /**
  * Free and pay-as-you-go as two stops on a journey, not two plans in a table.
@@ -49,6 +51,15 @@ const StepBadge = ({ number, label, tone }: { number: number; label: string; ton
 )
 
 export default function PricingJourney(): JSX.Element {
+    const { addWindow } = useApp()
+
+    const openFreeTier = () =>
+        addWindow(
+            // `WindowElement` is typed as a ReactPortal, which no JSX element satisfies —
+            // App.tsx's own openSignIn has the same mismatch.
+            (<FreeTierModal location={{ pathname: FREE_TIER_MODAL_KEY }} key={FREE_TIER_MODAL_KEY} newWindow />) as any
+        )
+
     return (
         <div className="@container not-prose">
             <div className="grid @2xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-4 @2xl:gap-3 items-stretch">
@@ -98,8 +109,20 @@ export default function PricingJourney(): JSX.Element {
                     <StepBadge number={2} label="If and when you need it" tone="later" />
 
                     <h3 className="text-lg mb-0.5">Pay-as-you-go</h3>
+                    {/* The allowances hang off this card rather than the Free one because this is
+                        where they're in doubt. On the Free card "you get a free tier" is the
+                        expected claim; here it's the surprising one — adding a card doesn't take
+                        it away — so it's the sentence people want to check. */}
                     <p className="text-sm text-secondary mb-4">
-                        Same free tier every month. You only pay for what you use beyond it.
+                        Same{' '}
+                        <button
+                            type="button"
+                            onClick={openFreeTier}
+                            className="font-semibold text-red dark:text-yellow underline"
+                        >
+                            free tier
+                        </button>{' '}
+                        every month. You only pay for what you use beyond it.
                     </p>
 
                     <p className="text-[15px] font-semibold mb-2">

@@ -25,7 +25,10 @@ The old page tried to serve everyone at once and ended up making the visitor do 
 | Product screenshot slider | `Test/ImageSlider` | Didn't fit alongside a full-width headline, and screenshots aren't a pricing question. |
 | "Jump to" table of contents | `ReaderView` right sidebar | Suppressed with `hideRightSidebar`; buys ~290px of content width. |
 
-Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, `pages/pricing/philosophy`. Of these, only `Test/Calculator` was modified — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior, so `/pricing` renders identically.
+Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, `pages/pricing/philosophy`. Two of them were modified, both in ways that leave `/pricing` rendering identically:
+
+- **`Test/Calculator`** — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior.
+- **`Test/FreeTier`** — its hard-coded list of products moved into `Test/freeTierData` and the component now maps over it. Pure refactor: same items, same order, same markup. It was extracted so `FreeTierModal` could render the same allowances in a different shape without a second copy of the numbers. **Update allowances there, not in a component.** Three places render it (`FreeTierTicker`, `PricingExperiment`, `Presentation/Templates/PricingTemplate`) plus the modal, so a stale duplicate would be hard to spot.
 
 ## Page order
 
@@ -93,11 +96,25 @@ Reuses the technique from [`components/Home/ToolsTicker`](../../Home/ToolsTicker
 
 **The seam depends on `STRIP_GAP_CLASS` and `STRIP_TRAILING_CLASS` matching** (`gap-12` / `pr-12`). The trailing padding stands in for the gap between the last item of one copy and the first of the next. Change one without the other and a visible hitch appears once per loop.
 
-**Duration is derived from measured width** (`scrollWidth / PIXELS_PER_SECOND`) via a `ResizeObserver`, rather than counting items like ToolsTicker does. `FreeTier` owns its own list here, so item count isn't available to this component — and measuring also keeps the apparent speed constant when label lengths change. Currently ~43s per loop at 55px/s.
+**Duration is derived from measured width** (`scrollWidth / PIXELS_PER_SECOND`) via a `ResizeObserver`, rather than counting items like ToolsTicker does. `FreeTier` renders the list itself, so item count isn't available to this component — and measuring also keeps the apparent speed constant when label lengths change. Currently ~43s per loop at 55px/s.
 
 **Edge fades use CSS `mask-image`, not an overlaid gradient.** This is deliberate: `ScrollArea`'s `fadeX` prop paints a gradient in a fixed colour, which reads as a grey/white block against this section's translucent window backdrop. A mask makes the pixels genuinely transparent, so it works on any background and in both colour modes. Don't swap it back for `fadeX`.
 
 Pauses on hover and focus. Under `prefers-reduced-motion: reduce` the animation is disabled and the row becomes a manually scrollable `overflow-x-auto` strip.
+
+### `FreeTierModal`
+
+Every product's monthly allowance as a plain two-column list — name on the left, allowance on the right, with the allowance carrying the bold. Opened from the phrase "free tier" in `PricingJourney`'s **Pay-as-you-go** card.
+
+**It hangs off card 2, not the Free card.** On the Free card, "you get a free tier" is the expected claim and nobody stops to check it. On the pay-as-you-go card the same sentence is the surprising one — *"Same free tier every month"*, i.e. adding a card doesn't take it away — and that's the claim people want evidence for. The link sits where the doubt is.
+
+**The ticker already shows these numbers, and that's the point.** The ticker is the glanceable version: it moves, it's masked at both edges, and you can't scan it for the one product you care about. This is the readable version. Both stay.
+
+**No icons here.** The ticker uses them so products stay recognizable while scrolling past; in a static list they'd be a column that carries no information.
+
+It opens through the window system (`addWindow` plus a `'pricing-free-tier'` entry in `context/App.tsx`), the same way the community sign-in modal does, so it gets the standard window chrome, title bar, and dismiss behavior rather than a hand-rolled dialog. It sizes itself instead of relying on the window `size` config, because `PageModal` renders into a Radix portal where the content sets the dialog's dimensions.
+
+**Data comes from `Test/freeTierData`,** extracted out of `Test/FreeTier` so the ticker and this list can't drift. See below.
 
 ### `CustomerLogos`
 
