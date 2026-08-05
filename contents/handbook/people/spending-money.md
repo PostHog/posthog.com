@@ -89,6 +89,29 @@ We're not going to police your spending with hard limits but we will continue to
 Joining an offsite? _Only use the offsite budget_, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
+## High-value & ongoing vendor contracts
+
+Some of what we spend money on isn't a personal subscription or a one-off purchase - it's a platform a team runs to do its work, on a contract that bills continuously and at scale. Think infrastructure like Kafka, or certain security tooling. Spend here can run into the thousands or hundreds of thousands, so it deserves more care than "I subscribed to XYZ" - the guiding principles above still apply, they just matter more.
+
+This section is about _living with_ a contract we've already got. Deciding whether to adopt a new tool in the first place is covered separately in [Adding tools](/handbook/company/adding-tools).
+
+**Who owns it?** The team that operates the vendor owns its quota and spend - in practice, the person with the most context about the contract, usually whoever proposed or operates the tool. That includes keeping an eye on usage against the contract's limits (the usage terms and limits you agreed when you signed it) so nobody is surprised by the bill. The easiest way to stay on top of this is to fold it into the vendor's own periodic review (e.g. a quarterly business review), so quota and spend get looked at on a regular cadence rather than only when something goes wrong. Loop in your exec early - they should have enough context to support and guide you.
+
+Need help getting at the financial data or the tools to track your spend? Ask in [#project-infra-tools](https://posthog.slack.com/archives/C085ZJ43HDW). We want everyone to be able to work with their spend easily, so this doesn't get in the way of shipping.
+
+**If a contract is running into overages or about to induce extra spend, flag it early.** Act as soon as it's clear an overage is likely to persist over a longer time, or to have significant consequences on the bill - don't wait for it to land repeatedly first. The whole point of watching usage is to catch it before the money is spent. Concretely:
+- The person with the most context on the contract drives this. Keep your team lead and the responsible exec aware - they own the area and help decide whether the extra spend is worth it or whether we right-size.
+- Ping `@finance-folks` in Slack as soon as the overage looks material, and take it from there. That's usually enough - it keeps Finance in the loop so they can forecast it accurately.
+- Pull in [#legal](https://posthog.slack.com/archives/C08MYQX74KH) if this is a _new_ contract, or if the legal details have changed and need a second look. Straight re-commits or renewals usually don't need legal, but a new contract always does (see [Adding tools](/handbook/company/adding-tools)).
+- For company-level tool billing, [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) is the default admin, so billing stays owned and categorized correctly. The billing email for any vendor contract is finance@posthog.com.
+
+There's no fixed dollar amount that trips a formal approval - we stay trust-based and lead with context, not permission. Use your judgement for what counts as material. But spend at this scale isn't comparable to a personal subscription, so be proactive and transparent about it _early_ rather than once the overage has already landed.
+
+Past a certain spend, it's worth challenging the tool or contract itself, if feasible - and it's up to you to decide what feasible means here. Software keeps getting cheaper, and at some point it may be cheaper to build than to buy. Pull in your exec to discuss this - it's exactly the kind of trade-off they should be weighing in on.
+
+**Renewals are the same process.** A renewal isn't a rubber stamp - do the due diligence and see where you can optimize. Vendors can usually help here, so ask them. Pull in your exec and Finance for help negotiating the terms.
+
+
 ## Frequently asked questions 🤨
 - Can I use my personal card for a work-related expense?
   - No, you **must use** your Brex or Revolut for all work-related expenses.
@@ -108,6 +131,8 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
 - If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
+- A vendor contract we rely on is running into overages / about to cost more – what do I do?
+  - Flag it early - see [High-value & ongoing vendor contracts](#high-value--ongoing-vendor-contracts). Whoever has the most context on the contract should drive, keep your team lead and the responsible exec aware, and ping `@finance-folks` in Slack as soon as the overage looks material so Finance can forecast it. Use your judgement to assess what counts as material.
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
