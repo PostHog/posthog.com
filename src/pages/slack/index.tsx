@@ -697,7 +697,7 @@ const HeroSection = () => (
             </div>
 
             {/* Capped to roughly the width the video gets inside /desktop's max-w-4xl column */}
-            <div className="w-full min-w-0 max-w-[560px] @4xl/reader-content:flex-1">
+            <div className="w-full min-w-0 max-w-[540px] @4xl/reader-content:flex-1">
                 <div className="overflow-hidden rounded-md shadow-xl">
                     <WistiaEmbed mediaId="ifyltgbxid" />
                 </div>
@@ -721,7 +721,8 @@ export default function SlackAppPage(): JSX.Element {
                 })}
             />
             <ReaderView hideLeftSidebar showQuestions={false} title="posthog-slack-app.md" hideTitle={true}>
-                <div>
+                {/* Centered column, same as /desktop – the reader renders this page full-width otherwise */}
+                <div className="max-w-4xl mx-auto">
                     <HeroSection />
                     <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
