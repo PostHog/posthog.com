@@ -63,9 +63,15 @@ You can also set `postHogExecutable` if you want to use a custom `posthog-cli` p
 
 If your app includes native C or C++ code built with the NDK, upload the `.so` debug symbols so native crash stack traces resolve to function names, files, and line numbers.
 
-The Gradle plugin registers an `uploadPostHogNativeSymbols<Variant>` task that reads the variant's unstripped native libraries and uploads every one carrying debug info and a build ID. When your app module builds native code (CMake or ndk-build), the task runs automatically after `assemble`, `install`, or `bundle`, for minified and non-minified builds alike.
+Enable the upload in your app's `build.gradle.kts`:
 
-If your app only bundles prebuilt `.so` files from dependencies, run the task explicitly:
+```kotlin
+posthog {
+    uploadNativeSymbols.set(true)
+}
+```
+
+When enabled, the Gradle plugin's `uploadPostHogNativeSymbols<Variant>` task reads the variant's unstripped native libraries and uploads every one carrying debug info and a build ID, automatically after `assemble`, `install`, or `bundle`, for minified and non-minified builds alike. This covers native code you build with the NDK as well as `.so` files bundled from `jniLibs` or dependencies. You can also run the task explicitly without enabling the automatic upload:
 
 ```bash
 ./gradlew uploadPostHogNativeSymbolsRelease
@@ -78,6 +84,8 @@ posthog-cli symbol-sets upload --directory app/build/intermediates/merged_native
 ```
 
 PostHog matches crash frames to uploaded symbols by each library's GNU build ID, which the NDK emits by default. Each build has its own build ID, so symbols must be re-uploaded for every build you ship.
+
+Native crash events are captured on the next app launch, so event properties like `$app_version` reflect the app at capture time, not at crash time. If the app updated in between, check the crash's release (matched by build ID) rather than the event's version properties when investigating.
 
 </Step>
 
