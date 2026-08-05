@@ -13,7 +13,8 @@ const WALKTHROUGHS: InboxItem[] = INBOX_ITEMS.filter((item) => item.steps?.lengt
  * Vision and two came in through Conversations – so the commit scope disambiguates,
  * reading as "Replay Vision · cohorts".
  */
-const selectorLabel = (item: InboxItem): string => `${originMeta(item).primary} · ${item.scope}`
+const selectorLabel = (item: InboxItem): string =>
+    item.walkthroughLabel ?? `${originMeta(item).primary} · ${item.scope}`
 
 /**
  * "How signals get to your Inbox" – the section below the inbox. Each merged pull

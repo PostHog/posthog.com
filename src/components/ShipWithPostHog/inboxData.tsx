@@ -303,6 +303,13 @@ export interface InboxItem {
      * item added to the inbox never breaks that section by having nothing to narrate.
      */
     steps?: SelfDrivingStoryStep[]
+    /**
+     * Overrides the `SignalsToInbox` selector button label (default: "<source> · <scope>").
+     * Display-only – the inbox row above still shows the item's real discovery channel.
+     * Used so the general session-replay walkthrough reads "Session replay" even though its
+     * report was discovered by Replay Vision.
+     */
+    walkthroughLabel?: string
 }
 
 /*
@@ -990,6 +997,9 @@ export const INBOX_ITEMS: InboxItem[] = [
         prUrl: 'https://github.com/PostHog/posthog/pull/67019',
         prNumber: 67019,
         intro: 'Some bugs never throw an exception. Replay is how self-driving catches the ones users only feel.',
+        // This walkthrough is the general session-replay story, so its selector button reads
+        // "Session replay" even though the underlying report was discovered by Replay Vision.
+        walkthroughLabel: 'Session replay',
         /*
          * The built-out walkthrough, and the only one with real screenshots rather than
          * placeholder boxes. Its copy is about how a replay-sourced report moves through the
