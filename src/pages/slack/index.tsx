@@ -655,7 +655,7 @@ const faqItems = [
 ]
 
 const heroBullets = [
-    'Answer product data questions in-thread',
+    'Ask questions about your product data',
     'Turn a message into a draft PR',
     'Ship from your phone with the Slack mobile app',
 ]
