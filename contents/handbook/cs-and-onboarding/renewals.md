@@ -33,7 +33,7 @@ Work back from the end of the customer's current billing period, not from the an
 
 - **3 months out** — start the renewal conversation (see [When to start](#when-to-start) above).
 - **2 months out** — have the renewal call and share the quote. If the customer isn't engaging by now, start the [escalation steps](#what-to-do-when-things-arent-moving-forward).
-- **As soon as the amount is agreed** — order form out for signature in PandaDoc. There's no lead time that counts as "enough," so don't hold it for one. You can work out from the customer's remaining balance and burn rate which billing period the new credits need to cover — and if their credits will run out before the term ends, this is an early renewal and the paper should go out well ahead of the anniversary date.
+- **As soon as the amount is agreed** — order form out for signature in PandaDoc. You can work out from the customer's remaining balance and burn rate which billing period the new credits need to cover. If their credits will run out before the term ends, this is an early renewal and the paper should go out well ahead of the anniversary date.
 - **About a week before the period closes** — checkpoint. If it isn't signed by now, stop waiting and pick one of the options below.
 - **Before the current billing period ends** — signed. This is the hard deadline: the contract has to be signed before the `period_end` date of the invoice the new credits need to cover.
 
