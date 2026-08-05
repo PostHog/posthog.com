@@ -16,6 +16,8 @@ export interface BookTab {
 interface BookSpreadProps {
     /** One-column plain-page mode for phones and narrow windows – no book furniture. */
     single?: boolean
+    /** The sticky orientation bar in single mode: title plus page position. */
+    singleHead?: { title: string; page?: number; total: number }
     /** Volume color token for the spine edge, matching the shelf cover. */
     token: string
     /** Running heads, repeated at the top of each page. */
@@ -121,6 +123,7 @@ function PageTurnZone({
  */
 export default function BookSpread({
     single = false,
+    singleHead,
     token,
     heads,
     folios,
@@ -141,8 +144,38 @@ export default function BookSpread({
 
     // The plain single-page read: interleaved content, pinned action bar, plain prev/next links.
     if (single) {
+        const turnLinkClasses =
+            'flex size-9 shrink-0 items-center justify-center rounded text-secondary hover:bg-accent hover:text-primary dark:hover:bg-accent-dark'
         return (
             <div className="mx-auto flex h-full min-h-0 w-full max-w-2xl flex-col">
+                {/* Sticky orientation bar: where you are, and a turn in each direction. */}
+                <nav
+                    aria-label="Pocket guide navigation"
+                    className="flex shrink-0 items-center justify-between gap-1 border-b border-primary bg-primary px-1.5 py-1"
+                >
+                    {prev ? (
+                        <Link to={prev.url} aria-label={prev.label} className={turnLinkClasses}>
+                            <IconChevronLeft className="size-5" />
+                        </Link>
+                    ) : (
+                        <span aria-hidden="true" className="size-9 shrink-0" />
+                    )}
+                    <span className="flex min-w-0 items-baseline gap-1.5 text-xs">
+                        <span className="truncate font-semibold text-primary">{singleHead?.title}</span>
+                        {singleHead?.page && (
+                            <span className="shrink-0 tabular-nums text-secondary">
+                                p. {singleHead.page} of {singleHead.total}
+                            </span>
+                        )}
+                    </span>
+                    {next ? (
+                        <Link to={next.url} aria-label={next.label} className={turnLinkClasses}>
+                            <IconChevronRight className="size-5" />
+                        </Link>
+                    ) : (
+                        <span aria-hidden="true" className="size-9 shrink-0" />
+                    )}
+                </nav>
                 <div className="min-h-0 flex-1 overflow-y-auto">
                     <div style={{ fontSize }}>{children}</div>
                     <nav

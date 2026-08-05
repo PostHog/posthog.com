@@ -128,6 +128,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             <div ref={containerRef} className="not-prose @container h-full min-h-0 p-2 @xl:p-6">
                 <BookSpread
                     single={single}
+                    singleHead={{ title: entry.title, page: entry.page, total }}
                     token={volume?.token ?? 'orange'}
                     prev={prevTurn}
                     next={nextTurn}
