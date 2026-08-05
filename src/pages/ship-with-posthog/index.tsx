@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import { IconArrowUpRight } from '@posthog/icons'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -7,6 +8,7 @@ import { CallToAction } from 'components/CallToAction'
 import WizardCommand from 'components/WizardCommand'
 import InboxReplica from 'components/ShipWithPostHog/InboxReplica'
 import SignalsToInbox from 'components/ShipWithPostHog/SignalsToInbox'
+import SelfDrivingStories, { type SelfDrivingPost } from 'components/ShipWithPostHog/SelfDrivingStories'
 import SlotMachineText from 'components/SlotMachineText'
 
 // Words cycled through the "Ship {word} with PostHog" headline. "code" rests last (held
@@ -17,7 +19,13 @@ const SHIP_WORDS = ['features', 'fixes', 'experiments', 'flags', 'surveys', 'cod
 // redirect in vercel.json – nothing else references the slug.
 export const SLUG = 'ship-with-posthog'
 
-export default function ShipWithPostHog(): JSX.Element {
+interface ShipWithPostHogProps {
+    data: {
+        selfDrivingPosts: { nodes: SelfDrivingPost[] }
+    }
+}
+
+export default function ShipWithPostHog({ data }: ShipWithPostHogProps): JSX.Element {
     return (
         <>
             <SEO
@@ -70,6 +78,11 @@ export default function ShipWithPostHog(): JSX.Element {
                             <SignalsToInbox />
                         </div>
 
+                        {/* The long-form write-ups of those PRs, pulled from the blog by tag */}
+                        <div className="mt-14 @md:mt-20">
+                            <SelfDrivingStories posts={data.selfDrivingPosts.nodes} />
+                        </div>
+
                         {/* CTA */}
                         <div className="mx-auto mt-12 max-w-2xl rounded-lg border border-primary bg-accent p-6 @md:mt-16 @md:p-8">
                             <h2 className="mt-0 text-2xl font-bold">Set up your Inbox</h2>
@@ -118,3 +131,24 @@ export default function ShipWithPostHog(): JSX.Element {
         </>
     )
 }
+
+/*
+ * The blog posts for the section above. Filtered by the `Self-driving` frontmatter tag,
+ * so a new write-up joins the page by being tagged – see `SelfDrivingStories`.
+ *
+ * `limit` caps the visible rows; the section's footer button routes to the full tag page,
+ * so anything past the cap is still reachable. `isFuture` keeps scheduled posts out.
+ */
+export const query = graphql`
+    {
+        selfDrivingPosts: allMdx(
+            limit: 5
+            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { isFuture: { eq: false }, frontmatter: { tags: { in: ["Self-driving"] }, date: { ne: null } } }
+        ) {
+            nodes {
+                ...BlogFragment
+            }
+        }
+    }
+`
