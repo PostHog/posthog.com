@@ -45,6 +45,8 @@ export default function CloudinaryImage({
             </Image>
         </div>
     ) : (
-        <img src={src} width={width} className={`inline-block ${imgClassName}`} {...other} />
+        // No wrapper here, so `className` goes on the image itself – otherwise
+        // classes like `dark:hidden` are silently dropped on this branch.
+        <img src={src} width={width} className={`inline-block ${className} ${imgClassName}`} {...other} />
     )
 }
