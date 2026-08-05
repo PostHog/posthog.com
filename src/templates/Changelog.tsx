@@ -172,7 +172,7 @@ const Roadmap = ({
 }) => {
     const { appWindow } = useWindow()
     const { isModerator, getJwt } = useUser()
-    const { addWindow, websiteMode } = useApp()
+    const { addWindow } = useApp()
     const hasProfiles = (roadmap.profiles?.data?.length ?? 0) > 0
     const [width, setWidth] = useState(450)
     const [isResizing, setIsResizing] = useState(false)
@@ -223,9 +223,7 @@ const Roadmap = ({
 
     return (
         <motion.div
-            className={`border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden ${
-                websiteMode ? '' : 'shadow-2xl'
-            }`}
+            className="border-l border-primary bg-white dark:bg-dark flex-shrink-0 relative overflow-hidden shadow-2xl"
             initial={{ width: 0 }}
             animate={{ width: containerWidth }}
             exit={{ width: 0 }}
@@ -384,6 +382,78 @@ const Roadmap = ({
     )
 }
 
+// How many months of entries get full descriptions in the server-rendered fallback below.
+// Older entries render titles only to keep the HTML weight bounded.
+const SSR_FULL_DETAIL_MONTHS = 12
+
+// Server-rendered fallback for the virtualized cards view. `RoadmapCards` renders
+// `virtualizer.getVirtualItems()`, which is empty during SSR, so crawlers and agents
+// fetching this page over plain HTTP would otherwise see no entries at all. This list
+// renders until the client mounts, then hands off to the interactive UI.
+const StaticChangelogList = ({ roadmaps }: { roadmaps: RoadmapNode[] }) => {
+    const byMonth = useMemo(() => {
+        const groups = new Map<string, RoadmapNode[]>()
+        ;[...roadmaps]
+            .sort((a, b) => dayjs.utc(b.date).valueOf() - dayjs.utc(a.date).valueOf())
+            .forEach((roadmap) => {
+                const key = dayjs.utc(roadmap.date).format('YYYY-MM')
+                groups.set(key, [...(groups.get(key) || []), roadmap])
+            })
+        return [...groups.entries()]
+    }, [roadmaps])
+
+    // Derived from the data (not the clock) so SSR and hydration always agree
+    const fullDetailCutoff = useMemo(
+        () => (byMonth[0] ? dayjs.utc(byMonth[0][0]).subtract(SSR_FULL_DETAIL_MONTHS, 'month') : null),
+        [byMonth]
+    )
+
+    return (
+        <ScrollArea className="h-full">
+            <div className="max-w-3xl mx-auto px-4 pb-8">
+                <p className="text-sm text-secondary">
+                    Also available as <a href="/changelog.md">Markdown</a> and{' '}
+                    <a href="/changelog.rss">RSS</a>.
+                </p>
+                {byMonth.map(([month, items]) => {
+                    const fullDetail = fullDetailCutoff ? !dayjs.utc(month).isBefore(fullDetailCutoff) : true
+                    return (
+                        <section key={month}>
+                            <h2>{dayjs.utc(month).format('MMMM YYYY')}</h2>
+                            {items.map((roadmap) => {
+                                const teamName = roadmap.teams?.data?.[0]?.attributes?.name
+                                return (
+                                    <article key={roadmap.id} className="mb-6">
+                                        <Heading
+                                            as="h3"
+                                            id={slugify(roadmap.title, { lower: true })}
+                                            className="m-0"
+                                        >
+                                            {roadmap.title}
+                                        </Heading>
+                                        <p className="m-0 text-sm opacity-60">
+                                            {dayjs.utc(roadmap.date).format('MMMM D, YYYY')}
+                                            {teamName ? ` · ${teamName} Team` : ''}
+                                        </p>
+                                        {fullDetail && roadmap.description && (
+                                            <div className="mt-2">
+                                                <Markdown regularText={true}>{roadmap.description}</Markdown>
+                                            </div>
+                                        )}
+                                        {fullDetail && roadmap.cta?.url && (
+                                            <Link to={roadmap.cta.url}>{roadmap.cta.label || 'Learn more'}</Link>
+                                        )}
+                                    </article>
+                                )
+                            })}
+                        </section>
+                    )
+                })}
+            </div>
+        </ScrollArea>
+    )
+}
+
 interface RoadmapCardsProps {
     roadmaps: RoadmapNode[]
     setPercentageOfScrollInView: (percentage: number) => void
@@ -423,7 +493,7 @@ const RoadmapCards = ({
     initialActiveRoadmap,
     videos,
 }: RoadmapCardsProps) => {
-    const { addWindow, websiteMode } = useApp()
+    const { addWindow } = useApp()
     const width = 340
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -639,11 +709,7 @@ const RoadmapCards = ({
     }
 
     return (
-        <ScrollArea
-            className={`size-full [&>div>div]:size-full [&>div>div]:!flex ${
-                websiteMode ? '!h-[80vh] max-h-[900px]' : ''
-            }`}
-        >
+        <ScrollArea className="size-full [&>div>div]:size-full [&>div>div]:!flex">
             <div className="h-full px-4">
                 <div
                     ref={containerRef}
@@ -809,6 +875,13 @@ export default function Changelog({
     const [containerWidth, setContainerWidth] = useState(0)
     const [teamFilter, setTeamFilter] = useState('all')
     const [categoryFilter, setCategoryFilter] = useState('all')
+    // Two-pass render: SSR (and the first client render) show the static, crawlable list;
+    // the virtualized cards UI takes over after mount. Both passes agree, so hydration is safe.
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
     const hideEmpty = useMemo(() => teamFilter !== 'all' || categoryFilter !== 'all', [teamFilter, categoryFilter])
     const playlistVideos = data.allChangelogVideo?.nodes || []
 
@@ -976,7 +1049,10 @@ export default function Changelog({
 
     return (
         <>
-            <SEO title="Changelog - PostHog" />
+            <SEO
+                title="Changelog - PostHog"
+                description="New features, improvements, and fixes shipped in PostHog, updated continuously."
+            />
             <Editor
                 hideToolbar
                 hasTabs
@@ -987,7 +1063,10 @@ export default function Changelog({
                     description: 'Latest updates and releases',
                 }}
             >
-                <div data-scheme="secondary" className="bg-primary text-primary relative h-full flex">
+                <div
+                    data-scheme="secondary"
+                    className="bg-primary text-primary relative h-full flex border-t border-primary"
+                >
                     <div ref={resizeObserverRef} className="flex flex-col flex-1 min-w-0 h-full">
                         <div className="min-h-0 flex-shrink-0 flex justify-between items-center px-4 mt-2">
                             <Filters
@@ -1019,20 +1098,23 @@ export default function Changelog({
                         </div>
 
                         <div className={`min-h-0 flex-grow pt-2 ${hideEmpty ? 'mb-4' : ''}`}>
-                            <RoadmapCards
-                                startYear={2020}
-                                endYear={2026}
-                                roadmaps={filteredData}
-                                setPercentageOfScrollInView={setPercentageOfScrollInView}
-                                windowPercentageFromLeft={windowPercentageFromLeft}
-                                setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
-                                onRoadmapClick={handleRoadmapClick}
-                                containerWidth={containerWidth}
-                                activeRoadmap={activeRoadmap}
-                                hideEmpty={hideEmpty}
-                                initialActiveRoadmap={initialActiveRoadmap}
-                                videos={playlistVideos}
-                            />
+                            {!mounted && <StaticChangelogList roadmaps={filteredData} />}
+                            {mounted && (
+                                <RoadmapCards
+                                    startYear={2020}
+                                    endYear={2026}
+                                    roadmaps={filteredData}
+                                    setPercentageOfScrollInView={setPercentageOfScrollInView}
+                                    windowPercentageFromLeft={windowPercentageFromLeft}
+                                    setRoadmapsPercentageFromLeft={setRoadmapsPercentageFromLeft}
+                                    onRoadmapClick={handleRoadmapClick}
+                                    containerWidth={containerWidth}
+                                    activeRoadmap={activeRoadmap}
+                                    hideEmpty={hideEmpty}
+                                    initialActiveRoadmap={initialActiveRoadmap}
+                                    videos={playlistVideos}
+                                />
+                            )}
                         </div>
                         <AnimatePresence>
                             {!hideEmpty && (

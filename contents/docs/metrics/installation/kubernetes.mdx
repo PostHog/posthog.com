@@ -1,0 +1,152 @@
+---
+title: Kubernetes metrics installation
+platformLogo: kubernetes
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import MetricsNextSteps from "./_snippets/metrics-next-steps.mdx";
+
+> **Note:** Metrics is in alpha. Setup details, including the ingestion endpoint, may change before general availability.
+
+If your Kubernetes workloads already expose Prometheus-format `/metrics` endpoints, the PostHog metrics agent scrapes them and forwards everything to PostHog. One `helm install`, no application changes.
+
+The agent runs as a single-replica Deployment by design – two replicas would double-scrape every target and double-count all metrics.
+
+<Steps>
+
+<Step title="Prerequisites" badge="required">
+
+You need:
+
+- A running Kubernetes cluster with `helm` v3 installed
+- Pods that expose Prometheus metrics (the standard `prometheus.io/scrape: "true"` annotation pattern)
+- Your PostHog project token
+
+The chart creates a ClusterRole and ClusterRoleBinding so the agent can discover pods across all namespaces. If your cluster uses strict RBAC policies, confirm you have permission to create cluster-scoped roles.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate metrics requests. This is the same token you use for capturing events with the PostHog SDK.
+
+> **Important:** Use your **project token**, which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Install the Helm chart" badge="required">
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.apiKey=<ph_project_token>
+```
+
+For EU Cloud, set the host explicitly:
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.apiKey=<ph_project_token> \
+  --set posthog.host=https://eu.i.posthog.com
+```
+
+If you manage secrets separately, point the chart at an existing Kubernetes Secret containing a `posthog-api-key` key instead of passing the token directly:
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.existingSecret=my-posthog-secret
+```
+
+The API key is stored in a Secret and injected as an environment variable – it never appears in the ConfigMap.
+
+</Step>
+
+<Step title="Configure metric discovery" badge="required">
+
+### Annotation discovery (default)
+
+By default, the agent discovers and scrapes any pod annotated with `prometheus.io/scrape: "true"`. Two optional annotations control the scrape target:
+
+| Annotation             | Default              | Description                     |
+| ---------------------- | -------------------- | ------------------------------- |
+| `prometheus.io/scrape` | –                    | Set to `"true"` to opt a pod in |
+| `prometheus.io/path`   | `/metrics`           | Override the metrics path       |
+| `prometheus.io/port`   | Pod's container port | Override the scrape port        |
+
+Example pod annotation:
+
+```yaml
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
+    prometheus.io/path: "/custom/metrics"
+```
+
+### Static targets
+
+For services that don't carry Prometheus annotations, add fixed `host:port` targets:
+
+```bash
+helm install posthog-metrics-agent oci://ghcr.io/posthog/charts/posthog-metrics-agent \
+  --set posthog.apiKey=<ph_project_token> \
+  --set 'scrape.staticTargets={my-service:9090,another-service:8080}'
+```
+
+You can combine annotation discovery with static targets. To disable annotation discovery entirely and only use static targets, set `scrape.annotationDiscovery=false`.
+
+### Extra scrape configs
+
+For advanced use cases, pass raw Prometheus `scrape_configs` YAML via `scrape.extraScrapeConfigs`. This is appended verbatim to the collector configuration.
+
+</Step>
+
+<Step title="Verify metrics are flowing" badge="recommended">
+
+1. Confirm the agent pod is running:
+
+```bash
+kubectl get pods -l app.kubernetes.io/name=posthog-metrics-agent
+```
+
+2. Open [**Metrics**](https://app.posthog.com/metrics) in PostHog and pick a metric from the name picker
+3. Data points should appear within a minute of the agent starting
+
+If nothing shows up, check the agent logs for connection or authentication errors:
+
+```bash
+kubectl logs -l app.kubernetes.io/name=posthog-metrics-agent
+```
+
+<CallToAction type="primary" to="https://app.posthog.com/metrics">
+  View your metrics in PostHog
+</CallToAction>
+
+</Step>
+
+<MetricsNextSteps />
+
+</Steps>
+
+## Configuration reference
+
+| Value                        | Default                    | Description                                                                             |
+| ---------------------------- | -------------------------- | --------------------------------------------------------------------------------------- |
+| `posthog.apiKey`             | `''`                       | Project token (`phc_...`). Stored in a chart-managed Secret                             |
+| `posthog.existingSecret`     | `''`                       | Name of an existing Secret with a `posthog-api-key` key. Takes precedence over `apiKey` |
+| `posthog.host`               | `https://us.i.posthog.com` | PostHog ingestion origin. Set to `https://eu.i.posthog.com` for EU Cloud                |
+| `scrape.interval`            | `15s`                      | How often to scrape targets                                                             |
+| `scrape.annotationDiscovery` | `true`                     | Discover pods via `prometheus.io/scrape` annotations                                    |
+| `scrape.staticTargets`       | `[]`                       | Fixed `host:port` targets, e.g. `['my-svc:9090']`                                       |
+| `scrape.extraScrapeConfigs`  | `''`                       | Raw Prometheus `scrape_configs` YAML appended verbatim                                  |
+| `resources.requests.cpu`     | `100m`                     | CPU request                                                                             |
+| `resources.requests.memory`  | `256Mi`                    | Memory request                                                                          |
+| `resources.limits.memory`    | `512Mi`                    | Memory limit                                                                            |
+| `rbac.create`                | `true`                     | Create a ClusterRole for pod discovery                                                  |
+| `serviceAccount.create`      | `true`                     | Create a dedicated ServiceAccount                                                       |
+| `serviceAccount.name`        | `''`                       | Override the ServiceAccount name. Required when `serviceAccount.create` is `false`      |
+| `nodeSelector`               | `{}`                       | Kubernetes node selector                                                                |
+| `tolerations`                | `[]`                       | Kubernetes tolerations                                                                  |
+| `affinity`                   | `{}`                       | Kubernetes affinity rules                                                               |

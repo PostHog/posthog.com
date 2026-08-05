@@ -45,7 +45,7 @@ jobs:
                   app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
                   private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
             - name: Find stale issues and post reminders
-              uses: actions/github-script@v7
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               env:
                   INPUT_COLUMN: ${{ inputs.column }}
                   INPUT_STALE_DAYS: ${{ inputs.stale_days }}

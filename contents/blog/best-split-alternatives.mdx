@@ -46,7 +46,7 @@ This means it's not only an alternative to Split but also tools like [Mixpanel](
 
 - **Error tracking:** Automatically capture exceptions and link them directly to session replays, feature flags, and user profiles for faster debugging.
 
-- **PostHog AI:** PostHog's AI assistant (and MCP) can create and manage feature flags and experiments using natural language – roll out flags, configure targeting rules, audit stale flags, summarize experiment results, and more.
+- **PostHog AI:** PostHog's AI assistant, [MCP](/docs/model-context-protocol), and [CLI](/docs/cli) can create and manage feature flags and experiments using natural language – roll out flags, configure targeting rules, audit stale flags, summarize experiment results, and more.
 
 ### How does PostHog compare to Split?
 
@@ -458,6 +458,19 @@ It's completely free to get started – no credit card required. Our [AI setup w
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What happened to Split.io?</summary>

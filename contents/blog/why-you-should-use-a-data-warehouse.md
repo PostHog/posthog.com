@@ -33,7 +33,7 @@ If you don’t have much data then you probably don’t need a data warehouse, s
 
 It’s a rough guideline, but if you’re not either in the mid-millions of rows or anticipating being there soon then moving to a data warehouse is premature. Data warehouses are costly and only really pay off at scale anyway.
 
-Granted, if you’re anticipating explosive growth in the future then it could be worth looking at simple options ([PostHog](/data-stack) has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
+Granted, if you’re anticipating explosive growth in the future then it could be worth looking at simple options ([PostHog](/context-warehouse) has generous free allowances, for example), but implementing anything as complex as Snowflake would likely be overkill. 
 
 ### 2. “You need transactional workloads”
 
@@ -75,9 +75,9 @@ If you’re trying to figure out your MRR and you’re tired of having to reconc
 
 ### 2. You need to stop punishing your operational database
 
-Don’t be mean to Postgres. It can do a lot of things well, but heavy, concurrent reporting queries with complex joins? Not so much. You’ll end up slowing down your product, timing out your queries, and upsetting your product managers.
+Don’t be mean to [Postgres](/blog/duckdb-vs-postgres). It can do a lot of things well, but heavy, concurrent reporting queries with complex joins? Not so much. You’ll end up slowing down your product, timing out your queries, and upsetting your product managers.
 
-Once app performance starts to suffer and you're writing enough SQL to fill a book, it’s time to consider offloading that work. You can start small with tools like [DuckDB](/blog/duckdb-vs-clickhouse) for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/data-stack/managed-warehouse) for team-wide access. 
+Once app performance starts to suffer and you're writing enough SQL to fill a book, it’s time to consider offloading that work. You can start small with tools like [DuckDB](/blog/duckdb-vs-clickhouse) for fast, local analytical processing on your own machine, or graduate to a [managed warehouse](/context-warehouse/managed-warehouse) for team-wide access. 
 
 ### 3. Something something single source of truth
 

@@ -21,17 +21,19 @@ import {
     IconStickiness,
     IconAsterisk,
     IconAI,
-    IconSupport,
-    IconSpotlight,
     IconTestTube,
-    IconListTreeConnected,
-    IconSparkles,
     IconTarget,
     IconArrowUpRight,
     IconTrends,
     IconCursorClick,
+    IconChat,
+    IconAtSign,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import { mcpAnalytics } from './productData/mcp_analytics'
+import { traces } from './productData/traces'
+import { support } from './productData/support'
+import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -57,104 +59,83 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     name: 'Product analytics',
         //     slug: 'product-analytics',
         // },
+        traces,
         {
-            name: 'User interviews',
+            ...getTool('user_interviews'),
             Icon: IconThoughtBubble,
-            description: 'Get feedback from users.',
-            handle: 'user_interviews',
             color: 'purple',
             colorSecondary: 'purple',
-            category: 'communication',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'products',
-            status: 'WIP',
         },
+        support,
         {
-            name: 'Support',
-            Icon: IconSupport,
-            description: 'Built-in customer support with chat widget and unified inbox.',
-            handle: 'support',
-            color: 'blue',
-            colorSecondary: 'blue',
-            category: 'communication',
-            slug: 'docs/support',
-            status: 'beta',
-        },
-        {
-            name: 'PostHog Code',
+            ...getTool('posthog_code'),
             Icon: IconCoffee,
-            description: 'AI code editor that knows how people use your product',
-            handle: 'posthog_code',
             color: 'brown',
             colorSecondary: 'brown',
-            category: 'automation',
-            slug: 'code',
-            status: 'beta',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_light_4b3440dc2b.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/signals_dark_b29e5ed8f9.png',
+                    alt: 'PostHog Desktop screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
         {
-            name: 'Product Tours',
-            Icon: IconSpotlight,
-            description: 'Guide users through your product with interactive tours and announcements.',
-            handle: 'product_tours',
-            color: 'salmon',
-            colorSecondary: 'salmon',
-            category: 'product_engineering',
-            slug: 'docs/product-tours',
-            status: 'beta',
+            ...getTool('posthog_slack'),
+            Icon: IconAtSign,
+            color: 'sky-blue',
+            colorSecondary: 'sky-blue',
+            screenshots: {
+                home: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_light_15ad69ec86.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_dark_fc660ed74e.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                inbox: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_a328873cdd.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_ac23465bf6.png',
+                    alt: 'PostHog Slack inbox screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+                insight: {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_light_61f37a2fc9.png',
+                    srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/slack_insight_dark_e0f978e190.png',
+                    alt: 'PostHog Slack insight screenshot',
+                    imgClasses: 'w-full rounded shadow-xl border border-primary',
+                },
+            },
         },
+        // A UI-only product card that shares AI Observability's page, not a canonical tool with its own root page.
         {
-            name: 'Traces',
-            Icon: IconListTreeConnected,
-            description: 'Debug entire AI conversations with full trace visibility.',
-            handle: 'llm_traces',
-            color: 'seagreen',
-            colorSecondary: 'seagreen',
-            category: 'ai',
-            slug: 'llm-analytics',
-        },
-        {
-            name: 'Generations',
-            Icon: IconSparkles,
-            description: 'Inspect every LLM call with full input/output visibility.',
-            handle: 'llm_generations',
-            color: 'yellow',
-            colorSecondary: 'yellow',
-            category: 'ai',
-            slug: 'llm-analytics',
-            status: 'beta',
-        },
-        {
-            name: 'Evals',
+            name: 'AI Evals',
             Icon: IconTarget,
             description: 'Run LLM-as-a-judge evaluations to catch regressions.',
             handle: 'llm_evals',
             color: 'blue',
             colorSecondary: 'blue',
             category: 'ai',
-            slug: 'llm-analytics',
+            slug: 'ai-observability',
             status: 'beta',
         },
+        // A feature of Experiments used in product UI, not a canonical tool with its own root page.
         {
+            handle: 'no_code_ab_testing',
             name: 'No-code A/B Testing',
+            slug: 'docs/experiments/no-code-web-experiments',
+            category: 'product_engineering',
+            status: 'beta',
             Icon: IconTestTube,
             description: 'Run A/B tests without writing code.',
-            handle: 'no_code_ab_testing',
             color: 'blue',
             colorSecondary: 'blue',
-            category: 'product_engineering',
-            slug: 'docs/experiments/no-code-web-experiments',
-            status: 'beta',
         },
         {
-            name: 'Group Analytics',
+            ...getTool('group_analytics'),
             Icon: IconPeople,
-            description: 'Analyze multi-seat accounts and other groups.',
-            handle: 'group_analytics',
             color: 'teal',
             colorSecondary: 'purple',
-            category: 'analytics',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'group-analytics',
             overview: {
                 title: 'Group Analytics',
                 description:
@@ -189,36 +170,26 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
+            handle: 'platform_packages',
             name: 'Platform packages',
+            slug: 'platform-packages',
+            category: 'product_os',
             Icon: IconPeople,
             description: 'Features for teams',
-            handle: 'platform_packages',
             color: 'seagreen',
             colorSecondary: 'purple',
-            category: 'product_os',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'platform-packages',
         },
         {
-            name: 'Activity timeline',
+            ...getTool('profiles'),
             Icon: IconPeople,
-            description: 'Full event history for individuals and multi-seat accounts',
-            handle: 'profiles',
             color: 'blue',
             colorSecondary: 'purple',
-            category: 'product_os',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'profiles',
         },
         {
-            name: 'Custom dashboards',
+            ...getTool('dashboards'),
             Icon: IconDashboard,
-            description: 'Track all your most important product and performance metrics in one place.',
-            handle: 'dashboards',
             color: 'salmon',
             colorSecondary: 'sky-blue',
-            category: 'analytics',
-            slug: 'dashboards',
             seo: {
                 title: 'Dashboards - PostHog',
                 description:
@@ -582,29 +553,22 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'web_analytics', 'data_warehouse', 'session_replay'],
         },
         {
-            name: 'README: PostHog data stack.md',
+            ...getTool('data-stack'),
             // Icon: IconDatabase,
             parentIcon: 'documentCanvas',
-            description: 'CDP manifesto',
-            handle: 'data-stack',
             type: 'cdp_manifesto',
             color: 'blue',
             colorSecondary: 'lilac',
-            category: 'data',
-            slug: 'data-stack',
             seo: {
                 title: 'Unify external customer data with product usage data',
                 description: 'Analyze product and customer data in PostHog – no matter where it was generated.',
             },
         },
         {
-            name: 'Graphs & trends',
+            ...getTool('trends'),
             Icon: IconTrends,
-            handle: 'trends',
             color: 'yellow',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'trends',
             overview: {
                 title: 'Visualize user data with graphs, tables, charts, maps, and more',
                 description: 'Plot any event over time, apply advanced filtering, and break down by any property.',
@@ -661,13 +625,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Funnels',
+            ...getTool('funnels'),
             Icon: IconFunnels,
-            handle: 'funnels',
             color: 'blue',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'funnels',
             overview: {
                 title: 'Find drop-off across a series of actions',
                 description:
@@ -715,13 +676,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'BI',
+            ...getTool('bi'),
             Icon: IconMagicWand,
-            handle: 'bi',
             color: 'purple',
             colorSecondary: 'lilac',
-            category: 'data',
-            slug: 'data-stack/business-intelligence',
             overview: {
                 title: 'Business intelligence for data-driven teams',
                 description:
@@ -844,13 +802,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     ],
         // },
         {
-            name: 'User Paths',
+            ...getTool('user_paths'),
             Icon: IconUserPaths,
-            handle: 'user_paths',
             color: 'teal',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'user-paths',
             overview: {
                 title: 'See how users navigate your product, website, or conversion funnel',
                 description:
@@ -890,13 +845,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Correlation Analysis',
+            ...getTool('correlation_analysis'),
             Icon: IconCorrelationAnalysis,
-            handle: 'correlation_analysis',
             color: 'purple',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'correlation-analysis',
             overview: {
                 title: 'Discover what events correlate with conversion or churn',
                 description:
@@ -936,13 +888,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Retention',
+            ...getTool('retention'),
             Icon: IconRetention,
-            handle: 'retention',
             color: 'salmon',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'retention',
             overview: {
                 title: 'See how many users return on subsequent days',
                 description:
@@ -980,13 +929,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Stickiness',
+            ...getTool('stickiness'),
             Icon: IconStickiness,
-            handle: 'stickiness',
             color: 'yellow',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'stickiness',
             overview: {
                 title: 'Learn how many times users perform events in a period',
                 description:
@@ -1024,13 +970,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Lifecycle',
+            ...getTool('lifecycle'),
             Icon: IconLifecycle,
-            handle: 'lifecycle',
             color: 'seagreen',
             colorSecondary: 'lilac',
-            category: 'dataviz',
-            slug: 'lifecycle',
             overview: {
                 title: 'Understand how your active users break down',
                 description:
@@ -1125,25 +1068,16 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     ],
         // },
         {
-            name: 'User activity',
+            ...getTool('activity'),
             Icon: IconClockRewind,
-            description: 'See what users are doing in your product.',
-            handle: 'activity',
             color: 'teal',
             colorSecondary: 'yellow-2',
-            category: 'product_os',
-            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: 'activity',
         },
         {
-            name: 'Toolbar',
+            ...getTool('toolbar'),
             Icon: IconToolbar,
-            description: 'Interact with PostHog directly on your site.',
-            handle: 'toolbar',
             color: 'salmon',
             colorSecondary: 'red',
-            category: 'product_os',
-            slug: 'toolbar',
             seo: {
                 title: 'Toolbar - PostHog',
                 description:
@@ -1399,15 +1333,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'heatmaps', 'feature_flags', 'session_replay'],
         },
         {
-            name: 'Early Access Features',
+            ...getTool('early_access'),
             Icon: IconRocket,
-            description: 'Let users opt into betas and register interest in upcoming features',
-            handle: 'early_access',
             color: 'blue',
             colorSecondary: 'orange-2',
-            category: 'product_engineering',
-            slug: 'early-access-features',
-            status: 'beta',
             seo: {
                 title: 'Early access feature management - PostHog',
                 description:
@@ -1489,7 +1418,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     title: 'User opt-in experience',
                     headline: 'Beautiful opt-in UI out of the box',
                     description:
-                        'Pre-built site app or custom implementation for users to discover and control their beta features.',
+                        'Pre-built JS snippet or custom implementation for users to discover and control their beta features.',
                     images: [
                         {
                             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/feature-flags/early-access-feature-demo.png',
@@ -1581,7 +1510,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     features: [
                         {
                             title: 'One-line setup',
-                            description: 'Enable site app with just opt_in_site_apps: true',
+                            description: 'Enable JS snippet with just opt_in_site_apps: true',
                         },
                         {
                             title: 'Custom API',
@@ -1744,15 +1673,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
         },
+        mcpAnalytics,
         {
-            name: 'API',
+            ...getTool('api'),
             Icon: IconTerminal,
-            description: 'Powerful APIs and SDKs to build analytics into your product',
-            handle: 'api',
             color: 'purple',
             colorSecondary: 'sky-blue',
-            category: 'product_os',
-            slug: 'api',
             seo: {
                 title: 'API - PostHog',
                 description:
@@ -1760,13 +1686,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Webhooks',
+            ...getTool('webhooks'),
             Icon: IconWebhooks,
-            handle: 'webhooks',
             color: 'red',
             colorSecondary: 'sky-blue',
-            category: 'automation',
-            slug: 'webhooks',
             seo: {
                 title: 'Webhooks - PostHog',
                 description:
@@ -1831,14 +1754,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Notebooks',
+            ...getTool('notebooks'),
             Icon: IconNotebook,
-            description: 'Combine analytics, replays, and notes in collaborative docs',
-            handle: 'notebooks',
             color: 'orange',
             colorSecondary: 'yellow',
-            category: 'product_os',
-            slug: 'notebooks',
             seo: {
                 title: 'Notebooks - PostHog',
                 description:
@@ -2087,14 +2006,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'session_replay', 'feature_flags', 'surveys'],
         },
         {
-            name: 'Heatmaps',
+            ...getTool('heatmaps'),
             Icon: IconCursorClick,
-            description: 'See where users click, scroll, and move on your site',
-            handle: 'heatmaps',
             color: 'green',
             colorSecondary: 'orange',
-            category: 'dataviz',
-            slug: 'heatmaps',
             seo: {
                 title: 'Heatmaps - PostHog',
                 description:
@@ -2342,14 +2257,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['session_replay', 'product_analytics', 'toolbar', 'web_analytics'],
         },
         {
-            name: 'User activity',
+            ...getTool('activity'),
             Icon: IconClock,
-            description: 'Track user engagement patterns and identify churn risks',
-            handle: 'activity',
-            slug: 'activity',
             color: 'purple',
             colorSecondary: 'blue',
-            category: 'analytics',
             seo: {
                 title: 'User activity analytics - PostHog',
                 description:
@@ -2601,30 +2512,26 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'session_replay', 'cohorts', 'experiments'],
         },
         {
-            name: 'Data sources & import (ELT)',
+            ...getTool('data_in'),
             parentIcon: 'dataIn',
             Icon: IconDownload,
-            description: 'Data sources & import (ELT)',
-            handle: 'data_in',
             color: 'green',
             colorSecondary: 'lilac',
-            category: 'data',
-            slug: 'data-stack/sources',
             seo: {
                 title: 'PostHog provides multiple ways to ingest data from various sources',
                 description: "It's easy to centralize all your customer and product data in one place.",
             },
         },
         {
+            handle: 'posthog_ai_data_stack',
             name: 'PostHog AI for your data',
+            slug: 'context-warehouse/posthog-ai',
+            category: 'data',
             parentIcon: 'ai',
             Icon: IconAI,
             description: 'PostHog AI for your data',
-            handle: 'posthog_ai_data_stack',
             color: 'lilac',
             colorSecondary: 'lilac',
-            category: 'data',
-            slug: 'data-stack/posthog-ai',
             seo: {
                 title: 'PostHog AI - PostHog data stack',
                 description:
@@ -2632,16 +2539,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'Data modeling',
+            ...getTool('data_modeling'),
             parentIcon: 'dataBlender',
             Icon: IconAsterisk,
-            description: 'Model data',
-            handle: 'data_modeling',
             color: 'red',
             colorSecondary: 'red',
-            category: 'data',
-            slug: 'data-stack/data-modeling',
-            status: 'beta',
             seo: {
                 title: 'Transform, enrich, and model your data',
                 description: 'Get your data in the exact shape you need it.',
@@ -2670,15 +2572,12 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     },
         // },
         {
+            ...getTool('sql_editor'),
             parentIcon: 'SQL',
             Icon: IconAsterisk,
-            name: 'SQL editor',
-            handle: 'sql_editor',
             type: 'sql_editor',
-            slug: 'data-stack/sql-editor',
             color: 'red',
             colorSecondary: 'lilac',
-            category: 'data',
             seo: {
                 title: 'Explore your data with SQL',
                 description: 'Unify and query data from any source and analyze it alongside your product data.',
@@ -2720,16 +2619,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
         },
         {
-            name: 'Reverse ETL & export',
+            ...getTool('data_out'),
             parentIcon: 'dataOut',
             Icon: IconArrowUpRight,
-            description: 'Send data out of PostHog to other tools',
-            handle: 'data_out',
             color: 'orange',
             colorSecondary: 'orange',
-            category: 'data',
-            slug: 'data-stack/reverse-etl-export',
-            status: 'alpha',
             seo: {
                 title: 'Export and stream your data to external systems',
                 description: 'Activate your product data across your entire tech stack.',

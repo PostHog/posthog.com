@@ -1,6 +1,6 @@
 # Code Components
 
-Animation primitives and content components for the `/code` (PostHog Code) marketing page.
+Animation primitives and content components for the `/code` (PostHog Desktop) marketing page.
 
 ## Animation primitives
 
@@ -23,6 +23,11 @@ Elastic scale + rotation animation for inline icons. Pops in when scrolled into 
 Hook that returns `true` when the user has `prefers-reduced-motion: reduce` enabled. All animation components use this to skip animations gracefully.
 
 ## Content components
+
+### `DownloadContent`
+Download UI for PostHog Desktop, shared by the `/code#download` hero swap and the standalone `/code/download` page. Detects the visitor's OS and architecture client-side (via `userAgentData` where available, with UA sniffing as the Linux fallback) and links every button to `https://code.posthog.com/download/*`, a Cloudflare Worker that redirects to the matching asset on the latest published release. Arch-specific paths are used because browsers don't send `Sec-CH-UA-Arch` on cross-origin navigation, so the worker can't distinguish Intel from Apple Silicon on its own. GitHub is only linked for release notes.
+
+**Props:** `className`
 
 ### `SignalsCallout`
 Grid display of signal types (In-app activity, Logs, Errors, etc.) with icons. Responsive: 3-col at `@2xl`, 2-col below.

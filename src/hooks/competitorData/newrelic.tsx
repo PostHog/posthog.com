@@ -43,7 +43,31 @@ export const newrelic = {
             available: true,
             core_logging_and_ingestion: {
                 features: {
-                    native_open_telemetry_ingest: 'Limited, proprietary',
+                    centralized_log_ingestion_search: true,
+                    live_tail_real_time_logs: true,
+                    native_open_telemetry_ingest: true,
+                    vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: true,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'NRQL',
+                },
+            },
+            investigation_workflow: {
+                features: {
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
+                    ai_assisted_log_summaries: true,
+                },
+            },
+            debugging_integrations: {
+                features: {
+                    built_in_error_tracking: true,
+                    built_in_session_replay: true,
+                    product_analytics_context: false,
                 },
             },
             observability: {
@@ -54,10 +78,21 @@ export const newrelic = {
                     infra_monitoring: true,
                 },
             },
+            security_and_compliance: {
+                features: {
+                    siem: 'Limited',
+                    enterprise_scale_compliance: 'Limited',
+                },
+            },
+            pricing: {
+                features: {
+                    ingest_only_pricing: false,
+                    no_query_compute_fees: false,
+                    predictable_at_scale: 'Usage',
+                },
+            },
         },
-        llm_analytics: {
-            // They have some open source tools, but it's not native:
-            // https://newrelic.com/instant-observability/openllm
+        ai_observability: {
             available: false,
         },
         surveys: {
@@ -68,6 +103,7 @@ export const newrelic = {
         deployment: {
             eu_hosting: true,
             managed_reverse_proxy: false,
+            managed_cloud: true,
             open_source: false,
             self_host: false,
         },
