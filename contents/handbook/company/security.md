@@ -26,6 +26,10 @@ It is recommended to have most passkeys saved in 1Password itself, which will al
 
 We previously required all employees to purchase and configure two Yubikeys. These have been replaced with passkeys, and Yubikeys are no longer required nor recommended.
 
+## Signed commits
+
+Every commit pushed to a PostHog repository must be cryptographically signed. An org-wide GitHub ruleset enforces this on all branches, so we can verify who authored a commit instead of trusting the `Author` field, which anyone can set. Engineers should [set up commit signing](/handbook/engineering/security#commit-signing) in their first week.
+
 ## Mobile device management (MDM)
 
 We use [Fleet](https://fleetdm.com/) to manage all of our laptops. It applies targeted policies that raise the security baseline of every device, including:
