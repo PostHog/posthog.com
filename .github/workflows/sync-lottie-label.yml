@@ -1,0 +1,96 @@
+name: Sync Lottie label from board
+
+# Syncs the "Lottie" label on issues in PostHog/posthog.com with the
+# "Art & Brand Planning" board (https://github.com/orgs/PostHog/projects/65).
+#
+# Every 30 minutes: any issue whose board Status is "Assigned: Lottie" gets
+# the "Lottie" label; if the status changes to something else, the label is removed.
+#
+# SETUP:
+# 1. In PostHog/posthog.com → Issues → Labels → create a label called "Lottie".
+# 2. Nothing else — this uses the existing posthog-art-board-bot GitHub App, whose
+#    credentials are already stored as repo secrets (see the sibling art-board-* workflows).
+#    The app installation needs:
+#      - Repository permissions: Issues → Read and write (PostHog/posthog.com)
+#      - Organization permissions: Projects → Read-only
+# 3. Test it: Actions tab → "Sync Lottie label from board" → Run workflow.
+
+permissions:
+    contents: read
+
+on:
+    schedule:
+        - cron: '*/30 * * * *'
+    workflow_dispatch:
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get app token
+              id: app-token
+              uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+              with:
+                  app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
+                  private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+            - name: Sync label with board status
+              uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+              with:
+                  github-token: ${{ steps.app-token.outputs.token }}
+                  script: |
+                      const org = "PostHog";
+                      const projectNumber = 65;
+                      const statusValue = "Assigned: Lottie";
+                      const label = "Lottie";
+
+                      let cursor = null;
+                      const changes = [];
+                      while (true) {
+                        const res = await github.graphql(`
+                          query($org: String!, $num: Int!, $cursor: String) {
+                            organization(login: $org) {
+                              projectV2(number: $num) {
+                                items(first: 100, after: $cursor) {
+                                  pageInfo { hasNextPage endCursor }
+                                  nodes {
+                                    fieldValueByName(name: "Status") {
+                                      ... on ProjectV2ItemFieldSingleSelectValue { name }
+                                    }
+                                    content {
+                                      ... on Issue {
+                                        number
+                                        state
+                                        repository { name owner { login } }
+                                        labels(first: 50) { nodes { name } }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }`, { org, num: projectNumber, cursor });
+
+                        const items = res.organization.projectV2.items;
+                        for (const n of items.nodes) {
+                          const status = n.fieldValueByName && n.fieldValueByName.name;
+                          const c = n.content;
+                          if (!c || !c.number) continue;
+                          const hasLabel = c.labels.nodes.some(l => l.name === label);
+                          if (status === statusValue && !hasLabel) {
+                            changes.push({ action: "add", owner: c.repository.owner.login, repo: c.repository.name, number: c.number });
+                          } else if (status !== statusValue && hasLabel) {
+                            changes.push({ action: "remove", owner: c.repository.owner.login, repo: c.repository.name, number: c.number });
+                          }
+                        }
+                        if (!items.pageInfo.hasNextPage) break;
+                        cursor = items.pageInfo.endCursor;
+                      }
+
+                      for (const t of changes) {
+                        if (t.action === "add") {
+                          await github.rest.issues.addLabels({ owner: t.owner, repo: t.repo, issue_number: t.number, labels: [label] });
+                        } else {
+                          await github.rest.issues.removeLabel({ owner: t.owner, repo: t.repo, issue_number: t.number, name: label }).catch(() => {});
+                        }
+                      }
+                      core.info(`Applied ${changes.length} label change(s).`);
