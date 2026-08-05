@@ -31,24 +31,24 @@ Starting 3 months out isn't only about giving the customer time to decide. It's 
 
 Work back from the end of the customer's current billing period, not from the anniversary date:
 
-- **3 months out** — start the renewal conversation (see [When to start](#when-to-start) above).
-- **2 months out** — have the renewal call and share the quote. If the customer isn't engaging by now, start the [escalation steps](#what-to-do-when-things-arent-moving-forward).
-- **As soon as the amount is agreed** — order form out for signature in PandaDoc. You can work out from the customer's remaining balance and burn rate which billing period the new credits need to cover. If their credits will run out before the term ends, this is an early renewal and the paper should go out well ahead of the anniversary date.
-- **About a week before the period closes** — checkpoint. If it isn't signed by now, stop waiting and pick one of the options below.
-- **Before the current billing period ends** — signed. This is the hard deadline: the contract has to be signed before the `period_end` date of the invoice the new credits need to cover.
+- **3 months out:** start the renewal conversation (see [When to start](#when-to-start) above).
+- **2 months out:** have the renewal call and share the quote. If the customer isn't engaging by now, start the [escalation steps](#what-to-do-when-things-arent-moving-forward).
+- **As soon as the amount is agreed:** order form out for signature in PandaDoc. There's no lead time that counts as "enough," so don't hold it for one. You can work out from the customer's remaining balance and burn rate which billing period the new credits need to cover. If their credits will run out before the term ends, this is an early renewal and the paper should go out well ahead of the anniversary date.
+- **About a week before the period closes:** checkpoint. If it isn't signed by now, stop waiting and pick one of the options below.
+- **Before the current billing period ends:** signed. This is the hard deadline: the contract has to be signed before the `period_end` date of the invoice the new credits need to cover.
 
-Sending the paper early lowers the odds of a problem but can't remove it. Customers routinely route our order form through their own procurement or e-signature system, and once they do you no longer control when it gets signed — a form that went out three weeks early can still land after the period closes because the budget holder was on leave. Ask early whether the signer will be available and whether the form has to go through an internal system, and treat either answer as a reason to plan for the checkpoint rather than hope you won't need it.
+Sending the paper early lowers the odds of a problem but can't remove it. Customers routinely route our order form through their own procurement or e-signature system, and once they do you no longer control when it gets signed. A form that went out three weeks early can still land after the period closes because the budget holder was on leave. Ask early whether the signer will be available and whether the form has to go through an internal system, and treat either answer as a reason to plan for the checkpoint rather than hope you won't need it.
 
 ### At the checkpoint, when signature is going to slip
 
 Two options, in order of preference:
 
-1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for a few days so the credits land first. Flag it as early as you can — [they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued).
+1. **Ask billing to pause collection.** If the invoice hasn't been issued yet, billing can hold it for a few days so the credits land first. Flag it as early as you can, because [they can't pause an invoice that has already been issued](/handbook/growth/sales/contracts#flag-insufficient-credits-before-the-invoice-is-issued).
 2. **Re-paper with the next period's start date.** If the period is going to close before signature, don't hold the original start date. Move the `Contract.EffectiveDate` to the beginning of the next billing period and tell the customer the new credits apply from that date. The period we already invoiced stays payable separately.
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting.
 
-If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit) — credits only apply to upcoming invoices.
+If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit). Credits only apply to upcoming invoices.
 
 ## Unique renewal cases
 
