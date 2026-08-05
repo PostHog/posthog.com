@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Intent, setup, and engagement are customer level concepts that Sales, Marketing, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), raise it with RevOps before you edit a dashboard tile so we can all work off of same source of truth.
+Intent, setup, and engagement are customer level concepts that Sales, Marketing & Website, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), raise it with RevOps before you edit a dashboard tile so we can all work off of same source of truth.
 
 [Growth's self-serve dashboard](https://us.posthog.com/project/2/dashboard/1849743) tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup"). 
 
