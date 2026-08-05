@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
-import { useLocation } from '@reach/router'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
-import { Calculator } from 'components/Pricing/Test/Calculator'
-import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
 import { FAQs } from 'components/Pricing/FAQs'
 import { SectionLayout, SectionHeader } from 'components/Pricing/Test/Sections'
-import { scrollToElement } from 'components/ScrollToElement'
 import Hero from 'components/Pricing/Redesign/Hero'
 import FreeTierTicker from 'components/Pricing/Redesign/FreeTierTicker'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
+import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
 import Philosophy from './philosophy'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 
@@ -21,18 +18,10 @@ import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
  * See components/Pricing/Redesign/README.md for what was cut from /pricing and
  * why. The short version: two audiences (people trying PostHog out, and people
  * sizing it up for scale), and one page that answers each in order — free tier
- * limits first, then what a card changes, then a calculator and a human.
+ * limits first, then what a card changes, then escape hatches (with a quiet
+ * calculator footnote) and a human.
  */
 export default function PricingRedesign(): JSX.Element {
-    const { search } = useLocation()
-
-    useEffect(() => {
-        const params = new URLSearchParams(search)
-        if (params.get('calculator')) {
-            scrollToElement('calculator')
-        }
-    }, [search])
-
     return (
         <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
             <SEO
@@ -66,10 +55,6 @@ export default function PricingRedesign(): JSX.Element {
                 <CustomerLogos />
             </SectionLayout>
 
-            <SectionLayout id="calculator" className="not-prose bg-primary rounded-lg p-4">
-                <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
-            </SectionLayout>
-
             <Philosophy />
 
             <SectionLayout id="more-options" className="not-prose">
@@ -77,6 +62,7 @@ export default function PricingRedesign(): JSX.Element {
                     <h2 className="text-2xl mb-0">Startups, bigger teams, and discounts</h2>
                 </SectionHeader>
                 <MoreOptions />
+                <CalculatorReveal />
             </SectionLayout>
 
             <SectionLayout id="faq" className="mb-12">

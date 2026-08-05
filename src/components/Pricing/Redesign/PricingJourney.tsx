@@ -1,6 +1,5 @@
 import React from 'react'
 import { IconArrowRight, IconCheck, IconCreditCard } from '@posthog/icons'
-import ScrollToElement from 'components/ScrollToElement'
 import SignupBlock from './SignupBlock'
 
 /**
@@ -30,7 +29,7 @@ const freeIncludes = [
 ]
 
 const paidAdds = [
-    { name: 'Keep going past the free tier', detail: 'at usage-based rates', calculatorLink: true },
+    { name: 'Keep going past the free tier', detail: 'at usage-based rates' },
     { name: '6 projects', detail: 'up from 1' },
     { name: '7-year data retention', detail: 'up from 1 year' },
     { name: 'Email support', detail: 'or Slack over $2k/mo' },
@@ -108,24 +107,11 @@ export default function PricingJourney(): JSX.Element {
                     </p>
 
                     <ul className="list-none p-0 m-0 space-y-2 mb-4">
-                        {paidAdds.map(({ name, detail, calculatorLink }) => (
+                        {paidAdds.map(({ name, detail }) => (
                             <li key={name} className="flex items-start gap-2 text-[15px]">
                                 <IconArrowRight className="text-green size-5 shrink-0" />
                                 <span>
-                                    <strong>{name}</strong>{' '}
-                                    {calculatorLink ? (
-                                        <ScrollToElement
-                                            targetId="calculator"
-                                            offset={-20}
-                                            as="button"
-                                            type="button"
-                                            className="text-secondary text-sm underline cursor-pointer"
-                                        >
-                                            {detail}
-                                        </ScrollToElement>
-                                    ) : (
-                                        <span className="text-secondary text-sm">– {detail}</span>
-                                    )}
+                                    <strong>{name}</strong> <span className="text-secondary text-sm">– {detail}</span>
                                 </span>
                             </li>
                         ))}

@@ -1,13 +1,27 @@
 import React from 'react'
 import { CTA as PlanCTA } from 'components/Pricing/Plans'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import HeroDesk from '../../../images/pricing-hero-desk.png'
 import GrassAngled from '../../../images/grass-tuft-angled.png'
 import GrassFolded from '../../../images/grass-tuft-folded.png'
 import GrassFan from '../../../images/grass-tuft-fan.png'
 
 /**
- * Origami grass tufts dressing the hero panel, in three depth bands: behind the desk art, on the
+ * The "PostHog 3000" box, cut out of its white background so it sits on the dotted panel.
+ *
+ * The transformation chain does the work, in order: `e_background_removal` knocks out the white (a
+ * plain `e_make_transparent` can't — the box front is a near-white grey, so any tolerance high enough
+ * to clear the background also eats the box), `e_trim` crops the empty margins so the art fills its
+ * column, and `f_auto` ships a ~20KB AVIF instead of a 145KB PNG, alpha intact.
+ *
+ * Deliberately a URL string and a plain `<img>` rather than `CloudinaryImage`: that component treats
+ * everything after `/upload/` as the public ID, so it re-emits this as `/upload/v1/e_background_removal/…`
+ * and Cloudinary 404s on the version segment sitting in front of the transformations.
+ */
+const HERO_ART =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/e_background_removal/e_trim/w_720/f_auto,q_auto:good/product_os_df65018ac1.png'
+
+/**
+ * Origami grass tufts dressing the hero panel, in three depth bands: behind the box art, on the
  * panel floor, and one in front. Depth is sold with more than size — tufts further back are smaller,
  * sit *higher* (nearer the horizon), and are more faded.
  *
@@ -23,13 +37,13 @@ const Tuft = ({ src, flip, className }: { src: string; flip?: boolean; className
 )
 
 /**
- * Foreground tufts. Anchored to the art column rather than the panel, so they stay pinned to the desk
+ * Foreground tufts. Anchored to the art column rather than the panel, so they stay pinned to the box
  * at any width instead of drifting to the panel's corners, and layered above it so they paint over the
  * art — the band that closes the scene. Both hang past the art's bottom edge, and the panel's
  * `overflow-hidden` crops anything that runs past the panel.
  *
  * Neither is flipped: these are the large, fully opaque pieces, so their baked-in shadows have to fall
- * the same way as the desk's.
+ * the same way as the box art's.
  */
 const FRONT_TUFTS = [
     { src: GrassFan, className: '-left-6 @3xl:-left-9 -bottom-5 @3xl:-bottom-6 w-24 @3xl:w-32 -rotate-3' },
@@ -40,19 +54,19 @@ const FRONT_TUFTS = [
 ]
 
 /**
- * Tufts anchored to the art column instead of the panel, so they stay with the desk whatever the
+ * Tufts anchored to the art column instead of the panel, so they stay with the box whatever the
  * layout does, and paint *behind* it — the cue that makes the art look planted in the scene rather
  * than parked on a lawn.
  *
- * `bottom` is the fiddly part. Anchored near the art's baseline these vanish: the keyboard and mug are
+ * `bottom` is the fiddly part. Anchored near the art's baseline these vanish: the box and its CD are
  * opaque, so a short tuft down there is completely covered and you just get a row of grass along the
- * floor instead. Each one has to start high enough up the column that its tips clear the desk line
- * into the transparent background, and sit in a horizontal gap between the objects.
+ * floor instead. Each one has to start high enough up the column that its tips clear the artwork into
+ * the transparent background.
  */
 const BEHIND_TUFTS = [
-    // Only two, and both set outside the art's edges — pushed in any closer and they land on opaque
-    // keyboard or monitor and never show at all. The slight negative inset keeps enough overlap to
-    // still read as behind the desk.
+    // Only two, and both set outside the art's edges — pushed in any closer and they land on the
+    // opaque box front and never show at all. The slight negative inset keeps enough overlap to
+    // still read as behind the box.
     { src: GrassFolded, flip: true, className: '-left-[7%] bottom-[19%] w-10 opacity-60 rotate-2' },
     { src: GrassAngled, flip: true, className: '-right-[8%] bottom-[23%] w-9 opacity-50 rotate-1' },
 ]
@@ -112,15 +126,17 @@ export default function Hero(): JSX.Element {
                         </div>
                     </div>
 
-                    {/* TEMPORARY placeholder art – see README "Open items" before shipping.
-                        Plain <img> with a direct import: this repo has gatsby-plugin-image but
-                        NOT gatsby-plugin-sharp, so StaticImage/GatsbyImage will fail the build. */}
+                    {/* Plain <img>: this repo has gatsby-plugin-image but NOT gatsby-plugin-sharp,
+                        so StaticImage/GatsbyImage will fail the build. Intrinsic dimensions are set
+                        so the column reserves the right height before the remote art loads. */}
                     <div className="shrink-0 self-center w-56 @2xl:w-64 @4xl:w-80 relative">
                         <TuftLayer tufts={BEHIND_TUFTS} className="z-0" />
 
                         <img
-                            src={HeroDesk}
-                            alt="PostHog running on a beige desktop computer, next to a hedgehog and a PostHog mug"
+                            src={HERO_ART}
+                            width={720}
+                            height={688}
+                            alt="A boxed copy of PostHog 3000, 1990s shrink-wrapped software style, with its CD-ROM leaning against it"
                             className="w-full h-auto relative z-10"
                         />
 

@@ -21,9 +21,22 @@ interface CalculatorProps {
     SidebarList: React.FC<SidebarListProps>
     SidebarListItem: React.FC<SidebarListItemProps>
     Discounts: React.FC<DiscountsProps>
+    /**
+     * Drops the "Pricing calculator" heading, for callers that already introduce the
+     * calculator themselves (see Redesign/CalculatorReveal).
+     */
+    hideHeader?: boolean
+    /** Anchor id. Pass `''` when an outer element already owns `#calculator`. */
+    id?: string
 }
 
-export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: CalculatorProps): JSX.Element => {
+export const Calculator = ({
+    SidebarList,
+    SidebarListItem,
+    Discounts,
+    hideHeader = false,
+    id = 'calculator',
+}: CalculatorProps): JSX.Element => {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -121,10 +134,12 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
     `)
 
     return (
-        <SectionLayout id="calculator" className="not-prose mb-12">
-            <SectionHeader>
-                <h2>Pricing calculator</h2>
-            </SectionHeader>
+        <SectionLayout id={id} className="not-prose mb-12">
+            {!hideHeader && (
+                <SectionHeader>
+                    <h2>Pricing calculator</h2>
+                </SectionHeader>
+            )}
             <div className="flex flex-col @6xl:flex-row @6xl:gap-8 items-start">
                 <Tabbed />
 
