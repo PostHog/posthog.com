@@ -1,13 +1,6 @@
 import React from 'react'
-import Layout from 'components/Layout'
-import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
-import Product from 'components/Explorer/Product'
 
 export default function DictatorOrTechBro(): JSX.Element {
     return (
@@ -25,6 +18,8 @@ export default function DictatorOrTechBro(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
+                showAddressBar={false}
+                headerBarOptions={[]}
                 fullScreen
             >
                 <iframe src="https://dictatorortechbro.com" className="w-full h-full border-0" />

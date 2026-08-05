@@ -8,9 +8,20 @@ showTitle: true
 
 Sharing and receiving feedback openly is _really_ important to us at PostHog. Part of creating a highly autonomous culture where people feel empowered is maintaining the most transparent and open flow of information that we can. 
 
-This includes giving feedback [to each other](/handbook/values#youre-the-driver), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
+This includes giving feedback [to each other](/handbook/values#youre-the-driver), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#we-give-direct-feedback-early-and-often).
 
 'Open and honest' doesn't mean 'being an asshole' – we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
+
+### Keeper tests are not a substitute for direct feedback
+
+[Keeper tests](/handbook/company/management#the-keeper-test) are not designed to replace direct feedback, and the responses are not made visible to the person being assessed in the ops platform. We've always wanted people to give direct feedback to each other, across teams and in all directions – keeper tests do not replace the art and process of giving continual, direct, and 360 feedback.
+
+The keeper test forms exist for a few specific reasons:
+
+- To surface feedback to the relevant Blitzscale team member so they can help where necessary.
+- To keep a record of feedback given, in case the person moves team or the team lead changes.
+
+We also want people to fill these forms out totally unfiltered, rather than through the lens of "will this person see this feedback". If you have feedback for someone, give it to them directly – don't rely on the keeper test to do it for you.
 
 ## Full team feedback sessions
 
@@ -85,7 +96,7 @@ The questions are based on the ones used by [Culture Amp](https://www.cultureamp
 
 Only the People & Ops and Exec teams have access to the full list of responses, which are not anonymous. 
 
-We follow a template to report a summary of the results in an Issue. [You can view the latest survey results here](https://github.com/PostHog/company-internal/issues/1390) - just copy the formatting ever.  
+We follow a template to report a summary of the results in an Issue. <PrivateLink url="https://github.com/PostHog/company-internal/issues/2965">You can view the latest survey results here</PrivateLink> - just copy the formatting every time.  
 
 ### Current list of questions
 

@@ -8,7 +8,7 @@ availability:
     enterprise: full
 ---
 
-> Custom surveys is currently supported only with the [JavaScript Web SDK](/docs/libraries/js).
+> Custom surveys are currently supported only with the [JavaScript Web SDK](/docs/libraries/js). You aren't limited to the surveys PostHog renders for you, though. Because a survey is just a set of questions you fetch and responses you capture, you can [fetch your surveys](#fetching-surveys-manually) and [capture responses](#capture-survey-responses) yourself and show them with your own UI.
 
 At its most basic level, a survey is a collection of response events. If you wanted to, you could capture events from anywhere, like in this example of a hardcoded Next.js feedback survey:
 
@@ -30,7 +30,7 @@ export default function Feedback() {
           question: "Do you like PostHog?",
         }
       ],
-      $survey_response_a3071551-d599-4eeb-9ffe-69e93dc647b6: "Yes!"
+      $survey_response: "Yes!"
     })
   }
 
@@ -121,9 +121,11 @@ function App() {
 export default App;
 ```
 
+> **Note:** With `ignoreConditions: false`, this checks the survey's display conditions, which can depend on feature flags. See [waiting for feature flags](#wait-for-feature-flags-before-checking-which-surveys-match) if your survey is targeted with a flag.
+
 #### Pre-filling survey responses
 
-You can pre-fill survey answers programmatically by passing prefill data to `displaySurvey` or `renderSurvey`. This works with single choice, multiple choice, and rating questions.
+You can pre-fill survey answers programmatically by passing `initialResponses` to `displaySurvey`. This works with single choice, multiple choice, and rating questions, and is only supported for **popover** surveys.
 
 ```js
 import React from 'react';
@@ -138,10 +140,10 @@ function App() {
   const handleShowPrefilled = () => {
     posthog.displaySurvey(coolSurveyID, {
       displayType: DisplaySurveyType.Popover,
-      prefillData: {
-        0: 'Very Satisfied',      // Single choice (by value)
-        1: 9,                      // Rating
-        2: ['Analytics', 'Flags']  // Multiple choice (array of values)
+      initialResponses: {
+        0: 2,          // Single choice: select the 3rd choice (0-based index)
+        1: 9,          // Rating: pre-fill with a rating of 9
+        2: [0, 2]      // Multiple choice: select the 1st and 3rd choices (0-based indices)
       }
     });
   };
@@ -161,20 +163,20 @@ function App() {
 export default App;
 ```
 
-**Prefill data format:**
+**`initialResponses` format:**
 
 - Keys are question indices (0-based: `0` for first question, `1` for second, etc.)
-- Values depend on question type:
-  - **Single choice**: String matching the exact choice text (e.g., `'Very Satisfied'`)
-  - **Multiple choice**: Array of strings matching choice texts (e.g., `['Analytics', 'Flags']`)
-  - **Rating**: Number within the rating scale (e.g., `9` for a 0-10 scale)
-  - **Open text**: String value for the text field
+- Values use the same format as URL prefill parameters:
+  - **Single choice**: Choice index as a number (e.g., `2` for the 3rd choice)
+  - **Multiple choice**: Array of choice indices (e.g., `[0, 2]` for the 1st and 3rd choices)
+  - **Rating**: Rating value as a number (e.g., `9` for a 0-10 scale)
 
 **Important notes:**
-- Pre-filled values must match exactly with the choice text defined in your survey
-- Invalid values are silently ignored
-- Users can modify pre-filled answers before submitting
-- Question indices are 0-based (first question is `0`, second is `1`, etc.)
+- Only supported for popover surveys — inline surveys will log a warning and ignore the prefill
+- Choice and question indices are 0-based
+- Invalid indices are silently ignored
+- Open text and link questions do not support prefill
+- Pre-filled questions with "Automatically submit on selection" enabled will be skipped, advancing the user to the first non-prefilled question
 
 #### Inline surveys
 
@@ -278,11 +280,11 @@ You can then style the survey by targeting the classes like `survey-box`, `surve
 
 ## Fetching surveys manually
 
-For more control over your surveys, you can use API surveys. When implementing an API survey, there are two options for fetching surveys from PostHog:
+For more control over your surveys, you can use API surveys. Fetching a survey and capturing its responses yourself is all you need to show it with your own UI, without PostHog's built-in popover. This approach is sometimes called a headless survey. There are two options for fetching surveys from PostHog:
 
 1. To get all surveys, call `getSurveys(callback, forceReload)`. This means you still need to handle display conditions yourself.
 
-2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This always returns an active survey if the user meets the display conditions, as long as the user (determined by their distinct ID) has not already dismissed or responded the survey.
+2. To get surveys enabled for the current user, call `getActiveMatchingSurveys(callback, forceReload)`. This returns the active surveys the user matches the display conditions for, as long as the user (determined by their distinct ID) has not already dismissed or responded to the survey.
 
 Surveys are requested on first load and then cached by default by the JavaScript SDK. If you want to force an API call to get an updated list of surveys, pass `true` to the `forceReload` parameter. You only need to do this if you want changed surveys to appear mid-session for users.
 
@@ -315,6 +317,26 @@ Both methods return a callback with an array of surveys in this format:
 }]
 ```
 
+### Wait for feature flags before checking which surveys match
+
+Display conditions often depend on feature flags. Targeting a survey at a set of users creates a flag behind the scenes, and linking a survey to a flag uses one directly. Flags are fetched after the page loads, so they are not available immediately.
+
+`getActiveMatchingSurveys` reports what the SDK knows at the moment you call it, and it calls your callback once. If you call it before flag values arrive, you can get an empty list for a user who does match, and you won't be called again when the flags land.
+
+Call it inside `posthog.onFeatureFlags()` to avoid this. That callback runs as soon as flag values are available, and runs right away if they already are. It also returns a function you can call to unsubscribe.
+
+```js-web
+posthog.onFeatureFlags(() => {
+  posthog.getActiveMatchingSurveys((surveys) => {
+    // Flag values are available here, so display conditions are evaluated against them
+  });
+});
+```
+
+This applies to `displaySurvey` with `ignoreConditions: false` too, since it checks the same display conditions. If none of your surveys use flag targeting or a linked flag, you can call `getActiveMatchingSurveys` directly.
+
+### Example: a dynamic feedback form
+
 As an example, we can use `getActiveMatchingSurveys()` to make our Next.js feedback survey more dynamic:
 
 ```js-web
@@ -327,11 +349,14 @@ export default function Feedback() {
   const posthog = usePostHog()
 
   useEffect(() => {
-    posthog.getActiveMatchingSurveys((surveys) => {
-      if (surveys.length > 0) {
-        const survey = surveys[0];
-        setSurvey(survey)
-      }
+    // Wait for feature flags so surveys targeted with a flag are evaluated against real values
+    return posthog.onFeatureFlags(() => {
+      posthog.getActiveMatchingSurveys((surveys) => {
+        if (surveys.length > 0) {
+          const survey = surveys[0];
+          setSurvey(survey)
+        }
+      });
     });
   }, [posthog]);
 

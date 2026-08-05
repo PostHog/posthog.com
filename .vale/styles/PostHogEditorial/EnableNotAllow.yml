@@ -1,0 +1,11 @@
+extends: substitution
+message: "Use '%s' instead of '%s' when describing what PostHog does."
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: warning
+ignorecase: true
+swap:
+    allows you to: enables you to
+    allow you to: enable you to
+    allowing you to: enabling you to
+    allows users to: enables users to
+    allows teams to: enables teams to

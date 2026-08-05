@@ -10,14 +10,19 @@ const ChannelPlatforms = () => {
         },
         {
             label: 'Slack',
+            url: 'https://posthog.com/docs/workflows/configure-channels?tab=Slack',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/slack_EDCRACS_4_55ce672831.png',
-            badge: 'Coming soon',
         },
 
         {
             label: 'Twilio',
+            url: 'https://posthog.com/docs/workflows/configure-channels?tab=Twilio',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/twilio_860042a891.png',
-            badge: 'Coming soon',
+        },
+        {
+            label: 'Push',
+            url: 'https://posthog.com/docs/workflows/configure-channels?tab=Push',
+            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/push_8ac7759b08.svg',
         },
     ]
 

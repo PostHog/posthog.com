@@ -106,7 +106,6 @@ export default function Template({ data }) {
                 }}
                 title={title}
                 filePath={filePath}
-                homeURL="/templates"
                 leftSidebar={<TreeMenu items={templatesMenu} />}
                 hideRightSidebar
                 hideTitle
@@ -127,7 +126,7 @@ export default function Template({ data }) {
                             urls={{
                                 primary:
                                     templateType === 'survey'
-                                        ? `https://app.posthog.com/survey_templates`
+                                        ? `https://app.posthog.com/surveys/guided/new`
                                         : `https://app.posthog.com/dashboard?templateFilter=${title}#newDashboard`,
                                 secondary:
                                     templateType === 'survey'

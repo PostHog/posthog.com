@@ -29,12 +29,7 @@ interface PostHogOnPostHogSlideProps {
 const VideoPlayerWindow = ({ productData, startTime = 0 }: any) => {
     return (
         <div className="h-full w-full bg-black">
-            <WistiaCustomPlayer
-                theme="dark"
-                mediaId={productData.videos?.overview?.wistia}
-                autoPlay={true}
-                startTime={startTime}
-            />
+            <WistiaCustomPlayer mediaId={productData.videos?.overview?.wistia} autoPlay={true} startTime={startTime} />
         </div>
     )
 }
@@ -46,6 +41,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     const [isThumbnail, setIsThumbnail] = useState(false)
     const [currentTime, setCurrentTime] = useState(0)
     const mainPlayerRef = useRef<any>(null)
+    const rootRef = useRef<HTMLDivElement>(null)
     const [isPortraitMode, setIsPortraitMode] = useState(false)
 
     // Add context access
@@ -65,10 +61,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
 
             // For thumbnail mode, check container width
             if (isThumbnail) {
-                const containerWidth =
-                    typeof window !== 'undefined' && siteSettings.experience === 'boring'
-                        ? window.innerWidth
-                        : appWindow?.size?.width
+                const containerWidth = appWindow?.size?.width
 
                 // Below @2xl (672px) should show portrait thumbnails
                 setIsPortraitMode(containerWidth ? containerWidth < 672 : false)
@@ -94,8 +87,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     useEffect(() => {
         const checkThumbnailMode = () => {
             // Get the root element of this component using the ID we set
-            const rootElement = document.getElementById(`posthog-slide-${productData.videos?.overview?.wistia}`)
-
+            const rootElement = rootRef.current
             if (rootElement) {
                 const rect = rootElement.getBoundingClientRect()
 
@@ -240,7 +232,7 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
     }
 
     return (
-        <div className="h-full relative" id={`posthog-slide-${productData.videos?.overview?.wistia}`}>
+        <div className="h-full relative" ref={rootRef}>
             {/* Regular content */}
             <div className="h-full bg-gradient-to-b from-[#08080A] to-[#737385] text-white">
                 <div className="mb-8 pt-8 px-8">
@@ -259,7 +251,6 @@ export default function PostHogOnPostHogSlide({ productData }: PostHogOnPostHogS
                     {/* Video player on the left */}
                     <div className={`flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
-                            theme="dark"
                             mediaId={productData.videos?.overview?.wistia}
                             onMaximize={handleMaximize}
                             onPopOut={handlePopOut}

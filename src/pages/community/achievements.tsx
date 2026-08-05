@@ -22,7 +22,17 @@ const profileHasAchievement = (profile, achievement) => {
     return profile?.achievements?.some((profileAchievement) => profileAchievement.achievement?.id === achievement.id)
 }
 
-const AchievementRow = ({ achievement, badge, achieved }: { achievement: any; badge?: string; achieved?: boolean }) => {
+const AchievementRow = ({
+    achievement,
+    badge,
+    achieved,
+    showCheck = true,
+}: {
+    achievement: any
+    badge?: string
+    achieved?: boolean
+    showCheck?: boolean
+}) => {
     return (
         <div className="flex items-end justify-between w-full">
             <span className="flex space-x-1">
@@ -46,25 +56,43 @@ const AchievementRow = ({ achievement, badge, achieved }: { achievement: any; ba
                 </span>
             </span>
             <p className="text-sm text-secondary m-0 flex space-x-1 items-center">
-                {achieved && <IconCheck className="size-3 text-green" />}
-                <span className={achieved ? 'text-green font-semibold' : ''}>
-                    {achievement.points} point{achievement.points === 1 ? '' : 's'}
-                </span>
+                {achieved && showCheck && <IconCheck className="size-3 text-green" />}
+                {achievement.points && (
+                    <span className={achieved ? 'text-green font-semibold' : ''}>
+                        {achievement.points} point{achievement.points === 1 ? '' : 's'}
+                    </span>
+                )}
             </p>
         </div>
     )
 }
 
 const AchievementGroupRow = ({ achievementGroup, profile }) => {
+    const groupHasIcon = !!achievementGroup.icon?.data?.attributes?.url
+    const tiered = achievementGroup.tiered
+    const achievements = groupHasIcon ? achievementGroup.achievements.data : achievementGroup.achievements.data.slice(1)
+    const allAchieved = achievementGroup.achievements.data.every((a) => profileHasAchievement(profile, a))
     return (
         <div className="text-left w-full">
-            <AchievementRow
-                achievement={achievementGroup.data[0].attributes}
-                badge="Level 1"
-                achieved={profileHasAchievement(profile, achievementGroup.data[0])}
-            />
+            {groupHasIcon ? (
+                <AchievementRow
+                    achievement={{
+                        title: achievementGroup.Title,
+                        description: achievementGroup.description,
+                        icon: achievementGroup.icon,
+                    }}
+                    achieved={allAchieved}
+                    showCheck={false}
+                />
+            ) : (
+                <AchievementRow
+                    achievement={achievementGroup.achievements.data[0].attributes}
+                    badge={tiered ? 'Level 1' : undefined}
+                    achieved={profileHasAchievement(profile, achievementGroup.achievements.data[0])}
+                />
+            )}
             <ul className="m-0 p-0 list-none mt-2 ml-[16px]">
-                {achievementGroup.data.slice(1).map((achievement, index) => (
+                {achievements.map((achievement, index) => (
                     <li
                         key={achievement.id}
                         className="mt-2 border-l border-primary relative pl-[16px] before:content-[''] before:absolute before:left-[-1px] before:-top-4 before:w-[32px] before:border-l before:h-[calc(50%+1rem)] before:border-b before:border-primary before:rounded-bl-md last:border-l-0 last:before:left-0"
@@ -72,7 +100,7 @@ const AchievementGroupRow = ({ achievementGroup, profile }) => {
                         <div className="relative">
                             <AchievementRow
                                 achievement={achievement.attributes}
-                                badge={`Level ${index + 2}`}
+                                badge={tiered ? `Level ${groupHasIcon ? index + 1 : index + 2}` : undefined}
                                 achieved={profileHasAchievement(profile, achievement)}
                             />
                         </div>
@@ -108,6 +136,16 @@ const Points = () => {
             }
             allAchievementGroup {
                 nodes {
+                    Title
+                    description
+                    tiered
+                    icon {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
                     achievements {
                         data {
                             id
@@ -155,10 +193,7 @@ const Points = () => {
                                 key={achievement.id}
                             >
                                 {achievement.achievements ? (
-                                    <AchievementGroupRow
-                                        achievementGroup={achievement.achievements}
-                                        profile={profile}
-                                    />
+                                    <AchievementGroupRow achievementGroup={achievement} profile={profile} />
                                 ) : (
                                     <AchievementRow
                                         achievement={achievement}

@@ -12,15 +12,33 @@ Boolean and multivariate flags are helpful for dynamic values that differ from u
 
 Remote config flags enable you to configure a simple flag that always returns the same payload wherever it is called. Remote config flags can also be stored as encrypted values and decrypted on the server side when requested. Encryption/decryption is handled automatically.
 
-There are 3 steps to start using remote config flags:
+You can think of remote config flags as multivariate flags with a single variant which is served for all flag requests. By default, enabled remote config flags roll out to 100% of all users.
 
-## Step 1: Find your feature flags secure API key
+## Using remote config in client-side apps
+
+Non-encrypted remote config flags are served through the [`/flags` endpoint](/docs/api/flags) like any other feature flag, using your project API key (the one starting with `phc_`), which is safe to expose publicly. Read the payload with your SDK's flag payload function. For example, in [posthog-js](/docs/libraries/js):
+
+```js
+const config = posthog.getFeatureFlagPayload('landing-page-config')
+```
+
+This also works for CLIs, scripts, or anything else that can call `/flags` with your project API key.
+
+> **Note:** Flags with encrypted payloads are excluded from `/flags` entirely, so they can't be read client-side and require a server.
+
+## Using remote config on the server
+
+Server-side SDKs fetch remote config payloads using your feature flags secure API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and encrypted payloads – not for remote config in general. Unlike your project API key, it must never be exposed publicly.
+
+There are 3 steps to use remote config flags on the server:
+
+### Step 1: Find your feature flags secure API key
 
 import ObtainFeatureFlagsSecureAPIKey from "../integrate/_snippets/obtain-flags-secure-key.mdx"
 
 <ObtainFeatureFlagsSecureAPIKey />
 
-## Step 2: Initialize PostHog with your feature flags secure API key
+### Step 2: Initialize PostHog with your feature flags secure API key in options
 
 import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secure-key.mdx"
 
@@ -29,7 +47,7 @@ import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secu
 > **Note:** By default, initializing PostHog with your feature flags secure API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
 
 
-## Step 3: Use remote config flags
+### Step 3: Use remote config flags
 
 <MultiLanguage>
 
@@ -44,13 +62,13 @@ config = posthog.get_remote_config_payload('landing-page-config')
 ```
 
 ```go
-config, err := posthog.GetRemoteConfigPayload("landing-page-config")
+config, err := client.GetRemoteConfigPayload("landing-page-config")
 // config is a JSON encoded string. It will need to be parsed as a JSON object.
 ```
 
 ```ruby
 config = posthog.get_remote_config_payload('landing-page-config')
-# config is a JSON encoded string. It will need to be parsed as a JSON object.
+# config is returned as a parsed object.
 ```
 
 ```csharp
@@ -60,9 +78,11 @@ var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 
 </MultiLanguage>
 
-You can think of remote config flags as multivariate flags with a single variant which is served for all flag requests. By default, enabled remote config flags roll out to 100% of all users.
-
 > **Note**: Remote config flags are meant to always serve payloads and be called with the flag payload function in each SDK. If `getFeatureFlag` is called instead, the SDK simply returns `true`
+
+## Encrypted payloads
+
+Encrypted payloads are only available server-side, through the authenticated remote config API. Authenticate with a [personal API key](/docs/api/personal-api-keys) to receive the decrypted payload – the feature flags secure API key returns encrypted payloads redacted.
 
 ## Related
 

@@ -1,0 +1,160 @@
+---
+title: Digests and alerts
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+[Observations](/docs/replay-vision/observations) tell you what a scanner found. **Digests and alerts** push those findings to you on a schedule, so you don't have to keep opening the scanner to check. Both are configured on a scanner's **Digests and alerts** tab, and PostHog collectively calls them the scanner's *actions*.
+
+- A **digest** runs on a fixed schedule (say, every weekday at 8am) and produces an AI-written summary of the observations from that period.
+- An **alert** watches the scanner continuously and only notifies you when a condition you set is met – for example, when a monitor flags more than 20 sessions in a day.
+
+Every run of either shows up on the scanner page and in the action's run history whether or not you've wired up a delivery destination, so a broken Slack channel or unreachable webhook never hides the result.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_actions_list_a243b1f111.png"
+  alt="The Digests and alerts tab on a scanner, listing an action with its schedule, delivery, and enabled status"
+  classes="rounded"
+/>
+
+## Digests
+
+A digest answers "what did this scanner see recently?" without you watching a single recording. On each scheduled run, PostHog gathers the scanner's observations from the period, hands them to a Google Gemini model, and asks it to write a narrative summary with citations back to the individual sessions.
+
+### Creating a digest
+
+On a scanner's **Digests and alerts** tab, click **New digest** and fill in:
+
+- **Name** – how the digest appears in the list and in delivered reports.
+- **Schedule** – the days it runs (every day, weekdays, or a custom set), the time of day, and the timezone. Each run summarizes up to 100 observations from the period; busier periods are sampled down to that limit.
+- **What to summarize** – **All observations**, or a narrower slice scoped to the [scanner type](/docs/replay-vision/scanner-types). A monitor can summarize only certain verdicts, a scorer only a score range, and a classifier only certain tags. Summarizers always summarize all observations.
+- **Additional guidance** (optional) – a short prompt that steers the summary, e.g. "focus on bugs and friction users hit" versus "describe general user behavior and flows." Leave it blank and the model summarizes freely.
+- **Deliver to Slack** (optional) – pick a connected Slack channel to post the report to. You can also deliver to a [webhook](#webhooks) instead of, or alongside, Slack.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_new_digest_fab9d81890.png"
+  alt="The new digest form, showing name, schedule, what to summarize, additional guidance, and Slack delivery"
+  classes="rounded"
+/>
+
+### The digest report
+
+Each run produces a Markdown report: a headline takeaway, then themed sections grouping what the scanner saw. Numbered citations like `[3]` link straight to the observation – and the session – that backs each claim, so you can jump from a pattern to the recording behind it.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_digest_run_d0f61df356.png"
+  alt="A digest run summary with a headline takeaway, themed sections, and numbered citations linking to individual observations"
+  classes="rounded"
+/>
+
+Open the digest itself to see its run history – how many observations each run covered, when it last ran, and when it runs next. **Run now** triggers an off-schedule run against the current period, which is handy while you're tuning the guidance.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_digest_detail_2c66a7481d.png"
+  alt="A digest detail page showing its guidance, total runs, last run, next run, and a table of past runs"
+  classes="rounded"
+/>
+
+Each scheduled run spends [PostHog AI credits](/docs/replay-vision/quota-and-limits). Runs are skipped while you're over your AI-credit budget.
+
+## Alerts
+
+Where a digest tells you what happened on a cadence you set, an alert stays quiet until something you care about happens. You define a condition against the scanner's output, and PostHog notifies you only when it's met.
+
+### Creating an alert
+
+On a scanner's **Digests and alerts** tab, click **New alert** and fill in:
+
+- **Name** – how the alert appears in the list and in notifications.
+- **Condition** – which observations count as a match. This mirrors the [scanner type](/docs/replay-vision/scanner-types):
+  - **Monitor** – observations with a given verdict (`Yes`, `No`, or `Inconclusive`).
+  - **Classifier** – observations tagged with a specific tag.
+  - **Scorer** – observations scored within a range you set.
+  - **Summarizer** – summarizers don't have a categorical output, so they aren't a good fit for alerts. Use a digest instead.
+- **When to notify** – either **on every match** (checked every few minutes; each notification covers the new matches since the last check) or **on a threshold** (checked about hourly over a rolling window). A threshold fires when the metric – the number of matches, or for a scorer the average score – reaches your limit over the window, and you're notified again only after it clears first, so a persistent problem doesn't spam you.
+- **Deliver to Slack** (optional) – same as digests: a connected Slack channel, a [webhook](#webhooks), or both.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/replay_vision_new_alert_69735a72f2.png"
+  alt="The new alert form, showing a scorer condition, the threshold notify mode with a rolling window, and Slack delivery"
+  classes="rounded"
+/>
+
+### Fired and recovered
+
+A threshold alert has two states. When the condition starts being met it **fires**; when a later check finds the condition no longer met it **recovers**. Both are separate notifications, so you can wire "dead-end rate is spiking" and "dead-end rate is back to normal" into the same channel. (A [webhook](#webhooks) receives these as `replay_vision.alert_fired` and `replay_vision.alert_recovered`.) An "on every match" alert has no recovered state – it just sends the new matches each check.
+
+## Delivery
+
+Both digests and alerts can post to Slack, to a webhook, or to both at once. Delivery is optional: leave it unset and the report still lands on the scanner page and in the action's run history, so nothing is lost if a channel is misconfigured or an endpoint is down.
+
+### Webhooks
+
+Instead of, or alongside, Slack, you can have a digest or alert deliver to a webhook. When it fires, PostHog sends an HTTP `POST` with a JSON body to the URL you set on the action.
+
+To set one up:
+
+1. Open a scanner and create or edit a digest or an alert.
+2. Under **Delivery**, choose **Webhook**.
+3. Paste the URL of the endpoint that should receive the payload.
+4. Save.
+
+#### Request
+
+- **Method:** `POST`
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 1` – the payload version. New fields may be added to the body without changing this, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+#### Payload
+
+The body is a JSON envelope. `type` tells you what happened; `data` carries the report and links.
+
+```json
+{
+  "id": "0192f3a4-...",
+  "type": "replay_vision.digest",
+  "timestamp": "2026-07-27T12:00:00+00:00",
+  "data": {
+    "vision_action_id": "0192f3a4-...",
+    "run_id": "0192f3a4-...",
+    "scanner_id": "0192f3a4-...",
+    "action_name": "Daily checkout digest",
+    "scanner_name": "Checkout funnel scanner",
+    "observation_count": 12,
+    "report": "**Checkout digest**\n\n12 sessions showed ...",
+    "run_url": "https://us.posthog.com/project/1/replay-vision/actions/.../runs/..."
+  }
+}
+```
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | string | Unique ID for this delivery. Equal to `data.run_id`; use it to dedupe retries. |
+| `type` | string | One of `replay_vision.digest`, `replay_vision.alert_fired`, or `replay_vision.alert_recovered`. Route on this. |
+| `timestamp` | string | ISO 8601 time the run was scheduled. |
+| `data.vision_action_id` | string | ID of the digest or alert. |
+| `data.run_id` | string | ID of this specific run. |
+| `data.scanner_id` | string \| null | ID of the scanner the action belongs to. |
+| `data.action_name` | string | Name of the digest or alert. |
+| `data.scanner_name` | string \| null | Name of the scanner. |
+| `data.observation_count` | number | How many observations this run matched. |
+| `data.report` | string | The report as Markdown. |
+| `data.run_url` | string | Link to the run in PostHog, showing every matching observation. |
+
+The `type` field tells you which event fired:
+
+- `replay_vision.digest` – a scheduled digest produced its summary.
+- `replay_vision.alert_fired` – an alert's condition was met.
+- `replay_vision.alert_recovered` – an alert that was firing has cleared.
+
+## Digests and alerts vs. insight alerts
+
+Because every observation is also a [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events), you have a second, more general way to get notified: build an [insight](/docs/product-analytics/insights) on those events and put a standard [alert](/docs/alerts) on it.
+
+Reach for a **scanner digest or alert** when you want the finding itself – the AI narrative, the matching sessions, links straight to the recordings. Reach for an **insight alert** when you want to threshold a metric derived from observations (a rate, a percentile, a comparison against other events) using the full power of PostHog's [SQL](/docs/product-analytics/sql).
+
+## Further reading
+
+- [Observations](/docs/replay-vision/observations)
+- [Quota and limits](/docs/replay-vision/quota-and-limits)

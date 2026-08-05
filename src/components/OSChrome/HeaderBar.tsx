@@ -33,7 +33,6 @@ import { Popover } from 'components/RadixUI/Popover'
 import { FileMenu } from 'components/RadixUI/FileMenu'
 import BookmarkButton from 'components/BookmarkButton'
 import KeyboardShortcut from 'components/KeyboardShortcut'
-
 interface HeaderBarProps {
     isNavVisible?: boolean
     isTocVisible?: boolean
@@ -41,6 +40,7 @@ interface HeaderBarProps {
     onToggleToc?: () => void
     showBack?: boolean
     showForward?: boolean
+    showCustomLeft?: React.ReactNode
     showSearch?: boolean
     showToc?: boolean
     showSidebar?: boolean
@@ -71,6 +71,7 @@ interface HeaderBarProps {
     isOrderHistoryOpen?: boolean
     onOrderHistoryOpen?: () => void
     onOrderHistoryClose?: () => void
+    className?: string
 }
 
 export default function HeaderBar({
@@ -80,6 +81,7 @@ export default function HeaderBar({
     onToggleToc,
     showBack = false,
     showForward = false,
+    showCustomLeft = false,
     showSearch = false,
     showToc = false,
     showSidebar = false,
@@ -106,6 +108,7 @@ export default function HeaderBar({
     isOrderHistoryOpen = false,
     onOrderHistoryOpen,
     onOrderHistoryClose,
+    className = '',
 }: HeaderBarProps) {
     const { compact, focusedWindow, posthogInstance } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
@@ -170,9 +173,33 @@ export default function HeaderBar({
         }
     }, [focusedWindow, appWindow])
 
+    const hasContent =
+        Boolean(homeURL) ||
+        Boolean(hasLeftSidebar) ||
+        showBack ||
+        showForward ||
+        Boolean(showCustomLeft) ||
+        compact || // compact mode always renders the window title
+        Boolean(rightActionButtons) ||
+        (showSearch && Boolean(searchContentRef || onSearch)) ||
+        showOrderHistory ||
+        showCart ||
+        Boolean(bookmark?.title && bookmark?.description) ||
+        (showSidebar && showToc) ||
+        showDrawerToggle ||
+        exportToPdf ||
+        showFullScreen
+
+    if (!hasContent) {
+        return null
+    }
+
     return (
         <>
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 items-center">
+            <div
+                data-scheme="secondary"
+                className={`bg-primary flex w-full gap-px p-2 flex-shrink-0 items-center ${className}`}
+            >
                 {!compact && (
                     <div>
                         <motion.div
@@ -220,6 +247,7 @@ export default function HeaderBar({
                                 icon={<IconChevronRight />}
                             />
                         )}
+                        {showCustomLeft && showCustomLeft}
                     </div>
                     {compact &&
                         (menu && menu.length > 0 ? (
@@ -328,7 +356,7 @@ export default function HeaderBar({
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (
-                            <div className="hidden @4xl:block [&>span]:inline-block">
+                            <div className="[&>span]:inline-block hidden @4xl:block">
                                 <Tooltip
                                     trigger={
                                         <OSButton
@@ -347,29 +375,18 @@ export default function HeaderBar({
                 )}
                 <div className="flex items-center gap-1">
                     {showDrawerToggle && (
-                        <>
-                            <OSButton
-                                variant="secondary"
-                                size="md"
-                                asLink
-                                to="https://app.posthog.com/signup"
-                                className="mr-1"
-                            >
-                                Get started – free
-                            </OSButton>
-                            <Tooltip
-                                trigger={
-                                    <OSButton
-                                        size="md"
-                                        icon={<IconBottomPanel />}
-                                        active={isDrawerOpen}
-                                        onClick={onToggleDrawer}
-                                    />
-                                }
-                            >
-                                {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
-                            </Tooltip>
-                        </>
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    size="md"
+                                    icon={<IconBottomPanel />}
+                                    active={isDrawerOpen}
+                                    onClick={onToggleDrawer}
+                                />
+                            }
+                        >
+                            {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
+                        </Tooltip>
                     )}
                     {exportToPdf && (
                         <Tooltip

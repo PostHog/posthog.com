@@ -2,4 +2,8 @@
 export const internalToolsNav = [
     { name: 'Components', url: '/components' },
     { name: 'Feature matrix', url: '/feature-matrix' },
+    { name: 'Team', url: '/team-directory' },
+    { name: 'Community directory', url: '/community/directory' },
+    { name: 'HogWatch 3000', url: '/hogwatch' },
+    { name: 'Image annotation', url: '/image-annotator' },
 ]

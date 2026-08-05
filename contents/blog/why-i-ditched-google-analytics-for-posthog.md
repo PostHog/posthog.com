@@ -16,7 +16,7 @@ tags:
 
 _By Colin Wren, Co-founder of [Reciprocal.dev](https://reciprocal.dev/)._
 
-It took me until I built my second product, [Reciprocal.dev](https://reciprocal.dev/), to really understand the value of analytics. I’d always thought of such tools as being an invasion of privacy and questioned the need for front-end scripts when properly configured server logs could provide the same information. But, after learning how customer behaviour metrics are key to performing the iterative small tweaks needed to align a product to customer needs, I took a second look at how analytics were used in my existing products.
+It took me until I built my second product, [Reciprocal.dev](https://reciprocal.dev/), to really understand the value of analytics. I’d always thought of such tools as being an invasion of privacy and questioned the need for front-end scripts when properly configured server logs could provide the same information. But, after learning how customer behavior metrics are key to performing the iterative small tweaks needed to align a product to customer needs, I took a second look at how analytics were used in my existing products.
 
 Until this point, Google Analytics had always been my go-to analytics platform. This wasn’t based on any real knowledge of the analytics space. I just used it because I knew that others did.
 
@@ -54,7 +54,7 @@ export function recordEvent(eventName: string, options: AnalyticsOptions): void 
 }
 ```
 
-After this, [building funnels in PostHog](/docs/user-guides/funnels) was really easy. I built a sequence of events trigger as a user performs actions in the app and [saved these insights into a dashboard](/docs/user-guides/dashboards) so there would be a single place to collect insights for a particular behaviour or section of the product.
+After this, [building funnels in PostHog](/docs/user-guides/funnels) was really easy. I built a sequence of events trigger as a user performs actions in the app and [saved these insights into a dashboard](/docs/user-guides/dashboards) so there would be a single place to collect insights for a particular behavior or section of the product.
 
 There are also tools that make it easier to track which iteration of the product events are being captured against, such as [feature flags](/docs/user-guides/feature-flags) and [apps that integrate with release management tools](/integrations). Overall, I’ve found PostHog to be miles ahead of the other tools I’ve tried and I’m a little miffed that I wasted time with Mixpanel.
 

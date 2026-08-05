@@ -120,7 +120,7 @@ useEffect(() => {
 }, [])
 ```
 
-With this set up., we can set up the capture calls. For this, we need an initialization of PostHog. Run `npm i posthog-js`, and then add a `posthog.init` call with your project API key and instance address. You can get both from your project settings. 
+With this set up., we can set up the capture calls. For this, we need an initialization of PostHog. Run `npm i posthog-js`, and then add a `posthog.init` call with your project token and instance address. You can get both from your project settings. 
 
 In the `handleRouteChange` function, call `posthog.capture()` with a `left page` event with all the properties we want. Altogether, this looks like this.
 
@@ -131,7 +131,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
   })
@@ -199,7 +199,7 @@ The changed pieces of our code look like this.
 ```js
 // pages/_app.js
 if (typeof window !== 'undefined') {
-  posthog.init('<ph_project_api_key>', {
+  posthog.init('<ph_project_token>', {
     api_host: '<ph_client_api_host>',
     defaults: '<ph_posthog_js_defaults>',
     capture_pageleave: false,

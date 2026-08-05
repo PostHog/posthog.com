@@ -3,6 +3,7 @@ import React, { useState, createContext, useEffect, useContext, useRef } from 'r
 import { Replies } from './Replies'
 import { Profile } from './Profile'
 import { QuestionData, StrapiData, StrapiRecord, TopicData } from 'lib/strapi'
+import LevelBadge from './LevelBadge'
 import Days from './Days'
 import Markdown from './Markdown'
 import { QuestionForm } from './QuestionForm'
@@ -23,13 +24,13 @@ import {
 } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
-import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
+import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import { Check2, Close } from 'components/Icons'
 import Modal from 'components/Modal'
 import Checkbox from 'components/Checkbox'
 import { CallToAction } from 'components/CallToAction'
 import { navigate } from 'gatsby'
-import Logomark from 'components/Home/images/Logomark'
+import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import EditWrapper from './EditWrapper'
@@ -40,6 +41,7 @@ import ZendeskTicket from 'components/ZendeskTicket'
 import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
+import { useWindow } from '../../../context/Window'
 
 type QuestionProps = {
     // TODO: Deal with id possibly being undefined at first
@@ -279,7 +281,7 @@ const MaxReply = ({ children, isInForum }: { children: React.ReactNode; isInForu
                                         image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
                                     />
                                     <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                        <Logomark className="w-[16px]" />
+                                        <Logo layout="logomark" className="w-[16px]" />
                                     </span>
                                 </div>
                                 <strong>PostHog AI</strong>
@@ -444,7 +446,10 @@ export function Question(props: QuestionProps) {
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
-    const [maxQuestions, setMaxQuestions] = useState(other.askMax ? [{ manual: false, withContext: false }] : [])
+    const { appWindow } = useWindow()
+    const [maxQuestions, setMaxQuestions] = useState(
+        appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
+    )
 
     useEffect(() => {
         if (
@@ -470,6 +475,7 @@ export function Question(props: QuestionProps) {
         handlePublishReply,
         handleResolve,
         handleReplyDelete,
+        voteReply,
         archive,
         pinTopics,
         escalate,
@@ -514,6 +520,7 @@ export function Question(props: QuestionProps) {
                 handlePublishReply,
                 handleResolve,
                 handleReplyDelete,
+                voteReply,
                 pinTopics,
                 mutate,
             }}
@@ -546,6 +553,7 @@ export function Question(props: QuestionProps) {
                             profile={questionData.attributes.profile?.data}
                             className={archived ? 'opacity-50' : ''}
                         />
+                        <LevelBadge points={questionData.attributes.profile?.data?.attributes?.reputation} />
                         <Days
                             created={questionData.attributes.createdAt}
                             profile={questionData.attributes.profile?.data}

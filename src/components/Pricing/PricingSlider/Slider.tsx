@@ -12,6 +12,7 @@ interface SliderProps {
     stepsInRange: number
     onChange: (value: number) => void
     value: number
+    scaleMin?: number
 }
 
 const MySlider = Slider.createSliderWithTooltip(Slider)
@@ -40,9 +41,10 @@ const abbreviateNumber = (number: number): string => {
     return `${scaled.toFixed(0) + suffix}`
 }
 
-const makeMarks = (marks: number[]): Record<number, string> => {
+const makeMarks = (marks: number[], scaleMin: number): Record<number, string> => {
     return marks.reduce((acc, cur) => {
-        acc[inverseCurve(cur)] = abbreviateNumber(cur)
+        const value = cur <= 0 ? scaleMin : cur
+        acc[inverseCurve(value)] = cur <= 0 ? '0' : abbreviateNumber(cur)
         return acc
     }, {} as Record<number, string>)
 }
@@ -61,14 +63,19 @@ const makeNonLinearMarks = (marks: number[], max): Record<number, string> => {
     }, {} as Record<number, string>)
 }
 
-export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value }: SliderProps): JSX.Element => {
+export const LogSlider = ({ min, max, marks, stepsInRange, onChange, value, scaleMin }: SliderProps): JSX.Element => {
+    const effectiveMin = scaleMin ?? Math.max(min, 1)
+
     return (
         <MySlider
-            min={inverseCurve(min)}
+            min={inverseCurve(effectiveMin)}
             max={inverseCurve(max)}
-            marks={makeMarks(marks)}
-            step={(inverseCurve(max) - inverseCurve(min)) / stepsInRange}
-            tipFormatter={(value) => prettyInt(sliderCurve(value))}
+            marks={makeMarks(marks, effectiveMin)}
+            step={(inverseCurve(max) - inverseCurve(effectiveMin)) / stepsInRange}
+            tipFormatter={(value) => {
+                const roundedValue = Math.round(sliderCurve(value))
+                return min === 0 && roundedValue <= effectiveMin ? '0' : prettyInt(roundedValue)
+            }}
             onChange={onChange}
             className="slider center"
             value={value}

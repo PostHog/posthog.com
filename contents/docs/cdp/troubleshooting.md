@@ -10,13 +10,13 @@ This page covers troubleshooting for CDP. For setup, see the [installation guide
 
 ## My transformation or destination isn't working, what do I do?
 
-1. Wait 60 seconds, then check that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/pipeline). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
+1. Wait 60 seconds, then check that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/data-management/destinations). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.
 
 2. Click "Logs & metrics" and go to the `Metrics` tab to check that the transformation or destination is processing events without errors.
 
 3. Check the `Logs` tab to see if there are any errors.
 
-4. Go to the data management tab to check if there any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
+4. Go to the data management tab to check if there are any [ingestion warnings](https://us.posthog.com/data-management/ingestion-warnings).
 
 5. If the transformation or destination relates to an external service, check that the external service is working correctly. Make a request to the relevant API endpoint. You can also use a tool like [webhook.site](https://webhook.site/) to check that PostHog sends events as expected.
 

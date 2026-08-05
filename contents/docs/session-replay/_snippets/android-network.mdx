@@ -5,8 +5,15 @@ import com.posthog.PostHogOkHttpInterceptor
 import okhttp3.OkHttpClient
 
 private val client = OkHttpClient.Builder()
+    // Support for remote configuration
+    // in the [session replay settings](https://app.posthog.com/settings/project-replay#replay-network)
+    // requires SDK version 3.32.0 or higher.
     .addInterceptor(PostHogOkHttpInterceptor(captureNetworkTelemetry = true))
     .build()
 ```
 
 > **Note:** Only metric-like data like speed, size, and response code are captured. No data is captured from the request or response body.
+
+## Add tracing headers
+
+The same interceptor can also add PostHog tracing headers to matching hosts. See the [Android tracing headers docs](/docs/libraries/android#tracing-headers) for setup.

@@ -57,11 +57,16 @@ The final decision should always be made by the relevant member(s) of the Blitzs
 
 Once made, they should share their decision in #tell-posthog-anything and the relevant team channels, alongside a short summary of why we're making that change.
 
+### 4. Execute the change
+
+Once the decision is shared, the team lead kicks off execution by running `/org-change` in Slack and selecting the relevant change type. This creates a tracked issue with the right checklist, assigned to those involved.
+
 ## FAQ
 
 ### What if I want to move teams?
 
-Talk to your line manager. This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people.
+This process exists purely for making larger changes to existing teams, or forming new ones, that impact multiple people. If you are personally looking to change team, see the [small teams handbook page](/handbook/company/small-teams#can-people-change-teams).
+
 
 ### What happens after a decision is made?
 

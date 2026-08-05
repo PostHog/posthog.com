@@ -5,15 +5,15 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 <CalloutBox type="caution" title="Important">
 
-PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users with [Boost, Scale or Enterprise add-ons](/platform-packages). You can use [our BAA generator](/baa) to create a BAA for us to countersign.
+PostHog only offers Business Associate Agreements (BAAs) for PostHog Cloud to users with the [Boost, Scale, or Enterprise package](/platform-packages). You can use [our BAA generator](/baa) to create a BAA for us to countersign.
 
 </CalloutBox>
 
-HIPAA is the Health Insurance Portability and Accountability Act. It’s a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
+HIPAA is the Health Insurance Portability and Accountability Act. It's a piece of legislation that applies to certain [covered entities](https://www.hhs.gov/hipaa/for-professionals/covered-entities/index.html) operating in the United States of America (e.g. healthcare providers).
 
 A key goal of this legislation is to ["assure that individuals' health information is properly protected while allowing the flow of health information needed to provide and promote high quality health care and to protect the public's health and well being.""](https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html)
 
@@ -61,7 +61,19 @@ We strongly recommend teams which need HIPAA compliance use PostHog Cloud under 
 
 </CalloutBox>
 
-The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [platform add-on for our standard BAA, or the Enterprise plan for a custom BAA](/platform-packages).
+<CalloutBox type="caution" title="Managed reverse proxy is not HIPAA-compliant">
+
+The [managed reverse proxy](/docs/advanced/proxy) is **not** covered by BAAs and should not be used to process Protected Health Information (PHI). If you need a reverse proxy for HIPAA-compliant deployments, set up a [self-hosted proxy](/docs/advanced/proxy) on infrastructure you control instead.
+
+</CalloutBox>
+
+<CalloutBox type="caution" title="PostHog AI is not HIPAA-compliant">
+
+[PostHog AI](/docs/posthog-ai) and other AI features are **not** covered by BAAs and should not be enabled in organizations where any project processes Protected Health Information (PHI). These features send your data to [third-party LLM providers](/docs/posthog-ai/faq) that are not currently set up in a HIPAA-compliant way. Org admins can [disable PostHog AI and all AI data analysis](/docs/posthog-ai/faq#how-can-i-disable-posthog-ai) in your organization settings.
+
+</CalloutBox>
+
+The best way to use PostHog in a way which is HIPAA compliant is with a BAA covering a PostHog Cloud instance. This ensures that PostHog remains scalable and that you have access to all premium features and security enhancements. BAAs are only available to users with a [platform package for our standard BAA, or the Enterprise package for a custom BAA](/platform-packages).
 
 However, it is possible to host PostHog yourself using our open-source hobby deployment. It is important to note that the hobby deployment is **only suitable for smaller event volumes** and provided without guarantee. It also lacks many of the advanced features available under PostHog Cloud.
 
@@ -74,9 +86,9 @@ We recommend hosting PostHog on your own infrastructure. If you're leveraging a 
 Follow our [standard deployment guides](/docs/self-host) to get started deploying PostHog. This is a technical task which requires some engineering knowledge.
 
 **Step 3: Security configuration**
-We strongly recommend that you use HTTPS to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance. We recommend you limit access to your self-hosted deployment, including shared dashboard links and subscriptions, as well as caution when installing, building and enabling [apps](/docs/apps).
+We strongly recommend that you use HTTPS to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance. We recommend you limit access to your self-hosted deployment, including shared dashboard links and subscriptions, as well as caution when installing, building and enabling [data pipeline destinations](/docs/cdp/destinations).
 
 ### Further reading
 
--   [A simple guide to personal data & PII](/blog/what-is-personal-data-pii)
--   [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)
+- [A simple guide to personal data & PII](/blog/what-is-personal-data-pii)
+- [Is Google Analytics HIPAA compliant?](/blog/is-google-analytics-hipaa-compliant)

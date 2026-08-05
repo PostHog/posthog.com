@@ -6,8 +6,8 @@ author:
 showTitle: true
 sidebar: Docs
 tags:
-  - AI
-  - DeskHog
+  - ai
+  - deskhog
 ---
 
 > Unfortunately, since writing this the process for integrating Cursor and PlatformIO has changed and users can no longer directly install PlatformIO within Cursor. We're leaving this guide live for those who want to attempt the workaround of installing PlatformIO in VSCode and importing the plugin to Cursor - but our recommended route is to [use Claude Code instead](/tutorials/deskhog-claude-tutorial). It's just better. 
@@ -99,7 +99,7 @@ If everything goes smoothly, your DeskHog will reboot and you can navigate to yo
 
 ## Iterating, bugfixing and committing 
 
-It’s very likely you’ll hit a bug or see some unexpected behaviour. Even if everything goes perfectly you’ll probably still want to make modifications, such as tweaking the game logic or graphics to make the game better.
+It’s very likely you’ll hit a bug or see some unexpected behavior. Even if everything goes perfectly you’ll probably still want to make modifications, such as tweaking the game logic or graphics to make the game better.
 
 Ultimately, this is the essence of vibe-coding: giving Cursor a prompt for the change you want to make, letting it modify the code, then building and deploying that code to test it on your device. This loop will get faster as you learn more about how DeskHog works and give Cursor more and more context.
 

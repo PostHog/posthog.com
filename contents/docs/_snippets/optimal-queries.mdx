@@ -255,50 +255,21 @@ Bad names are generic and vague:
 - `test`
 - `data`
 
-### 5. Use timestamp-based pagination instead of OFFSET
+### 5. Use keyset pagination instead of OFFSET
 
-When querying large datasets like `events` or `query_log` over multiple batches, avoid using `OFFSET` for pagination. Instead, use timestamp-based pagination, which is much more efficient and scales better.
+`OFFSET` pagination is **not supported** for programmatic requests on `/query` and is currently rejected with HTTP 400 for personal API keys. If you're paginating to export data, **stop and use [batch exports](/docs/cdp/batch-exports) instead** – `/query` is not a supported export path.
 
-**❌ Inefficient approach using OFFSET:**
+For ad-hoc paging, use keyset pagination on the table's sort column: `timestamp` for `events`, `id` for `persons`. Other columns (e.g. `created_at`) are not indexed for this and will be slow.
+
 ```sql
--- First batch
-SELECT timestamp, event, distinct_id
-FROM events
-WHERE timestamp >= '2024-01-01'
-ORDER BY timestamp
-LIMIT 1000;
+-- ❌ Rejected
+SELECT * FROM events WHERE timestamp >= '2024-01-01'
+ORDER BY timestamp LIMIT 1000 OFFSET 1000;
 
--- Second batch
-SELECT timestamp, event, distinct_id
-FROM events
-WHERE timestamp >= '2024-01-01'
-ORDER BY timestamp
-LIMIT 1000 OFFSET 1000;  -- This gets slower with each page
+-- ✅ Keyset pagination
+SELECT * FROM events WHERE timestamp > '2024-01-01 12:34:56.789'
+ORDER BY timestamp LIMIT 1000;
 ```
-
-**✅ Efficient approach using timestamp pagination:**
-```sql
--- First batch
-SELECT timestamp, event, distinct_id
-FROM events
-WHERE timestamp >= '2024-01-01'
-ORDER BY timestamp
-LIMIT 1000;
-
--- Second batch (use timestamp of last event from previous batch)
-SELECT timestamp, event, distinct_id
-FROM events
-WHERE timestamp > '2024-01-01 12:34:56.789'  -- timestamp from last row of previous batch
-ORDER BY timestamp
-LIMIT 1000;
-```
-
-This approach is more efficient because:
-- **Constant performance**: Each query executes in similar time regardless of how many rows you've already retrieved
-- **Index-friendly**: Uses the timestamp index effectively for filtering
-- **Scalable**: Performance doesn't degrade as you paginate through millions of rows
-
-**For geeks:** OFFSET-based pagination gets progressively slower because the database must scan and skip all the offset rows for each query. With timestamp-based pagination, the database uses the timestamp index to directly jump to the right starting point, maintaining consistent performance across all pages.
 
 ### 6. Other SQL optimizations
 

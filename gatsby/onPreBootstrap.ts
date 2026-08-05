@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'node-fetch'
+
 import path from 'path'
 import fs from 'fs'
 
@@ -9,15 +9,65 @@ import { enrichVideos } from './enrichVideos'
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
+const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
+const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
+
+/**
+ * Invalidates the gatsby-source-git cache if the configured branch has changed.
+ * This prevents stale docs from being served when switching GATSBY_POSTHOG_BRANCH.
+ */
+function invalidateGitCacheIfBranchChanged(): void {
+    const currentBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
+
+    // Read the stored branch from the manifest file
+    let storedBranch: string | null = null
+    if (fs.existsSync(BRANCH_MANIFEST_FILE)) {
+        try {
+            const manifest = JSON.parse(fs.readFileSync(BRANCH_MANIFEST_FILE, 'utf-8'))
+            storedBranch = manifest.branch
+        } catch {
+            // Manifest is corrupted, treat as no stored branch
+        }
+    }
+
+    // If the branch has changed, clear the gatsby-source-git cache
+    if (storedBranch !== null && storedBranch !== currentBranch) {
+        console.log(`GATSBY_POSTHOG_BRANCH changed from '${storedBranch}' to '${currentBranch}'`)
+        console.log('Clearing gatsby-source-git cache…')
+
+        // Remove the entire gatsby-source-git cache directory
+        if (fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+            fs.rmSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true, force: true })
+        }
+    }
+
+    // Ensure the cache directory exists and write the current branch to the manifest
+    if (!fs.existsSync(GATSBY_SOURCE_GIT_CACHE_DIR)) {
+        fs.mkdirSync(GATSBY_SOURCE_GIT_CACHE_DIR, { recursive: true })
+    }
+    fs.writeFileSync(BRANCH_MANIFEST_FILE, JSON.stringify({ branch: currentBranch }))
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+    // Invalidate gatsby-source-git cache if branch has changed
+    invalidateGitCacheIfBranchChanged()
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
-        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        const assetHost = process.env.GATSBY_POSTHOG_ASSET_HOST
+        // The "1" pins the array.js major version; strict_script_versioning makes the
+        // SDK load its lazy chunks from matching versioned paths on the asset host.
+        const arrayRoute = assetHost
+            ? `${assetHost}/static/1/array.js`
+            : `${process.env.GATSBY_POSTHOG_API_HOST}/static/array.js`
+        const assetHostConfig = assetHost
+            ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
+            : ''
+        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
-    capture_pageview: false,
+    ${assetHostConfig}capture_pageview: false,
     capture_pageleave: true,
     persistence: 'localStorage+cookie',
     cookie_persisted_properties: ['prod_interest'],
@@ -31,6 +81,16 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Drop exceptions coming from local dev servers so developers' local
+    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
+    // don't pollute production error tracking. Real users are never on localhost.
+    before_send: function (event) {
+        var hostname = window.location.hostname
+        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+            return null
+        }
+        return event
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,
@@ -39,6 +99,13 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     __preview_lazy_load_replay: true,
     __preview_capture_bot_pageviews: true,
     __preview_disable_xhr_credentials: true,
+    // Tune rageclick detection to cut false positives from toggles and other
+    // flip-to-see controls: require 4 rapid clicks (default 3) within 750ms of
+    // each other (default 1000ms) before treating a burst as a $rageclick.
+    rageclick: {
+        click_count: 4,
+        timeout_ms: 750,
+    },
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
@@ -55,7 +122,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
 
     // Cache the data if successful
     if (!mcpToolsData.error && mcpToolsData.categories) {
-        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData.categories)
+        await cache.set(MCP_TOOLS_CACHE_KEY, mcpToolsData)
     }
 
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {

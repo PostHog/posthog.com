@@ -12,8 +12,8 @@ You'll also need access to the relevant ActiveCampaign account.
 
 ## Installation
 
-1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=activecampaign) tab.
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=activecampaign) tab.
 3. Search for 'ActiveCampaign' and click **+ Create**.
 4. Add your ActiveCampaign API Key at the configuration step.
 5. Press **Create & Enable** and watch your 'Events' list get populated in ActiveCampaign!

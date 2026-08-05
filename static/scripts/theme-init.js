@@ -27,11 +27,24 @@
     }
     setTheme(preferredTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : preferredTheme)
 
-    // Set initial skin value
+    // Set initial skin / wallpaper / reduce-transparency before React hydrates
     try {
-        const savedSkin = JSON.parse(localStorage.getItem('siteSettings') || '{}').skinMode || 'modern'
-        document.body.setAttribute('data-skin', savedSkin)
-        const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'keyboard-garden'
-        document.body.setAttribute('data-wallpaper', savedWallpaper)
+        // The classic skin has been retired; always render the modern skin
+        document.body.setAttribute('data-skin', 'modern')
+        var siteSettings = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+        document.body.setAttribute('data-wallpaper', siteSettings.wallpaper || 'keyboard-garden')
+        document.body.setAttribute(
+            'data-reduce-transparency',
+            siteSettings.reduceTransparency ? 'true' : 'false'
+        )
+    } catch (err) {}
+
+    // Hide dismissed WizardHint variants before first paint
+    try {
+        ;['warehouse-wizard-hint-dismissed', 'ai-observability-wizard-hint-dismissed'].forEach(function (key) {
+            if (localStorage.getItem(key) === '1') {
+                document.documentElement.classList.add(key)
+            }
+        })
     } catch (err) {}
 })()

@@ -1,0 +1,138 @@
+---
+title: Get started with Support
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic } from '@posthog/icons'
+
+<QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
+
+<QuestLogItem title="Enable Support and add the widget" subtitle="Where tickets begin" icon="IconToggle">
+
+The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
+
+Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget.
+
+<OSButton variant="primary" asLink to="/docs/support/widget">Set up the widget</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Connect your other channels" subtitle="Email, Slack, and GitHub" icon="IconMessage">
+
+Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), and [GitHub](/docs/support/github), and every channel syncs both ways so you answer from a single inbox.
+
+<div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconChat className="size-5 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Widget</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">In-app chat with replay and events attached</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconAtSign className="size-5 shrink-0 text-teal mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Email</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Forward support@ mail into the inbox</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">Slack</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">SupportHog turns messages and reactions into tickets</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconGithub className="size-5 shrink-0 text-primary mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">GitHub</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Issues become tickets and replies post back</p>
+    </div>
+  </div>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/support/email">Connect a channel</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Work your tickets" subtitle="Your team's inbox" icon="IconNotebook">
+
+The [Support inbox](/docs/support/inbox) is where your team lives. Open any ticket and the customer's replay, recent events, exceptions, and past conversations are right there, so you resolve issues without the back-and-forth. Assign, tag, snooze, and track SLAs from one view.
+
+<!-- TODO(sarah): replace with a Support inbox screenshot – capture at 1000-1400px wide, light + dark, no PII.
+<ProductScreenshot
+    imageLight="TODO_CLOUDINARY_URL_LIGHT"
+    imageDark="TODO_CLOUDINARY_URL_DARK"
+    alt="The Support inbox with a ticket open, showing the customer's session replay and events alongside the conversation"
+    classes="rounded"
+/>
+-->
+
+<OSButton variant="primary" asLink to="/docs/support/inbox">Explore the inbox</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Automate assignment, tags, and SLAs" subtitle="Rules you control" icon="IconDecisionTree">
+
+Let rules handle the repetitive parts. [Workflows](/docs/support/workflows) are rules you control – no autonomous AI involved. For example:
+
+- Set SLAs based on channel or priority
+- Auto-assign new tickets to a role
+- Tag tickets by customer email domain
+- Reopen a ticket when the customer replies
+
+<OSButton variant="primary" asLink to="/docs/support/workflows">Set up workflows</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Turn tickets into fixes" subtitle="Support feeds Self-driving" icon="IconMagic">
+
+Support isn't just an inbox – it's a signal source. Recurring issues in your conversations become [Self-driving](/docs/self-driving) reports, and when there's a code fix, a pull request you review and merge. Answering customers still happens in the Support inbox; you review these fixes in the Self-driving inbox.
+
+<div className="not-prose flex flex-wrap items-center gap-x-3 gap-y-2 my-4">
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMessage className="size-5 shrink-0" />
+    Tickets
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconMagic className="size-5 shrink-0" />
+    Self-driving report
+  </span>
+  <span className="text-muted" aria-hidden="true">→</span>
+  <span className="flex items-center gap-1.5 text-sm text-secondary">
+    <IconGithub className="size-5 shrink-0" />
+    Pull request
+  </span>
+</div>
+
+<OSButton variant="primary" asLink to="/docs/self-driving">Support and Self-driving</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Migrating from another tool?" subtitle="Bring your tickets with you" icon="IconUpload">
+
+Bring your history with you so the inbox starts with context instead of an empty slate. The [Zendesk](/docs/support/imports/zendesk) import (beta) brings over:
+
+- Full message threads, including internal notes
+- Customer names and emails
+- Tags, statuses, and priorities
+- Attachments and original timestamps
+
+<OSButton variant="primary" asLink to="/docs/support/imports">Import tickets</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Know what's free" subtitle="Opt-in AI agent" icon="IconPiggyBank">
+
+Support's core features – the widget, inbox, and integrations – are free. An AI agent that drafts replies to your customers is coming soon and will be opt-in: only teams who turn it on are billed, and we'll give you plenty of notice first.
+
+<OSButton variant="primary" asLink to="/docs/support/pricing">See pricing</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

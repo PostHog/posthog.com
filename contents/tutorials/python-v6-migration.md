@@ -6,7 +6,7 @@ author:
 showTitle: true
 sidebar: Docs
 tags:
-  - product-os
+  - product os
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -188,7 +188,7 @@ You might be using the old Django error tracking integration like this in `5.x`:
 from posthog import Posthog
 from posthog.exception_capture import Integrations
 
-Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+Posthog("<ph_project_token>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
 
 This is deprecated and no longer necessary in `6.x`, instead, the general purpose [context middleware](/docs/libraries/django#django-contexts-middleware) also handles error capturing.
@@ -298,7 +298,7 @@ The `exception_capture` module is removed. Instead, use the [context middleware]
 from posthog import Posthog
 from posthog.exception_capture import Integrations
 
-Posthog("<ph_project_api_key>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
+Posthog("<ph_project_token>", enable_exception_autocapture=True, exception_autocapture_integrations = [Integrations.Django])
 ```
 
 **Now:**

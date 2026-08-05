@@ -4,7 +4,6 @@ import { IconCheck, IconChevronDown } from '@posthog/icons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
 import * as OSIcons from '../OSIcons/Icons'
-
 type SelectItem = {
     value: string
     label: string
@@ -23,6 +22,7 @@ type SelectProps = {
     defaultValue?: string
     onValueChange?: (value: string) => void
     placeholder?: string
+    prefix?: string
     disabled?: boolean
     required?: boolean
     name?: string
@@ -84,6 +84,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             defaultValue,
             onValueChange,
             placeholder,
+            prefix,
             disabled,
             required,
             name,
@@ -96,6 +97,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
     ) => {
         // Use client-only rendering to prevent hydration mismatches
         const [isClient, setIsClient] = React.useState(false)
+        const appContainer: HTMLElement | null = null
 
         React.useEffect(() => {
             setIsClient(true)
@@ -151,7 +153,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                             {selectedItem && (
                                 <span className="flex space-x-1 items-center">
                                     <Icon icon={selectedItem.icon} color={selectedItem.color} className="size-4" />
-                                    <span>{selectedItem.label}</span>
+                                    {prefix && <span className="text-muted">{prefix}:</span>}
+                                    <span className={`${selectedItem.label?.length > 20 ? 'text-xs' : ''}`}>
+                                        {selectedItem.label}
+                                    </span>
                                 </span>
                             )}
                         </RadixSelect.Value>
@@ -161,7 +166,9 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
                         <RadixSelect.Content
-                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl"
+                            position={appContainer ? 'popper' : undefined}
+                            collisionBoundary={appContainer}
+                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl z-[50]"
                             data-scheme={dataScheme}
                         >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">

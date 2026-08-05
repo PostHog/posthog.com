@@ -1,0 +1,108 @@
+---
+title: Managing lifecycle
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: full
+  enterprise: full
+---
+
+After you've analyzed your experiment metrics and determined a winning variant, you can manage the experiment's lifecycle by ending, pausing, freezing exposure, or resetting it.
+
+## Ending an experiment
+
+After you've determined a winning variant, click the **End experiment** button on the experiment page. This lets you choose a variant to keep, roll it out to all users, and end the experiment.
+
+When an experiment is ended (or when a variant is shipped while the experiment is still running), the experiment creator receives an in-app notification with the primary metric outcome – either significant or inconclusive. This notification isn't sent if the person ending the experiment is the same person who created it.
+
+Beyond this, we recommend:
+
+1. Sharing the results with your team.
+
+2. Documenting conclusions and findings in the description field of your experiment. This helps preserve historical context for future team members.
+
+3. Removing the experiment and losing variant's code.
+
+4. Archiving the experiment.
+
+5. Disabling or deleting the feature flag once the winning variant is hardcoded in your application and the flag check has been removed from your code. You can [delete flags linked to non-running experiments](/docs/feature-flags/creating-feature-flags#deleting-flags-linked-to-experiments) without losing the experiment's historical data. Every active flag counts toward your [feature flag billing](/docs/feature-flags/cutting-costs), even if it's rolled out to 100% and no longer doing anything useful.
+
+Remember, experimentation is an iterative process. Each experiment teaches you something about your users, even when results aren't what you expected.
+
+### Ending an already rolled out experiment
+
+If you've already shipped a variant to 100% of users, you can still end the experiment using the **End experiment** button. In this case, the experiment is marked as complete without changing the feature flag.
+
+## Pausing an experiment
+
+You can temporarily pause an experiment to stop collecting data without ending it completely. This is useful when:
+
+- You need to fix a bug in one of the variants
+- External factors might temporarily affect results (e.g., a major marketing campaign)
+- You want to review interim results before continuing
+
+To pause an experiment, click the **Pause experiment** button on the experiment page. This will disable the feature flag behind the experiment, so no new data will be collected.
+
+When you're ready to continue, click **Resume experiment** to start collecting data again. The experiment will continue from where it left off.
+
+## Freezing exposure
+
+Freezing exposure stops new users from entering an experiment while already-enrolled users keep their variants and metrics keep updating. This is useful when you've reached a good sample size but need long-term metrics to mature, like 90-day revenue or renewals tracked over weeks.
+
+To freeze exposure, click **Freeze exposure** in the actions menu on the experiment page and confirm in the dialog. PostHog snapshots all currently exposed users into a static [cohort](/docs/data/cohorts) and narrows the feature flag's release conditions to that cohort. The variant distribution and the experiment's end date stay untouched, so enrolled users keep their assigned variant and their metric data keeps flowing.
+
+Freezing takes longer the more exposed users the experiment has. Experiments with tens of thousands of exposed users can take tens of seconds, so wait for the dialog to finish. An **Exposure frozen** status badge appears once the freeze is active, and your exposure graph flattens out, which is expected. Users exposed in the final moments before freezing may miss the snapshot due to ingestion lag, and hand-editing the flag's release conditions while frozen can reopen enrollment.
+
+To unfreeze, click **Unfreeze exposure** in the actions menu. This restores the flag's original targeting and deletes the snapshot cohort. Users who enroll after unfreezing joined later, possibly under different conditions, so be careful mixing them with the original participants in one analysis.
+
+Shipping a variant or resetting the experiment also removes the freeze. Ending without shipping doesn't touch the feature flag, so it stays narrowed to the snapshot cohort. Unfreeze first, or ship a variant, if that's not what you want.
+
+### Limitations of freezing exposure
+
+Freezing isn't offered for experiments that aren't running, group-aggregated experiments (a person-based cohort can't freeze group-based matching), or experiments with a holdout or early access conditions (both are evaluated before release conditions, so freezing couldn't stop enrollment through them).
+
+A freeze can also be rejected after you confirm it: when the experiment is very large (the exposure scan is bounded by a cap on exposed users and a timeout), when no one has been exposed yet, or when more than about 5% of exposed users are anonymous with no person profile, since they would silently lose their variant. In practice this means experiments on logged-out surfaces can't be frozen. These rejections are structural, so retrying won't help.
+
+SDKs using [local evaluation](/docs/feature-flags/local-evaluation) can't resolve static cohorts, so a frozen flag evaluates on PostHog's servers instead. SDKs configured with `only_evaluate_locally` return the flag's default value.
+
+## Resetting analysis
+
+Resetting analysis clears the experiment's results and returning it to a draft state. This doesn't affect the feature flag or variant rollout, so variants stay visible to users. It does also not delete any collected data.
+
+Technically speaking it resets the experiment's start and end dates. All events collected thus far will still exist, but won't be applied to the experiment unless you manually change the start date after launching the experiment again.
+
+This is useful when you need to restart data collection, for example after fixing a bug in your experiment setup or changing metric definitions.
+
+## Duplicating an experiment
+
+You can duplicate an experiment within the same project or copy it to another project in your organization.
+
+### Within the same project
+
+To duplicate an experiment, click the **⋯** (more) menu on the experiment page and select **Duplicate**. This creates a copy of the experiment as a new draft with all its metrics, parameters, and feature flag configuration. You need to specify a new feature flag key for the duplicated experiment.
+
+### To another project
+
+To copy an experiment to a different project, click the **⋯** (more) menu and select **Copy to project**. This option is only available when your organization has multiple projects.
+
+When copying to another project:
+
+- The copied experiment is created as a draft with its feature flag disabled
+- If a feature flag with the same key already exists in the target project, the copied experiment reuses that flag's variant configuration
+- Saved metrics and holdout groups are not copied since they are project-scoped
+- You must have write access to both the source and target projects
+- The target project must be in the same organization
+- Experiments using legacy metrics can't be copied
+
+## Comparing lifecycle actions
+
+Here's how the actions differ:
+
+| Status        | Feature flag                                     | Users see         | Exposure tracking               | Results  | Can resume     |
+| ------------- | ------------------------------------------------ | ----------------- | ------------------------------- | -------- | -------------- |
+| **Running**   | Enabled                                          | Multiple variants | Continues                       | Updating | N/A            |
+| **Pausing**   | Disabled                                         | Control variant   | Stops                           | Fixed    | Yes            |
+| **Freezing**  | Narrowed to snapshot cohort                      | Keeps assigned variant | Stops for new users        | Updating | Yes (unfreeze) |
+| **Ending**    | Modified to roll out chosen variant to all users | Chosen variant    | Continues (chosen variant only) | Fixed    | No             |
+| **Resetting** | Unchanged                                        | Multiple variants | Continues                       | Cleared  | Yes (relaunch) |

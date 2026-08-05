@@ -1,0 +1,97 @@
+---
+title: Quota and limits
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+Replay Vision usage is metered per organization in **credits**, on a monthly billing cycle. This page covers how observations are priced, what the budget is, what counts against it, and what to do when you're approaching it.
+
+## How usage is priced
+
+One credit is $0.01. Every successful observation costs a fixed number of credits that depends on the **model** the scanner uses – newer models tend to produce higher-quality observations but cost more per observation. The model picker in the scanner editor shows each option's price, and the current lineup is:
+
+| Model                       | Credits per observation |
+| --------------------------- | ----------------------- |
+| Gemini 3.5 Flash Lite       | 2                       |
+| Gemini 3 Flash (default)    | 5                       |
+| Gemini 3.6 Flash            | 15                      |
+
+Prices are frozen when the observation runs: editing a scanner's model later doesn't change what past observations cost, and each [`$recording_observed` event](/docs/replay-vision/observations#querying-observations-as-events) carries a `credits` property with its price.
+
+## The monthly budget
+
+Each organization gets a monthly credit budget – this defaults to **15,000 credits per month** (about $150). Current usage and the projection for the rest of the period are shown on the **Spend this period** tile on the Replay Vision home, in credits with the dollar equivalent alongside.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/quota_meter_ddcc762a43.png"
+  alt="The Replay Vision usage meter: credits used this period against the organization's budget"
+  classes="rounded"
+/>
+
+You can also fetch the budget programmatically – the `vision-quota-retrieve` MCP tool returns `credit_limit` (null when uncapped), `credits_used`, `remaining`, `exhausted`, `projected_monthly_credits`, and the current period's start and end.
+
+## What counts against the budget
+
+| Observation outcome | Counts against budget?                                 |
+| ------------------- | ------------------------------------------------------ |
+| **Succeeded**       | Yes – charged the scanner's credits per observation    |
+| **Pending**         | Reserved while in flight                              |
+| **Running**         | Reserved while in flight                              |
+| **Failed**          | No                                                    |
+| **Ineligible**      | No                                                    |
+
+Pending and running observations reserve budget so a burst of concurrent on-demand triggers can't blow past the cap before any of them complete. Once an observation reaches a terminal failed or ineligible state, its reservation is released.
+
+Testing a configuration recommendation on the [calibration tab](/docs/replay-vision/calibration#test-before-applying) re-runs the scanner against rated sessions, and each tested session is charged like a normal observation of the scanner's model. The test controls show the planned cost before you run it.
+
+## What happens when the budget is reached
+
+Both enforcement paths use the same check:
+
+- **Background sweeps** – new observations queued by the automatic schedule are silently skipped. The scanner stays enabled, the sweep keeps running, but no work gets queued until budget frees up. A banner on the Replay Vision pages shows "Monthly spend limit reached" with the reset date.
+- **On-demand triggers** – the player action and the `vision-scanners-scan-session` MCP tool return a `402 Payment Required` response.
+
+A scanner that's been paused by the budget resumes producing observations automatically once the period resets.
+
+## Tracking where spend goes
+
+The Replay Vision home has a **Usage** tab with:
+
+- **Spend over time** – a chart of your spend (daily, weekly, monthly, or yearly), with a forecast warning when the current pace would hit the budget before the period ends.
+- **A per-scanner breakdown** – each scanner's successful observations this period, its price per observation (which model it uses), its sampling rate, and its share of total spend.
+
+A scanner dominating the spend table is the first place to look when the budget runs down faster than expected – its sampling rate is the main cost lever.
+
+## Sizing scanners against the budget
+
+The scanner editor shows an **estimated cost** for the scanner you're configuring – roughly how many observations per month and the credits they'll spend – based on:
+
+- Your project's recent recording volume.
+- The filters you've set.
+- The session coverage mode.
+- The sampling rate.
+- The selected model's price.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/estimate_callout_2d954ec2cb.png"
+  alt="The scan conditions step of the scanner editor: sampling rate, recording filters, and the estimated per-month credits against the remaining budget"
+  classes="rounded"
+/>
+
+If the projection is uncomfortably close to your remaining budget, the cheapest knobs are:
+
+- **Narrow the filters** – e.g. require a specific URL pattern, exclude bots, restrict to a cohort.
+- **Tighten session coverage** – switching from "All recordings" to "Skip lowest activity" or "Highest activity only" filters out low-activity sessions before sampling, so your budget goes toward recordings with meaningful activity.
+- **Lower the sampling rate** – samples are random, so a 10% rate gives you a representative slice of matching sessions for one-tenth the cost.
+- **Pick a cheaper model** – the price difference per observation is up to 7x across the lineup.
+
+To project a hypothetical scanner _before_ creating it (e.g. from a script or agent), use the `vision-scanners-estimate-create` MCP tool. It runs the same projection the editor shows, returning both the observation count and the credits it would cost (`estimated_credits_per_month`).
+
+## What to do if you're hitting the budget
+
+Try these, in order:
+
+1. **Open the Usage tab and look at which scanner is consuming the most spend.** A scanner dominating the share-of-spend column is probably broader (or on a pricier model) than it needs to be.
+2. **Tighten its filters, session coverage, or sampling rate, or move it to a cheaper model.** Use the editor's estimate to find a setting that gives you enough signal without dominating the budget.
+3. **Disable scanners you're not actively using.** A disabled scanner produces zero new background observations.
+4. **Wait for the period to reset.** The reset date is shown on the spend tile and in the budget banner.

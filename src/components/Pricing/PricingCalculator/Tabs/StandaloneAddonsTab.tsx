@@ -5,7 +5,42 @@ import { calculatePrice, formatUSD } from '../../PricingSlider/pricingSliderLogi
 import { PricingTiers } from '../../Plans'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
-import pluralizeWord from 'pluralize'
+import { pluralizeUnit } from '../../utils'
+
+const TriggerEventsModal = ({ onClose, isVisible }) => {
+    return (
+        <>
+            <div
+                className={`bg-accent-dark/50 fixed h-screen left-0 right-0 top-0 bg-opacity-40 flex justify-center items-center ${
+                    !isVisible ? 'hidden' : 'z-[1000000]'
+                }`}
+                onClick={() => onClose()}
+            />
+            <div
+                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
+          ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
+            >
+                <div className="w-full h-fit flex justify-between p-4 border-b border-primary">
+                    <span className="font-bold text-xl">Trigger events, explained</span>
+                    <button onClick={() => onClose()}>
+                        <IconX className="size-5" />
+                    </button>
+                </div>
+                <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
+                    <p className="mb-4 text-[15px]">
+                        Trigger Events are the events that actually kick off destinations in your pipelines.
+                    </p>
+                    <p className="text-[15px]">
+                        As an example lets say a <em>sign up event</em> is the trigger for 5 different slack
+                        destinations you have configured. Every time a sign up event is processed, it will trigger 5
+                        different slack messages but you will be charged only once not five times. The sign up event is
+                        a trigger event in this case.
+                    </p>
+                </div>
+            </div>
+        </>
+    )
+}
 
 const SliderRow = ({
     label = '',
@@ -19,6 +54,11 @@ const SliderRow = ({
     freeAllocationText,
 }) => {
     const [currentVolume, setCurrentVolume] = useState(volume)
+    const scaleMin = sliderConfig.scaleMin ?? Math.max(sliderConfig.min, 1)
+    const minimumVisibleValue = sliderConfig.min > 0 ? sliderConfig.min : scaleMin
+    // Logarithmic sliders cannot represent 0 directly, so 0-volume rows use the left edge of the scale.
+    const sliderValue = Math.max(currentVolume, minimumVisibleValue)
+    const hasFreeAllocationNote = Boolean(freeAllocation || freeAllocationText)
 
     useEffect(() => {
         if (billingTiers) {
@@ -28,7 +68,7 @@ const SliderRow = ({
     }, [currentVolume, billingTiers])
 
     const handleVolumeChange = (newVolume) => {
-        const roundedVolume = Math.round(newVolume)
+        const roundedVolume = Math.max(Math.round(newVolume || 0), 0)
         setCurrentVolume(roundedVolume)
 
         if (billingTiers) {
@@ -37,8 +77,15 @@ const SliderRow = ({
         }
     }
 
+    const handleSliderChange = (value) => {
+        const roundedVolume = Math.round(sliderCurve(value))
+        const newVolume =
+            sliderConfig.min === 0 && roundedVolume <= scaleMin ? 0 : Math.max(roundedVolume, sliderConfig.min)
+        handleVolumeChange(newVolume)
+    }
+
     return (
-        <div className="grid grid-cols-8 mb-4">
+        <div className={`grid grid-cols-8 ${hasFreeAllocationNote ? 'mb-4' : 'mb-10'}`}>
             <div className="col-span-6">
                 <p className="mb-2">
                     <NumericFormat
@@ -48,7 +95,7 @@ const SliderRow = ({
                         onValueChange={({ floatValue }) => handleVolumeChange(floatValue)}
                         customInput={AutosizeInput}
                     />{' '}
-                    <span className="opacity-70 text-sm">{label}s/month</span>
+                    <span className="opacity-70 text-sm">{pluralizeUnit(label, currentVolume || 2)}/month</span>
                 </p>
             </div>
             <div className="col-span-2 text-right pr-3">
@@ -59,12 +106,13 @@ const SliderRow = ({
                     stepsInRange={100}
                     marks={sliderConfig.marks}
                     min={sliderConfig.min}
+                    scaleMin={scaleMin}
                     max={sliderConfig.max}
-                    onChange={(value) => handleVolumeChange(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(currentVolume)}
+                    onChange={handleSliderChange}
+                    value={inverseCurve(sliderValue)}
                 />
             </div>
-            {(freeAllocation || freeAllocationText) && (
+            {hasFreeAllocationNote && (
                 <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
                     <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
                     <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
@@ -73,7 +121,7 @@ const SliderRow = ({
                         ) : (
                             <>
                                 First {Math.round(freeAllocation).toLocaleString()}{' '}
-                                {pluralizeWord(unit, Math.round(freeAllocation))} free –&nbsp;
+                                {pluralizeUnit(unit, Math.round(freeAllocation))} free –&nbsp;
                                 <em>every month!</em>
                             </>
                         )}
@@ -84,11 +132,15 @@ const SliderRow = ({
     )
 }
 
+const isDataPipelines = (product) =>
+    product?.categoryName === 'Data pipelines' || product?.handle === 'realtime_destinations'
+
 export default function StandaloneAddonsTab({ activeProduct, setVolume, setProduct }) {
     const [mainVolume, setMainVolume] = useState(activeProduct.volume || 0)
     const [mainCost, setMainCost] = useState(0)
     const [showBreakdown, setShowBreakdown] = useState(false)
     const [mainCostByTier, setMainCostByTier] = useState([])
+    const [triggerEventsModalOpen, setTriggerEventsModalOpen] = useState(false)
 
     const [addonData, setAddonData] = useState(
         () =>
@@ -119,13 +171,21 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     const totalCost = mainCost + addonData.reduce((sum, addon) => sum + addon.cost, 0)
 
+    // Add-ons like logs 30-day retention meter their volume through the main product's tiers too
+    // (the add-on price is only the premium), so the main product is billed on the combined volume.
+    const parentMeteredAddonVolume = addonBillingData.reduce(
+        (sum, addon, index) => (addon.countsTowardParentVolume ? sum + (addonData[index]?.volume || 0) : sum),
+        0
+    )
+    const billedMainVolume = mainVolume + parentMeteredAddonVolume
+
     useEffect(() => {
         if (mainBillingTiers) {
-            const { total, costByTier } = calculatePrice(mainVolume, mainBillingTiers)
+            const { total, costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
             setMainCost(total)
             setMainCostByTier(costByTier)
         }
-    }, [mainVolume, mainBillingTiers])
+    }, [billedMainVolume, mainBillingTiers])
 
     useEffect(() => {
         const updatedAddonData = addonData.map((addon, index) => {
@@ -141,18 +201,19 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     useEffect(() => {
         if (mainBillingTiers) {
-            const { costByTier } = calculatePrice(mainVolume, mainBillingTiers)
+            const { costByTier } = calculatePrice(billedMainVolume, mainBillingTiers)
             setProduct(activeProduct.handle, {
                 cost: totalCost,
                 volume: mainVolume,
                 costByTier,
             })
         }
-    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, setProduct])
+    }, [totalCost, mainVolume, billedMainVolume, mainBillingTiers, activeProduct.handle, setProduct])
 
-    const handleMainVolumeChange = (volume, cost) => {
+    // Cost is derived from billedMainVolume in the effect above — the cost SliderRow reports only
+    // covers its own volume, which undercounts when an add-on meters through the main product.
+    const handleMainVolumeChange = (volume) => {
         setMainVolume(volume)
-        setMainCost(cost)
     }
 
     const handleAddonVolumeChange = (index) => (volume, cost) => {
@@ -161,6 +222,19 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
 
     return (
         <div className="mb-4">
+            <TriggerEventsModal onClose={() => setTriggerEventsModalOpen(false)} isVisible={triggerEventsModalOpen} />
+            {isDataPipelines(activeProduct) && (
+                <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
+                    Trigger Events are the events that actually kick off destinations in your pipelines (
+                    <button
+                        onClick={() => setTriggerEventsModalOpen(true)}
+                        className="text-red dark:text-yellow font-semibold text-sm not-italic"
+                    >
+                        see explanation
+                    </button>
+                    ).
+                </div>
+            )}
             <div className="mb-4">
                 <h4 className="mb-3 text-base font-semibold">
                     {activeProduct.productVariantName || activeProduct.name}
@@ -182,7 +256,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 (addon, index) =>
                     addon.billingTiers && (
                         <div key={addon.key} className="mb-4">
-                            <h4 className="mb-3 text-base font-semibold">{addon.label}</h4>
+                            <h4 className={`${addon.note ? 'mb-1' : 'mb-3'} text-base font-semibold`}>{addon.label}</h4>
+                            {addon.note && <p className="text-sm opacity-70 mb-3">{addon.note}</p>}
                             <SliderRow
                                 label={addon.unit}
                                 sliderConfig={addon.sliderConfig}
@@ -238,7 +313,22 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                     {activeProduct.productVariantName || activeProduct.name}
                                 </h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
-                                    <strong>{mainVolume.toLocaleString()}</strong> {activeProduct.billingData.unit}s
+                                    <strong>{billedMainVolume.toLocaleString()}</strong>{' '}
+                                    {pluralizeUnit(activeProduct.billingData.unit, billedMainVolume)}
+                                    {parentMeteredAddonVolume > 0 && (
+                                        <>
+                                            {' '}
+                                            (includes{' '}
+                                            {addonBillingData
+                                                .filter(
+                                                    (addon, index) =>
+                                                        addon.countsTowardParentVolume && addonData[index]?.volume > 0
+                                                )
+                                                .map((addon) => addon.label.toLowerCase())
+                                                .join(', ')}{' '}
+                                            volume)
+                                        </>
+                                    )}
                                 </p>
                                 <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                     <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
@@ -259,8 +349,8 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                                         <div key={addon.key}>
                                             <h4 className="text-lg m-0">{addon.label}</h4>
                                             <p className="opacity-70 m-0 text-sm mb-2">
-                                                <strong>{addonData[index].volume.toLocaleString()}</strong> {addon.unit}
-                                                s
+                                                <strong>{addonData[index].volume.toLocaleString()}</strong>{' '}
+                                                {pluralizeUnit(addon.unit, addonData[index].volume)}
                                             </p>
                                             <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                                 <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">

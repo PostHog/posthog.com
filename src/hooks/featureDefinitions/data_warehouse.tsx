@@ -2,7 +2,7 @@ export const dataWarehouseFeatures = {
     summary: {
         name: 'Data Stack',
         description: 'Import, query, model & visualize product and third party data together',
-        url: '/data-stack',
+        url: '/context-warehouse',
         docsUrl: '/docs/data-warehouse',
     },
     features: {
@@ -104,7 +104,7 @@ export const dataWarehouseFeatures = {
             },
             cloud_storage: {
                 name: 'S3 & BigQuery',
-                description: 'Query data directly from cloud storage',
+                description: 'Run SQL in PostHog over data in your object storage',
             },
         },
     },

@@ -6,7 +6,6 @@ import * as Icons from '@posthog/icons'
 import Link from 'components/Link'
 import { IconBold, IconLink } from 'components/OSIcons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
 import { RadioGroup } from 'components/RadixUI/RadioGroup'
 import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
@@ -16,7 +15,7 @@ import CodeBlock from '../Home/CodeBlock'
 import ContactForm from '../Home/ContactForm'
 import { useLocation } from '@reach/router'
 import OSTabs from 'components/OSTabs'
-import IntegrationPrompt from 'components/IntegrationPrompt'
+import WizardCommand from 'components/WizardCommand'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Loading from 'components/Loading'
@@ -28,7 +27,9 @@ const AIInstall = ({ setActiveTab }) => (
         className="bg-primary text-primary flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
     >
         <div className="flex-1 p-4 @2xl:p-6">
-            <IntegrationPrompt />
+            <h3>Install with AI in a single prompt</h3>
+            <p className="text-[15px]">Paste into your terminal or code editor and make AI do the work.</p>
+            <WizardCommand />
             <p className="border-t border-primary pt-4 mt-6 text-sm">
                 Not into AI?{' '}
                 <button className="cursor-pointer font-semibold underline" onClick={() => setActiveTab('signup')}>
