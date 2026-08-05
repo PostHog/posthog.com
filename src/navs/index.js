@@ -1643,6 +1643,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/health-checks',
                     },
                     {
+                        name: 'Cost optimization reviews',
+                        url: '/handbook/cs-and-onboarding/cost-optimization-reviews',
+                    },
+                    {
                         name: 'Risk mitigation and churn prevention',
                         url: '/handbook/growth/sales/risk-mitigation-and-churn-prevention',
                     },
