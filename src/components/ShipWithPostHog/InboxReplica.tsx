@@ -25,8 +25,10 @@ const TABS: { key: TabKey; label: string; items: typeof INBOX_ITEMS; hint: strin
         key: 'prs',
         label: 'Pull requests',
         items: INBOX_ITEMS,
-        hint: 'Reports an agent took all the way to a merged pull request.',
-        empty: 'These five are the real ones we merged, so not every combination has a result.',
+        hint: 'Reports an agent took to a pull request.',
+        // Deliberately no count: the list grows as walkthroughs land, and a hardcoded
+        // number here went stale the first time one was added.
+        empty: 'These are the real ones we merged, so not every combination has a result.',
     },
     {
         key: 'reports',

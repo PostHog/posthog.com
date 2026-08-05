@@ -306,24 +306,25 @@ export interface InboxItem {
     /**
      * Overrides the `SignalsToInbox` selector button label (default: "<source> · <scope>").
      * Display-only – the inbox row above still shows the item's real discovery channel.
-     * Used so the general session-replay walkthrough reads "Session replay" even though its
-     * report was discovered by Replay Vision.
+     *
+     * Two reasons an item sets this: its walkthrough narrates the product rather than the
+     * one PR, so the disambiguating scope is noise ("Replay Vision"); or the default would
+     * name the wrong product, because the report's discovery channel isn't what the story
+     * is about ("Session replay" on a report Replay Vision found).
      */
     walkthroughLabel?: string
 }
 
 /*
- * Placeholder screenshot labels, so a later content pass knows which image each slot
- * wants. `SelfDrivingStory` renders these as labeled dashed boxes until real captures
- * land, and `image` takes precedence over `imagePlaceholder` once one does – the
- * session-replay walkthrough already has all four for real.
+ * Every walkthrough here now carries real screenshots, so the `ph` helper that supplied
+ * placeholder labels is gone. The mechanism it fed remains: a step can still set
+ * `imagePlaceholder` and `SelfDrivingStory` will render a labeled dashed box, with `image`
+ * taking precedence once a real capture lands. Reach for it when authoring a new
+ * walkthrough before its mocks exist – the strings it used were:
+ *   signal      "Screenshot: the report in your Inbox"
+ *   investigate "Screenshot: the agent tracing the root cause"
+ *   pr / merge  "Screenshot: pull request #<n> on GitHub" / "Screenshot: #<n> merged"
  */
-const ph = {
-    signal: 'Screenshot: the report in your Inbox',
-    investigate: 'Screenshot: the agent tracing the root cause',
-    pr: (n: number) => `Screenshot: pull request #${n} on GitHub`,
-    merge: (n: number) => `Screenshot: #${n} merged`,
-}
 
 /**
  * Five real reports that produced real merged pull requests on PostHog/posthog.
@@ -358,40 +359,29 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'error_tracking' },
         prUrl: 'https://github.com/PostHog/posthog/pull/75725',
         prNumber: 75725,
-        intro: 'An exception burst that pointed at the wrong culprit until an agent read the write path.',
+        // Product-level narration rather than this one PR, so the scope would be noise.
+        walkthroughLabel: 'Error tracking',
+        intro: 'Exceptions get grouped into issues. Issues that matter become signals.',
         steps: [
             {
                 stage: 'signal',
-                copy: 'Error tracking groups every exception into an issue with a running count, so a burst registers the moment it starts. Insight queries begin returning 500s in project-wide bursts – 172 exceptions inside three minutes, 171 of them the same database error.',
-                imagePlaceholder: ph.signal,
+                copy: 'New exceptions, reopened issues, volume spikes. Grouping is the point: seven fingerprints of the same disease read as one problem, not seven tickets.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_28_33_2x_95119ac46a.png',
             },
             {
                 stage: 'investigate',
-                copy: (
-                    <>
-                        The agent finds the queries had already succeeded. <Code>store_result()</Code> asks{' '}
-                        <Code>get_team_cache_limit()</Code> for the team's cache cap, and that helper reads an optional
-                        override from Postgres while only catching <Code>Team.DoesNotExist</Code> – so a saturated
-                        connection pooler fails a query over a config value that has a good default.
-                    </>
-                ),
-                imagePlaceholder: ph.investigate,
+                copy: "The agent walks the stack traces to the code they share, checks who's affected and since when, and writes it up with the issues attached.",
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Error_tracking_92da14dd9f.png',
             },
             {
                 stage: 'pr',
-                copy: (
-                    <>
-                        The fix catches <Code>DatabaseError</Code>, falls back to the default limit, and wraps the
-                        bookkeeping call so cache accounting can never fail a query that already ran. 39 lines added
-                        across four files.
-                    </>
-                ),
-                imagePlaceholder: ph.pr(75725),
+                copy: 'No waiting on this one – error tracking has the stack trace, so the agent goes straight to a draft PR. It lands in your Inbox next to the report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Error_tracking_e283365724.png',
             },
             {
                 stage: 'merge',
-                copy: 'The agent suggested Andy Zhao, who wrote the cache-limit helper in the first place. He reviewed it, approved it, and it merged the same day.',
-                imagePlaceholder: ph.merge(75725),
+                copy: 'One review, seven issues closed. Dismiss it instead, and your reason steers what gets surfaced next.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Error_tracking_ef7e6bea2a.png',
             },
         ],
         detail: {
@@ -537,34 +527,30 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/72382',
         prNumber: 72382,
-        intro: 'Three recordings, three weeks apart, all stuck on the same validation error.',
+        // The scope would read "Replay Vision · cohorts", but this walkthrough narrates the
+        // product rather than this one cohort bug, so the button carries the product alone.
+        walkthroughLabel: 'Replay Vision',
+        intro: 'Session replay collects the footage. Replay Vision actually watches it.',
         steps: [
             {
                 stage: 'signal',
-                copy: 'Replay Vision watches recordings and flags friction as it happens. Someone builds a cohort with a "did not complete event" criterion, hits save, and gets an error – three independent recordings catch the same block across two regions over about three weeks.',
-                imagePlaceholder: ph.signal,
+                copy: 'Scanners watch every recording with vision models – frustration, dead ends, outcomes – and you write new ones as a prompt. What a scanner keeps seeing becomes a report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_20_35_2x_ace6f4a89a.png',
             },
             {
                 stage: 'investigate',
-                copy: (
-                    <>
-                        The agent matches the error text to its client-side constant, then finds{' '}
-                        <Code>validateGroup</Code> checking negation one group at a time. A negation alone in its group
-                        makes that group entirely negated, so the check throws without ever looking at the positive
-                        criterion in a sibling group.
-                    </>
-                ),
-                imagePlaceholder: ph.investigate,
+                copy: 'The agent pulls the flagged recordings, confirms what the scanner saw, and traces it to the responsible code. The clips go in as evidence.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Replay_Vision_79e51365f5.png',
             },
             {
                 stage: 'pr',
-                copy: 'The fix makes negation validation reason about the whole cohort: under a top-level AND, a negation in one group is satisfied by a positive criterion in any sibling group.',
-                imagePlaceholder: ph.pr(72382),
+                copy: 'A scanner sees the symptom, so the report waits for your call. You decide the fix; the agent opens the PR.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Replay_Vision_9f7ebbb82a.png',
             },
             {
                 stage: 'merge',
-                copy: 'Worth merging for the workaround alone – people were switching the group to "any" to get past the error, which silently built a different cohort than the one they wanted.',
-                imagePlaceholder: ph.merge(72382),
+                copy: 'You review the diff with the clips beside it. Merge, or hit "Improve scanner" and tell it what it got wrong.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Replay_Vision_f022dc3f54.png',
             },
         ],
         detail: {
@@ -684,42 +670,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'conversations' },
         prUrl: 'https://github.com/PostHog/posthog/pull/73901',
         prNumber: 73901,
-        intro: 'A support thread about Slack that turned out to be an OAuth bug hiding behind a successful-looking redirect.',
-        steps: [
-            {
-                stage: 'signal',
-                copy: 'Conversations reads your support inbox, so a thread describing a reproducible problem becomes a signal without anyone filing a ticket. A customer with several projects connects Slack and it lands on a different one – and integration-created events show people making three or four attempts in a day that all resolve to the same project.',
-                imagePlaceholder: ph.signal,
-            },
-            {
-                stage: 'investigate',
-                copy: (
-                    <>
-                        The agent finds <Code>authorize_url</Code> putting only <Code>{'{next, token}'}</Code> in the
-                        OAuth <Code>state</Code>, with a callback that isn't project-scoped. The full-page round-trip
-                        re-resolves the current team to the user's saved default, so the integration is created against
-                        the wrong one – then <Code>state.next</Code> bounces the UI back, which is why it looks like it
-                        worked.
-                    </>
-                ),
-                imagePlaceholder: ph.investigate,
-            },
-            {
-                stage: 'pr',
-                copy: (
-                    <>
-                        The fix carries the initiating <Code>team_id</Code> through the OAuth <Code>state</Code> and
-                        creates against that team, matching what the GitHub flow already did.
-                    </>
-                ),
-                imagePlaceholder: ph.pr(73901),
-            },
-            {
-                stage: 'merge',
-                copy: 'One report, but it affects every multi-project customer wiring up any OAuth integration, since they all share this flow. Approved and merged three days after it was first seen.',
-                imagePlaceholder: ph.merge(73901),
-            },
-        ],
+        // No `steps`, so this one stays in the inbox but out of the walkthrough selector.
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 27, 2026',
@@ -856,35 +807,12 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'conversations' },
         prUrl: 'https://github.com/PostHog/posthog/pull/70918',
         prNumber: 70918,
-        intro: 'A feature that failed two times in three, with every failure landing on the same suspicious number.',
-        steps: [
-            {
-                stage: 'signal',
-                copy: (
-                    <>
-                        Conversations picked this one up, and LLM analytics had the numbers to confirm it. Generating an
-                        AI eval summary mostly fails: over 30 days of <Code>$ai_generation</Code> events, 16 errors, all
-                        502, averaging 29.1s against 8 successes topping out at 29.3s.
-                    </>
-                ),
-                imagePlaceholder: ph.signal,
-            },
-            {
-                stage: 'investigate',
-                copy: 'Failures clustered on the boundary rather than spread out, which points at a hard timeout instead of a slow model. The endpoint ran one blocking completion over as many as 250 runs, taking 20 to 30+ seconds through a gateway that aborts at about 30 – so the generous Python-side timeout never got a chance to apply.',
-                imagePlaceholder: ph.investigate,
-            },
-            {
-                stage: 'pr',
-                copy: 'The fix summarizes as a bounded concurrent map-reduce, chunking the run set so no single gateway request approaches the timeout. The largest of these five by a distance: 997 lines added across 13 files.',
-                imagePlaceholder: ph.pr(70918),
-            },
-            {
-                stage: 'merge',
-                copy: 'Approved and merged, taking a 67% failure rate to zero without raising a single limit.',
-                imagePlaceholder: ph.merge(70918),
-            },
-        ],
+        /*
+         * No `steps`, so this stays in the inbox but out of the walkthrough selector. The
+         * AI Observability walkthrough gets rebuilt on this item – it has the real PR – once
+         * its copy and mocks land. It'll want `walkthroughLabel: 'AI observability'`, because
+         * the report was discovered by Conversations and the default label said so.
+         */
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 14, 2026',
@@ -1160,6 +1088,55 @@ export const INBOX_ITEMS: InboxItem[] = [
                 },
             ],
         },
+    },
+    /*
+     * 6 — APM. The umbrella story for metrics, logs and traces, which the site otherwise
+     * ships as separate products.
+     *
+     * TODO: this is the one item here without a real merged pull request. `prUrl`,
+     * `prNumber` and `detail` are deliberately absent rather than invented – the header
+     * link is gated on `prUrl`, so the row renders without a PR badge and expands to
+     * header + summary only. The title and summary below are placeholders too. Swap all of
+     * it for the real PR's data once one exists; see README.md for the fetch flow.
+     */
+    {
+        id: 'apm',
+        commitType: 'fix',
+        scope: 'apm',
+        title: 'placeholder – awaiting the real APM pull request',
+        summary:
+            'Placeholder summary. A p95 regression on one service operation, caught against its own baseline rather than a fixed threshold.',
+        priority: 'P2',
+        signalCount: 3,
+        timeAgo: 'Updated Aug 5',
+        // The copy calls this "the APM scout", and a scheduled scout is exactly what it
+        // describes – so this is a scout report, not a signal from one source product.
+        origin: { kind: 'scout', scout: 'APM' },
+        // Metrics, logs and traces are one story here, so the button drops the scope.
+        walkthroughLabel: 'APM',
+        intro: "Metrics say something's wrong. Logs say what happened. Traces say where. Self-driving reads all three.",
+        steps: [
+            {
+                stage: 'signal',
+                copy: 'The APM scout watches RED metrics per service and operation – error rate, p95, volume – plus log-level spikes, on a schedule. A regression against baseline becomes a report; one bad minute doesn’t.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_APM_1_8d287374b6.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. The trace hands over the location: service, operation, line.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_APM_68ef834f95.png',
+            },
+            {
+                stage: 'pr',
+                copy: 'The agent fixes what the trace located and opens the PR, instrumented so the fix can prove itself.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_APM_62fd9d0412.png',
+            },
+            {
+                stage: 'merge',
+                copy: 'You review the diff with the waterfall beside it. After you merge, the same check that raised the alarm watches the graph come back down.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_APM_5caee0bbd3.png',
+            },
+        ],
     },
 ]
 

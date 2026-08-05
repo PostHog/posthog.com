@@ -9,9 +9,10 @@ import { INBOX_ITEMS, originMeta, type InboxItem } from './inboxData'
 const WALKTHROUGHS: InboxItem[] = INBOX_ITEMS.filter((item) => item.steps?.length)
 
 /**
- * Selector label. The source alone isn't unique – two of these were found by Replay
- * Vision and two came in through Conversations – so the commit scope disambiguates,
- * reading as "Replay Vision · cohorts".
+ * Selector label. The source alone isn't unique – several of these were found by Replay
+ * Vision and two came in through Conversations – so by default the commit scope
+ * disambiguates, reading as "Conversations · integrations". Items whose walkthrough is
+ * about the product rather than the one PR override it; see `walkthroughLabel`.
  */
 const selectorLabel = (item: InboxItem): string =>
     item.walkthroughLabel ?? `${originMeta(item).primary} · ${item.scope}`
