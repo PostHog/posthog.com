@@ -38,7 +38,8 @@ Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, `pages/pricing/phil
 4. `CustomerLogos`
 5. Philosophy note
 6. `MoreOptions` — three cards, then `CalculatorReveal` as a quiet footnote in the same section
-7. FAQ
+7. `SelfDrivingPricing` — the one exception to usage-based billing
+8. FAQ
 
 `CustomerLogos` sits after `PricingJourney` rather than next to the free-tier row on purpose — see its section below. The calculator is intentionally late on the page (above the FAQ) so first-time visitors hit free-tier reassurance before an estimator.
 
@@ -187,6 +188,16 @@ Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto
 **Panel content comes from `Platform/PlatformPackageComparison`,** two components (`PlatformPackageList`, `PlatformFeatureTable`) extracted from the `/platform-packages` page so the prices and feature lists exist once. The page keeps its own intro and "get started" copy; the panel has neither, and doesn't link out to the page for them either. The panel answers the question the CTA asked and stops — the card's own CTA is the way to the page, for anyone who wants it.
 
 The page renders `CalculatorReveal` immediately after this component, still inside the same `SectionLayout` — see that section. The cards component itself doesn't know about the calculator.
+
+### `SelfDrivingPricing`
+
+How [self-driving](/self-driving) is billed: models at cost plus about 27%, not per pull request and not per seat. One sentence for the rule, then a table of the four surfaces you can run it from.
+
+**It's last before the FAQ because it's an exception, not a pitch.** Everything above tells one story — start free, add a card when you outgrow it — and this is the one thing that doesn't follow it. Placing it earlier means interrupting that story to explain a billing model most visitors will never touch. Placing it here means anyone who's still reading is the sort of person who wants it.
+
+**The four surfaces are a table, not cards.** The version this came from used four cards, which put a feature grid a few hundred pixels below `MoreOptions`' three cards — the same component twice, at two different meanings. The table also does more work: its "who bills the tokens" column *is* the footnote that used to sit beneath those cards ("the first three run tokens through PostHog… with MCP you pay your provider directly"). The one thing that differs between the four surfaces became the thing you scan for, rather than a sentence you have to hold in your head while reading a grid.
+
+PostHog Web is the only surface with no link — it's just `app.posthog.com`, and a signup CTA inside a billing table would be the wrong ask in the wrong place. The other three are underlined but **not** recoloured to `text-red dark:text-yellow` like the page's prose links: three red words down the first column would fight the table, and the underline alone is enough to distinguish them from Web.
 
 ## Conventions
 

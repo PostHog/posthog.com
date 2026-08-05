@@ -11,6 +11,7 @@ import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
 import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
 import Philosophy from './philosophy'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
+import SelfDrivingPricing from 'components/Pricing/Redesign/SelfDrivingPricing'
 
 /**
  * Redesigned pricing page — mockup route, live at /pricing/redesign.
@@ -63,6 +64,16 @@ export default function PricingRedesign(): JSX.Element {
                 </SectionHeader>
                 <MoreOptions />
                 <CalculatorReveal />
+            </SectionLayout>
+
+            <SectionLayout id="self-driving" className="not-prose">
+                <SectionHeader>
+                    <h2 className="text-2xl mb-0">If you'd rather PostHog did the work</h2>
+                    <p className="text-[15px] text-secondary mb-0 mt-1">
+                        Self-driving is the one thing here that isn't billed on usage.
+                    </p>
+                </SectionHeader>
+                <SelfDrivingPricing />
             </SectionLayout>
 
             <SectionLayout id="faq" className="mb-12">
