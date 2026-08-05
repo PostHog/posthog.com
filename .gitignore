@@ -43,3 +43,6 @@ __pycache__
 .env*.local
 /.claude/worktrees/
 .env*
+
+# Local design reference exports (not part of the site)
+design-refs/
