@@ -167,6 +167,24 @@ Three quiet cards — Startups (`/startups`), Platform packages (`/platform-pack
 
 These replace the cut Enterprise plan column. Styled as low-key cards rather than plan tiers so they don't compete with the single signup CTA above them.
 
+**"See what's included" expands in place instead of navigating.** "What's in a platform package" is a question you ask *while* comparing these three cards, so answering it on a separate page costs you your place — you have to come back to finish comparing. The other two cards are genuine destinations and still open as pages.
+
+**The panel is full width below the row, not inside the card.** The feature table needs a label column plus one column per package, which won't fit in a third of the row; and growing one card would leave the other two standing short beside it. Opening it pushes the `CalculatorReveal` footnote down, which is fine — the footnote isn't anchored to anything.
+
+**Three things tie the panel to its card,** because full width below a grid otherwise reads as a new section:
+
+1. **It's styled as one of the cards** — same fill, radius, and padding. An early version separated it with a full-width `border-t`, which was actively wrong: that's how this page divides *sections*, so it said "unrelated" as loudly as possible.
+2. **A caret notch points up at the middle card.** A `size-3` square rotated 45° with `border-l border-t`, offset `-top-1.5`; its fill covers the panel's own top border, so the edge reads as opening into the notch. It's `left-1/2` because the middle column of an evenly-gapped 3-up grid is centered too — which stops being true when the cards stack, so the notch is `@2xl` only.
+3. **The open card keeps its hover border.** `border-input` instead of `border-primary`, on the card, the panel, and the notch, so the pair stays visually linked after the cursor moves away.
+
+The notch needs room above the panel or `overflow-hidden` clips it — that's what the panel wrapper's `mt-4` buys, and it happens to match the grid gap.
+
+Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto` transition (not `RadixUI/Accordion`), content mounted only after the first open, and `invisible` once collapsed so its links leave the tab order.
+
+**The CTA is still a `<Link to="/platform-packages">`** whose `onClick` calls `preventDefault`. Gatsby's `Link` skips navigating when the event is already default-prevented, so that's the whole opt-out — and because the `to` is real, cmd-click, middle-click, and the "Open in new PostHog window" context menu still open the page. It carries `aria-expanded` and `aria-controls` for the panel.
+
+**Panel content comes from `Platform/PlatformPackageComparison`,** two components (`PlatformPackageList`, `PlatformFeatureTable`) extracted from the `/platform-packages` page so the prices and feature lists exist once. The page keeps its own intro and "get started" copy; the panel has neither, and doesn't link out to the page for them either. The panel answers the question the CTA asked and stops — the card's own CTA is the way to the page, for anyone who wants it.
+
 The page renders `CalculatorReveal` immediately after this component, still inside the same `SectionLayout` — see that section. The cards component itself doesn't know about the calculator.
 
 ## Conventions
