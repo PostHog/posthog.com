@@ -30,6 +30,7 @@ import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
+import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
 import NewsletterForm from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -364,6 +365,14 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname === '/docs/data-warehouse/sources' ||
         pathname.startsWith('/docs/data-warehouse/sources/')
 
+    // Same nudge for AI observability SDK installation pages. The coding-agent integrations
+    // (Claude Code, OpenClaw, Pi) are excluded: they instrument the agent itself, so running
+    // the wizard in a project doesn't set them up. The installation index has its own
+    // AI wizard section in the MDX.
+    const showAIObservabilityWizardHint =
+        pathname.startsWith('/docs/ai-observability/installation/') &&
+        !['claude-code', 'openclaw', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
 
@@ -447,7 +456,10 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                     : null),
             }}
             title={title}
-            belowTitle={showWarehouseWizardHint && <WarehouseWizardHint />}
+            belowTitle={
+                (showWarehouseWizardHint && <WarehouseWizardHint />) ||
+                (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
+            }
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
             commits={commits}

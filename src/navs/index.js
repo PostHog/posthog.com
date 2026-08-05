@@ -3705,8 +3705,8 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/skills-store',
                         },
                         {
-                            name: 'AI Observability ↗',
-                            url: 'https://posthog.com/docs/ai-observability',
+                            name: 'AI Observability',
+                            url: '/docs/ai-observability',
                         },
                         {
                             name: 'Markdown and llms.txt',
