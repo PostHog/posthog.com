@@ -657,7 +657,7 @@ const faqItems = [
 const heroBullets = [
     'Answer product data questions in-thread',
     'Turn a message into a draft PR',
-    'No editor, no context switch, no laptop',
+    'Ship from your phone with the Slack mobile app',
 ]
 
 const HeroSection = () => (
