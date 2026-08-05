@@ -21,9 +21,17 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
                         <CloudinaryImage
                             src={screenshots.home.src as `https://res.cloudinary.com/${string}`}
                             alt={screenshots.home.alt || name}
-                            className="w-full"
+                            className={`w-full${screenshots.home.srcDark ? ' dark:hidden' : ''}`}
                             imgClassName="h-auto rounded-lg transition-all duration-300"
                         />
+                        {screenshots.home.srcDark && (
+                            <CloudinaryImage
+                                src={screenshots.home.srcDark as `https://res.cloudinary.com/${string}`}
+                                alt={screenshots.home.alt || name}
+                                className="w-full hidden dark:block"
+                                imgClassName="h-auto rounded-lg transition-all duration-300"
+                            />
+                        )}
                         {/* Optional – composite heroes (hog already in the art) skip this. */}
                         {(HogComponent || hogs?.default?.src) && (
                             <div className="absolute bottom-0 -right-4">

@@ -56,7 +56,7 @@ Its [AI Observability](/docs/ai-observability) tool captures every instrumented 
 
 Beyond that, two features stand out for teams iterating on LLM apps:
 
-1. [Prompt management](/docs/prompt-management) (beta) lets you version and update prompts at runtime without a redeploy.
+1. [Prompt management](/docs/prompt-management) lets you version and update prompts at runtime without a redeploy.
 2. [Evaluations](/docs/ai-evals) use code and LLM-as-a-judge to score outputs for quality, not just whether the API call succeeded.
 
 PostHog is free to start: 100k AI observability events per month, no credit card needed. Beyond that, [pricing is usage-based and fully transparent](/pricing).
@@ -267,11 +267,11 @@ The exception is **per-trace pricing** (LangSmith): one trace covers a whole req
 
 Let's see how much this would cost, across different platforms:
 
-- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a $0.00006 per-event rate with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; you'd pay for the ~600,000 above the free tier = ~$36.
+- **PostHog (usage-based per event):** the first 100,000 LLM analytics events each month are free, then you pay a volume-tiered rate that starts at $35 per 100,000 events and falls to $6 per 100,000 at the highest volumes, with no seat fees. Each generation and span is an event, so this workload is roughly 700,000 events; the ~600,000 above the free tier works out to ~$76.
 
 - **LangSmith (per seat + per trace):** one trace typically represents an entire user request, regardless of how many spans or model calls happen inside it. In this example, 100,000 requests produce 100,000 billable traces. With five seats at $39/month (Plus plan), that's $195 in seat costs. After the 10,000 included traces (Plus plan), the remaining 90,000 traces cost about $225 in overages ($0.0025/trace), bringing the total to roughly $420/month. The important thing is that the bill grows with request volume, not with the number of spans inside each request.
 
-- **Braintrust (flat fee, no seats):** the free Starter tier includes 1GB of processed data (roughly 1 million spans at typical payload sizes), so this ~700,000-span workload still fits inside the free tier at $0. If you outgrow it, Pro is a flat $249 a month with unlimited users and data-based overages. Adding engineers costs nothing.
+- **Braintrust (flat fee, no seats):** the free Starter tier includes 1GB of processed data (roughly 70,000 spans at typical payload sizes), so this ~700,000-span workload runs about $38 a month in overages. Pro is a flat $249 a month with unlimited users and 5GB included, plus ~$17 in overages, for about $266 a month. Adding engineers costs nothing.
 
 - **Langfuse cloud (per observation):** a note on terminology first – Langfuse's billable unit is anything you send it: traces, observations (spans, generations), and scores. If 100,000 user requests create 100,000 traces and about 700,000 observations, the workload is about 800,000 billable units. On the Core plan, that means $29 for the first 100,000 units, plus $56 for the remaining 700,000 units, or about $85/month.
 
@@ -314,7 +314,7 @@ Both your team and your traffic are growing, which makes per-seat pricing painfu
 
 You need compliance, SSO, and on-prem or VPC deployment? **Arize**, **Braintrust** (Enterprise), **LangSmith** (Enterprise and hybrid), and **W&B Weave** (on-prem) all serve this tier. 
 
-**PostHog** is open source and its cloud is SOC 2 Type II compliant. For a compliance-first shop that wants it out of the box, **HoneyHive** is an honorable mention with SOC 2 Type II, HIPAA, and GDPR built in, though it's enterprise-priced and sales-led rather than self-serve.
+**PostHog** is open source and its cloud is SOC 2 Type 2 compliant. For a compliance-first shop that wants it out of the box, **HoneyHive** is an honorable mention with SOC 2 Type 2, HIPAA, and GDPR built in, though it's enterprise-priced and sales-led rather than self-serve.
 
 <WizardCTA />
 

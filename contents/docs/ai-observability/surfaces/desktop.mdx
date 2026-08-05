@@ -14,6 +14,11 @@ PostHog Desktop is in beta.
 
 Unlike [error tracking](/docs/error-tracking), this scout stops at the report. It does not open a draft pull request – see [why](#why-there-is-no-automatic-pull-request) below.
 
+## Before you start
+
+1. **Set up AI Observability** – [install a PostHog LLM SDK or provider integration](/docs/ai-observability/installation) so traces are captured.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## How a regression becomes a report
 
 The scout looks for five kinds of change, sliced by the dimensions it finds in your data – model, provider, feature, product area, and any custom properties you attach:
