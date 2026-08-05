@@ -3156,3 +3156,7 @@ div[data-radix-popper-content-wrapper] {
 html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint {
     display: none;
 }
+
+html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint {
+    display: none;
+}
