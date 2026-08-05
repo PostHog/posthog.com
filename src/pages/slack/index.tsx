@@ -9,16 +9,11 @@ import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import OSTable from 'components/OSTable'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
-import SlotMachineText from 'components/SlotMachineText'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { IconSlack } from 'components/OSIcons/Icons'
-import posthogIcon from '../../images/posthog-icon-white.svg'
 import {
-    IconArrowUpRight,
     IconBell,
     IconBolt,
     IconCalendar,
-    IconChat,
     IconCheck,
     IconCode,
     IconCoffee,
@@ -491,7 +486,7 @@ const compareRows: CompareRow[] = [
 
 const compareLinks: { label: string; url: string }[] = [
     { label: 'PostHog AI', url: '/ai' },
-    { label: 'PostHog Slack app', url: '#try' },
+    { label: 'PostHog Slack app', url: '/docs/slack' },
     { label: 'PostHog Desktop', url: '/desktop' },
 ]
 
@@ -659,73 +654,14 @@ const faqItems = [
     },
 ]
 
-const fighterOptions: { icon: IconComponent; iconColor: string; label: React.ReactNode; copy: React.ReactNode }[] = [
-    {
-        icon: IconSparkles,
-        iconColor: 'text-blue',
-        label: (
-            <Link to="/ai" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog AI
-            </Link>
-        ),
-        copy: "When you're already in the app looking at data – ask it to write the SQL, build the dashboard, or make sense of what you're seeing.",
-    },
-    {
-        icon: IconChat,
-        iconColor: 'text-sky-blue',
-        label: 'PostHog Slack app',
-        copy: "For all the drive-by stuff you'd normally Slack a teammate about (typos, cross-repo checks, quick fixes).",
-    },
-    {
-        icon: IconCoffee,
-        iconColor: 'text-brown dark:text-brown-dark',
-        label: (
-            <Link to="/desktop" state={{ newWindow: true }} className="font-bold text-primary">
-                PostHog Desktop
-            </Link>
-        ),
-        copy: 'For real engineering work – signals from the inbox, parallel agents, anything where you care about the diff before it ships.',
-    },
-]
-
 const heroBullets = [
     'Answer product data questions in-thread',
     'Turn a message into a draft PR',
     'No editor, no context switch, no laptop',
 ]
 
-const LetPostHogScroller = () => (
-    <SlotMachineText
-        className="text-lg @xl/reader-content:text-2xl font-bold tracking-tight"
-        words={['analyze', 'debug', 'instrument', 'ship', 'experiment', 'query', 'flag', 'code']}
-        holdDuration={4000}
-        wordClassName="text-red dark:text-yellow"
-        prefix={
-            <span className="inline-flex items-center gap-2">
-                <span>Let</span>
-                <img src={posthogIcon} alt="" aria-hidden className="size-6 rounded-md @xl/reader-content:size-7" />
-                <span>PostHog</span>
-            </span>
-        }
-    />
-)
-
 const HeroSection = () => (
     <section className="not-prose w-full tracking-[-0.0125em]">
-        {/* Title strip – mirrors the header bar on /desktop */}
-        <div className="mb-6 flex items-center justify-between gap-4 border-b border-primary pb-3">
-            <LetPostHogScroller />
-            <Link
-                className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-secondary hover:text-primary"
-                to={SLACK_MARKETPLACE_URL}
-                externalNoIcon
-            >
-                <IconSlack className="size-5" />
-                <span className="group-hover:underline">Slack marketplace</span>
-                <IconArrowUpRight className="size-4 inline-block invisible group-hover:visible" />
-            </Link>
-        </div>
-
         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
             Don't @ <em>me,</em>{' '}
             <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} delay={300}>
@@ -760,7 +696,8 @@ const HeroSection = () => (
                 </div>
             </div>
 
-            <div className="w-full min-w-0 @4xl/reader-content:flex-1">
+            {/* Capped to roughly the width the video gets inside /desktop's max-w-4xl column */}
+            <div className="w-full min-w-0 max-w-[560px] @4xl/reader-content:flex-1">
                 <div className="overflow-hidden rounded-md shadow-xl">
                     <WistiaEmbed mediaId="ifyltgbxid" />
                 </div>
@@ -856,33 +793,6 @@ export default function SlackAppPage(): JSX.Element {
                     <h3>
                         Choose your <Highlight>fighter</Highlight>
                     </h3>
-                    <p>Same agent, three front doors.</p>
-                    <div className="not-prose grid @lg/reader-content:grid-cols-2 gap-6 items-center my-6">
-                        <div className="space-y-4">
-                            {fighterOptions.map(({ icon: Icon, iconColor, label, copy }, index) => (
-                                <div key={index}>
-                                    <p className="m-0 inline-flex items-center gap-2 font-bold text-base">
-                                        <Icon className={`size-5 shrink-0 ${iconColor}`} />
-                                        {label}
-                                    </p>
-                                    <p className="m-0 mt-1 text-base">{copy}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/choose_your_fighter_e62bd78032.png"
-                            alt="Choose your fighter"
-                            className="hidden @lg/reader-content:block"
-                            imgClassName="w-full"
-                        />
-                    </div>
-                    <p className="text-sm text-secondary">
-                        Building your own?{' '}
-                        <Link to="/docs/model-context-protocol" state={{ newWindow: true }}>
-                            PostHog MCP
-                        </Link>{' '}
-                        wires the same product context into the editor or agent of your choice.
-                    </p>
                     <div className="not-prose my-6">
                         <OSTable
                             size="sm"
@@ -893,7 +803,11 @@ export default function SlackAppPage(): JSX.Element {
                                 { name: '', align: 'left', width: 'minmax(80px,110px)' },
                                 ...compareLinks.map(({ label, url }) => ({
                                     name: (
-                                        <Link to={url} state={{ newWindow: true }} className="font-bold text-primary">
+                                        <Link
+                                            to={url}
+                                            state={{ newWindow: true }}
+                                            className="font-bold text-red dark:text-yellow hover:underline"
+                                        >
                                             {label}
                                         </Link>
                                     ),
@@ -912,13 +826,6 @@ export default function SlackAppPage(): JSX.Element {
                             }))}
                         />
                     </div>
-                    <p className="text-sm text-secondary">
-                        Steering an agent from Slack is one way work gets done.{' '}
-                        <Link to="/self-driving" state={{ newWindow: true }}>
-                            Self-driving
-                        </Link>{' '}
-                        is the bigger loop around it.
-                    </p>
                     <div
                         id="try"
                         className="not-prose bg-accent border border-primary rounded-md p-4 @md/reader-content:p-6 my-6"
