@@ -75,11 +75,7 @@ export default function MoreOptions(): JSX.Element {
                 {options.map(({ icon, title, description, cta, url, onClick, expanded }) => (
                     <div
                         key={title}
-                        // An open card holds the hover border, so the row shows which of the three
-                        // the panel below belongs to even after the cursor has moved away.
-                        className={`flex flex-col border rounded-md p-5 bg-light dark:bg-accent transition-colors ${
-                            expanded ? 'border-input' : 'border-primary hover:border-input'
-                        }`}
+                        className="flex flex-col border border-primary rounded-md p-5 bg-light dark:bg-accent"
                     >
                         <div className="mb-3">{icon}</div>
                         <h3 className="text-base mb-1">{title}</h3>
@@ -111,19 +107,20 @@ export default function MoreOptions(): JSX.Element {
                 onAnimationComplete={() => setSettled(true)}
                 className={`overflow-hidden ${settled && !open ? 'invisible' : ''}`}
             >
-                {/* Same fill, radius, and padding as the cards, so it reads as one of the family
-                    rather than page content, and the same `border-input` as the open card so the
-                    two are a matched pair. `mt-4` matches the grid gap and also leaves the notch
-                    below room to poke out without `overflow-hidden` clipping it. */}
-                <div className="relative mt-4 border border-input rounded-md p-5 bg-light dark:bg-accent">
+                {/* Same fill, border, radius, and padding as the cards, so it reads as one of the
+                    family rather than page content. `mt-4` matches the grid gap and also leaves
+                    the notch below room to poke out without `overflow-hidden` clipping it. */}
+                <div className="relative mt-4 border border-primary rounded-md p-5 bg-light dark:bg-accent">
                     {/* Points at the card that opened this. A square rotated 45° with two borders
                         makes the arrowhead; its fill covers the panel's own top border, so the
-                        edge reads as opening into the notch. Centered because the middle column of
-                        an evenly-gapped 3-up grid is centered too — which stops being true once
+                        edge reads as opening into the notch. The `-top-[7px]` is fussy by a pixel
+                        either way: lower and the arms' ends poke through the panel edge as stray
+                        diagonals, higher and they lift off it. Centered because the middle column
+                        of an evenly-gapped 3-up grid is centered too, which stops being true once
                         the cards stack, hence `@2xl` only. */}
                     <div
                         aria-hidden
-                        className="hidden @2xl:block absolute left-1/2 -top-1.5 size-3 -translate-x-1/2 rotate-45 border-l border-t border-input bg-light dark:bg-accent"
+                        className="hidden @2xl:block absolute left-1/2 -top-[7px] size-3 -translate-x-1/2 rotate-45 border-l border-t border-primary bg-light dark:bg-accent"
                     />
                     {hasOpened && (
                         <>

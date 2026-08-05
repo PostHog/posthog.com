@@ -171,11 +171,12 @@ These replace the cut Enterprise plan column. Styled as low-key cards rather tha
 
 **The panel is full width below the row, not inside the card.** The feature table needs a label column plus one column per package, which won't fit in a third of the row; and growing one card would leave the other two standing short beside it. Opening it pushes the `CalculatorReveal` footnote down, which is fine — the footnote isn't anchored to anything.
 
-**Three things tie the panel to its card,** because full width below a grid otherwise reads as a new section:
+**Two things tie the panel to its card,** because full width below a grid otherwise reads as a new section:
 
-1. **It's styled as one of the cards** — same fill, radius, and padding. An early version separated it with a full-width `border-t`, which was actively wrong: that's how this page divides *sections*, so it said "unrelated" as loudly as possible.
+1. **It's styled as one of the cards** — same fill, border, radius, and padding. An early version separated it with a full-width `border-t`, which was actively wrong: that's how this page divides *sections*, so it said "unrelated" as loudly as possible.
 2. **A caret notch points up at the middle card.** A `size-3` square rotated 45° with `border-l border-t`, offset `-top-1.5`; its fill covers the panel's own top border, so the edge reads as opening into the notch. It's `left-1/2` because the middle column of an evenly-gapped 3-up grid is centered too — which stops being true when the cards stack, so the notch is `@2xl` only.
-3. **The open card keeps its hover border.** `border-input` instead of `border-primary`, on the card, the panel, and the notch, so the pair stays visually linked after the cursor moves away.
+
+**The cards' borders never change** — no hover state, and no active state on the open card. The notch carries the connection on its own, so the row stays still.
 
 The notch needs room above the panel or `overflow-hidden` clips it — that's what the panel wrapper's `mt-4` buys, and it happens to match the grid gap.
 
