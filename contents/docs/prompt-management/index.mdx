@@ -2,9 +2,7 @@
 title: Prompt management
 ---
 
-import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
-
-<PromptsAlpha />
+import { ProductScreenshot } from "components/ProductScreenshot"
 
 Prompt management lets you create and update LLM prompts directly in PostHog. When you use prompts through the SDK, they're fetched at runtime with caching and fallback support—so you can iterate on prompts without deploying code.
 
@@ -14,11 +12,13 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Non-engineers can iterate** – Product and content teams can tweak prompts without touching code
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
 - **Versioning** – Every change creates an immutable version you can view, compare, or restore
+- **Labels** – Point a label like `production` at a version and fetch by label, so saving a prompt and releasing it are separate steps
+- **Configuration** – Store model parameters or any settings next to the prompt and change them without a deploy
 - **[A/B testing](/docs/prompt-management/prompt-experiments)** – Compare prompt versions on cost, latency, and eval pass rate using PostHog Experiments
 
 ## Creating prompts
 
-1. Navigate to **Prompt Management** > **Prompts**
+1. Navigate to **Prompt management** > **Prompts**
 2. Click **New prompt**
 3. Enter a name for your prompt
 4. Write your prompt content, using `{{variables}}` for dynamic values
@@ -40,14 +40,16 @@ When viewing a prompt, markdown rendering is enabled by default, formatting your
 
 You can also manage prompts through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
 
-The MCP server provides four prompt management tools:
+The MCP server provides six prompt management tools:
 
 | Tool | Description |
 |------|-------------|
 | `prompt-list` | List all team prompts with optional name filtering |
-| `prompt-get` | Get a prompt by name, including full content |
+| `prompt-get` | Get a prompt by name, including full content, optionally by version or label |
 | `prompt-create` | Create a new prompt with a unique name and content |
-| `prompt-update` | Update an existing prompt's content by name |
+| `prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
+| `prompt-label-set` | Point a label at a version, creating the label or moving it from another version |
+| `prompt-label-delete` | Remove a label from a prompt |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -75,18 +77,21 @@ Every prompt change creates a new immutable version. Previous versions are prese
 
 ### Publish a new version
 
-1. Open a prompt and click **Edit latest**
+1. Open a prompt and click **New version**
 2. Make your changes
-3. Click **Publish version**
+3. Click **Publish** — the button shows the number the new version will get, for example **Publish v4**
+4. Review the diff of your changes, optionally add a note describing what changed, and confirm
 
-If someone else published a new version while you were editing, you'll see a conflict error. Refresh the page to load the latest version and try again.
+The note appears alongside the version in the **Version history** sidebar, so you can scan past changes without opening diffs. It can also be set programmatically via the `version_description` field on the publish API and the MCP `prompt-update` tool.
+
+If someone else published a new version while you were editing, publishing fails with a warning. Your edits are preserved in the editor — review them against the new latest version and publish again.
 
 ### Restore a previous version
 
 1. Open a prompt and select a version from the **Version history** sidebar
-2. Click **Use as latest**
+2. Click **New version** — the editor is prefilled with that version's content
 3. Edit the prompt content if needed
-4. Click **Publish version**
+4. Click **Publish** and confirm in the review dialog
 
 This publishes the old content as a new version. The original version remains unchanged.
 
@@ -106,7 +111,157 @@ Unchanged regions are automatically collapsed in the diff view. Click **Compare 
 
 ### Archive a prompt
 
-Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it.
+Click **Archive** to remove a prompt from active use. This archives all versions of the prompt. Any code fetching the prompt by name stops resolving it. Archiving also removes the prompt's labels.
+
+## Labels
+
+A label is a movable pointer to exactly one version of a prompt. Fetching by a label like `production` returns whatever version the label points to right now.
+
+Labels separate saving a prompt from releasing it. Without labels, code either fetches the latest version (so every save immediately changes what your app uses) or pins a version number (so every release needs a code change). With a label, you edit and publish versions freely, then move the label when a version is ready:
+
+- **Release** a version by pointing `production` at it
+- **Roll back** by pointing `production` at an earlier version
+- Your code just fetches by label and never changes
+
+One version can hold several labels (for example `production` and `staging` on the same version), but a label always points to exactly one version. Setting a label that already exists on another version moves it there.
+
+### Label naming rules
+
+- Lowercase letters, numbers, dots, hyphens, and underscores; must start and end with a letter or number
+- Maximum 128 characters
+- `latest` is reserved (it always means the newest version)
+- Numbers-only names are not allowed, to avoid confusion with version numbers
+- Up to 50 labels per prompt
+
+### Managing labels
+
+#### In the app
+
+Each version in the version history shows the labels pointing at it.
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-versions-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-versions-dark-mode.png"
+  alt="Labels on prompt versions in the version history"
+  classes="rounded"
+/>
+
+To set a label:
+
+1. Open the prompt and find the version in the version history
+2. Click **Add label** on that version
+3. Pick an existing label, or type a name to create a new one
+
+If the label is already on another version, PostHog asks you to confirm the move:
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-move-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-move-dark-mode.png"
+  alt="Confirming a label move"
+  classes="rounded"
+/>
+
+To remove a label, click the **×** on the label and confirm.
+
+The **History** tab on the prompt shows every label change: who created, moved, or removed a label, and when.
+
+<ProductScreenshot
+  imageLight="/images/docs/prompt-management/labels-history-light-mode.png"
+  imageDark="/images/docs/prompt-management/labels-history-dark-mode.png"
+  alt="Label history on a prompt"
+  classes="rounded"
+/>
+
+#### With the API
+
+Set or move a label:
+
+```bash
+curl -X PUT "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/labels/production/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"version": 3}'
+```
+
+Remove a label with a `DELETE` request to the same URL. You can also manage labels through the MCP tools (`prompt-label-set`, `prompt-label-delete`).
+
+### How label changes propagate
+
+Moving a label takes effect on the PostHog API within seconds. SDK consumers pick it up when their client-side cache expires, so a moved label is fully live within the SDK cache TTL (5 minutes by default, configurable per fetch).
+
+If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
+
+## Configuration
+
+A prompt version can store a `config`: a JSON object with model parameters or any other settings your app reads at runtime. PostHog doesn't interpret it. Whatever you store is returned as-is when you fetch the prompt, so it can hold a model name, sampling parameters, tool definitions, a response schema, or anything else your app needs.
+
+Config is versioned together with the prompt content. Publishing a config change creates a new version, moving a label releases it, and rolling a label back rolls the config back too. You can publish a version that changes only the config, so tuning a parameter doesn't require touching the prompt text.
+
+Don't store secrets in the config. It's returned to anyone who can read the prompt.
+
+### In the app
+
+When editing a prompt, click **Add configuration** and enter a JSON object, for example:
+
+```json
+{
+  "model": "your-model-name",
+  "temperature": 0.7
+}
+```
+
+The config must be a JSON object. Click **Remove** next to the **Configuration** label to clear it. Either way, nothing changes until you publish, and the review dialog shows a diff of the config change first. When a version has a config, it's shown below the prompt content, and comparing versions also diffs the config.
+
+### With the API
+
+The create and publish endpoints accept a `config` field:
+
+```bash
+curl -X PATCH "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"config": {"model": "your-model-name", "temperature": 0.7}, "base_version": 3}'
+```
+
+Three things to know about publishing:
+
+- If you leave `config` out, the new version keeps the previous version's config. Text-only edits never drop it.
+- Send `"config": null` to remove it.
+- You can send `config` on its own, without `prompt` or `edits`. The prompt content carries forward unchanged.
+
+The MCP `prompt-create` and `prompt-update` tools accept `config` the same way.
+
+### In your code
+
+Fetched prompts expose the config, so your app can spread it into the LLM call:
+
+<MultiLanguage>
+
+```python
+result = prompts.get('support-system-prompt', with_metadata=True, label='production', fallback='You are a helpful assistant.')
+
+config = result.config or {}
+response = client.chat.completions.create(
+    model=config.get('model', 'your-default-model'),
+    temperature=config.get('temperature', 0),
+    messages=[{"role": "system", "content": result.prompt}],
+)
+```
+
+```typescript
+const result = await prompts.get('support-system-prompt', { label: 'production', fallback: 'You are a helpful assistant.' })
+
+const config = result.config ?? {}
+const response = await openai.chat.completions.create({
+    model: (config.model as string) ?? 'your-default-model',
+    temperature: (config.temperature as number) ?? 0,
+    messages: [{ role: 'system', content: result.prompt }],
+})
+```
+
+</MultiLanguage>
+
+`config` is `None` (Python) or `null` (JavaScript) when the version has no config, and it's missing entirely on fallback results, so read it defensively with defaults as above. The config is cached together with the prompt, including the stale-cache fallback.
 
 ## Using prompts in code
 
@@ -129,7 +284,7 @@ from posthog.ai.prompts import Prompts
 posthog = Posthog(
     '<your_project_api_key>',
     host='https://us.posthog.com',
-    personal_api_key='<your_personal_api_key>'
+    secret_key='<your_personal_api_key>'
 )
 prompts = Prompts(posthog)
 
@@ -141,25 +296,38 @@ prompts = Prompts(
 )
 
 # Fetch the latest version of a prompt
-template = prompts.get(
+result = prompts.get(
     'support-system-prompt',
+    with_metadata=True,  # Returns a PromptResult with prompt, name, version, and source
     cache_ttl_seconds=600,  # Override default 5-minute cache
     fallback='You are a helpful assistant.'  # Used if fetch fails
 )
 
-# Or fetch a specific version
-template = prompts.get(
+# Fetch the version a label points to (recommended for production apps)
+result = prompts.get(
     'support-system-prompt',
+    with_metadata=True,
+    label='production',
+    fallback='You are a helpful assistant.'
+)
+
+# Or fetch a specific version
+result = prompts.get(
+    'support-system-prompt',
+    with_metadata=True,
     version=2,
     fallback='You are a helpful assistant.'
 )
 
 # Compile with variables
-system_prompt = prompts.compile(template, {
+system_prompt = prompts.compile(result.prompt, {
     'company': 'Acme Corp',
     'tier': 'premium',
     'user_name': 'Alice'
 })
+
+# Model parameters or other settings stored with the version (None when there are none)
+config = result.config or {}
 
 # Use in your LLM call
 # ... your OpenAI/Anthropic call here
@@ -187,23 +355,33 @@ const prompts = new Prompts({
 })
 
 // Fetch the latest version of a prompt
-const template = await prompts.get('support-system-prompt', {
+// Returns a PromptResult with prompt, name, version, and source
+const result = await prompts.get('support-system-prompt', {
   cacheTtlSeconds: 600,
   fallback: 'You are a helpful assistant.'
 })
 
+// Fetch the version a label points to (recommended for production apps)
+const result = await prompts.get('support-system-prompt', {
+  label: 'production',
+  fallback: 'You are a helpful assistant.'
+})
+
 // Or fetch a specific version
-const template = await prompts.get('support-system-prompt', {
+const result = await prompts.get('support-system-prompt', {
   version: 2,
   fallback: 'You are a helpful assistant.'
 })
 
 // Compile with variables
-const systemPrompt = prompts.compile(template, {
+const systemPrompt = prompts.compile(result.prompt, {
   company: 'Acme Corp',
   tier: 'premium',
   userName: 'Alice'
 })
+
+// Model parameters or other settings stored with the version (null when there are none)
+const config = result.config ?? {}
 
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
@@ -217,6 +395,7 @@ Prompts are cached on the SDK side to minimize latency and API calls:
 - **Configurable per-request**: Override with `cache_ttl_seconds` (Python) or `cacheTtlSeconds` (JS)
 - **Stale-while-revalidate**: If a fetch fails, the cached value is used (even if expired)
 - **Fallback support**: Provide a fallback value that's used when both fetch and cache fail
+- **Separate entries per fetch type**: Latest, pinned-version, and labeled fetches of the same prompt are cached independently. Label moves reach your app when the labeled entry's TTL expires
 
 ## Linking prompts to traces
 
@@ -257,4 +436,5 @@ Once linked, you can:
 ## Limits
 
 - **Maximum prompt size** - 1MB per prompt
+- **Maximum config size** - 1MB per version
 - **Maximum versions per prompt** - 2,000

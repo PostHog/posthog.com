@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { IconQuestion } from '@posthog/icons'
+import { IconInfo, IconQuestion } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
 import ZoomHover from 'components/ZoomHover'
-import useCloud from 'hooks/useCloud'
 import IconButton from './IconButton'
 import { CopyableCommand } from './CopyableCommand'
 import { InlineCommand } from './InlineCommand'
 import { buildWizardCommand, buildSchemaCommand } from './buildCommand'
 import {
+    cliInstallSchema,
     mcpInstallSchema,
     wizardInstallSchema,
     type InstallMethod,
@@ -147,8 +147,10 @@ export interface PlatformInstallProps {
     bordered?: boolean
     /** Inline only: "Learn more" link target (default `/wizard`). */
     secondaryTo?: string
-    /** Copy callback (inline). */
+    /** Fired when the main command is copied, in either variant. */
     onCopy?: () => void
+    /** Fired when the schema's `secondaryAction` link is clicked. Card only. */
+    onSecondaryAction?: () => void
 }
 
 export default function PlatformInstall({
@@ -161,6 +163,7 @@ export default function PlatformInstall({
     bordered = false,
     secondaryTo,
     onCopy,
+    onSecondaryAction,
 }: PlatformInstallProps): JSX.Element {
     const [selectedId, setSelectedId] = useState<string | null>(null)
     const [lastSelected, setLastSelected] = useState<Platform | null>(null)
@@ -184,13 +187,12 @@ export default function PlatformInstall({
     }
 
     // `selfDriving` is shorthand for the `self-driving` subcommand; `command` is the escape hatch.
-    const cloud = useCloud()
     const subcommand = selfDriving ? 'self-driving' : command || undefined
 
     // Inline variant: the bare command button (consolidated WizardCommand look). Builds the command
     // from flags via the shared builder so display/copy semantics can never drift from the card.
     if (variant === 'inline') {
-        const inline = buildWizardCommand({ subcommand, cloud })
+        const inline = buildWizardCommand({ subcommand })
         return (
             <InlineCommand
                 displayCommand={inline.displayCommand}
@@ -204,25 +206,32 @@ export default function PlatformInstall({
         )
     }
 
-    // Card variant: append the subcommand + the user's cloud region (when the schema opts in) to the
-    // schema's base command(s), e.g. `npx @posthog/wizard self-driving --region eu`.
+    // Card variant: append the subcommand to the schema's base command(s), e.g.
+    // `npx @posthog/wizard self-driving`.
     const { displayCommand, copyCommand } = buildSchemaCommand({
         base: schema.defaultCommand,
         copyBase: schema.defaultCopyCommand,
         subcommand,
-        appendRegion: schema.appendRegion,
-        cloud,
     })
 
     return (
         <div
-            className={`not-prose min-w-96 max-w-md inline-block border border-primary rounded bg-accent/40 shadow-2xl mb-2 ${className}`}
+            className={`not-prose w-full max-w-md min-w-0 border border-primary rounded-md bg-primary shadow-2xl mb-2 ${className}`}
         >
             <div className="p-3 space-y-2">
                 <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-1.5">
                         <h3 className="!text-base font-bold text-primary m-0">{schema.title}</h3>
-                        {schema.titleTooltip ? (
+                        {schema.titleInfoAction ? (
+                            <Link
+                                to={schema.titleInfoAction.to}
+                                state={schema.titleInfoAction.state}
+                                aria-label={schema.titleInfoAction.label}
+                                className="inline-flex text-secondary hover:text-primary"
+                            >
+                                <IconInfo className="size-4" />
+                            </Link>
+                        ) : schema.titleTooltip ? (
                             <Tooltip
                                 delay={0}
                                 open={titleTooltipOpen}
@@ -245,6 +254,7 @@ export default function PlatformInstall({
                         <Link
                             to={schema.secondaryAction.to}
                             state={schema.secondaryAction.state}
+                            onClick={onSecondaryAction}
                             className="inline-flex items-center gap-0.5 text-sm text-secondary hover:text-primary whitespace-nowrap"
                         >
                             {schema.secondaryAction.label}
@@ -253,7 +263,7 @@ export default function PlatformInstall({
                     ) : null}
                 </div>
 
-                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate />
+                <CopyableCommand command={displayCommand} copyCommand={copyCommand} animate onCopy={onCopy} />
 
                 {schema.supports ? <div className="text-sm text-secondary">{schema.supports}</div> : null}
             </div>
@@ -312,5 +322,5 @@ export default function PlatformInstall({
 }
 
 export { CopyableCommand } from './CopyableCommand'
-export { mcpInstallSchema, wizardInstallSchema }
+export { cliInstallSchema, mcpInstallSchema, wizardInstallSchema }
 export type { InstallSchema, Platform, PlatformOption, InstallMethod } from './schema'

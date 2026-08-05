@@ -27,7 +27,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 <div className="grid @md:grid-cols-2 gap-4">
 
 <fieldset>
-<legend><TeamMember name="Anna Szell" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Anna Szell" photo /></legend>
 
 -   <SmallTeam slug="data-modeling" />
 -   <SmallTeam slug="data-tools" />
@@ -37,15 +37,15 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Annika Schmid" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Annika Schmid" photo /></legend>
 
--   <SmallTeam slug="posthog-code" />
+-   <SmallTeam slug="posthog-desktop" />
 -   <SmallTeam slug="self-driving" />
 
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Cory Slater" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Cory Slater" photo /></legend>
 
 -   <SmallTeam slug="error-tracking" />
 -   <SmallTeam slug="replay" />
@@ -57,7 +57,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Abe Basu" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Abe Basu" photo /></legend>
 
 -   <SmallTeam slug="batch-exports" />
 -   <SmallTeam slug="apm" />
@@ -67,18 +67,18 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Mike Warren" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Mike Warren" photo /></legend>
 
 -   <SmallTeam slug="analytics-platform" />
+-   <SmallTeam slug="mcp-analytics" />
 -   <SmallTeam slug="product-analytics" />
--   <SmallTeam slug="query-performance" />
 -   <SmallTeam slug="web-analytics" />
 
 
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Marco Gancitano" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Marco Gancitano" photo /></legend>
 
 -   <SmallTeam slug="ai-observability" />
 -   <SmallTeam slug="ai-gateway" />
@@ -87,7 +87,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
-<legend><TeamMember name="Ruby Childs" photo /></legend>
+<legend className="bg-transparent"><TeamMember name="Ruby Childs" photo /></legend>
 
 -   <SmallTeam slug="experiments" />
 -   <SmallTeam slug="feature-flags" />
@@ -95,7 +95,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 </fieldset>
 
 <fieldset>
-<legend>Product teams with no PM currently</legend>
+<legend className="bg-transparent">Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
 

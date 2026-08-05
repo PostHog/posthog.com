@@ -39,14 +39,34 @@ The root URL that all stream paths are resolved against (e.g. `https://api.examp
 
 Select an authentication type from the **Authentication** dropdown.
 
-| Type                | Fields                               | Description                                                         |
-| ------------------- | ------------------------------------ | ------------------------------------------------------------------- |
-| **No auth**         | –                                    | No authentication. Use for public APIs.                             |
-| **Bearer token**    | Token                                | Sends an `Authorization: Bearer <token>` header with every request. |
-| **API key**         | Location, Header/parameter name, Key | Sends the key as a header, query parameter, or cookie.              |
-| **HTTP basic auth** | Username, Password                   | Sends HTTP Basic credentials with every request.                    |
+| Type                | Fields                                                                                     | Description                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **No auth**         | –                                                                                          | No authentication. Use for public APIs.                                             |
+| **Bearer token**    | Token                                                                                      | Sends an `Authorization: Bearer <token>` header with every request.                 |
+| **API key**         | Location, Header/parameter name, Key                                                       | Sends the key as a header, query parameter, or cookie.                              |
+| **HTTP basic auth** | Username, Password                                                                         | Sends HTTP Basic credentials with every request.                                    |
+| **OAuth2**          | Client ID, Client secret, Token URL, Grant type, Refresh token (for `refresh_token` grant) | Authenticates via OAuth2. Supports `client_credentials` and `refresh_token` grants. |
 
 Credentials are stored encrypted and never exposed in API responses.
+
+#### OAuth2 configuration
+
+OAuth2 authentication supports two grant types:
+
+- **`client_credentials`** – Machine-to-machine authentication. The source exchanges the client ID and client secret for an access token. No user interaction is required.
+- **`refresh_token`** – The source uses a pre-obtained refresh token (along with the client ID and secret) to mint access tokens. Use this for APIs where you've already completed an authorization flow outside PostHog.
+
+The `authorization_code` grant is not supported.
+
+| Field                  | Required                  | Description                                                                                                                                    |
+| ---------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Client ID**          | Yes                       | The OAuth2 client ID.                                                                                                                          |
+| **Client secret**      | Yes                       | The OAuth2 client secret. Stored encrypted and never returned in API responses.                                                                |
+| **Token URL**          | Yes                       | The endpoint PostHog calls to mint access tokens (e.g. `https://auth.example.com/oauth/token`). Cannot be changed after the source is created. |
+| **Grant type**         | Yes                       | `client_credentials` (default) or `refresh_token`.                                                                                             |
+| **Refresh token**      | For `refresh_token` grant | A pre-obtained refresh token. Required when using the `refresh_token` grant type. Stored encrypted and never returned.                         |
+| **Scopes**             | No                        | Space-separated OAuth2 scopes, if the provider requires them.                                                                                  |
+| **Client auth method** | No                        | How credentials are sent to the token endpoint: `body` (form parameters, default) or `basic` (HTTP Basic).                                     |
 
 ### Default headers
 
@@ -150,6 +170,14 @@ Common issues:
 ### Incremental sync skips rows
 
 If using **Ascending** upstream row order (the default) and the API doesn't guarantee ascending order by the cursor field, rows can be skipped when a sync is interrupted and resumed. Set **Upstream row order** to **Descending** if the API returns newest records first.
+
+### OAuth2 token errors
+
+If an OAuth2 source's token expires or is revoked, the source fails with a `TOKEN_REFRESH_FAILED` error. To reconnect:
+
+1. Edit the source settings.
+2. Re-enter the **Client secret** and (for `refresh_token` grant sources) the **Refresh token**.
+3. Save the source. PostHog validates the new credentials and clears the error once a token is successfully minted.
 
 ### Have a question? Ask PostHog AI
 

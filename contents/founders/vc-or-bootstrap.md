@@ -9,7 +9,6 @@ featuredImageType: full
 tags:
   - Founders
   - Fundraising
-  - Being a founder
 crosspost:
   - Blog
 ---

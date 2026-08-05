@@ -8,9 +8,39 @@ PostHog Workflows captures two types of events as standard PostHog events: **ema
 
 ## Enable engagement events
 
-Go to **Settings → Workflows → Engagement events** and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder, the toggle in settings is the same setting.
+Go to [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and toggle **Capture email engagement events** on. You can also enable it inline from the email step in the workflow builder — the toggle in settings is the same setting.
+
+This setting controls whether email engagement activity is captured as standard PostHog events. It does not control whether opens and clicks are tracked — for that, use the **Track opens and link clicks** toggle on each email step (see below).
 
 The setting takes effect within a couple of minutes for future email sends. Emails that were already sent before you enabled it won't backfill, but provider callbacks (opens, clicks, bounces) for those in-flight messages will still produce engagement events once the setting is on.
+
+## Email tracking controls
+
+Two independent controls determine whether an email includes open and click tracking (the tracking pixel and rewritten links):
+
+### Per-email step toggle
+
+Each email step in the workflow builder has a **Track opens and link clicks** toggle. When off, the email is sent without a tracking pixel and without rewritten links, so opens and clicks are never recorded for that step. Delivery, bounce, and unsubscribe events are still recorded.
+
+This toggle defaults to on. Turn it off for emails that should never be tracked, such as transactional messages or deliverability-sensitive sends.
+
+### Team-level tracking consent
+
+Go to [**Settings → Workflows → Email tracking consent**](https://app.posthog.com/settings/environment-workflows#workflows-email-tracking-consent) to control whether open and click tracking on marketing emails requires recipient consent. This is designed for compliance with regulations like France's CNIL.
+
+Three modes are available:
+
+| Mode                                 | Behavior                                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **No consent enforcement** (default) | Opens and clicks are tracked according to each email step's toggle. No consent is checked.                                                                               |
+| **Opt-out**                          | Track by default, but stop tracking for recipients who have objected. Marketing emails only — transactional emails are exempt.                                           |
+| **Opt-in**                           | Only track recipients who have explicitly consented. Recipients without a stored preference are sent untracked. Marketing emails only — transactional emails are exempt. |
+
+Recipient consent is stored against the email address (the `$email_tracking` preference) and checked at send time. When a team's consent mode is set to opt-out or opt-in, recipients can manage their tracking preference on the messaging preferences page alongside their subscription settings.
+
+If a consent lookup fails at send time, the email is sent untracked (fail closed) — tracking without verifiable consent is a compliance risk, while an untracked send only loses engagement metrics.
+
+The per-email step toggle takes priority: if **Track opens and link clicks** is off on an email step, the email is always sent untracked regardless of consent mode or recipient preference.
 
 ## Conversion events
 
@@ -33,15 +63,17 @@ Conversion events count toward your PostHog event ingestion like any other event
 
 Every event below is captured as a standard PostHog event under the recipient's distinct ID. They appear in the event explorer, insights builder, and any other place PostHog events are available.
 
-| Event                           | When it fires                                                                                                                                             |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$workflows_email_sent`         | The workflow handed the email to the email provider (SES) for delivery.                                                                                   |
-| `$workflows_email_delivered`    | The email provider confirmed the message was accepted by the recipient's mail server.                                                                     |
-| `$workflows_email_opened`       | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. |
-| `$workflows_email_link_clicked` | The recipient clicked a tracked link in the email body.                                                                                                   |
-| `$workflows_email_bounced`      | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.).                                                                        |
-| `$workflows_email_blocked`      | The recipient marked the email as spam (a complaint).                                                                                                     |
-| `$workflows_email_failed`       | The send failed for another reason (provider error, malformed request, transient outage).                                                                 |
+| Event                                       | When it fires                                                                                                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `$workflows_email_sent`                     | The workflow handed the email to the email provider (SES) for delivery.                                                                                                                    |
+| `$workflows_email_delivered`                | The email provider confirmed the message was accepted by the recipient's mail server.                                                                                                      |
+| `$workflows_email_opened`                   | The recipient opened the email. Detected via the tracking pixel embedded in the HTML body, so requires the recipient's mail client to load remote images. Only recorded for tracked sends. |
+| `$workflows_email_link_clicked`             | The recipient clicked a tracked link in the email body. Only recorded for tracked sends.                                                                                                   |
+| `$workflows_email_bounced`                  | The provider reported a hard or soft bounce (invalid address, mailbox full, etc.).                                                                                                         |
+| `$workflows_email_blocked`                  | The recipient marked the email as spam (a complaint).                                                                                                                                      |
+| `$workflows_email_failed`                   | The send failed for another reason (provider error, malformed request, transient outage).                                                                                                  |
+| `$workflows_email_unsubscribed`             | The recipient unsubscribed from emails via one-click unsubscribe or the preferences page.                                                                                                  |
+| `$workflows_email_tracking_consent_updated` | The recipient changed their email tracking consent preference via the messaging preferences page.                                                                                          |
 
 `$workflows_email_sent` is recorded when the email is handed off for delivery. The delivery, open, click, bounce, and block events depend on the email provider sending event callbacks back to PostHog, so they only appear once those callbacks arrive.
 
@@ -54,6 +86,7 @@ Because these are standard events, you can use them anywhere PostHog events are 
 - **Retention**: cohort recipients who received an email last week and see how many returned to the product.
 - **Dashboards**: combine engagement metrics with revenue or feature-flag exposure to attribute workflows impact.
 - **Conversion tracking**: measure conversion rates by workflow using `$workflows_conversion` broken down by `$workflow_id`.
+- **Accurate engagement rates**: when tracking consent is enabled, filter `$workflows_email_sent` to `$email_tracking_enabled = true` before calculating open or click rates. Untracked sends can never produce opens or clicks, so including them in the denominator deflates your rates.
 
 ## Properties on email engagement events
 
@@ -63,7 +96,38 @@ Each email engagement event carries properties so you can filter and break down 
 - `$workflow_action_id` — the email step within the workflow that this event belongs to (on every event)
 - `$email_to` — the recipient address (on every event)
 - `$email_subject` — the email subject (on every event)
+- `$email_tracking_enabled` — whether this send included open and click tracking (the tracking pixel and rewritten links), on `$workflows_email_sent` and `$workflows_email_failed` only. Always set, so you can filter or break down by tracking status without handling absent values.
 - `$link_url` — the clicked link, on `$workflows_email_link_clicked`
+
+## Properties on unsubscribe events
+
+The `$workflows_email_unsubscribed` event differs from other email engagement events in a few important ways:
+
+| Property   | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `$email`   | The recipient's email address                                                      |
+| `category` | The message category the recipient unsubscribed from, or `$all` for all categories |
+| `source`   | How the recipient unsubscribed: `one_click` or `preferences_page`                  |
+
+**Key differences from other email engagement events:**
+
+- **No workflow or action ID**: The unsubscribe event is captured at the email-level, not per-send. It does not include `$workflow_id` or `$workflow_action_id` properties because the unsubscribe token only carries the team and recipient identifier.
+- **Distinct ID is the email address**: The `distinct_id` on unsubscribe events is the recipient's email address, which may differ from the tracked distinct ID on other events like opens and clicks.
+- **Transition-only**: The event only fires when a recipient genuinely transitions from opted-in to opted-out. Replayed unsubscribe requests or repeated saves do not emit duplicate events.
+
+## Properties on tracking consent events
+
+The `$workflows_email_tracking_consent_updated` event shares the same structural differences as unsubscribe events:
+
+| Property | Description                                       |
+| -------- | ------------------------------------------------- |
+| `$email` | The recipient's email address                     |
+| `status` | The new consent status: `OPTED_IN` or `OPTED_OUT` |
+| `source` | How the consent was changed: `preferences_page`   |
+
+- **No workflow or action ID** — the event is captured at the email-address level, not per-send.
+- **Distinct ID is the email address** — the `distinct_id` is the recipient's email address.
+- **Transition-only** — the event only fires when the consent status genuinely changes. Repeated saves without a change don't emit duplicate events.
 
 ## Relationship to workflow metrics
 
@@ -71,4 +135,6 @@ Workflow metrics (the per-step success/failure counters you see on the workflow 
 
 ## Privacy and cost
 
-Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. If you send a high volume of email or have many converting users, enabling these can meaningfully increase event volume. You can disable email engagement events at any time in **Settings → Workflows → Engagement events** and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.
+Both email engagement events and conversion events count toward your PostHog event ingestion like any other event. If you send a high volume of email or have many converting users, enabling these can meaningfully increase event volume. You can disable email engagement events at any time in [**Settings → Workflows → Engagement events**](https://app.posthog.com/settings/environment-workflows#workflows-engagement-events) and the workflow will fall back to metrics-only without any other configuration change. Conversion events are captured automatically whenever a conversion goal is configured.
+
+When tracking is disabled for a send — whether via the per-step toggle or recipient consent — the email is sent without a tracking pixel and without rewritten links. Opens and clicks are never recorded for untracked sends. The workflow's **Metrics** tab shows an **Untracked** series so you can see how many sends skipped tracking. Open and click rates are shown against tracked sends (sent minus untracked) to avoid deflating engagement numbers.

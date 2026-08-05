@@ -57,7 +57,7 @@ Since LLM data is stored as [regular events](/docs/data/events), you can connect
 
 PostHog's [AI Evals](/docs/ai-evals/evaluations) score outputs with LLM-as-judge or your own code, and run automatically after a prompt or model change to catch the quality regressions that error rates miss.
 
-And because [PostHog AI](/ai) and the [MCP server](/docs/model-context-protocol) can read your trace data, you can ask questions in plain English such as "what were my most expensive calls yesterday?" directly from your code editor.
+And because [PostHog AI](/ai), the [MCP server](/docs/model-context-protocol), and [CLI](/docs/cli) can read your trace data, you can ask questions in plain English such as "what were my most expensive calls yesterday?" directly from your code editor.
 
 **Free tier:** [PostHog's free plan](/pricing) includes 100K LLM events per month, unlimited seats, and 30 day retention.
 
@@ -266,7 +266,7 @@ Its "Loop" assistant agent generates scorers, prompts, and datasets from plain-l
 **Strengths:**
 - Unlimited users on the free plan, rare in this list
 - Scores-and-evals-first UX, strong for teams measuring output quality
-- SOC 2 Type II and multi-factor authentication (MFA) on the free tier
+- SOC 2 Type 2 and multi-factor authentication (MFA) on the free tier
 
 <details>
 <summary>Quick PostHog vs Braintrust free tier comparison</summary>
@@ -355,11 +355,24 @@ Enterprises already standardized on Datadog who want LLM traces correlated with 
 #### For enterprises with compliance needs
 
 - **Datadog** when you already run their platform and want LLM traces beside infrastructure and APM telemetry (expect per-host platform pricing)
-- **PostHog** for [CDP](/cdp), [data warehouse](/data-stack), and AI observability under one vendor, with self-host and EU hosting for data residency
+- **PostHog** for [CDP](/cdp), [data warehouse](/context-warehouse), and AI observability under one vendor, with self-host and EU hosting for data residency
 
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Do all AI observability tools have a free tier?</summary>

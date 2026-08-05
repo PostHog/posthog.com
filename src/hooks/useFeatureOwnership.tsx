@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
+import TeamMember from '../components/TeamMember'
 
 export interface Feature {
     slug: string
@@ -62,7 +63,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'background-agents': {
         feature: 'Cloud agents',
-        owner: ['posthog-code'],
+        owner: ['posthog-desktop'],
         label: 'feature/background-agents',
     },
     'api-structure': {
@@ -97,7 +98,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking'],
+        owner: ['error-tracking', 'self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner for agentic use cases. Error tracking owns the
+                symbolication/upload pipeline and symbol/sourcemap upload internals.
+            </>
+        ),
     },
     'client-libraries': {
         feature: 'Client libraries',
@@ -171,6 +178,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'embedding-worker': {
         feature: 'Embedding worker',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Oliver Browne" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     'early-access-features': {
@@ -241,6 +253,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['clickhouse'],
         label: false,
     },
+    loops: {
+        feature: 'Loops',
+        owner: ['posthog-desktop'],
+        label: false,
+    },
     'managed-migrations': {
         feature: 'Managed migrations',
         owner: ['ingestion'],
@@ -257,7 +274,22 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'mcp-server': {
         feature: 'MCP server',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/mcp',
+    },
+    'mcp-store': {
+        feature: 'MCP store',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Chris Volzer" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     notebooks: {
         feature: 'Notebooks',
@@ -329,17 +361,32 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'posthog-ai': {
         feature: 'PostHog AI platform',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: 'feature/posthog-ai',
     },
     'posthog-code': {
-        feature: 'PostHog Code',
-        owner: ['posthog-code'],
+        feature: 'PostHog Desktop',
+        owner: ['posthog-desktop'],
         label: 'feature/posthog-code',
     },
     'project-homepage': {
         feature: 'Project homepage',
         owner: ['platform-ux'],
         label: 'feature/home',
+    },
+    'project-secret-api-keys': {
+        feature: 'Project secret API keys',
+        owner: ['platform-features'],
+        notes: (
+            <>
+                <TeamMember name="Jovan Sakovic" /> is the point owner.
+            </>
+        ),
+        label: false,
     },
     'property-filters': {
         feature: 'Property filters',
@@ -437,7 +484,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/session-summaries',
     },
     signals: {
-        feature: 'Signals',
+        feature: 'Inbox',
         owner: ['self-driving'],
         label: 'feature/signals',
     },
@@ -449,6 +496,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'slack-app': {
         feature: 'Slack app',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Vojta Bartoš" /> is the point owner.
+            </>
+        ),
         label: 'feature/slack-app',
     },
     settings: {

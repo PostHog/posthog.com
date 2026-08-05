@@ -7,6 +7,7 @@ import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -19,6 +20,7 @@ import Snippet from '../contents/docs/integrate/snippet.mdx'
 import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Step, Steps } from './components/Docs/Steps'
+import EmbeddedSurvey from './components/Docs/EmbeddedSurvey'
 import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
@@ -80,6 +82,7 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -151,4 +154,5 @@ export const shortcodes = {
     WistiaEmbed,
     WizardCommand,
     WizardCTA,
+    EmbeddedSurvey,
 }

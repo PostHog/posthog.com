@@ -37,6 +37,8 @@ Validation is only enforced when you enable a workflow. Before enabling, PostHog
 
 Draft workflows can also be archived, even if they contain invalid configurations.
 
+You can edit a workflow after it's enabled, and your changes reach people who are already moving through it. See [Editing a live workflow](/docs/workflows/editing-live-workflows) for exactly what happens to in-flight runs when you change a live workflow.
+
 ## Triggers
 
 Every workflow starts with a trigger. Triggers define what kicks off the workflow.
@@ -77,7 +79,7 @@ To set this up:
 ### Batch triggers
 
 Batch triggers let you run a workflow for each person in an audience you define, optionally on a recurring schedule.
-When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person.
+When the batch runs, PostHog evaluates your audience filters and executes the workflow once per matching person. If the workflow contains an [email dispatch](#dispatches), PostHog automatically deduplicates recipients by email address so each unique address receives only one email.
 
 A batch trigger combines two things:
 
@@ -86,9 +88,17 @@ A batch trigger combines two things:
 
 #### Audience filters
 
-You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **OR** logic, so a person matches if they meet any of them.
+You define the audience using person properties, cohorts, or distinct IDs. Multiple conditions are combined with **AND** logic, so a person matches only if they meet all of them.
 
 The trigger shows a real-time estimate of how many persons will be affected (e.g. "approximately 1,200 of 50,000 persons") before you enable the workflow. If the audience is too large, you'll see a warning prompting you to add filters to narrow it down.
+
+#### Email deduplication
+
+When a batch workflow includes an email dispatch step, PostHog deduplicates recipients by email address. Multiple persons sharing the same email address (after lowercasing and trimming whitespace) are collapsed into a single send, so each unique email address receives the email only once. Persons without an email address are unaffected and processed individually.
+
+The audience preview estimate reflects this deduplication, showing the number of emails that will be sent rather than the total number of matching persons.
+
+Deduplication applies when each email action in the workflow sends to the default recipient (`{{ person.properties.email }}`). Workflows using a custom recipient address or workflows without an email step are not deduplicated.
 
 #### Recurring schedule
 
@@ -152,14 +162,27 @@ Each conversion emits a billable `$workflows_conversion` event. This counts towa
 
 ## Dispatches
 
-Dispatches are the messages you send, mail, slack, SMS, webhook, or any PostHog real time destinations. There are 4 main types of dispatches:
+Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:
 
 | Dispatch type    | Description                                                                                                                |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.          |
 | Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.               |
+| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section. |
 | Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                           |
 | CDP destinations | Use any [realtime destination](/docs/cdp/destinations) as an dispatch step to deliver messages to users or other services. |
+
+### Email dispatch options
+
+Email dispatch steps include a **Track opens and link clicks** toggle in the build panel. This is enabled by default.
+
+When enabled, PostHog injects a tracking pixel and rewrites links so that opens and clicks appear in the workflow's metrics and produce [engagement events](/docs/workflows/engagement-events) like `$workflows_email_opened` and `$workflows_email_link_clicked`.
+
+When disabled, the email is sent without the tracking pixel or link rewriting. No open or click events are captured for these sends. Delivery, bounce, and unsubscribe events are still recorded.
+
+Use this for transactional or deliverability-sensitive emails where tracking isn't needed or could reduce inbox placement.
+
+Marketing emails may also be sent untracked based on your team's email tracking consent setting. See [email tracking consent](/docs/workflows/engagement-events#email-tracking-consent) for details.
 
 ## Delays
 
@@ -172,6 +195,15 @@ Delays help you control the timing of your messages. There are 3 types of delays
 | Wait until time window | Wait until a specific time window (e.g. only send on weekdays 9-5).                      |
 
 You can see an example of a delay in the [email drip campaign](/docs/workflows/email-drip-campaign) tutorial.
+
+### Waiting for events
+
+A **wait until condition** step can wait for one or more events instead of (or as well as) a property condition. The step resumes when the person in the workflow run sends a matching event - events from other people never resume it. If no matching event arrives before the step's maximum wait duration, the workflow continues down the timeout branch.
+
+A couple of things to keep in mind:
+
+- **Event filters use fixed values.** Filter values are set when you save the workflow and can't reference the trigger event's properties. For example, you can wait for any `order_shipped` event from the person, but you can't wait for an `order_shipped` event whose `order_id` matches the `order_id` on the event that triggered the workflow. Template syntax like `{{event.properties.order_id}}` in a filter value is compared as a literal string, so it will never match.
+- **Each run waits independently.** If the same person triggers the workflow more than once, each run has its own wait step, and a single matching event resumes all of them. If your trigger can fire multiple times per person concurrently, design the workflow so that any matching event is a valid reason to continue.
 
 ## Audience splits
 
@@ -193,14 +225,14 @@ PostHog Actions allow you to change a person's properties, trigger other events,
 | Capture Event            | Trigger a PostHog event. This can be a useful way to chain workflows together, or track the effectiveness of workflows in analytics dashboards. |
 | Update Person Properties | Set a specific person property, or create a new one. This can be a useful way to chain workflows together.                                      |
 
-## Conversations actions
+## Support actions
 
-If you have [Conversations](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
+If you have [Support](/docs/support) enabled, two additional actions become available in the workflow builder. These let you automate support ticket management.
 
-| Conversations action | Description                                             | Properties / Options                                                                                               |
-| -------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Get ticket           | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source`                                               |
-| Update ticket        | Change a ticket's status, priority, or assignee         | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
+| Support action | Description                                             | Properties / Options                                                                                               |
+| -------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Get ticket     | Fetch the current ticket's data into workflow variables | `ticket_id`, `ticket_number`, `status`, `priority`, `channel_source`                                               |
+| Update ticket  | Change a ticket's status, priority, or assignee         | Status: `new`, `open`, `pending`, `on_hold`, `resolved`. Priority: `low`, `medium`, `high`. Assignee: user or role |
 
 ### Example use cases
 
@@ -213,7 +245,7 @@ Use these actions together with [conversation events](#conversation-event-trigge
 
 ### Conversation event triggers
 
-When Conversations is enabled, you can trigger workflows using these events:
+When Support is enabled, you can trigger workflows using these events:
 
 | Event                                   | Description                                | Properties                                                                        |
 | --------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------- |

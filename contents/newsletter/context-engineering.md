@@ -4,7 +4,7 @@ date: 2026-06-24
 author:
   - edwin-lim
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1782746594/context_engineering_hero_7ee47b4915.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/context_engineering_hero_7ee47b4915.png
 featuredImageType: full
 tags:
   - Product engineers
@@ -52,7 +52,7 @@ The agent routinely got these details wrong because it was operating in a contex
 
 <Caption>The wizard is <a href="https://github.com/PostHog/wizard">open source</a>. You should steal it!</Caption>
 
-Our Docs team of technical writers became a [Docs & Wizard team](/teams/docs-wizard) of context engineers – same people, different mission. Their job became building a library of context for agents, and a delivery system that made it accessible.
+Our Docs team of technical writers became a [Wizard & Docs team](/teams/wizard-and-docs) of context engineers – same people, different mission. Their job became building a library of context for agents, and a delivery system that made it accessible.
 
 The result was a company-wide context layer that could pull from everything we maintained: docs, source code, SDK references, example apps, anything that could widen the scope of what the agent could handle.
 
@@ -81,7 +81,7 @@ This lets us generate large libraries of skills that cover our entire platform w
 
 For example, if there's a framework we don't support yet, like serverless Next.js, we load the context into the mill and send it straight to the agent. It's continuous context delivery.
 
-The same pipeline also delivers skills to our [AI plugins](https://github.com/PostHog/ai-plugin), [PostHog Code](/code), and our MCP server.
+The same pipeline also delivers skills to our [AI plugins](https://github.com/PostHog/ai-plugin), [PostHog Code](/desktop), and our MCP server.
 
 **Remember:** "The fastest way to make an agent obsolete is to hardcode its knowledge. Decouple the context from your harness and assemble it from sources of truth."
 
@@ -181,7 +181,7 @@ Here's how it changed our onboarding:
 
 Building a context layer is high-leverage for any company shipping agents, but it takes real investment and a shift in how you think about the work.
 
-We created a whole [new team](/teams/docs-wizard) for it. It's a kind of work that didn't exist a year ago, and it's only going to get bigger as more of what companies ship runs on agents.
+We created a whole [new team](/teams/wizard-and-docs) for it. It's a kind of work that didn't exist a year ago, and it's only going to get bigger as more of what companies ship runs on agents.
 
 The job is context.
 

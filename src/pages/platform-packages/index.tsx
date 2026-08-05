@@ -4,13 +4,7 @@ import SEO from 'components/seo'
 import { usePlatform } from 'components/Pricing/Platform/usePlatform'
 import OSTable from 'components/OSTable'
 import { IconCheck } from '@posthog/icons'
-import { TreeMenu } from 'components/TreeMenu'
-import { productOSNav } from 'hooks/useProductOSNavigation'
 import { Link } from 'gatsby'
-
-const LeftSidebarContent = () => {
-    return <TreeMenu items={productOSNav.children} />
-}
 
 export default function PlatformPackages() {
     // Get platform data from usePlatform hook
@@ -30,11 +24,11 @@ export default function PlatformPackages() {
 
     // Create table data for OSTable
     const columns = [
-        { name: 'Feature', align: 'left' as const, width: '1fr' },
+        { name: 'Feature', align: 'left' as const, width: 'minmax(200px, 2fr)' },
         ...platformAddons.map((addon: any) => ({
             name: addon.name,
             align: 'center' as const,
-            width: 'minmax(60px,140px)',
+            width: '1fr',
         })),
     ]
 
@@ -82,7 +76,7 @@ export default function PlatformPackages() {
                 description="Our platform packages are designed to help you manage your teams securely and efficiently on PostHog as you grow."
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />}>
+            <ReaderView hideLeftSidebar>
                 <div className="space-y-8">
                     <div>
                         <h1>Platform packages</h1>
@@ -139,7 +133,7 @@ export default function PlatformPackages() {
                     <div>
                         <h2>Feature comparison</h2>
                         <p className="-mt-4 mb-6">Compare features across all platform packages:</p>
-                        <OSTable columns={columns} rows={rows} size="md" className="text-sm" />
+                        <OSTable columns={columns} rows={rows} size="md" className="text-sm" width="full" />
                     </div>
 
                     <div>

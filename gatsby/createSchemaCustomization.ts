@@ -137,6 +137,16 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       maintainer: String,
       imageUrl: String,
     }
+    type EarlyAccessFeature implements Node {
+      name: String,
+      description: String,
+      stage: String,
+      documentationUrl: String,
+      flagKey: String,
+      featureId: String,
+      waitlistCount: Int,
+      payload: JSON,
+    }
     type Plugin implements Node {
       name: String,
       url: String,
@@ -226,6 +236,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String
       number: Int
     }
+    type ResearchMergedPr implements Node {
+      title: String
+      url: String
+      repo: String
+      author: String
+      mergedAt: String
+    }
+    type SelfDrivingPullRequest implements Node {
+      prNumber: Int
+      title: String
+      summary: String
+      type: String
+      scope: String
+      url: String
+      state: String
+      openedAt: Date @dateformat
+      mergedAt: Date @dateformat
+    }
     type PostTagAttributes {
         label: String
         folder: String
@@ -243,6 +271,15 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostCategory implements Node {
       attributes: PostCategoryAttributes
+    }
+    type CommunityStats implements Node {
+      topicId: Int
+      topicSlug: String
+      topicLabel: String
+      questions: Int
+      resolved: Int
+      replies: Int
+      helpful: Int
     }
     type ProductSectionsSectionsFeatures {
       title: String
@@ -285,9 +322,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       html_url: String
       type: String
     }
+    type ProductDataProductsPlansTiers {
+      current_amount_usd: String
+      current_usage: Float
+      flat_amount_usd: String
+      unit_amount_usd: String
+      up_to: Float
+    }
     type ProductDataProductsPlans {
       contact_support: Boolean
       unit_amount_usd: Float
+      tiers: [ProductDataProductsPlansTiers]
+    }
+    type ProductDataProductsAddonsPlans {
+      contact_support: Boolean
+      unit_amount_usd: String
+      tiers: [ProductDataProductsPlansTiers]
     }
     type SlackEmoji implements Node {
       name: String
@@ -336,6 +386,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       secret: Boolean
       required: Boolean
       description: String
+    }
+    type AgentSkill implements Node @dontInfer {
+      product: String
+      name: String
+      description: String
+      sourcePath: String
+      mcpTools: [String]
     }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
@@ -552,6 +609,27 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         created_at: Date
         created_by: PostHogWorkflowTemplateCreatedBy
         fields: PostHogWorkflowTemplateFields
+    }
+    type ProductUsageStats implements Node {
+        product: String
+        unique_users: Int
+        unique_orgs: Int
+    }
+    # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
+    # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
+    type SitePage implements Node {
+        searchContentId: String @proxy(from: "context.id")
+    }
+    type Tool implements Node @dontInfer {
+        handle: String!
+        name: String!
+        description: String
+        searchDescription: String
+        searchTitle: String
+        slug: String
+        category: String
+        status: String
+        aliases: [String!]
     }
   `)
     createTypes([

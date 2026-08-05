@@ -1,3 +1,45 @@
 ## Q3 2026 objectives
 
-_This is a new team — we're still ironing out our goals. More to come soon 🤖._
+MCP analytics is greenfield. This quarter is about making onboarding magical, launching to real customers, and betting on "self-driving" as our top engineering priority. Expect these to change as we learn from customers.
+
+### Self-driving (top priority)
+
+**Motivation:** We don't want to be the bottleneck for improving MCP servers. Instead of fixing everything by hand, we want the system to catch problems and fix itself, with us stepping in only when it matters.
+
+* When a tool call fails, it opens a PR automatically. Small fixes merge on their own, bigger ones get a human review
+* When an agent leaves feedback, it feeds into the same flow, so what agents tell us turns into real fixes
+* Group each user's tool calls by session to see what they're actually trying to do, since one task usually spans several tools. Use `$session_id` when it's there, and fall back to a simple time gap between calls until it is
+* Try the whole thing fully self-driving on our own MCP server first: let it ship improvements end to end with no human in the loop, and see how that compares to how we work today
+
+**We'll know it worked when** a failing tool call can fix itself, and we trust the process enough to let it ship on its own.
+
+### Magical onboarding
+
+**Motivation:** Onboarding is where we're losing people. Most who start the wizard don't finish. Getting started should be as simple as running a command, and every drop-off is someone we can learn from.
+
+* Make wizard onboarding work end to end, and make sure it works for real users ([wizard stats](https://us.posthog.com/project/2/dashboard/1781611))
+* Reach out to the people who dropped off or signed up but never got going, and find out what got in the way
+* Make the docs genuinely good and write up what we learn as blog posts. That's how we get Claude and Codex to actually use our content
+
+**We'll know it worked when** more people finish the wizard and get to value without us walking them through it.
+
+### Launch
+
+**Motivation:** Almost nobody is competing on "MCP analytics" yet, so there's a window to own agent analytics before that changes. We need real customers and marketing behind us to use it.
+
+* Get product marketing on our side for a launch about a month out
+* Land 5 to 10 close customers to build with
+* Publish blog posts on what we learn, not just docs, so Claude, ChatGPT and the rest pick us up early
+* Settle pricing: give MCP events their own bucket instead of mixing them with Product Analytics, charge the same rate as Product Analytics events but with a separate, smaller free tier to start. Sanity-check it by asking what PostHog would pay if it were the customer
+
+**We'll know it worked when** we've launched with marketing support, have a handful of customers building with us, and a pricing model we believe in.
+
+### CLI & skills analytics (exploratory)
+
+**Motivation:** Agents don't only act through MCP. CLIs and skills are next, and we'd rather reuse what we have than build a new SDK for each one.
+
+* CLI analytics: wrap existing CLIs with the MCP analytics SDK (Python, Go and Rust are already covered) and ship a wizard, so tool calls just show up as MCP events. No separate CLI SDK
+* Skills analytics: harder, and it needs hooks on the LLM side that we don't have yet. Talk to Anthropic and OpenAI about capturing skill-level data. We can probably build one for PostHog Code first
+* Keep it exploratory and pick it up once the core MCP work has settled
+
+**We'll know it worked when** CLI tool calls show up through the existing SDK, and we know whether skills analytics is actually doable.

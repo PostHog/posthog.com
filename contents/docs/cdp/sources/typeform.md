@@ -31,17 +31,28 @@ The Typeform connector can link data from your Typeform account into PostHog.
 
 The Typeform source currently supports syncing the following datasets and API endpoints:
 
-| Dataset | Endpoint path |
-| --- | --- |
-| `forms` | `/forms` |
+| Dataset     | Endpoint path                |
+| ----------- | ---------------------------- |
+| `forms`     | `/forms`                     |
 | `responses` | `/forms/{form_id}/responses` |
 
 The `responses` dataset is a dependent (fan-out) endpoint — PostHog fetches all your forms first, then retrieves responses for each form individually.
 
+## Syncing partial and started responses
+
+By default, PostHog only syncs **completed** Typeform responses. You can change this using the **Responses to sync** setting when configuring your Typeform source:
+
+- **Completed responses only** (default): Syncs only completed form submissions. Uses incremental sync on `submitted_at`.
+- **All responses (including partial & started)**: Syncs completed, partial, and started responses. Uses a **full refresh** on every sync run.
+
+The "All responses" mode uses full refresh because partial and started responses have no `submitted_at` timestamp, and Typeform's API doesn't provide a cursor that works across all three response types. This means incremental sync isn't possible when including partial responses.
+
+> **Note:** To apply this change to an existing source, use **Delete table and resync** on the `responses` table. **Sync now** alone won't backfill the responses you're adding.
+
 ## Supported API base URLs
 
-| Region | API base URL |
-| --- | --- |
-| Global (default) | `https://api.typeform.com` |
-| EU | `https://api.eu.typeform.com` |
-| EU (alternative) | `https://api.typeform.eu` |
+| Region           | API base URL                  |
+| ---------------- | ----------------------------- |
+| Global (default) | `https://api.typeform.com`    |
+| EU               | `https://api.eu.typeform.com` |
+| EU (alternative) | `https://api.typeform.eu`     |

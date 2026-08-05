@@ -12,6 +12,7 @@ import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import {
     generateRawMarkdownPages,
     generateApiSpecMarkdown,
+    generateChangelogMd,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
@@ -25,6 +26,7 @@ import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
+import { syncStandardSiteDocuments } from './standardSite'
 
 const limit = pLimit(10)
 
@@ -600,6 +602,64 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()
     generateProductPagesMarkdown()
+
+    // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
+    // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.
+    try {
+        const changelogQuery = (await graphql(`
+            query {
+                allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date, order: DESC }) {
+                    nodes {
+                        strapiID
+                        title
+                        description
+                        date
+                        cta {
+                            label
+                            url
+                        }
+                        teams {
+                            data {
+                                attributes {
+                                    name
+                                }
+                            }
+                        }
+                        topic {
+                            data {
+                                attributes {
+                                    label
+                                }
+                            }
+                        }
+                    }
+                }
+                allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
+                    nodes {
+                        videoId
+                        publishedAt
+                        title
+                    }
+                }
+            }
+        `)) as {
+            data?: {
+                allRoadmap?: { nodes: any[] }
+                allChangelogVideo?: { nodes: any[] }
+            }
+        }
+        generateChangelogMd(
+            changelogQuery.data?.allRoadmap?.nodes || [],
+            changelogQuery.data?.allChangelogVideo?.nodes || []
+        )
+    } catch (error) {
+        console.error('Failed to generate changelog markdown:', error)
+    }
+
+    // Publish/update Standard.site document records for blog posts.
+    // Self-gates on env (AWS_CODEPIPELINE / STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
+    // Placed before the prod-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
+    await syncStandardSiteDocuments(graphql)
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
