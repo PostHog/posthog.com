@@ -730,5 +730,21 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/oyedele-tioluwani-ba5a65247/",
         "profile_id": 46686
+    },
+    {
+        "handle": "daniel-efe",
+        "name": "Daniel Efe",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/daniel-efe-405497253/",
+        "profile_id": 46907
+    },
+    {
+        "handle": "rohan-taneja",
+        "name": "Rohan Taneja",
+        "role": "Freelance Technical Writer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/rohnx/",
+        "profile_id": 46998
     }
 ]

@@ -101,7 +101,6 @@ export const sessionReplay = {
     // …other product data
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
-        { slug: 'customers', name: 'Who uses it?', group: 'divided', icon: <IconPeople className="size-4" /> },
         {
             slug: 'applications',
             name: 'How do I use it?',
@@ -130,7 +129,7 @@ export const sessionReplay = {
 }
 ```
 
-Only the items listed in `productMenu` / `pricingMenu` render as sections — other product-data fields (like `screenshots`, `hog`, `slider`, `videos`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
+Only the items listed in `productMenu` / `pricingMenu` render as sections — other product-data fields (like `screenshots`, `hog`, `slider`, `presenterNotes`) are consumed by individual templates internally and don't need their own menu entry.
 
 If a section's slug already matches a key in `templateRegistry` (see `templates/index.ts`), no extra wiring is needed; the registry resolves it automatically. Use `template:` only when the slug differs from the desired template key, or when reusing one template under several anchors.
 
@@ -197,9 +196,6 @@ interface SectionComponentProps {
     id: string          // from the menu item's slug
     productData: any    // from useProduct({ handle })
     data: any           // pass-through from the page (GraphQL result)
-    customers: any[]
-    customerSlugs: string[]
-    hasCaseStudy: (slug: string) => boolean
     allProducts: any[]
 }
 ```
@@ -211,7 +207,6 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | Template key           | Reads from `productData`                | Summary                                                        |
 | ---------------------- | --------------------------------------- | -------------------------------------------------------------- |
 | `overview`             | `name`, `Icon`, `overview`, `screenshots`, `status` | Hero: title, description, product icon, screenshot. |
-| `customers`            | `customers`                             | Grid of customer cards + optional case-study link.             |
 | `features`             | `features`                              | Vertical list of feature cards (headline, description, images, children, sub-features, labels). |
 | `ai`                   | `ai`, `name`                            | AI skills + prompts + hero image.                              |
 | `posthog-on-posthog`   | `postHogOnPostHog`                      | How PostHog uses this product internally.                      |
@@ -225,7 +220,7 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | `calculator`           | (none yet)                              | Stub — pricing calculator placeholder for the Pricing surface. |
 | `plans`                | (none yet)                              | Stub — plans summary placeholder for the Pricing surface.      |
 
-If a template finds nothing to render (e.g. `customers` for a product with no `customers` data), it returns `null` — the section disappears but the menu item stays.
+If a template finds nothing to render, it returns `null` – the section disappears but the menu item stays.
 
 ### Adding a new template
 
@@ -247,7 +242,7 @@ If a template finds nothing to render (e.g. `customers` for a product with no `c
 
 ## Product switcher
 
-[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It sources the product list from `useProduct()` (which chains in `useProducts()` plus the alpha/beta extensions in [`hooks/useProduct.ts`](../../../hooks/useProduct.ts)) and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
+[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It uses the same curated handle list/order as the taskbar "Browse tools" menu ([`BROWSE_TOOLS_HANDLES`](../../../constants/productNavigation.ts)), resolved via [`useProduct()`](../../../hooks/useProduct.ts), and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
 
 ```tsx
 <ReaderView
@@ -277,16 +272,7 @@ What's still hard-coded inside `OSSelect` (not exposed as props): the search inp
 
 ### Navigation
 
-Switching products navigates via [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts):
-
-| Current URL                           | Target                          | Reason |
-| ------------------------------------- | ------------------------------- | ------ |
-| `/<currentSlug>`                      | `/<newSlug>`                    | Product root → Product root. |
-| `/<currentSlug>/<section>` where `section` is in `KNOWN_SHARED_SECTIONS` (currently just `'pricing'`) | `/<newSlug>/<section>` | Preserve known shared surfaces (e.g. Pricing). |
-| `/<currentSlug>/<anything-else>`      | `/<newSlug>`                    | Unknown subpath → fall back to product root. |
-| `/docs/<currentSlug>/...`             | `/docs/<newSlug>`               | Docs subpaths are product-specific; always strip to docs root. |
-
-To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHARED_SECTIONS` in [`getProductSurfaceUrl.ts`](./getProductSurfaceUrl.ts).
+Switching products always navigates to the product root (`/<newSlug>`). Surface-preserving navigation (e.g. staying on `/pricing`) is deferred until every product has those pages. [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts) still exists for that future use.
 
 ---
 
@@ -298,8 +284,8 @@ To add a new shared surface (e.g. `tutorials`), append its segment to `KNOWN_SHA
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
-| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProduct()`; navigates via `getProductSurfaceUrl`. |
-| `getProductSurfaceUrl.ts`  | Pure function that maps the current path onto the equivalent surface for another product when the user switches. |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; always navigates to `/<slug>`. |
+| `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 
 ---

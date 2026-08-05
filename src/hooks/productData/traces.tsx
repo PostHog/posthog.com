@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconGanttChart, IconWarning, IconRewindPlay, IconFunnels } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 // "Catnip for agents" cards. Mirrors the "Automatic PostHog instrumentation"
 // section on the /code page: a 2-column grid of icon + title + description cards.
@@ -33,20 +34,15 @@ const catnipSignals = [
 ]
 
 export const traces = {
-    name: 'Traces',
+    ...getTool('traces'),
     Icon: IconGanttChart,
-    description: 'Distributed tracing that goes straight to the line that broke',
-    handle: 'traces',
     type: 'traces',
-    slug: 'traces',
     color: 'blue',
     colorSecondary: 'sky-blue',
-    category: 'product_engineering',
-    status: 'beta',
     seo: {
         title: 'Traces – Distributed tracing with PostHog',
         description:
-            'Traces pinpoint the exact query that broke. PostHog Code opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
+            'Traces pinpoint the exact query that broke. PostHog Desktop opens the PR and sends it to your Inbox. You hit merge. That’s the whole job.',
     },
     overview: {
         title: 'Straight to the line that broke',

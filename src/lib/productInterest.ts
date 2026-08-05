@@ -42,6 +42,9 @@ const PRODUCT_SLUGS = new Set([
 // downstream PROD_INTEREST_TO_PRODUCT map in the PostHog app) keeps matching.
 const SLUG_ALIASES: Record<string, string> = {
     'ai-observability': 'llm-analytics',
+    // The page lives at /desktop (formerly /code) but we keep tracking as 'posthog-code'
+    // so existing prod_interest history and the downstream PostHog app map keep matching.
+    desktop: 'posthog-code',
 }
 
 function getPostHog() {

@@ -9,16 +9,19 @@ import {
     IconImage,
     IconLaptop,
     IconMagicWand,
+    IconMouseScrollDown,
     IconNight,
     IconRocket,
     IconShare,
     IconStar,
     IconX,
 } from '@posthog/icons'
+import { navigate } from 'gatsby'
 import { useApp, SiteSettings } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import { themeOptions } from '../../hooks/useTheme'
 import { useHedgehogMode } from 'components/HedgehogMode'
+import useEarlyAccessFeatures from 'hooks/useEarlyAccessFeatures'
 
 export type SpotlightAction = {
     id: string
@@ -40,6 +43,10 @@ export type SpotlightAction = {
  * dance mode (a TapePlayer-internal window, no route), the hedgehog generator
  * (opened via addWindow from MediaLibrary, no route), and enterprise/theo
  * modes (Layout context, which isn't an ancestor of the overlay).
+ *
+ * Roadmap Early Access Features ARE here despite being navigations: they're
+ * live API data, not pages, so Algolia never indexes them — search genuinely
+ * can't find them any other way. Each deep-links to its card (/roadmap#flag).
  */
 export const useSpotlightActions = (): SpotlightAction[] => {
     const {
@@ -158,6 +165,18 @@ export const useSpotlightActions = (): SpotlightAction[] => {
                     )
                 }
             },
+        },
+        {
+            id: 'scrollbars',
+            label: siteSettings.scrollbars === 'show' ? 'Auto-hide scrollbars' : 'Always show scrollbars',
+            icon: <IconMouseScrollDown />,
+            keywords: ['scrollbar', 'scrollbars', 'scroll', 'scrolling', 'hide', 'show', 'accessibility'],
+            keepOpen: true,
+            perform: () =>
+                updateSiteSettings({
+                    ...siteSettings,
+                    scrollbars: siteSettings.scrollbars === 'show' ? 'auto' : 'show',
+                }),
         },
         {
             id: 'performance-boost',

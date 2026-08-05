@@ -11,6 +11,7 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -357,6 +358,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -444,6 +446,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -658,7 +661,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/code': {
+    '/desktop': {
         size: {
             min: {
                 width: 700,
@@ -872,7 +875,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/data-stack': {
+    '/context-warehouse': {
         size: {
             min: {
                 width: 750,
@@ -899,6 +902,23 @@ const appSettings: AppSettings = {
                 height: 750,
             },
             fixed: true,
+        },
+    },
+    '/connect/posthog/redirect': {
+        size: {
+            min: {
+                width: 425,
+                height: 250,
+            },
+            max: {
+                width: 425,
+                height: 280,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/display-options': {
@@ -1539,40 +1559,7 @@ const appSettings: AppSettings = {
     '/trash': {
         toolbar: true,
     },
-    '/product-analytics': {
-        toolbar: true,
-    },
-    '/web-analytics': {
-        toolbar: true,
-    },
-    '/feature-flags': {
-        toolbar: true,
-    },
-    '/experiments': {
-        toolbar: true,
-    },
-    '/surveys': {
-        toolbar: true,
-    },
-    '/error-tracking': {
-        toolbar: true,
-    },
-    '/logs': {
-        toolbar: true,
-    },
-    '/workflows': {
-        toolbar: true,
-    },
-    '/endpoints': {
-        toolbar: true,
-    },
     '/ai': {
-        toolbar: true,
-    },
-    '/ai-observability': {
-        toolbar: true,
-    },
-    '/mcp-analytics': {
         toolbar: true,
     },
     '/hog': {
@@ -1596,6 +1583,7 @@ export interface SiteSettings {
     reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -1613,6 +1601,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1643,6 +1632,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
@@ -2717,7 +2707,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

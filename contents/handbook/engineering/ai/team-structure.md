@@ -14,7 +14,7 @@ This page explains how teams collaborate on AI features at PostHog. For a high-l
 
 ### The PostHog Desktop team
 
-<SmallTeam slug="posthog-code" /> builds PostHog Desktop, an agent-powered product workspace. Everything you and your team need to build and manage your self-driving product. The product is organized around channels that create a multiplayer experience around working with agents, then augment the agent sessions with PostHog's data and channel context that learns over time
+<SmallTeam slug="posthog-desktop" /> builds PostHog Desktop, an agent-powered product workspace. Everything you and your team need to build and manage your self-driving product. The product is organized around channels that create a multiplayer experience around working with agents, then augment the agent sessions with PostHog's data and channel context that learns over time
 
 The PostHog Desktop team owns the desktop app and the task execution pipeline.
 
@@ -30,15 +30,15 @@ The PostHog Desktop team owns the desktop app and the task execution pipeline.
 - [Write skills](/handbook/engineering/ai/writing-skills) that teach agents how to accomplish jobs in your domain
 - Build UI for specific personas using MCP Apps when needed
 
-Once you ship a tool or skill, it's automatically available across every surface – PostHog AI in the web, PostHog Code, Claude Code, Cursor, and any other MCP-compatible agent.
+Once you ship a tool or skill, it's automatically available across every surface – PostHog AI in the web, PostHog Desktop, Claude Code, Cursor, and any other MCP-compatible agent.
 
 ## How the teams connect
 
 Together, these teams form the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy):
 
-- **Signals** surfaces useful data from PostHog, creates a task with context, and the cloud agent works on it. You review and iterate in PostHog Code.
-- **PostHog AI** owns the background sandboxed agents and can start coding agent tasks during chats. These tasks are inspectable in both the web product and PostHog Code.
-- **PostHog Code** is where engineers review, guide, and manage agent work across all their tasks in one place.
+- **Signals** surfaces useful data from PostHog, creates a task with context, and the cloud agent works on it. You review and iterate in PostHog Desktop.
+- **PostHog AI** owns the background sandboxed agents and can start coding agent tasks during chats. These tasks are inspectable in both the web product and PostHog Desktop.
+- **PostHog Desktop** is where engineers review, guide, and manage agent work across all their tasks in one place.
 - **Product teams** ship their own MCP tools and skills independently. Once shipped, these are automatically available across every surface.
 
 ## Integration vectors for product teams
@@ -51,7 +51,7 @@ The most obvious and lowest-effort vector. Expose your product's APIs through th
 
 **Effort**: Low
 
-**Consumers**: PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
+**Consumers**: PostHog AI, PostHog Desktop, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
 
 ### Skills: Teach agents how to do jobs
 
@@ -59,23 +59,23 @@ If you've already exposed your APIs, the next step is explaining how an agent sh
 
 **Effort**: Medium, but the impact is very high.
 
-**Consumers**: PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), ChatGPT & Claude Desktop, and more.
+**Consumers**: PostHog AI, PostHog Desktop, coding agents (Claude Code, Codex, etc.), ChatGPT & Claude Desktop, and more.
 
 ### Signals: Feed the autonomy loop
 
-If your product produces actionable or near-actionable signals — an insight threshold reached, a new error-tracking issue, a frustration pattern detected — use the signals API so agents can discover these hints and act on them later. Signals are what enable the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy). PostHog Code acts on plans generated from these signals.
+If your product produces actionable or near-actionable signals — an insight threshold reached, a new error-tracking issue, a frustration pattern detected — use the signals API so agents can discover these hints and act on them later. Signals are what enable the [product autonomy loop](/handbook/engineering/ai/ai-platform#vision-product-autonomy). PostHog Desktop acts on plans generated from these signals.
 
 **Effort**: Low to medium.
 
-**Consumers**: PostHog Code (local development) and PostHog AI (background agents).
+**Consumers**: PostHog Desktop (local development) and PostHog AI (background agents).
 
-### PostHog Code: Features for the agentic development environment
+### PostHog Desktop: Features for the agentic development environment
 
-PostHog Code is an agentic development environment where coding agents work on tasks in isolated workspaces. If your product area can make those agents smarter or the engineer's workflow faster, you can build features directly into it. Think PR reviews that check session recordings for regressions, QA steps that verify instrumentation coverage, or task prioritization that weighs your product's signals. This is the highest-effort vector but also the most deeply integrated.
+PostHog Desktop is an agentic development environment where coding agents work on tasks in isolated workspaces. If your product area can make those agents smarter or the engineer's workflow faster, you can build features directly into it. Think PR reviews that check session recordings for regressions, QA steps that verify instrumentation coverage, or task prioritization that weighs your product's signals. This is the highest-effort vector but also the most deeply integrated.
 
 **Effort**: High.
 
-**Consumers**: PostHog Code.
+**Consumers**: PostHog Desktop.
 
 ### Automations & background agents
 
@@ -83,7 +83,7 @@ Run PostHog AI based on triggers from PostHog Workflows, CRON, Temporal, etc., t
 
 **Effort**: Medium to high.
 
-**Consumers**: Your persona using the web browser (UI), PostHog AI, PostHog Code, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
+**Consumers**: Your persona using the web browser (UI), PostHog AI, PostHog Desktop, coding agents (Claude Code, Codex, etc.), Wizard, vibecoding platforms (Lovable, Replit, etc.), ChatGPT & Claude Desktop, and more.
 
 ## How to get started
 

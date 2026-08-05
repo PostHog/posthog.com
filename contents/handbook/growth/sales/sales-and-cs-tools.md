@@ -28,6 +28,18 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
    - Once connected, Gong automatically joins and records your Zoom calls into the shared library.
 3. **Granola** – Install the [Granola](https://www.granola.ai/) app and connect it to your calendar. It runs on your laptop and transcribes whatever call you're in (including your Zoom calls), so you get notes and a transcript without adding another bot to the meeting.
 
+### AI investigation tools
+
+The fastest way to dig into an account is an AI agent wired into our tools. Not mandated, but many of us lean on it daily, and setting it up early will speed things up.
+
+- **PostHog Desktop** – PostHog's agent workspace. Runs coding agents on top of product data with PostHog skills built in.
+- **Claude Code** – a terminal agent you point at customer data, tickets, and repos. Install the PostHog plugin with `claude plugin install posthog@claude-plugins-official`.
+- **MCPs** – connect the following MCPs to your AI agent:
+  - PostHog MCP
+  - Slack
+  - GitHub
+  - Granola
+
 ### Tools through Google and Single Sign-On (SSO)
 
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
@@ -84,4 +96,3 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
 - <PrivateLink url='https://posthog.slack.com/archives/C07TQR0V16U'>#ask-max</PrivateLink> - bot focused on internal processes and questions.
 - <PrivateLink url='https://posthog.slack.com/archives/C0AP5NXF8D7'>#demo-posthog-anything</PrivateLink> - show off something cool or see how others are demoing things.
-- <PrivateLink url='https://posthog.slack.com/archives/C0B5QBS29QU'>#coming-soon</PrivateLink> - see what's coming soon - a schedule of upcoming product launches.

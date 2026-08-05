@@ -1,0 +1,51 @@
+---
+title: Use Session Replay over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog MCP server](/docs/model-context-protocol) exposes session replay to any MCP client, so your AI coding agent can find and read sessions from your editor or terminal. Investigate a bug report, check how users actually move through a feature before you change it, or confirm a fix landed – without switching to the PostHog app.
+
+This works in any MCP client, including Cursor, Claude Code, Codex, Windsurf, and VS Code.
+
+## Before you start
+
+1. **Set up Session Replay** – [install and enable recording](/docs/session-replay/installation) so there are sessions to watch.
+2. **Connect the MCP server** – [install it in your AI tool](#install-the-mcp-server) and give it access to your project.
+
+## What you can do here
+
+- **Search recordings** – find sessions by events, person properties, replay behaviors like rage clicks and dead clicks, and time range.
+- **Read a specific recording** – pull a session's metadata by ID, including duration, interaction counts, console log counts, and a person summary. Any `$session_id` on an event can be used as the ID.
+- **Read AI summaries** – list and fetch existing session summaries so the agent gets the story without watching the playback.
+- **Manage playlists** – create collections or saved filter playlists, update them, and add or remove recordings.
+- **Update and delete recordings** – mark recordings as viewed, or delete them one at a time or in batches of up to 100 for privacy and compliance work. Deletion is permanent, so your agent should confirm with you first.
+
+## Example prompts
+
+Try these with your MCP-enabled agent:
+
+- `Find replays where users hit a JavaScript error on the /checkout page.`
+- `Show me sessions from the last hour where users visited the pricing page.`
+- `Find recordings of users on the enterprise plan who used the bulk import feature.`
+- `Are there any replays showing users stuck in a navigation loop?`
+- `Summarize what happened in the session for this $session_id.`
+- `Create a collection called "Checkout friction" and add the five worst sessions to it.`
+
+## Install the MCP server
+
+The recommended way to install is with the [AI wizard](/docs/ai-engineering/ai-wizard):
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+The wizard supports Claude, Cursor, Windsurf, VS Code, and more. You can also [configure it manually](/docs/model-context-protocol#get-started-in-30-seconds).
+
+See the [MCP server docs](/docs/model-context-protocol) for full setup instructions.
+
+## Related
+
+- Watch and share the same sessions in the [web app](/docs/session-replay/surfaces/web-app).
+- Automate against recordings and playlists with the [API](/docs/session-replay/surfaces/api).
+- Have AI watch recordings and turn what it sees into queryable data with [Replay Vision](/docs/replay-vision).

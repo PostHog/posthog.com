@@ -35,6 +35,7 @@ import {
     IconExternal,
     IconPresent,
     IconSparkles,
+    IconShieldLock,
 } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
@@ -51,6 +52,7 @@ import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
 import { IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
@@ -412,8 +414,9 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+    const email = profile?.user?.data?.attributes?.email
 
     // Update showPronounsInput when values.pronouns changes
     useEffect(() => {
@@ -421,6 +424,23 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && email && (
+                <p className="flex justify-between m-0 gap-2 items-center">
+                    <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                        Email
+                        <Tooltip
+                            delay={0}
+                            className="inline-flex items-center text-secondary"
+                            trigger={<IconShieldLock className="size-4" />}
+                        >
+                            Only visible to moderators
+                        </Tooltip>
+                    </span>
+                    <a href={`mailto:${email}`} className="truncate text-right underline font-medium">
+                        {email}
+                    </a>
+                </p>
+            )}
             {!isEditing && profile.reputation != null && (
                 <p className="flex justify-between items-center m-0">
                     <span className="font-semibold">Reputation</span>
@@ -1500,7 +1520,8 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
-                                profile.location) && (
+                                profile.location ||
+                                (isModerator && profile?.user?.data?.attributes?.email)) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
@@ -1509,6 +1530,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
+                                        isModerator={isModerator}
                                     />
                                 </Block>
                             )}
@@ -1539,6 +1561,11 @@ export default function ProfilePage({ params }: PageProps) {
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditing && isCurrentUser && (
+                                <Block title="Connected accounts">
+                                    <ConnectedAccounts hideHeading stacked />
+                                </Block>
+                            )}
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />

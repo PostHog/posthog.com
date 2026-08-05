@@ -53,6 +53,23 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
+    // Luma's API blocks browser CORS, so the events form fetches /api/luma-events.
+    // In production Vercel serves api/luma-events.js; mirror that route here so
+    // the form also works under `gatsby develop`. Dev server only — no effect on builds.
+    developMiddleware: (app) => {
+        // Vercel serves these from api/*.js in production; mirror them here so the event
+        // form works under `gatsby develop`. Dev only — ignored by `gatsby build`.
+        ;['luma-events', 'notion-events'].forEach((route) => {
+            app.use(`/api/${route}`, async (req, res) => {
+                try {
+                    await require(`./api/${route}`)(req, res)
+                } catch (error) {
+                    console.error(`${route} dev middleware error:`, error)
+                    res.status(500).json({ error: `Failed to fetch ${route}` })
+                }
+            })
+        })
+    },
     flags: {
         DEV_SSR: false,
     },
@@ -372,6 +389,70 @@ module.exports = {
                         // if `string` is used, it will be used to create RegExp and then test if pathname of
                         // current page satisfied this regular expression;
                         // if not provided or `undefined`, all pages will have feed reference inserted
+                    },
+                    {
+                        serialize: ({ query: { site, allRoadmap } }) => {
+                            const { siteUrl } = site.siteMetadata
+
+                            return allRoadmap.nodes.map((node) => {
+                                const team = node.teams?.data?.[0]?.attributes?.name
+                                const topic = node.topic?.data?.attributes?.label
+                                const description = (node.description || '')
+                                    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+                                    .replace(/\]\(\//g, `](${siteUrl}/`) // absolutize relative links
+                                    .trim()
+
+                                return {
+                                    title: node.title,
+                                    description,
+                                    date: node.date,
+                                    url: `${siteUrl}/changelog?id=${node.strapiID}`,
+                                    guid: `posthog-changelog-${node.strapiID}`,
+                                    categories: [team && `${team} Team`, topic].filter(Boolean),
+                                    custom_elements: [
+                                        {
+                                            'content:encoded': {
+                                                _cdata: description,
+                                            },
+                                        },
+                                    ],
+                                }
+                            })
+                        },
+                        query: `
+                        {
+                            allRoadmap(
+                                filter: { complete: { eq: true }, date: { ne: null } }
+                                sort: { fields: date, order: DESC }
+                                limit: 50
+                            ) {
+                                nodes {
+                                    strapiID
+                                    title
+                                    description
+                                    date
+                                    teams {
+                                        data {
+                                            attributes {
+                                                name
+                                            }
+                                        }
+                                    }
+                                    topic {
+                                        data {
+                                            attributes {
+                                                label
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        `,
+                        output: '/changelog.rss',
+                        title: 'PostHog Changelog',
+                        // inserts <link rel="alternate" type="application/rss+xml"> on /changelog pages
+                        match: '^/changelog',
                     },
                 ],
             },

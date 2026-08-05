@@ -1,0 +1,35 @@
+---
+title: Use Session Replay over the API
+sidebar: Docs
+showTitle: true
+---
+
+PostHog's REST API exposes session recordings and playlists, so you can pull replay metadata into your own systems, automate cleanup, or wire recordings into an internal tool. It's the same API the PostHog web app uses, and the same one the [MCP server](/docs/session-replay/surfaces/mcp) wraps.
+
+Authenticate with a [personal API key](/docs/api#authentication) scoped to `session_recording` and `session_recording_playlist`. Reads need the `:read` scopes; writes and deletes need `:write`.
+
+## Before you start
+
+1. **Set up Session Replay** – [install and enable recording](/docs/session-replay/installation) so there are sessions to watch.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need.
+
+## What you can do here
+
+- **List and filter recordings** – page through recordings for a project and filter them the same way the replay list does.
+- **Fetch a single recording** – get metadata for one session by ID, including duration, interaction and console log counts, viewing status, and the person it belongs to.
+- **Update recordings** – mark a recording as viewed, or update its metadata.
+- **Delete recordings** – remove a recording, or delete a batch of them for privacy and compliance requests. Deletion is permanent.
+- **Manage playlists** – create, read, update, and delete collections and saved filter playlists, and add or remove recordings from them.
+- **Read session summaries** – list and fetch AI summaries that have already been generated for a session.
+
+Full request and response details live in the [session recordings API reference](/docs/api/session-recordings).
+
+## Getting the recording data itself
+
+The endpoints above return metadata, not the recorded events. If you need the raw snapshot data – for a bulk export or your own player – there's a separate [snapshot API](/docs/session-replay/snapshot-api). It was built for PostHog's own UI rather than for public use and can change with little notice, so read that page before you build on it.
+
+## Related
+
+- Do the same things conversationally over [MCP](/docs/session-replay/surfaces/mcp).
+- Watch and share replays in the [web app](/docs/session-replay/surfaces/web-app).
+- Control how long recordings stick around with [data retention](/docs/session-replay/recording-retention).

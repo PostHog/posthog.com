@@ -68,10 +68,22 @@ The client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger
   classes="rounded"
 />
 
+URL trigger patterns are regular expressions and are automatically anchored: PostHog wraps your pattern in `^` and `$`, so it must match the full URL including the path. A bare domain like `https://example.com` won't match `https://example.com/` or any subpage.
+
+To record on a domain, all of its subdomains, and every path:
+
+```
+https://([a-zA-Z0-9-]+\.)?example\.com(/.*)?
+```
+
+Use the URL tester in the settings panel to check your pattern against real URLs before saving.
+
 ## With Event trigger conditions
 
 You can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues for the rest of the session.
 On the web, the client keeps a buffer in-memory (see [how the buffer works](#how-the-trigger-buffer-works) below), so you'll still be able to see activity leading up to that event.
+
+> **Note:** Event triggers match on the event name only. Property filters are not applied, so an event trigger can't be scoped to a specific domain or page. Use a URL trigger for that.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png"

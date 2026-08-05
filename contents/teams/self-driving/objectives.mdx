@@ -1,57 +1,60 @@
-## Q2 2026
+## Q3 2026 goals
 
-For reference (internal-only): [Q2 planning doc](https://docs.google.com/document/d/1s8LQVo0UThfDx3VSEMBMp1_nmuENRBaiSDKLcTYuol4/edit?tab=t.0)
+### Inbox
 
-Going as far as it takes to make users feel Inbox is not just "cool" - but awesome.
+#### Make the Inbox UX amazing - Michael
 
-Principles:
-- We eat our own dog food - PostHog Inc. has to be a set of happy Inbox users, and we have a path to that
-- Reliabiltity is non-optional - explicitly allocating time to reliability, including devex 
+- Users should not need to leave PostHog to merge a PR
 
-_Ownership will be assigned as we prioritize throughout the quarter. Michael makes sure this happens as team lead._
+#### Improve mergeability
 
-### Objective 1: One PR merged a day
+- ReviewHog - Alex
+- CI followups for autostarted tasks
+- Screenshots and video previews of feature changes
 
-Self-driving has to deliver concrete code to review and merge:
-- Auto-create PRs
-- Allow users to configure the level of confidence for PR creation
-- Make PostHog Code Inbox UX spark joy
-- Run user interviews
-  - Annika will be running interviews with active PH Code users, we should take part
+#### Costs - Josh
 
-### Objective 2: Prioritization
+- Reduce wasted token spend per PR, so that we can spend it on things that improve quality
 
-Serving "One PR merged a day": 
-Prioritization in the inbox has to always surface slam dunks above noise:
-- Making the agent run queries to determine if the problem is in a hot path
-- "Analyze part of session visually" tool for research
-- Seamless PostHog org member→GH user mapping (for owner assignment)
-- Ability to reingest all signals in prod
-  - Plus ability fo filter by pipeline version
+#### Self-driving features - Olly
 
-### Objective 3: Sources
+- We have self-healing working: deploying a PR to fix a problem in the users codebase. We want to move to features that require multiple PRs, and tracking the progress between them, to achieve an objective.
 
-Specific sources have to result in salient inbox items:
-- PostHog Error Tracking
-- Linear
-- GitHub Issues
-- Zendesk
-- PostHog Support
-- Later in the quarter: Session Replay (much higher-effort w/ Replay team collab)
-  - Michael to write a spec for the person who'll help us ship here
+#### Make it easy to use
 
-Other teams integrating: on pause until we have confidence in these core sources.
+- Add more sources, including logs and analytics
+- Increase quality of our existing integrations
+- Reduce friction to getting started with self-driving
+- Templates and recipes for scouts
 
-### Objective 4: Experiments
+#### Memory
 
-We're in delivery mode with PostHog Code launch, but when we have solid footing there, we should get back into some experimentation. We think we have some ideas that _may_ take the product to the next level, but they need to be actually tested:
+- Shared memory for agents running in the pipeline. Form factor TBD
+- Semantic layer
 
-- AI PM: Agent as the "product owner" on a product/feature level: On a cron, the agent checks the feature status (metrics, errors etc.) & recommends actions
-- Memory
-- Allow agent to schedule follow-up (esp. for LLMA + replay)
+#### Pricing - Annika
 
-### Non-objective: Pricing
+- Experiment with different pricing models, including per-merged-PR and agentic pricing
 
-Pricing is not a priority before we feel that the Inbox is indeed _awesome_. We should just keep track of costs to keep an eye:
+### PostHog AI
 
-- Set up Inbox usage/success/costs dashboard
+- Complete the PostHog AI migration to give PostHog AI access to all products via MCP
+- Roll it out to users, and iterate on feedback
+
+### Slack
+
+- Better activation and onboarding
+- It messages you, you don't message it
+- Inbox notification digest, rather than just everything in a channel
+- Scouts send Slack messages to a user
+
+### Agentic interfaces
+
+- Continue monitoring feedback and improving MCP, CLI, and SDK interfaces
+- Add skills for using the SDK
+
+## Anti-goals
+
+- Spending overly long amounts of time debating naming or pricing strategies
+- Trying to seek consensus on decisions - we have to lean on folks owning stuff as we're a big team
+- Shipping to any interface where we don't control rollout
