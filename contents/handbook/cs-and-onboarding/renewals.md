@@ -47,7 +47,6 @@ Two options, in order of preference:
 
 Tell the customer which of these is happening while the order form is still out, not after they get an invoice they weren't expecting.
 
-If a customer does end up with a balance on an already-issued invoice because the renewal slipped, that's a [refund, not a credit](/handbook/growth/sales/refunds#refund-or-credit) — credits only apply to upcoming invoices.
 
 ## Unique renewal cases
 
