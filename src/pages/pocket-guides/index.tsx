@@ -77,9 +77,10 @@ export default function PocketGuidesPage(): JSX.Element {
                         </header>
 
                         {/* Static list so the shelf is in built HTML; fixed widths keep covers book-sized. */}
-                        <ul className="m-0 flex list-none flex-wrap gap-6 p-0">
+                        {/* Narrow containers: one centered scrolling stack. Wide: the wrapping shelf. */}
+                        <ul className="m-0 flex list-none flex-col items-center gap-8 p-0 @xl:flex-row @xl:flex-wrap @xl:items-stretch @xl:gap-6">
                             {volumes.map((volume) => (
-                                <li key={volume.id} className="w-[190px] @xl:w-[210px] @4xl:w-[230px]">
+                                <li key={volume.id} className="w-[250px] @xl:w-[210px] @4xl:w-[230px]">
                                     <Cover volume={volume} count={counts[volume.id] ?? 0} />
                                 </li>
                             ))}
