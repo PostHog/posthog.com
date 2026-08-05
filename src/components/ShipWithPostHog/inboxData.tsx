@@ -1122,56 +1122,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         },
     },
     /*
-     * 6 — APM. The umbrella story for metrics, logs and traces, which the site otherwise
-     * ships as separate products.
-     *
-     * TODO: this is the one item here without a real merged pull request. `prUrl`,
-     * `prNumber` and `detail` are deliberately absent rather than invented – the header
-     * link is gated on `prUrl`, so the row renders without a PR badge and expands to
-     * header + summary only. The title and summary below are placeholders too. Swap all of
-     * it for the real PR's data once one exists; see README.md for the fetch flow.
-     */
-    {
-        id: 'apm',
-        commitType: 'fix',
-        scope: 'apm',
-        title: 'placeholder – awaiting the real APM pull request',
-        summary:
-            'Placeholder summary. A p95 regression on one service operation, caught against its own baseline rather than a fixed threshold.',
-        priority: 'P2',
-        signalCount: 3,
-        timeAgo: 'Updated Aug 5',
-        // The copy calls this "the APM scout", and a scheduled scout is exactly what it
-        // describes – so this is a scout report, not a signal from one source product.
-        origin: { kind: 'scout', scout: 'APM' },
-        // Metrics, logs and traces are one story here, so the button drops the scope.
-        walkthroughLabel: 'APM',
-        intro: 'APM gives the loop your traces, logs, and metrics – what broke, what it said, and where it happened.',
-        steps: [
-            {
-                stage: 'signal',
-                copy: 'Log alerts and new error signatures arrive as signals on their own. The APM scout adds the scheduled sweep: RED metrics per service and operation, compared against baseline, with every validated regression filed as a report.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_APM_1_8d287374b6.png',
-            },
-            {
-                stage: 'investigate',
-                copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. Because a trace names the service, operation, and line, the agent starts at the problem instead of searching for it.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_APM_68ef834f95.png',
-            },
-            {
-                stage: 'pr',
-                copy: 'The agent fixes what the trace located and opens the PR, with instrumentation included so the effect of the change shows up in the same metrics.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_APM_62fd9d0412.png',
-            },
-            {
-                stage: 'merge',
-                copy: 'You review the diff with the waterfall beside it. After you merge, the same check that raised the alarm watches the graph come back down.',
-                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_APM_5caee0bbd3.png',
-            },
-        ],
-    },
-    /*
-     * 7 — Product analytics.
+     * 6 — Product analytics.
      *
      * TODO: the second item here without a real merged pull request. As with APM, `prUrl`,
      * `prNumber` and `detail` are absent rather than invented, and the title and summary
@@ -1221,25 +1172,124 @@ export const INBOX_ITEMS: InboxItem[] = [
         ],
     },
     /*
-     * 8 — Feature flags. Introduces the `feature_flags` source key above; it's the first of
-     * the analytics-group products that didn't already have one.
+     * NOTE: APM and Feature flags used to sit here. Both turned out to be real reports with
+     * `implementation_pr_url: null`, so they moved to `REPORT_ITEMS` where they belong –
+     * `SignalsToInbox` draws walkthroughs from both arrays, so they keep their carousel slots.
+     */
+]
+
+/**
+ * Real reports that have **not** become pull requests – the other half of the Inbox, and
+ * the state every item in `INBOX_ITEMS` passed through first.
+ *
+ * A report is what the loop produces before anyone commits to a fix: the evidence is
+ * gathered, the code is read, reviewers are worked out, and a write-up exists – but no
+ * branch has been merged. Some are `immediately_actionable`, meaning an agent could open
+ * the pull request today; the rest are `requires_human_input`, where the agent
+ * investigated and stopped rather than shipping a fix it couldn't stand behind. Those are
+ * the honest cases, so they're included.
+ *
+ * Sourced exactly like `INBOX_ITEMS` – `inbox-reports-retrieve` and
+ * `inbox-report-artefacts-list` on project 2 – with the same privacy rules: evidence
+ * bodies are re-worded to drop customer project ids, ticket numbers, session ids, and
+ * email addresses, while repo paths and commit SHAs stay verbatim because they're public.
+ *
+ * None of them carry `stats` or `files`: without a merged pull request there is no
+ * authoritative diff to publish, so the detail view degrades to Overview rather than
+ * showing invented numbers.
+ */
+export const REPORT_ITEMS: InboxItem[] = [
+    /*
+     * 0 — Report 019fb921, the APM walkthrough's report. Scout-authored: its real
+     * `source_products` is `['signals_scout']` with `scout_name: 'signals-scout-apm'`.
      *
-     * TODO: no real merged pull request yet, so `prUrl`, `prNumber` and `detail` are absent
-     * rather than invented, and the title and summary below are placeholders that DO render
-     * in the inbox row. The walkthrough itself is complete.
+     * Title is the report's own, verbatim. The summary is written fresh: the stored one
+     * carries PostHog's own failure rates, p95 figures and ClickHouse diagnosis, which is
+     * more of our reliability data than a public page should publish.
+     */
+    {
+        id: 'apm',
+        commitType: 'fix',
+        scope: 'query',
+        title: 'Events-list endpoint is timing out at 11.5%',
+        summary:
+            'The events-list endpoint started failing at a materially higher rate than the week before, with latency worsening alongside it – a sustained step, not a traffic artifact.',
+        priority: 'P1',
+        signalCount: 3,
+        timeAgo: 'Updated Jul 31',
+        origin: { kind: 'scout', scout: 'APM' },
+        // Metrics, logs and traces are one story here, so the button drops the scope.
+        walkthroughLabel: 'APM',
+        intro: 'APM gives the loop your traces, logs, and metrics – what broke, what it said, and where it happened.',
+        steps: [
+            {
+                stage: 'signal',
+                copy: 'Log alerts and new error signatures arrive as signals on their own. The APM scout adds the scheduled sweep: RED metrics per service and operation, compared against baseline, with every validated regression filed as a report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_APM_1_8d287374b6.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. Because a trace names the service, operation, and line, the agent starts at the problem instead of searching for it.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_APM_68ef834f95.png',
+            },
+            {
+                stage: 'pr',
+                copy: 'The agent fixes what the trace located and opens the PR, with instrumentation included so the effect of the change shows up in the same metrics.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_APM_62fd9d0412.png',
+            },
+            {
+                stage: 'merge',
+                copy: 'You review the diff with the waterfall beside it. After you merge, the same check that raised the alarm watches the graph come back down.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_APM_5caee0bbd3.png',
+            },
+        ],
+        detail: {
+            status: 'Needs input',
+            firstSeen: 'Jul 31, 2026',
+            lastUpdated: 'Jul 31, 2026',
+            contributingSources: ['signals_scout'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            The events-list endpoint's failure rate stepped up sharply against the same window a week
+                            earlier, while traffic barely moved – so this is a real regression in the query path rather
+                            than load. Latency at the 95th percentile worsened alongside it.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Why it needs a human',
+                    paragraphs: [
+                        <>
+                            The failing requests time out inside query execution against a fixed limit. Whether the
+                            right fix is that limit, the query plan, or the materialisation strategy is an owner
+                            decision, so the agent stopped at the diagnosis instead of picking one.
+                        </>,
+                    ],
+                },
+            ],
+        },
+    },
+    /*
+     * 0b — Report 019fc98f, the Feature flags walkthrough's report. Also scout-authored
+     * (`scout_name: 'signals-scout-feature-flags'`), which is why its origin is a scout even
+     * though the step copy leads with signals.
+     *
+     * Title verbatim from the report. Summary rewritten to drop the evaluation counts and
+     * person counts the stored one carries.
      */
     {
         id: 'feature-flags',
         commitType: 'fix',
-        scope: 'flags',
-        title: 'placeholder – awaiting the real feature flags pull request',
+        scope: 'feature-flags',
+        title: 'remove residual calls to renamed streamlit flag',
         summary:
-            'Placeholder summary. A renamed flag was still being called from an old deployment, so it evaluated false for everyone on that build.',
-        priority: 'P2',
-        signalCount: 2,
-        timeAgo: 'Updated Aug 5',
-        // Signals lead here – the scout is the alternative for high-stakes flags.
-        origin: { kind: 'signal', product: 'feature_flags' },
+            'A retired flag key kept being evaluated for days after the live flag was renamed, with almost every one of those calls returning null.',
+        priority: 'P3',
+        signalCount: 3,
+        timeAgo: 'Updated Aug 3',
+        origin: { kind: 'scout', scout: 'Feature flags' },
         walkthroughLabel: 'Feature flags',
         intro: 'Feature flags accumulate faster than anyone cleans them up. This is the part of the loop that does.',
         steps: [
@@ -1264,30 +1314,110 @@ export const INBOX_ITEMS: InboxItem[] = [
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Feature_flags_952d61c07a.png',
             },
         ],
+        detail: {
+            status: 'Needs input',
+            firstSeen: 'Aug 3, 2026',
+            lastUpdated: 'Aug 3, 2026',
+            contributingSources: ['signals_scout'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            A flag key was renamed, but the old key kept being evaluated every day afterwards. The
+                            roster has no live flag under the old name, so nearly all of those calls resolved to nothing
+                            – callers were reading a default rather than the flag they meant.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Why it needs a human',
+                    paragraphs: [
+                        <>
+                            The remaining calls could be cached deployments that will age out on their own, or live code
+                            still checking a dead key. Which one decides whether this is a migration or a deletion, and
+                            that call belongs to whoever owns the caller.
+                        </>,
+                    ],
+                },
+            ],
+        },
     },
-]
-
-/**
- * Three real reports that have **not** become pull requests – the other half of the
- * Inbox, and the state every item in `INBOX_ITEMS` passed through first.
- *
- * A report is what the loop produces before anyone commits to a fix: the evidence is
- * gathered, the code is read, reviewers are worked out, and a write-up exists – but no
- * branch has been merged. Two here are `immediately_actionable`, meaning an agent could
- * open the pull request today; the third is `requires_human_input`, where the agent
- * investigated, disproved its own first diagnosis, and stopped rather than shipping a
- * fix it couldn't stand behind. That last one is the honest case, so it's included.
- *
- * Sourced exactly like `INBOX_ITEMS` – `inbox-reports-retrieve` and
- * `inbox-report-artefacts-list` on project 2 – with the same privacy rules: evidence
- * bodies are re-worded to drop customer project ids, ticket numbers, session ids, and
- * email addresses, while repo paths and commit SHAs stay verbatim because they're public.
- *
- * None of them carry `stats` or `files`: without a merged pull request there is no
- * authoritative diff to publish, so the detail view degrades to Overview rather than
- * showing invented numbers.
- */
-export const REPORT_ITEMS: InboxItem[] = [
+    /*
+     * 0c — Experiments. Scout-authored, like the two above, so no new `SourceKey` is needed.
+     *
+     * The work behind this reached PostHog/posthog#70239 – `feat(web-analytics): gate session
+     * replay tile behind experiment flag`, +26/-1 across three files, approved by lricoy –
+     * but that PR was **closed without merging** on Jul 28, so no `prUrl` or `prNumber` here:
+     * the header link is gated on `prUrl`, and linking an unmerged PR from a page about
+     * merged ones would misrepresent it. Title and diff shape are the real PR's.
+     *
+     * `priority` and `signalCount` are illustrative – unlike APM and Feature flags there's no
+     * stored report to read them from. Replace them if one turns up.
+     */
+    {
+        id: 'experiments',
+        commitType: 'feat',
+        scope: 'web-analytics',
+        title: 'gate session replay tile behind experiment flag',
+        summary:
+            'A running experiment produced no exposures, because the flag it was built on was never read in the serving path – so neither variant could fill and the readout would have been empty.',
+        priority: 'P2',
+        signalCount: 2,
+        timeAgo: 'Updated Jul 28',
+        origin: { kind: 'scout', scout: 'Experiments' },
+        walkthroughLabel: 'Experiments',
+        intro: 'An experiment is only as good as the data underneath it. This is the part of the loop that checks.',
+        steps: [
+            {
+                stage: 'signal',
+                copy: "The experiments scout sweeps every running test on a schedule: exposure balance, sample ratios, metrics actually filling. A test that can't produce a valid readout becomes a report a day into the run, not at the readout. For a high-stakes launch, set up your own scout with tighter checks.",
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_Experiments_83d2511ca0.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent traces the exposure stream back through the serving path: whether the flag is read at all, where the exposure event fires, and whether the split you configured is the split users get.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Experiments_bcb10f1ea2.png',
+            },
+            {
+                stage: 'pr',
+                copy: 'Wiring problems are code problems, so the agent opens the PR: the flag read goes into the serving path, with tests that keep it there, and a note on resetting the experiment so the empty window stays out of the analysis.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Experiments_af42b8b94b.png',
+            },
+            {
+                stage: 'merge',
+                copy: 'You review the diff with the exposure data beside it. Both variants start filling after the merge, and the readout you eventually get is one you can trust.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Experiments_1983ea7703.png',
+            },
+        ],
+        detail: {
+            status: 'Needs input',
+            firstSeen: 'Jul 11, 2026',
+            lastUpdated: 'Jul 28, 2026',
+            branch: 'posthog-code/wire-web-analytics-replay-tile-flag',
+            contributingSources: ['signals_scout'],
+            summary: [
+                {
+                    paragraphs: [
+                        <>
+                            The experiment was configured and running, but its flag was never read on the path that
+                            serves the tile – so no exposure event fired for either variant and the test could not
+                            produce a readout at all.
+                        </>,
+                    ],
+                },
+                {
+                    heading: 'Why it needs a human',
+                    paragraphs: [
+                        <>
+                            Wiring the flag in is straightforward, but the run already has an empty window in it.
+                            Whether to reset the experiment and discard that window, or restart it outright, is a call
+                            for whoever owns the test.
+                        </>,
+                    ],
+                },
+            ],
+        },
+    },
     // 1 — Report 019f21c4. Found by Replay Vision, corroborated by a support ticket.
     {
         id: 'mcp-analytics',

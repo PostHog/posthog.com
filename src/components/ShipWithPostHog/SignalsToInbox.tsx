@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import SelfDrivingStory from 'components/SelfDrivingStory'
-import { INBOX_ITEMS, originMeta, type InboxItem } from './inboxData'
+import { INBOX_ITEMS, REPORT_ITEMS, originMeta, type InboxItem } from './inboxData'
 
 /*
  * Only items that actually have a walkthrough. Steps are optional on InboxItem, so
  * adding a report to the inbox can never leave a selector button here that opens nothing.
+ *
+ * Both arrays, because a product's story doesn't depend on whether its report reached a
+ * pull request: APM and Feature flags are genuine `requires_human_input` reports and live
+ * in `REPORT_ITEMS`, but they narrate their product as well as any merged one does.
  */
-const WALKTHROUGHS: InboxItem[] = INBOX_ITEMS.filter((item) => item.steps?.length)
+const WALKTHROUGHS: InboxItem[] = [...INBOX_ITEMS, ...REPORT_ITEMS].filter((item) => item.steps?.length)
 
 /**
  * Selector label. The source alone isn't unique – several of these were found by Replay
