@@ -1,5 +1,5 @@
 import React from 'react'
-import Explorer from 'components/Explorer'
+import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO, { buildProductStructuredData } from 'components/seo'
@@ -8,7 +8,6 @@ import {
     IconCheck,
     IconX,
     IconStarFilled,
-    IconQuestion,
     IconBolt,
     IconRewindPlay,
     IconSparkles,
@@ -36,7 +35,6 @@ import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
-import { useMenuSelectOptions } from 'components/TaskBarMenu/menuData'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -377,8 +375,6 @@ interface StartupProgramProps {
 }
 
 export default function StartupProgram({ partnerSlug = null }: StartupProgramProps): JSX.Element {
-    const selectOptions = useMenuSelectOptions()
-
     const partnerConfig = partnerSlug ? partnerConfigs.find((config) => config.slug === partnerSlug) : null
     const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
     const applyUrl = `https://app.posthog.com/startups${partnerSlug ? `/${partnerSlug}` : ''}`
@@ -397,102 +393,13 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     faq: faqStructuredData,
                 })}
             />
-            <Explorer
-                template="generic"
-                slug="startups"
-                title="PostHog startup program"
-                headerBarOptions={['showBack', 'showForward']}
-                selectOptions={selectOptions}
-                selectedCategory="startups"
-                leftSidebarContent={
-                    <div className="p-2">
-                        <Accordion
-                            data-scheme="primary"
-                            type="multiple"
-                            className="[&>*:first-child_button]:!pt-0"
-                            triggerClassName="!text-sm !font-semibold"
-                            contentClassName="!text-sm [&_p]:!text-sm [&_li]:!text-sm"
-                            defaultValue={['item-0']}
-                            items={[
-                                {
-                                    value: 'item-0',
-                                    trigger: (
-                                        <>
-                                            <IconQuestion className="text-green size-5 shrink-0" />
-                                            <span className="flex-1">What is this?</span>
-                                        </>
-                                    ),
-                                    content: (
-                                        <p className="m-0">
-                                            PostHog for Startups helps early-stage teams and founders build better
-                                            products, faster. Get over $50,000 in credits to use across any PostHog
-                                            features, including AI observability and self-driving.
-                                        </p>
-                                    ),
-                                },
-                                {
-                                    value: 'item-1',
-                                    trigger: (
-                                        <>
-                                            <IconCheck className="text-green size-5 shrink-0" />
-                                            <span className="flex-1">How to apply</span>
-                                        </>
-                                    ),
-                                    content: (
-                                        <ol className="m-0">
-                                            <li>Create a PostHog account and add a credit card</li>
-                                            <li>
-                                                After onboarding,{' '}
-                                                <Link to={applyUrl} external className="underline font-semibold">
-                                                    complete this form
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                If accepted into the PostHog startup program, you'll be notified by
-                                                email
-                                            </li>
-                                        </ol>
-                                    ),
-                                },
-                                {
-                                    value: 'item-2',
-                                    trigger: (
-                                        <>
-                                            <IconCheck className="text-green size-5 shrink-0" />
-                                            <span className="flex-1">Who is eligible?</span>
-                                        </>
-                                    ),
-                                    content: (
-                                        <ul className="m-0">
-                                            <li>Startup under 2 years old</li>
-                                            <li>Less than $5 million in funding</li>
-                                        </ul>
-                                    ),
-                                },
-                                {
-                                    value: 'item-3',
-                                    trigger: (
-                                        <>
-                                            <IconCheck className="text-green size-5 shrink-0" />
-                                            <span className="flex-1">Fine print</span>
-                                        </>
-                                    ),
-                                    content: (
-                                        <ul className="m-0">
-                                            <li>Credits expire after 12 months</li>
-                                            <li>This deal is not valid with other discounts or offers</li>
-                                            <li>
-                                                Companies on our startups plan are not eligible for priority support
-                                            </li>
-                                        </ul>
-                                    ),
-                                },
-                            ]}
-                        />
-                    </div>
-                }
-                showTitle={false}
-                padding={false}
+            <ReaderView
+                proseSize="lg"
+                hideLeftSidebar
+                showQuestions={false}
+                title="startups.md"
+                hideTitle
+                className="overflow-x-hidden"
             >
                 <div className="@container h-full bg-[#EFF0EB] dark:bg-dark">
                     <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center w-full">
@@ -933,7 +840,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         <p className="italic text-sm mt-2 text-secondary">You'll need a PostHog account first</p>
                     </div>
                 </div>
-            </Explorer>
+            </ReaderView>
         </>
     )
 }

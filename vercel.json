@@ -128,6 +128,28 @@
             "destination": "/newsletter/:path*.md"
         },
         {
+            "source": "/changelog/",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/changelog.md"
+        },
+        {
+            "source": "/changelog",
+            "has": [
+                {
+                    "type": "header",
+                    "key": "accept",
+                    "value": "(?:.*text/markdown.*)"
+                }
+            ],
+            "destination": "/changelog.md"
+        },
+        {
             "source": "/community/profiles/:path*",
             "destination": "/community/profiles/[id]/index.html"
         },
@@ -150,6 +172,10 @@
         {
             "source": "/posts/:path*",
             "destination": "/posts/[slug]/index.html"
+        },
+        {
+            "source": "/teams/:path*",
+            "destination": "/teams/[slug]/index.html"
         }
     ],
     "redirects": [
@@ -393,6 +419,16 @@
         {
             "source": "/teams/docs-wizard",
             "destination": "/teams/wizard-and-docs"
+        },
+        {
+            "source": "/handbook/wizard-and-docs/changelog",
+            "destination": "/handbook/wizard-and-docs/how-to-publish-changelog",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/docs-and-wizard/changelog",
+            "destination": "/handbook/wizard-and-docs/how-to-publish-changelog",
+            "statusCode": 301
         },
         {
             "source": "/handbook/docs-and-wizard",

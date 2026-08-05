@@ -64,7 +64,7 @@ These three properties together describe replay status. Read them as a set, not 
 | Property                          | What it tells you                                                                                                   |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `$has_recording`                  | `true` once PostHog has confirmed a recording exists for the session. The strongest positive signal.                |
-| `$recording_status`               | The SDK's current state: `active`, `buffering`, `disabled`, `sampled`, or `paused`.                                 |
+| `$recording_status`               | The SDK's current state. See the [full list of values](#recording_status-values) below.                             |
 | `$session_recording_start_reason` | Why recording started (or didn't). Useful for distinguishing "we chose not to record" from "we tried but couldn't". |
 
 #### `$recording_status` values
@@ -76,6 +76,10 @@ These three properties together describe replay status. Read them as a set, not 
 | `disabled`  | Recording is turned off – either in [your project replay settings](https://app.posthog.com/settings/project-replay) or via SDK config at runtime. |
 | `sampled`   | This session was included by the configured replay sample rate – recording started.                                                               |
 | `paused`    | Recording is temporarily paused for this session (consent gate, programmatic `pause()`, or a max-duration cap).                                   |
+| `lazy_loading`    | Recording is enabled and the SDK is still fetching the recorder script. Normal on the first events of a pageload (including the initial `$pageview`). If it persists across a whole session, the script never finished loading (check `$sdk_debug_recording_script_not_loaded`). |
+| `awaiting_config` | The SDK is waiting for fresh remote config before starting the recorder.                                                                                                                                                                                                        |
+| `missing_config`  | The remote config fetch failed. Recording will not start until the page is reloaded.                                                                                                                                                                                            |
+| `rrweb_error`     | The recorder failed to start. `$sdk_debug_replay_rrweb_error` contains the error message.                                                                                                                                                                                       |
 
 #### `$session_recording_start_reason` values
 
@@ -93,6 +97,7 @@ These three properties together describe replay status. Read them as a set, not 
 | `true`           | any                   | any                                                                 | A recording exists. If you can't find it, the issue is UI filtering, retention, or it's still processing.                                                    |
 | `null` / `false` | `active` or `sampled` | `recording_initialized` / `sampling_override` / `linked_flag_match` | Recording is running but PostHog hasn't confirmed ingestion yet, check a later event.                                                                        |
 | `null` / `false` | `buffering`           | any                                                                 | The SDK is waiting on a [trigger](/docs/session-replay/how-to-control-which-sessions-you-record) or duration threshold, check the trigger status properties. |
+| `null` / `false` | `lazy_loading`        | any                                                                 | The recorder script was still loading when this event fired. Normal on early events in a session, check a later event.                                       |
 | `null` / `false` | `disabled`            | any                                                                 | Replay is off, either in [project settings](https://app.posthog.com/settings/project-replay) or via SDK config like `disable_session_recording: true`.       |
 | `null` / `false` | any                   | `sampled_out`                                                       | Your sample rate excluded this session – increase the sample rate or use a trigger to guarantee capture for important flows.                                 |
 | `null` / `false` | `paused`              | any                                                                 | Recording was paused mid-session – usually a consent flow or a programmatic `posthog.sessionRecording.pause()` call.                                         |
@@ -104,11 +109,11 @@ A normal session's `$recording_status` typically progresses like this:
 ```text
 disabled ──── (config or setting turns replay off)
 
-buffering ──► active ──► (recording captured, $has_recording flips to true on later events)
-    │            │
-    │            └──► paused ──► active   (consent flow, programmatic control)
-    │
-    └──► (session ends before a trigger matches, buffer discarded, no recording stored)
+lazy_loading ──► buffering ──► active ──► (recording captured, $has_recording flips to true on later events)
+                     │            │
+                     │            └──► paused ──► active   (consent flow, programmatic control)
+                     │
+                     └──► (session ends before a trigger matches, buffer discarded, no recording stored)
 ```
 
 `sampled` is an alternative entry point meaning "this session was rolled into the sample" and it behaves like `active` from a capture standpoint.

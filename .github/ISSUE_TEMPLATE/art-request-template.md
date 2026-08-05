@@ -21,6 +21,7 @@ projects:
 ## Outline
 _Avoid being overly prescriptive and instead provide context about what you're trying to convey - i.e. a feeling, reaction, or narrative._
 _If it's for an article, share the draft headline and some bullet points of what it's about._
+_For editorial team only: Please specify if this is a build mode newsletter hero image/infrogaphic request. And, if so, let us know what you want the hero image text to be._
 
 ## Deadline & Priority
 _Leave reasonable time. A week is the minimum. Two weeks notice is good, even more time is ideal._

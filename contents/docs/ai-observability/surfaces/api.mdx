@@ -6,6 +6,11 @@ showTitle: true
 
 The API is both how trace data gets into PostHog and how you drive AI Observability from your own code. Your app sends LLM events through the [capture API](/docs/api/capture), and the [PostHog API](/docs/api) exposes the rest of the product – evaluations, datasets, review queues, clustering, summarization, and provider keys – so you can wire scoring and review into CI or your own tooling instead of clicking through the app.
 
+## Before you start
+
+1. **Set up AI Observability** – [install a PostHog LLM SDK or provider integration](/docs/ai-observability/installation) so traces are captured.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
 ## What you can do here
 
 **Send traces in**

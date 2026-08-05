@@ -468,11 +468,18 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Founders hub',
+                    link: '/founders',
+                    icon: <Icons.IconRocket className="size-4 text-purple" />,
+                },
+                {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/questions',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
+                { type: 'separator' },
                 {
                     type: 'item',
                     label: 'Merch store',

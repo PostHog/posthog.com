@@ -79,7 +79,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                 }}
                 options={[
                     { label: 'Example prompts', value: 'prompts', default: true },
-                    { label: 'Tools', value: 'tools' },
+                    { label: 'MCP tools', value: 'tools' },
                 ]}
                 className="mb-4 max-w-sm"
             />
