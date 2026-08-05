@@ -808,11 +808,34 @@ export const INBOX_ITEMS: InboxItem[] = [
         prUrl: 'https://github.com/PostHog/posthog/pull/70918',
         prNumber: 70918,
         /*
-         * No `steps`, so this stays in the inbox but out of the walkthrough selector. The
-         * AI Observability walkthrough gets rebuilt on this item – it has the real PR – once
-         * its copy and mocks land. It'll want `walkthroughLabel: 'AI observability'`, because
-         * the report was discovered by Conversations and the default label said so.
+         * The report really was discovered by Conversations, with AI observability
+         * confirming it – see `contributingSources` below – so the origin stays honest and
+         * the button gets overridden instead. Without this it would read "Conversations · aio".
          */
+        walkthroughLabel: 'AI observability',
+        intro: 'AI features fail politely: wrong answers, slow answers, expensive answers. Evals catch what error tracking can’t.',
+        steps: [
+            {
+                stage: 'signal',
+                copy: 'Evals score your LLM traffic on a schedule – correctness, cost, latency, struggle. A failing pattern across generations becomes a report; one bad completion doesn’t.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_15_07_06_2x_19076236d0.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent reads the failing traces against the passing ones and follows them back to the prompt, tool, or model call responsible. The traces go in as evidence.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_AI_observability_3bdb92d6e5.png',
+            },
+            {
+                stage: 'pr',
+                copy: 'Most AI bugs are prompt bugs, so the fix is often a diff in a prompt file. The agent opens it like any other PR.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_AI_observability_4261e76fa5.png',
+            },
+            {
+                stage: 'merge',
+                copy: 'You review the prompt diff with the failing traces beside it. After the merge, the eval that caught it becomes the regression test that keeps it fixed.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_AI_observability_b9ffb78366.png',
+            },
+        ],
         detail: {
             status: 'Actionable',
             firstSeen: 'Jul 14, 2026',
