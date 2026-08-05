@@ -3,6 +3,10 @@ title: Onboarding conversations playbook
 sidebar: Handbook
 showTitle: true
 ---
+Given how successful Notebooks have been with our customers, we’re experimenting with creating a concise post-meeting Notebook that includes the same resources you would normally share in your follow-up email, along with the Gong recording.
+
+The goal is to make the information accessible to a wider audience within the customer’s organization. You would send meeting participants a follow-up email containing the relevant resources and a link to the Notebook, while the Notebook would make the same information available to other users within their PostHog instance.
+
 Our customers are busy, self-serve by default, and allergic to anything that feels like a time sink. We deliver the most value when we can talk directly, so it’s worth being intentional and trying creative ways to earn that conversation.
 
 That said, we’ve repeatedly seen customers implement our recommendations even when they never reply. That’s why we don’t gate value behind a meeting - we provide it regardless.
@@ -297,7 +301,7 @@ Follow-up with: Now go look at their business and domain. What should they be do
 - **Introduce our beta features** (if relevant). Encourage customers to use them and share feedback. It can positively impact adoption before the feature becomes a paid product. 
 - **If growth signals are strong, plant the seed early**. If the account is on a positive trajectory, introduce the idea of prepaid credits coming with [a discount](https://posthog.com/handbook/growth/sales/contract-rules) and the option of a dedicated PostHog human. 
 
-## Email Follow-up
+## Email & Notebook Follow-up
 
 - Send it the same day. Use the momentum!
 - Include the public Gong recording link.
