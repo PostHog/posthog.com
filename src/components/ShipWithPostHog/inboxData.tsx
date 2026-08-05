@@ -8,6 +8,7 @@ import {
     IconSparkles,
     IconSupport,
     IconGraph,
+    IconToggle,
 } from '@posthog/icons'
 import { Code } from './prose'
 import type { SelfDrivingStoryStep } from 'components/SelfDrivingStory'
@@ -43,6 +44,7 @@ export type SourceKey =
     | 'traces'
     | 'ai_observability'
     | 'analytics'
+    | 'feature_flags'
     /**
      * Scout-authored reports. This really is a `source_product` in the API rather than a
      * modifier on another one – a scout report comes back as
@@ -115,6 +117,13 @@ export const SOURCE_META: Record<SourceKey, SourceMeta> = {
         Icon: IconGraph,
         color: 'text-blue',
         found: 'The numbers moved against their own baseline.',
+    },
+    feature_flags: {
+        label: 'Feature flags',
+        // IconToggle and seagreen are what the rest of the site uses for this product.
+        Icon: IconToggle,
+        color: 'text-seagreen',
+        found: 'A flag drifted – stale, renamed, or evaluating off a cliff.',
     },
     signals_scout: {
         label: 'Scout',
@@ -361,11 +370,11 @@ export const INBOX_ITEMS: InboxItem[] = [
         prNumber: 75725,
         // Product-level narration rather than this one PR, so the scope would be noise.
         walkthroughLabel: 'Error tracking',
-        intro: 'Exceptions get grouped into issues. Issues that matter become signals.',
+        intro: "Error tracking turns exceptions into grouped, ranked issues – the loop's most direct route from signal to fix.",
         steps: [
             {
                 stage: 'signal',
-                copy: 'New exceptions, reopened issues, volume spikes. Grouping is the point: seven fingerprints of the same disease read as one problem, not seven tickets.',
+                copy: 'New exceptions, reopened issues, and volume spikes arrive as signals, grouped so that seven fingerprints of the same bug land as one report. A scout can keep closer watch on a single service or release.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_28_33_2x_95119ac46a.png',
             },
             {
@@ -375,12 +384,12 @@ export const INBOX_ITEMS: InboxItem[] = [
             },
             {
                 stage: 'pr',
-                copy: 'No waiting on this one – error tracking has the stack trace, so the agent goes straight to a draft PR. It lands in your Inbox next to the report.',
+                copy: 'Error tracking hands the agent a stack trace, so it goes straight to a draft PR without waiting for a human decision. The PR lands in your Inbox next to the report that produced it.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Error_tracking_e283365724.png',
             },
             {
                 stage: 'merge',
-                copy: 'One review, seven issues closed. Dismiss it instead, and your reason steers what gets surfaced next.',
+                copy: 'Merging one PR can close a whole family of grouped issues at once. Dismissing it works too – the reason you give steers what error tracking surfaces after that.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Error_tracking_ef7e6bea2a.png',
             },
         ],
@@ -530,26 +539,26 @@ export const INBOX_ITEMS: InboxItem[] = [
         // The scope would read "Replay Vision · cohorts", but this walkthrough narrates the
         // product rather than this one cohort bug, so the button carries the product alone.
         walkthroughLabel: 'Replay Vision',
-        intro: 'Session replay collects the footage. Replay Vision actually watches it.',
+        intro: 'Replay Vision watches your recordings with vision models, so findings come from the footage itself.',
         steps: [
             {
                 stage: 'signal',
-                copy: 'Scanners watch every recording with vision models – frustration, dead ends, outcomes – and you write new ones as a prompt. What a scanner keeps seeing becomes a report.',
+                copy: 'Scanners watch recordings with vision models and flag frustration, dead ends, and bad outcomes. Repeat findings become reports, and writing a new scanner takes a prompt.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_14_20_35_2x_ace6f4a89a.png',
             },
             {
                 stage: 'investigate',
-                copy: 'The agent pulls the flagged recordings, confirms what the scanner saw, and traces it to the responsible code. The clips go in as evidence.',
+                copy: 'The agent pulls the flagged recordings and confirms what the scanner saw before touching code – vision models can be wrong, and the report says so when they are. Confirmed findings get traced to the responsible component.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Replay_Vision_79e51365f5.png',
             },
             {
                 stage: 'pr',
-                copy: 'A scanner sees the symptom, so the report waits for your call. You decide the fix; the agent opens the PR.',
+                copy: 'Scanner findings get a human look before any code changes. When you confirm what it saw, the agent writes the fix and opens the PR.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Replay_Vision_9f7ebbb82a.png',
             },
             {
                 stage: 'merge',
-                copy: 'You review the diff with the clips beside it. Merge, or hit "Improve scanner" and tell it what it got wrong.',
+                copy: 'You review the diff with the clips beside it. If the scanner misread the situation, Improve scanner takes your correction and adjusts what it looks for.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Replay_Vision_f022dc3f54.png',
             },
         ],
@@ -813,16 +822,16 @@ export const INBOX_ITEMS: InboxItem[] = [
          * the button gets overridden instead. Without this it would read "Conversations · aio".
          */
         walkthroughLabel: 'AI observability',
-        intro: 'AI features fail politely: wrong answers, slow answers, expensive answers. Evals catch what error tracking can’t.',
+        intro: 'AI observability watches your LLM features the way error tracking watches your code: every generation is a trace, and evals grade them.',
         steps: [
             {
                 stage: 'signal',
-                copy: 'Evals score your LLM traffic on a schedule – correctness, cost, latency, struggle. A failing pattern across generations becomes a report; one bad completion doesn’t.',
+                copy: 'Evals score your LLM traffic for correctness, cost, latency, and struggle, and failing patterns become reports. The scout sweeps for the trends you have no eval written for yet.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_15_07_06_2x_19076236d0.png',
             },
             {
                 stage: 'investigate',
-                copy: 'The agent reads the failing traces against the passing ones and follows them back to the prompt, tool, or model call responsible. The traces go in as evidence.',
+                copy: 'The agent reads the failing traces against the passing ones and follows them back to the prompt, tool, or model call responsible. The report cites the failing traces, so you can read exactly what the model was asked and what it answered.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_AI_observability_3bdb92d6e5.png',
             },
             {
@@ -947,7 +956,7 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'signal', product: 'replay_vision' },
         prUrl: 'https://github.com/PostHog/posthog/pull/67019',
         prNumber: 67019,
-        intro: 'Some bugs never throw an exception. Replay is how self-driving catches the ones users only feel.',
+        intro: 'Session replay is where self-driving sees what users actually did – including the problems that never threw an exception.',
         // This walkthrough is the general session-replay story, so its selector button reads
         // "Session replay" even though the underlying report was discovered by Replay Vision.
         walkthroughLabel: 'Session replay',
@@ -959,22 +968,22 @@ export const INBOX_ITEMS: InboxItem[] = [
         steps: [
             {
                 stage: 'signal',
-                copy: 'Rage clicks, dead ends, blocking errors: the signal source flags them in every new recording, and scouts hunt where you point them, on a schedule. When the same wall keeps showing up, it becomes a report.',
+                copy: "The signal source reads every new recording for rage clicks, dead ends, and blocking errors, and files recurring problems as reports. For one flow you're worried about, make a scout and give it a schedule.",
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_07_30_at_15_24_02_2x_1_1054be2650.png',
             },
             {
                 stage: 'investigate',
-                copy: 'The agent watches the flagged sessions, sizes the damage, and traces it to the responsible code. The replays go in as evidence.',
+                copy: 'The agent watches the flagged sessions, sizes the damage against your product data, and traces it to the responsible code. The report links the replays as evidence.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Session_replay_c67c6ef4d4.png',
             },
             {
                 stage: 'pr',
-                copy: 'A replay shows the symptom, so the report waits for your call. You decide the fix; the agent opens the PR.',
+                copy: 'A replay shows the symptom rather than the cause, so the report waits for your call. Once you decide what the fix should be, the agent writes it and opens the PR.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Session_replay_4207c634ad.png',
             },
             {
                 stage: 'merge',
-                copy: 'You review the diff next to the replays that earned it. Merge, or dismiss with a reason the scout learns from.',
+                copy: "You review the diff next to the replays and merge when you're satisfied. If you dismiss the report instead, your note is forwarded to the scout, which reads it before deciding what to surface next.",
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Session_replay_c1198f45ea.png',
             },
         ],
@@ -1137,27 +1146,122 @@ export const INBOX_ITEMS: InboxItem[] = [
         origin: { kind: 'scout', scout: 'APM' },
         // Metrics, logs and traces are one story here, so the button drops the scope.
         walkthroughLabel: 'APM',
-        intro: "Metrics say something's wrong. Logs say what happened. Traces say where. Self-driving reads all three.",
+        intro: 'APM gives the loop your traces, logs, and metrics – what broke, what it said, and where it happened.',
         steps: [
             {
                 stage: 'signal',
-                copy: 'The APM scout watches RED metrics per service and operation – error rate, p95, volume – plus log-level spikes, on a schedule. A regression against baseline becomes a report; one bad minute doesn’t.',
+                copy: 'Log alerts and new error signatures arrive as signals on their own. The APM scout adds the scheduled sweep: RED metrics per service and operation, compared against baseline, with every validated regression filed as a report.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_APM_1_8d287374b6.png',
             },
             {
                 stage: 'investigate',
-                copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. The trace hands over the location: service, operation, line.',
+                copy: 'The agent lines the slow traces up against the fast ones, pulls the logs on the failing spans, and finds what they share. Because a trace names the service, operation, and line, the agent starts at the problem instead of searching for it.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_APM_68ef834f95.png',
             },
             {
                 stage: 'pr',
-                copy: 'The agent fixes what the trace located and opens the PR, instrumented so the fix can prove itself.',
+                copy: 'The agent fixes what the trace located and opens the PR, with instrumentation included so the effect of the change shows up in the same metrics.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_APM_62fd9d0412.png',
             },
             {
                 stage: 'merge',
                 copy: 'You review the diff with the waterfall beside it. After you merge, the same check that raised the alarm watches the graph come back down.',
                 image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_APM_5caee0bbd3.png',
+            },
+        ],
+    },
+    /*
+     * 7 — Product analytics.
+     *
+     * TODO: the second item here without a real merged pull request. As with APM, `prUrl`,
+     * `prNumber` and `detail` are absent rather than invented, and the title and summary
+     * below are placeholders that DO render in the inbox row. Swap for the real PR's data.
+     */
+    {
+        id: 'product-analytics',
+        commitType: 'fix',
+        scope: 'funnels',
+        title: 'placeholder – awaiting the real product analytics pull request',
+        summary:
+            'Placeholder summary. A conversion step quietly stopped firing, so the funnel read as a real decline against its own baseline.',
+        priority: 'P2',
+        signalCount: 4,
+        timeAgo: 'Updated Aug 5',
+        /*
+         * `analytics` already exists in SOURCE_META, labelled exactly "Product analytics",
+         * with `found: 'The numbers moved against their own baseline.'` – so this needs no
+         * new SourceKey. Signal rather than scout because the revised copy leads with
+         * "checked against baseline as signals" and offers a scout as the alternative.
+         */
+        origin: { kind: 'signal', product: 'analytics' },
+        // Drops the scope: this narrates the product, not the one PR.
+        walkthroughLabel: 'Product analytics',
+        intro: 'Product analytics puts your funnels and trends into the loop, checked against baseline like any other production system.',
+        steps: [
+            {
+                stage: 'signal',
+                copy: 'Funnel and trend regressions arrive as signals, measured on complete cohorts against their own baseline. For a metric you currently watch by hand, make a scout and hand it the schedule.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_08_05_at_15_58_19_2x_d963127c6f.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent segments the drop by browser, OS, cohort, and experiment exposure, then follows the failing step into the code that renders it. The funnel comparison stays attached to the report.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Product_analytics_e06fca8e82.png',
+            },
+            {
+                stage: 'pr',
+                copy: "A conversion bug gets the same treatment as a crash: the agent opens the fix, and adds events on the step the funnel couldn't see before.",
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Product_analytics_6cc1777e40.png',
+            },
+            {
+                stage: 'merge',
+                copy: 'You review the diff with the funnel beside it. The recovery gets measured by the next complete cohort, in the same comparison that caught the drop.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Product_analytics_4a9be451bb.png',
+            },
+        ],
+    },
+    /*
+     * 8 — Feature flags. Introduces the `feature_flags` source key above; it's the first of
+     * the analytics-group products that didn't already have one.
+     *
+     * TODO: no real merged pull request yet, so `prUrl`, `prNumber` and `detail` are absent
+     * rather than invented, and the title and summary below are placeholders that DO render
+     * in the inbox row. The walkthrough itself is complete.
+     */
+    {
+        id: 'feature-flags',
+        commitType: 'fix',
+        scope: 'flags',
+        title: 'placeholder – awaiting the real feature flags pull request',
+        summary:
+            'Placeholder summary. A renamed flag was still being called from an old deployment, so it evaluated false for everyone on that build.',
+        priority: 'P2',
+        signalCount: 2,
+        timeAgo: 'Updated Aug 5',
+        // Signals lead here – the scout is the alternative for high-stakes flags.
+        origin: { kind: 'signal', product: 'feature_flags' },
+        walkthroughLabel: 'Feature flags',
+        intro: 'Feature flags accumulate faster than anyone cleans them up. This is the part of the loop that does.',
+        steps: [
+            {
+                stage: 'signal',
+                copy: 'The signals cover flag drift: stale keys, evaluation cliffs, renamed flags still being called from old deployments. A scout can watch the flags with the highest stakes, like an experiment gate or a kill switch.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Scanners_Mock_Feature_flags_eabb057430.png',
+            },
+            {
+                stage: 'investigate',
+                copy: 'The agent finds the call sites, works out which SDK and deployment they ship in, and separates cached noise from live code still checking a dead key.',
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Report_Investigate_Mock_Feature_flags_641e6583a6.png',
+            },
+            {
+                stage: 'pr',
+                copy: "Flag cleanup is the PR that never makes it off anyone's backlog, so the agent opens it: the checks migrate to the right key and the dead branch comes out.",
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Mock_Feature_flags_3e6586debd.png',
+            },
+            {
+                stage: 'merge',
+                copy: "You review the diff with the evaluation graph beside it. Once the old key's calls decay to zero, the cleanup is confirmed in the same graph.",
+                image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Git_Hub_PR_Merged_Mock_Feature_flags_952d61c07a.png',
             },
         ],
     },
