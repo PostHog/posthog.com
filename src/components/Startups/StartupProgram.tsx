@@ -34,6 +34,7 @@ import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'
 import ODFLogo from '../../images/odf.svg'
 import { Logo } from '@posthog/brand/logo'
+import { HedgehogHahaBizzniss, HedgehogTransformer } from '@posthog/brand/hoggies'
 import AxisLogo from '../../images/axis-logo.svg'
 import CategoryLogo from '../../images/category.svg'
 
@@ -507,36 +508,33 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                 </div>
                             </div>
 
-                            <div className="w-full min-w-0 max-w-[540px] @4xl/reader-content:flex-1">
-                                <div className="overflow-hidden rounded-md shadow-xl">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png"
-                                        alt="A hedgehog-piloted rocket, powered by PostHog credits"
-                                        imgClassName="w-full"
-                                    />
-                                </div>
+                            <div className="w-full min-w-0 max-w-[540px] @4xl/reader-content:flex-1 flex justify-center @4xl/reader-content:justify-end self-center">
+                                <HedgehogTransformer
+                                    title="A hedgehog mid-transformation into a robot, like your product about to become self-driving"
+                                    className="w-full max-w-[300px] @4xl/reader-content:max-w-[360px]"
+                                />
                             </div>
                         </div>
                     </section>
                     <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
                     <h3>
-                        What you <Highlight>get</Highlight>
+                        What you'll <Highlight>actually</Highlight> get
                     </h3>
                     <p>
                         Credits are the headline, but the program comes with perks from partners we use ourselves.
                         Here's the full haul:
                     </p>
-                    <div className="not-prose grid @sm/reader-content:grid-cols-2 @2xl/reader-content:grid-cols-3 gap-4 my-6">
+                    <div className="not-prose grid grid-cols-2 @md/reader-content:grid-cols-3 @2xl/reader-content:grid-cols-6 gap-2 my-6">
                         {perks.map(({ image, alt, title, copy }) => (
-                            <div key={title} className="border border-primary rounded-md p-4 bg-primary">
+                            <div key={title} className="border border-primary rounded-md p-2 bg-primary">
                                 <CloudinaryImage src={image} alt={alt} imgClassName="w-full rounded-sm" />
-                                <h4 className="m-0 mt-3 text-base font-bold leading-tight">
+                                <h4 className="m-0 mt-2 text-sm font-bold leading-tight">
                                     {title === '$50,000 in PostHog credits'
                                         ? `${creditValue} in PostHog credits`
                                         : title}
                                 </h4>
-                                <p className="m-0 mt-1 text-sm text-secondary">{copy}</p>
+                                <p className="m-0 mt-1 text-xs text-secondary">{copy}</p>
                             </div>
                         ))}
                     </div>
@@ -844,11 +842,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                     </span>
                                 </div>
                             </div>
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_merch_b2106b276a.png"
-                                alt="Exclusive PostHog founder merch and swag"
-                                className="hidden @lg/reader-content:block bg-light rounded-md shadow border border-primary overflow-hidden"
-                                imgClassName="w-full"
+                            <HedgehogHahaBizzniss
+                                title="A hedgehog in a suit laughing: haha, business!"
+                                className="hidden @lg/reader-content:block w-full max-w-[220px] justify-self-center"
                             />
                         </div>
                     </div>
