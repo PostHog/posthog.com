@@ -556,14 +556,12 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                         title
                     }
                     types {
-                        description
                         example
                         id
                         name
                         path
                         properties {
                             description
-                            isOptional
                             name
                             type
                         }

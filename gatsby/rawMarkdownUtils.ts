@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId, hasConcreteVersion } from '../src/components/SdkReferences/utils'
+import { getLanguageFromSdkId, hasConcreteVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 import {
     createTurndownService,
     extractTitleFromHtml,
@@ -254,7 +254,6 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
     const markdownNodes: string[] = []
 
     markdownNodes.push(`# ${sdkReferences.info.title}`)
-    // The pinned `latest` row carries a `<version>` placeholder rather than a semver.
     if (hasConcreteVersion(sdkReferences.info.version)) {
         markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
     }
@@ -330,13 +329,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
     fs.writeFileSync(filePath, markdownContent, 'utf8')
 }
 
-/**
- * Write a `.md` sibling for each SDK type page, so `/docs/references/<sdk>/types/<Type>.md`
- * resolves the same way the HTML page does. Agents and "copy as markdown" both fetch these.
- *
- * Mirrors the page paths and the `properties || example` gate in createPages.ts — type pages
- * are built for the pinned `latest` row only.
- */
+/** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
 export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
     if (!sdkReferences.version.includes('latest')) {
         return
@@ -348,7 +341,7 @@ export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
     const sdkLanguage = getLanguageFromSdkId(sdkReferences.referenceId)
 
     sdkReferences.types?.forEach((type) => {
-        if (!type?.id || !(type.properties || type.example)) {
+        if (!typeHasPage(type)) {
             return
         }
 

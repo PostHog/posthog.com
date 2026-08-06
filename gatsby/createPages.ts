@@ -5,6 +5,7 @@ import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+import { typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -494,14 +495,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     hogRef
                     categories
                     types {
-                        description
                         example
                         id
                         name
                         path
                         properties {
                             description
-                            isOptional
                             name
                             type
                         }
@@ -1090,15 +1089,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // A type only gets a page when it has properties or an example, so the allowlist
-    // handed to TypeLink has to use the same gate — a name in `validTypes` with no page
-    // is a guaranteed 404. Keep these two in lockstep.
-    const typeHasPage = (type?: { id?: string; properties?: unknown; example?: unknown }) =>
-        Boolean(type?.id && (type.properties || type.example))
-
-    // Type pages are built for the pinned `latest` row only (see below), so every type
-    // crosslink on the site — including the ones on versioned pages — resolves against
-    // that one set of names.
+    // Type pages exist for the `latest` row only, so all crosslinks resolve against that set.
     const latestTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
         if (node.version.includes('latest')) {
             acc[node.referenceId] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
@@ -1107,8 +1098,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }, {} as Record<string, string[]>)
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        const isLatest = node.version.includes('latest')
-        const path = `/docs/references/${isLatest ? node.referenceId : node.id}`
+        const path = `/docs/references/${node.version.includes('latest') ? node.referenceId : node.id}`
 
         createPage({
             path,
@@ -1120,20 +1110,12 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 regex: path,
                 // Null checks, only affects type crosslinking, won't break build
                 types: latestTypesByReference[node.referenceId] ?? [],
-                // Type crosslinks always use the unversioned prefix — the same one the
-                // type pages below are built at — because a versioned page only lives as
-                // long as it stays inside MAX_VERSIONS_PER_SDK. Linking to a versioned
-                // type URL mints a link that 404s a release or two later.
-                slugPrefix: node.referenceId,
-                isLatest,
-                canonicalPath: `/docs/references/${node.referenceId}`,
             },
         })
     })
 
     result.data.allSdkTypes.nodes.forEach((node) => {
-        // Versioned type pages are no longer linked from anywhere, and they rot out of the
-        // build within a release cycle. vercel.json redirects the old URLs to these.
+        // Versioned type pages rot out of the build within a release cycle, so only build `latest`.
         if (!node.version.includes('latest')) {
             return
         }
@@ -1146,10 +1128,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         typeData: type,
                         version: node.version,
-                        id: node.id,
                         referenceId: node.referenceId,
                         types: latestTypesByReference[node.referenceId] ?? [],
-                        slugPrefix: node.referenceId,
                     },
                 })
             }

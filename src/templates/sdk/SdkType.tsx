@@ -27,31 +27,22 @@ interface TypeData {
 interface PageContext {
     typeData: TypeData
     version: string
-    id: string
-    /** Unversioned SDK id, e.g. `posthog-js`. `id` carries the version suffix. */
+    /** Unversioned SDK id, e.g. `posthog-js`. */
     referenceId: string
-    noDocsTypes: string[]
     types: string[]
-    slugPrefix: string
 }
 
 export default function SdkType({ pageContext }: { pageContext: PageContext }) {
     const { menu } = useApp()
-    const { typeData, version, referenceId, types, slugPrefix } = pageContext
+    const { typeData, version, referenceId, types } = pageContext
 
-    // Get the language for this SDK type — `id` is version-suffixed, so it never
-    // matches the language lookup and silently falls back to TypeScript.
     const sdkLanguage = getLanguageFromSdkId(referenceId)
 
     return (
         <ReaderView parent={menu.find(({ name }) => name === 'Docs')}>
             <SEO
                 title={`${typeData.name} - PostHog`}
-                canonicalUrl={`https://posthog.com/docs/references/${referenceId}/types/${typeData.id}`}
-                // createPages only builds these for the `latest` row, so this is normally
-                // false. Kept as a guard in case versioned type pages ever come back —
-                // those URLs rot out of the build and shouldn't be indexed.
-                noindex={slugPrefix !== referenceId}
+                canonicalUrl={`/docs/references/${referenceId}/types/${typeData.id}`}
             />
             <div>
                 <div className="mb-8">
@@ -71,7 +62,7 @@ export default function SdkType({ pageContext }: { pageContext: PageContext }) {
                 <div className="w-full">
                     {typeData.properties && typeData.properties.length > 0 ? (
                         <Parameters
-                            slugPrefix={slugPrefix}
+                            slugPrefix={referenceId}
                             params={typeData.properties}
                             title="Properties"
                             validTypes={types}

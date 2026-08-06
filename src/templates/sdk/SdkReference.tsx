@@ -84,11 +84,6 @@ export interface SdkTypeData {
 export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
-    /** Unversioned prefix for type crosslinks — the SDK's `referenceId`. */
-    slugPrefix: string
-    isLatest: boolean
-    /** The unversioned page every version of this reference canonicalises to. */
-    canonicalPath: string
 }
 
 export interface VersionsData {
@@ -154,7 +149,9 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
-    const { slugPrefix, isLatest, canonicalPath } = pageContext
+    const isLatest = fullReference.version.includes('latest')
+    // Crosslinks use the unversioned prefix so they don't rot when versioned pages age out.
+    const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
     const sdkVersions = data.allSdkReferences.nodes
@@ -273,13 +270,8 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
 
     return (
         <ReaderView markdownContent={JSON.stringify(fullReference, null, 2)}>
-            <SEO
-                title={`${fullReference.info.title} - PostHog`}
-                canonicalUrl={`https://posthog.com${canonicalPath}`}
-                // Versioned pages drop out of the build once they fall outside
-                // MAX_VERSIONS_PER_SDK, so only the unversioned page is indexable.
-                noindex={!isLatest}
-            />
+            {/* Versioned pages age out of the build, so only the unversioned page is indexable. */}
+            <SEO title={`${fullReference.info.title} - PostHog`} canonicalUrl={canonicalPath} noindex={!isLatest} />
             <section>
                 <div className="mb-8 relative">
                     <div className="flex items-center mt-0 flex-wrap justify-between">
@@ -384,7 +376,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={slugPrefix}
+                                                        slugPrefix={fullReference.referenceId}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -393,7 +385,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={slugPrefix}
+                                                        slugPrefix={fullReference.referenceId}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />

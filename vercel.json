@@ -192,11 +192,6 @@
     ],
     "redirects": [
         {
-            "source": "/docs/references/:sdk(posthog-[a-z-]+)-:version(\\d[^/]*|latest)/types/:type",
-            "destination": "/docs/references/:sdk/types/:type",
-            "statusCode": 301
-        },
-        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
