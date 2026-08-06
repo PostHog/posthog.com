@@ -227,7 +227,7 @@ const Form = ({
             const form = new FormData()
 
             for (const [name, value] of data as any) {
-                const el = e.currentTarget.querySelector(`[name="${name}"]`) as HTMLInputElement
+                const el = e.currentTarget.querySelector(`[name="${CSS.escape(name as string)}"]`) as HTMLInputElement
                 const path = el?.dataset.path
                 if (el?.type === 'file') {
                     if (!allowedFileTypes.includes((value as File).type)) {
