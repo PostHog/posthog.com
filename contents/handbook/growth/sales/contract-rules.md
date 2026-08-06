@@ -55,11 +55,11 @@ Beyond optimization, we offer discounts based on four levers:
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
-- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
+- To include the 5% discount on the order form, we require written confirmation from the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 
-**For renewals:** +5% additional discount
+**For early renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 - Customer must be actively on a prepaid credit plan at the time of signing. If credits ran out before a new order form is signed and the customer rolled onto pay-as-you-go, the +5% does not apply; this is treated as a re-entry into a credit plan, not an early renewal. The spirit of this discount is to reward customers committing to a new renewal plan earlier than required, often because of recent rapid growth or a planned increase in usage, both of which result in a deeper partnership. 
 
