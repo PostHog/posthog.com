@@ -219,7 +219,7 @@ export default function BookReader({
                 )}
             </div>
 
-            <div className="relative min-h-0 flex-1">
+            <div className="relative min-h-0 flex-1 bg-white dark:bg-accent">
                 {prev && <PageTurnZone to={prev.url} label={prev.label} direction="prev" />}
                 {next && <PageTurnZone to={next.url} label={next.label} direction="next" />}
                 <div className="h-full overflow-y-auto">
