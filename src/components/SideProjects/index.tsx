@@ -3,7 +3,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
-import { OSInput, OSTextarea } from 'components/OSForm'
+import { OSInput } from 'components/OSForm'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { PROFILE_COLORS } from 'constants/profileColors'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -375,7 +375,6 @@ export type SideProjectFormValues = {
     liveUrl: string
     projectThumbnail: string
     tags: string
-    body: string
 }
 
 export const slugifyProjectTitle = (title: string): string =>
@@ -412,7 +411,7 @@ export const buildSideProjectMdx = (values: SideProjectFormValues): string => {
     if (tags.length > 0) {
         lines.push('filters:', '  tags:', ...tags.map((tag) => `    - ${tag}`))
     }
-    lines.push('---', '', values.body.trim() || values.description.trim(), '')
+    lines.push('---', '', values.description.trim(), '')
     return lines.join('\n')
 }
 
@@ -450,7 +449,6 @@ export const SideProjectForm = ({
         liveUrl: '',
         projectThumbnail: '',
         tags: '',
-        body: '',
     })
     const [featuredImage, setFeaturedImage] = useState<UploadImage | undefined>(undefined)
     const [submitting, setSubmitting] = useState(false)
@@ -567,17 +565,6 @@ export const SideProjectForm = ({
                 placeholder="open-source, typescript, ai"
                 value={values.tags}
                 onChange={setValue('tags')}
-            />
-            <OSTextarea
-                label="About the project"
-                name="body"
-                direction="column"
-                rows={4}
-                description="A paragraph or two for the project's page. Markdown works."
-                value={values.body}
-                onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
-                    setValues((prev) => ({ ...prev, body: event.target.value }))
-                }
             />
             <div className="flex items-center gap-2">
                 <OSButton type="submit" variant="primary" size="md" disabled={!canSubmit}>

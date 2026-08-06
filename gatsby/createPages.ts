@@ -24,7 +24,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const AppTemplate = path.resolve(`src/templates/App.js`)
     const PipelineTemplate = path.resolve(`src/templates/Pipeline.js`)
     const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
-    const SideProjectTemplate = path.resolve(`src/templates/SideProject.tsx`)
     const WorkflowTemplate = path.resolve(`src/templates/WorkflowTemplate.tsx`)
     const Job = path.resolve(`src/templates/Job.tsx`)
     const EventTemplate = path.resolve(`src/templates/Event.tsx`)
@@ -184,19 +183,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                }
-            }
-            sideProjects: allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
-                    frontmatter: { projectAuthor: { ne: null } }
-                }
-            ) {
                 nodes {
                     id
                     fields {
@@ -991,17 +977,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    result.data.sideProjects.nodes.forEach((node) => {
-        const { slug } = node.fields
-        createPage({
-            path: slug,
-            component: SideProjectTemplate,
-            context: {
-                id: node.id,
-            },
-        })
-    })
-
     // Create workflow template pages
     result.data.workflowTemplates.nodes.forEach((node) => {
         createPage({
@@ -1277,19 +1252,6 @@ async function createMinimalPages({
                     }
                 }
             }
-            sideProjects: allMdx(
-                filter: {
-                    fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
-                    frontmatter: { projectAuthor: { ne: null } }
-                }
-            ) {
-                nodes {
-                    id
-                    fields {
-                        slug
-                    }
-                }
-            }
         }
     `)
 
@@ -1374,7 +1336,6 @@ async function createMinimalPages({
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
         localizedNewsletter: { nodes: any[] }
-        sideProjects: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
@@ -1385,17 +1346,6 @@ async function createMinimalPages({
         url: '/product-engineer',
     })
     createBlogPreviewPosts(data.posts.nodes)
-    data.sideProjects.nodes.forEach((node) => {
-        const slug = node.fields?.slug
-        if (!slug) return
-        createPage({
-            path: slug,
-            component: path.resolve(`src/templates/SideProject.tsx`),
-            context: {
-                id: node.id,
-            },
-        })
-    })
     data.localizedNewsletter.nodes.forEach((node) => {
         const slug = node.fields?.slug
         if (!slug) return

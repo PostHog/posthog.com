@@ -4,13 +4,15 @@ This folder contains PostHog team side projects displayed in the gallery at `/si
 
 ## Adding your side project
 
-The easy way, if you're a PostHog team member: sign in to your community profile, open [/side-projects](https://posthog.com/side-projects), and click **Add a project**. You can upload a featured image right in the form, and it prefills the MDX file on GitHub – committing it there opens the pull request for you. An **Edit** button on each project page works the same way for updates.
+The easy way, if you're a PostHog team member: sign in to your community profile, open [/side-projects](https://posthog.com/side-projects), and click **Add a project**. You can upload a featured image right in the form, and it prefills the MDX file on GitHub – committing it there opens the pull request for you. A pencil button on each card (visible on hover) works the same way for updates.
 
 Or by hand:
 
 1. Create a new folder with your project name (use kebab-case)
 2. Add an `index.mdx` file with your project details
 3. Open a PR to the posthog.com repo
+
+Gallery cards link straight to your project – the live URL if there is one, otherwise the GitHub repo – so include at least one of the two.
 
 ## Frontmatter schema
 
@@ -20,7 +22,6 @@ title: Your Project Name
 date: 2026-08-06  # when the project was added - newest first in the gallery
 description: A brief one-liner that appears on the gallery card
 projectThumbnail: https://example.com/thumbnail.png  # URL for gallery card image
-featuredImage: ./featured.png  # Optional larger image for detail page
 projectAuthor: Your Name
 authorGitHub: your-github-username
 alumni: true  # optional - list under "PostHog Alums" (auto-detected from team membership otherwise)
@@ -43,11 +44,10 @@ filters:
 ### Optional fields
 
 - **projectThumbnail**: URL for the gallery card image (YouTube thumbnails, GitHub raw URLs, or Cloudinary URLs work well). Without one, the gallery generates card art from your project title and community profile
-- **featuredImage**: Larger image shown on the detail page
 - **authorGitHub**: Your GitHub username (fallback avatar and profile link)
 - **teamLink**: Link to your PostHog team page
 - **githubUrl**: Link to the source code
-- **liveUrl**: Link to a live demo
+- **liveUrl**: Link to a live demo (the card links here when present, otherwise to the repo)
 
 ## Thumbnail options
 

@@ -23,7 +23,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 
 type ProjectNode = {
     id: string
-    fields: { slug: string }
     parent?: { relativePath?: string }
     frontmatter: SideProjectFrontmatter
 }
@@ -69,11 +68,11 @@ const ProjectCard = ({
     onTagClick: (tag: string) => void
     showRole?: boolean
 }) => {
-    const {
-        fields: { slug },
-        frontmatter,
-    } = node
-    const { projectThumbnail, title, description, projectAuthor, authorGitHub, teamLink, filters } = frontmatter
+    const { frontmatter } = node
+    const { projectThumbnail, title, description, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
+        frontmatter
+    // Cards link straight to the project itself; prefer the live app over the repo
+    const projectUrl = liveUrl || githubUrl
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
     const tags = normalizeTags(filters?.tags)
     const relativePath = node.parent?.relativePath
@@ -93,7 +92,7 @@ const ProjectCard = ({
                     <IconPencil className="size-4" />
                 </Link>
             )}
-            <Link to={slug} state={{ newWindow: true }} className="block">
+            <Link to={projectUrl} externalNoIcon className="block">
                 <div className="border-b border-primary">
                     {projectThumbnail ? (
                         <div className="flex aspect-video items-center justify-center overflow-hidden bg-accent">
@@ -530,9 +529,6 @@ const query = graphql`
         ) {
             nodes {
                 id
-                fields {
-                    slug
-                }
                 parent {
                     ... on File {
                         relativePath
