@@ -39,6 +39,20 @@ Shipping is also done through Micromerch (in partnership with Shiphero) - they c
 
 Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
 
+To log into Shopify using 1Password:
+
+1. Sign in with the email from 1Password
+2. Log in with the saved passkey when the pop-up appears — this is the preferred way to log in
+3. You're logged in!
+
+If you aren't prompted for the passkey, use the password and authentication code instead:
+
+1. Click "Log in using a different method"
+2. Click "Continue with password"
+3. Use the password from 1Password and click "Log in"
+4. On the "Use your passkey" screen, click "Use the authentication app" — you can then use 1Password to enter the authentication code
+5. You're logged in!
+
 When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $30, $50, or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". 
 
 > Limit the use to one use only (_not_ one use per customer), otherwise it's unlimited free stuff for them, unlimited high cost for us! 

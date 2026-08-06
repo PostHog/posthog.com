@@ -1,6 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -68,6 +68,7 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opensearch } from '../../hooks/competitorData/opensearch'
 import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
@@ -86,6 +87,7 @@ import { signoz } from '../../hooks/competitorData/signoz'
 import { smartlook } from '../../hooks/competitorData/smartlook'
 import { split } from '../../hooks/competitorData/split'
 import { sprig } from '../../hooks/competitorData/sprig'
+import { splunk } from '../../hooks/competitorData/splunk'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
@@ -99,11 +101,14 @@ import { userpilot } from '../../hooks/competitorData/userpilot'
 import { userflow } from '../../hooks/competitorData/userflow'
 import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
+import { victorialogs } from 'hooks/competitorData/victorialogs'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
 import { weave } from '../../hooks/competitorData/weave'
 import { zapier } from '../../hooks/competitorData/zapier'
+import { zendesk } from '../../hooks/competitorData/zendesk'
+import { intercom } from '../../hooks/competitorData/intercom'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
 import { brevo } from '../../hooks/competitorData/brevo'
@@ -128,6 +133,7 @@ import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { supportFeatures } from 'hooks/featureDefinitions/support'
 import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -158,7 +164,10 @@ interface ProductComparisonTableProps {
 export default function ProductComparisonTable({
     competitors,
     rows,
-    width = 'auto',
+    // Fill the available width by default so small tables (e.g. two-column blog
+    // comparisons) don't collapse to their minimum content width. Wide tables
+    // still overflow and scroll, with an edge fade hinting there's more to see.
+    width = 'full',
     autoExpand = false,
     excludedSections = [],
     requireCompleteData = false,
@@ -183,6 +192,7 @@ export default function ProductComparisonTable({
         web_analytics: webAnalyticsFeatures,
         workflows: workflowsFeatures,
         logs: logsFeatures,
+        support: supportFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -675,6 +685,7 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opensearch,
         opik,
         optimizely,
         pendo,
@@ -693,6 +704,7 @@ export default function ProductComparisonTable({
         smartlook,
         split,
         sprig,
+        splunk,
         statsig,
         stripe,
         survicate,
@@ -706,11 +718,14 @@ export default function ProductComparisonTable({
         userflow,
         uxcam,
         vercel_analytics,
+        victorialogs,
         vwo,
         walkme,
         whatfix,
         weave,
         zapier,
+        zendesk,
+        intercom,
         make,
         customer_io,
         brevo,
@@ -998,8 +1013,7 @@ export default function ProductComparisonTable({
         return null
     }
 
-    const { siteSettings, location: appLocation } = useApp()
-    const isDark = siteSettings.theme === 'dark'
+    const { location: appLocation } = useApp()
 
     const currentPathname = appLocation?.pathname || ''
     // Build columns
@@ -1013,11 +1027,15 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo
-                                className="h-5 mx-auto w-auto max-w-full"
-                                variant={isDark ? 'mono' : 'gradient'}
-                                color={isDark ? 'white' : undefined}
-                            />
+                            <>
+                                <Logo className="h-5 mx-auto w-auto max-w-full dark:hidden" width="auto" />
+                                <Logo
+                                    className="hidden h-5 mx-auto w-auto max-w-full dark:block"
+                                    variant="mono"
+                                    color="white"
+                                    width="auto"
+                                />
+                            </>
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (
@@ -1086,8 +1104,12 @@ export default function ProductComparisonTable({
                     </div>
                 ),
             },
+            // Cells are flex containers (OSTable rowAlignment="center"), so the column's
+            // text-center is inert on the rendered span and values pack left. Center them on
+            // the main axis so string values and ✓/✗ glyphs align the same way as the headers.
             ...competitors.map((key, index) => ({
                 content: renderCell(key, row, index),
+                className: 'justify-center',
             })),
         ]
 

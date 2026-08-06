@@ -12,7 +12,7 @@ const TopFeatures = ({ id, productData, slides = [] }: TopFeaturesProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">Top features</h2>
+            <h2 className="mb-3">Top features</h2>
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,

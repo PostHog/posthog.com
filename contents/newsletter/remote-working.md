@@ -4,7 +4,7 @@ date: 2024-05-16
 author:
   - james-temperton
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711656184/posthog.com/contents/images/newsletter/remote-work/remote_hog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/remote-work/remote_hog.png
 featuredImageType: full
 tags:
   - Culture

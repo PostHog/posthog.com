@@ -34,8 +34,6 @@ Mohamad submitted a [500+ line PR](https://github.com/PostHog/posthog-php/pull/1
 
 Awesome work and thanks again Mohamad!
 
-> If you haven't seen it yet, we have a [new page dedicated to our contributors](/contributors). Every contributor gets their own digital card, and we provide a leaderboard with stats on each person's contributions. We also have a bot that sends a gift card for PostHog merch to contributors for every PR merged, and we welcome all types of contributions! 
-
 **In this release:**
 
 

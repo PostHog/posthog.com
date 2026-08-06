@@ -499,6 +499,19 @@ Choosing the right product analytics platform depends on your team's needs and t
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
     <summary>What's the difference between PostHog and Mixpanel?</summary>
 
 **Mixpanel** is a product analytics platform that has expanded to include session replay, heatmaps, A/B testing, and feature flags. It's optimized for product managers and growth teams. **PostHog** is a broader all-in-one platform that combines product analytics with error tracking, LLM observability, surveys, and more – built primarily for engineering-led teams who want everything in one place.
@@ -558,7 +571,7 @@ The top all-in-one product analytics platforms in 2026 include:
 <details>
     <summary>Which is better for B2B SaaS – PostHog or Mixpanel?</summary>
 
-Both support group/account-level analytics for B2B use cases. **Mixpanel** recently added Account Profiles and Activation Metrics specifically for B2B analysis (requires Group Analytics add-on). **PostHog** includes [group analytics](/docs/product-analytics/group-analytics) on all plans, plus you can connect it to CRM data via the built-in [data warehouse](/data-stack). PostHog is often preferred by B2B teams that also need feature flags and experiments for enterprise rollouts.
+Both support group/account-level analytics for B2B use cases. **Mixpanel** recently added Account Profiles and Activation Metrics specifically for B2B analysis (requires Group Analytics add-on). **PostHog** includes [group analytics](/docs/product-analytics/group-analytics) on all plans, plus you can connect it to CRM data via the built-in [data warehouse](/context-warehouse). PostHog is often preferred by B2B teams that also need feature flags and experiments for enterprise rollouts.
 
 </details>
 

@@ -149,6 +149,21 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       maintainer: String,
       imageUrl: String,
     }
+    type EarlyAccessFeatureAssignee {
+      type: String,
+      name: String,
+    }
+    type EarlyAccessFeature implements Node {
+      name: String,
+      description: String,
+      stage: String,
+      documentationUrl: String,
+      flagKey: String,
+      featureId: String,
+      waitlistCount: Int,
+      payload: JSON,
+      assignee: EarlyAccessFeatureAssignee,
+    }
     type Plugin implements Node {
       name: String,
       url: String,
@@ -616,6 +631,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         product: String
         unique_users: Int
         unique_orgs: Int
+    }
+    # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
+    # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
+    type SitePage implements Node {
+        searchContentId: String @proxy(from: "context.id")
+    }
+    type Tool implements Node @dontInfer {
+        handle: String!
+        name: String!
+        description: String
+        searchDescription: String
+        searchTitle: String
+        slug: String
+        category: String
+        status: String
+        aliases: [String!]
     }
   `)
     createTypes([

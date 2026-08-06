@@ -118,6 +118,17 @@ const accessToken = response.accessToken
 </iframe>
 ```
 
+## Exporting a video (MP4 or GIF)
+
+To share a replay outside PostHog, you can export it as a video file:
+
+1. **Full recording:** Click the **...** menu in the top right of the player and select **Export to MP4**.
+2. **Short clip:** Click the clip icon in the player controls (or press `X`), choose MP4 or GIF and a duration of 5, 10, or 15 seconds, then click **Create clip**.
+
+Videos render in the background and usually take a few minutes. When the render finishes, the export is ready in the [exports panel](https://us.posthog.com/exports), which you can also open from the export toast or from **Settings** > **Exports**. Exported videos are kept for 12 months.
+
+Video exports (including clips) are limited per project each calendar month: 10 on the free plan, 15 on paid plans, and 25 on enterprise plans.
+
 ## Limitations
 
 1. We make **no guarantees** about sensitive information contained in the recording. We recommend you only sharing recordings that you are certain contain no sensitive information or embed them only where authorized users can see them.

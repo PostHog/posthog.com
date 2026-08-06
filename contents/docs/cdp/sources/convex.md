@@ -37,6 +37,15 @@ Once the syncs are complete, you can start using Convex data in PostHog.
 
 <SourceTables />
 
+### Component tables
+
+Convex lets you install [components](https://docs.convex.dev/components) — self-contained packages (like `betterAuth`) that bring their own tables outside the default app component. PostHog can sync tables from both your root component and any installed components:
+
+- **Root component tables** appear with their original name (e.g., `users`, `messages`)
+- **Component tables** appear with a component prefix using dot notation (e.g., `betterAuth.users`, `betterAuth.sessions`)
+
+To sync components in older Convex sources, you currently need to delete the source and re-add it for PostHog to pick up component tables.
+
 ### How syncing works
 
 Convex uses its streaming export API to sync data:
@@ -47,6 +56,6 @@ Convex uses its streaming export API to sync data:
 
 > **Note:** If the sync cursor is older than approximately 30 days (Convex's retention window), a full resync is required.
 
-import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+import InboundIpAddresses from "../\_snippets/inbound-ip-addresses.mdx";
 
 <InboundIpAddresses />
