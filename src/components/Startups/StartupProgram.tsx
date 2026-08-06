@@ -479,8 +479,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </RoughAnnotation>
                         </h1>
 
-                        <div className="flex flex-col items-start gap-6 @4xl/reader-content:flex-row @4xl/reader-content:gap-8">
-                            <div className="@4xl/reader-content:flex-[0_0_280px]">
+                        {/* Text takes the flexible column; the illustration gets a fixed slot */}
+                        <div className="flex flex-col items-start gap-6 @2xl/reader-content:flex-row @2xl/reader-content:gap-8">
+                            <div className="min-w-0 @2xl/reader-content:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
                                     PostHog finds what's worth fixing, writes the code, and opens the pull request. You
                                     get the credits to run it – plus swag and partner perks perfect for anyone building
@@ -508,10 +509,10 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                 </div>
                             </div>
 
-                            <div className="w-full min-w-0 max-w-[540px] @4xl/reader-content:flex-1 flex justify-center @4xl/reader-content:justify-end self-center">
+                            <div className="w-full flex justify-center self-center @2xl/reader-content:w-auto @2xl/reader-content:flex-[0_0_240px] @4xl/reader-content:flex-[0_0_300px]">
                                 <HedgehogTransformer
                                     title="A hedgehog mid-transformation into a robot, like your product about to become self-driving"
-                                    className="w-full max-w-[300px] @4xl/reader-content:max-w-[360px]"
+                                    className="w-full max-w-[280px] @2xl/reader-content:max-w-none"
                                 />
                             </div>
                         </div>
