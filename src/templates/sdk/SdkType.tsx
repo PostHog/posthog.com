@@ -15,8 +15,6 @@ interface Property {
 }
 
 interface TypeData {
-    /** Slug used in the page path — see `createPages.ts`. */
-    id: string
     name: string
     description: string
     properties: Property[]
@@ -40,10 +38,7 @@ export default function SdkType({ pageContext }: { pageContext: PageContext }) {
 
     return (
         <ReaderView parent={menu.find(({ name }) => name === 'Docs')}>
-            <SEO
-                title={`${typeData.name} - PostHog`}
-                canonicalUrl={`/docs/references/${referenceId}/types/${typeData.id}`}
-            />
+            <SEO title={`${typeData.name} - PostHog`} />
             <div>
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold mb-4">{typeData.name}</h1>
