@@ -20,7 +20,9 @@ You like cookies? Then watch this video. Plus, you’ll learn about how to prope
 
 - [Download Screen Studio](https://screen.studio/download). 
 
-By default, **Screen Studio is free** and there’s **no need to upgrade to a paid plan**.
+Screen Studio is free to record and edit with, but **exporting now requires a paid subscription**. If you just need to hand a `.screenstudio` project to the YouTube team (see step 7), the free version is enough and you don't need to upgrade.
+
+If you need to export the video yourself – for example to embed it in docs or the handbook – go ahead and buy a subscription and expense it. Put it on your Brex virtual card under your own User Limit, as described in [spending money](/handbook/people/spending-money).
 
 ## 2. Set Recording Settings
 
@@ -84,5 +86,13 @@ Use your name or the project’s name for the file name, and ensure the file end
 Drag that file into the [“ScreenStudio Projects” Google Drive](https://drive.google.com/drive/folders/1syLVUYgRkX81fP7LXzt1M7hSK0OarrWn?usp=drive_link) and ping the YouTube team/member in the corresponding GitHub issue.  
         
 > **Important!** If your recording contains any customer-sensitive information that needs to be blurred or removed, please leave exact timestamps of where the information appears in the recording project. Please triple check your work, as our post team will not always be able to catch this on our own.  
-      
+
+## 8. (Optional) Export and upload to Cloudinary
+
+If your recording is going into docs or the handbook rather than through the YouTube team, export it from Screen Studio (this needs a paid plan – see step 1), then upload it to Cloudinary to get a URL you can embed.
+
+You don't need a Cloudinary login. Sign in on posthog.com, then choose **Upload media** under **Moderator tools** in the account menu, upload the file, and copy the URL. See [uploading assets with Cloudinary](/handbook/engineering/posthog-com/assets) for the full walkthrough, and [videos in markdown](/handbook/engineering/posthog-com/markdown#videos) for how to embed the URL once you have it.
+
+Keep exports under 20MB so Cloudinary accepts them – for anything longer, use [Wistia](/handbook/engineering/posthog-com/markdown#embedding-wistia-videos) instead.
+
 And voila! You’re done! Thanks for following these steps, and feel free to ask any questions in the [\#team-youtube](https://posthog.slack.com/archives/C01R387F6H5) Slack channel.
