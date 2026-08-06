@@ -1,0 +1,86 @@
+---
+title: Self-driving with AI Observability
+---
+
+import { CallToAction } from "components/CallToAction";
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
+
+</CalloutBox>
+
+Most observability tools end at a dashboard: they show you the chart, and fixing what it shows is your problem. AI Observability feeds [Self-driving](/docs/self-driving) instead. Your LLM data becomes [signals](/docs/self-driving/signals), agents investigate what changed, and reports land in your [inbox](/docs/self-driving/inbox) – where one click turns a finding into a pull request.
+
+This page covers how that works and how to turn on each signal. You need LLM data flowing first – if you haven't instrumented yet, start with [installation](/docs/ai-observability/installation).
+
+## How it works
+
+A [signal](/docs/self-driving/signals) is a structured finding: what's happening, the evidence behind it, and a suggested action. Your LLM data produces signals three ways:
+
+| Signal | What it catches | When it runs |
+|---|---|---|
+| [Eval reports](#eval-reports) | Quality and sentiment trends in production traffic | After each batch of evaluation results |
+| [Anomaly investigations](#anomaly-investigations) (alpha) | Spikes in cost, latency, or errors | When an anomaly alert fires |
+| [Scouts](#scouts) | Regressions across cost, latency, errors, volume, and eval performance – or anything you describe | On a schedule you set |
+
+All three land in the same place: your inbox, as [reports](/docs/self-driving/reports) backed by evidence. From there you can review the finding, ask for more research, or let an agent open a pull request.
+
+## Eval reports
+
+[Evaluations](/docs/ai-evals) score your live generations in production – with an LLM judge, deterministic Hog code, or sentiment analysis. Eval reports are what make those scores actionable: instead of you watching a pass-rate chart, an agent reviews each batch of results and summarizes what it found, with example generations as evidence.
+
+To set them up:
+
+1. [Create an evaluation](/docs/ai-evals#choosing-an-evaluation-type) that targets generations. PostHog provisions a report configuration automatically: a report after every 100 evaluation results, at most one per hour, capped at 10 per day. You can tune all three, and add Slack or email delivery, in the evaluation's settings.
+2. Enable the **AI observability** source in your [inbox settings](/docs/self-driving/inbox/sources), so report findings flow into your inbox as signals.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_self_driving_setup_a065ecc0a1.mp4"
+  alt="Enabling the AI Observability signal source for Self-driving"
+  classes="rounded"
+/>
+
+## Anomaly investigations
+
+<CalloutBox icon="IconFlask" title="Alpha" type="fyi">
+
+Anomaly investigations are in alpha. Expect the rough edges to be rougher here.
+
+</CalloutBox>
+
+Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. What reaches you is what survived investigation.
+
+To set them up:
+
+1. Create an insight on the metric you care about – cost, latency, or errors. The [AI Observability dashboard](/docs/ai-observability/dashboard) charts are a good starting point.
+2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it. No thresholds to pick – the detectors learn what normal looks like from your data.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_alerts_web_clean_0d31748bb1.mp4"
+  alt="Creating an anomaly alert from the AI Observability dashboard"
+  classes="rounded"
+/>
+
+From then on, every firing gets investigated automatically.
+
+## Scouts
+
+[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your data and file a report only when a finding clears the bar. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, sliced by the dimensions it discovers in your data – model, provider, feature, tool. It keeps a memory between runs: your baselines, known noise, and what it already reported, so a persistent regression stays one report instead of becoming ten.
+
+Create one from the **Self-driving** tab in AI Observability. Templates cover the common cases – the daily digest, for example, reviews your dashboard, errors, unusually expensive users, and evaluation results every morning, and can deliver to Slack. Or describe what's worth your attention in plain English and author your own – a scout is steerable text, not configuration.
+
+Scouts and the signals above compose rather than compete: eval reports and anomaly investigations are exhaustive on their one stream, while a scout applies judgement across all of them. Most projects run both – see [sources or scouts](/docs/self-driving/signals#sources-or-scouts) for how to split the work.
+
+## What lands in your inbox
+
+Whichever path produced it, a finding arrives as a report: a title, a summary, the evidence, and a call on how actionable it is. A research agent connects it to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
+
+## Next step
+
+See the full picture of the loop your LLM data is feeding.
+
+<CallToAction type="primary" to="/docs/self-driving">
+  Self-driving
+</CallToAction>

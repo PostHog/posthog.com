@@ -6719,6 +6719,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Self-driving',
+                    url: '/docs/ai-observability/self-driving',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
