@@ -19,6 +19,9 @@ A person who currently uses your product. A user who stops being active may have
 #### Agent 🦔
 An AI agent that works inside PostHog to diagnose problems, uncover opportunities, and ship fixes on your behalf. Agents are the engine of [self-driving](#self-driving): they read the full [context](#context) of your product and act on it, either reactively (when you prompt one, for example via [Max](#max-ai) or [Slack](#product)) or proactively (via [scouts](#scout) and the [inbox](#inbox)). [Learn more about self-driving](/docs/self-driving).
 
+#### Alert 🦔
+A rule that watches an [insight](#insights) and notifies you when a metric crosses a threshold you set or when anomaly detection spots something unusual. Alerts work on [trends](#trend), [funnels](#funnel), and [SQL](#sql) insights, and you can also alert on [error tracking](#error-tracking) issues and [logs](#logs). [Learn more about alerts](/docs/alerts).
+
 #### Alias 🦔
 A related user account. In PostHog, an alias connects two identities – and their data – together. For example, merging an anonymous user with the account they create when they sign up. See [identifying users](/docs/getting-started/identify-users).
 
@@ -77,8 +80,14 @@ An [open source](#open-source), column-oriented database. [We like it a lot, and
 #### Cloud
 Computing infrastructure, services, or storage hosted for on-demand use, with less setup and maintenance for you. You can run PostHog on PostHog Cloud instead of [self-hosting](#self-host).
 
+#### Cluster 🦔
+In [LLM observability](#llm-observability), an automatic grouping of similar [traces](/docs/ai-observability/traces) or [generations](#generation), so you can discover patterns in how people use your AI features – and spot outliers – without reading every conversation. [Learn more about clusters](/docs/ai-observability/clusters).
+
 #### Cohort 🦔
 A group of users defined by shared properties or behavior. Cohorts can be static (a fixed list) or dynamic (continually updated as people match or stop matching). Cohorts and [groups](#groups) are similar, but [not the same](/docs/product-analytics/group-analytics). [Learn more about cohorts](/docs/data/cohorts).
+
+#### Command palette 🦔
+A keyboard-driven way to search PostHog, jump between pages, and trigger actions without reaching for the mouse. Open it with `Cmd+K` (or `Ctrl+K`). [Learn more about the command palette](/docs/cmd-k).
 
 #### Compliance
 The act of complying with laws or regulations such as [HIPAA](#hipaa) or [GDPR](#gdpr). [Learn how to use PostHog in compliance with common regulations](/docs/privacy).
@@ -98,11 +107,17 @@ When a user moves into a new, usually more desirable, state – for example, fro
 #### CPA
 Cost per acquisition. How much it costs to acquire a user through an advertising campaign, calculated as `cost of the campaign / number of conversions`.
 
+#### CSP
+Content Security Policy. A browser security feature that helps prevent cross-site scripting (XSS) attacks. You can send CSP violation reports to PostHog to catch attacks and misconfigured policies. [Learn more about CSP reporting](/docs/csp-tracking).
+
 #### CTA
 Call to action. A message intended to prompt an action from your users, like this one: [star PostHog on GitHub!](https://github.com/PostHog/posthog)
 
 #### CTR
 Click-through rate. The proportion of people who saw a [CTA](#cta) and actually clicked it. CTR is usually a good measure of [engagement](#engagement).
+
+#### Customer analytics 🦔
+A [tool](#tool) for tracking the metrics that matter while you're finding product-market fit – active users, signups, conversions, and engagement – without building [dashboards](#dashboard) from scratch. [Learn more about customer analytics](/docs/customer-analytics).
 
 ## D
 
@@ -141,6 +156,9 @@ How involved or active someone is with your product. A regular user is said to h
 #### Error tracking 🦔
 A [tool](#tool) for capturing, grouping, and monitoring exceptions and errors in your application, so you can see what's breaking, how often, and for whom. [Learn more about error tracking](/docs/error-tracking).
 
+#### Evaluation 🦔
+An automated quality check on your LLM [generations](#generation). PostHog supports LLM-as-a-judge, code-based ([Hog](#hog)), and [sentiment](#sentiment) evaluations, each scoring generations so you can catch regressions in your AI features. Often shortened to "evals". [Learn more about evaluations](/docs/ai-evals).
+
 #### Event 🦔
 The core building block of PostHog. Any activity a user performs – clicking a button, viewing a page – is an event. Events are [ingested](#ingestion) into PostHog and can be grouped into [actions](#action). [Learn more about events](/docs/data/events).
 
@@ -178,6 +196,9 @@ Analysis that aggregates events by something other than an individual user – a
 #### Groups 🦔
 A way to aggregate events by an entity other than an individual person, such as a company, team, device, or pricing tier. [Groups are different from cohorts](/docs/product-analytics/group-analytics) and power [group analytics](#group-analytics).
 
+#### Group type 🦔
+A category of [group](#groups) you define – such as "company", "project", or "team". Each group type contains the individual groups that belong to it, and you can define up to five per project. [Learn more about group analytics](/docs/product-analytics/group-analytics).
+
 #### GTM
 Go-to-market. The plan for how you'll bring a new product or feature to market, often informed by product analytics.
 
@@ -197,6 +218,9 @@ PostHog's SQL dialect, built on top of ClickHouse SQL, with shortcuts for access
 
 #### HIPAA
 Health Insurance Portability and Accountability Act. US legislation covering, among other things, how [personal health information](#phi) must be handled. [Learn how to use PostHog in a way that complies with HIPAA](/docs/privacy/hipaa-compliance).
+
+#### Holdout 🦔
+A set of users deliberately held out of all [experiments](#experiment) so you can measure the long-term, cumulative impact of your changes – often over months – rather than just the short-term effect of a single test. [Learn more about holdouts](/docs/experiments/holdouts).
 
 ## I
 
@@ -257,6 +281,12 @@ PostHog's AI [agent](#agent), named after [our hedgehog mascot](#hedgehog). Max 
 
 #### MCP 🦔
 Model Context Protocol. An open standard that lets AI tools talk to external systems. PostHog MCP is one of PostHog's [products](#product) – it exposes your PostHog data and [tools](#tool) to AI assistants and agents. [Learn more about PostHog MCP](/docs/model-context-protocol).
+
+#### MCP analytics 🦔
+A [tool](#tool) that shows how AI agents actually use your [MCP](#mcp) tools – which tools get called, what the agent was trying to do, where calls fail, and which capabilities were requested that you don't offer yet. [Learn more about MCP analytics](/docs/mcp-analytics).
+
+#### Metrics 🦔
+A [tool](#tool) for sending application and infrastructure metrics – request counts, latencies, queue depths, resource usage – to PostHog and analyzing them alongside your [logs](#logs), [traces](#traces), and product data. [Learn more about metrics](/docs/metrics).
 
 #### MOM
 Month-on-month (or month-over-month). Used to track performance from one month to the next, e.g. "we grew revenue 10% month-on-month".
@@ -327,6 +357,9 @@ One of the surfaces you access PostHog through: [PostHog Web](/docs/self-driving
 #### Product analytics 🦔
 The [tool](#tool) for understanding how identified and anonymous users interact with your product, through [insights](#insights) like [trends](#trend), [funnels](#funnel), [retention](#retention), and [paths](#path). Product analytics is typically deeper than [web analytics](#web-analytics). [Learn more about product analytics](/docs/product-analytics).
 
+#### Prompt management 🦔
+A [tool](#tool) for creating and updating LLM prompts inside PostHog and fetching them at runtime via the [SDK](#sdk), so product and content teams can iterate on prompts without shipping code. [Learn more about prompt management](/docs/prompt-management).
+
 #### PR
 Sometimes this means public relations. But when _we_ say PR we usually mean a [pull request](#pull-request), because [we don't do much of the other sort](/handbook/marketing).
 
@@ -343,8 +376,14 @@ Asking a question of your data. Every time you create an [insight](#insights) yo
 
 ## R
 
+#### Rageclick
+A rapid burst of clicks in the same spot, usually a sign that a user is frustrated because something isn't responding or isn't clickable when they expect it to be. PostHog detects rageclicks (and dead clicks) and surfaces them in [heatmaps](#heatmap) and [session replay](#session-replay).
+
 #### Release condition
 The rules that decide which users a [feature flag](#feature-flag) is active for – for example, your internal team, or 50% of all users.
+
+#### Replay Vision 🦔
+A [tool](#tool) (currently in alpha) that uses AI to watch your [session replays](#session-replay) and turn what it sees – hesitation, confusion, where a user's attention goes – into structured, queryable data. You define scanners that describe what to look for, and PostHog runs them across your recordings. [Learn more about Replay Vision](/docs/replay-vision).
 
 #### Retention 🦔
 A PostHog insight that shows how many users come back to your product over time after first performing an action. [Learn more about retention](/docs/product-analytics/retention).
@@ -357,6 +396,9 @@ In PostHog's [lifecycle](#lifecycle) insight, a user who performed the specified
 
 #### Revenue analytics 🦔
 A [tool](#tool) for tracking revenue metrics – [MRR](#mrr), [ARR](#arr), [churn](#churn), and more – by combining payment data (for example from Stripe) with your product data. [Learn more about revenue analytics](/docs/revenue-analytics).
+
+#### Reverse proxy
+A server on your own domain that forwards analytics requests to PostHog. Because requests go through a domain you control (like `e.yourdomain.com`), ad blockers are less likely to block them, so you capture more complete data. [Learn more about reverse proxies](/docs/advanced/proxy).
 
 ## S
 
@@ -381,6 +423,9 @@ Running and managing PostHog yourself, on your own infrastructure, rather than u
 #### Semantic layer 🦔
 A shared set of definitions – metrics, dimensions, and their relationships – that sits between your raw data and the people querying it, so everyone works from the same, consistent definitions. [Learn more about the semantic layer](/docs/semantic-layer).
 
+#### Sentiment 🦔
+In [LLM observability](#llm-observability), an automatic read of the emotional tone of a user's messages to your AI features – positive, neutral, or negative – so you can spot frustration at scale. [Learn more about sentiment](/docs/ai-observability/sentiment).
+
 #### Service
 In [distributed tracing](#traces), a named component of your system – an app, API, or worker – that emits [spans](#span). Every span records the service it ran in, so you can follow a request as it moves between them.
 
@@ -393,6 +438,9 @@ A [tool](#tool) that records and plays back individual user sessions, so you can
 #### Signal 🦔
 An individual observation a [scout](#scout) or [agent](#agent) picks up while scanning your data – a spike, an anomaly, a broken funnel step – which can become a report in the [inbox](#inbox). [Learn more about signals](/docs/self-driving/signals).
 
+#### Source 🦔
+A system PostHog imports data from – Stripe, Postgres, Hubspot, and more – so you can query it alongside your product data. Sources feed the [data warehouse](#data-warehouse), are part of [data pipelines](#data-pipeline), and are the counterpart to [destinations](#destination). [Browse sources](/docs/cdp/sources).
+
 #### Span
 A single unit of work within a [trace](#traces) – an operation such as an incoming HTTP request, a database query, a function call, or, in [LLM observability](#llm-observability), a step like a vector search. Spans each carry a name, service, timing, status, and attributes, and nest into a tree that shows how a request flowed and where the time went. [Learn more about spans](/docs/ai-observability/spans).
 
@@ -402,11 +450,17 @@ Structured Query Language (pronounced "sequel"). A language for querying relatio
 #### SSO
 Single sign-on. A system that lets users log in to one service (such as PostHog) using their credentials from another (such as Google Workspace). See also [SAML](#saml).
 
+#### Statistical significance
+In an [experiment](#experiment), a result is statistically significant when the difference between [variants](#variants) is unlikely to be down to chance. PostHog reports significance so you know whether a change really moved the metric before you act on it. [Learn more about analyzing experiment results](/docs/experiments).
+
 #### Stickiness 🦔
 A PostHog insight showing how many times users perform an action within a given period – a measure of how habit-forming your product is. [Learn more about stickiness](/docs/product-analytics/stickiness).
 
 #### Survey 🦔
 A [tool](#tool) for asking your users questions directly in your product – for [NPS](#nps), feedback, feature interest, and more – and analyzing the responses. [Learn more about surveys](/docs/surveys).
+
+#### Symbolication 🦔
+Converting the minified or obfuscated frames in a [stack trace](/docs/error-tracking/stack-traces) back into readable file names, functions, and line numbers, using source maps or symbol files you upload. It's what makes [error tracking](#error-tracking) stack traces actually useful. [Learn more about uploading source maps](/docs/error-tracking/upload-source-maps).
 
 ## T
 
@@ -421,6 +475,9 @@ A widget PostHog injects into your own site that gives you quick access to usefu
 
 #### Traces 🦔
 PostHog's distributed tracing [tool](#tool) (currently in alpha). A trace follows a single request as it travels through your application – across functions, [services](#service), databases, and APIs – so you can see what called what, in what order, and where the time or failure actually came from. Traces are built from [spans](#span) and ingested via [OpenTelemetry](#opentelemetry), providing [APM](#apm)-style visibility. This is distinct from the traces in [LLM observability](#llm-observability), which capture a full interaction with an AI model. [Learn more about distributed tracing](/docs/distributed-tracing).
+
+#### Transformation 🦔
+A step in a [data pipeline](#data-pipeline) that modifies, enriches, or filters [events](#event) in-flight as they're ingested, written as [Hog](#hog) functions. [Learn more about transformations](/docs/cdp/transformations).
 
 #### Trend 🦔
 The default PostHog [insight](#insights) type, which plots data onto a [chart](#chart) over time. Trends support many [chart types](/docs/product-analytics/trends) and options, including [formulas](#formula). [Learn more about trends](/docs/product-analytics/trends).
@@ -445,6 +502,12 @@ Virtual machine. An emulated, isolated computing environment. We historically ra
 
 #### Web analytics 🦔
 A [tool](#tool) for understanding how visitors interact with your website – pageviews, sessions, sources, and more – with a privacy-friendly, cookieless-capable dashboard. Typically lighter-weight than [product analytics](#product-analytics). [Learn more about web analytics](/docs/web-analytics).
+
+#### Web vitals 🦔
+Google's Core Web Vitals – metrics like largest contentful paint (LCP), cumulative layout shift (CLS), interaction to next paint (INP), and first contentful paint (FCP) – that measure real-user page performance. PostHog's [web analytics](#web-analytics) captures them automatically. [Learn more about web vitals](/docs/web-analytics/web-vitals).
+
+#### Workflows 🦔
+A [tool](#tool) for automating messaging and actions from your product data – event-triggered sequences, drip campaigns, and emails that respond to what users do. [Learn more about workflows](/docs/workflows).
 
 ## X
 
