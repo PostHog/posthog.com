@@ -72,8 +72,9 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             headerBarOptions={['showBack', 'showForward']}
             // fullScreen: the book fits the window and its page owns its scroll.
             fullScreen
-            // The window itself is the page – no desk. The viewport selector re-pins the height fullScreen drops.
-            className="[&_.app-scroll-viewport>div>div]:h-full"
+            // The window itself is the page, on the shell's translucent glass – no desk, no
+            // opaque repaint. The viewport selector re-pins the height fullScreen drops.
+            className="[&_main]:bg-transparent [&_.app-scroll-viewport>div>div]:h-full"
         >
             <div className="not-prose @container h-full min-h-0">
                 <BookReader
