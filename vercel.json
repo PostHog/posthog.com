@@ -254,6 +254,14 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/product-led-sales",
+            "destination": "/teams/sales-product-led"
+        },
+        {
+            "source": "/teams/product-led-sales/:path*",
+            "destination": "/teams/sales-product-led/:path*"
+        },
+        {
             "source": "/teams/customer-success",
             "destination": "/teams/customer-success-eu"
         },
