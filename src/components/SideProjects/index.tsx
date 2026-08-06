@@ -462,13 +462,20 @@ export const SideProjectForm = ({
     const setValue = (key: keyof SideProjectFormValues) => (event: React.ChangeEvent<HTMLInputElement>) =>
         setValues((prev) => ({ ...prev, [key]: event.target.value }))
 
+    // Absolute http(s) URLs or site-relative paths like /deskhog (per the internal-link convention)
+    const isValidProjectUrl = (value: string): boolean => /^(https?:\/\/|\/)/.test(value)
+
+    const githubUrl = values.githubUrl.trim()
+    const liveUrl = values.liveUrl.trim()
     // A card links to liveUrl || githubUrl, so a project without either would be unclickable
     const canSubmit =
         Boolean(
             values.title.trim() &&
                 values.description.trim() &&
                 values.projectAuthor.trim() &&
-                (values.githubUrl.trim() || values.liveUrl.trim())
+                (githubUrl || liveUrl) &&
+                (!githubUrl || isValidProjectUrl(githubUrl)) &&
+                (!liveUrl || isValidProjectUrl(liveUrl))
         ) && !submitting
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -553,7 +560,6 @@ export const SideProjectForm = ({
                 label="GitHub repo URL"
                 name="githubUrl"
                 direction="column"
-                type="url"
                 description="Give at least one of the repo or live URL – it's what the gallery card links to"
                 value={values.githubUrl}
                 onChange={setValue('githubUrl')}
@@ -562,8 +568,7 @@ export const SideProjectForm = ({
                 label="Live URL"
                 name="liveUrl"
                 direction="column"
-                type="url"
-                description="Where people can try it"
+                description="Where people can try it – use a relative path like /deskhog for pages on posthog.com"
                 value={values.liveUrl}
                 onChange={setValue('liveUrl')}
             />
