@@ -3,6 +3,8 @@ import { IconArrowRight, IconCheck, IconCreditCard } from '@posthog/icons'
 import { TrackedCTA } from 'components/CallToAction'
 import useCloud from 'hooks/useCloud'
 import usePostHogInstance from 'hooks/usePostHogInstance'
+import { useApp } from '../../../context/App'
+import FreeTierModal, { FREE_TIER_MODAL_KEY } from './FreeTierModal'
 
 /**
  * Free and pay-as-you-go as two stops on a journey, not two plans in a table.
@@ -57,6 +59,14 @@ export default function PricingJourney(): JSX.Element {
     const basePosthogUrl = isEU ? 'eu.posthog.com' : 'app.posthog.com'
     const billingUrl = `https://${basePosthogUrl}/organization/billing`
     const signupUrl = `https://${basePosthogUrl}/signup`
+    const { addWindow } = useApp()
+
+    const openFreeTier = () =>
+        addWindow(
+            // `WindowElement` is typed as a ReactPortal, which no JSX element satisfies —
+            // App.tsx's own openSignIn has the same mismatch.
+            (<FreeTierModal location={{ pathname: FREE_TIER_MODAL_KEY }} key={FREE_TIER_MODAL_KEY} newWindow />) as any
+        )
 
     return (
         <div className="@container not-prose">
@@ -120,18 +130,26 @@ export default function PricingJourney(): JSX.Element {
                     <StepBadge number={2} label="If and when you need it" tone="later" />
 
                     <h3 className="text-lg mb-0.5">Pay-as-you-go</h3>
+                    {/* The allowances hang off this card rather than the Free one because this is
+                        where they're in doubt. On the Free card "you get a free tier" is the
+                        expected claim; here it's the surprising one — adding a card doesn't take
+                        it away — so it's the sentence people want to check. */}
                     <p className="text-sm text-secondary mb-4">
-                        Same free tier every month. You only pay for what you use.
-                    </p>
-
-                    <p className="text-[15px] font-semibold mb-2">
-                        Everything in Free, <span className="text-green-dark dark:text-lime-green">plus:</span>
+                        Same{' '}
+                        <button
+                            type="button"
+                            onClick={openFreeTier}
+                            className="font-semibold text-red dark:text-yellow underline"
+                        >
+                            free tier
+                        </button>{' '}
+                        every month. You only pay for what you use.
                     </p>
 
                     <ul className="list-none p-0 m-0 space-y-2 mb-4">
                         {paidAdds.map(({ name, detail }) => (
                             <li key={name} className="flex items-start gap-2 text-[15px]">
-                                <IconArrowRight className="text-green size-5 shrink-0" />
+                                <IconCheck className="text-green size-5 shrink-0" />
                                 <span>
                                     <strong>{name}</strong>{' '}
                                     {detail && <span className="text-secondary text-sm">– {detail}</span>}
@@ -141,6 +159,9 @@ export default function PricingJourney(): JSX.Element {
                     </ul>
 
                     <div className="mt-auto border-t border-primary pt-3">
+                        <p className="text-sm text-secondary mb-4">
+                            Billing limits can be set for each product individually.
+                        </p>
                         <TrackedCTA
                             to={billingUrl}
                             width="full"

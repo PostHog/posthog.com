@@ -867,7 +867,7 @@ export const posthog = {
             saml_sso: 'Scale',
             siem: false,
             soc2_certified: true,
-            security_certification: 'SOC 2 Type II',
+            security_certification: 'SOC 2 Type 2',
             two_factor_auth: true,
             user_privacy_options: true,
         },

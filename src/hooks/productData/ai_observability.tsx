@@ -31,7 +31,7 @@ export const aiObservability = {
     forumTopicId: 390,
     color: 'purple',
     colorSecondary: 'green-2',
-    wizardSupport: 'Coming soon',
+    wizardSupport: true,
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {

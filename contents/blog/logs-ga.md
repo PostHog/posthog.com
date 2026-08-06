@@ -69,7 +69,7 @@ When investigations get noisy or time is tight, you can also summarize what’s 
 
 All of this works because Logs lives in the same place as [error tracking](/error-tracking), [session replay](/session-replay), and [product analytics](/product-analytics). Debugging shouldn’t be a sequence of separate tools so much as a single flow that moves from signal to explanation. 
 
-Logs is now generally available. All beta users get one month free. The free tier includes 50 GB, then costs $0.25 per GiB ingested (or $0.15 per GiB at 300 GB+), with 7-day retention and no per-seat or query fees.
+Logs is now generally available. All beta users get one month free. The free tier includes 10 GB, then costs $0.25 per GiB ingested (or $0.15 per GiB at 300 GB+), with 14-day retention and no per-seat or query fees.
 
 If you’re already using PostHog for errors or replays, Logs fits into the workflow you already have, rather than adding a new one. [Try it out.](https://app.posthog.com/logs)
 

@@ -3154,8 +3154,9 @@ div[data-radix-popper-content-wrapper] {
     }
 }
 
-/* Set on <html> by theme-init.js before paint when the hint was previously dismissed. */
-html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint {
+/* Set on <html> by theme-init.js before paint when the hint was previously collapsed.
+   Collapsing swaps the WizardHint's full banner for its slim re-expandable bar. */
+.wizard-hint-collapsed {
     display: none;
 }
 
@@ -3174,4 +3175,14 @@ html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint {
     background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.07), transparent 70%),
         radial-gradient(hsla(0, 0%, 100%, 0.07) 1.4px, transparent 0);
     background-color: #1a1a1a;
+}
+
+html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-full,
+html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizard-hint-full {
+    display: none;
+}
+
+html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-collapsed,
+html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizard-hint-collapsed {
+    display: flex;
 }
