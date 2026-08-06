@@ -21,21 +21,11 @@ For any dashboard or insight, you can share a public link and/or embed it using 
 
 ## Access control and public sharing
 
-If your organization uses [access controls](/docs/settings/access-control), PostHog checks that you can run every query an artifact exposes before it lets you share it publicly. Shared links execute without warehouse access control, so the access decision happens at publish time instead.
+If your organization uses [access controls](/docs/settings/access-control), PostHog checks that you can run every query an artifact exposes before it lets you share it publicly. Shared links execute without access control.
 
-When you try to enable sharing on an insight, dashboard, or notebook that queries a table you don't have access to, you'll see an error like:
+The same restriction applies when editing already-shared content: if a query references tables you're denied access to, you can't update a shared insight's query, add an insight to a shared dashboard, or add a query to a shared notebook.
 
-> Can't enable sharing: you don't have access to `table_name`, which the shared queries use. Ask an admin for access, or remove those queries first.
-
-The same restriction applies when editing already-shared content. You can't update a shared insight's query, add an insight to a shared dashboard, or add a query to a shared notebook if that query references tables you're denied access to.
-
-A few things to note:
-
-- **Already-enabled shares aren't re-gated** – changing settings like the password on an existing share still works even if you later lose access to a table it queries. Taking content down requires an explicit disable.
-
-- **Organization admins are exempt** – admins always have full access and skip this check.
-
-- **Non-access errors don't block sharing** – if a query has a syntax error or other non-access problem, it won't prevent you from enabling the share.
+Non-access errors don't block sharing – if a query has a syntax error or other non-access problem, it won't prevent you from enabling the share.
 
 ## Sharing an insight
 
