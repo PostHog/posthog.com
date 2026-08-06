@@ -127,6 +127,8 @@ posthog.setPersonPropertiesForFlags({
 })
 ```
 
+[`setPersonProperties()`](/docs/feature-flags/property-overrides#from-setpersonproperties-calls) does both in one call: it persists the property on the person and caches it for flag evaluation. Use `setPersonPropertiesForFlags()` when you don't want to create a person profile for the user.
+
 
 
 ## Why can't I create a new feature flag?
