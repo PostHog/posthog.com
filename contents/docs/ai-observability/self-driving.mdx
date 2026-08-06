@@ -44,15 +44,15 @@ To set them up:
 
 ## Anomaly investigations
 
-<CalloutBox icon="IconFlask" title="Alpha" type="fyi">
+<CalloutBox icon="IconFlask" title="Anomaly investigations are in alpha" type="action">
 
-Anomaly investigations are in alpha. Expect the rough edges to be rougher here.
+Anomaly investigations are currently in alpha. We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
 
 </CalloutBox>
 
 Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. What reaches you is what survived investigation.
 
-To set them up:
+Because alerts run on insights, this needs [product analytics](/docs/product-analytics) enabled in your project. To set them up:
 
 1. Create an insight on the metric you care about – cost, latency, or errors. The [AI Observability dashboard](/docs/ai-observability/dashboard) charts are a good starting point.
 2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it. No thresholds to pick – the detectors learn what normal looks like from your data.
