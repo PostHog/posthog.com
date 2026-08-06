@@ -1,16 +1,21 @@
 import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { usePostHog } from 'posthog-js/react'
 
 import Link from 'components/Link'
 
 /**
- * Self-driving vocabulary, defined once so no template carries the 101. Definitions are quoted
- * from the docs page that owns each concept, so this can't drift into a competing source.
+ * Self-driving vocabulary, defined once so no template carries the 101. Definitions come from
+ * the docs page that owns each concept – pulled from its frontmatter `description` at build
+ * time, so the hover card can't drift from the docs. The map below carries the slug, the card
+ * title (sometimes singular where the page is plural), and a fallback definition for when a
+ * page or its description goes missing.
  */
 
 export interface TermDefinition {
     /** Display title in the hover card. */
     title: string
-    /** One or two sentences, quoted from the owning docs page. */
+    /** One or two sentences. Fallback only – the docs page's `description` frontmatter wins. */
     description: string
     /** The docs page that owns this concept; becomes the card's "Read the docs" link. */
     slug: string
@@ -51,6 +56,34 @@ export const TERMS = {
 
 export type TermName = keyof typeof TERMS
 
+/** Docs-page `description` frontmatter by slug, so definitions stay fresh with the docs. */
+function useDocsDescriptions(): Map<string, string> {
+    const data = useStaticQuery(graphql`
+        query SelfDrivingTermDocsQuery {
+            docs: allMdx(filter: { fields: { slug: { regex: "/^/docs/self-driving//" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        description
+                    }
+                }
+            }
+        }
+    `)
+
+    return React.useMemo(
+        () =>
+            new Map(
+                (data?.docs?.nodes || [])
+                    .filter((node: any) => node.frontmatter?.description)
+                    .map((node: any) => [node.fields.slug.replace(/\/$/, ''), node.frontmatter.description])
+            ),
+        [data]
+    )
+}
+
 interface TermProps {
     name: TermName
     /** Override the rendered text, e.g. to pluralize: <Term name="scout">scouts</Term>. */
@@ -61,19 +94,25 @@ interface TermProps {
 /** First mention only – repeated, the dotted underlines stop reading as helpful. */
 export default function Term({ name, children, className = '' }: TermProps): JSX.Element {
     const definition = TERMS[name]
+    const docsDescriptions = useDocsDescriptions()
+    const posthog = usePostHog()
 
     // Fail soft on unknown names – an author typo prints plain text instead of crashing the page.
     if (!definition) {
         return <>{children ?? name}</>
     }
 
+    // The docs page is the source of truth; the authored copy above is the safety net.
+    const description = docsDescriptions.get(definition.slug) ?? definition.description
+
     return (
         <Link
             to={definition.slug}
             state={{ newWindow: true }}
+            onMouseEnter={() => posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })}
             // "Read the docs", not "Continue reading": the reader IS reading – this link leaves
             // the pocket guide for the docs page that owns the term.
-            preview={{ ...definition, ctaLabel: 'Read the docs' }}
+            preview={{ ...definition, description, ctaLabel: 'Read the docs' }}
             // Orange dotted + help cursor is the "defined term" affordance; navigation links keep
             // a solid text-color underline. Color is what separates the two at body size – the
             // orange matches the book's other teaching apparatus (figure markers, the spine).
