@@ -5037,6 +5037,10 @@
             "destination": "https://app.posthog.com/startups"
         },
         {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
+        },
+        {
             "source": "/yc-onboarding",
             "destination": "https://app.posthog.com/startups/yc"
         },
