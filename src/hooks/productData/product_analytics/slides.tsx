@@ -11,6 +11,7 @@ import {
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
+import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
@@ -172,7 +173,15 @@ export const topFeatures: CarouselSlide[] = [
                                 description: item.description,
                             })),
                             {
-                                label: f.correlation_analysis.title,
+                                label: (
+                                    <Link
+                                        to="/docs/product-analytics/correlation"
+                                        state={{ newWindow: true }}
+                                        className="underline"
+                                    >
+                                        {f.correlation_analysis.title}
+                                    </Link>
+                                ),
                                 description: f.correlation_analysis.description,
                             },
                         ]}
@@ -205,11 +214,27 @@ export const topFeatures: CarouselSlide[] = [
                                 description: item.description,
                             })),
                             {
-                                label: f.lifecycle.title,
+                                label: (
+                                    <Link
+                                        to="/docs/product-analytics/lifecycle"
+                                        state={{ newWindow: true }}
+                                        className="underline"
+                                    >
+                                        {f.lifecycle.title}
+                                    </Link>
+                                ),
                                 description: f.lifecycle.description,
                             },
                             {
-                                label: f.stickiness.title,
+                                label: (
+                                    <Link
+                                        to="/docs/product-analytics/stickiness"
+                                        state={{ newWindow: true }}
+                                        className="underline"
+                                    >
+                                        {f.stickiness.title}
+                                    </Link>
+                                ),
                                 description: f.stickiness.description,
                             },
                         ]}
@@ -239,7 +264,15 @@ export const topFeatures: CarouselSlide[] = [
                                 description: item.description,
                             })),
                             {
-                                label: f.user_paths.title,
+                                label: (
+                                    <Link
+                                        to="/docs/product-analytics/paths"
+                                        state={{ newWindow: true }}
+                                        className="underline"
+                                    >
+                                        {f.user_paths.title}
+                                    </Link>
+                                ),
                                 description: f.user_paths.description,
                             },
                         ]}
@@ -269,7 +302,15 @@ export const topFeatures: CarouselSlide[] = [
                                 description: item.description,
                             })),
                             {
-                                label: f.group_analytics.title,
+                                label: (
+                                    <Link
+                                        to="/docs/product-analytics/group-analytics"
+                                        state={{ newWindow: true }}
+                                        className="underline"
+                                    >
+                                        {f.group_analytics.title}
+                                    </Link>
+                                ),
                                 description: f.group_analytics.description,
                             },
                         ]}
