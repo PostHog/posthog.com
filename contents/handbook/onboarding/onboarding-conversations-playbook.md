@@ -309,4 +309,5 @@ The goal is to make the information accessible to a wider audience within the cu
 - Summarize the call and send resources. Include some extra resources if you feel it would be beneficial as well. For example, our [YouTube playlist](https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci%C2%A0) is great!
 - If relevant, give them one quick win. Encourage a small task they can do immediately after the call to lock in value and reinforce learning.
 - If you feel you have built a strong relationship, use your champion to introduce you to other teams that might be interested in PostHog and might be willing to jump on the call to be shown around.
+- Leverage the good relationship you've just established, and ask for direct feedback on the onboarding experience. Link to [our survey](https://us.posthog.com/external_surveys/019c523d-0d90-0000-65ba-4b976e24c83e) in your email/notebook.
 - Share any feedback or feature requests with the relevant product team. Their responsiveness can help you deliver some customer happiness! It's always great to be able to send a GitHub link to follow in your email. 
