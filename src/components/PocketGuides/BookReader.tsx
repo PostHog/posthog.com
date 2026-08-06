@@ -165,7 +165,7 @@ export default function BookReader({
         }`
 
     return (
-        <div className="relative flex h-full min-h-0 w-full flex-col">
+        <div className="relative flex h-full min-h-0 w-full flex-col bg-primary">
             {/* Book tabs on the left edge. z-30: above the page, beside its scroll. */}
             <div className="absolute left-0 top-6 z-30 flex flex-col items-start gap-1">
                 {shelf && (
@@ -219,7 +219,7 @@ export default function BookReader({
                 )}
             </div>
 
-            <div className="relative min-h-0 flex-1">
+            <div className="relative min-h-0 flex-1 bg-white dark:bg-accent">
                 {prev && <PageTurnZone to={prev.url} label={prev.label} direction="prev" />}
                 {next && <PageTurnZone to={next.url} label={next.label} direction="next" />}
                 <div className="h-full overflow-y-auto">
