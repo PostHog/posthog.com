@@ -185,7 +185,7 @@ Getting the reason right is only half of it — most failed outreach dies becaus
 - **Non-technical people.** Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn't an engineer to talk to us given engineers don't want to.
 - **Escalate to senior stakeholders.** If you can't get hold of anyone, email more senior team members even if they don't use PostHog (credit to Steven). They can help you find the right person.
 - **"New users."** If you're not succeeding getting through with your champions, engage with colleagues recently invited into PostHog. Monitor for them via the "new user" segment in Vitally and reach out immediately with an email and Slack invite. New users often accept because they assume the Slack channel is part of their company's PostHog setup. Be helpful, send merch, and when it lands at their office, the rest of the team is much more likely to join the Slack channel.
-- **Their language.** If you're reaching out to a non-English speaking team and getting no response, try writing your message in their language. Use Claude to draft it, or ideally – get a native speaker on your team to help you craft it.
+- **Their language.** If the customer's main language isn't English, that alone can make them hesitant to engage over Slack or email. Try writing your message in their language – but AI translation can read as unnatural depending on the language, so use it with discretion, ideally where you can spot-check the result. Better still, pull in a teammate who speaks the language (credit to Steven) – they don't need to own the account, just to remove the friction. ([Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&cid=C08M011SBCM))
 - **Ask the wider team for help** - we have to get creative here! You'd be surprised how often somebody knows someone...
 
 Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission.
@@ -259,18 +259,6 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
 
 **Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
-
-### Bring in a teammate who speaks their language
-
-If an account has gone quiet and there's a language barrier in the mix, the blocker often isn't disinterest – it's that the people on their side feel anxious communicating with us over Slack, email, or calls in a second language. Pulling in a PostHog teammate who speaks their language removes that friction fast. They don't need to own the account, just to lower the social cost of talking to us – ask around the team for a fluent speaker. Steven had been trying to reach a long-silent customer for months; once a fluent-speaking teammate joined to run implementation fixes and training, the team got on a call and started engaging – opening up cost-optimization work and a path to renewal.
-
-**Suggested wording (introducing the teammate in-channel):**
-
-> Thanks for hopping on a call with me today. I want to introduce you all to @[teammate], who has volunteered to help coordinate things with your team – including getting your implementation in good shape and running training to get everyone up to speed on how to maximize value from PostHog.
->
-> I'll leave it here for you all to coordinate a meeting time.
-
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&cid=C08M011SBCM)
 
 ### Have you been ghosted?
 
