@@ -352,8 +352,10 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
     }, [searchQuery, isInitialized, decodeHash, encodeHash])
 
     const handleViewChange = (value: string) => {
+        // Clear the search term when switching views
+        setSearchQuery('')
         const path = value === 'map' ? '/people/map' : '/people'
-        navigate(`${path}${window.location.hash}`)
+        navigate(path)
     }
 
     const teamSize = teamMembers.length - 1

@@ -33,6 +33,10 @@ interface PeopleMapSearchProps {
 
 const fullName = (m: EmployeeLike): string => [m.firstName, m.lastName].filter(Boolean).join(' ')
 
+// Session token for Search Box API billing (rotated after each selection)
+const makeSessionToken = (): string =>
+    typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2)
+
 // Map search box: matches team members by name first, then Mapbox places.
 export default function PeopleMapSearch({
     members,
@@ -48,7 +52,7 @@ export default function PeopleMapSearch({
     const [locationResults, setLocationResults] = useState<LocationSuggestion[]>([])
     const [isOpen, setIsOpen] = useState(false)
     const [highlightIndex, setHighlightIndex] = useState(-1)
-    const [sessionToken, setSessionToken] = useState('')
+    const [sessionToken, setSessionToken] = useState(makeSessionToken)
     const containerRef = useRef<HTMLDivElement>(null)
     const inputRef = useRef<HTMLInputElement>(null)
     const abortRef = useRef<AbortController | null>(null)
@@ -57,15 +61,6 @@ export default function PeopleMapSearch({
     useEffect(() => {
         setQuery(value)
     }, [value])
-
-    // Session token for Search Box API billing
-    useEffect(() => {
-        const newToken =
-            typeof crypto !== 'undefined' && crypto.randomUUID
-                ? crypto.randomUUID()
-                : Math.random().toString(36).slice(2)
-        setSessionToken(newToken)
-    }, [])
 
     const employeeMatches = useMemo(() => {
         const q = query.trim().toLowerCase()
@@ -125,14 +120,6 @@ export default function PeopleMapSearch({
         [employeeMatches, locationResults]
     )
 
-    // Close when there's nothing to show, but never auto-open — opening is driven
-    // by user intent (typing/focus) so a hash-loaded value doesn't pop the dropdown.
-    useEffect(() => {
-        if (items.length === 0) {
-            setIsOpen(false)
-        }
-    }, [items.length])
-
     useEffect(() => {
         const onClick = (e: MouseEvent) => {
             if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -153,12 +140,7 @@ export default function PeopleMapSearch({
             setQuery(item.suggestion.name)
             onSelectLocation(item.suggestion.name)
         }
-        // Start a fresh session token after a selection (Search Box semantics)
-        setSessionToken(
-            typeof crypto !== 'undefined' && crypto.randomUUID
-                ? crypto.randomUUID()
-                : Math.random().toString(36).slice(2)
-        )
+        setSessionToken(makeSessionToken())
     }
 
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -204,7 +186,7 @@ export default function PeopleMapSearch({
                 placeholder={placeholder}
                 name="people-map-search"
                 aria-autocomplete="list"
-                aria-expanded={isOpen}
+                aria-expanded={isOpen && items.length > 0}
                 className="h-[34px] w-full min-w-[12rem] box-border rounded border border-primary bg-primary text-primary placeholder:text-secondary px-2 pr-7 text-sm leading-none outline-none focus:ring-2 focus:ring-orange"
             />
             {query && (
