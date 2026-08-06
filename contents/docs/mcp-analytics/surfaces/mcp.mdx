@@ -12,9 +12,10 @@ MCP Analytics tools are in beta and require the MCP Analytics feature preview to
 
 PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a set of tools, so you can investigate how agents use your server from Claude Code, Cursor, or any other MCP client – without switching to the web app. It's the fastest way to ask "which of my tools is failing, and why?" while you're already in your editor.
 
-## Setup
+## Before you start
 
-Follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics tools need the `mcp_analytics:read` scope, and the ones that write data (feedback, missing capabilities, recomputing clusters) need `mcp_analytics:write`.
+1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics tools need the `mcp_analytics:read` scope, and the ones that write data (feedback, missing capabilities, recomputing clusters) need `mcp_analytics:write`.
 
 ## What you can do here
 

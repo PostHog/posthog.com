@@ -131,7 +131,7 @@ Define a [launch tier framework](https://aakashgupta.medium.com/the-launch-tier-
 2. **Strategic upgrades:** Meaningful product improvements (not redefinitions) that don't require the full machinery of a major campaign. For example, [PostHog Logs launch](/blog/logs-ga).
 3. **Steady improvements:** Standard product development that doesn't require coordination beyond the product team. For example, AI Observability adding [time to first token](/changelog?id=2558).
 
-This is where brand helps. Things like [humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), narrative, and deliberate [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0) work because they lower the cost of paying attention. [Partnering with influencers](https://www.linkedin.com/feed/update/urn:li:activity:7401713037386379265) that own trust with your ICP is another way to extend mindshare beyond your brand channels.
+This is where brand helps. Things like [humor](https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL), narrative, and deliberate [absurdity](https://www.youtube.com/watch?v=EXisgy6eWJ0) work because they lower the cost of paying attention. Partnering with influencers that own trust with your ICP is another way to extend mindshare beyond your brand channels.
 
 > **What this looks like:** Notion ships constantly, but markets selectively. Many features land with almost no fanfare, while a small number (AI, databases, templates) get sustained narrative investment over months.
 

@@ -38,7 +38,7 @@ When your assistant's response quality dips, you can check whether that tracks w
 
 ### 2. We let you A/B test prompts and AI features on real users
 
-Although both have prompt playgrounds, PostHog goes further with [prompt experiments (beta)](/docs/prompt-management/prompt-experiments) that let you pit two or more versions of a prompt against each other. It splits users between them [via a feature flag](/docs/feature-flags) and reports cost, latency, eval pass rate, and usage analytics per variant, with a confidence interval against the control.
+Although both have prompt playgrounds, PostHog goes further with [prompt experiments](/docs/prompt-management/prompt-experiments) that let you pit two or more versions of a prompt against each other. It splits users between them [via a feature flag](/docs/feature-flags) and reports cost, latency, eval pass rate, and usage analytics per variant, with a confidence interval against the control.
 
 And because [experiments](/experiments) aren't limited to prompts, you can take it further: route a percentage of users to a new model or retrieval strategy, then measure the impact on real product goals using PostHog's [Bayesian](/docs/experiments/statistics-bayesian) and [Frequentist](/docs/experiments/statistics-frequentist) stats engines.
 
@@ -86,7 +86,7 @@ The differences show up in what surrounds the trace.
 
 ### Prompt management
 
-Langfuse had prompt management from day one. However, PostHog is playing catch-up with a [Prompt Management](/docs/prompt-management) tool (currently in beta). While PostHog's tool already covers versioning, runtime fetching, and A/B testing of prompt versions, Langfuse is still further along with features like labels, playground testing, and composable prompts.
+Langfuse had prompt management from day one. PostHog's [Prompt Management](/docs/prompt-management) tool now covers versioning, labels, configuration, runtime fetching, and A/B testing of prompt versions. Langfuse is still further along with features like composable prompts.
 
 <p>
 <ProductComparisonTable
@@ -96,6 +96,7 @@ Langfuse had prompt management from day one. However, PostHog is playing catch-u
         'ai_observability.prompt_management.features.template_variables',
         'ai_observability.prompt_management.features.prompt_deployment_api',
         'ai_observability.prompt_management.features.version_comparison',
+        'ai_observability.prompt_management.features.prompt_config',
         'ai_observability.prompt_management.features.prompt_labels',
         'ai_observability.prompt_management.features.prompt_playground',
         'ai_observability.prompt_management.features.composable_prompts',
@@ -191,7 +192,7 @@ When it comes to pricing, Langfuse uses a combination of tier and usage-based pr
 | **Pricing model** | Usage-based | Tiered plans |
 | **Free tier** | Generous limits per product (100,000 events free per month for AI observability) | 50,000 units/month (Units \= Count of Traces \+ Count of Observations \+ Count of Scores) |
 | **Seat limits** | None, as you get unlimited users on every plan | 2 users on the free plan |
-| **Paid plans** | Pay only for usage above free tier (Starts at $0.00006/event) | Starts at $29/month for 100k units (extra at $0.00008/unit) |
+| **Paid plans** | Pay only for usage above free tier (Starts at $0.00035/event, with volume discounts down to $0.00006/event) | Starts at $29/month for 100k units (extra at $0.00008/unit) |
 | **Overages** | Scales with usage | Billed on top of the paid tier |
 | **Startup program** | [$50,000 in free credits](/startups) for 12 months | 50% off the first year |
 | **License** | MIT | MIT |
@@ -299,7 +300,7 @@ But for connecting traces to user behavior or running tests on AI-powered featur
 <details>
 <summary>Can PostHog replace Langfuse?</summary>
 
-For many teams, yes. **PostHog** covers tracing, cost tracking, [prompt management](/docs/prompt-management/prompts) (beta), and A/B testing of prompt versions. But it also offers product analytics, session replay, flags, error tracking, and more, which Langfuse doesn't. That said, if you need advanced AI observability features like an annotation queue for human review or composable prompt chains, you'll still need **Langfuse** (or both\!).
+For many teams, yes. **PostHog** covers tracing, cost tracking, [prompt management](/docs/prompt-management/prompts), and A/B testing of prompt versions. But it also offers product analytics, session replay, flags, error tracking, and more, which Langfuse doesn't. That said, if you need advanced AI observability features like an annotation queue for human review or composable prompt chains, you'll still need **Langfuse** (or both\!).
 
 </details>
 
@@ -328,15 +329,9 @@ You can find a few more in our [guide on LLM observability tools](/blog/best-ope
 <details>
 <summary>Which is better for prompt management?</summary>
 
-**Langfuse** has the more complete prompt management system today, with features like:
+They are close to parity. Both cover prompt versioning, labels (production/staging/latest), configuration stored with each version, a playground for interactive testing, and a deployment API.
 
-- Prompt versioning
-- Labels (production/staging/latest)
-- A playground for interactive testing
-- Composable prompt chains
-- A deployment API
-
-**PostHog's** [prompt management](/docs/prompt-management/prompts) is in beta and covers versioning, template variables, runtime SDK fetching with caching, version diffs, and MCP server support. Where it does a better job at A/B testing [prompt versions](/docs/prompt-management/prompt-experiments) and measuring cost, latency, and eval pass rate.
+**Langfuse** still has composable prompt chains, which PostHog doesn't. **PostHog's** [prompt management](/docs/prompt-management/prompts) adds template variables, version diffs, and MCP server support, and does a better job at A/B testing [prompt versions](/docs/prompt-management/prompt-experiments) and measuring cost, latency, and eval pass rate.
 
 </details>
 

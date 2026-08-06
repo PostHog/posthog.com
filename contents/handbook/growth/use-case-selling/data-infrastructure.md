@@ -14,6 +14,8 @@ hideAnchor: false
 - Export PostHog data to existing warehouses (Snowflake, BigQuery, Redshift) so it's part of the company's data stack
 - Feed enriched data to downstream tools: BI platforms, ad platforms, CRMs, marketing tools
  
+**Naming note:** the current positioning for this whole area is the **context warehouse** — the managed warehouse plus the full context-ingestion pipeline (modelling, pipelines, batch exports). That framing is what ties this use case to self-driving: the warehouse isn't just a SQL bucket, it's the fuel for agents. Don't say "PostHog Data Stack" — that's not a term we use externally. See [brand foundations](/handbook/brand/foundations#how-we-describe-posthog).
+
 This is the "stickiness" use case. Once PostHog is part of a company's data infrastructure, receiving data from Stripe, HubSpot, and databases AND feeding data out to their BI layer, it becomes very hard to rip out. This also makes their product data more valuable as it is enriched with additional business context. Data infrastructure customers also tend to have the highest retention rates.
  
 However, this is also the hardest use case to sell into. Data teams are skeptical of analytics tools playing in the data engineering space. Product maturity matters a lot here.
@@ -23,6 +25,9 @@ However, this is also the hardest use case to sell into. Data teams are skeptica
 - **[Data Warehouse](/docs/data-warehouse) (core)** — Bring external data into PostHog. Connect Stripe, HubSpot, Salesforce, Postgres, MySQL, Snowflake, BigQuery, and [many more sources](/docs/cdp/sources). Query across PostHog events and external data using HogQL. Build unified dashboards that combine product behavior with revenue, CRM, and business data.
 - **[Data Pipelines / Batch Exports](/docs/cdp) (core)** — Send PostHog data out to external destinations. [Batch exports](/docs/cdp/batch-exports) to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, Azure Blob. [Realtime destinations](/docs/cdp/destinations) to Slack, HubSpot, Salesforce, ad platforms, and more. [Transformations](/docs/cdp/transformations) to clean, enrich, or filter data before it lands.
 - **[Product Analytics](/docs/product-analytics)** — The query engine for unified data. Once external data is in the Data Warehouse, Product Analytics becomes the interface for querying across all of it. HogQL gives SQL access to everything. Dashboards combine product events with business metrics.
+- **[Endpoints](/docs/endpoints) (*beta*)** — Turn any saved insight or SQL query into a stable, authenticated, cached HTTP endpoint. This is the answer to "we need this data inside our own product / internal tool / customer-facing dashboard" — previously a custom backend job. Optionally materialize for latency. ([Positioning](/handbook/marketing/positioning/endpoints))
+- **[Semantic layer](/docs/semantic-layer) (*alpha*)** — Define metrics and dimensions once so every query, dashboard, and agent uses the same definition. The governance answer for data teams who've been burned by six versions of "active user."
+- **[self-driving](/docs/self-driving)** — Scouts watch the data infrastructure itself: failing warehouse syncs, broken materialized views, data pipeline errors, ingestion warnings. Pipeline breakage is exactly the kind of unglamorous maintenance that sits in a data team's backlog for weeks. External sources also connect *through* the warehouse, so a data team that's wired up their sources has also wired up the inbox.
  
 ## Adoption path and expansion path
  
@@ -150,7 +155,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 - **Query across everything with HogQL.** Join PostHog events with Stripe revenue data, HubSpot contacts, or your Postgres database in a single SQL query. No separate BI tool required for many use cases.
 - **Built into the analytics platform.** The Data Warehouse isn't a separate product. It's integrated with Product Analytics, dashboards, cohorts, and every other PostHog feature. External data becomes first-class data.
 - **Lightweight warehouse for early-stage teams.** Teams without Snowflake/BigQuery get warehouse capabilities as part of PostHog. No separate vendor, no separate setup.
-- **Bidirectional data flow.** Data Warehouse brings external data *into* PostHog. Batch Exports and Pipelines push PostHog data *out*. Two-way integration with the customer's data stack, not just one direction.
+- **Bidirectional data flow.** Data Warehouse brings external data *into* PostHog. Batch Exports and Pipelines push PostHog data *out*. Two-way integration with the customer's data stack.
  
 ### Competitor quick reference
  
@@ -161,7 +166,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 | Census / Hightouch | Reverse ETL (warehouse to business tools) | We push data from PostHog directly, no warehouse intermediate step needed; simpler architecture | More destination integrations; audience management features; built for marketing/ops teams |
 | Segment | CDP (collect events, route to destinations) | We're the analytics platform AND the pipe; no separate CDP needed | More destination integrations; more mature event collection; established in enterprise CDP workflows |
  
-**Honest assessment:** We are not trying to replace Snowflake or BigQuery. For teams with a mature data stack (Fivetran + Snowflake + dbt + Looker), PostHog's Data Warehouse is a complement, not a replacement. Batch Exports feed PostHog data into their stack; Data Warehouse brings their data into PostHog for product-specific analysis. The full replacement pitch only works for early-stage teams that don't have a warehouse yet and want PostHog to serve double duty. Early stage teams may also have experience with the complexity of layering in data systems, so may be more open to centralizing tooling, and Batch Exports always allow teams to not feel vendor lock-in. Be calibrated about which accounts can realistically adopt this as infrastructure vs. a convenience feature.
+**Where PostHog stands:** We are not trying to replace Snowflake or BigQuery. For teams with a mature data stack (Fivetran + Snowflake + dbt + Looker), PostHog's Data Warehouse is a complement, not a replacement. Batch Exports feed PostHog data into their stack; Data Warehouse brings their data into PostHog for product-specific analysis. The full replacement pitch only works for early-stage teams that don't have a warehouse yet and want PostHog to serve double duty. Early stage teams may also have experience with the complexity of layering in data systems, so may be more open to centralizing tooling, and Batch Exports always allow teams to not feel vendor lock-in. Be calibrated about which accounts can realistically adopt this as infrastructure vs. a convenience feature.
  
 ## Pain points & known limitations
  
@@ -202,10 +207,16 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 | Data Pipelines to CRM | Growth & Marketing | They're pushing data to HubSpot/Salesforce. The growth team could use more of the marketing analytics stack. | "You're syncing data to your CRM. Has the marketing team seen Web Analytics and Marketing Analytics for attribution?" |
 | Data Warehouse + Product Analytics | Product Intelligence (for the product team) | They're doing unified data analysis. The product team should be using the full analytics suite. | "Your data team is doing advanced queries. Are your PMs using funnels, retention, and session replay for product decisions?" |
 | Data team in PostHog | Any use case for other teams | Data team is in PostHog and advocates for it. Expand to product, engineering, or growth. | "Your data team loves PostHog. Which other teams could benefit? Product? Engineering? Growth?" |
+| Warehouse + insights, hand-rolled internal APIs | Endpoints | They've built a backend service to serve saved queries to another app | "Who maintains the API that serves these numbers to your internal tool? Endpoints does that without the service." |
+| Warehouse sources connected | self-driving | Sources are already the hard part of setup, and failing syncs are a real recurring pain | "When a sync breaks, how long before someone notices? There's a scout that watches for exactly that and files it with the fix." |
  
 ## Internal resources
  
-- **Data Warehouse docs:** [Data Warehouse](/docs/data-warehouse) · [Sources](/docs/cdp/sources) · [HogQL](/docs/product-analytics/sql)
+- **Data Warehouse docs:** [Data Warehouse](/docs/data-warehouse) · [Sources](/docs/cdp/sources) · [SQL](/docs/data-warehouse/sql)
+- **Endpoints docs:** [Endpoints](/docs/endpoints) · [Positioning](/handbook/marketing/positioning/endpoints)
+- **Semantic layer docs:** [Semantic layer](/docs/semantic-layer)
+- **Context warehouse positioning:** [Handbook](/handbook/marketing/positioning/data-warehouse) · [What is a context warehouse?](/blog/what-is-a-context-warehouse)
+- **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving)
 - **Data Pipelines docs:** [CDP overview](/docs/cdp) · [Batch exports](/docs/cdp/batch-exports) · [Realtime destinations](/docs/cdp/destinations) · [Transformations](/docs/cdp/transformations)
 - **External data source guides:** [Stripe](/docs/cdp/sources/stripe) · [HubSpot](/docs/cdp/sources/hubspot) · [Salesforce](/docs/cdp/sources/salesforce) · [Postgres](/docs/cdp/sources/postgres)
 - **Batch export guides:** [S3](/docs/cdp/batch-exports/s3) · [Snowflake](/docs/cdp/batch-exports/snowflake) · [BigQuery](/docs/cdp/batch-exports/bigquery)
@@ -230,4 +241,3 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 | 3 | PostHog + Data Pipelines | Product + Business | Cross-functional | Hub for analytics |
 | 4 | PostHog + Data Pipelines + Warehouse | Everything | Cross-functional | Source of truth |
 | 5 | PostHog + Batch Exports + External warehouse | Everything | Data Team | Source + destination |
-
