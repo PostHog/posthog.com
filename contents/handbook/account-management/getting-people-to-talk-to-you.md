@@ -260,6 +260,18 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 
 **Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
 
+### Bring in a teammate who speaks their language
+
+If an account has gone quiet and there's a language barrier in the mix, the blocker often isn't disinterest – it's that the people on their side feel anxious communicating with us over Slack, email, or calls in a second language. Pulling in a PostHog teammate who speaks their language removes that friction fast. They don't need to own the account, just to lower the social cost of talking to us – ask around the team for a fluent speaker. Steven had been trying to reach a long-silent customer for months; once a fluent-speaking teammate joined to run implementation fixes and training, the team got on a call and started engaging – opening up cost-optimization work and a path to renewal.
+
+**Suggested wording (introducing the teammate in-channel):**
+
+> Thanks for hopping on a call with me today. I want to introduce you all to @[teammate], who has volunteered to help coordinate things with your team – including getting your implementation in good shape and running training to get everyone up to speed on how to maximize value from PostHog.
+>
+> I'll leave it here for you all to coordinate a meeting time.
+
+**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&cid=C08M011SBCM)
+
 ### Have you been ghosted?
 
 If you've had a conversation with someone, there was interest on their side and then they suddenly go dark, using the [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them.
