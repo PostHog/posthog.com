@@ -34,17 +34,15 @@ Here's my take:
 - headless is a new layer on top of product building, the same way APIs and the GUI once were
 - which means the screen matters more than it used to, not less
 
-If you're a product builder, congratulations! That means your job just doubled: every user of your product is potentially bringing an agentic plus-one.
+If you're a product builder, congratulations! That means your job just doubled: every user of your product is bringing an agentic plus-one.
 
 Here's what we've learned building for a hybrid (not headless) future.
 
-## 1. If a human can do it, an agent should too
-
-If you're new to this whole "agentic users" thing, start here. Anything a human can do in your product, [an agent needs a way to do as well](/newsletter/agent-first-product-engineering).
+## If a human can do it, an agent should too
 
 Mostly, agents don't touch your UI. Some can (computer-use agents like Perplexity's Comet will click around a live DOM), but that's slow and human-shaped. Agents work better with SQL, tool calls, and APIs.
 
-Netlify has a name for getting this right: [agent experience](https://www.netlify.com/agent-experience/), or AX, how easily an agent can use your product and recover when something breaks. The standard for this is [MCP](https://modelcontextprotocol.io): you run a server that describes what your product can do and what it knows, and any agent can connect to it, see what's on offer, and call it directly.
+Netlify has a name for getting this right: [agent experience](https://www.netlify.com/agent-experience/), or AX, how easily an agent can use your product and recover when something breaks. The standard for this is [MCP](https://modelcontextprotocol.io): you run a server that describes what your product can do, an agent can connect to it, see what's on offer, and interact with your product directly.
 
 Every action you hand an agent creates a new job for your UI: someone has to be able to see that it happened.
 
@@ -55,13 +53,20 @@ Every action you hand an agent creates a new job for your UI: someone has to be 
 
 <CalloutBox icon="IconTerminal" title="Go build:" type="fyi">
 
-Build two things for every action. First, a way for the agent to do it: an MCP that covers everything a human can do in your product. Second, a way for the person to check it got done: a record of what changed, when, and who asked for it. Unlike a magician, you *do* want people looking up your sleeve. Try running your whole product through an agent, and identify the handoff points (there are probably way more than you think).
+Build two things for every action. 
+
+1. A way for the agent to do it: an MCP that covers everything a human can do in your product. 
+2. A way for the person to check it got done: a record of what changed, when, and who asked for it. 
+
+Unlike a magician, you *do* want people looking up your sleeve. Try running your whole product through an agent, and identify the handoff points (there are probably way more than you think).
 
 </CalloutBox>
 
-## 2. Your homepage isn't the front door
+## Your homepage isn't the front door
 
-If you're building for a technical audience, onboarding them into your product increasingly won't start from a "get started" button. It'll start in a terminal or an AI chat window. This is less true for consumer products, but the pattern is still spreading – especially if your [AEO](/blog/aeo-advice) game is strong. A new user chatting with Claude or ChatGPT may never see your homepage at all. They'll ask the agent for a recommendation, it'll point them at you, and (with user permission and a good MCP) set up your product right in the chat window.
+If you're building for a technical audience, onboarding them into your product increasingly won't start from a "get started" button. It'll start in a terminal or an AI chat window. 
+
+This is less true for consumer products, but the pattern is spreading – especially if your [AEO](/blog/aeo-advice) game is strong. A new user chatting with Claude or ChatGPT may never see your homepage at all. They'll ask the agent for a recommendation, it'll point them at you, and (with user permission and a good MCP) set up your product right in the chat window.
 
 The catch is you can't count on the agent to read your install docs. A capable one might go looking, but plenty won't. So setup has to be something an agent can finish on its own: easy to find, easy to authenticate into, and done in one call instead of ten steps.
 
@@ -70,31 +75,35 @@ Get that right and you've handled the agent. You still haven't handled the perso
 **What this looks like:**
 
 - The fastest way to try PostHog is a single `npx` [command](/docs/getting-started/install) that sets up your account and scans your codebase to work out what to instrument, logging each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, people tend to open the web app anyway, to see their data and start playing with it.
-- Our [Slack app](/blog/slack-app-beta) turns a message in a channel into a draft PR. You watch the agent's thought process in the thread, then go read the diff in the GitHub web UI before merging it. Usually there's nothing to change. But sometimes there's a bit you'd do differently, or context you left out of the prompt that would polish the output.
+- Our [Slack app](/blog/slack-app-beta) turns a message in a channel into a draft PR. You watch the agent's thought process in the thread, then go read the diff in the GitHub web UI before merging it.
 - [AgentMail](https://docs.agentmail.to/agent-onboarding)'s onboarding docs teach the agent to provision an inbox and key itself, no console required. Even there, a human UI is needed, and that UI is email: a six-digit code gets sent to a person, and until someone opens it and hands it over, the agent can only send mail to the address it signed up with.
 
 <CalloutBox icon="IconSparkles" title="Go build:" type="fyi">
 
-Build both front doors. For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have), a listing wherever agents go looking for connectors (the Claude and Codex app directories, for a start), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). For the human: where you start them depends on how they got there. If an agent set things up, they're landing in the middle of a process they never saw, so show them what got instrumented and what's missing. If they did it themselves, just point them at the next step.
+Build both front doors. 
+
+- For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have), a listing where agents look for connectors (like the Claude and Codex app directories), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). 
+
+- For the human: where you start them depends on how they got there. If an agent set things up, they're landing in the middle of a process they never saw, so show them what got instrumented and what's missing. If they did it themselves, just point them at the next step.
 
 </CalloutBox>
 
 ![Can't see without my UI](https://res.cloudinary.com/dmukukwp6/image/upload/cant_see_without_my_ui_e9008a850f.png)
 
-## 3. Watch what agents actually do
+## Watch what agents actually do
 
-Here's what's probably happening in your product right now. Agents are hitting your API rather than your front end, so pageviews and autocapture don't fire. What lands instead are server-side requests that look like any other integration. There's usually a user agent string in there somewhere, but nothing that says what the agent was trying to do, or whether it managed it. You can see the requests, but not the user. So when something breaks, you're guessing.
+Here's what's probably happening in your product right now. Agents are hitting your API rather than your front end, so pageviews and autocapture don't fire. Server-side requests that look like any other integration land instead. There's usually a user agent string somewhere, but nothing that says what the agent was trying to do, or whether it managed it. When something breaks, you're guessing.
 
-Agents also fail differently from human users. Human failure leaves marks all over the UI (rage clicks, abandoned forms), which is why [session recordings](/session-replay) are such a goldmine. An agent fails as an error category in a log: it invents a parameter and trips validation, hits a permission wall, times out, or hallucinates a tool that was never there. Sometimes it just gives up without saying so. Nothing touched the interface, so there's nothing for a replay to catch.
+Agents fail differently than humans. Human failure leaves marks all over the UI (rage clicks, abandoned forms), which is why [session recordings](/session-replay) are such a goldmine. An agent fails as an error category in a log: it invents a parameter, trips validation, hits a permission wall, times out, hallucinates a tool, or just gives up without saying so. Nothing touched the interface, so there's nothing for a replay to catch.
 
-[MCP Analytics](/docs/mcp-analytics) covers the agents turning up at your MCP server, and [AI observability](/docs/ai-engineering/observability) covers the ones you ship yourself. Every failure you find is a place your product is hard for an agent to use, and the most useful signal of all is the tool an agent reached for that you never built – a feature request, written by a robot. Last month, ours clustered close to 10 million tool calls from 31 different agent clients. Real people, running things like this:
+[MCP Analytics](/docs/mcp-analytics) covers the agents using your MCP server, and [AI Observability](/ai-observability) covers the ones you ship yourself. Every failure you find is a place your product is hard for an agent to use. The most useful signal are the tools an agent reached for that you never built – a feature request, written by a robot. Last month, ours clustered close to 10 million tool calls from 31 different agent clients. Real people, running things like this:
 
-- Wired PostHog into a text-message assistant so it pings them the moment a metric moves.
+- Wired PostHog to send a text message the moment a metric moves.
 - Shipped an A/B test on a "skip the intro" screen – feature flag, 50/50 split, and all.
 - Built an activation-to-paid funnel.
 - Triaged live production errors like expired magic links and missing auth sessions.
 
-What's missing from those examples is the PostHog UI. What's not missing is UI. Those 31 clients (Claude Code, Cursor, Cowork, Linear, Notion) all have a screen. A terminal is a UI. A chat window is a UI. [Slack is a UI](/blog/slack-app-beta). Your users are still looking at a screen, just not yours.
+What's missing is a not a UI, but the PostHog UI specifically. Those 31 clients like Claude Code, Cursor, Cowork, Linear, Notion all have a screen. A terminal is a UI. A chat window is a UI. [Slack is a UI](/blog/slack-app-beta). Your users are still looking at a screen, just not yours.
 
 ![MCP Analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png)
 
@@ -102,12 +111,12 @@ What's missing from those examples is the PostHog UI. What's not missing is UI. 
 
 **What this looks like:**
 
-- In June, Cloudflare's [Radar data](https://www.nbcnews.com/tech/tech-news/bot-web-traffic-overtaken-human-web-traffic-data-shows-rcna348522) showed automated requests overtaking human ones on HTML traffic for the first time, 57.5% to 42.5%, about 18 months earlier than its CEO had predicted. You can read that as the end of the screen if you like. I read it as a lot of people asking for things, then going somewhere to look at the answer.
+- In June, Cloudflare's [Radar data](https://www.nbcnews.com/tech/tech-news/bot-web-traffic-overtaken-human-web-traffic-data-shows-rcna348522) showed automated requests overtaking human ones on HTML traffic for the first time, 57.5% to 42.5%, about 18 months earlier than its CEO had predicted. You can read that as the end of the screen if you like. I read it as a lot of people asking for things, then agents going to look at the answer.
 - [Temporal](https://temporal.io/solutions/ai) records every step of an agent's run as a durable event history you can replay and inspect, so you can see exactly where a loop stalled or repeated itself.
 
 <CalloutBox icon="IconGraph" title="Go build:" type="fyi">
 
-Instrument agent traffic the way you already instrument humans: tag every call with the client it came from, then watch where agents retry or give up. And enjoy the irony, because the thing you build to watch a swarm of agents who never touch a UI is a dashboard. A UI. You can't hold a thousand silent agent runs in your head, so even here the answer is a screen for a human to read.
+Instrument agent traffic the way you already instrument humans: tag every call with the client it came from, then watch where agents retry or give up. And enjoy the irony, because the thing you built to watch a swarm of agents who never touch a UI is... a UI. You can't hold a thousand silent agent runs in your head, so even here the answer is a screen for a human to read.
 
 </CalloutBox>
 
@@ -115,11 +124,11 @@ Instrument agent traffic the way you already instrument humans: tag every call w
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/truman_show_3cb839fddf.jpeg" alt="The Truman Show: what we see vs what they see" />
 </div>
 
-## 4. Build an interface worth interacting with
+## Build an interface worth interacting with
 
-A good UI gives you a sense of state at a glance, the way a door handle tells you to push or pull (Danilo wrote a [whole thing](/newsletter/good-taste-great-products) on affordances). On a screen, that looks like a spinner that means *wait*, a greyed-out button that means *not yet*, or a red badge that means *look here!* As a human being, I take that in ten zillion times faster than I'd skim the equivalent wall of AI-generated text in a terminal.
+A good UI gives you a sense of state at a glance, the way a door handle tells you to push or pull (Danilo wrote a [whole thing](/newsletter/good-taste-great-products) on affordances). On a screen, that looks like a spinner that means *wait*, a greyed-out button that means *not yet*, or a red badge that means *look here!* As a human being, I take that in ten zillion times faster than I'd skim the equivalent wall of AI-generated text.
 
-That's what you want when you're checking an agent's work. Even if you do believe the UI is dead, and you won't build one for your product, someone still has to decide whether to ship what the agent produced, and that decision happens through some kind of interface.
+You want an interface when you're checking an agent's work. Even if you do believe the UI is dead, and you won't build one for your product, someone still has to decide whether to ship what the agent produced, and that decision happens through some kind of interface.
 
 That means if you're building something agent-shaped (and I think you [should be](/newsletter/2030-shaped-software)) you need to be fine with your UI mattering *less*, without it becoming obsolete. A good MCP lets your product exist wherever the user already is, instead of only where you built it. People still pay real money for a great experience, though, and that notable UX is often a UI that's easier to use, or looks better than other options (are you getting it now?).
 
@@ -137,7 +146,7 @@ Those are much better design problems than another login page.
 **What this looks like:**
 
 - Intercom's [Fin Operator](https://www.intercom.com/blog/introducing-operator/) tunes Fin for you, then hands the work back as a screen. Every change arrives as a proposal (their words: "Operator's version of a pull request"), a structured diff of what's changing and why, which you review, edit, and approve before it takes effect. The agent does the work. The human decides what ships.
-- Anthropic could have left Claude Code in the terminal. Instead it ships a desktop app, a web app, IDE extensions, and Cowork, all wrapping the same models in more interface. Some people love the CLI precisely because there's so little UI in the way, and others go straight for Cowork.
+- Anthropic could have left Claude Code in the terminal. Instead it shipped a desktop app, a web app, IDE extensions, and Cowork, all wrapping the same models in more interfaces. Some people love the CLI precisely because there's so little UI in the way, and others [go straight for Cowork](/blog/making-claude-cowork-actually-useful).
 - We're betting on [self-driving](/blog/what-if-your-product-built-itself), where agents run most of the loop themselves. That made the screen more important, not less. Nobody wants to watch an agent work; they want to see what it did. So [PostHog Desktop](/desktop) is where the outcomes land – bugs fixed, PRs merged – and where you approve them or take the wheel back.
 
 <CalloutBox icon="IconLaptop" title="Go build:" type="fyi">
@@ -150,7 +159,7 @@ Give up the screens agents made redundant, and use your MCP to put the product w
 
 Agents might be the primary users of software soon, by sheer volume. But by _meaning_? There's no agent without me. Text scrolls past and I skim it. A screen makes me stop and look. Looking (and clicking around a UI) is where I catch what the agent got wrong, and where I still feel like I'm holding the wheel.
 
-None of which means the plumbing doesn't count. Good products for agents really are, under the hood, a pile of Markdown, SQL, tools, and resources. But I'm a human living in a home, not a data center. So give me _and_ my agents a reason to use your thing, and you'll be in good shape.
+None of which means the plumbing doesn't count. Good products for agents really are a pile of Markdown, SQL, tools, and resources under the hood. But I'm a human living in a home, not a data center. So give me _and_ my agents a reason to use your thing, and you'll be in good shape.
 
 <div style="text-align: center;">
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/power_d5162ea4d2.jpg" alt="What gives people feelings of power" />
