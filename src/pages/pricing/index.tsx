@@ -11,7 +11,8 @@ import MoreOptions from 'components/Pricing/Page/MoreOptions'
 import CalculatorReveal from 'components/Pricing/Page/CalculatorReveal'
 import Philosophy from './philosophy'
 import PricingJourney from 'components/Pricing/Page/PricingJourney'
-import SelfDrivingPricing from 'components/Pricing/Page/SelfDrivingPricing'
+import Surfaces from 'components/Pricing/Page/Surfaces'
+import ShamelessCTA from 'components/Home/ShamelessCTA'
 
 /**
  * Canonical pricing page.
@@ -28,7 +29,6 @@ export default function Pricing(): JSX.Element {
             />
 
             <Hero />
-
             <SectionLayout id="free-tiers" className="not-prose">
                 <SectionHeader>
                     <h2 className="text-2xl mb-0">What you get for free, every month</h2>
@@ -37,6 +37,9 @@ export default function Pricing(): JSX.Element {
                     </p>
                 </SectionHeader>
                 <FreeTierTicker />
+                <div className="mt-3">
+                    <Surfaces />
+                </div>
             </SectionLayout>
 
             <SectionLayout id="plans" className="not-prose">
@@ -53,25 +56,15 @@ export default function Pricing(): JSX.Element {
                 <CustomerLogos />
             </SectionLayout>
 
-            <Philosophy />
-
             <SectionLayout id="more-options" className="not-prose">
                 <SectionHeader>
-                    <h2 className="text-2xl mb-0">Startups, bigger teams, and discounts</h2>
+                    <h2 className="text-2xl mb-0">Platform features, volume discounts, and onboarding help</h2>
                 </SectionHeader>
                 <MoreOptions />
                 <CalculatorReveal />
             </SectionLayout>
 
-            <SectionLayout id="self-driving" className="not-prose">
-                <SectionHeader>
-                    <h2 className="text-2xl mb-0">If you'd rather PostHog did the work</h2>
-                    <p className="text-[15px] text-secondary mb-0 mt-1">
-                        Self-driving is the one thing here that isn't billed on usage.
-                    </p>
-                </SectionHeader>
-                <SelfDrivingPricing />
-            </SectionLayout>
+            <Philosophy />
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-0 pb-6 border-b border-primary">Pricing FAQ</h2>
@@ -87,6 +80,19 @@ export default function Pricing(): JSX.Element {
                     </Link>
                     .
                 </p>
+            </SectionLayout>
+
+            <SectionLayout id="shameless-cta" className="mb-12 overflow-x-hidden">
+                <SectionHeader>
+                    <h2 className="text-2xl mb-0">Shameless CTA</h2>
+                </SectionHeader>
+                {/* The "haha bizzniss" hedgehog is positioned against the CTA card and pokes ~50px
+                    above where this section's rule lands, so the border used to cut through it.
+                    Padding the whole block down moves the doodle with it and clears the rule by
+                    about 10px. Tuned by eye — if the artwork is ever swapped, re-check it. */}
+                <div className="pt-0 md:pt-16">
+                    <ShamelessCTA />
+                </div>
             </SectionLayout>
         </ReaderView>
     )

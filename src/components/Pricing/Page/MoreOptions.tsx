@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconHandMoney, IconRocket, IconShield } from '@posthog/icons'
+import { IconHandMoney, IconHeadset, IconShield } from '@posthog/icons'
 import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'components/Link'
 import { PlatformPackageList, PlatformFeatureTable } from 'components/Pricing/Platform/PlatformPackageComparison'
@@ -9,12 +9,15 @@ const PANEL_ID = 'platform-packages-panel'
 const ctaClasses = 'text-[15px] font-semibold text-red dark:text-yellow'
 
 /**
- * The three escape hatches for people the standard flow doesn't fit: startups
- * who want credits, larger teams who need platform features, and anyone big
- * enough to want a human on the phone.
+ * The three escape hatches for people the standard flow doesn't fit: larger
+ * teams who need platform features, anyone big enough to want a discount, and
+ * anyone who'd rather be walked through setup.
  *
  * These replace the cut Enterprise plan column. Kept as quiet cards rather than
  * plan tiers so they don't compete with the single signup CTA above.
+ *
+ * Platform packages leads because it's the one with an answer on this page —
+ * its CTA expands the comparison in place, and the other two send you elsewhere.
  */
 export default function MoreOptions(): JSX.Element {
     const [open, setOpen] = useState(false)
@@ -39,14 +42,6 @@ export default function MoreOptions(): JSX.Element {
     // `url`; an `onClick` that calls `preventDefault` is how one opts out of navigating.
     const options = [
         {
-            icon: <IconRocket className="size-6 text-blue" />,
-            title: 'PostHog for Startups',
-            description:
-                'Raised less than $5M and under 2 years old? Get $50,000 in credits, plus free tickets to events and merch.',
-            cta: 'Check eligibility',
-            url: '/startups',
-        },
-        {
             icon: <IconShield className="size-6 text-purple" />,
             title: 'Platform packages',
             description:
@@ -66,6 +61,13 @@ export default function MoreOptions(): JSX.Element {
                 'Annual plans and volume discounts are available. Talk to a technical account exec – no SDRs, no discovery calls.',
             cta: 'Talk to a human',
             url: '/talk-to-a-human',
+        },
+        {
+            icon: <IconHeadset className="size-6 text-blue" />,
+            title: 'Book an onboarding call',
+            description: 'Get 30 minutes with a PostHog expert for $80 – they’ll get your setup right the first time.',
+            cta: 'Book a call',
+            url: '/merch?product=30-min-onboarding-consultation',
         },
     ]
 
@@ -111,16 +113,17 @@ export default function MoreOptions(): JSX.Element {
                     family rather than page content. `mt-4` matches the grid gap and also leaves
                     the notch below room to poke out without `overflow-hidden` clipping it. */}
                 <div className="relative mt-4 border border-primary rounded-md p-5 bg-light dark:bg-accent">
-                    {/* Points at the card that opened this. A square rotated 45° with two borders
-                        makes the arrowhead; its fill covers the panel's own top border, so the
-                        edge reads as opening into the notch. The `-top-[7px]` is fussy by a pixel
-                        either way: lower and the arms' ends poke through the panel edge as stray
-                        diagonals, higher and they lift off it. Centered because the middle column
-                        of an evenly-gapped 3-up grid is centered too, which stops being true once
-                        the cards stack, hence `@2xl` only. */}
+                    {/* Points at the card that opened this — the first one. A square rotated 45°
+                        with two borders makes the arrowhead; its fill covers the panel's own top
+                        border, so the edge reads as opening into the notch. The `-top-[7px]` is
+                        fussy by a pixel either way: lower and the arms' ends poke through the
+                        panel edge as stray diagonals, higher and they lift off it. The `left`
+                        lands on the center of column 1 of a 3-up `gap-4` grid — three equal
+                        columns share `100% - 2rem` of the row, so that center is a sixth of it.
+                        Only true while the cards are side by side, hence `@2xl` only. */}
                     <div
                         aria-hidden
-                        className="hidden @2xl:block absolute left-1/2 -top-[7px] size-3 -translate-x-1/2 rotate-45 border-l border-t border-primary bg-light dark:bg-accent"
+                        className="hidden @2xl:block absolute left-[calc((100%-2rem)/6)] -top-[7px] size-3 -translate-x-1/2 rotate-45 border-l border-t border-primary bg-light dark:bg-accent"
                     />
                     {hasOpened && (
                         <>

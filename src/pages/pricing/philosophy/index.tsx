@@ -31,7 +31,6 @@ const PricingPhilosophy = (): JSX.Element => {
             </div>
 
             <SectionHeader>
-                <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
                 <h3 className="text-xl">Our pricing is designed to make you happy</h3>
             </SectionHeader>
 

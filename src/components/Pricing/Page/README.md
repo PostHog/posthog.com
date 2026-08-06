@@ -31,13 +31,15 @@ Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/
 ## Page order
 
 1. `Hero`
-2. `FreeTierTicker` — the free allowances, auto-scrolling in one row
+2. `FreeTierTicker` — the free allowances, auto-scrolling in one row, with `Surfaces` as a one-line footnote under it
 3. `PricingJourney` — the two billing stages, as a journey
 4. `CustomerLogos`
-5. Philosophy note
-6. `MoreOptions` — three cards, then `CalculatorReveal` as a quiet footnote in the same section
-7. `SelfDrivingPricing` — the one exception to usage-based billing
-8. FAQ
+5. `MoreOptions` — three cards, then `CalculatorReveal` as a quiet footnote in the same section
+6. Philosophy note
+7. FAQ
+8. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
+
+`MoreOptions` comes before the philosophy note, not after: the note ends on a signup CTA, and following that with three "actually, maybe you need something else" cards undoes it. The note is the last word on the page before the FAQ.
 
 `CustomerLogos` sits after `PricingJourney` rather than next to the free-tier row on purpose — see its section below. The calculator is intentionally late on the page (above the FAQ) so first-time visitors hit free-tier reassurance before an estimator.
 
@@ -123,7 +125,7 @@ The copy is intentionally limited to four commitments: no loss leaders, cheapest
 
 Wraps `Test/Calculator` so the full estimator is **hidden until asked for**, and kept as the quietest thing on the page: one sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator below it, and swaps to `Hide the calculator` once open.
 
-**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/index.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Startups, bigger teams, and discounts") doesn't name the calculator; footnotes don't need to be in the title.
+**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/index.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Platform features, volume discounts, and onboarding help") doesn't name the calculator; footnotes don't need to be in the title.
 
 **The understatement is the whole point, and it should survive future edits.** An estimator muddies this page's frame: it turns "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So this deliberately has no card, no fill, no border, and no heading. Earlier versions gave it a tinted, bordered card with an `<h2>` and a CTA-styled button, which made it a visual peer of the three `MoreOptions` cards — a fourth card in that family, which is exactly the prominence it shouldn't have. Other earlier versions gave it its own section and then faked attachment with a negative margin; putting it inside `more-options` makes that relationship structural.
 
@@ -150,9 +152,13 @@ Three implementation details are load-bearing:
 
 ### `MoreOptions`
 
-Three quiet cards — Startups (`/startups`), Platform packages (`/platform-packages`), and enterprise volume (`/talk-to-a-human`).
+Three quiet cards, in this order — Platform packages (`/platform-packages`), enterprise volume (`/talk-to-a-human`), and a paid onboarding call (`/merch?product=30-min-onboarding-consultation`).
 
 These replace the cut Enterprise plan column. Styled as low-key cards rather than plan tiers so they don't compete with the single signup CTA above them.
+
+**Platform packages leads** because it's the only one of the three that answers itself on this page — its CTA expands the comparison in place, and the other two send you somewhere else. The order also runs cheapest-commitment first.
+
+**The startups card was cut, not moved.** `/startups` is its own program with its own page, and the $50k credits offer answers a different question than the three sections above it. The onboarding call took its slot: same shape of escape hatch (something outside the standard flow), but one that's about getting set up rather than about the bill. It's $80 via the merch store — see `ProfessionalServices`, which sells the same 30 minutes.
 
 **"See what's included" expands in place instead of navigating.** "What's in a platform package" is a question you ask *while* comparing these three cards, so answering it on a separate page costs you your place — you have to come back to finish comparing. The other two cards are genuine destinations and still open as pages.
 
@@ -161,7 +167,7 @@ These replace the cut Enterprise plan column. Styled as low-key cards rather tha
 **Two things tie the panel to its card,** because full width below a grid otherwise reads as a new section:
 
 1. **It's styled as one of the cards** — same fill, border, radius, and padding. An early version separated it with a full-width `border-t`, which was actively wrong: that's how this page divides *sections*, so it said "unrelated" as loudly as possible.
-2. **A caret notch points up at the middle card.** A `size-3` square rotated 45° with `border-l border-t`, offset `-top-1.5`; its fill covers the panel's own top border, so the edge reads as opening into the notch. It's `left-1/2` because the middle column of an evenly-gapped 3-up grid is centered too — which stops being true when the cards stack, so the notch is `@2xl` only.
+2. **A caret notch points up at the first card.** A `size-3` square rotated 45° with `border-l border-t`, offset `-top-[7px]`; its fill covers the panel's own top border, so the edge reads as opening into the notch. Its `left` is `calc((100%-2rem)/6)` — three equal columns share `100% - 2rem` of a `gap-4` row, so the center of column 1 is a sixth of that. **If the cards are ever reordered, this has to move with the platform packages card** (it was `left-1/2` while that card was in the middle). Only true side by side, so the notch is `@2xl` only.
 
 **The cards' borders never change** — no hover state, and no active state on the open card. The notch carries the connection on its own, so the row stays still.
 
@@ -175,15 +181,27 @@ Same expand mechanics as `CalculatorReveal`: a Framer Motion `height: 0 ↔ auto
 
 The page renders `CalculatorReveal` immediately after this component, still inside the same `SectionLayout` — see that section. The cards component itself doesn't know about the calculator.
 
-### `SelfDrivingPricing`
+### `Surfaces`
 
-How [self-driving](/self-driving) is billed: models at cost plus about 27%, not per pull request and not per seat. One sentence for the rule, then a table of the four surfaces you can run it from.
+One line under the ticker — *Used across any of these products: Web, Slack, MCP* — with an icon each and **no links**.
 
-**It's last before the FAQ because it's an exception, not a pitch.** Everything above tells one story — start free, add a card when you outgrow it — and this is the one thing that doesn't follow it. Placing it earlier means interrupting that story to explain a billing model most visitors will never touch. Placing it here means anyone who's still reading is the sort of person who wants it.
+**It replaced a whole `SelfDrivingPricing` section** (deleted; see git history for the component). That section explained how self-driving is billed — models at cost plus ~27%, across four surfaces in a table — and it sat between the philosophy note and the FAQ. Two problems: it was the only thing on the page that didn't follow the page's one story (start free, add a card when you outgrow it), so it read as a second pitch at the exact point the page should be finishing; and most visitors will never touch that billing model. The part worth keeping was the *list of surfaces*, which belongs next to the allowances it applies to.
 
-**The four surfaces are a table, not cards.** The version this came from used four cards, which put a feature grid a few hundred pixels below `MoreOptions`' three cards — the same component twice, at two different meanings. The table also does more work: its "who bills the tokens" column *is* the footnote that used to sit beneath those cards ("the first three run tokens through PostHog… with MCP you pay your provider directly"). The one thing that differs between the four surfaces became the thing you scan for, rather than a sentence you have to hold in your head while reading a grid.
+**So it's a footnote to `FreeTierTicker`, not a section.** "Which of these can I use my free tier from?" is a question about the row directly above it.
 
-PostHog Web is the only surface with no link — it's just `app.posthog.com`, and a signup CTA inside a billing table would be the wrong ask in the wrong place. The other three are underlined but **not** recoloured to `text-red dark:text-yellow` like the page's prose links: three red words down the first column would fight the table, and the underline alone is enough to distinguish them from Web.
+**Nothing here links out,** deliberately. These are labels on the allowances, not three more destinations — the top of the page has one CTA and this shouldn't compete with it. That also keeps it from turning back into a section.
+
+Wording follows the [glossary](/manual/glossary)'s taxonomy, where Web, Slack, MCP, CLI, and Code are PostHog's *products* and analytics, replay, flags, and so on are its *tools*. Three of the five are listed because they're the three most people will use; the icons are `IconBrowser` (`@posthog/icons`) plus `IconSlack` and `IconMCP` from `OSIcons`.
+
+### `Home/ShamelessCTA` (reused)
+
+The homepage's boxed-software CTA — the PostHog Web "digital download", the fake cart banner, the Kim K sticker — dropped in below the FAQ, wrapped in a `SectionLayout` with a `Shameless CTA` heading to match the homepage's own.
+
+**It's after the FAQ because almost nobody gets there,** which is the point: it costs the people actually deciding nothing, and it's a reward for anyone who read the whole page. This is also why the README's "no closing CTA" note is gone — the closing CTA is a joke, not a fourth ask.
+
+Rendered as `<ShamelessCTA />` (which passes `headline={false} card` to `Home/CTA` and supplies its own subtitle), so the copy and layout can't drift from the homepage's. The section needs `overflow-x-hidden` like the homepage's wrapper does — the cart banner animates in from `-100vw` and the "haha bizzniss" doodle hangs off the top right.
+
+**The block is wrapped in `pt-16`, and that padding is load-bearing.** The doodle is positioned `top-0 -translate-y-[60%]` against the CTA card, so it reaches well above the intro paragraph — about 50px past where this section's `SectionHeader` rule sits. Without the padding the border draws straight through the hedgehog, which reads as a bug. The padding moves the doodle down with the rest of the block and clears the rule by roughly 10px. It's tuned by eye against the current artwork; if the SVG is ever swapped for one with a different aspect ratio, re-check it. (The homepage doesn't need this — it renders the component under a plain heading with no rule to collide with.)
 
 ## Conventions
 
@@ -196,4 +214,4 @@ PostHog Web is the only surface with no link — it's just `app.posthog.com`, an
 
 - **The hero art has no `srcset`.** It's delivered at a fixed 800px wide for a column that's at most 320px. `f_auto` keeps the payload small, but responsive variants are the next lever if needed.
 - **The 97% stat** in `Hero` came from the original design mockup. Verify the real number before publishing this change.
-- **No closing CTA.** The page ends on the FAQ. `components/Home/CTA` (the "PostHog Web / digital download" box) was left off because the hero, `PricingJourney`, and the philosophy note already carry three CTAs. Easy to add back at the bottom of the page if the drop-off says otherwise.
+- **The closing CTA is a fourth ask.** The hero, `PricingJourney`, and the philosophy note already carry three, and `Home/ShamelessCTA` now adds one below the FAQ. It's deliberately the joke version and it's past the fold that matters, but if the numbers say the FAQ is where people leave, this is the first thing to look at.
