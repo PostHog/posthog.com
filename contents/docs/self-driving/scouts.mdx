@@ -21,7 +21,7 @@ A scout runs on a schedule. Each run, it looks at one slice of your data, decide
 
 - **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
 - **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
-- **Record a measurement.** When the job is scoring or classifying rather than surfacing, a scout can record structured, schema-checked measurements as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric).
+- **Record structured data.** When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric).
 
 Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
 
@@ -130,6 +130,8 @@ ORDER BY day DESC
 ```
 
 Reach for this when the thing you want to measure is real but too subjective for a query to compute: whether a support reply resolved the question, whether a generated summary sticks to its sources, whether a session looks like a genuine evaluation or a bot. The scout's judgment is the measuring instrument, and the schedule turns it into a time series.
+
+Judging is the headline use, but the channel itself is general: a record is any structured object matching the schema, so a scout can turn anything it reads into events. Extract typed fields from free text, like the product areas and requested features in a support channel. Snapshot state nothing else captures, like a vendor's API health or your own fleet's configuration, so its history becomes chartable. Or land a number from a system that has no SDK. If a scout can see it, the schema can shape it, and it arrives as events.
 
 A few things to know:
 
