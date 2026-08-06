@@ -38,7 +38,7 @@ Both feed the same inbox, and most customers will likely end up running both.
 
 A signal source will ingest every single item. Turn on Error Tracking as a source and *every* qualifying error gets processed continuously. That specificity is useful when you want something comprehensive, and predictable.
 
-A scout trades some of that determinism for judgement and customization. It runs on a schedule rather than continuously, it explores rather than following a fixed stream, and it decides matches criteria on its own – which means it can weigh, rank, cluster, and stay quiet, but also means it's making a call each run and won't be exhaustive by design. That's the right trade when the volume is unmanageable, the interesting thing spans several surfaces, or "worth knowing" is a matter of opinion that only the customer can define.
+A scout trades some of that determinism for flexibility and customization. It runs on a schedule rather than continuously, and explores rather than following a fixed stream. Like a signal source, a scout weighs, ranks, and clusters data points, the key difference is that each scout retains memory of its previous runs, and can make a judgement call whether new findings are "worth knowing" (sometimes a run will return nothing). 
 
 | | **Signal sources** | **Scouts** |
 |---|---|---|
