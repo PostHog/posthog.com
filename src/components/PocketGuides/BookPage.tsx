@@ -69,7 +69,9 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             title={entry.title}
             showTitle={false}
             showAddressBar={false}
-            headerBarOptions={['showBack', 'showForward']}
+            // No header bar: like the docs reader, the page is the whole window and the OS
+            // window buttons float over it. Empty options keep HeaderBar from rendering.
+            headerBarOptions={[]}
             // fullScreen: the book fits the window and its page owns its scroll.
             fullScreen
             // The window itself is the page – no desk. The viewport selector re-pins the height fullScreen drops.

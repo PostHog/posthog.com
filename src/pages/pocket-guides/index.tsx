@@ -59,7 +59,6 @@ export default function PocketGuidesPage(): JSX.Element {
                 title="Pocket guides"
                 showTitle={false}
                 showAddressBar={false}
-                headerBarOptions={['showBack', 'showForward']}
                 // Explorer's <main> paints opaque bg-primary over the window shell's translucent
                 // material; transparent here lets the standard glass show behind the shelf.
                 className="[&_main]:bg-transparent"
