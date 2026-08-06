@@ -60,8 +60,6 @@ export default function PocketGuidesPage(): JSX.Element {
                 showTitle={false}
                 showAddressBar={false}
                 headerBarOptions={['showBack', 'showForward']}
-                // Explorer's <main> hardcodes bg-primary; the desk is recoloured from here.
-                className="[&_main]:bg-accent dark:[&_main]:bg-accent-dark"
             >
                 {/* not-prose: Explorer wraps children in prose, which underlines every cover link. */}
                 <div className="@container not-prose p-2 @xl:p-6">
