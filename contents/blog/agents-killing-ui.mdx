@@ -122,22 +122,18 @@ Instrument agent traffic the way you already instrument humans: tag every call w
 
 ## Build an interface worth interacting with
 
-If you're building something agent-shaped (and I think you [should be](/newsletter/2030-shaped-software)) your product's UI might matter *less* to some users – but that doesn't make it obsolete. A good MCP puts wherever the user already is, instead of only where you built it. That's reach. It's not quality: people still pay real money for a great experience, and with software, that's often just a UI that's better to use, or better to look at.
+If you're building something agent-shaped (and I think you [should be](/newsletter/2030-shaped-software)) your product's UI might matter *less* to some users – but that doesn't make it obsolete. A good MCP puts uour product wherever the user already is, instead of only where you built it. That's reach. It's not quality: people still pay real money for a great experience, and with software, that's often just a UI that's better to use, or better to look at.
+
+Agents just change what there is to design for, and that's the fun part, honestly. The screens worth building now do different work. You're no longer designing a login screen, you're designing for moments like:
+
+- **Approval** – the agent has the change ready and needs a yes. Can the human tell what they're saying yes to in two seconds?
+- **Review** – not a summary of what changed. The change itself. A diff beats a paragraph.
+- **Undo** – when the agent gets it wrong, there needs to be a way back.
+- **Legibility** – a feed you can scan to instantly tell which actions came from a colleague and which came from a bot.
+- **Orchestration** – if five agents are running at once, do you watch them on one screen, or open five chats?
+- **Interruption** – when you need to steer the agent while it's still moving.
 
 A good UI gives you a sense of state at a glance, the way a door handle tells you to push or pull (Danilo wrote a [whole thing](/newsletter/good-taste-great-products) on affordances). On a screen, that looks like a spinner that means *wait*, a greyed-out button that means *not yet*, or a red badge that means *look here!* As a human being, I take that in ten zillion times faster than I'd skim the equivalent wall of AI-generated text.
-
-And when it comes to agents there's so much to dwesign fore.
-
-Agents change what there is to design for, and that's the fun part, honestly. The screens worth building now do different work:
-
-- **Approval.** The agent has the change ready and needs a yes. Can the human tell what they're saying yes to in two seconds?
-- **Review.** Not a summary of what changed. The change itself. A diff beats a paragraph.
-- **Undo.** When the agent gets it wrong, there needs to be a way back.
-- **Legibility.** A feed you can scan to instantly tell which actions came from a colleague and which came from a bot.
-- **Orchestration.** If five agents are running at once, do you watch them on one screen, or open five chats?
-- **Interruption.** When you need to steer the agent while it's still moving.
-
-Those are much better design problems than another login page.
 
 **What this looks like:**
 
@@ -146,7 +142,7 @@ Those are much better design problems than another login page.
 
 <CalloutBox icon="IconLaptop" title="Go build" type="fyi">
 
-Give up the screens agents made redundant, and use your MCP to put the product wherever the user already is. Then build the decision surfaces properly: show the diff, not a summary of the diff. Put an undo next to anything an agent can do on its own. Label the things an agent did, so nobody has to work out who changed what. Show state visually, because a person reads a screen far quicker than a wall of agent output. And make the surfaces agents never touch as delightful as you possibly can, because that's the part someone actually chose you for.
+Deprioritize the screens that agents make redundant, and treat your MCP as a product. Then build the decision surfaces properly: show the diff, not a summary of the diff. Put an undo next to anything an agent can do on its own. Label the things an agent did, so nobody has to work out who changed what. Show state visually, because a human understands color and shapes far quicker than text. And please, make the UI that agents _don't_ touch as delightful as you possibly can, because that's the part someone actually chose you for.
 
 </CalloutBox>
 
@@ -154,7 +150,7 @@ Give up the screens agents made redundant, and use your MCP to put the product w
 
 Agents might be the primary users of software soon, by sheer volume. But by _meaning_? There's no agent without me. Text scrolls past and I skim it. A screen makes me stop and look. Looking (and clicking around a UI) is where I catch what the agent got wrong, and where I still feel like I'm holding the wheel.
 
-None of which means the plumbing doesn't count. Good products for agents really are a pile of Markdown, SQL, tools, and resources under the hood. But I'm a human living in a home, not a data center. So give me _and_ my agents a reason to use your thing, and you'll be in good shape.
+None of which means the plumbing doesn't count. Good products for agents are, after all, are a pile of Markdown, SQL, tools, and resources under the hood. But I'm a human living in a home, not a data center. So give me _and_ my agents a reason to use your thing, and you'll be in good shape.
 
 <div style="text-align: center;">
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/power_d5162ea4d2.jpg" alt="What gives people feelings of power" />
