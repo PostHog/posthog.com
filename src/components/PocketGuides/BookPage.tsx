@@ -20,7 +20,6 @@ import {
     useBookPages,
     usePageTurnKeys,
 } from './bookModel'
-import { volumeById } from '../../constants/pocketGuides'
 
 /** The page body: the reader's wrapper interleaves each figure after the block citing it. */
 function MdxBody({ body, entry, pages }: { body: string; entry: BookPageEntry; pages: BookPageEntry[] }): JSX.Element {
@@ -42,7 +41,6 @@ interface BookPageProps {
 
 /** Any page of a pocket guide: the layout is fixed, every word comes from the MDX. */
 export default function BookPage({ slug, body }: BookPageProps): JSX.Element | null {
-    const volume = volumeById('self-driving')
     const pages = useBookPages()
     const { fontSize, stepFontSize } = useBookFontSize()
 
@@ -74,13 +72,12 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             headerBarOptions={['showBack', 'showForward']}
             // fullScreen: the book fits the window and its page owns its scroll.
             fullScreen
-            // Explorer's main hardcodes bg-primary; the viewport selector re-pins the height fullScreen drops.
-            className="[&_main]:bg-accent dark:[&_main]:bg-accent-dark [&_.app-scroll-viewport>div>div]:h-full"
+            // The window itself is the page – no desk. The viewport selector re-pins the height fullScreen drops.
+            className="[&_.app-scroll-viewport>div>div]:h-full"
         >
-            <div className="not-prose @container h-full min-h-0 p-2 @xl:p-6">
+            <div className="not-prose @container h-full min-h-0">
                 <BookReader
                     head={{ title: entry.title, page: entry.page, total }}
-                    token={volume?.token ?? 'orange'}
                     prev={prevTurn}
                     next={nextTurn}
                     tabs={bookTabs(pages, url)}
