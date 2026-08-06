@@ -3016,7 +3016,7 @@ article.reader-view-content-container:has(.quest-sidebar) {
     #app-container:not([data-window-expanded])
         div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]),
     #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/pricing']:not([data-fixed-size]) {
+        div[data-app='AppWindow'][data-windowed][data-path='/pricing/redesign']:not([data-fixed-size]) {
         max-width: 1200px;
     }
 }

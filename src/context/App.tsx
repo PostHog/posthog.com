@@ -844,7 +844,7 @@ const appSettings: AppSettings = {
         },
     },
     // Free-tier allowances, opened from the pricing page. Not a route — see
-    // components/Pricing/Page/FreeTierModal.
+    // components/Pricing/Redesign/FreeTierModal.
     'pricing-free-tier': {
         size: {
             min: {

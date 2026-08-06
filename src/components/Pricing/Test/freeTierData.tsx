@@ -6,7 +6,7 @@ import * as Icons from '@posthog/icons'
  *
  * Extracted from `FreeTier` so it can be rendered in more than one shape — the
  * auto-scrolling ticker on the pricing pages and the plain list in
- * `Page/FreeTierModal` — without the two drifting. Anything that reads as
+ * `Redesign/FreeTierModal` — without the two drifting. Anything that reads as
  * presentation (icon sizes, tooltip vs. inline note) is left to the renderer.
  */
 export interface FreeTierProduct {

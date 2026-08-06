@@ -1,10 +1,12 @@
-# Pricing page
+# Pricing page redesign
 
-Components for the canonical pricing page, live at **`/pricing`** (`src/pages/pricing/index.tsx`).
+Components for the redesigned pricing page, live at **`/pricing/redesign`** (`src/pages/pricing/redesign.tsx`).
+
+`/pricing` still serves the previous page (`PricingExperiment` and friends). The two are deliberately kept as separate routes so they can be run against each other, and share only `pages/pricing/philosophy`, `Pricing/FAQs`, and `Test/Sections` — everything in this folder belongs to this variant alone, so editing it can't move `/pricing`.
 
 ## Why
 
-The old page tried to serve everyone at once and ended up making the visitor do the sorting. The current page targets two audiences in order:
+The existing page tries to serve everyone at once and ends up making the visitor do the sorting. This one targets two audiences in order:
 
 1. **People trying something out** — usually small, don't know what they want yet. They need to be assured of zero risk and easy setup. Answered by the hero, the free-tier grid, and a single no-card CTA.
 2. **People sizing PostHog up for scale** — already large or getting there. They need a credible estimate and a human. Answered by the calculator, the FAQ, and `MoreOptions`.
@@ -117,15 +119,17 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 ### `pages/pricing/philosophy`
 
-James's pricing note is shared by `/pricing` and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
+James's pricing note is shared by `/pricing`, `/pricing/redesign`, and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
 
 The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
+
+**This is the one piece both variants render**, so a copy edit here changes `/pricing` too. That's intentional — the note is a company position, not a design — but it does mean the philosophy card isn't a fair thing to vary in a test. If it needs to differ per variant, split it into a `Redesign/Philosophy` first.
 
 ### `CalculatorReveal`
 
 Wraps `Test/Calculator` so the full estimator is **hidden until asked for**, and kept as the quietest thing on the page: one sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator below it, and swaps to `Hide the calculator` once open.
 
-**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/index.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Platform features, volume discounts, and onboarding help") doesn't name the calculator; footnotes don't need to be in the title.
+**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/redesign.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Platform features, volume discounts, and onboarding help") doesn't name the calculator; footnotes don't need to be in the title.
 
 **The understatement is the whole point, and it should survive future edits.** An estimator muddies this page's frame: it turns "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So this deliberately has no card, no fill, no border, and no heading. Earlier versions gave it a tinted, bordered card with an `<h2>` and a CTA-styled button, which made it a visual peer of the three `MoreOptions` cards — a fourth card in that family, which is exactly the prominence it shouldn't have. Other earlier versions gave it its own section and then faked attachment with a negative margin; putting it inside `more-options` makes that relationship structural.
 
