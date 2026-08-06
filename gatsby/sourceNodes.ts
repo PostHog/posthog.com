@@ -935,52 +935,52 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const githubHeaders: HeadersInit = { Authorization: `token ${process.env.GITHUB_API_KEY}` }
 
-        const fetchIssuesPromise = fetch(
-            'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
-            {
-                headers: githubHeaders,
+        const fetchGithubJson = async (url: string) => {
+            const res = await fetch(url, { headers: githubHeaders })
+            const data = await res.json()
+            if (!res.ok) {
+                throw new Error(
+                    `GitHub request failed (${res.status}) ${url}: ${data?.message || JSON.stringify(data)}`
+                )
             }
-        ).then((res) => res.json())
+            return data
+        }
 
-        const fetchPullsPromise = fetch(
-            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
-            {
-                headers: githubHeaders,
+        const fetchGithubLinkCount = async (url: string) => {
+            const res = await fetch(url, { headers: githubHeaders })
+            if (!res.ok) {
+                const data = await res.json().catch(() => null)
+                throw new Error(
+                    `GitHub request failed (${res.status}) ${url}: ${data?.message || JSON.stringify(data)}`
+                )
             }
-        ).then((res) => res.json())
-
-        const fetchIntegrationsPromise = fetch(
-            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
-            { headers: githubHeaders }
-        ).then((res) => res.json())
+            const link = parseLinkHeader(res.headers.get('link'))
+            const number = link?.last?.page
+            return number ? Number(number) : null
+        }
 
         const createGitHubStatsNode = async (owner, repo) => {
-            const [repoStats, contributors, commits] = await Promise.all([
-                fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-                    headers: githubHeaders,
-                }).then((res) => res.json()),
-                fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
-                    headers: githubHeaders,
-                }).then((res) => {
-                    const link = parseLinkHeader(res.headers.get('link'))
-                    const number = link?.last?.page
-                    return number && Number(number)
-                }),
-                fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
-                    headers: githubHeaders,
-                }).then((res) => {
-                    const link = parseLinkHeader(res.headers.get('link'))
-                    const number = link?.last?.page
-                    return number && Number(number)
-                }),
-            ])
-            const { stargazers_count, forks_count } = repoStats
+            const repoStats = await fetchGithubJson(`https://api.github.com/repos/${owner}/${repo}`)
+            if (typeof repoStats.stargazers_count !== 'number') {
+                throw new Error(
+                    `GitHubStats for ${owner}/${repo} missing stargazers_count: ${
+                        repoStats?.message || JSON.stringify(repoStats)
+                    }`
+                )
+            }
+
+            const contributors = await fetchGithubLinkCount(
+                `https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`
+            )
+            const commits = await fetchGithubLinkCount(
+                `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`
+            )
 
             const data = {
                 owner,
                 repo,
-                stars: stargazers_count,
-                forks: forks_count,
+                stars: repoStats.stargazers_count,
+                forks: repoStats.forks_count,
                 commits,
                 contributors,
             }
@@ -998,14 +998,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         }
 
-        const [postHogIssues, postHogPulls, integrations] = await Promise.all([
-            fetchIssuesPromise,
-            fetchPullsPromise,
-            fetchIntegrationsPromise,
-            createGitHubStatsNode('posthog', 'posthog'),
-            createGitHubStatsNode('posthog', 'posthog.com'),
-        ]).then(([issues, pulls, integrations]) => [issues, pulls, integrations])
-
+        const postHogIssues = await fetchGithubJson(
+            'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5'
+        )
+        if (!Array.isArray(postHogIssues)) {
+            throw new Error(
+                `PostHog issues sourcing expected an array: ${postHogIssues?.message || JSON.stringify(postHogIssues)}`
+            )
+        }
         postHogIssues.forEach((issue) => {
             const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
             const data = {
@@ -1040,6 +1040,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
+        const postHogPulls = await fetchGithubJson(
+            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5'
+        )
+        if (!Array.isArray(postHogPulls)) {
+            throw new Error(
+                `PostHog pulls sourcing expected an array: ${postHogPulls?.message || JSON.stringify(postHogPulls)}`
+            )
+        }
         postHogPulls.forEach((issue) => {
             const { html_url, title, number, user, labels, body, updated_at } = issue
             const data = {
@@ -1069,6 +1077,14 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
+        const integrations = await fetchGithubJson(
+            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json'
+        )
+        if (!Array.isArray(integrations)) {
+            throw new Error(
+                `Integrations sourcing expected an array: ${integrations?.message || JSON.stringify(integrations)}`
+            )
+        }
         integrations.forEach((integration) => {
             const { name, url, ...other } = integration
             const node = {
@@ -1085,6 +1101,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(node)
         })
+
+        await createGitHubStatsNode('posthog', 'posthog')
+        await createGitHubStatsNode('posthog', 'posthog.com')
 
         const extractIntroSection = (markdown: string): string => {
             const headingMatch = markdown.match(/^#{1,2}\s+/m)
