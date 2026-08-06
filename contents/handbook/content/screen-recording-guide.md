@@ -22,7 +22,7 @@ You like cookies? Then watch this video. Plus, you’ll learn about how to prope
 
 Screen Studio is free to record and edit with, but **exporting now requires a paid subscription**. If you just need to hand a `.screenstudio` project to the YouTube team (see step 7), the free version is enough and you don't need to upgrade.
 
-If you need to export the video yourself – for example to embed it in docs or the handbook – go ahead and buy a subscription and expense it. Put it on your Brex virtual card under your own User Limit, as described in [spending money](/handbook/people/spending-money).
+If you need to export the video yourself – for example to embed it in docs or the handbook – you will need to upgrade.
 
 ## 2. Set Recording Settings
 
