@@ -20,7 +20,6 @@ function avatarColorClass(id: number | string | undefined): string {
 type Props = {
     questions: Omit<StrapiResult<QuestionData[]>, 'meta'>
     isLoading: boolean
-    currentPage?: { url: string; title: string }
     forumUrl: string
 }
 
@@ -29,7 +28,7 @@ const MAX_VISIBLE = 4
 const AvatarStack = ({ profiles }: { profiles: any[] }) => {
     const visible = profiles.slice(0, MAX_VISIBLE)
     const overflow = Math.max(profiles.length - visible.length, 0)
-    const sizing = 'size-7 @md/reader-content:size-8'
+    const sizing = 'size-6 @md/reader-content:size-7'
 
     return (
         <div className="flex shrink-0 items-center">
@@ -69,7 +68,7 @@ const AvatarStack = ({ profiles }: { profiles: any[] }) => {
     )
 }
 
-const Row = ({ question, currentPage }: { question: QuestionData; currentPage?: { url: string; title: string } }) => {
+const Row = ({ question }: { question: QuestionData }) => {
     const {
         attributes: { profile, subject, permalink, replies, resolved, activeAt },
     } = question as any
@@ -104,7 +103,7 @@ const Row = ({ question, currentPage }: { question: QuestionData; currentPage?: 
                 <div className="flex items-center gap-4 @md/reader-content:gap-5">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-start gap-2">
-                            <h3 className="m-0 !text-sm @md/reader-content:!text-base @2xl/reader-content:!text-lg font-semibold leading-snug text-primary line-clamp-2 group-hover:underline">
+                            <h3 className="m-0 !text-[15px] font-semibold leading-snug text-primary line-clamp-2 group-hover:underline">
                                 {subject}
                             </h3>
                             {resolved && (
@@ -140,7 +139,7 @@ const SkeletonRow = () => (
                     {[0, 1, 2].map((i) => (
                         <div
                             key={i}
-                            className={`size-7 @md/reader-content:size-8 rounded-full ring-2 ring-white dark:ring-dark bg-accent animate-pulse ${
+                            className={`size-6 @md/reader-content:size-7 rounded-full ring-2 ring-white dark:ring-dark bg-accent animate-pulse ${
                                 i === 0 ? '' : '-ml-2 @md/reader-content:-ml-2.5'
                             }`}
                         />
@@ -151,13 +150,13 @@ const SkeletonRow = () => (
     </li>
 )
 
-const CommunityQuestionsList = ({ questions, isLoading, currentPage, forumUrl }: Props) => {
+const CommunityQuestionsList = ({ questions, isLoading, forumUrl }: Props) => {
     const items = (questions?.data ?? []).filter(Boolean)
 
     if (isLoading && items.length === 0) {
         return (
             <ul className="m-0 p-0 list-none">
-                {Array.from({ length: 5 }).map((_, i) => (
+                {Array.from({ length: 3 }).map((_, i) => (
                     <SkeletonRow key={i} />
                 ))}
             </ul>
@@ -183,7 +182,7 @@ const CommunityQuestionsList = ({ questions, isLoading, currentPage, forumUrl }:
     return (
         <ul className="m-0 p-0 list-none">
             {items.map((question: any) => (
-                <Row key={question.id} question={question} currentPage={currentPage} />
+                <Row key={question.id} question={question} />
             ))}
         </ul>
     )
