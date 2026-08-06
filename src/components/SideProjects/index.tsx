@@ -383,33 +383,37 @@ export const slugifyProjectTitle = (title: string): string =>
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
 
+// Serialize a form value as a single-quoted YAML scalar so characters like ':' or '#'
+// can't break the frontmatter, and keyword-like values ('true', '[work]') aren't coerced
+const yamlScalar = (value: string): string => `'${value.replace(/'/g, "''")}'`
+
 export const buildSideProjectMdx = (values: SideProjectFormValues): string => {
     const tags = values.tags
         .split(',')
         .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, '-'))
         .filter(Boolean)
 
-    const lines = ['---', `title: ${values.title.trim()}`]
+    const lines = ['---', `title: ${yamlScalar(values.title.trim())}`]
     if (values.description.trim()) {
-        lines.push(`description: ${values.description.trim()}`)
+        lines.push(`description: ${yamlScalar(values.description.trim())}`)
     }
     // Added date drives the "newest first" ordering in the gallery
     lines.push(`date: ${new Date().toISOString().slice(0, 10)}`)
     if (values.projectThumbnail.trim()) {
-        lines.push(`projectThumbnail: ${values.projectThumbnail.trim()}`)
+        lines.push(`projectThumbnail: ${yamlScalar(values.projectThumbnail.trim())}`)
     }
-    lines.push(`projectAuthor: ${values.projectAuthor.trim()}`)
+    lines.push(`projectAuthor: ${yamlScalar(values.projectAuthor.trim())}`)
     if (values.authorGitHub.trim()) {
-        lines.push(`authorGitHub: ${values.authorGitHub.trim()}`)
+        lines.push(`authorGitHub: ${yamlScalar(values.authorGitHub.trim())}`)
     }
     if (values.githubUrl.trim()) {
-        lines.push(`githubUrl: ${values.githubUrl.trim()}`)
+        lines.push(`githubUrl: ${yamlScalar(values.githubUrl.trim())}`)
     }
     if (values.liveUrl.trim()) {
-        lines.push(`liveUrl: ${values.liveUrl.trim()}`)
+        lines.push(`liveUrl: ${yamlScalar(values.liveUrl.trim())}`)
     }
     if (tags.length > 0) {
-        lines.push('filters:', '  tags:', ...tags.map((tag) => `    - ${tag}`))
+        lines.push('filters:', '  tags:', ...tags.map((tag) => `    - ${yamlScalar(tag)}`))
     }
     lines.push('---', '', values.description.trim(), '')
     return lines.join('\n')
@@ -458,8 +462,14 @@ export const SideProjectForm = ({
     const setValue = (key: keyof SideProjectFormValues) => (event: React.ChangeEvent<HTMLInputElement>) =>
         setValues((prev) => ({ ...prev, [key]: event.target.value }))
 
+    // A card links to liveUrl || githubUrl, so a project without either would be unclickable
     const canSubmit =
-        Boolean(values.title.trim() && values.description.trim() && values.projectAuthor.trim()) && !submitting
+        Boolean(
+            values.title.trim() &&
+                values.description.trim() &&
+                values.projectAuthor.trim() &&
+                (values.githubUrl.trim() || values.liveUrl.trim())
+        ) && !submitting
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
@@ -468,15 +478,28 @@ export const SideProjectForm = ({
         }
         setSubmitting(true)
         setError(null)
+        // Open the tab synchronously while the user gesture is still live – popup blockers
+        // reject window.open after the upload's await. Navigated once the URL is ready.
+        const popup = window.open('about:blank', '_blank')
+        if (popup) {
+            popup.opener = null
+        }
         try {
             let thumbnailUrl = values.projectThumbnail
             if (featuredImage?.file) {
                 const uploaded = await uploadImage(featuredImage.file, await getJwt())
                 thumbnailUrl = uploaded?.url || thumbnailUrl
             }
-            window.open(getNewProjectUrl({ ...values, projectThumbnail: thumbnailUrl }), '_blank', 'noopener')
-            setSubmitted(true)
+            const url = getNewProjectUrl({ ...values, projectThumbnail: thumbnailUrl })
+            if (popup) {
+                popup.location.href = url
+                setSubmitted(true)
+            } else {
+                // Popup blocked: same-tab navigation so the submission isn't silently lost
+                window.location.href = url
+            }
         } catch (uploadError) {
+            popup?.close()
             setError(
                 uploadError instanceof Error
                     ? uploadError.message
@@ -531,6 +554,7 @@ export const SideProjectForm = ({
                 name="githubUrl"
                 direction="column"
                 type="url"
+                description="Give at least one of the repo or live URL – it's what the gallery card links to"
                 value={values.githubUrl}
                 onChange={setValue('githubUrl')}
             />

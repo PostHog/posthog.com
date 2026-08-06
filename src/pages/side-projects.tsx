@@ -268,7 +268,8 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
         const search = searchQuery.trim().toLowerCase()
         return projects.filter((project: ProjectNode) => {
             const { title, description, projectAuthor, filters } = project.frontmatter
-            const tags = normalizeTags(filters?.tags)
+            const rawTags = filters?.tags || []
+            const tags = normalizeTags(rawTags)
             if (tagFilter && !tags.includes(tagFilter)) {
                 return false
             }
@@ -276,7 +277,11 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                 return false
             }
             if (search) {
-                const haystack = [title, description, projectAuthor, ...tags].filter(Boolean).join(' ').toLowerCase()
+                // Search both canonical and raw tags so aliased one-offs (e.g. dagster -> data) stay findable
+                const haystack = [title, description, projectAuthor, ...tags, ...rawTags]
+                    .filter(Boolean)
+                    .join(' ')
+                    .toLowerCase()
                 return haystack.includes(search)
             }
             return true
@@ -294,7 +299,15 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
 
     const hasActiveFilters = Boolean(searchQuery.trim() || tagFilter || creatorFilter)
     const visibleTags = showAllTags ? rankedTags : rankedTags.slice(0, VISIBLE_TAG_COUNT)
-    const showAlumni = alumniExpanded || hasActiveFilters
+
+    // Auto-expand the alumni section when filters activate so matches aren't hidden,
+    // while keeping the toggle functional – the user can still collapse it explicitly
+    useEffect(() => {
+        if (hasActiveFilters) {
+            setAlumniExpanded(true)
+        }
+    }, [hasActiveFilters])
+    const showAlumni = alumniExpanded
 
     return (
         <>
