@@ -37,6 +37,10 @@ export default function TemplatesPage(): JSX.Element {
                     <Link to="/docs/workflows" state={{ newWindow: true }}>
                         workflows
                     </Link>
+                    . Looking for self-driving scouts? They live in the{' '}
+                    <Link to="/pocket-guides" state={{ newWindow: true }}>
+                        pocket guides
+                    </Link>
                     .
                 </p>
                 <TemplatesLibrary />

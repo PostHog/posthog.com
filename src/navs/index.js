@@ -1867,6 +1867,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/assets',
             },
             {
+                name: 'Pocket guides',
+                url: '/handbook/engineering/posthog-com/pocket-guides',
+            },
+            {
                 name: 'Merch store',
                 url: '/handbook/engineering/posthog-com/merch-store',
             },
@@ -2388,6 +2392,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                    },
                 },
                 {
                     name: 'Pricing',
