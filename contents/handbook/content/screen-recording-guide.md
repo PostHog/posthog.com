@@ -91,7 +91,7 @@ Drag that file into the [“ScreenStudio Projects” Google Drive](https://drive
 
 If your recording is going into docs or the handbook rather than through the YouTube team, export it from Screen Studio (this needs a paid plan – see step 1), then upload it to Cloudinary to get a URL you can embed.
 
-You don't need a Cloudinary login. Sign in on posthog.com, then choose **Upload media** under **Moderator tools** in the account menu, upload the file, and copy the URL. See [uploading assets with Cloudinary](/handbook/engineering/posthog-com/assets) for the full walkthrough, and [videos in markdown](/handbook/engineering/posthog-com/markdown#videos) for how to embed the URL once you have it.
+You don't need a Cloudinary login. Sign in on PostHog.com, then choose **Upload media** under **Moderator tools** in the account menu, upload the file, and copy the URL. See [uploading assets with Cloudinary](/handbook/engineering/posthog-com/assets) for the full walkthrough, and [videos in Markdown](/handbook/engineering/posthog-com/markdown#videos) for how to embed the URL once you have it.
 
 Keep exports under 20MB so Cloudinary accepts them – for anything longer, use [Wistia](/handbook/engineering/posthog-com/markdown#embedding-wistia-videos) instead.
 
