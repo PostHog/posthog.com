@@ -3,6 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconInfo } from '@posthog/icons'
 
+import { usePostHog } from 'posthog-js/react'
+
 import Tooltip from 'components/RadixUI/Tooltip'
 import { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
 
@@ -26,17 +28,24 @@ export interface ReportAnatomyProps {
 /** A numbered annotation: appears on figure hover, opens its gloss on hover or tap. */
 export function AnatomyMarker({ n, label, gloss }: { n: number; label: string; gloss: string }): JSX.Element {
     const [open, setOpen] = React.useState(false)
+    const posthog = usePostHog()
+    const onOpenChange = (next: boolean) => {
+        setOpen(next)
+        if (next) {
+            posthog?.capture('pocket_guide_interaction', { kind: 'marker_gloss', marker: label })
+        }
+    }
     return (
         <Tooltip
             delay={100}
             sideOffset={4}
             open={open}
-            onOpenChange={setOpen}
+            onOpenChange={onOpenChange}
             contentClassName="max-w-[16rem] whitespace-normal text-left text-sm leading-snug"
             trigger={
                 <button
                     type="button"
-                    onClick={() => setOpen((current) => !current)}
+                    onClick={() => onOpenChange(!open)}
                     aria-label={`${n}. ${label} – ${gloss}`}
                     className="anatomy-marker inline-flex size-4 shrink-0 cursor-help select-none items-center justify-center rounded-full bg-orange align-middle font-bold leading-none text-white opacity-0 transition-opacity duration-200 focus-visible:opacity-100 group-hover/anatomy:opacity-100"
                 >

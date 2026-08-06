@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 
 import { IconMinus, IconPlus } from '@posthog/icons'
 
@@ -9,6 +10,7 @@ import { ScoutSpec } from './types'
 /** Clipped with `max-height`, not `focusOnLines`, which drops lines the .md mirror needs. */
 export default function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element {
     const [expanded, setExpanded] = useState(false)
+    const posthog = usePostHog()
     const code = (scout.raw ?? '').trim()
 
     return (
@@ -38,7 +40,12 @@ export default function ScoutFile({ scout }: { scout: ScoutSpec }): JSX.Element 
             {/* Plus/minus, as RadixUI/Accordion does – the label alone didn't read as a control. */}
             <button
                 type="button"
-                onClick={() => setExpanded(!expanded)}
+                onClick={() => {
+                    if (!expanded) {
+                        posthog?.capture('pocket_guide_interaction', { kind: 'scout_file_expanded' })
+                    }
+                    setExpanded(!expanded)
+                }}
                 className="mt-2 flex items-center gap-1.5 font-sans text-sm font-semibold text-secondary hover:text-primary"
             >
                 {expanded ? (
