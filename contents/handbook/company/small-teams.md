@@ -92,7 +92,7 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 
 **Typically, you must give at least 2-3 weeks notice of a product launch and you should reach out directly to marketing team leads if this is not possible.**
 
--   [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
+-   [ ] [Create a new launch plan issue](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md)
 -   [ ] Continue to communicate timelines / updates in the Slack channel created
 
 ## Leading quarterly goal setting
