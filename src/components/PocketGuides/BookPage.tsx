@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 import Explorer from 'components/Explorer'
-import Link from 'components/Link'
 
 import { EnableScoutBar } from 'components/SelfDrivingInbox/EnableScout'
 
-import BookSpread from './BookSpread'
-import { EntryProvider, bookMdxComponents, singleModeComponents } from './bookComponents'
+import BookReader from './BookReader'
+import { EntryProvider, bookMdxComponents } from './bookComponents'
 import {
     BookPageEntry,
     FONT_SIZES,
@@ -20,63 +19,18 @@ import {
     useBookFontSize,
     useBookPages,
     usePageTurnKeys,
-    useTurnDirection,
 } from './bookModel'
 import { volumeById } from '../../constants/pocketGuides'
 
-/** The page body, rendered once; `single` swaps in the figure-interleaving wrapper. */
-function MdxBody({
-    body,
-    entry,
-    pages,
-    turn,
-    single,
-}: {
-    body: string
-    entry: BookPageEntry
-    pages: BookPageEntry[]
-    turn: 'forward' | 'backward'
-    single: boolean
-}): JSX.Element {
+/** The page body: the reader's wrapper interleaves each figure after the block citing it. */
+function MdxBody({ body, entry, pages }: { body: string; entry: BookPageEntry; pages: BookPageEntry[] }): JSX.Element {
     return (
-        <EntryProvider value={{ entry, pages, turn }}>
-            <MDXProvider components={single ? singleModeComponents : bookMdxComponents}>
+        <EntryProvider value={{ entry, pages }}>
+            <MDXProvider components={bookMdxComponents}>
                 <MDXRenderer>{body}</MDXRenderer>
             </MDXProvider>
         </EntryProvider>
     )
-}
-
-// Single-page mode below this container width: the @4xl gate (896) plus desk padding, so the
-// JS switch fires before CSS could ever stack the spread figure-first.
-const SINGLE_BELOW = 944
-
-// Module scope: carries the mode across page turns so a phone never flashes the spread.
-let lastKnownSingle = false
-
-function useSinglePage(): { containerRef: (element: HTMLDivElement | null) => void; single: boolean } {
-    const [single, setSingleState] = useState(lastKnownSingle)
-    const setSingle = (value: boolean) => {
-        lastKnownSingle = value
-        setSingleState(value)
-    }
-    const observerRef = useRef<ResizeObserver | null>(null)
-
-    // Callback ref: the page can render null for a frame mid-navigation, which an effect would miss.
-    const containerRef = useCallback((element: HTMLDivElement | null) => {
-        observerRef.current?.disconnect()
-        observerRef.current = null
-        if (!element || typeof ResizeObserver === 'undefined') {
-            return
-        }
-        const observer = new ResizeObserver(([observed]) => setSingle(observed.contentRect.width < SINGLE_BELOW))
-        observer.observe(element)
-        observerRef.current = observer
-    }, [])
-
-    useEffect(() => () => observerRef.current?.disconnect(), [])
-
-    return { containerRef, single }
 }
 
 interface BookPageProps {
@@ -100,8 +54,6 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
     const total = pageCount(pages)
 
     usePageTurnKeys(previous ? previous.url : SHELF.url, next?.url)
-    const turnDirection = useTurnDirection(index)
-    const { containerRef, single } = useSinglePage()
 
     if (!entry) {
         return null
@@ -120,15 +72,14 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
             showTitle={false}
             showAddressBar={false}
             headerBarOptions={['showBack', 'showForward']}
-            // fullScreen: the book fits the window and its pages own their scroll.
+            // fullScreen: the book fits the window and its page owns its scroll.
             fullScreen
             // Explorer's main hardcodes bg-primary; the viewport selector re-pins the height fullScreen drops.
             className="[&_main]:bg-accent dark:[&_main]:bg-accent-dark [&_.app-scroll-viewport>div>div]:h-full"
         >
-            <div ref={containerRef} className="not-prose @container h-full min-h-0 p-2 @xl:p-6">
-                <BookSpread
-                    single={single}
-                    singleHead={{ title: entry.title, page: entry.page, total }}
+            <div className="not-prose @container h-full min-h-0 p-2 @xl:p-6">
+                <BookReader
+                    head={{ title: entry.title, page: entry.page, total }}
                     token={volume?.token ?? 'orange'}
                     prev={prevTurn}
                     next={nextTurn}
@@ -137,49 +88,6 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                     fontSize={fontSize}
                     onFontSize={stepFontSize}
                     fontSizes={FONT_SIZES}
-                    heads={{
-                        left: (
-                            <>
-                                <span className="truncate">Pocket guide to self-driving</span>
-                                <span className="shrink-0">Vol. {volume?.volume ?? 1}</span>
-                            </>
-                        ),
-                        right: (
-                            <>
-                                <span className="truncate">{entry.title}</span>
-                                {entry.page && <span className="shrink-0 tabular-nums">p. {entry.page}</span>}
-                            </>
-                        ),
-                    }}
-                    folios={{
-                        left: (
-                            <>
-                                <Link to={prevTurn.url} className="min-w-0 truncate text-secondary hover:text-primary">
-                                    ‹ {prevTurn.label}
-                                </Link>
-                                <span className="shrink-0">PostHog</span>
-                            </>
-                        ),
-                        right: (
-                            <>
-                                {entry.page ? (
-                                    <span className="shrink-0 tabular-nums">
-                                        p. {entry.page} / {total}
-                                    </span>
-                                ) : (
-                                    <span />
-                                )}
-                                {nextTurn && (
-                                    <Link
-                                        to={nextTurn.url}
-                                        className="min-w-0 truncate text-right text-secondary hover:text-primary"
-                                    >
-                                        {nextTurn.label} ›
-                                    </Link>
-                                )}
-                            </>
-                        ),
-                    }}
                     // Pinned, so a reader convinced early can act without scrolling to the end.
                     actionBar={
                         entry.template?.scout ? (
@@ -187,8 +95,8 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                         ) : undefined
                     }
                 >
-                    <MdxBody body={body} entry={entry} pages={pages} turn={turnDirection} single={single} />
-                </BookSpread>
+                    <MdxBody body={body} entry={entry} pages={pages} />
+                </BookReader>
             </div>
         </Explorer>
     )

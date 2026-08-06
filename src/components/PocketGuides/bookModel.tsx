@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 
-import { BookTab } from 'components/PocketGuides/BookSpread'
+import { BookTab } from 'components/PocketGuides/BookReader'
 import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
 import { InboxTemplate } from 'components/SelfDrivingInbox/types'
 
@@ -128,18 +128,6 @@ export function useBookFontSize(): { fontSize: number; stepFontSize: (delta: num
     }, [])
 
     return { fontSize, stepFontSize }
-}
-
-/** Which way the reader turned. Module scope survives the per-route remount; cold loads open forward. */
-let lastPosition: number | null = null
-
-export function useTurnDirection(position: number): 'forward' | 'backward' {
-    const [direction] = useState<'forward' | 'backward'>(() => {
-        const previous = lastPosition
-        lastPosition = position
-        return previous !== null && position < previous ? 'backward' : 'forward'
-    })
-    return direction
 }
 
 /** Turn the page with the arrow keys, the way a reader would expect a book to behave. */

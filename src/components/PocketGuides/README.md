@@ -49,18 +49,15 @@ Prose, **markdown**, and <Term name="scout" /> definitions.
 </RightPage>
 ```
 
-`<LeftPage>` is the left page, `<RightPage>` the right. The body renders once per side behind a gate, so
-each page scrolls independently while the file stays one readable document. Content outside either
-wrapper lands on the right page.
-
-**Left page = figures, right page = text is a convention, not a rule** – both take arbitrary content, and a
-future volume can mix them however its material wants.
+`<LeftPage>` holds a page's figures, `<RightPage>` its prose – authoring markers, not layout.
+The reader interleaves them at render time (see below). Content outside either wrapper renders
+after the prose.
 
 ### Components available in a body
 
 | Component | What it does |
 |---|---|
-| `<LeftPage>` / `<RightPage>` | Which page the content lands on |
+| `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
 | `<Eyebrow>` | The small line above a title-page heading |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
@@ -74,16 +71,17 @@ future volume can mix them however its material wants.
 
 Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
 
-### The single-page read (mobile and narrow windows)
+### How the reader lays a page out
 
-Below ~944px of container width the spread becomes a plain one-column page: no book furniture,
-just the content with each figure embedded after the first block that cites it via `<SeeFig>`,
-plus prev/next/All-guides links and the pinned scout bar. This is automatic – authors still
-write `<LeftPage>` figures and `<RightPage>` prose, and `SinglePageWrapper` (bookComponents.tsx)
-re-orders the compiled elements by their `mdxType` and `n` props at render time. Two authoring
-consequences: a figure nobody cites prints at the end of the page, and the hover markers plus
-their hint line are hidden in this mode (there is no hover on touch), so a figure's caption has
-to carry it alone.
+Every page is one linear scroll. `ReaderWrapper` (bookComponents.tsx) re-orders the compiled
+elements by their `mdxType` and `n` props at render time: each figure is embedded after the
+first block that cites it via `<SeeFig>`, and a figure nobody cites prints at the end of the
+page. One exception: a figure-less page authored as two pages – the volume's front matter –
+renders `<LeftPage>` and `<RightPage>` as two columns at reading widths.
+
+The hover markers and their hint line show at reading widths only – below ~672px of container
+width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
+on phones.
 
 ### One MDX trap worth knowing
 
@@ -111,28 +109,28 @@ skips everything under `contents/pocket-guides/` (see the guard at the top of
 paragraph again, check that guard first – and note Gatsby caches compiled MDX, so the fix only
 shows after the `.mdx` file itself changes (or `pnpm clean`).
 
-## The book UI
+## The reader UI
 
-- **`BookSpread`** – the volume's color spine down the left edge (matching its shelf cover), two
-  pages joined at a gutter shadow, running heads, folios, click-to-turn page margins, and index
-  tabs pinned left with a "Return to bookshelf" link. Below `@4xl` the pages stack in DOM order.
-- **The book fits the window; pages scroll internally.** Like paper in a frame: the desk never
-  scrolls, each page owns its own scroll. (A strict no-scroll fit-or-split rule was tried and
-  reverted – splitting just moved the overflow around.)
+- **`BookReader`** – an e-reader page: the volume's color spine down the left edge (matching its
+  shelf cover), an orientation bar (shelf link, prev/next turns, title + page position, a
+  Contents popover, an Aa reading-size control), click-to-turn page margins, and prev/All
+  guides/next links pinned at the page's foot. On phones the frame drops away and it's a plain
+  page.
+- **The page fits the window and owns its scroll.** The desk never scrolls.
 - **One model drives everything.** `bookModel.tsx`'s `useBookPages()` reads every page's
-  `bookOrder` and produces the reading order; folios, tabs, contents lines, and page turns all
-  derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
-  inserting a chapter renumbers what follows without anyone editing a number by hand.
-- **Turning pages** – the margin turn zones, the folio links, and the left/right arrow keys all
-  walk the same sequence.
+  `bookOrder` and produces the reading order; the bar, contents, and page turns all derive from
+  it. Front matter is unnumbered; arabic numbering starts at the page after it, so inserting a
+  chapter renumbers what follows without anyone editing a number by hand.
+- **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
+  left/right arrow keys all walk the same sequence.
 
 ## Files
 
 | File | Responsibility |
 |---|---|
 | `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
-| `BookSpread.tsx` | The open-book frame: spine, two pages, gutter, heads, folios, turn zones, tabs |
-| `BookPage.tsx` | Renders one MDX page into the spread, once per side |
+| `BookReader.tsx` | The e-reader page: spine, orientation bar, popovers, turn zones, foot nav |
+| `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | The MDX vocabulary above, plus prose styling |
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |

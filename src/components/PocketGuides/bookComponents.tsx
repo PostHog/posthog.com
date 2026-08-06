@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
 
@@ -24,8 +23,6 @@ import { BookPageEntry } from './bookModel'
 interface BookEntry {
     entry: BookPageEntry
     pages: BookPageEntry[]
-    /** Which way the reader turned to get here, so each page can flip on its own. */
-    turn?: 'forward' | 'backward'
 }
 const EntryContext = createContext<BookEntry | null>(null)
 export const EntryProvider = EntryContext.Provider
@@ -38,32 +35,13 @@ function useTemplate(): InboxTemplate | undefined {
     return useEntry()?.entry.template
 }
 
-/** One page of the spread: only the moving leaf flips, hinged at the gutter side. */
-function PageColumn({ side, children }: { side: 'left' | 'right'; children: React.ReactNode }): JSX.Element {
-    const reducedMotion = useReducedMotion()
-    const turn = useEntry()?.turn ?? 'forward'
-    const moving = (turn === 'forward') === (side === 'right')
-    const animate = moving && !reducedMotion
-
-    return (
-        <motion.div
-            // The right page resets the counter that numbers its h2s.
-            className={`min-w-0 flex-1 px-5 py-6 @4xl:px-11 ${side === 'right' ? '[counter-reset:book-section]' : ''}`}
-            style={{ transformOrigin: side === 'right' ? 'left center' : 'right center' }}
-            initial={animate ? { rotateY: side === 'right' ? -75 : 75, opacity: 0.2 } : false}
-            animate={{ rotateY: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-        >
-            {children}
-        </motion.div>
-    )
-}
-
-/** The left page: the figures, in the order the sections opposite cite them. */
-const LeftPage = ({ children }: { children: React.ReactNode }) => <PageColumn side="left">{children}</PageColumn>
-
-/** The right page: the reading. Title, intro, then the sections. */
-const RightPage = ({ children }: { children: React.ReactNode }) => <PageColumn side="right">{children}</PageColumn>
+/**
+ * Authoring markers, not layout: `<LeftPage>` holds a page's figures, `<RightPage>` its prose.
+ * The reader's wrapper consumes both by `mdxType` and interleaves them – these components only
+ * render if something bypasses the wrapper, so they pass their children through unstyled.
+ */
+const LeftPage = ({ children }: { children: React.ReactNode }) => <>{children}</>
+const RightPage = ({ children }: { children: React.ReactNode }) => <>{children}</>
 
 /** Deep-walk an element tree collecting the figure numbers its <SeeFig> cues cite. */
 function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
@@ -82,10 +60,10 @@ function collectCitedFigures(node: React.ReactNode, found: Set<number>): void {
 }
 
 /**
- * The single-page read: as the MDX `wrapper` it re-orders the compiled LeftPage/RightPage trees
- * (matched by `mdxType` and `n`) so each figure follows the first block citing it.
+ * The reader: as the MDX `wrapper` it re-orders the compiled LeftPage/RightPage trees (matched
+ * by `mdxType` and `n`) so each figure follows the first block citing it.
  */
-function SinglePageWrapper({ children }: { children: React.ReactNode }): JSX.Element {
+function ReaderWrapper({ children }: { children: React.ReactNode }): JSX.Element {
     // Non-figure left-page content (the front matter's title block) leads the column.
     const preface: React.ReactNode[] = []
     const figures = new Map<number, React.ReactNode>()
@@ -120,7 +98,22 @@ function SinglePageWrapper({ children }: { children: React.ReactNode }): JSX.Ele
     })
 
     const emitted = new Set<number>()
-    const stream: React.ReactNode[] = [...preface]
+    const stream: React.ReactNode[] = []
+
+    // A figure-less page authored as two prose pages – the volume's front matter – keeps its
+    // two-page character as two columns at reading widths, instead of one tall stack.
+    if (figures.size === 0 && preface.length > 0 && prose.length > 0) {
+        stream.push(
+            <div key="front-matter" className="@3xl:grid @3xl:grid-cols-2 @3xl:items-start @3xl:gap-12">
+                <div>{preface}</div>
+                <div>{prose}</div>
+            </div>
+        )
+        prose = []
+    } else {
+        stream.push(...preface)
+    }
+
     for (const block of prose) {
         stream.push(block)
         const cited = new Set<number>()
@@ -141,7 +134,7 @@ function SinglePageWrapper({ children }: { children: React.ReactNode }): JSX.Ele
 
     return (
         // No hover on touch: markers and the hover hint are hidden in the single-page read.
-        <div className="px-5 py-6 [counter-reset:book-section] [&_.anatomy-hint]:hidden [&_.anatomy-marker]:hidden">
+        <div className="px-5 py-6 [counter-reset:book-section] @xl:px-12 @xl:py-10 [&_.anatomy-hint]:hidden [&_.anatomy-marker]:hidden @2xl:[&_.anatomy-hint]:inline-flex @2xl:[&_.anatomy-marker]:inline-flex">
             {React.Children.toArray(stream)}
         </div>
     )
@@ -439,6 +432,7 @@ function SeeAlso({ children }: { children: React.ReactNode }): JSX.Element {
 
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const bookMdxComponents = {
+    wrapper: ReaderWrapper,
     LeftPage,
     SeeFig,
     RightPage,
@@ -487,10 +481,4 @@ export const bookMdxComponents = {
     ),
     a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
-}
-
-/** The vocabulary plus the single-page wrapper that interleaves figures into the prose. */
-export const singleModeComponents = {
-    ...bookMdxComponents,
-    wrapper: SinglePageWrapper,
 }
