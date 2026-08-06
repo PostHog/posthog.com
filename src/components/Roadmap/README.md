@@ -54,7 +54,7 @@ Cards and idea prompts share one right-side drawer contained by the Editor surfa
 
 The drawer animates only when it opens from a closed state or closes. Switching directly between features or between a feature and the pitch form replaces the drawer content without replaying the animation. Framer Motion uses a non-overshooting right-edge tween and respects reduced-motion preferences. The drawer creates an isolated, opaque paint layer so accelerated team imagery cannot bleed through it while it moves.
 
-The drawer is non-modal. Clicking another feature or idea card replaces its content without closing the shell or replaying the animation. Clicking elsewhere inside the roadmap's Editor surface closes it; clicks within the drawer itself do not. Escape remains disabled, and the standard `OSButton` window close control always dismisses it. This behavior uses one Editor-scoped click listener plus `data-roadmap-item` and `data-roadmap-drawer` markers—do not add a scrim or restore modal outside-click handling.
+The drawer is non-modal. Clicking another feature or idea card replaces its content without closing the shell or replaying the animation. Clicking elsewhere inside the roadmap's Editor surface closes it; clicks within the drawer itself do not. Escape remains disabled, and the standard `OSButton` window close control always dismisses it. This behavior uses one Editor-scoped click listener plus `data-roadmap-item` and `data-roadmap-drawer` markers – do not add a scrim or restore modal outside-click handling.
 
 The drawer contains the full description, documentation link, linked small team, complete avatar roster with tooltips, and the stage-specific action.
 
