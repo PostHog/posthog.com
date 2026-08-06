@@ -4,7 +4,14 @@ import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
-import { Creator, getEditProjectUrl, useCreatorProfiles, type SideProjectFrontmatter } from 'components/SideProjects'
+import {
+    Creator,
+    SideProjectGraphic,
+    findCreatorProfile,
+    getEditProjectUrl,
+    useCreatorProfiles,
+    type SideProjectFrontmatter,
+} from 'components/SideProjects'
 import { TreeMenu } from 'components/TreeMenu'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -31,8 +38,18 @@ type SideProjectData = {
 export default function SideProject({ data }: { data: SideProjectData }): JSX.Element {
     const { pageData, sideProjects } = data
     const { body, excerpt } = pageData
-    const { title, description, featuredImage, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
-        pageData.frontmatter
+    const {
+        title,
+        description,
+        featuredImage,
+        projectThumbnail,
+        projectAuthor,
+        authorGitHub,
+        teamLink,
+        githubUrl,
+        liveUrl,
+        filters,
+    } = pageData.frontmatter
     const profiles = useCreatorProfiles()
     const { isModerator } = useUser()
 
@@ -141,11 +158,32 @@ export default function SideProject({ data }: { data: SideProjectData }): JSX.El
                         </div>
                     </header>
 
-                    {featuredImage && (
-                        <div className="not-prose mb-8 overflow-hidden rounded border border-primary">
+                    <div className="not-prose mb-8 overflow-hidden rounded-md border border-primary">
+                        {featuredImage?.childImageSharp ? (
                             <GatsbyImage image={getImage(featuredImage)} alt={title} />
-                        </div>
-                    )}
+                        ) : projectThumbnail ? (
+                            <img src={projectThumbnail} alt={title} className="w-full object-cover" />
+                        ) : (
+                            (() => {
+                                const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
+                                return (
+                                    <SideProjectGraphic
+                                        title={title}
+                                        creatorName={projectAuthor}
+                                        creatorRole={profile?.companyRole}
+                                        avatarUrl={
+                                            profile?.avatar?.url ||
+                                            profile?.avatar?.formats?.thumbnail?.url ||
+                                            (authorGitHub
+                                                ? `https://github.com/${authorGitHub}.png?size=256`
+                                                : undefined)
+                                        }
+                                        color={profile?.color}
+                                    />
+                                )
+                            })()
+                        )}
+                    </div>
 
                     <MDXProvider components={shortcodes}>
                         <MDXRenderer>{body}</MDXRenderer>
@@ -172,6 +210,7 @@ export const query = graphql`
             frontmatter {
                 title
                 description
+                projectThumbnail
                 projectAuthor
                 authorGitHub
                 teamLink

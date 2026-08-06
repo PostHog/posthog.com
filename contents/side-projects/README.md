@@ -4,7 +4,7 @@ This folder contains PostHog team side projects displayed in the gallery at `/si
 
 ## Adding your side project
 
-The easy way, if you're a PostHog team member: sign in to your community profile, open [/side-projects](https://posthog.com/side-projects), and click **Add a project**. The form prefills the MDX file on GitHub – committing it there opens the pull request for you. An **Edit** button on each project page works the same way for updates.
+The easy way, if you're a PostHog team member: sign in to your community profile, open [/side-projects](https://posthog.com/side-projects), and click **Add a project**. You can upload a featured image right in the form, and it prefills the MDX file on GitHub – committing it there opens the pull request for you. An **Edit** button on each project page works the same way for updates.
 
 Or by hand:
 
@@ -40,11 +40,11 @@ filters:
 
 ### Optional fields
 
-- **projectThumbnail**: URL for gallery card image (YouTube thumbnails, GitHub raw URLs, or Cloudinary URLs work well)
+- **projectThumbnail**: URL for the gallery card image (YouTube thumbnails, GitHub raw URLs, or Cloudinary URLs work well). Without one, the gallery generates card art from your project title and community profile
 - **featuredImage**: Larger image shown on the detail page
 - **authorGitHub**: Your GitHub username (fallback avatar and profile link)
 - **teamLink**: Link to your PostHog team page
-- **githubUrl**: Link to the source code (also used as a thumbnail fallback via the repo's social image)
+- **githubUrl**: Link to the source code
 - **liveUrl**: Link to a live demo
 
 ## Thumbnail options

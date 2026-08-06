@@ -1,39 +1,22 @@
-import Explorer from 'components/Explorer'
+import Editor from 'components/Editor'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { OSInput, OSSelect } from 'components/OSForm'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
-import { Creator, SideProjectForm, useCreatorProfiles, type SideProjectFrontmatter } from 'components/SideProjects'
+import {
+    Creator,
+    SideProjectForm,
+    SideProjectGraphic,
+    findCreatorProfile,
+    useCreatorProfiles,
+    type SideProjectFrontmatter,
+} from 'components/SideProjects'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useMemo, useState } from 'react'
 
-// Hedgehog placeholder images for projects without thumbnails
-const PLACEHOLDER_HOGS = [
-    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/builder_hog.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/professor_hog.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/detective_hog.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
-]
-
-// Get a deterministic placeholder based on title (same project always gets same hog)
-const getPlaceholderHog = (title: string) => {
-    const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-    return PLACEHOLDER_HOGS[hash % PLACEHOLDER_HOGS.length]
-}
-
-// Extract owner/repo from GitHub URL and return OpenGraph image URL
-const getGitHubOGImage = (githubUrl?: string): string | null => {
-    const match = githubUrl?.match(/github\.com\/([^/]+)\/([^/]+)/)
-    if (match) {
-        const [, owner, repo] = match
-        return `https://opengraph.githubassets.com/1/${owner}/${repo}`
-    }
-    return null
-}
+const HERO_IMAGE =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/v1710055416/posthog.com/contents/images/media/social-media-headers/hogs/builder_hog.png'
 
 type ProjectNode = {
     id: string
@@ -182,220 +165,248 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                 description="Side projects are awesome, help us learn, and make us better at building stuff. A collection of things the PostHog team has built."
                 image="/images/og/default.png"
             />
-            <Explorer template="generic" slug="side-projects" title="Side projects" fullScreen>
-                <ScrollArea className="min-h-0 h-full">
-                    <div data-scheme="primary" className="@container bg-primary text-primary px-4 pb-12 @2xl:px-8">
-                        <header className="py-8 text-center">
-                            <h1 className="m-0 text-3xl @2xl:text-4xl">Side projects</h1>
-                            <p className="mt-3 mb-0 mx-auto max-w-2xl text-secondary text-base @2xl:text-lg">
+            <Editor
+                hideToolbar
+                hasPadding={false}
+                type="side-projects"
+                proseSize="base"
+                maxWidth="100%"
+                bookmark={{
+                    title: 'Side projects',
+                    description: 'A collection of things the PostHog team has built',
+                }}
+            >
+                <div
+                    data-scheme="primary"
+                    className="@container not-prose flex min-h-full flex-col gap-6 bg-transparent p-4 text-primary @xl:p-6"
+                >
+                    <header className="grid gap-4 px-2 @3xl:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)] @3xl:items-center @3xl:gap-8">
+                        <div className="min-w-0">
+                            <h1 className="m-0 text-2xl @xl:text-3xl">Side projects</h1>
+                            <p className="mb-0 mt-2 max-w-3xl text-base leading-relaxed text-secondary">
                                 Side projects are awesome, help us learn, and make us better at building stuff. Here's a
-                                collection of things the PostHog team has built.
+                                collection of things the PostHog team has built – games, tools, apps, and experiments.
+                                Click through to meet the person behind each one.
                             </p>
-                        </header>
+                        </div>
+                        <img
+                            src={HERO_IMAGE}
+                            alt="A hedgehog hard at work building something"
+                            className="w-full max-w-[22rem] justify-self-end object-contain"
+                        />
+                    </header>
 
-                        {addingProject && isModerator ? (
-                            <div data-scheme="secondary" className="rounded border border-primary bg-primary p-4 mb-8">
-                                <h2 className="mt-0 mb-4 text-xl">Add a project</h2>
-                                <SideProjectForm
-                                    existingTags={rankedTags.map(({ tag }) => tag)}
-                                    onCancel={() => setAddingProject(false)}
-                                />
-                            </div>
-                        ) : (
-                            <>
-                                {/* Filter toolbar */}
-                                <div className="mb-3 flex flex-col gap-2 @xl:flex-row @xl:items-center">
-                                    <div className="@xl:max-w-xs w-full">
-                                        <OSInput
-                                            label="Search projects"
+                    {addingProject && isModerator ? (
+                        <div data-scheme="secondary" className="mx-2 rounded-md border border-primary bg-primary p-6">
+                            <h2 className="mt-0 mb-4 text-xl">Add a project</h2>
+                            <SideProjectForm
+                                existingTags={rankedTags.map(({ tag }) => tag)}
+                                onCancel={() => setAddingProject(false)}
+                            />
+                        </div>
+                    ) : (
+                        <div className="px-2">
+                            {/* Filter toolbar */}
+                            <div className="mb-4 flex flex-col gap-3 @xl:flex-row @xl:items-center">
+                                <div className="@xl:max-w-xs w-full">
+                                    <OSInput
+                                        label="Search projects"
+                                        showLabel={false}
+                                        name="search"
+                                        size="sm"
+                                        placeholder="Search projects, tags, and creators…"
+                                        value={searchQuery}
+                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                            setSearchQuery(event.target.value)
+                                        }
+                                        showClearButton
+                                        onClear={() => setSearchQuery('')}
+                                    />
+                                </div>
+                                <div className="flex items-center gap-2 @xl:ml-auto">
+                                    <div className="w-48">
+                                        <OSSelect
+                                            label="Creator"
                                             showLabel={false}
-                                            name="search"
                                             size="sm"
-                                            placeholder="Search projects, tags, and creators…"
-                                            value={searchQuery}
-                                            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                setSearchQuery(event.target.value)
-                                            }
-                                            showClearButton
-                                            onClear={() => setSearchQuery('')}
+                                            placeholder="Filter by creator…"
+                                            value={creatorFilter || ''}
+                                            onChange={(value: string) => handleCreatorChange(value || null)}
+                                            options={[
+                                                { label: 'Everyone', value: '' },
+                                                ...allCreators.map((creator) => ({
+                                                    label: creator,
+                                                    value: creator,
+                                                })),
+                                            ]}
                                         />
                                     </div>
-                                    <div className="flex items-center gap-2 @xl:ml-auto">
-                                        <div className="w-48">
-                                            <OSSelect
-                                                label="Creator"
-                                                showLabel={false}
-                                                size="sm"
-                                                placeholder="Filter by creator…"
-                                                value={creatorFilter || ''}
-                                                onChange={(value: string) => handleCreatorChange(value || null)}
-                                                options={[
-                                                    { label: 'Everyone', value: '' },
-                                                    ...allCreators.map((creator) => ({
-                                                        label: creator,
-                                                        value: creator,
-                                                    })),
-                                                ]}
-                                            />
-                                        </div>
-                                        {isModerator && (
-                                            <OSButton
-                                                variant="primary"
-                                                size="sm"
-                                                onClick={() => setAddingProject(true)}
-                                            >
-                                                Add a project
-                                            </OSButton>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Tag pills, most-used first */}
-                                <div className="mb-4 flex flex-wrap items-center gap-1.5">
-                                    <TagPill label="All" active={!tagFilter} onClick={() => handleTagChange(null)} />
-                                    {visibleTags.map(({ tag, count }) => (
-                                        <TagPill
-                                            key={tag}
-                                            label={tag}
-                                            count={count}
-                                            active={tagFilter === tag}
-                                            onClick={() => handleTagChange(tagFilter === tag ? null : tag)}
-                                        />
-                                    ))}
-                                    {tagFilter && !visibleTags.some(({ tag }) => tag === tagFilter) && (
-                                        <TagPill label={tagFilter} active onClick={() => handleTagChange(null)} />
+                                    {isModerator && (
+                                        <OSButton variant="primary" size="sm" onClick={() => setAddingProject(true)}>
+                                            Add a project
+                                        </OSButton>
                                     )}
-                                    {rankedTags.length > VISIBLE_TAG_COUNT && (
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowAllTags(!showAllTags)}
-                                            className="px-2 py-0.5 text-[13px] font-semibold text-secondary underline hover:text-primary"
+                                </div>
+                            </div>
+
+                            {/* Tag pills, most-used first */}
+                            <div className="mb-3 flex flex-wrap items-center gap-1.5">
+                                <TagPill label="All" active={!tagFilter} onClick={() => handleTagChange(null)} />
+                                {visibleTags.map(({ tag, count }) => (
+                                    <TagPill
+                                        key={tag}
+                                        label={tag}
+                                        count={count}
+                                        active={tagFilter === tag}
+                                        onClick={() => handleTagChange(tagFilter === tag ? null : tag)}
+                                    />
+                                ))}
+                                {tagFilter && !visibleTags.some(({ tag }) => tag === tagFilter) && (
+                                    <TagPill label={tagFilter} active onClick={() => handleTagChange(null)} />
+                                )}
+                                {rankedTags.length > VISIBLE_TAG_COUNT && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowAllTags(!showAllTags)}
+                                        className="px-2 py-0.5 text-[13px] font-semibold text-secondary underline hover:text-primary"
+                                    >
+                                        {showAllTags
+                                            ? 'Fewer tags'
+                                            : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Results count */}
+                            <div className="mb-6 flex items-center gap-2 text-sm text-secondary">
+                                <span>
+                                    {hasActiveFilters
+                                        ? `Showing ${filteredProjects.length} of ${nodes.length} projects`
+                                        : `${nodes.length} projects`}
+                                </span>
+                                {hasActiveFilters && (
+                                    <button
+                                        type="button"
+                                        onClick={clearFilters}
+                                        className="font-semibold underline hover:text-primary"
+                                    >
+                                        Clear filters
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Project grid */}
+                            <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
+                                {filteredProjects.map(({ id, fields: { slug }, frontmatter }: ProjectNode) => {
+                                    const {
+                                        projectThumbnail,
+                                        title,
+                                        description,
+                                        liveUrl,
+                                        projectAuthor,
+                                        authorGitHub,
+                                        teamLink,
+                                        filters,
+                                    } = frontmatter
+                                    const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
+                                    return (
+                                        <article
+                                            key={id}
+                                            data-scheme="secondary"
+                                            className="group flex flex-col overflow-hidden rounded-md border border-primary bg-primary transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                                         >
-                                            {showAllTags
-                                                ? 'Fewer tags'
-                                                : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
-                                        </button>
-                                    )}
-                                </div>
-
-                                {/* Results count */}
-                                <div className="mb-4 flex items-center gap-2 text-sm text-secondary">
-                                    <span>
-                                        {hasActiveFilters
-                                            ? `Showing ${filteredProjects.length} of ${nodes.length} projects`
-                                            : `${nodes.length} projects`}
-                                    </span>
-                                    {hasActiveFilters && (
-                                        <button
-                                            type="button"
-                                            onClick={clearFilters}
-                                            className="font-semibold underline hover:text-primary"
-                                        >
-                                            Clear filters
-                                        </button>
-                                    )}
-                                </div>
-
-                                {/* Project grid */}
-                                <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2 @4xl:grid-cols-3">
-                                    {filteredProjects.map(({ id, fields: { slug }, frontmatter }: ProjectNode) => {
-                                        const {
-                                            projectThumbnail,
-                                            title,
-                                            description,
-                                            liveUrl,
-                                            githubUrl,
-                                            projectAuthor,
-                                            authorGitHub,
-                                            teamLink,
-                                            filters,
-                                        } = frontmatter
-                                        const thumbnailSrc = projectThumbnail || getGitHubOGImage(githubUrl)
-                                        return (
-                                            <article
-                                                key={id}
-                                                data-scheme="secondary"
-                                                className="group flex flex-col overflow-hidden rounded border border-primary bg-primary transition-transform duration-200 hover:-translate-y-0.5"
-                                            >
-                                                <Link to={slug} state={{ newWindow: true }} className="block">
-                                                    <div className="flex aspect-video items-center justify-center overflow-hidden bg-accent border-b border-primary">
-                                                        <img
-                                                            src={thumbnailSrc || getPlaceholderHog(title)}
-                                                            alt={title}
-                                                            loading="lazy"
-                                                            className={
-                                                                thumbnailSrc
-                                                                    ? 'size-full object-cover transition-transform duration-200 group-hover:scale-105'
-                                                                    : 'h-3/4 w-auto object-contain transition-transform duration-200 group-hover:scale-110'
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <div className="p-4 pb-2">
-                                                        <div className="flex items-start justify-between gap-2">
-                                                            <h3 className="m-0 text-lg group-hover:underline">
-                                                                {title}
-                                                            </h3>
-                                                            {liveUrl && (
-                                                                <span className="mt-1 shrink-0 rounded-full border border-green/50 bg-green/10 px-2 py-0.5 text-xs font-semibold text-green">
-                                                                    Live
-                                                                </span>
-                                                            )}
+                                            <Link to={slug} state={{ newWindow: true }} className="block">
+                                                <div className="border-b border-primary">
+                                                    {projectThumbnail ? (
+                                                        <div className="flex aspect-video items-center justify-center overflow-hidden bg-accent">
+                                                            <img
+                                                                src={projectThumbnail}
+                                                                alt={title}
+                                                                loading="lazy"
+                                                                className="size-full object-cover transition-transform duration-200 group-hover:scale-105"
+                                                            />
                                                         </div>
-                                                        {description && (
-                                                            <p className="m-0 mt-1.5 text-sm text-secondary line-clamp-2">
-                                                                {description}
-                                                            </p>
+                                                    ) : (
+                                                        <SideProjectGraphic
+                                                            title={title}
+                                                            creatorName={projectAuthor}
+                                                            creatorRole={profile?.companyRole}
+                                                            avatarUrl={
+                                                                profile?.avatar?.url ||
+                                                                profile?.avatar?.formats?.thumbnail?.url ||
+                                                                (authorGitHub
+                                                                    ? `https://github.com/${authorGitHub}.png?size=256`
+                                                                    : undefined)
+                                                            }
+                                                            color={profile?.color}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div className="p-5 pb-3">
+                                                    <div className="flex items-start justify-between gap-2">
+                                                        <h3 className="m-0 text-lg leading-snug group-hover:underline">
+                                                            {title}
+                                                        </h3>
+                                                        {liveUrl && (
+                                                            <span className="mt-1 shrink-0 rounded-full border border-green/50 bg-green/10 px-2 py-0.5 text-xs font-semibold text-green">
+                                                                Live
+                                                            </span>
                                                         )}
                                                     </div>
-                                                </Link>
-                                                <div className="mt-auto p-4 pt-2">
-                                                    {filters?.tags && filters.tags.length > 0 && (
-                                                        <div className="mb-3 flex flex-wrap gap-1">
-                                                            {filters.tags.slice(0, 3).map((tag) => (
-                                                                <button
-                                                                    key={tag}
-                                                                    type="button"
-                                                                    onClick={() => handleTagChange(tag)}
-                                                                    className="rounded-full border border-primary px-2 py-0.5 text-xs text-secondary hover:text-primary"
-                                                                >
-                                                                    {tag}
-                                                                </button>
-                                                            ))}
-                                                            {filters.tags.length > 3 && (
-                                                                <span className="px-1 py-0.5 text-xs text-secondary">
-                                                                    +{filters.tags.length - 3}
-                                                                </span>
-                                                            )}
-                                                        </div>
+                                                    {description && (
+                                                        <p className="m-0 mt-2 text-sm leading-relaxed text-secondary line-clamp-2">
+                                                            {description}
+                                                        </p>
                                                     )}
-                                                    <div className="border-t border-primary pt-3">
-                                                        <Creator
-                                                            projectAuthor={projectAuthor}
-                                                            authorGitHub={authorGitHub}
-                                                            teamLink={teamLink}
-                                                            profiles={profiles}
-                                                        />
-                                                    </div>
                                                 </div>
-                                            </article>
-                                        )
-                                    })}
-                                </div>
+                                            </Link>
+                                            <div className="mt-auto p-5 pt-2">
+                                                {filters?.tags && filters.tags.length > 0 && (
+                                                    <div className="mb-4 flex flex-wrap gap-1">
+                                                        {filters.tags.slice(0, 3).map((tag) => (
+                                                            <button
+                                                                key={tag}
+                                                                type="button"
+                                                                onClick={() => handleTagChange(tag)}
+                                                                className="rounded-full border border-primary px-2 py-0.5 text-xs text-secondary hover:text-primary"
+                                                            >
+                                                                {tag}
+                                                            </button>
+                                                        ))}
+                                                        {filters.tags.length > 3 && (
+                                                            <span className="px-1 py-0.5 text-xs text-secondary">
+                                                                +{filters.tags.length - 3}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                )}
+                                                <div className="border-t border-primary pt-3">
+                                                    <Creator
+                                                        projectAuthor={projectAuthor}
+                                                        authorGitHub={authorGitHub}
+                                                        teamLink={teamLink}
+                                                        profiles={profiles}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </article>
+                                    )
+                                })}
+                            </div>
 
-                                {/* No results message */}
-                                {filteredProjects.length === 0 && (
-                                    <div className="py-12 text-center">
-                                        <p className="m-0 text-secondary">No projects match the current filters.</p>
-                                        <OSButton size="md" className="mt-2" onClick={clearFilters}>
-                                            Clear filters
-                                        </OSButton>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
-                </ScrollArea>
-            </Explorer>
+                            {/* No results message */}
+                            {filteredProjects.length === 0 && (
+                                <div className="py-12 text-center">
+                                    <p className="m-0 text-secondary">No projects match the current filters.</p>
+                                    <OSButton size="md" className="mt-2" onClick={clearFilters}>
+                                        Clear filters
+                                    </OSButton>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </Editor>
         </>
     )
 }

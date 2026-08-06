@@ -1,8 +1,13 @@
+import { Logo } from '@posthog/brand/logo'
 import CloudinaryImage from 'components/CloudinaryImage'
+import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { OSInput, OSTextarea } from 'components/OSForm'
+import uploadImage from 'components/Squeak/util/uploadImage'
+import { PROFILE_COLORS } from 'constants/profileColors'
 import { graphql, useStaticQuery } from 'gatsby'
+import { useUser } from 'hooks/useUser'
 import React, { useState } from 'react'
 
 const REPO_BASE_URL = 'https://github.com/PostHog/posthog.com'
@@ -15,7 +20,7 @@ export type CreatorProfile = {
     companyRole?: string
     github?: string
     color?: string
-    avatar?: { formats?: { thumbnail?: { url?: string } } }
+    avatar?: { url?: string; formats?: { thumbnail?: { url?: string } } }
 }
 
 export type SideProjectFrontmatter = {
@@ -44,6 +49,7 @@ export const useCreatorProfiles = (): CreatorProfile[] => {
                     github
                     color
                     avatar {
+                        url
                         formats {
                             thumbnail {
                                 url
@@ -197,6 +203,85 @@ export const Creator = ({
     )
 }
 
+// Profile colors light enough to need dark text – the rest get white (mirrors EventGraphic)
+const LIGHT_BACKGROUNDS = ['lime-green', 'teal', 'yellow', 'orange']
+
+// Fallback artwork for creators without an avatar
+const DEFAULT_HEDGEHOG = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hogzilla_73b822a689.png'
+
+// Generated card art for projects without a featured image, adapted from EventGraphic:
+// deterministic background color from the title, project name in display type, and the
+// creator's avatar breaking out of a circle.
+export const SideProjectGraphic = ({
+    title,
+    creatorName,
+    creatorRole,
+    avatarUrl,
+    color,
+    className = '',
+}: {
+    title: string
+    creatorName?: string
+    creatorRole?: string
+    avatarUrl?: string
+    color?: string
+    className?: string
+}): JSX.Element => {
+    const hash = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    const background = color && PROFILE_COLORS.includes(color) ? color : PROFILE_COLORS[hash % PROFILE_COLORS.length]
+    const darkText = LIGHT_BACKGROUNDS.includes(background)
+
+    return (
+        <div className={`@container overflow-hidden ${className}`}>
+            <div
+                className={`relative aspect-video w-full overflow-hidden bg-${background} ${
+                    darkText ? 'text-black' : 'text-white'
+                }`}
+            >
+                <div className="absolute right-[5%] top-[30%] aspect-square w-[26%]">
+                    <div className="absolute inset-0 rounded-full border-[0.5cqw] border-white bg-tan shadow-xl" />
+                    {/* Clip only below the circle's midline so the avatar breaks out of the top instead of being cropped */}
+                    <div className="absolute inset-x-0 -top-[18%] bottom-0 overflow-hidden rounded-b-full">
+                        <img
+                            src={avatarUrl || DEFAULT_HEDGEHOG}
+                            alt=""
+                            className="absolute bottom-0 left-1/2 w-[108%] max-w-none -translate-x-1/2"
+                        />
+                    </div>
+                </div>
+                <div className="absolute inset-0 flex flex-col p-[5%]">
+                    <h3
+                        className={`m-0 w-[68%] break-words font-squeak font-bold uppercase leading-[0.95] ${
+                            title.length > 26 ? 'text-[6.5cqw]' : title.length > 14 ? 'text-[8cqw]' : 'text-[10cqw]'
+                        }`}
+                    >
+                        {title}
+                    </h3>
+                    {creatorName && (
+                        <div className="mt-auto w-[68%]">
+                            <div className="break-words font-squeak text-[4.5cqw] font-bold uppercase leading-none">
+                                {creatorName}
+                            </div>
+                            {creatorRole && (
+                                <div className="mt-[1%] font-rounded text-[2.5cqw] font-semibold uppercase leading-none">
+                                    {creatorRole}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    <div
+                        className={`mt-[2.5%] flex items-center justify-center rounded-[1.5cqw] bg-white px-[4%] py-[1.5%] text-black ${
+                            creatorName ? '' : 'mt-auto'
+                        }`}
+                    >
+                        <Logo className="h-[3.5cqw] w-auto shrink-0" width="auto" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export type SideProjectFormValues = {
     title: string
     description: string
@@ -269,6 +354,7 @@ export const SideProjectForm = ({
     existingTags: string[]
     onCancel: () => void
 }): JSX.Element => {
+    const { getJwt } = useUser()
     const [values, setValues] = useState<SideProjectFormValues>({
         title: '',
         description: '',
@@ -280,20 +366,41 @@ export const SideProjectForm = ({
         tags: '',
         body: '',
     })
+    const [featuredImage, setFeaturedImage] = useState<UploadImage | undefined>(undefined)
+    const [submitting, setSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     const setValue = (key: keyof SideProjectFormValues) => (event: React.ChangeEvent<HTMLInputElement>) =>
         setValues((prev) => ({ ...prev, [key]: event.target.value }))
 
-    const canSubmit = values.title.trim() && values.description.trim() && values.projectAuthor.trim()
+    const canSubmit =
+        Boolean(values.title.trim() && values.description.trim() && values.projectAuthor.trim()) && !submitting
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         if (!canSubmit) {
             return
         }
-        window.open(getNewProjectUrl(values), '_blank', 'noopener')
-        setSubmitted(true)
+        setSubmitting(true)
+        setError(null)
+        try {
+            let thumbnailUrl = values.projectThumbnail
+            if (featuredImage?.file) {
+                const uploaded = await uploadImage(featuredImage.file, await getJwt())
+                thumbnailUrl = uploaded?.url || thumbnailUrl
+            }
+            window.open(getNewProjectUrl({ ...values, projectThumbnail: thumbnailUrl }), '_blank', 'noopener')
+            setSubmitted(true)
+        } catch (uploadError) {
+            setError(
+                uploadError instanceof Error
+                    ? uploadError.message
+                    : 'Image upload failed. Try again, or submit without an image.'
+            )
+        } finally {
+            setSubmitting(false)
+        }
     }
 
     return (
@@ -352,15 +459,18 @@ export const SideProjectForm = ({
                 value={values.liveUrl}
                 onChange={setValue('liveUrl')}
             />
-            <OSInput
-                label="Thumbnail URL"
-                name="projectThumbnail"
-                direction="column"
-                type="url"
-                description="Optional – we fall back to the GitHub social image, then a hedgehog"
-                value={values.projectThumbnail}
-                onChange={setValue('projectThumbnail')}
-            />
+            <div>
+                <label className="text-[15px] font-semibold">Featured image</label>
+                <p className="m-0 mb-2 text-sm text-secondary">
+                    Optional – a screenshot or artwork for the gallery card. Leave it out and we generate one for you.
+                </p>
+                <ImageDrop
+                    image={featuredImage}
+                    onDrop={(image) => setFeaturedImage(image)}
+                    onRemove={() => setFeaturedImage(undefined)}
+                    className="h-32"
+                />
+            </div>
             <OSInput
                 label="Tags"
                 name="tags"
@@ -385,12 +495,13 @@ export const SideProjectForm = ({
             />
             <div className="flex items-center gap-2">
                 <OSButton type="submit" variant="primary" size="md" disabled={!canSubmit}>
-                    Continue on GitHub
+                    {submitting ? 'Uploading image…' : 'Continue on GitHub'}
                 </OSButton>
                 <OSButton type="button" size="md" onClick={onCancel}>
                     Cancel
                 </OSButton>
             </div>
+            {error && <p className="text-sm text-red m-0">{error}</p>}
             {submitted && (
                 <p className="text-sm text-secondary m-0">
                     We opened GitHub in a new tab with the file prefilled. Commit it there to open your pull request –
