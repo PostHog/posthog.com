@@ -23,7 +23,7 @@ A scout runs on a schedule. Each run, it looks at one slice of your data, decide
 - **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
 - **Record structured data.** When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric).
 
-Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
+For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
 
 A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
@@ -118,13 +118,14 @@ Not every watching job ends in a report. Sometimes what you want is a number, me
 
 Give a scout a **structured output schema**: a JSON Schema describing one record, set on the scout alongside its schedule. Each run, the scout judges a sample of whatever it watches and records one record per judged item – a classification, a score, a verdict with a reason. Every record is validated against the schema before it's written, so the series stays clean.
 
-Records land in your project as `$scout_structured_output` events, with each field of the record flattened to an `output_<field>` property and a `subject` property naming the item that was judged. Because they're ordinary events, the metric works everywhere in PostHog with nothing to wire up: chart the share of items judged `critical` in an insight, break down by any field, set an [alert](/docs/alerts) on a shift, or query the raw records with [SQL](/docs/sql).
+Records land in your project as `$scout_structured_output` events, with each field of the record flattened to an `output_<field>` property, a `subject` property naming the item that was judged, and a `skill_name` property naming the scout that recorded it. Because they're ordinary events, the metric works everywhere in PostHog with nothing to wire up: chart the share of items judged `critical` in an insight, break down by any field, set an [alert](/docs/alerts) on a shift, or query the raw records with [SQL](/docs/sql). Filter on `skill_name` whenever more than one scout records measurements, so each scout's series stays its own.
 
 ```sql
 SELECT toDate(timestamp) AS day,
        countIf(properties.output_verdict = 'good') / count() AS good_rate
 FROM events
 WHERE event = '$scout_structured_output'
+  AND properties.skill_name = 'signals-scout-your-scout'
 GROUP BY day
 ORDER BY day DESC
 ```
