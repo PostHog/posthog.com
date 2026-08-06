@@ -36,7 +36,7 @@ The full flow: **something watches (source or scout) → it emits signals → th
 
 Both feed the same inbox, and most customers will likely end up running both. 
 
-A signal source will report on every single item. Turn on error tracking as a source and *every* qualifying error-tracking signal gets processed, continuously, in real time. That predictability is useful when you want something predictable and comprehensive: you can reason about coverage, you get the same behavior today and next month.
+A signal source will ingest every single item. Turn on Error Tracking as a source and *every* qualifying error gets processed continuously. That specificity is useful when you want something comprehensive, and predictable.
 
 A scout trades some of that determinism for judgement and customization. It runs on a schedule rather than continuously, it explores rather than following a fixed stream, and it decides matches criteria on its own – which means it can weigh, rank, cluster, and stay quiet, but also means it's making a call each run and won't be exhaustive by design. That's the right trade when the volume is unmanageable, the interesting thing spans several surfaces, or "worth knowing" is a matter of opinion that only the customer can define.
 
