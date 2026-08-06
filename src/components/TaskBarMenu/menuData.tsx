@@ -434,6 +434,15 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'How instrumentation works',
+                    link: '/instrumentation',
+                    icon: getMenuIcon(pricingMenu.children, '/instrumentation', 'IconMagicWand', 'orange'),
+                    // Omit from mobile: the page is a side-by-side demo and sidebar
+                    // that needs the width to make any sense.
+                    mobileDestination: false,
+                },
+                {
+                    type: 'item',
                     label: 'Talk to a human',
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
