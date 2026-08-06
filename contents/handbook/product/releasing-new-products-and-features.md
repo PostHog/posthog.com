@@ -88,7 +88,7 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
-  It's helpful to let the marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+  It's helpful to let the marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
 
 </CalloutBox>
 
