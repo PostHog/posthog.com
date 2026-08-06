@@ -25,7 +25,7 @@ A [signal](/docs/self-driving/signals) is a structured finding: what's happening
 | [Anomaly investigations](#anomaly-investigations) (alpha) | Spikes in cost, latency, or errors | When an anomaly alert fires |
 | [Scouts](#scouts) | Regressions across cost, latency, errors, volume, and eval performance – or anything you describe | On a schedule you set |
 
-Eval report findings and scout findings land in your [inbox](/docs/self-driving/inbox) as [reports](/docs/self-driving/reports) backed by evidence – review the finding, ask for more research, or let an agent open a pull request. Anomaly investigations deliver through the alert itself: the notification arrives with the investigation's write-up attached, and false positives never reach you.
+All three run without you prompting them: agents watch the data, and what reaches you arrives with the evidence behind it.
 
 ## Eval reports
 
@@ -67,9 +67,9 @@ From then on, every firing gets investigated automatically.
 
 ## Scouts
 
-[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your data and file a report only when a finding clears the bar. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, sliced by the dimensions it discovers in your data – model, provider, feature, tool. It keeps a memory between runs: your baselines, known noise, and what it already reported, so a persistent regression stays one report instead of becoming ten.
+[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your LLM data and file a report only when a finding clears the bar. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, and remembers your baselines between runs – so a persistent regression stays one report instead of ten.
 
-Create one from the **Self-driving** tab in AI Observability. Templates cover the common cases – the daily digest, for example, reviews your dashboard, errors, unusually expensive users, and evaluation results every morning, and can deliver to Slack. Or describe what's worth your attention in plain English and author your own – a scout is steerable text, not configuration.
+Create one from the **Self-driving** tab in AI Observability: pick a template like the daily digest, or describe what's worth your attention in plain English.
 
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/scouts_c4e828ee72.mp4"
@@ -77,11 +77,9 @@ Create one from the **Self-driving** tab in AI Observability. Templates cover th
   classes="rounded"
 />
 
-Scouts and the signals above compose rather than compete: eval reports and anomaly investigations are exhaustive on their one stream, while a scout applies judgment across all of them. Most projects run both – see [sources or scouts](/docs/self-driving/signals#sources-or-scouts) for how to split the work.
-
 ## What lands in your inbox
 
-Eval report findings and scout findings arrive as reports: a title, a summary, the evidence, and a call on how actionable it is. A research agent connects each one to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
+A [report](/docs/self-driving/reports) has a title, a summary, the evidence, and a call on how actionable it is. A research agent connects it to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
 
 ## Next step
 
