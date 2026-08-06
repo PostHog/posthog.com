@@ -23,7 +23,7 @@ For Product-led leads we will only add them to your book for quota purposes if y
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Ben will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
-#### TAM Territory Review
+#### TAM At-Risk Accounts review meeting
 
 In addition to the weekly sprint planning meeting on a Monday, we do a [weekly territory review standup](/blog/customer-success-at-posthog#200-pm-team-account-review) on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
 

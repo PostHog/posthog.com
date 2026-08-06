@@ -32,20 +32,30 @@ jobs:
             #       python -m pip install requests
 
             - name: Configure Git
-              run: |
-                  git fetch origin master:master
-                  git config user.name PostHog Bot
-                  git config user.email hey@posthog.com
+              run: git fetch origin master:master
 
             - name: Fix typos
+              id: typos
               run: |
                   codespell ./contents -w -S "./contents/images/*,./contents/docs/_media/*" -q 8 -I ./.codespellignore
-                  git add .
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Fix typos"
+                  if [ -z "$(git status -s)" ]; then
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
 
+            # Commits through the GitHub API so it carries GitHub's signature, which
+            # the org-wide signed-commits ruleset requires. A plain `git push` is
+            # rejected.
             - name: Push changes
-              run: |
-                  git push
+              if: steps.typos.outputs.changed == 'true'
+              uses: planetscale/ghcommit-action@a6b150b81dca5dd027baa898604418eec9e11465 # v0.2.22
+              with:
+                  commit_message: Fix typos
+                  repo: ${{ github.repository }}
+                  branch: ${{ github.head_ref }}
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
 
     md_redirects:
         name: Docs .md redirects
@@ -63,21 +73,30 @@ jobs:
               with:
                   node-version: lts/*
 
-            - name: Configure Git
-              run: |
-                  git config user.name PostHog Bot
-                  git config user.email hey@posthog.com
-
             # Docs .md files are separate from the HTML pages and vercel.json
             # matches redirects literally, so a plain /docs/a/b redirect doesn't
             # cover /docs/a/b.md. This rewrites new docs redirects to accept an
             # optional .md, so adding one stays a one-line change.
             - name: Make docs redirects cover .md
+              id: redirects
               run: |
                   node scripts/generate-md-redirects.js
-                  git add vercel.json
-                  [ "$(git status -s)" = "" ] && exit 0 || git commit -m "Make docs redirects cover .md"
+                  if git diff --quiet vercel.json; then
+                    echo "changed=false" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "changed=true" >> "$GITHUB_OUTPUT"
+                  fi
 
+            # Commits through the GitHub API so it carries GitHub's signature, which
+            # the org-wide signed-commits ruleset requires. A plain `git push` is
+            # rejected.
             - name: Push changes
-              run: |
-                  git push
+              if: steps.redirects.outputs.changed == 'true'
+              uses: planetscale/ghcommit-action@a6b150b81dca5dd027baa898604418eec9e11465 # v0.2.22
+              with:
+                  commit_message: Make docs redirects cover .md
+                  repo: ${{ github.repository }}
+                  branch: ${{ github.head_ref }}
+                  file_pattern: vercel.json
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}

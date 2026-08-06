@@ -172,6 +172,10 @@
         {
             "source": "/posts/:path*",
             "destination": "/posts/[slug]/index.html"
+        },
+        {
+            "source": "/teams/:path*",
+            "destination": "/teams/[slug]/index.html"
         }
     ],
     "redirects": [
