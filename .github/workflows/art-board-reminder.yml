@@ -44,6 +44,13 @@ jobs:
               with:
                   app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
                   private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+                  # Board items live in other repos (art/merch requests moved to
+                  # PostHog/marketing) — an unscoped token only covers this repo
+                  # and 403s on every cross-repo write.
+                  owner: PostHog
+                  repositories: |
+                      posthog.com
+                      marketing
             - name: Find stale issues and post reminders
               uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               env:
@@ -117,19 +124,28 @@ jobs:
                       console.log(`${stale.length} stale item(s) in "${column}".`);
 
                       // ── Post one-time reminders ───────────────────────────────────
+                      let failures = 0;
                       for (const item of stale) {
                         const issue = item.content;
                         const [owner, repo] = issue.repository.nameWithOwner.split('/');
 
-                        const { data: comments } = await github.rest.issues.listComments({
-                          owner, repo, issue_number: issue.number, per_page: 100,
-                        });
-                        if (comments.some(c => c.body.includes(reminderTag))) continue;
+                        // One inaccessible item (e.g. in a repo the token isn't
+                        // scoped for) must not kill reminders for the rest.
+                        try {
+                          const { data: comments } = await github.rest.issues.listComments({
+                            owner, repo, issue_number: issue.number, per_page: 100,
+                          });
+                          if (comments.some(c => c.body.includes(reminderTag))) continue;
 
-                        const days = Math.floor((now - new Date(item.updatedAt).getTime()) / 86_400_000);
-                        await github.rest.issues.createComment({
-                          owner, repo, issue_number: issue.number,
-                          body: `${reminderTag}\n${msgTemplate.replace('{days}', days)}`,
-                        });
-                        console.log(`Reminded #${issue.number} (${days} days).`);
+                          const days = Math.floor((now - new Date(item.updatedAt).getTime()) / 86_400_000);
+                          await github.rest.issues.createComment({
+                            owner, repo, issue_number: issue.number,
+                            body: `${reminderTag}\n${msgTemplate.replace('{days}', days)}`,
+                          });
+                          console.log(`Reminded ${owner}/${repo}#${issue.number} (${days} days).`);
+                        } catch (error) {
+                          failures++;
+                          console.log(`Skipped ${owner}/${repo}#${issue.number}: ${error.message}`);
+                        }
                       }
+                      if (failures > 0) core.warning(`${failures} item(s) could not be processed.`);

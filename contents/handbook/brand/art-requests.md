@@ -29,11 +29,11 @@ The Art & Brand Planning board uses GitHub Actions to keep work moving:
 - **Reminders** — A daily job (9 AM UTC) posts one-time comments on issues that have been stuck in...
   - **Feedback/Review** for 10+ days: asks if any feedback is needed to move the task forward.
   - **No Status** for 7+ days: asks someone to pick it up or assign it to a column.
-- **Status changes** — When an issue’s Status is changed on the board:
+- **Status changes** — A job polls the board every 30 minutes and reacts to Status changes:
   - **Moved to "Done"** → the issue is automatically closed (as completed).
   - **Moved to "Assigned: Daniel", "Assigned: Lottie", or "Assigned: Heidi"** → other default assignees are removed so only the assigned person is on the issue. Internal requests (from the design team) keep all assignees.
   - These changes do not impact the "Assigned: Cleo" column, as Cleo has a different workload.
-- Workflows run under the **Art Board Bot** GitHub App and live in the posthog.com repo's `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`). They act on whichever repo an issue lives in, so they still cover requests filed in the marketing repo.
+- Workflows run under the **Art Board Bot** GitHub App and live in the posthog.com repo's `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`, `sync-artist-labels.yml`). They act on whichever repo an issue lives in, so they still cover requests filed in the marketing repo.
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
