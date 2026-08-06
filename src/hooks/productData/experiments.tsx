@@ -140,9 +140,9 @@ export const experiments = {
             imgClasses: 'rounded-t-md shadow-2xl',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_21_27_96d1375a92.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_01_at_14_21_27_96d1375a92.png',
             srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_04_01_at_14_24_58_04e669df5a.png',
+                'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_01_at_14_24_58_04e669df5a.png',
             alt: 'Experiment results',
             classes: 'justify-center items-end px-4 @lg:px-6',
             imgClasses: 'rounded-t-md shadow-2xl',
