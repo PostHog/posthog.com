@@ -48,7 +48,7 @@ Anomaly investigations are currently in alpha. We'd love to [hear your feedback]
 
 </CalloutBox>
 
-Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. You only read true-positives.
+Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. You only read true positives.
 
 To set them up:
 
@@ -63,7 +63,7 @@ To set them up:
 
 ## Scouts
 
-[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your LLM data and file a report only when they find something noteworthy. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, and remembers your baselines between runs – so a persistent regression only shows up in a single report, not everyday.
+[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your LLM data and file a report only when they find something noteworthy. The [built-in AI observability scout](/docs/self-driving/scout-examples) watches for regressions across cost, latency, errors, volume, and eval performance, and remembers your baselines between runs – so a persistent regression only shows up in a single report, not every day.
 
 Create one from the **Self-driving** tab in AI Observability: pick a template like the daily digest, or describe what's worth your attention in plain English.
 
