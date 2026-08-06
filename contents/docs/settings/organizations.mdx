@@ -88,10 +88,8 @@ The secret key value and key label are never exposed.
 
 ### Member list visibility
 
-Organization admins and owners can restrict which members are visible to non-admin members. This is useful if you invite external collaborators into separate projects and don't want them browsing the full list of users.
+Organization admins and owners can restrict which members are visible to non-admin members. Find this setting under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security), labeled **Members can see the full member list**.
 
-Find this setting under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security), labeled **Members can see the full member list**. It's enabled by default, so every member can see every other member.
+It's enabled by default. When you disable it, non-admin members only see themselves and members who have access to a project they share. Admins and owners still see everyone.
 
-When it's disabled, non-admin members only see themselves and members who have access to a project they share. Admins and owners still see everyone.
-
-This only has an effect in private projects. If a project's default access level is "Member" or "Admin", every organization member has access to it and stays visible.
+This only has an effect in private projects. If a project's default access level is "Member" or "Admin", every organization member stays visible.
