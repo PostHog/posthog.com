@@ -159,15 +159,18 @@ export default function BookReader({
     const [openPanel, setOpenPanel] = useState<Panel>(null)
     const toggle = (panel: Exclude<Panel, null>) => setOpenPanel((current) => (current === panel ? null : panel))
 
+    // Narrow containers: free-standing pills (the tabs sit in-flow above the page there).
+    // Reading widths: handles attached to the page's left edge.
     const edgeTabClasses = (active = false) =>
-        `flex size-8 items-center justify-center rounded-r-md border border-l-0 border-primary transition-colors ${
+        `flex size-8 items-center justify-center rounded-md border border-primary transition-colors @3xl:rounded-l-none @3xl:border-l-0 ${
             active ? 'bg-primary text-primary' : 'bg-accent text-secondary hover:text-primary dark:bg-accent-dark'
         }`
 
     return (
         <div className="relative flex h-full min-h-0 w-full flex-col bg-primary">
-            {/* Book tabs on the left edge. z-30: above the page, beside its scroll. */}
-            <div className="absolute left-0 top-6 z-30 flex flex-col items-start gap-1">
+            {/* Book tabs: in-flow above the page on narrow containers (floating tabs would sit
+                on the text), attached to the left edge at reading widths. */}
+            <div className="relative z-30 flex shrink-0 flex-row items-center gap-1 px-4 pt-3 @3xl:absolute @3xl:left-0 @3xl:top-6 @3xl:flex-col @3xl:items-start @3xl:p-0">
                 {shelf && (
                     <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={edgeTabClasses()}>
                         <IconBook className="size-4" />
@@ -201,7 +204,7 @@ export default function BookReader({
                 {openPanel === 'contents' && tabs && (
                     <motion.nav
                         aria-label="Pocket guide contents"
-                        className="absolute left-9 top-0 w-64 overflow-hidden rounded-md border border-primary bg-primary shadow-xl"
+                        className="absolute left-4 top-full mt-1 w-64 overflow-hidden rounded-md border border-primary bg-primary shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0"
                         initial={reducedMotion ? false : { x: -6, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.2, ease: 'easeOut' }}
@@ -210,7 +213,7 @@ export default function BookReader({
                     </motion.nav>
                 )}
                 {openPanel === 'type' && fontSize && onFontSize && fontSizes && (
-                    <div className="absolute left-9 top-0 rounded-md border border-primary bg-primary p-3 shadow-xl">
+                    <div className="absolute left-4 top-full mt-1 rounded-md border border-primary bg-primary p-3 shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0">
                         <div className="flex items-center justify-between gap-4">
                             <span className="text-xs font-semibold text-secondary">Font size</span>
                             <BookControls fontSize={fontSize} sizes={fontSizes} onStep={onFontSize} />
