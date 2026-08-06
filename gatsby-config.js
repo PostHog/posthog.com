@@ -239,8 +239,8 @@ module.exports = {
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
                     // Versioned SDK reference pages age out of the build, so keep them out of the
-                    // sitemap. Filtered here, not via `excludes`, since the map below absolutizes
-                    // each path and globs would no longer match.
+                    // sitemap. Filtered here rather than via `excludes`, because the map below
+                    // absolutizes each path, so an exclude glob would need a `**` prefix to match.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
                     const transformedPages = allPages
