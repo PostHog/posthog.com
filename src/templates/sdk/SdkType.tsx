@@ -15,6 +15,8 @@ interface Property {
 }
 
 interface TypeData {
+    /** Slug used in the page path — see `createPages.ts`. */
+    id: string
     name: string
     description: string
     properties: Property[]
@@ -26,6 +28,8 @@ interface PageContext {
     typeData: TypeData
     version: string
     id: string
+    /** Unversioned SDK id, e.g. `posthog-js`. `id` carries the version suffix. */
+    referenceId: string
     noDocsTypes: string[]
     types: string[]
     slugPrefix: string
@@ -33,14 +37,22 @@ interface PageContext {
 
 export default function SdkType({ pageContext }: { pageContext: PageContext }) {
     const { menu } = useApp()
-    const { typeData, version, id, types, slugPrefix } = pageContext
+    const { typeData, version, referenceId, types, slugPrefix } = pageContext
 
-    // Get the language for this SDK type
-    const sdkLanguage = getLanguageFromSdkId(id)
+    // Get the language for this SDK type — `id` is version-suffixed, so it never
+    // matches the language lookup and silently falls back to TypeScript.
+    const sdkLanguage = getLanguageFromSdkId(referenceId)
 
     return (
         <ReaderView parent={menu.find(({ name }) => name === 'Docs')}>
-            <SEO title={`${typeData.name} - PostHog`} />
+            <SEO
+                title={`${typeData.name} - PostHog`}
+                canonicalUrl={`https://posthog.com/docs/references/${referenceId}/types/${typeData.id}`}
+                // createPages only builds these for the `latest` row, so this is normally
+                // false. Kept as a guard in case versioned type pages ever come back —
+                // those URLs rot out of the build and shouldn't be indexed.
+                noindex={slugPrefix !== referenceId}
+            />
             <div>
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold mb-4">{typeData.name}</h1>

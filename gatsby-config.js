@@ -238,11 +238,21 @@ module.exports = {
                     return site.siteMetadata.siteUrl
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
-                    const transformedPages = allPages.map(({ path }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
+                    // Versioned SDK reference pages only exist while they stay inside
+                    // MAX_VERSIONS_PER_SDK (gatsby/sourceNodes.ts) — roughly a week or two for
+                    // fast-moving SDKs — so advertising them to crawlers just mints 404s.
+                    // The unversioned page they canonicalise to stays in the sitemap.
+                    // Filtered here rather than via the plugin's `excludes` option, because the
+                    // map below turns each path into an absolute URL that globs won't match.
+                    const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
+
+                    const transformedPages = allPages
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .map(({ path }) => {
+                            return {
+                                path: `${site.siteMetadata.siteUrl}${path}`,
+                            }
+                        })
 
                     let plugins = []
                     try {

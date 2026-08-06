@@ -494,12 +494,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     hogRef
                     categories
                     types {
+                        description
                         example
                         id
                         name
                         path
                         properties {
                             description
+                            isOptional
                             name
                             type
                         }
@@ -1088,76 +1090,68 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Grab types available for each SDK and version
-    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
-        const { referenceId, version, ...types } = node
+    // A type only gets a page when it has properties or an example, so the allowlist
+    // handed to TypeLink has to use the same gate — a name in `validTypes` with no page
+    // is a guaranteed 404. Keep these two in lockstep.
+    const typeHasPage = (type?: { id?: string; properties?: unknown; example?: unknown }) =>
+        Boolean(type?.id && (type.properties || type.example))
 
-        if (!acc[referenceId]) {
-            acc[referenceId] = {}
+    // Type pages are built for the pinned `latest` row only (see below), so every type
+    // crosslink on the site — including the ones on versioned pages — resolves against
+    // that one set of names.
+    const latestTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
+        if (node.version.includes('latest')) {
+            acc[node.referenceId] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
         }
-
-        acc[referenceId][version] = types.types.map(({ name }) => name)
-
         return acc
-    }, {} as Record<string, Record<string, any>>)
+    }, {} as Record<string, string[]>)
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        if (node.version.includes('latest')) {
-            createPage({
-                path: `/docs/references/${node.referenceId}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.referenceId}`,
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        } else {
-            createPage({
-                path: `/docs/references/${node.id}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.id}`,
-                    // Null checks, only affects type crosslinking, won't break build
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        }
+        const isLatest = node.version.includes('latest')
+        const path = `/docs/references/${isLatest ? node.referenceId : node.id}`
+
+        createPage({
+            path,
+            component: SdkReferenceTemplate,
+            context: {
+                name: node.info.title,
+                description: node.info.description,
+                fullReference: node,
+                regex: path,
+                // Null checks, only affects type crosslinking, won't break build
+                types: latestTypesByReference[node.referenceId] ?? [],
+                // Type crosslinks always use the unversioned prefix — the same one the
+                // type pages below are built at — because a versioned page only lives as
+                // long as it stays inside MAX_VERSIONS_PER_SDK. Linking to a versioned
+                // type URL mints a link that 404s a release or two later.
+                slugPrefix: node.referenceId,
+                isLatest,
+                canonicalPath: `/docs/references/${node.referenceId}`,
+            },
+        })
     })
 
     result.data.allSdkTypes.nodes.forEach((node) => {
+        // Versioned type pages are no longer linked from anywhere, and they rot out of the
+        // build within a release cycle. vercel.json redirects the old URLs to these.
+        if (!node.version.includes('latest')) {
+            return
+        }
+
         node.types?.forEach((type) => {
-            if (type.id && (type.properties || type.example)) {
-                if (node.version.includes('latest')) {
-                    createPage({
-                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.referenceId,
-                        },
-                    })
-                } else {
-                    createPage({
-                        path: `/docs/references/${node.id}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.id,
-                        },
-                    })
-                }
+            if (typeHasPage(type)) {
+                createPage({
+                    path: `/docs/references/${node.referenceId}/types/${type.id}`,
+                    component: SdkTypeTemplate,
+                    context: {
+                        typeData: type,
+                        version: node.version,
+                        id: node.id,
+                        referenceId: node.referenceId,
+                        types: latestTypesByReference[node.referenceId] ?? [],
+                        slugPrefix: node.referenceId,
+                    },
+                })
             }
         })
     })

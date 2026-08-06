@@ -484,6 +484,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       name: String
     }
     type SdkReferencesType {
+      description: String
       example: String
       id: String
       name: String
@@ -492,6 +493,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type SdkReferencesTypeProperty {
       description: String
+      isOptional: Boolean
       name: String
       type: String
     }

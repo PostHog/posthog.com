@@ -18,3 +18,11 @@ export const SUPPORTED_SDK_IDS = Object.keys(SDK_LANGUAGE_BY_ID) as SupportedSdk
 
 export const getLanguageFromSdkId = (sdkId: string): string =>
     (SDK_LANGUAGE_BY_ID as Record<string, string>)[sdkId] ?? 'ts'
+
+/**
+ * The pinned `latest` HogRef row carries this literal placeholder in `info.version`
+ * instead of a semver. It must never reach a URL or a user-facing label.
+ */
+export const VERSION_PLACEHOLDER = '<version>'
+
+export const hasConcreteVersion = (version?: string): boolean => Boolean(version) && version !== VERSION_PLACEHOLDER
