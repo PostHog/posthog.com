@@ -1,6 +1,6 @@
 import React from 'react'
+import usePostHog from '../../hooks/usePostHog'
 import { graphql, useStaticQuery } from 'gatsby'
-import { usePostHog } from 'posthog-js/react'
 
 import Link from 'components/Link'
 

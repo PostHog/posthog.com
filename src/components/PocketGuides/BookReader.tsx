@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
-import { usePostHog } from 'posthog-js/react'
 
 import { IconBook, IconChevronLeft, IconChevronRight, IconList } from '@posthog/icons'
 

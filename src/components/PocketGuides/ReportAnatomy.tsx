@@ -1,9 +1,8 @@
 import React from 'react'
+import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconInfo } from '@posthog/icons'
-
-import { usePostHog } from 'posthog-js/react'
 
 import Tooltip from 'components/RadixUI/Tooltip'
 import { SelfDrivingReport } from 'components/SelfDrivingInbox/types'

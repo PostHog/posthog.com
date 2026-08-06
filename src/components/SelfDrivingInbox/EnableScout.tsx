@@ -1,8 +1,8 @@
 import React from 'react'
+import usePostHog from '../../hooks/usePostHog'
 
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
 import Link from 'components/Link'
-import { usePostHog } from 'posthog-js/react'
 
 import OSButton from 'components/OSButton'
 

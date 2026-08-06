@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { usePostHog } from 'posthog-js/react'
+import usePostHog from '../../hooks/usePostHog'
 
 import { IconMinus, IconPlus } from '@posthog/icons'
 
