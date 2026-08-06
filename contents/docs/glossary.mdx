@@ -25,6 +25,9 @@ A related user account. In PostHog, an alias connects two identities – and the
 #### Annotation 🦔
 A short text note you can attach to a point in time on your data, to record context for later or signal it to others. A common use is marking feature releases or marketing pushes on a shared chart. [Learn more about annotations](/docs/data/annotations).
 
+#### APM
+Application performance monitoring. Observing the health, latency, and errors of your running application in production. In PostHog this is covered by [traces](#traces) (distributed tracing), alongside [error tracking](#error-tracking) and [logs](#logs).
+
 #### App 🦔
 Historically, apps (originally called plugins) were add-ons that extended PostHog – transforming events, or sending data to other systems. That functionality now lives in [data pipelines](#data-pipeline) as [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), and PostHog's own capabilities are now called [tools](#tool). See also [Hog](#hog).
 
@@ -166,6 +169,9 @@ A way to track users through a sequence of steps – such as pageview → sign u
 #### GDPR
 General Data Protection Regulation. An EU regulation governing how personal data must be processed, protected, and kept private. [Learn about complying with GDPR while using PostHog](/docs/privacy/gdpr-compliance).
 
+#### Generation 🦔
+An [LLM observability](#llm-observability) event capturing a single call to an AI model and its response, including the prompt, the output, token counts, cost, and latency. Generations are grouped, together with [spans](#span), into [traces](/docs/ai-observability/traces). [Learn more about generations](/docs/ai-observability/generations).
+
 #### Group analytics 🦔
 Analysis that aggregates events by something other than an individual user – a company, team, project, or account – using [groups](#groups). Especially valuable for [B2B](#b2b) products. [Learn more about group analytics](/docs/product-analytics/group-analytics).
 
@@ -230,7 +236,7 @@ Key performance indicator. A measurable metric used to judge the success (or fai
 A PostHog insight that breaks your active users down into new, returning, resurrecting, and dormant, so you can see how engagement grows and decays over time. See [new user](#new-user), [returning user](#returning-user), [resurrecting user](#resurrecting-user), and [dormant user](#dormant-user). [Learn more about lifecycle](/docs/product-analytics/lifecycle).
 
 #### LLM observability 🦔
-A [tool](#tool) for capturing and analyzing the behavior, cost, and latency of your LLM-powered features – traces, generations, spans, and the prompts and responses inside them. [Learn more about LLM observability](/docs/ai-observability).
+A [tool](#tool) for capturing and analyzing the behavior, cost, and latency of your LLM-powered features – [traces](/docs/ai-observability/traces), [generations](#generation), [spans](#span), and the prompts and responses inside them. [Learn more about LLM observability](/docs/ai-observability).
 
 #### Logs 🦔
 A [tool](#tool) for collecting, searching, and analyzing the log lines emitted by your applications and services, alongside the rest of your PostHog data. [Learn more about logs](/docs/logs).
@@ -288,6 +294,9 @@ Objectives and key results. Like [KPIs](#kpi), a system for organizing goals and
 
 #### Open source
 A model of distribution that lets others inspect, modify, and share what you create. PostHog is both an open source product – [we distribute our software under an open source MIT license](https://github.com/PostHog/posthog) – and [an open source company, because we work transparently](/handbook/company/culture).
+
+#### OpenTelemetry
+Often shortened to OTel. An open standard for generating and exporting [traces](#traces), metrics, and logs from your applications. PostHog's [distributed tracing](#traces) ingests spans from any OpenTelemetry client, so no PostHog-specific SDK is required. [Learn more about distributed tracing](/docs/distributed-tracing).
 
 ## P
 
@@ -372,6 +381,9 @@ Running and managing PostHog yourself, on your own infrastructure, rather than u
 #### Semantic layer 🦔
 A shared set of definitions – metrics, dimensions, and their relationships – that sits between your raw data and the people querying it, so everyone works from the same, consistent definitions. [Learn more about the semantic layer](/docs/semantic-layer).
 
+#### Service
+In [distributed tracing](#traces), a named component of your system – an app, API, or worker – that emits [spans](#span). Every span records the service it ran in, so you can follow a request as it moves between them.
+
 #### Session
 A period during which a user is actively interacting with your product. PostHog can [record sessions as replays](/docs/session-replay). [Learn more about sessions](/docs/data/sessions).
 
@@ -380,6 +392,9 @@ A [tool](#tool) that records and plays back individual user sessions, so you can
 
 #### Signal 🦔
 An individual observation a [scout](#scout) or [agent](#agent) picks up while scanning your data – a spike, an anomaly, a broken funnel step – which can become a report in the [inbox](#inbox). [Learn more about signals](/docs/self-driving/signals).
+
+#### Span
+A single unit of work within a [trace](#traces) – an operation such as an incoming HTTP request, a database query, a function call, or, in [LLM observability](#llm-observability), a step like a vector search. Spans each carry a name, service, timing, status, and attributes, and nest into a tree that shows how a request flowed and where the time went. [Learn more about spans](/docs/ai-observability/spans).
 
 #### SQL
 Structured Query Language (pronounced "sequel"). A language for querying relational databases. In PostHog you write SQL using [HogQL](#hogql). [Learn more about SQL in PostHog](/docs/sql).
@@ -403,6 +418,9 @@ One of PostHog's functional capabilities – [product analytics](#product-analyt
 
 #### Toolbar 🦔
 A widget PostHog injects into your own site that gives you quick access to useful actions and information. The toolbar lets you inspect elements, view [heatmaps](#heatmap), create [actions](#action), and toggle [feature flags](#feature-flag). [Learn more about the toolbar](/docs/toolbar).
+
+#### Traces 🦔
+PostHog's distributed tracing [tool](#tool) (currently in alpha). A trace follows a single request as it travels through your application – across functions, [services](#service), databases, and APIs – so you can see what called what, in what order, and where the time or failure actually came from. Traces are built from [spans](#span) and ingested via [OpenTelemetry](#opentelemetry), providing [APM](#apm)-style visibility. This is distinct from the traces in [LLM observability](#llm-observability), which capture a full interaction with an AI model. [Learn more about distributed tracing](/docs/distributed-tracing).
 
 #### Trend 🦔
 The default PostHog [insight](#insights) type, which plots data onto a [chart](#chart) over time. Trends support many [chart types](/docs/product-analytics/trends) and options, including [formulas](#formula). [Learn more about trends](/docs/product-analytics/trends).
