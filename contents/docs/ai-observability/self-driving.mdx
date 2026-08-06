@@ -13,7 +13,7 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 Most observability tools end at a dashboard: they show you the chart, and fixing what it shows is your problem. AI Observability feeds [Self-driving](/docs/self-driving) instead. Your LLM data becomes [signals](/docs/self-driving/signals), agents investigate what changed, and reports land in your [inbox](/docs/self-driving/inbox) – where one click turns a finding into a pull request.
 
-This page covers how that works and how to turn on each signal. You need LLM data flowing first – if you haven't instrumented yet, start with [installation](/docs/ai-observability/installation).
+All of it needs LLM data flowing first – if you haven't instrumented yet, start with [installation](/docs/ai-observability/installation).
 
 ## How it works
 
@@ -71,7 +71,13 @@ From then on, every firing gets investigated automatically.
 
 Create one from the **Self-driving** tab in AI Observability. Templates cover the common cases – the daily digest, for example, reviews your dashboard, errors, unusually expensive users, and evaluation results every morning, and can deliver to Slack. Or describe what's worth your attention in plain English and author your own – a scout is steerable text, not configuration.
 
-Scouts and the signals above compose rather than compete: eval reports and anomaly investigations are exhaustive on their one stream, while a scout applies judgement across all of them. Most projects run both – see [sources or scouts](/docs/self-driving/signals#sources-or-scouts) for how to split the work.
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/scouts_c4e828ee72.mp4"
+  alt="Creating a scout for AI Observability"
+  classes="rounded"
+/>
+
+Scouts and the signals above compose rather than compete: eval reports and anomaly investigations are exhaustive on their one stream, while a scout applies judgment across all of them. Most projects run both – see [sources or scouts](/docs/self-driving/signals#sources-or-scouts) for how to split the work.
 
 ## What lands in your inbox
 
