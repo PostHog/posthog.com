@@ -19,7 +19,7 @@ import WizardCommand from 'components/WizardCommand'
     icon="IconLlmPromptManagement"
 >
 
-AI Observability captures every call your product makes to an LLM and turns them into traces you can query, score, and get alerted on. You can:
+AI Observability captures every call your product makes to an LLM and turns them into generations you can query, score, and get alerted on. You can:
 
 - 🔍 Read full traces and sessions when you need to go detective mode
 - ⚖️ Score response quality and sentiment with evals
@@ -41,12 +41,12 @@ Prefer to do it by hand? Choose your platform below:
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Track AI traces"
+  title="Track AI generations"
   subtitle="Required"
   icon="IconRecord"
 >
 
-  Once you've installed the SDK, every LLM call automatically becomes a [trace](/docs/ai-observability/traces) – a detailed record of what went in and what came out. Each trace captures:
+  Once you've installed the SDK, every LLM call automatically becomes a [generation](/docs/ai-observability/generations) – a detailed record of what went in and what came out. Each generation captures:
 
   - Complete conversation context (inputs and outputs)
   - Associated tool calls and their results
@@ -63,8 +63,8 @@ Prefer to do it by hand? Choose your platform below:
 
 PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
   
-<OSButton variant="primary" asLink to="/docs/ai-observability/traces">
-  Learn about traces
+<OSButton variant="primary" asLink to="/docs/ai-observability/generations">
+  Learn about generations
 </OSButton>
 
 </QuestLogItem>
@@ -75,7 +75,7 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   icon="IconLineGraph"
 >
 
-  PostHog's evaluation suite runs offline and online evals, so you can block regressions before they ship and monitor live performance. Three evaluation types are supported:
+  PostHog's evaluation suite scores your live generations as they happen, so you can monitor quality in production. Three evaluation types are supported:
 
   - **LLM-as-a-judge** – an LLM scores each generation against a prompt you define
   - **Code-based (Hog)** – deterministic checks written in code
@@ -162,13 +162,12 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
   icon="IconBolt"
 >
 
-  Your LLM data is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving). A scout watches it and files an investigation report in your inbox when a regression appears which can become a PR in one-click. Signals include:
+  Your LLM data is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving), feeding it two ways:
 
-  - 💰 Cost spikes
-  - ⏱️ Latency regressions
-  - ❌ Error rate increases
-  - 📈 Volume anomalies
-  - ⚖️ Eval performance drops
+  - ⚖️ **Eval reports** – an agent reviews your [online evaluation](/docs/ai-evals) results in batches and sends a summary of its findings to your inbox
+  - ⚠️ **Anomaly investigations** (alpha) – when an [anomaly alert](/docs/alerts#anomaly-detection) fires on a cost, latency, or error insight, an agent investigates and only reports true positives
+
+  Reports land in your [inbox](/docs/self-driving/inbox), where one click turns them into a PR.
 
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_self_driving_setup_a065ecc0a1.mp4"
