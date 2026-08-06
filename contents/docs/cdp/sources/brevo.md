@@ -9,9 +9,9 @@ availability:
 sourceId: Brevo
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Beta release" type="action">
 
-This source is currently in **alpha**. The interface and available tables may change.
+This source is currently in **beta**. The interface and available tables may change.
 
 </CalloutBox>
 
@@ -29,19 +29,23 @@ Once the syncs are complete, you can start using Brevo data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `contacts` | Contacts in your Brevo account | Incremental |
-| `contact_lists` | Contact lists | Full refresh |
-| `contact_folders` | Folders that organize contact lists | Full refresh |
-| `contact_segments` | Contact segments | Full refresh |
-| `email_campaigns` | Email campaigns | Full refresh |
-| `sms_campaigns` | SMS campaigns | Full refresh |
-| `email_templates` | Transactional email templates | Full refresh |
-| `senders` | Configured sending identities | Full refresh |
+| Table              | Description                         | Sync method  |
+| ------------------ | ----------------------------------- | ------------ |
+| `contacts`         | Contacts in your Brevo account      | Incremental  |
+| `contact_lists`    | Contact lists                       | Full refresh |
+| `contact_folders`  | Folders that organize contact lists | Full refresh |
+| `contact_segments` | Contact segments                    | Full refresh |
+| `email_campaigns`  | Email campaigns                     | Full refresh |
+| `sms_campaigns`    | SMS campaigns                       | Full refresh |
+| `email_templates`  | Transactional email templates       | Full refresh |
+| `senders`          | Configured sending identities       | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

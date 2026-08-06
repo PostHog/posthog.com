@@ -7,17 +7,24 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
-A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) the rest of the loop can act on.
+A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) and [reports](/docs/self-driving/reports) the rest of the loop can act on.
 
 ## How a scout works
 
-A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so emits a [signal](/docs/self-driving/signals): a structured finding with the evidence behind it and a suggested action.
+A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has two ways to do that:
+
+- **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
+- **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
+
+Either way, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first.
+
+A scout is **selective by design**. Holding something back is a decision it makes on purpose, not a gap – most runs close out having found nothing worth your attention, and that's the scout working. If you need every item in a stream handled with no judgement call in between, that's what a [signal source](/docs/self-driving/inbox/sources) is for, and the two are often best run together.
 
 A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you can connect to Claude Code or Cursor, so it can see anything in PostHog out of the box – events, [data warehouse](/docs/data-warehouse) tables, insights, dashboards – with nothing to wire up per scout. Because any source you land in PostHog becomes queryable, a scout isn't limited to product analytics: a Slack channel, a billing system, or a support inbox synced to your warehouse is fair game too.
 
@@ -25,20 +32,111 @@ A scout also keeps a durable memory between runs. Each run, it reads back what e
 
 Because scouts run on a schedule, the loop keeps noticing problems and opportunities on its own, instead of waiting for someone to file a ticket.
 
+## Setting a scout's schedule
+
+Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
+
+- **An interval** – how long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing.
+- **A cron expression** – a standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval.
+
+Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
+
+Interval scheduling drifts – a run that starts late pushes the next one later – so reach for cron when the timing itself matters: a [digest scout](/docs/self-driving/scout-examples) that should land before standup, or a scout that should look at a full day of data rather than a rolling window.
+
+Since every run costs a share of your project's daily run budget, the schedule is also the main dial on what a scout costs. Most scouts close out without finding anything, so a tighter cadence mostly pays to re-confirm that nothing changed. Slow a chatty or expensive scout down before you turn it off.
+
+## Running a scout on demand
+
+Scouts run themselves on their schedule, but you can also trigger a run on demand – useful to test a scout right after authoring it, or to refresh its findings without waiting for the next scheduled run. A scout that's still disabled can be run this way too, so you can see what it would surface before turning it on.
+
+On-demand runs count against the same daily run budget as scheduled runs, so repeatedly re-running the same scout can use up your project's daily allowance.
+
+### Dry runs
+
+A scout writes its findings to your inbox by default, which is usually what you want – seeing what actually lands is the fastest way to tell whether a scout is calibrated. For a scout you expect to be chatty, expensive, or high-stakes, you can put it in **dry run** instead: it still runs and still records its full reasoning, but writes nothing to your inbox. Read back what it *would* have filed, tune it, then switch it to writing for real.
+
+A dry run consumes a run from your daily budget like any other, so it's a safety net rather than an iteration loop.
+
+<CalloutBox icon="IconInfo" title="When PostHog flags or pauses a scout" type="fyi">
+
+PostHog checks whether a scout's output is being used. A scout that stays quiet is flagged for review but keeps running, because a quiet watchdog may be doing its job. If a scout has established reports that nobody acts on, PostHog warns you first and pauses it after a week unless someone engages with its reports.
+
+An inactivity pause never retries on its own – it stays in place until you enable the scout again, which also exempts it from later inactivity checks. That's separate from the failure safeguard: a scout that fails five runs in a row pauses so a broken configuration doesn't keep consuming runs, then retries once a day until a successful retry resumes it.
+
+</CalloutBox>
+
+## Steering a scout with a note
+
+Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
+
+- **Feedback on its output** – "the staging traffic spike you keep flagging is known noise, stop reporting it."
+- **A pointer** – "dig into the EU signup funnel this week, we think something regressed."
+- **Context it couldn't know** – "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected."
+
+A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
+
+Notes are advisory. They direct a scout's attention, but they don't lower its evidence bar or force it to file anything – a note saying "report X" still gets an honest investigation. Each run says which notes it acted on and how, and folds anything durable into its memory.
+
+A note is the right tool for steering *this project, right now*, and for trying a nudge before committing to it. Once a steer becomes permanent policy – a threshold, a disqualifier, a change of scope – edit the scout instead. A note you keep re-leaving is a scout edit waiting to happen.
+
+### Your inbox feedback steers scouts too
+
+When you dismiss or snooze a [report](/docs/self-driving/reports) and type a note explaining why, that note is the single most useful thing a scout can learn from: a human saying, in their own words, why what it surfaced wasn't worth surfacing. So it doesn't just sit on the report – it's also forwarded into the steering channel, where later runs read it by name.
+
+Resolving a report doesn't forward anything, because resolving says the report did its job, not that filing it was wrong. Forwarded notes expire after 30 days, so a steady stream of dismissals can't crowd out the steering you leave deliberately.
+
+The practical upshot: triaging your inbox honestly is how scouts get quieter. You don't have to go and edit a scout to stop it repeating itself.
+
+## Sending a scout's output to Slack
+
+Each scout can post what it finds to a Slack channel of your choosing, set per scout. That lets you route scouts to the teams that care – the revenue scout to `#growth`, the APM scout to `#on-call` – instead of sending everything to one firehose channel.
+
+This is per scout and separate from the project-wide **#posthog-inbox** notification you set up when [connecting Slack](/docs/self-driving/setup). Connect your Slack workspace once, then pick a channel on any scout you want routed.
+
+## Every report is also an event
+
+When a scout emits a report, PostHog also captures a `$scout_report_emitted` event into your project (and a `$scout_report_edited` event when a scout later updates one). The event carries the scout's name, the report's title, summary, priority, and actionability, whether it surfaced in your inbox or was held back, and a `report_url` link straight to the report.
+
+Because it's a regular event in your stream, everything in PostHog can build on your scouts' output with nothing to wire up: query scout activity with [SQL](/docs/sql), chart it in an insight, set an [alert](/docs/alerts) on it, or point a [destination](/docs/cdp) at it – like forwarding every surfaced report to a [Slack channel](/docs/cdp/destinations/slack), templated from the event's title, summary, and link.
+
+Try it: this query lists your fleet's most recent findings.
+
+```sql
+SELECT properties.skill_name AS scout, properties.title, properties.priority, properties.report_url
+FROM events
+WHERE event = '$scout_report_emitted'
+ORDER BY timestamp DESC
+LIMIT 20
+```
+
+Scout report events are captured against a synthetic per-scout ID with person processing off, so they never create person profiles or mix into your user analytics.
+
 ## Built-in and custom scouts
 
 PostHog ships with a set of scouts that watch common patterns out of the box. You can turn each on or off per project, and teams can add their own scouts for the patterns specific to their product. See [scout examples](/docs/self-driving/scout-examples) for the scouts PostHog ships with and ideas for your own.
+
+## Custom scouts suggest improvements to themselves
+
+A custom scout doesn't just report on your product – it also reports on itself. Its instructions were authored by your team, and the scout is the only one that sees where those instructions steer a real run wrong. When a run produces concrete evidence that its instructions misdirected it – they pointed at an event or table that doesn't exist in your project, set a default threshold it had to correct again, or missed a pitfall it keeps hitting – the scout records the specific change it would suggest in its durable memory, with the evidence from that run attached.
+
+When a suggestion re-confirms across runs, or a single failure was material – it burned most of the run's budget, or steered the scout into a wrong finding – the scout escalates it to your [inbox](/docs/self-driving/inbox) as a report titled `Scout self-improvement: <scout-name> – <topic>`, carrying the suggested change and the evidence behind it. Self-improvement reports are always marked as requiring human input: applying one is an edit to instructions your team owns, so the scout proposes and you decide. (A custom scout that only emits signals keeps its suggestions in its memory instead, where they surface when you next review or edit the scout.)
+
+The bar is deliberately high – a suggestion needs a concrete failure or wasted budget observed on a real run, not generic polish. And like any other scout report, a self-improvement report fires a `$scout_report_emitted` event, with `report_kind` set to `self_improvement`, so you can track how often your fleet is asking for tune-ups.
+
+Built-in scouts don't do this. Their instructions are maintained by PostHog and kept current automatically, so feedback about them routes to PostHog instead. The moment you edit a built-in scout to make it your own, it starts self-reporting like any custom scout.
 
 ## Scouts and signal sources
 
 Scouts aren't the only thing that emits [signals](/docs/self-driving/signals). PostHog also has **signal sources**: built-in pipelines that watch one specific stream continuously, like error tracking, session replay, Zendesk, GitHub Issues, and Linear.
 
-The difference is how they look. A signal source watches a single stream in real time; a scout runs on a schedule and explores your product data more holistically. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with.
+The difference is how they look, and what you get for it. A signal source watches a single stream continuously and processes every qualifying item in it – deterministic and exhaustive, with no bar to clear. A scout runs on a schedule, explores more holistically, and decides what's worth surfacing – judgement and steerability, at the cost of being selective rather than exhaustive.
+
+Neither is the upgrade from the other and most projects run both. You turn them on independently, and both feed the same pipeline, where their signals are deduplicated and grouped into reports. The more data you capture, the more both have to work with. For a side-by-side breakdown and when to reach for which, see [sources or scouts?](/docs/self-driving/signals#sources-or-scouts).
 
 ## Next step
 
-A scout's output is a signal. See what's in one.
+Meet the scouts PostHog ships with, and steal ideas for your own.
 
-<CallToAction type="primary" to="/docs/self-driving/signals">
-  Signals
+<CallToAction type="primary" to="/docs/self-driving/scout-examples">
+  Scout examples
 </CallToAction>

@@ -119,7 +119,7 @@ When you have a piece of code ready to be reviewed, create a PR. Link the PR to 
 
 All PRs should be attributable to a human author as far as possible, even if they were assisted by an agent.
 
-Fully automatically generated PRs might come from an agent like PostHog Code or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
+Fully automatically generated PRs might come from an agent like PostHog Desktop or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
 
 For external contributors, our [AI contributions policy](https://github.com/PostHog/posthog/blob/master/AI_POLICY.md) covers expectations around AI-assisted PRs.
 
@@ -274,6 +274,8 @@ Branch protection on the `posthog` repo requires a review and green CI before an
 - The PR author is a member of the PostHog GitHub org (no fork PRs from external contributors).
 - You're a full Slack workspace member with a `@posthog.com` email.
 
+It bypasses required reviews and checks, but **not** [commit signing](/handbook/engineering/security#commit-signing). A PR carrying an unsigned commit can't be force-merged, so sign your commits before reaching for this during an incident.
+
 **Everything is audited.** Each force-merge posts an audit message to Slack, comments on the PR recording who triggered it and the reason, and writes a tamper-proof (object-locked) record, alongside an EventBridge event and a CloudWatch metric that alarms on unusual volume. Accountability is after the fact, so expect to justify any force-merge — and cover it in the [post-mortem](/handbook/engineering/operations/post-mortems) if it was part of an incident.
 
 ### Deploy notification bot
@@ -332,7 +334,7 @@ If `state.yaml` shows a newer commit than what's running on pods, check ArgoCD:
 | Pods running old commit | Rollout stuck or image not built | Check deployment rollout status; verify CI built the image |
 | Can't find your service in ArgoCD | Looking at wrong app grouping | Search for your specific service + environment (e.g., `ingestion-events-prod-us`) |
 
-If a deployment appears stuck, reach out in `#team-infrastructure`.
+If a deployment appears stuck, reach out in `#support-infrastructure` or ping `@infra-folks`.
 
 ## Documenting
 

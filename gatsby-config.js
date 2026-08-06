@@ -1,5 +1,6 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
+const pLimit = require('p-limit')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}.local`,
@@ -10,9 +11,12 @@ require('dotenv').config({
 })
 
 const getQuestionPages = async (base) => {
+    const limit = pLimit(3)
+
     const fetchQuestions = async (page) => {
+        // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
-            populate: '*',
+            fields: ['permalink'],
             pagination: {
                 page,
                 pageSize: 100,
@@ -34,8 +38,7 @@ const getQuestionPages = async (base) => {
                     throw error
                 }
                 console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
-                // Simple delay between retries (1 second)
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                await new Promise((resolve) => setTimeout(resolve, 1000 * attempt))
             }
         }
     }
@@ -43,7 +46,9 @@ const getQuestionPages = async (base) => {
     const initialResponse = await fetchQuestions(1)
     const totalPages = initialResponse.meta.pagination.pageCount
 
-    const allResponses = await Promise.all(Array.from({ length: totalPages }, (_, i) => fetchQuestions(i + 1)))
+    const allResponses = await Promise.all(
+        Array.from({ length: totalPages }, (_, i) => limit(() => fetchQuestions(i + 1)))
+    )
 
     const questions = allResponses.flatMap((response) =>
         response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
@@ -53,6 +58,23 @@ const getQuestionPages = async (base) => {
 }
 
 module.exports = {
+    // Luma's API blocks browser CORS, so the events form fetches /api/luma-events.
+    // In production Vercel serves api/luma-events.js; mirror that route here so
+    // the form also works under `gatsby develop`. Dev server only — no effect on builds.
+    developMiddleware: (app) => {
+        // Vercel serves these from api/*.js in production; mirror them here so the event
+        // form works under `gatsby develop`. Dev only — ignored by `gatsby build`.
+        ;['luma-events', 'notion-events'].forEach((route) => {
+            app.use(`/api/${route}`, async (req, res) => {
+                try {
+                    await require(`./api/${route}`)(req, res)
+                } catch (error) {
+                    console.error(`${route} dev middleware error:`, error)
+                    res.status(500).json({ error: `Failed to fetch ${route}` })
+                }
+            })
+        })
+    },
     flags: {
         DEV_SSR: false,
     },
@@ -121,8 +143,13 @@ module.exports = {
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
-                    node.url &&
-                    new URL(node.url).hostname === 'raw.githubusercontent.com',
+                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                    // (and thus pages).
+                    ((node.sourceInstanceName === 'posthog-main-repo' &&
+                        node.name === 'SKILL' &&
+                        (node.relativeDirectory || '').includes('/skills/')) ||
+                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -368,6 +395,70 @@ module.exports = {
                         // current page satisfied this regular expression;
                         // if not provided or `undefined`, all pages will have feed reference inserted
                     },
+                    {
+                        serialize: ({ query: { site, allRoadmap } }) => {
+                            const { siteUrl } = site.siteMetadata
+
+                            return allRoadmap.nodes.map((node) => {
+                                const team = node.teams?.data?.[0]?.attributes?.name
+                                const topic = node.topic?.data?.attributes?.label
+                                const description = (node.description || '')
+                                    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+                                    .replace(/\]\(\//g, `](${siteUrl}/`) // absolutize relative links
+                                    .trim()
+
+                                return {
+                                    title: node.title,
+                                    description,
+                                    date: node.date,
+                                    url: `${siteUrl}/changelog?id=${node.strapiID}`,
+                                    guid: `posthog-changelog-${node.strapiID}`,
+                                    categories: [team && `${team} Team`, topic].filter(Boolean),
+                                    custom_elements: [
+                                        {
+                                            'content:encoded': {
+                                                _cdata: description,
+                                            },
+                                        },
+                                    ],
+                                }
+                            })
+                        },
+                        query: `
+                        {
+                            allRoadmap(
+                                filter: { complete: { eq: true }, date: { ne: null } }
+                                sort: { fields: date, order: DESC }
+                                limit: 50
+                            ) {
+                                nodes {
+                                    strapiID
+                                    title
+                                    description
+                                    date
+                                    teams {
+                                        data {
+                                            attributes {
+                                                name
+                                            }
+                                        }
+                                    }
+                                    topic {
+                                        data {
+                                            attributes {
+                                                label
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        `,
+                        output: '/changelog.rss',
+                        title: 'PostHog Changelog',
+                        // inserts <link rel="alternate" type="application/rss+xml"> on /changelog pages
+                        match: '^/changelog',
+                    },
                 ],
             },
         },
@@ -395,7 +486,12 @@ module.exports = {
                 name: `posthog-main-repo`,
                 remote: `https://github.com/posthog/posthog.git`,
                 branch: process.env.GATSBY_POSTHOG_BRANCH || 'master',
-                patterns: ['docs/published/**', 'docs/onboarding/**'],
+                // Canonical agent-skill definitions (products/*/skills/*/SKILL.md) are
+                // ingested for the /skills page. Reuses this clone rather than a second
+                // full clone of the monorepo. Tight glob excludes bundled references,
+                // scripts, and unrelated frontend/skills code paths. They never become
+                // pages — see shouldBlockNodeFromTransformation above and onCreateNode.
+                patterns: ['docs/published/**', 'docs/onboarding/**', 'products/*/skills/*/SKILL.md'],
             },
         },
         // {

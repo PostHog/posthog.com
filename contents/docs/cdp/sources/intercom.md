@@ -57,3 +57,7 @@ When you enable incremental sync for a supported table:
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

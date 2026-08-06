@@ -9,7 +9,7 @@ availability:
 sourceId: Webflow
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -50,6 +50,10 @@ All Webflow tables are full refresh only. Webflow's v2 list endpoints do not exp
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />
 
 ## Troubleshooting
 

@@ -32,6 +32,7 @@ export interface EarlyAccessOptInProps {
     /** Optional extra classes for the button. */
     className?: string
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+    width?: 'auto' | 'full'
 }
 
 /**
@@ -48,9 +49,10 @@ export default function EarlyAccessOptIn({
     label,
     className = '',
     size = 'md',
+    width = 'auto',
 }: EarlyAccessOptInProps): JSX.Element {
     return (
-        <OSButton variant="primary" size={size} asLink external to={to} className={className}>
+        <OSButton variant="primary" size={size} width={width} asLink external to={to} className={className}>
             {label || DEFAULT_LABELS[state]}
         </OSButton>
     )

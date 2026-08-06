@@ -104,3 +104,72 @@ await posthog.flush()
 // or keep the runtime alive until the flush completes
 ctx.waitUntil(posthog.flush())
 ```
+
+## Python
+
+The Python SDK ships the same custom-dispatcher path as `PostHogMCP`, a subclass of the [`posthog`](/docs/libraries/python) client. Method names are snake_case and arguments are keyword args rather than an options object:
+
+```python
+from posthog.mcp import PostHogMCP, get_more_tools_result
+
+posthog = PostHogMCP("phc_your_project_api_key", host="https://us.i.posthog.com")
+
+# Decorate your tools/list response so agents state their intent (and, optionally,
+# advertise the get_more_tools virtual tool):
+tools = posthog.prepare_tool_list(my_tools, report_missing=True)
+
+# On an inbound tools/call, pull the intent and strip the injected `context`:
+prepared = posthog.prepare_tool_call(name, arguments)
+if prepared.is_missing_capability:
+    posthog.capture_missing_capability(context=prepared.intent, distinct_id=user_id)
+    return get_more_tools_result()
+
+result = run_tool(name, prepared.args)
+
+# Capture the call (fire-and-forget, like posthog.capture):
+posthog.capture_tool_call(
+    name,
+    intent=prepared.intent,
+    intent_source=prepared.intent_source,
+    parameters=arguments,
+    response=result,
+    duration_ms=elapsed_ms,
+    is_error=False,
+    distinct_id=user_id,
+    session_id=mcp_session_id,
+    groups={"organization": org_id},
+)
+
+# On the handshake:
+posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", distinct_id=user_id)
+
+posthog.flush()  # PostHogMCP is a posthog client — flush/shutdown it yourself
+```
+
+`PostHogMCP(api_key, missing_capability_tool_name="get_more_tools", mcp_exception_autocapture=True, **posthog_kwargs)` accepts the standard `posthog` client kwargs (e.g. `host`). Set `mcp_exception_autocapture=False` to stop a failed tool call from emitting a `$exception` sibling. As in TypeScript, the wrapping-path hooks (`identify`, `context`, `intent_fallback`, `event_properties`) don't apply here — pass identity and properties on each `capture_*` call.
+
+### Stateless / multi-pod dispatchers
+
+On a stateless deployment (a fresh server per request, often across pods) there's no connection to carry a session, so `$session_id` fragments and the client name/version — sent only at `initialize` — go missing from later requests. Add the mint middleware to your ASGI app once. It mints a self-encoded token onto the `Mcp-Session-Id` response header at `initialize` and decodes the client's replay on every later request, so every pod recovers the same values with no shared store:
+
+```python
+from posthog.mcp import PostHogMcpStatelessSessionMiddleware, get_mcp_session
+
+app.add_middleware(PostHogMcpStatelessSessionMiddleware)
+
+# ...then in your request handler, feed the recovered session into each capture.
+# The token carries the client identity too — pass it as $mcp_client_* properties
+# (capture_tool_call takes session_id directly, client name/version via properties):
+sess = get_mcp_session(request)  # None until the client replays the token
+posthog.capture_tool_call(
+    name,
+    session_id=sess.session_id if sess else None,
+    intent=prepared.intent,
+    properties={
+        "$mcp_client_name": sess.client_name if sess else None,
+        "$mcp_client_version": sess.client_version if sess else None,
+    },
+)
+```
+
+The token is unsigned and carries only what the client volunteered at `initialize` — treat `$session_id` and `$mcp_client_*` as analytics labels, not authentication.

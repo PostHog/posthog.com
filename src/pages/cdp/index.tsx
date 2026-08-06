@@ -1,5 +1,5 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
@@ -15,8 +15,14 @@ export default function CDP(): JSX.Element {
         <>
             <SEO
                 title="CDP sources & destinations"
-                description="Get all your data into PostHog with 60+ sources & destinations"
-                image="https://res.cloudinary.com/dmukukwp6/image/upload/cdp_3f8703b873.jpg"
+                description="Move your data across 50+ destinations – the context agents act on to make your product self-driving"
+                image={`images/og/cdp.jpg`}
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog CDP',
+                    description:
+                        'Move your data across 50+ destinations – the context agents act on to make your product self-driving',
+                    slug: 'cdp',
+                })}
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <h1 className="mx-auto transition-all max-w-full">PostHog CDP</h1>
@@ -27,12 +33,13 @@ export default function CDP(): JSX.Element {
                     className="not-prose @lg:float-right @lg:max-w-[250px] @xl:max-w-[300px] @lg:ml-4"
                 />
                 <p>
-                    PostHog's CDP makes it easy to transform events as they arrive, and sync them over to other services
-                    that you use to run your business.
+                    PostHog's CDP makes it easy to transform events as they arrive, and move them across 50+
+                    destinations you use to run your business – the context agents act on to make your product
+                    self-driving.
                 </p>
                 <p>
-                    Any event or action in PostHog can update user records or trigger workflows in other products in
-                    your stack.
+                    Any event or action in PostHog can update user records or trigger workflows in other tools in your
+                    stack.
                 </p>
 
                 <h2>Realtime event transformations</h2>
@@ -167,13 +174,13 @@ export default function CDP(): JSX.Element {
                     in complex ETL pipelines, though you can still export data via our CDP if you have specific tooling
                     needs Alternatively, you can connect external warehouses (like Snowflake or BigQuery) as sources to
                     use your warehouse tables inside PostHog.{' '}
-                    <Link to="/data-stack/warehouse-native" state={{ newWindow: true }}>
+                    <Link to="/context-warehouse/warehouse-native" state={{ newWindow: true }}>
                         Learn more about PostHog&apos;s integrated warehouse
                     </Link>
                 </p>
 
                 <h2 id="integrations-library">Integrations library</h2>
-                <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
+                <Link to="/context-warehouse/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
         </>
     )

@@ -11,6 +11,7 @@ tags:
   - Engineering
   - AI
   - Inside PostHog
+  - Research
 ---
 
 After the success of using agents to [improve query performance through autoresearch](/blog/karpathy-autoresearch-query-engine-bug), I wanted to try something more ambitious.
@@ -57,7 +58,7 @@ I tested two approaches in parallel:
 
 In the end, both of those approaches worked about as well as each other, but I wouldn’t know this until I’d been working on it for a couple of days.
 
-My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. Having an oracle was critical for how I developed the new parser, because I could essentially do test-driven-development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
+My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. [Having an oracle](/newsletter/agent-autonomy#level-2-agent-delegation) was critical for how I developed the new parser, because I could essentially do test-driven-development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
 
 ## Generating disagreement (many ways)
 
@@ -119,3 +120,5 @@ And although I didn’t write any of the code by hand, I wouldn’t call this �
 It’s interesting to think about what this means for tools like ANTLR. I suspect an AI-based approach like mine will become the new normal. A parser generator will provide the oracle and then an LLM “hand”-rolls a higher performance parser using PBT/fuzzing to make them match.
 
 What specifically did I end up with? Formally, my new parser is a "hand"-written, predominantly predictive recursive-descent parser with a Pratt expression core, an LL(2) cursor widened at specific spots by bounded non-consuming look-ahead probes, plus localized ordered-choice speculative backtracking reserved for the few decisions that need it. It was entirely written by Claude Opus 4.7, in Rust, in May 2026.
+
+[Discuss on Hacker News](https://news.ycombinator.com/item?id=48663544)

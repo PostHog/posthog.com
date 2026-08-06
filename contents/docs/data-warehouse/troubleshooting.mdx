@@ -55,7 +55,11 @@ Use the error details in the toast notification to diagnose and fix the issue in
 
 ## Why is my BigQuery sync failing with credential errors?
 
-If your BigQuery sync fails with a message like "Your BigQuery service account credentials were rejected by Google," it means Google's token endpoint rejected the service account grant. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
+BigQuery credential errors can occur during initial setup or after the source has been running. PostHog provides specific, actionable messages for different credential issues:
+
+### "Your BigQuery service account credentials were rejected by Google"
+
+This means Google's token endpoint rejected the service account grant. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
 
 This happens when:
 
@@ -68,6 +72,24 @@ To fix this:
 2. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
 3. Upload the new Google Cloud JSON key file.
 4. Re-run the sync.
+
+### "Your Google Cloud JSON key file is missing required fields"
+
+This means the uploaded key file is incomplete. The JSON key file must include `project_id`, `private_key`, `private_key_id`, `client_email`, and `token_uri`.
+
+Download the complete service account key from Google Cloud and re-upload it.
+
+### "We couldn't read the private key in your Google Cloud JSON key file"
+
+This means the private key in your JSON file is corrupted or truncated. This can happen if the file was partially copied or modified.
+
+Download a fresh service account key from Google Cloud and re-upload the complete JSON file.
+
+### "BigQuery denied access to the configured dataset or tables"
+
+This means your service account lacks read permissions. Ensure it has at least the **BigQuery Data Viewer** role on the dataset you're syncing.
+
+For the full list of required permissions, see the [BigQuery source setup guide](/docs/cdp/sources/bigquery).
 
 ## Why is my BigQuery source failing with 'Dataset not found'?
 
@@ -106,6 +128,27 @@ To fix this:
 3. If you connected via OAuth, reconnect your Stripe account by selecting the OAuth authentication method and authorizing PostHog again.
 4. Re-run the sync.
 
+## Why is my Cloudflare source failing during validation?
+
+When you link a Cloudflare source, PostHog validates your API token against Cloudflare's `/user/tokens/verify` endpoint. Validation can fail for two reasons:
+
+### "Couldn't reach Cloudflare to verify your API token"
+
+This means PostHog couldn't connect to Cloudflare's API – typically due to a network error, timeout, 5xx server error, or 429 rate limiting. Your token may be perfectly valid.
+
+Wait a moment and retry. If the error persists, check the [Cloudflare status page](https://www.cloudflarestatus.com/) for any ongoing incidents.
+
+### "Invalid Cloudflare API token"
+
+This means Cloudflare rejected the token outright (401 Unauthorized, 403 Forbidden, or the verification endpoint returned `success: false`).
+
+To fix this:
+
+1. Verify your token hasn't been revoked in the [Cloudflare dashboard](https://dash.cloudflare.com/profile/api-tokens).
+2. Check that the token has the required read permissions: **Account Settings**, **Zone**, and **DNS**.
+3. If the token was revoked or is missing permissions, create a new one following the [Cloudflare source setup guide](/docs/cdp/sources/cloudflare).
+4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources), update your Cloudflare source with the new token, and retry.
+
 ## Why is my Microsoft SQL Server sync failing with 'Invalid object name'?
 
 If your Microsoft SQL Server sync fails with a message containing "Invalid object name," it means the database couldn't find an object (table or view) referenced in the query. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
@@ -123,6 +166,26 @@ To fix this:
 3. Ensure your connection user has SELECT permissions on all required objects, including cross-database dependencies.
 4. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and re-sync after fixing the issue.
 
+## Why is my ClickHouse sync failing with 'not supported for conversion into Arrow data format'?
+
+If your ClickHouse sync fails with an error containing "is not supported for conversion into Arrow data format," it means one of the selected columns has a type that ClickHouse can't serialize to Arrow format. This most commonly happens with `AggregateFunction(...)` state columns on aggregating materialized views.
+
+The full error looks like:
+
+```
+Code: 50. DB::Exception: The type 'AggregateFunction(...)' of a column '<name>'
+is not supported for conversion into Arrow data format: While executing Arrow. (UNKNOWN_TYPE)
+```
+
+This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because the column type is fixed.
+
+To fix this:
+
+1. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your ClickHouse source.
+2. [Deselect the offending column](/docs/cdp/sources/clickhouse#selecting-columns) in the schema's column settings.
+3. Or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`).
+4. Re-run the sync.
+
 ## Why is my Shopify sync failing with "Payment Required"?
 
 If your Shopify sync fails with a `402 Client Error: Payment Required` message, it means your Shopify store is frozen due to an unpaid bill. Shopify's Admin API returns this error when the store owner has an outstanding balance.
@@ -133,6 +196,18 @@ To fix this:
 
 1. Log into your [Shopify admin](https://admin.shopify.com/) and settle any outstanding balance to unfreeze your store.
 2. Once your store is active again, re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
+
+## Why is my Google Sheets sync failing with "collapse to the same column name"?
+
+This error occurs when two column headers in your Google Sheet look different but normalize to the same column name. PostHog ignores case, spaces, and punctuation when converting headers to column names — so headers like `Task ID` and `task_id` both become `task_id`.
+
+The error message names the two colliding headers and the column name they collapse to. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely because renaming the header is the only fix.
+
+To fix this:
+
+1. Open your Google Sheet and find the column headers mentioned in the error message.
+2. Rename one of the colliding headers so that it stays unique after normalization (case, spaces, and punctuation are ignored).
+3. Re-run the sync from [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) in PostHog.
 
 ## How do I speed up my SQL queries?
 

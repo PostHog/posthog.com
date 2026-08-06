@@ -442,6 +442,26 @@ const products: Product[] = [
         },
     },
     {
+        name: 'MCP analytics',
+        color: '[#8B0DC8]',
+        Icon: IconLlmAnalytics,
+        description: 'Product analytics for your MCP servers — see how agents use your tools.',
+        types: ['AI'],
+        features: [
+            { title: 'MCP tool usage and errors', Icon: IconLlmAnalytics },
+            { title: 'Agent intent clustering', Icon: IconDecisionTree },
+            { title: 'Latency and quality metrics', Icon: IconTrends },
+        ],
+        status: 'WIP',
+        badge: 'BETA',
+        pricing: {
+            cta: {
+                url: '/teams/mcp-analytics',
+                text: 'Learn more',
+            },
+        },
+    },
+    {
         name: 'Embedded analytics',
         color: '[#36C46F]',
         Icon: IconCodeInsert,
@@ -529,20 +549,19 @@ const products: Product[] = [
         Icon: IconLlmPromptManagement,
         color: 'yellow',
         types: ['AI'],
-        status: 'Roadmap',
-        roadmapID: 2168,
+        status: 'Production',
     },
     {
         name: 'Support',
         Icon: IconChatHelp,
         color: 'blue',
-        description: 'Built-in customer support with chat widget and unified inbox.',
+        description: 'Built-in customer support with chat widget and unified helpdesk.',
         types: ['Support'],
         status: 'Production',
         badge: 'BETA',
         pricing: {
             cta: {
-                url: '/docs/support',
+                url: '/support',
                 text: 'Learn more',
             },
         },

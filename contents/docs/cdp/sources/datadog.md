@@ -9,7 +9,7 @@ availability:
 sourceId: Datadog
 ---
 
-<CalloutBox icon="IconInfo" title="Alpha release" type="fyi">
+<CalloutBox icon="IconFlask" title="Alpha release" type="action">
 
 This source is currently in **alpha**. The interface and available tables may change.
 
@@ -51,3 +51,7 @@ Logs, audit logs, and events read access is governed by your Datadog account's d
 ## Configuration
 
 <SourceParameters />
+
+## Supported tables
+
+<SourceTables />

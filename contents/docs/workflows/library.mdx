@@ -4,13 +4,15 @@ title: Content library and message templates
 
 import CalloutBox from "components/Docs/CalloutBox";
 
-Our library lets you create reusable message templates for your workflows. You can access it from the **Library** tab in workflows.
+Our library lets you create reusable message templates for your workflows. You can access it from the **Library** tab in Workflows.
+
+Templates are displayed in a grid view with visual HTML previews, making it easy to see what each email looks like at a glance. Use the search bar and **Created by** filter to find templates quickly.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_library_95255c0656.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_library_95255c0656.png"
   classes="rounded"
-  alt="Library"
+  alt="Library showing email templates in grid view"
 />
 
 Currently, we support email templates, with push notifications and SMS templates coming soon.
@@ -49,10 +51,10 @@ This ensures your message displays correctly even when a property is missing.
 
 In addition to person properties, PostHog provides these system merge tags for email templates:
 
-| Merge tag                       | Description                                                                                                                                                                                                                                     |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{{unsubscribe_url}}`           | Links to a page where recipients can manage their email preferences                                                                                                                                                                             |
-| `{{unsubscribe_url_one_click}}` | Enables RFC 8058-compliant one-click unsubscribe. When email clients send a POST request to this URL, recipients are automatically unsubscribed from all marketing emails. When clicked directly, it displays an unsubscribe confirmation page. |
+| Merge tag                       | Description                                                                                                                                                                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{{unsubscribe_url}}`           | Links to a page where recipients can manage their email preferences. When [email tracking consent](/docs/workflows/engagement-events#email-tracking-consent) is enabled, this page also includes an option to manage open and click tracking consent. |
+| `{{unsubscribe_url_one_click}}` | Enables RFC 8058-compliant one-click unsubscribe. When email clients send a POST request to this URL, recipients are automatically unsubscribed from all marketing emails. When clicked directly, it displays an unsubscribe confirmation page.       |
 
 Use the one-click unsubscribe URL to improve email deliverability and comply with email regulations like CAN-SPAM. Most modern email clients display a prominent unsubscribe button when they detect proper one-click unsubscribe headers.
 
@@ -105,6 +107,18 @@ You can type Liquid syntax directly into your email template. We also provide a 
 />
 
 If you type Liquid syntax directly and the Liquid doesn't compile correctly, the email won't be sent. Always verify your Liquid syntax is valid before starting a workflow.
+
+### Disabling link click tracking
+
+PostHog automatically rewrites every link in an email to route through a click-tracking redirect, which powers the `$workflows_email_link_clicked` [engagement event](/docs/workflows/engagement-events).
+
+If you need a link to reach its destination exactly as written, add an HTML block and mark the anchor with either `clicktracking="off"` or `data-ph-no-track`:
+
+```html
+<a href="https://example.com/your-link" data-ph-no-track>Open link</a>
+```
+
+The attribute must be on the `<a>` tag itself, not a child element. Links marked this way won't produce click events.
 
 ### Testing templates
 

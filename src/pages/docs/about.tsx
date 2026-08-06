@@ -49,7 +49,7 @@ export default function AboutDocs(): JSX.Element {
                             </p>
                             <p className="mb-0 text-secondary">
                                 Maintained by the
-                                <SmallTeam slug="docs-wizard" />.
+                                <SmallTeam slug="wizard-and-docs" />.
                             </p>
                         </div>
                     </ScrollArea>

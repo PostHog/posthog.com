@@ -9,36 +9,33 @@ availability:
 sourceId: Klaviyo
 ---
 
-The Klaviyo connector can link campaigns, profiles, events, flows, and more to PostHog.
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-To link Klaviyo:
+The Klaviyo connector syncs your marketing data – campaigns, profiles, events, flows, lists, and metrics – into PostHog, so you can analyze your email and marketing activity alongside your product data.
 
-1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
+## Prerequisites
 
-2. Click **+ New source** and then click **Link** next to Klaviyo.
+You need a Klaviyo account and a private API key. Create one in your [Klaviyo account settings](https://www.klaviyo.com/settings/account/api-keys) by clicking **Create Private API Key**, giving it a name, and selecting a **Read-Only Key**. Grant read permissions for the data you want to sync: Accounts, Campaigns, Catalogs, Coupon codes, Coupons, Custom objects, Events, Flows, Forms, Images, Lists, Metrics, Profiles, Push tokens, Reviews, Segments, Tags, Templates, Web feeds, and Webhooks. Tables you haven't granted access to are skipped.
 
-3. Next, you need an API key from Klaviyo. Go to your [API keys settings](https://www.klaviyo.com/settings/account/api-keys) in Klaviyo. Click **Create Private API Key**, give it a name, and select **Read-Only Key** for the access level. Copy the value of the newly created key.
+## Adding a data source
 
-4. Back in PostHog, paste the API key in the `API key` field and click **Next**.
+<SourceSetupIntro />
 
-5. On the next page, set up the schemas you want to sync and modify the method and frequency as needed. Once done, click **Import**.
+When linking Klaviyo, you'll need:
 
-Once the syncs are complete, you can start using Klaviyo data in PostHog.
+- **API key** – the private API key you created in your Klaviyo account settings (starts with `pk_`).
 
-## Configuration
+## Sync modes
 
-<SourceParameters />
+<SyncModes />
 
-## Syncing list membership data
+The `events` table is append-only, since Klaviyo events are immutable. On the initial sync, only the last 365 days of events are imported.
 
-The Klaviyo connector includes an opt-in `list_profiles` table that maps which profiles belong to which list. This is disabled by default — to enable it, toggle it on in the schema configuration when setting up or editing your Klaviyo source.
+## List profiles
 
-This table is useful because Klaviyo only exposes list membership as relationship links that can't be queried directly in PostHog. The `list_profiles` table materializes this many-to-many relationship as a flat join table with two columns:
-
-- `list_id` – the Klaviyo list ID
-- `profile_id` – the Klaviyo profile ID
-
-Once synced, you can join it with your profiles table to query members of a specific list:
+The opt-in `list_profiles` table maps which profiles belong to which list as `{list_id, profile_id, joined_group_at}` rows. This is disabled by default, but can be toggled on in the schema configuration when setting up or editing your Klaviyo source. It supports incremental sync on `joined_group_at` (the datetime when the profile most recently joined the list). Incremental syncs only pick up new joins and re-joins, and will not account for profiles removed from a list. A full refresh is required if profiles need to be removed. Once synced, you can join it with your profiles table:
 
 ```sql
 SELECT p.*
@@ -47,4 +44,30 @@ JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
 WHERE lp.list_id = 'your_list_id'
 ```
 
-> **Note:** The `list_profiles` table uses full refresh sync only. Incremental sync isn't available because Klaviyo's relationship API doesn't support filtering by change date. This also means removed memberships are correctly reflected after each sync.
+> **Note:** List membership isn't the same as subscription. A profile can belong to a list without being subscribed to any of its communications. To check what a profile is actually subscribed to, look at the `$consent` array in the profile's `properties` column — it lists the channels (`sms`, `email`, and/or `push`) the profile currently consents to. Avoid relying on `$consent_timestamp` for this: it records when consent was given, but Klaviyo doesn't always clear it when a profile unsubscribes.
+
+To find profiles that are on a list **and** actually subscribed to a given channel, filter on `$consent` too:
+
+```sql
+SELECT p.id, p.email
+FROM klaviyo_profiles p
+JOIN klaviyo_list_profiles lp ON lp.profile_id = p.id
+WHERE lp.list_id = 'your_list_id'
+  AND arrayExists(x -> x = 'email', JSONExtractArrayRaw(p.properties, '$consent'))
+```
+
+## Webhooks
+
+The `webhooks` table is only available to Klaviyo accounts with the [Advanced KDP add-on](https://help.klaviyo.com/hc/en-us/articles/17655007276059). Without it, Klaviyo returns a `403 permission_denied` error saying "You must have Advanced KDP enabled to use this endpoint," even when your API key has the Webhooks read scope. This table is disabled by default. Only enable it if your Klaviyo account includes Advanced KDP.
+
+## Configuration
+
+<SourceParameters />
+
+## Supported tables
+
+<SourceTables />
+
+## Troubleshooting
+
+<TroubleshootingLink />

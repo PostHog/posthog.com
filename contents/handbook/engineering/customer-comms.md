@@ -15,11 +15,8 @@ Prior art to mirror: the feature-flags quota-limit rollout in [`product-internal
 
 For the underlying email infrastructure (Customer.io tags, categories, unsubscribe behavior), see the [email comms handbook page](/handbook/marketing/email-comms). For incidents specifically, see [engineering incidents](/handbook/engineering/operations/incidents) — Marketing handles those comms too.
 
-## Staying ahead of what's about to ship
+## Staying on top of what ships
 
-If you write or coordinate customer comms, join these two internal Slack channels — they're the lowest-friction way to know what's just shipped and what's about to land:
+If you write or coordinate customer comms, join the [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) internal Slack channel — it's the lowest-friction way to know what's just shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. Owned by the [Marketing team](/teams/marketing) and posted as a daily digest.
-
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in `posthog/posthog` and summarize them into the channel. You can opt a PR in or out via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for the full flow.
+The channel is populated by agentic workflows that scan merged PRs and feature flag changes in `posthog/posthog` and summarize them into it. You can opt a PR in or out via the *Publish to changelog?* checkbox on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.

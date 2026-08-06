@@ -118,8 +118,14 @@ export default function FreeTier({ size = 'normal' }: { size?: 'normal' | 'large
             />
             <FreeTierItem
                 name="Logs"
-                allocation="50 GB ingested"
+                allocation="10 GB ingested"
                 icon={<Icons.IconTerminal className={`text-blue size-5 ${size === 'large' && 'size-7'}`} />}
+                size={size}
+            />
+            <FreeTierItem
+                name="Replay Vision"
+                allocation="2500 credits (worth $25)"
+                icon={<Icons.IconEye className={`text-yellow size-5 ${size === 'large' && 'size-7'}`} />}
                 size={size}
             />
         </>

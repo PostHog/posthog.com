@@ -6,15 +6,14 @@ showTitle: true
 
 Our email communications can be broadly divided into broadcasts (one-off emails to specific lists, like a newsletter), campaigns (repeatable workflows which users move through dynamically), and API triggered emails (self-explanatory).
 
-This page doesn't deal with [our Product for Engineers newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
+This page doesn't deal with [our build mode newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
-## Linking to the PostHog app
+## Linking to the PostHog app or PostHog AI
 
 To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
 
 For example:
-`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`
-`https://app.posthog.com//logs?activeTab=alerts`
+`https://app.posthog.com/endpoints` instead of `https://app.posthog.com/project/2/endpoints`.
 
 The `app.posthog.com` prefix works for both US and EU instances, and the project path resolves itself for the recipient.
 
@@ -23,7 +22,6 @@ To preload a prompt for PostHog AI, use this format:
 
 For example:
 `https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate?`
-`https://app.posthog.com/#panel=max:!All%20hail%20hogzilla`
 
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
@@ -49,14 +47,16 @@ The email is usually comprised of three sections, which inform users of new guid
 We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
 
 ### Launch emails
-Most product and feature launch emails come from the Product Marketer who sent them -- but sometimes campaigns trigger from others, such as billing@posthog.com.
+Most product and feature launch emails come from the Product Marketer who sent them – but sometimes campaigns trigger from others, such as billing@posthog.com.
 
 The exceptions and other solutions are:
-- Sending emails from hey@posthog.com -- this is what we usually do for BIG sends, because it would overwhelm the sender's inbox with 'out-of-office' auto-replies.
-- Sending emails from beta-feedback@posthog.com -- this is a Google group tied to the automation in [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U ) by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
+- Sending emails from hey@posthog.com – this is what we usually do for BIG sends, because it would overwhelm the sender's inbox with 'out-of-office' auto-replies.
+- Sending emails from beta-feedback@posthog.com – this is a Google group tied to the automation in [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U ) by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
 - Sending emails from a specific person, but setting the reply-to address as one of the above. This is not common, but it's there if you want to use it.
 
 >We specifically do not want emails we think people will reply to going into hey@posthog.com because it is sporadically monitored at best, and hard to collaborate through.
+
+If you're sending a launch email (alpha, beta, GA), it's helpful to add an annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the send date, so we can see its impact on our metrics later.
 
 When we ask users to share feedback through email, it should either link to beta-feedback@posthog.com, the [support modal](http://app.posthog.com/home#supportModal), or to ourselves personally. Never hey@posthog.com.
 
@@ -99,14 +99,17 @@ The goal of this flow is to set expectations for what the self-hosted experience
 
 Our open source onboarding email is essentially identical to the self-hosted onboarding flow, but excludes information about the sunsetting of the self-hosted product. 
 
-#### Beta onboarding emails
-When a user opts in to a beta via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) we enter them into an email flow designed to help us collect feedback from users. 
+#### Waitlist, alpha, and beta onboarding emails
+When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on either a product or [the roadmap](/roadmap) page — a `$feature_enrollment_update` event is sent to Customer.io through a data pipeline and enters them into the Waitlist, Alpha, Beta onboarding flow. The flow immediately segments on the `$feature_enrollment_stage` property:
 
-This flow currently comprises a single, personal email from either Joe or the team lead working on the beta feature. This email is sent one week after the user joins the beta and features tailored content based on which beta the user joined. 
+- **Concept:** an immediate, simple confirmation that they're on the waitlist.
+- **Alpha:** an immediate email warning of rough edges and asking for feedback.
+- **Beta:** a 5-day wait, then an email asking for feedback on the beta.
 
-When responses come in, Joe generally triages replies and directs feedback to the relevant team, as well as rewarding users with merch as thanks for their feedback. 
+When a feature moves from concept to alpha or beta, users who registered interest are automatically opted in to the new stage and a `user moved feature preview stage` event fires — we then email them to let them know the feature is enabled and now available, and ask for feedback.
 
-> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed. 
+> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed.
+
 
 #### Onboarding - new hires
 This is an internal email flow for new hires, which triggers whenever a new user signs up with a PostHog email address. We currently exclude most old-time hires from this flow, to avoid blocking their inboxes. 

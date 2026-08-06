@@ -101,6 +101,41 @@ ClickHouse's Arrow output does not support every type, so PostHog serializes the
 
 `Nullable` and `LowCardinality` wrappers, `DateTime`/`DateTime64` precision and timezones, and `Decimal[32–256]` are all preserved natively.
 
+## Live queries
+
+In addition to syncing data on a schedule, you can enable live queries on a synced ClickHouse source. This lets you query your ClickHouse database directly from the [SQL editor](https://app.posthog.com/sql) — queries run against your live database in real time without duplicating data into PostHog.
+
+### Enabling live queries on a new source
+
+When creating a new ClickHouse source, the source wizard offers three query modes:
+
+- **Sync to PostHog** — Sync selected tables on a schedule. This is the default.
+- **Query live only** — Run queries directly against your database without syncing any data.
+- **Sync and query live** — Sync tables into PostHog and also run live queries against the database from the SQL editor.
+
+Select **Sync and query live** to enable both scheduled syncs and live queries on the same source.
+
+### Enabling live queries on an existing source
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your ClickHouse source.
+2. Open the **Configuration** tab.
+3. Toggle **Enable live queries** on.
+4. Click **Save** to apply.
+
+Once enabled, you can query your ClickHouse source directly from the SQL editor.
+
+### Querying a live source
+
+There are two ways to start a live query:
+
+- **From the source page:** Go to the **Schemas** tab on your source and click **Query directly**. This opens the SQL editor with your source connection preselected.
+- **From the SQL editor:** Open the [SQL editor](https://app.posthog.com/sql), click the connection picker in the toolbar, and select your ClickHouse source. Synced sources with live queries enabled are labeled with `· synced` (e.g., `my_source (ClickHouse · synced)`) to distinguish them from direct-only connections.
+
+### When to use live queries vs scheduled syncs only
+
+- **Live queries** are best for ad-hoc exploration, querying data that changes frequently, or when you want to query your database without waiting for a sync.
+- **Scheduled syncs only** are better when you need faster query performance, want to join external data with PostHog events in dashboards and insights, or need data available across all PostHog features.
+
 ## Troubleshooting
 
 ### Table not found or has no columns
@@ -111,6 +146,21 @@ If you see an error like "table not found or has no columns," the source table n
 - You're syncing a materialized view's internal `.inner_id.<uuid>` table, which changes whenever the view is recreated.
 
 **Solution:** Remove the missing table from your source configuration, or re-point it to the correct table. If you were syncing a materialized view, sync it by its own name rather than its internal `.inner_id.<uuid>` table.
+
+### Unsupported Arrow column type
+
+If your sync fails with an error containing "is not supported for conversion into Arrow data format," it means one of the selected columns has a type that ClickHouse can't serialize to Arrow format. This most commonly happens with `AggregateFunction(...)` state columns on aggregating materialized views.
+
+The full error looks like:
+
+```
+Code: 50. DB::Exception: The type 'AggregateFunction(...)' of a column '<name>'
+is not supported for conversion into Arrow data format: While executing Arrow. (UNKNOWN_TYPE)
+```
+
+This is a non-retryable error — PostHog stops the sync instead of retrying indefinitely because the column type is fixed.
+
+**Solution:** [Deselect the offending column](#selecting-columns) in the schema's column settings, or sync a view that finalizes the aggregate (for example, using `finalizeAggregation()`), then resync.
 import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 
 <InboundIpAddresses />

@@ -6,6 +6,8 @@ showTitle: true
 
 > **Owner:** Sara Miteva
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Workflows is an automation builder that turns any product event, schedule, or cohort change into a multi-step flow – send emails, fire Slack alerts, push webhooks, update feature flags, capture new events – all on the same data your analytics, replay, and experiments already use. Triggers and the builder are free; messages start at $0.005 per send after 10K free per channel each month.

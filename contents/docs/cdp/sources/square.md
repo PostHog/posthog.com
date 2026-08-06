@@ -37,6 +37,10 @@ Once the syncs are complete, you can start using Square data in PostHog.
 
 <SourceParameters />
 
+## Supported tables
+
+<SourceTables />
+
 ## Sync methods
 
 The `payments` and `refunds` tables support incremental syncing using `created_at` as the replication key. This means only new records are fetched on each sync.

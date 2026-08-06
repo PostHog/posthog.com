@@ -553,7 +553,7 @@ We offer a pre-built `sampleByEvent` function to sample by event name. You can i
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+import { sampleByEvent } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
@@ -603,7 +603,7 @@ We offer a pre-built `sampleByDistinctId` function to sample a percentage of eve
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
+import { sampleByDistinctId } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   before_send: sampleByDistinctId(0.4)
@@ -633,7 +633,7 @@ We offer a pre-built `sampleBySessionId` function to sample a percentage of even
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
+import { sampleBySessionId } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   before_send: sampleBySessionId(0.25)

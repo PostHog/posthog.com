@@ -1,0 +1,88 @@
+---
+title: Query the semantic layer with SQL
+sidebar: Docs
+showTitle: true
+---
+
+import AlphaCallout from './_snippets/alpha-callout'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+The whole semantic layer is queryable with [SQL](/docs/data-warehouse/query) through `system.information_schema` – from the SQL editor in PostHog or the `execute-sql` MCP tool. This is also how agents discover metrics: there's no "list metrics" tool by design, just these tables.
+
+<AlphaCallout />
+
+## system.information_schema.metrics
+
+One row per metric in your project:
+
+| Column | Type | What it is |
+|--------|------|------------|
+| `id` | String | The metric's id. |
+| `name` | String | Write-once identifier, e.g. `mrr`. |
+| `display_name` | Nullable string | Human-friendly label. |
+| `description` | String | What the metric means – the text agents match questions against. |
+| `unit` | Nullable string | e.g. `usd`, `percent`. |
+| `status` | String | `proposed` or `approved`. |
+| `is_drifted` | Boolean | Whether the definition has drifted from its source insight. Computed at read time. |
+| `definition` | Nullable string | The machine-readable definition, or null for a stub. |
+| `definition_kind` | Nullable string | `HogQLQuery`, `TrendsQuery`, `MarkdownDefinition`, ... |
+| `owner` | Nullable string | Email of the accountable human. |
+| `confidence` | Nullable float | AI author's confidence, 0-1, when AI-authored. |
+| `reasoning` | Nullable string | AI author's reasoning, as review context. |
+| `source_insight_short_id` | Nullable string | The insight the metric was created from, if any. |
+| `last_run_at` | Nullable string | When the metric last ran. |
+| `created_at` | String | When the metric was created. |
+
+Metrics whose definitions reference tables you don't have access to are hidden from your results.
+
+### Find a metric
+
+```sql
+SELECT name, display_name, description, status, is_drifted
+FROM system.information_schema.metrics
+WHERE name ILIKE '%mrr%' OR description ILIKE '%revenue%'
+```
+
+### List everything canonical
+
+```sql
+SELECT name, display_name, unit, owner
+FROM system.information_schema.metrics
+WHERE status = 'approved' AND is_drifted = false
+```
+
+### The review queue
+
+```sql
+SELECT name, display_name, confidence, reasoning
+FROM system.information_schema.metrics
+WHERE status = 'proposed'
+```
+
+<CalloutBox icon="IconWarning" title="Check before you trust" type="caution">
+
+A result is canonical only when `status = 'approved'` and `is_drifted = false`. Always check both columns before treating a metric – or its output – as the source of truth.
+
+</CalloutBox>
+
+## Certifications in system.information_schema.tables
+
+Each table row carries its trust mark in the `certification` column (`certified`, `deprecated`, or null):
+
+```sql
+SELECT table_name, table_type, description, certification
+FROM system.information_schema.tables
+WHERE certification IS NOT NULL
+```
+
+## Relationships in system.information_schema.relationships
+
+Relationships lists every joinable path between tables. Rows that came from an accepted catalog proposal carry the reviewed `confidence` and `reasoning`:
+
+```sql
+SELECT source_table, source_column, target_table, target_column, confidence, reasoning
+FROM system.information_schema.relationships
+WHERE confidence IS NOT NULL
+```
+
+For the rest of the `information_schema` surface – columns, data types, statistics – see the [data warehouse SQL docs](/docs/data-warehouse/query).

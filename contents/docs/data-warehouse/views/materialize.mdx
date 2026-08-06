@@ -10,7 +10,11 @@ availability:
 
 Views can be materialized and stored in the PostHog data warehouse. This means that the view is precomputed, which can significantly improve query performance. This is useful for expensive and frequently used queries like KPI dashboards or [embedded analytics](/tutorials/embedded-analytics) queries.
 
-To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces. You can then query the view like any other table.
+There are two ways to materialize a view:
+
+1. **At creation time:** When saving a query as a view in the [SQL editor](https://app.posthog.com/sql), check the **Materialize this view** checkbox in the "Save as view" dialog. This materializes the view immediately with a daily sync by default. You can adjust the sync frequency later in the materialization settings.
+
+2. **After creation:** For an existing view, go to the [SQL editor](https://app.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
@@ -19,13 +23,13 @@ To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), selec
   classes="rounded"
 />
 
-Once materialized, you can query the view like any other.
+Once materialized, you can query the view like any other table.
 
 ## Scheduling a materialized view
 
-After you create a view, you can also schedule it to be updated at a specific interval, anywhere from never to every 15 minutes to every month. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. 
+After you create a view, you can also schedule it to be updated at a specific interval, anywhere from never to every 15 minutes to every month. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence.
 
-For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well. 
+For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"

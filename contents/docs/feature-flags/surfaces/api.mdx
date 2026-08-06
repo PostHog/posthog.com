@@ -1,0 +1,30 @@
+---
+title: Feature flags API
+sidebar: Docs
+showTitle: true
+---
+
+There are two APIs for feature flags, and they answer different questions. The [`/flags` endpoint](/docs/api/flags) evaluates flags for a user at runtime – it's what the SDKs call under the hood, and it's what you use if there's no SDK for your platform. The [feature flags API](/docs/api/feature-flags) manages the flag definitions themselves: create, list, update, and delete flags from your own tooling or CI.
+
+Use the API when you want flags in a place PostHog doesn't ship an SDK for, or when flag management should be part of a pipeline rather than a person clicking through the app.
+
+## Before you start
+
+1. **Set up Feature Flags** – [install a PostHog SDK](/docs/feature-flags/installation) so your app can evaluate flags.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need.
+
+## What you can do here
+
+**Evaluate flags** with [`/flags`](/docs/api/flags), using your public project API key and a `distinct_id`. It returns each flag's value for that user, plus any payloads. See the [API installation guide](/docs/feature-flags/installation/api) for the request shape.
+
+**Manage flag definitions** with the [feature flags API](/docs/api/feature-flags), using a [personal API key](/docs/api/personal-api-keys) scoped to `feature_flag:read` or `feature_flag:write`. This covers creating and updating flags, release conditions, variants, and [scheduled changes](/docs/feature-flags/scheduled-flag-changes).
+
+**Check impact before you roll out** – the same endpoints back the blast radius, evaluation reasons, and flag status checks you see in the web app, so CI can gate a rollout on them.
+
+For high-volume server-side evaluation, don't call `/flags` per request. Use [local evaluation](/docs/feature-flags/local-evaluation) instead: your server pulls the flag definitions once and resolves values in-process.
+
+## Related
+
+- Create and roll out flags in the [web app](/docs/feature-flags/surfaces/web-app).
+- Do the same thing conversationally over [MCP](/docs/feature-flags/surfaces/mcp).
+- Read the full [PostHog API reference](/docs/api).

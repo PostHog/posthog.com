@@ -8,11 +8,10 @@ import { ProductVideo } from 'components/ProductVideo'
 import List from 'components/List'
 import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import PlatformInstall from 'components/PlatformInstall'
 import WizardCTA from 'components/WizardCTA'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import LovableLogo from 'components/CustomerLogos/LovableLogo'
-import PostHogLogo from 'components/CustomerLogos/PostHogLogo'
 
 const TOP_COUNT = 8
 const PLATFORM_ORDER = [
@@ -149,7 +148,16 @@ export default function AIObservabilityLanding(): JSX.Element {
                             alt="Kilo Code"
                             imgClassName="object-contain max-w-full h-10 w-auto"
                         />
-                        <PostHogLogo className="fill-current object-contain max-w-full h-10" />
+                        <img
+                            src="/brand/posthog-logo.svg"
+                            alt="PostHog"
+                            className="object-contain max-w-full h-10 w-auto dark:hidden"
+                        />
+                        <img
+                            src="/brand/posthog-logo-white.svg"
+                            alt="PostHog"
+                            className="hidden object-contain max-w-full h-10 w-auto dark:block"
+                        />
                     </div>
                     <p className="text-xs mt-3 !mb-0">
                         <span className="font-semibold">AI teams using PostHog AI Observability in production.</span>
@@ -217,9 +225,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 errors, latency, traces — without switching to a browser.
                             </p>
 
-                            <SingleCodeBlock language="bash" showAskAI={false}>
-                                npx @posthog/wizard mcp add
-                            </SingleCodeBlock>
+                            <PlatformInstall variant="inline" command="mcp add" slim />
 
                             <ul>
                                 <li>
@@ -246,7 +252,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                 <CallToAction
                                     type="secondary"
                                     size="md"
-                                    to="/docs/ai-observability/query-traces-mcp"
+                                    to="/docs/ai-observability/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     MCP docs
@@ -418,7 +424,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                     <strong>First 100k LLM events/mo are free</strong> with 30-day retention
                                 </li>
                                 <li>
-                                    Above 100k: <strong>$0.00006/event</strong> with volume discounts
+                                    Above 100k: <strong>from $0.00035/event</strong> with volume discounts down to $0.00006/event
                                 </li>
                                 <li>Set billing limits to avoid surprise charges</li>
                                 <li>

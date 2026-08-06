@@ -7,7 +7,7 @@ import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
 import Link from 'components/Link'
-import Logomark from 'components/Home/images/Logomark'
+import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import {
     IconArchive,
@@ -365,7 +365,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                         />
                                         {isTeamMember && (
                                             <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white dark:bg-aggent-dark text-primary dark:text-primary-dark">
-                                                <Logomark className="w-[16px]" />
+                                                <Logo layout="logomark" className="w-[16px]" />
                                             </span>
                                         )}
                                     </div>
@@ -402,7 +402,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                             />
                             {isTeamMember && (
                                 <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                    <Logomark className="w-[16px]" />
+                                    <Logo layout="logomark" className="w-[16px]" />
                                 </span>
                             )}
                         </div>

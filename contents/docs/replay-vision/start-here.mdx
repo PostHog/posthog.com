@@ -4,12 +4,6 @@ title: Getting started with Replay Vision
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconInfo" title="Replay Vision is in closed beta" type="warning">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
 This walkthrough takes you from zero to your first observation in about five minutes. We'll create a scanner from a built-in template, run it on a recording you pick, and then query the result as a regular PostHog event.
 
 You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
@@ -53,7 +47,7 @@ For a first run, leave the prompt and model alone. To keep volume low while you 
 
 <CalloutBox type="fyi" title="Estimate your usage first">
 
-The form shows a projected per-month observation count based on your project's recent recording volume, the filters you set, and the sampling rate. Use that to size against your [quota](/docs/replay-vision/quota-and-limits) before saving.
+The form shows an estimated monthly cost and observation count based on your project's recent recording volume, the filters you set, and the sampling rate. Use that to size against your [budget](/docs/replay-vision/quota-and-limits) before saving.
 
 </CalloutBox>
 
@@ -119,3 +113,4 @@ You'll see a count over time of sessions the scanner flagged. From here you can 
 - [Scanner types](/docs/replay-vision/scanner-types) – understand monitor vs. classifier vs. scorer vs. summarizer before authoring your second one.
 - [Creating scanners](/docs/replay-vision/creating-scanners) – prompt patterns that actually work, plus how filters and sampling interact.
 - [Running scanners](/docs/replay-vision/running-scanners) – automatic background sweeps vs. on-demand triggers, and what happens to ineligible sessions.
+- [Calibration](/docs/replay-vision/calibration) – once observations flow, rate them on the scanner's calibration tab and let PostHog AI recommend configuration improvements.

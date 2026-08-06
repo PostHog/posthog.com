@@ -6,6 +6,8 @@ showTitle: true
 
 > **Owner:** Sara Miteva
 
+*For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
+
 ## Elevator pitch
 
 PostHog Logs is a centralized log search built on OpenTelemetry. Send logs from any OTLP-compatible source (including your existing Datadog Agent) and they're searchable inside the same platform that runs your analytics, session replays, errors, and feature flags. Generous free tier, usage-priced per GB, no per-host or per-user fees.
@@ -64,10 +66,10 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 
 **Problem:** Datadog, New Relic, and Splunk price logs by host, GB, retention tier, and indexing rate. Bills are unpredictable and grow faster than usage. Customers in our research consistently cite cost as the sharpest switching reason: Datadog's "sudden cost increases" and "commit to events, pay on demand if you don't hit the mark" framing keeps coming up in user interviews.
 
-**Solution:** PostHog Logs is per-GB only. 50 GB free per month, $0.25/GB after, with volume discounts. No per-host fees. No per-retention-tier surcharges. No per-user pricing. And because ingest runs on OpenTelemetry, your setup stays portable if you ever decide to leave.
+**Solution:** PostHog Logs is per-GB only. 10 GB free per month, $0.25/GB after, with volume discounts. No per-host fees. No per-retention-tier surcharges. No per-user pricing. And because ingest runs on OpenTelemetry, your setup stays portable if you ever decide to leave.
 
 **Supporting features:**
-- 50 GB/month free across log ingest; $0.25/GB after with volume discounts
+- 10 GB/month free across log ingest; $0.25/GB after with volume discounts
 - No per-host, per-user, or per-retention-tier surcharges
 - Hard billing limits per product
 - OpenTelemetry-native ingest – migrate in and out without proprietary lock-in
@@ -82,7 +84,7 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 **Where PostHog wins:**
 - Customer is product-led, not infra-led. PostHog Logs sits next to product analytics, funnels, retention, cohorts, and experiments. Datadog and New Relic don't have any of those.
 - Customer wants logs tied to user behavior, not just hostname and pod – every log shares identity with the rest of the product data.
-- Customer can't justify the bill at their volume – simple $0.25/GB after 50 GB free, no per-host fees, no per-retention-tier surcharges, published pricing not quote-locked.
+- Customer can't justify the bill at their volume – simple $0.25/GB after 10 GB free, no per-host fees, no per-retention-tier surcharges, published pricing not quote-locked.
 - Datadog Agent drop-in lets the customer migrate with one env variable.
 
 ### vs Grafana Loki and Grafana Cloud Logs
@@ -125,7 +127,7 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 
 **Follow-up:** What's your current daily volume, and where does the cost get painful – ingest, indexing, or retention?
 
-**Answer:** PostHog Logs is per-GB ingest only, with volume discounts past the 50 GB free tier. At terabyte-per-day volume the bill is predictable but real – customers usually pair PostHog with sampling (drop debug-level logs in production) or use the OpenTelemetry collector to route only the logs that need product context to PostHog. For pure-volume use cases without that need (security audit, raw archival), self-hosted Loki or an enterprise platform may make more sense for bulk volume, and PostHog Logs for the *product-relevant* slice. The product integration matters most when the log is debugging a user-facing issue, not when it's part of a compliance archive.
+**Answer:** PostHog Logs is per-GB ingest only, with volume discounts past the 10 GB free tier. At terabyte-per-day volume the bill is predictable but real – customers usually pair PostHog with sampling (drop debug-level logs in production) or use the OpenTelemetry collector to route only the logs that need product context to PostHog. For pure-volume use cases without that need (security audit, raw archival), self-hosted Loki or an enterprise platform may make more sense for bulk volume, and PostHog Logs for the *product-relevant* slice. The product integration matters most when the log is debugging a user-facing issue, not when it's part of a compliance archive.
 
 **Proof point:** OpenTelemetry-native ingest lets you route logs by severity, service, or attribute to multiple destinations, PostHog for product-context logs, your existing tool for the rest.
 

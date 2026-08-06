@@ -7,9 +7,9 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconInfo" title="Open beta" type="fyi">
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
 
-Self-driving is currently in open beta.
+Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
 
 </CalloutBox>
 
@@ -17,7 +17,7 @@ A report groups related [signals](/docs/self-driving/signals) into one item of w
 
 ## Why reports, not raw signals
 
-A real problem rarely shows up as one clean signal. "Checkout is broken" might surface as a spike in error tracking, a cluster of rage-clicks in session replay, and a handful of support tickets, all at once. A report ties those together so you see one problem instead of a dozen alerts.
+A real problem rarely shows up as one clean signal. "Checkout is broken" might surface as a spike in error tracking, a cluster of rage-clicks in session replay, and a handful of support tickets, all at once. A report ties those together so you see one problem instead of a dozen alerts. ([Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) follows exactly this example through the whole loop.)
 
 ## What's in a report
 
@@ -26,10 +26,19 @@ A report is enriched and ranked:
 - **Grouped signals** – the related findings, from one or more sources, with the evidence behind them.
 - **Priority** – how urgent it is, so the most important work rises to the top.
 - **State** – whether it's **actionable**, so an agent can open a pull request, or **needs input** before anything can be worked on.
+- **Charts** – where a finding is about something that moved, the report can carry the chart that shows it, so you can see the shape of the problem without rebuilding the query yourself.
+
+A report also accumulates a history as work happens on it: the commits and pull requests opened against it, the code the investigating agent referenced, CI status and review comments on its PR, related reports, and any notes people left while triaging. You're reading the whole trail, not just the original finding.
 
 ## Where reports go
 
 Reports land in your [inbox](/docs/self-driving/inbox), ranked by priority. An agent investigates each one. Actionable reports get a pull request to review and merge – the rest wait in your inbox for your input.
+
+## When a report is done
+
+A report you resolve stays resolved – resolving is terminal, and a resolved report never quietly reopens. If the same problem comes back later, the loop files a **fresh** report for the new occurrence instead of reviving the old one.
+
+That's deliberate: the recurrence is genuinely new information. Reopening would blur two separate incidents into one item and lose the fact that a fix didn't hold, where a new report makes the pattern visible.
 
 ## Next step
 
