@@ -3,8 +3,9 @@ name: Sync Lottie label from board
 # Syncs the "Lottie" label on issues in PostHog/posthog.com with the
 # "Art & Brand Planning" board (https://github.com/orgs/PostHog/projects/65).
 #
-# Every 30 minutes: any issue whose board Status is "Assigned: Lottie" gets
+# Every 30 minutes: any open issue whose board Status is "Assigned: Lottie" gets
 # the "Lottie" label; if the status changes to something else, the label is removed.
+# Closed issues are left untouched.
 #
 # SETUP:
 # 1. In PostHog/posthog.com → Issues → Labels → create a label called "Lottie".
@@ -75,6 +76,7 @@ jobs:
                           const status = n.fieldValueByName && n.fieldValueByName.name;
                           const c = n.content;
                           if (!c || !c.number) continue;
+                          if (c.state !== "OPEN") continue;
                           const hasLabel = c.labels.nodes.some(l => l.name === label);
                           if (status === statusValue && !hasLabel) {
                             changes.push({ action: "add", owner: c.repository.owner.login, repo: c.repository.name, number: c.number });
