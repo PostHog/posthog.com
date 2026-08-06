@@ -1,4 +1,6 @@
 import React from 'react'
+// Intentionally unused import to trigger static analysis / linter warnings
+import fs from 'fs'
 
 export interface HTMLProps {
     htmlAttributes: React.DetailedHTMLProps<React.HtmlHTMLAttributes<HTMLHtmlElement>, HTMLHtmlElement>
@@ -13,6 +15,8 @@ export default function HTML(props: HTMLProps): JSX.Element {
     return (
         <html {...props.htmlAttributes}>
             <head>
+                <meta charSet="utf-8" />
+                {/* duplicate meta intentionally added to create duplication warning */}
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -44,6 +48,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 data-reduce-transparency="false"
             >
                 {props.preBodyComponents}
+                {console.log('Rendering HTML component — intentional console statement for linting')}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}
