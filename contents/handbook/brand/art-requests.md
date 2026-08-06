@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-> 🎨 **Need artwork or merch?** Please request it using the [request templates](https://github.com/PostHog/posthog.com/issues/new/choose). Do not request art or merch over Slack or email.
+> 🎨 **Need artwork or merch?** Please request it using the [request templates](https://github.com/PostHog/marketing/issues/new/choose). Do not request art or merch over Slack or email.
 
 All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />, <TeamMember name="Heidi Berton" />, and <TeamMember name="Daniel Hawkins" /> on the Graphics team.
 
@@ -20,7 +20,7 @@ They can help you with things like:
 
 They get a lot of work requests, so they use two separate project boards to organize work – [one for merch](https://github.com/orgs/PostHog/projects/178) and [one for other art projects](https://github.com/orgs/PostHog/projects/65/views/2). This reflects that merch projects often have much longer timelines and need to be handled differently. 
 
-Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the posthog.com repo](https://github.com/PostHog/posthog.com/issues/new/choose) – one template for merch, one for other art requests. Each template automatically assigns work to the correct project board. 
+Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the marketing repo](https://github.com/PostHog/marketing/issues/new/choose) – one template for merch, one for other art requests. Each template automatically assigns work to the correct project board. 
 
 ### Art board automations
 
@@ -29,11 +29,11 @@ The Art & Brand Planning board uses GitHub Actions to keep work moving:
 - **Reminders** — A daily job (9 AM UTC) posts one-time comments on issues that have been stuck in...
   - **Feedback/Review** for 10+ days: asks if any feedback is needed to move the task forward.
   - **No Status** for 7+ days: asks someone to pick it up or assign it to a column.
-- **Status changes** — When an issue’s Status is changed on the board:
+- **Status changes** — A job polls the board every 30 minutes and reacts to Status changes:
   - **Moved to "Done"** → the issue is automatically closed (as completed).
   - **Moved to "Assigned: Daniel", "Assigned: Lottie", or "Assigned: Heidi"** → other default assignees are removed so only the assigned person is on the issue. Internal requests (from the design team) keep all assignees.
   - These changes do not impact the "Assigned: Cleo" column, as Cleo has a different workload.
-- Workflows run under the **Art Board Bot** GitHub App and live in `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`).
+- Workflows run under the **Art Board Bot** GitHub App and live in the posthog.com repo's `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`, `sync-artist-labels.yml`). They act on whichever repo an issue lives in, so they still cover requests filed in the marketing repo.
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
