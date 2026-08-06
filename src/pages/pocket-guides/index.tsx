@@ -59,6 +59,9 @@ export default function PocketGuidesPage(): JSX.Element {
                 title="Pocket guides"
                 showTitle={false}
                 showAddressBar={false}
+                // Docs-style chrome: no header-bar strip, the OS window buttons float over the
+                // page. Empty options keep HeaderBar from rendering.
+                headerBarOptions={[]}
                 // Explorer's <main> paints opaque bg-primary over the window shell's translucent
                 // material; transparent here lets the standard glass show behind the shelf.
                 className="[&_main]:bg-transparent"
