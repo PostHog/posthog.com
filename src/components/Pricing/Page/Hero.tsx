@@ -1,24 +1,15 @@
 import React from 'react'
 import { CTA as PlanCTA } from 'components/Pricing/Plans'
-import HeroDesk from '../../../images/pricing-hero-desk.png'
 import GrassAngled from '../../../images/grass-tuft-angled.png'
 import GrassFolded from '../../../images/grass-tuft-folded.png'
 import GrassFan from '../../../images/grass-tuft-fan.png'
 
 /**
- * The "PostHog 3000" box, cut out of its white background so it sits on the dotted panel.
- *
- * The transformation chain does the work, in order: `e_background_removal` knocks out the white (a
- * plain `e_make_transparent` can't — the box front is a near-white grey, so any tolerance high enough
- * to clear the background also eats the box), `e_trim` crops the empty margins so the art fills its
- * column, and `f_auto` ships a ~20KB AVIF instead of a 145KB PNG, alpha intact.
- *
- * Deliberately a URL string and a plain `<img>` rather than `CloudinaryImage`: that component treats
- * everything after `/upload/` as the public ID, so it re-emits this as `/upload/v1/e_background_removal/…`
- * and Cloudinary 404s on the version segment sitting in front of the transformations.
+ * Transparent "PostHog 3000" art, trimmed and capped at 800px by Cloudinary.
+ * Kept as a plain `<img>` because the transformation chain is part of the URL.
  */
 const HERO_ART =
-    'https://res.cloudinary.com/dmukukwp6/image/upload/e_background_removal/e_trim/w_720/f_auto,q_auto:good/product_os_df65018ac1.png'
+    'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim/w_800,c_limit,q_auto,f_auto/posthog_3000_left_facing_transparent_b87ac905bf.png'
 
 /**
  * Origami grass tufts dressing the hero panel, in three depth bands: behind the box art, on the
@@ -46,7 +37,7 @@ const Tuft = ({ src, flip, className }: { src: string; flip?: boolean; className
  * the same way as the box art's.
  */
 const FRONT_TUFTS = [
-    { src: GrassFan, className: '-left-6 @3xl:-left-9 -bottom-5 @3xl:-bottom-6 w-24 @3xl:w-32 -rotate-3' },
+    { src: GrassFan, className: '-left-20 @3xl:-left-24 -bottom-5 @3xl:-bottom-6 w-24 @3xl:w-32 -rotate-3' },
     {
         src: GrassAngled,
         className: '-right-6 @3xl:-right-9 -bottom-5 @3xl:-bottom-6 w-16 @4xl:w-20 opacity-85 rotate-2',
@@ -81,7 +72,7 @@ const TuftLayer = ({ tufts, className }: { tufts: typeof FRONT_TUFTS; className:
 )
 
 /**
- * Page-level hero for the pricing redesign.
+ * Page-level hero for pricing.
  *
  * The headline is the whole pitch: you start free, and paying is something you
  * opt into later. Everything else on the page is evidence for that sentence, so

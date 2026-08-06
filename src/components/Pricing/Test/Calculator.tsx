@@ -23,7 +23,7 @@ interface CalculatorProps {
     Discounts: React.FC<DiscountsProps>
     /**
      * Drops the "Pricing calculator" heading, for callers that already introduce the
-     * calculator themselves (see Redesign/CalculatorReveal).
+     * calculator themselves (see Page/CalculatorReveal).
      */
     hideHeader?: boolean
     /** Anchor id. Pass `''` when an outer element already owns `#calculator`. */

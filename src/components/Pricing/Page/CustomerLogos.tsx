@@ -19,7 +19,6 @@ const TRUST_LOGOS = [
     'airbus',
     'ukgovt',
     'elevenlabs',
-    'mistralai',
     'lovable',
     'supabase',
     'raycast',
@@ -27,6 +26,10 @@ const TRUST_LOGOS = [
     'resend',
     'researchgate',
     'startengine',
+    'exa',
+    'heygen',
+    'wisprflow',
+    'convex',
 ]
 
 /**

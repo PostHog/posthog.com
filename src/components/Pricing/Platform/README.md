@@ -25,7 +25,7 @@ Each caller introduces this content differently. `/platform-packages` gives each
 | Consumer | Renders |
 | --- | --- |
 | `pages/platform-packages` | Both, under `<h2>`s, plus its own intro and "get started" copy |
-| `Pricing/Redesign/MoreOptions` | Both, in the panel that expands under the three cards |
+| `Pricing/Page/MoreOptions` | Both, in the panel that expands under the three cards |
 
 Anything price- or feature-related belongs here rather than in a consumer, or the two will drift.
 

@@ -1,12 +1,10 @@
-# Pricing redesign
+# Pricing page
 
-Components for the redesigned pricing page, live at **`/pricing/redesign`** (`src/pages/pricing/redesign.tsx`).
-
-This is a **mockup route**. The existing `/pricing` page (`src/pages/pricing/index.tsx`) is untouched, so the two can be compared side by side before anything is swapped over.
+Components for the canonical pricing page, live at **`/pricing`** (`src/pages/pricing/index.tsx`).
 
 ## Why
 
-The old page tried to serve everyone at once and ended up making the visitor do the sorting. The redesign targets two audiences in order:
+The old page tried to serve everyone at once and ended up making the visitor do the sorting. The current page targets two audiences in order:
 
 1. **People trying something out** — usually small, don't know what they want yet. They need to be assured of zero risk and easy setup. Answered by the hero, the free-tier grid, and a single no-card CTA.
 2. **People sizing PostHog up for scale** — already large or getting there. They need a credible estimate and a human. Answered by the calculator, the FAQ, and `MoreOptions`.
@@ -25,7 +23,7 @@ The old page tried to serve everyone at once and ended up making the visitor do 
 | Product screenshot slider | `Test/ImageSlider` | Didn't fit alongside a full-width headline, and screenshots aren't a pricing question. |
 | "Jump to" table of contents | `ReaderView` right sidebar | Suppressed with `hideRightSidebar`; buys ~290px of content width. |
 
-Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, `pages/pricing/philosophy`. Two of them were modified, both in ways that leave `/pricing` rendering identically:
+Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/philosophy`.
 
 - **`Test/Calculator`** — two optional props (`hideHeader`, `id`), both defaulting to its previous behavior.
 - **`Test/FreeTier`** — its hard-coded list of products moved into `Test/freeTierData` and the component now maps over it. Pure refactor: same items, same order, same markup. It was extracted so `FreeTierModal` could render the same allowances in a different shape without a second copy of the numbers. **Update allowances there, not in a component.** Three places render it (`FreeTierTicker`, `PricingExperiment`, `Presentation/Templates/PricingTemplate`) plus the modal, so a stale duplicate would be hard to spot.
@@ -49,25 +47,13 @@ The page passes `hideRightSidebar` to `ReaderView`, so there's no "Jump to" tabl
 
 ### `Hero`
 
-Headline (`Start free, scale when you need.`) plus the 97%-use-it-free framing, the primary CTA, and the boxed-software graphic. The only display-sized type on the page — everything below is evidence for this one sentence.
+Headline (`97% of companies use PostHog for free.`), the primary CTA, and the boxed-software graphic. The only display-sized type on the page — everything below is evidence for this one sentence.
 
-The green highlight on "when you need." uses `bg-green/25` with `text-green-dark` / `dark:text-lime-green`, and `box-decoration-clone` so the highlight wraps cleanly across lines at narrow container widths.
+The green highlight on "for free." uses `bg-green/25` with `text-green-dark` / `dark:text-lime-green`, and `box-decoration-clone` so the highlight wraps cleanly across lines at narrow container widths.
 
 **Image:** the "PostHog 3000" box and CD, from Cloudinary, via the `HERO_ART` URL at the top of `Hero.tsx`.
 
-The source asset (`product_os_df65018ac1.png`) has an **opaque white background**, which reads as a white square on the `#eef0e7` panel and is glaring in dark mode, so the URL carries a transformation chain:
-
-```
-/upload/e_background_removal/e_trim/w_720/f_auto,q_auto:good/product_os_df65018ac1.png
-```
-
-- `e_background_removal` cuts out the white, keeping the soft floor shadow. Cloudinary's cheaper `e_make_transparent` is **not** a substitute: the box front is a near-white grey, so any tolerance high enough to clear the background also eats the box.
-- `e_trim` crops the transparent margins the source has baked in, so the art fills its column instead of floating in padding. The trimmed art is 720x688, which is why `<img>` carries those intrinsic dimensions.
-- `f_auto` ships ~20KB of AVIF to browsers that take it, versus 148KB as PNG, with alpha intact.
-
-Derived assets are cached by Cloudinary after the first request, so the background-removal add-on isn't hit per page view.
-
-**It's a plain `<img>` with a URL string, not `CloudinaryImage`, and that's deliberate.** `CloudinaryImage` treats everything after `/upload/` as the public ID and hands it to `cloudinary-core`, which inserts a version segment in front of it — `/upload/v1/e_background_removal/…` — and Cloudinary 404s on that. It can only serve bare public IDs, so any transformed asset has to bypass it.
+The source is already transparent. Cloudinary trims its empty margins, caps it at 800px, and serves an optimized format. It stays a plain `<img>` because the transformation chain is part of the URL.
 
 **Also don't reach for `StaticImage` or `GatsbyImage` here.** This repo lists `gatsby-plugin-image` in `gatsby-config.js` but *not* `gatsby-plugin-sharp`, so any use of those components fails the build with `ERROR #11321 – Gatsby-plugin-sharp wasn't setup correctly`. Several files import `StaticImage` without ever rendering it, which makes it look supported when it isn't. (The grass tufts still use direct webpack imports from `src/images/`; `src/custom.d.ts` declares `*.png` so those type-check.)
 
@@ -127,11 +113,17 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 **Note on logo heights:** customer records carry `height` as a Tailwind scale value. This component maps those to literal class names via `LOGO_HEIGHT_CLASSES` rather than interpolating `h-${n}`, because interpolated classes aren't in `safelist.txt` and only survive purge by coincidence elsewhere in the codebase. The rail uses one step smaller than `/customers` does, to keep the row compact.
 
+### `pages/pricing/philosophy`
+
+James's pricing note is shared by `/pricing` and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
+
+The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
+
 ### `CalculatorReveal`
 
 Wraps `Test/Calculator` so the full estimator is **hidden until asked for**, and kept as the quietest thing on the page: one sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator below it, and swaps to `Hide the calculator` once open.
 
-**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `redesign.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Startups, bigger teams, and discounts") doesn't name the calculator; footnotes don't need to be in the title.
+**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/index.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Startups, bigger teams, and discounts") doesn't name the calculator; footnotes don't need to be in the title.
 
 **The understatement is the whole point, and it should survive future edits.** An estimator muddies this page's frame: it turns "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So this deliberately has no card, no fill, no border, and no heading. Earlier versions gave it a tinted, bordered card with an `<h2>` and a CTA-styled button, which made it a visual peer of the three `MoreOptions` cards — a fourth card in that family, which is exactly the prominence it shouldn't have. Other earlier versions gave it its own section and then faked attachment with a negative margin; putting it inside `more-options` makes that relationship structural.
 
@@ -146,7 +138,7 @@ For the same reason, **nothing earlier in the page points at it.** `PricingJourn
 
 It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden` — that would break the calculator's `sticky` sidebar and clip its tooltips.
 
-**It renders `Test/Calculator` with `hideHeader` and `id=""`.** Those two props were added to the shared component for this caller and both default to the old behavior, so the live `/pricing` page is byte-identical. `hideHeader` drops its `<h2>Pricing calculator</h2>` — a bordered, section-weight heading inside a one-line footnote reintroduces exactly the prominence this component exists to avoid — and `id=""` stops `#calculator` existing twice in the DOM once the panel is open, since this component's wrapper owns that anchor.
+**It renders `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops its `<h2>Pricing calculator</h2>` — a bordered, section-weight heading inside a one-line footnote reintroduces exactly the prominence this component exists to avoid — and `id=""` stops `#calculator` existing twice in the DOM once the panel is open, since this component's wrapper owns that anchor.
 
 Its `SectionLayout` margins and `@5xl:px-4` still need neutralizing, and that's done locally with `[&>section]:my-0 [&>section]:px-0` rather than a third prop. A `className` prop wouldn't work: `SectionLayout` appends caller classes after its own, and `my-0` loses to `mb-12` in Tailwind's cascade no matter the order in the attribute, so it takes a child selector to win on specificity.
 
@@ -155,12 +147,6 @@ Three implementation details are load-bearing:
 - **The panel animates `height: 0 → auto` with `initial={false}`** (framer-motion, the same approach as `Home/Accordion`). `initial={false}` is what makes a `?calculator` deep link render open with no animation instead of unfurling on load. `useReducedMotion` drops the duration to zero.
 - **`overflow` returns to `visible` once the open animation finishes.** A permanent `overflow-hidden` would break the calculator's `sticky top-4` sidebar and clip its tooltips. The same `settled` flag applies `invisible` when fully collapsed, which keeps the mounted calculator out of the tab order. It's set false by the toggle and true by `onAnimationComplete`, which is safe because the deep-link path never animates and never leaves it false.
 - **The calculator stays mounted after the first open.** Hiding it only collapses the panel, so volumes someone dialled in survive a hide/show.
-
-### `SignupBlock`
-
-Cloud region picker + the single `Get started - free` CTA + today's signup count.
-
-This duplicates the region/CTA/count block currently inlined at the bottom of `Test/PlanContent.tsx`. It was extracted here rather than shared, deliberately: `PlanContent` is on the live `/pricing` page and this is an unapproved mockup. **If the redesign ships, delete the inlined copy in `PlanContent` and import this instead.**
 
 ### `MoreOptions`
 
@@ -208,8 +194,6 @@ PostHog Web is the only surface with no link — it's just `app.posthog.com`, an
 
 ## Open items
 
-- **`src/images/pricing-hero-desk.png` is now unused** — it was the placeholder hero art before the box render, and it's an unoptimized 1.4MB PNG. Safe to delete.
-- **The hero art has no `srcset`.** It's delivered at a fixed 720px wide (`w_720`) for a column that's at most 320px, so ~2x on retina and oversized below that. `f_auto` keeps the payload small enough (~20KB) that this hasn't been worth a `srcset` of `w_` variants, but that's the next lever if the hero ever needs it.
-- **The 97% stat** in `Hero` is taken from the design mockup. The live page says "more than 90%". Verify the real number before this ships.
+- **The hero art has no `srcset`.** It's delivered at a fixed 800px wide for a column that's at most 320px. `f_auto` keeps the payload small, but responsive variants are the next lever if needed.
+- **The 97% stat** in `Hero` came from the original design mockup. Verify the real number before publishing this change.
 - **No closing CTA.** The page ends on the FAQ. `components/Home/CTA` (the "PostHog Web / digital download" box) was left off because the hero, `PricingJourney`, and the philosophy note already carry three CTAs. Easy to add back at the bottom of the page if the drop-off says otherwise.
-- **If this replaces `/pricing`**, add a redirect for `/pricing/redesign` in `vercel.json` and check that `?plan=free` / `?plan=paid` inbound links (previously handled by the plan toggle) still land somewhere sensible — the toggle no longer exists.
