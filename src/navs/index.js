@@ -2931,6 +2931,10 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
+                            name: 'Embedded analytics',
+                            url: '/docs/data/embedded-analytics',
+                        },
+                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
