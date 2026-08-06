@@ -3,9 +3,10 @@ import React from 'react'
 import { docsMenu, handbookSidebar } from '../../../navs'
 import * as Icons from '@posthog/icons'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { APP_COUNT } from 'constants/index'
 import SearchableProductMenu from './SearchableProductMenu'
+import { getDocsMenuItems } from '../../TaskBarMenu/menuData'
 import {
     categoryOrder,
     categoryDisplayNames,
@@ -29,9 +30,6 @@ import {
 import { useApp } from '../../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { useToast } from '../../../context/Toast'
-import usePostHog from 'hooks/usePostHog'
-import { translateKo } from '../../../pages/ko/_translations'
 
 interface DocsMenuItem {
     name: string
@@ -187,19 +185,6 @@ const processMenuItemWithGrouping = (item: DocsMenuItem): any => {
     return null
 }
 
-const getDocsMenuItems = () => {
-    let items = groupBySectionDividers((docsMenu as DocsMenu).children)
-
-    // Remove any item (submenu or section divider) with label 'Docs'
-    items = items.filter((item) => {
-        // Remove if submenu with label 'Docs'
-        if (item.type === 'submenu' && item.label === 'Docs') return false
-        return true
-    })
-
-    return items
-}
-
 const mergedDocsMenu = (allProducts: any[]) => {
     const docsItems = getDocsMenuItems()
     const itemsWithMobileDestinations = addDocsMenuMobileDestinations(docsItems, allProducts)
@@ -328,17 +313,7 @@ const buildProductOSMenuItems = (allProducts: any[]) => {
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
     const allProducts = useProduct() as any[]
-    const {
-        animateClosingAllWindows,
-        windows,
-        setScreensaverPreviewActive,
-        isMobile,
-        websiteMode,
-        siteSettings,
-        updateSiteSettings,
-    } = useApp()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
+    const { isMobile } = useApp()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
@@ -439,6 +414,8 @@ export function useMenuData(): MenuType[] {
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -525,7 +502,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'customers.mdx',
+                    label: 'Customers',
                     link: '/customers',
                 },
                 {
@@ -544,11 +521,6 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Roadmap',
                     link: '/roadmap',
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
                 },
                 {
                     type: 'item',
@@ -742,6 +714,16 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Display options',
+                    onClick: () => {
+                        navigate('/display-options', { state: { newWindow: true } })
+                    },
+                    icon: <Icons.IconBrightness className="size-4 text-yellow" />,
+                    shortcut: [','],
+                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
+                },
+                {
+                    type: 'item',
                     label: 'Keyboard shortcuts',
                     link: '/kbd',
                     icon: <Icons.IconKeyboard className="size-4 text-primary" />,
@@ -778,38 +760,6 @@ export function useMenuData(): MenuType[] {
             },
             shortcut: [','],
         },
-        ...(isMobile
-            ? []
-            : [
-                  {
-                      type: 'item' as const,
-                      label: websiteMode ? 'Switch to OS mode' : 'Switch to website mode',
-                      onClick: () => {
-                          const newExperience = websiteMode ? 'posthog' : 'boring'
-                          updateSiteSettings({ ...siteSettings, experience: newExperience })
-                          posthog?.capture('switched site mode', {
-                              value: newExperience === 'posthog' ? 'os' : 'website',
-                              source: 'menu',
-                          })
-                          addToast({
-                              title: translateKo(websiteMode ? 'Switched to OS mode' : 'Switched to website mode'),
-                              description: translateKo(
-                                  websiteMode
-                                      ? 'Click the logo to return to website mode.'
-                                      : 'Hover the logo to return to OS mode.'
-                              ),
-                              duration: 5000,
-                              onUndo: () => {
-                                  updateSiteSettings({
-                                      ...siteSettings,
-                                      experience: websiteMode ? 'posthog' : 'boring',
-                                  })
-                              },
-                          })
-                      },
-                      shortcut: ['Shift', 'M'],
-                  },
-              ]),
     ]
 
     // Process main nav items for mobile menu
@@ -904,30 +854,13 @@ export function useMenuData(): MenuType[] {
               ...baseLogoMenuItems,
           ]
         : [
+              {
+                  type: 'item' as const,
+                  label: 'Home',
+                  link: '/',
+              },
               // Desktop: only show system items
               ...baseLogoMenuItems,
-              ...(!websiteMode
-                  ? [
-                        { type: 'separator' as const },
-                        {
-                            type: 'item' as const,
-                            label: 'Start screensaver',
-                            onClick: () => {
-                                setScreensaverPreviewActive(true)
-                            },
-                            shortcut: ['Shift', 'Z'],
-                        },
-                        {
-                            type: 'item' as const,
-                            label: 'Close all windows',
-                            disabled: windows.length < 1,
-                            onClick: () => {
-                                animateClosingAllWindows()
-                            },
-                            shortcut: ['Shift', 'X'],
-                        },
-                    ]
-                  : []),
           ]
 
     return [
@@ -936,22 +869,24 @@ export function useMenuData(): MenuType[] {
                 <>
                     <div className="flex items-center">
                         <Logo
-                            noText
-                            className={`2xs:hidden md:block ${websiteMode ? 'size-10' : 'size-8 md:size-6'}`}
-                            fill="primary"
-                            classic
+                            layout="logomark"
+                            variant="mono"
+                            color="currentColor"
+                            className="text-primary 2xs:hidden md:block size-8 md:size-6"
+                            width="auto"
                         />
                         <Logo
-                            className={`hidden 2xs:flex md:hidden w-auto ${websiteMode ? 'h-7' : ' h-5'} `}
-                            fill="primary"
-                            classic
+                            variant="mono"
+                            color="currentColor"
+                            className="text-primary hidden 2xs:flex md:hidden w-auto h-5"
+                            width="auto"
                         />
                         <IconChevronDown className="size-6 inline-block md:hidden text-muted" />
                     </div>
                 </>
             ),
             items: logoMenuItems,
-            mobileLink: websiteMode ? '/' : undefined,
+            mobileLink: undefined,
             hideChevron: true,
         },
         // On desktop, show main navigation items

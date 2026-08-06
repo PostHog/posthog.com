@@ -17,6 +17,10 @@ type ProductConfig = {
     teams?: string[] // Filter by team name(s)
 }
 
+// Every page that renders `<ProductChangelog />` needs an entry here, keyed by its
+// lowercased `product` prop. The values are Strapi labels, so renaming a topic or a
+// team in Strapi means updating them here too — otherwise the page renders empty.
+// `scripts/check-product-changelogs.js` fails CI when a page has no entry.
 const productConfigMap: Record<string, ProductConfig> = {
     'product analytics': { topic: 'Product analytics', teams: ['product analytics', 'analytics platform'] },
     'web analytics': { topic: 'Web analytics', teams: ['web analytics'] },
@@ -28,11 +32,10 @@ const productConfigMap: Record<string, ProductConfig> = {
     'data pipelines': { topic: 'CDP', teams: ['batch exports'] },
     workflows: { topic: 'Workflows', teams: ['workflows'] },
     'error tracking': { topic: 'Error tracking', teams: ['error tracking'] },
-    'ai observability': { topic: 'LLM analytics', teams: ['llm analytics'] },
-    'llm analytics': { topic: 'LLM analytics', teams: ['llm analytics'] },
+    'ai observability': { topic: 'AI observability', teams: ['ai observability'] },
     'posthog ai': { topic: 'PostHog AI', teams: ['posthog ai'] },
     endpoints: { topic: 'endpoints' },
-    logs: { topic: 'logs', teams: ['logs'] },
+    logs: { topic: 'logs', teams: ['apm'] },
     'customer analytics': { teams: ['customer analytics'] },
 }
 
@@ -52,10 +55,32 @@ const buildRoadmapFilters = (config: ProductConfig) => {
     return filters
 }
 
+// A config with no topic and no teams produces no filters, which the roadmap query
+// reads as "every completed entry" — so the page would silently render the whole
+// company changelog as if it belonged to this product.
+const isConfigured = (config?: ProductConfig): config is ProductConfig =>
+    Boolean(config && (config.topic || config.teams?.length))
+
 export const ProductChangelog = ({ product }: { product: string }) => {
+    const config = productConfigMap[product.toLowerCase()]
+
+    if (!isConfigured(config)) {
+        return (
+            <div className="w-full py-4">
+                <p className="text-muted m-0">
+                    No changelog filter is configured for {product}. Add an entry for it to{' '}
+                    <code>productConfigMap</code> in <code>src/components/Docs/ProductChangelog.tsx</code>.
+                </p>
+            </div>
+        )
+    }
+
+    return <ProductChangelogEntries product={product} config={config} />
+}
+
+const ProductChangelogEntries = ({ product, config }: { product: string; config: ProductConfig }) => {
     const { isModerator } = useUser()
     const { addWindow } = useApp()
-    const config = productConfigMap[product.toLowerCase()] || {}
     const orFilters = buildRoadmapFilters(config)
     const fiveMonthsAgo = dayjs().subtract(5, 'month').format('YYYY-MM-DD')
 
@@ -89,7 +114,7 @@ export const ProductChangelog = ({ product }: { product: string }) => {
             filters: {
                 complete: { $eq: true },
                 dateCompleted: { $gte: fiveMonthsAgo },
-                ...(orFilters.length > 0 && { $or: orFilters }),
+                $or: orFilters,
             },
         },
     })

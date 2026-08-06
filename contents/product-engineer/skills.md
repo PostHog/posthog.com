@@ -11,7 +11,7 @@ Being a fundamentally sound engineer is table stakes for any aspiring product en
 
 ## 1. How software businesses work
 
-Understanding how a business work gives product engineers the context they need to make good decisions about what to build.
+Understanding how a business works gives product engineers the context they need to make good decisions about what to build.
 
 This starts with understanding basic concepts like [product-market fit](/founders/product-market-fit-game), and the difference between an [ideal customer profile](/newsletter/ideal-customer-profile-framework) and a [user persona](/product-engineers/how-to-create-user-personas). It also includes the business metrics that imply or predict the success of a product, like net revenue retention or [activation](/newsletter/wtf-is-activation).
 
@@ -87,7 +87,7 @@ Product engineers also need to be practical about choosing the best tool for the
 
 You can't be a truly effective product engineer without AI asisstance anymore. This is a straightforward fact. It's too powerful a tool to ignore, so learning how to use AI effectively is table stakes for a product engineer.
 
-This doesn't, however, invalidate invalidate traditional engineering skills and knowledge because understanding the proper architecture of a software project protects you against the decision-making of the robot.
+This doesn't, however, invalidate traditional engineering skills and knowledge because understanding the proper architecture of a software project protects you against the decision-making of the robot.
 
 ## 7. Design and UX fundamentals
 
@@ -105,7 +105,9 @@ This *does not* mean committing to main every time you make a change, randomly c
 
 It *does* mean using techniques like:
 
-| **Real user monitoring** | Tracking app, query, and site performance, as well as error rate and logs.  |
+| Technique | Description |
+| --- | --- |
+| **Real user monitoring** | Tracking app, query, and site performance, as well as error rate and logs. |
 | **Load, spike, soak testing** | Planning for scale by checking code for issues and performance when under a high volume or stressful load. |
 | **Shadowing, mirroring, dark launches** | Evaluating new code with duplicated or mirrored production data hidden or separated from users. |
 | **Integration testing** | Checking services, features, and infrastructure work together once deployed. |

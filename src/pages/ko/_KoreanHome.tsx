@@ -16,7 +16,7 @@ import {
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -100,7 +100,7 @@ export const CTAs = ({ t = identity }: { t?: TranslateFn }): JSX.Element => {
             Existing test CTA row retained for reference:
             <div className="flex gap-2 items-center">
                 <div className="flex items-center gap-1">
-                    <WizardCommand latest={false} slim className="border border-primary" />
+                    <WizardCommand slim className="border border-primary" />
                     <Tooltip trigger={<IconInfo className="size-4 text-primary inline-block" />}>
                         <div className="max-w-sm">
                             <p className="text-sm mb-1">
@@ -232,7 +232,7 @@ const CompanyStageTabs = ({ t = identity }: { t?: TranslateFn }) => {
                 { handle: 'data_warehouse', text: 'for centralizing data' },
                 { handle: 'error_tracking', text: 'for catching bugs fast' },
                 { handle: 'cdp', text: 'for syncing data everywhere' },
-                { handle: 'llm_analytics', text: 'for monitoring AI features' },
+                { handle: 'ai_observability', text: 'for monitoring AI features' },
             ],
         },
         {
@@ -311,7 +311,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -326,7 +331,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog 데이터 스택.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog 데이터 스택.md</Button>,
     },
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">가격 정보 보기</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">PostHog AI 알아보기</Button> },
@@ -360,7 +365,12 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -375,7 +385,7 @@ const getJsxComponentDescriptors = (t: TranslateFn): JsxComponentDescriptor[] =>
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">{t('README: PostHog data stack.md')}</Button>,
+        Editor: () => <Button url="/context-warehouse">{t('README: PostHog data stack.md')}</Button>,
     },
     {
         name: 'ButtonPricing',

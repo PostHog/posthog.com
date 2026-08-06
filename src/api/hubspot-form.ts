@@ -1,5 +1,4 @@
 import { GatsbyFunctionRequest, GatsbyFunctionResponse } from 'gatsby'
-import fetch from 'node-fetch'
 
 const handler = async (req: GatsbyFunctionRequest, res: GatsbyFunctionResponse) => {
     const { formID } = req.query

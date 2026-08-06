@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, navigate } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
-import { getLogo } from 'constants/logos'
+import { getLogo, getDarkClassForLogo } from 'constants/logos'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 
 const getIconUrl = (iconUrl: string) => {
@@ -27,7 +27,7 @@ const Title = ({ pipeline }: { pipeline: any }) => {
             <img
                 src={getIconUrl(pipeline.icon_url)}
                 alt={pipeline.name}
-                className="w-6 h-6 object-contain flex-shrink-0"
+                className={`w-6 h-6 object-contain flex-shrink-0 ${getDarkClassForLogo(pipeline.icon_url)}`}
             />
             {url ? (
                 <Link to={url} state={{ newWindow: true }}>
@@ -150,33 +150,26 @@ export default function IntegrationsLibrary(): JSX.Element {
         { name: 'Status', width: '100px', align: 'center' as const },
     ]
 
-    // Parse URL query parameters on initial load
-    const getInitialFilterValues = () => {
-        if (typeof window === 'undefined') return { type: null, status: null, category: null }
+    // State for managing filters - hydrated from URL after mount
+    const [typeFilter, setTypeFilter] = useState<string | null>(null)
+    const [statusFilter, setStatusFilter] = useState<string | null>(null)
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
 
+    // Hydrate filters from URL on mount
+    useEffect(() => {
         const params = new URLSearchParams(window.location.search)
         const type = params.get('type')
         const status = params.get('status')
         const categorySlug = params.get('category')
 
-        // Validate type
         const validType = type && ['source', 'destination', 'transformation'].includes(type) ? type : null
-
-        // Validate status (convert "roadmap" to "coming_soon" for internal use)
         const validStatus = status === 'roadmap' ? 'coming_soon' : status === 'live' ? 'live' : null
-
-        // Unslugify category
         const validCategory = categorySlug ? unslugifyCategory(categorySlug, allCategories) : null
 
-        return { type: validType, status: validStatus, category: validCategory }
-    }
-
-    const initialFilters = getInitialFilterValues()
-
-    // State for managing filters
-    const [typeFilter, setTypeFilter] = useState<string | null>(initialFilters.type)
-    const [statusFilter, setStatusFilter] = useState<string | null>(initialFilters.status)
-    const [categoryFilter, setCategoryFilter] = useState<string | null>(initialFilters.category)
+        if (validType) setTypeFilter(validType)
+        if (validStatus) setStatusFilter(validStatus)
+        if (validCategory) setCategoryFilter(validCategory)
+    }, [])
 
     // Update URL when filters change
     useEffect(() => {

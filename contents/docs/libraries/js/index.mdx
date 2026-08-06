@@ -13,7 +13,7 @@ features:
     featureFlags: true
     groupAnalytics: true
     surveys: true
-    llmAnalytics: false
+    aiObservability: false
     errorTracking: true
     logs: true
 ---
@@ -31,6 +31,8 @@ import JSInstall from '../../integrate/_snippets/install-web.mdx'
 import IdentifyFrontendCallout from '../../_snippets/identify-frontend-callout.mdx'
 
 <IdentifyFrontendCallout />
+
+If your app already knows the signed-in user when PostHog initializes, you can [call `identify` from the `loaded` callback](/docs/getting-started/identify-users#identify-users-when-the-web-sdk-loads) to identify them as soon as the web SDK loads.
 
 Once you've installed PostHog, see our [features doc](/docs/libraries/js/features) for more information about what you can do with it. You can also install the [PostHog VS Code extension](/docs/vscode-extension) to see live analytics, flag status, and session replay links inline in your code.
 

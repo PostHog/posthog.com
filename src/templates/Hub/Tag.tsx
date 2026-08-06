@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'components/Link'
-import * as Icons from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import { getParams, getSortOption, sortOptions } from '../BlogPost'
@@ -9,13 +8,13 @@ import { Sidebar as FoundersSidebar } from '../../pages/founders'
 import { useUser } from '../../hooks/useUser'
 import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
-import { tagOptions } from 'components/Hub'
+import { getTagIcon } from 'components/BlogLanding/tagOptions'
 import MenuBar from 'components/RadixUI/MenuBar'
 import OSButton from 'components/OSButton'
 
 const rootOptions = {
     founders: {
-        title: "Founder's hub",
+        title: 'Founders hub',
         sidebar: <FoundersSidebar />,
     },
     'product-engineers': {
@@ -29,10 +28,7 @@ const rootOptions = {
 const Post = ({ post }: { post: any }) => {
     const { title, slug, excerpt } = post.attributes
     const { addBookmark, user } = useUser()
-    const isBookmarked = useMemo(
-        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === slug),
-        [user, slug]
-    )
+    const isBookmarked = useMemo(() => user?.profile?.bookmarks?.some((b) => b.url === slug), [user, slug])
     return (
         <li key={post.id}>
             <OSButton asLink to={slug} size="md" width="full" className="justify-between" hover="background">
@@ -60,8 +56,7 @@ export default function Tag({
     const [params, setParams] = useState(getParams(root, selectedTag, getSortOption(root).sort))
     const { posts, isLoading, isValidating, fetchMore, hasMore } = usePosts({ params })
     const sidebar = rootOptions[root]?.sidebar
-    const tagOption = tagOptions[selectedTag]
-    const TagIcon = tagOption?.icon ? Icons[tagOption.icon] : null
+    const TagIcon = getTagIcon(selectedTag)
 
     useEffect(() => {
         setParams(getParams(root, selectedTag, sort.sort))

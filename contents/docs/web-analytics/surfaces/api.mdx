@@ -1,0 +1,50 @@
+---
+title: Web analytics API
+sidebar: Docs
+showTitle: true
+---
+
+The API is how traffic data gets into PostHog and how you get it back out. Your site sends pageviews, sessions, and heatmap interactions through the [capture API](/docs/api/capture), and the [PostHog API](/docs/api) lets you pull the same numbers the dashboard shows into your own reports, warehouse, or scripts.
+
+Use it when you want traffic data somewhere PostHog isn't – a status page, an internal report, a weekly digest of your own – or when you want to script something the dashboard doesn't do.
+
+## Before you start
+
+1. **Set up Web Analytics** – [install PostHog on your site](/docs/web-analytics/installation) so pageviews are captured.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What you can do here
+
+**Send traffic in**
+
+Pageviews and [sessions](/docs/data/sessions) arrive through the [capture API](/docs/api/capture), the same endpoint every [SDK](/docs/web-analytics/installation) posts to. Heatmap interactions – clicks, rageclicks, mouse movement, and scroll depth – ride along on the same event stream, so nothing extra is needed to collect them.
+
+**Query your traffic**
+
+The [query API](/docs/api/query) runs HogQL against your sessions and events, so anything the dashboard can show, you can ask for directly – visitors by channel, top entry paths, bounce rate for one campaign. There's also a weekly digest endpoint that returns the overview numbers ready-made: visitors, pageviews, sessions, and bounce rate against the previous period, plus top pages, top sources, and goal conversions.
+
+**Read heatmap data**
+
+Pull click, rageclick, mousemove, and scroll-depth data for a URL, filtered by date range and viewport width so you can isolate a device class. From a hotspot you can drill into the individual interactions behind it. Saved heatmaps and their screenshots are available too, so a rendered page with its overlay can be fetched programmatically rather than opened in the [toolbar](/docs/toolbar/heatmaps).
+
+**Manage saved views**
+
+Filter presets – the saved combinations of filters your team reuses on the dashboard – are stored through the API, so a preset created in one place shows up everywhere the dashboard is opened.
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) passed as a bearer token, scoped to the least it needs. Reading traffic data needs the `web_analytics` scope, and heatmap data needs `heatmap`.
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/query/
+```
+
+Treat a personal API key like a password – keep it in a secret store, never in client-side code or a committed file, and give it only the scopes the job needs.
+
+## Related
+
+- See the full [PostHog API reference](/docs/api).
+- Explore the same data in the [web app](/docs/web-analytics/surfaces/web-app).
+- Ask for it conversationally over [MCP](/docs/web-analytics/surfaces/mcp), which is usually faster than writing a query by hand.
+- Get your site sending events in the first place with [installation](/docs/web-analytics/installation).

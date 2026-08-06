@@ -1,12 +1,20 @@
 <!-- Keep in sync with https://github.com/PostHog/posthog-js/tree/main/playground/nuxtjs -->
 
 import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+import NuxtApiKeysSecurity from "./nuxt-api-keys-security.mdx"
 
 1. Install `posthog-js` using your package manager:
 
 <InstallWebPackageManagers />
 
-2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find these in [your project settings](https://us.posthog.com/settings/project).
+2. Store your PostHog key and host in environment variables rather than hard-coding them. Add them to a `.env` file (and to your hosting provider). You can find these in [your project settings](https://us.posthog.com/settings/project).
+
+```shell file=.env
+NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN=<ph_project_token>
+NUXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+Then reference them in your `nuxt.config.js` file:
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
@@ -19,6 +27,8 @@ export default defineNuxtConfig({
   }
 })
 ```
+
+<NuxtApiKeysSecurity />
 
 3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
 

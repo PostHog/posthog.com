@@ -27,8 +27,6 @@ Thanks to all our community members for helping move PostHog forward! This relea
 
 Dimitris added an option to automatically refresh dashboards every couple of minutes. You can now have your PostHog dashboards in separate monitors or your conference room TV always in sync! Thanks for driving this forward, Dimitris!
 
-> _If you haven't seen it yet, we have a [new page](https://posthog.com/contributors) dedicated to our contributors. Every contributor gets their own digital card, and we provide a leaderboard with stats on each person's contributions. We also have a bot that sends a gift card for [PostHog merch](https://merch.posthog.com) to contributors for every PR merged, and we welcome all types of contributions!_
-
 ### Help Us Improve PostHog
 
 We’re working hard to improve the PostHog experience and would love to talk to you! Please join one of our Product, Engineering or Marketing team members in a quick 30-min call to help us understand how to improve. Schedule directly [on Calendly](https://calendly.com/posthog-feedback).
@@ -83,7 +81,7 @@ It's now easier than ever to find the event, user, or cohort definitions you're 
 
 ### ClickHouse is now free to use!
 
-A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.tech/">ClickHouse</a> backend. ClickHouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this ClickHouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
+A few months after PostHog we started hitting limitations on some operations running on Postgres. We then decided to develop full support for a <a rel="noreferrer noopener" target="_blank" href="https://clickhouse.com/">ClickHouse</a> backend. ClickHouse is a very powerful OLAP database that works specially well at computing analytics for huge volumes of data. At first this ClickHouse backend was launched as a premium feature requiring an Enterprise license. Some weeks ago we decided to offer a free version with a restriction of 3 team members to serve as trial for the feature.
 
 Since then, we have ironed out all the details and have now decided to make this feature **fully free** now, no longer requiring a license nor having any additional restrictions. This comes from our commitment to supporting teams and companies of any size, so you can continue using PostHog for free even if your event volume increases significantly.
 

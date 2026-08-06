@@ -1,0 +1,34 @@
+---
+title: Workflows in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where workflows are built. It's the surface for the drag-and-drop [workflow builder](/docs/workflows/workflow-builder), the [content library](/docs/workflows/library) where message templates live, your [channels](/docs/workflows/configure-channels), and your [opt-out and suppression lists](/docs/workflows/opt-outs).
+
+## Before you start
+
+1. **Set up Workflows** – Workflows are no-code, so there's nothing to install. [Install a PostHog SDK](/docs/workflows/installation) if you want event-based triggers.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **Build a workflow.** Start from a trigger – an event, a webhook, a tracking pixel, a schedule, or a manual run – then add delays, audience splits, message dispatches, and PostHog actions until you reach an exit. See the [workflow builder](/docs/workflows/workflow-builder) for every node type.
+- **Work in drafts, then publish.** A workflow stays a draft until you enable it, so you can build and test without anyone receiving a message.
+- **Design message templates.** Compose emails and other messages in the [content library](/docs/workflows/library), personalize them with person properties, and reuse them across workflows.
+- **Manage channels.** Verify a sending domain and connect email, Slack, or any [real-time destination](/docs/cdp/destinations) as a dispatch target. See [configure a channel](/docs/workflows/configure-channels).
+- **Honor opt-outs.** Review message categories, recipient preferences, and the suppression list in [opt-outs](/docs/workflows/opt-outs).
+- **Watch performance.** Each workflow reports how many people entered, where they are in the flow, and what was sent, alongside the [workflow events](/docs/workflows/engagement-events) written back into your project.
+
+## Create emails with PostHog AI
+
+[PostHog AI](/docs/posthog-ai) is available inside the web app, not a separate surface. Describe the email you want – audience, tone, and goal – and it drafts the content and layout as a message template you can then edit by hand. You can also point it at a URL to inform the messaging.
+
+See [create emails with PostHog AI](/docs/workflows/create-emails-ai) for the prompts it handles and how personalization works.
+
+## Related
+
+- [Workflow builder](/docs/workflows/workflow-builder) – every trigger, delay, split, and action
+- [Content library and message templates](/docs/workflows/library) – composing and reusing messages
+- [Configure a channel](/docs/workflows/configure-channels) – email, Slack, and CDP destinations
+- [Use Workflows over PostHog MCP](/docs/workflows/surfaces/mcp) – the same work from your editor

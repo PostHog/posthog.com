@@ -1,7 +1,8 @@
 import chromium from 'chrome-aws-lambda'
 import path from 'path'
 import fs from 'fs'
-import fetch from 'node-fetch'
+import nodeFetch from 'node-fetch'
+
 import { GatsbyNode } from 'gatsby'
 import pLimit from 'p-limit'
 import qs from 'qs'
@@ -11,9 +12,12 @@ import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import {
     generateRawMarkdownPages,
     generateApiSpecMarkdown,
+    generateChangelogMd,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
     generatePricingMd,
+    generatePlatformMd,
+    generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
@@ -22,6 +26,7 @@ import docsHandbookTemplate from '../src/templates/OG/docs-handbook.js'
 import customerTemplate from '../src/templates/OG/customer.js'
 import jobTemplate from '../src/templates/OG/job.js'
 import { flattenMenu } from './utils'
+import { syncStandardSiteDocuments } from './standardSite'
 
 const limit = pLimit(10)
 
@@ -100,7 +105,7 @@ const createOGImages = async (data) => {
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
-    const res = await fetch('https://d27nj4tzr3d5tm.cloudfront.net/Website-Assets/Fonts/Matter/MatterSQVF.woff', {
+    const res = await nodeFetch(process.env.CLOUDFRONT_FONT_URL, {
         headers: {
             Origin: 'https://posthog.com',
         },
@@ -594,6 +599,68 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
     generateLlmsTxt(docsPages)
 
+    // Generate the self-driving platform overview + per-product markdown for LLMs/agents
+    generatePlatformMd()
+    generateProductPagesMarkdown()
+
+    // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
+    // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.
+    try {
+        const changelogQuery = (await graphql(`
+            query {
+                allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date, order: DESC }) {
+                    nodes {
+                        strapiID
+                        title
+                        description
+                        date
+                        cta {
+                            label
+                            url
+                        }
+                        teams {
+                            data {
+                                attributes {
+                                    name
+                                }
+                            }
+                        }
+                        topic {
+                            data {
+                                attributes {
+                                    label
+                                }
+                            }
+                        }
+                    }
+                }
+                allChangelogVideo(sort: { fields: publishedAt, order: DESC }) {
+                    nodes {
+                        videoId
+                        publishedAt
+                        title
+                    }
+                }
+            }
+        `)) as {
+            data?: {
+                allRoadmap?: { nodes: any[] }
+                allChangelogVideo?: { nodes: any[] }
+            }
+        }
+        generateChangelogMd(
+            changelogQuery.data?.allRoadmap?.nodes || [],
+            changelogQuery.data?.allChangelogVideo?.nodes || []
+        )
+    } catch (error) {
+        console.error('Failed to generate changelog markdown:', error)
+    }
+
+    // Publish/update Standard.site document records for blog posts.
+    // Self-gates on env (AWS_CODEPIPELINE / STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
+    // Placed before the prod-only return so STANDARD_SITE_SYNC=true can drive a local/dry run.
+    await syncStandardSiteDocuments(graphql)
+
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
         return
@@ -767,10 +834,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
         }
     `)
 
+    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
+
     console.log('Creating OG images')
     await createCareersOG()
     await createOGImages(data)
     console.log('Finished creating OG images')
-
-    await createOrUpdateStrapiPosts(data.allMDXPosts.nodes, data.allRoadmap.nodes)
 }

@@ -30,7 +30,7 @@ Major incidents require a **team call** to discuss and learn together:
 1. **Fill out the Summary and DERP sections in detail** – These are the most valuable
 1. **Check the timeline is accurate** –
 1. **Schedule the call** – Invite `engineering@posthog.com` and any key stakeholders related to the incident
-3. **Review as a group** – There may be details and other ideas people come up with in the call – you should be updating the post-mortem as you go to capture these.
+3. **Review as a group** – Spend the majority of the call reviewing Prevention. There may be details and other ideas people come up with in the call – you should be updating the post-mortem as you go to capture these.
 5. **Share outcomes** – Post the final summary in `#incidents` (this should happen automatically when you mark the post-mortem as complete)
 
 ### For minor incidents

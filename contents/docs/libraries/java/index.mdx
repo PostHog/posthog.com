@@ -11,7 +11,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: false
-  llmAnalytics: false
+  aiObservability: false
 ---
 
 This is an optional library you can install if you're working with server-side Java applications. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
@@ -120,6 +120,10 @@ posthog.capture(
 ## Request context
 
 Use request context to apply a distinct ID, session ID, and common properties to all captures inside a request scope. This allows you to associate frontend user activity with backend events, session replay, error tracking, and feature flag evaluation.
+
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Java backend hostname so browser requests include the session and distinct ID headers.
+
+Then read the incoming headers in your Java request scope:
 
 ```java
 Map<String, Object> headers = new HashMap<>();

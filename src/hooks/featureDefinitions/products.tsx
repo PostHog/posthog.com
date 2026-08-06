@@ -28,13 +28,13 @@ export const productDescriptions = {
         name: 'Error tracking',
         description: 'Track and monitor errors and exceptions in your code',
     },
-    llm_analytics: {
+    ai_observability: {
         name: 'AI Observability',
         description: 'Gather usage and performance data for your AI and LLM product',
     },
     revenue_analytics: {
-        name: 'Marketing analytics',
-        description: 'Track conversion and campaign ROI',
+        name: 'Revenue analytics',
+        description: 'Track revenue and understand your business performance',
     },
     product_tours: {
         name: 'Product tours',

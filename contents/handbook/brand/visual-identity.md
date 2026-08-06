@@ -29,7 +29,7 @@ Find logos on our [brand assets](/handbook/brand/assets) page.
 | Stacked logo                                      | When horizontal space is limited but the full name is important. |
 | 4-color logo                                      | Print version, when gradients can't be printed. Only use the 4-color logo for this case. |
 
-Download all variants at [/handbook/company/brand-assets.md](/handbook/company/brand-assets). SVG is always preferred.
+Download all variants from [brand assets](/handbook/brand/assets). SVG is always preferred.
 
 ### Rules
 
@@ -72,7 +72,7 @@ PostHog uses a deliberately limited palette. Fewer colors, used consistently, cr
 
 PostHog uses three typefaces, each with a specific role. Using them correctly is one of the fastest ways to make something feel on-brand.
 
-### Open Runde
+### RoundHog
 
 Our primary typeface. Used for all text on posthog.com and in most contexts.
 
@@ -82,7 +82,7 @@ Our primary typeface. Used for all text on posthog.com and in most contexts.
 - **Semibold** – Paragraphs with large headers, paragraph links
 - **Regular & Regular Italic** – Body text
 
-Unfortunately there are no italic variants at this time, but Cory is trying to convince the font creator to make them...
+Italic variants are available for Regular, Medium, Semibold, and Bold.
 
 ### Squeak
 

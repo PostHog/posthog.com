@@ -10,10 +10,10 @@ PostHog supports [OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) for 
 
 PostHog's OAuth endpoints are available per-region, as well as through a region-agnostic domain that transparently handles routing between US and EU Cloud:
 
-| Region | Base URL |
-|--------|----------|
-| US Cloud | `https://us.posthog.com` |
-| EU Cloud | `https://eu.posthog.com` |
+| Region          | Base URL                    |
+| --------------- | --------------------------- |
+| US Cloud        | `https://us.posthog.com`    |
+| EU Cloud        | `https://eu.posthog.com`    |
 | Region-agnostic | `https://oauth.posthog.com` |
 
 If you're building an integration that should work for any PostHog customer regardless of their region, use `https://oauth.posthog.com`. The [well-known metadata endpoint](#client-id-metadata-document-cimd) works the same way for all three domains.
@@ -37,23 +37,25 @@ The JSON document you host at your `client_id` URL should include at least:
   "client_id": "https://myapp.example.com/oauth-client",
   "client_name": "My App",
   "logo_uri": "https://myapp.example.com/logo.png",
-  "redirect_uris": [
-    "https://myapp.example.com/oauth/callback"
-  ]
+  "redirect_uris": ["https://myapp.example.com/oauth/callback"]
 }
 ```
 
 - `client_name` (required) – The human-readable name of your application, shown to users on the authorization screen.
 - `logo_uri` (optional) – A URL to a logo image that will be shown alongside the name on the authorization screen.
-- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization.
+- `redirect_uris` (required) – The URLs PostHog is allowed to redirect users to after authorization. These may be on a different domain than your `client_id` – they only need to be listed here. At authorization time, the requested `redirect_uri` must match one of these entries exactly (scheme, host, port, and path), and must use `https` unless it's a loopback address (`localhost` or `127.0.0.1`).
 
-Because the `client_id` is a URL you control, your organization implicitly "owns" it – anyone fetching the URL sees the same metadata, which is how PostHog validates the client identity.
+For native apps that grab a dynamically assigned local port at runtime (per [RFC 8252](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3)), register a loopback redirect URI *without* a port – for example `http://localhost/callback` or `http://127.0.0.1/callback` – and a request on any port, like `http://localhost:54321/callback`, will match. If you register a `localhost` URI *with* a port, the request must use that exact port. `127.0.0.1` and `::1` allow any port regardless of what you register.
+
+PostHog caches your metadata document according to the `Cache-Control: max-age` header you return. If you add a new redirect URI after your client has already been used, the previously cached document stays in effect until its TTL elapses. Return a shorter `max-age` to have changes picked up sooner.
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
 ## Server metadata discovery
 
-PostHog exposes its OAuth server configuration through the standard well-known metadata endpoint:
+### Authorization server metadata
+
+PostHog exposes its OAuth server configuration through the standard well-known metadata endpoint ([RFC 8414](https://datatracker.ietf.org/doc/html/rfc8414)):
 
 - `https://oauth.posthog.com/.well-known/oauth-authorization-server`
 - `https://us.posthog.com/.well-known/oauth-authorization-server`
@@ -72,23 +74,82 @@ The response contains the endpoints and capabilities you need, including:
 - `scopes_supported` – Available OAuth scopes (see below)
 - `response_types_supported` – Supported response types
 
+### Protected resource metadata
+
+PostHog also serves OAuth 2.0 Protected Resource Metadata ([RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728)) at:
+
+- `https://oauth.posthog.com/.well-known/oauth-protected-resource`
+- `https://us.posthog.com/.well-known/oauth-protected-resource`
+- `https://eu.posthog.com/.well-known/oauth-protected-resource`
+
+Example:
+
+```bash
+curl https://oauth.posthog.com/.well-known/oauth-protected-resource
+```
+
+The response tells OAuth clients which authorization server issues tokens for PostHog's API:
+
+- `resource` – The resource server identifier (the PostHog instance URL)
+- `authorization_servers` – The authorization server(s) that issue tokens for this resource
+- `scopes_supported` – Available OAuth scopes
+- `bearer_methods_supported` – How to present tokens (PostHog supports `header` only)
+
+OAuth clients and MCP-style agents discover this endpoint automatically through the `WWW-Authenticate: Bearer resource_metadata="..."` header returned on `401` responses. This lets a client that receives a `401` follow the metadata URL to find the correct authorization server without any prior configuration.
+
 ## Supported scopes
 
 The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
 
-## Claiming your OAuth integration
+## Going live and getting verified
 
-The <SmallTeam slug="growth" /> is working on creating a better, more streamlined process for partners to register and claim OAuth integrations with PostHog. In the meantime, CIMD provides a reliable way to integrate with PostHog's OAuth system without a manual registration step.
+Start with [CIMD](#client-id-metadata-document-cimd). For most integrations, hosting a metadata document on a domain you control is all you need to go live, and your app's name and logo appear on the authorization screen. There's no registration step to wait on.
 
-If you need to register an official OAuth integration or have questions about the integration process, email **team-growth@posthog.com**.
+Verification is optional and isn't required to go live. It removes the **unverified application** notice shown on the authorization screen.
+
+### What verification means
+
+A verified badge means PostHog has confirmed the identity of the developer behind the app and reviewed the app's name, logo, and requested scopes for fit. It is an identity check in the style of publisher verification. It is not a security audit of your application and it is not an endorsement by PostHog.
+
+### What we check
+
+We aim to approve requests on arrival, so make sure the following are true before you email us:
+
+- Your client metadata document is served from your production domain over HTTPS, not a tunnel (for example `trycloudflare.com`) or a preview deployment URL.
+- Your `redirect_uris` all use HTTPS and live on that same production domain.
+- You have a public product page a reviewer can look at.
+- Your requested scopes are limited to what your product actually needs. Declaring a [scope ceiling](#declare-your-scopes) makes this explicit.
+
+### Requesting verification
+
+Email [team-growth@posthog.com](mailto:team-growth@posthog.com) with:
+
+- Your app name.
+- Your client metadata URL (your `client_id`).
+- A link to your product.
+- Which PostHog organization is yours (recommended, see below).
+
+Verification is granted per region. If your integration supports both `us.posthog.com` and `eu.posthog.com`, say so in your email so we can verify your app in both regions.
+
+PostHog may remove verification if an app's scopes, branding, or behavior change materially, and you can re-request it at any time.
+
+### Link your app to a PostHog organization
+
+We recommend adding a CIMD verification token to your metadata document. Create it in **Organization settings → CIMD verification tokens** and add it under the `com.posthog` namespace as `com.posthog.verification_token`. Linking your app to a PostHog organization raises your provisioning rate limits and surfaces the integration to that organization's admins. It is recommended but not required, and it doesn't affect the unverified notice on the authorization screen. See [Link your partner app to a PostHog organization](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional) for the full walkthrough.
+
+### Declare your scopes
+
+We also recommend declaring the OAuth scopes your app needs under `com.posthog.scopes` in your metadata document. This sets a scope ceiling, the maximum set of scopes any token for your app can carry, so a reviewer can see exactly what your app asks for. See [Declare OAuth scopes for your app](/docs/integrate/provisioning#declare-oauth-scopes-for-your-app-optional) for details.
+
+Have a question while integrating? [Reach out to us](/talk-to-a-human).
 
 ## Token types
 
 PostHog OAuth uses the following token prefixes:
 
-| Token type | Prefix | Description |
-|------------|--------|-------------|
-| Access token | `pha_` | Short-lived token for API access |
+| Token type    | Prefix | Description                                  |
+| ------------- | ------ | -------------------------------------------- |
+| Access token  | `pha_` | Short-lived token for API access             |
 | Refresh token | `phr_` | Long-lived token to obtain new access tokens |
 
 Both token types are automatically revoked if detected by [GitHub secret scanning](/docs/api#github-secret-scanning).
@@ -97,6 +158,7 @@ Both token types are automatically revoked if detected by [GitHub secret scannin
 
 - [OAuth 2.0 (RFC 6749)](https://datatracker.ietf.org/doc/html/rfc6749) – The core OAuth 2.0 authorization framework
 - [OAuth 2.0 Authorization Server Metadata (RFC 8414)](https://datatracker.ietf.org/doc/html/rfc8414) – Server metadata discovery via `.well-known`
+- [OAuth 2.0 Protected Resource Metadata (RFC 9728)](https://datatracker.ietf.org/doc/html/rfc9728) – Protected resource metadata discovery via `.well-known`
 - [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) – The CIMD specification
 - [API overview](/docs/api) – Learn about PostHog's API authentication options and scopes
 - [Personal API keys](/docs/api/personal-api-keys) – Alternative authentication for scripts and integrations
