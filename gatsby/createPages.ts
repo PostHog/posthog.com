@@ -192,7 +192,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             sideProjects: allMdx(
-                filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } }, frontmatter: { projectAuthor: { ne: null } } }
+                filter: {
+                    fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
+                    frontmatter: { projectAuthor: { ne: null } }
+                }
             ) {
                 nodes {
                     id
@@ -1274,6 +1277,19 @@ async function createMinimalPages({
                     }
                 }
             }
+            sideProjects: allMdx(
+                filter: {
+                    fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
+                    frontmatter: { projectAuthor: { ne: null } }
+                }
+            ) {
+                nodes {
+                    id
+                    fields {
+                        slug
+                    }
+                }
+            }
         }
     `)
 
@@ -1358,6 +1374,7 @@ async function createMinimalPages({
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
         localizedNewsletter: { nodes: any[] }
+        sideProjects: { nodes: any[] }
     }
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
@@ -1368,6 +1385,17 @@ async function createMinimalPages({
         url: '/product-engineer',
     })
     createBlogPreviewPosts(data.posts.nodes)
+    data.sideProjects.nodes.forEach((node) => {
+        const slug = node.fields?.slug
+        if (!slug) return
+        createPage({
+            path: slug,
+            component: path.resolve(`src/templates/SideProject.tsx`),
+            context: {
+                id: node.id,
+            },
+        })
+    })
     data.localizedNewsletter.nodes.forEach((node) => {
         const slug = node.fields?.slug
         if (!slug) return
