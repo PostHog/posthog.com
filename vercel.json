@@ -154,6 +154,11 @@
     ],
     "redirects": [
         {
+            "source": "/managed-warehouse-recipes",
+            "destination": "/context-warehouse/use-cases",
+            "statusCode": 301
+        },
+        {
             "source": "/activity",
             "destination": "/docs/activity",
             "statusCode": 301
