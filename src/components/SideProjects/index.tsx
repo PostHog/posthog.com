@@ -111,15 +111,6 @@ export const isAlumniProject = (
     return !isCurrentTeamMember(findCreatorProfile(profiles, frontmatter))
 }
 
-// Highlight for projects whose creator's role doesn't include "engineer"
-export const isNonEngineerProject = (
-    profiles: CreatorProfile[],
-    frontmatter: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub'>
-): boolean => {
-    const profile = findCreatorProfile(profiles, frontmatter)
-    return Boolean(profile?.companyRole && !profile.companyRole.toLowerCase().includes('engineer'))
-}
-
 export const useCreatorProfiles = (): CreatorProfile[] => {
     const {
         profiles: { nodes },
@@ -240,9 +231,11 @@ export const Creator = ({
     teamLink,
     profiles,
     size = 'sm',
+    showRole = true,
 }: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub' | 'teamLink'> & {
     profiles: CreatorProfile[]
     size?: 'sm' | 'lg'
+    showRole?: boolean
 }): JSX.Element | null => {
     if (!projectAuthor) {
         return null
@@ -268,7 +261,7 @@ export const Creator = ({
                 >
                     {projectAuthor}
                 </span>
-                {profile?.companyRole && (
+                {showRole && profile?.companyRole && (
                     <span className={`block truncate text-secondary ${isLarge ? 'text-sm' : 'text-[13px]'}`}>
                         {profile.companyRole}
                     </span>

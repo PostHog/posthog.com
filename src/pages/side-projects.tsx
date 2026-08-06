@@ -12,7 +12,6 @@ import {
     findCreatorProfile,
     getEditProjectUrl,
     isAlumniProject,
-    isNonEngineerProject,
     normalizeTags,
     useCreatorProfiles,
     type CreatorProfile,
@@ -62,11 +61,13 @@ const ProjectCard = ({
     profiles,
     canEdit,
     onTagClick,
+    showRole = true,
 }: {
     node: ProjectNode
     profiles: CreatorProfile[]
     canEdit: boolean
     onTagClick: (tag: string) => void
+    showRole?: boolean
 }) => {
     const {
         fields: { slug },
@@ -75,7 +76,6 @@ const ProjectCard = ({
     const { projectThumbnail, title, description, projectAuthor, authorGitHub, teamLink, filters } = frontmatter
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
     const tags = normalizeTags(filters?.tags)
-    const nonEngineer = isNonEngineerProject(profiles, { projectAuthor, authorGitHub })
     const relativePath = node.parent?.relativePath
 
     return (
@@ -108,7 +108,7 @@ const ProjectCard = ({
                         <SideProjectGraphic
                             title={title}
                             creatorName={projectAuthor}
-                            creatorRole={profile?.companyRole}
+                            creatorRole={showRole ? profile?.companyRole : undefined}
                             avatarUrl={
                                 profile?.avatar?.url ||
                                 profile?.avatar?.formats?.thumbnail?.url ||
@@ -126,13 +126,8 @@ const ProjectCard = ({
                 </div>
             </Link>
             <div className="mt-auto p-5 pt-2">
-                {(tags.length > 0 || nonEngineer) && (
+                {tags.length > 0 && (
                     <div className="mb-4 flex flex-wrap gap-1">
-                        {nonEngineer && (
-                            <span className="rounded-full border border-purple bg-purple/10 px-2 py-0.5 text-xs font-semibold text-purple">
-                                Not made by an engineer
-                            </span>
-                        )}
                         {tags.slice(0, 3).map((tag) => (
                             <button
                                 key={tag}
@@ -154,6 +149,7 @@ const ProjectCard = ({
                         authorGitHub={authorGitHub}
                         teamLink={teamLink}
                         profiles={profiles}
+                        showRole={showRole}
                     />
                 </div>
             </div>
@@ -180,7 +176,6 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
     const [searchQuery, setSearchQuery] = useState('')
     const [tagFilter, setTagFilter] = useState<string | null>(null)
     const [creatorFilter, setCreatorFilter] = useState<string | null>(null)
-    const [nonEngineersOnly, setNonEngineersOnly] = useState(false)
     const [showAllTags, setShowAllTags] = useState(false)
     const [addingProject, setAddingProject] = useState(false)
     const [alumniExpanded, setAlumniExpanded] = useState(false)
@@ -228,7 +223,6 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
         setSearchQuery('')
         setTagFilter(null)
         setCreatorFilter(null)
-        setNonEngineersOnly(false)
         updateURL(null, null)
     }
 
@@ -274,15 +268,12 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
     const applyFilters = (projects: ProjectNode[]): ProjectNode[] => {
         const search = searchQuery.trim().toLowerCase()
         return projects.filter((project: ProjectNode) => {
-            const { title, description, projectAuthor, authorGitHub, filters } = project.frontmatter
+            const { title, description, projectAuthor, filters } = project.frontmatter
             const tags = normalizeTags(filters?.tags)
             if (tagFilter && !tags.includes(tagFilter)) {
                 return false
             }
             if (creatorFilter && projectAuthor !== creatorFilter) {
-                return false
-            }
-            if (nonEngineersOnly && !isNonEngineerProject(profiles, { projectAuthor, authorGitHub })) {
                 return false
             }
             if (search) {
@@ -295,14 +286,14 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
 
     const filteredCurrent = useMemo(
         () => applyFilters(currentProjects),
-        [currentProjects, searchQuery, tagFilter, creatorFilter, nonEngineersOnly, profiles]
+        [currentProjects, searchQuery, tagFilter, creatorFilter, profiles]
     )
     const filteredAlumni = useMemo(
         () => applyFilters(alumniProjects),
-        [alumniProjects, searchQuery, tagFilter, creatorFilter, nonEngineersOnly, profiles]
+        [alumniProjects, searchQuery, tagFilter, creatorFilter, profiles]
     )
 
-    const hasActiveFilters = Boolean(searchQuery.trim() || tagFilter || creatorFilter || nonEngineersOnly)
+    const hasActiveFilters = Boolean(searchQuery.trim() || tagFilter || creatorFilter)
     const visibleTags = showAllTags ? rankedTags : rankedTags.slice(0, VISIBLE_TAG_COUNT)
     const showAlumni = alumniExpanded || hasActiveFilters
 
@@ -420,19 +411,6 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                             : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
                                     </button>
                                 )}
-                                <span className="mx-1 h-4 w-px bg-border" />
-                                <button
-                                    type="button"
-                                    onClick={() => setNonEngineersOnly(!nonEngineersOnly)}
-                                    aria-pressed={nonEngineersOnly}
-                                    className={`rounded-full border px-2.5 py-0.5 text-[13px] transition-colors ${
-                                        nonEngineersOnly
-                                            ? 'border-purple bg-purple/10 font-semibold text-purple'
-                                            : 'border-primary bg-primary text-secondary hover:text-primary'
-                                    }`}
-                                >
-                                    Not made by engineers
-                                </button>
                             </div>
 
                             {/* Results count */}
@@ -520,6 +498,7 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                                         profiles={profiles}
                                                         canEdit={canEdit}
                                                         onTagClick={handleTagChange}
+                                                        showRole={false}
                                                     />
                                                 ))}
                                             </div>
