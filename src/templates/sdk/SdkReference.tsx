@@ -8,7 +8,7 @@ import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { getLanguageFromSdkId, hasConcreteVersion } from '../../components/SdkReferences/utils'
+import { getLanguageFromSdkId, hasConcreteVersion, isLatestVersion } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
 import ReaderView from 'components/ReaderView'
@@ -147,17 +147,16 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     const location = useLocation()
 
     // Get the language for this SDK reference
-    const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
+    const sdkLanguage = getLanguageFromSdkId(fullReference.referenceId)
     const validTypes = pageContext.types
-    const isLatest = fullReference.version.includes('latest')
+    const isLatest = isLatestVersion(fullReference.version)
     // Crosslinks use the unversioned prefix so they don't rot when versioned pages age out.
     const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
     const sdkVersions = data.allSdkReferences.nodes
 
-    // Get versions for current referenceId
-    const currentReferenceId = fullReference.info.id
+    const currentReferenceId = fullReference.referenceId
     // Sort versions by version string (descending)
     const availableVersions = sdkVersions
         .filter((version) => version.referenceId === currentReferenceId)
@@ -287,7 +286,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                             <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none gap-2">
                                                 <span>
                                                     {getCurrentVersion()}
-                                                    {getCurrentVersion() === 'latest' && hasConcreteVersionLabel && (
+                                                    {isLatest && hasConcreteVersionLabel && (
                                                         <span className="text-xs text-primary/60 dark:text-primary-dark/60">
                                                             {' '}
                                                             ({fullReference.info.version})

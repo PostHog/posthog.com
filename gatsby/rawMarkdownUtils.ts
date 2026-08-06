@@ -1,7 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId, hasConcreteVersion, typeHasPage } from '../src/components/SdkReferences/utils'
+import {
+    getLanguageFromSdkId,
+    hasConcreteVersion,
+    isLatestVersion,
+    typeHasPage,
+} from '../src/components/SdkReferences/utils'
 import {
     createTurndownService,
     extractTitleFromHtml,
@@ -220,16 +225,16 @@ const renderReturnType = (returnType: any): string => {
     }
 }
 
-const renderExamples = (examples: any[], language: string): string => {
+const renderExamples = (examples: any[], language: string, title = 'Examples'): string => {
     if (!examples || examples.length === 0) return ''
 
     if (examples.length === 1) {
-        return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+        return `### ${title}\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
     } else {
         const exampleBlocks = examples.map(
             (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
         )
-        return `### Examples\n\n${exampleBlocks.join('\n\n')}`
+        return `### ${title}\n\n${exampleBlocks.join('\n\n')}`
     }
 }
 
@@ -243,7 +248,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     // Follow the same path logic as createPages.ts
     let fileName: string
-    if (sdkReferences.version.includes('latest')) {
+    if (isLatestVersion(sdkReferences.version)) {
         fileName = `${sdkReferences.referenceId}.md`
     } else {
         fileName = `${sdkReferences.id}.md`
@@ -331,7 +336,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
 /** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
 export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
-    if (!sdkReferences.version.includes('latest')) {
+    if (!isLatestVersion(sdkReferences.version)) {
         return
     }
 
@@ -356,8 +361,11 @@ export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
             markdownNodes.push(propertiesMarkdown)
         }
 
-        if (type.example) {
-            markdownNodes.push(`### Example values\n\n\`\`\`${sdkLanguage}\n${type.example.trim()}\n\`\`\``)
+        const exampleMarkdown = type.example
+            ? renderExamples([{ code: type.example }], sdkLanguage, 'Example values')
+            : ''
+        if (exampleMarkdown) {
+            markdownNodes.push(exampleMarkdown)
         }
 
         fs.writeFileSync(path.join(typesDir, `${type.id}.md`), markdownNodes.join('\n\n'), 'utf8')

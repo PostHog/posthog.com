@@ -22,6 +22,9 @@ export const getLanguageFromSdkId = (sdkId: string): string =>
 /** The pinned `latest` row carries this in `info.version` instead of a semver. */
 export const VERSION_PLACEHOLDER = '<version>'
 
+/** True for the pinned `latest` row, which is served at the unversioned URL. */
+export const isLatestVersion = (version?: string): boolean => Boolean(version?.includes('latest'))
+
 export const hasConcreteVersion = (version?: string): boolean => Boolean(version) && version !== VERSION_PLACEHOLDER
 
 /** A type only gets a page when it has properties or an example — link allowlists must match. */

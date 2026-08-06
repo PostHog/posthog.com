@@ -5,7 +5,7 @@ import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
-import { typeHasPage } from '../src/components/SdkReferences/utils'
+import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -1091,14 +1091,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     // Type pages exist for the `latest` row only, so all crosslinks resolve against that set.
     const latestTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
-        if (node.version.includes('latest')) {
+        if (isLatestVersion(node.version)) {
             acc[node.referenceId] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
         }
         return acc
     }, {} as Record<string, string[]>)
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        const path = `/docs/references/${node.version.includes('latest') ? node.referenceId : node.id}`
+        const path = `/docs/references/${isLatestVersion(node.version) ? node.referenceId : node.id}`
 
         createPage({
             path,
@@ -1116,7 +1116,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.allSdkTypes.nodes.forEach((node) => {
         // Versioned type pages rot out of the build within a release cycle, so only build `latest`.
-        if (!node.version.includes('latest')) {
+        if (!isLatestVersion(node.version)) {
             return
         }
 
