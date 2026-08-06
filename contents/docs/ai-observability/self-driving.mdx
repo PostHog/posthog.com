@@ -25,15 +25,13 @@ A [signal](/docs/self-driving/signals) is a structured finding: what's happening
 | [Anomaly investigations](#anomaly-investigations) (alpha) | Spikes in cost, latency, or errors | When an anomaly alert fires |
 | [Scouts](#scouts) | Regressions across cost, latency, errors, volume, and eval performance – or anything you describe | On a schedule you set |
 
-All three run without you prompting them: agents watch the data, and what reaches you arrives with the evidence behind it.
-
 ## Eval reports
 
 [Evaluations](/docs/ai-evals) score your live generations in production – with an LLM judge, deterministic Hog code, or sentiment analysis. Eval reports are what make those scores actionable: instead of you watching a pass-rate chart, an agent reviews each batch of results and summarizes what it found, with example generations as evidence.
 
 To set them up:
 
-1. [Create an evaluation](/docs/ai-evals#choosing-an-evaluation-type) that targets generations. PostHog provisions a report configuration automatically: a report after every 100 evaluation results, at most one per hour, capped at 10 per day. You can tune all three, and add Slack or email delivery, in the evaluation's settings.
+1. [Create an evaluation](/docs/ai-evals#choosing-an-evaluation-type) that targets generations. PostHog provisions a report configuration automatically that you can further configure and have sent to email or Slack.
 2. Enable the **AI observability** source in your [inbox settings](/docs/self-driving/inbox/sources), so report findings flow into your inbox as signals.
 
 <ProductVideo
@@ -50,12 +48,12 @@ Anomaly investigations are currently in alpha. We'd love to [hear your feedback]
 
 </CalloutBox>
 
-Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. What reaches you is what survived investigation.
+Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. You only read true-positives.
 
 To set them up:
 
 1. Create an insight on the metric you care about – cost, latency, or errors. The [AI Observability dashboard](/docs/ai-observability/dashboard) charts are a good starting point.
-2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it. No thresholds to pick – the detectors learn what normal looks like from your data.
+2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it. Either set a threshold, or detect one automatically when it drifts too far from the average.
 
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_alerts_web_clean_0d31748bb1.mp4"
@@ -63,11 +61,9 @@ To set them up:
   classes="rounded"
 />
 
-From then on, every firing gets investigated automatically.
-
 ## Scouts
 
-[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your LLM data and file a report only when a finding clears the bar. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, and remembers your baselines between runs – so a persistent regression stays one report instead of ten.
+[Scouts](/docs/self-driving/scouts) are scheduled agents that explore your LLM data and file a report only when they find something noteworthy. The built-in AI observability scout watches for regressions across cost, latency, errors, volume, and eval performance, and remembers your baselines between runs – so a persistent regression only shows up in a single report, not everyday.
 
 Create one from the **Self-driving** tab in AI Observability: pick a template like the daily digest, or describe what's worth your attention in plain English.
 
@@ -79,7 +75,7 @@ Create one from the **Self-driving** tab in AI Observability: pick a template li
 
 ## What lands in your inbox
 
-A [report](/docs/self-driving/reports) has a title, a summary, the evidence, and a call on how actionable it is. A research agent connects it to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
+A [report](/docs/self-driving/reports) gives a summary and the evidence plus how actionable and important it is. A research agent connects it to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
 
 ## Next step
 
