@@ -24,7 +24,7 @@ const UseCases = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">Who is it for?</h2>
+            <h2 className="mb-3">Who is it for?</h2>
             {useCases?.intro && <p>{useCases.intro}</p>}
             <OSTable
                 columns={columns}

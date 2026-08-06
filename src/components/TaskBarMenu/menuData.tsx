@@ -3,7 +3,6 @@ import React from 'react'
 import { companyMenu, docsMenu, pricingMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { APP_COUNT } from '../../constants'
 import SearchableProductMenu from './SearchableProductMenu'
 import useProduct from '../../hooks/useProduct'
 import {
@@ -360,7 +359,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         {
             type: 'item',
             label: 'Context Warehouse',
-            link: '/data-stack',
+            link: '/context-warehouse',
             icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
@@ -376,19 +375,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             type: 'separator',
         },
         {
-            type: 'item',
-            label: `Browse all tools (${APP_COUNT})`,
-            link: '/products',
-            icon: <Icons.IconApps className="size-4 text-red" />,
-            mobileDestination: '/products',
-        },
-        {
             type: 'submenu' as const,
-            label: 'Search tools',
+            label: 'Browse tools',
             link: '/products',
             items: <SearchableProductMenu products={allProducts} />,
-            icon: <Icons.IconSearch className="size-4 text-gray" />,
-            mobileDestination: false, // Omit from mobile menu; desktop-only search
+            icon: <Icons.IconApps className="size-4 text-red" />,
+            mobileDestination: '/products', // Desktop shows the searchable submenu; mobile links to the tools list
         },
     ]
 
@@ -412,15 +404,15 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'Plans & usage-based pricing',
+                    label: 'Usage-based pricing',
                     link: '/pricing',
                     icon: getMenuIcon(pricingMenu.children, '/pricing', 'IconReceipt', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'How we do "sales"',
-                    link: '/sales',
-                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                    label: 'Platform packages',
+                    link: '/platform-packages',
+                    icon: getMenuIcon(pricingMenu.children, '/platform-packages', 'IconServer', 'purple'),
                 },
                 {
                     type: 'item',
@@ -446,10 +438,18 @@ export function useMenuData(): MenuType[] {
                     link: '/talk-to-a-human',
                     icon: getMenuIcon(pricingMenu.children, '/talk-to-a-human', 'IconHeadset', 'purple'),
                 },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/sales',
+                    icon: getMenuIcon(pricingMenu.children, '/sales', 'IconPercentage', 'green'),
+                },
             ],
         },
         {
             trigger: 'Docs',
+            // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
+            mobileLink: '/docs',
             items: mergedDocsMenu(allProducts),
         },
         {
@@ -468,11 +468,18 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconPencil className="size-4 text-yellow" />,
                 },
                 {
+                    type: 'item',
+                    label: 'Founders hub',
+                    link: '/founders',
+                    icon: <Icons.IconRocket className="size-4 text-purple" />,
+                },
+                {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/questions',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
+                { type: 'separator' },
                 {
                     type: 'item',
                     label: 'Merch store',
@@ -525,12 +532,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Roadmap',
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
-                    label: 'WIP',
-                    link: '/wip',
-                    icon: getMenuIcon(companyMenu.children, '/wip', 'IconWrench', 'green'),
                 },
                 {
                     type: 'item',
@@ -892,7 +893,7 @@ export function useMenuData(): MenuType[] {
         ? [
               {
                   type: 'item' as const,
-                  label: 'home.mdx',
+                  label: 'Home',
                   link: '/',
               },
               { type: 'separator' as const },
@@ -1065,8 +1066,9 @@ export function useMenuSelectOptions() {
         {
             label: 'Pricing',
             items: [
-                { value: 'pricing', label: 'Plans & usage-based pricing' },
-                { value: 'sales', label: 'How we do "sales"' },
+                { value: 'pricing', label: 'Usage-based pricing' },
+                { value: 'platform-packages', label: 'Platform packages' },
+                { value: 'sales', label: 'How we do sales' },
                 { value: 'startups', label: 'Startups' },
             ],
         },
