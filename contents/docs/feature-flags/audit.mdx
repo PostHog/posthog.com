@@ -1,0 +1,78 @@
+---
+title: Auditing and fixing feature flags with the wizard
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Feature flags fail quietly. A misconfigured flag doesn't throw – your app serves defaults, the dashboard says the flag is active, and every evaluation keeps [counting toward your bill](/docs/feature-flags/cutting-costs). Nobody files a bug, because nothing looks broken.
+
+The wizard's feature flags audit used to read your code and hand back a report. Now it also **verifies your flags actually arrive**, and fixes what you approve:
+
+<WizardCommand command="audit feature-flags" />
+
+Same command, three phases: check everything (read-only), show you what it found, apply only the fixes you pick.
+
+## What it checks
+
+**Correctness** – the static checks: [bootstrapping](/docs/feature-flags/bootstrapping), readiness (a flag evaluated before the SDK loads returns `undefined`, which is *not* `false`), default values, and flags evaluated before `identify()` resolves the real user.
+
+**Delivery** – the live checks. The audit calls the same `/flags` endpoint your app does, with your project's key, through your app's configured host, and compares the response to your flag definitions:
+
+- **Does your key actually authenticate?** Static analysis sees the env var referenced. It can't know the value works – or that the variable is empty in the environment you're running. It also catches the opposite mistake: a personal API key shipped into client-side code, which exposes account-level access to anyone reading your bundle.
+- **Does the path your app actually uses serve flags?** Projects behind a reverse proxy can have a healthy key while the proxy's flags route is broken – PostHog's servers respond fine, but your app never sees it.
+- **Does every flag in your code exist in PostHog?** A typo'd key returns `undefined` on every evaluation, forever, with no error anywhere.
+- **What does each flag evaluate to, and why?** Every flag gets a row with its `reason` code.
+
+**Cost** – [unreferenced active flags](/docs/feature-flags/cleaning-up-stale-flags), flags at 100% still gated in code, [local-evaluation](/docs/feature-flags/local-evaluation) polling cost, and flag fetches in test runs.
+
+**Observability** – whether `$feature_flag_called` events are actually being sent. [Experiments](/docs/experiments/exposures) rely on those events for exposure, and PostHog uses them to decide a flag is stale – so this check gates the cleanup checks above it.
+
+## The delivery snapshot
+
+The report opens with a row per flag. This is the part that answers "why isn't my flag working?" without you guessing:
+
+| Flag | In PostHog | Delivered | Evaluates to | Reason |
+| --- | --- | --- | --- | --- |
+| `promo-banner` | active, 100% | yes | `true` | condition_match |
+| `new-dashboard` | active, 50% | yes | `false` | out_of_rollout_bound |
+| ~~`beta-serach`~~ | **not found** | – | `undefined` forever | ghost key |
+
+That last row is a real class of bug: the flag in PostHog is `beta-search`, the code asks for `beta-serach`, and the feature has never shown for anyone. No error was ever logged.
+
+## Why cleanup waits on your events
+
+<CalloutBox icon="IconWarning" title="Removing a flag from code doesn't stop the billing – and 'unused' can lie" type="caution">
+
+PostHog decides a flag is stale from `$feature_flag_called` events. If your app evaluates flags but doesn't send those events, a flag in heavy production use looks identical to a dead one – archiving it turns off a live feature, and any experiment reading that flag loses its exposure count silently too.
+
+So the audit won't offer to archive anything until it has verified those events are flowing. If they aren't, it fixes that first, tells you to let data accumulate, and re-offers the cleanup on a later run.
+
+</CalloutBox>
+
+This is also why code cleanup alone doesn't save you money: `/flags` evaluates every active flag whether your code references it or not. Removing the gate clears the tech debt; disabling or archiving the flag in PostHog clears the cost.
+
+## Applying fixes
+
+When the checks finish, you get a checklist. Nothing you don't tick gets touched.
+
+Fixes follow the [safe cleanup order](/docs/feature-flags/cleaning-up-stale-flags):
+
+1. **Flags still referenced in code** – the audit removes the gate and keeps the winning path. It does *not* disable the flag in PostHog, because switching off a flag your deployed code still checks breaks the feature for everyone. Deploy first; the report reminds you to disable it after.
+2. **Flags with zero references** – nothing checks them, so they can be archived in PostHog right away.
+
+Code changes land as a diff in your working tree. Nothing is committed, nothing is pushed.
+
+Some findings – a broken proxy route, a leaked personal API key, a targeting decision that depends on your auth flow – aren't offered as one-click fixes at all, because they need a judgment call only you can make. Those, plus everything you skip, go into `posthog-feature-flags-report.md` with a `file:line`, why it matters, and the doc link for the concept behind it.
+
+## Audit or scout?
+
+If you use [self-driving](/docs/self-driving), the [feature flags scout](/docs/self-driving/scout-examples) watches for flag debt continuously and files findings in your inbox. They're complementary: the scout needs a couple of weeks of production traffic and never touches your code, while the audit runs on demand with no traffic at all and applies fixes you approve. Run the audit for a checkup – day one, before a launch, or when a scout report lands and you want it acted on.
+
+## Further reading
+
+- [Cleaning up stale feature flags](/docs/feature-flags/cleaning-up-stale-flags) – the full workflow, manual through automated
+- [Cutting feature flag costs](/docs/feature-flags/cutting-costs) – what bills, and how to reduce it
+- [Feature flag best practices](/docs/feature-flags/best-practices) – the concepts behind the correctness checks
+- [Troubleshooting](/docs/feature-flags/troubleshooting) – when a flag still isn't behaving

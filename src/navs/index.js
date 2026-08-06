@@ -4601,6 +4601,13 @@ export const docsMenu = {
                     name: 'Guides',
                 },
                 {
+                    name: 'Audit and fix flags',
+                    url: '/docs/feature-flags/audit',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Best practices',
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconBolt',
