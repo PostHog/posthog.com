@@ -1,0 +1,232 @@
+---
+title: SIEM integration
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  scale: full
+  enterprise: full
+---
+
+You can forward PostHog [activity logs](/docs/settings/activity-logs) into a security information and event management (SIEM) system to keep an audit trail alongside the rest of your security data, alert on changes, and satisfy compliance requirements.
+
+PostHog exposes activity logs as a paginated API that your SIEM polls on a schedule. Most SIEM platforms ship a scheduled input for exactly this, so in most cases you configure the integration in your SIEM rather than in PostHog.
+
+## Before you start
+
+You need:
+
+- A personal API key with the `activity_log:read` scope. See [API authentication](/docs/api).
+- Organization admin or owner access, if you want activity across every project rather than one.
+
+## Recommended setup
+
+### 1. Choose an endpoint
+
+| Endpoint | Use it for |
+| --- | --- |
+| `GET /api/projects/@current/advanced_activity_logs/` | Activity in a single project |
+| `GET /api/organizations/<organization_id>/advanced_activity_logs/` | Activity across every project in the organization. Restricted to admins and owners |
+
+Most SIEM integrations use the organization endpoint, so one input covers the whole account.
+
+### 2. Poll oldest first and keep the cursor
+
+Set `ordering=created_at` to return the oldest entry first, and `follow=true` to keep the `next` link valid after the last entry.
+
+```
+GET /api/organizations/<organization_id>/advanced_activity_logs/?ordering=created_at&follow=true&page_size=200
+```
+
+Save the `next` link from each response and request it on the following poll. It returns only entries recorded since the previous request, so your SIEM never re-indexes the same entry.
+
+With `follow=true`, stop when `results` is empty rather than when `next` is null. The link stays valid so you can keep polling it.
+
+Without `follow=true`, the `next` link becomes null once you reach the newest entry, and you have no position to resume from.
+
+### 3. Request OCSF
+
+Set `schema=ocsf` to receive events in [Open Cybersecurity Schema Framework](https://schema.ocsf.io/) 1.5.0 instead of PostHog's own format. Most SIEM platforms parse OCSF without a custom parser.
+
+Activity maps to three OCSF classes:
+
+| Class | `class_uid` | Covers |
+| --- | --- | --- |
+| Entity Management | 3004 | Changes to insights, dashboards, feature flags, and other resources |
+| Authentication | 3002 | Logins and logouts |
+| Account Change | 3001 | SCIM provisioning changes |
+
+Activity types without a direct OCSF equivalent use `activity_id: 99` and carry the original PostHog activity name in `activity_name`, so nothing is dropped.
+
+### 4. Decide whether to include values
+
+By default, an event records which fields changed but not their values:
+
+```json
+{
+  "class_uid": 3004,
+  "activity_id": 3,
+  "time": 1785932169290,
+  "entity": { "type": "FeatureFlag", "uid": "1234", "name": "beta-checkout" },
+  "actor": { "user": { "email_addr": "person@example.com" } },
+  "src_endpoint": { "ip": "203.0.113.4" },
+  "unmapped": { "changed_fields": ["filters"] }
+}
+```
+
+This answers who changed what and when, which is what an audit trail needs.
+
+Set `include_values=true` to also receive the previous and new values, mapped to the OCSF `entity` and `entity_result` attributes. Values can contain the content of the changed object, such as the body of a notebook or the targeting rules on a feature flag. Including them makes responses larger and sends that content to your SIEM, where it counts toward your ingest volume.
+
+### 5. Bound the first run
+
+Your first poll returns your full retained history, which can be large. To start from a specific point, add `start_date` with an ISO 8601 timestamp:
+
+```
+&start_date=2026-01-01T00:00:00Z
+```
+
+You can only backfill as far as your [retention period](/docs/settings/activity-logs#retention-periods) allows.
+
+## Splunk
+
+These steps use a scripted input, which is built into Splunk Enterprise and needs no add-ons.
+
+### 1. Create the app directory
+
+On your Splunk instance, create an app to hold the poller:
+
+```bash
+mkdir -p $SPLUNK_HOME/etc/apps/posthog_activity/{bin,default,local}
+```
+
+Add `$SPLUNK_HOME/etc/apps/posthog_activity/default/app.conf`:
+
+```ini
+[install]
+is_configured = 1
+
+[ui]
+is_visible = 1
+label = PostHog activity logs
+```
+
+Store your personal API key in `$SPLUNK_HOME/etc/apps/posthog_activity/local/posthog_pat.txt` and restrict access to it:
+
+```bash
+chmod 600 $SPLUNK_HOME/etc/apps/posthog_activity/local/posthog_pat.txt
+```
+
+### 2. Add the poller script
+
+Save this as `$SPLUNK_HOME/etc/apps/posthog_activity/bin/posthog_activity.py` and make it executable. Set `POSTHOG_HOST` and `ORGANIZATION_ID` for your account.
+
+```python
+#!/usr/bin/env python3
+import json
+import sys
+import urllib.request
+from pathlib import Path
+from urllib.parse import urlencode
+
+POSTHOG_HOST = "https://us.posthog.com"
+ORGANIZATION_ID = "your-organization-id"
+PAGE_SIZE = "200"
+
+APP_DIR = Path(__file__).resolve().parent.parent
+CHECKPOINT = APP_DIR / "local" / "cursor.txt"
+PAT_FILE = APP_DIR / "local" / "posthog_pat.txt"
+
+
+def first_url():
+    params = {
+        "schema": "ocsf",
+        "ordering": "created_at",
+        "follow": "true",
+        "page_size": PAGE_SIZE,
+    }
+    return f"{POSTHOG_HOST}/api/organizations/{ORGANIZATION_ID}/advanced_activity_logs/?{urlencode(params)}"
+
+
+def main():
+    pat = PAT_FILE.read_text().strip()
+    CHECKPOINT.parent.mkdir(parents=True, exist_ok=True)
+    url = CHECKPOINT.read_text().strip() if CHECKPOINT.exists() else first_url()
+
+    while url:
+        request = urllib.request.Request(url, headers={"Authorization": f"Bearer {pat}"})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            body = json.loads(response.read())
+
+        for event in body["results"]:
+            print(json.dumps(event))
+
+        next_url = body.get("next")
+        if next_url:
+            CHECKPOINT.write_text(next_url)
+        # With follow=true the link stays valid, so an empty page means there is nothing new.
+        if not body["results"]:
+            break
+        url = next_url
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+```
+
+The script writes each event to stdout as one JSON object, which is what Splunk indexes. It saves the `next` link to `local/cursor.txt` after every page, so an interrupted run does not re-send what it already printed.
+
+### 3. Restart Splunk
+
+```bash
+$SPLUNK_HOME/bin/splunk restart
+```
+
+### 4. Configure the input
+
+In Splunk Web:
+
+1. Go to **Settings** > **Data inputs** > **Scripts**, then click **New Local Script**.
+2. Set **Script Path** to `$SPLUNK_HOME/etc/apps/posthog_activity/bin`.
+3. Set **Script Name** to `posthog_activity.py`.
+4. Set **Interval** to how often you want to poll, in seconds. 60 is a reasonable starting point.
+5. Click **Next**, then set **Source type** to `_json` so Splunk parses the event fields.
+6. Choose your index, then click **Review** and **Submit**.
+
+### 5. Confirm events are arriving
+
+Search for the events in Splunk:
+
+```
+index=<your index> source="*posthog_activity.py"
+```
+
+To check the OCSF fields parsed correctly:
+
+```
+index=<your index> source="*posthog_activity.py" | stats count by class_uid, activity_id
+```
+
+Events are timestamped with when the activity happened in PostHog, not when Splunk indexed them, so a `timechart` reflects real history.
+
+### Troubleshooting
+
+If no events appear, check `$SPLUNK_HOME/var/log/splunk/splunkd.log` for lines mentioning `posthog_activity.py`. Splunk logs the script's stderr there.
+
+| Problem | Cause |
+| --- | --- |
+| `401` from PostHog | The personal API key is missing or wrong |
+| `403` from PostHog | The key does not have the `activity_log:read` scope |
+| Script runs but indexes nothing | The checkpoint is already at the newest entry. Make a change in PostHog and wait for the next poll |
+| Events all share one timestamp | The source type is not `_json`, so Splunk is not reading the event time |
+
+To re-index your history from the beginning, delete `local/cursor.txt` and wait for the next run.
+
+## Other SIEM platforms
+
+The approach is the same for any platform that can poll an HTTP endpoint on a schedule: request OCSF, order oldest first, follow the cursor, and store it between runs.
+
+If you are integrating with a platform not covered here, [let us know](/questions) and we can add steps for it.
