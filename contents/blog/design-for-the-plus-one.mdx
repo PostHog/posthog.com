@@ -33,21 +33,23 @@ Here's the tl;dr of my take:
 - my agents are the ones using it sometimes
 - headless is just a new layer to product building (the same way APIs and the GUI were once new)
 
-If you're a product builder, congratulations! That means your job just doubled: every user of your product is now potentially bringing a plus-one, an agent (or several) that doesn't care what font you picked.
+If you're a product builder, congratulations! That means your job just doubled: every user of your product is potentially bringing a plus-one, an agent (or several) that doesn't care what font you picked.
 
-At PostHog we've spent the last while building for these new agent guests, tools like our [MCP server](/docs/model-context-protocol), [CLI](/docs/getting-started/install), and [context mill](https://github.com/PostHog/context-mill), while shipping more charts, screens, and clicky stuff for humans than ever.
+At PostHog we've spent the last while building for these new agent party guests, tools like our [MCP server](/docs/model-context-protocol), [CLI](/docs/getting-started/install), and [context mill](https://github.com/PostHog/context-mill). At the same time, we've been shipping more charts, screens, and clicky stuff for humans than ever.
 
 Here's what we've learned building for a hybrid (not headless) future.
 
 ## 1. If a human can do it, an agent should too
 
-If you're new to this whole "agentic users" thing, start here. Everything else builds on it. Anything a human can do in your product, [an agent needs a way to do as well](/newsletter/agent-first-product-engineering).
+If you're new to this whole "agentic users" thing, start here. Anything a human can do in your product, [an agent needs a way to do as well](/newsletter/agent-first-product-engineering).
 
 Mostly, agents don't touch your UI. Some can (computer-use agents like Perplexity's Comet will click around a live DOM), but that's the slow, brittle path. Given the choice, an agent would rather work in data, SQL, tool calls, and APIs.
 
-Start by auditing your product's capabilities and ask at each interaction: can an agent do this through an endpoint or an MCP call? Every click-only answer is a dead end for the agent, and dead ends are where [loops](/newsletter/loops) die. A common one: the agent can create a dashboard but not share it, because sharing only lives behind a menu with no endpoint. It gets all the way there, then stalls on "okay, now _you_ open the dashboard and paste this link in." Find those handoffs and close them.
+Start by auditing your product's capabilities and ask at each interaction: can an agent do this through an endpoint or an MCP call? Every click-only answer is a dead end for the agent, and dead ends are where [loops](/newsletter/loops) die.
 
 Netlify has a name for getting this right: [agent experience](https://www.netlify.com/agent-experience/), or AX, how easily an agent can discover what you do, call it reliably, and recover when something breaks. The standard way to give it that is [MCP](https://modelcontextprotocol.io). Think of it as an API built for agents instead of developers: the same menu of actions your product already exposes, described in a language an agent can read.
+
+The flip side matters just as much (and it's where the rest of this post is headed). Every action you hand the agent is an action a human now needs a way to see, sign off on, or roll back.
 
 **What this looks like:**
 
@@ -65,9 +67,13 @@ An MCP that covers every action a human can take. Run the dead-end audit. Rewrit
 
 If you're building for developers, onboarding increasingly doesn't start from a "get started" button. It starts in a terminal or a chat window. This is less true if your users aren't technical, but the pattern is spreading: if your [AEO](/blog/aeo-advice) game is strong, the user may never see your homepage at all. Claude or ChatGPT recommended you to a person, they said "go for it," and the agent set it up.
 
-The catch is you can't count on the agent to read your install docs. A capable one might go looking, but plenty won't. They show up, reach for a tool they already know how to call, and improvise if it's missing.
+The catch is you can't count on the agent to read your install docs. A capable one might go looking, but plenty won't. So the job is to make setup something an agent can finish without a human stepping in. Three things get you most of the way there:
 
-So the job is to make setup something an agent can finish without a human stepping in. Three things get you most of the way there. Be discoverable: register your MCP server and get your product into the tool directories agents already check, so it can find you without being told. Handle auth on its own terms: an OAuth device flow, or a scoped key the agent can mint itself, beats a dashboard a person has to click through. And collapse setup into a single call, so the agent runs one command instead of following a ten-step guide.
+1. **Be discoverable.** Register your MCP server and get listed where agents look for connectors (the Claude and Codex app directories, for a start).
+2. **Handle auth on its own terms.** An OAuth device flow or a self-minted scoped key beats a dashboard someone has to click through.
+3. **Collapse setup into one call.** One command, not a ten-step guide.
+
+That's the agent handled. Humans still onboard themselves, though. And even when an agent runs the whole setup, a person eventually opens the product and has to work out what it is, whether it worked, and what to do next. That requires UI, baby! The agent gets you wired up in one call, but the human still needs a screen that orients them, shows the state of things, and points at the obvious next step.
 
 **What this looks like:**
 
@@ -77,17 +83,17 @@ So the job is to make setup something an agent can finish without a human steppi
 
 <CalloutBox icon="IconSparkles" title="Go build:" type="fyi">
 
-A signup flow an agent can complete end to end. [Fork ours here](https://github.com/PostHog/wizard) (our competitors already have). Treat your docs like the conversion surface they've become: publish an llms.txt, serve pages as plain Markdown, put the answer at the top of every article. And design your auth for the agent, because the agent _will_ improvise. One of ours was cheerfully told by ChatGPT that it's fine to paste an API key into a chat window. Short-lived tokens, revoked when the job's done, beat trusting the agent to be careful.
+Build both front doors. For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens beat hoping it won't paste a key into a chat). For the human: a first run that orients them in seconds. Adapt it to how they arrived. If an agent already did the setup, drop the person into a working product that shows them what it did and one clear next step. If they're setting up by hand, walk them through it.
 
 </CalloutBox>
 
-## 3. Feed your plus-one context, or it invents it
+## 3. Feed agents context (or they'll invent it)
 
-An agent shows up able to do almost anything and knowing almost nothing about you. Your product might be the best toy ever, but if the batteries aren't included, Christmas morning is a disappointment. Two things have to be true: a user generates data by using your product, and that data has to live somewhere an agent can reach and manipulate.
+Your product might be the best toy ever, but if the batteries aren't included, Christmas morning is going to be disappointing. The batteries are context: what the user has done, what's in their account, what state everything is in. Your UI already shows a human all of that. The job is to make the same context reachable to an agent, as data it can query and act on.
 
-More context isn't better context, though. Anthropic's [advice on context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) is to keep it informative and tight, curating each turn rather than stockpiling. Every token you spend on data that doesn't matter is one not spent thinking.
+More context isn't better context, mind you. Anthropic's [advice on context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) is to keep it informative and tight, curating each turn rather than context dumping. Every token you spend on data that doesn't matter is one not spent thinking.
 
-Get it right and you close the loop instead of just opening it. Take PostHog: our [error tracking](/docs/error-tracking) captures where users get stuck and what's breaking. Instead of drawing you a dashboard, the agent opens a PR, ships the fix, then checks the funnel and the error rate afterwards to see whether it worked. Signals in, work out, evaluation back, repeat.
+Get this right, and one pool of context feeds a dozen surfaces. Take PostHog error tracking. The exceptions it captures show up as a [web UI](/docs/error-tracking) a human reads, but the same data can be pulled into an agent over our MCP. Taking it a step further, errors can be acted on automatically by [self-driving](/blog/what-if-your-product-built-itself), and land as a PR with the fix in [Slack](/blog/slack-app-beta). It's the same data, with many front doors, and many ways for humans and agents to manipulate it.
 
 <div style="text-align: center;">
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/truman_show_3cb839fddf.jpeg" alt="The Truman Show: what we see vs what they see" />
@@ -95,30 +101,30 @@ Get it right and you close the loop instead of just opening it. Take PostHog: ou
 
 **What this looks like:**
 
-- We rebuilt the context layer behind our own setup wizard and [5x'd paid conversion](/newsletter/context-engineering). Same model, better context.
+- We rebuilt the context layer behind our own setup wizard and [5x'd paid conversion](/newsletter/context-engineering).
 - Linear's agent triages an incoming issue, investigates the code, and opens a PR for an engineer to review in the morning. Their internal agent [merged nearly 700 PRs in a single month](https://linear.app/now/coding-sessions-for-linear-agent).
-- Some teams are starting to write their blog posts as ground truth for the agents that don't have the MCP yet. Documentation aimed at a reader who'll never scroll.
+- Supabase's [MCP server](https://supabase.com/docs/guides/getting-started/mcp) hands an agent your project's live schema and logs and lets it run SQL, so it works from the actual state of your database instead of guessing at it.
 
 <CalloutBox icon="IconDatabase" title="Go build:" type="fyi">
 
-Pipe your data into one place an agent can query in a single hop (your own agents and your customers' alike). Then wire the reaction back to whatever made the change, so the same context that spotted a problem can confirm the fix.
+Build one context layer and point both the UI and the agent at it: the dashboard a human reads and the answer an agent pulls come from the same source. Then notice how much of your UI is already context. An error message is a screen a human reads and a signal an agent acts on, so when you make it say exactly what to do next instead of "something went wrong," you've improved the interface and fed the agent in the same move.
 
 </CalloutBox>
 
-## 4. Watch what your plus-one actually does
+## 4. Watch what agents actually do
 
-Most product teams have years of analytics on human sessions and nothing on agent ones. You can't build for a user you can't see, so watch what agents call, what they retry, and where they give up, the same way you'd watch the [AI features you ship](/blog/what-is-ai-observability).
+You've got years of data on what your human users do and almost none on what the agents do. You can't build for a user you can't see (shocker), so the solution is to watch what agents call, what they retry, and where they give up.
 
-There are two questions here, and people conflate them. One is how agents use _you_: which clients show up, which tools they call, what's failing, what they were trying to do. The other is what your own agents are doing out in the world: their cost, their intent, their evals. Both matter. They're not the same dashboard.
+It's the same instinct you already have for humans, but the failures look different. A person rage-clicks or bails, and you catch it in [session replays](/session-replay). An agent fails in its own ways: it loops, retries a tool that keeps erroring, hallucinates a parameter, or gives up and hands the job back to the human.
 
-For the first one, we built [MCP Analytics](/docs/mcp-analytics), which clusters what agents are actually trying to do on any MCP server, including ours. Last month, PostHog's MCP fielded close to 10 million tool calls from 31 different agent clients. Real people ran things like this through it:
+You catch those in [AI observability](/docs/ai-engineering/observability) for the agents you ship, and [MCP analytics](/docs/mcp-analytics) for the ones showing up at your MCP server. Different shapes, same payoff: each one you find is usually a spot where the surface between you and the agent needs work. Last month ours clustered close to 10 million tool calls from 31 different agent clients, real people running things like this:
 
 - Wired PostHog into a text-message assistant so it pings them the moment a metric moves.
 - Shipped an A/B test on a "skip the intro" screen – feature flag, 50/50 split, and all.
 - Built an activation-to-paid funnel.
 - Triaged live production errors like expired magic links and missing auth sessions.
 
-What's missing from those examples is the PostHog UI. But look at the 31 clients: Claude Code, Codex, and Cursor, yes, but also Claude.ai, Claude Desktop, Cowork, Linear, Notion, Lovable, Replit. Coding agents, chat windows, desktop apps, products with agents baked in. The plus-one arrived through 31 different front doors, and almost every one of them has a screen. A terminal is a UI. A Claude chat is a UI. [Slack is a UI](/blog/slack-app-beta). Your users are reaching you through surfaces you don't own and can't fully control. The interface didn't die. It splintered into 31 front doors.
+What's missing from those examples is the PostHog UI. What's not missing is UI. Those 31 clients (Claude Code, Cursor, Cowork, Linear, Notion) all have a screen. A terminal is a UI. A chat window is a UI. [Slack is a UI](/blog/slack-app-beta). Your users are still looking at a screen, just not yours.
 
 ![MCP Analytics dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png)
 
@@ -131,15 +137,17 @@ What's missing from those examples is the PostHog UI. But look at the 31 clients
 
 <CalloutBox icon="IconGraph" title="Go build:" type="fyi">
 
-Analytics for your agent users, not just your humans. Start by finding out which agent clients are even showing up, then watch where they retry or give up. When a tool starts failing, check whether your description misled the agent before you assume your code is broken.
+Instrument agent traffic the way you already instrument humans: tag every call with the client it came from, then watch where agents retry or give up. And enjoy the irony, because the thing you build to watch a swarm of agents who never touch a UI is a dashboard. A UI. You cannot hold a thousand silent agent runs in your head, so even here the answer is a screen for a human to read.
 
 </CalloutBox>
 
-## 5. Charge the human and the plus-one differently
+## 5. Price for two kinds of user
 
-In February, the software industry had a collective panic attack. Around [$300 billion](https://www.forbes.com/sites/donmuir/2026/02/04/300-billion-evaporated-the-saaspocalypse-has-begun/) in market value evaporated in roughly 48 hours, Wall Street named it the SaaSpocalypse, and by spring the number was closer to [$2 trillion](https://www.saastr.com/the-saas-rout-of-2026-is-even-worse-than-you-think-for-the-first-time-ever-software-now-trades-at-a-discount-to-the-sp-500/). The logic: if one agent does the work of ten people, you don't buy ten seats.
+In February 2026, the software industry had a collective panic attack. Around [$300 billion](https://www.forbes.com/sites/donmuir/2026/02/04/300-billion-evaporated-the-saaspocalypse-has-begun/) in market value evaporated in roughly 48 hours, Wall Street named it the SaaSpocalypse (nice branding), and by spring the number was closer to [$2 trillion](https://www.saastr.com/the-saas-rout-of-2026-is-even-worse-than-you-think-for-the-first-time-ever-software-now-trades-at-a-discount-to-the-sp-500/). The logic was that if one agent does the work of ten people, you don't buy ten seats.
 
-We've used [usage-based pricing](/newsletter/pricing-advice) since day one because it keeps our interests aligned with our users': you pay for what you send us, and we don't store what you won't pay for. That model matters more now, because an agent and a human don't cost you the same, not even close, and if you charge them the same way you'll either eat the agent's bill or overcharge the human. Getting it right is genuinely hard, so ship a version, watch what agents and humans actually cost you, and adjust.
+PostHog has had [usage-based pricing](/newsletter/pricing-advice) from the beginning, which sidesteps the whole problem: charge for what gets used and it doesn't matter whether a human or an agent used it. Per-seat pricing can't do that. An agent and a human cost you wildly different amounts, so one price for both means you either eat the agent's bill or overcharge the human.
+
+It also clarifies what each side is buying. The agent is paying for raw capability, the tokens and calls it burns to get work done. The human is paying for the experience wrapped around that work: the screen where they see what happened, decide whether to trust it, and steer. Yet another useful reminder that the UI isn't overhead you begrudgingly maintain. It's a thing people actually pay for (are you getting it now?).
 
 **What this looks like:**
 
@@ -148,27 +156,32 @@ We've used [usage-based pricing](/newsletter/pricing-advice) since day one becau
 
 <CalloutBox icon="IconReceipt" title="Go build:" type="fyi">
 
-Meter the surface your agents touch (API calls, tokens, actions taken) and charge your humans for the value they get. Bill them separately.
+Put a usage meter on the machine surfaces your customers' agents hit (the API, the MCP server, tokens) and bill those by consumption. Keep humans on a plan that buys access to the product and its interface. Concretely: one line item that scales with agent traffic, one that doesn't. Then earn that second line. Delight me while my agent does the grunt work. Give me a screen I actually want to open.
 
 </CalloutBox>
 
 ## 6. Now build the screen worth looking at
 
-Uno reverse. I spent five sections telling you to build for the plus-one. Here's why the screen is still where you win.
+Uno reverse. Every one of those five sections produces something a human still has to see, trust, approve, or undo. The agent creates the dashboard, but someone decides whether to ship it. The agent files the fix, but someone reads the diff.
 
-We painted cave paintings because we tell stories with images. Your brand, your taste, your whole sense of what the user is trying to do – all of it lives in the interface. A good UI gives a human a sense of state, and I process that about ten zillion times faster than I'd skim the equivalent wall of text. That's not a knock on me. It's why Claude started drawing little generative UIs inside the chat. I'm a child who likes picture books, and so are you.
+Humans are visual creatures. A good UI gives you a sense of state at a glance, the way a door handle tells you to push or pull (Danilo wrote a [whole thing](/newsletter/good-taste-great-products) on affordances). On screen it's a spinner that means wait, a greyed-out button that means not yet, or a red badge that means "look here!" I take that in ten zillion times faster than I'd skim the equivalent wall of text in a terminal. Your brand, your taste, your whole sense of what the user is trying to do **all live in the user interface**.
 
-Which is also why generative UI drives me a bit mad. It's cool, sure, but why am I waiting on an LLM call to render a dashboard or a widget? A doorknob doesn't phone home before it tells you to push or pull. (Danilo wrote a [whole thing](/newsletter/good-taste-great-products) on affordances that says this better than I can.) The interface matters every single time I touch a computer, and latency is the fastest way to ruin it. When we ask people why they stayed in the terminal instead of opening our dashboard, the answer is rarely taste. It's that they can't click as fast as the model works. The UI didn't lose on beauty, it lost on speed.
+If anything, the UI matters _more_ now. When software was hard to build, people had fewer choices (and used crummy products as a result). Now a decent product can be scaffolded in an afternoon, so the thing that makes a human pick yours is how it looks and feels to use, and how well their agent can use it too.
 
-If anything, delight matters _more_ now. When software was hard to build, people had fewer choices (which is why your tax software looks like it does). Now a decent product can be scaffolded in an afternoon, so the thing that makes a human choose yours is how it feels to use. The trick is knowing where to spend it. The rule we've landed on internally: be generative where it's cheap, deterministic where trust matters. Lean on templates so the agent isn't reinventing a chart every time, and use fixed, hand-built widgets for anything that needs to be trusted or touches a secure action. An experiment-results widget beats a blob of text. You just don't need a bespoke canvas for every one.
+Even the companies furthest down the headless road keep reaching back for the screen. Claude Code lives in the terminal and it's lovely, but Anthropic still built it a UI, shipping Claude Desktop and Cowork.
 
-The most interesting design problems now live in the seam between the agent and the person it's working for. We've been arguing about ours in the open. When we shipped agent reports as a separate inbox, one of our engineers pointed out it made the agent's work feel like a _problem list_ handed to you, rather than work being _taken off your plate_. The better shape is a thread the agent posts into, like a colleague would, appending its notes and diffs while the top-level summary stays current. As Andy on our team put it, each report becomes "the flexible dynamic cockpit for this feature." You've moved from shipping a PR to shipping a feature, and the cockpit is a UI argument, not a headless one. (Our design system didn't even have components for feed-style agent output. We had chat bubbles and nothing else, so we built them.)
+We made the same call. Our bet with [self-driving](/blog/what-if-your-product-built-itself) is that a product can run its own loop, with agents doing most of the work. But people don't open PostHog to watch agents work. They open it for the outcomes: bugs fixed, PRs merged. [PostHog Desktop](/desktop) is the screen where you see those outcomes, approve them, and steer.
 
-And I'll be honest about the tension, because I don't think it resolves cleanly. A unified feed where you see everything an agent did is great until the volume buries you, and people pay for a filtered inbox _because_ it's filtered. As agents produce more, the interface's job quietly shifts from surfacing to filtering. My colleague Oliver keeps us honest on the flip side: don't stall the web app you have today on the promise of some 10x agent-native thing you'll build later. Both cautions are right.
+This is the fun part, honestly. You're no longer designing a screen for someone with nothing else to look at. You're designing for moments like:
 
-Even the companies furthest down the headless road keep reaching back for the screen. Claude Code lives entirely in the terminal and it's lovely, and then Anthropic went, well, what if we gave it a UI, and shipped Claude Desktop and Cowork.
+- **Approval.** The agent has the change ready and needs a yes. Can the human tell what they're saying yes to in two seconds?
+- **Review.** Not a summary of what changed. The change itself. A diff beats a paragraph.
+- **Undo.** When the agent gets it wrong, there needs to be a way back.
+- **Legibility.** A feed you can scan and instantly tell which actions came from a colleague and which came from a bot.
+- **Orchestration.** If five agents are running at once, do you watch them on one screen, or open five chats?
+- **Interruption.** When you need to steer the agent while it's still moving.
 
-We made the same call, and it's the cleanest way to say what I actually believe. Our bet with [self-driving](/blog/what-if-your-product-built-itself) is that a product can run its own loop (signal, report, work, verified fix, measured outcome) with agents doing most of the doing. But nobody opens PostHog for a workspace. They open it for outcomes: bugs fixed, reports actioned, PRs merged. A screen earns its keep only by being the best place to see those outcomes and steer them. That's the whole job of PostHog Desktop. It isn't an agent orchestrator with canvases stapled on. It's the operating surface for a product that fixes and improves itself, with a human in the chair to review the loop, steer it, and trust it.
+Those are much better design problems than another login page.
 
 **What this looks like:**
 
@@ -186,25 +199,9 @@ Surfaces for reviewing, approving, and overriding agent work. Make agent actions
 
 ## The future is hybrid (not headless)
 
-If you build products for a living, this is the fun part. You're no longer designing a screen for someone who has nothing else to look at. You're designing for moments like:
+Agents might be the primary users of software soon, by sheer volume. But by _meaning_? There's no agent without me. It's easy to nod along to an agent's output without really reading it, and the screen is what pulls me back in. It's where I catch what the agent got wrong, and where I still feel like I'm holding the wheel.
 
-- **Approval.** The agent has the change ready and needs a yes. Can the human tell what they're saying yes to in two seconds?
-- **Review.** Not a summary of what changed. The change itself. A diff beats a paragraph.
-- **Undo.** When the agent gets it wrong, there needs to be a way back.
-- **Legibility.** A feed you can scan and instantly tell which actions came from a colleague and which came from a bot.
-- **Orchestration.** If five agents are running at once, do you watch them on one screen, or open five chats?
-- **Interruption.** When you need to steer the agent while it's still moving.
-- **Delight.** The reason you love the product, beyond what it does.
-
-Those are much better design problems than another login page.
-
-Ian wrote about what [2030-shaped software](/newsletter/2030-shaped-software) looks like, and Jina laid out the [engineering rules](/newsletter/agent-first-product-engineering) for building it. Go read both. I'm not going to re-litigate the strategy here. I just want to plant a flag on the one part everyone's a little too eager to bury.
-
-Agents might be the primary users of software soon, by sheer volume. But by _meaning_? There's no agent without me. I keep failing myself on this, honestly. I skim my agents' output instead of reading it, and I can feel my own brain going soft, skating along the surface of things instead of diving in. The screen is what pulls me back. It's where I catch what the agent got wrong, where I feel like I'm still holding the wheel.
-
-Good products for agents really are, under the hood, a pile of Markdown, SQL, tools, and resources. Build that. But I'm a human living in a home, not a data center or cyberspace. Give me _and_ my agents a reason to use your thing.
-
-So no, the UI isn't dead. It just came with a plus-one.
+Good products for agents really are, under the hood, a pile of Markdown, SQL, tools, and resources. Build that. But I'm a human living in a home, not a data center or cyberspace. So build the plumbing for my agent, and build me a screen worth looking at. Give me _and_ my agents a reason to use your thing.
 
 <div style="text-align: center;">
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/power_d5162ea4d2.jpg" alt="What gives people feelings of power" />
