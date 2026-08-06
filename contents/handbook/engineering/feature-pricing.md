@@ -93,10 +93,10 @@ Each product should run a yearly pricing evaluation. The evaluation should look 
 - Competitive market
 - New features
 - Costs & margins
-- etc
+- etc.
 
 Use the yearly pricing evaluation template to do this, and submit it as an RFC for others to review. 
 
 The goal with the pricing evaluation is to make sure we are not undercharging or overcharging. Though we aim to be generous, things like inflation, increasing provider costs, and new features can mean that our margins get thinner and that PostHog becomes less healthy as a business. Business health is critical to making sure we can continue to provide great services for our customers. 
 
-Pricing evaluations might result in a recommendation to raise prices. This should be done respectfully - customers should always be notified of the price change with plenty of advance warning (eg 60 days) and should be given resources for how to maintain their current spend (eg. tuning event volume). 
+Pricing evaluations might result in a recommendation to raise prices. This should be done respectfully - customers should always be notified of the price change with plenty of advance warning (eg 60 days) and should be given resources for how to maintain their current spend (e.g. tuning event volume). 
