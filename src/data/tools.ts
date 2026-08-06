@@ -303,7 +303,6 @@ export const tools = [
         description: 'AI-powered session replay analysis that watches recordings for you',
         slug: 'replay-vision',
         category: 'product_engineering',
-        status: 'beta',
     },
     {
         handle: 'api',

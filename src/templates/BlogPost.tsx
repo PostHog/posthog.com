@@ -379,6 +379,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                     setPostID(posts.data[0].id)
                 }
             })
+            // postID only feeds the like button, so leave it unset if the lookup fails.
+            .catch(() => undefined)
     }, [pathname])
 
     useEffect(() => {

@@ -3705,8 +3705,8 @@ export const docsMenu = {
                             url: '/docs/ai-engineering/skills-store',
                         },
                         {
-                            name: 'AI Observability ↗',
-                            url: 'https://posthog.com/docs/ai-observability',
+                            name: 'AI Observability',
+                            url: '/docs/ai-observability',
                         },
                         {
                             name: 'Markdown and llms.txt',
@@ -7902,6 +7902,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: '.NET', url: '/docs/logs/installation/dotnet' },
                         { name: 'Rust', url: '/docs/logs/installation/rust' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },

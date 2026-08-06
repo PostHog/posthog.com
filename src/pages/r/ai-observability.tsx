@@ -424,7 +424,7 @@ export default function AIObservabilityLanding(): JSX.Element {
                                     <strong>First 100k LLM events/mo are free</strong> with 30-day retention
                                 </li>
                                 <li>
-                                    Above 100k: <strong>$0.00006/event</strong> with volume discounts
+                                    Above 100k: <strong>from $0.00035/event</strong> with volume discounts down to $0.00006/event
                                 </li>
                                 <li>Set billing limits to avoid surprise charges</li>
                                 <li>

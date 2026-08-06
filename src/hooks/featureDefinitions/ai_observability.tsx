@@ -167,6 +167,10 @@ export const aiObservabilityFeatures = {
                 name: 'Version comparison',
                 description: 'Side-by-side diff of prompt versions',
             },
+            prompt_config: {
+                name: 'Prompt configuration',
+                description: 'Store model parameters and settings with each prompt version',
+            },
             prompt_labels: {
                 name: 'Prompt labels',
                 description: 'Tag prompts as production, staging, latest',

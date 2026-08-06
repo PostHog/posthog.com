@@ -111,10 +111,8 @@ Back in our `user` route, we add a check with PostHog of our `new-cool-feature` 
 
 @app.route("/user/<string:user>")
 def show_user(user):
-  flag_enabled = posthog.feature_enabled(
-    'new-cool-feature',
-    user
-  )
+  flags = posthog.evaluate_flags(user)
+  flag_enabled = flags.is_enabled('new-cool-feature')
 
   posthog.capture(
     "visited_user_page",
@@ -141,10 +139,8 @@ Lastly, we must capture the feature flag details in our event. This enables us t
 
 @app.route("/user/<string:user>")
 def show_user(user):
-  flag_enabled = posthog.feature_enabled(
-    'new-cool-feature',
-    user
-  )
+  flags = posthog.evaluate_flags(user)
+  flag_enabled = flags.is_enabled('new-cool-feature')
 
   posthog.capture(
     "visited_user_page",

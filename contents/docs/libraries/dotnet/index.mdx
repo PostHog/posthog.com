@@ -101,6 +101,10 @@ For the full setup guide, see the [.NET error tracking installation docs](/docs/
 
 Automatic exception capture is not available in the .NET SDK yet.
 
+## Logs
+
+[PostHog Logs](/docs/logs) doesn't use this SDK. Logs are ingested over OpenTelemetry, so you attach an OTLP exporter to the standard `ILogger` pipeline instead — see the [.NET logs installation guide](/docs/logs/installation/dotnet).
+
 ## Person profiles and properties
 
 The .NET SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:

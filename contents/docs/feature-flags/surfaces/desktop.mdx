@@ -12,6 +12,11 @@ PostHog Desktop is in beta.
 
 [PostHog Desktop](/docs/posthog-desktop) is where you review the [Self-driving](/docs/self-driving) work that feature flags generate. A scout reads your flag roster against the `$feature_flag_called` stream, finds places where the flags in your PostHog project no longer match the flag checks in your code, and files what it finds as a report you can act on.
 
+## Before you start
+
+1. **Set up Feature Flags** – [install a PostHog SDK](/docs/feature-flags/installation) so your app can evaluate flags.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## What the flags scout watches for
 
 The scout is auditing the wiring between the flag UI and your code, not judging which features should be on. A flag whose evaluation stream matches its configured state is left alone, however its volume trends. What it looks for instead:
