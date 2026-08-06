@@ -56,7 +56,7 @@ A scout trades some of that determinism for flexibility and customization. It ru
 - **A custom scout suggests its own edits.** When a run turns up concrete evidence that its own instructions misdirected it, it files that as a suggestion with the evidence attached. The scout proposes, the customer decides.
 - **Dry runs.** Run it for real, record everything it would have filed, write nothing to the inbox. The answer for a cautious or high-stakes team.
 
-So the framing for a customer with strong opinions about their own domain: a source gives you guaranteed handling of a known stream; a scout lets you encode judgement nobody else could write down, then keep tuning it in English as you learn. Customization is the reason to reach for a scout.
+So the framing for a customer with strong opinions about their own domain: a source gives you guaranteed handling of a known stream; a scout lets you encode judgement, then keep tuning it in English as you learn. Customization is the reason to reach for a scout.
 
 ### Which to lead with - scouts vs signals
 
