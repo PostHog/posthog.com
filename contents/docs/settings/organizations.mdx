@@ -88,19 +88,10 @@ The secret key value and key label are never exposed.
 
 ### Member list visibility
 
-Organization admins and owners can restrict which members are visible to non-admin members. This is useful for organizations that invite external collaborators into separate projects (e.g., B2B2C scenarios) and want to prevent those collaborators from browsing the full list of users.
+Organization admins and owners can restrict which members are visible to non-admin members. This is useful if you invite external collaborators into separate projects and don't want them browsing the full list of users.
 
-Find this setting under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security). The toggle is labeled **Members can see the full member list**.
+Find this setting under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security), labeled **Members can see the full member list**. It's enabled by default, so every member can see every other member.
 
-When enabled (the default), all organization members can see every other member in the organization members list and project access control panels.
+When it's disabled, non-admin members only see themselves and members who have access to a project they share. Admins and owners still see everyone.
 
-When disabled:
-
-- **Admins and owners** continue to see all members everywhere.
-- **Non-admin members** only see themselves and members who have project-scoped access to a shared project (via explicit grants, role-based access, or the project's default access level).
-- The members table shows an "Other organization members" footer row so the shortened list doesn't look broken.
-- The access control panel hides the "has access as an organization admin" row when admins are not visible to the viewer.
-
-> **Note:** This restriction is only meaningful in **private projects** where the default access level is set to "No access" with explicit grants. In projects where the default access is "Member" or "Admin", all organization members have project-scoped access via the default and remain visible.
-
-> **Note:** This feature requires a plan that includes organization security settings. Only admins and owners can modify this setting.
+This only has an effect in private projects. If a project's default access level is "Member" or "Admin", every organization member has access to it and stays visible.
