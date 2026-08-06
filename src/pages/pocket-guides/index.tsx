@@ -60,6 +60,9 @@ export default function PocketGuidesPage(): JSX.Element {
                 showTitle={false}
                 showAddressBar={false}
                 headerBarOptions={['showBack', 'showForward']}
+                // Explorer's <main> paints opaque bg-primary over the window shell's translucent
+                // material; transparent here lets the standard glass show behind the shelf.
+                className="[&_main]:bg-transparent"
             >
                 {/* not-prose: Explorer wraps children in prose, which underlines every cover link. */}
                 <div className="@container not-prose p-2 @xl:p-6">
