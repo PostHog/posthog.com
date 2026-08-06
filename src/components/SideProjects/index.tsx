@@ -328,6 +328,7 @@ export const SideProjectGraphic = ({
                         <img
                             src={avatarUrl || DEFAULT_HEDGEHOG}
                             alt=""
+                            loading="lazy"
                             className="absolute bottom-0 left-1/2 w-[108%] max-w-none -translate-x-1/2"
                         />
                     </div>
