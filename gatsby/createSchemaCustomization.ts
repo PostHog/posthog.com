@@ -93,6 +93,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featuredImageCaption: String
       projectAuthor: String
       authorGitHub: String
+      alumni: Boolean
       teamLink: String
       githubUrl: String
       liveUrl: String

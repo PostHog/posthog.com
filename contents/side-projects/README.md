@@ -17,11 +17,13 @@ Or by hand:
 ```yaml
 ---
 title: Your Project Name
+date: 2026-08-06  # when the project was added - newest first in the gallery
 description: A brief one-liner that appears on the gallery card
 projectThumbnail: https://example.com/thumbnail.png  # URL for gallery card image
 featuredImage: ./featured.png  # Optional larger image for detail page
 projectAuthor: Your Name
 authorGitHub: your-github-username
+alumni: true  # optional - list under "PostHog Alums" (auto-detected from team membership otherwise)
 teamLink: /teams/your-team  # optional - links to your PostHog team page
 githubUrl: https://github.com/your-username/your-repo  # optional - if the source is public
 liveUrl: https://your-demo.com  # optional - if you have a live demo
@@ -54,9 +56,13 @@ filters:
 - **Cloudinary**: `https://res.cloudinary.com/dmukukwp6/image/upload/...`
 - **Static file**: Add to `/static/images/side-projects/` and reference as `/images/side-projects/filename.png`
 
+## Alumni
+
+Projects by former team members live in a collapsed "PostHog Alums" section at the bottom of the gallery. This is automatic: creators whose community profile no longer belongs to a small team count as alumni. Set `alumni: true` or `alumni: false` in frontmatter to override.
+
 ## Tags
 
-The gallery ranks tag filters by how many projects use them, so reuse an existing tag before inventing a new one. Common ones:
+The gallery ranks tag filters by how many projects use them and folds near-duplicate tags into a canonical set (see `TAG_ALIASES` in `src/components/SideProjects`), so reuse an existing tag before inventing a new one. Common ones:
 
 - `open-source` – Public source code
 - `python` / `typescript` / `javascript` / `go` – Language/runtime

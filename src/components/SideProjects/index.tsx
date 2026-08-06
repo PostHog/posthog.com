@@ -21,18 +21,103 @@ export type CreatorProfile = {
     github?: string
     color?: string
     avatar?: { url?: string; formats?: { thumbnail?: { url?: string } } }
+    teams?: { data?: { id: number }[] }
 }
 
 export type SideProjectFrontmatter = {
     title: string
     description?: string
+    date?: string
     projectThumbnail?: string
     projectAuthor?: string
     authorGitHub?: string
+    alumni?: boolean
     teamLink?: string
     githubUrl?: string
     liveUrl?: string
     filters?: { tags?: string[] }
+}
+
+// Tag aliases fold near-duplicate and one-off tags into a smaller canonical set,
+// so the filter bar stays scannable without editing every entry's frontmatter.
+const TAG_ALIASES: Record<string, string> = {
+    'ai-coding': 'ai',
+    'anomaly-detection': 'ai',
+    langgraph: 'ai',
+    llm: 'ai',
+    'openai-agents': 'ai',
+    rag: 'ai',
+    analytics: 'data',
+    airflow: 'data',
+    clickhouse: 'data',
+    dagster: 'data',
+    'data-engineering': 'data',
+    'data-viz': 'data',
+    dbt: 'data',
+    visualization: 'data',
+    aws: 'infrastructure',
+    devops: 'infrastructure',
+    dns: 'infrastructure',
+    monitoring: 'infrastructure',
+    networking: 'infrastructure',
+    pagerduty: 'infrastructure',
+    terraform: 'infrastructure',
+    git: 'developer-tools',
+    github: 'developer-tools',
+    terminal: 'developer-tools',
+    vscode: 'developer-tools',
+    esp32: 'hardware',
+    firmware: 'hardware',
+    'raspberry-pi': 'hardware',
+    documentation: 'content',
+    writing: 'content',
+    desktop: 'desktop-app',
+    electron: 'desktop-app',
+    authentication: 'security',
+    node: 'javascript',
+    nextjs: 'react',
+    django: 'python',
+    flask: 'python',
+    'static-site': 'web-app',
+    wordpress: 'web-app',
+}
+
+// Normalize a project's tags through the alias map, deduped and order-preserving
+export const normalizeTags = (tags?: string[]): string[] => {
+    const seen = new Set<string>()
+    const normalized: string[] = []
+    tags?.forEach((tag) => {
+        const canonical = TAG_ALIASES[tag] || tag
+        if (!seen.has(canonical)) {
+            seen.add(canonical)
+            normalized.push(canonical)
+        }
+    })
+    return normalized
+}
+
+// Current team members belong to at least one small team; alumni profiles stick around but lose theirs
+export const isCurrentTeamMember = (profile?: CreatorProfile): boolean =>
+    Boolean(profile?.teams?.data && profile.teams.data.length > 0)
+
+// The frontmatter `alumni` flag wins; otherwise fall back to the profile's team membership
+export const isAlumniProject = (
+    profiles: CreatorProfile[],
+    frontmatter: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub' | 'alumni'>
+): boolean => {
+    if (typeof frontmatter.alumni === 'boolean') {
+        return frontmatter.alumni
+    }
+    return !isCurrentTeamMember(findCreatorProfile(profiles, frontmatter))
+}
+
+// Highlight for projects whose creator's role doesn't include "engineer"
+export const isNonEngineerProject = (
+    profiles: CreatorProfile[],
+    frontmatter: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub'>
+): boolean => {
+    const profile = findCreatorProfile(profiles, frontmatter)
+    return Boolean(profile?.companyRole && !profile.companyRole.toLowerCase().includes('engineer'))
 }
 
 export const useCreatorProfiles = (): CreatorProfile[] => {
@@ -54,6 +139,11 @@ export const useCreatorProfiles = (): CreatorProfile[] => {
                             thumbnail {
                                 url
                             }
+                        }
+                    }
+                    teams {
+                        data {
+                            id
                         }
                     }
                 }
@@ -250,13 +340,14 @@ export const SideProjectGraphic = ({
                     </div>
                 </div>
                 <div className="absolute inset-0 flex flex-col p-[5%]">
-                    <h3
+                    <div
+                        aria-hidden="true"
                         className={`m-0 w-[68%] break-words font-squeak font-bold uppercase leading-[0.95] ${
-                            title.length > 26 ? 'text-[6.5cqw]' : title.length > 14 ? 'text-[8cqw]' : 'text-[10cqw]'
+                            title.length > 24 ? 'text-[6.5cqw]' : title.length > 13 ? 'text-[8cqw]' : 'text-[10cqw]'
                         }`}
                     >
                         {title}
-                    </h3>
+                    </div>
                     {creatorName && (
                         <div className="mt-auto w-[68%]">
                             <div className="break-words font-squeak text-[4.5cqw] font-bold uppercase leading-none">
@@ -310,6 +401,8 @@ export const buildSideProjectMdx = (values: SideProjectFormValues): string => {
     if (values.description.trim()) {
         lines.push(`description: ${values.description.trim()}`)
     }
+    // Added date drives the "newest first" ordering in the gallery
+    lines.push(`date: ${new Date().toISOString().slice(0, 10)}`)
     if (values.projectThumbnail.trim()) {
         lines.push(`projectThumbnail: ${values.projectThumbnail.trim()}`)
     }

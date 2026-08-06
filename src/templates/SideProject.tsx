@@ -9,6 +9,7 @@ import {
     SideProjectGraphic,
     findCreatorProfile,
     getEditProjectUrl,
+    normalizeTags,
     useCreatorProfiles,
     type SideProjectFrontmatter,
 } from 'components/SideProjects'
@@ -52,8 +53,10 @@ export default function SideProject({ data }: { data: SideProjectData }): JSX.El
     } = pageData.frontmatter
     const profiles = useCreatorProfiles()
     const { isModerator } = useUser()
+    // Dev builds show the team-gated edit UI without sign-in so preview environments can exercise the flow
+    const canEdit = isModerator || process.env.NODE_ENV === 'development'
 
-    const tags = filters?.tags || []
+    const tags = normalizeTags(filters?.tags)
     const relativePath = pageData.parent?.relativePath
 
     const projectsMenu = [
@@ -142,7 +145,7 @@ export default function SideProject({ data }: { data: SideProjectData }): JSX.El
                                         View source
                                     </OSButton>
                                 )}
-                                {isModerator && relativePath && (
+                                {canEdit && relativePath && (
                                     <OSButton
                                         asLink
                                         to={getEditProjectUrl(relativePath)}
