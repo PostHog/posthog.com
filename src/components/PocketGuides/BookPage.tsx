@@ -77,11 +77,11 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
         >
             <div className="not-prose @container h-full min-h-0">
                 <BookReader
-                    head={{ title: entry.title, page: entry.page, total }}
                     prev={prevTurn}
                     next={nextTurn}
                     tabs={bookTabs(pages, url)}
                     shelf={SHELF}
+                    position={{ page: entry.page, total }}
                     fontSize={fontSize}
                     onFontSize={stepFontSize}
                     fontSizes={FONT_SIZES}

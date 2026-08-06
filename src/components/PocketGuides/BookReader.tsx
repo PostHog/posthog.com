@@ -14,8 +14,6 @@ export interface BookTab {
 }
 
 interface BookReaderProps {
-    /** Title and page position, for the orientation bar. */
-    head?: { title: string; page?: number; total: number }
     /** The scrolling body: the page's MDX, interleaved by the reader's wrapper. */
     children: React.ReactNode
     /** Pinned below the page, so a reader convinced early can act without scrolling back. */
@@ -24,8 +22,10 @@ interface BookReaderProps {
     next?: { url: string; label: string }
     /** The contents popover's entries, one per page you can turn to. */
     tabs?: BookTab[]
-    /** The way out – a bar control and a foot link, so leaving the book is always one click. */
+    /** The way out – an edge tab and a foot link, so leaving the book is always one click. */
     shelf?: { url: string; label: string }
+    /** Where you are, printed in the foot line. Front matter is unnumbered. */
+    position?: { page?: number; total: number }
     /** Reading size in px, applied to the body so the em-based prose scales. */
     fontSize?: number
     onFontSize?: (delta: number) => void
@@ -112,48 +112,6 @@ function ContentsList({ tabs }: { tabs: BookTab[] }): JSX.Element {
     )
 }
 
-/** The open pop-out's body, anchored under the orientation bar. */
-function PanelBody({
-    panel,
-    tabs,
-    fontSize,
-    onFontSize,
-    fontSizes,
-}: {
-    panel: Panel
-    tabs?: BookTab[]
-    fontSize?: number
-    onFontSize?: (delta: number) => void
-    fontSizes?: readonly number[]
-}): JSX.Element | null {
-    const reducedMotion = useReducedMotion()
-
-    if (panel === 'contents' && tabs && tabs.length > 0) {
-        return (
-            <motion.nav
-                aria-label="Pocket guide contents"
-                className="w-64 overflow-hidden rounded-md border border-primary bg-primary shadow-xl"
-                initial={reducedMotion ? false : { y: -6, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-            >
-                <ContentsList tabs={tabs} />
-            </motion.nav>
-        )
-    }
-    if (panel === 'type' && fontSize && onFontSize && fontSizes) {
-        return (
-            <div className="rounded-md border border-primary bg-primary p-3 shadow-xl">
-                <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-semibold text-secondary">Font size</span>
-                    <BookControls fontSize={fontSize} sizes={fontSizes} onStep={onFontSize} />
-                </div>
-            </div>
-        )
-    }
-    return null
-}
-
 /** Click-to-turn zone in the page margin, so the chevron never lands on text. */
 function PageTurnZone({
     to,
@@ -181,96 +139,85 @@ function PageTurnZone({
 }
 
 /**
- * The e-reader: the window itself is the page – no inner frame. One scrolling column with
- * figures inline where the prose cites them, under an orientation bar that spans the window.
+ * The e-reader: the window itself is the page. Reading controls are book tabs on the page's
+ * left edge – small handles that belong to the page, not a toolbar. Left, because that's where
+ * readers expect navigation, and their popovers open over the page instead of off the window.
  */
 export default function BookReader({
-    head,
     children,
     actionBar,
     prev,
     next,
     tabs,
     shelf,
+    position,
     fontSize,
     onFontSize,
     fontSizes,
 }: BookReaderProps): JSX.Element {
+    const reducedMotion = useReducedMotion()
     const [openPanel, setOpenPanel] = useState<Panel>(null)
     const toggle = (panel: Exclude<Panel, null>) => setOpenPanel((current) => (current === panel ? null : panel))
 
-    const controlClasses =
-        'flex size-9 shrink-0 items-center justify-center rounded text-secondary hover:bg-accent hover:text-primary dark:hover:bg-accent-dark'
-    const toggleClasses = (active: boolean) =>
-        `${controlClasses} ${active ? 'bg-accent text-primary dark:bg-accent-dark' : ''}`
-
-    const contentsToggle = tabs && tabs.length > 0 && (
-        <button
-            type="button"
-            onClick={() => toggle('contents')}
-            aria-expanded={openPanel === 'contents'}
-            aria-label="Contents"
-            title="Contents"
-            className={toggleClasses(openPanel === 'contents')}
-        >
-            <IconList className="size-4" />
-        </button>
-    )
-    const typeToggle = fontSize && onFontSize && fontSizes && (
-        <button
-            type="button"
-            onClick={() => toggle('type')}
-            aria-expanded={openPanel === 'type'}
-            aria-label="Reading settings"
-            title="Reading settings"
-            className={toggleClasses(openPanel === 'type')}
-        >
-            <span className="text-[13px] font-bold leading-none">Aa</span>
-        </button>
-    )
-    const panelBody = (
-        <PanelBody panel={openPanel} tabs={tabs} fontSize={fontSize} onFontSize={onFontSize} fontSizes={fontSizes} />
-    )
+    const edgeTabClasses = (active = false) =>
+        `flex size-8 items-center justify-center rounded-r-md border border-l-0 border-primary transition-colors ${
+            active ? 'bg-primary text-primary' : 'bg-accent text-secondary hover:text-primary dark:bg-accent-dark'
+        }`
 
     return (
         <div className="relative flex h-full min-h-0 w-full flex-col bg-primary">
-            {/* The orientation bar, spanning the window: the way out, a turn each way, where you
-                are, contents, and type. */}
-            <nav
-                aria-label="Pocket guide navigation"
-                className="relative z-30 flex shrink-0 items-center gap-0.5 border-b border-primary bg-primary px-1.5 py-1"
-            >
+            {/* Book tabs on the left edge. z-30: above the page, beside its scroll. */}
+            <div className="absolute left-0 top-6 z-30 flex flex-col items-start gap-1">
                 {shelf && (
-                    <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={controlClasses}>
+                    <Link to={shelf.url} aria-label={shelf.label} title={shelf.label} className={edgeTabClasses()}>
                         <IconBook className="size-4" />
                     </Link>
                 )}
-                {prev ? (
-                    <Link to={prev.url} aria-label={prev.label} className={controlClasses}>
-                        <IconChevronLeft className="size-5" />
-                    </Link>
-                ) : (
-                    <span aria-hidden="true" className="size-9 shrink-0" />
+                {tabs && tabs.length > 0 && (
+                    <button
+                        type="button"
+                        onClick={() => toggle('contents')}
+                        aria-expanded={openPanel === 'contents'}
+                        aria-label="Contents"
+                        title="Contents"
+                        className={edgeTabClasses(openPanel === 'contents')}
+                    >
+                        <IconList className="size-4" />
+                    </button>
                 )}
-                <span className="flex min-w-0 flex-1 items-baseline justify-center gap-1.5 text-xs">
-                    <span className="truncate font-semibold text-primary">{head?.title}</span>
-                    {head?.page && (
-                        <span className="shrink-0 tabular-nums text-secondary">
-                            p. {head.page} of {head.total}
-                        </span>
-                    )}
-                </span>
-                {next ? (
-                    <Link to={next.url} aria-label={next.label} className={controlClasses}>
-                        <IconChevronRight className="size-5" />
-                    </Link>
-                ) : (
-                    <span aria-hidden="true" className="size-9 shrink-0" />
+                {fontSize && onFontSize && fontSizes && (
+                    <button
+                        type="button"
+                        onClick={() => toggle('type')}
+                        aria-expanded={openPanel === 'type'}
+                        aria-label="Reading settings"
+                        title="Reading settings"
+                        className={edgeTabClasses(openPanel === 'type')}
+                    >
+                        <span className="text-[12px] font-bold leading-none">Aa</span>
+                    </button>
                 )}
-                {contentsToggle}
-                {typeToggle}
-                <div className="absolute right-1.5 top-full mt-1">{panelBody}</div>
-            </nav>
+
+                {openPanel === 'contents' && tabs && (
+                    <motion.nav
+                        aria-label="Pocket guide contents"
+                        className="absolute left-9 top-0 w-64 overflow-hidden rounded-md border border-primary bg-primary shadow-xl"
+                        initial={reducedMotion ? false : { x: -6, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                    >
+                        <ContentsList tabs={tabs} />
+                    </motion.nav>
+                )}
+                {openPanel === 'type' && fontSize && onFontSize && fontSizes && (
+                    <div className="absolute left-9 top-0 rounded-md border border-primary bg-primary p-3 shadow-xl">
+                        <div className="flex items-center justify-between gap-4">
+                            <span className="text-xs font-semibold text-secondary">Font size</span>
+                            <BookControls fontSize={fontSize} sizes={fontSizes} onStep={onFontSize} />
+                        </div>
+                    </div>
+                )}
+            </div>
 
             <div className="relative min-h-0 flex-1">
                 {prev && <PageTurnZone to={prev.url} label={prev.label} direction="prev" />}
@@ -278,7 +225,7 @@ export default function BookReader({
                 <div className="h-full overflow-y-auto">
                     {/* min-h-full + mt-auto: on a short page the nav pins to the page's
                         foot instead of floating mid-page above empty paper. */}
-                    <div className="mx-auto flex min-h-full w-full max-w-[52rem] flex-col @3xl:max-w-[60rem]">
+                    <div className="mx-auto flex min-h-full w-full max-w-[52rem] flex-col @3xl:max-w-[56rem]">
                         <div style={{ fontSize }}>{children}</div>
                         <nav
                             aria-label="Pocket guide pages"
@@ -291,12 +238,19 @@ export default function BookReader({
                             ) : (
                                 <span />
                             )}
-                            {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
-                            {shelf && prev?.url !== shelf.url && (
-                                <Link to={shelf.url} className="shrink-0 text-secondary hover:text-primary">
-                                    All guides
-                                </Link>
-                            )}
+                            <span className="flex shrink-0 items-baseline gap-3">
+                                {/* On the front matter the prev turn already IS the shelf – one link is plenty. */}
+                                {shelf && prev?.url !== shelf.url && (
+                                    <Link to={shelf.url} className="text-secondary hover:text-primary">
+                                        All guides
+                                    </Link>
+                                )}
+                                {position?.page && (
+                                    <span className="tabular-nums text-secondary">
+                                        p. {position.page} of {position.total}
+                                    </span>
+                                )}
+                            </span>
                             {next ? (
                                 <Link
                                     to={next.url}
@@ -313,7 +267,7 @@ export default function BookReader({
             </div>
             {actionBar && (
                 <div className="shrink-0 border-t border-primary">
-                    <div className="mx-auto w-full max-w-[52rem] @3xl:max-w-[60rem]">{actionBar}</div>
+                    <div className="mx-auto w-full max-w-[52rem] @3xl:max-w-[56rem]">{actionBar}</div>
                 </div>
             )}
         </div>

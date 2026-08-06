@@ -111,11 +111,10 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 
 ## The reader UI
 
-- **`BookReader`** – the window itself is the page, no inner frame: an orientation bar spanning
-  the window (shelf link, prev/next turns, title + page position, a Contents popover, an Aa
-  reading-size control), a centered reading column, click-to-turn page margins, and prev/next
-  links pinned at the page's foot ("All guides" joins them on pages where prev isn't already
-  the shelf).
+- **`BookReader`** – the window itself is the page, no inner frame and no toolbar: reading
+  controls are book tabs on the page's left edge (shelf link, a Contents popover, an Aa
+  reading-size control), a centered reading column, click-to-turn page margins, and a foot line
+  with prev/next turns, "All guides" (except where prev already is the shelf), and "p. N of M".
 - **One model drives everything.** `bookModel.tsx`'s `useBookPages()` reads every page's
   `bookOrder` and produces the reading order; the bar, contents, and page turns all derive from
   it. Front matter is unnumbered; arabic numbering starts at the page after it, so inserting a
@@ -128,7 +127,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | File | Responsibility |
 |---|---|
 | `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
-| `BookReader.tsx` | The full-window page: orientation bar, popovers, turn zones, foot nav |
+| `BookReader.tsx` | The full-window page: edge book tabs, popovers, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
 | `bookComponents.tsx` | The MDX vocabulary above, plus prose styling |
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
