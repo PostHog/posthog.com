@@ -160,7 +160,7 @@ PostHog ships around 30 **canonical scouts** out of the box – error tracking, 
 - A scout that checks whether a merged fix actually held, re-measured after a soak window.
 - Scouts that read a repo: docs drifting out of date, features shipped with no instrumentation, flags fully rolled out whose keys still litter the codebase.
 
-Also worth knowing: scout can watch things that never throw an exception, which is kind of like a reverse-signal. No news is good news!
+Also worth knowing: scouts can watch things that never throw an exception, which is kind of like a reverse-signal. No news is good news!
 
 For ideas that work across verticals, and the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) behind them, send them to [scout examples](/docs/self-driving/scout-examples). For a deep dive with two real scouts traced end to end and a walkthrough video, [What is a scout?](/blog/what-is-a-scout) are good references.
 
