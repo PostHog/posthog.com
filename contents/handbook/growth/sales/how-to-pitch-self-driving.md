@@ -149,7 +149,7 @@ Specific and specialized scout explanations tailored to use-case are always bett
 
 PostHog ships around 30 **canonical scouts** out of the box – error tracking, product analytics, revenue analytics, experiments, feature flags, web vitals, session replay, data warehouse health, and more – each watching a common pattern (default toggled on or off per project). The full list with what each one looks for is in [scout examples](/docs/self-driving/scout-examples). Worth knowing: every canonical scout is just a readable markdown skill in our public repo, which is a good answer to "what is it actually doing?" from a skeptical engineer.
 
-**Custom scouts** are where the pitch gets specific, and we run a lot of them on ourselves. Genericized, some of the shapes we dogfood internally:
+**Custom scouts** are where the pitch gets more targeted towards their specific use-cases and needs, try and demonstrate ones that are tailored to them:
 
 - A scout that scores each day's new signups against our written ICP and files one ranked digest, instead of a firehose of signup notifications.
 - A scout that watches a social-listening feed synced into the warehouse and surfaces live product problems people are hitting in public.
@@ -157,7 +157,7 @@ PostHog ships around 30 **canonical scouts** out of the box – error tracking, 
 - A scout that finds fast-growing accounts nobody on our side is working yet – the intersection of "taking off," "good profile," and "not already owned."
 - A scout that watches for sustained multi-axis decline on commercially meaningful accounts: usage down _and_ spend down _and_ engagement down, ranked by revenue at risk.
 - A scout that catches items in an already-automated queue that got classified but never actioned – the judgement layer on top of an existing detector.
-- A scout that checks whether a merged fix actually held, re-measured after a soak window.
+- A scout that checks whether a merged fix actually held and can check back after enough time has passed
 - Scouts that read a repo: docs drifting out of date, features shipped with no instrumentation, flags fully rolled out whose keys still litter the codebase.
 
 Also worth knowing: scouts can watch things that never throw an exception, which is kind of like a reverse-signal. No news is good news!
