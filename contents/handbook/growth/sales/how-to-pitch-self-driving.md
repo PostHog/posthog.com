@@ -30,7 +30,7 @@ The full flow: **something watches (source or scout) → it emits signals → th
 ### Scouts vs Signals
 
 - **A scout is not an alert.** An alert fires on a threshold you set on one metric. A scout has memory, learns your baseline, dedupes against what it already told you, weighs how much a finding matters, and stays quiet on a quiet day. If a customer describes something a simple alert would solve, sell them the alert – it's cheaper and they'll trust us more for saying so.
-- **Not every report becomes a PR.** The PR is the flashiest end state, not the only one. Plenty of the value is a report that tells a human something true they'd have missed. We also don't want to overpromise anything.
+- **Not every report becomes a PR.** The PR is the flashiest end state, but there's plenty of value in a report that flags something you might have missed, and has real research to back it up. We also don't want to overpromise anything.
 
 ## Scouts and signal sources: the strengths of each
 
