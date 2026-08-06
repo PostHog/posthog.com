@@ -25,7 +25,7 @@ A [signal](/docs/self-driving/signals) is a structured finding: what's happening
 | [Anomaly investigations](#anomaly-investigations) (alpha) | Spikes in cost, latency, or errors | When an anomaly alert fires |
 | [Scouts](#scouts) | Regressions across cost, latency, errors, volume, and eval performance – or anything you describe | On a schedule you set |
 
-All three land in the same place: your inbox, as [reports](/docs/self-driving/reports) backed by evidence. From there you can review the finding, ask for more research, or let an agent open a pull request.
+Eval report findings and scout findings land in your [inbox](/docs/self-driving/inbox) as [reports](/docs/self-driving/reports) backed by evidence – review the finding, ask for more research, or let an agent open a pull request. Anomaly investigations deliver through the alert itself: the notification arrives with the investigation's write-up attached, and false positives never reach you.
 
 ## Eval reports
 
@@ -52,7 +52,7 @@ Anomaly investigations are currently in alpha. We'd love to [hear your feedback]
 
 Every LLM event is a standard PostHog event, so cost, latency, and error rate are insights you can put an [anomaly alert](/docs/alerts#anomaly-detection) on. When one fires, an investigation agent picks it up before the notification reaches you: it digs into the underlying traces, writes up what it found, and suppresses the alert when the spike turns out to be a false positive – a batch job, a provider incident, one developer testing locally. What reaches you is what survived investigation.
 
-Because alerts run on insights, this needs [product analytics](/docs/product-analytics) enabled in your project. To set them up:
+To set them up:
 
 1. Create an insight on the metric you care about – cost, latency, or errors. The [AI Observability dashboard](/docs/ai-observability/dashboard) charts are a good starting point.
 2. Add an [anomaly detection alert](/docs/alerts#creating-an-anomaly-detection-alert) to it. No thresholds to pick – the detectors learn what normal looks like from your data.
@@ -81,7 +81,7 @@ Scouts and the signals above compose rather than compete: eval reports and anoma
 
 ## What lands in your inbox
 
-Whichever path produced it, a finding arrives as a report: a title, a summary, the evidence, and a call on how actionable it is. A research agent connects it to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
+Eval report findings and scout findings arrive as reports: a title, a summary, the evidence, and a call on how actionable it is. A research agent connects each one to your codebase, and when a code fix is possible, one click opens a pull request. Reports are free; a PR is [$15, with your first three each month free](/docs/self-driving/pricing).
 
 ## Next step
 
