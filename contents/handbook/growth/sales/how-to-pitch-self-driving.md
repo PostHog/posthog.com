@@ -170,7 +170,7 @@ AI products are an easy self-driving pitch: they already know their agent misbeh
 
 **Evaluations (rolled out to everyone).** [Ingest AIO events](/docs/ai-observability/start-here) → create an [online evaluation](/docs/ai-evals) that scores them → turn on [evaluation reports](/docs/ai-evals#evaluation-reports), where an agent reads a batch of results and writes up what it found. That summary is the signal.
 
-**Anomaly detection (alpha).** Ingest AIO events → add an [anomaly detection alert](/docs/alerts#anomaly-detection) on an AI errors, latency, or cost insight → enable agent investigation. The agent checks whether the anomaly is real and writes a notebook. Only true positives reach the inbox. 
+**Anomaly detection (alpha).** Ingest AI observability events, then add an [anomaly detection alert](/docs/alerts#anomaly-detection) on an AI errors, latency, or cost insight and turn on agent investigation. When the alert fires, the agent checks whether the anomaly is real and writes up what it found in a notebook. Only true positives reach the inbox, as a report summarizing the investigation.
 
 
 ## Objections and what not to promise
