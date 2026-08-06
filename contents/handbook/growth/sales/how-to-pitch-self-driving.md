@@ -147,7 +147,7 @@ The thing to make land here is the memory. A scout reads back what earlier runs 
 
 Specific and specialized scout explanations tailored to use-case are always better than generic overviews and broad scout examples.
 
-PostHog ships around 30 **canonical scouts** out of the box – error tracking, product analytics, revenue analytics, experiments, feature flags, web vitals, session replay, data warehouse health, and more – each watching a common pattern, each toggled on or off per project. The full list with what each one looks for is in [scout examples](/docs/self-driving/scout-examples). Worth knowing: every canonical scout is just a readable markdown skill in our public repo, which is a good answer to "what is it actually doing?" from a skeptical engineer.
+PostHog ships around 30 **canonical scouts** out of the box – error tracking, product analytics, revenue analytics, experiments, feature flags, web vitals, session replay, data warehouse health, and more – each watching a common pattern (default toggled on or off per project). The full list with what each one looks for is in [scout examples](/docs/self-driving/scout-examples). Worth knowing: every canonical scout is just a readable markdown skill in our public repo, which is a good answer to "what is it actually doing?" from a skeptical engineer.
 
 **Custom scouts** are where the pitch gets specific, and we run a lot of them on ourselves. Genericized, some of the shapes we dogfood internally:
 
