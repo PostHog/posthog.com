@@ -13,6 +13,9 @@ const VERSIONED_SLUG = new RegExp(`^(posthog-[a-z-]+)-(\\d[\\w.+-]*|latest|${VER
 
 const MARKDOWN_SUFFIX = '.md'
 
+/** Type ids are source identifiers, occasionally dotted (e.g. `PostHogConfig.PostHogDataMode`). */
+const TYPE_ID = /^[\w$.-]+$/
+
 const isSupportedSdk = (id: string): boolean => (SUPPORTED_SDK_IDS as readonly string[]).includes(id)
 
 const stripMarkdown = (value: string): string =>
@@ -23,7 +26,9 @@ export const resolveReferenceRedirect = (rawSlug: string, rawType?: string): str
     // The extension is on whichever segment came last.
     const wantsMarkdown = rawType ? rawType.endsWith(MARKDOWN_SUFFIX) : rawSlug.endsWith(MARKDOWN_SUFFIX)
     const slug = stripMarkdown(rawSlug)
-    const type = rawType ? stripMarkdown(rawType) : undefined
+    const stripped = rawType ? stripMarkdown(rawType) : undefined
+    // Anything else never named a type page, and this value ends up in a Location header.
+    const type = stripped && TYPE_ID.test(stripped) ? stripped : undefined
 
     const versioned = VERSIONED_SLUG.exec(slug)
     const sdk = versioned ? versioned[1] : slug
