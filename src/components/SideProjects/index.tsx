@@ -467,10 +467,13 @@ export const SideProjectForm = ({
 
     const githubUrl = values.githubUrl.trim()
     const liveUrl = values.liveUrl.trim()
-    // A card links to liveUrl || githubUrl, so a project without either would be unclickable
+    // A card links to liveUrl || githubUrl, so a project without either would be unclickable.
+    // The slug check guards titles with no ASCII letters or digits, which would otherwise
+    // hand GitHub an invalid /index.mdx path.
     const canSubmit =
         Boolean(
             values.title.trim() &&
+                slugifyProjectTitle(values.title) &&
                 values.description.trim() &&
                 values.projectAuthor.trim() &&
                 (githubUrl || liveUrl) &&

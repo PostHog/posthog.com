@@ -20,6 +20,7 @@ import {
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useMemo, useState } from 'react'
+import { useWindow } from '../context/Window'
 
 type ProjectNode = {
     id: string
@@ -86,13 +87,18 @@ const ProjectCard = ({
                 <Link
                     to={getEditProjectUrl(relativePath)}
                     externalNoIcon
-                    className="absolute right-2 top-2 z-10 rounded-md border border-primary bg-primary p-1.5 text-secondary opacity-0 transition-opacity hover:text-primary group-hover:opacity-100"
+                    className="absolute right-2 top-2 z-10 rounded-md border border-primary bg-primary p-1.5 text-secondary opacity-0 transition-opacity hover:text-primary focus-visible:opacity-100 group-hover:opacity-100"
                     aria-label={`Edit ${title}`}
                 >
                     <IconPencil className="size-4" />
                 </Link>
             )}
-            <Link to={projectUrl} externalNoIcon className="block">
+            <Link
+                to={projectUrl}
+                externalNoIcon
+                state={projectUrl?.startsWith('/') ? { newWindow: true } : undefined}
+                className="block"
+            >
                 <div className="border-b border-primary">
                     {projectThumbnail ? (
                         <div className="flex aspect-video items-center justify-center overflow-hidden bg-accent">
@@ -179,18 +185,21 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
     const [addingProject, setAddingProject] = useState(false)
     const [alumniExpanded, setAlumniExpanded] = useState(false)
 
-    // Sync filters with the URL on mount and on router navigation (e.g. back/forward,
-    // or clicking a link to /side-projects while already on a filtered view)
+    // Sync filters with the URL on mount and on navigation. The app window's location is the
+    // source of truth: when an existing /side-projects window is re-navigated (e.g. a docs link
+    // with ?tag=...), only appWindow.location updates – the page's location prop stays stale.
+    const { appWindow } = useWindow()
+    const windowSearch = appWindow?.location?.search
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search)
+            const params = new URLSearchParams(windowSearch ?? window.location.search)
             // Support legacy ?filter=tags&value= and ?author= formats too
             const tag = params.get('tag') || (params.get('filter') === 'tags' ? params.get('value') : null)
             const creator = params.get('creator') || params.get('author')
             setTagFilter(tag)
             setCreatorFilter(creator)
         }
-    }, [location?.search])
+    }, [location?.search, windowSearch])
 
     // Update URL when filters change
     const updateURL = (tag: string | null, creator: string | null) => {
