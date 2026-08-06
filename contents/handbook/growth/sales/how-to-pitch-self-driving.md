@@ -70,7 +70,7 @@ So the framing for a customer with strong opinions about their own domain: a sou
 | Fastest to demo: toggle a source, show the queue fill | Fastest to demo: point a scout at their data and run it on demand |
 
 
-> **An example.** A customer asks for a Linear source, expecting every issue to become a PR. That's exactly what the source does, and for a team whose backlog is already groomed – where every issue in there genuinely should be worked – it's the right answer, and the determinism is the point. In some cases, what they want is a Linear _scout_ reading the same issues with weighting and judgement they control and can steer over time. Same data, two legitimate products. The question that separates them: "should everything in there get worked, or does someone need to decide what matters first?" Both are valid, but giving them that flexibility and choice is key.
+> **An example.** A customer hooks up Linear as a signal source, and every issue automatically turns into a PR. No judgment calls needed – if it's there, it gets worked on. That's great for a team whose backlog is already clean and prioritized. In some cases, what they actually want is a Linear _scout_ reading the same issues with weighting they can control and judgement they can steer over time. Same data, two use cases. The question that separates them: "should everything in there get worked, or does someone need to decide what matters first?"
 
 ## The core pitch
 
