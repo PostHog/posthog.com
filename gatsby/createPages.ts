@@ -192,7 +192,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 }
             }
             sideProjects: allMdx(
-                filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } }, frontmatter: { githubUrl: { ne: null } } }
+                filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } }, frontmatter: { projectAuthor: { ne: null } } }
             ) {
                 nodes {
                     id

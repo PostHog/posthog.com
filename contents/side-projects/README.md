@@ -4,6 +4,10 @@ This folder contains PostHog team side projects displayed in the gallery at `/si
 
 ## Adding your side project
 
+The easy way, if you're a PostHog team member: sign in to your community profile, open [/side-projects](https://posthog.com/side-projects), and click **Add a project**. The form prefills the MDX file on GitHub – committing it there opens the pull request for you. An **Edit** button on each project page works the same way for updates.
+
+Or by hand:
+
 1. Create a new folder with your project name (use kebab-case)
 2. Add an `index.mdx` file with your project details
 3. Open a PR to the posthog.com repo
@@ -19,7 +23,7 @@ featuredImage: ./featured.png  # Optional larger image for detail page
 projectAuthor: Your Name
 authorGitHub: your-github-username
 teamLink: /teams/your-team  # optional - links to your PostHog team page
-githubUrl: https://github.com/your-username/your-repo
+githubUrl: https://github.com/your-username/your-repo  # optional - if the source is public
 liveUrl: https://your-demo.com  # optional - if you have a live demo
 filters:
   tags:
@@ -32,15 +36,15 @@ filters:
 
 - **title**: The name of your project
 - **description**: A short description (shown on gallery cards)
-- **projectAuthor**: Your name
-- **githubUrl**: Link to the source code
+- **projectAuthor**: Your name – use the same name as your community profile, so the gallery can link to it and show your avatar and role
 
 ### Optional fields
 
 - **projectThumbnail**: URL for gallery card image (YouTube thumbnails, GitHub raw URLs, or Cloudinary URLs work well)
 - **featuredImage**: Larger image shown on the detail page
-- **authorGitHub**: Your GitHub username (shows your avatar)
+- **authorGitHub**: Your GitHub username (fallback avatar and profile link)
 - **teamLink**: Link to your PostHog team page
+- **githubUrl**: Link to the source code (also used as a thumbnail fallback via the repo's social image)
 - **liveUrl**: Link to a live demo
 
 ## Thumbnail options
@@ -50,12 +54,17 @@ filters:
 - **Cloudinary**: `https://res.cloudinary.com/dmukukwp6/image/upload/...`
 - **Static file**: Add to `/static/images/side-projects/` and reference as `/images/side-projects/filename.png`
 
-## Common tags
+## Tags
 
-- `ai-observability` – Projects using PostHog AI Observability
-- `python` / `typescript` / `node` – Language/runtime
+The gallery ranks tag filters by how many projects use them, so reuse an existing tag before inventing a new one. Common ones:
+
+- `open-source` – Public source code
+- `python` / `typescript` / `javascript` / `go` – Language/runtime
 - `cli` – Command-line tools
 - `web-app` – Web applications
-- `demo` – PostHog feature demonstrations
+- `games` – Games of any kind
+- `ai` / `ai-observability` / `mcp` – AI/ML projects
 - `data` – Data analysis/visualization projects
-- `ai` – AI/ML projects
+- `demo` – PostHog feature demonstrations
+- `developer-tools` – Tools for developers
+- `self-hosted` – Things you run yourself

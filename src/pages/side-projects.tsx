@@ -1,9 +1,13 @@
-import Layout from 'components/Layout'
+import Explorer from 'components/Explorer'
 import Link from 'components/Link'
-import { SEO } from 'components/seo'
+import OSButton from 'components/OSButton'
+import { OSInput, OSSelect } from 'components/OSForm'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import SEO from 'components/seo'
+import { Creator, SideProjectForm, useCreatorProfiles, type SideProjectFrontmatter } from 'components/SideProjects'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useEffect, useMemo } from 'react'
-import { IconX, IconChevronDown } from '@posthog/icons'
+import { useUser } from 'hooks/useUser'
+import React, { useEffect, useMemo, useState } from 'react'
 
 // Hedgehog placeholder images for projects without thumbnails
 const PLACEHOLDER_HOGS = [
@@ -22,371 +26,387 @@ const getPlaceholderHog = (title: string) => {
 }
 
 // Extract owner/repo from GitHub URL and return OpenGraph image URL
-const getGitHubOGImage = (githubUrl: string): string | null => {
-    try {
-        const match = githubUrl.match(/github\.com\/([^/]+)\/([^/]+)/)
-        if (match) {
-            const [, owner, repo] = match
-            return `https://opengraph.githubassets.com/1/${owner}/${repo}`
-        }
-    } catch {
-        // Fall through to return null
+const getGitHubOGImage = (githubUrl?: string): string | null => {
+    const match = githubUrl?.match(/github\.com\/([^/]+)\/([^/]+)/)
+    if (match) {
+        const [, owner, repo] = match
+        return `https://opengraph.githubassets.com/1/${owner}/${repo}`
     }
     return null
 }
 
-interface FilterChipProps {
-    label: string
-    onRemove: () => void
+type ProjectNode = {
+    id: string
+    fields: { slug: string }
+    frontmatter: SideProjectFrontmatter
 }
 
-const FilterChip: React.FC<FilterChipProps> = ({ label, onRemove }) => (
-    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-sm bg-accent dark:bg-accent-dark border border-light dark:border-dark">
+const VISIBLE_TAG_COUNT = 12
+
+const TagPill = ({
+    label,
+    count,
+    active,
+    onClick,
+}: {
+    label: string
+    count?: number
+    active: boolean
+    onClick: () => void
+}) => (
+    <button
+        type="button"
+        onClick={onClick}
+        aria-pressed={active}
+        className={`rounded-full border px-2.5 py-0.5 text-[13px] transition-colors ${
+            active
+                ? 'border-orange bg-orange/10 font-semibold text-primary'
+                : 'border-primary bg-primary text-secondary hover:text-primary'
+        }`}
+    >
         {label}
-        <button
-            onClick={(e) => {
-                e.preventDefault()
-                onRemove()
-            }}
-            className="hover:text-red dark:hover:text-yellow"
-        >
-            <IconX className="w-4 h-4" />
-        </button>
-    </span>
+        {count !== undefined && <span className="ml-1 opacity-60">{count}</span>}
+    </button>
 )
 
-function SideProjectsPage({ location }: { location: { search: string } }) {
+function SideProjectsPage({ location }: { location: { search: string } }): JSX.Element {
     const {
         sideProjects: { nodes },
-        profiles: { nodes: profileNodes },
     } = useStaticQuery(query)
+    const profiles = useCreatorProfiles()
+    const { isModerator } = useUser()
 
-    // Create a lookup map from GitHub username to community profile ID
-    const githubToProfile = useMemo(() => {
-        const map: Record<string, string> = {}
-        profileNodes.forEach((profile: { github?: string; squeakId: string }) => {
-            if (profile.github) {
-                // Handle both full URLs and usernames
-                const username = profile.github.replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '')
-                map[username.toLowerCase()] = profile.squeakId
-            }
-        })
-        return map
-    }, [profileNodes])
-
+    const [searchQuery, setSearchQuery] = useState('')
     const [tagFilter, setTagFilter] = useState<string | null>(null)
-    const [authorFilter, setAuthorFilter] = useState<string | null>(null)
-    const [filtersExpanded, setFiltersExpanded] = useState(false)
+    const [creatorFilter, setCreatorFilter] = useState<string | null>(null)
+    const [showAllTags, setShowAllTags] = useState(false)
+    const [addingProject, setAddingProject] = useState(false)
 
     // Sync filters with the URL on mount and on router navigation (e.g. back/forward,
     // or clicking a link to /side-projects while already on a filtered view)
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search)
-            // Support both ?tag= and ?filter=tags&value= formats
+            // Support legacy ?filter=tags&value= and ?author= formats too
             const tag = params.get('tag') || (params.get('filter') === 'tags' ? params.get('value') : null)
-            const author = params.get('author')
+            const creator = params.get('creator') || params.get('author')
             setTagFilter(tag)
-            setAuthorFilter(author)
-            if (tag || author) {
-                setFiltersExpanded(true)
-            }
+            setCreatorFilter(creator)
         }
     }, [location?.search])
 
     // Update URL when filters change
-    const updateURL = (tag: string | null, author: string | null) => {
-        if (typeof window === 'undefined') return
+    const updateURL = (tag: string | null, creator: string | null) => {
+        if (typeof window === 'undefined') {
+            return
+        }
         const params = new URLSearchParams()
-        if (tag) params.set('tag', tag)
-        if (author) params.set('author', author)
-        const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname
-        window.history.replaceState({}, '', newURL)
+        if (tag) {
+            params.set('tag', tag)
+        }
+        if (creator) {
+            params.set('creator', creator)
+        }
+        const search = params.toString()
+        window.history.replaceState({}, '', search ? `${window.location.pathname}?${search}` : window.location.pathname)
     }
 
     const handleTagChange = (tag: string | null) => {
         setTagFilter(tag)
-        updateURL(tag, authorFilter)
+        updateURL(tag, creatorFilter)
     }
 
-    const handleAuthorChange = (author: string | null) => {
-        setAuthorFilter(author)
-        updateURL(tagFilter, author)
+    const handleCreatorChange = (creator: string | null) => {
+        setCreatorFilter(creator)
+        updateURL(tagFilter, creator)
     }
 
     const clearFilters = () => {
+        setSearchQuery('')
         setTagFilter(null)
-        setAuthorFilter(null)
+        setCreatorFilter(null)
         updateURL(null, null)
     }
 
-    // Extract unique tags from all projects
-    const allTags = useMemo(() => {
-        const tags = new Set<string>()
-        nodes.forEach((node: any) => {
-            node.frontmatter.filters?.tags?.forEach((tag: string) => tags.add(tag))
+    // Tags ranked by how many projects use them, so the most useful filters come first
+    const rankedTags = useMemo(() => {
+        const counts: Record<string, number> = {}
+        nodes.forEach((node: ProjectNode) => {
+            node.frontmatter.filters?.tags?.forEach((tag) => {
+                counts[tag] = (counts[tag] || 0) + 1
+            })
         })
-        return Array.from(tags).sort()
+        return Object.entries(counts)
+            .sort(([tagA, countA], [tagB, countB]) => countB - countA || tagA.localeCompare(tagB))
+            .map(([tag, count]) => ({ tag, count }))
     }, [nodes])
 
-    // Extract unique authors from all projects
-    const allAuthors = useMemo(() => {
-        const authors = new Set<string>()
-        nodes.forEach((node: any) => {
+    const allCreators = useMemo(() => {
+        const creators = new Set<string>()
+        nodes.forEach((node: ProjectNode) => {
             if (node.frontmatter.projectAuthor) {
-                authors.add(node.frontmatter.projectAuthor)
+                creators.add(node.frontmatter.projectAuthor)
             }
         })
-        return Array.from(authors).sort()
+        return Array.from(creators).sort()
     }, [nodes])
 
-    // Filter projects based on active filters
     const filteredProjects = useMemo(() => {
-        let filtered = nodes
+        const search = searchQuery.trim().toLowerCase()
+        return nodes.filter((project: ProjectNode) => {
+            const { title, description, projectAuthor, filters } = project.frontmatter
+            if (tagFilter && !filters?.tags?.includes(tagFilter)) {
+                return false
+            }
+            if (creatorFilter && projectAuthor !== creatorFilter) {
+                return false
+            }
+            if (search) {
+                const haystack = [title, description, projectAuthor, ...(filters?.tags || [])]
+                    .filter(Boolean)
+                    .join(' ')
+                    .toLowerCase()
+                return haystack.includes(search)
+            }
+            return true
+        })
+    }, [nodes, searchQuery, tagFilter, creatorFilter])
 
-        if (tagFilter) {
-            filtered = filtered.filter((project: any) => project.frontmatter.filters?.tags?.includes(tagFilter))
-        }
-
-        if (authorFilter) {
-            filtered = filtered.filter((project: any) => project.frontmatter.projectAuthor === authorFilter)
-        }
-
-        return filtered
-    }, [nodes, tagFilter, authorFilter])
-
-    const hasActiveFilters = tagFilter || authorFilter
+    const hasActiveFilters = Boolean(searchQuery.trim() || tagFilter || creatorFilter)
+    const visibleTags = showAllTags ? rankedTags : rankedTags.slice(0, VISIBLE_TAG_COUNT)
 
     return (
-        <Layout>
+        <>
             <SEO
-                title="PostHog Side Projects"
-                description="Side projects are awesome, help us learn and make us better at building stuff. A collection of projects folks at PostHog have worked on."
+                title="Side projects - PostHog"
+                description="Side projects are awesome, help us learn, and make us better at building stuff. A collection of things the PostHog team has built."
                 image="/images/og/default.png"
             />
-            <header className="py-12 px-5">
-                <h1 className="m-0 text-center text-4xl md:text-5xl lg:text-6xl text-primary dark:text-primary-dark">
-                    Side Projects
-                </h1>
-                <p className="my-4 mx-auto text-center text-lg md:text-xl font-semibold text-primary/75 dark:text-primary-dark/75 max-w-2xl">
-                    Side projects are awesome, help us learn and make us better at building stuff. Here's a collection
-                    of projects folks at PostHog have worked on.
-                </p>
-            </header>
+            <Explorer template="generic" slug="side-projects" title="Side projects" fullScreen>
+                <ScrollArea className="min-h-0 h-full">
+                    <div data-scheme="primary" className="@container bg-primary text-primary px-4 pb-12 @2xl:px-8">
+                        <header className="py-8 text-center">
+                            <h1 className="m-0 text-3xl @2xl:text-4xl">Side projects</h1>
+                            <p className="mt-3 mb-0 mx-auto max-w-2xl text-secondary text-base @2xl:text-lg">
+                                Side projects are awesome, help us learn, and make us better at building stuff. Here's a
+                                collection of things the PostHog team has built.
+                            </p>
+                        </header>
 
-            <div className="@container max-w-6xl mx-auto px-4 pb-12">
-                {/* Filter bar */}
-                <div className="mb-6">
-                    <button
-                        onClick={() => setFiltersExpanded(!filtersExpanded)}
-                        className="flex items-center gap-2 text-sm font-medium text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark"
-                    >
-                        <IconChevronDown
-                            className={`w-5 h-5 transition-transform ${filtersExpanded ? 'rotate-180' : ''}`}
-                        />
-                        <span>Filters</span>
-                        {hasActiveFilters && <span className="w-2 h-2 bg-red dark:bg-yellow rounded-full" />}
-                    </button>
-
-                    {/* Collapsible filter panel */}
-                    {filtersExpanded && (
-                        <div className="mt-3 p-4 bg-accent dark:bg-accent-dark rounded-lg border border-light dark:border-dark">
-                            <div className="flex flex-wrap gap-4 items-end">
-                                {/* Tag filter */}
-                                <div className="flex-1 min-w-[150px] max-w-[200px]">
-                                    <label className="block text-sm font-medium text-primary/75 dark:text-primary-dark/75 mb-1">
-                                        Tag
-                                    </label>
-                                    <select
-                                        value={tagFilter || ''}
-                                        onChange={(e) => handleTagChange(e.target.value || null)}
-                                        className="w-full px-3 py-2 rounded-md border border-light dark:border-dark bg-white dark:bg-dark text-primary dark:text-primary-dark text-sm"
-                                    >
-                                        <option value="">All tags</option>
-                                        {allTags.map((tag) => (
-                                            <option key={tag} value={tag}>
-                                                {tag}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Author filter */}
-                                <div className="flex-1 min-w-[150px] max-w-[200px]">
-                                    <label className="block text-sm font-medium text-primary/75 dark:text-primary-dark/75 mb-1">
-                                        Author
-                                    </label>
-                                    <select
-                                        value={authorFilter || ''}
-                                        onChange={(e) => handleAuthorChange(e.target.value || null)}
-                                        className="w-full px-3 py-2 rounded-md border border-light dark:border-dark bg-white dark:bg-dark text-primary dark:text-primary-dark text-sm"
-                                    >
-                                        <option value="">All authors</option>
-                                        {allAuthors.map((author) => (
-                                            <option key={author} value={author}>
-                                                {author}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                {/* Clear filters button */}
-                                {hasActiveFilters && (
-                                    <button
-                                        onClick={clearFilters}
-                                        className="px-3 py-2 text-sm font-medium text-red dark:text-yellow hover:underline"
-                                    >
-                                        Clear filters
-                                    </button>
-                                )}
-                            </div>
-                        </div>
-                    )}
-                </div>
-
-                {/* Active filters and results count */}
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                    {hasActiveFilters && (
-                        <>
-                            {tagFilter && (
-                                <FilterChip label={`Tag: ${tagFilter}`} onRemove={() => handleTagChange(null)} />
-                            )}
-                            {authorFilter && (
-                                <FilterChip
-                                    label={`Author: ${authorFilter}`}
-                                    onRemove={() => handleAuthorChange(null)}
+                        {addingProject && isModerator ? (
+                            <div data-scheme="secondary" className="rounded border border-primary bg-primary p-4 mb-8">
+                                <h2 className="mt-0 mb-4 text-xl">Add a project</h2>
+                                <SideProjectForm
+                                    existingTags={rankedTags.map(({ tag }) => tag)}
+                                    onCancel={() => setAddingProject(false)}
                                 />
-                            )}
-                        </>
-                    )}
-                    <span className="text-sm text-primary/60 dark:text-primary-dark/60">
-                        {hasActiveFilters
-                            ? `Showing ${filteredProjects.length} of ${nodes.length} projects`
-                            : `${nodes.length} projects`}
-                    </span>
-                </div>
+                            </div>
+                        ) : (
+                            <>
+                                {/* Filter toolbar */}
+                                <div className="mb-3 flex flex-col gap-2 @xl:flex-row @xl:items-center">
+                                    <div className="@xl:max-w-xs w-full">
+                                        <OSInput
+                                            label="Search projects"
+                                            showLabel={false}
+                                            name="search"
+                                            size="sm"
+                                            placeholder="Search projects, tags, and creators…"
+                                            value={searchQuery}
+                                            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                setSearchQuery(event.target.value)
+                                            }
+                                            showClearButton
+                                            onClear={() => setSearchQuery('')}
+                                        />
+                                    </div>
+                                    <div className="flex items-center gap-2 @xl:ml-auto">
+                                        <div className="w-48">
+                                            <OSSelect
+                                                label="Creator"
+                                                showLabel={false}
+                                                size="sm"
+                                                placeholder="Filter by creator…"
+                                                value={creatorFilter || ''}
+                                                onChange={(value: string) => handleCreatorChange(value || null)}
+                                                options={[
+                                                    { label: 'Everyone', value: '' },
+                                                    ...allCreators.map((creator) => ({
+                                                        label: creator,
+                                                        value: creator,
+                                                    })),
+                                                ]}
+                                            />
+                                        </div>
+                                        {isModerator && (
+                                            <OSButton
+                                                variant="primary"
+                                                size="sm"
+                                                onClick={() => setAddingProject(true)}
+                                            >
+                                                Add a project
+                                            </OSButton>
+                                        )}
+                                    </div>
+                                </div>
 
-                {/* Project grid */}
-                <div className="grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-6">
-                    {filteredProjects.map(
-                        ({
-                            id,
-                            fields: { slug },
-                            frontmatter: {
-                                projectThumbnail,
-                                title,
-                                description,
-                                liveUrl,
-                                githubUrl,
-                                projectAuthor,
-                                authorGitHub,
-                                teamLink,
-                            },
-                        }: any) => {
-                            const thumbnailSrc = projectThumbnail || getGitHubOGImage(githubUrl)
-                            const profileId = authorGitHub && githubToProfile[authorGitHub.toLowerCase()]
-                            const authorUrl = teamLink
-                                ? teamLink
-                                : profileId
-                                ? `/community/profiles/${profileId}`
-                                : authorGitHub
-                                ? `https://github.com/${authorGitHub}`
-                                : null
-                            return (
-                                <div
-                                    key={id}
-                                    className="group bg-accent dark:bg-accent-dark rounded-lg overflow-hidden border border-light dark:border-dark hover:border-primary/25 dark:hover:border-primary-dark/25 hover:scale-[1.02] transition-all duration-200"
-                                >
-                                    <Link to={slug} className="block">
-                                        <div className="aspect-video bg-light dark:bg-dark overflow-hidden flex items-center justify-center">
-                                            {thumbnailSrc ? (
-                                                <img
-                                                    src={thumbnailSrc}
-                                                    alt={title}
-                                                    loading="lazy"
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                                                />
-                                            ) : (
-                                                <img
-                                                    src={getPlaceholderHog(title)}
-                                                    alt={title}
-                                                    loading="lazy"
-                                                    className="w-auto h-3/4 object-contain group-hover:scale-110 transition-transform duration-200"
-                                                />
-                                            )}
-                                        </div>
-                                        <div className="p-4">
-                                            <div className="flex items-start justify-between gap-2">
-                                                <h3 className="m-0 text-lg font-bold text-primary dark:text-primary-dark group-hover:text-red dark:group-hover:text-yellow transition-colors">
-                                                    {title}
-                                                </h3>
-                                                {liveUrl && (
-                                                    <span className="shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green/10 text-green dark:bg-green/20">
-                                                        Live
-                                                    </span>
-                                                )}
-                                            </div>
-                                            {description && (
-                                                <p className="m-0 mt-2 text-sm text-primary/70 dark:text-primary-dark/70 line-clamp-2">
-                                                    {description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </Link>
-                                    {projectAuthor && (
-                                        <div className="px-4 pb-4 -mt-2">
-                                            {authorUrl ? (
-                                                <Link
-                                                    to={authorUrl}
-                                                    className="inline-flex items-center gap-1.5 text-xs text-primary/60 dark:text-primary-dark/60 hover:text-red dark:hover:text-yellow"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    {authorGitHub && (
-                                                        <img
-                                                            src={`https://github.com/${authorGitHub}.png?size=32`}
-                                                            alt={projectAuthor}
-                                                            loading="lazy"
-                                                            className="w-4 h-4 rounded-full"
-                                                        />
-                                                    )}
-                                                    <span>{projectAuthor}</span>
-                                                </Link>
-                                            ) : (
-                                                <span className="inline-flex items-center gap-1.5 text-xs text-primary/60 dark:text-primary-dark/60">
-                                                    <span>{projectAuthor}</span>
-                                                </span>
-                                            )}
-                                        </div>
+                                {/* Tag pills, most-used first */}
+                                <div className="mb-4 flex flex-wrap items-center gap-1.5">
+                                    <TagPill label="All" active={!tagFilter} onClick={() => handleTagChange(null)} />
+                                    {visibleTags.map(({ tag, count }) => (
+                                        <TagPill
+                                            key={tag}
+                                            label={tag}
+                                            count={count}
+                                            active={tagFilter === tag}
+                                            onClick={() => handleTagChange(tagFilter === tag ? null : tag)}
+                                        />
+                                    ))}
+                                    {tagFilter && !visibleTags.some(({ tag }) => tag === tagFilter) && (
+                                        <TagPill label={tagFilter} active onClick={() => handleTagChange(null)} />
+                                    )}
+                                    {rankedTags.length > VISIBLE_TAG_COUNT && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowAllTags(!showAllTags)}
+                                            className="px-2 py-0.5 text-[13px] font-semibold text-secondary underline hover:text-primary"
+                                        >
+                                            {showAllTags
+                                                ? 'Fewer tags'
+                                                : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
+                                        </button>
                                     )}
                                 </div>
-                            )
-                        }
-                    )}
-                </div>
 
-                {/* No results message */}
-                {filteredProjects.length === 0 && (
-                    <div className="text-center py-12">
-                        <p className="text-primary/60 dark:text-primary-dark/60">
-                            No projects match the current filters.
-                        </p>
-                        <button
-                            onClick={clearFilters}
-                            className="mt-2 text-red dark:text-yellow font-medium hover:underline"
-                        >
-                            Clear filters
-                        </button>
+                                {/* Results count */}
+                                <div className="mb-4 flex items-center gap-2 text-sm text-secondary">
+                                    <span>
+                                        {hasActiveFilters
+                                            ? `Showing ${filteredProjects.length} of ${nodes.length} projects`
+                                            : `${nodes.length} projects`}
+                                    </span>
+                                    {hasActiveFilters && (
+                                        <button
+                                            type="button"
+                                            onClick={clearFilters}
+                                            className="font-semibold underline hover:text-primary"
+                                        >
+                                            Clear filters
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Project grid */}
+                                <div className="grid grid-cols-1 gap-4 @xl:grid-cols-2 @4xl:grid-cols-3">
+                                    {filteredProjects.map(({ id, fields: { slug }, frontmatter }: ProjectNode) => {
+                                        const {
+                                            projectThumbnail,
+                                            title,
+                                            description,
+                                            liveUrl,
+                                            githubUrl,
+                                            projectAuthor,
+                                            authorGitHub,
+                                            teamLink,
+                                            filters,
+                                        } = frontmatter
+                                        const thumbnailSrc = projectThumbnail || getGitHubOGImage(githubUrl)
+                                        return (
+                                            <article
+                                                key={id}
+                                                data-scheme="secondary"
+                                                className="group flex flex-col overflow-hidden rounded border border-primary bg-primary transition-transform duration-200 hover:-translate-y-0.5"
+                                            >
+                                                <Link to={slug} state={{ newWindow: true }} className="block">
+                                                    <div className="flex aspect-video items-center justify-center overflow-hidden bg-accent border-b border-primary">
+                                                        <img
+                                                            src={thumbnailSrc || getPlaceholderHog(title)}
+                                                            alt={title}
+                                                            loading="lazy"
+                                                            className={
+                                                                thumbnailSrc
+                                                                    ? 'size-full object-cover transition-transform duration-200 group-hover:scale-105'
+                                                                    : 'h-3/4 w-auto object-contain transition-transform duration-200 group-hover:scale-110'
+                                                            }
+                                                        />
+                                                    </div>
+                                                    <div className="p-4 pb-2">
+                                                        <div className="flex items-start justify-between gap-2">
+                                                            <h3 className="m-0 text-lg group-hover:underline">
+                                                                {title}
+                                                            </h3>
+                                                            {liveUrl && (
+                                                                <span className="mt-1 shrink-0 rounded-full border border-green/50 bg-green/10 px-2 py-0.5 text-xs font-semibold text-green">
+                                                                    Live
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        {description && (
+                                                            <p className="m-0 mt-1.5 text-sm text-secondary line-clamp-2">
+                                                                {description}
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </Link>
+                                                <div className="mt-auto p-4 pt-2">
+                                                    {filters?.tags && filters.tags.length > 0 && (
+                                                        <div className="mb-3 flex flex-wrap gap-1">
+                                                            {filters.tags.slice(0, 3).map((tag) => (
+                                                                <button
+                                                                    key={tag}
+                                                                    type="button"
+                                                                    onClick={() => handleTagChange(tag)}
+                                                                    className="rounded-full border border-primary px-2 py-0.5 text-xs text-secondary hover:text-primary"
+                                                                >
+                                                                    {tag}
+                                                                </button>
+                                                            ))}
+                                                            {filters.tags.length > 3 && (
+                                                                <span className="px-1 py-0.5 text-xs text-secondary">
+                                                                    +{filters.tags.length - 3}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                    <div className="border-t border-primary pt-3">
+                                                        <Creator
+                                                            projectAuthor={projectAuthor}
+                                                            authorGitHub={authorGitHub}
+                                                            teamLink={teamLink}
+                                                            profiles={profiles}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        )
+                                    })}
+                                </div>
+
+                                {/* No results message */}
+                                {filteredProjects.length === 0 && (
+                                    <div className="py-12 text-center">
+                                        <p className="m-0 text-secondary">No projects match the current filters.</p>
+                                        <OSButton size="md" className="mt-2" onClick={clearFilters}>
+                                            Clear filters
+                                        </OSButton>
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </div>
-                )}
-            </div>
-        </Layout>
+                </ScrollArea>
+            </Explorer>
+        </>
     )
 }
 
 const query = graphql`
     query {
         sideProjects: allMdx(
-            filter: { fields: { slug: { regex: "/^/side-projects/(?!_)/" } }, frontmatter: { githubUrl: { ne: null } } }
+            filter: {
+                fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
+                frontmatter: { projectAuthor: { ne: null } }
+            }
             sort: { fields: frontmatter___title, order: ASC }
         ) {
             nodes {
@@ -407,12 +427,6 @@ const query = graphql`
                         tags
                     }
                 }
-            }
-        }
-        profiles: allSqueakProfile {
-            nodes {
-                squeakId
-                github
             }
         }
     }

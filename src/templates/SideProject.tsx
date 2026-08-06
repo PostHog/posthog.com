@@ -1,163 +1,158 @@
 import { MDXProvider } from '@mdx-js/react'
-import Layout from 'components/Layout'
+import { IconExternal, IconGithub, IconPencil } from '@posthog/icons'
 import Link from 'components/Link'
+import OSButton from 'components/OSButton'
+import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
+import { Creator, getEditProjectUrl, useCreatorProfiles, type SideProjectFrontmatter } from 'components/SideProjects'
+import { TreeMenu } from 'components/TreeMenu'
+import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
-import { graphql } from 'gatsby'
-import React, { useMemo } from 'react'
+import { useUser } from 'hooks/useUser'
+import React from 'react'
 import { shortcodes } from '../mdxGlobalComponents'
-import { IconGithub, IconExternal } from '@posthog/icons'
 
-export default function SideProject({ data }) {
-    const { pageData, profiles } = data
-    const {
-        body,
-        excerpt,
-        fields: { slug },
-    } = pageData
+type SideProjectData = {
+    pageData: {
+        body: string
+        excerpt: string
+        fields: { slug: string }
+        parent?: { relativePath?: string }
+        frontmatter: SideProjectFrontmatter & {
+            featuredImage?: { publicURL?: string; childImageSharp?: { gatsbyImageData?: unknown } }
+        }
+    }
+    sideProjects: {
+        nodes: { fields: { slug: string }; frontmatter: { title: string } }[]
+    }
+}
+
+export default function SideProject({ data }: { data: SideProjectData }): JSX.Element {
+    const { pageData, sideProjects } = data
+    const { body, excerpt } = pageData
     const { title, description, featuredImage, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
-        pageData?.frontmatter
+        pageData.frontmatter
+    const profiles = useCreatorProfiles()
+    const { isModerator } = useUser()
 
     const tags = filters?.tags || []
+    const relativePath = pageData.parent?.relativePath
 
-    // Create a lookup map from GitHub username to community profile ID
-    const githubToProfile = useMemo(() => {
-        const map: Record<string, string> = {}
-        profiles?.nodes?.forEach((profile: { github?: string; squeakId: string }) => {
-            if (profile.github) {
-                const username = profile.github.replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '')
-                map[username.toLowerCase()] = profile.squeakId
-            }
-        })
-        return map
-    }, [profiles])
-
-    // Determine author link: teamLink (manual) > community profile > GitHub
-    const profileId = authorGitHub && githubToProfile[authorGitHub.toLowerCase()]
-    const authorUrl =
-        teamLink ||
-        (profileId ? `/community/profiles/${profileId}` : authorGitHub ? `https://github.com/${authorGitHub}` : null)
+    const projectsMenu = [
+        {
+            name: 'Side projects',
+            url: '/side-projects',
+            children: sideProjects.nodes.map(({ frontmatter: { title }, fields: { slug } }) => ({
+                name: title,
+                url: slug,
+            })),
+        },
+    ]
 
     return (
-        <Layout>
+        <>
             <SEO
                 image={featuredImage?.publicURL}
-                title={`${title} - PostHog Side Projects`}
+                title={`${title} - PostHog side projects`}
                 description={description || excerpt}
             />
-            <div className="max-w-4xl mx-auto px-5 py-12">
-                <div className="mb-8">
-                    <Link to="/side-projects" className="text-red dark:text-yellow hover:underline text-sm">
-                        &larr; Back to Side Projects
-                    </Link>
-                </div>
+            <ReaderView
+                body={{ type: 'plain' }}
+                title={title}
+                filePath={relativePath}
+                leftSidebar={<TreeMenu items={projectsMenu} />}
+                hideRightSidebar
+                hideTitle
+                showQuestions={false}
+            >
+                <div className="max-w-3xl mx-auto">
+                    <header className="not-prose mb-8">
+                        <h1 className="m-0 mb-2 text-3xl @2xl:text-4xl">{title}</h1>
+                        {description && <p className="m-0 mb-4 text-lg text-secondary">{description}</p>}
 
-                <header className="mb-8">
-                    <h1 className="text-4xl md:text-5xl font-bold m-0 mb-4">{title}</h1>
-                    {description && (
-                        <p className="text-xl text-primary/75 dark:text-primary-dark/75 m-0 mb-4">{description}</p>
-                    )}
-
-                    <div className="flex flex-wrap items-center gap-4 text-sm">
-                        {projectAuthor && (
-                            <div className="flex items-center gap-2">
-                                {authorGitHub && (
-                                    <img
-                                        src={`https://github.com/${authorGitHub}.png?size=32`}
-                                        alt={projectAuthor}
-                                        className="w-6 h-6 rounded-full"
-                                    />
-                                )}
-                                <span className="text-primary/75 dark:text-primary-dark/75">
-                                    by{' '}
-                                    {authorUrl ? (
-                                        <Link to={authorUrl} className="text-red dark:text-yellow hover:underline">
-                                            {projectAuthor}
-                                        </Link>
-                                    ) : (
-                                        projectAuthor
-                                    )}
-                                </span>
+                        {tags.length > 0 && (
+                            <div className="mb-4 flex flex-wrap gap-1.5">
+                                {tags.map((tag) => (
+                                    <Link
+                                        key={tag}
+                                        to={`/side-projects?tag=${encodeURIComponent(tag)}`}
+                                        state={{ newWindow: true }}
+                                        className="rounded-full border border-primary px-2.5 py-0.5 text-[13px] text-secondary hover:text-primary"
+                                    >
+                                        {tag}
+                                    </Link>
+                                ))}
                             </div>
                         )}
 
-                        {githubUrl && (
-                            <Link
-                                to={githubUrl}
-                                className="inline-flex items-center gap-1.5 text-primary/75 dark:text-primary-dark/75 hover:text-red dark:hover:text-yellow"
-                                externalNoIcon
-                            >
-                                <IconGithub className="w-4 h-4" />
-                                <span>View on GitHub</span>
-                            </Link>
-                        )}
+                        <div
+                            data-scheme="secondary"
+                            className="flex flex-wrap items-center gap-4 rounded border border-primary bg-primary p-4"
+                        >
+                            <div className="min-w-0 flex-1">
+                                <div className="mb-1 text-[13px] text-secondary">Made by</div>
+                                <Creator
+                                    projectAuthor={projectAuthor}
+                                    authorGitHub={authorGitHub}
+                                    teamLink={teamLink}
+                                    profiles={profiles}
+                                    size="lg"
+                                />
+                            </div>
+                            <div className="flex flex-wrap items-center gap-2">
+                                {liveUrl && (
+                                    <OSButton
+                                        asLink
+                                        to={liveUrl}
+                                        external
+                                        variant="primary"
+                                        size="md"
+                                        icon={<IconExternal />}
+                                    >
+                                        Try it
+                                    </OSButton>
+                                )}
+                                {githubUrl && (
+                                    <OSButton
+                                        asLink
+                                        to={githubUrl}
+                                        external
+                                        variant="secondary"
+                                        size="md"
+                                        icon={<IconGithub />}
+                                    >
+                                        View source
+                                    </OSButton>
+                                )}
+                                {isModerator && relativePath && (
+                                    <OSButton
+                                        asLink
+                                        to={getEditProjectUrl(relativePath)}
+                                        external
+                                        size="md"
+                                        icon={<IconPencil />}
+                                        tooltip="Edit this project on GitHub"
+                                    >
+                                        Edit
+                                    </OSButton>
+                                )}
+                            </div>
+                        </div>
+                    </header>
 
-                        {liveUrl && (
-                            <Link
-                                to={liveUrl}
-                                className="inline-flex items-center gap-1.5 text-primary/75 dark:text-primary-dark/75 hover:text-red dark:hover:text-yellow"
-                                externalNoIcon
-                            >
-                                <IconExternal className="w-4 h-4" />
-                                <span>Live Demo</span>
-                            </Link>
-                        )}
-                    </div>
-
-                    {tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mt-4">
-                            {tags.map((tag) => (
-                                <Link
-                                    key={tag}
-                                    to={`/side-projects?tag=${encodeURIComponent(tag.toLowerCase())}`}
-                                    className="inline-block px-2 py-1 text-xs font-medium rounded bg-accent dark:bg-accent-dark text-primary/75 dark:text-primary-dark/75 hover:text-red dark:hover:text-yellow"
-                                >
-                                    {tag}
-                                </Link>
-                            ))}
+                    {featuredImage && (
+                        <div className="not-prose mb-8 overflow-hidden rounded border border-primary">
+                            <GatsbyImage image={getImage(featuredImage)} alt={title} />
                         </div>
                     )}
-                </header>
 
-                {featuredImage && (
-                    <div className="mb-8 rounded-lg overflow-hidden border border-light dark:border-dark">
-                        <GatsbyImage image={getImage(featuredImage)} alt={title} />
-                    </div>
-                )}
-
-                <article className="article-content">
                     <MDXProvider components={shortcodes}>
                         <MDXRenderer>{body}</MDXRenderer>
                     </MDXProvider>
-                </article>
-
-                <footer className="mt-12 pt-8 border-t border-light dark:border-dark">
-                    <div className="flex flex-wrap gap-4">
-                        {githubUrl && (
-                            <Link
-                                to={githubUrl}
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-accent dark:bg-accent-dark hover:bg-light dark:hover:bg-dark font-medium"
-                                externalNoIcon
-                            >
-                                <IconGithub className="w-5 h-5" />
-                                <span>View Source Code</span>
-                            </Link>
-                        )}
-                        {liveUrl && (
-                            <Link
-                                to={liveUrl}
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-red dark:bg-yellow text-white dark:text-primary font-medium hover:opacity-90"
-                                externalNoIcon
-                            >
-                                <IconExternal className="w-5 h-5" />
-                                <span>Try Live Demo</span>
-                            </Link>
-                        )}
-                    </div>
-                </footer>
-            </div>
-        </Layout>
+                </div>
+            </ReaderView>
+        </>
     )
 }
 
@@ -168,6 +163,11 @@ export const query = graphql`
             excerpt(pruneLength: 150)
             fields {
                 slug
+            }
+            parent {
+                ... on File {
+                    relativePath
+                }
             }
             frontmatter {
                 title
@@ -188,10 +188,20 @@ export const query = graphql`
                 }
             }
         }
-        profiles: allSqueakProfile {
+        sideProjects: allMdx(
+            filter: {
+                fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
+                frontmatter: { projectAuthor: { ne: null } }
+            }
+            sort: { fields: frontmatter___title, order: ASC }
+        ) {
             nodes {
-                squeakId
-                github
+                fields {
+                    slug
+                }
+                frontmatter {
+                    title
+                }
             }
         }
     }
