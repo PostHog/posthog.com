@@ -1,6 +1,5 @@
 import React from 'react'
 import { CTA as PlanCTA } from 'components/Pricing/Plans'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import HeroDesk from '../../../images/pricing-hero-desk.png'
 import GrassAngled from '../../../images/grass-tuft-angled.png'
 import GrassFolded from '../../../images/grass-tuft-folded.png'
@@ -86,24 +85,16 @@ export default function Hero(): JSX.Element {
                 <div className="relative z-10 flex flex-col-reverse @2xl:flex-row @2xl:items-center gap-6 @2xl:gap-8 p-6 @2xl:p-8 @4xl:p-10">
                     <div className="flex-1">
                         <h1 className="text-3xl @lg:text-4xl @2xl:text-5xl @4xl:text-6xl font-bold tracking-tight leading-[1.05] text-balance mb-4 @2xl:mb-5">
-                            Start free, scale{' '}
+                            97% of companies use PostHog{' '}
                             <span className="bg-green/25 text-green-dark dark:text-lime-green rounded-sm px-1.5 box-decoration-clone">
-                                as you grow.
+                                for free.
                             </span>
                         </h1>
 
                         <p className="text-[15px] @lg:text-base max-w-xl mb-5">
-                            <RoughAnnotation
-                                type="underline"
-                                color="currentColor"
-                                strokeWidth={1}
-                                delay={400}
-                                multiline
-                            >
-                                <strong>97% of companies use PostHog for free.</strong>
-                            </RoughAnnotation>{' '}
-                            Only add a card if you need more than the free tier limits, advanced features, or want more
-                            projects. You still keep the same monthly free volume, even after upgrading.
+                            One day we’d like your money, but not today. Only add a card if you need more than the free
+                            tier limits, advanced features, or want more projects. Your free allowance renews every
+                            month. Yes, for everything. Yes, forever.
                         </p>
 
                         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

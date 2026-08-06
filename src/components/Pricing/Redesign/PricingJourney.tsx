@@ -1,7 +1,8 @@
 import React from 'react'
 import { IconArrowRight, IconCheck, IconCreditCard } from '@posthog/icons'
-import ScrollToElement from 'components/ScrollToElement'
-import SignupBlock from './SignupBlock'
+import { TrackedCTA } from 'components/CallToAction'
+import useCloud from 'hooks/useCloud'
+import usePostHogInstance from 'hooks/usePostHogInstance'
 
 /**
  * Free and pay-as-you-go as two stops on a journey, not two plans in a table.
@@ -30,7 +31,7 @@ const freeIncludes = [
 ]
 
 const paidAdds = [
-    { name: 'Keep going past the free tier', detail: 'at usage-based rates', calculatorLink: true },
+    { name: 'Unlimited usage' },
     { name: '6 projects', detail: 'up from 1' },
     { name: '7-year data retention', detail: 'up from 1 year' },
     { name: 'Email support', detail: 'or Slack over $2k/mo' },
@@ -50,6 +51,13 @@ const StepBadge = ({ number, label, tone }: { number: number; label: string; ton
 )
 
 export default function PricingJourney(): JSX.Element {
+    const cloud = useCloud()
+    const posthogInstance = usePostHogInstance()
+    const isEU = posthogInstance ? posthogInstance.includes('eu.posthog.com') : cloud === 'eu'
+    const basePosthogUrl = isEU ? 'eu.posthog.com' : 'app.posthog.com'
+    const billingUrl = `https://${basePosthogUrl}/organization/billing`
+    const signupUrl = `https://${basePosthogUrl}/signup`
+
     return (
         <div className="@container not-prose">
             <div className="grid @2xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-4 @2xl:gap-3 items-stretch">
@@ -76,7 +84,20 @@ export default function PricingJourney(): JSX.Element {
                     </p>
 
                     <div className="mt-auto">
-                        <SignupBlock />
+                        <TrackedCTA
+                            to={signupUrl}
+                            state={{ initialTab: 'signup' }}
+                            event={{
+                                name: `clicked Get started - free`,
+                                type: 'cloud',
+                                intent: 'free',
+                            }}
+                            size="lg"
+                            width="full"
+                            className="shadow-md !block"
+                        >
+                            Get started - free
+                        </TrackedCTA>
                     </div>
                 </div>
 
@@ -100,7 +121,7 @@ export default function PricingJourney(): JSX.Element {
 
                     <h3 className="text-lg mb-0.5">Pay-as-you-go</h3>
                     <p className="text-sm text-secondary mb-4">
-                        Same free tier every month. You only pay for what you use beyond it.
+                        Same free tier every month. You only pay for what you use.
                     </p>
 
                     <p className="text-[15px] font-semibold mb-2">
@@ -108,35 +129,38 @@ export default function PricingJourney(): JSX.Element {
                     </p>
 
                     <ul className="list-none p-0 m-0 space-y-2 mb-4">
-                        {paidAdds.map(({ name, detail, calculatorLink }) => (
+                        {paidAdds.map(({ name, detail }) => (
                             <li key={name} className="flex items-start gap-2 text-[15px]">
                                 <IconArrowRight className="text-green size-5 shrink-0" />
                                 <span>
                                     <strong>{name}</strong>{' '}
-                                    {calculatorLink ? (
-                                        <ScrollToElement
-                                            targetId="calculator"
-                                            offset={-20}
-                                            as="button"
-                                            type="button"
-                                            className="text-secondary text-sm underline cursor-pointer"
-                                        >
-                                            {detail}
-                                        </ScrollToElement>
-                                    ) : (
-                                        <span className="text-secondary text-sm">– {detail}</span>
-                                    )}
+                                    {detail && <span className="text-secondary text-sm">– {detail}</span>}
                                 </span>
                             </li>
                         ))}
                     </ul>
 
                     <div className="mt-auto border-t border-primary pt-3">
-                        <p className="text-sm text-secondary mb-0">
+                        <TrackedCTA
+                            to={billingUrl}
+                            width="full"
+                            type="secondary"
+                            size="lg"
+                            externalNoIcon
+                            event={{
+                                name: `clicked Set billing limits`,
+                                type: 'cloud',
+                                cloud: isEU ? 'eu' : 'us',
+                                intent: 'pay-as-you-go',
+                            }}
+                        >
+                            Set billing limits
+                        </TrackedCTA>
+                        {/* <p className="text-sm text-secondary mb-0">
                             <strong className="text-primary">Nothing to do today.</strong> Add a card from your billing
                             settings whenever you're ready – there's nothing to migrate, and you can set a billing limit
                             per product.
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </div>
