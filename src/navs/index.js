@@ -1867,10 +1867,6 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/assets',
             },
             {
-                name: 'Pocket guides',
-                url: '/handbook/engineering/posthog-com/pocket-guides',
-            },
-            {
                 name: 'Merch store',
                 url: '/handbook/engineering/posthog-com/merch-store',
             },
@@ -1975,6 +1971,10 @@ export const handbookSidebar = [
             {
                 name: 'How to write docs',
                 url: '/handbook/wizard-and-docs/writing-product-docs',
+            },
+            {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
             },
             {
                 name: 'How to use the content writer agent',

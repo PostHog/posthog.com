@@ -730,10 +730,9 @@ const PocketGuidesSection = (): JSX.Element | null => {
                 <div className="min-w-0">
                     <p className="m-0 text-base font-bold text-primary">The pocket guide to self-driving</p>
                     <p className="m-0 mt-2 max-w-xl text-base leading-relaxed text-secondary">
-                        A 101 plus {guides.length} real use cases – AI spend that jumps overnight, feature flag debt,
-                        silent failures in your core action. Each one walks through the report a scout files, the pull
-                        request it becomes, and the scout itself, ending in a one-click way to add it to your own
-                        product.
+                        A quick overview of self-driving, plus real use cases. Each one walks through the report a scout
+                        files, the pull request it becomes, and the scout itself. You can also add each use case as a
+                        custom scout to your own product.
                     </p>
                     <CallToAction
                         to="/pocket-guides"

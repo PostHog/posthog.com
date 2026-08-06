@@ -37,9 +37,9 @@ export default function TemplatesPage(): JSX.Element {
                     <Link to="/docs/workflows" state={{ newWindow: true }}>
                         workflows
                     </Link>
-                    . Looking for self-driving scouts? They live in the{' '}
+                    . Looking for use case guides? Check out{' '}
                     <Link to="/pocket-guides" state={{ newWindow: true }}>
-                        pocket guides
+                        PostHog's Pocket Guides
                     </Link>
                     .
                 </p>

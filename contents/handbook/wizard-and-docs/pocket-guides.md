@@ -44,12 +44,10 @@ contents/pocket-guides/<volume>/<slug>/
    then remember Gatsby caches compiled MDX (the fix shows only after the `.mdx` changes or
    `pnpm clean`).
 
-## Definitions stay fresh
+## Term definitions
 
-`<Term>` hover cards pull their definitions from the owning docs page's `description`
-frontmatter at build time (for example `contents/docs/self-driving/scouts.mdx`). To change a
-definition, edit the docs page – the guides follow. The authored copies in
-`src/components/SelfDrivingInbox/terms.tsx` are fallbacks only.
+`<Term>` hover-card definitions live in `src/components/SelfDrivingInbox/terms.tsx`, each
+quoted from the docs page it links to. If a docs definition changes, update the quote there.
 
 ## Measuring
 

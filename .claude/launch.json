@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "posthog.com",
+            "runtimeExecutable": "pnpm",
+            "runtimeArgs": ["start"],
+            "port": 8001
+        },
+        {
+            "name": "twig-prototype",
+            "runtimeExecutable": "python3",
+            "runtimeArgs": ["-m", "http.server", "8899", "-d", "/Users/sarahsanders/Documents/twig-prototype/site"],
+            "port": 8899
+        }
+    ]
+}
