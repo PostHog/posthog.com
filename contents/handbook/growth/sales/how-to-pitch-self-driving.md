@@ -195,7 +195,7 @@ For the five minutes before a call.
 - **The chain:** something watches (source or scout) → signals → grouped into a report → inbox researches it → agent opens a PR → human merges.
 - **Source = one stream, continuous, exhaustive, predictable. Scout = scheduled, exploratory, selective, steerable.** Both land in the same inbox, and most customers want both.
 - **The trade-offs between Signals and Scouts:** sources give determinism and guaranteed coverage, scouts give judgement and steerability. Neither is the upgrade.
-- **Lead with sources** when missing one is unacceptable. **Lead with scouts** when everything is technically "something" and they need a filter.
+- **Lead with sources** when there's significant volume to triage. **Lead with scouts** when everything is technically "something" and they need a filter.
 - **Best discovery question:** "What does someone on your team open every morning?"
 - **The question that separates the two:** "Should everything in that stream get worked, or does someone need to decide what matters first?"
 - **Best demo move:** toggle a source and watch the queue fill, or make a scout on their data and run it on demand, live.
