@@ -1,6 +1,6 @@
 ---
-date: "2026-07-08"
-title: "RIP to the UI?"
+date: "2026-08-05"
+title: "Are agents really killing UI?"
 author:
   - cleo-lant
 rootPage: /blog
@@ -16,23 +16,22 @@ tags:
   - Product engineers
 seo:
   {
-    metaTitle: "RIP to the UI?",
+    metaTitle: "Are agents really killing UI?",
     metaDescription: "Your best user doesn't use a mouse. Your most important one still does. Why the future is hybrid, not headless – and what to build for both.",
   }
 ---
 
-The UI is dead. Or so I keep hearing.
+The UI is dead. Or so I keep hearing:
 
-Agents are your users now, software is [losing its head](https://a16z.com/is-software-losing-its-head/), and everyone who learned Figma should start learning Bash.
+"Agents are your users now, software is [losing its head](https://a16z.com/is-software-losing-its-head/), and everyone who learned Figma should start learning Bash."
 
 Maybe the UI is dead in the four square blocks of San Francisco where everyone's running three Mac minis with clawbots. But I'm a regular person at a screen for most of my day, and so are the people I build for.
 
 Here's my take:
 
-- everything is a user interface if I'm using it
-- my agents are using it too now, just not the part you designed
-- headless is a new layer on top of product building, the same way APIs and the GUI once were
-- which means the screen matters more than it used to, not less
+- Everything is a user interface if I'm using it
+- My agents are using it too now, just not the part you designed
+- Headless is a new layer on top of product building, the same way APIs and the GUI once were
 
 If you're a product builder, congratulations! That means your job just doubled: every user of your product is bringing an agentic plus-one.
 
@@ -48,12 +47,12 @@ Every action you hand an agent creates a new job for your UI: someone has to be 
 
 **What this looks like:**
 
-- [Vercel's MCP server](https://vercel.com/blog/introducing-vercel-mcp-connect-vercel-to-your-ai-tools) lets an agent inspect deployments, pull runtime logs, and trigger deploys. When it ships something, that deploy appears in the human UI too (the Vercel dashboard), with the same logs and rollback capabilities.
-- Our own [MCP server](/docs/model-context-protocol) lets an agent create a feature flag or launch an experiment using your credentials. Since it's acting as you, the change lands in the project's activity log attributed to your account, with the calling client recorded alongside it (the `x-posthog-client` header), so you can filter the log for changes an agent made rather than a person.
+- [Vercel's MCP server](https://vercel.com/blog/introducing-vercel-mcp-connect-vercel-to-your-ai-tools) lets an agent inspect deployments, pull runtime logs, and trigger deploys. When it ships something, the change appears in the human UI too (the Vercel dashboard), with the same logs and rollback capabilities.
+- Our own [MCP server](/docs/model-context-protocol) lets an agent create a feature flag or launch an experiment using your credentials. Changes land in the project's activity log attributed to your account, with the calling agent client recorded alongside it (the `x-posthog-client` header), so you can filter for changes an agent made rather than a person.
 
 <CalloutBox icon="IconTerminal" title="Go build:" type="fyi">
 
-Build two things for every action. 
+Consider two options for every action: 
 
 1. A way for the agent to do it: an MCP that covers everything a human can do in your product. 
 2. A way for the person to check it got done: a record of what changed, when, and who asked for it. 
@@ -74,17 +73,16 @@ Get that right and you've handled the agent. You still haven't handled the perso
 
 **What this looks like:**
 
-- The fastest way to try PostHog is a single `npx` [command](/docs/getting-started/install) that sets up your account and scans your codebase to work out what to instrument, logging each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, people tend to open the web app anyway, to see their data and start playing with it.
+- The fastest way to try PostHog is the `npx -y @posthog/wizard@latest` [command](/docs/getting-started/install) that sets up your account, scans your codebase for what to instrument, and logs each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, some people continue their PostHog journey through the MCP. Plenty of other open the web app (they want to _see_ their data and start playing with it).
 - Our [Slack app](/blog/slack-app-beta) turns a message in a channel into a draft PR. You watch the agent's thought process in the thread, then go read the diff in the GitHub web UI before merging it.
 - [AgentMail](https://docs.agentmail.to/agent-onboarding)'s onboarding docs teach the agent to provision an inbox and key itself, no console required. Even there, a human UI is needed, and that UI is email: a six-digit code gets sent to a person, and until someone opens it and hands it over, the agent can only send mail to the address it signed up with.
 
 <CalloutBox icon="IconSparkles" title="Go build:" type="fyi">
 
-Build both front doors. 
+Design two entry points to your product: 
 
-- For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have), a listing where agents look for connectors (like the Claude and Codex app directories), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). 
-
-- For the human: where you start them depends on how they got there. If an agent set things up, they're landing in the middle of a process they never saw, so show them what got instrumented and what's missing. If they did it themselves, just point them at the next step.
+1. For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have), a listing where agents look for connectors (like the Claude and Codex app directories), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). 
+2. For the human: where you start them depends on how they got there. If an agent set things up, they're landing in the middle of a process they never saw, so show them what got instrumented and what's missing. If they did it themselves, just point them at the next step.
 
 </CalloutBox>
 
@@ -147,7 +145,6 @@ Those are much better design problems than another login page.
 
 - Intercom's [Fin Operator](https://www.intercom.com/blog/introducing-operator/) tunes Fin for you, then hands the work back as a screen. Every change arrives as a proposal (their words: "Operator's version of a pull request"), a structured diff of what's changing and why, which you review, edit, and approve before it takes effect. The agent does the work. The human decides what ships.
 - Anthropic could have left Claude Code in the terminal. Instead it shipped a desktop app, a web app, IDE extensions, and Cowork, all wrapping the same models in more interfaces. Some people love the CLI precisely because there's so little UI in the way, and others [go straight for Cowork](/blog/making-claude-cowork-actually-useful).
-- We're betting on [self-driving](/blog/what-if-your-product-built-itself), where agents run most of the loop themselves. That made the screen more important, not less. Nobody wants to watch an agent work; they want to see what it did. So [PostHog Desktop](/desktop) is where the outcomes land – bugs fixed, PRs merged – and where you approve them or take the wheel back.
 
 <CalloutBox icon="IconLaptop" title="Go build:" type="fyi">
 
