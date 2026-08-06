@@ -4225,7 +4225,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Multi-tenant apps',
-                    url: '/docs/product-analytics/multi-tenant-saas',
+                    url: '/docs/product-analytics/multi-tenant-apps',
                     icon: 'IconGroups',
                     color: 'blue',
                 },

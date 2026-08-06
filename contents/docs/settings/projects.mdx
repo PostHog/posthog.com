@@ -56,7 +56,7 @@ It's best to use separate projects for:
 
 If you run a multi-tenant app, don't split tenants across projects. Because all queries are project-specific, a project per customer makes it impossible to analyze your customer base as a whole, and every new signup means provisioning a project, token, and set of dashboards.
 
-Keep all tenants in one production project and separate them with [group analytics](/docs/product-analytics/group-analytics) instead. See [multi-tenant and B2B SaaS setup](/docs/product-analytics/multi-tenant-saas) for the full walkthrough.
+Keep all tenants in one production project and separate them by attaching the tenant to your events, using [group analytics](/docs/product-analytics/group-analytics) when you need to aggregate by tenant. See [multi-tenant apps](/docs/product-analytics/multi-tenant-apps) for the full walkthrough.
 
 ## Moving projects between organizations
 
