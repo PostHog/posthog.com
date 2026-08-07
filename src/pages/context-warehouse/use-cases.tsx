@@ -230,7 +230,7 @@ const modelingSkills: ModelingSkill[] = [
     {
         name: 'modeling-activation-metrics',
         builds: 'An activated flag per user or account, plus an activation rate.',
-        rule: "Activation is not an event you declare. It's the early behavior that predicts retention, so validate it against retention lift before you enshrine it.",
+        rule: "Activation is not an event you declare. It's the early behavior that predicts whether people stick around, so test it against retention lift. If it doesn't lift, it isn't activation.",
     },
     {
         name: 'modeling-product-usage-metrics',
