@@ -1,14 +1,11 @@
 /**
- * Pricing calculator math, checked against a snapshot of the real billing API.
+ * Pricing calculator math, checked against the prices in `__fixtures__/billing-products.json`.
  *
  *   pnpm test:pricing-calculator
  *
  * The dollar amounts below are the ones posthog.com quotes publicly, so they're written out
- * literally rather than derived – if a change moves any of them, that's the point.
- *
- * The snapshot lives in `__fixtures__/billing-products.json`. When billing changes its prices,
- * `node scripts/billing-products-fixture.mjs --check` fails; refresh the fixture and update the
- * expectations here together.
+ * literally rather than derived – if a change moves any of them, that's the point. When billing
+ * changes its prices, update the fixture and these expectations together.
  */
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
