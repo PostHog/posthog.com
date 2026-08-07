@@ -1356,6 +1356,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         // API key at build time, or no linked survey).
                         waitlistCount: payload.survey_id != null ? waitlistCounts[payload.survey_id] ?? null : null,
                         payload,
+                        // Display name of the assigned person or role in PostHog; the roadmap
+                        // resolves it to a small team (see useRoadmapEarlyAccessFeatures).
+                        assignee: feature.assignee || null,
                     })
                 })
         } catch (error) {

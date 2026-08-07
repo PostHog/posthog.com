@@ -22,7 +22,7 @@ You don't have to treat every bot the same. Because classification happens at qu
 There are three points where you can deal with bots, from most aggressive to most flexible:
 
 1. **Block at capture (client-side).** The [PostHog JavaScript SDK](/docs/libraries/js) blocks known bots before they ever send an event. Lowest effort, but you lose the data entirely, and it only affects traffic that runs JavaScript. See [blocking bots](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers).
-2. **Exclude at query time.** Keep the events and filter them out where you don't want them – add a `$virt_is_bot` is `false` filter to an insight or dashboard. Flexible and reversible: the underlying data stays intact, so you can include or break down bot traffic whenever you want.
+2. **Exclude at query time.** Keep the events and filter them out where you don't want them – add an **Is bot** (`$virt_is_bot`) is `false` filter to an insight or dashboard. Flexible and reversible: the underlying data stays intact, so you can include or break down bot traffic whenever you want.
 3. **Capture server-side to measure bots.** Most bots and AI agents never run JavaScript, so the SDK never sees them. To measure that traffic, forward your server logs as [`$http_log` events](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) – they carry the user agent and get classified the same way.
 
 ## See bots in the Bots tab
@@ -39,14 +39,24 @@ The tab reads `$pageview`, `$screen`, and [`$http_log`](/docs/web-analytics/bot-
 
 ## Exclude bots from an insight or dashboard
 
-In any [Product Analytics](/docs/product-analytics) insight or [Web Analytics](/docs/web-analytics/dashboard) view, add a filter where `$virt_is_bot` equals `false`. Your visitor, session, and pageview counts then reflect human traffic only, without changing the stored data.
+In any [Product Analytics](/docs/product-analytics) insight or [Web Analytics](/docs/web-analytics/dashboard) view, add a filter where **Is bot** equals `false`. Your visitor, session, and pageview counts then reflect human traffic only, without changing the stored data.
 
-To exclude a narrower set – say, only automation and HTTP clients while keeping AI agents – filter on `$virt_traffic_type` or `$virt_traffic_category` instead.
+The property picker lists these under their display names rather than their raw keys, though searching for either works:
+
+| Name in the UI   | Property                 |
+| ---------------- | ------------------------ |
+| Is bot           | `$virt_is_bot`           |
+| Traffic type     | `$virt_traffic_type`     |
+| Traffic category | `$virt_traffic_category` |
+| Bot name         | `$virt_bot_name`         |
+| Bot operator     | `$virt_bot_operator`     |
+
+To exclude a narrower set – say, only automation and HTTP clients while keeping AI agents – filter on **Traffic type** or **Traffic category** instead.
 
 ## See which bots are hitting you
 
 - **Right now** – open the [Live tab](/docs/web-analytics/live#bot-traffic) and check the bot traffic tile to see which bots are crawling you in real time.
-- **Over time** – open the [Bots tab](#see-bots-in-the-bots-tab) for a ready-made dashboard, or build a trend filtered to `$virt_is_bot` is `true` and broken down by `$virt_bot_name`. See [example queries](/docs/web-analytics/bot-detection#example-queries) for the SQL equivalent.
+- **Over time** – open the [Bots tab](#see-bots-in-the-bots-tab) for a ready-made dashboard, or build a trend filtered to **Is bot** is `true` and broken down by **Bot name**. See [example queries](/docs/web-analytics/bot-detection#example-queries) for the SQL equivalent.
 
 ## Track AI bot traffic
 
@@ -59,7 +69,7 @@ AI traffic is worth measuring on its own: these visits are how AI tools discover
 To track them:
 
 1. **Capture the traffic.** Most AI bots don't run JavaScript, so the SDK never sees them. Forward your server or CDN logs as [`$http_log` events](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) – without this, you only measure the small slice of AI traffic that executes your snippet.
-2. **See who's reading your site.** Open the [Bots tab](#see-bots-in-the-bots-tab) and switch the trend to the **Category** breakdown, or build a trend on the `$pageview` and `$http_log` events (a `$pageview`-only trend misses the server-side traffic you set up in step 1), filtered to `$virt_traffic_type` equals `AI Agent` and broken down by `$virt_bot_name` or `$virt_bot_operator` to compare OpenAI, Anthropic, Perplexity, and others.
+2. **See who's reading your site.** Open the [Bots tab](#see-bots-in-the-bots-tab) and switch the trend to the **Category** breakdown, or build a trend on the `$pageview` and `$http_log` events (a `$pageview`-only trend misses the server-side traffic you set up in step 1), filtered to **Traffic type** equals `AI Agent` and broken down by **Bot name** or **Bot operator** to compare OpenAI, Anthropic, Perplexity, and others.
 3. **See what they're reading.** Check **Most crawled paths** in the Bots tab, or break the same trend down by `$pathname`, to find which content AI tools hit most.
 
 Assistant traffic deserves particular attention: each `ai_assistant` request has a person on the other end asking about your content right now, even though the request itself is automated. A rise in assistant traffic to a page means AI tools are reading it on users' behalf.

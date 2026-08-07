@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import useEarlyAccessFeatures, { EarlyAccessFeature } from './useEarlyAccessFeatures'
-import { useFeatureOwnership } from './useFeatureOwnership'
-import { ROADMAP_TEAM_OVERRIDES } from 'components/Roadmap/roadmapTeamOverrides'
 
 export interface RoadmapEarlyAccessFeature extends EarlyAccessFeature {
     teamSlug?: string
@@ -26,33 +25,92 @@ const slugify = (text: string): string =>
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')
 
+/** Case-, whitespace-, and diacritic-insensitive key for matching people and team names. */
+const normalizeName = (name: string): string =>
+    name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim()
+
+interface SqueakTeamOwnershipNode {
+    slug: string
+    name: string
+    profiles?: { data?: { attributes?: { firstName?: string; lastName?: string } }[] }
+}
+
 /**
- * Adds the roadmap's canonical team ownership to each Early Access Feature.
- * Consumers can optionally select one small team's roadmap without duplicating
- * the override and feature-ownership resolution used by /roadmap.
+ * Adds small-team ownership to each Early Access Feature, resolved from the feature's
+ * assignee in PostHog (served by the public EAF endpoint as a display name):
+ *  - a `role` assignee matches a small team by name or slug,
+ *  - a `user` assignee matches a team member profile by full name and takes that
+ *    person's team.
+ * Ownership therefore lives on the Early Access Feature itself — change the assignee in
+ * the PostHog app to change the team shown here; there is no hard-coded feature-to-team
+ * list on the website. Consumers can optionally select one small team's roadmap for
+ * embedded views such as /ai.
  */
 export function useRoadmapEarlyAccessFeatures({
     teamSlug,
 }: UseRoadmapEarlyAccessFeaturesOptions = {}): UseRoadmapEarlyAccessFeaturesResult {
     const earlyAccessFeatures = useEarlyAccessFeatures()
-    const { features: ownedFeatures } = useFeatureOwnership()
 
-    const teamByFeatureSlug = useMemo(() => {
-        const map: Record<string, string> = {}
-        ownedFeatures.forEach((feature) => {
-            if (feature.owner?.[0]) {
-                map[feature.slug] = feature.owner[0]
+    const { allSqueakTeam } = useStaticQuery<{ allSqueakTeam: { nodes: SqueakTeamOwnershipNode[] } }>(graphql`
+        {
+            allSqueakTeam {
+                nodes {
+                    slug
+                    name
+                    profiles {
+                        data {
+                            attributes {
+                                firstName
+                                lastName
+                            }
+                        }
+                    }
+                }
             }
+        }
+    `)
+
+    const { teamSlugByPerson, teamSlugByTeamName, teamSlugs } = useMemo(() => {
+        const byPerson: Record<string, string> = {}
+        const byTeamName: Record<string, string> = {}
+        const slugs = new Set<string>()
+        allSqueakTeam.nodes.forEach((team) => {
+            if (!team.slug) {
+                return
+            }
+            slugs.add(team.slug)
+            byTeamName[normalizeName(team.name)] = team.slug
+            team.profiles?.data?.forEach((profile) => {
+                const fullName = normalizeName(
+                    [profile.attributes?.firstName, profile.attributes?.lastName].filter(Boolean).join(' ')
+                )
+                // People can appear on multiple teams (e.g. leads); keep their first team.
+                if (fullName && !byPerson[fullName]) {
+                    byPerson[fullName] = team.slug
+                }
+            })
         })
-        return map
-    }, [ownedFeatures])
+        return { teamSlugByPerson: byPerson, teamSlugByTeamName: byTeamName, teamSlugs: slugs }
+    }, [allSqueakTeam])
 
     const teamForFeature = useCallback(
-        (feature: EarlyAccessFeature): string | undefined =>
-            ROADMAP_TEAM_OVERRIDES[feature.flagKey] ||
-            teamByFeatureSlug[feature.flagKey] ||
-            teamByFeatureSlug[slugify(feature.name)],
-        [teamByFeatureSlug]
+        (feature: EarlyAccessFeature): string | undefined => {
+            const assignee = feature.assignee
+            if (!assignee?.name) {
+                return undefined
+            }
+            if (assignee.type === 'role') {
+                const asSlug = slugify(assignee.name)
+                return teamSlugByTeamName[normalizeName(assignee.name)] || (teamSlugs.has(asSlug) ? asSlug : undefined)
+            }
+            return teamSlugByPerson[normalizeName(assignee.name)]
+        },
+        [teamSlugByPerson, teamSlugByTeamName, teamSlugs]
     )
 
     const features = useMemo<RoadmapEarlyAccessFeature[]>(() => {
