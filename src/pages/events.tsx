@@ -15,6 +15,7 @@ import { IconPencil, IconTrash } from '@posthog/icons'
 import { useToast } from '../context/Toast'
 import EventsMap, { LAYER_EVENTS_UPCOMING, LAYER_EVENTS_PAST } from 'components/HogMap/EventsMap'
 import EventGraphic, { type EventGraphicProps, type EventGraphicSpeaker } from 'components/EventGraphic'
+import { eventGraphicStyleIndex } from 'constants/eventGraphicPalette'
 import MobileDrawer from 'components/MobileDrawer'
 import { useApp } from '../context/App'
 
@@ -36,7 +37,7 @@ export type Event = {
     speakers?: string[]
     speakerProfiles?: EventGraphicSpeaker[]
     speakerTopic?: string
-    partners?: Array<{ name: string; url?: string }>
+    partners?: Array<{ name: string; url?: string; logoUrl?: string }>
     attendees?: number
     vibeScore?: number
     photos?: { id: number; url: string }[]
@@ -66,7 +67,12 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
         avatarUrl: s.attributes?.avatar?.data?.attributes?.url || undefined,
         companyRole: s.attributes?.companyRole || undefined,
     }))
-    const partners = partnersData?.map((p: any) => ({ name: p.name, url: p.url || undefined }))
+    const partners = partnersData?.map((p: any) => ({
+        name: p.name,
+        url: p.url || undefined,
+        // Optional — partners without an uploaded logo fall back to their name set in Squeak
+        logoUrl: p.logo?.data?.attributes?.url || p.logo?.url || undefined,
+    }))
 
     return {
         ...strapiEvent.attributes,
@@ -83,10 +89,14 @@ export const transformStrapiEvent = (strapiEvent: any): Event => {
 const eventGraphicProps = (event: Event): EventGraphicProps => ({
     title: event.name,
     date: event.date,
+    startTime: event.startTime,
+    venue: event.location?.venue?.name,
     location: event.location?.label,
     online: event.online,
     speaker: event.speakerProfiles?.[0],
     partners: event.partners,
+    // Keyed to the event so the list card and the detail panel always agree
+    styleIndex: eventGraphicStyleIndex(`${event.id}-${event.name}`),
 })
 
 export const useEvents = (): { events: Event[]; refreshEvents: () => void; deleteEvent: (eventId: number) => void } => {
@@ -110,7 +120,9 @@ export const useEvents = (): { events: Event[]; refreshEvents: () => void; delet
                         speakers: {
                             populate: ['avatar'],
                         },
-                        partners: true,
+                        partners: {
+                            populate: ['logo'],
+                        },
                     },
                 },
                 { encodeValuesOnly: true }
