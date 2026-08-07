@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconBook, IconChevronLeft, IconChevronRight, IconList } from '@posthog/icons'
@@ -156,8 +157,18 @@ export default function BookReader({
     fontSizes,
 }: BookReaderProps): JSX.Element {
     const reducedMotion = useReducedMotion()
+    const posthog = usePostHog()
     const [openPanel, setOpenPanel] = useState<Panel>(null)
-    const toggle = (panel: Exclude<Panel, null>) => setOpenPanel((current) => (current === panel ? null : panel))
+    const toggle = (panel: Exclude<Panel, null>) =>
+        setOpenPanel((current) => {
+            const next = current === panel ? null : panel
+            if (next) {
+                posthog?.capture('pocket_guide_interaction', {
+                    kind: next === 'contents' ? 'contents_opened' : 'reading_settings_opened',
+                })
+            }
+            return next
+        })
 
     // Narrow containers: free-standing pills (the tabs sit in-flow above the page there).
     // Reading widths: handles attached to the page's left edge.
@@ -216,7 +227,14 @@ export default function BookReader({
                     <div className="absolute left-4 top-full mt-1 rounded-md border border-primary bg-primary p-3 shadow-xl @3xl:left-9 @3xl:top-0 @3xl:mt-0">
                         <div className="flex items-center justify-between gap-4">
                             <span className="text-xs font-semibold text-secondary">Font size</span>
-                            <BookControls fontSize={fontSize} sizes={fontSizes} onStep={onFontSize} />
+                            <BookControls
+                                fontSize={fontSize}
+                                sizes={fontSizes}
+                                onStep={(delta) => {
+                                    posthog?.capture('pocket_guide_interaction', { kind: 'font_size_step', delta })
+                                    onFontSize(delta)
+                                }}
+                            />
                         </div>
                     </div>
                 )}

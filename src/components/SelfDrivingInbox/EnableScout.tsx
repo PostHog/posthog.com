@@ -1,7 +1,9 @@
 import React from 'react'
+import usePostHog from '../../hooks/usePostHog'
 
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
 import Link from 'components/Link'
+
 import OSButton from 'components/OSButton'
 
 import { productSource } from './sources'
@@ -11,12 +13,26 @@ import { Requirement, RequirementLevel, ScoutSpec } from './types'
 
 /** Pinned shortcut to the enable block, which sits last because the page teaches top-to-bottom. */
 export function EnableScoutBar({ scout, templateTitle }: Pick<EnableScoutProps, 'scout' | 'templateTitle'>) {
+    const posthog = usePostHog()
     return (
         <div className="flex items-center gap-3 border-t border-primary bg-primary px-6 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-secondary">
                 <span className="font-mono text-[13px] text-primary">{scout?.name || templateTitle}</span>
             </span>
-            <OSButton asLink to={buildScoutDeepLink(scout)} external variant="primary" size="sm">
+            <OSButton
+                asLink
+                to={buildScoutDeepLink(scout)}
+                external
+                variant="primary"
+                size="sm"
+                onClick={() =>
+                    posthog?.capture('pocket_guide_interaction', {
+                        kind: 'add_scout_click',
+                        scout: scout?.name,
+                        placement: 'pinned_bar',
+                    })
+                }
+            >
                 Add this scout
             </OSButton>
         </div>
@@ -65,6 +81,7 @@ function RequirementLabel({ label }: { label: string }): JSX.Element {
  * Kept honest against posthog/posthog `scenes/inbox/components/config/scouts/ScoutRowCard.tsx`.
  */
 export default function EnableScout({ scout, requires, templateTitle }: EnableScoutProps): JSX.Element {
+    const posthog = usePostHog()
     const deepLink = buildScoutDeepLink(scout)
     const hasScout = Boolean(scout?.name && scout?.description)
     const selfDrivingCommand = buildSelfDrivingCommand()
@@ -122,7 +139,20 @@ export default function EnableScout({ scout, requires, templateTitle }: EnableSc
             )}
 
             <div className="flex flex-wrap items-center gap-2">
-                <OSButton asLink to={deepLink} external variant="primary" size="md">
+                <OSButton
+                    asLink
+                    to={deepLink}
+                    external
+                    variant="primary"
+                    size="md"
+                    onClick={() =>
+                        posthog?.capture('pocket_guide_interaction', {
+                            kind: 'add_scout_click',
+                            scout: scout?.name,
+                            placement: 'enable_section',
+                        })
+                    }
+                >
                     Add this scout
                 </OSButton>
                 <span className="text-xs text-secondary">

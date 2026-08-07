@@ -2,6 +2,8 @@ import React from 'react'
 
 import Link from 'components/Link'
 
+import usePostHog from '../../hooks/usePostHog'
+
 /**
  * Self-driving vocabulary, defined once so no template carries the 101. Definitions are quoted
  * from the docs page that owns each concept, so this can't drift into a competing source.
@@ -61,6 +63,7 @@ interface TermProps {
 /** First mention only – repeated, the dotted underlines stop reading as helpful. */
 export default function Term({ name, children, className = '' }: TermProps): JSX.Element {
     const definition = TERMS[name]
+    const posthog = usePostHog()
 
     // Fail soft on unknown names – an author typo prints plain text instead of crashing the page.
     if (!definition) {
@@ -71,6 +74,7 @@ export default function Term({ name, children, className = '' }: TermProps): JSX
         <Link
             to={definition.slug}
             state={{ newWindow: true }}
+            onMouseEnter={() => posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })}
             // "Read the docs", not "Continue reading": the reader IS reading – this link leaves
             // the pocket guide for the docs page that owns the term.
             preview={{ ...definition, ctaLabel: 'Read the docs' }}
