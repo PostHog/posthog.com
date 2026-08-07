@@ -65,7 +65,7 @@ There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, w
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
-The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Vitally and the account stays CSM-only. A documented "no" is still useful — it stops the next person re-litigating the same idea in 3 months.
+The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Vitally and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
 We track coverage in Vitally with the existing segments: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both segments has both.
 
@@ -73,11 +73,11 @@ We track coverage in Vitally with the existing segments: `CSM Managed` for the b
 
 ## Removing a TAM from an account
 
-A TAM comes off an account when the opportunity that justified them is done. In [journey](/handbook/growth/sales/customer-journey) terms, the account moves to Steady state and the overlay is removed. The CSM stays, so the customer keeps their point of contact throughout.
+A TAM stays on an account through expansion until it's fully saturated, not just until the first opportunity closes. As long as there's a realistic next play to work (another cross-sell, a new team to land, an annual conversion), the TAM keeps the account and works it. They come off once expansion is genuinely exhausted. In [journey](/handbook/growth/sales/customer-journey) terms, the account moves to Steady state and the overlay is removed. The CSM stays, so the customer keeps their point of contact throughout.
 
 Removal happens when one of these is true:
 
-- The opp closed (won or lost) and there are no further qualified opportunities
+- The account is saturated: the opportunity being worked closed (won or lost) and no further qualified opportunities remain
 - The opportunity evaporated (champion left, budget cut, roadmap changed) and the [saturation checks](/handbook/growth/sales/evaluating-growth-potential#the-saturation-checks) now hold
 - The account dropped below $20k ARR with no documented plan to recover it this quarter
 - The account is on the YC plan. YC accounts are unowned while on the promo (onboarding picks them up at roll-off). If one shows a genuinely qualified opportunity, flag it like any other account.
