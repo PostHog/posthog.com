@@ -608,7 +608,10 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
     try {
         const changelogQuery = (await graphql(`
             query {
-                allRoadmap(filter: { complete: { eq: true }, date: { ne: null } }, sort: { fields: date, order: DESC }) {
+                allRoadmap(
+                    filter: { complete: { eq: true }, date: { ne: null } }
+                    sort: { fields: date, order: DESC }
+                ) {
                     nodes {
                         strapiID
                         title

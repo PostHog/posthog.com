@@ -1,5 +1,13 @@
 The recommended way to set person properties is to send a `$set` event with a `$set` property. For SDKs that provide helper methods (such as `posthog.setPersonProperties`), we recommend using them, as they handle important side effects like switching to identified mode.
 
+<CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them.
+
+To query the values you set, use [person properties](/docs/product-analytics/person-properties) (`person.properties.your_property` in [SQL](/docs/sql)) instead.
+
+</CalloutBox>
+
 <MultiLanguage selector="tabs">
 
 ```js-web
