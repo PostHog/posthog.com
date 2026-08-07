@@ -5,15 +5,23 @@ import { DEFAULT_PRICING_VARIANT, resolvePricingVariant } from './variants'
 
 export const PRICING_PAGE_FLAG = 'pricing-page-redesign'
 
-function VariantSlot(): JSX.Element {
+function VariantSlot({ flagsReady }: { flagsReady: boolean }): JSX.Element {
     const posthog = usePostHog()
-    const { Component } = resolvePricingVariant(posthog?.getFeatureFlag?.(PRICING_PAGE_FLAG)) ?? DEFAULT_PRICING_VARIANT
+    // Before flags land we can't read the flag without risking a hydration mismatch against the
+    // server-rendered control, so hold the default until RenderInClient says it's safe.
+    const { Component } = flagsReady
+        ? resolvePricingVariant(posthog?.getFeatureFlag?.(PRICING_PAGE_FLAG)) ?? DEFAULT_PRICING_VARIANT
+        : DEFAULT_PRICING_VARIANT
 
     return <Component />
 }
 
 export default function PricingPageExperiment(): JSX.Element {
-    return <RenderInClient placeholder={<DEFAULT_PRICING_VARIANT.Component />} render={() => <VariantSlot />} />
+    // Both slots render VariantSlot so the element type at this position never changes. Swapping
+    // types here would unmount and remount the whole page when flags arrive, throwing away scroll
+    // position and calculator/plan state — including for the ~third of visitors on the control
+    // arm, whose page doesn't change at all.
+    return <RenderInClient placeholder={<VariantSlot flagsReady={false} />} render={() => <VariantSlot flagsReady />} />
 }
 
 export { PRICING_VARIANTS, DEFAULT_PRICING_VARIANT, resolvePricingVariant } from './variants'

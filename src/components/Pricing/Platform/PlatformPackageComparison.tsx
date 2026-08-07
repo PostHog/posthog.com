@@ -156,7 +156,7 @@ export function PlatformFeatureTable(): JSX.Element {
                 ),
             },
             ...packages.map((addon: any) => {
-                const feature = addon.plans[0].features.find((f: any) => f.name === featureName)
+                const feature = addon.plans[0].features?.find((f: any) => f.name === featureName)
                 return {
                     content: feature ? (
                         <div className="flex flex-col items-center justify-center min-h-[24px] gap-y-1">
