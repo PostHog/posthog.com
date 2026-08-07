@@ -21,19 +21,7 @@ export default function PricingPageExperiment(): JSX.Element {
     // types here would unmount and remount the whole page when flags arrive, throwing away scroll
     // position and calculator/plan state — including for the ~third of visitors on the control
     // arm, whose page doesn't change at all.
-    //
-    // hidePlaceholder keeps control in the DOM but unpainted until the flag resolves, so the two
-    // redesign arms don't flash control first. Everyone pays for that: the page is blank until
-    // flags land, control isn't an LCP candidate while hidden, and visitors whose flags never
-    // arrive (ad blockers) wait out RenderInClient's timeout before control appears. See the
-    // "Why control is the placeholder" section of README.md.
-    return (
-        <RenderInClient
-            placeholder={<VariantSlot flagsReady={false} />}
-            hidePlaceholder
-            render={() => <VariantSlot flagsReady />}
-        />
-    )
+    return <RenderInClient placeholder={<VariantSlot flagsReady={false} />} render={() => <VariantSlot flagsReady />} />
 }
 
 export { PRICING_VARIANTS, DEFAULT_PRICING_VARIANT, resolvePricingVariant } from './variants'
