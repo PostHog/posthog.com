@@ -63,8 +63,6 @@ To surface per-tenant analytics inside your product, query PostHog server-side a
 
 You're handling data on behalf of your customers, so capture as little of their users' PII as you can, then control who can reach the rest. [Privacy controls](/docs/product-analytics/privacy) cover redaction before capture, and [data storage controls](/docs/privacy/data-storage) cover [transformations](/docs/cdp/transformations) that hash PII, per-person [deletion](/docs/privacy/data-storage#right-to-be-forgotten) for right to be forgotten requests, and access control.
 
-One choice is worth making early. [PostHog Cloud EU](/eu) stores data in Frankfurt, which matters if your tenants have [GDPR](/docs/privacy/gdpr-compliance) requirements. Moving regions later isn't self-serve, because a PostHog engineer has to run the migration for you.
-
 ## Tenant metadata from your database
 
 Attributes like contract value, account owner, or billing region often live in your billing system rather than your app, which makes them awkward to send as group properties.
