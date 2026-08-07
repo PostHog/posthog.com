@@ -72,7 +72,7 @@ exports.onPreInit = async function ({ reporter }, options = {}) {
         cwd = process.cwd(),
     } = options
 
-    const token = process.env.GITHUB_API_KEY || process.env.GITHUB_TOKEN
+    const token = process.env.GITHUB_API_KEY
     if (!token) {
         reporter.warn('[git-metadata] no GitHub token, page dates and contributors will be omitted')
         return
