@@ -1,8 +1,10 @@
 # Pricing page redesign
 
-Components for the redesigned pricing page, live at **`/pricing/redesign`** (`src/pages/pricing/redesign.tsx`).
+Components for the redesigned pricing page, served on **`/pricing`** as two of the three arms of the `pricing-page-redesign` experiment. The page that assembles them is `Pricing/Experiment/RedesignPage`; see `Pricing/Experiment/README.md` for how a variant gets chosen and how to preview one.
 
-`/pricing` still serves the previous page (`PricingExperiment` and friends). The two are deliberately kept as separate routes so they can be run against each other, and share only `pages/pricing/philosophy`, `Pricing/FAQs`, and `Test/Sections` — everything in this folder belongs to this variant alone, so editing it can't move `/pricing`.
+The previous page (`PricingExperiment` and friends) is the experiment's control, and lives in `Pricing/Experiment/ControlPage`. The two share only `pages/pricing/philosophy`, `Pricing/FAQs`, and `Test/Sections` — everything in this folder belongs to the redesign alone, so editing it can't move the control.
+
+These components used to have their own route at `/pricing/redesign`. It was removed when the experiment went in: the redesign now only ever renders through the flag.
 
 ## Why
 
@@ -36,10 +38,11 @@ Kept and reused: `Test/FreeTier`, `Test/Calculator`, `FAQs`, and `pages/pricing/
 2. `FreeTierTicker` — the free allowances, auto-scrolling in one row, with `Surfaces` as a one-line footnote under it
 3. `PricingJourney` — the two billing stages, as a journey
 4. `CustomerLogos`
-5. `MoreOptions` — three cards, then `CalculatorReveal` as a quiet footnote in the same section
-6. Philosophy note
-7. FAQ
-8. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
+5. `MoreOptions` — three cards, plus `CalculatorReveal` as a footnote in the `minimized` arm
+6. `CalculatorSection` — the pricing calculator in its own section, in the `section` arm only
+7. Philosophy note
+8. FAQ
+9. `Home/ShamelessCTA` — the homepage's boxed-software CTA, reused verbatim
 
 `MoreOptions` comes before the philosophy note, not after: the note ends on a signup CTA, and following that with three "actually, maybe you need something else" cards undoes it. The note is the last word on the page before the FAQ.
 
@@ -119,40 +122,42 @@ Unlike `components/Home/Customers`, there's no shuffle button or breakdown label
 
 ### `pages/pricing/philosophy`
 
-James's pricing note is shared by `/pricing`, `/pricing/redesign`, and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
+James's pricing note is shared by all three experiment arms and the standalone `/pricing/philosophy` route. His photo, name, and co-founder title lead the card so the attribution is clear before the note begins.
 
 The copy is intentionally limited to four commitments: no loss leaders, cheapest-at-scale pricing, financial stability, and an MIT-licensed open source option. The old biographical sign-off and secondary FAQ/contact paragraph were removed so the note ends on its signup CTA.
 
 **This is the one piece both variants render**, so a copy edit here changes `/pricing` too. That's intentional — the note is a company position, not a design — but it does mean the philosophy card isn't a fair thing to vary in a test. If it needs to differ per variant, split it into a `Redesign/Philosophy` first.
 
-### `CalculatorReveal`
+### `CalculatorSection` and `CalculatorReveal`
 
-Wraps `Test/Calculator` so the full estimator is **hidden until asked for**, and kept as the quietest thing on the page: one sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator below it, and swaps to `Hide the calculator` once open.
+Two treatments of the same calculator, and **the only difference between the experiment's two redesign arms.** `RedesignPage`'s `calculator` prop picks one:
 
-**It lives inside the `more-options` section, not as its own.** Rendered after the three cards in `pages/pricing/redesign.tsx`, as a footnote under them. That keeps the cards and the calculator under one section break before the FAQ, and means this component has no `SectionLayout` of its own — just a `div` with `id="calculator"` and `mt-6`. The section heading ("Platform features, volume discounts, and onboarding help") doesn't name the calculator; footnotes don't need to be in the title.
+| Prop value  | Component           | Arm                             |
+| ----------- | ------------------- | ------------------------------- |
+| `section`   | `CalculatorSection` | `redesign`                      |
+| `minimized` | `CalculatorReveal`  | `redesign-calculator-minimized` |
 
-**The understatement is the whole point, and it should survive future edits.** An estimator muddies this page's frame: it turns "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So this deliberately has no card, no fill, no border, and no heading. Earlier versions gave it a tinted, bordered card with an `<h2>` and a CTA-styled button, which made it a visual peer of the three `MoreOptions` cards — a fourth card in that family, which is exactly the prominence it shouldn't have. Other earlier versions gave it its own section and then faked attachment with a negative margin; putting it inside `more-options` makes that relationship structural.
+Keep everything else identical between the two — they're a two-arm test of calculator prominence, so any other difference is a confound.
 
-For the same reason, **nothing earlier in the page points at it.** `PricingJourney` step 2 used to link "at usage-based rates" down to `#calculator`; that link is gone and the detail is plain text like its three siblings.
+**`CalculatorReveal` is the original design, and the hypothesis the third arm exists to test.** One sentence — `Most companies stay on the free tier. Calculate what you'd pay past it` — where the second half is a text link that expands the estimator in place and swaps to `Hide the calculator` once open. The argument: an estimator muddies this page's frame, turning "this is free for you" into "work out your bill," which is the wrong question for the ~97% who never pay. So it has no card, no fill, no border, and no heading, and it sits as a footnote *inside* the `more-options` section rather than as a section of its own. It owns `#calculator` in this mode, and the calculator only mounts once opened, so it costs everyone else nothing.
 
-**Two ways in, both opt-in:**
+It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden` — that would break the calculator's `sticky` sidebar and clip its tooltips. Three details are load-bearing:
 
-1. The text link
-2. `?calculator` in the URL, which renders it already open and scrolls to `#calculator`
+- **The panel animates `height: 0 → auto` with `initial={false}`** (framer-motion, same approach as `Home/Accordion`). `initial={false}` is what makes a `?calculator` deep link render open with no animation instead of unfurling on load. `useReducedMotion` drops the duration to zero.
+- **`overflow` returns to `visible` once the open animation finishes**, because a permanent `overflow-hidden` breaks the sticky sidebar and clips tooltips. The same `settled` flag applies `invisible` when fully collapsed, keeping the mounted calculator out of the tab order.
+- **The calculator stays mounted after the first open**, so volumes someone dialled in survive a hide/show.
 
-**The sentence stays put on open, rather than being replaced by the calculator.** Expanding in place keeps the toggle where your cursor already is, and makes hiding it as discoverable as opening it.
+Expanding fires `pricing_calculator_expanded`. **That event only exists in this arm** — the other two have nothing to expand — so it is not a cross-arm engagement metric. Use `pricing_calculator_interacted` for comparisons; see `Pricing/Experiment/README.md`.
 
-It's deliberately *not* built on `RadixUI/Accordion`, whose `AccordionContent` hardcodes `overflow-hidden` — that would break the calculator's `sticky` sidebar and clip its tooltips.
+**`CalculatorSection` is the plain treatment:** always visible, under a `Pricing calculator` heading like every other section on the page. The heading and the `#calculator` anchor live in `RedesignPage`, not in the component, so they match the sibling sections exactly.
 
-**It renders `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops its `<h2>Pricing calculator</h2>` — a bordered, section-weight heading inside a one-line footnote reintroduces exactly the prominence this component exists to avoid — and `id=""` stops `#calculator` existing twice in the DOM once the panel is open, since this component's wrapper owns that anchor.
+**Nothing earlier in the page points at either.** `PricingJourney` step 2 used to link "at usage-based rates" down to `#calculator`; that link is gone and the detail is plain text like its three siblings. Worth keeping that way — the page has one signup CTA, and internal jump links compete with it.
+
+`?calculator` in the URL scrolls to the calculator in both modes, and opens it in the minimized one, so an estimate can be shared as a link.
+
+**Both render `Test/Calculator` with `hideHeader` and `id=""`.** `hideHeader` drops the calculator's own `<h2>Pricing calculator</h2>`, whose bordered, section-weight styling doesn't match this page; `id=""` stops `#calculator` existing twice in the DOM, since the page (or the reveal wrapper) owns that anchor.
 
 Its `SectionLayout` margins and `@5xl:px-4` still need neutralizing, and that's done locally with `[&>section]:my-0 [&>section]:px-0` rather than a third prop. A `className` prop wouldn't work: `SectionLayout` appends caller classes after its own, and `my-0` loses to `mb-12` in Tailwind's cascade no matter the order in the attribute, so it takes a child selector to win on specificity.
-
-Three implementation details are load-bearing:
-
-- **The panel animates `height: 0 → auto` with `initial={false}`** (framer-motion, the same approach as `Home/Accordion`). `initial={false}` is what makes a `?calculator` deep link render open with no animation instead of unfurling on load. `useReducedMotion` drops the duration to zero.
-- **`overflow` returns to `visible` once the open animation finishes.** A permanent `overflow-hidden` would break the calculator's `sticky top-4` sidebar and clip its tooltips. The same `settled` flag applies `invisible` when fully collapsed, which keeps the mounted calculator out of the tab order. It's set false by the toggle and true by `onAnimationComplete`, which is safe because the deep-link path never animates and never leaves it false.
-- **The calculator stays mounted after the first open.** Hiding it only collapses the panel, so volumes someone dialled in survive a hide/show.
 
 ### `MoreOptions`
 
@@ -166,7 +171,7 @@ These replace the cut Enterprise plan column. Styled as low-key cards rather tha
 
 **"See what's included" expands in place instead of navigating.** "What's in a platform package" is a question you ask *while* comparing these three cards, so answering it on a separate page costs you your place — you have to come back to finish comparing. The other two cards are genuine destinations and still open as pages.
 
-**The panel is full width below the row, not inside the card.** The feature table needs a label column plus one column per package, which won't fit in a third of the row; and growing one card would leave the other two standing short beside it. Opening it pushes the `CalculatorReveal` footnote down, which is fine — the footnote isn't anchored to anything.
+**The panel is full width below the row, not inside the card.** The feature table needs a label column plus one column per package, which won't fit in a third of the row; and growing one card would leave the other two standing short beside it. Opening it pushes the calculator section down, which is fine — nothing below is anchored to it.
 
 **Two things tie the panel to its card,** because full width below a grid otherwise reads as a new section:
 

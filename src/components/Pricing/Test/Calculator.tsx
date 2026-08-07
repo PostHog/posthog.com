@@ -17,6 +17,11 @@ interface DiscountsProps {
     children?: React.ReactNode
 }
 
+// The sidebar sits inside a `not-prose` section, so prose's link styling doesn't reach it and
+// `Link` ships no styles of its own — inline links read as plain text without this. Matches the
+// link treatment used elsewhere on the pricing page.
+const sidebarLinkClasses = 'font-semibold text-red dark:text-yellow underline'
+
 interface CalculatorProps {
     SidebarList: React.FC<SidebarListProps>
     SidebarListItem: React.FC<SidebarListItemProps>
@@ -179,12 +184,17 @@ export const Calculator = ({
                             </SidebarListItem>
                             <SidebarListItem>
                                 If something stupid happens and you get an unexpected bill (like if{' '}
-                                <Link href="/side-project-insurance">your side project unexpectedly goes viral</Link> or
-                                you're unhappy), we'll pretty much always refund it!
+                                <Link href="/side-project-insurance" className={sidebarLinkClasses}>
+                                    your side project unexpectedly goes viral
+                                </Link>{' '}
+                                or you're unhappy), we'll pretty much always refund it!
                             </SidebarListItem>
                             <SidebarListItem>
                                 We've also written{' '}
-                                <Link href="/docs/billing/estimating-usage-costs">this handy guide</Link> to help!
+                                <Link href="/docs/billing/estimating-usage-costs" className={sidebarLinkClasses}>
+                                    this handy guide
+                                </Link>{' '}
+                                to help!
                             </SidebarListItem>
                         </SidebarList>
                     </div>

@@ -4,11 +4,14 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
 import { scrollToElement } from 'components/ScrollToElement'
+import usePostHog from 'hooks/usePostHog'
 
 const PANEL_ID = 'calculator-panel'
 
 /**
- * Keeps the pricing calculator collapsed until someone asks for it.
+ * Keeps the pricing calculator collapsed until someone asks for it — the treatment used by the
+ * `redesign-calculator-minimized` variant. `CalculatorSection` is the always-visible
+ * alternative that plain `redesign` uses.
  *
  * Most visitors to this page are deciding whether to try PostHog for free, and an estimator
  * muddies that: it reframes the page from "this is free for you" to "work out your bill".
@@ -19,9 +22,14 @@ const PANEL_ID = 'calculator-panel'
  *
  * `?calculator` in the URL renders it already open and scrolls to it, so an estimate can be
  * shared as a link. Everything else goes through the link.
+ *
+ * Expanding fires `pricing_calculator_expanded`, which only exists in this variant. Don't
+ * compare it against the other arms — use `pricing_calculator_interacted` for that, which
+ * fires on the controls themselves and so means the same thing everywhere.
  */
 export default function CalculatorReveal(): JSX.Element {
     const { search } = useLocation()
+    const posthog = usePostHog()
     const isDeepLinked = new URLSearchParams(search).has('calculator')
     const [open, setOpen] = useState(isDeepLinked)
     // The calculator stays mounted after the first open so hiding it doesn't throw away
@@ -38,6 +46,7 @@ export default function CalculatorReveal(): JSX.Element {
         setOpen(next)
         if (next) {
             setHasOpened(true)
+            posthog?.capture('pricing_calculator_expanded', { trigger: 'link' })
         }
         setSettled(false)
     }

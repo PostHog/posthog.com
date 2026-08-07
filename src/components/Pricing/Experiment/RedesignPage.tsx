@@ -8,27 +8,43 @@ import Hero from 'components/Pricing/Redesign/Hero'
 import FreeTierTicker from 'components/Pricing/Redesign/FreeTierTicker'
 import CustomerLogos from 'components/Pricing/Redesign/CustomerLogos'
 import MoreOptions from 'components/Pricing/Redesign/MoreOptions'
+import CalculatorSection from 'components/Pricing/Redesign/CalculatorSection'
 import CalculatorReveal from 'components/Pricing/Redesign/CalculatorReveal'
-import Philosophy from './philosophy'
+// Relative, not `pages/...`: webpack has no `pages` alias (see gatsby-node.ts), so an absolute
+// path here type-checks and then fails to build.
+import Philosophy from '../../../pages/pricing/philosophy'
 import PricingJourney from 'components/Pricing/Redesign/PricingJourney'
 import Surfaces from 'components/Pricing/Redesign/Surfaces'
 import ShamelessCTA from 'components/Home/ShamelessCTA'
 
+export type CalculatorTreatment = 'section' | 'minimized'
+
+interface RedesignPageProps {
+    /**
+     * How the pricing calculator is presented — the only difference between the two redesign
+     * variants:
+     *
+     * - `section` — its own section with a "Pricing calculator" heading, always visible.
+     * - `minimized` — a one-line footnote under `MoreOptions` that expands on click.
+     */
+    calculator?: CalculatorTreatment
+}
+
 /**
- * Redesigned pricing page — variant route, live at /pricing/redesign.
+ * The redesigned pricing page, shared by two of the experiment's three variants.
  *
- * Kept as its own route rather than replacing `/pricing` so the two can be run
- * against each other. Nothing here is shared with `/pricing` except
- * `pages/pricing/philosophy`, `Pricing/FAQs`, and `Test/Sections`, so the
- * variants can be edited independently.
+ * See components/Pricing/Redesign/README.md for what was cut from the control and why. The
+ * short version: two audiences (people trying PostHog out, and people sizing it up for scale),
+ * and one page that answers each in order — free tier limits first, then what a card changes,
+ * then escape hatches and a human.
  *
- * See components/Pricing/Redesign/README.md for what was cut from /pricing and
- * why. The short version: two audiences (people trying PostHog out, and people
- * sizing it up for scale), and one page that answers each in order — free tier
- * limits first, then what a card changes, then escape hatches (with a quiet
- * calculator footnote) and a human.
+ * The `calculator` prop is what splits `redesign` from `redesign-calculator-minimized`. Keep
+ * everything else identical between them: they're a two-arm test of calculator prominence, and
+ * any other difference is confounding. See `Experiment/README.md`.
  */
-export default function PricingRedesign(): JSX.Element {
+export default function RedesignPage({ calculator = 'section' }: RedesignPageProps): JSX.Element {
+    const isMinimized = calculator === 'minimized'
+
     return (
         <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
             <SEO
@@ -69,8 +85,19 @@ export default function PricingRedesign(): JSX.Element {
                     <h2 className="text-2xl mb-0">Platform features, volume discounts, and onboarding help</h2>
                 </SectionHeader>
                 <MoreOptions />
-                <CalculatorReveal />
+                {/* The minimized treatment is a footnote *inside* this section, so the cards and the
+                    calculator share one section break. It owns `#calculator` itself in that mode. */}
+                {isMinimized && <CalculatorReveal />}
             </SectionLayout>
+
+            {!isMinimized && (
+                <SectionLayout id="calculator" className="not-prose">
+                    <SectionHeader>
+                        <h2 className="text-2xl mb-0">Pricing calculator</h2>
+                    </SectionHeader>
+                    <CalculatorSection />
+                </SectionLayout>
+            )}
 
             <Philosophy />
 
@@ -94,10 +121,6 @@ export default function PricingRedesign(): JSX.Element {
                 <SectionHeader>
                     <h2 className="text-2xl mb-0">Shameless CTA</h2>
                 </SectionHeader>
-                {/* The "haha bizzniss" hedgehog is positioned against the CTA card and pokes ~50px
-                    above where this section's rule lands, so the border used to cut through it.
-                    Padding the whole block down moves the doodle with it and clears the rule by
-                    about 10px. Tuned by eye — if the artwork is ever swapped, re-check it. */}
                 <div className="pt-0 md:pt-16">
                     <ShamelessCTA />
                 </div>
