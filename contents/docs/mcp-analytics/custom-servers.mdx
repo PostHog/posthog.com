@@ -67,10 +67,10 @@ posthog.capture({
 
 | Field | Maps to | Notes |
 |---|---|---|
-| `distinctId` | `distinct_id` | Supplying it enables person processing so `setProperties` lands on a real person. Omit it for anonymous traffic — events are sent with `$process_person_profile: false`. |
+| `distinctId` | `distinct_id` | Supplying it enables person processing so `$set` lands on a real person. Omit it for anonymous traffic — events are sent with `$process_person_profile: false`. |
 | `sessionId` | `$session_id` | Omitted from the event entirely when you don't pass one (so stateless captures don't bucket into a non-existent [Session Replay](/docs/session-replay) session). |
 | `groups` | `$groups` | `{ groupType: groupKey }`, stamped on the event so you never hand-write the `$groups` key. |
-| `setProperties` | Person properties | Set on the person profile (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. Not stored on the event. |
+| `setProperties` | `$set` | Person properties (`{ name, email, plan }`), same as the `properties` you'd pass to `identify`. Updates the person profile; not retained on the stored event, so query them as [person properties](/docs/product-analytics/person-properties). |
 | `properties` | spread verbatim | Extra event properties, sitting alongside the `$mcp_*` keys. Values must be JSON-serializable. |
 | `timestamp` | event time | Defaults to the time of the capture call. |
 
