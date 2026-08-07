@@ -225,7 +225,7 @@ const modelingSkills: ModelingSkill[] = [
     {
         name: 'modeling-conversion-metrics',
         builds: 'Funnel and step conversion rates, drop-off, and time-to-convert.',
-        rule: 'Pin the conversion window first. No window, no funnel. And overall conversion is not step-to-step conversion.',
+        rule: 'A conversion rate means nothing until you pin the time box. Signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
     },
     {
         name: 'modeling-activation-metrics',
