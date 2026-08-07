@@ -195,8 +195,13 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/session-replay/pricing:ext(\\.md)?",
-            "destination": "/docs/session-replay:ext?",
+            "source": "/docs/session-replay/pricing",
+            "destination": "/session-replay/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/pricing.md",
+            "destination": "/session-replay/pricing",
             "statusCode": 301
         },
         {
@@ -205,8 +210,13 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/data/cookieless-tracking:ext(\\.md)?",
-            "destination": "/docs/privacy/data-collection:ext?",
+            "source": "/docs/data/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
             "statusCode": 301
         },
         {
@@ -230,13 +240,23 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/privacy/cookieless-tracking:ext(\\.md)?",
-            "destination": "/docs/privacy/data-collection:ext?",
+            "source": "/docs/privacy/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
             "statusCode": 301
         },
         {
-            "source": "/docs/product-analytics/cookieless-tracking:ext(\\.md)?",
-            "destination": "/docs/privacy/data-collection:ext?",
+            "source": "/docs/privacy/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/cookieless-tracking",
+            "destination": "/tutorials/cookieless-tracking",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/cookieless-tracking.md",
+            "destination": "/tutorials/cookieless-tracking",
             "statusCode": 301
         },
         {
@@ -366,7 +386,7 @@
         },
         {
             "source": "/sitemap.xml",
-            "destination": "/sitemap/sitemap-index.xml",
+            "destination": "/sitemap/sitemap-0.xml",
             "statusCode": 301
         },
         {
