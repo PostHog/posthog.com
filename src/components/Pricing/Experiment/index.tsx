@@ -13,7 +13,16 @@ function VariantSlot(): JSX.Element {
 }
 
 export default function PricingPageExperiment(): JSX.Element {
-    return <RenderInClient placeholder={<DEFAULT_PRICING_VARIANT.Component />} render={() => <VariantSlot />} />
+    return (
+        <RenderInClient
+            placeholder={
+                <div className="invisible">
+                    <DEFAULT_PRICING_VARIANT.Component />
+                </div>
+            }
+            render={() => <VariantSlot />}
+        />
+    )
 }
 
 export { PRICING_VARIANTS, DEFAULT_PRICING_VARIANT, resolvePricingVariant } from './variants'
