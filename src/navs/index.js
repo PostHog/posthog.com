@@ -3718,7 +3718,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'AI Observability',
-                            url: '/docs/ai-observability',
+                            url: 'https://posthog.com/docs/ai-observability',
+                            external: true,
                         },
                         {
                             name: 'Markdown and llms.txt',
