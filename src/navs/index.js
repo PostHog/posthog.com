@@ -1431,7 +1431,7 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Customer success overview',
+                        name: 'Overview',
                         url: '/handbook/cs-and-onboarding/customer-success',
                     },
                     {
@@ -1442,26 +1442,26 @@ export const handbookSidebar = [
                         name: 'Onboarding',
                     },
                     {
-                        name: 'New starter onboarding',
+                        name: 'New starters',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding',
                     },
                     {
-                        name: 'Onboarding a new CSM (team leads)',
+                        name: 'Team leads',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding-team-leads',
                     },
                     {
                         name: 'Working with customers',
                     },
                     {
-                        name: 'Getting started with newly assigned customers',
+                        name: 'Newly assigned customers',
                         url: '/handbook/cs-and-onboarding/getting-started-with-customers',
                     },
                     {
-                        name: 'Lifecycle of CSM engagement',
+                        name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
                     },
                     {
-                        name: 'Engaging unengaged customers',
+                        name: 'Unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
                     {
@@ -1472,7 +1472,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
-                        name: 'Using AI to analyze customer issues',
+                        name: 'Analyzing customer issues',
                         url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
                     },
                 ],
