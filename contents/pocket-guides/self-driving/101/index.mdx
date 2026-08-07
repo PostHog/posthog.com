@@ -19,23 +19,23 @@ bookOrder: 1
 # Self-driving 101
 
 Self-driving is PostHog using your product data as context to proactively improve your product. Here's how it works:
-- <Term name="scout">Scouts</Term> is an agent that watches your data on a schedule
-- <Term name="report">Reports</Term> are created when something needs your attention
-- High confidence, actionable reports arrive with a pull request for you to review.
+- <Term name="scout">Scouts</Term> are agents that watch your data on a schedule.
+- <Term name="report">Reports</Term> are created when something needs your attention.
+- High-confidence, actionable reports arrive with a pull request for you to review.
 
 You're in control to review and merge everything. Nothing ships without you.
 
 ## The loop
 
-A <Term name="signal" /> is something in your product data that's worth knowing supported by evidence attached. Related signals group into a report for you to review. An agent writes the fix as a pull request, and PostHog measures whether it worked.
+The whole system is <SeeFig n={1} />. A <Term name="signal" /> is something in your product data that's worth knowing, with its evidence attached. Related signals group into a report for you to review. An agent writes the fix as a pull request, and PostHog measures whether it worked.
 
 Here are some examples of signals:
 - New exceptions captured in Error Tracking.
 - Drops in core activation metrics like signup, conversion, or retention rate.
 - Replay vision that watches replays for hesitation, confusion, a user's attention.
-- External signal source like Zendesk, Linear, and Sentry
+- External signal sources like Zendesk, Linear, and Sentry.
 
-<Term name="report">Reports</Term> created from signals land in your <Term name="inbox" /> have an anatomy like this:
+<Term name="report">Reports</Term> created from signals land in your <Term name="inbox" />. Each one has an anatomy like this:
 
 | Content | Description |
 | --- | --- |
@@ -53,9 +53,9 @@ Once the PR merges, the change generates new signals, so your product keeps impr
 Each time a scout runs, it ends one of two ways: it writes a report, or it writes nothing.
 
 A scout only writes a report when it spots a change that needs your attention:
-- Your AI bill jumped
-- A core activation metric dipped
-- A new exception captured in production
+- Your AI bill jumped.
+- A core activation metric dipped.
+- A new exception was captured in production.
 
 It stays quiet when everything looks healthy, including when a trend indicates growth or noise.
 
