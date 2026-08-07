@@ -193,12 +193,6 @@ const heroBullets: { Icon: React.ComponentType<{ className?: string }>; color: s
     { Icon: IconGraduationCap, color: 'text-blue', text: 'Invites to PostHog Startup School' },
 ]
 
-const eligibilityBullets: string[] = [
-    "You're enrolled at a university or college",
-    'You have a school-issued email address, like a .edu, .ac.uk, or other university-associated domain',
-    "You're building something you can tell us about",
-]
-
 export default function StudentProgram(): JSX.Element {
     return (
         <>
@@ -262,42 +256,19 @@ export default function StudentProgram(): JSX.Element {
                                     You'll need a PostHog account and your school email
                                 </p>
                             </div>
-
-                            <div className="hidden w-80 shrink-0 select-none @2xl:block">
-                                {/* Light plate so the artwork's dark laptop screen doesn't blend into the navy hero */}
-                                <div className="rotate-1 rounded-md bg-white p-4 pb-2 shadow-xl">
-                                    <img
-                                        src="/images/students/student-laptop-hog.png"
-                                        alt="A hedgehog working at a laptop"
-                                        className="pointer-events-none h-auto w-full"
-                                    />
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div className="mx-auto max-w-3xl px-4 py-8 @3xl:px-8">
-                        <h2>Who is this for?</h2>
+                        <h2>What even is this?</h2>
                         <HedgehogCodingGroup
                             className="pointer-events-none float-right mb-2 ml-6 hidden h-auto w-[180px] @lg:block @2xl:w-[220px]"
                             title="A group of hedgehogs coding together"
                         />
                         <p>
-                            Students shipping something people use: a product, a startup, a research project, or a class
-                            project that found real users. It's a program for builders, not a discount for having a
-                            school email.
+                            This is a program for students who want to build things, whether it's a class project, a
+                            startup, or a community. All you need to do is apply with your school-issued email address!
                         </p>
-                        <ul className="list-none space-y-1.5 pl-0">
-                            {eligibilityBullets.map((text) => (
-                                <li key={text} className="relative pl-7">
-                                    <IconCheck className="absolute left-0 top-1 size-5 text-green" />
-                                    {text}
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="clear-both" />
-
-                        <h2>How it works</h2>
                         <ol>
                             <li>
                                 <Link to="https://app.posthog.com/signup" external className="underline font-semibold">
@@ -312,6 +283,7 @@ export default function StudentProgram(): JSX.Element {
                             <li>Apply with your school email and tell us what you're building</li>
                             <li>Use your credits on any PostHog product for 12 months</li>
                         </ol>
+                        <div className="clear-both" />
 
                         {/* Highlighted callout, same treatment as the /slack page's yellow callouts */}
                         <div className="not-prose my-8 rounded-md border border-yellow bg-yellow/10 p-6">
