@@ -782,19 +782,12 @@ export function useMenuData(): MenuType[] {
         const mobileItems: MenuItemType[] = []
 
         mainNavItems.forEach((menu) => {
-            if (menu.link) {
+            const link = menu.link || menu.mobileLink
+            if (link) {
                 mobileItems.push({
                     type: 'item' as const,
                     label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
-                    link: menu.link,
-                })
-            }
-            // If menu has mobileLink, convert to simple item
-            else if (menu.mobileLink) {
-                mobileItems.push({
-                    type: 'item' as const,
-                    label: typeof menu.trigger === 'string' ? menu.trigger : 'Menu',
-                    link: menu.mobileLink,
+                    link,
                 })
             } else {
                 // Process items and filter out those with mobileDestination === false

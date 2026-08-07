@@ -364,11 +364,12 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
             onValueChange={(value) => setOpenMenuIndex(value ? Number(value) : null)}
         >
             {processedMenus.map((menu, menuIndex) => {
-                if (menu.link) {
+                const triggerLink = menu.link || (isMobile && menu.mobileLink) || null
+                if (triggerLink) {
                     return (
                         <Link
                             key={menuIndex}
-                            to={menu.link}
+                            to={triggerLink}
                             state={{ newWindow: true }}
                             contextMenu={false}
                             className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
@@ -376,24 +377,6 @@ const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, cus
                             }`}
                         >
                             {menu.trigger}
-                        </Link>
-                    )
-                }
-
-                // On mobile, if menu has mobileLink, make it a direct link
-                if (isMobile && menu.mobileLink) {
-                    return (
-                        <Link
-                            key={menuIndex}
-                            to={menu.mobileLink}
-                            state={{ newWindow: true }}
-                            contextMenu={false}
-                            className={`${TriggerClasses} ${menu.bold ? 'font-bold' : 'font-medium'} ${
-                                customTriggerClasses || ''
-                            }`}
-                        >
-                            {menu.trigger}
-                            {!menu.hideChevron && <IconChevronDown className="size-5 opacity-60 -mr-2 hidden" />}
                         </Link>
                     )
                 }
