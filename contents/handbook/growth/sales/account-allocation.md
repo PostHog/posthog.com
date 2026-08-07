@@ -3,68 +3,111 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles within the team who manage customers at various stages in their lifecycle. Customers will typically sign up and start paying for PostHog themselves, or land as customers via a [Technical Account Executive](/handbook/growth/sales/how-we-work#technical-account-executives). Once customers hit $20k a year in spend with us they should have a dedicated Technical Account Manager or Customer Success Manager.
+We have different roles who manage customers through their lifecycle. Customers typically sign up and start paying on their own, or land via a [Technical Account Executive](/handbook/growth/sales/how-we-work#technical-account-executives). Once an account hits $20k a year in spend, a Customer Success Manager becomes the point of contact. A Technical Account Manager is added on top only where there's a qualified growth opportunity.
 
-## TAM vs CSM
+The [customer journey and coverage model](/handbook/growth/sales/customer-journey) covers the phases an account moves through and who covers it at each one. This page covers the operational side: book planning, how TAMs get added and removed, and handover mechanics.
 
-[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles. Our default is for a CSM/CSE to be the point of contact on every $20k+ account, with a TAM requested as an overlay where there's room to grow. When deciding whether to request that overlay we factor in their usage of our primary products.
+We're partway through this transition. Not every $20k+ account has a CSM yet, so some accounts are TAM-only for now. The rules below describe where we're headed. Where today works differently, we've noted it.
 
-**Primary products** are the set of billable main products which we believe that all engineers should be using, not including add-ons or platform features. Our current set of primary products are:
+## How coverage works
 
-- Session replay
-- Feature flags
-- Error tracking
+### CSMs are the base layer
 
-We track whether a customer is paying for each product in Vitally using the `Paying for <Product Name>` trait.
+Every $20k+ account gets a [CSM](/handbook/cs-and-onboarding/customer-success). They own the relationship: onboarding depth, product health, engagement, retention. If nothing else is happening on an account, the CSM is who the customer knows.
 
-- Customers already paying for all of the primary products are considered expanded to the max and should go to a Customer Success Manager. They should be pretty sticky as a customer so the main focus here is retention.
-- Otherwise, there is room to grow and a Technical Account Manager should be focused on getting them using the three primary products.
+### TAMs are an overlay
 
-> This allocation may vary depending on team capacity - there may be some accounts who only have 1 or 2 paid products allocated to a CSM rather than a TAM where there is more capacity in the CSM team for example.
+A [TAM](/handbook/growth/sales/how-we-work#technical-account-managers) joins an account only when there's a qualified expansion opportunity. That could be cross-sell, workload expansion, annual conversion, or a renewal worth actively working. How to judge whether an opportunity is real is covered in [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential). Without a qualified opportunity, the account stays CSM-only.
 
-### Requesting a TAM overlay
+In [customer journey](/handbook/growth/sales/customer-journey) terms: a TAM is on an account while it's Expanding (or Implementing, when a deal closed with a qualified opp already attached). When the account reaches Steady state, the TAM comes off. The CSM was there the whole time, so nothing gets handed over.
 
-Because a CSM/CSE is the default point of contact on every $20k+ account, the decision is no longer "TAM or CSM" but whether to add a TAM overlay on top. Request one where there's clear expansion potential and it's worth having a second person on the account: commercial depth from the TAM, technical depth from the CSM/CSE. Accounts that are fully expanded and in steady state stay CSM/CSE-only. Where there's expansion potential but no TAM capacity yet, an account may sit CSM/CSE-only for a period until an overlay can be added.
+When both are on an account, who does what is covered in [CSM + TAM rules of engagement](/handbook/growth/sales/csm-tam-overlay-coverage).
+
+Where there's expansion potential but no TAM capacity yet, an account can sit CSM-only until a TAM can be added.
+
+### A note on primary products
+
+We used to route accounts between TAM and CSM based on primary product adoption (Session Replay, Feature Flags, Error Tracking, tracked in Vitally as `Paying for <Product Name>`). That was the old model. Product count is still a decent rough signal, since an account paying for all three is often closer to saturated. Rather than using a strict product adoption method, we rely on the framing in [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential) to determine if there's actually expansion potential.
+
+### Churn saves
+
+An at-risk account follows the [risk mitigation and churn prevention](/handbook/growth/sales/risk-mitigation-and-churn-prevention) playbook, same as always. Flag early with the Churn Risk segment, dig into the why, and run the save.
+
+When both a TAM and a CSM are on the account, they co-own the save. Both are responsible, and neither should assume the other is handling it.
+
+An account going at risk is also not a reason to add a TAM. Churn saves are generally not a legitimate TAM opportunity. Risk on a CSM-only account stays with the CSM unless a genuine expansion opportunity qualifies through the normal path.
+
+### Below $20k
+
+Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/sales/customer-journey#coverage-map) covers who (or what) handles them, including Growth TAM coverage and automation.
 
 ---
 
-## Quarterly book planning
+## TAM book balance
 
-At the start of each quarter, TAMs should prepare their book of business with the following constraints in mind:
+TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
 
-**Target book size:** 10-15 accounts with a combined ~$1.5m ARR. This gives TAMs enough focus to actually move the needle on expansion and credit pre-purchases.
+- **Target:** Around $1.5M to $2M ARR per TAM. This usually works out to 12-18 accounts. There is a little in-quarter wiggle room, but generally TAMs should focus on a defined book of business. 
+- **Rough makeup:** 1-2 accounts around $200k ARR, 3-4 around $100k, and the rest in the $30k-$100k range.
 
-**Maximum book size:** 15 accounts. New leads or handoffs from CS/Onboarding/TAEs will push a TAM above this throughout the quarter, but if you're starting a quarter at 18 accounts, you need to find a way to get to 15 or fewer.
+Beyond total size, a balanced book also needs:
 
-### Accounts to remove from your book
+- **Billing mix.** At least 40% of book ARR on monthly billing. Annual accounts still have plenty to work: renewals, cross-sells, and expanding into more of the org. But monthly accounts are where annual conversions come from, and usage growth there turns into cash faster, so a book with little monthly billing has a thin conversion pipeline.
+- **Conversion candidates.** At least 2 accounts above $100k ARR with a realistic path to an annual conversion this year.
+- **A staggered renewal calendar.** If half your book renews in the same quarter, a single weak quarter can set back the whole year, so spread renewals across the calendar.
+- **Concentration awareness.** Two $200k accounts can be a quarter of your book. That's fine, but know what losing one does to your number. Don't stack more concentration than that.
 
-Before the quarter starts, review each account and remove those that meet any of the following criteria:
+If your book is outside these bounds at quarter start, work with your team lead to rebalance.
 
-- **Churned or dropped below $20k ARR** – unless you have a documented, specific plan to get them above $20k this quarter
-- **On YC Plan** – accounts $20k-$50k on the YC plan will go to the YC role on the CS team. Accounts above $50k should be a candidate for TAM referral if there is growth opportunity.
-- **Fully expanded and committed** – if the account has all 3 core products adopted (Session Replay, Feature Flags, Error Tracking), has a discount agreement in place, and has no viable levers for net new revenue, they should go to a CSM
-- **No viable expansion levers** – if there's genuinely no path to growth, it shouldn't be consuming TAM bandwidth.  You need to document what you've tried here so that we know all avenues for growth have been exhausted.
+## Adding a TAM to an account
 
-If criteria is met, let the customer know their slack channel will be archived, and direct them to the typical support paths. A warm transition call for more engaged customers is likely preferred. Internally, create a [handover note](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover) against the customer in Vitally with all relevant information, for future team members to pick the account back up if needed. If the customer was previously above $20k and decreased usage significantly, include details on what went wrong (similar to a churn retro).
+There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, when someone spots a growth opportunity on a CSM-covered account, they flag it for a TAM.
 
-Team leads should populate the `previous owner` trait in Vitally with the current owner's email.
+Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
-### What is NOT a valid reason to hand off
+The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Vitally and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
 
-Low engagement or an account being "difficult to work with" is not a reason to pass them off. That's literally your job. Specifically:
+We track coverage in Vitally with the existing segments: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both segments has both.
+
+---
+
+## Removing a TAM from an account
+
+A TAM stays on an account through expansion until it's fully saturated, not just until the first opportunity closes. As long as there's a realistic next play to work (another cross-sell, a new team to land, an annual conversion), the TAM keeps the account and works it. They come off once expansion is genuinely exhausted. In [journey](/handbook/growth/sales/customer-journey) terms, the account moves to Steady state and the overlay is removed. The CSM stays, so the customer keeps their point of contact throughout.
+
+A TAM being willing to release an account is itself a decent signal the upside is gone. TAMs are paid on their book, so they don't give up real opportunities lightly. But treat it as a signal and sanity check it. Team leads should verify before agreeing. Team leads should post in public for visibility and approval before removing
+
+Removing a TAM is usually a good outcome, and typically means a healthy, expanded customer. Inventing an opportunity to justify staying on is worse than coming off cleanly.
+
+TAM removals generally happen at the end of the quarter. Accounts can be added to a book at any time, but plan removals for quarter end so books stay stable and handovers get done properly rather than rushed mid-quarter.
+
+### Keeping the context with the CSM
+
+The CSM stays on, so nothing about the customer relationship changes from their side. But the TAM knows things the CSM doesn't, and that context has to land somewhere before they leave:
+
+- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
+- **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
+- **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
+- **Removing the TAM in Vitally.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` segment from the account, with Ben's approval.
+
+If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
+
+### What is NOT a valid reason to come off an account
+
+Low engagement or an account being difficult is not a reason to come off. That's the job. Specifically:
 
 - Account doesn't respond to your outreach
 - Champion left and you haven't re-established relationships
 - Low user activity or poor health score
 - You don't like working with them / they don't like you
 
-If an account is struggling on these dimensions, that's a signal you need to invest more effort – not hand them off. You should only hand off accounts that are in a **good state**.
+If an account is struggling on these dimensions, that's a signal to invest more. The saturation checks require *evidence* that the opportunity is gone; an account being hard to work is not the same as the opportunity being gone.
 
 ---
 
 ## Doing the allocation
 
-It's Simon's job, with input from Ben and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs. We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in. Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer. Once this has been decided the New Owner trait is populated with one of the following:
+Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account, including the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3). A TAM is added on top where an opportunity qualifies. We use Vitally data to understand which region the account is primarily based in. Looking at the user list in Vitally will show you where the most users are, so make a judgement call on where the CSM or TAM should be based to best support the customer. Once decided, the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -75,14 +118,14 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 ### Quarterly allocation process
 
-At the start of each quarter, Simon (with input from Ben and Team Leads) reviews:
+At the start of each quarter, team leads (with Ben's approval) review:
 
-1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need to be assigned
-2. **Accounts flagged for handover** from TAEs, TAMs, and CSMs
-3. **TAM books exceeding 15 accounts** – identifying accounts that should move to CSM or another TAM
-4. **CSM accounts with expansion potential** – identifying accounts that should move to a TAM
+1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need a CSM assigned
+2. **Accounts flagged for handover** from TAEs and TAMs
+3. **TAM books outside the $1.5M-$2M ARR band** – identifying which accounts to rebalance
+4. **Flagged growth opportunities on CSM-only accounts** – identifying where to add a TAM
 
-Once Simon determines whether an account belongs with a TAM or CSM (and which region), the `New Owner` trait is populated, and Team Leads assign the specific team member.
+Once the region and any TAM decision are settled, the `New Owner` trait is populated and team leads assign the specific team member. CSM coverage assignments stay with Simon.
 
 ### Mid-quarter changes
 
@@ -96,30 +139,22 @@ If you're assigned an account with a previous owner, work with them on a proper 
 
 ## Top 40 account management
 
-Our highest-spend customers (~Top 40 by ARR) get special consideration for ownership decisions. Simon and Ben regularly review these accounts to:
-
-- **Minimize ownership changes** – frequent handoffs create whiplash for customers and damage relationships
-- **Ensure continuity** – the bar for changing ownership on a Top 40 account is higher than for the rest of the book
-- **Make judgment calls** – sometimes a TAM should keep a "fully expanded" account if the relationship is strong and there's long-term strategic value
-
-For Top 40 accounts, ownership changes (TAM→CSM or CSM→TAM) are decided directly by Simon and Ben, not through the standard Team Lead allocation process.
+Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding or removing a TAM on a Top 40 account is decided directly by Simon and Ben rather than the standard Team Lead process. The bar for change is higher here. Sometimes a TAM stays on a saturated account because the relationship is strong and there's long-term strategic value.
 
 ---
 
 ## Handing over customers
 
-To help the new owner of a customer hit the ground running, we should make sure that the customer is in a good state and that a warm introduction happens. Typical handoffs between roles are:
+To help the new owner hit the ground running, we should make sure the customer is in a good state and a warm introduction happens.
 
-| Transition | Typical timing | Condition |
-|------------|----------------|-----------|
-| TAE → TAM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 1-2 primary products and has growth potential |
-| TAE → CSM | When onboarded, typically 3 months after initial credit purchase OR 12 months after initial credit pre-purchase if the account is retained by the TAE | Customer onboarded to 3+ primary products or does not have growth potential|
-| TAM → CSM | After expansion completes | All 3 core products adopted, discount agreement in place, no remaining expansion levers, no growth potential |
-| CSM → TAM | When expansion opportunity identified | Customer not fully expanded and has clear growth potential |
+TAE handoff goes to a CSM, always. This typically happens when onboarded, around 3 months after the initial credit purchase, or 12 months after the initial credit pre-purchase if the TAE retains the account against a specific opportunity (see the [journey page ownership rules](/handbook/growth/sales/customer-journey#ownership-rules)). If a qualified expansion opportunity exists at handover, a TAM is added at the same time.
+
+TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding a TAM](#adding-a-tam-to-an-account) and [Removing a TAM](#removing-a-tam-from-an-account) above.
 
 > For accounts who will be landing at $100k+ a year or have high expansion potential after the initial deal, we should involve a TAM early in the process to ensure a smooth transition. See the section further down this page on how this works.
-- When determining whether an account is a growth account or not, reviewing the criteria set out in the [lead qualification page](handbook/growth/sales/product-led-lead-qualification) can be helpful
-- When in doubt, ask yourself: do I see this account growing in the next year? If not, it should not go to a TAM
+
+- When judging growth potential, use [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential)
+- When in doubt, ask yourself: do I see this account growing in the next year? If not, it doesn't need a TAM
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for.
 
@@ -265,13 +300,13 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 ### Unassign yourself in Vitally
 
-Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This ensures the new owner is the sole point of contact and avoids confusion about who is responsible for the account.
+Once the handover is complete, the outgoing owner should unassign themselves from the account in Vitally. This keeps Vitally accurate about who is actually on the account.
 
 ---
 
 ## Receiving an account as a CSM
 
-CSM accounts should generally be in a steady state — they're using the products they need, they're engaged, and there aren't major unresolved issues. When you're taking an account from a TAE or TAM, it's worth looking beyond the surface to make sure that's actually the case. These aren't a rigid checklist. They're things to dig into that can surface problems which are otherwise easy to miss.
+CSMs receive every $20k+ account, whether from a TAE at close or when a TAM comes off. Accounts arriving from a TAM should generally be in a steady state: using the products they need, engaged, no major unresolved issues. It's worth looking beyond the surface to make sure that's actually the case. These aren't a rigid checklist. They're things to dig into that can surface problems which are otherwise easy to miss.
 
 ### Billing and commercial
 
@@ -282,7 +317,7 @@ CSM accounts should generally be in a steady state — they're using the product
 
 ### Product adoption
 
-- **Core product coverage** — see [TAM vs CSM](#tam-vs-csm) for the general criteria. We currently have capacity on the CSM side, so we're okay receiving accounts using only 1 core product if the previous owner has determined there isn't a realistic path to expand.
+- **Core product coverage** - see [How coverage works](#how-coverage-works). Receiving accounts with only 1 core product adopted is normal. It just means the previous owner determined there isn't a realistic path to expand right now, and that reasoning should be documented.
 - **Deployment health** — if the customer doesn't have basic recommendations in place (e.g. session replay minimum duration, high identify call volume), that's a flag. Check the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) and the Metabase dashboard to assess this. The [product onboarding checklist](#product-onboarding) is also a good reference for what "properly set up" looks like.
 - **Unexplained usage changes** — big spikes or drops that aren't documented, or where there's no record of a conversation with the customer about them. These can indicate problems nobody's looked into yet.
 
