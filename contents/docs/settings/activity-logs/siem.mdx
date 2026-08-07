@@ -118,12 +118,15 @@ Go to **Settings** > **Data inputs** > **PostHog activity logs** and click **New
 | Interval | How often to poll, in seconds. 300 is a reasonable start |
 | Include changed values | Leave off unless you need before and after values |
 | Start date | Optional ISO-8601 lower bound for the first run |
+| Index | Under **More settings**, choose the index to write to. Note which one you pick, you need it to search |
 
 Save. Splunk polls on your interval and resumes from where it stopped, so entries are not collected twice.
 
-The add-on moves your API key into Splunk's encrypted credential store on the first run, so it is not left in plain text in `inputs.conf`.
+The add-on moves your API key into Splunk's encrypted credential store on the first run.
 
 ### 3. Confirm events are arriving
+
+Search the index you chose when you added the input:
 
 ```
 index=<your index> sourcetype="posthog:activity_log"
@@ -157,4 +160,4 @@ Splunk Cloud does not let you create scripted inputs, and the roles available to
 
 The approach is the same for any platform that can poll an HTTP endpoint on a schedule: request OCSF, order oldest first, follow the cursor, and store it between runs. Deduplicate on `metadata.uid`, which carries the PostHog activity log ID and is stable across replays.
 
-If you are integrating with a platform not covered here, [let us know](/questions) and we can add steps for it.
+If you are integrating with a platform not covered here, [open a support ticket](https://us.posthog.com/#panel=support:support) and we can add steps for it.
