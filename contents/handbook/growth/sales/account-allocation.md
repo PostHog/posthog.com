@@ -107,7 +107,7 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-It's Simon's job, with input from Ben and Team Leads, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts flagged by TAEs and TAMs. The CSM assignment is the base layer. A TAM is added where an opportunity qualifies. We use Vitally data to understand which region the account is primarily based in. Looking at the user list in Vitally will show you where the most users are, so make a judgement call on where the CSM or TAM should be based to best support the customer. Once decided, the New Owner trait is populated with one of the following:
+Each quarter, team leads, with Ben's approval, review coverage: which accounts need a TAM added or removed, and how books should be rebalanced. CSM coverage stays Simon's call. That's the base layer on every $20k+ account, including the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3). A TAM is added on top where an opportunity qualifies. We use Vitally data to understand which region the account is primarily based in. Looking at the user list in Vitally will show you where the most users are, so make a judgement call on where the CSM or TAM should be based to best support the customer. Once decided, the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
@@ -118,14 +118,14 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 ### Quarterly allocation process
 
-At the start of each quarter, Simon (with input from Ben and Team Leads) reviews:
+At the start of each quarter, team leads (with Ben's approval) review:
 
 1. **[$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3)** – accounts that need a CSM assigned
 2. **Accounts flagged for handover** from TAEs and TAMs
 3. **TAM books outside the $1.5M-$2.5M ARR band** – identifying which accounts to rebalance
 4. **Flagged growth opportunities on CSM-only accounts** – identifying where to add a TAM
 
-Once Simon determines the region and whether a TAM should be added, the `New Owner` trait is populated, and Team Leads assign the specific team member.
+Once the region and any TAM decision are settled, the `New Owner` trait is populated and team leads assign the specific team member. CSM coverage assignments stay with Simon.
 
 ### Mid-quarter changes
 
