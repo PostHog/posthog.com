@@ -75,6 +75,8 @@ Set on `$identify` events when `identify()` returns a user.
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | (any) | Keys of the identity's `properties` are written to `$set` (e.g. return `properties: { name, email }` to set a person's name and email) |
 
+`$set` is sent on the wire to update the person profile, but isn't retained on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
+
 ## Groups (`$groups`)
 
 If `identify()` returns a `groups` field (a `Record<string, string>` of groupType → groupKey), the SDK stamps it onto every event as `$groups`. You never hand-write `$groups` yourself. See [Identifying users](/docs/mcp-analytics/identifying-users).
