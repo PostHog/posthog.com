@@ -60,7 +60,7 @@ export const calculatePrice = (
     let alreadyCountedEvents = 0
 
     if (!tiers) {
-        return 0 as any
+        return { total: 0, costByTier: [] }
     }
     const costByTier: any[] = []
     for (const { up_to, unit_amount_usd, ...rest } of tiers) {

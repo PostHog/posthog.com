@@ -64,6 +64,10 @@ const productAnalyticsEstimate = ({
 }
 
 describe('calculatePrice', () => {
+    test('returns an empty result when no tiers are available', () => {
+        assert.deepEqual(calculatePrice(1_000_000, null), { total: 0, costByTier: [] })
+    })
+
     test('prices Product analytics across tier boundaries', () => {
         assert.equal(costOf('product_analytics', 1_000_000), 0)
         assert.equal(costOf('product_analytics', 2_000_000), 50)
