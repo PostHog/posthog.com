@@ -534,6 +534,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Side projects',
+                    link: '/side-projects',
+                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
+                },
+                {
+                    type: 'item',
                     label: 'Partnerships',
                     link: '/partnerships',
                     icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),

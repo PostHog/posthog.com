@@ -1,0 +1,469 @@
+[
+    {
+        "title": "airflow-dbt-python",
+        "description": "Airflow operators and hooks to run dbt as a first-class citizen",
+        "projectAuthor": "Tomás Farías Santana",
+        "authorGitHub": "tomasfarias",
+        "githubUrl": "https://github.com/tomasfarias/airflow-dbt-python",
+        "liveUrl": "https://airflow-dbt-python.readthedocs.io",
+        "projectThumbnail": "/images/side-projects/airflow-dbt-python.png",
+        "tags": ["python", "airflow", "dbt", "data-engineering", "open-source"]
+    },
+    {
+        "title": "Andy's Daily Factoids",
+        "description": "AI-powered factoid generator with voting, streaming, and payments",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/andys-daily-factoids",
+        "liveUrl": "https://andys-daily-factoids.com",
+        "projectThumbnail": "/images/side-projects/andys-daily-factoids.png",
+        "tags": ["ai-observability", "python", "django", "nextjs", "web-app"]
+    },
+    {
+        "title": "Anomaly Agent",
+        "description": "LLM-powered anomaly detection for time series data using LangGraph",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/anomaly-agent",
+        "projectThumbnail": "/images/side-projects/anomaly-agent.png",
+        "tags": ["ai-observability", "python", "ai", "data"]
+    },
+    {
+        "title": "Anomstack",
+        "description": "Lightweight anomaly detection system with LLM-powered analysis",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/anomstack",
+        "liveUrl": "https://anomstack-demo.fly.dev",
+        "projectThumbnail": "/images/side-projects/anomstack.png",
+        "tags": ["ai-observability", "python", "dagster", "anomaly-detection", "data"]
+    },
+    {
+        "title": "ASP.NET Client Validation",
+        "description": "jQuery-free client-side validation library for ASP.NET MVC",
+        "projectAuthor": "Phil Haack",
+        "authorGitHub": "haacked",
+        "githubUrl": "https://github.com/haacked/aspnet-client-validation",
+        "liveUrl": "https://www.npmjs.com/package/aspnet-client-validation",
+        "tags": ["open-source", "typescript", "javascript", "web-app"]
+    },
+    {
+        "title": "Atuin",
+        "description": "Magical shell history – sync, search, and back up your shell history across machines",
+        "date": "2026-08-06",
+        "projectAuthor": "Ellie Huxtable",
+        "authorGitHub": "ellie",
+        "alumni": true,
+        "githubUrl": "https://github.com/atuinsh/atuin",
+        "liveUrl": "https://atuin.sh/",
+        "tags": ["cli", "rust", "open-source", "developer-tools"]
+    },
+    {
+        "title": "Auth0 Web Extension",
+        "description": "JavaScript library for authenticating with Auth0 in browser extensions",
+        "projectAuthor": "Paul Hultgren",
+        "authorGitHub": "pjhul",
+        "githubUrl": "https://github.com/pjhul/auth0-web-extension",
+        "liveUrl": "https://www.npmjs.com/package/auth0-web-extension",
+        "tags": ["open-source", "typescript", "chrome-extension", "authentication"]
+    },
+    {
+        "title": "Backname",
+        "description": "A DNS server where every IP address gets its own domain",
+        "projectAuthor": "Michael Matloka",
+        "authorGitHub": "twixes",
+        "githubUrl": "https://github.com/twixes/backname",
+        "liveUrl": "https://backname.io/",
+        "projectThumbnail": "/images/side-projects/backname.png",
+        "tags": ["go", "dns", "networking", "open-source"]
+    },
+    {
+        "title": "Boring News",
+        "description": "A news aggregator that uses AI to strip the hype out of headlines",
+        "date": "2026-08-06",
+        "projectAuthor": "Cory Slater",
+        "liveUrl": "https://www.boringnews.news/",
+        "tags": ["ai", "web-app", "content"]
+    },
+    {
+        "title": "Comp Scraping",
+        "description": "Python script to scrape and analyze Brazil tech salary data from levels.fyi",
+        "projectAuthor": "Lucas Faria",
+        "authorGitHub": "lucasheriques",
+        "githubUrl": "https://github.com/lucasheriques/comp-scraping",
+        "tags": ["open-source", "python", "data", "scraping"]
+    },
+    {
+        "title": "django-subdomains",
+        "description": "Subdomain helpers for the Django framework including URL routing",
+        "projectAuthor": "Ted Kaemming",
+        "authorGitHub": "tkaemming",
+        "githubUrl": "https://github.com/tkaemming/django-subdomains",
+        "tags": ["open-source", "python", "django", "web-app"]
+    },
+    {
+        "title": "Emoji Hero",
+        "description": "An emoji game for the browser",
+        "date": "2026-08-06",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "githubUrl": "https://github.com/andrewm4894/emoji-hero",
+        "liveUrl": "https://emoji-hero.com",
+        "tags": ["games", "web-app"]
+    },
+    {
+        "title": "FrameOS",
+        "description": "Operating system for single-function smart frames on Raspberry Pi",
+        "projectAuthor": "Marius Andra",
+        "authorGitHub": "mariusandra",
+        "githubUrl": "https://github.com/FrameOS/frameos",
+        "liveUrl": "https://frameos.net/",
+        "tags": ["nim", "python", "raspberry-pi", "hardware", "open-source"]
+    },
+    {
+        "title": "G Desktop Suite",
+        "description": "Google Drive as a native desktop app built with Electron",
+        "projectAuthor": "Alex Kim",
+        "authorGitHub": "alexkim205",
+        "githubUrl": "https://github.com/alexkim205/G-Desktop-Suite",
+        "projectThumbnail": "https://raw.githubusercontent.com/alexkim205/G-Desktop-Suite/master/static/two-window-shot.png",
+        "tags": ["javascript", "electron", "desktop", "open-source"]
+    },
+    {
+        "title": "GitHub Standup Agent",
+        "description": "AI-powered CLI for generating daily standup summaries from GitHub activity",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/github-standup-agent",
+        "tags": ["ai-observability", "python", "cli", "openai-agents", "ai"]
+    },
+    {
+        "title": "Gutenberg Migration Guide",
+        "description": "WordPress Classic Editor to Gutenberg block editor migration documentation",
+        "projectAuthor": "Daniel Bachhuber",
+        "authorGitHub": "danielbachhuber",
+        "githubUrl": "https://github.com/danielbachhuber/gutenberg-migration-guide",
+        "tags": ["open-source", "php", "wordpress", "documentation"]
+    },
+    {
+        "title": "HikeWA",
+        "description": "AI-powered Washington trail conditions from real trip reports",
+        "date": "2026-08-06",
+        "projectAuthor": "Cory Slater",
+        "liveUrl": "https://hikewa.app/",
+        "tags": ["ai", "web-app", "maps"]
+    },
+    {
+        "title": "Hypemoji",
+        "description": "Hypify your Slack emojis",
+        "date": "2026-08-06",
+        "projectAuthor": "Frank Hamand",
+        "authorGitHub": "frankh",
+        "githubUrl": "https://github.com/frankh/hypemoji",
+        "liveUrl": "https://frankh.github.io/hypemoji",
+        "tags": ["slack", "web-app", "javascript", "open-source"]
+    },
+    {
+        "title": "Kea",
+        "description": "Batteries Included State Management for React",
+        "projectAuthor": "Marius Andra",
+        "authorGitHub": "mariusandra",
+        "githubUrl": "https://github.com/keajs/kea",
+        "liveUrl": "https://keajs.org/",
+        "projectThumbnail": "/images/side-projects/kea.png",
+        "tags": ["javascript", "typescript", "react", "open-source"]
+    },
+    {
+        "title": "LazyAWS",
+        "description": "Terminal UI for managing AWS resources, inspired by lazygit and k9s",
+        "projectAuthor": "James Greenhill",
+        "authorGitHub": "fuziontech",
+        "githubUrl": "https://github.com/fuziontech/lazyaws",
+        "tags": ["go", "aws", "cli", "devops", "open-source"]
+    },
+    {
+        "title": "Loggl",
+        "description": "Self-hostable event analytics and push notifications via HTTP",
+        "projectAuthor": "Marcus Hof",
+        "authorGitHub": "MarconLP",
+        "githubUrl": "https://github.com/MarconLP/loggl",
+        "liveUrl": "https://loggl.net",
+        "projectThumbnail": "https://raw.githubusercontent.com/marconlp/loggl/main/cover.png",
+        "tags": ["typescript", "nextjs", "analytics", "self-hosted", "open-source"]
+    },
+    {
+        "title": "medium-markdown",
+        "description": "npm package to convert Medium posts to Markdown format",
+        "projectAuthor": "Neil Kakkar",
+        "authorGitHub": "neilkakkar",
+        "githubUrl": "https://github.com/neilkakkar/medium-markdown",
+        "liveUrl": "https://www.npmjs.com/package/medium-markdown",
+        "tags": ["open-source", "javascript", "node", "cli", "content"]
+    },
+    {
+        "title": "MetNoPy",
+        "description": "Python package for retrieving Norwegian weather station observations",
+        "projectAuthor": "Anders",
+        "authorGitHub": "andehen",
+        "githubUrl": "https://github.com/andehen/MetNoPy",
+        "tags": ["open-source", "python", "data", "api", "weather"]
+    },
+    {
+        "title": "ModulusChecker",
+        "description": "C# library for UK bank account modulus checking validation",
+        "projectAuthor": "Paul D'Ambra",
+        "authorGitHub": "pauldambra",
+        "githubUrl": "https://github.com/pauldambra/ModulusChecker",
+        "liveUrl": "https://www.nuget.org/packages/ModulusChecker",
+        "tags": ["open-source", "csharp", "fintech", "validation"]
+    },
+    {
+        "title": "Null Sector",
+        "description": "A turn-based strategy game you can play in the browser",
+        "date": "2026-08-06",
+        "projectAuthor": "Joe Martin",
+        "liveUrl": "https://joemartin.work/null-sector.html",
+        "tags": ["games", "web-app", "ai-coding"]
+    },
+    {
+        "title": "One Time Login",
+        "description": "Generate one-time login URLs for any WordPress user",
+        "projectAuthor": "Daniel Bachhuber",
+        "authorGitHub": "danielbachhuber",
+        "githubUrl": "https://github.com/danielbachhuber/one-time-login",
+        "tags": ["open-source", "php", "wordpress", "security"]
+    },
+    {
+        "title": "PagerBot",
+        "description": "Manage PagerDuty on-call schedules from within your chat channels",
+        "projectAuthor": "Karl-Aksel Puulmann",
+        "authorGitHub": "macobo",
+        "githubUrl": "https://github.com/stripe-contrib/pagerbot",
+        "tags": ["ruby", "slack", "pagerduty", "devops", "open-source"]
+    },
+    {
+        "title": "Pigeon Maps",
+        "description": "ReactJS maps without external dependencies – lightweight alternative to Google Maps",
+        "projectAuthor": "Marius Andra",
+        "authorGitHub": "mariusandra",
+        "githubUrl": "https://github.com/mariusandra/pigeon-maps",
+        "liveUrl": "https://pigeon-maps.js.org/",
+        "projectThumbnail": "/images/side-projects/pigeon-maps.png",
+        "tags": ["typescript", "react", "open-source"]
+    },
+    {
+        "title": "Plot Agent",
+        "description": "AI-powered data visualization assistant for generating Plotly charts",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/plot-agent",
+        "projectThumbnail": "/images/side-projects/plot-agent.png",
+        "tags": ["ai-observability", "python", "langgraph", "data-viz", "ai"]
+    },
+    {
+        "title": "POABus",
+        "description": "Bus route visualization for Porto Alegre's public transportation",
+        "projectAuthor": "Rafael Audibert",
+        "authorGitHub": "rafaeelaudibert",
+        "githubUrl": "https://github.com/rafaeelaudibert/POABus",
+        "projectThumbnail": "/images/side-projects/poabus.png",
+        "tags": ["open-source", "javascript", "data", "visualization", "maps"]
+    },
+    {
+        "title": "PyPI Assistant",
+        "description": "VS Code extension showing PyPI package info on hover",
+        "projectAuthor": "Michael Matloka",
+        "authorGitHub": "Twixes",
+        "githubUrl": "https://github.com/Twixes/pypi-assistant",
+        "liveUrl": "https://marketplace.visualstudio.com/items?itemName=twixes.pypi-assistant",
+        "projectThumbnail": "/images/side-projects/pypi-assistant.png",
+        "tags": ["open-source", "typescript", "vscode", "python", "developer-tools"]
+    },
+    {
+        "title": "Railcode",
+        "description": "Create secure data apps and agents built for teams.",
+        "date": "2026-08-07",
+        "projectAuthor": "Yakko Majuri",
+        "authorGitHub": "yakkomajuri",
+        "alumni": true,
+        "liveUrl": "https://railcode.dev",
+        "tags": ["ai", "data"]
+    },
+    {
+        "title": "React Calendar Timeline",
+        "description": "Modern, responsive timeline component for React applications",
+        "projectAuthor": "Marius Andra",
+        "authorGitHub": "mariusandra",
+        "githubUrl": "https://github.com/namespace-ee/react-calendar-timeline",
+        "projectThumbnail": "https://raw.githubusercontent.com/namespace-ee/react-calendar-timeline/master/demo.gif",
+        "tags": ["typescript", "react", "open-source"]
+    },
+    {
+        "title": "Refined Zapier",
+        "description": "Open-source browser extension to 10x Zapier's UX",
+        "projectAuthor": "Zach Waterfield",
+        "authorGitHub": "zlwaterfield",
+        "githubUrl": "https://github.com/zlwaterfield/refined-zapier",
+        "tags": ["typescript", "chrome-extension", "productivity", "open-source"]
+    },
+    {
+        "title": "Repo Stalker",
+        "description": "GitHub PR & Issue AI assistant with intelligent summaries",
+        "projectAuthor": "Andy Maguire",
+        "authorGitHub": "andrewm4894",
+        "teamLink": "/community/profiles/37401",
+        "githubUrl": "https://github.com/andrewm4894/repo-stalker",
+        "projectThumbnail": "/images/side-projects/repo-stalker.png",
+        "tags": ["ai-observability", "typescript", "react", "github", "ai"]
+    },
+    {
+        "title": "RFC123",
+        "description": "The agent-native, open-source platform for writing and reviewing RFCs",
+        "date": "2026-08-06",
+        "projectAuthor": "Michael Matloka",
+        "authorGitHub": "Twixes",
+        "githubUrl": "https://github.com/Twixes/rfc123",
+        "liveUrl": "https://rfc123.com",
+        "tags": ["open-source", "collaboration", "documentation", "ai", "mcp"]
+    },
+    {
+        "title": "Rides",
+        "description": "Full-stack simulation of a ridesharing app with real-time visualization",
+        "projectAuthor": "Juraj Majerik",
+        "authorGitHub": "jurajmajerik",
+        "githubUrl": "https://github.com/jurajmajerik/rides",
+        "liveUrl": "https://rides.jurajmajerik.com",
+        "projectThumbnail": "https://raw.githubusercontent.com/jurajmajerik/rides/master/frontend/assets/images/diagram-6.png",
+        "tags": ["typescript", "go", "simulation", "open-source"]
+    },
+    {
+        "title": "RomM",
+        "description": "Scan, enrich, browse, and play your retro game collection from one self-hosted app",
+        "date": "2026-08-06",
+        "projectAuthor": "Georges-Antoine Assi",
+        "authorGitHub": "gantoine",
+        "githubUrl": "https://github.com/rommapp/romm",
+        "liveUrl": "https://romm.app",
+        "tags": ["open-source", "self-hosted", "games", "web-app", "python"]
+    },
+    {
+        "title": "RouteMagic",
+        "description": "Utility library to get the most out of ASP.NET Routing",
+        "projectAuthor": "Phil Haack",
+        "authorGitHub": "haacked",
+        "githubUrl": "https://github.com/haacked/routemagic",
+        "tags": ["open-source", "csharp", "web-app"]
+    },
+    {
+        "title": "Scramble",
+        "description": "Open-source Grammarly alternative – AI writing assistant Chrome extension",
+        "projectAuthor": "Zach Waterfield",
+        "authorGitHub": "zlwaterfield",
+        "githubUrl": "https://github.com/zlwaterfield/scramble",
+        "liveUrl": "https://chromewebstore.google.com/detail/scramble/mkaljgnigabhmjfookbokejhfghmkffo",
+        "tags": ["javascript", "ai", "chrome-extension", "open-source"]
+    },
+    {
+        "title": "SeeGit",
+        "description": "Real-time Git repository visualizer for presentations and learning",
+        "projectAuthor": "Phil Haack",
+        "authorGitHub": "haacked",
+        "githubUrl": "https://github.com/haacked/seegit",
+        "projectThumbnail": "/images/side-projects/seegit.png",
+        "tags": ["open-source", "csharp", "git", "visualization", "desktop-app"]
+    },
+    {
+        "title": "SF Mono Powerline",
+        "description": "Apple's SF Mono font patched with Powerline glyphs for terminal customization",
+        "projectAuthor": "Michael Matloka",
+        "authorGitHub": "twixes",
+        "githubUrl": "https://github.com/twixes/SF-Mono-Powerline",
+        "tags": ["fonts", "terminal", "open-source"]
+    },
+    {
+        "title": "Sheets to Dashboard",
+        "description": "Publish your spreadsheets as beautiful interactive dashboards",
+        "projectAuthor": "Alex Kim",
+        "authorGitHub": "alexkim205",
+        "githubUrl": "https://github.com/alexkim205/sheetstodashboard",
+        "projectThumbnail": "/images/side-projects/sheetstodashboard.png",
+        "tags": ["open-source", "typescript", "web-app", "data", "visualization"]
+    },
+    {
+        "title": "Snapify",
+        "description": "Self-hostable Loom alternative for screen recording and sharing",
+        "projectAuthor": "Marcus Hof",
+        "authorGitHub": "MarconLP",
+        "githubUrl": "https://github.com/MarconLP/snapify",
+        "liveUrl": "https://snapify.it",
+        "tags": ["typescript", "nextjs", "self-hosted", "open-source"]
+    },
+    {
+        "title": "Somsiad",
+        "description": "The Polish Discord bot with fun commands and utilities",
+        "projectAuthor": "Michael Matloka",
+        "authorGitHub": "Twixes",
+        "githubUrl": "https://github.com/Twixes/somsiad",
+        "tags": ["open-source", "python", "discord", "bot"]
+    },
+    {
+        "title": "Tablane",
+        "description": "Open platform for seamless management and collaboration",
+        "projectAuthor": "Marcus Hof",
+        "authorGitHub": "MarconLP",
+        "githubUrl": "https://github.com/Tablane/tablane",
+        "liveUrl": "https://tablane.net",
+        "projectThumbnail": "https://raw.githubusercontent.com/tablane/.github/main/tablane_overview.png",
+        "tags": ["typescript", "react", "collaboration", "open-source"]
+    },
+    {
+        "title": "Talyn",
+        "description": "Mission control for your GitHub PRs, powered by cloud coding agents",
+        "date": "2026-08-06",
+        "projectAuthor": "Tom Owers",
+        "authorGitHub": "Gilbert09",
+        "githubUrl": "https://github.com/Gilbert09/talyn",
+        "liveUrl": "https://talyn.dev",
+        "tags": ["ai", "developer-tools", "github", "desktop-app"]
+    },
+    {
+        "title": "Teeny",
+        "description": "A super simple static site generator",
+        "projectAuthor": "Yakko Majuri",
+        "authorGitHub": "yakkomajuri",
+        "githubUrl": "https://github.com/yakkomajuri/teeny",
+        "liveUrl": "https://yakkomajuri.github.io",
+        "tags": ["javascript", "static-site", "cli", "open-source"]
+    },
+    {
+        "title": "Terraformation",
+        "description": "UI for Terraform remote states similar to CloudFormation",
+        "projectAuthor": "Ben White",
+        "authorGitHub": "benjackwhite",
+        "githubUrl": "https://github.com/benjackwhite/terraformation",
+        "tags": ["open-source", "typescript", "devops", "terraform", "infrastructure"]
+    },
+    {
+        "title": "WhatsApp MCP",
+        "description": "WhatsApp MCP server for AI integration – search, read and send messages via Claude",
+        "projectAuthor": "Luke Harries",
+        "authorGitHub": "lharries",
+        "githubUrl": "https://github.com/lharries/whatsapp-mcp",
+        "projectThumbnail": "/images/side-projects/whatsapp-mcp.png",
+        "tags": ["ai", "python", "go", "mcp", "open-source"]
+    },
+    {
+        "title": "WriteConcise",
+        "description": "An app for helping you write better by writing less",
+        "projectAuthor": "Ian Vanagas",
+        "authorGitHub": "ivanagas",
+        "githubUrl": "https://github.com/ivanagas/writeconcise",
+        "projectThumbnail": "/images/side-projects/writeconcise.png",
+        "tags": ["open-source", "vue", "web-app", "writing", "productivity"]
+    }
+]

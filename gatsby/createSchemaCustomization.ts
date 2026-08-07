@@ -73,6 +73,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterFilters {
+      tags: [String]
+      type: [String]
+      maintainer: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
@@ -86,6 +91,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      filters: FrontmatterFilters
       sourceId: String
     }
     type TeamData {
