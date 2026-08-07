@@ -73,7 +73,7 @@ Headings map to the book's type scale: `#` is the page title, `##` a small-caps 
 
 ### How the reader lays a page out
 
-Every page is one linear scroll. `ReaderWrapper` (bookComponents.tsx) re-orders the compiled
+Every page is one linear scroll. `ReaderWrapper` (ReaderWrapper.tsx) re-orders the compiled
 elements by their `mdxType` and `n` props at render time: each figure is embedded after the
 first block that cites it via `<SeeFig>`, and a figure nobody cites prints at the end of the
 page. One exception: a figure-less page authored as two pages – the volume's front matter –
@@ -129,7 +129,11 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `Cover.tsx` | The series cover on the shelf: spine, masthead, specimen, volume number |
 | `BookReader.tsx` | The full-window page: edge book tabs, popovers, turn zones, foot nav |
 | `BookPage.tsx` | Renders one MDX page into the reader |
-| `bookComponents.tsx` | The MDX vocabulary above, plus prose styling |
+| `bookComponents.tsx` | Assembles the MDX vocabulary from the files below |
+| `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
+| `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
+| `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
+| `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
