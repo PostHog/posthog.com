@@ -169,6 +169,8 @@ Once we finish determining the person associated with the event we are processin
 
 This step takes into account any `$set`, `$set_once` or `$unset` arguments provided on the event, and merges these with any existing values for the person.
 
+These arguments are instructions for updating person data — they aren't retained on the stored event, so you can't filter, break down, or query events by them. Query the resulting [person properties](/docs/product-analytics/person-properties) instead.
+
 > **Important:** Person properties are applied in **ingestion order** (the order PostHog receives and processes events), not by event timestamp. This means:
 >
 > - `$set` unconditionally overwrites the property value — the last *ingested* event wins, regardless of its timestamp.
