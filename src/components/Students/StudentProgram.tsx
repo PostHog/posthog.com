@@ -8,8 +8,8 @@ import Input from 'components/OSForm/input'
 import Textarea from 'components/OSForm/textarea'
 import usePostHog from 'hooks/usePostHog'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogEinstein, HedgehogPartyHog, HedgehogCodingGroup } from '@posthog/brand/hoggies'
-import { IconCheck, IconHandMoney, IconStack, IconPeople } from '@posthog/icons'
+import { HedgehogPartyHog, HedgehogCodingGroup } from '@posthog/brand/hoggies'
+import { IconCheck, IconHandMoney, IconConfetti, IconGraduationCap } from '@posthog/icons'
 
 // The in-app application flow, mirroring https://app.posthog.com/startups for the startup program.
 // Program terms come from https://github.com/PostHog/requests-for-comments-public/issues/503
@@ -188,13 +188,9 @@ function CampusMixerForm(): JSX.Element {
 }
 
 const heroBullets: { Icon: React.ComponentType<{ className?: string }>; color: string; text: string }[] = [
-    { Icon: IconHandMoney, color: 'text-yellow', text: '$50,000 in PostHog credits, valid for 12 months' },
-    {
-        Icon: IconStack,
-        color: 'text-blue',
-        text: 'Product analytics, session replay, feature flags, error tracking, and more',
-    },
-    { Icon: IconPeople, color: 'text-green', text: 'Credits apply to your whole PostHog organization' },
+    { Icon: IconHandMoney, color: 'text-yellow', text: '$50,000 in PostHog credit, valid for 12 months' },
+    { Icon: IconConfetti, color: 'text-orange', text: '$2,000 in support for student events' },
+    { Icon: IconGraduationCap, color: 'text-blue', text: 'Invites to PostHog Startup School' },
 ]
 
 const eligibilityBullets: string[] = [
@@ -231,8 +227,8 @@ export default function StudentProgram(): JSX.Element {
                     <div className="relative flex min-h-96 w-full flex-col justify-center bg-[#122030] p-8 text-white">
                         <div className="absolute inset-0 bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/stars_24a6a0b509.png)] bg-cover" />
 
-                        <div className="relative mx-auto grid w-full max-w-3xl items-center gap-8 @2xl:grid-cols-[minmax(0,1fr)_200px]">
-                            <div className="prose-invert prose-sm">
+                        <div className="relative mx-auto flex w-full max-w-3xl items-center gap-8">
+                            <div className="prose-invert prose-sm min-w-0 flex-1">
                                 <h1 className="mb-0 flex items-center gap-2.5 text-2xl @md:text-3xl">
                                     <Logo
                                         layout="logomark"
@@ -245,8 +241,9 @@ export default function StudentProgram(): JSX.Element {
                                     </span>
                                 </h1>
                                 <p className="mb-3 mt-3 max-w-xl text-white">
-                                    Get <strong className="text-yellow">$50,000 in PostHog credits</strong> to build
-                                    something real while you're still in school.
+                                    Get <strong className="text-yellow">$50,000 in credits</strong> to build something
+                                    while you're still in school, plus invites to exclusive events and support for your
+                                    own on-campus mixers!
                                 </p>
                                 <ul className="mb-5 mt-3 list-none space-y-1.5 p-0 text-[15px] text-white">
                                     {heroBullets.map(({ Icon, color, text }) => (
@@ -262,24 +259,27 @@ export default function StudentProgram(): JSX.Element {
                                 </CallToAction>
 
                                 <p className="mt-3 text-sm italic text-white/80">
-                                    You'll need a PostHog account and your school email – a .edu, .ac.uk, or other
-                                    university-associated domain
+                                    You'll need a PostHog account and your school email
                                 </p>
                             </div>
 
-                            <div className="hidden select-none @2xl:block">
-                                <HedgehogEinstein
-                                    className="pointer-events-none h-auto w-full"
-                                    title="A hedgehog dressed as Einstein"
-                                />
+                            <div className="hidden w-80 shrink-0 select-none @2xl:block">
+                                {/* Light plate so the artwork's dark laptop screen doesn't blend into the navy hero */}
+                                <div className="rotate-1 rounded-md bg-white p-4 pb-2 shadow-xl">
+                                    <img
+                                        src="/images/students/student-laptop-hog.png"
+                                        alt="A hedgehog working at a laptop"
+                                        className="pointer-events-none h-auto w-full"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div className="mx-auto max-w-3xl px-4 py-8 @3xl:px-8">
-                        <h2>Who it's for</h2>
+                        <h2>Who is this for?</h2>
                         <HedgehogCodingGroup
-                            className="pointer-events-none float-right mb-2 ml-4 hidden h-auto w-[200px] @xl:block"
+                            className="pointer-events-none float-right mb-2 ml-6 hidden h-auto w-[180px] @lg:block @2xl:w-[220px]"
                             title="A group of hedgehogs coding together"
                         />
                         <p>
@@ -313,9 +313,28 @@ export default function StudentProgram(): JSX.Element {
                             <li>Use your credits on any PostHog product for 12 months</li>
                         </ol>
 
+                        {/* Highlighted callout, same treatment as the /slack page's yellow callouts */}
+                        <div className="not-prose my-8 rounded-md border border-yellow bg-yellow/10 p-6">
+                            <h2
+                                id="startup-school"
+                                className="m-0 flex items-center gap-2.5 text-2xl font-bold @md:text-3xl"
+                            >
+                                <IconGraduationCap className="size-8 shrink-0 text-yellow" />
+                                Get invited to PostHog Startup School
+                            </h2>
+                            <p className="mb-0 mt-4 text-base leading-relaxed">
+                                A few times a year we bring our top US student ambassadors together in SF at Hogpatch,
+                                our space normally reserved for YC founders. We host a multi-day event that's focused on
+                                giving students the chance to discuss their projects with our network. Want in?
+                            </p>
+                            <p className="mb-0 mt-3 text-base italic text-secondary">
+                                [Kliment: please add some more detail here]
+                            </p>
+                        </div>
+
                         <h2 id="campus">Bring PostHog to your campus</h2>
                         <HedgehogPartyHog
-                            className="pointer-events-none float-right mb-2 ml-4 hidden h-auto w-[150px] @xl:block"
+                            className="pointer-events-none float-right mb-2 ml-6 hidden h-auto w-[150px] @lg:block @2xl:w-[180px]"
                             title="A hedgehog at a party"
                         />
                         <p>
