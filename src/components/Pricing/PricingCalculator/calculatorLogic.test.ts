@@ -1,8 +1,5 @@
 /**
  * Pricing calculator math, checked against the prices in `__fixtures__/billing-products.json`.
- *
- *   pnpm test:pricing-calculator
- *
  * The dollar amounts below are the ones posthog.com quotes publicly, so they're written out
  * literally rather than derived – if a change moves any of them, that's the point. When billing
  * changes its prices, update the fixture and these expectations together.
@@ -249,6 +246,13 @@ describe('getAddonsCostForProduct', () => {
     test("only counts the product's own add-ons", () => {
         assert.equal(getAddonsCostForProduct(addons, getProduct('product_analytics')), 71)
         assert.equal(getAddonsCostForProduct(addons, getProduct('session_replay')), 500)
+    })
+
+    test('does not count a disabled add-on with stale cached cost', () => {
+        const disabledGroupAnalytics = addons.map((addon) =>
+            addon.type === 'group_analytics' ? { ...addon, checked: false } : addon
+        )
+        assert.equal(getAddonsCostForProduct(disabledGroupAnalytics, getProduct('product_analytics')), 0)
     })
 
     test('is zero for products that have no add-ons', () => {

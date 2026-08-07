@@ -115,7 +115,9 @@ export const getAddonsCostForProduct = (
     billingProduct?: { addons?: BillingAddon[] | null } | null
 ): number =>
     addons
-        .filter((addon) => billingProduct?.addons?.some((productAddon) => productAddon.type === addon.type))
+        .filter(
+            (addon) => addon.checked && billingProduct?.addons?.some((productAddon) => productAddon.type === addon.type)
+        )
         .reduce((total, addon) => total + addon.totalCost, 0)
 
 /** The headline monthly estimate: every product's usage cost, plus whatever add-ons are enabled. */
