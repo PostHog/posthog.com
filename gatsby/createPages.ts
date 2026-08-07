@@ -1089,16 +1089,21 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Type pages exist for the `latest` row only, so all crosslinks resolve against that set.
-    const latestTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
-        if (isLatestVersion(node.version)) {
-            acc[node.referenceId] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
-        }
-        return acc
-    }, {} as Record<string, string[]>)
+    // The `latest` row is served unversioned; every other row keeps its `<sdk>-<version>` id.
+    const slugPrefixFor = (node: { version: string; referenceId: string; id: string }) =>
+        isLatestVersion(node.version) ? node.referenceId : node.id
+
+    // Each row crosslinks against its own types, so a versioned page describes that version.
+    const typesByRow = result.data.allSdkTypes.nodes.reduce(
+        (acc, node) => {
+            acc[node.id] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
+            return acc
+        },
+        {} as Record<string, string[]>
+    )
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        const path = `/docs/references/${isLatestVersion(node.version) ? node.referenceId : node.id}`
+        const path = `/docs/references/${slugPrefixFor(node)}`
 
         createPage({
             path,
@@ -1109,27 +1114,25 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 fullReference: node,
                 regex: path,
                 // Null checks, only affects type crosslinking, won't break build
-                types: latestTypesByReference[node.referenceId] ?? [],
+                types: typesByRow[node.id] ?? [],
             },
         })
     })
 
     result.data.allSdkTypes.nodes.forEach((node) => {
-        // Versioned type pages rot out of the build within a release cycle, so only build `latest`.
-        if (!isLatestVersion(node.version)) {
-            return
-        }
+        const slugPrefix = slugPrefixFor(node)
 
         node.types?.forEach((type) => {
             if (typeHasPage(type)) {
                 createPage({
-                    path: `/docs/references/${node.referenceId}/types/${type.id}`,
+                    path: `/docs/references/${slugPrefix}/types/${type.id}`,
                     component: SdkTypeTemplate,
                     context: {
                         typeData: type,
                         version: node.version,
                         referenceId: node.referenceId,
-                        types: latestTypesByReference[node.referenceId] ?? [],
+                        slugPrefix,
+                        types: typesByRow[node.id] ?? [],
                     },
                 })
             }

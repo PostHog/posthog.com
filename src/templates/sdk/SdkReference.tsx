@@ -150,7 +150,9 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     const sdkLanguage = getLanguageFromSdkId(fullReference.referenceId)
     const validTypes = pageContext.types
     const isLatest = isLatestVersion(fullReference.version)
-    // Crosslinks use the unversioned prefix so they don't rot when versioned pages age out.
+    // Crosslinks stay on this page's own version, so a pinned page describes that version.
+    const slugPrefix = isLatest ? fullReference.referenceId : fullReference.id
+    // Versioned copies are duplicates of the unversioned page, which is the one worth indexing.
     const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
@@ -375,7 +377,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={fullReference.referenceId}
+                                                        slugPrefix={slugPrefix}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -384,7 +386,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={fullReference.referenceId}
+                                                        slugPrefix={slugPrefix}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />
