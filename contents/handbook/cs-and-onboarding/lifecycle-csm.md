@@ -20,6 +20,7 @@ Once you've worked through your book of business, focus on building trust with y
 - **Be timely on alerts.** Our automated alerts flag event spikes, drops, and other unusual behavior. Reach out quickly so the customer can investigate. If a customer's company raises funding or gets press, send congrats.
 - **Push beyond the basics.** Look at what they're not using yet. Have they set up tracking funnels for key metrics? Created alerts on important actions? Tried PostHog AI? Implemented error tracking to explain conversion drops? Cross-sell here, but frame it as helping them get more value.
 - **Regularly invite new users to the Slack channel.** The more people on the customer side who know you exist, the more come to you when they hit issues. Monthly is a good cadence — Vitally shows you who's new.
+- **Recognize customer milestones.** When customers reach milestones like fundraising, product launches, or major growth, acknowledge and celebrate those moments and understand how their customer priorities might change.
 
 Offer recurring calls with your champion so you have a touchpoint and can stay close to what's happening.
 
