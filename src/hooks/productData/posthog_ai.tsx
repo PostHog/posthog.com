@@ -259,7 +259,7 @@ export const posthog_ai = {
             icon: <IconRewindPlay className="size-5" />,
             color: 'yellow',
             description:
-                "Don't scrub through hours of recordings — let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
+                "Don't scrub through hours of recordings – let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_reply_6846989ead.png',
@@ -305,7 +305,7 @@ export const posthog_ai = {
             icon: <IconToggle className="size-5" />,
             color: 'green',
             description:
-                'PostHog AI sets up, monitors, manages, and rolls out your feature flags — making releases safe by default.',
+                'PostHog AI sets up, monitors, manages, and rolls out your feature flags – making releases safe by default.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_ce422c1e73.png',
@@ -349,7 +349,7 @@ export const posthog_ai = {
             icon: <IconFlask className="size-5" />,
             color: 'purple',
             description:
-                'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics — you decide what deploys (and which experiments never leave the lab).',
+                'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics – you decide what deploys (and which experiments never leave the lab).',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
@@ -396,7 +396,7 @@ export const posthog_ai = {
             icon: <IconWarning className="size-5" />,
             color: 'orange',
             description:
-                'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context—not just stack traces.',
+                'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context – not just stack traces.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_53fc0bc180.png',
