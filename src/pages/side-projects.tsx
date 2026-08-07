@@ -352,11 +352,15 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                             <p className="mb-0 mt-3 max-w-3xl text-base leading-relaxed text-secondary">
                                 If building things like this sounds like your idea of a good time, we actively encourage
                                 it. Read our{' '}
-                                <Link to="/handbook/people/side-gigs" state={{ newWindow: true }}>
+                                <Link
+                                    to="/handbook/people/side-gigs"
+                                    state={{ newWindow: true }}
+                                    className="font-semibold underline"
+                                >
                                     side gigs policy
                                 </Link>
                                 , then{' '}
-                                <Link to="/careers" state={{ newWindow: true }}>
+                                <Link to="/careers" state={{ newWindow: true }} className="font-semibold underline">
                                     come work with us
                                 </Link>
                                 .
