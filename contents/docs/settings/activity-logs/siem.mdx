@@ -104,27 +104,37 @@ Install the [PostHog Splunk add-on](https://github.com/PostHog/splunk-add-on). S
 
 On **Splunk Cloud Platform**, go to **Apps** > **Find More Apps**, search for PostHog, and install.
 
-On **Splunk Enterprise**, install from Splunkbase, or copy the `TA-posthog-activity-logs` directory into `$SPLUNK_HOME/etc/apps/` and restart Splunk.
+On **Splunk Enterprise**, install from Splunkbase, or build it from source and copy the result into `$SPLUNK_HOME/etc/apps/`.
 
-### 2. Add an input
+### 2. Add your PostHog account
 
-Go to **Settings** > **Data inputs** > **PostHog activity logs** and click **New**.
+Open the add-on from the Splunk apps menu, go to **Configuration**, and click **Add**.
 
 | Field | Value |
 | --- | --- |
-| PostHog host | `https://us.posthog.com` or `https://eu.posthog.com` |
-| Organization ID | Find it in PostHog under **Settings** > **Organization** |
+| Name | A name for the account, so you can pick it when you add an input |
+| Region | US Cloud or EU Cloud |
 | Personal API key | A key with the `activity_log:read` scope |
+
+The key is held in Splunk's encrypted credential store. One account can serve several inputs.
+
+### 3. Add an input
+
+Go to **Inputs** and click **Create New Input**.
+
+| Field | Value |
+| --- | --- |
+| Name | A name for this input |
+| Account | The account you just added |
+| Organization ID | Find it in PostHog under **Settings** > **Organization** |
 | Interval | How often to poll, in seconds. 300 is a reasonable start |
+| Index | The index to write to. Note which one you pick, you need it to search |
 | Include changed values | Leave off unless you need before and after values |
 | Start date | Optional ISO-8601 lower bound for the first run |
-| Index | Under **More settings**, choose the index to write to. Note which one you pick, you need it to search |
 
 Save. Splunk polls on your interval and resumes from where it stopped, so entries are not collected twice.
 
-The add-on moves your API key into Splunk's encrypted credential store on the first run.
-
-### 3. Confirm events are arriving
+### 4. Confirm events are arriving
 
 Search the index you chose when you added the input:
 
@@ -142,7 +152,7 @@ Events are timestamped with when the activity happened in PostHog, not when Splu
 
 ### Troubleshooting
 
-Splunk records the add-on's messages in `$SPLUNK_HOME/var/log/splunk/splunkd.log`. Search for `posthog_activity_logs`.
+The add-on writes its own log, which you can search in Splunk with `index=_internal source=*ta_posthog_activity_logs*`. Raise the detail level on the add-on's **Configuration** > **Logging** tab.
 
 | Problem | Cause |
 | --- | --- |
@@ -150,7 +160,7 @@ Splunk records the add-on's messages in `$SPLUNK_HOME/var/log/splunk/splunkd.log
 | `403` from PostHog | The key does not have the `activity_log:read` scope |
 | Runs but indexes nothing | The input is up to date. Make a change in PostHog and wait for the next poll |
 
-To re-read history from the beginning, delete the input's checkpoint under `$SPLUNK_HOME/var/lib/splunk/modinputs/posthog_activity_logs/` and restart Splunk.
+To re-read history from the beginning, delete the input and add it again.
 
 ### Building your own input
 
