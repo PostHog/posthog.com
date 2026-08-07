@@ -196,10 +196,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-strapi-pages`,
+            resolve: `gatsby-source-git-metadata`,
             options: {
-                strapiURL: process.env.STRAPI_URL,
-                strapiKey: process.env.STRAPI_API_KEY,
+                owner: 'PostHog',
+                repo: 'posthog.com',
             },
         },
         `gatsby-plugin-image`,
