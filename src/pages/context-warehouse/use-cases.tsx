@@ -7,7 +7,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
-import { IconTrending, IconWarning, IconTarget } from '@posthog/icons'
+import { IconTrending, IconWarning, IconTarget, IconDatabase } from '@posthog/icons'
 import { HedgehogChartHog, HedgehogDocBrown } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -192,6 +192,73 @@ const sections: Section[] = [
     },
 ]
 
+const Mono = ({ children }: { children: React.ReactNode }) => (
+    <span className="font-code text-[0.9em] text-primary">{children}</span>
+)
+
+interface ModelingSkill {
+    name: string
+    builds: React.ReactNode
+    rule: React.ReactNode
+}
+
+// The "start here" skill every other modeling skill tells you to read first, so it gets
+// its own full-width card above the grid rather than competing with the domain skills.
+const foundationsSkill: ModelingSkill = {
+    name: 'modeling-warehouse-foundations',
+    builds: (
+        <>
+            The groundwork for everything else: PostHog views or dbt, the <Mono>view-create</Mono> to{' '}
+            <Mono>view-materialize</Mono> workflow, warehouse joins, currency conversion, and registering a model in the
+            data catalog so nobody builds a rival copy.
+        </>
+    ),
+    rule: 'Decide person vs. group once. That choice is load-bearing across every model you build after it.',
+}
+
+const modelingSkills: ModelingSkill[] = [
+    {
+        name: 'modeling-revenue-metrics',
+        builds: 'MRR, ARR, expansion and contraction, ARPU, LTV, and revenue per account.',
+        rule: 'MRR right now and MRR over time are two different models. A live snapshot never turns into a trend, so know which one you need before you build it.',
+    },
+    {
+        name: 'modeling-conversion-metrics',
+        builds: 'Funnel and step conversion rates, drop-off, and time-to-convert.',
+        rule: 'A conversion rate means nothing until you pin the time box. Signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
+    },
+    {
+        name: 'modeling-activation-metrics',
+        builds: 'An activated flag per user or account, plus an activation rate.',
+        rule: "Activation is not an event you declare. It's the early behavior that predicts whether people stick around, so test it against retention lift. If it doesn't lift, it isn't activation.",
+    },
+    {
+        name: 'modeling-product-usage-metrics',
+        builds: 'Retention, stickiness, and lifecycle models.',
+        rule: (
+            <>
+                Retention of <Mono>$pageview</Mono> and retention of your core action tell very different stories. Model
+                the one that means "got value".
+            </>
+        ),
+    },
+    {
+        name: 'modeling-dimension-tables',
+        builds: (
+            <>
+                <Mono>dim_country</Mono>, <Mono>dim_plan</Mono>, <Mono>dim_date</Mono>, and the other lookup tables
+                every model joins to.
+            </>
+        ),
+        rule: (
+            <>
+                One row per entity, or a duplicate key silently fans out every fact it touches. And don't hand-roll
+                currency, <Mono>convertCurrency()</Mono> already ships with PostHog.
+            </>
+        ),
+    },
+]
+
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
 }
@@ -233,6 +300,20 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
                     Go to tutorial
                 </CallToAction>
             </div>
+        </div>
+    )
+}
+
+function SkillCard({ skill }: { skill: ModelingSkill }) {
+    return (
+        <div className="flex h-full flex-col bg-primary border border-primary border-b-4 rounded p-5 transition-all hover:-translate-y-0.5 hover:border-b-red">
+            <p className="font-code text-[13.5px] font-bold leading-tight m-0 mb-3 break-words text-red dark:text-yellow">
+                {skill.name}
+            </p>
+            <p className="text-[14.5px] text-secondary m-0">{skill.builds}</p>
+            <div className="border-t border-primary mt-4 mb-2" />
+            <p className="text-[11px] font-bold uppercase tracking-wide text-green mt-2 mb-1">The rule it enforces</p>
+            <p className="text-[14.5px] text-secondary m-0">{skill.rule}</p>
         </div>
     )
 }
@@ -291,6 +372,65 @@ function UseCases(): JSX.Element {
                         </div>
                     </div>
                 ))}
+
+                <div className="mt-14 not-prose">
+                    <div className="mb-5">
+                        <h2 className="flex items-center gap-2 m-0 text-2xl font-bold @md/reader-content:text-3xl">
+                            <IconDatabase className="size-5 shrink-0 @md/reader-content:size-6 text-purple" />
+                            From a one-off answer to a model that lasts
+                        </h2>
+                        <p className="text-[15px] text-secondary mt-1 mb-0">
+                            A query answers the question today. A model answers it every day, with one definition reused
+                            by every insight, dashboard, and query downstream. These six Skills teach your coding agent
+                            how to build them, and each one carries an opinion about how to get it right.
+                        </p>
+                    </div>
+
+                    <div className="mb-4">
+                        <div className="bg-accent border border-primary border-b-4 rounded p-5">
+                            <div className="flex flex-wrap items-center gap-2 mb-3">
+                                <span className="font-code text-[13.5px] font-bold leading-tight break-words text-red dark:text-yellow">
+                                    {foundationsSkill.name}
+                                </span>
+                                <span className="text-[11px] font-bold uppercase tracking-wide text-green">
+                                    Start here
+                                </span>
+                            </div>
+                            <p className="text-[14.5px] text-secondary m-0">{foundationsSkill.builds}</p>
+                            <div className="border-t border-primary mt-4 mb-2" />
+                            <p className="text-[11px] font-bold uppercase tracking-wide text-green mt-2 mb-1">
+                                The rule it enforces
+                            </p>
+                            <p className="text-[14.5px] text-secondary m-0">{foundationsSkill.rule}</p>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 gap-4">
+                        {modelingSkills.map((skill) => (
+                            <SkillCard key={skill.name} skill={skill} />
+                        ))}
+                    </div>
+
+                    <p className="text-[14.5px] text-secondary mt-5 mb-0">
+                        Install the{' '}
+                        <Link to="/docs/model-context-protocol/claude-code" className="font-semibold">
+                            PostHog AI plugin
+                        </Link>{' '}
+                        in your coding agent, or open{' '}
+                        <Link to="/docs/posthog-desktop/skills" className="font-semibold">
+                            PostHog Desktop
+                        </Link>
+                        , then ask for the model you want. More on{' '}
+                        <Link to="/docs/data-warehouse/views" className="font-semibold">
+                            views
+                        </Link>{' '}
+                        and{' '}
+                        <Link to="/context-warehouse/data-modeling" className="font-semibold">
+                            data modeling
+                        </Link>
+                        .
+                    </p>
+                </div>
 
                 <div
                     className={`not-prose relative mt-14 overflow-hidden rounded-md border border-primary p-4 @md/reader-content:p-6 ${WINDOW_BG}`}
