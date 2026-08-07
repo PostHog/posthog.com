@@ -228,10 +228,17 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
                 Self-driving development
             </p>
             <p className="text-[14.5px] text-secondary m-0">{recipe.uncover}</p>
-            <div className="mt-auto pt-4">
-                <CallToAction to="/tutorials" type="secondary" size="sm" width="full">
-                    Go to tutorial
-                </CallToAction>
+            <div className="mt-auto flex gap-2 pt-4">
+                <div className="flex-1">
+                    <CallToAction to="/tutorials" type="secondary" size="sm" width="full">
+                        Tutorial
+                    </CallToAction>
+                </div>
+                <div className="flex-1">
+                    <CallToAction to="#" type="secondary" size="sm" width="full">
+                        Download Skill
+                    </CallToAction>
+                </div>
             </div>
         </div>
     )
@@ -254,9 +261,11 @@ function UseCases(): JSX.Element {
                                 </h1>
                                 <p className="!mb-0 !mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
                                     Your warehouse already holds all your PostHog data. Add an external source or two
-                                    and you can answer questions neither could answer alone.{' '}
-                                    <strong className="text-primary">PostHog events</strong> plus{' '}
-                                    <strong className="text-primary">your business data</strong> are the answers you've
+                                    and you can answer questions neither could answer alone.
+                                </p>
+                                <p className="!mb-0 !mt-2 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
+                                    <strong className="text-primary">PostHog events</strong> +{' '}
+                                    <strong className="text-primary">your business data</strong> = the answers you've
                                     been looking for.
                                 </p>
                             </div>
@@ -274,7 +283,7 @@ function UseCases(): JSX.Element {
                 </div>
 
                 {sections.map((section, si) => (
-                    <div key={si} className="mt-12 not-prose">
+                    <div key={si} className={`${si === 0 ? 'mt-6' : 'mt-12'} not-prose`}>
                         <div className="mb-5">
                             <h2 className="flex items-center gap-2 m-0 text-2xl font-bold @md/reader-content:text-3xl">
                                 <section.Icon
