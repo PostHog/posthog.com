@@ -1,7 +1,12 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
+import {
+    getLanguageFromSdkId,
+    hasConcreteVersion,
+    isLatestVersion,
+    typeHasPage,
+} from '../src/components/SdkReferences/utils'
 import {
     createTurndownService,
     extractTitleFromHtml,
@@ -181,6 +186,58 @@ ${jsonContent}
     console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
 }
 
+const renderTypeAsText = (type: string): string => {
+    return type
+}
+
+const renderParameters = (params: any[], title = 'Parameters'): string => {
+    if (!params || params.length === 0) return ''
+
+    const paramLines = params.map((param) => {
+        const name = param.isOptional ? `${param.name}?` : param.name
+        const type = renderTypeAsText(param.type)
+        let paramLine = `- **\`${name}\`** (\`${type}\`)`
+
+        if (param.description) {
+            paramLine += ` - ${param.description}`
+        }
+        return paramLine
+    })
+
+    return `### ${title}\n\n${paramLines.join('\n')}`
+}
+
+const renderReturnType = (returnType: any): string => {
+    if (!returnType) return ''
+
+    const typeString = returnType.name
+    const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
+
+    if (isUnionOrIntersection) {
+        const separator = typeString.includes('|') ? '|' : '&'
+        const types = typeString.split(separator).map((t: string) => t.trim())
+        const label = separator === '|' ? 'Union of' : 'Intersection of'
+
+        const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
+        return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
+    } else {
+        return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
+    }
+}
+
+const renderExamples = (examples: any[], language: string, title = 'Examples'): string => {
+    if (!examples || examples.length === 0) return ''
+
+    if (examples.length === 1) {
+        return `### ${title}\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+    } else {
+        const exampleBlocks = examples.map(
+            (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
+        )
+        return `### ${title}\n\n${exampleBlocks.join('\n\n')}`
+    }
+}
+
 export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) => {
     const sdkSpecDir = path.join(process.cwd(), 'public', 'docs', 'references')
     if (!fs.existsSync(sdkSpecDir)) {
@@ -191,7 +248,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     // Follow the same path logic as createPages.ts
     let fileName: string
-    if (sdkReferences.version.includes('latest')) {
+    if (isLatestVersion(sdkReferences.version)) {
         fileName = `${sdkReferences.referenceId}.md`
     } else {
         fileName = `${sdkReferences.id}.md`
@@ -199,62 +256,12 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const filePath = path.join(sdkSpecDir, fileName)
 
-    const renderTypeAsText = (type: string): string => {
-        return type
-    }
-
-    const renderParameters = (params: any[]): string => {
-        if (!params || params.length === 0) return ''
-
-        const paramLines = params.map((param) => {
-            const name = param.isOptional ? `${param.name}?` : param.name
-            const type = renderTypeAsText(param.type)
-            let paramLine = `- **\`${name}\`** (\`${type}\`)`
-
-            if (param.description) {
-                paramLine += ` - ${param.description}`
-            }
-            return paramLine
-        })
-
-        return `### Parameters\n\n${paramLines.join('\n')}`
-    }
-
-    const renderReturnType = (returnType: any): string => {
-        if (!returnType) return ''
-
-        const typeString = returnType.name
-        const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
-
-        if (isUnionOrIntersection) {
-            const separator = typeString.includes('|') ? '|' : '&'
-            const types = typeString.split(separator).map((t: string) => t.trim())
-            const label = separator === '|' ? 'Union of' : 'Intersection of'
-
-            const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
-            return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
-        } else {
-            return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
-        }
-    }
-
-    const renderExamples = (examples: any[], language: string): string => {
-        if (!examples || examples.length === 0) return ''
-
-        if (examples.length === 1) {
-            return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
-        } else {
-            const exampleBlocks = examples.map(
-                (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
-            )
-            return `### Examples\n\n${exampleBlocks.join('\n\n')}`
-        }
-    }
-
     const markdownNodes: string[] = []
 
     markdownNodes.push(`# ${sdkReferences.info.title}`)
-    markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    if (hasConcreteVersion(sdkReferences.info.version)) {
+        markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    }
     markdownNodes.push(sdkReferences.info.description)
 
     if (sdkReferences.categories && sdkReferences.categories.length > 0) {
@@ -325,6 +332,44 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
     const markdownContent = markdownNodes.join('\n\n')
 
     fs.writeFileSync(filePath, markdownContent, 'utf8')
+}
+
+/** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
+export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
+    if (!isLatestVersion(sdkReferences.version)) {
+        return
+    }
+
+    const typesDir = path.join(process.cwd(), 'public', 'docs', 'references', sdkReferences.referenceId, 'types')
+    fs.mkdirSync(typesDir, { recursive: true })
+
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.referenceId)
+
+    sdkReferences.types?.forEach((type) => {
+        if (!typeHasPage(type)) {
+            return
+        }
+
+        const markdownNodes: string[] = [`# ${type.name}`, `**SDK:** ${sdkReferences.info.title}`]
+
+        if (type.description) {
+            markdownNodes.push(type.description)
+        }
+
+        const propertiesMarkdown = renderParameters(type.properties, 'Properties')
+        if (propertiesMarkdown) {
+            markdownNodes.push(propertiesMarkdown)
+        }
+
+        const exampleMarkdown = type.example
+            ? renderExamples([{ code: type.example }], sdkLanguage, 'Example values')
+            : ''
+        if (exampleMarkdown) {
+            markdownNodes.push(exampleMarkdown)
+        }
+
+        fs.writeFileSync(path.join(typesDir, `${type.id}.md`), markdownNodes.join('\n\n'), 'utf8')
+    })
 }
 
 // Function to generate llms.txt file according to spec

@@ -5,6 +5,7 @@ import slugify from 'slugify'
 import menu from '../src/navs/index'
 import type { GatsbyContentResponse, MetaobjectsCollection } from '../src/templates/merch/types'
 import { flattenMenu, replacePath } from './utils'
+import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -1097,76 +1098,52 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     })
 
-    // Grab types available for each SDK and version
-    const sdkTypesByReference = result.data.allSdkTypes.nodes.reduce((acc, node) => {
-        const { referenceId, version, ...types } = node
+    // The `latest` row is served unversioned; every other row keeps its `<sdk>-<version>` id.
+    const slugPrefixFor = (node: { version: string; referenceId: string; id: string }) =>
+        isLatestVersion(node.version) ? node.referenceId : node.id
 
-        if (!acc[referenceId]) {
-            acc[referenceId] = {}
-        }
-
-        acc[referenceId][version] = types.types.map(({ name }) => name)
-
-        return acc
-    }, {} as Record<string, Record<string, any>>)
+    // Each row crosslinks against its own types, so a versioned page describes that version.
+    const typesByRow = result.data.allSdkTypes.nodes.reduce(
+        (acc, node) => {
+            acc[node.id] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
+            return acc
+        },
+        {} as Record<string, string[]>
+    )
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        if (node.version.includes('latest')) {
-            createPage({
-                path: `/docs/references/${node.referenceId}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.referenceId}`,
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        } else {
-            createPage({
-                path: `/docs/references/${node.id}`,
-                component: SdkReferenceTemplate,
-                context: {
-                    name: node.info.title,
-                    description: node.info.description,
-                    fullReference: node,
-                    regex: `/docs/references/${node.id}`,
-                    // Null checks, only affects type crosslinking, won't break build
-                    types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                },
-            })
-        }
+        const path = `/docs/references/${slugPrefixFor(node)}`
+
+        createPage({
+            path,
+            component: SdkReferenceTemplate,
+            context: {
+                name: node.info.title,
+                description: node.info.description,
+                fullReference: node,
+                regex: path,
+                // Null checks, only affects type crosslinking, won't break build
+                types: typesByRow[node.id] ?? [],
+            },
+        })
     })
 
     result.data.allSdkTypes.nodes.forEach((node) => {
+        const slugPrefix = slugPrefixFor(node)
+
         node.types?.forEach((type) => {
-            if (type.id && (type.properties || type.example)) {
-                if (node.version.includes('latest')) {
-                    createPage({
-                        path: `/docs/references/${node.referenceId}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.referenceId,
-                        },
-                    })
-                } else {
-                    createPage({
-                        path: `/docs/references/${node.id}/types/${type.id}`,
-                        component: SdkTypeTemplate,
-                        context: {
-                            typeData: type,
-                            version: node.version,
-                            id: node.id,
-                            types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
-                            slugPrefix: node.id,
-                        },
-                    })
-                }
+            if (typeHasPage(type)) {
+                createPage({
+                    path: `/docs/references/${slugPrefix}/types/${type.id}`,
+                    component: SdkTypeTemplate,
+                    context: {
+                        typeData: type,
+                        version: node.version,
+                        referenceId: node.referenceId,
+                        slugPrefix,
+                        types: typesByRow[node.id] ?? [],
+                    },
+                })
             }
         })
     })
