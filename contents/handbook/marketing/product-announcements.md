@@ -41,11 +41,12 @@ It's easy to look at what competitors post on X and feel like we should be slick
 
 We classify announcements into four tiers, from a full-blown new product launch (tier 1) down to a minor changelog note (tier 4). The tier defines how much we do to market something. It's a guideline, but PMMs have free rein to do something different.
 > This framework helps us manage expectations with other teams. When a team lead or PM tells us about a launch, we use the context they give us (plus our own judgement) to decide which tier it falls into. Share that back with the team so they know what marketing will deliver.
+
 ### Deciding what to market
 
 Before you settle on a launch tier, work through the questions below. They shape how you pitch a launch and who you point it at.
 
-- **Who is this for, and what do they expect from us?** Remember that existing users have fixed notions of what PostHog is and what it's for. As we attract new users with the self-driving story, that gap will widen – so be deliberate about which story a given audience is expecting and how this launch relates.
+**Who is this for, and what do they expect from us?** Remember that existing users have fixed notions of what PostHog is and what it's for. As we attract new users with the self-driving story, that gap will widen – so be deliberate about which story a given audience is expecting and how this launch relates.
 
 **Which surface is it for?** Should a user reach for this new thing through MCP, desktop, web, or the Slack app? Be explicit about where it's most relevant to the user based on the interface(s) they're engaged, or which interface you want them to adopt. 
 
@@ -53,11 +54,11 @@ Before you settle on a launch tier, work through the questions below. They shape
 
 **How does it fit the self-driving story?** Some launches feed the loop by giving the system a new source of context (tickets, conversations). Other launches close the loop by acting on that context (Scouts generating Inbox reports). Both promise the same thing: the user's product gets better. A support product isn't exciting because an agent can read tickets. It's exciting because bugs buried in those tickets get found and fixed without anyone prompting it.
 
-- **What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for thing that's launching (the PMM can ask the PM for this). Actions that carry more decision or risk, like connecting a GitHub account to enable self-driving, will typically have lower conversion and need more follow-ups emails and marketing.
+**What's the "now what?"** Once someone clicks the email, ad, or notification, what's the one meaningful action we want? Be diligent about setting a goal metric in Customer.io, usually tied to the activation criteria for thing that's launching (the PMM can ask the PM for this). Actions that carry more decision or risk, like connecting a GitHub account to enable self-driving, will typically have lower conversion and need more follow-ups emails and marketing.
 
 ### Tier 1: New product announcements
 
-New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/meta/issues/new/choose). Product marketers should always create a launch plan for new product announcements.
+New product launches are our biggest tier. They have their own GitHub template: [Launch Plan](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md). Product marketers should always create a launch plan for new product announcements.
 
 Here are some activities your Tier 1 launch could include:
 
@@ -82,7 +83,7 @@ Some other things we've done for launches:
 - If the product is moving from free beta to paid general availability (GA) you might also want to choose a reward for beta users. Examples of this include giving PostHog AI beta users 30 extra days of unlimited free usage, or giving Workflows beta users a discount code for merch.
 - If the product has been free for a while and it's becoming paid with the launch, make sure to plan to notify free customers in advance and clearly communicate pricing. 
 
-As an example, here's the issue of the [Tier 1 launch for Replay Vision](https://github.com/PostHog/requests-for-comments-public/issues/562).
+As an example, here's the issue of the [Tier 1 launch for Replay Vision](https://github.com/PostHog/marketing/issues/179).
 
 _Note: All of these are suggestions, not must-haves. It's likely that not all of these things can be ready for launch. A case study, for example, can follow a few weeks after._
 

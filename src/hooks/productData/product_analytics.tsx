@@ -1,19 +1,19 @@
 import React from 'react'
 import {
-    IconGraph,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconGraph,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
@@ -164,16 +164,21 @@ export const productAnalytics = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_data_warehouse_light_b0cdbebe8f.png',
             alt: 'SQL editor',
         },
+        'mcp-analytics': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_dashboard_light_0907967b56.png',
+            alt: 'MCP analytics dashboard',
+        },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-        alt: 'A hedgehog presenting some shocking findings',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-hog.png',
+        alt: 'A hedgehog wearing a chart apron',
+        footerClasses: 'max-w-[220px]',
         classes: 'absolute bottom-0 right-4 max-w-lg',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-            alt: 'A hedgehog presenting some shocking findings',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/steve_hogs_17c7900b07.png',
+            alt: 'A hedgehog presenting a chart on stage',
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
@@ -380,8 +385,8 @@ export const productAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/PRODUCT_ANALYTICS_hog_23b2808c18.png',
-        imageAlt: 'PostHog AI and product analytics',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_hog_f6db3a01c9.png',
+        imageAlt: 'A hedgehog presenting some shocking findings',
         intro: 'Ask PostHog AI to answer product questions, build insights, and write SQL.',
         mcpFeatures: ['product_analytics', 'insights', 'sql', 'dashboards'],
         groups: [
@@ -439,7 +444,7 @@ export const productAnalytics = {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
         features:
-            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/data-stack'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
+            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/context-warehouse'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
         answers:
             'These questions come from real users. The cool thing is you can answer them without writing code or bothering engineering. Define churn however you want, find those users, see what they did differently. Then watch their last sessions to understand why they left. Power users? We automatically find who uses features most. Make cohorts, message them differently, whatever you need.',
         pricing:

@@ -4,12 +4,6 @@ title: Troubleshooting
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
 Common things that go wrong with Replay Vision, and what to do about each.
 
 ## My scanner isn't producing any observations
@@ -65,7 +59,7 @@ One caveat: sessions from the over-limit window are permanently unscannable. Dro
 
 ## The model is making bad calls
 
-Start on the scanner's [quality tab](/docs/replay-vision/quality): rate the wrong results with a thumbs down and say why in the feedback field. PostHog AI turns those ratings into a configuration recommendation you can test against the rated sessions before applying – that loop fixes most systematic errors without hand-tuning.
+Start on the scanner's [calibration tab](/docs/replay-vision/calibration): rate the wrong results with a thumbs down and say why in the feedback field. PostHog AI turns those ratings into a configuration recommendation you can test against the rated sessions before applying – that loop fixes most systematic errors without hand-tuning.
 
 To understand *why* the model got something wrong, the reasoning + citations on each observation are your debugging tool. Open three or four observations the scanner got wrong and read them.
 
@@ -136,4 +130,4 @@ Something else went wrong on PostHog's side. These should be rare.
 
 ## Something else
 
-If you're hitting something that doesn't fit the above, [reach out](/questions) – Replay Vision is in beta and the team is actively looking for sharp edges.
+If you're hitting something that doesn't fit the above, [reach out](/questions) – the team is actively looking for sharp edges.

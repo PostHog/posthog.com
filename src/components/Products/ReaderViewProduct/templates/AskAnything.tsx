@@ -28,6 +28,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const ai = productData?.ai
     const groups: PromptGroup[] = ai?.groups ?? []
     const mcpFeatures: string[] = ai?.mcpFeatures ?? []
+    const HogComponent = ai?.Hog
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
 
@@ -78,7 +79,7 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                 }}
                 options={[
                     { label: 'Example prompts', value: 'prompts', default: true },
-                    { label: 'Tools', value: 'tools' },
+                    { label: 'MCP tools', value: 'tools' },
                 ]}
                 className="mb-4 max-w-sm"
             />
@@ -86,13 +87,20 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                 <div className="flex-1 min-w-0 w-full">
                     {tab === 'prompts' && (
                         <>
-                            {ai?.image && (
+                            {(HogComponent || ai?.image) && (
                                 <aside className="w-36 mx-auto mb-4 @lg:ml-4 @lg:mr-0 @lg:float-right @lg:w-28 @xl:w-40 @2xl:w-48 @6xl:w-56 @xl:ml-8 transition-all">
-                                    <CloudinaryImage
-                                        src={ai.image}
-                                        alt={ai.imageAlt || 'Ask PostHog anything'}
-                                        className="w-full"
-                                    />
+                                    {HogComponent ? (
+                                        <HogComponent
+                                            className="w-full h-auto"
+                                            title={ai.imageAlt || 'Ask PostHog anything'}
+                                        />
+                                    ) : (
+                                        <CloudinaryImage
+                                            src={ai.image}
+                                            alt={ai.imageAlt || 'Ask PostHog anything'}
+                                            className="w-full"
+                                        />
+                                    )}
                                 </aside>
                             )}
                             <div className="space-y-6">

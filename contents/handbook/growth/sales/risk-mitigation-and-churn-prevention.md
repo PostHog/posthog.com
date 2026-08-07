@@ -8,7 +8,7 @@ If you're actively thinking about churn prevention in response to a customer chu
 
 Churn prevention is best done from early, and often, risk mitigation practices.
 
-We should default to flagging "at risk" accounts using the "Churn Risk" segment in Vitally well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
+We should default to flagging "at risk" accounts by adding the "Churn Risk" tag in PostHog Customer Analytics well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
 
 There are a few risk-mitigation strategies you'll want to incorporate that serve as early detection and proactive mitigation, as well as a process for what to do when an account is actively at risk.
 
@@ -95,6 +95,16 @@ A lot of customers self-serve without ever talking to a PostHog human. This mean
 
 Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) for the full checklist.
 
+**When a customer wants to cut costs**
+
+If a customer expresses interest in reducing their PostHog spend, view it as an opportunity to act in their interest, help them optimize, and stabilize the relationship. The fact that they're telling you is a signal of trust. Deepen that trust by helping them save money (which is a totally reasonable goal to support).
+
+- **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
+- **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
+- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/cs-and-onboarding/how-we-work#working-with-engineering-teams) so they can better assist you).
+- **Consider proposing a target spend.** Once you've acted on their initial request, consider aligning on a target monthly spend. You can then work backwards from that goal to improve their implementation and shape how you support them going forward.
+- **Pause any cross-selling or expansion work until they're at their target monthly spend.** You make the call on when the relationship is stable enough to recommend increased adoption of our products, but it's a safe bet to pause on this while they're in the process of lowering their spend.
+
 **Billing waste:**
 
 - **Group Analytics enabled but not implemented.** We have a Vitally risk indicator for this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
@@ -140,7 +150,7 @@ When an account is actively at risk (they've told you they're evaluating alterna
 
 ### When to flag an account as at risk
 
-Add the account to the **Churn Risk** segment in Vitally if any of the following are true:
+Add the **Churn Risk** tag to the account in PostHog Customer Analytics if any of the following are true:
 
 - Customer explicitly mentions evaluating alternatives or considering churning
 - Usage has dropped 30%+ with no seasonal explanation
@@ -155,9 +165,9 @@ Add the account to the **Churn Risk** segment in Vitally if any of the following
 
 ### Internal process
 
-**1. Add churn risk segment in Vitally**
+**1. Add the Churn Risk tag in PostHog Customer Analytics**
 
-When you flag an account as at risk, add a note in vitally  with:
+When you flag an account as at risk, add the **Churn Risk** tag to the account in PostHog Customer Analytics, and add a note on the account with:
 
 - Account name and ARR
 - What triggered the risk flag
@@ -165,11 +175,11 @@ When you flag an account as at risk, add a note in vitally  with:
 - What help you need (if any)
 - What you are doing to mitigate the churn
 
-The churn risk bot should automatically post this in the #customer-churn slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
+Adding the tag triggers a PostHog workflow that automatically posts to the #customer-churn Slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
 **2. Weekly at-risk account review**
 
-We hold a weekly team meeting to review all accounts in the Churn Risk segment in Vitally. Come prepared to:
+We hold a weekly team meeting to review all accounts tagged **Churn Risk** in PostHog Customer Analytics. Come prepared to:
 
 - Give a 60-second status update on each at-risk account you own
 - Share what you've tried and what's working or not

@@ -2,18 +2,20 @@ import React from 'react'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { useApp } from '../../../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export const Letterhead = () => {
-    const { siteSettings } = useApp()
-
     return (
         <div className="not-prose border-b border-primary py-4 flex flex-col gap-2 @sm:flex-row items-center justify-between">
             <div>
                 <img
-                    className="inline-block w-auto h-auto max-w-full"
-                    src={siteSettings.theme === 'dark' ? '/brand/posthog-logo-white.svg' : '/brand/posthog-logo.svg'}
+                    className="inline-block w-auto h-auto max-w-full dark:hidden"
+                    src="/brand/posthog-logo.svg"
+                    alt="PostHog"
+                />
+                <img
+                    className="hidden w-auto h-auto max-w-full dark:inline-block"
+                    src="/brand/posthog-logo-white.svg"
                     alt="PostHog"
                 />
             </div>
