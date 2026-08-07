@@ -42,5 +42,6 @@ __pycache__
 
 .playwright-mcp/
 .env*.local
+/.claude/settings.local.json
 /.claude/worktrees/
 .env*
