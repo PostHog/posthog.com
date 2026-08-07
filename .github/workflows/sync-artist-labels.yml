@@ -8,12 +8,12 @@ name: Sync artist labels from board
 # the label is removed. Closed issues are left untouched.
 #
 # SETUP:
-# 1. In PostHog/posthog.com → Issues → Labels → create a label for each artist
-#    in the statusToLabel map below.
+# 1. In each repo that holds board issues (PostHog/posthog.com, PostHog/marketing)
+#    → Issues → Labels → create a label for each artist in the statusToLabel map below.
 # 2. Nothing else — this uses the existing posthog-art-board-bot GitHub App, whose
 #    credentials are already stored as repo secrets (see the sibling art-board-* workflows).
 #    The app installation needs:
-#      - Repository permissions: Issues → Read and write (PostHog/posthog.com)
+#      - Repository permissions: Issues → Read and write (PostHog/posthog.com, PostHog/marketing)
 #      - Organization permissions: Projects → Read-only
 # 3. Test it: Actions tab → "Sync artist labels from board" → Run workflow.
 
@@ -35,6 +35,13 @@ jobs:
               with:
                   app-id: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_APP_ID }}
                   private-key: ${{ secrets.GH_APP_POSTHOG_ART_BOARD_BOT_PRIVATE_KEY }}
+                  # Board items live in other repos (art/merch requests moved to
+                  # PostHog/marketing) — an unscoped token only covers this repo
+                  # and 403s on every cross-repo write.
+                  owner: PostHog
+                  repositories: |
+                      posthog.com
+                      marketing
             - name: Sync labels with board status
               uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
               with:
@@ -97,11 +104,20 @@ jobs:
                         cursor = items.pageInfo.endCursor;
                       }
 
+                      // One inaccessible issue (e.g. in a repo the token isn't
+                      // scoped for) must not kill the rest of the sync.
+                      let failures = 0;
                       for (const t of changes) {
-                        if (t.action === "add") {
-                          await github.rest.issues.addLabels({ owner: t.owner, repo: t.repo, issue_number: t.number, labels: [t.label] });
-                        } else {
-                          await github.rest.issues.removeLabel({ owner: t.owner, repo: t.repo, issue_number: t.number, name: t.label }).catch(() => {});
+                        try {
+                          if (t.action === "add") {
+                            await github.rest.issues.addLabels({ owner: t.owner, repo: t.repo, issue_number: t.number, labels: [t.label] });
+                          } else {
+                            await github.rest.issues.removeLabel({ owner: t.owner, repo: t.repo, issue_number: t.number, name: t.label });
+                          }
+                        } catch (error) {
+                          failures++;
+                          core.info(`Skipped ${t.owner}/${t.repo}#${t.number}: ${error.message}`);
                         }
                       }
-                      core.info(`Applied ${changes.length} label change(s).`);
+                      core.info(`Applied ${changes.length - failures} of ${changes.length} label change(s).`);
+                      if (failures > 0) core.warning(`${failures} change(s) could not be applied.`);
