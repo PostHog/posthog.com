@@ -86,8 +86,8 @@ This is the default model for Snowflake batch exports. The schema of the model a
 | event                        | `STRING`    | The name of the event that was sent                                       |
 | properties                   | `VARIANT`   | A JSON object with all the properties sent along with an event            |
 | elements                     | `VARIANT`   | This field is present for backwards compatibility but has been deprecated |
-| people_set                   | `VARIANT`   | A JSON object with any person properties sent with the `$set` field       |
-| people_set_once              | `VARIANT`   | A JSON object with any person properties sent with the `$set_once` field  |
+| people_set                   | `VARIANT`   | Deprecated. Person update payloads aren't retained on stored events       |
+| people_set_once              | `VARIANT`   | Deprecated. Person update payloads aren't retained on stored events       |
 | distinct_id                  | `STRING`    | The `distinct_id` of the user who sent the event                          |
 | team_id                      | `INTEGER`   | The `team_id` for the event                                               |
 | ip                           | `STRING`    | The IP address that was sent with the event                               |

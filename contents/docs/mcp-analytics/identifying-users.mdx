@@ -37,7 +37,7 @@ instrument(server, posthog, {
 
     return {
       distinctId: user.id,              // becomes distinct_id
-      properties: {                     // written to $set
+      properties: {                     // become person properties
         name: user.name,
         email: user.email,
         plan: user.plan,
@@ -54,13 +54,13 @@ instrument(server, posthog, {
 This is the same shape as posthog-node's [`identify({ distinctId, properties })`](/docs/libraries/node) — just returned from a per-request callback instead of called imperatively. The fields map to PostHog as follows:
 
 - `distinctId` → the event's `distinct_id`.
-- `properties` → written verbatim to `$set` (so to set a person's name or email, put them here, e.g. `properties: { name, email }`).
+- `properties` → written verbatim to the person profile (so to set a person's name or email, put them here, e.g. `properties: { name, email }`). Query them as [person properties](/docs/product-analytics/person-properties) — they aren't stored on the event.
 - `groups` (optional `Record<string, string>` of groupType → groupKey) is stamped onto **every** event as `$groups`. You never hand-write `$groups` yourself.
 
 When this returns a non-null identity, the SDK:
 
 1. Switches the event's `distinct_id` to `distinctId` for that session.
-2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), with `$set` populated from `properties`.
+2. Emits a `$identify` event the first time the identity is observed (or whenever it changes for that session), setting person properties from `properties`.
 3. Stamps `$groups` onto subsequent events from the returned `groups` map.
 4. Caches the identity in a small per-server LRU keyed by session id, so unchanged identities are silently deduped.
 
