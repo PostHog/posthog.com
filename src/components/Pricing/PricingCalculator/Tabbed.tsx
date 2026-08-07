@@ -2,7 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
 import Toggle from 'components/Toggle'
-import { calculatePrice, formatUSD } from '../PricingSlider/pricingSliderLogic'
+import { formatUSD } from '../PricingSlider/pricingSliderLogic'
+import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
@@ -277,28 +278,7 @@ export default function Tabbed() {
     const { products: initialProducts, setVolume, setProduct, monthlyTotal } = useProducts()
     const products = initialProducts.filter((product) => !!product.unit && !product.hideFromPricingTableAndCalculator)
     const activeProduct = products[activeTab]
-    const initialProductAddons = useMemo(() => {
-        const initialAddons = []
-        for (const product of products) {
-            if (product.billingData?.addons?.length > 0) {
-                product.billingData.addons.forEach((addon) => {
-                    // Some products share a billing product (eg. Web analytics is billed as Product
-                    // analytics), so the same add-on shows up on more than one product. Add-ons are
-                    // tracked by type, so register each type once – otherwise its cost is counted
-                    // once per product that surfaces it.
-                    if (initialAddons.some((initialAddon) => initialAddon.type === addon.type)) {
-                        return
-                    }
-                    initialAddons.push({
-                        type: addon.type,
-                        checked: addonDefaults[addon.type]?.checked || false,
-                        totalCost: 0,
-                    })
-                })
-            }
-        }
-        return initialAddons
-    }, [])
+    const initialProductAddons = useMemo(() => buildProductAddons(products, addonDefaults), [])
     const initialPlatformAddons = useMemo(() => {
         const initialAddons = []
         platform.addons.forEach((addon) => {
@@ -314,10 +294,7 @@ export default function Tabbed() {
     const [productAddons, setProductAddons] = useState(initialProductAddons)
     const [platformAddons, setPlatformAddons] = useState(initialPlatformAddons)
     const totalPrice = useMemo(
-        () =>
-            monthlyTotal +
-            productAddons.reduce((acc, addon) => acc + addon.totalCost, 0) +
-            platformAddons.reduce((acc, addon) => acc + (addon.checked ? addon.price : 0), 0),
+        () => getCalculatorTotal(monthlyTotal, productAddons, platformAddons),
         [monthlyTotal, productAddons, platformAddons]
     )
 
@@ -379,13 +356,7 @@ export default function Tabbed() {
                         {products.map(
                             ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
                                 const active = activeTab === index
-                                const addonsPrice = productAddons
-                                    .filter(
-                                        (addon) =>
-                                            addon.checked &&
-                                            billingData?.addons.some((billingAddon) => addon.type === billingAddon.type)
-                                    )
-                                    .reduce((acc, addon) => acc + addon.totalCost, 0)
+                                const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
                                     <li key={name} className="flex-1">
                                         <button

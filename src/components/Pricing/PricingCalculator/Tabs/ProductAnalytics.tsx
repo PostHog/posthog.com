@@ -3,7 +3,8 @@ import { IconCheck, IconInfo, IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
-import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { calculatePrice, getAddonsCostForProduct } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
@@ -397,12 +398,7 @@ export default function ProductAnalyticsTab({
     // `addons` is shared across every product in the calculator, so scope it to this product's
     // add-ons before adding them to the subtotal
     const productAnalyticsAddonsCost = useMemo(
-        () =>
-            addons
-                .filter((addon) =>
-                    activeProduct?.billingData.addons.some((productAddon) => productAddon.type === addon.type)
-                )
-                .reduce((acc, addon) => acc + addon.totalCost, 0),
+        () => getAddonsCostForProduct(addons, activeProduct?.billingData),
         [addons, activeProduct]
     )
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)

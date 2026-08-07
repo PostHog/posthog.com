@@ -31,6 +31,8 @@
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "test-redirects": "jest scripts",
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
+        "test:pricing-calculator": "node --test src/components/Pricing/PricingCalculator/calculatorLogic.test.ts",
+        "check-billing-prices": "node scripts/billing-products-fixture.mjs --check",
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "check-product-changelogs": "node scripts/check-product-changelogs.js",
         "generate-md-redirects": "node scripts/generate-md-redirects.js",

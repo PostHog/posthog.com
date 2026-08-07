@@ -1,0 +1,1299 @@
+{
+    "_comment": "Trimmed snapshot of https://billing.posthog.com/api/products-v2?display_friendly=true. Refresh with: node scripts/billing-products-fixture.mjs",
+    "products": [
+        {
+            "type": "product_analytics",
+            "name": "Product analytics",
+            "unit": "event",
+            "usage_key": "events",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20230117",
+                    "unit": "event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 1000000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20240404",
+                    "unit": "event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 2000000,
+                            "unit_amount_usd": "0.00005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 15000000,
+                            "unit_amount_usd": "0.0000343",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000000,
+                            "unit_amount_usd": "0.0000295",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000000,
+                            "unit_amount_usd": "0.0000218",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 250000000,
+                            "unit_amount_usd": "0.000015",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.000009",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "enhanced_persons",
+                    "name": "Identified events",
+                    "unit": "event",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Addon",
+                            "plan_key": "free-20240531",
+                            "unit": "event",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": null
+                        },
+                        {
+                            "name": "Addon",
+                            "plan_key": "addon-20240404",
+                            "unit": "event",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 1000000,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 2000000,
+                                    "unit_amount_usd": "0.000198",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 15000000,
+                                    "unit_amount_usd": "0.0000697",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000000,
+                                    "unit_amount_usd": "0.000036",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000000,
+                                    "unit_amount_usd": "0.0000146",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 250000000,
+                                    "unit_amount_usd": "0.0000037",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.000001",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "group_analytics",
+                    "name": "Group analytics",
+                    "unit": "event",
+                    "inclusion_only": false,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Addon",
+                            "plan_key": "addon-20240313",
+                            "unit": "event",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 1000000,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 2000000,
+                                    "unit_amount_usd": "0.000071",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 15000000,
+                                    "unit_amount_usd": "0.00003",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000000,
+                                    "unit_amount_usd": "0.0000189",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000000,
+                                    "unit_amount_usd": "0.0000105",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 250000000,
+                                    "unit_amount_usd": "0.000004",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.0000029",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "data_pipelines",
+                    "name": "Data pipelines",
+                    "unit": "event",
+                    "inclusion_only": false,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Addon",
+                            "plan_key": "addon-20240313",
+                            "unit": "event",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 1000000,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 2000000,
+                                    "unit_amount_usd": "0.000062",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 15000000,
+                                    "unit_amount_usd": "0.000026",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000000,
+                                    "unit_amount_usd": "0.0000164",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000000,
+                                    "unit_amount_usd": "0.0000091",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 250000000,
+                                    "unit_amount_usd": "0.0000047",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.0000025",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "session_replay",
+            "name": "Session replay",
+            "unit": "recording",
+            "usage_key": "recordings",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20231218",
+                    "unit": "recording",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 5000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20240402-5k-free",
+                    "unit": "recording",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 5000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 15000,
+                            "unit_amount_usd": "0.005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000,
+                            "unit_amount_usd": "0.0035",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 150000,
+                            "unit_amount_usd": "0.002",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 500000,
+                            "unit_amount_usd": "0.0017",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.0015",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "mobile_replay",
+                    "name": "Mobile session replay",
+                    "unit": "mobile recording",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Addon",
+                            "plan_key": "free-20250106",
+                            "unit": "mobile recording",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": 2500,
+                            "tiers": null
+                        },
+                        {
+                            "name": "Addon",
+                            "plan_key": "addon-20250106",
+                            "unit": "mobile recording",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 2500,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 15000,
+                                    "unit_amount_usd": "0.01",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000,
+                                    "unit_amount_usd": "0.007",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 150000,
+                                    "unit_amount_usd": "0.004",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 500000,
+                                    "unit_amount_usd": "0.0034",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.003",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "realtime_destinations",
+            "name": "Realtime destinations",
+            "unit": "trigger event",
+            "usage_key": "cdp_trigger_events",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "realtime-destinations-free-20250902",
+                    "unit": "trigger event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 10000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "realtime-destinations-paid-20250902",
+                    "unit": "trigger event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 10000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000,
+                            "unit_amount_usd": "0.0005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000,
+                            "unit_amount_usd": "0.0003",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0.00015",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.0001",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000000,
+                            "unit_amount_usd": "0.00005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.000025",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "batch_exports",
+                    "name": "Batch exports",
+                    "unit": "row",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Free",
+                            "plan_key": "batch-exports-free-20250902",
+                            "unit": "row",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": 1000000,
+                            "tiers": null
+                        },
+                        {
+                            "name": "Paid",
+                            "plan_key": "batch-exports-paid-20250902",
+                            "unit": "row",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 1000000,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 10000000,
+                                    "unit_amount_usd": "0.000015",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000000,
+                                    "unit_amount_usd": "0.000005",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000000,
+                                    "unit_amount_usd": "0.0000025",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.00000125",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "feature_flags",
+            "name": "Feature flags & Experiments",
+            "unit": "request",
+            "usage_key": "feature_flag_requests",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20230117",
+                    "unit": "request",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 1000000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20230623",
+                    "unit": "request",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 2000000,
+                            "unit_amount_usd": "0.0001",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.000045",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000000,
+                            "unit_amount_usd": "0.000025",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.00001",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "surveys",
+            "name": "Surveys",
+            "unit": "survey response",
+            "usage_key": "survey_responses",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20250801",
+                    "unit": "survey response",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 1500,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20250801",
+                    "unit": "survey response",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 1500,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 2000,
+                            "unit_amount_usd": "0.1",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000,
+                            "unit_amount_usd": "0.035",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 20000,
+                            "unit_amount_usd": "0.015",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.01",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "data_warehouse",
+            "name": "Data warehouse",
+            "unit": "row",
+            "usage_key": "rows_synced",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20240530",
+                    "unit": "row",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 1000000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20251020",
+                    "unit": "row",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.000015",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 25000000,
+                            "unit_amount_usd": "0.00001",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000000,
+                            "unit_amount_usd": "0.000008",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000000,
+                            "unit_amount_usd": "0.000005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 1000000000,
+                            "unit_amount_usd": "0.000002",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.000001",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "data_warehouse_historical",
+                    "name": "Data warehouse historical syncs",
+                    "unit": "row",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Free",
+                            "plan_key": "free-20251020",
+                            "unit": "row",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": 100000000,
+                            "tiers": null
+                        },
+                        {
+                            "name": "Paid (beta)",
+                            "plan_key": "paid-20251020",
+                            "unit": "row",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "error_tracking",
+            "name": "Error tracking",
+            "unit": "exception",
+            "usage_key": "exceptions",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20250326",
+                    "unit": "exception",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 100000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20250422",
+                    "unit": "exception",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 100000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 325000,
+                            "unit_amount_usd": "0.00037",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.00014",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.000115",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "llm_analytics",
+            "name": "AI Observability",
+            "unit": "event",
+            "usage_key": "llm_events",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20250822",
+                    "unit": "event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 100000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20260722",
+                    "unit": "event",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 100000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 150000,
+                            "unit_amount_usd": "0.00035",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 250000,
+                            "unit_amount_usd": "0.000175",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 500000,
+                            "unit_amount_usd": "0.0001",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0.00008",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.00007",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000000,
+                            "unit_amount_usd": "0.000065",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.00006",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "logs",
+            "name": "Logs",
+            "unit": "GB",
+            "usage_key": "logs_mb_ingested",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-logs-20260601",
+                    "unit": "GB",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 10,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-logs-20260601",
+                    "unit": "GB",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 10,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 300,
+                            "unit_amount_usd": "0.25",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.15",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "logs_retention_30d",
+                    "name": "Logs 30-day retention",
+                    "unit": "GB",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "30-day retention",
+                            "plan_key": "logs-retention-30d-20260601",
+                            "unit": "GB",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.05",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "posthog_ai",
+            "name": "PostHog AI",
+            "unit": "credit",
+            "usage_key": "ai_credits",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20260612",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 500,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20260612",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 500,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.01",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "replay_vision",
+            "name": "Replay vision",
+            "unit": "credit",
+            "usage_key": "replay_vision_credits",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20260706",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 2500,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20260706",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 2500,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.01",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "inbox",
+            "name": "Inbox",
+            "unit": "PR",
+            "usage_key": "signals_credits",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20260617",
+                    "unit": "PR",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 3,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20260617",
+                    "unit": "PR",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 3,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "15",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "posthog_code_usage",
+            "name": "PostHog Desktop (usage-based)",
+            "unit": "credit",
+            "usage_key": "posthog_code_credits",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20260709",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 2000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20260709",
+                    "unit": "credit",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 2000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.01",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "workflows_emails",
+            "name": "Emails",
+            "unit": "email",
+            "usage_key": "workflow_emails",
+            "inclusion_only": false,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20251208",
+                    "unit": "email",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": 10000,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-workflows-emails-20251208",
+                    "unit": "email",
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": [
+                        {
+                            "up_to": 10000,
+                            "unit_amount_usd": "0",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 50000,
+                            "unit_amount_usd": "0.003",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000,
+                            "unit_amount_usd": "0.0018",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 1000000,
+                            "unit_amount_usd": "0.001",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 10000000,
+                            "unit_amount_usd": "0.0005",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": 100000000,
+                            "unit_amount_usd": "0.000375",
+                            "flat_amount_usd": "0"
+                        },
+                        {
+                            "up_to": null,
+                            "unit_amount_usd": "0.00025",
+                            "flat_amount_usd": "0"
+                        }
+                    ]
+                }
+            ],
+            "addons": [
+                {
+                    "type": "workflows_destinations",
+                    "name": "Destinations",
+                    "unit": "dispatch",
+                    "inclusion_only": true,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Free",
+                            "plan_key": "free-20251208",
+                            "unit": "dispatch",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": 10000,
+                            "tiers": null
+                        },
+                        {
+                            "name": "Paid",
+                            "plan_key": "paid-workflows-destinations-20251208",
+                            "unit": "dispatch",
+                            "flat_rate": false,
+                            "unit_amount_usd": null,
+                            "free_allocation": null,
+                            "tiers": [
+                                {
+                                    "up_to": 10000,
+                                    "unit_amount_usd": "0",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 50000,
+                                    "unit_amount_usd": "0.00075",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000,
+                                    "unit_amount_usd": "0.00045",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 1000000,
+                                    "unit_amount_usd": "0.000225",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 10000000,
+                                    "unit_amount_usd": "0.00015",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": 100000000,
+                                    "unit_amount_usd": "0.000075",
+                                    "flat_amount_usd": "0"
+                                },
+                                {
+                                    "up_to": null,
+                                    "unit_amount_usd": "0.0000375",
+                                    "flat_amount_usd": "0"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "integrations",
+            "name": "Integrations",
+            "unit": null,
+            "usage_key": null,
+            "inclusion_only": true,
+            "legacy_product": true,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20230117",
+                    "unit": null,
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": null
+                },
+                {
+                    "name": "Paid",
+                    "plan_key": "paid-20230117",
+                    "unit": null,
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": null
+                }
+            ],
+            "addons": []
+        },
+        {
+            "type": "platform_and_support",
+            "name": "Platform and support",
+            "unit": null,
+            "usage_key": null,
+            "inclusion_only": true,
+            "legacy_product": false,
+            "plans": [
+                {
+                    "name": "Free",
+                    "plan_key": "free-20230117",
+                    "unit": null,
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": null
+                },
+                {
+                    "name": "Pay-as-you-go",
+                    "plan_key": "paid-20240208",
+                    "unit": null,
+                    "flat_rate": false,
+                    "unit_amount_usd": null,
+                    "free_allocation": null,
+                    "tiers": null
+                }
+            ],
+            "addons": [
+                {
+                    "type": "boost",
+                    "name": "Boost",
+                    "unit": null,
+                    "inclusion_only": false,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Boost",
+                            "plan_key": "boost-addon-20250429",
+                            "unit": "month",
+                            "flat_rate": true,
+                            "unit_amount_usd": "250.00",
+                            "free_allocation": null,
+                            "tiers": []
+                        }
+                    ]
+                },
+                {
+                    "type": "teams",
+                    "name": "Teams add-on",
+                    "unit": null,
+                    "inclusion_only": false,
+                    "legacy_product": true,
+                    "plans": [
+                        {
+                            "name": "Teams add-on",
+                            "plan_key": "addon-20241002",
+                            "unit": "month",
+                            "flat_rate": true,
+                            "unit_amount_usd": "450.00",
+                            "free_allocation": null,
+                            "tiers": []
+                        }
+                    ]
+                },
+                {
+                    "type": "scale",
+                    "name": "Scale",
+                    "unit": null,
+                    "inclusion_only": false,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Scale",
+                            "plan_key": "scale-addon-20250429",
+                            "unit": "month",
+                            "flat_rate": true,
+                            "unit_amount_usd": "750.00",
+                            "free_allocation": null,
+                            "tiers": []
+                        }
+                    ]
+                },
+                {
+                    "type": "enterprise",
+                    "name": "Enterprise",
+                    "unit": null,
+                    "inclusion_only": false,
+                    "legacy_product": false,
+                    "plans": [
+                        {
+                            "name": "Enterprise",
+                            "plan_key": "enterprise-addon-20241001",
+                            "unit": "month",
+                            "flat_rate": true,
+                            "unit_amount_usd": "2000.00",
+                            "free_allocation": null,
+                            "tiers": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
