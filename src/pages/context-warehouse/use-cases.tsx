@@ -4,11 +4,11 @@ import { CallToAction } from 'components/CallToAction'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
-import CloudinaryImage from 'components/CloudinaryImage'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import { IconTrending, IconWarning, IconTarget } from '@posthog/icons'
+import { HedgehogChartHog, HedgehogDocBrown } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -21,39 +21,6 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
         <span className="font-bold text-red dark:text-yellow">{children}</span>
     </RoughAnnotation>
 )
-
-const GRAPHS_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/graphs_27bb7325fd.png'
-const CTA_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/endpoints_d59d721ad8.png'
-
-interface HowToStep {
-    image: string
-    alt: string
-    title: string
-    description: React.ReactNode
-}
-
-const howToSteps: HowToStep[] = [
-    {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/business_hog_07ca71b8b9.png',
-        alt: 'A hedgehog in business attire',
-        title: 'Start with a question',
-        description: 'Pick something that matters to your business, like revenue, churn, or pipeline health.',
-    },
-    {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/scroll_reader_00431e4045.png',
-        alt: 'A hedgehog reading a long scroll',
-        title: 'Grab the tutorial',
-        description:
-            "Each question points to a tutorial that walks through how to answer it in PostHog; decide whether it's a one-off question or a full data modeling workflow.",
-    },
-    {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/1_9da7501908.png',
-        alt: 'A hedgehog at a computer',
-        title: "Let PostHog's AI run with it",
-        description:
-            "Connect PostHog's MCP server, run the matching Skill, and let it connect your sources, write and run the query for you.",
-    },
-]
 
 type ChipKind = 'ph' | 'ext'
 
@@ -287,22 +254,11 @@ function UseCases(): JSX.Element {
                                 </h1>
                                 <p className="!mb-0 !mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
                                     Your warehouse already holds all your PostHog data. Add an external source or two
-                                    and you can answer questions neither could answer alone.
+                                    and you can answer questions neither could answer alone.{' '}
+                                    <strong className="text-primary">PostHog events</strong> plus{' '}
+                                    <strong className="text-primary">your business data</strong> are the answers you've
+                                    been looking for.
                                 </p>
-                            </div>
-
-                            <div className="not-prose flex items-center gap-2.5 text-sm text-secondary bg-accent border border-primary rounded-full px-4 py-2 w-fit max-w-full overflow-x-auto whitespace-nowrap mt-4">
-                                <span>
-                                    <b className="text-primary">PostHog events</b>
-                                </span>
-                                <span className="font-bold text-muted">+</span>
-                                <span>
-                                    <b className="text-primary">Your business data</b>
-                                </span>
-                                <span className="font-bold text-muted">=</span>
-                                <span>
-                                    <b className="text-primary">The answers you've been looking for</b>
-                                </span>
                             </div>
 
                             <div className="mt-6 w-fit">
@@ -312,36 +268,8 @@ function UseCases(): JSX.Element {
                             </div>
                         </div>
                         <div className="hidden justify-center @lg/reader-content:flex">
-                            <CloudinaryImage
-                                src={GRAPHS_IMAGE}
-                                alt="Graphs representing PostHog and business data combined"
-                                imgClassName="w-full max-w-[280px] block"
-                            />
+                            <HedgehogChartHog size={280} className="w-full max-w-[280px]" />
                         </div>
-                    </div>
-                </div>
-
-                <div className="not-prose mt-14">
-                    <h2 className="mb-2 text-2xl font-bold @md/reader-content:text-3xl">How to use this page:</h2>
-                    <div className="grid grid-cols-1 gap-6 @md/reader-content:grid-cols-3">
-                        {howToSteps.map((step, i) => (
-                            <div key={step.title} className="flex flex-col items-start">
-                                <div className="mb-4 flex h-40 w-40 items-center justify-center">
-                                    <CloudinaryImage
-                                        src={step.image}
-                                        alt={step.alt}
-                                        imgClassName="max-h-40 max-w-40 w-auto object-contain"
-                                    />
-                                </div>
-                                <div className="mb-1.5 flex items-start gap-2">
-                                    <span className="mt-0.5 inline-flex size-6 flex-none items-center justify-center rounded-md border border-primary bg-primary text-xs font-bold text-primary">
-                                        {i + 1}
-                                    </span>
-                                    <h3 className="m-0 text-[15px] font-bold">{step.title}</h3>
-                                </div>
-                                <p className="m-0 text-[14.5px] text-secondary">{step.description}</p>
-                            </div>
-                        ))}
                     </div>
                 </div>
 
@@ -374,7 +302,11 @@ function UseCases(): JSX.Element {
                                 With <strong className="text-primary">800+ warehouse sources</strong> including
                                 payments, CRMs, support desks, ad platforms, your production database, the questions you
                                 can ask are endless.{' '}
-                                <Link to="/docs/data-warehouse/sources" className="font-semibold">
+                                <Link
+                                    to="/docs/data-warehouse/sources"
+                                    state={{ newWindow: true }}
+                                    className="font-semibold"
+                                >
                                     See every source →
                                 </Link>
                             </p>
@@ -398,12 +330,8 @@ function UseCases(): JSX.Element {
                                 </p>
                             </div>
                         </div>
-                        <div className="hidden self-center @lg/reader-content:block">
-                            <CloudinaryImage
-                                src={CTA_IMAGE}
-                                alt="Data warehouse source endpoints"
-                                imgClassName="w-full !block"
-                            />
+                        <div className="hidden justify-center @lg/reader-content:flex">
+                            <HedgehogDocBrown size={190} className="w-full max-w-[190px]" />
                         </div>
                     </div>
                 </div>
