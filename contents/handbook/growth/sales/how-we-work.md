@@ -15,7 +15,7 @@ We have three types of roles:
 
 ### Technical Account Managers
 
-Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
+Each TAM manages a book sized by ARR under management: $1.5M to $2.5M, which usually works out to 12-18 accounts. See [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance) for the full composition targets. Additionally, you will manage inbound leads as they are assigned to you in your territory. Staying extremely focused is important.
 
 We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
 
@@ -33,23 +33,11 @@ In addition to the weekly sprint planning meeting on a Monday, we do a [weekly t
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
-### Handing off customers to Technical CSMs
+### Coming off an account
 
-We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Technical CSM for more steady-state retention.  When you want to move a customer off your book you should talk it through with Simon. Here are the things we will be looking at:
+The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is done. The account just moves to CSM-only coverage. When and how to come off, and what context needs to land with the CSM first, is covered in [Removing a TAM from an account](/handbook/growth/sales/account-allocation#removing-a-tam-from-an-account). Use the [saturation checks](/handbook/growth/sales/evaluating-growth-potential#the-saturation-checks) to make the case, and talk it through with your team lead.
 
-1. Have you tried multiple times to [make contact](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) with all of the active users in an account?
-   - An _Active User_ is someone who has been seen in Vitally in the past month
-   - When you reach out, demonstrate how you can help that person out, be specific to their role/usage of PostHog.
-2. Are they using all PostHog products?
-   - If they have been customers for a while they may not be aware of new products like Surveys and Data Warehouse.  Look at their usage and see if there are any obvious cross-sell opportunities.
-   - Could they benefit from some of the advanced capabilities and training/support available in Teams/Enterprise?
-3. Is there an opportunity to cross-sell to a different team?
-   - Have a look at what they are tracking with PostHog.  If it's an app then maybe get in touch with the marketing team to talk about Web Analytics or No Code Testing
-   - Are they a multi-product company?  Find out if there are other teams who aren't using us who could benefit from PostHog today, and then use your current users as an internal reference.
-
-If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
-
-> A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
+> A customer being negative/difficult to work with isn't a reason to come off an account.  It's your job to turn them around to being a happy customer (AKA be their favorite).
 
 ## How commission works - Technical Account Managers
 
@@ -102,7 +90,7 @@ Deals a previous owner signed (including ones with a future-dated start that lan
 3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
 4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
 5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
-6. Nominally, you should have 15 accounts/around $1.5m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
+6. Your `AM Managed` book should hold $1.5M-$2.5M in ARR, usually 12-18 accounts (see [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance)). There is some wiggle room here, but well past those bounds you won't be able to give accounts the focus we expect from a TAM, so be prepared to rebalance with your team lead.
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
 8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
 9. We want you to ensure the customer has paid, and we don't want AMs to throw invoice chasing to a finance person. This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay. You should make the [failed/late payment process](/handbook/growth/sales/billing#failedlate-payments) clear to your customer, especially in the case of a severely delayed payment.
