@@ -176,6 +176,10 @@
         {
             "source": "/teams/:path*",
             "destination": "/teams/[slug]/index.html"
+        },
+        {
+            "source": "/startups/:path*",
+            "destination": "/startups/[...slug]/index.html"
         }
     ],
     "redirects": [
@@ -5477,10 +5481,6 @@
         {
             "source": "/handbook/cs-and-onboarding/customer-industry-segments",
             "destination": "/handbook/growth/sales/customer-industry-segments"
-        },
-        {
-            "source": "/startups/[...slug]",
-            "destination": "/startups"
         },
         {
             "source": "/customer-data-infrastructure/:path*",
