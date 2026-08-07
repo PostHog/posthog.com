@@ -77,7 +77,10 @@ Each product should be usable on its own. For example, session replay can be ena
 - Features that are focused around extra security, permissioning, compliance, or other enterprise-style upgrades should be reserved for our enterprise pricing tier.
 
 - We shouldn't assume that all products should be usage-based. For some products the engineering time is the most expensive part, and in these cases we should consider tiered fees, monthly flat fees, or seat-based pricing where it makes sense. 
-
+- Grandfathering is expensive for us to maintain, so we don't do it by default for everyone and follow these guidelines:
+	- Free users don't get legacy pricing. Once they start to pay, they pay our current prices.
+	- Self-serve paid customers get a limited transition period (e.g. three months) with grandfathered pricing. This ensures that there's a clear deadline for the new pricing taking effect, while showing goodwill to customers who were already paying us. This also applies to customers who have a contract with us.
+	- Nobody gets legacy pricing forever. If you think a customer needs an exception, that should be a time-boxed decision, and not the default.
 ### Deciding on a free volume, and making changes to it
 
 - When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should roughly match our competitors if they offer a free tier. 
