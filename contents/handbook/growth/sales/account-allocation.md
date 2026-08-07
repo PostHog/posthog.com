@@ -75,13 +75,6 @@ We track coverage in Vitally with the existing segments: `CSM Managed` for the b
 
 A TAM stays on an account through expansion until it's fully saturated, not just until the first opportunity closes. As long as there's a realistic next play to work (another cross-sell, a new team to land, an annual conversion), the TAM keeps the account and works it. They come off once expansion is genuinely exhausted. In [journey](/handbook/growth/sales/customer-journey) terms, the account moves to Steady state and the overlay is removed. The CSM stays, so the customer keeps their point of contact throughout.
 
-Removal happens when one of these is true:
-
-- The account is saturated: the opportunity being worked closed (won or lost) and no further qualified opportunities remain
-- The opportunity evaporated (champion left, budget cut, roadmap changed) and the [saturation checks](/handbook/growth/sales/evaluating-growth-potential#the-saturation-checks) now hold
-- The account dropped below $20k ARR with no documented plan to recover it this quarter
-- The account is on the YC plan. YC accounts are unowned while on the promo (onboarding picks them up at roll-off). If one shows a genuinely qualified opportunity, flag it like any other account.
-
 A TAM being willing to release an account is itself a decent signal the upside is gone. TAMs are paid on their book, so they don't give up real opportunities lightly. But treat it as a signal and sanity check it. Team leads should verify before agreeing.
 
 Removing a TAM is usually a good outcome, and typically means a healthy, expanded customer. Inventing an opportunity to justify staying on is worse than coming off cleanly.
