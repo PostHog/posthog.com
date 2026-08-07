@@ -10,6 +10,14 @@ Onboarding here is mostly self-serve - we won't sit you in a room for training f
 
 Below is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
 
+## General advice
+
+A few things every recent joiner has run into:
+
+- Everyone will seem to know everything. They've just been here longer. Asking in public is the culture working, not you falling short.
+- It won't all stick, and it's not supposed to. Onboarding is an info dump - the goal is knowing where to look things up, not remembering it all.
+- Breadth beats depth early. Don't build a big write-up per account you'll never reopen - a shallow pass over your whole book serves you better in the first weeks.
+
 ## Week 1 – how we talk about PostHog
 
 This week is about getting set up and learning how we talk about PostHog. You'll feel extremely unproductive, and that's fine - the aim is to set yourself up for in-person onboarding in Week 2. Read everything you can, work through the product fundamentals, and come to Week 2 with questions we can work through together.
@@ -24,7 +32,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
-- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook.
+- Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, your local city channel, and the spike detector channel - ask your team lead to add you and tag you as owner on your accounts.
 - Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts.
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:

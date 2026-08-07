@@ -1435,20 +1435,37 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/customer-success',
                     },
                     {
-                        name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
+                        name: 'How we work',
+                        url: '/handbook/cs-and-onboarding/how-we-work',
+                    },
+                    {
+                        name: 'Onboarding',
                     },
                     {
                         name: 'New starter onboarding',
                         url: '/handbook/cs-and-onboarding/new-hire-onboarding',
                     },
                     {
-                        name: 'How we work',
-                        url: '/handbook/cs-and-onboarding/how-we-work',
+                        name: 'Onboarding a new CSM (team leads)',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding-team-leads',
+                    },
+                    {
+                        name: 'Working with customers',
+                    },
+                    {
+                        name: 'Getting started with newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
                     },
                     {
                         name: 'Lifecycle of CSM engagement',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
+                        name: 'Engaging unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                    {
+                        name: 'Automation & AI',
                     },
                     {
                         name: 'How we use automation',
@@ -1457,10 +1474,6 @@ export const handbookSidebar = [
                     {
                         name: 'Using AI to analyze customer issues',
                         url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
-                    },
-                    {
-                        name: 'Engaging unengaged customers',
-                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
                 ],
             },
