@@ -41,7 +41,9 @@ interface BookPageProps {
 
 /** Any page of a pocket guide: the layout is fixed, every word comes from the MDX. */
 export default function BookPage({ slug, body }: BookPageProps): JSX.Element | null {
-    const pages = useBookPages()
+    // slug is `/pocket-guides/<volumeId>/...` – the second segment names the volume.
+    const volumeId = slug.split('/')[2]
+    const pages = useBookPages(volumeId)
     const { fontSize, stepFontSize } = useBookFontSize()
 
     const url = normalizeUrl(slug)

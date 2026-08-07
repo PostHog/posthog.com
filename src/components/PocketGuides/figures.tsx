@@ -12,7 +12,9 @@ import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
-import { useTemplate } from './bookContext'
+import { useEntry, useTemplate } from './bookContext'
+import { normalizeUrl } from './bookModel'
+import { useSkillFiles } from './useSkillFile'
 
 /** The loop, drawn. Wording from /docs/self-driving/self-improving-loop. */
 const LOOP_STAGES = [
@@ -73,6 +75,24 @@ export function ScoutFigure({ n = 2, caption }: { n?: number; caption: string })
     return (
         <Fig n={n} caption={caption}>
             <ScoutFile scout={template.scout} />
+        </Fig>
+    )
+}
+
+/**
+ * A page's own `SKILL.md`, for guides that aren't self-driving scouts and so have no
+ * `InboxTemplate` to pull one from. Paired by directory, the same way self-driving's scouts are.
+ */
+export function SkillFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element | null {
+    const entry = useEntry()?.entry
+    const skills = useSkillFiles()
+    const skill = entry ? skills.get(normalizeUrl(entry.url)) : undefined
+    if (!skill?.raw) {
+        return null
+    }
+    return (
+        <Fig n={n} caption={caption}>
+            <ScoutFile scout={{ name: skill.name ?? '', description: skill.description ?? '', raw: skill.raw }} />
         </Fig>
     )
 }

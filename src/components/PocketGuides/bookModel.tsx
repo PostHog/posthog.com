@@ -6,7 +6,6 @@ import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
 import { InboxTemplate } from 'components/SelfDrivingInbox/types'
 
 export const SHELF = { url: '/pocket-guides', label: 'Return to bookshelf' }
-export const VOLUME_URL = '/pocket-guides/self-driving'
 
 /** Trailing slashes come and go between Gatsby's slugs and `location.pathname`. */
 export function normalizeUrl(url: string): string {
@@ -28,12 +27,12 @@ export interface BookPageEntry {
 }
 
 /** The book in reading order, built from content – folios, tabs, and turns all derive from it. */
-export function useBookPages(): BookPageEntry[] {
+export function useBookPages(volumeId: string): BookPageEntry[] {
     const data = useStaticQuery(graphql`
         query PocketGuideBookPagesQuery {
-            # No trailing slash in the pattern: the volume's own index page is
-            # /pocket-guides/self-driving exactly, and it belongs in the book.
-            pages: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides/self-driving/" } } }) {
+            # Every volume's pages – filtered down to one volume below, since a static query
+            # can't take the volume as a variable.
+            pages: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
                 nodes {
                     fields {
                         slug
@@ -52,11 +51,15 @@ export function useBookPages(): BookPageEntry[] {
 
     return useMemo(() => {
         const byUrl = new Map(templates.map((template) => [normalizeUrl(template.url), template]))
+        // No trailing slash in the pattern: the volume's own index page is
+        // /pocket-guides/<volumeId> exactly, and it belongs in the book.
+        const volumePattern = new RegExp(`^/pocket-guides/${volumeId}(/|$)`)
 
         const pages = (data?.pages?.nodes || [])
             // SKILL files and `_` starters aren't pages; no `bookOrder` keeps a draft unlisted.
             .filter(
                 (node: any) =>
+                    volumePattern.test(node.fields.slug) &&
                     !node.fields.slug.endsWith('/SKILL') &&
                     !/\/_/.test(node.fields.slug) &&
                     typeof node.frontmatter?.bookOrder === 'number'
@@ -78,7 +81,7 @@ export function useBookPages(): BookPageEntry[] {
         // Numbering runs after the front matter, so inserting a chapter renumbers the rest.
         let page = 0
         return pages.map((entry: BookPageEntry) => (entry.isFrontMatter ? entry : { ...entry, page: ++page }))
-    }, [data, templates])
+    }, [data, templates, volumeId])
 }
 
 /** How a page is named when you're turning toward it. Authors own the front matter's name. */

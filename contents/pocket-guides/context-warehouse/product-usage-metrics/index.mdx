@@ -1,0 +1,53 @@
+---
+title: Product usage metrics
+shortTitle: Usage
+subtitle: Retention, stickiness, and lifecycle, modeled together as one engagement family.
+bookOrder: 5
+---
+
+<LeftPage>
+
+<SkillFigure n={1} caption="The skill itself – the file an agent follows to build retention, stickiness, and lifecycle models." />
+
+</LeftPage>
+
+<RightPage>
+
+# Product usage metrics
+
+Retention, stickiness, and lifecycle answer three different questions about the same event
+stream, all keyed off one chosen event, an interval, and an aggregation unit.
+
+## Pick the lens
+
+**Retention** asks whether users come back, as a cohort matrix of entry period by intervals later.
+**Stickiness** asks how often they engage, as a distribution of users by active-interval count.
+**Lifecycle** asks whether growth is healthy, splitting each interval into new, returning,
+resurrecting, and dormant.
+
+## Rules before you model
+
+- **Choose the event deliberately.** Retention of `$pageview` and retention of your core value
+  action tell very different stories.
+- **Match the interval to the product's cadence** – daily retention looks brutal for a
+  weekly-use product.
+- **Read lifecycle as a system**: dormant growing faster than returning is a leaky bucket; a
+  resurrection spike is a win-back working.
+
+## The skill itself
+
+<SeeFig n={1} /> covers all three lenses, mirroring PostHog's built-in retention, stickiness, and
+lifecycle insights in HogQL, plus a full dbt `fct_retention` / `fct_stickiness` / `fct_lifecycle`
+scaffold.
+
+Copy it into your own agent, or find it in the
+[PostHog monorepo](https://github.com/PostHog/posthog/blob/master/products/data_modeling/skills/modeling-product-usage-metrics/SKILL.md).
+
+<SeeAlso>
+
+See also: [Activation metrics](/pocket-guides/context-warehouse/activation-metrics) ·
+[Dimension tables](/pocket-guides/context-warehouse/dimension-tables)
+
+</SeeAlso>
+
+</RightPage>

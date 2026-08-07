@@ -61,7 +61,8 @@ after the prose.
 | `<Eyebrow>` | The small line above a title-page heading |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
-| `<ScoutFigure n caption>` | This use case's `SKILL.md` |
+| `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
+| `<SkillFigure n caption>` | This page's own `SKILL.md`, for guides with no `InboxTemplate` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
 | `<Enable />` | The one-click CTA – the book's only real button |
@@ -115,10 +116,10 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
   controls are book tabs on the page's left edge (shelf link, a Contents popover, an Aa
   reading-size control), a centered reading column, click-to-turn page margins, and a foot line
   with prev/next turns, "All guides" (except where prev already is the shelf), and "p. N of M".
-- **One model drives everything.** `bookModel.tsx`'s `useBookPages()` reads every page's
-  `bookOrder` and produces the reading order; the bar, contents, and page turns all derive from
-  it. Front matter is unnumbered; arabic numbering starts at the page after it, so inserting a
-  chapter renumbers what follows without anyone editing a number by hand.
+- **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
+  `bookOrder` within that volume and produces the reading order; the bar, contents, and page turns
+  all derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
+  inserting a chapter renumbers what follows without anyone editing a number by hand.
 - **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
   left/right arrow keys all walk the same sequence.
 
@@ -135,6 +136,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
+| `useSkillFile.ts` | Pairs a page with its sibling `SKILL.md`, for `<SkillFigure>` |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
 

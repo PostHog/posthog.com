@@ -11,6 +11,7 @@ import {
     LoopFigure,
     ReportFigure,
     ScoutFigure,
+    SkillFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 
@@ -35,6 +36,7 @@ export const bookMdxComponents = {
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    SkillFigure,
     LoopFigure,
     Watches,
     Enable,

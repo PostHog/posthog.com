@@ -101,6 +101,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
       # pages in sequence. Declared so a book page can exist without a report block.
       bookOrder: Int
+      # An orientation page (self-driving's 101, a volume's "foundations" page) – in the book's
+      # reading order, but not one of the "N guides" the cover prints. Declared so a book page can
+      # exist without a report block.
+      isPrimer: Boolean
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
       # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
