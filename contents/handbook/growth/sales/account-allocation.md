@@ -88,7 +88,7 @@ The CSM stays on, so nothing about the customer relationship changes from their 
 - **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
-- **Unassign yourself in Vitally** once the note and call are done. Team leads populate the `previous owner` trait with the outgoing TAM's email.
+- **Removing the TAM in Vitally.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` segment from the account, with Ben's approval.
 
 If the same account gets a qualified opportunity later, it goes back through the normal flag and qualification path. The handover note is what lets the next TAM (maybe you) pick it up fast.
 
