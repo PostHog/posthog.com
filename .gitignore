@@ -25,10 +25,7 @@ static/fonts/MatterSQVF.woff
 static/fonts/MatterSQVF.woff2
 static/scripts/posthog-init.js
 .vercel
-.env
 *Type.ts
-.env.development
-.env.*.local
 CLAUDE.local.md
 
 # Generated data files
@@ -40,7 +37,6 @@ __pycache__
 *.pyc
 *.pyo
 
-.env*.local
-/.claude/settings.local.json
 /.claude/worktrees/
+/.claude/settings.local.json
 .env*
