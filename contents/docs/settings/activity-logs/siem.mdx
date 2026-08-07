@@ -113,10 +113,14 @@ Open the add-on from the Splunk apps menu, go to **Configuration**, and click **
 | Field | Value |
 | --- | --- |
 | Name | A name for the account, so you can pick it when you add an input |
-| Region | US Cloud or EU Cloud |
+| PostHog host | `https://us.posthog.com`, `https://eu.posthog.com`, or your self-hosted address |
 | Personal API key | A key with the `activity_log:read` scope |
 
 The key is held in Splunk's encrypted credential store. One account can serve several inputs.
+
+Changing an account's host requires entering the key again, so a key does not travel to a new host on its own.
+
+If you self-host PostHog, enter your own address. It has to be https, because the key is sent as a bearer token on every request. If PostHog sits behind a reverse proxy, the proxy has to preserve the `Host` header: PostHog builds the paging links in its responses from the host it sees, and if those point at an internal address the add-on will not follow them.
 
 ### 3. Add an input
 
