@@ -1,0 +1,91 @@
+---
+title: Choose an embedded analytics architecture
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Embedded analytics, also called customer-facing analytics, shows your customers data about their own users.
+
+Before building it, decide how to separate each customer's data. You can store every customer's data in one PostHog project or create a project for each customer.
+
+<CalloutBox icon="IconLightBulb" type="info" title="Our recommendation">
+
+Use a **project per customer** for user-level analytics or when you need to isolate customer data. Use a **single project** for aggregate metrics that don't rely on person profiles.
+
+</CalloutBox>
+
+| | Single project | Project per customer |
+|---|---|---|
+| **Data** | Store all customer data together and filter it by a `customer_id` property. | Store each customer's data in a separate project. |
+| **Best for** | Aggregate metrics that don't rely on person profiles. | User-level analytics, data isolation, or direct customer access to PostHog. |
+| **Person profiles** | Shared across customers and may merge. | Separate for each customer. |
+| **Setup** | Use one project and one project token. | Create projects with the [projects API](/docs/api/projects). |
+| **Plan** | Available without an add-on. | Requires the [Boost add-on](/platform-packages) for unlimited projects. |
+
+## Store all customers in one project
+
+Add a customer identifier, such as `customer_id`, to each event. Then pass it as a filter or variable when you query data with [Endpoints](/docs/endpoints) or the [Query API](/docs/api/queries).
+
+This approach works well for aggregate metrics. It doesn't isolate person profiles between customers.
+
+### Understand how person profiles can merge
+
+[Person profiles](/docs/data/persons) are scoped to a project. If two customers use the same distinct ID, such as a numeric user ID of `1`, PostHog treats them as the same person.
+
+You can prevent identified users from merging by including the customer ID in the distinct ID:
+
+```ts
+posthog.identify(`${customerId}:${user.id}`)
+```
+
+This doesn't fully isolate anonymous activity. The browser SDK stores an anonymous distinct ID in browser storage. If one person visits multiple customer workspaces that share this storage, their anonymous events can use the same ID. When you call [`identify()`](/docs/product-analytics/identify), PostHog merges those events into the identified profile.
+
+Merged profiles can:
+
+- Mix attribution data, such as UTM parameters and referrers, between customers.
+- Skew metrics that count unique users.
+- Create privacy or legal concerns by mixing customer data.
+
+Use a project per customer if these risks apply to your use case.
+
+## Create a project for each customer
+
+A separate project keeps each customer's events and person profiles apart. Use this approach when you:
+
+- Provide user-level analytics.
+- Need to isolate customer data for privacy, legal, or compliance reasons.
+- Give customers direct access to PostHog.
+
+### Create projects with the API
+
+Create a project when you add a customer by calling the [projects API](/docs/api/projects). Get your organization ID from the [`/api/organizations/@current`](https://app.posthog.com/api/organizations/@current) endpoint.
+
+Each project has its own [project token](/docs/settings/projects) for event ingestion. Use its project ID to call Endpoints or the Query API.
+
+<CalloutBox icon="IconWarning" type="caution" title="Requires the Boost add-on">
+
+Free organizations include one project. The [Boost add-on](/platform-packages) includes unlimited projects.
+
+</CalloutBox>
+
+### Give customers access
+
+If customers log in to PostHog:
+
+- Use [access control](/docs/settings/access-control) to give each customer access only to their project.
+- [Enforce two-factor authentication](/docs/settings/account-settings#enabling-2fa) to protect customer data.
+
+### Understand billing
+
+Billing is organization-wide, so usage is combined across all projects. For example, 100 projects sending 20,000 events each count as 2 million events, not 100 separate free tiers.
+
+Account for this combined usage when pricing your product.
+
+## Further reading
+
+- [Set up embedded analytics with Next.js and Recharts](/tutorials/embedded-analytics)
+- [Build customer-facing analytics with Endpoints](/docs/endpoints/customer-facing-analytics)
+- [Compare Endpoints and the Query API](/docs/endpoints/endpoints-vs-query-api)
+- [Manage PostHog projects](/docs/settings/projects)
