@@ -18,30 +18,57 @@ bookOrder: 1
 
 # Self-driving 101
 
-Self-driving is PostHog using your product data as context to make your product better. Here's how it works: <Term name="scout">Scouts</Term> watch your data on a schedule, file <Term name="report">reports</Term> when something needs your attention, and an agent opens a pull request that fixes it. You review and merge everything, so nothing ships without you.
+Self-driving is PostHog using your product data as context to proactively improve your product. Here's how it works:
+- <Term name="scout">Scouts</Term> is an agent that watches your data on a schedule
+- <Term name="report">Reports</Term> are created when something needs your attention
+- High confidence, actionable reports arrive with a pull request for you to review.
+
+You're in control to review and merge everything. Nothing ships without you.
 
 ## The loop
 
-The whole system is <SeeFig n={1} />. A <Term name="signal" /> is something in your product data that's worth knowing, with its evidence attached. Related signals group into a report for you to review. An agent writes the fix as a pull request, and PostHog measures whether it worked. The outcome becomes new signals, so your product keeps improving itself over time.
+A <Term name="signal" /> is something in your product data that's worth knowing supported by evidence attached. Related signals group into a report for you to review. An agent writes the fix as a pull request, and PostHog measures whether it worked.
 
-High-confidence reports arrive with the pull request already open – you just review and merge. Lower-confidence ones wait in your inbox for you to decide first.
+Here are some examples of signals:
+- New exceptions captured in Error Tracking.
+- Drops in core activation metrics like signup, conversion, or retention rate.
+- Replay vision that watches replays for hesitation, confusion, a user's attention.
+- External signal source like Zendesk, Linear, and Sentry
 
-## When a scout writes
+<Term name="report">Reports</Term> created from signals land in your <Term name="inbox" /> have an anatomy like this:
 
-A scout run ends one of two ways: it writes a report, or it writes nothing.
+| Content | Description |
+| --- | --- |
+| Grouped signals | The related findings, from one or more sources, with the evidence behind them. |
+| Priority | How urgent it is, so the most important work rises to the top. |
+| State | Whether it's actionable, so an agent can open a pull request, or needs input before anything can be worked on. |
+| Charts | Where a finding is about something that moved, the report can carry the chart that shows it, so you can see the shape of the problem without rebuilding the query yourself. |
 
-A scout writes a report when it spots a change that needs your attention – your AI bill jumped, or your core activation metric dipped. It stays quiet when everything looks healthy, including when a change is just growth.
+High-confidence reports arrive with the pull request already open, like [this one from PostHog](https://github.com/PostHog/posthog/pull/71511). You just review and merge. Lower-confidence ones wait in your inbox for you to decide first.
+
+Once the PR merges, the change generates new signals, so your product keeps improving itself over time.
+
+## What's acted on
+
+Each time a scout runs, it ends one of two ways: it writes a report, or it writes nothing.
+
+A scout only writes a report when it spots a change that needs your attention:
+- Your AI bill jumped
+- A core activation metric dipped
+- A new exception captured in production
+
+It stays quiet when everything looks healthy, including when a trend indicates growth or noise.
 
 Quiet is the common case. A scout that reports every day is one you'll mute before you get real value out of it.
 
-## How to read the use cases
+## Applying a use case example
 
-Each use case in this pocket guide is a real custom scout you can add to your own product. Every guide covers:
+To help you Self-drive, we've included a few use cases in this pocket guide. Each use case is a real custom scout you can add to your own product. Every guide covers:
 
-- the scout's job, and the anatomy of the <Term name="inbox" /> report it files
-- the pull request that report becomes
-- the scout itself – the actual file an agent follows
-- a one-click way to add it to your own product
+- The scout's job, and the anatomy of the <Term name="inbox" /> report it files
+- The pull request opened based on the reports
+- The scout itself – the actual file the agent follows
+- A one-click way to add it to your own product
 
 <SeeAlso>
 
