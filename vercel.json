@@ -40,14 +40,6 @@
     ],
     "rewrites": [
         {
-            "source": "/docs/references/:slug/types/:type",
-            "destination": "/api/sdk-reference-redirect?slug=:slug&type=:type"
-        },
-        {
-            "source": "/docs/references/:slug",
-            "destination": "/api/sdk-reference-redirect?slug=:slug"
-        },
-        {
             "source": "/docs/:path*/",
             "has": [
                 {
