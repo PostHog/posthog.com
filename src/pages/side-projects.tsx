@@ -1,7 +1,9 @@
 import { HedgehogCodingGroup } from '@posthog/brand/hoggies'
-import { IconChevronDown, IconPencil } from '@posthog/icons'
+import { IconChevronDown, IconPencil, IconTrash } from '@posthog/icons'
+import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Editor from 'components/Editor'
 import Link from 'components/Link'
+import SideModal from 'components/Modal/SideModal'
 import OSButton from 'components/OSButton'
 import { OSInput, OSSelect } from 'components/OSForm'
 import SEO from 'components/seo'
@@ -10,23 +12,16 @@ import {
     SideProjectForm,
     SideProjectGraphic,
     findCreatorProfile,
-    getEditProjectUrl,
     isAlumniProject,
     normalizeTags,
     useCreatorProfiles,
+    useSideProjects,
     type CreatorProfile,
-    type SideProjectFrontmatter,
+    type SideProject,
 } from 'components/SideProjects'
-import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useWindow } from '../context/Window'
-
-type ProjectNode = {
-    id: string
-    parent?: { relativePath?: string }
-    frontmatter: SideProjectFrontmatter
-}
 
 const VISIBLE_TAG_COUNT = 10
 
@@ -57,41 +52,54 @@ const TagPill = ({
 )
 
 const ProjectCard = ({
-    node,
+    project,
     profiles,
     canEdit,
     onTagClick,
+    onEdit,
+    onDelete,
     showRole = true,
 }: {
-    node: ProjectNode
+    project: SideProject
     profiles: CreatorProfile[]
     canEdit: boolean
     onTagClick: (tag: string) => void
+    onEdit: (project: SideProject) => void
+    onDelete: (projectId: number) => void
     showRole?: boolean
 }) => {
-    const { frontmatter } = node
-    const { projectThumbnail, title, description, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl, filters } =
-        frontmatter
+    const { projectThumbnail, title, description, projectAuthor, authorGitHub, teamLink, githubUrl, liveUrl } = project
     // Cards link straight to the project itself; prefer the live app over the repo
     const projectUrl = liveUrl || githubUrl
     const profile = findCreatorProfile(profiles, { projectAuthor, authorGitHub })
-    const tags = normalizeTags(filters?.tags)
-    const relativePath = node.parent?.relativePath
+    const tags = normalizeTags(project.tags)
 
     return (
         <article
             data-scheme="secondary"
             className="group relative flex flex-col overflow-hidden rounded-md border border-primary bg-primary transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-lg"
         >
-            {canEdit && relativePath && (
-                <Link
-                    to={getEditProjectUrl(relativePath)}
-                    externalNoIcon
-                    className="absolute right-2 top-2 z-10 rounded-md border border-primary bg-primary p-1.5 text-secondary opacity-0 transition-opacity hover:text-primary focus-visible:opacity-100 group-hover:opacity-100"
-                    aria-label={`Edit ${title}`}
-                >
-                    <IconPencil className="size-4" />
-                </Link>
+            {canEdit && (
+                <div className="absolute right-2 top-2 z-10 flex gap-1 opacity-0 transition-opacity focus-within:opacity-100 group-hover:opacity-100">
+                    <button
+                        type="button"
+                        onClick={() => onEdit(project)}
+                        className="rounded-md border border-primary bg-primary p-1.5 text-secondary hover:text-primary"
+                        aria-label={`Edit ${title}`}
+                    >
+                        <IconPencil className="size-4" />
+                    </button>
+                    {project.id && (
+                        <button
+                            type="button"
+                            onClick={() => onDelete(project.id as number)}
+                            className="rounded-md border border-primary bg-primary p-1.5 text-secondary hover:text-red"
+                            aria-label={`Delete ${title}`}
+                        >
+                            <IconTrash className="size-4" />
+                        </button>
+                    )}
+                </div>
             )}
             <Link
                 to={projectUrl}
@@ -162,17 +170,17 @@ const ProjectCard = ({
     )
 }
 
-// Newest first: entries carry an added date in frontmatter; undated legacy entries sort last, alphabetically
-const byMostRecent = (a: ProjectNode, b: ProjectNode): number => {
-    const dateA = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0
-    const dateB = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0
-    return dateB - dateA || a.frontmatter.title.localeCompare(b.frontmatter.title)
+// Newest first: entries carry an added date; undated legacy entries sort last, alphabetically
+const byMostRecent = (a: SideProject, b: SideProject): number => {
+    const dateA = a.date || a.createdAt
+    const dateB = b.date || b.createdAt
+    const timeA = dateA ? new Date(dateA).getTime() : 0
+    const timeB = dateB ? new Date(dateB).getTime() : 0
+    return timeB - timeA || a.title.localeCompare(b.title)
 }
 
 function SideProjectsPage({ location }: { location: { search: string } }): JSX.Element {
-    const {
-        sideProjects: { nodes },
-    } = useStaticQuery(query)
+    const { projects, refreshProjects, deleteProject } = useSideProjects()
     const profiles = useCreatorProfiles()
     const { isModerator } = useUser()
     // Dev builds show the team-gated add/edit UI without sign-in so preview environments can exercise the flow
@@ -182,7 +190,8 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
     const [tagFilter, setTagFilter] = useState<string | null>(null)
     const [creatorFilter, setCreatorFilter] = useState<string | null>(null)
     const [showAllTags, setShowAllTags] = useState(false)
-    const [addingProject, setAddingProject] = useState(false)
+    const [formOpen, setFormOpen] = useState(false)
+    const [editingProject, setEditingProject] = useState<SideProject | undefined>(undefined)
     const [alumniExpanded, setAlumniExpanded] = useState(false)
 
     // Sync filters with the URL on mount and on navigation. The app window's location is the
@@ -234,25 +243,30 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
         updateURL(null, null)
     }
 
+    const openForm = (project?: SideProject) => {
+        setEditingProject(project)
+        setFormOpen(true)
+    }
+
     // Split into current team members' projects and the alumni section
     const { currentProjects, alumniProjects } = useMemo(() => {
-        const current: ProjectNode[] = []
-        const alumni: ProjectNode[] = []
-        nodes.forEach((node: ProjectNode) => {
-            if (isAlumniProject(profiles, node.frontmatter)) {
-                alumni.push(node)
+        const current: SideProject[] = []
+        const alumni: SideProject[] = []
+        projects.forEach((project) => {
+            if (isAlumniProject(profiles, project)) {
+                alumni.push(project)
             } else {
-                current.push(node)
+                current.push(project)
             }
         })
         return { currentProjects: current.sort(byMostRecent), alumniProjects: alumni.sort(byMostRecent) }
-    }, [nodes, profiles])
+    }, [projects, profiles])
 
     // Tags ranked by how many projects use them; one-off tags stay searchable but don't clutter the bar
     const rankedTags = useMemo(() => {
         const counts: Record<string, number> = {}
-        nodes.forEach((node: ProjectNode) => {
-            normalizeTags(node.frontmatter.filters?.tags).forEach((tag) => {
+        projects.forEach((project) => {
+            normalizeTags(project.tags).forEach((tag) => {
                 counts[tag] = (counts[tag] || 0) + 1
             })
         })
@@ -260,24 +274,24 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
             .filter(([, count]) => count >= 2)
             .sort(([tagA, countA], [tagB, countB]) => countB - countA || tagA.localeCompare(tagB))
             .map(([tag, count]) => ({ tag, count }))
-    }, [nodes])
+    }, [projects])
 
     // Only current team members appear in the creator filter
     const allCreators = useMemo(() => {
         const creators = new Set<string>()
-        currentProjects.forEach((node: ProjectNode) => {
-            if (node.frontmatter.projectAuthor) {
-                creators.add(node.frontmatter.projectAuthor)
+        currentProjects.forEach((project) => {
+            if (project.projectAuthor) {
+                creators.add(project.projectAuthor)
             }
         })
         return Array.from(creators).sort()
     }, [currentProjects])
 
-    const applyFilters = (projects: ProjectNode[]): ProjectNode[] => {
+    const applyFilters = (projectList: SideProject[]): SideProject[] => {
         const search = searchQuery.trim().toLowerCase()
-        return projects.filter((project: ProjectNode) => {
-            const { title, description, projectAuthor, filters } = project.frontmatter
-            const rawTags = filters?.tags || []
+        return projectList.filter((project) => {
+            const { title, description, projectAuthor } = project
+            const rawTags = project.tags || []
             const tags = normalizeTags(rawTags)
             if (tagFilter && !tags.includes(tagFilter)) {
                 return false
@@ -325,6 +339,18 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                 description="People at PostHog love building things. A collection of side projects, games, tools, and startups the PostHog team has built."
                 image="/images/og/default.png"
             />
+            <SideModal title={editingProject ? 'Edit project' : 'Add a project'} open={formOpen} setOpen={setFormOpen}>
+                <SideProjectForm
+                    key={editingProject?.id ?? editingProject?.title ?? 'new'}
+                    project={editingProject}
+                    existingTags={rankedTags.map(({ tag }) => tag)}
+                    onSuccess={() => {
+                        refreshProjects()
+                        setFormOpen(false)
+                    }}
+                    onCancel={() => setFormOpen(false)}
+                />
+            </SideModal>
             <Editor
                 hideToolbar
                 hasPadding={false}
@@ -342,7 +368,22 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                 >
                     <header className="grid gap-4 px-2 @3xl:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)] @3xl:items-center @3xl:gap-8">
                         <div className="min-w-0">
-                            <h1 className="m-0 text-2xl @xl:text-3xl">We make cool side projects too</h1>
+                            {/* show is set explicitly because the scroll trigger's rootMargin never
+                                fires for a heading this close to the top of the pane */}
+                            <h1 className="m-0 text-2xl @xl:text-3xl">
+                                We make{' '}
+                                <RoughAnnotation
+                                    type="highlight"
+                                    color="rgba(48, 164, 108, 0.2)"
+                                    strokeWidth={1}
+                                    padding={2}
+                                    delay={300}
+                                    show
+                                >
+                                    cool side projects
+                                </RoughAnnotation>{' '}
+                                too
+                            </h1>
                             <p className="mb-0 mt-2 max-w-3xl text-base leading-relaxed text-secondary">
                                 People at PostHog love building things. Sometimes they're small things that just help us
                                 learn. Sometimes they're cute little games or tools we use everyday. Sometimes they can
@@ -365,235 +406,191 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                 </Link>
                                 .
                             </p>
-                            <p className="mb-0 mt-3 max-w-3xl text-sm leading-relaxed text-secondary">
-                                The boring small print: these are personal projects, not PostHog products. If one bricks
-                                your computer, that's between you and its creator.
+                            <p className="mb-0 mt-4 max-w-3xl border-l-2 border-primary pl-3 text-xs italic leading-relaxed text-secondary opacity-80">
+                                Boring small print: these are not PostHog products. If one bricks your computer, that's
+                                between you and its creator.
                             </p>
                         </div>
                         <HedgehogCodingGroup className="w-full max-w-[22rem] justify-self-end" />
                     </header>
 
-                    {addingProject && canEdit ? (
-                        <div data-scheme="secondary" className="mx-2 rounded-md border border-primary bg-primary p-6">
-                            <h2 className="mt-0 mb-4 text-xl">Add a project</h2>
-                            <SideProjectForm
-                                existingTags={rankedTags.map(({ tag }) => tag)}
-                                onCancel={() => setAddingProject(false)}
-                            />
-                        </div>
-                    ) : (
-                        <div className="px-2">
-                            {/* Filter toolbar */}
-                            <div className="mb-4 flex flex-col gap-3 @xl:flex-row @xl:items-center">
-                                <div className="@xl:max-w-xs w-full">
-                                    <OSInput
-                                        label="Search projects"
+                    <div className="px-2">
+                        {/* Filter toolbar */}
+                        <div className="mb-4 flex flex-col gap-3 @xl:flex-row @xl:items-center">
+                            <div className="@xl:max-w-xs w-full">
+                                <OSInput
+                                    label="Search projects"
+                                    showLabel={false}
+                                    name="search"
+                                    size="sm"
+                                    placeholder="Search projects, tags, and creators…"
+                                    value={searchQuery}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                        setSearchQuery(event.target.value)
+                                    }
+                                    showClearButton
+                                    onClear={() => setSearchQuery('')}
+                                />
+                            </div>
+                            <div className="flex items-center gap-2 @xl:ml-auto">
+                                <div className="w-48">
+                                    <OSSelect
+                                        label="Creator"
                                         showLabel={false}
-                                        name="search"
                                         size="sm"
-                                        placeholder="Search projects, tags, and creators…"
-                                        value={searchQuery}
-                                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                            setSearchQuery(event.target.value)
-                                        }
-                                        showClearButton
-                                        onClear={() => setSearchQuery('')}
+                                        placeholder="Filter by creator…"
+                                        value={creatorFilter || ''}
+                                        onChange={(value: string) => handleCreatorChange(value || null)}
+                                        options={[
+                                            { label: 'Everyone', value: '' },
+                                            ...allCreators.map((creator) => ({
+                                                label: creator,
+                                                value: creator,
+                                            })),
+                                        ]}
                                     />
                                 </div>
-                                <div className="flex items-center gap-2 @xl:ml-auto">
-                                    <div className="w-48">
-                                        <OSSelect
-                                            label="Creator"
-                                            showLabel={false}
-                                            size="sm"
-                                            placeholder="Filter by creator…"
-                                            value={creatorFilter || ''}
-                                            onChange={(value: string) => handleCreatorChange(value || null)}
-                                            options={[
-                                                { label: 'Everyone', value: '' },
-                                                ...allCreators.map((creator) => ({
-                                                    label: creator,
-                                                    value: creator,
-                                                })),
-                                            ]}
-                                        />
-                                    </div>
-                                    {canEdit && (
-                                        <OSButton variant="primary" size="sm" onClick={() => setAddingProject(true)}>
-                                            Add a project
-                                        </OSButton>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Tag pills, most-used first */}
-                            <div className="mb-3 flex flex-wrap items-center gap-1.5">
-                                <TagPill label="All" active={!tagFilter} onClick={() => handleTagChange(null)} />
-                                {visibleTags.map(({ tag, count }) => (
-                                    <TagPill
-                                        key={tag}
-                                        label={tag}
-                                        count={count}
-                                        active={tagFilter === tag}
-                                        onClick={() => handleTagChange(tagFilter === tag ? null : tag)}
-                                    />
-                                ))}
-                                {tagFilter && !visibleTags.some(({ tag }) => tag === tagFilter) && (
-                                    <TagPill label={tagFilter} active onClick={() => handleTagChange(null)} />
-                                )}
-                                {rankedTags.length > VISIBLE_TAG_COUNT && (
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowAllTags(!showAllTags)}
-                                        className="px-2 py-0.5 text-[13px] font-semibold text-secondary underline hover:text-primary"
-                                    >
-                                        {showAllTags
-                                            ? 'Fewer tags'
-                                            : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
-                                    </button>
-                                )}
-                            </div>
-
-                            {/* Results count */}
-                            <div className="mb-6 flex items-center gap-2 text-sm text-secondary">
-                                <span>
-                                    {hasActiveFilters
-                                        ? `Showing ${filteredCurrent.length + filteredAlumni.length} of ${
-                                              nodes.length
-                                          } projects`
-                                        : `${nodes.length} projects`}
-                                </span>
-                                {hasActiveFilters && (
-                                    <button
-                                        type="button"
-                                        onClick={clearFilters}
-                                        className="font-semibold underline hover:text-primary"
-                                    >
-                                        Clear filters
-                                    </button>
-                                )}
-                            </div>
-
-                            {/* Project grid */}
-                            <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
-                                {filteredCurrent.map((node: ProjectNode) => (
-                                    <ProjectCard
-                                        key={node.id}
-                                        node={node}
-                                        profiles={profiles}
-                                        canEdit={canEdit}
-                                        onTagClick={handleTagChange}
-                                    />
-                                ))}
-                            </div>
-
-                            {/* No results message */}
-                            {filteredCurrent.length === 0 && filteredAlumni.length === 0 && (
-                                <div className="py-12 text-center">
-                                    <p className="m-0 text-secondary">No projects match the current filters.</p>
-                                    <OSButton size="md" className="mt-2" onClick={clearFilters}>
-                                        Clear filters
+                                {canEdit && (
+                                    <OSButton variant="primary" size="sm" onClick={() => openForm(undefined)}>
+                                        Add a project
                                     </OSButton>
-                                </div>
-                            )}
+                                )}
+                            </div>
+                        </div>
 
-                            {/* Alumni section, collapsed by default */}
-                            {alumniProjects.length > 0 && (
-                                <section className="mt-12">
-                                    <button
-                                        type="button"
-                                        onClick={() => setAlumniExpanded(!alumniExpanded)}
-                                        aria-expanded={showAlumni}
-                                        className="flex w-full items-center gap-2 border-t border-primary pt-6 text-left"
-                                    >
-                                        <IconChevronDown
-                                            className={`size-5 shrink-0 text-secondary transition-transform ${
-                                                showAlumni ? '' : '-rotate-90'
-                                            }`}
-                                        />
-                                        <h2 className="m-0 text-xl">PostHog Alums...</h2>
-                                        <span className="text-sm text-secondary">
-                                            {filteredAlumni.length} project{filteredAlumni.length === 1 ? '' : 's'}
-                                        </span>
-                                    </button>
-                                    {showAlumni && (
-                                        <>
-                                            <p className="mb-6 mt-3 max-w-3xl text-base leading-relaxed text-secondary">
-                                                The number one reason people leave PostHog is to launch their own
-                                                start-ups or projects. We think that's great. Spend two years at PostHog
-                                                and we're even ready to{' '}
-                                                <Link
-                                                    to="/handbook/people/benefits#well-be-your-first-investor"
-                                                    state={{ newWindow: true }}
-                                                    className="font-semibold underline"
-                                                >
-                                                    be your first investor
-                                                </Link>
-                                                ! Here are some projects from PostHog alumni that we especially like...
-                                            </p>
-                                            <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
-                                                {filteredAlumni.map((node: ProjectNode) => (
-                                                    <ProjectCard
-                                                        key={node.id}
-                                                        node={node}
-                                                        profiles={profiles}
-                                                        canEdit={canEdit}
-                                                        onTagClick={handleTagChange}
-                                                        showRole={false}
-                                                    />
-                                                ))}
-                                            </div>
-                                            {filteredAlumni.length === 0 && (
-                                                <p className="text-sm text-secondary">
-                                                    No alumni projects match the current filters.
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
-                                </section>
+                        {/* Tag pills, most-used first */}
+                        <div className="mb-3 flex flex-wrap items-center gap-1.5">
+                            <TagPill label="All" active={!tagFilter} onClick={() => handleTagChange(null)} />
+                            {visibleTags.map(({ tag, count }) => (
+                                <TagPill
+                                    key={tag}
+                                    label={tag}
+                                    count={count}
+                                    active={tagFilter === tag}
+                                    onClick={() => handleTagChange(tagFilter === tag ? null : tag)}
+                                />
+                            ))}
+                            {tagFilter && !visibleTags.some(({ tag }) => tag === tagFilter) && (
+                                <TagPill label={tagFilter} active onClick={() => handleTagChange(null)} />
+                            )}
+                            {rankedTags.length > VISIBLE_TAG_COUNT && (
+                                <button
+                                    type="button"
+                                    onClick={() => setShowAllTags(!showAllTags)}
+                                    className="px-2 py-0.5 text-[13px] font-semibold text-secondary underline hover:text-primary"
+                                >
+                                    {showAllTags ? 'Fewer tags' : `${rankedTags.length - VISIBLE_TAG_COUNT} more tags`}
+                                </button>
                             )}
                         </div>
-                    )}
+
+                        {/* Results count */}
+                        <div className="mb-6 flex items-center gap-2 text-sm text-secondary">
+                            <span>
+                                {hasActiveFilters
+                                    ? `Showing ${filteredCurrent.length + filteredAlumni.length} of ${
+                                          projects.length
+                                      } projects`
+                                    : `${projects.length} projects`}
+                            </span>
+                            {hasActiveFilters && (
+                                <button
+                                    type="button"
+                                    onClick={clearFilters}
+                                    className="font-semibold underline hover:text-primary"
+                                >
+                                    Clear filters
+                                </button>
+                            )}
+                        </div>
+
+                        {/* Project grid */}
+                        <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
+                            {filteredCurrent.map((project) => (
+                                <ProjectCard
+                                    key={project.id ?? project.title}
+                                    project={project}
+                                    profiles={profiles}
+                                    canEdit={canEdit}
+                                    onTagClick={handleTagChange}
+                                    onEdit={openForm}
+                                    onDelete={deleteProject}
+                                />
+                            ))}
+                        </div>
+
+                        {/* No results message */}
+                        {filteredCurrent.length === 0 && filteredAlumni.length === 0 && (
+                            <div className="py-12 text-center">
+                                <p className="m-0 text-secondary">No projects match the current filters.</p>
+                                <OSButton size="md" className="mt-2" onClick={clearFilters}>
+                                    Clear filters
+                                </OSButton>
+                            </div>
+                        )}
+
+                        {/* Alumni section, collapsed by default */}
+                        {alumniProjects.length > 0 && (
+                            <section className="mt-12">
+                                <button
+                                    type="button"
+                                    onClick={() => setAlumniExpanded(!alumniExpanded)}
+                                    aria-expanded={showAlumni}
+                                    className="flex w-full items-center gap-2 border-t border-primary pt-6 text-left"
+                                >
+                                    <IconChevronDown
+                                        className={`size-5 shrink-0 text-secondary transition-transform ${
+                                            showAlumni ? '' : '-rotate-90'
+                                        }`}
+                                    />
+                                    <h2 className="m-0 text-xl">PostHog Alums...</h2>
+                                    <span className="text-sm text-secondary">
+                                        {filteredAlumni.length} project{filteredAlumni.length === 1 ? '' : 's'}
+                                    </span>
+                                </button>
+                                {showAlumni && (
+                                    <>
+                                        <p className="mb-6 mt-3 max-w-3xl text-base leading-relaxed text-secondary">
+                                            The number one reason people leave PostHog is to launch their own start-ups
+                                            or projects. We think that's great. Spend two years at PostHog and we're
+                                            even ready to{' '}
+                                            <Link
+                                                to="/handbook/people/benefits#well-be-your-first-investor"
+                                                state={{ newWindow: true }}
+                                                className="font-semibold underline"
+                                            >
+                                                be your first investor
+                                            </Link>
+                                            ! Here are some projects from PostHog alumni that we especially like...
+                                        </p>
+                                        <div className="grid grid-cols-1 gap-6 @xl:grid-cols-2 @3xl:grid-cols-3 @5xl:grid-cols-4">
+                                            {filteredAlumni.map((project) => (
+                                                <ProjectCard
+                                                    key={project.id ?? project.title}
+                                                    project={project}
+                                                    profiles={profiles}
+                                                    canEdit={canEdit}
+                                                    onTagClick={handleTagChange}
+                                                    onEdit={openForm}
+                                                    onDelete={deleteProject}
+                                                    showRole={false}
+                                                />
+                                            ))}
+                                        </div>
+                                        {filteredAlumni.length === 0 && (
+                                            <p className="text-sm text-secondary">
+                                                No alumni projects match the current filters.
+                                            </p>
+                                        )}
+                                    </>
+                                )}
+                            </section>
+                        )}
+                    </div>
                 </div>
             </Editor>
         </>
     )
 }
-
-const query = graphql`
-    query {
-        sideProjects: allMdx(
-            filter: {
-                fields: { slug: { regex: "/^/side-projects/(?!_)/" } }
-                frontmatter: { projectAuthor: { ne: null } }
-            }
-            sort: { fields: frontmatter___title, order: ASC }
-        ) {
-            nodes {
-                id
-                parent {
-                    ... on File {
-                        relativePath
-                    }
-                }
-                frontmatter {
-                    projectThumbnail
-                    title
-                    description
-                    date(formatString: "YYYY-MM-DD")
-                    liveUrl
-                    githubUrl
-                    projectAuthor
-                    authorGitHub
-                    alumni
-                    teamLink
-                    filters {
-                        tags
-                    }
-                }
-            }
-        }
-    }
-`
 
 export default SideProjectsPage

@@ -8,10 +8,11 @@ import uploadImage from 'components/Squeak/util/uploadImage'
 import { PROFILE_COLORS } from 'constants/profileColors'
 import { graphql, useStaticQuery } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useToast } from '../../context/Toast'
+import seedSideProjects from '../../data/sideProjects.json'
 
-const REPO_BASE_URL = 'https://github.com/PostHog/posthog.com'
-const CONTENT_DIR = 'contents/side-projects'
+const API_HOST = process.env.GATSBY_SQUEAK_API_HOST
 
 export type CreatorProfile = {
     squeakId: string
@@ -24,10 +25,13 @@ export type CreatorProfile = {
     teams?: { data?: { id: number }[] }
 }
 
-export type SideProjectFrontmatter = {
+export type SideProject = {
+    // Strapi entry id; seed/fallback entries don't have one until they're migrated
+    id?: number
     title: string
     description?: string
     date?: string
+    createdAt?: string
     projectThumbnail?: string
     projectAuthor?: string
     authorGitHub?: string
@@ -35,7 +39,7 @@ export type SideProjectFrontmatter = {
     teamLink?: string
     githubUrl?: string
     liveUrl?: string
-    filters?: { tags?: string[] }
+    tags?: string[]
 }
 
 // Tag aliases fold near-duplicate and one-off tags into a smaller canonical set,
@@ -103,7 +107,7 @@ export const isCurrentTeamMember = (profile?: CreatorProfile): boolean =>
 // The frontmatter `alumni` flag wins; otherwise fall back to the profile's team membership
 export const isAlumniProject = (
     profiles: CreatorProfile[],
-    frontmatter: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub' | 'alumni'>
+    frontmatter: Pick<SideProject, 'projectAuthor' | 'authorGitHub' | 'alumni'>
 ): boolean => {
     if (typeof frontmatter.alumni === 'boolean') {
         return frontmatter.alumni
@@ -153,7 +157,7 @@ const normalizeGitHub = (github?: string): string | undefined =>
 // Match a project's creator to a community profile by GitHub username first, then by full name
 export const findCreatorProfile = (
     profiles: CreatorProfile[],
-    { projectAuthor, authorGitHub }: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub'>
+    { projectAuthor, authorGitHub }: Pick<SideProject, 'projectAuthor' | 'authorGitHub'>
 ): CreatorProfile | undefined => {
     const github = normalizeGitHub(authorGitHub)
     const byGitHub = github && profiles.find((profile) => normalizeGitHub(profile.github) === github)
@@ -172,7 +176,7 @@ export const findCreatorProfile = (
 
 export const getCreatorUrl = (
     profile: CreatorProfile | undefined,
-    { authorGitHub, teamLink }: Pick<SideProjectFrontmatter, 'authorGitHub' | 'teamLink'>
+    { authorGitHub, teamLink }: Pick<SideProject, 'authorGitHub' | 'teamLink'>
 ): string | undefined => {
     if (profile) {
         return `/community/profiles/${profile.squeakId}`
@@ -232,7 +236,7 @@ export const Creator = ({
     profiles,
     size = 'sm',
     showRole = true,
-}: Pick<SideProjectFrontmatter, 'projectAuthor' | 'authorGitHub' | 'teamLink'> & {
+}: Pick<SideProject, 'projectAuthor' | 'authorGitHub' | 'teamLink'> & {
     profiles: CreatorProfile[]
     size?: 'sm' | 'lg'
     showRole?: boolean
@@ -367,97 +371,133 @@ export const SideProjectGraphic = ({
     )
 }
 
-export type SideProjectFormValues = {
+type StrapiEntry = { id: number; attributes: Record<string, unknown> }
+
+const transformStrapiSideProject = (entry: StrapiEntry): SideProject => ({
+    id: entry.id,
+    ...(entry.attributes as Omit<SideProject, 'id'>),
+    tags: (entry.attributes.tags as string[]) || [],
+})
+
+// Side projects live in Strapi (like events) so team members can add and edit them in the
+// site. The bundled seed data renders immediately and stays up if the API is unreachable.
+export const useSideProjects = (): {
+    projects: SideProject[]
+    usingFallback: boolean
+    refreshProjects: () => void
+    deleteProject: (projectId: number) => void
+} => {
+    const { getJwt } = useUser()
+    const { addToast } = useToast()
+    const [projects, setProjects] = useState<SideProject[]>(seedSideProjects as SideProject[])
+    const [usingFallback, setUsingFallback] = useState(true)
+
+    const fetchProjects = useCallback(async () => {
+        try {
+            const collected: SideProject[] = []
+            let page = 1
+            let pageCount = 1
+            while (page <= pageCount) {
+                const response = await fetch(
+                    `${API_HOST}/api/side-projects?pagination%5Bpage%5D=${page}&pagination%5BpageSize%5D=100`
+                )
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch side projects: ${response.statusText}`)
+                }
+                const { data, meta } = await response.json()
+                collected.push(...(data || []).map(transformStrapiSideProject))
+                pageCount = meta?.pagination?.pageCount || 1
+                page += 1
+            }
+            if (collected.length > 0) {
+                // Strapi entries win; bundled entries not yet migrated stay visible under them
+                const apiTitles = new Set(collected.map((project) => project.title.trim().toLowerCase()))
+                const unmigrated = (seedSideProjects as SideProject[]).filter(
+                    (project) => !apiTitles.has(project.title.trim().toLowerCase())
+                )
+                setProjects([...collected, ...unmigrated])
+                setUsingFallback(false)
+            }
+        } catch (error) {
+            // Collection not deployed yet, or transient API failure: the seed data stays up
+            console.warn('Falling back to bundled side projects:', error)
+        }
+    }, [])
+
+    useEffect(() => {
+        fetchProjects()
+    }, [fetchProjects])
+
+    const deleteProject = async (projectId: number) => {
+        if (!confirm('Are you sure you want to delete this project?')) {
+            return
+        }
+        try {
+            const response = await fetch(`${API_HOST}/api/side-projects/${projectId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            addToast({ title: 'Project deleted', description: 'The project was deleted successfully.' })
+            fetchProjects()
+        } catch (error) {
+            addToast({
+                title: 'Failed to delete project',
+                description: error instanceof Error ? error.message : 'An unexpected error occurred.',
+                error: true,
+            })
+        }
+    }
+
+    return { projects, usingFallback, refreshProjects: fetchProjects, deleteProject }
+}
+
+type SideProjectFormValues = {
     title: string
     description: string
     projectAuthor: string
     authorGitHub: string
     githubUrl: string
     liveUrl: string
-    projectThumbnail: string
     tags: string
+    alumni: boolean
 }
 
-export const slugifyProjectTitle = (title: string): string =>
-    title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
+const toFormValues = (project?: SideProject): SideProjectFormValues => ({
+    title: project?.title || '',
+    description: project?.description || '',
+    projectAuthor: project?.projectAuthor || '',
+    authorGitHub: project?.authorGitHub || '',
+    githubUrl: project?.githubUrl || '',
+    liveUrl: project?.liveUrl || '',
+    tags: (project?.tags || []).join(', '),
+    alumni: Boolean(project?.alumni),
+})
 
-// Serialize a form value as a single-quoted YAML scalar so characters like ':' or '#'
-// can't break the frontmatter, and keyword-like values ('true', '[work]') aren't coerced
-const yamlScalar = (value: string): string => `'${value.replace(/'/g, "''")}'`
-
-export const buildSideProjectMdx = (values: SideProjectFormValues): string => {
-    const tags = values.tags
-        .split(',')
-        .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, '-'))
-        .filter(Boolean)
-
-    const lines = ['---', `title: ${yamlScalar(values.title.trim())}`]
-    if (values.description.trim()) {
-        lines.push(`description: ${yamlScalar(values.description.trim())}`)
-    }
-    // Added date drives the "newest first" ordering in the gallery
-    lines.push(`date: ${new Date().toISOString().slice(0, 10)}`)
-    if (values.projectThumbnail.trim()) {
-        lines.push(`projectThumbnail: ${yamlScalar(values.projectThumbnail.trim())}`)
-    }
-    lines.push(`projectAuthor: ${yamlScalar(values.projectAuthor.trim())}`)
-    if (values.authorGitHub.trim()) {
-        lines.push(`authorGitHub: ${yamlScalar(values.authorGitHub.trim())}`)
-    }
-    if (values.githubUrl.trim()) {
-        lines.push(`githubUrl: ${yamlScalar(values.githubUrl.trim())}`)
-    }
-    if (values.liveUrl.trim()) {
-        lines.push(`liveUrl: ${yamlScalar(values.liveUrl.trim())}`)
-    }
-    if (tags.length > 0) {
-        lines.push('filters:', '  tags:', ...tags.map((tag) => `    - ${yamlScalar(tag)}`))
-    }
-    lines.push('---', '', values.description.trim(), '')
-    return lines.join('\n')
-}
-
-// Prefilled GitHub "create new file" page – committing it opens a PR against the repo
-export const getNewProjectUrl = (values: SideProjectFormValues): string => {
-    const slug = slugifyProjectTitle(values.title)
-    const params = new URLSearchParams({
-        filename: `${slug}/index.mdx`,
-        value: buildSideProjectMdx(values),
-    })
-    return `${REPO_BASE_URL}/new/master/${CONTENT_DIR}?${params.toString()}`
-}
-
-// relativePath is relative to contents/ (e.g. side-projects/deskhog/index.mdx)
-export const getEditProjectUrl = (relativePath: string): string =>
-    `${REPO_BASE_URL}/edit/master/contents/${relativePath}`
-
-// Add-a-project form for logged-in PostHog team members. Side projects live as MDX files in
-// the posthog.com repo, so submitting hands off to a prefilled GitHub commit page instead of
-// writing to an API – the change still ships as a normal pull request.
+// Add/edit form for logged-in PostHog team members, writing straight to the Strapi
+// collection the gallery reads from (the same pattern as the events page).
 export const SideProjectForm = ({
+    project,
     existingTags,
+    onSuccess,
     onCancel,
 }: {
+    project?: SideProject
     existingTags: string[]
+    onSuccess: () => void
     onCancel: () => void
 }): JSX.Element => {
     const { getJwt } = useUser()
-    const [values, setValues] = useState<SideProjectFormValues>({
-        title: '',
-        description: '',
-        projectAuthor: '',
-        authorGitHub: '',
-        githubUrl: '',
-        liveUrl: '',
-        projectThumbnail: '',
-        tags: '',
-    })
-    const [featuredImage, setFeaturedImage] = useState<UploadImage | undefined>(undefined)
+    const { addToast } = useToast()
+    const [values, setValues] = useState<SideProjectFormValues>(toFormValues(project))
+    const [featuredImage, setFeaturedImage] = useState<UploadImage | { id: number; url: string } | undefined>(
+        project?.projectThumbnail ? { id: 0, url: project.projectThumbnail } : undefined
+    )
     const [submitting, setSubmitting] = useState(false)
-    const [submitted, setSubmitted] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     const setValue = (key: keyof SideProjectFormValues) => (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -468,13 +508,10 @@ export const SideProjectForm = ({
 
     const githubUrl = values.githubUrl.trim()
     const liveUrl = values.liveUrl.trim()
-    // A card links to liveUrl || githubUrl, so a project without either would be unclickable.
-    // The slug check guards titles with no ASCII letters or digits, which would otherwise
-    // hand GitHub an invalid /index.mdx path.
+    // A card links to liveUrl || githubUrl, so a project without either would be unclickable
     const canSubmit =
         Boolean(
             values.title.trim() &&
-                slugifyProjectTitle(values.title) &&
                 values.description.trim() &&
                 values.projectAuthor.trim() &&
                 (githubUrl || liveUrl) &&
@@ -489,33 +526,59 @@ export const SideProjectForm = ({
         }
         setSubmitting(true)
         setError(null)
-        // Open the tab synchronously while the user gesture is still live – popup blockers
-        // reject window.open after the upload's await. Navigated once the URL is ready.
-        const popup = window.open('about:blank', '_blank')
-        if (popup) {
-            popup.opener = null
-        }
         try {
-            let thumbnailUrl = values.projectThumbnail
-            if (featuredImage?.file) {
-                const uploaded = await uploadImage(featuredImage.file, await getJwt())
+            const jwt = await getJwt()
+            if (!jwt) {
+                throw new Error('Sign in to your community profile first')
+            }
+            let thumbnailUrl = project?.projectThumbnail || ''
+            if (featuredImage && 'file' in featuredImage && featuredImage.file) {
+                const uploaded = await uploadImage(featuredImage.file, jwt)
                 thumbnailUrl = uploaded?.url || thumbnailUrl
+            } else if (!featuredImage) {
+                thumbnailUrl = ''
             }
-            const url = getNewProjectUrl({ ...values, projectThumbnail: thumbnailUrl })
-            if (popup) {
-                popup.location.href = url
-                setSubmitted(true)
-            } else {
-                // Popup blocked: same-tab navigation so the submission isn't silently lost
-                window.location.href = url
+            const tags = values.tags
+                .split(',')
+                .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, '-'))
+                .filter(Boolean)
+            const body = {
+                data: {
+                    title: values.title.trim(),
+                    description: values.description.trim(),
+                    // The added date drives "newest first" ordering; keep it stable on edits
+                    date: project?.date || new Date().toISOString().slice(0, 10),
+                    projectAuthor: values.projectAuthor.trim(),
+                    authorGitHub: values.authorGitHub.trim() || null,
+                    alumni: values.alumni,
+                    githubUrl: githubUrl || null,
+                    liveUrl: liveUrl || null,
+                    projectThumbnail: thumbnailUrl || null,
+                    tags,
+                },
             }
-        } catch (uploadError) {
-            popup?.close()
-            setError(
-                uploadError instanceof Error
-                    ? uploadError.message
-                    : 'Image upload failed. Try again, or submit without an image.'
+            const response = await fetch(
+                project?.id ? `${API_HOST}/api/side-projects/${project.id}` : `${API_HOST}/api/side-projects`,
+                {
+                    method: project?.id ? 'PUT' : 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                    body: JSON.stringify(body),
+                }
             )
+            if (!response.ok) {
+                const data = await response.json().catch(() => null)
+                throw new Error(data?.error?.message || response.statusText)
+            }
+            addToast({
+                title: project?.id ? 'Project updated' : 'Project added',
+                description: values.title.trim(),
+            })
+            onSuccess()
+        } catch (submitError) {
+            setError(submitError instanceof Error ? submitError.message : 'Something went wrong. Try again.')
         } finally {
             setSubmitting(false)
         }
@@ -523,10 +586,6 @@ export const SideProjectForm = ({
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
-            <p className="text-sm text-secondary m-0">
-                Projects are MDX files in the posthog.com repo. Fill this out and we'll prefill the file on GitHub –
-                committing it there opens the pull request.
-            </p>
             <OSInput
                 label="Project name"
                 name="title"
@@ -572,7 +631,7 @@ export const SideProjectForm = ({
                 label="Live URL"
                 name="liveUrl"
                 direction="column"
-                description="Where people can try it – use a relative path like /deskhog for pages on posthog.com"
+                description="Where people can try it – use a relative path like /max for pages on posthog.com"
                 value={values.liveUrl}
                 onChange={setValue('liveUrl')}
             />
@@ -599,21 +658,25 @@ export const SideProjectForm = ({
                 value={values.tags}
                 onChange={setValue('tags')}
             />
+            <label className="flex items-center gap-2 text-[15px]">
+                <input
+                    type="checkbox"
+                    checked={values.alumni}
+                    onChange={(event) => setValues((prev) => ({ ...prev, alumni: event.target.checked }))}
+                />
+                <span>
+                    List under PostHog Alums <span className="text-secondary">(the creator has left PostHog)</span>
+                </span>
+            </label>
             <div className="flex items-center gap-2">
                 <OSButton type="submit" variant="primary" size="md" disabled={!canSubmit}>
-                    {submitting ? 'Uploading image…' : 'Continue on GitHub'}
+                    {submitting ? 'Saving…' : project?.id ? 'Save changes' : 'Add project'}
                 </OSButton>
                 <OSButton type="button" size="md" onClick={onCancel}>
                     Cancel
                 </OSButton>
             </div>
             {error && <p className="text-sm text-red m-0">{error}</p>}
-            {submitted && (
-                <p className="text-sm text-secondary m-0">
-                    We opened GitHub in a new tab with the file prefilled. Commit it there to open your pull request –
-                    the project appears here once it's merged.
-                </p>
-            )}
         </form>
     )
 }

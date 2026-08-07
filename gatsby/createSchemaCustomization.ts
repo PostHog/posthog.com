@@ -91,13 +91,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
-      projectAuthor: String
-      authorGitHub: String
-      alumni: Boolean
-      teamLink: String
-      githubUrl: String
-      liveUrl: String
-      projectThumbnail: String
       filters: FrontmatterFilters
       sourceId: String
     }
