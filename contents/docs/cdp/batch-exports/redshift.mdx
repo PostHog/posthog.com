@@ -60,8 +60,8 @@ This is the default model for Redshift batch exports. The schema of the model as
 | event        | `VARCHAR(200)`                | The name of the event that was sent                                       |
 | properties   | `SUPER` or `VARCHAR(65535)`   | A JSON object with all the properties sent along with an event            |
 | elements     | `VARCHAR(65535)`              | This field is present for backwards compatibility but has been deprecated |
-| set          | `SUPER` or `VARCHAR(65535)`   | A JSON object with any person properties sent with the `$set` field       |
-| set_once     | `SUPER` or `VARCHAR(65535)`   | A JSON object with any person properties sent with the `$set_once` field  |
+| set          | `SUPER` or `VARCHAR(65535)`   | Deprecated. Person update payloads aren't retained on stored events       |
+| set_once     | `SUPER` or `VARCHAR(65535)`   | Deprecated. Person update payloads aren't retained on stored events       |
 | distinct_id  | `VARCHAR(200)`                | The `distinct_id` of the user who sent the event                          |
 | team_id      | `INTEGER`                     | The `team_id` for the event                                               |
 | ip           | `VARCHAR(200)`                | The IP address that was sent with the event                               |
