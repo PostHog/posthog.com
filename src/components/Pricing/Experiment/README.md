@@ -52,7 +52,7 @@ the experiment went in.
 
 Flags aren't bootstrapped on this site (see `static/scripts/posthog-init.js`), so there's a
 network round trip before a variant is known. `RenderInClient` renders `placeholder` until then,
-and control is what the placeholder resolves to, which makes it:
+and control is the placeholder, which makes it:
 
 - the server-rendered HTML, so crawlers index the canonical pricing content;
 - what renders in the gap before flags resolve;
@@ -63,13 +63,6 @@ The cost is a brief flash of control for the two-thirds assigned to a redesign a
 alternative — a blank page until flags land — would strip `/pricing` of its content for crawlers
 and punish every visitor to spare two-thirds a reflow. Worth revisiting only if flag bootstrapping
 gets added site-wide.
-
-Both `RenderInClient` slots render the same `VariantSlot` component, differing only in a
-`flagsReady` prop. Keep it that way: React reconciles by element type, so handing the two slots
-different component types would unmount and remount the entire page the moment flags arrive —
-discarding scroll position and any calculator or plan-switcher state, including for the control
-arm, whose output doesn't change. With the type held stable, only the arms that actually swap
-pages remount.
 
 ## Metrics, and what to distrust
 
