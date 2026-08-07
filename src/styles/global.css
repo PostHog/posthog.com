@@ -3014,7 +3014,9 @@ article.reader-view-content-container:has(.quest-sidebar) {
 /* Per-page windowed width overrides (desktop only; mobile stays full-screen above). */
 @media (min-width: 768px) {
     #app-container:not([data-window-expanded])
-        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]) {
+        div[data-app='AppWindow'][data-windowed][data-path='/']:not([data-fixed-size]),
+    #app-container:not([data-window-expanded])
+        div[data-app='AppWindow'][data-windowed][data-path='/pricing']:not([data-fixed-size]) {
         max-width: 1200px;
     }
 }
@@ -3156,6 +3158,23 @@ div[data-radix-popper-content-wrapper] {
    Collapsing swaps the WizardHint's full banner for its slim re-expandable bar. */
 .wizard-hint-collapsed {
     display: none;
+}
+
+/* Dotted "paper desk" backdrop, ported from the .PaperDesk rule on the PostHog
+   app's login screen. Two layers: a soft warm glow that does not repeat, over a
+   16px dot grid that does. Used by the pricing hero. */
+.paper-desk {
+    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.05), transparent 70%),
+        radial-gradient(hsla(0, 0%, 7%, 0.055) 1.4px, transparent 0);
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 16px 16px;
+    background-color: #eef0e7;
+}
+
+.dark .paper-desk {
+    background-image: radial-gradient(72% 72% at 50% 38%, rgba(247, 165, 1, 0.07), transparent 70%),
+        radial-gradient(hsla(0, 0%, 100%, 0.07) 1.4px, transparent 0);
+    background-color: #1a1a1a;
 }
 
 html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-full,

@@ -1973,6 +1973,10 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2388,6 +2392,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                    },
                 },
                 {
                     name: 'Pricing',
@@ -3706,7 +3718,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'AI Observability',
-                            url: '/docs/ai-observability',
+                            url: 'https://posthog.com/docs/ai-observability',
+                            external: true,
                         },
                         {
                             name: 'Markdown and llms.txt',
