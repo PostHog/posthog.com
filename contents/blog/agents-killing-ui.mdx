@@ -37,16 +37,38 @@ If you're a product builder, congratulations! That means your job just doubled: 
 
 Here's a few things to consider in this hybrid (not headless) future.
 
-## If a human can do it, an agent should too
+## Your homepage isn't the front door
 
-Mostly, agents don't touch your UI. Some can (computer-use agents like Perplexity's Comet will click around a live DOM), but that's slow and human-shaped. Agents work better with SQL, tool calls, and APIs.
+If you're building for a technical audience, onboarding them into your product increasingly won't start from a "get started" button. It'll start in a terminal or an AI chat window. 
 
-Netlify has a name for getting this right: [agent experience](https://www.netlify.com/agent-experience/), or AX – how easily an agent can use your product and recover when something breaks. The current standard for this is [MCP](https://modelcontextprotocol.io): you run a server that describes what your product can do, an agent can connect to it, see what's on offer, and interact with your product directly.
+This is less true for consumer products, but the pattern is spreading – especially if your [AEO](/blog/aeo-advice) game is strong. A new user chatting with Claude or ChatGPT may never see your homepage at all. They'll ask the agent for a recommendation, it'll point them at you, and (with user permission and a good MCP) set up your product right there.
+
+The catch is you can't count on the agent to read your install docs. A capable one might go looking, but plenty won't. So setup has to be something an agent can finish on its own (easy to find, easy to authenticate into, and done in one call instead of ten steps).
+
+Get that right and you've handled the agent, but don't forget the person _behind_ the agent. Expect that, eventually, they'll open the product and need to work out what it does and what to do next. That requires UI, baby!
+
+<CalloutBox icon="IconSparkles" title="Go build" type="fyi">
+
+Design two entry points to your product: 
+
+1. For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have). Also, a listing where agents look for connectors (like the Claude and Codex app directories), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). 
+2. For the human: where you start them depends on how they got there. If their agent set things up, they're landing in the middle of a process, so show them what's been done and what's missing. If they clicked around themselves, just point them at the next step.
+
+</CalloutBox>
 
 **What this looks like:**
 
-- [Vercel's MCP server](https://vercel.com/blog/introducing-vercel-mcp-connect-vercel-to-your-ai-tools) lets an agent inspect deployments, pull runtime logs, and trigger deploys. When it ships something, the change appears in the human UI too (the Vercel dashboard), with the same logs and rollback capabilities.
-- Our own [MCP server](/docs/model-context-protocol) lets an agent create a feature flag or launch an experiment using your credentials. Changes land in the project's activity log attributed to your account, with the calling agent client recorded alongside it (the `x-posthog-client` header) so you can filter for changes an agent made rather than a person.
+- The fastest way to try PostHog is the `npx -y @posthog/wizard@latest` [command](/docs/getting-started/install) that sets up your account, scans your codebase for what to instrument, and logs each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, some people continue their PostHog journey headless through the MCP. Plenty of others jump back into the web app (they want to _see_ their data and click around).
+- Our [Slack app](/blog/slack-app-beta) turns a message prompt into a draft PR. I 99% trust it to build things correctly. The 1% difference is why I still check the diff in GitHub (a different UI) before merging it.
+- [AgentMail](https://docs.agentmail.to/agent-onboarding)'s onboarding docs teach the agent to provision an inbox and key itself (no console required). Even there, a human UI is needed, and that UI is email: a six-digit code gets sent to a person. Until a human hands it over, the agent can only send mail to the address it signed up with.
+
+![Can't see without my UI](https://res.cloudinary.com/dmukukwp6/image/upload/cant_see_without_my_ui_e9008a850f.png)
+
+## If a human can do it, an agent should too
+
+Mostly, agents don't touch your UI. Some can (computer-use agents like Perplexity's Comet will click around a live DOM), but that's a slow and human-shaped UX (user experience).
+
+What agents need instead is AX ([agent experience](https://www.netlify.com/agent-experience/)) – how easily an agent can use your product and recover when something breaks. The current standard for AX is the [Model Context Protocol](https://modelcontextprotocol.io) (MCP): you run a server that describes what your product can do, an agent can connect to it, see what's on offer, and interact with your product directly.
 
 <CalloutBox icon="IconTerminal" title="Go build" type="fyi">
 
@@ -59,32 +81,10 @@ Make sure that for every action there's:
 
 </CalloutBox>
 
-## Your homepage isn't the front door
-
-If you're building for a technical audience, onboarding them into your product increasingly won't start from a "get started" button. It'll start in a terminal or an AI chat window. 
-
-This is less true for consumer products, but the pattern is spreading – especially if your [AEO](/blog/aeo-advice) game is strong. A new user chatting with Claude or ChatGPT may never see your homepage at all. They'll ask the agent for a recommendation, it'll point them at you, and (with user permission and a good MCP) set up your product right there.
-
-The catch is you can't count on the agent to read your install docs. A capable one might go looking, but plenty won't. So setup has to be something an agent can finish on its own (easy to find, easy to authenticate into, and done in one call instead of ten steps).
-
-Get that right and you've handled the agent, but don't forget the person _behind_ the agent. Expect that, eventually, they'll open the product and need to work out what it does and what to do next. That requires UI, baby!
-
 **What this looks like:**
 
-- The fastest way to try PostHog is the `npx -y @posthog/wizard@latest` [command](/docs/getting-started/install) that sets up your account, scans your codebase for what to instrument, and logs each step in your terminal as it goes ([here's how we built it](/blog/envoy-wizard-llm-agent)). Once it's done, some people continue their PostHog journey headless through the MCP. Plenty of others jump back into the web app (they want to _see_ their data and click around).
-- Our [Slack app](/blog/slack-app-beta) turns a message prompt into a draft PR. I 99% trust it to build things correctly. The 1% difference is why I still check the diff in GitHub (a different UI) before merging it.
-- [AgentMail](https://docs.agentmail.to/agent-onboarding)'s onboarding docs teach the agent to provision an inbox and key itself (no console required). Even there, a human UI is needed, and that UI is email: a six-digit code gets sent to a person. Until a human hands it over, the agent can only send mail to the address it signed up with.
-
-<CalloutBox icon="IconSparkles" title="Go build" type="fyi">
-
-Design two entry points to your product: 
-
-1. For the agent: a signup flow it can finish end to end ([fork ours](https://github.com/PostHog/wizard), our competitors already have). Also, a listing where agents look for connectors (like the Claude and Codex app directories), docs it can parse (an llms.txt, pages served as plain Markdown), and auth that's safe when it improvises (short-lived, scoped tokens). 
-2. For the human: where you start them depends on how they got there. If their agent set things up, they're landing in the middle of a process, so show them what's been done and what's missing. If they clicked around themselves, just point them at the next step.
-
-</CalloutBox>
-
-![Can't see without my UI](https://res.cloudinary.com/dmukukwp6/image/upload/cant_see_without_my_ui_e9008a850f.png)
+- [Vercel's MCP server](https://vercel.com/blog/introducing-vercel-mcp-connect-vercel-to-your-ai-tools) lets an agent inspect deployments, pull runtime logs, and trigger deploys. When it ships something, the change appears in the human UI too (the Vercel dashboard), with the same logs and rollback capabilities.
+- Our own [MCP server](/docs/model-context-protocol) lets an agent create a feature flag or launch an experiment using your credentials. Changes land in the project's activity log attributed to your account, with the calling agent client recorded alongside it (the `x-posthog-client` header) so you can filter for changes an agent made rather than a person.
 
 ## Watch what agents actually do
 
@@ -106,20 +106,16 @@ Note that what's missing from this work is a not a UI, but the PostHog UI specif
 
 <Caption>How's this for meta: the query I ran to pull those examples showed up, seconds later, as a sample intent in the same dashboard. The tool using the tool.</Caption>
 
-**What this looks like:**
-
-- In June, Cloudflare's [Radar data](https://www.nbcnews.com/tech/tech-news/bot-web-traffic-overtaken-human-web-traffic-data-shows-rcna348522) showed automated requests overtaking human ones on HTML traffic for the first time, 57.5% to 42.5%, about 18 months earlier than its CEO had predicted. You can read that as the end of the screen if you like. I read it as a lot of people asking for things, then agents going to look at the answer.
-- [Temporal](https://temporal.io/solutions/ai) records every step of an agent's run as a durable event history you can replay and inspect where a loop stalled or repeated itself (UI to keep an eye or your AI).
-
 <CalloutBox icon="IconGraph" title="Go build" type="fyi">
 
 Instrument agent traffic the way you already instrument humans: tag every call with the client it came from, then watch where agents retry or give up. And enjoy the irony, because the thing you built to watch a swarm of agents who never touch a UI is... a UI. Even here the answer is a screen for a human to interpret.
 
 </CalloutBox>
 
-<div style="text-align: center;">
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/truman_show_3cb839fddf.jpeg" alt="The Truman Show: what we see vs what they see" />
-</div>
+**What this looks like:**
+
+- In June, Cloudflare's [Radar data](https://www.nbcnews.com/tech/tech-news/bot-web-traffic-overtaken-human-web-traffic-data-shows-rcna348522) showed automated requests overtaking human ones on HTML traffic for the first time, 57.5% to 42.5%, about 18 months earlier than its CEO had predicted. You can read that as the end of the screen if you like. I read it as a lot of people asking for things, then agents going to look at the answer.
+- [Temporal](https://temporal.io/solutions/ai) records every step of an agent's run as a durable event history you can replay and inspect where a loop stalled or repeated itself (UI to keep an eye or your AI).
 
 ## Build an interface worth interacting with
 
@@ -134,11 +130,6 @@ Agents in the mix simply shift what there is to design _for_, and that's the fun
 - **Orchestration** – if five agents are running at once, do you watch them on one screen, or open five chats?
 - **Interruption** – when you need to steer the agent while it's still moving.
 
-**What this looks like:**
-
-- Intercom's [Fin Operator](https://www.intercom.com/blog/introducing-operator/) tunes Fin for you, then hands the work back as a screen. Every change arrives as a proposal (their words: "Operator's version of a pull request"), a structured diff of what's changing and why, which you review, edit, and approve before it takes effect. The agent does the work. The human decides what ships.
-- Anthropic could have left Claude Code in the terminal. Instead it shipped a desktop app, a web app, IDE extensions, and Cowork, all wrapping the same models in more interfaces. Some people love the CLI precisely because there's so little UI in the way, and others [go straight for Cowork](/blog/making-claude-cowork-actually-useful).
-
 <CalloutBox icon="IconLaptop" title="Go build" type="fyi">
 
 Deprioritize the screens that agents make redundant, and treat your MCP as a product. Then build the decision surfaces properly: show the diff, not a summary of the diff. Put an undo next to anything an agent can do on its own. Label the things an agent did, so nobody has to work out who changed what. Show state visually, because humans parse color and shape far quicker than text. 
@@ -146,6 +137,11 @@ Deprioritize the screens that agents make redundant, and treat your MCP as a pro
 A good MCP puts your product wherever the user already is. That's reach – it's not quality. Your moat might actually be a UI that's easier to use and nicer to look at, than whatever your MCP is competing against. People pay real money for a great experience. So make the UI that agents _don't_ touch delightfuly human.
 
 </CalloutBox>
+
+**What this looks like:**
+
+- Intercom's [Fin Operator](https://www.intercom.com/blog/introducing-operator/) tunes Fin for you, then hands the work back as a screen. Every change arrives as a proposal (their words: "Operator's version of a pull request"), a structured diff of what's changing and why, which you review, edit, and approve before it takes effect. The agent does the work. The human decides what ships.
+- Anthropic could have left Claude Code in the terminal. Instead it shipped a desktop app, a web app, IDE extensions, and Cowork, all wrapping the same models in more interfaces. Some people love the CLI precisely because there's so little UI in the way, and others [go straight for Cowork](/blog/making-claude-cowork-actually-useful).
 
 ## The future is hybrid (not headless)
 
