@@ -349,6 +349,22 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                 grow into larger side hustles or even startups of their own. Regardless, we like them
                                 and we collect them here.
                             </p>
+                            <p className="mb-0 mt-3 max-w-3xl text-base leading-relaxed text-secondary">
+                                If building things like this sounds like your idea of a good time, we actively encourage
+                                it. Read our{' '}
+                                <Link to="/handbook/people/side-gigs" state={{ newWindow: true }}>
+                                    side gigs policy
+                                </Link>
+                                , then{' '}
+                                <Link to="/careers" state={{ newWindow: true }}>
+                                    come work with us
+                                </Link>
+                                .
+                            </p>
+                            <p className="mb-0 mt-3 max-w-3xl text-sm leading-relaxed text-secondary">
+                                The boring small print: these are personal projects, not PostHog products. If one bricks
+                                your computer, that's between you and its creator.
+                            </p>
                         </div>
                         <HedgehogCodingGroup className="w-full max-w-[22rem] justify-self-end" />
                     </header>
