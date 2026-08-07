@@ -6,9 +6,9 @@ showTitle: true
 
 > This is a living document — we'll keep adding tactics as we learn what works. If you've found something effective, add it here!
 
-Product engineers, our ICP, are very self-serve and happy to implement PostHog themselves and read the docs without ever interacting with someone unless they have support queries. But unengaged customers churn, and "just checking in" rarely works.
+Engineers, our ICP, are very self-serve and happy to implement PostHog themselves. They often read the docs without ever interacting with someone unless they have support queries. But unengaged customers churn, and "just checking in" rarely works. This page details how to craft outreach, and some great examples. 
 
-The common thread across everything below: **do your homework first, then lead with something specific and valuable.**
+The common thread across everything below: **do your homework first, then lead with something specific and valuable.** Generic outreach will not work.
 
 ## Why is it helpful for someone to talk to you?
 
@@ -29,9 +29,9 @@ If you go down the 'saving money' route, bear in mind two things:
 
 ## Do your homework first
 
-Before reaching out, spend 10 minutes understanding where the customer is at. This makes all the difference between a generic check-in and a genuinely helpful conversation.
+Before reaching out, spend some time understanding where the customer is at. This makes all the difference between a generic check-in and a genuinely helpful conversation. The amount of time spent should be carefully prioritized. The more specific, the more likely you'll get a response, **but don't let research become the blocker**. For a first touch, a simple email that points at their use case with a specific suggestion is enough; you don't need to design a bespoke Loom for everyone. Some ways to research are:
 
-### Review their engagement metrics
+### 1. Review their engagement metrics
 
 Use the customer's PostHog usage data to understand what they're actually doing before you reach out. Look at:
 
@@ -43,7 +43,7 @@ For example, if a customer is creating and viewing insights with titles around "
 
 **Where to look:** Customer engagement dashboard in PostHog — filter by the customer's org/team and check insight creation and viewing activity. Use PostHog AI or the PostHog MCP ([with CS Skills like User Deep Dive](https://github.com/PostHog/skills/tree/main/skills/team/customer-success)) to pull additional details and summaries.
 
-### Walk through their site with debug mode
+### 2. Walk through their site with debug mode
 
 Visit the customer's website and inspect their PostHog implementation firsthand:
 
@@ -57,7 +57,7 @@ This gives you a firsthand view of what the customer is (or isn't) capturing. Yo
 
 **Framing matters:** Position it as a proactive health check, not a criticism. Something like: "I took a look at your implementation and spotted a couple of things that might be worth addressing..."
 
-### Dig into frustration signals with MCP
+### 3. Dig into frustration signals with MCP
 
 MCP is great for finding silent frustration — and the specific person worth reaching out to about it:
 
@@ -72,13 +72,9 @@ MCP is great for finding silent frustration — and the specific person worth re
 
 _Note:_ ask MCP to ignore weekend events — weekend dips create false positives.
 
-### But don't let research become the blocker
+## Pick your reason
 
-A heavily researched, tailored message is always better, but it can be a big time sink. For a first touch, a simple email that points at their use case with a specific suggestion is enough — you don't need to design a bespoke Loom for everyone. Just don't tip into generic: "here to help" won't break through.
-
-## Reasons to reach out
-
-Ordered roughly by how often the trigger comes up. Apply the [rules of thumb](#rules-of-thumb) to whichever you pick.
+Apply the [rules of thumb](#rules-of-thumb) to whichever you pick. If you have other examples, add them here!
 
 ### SDK health — flag outdated SDKs
 
@@ -88,7 +84,7 @@ Use the SDK health check to see if the customer is running outdated SDKs. This i
 
 **Suggested wording:**
 
-> BTW our SDK health check is warning that you are using a three year old version of our Python SDK — I promise we've improved it since then! Also your iOS and Android SDKs are really out of date. Any chance of updating these?
+> BTW our SDK health check is warning that you are using a three year old version of our Python SDK. I promise we've improved it since then! Also your iOS and Android SDKs are really out of date. Any chance of updating these?
 
 **Why it works:** Specific, helpful, and low-effort for both sides. The tone is light and friendly, not alarming.
 
@@ -132,9 +128,35 @@ For customers who rarely reply, keep sending value anyway. Session replays will 
 
 **Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&cid=C093XHYMGBE)
 
-### Send a lightweight survey
+### Account Handovers
 
-A short in-app or emailed survey is cheap, scales across your whole book, and doesn't ask anyone for a call ([example](https://us.posthog.com/project/2/surveys/019fb442-ff15-0000-fdb3-360d82cb621c), credit to Luke). It's good for gathering the basics: how they're using PostHog, whether they're happy, what they need help with, and how they'd prefer to hear from you. The answers then give you a specific reason for the follow-up.
+Sometimes you'll get a customer in your book who was previously working with someone else on the PostHog team. A pre-existing relationship can help, but it's not guaranteed they'll want to talk to you. We've found a message like this in Slack/email works well after the intro.
+
+**Suggested cadence:** At the beginning of your engagement,
+
+**Suggested wording:**
+
+> Thanks [PostHog team mate who introed you]
+> Hey [customer] :blob-wave: Excited to be working with you! As I take over, it would be a big help if we could schedule a quick 15–20 minutes intro call [link to your Calendly]. Just a chance for me to learn more and figure out how I can best support you going forward. Let me know if you'd be open to that.
+
+### 1:1 individualized outreach to revive a dead channel
+
+When a customer channel goes completely silent, don't mass-ping — it gets ignored. Instead, DM team members individually over a couple of weeks until you've rebuilt the channel one person at a time, then get them on a call together. Seb used this on a dead channel and eventually got the whole team back on a call.
+
+**Suggested cadence:** Spread individual DMs over 2-3 weeks. Convene the group on a call once you have a critical mass.
+
+**Bonus — same-day call follow-up with a custom touch:** A custom-branded merch discount code (set up in the Shopify admin — see the [merch store handbook page](/handbook/company/merch-store)) is a small detail with outsized goodwill impact. Sending it same-day rides the momentum, well before the "proper follow-up."
+
+**Suggested wording (same-day follow-up):**
+
+> hey team! thanks for the productive chat earlier today.
+>
+> i owe you a proper follow up on everything we discussed, but couldn't wait to share this discount code ([CUSTOM-CODE]) with ya'll so you can get your save posthog t shirt on the (hog)house :hog-party-wave:
+>
+> lovely meeting you all - excited to keep working together :hog-offers-heart:
+> cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
+
+**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
 
 ### Post-event outbound to long-silent customers
 
@@ -165,14 +187,6 @@ When something happens in the wider market that could cost the customer money �
 - Loop in engineering in the customer channel when relevant — turns the conversation into a product input loop and shows the feedback is being taken seriously.
 
 **Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&cid=C093XHYMGBE)
-
-### More reasons to reach out
-
-- Offer to optimize their usage/reduce their billing - if they are pointlessly tracking a bunch of junk, tell them! Otherwise they'll just find out themselves and churn anyway.
-- Subscribe to your customers' newsletters, set up Google Alerts, use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better.
-- If they submit a support request, jump in and respond yourself to try and build a relationship.
-- Find your customer's GitHub – company open source repos or individual engineers' personal projects. Review any open bugs, issues, etc. and submit a real pull request. Extra points if you fix an open bug on their company repo. The customer will see your name somewhere other than their inbox and engage. For important customers, ask our engineering team for help with more complex fixes.
-- Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.
 
 ## Which channel, and which person
 
@@ -222,17 +236,6 @@ If you feel like you have done a good job with a customer, and have genuinely be
 
 Something like "Hey Leon, our session last week seemed to have landed well. I'm glad you found it useful. I was wondering if you could help me out. Your team is growing really quickly, and there's a bunch of new folks starting to use PostHog. I imagine not all of them are super comfortable with the platform yet and could use a helping hand. Could you introduce me to Simon, Charles and Scott?"
 
-## Just been handed an account?
-
-Sometimes you'll get a customer in your book who was previously working with someone else on the PostHog team. A pre-existing relationship can help, but it's not guaranteed they'll want to talk to you.
-
-We've found a message like this in Slack/email works well after the intro:
-
-> Thanks [PostHog team mate]
-> Hey [customer] :blob-wave: Excited to be working with you! As I take over, it would be a big help if we could schedule a quick 15–20 minutes intro call [link to your Calendly]. Just a chance for me to learn more and figure out how I can best support you going forward. Let me know if you'd be open to that.
-
-We've found most people will respond to this.
-
 ## When they go quiet
 
 ### Put time on the calendar instead of waiting for a reply
@@ -279,15 +282,25 @@ That last line is very important because it gives them a safe option to say "no"
 
 Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
 
-## Rules of thumb
+## Additional Resources
+
+### Outreach rules of thumb
 
 - **Try stuff.** Got a quiet account? Test something unusual on it — there's very little downside, and it's how everything on this page got found.
 - **Mix value types, not all asks.** If every message is an ask, you train them to ignore you. Build trust before the ask.
 - **Low-pressure framing.** *"thought it was worth mentioning"*, *"lmk if interesting"*, *"if it's a bad fit, I'll say that and leave it there"*, *"you may already have something like that in place"*. Don't push when they push back — close the loop with a clean "let's put a pin in this" so the door stays open.
 - **Strike while energy is high.** Same-day follow-ups after calls beat polished follow-ups sent a week later.
-- **Timing probably matters.** Nobody's measured this properly, but the consensus is that early in the week and in the morning beats Friday afternoon.
+- **Timing matters.** Consensus is that early in the week and in the morning beats Friday afternoon.
 
-## LinkedIn Sales Nav
+### Additional creative ways to engage customers
+
+- If they submit a support request outside of Slack, jump in and respond yourself to try and build a relationship.
+- Create a lightweight survey across your book to gather the basics: how they're using PostHog, whether they're happy, what they need help with, and how they'd prefer to hear from you. The answers then give you a specific reason for the follow-up. [Example here](https://us.posthog.com/project/2/surveys/019fb442-ff15-0000-fdb3-360d82cb621c) (credit to Luke).
+- Subscribe to your customers' newsletters, set up Google Alerts or [Watch Tower](https://gotwatchtower.com/), use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better.
+- Find your customer's GitHub – company open source repos or individual engineers' personal projects. Review any open bugs, issues, etc. and submit a real pull request. Extra points if you fix an open bug on their company repo. The customer will see your name somewhere other than their inbox and engage. For important customers, ask our engineering team for help with more complex fixes.
+- Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.
+
+### LinkedIn Sales Nav
 
 To get notified about new hires and other changes to the accounts you manage, you can set up lists of accounts to track in LinkedIn Sales Nav.
 
