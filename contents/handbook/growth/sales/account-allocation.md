@@ -17,7 +17,7 @@ Every $20k+ account gets a [CSM](/handbook/cs-and-onboarding/customer-success). 
 
 ### TAMs are an overlay
 
-A [TAM](/handbook/growth/sales/how-we-work#technical-account-managers) joins an account only when there's a qualified expansion opportunity. That could be cross-sell, workload expansion, annual conversion, or a renewal worth actively working. How to judge whether an opportunity is real is covered in [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential). No qualified opportunity, no TAM.
+A [TAM](/handbook/growth/sales/how-we-work#technical-account-managers) joins an account only when there's a qualified expansion opportunity. That could be cross-sell, workload expansion, annual conversion, or a renewal worth actively working. How to judge whether an opportunity is real is covered in [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential). Without a qualified opportunity, the account stays CSM-only.
 
 In [customer journey](/handbook/growth/sales/customer-journey) terms: a TAM is on an account while it's Expanding (or Implementing, when a deal closed with a qualified opp already attached). When the account reaches Steady state, the TAM comes off. The CSM was there the whole time, so nothing gets handed over.
 
@@ -33,7 +33,7 @@ We used to route accounts between TAM and CSM based on primary product adoption 
 
 An at-risk account follows the [risk mitigation and churn prevention](/handbook/growth/sales/risk-mitigation-and-churn-prevention) playbook, same as always. Flag early with the Churn Risk segment, dig into the why, and run the save.
 
-When both a TAM and a CSM are on the account, they co-own the save. Both are responsible. Nobody gets to assume the other has it.
+When both a TAM and a CSM are on the account, they co-own the save. Both are responsible, and neither should assume the other is handling it.
 
 An account going at risk is also not a reason to add a TAM. Churn saves are generally not a legitimate TAM opportunity. Risk on a CSM-only account stays with the CSM unless a genuine expansion opportunity qualifies through the normal path.
 
@@ -52,9 +52,9 @@ TAM book size is set by ARR under management. Account count follows from that. T
 
 Beyond total size, a balanced book also needs:
 
-- **Billing mix.** At least 40% of book ARR on monthly billing. Annual accounts still have plenty to work: renewals, cross-sells, and expanding into more of the org. But monthly accounts are where annual conversions come from, and usage growth there turns into cash faster. A book with no monthly mix has no conversion pipeline.
+- **Billing mix.** At least 40% of book ARR on monthly billing. Annual accounts still have plenty to work: renewals, cross-sells, and expanding into more of the org. But monthly accounts are where annual conversions come from, and usage growth there turns into cash faster, so a book with little monthly billing has a thin conversion pipeline.
 - **Conversion candidates.** At least 2 accounts above $100k ARR with a realistic path to an annual conversion this year.
-- **A staggered renewal calendar.** If half your book renews in the same quarter, one bad quarter can wreck your year. Spread it out.
+- **A staggered renewal calendar.** If half your book renews in the same quarter, a single weak quarter can set back the whole year, so spread renewals across the calendar.
 - **Concentration awareness.** Two $200k accounts can be a quarter of your book. That's fine, but know what losing one does to your number. Don't stack more concentration than that.
 
 If your book is outside these bounds at quarter start, work with your team lead to rebalance.
@@ -65,10 +65,7 @@ There is no CSM to TAM handoff anymore, because the CSM never leaves. Instead, w
 
 Anyone can flag: the CSM, a TAE, support, or automated alerts. The flag routes to a TAM in the right region for qualification.
 
-The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). Two outcomes:
-
-- **It holds up.** The TAM joins the account as the overlay, opens the opp, and intros themselves to the customer with the CSM's help.
-- **It doesn't.** The TAM documents why in Vitally and the account stays CSM-only. A documented "no" is still useful. It stops the next person re-litigating the same idea in 3 months.
+The receiving TAM qualifies the opportunity using the [growth potential framework](/handbook/growth/sales/evaluating-growth-potential). If it holds up, they join the account as the overlay, open the opp, and intro themselves to the customer with the CSM's help. If it doesn't, they document why in Vitally and the account stays CSM-only. A documented "no" is still useful — it stops the next person re-litigating the same idea in 3 months.
 
 We track coverage in Vitally with the existing segments: `CSM Managed` for the base layer and `AM Managed` for the TAM overlay. An account with both segments has both.
 
@@ -87,7 +84,7 @@ Removal happens when one of these is true:
 
 A TAM being willing to release an account is itself a decent signal the upside is gone. TAMs are paid on their book, so they don't give up real opportunities lightly. But treat it as a signal and sanity check it. Team leads should verify before agreeing.
 
-Removing a TAM is a good outcome. It usually means a healthy, expanded customer. The worst outcome is inventing an opportunity to justify staying on.
+Removing a TAM is usually a good outcome, and typically means a healthy, expanded customer. Inventing an opportunity to justify staying on is worse than coming off cleanly.
 
 TAM removals generally happen at the end of the quarter. Accounts can be added to a book at any time, but plan removals for quarter end so books stay stable and handovers get done properly rather than rushed mid-quarter.
 
@@ -111,7 +108,7 @@ Low engagement or an account being difficult is not a reason to come off. That's
 - Low user activity or poor health score
 - You don't like working with them / they don't like you
 
-If an account is struggling on these dimensions, that's a signal to invest more. The saturation checks require *evidence* the opportunity is gone. Hard is different from gone.
+If an account is struggling on these dimensions, that's a signal to invest more. The saturation checks require *evidence* that the opportunity is gone; an account being hard to work is not the same as the opportunity being gone.
 
 ---
 
