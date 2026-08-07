@@ -27,7 +27,7 @@ Where there's expansion potential but no TAM capacity yet, an account can sit CS
 
 ### A note on primary products
 
-We used to route accounts between TAM and CSM based on primary product adoption (Session Replay, Feature Flags, Error Tracking, tracked in Vitally as `Paying for <Product Name>`). That was the old model. Product count is still a decent rough signal, since an account paying for all three is often closer to saturated. But it doesn't decide anything anymore. The [growth potential framework](/handbook/growth/sales/evaluating-growth-potential) decides.
+We used to route accounts between TAM and CSM based on primary product adoption (Session Replay, Feature Flags, Error Tracking, tracked in Vitally as `Paying for <Product Name>`). That was the old model. Product count is still a decent rough signal, since an account paying for all three is often closer to saturated. Rather than using a strict product adoption method, we rely on the framing in [how to evaluate an account's revenue growth potential](/handbook/growth/sales/evaluating-growth-potential) to determine if there's actually expansion potential.
 
 ### Churn saves
 
