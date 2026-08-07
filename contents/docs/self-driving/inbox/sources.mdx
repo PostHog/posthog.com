@@ -14,7 +14,7 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 </CalloutBox>
 
-Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, an LLM trace regression, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
+Signal sources are what fill your inbox. A [signal](/docs/self-driving/signals) can be a production error, a support conversation, a Session Replay pattern, a log alert changing state, a Replay Vision scanner finding, an LLM trace regression, an investigated anomaly on an insight, or an issue from an external tracker. Each source watches one of these streams and turns what it finds into work worth investigating.
 
 ## Configure sources
 
@@ -72,7 +72,14 @@ These sources are available when the matching PostHog product has data in your p
       label: "AI Observability",
       url: "/docs/ai-observability",
       icon: "IconLlmAnalytics",
-      description: "Eval report findings, plus investigated cost, latency, and error anomalies.",
+      description: "Findings from eval reports on your LLM traffic.",
+      lineClamp: 2,
+    },
+    {
+      label: "Product analytics",
+      url: "/docs/product-analytics",
+      icon: "IconGraph",
+      description: "Investigated anomaly alerts on your insights – true positives only.",
       lineClamp: 2,
     },
     {
