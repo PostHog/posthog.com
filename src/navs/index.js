@@ -1973,6 +1973,10 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2388,6 +2392,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                    },
                 },
                 {
                     name: 'Pricing',
@@ -7903,6 +7915,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: '.NET', url: '/docs/logs/installation/dotnet' },
                         { name: 'Rust', url: '/docs/logs/installation/rust' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },

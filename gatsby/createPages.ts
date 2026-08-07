@@ -182,7 +182,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     }
                 }
             }
-            templates: allMdx(filter: { fields: { slug: { regex: "/^/templates/" } } }) {
+            templates: allMdx(filter: { fields: { slug: { regex: "/^/(templates|pocket-guides)//" } } }) {
                 nodes {
                     id
                     fields {
@@ -657,6 +657,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         if (node.parent?.sourceInstanceName === 'posthog-main-repo') return
         const plainSlug = node.fields?.slug || node.slug
         if (plainSlug?.startsWith('/ko/newsletter/') || plainSlug?.startsWith('ko/newsletter/')) return
+        // `_`-prefixed template directories are starters to copy from, not pages. They carry a
+        // title (a starter has to model a real template), so the `title: { nin: [""] }` filter
+        // above doesn't exclude them the way it excludes sibling SKILL.md files.
+        if (/(^|\/)_/.test(plainSlug ?? '') && /(templates|pocket-guides)/.test(plainSlug ?? '')) return
         createPage({
             path: replacePath(node.slug),
             component: PlainTemplate,
@@ -968,6 +972,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.templates.nodes.forEach((node) => {
         const { slug } = node.fields
+        // A pocket guide's sibling SKILL.md and `_`-prefixed starter directories are files to
+        // copy, not pages – the query filters on slug prefix alone, so skip them here.
+        if (slug.endsWith('/SKILL') || /\/_/.test(slug)) {
+            return
+        }
         createPage({
             path: slug,
             component: DashboardTemplate,
@@ -1172,6 +1181,7 @@ async function createMinimalPages({
 }) {
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
     const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+    const DashboardTemplate = path.resolve(`src/templates/Template.tsx`)
     const Slugger = require('github-slugger')
 
     const result = await graphql(`
@@ -1247,6 +1257,14 @@ async function createMinimalPages({
                         depth
                         value
                     }
+                    fields {
+                        slug
+                    }
+                }
+            }
+            pocketGuides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+                nodes {
+                    id
                     fields {
                         slug
                     }
@@ -1336,7 +1354,22 @@ async function createMinimalPages({
         productEngineerHandbook: { nodes: any[] }
         posts: { nodes: any[] }
         localizedNewsletter: { nodes: any[] }
+        pocketGuides: { nodes: any[] }
     }
+
+    // Pocket guides render in preview builds too - reviewers need to click through the book.
+    // Same skip rule as the full build: SKILL.md siblings and _starter directories aren't pages.
+    data.pocketGuides.nodes.forEach((node) => {
+        const slug = node.fields?.slug
+        if (!slug || slug.endsWith('/SKILL') || /\/_/.test(slug)) return
+        createPage({
+            path: slug,
+            component: DashboardTemplate,
+            context: {
+                id: node.id,
+            },
+        })
+    })
 
     createHandbookPreviewPosts(data.docs.nodes, 'docs', { name: 'Docs', url: '/docs' })
 

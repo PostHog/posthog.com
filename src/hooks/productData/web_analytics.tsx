@@ -1,18 +1,18 @@
 import React from 'react'
 import {
-    IconPieChart,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
@@ -161,15 +161,15 @@ export const webAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
-        alt: 'A hedgehog looking at web analytics',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png',
+        alt: 'A hedgehog at a desk surrounded by charts',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
-            alt: 'A hedgehog looking at web analytics',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+            alt: 'PostHog AI and web analytics',
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png',
@@ -364,8 +364,8 @@ export const webAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
-        imageAlt: 'PostHog AI and web analytics',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
+        imageAlt: 'A hedgehog looking at web analytics',
         imageClasses: 'w-96',
         // Reshaped from presenterNotes.ai (existing MCP blurb)
         intro: 'Query web analytics data to check traffic trends, investigate anomalies, and build dashboards.',

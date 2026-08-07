@@ -34,7 +34,7 @@ Most companies don't have a customer experience system. They have tickets in one
 - **[AI Observability](/docs/ai-observability)** — See prompts, outputs, latency, and token usage for AI-powered workflows. When an AI feature misbehaves, trace it back to the specific generation.
 - **[Surveys](/docs/surveys)** — Capture frustration signals (NPS, CSAT) and tie them directly to broken flows. When someone leaves a low score, you can click through to their session and see what went wrong.
 - **[Experiments](/docs/experiments)** — Validate that fixes actually improved the experience. After resolving a class of issues, measure whether user satisfaction and completion rates improved.
-- **[Replay Vision](/docs/replay-vision)** *closed beta* — The support-scale version of session replay. Instead of a human watching recordings one at a time, a scanner reads all of them and tags what happened: task completed, abandoned, blocked by an error. For a support team, that turns "we think a few customers hit this" into a number. Findings land as queryable events. [Waitlist](/replay-vision).
+- **[Replay Vision](/docs/replay-vision)** — The support-scale version of session replay. Instead of a human watching recordings one at a time, a scanner reads all of them and tags what happened: task completed, abandoned, blocked by an error. For a support team, that turns "we think a few customers hit this" into a number. Findings land as queryable events.
 - **[self-driving](/docs/self-driving)** — Support conversations, error tracking, session replay, and logs are all [signal sources](/docs/self-driving/inbox/sources), and external helpdesks (Zendesk, Front, Intercom-likes, Gorgias, Plain) can feed the same inbox. A recurring ticket theme becomes an investigated report with a pull request, so the fix happens instead of the ticket being closed with a workaround.
 
 ## Adoption path and expansion path
@@ -293,7 +293,7 @@ This expansion happens naturally because each step removes a layer of uncertaint
 | Session Replay + Error Tracking | Product Intelligence (for the product team) | Support and engineering are in PostHog for debugging. The product team would benefit from the same analytics for feature development. | "Your support team is using PostHog to debug issues. Has your product team seen what they can do with funnels and retention in the same platform?" |
 | Replay + Errors + Analytics | Surveys (NPS/CSAT) | They're debugging reactively. Surveys let them detect frustration proactively and tie it to specific sessions. | "You're great at debugging reported issues. But how do you find the frustrated users who never file a ticket?" |
 | Replay + Errors (debugging AI features) | AI Observability | Traditional debugging misses AI-specific issues: prompt quality, hallucinations, latency. | "You're catching errors in your AI features. But are you seeing when the model gives a bad answer that isn't technically an error?" |
-| High ticket volume, support watching replays by hand | Replay Vision *closed beta* | Support can only watch a sample; a scanner reads every session | "How many tickets say 'it didn't work' with no detail? A scanner can read those sessions and tell you what actually happened in each one." |
+| High ticket volume, support watching replays by hand | Replay Vision | Support can only watch a sample; a scanner reads every session | "How many tickets say 'it didn't work' with no detail? A scanner can read those sessions and tell you what actually happened in each one." |
 | Zendesk/Front/Jira alongside PostHog | self-driving | Their helpdesk is already a supported signal source; recurring tickets can become PRs | "Your recurring tickets are a to-do list nobody has time for. What if each one arrived investigated, with a fix attached?" |
 | Support with the same issues recurring | self-driving | Tickets are resolved fast but the underlying bugs never make the roadmap | "How many of your tickets are the same handful of problems? Those can come back investigated, with a PR you review — so they stop coming back." |
 | Replay + Errors (engineering in PostHog) | Release Engineering (Feature Flags) | Engineering is in PostHog for debugging. Feature flags for safe releases is a natural add. | "You're tracking bugs after releases. What if you could gate features behind flags and roll back without a deploy?" |
@@ -311,7 +311,7 @@ This expansion happens naturally because each step removes a layer of uncertaint
 - **Surveys docs:** [Surveys](/docs/surveys)
 - **AI Observability docs:** [AI Observability](/docs/ai-observability)
 - **Logs docs:** [Start here](/docs/logs/start-here) · [Link to session replay](/docs/logs/link-session-replay)
-- **Replay Vision docs:** [Overview](/docs/replay-vision) · [Waitlist](/replay-vision)
+- **Replay Vision docs:** [Overview](/docs/replay-vision) · [Quota and limits](/docs/replay-vision/quota-and-limits)
 - **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Signal sources](/docs/self-driving/inbox/sources)
 - **Privacy controls:** [Session Replay Privacy](/docs/session-replay/privacy)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)

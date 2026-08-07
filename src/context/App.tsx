@@ -358,6 +358,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -445,6 +446,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -636,6 +638,24 @@ const appSettings: AppSettings = {
             max: {
                 width: 900,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    // The e-reader: tall enough that a guide page reads like a page, wide enough for the
+    // front matter's two columns.
+    '/pocket-guides': {
+        size: {
+            min: {
+                width: 700,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 1100,
             },
             fixed: false,
         },
@@ -1581,6 +1601,7 @@ export interface SiteSettings {
     reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -1598,6 +1619,7 @@ const getInitialSiteSettings = (): SiteSettings => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 
@@ -1628,6 +1650,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         performanceBoost: false,
         screensaverDisabled: true,
         reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)

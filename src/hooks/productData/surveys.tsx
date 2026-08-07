@@ -1,19 +1,19 @@
 import React from 'react'
 import { getTool } from '../../data/tools'
 import {
-    IconMessage,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, topFeatures } from './surveys/slides'
@@ -136,20 +136,19 @@ export const surveys = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
-        alt: 'A hedgehog looking at survey results',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png',
+        alt: 'A hedgehog posting a survey response',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
-            alt: 'A hedgehog looking at survey results',
-        },
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
             alt: 'A hedgehog taking a survey with a rating scale',
-            className: 'w-44 @lg/reader-content:w-56 @2xl/reader-content:w-72',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
+            alt: 'A hedgehog looking at survey results',
         },
     },
     slider: {

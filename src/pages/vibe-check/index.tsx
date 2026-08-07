@@ -102,7 +102,14 @@ export default function Ick() {
                     {!isFinalSlide && (
                         <header className="pb-4">
                             <h1 className="text-2xl flex items-center justify-center gap-2 text-primary dark:text-white">
-                                You'll hate <Logo className="relative -top-px h-6 w-auto" width="auto" /> if...
+                                You'll hate <Logo className="relative -top-px h-6 w-auto dark:hidden" width="auto" />
+                                <Logo
+                                    className="relative -top-px hidden h-6 w-auto dark:block"
+                                    variant="mono"
+                                    color="white"
+                                    width="auto"
+                                />{' '}
+                                if...
                             </h1>
                         </header>
                     )}
