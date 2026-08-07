@@ -808,9 +808,8 @@ export default function SelfDrivingPage({
                                     and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
                                 </p>
                                 <p className="mb-0 mt-4 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                    PostHog instruments your codebase, then combines that context with
-                                    product data like analytics events, errors, and recordings to understand problems and
-                                    propose fixes.
+                                    PostHog instruments your codebase, then combines that context with product data like
+                                    analytics events, errors, and recordings to understand problems and propose fixes.
                                 </p>
                                 <GetStarted selfDriving />
                             </div>

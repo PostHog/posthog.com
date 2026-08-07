@@ -1,0 +1,45 @@
+---
+title: Self-driving 101
+shortTitle: Self-driving 101
+subtitle: What self-driving is, how the self-driving loop works, and why most scout runs write nothing.
+bookOrder: 1
+---
+
+<LeftPage>
+
+<LoopFigure
+    n={1}
+    caption="The loop. Every scout you enable feeds the same four stages, and the outcome becomes new signals."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Self-driving 101
+
+Self-driving is PostHog using your product data as context to make your product better. Here's how it works: <Term name="scout">Scouts</Term> watch your data on a schedule, file <Term name="report">reports</Term> when something needs your attention, and an agent opens a pull request that fixes it. You review and merge everything, so nothing ships without you.
+
+## The loop
+
+The whole system is <SeeFig n={1} />. A <Term name="signal" /> is something in your product data that's worth knowing, with its evidence attached. Related signals group into a report for you to review. An agent writes the fix as a pull request, and PostHog measures whether it worked. The outcome becomes new signals, so your product keeps improving itself over time.
+
+## When a scout writes
+
+A scout run ends one of two ways: it writes a report, or it writes nothing.
+
+A scout writes a report when it finds a change in product usage data it can't explain. Maybe your AI bill went up or your core activation metric is down. It stays quiet when nothing changes, or the change signals growth.
+
+Quiet is the common case. A scout that reports every day is one you'll mute before you get real value out of it.
+
+## How to read the use cases
+
+Each use case in this pocket guide is a real custom scout you can add to your own product. The guide follows the scout's job and breaks down the anatomy of an <Term name="inbox" /> report into its individual components. Then it shows you the pull request that report becomes, the scout itself, and provides a one-click way to add it to your own product.
+
+<SeeAlso>
+
+See also: [Deep dive on self-driving](/docs/self-driving) · [The self-improving loop](/docs/self-driving/self-improving-loop)
+
+</SeeAlso>
+
+</RightPage>

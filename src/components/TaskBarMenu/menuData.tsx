@@ -929,6 +929,20 @@ export const DocsItemsEnd = [
         link: '/tutorials',
         icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
     },
+    {
+        type: 'item' as const,
+        label: 'Pocket guides',
+        link: '/pocket-guides',
+        // Orange matches volume one's token in src/constants/pocketGuides.ts.
+        icon: <Icons.IconCompass className="size-4 text-orange" />,
+    },
+    {
+        type: 'item' as const,
+        label: 'Templates',
+        link: '/templates',
+        // Matches the Templates entry in src/navs/index.js.
+        icon: <Icons.IconMagic className="size-4 text-purple" />,
+    },
 ]
 
 import type { AppIconName } from 'components/OSIcons/AppIcon'
