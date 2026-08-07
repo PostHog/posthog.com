@@ -41,85 +41,17 @@ const getSubtitle = (post: BuildModePost): string => {
 
 const getAuthorName = (post: BuildModePost): string | undefined => post.frontmatter.authors?.[0]?.name
 
-type PinColor = { light: string; base: string; dark: string }
+const PIN_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/red_pushpin_d9bbaf9e0c.svg'
 
-const PIN_COLORS: PinColor[] = [
-    { light: '#FF8A57', base: '#F54E00', dark: '#9E3300' }, // red
-    { light: '#82B4FC', base: '#2F80FA', dark: '#1B4FA8' }, // blue
-    { light: '#9CC786', base: '#6AA84F', dark: '#44682D' }, // green
-    { light: '#FFC94D', base: '#F7A501', dark: '#B26F00' }, // yellow
-    { light: '#D56FEA', base: '#B62AD9', dark: '#6E0F86' }, // purple
-]
-
-// Classic glossy pushpin, modeled on the reference art: wide rounded cap with a
-// bright top-left gloss, narrow waist, flared bell base, thin needle.
-const Pin = ({
-    color,
-    className = '',
-    style,
-}: {
-    color: PinColor
-    className?: string
-    style?: React.CSSProperties
-}) => {
-    const gid = color.base.replace('#', '')
-    return (
-        <svg viewBox="0 0 40 48" className={className} style={style} aria-hidden="true">
-            <defs>
-                <linearGradient id={`pin-body-${gid}`} x1="0" y1="0" x2="1" y2="0.25">
-                    <stop offset="0" stopColor={color.light} />
-                    <stop offset="0.42" stopColor={color.base} />
-                    <stop offset="1" stopColor={color.dark} />
-                </linearGradient>
-            </defs>
-            {/* needle */}
-            <path d="M19.3 32 L19.7 44 L20.3 44 L20.7 32 Z" fill="#A7ACB3" />
-            <path d="M19.55 33 L19.75 44 L19.95 44 L19.9 33 Z" fill="#E8EAEC" />
-            <path d="M19.7 43.5 L20 47.5 L20.3 43.5 Z" fill="#63686F" />
-            {/* flared bell base */}
-            <path
-                d="M14 25 L26 25 L30.4 29.8 Q31.6 32 28.9 32 L11.1 32 Q8.4 32 9.6 29.8 Z"
-                fill={`url(#pin-body-${gid})`}
-            />
-            {/* waist, shadowed under the cap */}
-            <path d="M12.8 21.6 L27.2 21.6 L26 25.4 L14 25.4 Z" fill={`url(#pin-body-${gid})`} />
-            <path d="M12.8 21.6 L27.2 21.6 L26 25.4 L14 25.4 Z" fill="#000" fillOpacity="0.16" />
-            {/* rounded cap */}
-            <path
-                d="M7 14.5 Q7 4 20 4 Q33 4 33 14.5 Q33 20.6 27.4 21.9 L12.6 21.9 Q7 20.6 7 14.5 Z"
-                fill={`url(#pin-body-${gid})`}
-            />
-            {/* gloss highlights */}
-            <ellipse
-                cx="13.8"
-                cy="9.6"
-                rx="4.8"
-                ry="2.9"
-                fill="#fff"
-                fillOpacity="0.75"
-                transform="rotate(-28 13.8 9.6)"
-            />
-            <circle cx="10.9" cy="13.8" r="1.2" fill="#fff" fillOpacity="0.5" />
-            {/* soft reflected light on the bell rim */}
-            <path d="M11 30.8 Q20 32.6 29 30.8 L28.9 32 L11.1 32 Z" fill="#fff" fillOpacity="0.28" />
-        </svg>
-    )
-}
+// Torn-off strip outline, reused for both the fill and the edge stroke
+const TAPE_PATH = 'M6 2 L114 1 L119 7 L115 13 L120 20 L116 27 L119 34 L113 41 L5 42 L1 34 L5 26 L0 19 L4 12 L1 6 Z'
 
 // Translucent strip of masking tape with torn ends
 const Tape = ({ className = '' }: { className?: string }) => (
     <svg viewBox="0 0 120 42" fill="none" className={`drop-shadow-sm ${className}`} aria-hidden="true">
-        <path
-            d="M6 2 L114 1 L119 7 L115 13 L120 20 L116 27 L119 34 L113 41 L5 42 L1 34 L5 26 L0 19 L4 12 L1 6 Z"
-            fill="#FFFDF2"
-            fillOpacity="0.68"
-        />
-        <path
-            d="M6 2 L114 1 L119 7 L115 13 L120 20 L116 27 L119 34 L113 41 L5 42 L1 34 L5 26 L0 19 L4 12 L1 6 Z"
-            stroke="#000"
-            strokeOpacity="0.06"
-            strokeWidth="1"
-        />
+        <path d={TAPE_PATH} fill="#FFFDF2" fillOpacity="0.68" />
+        <path d={TAPE_PATH} stroke="#000" strokeOpacity="0.06" strokeWidth="1" />
+        {/* sheen along the top edge */}
         <path d="M6 2 L114 1 L116 4 L7 5 Z" fill="#fff" fillOpacity="0.5" />
     </svg>
 )
@@ -146,13 +78,13 @@ const PostImage = ({
             width={width}
             alt={post.frontmatter.title}
             className={`!block ${className}`}
-            imgClassName={`${imgClassName} h-full w-full`}
+            imgClassName={imgClassName}
             loading="lazy"
         />
     ) : publicURL ? (
         <img src={publicURL} alt={post.frontmatter.title} loading="lazy" className={`${className} ${imgClassName}`} />
     ) : (
-        <div className={`flex items-center justify-center bg-accent ${className}`}>
+        <div className={`flex min-h-32 items-center justify-center bg-accent ${className}`}>
             <IconNewspaper className="size-8 text-muted" />
         </div>
     )
@@ -163,28 +95,29 @@ const FeaturedPost = ({ post }: { post: BuildModePost }) => {
 
     return (
         <div className="min-w-0 flex-1">
-            <Link to={post.fields.slug} state={{ newWindow: true }} className="group block no-underline text-primary">
-                <div className="relative">
+            <Link
+                to={post.fields.slug}
+                state={{ newWindow: true }}
+                className="group flex flex-col gap-5 no-underline text-primary @2xl:flex-row @2xl:items-center @2xl:gap-7"
+            >
+                {/* Image keeps its own aspect ratio — no fixed frame, no cropping */}
+                <div className="relative shrink-0 @2xl:w-[56%]">
                     <Tape className="absolute -left-5 -top-3 z-10 w-16 -rotate-[28deg] @2xl:w-20" />
                     <Tape className="absolute -right-5 -top-3 z-10 w-16 rotate-[24deg] @2xl:w-20" />
-                    <div className="aspect-[2/1] @3xl:aspect-[8/3] overflow-hidden rounded-sm border border-primary bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)]">
-                        <PostImage
-                            post={post}
-                            className="h-full w-full"
-                            imgClassName="h-full w-full object-cover object-top"
-                        />
+                    <div className="overflow-hidden rounded-sm border border-primary bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)]">
+                        <PostImage post={post} className="w-full" imgClassName="block h-auto w-full" width={1000} />
                     </div>
                 </div>
-                <div className="mt-4 flex items-baseline justify-between gap-4">
-                    <h1 className="m-0 text-xl font-bold leading-tight group-hover:underline @2xl:text-2xl">
+                <div className="min-w-0 flex-1">
+                    <h1 className="m-0 text-xl font-bold leading-tight group-hover:underline @2xl:text-2xl @4xl:text-3xl">
                         {post.frontmatter.title}
                     </h1>
-                    <span className="shrink-0 text-sm font-medium uppercase text-muted">
+                    <p className="m-0 mt-2 text-secondary @2xl:text-lg">{getSubtitle(post)}</p>
+                    <p className="m-0 mt-3 text-sm font-medium uppercase text-muted">
                         {post.frontmatter.shortDate}
                         {author ? ` · ${author}` : ''}
-                    </span>
+                    </p>
                 </div>
-                <p className="m-0 mt-1 text-secondary @2xl:text-lg">{getSubtitle(post)}</p>
             </Link>
         </div>
     )
@@ -199,13 +132,17 @@ const RecentPostCard = ({ post, index }: { post: BuildModePost; index: number })
         <div className="w-52 shrink-0 grow-0 snap-start @2xl:w-60">
             <Link to={post.fields.slug} state={{ newWindow: true }} className="group block no-underline text-primary">
                 <div className="relative px-1 pt-2" data-card-index={index}>
-                    {/* The pin stays fixed — only the card swings on it */}
-                    <Pin
-                        color={PIN_COLORS[(index * 7 + 3) % PIN_COLORS.length]}
-                        className="pointer-events-none absolute -top-0.5 left-1/2 z-20 h-10 w-auto drop-shadow-md"
+                    {/* The pin stays fixed — only the card swings on it. Its needle
+                        tip sits ~40% across and ~93% down the artwork (the rest of
+                        the width is cast shadow), which is both the rotation pivot
+                        and what gets centered over the card. */}
+                    <img
+                        src={PIN_SRC}
+                        alt=""
+                        className="pointer-events-none absolute -top-3 left-1/2 z-20 h-11 w-auto"
                         style={{
-                            transform: `translateX(-50%) rotate(${pinAngle.toFixed(1)}deg)`,
-                            transformOrigin: '50% 92%',
+                            transform: `translateX(-40%) rotate(${pinAngle.toFixed(1)}deg)`,
+                            transformOrigin: '40% 93%',
                         }}
                     />
                     <div
@@ -269,11 +206,11 @@ const RecentPosts = ({ posts }: { posts: BuildModePost[] }) => {
         // Constants vary per card so they drift out of phase.
         const MAX_TILT = 14
         const pendulums = posts.map((_, i) => ({
-            stiffness: 60 * (0.8 + 0.6 * rand(i, 1)), // higher = snappier direction changes
-            damping: 7 * (0.85 + 0.4 * rand(i, 2)), // friction bleeding off momentum
-            coupling: 0.05 * (0.8 + 0.6 * rand(i, 3)), // scroll px/s² → angular accel (deg/s²)
-            lean: 0.0015 * (0.8 + 0.6 * rand(i, 4)), // deg of steady lean per px/s of scroll speed
-            jostle: 12 * (0.8 + 0.6 * rand(i, 5)), // deg/s kick when the cursor enters the card
+            stiffness: 60 * (0.8 + 0.8 * rand(i, 1)), // higher = snappier direction changes
+            damping: 7 * (0.85 + 0.6 * rand(i, 2)), // friction bleeding off momentum
+            coupling: 0.05 * (0.8 + 0.8 * rand(i, 3)), // scroll px/s² → angular accel (deg/s²)
+            lean: 0.0015 * (0.8 + 0.8 * rand(i, 4)), // deg of steady lean per px/s of scroll speed
+            jostle: 12 * (0.8 + 0.8 * rand(i, 5)), // deg/s kick when the cursor enters the card
             angle: 0,
             velocity: 0,
         }))
@@ -567,7 +504,7 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
                         <header className="flex flex-col gap-8 @3xl:flex-row @3xl:gap-12">
                             <div className="flex shrink-0 flex-col items-start gap-4 @3xl:w-44 @3xl:pt-2">
                                 <img
-                                    src="/images/build-mode/build-mode-button.png"
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/build_mode_button_79d51b3276.png"
                                     alt="build mode"
                                     className="h-auto w-36 @3xl:w-40"
                                 />
