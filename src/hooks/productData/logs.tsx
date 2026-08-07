@@ -1,18 +1,18 @@
 import React from 'react'
 import {
     IconActivity,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
-    IconCursorClick,
     IconChat,
-    IconInfo,
-    IconMagic,
+    IconCheckCircle,
     IconCode,
     IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
@@ -126,8 +126,8 @@ export const logs = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
-        alt: 'A hedgehog perusing some logs',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+        alt: 'A hedgehog in its log store',
         classes: 'hidden @2xl:block max-w-sm',
         footerClasses: 'max-w-[240px]',
     },
@@ -334,8 +334,8 @@ export const logs = {
     ],
     worksWith: ['session_replay', 'error_tracking', 'product_analytics', 'feature_flags'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
-        imageAlt: 'PostHog AI and logs',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/night_hog_219fff00f3.png',
+        imageAlt: 'A hedgehog asleep at a laptop after a long log dive',
         description: 'find the bug in your logs and ship the fix',
         intro: 'Ask PostHog AI to find error logs, mine patterns, and explain what changed.',
         mcpFeatures: ['logs'],

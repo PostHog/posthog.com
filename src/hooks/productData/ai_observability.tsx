@@ -140,20 +140,20 @@ export const aiObservability = {
     },
     // Rendered in the Pricing surface footer CTA. The Product surface uses `hogs` below.
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
-        alt: 'A robot hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_cash_64f561fac6.png',
+        alt: 'A hedgehog showered in the money it saved on tokens',
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
-        // Reused from the /docs/ai-observability hero – AI Observability has no
-        // dedicated product hog yet.
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
-            alt: 'A hedgehog with a robot',
-        },
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
             alt: 'A hedgehog inspecting a trace with a magnifying glass',
+        },
+        // Reused from the /docs/ai-observability hero – AI Observability has no
+        // dedicated product hog yet.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
+            alt: 'A hedgehog with a robot',
         },
     },
     slider: {

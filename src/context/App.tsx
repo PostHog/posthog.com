@@ -645,6 +645,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // The e-reader: tall enough that a guide page reads like a page, wide enough for the
+    // front matter's two columns.
+    '/pocket-guides': {
+        size: {
+            min: {
+                width: 700,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 1100,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {

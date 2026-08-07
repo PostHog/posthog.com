@@ -57,6 +57,12 @@ Person profiles are created when you:
 - Set person properties using [`posthog.setPersonProperties()`](/docs/product-analytics/person-properties)
 - Capture an event with `$set` or `$set_once` properties
 
+<CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them. To query the values you set, use [person properties](/docs/product-analytics/person-properties) instead.
+
+</CalloutBox>
+
 To control costs, you can [configure anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for events that don't need person profiles.
 
 ## Duplicate person profiles
