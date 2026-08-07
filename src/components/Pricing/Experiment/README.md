@@ -59,17 +59,41 @@ and control is what the placeholder resolves to, which makes it:
 - what visitors keep if flags are blocked (ad blockers) or never arrive — `RenderInClient` gives
   up after 5 seconds and renders anyway, and an unresolved flag resolves to control.
 
-The cost is a brief flash of control for the two-thirds assigned to a redesign arm. The
-alternative — a blank page until flags land — would strip `/pricing` of its content for crawlers
-and punish every visitor to spare two-thirds a reflow. Worth revisiting only if flag bootstrapping
-gets added site-wide.
-
 Both `RenderInClient` slots render the same `VariantSlot` component, differing only in a
 `flagsReady` prop. Keep it that way: React reconciles by element type, so handing the two slots
 different component types would unmount and remount the entire page the moment flags arrive —
 discarding scroll position and any calculator or plan-switcher state, including for the control
 arm, whose output doesn't change. With the type held stable, only the arms that actually swap
 pages remount.
+
+### The placeholder is hidden, not shown
+
+`hidePlaceholder` is on, so control is server-rendered into the DOM but held at `visibility: hidden`
+until the flag resolves — the two redesign arms never flash control first. `visibility` rather than
+`display: none` means the placeholder still occupies its normal space, so there's no layout shift
+when the real variant swaps in.
+
+What that buys is paid for by everyone, and it's worth being blunt about the bill:
+
+- **The page is blank until flags land.** Not just for the two-thirds in a redesign arm. Control
+  visitors previously got painted content instantly and then watched nothing change; now they wait
+  too, and gain nothing for it.
+- **LCP is gated on the flags round trip.** Hidden content is never painted, so nothing on
+  `/pricing` is an LCP candidate until PostHog answers. This is a commercial page — watch its Core
+  Web Vitals after this ships.
+- **Blocked flags mean a blank page for the full timeout.** Ad-blocked visitors, a meaningful slice
+  of a developer audience, see nothing until `RenderInClient` gives up. That's 5 seconds by default;
+  pass `flagTimeoutMs` to shorten it if the wait proves too long in the field.
+- **Crawlers that apply CSS see hidden content.** Ones that only parse HTML still get the full
+  control markup, which is why this hides rather than omits. Googlebot renders JS and should resolve
+  to a variant, but if it snapshots before flags land it captures hidden text, which Google indexes
+  at a discount.
+
+If `hidePlaceholder` comes back off, control simply paints immediately again and the redesign arms
+go back to flashing it — nothing else in this folder depends on the setting.
+
+Bootstrapping flags site-wide removes the round trip and makes all of this moot. That's the actual
+fix whenever someone has the appetite for it.
 
 ## Metrics, and what to distrust
 
