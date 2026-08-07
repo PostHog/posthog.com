@@ -30,7 +30,7 @@ Path cleaning rules are configured globally in your [project settings](https://a
 Each rule has two parts:
 
 - **Regex** – a regular expression that matches the URL patterns you want to combine.
-- **Alias** – the replacement string for the matched portion of the URL.
+- **Alias** – the replacement for the matched portion of the URL. This is usually a fixed placeholder like `/user/:id`, but it can also [reuse part of the matched URL](#reusing-part-of-the-matched-url).
 
 When a URL matches the regex, the matched portion is replaced with the alias. The rest of the URL remains unchanged.
 
@@ -64,6 +64,51 @@ To combine merchant-specific dashboards:
 - **Alias:** `/merchant/dashboard`
 
 This turns `https://example.com/merchant/12345/dashboard` and `https://example.com/merchant/6789/dashboard` into `https://example.com/merchant/dashboard`.
+
+## Reusing part of the matched URL
+
+The examples above replace the matched text with a fixed string. When your routes all share a shape, that forces one rule per route – a rule for `/team/:id/settings`, another for `/team/:id/billing`, and so on for every page.
+
+Instead, wrap the part of the URL you want to keep in a capture group and reference it from the alias with `\1`. One rule then covers every route with that shape.
+
+### Replace a prefix, keep the rest
+
+Locale-prefixed routes split each page into one row per language. To collapse them into a single row:
+
+- **Regex:** `^/[a-z]{2}-[a-z]{2}(/.*)$`
+- **Alias:** `/:locale\1`
+
+This turns `/en-us/pricing` and `/de-de/pricing` into `/:locale/pricing`, and `/en-us/docs` into `/:locale/docs`. Without the capture group, you'd need a separate rule for every page on the site.
+
+### Keep the path, drop a trailing fragment
+
+To strip an in-page fragment while keeping the first three segments of the path:
+
+- **Regex:** `^(/[^/#]+/[^/#]+/[^/#]+)/#.*$`
+- **Alias:** `\1`
+
+This turns `/reports/2024/summary/#revenue` and `/reports/2024/summary/#costs` into `/reports/2024/summary`.
+
+### Alias syntax
+
+| Syntax       | Meaning                                                          |
+| ------------ | ---------------------------------------------------------------- |
+| `\1` to `\9` | The first to ninth capture group, counted by opening parenthesis |
+| `\0`         | The whole matched string                                         |
+| `\\`         | A literal backslash                                              |
+
+Everything else in the alias is treated as literal text. A few things to watch for:
+
+- **`$1` does nothing.** Aliases use `\1`, not the `$1` syntax you may know from JavaScript. `$` is always literal, so an alias of `/user/$1` cleans paths to the literal string `/user/$1`.
+- **There's no `\10`.** Only `\1` to `\9` are capture groups. `\10` reads as group 1 followed by a literal `0`, so with a regex capturing `123`, an alias of `/user/\10` gives `/user/1230`.
+- **The group has to exist.** PostHog rejects a rule when you save it if the alias references a group that its regex doesn't define, such as `\2` in a regex with only one group.
+- **Double the backslash in JSON.** In your project settings, type `\1`. If you set rules through the API, JSON needs the backslash escaped: `"alias": "/:locale\\1"`.
+
+### When to use capture groups
+
+A rule with capture groups costs more per row than one with a fixed alias, because the regex engine has to track where each group starts and ends instead of only whether the pattern matched. That's still a win when it collapses several near-identical rules into one, since every rule runs against every row: five rules replaced by one means four fewer patterns to evaluate.
+
+Anchor your regex with `^` either way. Path cleaning replaces every match in a URL, not just the first, so an unanchored pattern keeps scanning the rest of the string.
 
 ## Where path cleaning applies
 
