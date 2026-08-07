@@ -93,6 +93,12 @@ You pass that same `distinct_id` into your server-side code and use it when capt
 
 Backend SDKs have no concept of an anonymous session, so there's nothing to merge. Instead, pass the same `distinct_id` you use on the frontend when capturing events. Some SDKs expose an `identify` method, while others set [person properties](/docs/data/user-properties) with `$set` on a captured event.
 
+<CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them. To query the values you set, use [person properties](/docs/product-analytics/person-properties) instead.
+
+</CalloutBox>
+
 <MultiLanguage selector="tabs">
 
 ```node
