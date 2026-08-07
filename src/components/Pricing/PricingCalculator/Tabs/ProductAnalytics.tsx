@@ -394,6 +394,17 @@ export default function ProductAnalyticsTab({
                 .plans.find((plan) => plan.tiers).tiers,
         []
     )
+    // `addons` is shared across every product in the calculator, so scope it to this product's
+    // add-ons before adding them to the subtotal
+    const productAnalyticsAddonsCost = useMemo(
+        () =>
+            addons
+                .filter((addon) =>
+                    activeProduct?.billingData.addons.some((productAddon) => productAddon.type === addon.type)
+                )
+                .reduce((acc, addon) => acc + addon.totalCost, 0),
+        [addons, activeProduct]
+    )
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
     const totalProductAnalyticsPrice = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
@@ -516,9 +527,7 @@ export default function ProductAnalyticsTab({
                         <div>
                             <strong>
                                 {formatUSD(
-                                    totalProductAnalyticsPrice +
-                                        enhancedPersonsCost.total +
-                                        addons.reduce((acc, addon) => acc + addon.totalCost, 0)
+                                    totalProductAnalyticsPrice + enhancedPersonsCost.total + productAnalyticsAddonsCost
                                 )}
                             </strong>
                         </div>

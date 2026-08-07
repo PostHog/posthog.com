@@ -282,6 +282,13 @@ export default function Tabbed() {
         for (const product of products) {
             if (product.billingData?.addons?.length > 0) {
                 product.billingData.addons.forEach((addon) => {
+                    // Some products share a billing product (eg. Web analytics is billed as Product
+                    // analytics), so the same add-on shows up on more than one product. Add-ons are
+                    // tracked by type, so register each type once – otherwise its cost is counted
+                    // once per product that surfaces it.
+                    if (initialAddons.some((initialAddon) => initialAddon.type === addon.type)) {
+                        return
+                    }
                     initialAddons.push({
                         type: addon.type,
                         checked: addonDefaults[addon.type]?.checked || false,
