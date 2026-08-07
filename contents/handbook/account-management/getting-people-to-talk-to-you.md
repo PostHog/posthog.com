@@ -212,7 +212,7 @@ Despite the organization using PostHog, they may not recognize you/PostHog, or m
 2. Open with a specific observation pulled from their actual PostHog usage, and pair it with a direct link to the relevant view in their project so they can act in one click.
 3. Avoid fluff. "I'm just reaching out to", "I just wanted to" etc. are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
 4. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
-5. Keep it human — lowercase subject lines, minimal formatting, casual hooks. Match their style if their team or brand has a distinct one. Seb reached out to a customer's marketing lead by making a TikTok in the same style the customer's own marketing team uses, explaining session replay.
+5. Keep it human. Lowercase subject lines, minimal formatting, casual hooks.
 6. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?
 
 Some examples of good emails that have worked:
@@ -228,7 +228,7 @@ Some examples of good emails that have worked:
 > Up for a chat? Here's my calendar, feel free to grab a time that works best for you.
 > Cheers,
 
-Pattern breakers are worth a test, too — unusual openers, intentional mistakes, personal or pop culture hooks. Empty subject lines can grab attention, but be careful: they lower open rates and are more likely to land you in spam. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!
+Pattern breakers are worth a test, too — unusual openers, intentional mistakes, personal or pop culture hooks. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!
 
 ## Asking for introductions
 
@@ -299,6 +299,8 @@ Leave the body empty. This will pick up about 80% of people who go dark. If not,
 - Subscribe to your customers' newsletters, set up Google Alerts or [Watch Tower](https://gotwatchtower.com/), use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better.
 - Find your customer's GitHub – company open source repos or individual engineers' personal projects. Review any open bugs, issues, etc. and submit a real pull request. Extra points if you fix an open bug on their company repo. The customer will see your name somewhere other than their inbox and engage. For important customers, ask our engineering team for help with more complex fixes.
 - Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.
+- If the customer has a distinct style or brand, try and match it! If you're reaching out to a CMO who primarily markets through TikTok, maybe create a TikTok explaining your point instead of an email and send it their way.
+- Why limit yourself just to PostHog users? Stakeholders and leadership are still invested in PostHog. If you're struggling to get a hold of someone, try going up the org chain and asking if they know the right person.
 
 ### LinkedIn Sales Nav
 
