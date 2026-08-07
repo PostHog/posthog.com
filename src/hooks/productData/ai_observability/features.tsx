@@ -1,6 +1,7 @@
 import React from 'react'
 import {
     IconBell,
+    IconBolt,
     IconDashboard,
     IconGear,
     IconGlobe,
@@ -157,7 +158,7 @@ export const features = {
             {
                 icon: <IconDashboard />,
                 title: 'Latency tracking',
-                description: 'optimize response times and identify performance bottlenecks',
+                description: 'Optimize response times and identify performance bottlenecks',
             },
             {
                 icon: <IconWarning />,
@@ -171,8 +172,9 @@ export const features = {
             },
             {
                 icon: <IconBell />,
-                title: 'Real-time alerts',
-                description: 'Get notified of latency spikes or error rate increases',
+                title: 'Anomaly alerts',
+                description:
+                    'Detectors learn what normal looks like and notify you when cost, latency, or errors spike',
             },
             {
                 icon: <IconGlobe />,
@@ -241,13 +243,27 @@ export const features = {
         title: 'Evaluations',
         headline: 'Evaluations',
         description:
-            'Catch regressions before users do. Run evals for hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria.',
+            'Score live generations as they happen – hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria. Catch regressions before users do.',
         icon: <IconLlmPromptEvaluation />,
         color: 'blue',
         images: [
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
                 alt: 'AI Observability evaluations',
+            },
+        ],
+        features: [
+            {
+                title: 'LLM-as-a-judge',
+                description: 'An LLM scores each generation against a prompt you define',
+            },
+            {
+                title: 'Code-based (Hog)',
+                description: 'Deterministic checks written in code',
+            },
+            {
+                title: 'Sentiment analysis',
+                description: 'Classifies user sentiment as positive, neutral, or negative',
             },
         ],
     },
@@ -317,6 +333,40 @@ export const features = {
                 title: 'Works with your AI stack',
                 description:
                     'Already using an LLM observability tool? Send that data to PostHog to analyze alongside other product and user data.',
+            },
+        ],
+    },
+    // Copy verified against the Self-driving docs (/docs/self-driving) and the
+    // start-here quest log. The inbox screenshot is reused from /self-driving –
+    // AI Observability has no dedicated Self-driving screenshot yet.
+    self_driving: {
+        title: 'Self-driving',
+        headline: 'From LLM data to pull request',
+        description:
+            'AI Observability is a signal source for Self-driving (open beta): agents watch your LLM data, investigate what changed, and file reports in your inbox – where one click turns a finding into a pull request.',
+        icon: <IconBolt />,
+        color: 'green',
+        images: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png',
+                alt: 'Self-driving reports and pull requests in the PostHog inbox',
+            },
+        ],
+        features: [
+            {
+                title: 'Eval reports',
+                description:
+                    'An agent reviews each batch of evaluation results and summarizes what it found, with example generations as evidence',
+            },
+            {
+                title: 'Anomaly investigations (alpha)',
+                description:
+                    'When an anomaly alert fires on cost, latency, or errors, an agent digs into the underlying traces and suppresses false positives',
+            },
+            {
+                title: 'Scouts',
+                description:
+                    'Scheduled agents that catch regressions across cost, latency, errors, volume, and eval performance – or watch anything you describe in plain English',
             },
         ],
     },

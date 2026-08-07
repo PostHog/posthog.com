@@ -1,9 +1,11 @@
 import React from 'react'
 import {
+    IconBolt,
     IconBrowser,
     IconDashboard,
     IconLightBulb,
     IconListTreeConnected,
+    IconLlmPromptEvaluation,
     IconMagicWand,
     IconPiggyBank,
     IconPlug,
@@ -131,7 +133,8 @@ const IntegrationGrid = () => (
 )
 
 /**
- * Applications = the ways you show up to the product (dashboard, editor/MCP).
+ * Applications = the ways you show up to the product (dashboard, editor/MCP),
+ * ending with Self-driving – where the product shows up to you instead.
  * Capability detail belongs in `topFeatures`.
  */
 export const applications: CarouselSlide[] = [
@@ -249,6 +252,42 @@ export const applications: CarouselSlide[] = [
             imgClassName: 'w-full',
         },
     },
+    {
+        slug: 'self-driving',
+        label: 'Self-driving',
+        icon: <IconBolt className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-green',
+        layout: 'stack',
+        heading: f.self_driving.headline,
+        description: (
+            <>
+                <p>{f.self_driving.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.self_driving.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+                <p>
+                    Reports are free; pull requests are priced per PR. Read more in the{' '}
+                    <Link to="/docs/self-driving" state={{ newWindow: true }}>
+                        Self-driving docs
+                    </Link>
+                    .
+                </p>
+            </>
+        ),
+        image: {
+            src: f.self_driving.images[0].src,
+            alt: f.self_driving.images[0].alt,
+            maxWidth: 'max-w-none',
+            imgClassName: 'w-full',
+        },
+    },
 ]
 
 export const topFeatures: CarouselSlide[] = [
@@ -296,6 +335,35 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.generations.images[0].src,
             alt: f.generations.images[0].alt,
+            maxWidth: 'max-w-none',
+            imgClassName: 'w-full',
+        },
+    },
+    {
+        slug: 'evaluations',
+        label: 'Evaluations',
+        icon: <IconLlmPromptEvaluation className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-seagreen',
+        layout: 'stack',
+        heading: f.evaluations.headline,
+        description: (
+            <>
+                <p>{f.evaluations.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.evaluations.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.evaluations.images[0].src,
+            alt: f.evaluations.images[0].alt,
             maxWidth: 'max-w-none',
             imgClassName: 'w-full',
         },

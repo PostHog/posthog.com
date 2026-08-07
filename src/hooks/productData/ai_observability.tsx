@@ -37,7 +37,7 @@ export const aiObservability = {
     seo: {
         title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
-            'Monitor and optimize AI products with AI Observability. Get full observability across every conversation. See model performance, cost, and errors.',
+            'Monitor and optimize AI products with AI Observability. Trace every generation, score quality with evals, alert on anomalies, and turn findings into PRs.',
     },
     /**
      * Sections rendered on the Product surface (`/ai-observability`). Each entry
@@ -109,10 +109,26 @@ export const aiObservability = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Observe and debug AI in production',
+        title: 'Observe, evaluate, and fix AI in production',
         description:
-            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features – the context agents use to fix LLM behavior.',
-        eli5: "AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Calls that belong to the same conversation or agent run are stitched together into a trace, so a multi-step interaction reads as one story instead of a pile of unrelated requests. It's all captured as regular PostHog events, which is why your LLM data sits next to your product analytics, replays, and errors instead of in a separate tool.",
+            'Product analytics for LLMs. Trace every generation, score quality with evals, alert on cost, latency, and error anomalies – the context that makes your product self-driving.',
+        eli5: (
+            <>
+                <p>
+                    AI Observability records every call your product makes to an LLM – the prompt that went in, the
+                    response that came out, which model answered, how long it took, what it cost, and who it was for.
+                    Calls that belong to the same conversation or agent run are stitched together into a trace, so a
+                    multi-step interaction reads as one story instead of a pile of unrelated requests. It's all captured
+                    as regular PostHog events, which is why your LLM data sits next to your product analytics, replays,
+                    and errors instead of in a separate tool.
+                </p>
+                <p>
+                    That data doesn't just sit in a dashboard. Evals score your live generations as they happen, anomaly
+                    alerts fire when cost, latency, or errors spike, and Self-driving agents investigate what changed –
+                    findings land in your inbox, where one click turns them into a pull request.
+                </p>
+            </>
+        ),
         textColor: 'text-white',
         layout: 'overlay',
     },
