@@ -47,7 +47,7 @@ Accounts below $20k don't get a CSM or TAM. The [coverage map](/handbook/growth/
 
 TAM book size is set by ARR under management. Account count follows from that. This mirrors how [CSM books](/handbook/cs-and-onboarding/how-we-work) are balanced, by shape as well as total.
 
-- **Target:** $1.5M to $2.5M ARR per TAM. This usually works out to 12-18 accounts.
+- **Target:** Around $1.5M to $2M ARR per TAM. This usually works out to 12-18 accounts. There is a little in-quarter wiggle room, but generally TAMs should focus on a defined book of business. 
 - **Rough makeup:** 1-2 accounts around $200k ARR, 3-4 around $100k, and the rest in the $30k-$100k range.
 
 Beyond total size, a balanced book also needs:
