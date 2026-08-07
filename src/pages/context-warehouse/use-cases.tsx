@@ -220,12 +220,7 @@ const modelingSkills: ModelingSkill[] = [
     {
         name: 'modeling-revenue-metrics',
         builds: 'MRR, ARR, expansion and contraction, ARPU, LTV, and revenue per account.',
-        rule: (
-            <>
-                Build on the managed <Mono>revenue_analytics_*</Mono> views, not raw Stripe tables. They already handle
-                deferred revenue and currency.
-            </>
-        ),
+        rule: 'MRR right now and MRR over time are two different models. A live snapshot never turns into a trend, so know which one you need before you build it.',
     },
     {
         name: 'modeling-conversion-metrics',
