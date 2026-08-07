@@ -1,64 +1,138 @@
 import React from 'react'
 import {
-    IconBolt,
-    IconClock,
-    IconDatabase,
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
     IconDecisionTree,
-    IconGraph,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
-    IconPeople,
-    IconPlug,
-    IconSend,
-    IconTestTube,
-    IconWarning,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
-import { IconEnvelope, IconLink, IconMessages } from 'components/OSIcons'
+import { features } from './workflows/features'
+import { applications, topFeatures } from './workflows/slides'
+import { getTool } from '../../data/tools'
 
 export const workflows = {
-    name: 'Workflows',
+    ...getTool('workflows_emails'),
     productVariantName: 'Emails',
     Icon: IconDecisionTree,
-    description: 'Automate workflows with your product data',
-    handle: 'workflows_emails',
     type: 'workflows_emails',
-    slug: 'workflows',
+    teamSlug: 'workflows',
+    forumTopicId: 392, // /questions/topic/workflows squeakId
     color: 'teal',
     colorSecondary: 'green-2',
-    category: 'automation',
     includeAddonRates: true,
-    slider: {
-        marks: [10000, 50000, 100000, 1000000, 10000000],
-        min: 10000,
-        max: 10000000,
-    },
-    volume: 10000,
-    addonSliders: [
-        {
-            key: 'workflows_destinations',
-            label: 'Destinations',
-            sliderConfig: {
-                marks: [10000, 50000, 100000, 1000000, 10000000],
-                min: 10000,
-                max: 10000000,
-            },
-            volume: 10000,
-            unit: 'dispatch',
-        },
-    ],
+    // Matches billing API / pricing page (Emails + Destinations free tiers + first paid tiers).
+    pricingDescription:
+        'First 10,000 emails and 10,000 destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
         title: 'Workflows – Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Automations that act on live user behavior – send Slack messages, emails, or events. The actions agents take to close the loop and make your product self-driving.',
     },
+    /**
+     * Sections rendered on the Product surface (`/workflows`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/workflows/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Automate workflows with product data',
-        description: 'Trigger Slack messages, emails, or events based on live user behavior.',
+        description:
+            'Workflows is one of the tools that makes your product self-driving: the actions agents take to close the loop. Trigger Slack messages, emails, or events based on live user behavior.',
+        // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
+        eli5: (
+            <>
+                <p>
+                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
+                    your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
+                    triggers, delays, audience splits, message sends, and PostHog actions.
+                </p>
+                <p>
+                    Because workflows run on the same events and person properties you already send to PostHog, you can
+                    act on real product behavior instead of a separate marketing dataset. Any real-time destination in
+                    PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and
+                    automation.
+                </p>
+            </>
+        ),
         textColor: 'text-black',
         layout: 'overlay',
     },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/workflows_overview_339c7cd37b.png',
-            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
             alt: 'Workflows overview',
             classes: '',
             imgClasses: 'rounded-t-md shadow-2xl max-w-5xl mx-auto',
@@ -72,12 +146,14 @@ export const workflows = {
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
         },
+        // From contents/docs/workflows/start-here.mdx
+        builder: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_light_a9f00e201e.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/workflows_screenshot_dark_83291e0b1c.png',
+            alt: 'How to create a workflow in PostHog',
+        },
     },
-    // hog: {
-    //   src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
-    //   alt: 'AI-powered hedgehog',
-    //   classes: 'absolute bottom-0 right-4 max-w-lg',
-    // },
     customers: {
         grantable: {
             headline: 'replaced Zapier with PostHog Workflows and cut setup time by ~90%',
@@ -91,178 +167,71 @@ export const workflows = {
                 'Even at this early stage, Workflows is better for us than Zapier. It’s simpler, and it lets us move faster without adding another vendor to manage.',
         },
     },
-    features: [
-        {
-            title: 'Workflow automation builder',
-            handle: 'workflow_builder',
-            template: 'splitImage',
-            headline: 'Workflow automation builder',
-            description: 'No YAML, no syncing, no API juggling.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10157_1_3d5bffb9a5.png',
-                    alt: 'Workflow automation builder',
-                    className: '@2xl:w-[80%] @2xl:ml-auto @2xl:mt-8',
-                },
+    // Roles reshaped from contents/teams/workflows/index.mdx ICP + pairsWith use cases.
+    useCases: {
+        intro: 'Workflows is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Leads / Technical PMs',
+                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
             ],
-            features: [
-                {
-                    icon: <IconDecisionTree />,
-                    title: 'Drag-and-drop steps',
-                    description: 'Build onboarding, activation, and retention flows in minutes',
-                },
-                {
-                    icon: <IconPeople />,
-                    title: 'Event and cohort triggers',
-                    description: 'Start workflows from real product behavior',
-                },
-                {
-                    icon: <IconDatabase />,
-                    title: 'Data-native',
-                    description: 'Use the events, actions, and properties already tracked in PostHog',
-                },
-                {
-                    icon: <IconTestTube />,
-                    title: 'Testing & execution logs',
-                    description: 'Preview how a workflow behaves for a real user and view detailed run history',
-                },
+            [
+                'Product Marketers',
+                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
             ],
-        },
-        {
-            title: 'Behavior-triggered messaging',
-            handle: 'messaging',
-            template: 'splitImage',
-            headline: 'Behavior-triggered messaging',
-            description: 'Send emails, Slack posts, or webhook messages based on product activity.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10158_1_5b25e98912.png',
-                    alt: 'Behavior-triggered messaging',
-                    containerClassName: 'flex justify-end items-end @2xl:w-[85%] @2xl:ml-auto -mb-2',
-                },
+            [
+                'Growth Engineers',
+                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
             ],
-            features: [
-                {
-                    icon: <IconEnvelope />,
-                    title: 'Built-in email editor',
-                    description: 'Create onboarding, activation, and transactional emails directly in PostHog',
-                },
-                {
-                    icon: <IconBolt />,
-                    title: 'Behavior-triggered delivery',
-                    description: 'Messages fire the moment users perform key actions',
-                },
-                {
-                    icon: <IconPeople />,
-                    title: 'Cohort & property personalization',
-                    description: 'Tailor content using user properties, segments, and experiment variants',
-                },
-                {
-                    icon: <IconGraph />,
-                    title: 'Unified with your product data',
-                    description: 'No syncing, all context comes from PostHog natively',
-                },
+            [
+                'Product Engineers',
+                'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',
             ],
-        },
-        {
-            title: 'Flow logic & timing controls',
-            handle: 'flow_logic',
-            template: 'splitImage',
-            headline: 'Flow logic & timing controls',
-            description: 'Shape user journeys with conditions, splits, delays, and lifecycle-based steps.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Group_10159_1_2ff0d42149.png',
-                    alt: 'Flow logic & timing controls',
-                    containerClassName: 'flex justify-end items-center @2xl:w-[85%] @2xl:ml-auto',
-                },
+            [
+                'Automation-minded teams',
+                'Zapier/n8n-style flows triggered by product events, with destinations and basic workflow logic in one place',
             ],
-            features: [
-                {
-                    icon: <IconDecisionTree />,
-                    title: 'Smart branching',
-                    description: 'Route users with conditions based on properties, events, or random splits',
-                },
-                {
-                    icon: <IconClock />,
-                    title: 'Precise timing',
-                    description: 'Add delays or scheduled waits to build multi-step journeys',
-                },
-                {
-                    icon: <IconSend />,
-                    title: 'Conditional waits',
-                    description: 'Continue only when a user completes a specific action',
-                },
-                {
-                    icon: <IconWarning />,
-                    title: 'Step-level error handling',
-                    description: 'Build resilient automations with fallback paths',
-                },
-            ],
-        },
-        {
-            title: 'Channels',
-            handle: 'channels',
-            template: 'splitImage',
-            headline: 'Channels',
-            description:
-                'Reach users wherever they are. Pick from the standard channels or connect to one of the 35+ integrations (and counting) that we have.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_channels_2_1f26ef04dd.png',
-                    alt: 'Channels',
-                    containerClassName: 'flex justify-end items-center @2xl:ml-auto',
-                },
-            ],
-            features: [
-                {
-                    icon: <IconEnvelope />,
-                    title: 'Email',
-                },
-                {
-                    icon: <IconMessage />,
-                    title: 'SMS',
-                },
-                {
-                    icon: <IconMessages />,
-                    title: 'Slack',
-                },
-                {
-                    icon: <IconLink />,
-                    title: 'Webhook',
-                },
-                {
-                    icon: <IconPlug />,
-                    title: '35+ integrations',
-                    description: 'ClickUp, Discord, GitHub, GitLab, Google Ads, Google Cloud Storage, and more',
-                },
-            ],
-        },
-    ],
+        ],
+    },
+    features,
+    mcp: {
+        title: features.mcp.title,
+        headline: features.mcp.headline,
+        description: features.mcp.description,
+    },
+    // Description reshaped from contents/docs/workflows/installation.mdx
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            "Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app. These are the same SDKs used for Product Analytics – if you already have PostHog installed, you're good to go.",
+        productSlug: 'workflows',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
     questions: [
         {
-            question: 'What are my LLM costs by customer?',
+            question: 'How do I set up an email drip campaign?',
+            url: '/docs/workflows/email-drip-campaign',
         },
         {
-            question: 'Which AI features have the highest error rates?',
+            question: 'How do I create emails with PostHog AI?',
+            url: '/docs/workflows/create-emails-ai',
         },
         {
-            question: 'Are there latency spikes in my LLM calls?',
+            question: 'How do I configure email, Slack, or other channels?',
+            url: '/docs/workflows/configure-channels',
         },
         {
-            question: 'Do AI features improve user retention?',
+            question: 'How do I run A/B tests inside workflows?',
+            url: '/tutorials/workflows-ab-testing',
         },
         {
-            question: 'Which prompts are most expensive?',
+            question: 'How do teams use Workflows for customer journeys?',
+            url: '/tutorials/complete-workflows-guide',
         },
         {
-            question: 'How many tokens does each feature consume?',
-        },
-        {
-            question: "What's the ROI of our AI features?",
-        },
-        {
-            question: 'Which model gives the best cost/performance ratio?',
+            question: 'How do I manage opt-outs and suppressions?',
+            url: '/docs/workflows/opt-outs',
         },
     ],
     comparison: {
@@ -277,15 +246,11 @@ export const workflows = {
                 {
                     title: 'You need granular permissioning and audit logs for a large org',
                 },
-                // {
-                //     title: 'Deep mobile support',
-                //     subtitle: "if you're building a mobile-specific product",
-                // },
-                // {
-                //     title: "You don't want to use an open source product",
-                // },
             ],
             us: [
+                {
+                    title: 'Agents can build automations that act on your product data – the actions that close the self-driving loop',
+                },
                 {
                     title: 'You want automations that run on top of your live product data',
                 },
@@ -326,22 +291,6 @@ export const workflows = {
         rows: ['workflows'],
         excluded_sections: ['platform'],
     },
-    ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
-        imageAlt: 'A hedgehog automating workflows',
-        imageClasses: 'max-w-[360px]',
-        description: 'build automations based on events and user behavior',
-        skills: [
-            'Generates email templates for your content library',
-            'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
-            'Recommends which workflows to build and when to run them based on your product metrics',
-        ],
-        prompts: [
-            'Build an onboarding email sequence to help new users get started',
-            'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
-            'Generate a SMS sequence to encourage users to complete a survey',
-        ],
-    },
     pairsWith: [
         {
             slug: 'experiments',
@@ -365,13 +314,89 @@ export const workflows = {
         },
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
-    presenterNotes: {
-        overview: '',
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
+        imageAlt: 'A robot hedgehog running a workflow',
+        imageClasses: 'max-w-[360px]',
+        description: 'build the automation and ship it on your behalf',
+        // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
+        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
+        mcpFeatures: ['workflows'],
+        skills: [
+            'Generates email templates for your content library',
+            'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
+            'Recommends which workflows to build and when to run them based on your product metrics',
+        ],
+        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/create-emails-ai.mdx.
+        // Tool names verified against src/data/mcp-tools.json (feature: workflows).
+        groups: [
+            {
+                title: 'Create workflows',
+                tool: 'workflows-create',
+                prompts: [
+                    'Build an onboarding email sequence to help new users get started',
+                    'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
+                    'Generate a SMS sequence to encourage users to complete a survey',
+                ],
+            },
+            {
+                title: 'Create email templates',
+                tool: 'workflows-create-email-template',
+                prompts: [
+                    'Create a welcome email for new users who just signed up',
+                    "Write a re-engagement email for users who haven't logged in for 30 days",
+                    'Generate an email template for announcing a new feature',
+                    'Create an onboarding drip email series for trial users',
+                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
+                ],
+            },
+            {
+                title: 'Inspect templates',
+                tool: 'workflows-show-email-template',
+                prompts: ['Show me the current welcome email template'],
+            },
+            {
+                title: 'Update templates',
+                tool: 'workflows-update-email-template',
+                prompts: ['Update the onboarding template to include their company name in the subject'],
+            },
+        ],
     },
+    slider: {
+        marks: [10000, 50000, 100000, 1000000, 10000000],
+        min: 10000,
+        max: 10000000,
+    },
+    volume: 10000,
+    addonSliders: [
+        {
+            key: 'workflows_destinations',
+            label: 'Destinations',
+            sliderConfig: {
+                marks: [10000, 50000, 100000, 1000000, 10000000],
+                min: 10000,
+                max: 10000000,
+            },
+            volume: 10000,
+            unit: 'dispatch',
+        },
+    ],
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-        alt: 'the automator hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png',
+        alt: 'A hedgehog wiring up a workflow',
+        footerClasses: 'max-w-[360px]',
         classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
+            alt: 'A hedgehog automating workflows',
+        },
+        // Perches on the bottom-right of the Overview screenshot.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
+            alt: 'the automator hedgehog',
+        },
     },
     videos: {
         automating_onboarding_with_posthog_workflows: {
@@ -424,5 +449,8 @@ export const workflows = {
                 },
             ],
         },
+    },
+    presenterNotes: {
+        overview: '',
     },
 }

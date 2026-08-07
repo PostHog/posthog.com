@@ -9,7 +9,7 @@ featuredImageType: full
 tags:
   - Culture
   - Product
-  - Being a founder
+  - Founders
   - Engineering
 crosspost:
   - Founders

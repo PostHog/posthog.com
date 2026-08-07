@@ -328,6 +328,347 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 }
 
 // Function to generate llms.txt file according to spec
+// Canonical self-driving taxonomy used to generate /platform.md, the per-product .md files,
+// and the "Products and tools" section of llms.txt. Single source so they stay in sync.
+// Copy mirrors the handbook canonical vocabulary: products = the surfaces you adopt;
+// tools = the functional capabilities; context = the data; context warehouse = warehouse + ingestion.
+type PlatformItem = { name: string; slug?: string; layer: 'product' | 'tool'; oneLiner: string; link?: string }
+
+const PLATFORM_ITEMS: PlatformItem[] = [
+    // Products — the surfaces a customer adopts to access self-driving
+    {
+        name: 'Web (app.posthog.com)',
+        layer: 'product',
+        link: 'https://app.posthog.com',
+        oneLiner: 'Get simple or complex work done without installing anything — the full surface, next to your data.',
+    },
+    {
+        name: 'PostHog Slack app',
+        slug: 'slack-app',
+        layer: 'product',
+        oneLiner:
+            'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+    },
+    {
+        name: 'PostHog Desktop',
+        slug: 'desktop',
+        layer: 'product',
+        oneLiner:
+            "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",
+    },
+    {
+        name: 'PostHog MCP',
+        layer: 'product',
+        link: 'https://posthog.com/docs/model-context-protocol',
+        oneLiner: 'A product analyst that lives in your editor, via MCP.',
+    },
+    // Tools — the functional capabilities that produce and act on your product's context
+    {
+        name: 'Product analytics',
+        slug: 'product-analytics',
+        layer: 'tool',
+        oneLiner: 'The measurement agents use to see what works.',
+    },
+    {
+        name: 'Web analytics',
+        slug: 'web-analytics',
+        layer: 'tool',
+        oneLiner: 'The lightweight measurement layer feeding the loop.',
+    },
+    {
+        name: 'Session replay',
+        slug: 'session-replay',
+        layer: 'tool',
+        oneLiner: 'A proactive signal — watch exactly why something happened.',
+    },
+    {
+        name: 'Feature flags',
+        slug: 'feature-flags',
+        layer: 'tool',
+        oneLiner: 'How agents roll a change out and roll it back.',
+    },
+    {
+        name: 'Experiments',
+        slug: 'experiments',
+        layer: 'tool',
+        oneLiner: 'The evaluation that proves a change worked.',
+    },
+    {
+        name: 'Error tracking',
+        slug: 'error-tracking',
+        layer: 'tool',
+        oneLiner: 'The signal that triggers a fix — every error tied to the user who hit it.',
+    },
+    {
+        name: 'Surveys',
+        slug: 'surveys',
+        layer: 'tool',
+        oneLiner: 'The qualitative signal — what users say, not just what they do.',
+    },
+    {
+        name: 'AI observability',
+        slug: 'ai-observability',
+        layer: 'tool',
+        oneLiner: 'Observability for your AI features — the context agents use to fix LLM behavior.',
+    },
+    {
+        name: 'Logs',
+        slug: 'logs',
+        layer: 'tool',
+        oneLiner: 'Backend signal that triggers fixes, tied to the user who hit it.',
+    },
+    {
+        name: 'Data warehouse',
+        slug: 'data-warehouse',
+        layer: 'tool',
+        oneLiner: "Where your product's context lives so agents can use all of it.",
+    },
+    {
+        name: 'CDP',
+        slug: 'cdp',
+        layer: 'tool',
+        oneLiner: 'How agents move and act on your data across 50+ destinations.',
+    },
+    {
+        name: 'Endpoints',
+        slug: 'endpoints',
+        layer: 'tool',
+        oneLiner: "How your product's context flows out to agents and tools.",
+    },
+    {
+        name: 'Workflows',
+        slug: 'workflows',
+        layer: 'tool',
+        oneLiner: 'How agents act — automated actions in the loop.',
+    },
+    {
+        name: 'PostHog AI',
+        slug: 'ai',
+        layer: 'tool',
+        oneLiner: 'The interface humans and agents use to understand the product.',
+    },
+    {
+        name: 'Support',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+    },
+    {
+        name: 'Customer analytics',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/customer-analytics/start-here',
+        oneLiner: 'Accounts, usage metrics, and customer journeys — the account-level context behind every signal.',
+    },
+    {
+        name: 'Replay Vision',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+    },
+]
+
+const CONTEXT_BLURB =
+    'Events, recordings, errors, and logs — the data that feeds the self-driving loop. This is the fuel.'
+const CONTEXT_WAREHOUSE_BLURB =
+    'The data warehouse plus the full context-ingestion pipeline for your product — where context lives and a significant part of how we bill.'
+
+const pageLinkFor = (item: PlatformItem): string => item.link || `https://posthog.com/${item.slug}`
+const mdLinkFor = (item: PlatformItem): string =>
+    item.slug ? `https://posthog.com/${item.slug}.md` : item.link || 'https://posthog.com'
+
+// Generate /platform.md — a machine-readable four-layer overview for LLMs/agents.
+export const generatePlatformMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    if (!fs.existsSync(publicPath)) fs.mkdirSync(publicPath, { recursive: true })
+
+    const list = (layer: 'product' | 'tool') =>
+        PLATFORM_ITEMS.filter((i) => i.layer === layer)
+            .map((i) => `- [${i.name}](${pageLinkFor(i)}) — ${i.oneLiner}`)
+            .join('\n')
+
+    const content = `# PostHog: the platform for self-driving products
+
+PostHog makes your product self-driving. It pairs the full context of your data (events, errors, logs, replays, and more) with agents that find problems and opportunities and ship the fix — reactively (e.g. prompted via Slack) or proactively. Everything PostHog offers is one of four layers.
+
+## Products — how you access self-driving
+
+The surfaces a customer adopts. Each has a distinct job.
+
+${list('product')}
+
+## Tools — the functional capabilities
+
+The tools produce and act on your product's context. They sit below the products, but this is where the work happens.
+
+${list('tool')}
+
+## Context — the fuel
+
+${CONTEXT_BLURB}
+
+## Context warehouse — where context lives
+
+${CONTEXT_WAREHOUSE_BLURB}
+
+---
+
+Self-driving in depth — signals, Inbox, scouts, and the PR loop: https://posthog.com/docs/self-driving.md
+Pricing: every tool has a generous free tier, then usage-based pricing. Exact numbers: https://posthog.com/pricing.md
+All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
+`
+
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), content, 'utf8')
+    console.log('Generated: platform.md')
+}
+
+// Generate a clean .md for each product/tool page (built from the curated taxonomy, not HTML-scraped,
+// since the slide-based pages don't convert to useful markdown).
+export const generateProductPagesMarkdown = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+
+    for (const item of PLATFORM_ITEMS) {
+        if (!item.slug) continue // Web / MCP point at existing pages, no bespoke .md
+        const layerLabel =
+            item.layer === 'product'
+                ? "one of PostHog's products — the surfaces you adopt to access self-driving"
+                : "one of PostHog's tools — the functional capabilities that make your product self-driving"
+
+        const content = `# ${item.name}
+
+${item.oneLiner}
+
+${item.name} is ${layerLabel}.
+
+PostHog is the platform for self-driving products: it pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship better products, faster.
+
+- Full page: ${pageLinkFor(item)}
+- All products and tools: https://posthog.com/platform.md
+- Pricing: https://posthog.com/pricing.md
+
+For features, screenshots, and details, see ${pageLinkFor(item)}.
+`
+
+        const outputPath = path.join(publicPath, `${item.slug}.md`)
+        const dirPath = path.dirname(outputPath)
+        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
+        fs.writeFileSync(outputPath, content, 'utf8')
+        console.log(`Generated: ${item.slug}.md`)
+    }
+}
+
+type ChangelogRoadmapNode = {
+    strapiID?: number | string
+    title: string
+    description?: string
+    date: string
+    cta?: { label?: string; url?: string }
+    teams?: { data?: Array<{ attributes?: { name?: string } }> }
+    topic?: { data?: { attributes?: { label?: string } } }
+}
+
+type ChangelogVideoNode = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+// How many months of entries the top-level changelog.md covers. Full history is
+// available in the per-year archives (public/changelog/{year}.md).
+const CHANGELOG_MD_MONTHS = 12
+
+// Generates /changelog.md (and per-year archives) directly from the build-time Roadmap
+// nodes, like generatePricingMd/generatePlatformMd. The /changelog page itself renders a
+// virtualized UI, so the HTML-scrape path used for docs pages can't produce useful
+// markdown for it — this is the canonical machine-readable changelog for LLMs/agents.
+export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: ChangelogVideoNode[] = []) => {
+    console.log('Generating changelog markdown files...')
+
+    const publicPath = path.resolve(__dirname, '../public')
+
+    const monthKey = (date: string) => date.slice(0, 7) // YYYY-MM
+    const monthTitle = (key: string) =>
+        new Date(`${key}-15T00:00:00Z`).toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+    const dayTitle = (date: string) =>
+        new Date(date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+
+    const cleanDescription = (md?: string) =>
+        (md || '')
+            .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+            .replace(/\]\(\//g, '](https://posthog.com/') // absolutize relative links
+            .trim()
+
+    const absoluteUrl = (url?: string) => (url && url.startsWith('/') ? `https://posthog.com${url}` : url)
+
+    const entryMarkdown = (roadmap: ChangelogRoadmapNode) => {
+        const team = roadmap.teams?.data?.[0]?.attributes?.name
+        const topic = roadmap.topic?.data?.attributes?.label
+        const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
+        const description = cleanDescription(roadmap.description)
+        const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+
+        return [`### ${roadmap.title}`, `_${meta}_`, description, cta].filter(Boolean).join('\n\n')
+    }
+
+    // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)
+    const months = new Map<string, { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }>()
+    const getMonth = (key: string) => {
+        if (!months.has(key)) months.set(key, { roadmaps: [], videos: [] })
+        return months.get(key) as { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }
+    }
+    roadmaps
+        .filter((roadmap) => roadmap?.title && roadmap?.date)
+        .forEach((roadmap) => getMonth(monthKey(roadmap.date)).roadmaps.push(roadmap))
+    videos
+        .filter((video) => video?.videoId && video?.publishedAt)
+        .forEach((video) => getMonth(monthKey(video.publishedAt)).videos.push(video))
+
+    const sortedMonthKeys = [...months.keys()].sort().reverse()
+    if (sortedMonthKeys.length === 0) {
+        console.warn('No changelog entries found; skipping changelog markdown generation')
+        return
+    }
+
+    const monthMarkdown = (key: string) => {
+        const { roadmaps: monthRoadmaps, videos: monthVideos } = getMonth(key)
+        const videoLines = monthVideos
+            .map((video) => `- 📺 [${video.title}](https://www.youtube.com/watch?v=${video.videoId})`)
+            .join('\n')
+        return [`## ${monthTitle(key)}`, videoLines, ...monthRoadmaps.map(entryMarkdown)].filter(Boolean).join('\n\n')
+    }
+
+    const years = [...new Set(sortedMonthKeys.map((key) => key.slice(0, 4)))].sort().reverse()
+    const yearArchiveLinks = years.map((year) => `[${year}](https://posthog.com/changelog/${year}.md)`).join(' · ')
+
+    const header = (scope: string) => `# PostHog changelog
+
+New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated on every deploy.
+
+- Canonical page: https://posthog.com/changelog
+- RSS feed: https://posthog.com/changelog.rss
+- Full history by year: ${yearArchiveLinks}
+
+`
+
+    // Top-level changelog.md: the most recent CHANGELOG_MD_MONTHS months
+    const recentMonthKeys = sortedMonthKeys.slice(0, CHANGELOG_MD_MONTHS)
+    const changelogMd =
+        header(`This file covers the last ${recentMonthKeys.length} months.`) +
+        recentMonthKeys.map(monthMarkdown).join('\n\n') +
+        '\n'
+    fs.writeFileSync(path.join(publicPath, 'changelog.md'), changelogMd, 'utf8')
+    console.log('Generated: changelog.md')
+
+    // Per-year archives: public/changelog/{year}.md
+    const changelogDir = path.join(publicPath, 'changelog')
+    if (!fs.existsSync(changelogDir)) fs.mkdirSync(changelogDir, { recursive: true })
+    for (const year of years) {
+        const yearMonthKeys = sortedMonthKeys.filter((key) => key.startsWith(year))
+        const yearMd = header(`This file covers ${year}.`) + yearMonthKeys.map(monthMarkdown).join('\n\n') + '\n'
+        fs.writeFileSync(path.join(changelogDir, `${year}.md`), yearMd, 'utf8')
+        console.log(`Generated: changelog/${year}.md`)
+    }
+}
+
 export const generateLlmsTxt = (pages) => {
     console.log('Generating llms.txt file...')
 
@@ -385,7 +726,7 @@ export const generateLlmsTxt = (pages) => {
     const sectionTitleOverrides: Record<string, string> = {
         'docs-libraries': 'SDKs and Libraries',
         'docs-experiments': 'A/B Testing and Experiments',
-        'docs-llm-analytics': 'LLM Analytics and Observability',
+        'docs-llm-analytics': 'AI Observability',
         'docs-cdp': 'Customer Data Platform (CDP)',
         'docs-api': 'API',
         'docs-hogql': 'HogQL',
@@ -393,6 +734,7 @@ export const generateLlmsTxt = (pages) => {
         'docs-hog': 'Hog (Query Language)',
         'docs-model-context-protocol': 'Model Context Protocol (MCP)',
         'docs-ai-engineering': 'AI Engineering',
+        templates: 'Self-driving scout templates',
     }
 
     const formatSectionTitle = (section: string): string => {
@@ -426,7 +768,7 @@ export const generateLlmsTxt = (pages) => {
     // Build llms.txt content
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source product and data tools platform. It provides product analytics, session replay, feature flags, A/B testing, error tracking, surveys, LLM observability, web analytics, data warehouse, and more - all in one platform. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
+> PostHog is the platform for self-driving products. It pairs the full context of your product's data (events, errors, logs, replays, and more) with agents that find problems and ship changes with you. It includes tools for product analytics, session replay, feature flags, A/B testing, error tracking, surveys, AI observability, web analytics, a data warehouse, and more. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
 
 PostHog can be added to any web, mobile, or backend application. All docs pages below are available as raw Markdown by appending \`.md\` to any URL.
 
@@ -446,12 +788,43 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 - **A/B Testing (Experiments)**: Built on feature flags. Create experiments in the PostHog UI, then use \`posthog.getFeatureFlag('experiment-flag')\` to render variants. See the [Experiments docs](https://posthog.com/docs/experiments/adding-experiment-code.md).
 - **Surveys**: In-app surveys configured in the PostHog UI and rendered automatically by \`posthog-js\`. No extra code required for popup surveys. See the [Surveys docs](https://posthog.com/docs/surveys/creating-surveys.md).
 - **Error Tracking**: Capture frontend exceptions with \`posthog.captureException(error)\`. Works automatically when enabled. See the [Error Tracking docs](https://posthog.com/docs/error-tracking/capture.md).
-- **LLM Analytics**: Track LLM API calls, token usage, and costs. Integrations for OpenAI, Anthropic, LangChain, and more. See the [LLM Analytics docs](https://posthog.com/docs/llm-analytics.md).
+- **AI Observability**: Track LLM API calls, token usage, and costs. Integrations for OpenAI, Anthropic, LangChain, and more. See the [AI Observability docs](https://posthog.com/docs/ai-observability.md).
 - **Data Warehouse**: Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. See the [Data Warehouse docs](https://posthog.com/docs/data-warehouse.md).
 
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
 **MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+
+`
+
+    // Products and tools overview (self-driving taxonomy) — kept in sync with /platform.md via PLATFORM_ITEMS.
+    llmsTxtContent += `## Products and tools
+
+PostHog has one umbrella story — self-driving — and four layers. Full machine-readable overview: https://posthog.com/platform.md
+
+**Products** (the surfaces you adopt to access self-driving):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'product')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Tools** (the functional capabilities):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'tool')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Context** — ${CONTEXT_BLURB}
+
+**Context warehouse** — ${CONTEXT_WAREHOUSE_BLURB}
+
+`
+
+    // Changelog — high-value for agents deciding what PostHog can do today
+    llmsTxtContent += `## Changelog
+
+What's new in PostHog — new features, products, and tools, updated with every deploy. Check this before assuming a capability doesn't exist.
+
+- [Changelog (last 12 months, Markdown)](https://posthog.com/changelog.md)
+- [Changelog RSS feed](https://posthog.com/changelog.rss)
 
 `
 
@@ -560,7 +933,6 @@ export const generatePricingMd = (products: any[]) => {
         data_warehouse: {
             description:
                 'Query external data sources (Stripe, Hubspot, Postgres, S3, etc.) alongside PostHog data using SQL. No separate warehouse needed.',
-            note: 'Revenue Analytics is included with Data Warehouse at no extra cost.',
         },
         realtime_destinations: {
             description:

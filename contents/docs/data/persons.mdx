@@ -57,6 +57,12 @@ Person profiles are created when you:
 - Set person properties using [`posthog.setPersonProperties()`](/docs/product-analytics/person-properties)
 - Capture an event with `$set` or `$set_once` properties
 
+<CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them. To query the values you set, use [person properties](/docs/product-analytics/person-properties) instead.
+
+</CalloutBox>
+
 To control costs, you can [configure anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for events that don't need person profiles.
 
 ## Duplicate person profiles
@@ -105,6 +111,8 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 - **Events** shows all the events a person has triggered, which you can search and filter to find specific events.
 
 - **Recordings** shows all of the session replays a person has generated. Note this is subject to the retention policy of your plan, so people who haven't been active recently may have none.
+
+- **Logs** shows every [log](/docs/logs) emitted on behalf of this person — backend OTel logs, frontend SDK logs, anything carrying the `posthogDistinctId` attribute (or a [custom attribute key](/docs/logs/link-person#customizing-the-attribute-key) you've configured). Useful for debugging a specific user's issue across services.
 
 - **Cohorts** shows all the [cohorts](/docs/data/cohorts) a person belongs to.
 

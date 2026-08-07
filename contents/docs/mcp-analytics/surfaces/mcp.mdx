@@ -1,0 +1,61 @@
+---
+title: Query MCP Analytics over PostHog MCP
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="fyi">
+
+MCP Analytics tools are in beta and require the MCP Analytics feature preview to be enabled.
+
+</CalloutBox>
+
+PostHog's [MCP server](/docs/model-context-protocol) exposes MCP Analytics as a set of tools, so you can investigate how agents use your server from Claude Code, Cursor, or any other MCP client – without switching to the web app. It's the fastest way to ask "which of my tools is failing, and why?" while you're already in your editor.
+
+## Before you start
+
+1. **Set up MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Connect the MCP server** – follow the [MCP server setup](/docs/model-context-protocol) to connect PostHog to your client. MCP Analytics tools need the `mcp_analytics:read` scope, and the ones that write data (feedback, missing capabilities, recomputing clusters) need `mcp_analytics:write`.
+
+## What you can do here
+
+**Explore sessions**
+
+- List MCP sessions and filter them down
+- Open a single session and read its tool calls in order
+- Generate an intent summary for a session
+
+**Understand intent**
+
+- Retrieve intent clusters and their tool distribution
+- Recompute clusters after new data lands
+
+**Dig into tool quality**
+
+- Per-tool stats: volume, error rate, and latency
+- Daily trend for a tool over time
+- Recent failures, with error type and message
+- Top users of a given tool
+- Neighboring tools that get called alongside it
+- Sample intents behind its calls
+- Harness and client breakdown
+
+**Send feedback**
+
+- Submit feedback about a tool
+- Report a missing capability your agent needed but couldn't find
+
+## Example prompts
+
+Point your agent at these once the tools are connected:
+
+- "Which of my MCP tools has the highest error rate this week?"
+- "Show me the last 10 failed calls to `search_docs` and what the errors were."
+- "What are agents actually trying to do when they call `create_issue`? Summarize the intent clusters."
+- "Which tools get called right before `run_query`?"
+
+## Related
+
+- Explore the same data visually in the [web app](/docs/mcp-analytics/surfaces/web-app).
+- See the full list of PostHog MCP tools in the [MCP docs](/docs/model-context-protocol).
+- Act on Self-driving reports about failing tools in [PostHog Desktop](/docs/mcp-analytics/surfaces/desktop).

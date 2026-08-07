@@ -3,7 +3,8 @@ import { IconCheck, IconInfo, IconX } from '@posthog/icons'
 import Checkbox from 'components/Checkbox'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { NonLinearSlider, nonLinearCurve, reverseNonLinearCurve } from 'components/Pricing/PricingSlider/Slider'
-import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { calculatePrice, getAddonsCostForProduct } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
@@ -82,7 +83,7 @@ const Modal = ({ onClose, isVisible }) => {
                 onClick={() => onClose()}
             ></div>
             <div
-                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
+                className={`max-w-full z-[1000001] fixed left-4 md:left-8 right-4 md:right-8 bottom-4 md:bottom-8 rounded-tl md:rounded-tl-lg rounded-tr md:rounded-tr-lg flex flex-col bg-white dark:bg-accent-dark transition-all duration-300 ease-out
           ${isVisible ? '!opacity-100 top-4' : 'opacity-0 top-[100vh]'}`}
             >
                 <div className="w-full h-fit flex justify-between p-4 border-b border-primary">
@@ -93,7 +94,7 @@ const Modal = ({ onClose, isVisible }) => {
                     </button>
                 </div>
 
-                <div className="max-h-[calc(100vh_-_1rem_-_60px_-_122px)] md:max-h-[calc(100vh_-_1rem_-_60px)] overflow-y-auto px-4 py-4 md:pb-8">
+                <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 md:pb-8">
                     {/* <h3 className="mb-2 text-lg">Save money if you don't need user properties</h3>
                     <p className="font-semibold opacity-70 text-[15px]">(Custom user properties more expensive to process)</p>
                     <p className="mb-2">The more data we store about users, the higher the cost. So the less data you need, the more you can save.</p> */}
@@ -394,6 +395,12 @@ export default function ProductAnalyticsTab({
                 .plans.find((plan) => plan.tiers).tiers,
         []
     )
+    // `addons` is shared across every product in the calculator, so scope it to this product's
+    // add-ons before adding them to the subtotal
+    const productAnalyticsAddonsCost = useMemo(
+        () => getAddonsCostForProduct(addons, activeProduct?.billingData),
+        [addons, activeProduct]
+    )
     const totalProductAnalyticsVolume = getTotalAnalyticsVolume(analyticsData)
     const totalProductAnalyticsPrice = calculatePrice(totalProductAnalyticsVolume, productAnalyticsTiers).total
     const totalEnhancedPersonsVolume = getTotalEnhancedPersonsVolume(analyticsData)
@@ -516,9 +523,7 @@ export default function ProductAnalyticsTab({
                         <div>
                             <strong>
                                 {formatUSD(
-                                    totalProductAnalyticsPrice +
-                                        enhancedPersonsCost.total +
-                                        addons.reduce((acc, addon) => acc + addon.totalCost, 0)
+                                    totalProductAnalyticsPrice + enhancedPersonsCost.total + productAnalyticsAddonsCost
                                 )}
                             </strong>
                         </div>

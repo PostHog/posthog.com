@@ -1,40 +1,117 @@
 import React from 'react'
-import { IconToggle } from '@posthog/icons'
-import CodeBlock from 'components/Home/CodeBlock'
-import Link from 'components/Link'
-import MCPInstall from 'components/Products/MCPInstall'
+import {
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+    IconToggle,
+} from '@posthog/icons'
+import { features } from './feature_flags/features'
+import { applications, topFeatures } from './feature_flags/slides'
+import { getTool } from '../../data/tools'
 
 export const featureFlags = {
+    ...getTool('feature_flags'),
     Icon: IconToggle,
-    name: 'Feature Flags',
-    description: 'Control feature access with precision',
-    handle: 'feature_flags',
     type: 'feature_flags',
-    slug: 'feature-flags',
+    teamSlug: 'feature-flags',
+    forumTopicId: 360,
     color: 'seagreen',
     colorSecondary: 'seagreen',
-    category: 'product_engineering',
     wizardSupport: 'In development',
+    shortDescription: 'Control feature access with precision',
+    pricingDescription:
+        'Feature flags are billed on requests – evaluations against your flags. You get 1 million free every month, then pay for what you use. No per-seat charges.',
     seo: {
         title: 'Feature Flags – Ship safely and control rollouts with PostHog',
         description:
             "Deploy new features confidently with Feature Flags. Test in production, target cohorts, and measure impact through PostHog's integrated analytics and experiments.",
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_f536371cce.jpg',
     },
+    /**
+     * Sections rendered on the Product surface (`/feature-flags`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/feature-flags/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Safely roll out features to specific users or groups',
-        description: (
-            <>
-                Test changes with small groups of users before rolling out wider. Then analyze usage with{' '}
-                <Link to="/product-analytics" className="font-bold underline" state={{ newWindow: true }}>
-                    Product Analytics
-                </Link>{' '}
-                and{' '}
-                <Link to="/session-replay" className="font-bold underline" state={{ newWindow: true }}>
-                    Session Replay
-                </Link>
-                .
-            </>
-        ),
+        description:
+            'Feature Flags is one of the tools that makes your product self-driving: the control layer agents use to roll a change out and roll it back. Built to work natively with product analytics, session replay, experiments, and surveys.',
+        eli5: 'Feature Flags let you turn features on or off for specific users, groups, or percentages of traffic without redeploying code. Create a flag, check it in your app, then control who sees what from PostHog – phased rollouts, kill switches, multivariate variants, JSON payloads, and beta opt-ins. When something breaks, flip it off. When it works, roll it out wider and measure the impact in analytics and session replay.',
         textColor: 'text-white', // tw
     },
     screenshots: {
@@ -50,17 +127,38 @@ export const featureFlags = {
             classes: 'justify-end items-end pl-4 @lg:pl-6',
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
-    },
-    videos: {
-        overview: {
-            youtube: '1X2gha80fsA',
-            wistia: 'x8m2u14slo',
+        multivariate: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png',
+            alt: 'Multivariate feature flags',
+        },
+        'release-conditions': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png',
+            alt: 'Release conditions',
+        },
+        'early-access': {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png',
+            alt: 'Early access feature opt-in widget',
+        },
+        reports: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png',
+            alt: 'Developer-friendly automation',
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
-        alt: 'A hedgehog toggling a feature flag',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogmillionaire_6a6c2c958d.png',
+        alt: 'A hedgehog holding an enormous banknote',
+        footerClasses: 'max-w-[240px]',
         classes: 'absolute bottom-0 right-0 max-w-md',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
+            alt: 'A hedgehog toggling a feature flag',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
+            alt: 'A hedgehog toggling a feature flag',
+        },
     },
     slider: {
         marks: [1000000, 10000000, 100000000, 1000000000],
@@ -90,290 +188,42 @@ export const featureFlags = {
                 "Feature flags immediately bought a lot of value. What's really elegant is how flags interlink with product analytics.",
         },
     },
-    features: [
-        {
-            title: 'Boolean & multivariate feature flags',
-            headline: 'Boolean & multivariate feature flags',
-            description: 'Test or release different versions of a feature with as many variants as you need.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png',
-                    alt: 'Multivariate feature flags',
-                    stylize: true,
-                    shadow: true,
-                },
+    useCases: {
+        intro: 'Feature Flags is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                'Ship behind a flag, canary to a slice of users, and kill a bad release without a redeploy',
             ],
-        },
-        {
-            title: 'Test changes without pushing code',
-            headline: 'Test changes without pushing code',
-            description: (
-                <>
-                    JSON payloads let you change text, visuals, or entire blocks of code directly from within PostHog –
-                    no code deployments needed with <code>getFeatureFlagPayload()</code> – or server-side with{' '}
-                    <Link
-                        to="/docs/feature-flags/remote-config"
-                        className="font-bold underline"
-                        state={{ newWindow: true }}
-                    >
-                        remote config
-                    </Link>
-                    .
-                </>
-            ),
-            // images: [
-            //     {
-            //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/payloads.png',
-            //         alt: 'Test changes without touching your codebase',
-            //     },
-            // ],
-            children: (
-                <div className="grid grid-cols-12 gap-x-8 gap-y-4 -mt-4">
-                    <div className="col-span-12">
-                        <h4 className="text-xl mb-1">Feature flag payload</h4>
-                        <p className="text-lg">
-                            Enter the payload in the feature flag's settings (inside PostHog) as a value or an object.
-                        </p>
-                        <CodeBlock code={`{"title": "Test headline", "subtitle": "Test description"}`} language="js" />
-                    </div>
-                    <div className="col-span-7">
-                        <h4 className="text-xl">Your code</h4>
-                        <CodeBlock
-                            code={`<h1>Default headline</h1>
-<h2>Default description</h2>`}
-                            language="html"
-                        />
-                        <CodeBlock
-                            code={`posthog.onFeatureFlags(function () {
-  if (posthog.isFeatureEnabled('headline-change')) {
-    const swapText = posthog.getFeatureFlagPayload('headline-change');
-    document.querySelector('h1').textContent = swapText.title;
-    document.querySelector('h2').textContent = swapText.subtitle;
-  }
-});`}
-                            language="js"
-                        />
-                    </div>
-                    <div className="col-span-5">
-                        <h4 className="text-xl">Output</h4>
-                        <CodeBlock
-                            code={`<h1>Test headline</h1>
-<h2>Test description</h2>`}
-                            language="html"
-                        />
-                        <p className="text-lg">
-                            Serve any sort of changes from the payload like text or colors, or trigger functions.
-                        </p>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            title: 'Release conditions',
-            headline: 'Release conditions',
-            description: 'Customize your rollout strategy by user or group properties, cohort, or traffic percentage.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png',
-                    alt: 'Release conditions',
-                    stylize: true,
-                    shadow: true,
-                },
+            [
+                'Product Managers',
+                'Control beta access and rollout percentage once engineering wires the flag into the product',
             ],
-        },
-        {
-            title: 'Local evaluation ',
-            headline: 'Local evaluation',
-            description:
-                "Improve speed by caching a flag's value on initial load. Or use the API to build your own UI. ",
-            children: (
-                <>
-                    <h4 className="text-xl mb-1">
-                        Use a single API request to get feature flag definitions and match your users locally.
-                    </h4>
-                    <p className="text-lg">The following will make an API request if the data is not already cached.</p>
-                    <CodeBlock
-                        code={`await client.getAllFlags('distinct id', {
-  groups: {},
-  personProperties: { is_authorized: True },
-  groupProperties: {},
-});`}
-                        language="js"
-                    />
-                </>
-            ),
-        },
-        {
-            title: 'Bootstrapping',
-            headline: 'Bootstrapping',
-            description:
-                'Bootstrap flags on initialization so all flags are available immediately on page load – without having to make extra network requests.',
-            children: (
-                <div className="">
-                    <h4 className="text-xl mb-1">
-                        Make feature flags available at initialization without waiting for a response from PostHog.
-                    </h4>
-                    <p className="text-lg">
-                        This is useful for redirecting to another page based on feature flag or showing variants
-                        instantly.
-                    </p>
-                    <CodeBlock
-                        code={`posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
-  bootstrap: {
-    distinctID: 'your-anonymous-id',
-    featureFlags: {
-      'flag-1': true,
-      'variant-flag': 'control',
-      'other-flag': false,
+            [
+                'Growth Engineers',
+                'Target cohorts, run multivariate variants, and measure impact next to analytics and replays',
+            ],
+            [
+                'Platform / DevOps',
+                'Gate infrastructure changes and migrations with gradual rollouts and instant rollback',
+            ],
+            ['Support Engineers', 'Enable a fix or workaround for a specific customer without shipping a new build'],
+        ],
     },
-  },
-});
-`}
-                        language="js"
-                    />
-                </div>
-            ),
-        },
-        {
-            title: 'Testing & diagnostics',
-            headline: 'Flag testing & diagnostics',
-            description: 'There are a few ways to test flags and make sure your flags are working as expected.',
-            children: (
-                <div className="-mt-5">
-                    <h4 className="text-xl mb-1">1. Assign a specific value to a user</h4>
-                    <p className="text-lg">
-                        Set release conditions to match your email or other user-identifiable properties.
-                    </p>
-
-                    <h4 className="text-xl mb-1">2. Flag overrides</h4>
-                    <p className="text-lg">
-                        When developing locally, you can set a flag's value in your browser's console.
-                    </p>
-                    <CodeBlock
-                        code={`posthog.featureFlags.overrideFeatureFlags({ flags: {"myFlag": "test"}})`}
-                        language="js"
-                    />
-                    <p className="text-lg">
-                        This will persist until you call override again with the argument <code>false</code>.
-                    </p>
-                    <CodeBlock code={`posthog.featureFlags.overrideFeatureFlags(false)`} language="js" />
-
-                    <h4 className="text-xl mb-1">3. PostHog toolbar</h4>
-                    <p className="text-lg">
-                        Fire up the{' '}
-                        <Link to="/toolbar" state={{ newWindow: true }}>
-                            PostHog toolbar
-                        </Link>{' '}
-                        to toggle the status of any feature flag while on any page of your site.
-                    </p>
-                </div>
-            ),
-        },
-        {
-            title: 'Developer-friendly automation',
-            headline: 'Developer-friendly automation',
-            description: (
-                <>
-                    <Link
-                        to="/docs/feature-flags/scheduled-flag-changes"
-                        className="font-bold underline"
-                        state={{ newWindow: true }}
-                    >
-                        Schedule flag changes.
-                    </Link>{' '}
-                    Get automated usage reports, IP address resolution (for location-based targeting), and recall person
-                    properties to avoid passing them manually every time.
-                </>
-            ),
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png',
-                    alt: 'Developer-friendly automation',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Early access feature opt-in widget',
-            headline: 'Early access feature opt-in widget',
-            description:
-                'Allow users to opt in to (or out of) specified features. Or use the API to build your own UI.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png',
-                    alt: 'Early access feature opt-in widget',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Persist flags across authentication',
-                    description:
-                        "Persist feature flags across authentication events so that flag values don't change when an anonymous user logs in and becomes identified.",
-                },
-                {
-                    title: 'History & activity feed',
-                    description: "See who hit a feature flag, the flag's value, and which page they were on",
-                },
-                {
-                    title: 'Instant rollbacks',
-                    description: 'Disable a feature without touching your codebase',
-                },
-                {
-                    title: 'Persist flags across authentication steps',
-                    description: 'Make sure users have a consistent experience after login',
-                },
-                {
-                    title: 'Flag administration',
-                    description: 'See the history of a feature flag or control who can modify flags with user roles',
-                },
-                {
-                    title: 'SDKs or API',
-                    description: 'Copy code snippets for your library of choice, or implement yourself with the API',
-                },
-                {
-                    title: 'Multi-environment support',
-                    description:
-                        'Test flags in local development or staging by using the same flag key across PostHog projects',
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Manage flags from your editor',
-            description:
-                'Create flags, configure targeting rules, and check rollout status from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            features: [
-                {
-                    title: 'Create flags while building features',
-                    description:
-                        'Create a new feature flag with rollout percentage, targeting rules, and optional multivariate variants.',
-                },
-                {
-                    title: 'Check flags before deploying',
-                    description: 'Get the full definition of flags, including filters, groups, and payloads.',
-                },
-                {
-                    title: 'Clean up stale flags',
-                    description:
-                        'List all active/inactive feature flags in the current project and find dead code to remove.',
-                },
-                {
-                    title: 'Update rollout rules',
-                    description: "Update a flag's rollout percentage, targeting rules, or variants.",
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Manage flags from your editor',
+        description:
+            'Create flags, configure targeting rules, and check rollout status from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description: 'SDKs for web, mobile, and backend – or evaluate flags over the API.',
+        productSlug: 'feature-flags',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Feature Flags',
         benefits: [
@@ -454,6 +304,9 @@ export const featureFlags = {
             ],
             us: [
                 {
+                    title: 'Agents can roll a change out and roll it back from flag context – the control that powers self-driving',
+                },
+                {
                     title: 'Integration with other analysis products',
                     subtitle: 'View replays attached to a flag, analyze data based on a flag, etc.',
                 },
@@ -506,8 +359,9 @@ export const featureFlags = {
                 "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
         },
         {
-            slug: 'product-analytics',
-            description: "User paths: See how a flag's value influenced an intended outcome",
+            slug: 'experiments',
+            description:
+                'Run A/B tests on top of the same flags, with statistical significance tracking for each variant',
         },
         {
             slug: 'session-replay',
@@ -527,7 +381,7 @@ export const featureFlags = {
         pricing:
             "1 million requests free per month. Then pay for what you use. LaunchDarkly charges $10-20 per developer PLUS usage. We just charge usage. A typical SaaS uses 5-10M requests/month. Even at 100M requests, we're way cheaper. And no 'enterprise tier' gatekeeping.",
         'comparison-summary':
-            'LaunchDarkly pioneered standalone flags. Optimizely came from A/B testing. We built flags as part of a complete platform. Everything shares the same data model. LaunchDarkly has more enterprise workflow stuff, but most teams just want flags that work with their analytics.',
+            "LaunchDarkly pioneered standalone flags. Optimizely came from A/B testing. We built flags as part of a complete platform. Everything shares the same data model. Because it's one system, agents can act on flag context directly – roll a change out, watch the impact, and roll it back – which is what makes your product self-driving. LaunchDarkly has more enterprise workflow stuff, but most teams just want flags that work with their analytics.",
         'feature-comparison':
             "We auto-resolve IPs and recall person properties. Sounds minor but eliminates whole bug categories. We don't have data export because... why would you? Your flag data is already in our analytics. Query it there.",
         docs: "Written by engineers who've actually built flag systems. Real code examples for every SDK. We cover the weird stuff - clock skew, network failures, race conditions. If something's broken, we tell you how to work around it.",
@@ -538,18 +392,75 @@ export const featureFlags = {
         ai: 'The PostHog MCP server lets your AI coding agent create and manage Feature Flags directly from your code editor. Create flags, configure targeting rules, and check rollout status – without switching to the PostHog app.',
     },
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/FEATURE_FLAGS_hog_95e008723c.png',
-        imageAlt: 'PostHog AI and feature flags',
-        description: 'set up, monitor, and manage feature flags using natural language',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/business_hog_adb9cf3c35.png',
+        imageAlt: 'A hedgehog in a suit deciding who gets the flag',
+        description: 'roll a change out, watch the impact, and roll it back',
+        intro: 'Ask PostHog AI to create flags, explain targeting, and clean up stale ones.',
+        mcpFeatures: ['flags'],
         skills: [
             'Configures and modifies flags with simple prompts – including rollout rules, targeting, and variants',
             'Identifies stale flags to remove from your codebase',
             'Summarizes rollout rules and targeting in plain english',
         ],
-        prompts: [
-            'Create a new multivariate feature flag for dark mode',
-            'Show me which flags are currently active in production',
-            'Explain how this flag is configured and who receives each variant',
+        groups: [
+            {
+                title: 'Create',
+                tool: 'create-feature-flag',
+                prompts: [
+                    'Create a new multivariate feature flag for dark mode',
+                    'Create a flag that rolls out new-checkout to 10% of free users',
+                ],
+            },
+            {
+                title: 'Update',
+                tool: 'update-feature-flag',
+                prompts: [
+                    'Add a release condition so only users with email ending in @acme.com get the flag',
+                    'Update pricing-test so variant_b is 50% of traffic',
+                ],
+            },
+            {
+                title: 'Inspect',
+                tool: 'feature-flag-get-definition',
+                prompts: [
+                    'Explain how this flag is configured and who receives each variant',
+                    'What payload does the headline-change flag return?',
+                    'Get the full definition of new-onboarding',
+                ],
+            },
+            {
+                title: 'Test evaluation',
+                tool: 'feature-flags-test-evaluation-create',
+                prompts: [
+                    'Would user_id 12345 get the new-checkout flag with their current properties?',
+                    'Test evaluation for distinct_id demo@example.com against pricing-test',
+                ],
+            },
+            {
+                title: 'Blast radius',
+                tool: 'feature-flags-user-blast-radius-create',
+                prompts: [
+                    "What's the blast radius if I roll new-checkout out to 100%?",
+                    'How many users would a 10% rollout of pricing-test affect?',
+                ],
+            },
+            {
+                title: 'Clean up',
+                tool: 'feature-flags-status-retrieve',
+                prompts: [
+                    'Is new-checkout stale?',
+                    'Check the health status of pricing-test',
+                    'Show me why this flag is marked stale',
+                ],
+            },
+            {
+                title: 'Schedule changes',
+                tool: 'scheduled-changes-create',
+                prompts: [
+                    'Schedule new-checkout to go to 50% tomorrow at 9am UTC',
+                    'Schedule this flag to turn off on Friday',
+                ],
+            },
         ],
     },
 }

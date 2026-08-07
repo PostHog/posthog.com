@@ -14,7 +14,7 @@ export const grafana_loki = {
         error_tracking: {
             available: true,
         },
-        llm_analytics: {
+        ai_observability: {
             available: false,
         },
         logs: {
@@ -25,6 +25,13 @@ export const grafana_loki = {
                     live_tail_real_time_logs: true,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: false,
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: 'Partial',
+                    no_proprietary_query_language: 'LogQL',
                 },
             },
             investigation_workflow: {
@@ -43,10 +50,16 @@ export const grafana_loki = {
             },
             observability: {
                 features: {
-                    metrics: true,
-                    traces: true,
+                    metrics: 'Via LogQL',
+                    traces: 'Requires Tempo',
                     alerting: true,
-                    infra_monitoring: true,
+                    infra_monitoring: 'Via stack',
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: true,
                 },
             },
             pricing: {
@@ -61,9 +74,13 @@ export const grafana_loki = {
     platform: {
         deployment: {
             self_host: true,
+            open_source: true,
+            managed_cloud: 'Grafana Cloud',
         },
         pricing: {
-            transparent_pricing: true,
+            self_serve: true,
+            free_tier: true,
+            transparent_pricing: false,
         },
         tools: {
             ai_assistant: true,

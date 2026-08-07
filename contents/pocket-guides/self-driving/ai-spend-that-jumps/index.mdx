@@ -1,0 +1,121 @@
+---
+title: AI spend that jumps overnight
+shortTitle: AI spend
+subtitle: 'Did your AI feature get more expensive without more usage?'
+bookOrder: 2
+filters:
+  type:
+    - self-driving
+watches:
+  - name: AI Observability
+    detail: Cost, tokens, model, cache reads, and error flags on every generation – enough to spot the change and attribute it.
+  - name: Your codebase
+    detail: Deploys, so a cost change can be tied to the commit that caused it rather than just a timestamp.
+requires:
+  - label: AI Observability instrumented, so $ai_generation events are arriving
+    level: required
+  - label: A property on generations identifying the feature, so you can split cost per surface
+    level: required
+  - label: Your codebase connected via GitHub, to correlate a change against deploys
+    level: recommended
+schedule: Daily
+report:
+  title: Cost per conversation up 3.1x while volume is flat
+  source: Scout · AI cost
+  receivedAgo: 4h
+  affected: '~$230/day above the 14-day norm'
+  body: >-
+    Since yesterday's 09:14 deploy, conversations are flat at roughly 1,200/day but cost per
+    conversation rose from $0.09 to $0.28. Generations per conversation went from 1.2 to 3.6 while
+    input tokens and model distribution held steady. The extra generations carry non-zero cost and
+    a `max_tokens` stop reason rather than a 429, so the provider billed for every retry – this is
+    a retry loop, not a bigger prompt or a cache miss.
+  suggestedAction: >-
+    Cap the retry count on the generation path and surface the underlying failure instead of
+    retrying silently.
+  actionNote: An agent opens the pull request – you review and merge.
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="What the scout saw: Your newest deploy went out at 09:14. Volume held, but cost per conversation didn't."
+    markerAt={0.42}
+    markerLabel="09:14 deploy"
+    series={[
+        {
+            label: 'Conversations',
+            note: 'flat at ~1,200/day',
+            values: [0.52, 0.48, 0.55, 0.5, 0.53, 0.49, 0.54, 0.51, 0.5, 0.53],
+        },
+        {
+            label: 'Cost per conversation',
+            note: '$0.09 → $0.28',
+            emphasis: true,
+            values: [0.12, 0.1, 0.14, 0.11, 0.62, 0.78, 0.85, 0.88, 0.92, 0.9],
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Generations per conversation went 1.2 → 3.6 after the 09:14 deploy while tokens and models held steady"
+/>
+
+<DetailFigure
+    n={3}
+    caption="The report opened. From here, you can review the evidence and open a pull request."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+/>
+
+<ScoutFigure n={4} caption="The scout itself – the file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# AI spend that jumps overnight
+
+An LLM bill moves for one of two reasons: more conversations, or more cost per conversation. The
+first is growth. The second is a regression – a prompt grew, a model changed, a cache stopped
+hitting, a retry looped. This scout watches your LLM traces for the second kind.
+
+## What the scout looks at
+
+The scout looks for patterns like <SeeFig n={1} />: you deployed a new version of your feature at `09:14`. Your conversation costs is rising, but volume is stable. This is a signal that LLM costs are rising. If both were rising, this is just growth.
+
+## The report in your inbox
+
+When your product emits <Term name="signal">signals</Term> that indicate AI costs are rising, a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw signals, and options to take action. Yours would look like this one, but name your events, your deploys, and your users.
+
+## The pull request you merge
+
+When you're ready to open a pull request, the agent does it for you, attaching the evidence along the way. You review and merge it like any other – nothing merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual file for this guide's custom scout.
+
+It reads more than one <Term name="signal source" />, so the report can name a likely cause, not
+just a number that moved.
+
+<Watches />
+
+## The schedule it runs on
+
+This custom scout runs **daily** by default. You can choose to run it every 30 minutes up to once a day. It only writes when something is wrong, so most days it's silent.
+
+## Add this to your scout troop
+
+<Enable />
+
+</RightPage>

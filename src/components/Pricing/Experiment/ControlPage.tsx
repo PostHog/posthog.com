@@ -1,0 +1,216 @@
+import React, { useState, useEffect } from 'react'
+import PricingExperiment from 'components/Pricing/PricingExperiment'
+import { graphql, Link, useStaticQuery } from 'gatsby'
+import { Calculator } from 'components/Pricing/Test/Calculator'
+import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
+import { Addons } from 'components/Pricing/Test/Addons'
+import { SimilarProducts } from 'components/Pricing/Test/SimilarProducts'
+import { FAQs } from 'components/Pricing/FAQs'
+import CTA from 'components/Home/CTA.js'
+// Relative, not `pages/...`: webpack aliases `components`/`hooks`/`constants` but not `pages`
+// (see the resolve block in gatsby-node.ts), so an absolute path here type-checks and then fails
+// to build.
+import Philosophy from '../../../pages/pricing/philosophy'
+import { useLocation } from '@reach/router'
+import SEO from 'components/seo'
+import ReaderView from 'components/ReaderView'
+import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
+import { SectionLayout } from 'components/Pricing/Test/Sections'
+import { scrollToElement } from 'components/ScrollToElement'
+
+/**
+ * The control variant of the pricing page experiment: `/pricing` exactly as it shipped before
+ * the redesign.
+ *
+ * This is a lift-and-shift of what used to be the body of `pages/pricing/index.tsx` — moved
+ * into a component so the page can pick between it and the redesign at runtime. Treat it as
+ * frozen for the duration of the experiment: editing the control mid-flight changes what the
+ * other two variants are being measured against.
+ *
+ * It's also the variant that gets server-rendered, so it's what crawlers and anyone whose
+ * flags never resolve will see. See `Experiment/README.md`.
+ */
+export default function ControlPage(): JSX.Element {
+    const [activePlan, setActivePlan] = useState('free')
+    const [animateFreeTiers, setAnimateFreeTiers] = useState(false)
+    const [currentModal, setCurrentModal] = useState<string | boolean>(false)
+    const [defaultTab, setDefaultTab] = useState('plans')
+    const { search } = useLocation()
+
+    const pricingTableOfContents = [
+        { url: 'cloud', value: 'PostHog Web', depth: 0 },
+        { url: 'rates', value: 'Usage-based pricing', depth: 0 },
+        { url: 'plans', value: 'Plans', depth: 0 },
+        { url: 'calculator', value: 'Pricing calculator', depth: 0 },
+        { url: 'addons', value: 'Add-ons', depth: 0 },
+        // { url: 'g2-reviews', value: 'Reviews', depth: 0 },
+        { url: 'faq', value: 'FAQ', depth: 0 },
+        { url: 'cta', value: 'Shameless CTA', depth: 0 },
+    ]
+
+    const {
+        allProductData: {
+            nodes: [{ products: billingProducts }],
+        },
+    } = useStaticQuery(graphql`
+        query {
+            allProductData {
+                nodes {
+                    products {
+                        description
+                        docs_url
+                        image_url
+                        icon_key
+                        inclusion_only
+                        contact_support
+                        addons {
+                            contact_support
+                            description
+                            docs_url
+                            image_url
+                            icon_key
+                            inclusion_only
+                            name
+                            type
+                            unit
+                            plans {
+                                description
+                                docs_url
+                                image_url
+                                name
+                                plan_key
+                                product_key
+                                unit
+                                flat_rate
+                                unit_amount_usd
+                                features {
+                                    key
+                                    name
+                                    description
+                                    category
+                                    limit
+                                    note
+                                    entitlement_only
+                                    is_plan_default
+                                    unit
+                                }
+                                tiers {
+                                    current_amount_usd
+                                    current_usage
+                                    flat_amount_usd
+                                    unit_amount_usd
+                                    up_to
+                                }
+                            }
+                        }
+                        name
+                        type
+                        unit
+                        usage_key
+                        plans {
+                            description
+                            docs_url
+                            features {
+                                key
+                                name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
+                                unit
+                            }
+                            free_allocation
+                            image_url
+                            included_if
+                            name
+                            plan_key
+                            product_key
+                            contact_support
+                            unit_amount_usd
+                            tiers {
+                                current_amount_usd
+                                current_usage
+                                flat_amount_usd
+                                unit_amount_usd
+                                up_to
+                            }
+                            unit
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        const plan = params.get('plan')
+        if (plan === 'free' || plan === 'paid') {
+            setActivePlan(plan)
+        }
+    }, [])
+
+    useEffect(() => {
+        const params = new URLSearchParams(search)
+        const tab = params.get('tab')
+        if (tab) {
+            setDefaultTab(tab)
+        }
+        const calculator = params.get('calculator')
+        if (calculator) {
+            scrollToElement('calculator')
+        }
+    }, [search])
+
+    return (
+        <ReaderView
+            hideLeftSidebar
+            tableOfContents={pricingTableOfContents}
+            showQuestions={false}
+            hideMobileTableOfContents
+        >
+            <SEO
+                title="PostHog pricing – Transparent, usage-based, generous free tier"
+                description="Find out exactly how much it costs to use PostHog (spoiler: it's cheaper than every major competitor). Generous free tiers and no unexpected bills."
+            />
+
+            <PricingExperiment
+                activePlan={activePlan}
+                setActivePlan={setActivePlan}
+                animateFreeTiers={animateFreeTiers}
+                setAnimateFreeTiers={setAnimateFreeTiers}
+                currentModal={currentModal}
+                setCurrentModal={setCurrentModal}
+                billingProducts={billingProducts}
+            />
+
+            <Philosophy />
+
+            <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
+
+            <Addons addons={billingProducts.flatMap((product: any) => product.addons || [])} />
+
+            <SimilarProducts />
+
+            <PurchasedWith />
+
+            {/* <Reviews /> */}
+
+            <SectionLayout id="faq" className="mb-12">
+                <h2 className="text-2xl m-0 mb-0 pb-6 border-b border-primary">Pricing FAQ</h2>
+                <FAQs />
+                <p className="my-6 relative">
+                    Have another pricing-related question?{' '}
+                    <Link to="/questions/topic/pricing" state={{ newWindow: true }}>
+                        Ask in our community forum.
+                    </Link>
+                </p>
+            </SectionLayout>
+            <div className="@lg:overflow-x-visible overflow-x-hidden">
+                <CTA />
+            </div>
+        </ReaderView>
+    )
+}

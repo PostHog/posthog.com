@@ -47,9 +47,9 @@ Our [pricing](/pricing) is transparent, too – no opaque add-ons or surprise ex
 
 ### 3. Built for startups and engineers
 
-PostHog is built for high-growth startups. It's simple to implement – we have many [SDKs](/docs/libraries), [tutorials](/tutorials), an [MCP server](/docs/model-context-protocol) for AI workflows, and docs to help you get started quickly with any type of app – and will grow with you as you scale. 
+PostHog is built for high-growth startups. It's simple to implement – we have many [SDKs](/docs/libraries), [tutorials](/tutorials), an [MCP server](/docs/model-context-protocol) and [CLI](/docs/cli) for AI workflows, and docs to help you get started quickly with any type of app – and will grow with you as you scale. 
 
-When you need more – [a CDP](/cdp), [data warehouse](/data-stack), or advanced analytics – you can just turn those features on. LaunchDarkly is built for enterprise teams and DevOps, with a focus on governance, compliance, and integrations that are often gated behind expensive enterprise contracts.
+When you need more – [a CDP](/cdp), [data warehouse](/context-warehouse), or advanced analytics – you can just turn those features on. LaunchDarkly is built for enterprise teams and DevOps, with a focus on governance, compliance, and integrations that are often gated behind expensive enterprise contracts.
 
 <WizardCTA />
 
@@ -151,7 +151,7 @@ As mentioned earlier, many of the security, approval, and workflow features that
 |---|---|---|
 | **Startup (1M requests/mo)** | **$0** (free tier) | Foundation plan depends on service connections and MAU. Example: ~5 connections + 5k MAU ≈ **$110/mo minimum** |
 | **Scaleup (10M requests/mo)** | **$460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045) | Mid-size setup: ~20 connections + 25k MAU ≈ **$490/mo**, not counting Experimentation MAU |
-| **Enterprise (50M requests/mo)** | **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025) | **Custom Enterprise pricing — contact sales** |
+| **Enterprise (50M requests/mo)** | **$1,460/mo** (1M free + 1M @ $0.0001 + 8M @ $0.000045 + 40M @ $0.000025) | **Custom Enterprise pricing – contact sales** |
 
 ### Reporting and analytics
 
@@ -241,6 +241,19 @@ Many of LaunchDarkly’s advanced compliance tools are only available on its ent
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Who uses PostHog?</summary>

@@ -89,6 +89,29 @@ We're not going to police your spending with hard limits but we will continue to
 Joining an offsite? _Only use the offsite budget_, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 
 
+## High-value & ongoing vendor contracts
+
+Some of what we spend money on isn't a personal subscription or a one-off purchase - it's a platform a team runs to do its work, on a contract that bills continuously and at scale. Think infrastructure like Kafka, or certain security tooling. Spend here can run into the thousands or hundreds of thousands, so it deserves more care than "I subscribed to XYZ" - the guiding principles above still apply, they just matter more.
+
+This section is about _living with_ a contract we've already got. Deciding whether to adopt a new tool in the first place is covered separately in [Adding tools](/handbook/company/adding-tools).
+
+**Who owns it?** The team that operates the vendor owns its quota and spend - in practice, the person with the most context about the contract, usually whoever proposed or operates the tool. That includes keeping an eye on usage against the contract's limits (the usage terms and limits you agreed when you signed it) so nobody is surprised by the bill. The easiest way to stay on top of this is to fold it into the vendor's own periodic review (e.g. a quarterly business review), so quota and spend get looked at on a regular cadence rather than only when something goes wrong. Loop in your exec early - they should have enough context to support and guide you.
+
+Need help getting at the financial data or the tools to track your spend? Ask in [#project-infra-tools](https://posthog.slack.com/archives/C085ZJ43HDW). We want everyone to be able to work with their spend easily, so this doesn't get in the way of shipping.
+
+**If a contract is running into overages or about to induce extra spend, flag it early.** Act as soon as it's clear an overage is likely to persist over a longer time, or to have significant consequences on the bill - don't wait for it to land repeatedly first. The whole point of watching usage is to catch it before the money is spent. Concretely:
+- The person with the most context on the contract drives this. Keep your team lead and the responsible exec aware - they own the area and help decide whether the extra spend is worth it or whether we right-size.
+- Ping `@finance-folks` in Slack as soon as the overage looks material, and take it from there. That's usually enough - it keeps Finance in the loop so they can forecast it accurately.
+- Pull in [#legal](https://posthog.slack.com/archives/C08MYQX74KH) if this is a _new_ contract, or if the legal details have changed and need a second look. Straight re-commits or renewals usually don't need legal, but a new contract always does (see [Adding tools](/handbook/company/adding-tools)).
+- For company-level tool billing, [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) is the default admin, so billing stays owned and categorized correctly. The billing email for any vendor contract is finance@posthog.com.
+
+There's no fixed dollar amount that trips a formal approval - we stay trust-based and lead with context, not permission. Use your judgement for what counts as material. But spend at this scale isn't comparable to a personal subscription, so be proactive and transparent about it _early_ rather than once the overage has already landed.
+
+Past a certain spend, it's worth challenging the tool or contract itself, if feasible - and it's up to you to decide what feasible means here. Software keeps getting cheaper, and at some point it may be cheaper to build than to buy. Pull in your exec to discuss this - it's exactly the kind of trade-off they should be weighing in on.
+
+**Renewals are the same process.** A renewal isn't a rubber stamp - do the due diligence and see where you can optimize. Vendors can usually help here, so ask them. Pull in your exec and Finance for help negotiating the terms.
+
+
 ## Frequently asked questions 🤨
 - Can I use my personal card for a work-related expense?
   - No, you **must use** your Brex or Revolut for all work-related expenses.
@@ -106,13 +129,17 @@ Joining an offsite? _Only use the offsite budget_, not your User Limit - it help
     - [Attaching receipts for multiple expenses](https://www.brex.com/support/receipts-for-expenses#attaching-receipts-to-multiple-expenses)
 - What do I do if I have a new tool/enterprise software subscription for the team to use?
   - Add [Janani](https://posthog.com/community/profiles/34497) as the Billing Admin to manage payments.
-- If I'm asked for a billing email for bill payments, what do I use?
+- If I'm asked for a billing email – for bill payments or when signing a vendor contract – what do I use?
   - Use finance@posthog.com
+- A vendor contract we rely on is running into overages / about to cost more – what do I do?
+  - Flag it early - see [High-value & ongoing vendor contracts](#high-value--ongoing-vendor-contracts). Whoever has the most context on the contract should drive, keep your team lead and the responsible exec aware, and ping `@finance-folks` in Slack as soon as the overage looks material so Finance can forecast it. Use your judgement to assess what counts as material.
 - What if I'm driving for work-related purposes?
   - You can claim a mileage reimbursement through Brex. **Do not** separately expense fuel.
 - What if I accidentally used the company card for a personal expense?
-  - Login to Brex > find the charge > click on 'Repay' > Repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md)
-  - For Revolut charges, ping [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
+  - Login to Brex > find the charge > click on 'Repay'.
+    - **US and Canada:** Brex's auto repay function works, so it'll pull the money from your connected bank account for you.
+    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md).
+  - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
 - How do I get access to WeWork?
   - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
 - What if I've received a bill I need Finance to pay?
@@ -140,27 +167,19 @@ If the inappropriate spend was due to a misunderstanding, e.g. you genuinely tho
 Talk to [Tara](https://posthog.com/community/profiles/34526) who handles most Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
-  - Apple Studio Displays are only for Product Engineers (high density screen) and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
+  - Apple Studio Displays are only for Product Engineers (high density screen), PM's and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
     - If you order a Studio Display during your probation period but end up leaving PostHog, we can recover the cost of the display and you won't need to return it.
   - Laptop guidelines
-    - For engineering roles (product, platform, & support), we recommend a Macbook Pro 14-inch M5 Pro, with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM.
+    - For engineering roles (product, platform, & support), we buy the Macbook Pro 14-inch M5 Pro 14", with the 18-core CPU, 20-core GPU upgrade and 64GB of RAM. 
     - For sales & CS roles, we buy the Macbook Pro 14-inch M5, with 10-core GPU, 16-core and the 32GB RAM upgrade.
-    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Code.
-    - Apple offers multiple screen sizes. The larger screen sizes (15 inches +), are disproportionately more expensive. If you are realistically going to do most of your work at home, it is more rational to pick a smaller laptop size, and to get a large monitor.
+    - All other roles, we issue Macbook Pros. Wherever possible we will redistribute engineering models (Macbook Pros) no longer in use to allow you to have a more powerful machine for running PostHog Desktop.
     - We only purchase laptops with an English keyboard configuration (US, International or British is fine) - this enables us to easily pass your laptop on to someone else if you upgrade or leave.
     - In the unlikely case that you need to purchase your own laptop:
       - Check if Amazon has sales before purchasing through Apple
       - US only: use your Brex since we earn cashback
-      - UK only: use your Revolut since we claim back the VAT
       - Do not get AppleCare since it doesn't have great value for money
-    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old or significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
+    - You can request a new laptop in `#team-people-and-ops` if it is over 4 years old, (for engineering machines) has less than 48GB of RAM, or is significantly impacting your productivity. We do ask that you do some diligence to make sure it's not a setup issue though - i.e. other applications aren't hogging the memory, etc.
     - Part of `#team-client-libraries` and need to purchase a phone for testing? Talk to [Tara](https://posthog.com/community/profiles/34526) in `#team-people-and-ops`.
-
-#### Yubikey (for specific roles only)
-
-Passkeys are the preferred way of securing accounts. In some cases Passkeys aren't supported by the service provider.
-
-If you find yourself in a team requiring access to these kinds of tools where a Yubikey is required then you should purchase them as recommended on the [on the MFA page](https://posthog.com/handbook/company/security#multi-factor-authentication) using your Brex card. If you aren't sure if you need one then you probably don't and should instead be using Passkeys
 
 #### Other equipment
 - Keyboard/mouse/laptop stand: Check Amazon and Apple for discounts. Refurbished items usually work just fine. [Nextstand](https://www.amazon.co.uk/NEXSTAND-K2-Adjustable-Foldable-Portable/dp/B01HHYQBB8) make great value laptop stands that are portable.
@@ -170,6 +189,8 @@ As a guide, here's what we'd consider reasonable spend:
 - Desk - up to $500
 - Chair - up to $500
 - Keyboard - up to $250
+
+If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
 
 ### Software
 We are _strongly opposed_ to introducing new software that is designed for collaboration by default. There needs to be a very significant upside to introducing a new piece of software to outweigh its cost.
@@ -188,6 +209,8 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
+- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure. We have a team Claude Code account that you can request to be added to using Zluri in slack.
+
 ### Travel
 - We travel in economy by default and do not pay for business class
   - If you're unsure of your travel plans and believe you may have to cancel, it may be worth spending a bit extra to book flex tickets that allow a full refund to your Brex
@@ -199,9 +222,18 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less.
  - Any other costs outside of the days you are required to be at an event are of course _not_ covered.
 > If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
-- We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together.
+- We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
-- When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine. 
+- When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
+  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
+
+#### Hub travel budget
+
+We encourage people to visit our hubs in SF (Hogpatch) and London (Hedgehouse). These places generally have a high density of PostHog employees around, so you'll get to meet people from other teams, which makes cross-team work much easier and more successful. SF also has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+
+There is no specific travel budget, this can come out of your general employee budget. We strongly encourage you to use your budget for this reason!
+
+If you do decide to come, we ask that you make the trip worthwhile - attend a conference, speak at an event, gather a few colleagues to come with you at the same time and work on something specific together. Don't just pop in and put your headphones in while there - make it worth your while.
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).

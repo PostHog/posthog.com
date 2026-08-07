@@ -1,0 +1,212 @@
+---
+title: Getting started with AI Observability
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
+import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
+import OSButton from 'components/OSButton'
+import WizardCommand from 'components/WizardCommand'
+
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate AI Observability!">
+
+<QuestLogItem 
+    title="Capture LLM data"
+    subtitle="Required"
+    icon="IconLlmPromptManagement"
+>
+
+AI Observability captures every call your product makes to an LLM and turns them into generations you can query, score, and get alerted on. You can:
+
+- 🔍 Read full traces and sessions when you need to go detective mode
+- ⚖️ Score response quality and sentiment with evals
+- ⚠️ Get alerts on spikes in cost, latency, errors, or negative sentiment
+- 💬 Get daily reports on how your LLM is used and performing
+- 🧑 Combine LLM data with your existing customer data
+- 🪄 Automagically turn these insights into PRs 
+
+> **New to AI observability?** See [core concepts](/docs/ai-observability/basics) for a primer on events, tokens, and traces.
+
+The first step is to install a PostHog SDK to capture conversations, requests, and responses from an LLM provider. The fastest way is our wizard, which installs the SDK and instruments your LLM calls for you (it also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+
+<WizardCommand command="ai-observability" />
+
+Prefer to do it by hand? Choose your platform below:
+
+<LLMsInstallationPlatforms columns={3} />
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Track AI generations"
+  subtitle="Required"
+  icon="IconRecord"
+>
+
+  Once you've installed the SDK, every LLM call automatically becomes a [generation](/docs/ai-observability/generations) – a detailed record of what went in and what came out. Each generation captures:
+
+  - Complete conversation context (inputs and outputs)
+  - Associated tool calls and their results
+  - Token counts and usage metrics  
+  - Response latency and performance data
+  - Automatic cost calculation based on model pricing
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
+  alt="AI generation in-app view" 
+  autoPlay
+  loop
+/>
+
+PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
+  
+<OSButton variant="primary" asLink to="/docs/ai-observability/generations">
+  Learn about generations
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Evaluate AI quality"
+  subtitle="Recommended"
+  icon="IconLineGraph"
+>
+
+  PostHog's evaluation suite scores your live generations as they happen, so you can monitor quality in production. Three evaluation types are supported:
+
+  - **LLM-as-a-judge** – an LLM scores each generation against a prompt you define
+  - **Code-based (Hog)** – deterministic checks written in code
+  - **Sentiment analysis** – classifies user sentiment as positive, neutral, or negative
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png"
+  alt="AI Observability evaluations"
+  classes="rounded"
+/>
+
+  <OSButton variant="primary" asLink to="/docs/ai-evals">
+    Measure LLM performance
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up alerting"
+  subtitle="Recommended"
+  icon="IconBell"
+>
+
+  Since every LLM event is also a standard PostHog event, you can build insights on cost, latency, errors, or sentiment and set alerts to get notified when they spike.
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_alerts_web_clean_0d31748bb1.mp4"
+    alt="Creating an anomaly alert from the AI Observability dashboard"
+    classes="rounded"
+  />
+
+  <OSButton variant="primary" asLink to="/docs/alerts">
+      Create an alert
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Integrate customer data"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  Take advantage of PostHog's [platform](/docs) to integrate your customer data with AI Observability.
+
+  ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
+
+  All AI Observability events are captured as standard PostHog events, which means you can create dashboards, trends, funnels, custom SQL queries, alerts, and more.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_da40edc407.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_dark_558f8f2cd8.png"
+    alt="LLM observability dashboard"
+    classes="rounded"
+/>
+
+  ### <IconWarning className="text-orange w-7 -mt-1 inline-block"/>  Error tracking
+
+  LLM generated errors are automatically captured in PostHog's [error tracking](/docs/error-tracking) for you to monitor, debug, and resolve.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_4edcb7d7a1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_dark_a298d3f2b7.png"
+    alt="AI Observability error tracking"
+    classes="rounded"
+/>
+
+  ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay
+  
+  Watch [session replays](/docs/session-replay) to see exactly how users interact with your LLM features.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_95b9268668.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_dark_767332d926.png"
+    alt="AI Observability session replay"
+    classes="rounded"
+/>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Power Self-driving"
+  subtitle="Recommended"
+  icon="IconBolt"
+>
+
+  Your LLM data is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving), feeding it two ways:
+
+  - ⚖️ **Eval reports** – an agent reviews your [online evaluation](/docs/ai-evals) results in batches and sends a summary of its findings to your inbox
+  - ⚠️ **Anomaly investigations** (alpha) – when an [anomaly alert](/docs/alerts#anomaly-detection) fires on a cost, latency, or error insight, an agent investigates and only reports true positives
+
+Want more control? Configure a [scout](/docs/self-driving/scouts) – a scheduled agent that explores your LLM data on your terms and files what it finds as signals and reports.
+
+Reports land in your [inbox](/docs/self-driving/inbox), where one click turns them into a PR.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_self_driving_setup_a065ecc0a1.mp4"
+  alt="Setting up the AI Observability signal source for Self-driving"
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/self-driving">
+  Set up Self-driving
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 100k events/mo"
+  icon="IconPiggyBank"
+>
+
+  PostHog AI Observability is designed to be cost-effective with a generous free tier and transparent usage-based pricing. Since we don't charge per seat, more than 90% of companies use PostHog for free.
+
+### TL;DR 💸
+
+  - No credit card required to start
+  - First 100K LLM events per month are free with 30-day retention
+  - Above 100k, we have volume-based pricing starting at $0.00035/event and falling to $0.00006/event as volume grows
+  - Set billing limits to avoid surprise charges
+  - See our [pricing page](/pricing) for more up-to-date details
+
+--- 
+
+That's it! You're ready to start integrating.
+
+  <OSButton variant="primary" asLink to="/docs/ai-observability/installation">
+    Install AI Observability
+  </OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

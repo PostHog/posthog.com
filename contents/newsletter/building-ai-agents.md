@@ -73,7 +73,7 @@ Our third and current harness uses the Claude Agent SDK with MCP tools and skill
 
 2. **Agents are a primary persona.** Our “users” are increasingly agents, whether that is through PostHog AI or [our MCP server](/docs/model-context-protocol). Our work here should converge and support both using a single architecture.
 
-The flexibility of the sandbox plus the scalability of MCP tools and skill standards (which I’ll explain more about later) solves the issues of the second harness and positions us better for an agent-first future.
+The flexibility of the sandbox plus the scalability of MCP tools and skill standards (which I’ll explain more about later) solves the issues of the second harness and positions us better for an [agent-first future](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first).
 
 ![Harness](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/image_13_072d8c5986.jpg)
 
@@ -81,7 +81,7 @@ The flexibility of the sandbox plus the scalability of MCP tools and skill stand
 
 When building an agent, there’s ultimately one question you need to answer to succeed: How does this beat Claude?
 
-Context is the most important part of an answer. The combination of your app’s functionality and user data create a unique blend no other product can match.
+Context is the most important part of an answer. The combination of your app’s functionality and user data create a unique blend no other product can match. 
 
 Although you have product and user context sitting around, you need structure and format it to be useful for the agent. We do this with:
 
@@ -105,21 +105,21 @@ These are essential as AI agents are non-deterministic and can [fail in unpredic
 
 We didn’t have observability and evaluation early and regretted it. We wish we had:
 
-- [Tracing](/docs/llm-analytics/traces) for every LLM call with inputs, outputs, latency, and cost
+- [Tracing](/docs/ai-observability/traces) for every LLM call with inputs, outputs, latency, and cost
 
 - Trace IDs that span the full conversation
 
-- The ability to replay and debug [specific interactions](/docs/llm-analytics/sessions)
+- The ability to replay and debug [specific interactions](/docs/ai-observability/sessions)
 
-- A [curated datasets](/docs/llm-analytics/clusters) of real user queries
+- A [curated datasets](/docs/ai-observability/clusters) of real user queries
 
 - Automated scorers like [LLM-as-judge](/blog/stop-ai-slop) and deterministic checks
 
-Basically, [LLM analytics](/llm-analytics).
+Basically, [AI Observability](/llm-analytics).
 
-Unfortunately, LLM analytics alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
+Unfortunately, AI Observability alone isn’t enough. Reality is gnarly and to deal with it, our team often looks at real usage.
 
-They run a “traces hour,” where they meet, manually analyze LLM traces (AKA real user interactions), and find areas to improve. [Evals](/docs/llm-analytics/evaluations) make the most sense when they stem from these investigations.
+They run a “traces hour,” where they meet, manually analyze LLM traces (AKA real user interactions), and find areas to improve. [Evals](/docs/ai-evals) make the most sense when they stem from these investigations.
 
 Like building any successful product, understanding a user’s experience is critical to building a successful agent.
 

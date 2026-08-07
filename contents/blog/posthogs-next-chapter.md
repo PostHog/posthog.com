@@ -51,7 +51,7 @@ It relied on agents answering questions in one shot, so it frequently made mista
 
 FOMO got the better of me and I pushed this in our marketing too early. It felt good enough to be sort of useful, and I felt the pressure of new companies generating gazillions in revenue seemingly overnight – many of them were PostHog customers!
 
-It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's LLM Analytics](/llm-analytics)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
+It was a mixed start, but belief remained. We ran regular traces hours, where we looked at LLM calls (hey, you should try [PostHog's AI Observability](/llm-analytics)!) and worked out what went wrong when our users had a poor experience. We kept iterating.
 
 The breakthrough was moving to a single query loop architecture, so the agent could iterate and make sense of all the atomic endpoints from our products. Now, if a graph was empty, the agent would question this and try to figure out if a different event or property was better.
 
@@ -65,7 +65,7 @@ The other breakthrough was our [AI-powered onboarding wizard](/docs/ai-engineeri
 
 The momentum feels irresistible now and the data backs that up. Last week, the majority of dashboards were created by agents via PostHog AI, MCP, our API, or our onboarding wizard. That's a huge shift and the trend is accelerating – MCP usage is roughly doubling every month.
 
-This trend is forcing us to rethink everything: our core UX, positioning, marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
+This trend is forcing us to rethink everything: our core UX, [positioning](/blog/repositioning-posthog), marketing. Everything. It's the most full-on time since we were getting the company off the ground during our YC batch in 2020. Right now, we're focused on:
 
 ### 1) Making PostHog easier for agents to use
 
@@ -83,13 +83,13 @@ There are a ton of things about to start appearing here, such as proactive agent
 
 We want product development to feel increasingly self-driven by agents that you direct. This requires long-running agents that understand your product and your goals; agents that can take a huge list of problems that need solving and get to work for you, freeing you up to focus on more strategic work.
 
-Our long-running agents will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
+Our [long-running agents](/newsletter/2030-shaped-software#be-everywhere) will likely have global skills and context specific to you based on your codebase, your website, and your git history, for example. PostHog is already where your product context lives, and we want to enhance that in every way possible.
 
 ## Turning PostHog into a doing company
 
 This is the common thread connecting all this work. The PostHog of the future isn't read-only analytics. We want to solve the low-level tasks in building software, the less creative but important work, so you can spend more time on high impact work.
 
-We want [PostHog to code in response to problems we find](/code), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
+We want [PostHog to code in response to problems we find](/desktop), taking users straight to the solution, and to handle support tickets given we already have all the context of what went wrong, and lots more! Watch out for an announcement about this soon.
 
 These are big bets and our UX will be in flux as a result for a while. I'm sorry if the changes here are aggravating, but your feedback, the data, and our subjective experience suggest a little short-term pain will be worth it.
 

@@ -1,32 +1,122 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { IconActivity } from '@posthog/icons'
+import {
+    IconActivity,
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+} from '@posthog/icons'
+import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
+import { features } from './logs/features'
+import { applications, topFeatures } from './logs/slides'
+import { getTool } from '../../data/tools'
+
+const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 
 export const logs = {
-    name: 'Logs',
+    ...getTool('logs'),
     Icon: IconActivity,
-    description: 'Search and analyze your logs in PostHog',
-    handle: 'logs',
+    productVariantName: 'Logs ingestion (14-day retention)',
     type: 'logs',
-    slug: 'logs',
+    teamSlug: 'apm',
+    // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
+    // forumTopicId: /* create topic, then uncomment community menu item below */,
     color: 'red',
     colorSecondary: 'green-2',
-    category: 'product_engineering',
     wizardSupport: 'Coming soon',
-    slider: {
-        // Values in GB (display_friendly=true converts MB to GB)
-        marks: [50, 100, 500, 1000, 5000],
-        min: 50,
-        max: 5000,
-    },
-    volume: 50,
+    includeAddonRates: true,
+    // From contents/docs/logs/pricing.mdx
+    pricingDescription:
+        'Logs is billed by the number of GB ingested. The price per GB changes based on your usage. Retention is 14 days by default; extend newly ingested logs to 30 days with an add-on.',
     seo: {
-        title: 'Logs that sync with customer data',
-        description: 'Full backend context, with events, requests, and state changes in one place',
+        title: 'Logs – Centralized log management with PostHog',
+        description:
+            'Works with your existing OTel setup. Backend context, user data, and session replays in one place – the context agents use to find a bug and ship the fix.',
     },
+    /**
+     * Sections rendered on the Product surface (`/logs`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        // Needs forumTopicId once a Logs community topic exists.
+        // { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/logs/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
-        title: 'Logs that sync with customer data',
-        description: 'Full backend context, with events, requests, and state changes in one place',
+        title: 'Logs that already know your users',
+        description:
+            'Events, requests, state changes, and session replays in one place – one of the tools that makes your product self-driving by giving agents the backend signal to find a bug and ship the fix, tied to the user who hit it.',
+        eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -36,14 +126,24 @@ export const logs = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
-        alt: 'A hedgehog perusing some logs',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+        alt: 'A hedgehog in its log store',
         classes: 'hidden @2xl:block max-w-sm',
+        footerClasses: 'max-w-[240px]',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/log_hog_55f5aaca56.png',
+            alt: 'A hedgehog perusing some logs',
+        },
+        mobileHog: {
+            Component: HedgehogMagnifyingGlass,
+            alt: logsHogAlt,
+        },
     },
     screenshots: {
         overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_overview_5408b3bed3.png',
-            // srcMobile: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_overview_mobile_b9565d0690.png',
             alt: 'Logs overview',
             classes: 'max-w-5xl mt-auto',
             imgClasses: '',
@@ -58,117 +158,83 @@ export const logs = {
             imgClasses: 'rounded-tl-md shadow-2xl',
         },
     },
+    slider: {
+        // Values in GB (display_friendly=true converts MB to GB)
+        marks: [0, 10, 50, 100, 500, 1000, 5000],
+        min: 0,
+        scaleMin: 1,
+        max: 5000,
+    },
+    volume: 10,
+    freeAllocationText: 'First 10 GB free – every month!',
+    addonSliders: [
+        {
+            key: 'logs_retention_30d',
+            label: '30-day retention',
+            // Billing meters all ingested GB (any retention) on the base logs product, then bills
+            // 30-day GB again at the add-on rate as a storage premium.
+            countsTowardParentVolume: true,
+            note: 'These GB also count toward logs ingestion above – this price is just the added cost of storing them longer.',
+            sliderConfig: {
+                marks: [0, 10, 50, 100, 500, 1000, 5000],
+                min: 0,
+                scaleMin: 1,
+                max: 5000,
+            },
+            volume: 0,
+            unit: 'GB',
+            freeAllocation: 0,
+        },
+    ],
     customers: {
         key: {
             headline: '',
             description: '',
         },
     },
-    features: [
-        {
-            title: 'Queryable logs',
-            headline: 'Logs you can actually query',
-            template: 'splitImage',
-            description: 'Filter, aggregate, and explore logs by attributes instead of scrolling text',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_1_light_40dd0d8b26.png',
-                    alt: 'Queryable logs',
-                    className: 'justify-center items-center mt-12',
-                },
+    // Roles/scenarios reshaped from contents/docs/logs/basics.mdx ("When logs save you")
+    // and link-person / link-session-replay docs.
+    useCases: {
+        intro: 'Logs is used across teams depending on your role.',
+        rows: [
+            [
+                'Product Engineers',
+                "Debug production issues that analytics and error tracking alone can't explain – cache misses, third-party lag, silent parse failures",
             ],
-            features: [
-                {
-                    title: 'Fast, reactive filtering',
-                    description: 'Slice by surface, severity, or attributes and see patterns update instantly',
-                },
-                {
-                    title: 'Visual feedback as you search',
-                    description: 'Sparklines respond in real time so spikes and anomalies stand out immediately',
-                },
-                {
-                    title: 'Attribute-driven navigation',
-                    description:
-                        'Pivot the entire log view around IDs and attributes instead of scrolling line by line',
-                },
+            [
+                'Support Engineers',
+                'Jump from a person profile or session replay to every backend log written while that user was active',
             ],
-        },
-        {
-            title: 'Built on OpenTelemetry',
-            template: 'splitImage',
-            headline: 'Built on OpenTelemetry',
-            description: 'Bring your existing logs without changing how you instrument',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_2_light_160af6be32.png',
-                    alt: 'Built on OpenTelemetry',
-                    className: 'justify-center items-center mt-12',
-                },
+            [
+                'Platform / DevOps',
+                'Alert on error volume by service, mine patterns after a deploy, and catch services that go quiet',
             ],
-            features: [
-                {
-                    title: 'OTLP-compatible ingestion',
-                    description: 'Send logs using standard OpenTelemetry SDKs. No proprietary agents required.',
-                },
-                {
-                    title: 'No lock-in',
-                    description: 'Your logging setup stays portable and standards-based',
-                },
-                {
-                    title: 'Logs where your context already is',
-                    description:
-                        'Logs behave like your typical log tool. Having them right inside PostHog just adds the missing context',
-                },
+            [
+                'Backend Engineers',
+                'Inspect background jobs and request paths with no UI – the only window when something vanishes into a black box',
             ],
-        },
-
-        {
-            title: 'Full stack context',
-            template: 'splitImage',
-            headline: 'Front end and back end context together',
-            description: 'Follow an issue from the browser to the backend in a single tool',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/logs_3_light_4a3138862f.png',
-                    alt: 'Full stack context',
-                    className: 'justify-center items-center mt-12',
-                },
+            [
+                'AI-assisted teams',
+                'Let coding agents query structured logs over MCP to find the bug and draft the fix without leaving the editor',
             ],
-            features: [
-                {
-                    title: 'Browser logs captured automatically',
-                    description:
-                        'Frontend logs from PostHog JS are ingested alongside backend logs – no extra setup required',
-                },
-                {
-                    title: 'Linked to real users and sessions',
-                    description:
-                        'Frontend log entries are automatically associated with user IDs and session replays. Click on the user ID when debugging and immediately watch the session replay.',
-                },
-                {
-                    title: 'One investigation, not four tools',
-                    description: 'Session replay, errors, analytics, and logs stay connected as you debug',
-                },
-            ],
-        },
-
-        {
-            title: 'AI',
-            handle: 'ai',
-            template: 'grid',
-            className: 'bg-blue',
-            headline: 'Get a sanity check from AI ✨',
-            description:
-                'PostHog AI can give on-demand summaries and highlight patterns. Think of it as your automatic backup; a second set of eyes on the problem.',
-            children: (
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/logs_4_light_6b4cc017f6.png"
-                    alt="AI"
-                    className="w-full h-full object-contain"
-                />
-            ),
-        },
-    ],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Debug logs from your editor',
+        description:
+            'Let your coding agent query logs, mine patterns, and manage alerts from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    // Description from contents/docs/logs/installation/index.mdx
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description:
+            "PostHog Logs works with any OpenTelemetry-compatible client. You don't need any PostHog-specific packages – just use standard OpenTelemetry libraries.",
+        productSlug: 'logs',
+        categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
+    },
     postHogOnPostHog: {
         title: 'How PostHog uses Logs',
         benefits: [
@@ -202,6 +268,9 @@ export const logs = {
             ],
             us: [
                 {
+                    title: 'Agents can act on your logs to find a bug and ship the fix – the context that powers self-driving',
+                },
+                {
                     title: 'You want debugging context to stay connected automatically',
                 },
                 {
@@ -220,7 +289,6 @@ export const logs = {
             {
                 name: 'Grafana (Loki)',
                 key: 'grafana_loki',
-                // link: '/blog/posthog-vs-langfuse',
             },
             {
                 name: 'Better Stack',
@@ -229,12 +297,10 @@ export const logs = {
             {
                 name: 'Datadog',
                 key: 'datadog',
-                // link: '/blog/posthog-vs-langsmith',
             },
             {
                 name: 'Elastic',
                 key: 'elastic',
-                // link: '/blog/posthog-vs-elastic',
             },
             {
                 name: 'PostHog',
@@ -244,27 +310,74 @@ export const logs = {
         rows: ['logs', 'logs.pricing.features'],
         excluded_sections: ['platform', 'pricing'],
     },
-    // pairsWith: [
-    //     {
-    //         slug: 'product-analytics',
-    //         description: 'Correlate AI usage with user behavior and business metrics',
-    //     },
-    //     {
-    //         slug: 'dashboards',
-    //         description: 'Build custom dashboards combining LLM and product metrics',
-    //     },
-    //     {
-    //         slug: 'session-replay',
-    //         description: 'Watch how users interact with AI features in real sessions',
-    //     },
-    //     {
-    //         slug: 'feature-flags',
-    //         description: 'Roll out AI features gradually and test different models',
-    //     },
-    // ],
-    // worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
-    // presenterNotes: {
-    //     overview:
-    //         '<strong>Presenter notes:</strong> Track conversations, model performance, spans, costs, latency, and traces in LLM applications – all as regular PostHog events - roughly 10x cheaper than other LLM observability tools.',
-    // },
+    // Descriptions reshaped from contents/docs/logs/basics.mdx + link-session-replay / link-person
+    pairsWith: [
+        {
+            slug: 'session-replay',
+            description:
+                'Navigate from a log entry directly to the session replay to see what the user was doing when the backend failed',
+        },
+        {
+            slug: 'error-tracking',
+            description: 'See Error Tracking issues that occurred during the same session directly in the log details',
+        },
+        {
+            slug: 'product-analytics',
+            description:
+                'Go from a log line to product analytics for the same user – what they did, which path they took, and what broke in between',
+        },
+        {
+            slug: 'feature-flags',
+            description:
+                'Include flag variants in log context so you can see which experiment or rollout a failing request was on',
+        },
+    ],
+    worksWith: ['session_replay', 'error_tracking', 'product_analytics', 'feature_flags'],
+    ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/night_hog_219fff00f3.png',
+        imageAlt: 'A hedgehog asleep at a laptop after a long log dive',
+        description: 'find the bug in your logs and ship the fix',
+        intro: 'Ask PostHog AI to find error logs, mine patterns, and explain what changed.',
+        mcpFeatures: ['logs'],
+        skills: [
+            'Finds the exact log lines you need with natural language – no query syntax required',
+            'Summarizes patterns, surfaces anomalies, and explains likely causes from a sea of log entries',
+            'Connects log entries to related session replays, errors, and analytics for full debugging context',
+        ],
+        // Groups reshape the old `prompts` plus example prompts from
+        // contents/docs/logs/surfaces/mcp.mdx. Tool names verified against mcp-tools.json.
+        groups: [
+            {
+                title: 'Query',
+                tool: 'query-logs',
+                prompts: [
+                    'Show me all error-level logs from the payments service in the last hour',
+                    'Show me all error logs from the last hour',
+                    'Find logs related to the spike in 500 errors after the latest deploy',
+                    'Find logs related to trace ID abc123',
+                    'Show me warning and error logs from the last 24 hours, excluding debug noise',
+                ],
+            },
+            {
+                title: 'Patterns',
+                tool: 'logs-patterns',
+                prompts: ["Summarize the most common errors users hit yesterday and what's causing them"],
+            },
+            {
+                title: 'Compare windows',
+                tool: 'logs-patterns-diff',
+                prompts: ["Compare log patterns from today against yesterday and show me what's new"],
+            },
+            {
+                title: 'Explore schema',
+                tool: 'logs-attributes-list',
+                prompts: ['What log attributes are available? Show me the values for service.name'],
+            },
+            {
+                title: 'Services',
+                tool: 'logs-services-create',
+                prompts: ['What services are logging errors? Search for error logs from the payments service'],
+            },
+        ],
+    },
 }

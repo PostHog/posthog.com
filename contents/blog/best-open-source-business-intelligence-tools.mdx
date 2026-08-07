@@ -80,7 +80,7 @@ PostHog is an all-in-one developer platform that combines business intelligence 
 
 Its business intelligence stack contains three key pieces:
 
-1. A [data warehouse](/data-stack) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
+1. A [data warehouse](/context-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
 
 2. [Product analytics](/docs/product-analytics) which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
 
@@ -92,7 +92,7 @@ PostHog has the flexibility of a business intelligence tool, while including a f
 
 For example, not only can you analyze [A/B tests from warehouse data](/docs/experiments/data-warehouse) in PostHog, but you can actually set up and run them natively using our experimentation and feature flag products. You don't need to set up four different products, just PostHog.
 
-[PostHog AI](/ai) can also generate and fix SQL queries, answer questions about your data, and more. The [MCP server](/docs/model-context-protocol) enables your [AI agents](/newsletter/building-ai-agents) and tools to directly interact with PostHog's products.
+[PostHog AI](/ai) can also generate and fix SQL queries, answer questions about your data, and more. The [MCP server](/docs/model-context-protocol) and [CLI](/docs/cli) enable your [AI agents](/newsletter/building-ai-agents) and tools to directly interact with PostHog's products.
 
 PostHog comes with 1 million events and 1 million rows synced for free every month, and has [transparent and usage-based pricing](/pricing).
 
@@ -101,6 +101,19 @@ You can use the [setup wizard](/wizard) to get started in minutes – no credit 
 <WizardCTA />
 
 #### FAQ
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
   <summary>What tools does PostHog replace?</summary>
@@ -155,7 +168,7 @@ Metabase is a simpler alternative to BI tools like Tableau, Power BI, and Looker
 <details>
   <summary>Can it connect to my data warehouse?</summary>
 
-Metabase can connect to a bunch of popular databases including BigQuery, ClickHouse, Databricks, MongoDB, PostgreSQL, Redshift, Snowflake, and more.
+Metabase can connect to a bunch of popular databases including BigQuery, ClickHouse, Databricks, MongoDB, PostgreSQL, Redshift, Snowflake, [DuckDB](/blog/duckdb-vs-clickhouse), and more.
 
 </details>
 <details>
@@ -515,7 +528,7 @@ For most teams, a managed cloud option (PostHog Cloud, Metabase Cloud, Grafana C
 <details>
   <summary>Can I use PostHog as a BI tool?</summary>
 
-Yes. PostHog includes a [data warehouse](/data-stack) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
+Yes. PostHog includes a [data warehouse](/context-warehouse) that syncs with external sources like Stripe, HubSpot, Postgres, Snowflake, and BigQuery. 
 
 You can query this data alongside your product events using PostHog's [SQL editor](/docs/data-warehouse/query), build dashboards, and share insights across your team – all from the same platform where you run product analytics, session replay, and feature flags.
 

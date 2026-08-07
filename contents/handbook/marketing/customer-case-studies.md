@@ -8,7 +8,7 @@ Case studies should make our users look smart, our products look useful, and Pos
 
 **Things we don't care about:**
 - if they pay us or not (most customers don't)
-- if they use every tool in the box (they might be a power user of only one product)
+- if they use every tool in the box (they might be a power user of only one tool)
 - if they have a recognizable brand (big logos are nice, but more frequent, smaller stories often beat enterprise red tape)
 
 **Things we do care about:**
@@ -63,7 +63,7 @@ Do what you need to do. The goal is to get the rubber stamp.
 >If your draft might include anything private such as screenshots of customer dashboards, keep it in an internal repo like <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">requests-for-comments-internal</PrivateLink> just to be safe.
 
 ### 7. Publish!
-Most people are excited to be featured and will sign off quickly. If you need artwork to go with the case study, use the [art or brand request template](https://github.com/PostHog/posthog.com/issues/new/choose) 
+Most people are excited to be featured and will sign off quickly. If you need artwork to go with the case study, use the [art or brand request template](https://github.com/PostHog/marketing/issues/new/choose) 
 
 Once the case study is merged and live on the website, the last step is to send a merch credit to the participants as thank you.
 

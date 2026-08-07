@@ -36,7 +36,7 @@ At a minimum, most good error tracking tools will offer things like:
 -   Full stack traces, source maps, and contextual metadata
 -   Alerts and assignment workflows for triage
 -   SDKs for major languages and frameworks
--   Integration with CI/CD, logs, and performance data
+-   Integration with CI/CD, [logs](/blog/best-log-monitoring-tools), and performance data
 
 The absolute best error tools tend to go a bit further by including things like:
 
@@ -255,6 +255,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## FAQ
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
   <summary>What's the best error tracking tool for developers?</summary>
 
 If you want full context, including stack traces, user sessions, and console logs, **PostHog** is the best choice. It combines error tracking, session replay, analytics, and feature flags in one platform. For large-scale reliability and performance monitoring, **Sentry** is another strong option.
@@ -271,7 +284,7 @@ If you want full context, including stack traces, user sessions, and console log
 <details>
   <summary>Are there open-source error tracking tools?</summary>
 
-Yes. **PostHog**, **Sentry**, and **GlitchTip** all offer open-source editions. These options are ideal for teams who want full data ownership and flexibility in how they run their error tracking systems.
+Yes. **PostHog** (MIT) and **GlitchTip** (MIT) offer open-source editions. **Sentry** is self-hostable with its main web app source-available under the Functional Source License (FSL), which converts to Apache-2.0 after two years. These options are ideal for teams who want full data ownership and flexibility in how they run their error tracking systems.
 
 </details>
 

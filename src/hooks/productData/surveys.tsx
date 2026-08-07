@@ -1,36 +1,203 @@
 import React from 'react'
-import { IconMessage } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import { IconJavaScript, IconApple, IconAndroid, IconReactNative, IconFlutter } from 'components/OSIcons'
-import Link from 'components/Link'
-import { Shadow } from '@inkeep/cxkit-react'
-import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
+import {
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
+} from '@posthog/icons'
+import { features } from './surveys/features'
+import { applications, topFeatures } from './surveys/slides'
 
 export const surveys = {
+    ...getTool('surveys'),
     Icon: IconMessage,
     name: 'Surveys',
+    description: 'Ask users anything with no-code surveys',
     handle: 'surveys',
     type: 'surveys',
     slug: 'surveys',
+    teamSlug: 'surveys',
+    forumTopicId: 347,
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'communication',
     shortDescription: 'Ask users anything with no-code surveys',
+    pricingDescription:
+        'Your first 1500 survey responses are free every month, then pay for what you use. No limits on surveys created or questions asked.',
     seo: {
         title: 'Surveys – Collect product feedback with PostHog',
         description:
             'Collect and analyze product feedback with Surveys. Launch customizable no-code surveys fast on web and mobile with templates for NPS, CSAT, user interviews, and more.',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_b918a1f9e9.jpg',
     },
+    /**
+     * Sections rendered on the Product surface (`/surveys`). Each entry
+     * resolves to a section template via `templateRegistry[item.template ?? item.slug]`,
+     * so the slug doubles as the lookup key when no explicit `template` is set.
+     * `props` is passed straight to the resolved section component (used here to
+     * feed the carousel templates their slide arrays).
+     */
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        {
+            slug: 'ask-anything',
+            name: 'AI prompts',
+            group: 'divided',
+            icon: <IconChat className="size-4" />,
+        },
+        {
+            slug: 'installation',
+            name: 'Install',
+            group: 'divided',
+            icon: <IconCode className="size-4" />,
+        },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+    ],
+    /**
+     * Sections rendered on the Pricing surface (`/surveys/pricing`).
+     * Same shape as `productMenu`.
+     */
+    pricingMenu: [
+        { slug: 'plans', name: 'Plans', icon: <IconCheckCircle className="size-4" /> },
+        { slug: 'calculator', name: 'Pricing calculator', icon: <IconPieChart className="size-4" /> },
+        { slug: 'comparison-summary', name: 'PostHog vs...', icon: <IconList className="size-4" /> },
+        // Hidden footer CTA rendered at the bottom of the Pricing surface.
+        { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
+    ],
     overview: {
         title: 'Ask anything with no-code surveys',
         description:
-            'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
+            'Surveys is one of the tools that makes your product self-driving: the user feedback agents use to see what works. Built to natively work with product analytics, session replay, feature flags, and experiments.',
+        eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
     videos: {
         overview: {
             wistia: 'qn3p9oer5q',
         },
+    },
+    screenshots: {
+        overview: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png',
+            alt: 'Screenshot of survey results in PostHog',
+            classes: '',
+        },
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png',
+            alt: 'Surveys screenshot',
+            classes: 'justify-end items-end pl-4 @lg:pl-6',
+            imgClasses: 'rounded-tl-md shadow-2xl',
+        },
+    },
+    hog: {
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hoggie_mail_48daf2f4b4.png',
+        alt: 'A hedgehog posting a survey response',
+        classes: 'absolute bottom-0 right-0 max-w-md',
+        footerClasses: 'max-w-[240px]',
+    },
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
+            alt: 'A hedgehog taking a survey with a rating scale',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_hog_99cd6e8e8b.png',
+            alt: 'A hedgehog looking at survey results',
+        },
+    },
+    slider: {
+        marks: [1500, 5000, 20000, 100000],
+        min: 1500,
+        max: 100000,
+    },
+    volume: 1500,
+    pricing: {
+        free_tier: '1500 responses/month',
+    },
+    customers: {
+        purplewave: {
+            headline: 'reached a 25% response rate with surveys',
+            description:
+                'I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform.',
+        },
+        elevenlabs: {
+            headline: 'uses surveys to organize interviews and more',
+            description:
+                'We even use surveys to send a little pop-up to our most active users and ask them to review us on G2.',
+        },
+    },
+    useCases: {
+        intro: 'Surveys is used across teams depending on your role.',
+        rows: [
+            ['Product Managers', 'Run NPS, PMF, and CSAT surveys, or book user interviews from in-app templates'],
+            ['Product Engineers', 'Gather beta feedback tied to feature flags after a rollout'],
+            ['Growth Engineers', 'Ask the right cohort at the right moment – after activation, purchase, or churn'],
+            [
+                'Support Engineers',
+                'Trigger satisfaction surveys after solved tickets and route urgent feedback to Slack',
+            ],
+            ['Founders', 'Collect testimonials and qualitative signal without a separate survey tool'],
+        ],
+    },
+    features,
+    mcp: {
+        title: 'MCP',
+        headline: 'Manage surveys from your editor',
+        description:
+            'Create, update, and analyze surveys from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
+    },
+    installation: {
+        title: 'Install',
+        headline: 'Install',
+        description: 'SDKs for web and mobile – or build a custom UI with the Surveys API.',
+        productSlug: 'surveys',
+        categories: ['web', 'mobile', 'no-code'],
     },
     postHogOnPostHog: {
         title: 'How PostHog uses Surveys',
@@ -57,297 +224,6 @@ export const surveys = {
             },
         ],
     },
-    screenshots: {
-        overview: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png',
-            alt: 'Screenshot of survey results in PostHog',
-            classes: '',
-        },
-        home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_light_3dfb9f57e9.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_surveys_dark_a492c37d9c.png',
-            alt: 'Surveys screenshot',
-            classes: 'justify-end items-end pl-4 @lg:pl-6',
-            imgClasses: 'rounded-tl-md shadow-2xl',
-        },
-    },
-    hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
-        alt: 'A hedgehog looking at survey results',
-        classes: 'absolute bottom-0 right-0 max-w-md',
-    },
-    slider: {
-        marks: [1500, 5000, 20000, 100000],
-        min: 1500,
-        max: 100000,
-    },
-    volume: 1500,
-    pricing: {
-        free_tier: '1500 responses/month',
-    },
-    customers: {
-        purplewave: {
-            headline: 'reached a 25% response rate with surveys',
-            description:
-                'I hate having to switch software. With PostHog, all our data and survey responses were centralized in one platform.',
-        },
-        elevenlabs: {
-            headline: 'uses surveys to organize interviews and more',
-            description:
-                'We even use surveys to send a little pop-up to our most active users and ask them to review us on G2.',
-        },
-    },
-    features: [
-        {
-            title: 'Question types',
-            headline: 'Question types',
-            description: 'Multiple choice, multi-select, numerical rating, emoji reaction, embedded links',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/question-types.png',
-                    alt: 'Question types',
-                },
-            ],
-        },
-        {
-            title: 'Templates',
-            headline: 'Templates',
-            description: 'Choose from the library or start from scratch',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/templates.png',
-                    alt: 'Templates',
-                    stylize: true,
-                },
-            ],
-        },
-        {
-            title: 'Display conditions',
-            headline: 'Display conditions',
-            description:
-                'Display surveys based on URL, person property, or feature flag when used with Feature Flags. You can also trigger a survey to open when an event occurs – either every time the event is sent or just once.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg',
-                    alt: 'Display conditions',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Presentation options',
-            headline: 'Presentation options',
-            description:
-                'Surveys can be displayed in your app as a popover (like one that sits in the bottom corner of the screen) or a feedback button. You can also get a shareable URL for a hosted survey or create a completely custom experience using the API.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg',
-                    alt: 'Presentation options',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Multi-step surveys',
-            headline: 'Multi-step surveys',
-            description:
-                'Define the next step based on the response received for <em>single choice</em> and <em>rating</em> questions.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_branching_singlechoice_8053dd1700.png',
-                    srcDark:
-                        'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_branching_singlechoice_dark_0ec63f974a.png',
-                    alt: 'Multi-step surveys',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Link somewhere',
-            headline: 'Link somewhere',
-            description: 'Send users to a webpage or invite them to book a meeting with a calendar invite',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/link-scheduler.png',
-                    alt: 'Link somewhere',
-                },
-            ],
-        },
-        {
-            title: 'No-code and API',
-            headline: 'No-code? Yes. API? Also yes.',
-            description:
-                'Using PostHog.js? No more code required. But want to create your own UI? Check out the Surveys API.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/api.png',
-                    alt: 'No-code and API',
-                    stylize: true,
-                    shadow: true,
-                },
-            ],
-        },
-        {
-            title: 'Supported platforms',
-            headline: 'Supported platforms',
-            description: 'Survey users across web and mobile..',
-            children: (
-                <div className="max-w-xl mx-auto">
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Web</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconJavaScript />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/surveys/installation/web"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>JavaScript</span>
-                        </OSButton>
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Mobile</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconApple />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/surveys/installation/ios"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>iOS</span>
-                        </OSButton>
-                        {/* <OSButton
-                            asLink
-                            icon={<IconAndroid />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/libraries/android"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Android</span>
-                        </OSButton> */}
-                    </fieldset>
-                    <fieldset className="bg-primary">
-                        <legend className="text-lg font-semibold">Cross-platform*</legend>
-                        <OSButton
-                            asLink
-                            icon={<IconReactNative />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/surveys/installation/react-native"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>React Native</span>
-                        </OSButton>
-                        <OSButton
-                            asLink
-                            icon={<IconFlutter />}
-                            iconClassName="size-8 relative -top-px"
-                            size="xl"
-                            className="!text-xl mr-1"
-                            to="/docs/surveys/installation/flutter"
-                            state={{
-                                newWindow: true,
-                            }}
-                        >
-                            <span>Flutter</span>
-                        </OSButton>
-                    </fieldset>
-                </div>
-            ),
-        },
-        {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Hosted surveys',
-                    description:
-                        'Get a shareable URL to a survey that you can send directly to your users or embed in your website using an iframe',
-                },
-                {
-                    title: 'Capture partial responses',
-                    description:
-                        'Log responses to individual questions as they are received, rather than waiting for the survey to complete',
-                },
-                {
-                    title: 'Completion conditions',
-                    description: 'Configure the survey to repeat on a schedule or when the display conditions are met',
-                },
-                {
-                    title: 'Customizable wait periods',
-                    description: 'Set a delay before a survey opens',
-                },
-                {
-                    title: 'Aggregated results',
-                    description: 'See feedback summarized and broken down per response',
-                },
-                {
-                    title: 'Send responses to Slack',
-                    description: 'Send realtime survey responses to a Slack channel',
-                },
-                {
-                    title: 'Send responses to CDP destinations',
-                    description: (
-                        <>
-                            {'Browse our '}
-                            <Link to="/cdp?type=destination" state={{ newWindow: true }}>
-                                {'destination library'}
-                            </Link>
-                            {' to explore the possibilities'}
-                        </>
-                    ),
-                },
-            ],
-        },
-        {
-            title: 'MCP',
-            headline: 'Manage surveys from your editor',
-            description:
-                'Create, update, and analyze surveys from Cursor, Claude Code, VS Code, or any MCP-compatible agent.',
-            features: [
-                {
-                    title: 'Create surveys',
-                    description: 'Spin up a new in-app survey without switching to the PostHog UI.',
-                },
-                {
-                    title: 'Check survey performance',
-                    description: 'Pull response rates, completion stats, and results for any survey.',
-                },
-                {
-                    title: 'Iterate on live surveys',
-                    description: 'Update questions, targeting, or appearance of surveys without leaving your editor.',
-                },
-                {
-                    title: 'Global stats',
-                    description:
-                        'Get all surveys in the project, view aggregated response statistics, or apply filters.',
-                },
-            ],
-            children: <MCPInstall />,
-        },
-    ],
     questions: [
         {
             question: 'Would you like to book a user interview?',
@@ -377,6 +253,9 @@ export const surveys = {
                 },
             ],
             us: [
+                {
+                    title: 'Agents can act on what users tell you – the qualitative signal that powers self-driving',
+                },
                 {
                     title: 'No-code surveys with customizable colors and removable branding',
                 },
@@ -421,20 +300,67 @@ export const surveys = {
         ],
     },
     ai: {
-        // title: '',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/surveys_284d9e66f4.png',
         imageAlt: 'PostHog AI and surveys',
-        description: 'collect user feedback and contextualize the results with product data',
+        description: 'collect what users say and act on the feedback to ship the fix',
+        intro: 'Ask PostHog AI to create surveys, refine targeting, and summarize responses.',
+        mcpFeatures: ['surveys'],
         skills: [
             'Generates complete surveys with display conditions and targeting',
             'Suggests appropriate question types (freeform text, rating scales, multiple choice, etc.) based on your research goals',
             'Analyzes the results and provides insights',
         ],
-        prompts: [
-            'Create an NPS survey for my mobile app users',
-            'Build a product satisfaction survey with rating questions',
-            'Help me create a survey to understand why users churn',
-            'Generate a post-purchase feedback survey',
+        // Prompts reshaped from existing ai.prompts + skillsData survey examples.
+        // Tool names verified against src/data/mcp-tools.json.
+        groups: [
+            {
+                title: 'Create',
+                tool: 'survey-create',
+                prompts: [
+                    'Create an NPS survey for my mobile app users',
+                    'Build a product satisfaction survey with rating questions',
+                    'Help me create a survey to understand why users churn',
+                    'Generate a post-purchase feedback survey',
+                    'Launch the Sean Ellis PMF survey to engaged users and report the score',
+                    'Launch a one-question poll asking if the new layout is better',
+                ],
+            },
+            {
+                title: 'Update targeting',
+                tool: 'survey-update',
+                prompts: [
+                    'Narrow this survey to only enterprise admins',
+                    'Retarget the running survey to activated users',
+                    'Tighten survey targeting to the cohort that matters',
+                ],
+            },
+            {
+                title: 'Check stats',
+                tool: 'survey-stats',
+                prompts: [
+                    'Aggregate our PMF survey responses by segment',
+                    "What's the response rate and completion rate on our NPS survey?",
+                    'Show me stats for the post-purchase feedback survey this month',
+                ],
+            },
+            {
+                title: 'Summarize',
+                tool: 'surveys-summarize-responses-create',
+                prompts: [
+                    'Spin up a cancel survey for the churn cohort and summarize the reasons',
+                    'What are users most frustrated about this month?',
+                    'Pull NPS, retention, and survey quotes into a one-page PMF report',
+                ],
+            },
+            {
+                title: 'Clean up',
+                tool: 'survey-delete',
+                prompts: [
+                    "Which surveys are stale? Retire the ones nobody's answering",
+                    'Clean up old surveys that are still running',
+                    "Archive the launch survey now that it's done",
+                ],
+            },
         ],
     },
     pairsWith: [
@@ -458,13 +384,13 @@ export const surveys = {
         customers:
             "<strong>Purplewave</strong> hit a 25% response rate by targeting active users who were more likely to respond which meant more actionable feedback from loyal users without annoying those who weren't likely to respond anyway. <strong>ElevenLabs</strong> uses them creatively - they pop surveys asking power users to review them on G2. Instead of email surveys people ignore, PostHog surveys are contextual, in-app, at can be tailored to show at exactly the right moment.",
         features:
-            "<strong>Question types:</strong> Everything you'd expect like multiple choice, ratings (1-5, 1-7 for Likert, 0-10 for NPS), emojis, free text. Plus you can embed links as the survey's CTA – great for external forms or scheduling calls like user interviews.<br /><br /><strong>Templates:</strong> We've got many of the acronyms covered including <strong>NPS</strong> (Net Promoter Score), <strong>PMF</strong> (product-market tit), <strong>CSAT</strong> (customer satisfaction score), <strong>CES</strong> (customer effort score), and others like one that helps schedule user interviews, one for user-provided context that fires after hitting an exception, and of course a freeform text option for collecting user feedback. Start from a template or build your own from scratch.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. You can ask beta users about new features or survey only enterprise customers.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions, progress bar included.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases and an API when you need custom UI or complex logic – both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time – great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Avoid annoying users new users – set delays before showing surveys so you trigger at the right time.",
+            "<strong>Question types:</strong> Everything you'd expect like multiple choice, ratings (1-5, 1-7 for Likert, 0-10 for NPS), emojis, free text. Plus you can embed links as the survey's CTA – great for external forms or scheduling calls like user interviews.<br /><br /><strong>Templates:</strong> We've got many of the acronyms covered including <strong>NPS</strong> (Net Promoter Score), <strong>PMF</strong> (product-market fit), <strong>CSAT</strong> (customer satisfaction score), <strong>CES</strong> (customer effort score), and others like one that helps schedule user interviews, one for user-provided context that fires after hitting an exception, and of course a freeform text option for collecting user feedback. Start from a template or build your own from scratch.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. You can ask beta users about new features or survey only enterprise customers.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions, progress bar included.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases and an API when you need custom UI or complex logic – both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time – great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Avoid annoying users new users – set delays before showing surveys so you trigger at the right time.",
         answers:
             'These are actual survey questions our customers use. User interviews? End with a Calendly link. PMF survey? Use the template. Support satisfaction? Time it after ticket resolution. The key is asking at the right moment - after they use a feature, complete a task, or hit a milestone.',
         pricing:
             "Use surveys free, or enter a credit card for advanced features. Either way, your first 1500 survey responses are free – every month, then it's simple usage-based pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything – targeting, multi-step, API access – out of the box.",
         'comparison-summary':
-            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. (We're the only one with feature flag targeting.)",
+            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. Because it's one system, agents can act on what users tell you – it's the qualitative signal that makes your product self-driving. (We're the only one with feature flag targeting.)",
         'feature-comparison':
             "We have all the core features. What we don't have: AI analysis (yet) or complex form logic. But we uniquely support feature flag targeting - survey only users who have a specific feature enabled. Nobody else does that.",
         docs: "We've got clear setup guides for both no-code and API approaches with real-world examples of different survey types and when to use them. Common patterns like NPS calculation and user interview scheduling are documented with copy-paste examples.",
