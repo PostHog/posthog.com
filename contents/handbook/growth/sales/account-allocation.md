@@ -21,7 +21,7 @@ A [TAM](/handbook/growth/sales/how-we-work#technical-account-managers) joins an 
 
 In [customer journey](/handbook/growth/sales/customer-journey) terms: a TAM is on an account while it's Expanding (or Implementing, when a deal closed with a qualified opp already attached). When the account reaches Steady state, the TAM comes off. The CSM was there the whole time, so nothing gets handed over.
 
-When both are on an account, who does what is covered in [CSM + TAM rules of engagement](/handbook/growth/sales/csm-tam-overlay-coverage). Short version: TAM leads commercial, CSM leads technical, and both stay close to the customer. The CSM stays on regardless of what the TAM does.
+When both are on an account, who does what is covered in [CSM + TAM rules of engagement](/handbook/growth/sales/csm-tam-overlay-coverage).
 
 Where there's expansion potential but no TAM capacity yet, an account can sit CSM-only until a TAM can be added.
 
