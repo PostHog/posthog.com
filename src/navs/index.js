@@ -2556,6 +2556,10 @@ export const docsMenu = {
                                     name: 'Configuration',
                                     url: '/docs/libraries/ios/configuration',
                                 },
+                                {
+                                    name: 'Push notifications',
+                                    url: '/docs/libraries/ios/push-notifications',
+                                },
                             ],
                         },
                         {
