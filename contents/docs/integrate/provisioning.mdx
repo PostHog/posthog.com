@@ -446,26 +446,15 @@ Each refresh token is single-use. The response includes a new refresh token for 
 
 ### Available scopes
 
-The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted. The default set does not include every scope below, so explicitly request the scopes your integration needs. Available scopes:
+The `scopes` field in the account request controls what permissions the access token receives. If omitted, a default set of scopes is granted – it does not include every available scope, so explicitly request the ones your integration needs.
 
-| Scope | Description |
-|---|---|
-| `customer_journey:read` | Read customer journey data |
-| `query:read` | Execute read-only queries |
-| `session_recording:read` | Read session recordings |
-| `conversation:read` | Read PostHog AI conversations |
-| `conversation:write` | Create and update PostHog AI conversations |
-| `experiment:read` | Read experiments |
-| `feature_flag:read` | Read feature flags |
-| `insight:read` | Read insights |
-| `organization:read` | Read organization details |
-| `person:read` | Read person data |
-| `project:read` | Read project settings |
-| `ticket:read` | Read tickets |
-| `ticket:write` | Create and update tickets |
-| `user:read` | Read user information |
-| `hog_flow:read` | Read Hog flows |
-| `hog_flow:write` | Create and update Hog flows |
+The full, always-current list of grantable scopes is published in the `scopes_supported` field of PostHog's [OAuth server metadata](/docs/api/oauth#supported-scopes), so you can read it straight from the source rather than a list that can fall out of date:
+
+```bash
+curl https://us.posthog.com/.well-known/oauth-authorization-server | jq '.scopes_supported'
+```
+
+Use `eu.posthog.com` for the EU region. These mirror the scopes available for [personal API keys](/docs/api/personal-api-keys); any scope PostHog reserves for internal use is not grantable. Common choices for a provisioning integration include `query:read`, `endpoint:read` and `endpoint:write` (read analytics back through [endpoints](/docs/endpoints)), `insight:read`, `person:read`, `project:read`, `project:write`, `session_recording:read`, and `sharing_configuration:write`.
 
 ## What the user gets
 
