@@ -11,8 +11,15 @@ Jump to the [full Node.js example](#full-example) to see the complete flow in co
 
 ## How it works
 
-The flow uses OAuth 2.0 with PKCE (Proof Key for Code Exchange), so there are no shared secrets to manage.
-Your application is identified by a metadata document hosted on your domain.
+The flow uses OAuth 2.0 with PKCE (Proof Key for Code Exchange).
+Your application is identified by a metadata document hosted on your domain, so there is no registration form to fill in and no client secret for us to issue.
+
+Whether your app also has to *authenticate* depends on what it does.
+A **public client** is identified by its `client_id` alone and relies on PKCE, which is enough to create accounts and exchange tokens.
+A **confidential client** additionally proves it controls the app by signing a short-lived assertion with a private key it holds.
+Some endpoints, including the [GitHub grant endpoints](#github-grants), accept only confidential clients.
+
+See [choosing an authentication method](#choosing-an-authentication-method) to work out which you are.
 
 ### Onboarding (once per user)
 
@@ -61,6 +68,17 @@ sequenceDiagram
 
 ## Set up as a partner
 
+Setup is four steps, and you only do them once:
+
+1. **[Decide whether you need to authenticate](#choosing-an-authentication-method).** If you need the GitHub grant endpoints, you do. If not, you can stay a public client and skip step 3.
+2. **[Host a metadata document](#host-a-cimd-metadata-document)** at an HTTPS URL on your domain. That URL becomes your `client_id`. There is no signup form.
+3. **Generate a key pair and publish the public half** at a `jwks_uri`, if you are a confidential client. See [authenticating with a private key](#authenticating-with-a-private-key).
+4. **[Register your client](#register-your-client)** in every region you serve, and check the diagnostics it returns.
+
+Optionally, [link the app to a PostHog organization](#link-your-partner-app-to-a-posthog-organization-optional) to raise your rate limit, and [declare a scope ceiling](#declare-oauth-scopes-for-your-app-optional).
+
+After that, the per-user flow is the three API calls in [onboarding](#onboarding-once-per-user).
+
 ### Host a CIMD metadata document
 
 PostHog uses [Client ID Metadata Documents](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) (CIMD) for partner registration. There's no signup form to fill out – you host a JSON document at an HTTPS URL on your domain, and that URL becomes your `client_id`.
@@ -84,14 +102,137 @@ Requirements:
 - **`client_id`** must exactly match the URL where this document is hosted.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients, no client secret).
+- **`token_endpoint_auth_method`** must be either `"none"` (a public client, relying on PKCE) or `"private_key_jwt"` (a confidential client, which also requires `jwks_uri`). A CIMD client can never hold a client secret, because there is no registration step in which we could deliver one.
+- **`jwks_uri`** is required when `token_endpoint_auth_method` is `"private_key_jwt"`, and must be an HTTPS URL serving your public keys as a JWK Set.
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
-- The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
+- The URL must use HTTPS, include a path component, and must not contain query parameters or fragments. These rules apply to the `client_id` document only, since it is your stable identifier. Your `jwks_uri` is an ordinary document reference and may carry a query string.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
-Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
+Because the document is re-read on every refresh, you can switch between `"none"` and `"private_key_jwt"` at any time by editing it. Your `client_id` does not change and there is nothing to re-register.
+
+### Register your client
+
+Once the document is live, register it. Paste the URL below: this reads the document back so you can see what you actually published, then registers it per region.
+
+<CIMDRegistration />
+
+Or do it yourself:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
+```
+
+This is the first call you make. Every other endpoint requires an already-registered client and returns `401` naming this one if it does not find yours.
+
+> **Register in every region you serve.** US and EU are separate deployments with separate databases, so registering in one does **not** register you in the other, and we will not do it for you. A client registered only in the US gets a `401` from `eu.posthog.com`. Run the registration against `https://us.posthog.com` and `https://eu.posthog.com` separately, and re-run both whenever you change your metadata document or your keys. The [setup script](#registration-script) below does both.
+
+The response reports each check separately, so a broken setup tells you which part is wrong rather than failing as a bare `401`:
+
+```json
+{
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "registered": true,
+  "client_type": "confidential",
+  "token_endpoint_auth_method": "private_key_jwt",
+  "jwks_uri": "https://yourapp.com/.well-known/jwks.json",
+  "scopes": ["organization:read", "project:read"],
+  "provisioning": { "active": true, "can_create_accounts": true, "can_provision_resources": true },
+  "capabilities": { "account_requests": true, "github_grants": true },
+  "checks": [
+    { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
+    { "name": "provisioning_enabled", "ok": true, "detail": "Active" },
+    { "name": "jwks", "ok": true, "detail": "1 key(s) served: my-key-1" }
+  ]
+}
+```
+
+`capabilities` tells you which endpoints you qualify for. If `github_grants` is `false`, you are a public client. It is safe to call this endpoint again at any time; it re-fetches your document and re-runs every check, which makes it the fastest way to confirm a change took effect.
+
+You can also verify your signing setup end to end by including an assertion. It is checked and reported as a `client_assertion` entry in `checks`:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -d '{
+        "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+        "client_assertion": "eyJhbGciOi...",
+        "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+      }'
+```
+
+Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it on a real call.
+
+### Registration script
+
+Save this as `register-posthog-client.mjs` and run it with `node register-posthog-client.mjs`. It registers in both regions, prints every check, and exits non-zero if anything failed, so you can run it from CI or a deploy step.
+
+```js
+#!/usr/bin/env node
+import crypto from 'crypto'
+
+const CLIENT_ID = process.env.POSTHOG_CLIENT_ID // your CIMD document URL
+const PRIVATE_KEY = process.env.POSTHOG_CLIENT_PRIVATE_KEY // omit if you are a public client
+const KEY_ID = process.env.POSTHOG_CLIENT_KEY_ID || 'key-1'
+
+const REGIONS = { us: 'https://us.posthog.com', eu: 'https://eu.posthog.com' }
+const ASSERTION_TYPE = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
+
+function assertion(host) {
+  const now = Math.floor(Date.now() / 1000)
+  const b64 = (o) => Buffer.from(JSON.stringify(o)).toString('base64url')
+  const input =
+    b64({ alg: 'RS256', typ: 'JWT', kid: KEY_ID }) +
+    '.' +
+    b64({
+      iss: CLIENT_ID,
+      sub: CLIENT_ID,
+      // Per region: an assertion minted for one region is not valid at the other.
+      aud: `${host}/api/agentic/oauth/token`,
+      jti: crypto.randomUUID(),
+      iat: now,
+      exp: now + 60,
+    })
+  const sig = crypto.sign('RSA-SHA256', Buffer.from(input), crypto.createPrivateKey(PRIVATE_KEY))
+  return `${input}.${sig.toString('base64url')}`
+}
+
+let ok = true
+for (const [region, host] of Object.entries(REGIONS)) {
+  const body = { client_id: CLIENT_ID }
+  if (PRIVATE_KEY) {
+    body.client_assertion = assertion(host)
+    body.client_assertion_type = ASSERTION_TYPE
+  }
+
+  const res = await fetch(`${host}/api/agentic/provisioning/client_registration`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  const json = await res.json().catch(() => null)
+
+  console.log(`\n${region.toUpperCase()} ${host}`)
+  for (const check of json?.checks || []) {
+    console.log(`  ${check.ok ? 'ok  ' : 'FAIL'} ${check.name}: ${check.detail}`)
+  }
+  if (!json?.registered) {
+    console.log(`  not registered: ${json?.error?.message || `HTTP ${res.status}`}`)
+    ok = false
+    continue
+  }
+  console.log(`  ${json.client_type} (${json.token_endpoint_auth_method})`)
+  console.log(`  github grants: ${json.capabilities?.github_grants ? 'allowed' : 'not allowed'}`)
+  ok = ok && (json.checks || []).every((c) => c.ok)
+}
+
+process.exit(ok ? 0 : 1)
+```
+
+Re-run it after any change to your metadata document or your keys. It re-fetches everything and re-runs every check, so it is the fastest way to confirm a change took effect.
 
 ### Link your partner app to a PostHog organization (optional)
 
@@ -149,11 +290,122 @@ If `com.posthog.scopes` is omitted, your app can request any scope a user can gr
 
 CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
 
+## Choosing an authentication method
+
+Your `token_endpoint_auth_method` decides this, and PostHog derives everything else from it. You do not declare `client_type` yourself.
+
+| Your document says | You are | You authenticate with | GitHub grant endpoints |
+| --- | --- | --- | --- |
+| `"none"` | public | nothing, PKCE proves the code exchange | no, `403` |
+| `"private_key_jwt"` plus a `jwks_uri` | confidential | a signed assertion per request | yes |
+
+Pick `"none"` if your client cannot keep a credential secret, such as a CLI, a mobile app, or anything running on a user's machine. PKCE is what protects a public client's code exchange and it is required for every client regardless.
+
+Pick `"private_key_jwt"` if you need the GitHub grant endpoints, or simply want the stronger guarantee. Nothing secret is ever transmitted, and you rotate keys yourself by publishing a new one.
+
+One thing to be honest about: a credential shipped inside a distributed binary is not secret, and that is equally true of a private key. If your app runs on end users' machines, either make the confidential half a server you control, or stay public and rely on PKCE.
+
+### Authenticating with a private key
+
+Generate an RSA key pair. Keep the private half in your environment or secret manager, never in your repo:
+
+```bash
+node -e "
+const c = require('crypto')
+const { privateKey, publicKey } = c.generateKeyPairSync('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: 'spki', format: 'pem' },
+  privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+})
+console.log(privateKey)
+console.log(JSON.stringify({ keys: [{ ...c.createPublicKey(publicKey).export({ format: 'jwk' }), kid: 'sig-1', use: 'sig', alg: 'RS256' }] }, null, 2))
+"
+```
+
+Publish the public half as a JWK Set at your `jwks_uri`:
+
+```json
+{
+  "keys": [
+    { "kty": "RSA", "n": "...", "e": "AQAB", "kid": "sig-1", "use": "sig", "alg": "RS256" }
+  ]
+}
+```
+
+`kid` is an opaque label you choose. It exists so a verifier can pick the right key when your set holds more than one, which is what makes rotation possible. Deriving the JWK Set from your private key at request time, rather than checking a copy into your repo, is worth the small effort: two copies that silently disagree is the most common reason a working setup stops working.
+
+Then send a signed assertion (<a href="https://datatracker.ietf.org/doc/html/rfc7523">RFC 7523</a>) with each request:
+
+| Claim | Value |
+| --- | --- |
+| `iss` | your `client_id` |
+| `sub` | your `client_id`, the same value |
+| `aud` | `https://us.posthog.com/api/agentic/oauth/token` |
+| `jti` | a unique id per assertion |
+| `iat` | issued-at, required |
+| `exp` | expiry, at most 300 seconds after `iat` |
+
+Sign with an asymmetric algorithm (`RS256`, `PS256`, `ES256` and their variants). HMAC algorithms are rejected: your public key is published, so accepting one would let anyone sign with it.
+
+The header must carry a `kid` whenever your JWK Set holds more than one key, so a rotated-out key stops working rather than falling back to a scan.
+
+```js
+import crypto from 'crypto'
+
+function clientAssertion() {
+    const now = Math.floor(Date.now() / 1000)
+    const b64 = (o) => Buffer.from(JSON.stringify(o)).toString('base64url')
+    const input =
+        b64({ alg: 'RS256', typ: 'JWT', kid: 'my-key-1' }) +
+        '.' +
+        b64({
+            iss: CLIENT_ID,
+            sub: CLIENT_ID,
+            aud: 'https://us.posthog.com/api/agentic/oauth/token',
+            jti: crypto.randomUUID(),
+            iat: now,
+            exp: now + 60,
+        })
+    const signature = crypto.sign('RSA-SHA256', Buffer.from(input), PRIVATE_KEY)
+    return `${input}.${signature.toString('base64url')}`
+}
+```
+
+Send it as `client_assertion`, alongside `client_assertion_type` set to `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, on `account_requests`, `oauth/token` (both grant types), and the GitHub grant endpoints. Both go in the JSON body, except on `GET` requests, which have no body and take them as query parameters instead.
+
+> **Each assertion is single use.** PostHog remembers the `jti` until the assertion would have expired, so reusing one gets rejected as a replay. Mint a fresh assertion per request, including on retries.
+
+The `aud` must name the region you are calling. An assertion minted for `us.posthog.com` is not accepted by `eu.posthog.com`.
+
+#### Rotating keys
+
+Rotation is yours to do, and needs an overlap window because PostHog caches your JWK Set for an hour:
+
+1. Generate a new key pair with a new `kid`.
+2. Publish **both** public keys in your JWK Set, and start signing with the new one. Anything holding a cached copy of the old set still verifies your old key, so nothing breaks mid-rotation.
+3. After an hour, drop the old key from the set.
+
+Skipping step 2 means assertions signed with the new key fail against every cached copy of the old set until it expires.
+
+Once your set holds more than one key, the `kid` header becomes mandatory: PostHog will not try each key in turn, so a rotated-out key stops working rather than lingering.
+
+### Authenticating with a client secret
+
+If PostHog issued you a `client_id` and `client_secret` directly rather than through CIMD, send them either as HTTP Basic credentials:
+
+```
+Authorization: Basic base64(urlencode(client_id) + ":" + urlencode(client_secret))
+```
+
+or as `client_id` and `client_secret` in the request body. Basic is the only option on `GET` requests.
+
+> **A confidential client cannot fall back to the public path.** If your app is registered as confidential and you send only your `client_id`, the request is rejected rather than treated as a public client. Your `client_id` is published, so honouring it alone would let anyone act as you.
+
 ## API reference
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
 
-Every request must include the `API-Version: 0.1d` header.
+The two regions are separate deployments with separate databases. Your client must be [registered in each region you serve](#register-your-client), tokens issued by one are not valid at the other, and a `client_assertion` must name the region it is sent to in its `aud`.
 
 ### Step 1: Create an account
 
@@ -186,7 +438,6 @@ JSON
 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
   -H "Content-Type: application/json" \
-  -H "API-Version: 0.1d" \
   -d "$BODY"
 ```
 
@@ -203,6 +454,9 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | `scopes`                          | list   | No       | OAuth scopes to request for the access token. See [available scopes](#available-scopes). |
 | `configuration.region`            | string | No       | `"US"` (default) or `"EU"`                                                               |
 | `configuration.organization_name` | string | No       | Organization name (defaults to `"Partner (email)"`)                                      |
+| `client_assertion`                | string | Confidential clients | Signed assertion. See [authenticating with a private key](#authenticating-with-a-private-key). |
+| `client_assertion_type`           | string | Confidential clients | `urn:ietf:params:oauth:client-assertion-type:jwt-bearer` |
+| `client_secret`                   | string | Confidential clients | Only if PostHog issued you a secret. Can also ride the Basic header. |
 
 **New user response** (HTTP 200):
 
@@ -232,6 +486,8 @@ The user receives a welcome email with a link to set their password and access t
 
 When `type` is `requires_auth`, redirect the user to the provided URL. After they approve, PostHog redirects them to your `redirect_uris` with a `code` query parameter that you use in step 2.
 
+An email that already has a PostHog account **always** takes this path. No partner setting skips it, and authenticating as a confidential client does not skip it either. Proving you control your app is not the same as proving you control somebody's email address, and silently linking an existing account to a partner would be an account takeover. Plan for the consent redirect as a normal branch rather than an edge case.
+
 ```mermaid
 sequenceDiagram
     participant P as Partner
@@ -259,8 +515,7 @@ Exchange the authorization code for an access token and refresh token. The token
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
-  -d "grant_type=authorization_code&code=abc123...authorization_code&code_verifier=$CODE_VERIFIER"
+  -d "grant_type=authorization_code&code=abc123...authorization_code&code_verifier=$CODE_VERIFIER&client_id=$CLIENT_ID"
 ```
 
 **Request fields:**
@@ -270,6 +525,14 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 | `grant_type`    | string | Yes      | Must be `"authorization_code"`                                         |
 | `code`          | string | Yes      | The authorization code from step 1                                     |
 | `code_verifier` | string | Yes      | The original PKCE code verifier (must match the challenge from step 1) |
+| `client_id`     | string | Yes      | Your CIMD metadata URL                                                 |
+| `client_assertion` | string | Confidential clients | Signed assertion. See [authenticating with a private key](#authenticating-with-a-private-key). |
+| `client_assertion_type` | string | Confidential clients | `urn:ietf:params:oauth:client-assertion-type:jwt-bearer` |
+| `client_secret` | string | Confidential clients | Only if PostHog issued you a secret. Can also ride the Basic header. |
+
+A public client exchanges on `code_verifier` alone. A confidential client must also authenticate, and gets `invalid_client` with a `401` if it does not.
+
+Client authentication is checked before the code is consumed, so an attempt that fails on credentials leaves the code usable and you can retry with the same one.
 
 **Response** (HTTP 200):
 
@@ -314,9 +577,7 @@ Use the access token to provision a PostHog project and get credentials.
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
-    "service_id": "analytics",
     "label_prefix": "Acme Co",
     "configuration": {
       "project_name": "My App - Production"
@@ -328,7 +589,6 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `service_id` | string | No | The plan to provision. `"analytics"` (default) provisions a standard project. `"free"` and `"pay_as_you_go"` set the billing plan explicitly. |
 | `label_prefix` | string | No | Label prefix for the provisioned personal API key, up to 25 characters, used only when a personal API key is issued (off by default). When issued, the key is labeled `{label_prefix} - {team_name}`; if omitted, empty, or whitespace-only, just the team name. |
 | `configuration.project_name` | string | No | Project name (defaults to `"Default project"`) |
 
@@ -338,7 +598,6 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/resources \
 {
   "status": "complete",
   "id": "12345",
-  "service_id": "analytics",
   "complete": {
     "access_configuration": {
       "api_key": "phc_abc123...",
@@ -365,7 +624,6 @@ For recurring deep links from your application into PostHog – the most common 
 curl -X POST https://us.posthog.com/api/agentic/provisioning/deep_links \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "path": "/project/12345/replay/019e6d10-c3b0-7000-8000-000000000000"
   }'
@@ -406,7 +664,6 @@ Rotate the project token for an existing provisioned project:
 curl -X POST https://us.posthog.com/api/agentic/provisioning/resources/12345/rotate_credentials \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer pha_abc123..." \
-  -H "API-Version: 0.1d" \
   -d '{
     "label_prefix": "Acme Co"
   }'
@@ -427,7 +684,6 @@ Access tokens expire after 1 hour. Use the refresh token to get new credentials:
 ```bash
 curl -X POST https://us.posthog.com/api/agentic/oauth/token \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -H "API-Version: 0.1d" \
   -d "grant_type=refresh_token&refresh_token=phr_def456..."
 ```
 
@@ -442,7 +698,43 @@ curl -X POST https://us.posthog.com/api/agentic/oauth/token \
 }
 ```
 
+Confidential clients must authenticate on this grant too, with the same `client_assertion` or `client_secret` parameters as the authorization code exchange.
+
 Each refresh token is single-use. The response includes a new refresh token for subsequent refreshes. Refreshing can only keep or narrow a token's scopes, never add them. To grant additional scopes, request them in a new account request; they apply to connections provisioned afterward.
+
+### GitHub grants
+
+These endpoints let you hand PostHog a GitHub OAuth code and get back an opaque `grant_id`, so the GitHub user tokens stay server-side and never pass through your app.
+
+> **Confidential clients only.** These endpoints exchange GitHub OAuth codes and read back GitHub account metadata, so they need a real partner trust boundary. A public client gets `403`. Either a signed assertion or a client secret qualifies, since both prove you control the app. Check `capabilities.github_grants` in the [registration response](#register-your-client) to confirm you are eligible.
+
+Grants are region-local: call the same region that minted the grant.
+
+**Create a grant:**
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/github/grants \
+  -H "Content-Type: application/json" \
+  -d '{
+        "code": "github_oauth_code",
+        "redirect_uri": "https://yourapp.com/callbacks/github",
+        "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+        "client_assertion": "eyJhbGciOi...",
+        "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+      }'
+```
+
+The response carries `grant_id`, `gh_login`, `email`, and `expires_in`. PostHog fetches the verified email server-side, so you never call GitHub for it. `email` is `null` when GitHub has no verified email, which is still a usable grant; collect an address inline instead.
+
+**List repositories for a grant:**
+
+```bash
+curl "https://us.posthog.com/api/agentic/provisioning/github/grants/$GRANT_ID/repositories?client_id=$CLIENT_ID&client_assertion=$ASSERTION&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" \
+```
+
+This is a `GET`, so there is no body to carry your credentials. Send the assertion as query parameters, or use the Basic header if you authenticate with a client secret. Each assertion is still single use, so mint a fresh one per poll.
+
+The response carries `gh_login`, `installations`, and `repositories`. The GitHub App is installed if and only if `installations` is non-empty, so poll this while the user completes the install.
 
 ### Available scopes
 
@@ -505,8 +797,10 @@ Common error codes:
 | Code | HTTP Status | Description |
 |---|---|---|
 | `invalid_request` | 400 | Missing or invalid field |
-| `unauthorized` | 401 | Authentication failed |
-| `forbidden` | 403 | Partner not authorized for this action |
+| `unauthorized` | 401 | Authentication failed. If the message names `client_registration`, your client is not registered yet, so [register it](#register-your-client). |
+| `invalid_client` | 401 | Client authentication failed at the token endpoint: missing, wrong, or replayed credentials |
+| `forbidden` | 403 | Partner not authorized for this action. On the GitHub grant endpoints this means you are a public client, which those endpoints do not accept. |
+| `registration_failed` | 400 | `client_registration` could not register your client. The `checks` array says which part failed. |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
@@ -553,8 +847,7 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "API-Version": "0.1d",
-    },
+      },
     body: JSON.stringify({
       id: crypto.randomUUID(),
       email,
@@ -589,12 +882,13 @@ async function provisionPostHogAccount(email, name) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "API-Version": "0.1d",
-    },
+      },
     body: new URLSearchParams({
       grant_type: "authorization_code",
       code: account.oauth.code,
       code_verifier: codeVerifier,
+      client_id: CLIENT_ID,
+      // A confidential client also sends client_assertion and client_assertion_type here.
     }),
   });
 
@@ -613,10 +907,8 @@ async function provisionPostHogAccount(email, name) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${tokens.access_token}`,
-      "API-Version": "0.1d",
-    },
+      },
     body: JSON.stringify({
-      service_id: "analytics",
       label_prefix: "Acme Co",
       configuration: { project_name: "Production" },
     }),
@@ -653,7 +945,6 @@ async function getDeepLinkUrl(accessToken, path) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
-        'API-Version': '0.1d',
       },
       body: JSON.stringify(path ? { path } : {}),
     }

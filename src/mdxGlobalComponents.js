@@ -21,6 +21,7 @@ import { CompensationCalculator } from './components/CompensationCalculator'
 import { ContentViewer } from './components/ContentViewer'
 import { Step, Steps } from './components/Docs/Steps'
 import EmbeddedSurvey from './components/Docs/EmbeddedSurvey'
+import CIMDRegistration from './components/CIMDRegistration'
 import { Drawer } from './components/Drawer'
 import { lib } from './components/Edition/lib'
 import { Emoji } from './components/Emoji'
@@ -155,4 +156,5 @@ export const shortcodes = {
     WizardCommand,
     WizardCTA,
     EmbeddedSurvey,
+    CIMDRegistration,
 }
