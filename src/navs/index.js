@@ -3895,6 +3895,16 @@ export const docsMenu = {
                         {
                             name: 'Activity logs',
                             url: '/docs/settings/activity-logs',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/settings/activity-logs',
+                                },
+                                {
+                                    name: 'SIEM integration',
+                                    url: '/docs/settings/activity-logs/siem',
+                                },
+                            ],
                         },
                         {
                             name: 'Approvals',
