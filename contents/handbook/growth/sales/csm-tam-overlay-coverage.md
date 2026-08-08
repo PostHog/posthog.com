@@ -67,7 +67,7 @@ The customer should never have to figure out who to contact. They reach out to e
 - TAM checks out on health because "the CSM handles that now"
 - Customer has to explain the same thing twice
 
-# **How to kick off the CSM <> TAM collaboration**
+# **How to kick off the CSM + TAM collaboration**
 
 Both of you share the responsibility of making sure the other has enough context to be effective on the account.
 
