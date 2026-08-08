@@ -100,6 +100,7 @@ Notice: You're doing it anyway, specific location, low pressure, no stated agend
 - Don't treat this as a sales pitch - if you're showing up just to close a deal, you're not expanding your relationship and understanding of the customer.
 - Don't over-schedule - leaving buffer time for organic conversations is often more valuable than cramming in another session
 - Don't show up unprepared on their data - spend time before the visit building something useful in their PostHog instance that you can show them
+- Don't wing your product demos – rehearse the flow ahead of time, have a clear narrative, and test that everything works (logins, data loading, feature access) before you're in front of an audience. A demo that stalls or breaks live undermines your credibility and the customer's confidence in the product
 
 ## Follow-up
 
