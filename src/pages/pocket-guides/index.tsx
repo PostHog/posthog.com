@@ -6,7 +6,7 @@ import React from 'react'
 
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
-/** Report-bearing guides per volume (the 101 doesn't count), so the cover is never stale. */
+/** Numbered guides per volume (an `isPrimer` orientation page like the 101 doesn't count). */
 function useGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
@@ -17,9 +17,8 @@ function useGuideCounts(): Record<string, number> {
                     }
                     frontmatter {
                         title
-                        report {
-                            title
-                        }
+                        bookOrder
+                        isPrimer
                     }
                 }
             }
@@ -33,8 +32,12 @@ function useGuideCounts(): Record<string, number> {
         if (!volume || !guide || guide.startsWith('_') || !node.frontmatter?.title) {
             continue
         }
-        // A report in the frontmatter is what makes a page a guide; the 101 has none.
-        if (node.frontmatter.report?.title) {
+        // In the book (has a bookOrder), past the front matter, and not an orientation page.
+        if (
+            typeof node.frontmatter.bookOrder === 'number' &&
+            node.frontmatter.bookOrder > 0 &&
+            !node.frontmatter.isPrimer
+        ) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

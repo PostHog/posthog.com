@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { HedgehogDataThief, HedgehogImTheDriver } from '@posthog/brand/hoggies'
+import { HedgehogDollHouse, HedgehogImTheDriver } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
@@ -9,7 +9,7 @@ import { PocketGuideVolume } from '../../constants/pocketGuides'
 /** Cover art per volume, so a new volume picks an existing hoggie instead of commissioning one. */
 const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     'self-driving': HedgehogImTheDriver,
-    'data-warehouse': HedgehogDataThief,
+    'context-warehouse': HedgehogDollHouse,
 }
 
 interface CoverProps {

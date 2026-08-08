@@ -1,0 +1,57 @@
+---
+title: Activation metrics
+shortTitle: Activation
+subtitle: Activation as a retention-validated combination of early actions, not a single guessed event.
+bookOrder: 4
+---
+
+<LeftPage>
+
+<SkillFigure n={1} caption="The skill itself – the file an agent follows to build an activation model." />
+
+</LeftPage>
+
+<RightPage>
+
+# Activation metrics
+
+Activation is the earliest reliable predictor that a user will stick. The core idea this skill
+enforces: activation is **not** a single event someone declared "the aha moment" – it's the
+combination of early actions that best predicts long-term retention, validated rather than
+assumed.
+
+## The method
+
+1. **List candidate early actions** from the event taxonomy – things a new user could plausibly do
+   in their first session or week.
+2. **Measure retention lift** for each candidate, comparing the retention of users who did it
+   early against those who didn't.
+3. **Pick the definition** that maximizes predictive power while keeping reach acceptable – often
+   a combination or a count threshold, not one action.
+4. **Only then model it**, as an activated-flag plus activation-rate model.
+
+## Rules before you model
+
+- **Don't assume an activation event exists.** If the user names one, validate it against
+  retention lift before enshrining it.
+- **Pin the early window** – "activated" means the criteria were met within the first *N* days of
+  signup.
+- **Report reach and predictive power together**, not just the rate.
+
+## The skill itself
+
+<SeeFig n={1} /> covers finding candidate actions, validating them against retention lift, and
+modeling the winning definition as a durable activated-flag model – for B2C persons and B2B
+groups.
+
+Copy it into your own agent, or find it in the
+[PostHog monorepo](https://github.com/PostHog/posthog/blob/master/products/data_modeling/skills/modeling-activation-metrics/SKILL.md).
+
+<SeeAlso>
+
+See also: [Product usage metrics](/pocket-guides/context-warehouse/product-usage-metrics) ·
+[Conversion metrics](/pocket-guides/context-warehouse/conversion-metrics)
+
+</SeeAlso>
+
+</RightPage>
