@@ -66,6 +66,39 @@ ORDER BY url_count DESC
 
 You can use SQL insights within [notebooks](/docs/notebooks) and with external sources using the [data warehouse](/docs/data-warehouse).
 
+### UNION BY NAME
+
+When combining results from multiple queries using `UNION`, you can add `BY NAME` to match columns by their names instead of by position. This is useful when queries have different column orders.
+
+```sql
+SELECT
+    properties.$browser AS browser,
+    properties.$os AS os,
+    count() AS event_count
+FROM events
+WHERE event = '$pageview'
+GROUP BY browser, os
+
+UNION ALL BY NAME
+
+SELECT
+    properties.$os AS os,
+    properties.$browser AS browser,
+    count() AS event_count
+FROM events
+WHERE event = '$autocapture'
+GROUP BY os, browser
+```
+
+Without `BY NAME`, `UNION` matches columns by position, so the second query's `os` column would incorrectly map to the first query's `browser` column. With `BY NAME`, columns are matched by their aliases regardless of order.
+
+The supported variants are:
+
+- `UNION ALL BY NAME` – combines all rows including duplicates, matching by column name
+- `UNION DISTINCT BY NAME` – combines rows and removes duplicates, matching by column name
+
+A bare `UNION BY NAME` (without `ALL` or `DISTINCT`) is treated as `UNION DISTINCT BY NAME`.
+
 ## Query API
 
 To query events using SQL via the [PostHog API](/docs/api/queries), get [your project ID](https://us.posthog.com/settings/project-details#variables), a [personal API key](https://us.posthog.com/settings/user-api-keys) with the project query read permission and make a POST request to `/api/projects/:project_id/query` endpoint with the following JSON payload:
