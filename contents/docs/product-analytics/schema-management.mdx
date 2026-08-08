@@ -54,10 +54,11 @@ Property groups are reusable collections of typed properties that can be attache
 2. Click **New Property Group**
 3. Give your group a name (e.g., `Order Information`)
 4. Add properties with their types:
-   - **Name**: The property key
-   - **Type**: String, Number, Boolean, or Object
-   - **Required**: Whether the property must be present
-   - **Description**: Help text for your team
+   - **Name** - The property key
+   - **Type** - String, Number, Boolean, or Object
+   - **Required** - Whether the property must be present
+   - **Optional in types** - When enabled, this property is optional in generated SDK types even if required. Only applies to required properties. Use this for properties set globally via `posthog.register()` that are automatically added to all events
+   - **Description** - Help text for your team
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2025_11_14_at_2_26_02_PM_0c5f0a9310.png"
