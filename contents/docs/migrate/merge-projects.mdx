@@ -1,0 +1,232 @@
+---
+title: Merge two PostHog projects into one
+sidebar: Docs
+showTitle: true
+---
+
+import MigrationWarning from "./_snippets/migration-warning.mdx"
+
+<MigrationWarning />
+
+If you have two PostHog projects in the same organization – say, one for your marketing site and another for your app – you can consolidate them into a single project. This is useful when you want to connect upstream events (like ad clicks and pageviews) to downstream conversions (like sign-ups and purchases) in one set of funnels, dashboards, and cohorts.
+
+This guide walks through merging project **A** (source) into project **B** (target):
+
+1. [Backfill historical events](#1-backfill-historical-events-from-a-to-b) from A into B using a `PostHog HTTP` batch export.
+2. [Redirect live traffic](#2-redirect-live-traffic) to B – either by swapping the API key in your SDKs, by setting up a [PostHog destination](/docs/cdp/destinations/posthog) (replicator) in A that forwards new events to B, or both.
+3. [Verify](#3-verify-the-merge) that B has everything A had.
+4. [Decommission project A](#4-decommission-project-a-optional) once you're confident.
+
+> **Looking for cross-organization transfers instead?** Moving a project from one organization to another is handled by the PostHog team and requires a paid plan – see [Migrate to PostHog Cloud](/docs/migrate/migrate-to-cloud#migrating-events-between-cloud-instances-eg-us---eu-cloud).
+
+## Before you start
+
+Gather the following so the rest of the steps go smoothly:
+
+- **Both project IDs.** You'll be jumping between A and B repeatedly – keep both tabs open.
+- **An estimate of A's event volume.** A trends insight in A showing total events for the last 30, 90, or 365 days is enough. If you're moving more than ~10M events, [raise a support ticket](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic before you start so we can keep an eye on the historical ingestion lane.
+- **Project B's Project API Key** (the `phc_*` token in [project settings](/docs/settings/projects)). You'll need it for both the batch export and (if you use one) the replicator.
+- **An inventory of where A is being captured from.** Web only? Mobile apps? Server-side? Third-party tools? This decides how you cut over live traffic in step 2.
+- **The cloud region of each project.** US ↔ US and EU ↔ EU is straightforward. Cross-region merges work, but the host URL changes – `https://us.i.posthog.com` versus `https://eu.i.posthog.com` – so be careful not to paste the wrong one.
+
+> **A note on identity:** This merge copies events; it does not retroactively unify person profiles across the two projects. If the same user has a different `distinct_id` in A versus B, you'll end up with two PostHog persons in B after the merge. If unified identity across A and B matters to you, make sure your [identification calls](/docs/integrate/identifying-users) are consistent before you migrate.
+
+## 1. Backfill historical events from A to B
+
+Use a `PostHog HTTP` [batch export](/docs/cdp/batch-exports) on project A pointed at project B.
+
+1. In project **A**, go to **Data pipeline → Destinations → New destination**.
+2. Select **Batch exports**.
+3. Choose **PostHog HTTP** as the destination type.
+4. Fill in the configuration:
+
+    - **Name** – something obvious, like `Backfill to project B`.
+    - **Model** – `events`. (Persons and sessions are separate models with their own considerations; most merges only need events.)
+    - **PostHog URL** – `https://us.i.posthog.com` or `https://eu.i.posthog.com`, matching the region of project **B**.
+    - **API key** – project **B**'s `phc_*` Project API Key.
+    - **Interval** – `day` is a good default. `hour` closes the backfill window faster but creates more runs to monitor.
+    - **Backfill range** – set the start date to the earliest event you want in B, and the end date to a cutoff just after "now" so the export keeps running into the live window.
+
+5. **Save the export paused.** Don't unpause it until you've sent the support heads-up (if your backfill is large) and you've double-checked every field above – the host, the API key, and the date range are easy to get wrong, and once events are in B they can't easily be taken out.
+
+### Sizing and pacing the backfill
+
+- Daily interval gives you natural pause points: if the first 24-hour chunk looks wrong, you can stop before the rest of the backfill kicks off.
+- For very large backfills (50M+ events), split the time range into multiple sequential exports rather than running one giant one. Easier to monitor and easier to roll back.
+- The `PostHog HTTP` destination respects rate limits and retries failed batches automatically – but a 100M-event backfill can still take hours to days.
+
+### Monitoring the backfill
+
+- The export's **Runs** tab in project A shows per-batch success and failure, plus event counts.
+- In project B, build a trends insight on total events bucketed by day and watch the historical days fill in.
+- If you see sustained rate-limit errors in the export's logs, slow the export down (longer interval) or open a support ticket.
+
+## 2. Redirect live traffic
+
+The backfill only handles past events. To make sure new events also land in B, choose one of these strategies (or combine them).
+
+### Option A: Swap the SDK token (recommended)
+
+Replace project A's `phc_*` token with project B's `phc_*` in every place you initialize a PostHog SDK. New events flow straight into B; A goes quiet over time.
+
+**Pros**
+
+- Clean end state. One project, one write path, nothing extra to maintain.
+- No risk of duplicating events.
+
+**Cons**
+
+- You need to deploy every SDK client. Easy for web and server-side; harder for installed mobile apps and embedded SDKs.
+
+Only the token (and optionally the host) changes – the rest of your SDK setup stays the same:
+
+```js
+// posthog-js – see /docs/libraries/js
+posthog.init('phc_NEW_TOKEN_FROM_PROJECT_B', {
+    api_host: 'https://us.i.posthog.com',
+})
+```
+
+```ts
+// posthog-node – see /docs/libraries/node
+import { PostHog } from 'posthog-node'
+const client = new PostHog('phc_NEW_TOKEN_FROM_PROJECT_B', {
+    host: 'https://us.i.posthog.com',
+})
+```
+
+```python
+# posthog-python – see /docs/libraries/python
+from posthog import Posthog
+posthog = Posthog('phc_NEW_TOKEN_FROM_PROJECT_B', host='https://us.i.posthog.com')
+```
+
+```ts
+// posthog-react-native – see /docs/libraries/react-native
+import PostHog from 'posthog-react-native'
+const posthog = await PostHog.initAsync('phc_NEW_TOKEN_FROM_PROJECT_B', {
+    host: 'https://us.i.posthog.com',
+})
+```
+
+```kotlin
+// posthog-android – see /docs/libraries/android
+val config = PostHogAndroidConfig(apiKey = "phc_NEW_TOKEN_FROM_PROJECT_B").apply {
+    host = "https://us.i.posthog.com"
+}
+PostHogAndroid.setup(context, config)
+```
+
+```swift
+// posthog-ios – see /docs/libraries/ios
+let config = PostHogConfig(
+    apiKey: "phc_NEW_TOKEN_FROM_PROJECT_B",
+    host: "https://us.i.posthog.com"
+)
+PostHogSDK.shared.setup(config)
+```
+
+### Option B: Set up a PostHog replicator
+
+Leave A's SDKs alone and use the [PostHog destination](/docs/cdp/destinations/posthog) (also called the "replicator") in project A to forward every incoming event to B in real time.
+
+**Pros**
+
+- Zero client-side changes. You can ship it in minutes.
+- Works for SDKs you can't force-upgrade (installed mobile apps, embedded SDKs, third-party integrations writing into A).
+- Easy to roll back – just disable the destination.
+
+**Cons**
+
+- Project A keeps ingesting events (still counts toward your billing).
+- Two writes per event from A's perspective: one to A's own pipeline, one forwarded to B.
+- Mismatched filters or transformations between A and B can silently drop or duplicate events – check both sides before enabling.
+
+To set it up, follow the [PostHog destination installation steps](/docs/cdp/destinations/posthog#installation) inside project **A**. Use project **B**'s host and Project API Key in the configuration. Create the destination **disabled**, double-check the host and token point at B (not somewhere else), and only then enable it.
+
+> **Never set up replicators going both ways.** If A forwards to B and B also forwards to A, every event will be duplicated forever. Single direction only.
+
+### Option C: Use both (hybrid)
+
+In practice, many teams run the replicator and the token swap together:
+
+1. Turn on the replicator immediately when you start the backfill, so new events from A reach B straight away.
+2. Ship the SDK token swap in your client releases over the following weeks.
+3. Once mobile or embedded adoption of the new token is high enough (often 80–90% of active users), disable the replicator. The long tail of old-version clients then stops being copied to B.
+
+### Mobile-specific gotchas
+
+- App store review delays mean even an emergency token-swap release takes 1–3 days to be available, and many more days to reach meaningful penetration.
+- Don't try to swap the token at runtime using a remote-config flag. The session would split mid-flight and you'd see identity issues. Use the replicator instead.
+- iOS and Android can deliver a new token via remote configuration **for new installs only** – existing users keep the bundled token until they update the app.
+
+## 3. Verify the merge
+
+Once the backfill has completed and live traffic is reaching B, confirm the result before changing anything in A.
+
+### Daily event counts side-by-side
+
+Use the [SQL editor](/docs/product-analytics/sql) to run this in **project A**:
+
+```sql
+SELECT toDate(timestamp) AS day, count() AS events_in_a
+FROM events
+WHERE timestamp >= now() - INTERVAL 90 DAY
+GROUP BY day
+ORDER BY day
+```
+
+Then switch to **project B** and run the equivalent query there:
+
+```sql
+SELECT toDate(timestamp) AS day, count() AS events_in_b
+FROM events
+WHERE timestamp >= now() - INTERVAL 90 DAY
+GROUP BY day
+ORDER BY day
+```
+
+What to expect:
+
+- For the backfill window, `events_in_b` should be at least `events_in_a` (B may also have its own pre-existing events on those days).
+- For days after the cutover, `events_in_b` should look like `events_in_a + B's own native rate` if the replicator is running, or `B's own rate + A's prior rate` once the SDK token swap is fully shipped.
+- Small drift (under 1%) is normal – the historical ingestion lane is best-effort on ordering and may de-duplicate slightly differently.
+
+### Spot-check known users
+
+Pick three to five distinct IDs you recognize – a known internal user, a recent paying customer – and confirm each one resolves in B with the expected event history:
+
+```sql
+SELECT event, timestamp, properties.$current_url
+FROM events
+WHERE distinct_id = '<known_id>'
+ORDER BY timestamp DESC
+LIMIT 50
+```
+
+Run it in both A and B. The merged history should now appear in B.
+
+### Confirm the use case
+
+The whole point of the merge is usually "connect upstream pageviews or ad-campaign data to in-app conversions." Build the funnel in B end-to-end:
+
+- **Step 1:** an event that originated from A (for example, a `$pageview` with a `utm_source` property).
+- **Step 2:** an event that originated from B (for example, `account_created` or `purchase_completed`).
+
+If the funnel returns a non-zero conversion rate, the merge is delivering the use case. If step 1 is empty, the backfill or replicator isn't routing events the way you expect – go back to the destination's **Logs** tab before declaring victory.
+
+## 4. Decommission project A (optional)
+
+Only consider this once verification (step 3) checks out and you've been running on the merged project for at least one billing cycle.
+
+1. **Disable the replicator** (if you set one up). Confirm that A's own event rate doesn't change – it shouldn't, because A is still ingesting; only the forward to B is off.
+2. **Stop sending events to A** from any SDKs. Watch A's ingestion rate fall to roughly zero over a 24-hour window.
+3. **Archive or delete project A.** Most teams archive – it's effectively free and gives you a fallback for 30–90 days. Deletion is irreversible: data, dashboards, insights, feature flags, and recordings all go. See [Project settings](/docs/settings/projects) for both options.
+
+## Common pitfalls
+
+- **Backfilling more history than you need.** Confirm the time window you actually care about before sizing the export – most teams only need the period that overlaps with their reporting horizon.
+- **Token swap without the replicator on mobile.** Old app versions in the wild can keep writing to A for months. Either accept the long tail or run the replicator until adoption of the new token is high enough.
+- **Two replicators in a loop.** If both projects have replicators pointed at each other, you'll duplicate events forever. Single direction only.
+- **Filter or transformation mismatches.** The `PostHog HTTP` destination ships all events by default. If A has [transformations](/docs/cdp/transformations) or filters in place, mirror them either in the destination's filter list or in B's project settings, or events will silently double up or drop.
+- **Expecting person profiles to merge retroactively.** The merge copies events, not unified person records. If you need a unified profile across A and B, make sure identification is consistent before you migrate, or [contact us](/talk-to-a-human) – this is harder than it sounds.
