@@ -1,0 +1,94 @@
+---
+title: Multi-tenant apps
+sidebar: Docs
+showTitle: true
+---
+
+If your product serves many separate customer accounts from one deployment, you need a way to tell those accounts apart in PostHog. B2B SaaS is the obvious case, but so is a marketplace app installed across many merchant stores, or anything built around shared workspaces.
+
+Whatever you call the unit – tenant, organization, or workspace – the model is the same. Identify the user, then attach the tenant as a [group](/docs/product-analytics/group-analytics).
+
+Installing PostHog works the same as for any other app. Start with the [installation docs](/docs/product-analytics/installation) if you haven't yet.
+
+## Use one project, not one project per tenant
+
+A [project](/docs/settings/projects) is a silo of data. Queries can't cross projects, and every project has its own token, settings, dashboards, and feature flags.
+
+With a project per tenant:
+
+- You can't answer questions that span your customer base, like how many organizations activated this month or which plan tier retains best.
+- You duplicate every dashboard, flag, and setting for each new customer.
+- Every signup means provisioning a new project and token.
+
+Keep all tenants in one production project, alongside your marketing site so you can follow the journey from first visit through signup to product usage.
+
+Separate projects still make sense for the reasons that apply to any app: entirely separate products with unlinked authentication systems, admin apps that aren't customer-facing, or internal services. See [how to organize projects](/docs/settings/projects#how-to-organize-projects).
+
+## Keep the tenant separate from the user
+
+Model the tenant on whatever your customers call their own account, and key it on an immutable ID from your database.
+
+[`identify()`](/docs/product-analytics/identify) sets the person and [`group()`](/docs/product-analytics/group-analytics) sets the tenant:
+
+```js-web
+posthog.identify(user.id, { email: user.email, role: user.role })
+posthog.group('organization', tenant.id, { plan: tenant.plan })
+```
+
+Keep their properties separate too. A user's role belongs on the person, and a plan tier belongs on the tenant.
+
+A few things to know:
+
+- You can define up to 5 group types per project. Use two if you need levels, like an `organization` that owns several `store` entities.
+- Users who belong to several tenants stay one person. Call `group()` again when they switch context rather than issuing them a second `distinct_id`.
+- Server-side capture differs from the web SDK. See [setting up group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics) for the details.
+
+<CalloutBox icon="IconWarning" title="Don't use the tenant ID as the distinct ID" type="caution">
+
+The `distinct_id` identifies a *person*. Setting it to the tenant ID collapses every user in a tenant into one person profile, which breaks per-user metrics, funnels, and cohorts.
+
+A single distinct ID also hits a [rate limit](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) at roughly 5,000 events per minute. Past that, events lose strict ordering and person profile updates.
+
+Identify the user and pass the tenant as a group. For tenant events with no user behind them, like a nightly job or a webhook, see [capturing events for individual groups without a user](/docs/product-analytics/group-analytics#capture-events-for-individual-groups-without-a-user).
+
+</CalloutBox>
+
+## Filter and aggregate by tenant
+
+Filtering by tenant needs no add-on. Send the tenant ID as a [super property](/docs/libraries/js/usage#super-properties) or an event property. You can then filter and break down insights, [session replays](/docs/session-replay/how-to-watch-recordings), and [error tracking issues](/docs/error-tracking/monitoring#finding-specific-issues) by tenant.
+
+Aggregating by tenant needs [group analytics](/docs/product-analytics/group-analytics), a paid add-on. It covers:
+
+- Counting unique organizations rather than users
+- Funnels and [retention](/docs/product-analytics/retention) measured per tenant
+- [Flag rollouts targeted at a whole tenant](/docs/feature-flags/user-and-group-targeting)
+- Group-level [experiment](/docs/experiments) results
+- [B2B mode in customer analytics](/docs/customer-analytics/b2b-mode)
+
+Check the [billing scope](/docs/product-analytics/group-analytics#billing) before you subscribe. The add-on bills all identified events in your project, not only the events carrying group properties.
+
+## Show tenants their own data
+
+PostHog's [access controls](/docs/settings/access-control) apply to your team, not your customers. There's no way to scope a PostHog login to a single group, and anyone who has a [public share link](/docs/product-analytics/sharing) can view it.
+
+To surface per-tenant analytics inside your product, query PostHog server-side and render it yourself. See [embedded analytics](/tutorials/embedded-analytics) for the pattern.
+
+## Privacy and access controls
+
+PostHog has controls for limiting what you capture from your tenants' users, and who can reach it once captured.
+
+- [Privacy controls](/docs/product-analytics/privacy) redact data before capture.
+- [Transformations](/docs/cdp/transformations) hash PII after capture.
+- [Deletion](/docs/privacy/data-storage#right-to-be-forgotten) handles right to be forgotten requests per person.
+
+See [data storage controls](/docs/privacy/data-storage) for the full set.
+
+## Pull tenant metadata from your database
+
+Attributes like contract value, account owner, or billing region often live in your billing system rather than your app. Link that database as a [data warehouse source](/docs/cdp/sources), then [join it](/docs/data-warehouse/join) in [SQL](/docs/sql) to break events down by columns you never captured as events.
+
+## Further reading
+
+- [Group analytics](/docs/product-analytics/group-analytics) – the full reference for group types, properties, billing, and limitations
+- [Product analytics best practices](/docs/product-analytics/best-practices) – naming conventions, distinct ID design, and filtering internal users
+- [Understanding group analytics: frontend vs backend implementations](/tutorials/frontend-vs-backend-group-analytics)
