@@ -65,6 +65,39 @@ FROM
    ) AS previous_7_days
 ```
 
+#### VALUES expressions
+
+You can use `VALUES` to create inline tables directly in your query without needing to reference an existing table. This is useful for creating lookup tables, test data, or mapping values.
+
+```sql
+SELECT *
+FROM (VALUES
+    (1, 'active'),
+    (2, 'inactive'),
+    (3, 'pending')
+) AS status_lookup(id, status_name)
+```
+
+If you don't provide column names, they default to `col0`, `col1`, etc.
+
+You can also join `VALUES` expressions with other tables. For example, to map event names to categories:
+
+```sql
+SELECT
+    events.event,
+    category_map.category,
+    COUNT(*) as event_count
+FROM events
+JOIN (VALUES
+    ('$pageview', 'engagement'),
+    ('$screen', 'engagement'),
+    ('$autocapture', 'interaction'),
+    ('$rageclick', 'frustration')
+) AS category_map(event_name, category) ON events.event = category_map.event_name
+GROUP BY events.event, category_map.category
+ORDER BY event_count DESC
+```
+
 ### JOIN
 
 You can query over multiple tables together using the `JOIN` command. This combines the tables and returns different records depending on which of the four conditions you use:
