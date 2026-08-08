@@ -1462,6 +1462,10 @@ export const handbookSidebar = [
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
+                    {
+                        name: 'Advising customers on GDPR and PII',
+                        url: '/handbook/cs-and-onboarding/advising-customers-on-gdpr',
+                    },
                 ],
             },
             {
