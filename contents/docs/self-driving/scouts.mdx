@@ -100,6 +100,8 @@ When a scout emits a report, PostHog also captures a `$scout_report_emitted` eve
 
 Because it's a regular event in your stream, everything in PostHog can build on your scouts' output with nothing to wire up: query scout activity with [SQL](/docs/sql), chart it in an insight, set an [alert](/docs/alerts) on it, or point a [destination](/docs/cdp) at it – like forwarding every surfaced report to a [Slack channel](/docs/cdp/destinations/slack), templated from the event's title, summary, and link.
 
+If you want Slack delivery without wiring up a CDP destination, configure a Slack output on an individual scout instead. PostHog sends that scout's findings and any surfaced report updates straight to the channel you pick, using your project's Slack integration.
+
 Try it: this query lists your fleet's most recent findings.
 
 ```sql
