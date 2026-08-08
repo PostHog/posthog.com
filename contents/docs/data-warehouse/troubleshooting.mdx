@@ -28,6 +28,15 @@ You can also click the **Syncs** tab and expand any failed sync to see all the l
   classes="rounded"
 />
 
+## How do I get notified when syncs fail?
+
+PostHog sends a daily digest email when your data warehouse syncs fail. The email lists failing schemas grouped by source, with each schema showing one of two statuses:
+
+- **Paused — action required** - The sync hit a non-retryable error (like invalid credentials or an unreachable host) and has been paused. You need to fix the source configuration and re-enable the schema.
+- **Will retry** - The sync failed due to a transient error and retries automatically on the next scheduled run.
+
+These notifications use the **Data pipeline errors** toggle in your [account notification settings](https://app.posthog.com/settings/user#notifications). This is the same toggle that controls notifications for destinations and batch exports. See [account settings](/docs/settings/user#notifications) for more details on configuring notifications.
+
 ## Why is "Pull new schemas" not finding any tables?
 
 When you click **Pull new schemas** on an external data source (Postgres, MySQL, Redshift, etc.) and see a warning that no tables were found, this typically means:
