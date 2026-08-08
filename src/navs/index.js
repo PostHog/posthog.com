@@ -6708,6 +6708,11 @@ export const docsMenu = {
                             icon: 'IconCode',
                         },
                         {
+                            name: 'OpenCode',
+                            url: '/docs/ai-observability/installation/opencode',
+                            icon: 'IconOpenCode',
+                        },
+                        {
                             name: 'Claude Code',
                             url: '/docs/ai-observability/installation/claude-code',
                             icon: 'IconClaudeCode',
