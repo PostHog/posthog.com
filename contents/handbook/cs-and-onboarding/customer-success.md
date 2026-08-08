@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Customer Success Managers (CSMs) help customers get more value out of PostHog so they stick around. That means helping them onboard, train their team, work through support issues, find cost savings, and advocate for them inside PostHog.
+Customer Success Managers (CSMs) help customers get the most efficient use and value out of PostHog so they stay with us and tell their friends about it. That means helping them onboard, train their team, work through support issues, find cost savings, and advocate for them inside PostHog.
 
 ## Principles
 
@@ -22,12 +22,13 @@ Our primary goal is retention, and the team target is 120% NRR (see [how we work
 
 A big part of the work is spotting customers who need help before they ask. The loudest ones will find us anyway. The ones quietly struggling won't, and those are the ones where a well-timed outreach, a usage pattern in Vitally, or just reading between the lines on a ticket makes the difference.
 
-No two accounts need the same thing. Some need deep ticket involvement, some need strategic time, some just need a catch-up call every quarter.
+No two accounts need the same thing. Some need deep ticket and usage involvement, some need strategic time, some just need a catch-up call every quarter.
 
 ## The levers we have
 
 - **Establishing and building relationships.** Be the person a customer Slacks first when something breaks or when they want to try something new. [Getting started with customers](/handbook/cs-and-onboarding/getting-started-with-customers) covers the first 30 days; the [lifecycle of CSM engagement](/handbook/cs-and-onboarding/lifecycle-csm) covers how the relationship evolves after that.
 - **Implementation and setup.** Getting the right PostHog setup for a customer's use case, and improving what's already there. Implementations evolve - the person who set things up may have left, the product changes, or they want something more mature. Getting this right matters because if the implementation is off, customers stop trusting the data, and that makes everything else harder. The [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks) are the two main entry points.
+- **No Surprises as a customer.** Leave nothing to chance. Share early and often - this includes the good and the bad: setup optimizations, updates on feature requests, upcoming product changes, new product releases, noticed ingestion spikes. Anything that you think will impact your customer's experience sooner or later should proactively be shared with them.
 - **Technical troubleshooting and support.** Debugging customer issues (the broken event, the missing identify call, the misconfigured flag) and answering "how do I do X." CSMs at PostHog are technical, so this is yours by default, and it's also one of the best ways to build a relationship - you show technical credibility, get a better read on how they're actually using PostHog, and connect with the engineers who own the implementation. [Handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues) covers how we work through these.
 - **Finding and navigating friction.** Spotting where a customer is trying to do something they expect PostHog to handle and can't. Sometimes the fix is implementation or troubleshooting, sometimes it's training or pointing them to a feature they didn't know about, sometimes it's a feature request or bug report on our end. When it's genuinely our gap, we give credits generously. [Churn reasons](/handbook/cs-and-onboarding/churn-reasons) lists the patterns we see most.
 - **Monitoring health.** [Health tracking](/handbook/cs-and-onboarding/health-tracking) is our main signal for who needs attention. Don't just look at the score, look at what changed.
