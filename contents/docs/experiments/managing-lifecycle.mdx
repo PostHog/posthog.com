@@ -16,6 +16,18 @@ After you've determined a winning variant, click the **End experiment** button o
 
 When an experiment is ended (or when a variant is shipped while the experiment is still running), the experiment creator receives an in-app notification with the primary metric outcome – either significant or inconclusive. This notification isn't sent if the person ending the experiment is the same person who created it.
 
+### Automated flag code cleanup
+
+When ending an experiment (or shipping a variant), you can opt in to have PostHog automatically open a draft pull request that removes the experiment's feature flag code from your codebase. Check the cleanup option before confirming, and PostHog creates a Code task that scans your repository and opens a PR on GitHub.
+
+The cleanup status appears on the experiment page under the conclusion. While the task runs it shows "Preparing" and polls every 30 seconds. Once finished, it shows one of the following:
+
+- **Cleanup PR opened** – with a link to view the draft PR on GitHub.
+- **Nothing to remove** – no flag code was found in the repository.
+- **Failed** – the task encountered an error, with a link to view the task details.
+
+For more on removing stale flag code – including manual, AI-assisted, and CI-based approaches – see [Cleaning up stale feature flags](/docs/feature-flags/cleaning-up-stale-flags).
+
 Beyond this, we recommend:
 
 1. Sharing the results with your team.
