@@ -40,11 +40,31 @@ If your Azure Storage account has firewall rules enabled, you'll need to add the
 
 ## Models
 
-Azure Blob Storage supports all the models mentioned in the [batch export models reference](/docs/cdp/batch-exports#models).
+This section describes the models that can be exported to Azure Blob Storage.
 
-You can view the schema for each model inside the batch export configuration in the UI.
+> **Note:** New fields may be added to these models over time. Ensure that any downstream processes can handle additional fields being added to the exported files.
 
-> **Note:** New fields may be added to these models over time. Therefore, it is recommended that any downstream processes are able to handle additional fields being added to the exported files.
+### Events model
+
+This is the default model for Azure Blob Storage batch exports. The schema of the events model is:
+
+| Field                             | Type        | Description                                                               |
+|-----------------------------------|-------------|---------------------------------------------------------------------------|
+| uuid                              | `STRING`    | The unique ID of the event within PostHog                                 |
+| event                             | `STRING`    | The name of the event that was sent                                       |
+| properties                        | `STRING`    | A JSON object with all the properties sent along with an event            |
+| distinct_id                       | `STRING`    | The `distinct_id` of the user who sent the event                          |
+| team_id                           | `INT64`     | The `team_id` for the event                                               |
+| timestamp                         | `TIMESTAMP` | The timestamp associated with an event                                    |
+| azure_blob_ingested_timestamp     | `TIMESTAMP` | The timestamp when the event was exported to Azure Blob Storage           |
+
+### Persons model
+
+Azure Blob Storage supports the persons model. You can view the schema inside the batch export configuration in the UI.
+
+### Sessions model
+
+Azure Blob Storage supports the sessions model. You can view the schema inside the batch export configuration in the UI.
 
 ## Creating the batch export
 
