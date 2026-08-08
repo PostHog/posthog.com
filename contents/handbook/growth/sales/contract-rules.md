@@ -55,11 +55,11 @@ Beyond optimization, we offer discounts based on four levers:
 
 **For monthly-to-annual conversions & net new agreements:** +5% additional, non-recurring discount
 - Available when both parties commit to specific, mutually agreed date for contract signature (this is not an end-of-quarter discount)
-- To include the 5% discount on the order form, we require written confirmation by the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
+- To include the 5% discount on the order form, we require written confirmation from the customer's designated signatory of the customer's intent to sign an order form by a specific, mutually agreed upon date - _this needs to come from the person who will actually sign the order form_
 - This is about creating predictability for both sides, not artificial deadlines
 - This is a one-time discount, which will be offered once during a monthly-to-annual conversion or net new agreement cycle
 
-**For renewals:** +5% additional discount
+**For early renewals:** +5% additional discount
 - Early renewal commitment (60+ days before expiration)
 - Customer must be actively on a prepaid credit plan at the time of signing. If credits ran out before a new order form is signed and the customer rolled onto pay-as-you-go, the +5% does not apply; this is treated as a re-entry into a credit plan, not an early renewal. The spirit of this discount is to reward customers committing to a new renewal plan earlier than required, often because of recent rapid growth or a planned increase in usage, both of which result in a deeper partnership. 
 
@@ -272,7 +272,7 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 
 -   If they will run out of credit or wish to buy more within the **first half** of the contract term (1 year = 6 months, 2 years = 12 months, 3 years = 18 months), they can still take advantage of their initial discount. You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
     -   Example: Their original order form was signed on 1st January with a 12-month term. Their expansion order form could be signed on 1st June with a 7-month term. Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
--   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
+-   If they will run out of credit with **less than 2 months** remaining on their initial term, offer an early renewal. If they sign a renewal order form 60+ days before expiration, at an equal or higher contract amount, starting at the end of the original term, then we can cover their usage for free from when credits run out until the new contract starts.
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
