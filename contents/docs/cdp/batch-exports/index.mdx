@@ -248,3 +248,11 @@ Here is an example to illustrate this situation:
 This example illustrates the issue: The event with timestamp 12:59:59 can only be exported by batch export runs triggered after its arrival (13:00:00-14:00:00, and beyond), as the previous runs (12:00:00-13:00:00, and before) execute before PostHog even knows that the event exists. But if the 13:00:00-14:00:00 batch export run looked for events with timestamps in the 13:00:00-14:00:00 range, it would not export the event with timestamp 12:59:59, in fact, the event would never be automatically exported; we would say the event was **missed**.
 
 For this reason, PostHog tracks the time when an event is ingested and uses that to determine which events to include in a batch export run. Continuing with the example, the 13:00:00-14:00:00 batch export run instead looks for events that arrived within those bounds, and since the event in our example arrived at 13:07:00, it would be picked up and exported. This way, no events are missed.
+
+### Why can't I set `data_interval_end` to a future date?
+
+Batch exports can only export data that has already been captured. If you attempt to create a batch export run, backfill, or on-demand export with a `data_interval_end` that is after the current time, you'll receive an error like:
+
+> The provided 'data_interval_end' (your_timestamp) is in the future
+
+This applies to all batch export types, including scheduled runs, backfills, and file download exports. Set the end date to the current time or earlier.
