@@ -138,6 +138,24 @@ Hover over **Execution details** to see additional information about how the que
 
 These metrics are helpful for optimizing queries, especially when working with large datasets or complex joins. As you develop and change your query, keep an eye on the impact of your changes on the metrics. Seeing a spike in bytes read might prompt you to use a more selective filter.
 
+## Raw query mode for external connections
+
+When querying external data sources, PostHog normally translates your SQL through HogQL. If you run into syntax that HogQL doesn't yet support, you can enable **Send raw query** mode to bypass HogQL translation and send your query directly to the external connection.
+
+To enable raw query mode:
+
+1. Select an external connection in the SQL editor.
+2. Click the **settings gear** icon in the editor toolbar.
+3. Toggle **Send raw query** on.
+
+Your query is sent directly to the external database without any HogQL translation.
+
+<CalloutBox icon="IconInfo" title="When to use raw query mode" type="fyi">
+
+Use this as an escape hatch when HogQL translation doesn't support the SQL syntax you need. Your query may be logged to help improve HogQL support.
+
+</CalloutBox>
+
 ## Optimizing queries
 
 import OptimalQueries from "../_snippets/optimal-queries.mdx";
