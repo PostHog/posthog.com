@@ -1,0 +1,231 @@
+---
+title: Encore
+platformIconName: IconCode
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog makes it easy to get data about usage of your [Encore](https://encore.dev/) app. Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
+
+Encore is an open source backend framework with built-in infrastructure automation and observability. This guide walks you through integrating PostHog with your Encore TypeScript app.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. An Encore application. If you don't have one, create a new app with `encore app create`.
+
+## Installation
+
+Start by installing the `posthog-node` package using your package manager.
+
+```bash
+npm install posthog-node
+```
+
+<CalloutBox icon="IconInfo" title="Full-stack tracking">
+
+This guide covers server-side tracking with `posthog-node`. For full-stack applications, you'll typically also want [posthog-js](/docs/libraries/js) on your frontend for autocapture, session recordings, and client-side feature flags. Use the same `distinctId` on both frontend and backend to link user sessions.
+
+</CalloutBox>
+
+## Setting up secrets
+
+Encore uses its own [secrets management system](https://encore.dev/docs/ts/primitives/secrets). Define your PostHog API key as a secret:
+
+```ts file=posthog.ts
+import { secret } from "encore.dev/config";
+import { PostHog } from "posthog-node";
+
+const posthogApiKey = secret("PostHogApiKey");
+
+let posthogClient: PostHog | null = null;
+
+export function getPostHogClient(): PostHog {
+  if (!posthogClient) {
+    posthogClient = new PostHog(posthogApiKey(), {
+      host: "<ph_client_api_host>",
+    });
+  }
+  return posthogClient;
+}
+```
+
+Set the secret value using the Encore CLI:
+
+```bash
+encore secret set --type dev,local,pr,prod PostHogApiKey
+# Paste your PostHog project API key when prompted
+```
+
+You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
+
+<CalloutBox icon="IconInfo" title="Service lifecycle">
+
+Encore services are long-running, so PostHog's default batching behavior works well. Events are automatically batched and sent periodically. You don't need to call `flush()` after every event like you would in serverless environments.
+
+</CalloutBox>
+
+## Capturing events
+
+With PostHog set up, you can capture events in your Encore endpoints:
+
+```ts file=api.ts
+import { api } from "encore.dev/api";
+import { getPostHogClient } from "./posthog";
+
+interface Response {
+  message: string;
+}
+
+export const hello = api(
+  { expose: true, method: "GET", path: "/hello/:name" },
+  async ({ name }: { name: string }): Promise<Response> => {
+    const posthog = getPostHogClient();
+
+    posthog.capture({
+      distinctId: "user_123", // Replace with actual user ID
+      event: "hello_endpoint_called",
+      properties: {
+        name: name,
+      },
+    });
+
+    return { message: `Hello, ${name}!` };
+  }
+);
+```
+
+## User identification
+
+To connect events to identified users, use the `identify` method:
+
+```ts
+posthog.identify({
+  distinctId: "user_123",
+  properties: {
+    email: "user@example.com",
+    name: "John Doe",
+    plan: "pro",
+  },
+});
+```
+
+You can call this when a user signs up or logs in to associate their anonymous events with their identified profile.
+
+## Feature flags
+
+PostHog feature flags work seamlessly with Encore. Here's an example of using feature flags in an endpoint:
+
+```ts file=api.ts
+import { api } from "encore.dev/api";
+import { getPostHogClient } from "./posthog";
+
+interface FeatureResponse {
+  newFeatureEnabled: boolean;
+}
+
+export const checkFeature = api(
+  { expose: true, method: "GET", path: "/feature/:userId" },
+  async ({ userId }: { userId: string }): Promise<FeatureResponse> => {
+    const posthog = getPostHogClient();
+
+    const isEnabled = await posthog.isFeatureEnabled(
+      "new-checkout-flow",
+      userId
+    );
+
+    return { newFeatureEnabled: isEnabled ?? false };
+  }
+);
+```
+
+## Using with Encore's auth handler
+
+If you're using [Encore's built-in authentication](https://encore.dev/docs/ts/develop/auth), you can access the authenticated user's ID in your endpoints and use it as the PostHog `distinctId`:
+
+```ts file=auth.ts
+import { authHandler, Gateway, Header } from "encore.dev/auth";
+import { getPostHogClient } from "./posthog";
+
+interface AuthParams {
+  authorization: Header<"Authorization">;
+}
+
+interface AuthData {
+  userID: string;
+  email: string;
+}
+
+export const auth = authHandler<AuthParams, AuthData>(async (params) => {
+  // Your authentication logic here (e.g., verify JWT)
+  const userID = "authenticated_user_id";
+  const email = "user@example.com";
+
+  // Identify user in PostHog on authentication
+  const posthog = getPostHogClient();
+  posthog.identify({
+    distinctId: userID,
+    properties: { email },
+  });
+
+  return { userID, email };
+});
+
+export const gateway = new Gateway({ authHandler: auth });
+```
+
+Then in your authenticated endpoints, use `getAuthData()` to get the user's ID:
+
+```ts file=api.ts
+import { api } from "encore.dev/api";
+import { getAuthData } from "~encore/auth";
+import { getPostHogClient } from "./posthog";
+
+export const protectedEndpoint = api(
+  { expose: true, auth: true, method: "POST", path: "/checkout" },
+  async (): Promise<{ success: boolean }> => {
+    const auth = getAuthData()!;
+    const posthog = getPostHogClient();
+
+    posthog.capture({
+      distinctId: auth.userID,
+      event: "checkout_started",
+    });
+
+    return { success: true };
+  }
+);
+```
+
+<CalloutBox icon="IconInfo" title="Linking frontend and backend">
+
+If your frontend uses `posthog-js`, make sure you use the same `distinctId` (e.g., the user's ID from your auth system) on both frontend and backend. This links all events to the same user profile in PostHog.
+
+</CalloutBox>
+
+## Error tracking
+
+You can capture errors using PostHog's error tracking:
+
+```ts
+import { getPostHogClient } from "./posthog";
+
+try {
+  // Your code
+} catch (error) {
+  const posthog = getPostHogClient();
+  posthog.captureException(error, "user_123", {
+    endpoint: "/api/endpoint",
+    // Additional context
+  });
+  throw error;
+}
+```
+
+## Next steps
+
+- [Node SDK docs](/docs/libraries/node) for capturing events, feature flags, and group analytics
+- [Error tracking](/docs/error-tracking) for monitoring exceptions
+- [posthog-js](/docs/libraries/js) for client-side tracking in your frontend
