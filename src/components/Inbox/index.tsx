@@ -29,10 +29,11 @@ import { Select } from 'components/RadixUI/Select'
 import SEO from 'components/seo'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch, AlgoliaSearchResults } from 'components/Search/InlineSearch'
+import { useHasMounted } from 'hooks/useHasMounted'
 dayjs.extend(relativeTime)
 
 // lottie-react bundles lottie-web (~600 KiB); load it on demand instead of on every page.
-const Lottie = typeof window !== 'undefined' ? lazy(() => import('lottie-react')) : () => null
+const Lottie = lazy(() => import('lottie-react'))
 
 const Menu = ({ onValueChange }: { onValueChange: (value: string) => void }) => {
     const { user } = useUser()
@@ -458,6 +459,8 @@ export default function Inbox(props) {
     const { questions: subscribedQuestions } = useSubscribedQuestions()
     const [menuValue, setMenuValue] = useState('')
     const isMobile = useMemo(() => appWindow?.size.width < 896, [appWindow?.size.width])
+    // Only mount the lazy Lottie after hydration so the server and first client render match (avoids React #421).
+    const hasMounted = useHasMounted()
 
     const expandable = useMemo(() => {
         if (!containerRef.current) return true
@@ -631,7 +634,7 @@ export default function Inbox(props) {
                                                     </div>
                                                 </div>
                                             )}
-                                            {isLoading && (
+                                            {isLoading && hasMounted && (
                                                 <div className="flex items-center justify-center py-8 h-full">
                                                     <Suspense fallback={null}>
                                                         <Lottie
