@@ -37,3 +37,22 @@ jobs:
             - name: Skip if no markdown files changed
               if: steps.changed-files.outputs.any_changed != 'true'
               run: echo "No markdown files changed, skipping lint"
+
+    check-snippet-imports:
+        name: Check snippet imports
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
+            - name: Install dependencies
+              run: npm install glob
+
+            - name: Check for duplicate snippet import names
+              run: node scripts/check-snippet-imports.js
