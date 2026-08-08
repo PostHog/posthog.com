@@ -12,36 +12,33 @@ This page assumes you've already done the work in [discovery](/handbook/growth/s
 
 In a hurry before a call? Skip to the [cheat sheet](#cheat-sheet).
 
-## What you're actually selling
+## What you're selling
 
-The pitch is simple, but the machinery behind it has five parts and customers ask about them by name. If you can define these five in one line each, you can handle almost any question on the call. Self-driving is currently in open beta, so say that out loud too.
+The pitch is simple: If you can define these five in one line each, you can handle almost any question on the call. Self-driving is currently in open beta, so be sure to communicate that as well.
 
 | Part | One-line definition |
 |---|---|
-| **[Signal sources](/docs/self-driving/inbox/sources)** | Built-in pipelines that watch **one stream continuously**, in real time. Error tracking, support conversations, session replay, logs, Replay Vision, and health checks inside PostHog, plus external tools connected through the [data warehouse](/docs/data-warehouse) – Sentry, Zendesk, Linear, Jira, GitHub Issues, Snyk, Canny, and [many more](/docs/self-driving/inbox/sources). You toggle them on. |
-| **[Scouts](/docs/self-driving/scouts)** | Scheduled agents that **explore your data and use judgement**. A scout runs on a schedule, looks across whatever slice of PostHog you point it at, decides whether anything clears the bar you set, and files what it found. Some ship with PostHog, some you write yourself. |
+| **[Signal sources](/docs/self-driving/inbox/sources)** | Built-in pipelines that watch **one data stream continuously**, in real time. Error Tracking, Support, Session Replay, Replay Vision, Product Analytics, and AI Observability in PostHog, plus external tools connected through the [data warehouse](/docs/data-warehouse) – GitHub Issues, GitHub CI, Zendesk, Linear, and pganalyze. You toggle them on. |
+| **[Scouts](/docs/self-driving/scouts)** | Research agents that **explore a slice of your data** on a schedule, and decide what's worth surfacing. A few standard scout templates are ready to use, and you can generate custom scouts specific to your project. |
 | **The [signals](/docs/self-driving/signals) pipeline** | Both of the above emit **signals** – a finding, the evidence behind it, and a suggested action. The pipeline deduplicates and groups related signals so one real problem becomes one item, not five. |
 | **[Reports](/docs/self-driving/reports) and the [inbox](/docs/self-driving/inbox)** | A grouped set of signals becomes a **report** in your inbox, available in the [web app](/docs/self-driving/web), [PostHog Desktop](/docs/posthog-desktop), and Slack. This is the surface a human actually looks at. |
 | **[Research](/docs/self-driving/inbox/research) and [PRs](/docs/self-driving/anatomy-of-a-pr)** | From a report, a research agent connects it to the codebase and marks it **actionable** when a code fix is possible. From there an implementation agent can open a PR. Nothing merges without a human. |
 
-The chain in one breath: **something watches (source or scout) → it emits signals → the pipeline groups them into a report → the inbox researches it → an agent can open a PR.** The docs walk the same chain in order, so [the self-improving loop](/docs/self-driving/self-improving-loop) is the page to send anyone who wants the whole thing end to end.
+The full flow: **something watches (source or scout) → it emits signals → the pipeline groups them into a report → the inbox researches it → an agent can open a PR.** The docs walk the same chain in order, so [the self-improving loop](/docs/self-driving/self-improving-loop) is the page to send anyone who wants the whole thing end to end.
 
-> **The mistake to avoid.** Whichever of the two you personally understand best is the one you'll reach for on every call, and that's what makes a pitch feel generic. Sources and scouts are different tools with genuinely different strengths – neither is the premium version of the other. Pick based on what the customer told you in discovery, not on which one you find easier to explain.
 
-### Two things customers reliably conflate
+### Scouts vs Signals
 
 - **A scout is not an alert.** An alert fires on a threshold you set on one metric. A scout has memory, learns your baseline, dedupes against what it already told you, weighs how much a finding matters, and stays quiet on a quiet day. If a customer describes something a simple alert would solve, sell them the alert – it's cheaper and they'll trust us more for saying so.
-- **Not every report becomes a PR.** The PR is the flashiest end state, not the only one. Plenty of the value is a report that tells a human something true they'd have missed. Overpromising "it just fixes things" is the fastest way to a disappointed customer in week two.
+- **Not every report becomes a PR.** The PR is the flashiest end state, but there's plenty of value in a report that flags something you might have missed, and has real research to back it up. We also don't want to overpromise anything.
 
 ## Scouts and signal sources: the strengths of each
 
-Both feed the same inbox, and most customers end up running both. They aren't competing products and one isn't the upgrade from the other – they make an honest trade against each other, and a rep who can name that trade sounds like they know the product.
+Both feed the same inbox, and most customers will likely end up running both. 
 
-**The trade is determinism versus judgement.**
+A signal source will ingest every single item. Turn on Error Tracking as a source and *every* qualifying error gets processed continuously. That specificity is useful when you want something comprehensive, and predictable.
 
-A signal source is deterministic and exhaustive. Turn on error tracking as a source and *every* qualifying error-tracking signal gets processed, continuously, in real time. Nothing is skipped because an agent weighed it and decided it wasn't interesting. That predictability is a genuine feature: you can reason about coverage, you get the same behavior today and next month, and there's no bar for something to clear. When a customer says "I need to know that nothing gets missed," that's not a limitation talking, that's a requirement – and the pipeline is the honest answer.
-
-A scout trades some of that determinism for judgement and steerability. It runs on a schedule rather than continuously, it explores rather than following a fixed stream, and it decides what clears the bar – which means it can weigh, rank, cluster, and stay quiet, but also means it's making a call each run and won't be exhaustive by design. That's the right trade when the volume is unmanageable, the interesting thing spans several surfaces, or "worth knowing" is a matter of opinion that only the customer can define.
+A scout trades some of that determinism for flexibility and customization. It runs on a schedule rather than continuously, and explores rather than following a fixed stream. Like a signal source, a scout weighs, ranks, and clusters data points, the key difference is that each scout retains memory of its previous runs, and can make a judgement call whether new findings are "worth knowing" (sometimes a run will return nothing). 
 
 | | **Signal sources** | **Scouts** |
 |---|---|---|
@@ -53,21 +50,15 @@ A scout trades some of that determinism for judgement and steerability. It runs 
 | **Tuning** | Configuration | Steerable in plain English, and it learns |
 | **Best when** | Missing something is unacceptable | Everything is technically "something" and you need a filter |
 
-### Steerability is the scout's other half
-
-Determinism is what you give up; steerability and learning are what you get, and this is the part reps under-sell because it's harder to demo than a toggle. Worth knowing concretely:
-
-- **Scout notes.** Short steering messages in plain English that every run reads: "the staging traffic spike you keep flagging is known noise, stop reporting it," or "we shipped a new checkout Tuesday, treat conversion shifts after that as expected." They can address one scout or the whole fleet, and can be given an expiry so time-boxed steering retires itself. Notes are advisory – they direct attention without lowering the evidence bar.
-- **Inbox feedback becomes steering.** When someone dismisses or snoozes a report and types why, that note is forwarded into the steering channel and later runs read it. Triaging your inbox honestly is how scouts get quieter, with nobody editing anything.
-- **Durable memory.** Each run reads back what earlier runs learned – what's normal, what it already surfaced, what it decided to hold – so it dedupes against itself and sharpens over time rather than starting cold.
+- **Scout notes.** Short steering messages in plain English that every run reads: "the staging traffic spike you keep flagging is known noise, stop reporting it," or "we shipped a new checkout Monday, treat conversion shifts after that as expected." They can address one scout or the whole fleet, and can be given an expiry so time-boxed steering retires itself. Notes are advisory – they direct attention without lowering the evidence bar.
+- **Inbox feedback becomes steering.** When a team member dismisses or snoozes a report and types why, that note is forwarded into the steering channel and later scout runs read it. Triaging your inbox is how scouts get smarter.
+- **Durable memory.** Each run reads back what earlier runs learned (what's normal, what it already surfaced, what it decided to hold) so it dedupes against itself and sharpens over time rather than starting cold.
 - **A custom scout suggests its own edits.** When a run turns up concrete evidence that its own instructions misdirected it, it files that as a suggestion with the evidence attached. The scout proposes, the customer decides.
 - **Dry runs.** Run it for real, record everything it would have filed, write nothing to the inbox. The answer for a cautious or high-stakes team.
 
-So the framing for a customer with strong opinions about their own domain: a source gives you guaranteed handling of a known stream; a scout lets you encode judgement nobody else could write down, then keep tuning it in English as you learn. Customization is the reason to reach for a scout, and it's a real reason.
+So the framing for a customer with strong opinions about their own domain: a source gives you guaranteed handling of a known stream; a scout lets you encode judgement, then keep tuning it in English as you learn. Customization is the reason to reach for a scout.
 
-### Which to lead with
-
-You still have to open on one. The question to ask yourself: **does this customer have a stream that's already telling them something, or a question nobody is holding?**
+### Which to lead with - scouts vs signals
 
 | Lead with **signal sources** when… | Lead with **scouts** when… |
 |---|---|
@@ -78,20 +69,16 @@ You still have to open on one. The question to ask yourself: **does this custome
 | Their pain is described in nouns: tickets, exceptions, issues | Their pain is described in questions: "are we losing anyone?", "did that launch land?" |
 | Fastest to demo: toggle a source, show the queue fill | Fastest to demo: point a scout at their data and run it on demand |
 
-Two things that hold up on most calls:
 
-- **Most customers land on both, and they compose well.** The common shape is sources for the streams where completeness matters, scouts for the questions nobody is holding. Pitching them as either/or makes the product smaller than it is.
-- **If a detector already exists, a scout can sit on top of it rather than replace it.** Customers with existing alerting or triage often assume we're a rip-and-replace. Frequently the better answer is that their detector keeps its deterministic coverage and a scout adds the layer above: bundling related items, weighing who's affected, flagging what nobody actioned.
-
-> **A worked example.** A customer asks for a Linear source, expecting every issue to become a PR. That's exactly what the source does, and for a team whose backlog is already groomed – where every issue in there genuinely should be worked – it's the right answer, and the determinism is the point. But listen for "…and then it just does them all?" said with a slight wince. That's a team whose backlog is a mixed bag, and what they want is a Linear _scout_ reading the same issues with weighting and judgement they control and can steer over time. Same data, two legitimate products. The question that separates them: "should everything in there get worked, or does someone need to decide what matters first?"
+> **An example.** A customer hooks up Linear as a signal source, and every issue automatically turns into a PR. No judgment calls needed – if it's there, it gets worked on. That's great for a team whose backlog is already clean and prioritized. In some cases, what they actually want is a Linear _scout_ reading the same issues with weighting they can control and judgement they can steer over time. Same data, two use cases. The question that separates them: "should everything in there get worked, or does someone need to decide what matters first?"
 
 ## The core pitch
 
 Keep it simple. Something like this:
 
-> PostHog already has all the behavioral data about how people use your product. We turn that data into signals, feed those signals to an agent running in a sandbox, and it automatically opens PRs that improve your product. That's your product, self-driving – and the more you put into PostHog, the better the signals get.
+> PostHog already has all the behavioral data about how people use your product. We turn that data into signals, feed those signals to an agent running in a sandbox, and it automatically opens PRs that improve your product. The more you put into PostHog, the better the signals get.
 
-That last line is the flywheel line. Every event, flag, and replay you capture sharpens the signals the agent works from, so more data in means better PRs out. In brand terms this is [context – the fuel](/handbook/brand/foundations#how-we-describe-posthog) for the self-driving loop, which is why "put more into PostHog" and "get better PRs out" are the same sentence.
+That last line is the flywheel line. Every event, flag, and replay you capture improves the signals the agent works from, so more data in means better PRs out. In brand terms this is [context – the fuel](/handbook/brand/foundations#how-we-describe-posthog) for the self-driving loop, which is why "put more into PostHog" and "get better PRs out" are the same sentence.
 
 The flywheel is stronger than it first sounds, because it isn't limited to product analytics. A scout reads your data through the same [PostHog MCP](/docs/model-context-protocol) you'd connect to Claude Code, so **anything you land in PostHog becomes watchable** – a warehouse table, a Stripe sync, a support inbox, even a Slack channel relayed into the warehouse. That turns "put more into PostHog" from a land-grab into a concrete promise: every new source is a new thing a scout can hold an opinion about.
 
@@ -111,8 +98,6 @@ When the customer starts planning their instrumentation rollout unprompted and i
 - They ask who else on their team should see this
 - The question shifts from "what is it?" to "how would we set this up?" (when it does, [setup](/docs/self-driving/setup) is the page to walk them through)
 
-If none of these happen, you probably pitched the machinery instead of their problem. Go back to what they told you in discovery and re-anchor.
-
 ## How to run it
 
 - **Lead with the data they already have.** Start from the behavioral data they're capturing in PostHog today, not from the agent. The agent is the payoff, not the opener.
@@ -126,7 +111,7 @@ If none of these happen, you probably pitched the machinery instead of their pro
 
 A [reverse demo](https://www.clay.com/blog/reverse-demo) (a term Clay recently popularized) flips the usual script: instead of you driving a polished demo environment, the customer drives their own data. It's a faster path to the aha moment because the value shows up in their product, not a sandbox account.
 
-The honest catch for us is that a reverse demo only works once there's enough clean data in PostHog for the agent to act on. Clay can have someone build a lead list on the first call before they're even a customer; we can't conjure signals out of an empty project. That makes the reverse demo a great fit for existing customers who already have the data flowing (a natural play for TAMs), and a tougher one for prospects who haven't connected anything yet (TAEs will usually need to get data flowing first, see the pre-call prep below).
+The catch for us is that a reverse demo only works once there's enough clean data in PostHog for the agent to act on. Clay can have someone build a lead list on the first call before they're even a customer; we can't conjure signals out of an empty project. That makes the reverse demo a great fit for existing customers who already have the data flowing (a natural play for TAMs), and a tougher one for prospects who haven't connected anything yet (TAEs will usually need to get data flowing first, see the pre-call prep below). 
 
 ### Pre-call prep
 
@@ -136,7 +121,7 @@ The whole demo depends on there being real signals to work from, so set that up 
 - Have them get PostHog Desktop downloaded and their GitHub and PostHog connected, so they can kick off a PR live.
 - Frame the cost honestly: offer to credit any usage on errors and replays during the demo window, since you need them on to show it at its best, and they can turn them back off after. If it wows them, they'll want to keep them on anyway, and that's the flywheel starting.
 
-### Running it
+### The demo
 
 Let them drive the whole way. You narrate, they click.
 
@@ -147,7 +132,7 @@ Let them drive the whole way. You narrate, they click.
 
 Because they're looking at their own product the whole time, the conclusion lands on its own, which is exactly the same dynamic that makes the core pitch work.
 
-### The scout-led reverse demo (no soak window needed)
+### The scout-led reverse demo (no data prep or pre-ingest needed)
 
 The source-led version above needs data to accumulate first. The scout-led version doesn't, which makes it the better opener for an account with historical data but nothing switched on yet.
 
@@ -160,11 +145,11 @@ The thing to make land here is the memory. A scout reads back what earlier runs 
 
 ## What a scout actually looks like
 
-Abstract explanations of scouts land badly. Concrete ones land immediately, so keep a few in your back pocket.
+Specific and specialized scout explanations tailored to use-case are always better than generic overviews and broad scout examples.
 
-PostHog ships around 30 **canonical scouts** out of the box – error tracking, product analytics, revenue analytics, experiments, feature flags, web vitals, session replay, data warehouse health, and more – each watching a common pattern, each toggled on or off per project. The full list with what each one looks for is in [scout examples](/docs/self-driving/scout-examples). Worth knowing: every canonical scout is just a readable markdown skill in our public repo, which is a good answer to "what is it actually doing?" from a skeptical engineer.
+PostHog ships around 30 **canonical scouts** out of the box – error tracking, product analytics, revenue analytics, experiments, feature flags, web vitals, session replay, data warehouse health, and more – each watching a common pattern (default toggled on or off per project). The full list with what each one looks for is in [scout examples](/docs/self-driving/scout-examples). Worth knowing: every canonical scout is just a readable markdown skill in our public repo, which is a good answer to "what is it actually doing?" from a skeptical engineer.
 
-**Custom scouts** are where the pitch gets specific, and we run a lot of them on ourselves. Genericized, some of the shapes we dogfood internally:
+**Custom scouts** are where the pitch gets more targeted towards their specific use-cases and needs, try and demonstrate ones that are tailored to them:
 
 - A scout that scores each day's new signups against our written ICP and files one ranked digest, instead of a firehose of signup notifications.
 - A scout that watches a social-listening feed synced into the warehouse and surfaces live product problems people are hitting in public.
@@ -172,37 +157,23 @@ PostHog ships around 30 **canonical scouts** out of the box – error tracking, 
 - A scout that finds fast-growing accounts nobody on our side is working yet – the intersection of "taking off," "good profile," and "not already owned."
 - A scout that watches for sustained multi-axis decline on commercially meaningful accounts: usage down _and_ spend down _and_ engagement down, ranked by revenue at risk.
 - A scout that catches items in an already-automated queue that got classified but never actioned – the judgement layer on top of an existing detector.
-- A scout that checks whether a merged fix actually held, re-measured after a soak window.
+- A scout that checks whether a merged fix actually held and can check back after enough time has passed
 - Scouts that read a repo: docs drifting out of date, features shipped with no instrumentation, flags fully rolled out whose keys still litter the codebase.
 
-The last few are worth calling out because they surprise people: a scout can watch things that never throw an exception. Silence where there should be a heartbeat. A promise event with no matching fulfillment. A classifier whose verdict rate is quietly drifting. None of those show up in error tracking, ever.
+Also worth knowing: scouts can watch things that never throw an exception, which is kind of like a reverse-signal. No news is good news!
 
-For customer-shaped ideas across verticals, and the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) behind them, send them to [scout examples](/docs/self-driving/scout-examples). For a deep dive with two real scouts traced end to end and a walkthrough video, [What is a scout?](/blog/what-is-a-scout) is the best single link to leave behind.
+For ideas that work across verticals, and the [scout patterns cookbook](https://github.com/PostHog/posthog/blob/master/products/signals/skills/authoring-scouts/references/scout-patterns.md) behind them, send them to [scout examples](/docs/self-driving/scout-examples). For a deep dive with two real scouts traced end to end and a walkthrough video, [What is a scout?](/blog/what-is-a-scout) are good references.
 
-## Run one on your own accounts first
+## The AI observability play
 
-The best preparation for pitching a scout is having one. You'll explain it better, you'll have a screenshot, and you'll know where the rough edges are before a customer finds them.
+AI products are an easy self-driving pitch: they already know their agent misbehaves, and nobody is reading every trace. Two signal types turn [AI observability](/docs/ai-observability/start-here) data into inbox reports.
 
-All of our "who owns what account" logic now lives in [customer analytics](/docs/customer-analytics) in PostHog, which is the source of truth for the accounts you look after. That means a scout can scope itself to _your_ book of business and watch it for you: usage surges and drops, a product tried for the first time or abandoned, new teammates appearing, a support ticket, an upcoming renewal, or a billing-page visit that reads as intent.
+**Evaluations (rolled out to everyone).** [Ingest AIO events](/docs/ai-observability/start-here) → create an [online evaluation](/docs/ai-evals) that scores them → turn on [evaluation reports](/docs/ai-evals#evaluation-reports), where an agent reads a batch of results and writes up what it found. That summary is the signal.
 
-The nuggets are small and specific, and that's the point. A customer turning session replay on and then off again an hour later is exactly the kind of thing that's invisible in a dashboard, obvious in hindsight, and genuinely useful the same day. Ask yourself what you'd want a teammate to Slack you about, then make that the scout's bar.
+**Anomaly detection (alpha).** Ingest AI observability events, then add an [anomaly detection alert](/docs/alerts#anomaly-detection) on an AI errors, latency, or cost insight and turn on agent investigation. When the alert fires, the agent checks whether the anomaly is real and writes up what it found in a notebook. Only true positives reach the inbox, as a report summarizing the investigation.
 
-Each scout can post what it finds to a Slack channel of your choosing, so route yours to a channel you actually read rather than adding another inbox to your day.
-
-## How to frame it
-
-These are framings that help the pitch land. Reach for them when a customer needs help picturing what self-driving actually means for their team.
-
-- **Autonomy from instruction, not from the engineer.** Self-driving means the bots don't need to be told every step, not that they ship without you. Nothing gets Yolo-merged without your approval, so the engineer stays in control.
-- **Robots do maintenance, humans do creative work.** Bots are great at fixing bugs and making optimizations, while people are best at building new features. Self-driving is compelling because it puts maintenance mode on autopilot and frees you up to be in build mode.
-- **It belongs in a shared workspace.** The Slack app is a hit because it brings self-driving behavior into a space the whole team shares. Marketers can prompt work, engineers can help steer it, and everyone gets to feel like an F1 driver.
-- **It's more than cruise control.** Agentic workflows from other companies are basically cruise control, keeping you in the lane you already picked. Self-driving takes you down a road you didn't know was there.
-- **A scout is the teammate who reads the dashboards nobody opens.** Everyone has metrics they'd check if they had time. A scout is the colleague who checks them every day and only says something when it matters.
-- **You're buying silence, not volume.** A good scout mostly tells you nothing. That's the product working. If it talked every day you'd stop reading it, which is exactly what happened to their alerting.
 
 ## Objections and what not to promise
-
-Getting these right up front is what stops a great first call becoming a rough second month.
 
 | What they say | How to handle it |
 |---|---|
@@ -216,33 +187,22 @@ Getting these right up front is what stops a great first call becoming a rough s
 
 Things not to promise: that it replaces anyone, that it catches everything, that reports always become PRs, or that it's finished. It's in open beta, it's improving fast, and saying so builds more credibility than pretending otherwise.
 
-## Common mistakes
-
-- **Defaulting to whichever one you explain best.** The most common version is opening on the sources grid because it demos in ten seconds, but the reverse happens too – reps who love scouts pitching judgement to a team whose actual requirement is "we cannot miss one." Let discovery pick, not habit.
-- **Framing them as either/or.** Most customers end up with both, and the trade between determinism and judgement is a strength of the product, not an awkward question to dodge. Reps who explain the trade honestly sound like they know the product; reps who claim one does everything sound like they're selling.
-- **Demoing on an empty project.** Self-driving has nothing to say without data, and a scout that finds nothing on the call reads as "the product doesn't work" rather than "there's no data yet." Check what's flowing before you commit to a live demo, and use the [pre-call prep](#pre-call-prep) if it's thin.
-- **Explaining the architecture instead of their problem.** Nobody buys a pipeline diagram. The five parts exist so you can answer questions confidently, not so you can present them. If you're three minutes into signals-versus-sources and they haven't mentioned their own product once, you've lost the thread.
-- **Pitching a scout where an alert would do.** If they describe one metric and one threshold, sell them the alert. Saying "you don't need us for that" buys more credibility than the deal you'd have talked them into.
-- **Leaving without a specific scout.** "We'll follow up on self-driving" dies in the inbox. "We'll point a scout at your onboarding funnel and I'll send you what it finds Thursday" doesn't.
-- **Overpromising the PR.** The PR is the flashiest end state, not the guaranteed one. A rep who promises auto-fixes creates a churn risk in week two for a demo moment in week one.
-- **Being vague about beta.** They will find the rough edges. Naming them first makes you the person who told them, not the person who didn't.
-
-Specific beats generic every time, so watch the language. "It surfaces actionable insights from your data" is the kind of sentence that makes a buyer stop listening. "It'll tell you when someone turns on session replay and then turns it off an hour later" is the kind that makes them ask a follow-up question.
 
 ## Cheat sheet
 
 For the five minutes before a call.
 
 - **The chain:** something watches (source or scout) → signals → grouped into a report → inbox researches it → agent opens a PR → human merges.
-- **Source = one stream, continuous, exhaustive, predictable. Scout = scheduled, exploratory, selective, steerable.** Both land in the same inbox, and most customers run both.
-- **The trade in one line:** sources give determinism and guaranteed coverage, scouts give judgement and steerability. Neither is the upgrade.
-- **Lead with sources** when missing one is unacceptable. **Lead with scouts** when everything is technically "something" and they need a filter.
+- **Source = one stream, continuous, exhaustive, predictable. Scout = scheduled, exploratory, selective, steerable.** Both land in the same inbox, and most customers want both.
+- **The trade-offs between Signals and Scouts:** sources give determinism and guaranteed coverage, scouts give judgement and steerability. Neither is the upgrade.
+- **Lead with sources** when there's significant volume to triage. **Lead with scouts** when everything is technically "something" and they need a filter.
 - **Best discovery question:** "What does someone on your team open every morning?"
 - **The question that separates the two:** "Should everything in that stream get worked, or does someone need to decide what matters first?"
 - **Best demo move:** toggle a source and watch the queue fill, or make a scout on their data and run it on demand, live.
 - **Best close:** one concrete thing pointed at one thing they care about.
+- **On an AI account:** eval + [evaluation report](/docs/ai-evals#evaluation-reports) ships today, anomaly detection + agent investigation is alpha. Both need [AIO events](/docs/ai-observability/start-here) flowing first.
 - **Never promise:** auto-merge, total coverage from a scout, or a PR from every report.
-- **Links to leave behind:** [What is a scout?](/blog/what-is-a-scout), [scout examples](/docs/self-driving/scout-examples), [self-driving docs](/docs/self-driving).
+- **Links to share:** [What is a scout?](/blog/what-is-a-scout), [scout examples](/docs/self-driving/scout-examples), [self-driving docs](/docs/self-driving).
 - **Have open in another tab:** [the FAQ](/docs/self-driving/faq) for anything you get asked cold, and [pricing](/docs/self-driving/pricing) so you never guess at a number.
 
 ## Iterating on this page
