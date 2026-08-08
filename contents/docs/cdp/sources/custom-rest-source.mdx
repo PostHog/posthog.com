@@ -29,6 +29,29 @@ This is useful when:
 4. Click **Next**. PostHog validates the configuration, checks that the URLs are reachable, and probes the first few endpoints to confirm your credentials work.
 5. Configure sync settings (sync method, frequency) for each stream, then start syncing.
 
+## Build from API docs with AI
+
+Instead of configuring a Custom REST source manually, you can paste an API documentation URL and let PostHog draft the manifest for you.
+
+This feature requires your organization to have [AI data processing enabled](/docs/posthog-ai/allow-access). An organization admin can enable it from the PostHog AI chat or from **Settings** > **Organization** > **General**.
+
+To build a source from API docs:
+
+1. In PostHog, go to the [Data pipeline sources tab](https://app.posthog.com/pipeline/new/source) and select **Custom REST source**.
+2. On the **Build a custom source from API docs** screen, enter a **Source name** (e.g. `Acme CRM`) and the **Documentation URL** for the API.
+3. Click **Generate**. PostHog fetches the documentation, drafts a manifest, and validates it against the same checks as manual creation – repairing automatically if needed.
+4. Review the drafted manifest in the source builder. Adjust the base URL, streams, pagination, or incremental sync settings as needed.
+5. Add your credentials (bearer token, API key, or password) – the AI never includes secrets in the manifest.
+6. Click **Next** to validate and create the source.
+
+If you prefer to skip the AI step, click **Configure manually** to go straight to the source builder.
+
+<CalloutBox icon="IconInfo" title="AI-drafted manifests are a starting point" type="fyi">
+
+The drafted manifest covers common patterns well, but you should review it before creating the source. Check that pagination, data selectors, and incremental sync cursors match the API's behavior.
+
+</CalloutBox>
+
 ## Configuration reference
 
 ### Base URL
