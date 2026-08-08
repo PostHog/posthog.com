@@ -17,7 +17,7 @@ The Convex connector can sync your Convex database tables to PostHog.
 
 You need two things from your Convex project:
 
-- **Deploy URL** – must be in the format `<something>.convex.cloud`. Find it in the Convex Dashboard under **Settings** > **URL & Deploy Key**.
+- **Deploy URL** – must be in the format `<deployment-name>.convex.cloud` or `<deployment-name>.<region>.convex.cloud` for regional deployments. Find it in the Convex Dashboard under **Settings** > **URL & Deploy Key**.
 - **Deploy key** – found in the same location: **Settings** > **URL & Deploy Key**.
 
 ## Linking Convex to PostHog
