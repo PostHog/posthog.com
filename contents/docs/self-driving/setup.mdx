@@ -44,6 +44,22 @@ Prefer to install PostHog manually? Follow the [install guide](/docs/getting-sta
 
 </Step>
 
+<Step checkpoint title="Confirm PostHog is receiving events" badge="required">
+
+PostHog's [signal sources](/docs/self-driving/inbox/sources) only produce signals once the matching product has data in your project, so confirm events are arriving before you go further. External sources such as GitHub Issues and Jira work without them.
+
+1. **Deploy your changes.** The wizard edits your code. It does not commit or deploy it, so nothing reaches PostHog until your changes are live.
+2. **Use your product** – load a page, or run whichever action you instrumented.
+3. **Open the [activity tab](/docs/activity)** in your project. Your events appear within about a minute.
+
+If the activity tab stays empty:
+
+- **No `$pageview` events?** You may have a server-side install only. Without the [JavaScript Web SDK](/docs/libraries/js) the browser sends nothing, so you get no pageviews, no [session replay](/docs/session-replay), and no browser data for [web analytics](/docs/web-analytics).
+- **Checking with a script or a coding agent?** The JavaScript Web SDK [blocks bots and headless browsers client-side](/docs/web-analytics/troubleshooting#do-stats-include-bots-and-crawlers), so they never send events. Confirm in a real browser, or set `opt_out_useragent_filter` to `true`.
+- **Querying the API instead?** [Query results are cached](/docs/api/queries), so a repeated query can keep reporting no events after they arrive. Pass `"refresh": "force_blocking"` to force a fresh read.
+
+</Step>
+
 <Step title="Connect Slack" badge="recommended">
 
 Add the [PostHog Slack app](/docs/slack) so you can summon agents and review their work from your team's channels. You connect your Slack workspace once, and each teammate who wants to ship a pull request connects their own GitHub. PostHog also posts a notification to the **#posthog-inbox** channel whenever a new report lands, so your team sees work as it comes in.
