@@ -1173,6 +1173,10 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/positioning/posthog-ai',
                     },
                     {
+                        name: 'Inbox',
+                        url: '/handbook/marketing/positioning/inbox',
+                    },
+                    {
                         name: 'PostHog Desktop',
                         url: '/handbook/marketing/positioning/desktop',
                     },

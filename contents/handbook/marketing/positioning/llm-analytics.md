@@ -8,15 +8,15 @@ showTitle: true
 
 ## Elevator pitch
 
-PostHog LLM Analytics tracks every model call – latency, tokens, cost per user, quality signals, errors – alongside the product events and session data from the humans using your AI features. When something goes wrong, you can trace it back to the exact conversation, the exact prompt, and the exact user cohort affected. And because it's PostHog, PostHog Desktop can read those traces and propose fixes – automatically.
+PostHog LLM Analytics tracks every model call – latency, tokens, cost per user, quality signals, errors – alongside the product events and session data from the humans using your AI features. When something goes wrong, you can trace it back to the exact conversation, the exact prompt, and the exact user cohort affected. And because it's PostHog, self-driving can read those traces and propose fixes automatically. Those traces are a signal source: the loop turns the patterns it finds into ranked reports in your [Inbox](/handbook/marketing/positioning/inbox).
 
-Langfuse shows you the trace. PostHog shows you the trace *and* what it cost you in user retention **and** makes that information queryable to PostHog Desktop, the self-driving development platform. 
+Langfuse shows you the trace. PostHog shows you the trace *and* what it cost you in user retention **and** feeds that trace to self-driving, the loop that watches your product, finds what's worth fixing, and opens a PR.
 
 ## The unique belief (in terms of LLM analytics)
 
 Every team building an AI-native product is running two products simultaneously: the product users see, and the AI layer underneath it. That AI layer has its own failure modes – bad prompts, cost explosions, latency spikes, quality regressions – and none of those show up in standard product analytics. That's where LLM analytics comes in!
 
-PostHog Desktop already uses LLM traces optimize AI features as part of the [product autonomy loop](/blog/self-driving-product). Its built-in `exploring-llm-traces` and `exploring-llm-clusters` skills let agents find patterns in model calls and propose prompt improvements. But that only works if the traces exist. **LLM Analytics is the signal layer that makes AI products self-improving.**
+Self-driving already uses LLM traces to optimize AI features as part of the [product autonomy loop](/blog/self-driving-product). A scout with the `exploring-llm-traces` and `exploring-llm-clusters` skills finds patterns in model calls and proposes prompt or code fixes as reports and PRs in your [Inbox](/handbook/marketing/positioning/inbox). But that only works if the traces exist. **LLM Analytics is the signal layer that makes AI products self-improving.**
 
 If you're building AI features without LLM observability, your agents are flying blind.
 
@@ -45,7 +45,7 @@ If you're building AI features without LLM observability, your agents are flying
 - LLM span tracking linked to PostHog person profiles
 - Cost-per-user and cost-per-feature analysis
 - Cluster analysis to find patterns across conversations
-- PostHog Desktop's `exploring-llm-traces` skill triggers automated investigation on quality regressions
+- Self-driving's `exploring-llm-traces` skill triggers automated investigation on quality regressions
 
 ### Message 2: Cost visibility with user context
 
@@ -63,7 +63,7 @@ If you're building AI features without LLM observability, your agents are flying
 
 **Problem:** LLM observability tools were built by infrastructure teams. They're excellent at tracing model calls. They don't understand that the user behind the call is a churned customer, a free trial, or your top enterprise account.
 
-**Solution:** PostHog's LLM Analytics sits inside a product platform with full user profiles, cohorts, and behavioral history. Every trace has a person behind it. That context is what makes the data actionable – and what makes PostHog Desktop's agent research meaningful rather than mechanical.
+**Solution:** PostHog's LLM Analytics sits inside a product platform with full user profiles, cohorts, and behavioral history. Every trace has a person behind it. That context is what makes the data actionable – and what makes self-driving's agent research meaningful rather than mechanical.
 
 **Supporting features:**
 - Supports OpenAI, Anthropic, Google Gemini, and major LLM providers
@@ -79,7 +79,7 @@ If you're building AI features without LLM observability, your agents are flying
 
 **Where PostHog wins:**
 - User context – traces linked to person profiles and behavioral history
-- PostHog Desktop integration – traces become inputs to the autonomy loop
+- Self-driving integration – traces become a signal source for the autonomy loop
 - Session replay correlation – watch what users did before and after an LLM call
 - One platform – LLM observability inside your existing PostHog setup
 
@@ -100,7 +100,7 @@ If you're building AI features without LLM observability, your agents are flying
 - Purpose-built for product engineering teams
 - Dramatically lower cost for the observability product teams actually need
 - Native integration with feature flags and experiments for model A/B testing
-- PostHog Desktop agent integration
+- Self-driving agent integration
 
 ## Objections
 
@@ -108,7 +108,7 @@ If you're building AI features without LLM observability, your agents are flying
 
 **Follow-up:** How do you connect your LLM quality data to your product metrics today?
 
-**Answer:** Langfuse is a strong trace tool. PostHog LLM Analytics adds what Langfuse doesn't have: user context, session replay correlation, product metric linkage, and PostHog Desktop agent integration. Many teams run both during evaluation and consolidate as PostHog's LLM features mature.
+**Answer:** Langfuse is a strong trace tool. PostHog LLM Analytics adds what Langfuse doesn't have: user context, session replay correlation, product metric linkage, and self-driving agent integration. Many teams run both during evaluation and consolidate as PostHog's LLM features mature.
 
 ### "We just need cost monitoring"
 
@@ -122,4 +122,4 @@ If you're building AI features without LLM observability, your agents are flying
 
 Enterprise LLM Analytics customers get the same four-lever discounting as other PostHog products: volume, commitment, payment timing, forecast certainty. The enterprise conversation usually centers on **cost governance** (which model, which features, which teams are driving spend) and **compliance** (is LLM trace data covered by the DPA; does EU residency apply to conversation data).
 
-The forward-looking pitch: as PostHog Desktop matures, teams with well-instrumented LLM Analytics will have a fully automated quality improvement loop – traces in, agent optimization out. That's the infrastructure play for AI-native companies in 2030, and it starts with getting the observability layer right today.
+The forward-looking pitch: as self-driving matures, teams with well-instrumented LLM Analytics will have a fully automated quality improvement loop – traces in, ranked reports and PRs out. That's the infrastructure play for AI-native companies in 2030, and it starts with getting the observability layer right today.

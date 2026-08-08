@@ -14,7 +14,7 @@ Amplitude and Mixpanel tell you what happened. PostHog tells you what happened *
 
 ## The unique belief (in terms of analytics)
 
-PostHog is building the infrastructure for self-driving product development. The [product autonomy loop](/blog/self-driving-product) – signals in, work out, evaluation, repeat – only closes if agents can measure whether their changes worked. Analytics isn't the end of the workflow; it's the  truth the entire system runs on. Every funnel, retention chart, and correlation PostHog generates is a queryable signal. PostHog Desktop re-queries those same dashboards post-merge to evaluate its own work, or you can manually query the data yourself either via the MCP or with PostHog AI. 
+PostHog is building the infrastructure for self-driving product development. The [product autonomy loop](/blog/self-driving-product) – signals in, work out, evaluation, repeat – only closes if agents can measure whether their changes worked. Analytics isn't the end of the workflow; it's the  truth the entire system runs on. Every funnel, retention chart, and correlation PostHog generates is a queryable signal. Self-driving re-queries those same dashboards post-merge to evaluate its own work, or you can manually query the data yourself either via the MCP or with PostHog AI. A metric shift is itself a signal that becomes a report in your [Inbox](/handbook/marketing/positioning/inbox). 
 
 Analytics is the memory of everything users have done. Self-driving development is impossible without it.
 
@@ -43,7 +43,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 - MCP: lets agents query PostHog from Claude Code, Cursor, and any MCP-compatible runtime
 - HogQL: full SQL access on your event stream
 - Autocapture: instrument your product retrospectively, not just prospectively
-- PostHog Desktop: The self-driving product development platform
+- Self-driving: turns metric shifts into ranked reports in your [Inbox](/handbook/marketing/positioning/inbox)
 
 ### Message 2: Autocapture means you never miss the signal that mattered
 
@@ -77,7 +77,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 **Where PostHog wins:**
 - Usage-based pricing – no seat charges as your team grows
 - Native session replay, feature flags, and experiments included
-- PostHog Desktop agent integration; Amplitude has no equivalent
+- Self-driving loop that measures against your analytics; Amplitude has no equivalent
 - 1M events/month free tier is more generous than Amplitude's
 
 ### vs Mixpanel
@@ -89,7 +89,7 @@ Analytics is the memory of everything users have done. Self-driving development 
 - Experiments, feature flags, and more included
 - Full SQL access without a separate data warehouse
 - Also we have a data warehouse
-- Mixpanel has no equivalent to PostHog Desktop
+- Mixpanel has no equivalent to the self-driving loop that measures against your analytics
 
 ## Objections
 
@@ -117,4 +117,4 @@ Analytics is the memory of everything users have done. Self-driving development 
 
 Enterprise analytics customers get volume discounts, ~20% annual prepay, group analytics, SSO, advanced access controls, EU data residency, SOC 2, and HIPAA BAA. Contracts follow [the four-lever framework](/handbook/growth/sales/contract-rules).
 
-The enterprise pitch is consolidation: PostHog replaces analytics, session replay, feature flags, and experiments with one contract, one data model, and one platform that agents can query natively. That's four vendors consolidated, four renegotiations eliminated, and one platform that gets more capable as PostHog Desktop matures.
+The enterprise pitch is consolidation: PostHog replaces analytics, session replay, feature flags, and experiments with one contract, one data model, and one platform that agents can query natively. That's four vendors consolidated, four renegotiations eliminated, and one platform that gets more capable as self-driving matures.
