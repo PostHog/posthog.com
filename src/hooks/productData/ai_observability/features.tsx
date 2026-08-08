@@ -30,7 +30,7 @@ export const features = {
         color: 'purple',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dashboard_screenshot_ce72bbf715.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Dashboardscreenshot_36ce056f2d.png',
                 alt: 'AI Observability dashboard',
             },
         ],
@@ -44,7 +44,7 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Generationsscreenshot_cc4d4f107e.png',
                 alt: 'AI Observability generations',
             },
         ],
@@ -190,7 +190,7 @@ export const features = {
         color: 'red',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Userscreenshot_0b8d02a617.png',
                 alt: 'AI Observability users',
             },
         ],
@@ -204,7 +204,7 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/errorscreenshot_6b30e34a4e.png',
                 alt: 'AI Observability errors',
             },
         ],
@@ -232,7 +232,7 @@ export const features = {
         color: 'purple',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/playground_screenshot_2_3364a67436.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/playgroundscreenshot_29797c78d6.png',
                 alt: 'AI Observability playground',
             },
         ],
