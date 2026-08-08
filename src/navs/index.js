@@ -957,6 +957,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/developer-experience',
             },
             {
+                name: 'Building user experiences',
+                url: '/handbook/engineering/building-user-experiences',
+            },
+            {
                 name: 'Bug prioritization',
                 url: '/handbook/engineering/bug-prioritization',
             },
