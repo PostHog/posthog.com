@@ -9,6 +9,7 @@ availability:
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 SQL expressions enable you to directly access, modify, and aggregate data in many places in PostHog including:
 
@@ -20,7 +21,7 @@ SQL expressions enable you to directly access, modify, and aggregate data in man
 - [User paths](/docs/product-analytics/paths)
 - [Session replays](/docs/session-replay)
 - [Dashboards](/docs/product-analytics/dashboards)
-- The [activity tab](https://us.posthog.com/events)
+- The [activity tab](https://app.posthog.com/events)
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_11_at_10_35_25_2x_35d8460052.png"
@@ -46,13 +47,31 @@ SQL expressions can access data like:
 
 Properties can be accessed with dot notation like `person.properties.$initial_browser` which also works for nested or JSON properties. They can also be accessed with bracket notation like `properties['$feature/cool-flag']`.
 
+<CalloutBox icon="IconInfo" title="When to use bracket notation" type="fyi">
+
+Dot notation only works for property keys that are valid HogQL identifiers – keys must start with a letter, underscore, or `$`, and can only contain letters, digits, underscores, and `$`.
+
+Keys containing hyphens, dots, spaces, or starting with a digit **must** use bracket notation. For example, survey response properties like `$survey_response_0196e96d-7705-7d32` require bracket notation:
+
+```sql
+-- ❌ This fails (hyphens are parsed as subtraction)
+SELECT properties.$survey_response_0196e96d-7705-7d32 FROM events
+
+-- ✅ Use bracket notation instead
+SELECT properties['$survey_response_0196e96d-7705-7d32'] FROM events
+```
+
+This applies to all JSON columns like `properties`, `person.properties`, and data warehouse table properties.
+
+</CalloutBox>
+
 > **Note:** PostHog's properties always include `$` as a prefix, while custom properties do not (unless you add it).
 
 Property identifiers must be known at query time. For dynamic access, use the JSON manipulation functions from below on the `properties` field directly.
 
 ### Types
 
-Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database) and [properties](https://us.posthog.com/data-management/properties) tabs in data management. They include:
+Types (and names) for the accessible data can be found in the [database](https://app.posthog.com/data-management/database) and [properties](https://app.posthog.com/data-management/properties) tabs in data management. They include:
 
 - `STRING` (default)
 - `JSON` (accessible with dot or bracket notation)
