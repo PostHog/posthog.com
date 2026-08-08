@@ -1765,6 +1765,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/customer-faqs',
                     },
                     {
+    name: 'Deciding when to involve Engineering',
+    url: '/handbook/growth/sales/deciding-when-to-involve-engineering',
+},
+                    {
                         name: 'Turning knowledge into agent skills',
                         url: '/handbook/growth/sales/turning-knowledge-into-agent-skills',
                     },
