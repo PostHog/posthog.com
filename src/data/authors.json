@@ -746,5 +746,11 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/rohnx/",
         "profile_id": 46998
+    },
+    {
+        "handle": "thiago-rocha-salvatore",
+        "name": "Thiago Rocha Salvatore",
+        "role": "Product Engineer",
+        "profile_id": 45980
     }
 ]
