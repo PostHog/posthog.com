@@ -42,6 +42,37 @@ You can set the value for the variable in the **Variables** dropdown. For exampl
   classes="rounded"
 />
 
+## Applying dashboard filters
+
+Adding the `{filters}` placeholder to your query's `where` clause applies the dashboard or insight date range, property filters, and test account filtering to your query:
+
+```sql
+select *
+from events
+where event = '$pageview'
+and {filters}
+```
+
+This works when selecting from PostHog tables: `events`, `sessions`, `persons`, `groups`, logs, and traces. The date range applies to `timestamp` on events, logs, and traces, to `$start_timestamp` on sessions, and to `created_at` on groups and persons.
+
+### Binding filters to columns
+
+For any other table, view, or join, tell PostHog which of your columns each filter applies to by binding them:
+
+```sql
+select *
+from my_revenue_view
+where {filters(day AS timestamp, account_id AS 'account_id')}
+```
+
+Each argument binds one of your query's expressions to a filter key with `AS`:
+
+- The reserved key `timestamp` receives the date range.
+- Any other key, written as a string like `'plan'`, receives the dashboard and insight property filters on that key. Operators and multiple values work like they do elsewhere in PostHog.
+- `null AS key` opts the query out of filtering on that key. For example, `null AS timestamp` opts out of date filtering.
+
+If a filter is active but not bound, the query shows an error instead of silently ignoring the filter. This way a filtered dashboard never shows unfiltered data. Cohort filters and SQL expression filters can't be bound and show an error too.
+
 ## Dashboard date range filter variables
 
 Beyond the SQL variables you set up, you can access the dashboard's date range filters through the `filters.dateRange.from` and `filters.dateRange.to` variables like this:
