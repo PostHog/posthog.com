@@ -19,6 +19,14 @@ For any dashboard or insight, you can share a public link and/or embed it using 
 
 > **Note:** When you share an insight or dashboard, anyone with the link can view it. To better control this data, consider setting up [embedded analytics](/tutorials/embedded-analytics).
 
+## Access control and public sharing
+
+If your organization uses [access controls](/docs/settings/access-control), PostHog checks that you can run every query an artifact exposes before it lets you share it publicly. Shared links execute without access control.
+
+The same restriction applies when editing already-shared content. If a query references tables you're denied access to, you can't update a shared insight's query, add an insight to a shared dashboard, or add a query to a shared notebook.
+
+Non-access errors don't block sharing – if a query has a syntax error or other non-access problem, it won't prevent you from enabling the share.
+
 ## Sharing an insight
 
 To share an insight, click the `...` (more options) menu next to its name and choose **Share or embed**.
