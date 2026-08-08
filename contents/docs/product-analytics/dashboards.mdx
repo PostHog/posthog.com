@@ -137,6 +137,18 @@ Individual tiles (insights) can have their own filters and date ranges configure
 
 The insight card displays a warning when tile filters are merging with or overriding dashboard filters.
 
+### Ignoring dashboard filters entirely
+
+If you need a tile to completely ignore all dashboard filters, enable the **Ignore dashboard filters** switch in the tile's filter override modal:
+
+1. Click the **⋯** menu on the insight card.
+2. Select **Override tile filters**.
+3. Toggle **Ignore dashboard filters** on.
+
+When enabled, the tile uses only its own configured filters and ignores the dashboard's date range, properties, breakdown, interval, and test account filter. The tile's own filter overrides still apply, and [dashboard variables](/docs/data-warehouse/sql/variables) continue to work.
+
+Tiles ignoring dashboard filters display an **Ignores dashboard filters** indicator in the card heading.
+
 ## Dashboard options
 
 ### Editing the layout
