@@ -274,7 +274,7 @@ export const applications: CarouselSlide[] = [
                 </div>
                 <p>
                     Reports are free; pull requests are priced per PR. Read more in the{' '}
-                    <Link to="/docs/self-driving" state={{ newWindow: true }}>
+                    <Link to="/docs/ai-observability/self-driving" state={{ newWindow: true }}>
                         Self-driving docs
                     </Link>
                     .
