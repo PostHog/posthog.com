@@ -7,7 +7,7 @@ import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
 
-export const CTAs = () => {
+export const CTAs = ({ wizardCommand }: { wizardCommand?: string }) => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
@@ -38,7 +38,7 @@ export const CTAs = () => {
                     data-scheme="secondary"
                     className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
                 >
-                    <IntegrationPrompt />
+                    <IntegrationPrompt command={wizardCommand} />
                 </div>
             </motion.div>
 

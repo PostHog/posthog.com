@@ -25,6 +25,9 @@ const Compatibility = ({ productData }: { productData: any }) => {
 }
 
 const GettingStarted = ({ id, productData }: SectionComponentProps) => {
+    const installCommand = productData?.wizardCommand
+        ? `${INSTALL_COMMAND} ${productData.wizardCommand}`
+        : INSTALL_COMMAND
     return (
         <section id={id} className="scroll-mt-20 not-prose mb-20">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get started – free</h2>
@@ -51,7 +54,7 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                 <ScriptInstallCallout
                     title="Install with AI"
                     description="Run this command in your terminal or AI editor."
-                    command={INSTALL_COMMAND}
+                    command={installCommand}
                     footer={<WizardFrameworksTeaser />}
                 />
                 <div className="border border-primary rounded p-5 bg-primary">

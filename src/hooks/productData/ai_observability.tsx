@@ -32,6 +32,10 @@ export const aiObservability = {
     color: 'purple',
     colorSecondary: 'green-2',
     wizardSupport: true,
+    // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
+    // started install CTAs – the bare wizard installs a generic SDK instead of
+    // instrumenting LLM calls.
+    wizardCommand: 'ai-observability',
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
