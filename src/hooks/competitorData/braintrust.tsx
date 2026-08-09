@@ -12,6 +12,7 @@ export const braintrust = {
                 prompt_playground: true,
                 prompt_evaluations: true,
                 alerting: true,
+                anomaly_detection: false,
                 error_tracking: true,
                 byok: true,
                 system_prompts: true,
@@ -24,8 +25,11 @@ export const braintrust = {
                 prompt_management: true,
                 evaluation_datasets: true,
                 human_annotation: true,
+                // logFeedback API attaches user feedback to spans.
+                user_feedback: true,
                 session_replay: false,
                 product_analytics: false,
+                agent_reports: false,
                 ai_gateway_proxy: true,
             },
             evaluations: {

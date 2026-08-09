@@ -11,9 +11,12 @@ export const langsmith = {
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
+                // Threshold alerts on error rate, latency, and feedback score.
                 alerting: true,
+                anomaly_detection: false,
                 error_tracking: true,
-                clustering: false,
+                // LangSmith Insights clusters agent conversations into topics.
+                clustering: true,
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: false,
@@ -23,8 +26,11 @@ export const langsmith = {
                 prompt_management: true,
                 evaluation_datasets: true,
                 human_annotation: true,
+                // Feedback API attaches user feedback to runs.
+                user_feedback: true,
                 session_replay: false,
                 product_analytics: false,
+                agent_reports: false,
                 ai_gateway_proxy: false,
             },
             evaluations: {

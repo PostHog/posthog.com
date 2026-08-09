@@ -558,6 +558,8 @@ export const posthog = {
             available: true,
             features: {
                 alerting: true,
+                // Anomaly detectors learn baselines; firing alerts get agent investigations.
+                anomaly_detection: true,
                 cost_tracking: true,
                 generation_tracking: true,
                 latency_tracking: true,
@@ -570,14 +572,22 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
+                // Still beta per /docs/ai-observability/sentiment.
                 sentiment_classification: 'Beta',
                 privacy_mode: true,
-                agent_tracing: 'Basic',
+                // Tools tab auto-extracts tool calls across providers; spans + trace timeline.
+                agent_tracing: true,
                 prompt_management: true,
-                evaluation_datasets: false,
-                human_annotation: false,
+                // /docs/ai-evals/datasets
+                evaluation_datasets: true,
+                // Trace Reviews: queues, scorers, per-trace reviews (/docs/ai-observability/trace-reviews).
+                human_annotation: true,
+                // Beta per /docs/ai-observability/collect-user-feedback.
+                user_feedback: 'Beta',
                 session_replay: true,
                 product_analytics: true,
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
+                agent_reports: 'Beta',
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -593,7 +603,7 @@ export const posthog = {
                     session_replay_link: true,
                     user_profile_context: true,
                     sql_queries_on_traces: true,
-                    trace_explorer_ui: 'Basic',
+                    trace_explorer_ui: true,
                 },
             },
             prompt_management: {
@@ -614,9 +624,12 @@ export const posthog = {
                 features: {
                     llm_as_a_judge: true,
                     code_evaluators: true,
-                    annotation_queues: false,
-                    datasets: false,
-                    experiment_runs: false,
+                    // Trace Reviews queues (/docs/ai-observability/trace-reviews).
+                    annotation_queues: true,
+                    // /docs/ai-evals/datasets: curated input/output pairs...
+                    datasets: true,
+                    // ...replayed against prompt or model changes.
+                    experiment_runs: true,
                     ab_experiments_on_product_metrics: true,
                 },
             },

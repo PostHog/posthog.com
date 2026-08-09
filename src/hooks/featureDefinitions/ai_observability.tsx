@@ -38,6 +38,11 @@ export const aiObservabilityFeatures = {
             name: 'Alerting',
             description: '',
         },
+        anomaly_detection: {
+            name: 'Anomaly detection',
+            description:
+                'Alerts that learn what normal looks like for cost, latency, and errors – no fixed thresholds to tune',
+        },
         error_tracking: {
             name: 'Error tracking',
             description: 'Grouped error tracking for LLM applications',
@@ -82,6 +87,10 @@ export const aiObservabilityFeatures = {
             name: 'Human annotation/review',
             description: 'Review and label model outputs manually',
         },
+        user_feedback: {
+            name: 'User feedback',
+            description: 'Capture ratings and comments from users on AI responses',
+        },
         session_replay: {
             name: 'Session replay',
             description: 'Watch recordings of users interacting with AI features',
@@ -89,6 +98,11 @@ export const aiObservabilityFeatures = {
         product_analytics: {
             name: 'Product analytics',
             description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
+        },
+        agent_reports: {
+            name: 'Agent reports & pull requests',
+            description:
+                'Agents investigate eval results and anomalies, then file reports you can turn into PRs in one click',
         },
         ai_gateway_proxy: {
             name: 'AI gateway/proxy',
