@@ -72,8 +72,8 @@ importers:
         specifier: ^2.11.2
         version: 2.11.8
       '@posthog/brand':
-        specifier: 0.8.0
-        version: 0.8.0(react@18.3.1)
+        specifier: 0.9.1
+        version: 0.9.1(react@18.3.1)
       '@posthog/hedgehog-mode':
         specifier: ^0.0.52
         version: 0.0.52(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3598,8 +3598,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@posthog/brand@0.8.0':
-    resolution: {integrity: sha512-SjsjLdX6JHl/CGczENP2/75nUBEz9IshC9gbNKxcleoOnb8FUxISyggqjDWj4DxJx1oHmkqCbONdbv82VLhFFw==}
+  '@posthog/brand@0.9.1':
+    resolution: {integrity: sha512-Tml510NeanpPBVlZ6LTr3ghYAxiaEX1Qu3svMe++qK7rTQ68pbtr+zrdWasaS4wcJ7DET0E28YJ1us6jUHgo4w==}
     engines: {node: '>=22.18'}
     peerDependencies:
       react: '>=18'
@@ -7967,6 +7967,7 @@ packages:
 
   crypto-js@4.2.0:
     resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    deprecated: Active development of CryptoJS has been discontinued. This library is no longer maintained.
 
   crypto-random-string@2.0.0:
     resolution: {integrity: sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==}
@@ -21491,7 +21492,7 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@posthog/brand@0.8.0(react@18.3.1)':
+  '@posthog/brand@0.9.1(react@18.3.1)':
     optionalDependencies:
       react: 18.3.1
 
