@@ -14,6 +14,11 @@ In addition, every engineer regardless is part of the global follow-the-sun on-c
 
 ## Escalation schedules
 
+Two things work together in incident.io, and it's worth keeping them straight:
+
+* **Schedules** (rotas) say _who_ is on call. Teams own these and edit them in the incident.io dashboard.
+* **[Escalation paths](#escalation-paths)** say _who gets paged, in what order, and how long they have to respond_. These are managed in Terraform.
+
 ### Team schedules
 
 Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules)
@@ -43,8 +48,8 @@ Manual escalation should be used when:
 
 #### How to trigger manual escalation
 
-1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation: {team}` schedule
-2. This will notify all members on that escalation schedule simultaneously
+1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation (manual): {team}` path
+2. This pages whoever is on that team's `Escalation: {team}` rota right now, then everyone on it – one person at a time, 10 minutes per level
 3. Any available team member can then respond and assist with the incident
 
 > 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
@@ -73,6 +78,50 @@ And 2 weekend layers:
 If you're in a product team, it's tempting to think that service alerts don't apply to you, or that when you're on call you can just hand everything off to the infrastructure team. That's not the case, because it's important that every engineer has a basic understanding of how our software is deployed, where the weak points in our systems are, and what the failure modes look like. This understanding should be all that's needed to follow the runbooks, and if you follow the causes of alerts, ultimately you'll be less likely to ship code that takes PostHog down.
 
 Besides knowledge, being on call requires availability – including weekends. If teams had their own separate rotations, there would be more people on call in total, and each would have to stand by 24/7 as our teams aren't big enough to follow the sun. This would be more stressful because of availability constraints, while being less productive because of the rare alerts being spread across multiple people.
+
+## Escalation paths
+
+A team has up to two escalation paths:
+
+* `On call: {team}` – where an alert routed to the team goes. Previously named `PostHog: {team}`.
+* `Escalation (manual): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules).
+
+> **Escalation paths are managed in Terraform, not the dashboard.** Changes made in the incident.io UI get reverted on the next apply. Schedules are the exception – teams change those constantly for PTO and new joiners, so they stay in the dashboard and Terraform looks them up by name.
+
+They live in the [`incidentio-escalation-paths` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-escalation-paths) in `posthog-cloud-infra`, and every team is listed in one file: [`terraform/environments/incidentio/escalation-paths/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/escalation-paths/terragrunt.hcl).
+
+### The standard on-call path
+
+Every `On call: {team}` path is the same shape, so paging behavior doesn't vary by team:
+
+1. Post to the team's own alert channel, whatever the priority
+2. If the alert is critical, round-robin the team's `On call: {team}` rota – 10 minutes to ack
+3. Still unacked? Post to #alerts, then round-robin global on-call alongside the team – 15 minutes to ack
+4. Repeat
+
+Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets woken up. A few teams escalate sideways to a second team's rota between steps 2 and 3.
+
+### Adding or changing a path
+
+1. Create the rota you need in the [incident.io dashboard](https://app.incident.io/posthog/on-call/schedules) – `On call: {team}` for alert routing, `Escalation: {team}` for manual escalation
+2. Set the `Slack Alerts channel` attribute on your team's entry in the Team catalog. The path reads the channel from there, so an unset one fails the plan
+3. Add your team to `teams` in `terragrunt.hcl` and open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra). CI runs the plan – read it before merging, since it shows exactly which paging levels move
+
+Rather than hand-writing the HCL, point your editor's agent at it:
+
+```
+In posthog-cloud-infra, add my team to the incident.io escalation paths.
+
+Read terraform/modules/incidentio-escalation-paths/ first, then add an entry to
+`teams` in terraform/environments/incidentio/escalation-paths/terragrunt.hcl,
+keyed by my team's external ID in the incident.io Team catalog.
+
+Set `on_call = true` for a standard alert-routing path, and
+`manual_escalation = true` for a manual escalation path. Rota names derive from
+the team's catalog display name as "On call: <team>" and "Escalation: <team>",
+so only set `on_call_schedule` or `escalation_schedule` if our rota is named
+differently. Then run `terragrunt hcl validate` and `terraform fmt`.
+```
 
 ## Before going on call
 
@@ -147,9 +196,7 @@ As well as the above access you should ensure you have access and feel comfortab
 
 ![alert-example](https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/Screenshot_2025_10_27_at_08_42_11_f7508c7432.png)
 
-Critical alerts will trigger per-team escalation policies which go like this:
-1. If available, a member of the team associated with the alert is paged first
-1. If nobody is available or nobody responds within the configured time then the `On call: global` schedule is paged
+Critical alerts trigger the team's [`On call: {team}` escalation path](#the-standard-on-call-path), which pages a member of the team associated with the alert first, then global on-call alongside the team if nobody responds in time.
 
 > **If at any point you get paged - always respond!** Even if you are unavailable you should respond as such (either via the app or the personal Slack notification). That way the escalation can continue to the next available person.
 
