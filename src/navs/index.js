@@ -2102,7 +2102,7 @@ export const communityMenu = {
                     name: 'Product Analytics',
                     icon: 'IconGraph',
                     color: 'blue',
-                    url: '/tutorials/categories/dashboards',
+                    url: '/tutorials/categories/product-analytics',
                     children: [
                         { name: 'Dashboards', url: '/tutorials/categories/dashboards' },
                         { name: 'Funnels', url: '/tutorials/categories/funnels' },

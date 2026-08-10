@@ -345,39 +345,6 @@ export default function ProductsTest(): JSX.Element {
                             </p>
 
                             <GetStarted selfDriving showSecondaryActions={false} />
-
-                            {/*
-                        <div className="flex flex-wrap items-center gap-3 not-prose">
-                            <Link
-                                to="https://desktop.posthog.com/download"
-                                state={{ newWindow: true }}
-                                className="inline-flex items-center gap-2 bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md hover:opacity-90 no-underline"
-                            >
-                                <IconApple className="size-4" />
-                                Download for Mac
-                                <IconArrowRight className="size-4" />
-                            </Link>
-                            <WizardCommand slim />
-                        </div>
-
-                        <div className="flex gap-4 text-sm">
-                            <Link
-                                to="/docs/libraries/vscode"
-                                state={{ newWindow: true }}
-                                className="underline underline-offset-2 font-medium"
-                            >
-                                Get our VS Code extension
-                            </Link>
-                            <span className="text-secondary">or</span>
-                            <Link
-                                to="/docs/model-context-protocol"
-                                state={{ newWindow: true }}
-                                className="underline underline-offset-2 font-medium"
-                            >
-                                Try the MCP
-                            </Link>
-                        </div>
-                             */}
                         </div>
                     </header>
 

@@ -235,7 +235,7 @@ export const postsMenu: IMenu[] = [
             },
             {
                 name: 'AI Observability',
-                url: '/tutorials/ai-observability',
+                url: '/tutorials/categories/ai-observability',
                 color: 'purple',
                 icon: 'IconLlmAnalytics',
                 tag: 'AI Observability',
