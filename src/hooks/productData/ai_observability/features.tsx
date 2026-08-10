@@ -337,8 +337,7 @@ export const features = {
         ],
     },
     // Copy verified against the Self-driving docs (/docs/self-driving) and the
-    // start-here quest log. The inbox screenshot is reused from /self-driving –
-    // AI Observability has no dedicated Self-driving screenshot yet.
+    // start-here quest log.
     self_driving: {
         title: 'Self-driving',
         headline: 'From LLM data to pull request',
@@ -348,8 +347,8 @@ export const features = {
         color: 'green',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inbox_prs_cloud_f44f8ba69b.png',
-                alt: 'Self-driving reports and pull requests in the PostHog inbox',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_self_driving_2531b8cf6c.png',
+                alt: 'Scout templates in the AI observability Self-driving tab',
             },
         ],
         features: [

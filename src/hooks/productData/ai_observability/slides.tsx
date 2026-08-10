@@ -186,12 +186,11 @@ export const applications: CarouselSlide[] = [
         layout: 'float',
         heading: f.dashboard.headline,
         description: <p>{f.dashboard.description}</p>,
-        // The square insights stack floats tall like the MCP slide; the original
-        // dashboard screenshot (812x486) rendered too small in the float column.
+        // Portrait captures (1360x1444) shot for the float column – wide screenshots
+        // render too small at its ~50% width.
         image: {
-            src: f.cost_analysis.images[0].src,
-            srcDark: f.cost_analysis.images[0].srcDark,
-            alt: 'A stack of LLM cost and usage insights',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_dashboard_5c949c4084.png',
+            alt: 'Cost per user and cost by model insights on the AI observability dashboard',
             glow: true,
         },
     },
@@ -221,11 +220,9 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
-        // Square trace timeline for the same reason as the Dashboard slide.
         image: {
-            src: f.trace_monitoring.images[0].src,
-            srcDark: f.trace_monitoring.images[0].srcDark,
-            alt: f.trace_monitoring.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_debug_trace_5af2fbb45f.png',
+            alt: 'An LLM trace with its waterfall timeline and span tree',
             glow: true,
         },
     },
@@ -255,8 +252,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.evaluations.images[0].src,
-            alt: f.evaluations.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_evaluate_1cec16eb66.png',
+            alt: 'Online evals overview with pass rate, run counts, and failing evaluations',
             glow: true,
         },
     },
@@ -290,8 +287,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.self_driving.images[0].src,
-            alt: f.self_driving.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_self_driving_2531b8cf6c.png',
+            alt: 'Scout templates in the AI observability Self-driving tab',
             glow: true,
         },
     },
