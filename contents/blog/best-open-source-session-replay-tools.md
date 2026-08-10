@@ -206,7 +206,7 @@ Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 we
 
 ### Who is Matomo for?
 
-[Matomo](blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
+[Matomo](/blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
 
 To learn more, read our [PostHog vs Matomo comparison](/blog/posthog-vs-matomo).
 

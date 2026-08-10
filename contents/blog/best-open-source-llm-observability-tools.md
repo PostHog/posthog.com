@@ -245,7 +245,7 @@ Most tools on this list are free to start, so there's no reason to wait.
 
 No. PostHog's [LLM observability](/docs/ai-observability) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
 
-[Getting started](docs/ai-observability/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
+[Getting started](/docs/ai-observability/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
 
 </details>
 

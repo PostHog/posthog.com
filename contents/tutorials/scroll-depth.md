@@ -68,7 +68,7 @@ We now calculate and capture these scroll depth measurements. Depending on how m
 
 ### Capturing scroll depth on page change
 
-Similar to how we [capture pageviews in Next.js](/tutorials/nextjs-analytics#capturing-pageviews-in-nextjs), use `next/router` to listen for route change events, then capture the scroll depth values when those happen. Use the `routeChangeStart` event as the `routeChangeComplete` event doesn’t give us access to the `window` data we want.
+Similar to how we [capture pageviews in Next.js](/tutorials/nextjs-analytics#setting-up-posthog-on-the-client-side), use `next/router` to listen for route change events, then capture the scroll depth values when those happen. Use the `routeChangeStart` event as the `routeChangeComplete` event doesn’t give us access to the `window` data we want.
 
 ```js
 // pages/_app.js

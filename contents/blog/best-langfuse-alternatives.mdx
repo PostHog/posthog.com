@@ -16,7 +16,7 @@ seo:
   metaDescription: 'Looking for a Langfuse alternative? Compare the best LLM observability tools, including PostHog, Helicone, LangSmith, and more.'
 ---
 
-**Langfuse** is a well-known [open-source LLM observability platform](/blog/best-open-source-llm-observability-tools). It combines [tracing](/docs/ai-observability/traces), [prompt management](/docs/prompt-management/prompts), [evaluations](/docs/ai-evals/evaluations), and cost tracking to help developers understand how their LLM applications behave in production.
+**Langfuse** is a well-known [open-source LLM observability platform](/blog/best-open-source-llm-observability-tools). It combines [tracing](/docs/ai-observability/traces), [prompt management](/docs/prompt-management/prompts), [evaluations](/docs/ai-evals), and cost tracking to help developers understand how their LLM applications behave in production.
 
 But just like pineapple on pizza isn't for everyone, Langfuse isn't right for every team. Some need deeper evaluation tooling, a better way to understand how AI performance affects the overall product experience, or may just want a cheaper alternative.
 
@@ -52,11 +52,11 @@ PostHog ships new AI observability features fast, including prompt management fo
 
 ### Key features
 
-- [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
-- [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
-- [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
-- [**Prompt management**](docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
-- [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
+- [**Generations**](/docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
+- [**Traces**](/docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
+- [**AI evals**](/docs/ai-evals): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
+- [**Prompt management**](/docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 - [**Session replay**](/docs/ai-observability/link-session-replay): Watch recordings of users interacting with AI features and investigate issues alongside the actions that triggered them.
 
 ### How does PostHog compare to Langfuse?
@@ -87,7 +87,7 @@ PostHog ships new AI observability features fast, including prompt management fo
 <summary>Main differences between PostHog and Langfuse</summary>
 
 - Langfuse includes prompt management with versioning and deployment controls. [PostHog's prompt management](/docs/prompt-management) is newer, covering versioning, labels, configuration, runtime fetching, and A/B testing of prompt versions.
-- PostHog adds built-in [sentiment classification](docs/ai-observability/sentiment) (currently in beta) and [trace summarization](docs/ai-observability/summarization) on top of raw trace data. Langfuse has no direct, built-in equivalent for either.
+- PostHog adds built-in [sentiment classification](/docs/ai-observability/sentiment) (currently in beta) and [trace summarization](/docs/ai-observability/summarization) on top of raw trace data. Langfuse has no direct, built-in equivalent for either.
 - Langfuse provides more detailed agent and multi-step tracing. PostHog supports traces and spans, but its tracing capabilities are less specialized.
 - PostHog connects LLM traces to product analytics covering funnels, retention, and feature adoption. Langfuse focuses primarily on LLM observability.
 

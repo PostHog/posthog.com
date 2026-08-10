@@ -35,7 +35,7 @@ While similar in some respects to the EU's General Data Protection Regulation (G
 
 There are two ways to be HIPAA-compliant while using analytics tools:
 
-1. [Self-host your analytics](/best-open-source-analytics-tools), so data remains totally within your control.
+1. [Self-host your analytics](/blog/best-open-source-analytics-tools), so data remains totally within your control.
 2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool.
 
 ## What is a Business Associate Agreement (BAA)?
