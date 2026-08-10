@@ -144,7 +144,7 @@ export default function ReportAnatomy({
                                     <AnatomyMarker
                                         n={5}
                                         label="Where it stands"
-                                        gloss="Ready: ready to review; Actionable: an agent can fix it"
+                                        gloss='"Ready" means ready to review; "Actionable" means an agent can fix it, but no PR is open'
                                     />
                                 </span>
                                 {report.receivedAgo && <span className="ml-auto">{report.receivedAgo} ago</span>}
