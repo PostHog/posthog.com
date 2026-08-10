@@ -2544,10 +2544,6 @@ export const docsMenu = {
                                     name: 'Configuration',
                                     url: '/docs/libraries/ios/configuration',
                                 },
-                                {
-                                    name: 'Push notifications',
-                                    url: '/docs/libraries/ios/push-notifications',
-                                },
                             ],
                         },
                         {
@@ -7811,6 +7807,10 @@ export const docsMenu = {
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Push notifications',
+                    url: '/docs/workflows/push-notifications',
                 },
                 {
                     name: 'Workflow events',
