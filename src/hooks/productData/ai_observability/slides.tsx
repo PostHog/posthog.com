@@ -221,8 +221,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_debug_trace_5af2fbb45f.png',
-            alt: 'An LLM trace with its waterfall timeline and span tree',
+            src: f.trace_monitoring.images[0].src,
+            alt: f.trace_monitoring.images[0].alt,
             glow: true,
         },
     },
@@ -252,8 +252,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_evaluate_1cec16eb66.png',
-            alt: 'Online evals overview with pass rate, run counts, and failing evaluations',
+            src: f.evaluations.images[0].src,
+            alt: f.evaluations.images[0].alt,
             glow: true,
         },
     },
@@ -287,8 +287,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_self_driving_2531b8cf6c.png',
-            alt: 'Scout templates in the AI observability Self-driving tab',
+            src: f.self_driving.images[0].src,
+            alt: f.self_driving.images[0].alt,
             glow: true,
         },
     },
@@ -302,7 +302,7 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: f.trace_monitoring.headline,
         description: (
             <>
@@ -320,10 +320,8 @@ export const topFeatures: CarouselSlide[] = [
         ),
         image: {
             src: f.trace_monitoring.images[0].src,
-            srcDark: f.trace_monitoring.images[0].srcDark,
             alt: f.trace_monitoring.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
@@ -333,14 +331,13 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: f.generations.headline,
         description: <p>{f.generations.description}</p>,
         image: {
             src: f.generations.images[0].src,
             alt: f.generations.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
@@ -350,7 +347,7 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-seagreen',
-        layout: 'stack',
+        layout: 'float',
         heading: f.evaluations.headline,
         description: (
             <>
@@ -368,8 +365,7 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.evaluations.images[0].src,
             alt: f.evaluations.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {

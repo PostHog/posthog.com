@@ -45,8 +45,8 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_screenshot_56f0f313ae.png',
-                alt: 'AI Observability generations',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_29f90e5628.png',
+                alt: 'A list of LLM generations with person, sentiment, model, and latency',
             },
         ],
     },
@@ -72,9 +72,8 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_light_e4cea319cb.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_trace_dark_f49aa4dd89.png',
-                alt: 'LLM trace',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_detail_ab2f8a8e5c.png',
+                alt: 'An LLM trace with its timeline, tree, and generation detail',
             },
         ],
         features: [
@@ -248,8 +247,8 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evaluations_screenshot_959ba893da.png',
-                alt: 'AI Observability evaluations',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_9afa60bddc.png',
+                alt: 'Online evals overview with pass rate and configured evaluations',
             },
         ],
         features: [
@@ -347,7 +346,7 @@ export const features = {
         color: 'green',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_self_driving_2531b8cf6c.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_f9d87958a8.png',
                 alt: 'Scout templates in the AI observability Self-driving tab',
             },
         ],
