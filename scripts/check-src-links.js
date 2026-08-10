@@ -7,6 +7,7 @@ const path = require('path')
 
 const CONFIG = {
     SITEMAP_URL: 'https://posthog.com/sitemap/sitemap-0.xml',
+    LOCAL_SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     SRC_DIR: 'src',
     MIN_SITEMAP_PAGES: 1000,
     EXCLUDED_EXTENSIONS: [
@@ -42,12 +43,21 @@ const CONFIG = {
     LINK_PATTERNS: [/\b(?:to|href)=["'](\/[^"'\s]*)["']/g, /\b(?:to|href|url|link):\s*["'](\/[^"'\s]*)["']/g],
 }
 
-async function getSitemapPages() {
+async function getSitemapXml() {
+    if (fs.existsSync(CONFIG.LOCAL_SITEMAP_PATH)) {
+        console.log(`Using built sitemap at ${path.relative(process.cwd(), CONFIG.LOCAL_SITEMAP_PATH)}`)
+        return fs.readFileSync(CONFIG.LOCAL_SITEMAP_PATH, 'utf8')
+    }
+    console.log(`Fetching ${CONFIG.SITEMAP_URL}`)
     const response = await fetch(CONFIG.SITEMAP_URL)
     if (!response.ok) {
         throw new Error(`Failed to fetch sitemap: ${response.status}`)
     }
-    const xml = await response.text()
+    return response.text()
+}
+
+async function getSitemapPages() {
+    const xml = await getSitemapXml()
     const pages = new Set()
     for (const match of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
         const url = match[1].trim()

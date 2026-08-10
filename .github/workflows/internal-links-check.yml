@@ -46,20 +46,42 @@ jobs:
             - name: Check links (console only)
               if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
               run: |
+                  set +e
                   OUTPUT=$(node scripts/check-links-post-build.js 2>&1)
+                  EXIT_CODE=$?
                   echo "$OUTPUT"
                   echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
                   echo "$OUTPUT" >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
+                  exit $EXIT_CODE
 
             - name: Check links (with file output)
               if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false) }}
               run: |
+                  set +e
                   OUTPUT=$(node scripts/check-links-post-build.js link-check-results 2>&1)
+                  EXIT_CODE=$?
                   echo "$OUTPUT"
                   echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
                   echo "$OUTPUT" >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
+                  exit $EXIT_CODE
+
+            - name: Check source code links
+              if: always()
+              run: |
+                  set +e
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.save_results }}" = "false" ]; then
+                    OUTPUT=$(node scripts/check-src-links.js 2>&1)
+                  else
+                    OUTPUT=$(node scripts/check-src-links.js link-check-results 2>&1)
+                  fi
+                  EXIT_CODE=$?
+                  echo "$OUTPUT"
+                  echo "SRC_LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
+                  echo "$OUTPUT" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+                  exit $EXIT_CODE
 
             - name: Upload link check results
               if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false)) }}
@@ -67,7 +89,9 @@ jobs:
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
                   name: link-check-results
-                  path: link-check-results/*.json
+                  path: |
+                      link-check-results/*.json
+                      link-check-results/*.md
                   if-no-files-found: warn
                   retention-days: 30
 
@@ -126,6 +150,23 @@ jobs:
                       BROKEN_LINKS="0"
                       BROKEN_ANCHORS="0"
                     fi
+
+                    if [ -n "$SRC_LINK_CHECK_OUTPUT" ]; then
+                      SRC_LINKS=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
+                      SRC_EXCLUDED=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      SRC_REDIRECTED=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      SRC_BROKEN=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
+                    else
+                      SRC_LINKS="0"
+                      SRC_EXCLUDED="0"
+                      SRC_REDIRECTED="0"
+                      SRC_BROKEN="0"
+                    fi
+
+                    TOTAL_INTERNAL_LINKS=$(( ${TOTAL_INTERNAL_LINKS:-0} + ${SRC_LINKS:-0} ))
+                    EXCLUDED_LINKS=$(( ${EXCLUDED_LINKS:-0} + ${SRC_EXCLUDED:-0} ))
+                    REDIRECTED_LINKS=$(( ${REDIRECTED_LINKS:-0} + ${SRC_REDIRECTED:-0} ))
+                    BROKEN_LINKS=$(( ${BROKEN_LINKS:-0} + ${SRC_BROKEN:-0} ))
 
                     # Prepare variables for Slack payload
                     # Default to true for scheduled runs, use input value for manual runs
