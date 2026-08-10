@@ -45,7 +45,7 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_29f90e5628.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/generations_2_77391c6768.png',
                 alt: 'A list of LLM generations with person, sentiment, model, and latency',
             },
         ],
@@ -72,7 +72,7 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_detail_ab2f8a8e5c.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/trace_detail_2_e0a6a23865.png',
                 alt: 'An LLM trace with its timeline, tree, and generation detail',
             },
         ],
@@ -147,9 +147,8 @@ export const features = {
         color: 'lilac',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_light_d986541535.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_perf_dark_4e421717ba.png',
-                alt: 'LLM performance monitoring',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/performance_cf8ee79962.png',
+                alt: 'Generation latency by model and error rate insights',
             },
         ],
         features: [
@@ -190,7 +189,7 @@ export const features = {
         color: 'red',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_6ae9646093.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_2_9211062ba1.png',
                 alt: 'The AI observability users list with per-user generations, cost, and latency',
             },
         ],
@@ -246,7 +245,7 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_9afa60bddc.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_2_04072538a6.png',
                 alt: 'Online evals overview with pass rate and configured evaluations',
             },
         ],
@@ -345,7 +344,7 @@ export const features = {
         color: 'green',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_f9d87958a8.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_2_24b53e214b.png',
                 alt: 'Scout templates in the AI observability Self-driving tab',
             },
         ],

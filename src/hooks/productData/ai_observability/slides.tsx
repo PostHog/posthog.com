@@ -401,7 +401,7 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-lilac',
-        layout: 'stack',
+        layout: 'float',
         heading: f.performance_monitoring.headline,
         description: (
             <>
@@ -418,10 +418,8 @@ export const topFeatures: CarouselSlide[] = [
         ),
         image: {
             src: f.performance_monitoring.images[0].src,
-            srcDark: f.performance_monitoring.images[0].srcDark,
             alt: f.performance_monitoring.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
