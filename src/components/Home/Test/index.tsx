@@ -24,8 +24,10 @@ import ToolsTicker from 'components/Home/ToolsTicker'
 // 9000; tweak the install UI via the schema prop instead. This homepage integration (Tagline,
 // GetStarted, the carousel) is the only PostHog.com-side glue and is not present on 9000.
 import PlatformInstall, { wizardInstallSchema } from 'components/PlatformInstall'
+import HeroCTA from 'components/Home/HeroCTA'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
+import { cn } from '../../../utils'
 
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
 function LazyHeroCarousel({ className }: { className?: string }) {
@@ -131,24 +133,28 @@ export const CTAs = () => {
     )
 }
 
+const Headline = ({ className }: { className?: string }) => (
+    <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
+        Shift your product into{' '}
+        <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
+            self-driving mode
+        </span>
+    </h1>
+)
+
 function Hero(): JSX.Element {
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
-                <h1 className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-8 pt-2">
+                <div className="[&_p]:m-0 flex gap-1 flex-wrap justify-center @xl:justify-start !text-2xl mb-12 pt-2">
                     <Logo className="max-w-[157px] dark:hidden" width="auto" />
                     <Logo className="hidden max-w-[157px] dark:block" variant="mono" color="white" width="auto" />
-                </h1>
+                </div>
 
-                <h1 className="!text-3xl @xl:!text-4xl pt-4">
-                    Shift your product into{' '}
-                    <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-                        self-driving mode
-                    </span>
-                </h1>
+                <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
+                    <Headline className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1" />
 
-                <div className="grid @xl:grid-cols-2 @xl:gap-8 min-w-0">
-                    <div className="min-w-0">
+                    <div className="min-w-0 @xl:row-start-2 @xl:col-start-1">
                         <p className="text-balance @xl:text-wrap text-[17px]">
                             PostHog already knows your customers, which features they use, and the issues they have.
                         </p>
@@ -203,9 +209,8 @@ function Hero(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="mt-6 flex flex-col items-center min-w-0 w-full">
-                        <PlatformInstall schema={wizardInstallSchema} selfDriving />
-                        <SecondaryActions />
+                    <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:mt-0 @xl:justify-center @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:justify-start">
+                        <HeroCTA />
                     </div>
                 </div>
             </div>

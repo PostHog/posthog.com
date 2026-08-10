@@ -327,7 +327,7 @@ export const platformFeatures = {
                 description: 'Collect, analyze, and correlate security logs to detect threats',
             },
             soc2_certified: {
-                name: 'SOC 2 Type II',
+                name: 'SOC 2 Type 2',
                 description: 'SOC 2 security certification',
             },
             two_factor_auth: {

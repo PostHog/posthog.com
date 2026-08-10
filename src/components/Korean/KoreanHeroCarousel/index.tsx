@@ -92,7 +92,7 @@ export default function KoreanHeroCarousel({ translate = translateKo }: { transl
                                                 key={progressKey}
                                                 className={`h-full rounded-full ${tab.progressBar}`}
                                                 style={{
-                                                    animation: `hero-carousel-progress ${SLIDE_DURATION}ms linear forwards`,
+                                                    animation: `carousel-progress ${SLIDE_DURATION}ms linear forwards`,
                                                     animationPlayState: effectivelyPaused ? 'paused' : 'running',
                                                 }}
                                                 onAnimationEnd={advance}

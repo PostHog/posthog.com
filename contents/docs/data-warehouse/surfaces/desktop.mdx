@@ -14,6 +14,11 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 [PostHog Desktop](/docs/posthog-desktop) is where you work through the warehouse problems PostHog raises on its own – a materialized view that stopped refreshing, or a source whose sync keeps failing. It's a triage surface, not a place to browse your data.
 
+## Before you start
+
+1. **Set up the Data Warehouse** – [link a source](/docs/data-warehouse/start-here) so there are tables to query.
+2. **Install PostHog Desktop** – [download the app](/docs/posthog-desktop/download-posthog-desktop) and connect it to your project.
+
 ## What you can do here
 
 - **Pick up warehouse signals** – PostHog watches the import side for the moments a source stops keeping its promise: a connection in error, a table schema that failed or is stuck mid-sync, silent staleness behind a green status, a dead webhook channel, and materialized views that fail to refresh. Each one becomes a [signal](/docs/self-driving/signals) carrying the source or view name and the underlying error, so a stale dashboard lands in your queue instead of going unnoticed. When imports are healthy, it looks for optimization candidates instead – expensive query shapes worth materializing, and materialized views nobody reads.
