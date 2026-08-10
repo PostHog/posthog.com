@@ -187,9 +187,12 @@ export const applications: CarouselSlide[] = [
         layout: 'float',
         heading: f.dashboard.headline,
         description: <p>{f.dashboard.description}</p>,
+        // The square insights stack floats tall like the MCP slide; the original
+        // dashboard screenshot (812x486) rendered too small in the float column.
         image: {
-            src: f.dashboard.images[0].src,
-            alt: f.dashboard.images[0].alt,
+            src: f.cost_analysis.images[0].src,
+            srcDark: f.cost_analysis.images[0].srcDark,
+            alt: 'A stack of LLM cost and usage insights',
             glow: true,
         },
     },
@@ -219,9 +222,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
+        // Square trace timeline for the same reason as the Dashboard slide.
         image: {
-            src: f.errors.images[0].src,
-            alt: f.errors.images[0].alt,
+            src: f.trace_monitoring.images[0].src,
+            srcDark: f.trace_monitoring.images[0].srcDark,
+            alt: f.trace_monitoring.images[0].alt,
             glow: true,
         },
     },
