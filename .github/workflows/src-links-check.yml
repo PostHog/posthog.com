@@ -6,6 +6,10 @@ permissions:
 on:
     schedule:
         - cron: '0 11 * * 1' # Every Monday at 11am UTC
+    pull_request:
+        paths:
+            - scripts/check-src-links.js
+            - .github/workflows/src-links-check.yml
     workflow_dispatch:
         inputs:
             save_results:
@@ -33,7 +37,7 @@ jobs:
                   node-version: '22'
 
             - name: Check links (console only)
-              if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
+              if: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.save_results == false) }}
               run: |
                   set +e
                   OUTPUT=$(node scripts/check-src-links.js 2>&1)
@@ -67,7 +71,7 @@ jobs:
                   retention-days: 30
 
             - name: Send Slack notification
-              if: always()
+              if: ${{ always() && github.event_name != 'pull_request' }}
               env:
                   INPUT_SEND_SLACK: ${{ inputs.send_slack_notification }}
                   INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
