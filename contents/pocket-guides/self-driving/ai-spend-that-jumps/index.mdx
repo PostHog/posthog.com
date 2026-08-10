@@ -85,15 +85,15 @@ report:
 
 An LLM bill moves for one of two reasons: more conversations, or more cost per conversation. The
 first is growth. The second is a regression – a prompt grew, a model changed, a cache stopped
-hitting, a retry looped, or someone abusing your API for free reference.
+hitting, a retry looped, or someone abused your API for free inference.
 
-This scout watches your LLM traces for the regressions.
+This scout watches your LLM traces for regressions.
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: you deployed a new version of your feature at `09:14`. Your conversation costs is rising, but volume is stable.
+The scout looks for patterns like <SeeFig n={1} />: you deployed a new version of your feature at `09:14`. Your conversation costs are rising, but volume is stable.
 - If both are rising together, it's just growth. The scout stays _quiet_.
-- If cost rise while volume is stable, it signals possible regressions. The scout _**reports**_.
+- If costs rise while volume is stable, it signals a possible regression. The scout _**reports**_.
 
 ## The report in your inbox
 
