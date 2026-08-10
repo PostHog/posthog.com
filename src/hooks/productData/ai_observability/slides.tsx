@@ -6,7 +6,6 @@ import {
     IconLightBulb,
     IconListTreeConnected,
     IconLlmPromptEvaluation,
-    IconMagicWand,
     IconPiggyBank,
     IconPlug,
     IconSparkles,
@@ -231,25 +230,33 @@ export const applications: CarouselSlide[] = [
         },
     },
     {
-        slug: 'iterate',
-        label: 'Iterate',
-        icon: <IconMagicWand className="size-5" />,
+        slug: 'evaluate',
+        label: 'Evaluate',
+        icon: <IconLlmPromptEvaluation className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-seagreen',
         layout: 'float',
-        heading: 'Change the prompt without shipping a deploy',
+        heading: 'Evaluate AI quality in production',
         description: (
             <>
-                <p>{f.playground.description}</p>
+                <p>{f.evaluations.description}</p>
                 <div className="@container">
-                    <LabeledList items={[{ label: f.evaluations.title, description: f.evaluations.description }]} />
+                    <LabeledList
+                        items={[
+                            ...f.evaluations.features.map((item) => ({
+                                label: item.title,
+                                description: item.description,
+                            })),
+                            { label: f.playground.title, description: f.playground.description },
+                        ]}
+                    />
                 </div>
             </>
         ),
         image: {
-            src: f.playground.images[0].src,
-            alt: f.playground.images[0].alt,
+            src: f.evaluations.images[0].src,
+            alt: f.evaluations.images[0].alt,
             glow: true,
         },
     },
