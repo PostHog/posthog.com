@@ -39,8 +39,9 @@ export const logsFeatures = {
             },
             high_cardinality_indexing: {
                 name: 'High-cardinality indexing',
-                description: 'Index fields like user_id, trace_id, or request_id without cardinality limits causing issues',
-},
+                description:
+                    'Index fields like user_id, trace_id, or request_id without cardinality limits causing issues',
+            },
         },
     },
     search: {

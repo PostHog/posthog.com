@@ -26,32 +26,6 @@ const isValidUrl = (url: string): boolean => {
     }
 }
 
-exports.onPreInit = async function (_, options) {
-    const { strapiURL, strapiKey } = options
-    if (!strapiURL || !strapiKey) return
-    const createStrapiPageNodes = async (limit = 100, page = 1) => {
-        const strapiPages = await fetch(
-            `${strapiURL}/api/markdowns?pagination[pageSize]=${limit}&pagination[page]=${page}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${strapiKey}`,
-                },
-            }
-        ).then((res) => res.json())
-        const { data, meta } = strapiPages
-        if (data) {
-            data.forEach(({ id, attributes }) => {
-                files[attributes.path] = { contributors: attributes.contributors, lastUpdated: attributes.lastUpdated }
-            })
-        }
-        if (meta?.pagination?.pageCount > page) {
-            return await createStrapiPageNodes(limit, page + 1)
-        }
-    }
-
-    await createStrapiPageNodes()
-}
-
 const cloudinaryCache = {}
 // Persisted copy of the Cloudinary resource list. Produced by the master cache-warmup job and
 // restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this

@@ -73,10 +73,46 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterReport {
+      title: String
+      source: String
+      receivedAgo: String
+      body: String
+      suggestedAction: String
+      actionNote: String
+      affected: String
+    }
+    type FrontmatterWatches {
+      name: String
+      detail: String
+    }
+    type FrontmatterRequires {
+      label: String
+      level: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      report: FrontmatterReport
+      premise: String
+      tldr: String
+      # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.
+      shortTitle: String
+      # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
+      # pages in sequence. Declared so a book page can exist without a report block.
+      bookOrder: Int
+      watches: [FrontmatterWatches]
+      requires: [FrontmatterRequires]
+      # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
+      # inbox's category rail; the list of categories is derived from the templates that
+      # declare one, never hardcoded, so adding a template is a content-only change.
+      category: String
+      schedule: String
       seo: FrontmatterSEO
+      # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
+      # are declared here rather than left to inference – see components/SelfDrivingInbox.
+      name: String
+      allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
       lang: String
