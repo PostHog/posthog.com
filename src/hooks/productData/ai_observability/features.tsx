@@ -112,9 +112,8 @@ export const features = {
         color: 'purple',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_light_f2794e4e13.png',
-                srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cost_dark_d1efde15fd.png',
-                alt: 'LLM cost analysis',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_costs_70f4cf9fdd.png',
+                alt: 'Total LLM cost and cost by model insights',
             },
         ],
         features: [

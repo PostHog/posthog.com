@@ -186,11 +186,9 @@ export const applications: CarouselSlide[] = [
         layout: 'float',
         heading: f.dashboard.headline,
         description: <p>{f.dashboard.description}</p>,
-        // Portrait captures (1360x1444) shot for the float column – wide screenshots
-        // render too small at its ~50% width.
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/aio_dashboard_5c949c4084.png',
-            alt: 'Cost per user and cost by model insights on the AI observability dashboard',
+            src: f.cost_analysis.images[0].src,
+            alt: f.cost_analysis.images[0].alt,
             glow: true,
         },
     },
@@ -375,7 +373,7 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-purple',
-        layout: 'stack',
+        layout: 'float',
         heading: f.cost_analysis.headline,
         description: (
             <>
@@ -392,10 +390,8 @@ export const topFeatures: CarouselSlide[] = [
         ),
         image: {
             src: f.cost_analysis.images[0].src,
-            srcDark: f.cost_analysis.images[0].srcDark,
             alt: f.cost_analysis.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
