@@ -94,6 +94,7 @@ const ScrollArea = ({
         >
             <RadixScrollArea.Viewport
                 ref={setViewportRef}
+                tabIndex={-1}
                 // Radix derives the viewport's overflow from Root state that only flips to
                 // `scroll` in the Scrollbar's effect, so server-rendered markup ships
                 // `overflow: hidden` and nothing scrolls until hydration. Both scrollbars below

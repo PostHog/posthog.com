@@ -1397,6 +1397,14 @@ function ReaderViewContent({
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
 
+        // Focus follows the content on navigation, so the scroll keys have somewhere to act. Without
+        // this, focus stays on <body> after a page load (or on the sidebar link that was just
+        // clicked, whose own ScrollArea would swallow the keys instead). Never steal focus from a
+        // field being typed in, e.g. sidebar search.
+        if (!(document.activeElement as HTMLElement | null)?.closest('input, textarea, [contenteditable="true"]')) {
+            scrollElement.focus({ preventScroll: true })
+        }
+
         const waitForImagesAndScroll = async () => {
             const images = contentRef.current?.querySelectorAll('img') || []
             const imageLoadPromises = Array.from(images).map((img: HTMLImageElement) => {
