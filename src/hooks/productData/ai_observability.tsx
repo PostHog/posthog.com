@@ -185,7 +185,7 @@ export const aiObservability = {
     volume: 100000,
     customers: {
         kilocode: {
-            headline: 'keeps visibility into what its AI coding platform is actually doing',
+            headline: 'keeps visibility into what its AI coding platform is doing',
             description:
                 'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
@@ -201,11 +201,11 @@ export const aiObservability = {
         },
     },
     useCases: {
-        intro: 'AI Observability is used across teams depending on your role.',
+        intro: 'Different teams pull different answers from the same LLM data.',
         rows: [
             ['AI Engineers', 'Debug traces span by span and compare models on cost, latency, and quality'],
             ['Product Engineers', 'Tie failed generations and latency spikes back to the users who hit them'],
-            ['PMs', 'See which AI features people actually use, and whether using them changes retention'],
+            ['PMs', 'See which AI features get used – and whether using them changes retention'],
             ['Finance & leadership', 'Attribute token spend to models, features, and individual customers'],
             ['Support Engineers', 'Read the exact conversation behind a ticket, then watch the session it happened in'],
         ],
@@ -241,7 +241,7 @@ export const aiObservability = {
         ],
     },
     answersHeadline: 'What can AI Observability help me discover?',
-    answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
+    answersDescription: 'Ask about the cost, performance, and usage of your AI features in plain English',
     questions: [
         {
             question: 'What are my LLM costs by customer?',

@@ -25,8 +25,7 @@ export const features = {
     dashboard: {
         title: 'Dashboard',
         headline: 'Dashboard',
-        description:
-            "Get a comprehensive overview of where your LLM budget goes, who's using AI features, and how they perform.",
+        description: "See where your LLM budget goes, who's using AI features, and how they perform.",
         icon: <IconDashboard />,
         color: 'purple',
         images: [
@@ -105,7 +104,7 @@ export const features = {
             {
                 icon: <IconRewindPlay />,
                 title: 'Integrated session recordings',
-                description: "Observe any changes to your UI based on the LLM's response",
+                description: 'Jump from a trace to the session recording and watch what the response did in your UI',
             },
             {
                 icon: <IconTag />,
@@ -170,7 +169,7 @@ export const features = {
             {
                 icon: <IconDashboard />,
                 title: 'Latency tracking',
-                description: 'Optimize response times and identify performance bottlenecks',
+                description: 'Track response times and find the slow prompts, models, and workflow steps',
             },
             {
                 icon: <IconWarning />,
