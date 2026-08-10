@@ -1462,6 +1462,10 @@ export const handbookSidebar = [
                         name: 'Engaging unengaged customers',
                         url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
+                    {
+                        name: 'Voice of the customer',
+                        url: '/handbook/cs-and-onboarding/voice-of-the-customer',
+                    },
                 ],
             },
             {
