@@ -165,15 +165,16 @@ export const aiObservability = {
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
+        // Robot hog reused from the /docs/ai-observability hero; the detective hog
+        // below is the product's identity and takes the more prominent hero slot.
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
-            alt: 'A hedgehog inspecting a trace with a magnifying glass',
-        },
-        // Reused from the /docs/ai-observability hero – AI Observability has no
-        // dedicated product hog yet.
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
             alt: 'A hedgehog with a robot',
+        },
+        // `mobileHog` renders on the Overview hero screenshot.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+            alt: 'A hedgehog inspecting a trace with a magnifying glass',
         },
     },
     slider: {

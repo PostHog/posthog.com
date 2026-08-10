@@ -184,15 +184,13 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
-        layout: 'stack',
+        layout: 'float',
         heading: f.dashboard.headline,
         description: <p>{f.dashboard.description}</p>,
         image: {
             src: f.dashboard.images[0].src,
             alt: f.dashboard.images[0].alt,
-            maxWidth: 'max-w-none',
-            containerClassName: 'pb-0 leading-[0]',
-            imgClassName: 'w-full border-b-0 rounded-b-none',
+            glow: true,
         },
     },
     {
@@ -202,7 +200,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
-        layout: 'stack',
+        layout: 'float',
         heading: 'When a generation goes wrong, follow it end to end',
         description: (
             <>
@@ -224,8 +222,7 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.errors.images[0].src,
             alt: f.errors.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
@@ -235,7 +232,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-seagreen',
-        layout: 'stack',
+        layout: 'float',
         heading: 'Change the prompt without shipping a deploy',
         description: (
             <>
@@ -248,8 +245,7 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.playground.images[0].src,
             alt: f.playground.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
     {
@@ -259,7 +255,7 @@ export const applications: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-green',
-        layout: 'stack',
+        layout: 'float',
         heading: f.self_driving.headline,
         description: (
             <>
@@ -284,8 +280,7 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.self_driving.images[0].src,
             alt: f.self_driving.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
     },
 ]
