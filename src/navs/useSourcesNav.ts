@@ -14,16 +14,18 @@ export default function useSourcesNav(basePath = '/docs/data-warehouse/sources')
         }
     `)
 
-    const managed = allPostHogSource.nodes.map((node: any) => ({
-        url: `${basePath}/${node.slug}`,
-        name: node.name,
-        ...(node.beta && {
-            badge: {
-                title: 'Beta',
-                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
-        }),
-    }))
+    const managed = allPostHogSource.nodes
+        .filter((node: any) => node.slug)
+        .map((node: any) => ({
+            url: `${basePath}/${node.slug}`,
+            name: node.name,
+            ...(node.beta && {
+                badge: {
+                    title: 'Beta',
+                    className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                },
+            }),
+        }))
 
     const selfManaged = SELF_HOSTED_SOURCES.map((s) => ({
         name: s.name,

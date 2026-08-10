@@ -13,9 +13,11 @@ export default function useSourcePlatforms() {
         }
     `)
 
-    return allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/data-warehouse/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
+    return allPostHogSource.nodes
+        .filter((node: any) => node.slug)
+        .map((node: any) => ({
+            label: node.name,
+            url: `/docs/data-warehouse/sources/${node.slug}`,
+            image: node.icon_url,
+        }))
 }

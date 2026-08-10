@@ -1050,6 +1050,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     // Sources WITHOUT hand-written docs: create API-generated pages at both paths
     result.data.postHogSources.nodes.forEach((node) => {
+        if (!node.slug) return
         createPage({
             path: `/docs/data-warehouse/sources/${node.slug}`,
             component: DataWarehouseSource,
@@ -1065,7 +1066,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Sources WITH hand-written docs: create data-warehouse page from the MDX content
     // (cdp page is already created by Gatsby's MDX processing from contents/docs/cdp/sources/)
     result.data.postHogSourcesWithDocs.nodes.forEach((node) => {
-        if (node.mdx?.id) {
+        if (node.mdx?.id && node.slug) {
             createPage({
                 path: `/docs/data-warehouse/sources/${node.slug}`,
                 component: HandbookTemplate,
