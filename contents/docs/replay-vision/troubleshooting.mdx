@@ -4,12 +4,6 @@ title: Troubleshooting
 
 import { ProductScreenshot } from "components/ProductScreenshot";
 
-<CalloutBox icon="IconFlask" title="Replay Vision is in closed beta" type="action">
-
-Not yet available to everyone – <a href="/replay-vision">join the waitlist</a> to get updates.
-
-</CalloutBox>
-
 Common things that go wrong with Replay Vision, and what to do about each.
 
 ## My scanner isn't producing any observations
@@ -19,7 +13,7 @@ Check, in order:
 1. **Is the scanner enabled?** Disabled scanners don't sweep. The toggle is on the scanner list and on the scanner detail page.
 2. **Are the filters too narrow?** Try removing all filters and see whether observations start showing up. If they do, re-add filters one at a time to find the culprit.
 3. **Is the sampling rate 0%?** A common oversight – 0% means every matching session gets skipped.
-4. **Is the quota exhausted?** Check the usage meter in the Replay Vision header. A scanner whose background sweep is silenced by the cap will silently produce nothing until quota frees up. See [quota and limits](/docs/replay-vision/quota-and-limits).
+4. **Is the credit budget exhausted?** Check the spend tile on the Replay Vision home (the Usage tab breaks spend down per scanner). A scanner whose background sweep is paused by the budget will silently produce nothing until credits free up. See [quota and limits](/docs/replay-vision/quota-and-limits).
 5. **Is your project recording sessions at all?** Replay Vision only sees sessions [Session Replay](/docs/session-replay) has captured. No recordings, no observations. See [events or recordings aren't coming in](#events-or-recordings-arent-coming-in).
 6. **Is your organization over a usage limit?** If Product analytics or Session replay is over its billing limit, new events or recordings are dropped at ingestion and scanners have nothing usable to scan. See [usage limits stop scanning](#usage-limits-stop-scanning).
 7. **Are all the matched sessions ineligible?** If your filters happen to match only very short or no-event sessions, the scanner will produce ineligible observations but no successful ones. See [running scanners – ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
@@ -37,6 +31,7 @@ Ineligibles don't cost you quota, but a high ineligibility rate usually means th
 | `too_inactive` | Add an event-presence filter (e.g. require at least one `$pageview` or `$autocapture`) so silent sessions are skipped earlier. |
 | `too_long` | Add an upper duration filter. |
 | `no_events` | Require at least one event, as with `too_inactive`. If nearly every recent scan is `no_events`, check whether your organization is over its Product analytics limit – see [usage limits stop scanning](#usage-limits-stop-scanning). |
+| `no_ai_consent` | AI data processing is turned off for your organization, so nothing gets scanned. An organization admin needs to approve AI data processing in the organization settings. |
 
 Once you've added the filter, the ineligibility rate should drop. The Observations tab is the source of truth – check it after the next sweep.
 
@@ -64,7 +59,9 @@ One caveat: sessions from the over-limit window are permanently unscannable. Dro
 
 ## The model is making bad calls
 
-The reasoning + citations on each observation are your debugging tool here. Open three or four observations the scanner got wrong and read them.
+Start on the scanner's [calibration tab](/docs/replay-vision/calibration): rate the wrong results with a thumbs down and say why in the feedback field. PostHog AI turns those ratings into a configuration recommendation you can test against the rated sessions before applying – that loop fixes most systematic errors without hand-tuning.
+
+To understand *why* the model got something wrong, the reasoning + citations on each observation are your debugging tool. Open three or four observations the scanner got wrong and read them.
 
 Common patterns and fixes:
 
@@ -91,9 +88,9 @@ Failed observations show an **error reason** on the detail page in the form `kin
 
 ### `provider_transient`
 
-A transient Gemini error – network hiccup, rate limit, model overloaded.
+A transient Gemini error – network hiccup, rate limit, model overloaded. PostHog retries the provider call automatically during the scan (up to three attempts). An observation only lands here once those retries are exhausted.
 
-**What to do:** a single failure isn't actionable. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
+**What to do:** retry the observation from its detail page. If you're seeing a burst across many sessions, the upstream model is likely having availability issues – wait it out before triggering more on-demand work.
 
 ### `provider_rejected`
 
@@ -113,6 +110,12 @@ The model returned a response that didn't match the scanner's expected output sh
 
 **What to do:** tighten the prompt to spell out the allowed responses. For classifiers, restate the vocabulary inside the prompt body, not just in the config. For scorers, repeat the scale.
 
+### `orphaned`
+
+The analysis was interrupted before finishing – for example by a deploy or a worker restart – and was cleaned up.
+
+**What to do:** retry the observation from its detail page. The retry replaces the failed row with a fresh scan of the same recording. Interrupted observations don't spend credits. If the same session orphans repeatedly, [contact support](/questions) with the observation ID.
+
 ### `internal_error`
 
 Something else went wrong on PostHog's side. These should be rare.
@@ -127,4 +130,4 @@ Something else went wrong on PostHog's side. These should be rare.
 
 ## Something else
 
-If you're hitting something that doesn't fit the above, [reach out](/questions) – Replay Vision is in beta and the team is actively looking for sharp edges.
+If you're hitting something that doesn't fit the above, [reach out](/questions) – the team is actively looking for sharp edges.

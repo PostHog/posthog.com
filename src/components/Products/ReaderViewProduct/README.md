@@ -242,7 +242,7 @@ If a template finds nothing to render, it returns `null` – the section disappe
 
 ## Product switcher
 
-[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It sources the product list from [`useProducts()`](../../../hooks/useProducts.tsx) only (top-level billed products – not the extended WIP/sub-product dump in `useProduct.ts`) and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
+[`ProductSwitcher`](./ProductSwitcher.tsx) is the searchable dropdown rendered at the very top of the LeftSidebar. It uses the same curated handle list/order as the taskbar "Browse tools" menu ([`BROWSE_TOOLS_HANDLES`](../../../constants/productNavigation.ts)), resolved via [`useProduct()`](../../../hooks/useProduct.ts), and renders each entry through [`OSForm/select.tsx`](../../OSForm/select.tsx) with the product's `Icon` (tinted with `text-${color}`) and name.
 
 ```tsx
 <ReaderView
@@ -284,7 +284,7 @@ Switching products always navigates to the product root (`/<newSlug>`). Surface-
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
-| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `useProducts()`; always navigates to `/<slug>`. |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; always navigates to `/<slug>`. |
 | `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 

@@ -79,10 +79,10 @@ export default function Enterprise() {
 
                         <div className="flex justify-center items-center gap-4 @sm:gap-8 @xl:gap-4 @2xl:gap-8">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/soc-2type1.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/soc-2-seal.png"
                                 height={140}
                                 width={140}
-                                alt="SOC 2 Type II certified"
+                                alt="SOC 2 Type 2 certified"
                                 placeholder="blurred"
                             />
                             <CloudinaryImage

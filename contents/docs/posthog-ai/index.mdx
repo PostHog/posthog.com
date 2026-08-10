@@ -1,0 +1,76 @@
+---
+title: PostHog AI
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMessage, IconDatabase, IconChat, IconMemory } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+PostHog AI is an AI product analyst that lives inside PostHog. Ask it a question in plain English and it queries your data, builds the insight, writes the SQL, or finds the session replay – then explains what it found. Because it runs on your project's own events, persons, and schema, its answers are about your product, not a generic dataset.
+
+It also does the work, not just the analysis. PostHog AI creates dashboards, surveys, alerts, and feature flags, edits filters in the UI alongside you, and remembers what it learns about your product between conversations. Ask it for a change that belongs in code and it starts a [coding task](/docs/posthog-ai/surfaces/web-app) against a repository you've connected, then reports back when there's a pull request to review.
+
+<OSButton variant="primary" asLink to="/docs/posthog-ai/start-here">Get started</OSButton>
+
+## Where you can use it
+
+PostHog AI lives in the PostHog web app, in a chat sidebar and in inline entry points throughout the UI. You can also talk to it in Slack, and those conversations show up in your chat history back in the web app.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Chat in the sidebar, or trigger PostHog AI inline from the page you're already on.</p>
+      <a href="/docs/posthog-ai/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Chat in the web app →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMessage className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary flex items-center gap-1.5">PostHog Slack <span className="text-2xs font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-yellow/20 text-orange">Beta</span></p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Mention or DM <code>@PostHog</code> to investigate something without leaving the thread you're in.</p>
+      <a href="/docs/posthog-ai/surfaces/slack" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Ask in Slack →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+PostHog AI answers from your project's data, the context you attach to a conversation, and what it has saved to memory. It reads through your existing [access controls](/docs/settings/access-control), so it can only see what you can see.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconDatabase className="size-6 shrink-0 text-lilac mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Your PostHog data</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Events, persons, sessions, groups, cohorts, your data warehouse schema, and every saved insight and dashboard.</p>
+      <a href="/docs/posthog-ai/tools" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">See what it can read →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconChat className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Conversation context</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">The page you're on, plus insights, dashboards, events, and notebooks you attach to the chat yourself.</p>
+      <a href="/docs/posthog-ai/context-and-commands" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Add context →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMemory className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Project memory</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">What your product is, who uses it, and how your team works – saved once and reused in every conversation.</p>
+      <a href="/docs/posthog-ai/edit-memory" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Edit memory →</a>
+    </div>
+  </div>
+
+</div>

@@ -60,6 +60,12 @@ interface TreeMenuProps {
      */
     rootHeading?: string
     activeUrl?: string
+    /**
+     * When true, parent (collapsible) rows only toggle open/closed on click instead of
+     * navigating. For landing sidebars that want expand-in-place categories. Only applies to
+     * the `listed` variant.
+     */
+    expandOnly?: boolean
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -406,7 +412,14 @@ const renderSectionItems = (
     })
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true, variant = 'listed', appearance = 'os', rootHeading, activeUrl } = props
+    const {
+        watchPath = true,
+        variant = 'listed',
+        appearance = 'os',
+        rootHeading,
+        activeUrl,
+        expandOnly = false,
+    } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
@@ -504,7 +517,14 @@ export function TreeMenu(props: TreeMenuProps) {
                 const key = `${item.name}-${index}-${item.url}`
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                    <TreeMenuItem
+                        key={key}
+                        item={item}
+                        activeItem={activeItem}
+                        index={0}
+                        onClick={handleClick}
+                        expandOnly={expandOnly}
+                    />
                 ) : (
                     <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                 )
@@ -599,11 +619,13 @@ function TreeMenuItem({
     activeItem,
     index = 0,
     onClick,
+    expandOnly = false,
 }: {
     item: MenuItem
     activeItem: MenuItem | undefined
     index: number
     onClick: (item: MenuItem) => void
+    expandOnly?: boolean
 }) {
     const [open, setOpen] = useState(false)
     const hasChildren = item.children && item.children.length > 0
@@ -632,8 +654,7 @@ function TreeMenuItem({
                             : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
                     }`}
                     active={activeItem === item}
-                    to={item.url || item.children?.[0]?.url}
-                    asLink
+                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
@@ -666,6 +687,7 @@ function TreeMenuItem({
                                     activeItem={activeItem}
                                     index={index + 1}
                                     onClick={onClick}
+                                    expandOnly={expandOnly}
                                 />
                             ) : (
                                 <TreeLink

@@ -25,7 +25,7 @@ Handles that don't resolve to a product with a `name` and `slug` are silently sk
 ## How the loop works
 
 - The item list is rendered **twice** inside a `flex w-max` track.
-- The `tools-ticker-marquee` keyframe (defined in `src/styles/global.css`, next to `hero-carousel-progress`) animates the track from `translateX(0)` to `translateX(-50%)` – exactly one copy's width – so the loop is seamless for any number of items.
+- The `tools-ticker-marquee` keyframe (defined in `src/styles/global.css`, next to `carousel-progress`) animates the track from `translateX(0)` to `translateX(-50%)` – exactly one copy's width – so the loop is seamless for any number of items.
 - Each `<ul>` has `pr-6` matching its internal `gap-6`, so the seam between copies is invisible.
 - Duration is `items × 2.5s`, keeping the apparent speed constant when the list changes.
 

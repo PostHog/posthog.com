@@ -1,38 +1,36 @@
 import React from 'react'
 import {
-    IconPieChart,
-    IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconCheckCircle,
-    IconInfo,
-    IconCursorClick,
-    IconMagic,
     IconChat,
+    IconCheckCircle,
     IconCode,
+    IconConfetti,
+    IconCursorClick,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
     IconMessage,
-    IconNewspaper,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import Link from 'components/Link'
+import MCPInstall from 'components/Products/MCPInstall'
+import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'
 import { applications, topFeatures } from './web_analytics/slides'
 
 export const webAnalytics = {
+    ...getTool('web_analytics'),
     Icon: IconPieChart,
-    name: 'Web Analytics',
-    handle: 'web_analytics',
     type: 'product_analytics',
     // Billed as product analytics events – Plans/calculator resolve against this billing product.
     billingType: 'product_analytics',
-    slug: 'web-analytics',
     teamSlug: 'web-analytics',
     forumTopicId: 348,
     color: 'green-2',
     colorSecondary: '[#37945D]',
-    category: 'analytics',
     wizardSupport: true,
     billedWith: 'Product Analytics',
     billedWithSlug: 'product-analytics',
@@ -95,21 +93,20 @@ export const webAnalytics = {
             group: 'divided',
             icon: <IconChat className="size-4" />,
         },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'changelog', name: 'Changelog', group: 'divided', icon: <IconNewspaper className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
         {
             slug: 'installation',
             name: 'Install',
             group: 'divided',
             icon: <IconCode className="size-4" />,
         },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -164,15 +161,15 @@ export const webAnalytics = {
         },
     },
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
-        alt: 'A hedgehog looking at web analytics',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png',
+        alt: 'A hedgehog at a desk surrounded by charts',
         classes: 'absolute bottom-0 right-0 max-w-md',
         footerClasses: 'max-w-[240px]',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
-            alt: 'A hedgehog looking at web analytics',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
+            alt: 'PostHog AI and web analytics',
         },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_cursor_hog_2e5fec02ad.png',
@@ -367,8 +364,8 @@ export const webAnalytics = {
         },
     ],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_92791a9d9b.png',
-        imageAlt: 'PostHog AI and web analytics',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/web-analytics-hog.png',
+        imageAlt: 'A hedgehog looking at web analytics',
         imageClasses: 'w-96',
         // Reshaped from presenterNotes.ai (existing MCP blurb)
         intro: 'Query web analytics data to check traffic trends, investigate anomalies, and build dashboards.',
@@ -378,7 +375,7 @@ export const webAnalytics = {
             'Investigates traffic spikes, dips, and other anomalies',
             'Analyzes Core Web Vitals to identify performance bottlenecks',
         ],
-        // Reshaped from existing ai.prompts + contents/docs/web-analytics/query-traffic-mcp.mdx examples.
+        // Reshaped from existing ai.prompts + contents/docs/web-analytics/surfaces/mcp.mdx examples.
         // Tool names verified against src/data/mcp-tools.json.
         groups: [
             {

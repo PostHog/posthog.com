@@ -1,0 +1,58 @@
+---
+title: Use PostHog AI in Slack
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="action">
+
+PostHog AI in Slack is in beta. Behavior and available actions may change.
+
+</CalloutBox>
+
+Most questions about your product get asked in Slack, not in PostHog. The [PostHog Slack app](/docs/slack) puts PostHog AI in the thread where the question came up, so you can investigate something without asking someone to go pull a chart and paste it back.
+
+It's a real conversation, not an alert feed. PostHog AI replies in the thread, you can follow up in plain English, and it keeps the whole thread as context for the run.
+
+## Before you start
+
+1. **Enable PostHog AI** – [grant it access to your project](/docs/posthog-ai/allow-access), which an org admin does once.
+2. **Install the PostHog Slack app** – [add it to your workspace](/docs/slack/setup) as a project admin, and make sure your Slack email matches your PostHog account.
+
+## Start a conversation
+
+There are three ways in:
+
+- **Mention `@PostHog` in a channel.** PostHog AI picks up the message and the surrounding thread, and replies in that thread.
+- **DM the PostHog app.** Good for investigating something that doesn't belong in a channel. The app suggests a few starting prompts when you open the DM.
+- **Reply in an existing thread.** Once PostHog AI is working in a thread, you can keep replying without mentioning it again.
+
+While it's working, PostHog AI reacts to your message so you can see the state at a glance: an hourglass when your message is queued behind another, and eyes when it's actively working.
+
+## What you can do here
+
+- **Investigate a problem** – ask why an insight looks wrong, what changed this week, or what's behind a spike, and get an answer grounded in your project's data.
+- **Discuss an inbox item** – talk through a [Self-driving](/docs/self-driving) signals report and kick off the fix from the thread.
+- **Start a code change** – when the fix belongs in a connected repo, PostHog AI creates a coding task from the thread. A coding agent writes the code in a sandbox and opens a draft pull request for you to review.
+- **Follow up** – keep replying in the thread to refine, redirect, or ask for more detail.
+- **Approve or deny an action** – when PostHog AI needs sign-off on something sensitive, it posts approve and deny buttons in the thread.
+
+If a run fails or stalls, reply `retry` in the thread to pick up from the last checkpoint.
+
+## How it connects to the web app
+
+Slack conversations show up in your PostHog AI chat history in the [web app](/docs/posthog-ai/surfaces/web-app), tagged as a Slack thread and linking back to the original message. Work that produces a task – like a code fix – is visible in the task tracker alongside every other run, so a thread started in Slack and a chat started in the web app end up in the same place.
+
+The reverse isn't true today: you can't move a web app conversation into Slack. Keep a thread in the place you started it.
+
+## Requirements and limits
+
+To use PostHog AI in Slack, install the [PostHog Slack app](/docs/slack) in your workspace. Your Slack email needs to match your PostHog account so PostHog AI knows which project and permissions to work with, and opening pull requests requires a connected repository.
+
+A few things to know. Slack is a text surface, so PostHog AI answers in writing rather than rendering insights or notebooks – open the [web app](/docs/posthog-ai/surfaces/web-app) for the visual output. Long replies are split into chunks, and replies in a thread that aren't clearly aimed at PostHog AI may be ignored, so mention it directly if you want a response.
+
+## Related
+
+- Chat with full context and visual output in the [web app](/docs/posthog-ai/surfaces/web-app).
+- Set the app up in the [Slack app docs](/docs/slack).
+- See how reports become pull requests in the [Self-driving docs](/docs/self-driving).

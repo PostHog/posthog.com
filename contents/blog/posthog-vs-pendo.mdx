@@ -23,7 +23,7 @@ Want to understand the difference between [Pendo](/blog/best-pendo-alternatives)
 
 1. **Pendo** is a product experience platform with in-app guides, product analytics, session replay, feedback collection, and roadmap tools.
 
-2. **PostHog** is an all-in-one developer platform that includes [product analytics](/product-analytics), [web analytics](/web-analytics), [workflows](/workflows), [feature flags](/feature-flags), [session replays](/session-replay), [error tracking](/error-tracking), [logs](/logs), a [data warehouse](/data-stack), and more.
+2. **PostHog** is an all-in-one developer platform that includes [product analytics](/product-analytics), [web analytics](/web-analytics), [workflows](/workflows), [feature flags](/feature-flags), [session replays](/session-replay), [error tracking](/error-tracking), [logs](/logs), a [data warehouse](/context-warehouse), and more.
 
 Now it's time for the long answer...
 
@@ -73,7 +73,7 @@ Adding a credit card unlocks additional features like advanced paths, correlatio
 - **Data warehouse**: 1 million synced rows/month + free historical syncs for the first 7 days for each new source
 - **Error tracking**: 100 thousand exceptions/month
 - **LLM observability**: 100 thousand events/month
-- **Logs**: 50GB ingested/month
+- **Logs**: 10GB ingested/month
 - **Workflows**: 10,000 messages per channel/month
 - **PostHog AI**: 500 credits/month (worth $5)
 
@@ -320,6 +320,19 @@ PostHog supports [a wide range of client and server libraries](/docs/libraries),
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What's the difference between PostHog and Pendo?</summary>
