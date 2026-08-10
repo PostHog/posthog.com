@@ -139,7 +139,7 @@ If you're assigned an account with a previous owner, work with them on a proper 
 
 ## Top 40 account management
 
-Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding or removing a TAM on a Top 40 account is decided directly by Simon and Ben rather than the standard Team Lead process. The bar for change is higher here. Sometimes a TAM stays on a saturated account because the relationship is strong and there's long-term strategic value.
+Our highest-spend customers (~Top 40 by ARR) get special consideration. Adding or removing a TAM on a Top 40 account is decided directly by Ben and team leads rather than the standard Team Lead process. The bar for change is higher here. Sometimes a TAM stays on a saturated account because the relationship is strong and there's long-term strategic value.
 
 ---
 
