@@ -660,9 +660,10 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             </p>
                         </div>
                         <div className="border border-primary rounded-md p-4 bg-primary">
+                            {/* Dark logo, so it sits on a light chip in dark mode */}
                             <img
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/concept_ventures_fa46262122.svg"
-                                className="h-8 my-1"
+                                className="h-8 my-1 dark:bg-white dark:p-1.5 dark:rounded-sm dark:box-content"
                                 alt="Concept Ventures"
                             />
                             <p className="mt-4 mb-2 text-base">
