@@ -316,9 +316,18 @@ export default function Tabbed() {
 
     const initialProductAddons = useMemo(() => {
         const initialAddons = []
+        // Dedupe by addon type: since web_analytics and product_analytics share the same
+        // billingType (and therefore the same billingData.addons array), an addon like
+        // group_analytics would otherwise be pushed once per product tile. Every reduce that
+        // sums productAddons then counts it twice, overstating the quoted price.
+        const seenTypes = new Set()
         for (const product of products) {
             if (product.billingData?.addons?.length > 0) {
                 product.billingData.addons.forEach((addon) => {
+                    if (seenTypes.has(addon.type)) {
+                        return
+                    }
+                    seenTypes.add(addon.type)
                     initialAddons.push({
                         type: addon.type,
                         checked: addonDefaults[addon.type]?.checked || false,
