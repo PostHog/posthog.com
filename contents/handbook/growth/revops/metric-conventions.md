@@ -47,12 +47,12 @@ The test: would this number exist if the workflow didn't? If yes, the workflow d
 
 ## 2. Make the difference from siblings visible
 
-The name doesn't need to explain what NDR *is* that's what the description is for, and our [retention metrics](/handbook/growth/revops/retention-metrics) and [revenue adjustments](/handbook/growth/revops/revenue-adjustments) pages cover the underlying methodology. What the name needs to do is make clear how yours differs from the ones next to it. If you can't tell two siblings apart without opening both, the qualifier needs work, or it needs a row in the table above.
+The name doesn't need to explain what NDR is, that's what the description is for, and our [retention metrics](/handbook/growth/revops/retention-metrics) and [revenue adjustments](/handbook/growth/revops/revenue-adjustments) pages cover some of the underlying methodology. The name needs to make clear how yours differs from the other similar metrics. If you can't tell two siblings apart without opening both, the qualifier needs work, or it needs a row in the table above.
 
 ## 3. Shared logic goes in a view, not a second copy
 
 There's no way to define a metric in terms of another metric today. So if you're about to paste the same expression into a second metric, create a view instead and have both read from it.
 
-This matters a lot, we already have copies have already drifted apart from each other!
+This matters a lot, we already have copies have drifted apart from each other!
 
 One thing to know: editing a metric sends it back to `proposed` for re-approval, but editing a view doesn't. A view carrying shared business logic moves every metric downstream of it silently, so it needs an owner.
