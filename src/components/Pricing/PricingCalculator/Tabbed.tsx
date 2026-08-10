@@ -10,6 +10,7 @@ import useProducts from 'hooks/useProducts'
 import { LogSlider, inverseCurve, sliderCurve } from '../PricingSlider/Slider'
 import { PricingTiers } from '../Plans'
 import ProductAnalyticsTab, { analyticsSliders, getTotalEnhancedPersonsVolume } from './Tabs/ProductAnalytics'
+import ReplayVisionTab from './Tabs/ReplayVision'
 import StandaloneAddonsTab from './Tabs/StandaloneAddonsTab'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
@@ -86,6 +87,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
 
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
+    replay_vision: ReplayVisionTab,
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
