@@ -244,7 +244,7 @@ const faqItems = [
             <p>
                 Unfortunately, no. Credits cannot be used to claim a BAA under the Boost plan due to legal risk. If
                 you’d like to claim a BAA, you can instead{' '}
-                <Link to="/talk-to-sales" state={{ newWindow: true }} className="underline font-semibold">
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline font-semibold">
                     contact us to discuss options
                 </Link>
                 . Credits can be used towards all other aspects of the Boost package.
