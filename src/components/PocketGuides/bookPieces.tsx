@@ -98,9 +98,11 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
 }
 
 // text-secondary: .article-content's base color is an intentional 'unstyled' red alarm;
-// the book's prose grey is the right inherit for cells and list items.
+// the book's prose grey is the right inherit for cells and list items. Font sizes are forced
+// back to em: .article-content sets a fixed 16px (text-base), but the book reads at 15px by
+// default and scales via the Aa control – absolute sizes would sit off-scale and never resize.
 const NATIVE_CONTENT =
-    'article-content !text-secondary [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
+    'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
 
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
