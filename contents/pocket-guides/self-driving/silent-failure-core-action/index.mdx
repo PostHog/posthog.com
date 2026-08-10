@@ -96,7 +96,9 @@ files a ticket. This scout watches your most important flow and catches the fail
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: you deployed at `14:02`. People are still trying to publish, but fewer are finishing. No error page rendered and no alert fired. If both lines had dropped, that's a traffic change – not a break.
+The scout looks for patterns like <SeeFig n={1} />: you deployed at `14:02`. People are still trying to publish, but fewer are finishing. No error page rendered and no alert fired.
+- If both lines drop together, that's a traffic change, not a break. The scout stays _quiet_.
+- If traffic is flat but the finish rate drops, it signals a silent failure. The scout _**reports**_.
 
 ## The report in your inbox
 
