@@ -1,0 +1,57 @@
+---
+title: Session replay image bot
+---
+
+PostHog runs a bot that downloads images referenced by session recordings. This page explains what it does, how to identify it, and how to block it.
+
+The bot is called `PostHogSessionReplayBot`.
+
+## What it does
+
+When someone records a session on your site, the recording refers to images by URL rather than storing a copy of them. To use those recordings for AI training, PostHog needs the image itself.
+
+The bot downloads those images, one time each, and passes them through the same redaction pipeline as the rest of the recording. Faces, text, and barcodes are removed before anything is stored.
+
+## When it runs
+
+The bot only downloads images from sites belonging to organizations that turned on **Internal AI training** in their PostHog organization settings. That setting is off unless an organization turns it on.
+
+If no PostHog customer records sessions on your site, the bot has no reason to visit it.
+
+## How to identify it
+
+Look for this user agent:
+
+```
+PostHogSessionReplayBot/1.0 (+https://posthog.com/docs/session-replay/image-bot)
+```
+
+The user agent is the way to identify the bot. We don't publish a list of IP addresses, because the addresses can change and a list you can't rely on is worse than no list. If you need a stable range to add to an allowlist, [contact us](/talk-to-a-human) and tell us what you need it for.
+
+## How it behaves
+
+- It reads `robots.txt` on every site it fetches from, and follows the rules there. There are no exceptions.
+- It follows `Crawl-delay` if you set one.
+- It downloads each image once and remembers the result, so a popular image is fetched once rather than once per recording.
+- It sends no cookies, no credentials, and no `Referer` header. It sees your site the way an anonymous visitor does.
+- It slows down when your server returns 429 or 503, and it honors `Retry-After`.
+- It only requests images. It doesn't crawl your site, follow links, or index anything.
+
+## How to block it
+
+To block it in `robots.txt`:
+
+```
+User-agent: PostHogSessionReplayBot
+Disallow: /
+```
+
+The bot checks `robots.txt` before every fetch, so this takes effect on its next visit.
+
+You can also block the user agent at your CDN or web server. If you do, the bot treats the block as final and stops requesting from your site.
+
+Blocking the bot doesn't affect session recording. Your PostHog customers keep recording sessions as before, and their recordings still show images to anyone watching a replay. The only difference is that PostHog can't use those images for AI training.
+
+## Questions
+
+If the bot is causing load on your site, or something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.

@@ -4710,6 +4710,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Image bot',
+                    url: '/docs/session-replay/image-bot',
+                    icon: 'IconServer',
+                    color: 'orange',
+                },
+                {
                     name: 'Data retention',
                     url: '/docs/session-replay/recording-retention',
                     icon: 'IconCalendar',
