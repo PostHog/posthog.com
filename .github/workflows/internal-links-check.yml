@@ -21,7 +21,7 @@ on:
 
 jobs:
     check-internal-links:
-        runs-on: ubuntu-latest
+        runs-on: depot-ubuntu-latest-8
 
         env:
             NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
