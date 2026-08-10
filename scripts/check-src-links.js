@@ -98,7 +98,7 @@ function extractLinks(filePath) {
             pattern.lastIndex = 0
             let match
             while ((match = pattern.exec(line)) !== null) {
-                links.push({ url: match[1], line: index + 1 })
+                links.push({ url: match[1], line: index + 1, text: line.trim().slice(0, 160) })
             }
         }
     })
@@ -125,7 +125,7 @@ function checkLinks(pages, redirectSources, files) {
     const stats = { totalLinks: 0, excludedLinks: 0, redirectedLinks: 0 }
 
     for (const file of files) {
-        for (const { url, line } of extractLinks(file)) {
+        for (const { url, line, text } of extractLinks(file)) {
             stats.totalLinks++
             if (shouldExclude(url)) {
                 stats.excludedLinks++
@@ -142,7 +142,7 @@ function checkLinks(pages, redirectSources, files) {
             if (!brokenByUrl.has(base)) {
                 brokenByUrl.set(base, [])
             }
-            brokenByUrl.get(base).push({ file: path.relative(process.cwd(), file), line, link: url })
+            brokenByUrl.get(base).push({ file: path.relative(process.cwd(), file), line, link: url, text })
         }
     }
 
@@ -166,7 +166,93 @@ function displayResults(brokenByUrl) {
     }
 }
 
-function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath) {
+function bigrams(value) {
+    const grams = new Set()
+    for (let i = 0; i < value.length - 1; i++) {
+        grams.add(value.slice(i, i + 2))
+    }
+    return grams
+}
+
+function similarity(a, b) {
+    const gramsA = bigrams(a)
+    const gramsB = bigrams(b)
+    if (gramsA.size === 0 || gramsB.size === 0) {
+        return 0
+    }
+    let shared = 0
+    for (const gram of gramsA) {
+        if (gramsB.has(gram)) {
+            shared++
+        }
+    }
+    return (2 * shared) / (gramsA.size + gramsB.size)
+}
+
+function suggestTargets(brokenPath, pages) {
+    const lastSegment = brokenPath.split('/').filter(Boolean).pop() || ''
+    const candidates = []
+    for (const page of pages) {
+        const score = similarity(brokenPath, page) + (page.endsWith(`/${lastSegment}`) ? 0.3 : 0)
+        if (score >= 0.6) {
+            candidates.push({ page, score })
+        }
+    }
+    return candidates
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map((candidate) => candidate.page)
+}
+
+function writeMarkdownReport(brokenByUrl, pages, resultsDir) {
+    const sorted = [...brokenByUrl.entries()].sort((a, b) => a[0].localeCompare(b[0]))
+    const lines = ['# Broken internal links on posthog.com', '', `Generated: ${new Date().toISOString()}`]
+    if (process.env.GITHUB_SHA) {
+        lines.push(`Commit: ${process.env.GITHUB_SHA}`)
+    }
+    lines.push(
+        '',
+        '## Instructions',
+        '',
+        'You are fixing broken internal links in the posthog.com repository. Every URL below returns a 404: it is not in the sitemap and no redirect covers it. For each item:',
+        '',
+        '1. Open every listed location and read the link in context.',
+        '2. Pick the fix:',
+        '    - Fix typos in place.',
+        '    - If the page moved, point the link at its replacement. "Possible targets" lists similar live URLs from the sitemap. Verify a target is actually the right page before using it, the suggestions are fuzzy matches, not answers.',
+        '    - If the destination is gone with no replacement, remove the link but keep the surrounding text. Delete a whole nav or menu entry when its only purpose is linking to the dead page.',
+        '3. Fix the link at the source. Do not add redirects to vercel.json.',
+        '4. Tick the checkbox once fixed.',
+        '',
+        'When every item is done, run `pnpm check-src-links` and confirm it reports 0 broken links.',
+        '',
+        `## Broken links (${sorted.length})`,
+        ''
+    )
+    sorted.forEach(([url, locations], index) => {
+        lines.push(`### ${index + 1}. ${url}`, '', '- [ ] Fixed', '', 'Locations:', '')
+        for (const location of locations) {
+            lines.push(`- \`${location.file}:${location.line}\``)
+            lines.push('')
+            lines.push('    ```')
+            lines.push(`    ${location.text.replace(/```/g, '')}`)
+            lines.push('    ```')
+        }
+        const suggestions = suggestTargets(url, pages)
+        if (suggestions.length > 0) {
+            lines.push('', 'Possible targets:', '')
+            for (const suggestion of suggestions) {
+                lines.push(`- ${suggestion}`)
+            }
+        }
+        lines.push('')
+    })
+    const reportFile = path.join(resultsDir, 'broken-links-report.md')
+    fs.writeFileSync(reportFile, lines.join('\n'))
+    console.log(`Report saved to: ${reportFile}`)
+}
+
+function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath, pages) {
     if (!outputPath) {
         return
     }
@@ -175,6 +261,8 @@ function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath) {
     if (!fs.existsSync(resultsDir)) {
         fs.mkdirSync(resultsDir, { recursive: true })
     }
+
+    writeMarkdownReport(brokenByUrl, pages, resultsDir)
 
     const results = {
         timestamp: new Date().toISOString(),
@@ -221,7 +309,7 @@ async function main() {
     console.log(`Found ${stats.redirectedLinks} redirected links (skipped)`)
     console.log(`Found ${brokenByUrl.size} broken links`)
 
-    writeResultsToFile(brokenByUrl, stats, files.length, outputPath)
+    writeResultsToFile(brokenByUrl, stats, files.length, outputPath, pages)
 
     process.exit(brokenByUrl.size > 0 ? 1 : 0)
 }
