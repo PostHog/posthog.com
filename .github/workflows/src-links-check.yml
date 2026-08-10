@@ -1,0 +1,154 @@
+name: Check internal links in source code
+
+on:
+    schedule:
+        - cron: '0 11 * * 1' # Every Monday at 11am UTC
+    workflow_dispatch:
+        inputs:
+            save_results:
+                description: 'Save results to file'
+                required: false
+                default: 'true'
+                type: boolean
+            send_slack_notification:
+                description: 'Send Slack notification'
+                required: false
+                default: 'true'
+                type: boolean
+
+jobs:
+    check-src-links:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+              with:
+                  node-version: '22'
+
+            - name: Check links (console only)
+              if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
+              run: |
+                  set +e
+                  OUTPUT=$(node scripts/check-src-links.js 2>&1)
+                  EXIT_CODE=$?
+                  echo "$OUTPUT"
+                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
+                  echo "$OUTPUT" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+                  exit $EXIT_CODE
+
+            - name: Check links (with file output)
+              if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false) }}
+              run: |
+                  set +e
+                  OUTPUT=$(node scripts/check-src-links.js link-check-results 2>&1)
+                  EXIT_CODE=$?
+                  echo "$OUTPUT"
+                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
+                  echo "$OUTPUT" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+                  exit $EXIT_CODE
+
+            - name: Upload link check results
+              if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false)) }}
+              id: upload-results
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: src-link-check-results
+                  path: link-check-results/*.json
+                  if-no-files-found: warn
+                  retention-days: 30
+
+            - name: Send Slack notification
+              if: always()
+              env:
+                  INPUT_SEND_SLACK: ${{ inputs.send_slack_notification }}
+                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
+                  GH_REPOSITORY: ${{ github.repository }}
+                  GH_RUN_ID: ${{ github.run_id }}
+                  GH_JOB_STATUS: ${{ job.status }}
+                  GH_EVENT_NAME: ${{ github.event_name }}
+                  GH_ACTOR: ${{ github.actor }}
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS }}
+                  ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
+              run: |
+                  SEND_SLACK="$INPUT_SEND_SLACK"
+                  if [ "$SEND_SLACK" = "" ]; then SEND_SLACK="true"; fi
+
+                  if [ "$SEND_SLACK" = "true" ] && [ -n "$SLACK_WEBHOOK" ]; then
+                    WORKFLOW_URL="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID"
+
+                    if [ "$GH_JOB_STATUS" = "success" ]; then
+                      COLOR="good"
+                      EMOJI=":white_check_mark:"
+                      STATUS="completed successfully"
+                    else
+                      COLOR="danger"
+                      EMOJI=":x:"
+                      STATUS="failed"
+                    fi
+
+                    if [ "$GH_EVENT_NAME" = "workflow_dispatch" ]; then
+                      TRIGGERED_BY="manually run by $GH_ACTOR"
+                    elif [ "$GH_EVENT_NAME" = "schedule" ]; then
+                      TRIGGERED_BY="Triggered via schedule"
+                    else
+                      TRIGGERED_BY="$GH_ACTOR"
+                    fi
+
+                    if [ -n "$LINK_CHECK_OUTPUT" ]; then
+                      SOURCE_FILES=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Scanned [0-9]* source files" | grep -o "[0-9]*" | head -1 || echo "0")
+                      TOTAL_INTERNAL_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
+                      EXCLUDED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      REDIRECTED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      BROKEN_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
+                    else
+                      SOURCE_FILES="0"
+                      TOTAL_INTERNAL_LINKS="0"
+                      EXCLUDED_LINKS="0"
+                      REDIRECTED_LINKS="0"
+                      BROKEN_LINKS="0"
+                    fi
+
+                    SAVE_RESULTS="$INPUT_SAVE_RESULTS"
+                    if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
+
+                    RESULTS_DOWNLOAD=""
+                    if [ "$SAVE_RESULTS" = "true" ]; then
+                      if [ -n "$ARTIFACT_ID" ]; then
+                        RESULTS_DOWNLOAD="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID/artifacts/$ARTIFACT_ID"
+                      else
+                        RESULTS_DOWNLOAD="$WORKFLOW_URL"
+                      fi
+                    fi
+
+                    curl -s -X POST "$SLACK_WEBHOOK" \
+                      -H "Content-Type: application/json" \
+                      -d "{
+                        \"status\": \"$STATUS (source code links)\",
+                        \"emoji\": \"$EMOJI\",
+                        \"repository\": \"$GH_REPOSITORY\",
+                        \"triggered_by\": \"$TRIGGERED_BY\",
+                        \"workflow_url\": \"$WORKFLOW_URL\",
+                        \"markdown_files\": \"$SOURCE_FILES\",
+                        \"links_checked\": \"$TOTAL_INTERNAL_LINKS\",
+                        \"excluded_links\": \"$EXCLUDED_LINKS\",
+                        \"redirected_links\": \"$REDIRECTED_LINKS\",
+                        \"broken_links\": \"$BROKEN_LINKS\",
+                        \"broken_anchors\": \"0\",
+                        \"results_download\": \"$RESULTS_DOWNLOAD\",
+                        \"save_results\": \"$SAVE_RESULTS\"
+                      }" > /dev/null 2>&1
+
+                    echo "✅ Slack notification sent successfully"
+                  else
+                    if [ "$SEND_SLACK" = "false" ]; then
+                      echo "Slack notifications disabled by user input"
+                    else
+                      echo "SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS not configured, skipping Slack notification"
+                    fi
+                  fi
