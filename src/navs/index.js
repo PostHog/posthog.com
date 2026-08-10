@@ -6732,6 +6732,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Self-driving',
+                    url: '/docs/ai-observability/self-driving',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -6833,10 +6844,6 @@ export const docsMenu = {
                     url: '/docs/ai-observability/errors',
                     icon: 'IconWarning',
                     color: 'red',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tools',
