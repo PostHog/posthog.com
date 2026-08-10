@@ -292,7 +292,7 @@ export const amplitude = {
         surveys: {
             available: true,
             pricing: {
-                free_tier: 'Included (limited)',
+                free_tier: '1 survey',
             },
             features: {
                 aggregated_results: false,
