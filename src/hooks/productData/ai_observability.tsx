@@ -116,7 +116,7 @@ export const aiObservability = {
         title: 'Observe, evaluate, and fix AI in production',
         description:
             'Product analytics for LLMs. Trace every generation, score quality with evals, and set up alerts on cost, latency, or quality issues – the context that makes your agent self-driving.',
-        eli5: "AI Observability records every call your product makes to an LLM – the prompt, the response, which model answered, how long it took, what it cost, and who it was for – and stitches related calls into traces. It's all captured as regular PostHog events, so your LLM data sits next to your product analytics, replays, and errors instead of in a separate tool. From there, evals score your live generations, anomaly alerts fire when cost, latency, or errors spike, and Self-driving agents investigate what changed – findings land in your inbox, where one click turns them into a pull request.",
+        eli5: 'AI Observability monitors how your AI performs in the wild – agents, chatbots, background jobs, anything that calls an LLM. Every call becomes a regular PostHog event carrying the prompt, response, model, latency, cost, and the person behind it, and related calls are stitched into traces, so your LLM data lives next to your product analytics, replays, and errors instead of in a separate tool. From there, evals score your live generations, anomaly alerts fire when cost, latency, or errors spike, and Self-driving agents investigate what changed – findings land in your inbox, where one click turns them into a pull request.',
         textColor: 'text-white',
         layout: 'overlay',
     },
