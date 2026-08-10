@@ -51,7 +51,7 @@ async function getSitemapPages() {
     const pages = new Set()
     for (const match of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
         const url = match[1].trim()
-        if (url.startsWith('https://posthog.com')) {
+        if (url === 'https://posthog.com' || url.startsWith('https://posthog.com/')) {
             pages.add(url.replace('https://posthog.com', '').replace(/\/$/, '') || '/')
         }
     }
