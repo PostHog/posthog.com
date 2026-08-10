@@ -97,10 +97,8 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
     )
 }
 
-// text-secondary: .article-content's base color is an intentional 'unstyled' red alarm;
-// the book's prose grey is the right inherit for cells and list items. Font sizes are forced
-// back to em: .article-content sets a fixed 16px (text-base), but the book reads at 15px by
-// default and scales via the Aa control – absolute sizes would sit off-scale and never resize.
+// Borrows .article-content, overriding its red 'unstyled' alarm color and its fixed font
+// sizes – the book's type is em-based so the Aa control can scale everything together.
 const NATIVE_CONTENT =
     'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
 
@@ -120,10 +118,8 @@ export const proseComponents = {
     ),
     h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
-    // Lists and tables inherit the site's native docs styling (.article-content in global.css)
-    // instead of book-specific styles - one source of truth for shared content elements. Wrapped
-    // per element because the class also styles headings/paragraphs, which the book owns. The
-    // reverts undo the book's not-prose resets (marker + indent) so browser/native styles apply.
+    // Lists and tables borrow the site's native docs styling (.article-content in global.css),
+    // wrapped per element because the class also styles headings/paragraphs, which the book owns.
     ul: (props: any) => (
         <div className={NATIVE_CONTENT}>
             <ul {...props} />
