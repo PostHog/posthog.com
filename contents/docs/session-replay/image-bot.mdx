@@ -14,9 +14,9 @@ The bot downloads those images, one time each, and passes them through the same 
 
 ## When it runs
 
-The bot only downloads images from sites belonging to organizations that turned on **Internal AI training** in their PostHog organization settings. That setting is off unless an organization turns it on.
+The bot only downloads images from sites where a PostHog customer records sessions, and only for organizations whose data can be used to train PostHog's AI models. [Training our own AI models](/blog/training-ai-models) explains what that covers and how an organization changes it.
 
-If no PostHog customer records sessions on your site, the bot has no reason to visit it.
+If nobody records PostHog sessions on your site, the bot has no reason to visit it.
 
 ## How to identify it
 
