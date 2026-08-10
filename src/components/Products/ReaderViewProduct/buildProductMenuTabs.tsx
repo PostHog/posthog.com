@@ -58,7 +58,7 @@ const DocsTreeMenu = ({
         )
     }, [items, installItem, platforms])
 
-    return <TreeMenu items={itemsWithInstall as any} variant={variant} appearance="sidebar" rootHeading={rootHeading} />
+    return <TreeMenu items={itemsWithInstall as any} variant={variant} rootHeading={rootHeading} />
 }
 
 interface BuildProductMenuTabsArgs {
