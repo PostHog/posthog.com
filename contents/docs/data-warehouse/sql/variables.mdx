@@ -55,9 +55,13 @@ and {filters}
 
 This works when selecting from PostHog tables: `events`, `sessions`, `persons`, `groups`, logs, and traces. The date range applies to `timestamp` on events, logs, and traces, to `$start_timestamp` on sessions, and to `created_at` on groups and persons.
 
+Property filters resolve in the scope that fits the table. A query selecting only from `persons` takes person properties. Event properties show an error, because the query has no events to filter. A query that joins `persons` to `events` keeps event behavior: the date range applies to `timestamp` and properties resolve in event scope.
+
+If person scope isn't what you want, bind the columns yourself instead.
+
 ### Binding filters to columns
 
-For any other table, view, or join, tell PostHog which of your columns each filter applies to by binding them:
+For any other table, view, or join – or to override the defaults above – tell PostHog which of your columns each filter applies to by binding them:
 
 ```sql
 select *
