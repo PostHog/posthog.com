@@ -164,7 +164,7 @@ The add-on writes its own log, which you can search in Splunk with `index=_inter
 | `403` from PostHog | The key does not have the `activity_log:read` scope |
 | Runs but indexes nothing | The input is up to date. Make a change in PostHog and wait for the next poll |
 
-To re-read history from the beginning, delete the input and add it again.
+To re-read history from the beginning, add a new input with a different name. The collection position is stored per input name and is not removed when you delete an input, so an input recreated under the same name resumes where the old one stopped and collects nothing.
 
 ### Building your own input
 
