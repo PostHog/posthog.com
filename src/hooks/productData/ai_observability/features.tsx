@@ -49,6 +49,20 @@ export const features = {
                 alt: 'A list of LLM generations with person, sentiment, model, and latency',
             },
         ],
+        features: [
+            {
+                title: 'Full conversation context',
+                description: 'The exact input and output of every call, including multi-turn history',
+            },
+            {
+                title: 'Tokens and cost',
+                description: 'Token counts per call, with cost calculated automatically from model pricing',
+            },
+            {
+                title: 'Tool calls',
+                description: 'Which tools the model called and what they returned',
+            },
+        ],
     },
     traces: {
         title: 'Traces',
@@ -67,7 +81,8 @@ export const features = {
     trace_monitoring: {
         title: 'Traces',
         headline: 'Traces',
-        description: 'See an interaction timeline including all generation and span events.',
+        description:
+            'Debug entire conversations, not just individual calls. Every trace is a timeline of its generations and spans, with the person, total cost, and total latency attached.',
         icon: <IconListTreeConnected />,
         color: 'blue',
         images: [
@@ -191,6 +206,16 @@ export const features = {
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_2_9211062ba1.png',
                 alt: 'The AI observability users list with per-user generations, cost, and latency',
+            },
+        ],
+        features: [
+            {
+                title: 'Per-user roll-ups',
+                description: 'Generations, traces, cost, and latency for every person',
+            },
+            {
+                title: 'Full person profiles',
+                description: 'Jump from an expensive user to their events, sessions, and replays',
             },
         ],
     },

@@ -115,7 +115,7 @@ export const aiObservability = {
     overview: {
         title: 'Observe, evaluate, and fix AI in production',
         description:
-            'Product analytics for LLMs. Trace every generation, score quality with evals, alert on cost, latency, and error anomalies – the context that makes your product self-driving.',
+            'Product analytics for LLMs. Trace every generation, score quality with evals, and set up alerts on cost, latency, or quality issues – the context that makes your agent self-driving.',
         eli5: (
             <>
                 <p>
@@ -285,7 +285,7 @@ export const aiObservability = {
             ],
             us: [
                 {
-                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your product self-driving',
+                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your agent self-driving',
                 },
                 {
                     title: 'You want to understand LLM costs on a per user basis',

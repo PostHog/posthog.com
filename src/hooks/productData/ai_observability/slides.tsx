@@ -184,7 +184,33 @@ export const applications: CarouselSlide[] = [
         progressBar: 'bg-blue',
         layout: 'float',
         heading: 'Analyze cost, usage, and performance',
-        description: <p>{f.dashboard.description}</p>,
+        description: (
+            <>
+                <p>
+                    Every generation is a regular PostHog event, so your LLM data works with trends, funnels, SQL, and
+                    dashboards – no export step.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Ready-made dashboard',
+                                description: 'Cost, usage, latency, and errors charted the moment events arrive',
+                            },
+                            {
+                                label: 'Any insight, any metric',
+                                description: 'Break down spend by model, latency by feature, or errors by user segment',
+                            },
+                            {
+                                label: 'Anomaly alerts',
+                                description:
+                                    'Detectors learn what normal looks like and notify you when cost, latency, or errors spike',
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
         image: {
             src: f.performance_monitoring.images[0].src,
             alt: f.performance_monitoring.images[0].alt,
@@ -210,6 +236,11 @@ export const applications: CarouselSlide[] = [
                 <div className="@container">
                     <LabeledList
                         items={[
+                            {
+                                label: 'Trace timeline',
+                                description:
+                                    'A waterfall of every span and generation, with latency and cost at each step',
+                            },
                             { label: f.errors.title, description: f.errors.description },
                             { label: f.sessions.title, description: f.sessions.description },
                         ]}
@@ -303,7 +334,6 @@ export const topFeatures: CarouselSlide[] = [
         heading: f.trace_monitoring.headline,
         description: (
             <>
-                <p>{f.traces.description}</p>
                 <p>{f.trace_monitoring.description}</p>
                 <div className="@container">
                     <LabeledList
@@ -330,7 +360,19 @@ export const topFeatures: CarouselSlide[] = [
         progressBar: 'bg-yellow',
         layout: 'float',
         heading: f.generations.headline,
-        description: <p>{f.generations.description}</p>,
+        description: (
+            <>
+                <p>{f.generations.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.generations.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
         image: {
             src: f.generations.images[0].src,
             alt: f.generations.images[0].alt,
@@ -430,7 +472,19 @@ export const topFeatures: CarouselSlide[] = [
         progressBar: 'bg-red',
         layout: 'float',
         heading: f.users.headline,
-        description: <p>{f.users.description}</p>,
+        description: (
+            <>
+                <p>{f.users.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.users.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
         image: {
             src: f.users.images[0].src,
             alt: f.users.images[0].alt,
