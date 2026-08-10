@@ -32,6 +32,7 @@
         "test-redirects": "jest scripts",
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
         "check-links-post-build": "node scripts/check-links-post-build.js",
+        "check-src-links": "node scripts/check-src-links.js",
         "check-product-changelogs": "node scripts/check-product-changelogs.js",
         "generate-md-redirects": "node scripts/generate-md-redirects.js",
         "generate-brand-assets": "node scripts/generate-brand-assets.mjs",
