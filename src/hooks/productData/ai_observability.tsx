@@ -116,23 +116,7 @@ export const aiObservability = {
         title: 'Observe, evaluate, and fix AI in production',
         description:
             'Product analytics for LLMs. Trace every generation, score quality with evals, and set up alerts on cost, latency, or quality issues – the context that makes your agent self-driving.',
-        eli5: (
-            <>
-                <p>
-                    AI Observability records every call your product makes to an LLM – the prompt that went in, the
-                    response that came out, which model answered, how long it took, what it cost, and who it was for.
-                    Calls that belong to the same conversation or agent run are stitched together into a trace, so a
-                    multi-step interaction reads as one story instead of a pile of unrelated requests. It's all captured
-                    as regular PostHog events, which is why your LLM data sits next to your product analytics, replays,
-                    and errors instead of in a separate tool.
-                </p>
-                <p>
-                    That data doesn't just sit in a dashboard. Evals score your live generations as they happen, anomaly
-                    alerts fire when cost, latency, or errors spike, and Self-driving agents investigate what changed –
-                    findings land in your inbox, where one click turns them into a pull request.
-                </p>
-            </>
-        ),
+        eli5: "AI Observability records every call your product makes to an LLM – the prompt, the response, which model answered, how long it took, what it cost, and who it was for – and stitches related calls into traces. It's all captured as regular PostHog events, so your LLM data sits next to your product analytics, replays, and errors instead of in a separate tool. From there, evals score your live generations, anomaly alerts fire when cost, latency, or errors spike, and Self-driving agents investigate what changed – findings land in your inbox, where one click turns them into a pull request.",
         textColor: 'text-white',
         layout: 'overlay',
     },
