@@ -33,6 +33,39 @@ export const langsmith = {
                 agent_reports: false,
                 ai_gateway_proxy: false,
             },
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    custom_spans: true,
+                    tool_call_tracking: true,
+                    rag_retrieval_tracking: true,
+                    // Threads group related traces into conversations.
+                    session_grouping: true,
+                    opentelemetry_support: true,
+                    async_ingestion: true,
+                    multi_model_support: true,
+                    session_replay_link: false,
+                    // Metadata-level user tracking, no behavioral profile.
+                    user_profile_context: 'Partial',
+                    sql_queries_on_traces: false,
+                    trace_explorer_ui: 'Advanced',
+                },
+            },
+            prompt_management: {
+                features: {
+                    prompt_versioning: true,
+                    template_variables: true,
+                    prompt_deployment_api: true,
+                    version_comparison: true,
+                    prompt_config: true,
+                    // Commit tags serve as environment labels.
+                    prompt_labels: true,
+                    prompt_playground: true,
+                    composable_prompts: false,
+                    mcp_server_for_prompts: true,
+                    ab_test_prompt_versions: false,
+                },
+            },
             evaluations: {
                 features: {
                     llm_as_a_judge: true,
@@ -41,6 +74,17 @@ export const langsmith = {
                     datasets: true,
                     experiment_runs: true,
                     ab_experiments_on_product_metrics: false,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    cost_by_model: true,
+                    cost_trends: true,
+                    cost_by_user: false,
+                    cost_by_feature: false,
+                    cost_by_cohort: false,
                 },
             },
         },

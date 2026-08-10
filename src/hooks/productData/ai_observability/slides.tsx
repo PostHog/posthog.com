@@ -435,48 +435,14 @@ export const topFeatures: CarouselSlide[] = [
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-red',
-        layout: 'stack',
+        layout: 'float',
         heading: f.users.headline,
         description: <p>{f.users.description}</p>,
         image: {
             src: f.users.images[0].src,
             alt: f.users.images[0].alt,
-            maxWidth: 'max-w-none',
-            imgClassName: 'w-full',
+            glow: true,
         },
-    },
-    {
-        slug: 'analysis',
-        label: 'Analysis',
-        icon: <IconTrends className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-blue',
-        layout: 'stack',
-        heading: f.analysis.headline,
-        description: (
-            <>
-                <p>{f.analysis.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.analysis.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-                <h3 className="mt-8 mb-2">{f.customizations.headline}</h3>
-                <p>{f.customizations.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.customizations.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
     },
     {
         slug: 'integrations',

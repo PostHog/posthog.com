@@ -11,7 +11,7 @@ export const langfuse = {
                 token_tracking: true,
                 prompt_playground: true,
                 prompt_evaluations: true,
-                alerting: false,
+                alerting: true,
                 anomaly_detection: false,
                 system_prompts: true,
                 error_tracking: true,

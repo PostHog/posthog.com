@@ -572,8 +572,7 @@ export const posthog = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: true,
-                // Still beta per /docs/ai-observability/sentiment.
-                sentiment_classification: 'Beta',
+                sentiment_classification: true,
                 privacy_mode: true,
                 // Tools tab auto-extracts tool calls across providers; spans + trace timeline.
                 agent_tracing: true,

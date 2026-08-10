@@ -191,8 +191,8 @@ export const features = {
         color: 'red',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_screenshot_2_d93795cbdc.png',
-                alt: 'AI Observability users',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/users_6ae9646093.png',
+                alt: 'The AI observability users list with per-user generations, cost, and latency',
             },
         ],
     },
