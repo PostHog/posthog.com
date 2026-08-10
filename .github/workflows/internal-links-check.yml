@@ -72,9 +72,12 @@ jobs:
 
             - name: Check source code links
               if: always()
+              env:
+                  GH_EVENT_NAME: ${{ github.event_name }}
+                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
               run: |
                   set +e
-                  if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.save_results }}" = "false" ]; then
+                  if [ "$GH_EVENT_NAME" = "workflow_dispatch" ] && [ "$INPUT_SAVE_RESULTS" = "false" ]; then
                     OUTPUT=$(node scripts/check-src-links.js 2>&1)
                   else
                     OUTPUT=$(node scripts/check-src-links.js link-check-results 2>&1)
