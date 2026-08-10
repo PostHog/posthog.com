@@ -78,6 +78,11 @@ A Sales and CS SuperDay usually looks like this (_there is a degree of flexibili
 
 Overall, you should spend at least 80% of your time and energy on the task and less than 20% on meeting people, as we will base our decision on your output of the day. However, we encourage everyone to use the Slack channel as much as needed for any questions or problems. 
 
+What you'll have access to:
+
+A PostHog demo account, so you're working with real data rather than an empty project.
+We recommend wiring it to a [demo app]([url](https://github.com/PostHog/posthog-demo-3000)) so the role-play has something behind it — you can run Hogflix in a GitHub Codespace, or instrument an app of your own if you'd prefer.
+
 > In line with our [values](/handbook/company/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
 ### CS and FDE hiring process
