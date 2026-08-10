@@ -80,6 +80,11 @@ Product Analytics,best hipaa compliant analytics tools,/blog/best-hipaa-complian
 Product Analytics,google analytics cost,/blog/google-analytics-cost,Blog,Competitor comparison
 Product Analytics,google analytics to posthog,/blog/google-analytics-to-posthog,Blog,Competitor comparison
 Product Analytics,best adobe analytics alternatives,/blog/best-adobe-analytics-alternatives,Blog,Competitor comparison
+Product Analytics,best product analytics tools for startups,/blog/best-product-analytics-tools-for-startups,Blog,Competitor comparison
+Product Analytics,best real time analytics platforms,/blog/best-real-time-analytics-platforms,Blog,Competitor comparison
+Product Analytics,best mobile app analytics tools,/blog/best-mobile-app-analytics-tools,Blog,Competitor comparison
+Product Analytics,posthog alternatives,/blog/posthog-alternatives,Blog,Competitor comparison
+Product Analytics,best analytics stack for vibe coded apps,/blog/best-analytics-stack-for-vibe-coded-apps,Blog,Blog: analytics stack for vibe coded apps
 Product Analytics,misconceptions about analytics,/newsletter/misconceptions-about-analytics,Newsletter,Newsletter: misconceptions about analytics
 Product Analytics,ab testing,/newsletter/ab-testing,Newsletter,Newsletter: ab testing
 Product Analytics,product analytics,/product-engineers/product-analytics,Prod. Engineers,Engineering guide: product analytics
@@ -190,6 +195,8 @@ Session Replay,posthog vs hotjar,/blog/posthog-vs-hotjar,Blog,Blog: posthog vs h
 Session Replay,posthog vs fullstory,/blog/posthog-vs-fullstory,Blog,Blog: posthog vs fullstory
 Session Replay,posthog vs logrocket,/blog/posthog-vs-logrocket,Blog,Blog: posthog vs logrocket
 Session Replay,best contentsquare alternatives,/blog/best-contentsquare-alternatives,Blog,Competitor comparison
+Session Replay,best mobile app session replay tools,/blog/best-mobile-app-session-replay-tools,Blog,Competitor comparison
+Session Replay,smartlook alternatives,/blog/smartlook-alternatives,Blog,Competitor comparison
 Session Replay,session replay,/product-engineers/session-replay,Prod. Engineers,Engineering guide: session replay
 Session Replay,real user monitoring,/product-engineers/real-user-monitoring,Prod. Engineers,Engineering guide: real user monitoring
 Session Replay,session replay,/tutorials/session-replay,Tutorial,Tutorial: session replay
@@ -243,6 +250,8 @@ Feature Flags,best statsig alternatives,/blog/best-statsig-alternatives,Blog,Blo
 Feature Flags,posthog vs launchdarkly,/blog/posthog-vs-launchdarkly,Blog,Blog: posthog vs launchdarkly
 Feature Flags,posthog vs statsig,/blog/posthog-vs-statsig,Blog,Blog: posthog vs statsig
 Feature Flags,best growthbook alternatives,/blog/best-growthbook-alternatives,Blog,Competitor comparison
+Feature Flags,best feature flag software for developers,/blog/best-feature-flag-software-for-developers,Blog,Competitor comparison
+Feature Flags,best open source feature flag tools,/blog/best-open-source-feature-flag-tools,Blog,Competitor comparison
 Feature Flags,feature flag mistakes,/newsletter/feature-flag-mistakes,Newsletter,Newsletter: feature flag mistakes
 Feature Flags,feature flags,/product-engineers/feature-flags,Prod. Engineers,Engineering guide: feature flags
 Feature Flags,feature management,/product-engineers/feature-management,Prod. Engineers,Engineering guide: feature management
@@ -311,6 +320,9 @@ Experiments,posthog vs optimizely,/blog/posthog-vs-optimizely,Blog,Blog: posthog
 Experiments,posthog vs growthbook,/blog/posthog-vs-growthbook,Blog,Blog: posthog vs growthbook
 Experiments,posthog vs statsig,/blog/posthog-vs-statsig,Blog,Blog: posthog vs statsig
 Experiments,google optimize alternatives,/blog/google-optimize-alternatives,Blog,Blog: google optimize alternatives
+Experiments,best mobile app ab testing tools,/blog/best-mobile-app-ab-testing-tools,Blog,Competitor comparison
+Experiments,best open source ab testing tools,/blog/best-open-source-ab-testing-tools,Blog,Competitor comparison
+Experiments,best hipaa compliant ab testing tools,/blog/best-hipaa-compliant-ab-testing-tools,Blog,Competitor comparison
 Experiments,experiments,/newsletter/experiments,Newsletter,Newsletter: experiments
 Experiments,ab testing,/newsletter/ab-testing,Newsletter,Newsletter: ab testing
 Experiments,what we've learned about ab testing,/newsletter/what-we've-learned-about-ab-testing,Newsletter,Newsletter: what we've learned about ab testing
@@ -369,6 +381,7 @@ Surveys,why we made surveys,/blog/why-we-made-surveys,Blog,Blog: why we made sur
 Surveys,best sprig alternatives,/blog/best-sprig-alternatives,Blog,Blog: best sprig alternatives
 Surveys,best survicate alternatives,/blog/best-survicate-alternatives,Blog,Blog: best survicate alternatives
 Surveys,best userpilot alternatives,/blog/best-userpilot-alternatives,Blog,Blog: best userpilot alternatives
+Surveys,best inapp survey tools,/blog/best-inapp-survey-tools,Blog,Competitor comparison
 Surveys,user research,/newsletter/user-research,Newsletter,Newsletter: user research
 Surveys,surveys,/product-engineers/surveys,Prod. Engineers,Engineering guide: surveys
 Surveys,product survey questions,/product-engineers/product-survey-questions,Prod. Engineers,Engineering guide: product survey questions
@@ -424,6 +437,7 @@ CDP / Data Pipeline,essential posthog apps,/blog/essential-posthog-apps,Blog,Blo
 CDP / Data Pipeline,data pipelines,/blog/data-pipelines,Blog,Blog: data pipelines
 CDP / Data Pipeline,cdp vs data warehouse,/blog/cdp-vs-data-warehouse,Blog,Blog: cdp vs data warehouse
 CDP / Data Pipeline,data pipeline pricing,/blog/data-pipeline-pricing,Blog,Blog: data pipeline pricing
+CDP / Data Pipeline,best customer data platforms for developers,/blog/best-customer-data-platforms-for-developers,Blog,Competitor comparison
 CDP / Data Pipeline,cdp,/tutorials/cdp,Tutorial,Tutorial: cdp
 CDP / Data Pipeline,zapier,/tutorials/zapier,Tutorial,Tutorial: zapier
 CDP / Data Pipeline,zapier surveys,/tutorials/zapier-surveys,Tutorial,Tutorial: zapier surveys
@@ -469,7 +483,7 @@ Data Warehouse,shopify,/docs/data-warehouse/sources/shopify,Docs,Shopify feature
 Data Warehouse,snapchat ads,/docs/data-warehouse/sources/snapchat-ads,Docs,Snapchat Ads feature or configuration
 Data Warehouse,snowflake,/docs/data-warehouse/sources/snowflake,Docs,Snowflake feature or configuration
 Data Warehouse,stripe,/docs/data-warehouse/sources/stripe,Docs,Stripe feature or configuration
-Data Warehouse,temporal,/docs/data-warehouse/sources/temporal,Docs,Temporal feature or configuration
+Data Warehouse,temporal,/docs/cdp/sources/temporalio,Docs,Temporal feature or configuration
 Data Warehouse,tiktok ads,/docs/data-warehouse/sources/tiktok-ads,Docs,Tiktok Ads feature or configuration
 Data Warehouse,vitally,/docs/data-warehouse/sources/vitally,Docs,Vitally feature or configuration
 Data Warehouse,zendesk,/docs/data-warehouse/sources/zendesk,Docs,Zendesk feature or configuration
@@ -493,10 +507,14 @@ Data Warehouse,modern data stack sucks,/blog/modern-data-stack-sucks,Blog,Blog: 
 Data Warehouse,cdp vs data warehouse,/blog/cdp-vs-data-warehouse,Blog,Blog: cdp vs data warehouse
 Data Warehouse,clickhouse vs bigquery,/blog/clickhouse-vs-bigquery,Blog,Blog: clickhouse vs bigquery
 Data Warehouse,clickhouse vs snowflake,/blog/clickhouse-vs-snowflake,Blog,Blog: clickhouse vs snowflake
-Data Warehouse,clickhouse vs redshift,/blog/clickhouse-vs-redshift,Blog,Blog: clickhouse vs snowflake
+Data Warehouse,clickhouse vs redshift,/blog/clickhouse-vs-redshift,Blog,Blog: clickhouse vs redshift
 Data Warehouse,clickhouse vs postgres,/blog/clickhouse-vs-postgres,Blog,Blog: clickhouse vs postgres
 Data Warehouse,clickhouse vs druid,/blog/clickhouse-vs-druid,Blog,Blog: clickhouse vs druid
 Data Warehouse,clickhouse vs elasticsearch,/blog/clickhouse-vs-elasticsearch,Blog,Blog: clickhouse vs elasticsearch
+Data Warehouse,best open source business intelligence tools,/blog/best-open-source-business-intelligence-tools,Blog,Competitor comparison
+Data Warehouse,duckdb vs clickhouse,/blog/duckdb-vs-clickhouse,Blog,Blog: duckdb vs clickhouse
+Data Warehouse,duckdb vs postgres,/blog/duckdb-vs-postgres,Blog,Blog: duckdb vs postgres
+Data Warehouse,duckdb vs sqlite,/blog/duckdb-vs-sqlite,Blog,Blog: duckdb vs sqlite
 Data Warehouse,data warehouse,/tutorials/data-warehouse,Tutorial,Tutorial: data warehouse
 Data Warehouse,csv query,/tutorials/csv-query,Tutorial,Tutorial: csv query
 Data Warehouse,supabase query,/tutorials/supabase-query,Tutorial,Tutorial: supabase query
@@ -530,6 +548,8 @@ Web Analytics,posthog vs matomo,/blog/posthog-vs-matomo,Blog,Blog: posthog vs ma
 Web Analytics,posthog vs plausible,/blog/posthog-vs-plausible,Blog,Blog: posthog vs plausible
 Web Analytics,posthog vs fathom,/blog/posthog-vs-fathom,Blog,Blog: posthog vs fathom
 Web Analytics,best gdpr compliant analytics tools,/blog/best-gdpr-compliant-analytics-tools,Blog,Blog: best gdpr compliant analytics tools
+Web Analytics,is google analytics illegal microsite,/blog/is-google-analytics-illegal-microsite,Blog,Blog: is google analytics illegal microsite
+Web Analytics,why i ditched google analytics for posthog,/blog/why-i-ditched-google-analytics-for-posthog,Blog,Blog: why i ditched google analytics for posthog
 Web Analytics,web analytics,/tutorials/web-analytics,Tutorial,Tutorial: web analytics
 Web Analytics,bounce rate,/tutorials/bounce-rate,Tutorial,Tutorial: bounce rate
 Web Analytics,time on page,/tutorials/time-on-page,Tutorial,Tutorial: time on page
@@ -638,6 +658,14 @@ LLM Analytics,envoy wizard llm agent,/blog/envoy-wizard-llm-agent,Blog,Blog: env
 LLM Analytics,optimizing agent cost,/blog/optimizing-agent-cost,Blog,Blog: optimizing agent cost
 LLM Analytics,ai community answers,/blog/ai-community-answers,Blog,Blog: ai community answers
 LLM Analytics,stop ai slop,/blog/stop-ai-slop,Blog,Blog: stop ai slop
+LLM Analytics,best ai observability tools,/blog/best-ai-observability-tools,Blog,Competitor comparison
+LLM Analytics,best open source llm observability tools,/blog/best-open-source-llm-observability-tools,Blog,Competitor comparison
+LLM Analytics,best langfuse alternatives,/blog/best-langfuse-alternatives,Blog,Competitor comparison
+LLM Analytics,best langsmith alternatives,/blog/best-langsmith-alternatives,Blog,Competitor comparison
+LLM Analytics,best braintrust alternatives,/blog/best-braintrust-alternatives,Blog,Competitor comparison
+LLM Analytics,best helicone alternatives,/blog/best-helicone-alternatives,Blog,Competitor comparison
+LLM Analytics,best mcp servers for startups,/blog/best-mcp-servers-for-startups,Blog,Competitor comparison
+LLM Analytics,posthog vs langfuse,/blog/posthog-vs-langfuse,Blog,Blog: posthog vs langfuse
 LLM Analytics,building ai features,/newsletter/building-ai-features,Newsletter,Newsletter: building ai features
 LLM Analytics,ai coding mistakes,/newsletter/ai-coding-mistakes,Newsletter,Newsletter: ai coding mistakes
 LLM Analytics,llm product metrics,/product-engineers/llm-product-metrics,Prod. Engineers,Engineering guide: llm product metrics
@@ -683,3 +711,16 @@ Logs,logs,/blog/logs,Blog,Blog: logs
 Logs,logs beta,/blog/logs-beta,Blog,Blog: logs beta
 Logs,logs ga,/blog/logs-ga,Blog,Blog: logs ga
 Logs,how posthog uses logs,/blog/how-posthog-uses-logs,Blog,Blog: how posthog uses logs
+Revenue Analytics,revenue analytics,/revenue-analytics,Product page,General revenue analytics mentions
+Revenue Analytics,revenue analytics docs,/docs/revenue-analytics,Docs,Technical docs references
+Revenue Analytics,start here,/docs/revenue-analytics/start-here,Docs,Start Here feature or configuration
+Revenue Analytics,dashboard,/docs/revenue-analytics/dashboard,Docs,Dashboard feature or configuration
+Revenue Analytics,capture revenue events,/docs/revenue-analytics/capture-revenue-events,Docs,Capture Revenue Events feature or configuration
+Revenue Analytics,connect to customers,/docs/revenue-analytics/connect-to-customers,Docs,Connect To Customers feature or configuration
+Revenue Analytics,deferred revenue,/docs/revenue-analytics/deferred-revenue,Docs,Deferred Revenue feature or configuration
+Revenue Analytics,managed views,/docs/revenue-analytics/managed-views,Docs,Managed Views feature or configuration
+Revenue Analytics,analyze revenue ai,/docs/revenue-analytics/analyze-revenue-ai,Docs,Analyze Revenue Ai feature or configuration
+Revenue Analytics,query revenue mcp,/docs/revenue-analytics/query-revenue-mcp,Docs,Query Revenue Mcp feature or configuration
+Revenue Analytics,troubleshooting,/docs/revenue-analytics/troubleshooting,Docs,"Debugging, missing data, fixes"
+Revenue Analytics,payment platforms,/docs/revenue-analytics/payment-platforms,Docs,Payment Platforms feature or configuration
+Revenue Analytics,stripe,/docs/revenue-analytics/payment-platforms/stripe,Docs,Stripe feature or configuration
