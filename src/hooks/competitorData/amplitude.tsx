@@ -9,7 +9,7 @@ export const amplitude = {
         product_analytics: {
             available: true,
             pricing: {
-                free_tier: '10k MTUs (2M events/mo)',
+                free_tier: '2M events/mo',
             },
             features: {
                 advertising_analytics: true,
@@ -145,7 +145,7 @@ export const amplitude = {
         feature_flags: {
             available: true,
             pricing: {
-                free_tier: '10k MTUs (2M events/mo)',
+                free_tier: '2M events/mo',
             },
             features: {
                 boolean_flags: true,
