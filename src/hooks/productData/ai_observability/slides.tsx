@@ -268,13 +268,10 @@ export const applications: CarouselSlide[] = [
                 <p>{f.evaluations.description}</p>
                 <div className="@container">
                     <LabeledList
-                        items={[
-                            ...f.evaluations.features.map((item) => ({
-                                label: item.title,
-                                description: item.description,
-                            })),
-                            { label: f.playground.title, description: f.playground.description },
-                        ]}
+                        items={f.evaluations.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
                     />
                 </div>
             </>
@@ -306,7 +303,7 @@ export const applications: CarouselSlide[] = [
                     />
                 </div>
                 <p>
-                    Reports are free; pull requests are priced per PR. Read more in the{' '}
+                    Read more in the{' '}
                     <Link to="/docs/ai-observability/self-driving" state={{ newWindow: true }}>
                         Self-driving docs
                     </Link>
