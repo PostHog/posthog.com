@@ -225,13 +225,12 @@ export const applications: CarouselSlide[] = [
         activeText: 'text-primary',
         progressBar: 'bg-yellow',
         layout: 'float',
-        heading: 'When a generation goes wrong, follow it end to end',
+        heading: 'Debug generations when they go wrong',
         description: (
             <>
                 <p>
-                    Open the trace, find the generation that failed or stalled, and read the exact prompt, response,
-                    model parameters, and metadata behind it. From there, jump to the recording of the session it
-                    happened in to see what the user was doing at the time.
+                    Find the generation that failed or stalled, and read the exact prompt, response, model parameters,
+                    and metadata behind it.
                 </p>
                 <div className="@container">
                     <LabeledList
@@ -302,13 +301,6 @@ export const applications: CarouselSlide[] = [
                         }))}
                     />
                 </div>
-                <p>
-                    Read more in the{' '}
-                    <Link to="/docs/ai-observability/self-driving" state={{ newWindow: true }}>
-                        Self-driving docs
-                    </Link>
-                    .
-                </p>
             </>
         ),
         image: {

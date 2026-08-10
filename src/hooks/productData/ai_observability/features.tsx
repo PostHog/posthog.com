@@ -264,7 +264,7 @@ export const features = {
         title: 'Evaluations',
         headline: 'Evaluations',
         description:
-            'Score live generations as they happen – hallucinations, toxicity, relevance, helpfulness, jailbreak attempts, or custom criteria. Catch regressions before users do.',
+            'Score live generations as they happen across hallucinations, toxicity, relevance, or custom criteria. Catch regressions before users do.',
         icon: <IconLlmPromptEvaluation />,
         color: 'blue',
         images: [
@@ -363,7 +363,7 @@ export const features = {
         title: 'Self-driving',
         headline: 'From LLM data to pull request',
         description:
-            'AI Observability is a signal source for Self-driving (open beta): agents watch your LLM data, investigate what changed, and file reports in your inbox – where one click turns a finding into a pull request.',
+            'Agents watch your LLM data, investigate issues, and file reports in your inbox – where one click turns it into a pull request.',
         icon: <IconBolt />,
         color: 'green',
         images: [
@@ -386,7 +386,7 @@ export const features = {
             {
                 title: 'Scouts',
                 description:
-                    'Scheduled agents that catch regressions across cost, latency, errors, volume, and eval performance – or watch anything you describe in plain English',
+                    'Scheduled agents that watch for anything you describe in plain English. Plus we have templates to get you started!',
             },
         ],
     },
