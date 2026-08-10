@@ -1,5 +1,8 @@
 name: Check internal links in source code
 
+permissions:
+    contents: read
+
 on:
     schedule:
         - cron: '0 11 * * 1' # Every Monday at 11am UTC
