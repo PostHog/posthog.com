@@ -129,8 +129,8 @@ const partnerConfigs = [
 const perks: { image: string; alt: string; title: string; copy: string }[] = [
     {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png',
-        alt: '$50,000 in PostHog credits',
-        title: '$50,000 in PostHog credits',
+        alt: '$50,000 of PostHog',
+        title: '$50,000 of PostHog',
         copy: "That's a lot of events, replays, API calls, and survey responses.",
     },
     {
@@ -531,9 +531,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             <div key={title} className="border border-primary rounded-md p-2 bg-primary">
                                 <CloudinaryImage src={image} alt={alt} imgClassName="w-full rounded-sm" />
                                 <h4 className="m-0 mt-2 text-sm font-bold leading-tight">
-                                    {title === '$50,000 in PostHog credits'
-                                        ? `${creditValue} in PostHog credits`
-                                        : title}
+                                    {title === '$50,000 of PostHog' ? `${creditValue} of PostHog` : title}
                                 </h4>
                                 <p className="m-0 mt-1 text-xs text-secondary">{copy}</p>
                             </div>
