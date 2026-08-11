@@ -262,15 +262,17 @@ export const aiObservability = {
         summary: {
             them: [
                 {
-                    title: "You don't need any product insights",
-                    subtitle: 'and only want to track operational metrics',
+                    title: 'You want an AI gateway in the request path',
+                    subtitle:
+                        'Helicone and Braintrust can proxy your calls for caching, fallbacks, and rate limits – PostHog only observes',
                 },
                 {
-                    title: 'Deep mobile support',
-                    subtitle: "if you're building a mobile-specific product",
+                    title: "You're all-in on LangChain",
+                    subtitle: 'LangSmith is built by the LangChain team and goes deepest on LangGraph agents',
                 },
                 {
-                    title: "You don't want to use an open source product",
+                    title: 'You only want LLM ops metrics',
+                    subtitle: 'and will never need the product context – retention, funnels, replays – around them',
                 },
             ],
             us: [
