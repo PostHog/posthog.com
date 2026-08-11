@@ -145,11 +145,34 @@ When you target a person property of `distinct_id equals`, the value field searc
 
 #### Stop evaluation at first matching condition set
 
-By default, PostHog evaluates all condition sets and returns a match if any condition passes. This means a user who is excluded by one condition's rollout percentage can still match a later condition.
+This setting is off by default, and leaving it off means your flag evaluates exactly as it always has. Turning it on only changes what happens when a user matches a condition set's property filters but falls outside that set's rollout percentage:
 
-Enable **Stop evaluation at first matching condition set** to change this behavior. When enabled, conditions are evaluated in order – the first matching condition set determines the result and later conditions are skipped. If a user matches a condition's property filters but falls outside the rollout percentage, evaluation stops immediately and the flag returns `false`.
+- **Off (default):** the user falls through to the next condition set. A pass on any condition set is a pass.
+- **On:** evaluation stops there and the flag returns `false`. Later condition sets are never evaluated.
 
-This is useful when you want more deterministic flag behavior – for example, ensuring that a user who matches a targeted condition but is excluded by its rollout doesn't "fall through" to a broader catch-all condition below.
+Condition sets are evaluated top to bottom, in the order they appear in the UI.
+
+##### Example
+
+Say a flag has three condition sets, and your test user matches the property filters on all three:
+
+| # | Condition set | Rollout |
+| --- | --- | --- |
+| 1 | `email` contains `@example.com` | 25% |
+| 2 | `plan` equals `enterprise` | 25% |
+| 3 | Everyone | 100% |
+
+**Off (default):** the user is evaluated against set 1, where there's a 25% chance they fall inside the rollout. If they're in the 75% that don't, they move on to set 2, then to set 3 – where they match the 100% rollout and the flag returns `true`.
+
+**On:** the user is evaluated against set 1. If they're in the 75% outside its rollout, the flag returns `false` immediately and sets 2 and 3 are never evaluated.
+
+Use this when you want a user who is excluded by a targeted condition's rollout to stay excluded, rather than falling through to a broader catch-all condition below.
+
+##### Things to keep in mind
+
+- **The rollout percentage has to be what excluded them.** This is the only check that triggers an early exit. Anything else that fails – a property filter, a cohort, a [flag dependency](/docs/feature-flags/dependencies), or a missing group key – just means that condition set didn't match, and evaluation continues to the next one as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
+- **Order your condition sets narrowest first.** A broad catch-all set near the top will short-circuit the more specific sets below it. A set rolled out to 100% never triggers an early exit, since nobody falls outside its rollout.
+- **Rollout buckets are shared across condition sets.** For sets that target the same entity, a user's bucket comes from the flag key and their identifier, not the condition set – so falling through to a set with an equal or smaller rollout percentage can never succeed, only a larger one can.
 
 <CalloutBox icon="IconInfo" title="Local evaluation support varies by SDK" type="fyi">
 
