@@ -123,7 +123,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     comments: {
         feature: 'Comments/Discussions',
-        owner: ['platform-features'],
+        owner: ['conversations'],
         label: 'feature/comments',
     },
     'csp-tracking': {

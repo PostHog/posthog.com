@@ -1,0 +1,107 @@
+---
+title: Flutter push notifications
+sidebarTitle: Flutter
+---
+
+Set up [Workflows](/docs/workflows) push notifications in the Flutter SDK. For the concept and channel setup, see [Push notifications](/docs/workflows/push-notifications).
+
+Available in the Flutter SDK version 5.35.0 and newer. Not supported on Flutter Web or macOS.
+
+## Requirements
+
+Configure push in your app as usual (for example with `firebase_messaging`) and request notification permission from the user.
+
+## Automatic registration and open tracking (default)
+
+Both behaviors are on by default. An app that already has push configured starts sending its device token to PostHog after upgrading, with no code change:
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+// Both default to true, shown here for clarity:
+config.capturePushNotificationSubscriptions = true; // register the device token with PostHog
+config.capturePushNotificationOpened = true;        // capture `$push_notification_opened` on tap
+await Posthog().setup(config);
+```
+
+On iOS the native SDK hooks the app delegate's remote-notification registration callback, so it picks up the APNs token once your app registers for remote notifications. On Android it fetches the FCM token at startup when `firebase-messaging` is on the classpath. The token is registered under the current distinct ID, so it follows the user across `identify()`.
+
+Open coverage differs per platform. On iOS every tap on a remote notification is captured whatever the app state; locally-scheduled notifications are ignored. On Android only cold-start taps are captured. Capture the rest manually (below).
+
+The Android startup fetch doesn't see later token refreshes, so forward those yourself to keep the registered token current:
+
+```dart
+if (Platform.isAndroid) {
+  FirebaseMessaging.instance.onTokenRefresh.listen(
+    (token) => Posthog().registerPushNotificationToken(token),
+  );
+}
+```
+
+## Manual registration
+
+If you manage push tokens yourself, turn the automatic flags off and call the SDK directly:
+
+```dart
+// Register the device token. Pass appId to route to a specific channel
+// (your Firebase project id, or APNs bundle id on iOS):
+await Posthog().registerPushNotificationToken(token, appId: 'your-firebase-project-id');
+```
+
+Call this only after `setup()` has completed; a token registered earlier is silently dropped.
+
+Unregister the token when a user signs out so it isn't left bound to them:
+
+```dart
+await Posthog().unregisterPushNotificationToken();
+```
+
+Calling `Posthog().reset()` on logout already moves the registered token to the new anonymous identity, so this is only needed when you manage subscriptions yourself.
+
+Registration and unregistration are durable. If the device is offline or the request fails, the SDK retries on the next flush, identity change, or app launch.
+
+## Capturing opens
+
+For the opens automatic capture misses (locally-scheduled notifications on either platform, plus warm-start taps and foreground messages on Android), call the manual API:
+
+```dart
+if (Platform.isAndroid) {
+  FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    Posthog().capturePushNotificationOpened(
+      title: message.notification?.title,
+      body: message.notification?.body,
+      payload: message.data,
+    );
+  });
+}
+```
+
+Only call it for opens automatic capture can't see itself, or the tap is counted twice.
+
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body` (plus `$notification_subtitle` on iOS), and `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+
+## Opting out
+
+Set `capturePushNotificationSubscriptions: false` or `capturePushNotificationOpened: false` on `PostHogConfig` before `setup()`.
+
+If your app initializes the SDK natively via `com.posthog.posthog.AUTO_INIT`, the Dart config doesn't apply because the native SDK is already set up before any Dart runs. Opt out with the `com.posthog.posthog.CAPTURE_PUSH_NOTIFICATION_SUBSCRIPTIONS` and `com.posthog.posthog.CAPTURE_PUSH_NOTIFICATION_OPENED` keys instead, in `Info.plist` on iOS and as AndroidManifest `<meta-data>` on Android.
+
+## Identity verification
+
+If your push channel requires [identity verification](/docs/workflows/push-notifications#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+
+```dart
+config.pushIdentityProvider = (distinctId, appId) async {
+  // Fetch a freshly-minted token from your backend for this user, then:
+  return token; // or null to send without one
+};
+```
+
+`pushIdentityProvider` is a Dart callback with no `Info.plist` or manifest equivalent. If your app uses `com.posthog.posthog.AUTO_INIT`, set it to `false` and call `Posthog().setup()` explicitly, otherwise the provider is never installed.
+
+## Troubleshooting
+
+| Issue | Check |
+| --- | --- |
+| Token never registers | Confirm push is set up in your app and the user granted notification permission. On Android, confirm `firebase-messaging` is on the classpath (`firebase_messaging` sets this up). Any manual `registerPushNotificationToken` call must come after `setup()` completes. |
+| Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |

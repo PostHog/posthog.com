@@ -87,7 +87,7 @@ Every link in the automated onboarding emails carries UTM parameters, so we can 
 Where the numbers live:
 
 - The main view is the **Onboarding email link tracking** dashboard (<PrivateLink url="https://us.posthog.com/project/2/dashboard/1946614">link</PrivateLink>): per-email sections, per-link breakdowns, and all-time totals.
-- The two PostHog AI audit links are additionally tracked by matching the start of the prompt in the URL, because the app's login redirect strips UTMs. The source of truth for those is the **Onboarding email link clicks (E1-E4)** insight (<PrivateLink url="https://us.posthog.com/project/2/insights/TKyFrkIR">link</PrivateLink>). The prompt openings are fixed on purpose: E1 starts with "Audit this project's" and E2 with "Audit this project for adoption". Changing either opening breaks the tracking series, so keep them frozen when editing the prompts.
+- App links (the audit prompts, PostHog AI) sit behind a login: a logged-out click bounces to the sign-in page and its UTM properties are lost. The executive **Onboarding email link clicks (E1-E4)** insight (<PrivateLink url="https://us.posthog.com/project/2/insights/TKyFrkIR">link</PrivateLink>) therefore matches the campaign tag inside the page URL, which survives the redirect in double-encoded form, so every click counts whether or not the customer was logged in. A separate insight on the dashboard isolates the login-wall bounces.
 - Calendly clicks never reach PostHog. Calendly stores the UTMs on each booking instead, so filter the Calendly Meetings page by `utm_campaign` to attribute booked calls to emails.
 - The YouTube link in E3 is deliberately untracked (YouTube ignores UTM parameters, and we cannot read its analytics).
 
