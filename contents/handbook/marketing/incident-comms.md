@@ -89,16 +89,14 @@ These steps are a starting point, not a script. In practice, the Comms Lead's jo
 Including the organization name in incident emails
 --------------------------------------------------
 
-Plenty of people work across several PostHog organizations, and an email that doesn't name one leaves them guessing which account it's about. Bulk incident emails should say which organization was affected.
-
-There's no automatic way to do this, so it takes some manual setup. It's worth doing for major and critical incidents — for anything smaller, use your judgement.
+Plenty of people work across several PostHog organizations. Bulk emails should say which organization was affected, so users can easily check their billing settings, etc. It's worth doing for major and critical incidents — for anything smaller, use your judgement. There's no automatic way to do this, so it takes some manual setup. 
 
 1.  Export the list of affected users as a CSV, with an extra column for the affected organization name.
 2.  If a user is affected under more than one organization, concatenate the names into a single field ("Org 1 and Org 2") rather than sending them one email per org.
 3.  Upload the CSV to Customer.io, mapping that column to a new attribute with a unique name. See Customer.io's guidance on [mapping attributes](https://docs.customer.io/messaging/profiles/uploading-profiles/#map-attributes).
 4.  Pull the attribute into the email with Liquid, and set a generic fallback that shouldn't ever appear.
 
-Validating the export is the slow part of this, so leave time for it.
+Validating the export is the slow part of this, so leave time for it. Once you're all set, test and check the previews in Customer.io for a user or two to make sure the org names are correctly shown to their owners.
 
 What does the Comms Lead not do?
 ----------------------------
