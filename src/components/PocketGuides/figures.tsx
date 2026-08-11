@@ -10,6 +10,7 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import EvalRuns, { EvalRun } from './EvalRuns'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
 import TraceTree, { TraceTreeRow } from './TraceTree'
@@ -202,6 +203,25 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** The evaluation's runs tab, annotated – what a scored generation looks like in the app. */
+export function EvalRunsFigure({
+    n = 1,
+    caption,
+    legend,
+    runs,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    runs: EvalRun[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend ?? <AnatomyHint />}>
+            <EvalRuns runs={runs} />
         </Fig>
     )
 }

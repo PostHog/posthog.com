@@ -31,7 +31,7 @@ LLM calls arrive as PostHog events so you can put them in funnels, break them do
 
 ## The three events
 
-There are three AIO event types: `$ai_trace`, `$ai_generation`, and `$ai_span`:
+There are three AIO event types: `$ai_generation`, `$ai_span`, and `$ai_trace`:
 - A <Term name="generation" /> is one call to a model.
 - A <Term name="span" /> is a step around it that isn't a model call, like a retrieval or a tool.
 - A <Term name="trace" /> is the whole interaction, stitched together by `$ai_trace_id`, so a multi-step agent run reads as one story instead of a pile of unrelated requests.
@@ -56,7 +56,7 @@ Because AIO events are ordinary PostHog events, they sit alongside the rest of y
 
 - **Does the AI feature keep people?** Put `$ai_generation` in a funnel or retention chart.
 - **Who is it expensive for?** Break cost down by plan or company, using person properties you already send.
-- **What did this person see?** Jump to their [session replay](/docs/ai-observability/link-session-replay), or the [exception](/docs/ai-observability/link-error-tracking) their request threw.
+- **What did this person see?** Jump to their <Term name="session replay" />, or the [exception](/docs/ai-observability/link-error-tracking) their request threw.
 - **Did the new prompt help?** Ship it behind a feature flag and read it as an experiment.
 
 ## Apply a use case example

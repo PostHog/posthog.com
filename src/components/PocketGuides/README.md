@@ -24,6 +24,12 @@ off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volum
 plus a row in `src/constants/pocketGuides.ts` – no reader changes. The shelf counts a volume's
 use cases by `bookOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
 
+**Teach inside the book.** A reader who leaves for the docs mid-page usually doesn't come back, so
+a concept they might not know should be a `<Term>` (definition on hover, with its own "Read the
+docs" button) or an annotated figure marker – not a link in the prose. Keep plain links for things
+the reader is meant to go *do*, like an install guide. Term definitions are quoted from the docs
+page that owns the concept, so this can't drift into a second source of truth.
+
 **Every use case ends in a CTA, and only use cases have one.** Front matter and the 101 send
 people onward with ordinary links in the prose – a CTA there devalues the one that matters.
 Which CTA depends on the volume: self-driving chapters enable a scout (`<Enable />`, driven by
@@ -158,6 +164,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
 | `Action.tsx` | The non-scout CTA and its pinned bar, from `cta:` frontmatter |
+| `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |

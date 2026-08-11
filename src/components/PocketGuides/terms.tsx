@@ -73,20 +73,71 @@ export const TERMS = {
             'Evaluations automatically assess the quality of your LLM generations. PostHog runs them as LLM-as-a-judge, deterministic code, or sentiment analysis.',
         slug: '/docs/ai-evals',
     },
+    'LLM-as-a-judge': {
+        title: 'LLM-as-a-judge',
+        description:
+            'Uses an LLM to score each generation against a prompt you define, returning a pass/fail result with reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.',
+        slug: '/docs/ai-evals',
+    },
+    'code-based evaluation': {
+        title: 'Code-based evaluation',
+        description:
+            'Runs deterministic code you write against each generation, returning a pass/fail result. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.',
+        slug: '/docs/ai-evals',
+    },
+    'custom property': {
+        title: 'Custom property',
+        description:
+            'Metadata you attach to your AI generations – a feature name, a tenant, a prompt version – making it easier to filter, analyze, and understand your LLM usage patterns.',
+        slug: '/docs/ai-observability/custom-properties',
+    },
+    'session replay': {
+        title: 'Session replay',
+        description:
+            'Records what real users do in your product and plays it back like a DVR, with console logs, network requests, and errors at the exact moment they happened.',
+        slug: '/docs/session-replay',
+    },
+    'feature flag': {
+        title: 'Feature flag',
+        description:
+            'Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong.',
+        slug: '/docs/feature-flags',
+    },
+    'prompt management': {
+        title: 'Prompt management',
+        description:
+            'Create and update LLM prompts directly in PostHog. Prompts are fetched at runtime through the SDK, every change creates an immutable version, and a version links to the generations it produced.',
+        slug: '/docs/prompt-management',
+    },
+    'sentiment analysis': {
+        title: 'Sentiment analysis',
+        description:
+            'Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Free to run with no LLM cost.',
+        slug: '/docs/ai-observability/sentiment',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS
 
 interface TermProps {
-    name: TermName
+    /** A key of `TERMS`, matched case-insensitively – authors capitalize a term that opens a
+     * sentence. Typed as `string` because MDX authors aren't type-checked, and an unknown name
+     * fails soft below rather than failing the build. */
+    name: string
     /** Override the rendered text, e.g. to pluralize: <Term name="scout">scouts</Term>. */
     children?: React.ReactNode
     className?: string
 }
 
+/** Keys are lowercase; a term opening a sentence is written capitalized and still has to match. */
+function lookUp(name: string): TermDefinition | undefined {
+    const terms: Record<string, TermDefinition> = TERMS
+    return terms[name] ?? terms[name.toLowerCase()]
+}
+
 /** First mention only – repeated, the dotted underlines stop reading as helpful. */
 export default function Term({ name, children, className = '' }: TermProps): JSX.Element {
-    const definition = TERMS[name]
+    const definition = lookUp(name)
     const posthog = usePostHog()
 
     // Fail soft on unknown names – an author typo prints plain text instead of crashing the page.

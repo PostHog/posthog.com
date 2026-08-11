@@ -1,0 +1,119 @@
+---
+title: Wrong answers that never error
+shortTitle: Wrong answers
+subtitle: Error rate says your AI feature is fine, but evaluations tell you whether it's any good.
+bookOrder: 2
+cta:
+  kind: prompt
+  label: Set this up with PostHog AI
+  note: It creates the eval disabled, so you can read it before it starts scoring anything.
+  requires:
+    label: Needs AI Observability instrumented, plus an LLM provider key for the judge.
+  prompt: >-
+    Set up an LLM-as-a-judge evaluation on my $ai_generation events. It should fail a generation
+    when the answer contradicts the retrieved context, when it invents a fact the context doesn't
+    support, or when it refuses a question the context clearly answers. Sample at 10%, exclude
+    generations where the environment property is dev or local, and show me the pass rate over the
+    last 30 days broken down by model and by prompt version.
+---
+
+<LeftPage>
+
+<EvalRunsFigure
+    n={1}
+    caption="The eval's runs tab: one row per generation it scored, with the judge's reasoning."
+    runs={[
+        {
+            time: '14:02:11',
+            target: 'gen_8f21c4',
+            result: 'True',
+            reasoning: 'Answer restates the refund window from the retrieved policy doc, no additions.',
+        },
+        {
+            time: '14:01:58',
+            target: 'gen_8f21b9',
+            result: 'False',
+            reasoning: 'Quotes a $99 pricing plan. Retrieved context lists no such plan or price.',
+        },
+        {
+            time: '14:01:40',
+            target: 'gen_8f21a2',
+            result: 'N/A',
+            reasoning: 'No context was retrieved for this question, so groundedness cannot be judged.',
+        },
+    ]}
+/>
+
+<DivergenceFigure
+    n={2}
+    caption="A prompt change went out on the 4th. Nothing errored, volume held, and the answers got worse."
+    markerAt={0.44}
+    markerLabel="prompt v12"
+    series={[
+        {
+            label: 'Generations',
+            note: 'flat at ~9,000/day',
+            values: [0.5, 0.53, 0.49, 0.52, 0.5, 0.54, 0.51, 0.5, 0.52, 0.51],
+        },
+        {
+            label: 'Eval pass rate',
+            note: '94% → 71%',
+            emphasis: true,
+            values: [0.92, 0.94, 0.91, 0.93, 0.74, 0.7, 0.72, 0.69, 0.71, 0.7],
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Wrong answers that never error
+
+We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you own stays green.
+
+Every number you already have describes how the model performed – its speed, cost, and responsiveness. None of them describe whether what it said was true, the only one checking that is the user reading the output.
+
+## What scores the answer itself
+
+An <Term name="evaluation" /> scores the output, which is the half your other signals can't see. AI Observability (AIO) runs three kinds against your live traffic:
+
+- An <Term name="LLM-as-a-judge" /> that scores each generation against a prompt you write
+- A <Term name="code-based evaluation">code-based rule</Term> that checks something you can express exactly
+- Built-in <Term name="sentiment analysis" /> that classifies how the user sounds
+
+Each result lands on the generation it scored, with the reason it passed or failed – <SeeFig n={1} /> is an example of that list in the app.
+
+## What a quality drop looks like
+
+When you've collected enough of those scores, you get a pass rate: one number for how often your AI feature gets it right. If you watch a pass rate over time, a bad change stops being invisible.
+
+In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off a cliff, at the moment a prompt changed. Without an evaluation running, the first you'd hear of that is a customer email, weeks later.
+
+## Write the criteria you'd actually check
+
+But numbers are only worth watching if the check behind it asks something _real_. Sentiment needs nothing from you, but the other two are checks you write – a prompt for the judge and code for the deterministic rule.
+
+Asking "Is this good?" isn't good enough. It produces a number that moves for reasons you can't name. Ask for the specific failure you're worried about instead:
+
+- **For a support bot:** does the answer contradict the retrieved context?
+- **For a code assistant:** does it call a function that doesn't exist in the file?
+- **For a summarizer:** does it introduce a name that wasn't in the source?
+
+Each of those is checkable, so when the pass rate drops you know which behavior changed.
+
+A judge scores by making an LLM call, so sample rather than grade everything – 10% catches a real regression within a day, and code-based and sentiment evals are free enough to run on all of it. Either way, exclude development traffic and internal users, which fail for reasons that aren't your product.
+
+## Split by model and prompt version
+
+One pass rate covering every model, prompt, and surface will hide almost any regression. The drop in <SeeFig n={2} /> only looks dramatic because one prompt broke on one model – averaged in with everything else that's working, it's hard to see what's going on.
+
+Splitting by model is free: `$ai_model` is already on every generation. Splitting by prompt version usually isn't – if your prompts live in code, nothing records which version answered which generation. <Term name="Prompt management" /> adds that link, so a drop points straight at the change that caused it.
+
+## Run your first eval
+
+The prompt below sets up a judge on a retrieval-backed feature, with the criteria from earlier: does the answer contradict, invent, or refuse what the context supports? Swap those for the failure your product actually has – the structure is what matters.
+
+<Action />
+
+</RightPage>

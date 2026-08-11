@@ -64,9 +64,22 @@ contents/pocket-guides/<volume>/<slug>/
    then remember Gatsby caches compiled MDX (the fix shows only after the `.mdx` changes or
    `pnpm clean`).
 
+## Keep the learning in the book
+
+A reader who clicks out to the docs mid-page usually doesn't come back. So when a guide names
+something the reader might not know, define it in place:
+
+- **`<Term>`** for a concept – the definition appears on hover, with a "Read the docs" button for
+  anyone who wants the full page.
+- **Figure markers** for parts of a screen – hovering a numbered marker glosses that element.
+- **Plain links** only for things the reader is meant to go *do*, like an install guide, or for a
+  neighbouring guide.
+
+If you find yourself writing "see the docs for X" mid-sentence, X probably wants to be a term.
+
 ## Term definitions
 
-`<Term>` hover-card definitions live in `src/components/SelfDrivingInbox/terms.tsx`, each
+`<Term>` hover-card definitions live in `src/components/PocketGuides/terms.tsx`, each
 quoted from the docs page it links to. If a docs definition changes, update the quote there.
 
 ## Adding new content elements
