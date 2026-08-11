@@ -39,6 +39,8 @@ Unlike `On call: {team}`, this rotation has to cover the clock, every day of the
 
 Group windows have to tile the full 24 hours between them. If they don't, the Terraform plan fails and names the first uncovered minute – somebody escalating by hand at 3am should never find nobody there.
 
+> 💡 Don't rearrange this schedule around your own availability, and don't request cover on it. It's best-effort cover rather than a rotation with turns to trade – everyone in a group is on call for the whole window. If you're genuinely unavailable, [add an override on yourself](#make-sure-your-availability-is-up-to-date) and the rest of your group is still there.
+
 #### When to use manual escalation
 
 Manual escalation should be used when:
@@ -103,47 +105,7 @@ Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets 
 
 Teams, schedules, rotations, and escalation paths all live in the [`incidentio-oncall` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-oncall) in `posthog-cloud-infra`. Everything one team needs is a single block in a single file: [`terraform/environments/incidentio/oncall/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/oncall/terragrunt.hcl).
 
-You supply people and hours. Rotation mechanics aren't configurable, so every team's schedules and paging come out the same shape:
-
-```hcl
-"my-team" = {
-  name                   = "My Team"
-  alert_slack_channel_id = "C0123456789" # #alerts-my-team
-  slack_user_group_id    = "S0123456789" # @Team My Team
-
-  # Working hours. One rotation each, nine hours from start of day.
-  on_call = {
-    members = {
-      "eu-person@posthog.com" = { start_of_day = "07:00" }
-      "us-person@posthog.com" = { start_of_day = "15:00" }
-    }
-  }
-
-  # Round-the-clock cover for manual escalation. Windows must tile the day.
-  escalation = {
-    groups = {
-      "EU" = { start = "06:00", end = "18:00", members = ["eu-person@posthog.com"] }
-      "US" = { start = "18:00", end = "06:00", members = ["us-person@posthog.com"] }
-    }
-  }
-
-  # Support hero, taking turns a week at a time.
-  support_hero = {
-    members                 = ["eu-person@posthog.com", "us-person@posthog.com"]
-    handover_interval_weeks = 1
-    handover_start_at       = "2026-01-05T00:00:00Z"
-  }
-}
-```
-
-Worth knowing before you write one:
-
-* **Every time is UTC**, and you convert from your own timezone yourself. One timezone across every team is the only way the windows can be read off and checked against each other
-* **Schedules and paths follow from the blocks you write**, so there's no separate switch to forget. `on_call` gets you the `On call:` schedule and the path alerts route to, `escalation` gets you the escalation rotation and the manual path, and `support_hero` gets you a support hero rotation that nothing pages
-* **The key is your team's external ID** in the Team catalog rather than its name, so a rename moves nothing. The display name comes from `name`
-* **`handover_start_at` is fixed once it's set.** Changing it re-phases the support hero rotation and hands the pager over mid-turn
-* **`On call: Global` and the last-resort schedule are the exception.** They belong to no team, so they're looked up by name rather than defined here
-* Teams defined here carry a `Managed by Terraform` attribute in the dashboard pointing back at the file, so whoever finds your team knows where to edit it
+You supply people and hours – rotation mechanics aren't configurable. Read the existing team blocks in that file for the structure, and the module's README and `teams` variable for what each field means and the rules they have to follow. Those are the source of truth, so this page doesn't restate them.
 
 Open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra) and CI runs the plan. Read it before merging – it names every rotation and paging level that moves. Don't make these changes in the incident.io dashboard, because the next apply puts them back.
 
@@ -153,17 +115,15 @@ Rather than hand-writing the HCL, point your editor's agent at it:
 In posthog-cloud-infra, add my team to the incident.io on-call setup.
 
 Read terraform/modules/incidentio-oncall/ first – the README and the `teams`
-variable – then add a block for my team to `teams` in
-terraform/environments/incidentio/oncall/terragrunt.hcl, keyed by our external
-ID in the incident.io Team catalog.
+variable, which document every field and the rules they follow – then add a
+block for my team to `teams` in
+terraform/environments/incidentio/oncall/terragrunt.hcl, following the existing
+team blocks for structure.
 
 Here's who's on call and when, in local time: <people, their working hours, and
 who covers escalation out of hours>.
 
-Convert every time to UTC, and don't set `timezone` – that field only exists to
-adopt a schedule that isn't UTC yet. Escalation group windows have to tile the
-whole 24 hours or the plan fails. Then run `terragrunt hcl validate` and
-`terraform fmt`, and show me the plan.
+Then run `terragrunt hcl validate` and `terraform fmt`, and show me the plan.
 ```
 
 ## Before going on call
@@ -215,6 +175,7 @@ If you are unavailable for any of your schedules you need to act! Overrides are 
 
 1. For your `On call: {team}` schedule simply click on your name in your rotation, click `create an override` and then remove yourself from the list so it shows `No one`
 1. For your `Support Hero: {team}` or `On call: Global` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+1. For your [`Escalation: {team}`](#manual-escalation-schedules) schedule, don't request cover and don't reshuffle the groups – nobody needs to take your turn, because there aren't any. Add an override on yourself for the window you're away, the same way as above, so it's clear you're unavailable. Everyone else in your group is still on call.
 
 ## Make sure you have all the access you might need
 
