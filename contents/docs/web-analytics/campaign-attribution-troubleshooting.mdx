@@ -57,6 +57,41 @@ limit 100
 
 If you see different `distinct_id` or `person_id` values for pageviews and conversions from the same user, you have identity fragmentation.
 
+## Why are UTMs or click IDs on my events but not on person profiles?
+
+If campaign parameters like `utm_source` or `gclid` appear correctly on `$pageview` events but never show up as person properties, the usual cause is that those events aren't updating a person profile.
+
+Campaign parameters are copied from events to person properties server-side, and only for events that create or update a person profile. With the default [`person_profiles: 'identified_only'`](/docs/data/anonymous-vs-identified-events) configuration, events from anonymous users don't update person profiles, so the campaign parameters on those events never reach a person. This is expected behavior, but it surprises people because the event-level values look fine.
+
+What happens when the user identifies later differs between the two kinds of campaign person properties:
+
+- **Initial** (first-touch) properties like `$initial_utm_source` and `$initial_gclid` are backfilled on identification. The SDK stores first-touch values in a cookie and attaches them to later events.
+- **Latest** properties like `utm_source` and `gclid` are not backfilled. They only reflect campaign parameters seen on events captured while the user has a person profile, in the same browser tab and on the same domain. A campaign landing that happened before the user identified won't appear as a latest person property.
+
+To check whether this is affecting you, run this query and replace `gclid` with the parameter you care about:
+
+```sql
+select
+    person_mode,
+    count() as pageviews
+from events
+where event = '$pageview'
+and timestamp >= now() - interval 7 day
+and isNotNull(properties.gclid)
+group by person_mode
+order by pageviews desc
+```
+
+Rows where `person_mode` is not `full` are events that didn't update person properties.
+
+One thing to watch out for when querying: the JavaScript SDK sends every campaign parameter it tracks whenever at least one is present in the URL, using a JSON null for the missing ones. Use `isNotNull(properties.gclid)` to test for a real value, because `properties.gclid != ''` doesn't exclude JSON nulls.
+
+To fix it:
+
+1. Identify users as early as possible, so more of their events update the person profile
+2. If you need latest-touch attribution from before identification, capture the values yourself and set them with [`setPersonProperties()`](/docs/product-analytics/person-properties#how-to-set-person-properties) when you identify the user
+3. Or switch to [`person_profiles: 'always'`](/docs/data/anonymous-vs-identified-events), which makes anonymous events update person profiles too (note that identified events cost more than anonymous ones)
+
 ## Why are users from LinkedIn/Meta ads not being attributed?
 
 This is a common issue when running ads on social media platforms that open links in their native in-app browsers. Here's a typical scenario:
