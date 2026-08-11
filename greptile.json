@@ -29,11 +29,19 @@
             },
             {
                 "scope": ["src/**"],
-                "rule": "Check src/hooks/useProduct.ts and src/hooks/useProducts.tsx before hard-coding product names, metadata, or pricing."
+                "rule": "Check src/hooks/useProduct.ts and src/hooks/useProducts.tsx before hard-coding product names, metadata, or pricing. Flag literal prices, tier thresholds, and product lifecycle claims (alpha, beta, free tier) written directly into copy or components — these go stale; they should come from the product data hooks."
             },
             {
                 "scope": ["src/**"],
                 "rule": "If a page is moved or renamed, a redirect must be added in vercel.json."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Subscriptions registered inside useEffect (posthog.onFeatureFlags, addEventListener, setInterval, observers) must have their cleanup returned from the effect, or they leak across the many window mounts/unmounts in this desktop-style UI."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Flag `as any` casts and untyped return shapes, especially in pure-logic modules like the pricing calculator. Suggest the fully typed literal instead."
             }
         ]
     },
