@@ -23,7 +23,7 @@ Cover for PTO and swaps is the exception: [overrides](#make-sure-your-availabili
 A team has up to three schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules), and it gets the ones its Terraform block asks for:
 
 * `On call: {team}`
-    - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, running nine hours from their start of day, weekdays only unless you say otherwise
+    - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, you just set the start of your normal working day, weekdays only
     - Stagger start times to cover as much of the day as your team can – 08:00 for an EU-based engineer leaves 17:00 onwards for a US-based one
     - Gaps are fine. Nobody is woken up here: a critical alert that finds nobody on call goes to [global on-call](#global-on-call-schedule) instead
 * `Escalation: {team}`
