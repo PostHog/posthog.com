@@ -1,4 +1,4 @@
-# PostHog Desktop pricing
+# Pricing component
 
 `PostHogDesktopPricing` renders the current model and cloud compute rates on the PostHog Desktop pricing documentation page.
 
