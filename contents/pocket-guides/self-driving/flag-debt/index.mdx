@@ -108,10 +108,12 @@ This scout finds the flags you forgot to remove and opens the pull request that 
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: a rollout hit 100% four months ago, and the evaluations
-never stopped. A decision you already made and moved on with is still being asked ~52,000 times a day.
+A rollout hit 100% four months ago, and the evaluations never stopped. A decision you already made and moved on with is still being asked ~52,000 times a day. Which is it?
+
 - If the rollout is still moving, that's a live experiment, not debt. The scout stays _quiet_.
 - If the rollout finished and the evaluations kept going, it signals flag debt. The scout _**reports**_.
+
+That second pattern is what the scout looks for – <SeeFig n={1} /> shows every flag it caught.
 
 ## The report in your inbox
 
