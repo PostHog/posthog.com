@@ -2329,6 +2329,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/context',
                 },
                 {
+                    name: 'Skills',
+                    url: '/docs/self-driving/skills',
+                },
+                {
                     name: 'Scouts',
                     url: '/docs/self-driving/scouts',
                     children: [
@@ -3697,10 +3701,6 @@ export const docsMenu = {
                                     url: '/docs/integrations/v0',
                                 },
                             ],
-                        },
-                        {
-                            name: 'Skills store',
-                            url: '/docs/ai-engineering/skills-store',
                         },
                         {
                             name: 'AI Observability',
