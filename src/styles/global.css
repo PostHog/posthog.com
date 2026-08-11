@@ -237,6 +237,27 @@
         @apply bg-yellow/40 dark:bg-yellow/30 text-inherit rounded-sm;
     }
 
+    /* Text fragment (`#:~:text=`) matches, resolved by lib/textFragment and painted with the CSS
+       Custom Highlight API. Kept in its own rule from `::target-text` below because a single
+       unknown selector would invalidate the whole list. Highlight pseudo-elements only honour a
+       handful of properties – background-color is one, border-radius isn't. */
+    ::highlight(text-fragment) {
+        @apply bg-yellow/40;
+    }
+
+    .dark ::highlight(text-fragment) {
+        @apply bg-yellow/30;
+    }
+
+    /* Same treatment for the browser's own text fragment highlight, where it manages one. */
+    ::target-text {
+        @apply bg-yellow/40;
+    }
+
+    .dark ::target-text {
+        @apply bg-yellow/30;
+    }
+
     .search-scroll-target {
         @apply outline-2 outline-yellow outline-offset-2 rounded-sm;
         animation: search-scroll-fade 2s ease-out forwards;
