@@ -40,6 +40,7 @@ import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
+import { applyTextFragment, clearHighlight, getTextDirectives } from '../../lib/textFragment'
 import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import MarkdownActions from 'components/MarkdownActions'
@@ -1405,7 +1406,8 @@ function ReaderViewContent({
             scrollElement.focus({ preventScroll: true })
         }
 
-        const waitForImagesAndScroll = async () => {
+        // Offsets aren't stable until the images above the target have taken up their space.
+        const waitForImages = async () => {
             const images = contentRef.current?.querySelectorAll('img') || []
             const imageLoadPromises = Array.from(images).map((img: HTMLImageElement) => {
                 return new Promise<void>((resolve) => {
@@ -1419,6 +1421,10 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
+        }
+
+        const waitForImagesAndScroll = async () => {
+            await waitForImages()
             const targetElement = document.getElementById(hash.replace('#', ''))
             if (targetElement) {
                 const detailsParent = targetElement.closest('details')
@@ -1432,13 +1438,26 @@ function ReaderViewContent({
             }
         }
 
+        const waitForImagesAndHighlight = async () => {
+            await waitForImages()
+            if (!contentRef.current) return
+            applyTextFragment(contentRef.current, scrollElement)
+        }
+
         if (hash) {
             waitForImagesAndScroll()
+        } else if (getTextDirectives().length > 0) {
+            // A `#:~:text=` URL looks hashless to script, so it lands here rather than above. The
+            // browser has already scrolled to the match by now, but this page's client re-render
+            // drops both that scroll position and the highlight, so redo them ourselves.
+            waitForImagesAndHighlight()
         } else {
             scrollElement.scrollTo({
                 top: 0,
             })
         }
+
+        return () => clearHighlight()
     }, [appWindow?.path, hash])
 
     const articleColumnClasses = [

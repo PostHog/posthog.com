@@ -237,6 +237,12 @@
         @apply bg-yellow/40 dark:bg-yellow/30 text-inherit rounded-sm;
     }
 
+    /* Text fragment links (`#:~:text=`), highlighted by src/lib/textFragment.ts. Stands in for the
+       UA's own ::target-text, which doesn't survive the reader's client re-render. */
+    ::highlight(text-fragment) {
+        @apply bg-yellow/40 dark:bg-yellow/30 text-inherit;
+    }
+
     .search-scroll-target {
         @apply outline-2 outline-yellow outline-offset-2 rounded-sm;
         animation: search-scroll-fade 2s ease-out forwards;
