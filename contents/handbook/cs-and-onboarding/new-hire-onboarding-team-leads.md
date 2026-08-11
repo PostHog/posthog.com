@@ -8,7 +8,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 
 1. **Before they join** - prepare their book, book the 1:1s, plan the in-person week
 2. **First week** - welcome 1:1, get the team sharing calls and tips
-3. **In-person week** (usually week 2) - 4 days working together, agenda template below
+3. **In-person week** (usually week 2) - 3-4 days working together, agenda template below
 4. **First month** - any spillover from in-person onboarding
 
 ## Before they join
@@ -83,7 +83,7 @@ Questions from me
 
 ## In-person week (usually week 2)
 
-[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week - there's a [4-day agenda template](https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP) to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding.
+[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week over 3-4 days - there's a [4-day agenda template](https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP) to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding. 3 days can feel tight with a lot of information, but it's enough to cover all the content!
 
 By the end of the week they should:
 
