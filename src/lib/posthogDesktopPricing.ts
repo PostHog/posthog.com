@@ -18,6 +18,7 @@ const BLOCKED_DESKTOP_MODEL_IDS = new Set([
     'claude-haiku-4-5',
     'anthropic/claude-haiku-4-5',
 ])
+const MODEL_FAMILY_ORDER = ['fable', 'opus', 'sonnet', 'haiku']
 
 interface ModelPricing {
     prompt: string
@@ -60,6 +61,24 @@ const fetchJson = async <T>(url: string): Promise<T> => {
     return response.json() as Promise<T>
 }
 
+const getModelRecency = (modelId: string): number => {
+    const match = modelId.toLowerCase().match(/-(\d+)(?:[-.](\d+))?/)
+    if (!match) {
+        return Number.MAX_SAFE_INTEGER
+    }
+    return Number(match[1]) * 1000 + Number(match[2] ?? 0)
+}
+
+const getModelFamilyRank = (modelId: string): number => {
+    const rank = MODEL_FAMILY_ORDER.findIndex((family) => modelId.toLowerCase().includes(family))
+    return rank === -1 ? MODEL_FAMILY_ORDER.length : rank
+}
+
+const compareModelsForPicker = (first: Model, second: Model): number => {
+    const familyDifference = getModelFamilyRank(first.id) - getModelFamilyRank(second.id)
+    return familyDifference || getModelRecency(second.id) - getModelRecency(first.id)
+}
+
 export const getPostHogDesktopPricing = async (): Promise<PostHogDesktopPricing> => {
     const [models, compute] = await Promise.all([
         fetchJson<ModelsResponse>(MODELS_URL),
@@ -67,10 +86,12 @@ export const getPostHogDesktopPricing = async (): Promise<PostHogDesktopPricing>
     ])
 
     return {
-        models: models.data.filter(
-            (model): model is Model & { pricing: ModelPricing } =>
-                model.pricing !== null && !BLOCKED_DESKTOP_MODEL_IDS.has(model.id.toLowerCase())
-        ),
+        models: models.data
+            .filter(
+                (model): model is Model & { pricing: ModelPricing } =>
+                    model.pricing !== null && !BLOCKED_DESKTOP_MODEL_IDS.has(model.id.toLowerCase())
+            )
+            .sort(compareModelsForPicker),
         compute: compute.current,
     }
 }
