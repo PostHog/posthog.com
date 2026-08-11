@@ -34,6 +34,29 @@ const TOKEN_COLUMNS = [
 ] as const
 
 const CREDIT_FORMAT = new Intl.NumberFormat('en-US', { maximumFractionDigits: 4 })
+const MODEL_DISPLAY_NAMES: Record<string, string> = {
+    'claude-haiku-4-5': 'Claude Haiku 4.5',
+    'claude-sonnet-4-5': 'Claude Sonnet 4.5',
+    'claude-sonnet-5': 'Claude Sonnet 5',
+    'claude-sonnet-4-6': 'Claude Sonnet 4.6',
+    'claude-opus-4-5': 'Claude Opus 4.5',
+    'claude-opus-4-6': 'Claude Opus 4.6',
+    'claude-opus-4-7': 'Claude Opus 4.7',
+    'claude-fable-5': 'Claude Fable 5',
+    'claude-opus-5': 'Claude Opus 5',
+    'claude-opus-4-8': 'Claude Opus 4.8',
+    'gpt-5.2': 'GPT-5.2',
+    'gpt-5.6-sol': 'GPT-5.6 Sol',
+    'gpt-5.6-terra': 'GPT-5.6 Terra',
+    'gpt-5.6-luna': 'GPT-5.6 Luna',
+    'gpt-5.5': 'GPT-5.5',
+    'gpt-5.4': 'GPT-5.4',
+    'gpt-5.3-codex': 'GPT-5.3 Codex',
+    'gpt-5-mini': 'GPT-5 Mini',
+    '@cf/zai-org/glm-5.2': 'GLM-5.2',
+    'moonshotai/kimi-k3': 'Kimi K3',
+    'deepseek-ai/deepseek-v4-flash-0731': 'DeepSeek V4 Flash',
+}
 
 const creditsPerMillionTokens = (rate: string | null): string => {
     if (rate === null) {
@@ -62,11 +85,11 @@ export const PostHogDesktopPricing = (): React.ReactElement => {
         return <p>Loading current pricing...</p>
     }
 
-    const rows = pricing.models.map(({ id, display_name, pricing }) => ({
-        key: id,
+    const rows = pricing.models.map((model) => ({
+        key: model.id,
         cells: [
-            { content: display_name },
-            ...TOKEN_COLUMNS.map(({ rate }) => ({ content: creditsPerMillionTokens(pricing[rate]) })),
+            { content: MODEL_DISPLAY_NAMES[model.id] ?? model.display_name },
+            ...TOKEN_COLUMNS.map(({ rate }) => ({ content: creditsPerMillionTokens(model.pricing[rate]) })),
         ],
     }))
 
