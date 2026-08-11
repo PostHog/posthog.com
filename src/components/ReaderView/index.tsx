@@ -1434,7 +1434,9 @@ function ReaderViewContent({
 
         if (hash) {
             waitForImagesAndScroll()
-        } else {
+        } else if (!window.location.href.includes(':~:text=')) {
+            // Preserve the browser's native scroll-to-text-fragment behavior — otherwise
+            // this reset yanks the ScrollArea back to the top after Chrome scrolled it into view.
             scrollElement.scrollTo({
                 top: 0,
             })
