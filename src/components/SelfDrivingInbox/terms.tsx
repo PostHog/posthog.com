@@ -5,8 +5,8 @@ import Link from 'components/Link'
 import usePostHog from '../../hooks/usePostHog'
 
 /**
- * Self-driving vocabulary, defined once so no template carries the 101. Definitions are quoted
- * from the docs page that owns each concept, so this can't drift into a competing source.
+ * The pocket guides' vocabulary, defined once so no chapter carries the 101. Definitions are
+ * quoted from the docs page that owns each concept, so this can't drift into a competing source.
  */
 
 export interface TermDefinition {
@@ -48,6 +48,30 @@ export const TERMS = {
         description:
             'Signal sources are built-in pipelines that watch one stream continuously: error tracking, session replay, and health checks inside PostHog, plus external tools like Zendesk, GitHub Issues, and Linear.',
         slug: '/docs/self-driving/inbox/sources',
+    },
+    generation: {
+        title: 'Generation',
+        description:
+            'Generations are events that capture LLM calls and their responses. They represent interactions and conversations with an AI model, tracked as `$ai_generation` events.',
+        slug: '/docs/ai-observability/generations',
+    },
+    trace: {
+        title: 'Trace',
+        description:
+            'Traces are a collection of generations and spans that capture a full interaction between a user and an LLM, along with the properties PostHog autocaptures: the person, total cost, total latency, and more.',
+        slug: '/docs/ai-observability/traces',
+    },
+    span: {
+        title: 'Span',
+        description:
+            'Spans are units of work within an LLM trace: individual operations like function calls, vector searches, or data retrieval steps.',
+        slug: '/docs/ai-observability/spans',
+    },
+    evaluation: {
+        title: 'Evaluation',
+        description:
+            'Evaluations automatically assess the quality of your LLM generations. PostHog runs them as LLM-as-a-judge, deterministic code, or sentiment analysis.',
+        slug: '/docs/ai-evals',
     },
 } satisfies Record<string, TermDefinition>
 

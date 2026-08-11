@@ -12,6 +12,7 @@ import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
+import TraceTree, { TraceTreeRow } from './TraceTree'
 import { useTemplate } from './bookContext'
 
 /** The loop, drawn. Wording from /docs/self-driving/self-improving-loop. */
@@ -201,6 +202,25 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** One trace, drawn: the calls a single interaction made, and what each one cost. */
+export function TraceFigure({
+    n = 1,
+    caption,
+    legend,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    rows: TraceTreeRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <TraceTree rows={rows} />
         </Fig>
     )
 }

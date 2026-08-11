@@ -5,9 +5,24 @@ showTitle: true
 ---
 
 Pocket guides are the docs site's use case books at [/pocket-guides](/pocket-guides): each volume
-is a shelf cover, a 101, and a set of use cases that each end in a one-click "Add this scout"
-CTA. They render as a full-window e-reader – figures embedded where the prose cites them – and
-everything a reader sees is authored in MDX.
+is a shelf cover, a 101, and a set of use cases that each end in a CTA. They render as a
+full-window e-reader – figures embedded where the prose cites them – and everything a reader sees
+is authored in MDX.
+
+**Every use case ends in one action, and the action is what the volume is for.** Self-driving
+chapters add a custom scout. AI Observability chapters hand over a PostHog AI prompt that builds
+the eval, dashboard, or funnel the chapter describes. A future Support volume will have its own.
+Pick the shape when you plan the volume, not per chapter – a book where every chapter ends
+somewhere different reads as a link dump.
+
+**Only use cases get a CTA.** The front matter and the 101 point onward with ordinary links in
+the prose. Giving those pages a button too spends the reader's attention on "install this" and
+leaves nothing for the action each use case is actually built around.
+
+**Which volume does a use case belong to?** If the answer is a custom scout, it belongs in the
+self-driving volume, even when the subject is AI Observability or Support. Other volumes cover
+their product outside self-driving, and cross-link to the scout chapter that automates the manual
+loop they just taught.
 
 This page is the short version for authors. The source of truth for the component side lives in
 the repo: `src/components/PocketGuides/README.md` (the reader, figures, and MDX traps) and
@@ -21,7 +36,7 @@ A use case is one directory:
 ```
 contents/pocket-guides/<volume>/<slug>/
 ├── index.mdx    everything a human reads
-└── SKILL.md     the scout itself, verbatim
+└── SKILL.md     the scout itself, verbatim (scout volumes only)
 ```
 
 - **Copy `contents/pocket-guides/self-driving/_starter/`** to begin – it's a commented skeleton
@@ -29,6 +44,11 @@ contents/pocket-guides/<volume>/<slug>/
 - **Frontmatter carries the structured data**: `title`, `shortTitle`, `bookOrder` (reading
   order; 0 is the front matter, omit to keep a draft unlisted), the `report` block that renders
   as the inbox figures, `watches`, `requires`, `category`, and `schedule`.
+- **A non-scout chapter carries a `cta:` block instead** – `kind: prompt` with the PostHog AI
+  prompt itself, or `kind: link` with a destination – rendered by `<Action />` where the chapter
+  wants it, and repeated in the reader's pinned bar automatically.
+- **A new volume is a directory plus a row in `src/constants/pocketGuides.ts`.** The reader reads
+  the volume id off the slug, so nothing in the components needs to know your volume exists.
 - **The body carries every word.** `<LeftPage>` holds the figures, `<RightPage>` the prose; the
   reader interleaves each figure after the first block that cites it via `<SeeFig n={1} />`.
 - **`SKILL.md` is a real file, not a string** – same frontmatter as the canonical scouts in the

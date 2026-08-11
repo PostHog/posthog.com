@@ -8,16 +8,29 @@ whole thing uses PostHog fonts and tokens only.
 are layout and vocabulary, the words all live in `contents/pocket-guides/`.
 
 ```
-contents/pocket-guides/self-driving/
+contents/pocket-guides/<volume>/
 ├── index.mdx              bookOrder: 0 – the front matter (title page + contents)
 ├── 101/index.mdx          bookOrder: 1 – the primer
 └── <use-case>/
     ├── index.mdx          bookOrder: 2+ – one use case
-    └── SKILL.md           the scout itself, rendered as a figure
+    └── SKILL.md           the scout itself, rendered as a figure (scout volumes only)
 ```
 
 `gatsby/createPages.ts` already routes everything under `contents/pocket-guides/` through
 `src/templates/Template.tsx`, which hands any `/pocket-guides/` slug to `BookPage`.
+
+**One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
+off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volume is a directory
+plus a row in `src/constants/pocketGuides.ts` – no reader changes. The shelf counts a volume's
+use cases by `bookOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
+
+**Every use case ends in a CTA, and only use cases have one.** Front matter and the 101 send
+people onward with ordinary links in the prose – a CTA there devalues the one that matters.
+Which CTA depends on the volume: self-driving chapters enable a scout (`<Enable />`, driven by
+the sibling SKILL.md), and every other volume authors its own in the `cta:` frontmatter block and
+renders it with `<Action />` – today a PostHog AI prompt (`kind: prompt`) or a plain destination
+(`kind: link`). Both shapes also drive the pinned bar at the foot of the reader, so the page's
+action and the shortcut to it can't drift apart.
 
 ## Authoring a page
 
@@ -63,8 +76,10 @@ after the prose.
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
+| `<TraceFigure n caption rows>` | One LLM trace, nested – generations and spans with their numbers |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
-| `<Enable />` | The one-click CTA – the book's only real button |
+| `<Enable />` | The scout CTA – one click to add this page's scout |
+| `<Action />` | The CTA for volumes whose answer isn't a scout, from `cta:` frontmatter |
 | `<Contents />` | The contents list, built from the book itself |
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
@@ -124,10 +139,10 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
   controls are book tabs on the page's left edge (shelf link, a Contents popover, an Aa
   reading-size control), a centered reading column, click-to-turn page margins, and a foot line
   with prev/next turns, "All guides" (except where prev already is the shelf), and "p. N of M".
-- **One model drives everything.** `bookModel.tsx`'s `useBookPages()` reads every page's
-  `bookOrder` and produces the reading order; the bar, contents, and page turns all derive from
-  it. Front matter is unnumbered; arabic numbering starts at the page after it, so inserting a
-  chapter renumbers what follows without anyone editing a number by hand.
+- **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
+  `bookOrder` and produces that volume's reading order; the bar, contents, and page turns all
+  derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
+  inserting a chapter renumbers what follows without anyone editing a number by hand.
 - **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
   left/right arrow keys all walk the same sequence.
 
@@ -142,10 +157,12 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
+| `Action.tsx` | The non-scout CTA and its pinned bar, from `cta:` frontmatter |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
-| `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
+| `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
+| `TraceTree.tsx` | An LLM trace drawn as nested rows – the AI Observability volume's hero |
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in

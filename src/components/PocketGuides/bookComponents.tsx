@@ -1,5 +1,6 @@
 import Term from 'components/SelfDrivingInbox/terms'
 
+import Action, { Setup } from './Action'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
@@ -11,6 +12,7 @@ import {
     LoopFigure,
     ReportFigure,
     ScoutFigure,
+    TraceFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 
@@ -35,9 +37,12 @@ export const bookMdxComponents = {
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    TraceFigure,
     LoopFigure,
     Watches,
     Enable,
+    Action,
+    Setup,
     Contents,
     SeeAlso,
     Term,

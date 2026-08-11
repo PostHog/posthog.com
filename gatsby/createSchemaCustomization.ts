@@ -90,6 +90,19 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       label: String
       level: String
     }
+    # A pocket-guide chapter's one action. Scout chapters carry a scout instead – this is how a
+    # volume whose answer isn't a scout still ends on something to do.
+    type FrontmatterCTARequires {
+      label: String
+    }
+    type FrontmatterCTA {
+      kind: String
+      label: String
+      prompt: String
+      href: String
+      note: String
+      requires: FrontmatterCTARequires
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
@@ -103,6 +116,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       bookOrder: Int
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
+      cta: FrontmatterCTA
       # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
       # inbox's category rail; the list of categories is derived from the templates that
       # declare one, never hardcoded, so adding a template is a content-only change.
