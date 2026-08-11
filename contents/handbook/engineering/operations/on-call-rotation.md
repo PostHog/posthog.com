@@ -26,14 +26,14 @@ A team has up to three schedules in [incident.io](https://app.incident.io/postho
     - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, you just set the start of your normal working day, weekdays only
     - Stagger start times to cover as much of the day as your team can – 08:00 for an EU-based engineer leaves 17:00 onwards for a US-based one
     - Gaps are fine. Nobody is woken up here: a critical alert that finds nobody on call goes to [global on-call](#global-on-call-schedule) instead
-* `Escalation: {team}`
+* `Page team (emergency): {team}`
     - The "everything is broken" rotation, paged only when [someone escalates by hand](#manual-escalation-schedules)
 * `Support Hero: {team}`
     - The [support hero rotation](/handbook/engineering/operations/support-hero). Everyone takes turns one at a time, handing over every week or two. Nothing pages it
 
 ### Manual escalation schedules
 
-Teams that own production-critical services also have an `Escalation: {team}` schedule, triggered by hand by whoever is handling an incident and needs more help. Other teams don't need one.
+Teams that own production-critical services also have a `Page team (emergency): {team}` schedule, triggered by hand by whoever is handling an incident and needs more help. Other teams don't need one. The schedule and the escalation path that pages it share this name – there's exactly one of each per team.
 
 Unlike `On call: {team}`, this rotation has to cover the clock, every day of the week. You describe it as groups – blocks of the clock with the people covering each one, an EU group and a US group, or however your team is actually spread. Everyone in a group is on call for the whole of its window rather than taking turns, and the page cycles between them one at a time.
 
@@ -50,8 +50,8 @@ Manual escalation should be used when:
 
 #### How to trigger manual escalation
 
-1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation (manual): {team}` path
-2. This pages whoever is on that team's `Escalation: {team}` rotation right now, then everyone on it – one person at a time, 10 minutes per level
+1. From within an incident in incident.io, use the escalation options to page the relevant `Page team (emergency): {team}`
+2. This pages whoever is on that team's emergency rotation right now, then everyone on it – one person at a time, 10 minutes per level
 3. Any available team member can then respond and assist with the incident
 
 > 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
@@ -65,6 +65,8 @@ Manual escalation should be used when:
 PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. As a 24/7 service, our goal is to be 100% operational 100% of the time. The global on-call is the last line of defense and is escalated to:
 * if nobody at the `On call: {team}` level is available
 * if the alert is critical but has no team assignment (for whatever reason)
+
+It's also the one schedule not defined in Terraform – it changes too often, and by too many hands, for that to be safe.
 
 This schedule has 3 week day layers:
 - **Europe** (06:00 to 14:00 UTC) - (8 hours)
@@ -86,9 +88,11 @@ Besides knowledge, being on call requires availability – including weekends. I
 A schedule says who's on call. An escalation path says who gets paged, in what order, and how long they have to respond. A team gets the paths that follow from the schedules it has:
 
 * `On call: {team}` – where an alert routed to the team goes, previously named `PostHog: {team}`
-* `Escalation (manual): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules)
+* `Page team (emergency): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules)
 
-Two more are org-wide rather than owned by a team: `PostHog: General escalation`, for an escalation that's nobody's in particular, which pages global on-call for 30 minutes and then the last-resort rotation alongside it; and the `Notify: ...` paths, which post to a Slack channel and page nobody.
+Two more are org-wide rather than owned by a team: `Default escalation`, for an escalation that's nobody's in particular, which pages global on-call for 30 minutes and then the last-resort rotation alongside it; and the `Slack only: ...` paths, which post to a Slack channel and page nobody.
+
+Paths are named so that listing them alphabetically – which is what the escalation picker does – puts them in the order you'd reach for them.
 
 ### The standard on-call path
 
@@ -175,7 +179,7 @@ If you are unavailable for any of your schedules you need to act! Overrides are 
 
 1. For your `On call: {team}` schedule simply click on your name in your rotation, click `create an override` and then remove yourself from the list so it shows `No one`
 1. For your `Support Hero: {team}` or `On call: Global` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
-1. For your [`Escalation: {team}`](#manual-escalation-schedules) schedule, don't request cover and don't reshuffle the groups – nobody needs to take your turn, because there aren't any. Add an override on yourself for the window you're away, the same way as above, so it's clear you're unavailable. Everyone else in your group is still on call.
+1. For your [`Page team (emergency): {team}`](#manual-escalation-schedules) schedule, don't request cover and don't reshuffle the groups – nobody needs to take your turn, because there aren't any. Add an override on yourself for the window you're away, the same way as above, so it's clear you're unavailable. Everyone else in your group is still on call.
 
 ## Make sure you have all the access you might need
 
