@@ -34,6 +34,16 @@ import { getLogo, getDarkClassForLogo } from '../../constants/logos'
 import SearchProvider, { useSearch } from 'components/Editor/SearchProvider'
 import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
+import {
+    clearTextFragmentHighlight,
+    findTextDirectiveRanges,
+    highlightTextFragment,
+    parseFragmentDirective,
+    readLandingTextDirectives,
+    revealRange,
+    scrollRangeIntoView,
+    stripFragmentDirective,
+} from 'lib/textFragment'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { PANEL_BG } from '../../constants/frostedSurfaces'
@@ -1367,6 +1377,9 @@ function ReaderViewContent({
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
     const articleColumnRef = useRef<HTMLDivElement>(null)
+    // The landing URL's text fragment belongs to the navigation that carried it, and the browser
+    // strips it from the URL, so it has to be applied exactly once per page load.
+    const landingFragmentApplied = useRef(false)
 
     // Check if this is a customer page and get customer key
     const isCustomerPage = appWindow?.path?.startsWith('/customers/')
@@ -1405,7 +1418,20 @@ function ReaderViewContent({
             scrollElement.focus({ preventScroll: true })
         }
 
-        const waitForImagesAndScroll = async () => {
+        // A `#:~:text=` link can't be served by the browser here – it strips the directive before
+        // any script runs, and the MDX body isn't in the server-rendered HTML for it to match
+        // against anyway – so the reader resolves it itself. See lib/textFragment.
+        const hashDirectives = parseFragmentDirective(hash)
+        const textDirectives = hashDirectives.length
+            ? hashDirectives
+            : landingFragmentApplied.current
+            ? []
+            : readLandingTextDirectives(hash, appWindow?.path ?? pathname)
+        const targetId = stripFragmentDirective(hash)
+        let cancelled = false
+        let highlighted = false
+
+        const waitForImages = async () => {
             const images = contentRef.current?.querySelectorAll('img') || []
             const imageLoadPromises = Array.from(images).map((img: HTMLImageElement) => {
                 return new Promise<void>((resolve) => {
@@ -1419,7 +1445,28 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
-            const targetElement = document.getElementById(hash.replace('#', ''))
+        }
+
+        // MDX renders on the client, so the text a directive points at may not exist on the first
+        // attempt. Retry on a widening delay rather than giving up on an empty container.
+        const findTextRanges = async (): Promise<Range[]> => {
+            for (const delay of [0, 100, 250, 500, 1000]) {
+                await new Promise((resolve) => setTimeout(resolve, delay))
+                if (cancelled) return []
+                // Search the article body only. The mobile table of contents also lives under
+                // `contentRef` and repeats every heading's text, so anything wider than this would
+                // resolve heading directives to a TOC entry instead of the section.
+                const searchRoot = contentRef.current?.querySelector<HTMLElement>('.reader-content-container')
+                const ranges = searchRoot ? findTextDirectiveRanges(searchRoot, textDirectives) : []
+                if (ranges.length) return ranges
+            }
+            return []
+        }
+
+        const scrollToHashTarget = async () => {
+            await waitForImages()
+            if (cancelled) return
+            const targetElement = document.getElementById(targetId)
             if (targetElement) {
                 const detailsParent = targetElement.closest('details')
                 if (detailsParent) {
@@ -1432,12 +1479,37 @@ function ReaderViewContent({
             }
         }
 
-        if (hash) {
-            waitForImagesAndScroll()
+        const scrollToTarget = async () => {
+            // `#id:~:text=` carries both. The id scrolls first so it isn't held up by the search,
+            // then the directive refines the landing spot if its text turns up.
+            if (targetId) await scrollToHashTarget()
+            if (!textDirectives.length) return
+
+            const ranges = await findTextRanges()
+            if (cancelled || !ranges.length) return
+
+            ranges.forEach(revealRange)
+            await waitForImages()
+            if (cancelled) return
+            highlightTextFragment(ranges)
+            highlighted = true
+            landingFragmentApplied.current = true
+            scrollRangeIntoView(ranges[0])
+        }
+
+        if (hash || textDirectives.length) {
+            scrollToTarget()
         } else {
             scrollElement.scrollTo({
                 top: 0,
             })
+        }
+
+        // `CSS.highlights` is a single document-wide registry, so readers can't hold highlights
+        // independently – this only avoids clearing one that a different reader painted.
+        return () => {
+            cancelled = true
+            if (highlighted) clearTextFragmentHighlight()
         }
     }, [appWindow?.path, hash])
 
