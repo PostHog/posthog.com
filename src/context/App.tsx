@@ -298,23 +298,23 @@ const updateCursor = (cursor: string) => {
                 --cursor-ew-resize: ${horizontalResizeCursorUrl};
                 --cursor-ns-resize: ${verticalResizeCursorUrl};
             }
-            
+
             * { cursor: var(--cursor-default); }
-            
+
             a, button, [role="button"], [tabindex="0"],
             input[type="button"], input[type="submit"], input[type="reset"],
-            .cursor-pointer { 
-                cursor: var(--cursor-pointer) !important; 
+            .cursor-pointer {
+                cursor: var(--cursor-pointer) !important;
             }
-            
+
             [data-draggable="true"], .cursor-move {
                 cursor: var(--cursor-move) !important;
             }
-            
+
             .cursor-ew-resize {
                 cursor: var(--cursor-ew-resize) !important;
             }
-            
+
             .cursor-ns-resize {
                 cursor: var(--cursor-ns-resize) !important;
             }
@@ -1591,6 +1591,7 @@ const appSettings: AppSettings = {
     },
     '/docs': {
         toolbar: true,
+        hideTitle: true,
     },
     '/merch': {
         toolbar: true,
