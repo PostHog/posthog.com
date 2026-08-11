@@ -1,16 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 import OSButton from 'components/OSButton'
 import { SectionComponentProps } from '../types'
 
+/** Collapsed height cap. Roughly one screenful of rows. */
+const COLLAPSED_MAX_PX = 700
+/** Don't bother collapsing tables that barely exceed the cap. */
+const COLLAPSE_SLACK_PX = 200
+
 const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
     const comparison = productData?.comparison
-    // Opt-in via `comparison.collapsible` on the product data: long tables render
-    // collapsed to one screenful with a "Show full comparison" toggle. Products
-    // without the flag are untouched.
-    const collapsible = !!comparison?.collapsible
+    // Collapsed by default so long tables don't dominate the page. Products can
+    // opt out via `comparison.collapsible: false`. Tables that (almost) fit within
+    // the cap render fully with no toggle - see the measurement effect below.
+    const collapsible = comparison?.collapsible !== false
     const [expanded, setExpanded] = useState(false)
-    const collapsed = collapsible && !expanded
+    const [oversized, setOversized] = useState(true)
+    const wrapperRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (!collapsible) return
+        const el = wrapperRef.current
+        if (!el) return
+        // scrollHeight reports the full content height even under the max-h cap.
+        const measure = () => setOversized(el.scrollHeight > COLLAPSED_MAX_PX + COLLAPSE_SLACK_PX)
+        measure()
+        const observer = new ResizeObserver(measure)
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [collapsible])
 
     if (!comparison?.companies?.length || !comparison?.rows?.length) return null
 
@@ -24,10 +42,12 @@ const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
     // Products can add more via comparison.excluded_sections.
     const excludedSections = ['platform', ...(comparison.excluded_sections || [])]
 
+    const collapsed = collapsible && oversized && !expanded
+
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-4">Feature comparison</h2>
-            <div className={collapsed ? 'relative max-h-[700px] overflow-hidden' : undefined}>
+            <div ref={wrapperRef} className={collapsed ? 'relative max-h-[700px] overflow-hidden' : undefined}>
                 <ProductComparisonTable
                     competitors={competitors}
                     rows={comparison.rows}
@@ -43,7 +63,7 @@ const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
                     </div>
                 )}
             </div>
-            {collapsible && expanded && (
+            {collapsible && oversized && expanded && (
                 <div className="mt-4 flex justify-center">
                     <OSButton variant="secondary" size="md" aria-expanded onClick={() => setExpanded(false)}>
                         Show less
