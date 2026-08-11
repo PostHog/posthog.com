@@ -47,6 +47,8 @@ export function buildScoutDeepLink(scout?: ScoutSpec): string {
             name: scout.name,
             description: scout.description,
             ...(body ? { body } : {}),
+            // Attribution for the app's scout-created capture; older decoders ignore unknown fields.
+            source: 'pocket_guide',
         })
     )
 
