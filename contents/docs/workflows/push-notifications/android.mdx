@@ -1,0 +1,83 @@
+---
+title: Android push notifications
+sidebarTitle: Android
+---
+
+Set up [Workflows](/docs/workflows) push notifications in the Android SDK. For the concept and channel setup, see [Push notifications](/docs/workflows/push-notifications).
+
+Available in the Android SDK version 3.58.0 and newer. Sends go out through the FCM channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push), so the Firebase project on that channel must match your app.
+
+## Requirements
+
+Set up Firebase Cloud Messaging and request the `POST_NOTIFICATIONS` runtime permission from the user (required on Android 13+) so the system can show notifications.
+
+## Automatic registration and open tracking (default)
+
+Both behaviors are on by default. When `firebase-messaging` is on your classpath, the SDK registers this device's FCM token with PostHog, and it auto-captures a `$push_notification_opened` event when a user opens the app from a notification tray tap.
+
+```kotlin
+val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+    capturePushNotificationSubscriptions = true // register the FCM token with PostHog
+    capturePushNotificationOpened = true         // capture `$push_notification_opened`
+}
+PostHogAndroid.setup(context, config)
+```
+
+**Initialize the SDK in your `Application.onCreate`, not an Activity.** The SDK installs its open-tracking hook during `setup()`, so it has to run before the launching Activity is created. If you initialize inside an Activity, a cold-start tap on a notification won't be captured.
+
+Firebase delivers rotated tokens through `onNewToken`, which the SDK can't observe on its own, so forward it to keep the registered token current:
+
+```kotlin
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onNewToken(token: String) {
+        PostHog.registerPushNotificationToken(token, appId = "your-firebase-project-id")
+    }
+}
+```
+
+## Manual registration
+
+```kotlin
+// Register a device token (appId = your Firebase project id):
+PostHog.registerPushNotificationToken(token, appId = "your-firebase-project-id")
+
+// Unregister when a user signs out:
+PostHog.unregisterPushNotificationToken()
+```
+
+Calling `PostHog.reset()` on logout unregisters the token for the signed-out user and re-registers it under the new anonymous id.
+
+Registration and unregistration are durable. If the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
+
+## Capturing opens
+
+Automatic open capture detects cold-start taps on a notification from the system tray. Warm-start taps (handled in `onNewIntent`) and notifications you display yourself from a foreground data message need the manual API:
+
+```kotlin
+PostHog.capturePushNotificationOpened(
+    title = title,
+    body = body,
+    payload = message.data,
+)
+```
+
+The `$push_notification_opened` event includes `$notification_title` and `$notification_body`, plus `$notification_action` for action-button taps. Notification content is only captured for notifications sent by PostHog. Opens of other notifications are still captured, but without title or body.
+
+## Identity verification
+
+If your push channel requires [identity verification](/docs/workflows/push-notifications#identity-verification), supply a backend-minted token through `pushIdentityProvider`:
+
+```kotlin
+config.pushIdentityProvider = { distinctId, appId, completion ->
+    // Fetch a freshly-minted token from your backend for this user, then:
+    completion(token) // or completion(null) to send without one
+}
+```
+
+## Troubleshooting
+
+| Issue | Check |
+| --- | --- |
+| Token never registers | Confirm `firebase-messaging` is on the classpath and your Firebase setup (`google-services.json`) is in place, and that you forward rotated tokens from `onNewToken`. |
+| Push doesn't arrive | Confirm the Firebase project on your Workflows channel matches your app, and the user granted the `POST_NOTIFICATIONS` permission. |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |
