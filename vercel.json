@@ -6071,6 +6071,11 @@
             "source": "/wizard",
             "destination": "/docs/ai-engineering/ai-wizard",
             "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/pricing",
+            "destination": "/product-analytics/pricing",
+            "statusCode": 301
         }
     ]
 }
