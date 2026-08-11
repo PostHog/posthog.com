@@ -21,6 +21,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 
 **Book the 1:1s:** Welcome 1:1 on day 1, a recurring 1:1, and (optionally) an extended 1:1 every 4 weeks.
 
+**Find an onboarding buddy:** Another CSM (same geography) to schedule a 1:1 and provide additional support if they need it.
 **Plan the in-person onboarding:** Usually week 2 - the [agenda below](#in-person-week-usually-week-2) is what we've been running. Logistics that help:
 
 - Ask the wider team to see if they're free to drop by for a day or two
@@ -78,7 +79,7 @@ Questions from me
 
 **Ask the team to share things!** And for calls the new CSM can shadow on.
 
-**Optionally, a check-in 1:1 on day 3.** The first week is a lot of solo reading - a midweek touchpoint helps.
+**Optionally, a check-in 1:1 on day 3.** The first week is a lot of solo reading - a midweek touchpoint helps. Also check to see if the onboarding buddy has scheduled a 1:1 as well!
 
 ## In-person week (usually week 2)
 
@@ -113,12 +114,12 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 #### Prioritizing across the book + deciding next steps (days 3-4)
 
-- **Prioritizing a book** - the signals we look at and which ones are more worrisome, both when a book is first assigned and on an ongoing basis. Have them set up their own Vitally views
+- **Prioritizing a book** - the signals we look at and which ones are more worrisome, both when a book is first assigned and on an ongoing basis. Have them set up their own Customer Analytics views
 - **Deciding next steps** - by now they should have a read on where each account's at (or know how to find out). Use next steps that haven't come up yet as chances to talk them through - e.g. a new Slack channel (invite you + support-hog), an upcoming renewal (how renewals work)
 
 #### Throughout the week
 
-- Demo practice with feedback
+- Demo practice with feedback (the more team members attending, the better)
 - No stupid questions sessions
 - Their feedback on the week at the end
 
