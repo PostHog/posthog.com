@@ -85,7 +85,7 @@ TAM removals generally happen at the end of the quarter. Accounts can be added t
 
 The CSM stays on, so nothing about the customer relationship changes from their side. But the TAM knows things the CSM doesn't, and that context has to land somewhere before they leave:
 
-- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
+- **A handover note in Vitally** covering: what expansion plays were run and how they went, commercial context (discounts given and why, anything promised, credit terms), open threads, and who the real decision makers are. The note must also document who on the customer side owns the renewal (champion or procurement? how long did the last one take, and what quirks should the next owner expect?) and whether there's a valid payment method on file (and if not, why not). Use the [handover note skill](https://github.com/PostHog/skills/tree/main/skills/team/product-led-sales/account-handover).
 - **A 15 minute call with the CSM** to cover what's not in the data. Politics, sensitivities, what you'd try next if a new opportunity shows up.
 - **The Slack channel stays open.** The CSM keeps it. Don't archive it. Channel archival only applies when an account exits managed coverage entirely.
 - **Removing the TAM in Vitally.** Once the note and call are done, the team lead removes the TAM and the `AM Managed` segment from the account, with Ben's approval.
@@ -158,7 +158,7 @@ TAM add and removal aren't handoffs, since the CSM stays throughout. See [Adding
 
 For handover to take place there should be an Account Plan (saved as a note on the account in Vitally) and the customer should have been onboarded properly to the products they are currently paying for.
 
-> All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment.
+> All open invoices should also have been paid before handing over. It makes sense to use existing relationships to chase payments, rather than the new owner's first action needing to be chasing payments/suspending access for non-payment. Check there's a valid payment method on file too – if there isn't, the handover note needs to say why not, because a renewal with no way to pay is blocked no matter how good the relationship is.
 
 > For TAE accounts being handed over, set the New Owner to `Ready to move` in Vitally and then flag this with Simon directly.  There's no need to wait for the end of the quarter to do this.  He will review the plan and current state of the customer and then work with TAM or CSM leads to assign a new owner.
 
@@ -229,7 +229,7 @@ The incoming TAM should prepare by reviewing the following in Vitally and SFDC b
 #### Self-serve research (do this first)
 
 - [ ] **Vitally account overview** – MRR, ARR, health score, segments, paid products, usage traits
-- [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
+- [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits, and whether there's a valid payment method on file (check Stripe)
 - [ ] **Product adoption** – which products are they paying for? What's underutilized?
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
 - [ ] **Support history** – recent tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets), tags, priority, resolution status
@@ -263,6 +263,8 @@ This is the most valuable part of the handover – relationship context doesn't 
 
 - [ ] **Open proposals or negotiations** – anything in-flight that needs immediate follow-up?
 - [ ] **Renewal strategy** – what's the plan? Any risks?
+- [ ] **Renewal ownership** – who on the customer side owns the renewal? Is that the champion or procurement? How long did the last renewal take, and what quirks should you expect (security review, legal redlines, PO process)?
+- [ ] **Payment method** – is there a valid payment method on file? If not, why not, and what's the plan to fix it before the renewal?
 - [ ] **Discount/credit context** – why were discounts given? What was promised?
 - [ ] **Budget & procurement** – annual budget cycle, procurement process, finance contacts
 - [ ] **Expansion potential** – realistic growth ceiling? New teams, new brands, new products?
@@ -311,6 +313,8 @@ CSMs receive every $20k+ account, whether from a TAE at close or when a TAM come
 ### Billing and commercial
 
 - **Open invoices** — verify these have been resolved per the [handover requirements above](#handing-over-customers). You don't want your first interaction with a customer to be chasing payment.
+- **Payment method** – is there a valid payment method on file? The handover note should say, and if there isn't one, it should say why not. Sort this out early rather than discovering it at renewal time.
+- **Renewal ownership** – the handover note should name who on the customer side owns the renewal (champion or procurement), how long the last one took, and any quirks. If it doesn't, go back to the previous owner and get it.
 - **MRR trajectory** — is spend steady, declining, increasing, or swinging around? Declining or volatile MRR is worth digging into before you take over.
 - **Credit purchases** — if they've pre-purchased credits, does the amount actually line up with what they're spending month to month?
 - **Non-standard discounts** — review the contract for anything unusual or undocumented. If discounts exist without clear documentation, get context from the previous owner.
