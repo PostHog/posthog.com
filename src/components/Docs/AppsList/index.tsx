@@ -8,20 +8,39 @@ const docsUrlOverrides: Record<string, string> = {
     data_warehouse: '/docs/data-warehouse',
     realtime_destinations: '/docs/cdp/destinations',
     posthog_ai: '/docs/posthog-ai',
-    inbox: '/docs/self-driving/inbox',
 }
 
 const docsUrlFor = (product: any): string => docsUrlOverrides[product.handle] || `/docs/${product.slug}`
 
+// Metrics are OSButton's `md` from simpleSizeClasses – one rung below the docs page's Surfaces row.
+const CHIP =
+    'flex items-center gap-1 rounded border border-primary bg-accent px-1.5 py-1 text-sm font-medium text-primary transition-colors hover:bg-primary'
+
 interface AppsListProps {
     className?: string
+    /** `columns` (default) flows down text columns; `chips` wraps bordered pills left to right. */
+    variant?: 'columns' | 'chips'
 }
 
-// Renders PostHog's products as a compact, multi-column list of icon links to their docs.
-// Sourced from useProducts() (the canonical product set, the same data behind /products) so it
-// stays in sync with the real product lineup instead of scraping the docs nav.
-export const AppsList = ({ className = '' }: AppsListProps): JSX.Element => {
+// Sourced from useProducts(), the canonical set behind /products, so it never drifts from the lineup.
+export const AppsList = ({ className = '', variant = 'columns' }: AppsListProps): JSX.Element => {
     const { products } = useProducts()
+
+    if (variant === 'chips') {
+        return (
+            <div data-scheme="primary" className={`flex flex-wrap gap-2 ${className}`}>
+                {products.map((product: any) => {
+                    const Icon = product.Icon
+                    return (
+                        <Link key={product.handle || product.name} to={docsUrlFor(product)} className={CHIP}>
+                            {Icon && <Icon className={`size-4 shrink-0 text-${product.color || 'primary'}`} />}
+                            <span className="leading-tight">{product.name}</span>
+                        </Link>
+                    )
+                })}
+            </div>
+        )
+    }
 
     return (
         <div data-scheme="primary" className={`columns-2 @md:columns-3 @2xl:columns-4 gap-x-8 ${className}`}>

@@ -1,49 +1,13 @@
 import Explorer from 'components/Explorer'
 import Cover from 'components/PocketGuides/Cover'
 import SEO from 'components/seo'
-import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
-
-/** Report-bearing guides per volume (the 101 doesn't count), so the cover is never stale. */
-function useGuideCounts(): Record<string, number> {
-    const data = useStaticQuery(graphql`
-        query PocketGuideCountsQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        title
-                        report {
-                            title
-                        }
-                    }
-                }
-            }
-        }
-    `)
-
-    const counts: Record<string, number> = {}
-    for (const node of data?.guides?.nodes || []) {
-        const [, , volume, guide] = node.fields.slug.split('/')
-        // Skip the volume's own index, sibling SKILL.md files, and `_`-prefixed starters.
-        if (!volume || !guide || guide.startsWith('_') || !node.frontmatter?.title) {
-            continue
-        }
-        // A report in the frontmatter is what makes a page a guide; the 101 has none.
-        if (node.frontmatter.report?.title) {
-            counts[volume] = (counts[volume] ?? 0) + 1
-        }
-    }
-    return counts
-}
+import usePocketGuides from '../../hooks/usePocketGuides'
 
 export default function PocketGuidesPage(): JSX.Element {
-    const counts = useGuideCounts()
-    const volumes = [...POCKET_GUIDE_VOLUMES].sort((a, b) => a.volume - b.volume)
+    // Already ordered by volume number, with counts that exclude the 101 primer.
+    const volumes = usePocketGuides()
 
     return (
         <>
@@ -84,7 +48,7 @@ export default function PocketGuidesPage(): JSX.Element {
                         <ul className="m-0 flex list-none flex-col items-center gap-8 p-0 @xl:flex-row @xl:flex-wrap @xl:items-stretch @xl:gap-6">
                             {volumes.map((volume) => (
                                 <li key={volume.id} className="w-[250px] @xl:w-[210px] @4xl:w-[230px]">
-                                    <Cover volume={volume} count={counts[volume.id] ?? 0} />
+                                    <Cover volume={volume} count={volume.count} />
                                 </li>
                             ))}
                         </ul>
