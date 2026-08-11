@@ -35,12 +35,6 @@
                 "scope": ["src/**"],
                 "rule": "If a page is moved or renamed, a redirect must be added in vercel.json."
             }
-        ],
-        "other": [
-            {
-                "scope": ["src/**"],
-                "content": "The PostHog writing style guides referenced in the repository instructions apply only to content files under contents/. Do not apply prose style rules (sentence casing, American English spelling, relative URL copy guidance) to code files. Review code files for correctness, duplicated logic, abstraction quality, and the scoped rules instead. Repo-wide conventions are documented in CLAUDE.md and the agents/ guides."
-            }
         ]
     },
     "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\n.storybook/**\n/*.json\n/*.js\n/*.ts\n/*.jsx\ncontents/**/*.json\ncontents/**/*.js\ncontents/**/*.ts\ncontents/**/*.jsx\nstatic/**/*.json\nstatic/**/*.js\nstatic/**/*.ts\nstatic/**/*.jsx",
