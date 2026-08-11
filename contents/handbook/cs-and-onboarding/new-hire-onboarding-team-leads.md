@@ -15,7 +15,7 @@ So you've got a new CSM joining your team! This page is for team leads - the joi
 
 **Prepare their book of business:** 
 
-- Accounts come from a few places: Simon pulls net-new accounts, teammates can offload some if they're overloaded, and product-led sales and new business sales can have accounts waiting for a CSM handover - shoot them an ask. 
+- Accounts come from a few places (listed by priority): CSMs can offload accounts if they're overloaded, product-led sales and new business sales can have accounts waiting for a CSM handover, and Simon frequently pulls net-new accounts - ask all groups to see what needs coverage. 
 - Tee up ~20 accounts so they're not at capacity immediately - it also leaves room for late handovers. 
 - Follow the [capacity model](/handbook/cs-and-onboarding/how-we-work), and bonus points if accounts can line up with their previous experience.
 
