@@ -118,7 +118,6 @@ never stopped. A decision you already made and moved on with is still being aske
 When your product emits <Term name="signal">signals</Term> that indicate flags have gone stale, a <Term name="scout" /> opens a <Term name="report" /> – and <SeeFig n={2} /> breaks the card down part by part. Click Review and the report opens into <SeeFig n={3} />: the full evidence, the raw signals, and the button that turns it into a
 pull request.
 
-Yours would look just like this one, but with your product's flags, repos, and call sites.
 
 ## The pull request you merge
 
@@ -130,8 +129,9 @@ Reports are free. Pull requests are **$15 each**, with your first three a month 
 
 Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual skill file for this guide's custom scout.
 
-It reads more than one <Term name="signal source" />, so the report will name a likely cause, not
-just a number that moved.
+It reads more than one <Term name="signal source" />, so the report will name a likely cause, not just a number that moved.
+
+This scout's signal sources come from the following product data:
 
 <!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
 <Watches />

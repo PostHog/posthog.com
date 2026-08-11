@@ -91,15 +91,16 @@ This scout watches your LLM traces for regressions.
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: you deployed a new version of your feature at `09:14`. Your conversation costs are rising, but volume is stable.
+You deployed a new version of your feature at `09:14`. Your conversation costs are rising, but volume is stable. Which case is it?
+
 - If both are rising together, it's just growth. The scout stays _quiet_.
 - If costs rise while volume is stable, it signals a possible regression. The scout _**reports**_.
+
+That second pattern is what the scout looks for, shown in <SeeFig n={1} 
 
 ## The report in your inbox
 
 When your product emits <Term name="signal">signals</Term> that indicate AI costs are rising, a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw signals, and options to take action.
-
-Yours would look just like this one, but with your product's conversations, models, and deploys.
 
 ## The pull request you merge
 
@@ -111,8 +112,9 @@ Reports are free. Pull requests are **$15 each**, with your first three a month 
 
 Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual skill file for this guide's custom scout.
 
-It reads more than one <Term name="signal source" />, so the report will name a likely cause, not
-just a number that moved.
+It reads more than one <Term name="signal source" />, so the report will name a likely cause, not just a number that moved.
+
+This scout's signal sources come from the following product data:
 
 <!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
 <Watches />
