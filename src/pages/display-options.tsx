@@ -5,7 +5,7 @@ import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconDay, IconInfo, IconLaptop, IconNight } from '@posthog/icons'
+import { IconDay, IconEye, IconHide, IconInfo, IconLaptop, IconNight } from '@posthog/icons'
 import { SEO } from 'components/seo'
 import { useApp } from '../context/App'
 import type { SiteSettings } from '../context/App'
@@ -33,6 +33,25 @@ const colorModeOptions: ToggleOption[] = [
         label: 'Dark',
         value: 'dark',
         icon: <IconNight className="size-5" />,
+    },
+]
+
+const scrollbarOptions: ToggleOption[] = [
+    {
+        label: 'System',
+        value: 'system',
+        icon: <IconLaptop className="size-5" />,
+    },
+    {
+        label: 'Show',
+        value: 'show',
+        icon: <IconEye className="size-5" />,
+    },
+    {
+        label: 'Auto',
+        value: 'auto',
+        icon: <IconHide className="size-5" />,
+        default: true,
     },
 ]
 
@@ -191,6 +210,10 @@ export default function DisplayOptions() {
         }
     }
 
+    const handleScrollbarsChange = (value: string) => {
+        updateSiteSettings({ ...siteSettings, scrollbars: value as SiteSettings['scrollbars'] })
+    }
+
     const handleCursorChange = (value: string) => {
         updateSiteSettings({ ...siteSettings, cursor: value as SiteSettings['cursor'] })
     }
@@ -212,6 +235,14 @@ export default function DisplayOptions() {
                         options={colorModeOptions}
                         onValueChange={handleColorModeChange}
                         value={siteSettings.colorMode}
+                    />
+                </div>
+                <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
+                    <ToggleGroup
+                        title="Scrollbars"
+                        options={scrollbarOptions}
+                        onValueChange={handleScrollbarsChange}
+                        value={siteSettings.scrollbars ?? 'auto'}
                     />
                 </div>
                 <div className="bg-primary grid grid-cols-2 gap-2 mt-2">

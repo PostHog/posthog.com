@@ -266,7 +266,8 @@ Before configuring cookieless tracking, you need to enable "Cookieless server ha
 First is `cookieless_mode: "always"`:
 - Doesn't require a cookie banner (unless something else on your website uses cookies)
 - Never stores PostHog data in cookies or local/session storage
-- Prevents you from calling `identify()`, as a distinct ID would be considered Personal Data under GDPR and other similar privacy regulations
+- Doesn't block `identify()`, but you should avoid identifying users in this mode: a persistent distinct ID is considered Personal Data under GDPR and other similar privacy regulations, which undoes the privacy benefit of cookieless tracking. Set [`person_profiles: 'never'`](/docs/data/anonymous-vs-identified-events) to turn `identify()` calls into no-ops
+- Doesn't support `alias()`: alias events are dropped during ingestion
 - Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
 
 Second is `cookieless_mode: "on_reject"`:

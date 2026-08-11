@@ -1,0 +1,131 @@
+---
+title: Silent failure in your core action
+shortTitle: Silent failures
+subtitle: 'Where does your most important flow fail without telling anyone?'
+bookOrder: 4
+filters:
+  type:
+    - self-driving
+watches:
+  - name: Your product events
+    detail: How many people start your core action and how many finish, compared with the last two weeks.
+  - name: Error Tracking
+    detail: The failures that show up as errors – including the ones your code catches, so the user never sees them.
+  - name: Session Replay
+    detail: The failures that never become errors – recordings of people who started, got stuck, and gave up.
+  - name: Your codebase
+    detail: Your deploys, so a drop can be matched to the change that caused it instead of just a time of day.
+requires:
+  - label: >-
+      A core action with a start and finish event, named explicitly when you add the scout –
+      it can't guess which flow is the whole point of your product
+    level: required
+  - label: Error Tracking instrumented, including the paths where exceptions are caught
+    level: required
+  - label: Your codebase connected via GitHub, to correlate a break against deploys
+    level: recommended
+  - label: Session Replay, for failures that never reach your server at all
+    level: recommended
+  - label: >-
+      Intermediate events inside the flow, if you have them – they're what turns "it broke" into
+      "it broke at the payment step"
+    level: optional
+schedule: Daily
+report:
+  title: Publish completion rate down 31 points while attempts hold steady
+  source: Scout · core action funnel
+  receivedAgo: 2h
+  affected: ~1,240 publishes/day failing silently
+  body: >-
+    Since the 14:02 deploy, publish attempts are flat at ~4,000/day but the completion rate
+    fell from 92% to 61%. The drop is uniform across source, device, and geo, so it isn't a
+    traffic-mix change, and the `publish_completed` event is still firing normally elsewhere.
+
+
+    Error Tracking shows a new handled timeout on the publish path, caught by the retry wrapper
+    and never rethrown – so no error page rendered and no alert fired. Session Replay matches: users
+    click Publish, watch the spinner, and leave after ~8 seconds.
+  suggestedAction: >-
+    Surface the failure to the user instead of retrying silently. The timeout itself is the
+    root cause and a separate follow-up – this PR is about making it visible.
+  actionNote: An agent opens the pull request – you review and merge.
+---
+
+<LeftPage>
+
+<LeakFigure
+    n={1}
+    caption="What the scout saw: Your deploy went out at 14:02. The orange gap is everyone who started and never finished."
+    markerAt={0.45}
+    markerLabel="14:02 deploy"
+    leakLabel="~1,240/day vanish here – no error, no alert"
+    startsLabel="Started publishing · ~4,000/day"
+    finishesLabel="Finished · 92% → 61%"
+    starts={[0.9, 0.88, 0.91, 0.89, 0.9, 0.89, 0.9, 0.89, 0.91, 0.9]}
+    finishes={[0.84, 0.83, 0.85, 0.83, 0.84, 0.55, 0.47, 0.43, 0.41, 0.4]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="Completion rate fell 92% → 61% after the 14:02 deploy while attempts held steady – a handled timeout, retried silently"
+/>
+
+<DetailFigure
+    n={3}
+    caption="The report opened. From here, you can review the evidence and open a pull request."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+/>
+
+<ScoutFigure n={4} caption="The scout itself – the file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Silent failure in your core action
+
+Every product has one action that matters more than the rest: checkout, publish, send, or deploy.
+When it fails loudly, you hear about it. When it fails quietly, nobody sees an error and nobody
+files a ticket. This scout watches your most important flow and catches the failures nobody reports.
+
+## What the scout looks at
+
+The scout looks for patterns like <SeeFig n={1} />: you deployed at `14:02`. People are still trying to publish, but fewer are finishing. No error page rendered and no alert fired. If both lines had dropped, that's a traffic change – not a break.
+
+## The report in your inbox
+
+When your product emits <Term name="signal">signals</Term> that indicate your core action is failing, a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw signals, and options to take action. Yours would look like this one, but name your events, your deploys, and your users.
+
+## The pull request you merge
+
+When you're ready to open a pull request, the agent does it for you, attaching the evidence along the way. You review and merge it like any other – nothing merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual file for this guide's custom scout.
+
+It reads more than one <Term name="signal source" />, so the report can name a likely cause, not
+just a number that moved.
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
+<Watches />
+
+## The schedule it runs on
+
+This custom scout runs **daily** by default. You can choose to run it every 30 minutes up to once a day. It only writes when something is wrong, so most days it's silent.
+
+## Add this to your scout troop
+
+<!-- The requirement checklist comes from `requires:` in this file's frontmatter;
+    the scout itself (name, description, what the button prefills) is ../SKILL.md. -->
+<Enable />
+
+</RightPage>

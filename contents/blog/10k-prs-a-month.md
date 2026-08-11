@@ -34,7 +34,7 @@ There's no token budget set by some higher-ups at PostHog. We want people to fig
 
 This works because it's a big part of our culture to value trust and feedback over process. If we get to the point where we're uncomfortable with someone's spend, we'll dig into that with them and figure out if the spend is reasonable. Everyone else can learn from that too.
 
-Everybody's using agents and writing skills, but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing fast.
+Everybody's using agents and [writing skills](/newsletter/writing-agent-skills), but our [self-driving loop](/newsletter/loops) is further fueling the accelerated cadence. Over the last 4 months, we moved from around 20% of our monorepo PRs being opened by agent to 70%. [Self-driving](/blog/self-driving-product) is around 4% of our PRs right now but growing fast.
 
 Speeding up the rate we create PRs doesn't necessarily mean speeding up the rate we can handle them. For that, we're relying on agentic loops getting those PRs ready for human attention. Things like: 
 
