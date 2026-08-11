@@ -9,7 +9,7 @@
             },
             {
                 "scope": ["src/**"],
-                "rule": "Critique abstraction and API design: is the component the right shape, are prop and parameter names intuitive, and is state owned at the right level?"
+                "rule": "Critique abstraction and API design: is the component the right shape, are prop and parameter names intuitive, and is state owned at the right level? Prefer the smallest change that solves the PR's stated problem—flag single-use abstractions, speculative configurability, and overcomplicated solutions. If the design has multiple interpretations or unclear tradeoffs, call them out."
             },
             {
                 "scope": ["src/**"],
@@ -42,6 +42,10 @@
             {
                 "scope": ["src/**"],
                 "rule": "Flag `as any` casts and untyped return shapes, especially in pure-logic modules like the pricing calculator. Suggest the fully typed literal instead."
+            },
+            {
+                "scope": ["src/**"],
+                "rule": "Surgical changes only: every changed line should trace to the PR's goal. Flag drive-by refactors, unrelated formatting/comment churn, and adjacent 'improvements' that aren't required. Cleanup should only remove orphans created by this PR."
             }
         ]
     },
