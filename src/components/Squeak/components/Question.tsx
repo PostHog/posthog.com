@@ -539,14 +539,32 @@ export function Question(props: QuestionProps) {
         try {
             if (!posthog) throw new Error('PostHog is not loaded')
             // Attribute the ticket to the question author so support replies reach them
-            await createSupportTicket(posthog, message, {
+            const ticket = await createSupportTicket(posthog, message, {
                 name: authorName,
                 email: authorEmail || null,
             })
             setEscalateState('sent')
             addToast({
                 title: 'Escalated to support',
-                description: 'A support ticket was created for this question. Support will follow up with the author.',
+                // Default 3s is too short to read and click the ticket link
+                duration: 10000,
+                description: (
+                    <>
+                        A support ticket was created for this question.{' '}
+                        {ticket?.ticket_id && (
+                            <Link
+                                // Tickets live in the posthog.com project (id 2) on US Cloud
+                                to={`${
+                                    process.env.GATSBY_POSTHOG_UI_HOST || 'https://us.posthog.com'
+                                }/project/2/support/tickets/${ticket.ticket_id}`}
+                                external
+                                className="font-semibold underline"
+                            >
+                                View the ticket
+                            </Link>
+                        )}
+                    </>
+                ),
             })
         } catch (error) {
             setEscalateState('error')
