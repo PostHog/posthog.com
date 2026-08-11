@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product or offering compensation for a recent incident. Here’s how to do that. If you're deciding how much to offer for a new product trial, see [trial credits for new products](/handbook/growth/cross-selling/trial-credits) first.
+Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product or offering compensation for a recent incident. Here’s how to do that. If you're deciding how much to offer for a new product trial, see [trial/evaluation incentives](/handbook/growth/cross-selling/cross-sell-motions#trialevaluation-incentives) first.
 
 - Go to <PrivateLink url="https://billing.posthog.com/admin/billing/credit/">Billing Admin → Credits</PrivateLink>
 - Click Add Credit at the top right.

@@ -294,6 +294,15 @@ You may want to consider expanding usage of the same product within the same tea
 ## Trial/Evaluation incentives
 If we want customers to use more products, we should incentivize new product adoption. This could be in the form of credits for a specific timeframe to cover adoption and usage of the specific product. For example, if a customer wants to try out data warehouse, we offer 2-3 months of credit for any data warehouse usage as they figure out how they would use it and where it provides additional insight.
 
+### How much credit is reasonable?
+
+- **Scale it to the account.** Anchor on what the product would cost this customer at their real volume. A flat number is too small to matter for big accounts and a giveaway for small ones.
+- **Cover realistic usage, timeboxed.** Enough credits to run the product the way they actually would for a set period, so the trial ends with a decision point. Extending is fine, but that's a deliberate second offer, not a trial that quietly never ends.
+- **Run the comfort test.** If you'd hesitate to post the number and your reasoning in a public Slack channel, the offer is too big or the reasoning isn't there yet.
+- **Loop in the team that builds the product.** They know what realistic usage costs, and for new or pre-GA products there may already be an official alpha/beta credit offer. Check before inventing your own number.
+
+The mechanics of actually adding the credit are covered in [giving credits to customers](/handbook/growth/revops/credits).
+
 We have opportunities to get creative with how we incentivize new product adoption with users. A few ideas are: 
 
 - Bring them over at competitor pricing for X months

@@ -1597,10 +1597,6 @@ export const handbookSidebar = [
                         url: '/handbook/growth/cross-selling/cross-sell-motions',
                     },
                     {
-                        name: 'Trial credits for new products',
-                        url: '/handbook/growth/cross-selling/trial-credits',
-                    },
-                    {
                         name: 'Error Tracking cross-sell',
                         url: '/handbook/growth/cross-selling/error-tracking-cross-sell',
                     },
