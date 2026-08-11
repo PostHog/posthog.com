@@ -3,6 +3,8 @@ import React from 'react'
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
 
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+import ProductImageAnnotations from 'components/ImageAnnotations/FromProduct'
+import { useProductScreenshot } from 'components/ImageAnnotations/useProductScreenshot'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
 import Divergence, { DivergenceSeries } from './Divergence'
@@ -40,6 +42,58 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
         <Figure number={n} caption={caption} legend={legend ? <span className="mt-1 block">{legend}</span> : undefined}>
             {children}
         </Figure>
+    )
+}
+
+/**
+ * A screenshot a product page already ships, framed as a book figure. The image and its
+ * annotation sets are resolved from `useProducts`, so the book never holds its own copy of a
+ * URL – update the product hook and every figure citing it follows.
+ */
+export function ScreenshotFigure({
+    n = 1,
+    caption,
+    legend,
+    product,
+    screenshot,
+    set,
+    type,
+    showKey,
+    alt,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    /** Product handle, e.g. "session_replay". */
+    product: string
+    /** Key in that product's `screenshots` object, e.g. "overview". */
+    screenshot: string
+    /** Named annotation set on the screenshot – omit for an unannotated image. */
+    set?: string
+    type?: 'dots' | 'numbered'
+    showKey?: boolean
+    alt?: string
+}): JSX.Element | null {
+    // Checked here as well as inside the annotator: without it a missing screenshot key would
+    // print an empty frame and its caption, which reads as a broken figure rather than none.
+    const shot = useProductScreenshot(product, screenshot)
+    if (!shot?.src) {
+        return null
+    }
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <ProductImageAnnotations
+                product={product}
+                screenshot={screenshot}
+                set={set}
+                type={type}
+                showKey={showKey}
+                alt={alt}
+                // The frame already supplies the border and ground, so the product page's
+                // drop shadow would read as a second frame inside it.
+                imgClassName="rounded"
+            />
+        </Fig>
     )
 }
 

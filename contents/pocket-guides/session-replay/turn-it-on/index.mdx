@@ -1,0 +1,54 @@
+---
+# Shell. Prose is lifted from the docs pages listed in <SeeAlso> at the foot of the page –
+# facts are accurate, the editorial pass is yours. TODOs mark the figures and anything a
+# person should decide rather than copy.
+title: Turning it on
+shortTitle: Turning it on
+subtitle: Install the SDK, switch recording on, then decide which sessions are worth keeping.
+bookOrder: 2
+---
+
+<RightPage>
+
+# Turning it on
+
+Two things have to be true before a session is recorded: a PostHog SDK is installed with session recording enabled, and recording is switched on in your project settings. Once both are, the library starts recording sessions by default.
+
+Recording everything is rarely what you want, and it's the main driver of cost.
+
+## Set the rules before the traffic
+
+Recording rules apply at capture time, so they only affect sessions recorded after you change them. A session you recorded at the wrong setting stays recorded that way.
+
+Start by capturing 100% of sessions and decrease from there. That's the fastest way to see how many sessions you're recording and how much data you're collecting.
+
+## Sampling
+
+Sampling records a percentage of all sessions. It's deterministic: when a session starts, PostHog hashes the session ID into a number between 0 and 1 and compares it to your sample rate. Under the rate, the session is recorded.
+
+Because the same session ID always produces the same number, the decision holds for the whole session, including across page refreshes. What you can't do is choose *which* sessions get picked – the hash decides.
+
+## Triggers
+
+You can also record on a condition instead of a coin flip: a URL, an event (an exception, say), a feature flag, or a cohort. Trigger groups are the flexible form – each group carries its own URLs, events, flags, sample rate, minimum duration, and match type, and a session is recorded if it matches any group.
+
+One trap worth knowing: "any" matching with 100% sampling records every session, and your other conditions stop mattering – the sampling condition alone matches everything. Lower the rate or switch to "all" matching.
+
+## Minimum duration
+
+A minimum duration drops sessions too short to be useful – under two seconds, say, where someone bounced before the page settled.
+
+TODO: decide whether `strictMinimumDuration` (total session age vs. recorded activity) belongs in
+a pocket guide or is a docs-only detail. Leaning docs-only.
+
+## What this costs you
+
+Session replay is free up to a monthly allowance of web and mobile recordings, then priced per recording. Recording rules and data retention are the two biggest levers on the bill, and you can set a billing limit so a traffic spike can't surprise you.
+
+<SeeAlso>
+
+See also: [Install session replay](/docs/session-replay/installation) · [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) · [Pricing](/session-replay/pricing)
+
+</SeeAlso>
+
+</RightPage>

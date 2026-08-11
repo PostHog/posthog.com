@@ -1,0 +1,60 @@
+---
+# Shell. Prose is lifted from the docs pages listed in <SeeAlso> at the foot of the page –
+# facts are accurate, the editorial pass is yours. TODOs mark the figures and anything a
+# person should decide rather than copy.
+title: What gets captured
+shortTitle: What gets captured
+subtitle: Masking runs on the device, so what you mask never reaches PostHog. What you don't, you keep.
+bookOrder: 4
+---
+
+<RightPage>
+
+# What gets captured
+
+PostHog's privacy controls run in the browser or the mobile app. Masked data is never sent over the network to PostHog – it doesn't arrive and get hidden, it never leaves the device.
+
+Which is also the reason to get this right before you record real traffic: a replay captured unmasked stays unmasked.
+
+## The defaults
+
+Any input element is highly likely to contain sensitive text, so inputs are masked by default. General text is not.
+
+That asymmetry is what surprises people. If your app renders an email address, an invoice, or someone's name as ordinary text, it's in the replay until you say otherwise.
+
+## Masking more
+
+Three levers, roughly in order of bluntness. `maskTextSelector: "*"` masks all non-input text. A CSS selector – `.email, #sensitive` – masks specific elements, and masking an element applies to its children, so `:not` selectors don't do what you want. And `maskTextFn` decides per string, which is how you mask only text that looks like an email.
+
+For anything that isn't text or an input, add the class `ph-no-capture`. The element is replaced by a block of the same size in playback – tell your team, so nobody reports the blank rectangle as a bug. It also stops autocapture events firing from that element.
+
+## Masking by exception
+
+The inverse is often the safer posture: mask everything, then unmask what you've confirmed is safe. Set `maskAllInputs` and `maskTextSelector: "*"`, then let `maskTextFn` reveal only elements carrying a data attribute you control.
+
+TODO: pick one of these two postures as the guide's recommendation and say so. A guide that lists
+both without choosing leaves the reader where they started.
+
+## The URL bar counts
+
+The replay player shows the page URL on the timeline, and query strings carry auth tokens and user identifiers. The `maskCapturedNetworkRequestFn` callback runs against the captured page URL as well as network requests, so one config redacts both – in the browser, before anything is sent.
+
+## Mobile, and network bodies
+
+Native Android and iOS record a wireframe of the view hierarchy; screenshot mode captures the real screen instead, which means it can capture anything on it. React Native and Flutter always record in screenshot mode, so masking there isn't optional.
+
+Network capture is opt-in for exactly this reason: request and response bodies are off unless you turn them on.
+
+## How long it's kept
+
+Retention is a project setting, and the ceiling depends on your plan: 30 days on Free, 90 on pay-as-you-go, a year on Boost and Scale, up to five years on Enterprise.
+
+Changing it only affects recordings captured from that point on – existing recordings keep the retention they were captured with. Once a recording is deleted it can't be restored, which is the point if you're subject to data protection regulations. To keep one past its expiry, export it to JSON.
+
+<SeeAlso>
+
+See also: [Privacy controls](/docs/session-replay/privacy) · [Network recording](/docs/session-replay/network-recording) · [Mobile replay](/docs/session-replay/mobile) · [Recording retention](/docs/session-replay/recording-retention)
+
+</SeeAlso>
+
+</RightPage>

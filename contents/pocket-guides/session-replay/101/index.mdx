@@ -1,0 +1,69 @@
+---
+# Shell. Prose is lifted from the docs pages listed in <SeeAlso> at the foot of the page –
+# facts are accurate, the editorial pass is yours. TODOs mark the figures and anything a
+# person should decide rather than copy.
+title: Session replay 101
+shortTitle: Session replay 101
+subtitle: What a replay actually is, where the recording comes from, and what watches them besides you.
+bookOrder: 1
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="session_replay"
+    screenshot="home"
+    caption="The player: playback, the session's event timeline, and the DevTools panel beneath it."
+    legend="The timeline is built from your events, so it's the same activity you'd query – not a separate recording of it."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Session replay 101
+
+Session replay records what real users do in your product and plays it back like a DVR, with a synced DevTools panel showing console logs, network requests, and errors at the exact moment they happened.
+
+Because PostHog already captures your events, every replay is enriched with the person, their properties, and the feature flags they had – so you can jump from a funnel drop-off or an exception straight to the session behind it.
+
+## What a replay is made of
+
+The player is <SeeFig n={1} />: playback, the session's event timeline beside it, and the DevTools panel. Console logs and the network waterfall are opt-in, so the panel is only as full as your capture config.
+
+TODO: one line here on snapshots vs video – it's the thing people get wrong first, and it's why a
+replay can be fast, searchable, and masked at the same time.
+
+## Where the recording comes from
+
+Recordings come from your PostHog SDKs: web, React Native, iOS, Android, and Flutter. Recording is a project setting as well as an SDK one, so it has to be switched on in project settings before anything is captured.
+
+Web has the most complete feature support. Native Android and iOS record a wireframe of the view hierarchy rather than the real look and feel, unless you turn on screenshot mode; React Native and Flutter always record in screenshot mode.
+
+## What you get for free, and what you configure
+
+Once the SDK is installed and recording is on, the library starts recording sessions by default. Everything after that is a decision: which sessions you keep, what the browser panels collect, and what gets masked before it leaves the device.
+
+Those three decisions are the next three pages of this guide.
+
+## Who watches them
+
+You watch, filter, and share replays in the PostHog web app. You can also ask PostHog AI to find sessions in plain language and summarize them, pull sessions into your editor over MCP, or read them from the API.
+
+Or have your product watch itself: Replay Vision runs AI scanners over the same recordings and turns what they see into queryable data.
+
+## What a replay won't tell you
+
+A replay shows the symptom, not the cause. Rage clicks on one button could be a slow request, a confusing label, or a real bug – and telling those apart takes a person.
+
+TODO: decide whether this section stays here or moves to the watching page. It's the most
+important idea in the volume, which argues for keeping it early.
+
+<SeeAlso>
+
+See also: [Session replay](/docs/session-replay) · [Get started](/docs/session-replay/start-here) · [Mobile replay](/docs/session-replay/mobile) · [Replay Vision](/docs/replay-vision)
+
+</SeeAlso>
+
+</RightPage>

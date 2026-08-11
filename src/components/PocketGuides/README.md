@@ -59,7 +59,9 @@ after the prose.
 |---|---|
 | `<LeftPage>` / `<RightPage>` | Figures vs prose – markers the reader interleaves |
 | `<Eyebrow>` | The small line above a title-page heading |
+| `<Frontispiece />` | The volume's cover hoggie, for its title page |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
+| `<ScreenshotFigure n caption product screenshot set>` | A screenshot a product page already ships, framed as a figure |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
@@ -70,6 +72,40 @@ after the prose.
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
 
 Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
+
+### Reusing a product page's screenshots
+
+A figure doesn't have to be drawn. `<ScreenshotFigure>` resolves an image – light, dark, alt text,
+and any named annotation sets – from `useProducts` via `components/ImageAnnotations`, so the book
+cites the same asset the marketing page uses instead of keeping its own copy of a URL:
+
+```mdx
+<ScreenshotFigure
+    n={1}
+    product="session_replay"
+    screenshot="overview"
+    set="dev-tools"
+    caption="The player, with the DevTools panel synced to the timeline."
+/>
+```
+
+`screenshot` is a key in that product hook's `screenshots` object; `set` is a named annotation set
+stored on it (`screenshots.overview.annotations['dev-tools']`), which renders as numbered markers
+plus a key. Omit `set` for a plain image, and use the figure's own `legend` instead. Annotation
+coordinates are authored with the internal tool at `/image-annotator` – see
+`components/ImageAnnotations/README.md`.
+
+Check the asset before you cite it. Product pages carry hero crops as well as full screenshots –
+`session_replay`'s `overview` is 1052×1374 because it's pinned to the corner of a hero and clipped
+by it, which in a figure frame reads as a tall, badly cropped image. Landscape screenshots with a
+`srcDark` variant (`home`, `filters`, `technical-context`) are the ones that frame well.
+
+Annotation sets are authored against one image, so its coordinates don't transfer to another
+screenshot of the same surface. Without a set, the figure's own `legend` does that job.
+
+Nothing renders if the key doesn't resolve, so a renamed screenshot drops the figure rather than
+printing an empty frame. Drawn figures are still the right answer for anything no screenshot shows
+(a funnel, a schedule, a loop) – see `figures.tsx`.
 
 ### How the reader lays a page out
 

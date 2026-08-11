@@ -1,0 +1,56 @@
+---
+# Shell. Prose is lifted from the docs pages listed in <SeeAlso> at the foot of the page –
+# facts are accurate, the editorial pass is yours. TODOs mark the figures and anything a
+# person should decide rather than copy.
+title: The replays you never got
+shortTitle: Reverse proxy
+subtitle: Ad blockers drop requests to known analytics domains. A reverse proxy routes them through yours instead.
+bookOrder: 3
+---
+
+<RightPage>
+
+# The replays you never got
+
+Ad blockers maintain lists of known analytics domains and block requests to them. A reverse proxy routes those requests through your own domain – one ad blockers haven't catalogued – which typically increases event capture by 10–30% depending on your user base.
+
+You don't need a reverse proxy to watch your first replay. You need one before you trust a decision made from replays.
+
+## The failure you can't see
+
+Nothing errors in your app when a replay is blocked. The session happens, the user leaves, and the recording simply isn't there – so the gap looks like a quiet day rather than a missing one.
+
+Two SDK debug properties tell you it's happening. `$sdk_debug_recording_script_not_loaded` is `true` when `recorder.js` never loaded at all. And if `$sdk_debug_replay_internal_buffer_length` keeps growing across a session while `$sdk_debug_replay_flushed_size` stays at `0`, the upload is being blocked – the SDK recorded the session and never got to send it.
+
+## The managed proxy
+
+PostHog's managed reverse proxy runs on a subdomain you own, and PostHog handles SSL certificates, routing, and maintenance. It's free for all PostHog Cloud users; all you need is access to your DNS.
+
+Pick a neutral subdomain. Anything containing `analytics`, `tracking`, `telemetry`, `posthog`, or `ph` is a term ad blockers already target, and a blocked proxy achieves nothing. Point a CNAME at the domain PostHog generates, leave your DNS provider's own proxy off (grey cloud, not orange, on Cloudflare), and the status moves from **waiting** to **issuing** to **live** – usually 2–5 minutes, up to 30 if propagation is slow.
+
+Two constraints to know before you enable it: traffic routes through Cloudflare, listed as a subprocessor in our DPA, and the feature is not HIPAA-compliant – any BAA you have with PostHog doesn't cover it.
+
+## Rolling your own, and what it costs
+
+If the managed proxy doesn't fit, you can deploy your own – and then every proxied byte is yours to pay for. Events, session recordings, feature flags, and SDK assets all flow through your provider and count against its bandwidth and request quotas.
+
+Replay is the fat one. On platforms that bill egress or function invocations – Vercel, Netlify, CloudFront, Railway – recording snapshots are what makes the bill interesting.
+
+PostHog can't help troubleshoot a self-hosted proxy's configuration.
+
+## Where a proxy doesn't save you
+
+DNS-level blocking can still follow your subdomain's CNAME chain to a known analytics domain and drop the request before the browser ever sees it. This needs a custom resolver – NextDNS, Pi-hole – so it's a small share of users. Browser extensions can't do it: they only see HTTP requests after DNS has resolved.
+
+And your own Content-Security-Policy will drop `recorder.js` just as dead as any extension.
+
+TODO: decide whether CSP earns a paragraph here or a one-line pointer. It's a different failure
+with an identical symptom, which argues for keeping it.
+
+<SeeAlso>
+
+See also: [Deploy a reverse proxy](/docs/advanced/proxy) · [Managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) · [Content security policy](/docs/advanced/content-security-policy) · [Replay troubleshooting](/docs/session-replay/troubleshooting)
+
+</SeeAlso>
+
+</RightPage>

@@ -33,6 +33,13 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 2,
         comingSoon: true,
     },
+    {
+        id: 'session-replay',
+        title: 'Session replay',
+        description: 'Watch how people actually use your product – or let Replay Vision watch it for you.',
+        token: 'yellow',
+        volume: 3,
+    },
 ]
 
 export function volumeById(id: string): PocketGuideVolume | undefined {

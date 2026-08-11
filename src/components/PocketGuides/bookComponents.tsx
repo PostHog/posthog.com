@@ -11,8 +11,9 @@ import {
     LoopFigure,
     ReportFigure,
     ScoutFigure,
+    ScreenshotFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 
 export { EntryProvider } from './bookContext'
 
@@ -27,6 +28,7 @@ export const bookMdxComponents = {
     RightPage,
     SeeFig,
     Eyebrow,
+    Frontispiece,
     Fig,
     ReportFigure,
     AnatomyFigure,
@@ -35,6 +37,7 @@ export const bookMdxComponents = {
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    ScreenshotFigure,
     LoopFigure,
     Watches,
     Enable,

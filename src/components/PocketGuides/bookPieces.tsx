@@ -5,6 +5,8 @@ import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
+import { volumeIdFromUrl } from './bookModel'
+import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
@@ -14,6 +16,24 @@ export function SeeFig({ n }: { n: number }): JSX.Element {
 /** The small line above a title page's heading. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
     return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
+}
+
+/**
+ * The volume's specimen on its title page – the same hoggie the shelf cover carries, so a book
+ * still looks like itself once it's open. Not a numbered figure: it illustrates the volume rather
+ * than teaching anything, and the title page keeps its two-column layout only while figure-less.
+ */
+export function Frontispiece(): JSX.Element | null {
+    const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
+    if (!Art) {
+        return null
+    }
+    return (
+        <div aria-hidden="true" className="mb-[1.2em] mt-[0.4em] flex justify-center @lg:justify-start">
+            {/* Em-based cap: the specimen scales with the reader's Aa control like everything else. */}
+            <Art className="h-auto w-full max-w-[14em]" />
+        </div>
+    )
 }
 
 /** The signal sources this scout reads, from the use case's `watches` frontmatter. */
