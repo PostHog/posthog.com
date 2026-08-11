@@ -1393,6 +1393,8 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
+    const isInitialMount = useRef(true)
+
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
@@ -1434,13 +1436,15 @@ function ReaderViewContent({
 
         if (hash) {
             waitForImagesAndScroll()
-        } else if (!window.location.href.includes(':~:text=')) {
-            // Preserve the browser's native scroll-to-text-fragment behavior — otherwise
-            // this reset yanks the ScrollArea back to the top after Chrome scrolled it into view.
+        } else if (!isInitialMount.current) {
+            // On first mount the browser has already positioned us (top of page, native
+            // text-fragment target, or a restored scroll from history). Reset-to-top only
+            // applies to subsequent same-window navigations to a new page.
             scrollElement.scrollTo({
                 top: 0,
             })
         }
+        isInitialMount.current = false
     }, [appWindow?.path, hash])
 
     const articleColumnClasses = [
