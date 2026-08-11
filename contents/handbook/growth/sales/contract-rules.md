@@ -276,6 +276,14 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
+#### How to actually cover the gap
+
+Where we've agreed to cover usage for free until the renewal date, do it by adding a one-off credit allocation to the customer's credit balance in billing admin. You don't need billing engineering to do this.
+
+Always add the credit _before_ the invoice is generated. If you wait for the invoice and credit it afterwards, we've charged the customer an amount we already knew we weren't going to collect.
+
+You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up if it falls short, or wait until the last day before the invoice is generated so you're working from close to actual usage. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract.
+
 For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
 
 > In scenario one above, if their expansion credit purchase takes them into a higher volume discount tier, we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in discount when the expansion order form discount tier is greater than the discount tier of the original order form.
