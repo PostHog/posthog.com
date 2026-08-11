@@ -142,7 +142,7 @@ Unleash is for autonomous development teams who want a lightweight way to test, 
 
 ### How much does Unleash cost?
 
-Unleash's open source self-hosted plan is free with unlimited feature flags and experiments. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for teams that want annual contracts and dedicated support.
+Unleash's open source self-hosted plan is free with unlimited feature flags and experiments. A self-service Enterprise plan starts at $75 per seat per month, available as cloud-hosted or self-hosted, with a 5-seat minimum for self-hosted. Custom Enterprise pricing is available for teams that want annual contracts and dedicated support.
 
 > #### Bottom line
 >
