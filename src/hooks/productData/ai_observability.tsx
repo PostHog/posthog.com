@@ -256,6 +256,9 @@ export const aiObservability = {
         },
     ],
     comparison: {
+        // The table runs 60+ rows with the sub-sections – render one screenful
+        // with a "Show full comparison" toggle.
+        collapsible: true,
         summary: {
             them: [
                 {
