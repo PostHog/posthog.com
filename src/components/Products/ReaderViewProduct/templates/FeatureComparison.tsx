@@ -4,9 +4,7 @@ import OSButton from 'components/OSButton'
 import { SectionComponentProps } from '../types'
 
 /** Collapsed height cap. Roughly one screenful of rows. */
-const COLLAPSED_MAX_PX = 700
-/** Don't bother collapsing tables that barely exceed the cap. */
-const COLLAPSE_SLACK_PX = 200
+const COLLAPSED_MAX_PX = 900
 
 const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
     const comparison = productData?.comparison
@@ -20,7 +18,7 @@ const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
         const el = wrapperRef.current
         if (!el) return
         // scrollHeight reports the full content height even under the max-h cap.
-        const measure = () => setOversized(el.scrollHeight > COLLAPSED_MAX_PX + COLLAPSE_SLACK_PX)
+        const measure = () => setOversized(el.scrollHeight > COLLAPSED_MAX_PX)
         measure()
         const observer = new ResizeObserver(measure)
         observer.observe(el)
@@ -44,7 +42,7 @@ const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
     return (
         <section id={id} className="scroll-mt-20 not-prose">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-4">Feature comparison</h2>
-            <div ref={wrapperRef} className={collapsed ? 'relative max-h-[700px] overflow-hidden' : undefined}>
+            <div ref={wrapperRef} className={collapsed ? 'relative max-h-[900px] overflow-hidden' : undefined}>
                 <ProductComparisonTable
                     competitors={competitors}
                     rows={comparison.rows}
