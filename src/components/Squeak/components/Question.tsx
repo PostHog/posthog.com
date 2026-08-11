@@ -56,6 +56,42 @@ type QuestionProps = {
 
 export const CurrentQuestionContext = createContext<any>({})
 
+// The site's posthog-js api_host is a CloudFront proxy that doesn't forward
+// /api/conversations/* (returns 403), so we can't use posthog.conversations.sendMessage()
+// and call the PostHog API host directly instead. Payload shape mirrors the SDK's.
+// TODO: switch back to posthog.conversations.sendMessage() once the proxy forwards conversations paths
+const CONVERSATIONS_API_HOST = 'https://us.i.posthog.com'
+
+const createSupportTicket = async (
+    posthog: NonNullable<ReturnType<typeof usePostHog>>,
+    message: string,
+    traits: { name: string | null; email: string | null }
+) => {
+    const configResponse = await fetch(`${CONVERSATIONS_API_HOST}/array/${posthog.config.token}/config`)
+    if (!configResponse.ok) throw new Error(`Failed to fetch conversations config (${configResponse.status})`)
+    const remoteConfig = await configResponse.json()
+    const conversationsToken = remoteConfig?.conversations?.token
+    if (!conversationsToken) throw new Error('Conversations are not enabled for this project')
+    const response = await fetch(`${CONVERSATIONS_API_HOST}/api/conversations/v1/widget/message`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Conversations-Token': conversationsToken,
+        },
+        body: JSON.stringify({
+            message,
+            traits,
+            // null ticket_id + fresh widget_session_id = always create a new ticket
+            ticket_id: null,
+            widget_session_id: crypto.randomUUID(),
+            distinct_id: posthog.get_distinct_id?.(),
+            session_context: { current_url: window.location.href },
+        }),
+    })
+    if (!response.ok) throw new Error(`Failed to create support ticket (${response.status})`)
+    return response.json()
+}
+
 const TopicSelect = (props: {
     selectedTopics: StrapiData<TopicData[]>
     onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
@@ -483,12 +519,12 @@ export function Question(props: QuestionProps) {
             .filter(Boolean)
             .join('\n')
         try {
+            if (!posthog) throw new Error('PostHog is not loaded')
             // Attribute the ticket to the question author so support replies reach them
-            await posthog?.conversations?.sendMessage(
-                message,
-                authorEmail ? { name: authorName, email: authorEmail } : undefined,
-                true
-            )
+            await createSupportTicket(posthog, message, {
+                name: authorName,
+                email: authorEmail || null,
+            })
             setEscalateState('sent')
         } catch (error) {
             posthog?.captureException?.(error)
