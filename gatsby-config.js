@@ -1,5 +1,6 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
+const pLimit = require('p-limit')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}.local`,
@@ -10,9 +11,12 @@ require('dotenv').config({
 })
 
 const getQuestionPages = async (base) => {
+    const limit = pLimit(3)
+
     const fetchQuestions = async (page) => {
+        // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
-            populate: '*',
+            fields: ['permalink'],
             pagination: {
                 page,
                 pageSize: 100,
@@ -34,8 +38,7 @@ const getQuestionPages = async (base) => {
                     throw error
                 }
                 console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
-                // Simple delay between retries (1 second)
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                await new Promise((resolve) => setTimeout(resolve, 1000 * attempt))
             }
         }
     }
@@ -43,7 +46,9 @@ const getQuestionPages = async (base) => {
     const initialResponse = await fetchQuestions(1)
     const totalPages = initialResponse.meta.pagination.pageCount
 
-    const allResponses = await Promise.all(Array.from({ length: totalPages }, (_, i) => fetchQuestions(i + 1)))
+    const allResponses = await Promise.all(
+        Array.from({ length: totalPages }, (_, i) => limit(() => fetchQuestions(i + 1)))
+    )
 
     const questions = allResponses.flatMap((response) =>
         response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
@@ -191,10 +196,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-strapi-pages`,
+            resolve: `gatsby-source-git-metadata`,
             options: {
-                strapiURL: process.env.STRAPI_URL,
-                strapiKey: process.env.STRAPI_API_KEY,
+                owner: 'PostHog',
+                repo: 'posthog.com',
             },
         },
         `gatsby-plugin-image`,

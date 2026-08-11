@@ -94,8 +94,13 @@ export const support = {
         textColor: 'text-black', // tw
     },
     hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png',
+            alt: 'A support team of hedgehogs at their desks',
+        },
         mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/hog_phone_638d7d1ae4.png',
+            alt: 'A hedgehog answering a ticket on the phone',
         },
     },
     useCases: {
@@ -115,6 +120,8 @@ export const support = {
         ],
     },
     ai: {
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/support_hog_f7ed8447c9.png',
+        imageAlt: 'A lifeguard hedgehog with binoculars and a life ring',
         intro: 'Ask PostHog AI to triage, investigate, and answer tickets. Works in PostHog AI (in-app chat), PostHog Desktop, Slack, and your product editor (using the MCP).',
         mcpFeatures: ['conversations'],
         groups: [

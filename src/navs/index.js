@@ -1431,36 +1431,49 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Customer success overview',
+                        name: 'Overview',
                         url: '/handbook/cs-and-onboarding/customer-success',
-                    },
-                    {
-                        name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
-                    },
-                    {
-                        name: 'New starter onboarding',
-                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
                     },
                     {
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: 'Lifecycle of CSM engagement',
+                        name: 'Onboarding',
+                    },
+                    {
+                        name: 'New starters',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
+                        name: 'Team leads',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding-team-leads',
+                    },
+                    {
+                        name: 'Working with customers',
+                    },
+                    {
+                        name: 'Newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
+                    },
+                    {
+                        name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
+                        name: 'Unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                    {
+                        name: 'Automation & AI',
                     },
                     {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
-                        name: 'Using AI to analyze customer issues',
+                        name: 'Analyzing customer issues',
                         url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
-                    },
-                    {
-                        name: 'Engaging unengaged customers',
-                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
                 ],
             },
@@ -1627,12 +1640,16 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                     {
-                        name: 'Basic account review checklist',
+                        name: 'Basic implementation review',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
                     {
                         name: 'Handling customer issues',
                         url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
+                        name: 'Getting people to talk to you',
+                        url: '/handbook/account-management/getting-people-to-talk-to-you',
                     },
                     {
                         name: 'Health tracking',
@@ -1973,6 +1990,10 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2091,10 +2112,6 @@ export const communityMenu = {
                         { name: 'SQL', url: '/tutorials/categories/sql' },
                         { name: 'Insights', url: '/tutorials/categories/insights' },
                         { name: 'Persons', url: '/tutorials/categories/persons' },
-                        { name: 'Sessions', url: '/tutorials/categories/sessions' },
-                        { name: 'Settings', url: '/tutorials/categories/settings' },
-                        { name: 'Site apps', url: '/tutorials/categories/site-apps' },
-                        { name: 'Team collaboration', url: '/tutorials/categories/team-collaboration' },
                         { name: 'Toolbar', url: '/tutorials/categories/toolbar' },
                     ],
                 },
@@ -2102,19 +2119,13 @@ export const communityMenu = {
                     name: 'Product Analytics',
                     icon: 'IconGraph',
                     color: 'blue',
-                    url: '/tutorials/categories/correlation-analysis',
+                    url: '/tutorials/categories/dashboards',
                     children: [
-                        { name: 'Correlation analysis', url: '/tutorials/categories/correlation-analysis' },
                         { name: 'Dashboards', url: '/tutorials/categories/dashboards' },
                         { name: 'Funnels', url: '/tutorials/categories/funnels' },
                         { name: 'Group analytics', url: '/tutorials/categories/group-analytics' },
-                        { name: 'Lifecycle', url: '/tutorials/categories/lifecycle' },
-                        { name: 'Paths', url: '/tutorials/categories/paths' },
                         { name: 'Retention', url: '/tutorials/categories/retention' },
-                        { name: 'Stickiness', url: '/tutorials/categories/stickiness' },
-                        { name: 'Subscriptions', url: '/tutorials/categories/subscriptions' },
                         { name: 'Trends', url: '/tutorials/categories/trends' },
-                        { name: 'User paths', url: '/tutorials/categories/user-paths' },
                     ],
                 },
                 {
@@ -2140,17 +2151,13 @@ export const communityMenu = {
                     name: 'CDP',
                     color: 'yellow',
                     icon: 'IconPerson',
-                    url: '/tutorials/categories/filters',
-                    children: [
-                        { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Zapier', url: '/tutorials/categories/zapier' },
-                    ],
+                    url: '/tutorials/categories/cdp',
                 },
                 {
                     name: 'AI Observability',
                     color: 'purple',
                     icon: 'IconLlmAnalytics',
-                    url: '/tutorials/ai-engineering',
+                    url: '/tutorials/categories/ai-observability',
                 },
             ],
         },
@@ -2388,6 +2395,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                    },
                 },
                 {
                     name: 'Pricing',
@@ -3706,7 +3721,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'AI Observability',
-                            url: '/docs/ai-observability',
+                            url: 'https://posthog.com/docs/ai-observability',
+                            external: true,
                         },
                         {
                             name: 'Markdown and llms.txt',
@@ -6719,6 +6735,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Self-driving',
+                    url: '/docs/ai-observability/self-driving',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -6820,10 +6847,6 @@ export const docsMenu = {
                     url: '/docs/ai-observability/errors',
                     icon: 'IconWarning',
                     color: 'red',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tools',
@@ -7809,6 +7832,32 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Push notifications',
+                    url: '/docs/workflows/push-notifications',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/push-notifications',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/workflows/push-notifications/ios',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/workflows/push-notifications/android',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/workflows/push-notifications/react-native',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/workflows/push-notifications/flutter',
+                        },
+                    ],
+                },
+                {
                     name: 'Workflow events',
                     url: '/docs/workflows/engagement-events',
                     icon: 'IconGraph',
@@ -7902,6 +7951,7 @@ export const docsMenu = {
                         { name: 'Python', url: '/docs/logs/installation/python' },
                         { name: 'Go', url: '/docs/logs/installation/go' },
                         { name: 'Java', url: '/docs/logs/installation/java' },
+                        { name: '.NET', url: '/docs/logs/installation/dotnet' },
                         { name: 'Rust', url: '/docs/logs/installation/rust' },
                         { name: 'Next.js', url: '/docs/logs/installation/nextjs' },
                         { name: 'JavaScript (web)', url: '/docs/logs/installation/javascript' },
@@ -8099,6 +8149,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/distributed-tracing/installation' },
                         { name: 'Node.js', url: '/docs/distributed-tracing/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/distributed-tracing/installation/nextjs' },
                         { name: 'Python', url: '/docs/distributed-tracing/installation/python' },
                         { name: 'Go', url: '/docs/distributed-tracing/installation/go' },
                         { name: 'Java', url: '/docs/distributed-tracing/installation/java' },

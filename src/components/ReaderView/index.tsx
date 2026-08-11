@@ -1393,9 +1393,19 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
+    const previousPath = useRef<string | undefined>(undefined)
+
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
+
+        // Focus follows the content on navigation, so the scroll keys have somewhere to act. Without
+        // this, focus stays on <body> after a page load (or on the sidebar link that was just
+        // clicked, whose own ScrollArea would swallow the keys instead). Never steal focus from a
+        // field being typed in, e.g. sidebar search.
+        if (!(document.activeElement as HTMLElement | null)?.closest('input, textarea, [contenteditable="true"]')) {
+            scrollElement.focus({ preventScroll: true })
+        }
 
         const waitForImagesAndScroll = async () => {
             const images = contentRef.current?.querySelectorAll('img') || []
@@ -1424,9 +1434,16 @@ function ReaderViewContent({
             }
         }
 
+        const pathChanged = previousPath.current !== undefined && previousPath.current !== appWindow?.path
+        previousPath.current = appWindow?.path
+
         if (hash) {
             waitForImagesAndScroll()
-        } else {
+        } else if (pathChanged) {
+            // Reset-to-top only applies to same-window navigations to a new page. On first
+            // mount (and any effect re-runs before `appWindow` settles), the browser has
+            // already positioned us — for a `:~:text=` URL, native scroll-to-fragment;
+            // otherwise top of page. Don't fight the browser.
             scrollElement.scrollTo({
                 top: 0,
             })
