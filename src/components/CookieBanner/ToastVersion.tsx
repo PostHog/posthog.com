@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -8,14 +8,13 @@ import { IconX } from '@posthog/icons'
 export default function CookieBannerToast() {
     const { addToast } = useToast()
     const posthog = usePostHog()
-    const [hasShownBanner, setHasShownBanner] = useState(false)
 
     useEffect(() => {
         const consent = localStorage.getItem('cookie_consent')
 
-        if (!consent && !hasShownBanner) {
-            setHasShownBanner(true)
+        if (!consent) {
             addToast({
+                id: 'cookie-banner',
                 title: 'Legally-required cookie banner',
                 description: (
                     <>
@@ -63,7 +62,7 @@ export default function CookieBannerToast() {
             // If acknowledgement was already received, ensure PostHog is configured correctly
             posthog?.set_config({ persistence: 'localStorage+cookie' })
         }
-    }, [addToast, posthog, hasShownBanner])
+    }, [addToast, posthog])
 
     return null
 }
