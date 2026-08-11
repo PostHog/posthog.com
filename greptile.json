@@ -40,5 +40,6 @@
     "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\n.storybook/**\n/*.json\n/*.js\n/*.ts\n/*.jsx\ncontents/**/*.json\ncontents/**/*.js\ncontents/**/*.ts\ncontents/**/*.jsx\nstatic/**/*.json\nstatic/**/*.js\nstatic/**/*.ts\nstatic/**/*.jsx",
     "triggerOnUpdates": false,
     "shouldUpdateDescription": false,
-    "disabledLabels": ["no-greptile"]
+    "disabledLabels": ["no-greptile"],
+    "excludeAuthors": ["posthog[bot]"]
 }
