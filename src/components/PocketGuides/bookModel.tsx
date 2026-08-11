@@ -101,10 +101,11 @@ export function bookTabs(pages: BookPageEntry[], activeUrl: string): BookTab[] {
     }))
 }
 
-/** Reading size, e-reader style: one root size scales the whole em-based page. */
-export const FONT_SIZES = [15, 17, 19, 21] as const
+/** Reading size, e-reader style: one root size scales the whole em-based page. The default
+ * matches the site's body text (16px, `.article-content`'s text-base). */
+export const FONT_SIZES = [16, 18, 20, 22] as const
 const FONT_SIZE_KEY = 'pocket-guide-font-size'
-const DEFAULT_FONT_SIZE = 15
+const DEFAULT_FONT_SIZE = 16
 
 export function useBookFontSize(): { fontSize: number; stepFontSize: (delta: number) => void } {
     // SSR the default, adopt the saved choice after mount – localStorage in render would mismatch.

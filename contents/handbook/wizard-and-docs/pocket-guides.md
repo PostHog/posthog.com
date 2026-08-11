@@ -49,6 +49,20 @@ contents/pocket-guides/<volume>/<slug>/
 `<Term>` hover-card definitions live in `src/components/SelfDrivingInbox/terms.tsx`, each
 quoted from the docs page it links to. If a docs definition changes, update the quote there.
 
+## Adding new content elements
+
+The book styles every markdown element itself (its container opts out of the site's prose
+styling), so a new kind of content – a table, a new list style, anything the guides haven't
+used before – renders unstyled until the book's component map supports it.
+
+- **Check the rendered page** whenever you introduce an element the guides haven't used yet.
+  Unsupported elements fail silently: browser-default styling, not an error.
+- **Inherit website defaults instead of reinventing them.** Wrap the element in the site's
+  native styling (see how lists and tables borrow `.article-content` in
+  `src/components/PocketGuides/bookPieces.tsx`) rather than writing book-specific styles.
+- **Test text resizing on web and mobile.** Use the Aa control at every size, at desktop and
+  phone widths – the book's type scales from one base size, and new elements need to keep up.
+
 ## Measuring
 
 Reader interactions emit the `pocket_guide_interaction` event (marker glosses, term hovers,
