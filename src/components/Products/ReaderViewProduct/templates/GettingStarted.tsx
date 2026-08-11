@@ -55,7 +55,7 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                     title="Install with AI"
                     description="Run this command in your terminal or AI editor."
                     command={installCommand}
-                    footer={<WizardFrameworksTeaser />}
+                    footer={<WizardFrameworksTeaser rows={productData?.wizardSupports} />}
                 />
                 <div className="border border-primary rounded p-5 bg-primary">
                     <h3 className="text-lg font-bold text-primary mt-0 mb-2">Install without AI</h3>

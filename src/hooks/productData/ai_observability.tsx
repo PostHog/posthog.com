@@ -16,7 +16,7 @@ import {
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
-import { applications, topFeatures } from './ai_observability/slides'
+import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
 
 export const aiObservability = {
     ...getTool('ai_observability'),
@@ -36,6 +36,9 @@ export const aiObservability = {
     // started install CTAs – the bare wizard installs a generic SDK instead of
     // instrumenting LLM calls.
     wizardCommand: 'ai-observability',
+    // The install CTAs list LLM providers instead of app frameworks – that's
+    // what the ai-observability wizard actually instruments.
+    wizardSupports,
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
@@ -115,7 +118,7 @@ export const aiObservability = {
     overview: {
         title: 'Observe and fix AI in production',
         description:
-            'AI Observability is what makes your agent self-driving: Trace generations, evaluate live traffic, and set up anomaly alerts. The context agents use to fix hallucinations and improve user experience.',
+            'Trace generations, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
         eli5: 'AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Evaluations and anomaly alerting sit atop that data allowing you to understand usage patterns and issues without reading thousands of conversations. You can connect these results to self-driving and have your AI fix and improve itself.',
         textColor: 'text-white',
         layout: 'overlay',

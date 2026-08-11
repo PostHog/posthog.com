@@ -77,6 +77,37 @@ const additionalProviders = [
     'And more...',
 ]
 
+/**
+ * "Supports OpenAI, Anthropic, …" teaser rows for the install CTAs. The wizard
+ * instruments LLM providers here, not app frameworks, so the shared
+ * `WizardFrameworksTeaser` gets this list instead of the installation taxonomy.
+ */
+export const wizardSupports = [
+    ...nativeIntegrations
+        .filter((i) => !i.isManualCapture)
+        .map((i) => ({
+            slug: i.link.split('/').pop() as string,
+            label: i.name,
+            url: i.link,
+            image: i.logo ?? i.logoLight,
+            external: false,
+        })),
+    ...additionalProviders
+        .filter((name) => name !== 'And more...')
+        .map((name) => ({
+            slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            label: name,
+            url: '/docs/ai-observability/installation',
+            external: false,
+        })),
+    {
+        slug: 'manual-capture',
+        label: 'Manual capture',
+        url: '/docs/ai-observability/installation/manual-capture',
+        external: false,
+    },
+]
+
 const IntegrationGrid = () => (
     <div className="@container not-prose my-6">
         <ul className="grid grid-cols-2 @lg:grid-cols-4 gap-2 list-none p-0 m-0">
