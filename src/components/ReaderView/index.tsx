@@ -1393,7 +1393,7 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
-    const isInitialMount = useRef(true)
+    const previousPath = useRef<string | undefined>(undefined)
 
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
@@ -1434,17 +1434,20 @@ function ReaderViewContent({
             }
         }
 
+        const pathChanged = previousPath.current !== undefined && previousPath.current !== appWindow?.path
+        previousPath.current = appWindow?.path
+
         if (hash) {
             waitForImagesAndScroll()
-        } else if (!isInitialMount.current) {
-            // On first mount the browser has already positioned us (top of page, native
-            // text-fragment target, or a restored scroll from history). Reset-to-top only
-            // applies to subsequent same-window navigations to a new page.
+        } else if (pathChanged) {
+            // Reset-to-top only applies to same-window navigations to a new page. On first
+            // mount (and any effect re-runs before `appWindow` settles), the browser has
+            // already positioned us — for a `:~:text=` URL, native scroll-to-fragment;
+            // otherwise top of page. Don't fight the browser.
             scrollElement.scrollTo({
                 top: 0,
             })
         }
-        isInitialMount.current = false
     }, [appWindow?.path, hash])
 
     const articleColumnClasses = [
