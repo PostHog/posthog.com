@@ -145,14 +145,12 @@ When you target a person property of `distinct_id equals`, the value field searc
 
 #### Stop evaluation at first matching condition set
 
-**Stop evaluation at first matching condition set** is an opt-in circuit breaker. It's off by default, and leaving it off means your flag evaluates exactly as it always has. Turning it on only ever adds a way for evaluation to stop early – so whether you want it depends entirely on what you're trying to achieve with the flag.
+This setting is off by default, and leaving it off means your flag evaluates exactly as it always has. Turning it on only changes what happens when a user matches a condition set's property filters but falls outside that set's rollout percentage:
 
-The setting changes what happens when a user matches a condition set's property filters but falls outside that set's rollout percentage:
+- **Off (default):** the user falls through to the next condition set. A pass on any condition set is a pass.
+- **On:** evaluation stops there and the flag returns `false`. Later condition sets are never evaluated.
 
-- **Off (default):** the user "falls through" to the next condition set and keeps being evaluated. A pass on any condition set is a pass.
-- **On:** evaluation stops right there and the flag returns `false`. Later condition sets are never evaluated.
-
-Condition sets are always evaluated top to bottom, in the order they appear in the UI.
+Condition sets are evaluated top to bottom, in the order they appear in the UI.
 
 ##### Example
 
@@ -164,24 +162,17 @@ Say a flag has three condition sets, and your test user matches the property fil
 | 2 | `plan` equals `enterprise` | 25% |
 | 3 | Everyone | 100% |
 
-**With the setting off (default):**
+**Off (default):** the user is evaluated against set 1, where there's a 25% chance they fall inside the rollout. If they're in the 75% that don't, they move on to set 2, then to set 3 – where they match the 100% rollout and the flag returns `true`.
 
-1. The user is evaluated against set 1. They match the property filter, and there's a 25% chance they fall inside the rollout.
-2. If they're in the 75% that don't, they move on to set 2. Same story there.
-3. If they don't match set 2's rollout either, they move on to set 3, match the 100% rollout, and the flag returns `true`.
+**On:** the user is evaluated against set 1. If they're in the 75% outside its rollout, the flag returns `false` immediately and sets 2 and 3 are never evaluated.
 
-**With the setting on:**
-
-1. The user is evaluated against set 1. They match the property filter, and there's a 25% chance they fall inside the rollout.
-2. If they're in the 75% that don't, the flag returns `false` immediately. Sets 2 and 3 are never evaluated.
-
-This is useful when you want more deterministic flag behavior – for example, ensuring that a user who is excluded by a targeted condition's rollout doesn't fall through to a broader catch-all condition below.
+Use this when you want a user who is excluded by a targeted condition's rollout to stay excluded, rather than falling through to a broader catch-all condition below.
 
 ##### Things to keep in mind
 
-- **The rollout has to be what excluded them.** Early exit only triggers when a condition set's property filters *matched* and only the rollout check failed. If the user doesn't match a set's property filters at all, that set is simply skipped and evaluation continues as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
-- **Order your condition sets narrowest first.** Because evaluation stops at the first property-filter match that fails its rollout, a broad catch-all set placed near the top will short-circuit the more specific sets below it.
-- **Rollout buckets are shared across condition sets.** A user's bucket is derived from the flag key and their identifier, not from the individual condition set, so the same user is in the same position for every set. That means falling through to a set with an equal or smaller rollout percentage can never succeed – only a larger one can.
+- **The rollout has to be what excluded them.** If a user doesn't match a condition set's property filters at all, that set is skipped and evaluation continues as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
+- **Order your condition sets narrowest first.** A broad catch-all set near the top will short-circuit the more specific sets below it.
+- **Rollout buckets are shared across condition sets.** A user's bucket comes from the flag key and their identifier, not the condition set, so falling through to a set with an equal or smaller rollout percentage can never succeed – only a larger one can.
 
 <CalloutBox icon="IconInfo" title="Local evaluation support varies by SDK" type="fyi">
 
