@@ -1,0 +1,87 @@
+---
+title: AI Observability 101
+shortTitle: AI Observability 101
+subtitle: What PostHog captures on every LLM call, and why one big number hides the problem.
+bookOrder: 1
+---
+
+<LeftPage>
+
+<TraceFigure
+    n={1}
+    caption="One trace: everything a single user request did."
+    rows={[
+        { kind: 'trace', label: 'summarize_thread', meta: 'person 4821 · 8.4s · $0.031' },
+        { kind: 'span', label: 'retrieve_context', meta: '0.6s · 14 documents', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '1,240 in · 380 out · $0.011', depth: 1 },
+        { kind: 'span', label: 'search_tickets', meta: '1.9s · tool call', depth: 1 },
+        { kind: 'generation', label: 'claude-sonnet-4-5', meta: '3,100 in · 210 out · $0.020', depth: 1 },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# AI Observability 101
+
+Every LLM call your product makes is valuable performance and user insight. You can wrap your provider in the PostHog SDK so every call shows up in PostHog with its prompt, response, cost, and the person who triggered it.
+
+They arrive as PostHog events so you can put them in funnels, break them down by plan, or jump to the session replay of the user who made them.
+
+## The three events
+
+AI Observability (AIO) events are composed of three event types: `$ai_trace`, `$ai_generation`, and `$ai_span`:
+- A <Term name="generation" /> is one call to a model.
+- A <Term name="span" /> is a step around it that isn't a model call, like a retrieval or a tool.
+- A <Term name="trace" /> is the whole interaction, stitched together by `$ai_trace_id`, so a multi-step agent run reads as one story instead of a pile of unrelated requests.
+
+Below, <SeeFig n={1} /> shows all three in one request.
+
+## What lands on a generation
+
+Every `$ai_generation` event arrives with the properties you'd otherwise be computing yourself:
+
+| Property | What it holds | Example |
+| --- | --- | --- |
+| `$ai_model`, `$ai_provider` | Which model answered, and who served it | `gpt-4o-mini`, `openai` |
+| `$ai_input_tokens`, `$ai_output_tokens` | Token counts, split so you can see which side grew | `100`, `200` |
+| `$ai_total_cost_usd` | Cost for that call, including cache reads | `0.031` |
+| `$ai_latency`, `$ai_time_to_first_token` | How long the call took, and how long before anything appeared | `4.2s`, `0.8s` |
+| `$ai_is_error` | Whether the call failed | `false` |
+
+You can attach your own properties too to turn "something changed" into "this specific thing changed, here."
+
+## What a dedicated LLM tool can't do
+
+Most AI observability tools are a second analytics stack: their own dashboards, their own idea of who a user is, and no knowledge of anything that happened before or after the model answered. Yours already knows all of that, because an LLM call is an ordinary PostHog event sitting next to the rest of your product data.
+
+So the questions you can ask stop being about the model and start being about the product:
+
+- **Does the AI feature actually keep people?** Put `$ai_generation` in a funnel or a retention chart next to signup and conversion, like any other event.
+- **Which customers is this expensive for?** Break cost down by plan, company, or any person property you already send – you don't have to re-model who your users are.
+- **What did this person see?** Jump from a bad answer to their [session replay](/docs/ai-observability/link-session-replay) and any [exception](/docs/ai-observability/link-error-tracking) the request threw.
+- **Did the new prompt help?** Roll it out behind a feature flag and read the difference in an experiment, measured on conversion rather than a benchmark.
+
+One habit makes all of it readable: divide and split. A raw count hides the answer – errors doubling could be a broken prompt or twice the traffic, and only errors ÷ generations tells you which. An average hides it too – 4 seconds of latency is mostly whichever model takes the most traffic, until you split by `$ai_model` and find the reasoning model sitting at 40 seconds.
+
+## What this volume covers
+
+This volume covers four use cases, each ending in a prompt you can run in PostHog AI against your own data:
+
+- **Wrong answers that never error** – evaluations, for the failures error tracking can't see.
+- **An AI bill nobody can explain** – cost attribution by feature, model, and customer.
+- **Answers that get thrown away** – what users did with the answer, which is the only quality score that pays.
+- **You can't tell why the model said that** – reading one trace, when the aggregates have found something.
+
+None of it works until your LLM calls are arriving. The wizard instruments them for you, or you can [wrap your provider by hand](/docs/ai-observability/installation) – there's a guide for OpenAI, Anthropic, Vercel AI SDK, LangChain, and 20 more.
+
+<Setup />
+
+<SeeAlso>
+
+See also: [AI Observability docs](/docs/ai-observability) · [Installation](/docs/ai-observability/installation)
+
+</SeeAlso>
+
+</RightPage>
