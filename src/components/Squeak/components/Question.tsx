@@ -62,34 +62,46 @@ export const CurrentQuestionContext = createContext<any>({})
 // TODO: switch back to posthog.conversations.sendMessage() once the proxy forwards conversations paths
 const CONVERSATIONS_API_HOST = 'https://us.i.posthog.com'
 
+const ESCALATE_TIMEOUT_MS = 15000
+
 const createSupportTicket = async (
     posthog: NonNullable<ReturnType<typeof usePostHog>>,
     message: string,
     traits: { name: string | null; email: string | null }
 ) => {
-    const configResponse = await fetch(`${CONVERSATIONS_API_HOST}/array/${posthog.config.token}/config`)
-    if (!configResponse.ok) throw new Error(`Failed to fetch conversations config (${configResponse.status})`)
-    const remoteConfig = await configResponse.json()
-    const conversationsToken = remoteConfig?.conversations?.token
-    if (!conversationsToken) throw new Error('Conversations are not enabled for this project')
-    const response = await fetch(`${CONVERSATIONS_API_HOST}/api/conversations/v1/widget/message`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Conversations-Token': conversationsToken,
-        },
-        body: JSON.stringify({
-            message,
-            traits,
-            // null ticket_id + fresh widget_session_id = always create a new ticket
-            ticket_id: null,
-            widget_session_id: crypto.randomUUID(),
-            distinct_id: posthog.get_distinct_id?.(),
-            session_context: { current_url: window.location.href },
-        }),
-    })
-    if (!response.ok) throw new Error(`Failed to create support ticket (${response.status})`)
-    return response.json()
+    // Abort rather than hang forever if the API is unreachable
+    const abortController = new AbortController()
+    const timeout = setTimeout(() => abortController.abort(), ESCALATE_TIMEOUT_MS)
+    try {
+        const configResponse = await fetch(`${CONVERSATIONS_API_HOST}/array/${posthog.config.token}/config`, {
+            signal: abortController.signal,
+        })
+        if (!configResponse.ok) throw new Error(`Failed to fetch conversations config (${configResponse.status})`)
+        const remoteConfig = await configResponse.json()
+        const conversationsToken = remoteConfig?.conversations?.token
+        if (!conversationsToken) throw new Error('Conversations are not enabled for this project')
+        const response = await fetch(`${CONVERSATIONS_API_HOST}/api/conversations/v1/widget/message`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Conversations-Token': conversationsToken,
+            },
+            body: JSON.stringify({
+                message,
+                traits,
+                // null ticket_id + fresh widget_session_id = always create a new ticket
+                ticket_id: null,
+                widget_session_id: crypto.randomUUID(),
+                distinct_id: posthog.get_distinct_id?.(),
+                session_context: { current_url: window.location.href },
+            }),
+            signal: abortController.signal,
+        })
+        if (!response.ok) throw new Error(`Failed to create support ticket (${response.status})`)
+        return response.json()
+    } finally {
+        clearTimeout(timeout)
+    }
 }
 
 const TopicSelect = (props: {
@@ -414,6 +426,7 @@ export function Question(props: QuestionProps) {
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const { appWindow } = useWindow()
+    const { addToast } = useToast()
     const posthog = usePostHog()
     const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
     const [conversationsAvailable, setConversationsAvailable] = useState(false)
@@ -526,9 +539,18 @@ export function Question(props: QuestionProps) {
                 email: authorEmail || null,
             })
             setEscalateState('sent')
+            addToast({
+                title: 'Escalated to support',
+                description: 'A support ticket was created for this question. Support will follow up with the author.',
+            })
         } catch (error) {
-            posthog?.captureException?.(error)
             setEscalateState('error')
+            addToast({
+                title: 'Escalation failed',
+                description: "The support ticket couldn't be created. Please try again.",
+                error: true,
+            })
+            posthog?.captureException?.(error)
         }
     }
 
