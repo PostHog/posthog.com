@@ -298,6 +298,19 @@ Google also offers various [privacy controls](https://support.google.com/analyti
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>How much do PostHog and Google Analytics cost?</summary>
 
 **Google Analytics 4** is free for most users. However, there are limits: GA4 free caps data retention at 14 months, applies data sampling to large exploration queries (over 10M events), and limits the BigQuery export to 1 million events per day.
@@ -395,7 +408,7 @@ The [top GA4 alternatives](/blog/ga4-alternatives) include:
 - **[PostHog](/web-analytics)** – Best all-in-one platform for product and engineering teams wanting analytics, replay, feature flags, experiments, and more together
 - **[Plausible](/blog/posthog-vs-plausible)** – Best lightweight, privacy-focused option for simple web analytics
 - **[Matomo](/blog/posthog-vs-matomo)** – Best self-hosted GA alternative with full data ownership
-- **[Amplitude](/blog/posthog-vs-amplitude)** – Best for marketing-led teams needing advanced product analytics and MTU-based pricing
+- **[Amplitude](/blog/posthog-vs-amplitude)** – Best for marketing-led teams needing advanced product analytics
 - **[Mixpanel](/blog/posthog-vs-mixpanel)** – Best for product teams wanting event-based analytics with a clean UI
 
 See our full guide to [GA4 alternatives](/blog/ga4-alternatives) for more options.

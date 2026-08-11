@@ -1,0 +1,146 @@
+---
+title: Feature flag debt
+shortTitle: Flag debt
+subtitle: 'Which flags are still evaluating for decisions you already made?'
+bookOrder: 3
+filters:
+  type:
+    - self-driving
+watches:
+  - name: Your feature flags
+    detail: Which flags still evaluate, how often, at what rollout, and how long they've sat there.
+  - name: Your codebase
+    detail: >-
+      Your repo is a signal source too. Whether the flag key still appears in code decides between
+      cleanup and a question.
+requires:
+  - label: Feature flags in use
+    level: required
+  - label: >-
+      Your codebase connected via GitHub – every repo that evaluates flags, not just the main
+      one. A repo the scout can't see looks exactly like code that no longer exists.
+    level: required
+schedule: Daily
+report:
+  title: 3 flags at a terminal rollout for 4+ months, still evaluated
+  source: Scout · flag debt
+  receivedAgo: 1d
+  affected: 3 flags · ~52,000 evaluations/day
+  body: >-
+    Safe to clean up. `new-checkout-flow` has been at 100% for four months with no edits,
+    and its key still appears in three files – all of them taking the same branch every time.
+    `beta-nav` has been at 0% for five months, with its key in one file behind a conditional
+    that never fires. Neither is experiment-linked, and no other flag depends on them.
+
+
+    Open question. `legacy-export` is at 100% and still evaluated ~11,000 times a day, but
+    its key doesn't appear in any connected repo. 94% of those evaluations come from
+    `posthog-android` versions older than the cleanup release, so this looks like shipped
+    clients rather than live code – deleting it would flip them to the off path. Worth
+    confirming before anything is removed.
+  suggestedAction: >-
+    Remove the call sites for `new-checkout-flow` and `beta-nav`. Once that's deployed and
+    evaluations stop, you can delete the flags themselves – that's the follow-up, not this diff.
+  actionNote: An agent opens the pull request – you review and merge. `legacy-export` is left alone.
+---
+
+<LeftPage>
+
+<LedgerFigure
+    n={1}
+    caption="What the scout saw: every flag still evaluating, and how long each decision has been finished."
+    rows={[
+        {
+            flag: 'new-checkout-flow',
+            rollout: '100%',
+            age: '4 mo',
+            evaluations: '~29,000',
+            inCode: '3 files',
+            verdict: 'remove',
+        },
+        {
+            flag: 'beta-nav',
+            rollout: '0%',
+            age: '5 mo',
+            evaluations: '~12,000',
+            inCode: '1 file',
+            verdict: 'remove',
+        },
+        {
+            flag: 'legacy-export',
+            rollout: '100%',
+            age: '7 mo',
+            evaluations: '~11,000',
+            inCode: 'not found',
+            verdict: 'question',
+        },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
+    priority="P3"
+    status="Ready"
+    actionability="Actionable"
+    headline="new-checkout-flow and beta-nav finished months ago and are still evaluated – legacy-export is left as an open question"
+/>
+
+<DetailFigure
+    n={3}
+    caption="The report opened. From here, you can review the evidence and open a pull request."
+    priority="P3"
+    status="Ready"
+    actionability="Actionable"
+/>
+
+<ScoutFigure n={4} caption="The scout itself – the file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Feature flag debt
+
+Every flag is a decision you already made. The rollout finished, the losing branch deleted, and the
+flag stayed. It's still evaluating though, and it's cluttering your codebase. This scout finds the flags you forgot and opens the pull request that takes them out.
+
+## What the scout looks at
+
+The scout looks for patterns like <SeeFig n={1} />: a rollout hit 100% four months ago, and the evaluations
+never stopped. A decision you already made and moved on with is still being asked ~52,000 times a day. 
+
+If the rollout were still moving, this would be a live experiment, not debt. This is how the scout determines what to act on.
+
+## The report in your inbox
+
+When your product emits <Term name="signal">signals</Term> that indicate flags have gone stale, a <Term name="scout" /> opens a <Term name="report" /> – and <SeeFig n={2} /> breaks the card down part by part. Click Review and the report opens into <SeeFig n={3} />: the full evidence, the raw signals, and the button that turns it into a
+pull request. Yours would name your flags, your repos, your call sites.
+
+## The pull request you merge
+
+When you're ready to open a pull request, the agent does it for you, attaching the evidence along the way. You review and merge it like any other – nothing merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual file for this guide's custom scout.
+
+It reads more than one <Term name="signal source" />, so the report can name a likely cause, not
+just a number that moved.
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
+<Watches />
+
+## The schedule it runs on
+
+This custom scout runs **daily** by default. You can choose to run it every 30 minutes up to once a day. It only writes when something is wrong, so most days it's silent.
+
+## Add this to your scout troop
+
+<!-- The requirement checklist comes from `requires:` in this file's frontmatter;
+    the scout itself (name, description, what the button prefills) is ../SKILL.md. -->
+<Enable />
+
+</RightPage>

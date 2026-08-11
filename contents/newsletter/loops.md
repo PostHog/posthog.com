@@ -49,7 +49,7 @@ Good examples of loops include:
 
 - **Bug fixer.** The goal is to fix the bug. The context is the bug report and error trace. The evaluation is the test suite, snapshots, logs.
 
-- **Flaky test hunter.** The goal is to kill flaky tests. The context is CI history and retry logs. The eval is consecutive green runs.
+- **Flaky test hunter.** The goal is to [kill flaky tests](/blog/10k-prs-a-month#battling-the-bottleneck-of-ci). The context is CI history and retry logs. The eval is consecutive green runs.
 
 - **Performance autoresearcher.** The goal is to beat a benchmark. The context is the system, metrics, and budget. The eval is whether it is faster, better, etc. on that metric. We recently used Karpathy's autoresearcher loop and it [fixed a 3-year-old bug in our query engine](/blog/karpathy-autoresearch-query-engine-bug) and increased performance by 11%.
 
@@ -87,7 +87,7 @@ And here's the thing, [product engineers](/product-engineer/what-is-a-product-en
 
 4. Repeating constantly
 
-PostHog has helped product engineers complete this loop for years now, so we think we're in a great position to help agents with it too. It's why we're betting on building features that help make your product self-driving, like [our Slack app](/slack), [PostHog Code](/desktop), and [Replay Vision](/replay-vision). Yes, we're a little AI-pilled.
+PostHog has helped product engineers complete this loop for years now, so we think we're in a great position to help agents with it too. It's why we're betting on building features that help make your product self-driving, like [our Slack app](/slack), [PostHog Desktop](/desktop), and [Replay Vision](/replay-vision). Yes, we're a little AI-pilled.
 
 There are, of course, limits. Loops aren't about to eliminate all engineering work, but they can put the 1% gains on cruise control: the bugs, UX issues, [paper cuts](/blog/slack-app-beta), and conversion tweaks. The things that drain engineering hours, but rarely need strategic input.
 

@@ -1,0 +1,75 @@
+---
+title: Error tracking
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconWarning, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
+
+Error tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's [session replay](/docs/session-replay), events, and properties attached, so you can see what went wrong instead of trying to reproduce it. Those same exceptions feed [Self-driving](/docs/self-driving), which groups recurring issues and opens pull requests you review and merge.
+
+<OSButton variant="primary" asLink to="/docs/error-tracking/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You triage and resolve issues in the PostHog web app. The other surfaces let you debug and fix issues without leaving your existing tools.
+
+<SurfaceCards columns={2}>
+
+<SurfaceCard icon="IconLaptop" color="blue" title="PostHog Web" url="/docs/error-tracking/monitoring" cta="Monitor issues">
+Monitor, assign, and resolve issues, each with the affected user's replay and events in view.
+</SurfaceCard>
+
+<SurfaceCard icon="IconMagic" color="purple" title="PostHog MCP" url="/docs/error-tracking/surfaces/mcp" cta="Debug over PostHog MCP">
+Pull up issues and stack traces and debug them from any MCP client or AI agent.
+</SurfaceCard>
+
+<SurfaceCard icon="IconCode" color="green" title="PostHog Desktop" badge="Beta" url="/docs/error-tracking/surfaces/desktop" cta="Fix in PostHog Desktop">
+Review and merge the Self-driving fixes opened from your recurring issues.
+</SurfaceCard>
+
+<SurfaceCard icon="IconTerminal" color="seagreen" title="PostHog CLI" url="/docs/error-tracking/surfaces/cli" cta="Upload symbols">
+Upload source maps and debug symbols from your build so stack traces stay readable.
+</SurfaceCard>
+
+</SurfaceCards>
+
+## Where its data comes from
+
+Error tracking runs on the exceptions your app sends to PostHog. SDKs capture them automatically, source maps make the stack traces readable, and releases tie each exception back to the deploy that caused it.
+
+<SurfaceCards columns={3}>
+
+<SurfaceCard icon="IconBrackets" color="blue" title="SDKs" url="/docs/error-tracking/installation" cta="Install an SDK">
+Capture exceptions automatically from web, backend, and mobile SDKs across your stack.
+</SurfaceCard>
+
+<SurfaceCard icon="IconCode" color="green" title="Source maps" url="/docs/error-tracking/upload-source-maps" cta="Upload source maps">
+Upload source maps and symbol sets so minified stack traces point back to your real code.
+</SurfaceCard>
+
+<SurfaceCard icon="IconRocket" color="orange" title="Releases" url="/docs/error-tracking/releases" cta="Track releases">
+Tag exceptions with the release and commit that introduced them to spot regressions fast.
+</SurfaceCard>
+
+</SurfaceCards>
+
+## How error tracking works with Self-driving
+
+Your exceptions are a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving): recurring, high-impact issues become reports, and when there's a code fix, a pull request you review and merge.
+
+<CustomSelfDrivingLoop
+  stages={[
+    { label: 'Exceptions', icon: IconWarning, color: '#F54E00', description: 'Errors captured from every SDK in your stack' },
+    { label: 'Signals', icon: IconBolt, color: '#FFA81C', description: 'Recurring, high-impact issues surfaced automatically' },
+    { label: 'One report', icon: IconNotebook, color: '#29DBBB', description: 'Grouped with related replays and product context' },
+    { label: 'Draft PR', icon: IconPullRequest, color: '#A737D2', description: 'When a code fix is possible' },
+    { label: 'You merge', icon: IconCheckCircle, color: '#47C861', description: 'Nothing ships without a human' },
+  ]}
+/>
+
+You triage and resolve issues in the [PostHog web app](/docs/error-tracking/monitoring), and review and merge the Self-driving work in the [Self-driving inbox](/docs/self-driving/inbox). See the [Self-driving docs](/docs/self-driving) for the full picture.

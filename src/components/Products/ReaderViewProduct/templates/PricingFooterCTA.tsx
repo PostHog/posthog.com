@@ -5,6 +5,7 @@ import { SectionComponentProps } from '../types'
 
 const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
     const hog = productData?.hog
+    const HogComponent = hog?.Component
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
@@ -15,12 +16,12 @@ const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
                         The hedgehog has been waiting this whole time.
                     </h2>
                     <p className="text-base text-primary/70 mb-8">
-                        It's free to start. Not "free trial" free — actually free. No card, no call, no "someone from
+                        It's free to start. Not "free trial" free – actually free. No card, no call, no "someone from
                         our team will be in touch." Just PostHog.
                     </p>
                     <div className="flex flex-wrap gap-3 items-center">
                         <OSButton variant="primary" asLink to="https://app.posthog.com/signup" size="lg">
-                            Get started — free
+                            Get started – free
                         </OSButton>
                         <OSButton variant="secondary" asLink to="/talk-to-a-human" size="lg">
                             Talk to a human
@@ -29,13 +30,24 @@ const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {
                     <p className="text-xs text-primary/30 mt-4">No sales call. No "tailored demo." No expiry.</p>
                 </div>
 
-                {hog?.src && (
-                    <div className="hidden @2xl:block absolute bottom-0 right-0 max-w-[400px] w-full pointer-events-none select-none">
-                        <CloudinaryImage
-                            src={hog.src}
-                            alt={hog.alt || ''}
-                            className="object-contain object-bottom opacity-80"
-                        />
+                {(HogComponent || hog?.src) && (
+                    <div
+                        className={`hidden @2xl:block absolute bottom-0 right-0 w-full pointer-events-none select-none ${
+                            hog.footerClasses || 'max-w-[400px]'
+                        }`}
+                    >
+                        {HogComponent ? (
+                            <HogComponent
+                                className="w-full h-auto object-contain object-bottom opacity-80"
+                                title={hog.alt || ''}
+                            />
+                        ) : (
+                            <CloudinaryImage
+                                src={hog.src}
+                                alt={hog.alt || ''}
+                                className="object-contain object-bottom opacity-80"
+                            />
+                        )}
                     </div>
                 )}
             </div>

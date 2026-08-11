@@ -736,13 +736,13 @@ importers:
 
   plugins/gatsby-remark-video: {}
 
+  plugins/gatsby-source-git-metadata: {}
+
   plugins/gatsby-source-squeak:
     dependencies:
       gatsby-source-filesystem:
         specifier: ^4.20.0
         version: 4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))
-
-  plugins/gatsby-source-strapi-pages: {}
 
   plugins/gatsby-transformer-cloudinary:
     dependencies:
@@ -9631,15 +9631,6 @@ packages:
       react-dom:
         optional: true
 
-  framer-motion@4.1.17:
-    resolution: {integrity: sha512-thx1wvKzblzbs0XaK2X0G1JuwIdARcoNOW7VVwjO8BUltzXPyONGAElLu6CiCScsOQRI7FIk/45YTFtJw5Yozw==}
-    peerDependencies:
-      react: '>=16.8 || ^17.0.0'
-      react-dom: '>=16.8 || ^17.0.0'
-
-  framesync@5.3.0:
-    resolution: {integrity: sha512-oc5m68HDO/tuK2blj7ZcdEBRx3p1PjrgHazL8GYEpvULhrtGIFbQArN6cQS2QhW8mitffaB+VYzMjDqBxxQeoA==}
-
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -10393,9 +10384,6 @@ packages:
   helpertypes@0.0.19:
     resolution: {integrity: sha512-J00e55zffgi3yVnUp0UdbMztNkr2PnizEkOe9URNohnrNhW5X0QpegkuLpOmFQInpi93Nb8MCjQRHAiCDF42NQ==}
     engines: {node: '>=10.0.0'}
-
-  hey-listen@1.0.8:
-    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
@@ -13587,9 +13575,6 @@ packages:
   polylabel@1.1.0:
     resolution: {integrity: sha512-bxaGcA40sL3d6M4hH72Z4NdLqxpXRsCFk8AITYg6x1rn1Ei3izf00UMLklerBZTO49aPA3CYrIwVulx2Bce2pA==}
 
-  popmotion@9.3.6:
-    resolution: {integrity: sha512-ZTbXiu6zIggXzIliMi8LGxXBF5ST+wkpXGEjeTUDUOCdSQ356hij/xjeUdv0F8zCQNeqB1+PR5/BB+gC+QLAPw==}
-
   posix-character-classes@0.1.1:
     resolution: {integrity: sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==}
     engines: {node: '>=0.10.0'}
@@ -15910,9 +15895,6 @@ packages:
 
   style-to-object@1.0.9:
     resolution: {integrity: sha512-G4qppLgKu/k6FwRpHiGiKPaPTFcG3g4wNVX/Qsfu+RqQM30E7Tyu/TEgxcL9PNLF5pdRLwQdE3YKKf+KF2Dzlw==}
-
-  style-value-types@4.1.4:
-    resolution: {integrity: sha512-LCJL6tB+vPSUoxgUBt9juXIlNJHtBMy8jkXzUJSBzeHWdBu6lhzHqCvLVkXFGsFIlNa2ln1sQHya/gzaFmB2Lg==}
 
   styled-components@5.3.11:
     resolution: {integrity: sha512-uuzIIfnVkagcVHv9nE0VPlHPSCmXIUGKfJ42LNjxCCTDTL5sgnJ8Z7GZBq0EnLYGln77tPpEpExt2+qa+cZqSw==}
@@ -29978,22 +29960,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  framer-motion@4.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      framesync: 5.3.0
-      hey-listen: 1.0.8
-      popmotion: 9.3.6
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      style-value-types: 4.1.4
-      tslib: 2.8.1
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
-
-  framesync@5.3.0:
-    dependencies:
-      tslib: 2.8.1
-
   fresh@0.5.2: {}
 
   from2@2.3.0:
@@ -31753,8 +31719,6 @@ snapshots:
       tslib: 2.8.1
 
   helpertypes@0.0.19: {}
-
-  hey-listen@1.0.8: {}
 
   hmac-drbg@1.0.1:
     dependencies:
@@ -35962,13 +35926,6 @@ snapshots:
     dependencies:
       tinyqueue: 2.0.3
 
-  popmotion@9.3.6:
-    dependencies:
-      framesync: 5.3.0
-      hey-listen: 1.0.8
-      style-value-types: 4.1.4
-      tslib: 2.8.1
-
   posix-character-classes@0.1.1: {}
 
   possible-typed-array-names@1.1.0: {}
@@ -38907,11 +38864,6 @@ snapshots:
   style-to-object@1.0.9:
     dependencies:
       inline-style-parser: 0.2.4
-
-  style-value-types@4.1.4:
-    dependencies:
-      hey-listen: 1.0.8
-      tslib: 2.8.1
 
   styled-components@5.3.11(@babel/core@7.28.4)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
     dependencies:

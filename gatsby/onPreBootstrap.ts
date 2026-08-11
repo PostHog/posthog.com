@@ -81,6 +81,16 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    // Drop exceptions coming from local dev servers so developers' local
+    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
+    // don't pollute production error tracking. Real users are never on localhost.
+    before_send: function (event) {
+        var hostname = window.location.hostname
+        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+            return null
+        }
+        return event
+    },
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,

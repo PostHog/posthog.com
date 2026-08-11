@@ -1,0 +1,46 @@
+---
+title: Error tracking in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is home base for error tracking. It's where you triage, resolve, and route issues, with each one already grouped and symbolicated and carrying the affected user's [session replay](/docs/session-replay), events, and the release it shipped in. So you can see why something broke instead of trying to reproduce it.
+
+Open **Error tracking** in [PostHog](https://app.posthog.com) to see the issues list: every open issue with its status, assignee, first and last seen, and occurrence count. From there, filter and search to find what matters, then open an issue to dig in.
+
+## Before you start
+
+1. **Set up Error Tracking** – [install exception capture in your app](/docs/error-tracking/installation) so exceptions reach PostHog.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Monitor and search issues](/docs/error-tracking/monitoring)** – filter, search, and save views over your issues so the important ones surface first.
+- **[Manage and resolve issues](/docs/error-tracking/managing-issues)** – work an issue end to end: inspect the stack trace and context, then resolve, suppress, or reopen it.
+- **[Assign issues to teammates](/docs/error-tracking/assigning-issues)** – route an issue to the person or team who owns the code.
+- **[Send alerts](/docs/error-tracking/alerts)** – get notified when a new issue appears or an existing one starts spiking.
+- **[Detect spikes](/docs/error-tracking/spikes)** – spot bursts and regressions in exception volume before they page you.
+- **[Set up integrations](/docs/error-tracking/integrations)** – push issues to Linear, GitHub, or GitLab and keep them in sync.
+- **Debug with [PostHog AI](/docs/posthog-ai)** – ask PostHog AI, right here in the web app, to search your issues and root-cause straight from the stack trace. It's an interaction mode inside the web app, not a separate surface.
+
+## Fix with AI prompts
+
+For any issue, PostHog can generate a ready-to-use prompt that helps your coding assistant debug and fix the error. Each prompt includes the issue's stack trace along with prepared instructions for the AI to follow.
+
+Click **Fix with AI** on the issue details page. You choose two things:
+
+1. **What to generate** – a **fix** prompt, an **explain** prompt, or just the raw **stack trace**.
+2. **Where to open it** – directly in PostHog AI in your browser, copied to your clipboard, or via a deeplink that opens it in your editor: PostHog Desktop, Claude Code, Cursor, or Codex.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_40_27_111_Z_9c54a12e40.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_40_46_775_Z_d9b5b26e94.png"
+    alt="Fix with AI prompts"
+    classes="rounded"
+/>
+
+## Related
+
+- Learn how exceptions become issues in [Issues and exceptions](/docs/error-tracking/issues-and-exceptions).
+- Debug from your editor or terminal over [MCP](/docs/error-tracking/surfaces/mcp).
+- Review and merge Self-driving fixes in [PostHog Desktop](/docs/error-tracking/surfaces/desktop).

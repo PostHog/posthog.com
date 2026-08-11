@@ -44,7 +44,7 @@ Follow the [1Password SSH key management guide](https://developer.1password.com/
 
 ### Commit signing
 
-A git commit's `Author` field is completely user controllable and can be forged. Signing your commits cryptographically proves you authored them, preventing impersonation and confusion.
+A git commit's `Author` field is completely user controllable and can be forged. Signing your commits cryptographically proves you authored them, preventing impersonation and confusion. **Signing is required, not optional:** an org-wide GitHub ruleset rejects unsigned commits in every PostHog repository, on every branch. Set this up before your first push, rather than when a push fails. This applies to automation too, see [signing commits from workflows](#signing-commits-from-workflows).
 
 You can sign commits with either [Secretive](https://github.com/maxgoedjen/secretive/) or [1Password](https://developer.1password.com/docs/ssh/git-commit-signing/). We have a slight preference for Secretive because it stores your key in the macOS Secure Enclave, ensuring the key can never be exported or extracted, even by malware.
 
@@ -94,7 +94,7 @@ Follow the [1Password git commit signing guide](https://developer.1password.com/
 
 #### After setup
 
-Once commit signing is configured, enable the option in your [GitHub Profile](https://github.com/settings/keys) to "Flag unsigned commits as unverified".
+Once commit signing is configured, enable the option in your [GitHub Profile](https://github.com/settings/keys) to "Flag unsigned commits as unverified". The org ruleset already blocks unsigned commits in PostHog repos, but this marks any commit attributed to your email and not signed by you as **Unverified** everywhere else on GitHub, including your personal repos.
 
 #### Troubleshooting
 
@@ -117,11 +117,26 @@ Great care should be taken when writing or modifying a GitHub Actions workflow. 
 
 #### Authentication
 
-Most Actions use the default `GITHUB_TOKEN`, whose permissions can be scoped via the `permissions` property. However, `GITHUB_TOKEN` cannot trigger other workflows — so commits or PRs created by an Action won't run CI, leaving PRs unmergeable without manual intervention. The workaround is a Personal Access Token (PAT) or GitHub App. We use GitHub Apps because PATs are tied to an individual user and break when that user leaves PostHog.
+Most Actions use the default `GITHUB_TOKEN`, whose permissions can be scoped via the `permissions` property. However, `GITHUB_TOKEN` cannot trigger other workflows, so commits or PRs created by an Action won't run CI, leaving PRs unmergeable without manual intervention. The workaround is a GitHub App.
 
-Scope each GitHub App to its use case and ideally a single repo. Prefer creating a new App over expanding an existing one's permissions, otherwise every Action using that App inherits permissions it doesn't need.
+Personal access tokens are not an option here. Classic PATs are blocked org-wide. Fine-grained PATs require approval and are generally not approved, because they are tied to an individual user and break when that user leaves PostHog.
+
+Use a finely scoped, purpose-specific GitHub App instead. Scope each App to its use case and ideally a single repo. Prefer creating a new App over expanding an existing one's permissions, otherwise every Action using that App inherits permissions it doesn't need.
 
 Send a message in #team-security if you need help setting up a new GitHub App.
+
+#### Signing commits from workflows
+
+The org ruleset applies to Actions too. A workflow that commits with `git push` is rejected, because there is no signing key on the runner. Create the commit through the GitHub API instead, which GitHub signs with its own key. In practice that means one of:
+
+- [`planetscale/ghcommit-action`](https://github.com/planetscale/ghcommit-action), a wrapper around the GraphQL `createCommitOnBranch` mutation. This is what most of our workflows use.
+- [`peter-evans/create-pull-request`](https://github.com/peter-evans/create-pull-request) with `sign-commits: true` (v6.1 or later)
+- [`changesets/action`](https://github.com/changesets/action) with `commitMode: github-api`
+- calling `createCommitOnBranch` yourself
+
+> **Signing only works with a bot-generated token**, meaning `GITHUB_TOKEN` or a GitHub App installation token. With a PAT, `sign-commits` and its equivalents are a silent no-op: the action reports success, the commit is not signed, and the push is rejected.
+
+Two limits of `createCommitOnBranch` to plan for. Its `FileAddition` input takes only `path` and `contents`, so it cannot set a file's executable bit. And it sends `expectedHeadOid`, so the commit is rejected if the branch moved since the run read the head. Re-read the head and retry rather than forcing.
 
 #### External contributors
 
