@@ -30,7 +30,7 @@ Humans have this problem too. Every new analyst re-learns which revenue table is
 
 You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR", and every other metric you want to define, means the same thing on every call. That place is the [semantic layer](/docs/semantic-layer), and this is the story of building it into [PostHog's context warehouse](/blog/what-is-a-context-warehouse).
 
-![What was our MRR last month](https://res.cloudinary.com/dmukukwp6/image/upload/Semantic_layer_ARR_494c0a5aa3.png)
+![What was our MRR last month](https://res.cloudinary.com/dmukukwp6/image/upload/semantic_layer_ARR_1_a228fa4bdb.png)
 
 
 ## What is a semantic layer?
