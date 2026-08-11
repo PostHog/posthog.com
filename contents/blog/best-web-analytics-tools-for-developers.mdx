@@ -20,15 +20,15 @@ seo:
     }
 ---
 
-The tools below are all solid, but most of them stop at traffic; 
-
-For most developers, the best web analytics tool is **[PostHog](/web-analytics)** – it puts privacy-friendly traffic data in the same platform as your [product analytics](/product-analytics), [AI observability](/ai-observability), [session replays](/session-replay), [feature flags](/feature-flags), and more, and it makes your product [self-driving](/self-driving).  You also get a proper [MCP server](/mcp) for querying your data straight from your editor, plus transparent, usage-based [pricing](/pricing) with a generous free tier.
-
 ### What is web analytics?
 
 **Web analytics measures how people find and move through your website**, including (but not limited to) pageviews, sessions, traffic sources, and the paths visitors take. 
 
 For developers specifically, the best tools go further: they autocapture pageviews and clicks so you're not hand-instrumenting every interaction, hand over your raw data through SQL or an API instead of boxing you into the UI, survive ad blockers with reverse-proxy support and cookieless tracking, and plug into the rest of your stack. 
+
+The tools below are all solid, but most of them stop at traffic; 
+
+> For most developers, the best web analytics tool is **[PostHog](/web-analytics)** – it puts privacy-friendly traffic data in the same platform as your [product analytics](/product-analytics), [AI observability](/ai-observability), [session replays](/session-replay), [feature flags](/feature-flags), and more, and it makes your product [self-driving](/self-driving).  You also get a proper [MCP server](/mcp) for querying your data straight from your editor, plus transparent, usage-based [pricing](/pricing) with a generous free tier.> 
 
 ## The best web analytics tool for every use case
 
@@ -41,17 +41,18 @@ They're all good tools for developers – there's no wrong answer on this list. 
 -   **If you need to own your data:** Matomo
 -   **If you are a solo developer just running a small or personal site:** Umami
 
-### What's the best web analytics tool for developers?
+### What's the best web analytics tool for developers overall?
 
-For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools tell you a visitor showed up and then go quiet; PostHog keeps going, because [web analytics](/web-analytics) lives in the same platform as [product analytics](/product-analytics), [session replay](/session-replay), and [feature flags](/feature-flags).
+For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools only tell you a visitor showed up; PostHog keeps going, because [web analytics](/web-analytics) lives in the same platform as [product analytics](/product-analytics), [AI observability](/ai-observability), [session replay](/session-replay), [feature flags](/feature-flags), and a lot more. It also [makes your product self-driving](/self-driving).
 
-**Reasons to choose PostHog:**
-
--   Your traffic data and in-app behavior live in one place 
--   Cookieless and privacy-friendly by default, so you get clean data without a cookie banner
--   Query anything with SQL when the dashboards run out, or straight from your editor via the MCP server
--   [Transparent, usage-based pricing](/pricing) with credits for [eligible startups](/startups)
--   [Makes your product self-driving](/self-driving)
+| What makes PostHog good for developers | |
+| --- | --- |
+| **Install** | One `posthog-js` snippet, the package for your framework, or let the [setup wizard](/wizard) handle it |
+| **Capture** | Autocapture for pageviews and clicks, plus custom events |
+| **Data access** | SQL, REST API, the [MCP server](/mcp), and [data warehouse](/docs/data-warehouse) exports |
+| **Privacy** | Cookieless option and [reverse-proxy](/docs/advanced/proxy) support so ad blockers don't gut your data |
+| **Pricing** | [Transparent and usage-based](/pricing), with credits for [eligible startups](/startups) |
+| **License** | Open source (MIT) |
 
 **Not ideal if:** all you'll ever want is a bare visit counter with nothing else attached – that's more platform than you need.
 
@@ -63,11 +64,13 @@ For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools tell yo
  
 **Plausible** is the go-to for privacy: cookieless by default, GDPR- and CCPA-friendly, and no cookie banner required. It's a lightweight, open-source tool that offers readable traffic reporting with nothing to configure.
  
-**Reasons to choose Plausible:**
- 
--   Tiny script with almost no performance cost
--   No cookie banner required
--   One clean dashboard, zero setup fuss
+| What makes Plausible good for developers | |
+| --- | --- |
+| **Install** | Single `<script>` tag (~1 KB) or npm package |
+| **Capture** | Automatic pageviews; custom events set up manually |
+| **Data access** | Stats API for pulling your numbers |
+| **Privacy** | Cookieless by default, no cookie banner |
+| **License** | Open source (AGPL v3) |
 
 **Not ideal if:** you need to connect traffic to what users actually do next, since it's traffic-only by design.
  
@@ -77,25 +80,29 @@ For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools tell yo
  
 **Fathom** is the fastest to get running: drop in one script and you have clean, privacy-safe traffic data with no configuration. It strips web analytics down to the essentials and stays out of your way.
 
-**Reasons to choose Fathom:**
-
--   Effortless setup and a genuinely simple UI
--   Privacy compliance handled for you
--   Fast-loading script that won't drag your site
+| What makes Fathom good for developers | |
+| --- | --- |
+| **Install** | Single `<script>` tag; custom domain to slip past ad blockers |
+| **Capture** | Automatic pageviews plus manual event tracking |
+| **Data access** | REST API |
+| **Privacy** | Cookieless, GDPR/CCPA-friendly by default |
+| **License** | Proprietary (the old Fathom Lite was open source) |
 
 **Not ideal if:** you want funnels, retention, or any behavioral data beyond traffic.
  
-**Alternatives to consider:** **Plausible** is the obvious head-to-head pick; **PostHog** since you can easily get up and running [with the wizard](/wizard).
+**Alternatives to consider:** **Plausible** is the obvious head-to-head pick. 
 
 ### What's the best web analytics tool for Google Ads users?
 
 **Google Analytics 4** is the natural pick if you live in Google Ads; it's free and wired directly into Google's ad and search ecosystem. The tradeoff is the learning curve and traffic data that stays siloed from product behavior.
 
-**Reasons to choose Google Analytics 4:**
-
--   Free and near-universal
--   Deepest Google Ads and Search integrations
--   Flexible event-based data model
+| What makes Google Analytics 4 good for developers | |
+| --- | --- |
+| **Install** | `gtag.js` snippet or Google Tag Manager |
+| **Capture** | Enhanced-measurement auto-events plus custom events |
+| **Data access** | Free BigQuery export for raw events and the Data API – but reports sample above high thresholds |
+| **Privacy** | Cookie-based with Consent Mode; IP addresses aren't stored |
+| **License** | Proprietary |
 
 **Not ideal if:** you want something quick to learn and developer-friendly.
 
@@ -105,25 +112,29 @@ For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools tell yo
 
 **Matomo** is the best choice when owning your data matters most. It's a feature-rich GA alternative that keeps your analytics out of Google's ecosystem and adds extras like heatmaps and recordings.
 
-**Reasons to choose Matomo:**
- 
--   GA-level breadth without the Google ecosystem
--   Strong focus on owning your data
--   Optional add-ons like heatmaps
+| What makes Matomo good for developers | |
+| --- | --- |
+| **Install** | JS tracker, server-side, or import from server logs |
+| **Capture** | Pageviews and events; heatmaps and recordings as add-ons |
+| **Data access** | Reporting API plus direct access to the raw data |
+| **Privacy** | Cookieless mode available; GDPR tooling built in |
+| **License** | Open source (GPL v3) |
 
 **Not ideal if:** you'd rather not manage a heavier, feature-dense platform.
 
-**Alternatives to consider:** **PostHog** if you want product analytics, heatmaps, and replays in the same platform rather than as bolt-ons; **Plausible** if Matomo feels like more than you need.
+**Alternatives to consider:** **Plausible** if Matomo feels like more than you need.
  
 ### What's the best web analytics tool for small and personal sites?
  
 **Umami** is the tidiest option for a small or personal site: minimal, open-source, and fast, with a single clean dashboard. It gives you the basics and nothing you'd have to think about.
  
-**Reasons to choose Umami:**
- 
--   Extremely lightweight
--   Simple, single-page dashboard
--   Open source and free to run
+| What makes Umami good for developers | |
+| --- | --- |
+| **Install** | Single `<script>` tag; runs on Node + PostgreSQL/MySQL |
+| **Capture** | Automatic pageviews plus custom events |
+| **Data access** | REST API |
+| **Privacy** | Cookieless, no consent banner needed |
+| **License** | Open source (MIT) |
 
 **Not ideal if:** you need anything beyond basic traffic counts.
 
