@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import useSWR from 'swr'
 
 import OSTable from 'components/OSTable'
 
@@ -12,7 +13,7 @@ interface ModelPricing {
 interface Model {
     id: string
     display_name: string
-    pricing: ModelPricing | null
+    pricing: ModelPricing
 }
 
 interface ComputeRateCard {
@@ -22,66 +23,52 @@ interface ComputeRateCard {
 
 interface PricingResponse {
     models: Model[]
-    compute: {
-        current: ComputeRateCard | null
-    }
+    compute: ComputeRateCard | null
 }
+
+const TOKEN_COLUMNS = [
+    { name: 'Input', rate: 'prompt' },
+    { name: 'Cached input', rate: 'input_cache_read' },
+    { name: 'Cache write', rate: 'input_cache_write' },
+    { name: 'Output', rate: 'completion' },
+] as const
+
+const CREDIT_FORMAT = new Intl.NumberFormat('en-US', { maximumFractionDigits: 4 })
 
 const creditsPerMillionTokens = (rate: string | null): string => {
     if (rate === null) {
         return 'Not available'
     }
 
-    return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 4 }).format(Number(rate) * 100_000_000)} credits`
+    return `${CREDIT_FORMAT.format(Number(rate) * 100_000_000)} credits`
 }
 
-const usdRate = (rate: string): string => `$${rate}`
+const fetchPricing = async (url: string): Promise<PricingResponse> => {
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw new Error(`Pricing request returned ${response.status}`)
+    }
+    return response.json() as Promise<PricingResponse>
+}
 
-export const PostHogDesktopPricing = (): JSX.Element => {
-    const [pricing, setPricing] = useState<PricingResponse | null>(null)
-    const [error, setError] = useState(false)
-
-    useEffect(() => {
-        const controller = new AbortController()
-
-        fetch('/api/posthog-desktop-pricing', { signal: controller.signal })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Pricing request returned ${response.status}`)
-                }
-                return response.json() as Promise<PricingResponse>
-            })
-            .then(setPricing)
-            .catch((requestError: unknown) => {
-                if (requestError instanceof DOMException && requestError.name === 'AbortError') {
-                    return
-                }
-                setError(true)
-            })
-
-        return () => controller.abort()
-    }, [])
+export const PostHogDesktopPricing = (): React.ReactElement => {
+    const { data: pricing, error } = useSWR<PricingResponse>('/api/posthog-desktop-pricing', fetchPricing)
 
     if (error) {
         return <p>Pricing is currently unavailable. Refresh the page to try again.</p>
     }
 
-    if (pricing === null) {
+    if (!pricing) {
         return <p>Loading current pricing...</p>
     }
 
-    const rows = pricing.models
-        .filter((model) => model.pricing !== null)
-        .map((model) => ({
-            key: model.id,
-            cells: [
-                { content: model.display_name },
-                { content: creditsPerMillionTokens(model.pricing?.prompt ?? null) },
-                { content: creditsPerMillionTokens(model.pricing?.input_cache_read ?? null) },
-                { content: creditsPerMillionTokens(model.pricing?.input_cache_write ?? null) },
-                { content: creditsPerMillionTokens(model.pricing?.completion ?? null) },
-            ],
-        }))
+    const rows = pricing.models.map(({ id, display_name, pricing }) => ({
+        key: id,
+        cells: [
+            { content: display_name },
+            ...TOKEN_COLUMNS.map(({ rate }) => ({ content: creditsPerMillionTokens(pricing[rate]) })),
+        ],
+    }))
 
     if (rows.length === 0) {
         return <p>Pricing is currently unavailable. Refresh the page to try again.</p>
@@ -89,18 +76,8 @@ export const PostHogDesktopPricing = (): JSX.Element => {
 
     return (
         <>
-            <OSTable
-                columns={[
-                    { name: 'Model' },
-                    { name: 'Input' },
-                    { name: 'Cached input' },
-                    { name: 'Cache write' },
-                    { name: 'Output' },
-                ]}
-                rows={rows}
-                width="full"
-            />
-            {pricing.compute.current && (
+            <OSTable columns={[{ name: 'Model' }, ...TOKEN_COLUMNS]} rows={rows} width="full" />
+            {pricing.compute && (
                 <>
                     <h2>Cloud compute pricing</h2>
                     <p>Cloud tasks also consume credits for the CPU and memory used while your task is running.</p>
@@ -111,14 +88,14 @@ export const PostHogDesktopPricing = (): JSX.Element => {
                                 key: 'cpu',
                                 cells: [
                                     { content: 'CPU core-second' },
-                                    { content: usdRate(pricing.compute.current.cpu_core_second_usd) },
+                                    { content: `$${pricing.compute.cpu_core_second_usd}` },
                                 ],
                             },
                             {
                                 key: 'memory',
                                 cells: [
                                     { content: 'GiB-second of memory' },
-                                    { content: usdRate(pricing.compute.current.memory_gib_second_usd) },
+                                    { content: `$${pricing.compute.memory_gib_second_usd}` },
                                 ],
                             },
                         ]}

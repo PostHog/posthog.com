@@ -18,13 +18,13 @@ const handler = async (req, res) => {
     try {
         const [models, compute] = await Promise.all([
             fetchJson(MODELS_URL),
-            fetchJson(COMPUTE_URL).catch(() => ({ current: null, history: [] })),
+            fetchJson(COMPUTE_URL).catch(() => ({ current: null })),
         ])
-        if (!Array.isArray(models.data)) {
-            throw new Error('Models response did not contain a model list')
-        }
         res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400')
-        return res.status(200).json({ models: models.data, compute })
+        return res.status(200).json({
+            models: models.data.filter((model) => model.pricing),
+            compute: compute.current,
+        })
     } catch (error) {
         console.error('Error fetching PostHog Desktop pricing:', error)
         return res.status(502).json({ error: 'Failed to fetch PostHog Desktop pricing' })
