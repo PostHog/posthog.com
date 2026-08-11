@@ -34,6 +34,8 @@ Each rule has two parts:
 
 When a URL matches the regex, the matched portion is replaced with the alias. The rest of the URL remains unchanged.
 
+Rules run against whichever URL property is being cleaned. That's a path like `/user/123/profile` for the web analytics tiles, but a full URL like `https://example.com/user/123/profile` for a [Paths insight](/docs/product-analytics/paths) or a breakdown by `$current_url` – so a pattern anchored with `^/` matches the first and not the second. Test a rule against a sample URL in project settings before you save it.
+
 ## Examples
 
 Here are common path cleaning patterns:
@@ -67,27 +69,39 @@ This turns `https://example.com/merchant/12345/dashboard` and `https://example.c
 
 ## Reusing part of the matched URL
 
-The examples above replace the matched text with a fixed string. When your routes all share a shape, that forces one rule per route – a rule for `/team/:id/settings`, another for `/team/:id/billing`, and so on for every page.
+Because only the matched portion is replaced, a fixed alias already handles a segment that varies. The `/user/:id` rule above cleans both `/user/123/profile` and `/user/456/settings`, because `/profile` and `/settings` sit outside the match and are left alone.
 
-Instead, wrap the part of the URL you want to keep in a capture group and reference it from the alias with `\1`. One rule then covers every route with that shape.
+You need a capture group when the part you want to keep sits *inside* the match – when the regex has to reach past it to get to whatever you're removing. Wrap that part in parentheses and reference it from the alias with `\1`.
 
-### Replace a prefix, keep the rest
+### Group deep pages by their section
 
-Locale-prefixed routes split each page into one row per language. To collapse them into a single row:
+To collapse everything below the second path segment into one row per section:
 
-- **Regex:** `^/[a-z]{2}-[a-z]{2}(/.*)$`
-- **Alias:** `/:locale\1`
+- **Regex:** `^(/[^/]+/[^/]+)/.*$`
+- **Alias:** `\1`
 
-This turns `/en-us/pricing` and `/de-de/pricing` into `/:locale/pricing`, and `/en-us/docs` into `/:locale/docs`. Without the capture group, you'd need a separate rule for every page on the site.
+| Original path                     | Cleaned path              |
+| --------------------------------- | ------------------------- |
+| `/docs/product-analytics/trends`  | `/docs/product-analytics` |
+| `/docs/product-analytics/funnels` | `/docs/product-analytics` |
+| `/docs/web-analytics/dashboard`   | `/docs/web-analytics`     |
+
+The regex has to run to the end of the path to match the part it's dropping, which means it also matches the two segments you want to keep. `\1` puts them back. A fixed alias can't do this, because the text to keep is different on every row. Paths shorter than three segments don't match at all, so `/docs` is left as it is.
 
 ### Keep the path, drop a trailing fragment
 
-To strip an in-page fragment while keeping the first three segments of the path:
+To strip an in-page fragment, but only from paths that are exactly three segments deep:
 
 - **Regex:** `^(/[^/#]+/[^/#]+/[^/#]+)/#.*$`
 - **Alias:** `\1`
 
-This turns `/reports/2024/summary/#revenue` and `/reports/2024/summary/#costs` into `/reports/2024/summary`.
+| Original path                    | Cleaned path            |
+| -------------------------------- | ----------------------- |
+| `/reports/2024/summary/#revenue` | `/reports/2024/summary` |
+| `/reports/2024/summary/#costs`   | `/reports/2024/summary` |
+| `/reports/2023/detail/#revenue`  | `/reports/2023/detail`  |
+
+Here the capture group does double duty: it keeps the path, and spelling out the three segments is what limits the rule to that shape. A rule that matched only `/#...` would strip fragments from every path on the site.
 
 ### Alias syntax
 
@@ -106,9 +120,9 @@ Everything else in the alias is treated as literal text. A few things to watch f
 
 ### When to use capture groups
 
-A rule with capture groups costs more per row than one with a fixed alias, because the regex engine has to track where each group starts and ends instead of only whether the pattern matched. That's still a win when it collapses several near-identical rules into one, since every rule runs against every row: five rules replaced by one means four fewer patterns to evaluate.
+A capture group costs more per row than a fixed alias, because the regex engine has to track where each group starts and ends instead of only whether the pattern matched. It still pays off when it collapses several near-identical rules into one, since every rule runs against every row.
 
-Anchor your regex with `^` either way. Path cleaning replaces every match in a URL, not just the first, so an unanchored pattern keeps scanning the rest of the string.
+Anchor your regex where you can – `^` when you're matching a path, `$` when the pattern runs to the end of the URL. Path cleaning replaces every match in the value, not just the first, so an unanchored pattern keeps scanning after it has found what you were looking for, and can match again somewhere you didn't intend.
 
 ## Where path cleaning applies
 
