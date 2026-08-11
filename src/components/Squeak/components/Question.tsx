@@ -380,9 +380,32 @@ export function Question(props: QuestionProps) {
     const { appWindow } = useWindow()
     const posthog = usePostHog()
     const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+    const [conversationsAvailable, setConversationsAvailable] = useState(false)
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
+
+    // posthog-js and its conversations widget load asynchronously, so a single
+    // isAvailable() check at render time can miss it — poll briefly instead
+    useEffect(() => {
+        if (!isModerator || !isInForum) return
+        const isAvailable = () => !!window?.posthog?.conversations?.isAvailable?.()
+        if (isAvailable()) {
+            setConversationsAvailable(true)
+            return
+        }
+        let attempts = 0
+        const interval = setInterval(() => {
+            attempts++
+            if (isAvailable()) {
+                setConversationsAvailable(true)
+                clearInterval(interval)
+            } else if (attempts >= 20) {
+                clearInterval(interval)
+            }
+        }, 500)
+        return () => clearInterval(interval)
+    }, [isModerator, isInForum])
 
     useEffect(() => {
         if (
@@ -696,7 +719,7 @@ export function Question(props: QuestionProps) {
                                             >
                                                 View in Strapi
                                             </Link>
-                                            {posthog?.conversations?.isAvailable?.() && (
+                                            {conversationsAvailable && (
                                                 <OSButton
                                                     variant="secondary"
                                                     size="sm"
