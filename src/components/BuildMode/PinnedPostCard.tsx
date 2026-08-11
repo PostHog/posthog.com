@@ -53,7 +53,7 @@ export default function PinnedPostCard({ post, index }: { post: BuildModePost; i
                     </div>
                 </div>
                 <div className="mt-3 px-1">
-                    <h3 className="m-0 text-sm font-bold leading-tight line-clamp-2 group-hover:underline">
+                    <h3 className="m-0 text-sm font-bold leading-tight underline decoration-transparent transition-colors duration-200 line-clamp-2 group-hover:decoration-current">
                         {post.frontmatter.title}
                     </h3>
                     <p className="m-0 mt-1 text-xs text-secondary line-clamp-1">{getSubtitle(post)}</p>
