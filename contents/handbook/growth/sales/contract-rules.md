@@ -282,7 +282,7 @@ Where we've agreed to cover usage for free until the renewal date, do it by addi
 
 Always add the credit _before_ the invoice is generated. If you wait for the invoice and credit it afterwards, we've charged the customer an amount we already knew we weren't going to collect.
 
-You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up if it falls short, or wait until the last day before the invoice is generated so you're working from close to actual usage. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract.
+You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up the day before invoice is generated if it falls short. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract. Make sure to note this in other details field in the related Salesforce opportunity so the revops team can make sure the final credit balance is correct during contract setup.
 
 For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
 
