@@ -42,7 +42,7 @@ export default function PinnedPostCard({ post, index }: { post: BuildModePost; i
                             transformOrigin: '50% 25px',
                         }}
                     >
-                        <div className="aspect-square overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
+                        <div className="aspect-square overflow-hidden rounded-md shadow-[0_10px_20px_rgba(0,0,0,0.25)]">
                             {/* left-top anchor keeps thumbnail titles (usually top-left) inside the square crop */}
                             <PostImage
                                 post={post}

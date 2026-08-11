@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { IconChevronDown } from '@posthog/icons'
+import { Popover } from 'components/RadixUI/Popover'
 
-const TagPill = ({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) => (
+const TagPill = ({
+    label,
+    active,
+    onClick,
+    dataTag,
+}: {
+    label: string
+    active: boolean
+    onClick: () => void
+    dataTag?: string
+}) => (
     <button
         onClick={onClick}
-        className={`rounded-full border px-3 py-1 text-[13px] font-medium transition-colors ${
+        data-tag={dataTag}
+        className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors ${
             active
                 ? 'border-red bg-red text-white'
-                : 'border-input text-secondary hover:border-primary hover:text-primary'
+                : 'border-transparent text-secondary hover:border-primary hover:text-primary'
         }`}
     >
         {label}
@@ -20,19 +33,88 @@ type TagFilterProps = {
     onChange: (tag: string | null) => void
 }
 
-/** Row of tag pills, with an "All" reset. Clicking the active tag clears it. */
+/**
+ * A single row of tag pills, with an "All" reset — clicking the active tag clears it.
+ * Pills that don't fit the row are clipped (max-h + overflow-hidden) and collected
+ * into a "more" popover; a ResizeObserver re-measures as the window resizes.
+ */
 export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps): JSX.Element {
+    const rowRef = useRef<HTMLDivElement>(null)
+    const [overflowTags, setOverflowTags] = useState<string[]>([])
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    useLayoutEffect(() => {
+        const row = rowRef.current
+        if (!row) return
+
+        const measure = () => {
+            const children = Array.from(row.children) as HTMLElement[]
+            if (children.length === 0) return
+            const firstRowTop = children[0].offsetTop
+            // Anything that wrapped past the first row is clipped — surface it in the menu
+            const hidden = children
+                .filter((child) => child.dataset.tag && child.offsetTop > firstRowTop)
+                .map((child) => child.dataset.tag as string)
+            setOverflowTags((prev) =>
+                prev.length === hidden.length && prev.every((tag, i) => tag === hidden[i]) ? prev : hidden
+            )
+        }
+
+        measure()
+        const observer = new ResizeObserver(measure)
+        observer.observe(row)
+        return () => observer.disconnect()
+    }, [tags])
+
+    const activeIsHidden = activeTag !== null && overflowTags.includes(activeTag)
+
     return (
-        <div className="my-4 flex flex-wrap gap-1.5">
-            <TagPill label="All" active={!activeTag} onClick={() => onChange(null)} />
-            {tags.map((tag) => (
-                <TagPill
-                    key={tag}
-                    label={tag}
-                    active={activeTag === tag}
-                    onClick={() => onChange(activeTag === tag ? null : tag)}
-                />
-            ))}
+        <div className="my-4 flex items-start gap-1">
+            <div ref={rowRef} className="flex max-h-8 min-w-0 flex-1 flex-wrap gap-1 overflow-hidden">
+                <TagPill label="All" active={!activeTag} onClick={() => onChange(null)} />
+                {tags.map((tag) => (
+                    <TagPill
+                        key={tag}
+                        label={tag}
+                        dataTag={tag}
+                        active={activeTag === tag}
+                        onClick={() => onChange(activeTag === tag ? null : tag)}
+                    />
+                ))}
+            </div>
+            {overflowTags.length > 0 && (
+                <Popover
+                    dataScheme="primary"
+                    open={menuOpen}
+                    onOpenChange={setMenuOpen}
+                    align="end"
+                    trigger={
+                        <button
+                            className={`flex shrink-0 grow-0 items-center gap-1 whitespace-nowrap rounded-full border px-2.5 py-1 text-[13px] font-medium transition-colors ${
+                                activeIsHidden
+                                    ? 'border-red text-red'
+                                    : 'border-transparent text-secondary hover:border-primary hover:text-primary'
+                            }`}
+                        >
+                            +{overflowTags.length} more <IconChevronDown className="size-3.5" />
+                        </button>
+                    }
+                >
+                    <div className="flex max-w-xs flex-wrap gap-1 p-1">
+                        {overflowTags.map((tag) => (
+                            <TagPill
+                                key={tag}
+                                label={tag}
+                                active={activeTag === tag}
+                                onClick={() => {
+                                    onChange(activeTag === tag ? null : tag)
+                                    setMenuOpen(false)
+                                }}
+                            />
+                        ))}
+                    </div>
+                </Popover>
+            )}
         </div>
     )
 }

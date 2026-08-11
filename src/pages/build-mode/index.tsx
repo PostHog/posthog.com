@@ -3,18 +3,23 @@ import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import FeaturedPost from 'components/BuildMode/FeaturedPost'
-import Masthead from 'components/BuildMode/Masthead'
+import Hero, { HeroHeader } from 'components/BuildMode/Hero'
 import PostsGallery from 'components/BuildMode/PostsGallery'
 import RecentPosts from 'components/BuildMode/RecentPosts'
 import { BuildModePost } from 'components/BuildMode/types'
 
 /** How many posts hang on the pinboard below the featured one. */
-const RECENT_COUNT = 8
+const PINNED_COUNT = 8
 
 export default function BuildModePage({ data }: { data: { posts: { nodes: BuildModePost[] } } }): JSX.Element {
     const posts = data.posts.nodes.filter((post) => post.frontmatter?.title)
     const [featured, ...rest] = posts
-    const recent = rest.slice(0, RECENT_COUNT)
+    // Most-viewed posts (fields.pageViews — sourced from PostHog at build time).
+    // Builds without POSTHOG_APP_API_KEY see all zeros, and the stable sort
+    // preserves the query's date order — a recency fallback for free.
+    const pinned = [...rest]
+        .sort((a, b) => (b.fields.pageViews ?? 0) - (a.fields.pageViews ?? 0))
+        .slice(0, PINNED_COUNT)
 
     return (
         <>
@@ -24,15 +29,20 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
             />
             <Editor slug="/build-mode" maxWidth="100%" hasPadding={false} disableFormatting>
                 <div className="@container not-prose text-pretty text-primary">
-                    <div className="mx-auto w-full max-w-6xl px-4 py-8 @xl:px-8">
-                        <header className="flex flex-col gap-8 @3xl:flex-row @3xl:gap-12">
-                            <Masthead />
-                            {featured && <FeaturedPost post={featured} />}
-                        </header>
+                    <div className="relative mx-auto w-full max-w-6xl px-4 pb-20 @xl:px-8">
+                        <HeroHeader placement="build-mode-header" />
+                        <Hero className="mt-16" />
+                        {featured && (
+                            <header className="mt-24">
+                                <FeaturedPost post={featured} />
+                            </header>
+                        )}
                         <hr className="my-8 h-px border-none bg-red/40" />
-                        <RecentPosts posts={recent} />
+                        <RecentPosts posts={pinned} />
                         <hr className="my-8 h-px border-none bg-red/40" />
                         <PostsGallery posts={posts} />
+                        <hr className="my-8 h-px border-none bg-red/40" />
+                        <HeroHeader placement="build-mode-footer" />
                     </div>
                 </div>
             </Editor>
@@ -54,6 +64,7 @@ export const query = graphql`
                 id
                 fields {
                     slug
+                    pageViews
                 }
                 excerpt(pruneLength: 200)
                 frontmatter {

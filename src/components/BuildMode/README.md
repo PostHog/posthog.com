@@ -12,9 +12,10 @@ These components live under `src/components/` rather than beside the page becaus
 
 | Section | Components |
 | --- | --- |
-| Header | `Masthead` (wordmark + tagline) and `FeaturedPost` (the newest post, taped up) |
-| Pinboard | `RecentPosts` — a horizontally scrollable row of `PinnedPostCard`s that swing on their pins |
-| All posts | `PostsGallery` — search + `TagFilter` over a grid of `GalleryCard`s |
+| Header | `HeroHeader` (wordmark + subscribe; also repeated as the page footer), `Hero` (the statement: tagline as display type + pitch), and `FeaturedPost` (the newest post, taped up) |
+| Pinboard | `RecentPosts` — a horizontally scrollable row of `PinnedPostCard`s that swing on their pins. Shows the most-viewed posts (`fields.pageViews`, sourced from PostHog at build time; falls back to recency when the build has no `POSTHOG_APP_API_KEY`) |
+| All posts | `PostsGallery` — search + `TagFilter` over a paginated grid of `GalleryCard`s (12 per page) |
+| Footer | A second `HeroHeader` (`placement="build-mode-footer"`) after the gallery |
 
 ## Files
 
@@ -22,17 +23,18 @@ These components live under `src/components/` rather than beside the page becaus
 | --- | --- |
 | `types.ts` | `BuildModePost` — a `/newsletter/*` MDX node as shaped by the page query. |
 | `utils.ts` | `rand` (SSR-stable pseudo-random), `getSubtitle` (first sentence of the meta description/excerpt), `getAuthorName`, `getByline`. |
-| `Masthead.tsx` | The build mode wordmark and standing tagline. |
-| `FeaturedPost.tsx` | The newest post: large image with `Tape` corners, title, dek, byline. |
+| `Masthead.tsx` | The build mode wordmark and standing tagline (also exports `LOGO_SRC`). Currently unused by the page — superseded by `Hero` unless a variant brings it back. |
+| `Hero.tsx` | `HeroHeader` — wordmark + subscribe row (`SubscribeForm` fires `newsletter_subscribed` with a per-instance `placement`), rendered at the top and again as the footer — and `Hero`, the statement headline (static `bg-highlight` on "product builders") with the pitch as its deck. |
+| `FeaturedPost.tsx` | The newest post: a "Hot off the press" annotation pointing down at it, image with `Tape` corners on the left, title, dek, byline on the right. |
 | `Tape.tsx` | Inline SVG strip of masking tape with torn ends. |
 | `PostImage.tsx` | A post's featured image, degrading through the shapes it can arrive in: processed Gatsby image → Cloudinary URL → raw URL → `IconNewspaper` placeholder. Shared by all three sections. |
-| `RecentPosts.tsx` | The scrollable pinboard row: edge fade mask, arrow buttons, and the two hooks below. |
+| `RecentPosts.tsx` | The scrollable pinboard row, dashed rules between cards: edge fade mask, arrow buttons, and the two hooks below. |
 | `PinnedPostCard.tsx` | One pinned card — pushpin, square thumbnail, resting angle, caption. |
 | `usePinnedCardSwing.ts` | The swing physics (see below). |
 | `useScrollEdges.ts` | Tracks whether a scroller has content off either edge; also exposes `scrollByPage`. Drives the fade mask and the arrow buttons. |
-| `PostsGallery.tsx` | The all-posts section: heading with counts, search input, `TagFilter`, grid, empty state. |
+| `PostsGallery.tsx` | The all-posts section: heading with counts, search input, `TagFilter`, paginated grid (12 per page, resets on filter change), empty state. |
 | `GalleryCard.tsx` | One gallery tile. |
-| `TagFilter.tsx` | Tag pills with an "All" reset. Clicking the active tag clears it. |
+| `TagFilter.tsx` | A single measured row of tag pills with an "All" reset (clicking the active tag clears it); pills that don't fit collapse into a "+N more" popover. |
 | `usePostFilters.ts` | Search + single-tag filter state over a post list. Returns `tags` (most common first), `filteredPosts`, `isFiltered`, and `clear`. |
 
 ## How the swing works

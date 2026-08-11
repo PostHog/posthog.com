@@ -3,7 +3,11 @@ import { ImageDataLike } from 'gatsby-plugin-image'
 /** A `/newsletter/*` MDX node, shaped by the `/build-mode` page query. */
 export type BuildModePost = {
     id: string
-    fields: { slug: string }
+    fields: {
+        slug: string
+        /** Recent pageview count sourced from PostHog at build time; 0 when the build ran without POSTHOG_APP_API_KEY. */
+        pageViews?: number | null
+    }
     excerpt?: string
     frontmatter: {
         title: string

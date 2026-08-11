@@ -40,11 +40,20 @@ export default function RecentPosts({ posts }: { posts: BuildModePost[] }): JSX.
         <section className="relative -mx-4 @xl:-mx-8">
             <div
                 ref={scrollRef}
-                className="scrollbar-hide flex snap-x gap-6 overflow-x-auto px-4 pb-2 pt-4 scroll-px-4 @2xl:gap-8 @xl:px-8 @xl:scroll-px-8"
+                className="scrollbar-hide flex snap-x gap-3 overflow-x-auto px-4 pb-4 pt-4 scroll-px-4 @2xl:gap-4 @xl:px-8 @xl:scroll-px-8"
                 style={{ maskImage: mask, WebkitMaskImage: mask }}
             >
                 {posts.map((post, index) => (
-                    <PinnedPostCard key={post.id} post={post} index={index} />
+                    <React.Fragment key={post.id}>
+                        {index > 0 && (
+                            /* scroll rhythm: a dashed rule between cards (flex-none doesn't exist here — custom flex scale) */
+                            <div
+                                aria-hidden
+                                className="my-4 w-px shrink-0 grow-0 self-stretch border-l border-dashed border-primary"
+                            />
+                        )}
+                        <PinnedPostCard post={post} index={index} />
+                    </React.Fragment>
                 ))}
             </div>
             {canScroll.left && <ArrowButton direction="left" onClick={() => scrollByPage(-1)} />}
