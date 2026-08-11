@@ -1635,6 +1635,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/handling-customer-issues',
                     },
                     {
+                        name: 'Getting people to talk to you',
+                        url: '/handbook/account-management/getting-people-to-talk-to-you',
+                    },
+                    {
                         name: 'Health tracking',
                         url: '/handbook/cs-and-onboarding/health-tracking',
                     },
