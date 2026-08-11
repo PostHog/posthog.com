@@ -11,6 +11,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 import {
     IconArchive,
     IconPencil,
@@ -377,6 +378,8 @@ export function Question(props: QuestionProps) {
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const { appWindow } = useWindow()
+    const posthog = usePostHog()
+    const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
@@ -433,6 +436,40 @@ export function Question(props: QuestionProps) {
     const handleReply = async (_values, _formData, data) => {
         if (data.askMax) {
             setMaxQuestions([...maxQuestions, { manual: false, withContext: true }])
+        }
+    }
+
+    const handleEscalateToSupport = async () => {
+        if (escalateState === 'sending' || escalateState === 'sent') return
+        setEscalateState('sending')
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName = authorProfile?.attributes?.firstName
+            ? `${authorProfile.attributes.firstName} ${authorProfile.attributes.lastName ?? ''}`.trim()
+            : 'Anonymous'
+        const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
+        const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
+        const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
+        const message = [
+            'Community question escalated by a moderator',
+            `Title: ${questionData.attributes.subject}`,
+            `Link: https://posthog.com/questions/${questionData.attributes.permalink}`,
+            `Author: ${authorName}${authorEmail ? ` (${authorEmail})` : ''}`,
+            topics ? `Topics: ${topics}` : null,
+            `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
+        ]
+            .filter(Boolean)
+            .join('\n')
+        try {
+            // Attribute the ticket to the question author so support replies reach them
+            await posthog?.conversations?.sendMessage(
+                message,
+                authorEmail ? { name: authorName, email: authorEmail } : undefined,
+                true
+            )
+            setEscalateState('sent')
+        } catch (error) {
+            posthog?.captureException?.(error)
+            setEscalateState('error')
         }
     }
 
@@ -659,6 +696,25 @@ export function Question(props: QuestionProps) {
                                             >
                                                 View in Strapi
                                             </Link>
+                                            {posthog?.conversations?.isAvailable?.() && (
+                                                <OSButton
+                                                    variant="secondary"
+                                                    size="sm"
+                                                    onClick={handleEscalateToSupport}
+                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
+                                                >
+                                                    {escalateState === 'sending'
+                                                        ? 'Escalating…'
+                                                        : escalateState === 'sent'
+                                                        ? 'Escalated ✓'
+                                                        : 'Escalate to support'}
+                                                </OSButton>
+                                            )}
+                                            {escalateState === 'error' && (
+                                                <span className="text-red text-xs font-semibold">
+                                                    Couldn't create ticket. Try again?
+                                                </span>
+                                            )}
                                         </p>
                                     </div>
                                 </div>
