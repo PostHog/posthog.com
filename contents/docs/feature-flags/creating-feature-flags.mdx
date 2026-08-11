@@ -170,9 +170,9 @@ Use this when you want a user who is excluded by a targeted condition's rollout 
 
 ##### Things to keep in mind
 
-- **The rollout has to be what excluded them.** If a user doesn't match a condition set's property filters at all, that set is skipped and evaluation continues as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
-- **Order your condition sets narrowest first.** A broad catch-all set near the top will short-circuit the more specific sets below it.
-- **Rollout buckets are shared across condition sets.** A user's bucket comes from the flag key and their identifier, not the condition set, so falling through to a set with an equal or smaller rollout percentage can never succeed – only a larger one can.
+- **The rollout percentage has to be what excluded them.** This is the only check that triggers an early exit. Anything else that fails – a property filter, a cohort, a [flag dependency](/docs/feature-flags/dependencies), or a missing group key – just means that condition set didn't match, and evaluation continues to the next one as normal. In the example above, a user whose email isn't `@example.com` moves on to set 2 regardless of this setting.
+- **Order your condition sets narrowest first.** A broad catch-all set near the top will short-circuit the more specific sets below it. A set rolled out to 100% never triggers an early exit, since nobody falls outside its rollout.
+- **Rollout buckets are shared across condition sets.** For sets that target the same entity, a user's bucket comes from the flag key and their identifier, not the condition set – so falling through to a set with an equal or smaller rollout percentage can never succeed, only a larger one can.
 
 <CalloutBox icon="IconInfo" title="Local evaluation support varies by SDK" type="fyi">
 
