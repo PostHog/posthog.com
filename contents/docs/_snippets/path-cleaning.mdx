@@ -34,7 +34,7 @@ Each rule has two parts:
 
 When a URL matches the regex, the matched portion is replaced with the alias. The rest of the URL remains unchanged.
 
-Rules run against whichever URL property is being cleaned. That's a path like `/user/123/profile` for the web analytics tiles, but a full URL like `https://example.com/user/123/profile` for a [Paths insight](/docs/product-analytics/paths) or a breakdown by `$current_url` – so a pattern anchored with `^/` matches the first and not the second. Test a rule against a sample URL in project settings before you save it.
+Rules run against whichever URL property is being cleaned. That's a path like `/user/123/profile` for the web analytics tiles, but a full URL like `https://example.com/user/123/profile` for a [Paths insight](/docs/product-analytics/paths) or a breakdown by `$current_url` – so a pattern anchored with `^/` matches the first and not the second. Test a rule against a sample URL in project settings before you save it, or write one that [handles both](#matching-both-paths-and-full-urls).
 
 ## Examples
 
@@ -102,6 +102,22 @@ To strip an in-page fragment, but only from paths that are exactly three segment
 | `/reports/2023/detail/#revenue`  | `/reports/2023/detail`  |
 
 Here the capture group does double duty: it keeps the path, and spelling out the three segments is what limits the rule to that shape. A rule that matched only `/#...` would strip fragments from every path on the site.
+
+### Matching both paths and full URLs
+
+Both rules above are anchored with `^/`, so they only match a path. Don't fix that by dropping the anchor – an unanchored pattern happily matches the hostname as if it were a path segment. The section rule without its `^` turns `https://example.com/docs/product-analytics/trends` into `https://example.com/docs`, because `example.com` gets counted as the first segment.
+
+Make the scheme and host an optional group instead, and put it back with `\1`:
+
+- **Regex:** `^(https?://[^/]+)?(/[^/]+/[^/]+)/.*$`
+- **Alias:** `\1\2`
+
+| Original URL                                        | Cleaned URL                                  |
+| --------------------------------------------------- | -------------------------------------------- |
+| `/docs/product-analytics/trends`                    | `/docs/product-analytics`                    |
+| `https://example.com/docs/product-analytics/trends` | `https://example.com/docs/product-analytics` |
+
+When the value has no scheme and host, group 1 matches nothing and `\1` substitutes an empty string, so one rule covers both.
 
 ### Alias syntax
 
