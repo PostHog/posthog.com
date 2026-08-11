@@ -14,30 +14,30 @@ In addition, every engineer regardless is part of the global follow-the-sun on-c
 
 ## Escalation schedules
 
-Two things work together in incident.io, and it's worth keeping them straight:
+Your team's schedules, the escalation paths that page them, and your team's entry in the incident.io Team catalog are all [defined in Terraform](#managing-on-call-in-terraform) – one block per team, in one file. Setting a team up, or changing who's on call and when, means editing that block rather than the incident.io dashboard.
 
-* **Schedules** (rotas) say _who_ is on call. Teams own these and edit them in the incident.io dashboard.
-* **[Escalation paths](#escalation-paths)** say _who gets paged, in what order, and how long they have to respond_. These are managed in Terraform.
+Cover for PTO and swaps is the exception: [overrides](#make-sure-your-availability-is-up-to-date) still happen in the dashboard, because Terraform owns the rotations and not what's layered on top of them.
 
 ### Team schedules
 
-Every team has 2 schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules)
+A team has up to three schedules in [incident.io](https://app.incident.io/posthog/on-call/schedules), and it gets the ones its Terraform block asks for:
+
 * `On call: {team}`
-    - This is the working-hours rotation. Each engineer should have their working hours in place here Mon-Fri with a sensible working day
-    - For example 8:00-17:00 for EU based engineers is likely preferable as there will be US engineers who can take 17:00 onwards
-    - Each member is responsible for ensuring this is up-to-date with PTO. You can create an override for your schedule simply assigned to "No one".
-* `Support: {team}`
-    - This is a weekly or bi-weekly rotation (teams can decide) that covers both who is assigned to the [support hero rotation](/handbook/engineering/operations/support-hero) as well as the out of-hours-escalation for the extreme case
+    - Working-hours cover, and where alerts routed to the team go. Everyone gets their own rotation, running nine hours from their start of day, weekdays only unless you say otherwise
+    - Stagger start times to cover as much of the day as your team can – 08:00 for an EU-based engineer leaves 17:00 onwards for a US-based one
+    - Gaps are fine. Nobody is woken up here: a critical alert that finds nobody on call goes to [global on-call](#global-on-call-schedule) instead
+* `Escalation: {team}`
+    - The "everything is broken" rotation, paged only when [someone escalates by hand](#manual-escalation-schedules)
+* `Support Hero: {team}`
+    - The [support hero rotation](/handbook/engineering/operations/support-hero). Everyone takes turns one at a time, handing over every week or two. Nothing pages it
 
 ### Manual escalation schedules
 
-In addition to the regular on-call schedules, teams that own production-critical services have a manual escalation schedule in incident.io:
-* `Escalation: {team}`
-    - This is the "everything is broken" escalation path for critical out-of-hours emergencies
-    - Only teams that own production-critical services are required to have this schedule - other teams don't need one
-    - **Everyone relevant on the team should be on this schedule** - it's not a rotation like regular on-call
-    - There should be no gaps in coverage since this is the last resort when normal escalation paths fail
-    - This schedule is triggered manually by whoever is handling an incident when they need additional help
+Teams that own production-critical services also have an `Escalation: {team}` schedule, triggered by hand by whoever is handling an incident and needs more help. Other teams don't need one.
+
+Unlike `On call: {team}`, this rotation has to cover the clock, every day of the week. You describe it as groups – blocks of the clock with the people covering each one, an EU group and a US group, or however your team is actually spread. Everyone in a group is on call for the whole of its window rather than taking turns, and the page cycles between them one at a time.
+
+Group windows have to tile the full 24 hours between them. If they don't, the Terraform plan fails and names the first uncovered minute – somebody escalating by hand at 3am should never find nobody there.
 
 #### When to use manual escalation
 
@@ -49,7 +49,7 @@ Manual escalation should be used when:
 #### How to trigger manual escalation
 
 1. From within an incident in incident.io, use the escalation options to page the relevant `Escalation (manual): {team}` path
-2. This pages whoever is on that team's `Escalation: {team}` rota right now, then everyone on it – one person at a time, 10 minutes per level
+2. This pages whoever is on that team's `Escalation: {team}` rotation right now, then everyone on it – one person at a time, 10 minutes per level
 3. Any available team member can then respond and assist with the incident
 
 > 💡 Manual escalation is a safety net, not a shortcut. Always try the normal escalation paths first before manually escalating to an entire team.
@@ -81,46 +81,89 @@ Besides knowledge, being on call requires availability – including weekends. I
 
 ## Escalation paths
 
-A team has up to two escalation paths:
+A schedule says who's on call. An escalation path says who gets paged, in what order, and how long they have to respond. A team gets the paths that follow from the schedules it has:
 
-* `On call: {team}` – where an alert routed to the team goes. Previously named `PostHog: {team}`.
-* `Escalation (manual): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules).
+* `On call: {team}` – where an alert routed to the team goes, previously named `PostHog: {team}`
+* `Escalation (manual): {team}` – where you land when you [escalate to a team by hand](#manual-escalation-schedules)
 
-> **Escalation paths are managed in Terraform, not the dashboard.** Changes made in the incident.io UI get reverted on the next apply. Schedules are the exception – teams change those constantly for PTO and new joiners, so they stay in the dashboard and Terraform looks them up by name.
-
-They live in the [`incidentio-escalation-paths` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-escalation-paths) in `posthog-cloud-infra`, and every team is listed in one file: [`terraform/environments/incidentio/escalation-paths/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/escalation-paths/terragrunt.hcl).
+Two more are org-wide rather than owned by a team: `PostHog: General escalation`, for an escalation that's nobody's in particular, which pages global on-call for 30 minutes and then the last-resort rotation alongside it; and the `Notify: ...` paths, which post to a Slack channel and page nobody.
 
 ### The standard on-call path
 
 Every `On call: {team}` path is the same shape, so paging behavior doesn't vary by team:
 
 1. Post to the team's own alert channel, whatever the priority
-2. If the alert is critical, round-robin the team's `On call: {team}` rota – 10 minutes to ack
-3. Still unacked? Post to #alerts, then round-robin global on-call alongside the team – 15 minutes to ack
+2. If the alert is critical, page the team's `On call: {team}` rotation – 10 minutes to ack
+3. Still unacked? Post to #alerts, then page global on-call alongside the team – 15 minutes to ack
 4. Repeat
 
-Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets woken up. A few teams escalate sideways to a second team's rota between steps 2 and 3.
+Non-critical alerts stop at step 1 – the team sees them in Slack, nobody gets woken up. Levels page one person at a time, moving on every two minutes until somebody acks, rather than paging a whole rotation at once.
 
-### Adding or changing a path
+## Managing on-call in Terraform
 
-1. Create the rota you need in the [incident.io dashboard](https://app.incident.io/posthog/on-call/schedules) – `On call: {team}` for alert routing, `Escalation: {team}` for manual escalation
-2. Set the `Slack Alerts channel` attribute on your team's entry in the Team catalog. The path reads the channel from there, so an unset one fails the plan
-3. Add your team to `teams` in `terragrunt.hcl` and open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra). CI runs the plan – read it before merging, since it shows exactly which paging levels move
+Teams, schedules, rotations, and escalation paths all live in the [`incidentio-oncall` module](https://github.com/PostHog/posthog-cloud-infra/tree/main/terraform/modules/incidentio-oncall) in `posthog-cloud-infra`. Everything one team needs is a single block in a single file: [`terraform/environments/incidentio/oncall/terragrunt.hcl`](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/incidentio/oncall/terragrunt.hcl).
+
+You supply people and hours. Rotation mechanics aren't configurable, so every team's schedules and paging come out the same shape:
+
+```hcl
+"my-team" = {
+  name                   = "My Team"
+  alert_slack_channel_id = "C0123456789" # #alerts-my-team
+  slack_user_group_id    = "S0123456789" # @Team My Team
+
+  # Working hours. One rotation each, nine hours from start of day.
+  on_call = {
+    members = {
+      "eu-person@posthog.com" = { start_of_day = "07:00" }
+      "us-person@posthog.com" = { start_of_day = "15:00" }
+    }
+  }
+
+  # Round-the-clock cover for manual escalation. Windows must tile the day.
+  escalation = {
+    groups = {
+      "EU" = { start = "06:00", end = "18:00", members = ["eu-person@posthog.com"] }
+      "US" = { start = "18:00", end = "06:00", members = ["us-person@posthog.com"] }
+    }
+  }
+
+  # Support hero, taking turns a week at a time.
+  support_hero = {
+    members                 = ["eu-person@posthog.com", "us-person@posthog.com"]
+    handover_interval_weeks = 1
+    handover_start_at       = "2026-01-05T00:00:00Z"
+  }
+}
+```
+
+Worth knowing before you write one:
+
+* **Every time is UTC**, and you convert from your own timezone yourself. One timezone across every team is the only way the windows can be read off and checked against each other
+* **Schedules and paths follow from the blocks you write**, so there's no separate switch to forget. `on_call` gets you the `On call:` schedule and the path alerts route to, `escalation` gets you the escalation rotation and the manual path, and `support_hero` gets you a support hero rotation that nothing pages
+* **The key is your team's external ID** in the Team catalog rather than its name, so a rename moves nothing. The display name comes from `name`
+* **`handover_start_at` is fixed once it's set.** Changing it re-phases the support hero rotation and hands the pager over mid-turn
+* **`On call: Global` and the last-resort schedule are the exception.** They belong to no team, so they're looked up by name rather than defined here
+* Teams defined here carry a `Managed by Terraform` attribute in the dashboard pointing back at the file, so whoever finds your team knows where to edit it
+
+Open a PR against [`posthog-cloud-infra`](https://github.com/PostHog/posthog-cloud-infra) and CI runs the plan. Read it before merging – it names every rotation and paging level that moves. Don't make these changes in the incident.io dashboard, because the next apply puts them back.
 
 Rather than hand-writing the HCL, point your editor's agent at it:
 
 ```
-In posthog-cloud-infra, add my team to the incident.io escalation paths.
+In posthog-cloud-infra, add my team to the incident.io on-call setup.
 
-Read terraform/modules/incidentio-escalation-paths/ first, then add an entry to
-`teams` in terraform/environments/incidentio/escalation-paths/terragrunt.hcl,
-keyed by my team's external ID in the incident.io Team catalog.
+Read terraform/modules/incidentio-oncall/ first – the README and the `teams`
+variable – then add a block for my team to `teams` in
+terraform/environments/incidentio/oncall/terragrunt.hcl, keyed by our external
+ID in the incident.io Team catalog.
 
-Set `on_call = true` for a standard alert-routing path, and
-`manual_escalation = true` for a manual escalation path. Rota names derive from
-the team's catalog display name as "On call: <team>" and "Escalation: <team>",
-so only set `on_call_schedule` or `escalation_schedule` if our rota is named
-differently. Then run `terragrunt hcl validate` and `terraform fmt`.
+Here's who's on call and when, in local time: <people, their working hours, and
+who covers escalation out of hours>.
+
+Convert every time to UTC, and don't set `timezone` – that field only exists to
+adopt a schedule that isn't UTC yet. Escalation group windows have to tile the
+whole 24 hours or the plan fails. Then run `terragrunt hcl validate` and
+`terraform fmt`, and show me the plan.
 ```
 
 ## Before going on call
@@ -168,10 +211,10 @@ Exact menu paths vary by manufacturer (Pixel, Samsung, OnePlus, etc.), but the s
 
 ## Make sure your availability is up-to-date
 
-If you are unavailable for any of your schedules you need to act!
+If you are unavailable for any of your schedules you need to act! Overrides are the one part of a schedule that isn't in Terraform, so do these in the dashboard – an apply won't undo them.
 
-1. For your `On call: {team}` schedule simply click on your name in your layer, click `create an override` and then remove yourself from the list so it shows `No one`
-1. For your `Support: {team}` schedule or `On call: {global}` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
+1. For your `On call: {team}` schedule simply click on your name in your rotation, click `create an override` and then remove yourself from the list so it shows `No one`
+1. For your `Support Hero: {team}` or `On call: Global` schedules click `Request cover` at the top right. This will notify selected team members automatically to find someone to cover you (you should probably do a shout out in #ask-posthog-anything as well). You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
 ## Make sure you have all the access you might need
 
