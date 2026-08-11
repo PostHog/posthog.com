@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import SEO from 'components/seo'
-import Editor from 'components/Editor'
+import ReaderView from 'components/ReaderView'
 import FeaturedPost from 'components/BuildMode/FeaturedPost'
 import Hero, { HeroHeader } from 'components/BuildMode/Hero'
 import PostsGallery from 'components/BuildMode/PostsGallery'
@@ -27,7 +27,7 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
                 title="build mode – PostHog"
                 description="Tools, tactics, and taste for product builders. Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups."
             />
-            <Editor slug="/build-mode" maxWidth="100%" hasPadding={false} disableFormatting>
+            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
                 <div className="@container not-prose text-pretty text-primary">
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-20 @xl:px-8">
                         <HeroHeader placement="build-mode-header" />
@@ -45,7 +45,7 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
                         <HeroHeader placement="build-mode-footer" />
                     </div>
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }
