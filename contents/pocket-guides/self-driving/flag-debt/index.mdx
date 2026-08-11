@@ -102,33 +102,38 @@ report:
 
 # Feature flag debt
 
-Every flag is a decision you already made. The rollout finished, the losing branch deleted, and the
-flag stayed. It's still evaluating though, and it's cluttering your codebase. This scout finds the flags you forgot and opens the pull request that takes them out.
+Every fully rolled out flag is a decision you've already made. Once the flag is fully rolled out, the flag chooses the same code branch every time, and the losing branch becomes dead code. If you don't clean it up, every evaluation is still billed, and the dead code clutters your codebase.
+
+This scout finds the flags you forgot to remove and opens the pull request that takes them out.
 
 ## What the scout looks at
 
-The scout looks for patterns like <SeeFig n={1} />: a rollout hit 100% four months ago, and the evaluations
-never stopped. A decision you already made and moved on with is still being asked ~52,000 times a day. 
+A rollout hit 100% four months ago, and the evaluations never stopped. A decision you already made and moved on with is still being asked ~52,000 times a day. Which is it?
 
-If the rollout were still moving, this would be a live experiment, not debt. This is how the scout determines what to act on.
+- If the rollout is still moving, that's a live experiment, not debt. The scout stays _quiet_.
+- If the rollout finished and the evaluations kept going, it signals flag debt. The scout _**reports**_.
+
+That second pattern is what the scout looks for – <SeeFig n={1} /> shows every flag it caught.
 
 ## The report in your inbox
 
 When your product emits <Term name="signal">signals</Term> that indicate flags have gone stale, a <Term name="scout" /> opens a <Term name="report" /> – and <SeeFig n={2} /> breaks the card down part by part. Click Review and the report opens into <SeeFig n={3} />: the full evidence, the raw signals, and the button that turns it into a
-pull request. Yours would name your flags, your repos, your call sites.
+pull request.
+
 
 ## The pull request you merge
 
-When you're ready to open a pull request, the agent does it for you, attaching the evidence along the way. You review and merge it like any other – nothing merges without you.
+When you're ready to open a pull request, PostHog dispatches an agent to do it for you with the report and evidence attached as context. You review and merge it like any other PR – nothing merges without you.
 
 Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See self-driving [Pricing](/docs/self-driving/pricing).
 
 ## The scout itself
 
-Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual file for this guide's custom scout.
+Scouts are the heart of the self-driving system – they're instructions an agent follows on a schedule – <SeeFig n={4} /> is the actual skill file for this guide's custom scout.
 
-It reads more than one <Term name="signal source" />, so the report can name a likely cause, not
-just a number that moved.
+It reads more than one <Term name="signal source" />, so the report will name a likely cause, not just a number that moved.
+
+This scout's signal sources come from the following product data:
 
 <!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
 <Watches />
