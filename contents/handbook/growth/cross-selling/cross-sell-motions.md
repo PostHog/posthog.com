@@ -296,10 +296,14 @@ If we want customers to use more products, we should incentivize new product ado
 
 ### How much credit is reasonable?
 
-- **Scale it to the account.** Anchor on what the product would cost this customer at their real volume. A flat number is too small to matter for big accounts and a giveaway for small ones.
-- **Cover realistic usage, timeboxed.** Enough credits to run the product the way they actually would for a set period, so the trial ends with a decision point. Extending is fine, but that's a deliberate second offer, not a trial that quietly never ends.
-- **Run the comfort test.** If you'd hesitate to post the number and your reasoning in a public Slack channel, the offer is too big or the reasoning isn't there yet.
-- **Loop in the team that builds the product.** They know what realistic usage costs, and for new or pre-GA products there may already be an official alpha/beta credit offer. Check before inventing your own number.
+Credit retroactively rather than upfront. We don't have per-product credits, so an upfront credit pads whatever the customer's next invoices are, whether or not there's any usage of the new product on them. Let them use the product, then credit back what it cost.
+
+That shapes the sizing:
+
+- **Timebox it** – usually 2-3 months of usage, so the trial ends with a decision point.
+- **Cap it** – agree an upper limit up front, scaled to the account, so trial usage of a metered product (e.g. Replay Vision) can't blow up our infra or margins.
+- **Run the comfort test** – if you'd hesitate to post the number and your reasoning in a public Slack channel, the offer is too big or the reasoning isn't there yet.
+- **Loop in the team that builds the product** – they know what realistic usage costs, and for new or pre-GA products there may already be an official alpha/beta credit offer. Check before inventing your own number.
 
 The mechanics of actually adding the credit are covered in [giving credits to customers](/handbook/growth/revops/credits).
 
