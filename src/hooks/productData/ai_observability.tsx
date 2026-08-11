@@ -264,15 +264,14 @@ export const aiObservability = {
                 {
                     title: 'You want an AI gateway in the request path',
                     subtitle:
-                        'Helicone and Braintrust can proxy your calls for caching, fallbacks, and rate limits – PostHog only observes',
-                },
-                {
-                    title: "You're all-in on LangChain",
-                    subtitle: 'LangSmith is built by the LangChain team and goes deepest on LangGraph agents',
+                        'Others can proxy your calls for caching, fallbacks, and rate limits – PostHog only observes',
                 },
                 {
                     title: 'You only want LLM ops metrics',
                     subtitle: 'and will never need the product context – retention, funnels, replays – around them',
+                },
+                {
+                    title: "You don't want to use an open source product",
                 },
             ],
             us: [
