@@ -18,16 +18,23 @@ import Link from 'components/Link'
 import PlatformInstall from 'components/PlatformInstall'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
+import { getLogo } from '../../../constants/logos'
 import { features as f } from './features'
 
 import AnthropicLogo from '../../../../contents/images/docs/llms/Anthropic_logo_2025.svg'
+import AnthropicGlyph from '../../../../contents/images/docs/llms/anthropic.svg'
 import GeminiLogo from '../../../../contents/images/docs/llms/Google_Gemini_logo_2025.svg'
+import GeminiGlyph from '../../../../contents/images/docs/llms/gemini.svg'
 import LangChainLogo from '../../../../contents/images/docs/llms/LangChain_Logo.svg'
+import LangChainGlyph from '../../../../contents/images/docs/llms/langchain.svg'
 import LiteLLMLogoDark from '../../../../contents/images/docs/llms/LiteLLM_logo_white.png'
 import LiteLLMLogoLight from '../../../../contents/images/docs/llms/LiteLLM_logo_black.png'
 import OpenAILogo from '../../../../contents/images/docs/llms/OpenAI_Logo.svg'
+import OpenAIGlyph from '../../../../contents/images/docs/llms/openai.svg'
 import OpenRouterLogo from '../../../../contents/images/docs/llms/OpenRouter_logo_2025.svg'
+import OpenRouterGlyph from '../../../../contents/images/docs/llms/openrouterai.png'
 import VercelLogo from '../../../../contents/images/docs/llms/Vercel_logo_2025.svg'
+import VercelGlyph from '../../../../contents/images/docs/llms/vercel.svg'
 
 const nativeIntegrations: Array<{
     name: string
@@ -81,32 +88,35 @@ const additionalProviders = [
  * "Supports OpenAI, Anthropic, …" teaser rows for the install CTAs. The wizard
  * instruments LLM providers here, not app frameworks, so the shared
  * `WizardFrameworksTeaser` gets this list instead of the installation taxonomy.
+ * Square glyphs only (wordmark logos read as smudges at 24px); Databricks and
+ * Lepton stay in the on-page "We also support" list – no logo or docs page yet.
  */
-export const wizardSupports = [
-    ...nativeIntegrations
-        .filter((i) => !i.isManualCapture)
-        .map((i) => ({
-            slug: i.link.split('/').pop() as string,
-            label: i.name,
-            url: i.link,
-            image: i.logo ?? i.logoLight,
-            external: false,
-        })),
-    ...additionalProviders
-        .filter((name) => name !== 'And more...')
-        .map((name) => ({
-            slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            label: name,
-            url: '/docs/ai-observability/installation',
-            external: false,
-        })),
-    {
-        slug: 'manual-capture',
-        label: 'Manual capture',
-        url: '/docs/ai-observability/installation/manual-capture',
-        external: false,
-    },
+const providerTeaser: Array<{ slug: string; label: string; image?: string }> = [
+    { slug: 'openai', label: 'OpenAI', image: OpenAIGlyph },
+    { slug: 'anthropic', label: 'Anthropic', image: AnthropicGlyph },
+    { slug: 'google', label: 'Google Gemini', image: GeminiGlyph },
+    { slug: 'langchain', label: 'LangChain', image: LangChainGlyph },
+    { slug: 'vercel-ai', label: 'Vercel AI SDK', image: VercelGlyph },
+    { slug: 'openrouter', label: 'OpenRouter', image: OpenRouterGlyph },
+    { slug: 'litellm', label: 'LiteLLM', image: getLogo('litellm') },
+    { slug: 'aws-bedrock', label: 'AWS Bedrock', image: getLogo('awsBedrock') },
+    { slug: 'perplexity', label: 'Perplexity', image: getLogo('perplexity') },
+    { slug: 'azure-openai', label: 'Azure', image: getLogo('azureOpenAI') },
+    { slug: 'groq', label: 'Groq', image: getLogo('groq') },
+    { slug: 'mistral', label: 'Mistral AI', image: getLogo('mistral') },
+    { slug: 'deepseek', label: 'Deepseek', image: getLogo('deepseek') },
+    { slug: 'cohere', label: 'Cohere', image: getLogo('cohere') },
+    { slug: 'xai', label: 'xAI', image: getLogo('xai') },
+    { slug: 'fireworks-ai', label: 'Fireworks', image: getLogo('fireworksAI') },
 ]
+
+export const wizardSupports = providerTeaser.map(({ slug, label, image }) => ({
+    slug,
+    label,
+    url: `/docs/ai-observability/installation/${slug}`,
+    image,
+    external: false,
+}))
 
 const IntegrationGrid = () => (
     <div className="@container not-prose my-6">
