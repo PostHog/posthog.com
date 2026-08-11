@@ -30,7 +30,7 @@ Humans have this problem too. Every new analyst re-learns which revenue table is
 
 You can't fix it with a smarter model. You need to give every agent a single place to read the definition from, so "MRR", and every other metric you want to define, means the same thing on every call. That place is the [semantic layer](/docs/semantic-layer), and this is the story of building it into [PostHog's context warehouse](/blog/what-is-a-context-warehouse).
 
-<!-- SCREENSHOT: the same "what was our MRR last month?" question producing different SQL / different answers across two agents --> ![What was our MRR last month](XX)
+![What was our MRR last month](https://res.cloudinary.com/dmukukwp6/image/upload/Semantic_layer_ARR_494c0a5aa3.png)
 
 
 ## What is a semantic layer?
@@ -62,7 +62,7 @@ A catalog actually stores the semantic layer. What integrates it so fully is tha
 
 The reason three tools gave three MRR numbers is that each had to invent an answer. When you have a catalog, it becomes the first thing any agent checks: is there an approved metric? If so, it runs the governed definition instead of writing its own SQL. Same question, same number, every time.
 
-<!-- SCREENSHOT: the typed-confirm approval flow in an MCP client — agent proposes, human types "confirm" -->![What was our MRR last month](XX)
+![What was our MRR last month](https://res.cloudinary.com/dmukukwp6/image/upload/creating_approving_new_metric_9db2e60331.png)
 
 ## AI generated, human owned
 
