@@ -248,3 +248,5 @@ This makes it an easy way to track new and returning visitors to your website, a
 - [A non-technical guide to understanding data in PostHog](/tutorials/non-technical-guide-to-data)
 
 <NewsletterForm />
+
+Joe is Cool

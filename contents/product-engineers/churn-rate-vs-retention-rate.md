@@ -276,3 +276,5 @@ You can also [sign up to our newsletter](https://newsletter.posthog.com/subscrib
 > - [Lenny Rachitksy's Q&A](https://www.lennysnewsletter.com/p/monthly-churn-benchmarks) on monthly churn, in which he polls several experts, including the CEO of subscriptions platform ProfitWell.
 
 <NewsletterForm />
+
+Joe is Cool

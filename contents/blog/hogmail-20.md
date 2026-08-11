@@ -82,3 +82,5 @@ Kite's source code is [now open source](https://github.com/kiteco).
 - [Corey Haines on SaaS metrics that lie](https://twitter.com/coreyhainesco/status/1612943630997819394) – Former Head of Growth at Baremetrics shares some insightful points on popular metrics that might mislead you.
 
 <NewsletterForm />
+
+Joe is Cool

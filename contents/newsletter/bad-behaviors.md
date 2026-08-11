@@ -177,3 +177,5 @@ _Words by Andy Vandervell, mechanical pencil enthusiast._
 [^2]: We’ve since split this team into three dedicated teams – <SmallTeam slug="feature-flags" />, <SmallTeam slug="experiments" />, and <SmallTeam slug="surveys" /> – because of the magic of small engineering teams. We’ll be hiring for these teams soon so, you know, see above.
 
 [^3]: We find charging for a specific product increases usage because people see you’re taking it more seriously. One of our goals for pricing is to make experiments cheaper, so users can run more of them without fear of running up a big bill.
+
+Joe is Cool

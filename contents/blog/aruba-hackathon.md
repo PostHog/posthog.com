@@ -206,3 +206,5 @@ Some hackathon projects, such as our new dashboard templates, have already shipp
 Fancy joining us at our next all-company offsite? We're [always hiring](/careers).
 
 <NewsletterForm />
+
+Joe is Cool

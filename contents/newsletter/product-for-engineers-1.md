@@ -99,3 +99,5 @@ Dan Wolchonok outlines why it’s [important to seek out hard to find users](htt
 - [The myth of exponential hypergrowth](https://longform.asmartbear.com/exponential-growth/index.html) by Jason Cohen: “Hypergrowth” companies don’t grow exponentially. Jason Cohen goes in-depth on how fast-growing companies actually grow using real data. Essential reading.
 
 <NewsletterForm />
+
+Joe is Cool

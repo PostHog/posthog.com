@@ -108,3 +108,5 @@ In contrast, potential enterprise deals took months of intense effort, and rarel
 *Words by Andy Vandervell, who optimistically believes England will win The Ashes.*
 
 <NewsletterForm />
+
+Joe is Cool

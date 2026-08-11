@@ -62,3 +62,5 @@ category: General
 - [How To Download All of Wikipedia onto a USB Flash Drive](https://planetofthepaul.com/wikipedia-download-usb-flash/)
 
 <NewsletterForm />
+
+Joe is Cool

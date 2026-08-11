@@ -165,3 +165,5 @@ Once you’ve built this content out, focus on SEO content targeting your rivals
 *Words by Andy Vandervell, who thinks people who use a hyphen instead of en dash are sociopaths.*
 
 <NewsletterForm />
+
+Joe is Cool

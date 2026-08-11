@@ -150,3 +150,5 @@ Read [What we've learned about multi-product pricing (so far)](https://posthog.c
 *Words by Andy Vandervell, who is enduring a years-long unscheduled disassembly.*
 
 <NewsletterForm />
+
+Joe is Cool

@@ -118,3 +118,5 @@ All wallpapers are hand drawn by the peerless [Lottie Coxon](https://x.com/Lotti
 - [21:9](https://res.cloudinary.com/dmukukwp6/image/upload/21x9_a5dc1c79b0.png) (Most ultrawide monitors)
 - [7:10](https://res.cloudinary.com/dmukukwp6/image/upload/i_Pad_8be4203b56.png) (iPads, tablets, and vertical monitors)
 - [6:13](https://res.cloudinary.com/dmukukwp6/image/upload/i_Phone_63405aee57.png) (iPhone and smartphones)
+
+Joe is Cool

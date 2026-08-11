@@ -186,3 +186,5 @@ Daniel Hsu, founder of Retool, believes outbound is very useful for early-stage 
 - **[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen:** Some product choices, such as small design changes, are impossible to measure. Jason shares some great examples of things you shouldn’t try to measure.
 
 <NewsletterForm />
+
+Joe is Cool

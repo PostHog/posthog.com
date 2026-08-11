@@ -128,3 +128,5 @@ Needless to say, a developer platform like PostHog is essential for tracking any
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
 <NewsletterForm />
+
+Joe is Cool

@@ -70,3 +70,5 @@ category: General
 * [How Do You Prove a Secret?](https://www.quantamagazine.org/how-to-prove-you-know-a-secret-without-giving-it-away-20221011/)
 
 <NewsletterForm />
+
+Joe is Cool

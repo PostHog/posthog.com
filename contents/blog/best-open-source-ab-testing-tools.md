@@ -305,3 +305,5 @@ Yes – that's one of the main advantages of open-source A/B testing tools. **Gr
 - [PostHog vs. GrowthBook](/blog/posthog-vs-growthbook)
 
 <NewsletterForm />
+
+Joe is Cool

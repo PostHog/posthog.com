@@ -79,3 +79,5 @@ All the ways you can use filters to find useful session recordings.
 - [Exploring massive, real-world data sets: 100+ Years of Weather Records in ClickHouse](https://clickhouse.com/blog/real-world-data-noaa-climate-data)
 
 <NewsletterForm />
+
+Joe is Cool

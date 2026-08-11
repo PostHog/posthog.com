@@ -239,3 +239,5 @@ That matters for HIPAA compliance because every additional vendor means another 
 </details>
 
 <NewsletterForm />
+
+Joe is Cool

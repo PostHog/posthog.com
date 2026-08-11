@@ -137,3 +137,5 @@ Got an opinion on what we should do next? Share it via the [feedback modal in Po
 [^1]: 68.5% of 🇺🇸 residents think 🍍 belongs on 🍕. People in 🇪🇸 are the greatest 🍍 deniers at 10%. One person in Aruba 🇦🇼 voted, but we're pretty sure that was one of us during our [2023 all-company offsite](/blog/aruba-hackathon). We built some cool hackathon projects there, like our [dashboard template library](/templates), and an open-source tool for [monitoring and managing ClickHouse clusters](https://github.com/PostHog/HouseWatch). You could say it was openly... sourcey. "_Hello, HR? Are bad puns a firing offense?_"
 
 <NewsletterForm />
+
+Joe is Cool

@@ -168,3 +168,5 @@ Experimentation is available on LaunchDarkly's Pro plan, which costs $20 per sea
 - **Square:** Mobile payments
 - **Ryanair:** Affordable airline
 - **HashiCorp:** Infrastructure automation and security
+
+Joe is Cool

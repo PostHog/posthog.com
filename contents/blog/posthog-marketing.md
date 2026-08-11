@@ -226,3 +226,5 @@ We hope this look at how we use PostHog will inspire you (and your marketing tea
 - [How to track performance marketing](/tutorials/performance-marketing): An in-depth guide to tracking signups and conversions from different marketing channels.
 
 <NewsletterForm />
+
+Joe is Cool

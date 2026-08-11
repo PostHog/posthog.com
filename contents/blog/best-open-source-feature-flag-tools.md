@@ -321,3 +321,5 @@ Local evaluation means feature flags are checked locally within your application
 - [The benefits of feature flags and how to use them](/product-engineers/feature-flag-benefits-use-cases)
 
 <NewsletterForm />
+
+Joe is Cool

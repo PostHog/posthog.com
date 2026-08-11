@@ -83,3 +83,5 @@ Charles shares his practical guide to how we run finance without a dedicated fin
 - [Marie Kondo your software stack with open source](https://github.com/readme/featured/open-source-minimalism) (17 min read)
 
 <NewsletterForm />
+
+Joe is Cool

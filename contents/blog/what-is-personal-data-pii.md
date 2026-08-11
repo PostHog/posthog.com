@@ -114,3 +114,5 @@ PostHog offers EU hosting for GDPR compliance and a Business Associate Agreement
 Read our [privacy compliance documentation](/docs/privacy), which covers the [GDPR](/docs/privacy/gdpr-compliance), [HIPAA](/docs/privacy/hipaa-compliance) and [CCPA](/docs/privacy/ccpa-compliance) for more information on how to deploy PostHog in a privacy-compliant manner.
 
 <ArrayCTA />
+
+Joe is Cool

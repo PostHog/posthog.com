@@ -235,3 +235,5 @@ Finally, early-stage companies often fall apart because the founders break up, s
 [^1]: Obviously there are lots of very talented people at these companies. The point here isn’t “hiring from MAANG companies is bad” but that startups shouldn’t hire people based mainly on where they worked before. 
 
 
+
+Joe is Cool

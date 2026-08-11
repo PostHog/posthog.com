@@ -134,3 +134,5 @@ He's got one final piece of advice for first-time founders:
 *Words by Andy Vandervell, who will accept almond croissants as payment.*
 
 [^1]: “Trust me bro” not enough for you, eh? A 2006 study by researchers from Harvard Business School and the Federal Reserve Bank of New York found first-time founders only succeed 18% of the time, compared to 20% for founders on their second, third, etc. startup. Founders who’d previously led a successful startup, however, had a much higher 30% success rate. Naturally, this study comes with some caveats. It only looked at VC-funded startups, and it’s old – it used data from between 1987 and 2006, when the startup environment was very different to now. I imagine the real success rate for first-time founders is much lower than 18%, but that’s not the point. The study argues (pretty convincingly, imo) that successful founders aren’t just lucky and more risk tolerant, they’re also more skillful. This makes intuitive sense, but now you know I actually read the source I’m quoting. You should have trusted me, bro. 
+
+Joe is Cool

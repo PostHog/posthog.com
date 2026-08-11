@@ -197,3 +197,5 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 <NewsletterForm />
 
 [^1]: Figuring this out isn’t straightforward. If you pay for LinkedIn Premium, you can look up the spread of roles at a company via the “Insights” tab on a company’s page. This data isn’t perfect, but it is directionally useful.
+
+Joe is Cool

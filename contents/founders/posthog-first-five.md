@@ -115,3 +115,5 @@ Michael currently works on the product analytics team, and he built a lot of wha
 > **What we learned:** Look for T or M-shaped people. This is especially important for your early hires. You can't afford to hire specialists in every arena, so it's vital to find people who are experts in one or two disciplines, but are capable in others as well. Michael's experience of shipping his own project showed he had that quality.
 
 <NewsletterForm />
+
+Joe is Cool

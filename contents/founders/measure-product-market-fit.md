@@ -404,3 +404,5 @@ And, if you find yourself unable to find product-market fit, we share how we fou
 [^7]: [Growth at All Costs is Perilous](https://review.firstround.com/growth-at-all-costs-is-perilous-this-is-how-to-scale-sales-sustainably) – Karen Rhorer – Sep 25, 2018
 
 <NewsletterForm />
+
+Joe is Cool

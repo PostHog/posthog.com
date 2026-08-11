@@ -257,3 +257,5 @@ _Words by [Andy Vandervell](https://www.linkedin.com/in/andyvandervell/), who ra
 [^2]: Here’s a good example: I recently noticed people searching for “posthog SDK” were ending up at this forum index page instead of our docs. To fix this, I opened a PR on our repo that renamed an existing docs page to ‘PostHog SDK comparison’. Within days, it was ranking top for that search, so people will end up in the right place now.
 
 [^3]: This is particularly pertinent given all studies of AI Overviews in Google indicate they show most often on information keywords (i.e. questions, definitions, etc.).
+
+Joe is Cool

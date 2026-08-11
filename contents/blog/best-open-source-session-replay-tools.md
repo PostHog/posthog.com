@@ -337,3 +337,5 @@ See our full guide to the [best session replay tools](/blog/best-session-replay-
 
 <NewsletterForm />
  
+
+Joe is Cool

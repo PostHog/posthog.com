@@ -64,3 +64,5 @@ We recommend completing the following steps to ensure GDPR compliance when using
 5. **Create "right to be forgotten" process:** A user must be able to request that their data be removed from PostHog. How you facilitate that request is up to you. Information on how to delete user data is [available in our docs](/docs/privacy/data-deletion).
 
 <GDPRForm />
+
+Joe is Cool

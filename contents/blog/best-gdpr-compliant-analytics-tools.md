@@ -431,3 +431,5 @@ Yes. **PostHog**, **Plausible**, **Fathom**, **Matomo**, and **TelemetryDeck** a
 </details>
 
 <NewsletterForm />
+
+Joe is Cool

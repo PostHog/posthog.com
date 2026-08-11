@@ -161,3 +161,5 @@ When I talk to a startup that's been operating for more than 8 or 9 months, the 
 - [Why Product Market Fit Isn't Enough](https://brianbalfour.com/essays/product-market-fit-isnt-enough) – Brian Balfour
 
 <NewsletterForm />
+
+Joe is Cool

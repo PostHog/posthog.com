@@ -229,3 +229,5 @@ You may also find the following guides useful:
 - [How to measure product-market fit](/blog/measure-product-market-fit): Product-market fit isn't just an ephemeral gut feeling. You can measure it, and it moves as your customer's needs change. 
 
 <NewsletterForm />
+
+Joe is Cool

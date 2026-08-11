@@ -160,3 +160,5 @@ In contrast, someone who’s worked exclusively at FAANG-type companies c.2012-2
 _Words by Andy Vandervell, who thinks watermelon is pointless._
 
 <NewsletterForm />
+
+Joe is Cool

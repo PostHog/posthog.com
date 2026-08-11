@@ -93,3 +93,5 @@ Today, Neil Kakkar shares three things we've learned about running effective A/B
 _Enjoyed this? Subscribe to our [newsletter](https://newsletter.posthog.com/subscribe) to hear more from us twice a month!_
 
 
+
+Joe is Cool

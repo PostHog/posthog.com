@@ -61,3 +61,5 @@ Also, getting people who care about open-source projects to star our repo is of 
 > PostHog is an open source developer platform that helps people build successful products. We help you debug and ship your product faster.
 
 <ArrayCTA />
+
+Joe is Cool

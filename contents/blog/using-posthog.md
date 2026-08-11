@@ -234,3 +234,5 @@ Want to see where people are clicking on any page on your website or web app, ju
 Try the [PostHog Toolbar](/tutorials/toolbar).
 
 <ArrayCTA />
+
+Joe is Cool
