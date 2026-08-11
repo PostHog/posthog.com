@@ -2329,10 +2329,6 @@ export const docsMenu = {
                     url: '/docs/self-driving/context',
                 },
                 {
-                    name: 'Skills',
-                    url: '/docs/self-driving/skills',
-                },
-                {
                     name: 'Scouts',
                     url: '/docs/self-driving/scouts',
                     children: [
@@ -8040,6 +8036,24 @@ export const docsMenu = {
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Skills',
+            icon: 'IconMagic',
+            color: 'purple',
+            url: '/docs/skills',
+            description: 'Store and share versioned agent skills, usable from any MCP-connected agent.',
+            children: [
+                {
+                    name: 'Skills',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/skills',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                 },
             ],
         },
