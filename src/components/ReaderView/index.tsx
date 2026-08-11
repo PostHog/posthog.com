@@ -1393,6 +1393,8 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
+    const previousPath = useRef<string | undefined>(undefined)
+
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
@@ -1432,9 +1434,16 @@ function ReaderViewContent({
             }
         }
 
+        const pathChanged = previousPath.current !== undefined && previousPath.current !== appWindow?.path
+        previousPath.current = appWindow?.path
+
         if (hash) {
             waitForImagesAndScroll()
-        } else {
+        } else if (pathChanged) {
+            // Reset-to-top only applies to same-window navigations to a new page. On first
+            // mount (and any effect re-runs before `appWindow` settles), the browser has
+            // already positioned us — for a `:~:text=` URL, native scroll-to-fragment;
+            // otherwise top of page. Don't fight the browser.
             scrollElement.scrollTo({
                 top: 0,
             })

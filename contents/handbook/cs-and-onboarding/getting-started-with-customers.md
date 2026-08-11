@@ -34,7 +34,7 @@ In their project(s), check the data management tab:
 - Do custom events have meaningful [properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event)?
 - If they identify persons or groups, are the profile properties meaningful?
 
-Also worth running through the [basic account review](/handbook/cs-and-onboarding/foundation-check) checklist.
+Also worth running through the [basic implementation review](/handbook/cs-and-onboarding/foundation-check).
 
 ## 2. Reach out
 
