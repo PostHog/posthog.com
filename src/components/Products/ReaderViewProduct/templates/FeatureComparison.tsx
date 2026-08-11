@@ -10,9 +10,6 @@ const COLLAPSE_SLACK_PX = 200
 
 const FeatureComparison = ({ id, productData }: SectionComponentProps) => {
     const comparison = productData?.comparison
-    // Collapsed by default so long tables don't dominate the page. Products can
-    // opt out via `comparison.collapsible: false`. Tables that (almost) fit within
-    // the cap render fully with no toggle - see the measurement effect below.
     const collapsible = comparison?.collapsible !== false
     const [expanded, setExpanded] = useState(false)
     const [oversized, setOversized] = useState(true)
