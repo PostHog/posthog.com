@@ -1111,8 +1111,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.referenceId}`,
-                    // Slug type cross-links resolve under; matches the type pages below so the
-                    // template never re-derives routing. Latest → referenceId (no version in URL).
+                    // Must match the type page paths created below.
                     slugPrefix: node.referenceId,
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
@@ -1126,7 +1125,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.id}`,
-                    // Versioned → id (embeds the version); matches the type pages below.
+                    // Must match the type page paths created below.
                     slugPrefix: node.id,
                     // Null checks, only affects type crosslinking, won't break build
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],

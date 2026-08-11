@@ -74,7 +74,7 @@ export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
     // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
-    // referenceId, versioned → id). Passed in so the template never re-derives page routing.
+    // referenceId, versioned → id). Not `info.slugPrefix`, which is a spec field, unused here.
     slugPrefix: string
 }
 
