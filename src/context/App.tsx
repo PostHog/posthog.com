@@ -645,6 +645,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // The e-reader: tall enough that a guide page reads like a page, wide enough for the
+    // front matter's two columns.
+    '/pocket-guides': {
+        size: {
+            min: {
+                width: 700,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 1100,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {
@@ -857,6 +875,28 @@ const appSettings: AppSettings = {
                 width: 850,
                 height: 1000,
             },
+        },
+    },
+    // Free-tier allowances, opened from the pricing page. Not a route — see
+    // components/Pricing/Redesign/FreeTierModal.
+    'pricing-free-tier': {
+        size: {
+            min: {
+                width: 535,
+                height: 400,
+            },
+            max: {
+                width: 535,
+                height: 680,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
         },
     },
     '/about': {

@@ -1,19 +1,19 @@
 import React from 'react'
 import {
+    IconChat,
+    IconCheckCircle,
+    IconCode,
+    IconConfetti,
+    IconCursorClick,
     IconDecisionTree,
     IconEye,
-    IconSparkles,
-    IconList,
-    IconConfetti,
-    IconRocket,
-    IconPieChart,
-    IconCheckCircle,
     IconInfo,
-    IconCursorClick,
+    IconList,
     IconMagic,
-    IconChat,
-    IconCode,
     IconMessage,
+    IconPieChart,
+    IconRocket,
+    IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
 import { applications, topFeatures } from './workflows/slides'
@@ -315,8 +315,8 @@ export const workflows = {
     ],
     worksWith: ['experiments', 'product-analytics', 'feature-flags', 'error-tracking'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
-        imageAlt: 'A hedgehog automating workflows',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
+        imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
         // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
@@ -382,19 +382,20 @@ export const workflows = {
         },
     ],
     hog: {
-        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-        alt: 'the automator hedgehog',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png',
+        alt: 'A hedgehog wiring up a workflow',
+        footerClasses: 'max-w-[360px]',
         classes: 'absolute bottom-0 right-0 w-auto h-auto max-w-[min(90vw,480px)] @2xl:max-w-xl',
     },
     hogs: {
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
-            alt: 'the automator hedgehog',
-        },
-        // Same art as ai.image – used as the Eli5 float-right hog.
-        mobileHog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_hog_791169c2d0.png',
             alt: 'A hedgehog automating workflows',
+        },
+        // Perches on the bottom-right of the Overview screenshot.
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_066caea85f.png',
+            alt: 'the automator hedgehog',
         },
     },
     videos: {

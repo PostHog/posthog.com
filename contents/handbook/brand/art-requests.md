@@ -33,7 +33,8 @@ The Art & Brand Planning board uses GitHub Actions to keep work moving:
   - **Moved to "Done"** → the issue is automatically closed (as completed).
   - **Moved to "Assigned: Daniel", "Assigned: Lottie", or "Assigned: Heidi"** → other default assignees are removed so only the assigned person is on the issue. Internal requests (from the design team) keep all assignees.
   - These changes do not impact the "Assigned: Cleo" column, as Cleo has a different workload.
-- Workflows run under the **Art Board Bot** GitHub App and live in the posthog.com repo's `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`, `sync-artist-labels.yml`). They act on whichever repo an issue lives in, so they still cover requests filed in the marketing repo.
+- **Artist labels** — Every 30 minutes, open issues in an "Assigned: ..." column get a matching label for that artist, so the work can be filtered per person.
+- Workflows run under the **Art Board Bot** GitHub App and live in the [marketing repo](https://github.com/PostHog/marketing) under `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`, `sync-artist-labels.yml`). The board is org-level, so they act on art board issues wherever those issues live.
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 

@@ -14,34 +14,29 @@ import WizardCommand from 'components/WizardCommand'
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate AI Observability!">
 
 <QuestLogItem 
-    title="Capture LLM conversations"
+    title="Capture LLM data"
     subtitle="Required"
     icon="IconLlmPromptManagement"
 >
 
-AI Observability gives you x-ray vision into your LLM applications. You can track:
+AI Observability captures every call your product makes to an LLM and turns them into generations you can query, score, and get alerted on. You can:
 
-- 🗣️ Every conversation (inputs, outputs, and tokens)
-- 🤖 Model performance (cost, latency and error rates)
-- 🔍 Full traces and sessions for when you need to go detective mode
-- 💰 How much each chat/user/organization is costing you
-- 🔗 Multi-conversation sessions across user visits
+- 🔍 Read full traces and sessions when you need to go detective mode
+- ⚖️ Score response quality and sentiment with evals
+- ⚠️ Get alerts on spikes in cost, latency, errors, or negative sentiment
+- 💬 Get daily reports on how your LLM is used and performing
+- 🧑 Combine LLM data with your existing customer data
+- 🪄 Automagically turn these insights into PRs 
 
-> **New to LLM observability?** See [core concepts](/docs/ai-observability/basics) for a primer on events, tokens, and traces.
+> **New to AI observability?** See [core concepts](/docs/ai-observability/basics) for a primer on events, tokens, and traces.
 
-The first step is to install a PostHog SDK to capture conversations, requests, and responses from an LLM provider. The fastest way is our wizard, which installs the SDK and instruments your LLM calls for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+The first step is to install a PostHog SDK to capture conversations, requests, and responses from an LLM provider. The fastest way is our wizard, which installs the SDK and instruments your LLM calls for you (it also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
 <WizardCommand command="ai-observability" />
 
 Prefer to do it by hand? Choose your platform below:
 
-### Platforms
-
 <LLMsInstallationPlatforms columns={3} />
-
-<OSButton variant="primary" asLink to="/docs/ai-observability/installation">
-Install PostHog SDK
-</OSButton>
 
 </QuestLogItem>
 
@@ -54,11 +49,10 @@ Install PostHog SDK
   Once you've installed the SDK, every LLM call automatically becomes a [generation](/docs/ai-observability/generations) – a detailed record of what went in and what came out. Each generation captures:
 
   - Complete conversation context (inputs and outputs)
+  - Associated tool calls and their results
   - Token counts and usage metrics  
   - Response latency and performance data
   - Automatic cost calculation based on model pricing
-  - Trace IDs to group related LLM calls together
-
 
 <ProductVideo
   videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/ai_generation_in_app_18f37057ca.mp4" 
@@ -76,22 +70,45 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Evaluate model usage"
+  title="Evaluate AI quality"
   subtitle="Recommended"
   icon="IconLineGraph"
 >
 
-  PostHog's AI Observability dashboard provides a comprehensive overview of your LLM performance. Break usage metrics down by model, latency, cost, and more.
-  
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_dashboard_c710e66b5e.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_dashboard_dark_aef0f67baf.png"
-  alt="LLM observability dashboard"
+  PostHog's evaluation suite scores your live generations as they happen, so you can monitor quality in production. Three evaluation types are supported:
+
+  - **LLM-as-a-judge** – an LLM scores each generation against a prompt you define
+  - **Code-based (Hog)** – deterministic checks written in code
+  - **Sentiment analysis** – classifies user sentiment as positive, neutral, or negative
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/evals_e00c3b28ea.mp4"
+  alt="AI Observability evaluations"
   classes="rounded"
 />
 
-  <OSButton variant="primary" asLink to="/docs/ai-observability/dashboard">
-    Analyze LLM performance
+  <OSButton variant="primary" asLink to="/docs/ai-evals">
+    Measure LLM performance
+  </OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Set up alerting"
+  subtitle="Recommended"
+  icon="IconBell"
+>
+
+  Since every LLM event is also a standard PostHog event, you can build insights on cost, latency, errors, or sentiment and set alerts to get notified when they spike.
+
+  <ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_alerts_web_clean_0d31748bb1.mp4"
+    alt="Creating an anomaly alert from the AI Observability dashboard"
+    classes="rounded"
+  />
+
+  <OSButton variant="primary" asLink to="/docs/alerts">
+      Create an alert
   </OSButton>
 
 </QuestLogItem>
@@ -136,6 +153,33 @@ PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as no
     alt="AI Observability session replay"
     classes="rounded"
 />
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Power Self-driving"
+  subtitle="Recommended"
+  icon="IconBolt"
+>
+
+  Your LLM data is a [signal source](/docs/self-driving/inbox/sources) for [Self-driving](/docs/self-driving), feeding it two ways:
+
+  - ⚖️ **Eval reports** – an agent reviews your [online evaluation](/docs/ai-evals) results in batches and sends a summary of its findings to your inbox
+  - ⚠️ **Anomaly investigations** (alpha) – when an [anomaly alert](/docs/alerts#anomaly-detection) fires on a cost, latency, or error insight, an agent investigates and only reports true positives
+
+Want more control? Configure a [scout](/docs/self-driving/scouts) – a scheduled agent that explores your LLM data on your terms and files what it finds as signals and reports.
+
+Reports land in your [inbox](/docs/self-driving/inbox), where one click turns them into a PR.
+
+<ProductVideo
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/aio_self_driving_setup_a065ecc0a1.mp4"
+  alt="Setting up the AI Observability signal source for Self-driving"
+  classes="rounded"
+/>
+
+<OSButton variant="primary" asLink to="/docs/self-driving">
+  Set up Self-driving
+</OSButton>
 
 </QuestLogItem>
 

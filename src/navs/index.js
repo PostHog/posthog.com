@@ -1973,6 +1973,10 @@ export const handbookSidebar = [
                 url: '/handbook/wizard-and-docs/writing-product-docs',
             },
             {
+                name: 'Pocket guides',
+                url: '/handbook/wizard-and-docs/pocket-guides',
+            },
+            {
                 name: 'How to use the content writer agent',
                 url: '/handbook/wizard-and-docs/content-writer-agent',
             },
@@ -2091,10 +2095,6 @@ export const communityMenu = {
                         { name: 'SQL', url: '/tutorials/categories/sql' },
                         { name: 'Insights', url: '/tutorials/categories/insights' },
                         { name: 'Persons', url: '/tutorials/categories/persons' },
-                        { name: 'Sessions', url: '/tutorials/categories/sessions' },
-                        { name: 'Settings', url: '/tutorials/categories/settings' },
-                        { name: 'Site apps', url: '/tutorials/categories/site-apps' },
-                        { name: 'Team collaboration', url: '/tutorials/categories/team-collaboration' },
                         { name: 'Toolbar', url: '/tutorials/categories/toolbar' },
                     ],
                 },
@@ -2102,19 +2102,13 @@ export const communityMenu = {
                     name: 'Product Analytics',
                     icon: 'IconGraph',
                     color: 'blue',
-                    url: '/tutorials/categories/correlation-analysis',
+                    url: '/tutorials/categories/dashboards',
                     children: [
-                        { name: 'Correlation analysis', url: '/tutorials/categories/correlation-analysis' },
                         { name: 'Dashboards', url: '/tutorials/categories/dashboards' },
                         { name: 'Funnels', url: '/tutorials/categories/funnels' },
                         { name: 'Group analytics', url: '/tutorials/categories/group-analytics' },
-                        { name: 'Lifecycle', url: '/tutorials/categories/lifecycle' },
-                        { name: 'Paths', url: '/tutorials/categories/paths' },
                         { name: 'Retention', url: '/tutorials/categories/retention' },
-                        { name: 'Stickiness', url: '/tutorials/categories/stickiness' },
-                        { name: 'Subscriptions', url: '/tutorials/categories/subscriptions' },
                         { name: 'Trends', url: '/tutorials/categories/trends' },
-                        { name: 'User paths', url: '/tutorials/categories/user-paths' },
                     ],
                 },
                 {
@@ -2140,17 +2134,13 @@ export const communityMenu = {
                     name: 'CDP',
                     color: 'yellow',
                     icon: 'IconPerson',
-                    url: '/tutorials/categories/filters',
-                    children: [
-                        { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Zapier', url: '/tutorials/categories/zapier' },
-                    ],
+                    url: '/tutorials/categories/cdp',
                 },
                 {
                     name: 'AI Observability',
                     color: 'purple',
                     icon: 'IconLlmAnalytics',
-                    url: '/tutorials/ai-engineering',
+                    url: '/tutorials/categories/ai-observability',
                 },
             ],
         },
@@ -2388,6 +2378,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                    },
                 },
                 {
                     name: 'Pricing',
@@ -3706,7 +3704,8 @@ export const docsMenu = {
                         },
                         {
                             name: 'AI Observability',
-                            url: '/docs/ai-observability',
+                            url: 'https://posthog.com/docs/ai-observability',
+                            external: true,
                         },
                         {
                             name: 'Markdown and llms.txt',
@@ -6719,6 +6718,17 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Self-driving',
+                    url: '/docs/ai-observability/self-driving',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                    featured: true,
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Surfaces',
                 },
                 {
@@ -6820,10 +6830,6 @@ export const docsMenu = {
                     url: '/docs/ai-observability/errors',
                     icon: 'IconWarning',
                     color: 'red',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Tools',
@@ -8100,6 +8106,7 @@ export const docsMenu = {
                     children: [
                         { name: 'Overview', url: '/docs/distributed-tracing/installation' },
                         { name: 'Node.js', url: '/docs/distributed-tracing/installation/nodejs' },
+                        { name: 'Next.js', url: '/docs/distributed-tracing/installation/nextjs' },
                         { name: 'Python', url: '/docs/distributed-tracing/installation/python' },
                         { name: 'Go', url: '/docs/distributed-tracing/installation/go' },
                         { name: 'Java', url: '/docs/distributed-tracing/installation/java' },
