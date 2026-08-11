@@ -106,7 +106,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **What is the customer using PostHog for?** The products they pay for, the events they capture, what they do with the data
 - **How's the relationship?** The active users and what they're doing (candidates for outreach), recent tickets and calls, which PostHog humans they've talked to (AE, onboarding, TAM, CSM)
-- **Are they set up well and getting value?** Run the [foundation check](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks)
+- **Are they set up well and getting value?** Run the [basic implementation review](/handbook/cs-and-onboarding/foundation-check) and [health check](/handbook/cs-and-onboarding/health-checks)
 - **Commercials:**
   - Monthly usage - forecasted MRR, billing limits, platform add-ons
   - The contract, if they're on one - how much credit they bought, when they renew, are they on track? Talk through [contract rules](/handbook/growth/sales/contract-rules) and the tools we use (QuoteHog, PandaDoc, Salesforce)

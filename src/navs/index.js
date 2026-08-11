@@ -1640,7 +1640,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                     {
-                        name: 'Basic account review checklist',
+                        name: 'Basic implementation review',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
                     {
