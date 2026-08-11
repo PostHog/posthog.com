@@ -530,9 +530,9 @@ export function Question(props: QuestionProps) {
             `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
             // Widget tickets only deliver replies to the widget session that created them,
             // which is a throwaway here — make sure support contacts the author directly
-            `Note: replies in this thread won't reach the author — ${
-                authorEmail ? `email them directly at ${authorEmail}` : 'they have no email on file'
-            }, or reply on the community question above.`,
+            `Note: replies in this thread won't reach the author. Reply on the community question above (they'll be notified there)${
+                authorEmail ? `, or email them directly at ${authorEmail}` : ''
+            }.`,
         ]
             .filter(Boolean)
             .join('\n')
