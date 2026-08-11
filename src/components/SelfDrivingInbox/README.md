@@ -176,7 +176,7 @@ agent reading the mirror can create the scout verbatim instead of translating it
 | `EnableScout.tsx` | The "add this scout" CTA, plus the book's pinned bottom bar |
 | `scoutDeepLink.ts` | Builds the `#createScout=` deep link from a `ScoutSpec` |
 | `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
-| `terms.tsx` | `<Term>` glossary hover links for self-driving vocabulary |
+| _(terms moved)_ | `<Term>` and its definitions now live in `components/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
 | `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
