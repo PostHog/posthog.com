@@ -113,7 +113,7 @@ export const aiObservability = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Observe, evaluate, and fix AI in production',
+        title: 'Observe and fix AI in production',
         description:
             'AI Observability is what makes your agent self-driving: Trace generations, evaluate live traffic, and set up anomaly alerts. The context agents use to fix hallucinations and improve user experience.',
         eli5: 'AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Evaluations and anomaly alerting sit atop that data allowing you to understand usage patterns and issues without reading thousands of conversations. You can connect these results to self-driving and have your AI fix and improve itself.',
