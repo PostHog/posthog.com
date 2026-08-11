@@ -7815,6 +7815,32 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Push notifications',
+                    url: '/docs/workflows/push-notifications',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/push-notifications',
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/workflows/push-notifications/ios',
+                        },
+                        {
+                            name: 'Android',
+                            url: '/docs/workflows/push-notifications/android',
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/workflows/push-notifications/react-native',
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/workflows/push-notifications/flutter',
+                        },
+                    ],
+                },
+                {
                     name: 'Workflow events',
                     url: '/docs/workflows/engagement-events',
                     icon: 'IconGraph',
