@@ -508,10 +508,6 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
-        experiment: {
-            variant: 'control',
-            flag: 'homepage-test',
-        },
         size: {
             min: {
                 width: 700,
@@ -725,44 +721,6 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-        },
-    },
-    'home-test': {
-        experiment: {
-            variant: 'test',
-            flag: 'homepage-test',
-        },
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 1200,
-                height: 900,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
         },
     },
     '/careers-og': {

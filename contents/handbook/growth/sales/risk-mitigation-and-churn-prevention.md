@@ -115,7 +115,7 @@ If a customer expresses interest in reducing their PostHog spend, view it as an 
 
 - **Calling identify() on every page.** Inflates event volume dramatically. They only need to call it [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
 - **Calling group() on every page.** Same problem. Once per group per session is enough, or [when the group changes](/docs/product-analytics/group-analytics#how-to-create-groups).
-- **Calling posthog.reset() before identify.** Creates unlinked anonymous users. Common culprit when web-to-app tracking seems broken. See guidance in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
+- **Calling posthog.reset() before identify.** Creates unlinked anonymous users. Common culprit when web-to-app tracking seems broken. See guidance in the [JavaScript Web SDK usage guide](/docs/libraries/js/usage#resetting-a-user).
 - **No reverse proxy.** Best practice is to use PostHog's [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) or configure their own. Events from their own domain improve reliability and ad-blocker resistance.
 
 **Feature flag resilience:**

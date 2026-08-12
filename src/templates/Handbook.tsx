@@ -366,12 +366,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname.startsWith('/docs/data-warehouse/sources/')
 
     // Same nudge for AI observability SDK installation pages. The coding-agent integrations
-    // (Claude Code, OpenClaw, Pi) are excluded: they instrument the agent itself, so running
-    // the wizard in a project doesn't set them up. The installation index has its own
+    // (Claude Code, OpenClaw, OpenCode, Pi) are excluded: they instrument the agent itself, so
+    // running the wizard in a project doesn't set them up. The installation index has its own
     // AI wizard section in the MDX.
     const showAIObservabilityWizardHint =
         pathname.startsWith('/docs/ai-observability/installation/') &&
-        !['claude-code', 'openclaw', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
+        !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
