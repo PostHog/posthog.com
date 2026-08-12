@@ -39,6 +39,8 @@ export const aiObservability = {
     // The install CTAs list LLM providers instead of app frameworks – that's
     // what the ai-observability wizard actually instruments.
     wizardSupports,
+    // Volume-pricing floor shown in the Get started section (see /docs/ai-observability/start-here).
+    pricingFloor: '0.00006',
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
@@ -317,16 +319,16 @@ export const aiObservability = {
             description: 'Correlate AI usage with user behavior and business metrics',
         },
         {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
+            slug: 'error-tracking',
+            description: 'Failed LLM calls become issues you can triage, assign, and resolve',
         },
         {
             slug: 'session-replay',
             description: 'Watch how users interact with AI features in real sessions',
         },
         {
-            slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
+            slug: 'experiments',
+            description: 'A/B test prompts and models, measured on statistically significant results',
         },
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
@@ -365,8 +367,8 @@ export const aiObservability = {
             {
                 title: 'Compare models',
                 prompts: [
-                    'Compare token usage between GPT-4 and Claude for the search feature.',
-                    'Compare latency between GPT-4 and Claude for the chat feature',
+                    'Compare token usage between GPT and Claude for the search feature.',
+                    'Compare latency between GPT and Claude for the chat feature',
                     'How has LLM latency changed over the past 7 days?',
                 ],
             },

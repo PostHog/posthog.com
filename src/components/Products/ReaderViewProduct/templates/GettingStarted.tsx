@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import { SignupCTA } from 'components/SignupCTA'
 import ScriptInstallCallout from 'components/ScriptInstallCallout'
 import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
@@ -44,8 +45,28 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                             <strong>
                                 ${productData.startsAt}/{productData.unit}
                             </strong>{' '}
-                            and reduces with volume.
+                            and reduces with volume
+                            {productData.pricingFloor ? (
+                                <>
+                                    {' '}
+                                    to{' '}
+                                    <strong>
+                                        ${productData.pricingFloor}/{productData.unit}
+                                    </strong>
+                                </>
+                            ) : null}
+                            .
                         </span>
+                        {productData.slug ? (
+                            <>
+                                {' '}
+                                Estimate your bill with the{' '}
+                                <Link to={`/${productData.slug}/pricing`} state={{ newWindow: true }}>
+                                    pricing calculator
+                                </Link>
+                                .
+                            </>
+                        ) : null}
                     </>
                 ) : null}
             </p>
