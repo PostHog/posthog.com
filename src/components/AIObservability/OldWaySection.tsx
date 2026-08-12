@@ -32,11 +32,11 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                Your AI fails quietly – a wrong answer here and a slow reply there. Traces tell you{' '}
-                <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
-                    <em>what it said</em>
+                Your AI fails quietly – a wrong answer here and a slow reply there. Traces tell you what it said,{' '}
+                <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} multiline>
+                    <em>but you have to go read them, one by one</em>
                 </RoughAnnotation>
-                , but you have to go read them, one by one.
+                .
             </p>
 
             <FlowDiagram

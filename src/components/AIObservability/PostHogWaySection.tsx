@@ -38,9 +38,9 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             <p className="text-base leading-loose mb-5">
                 <strong>AI Observability</strong> captures every generation as a regular PostHog event – giving you the
                 full context and connecting it to many other products. Evals score your live traffic and anomaly alerts
-                learn what normal looks like, so regressions in tool calling, response quality, or latency automatically
-                turn into{' '}
+                learn what normal looks like,{' '}
                 <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} multiline>
+                    so regressions in tool calling, response quality, or latency automatically turn into{' '}
                     <strong>signals</strong>
                 </RoughAnnotation>
                 .
@@ -49,12 +49,11 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             <FlowDiagram className="mb-5 @xl:hidden" steps={steps} headerLeft="The loop" headerRight="(cir. 2026–)" />
 
             <p className="text-base leading-loose">
-                With each regression, an agent investigates and creates a report in your <strong>Inbox</strong>. When
-                there's code to fix, it{' '}
-                <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
-                    <em>opens the pull request</em>
-                </RoughAnnotation>
-                . Your AI improves while you sleep.
+                With each regression, an agent investigates and creates a report in your <strong>Inbox</strong>.{' '}
+                <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2} multiline>
+                    When there's code to fix, it <em>opens the pull request</em>.
+                </RoughAnnotation>{' '}
+                Your AI improves while you sleep.
             </p>
         </section>
     )
