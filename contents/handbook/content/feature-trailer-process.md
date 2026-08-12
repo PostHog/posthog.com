@@ -12,8 +12,8 @@ There are two types of feature trailer, depending on how much time you have and 
 
 | Type | Description | Production time | Example |
 |---|---|---|---|
-| **Teaser** (under 30 seconds) | Pure vibes, not a story. It shows a single user experience and is designed to create buzz and excitement about a new feature. | Up to a week and a half | [Slack app feature trailer](https://youtu.be/fsCEXfe5vKA) |
-| **Use case video** (30–90 seconds) | Narrative-based, showing the full breadth of what a feature or product can do. It tells a story. | Up to two weeks | [PostHog Code teaser](https://youtu.be/SaVTePqaPeM) |
+| **Teaser** (under 30 seconds) | Pure vibes, not a story. It shows a single user experience and is designed to create buzz and excitement about a new feature. | Up to a week and a half | [PostHog Code teaser](https://youtu.be/fsCEXfe5vKA) |
+| **Use case video** (30–90 seconds) | Narrative-based, showing the full breadth of what a feature or product can do. It tells a story. | Up to two weeks | [Slack app feature trailer](https://youtu.be/SaVTePqaPeM) |
 
 > The team can also make longer demo videos (e.g. 3 to 5 minutes or more), though these aren't feature trailers. They're a much bigger project that can take 4+ weeks, and work best on a product that's already stable – i.e. UI is finalized and unlikely to change. That's why we tend to avoid them for launches and announcements.
 
