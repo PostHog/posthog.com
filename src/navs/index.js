@@ -6346,6 +6346,16 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/managed-warehouse/connect',
                     icon: 'IconTerminal',
                     color: 'seagreen',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/managed-warehouse/connect',
+                        },
+                        {
+                            name: 'Performance tuning',
+                            url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',

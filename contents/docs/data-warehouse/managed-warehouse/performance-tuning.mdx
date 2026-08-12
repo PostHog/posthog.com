@@ -1,0 +1,68 @@
+---
+title: Performance tuning
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconFlask" title="The managed warehouse is in beta" type="action">
+
+Need access first? [Join the waitlist](/context-warehouse/managed-warehouse), then [set up your warehouse](/docs/data-warehouse/managed-warehouse/setup).
+
+</CalloutBox>
+
+Each active connection gets a dedicated DuckDB worker. The default worker fits most queries, but you can request more CPU or memory for large scans, joins, aggregations, sorts, and window functions.
+
+## Choose a worker size
+
+Pass these settings when you open the connection:
+
+| Setting | Default | Range | What it controls |
+|---|---:|---:|---|
+| `duckgres.worker_cpu` | 15 | 1–46 | Worker CPU cores and DuckDB parallelism |
+| `duckgres.worker_memory` | 120 GiB | 4–360 GiB | Worker memory for joins, sorts, caching, and other intermediate data |
+| `duckgres.worker_ttl` | 1 minute | 0–24 hours | How long the worker stays warm after the connection closes |
+
+You can set CPU and memory independently. The default shape uses 8 GiB per CPU core, which is a useful starting point when setting both. A longer TTL reduces cold starts for recurring jobs, but keeps the worker allocated for longer. Values outside the ranges are clamped.
+
+For example, this starts a 30-core, 240 GiB worker and keeps it warm for 30 minutes after disconnecting:
+
+```bash
+PGOPTIONS="-c duckgres.worker_cpu=30 -c duckgres.worker_memory=240Gi -c duckgres.worker_ttl=30m" \
+  psql "host=my-warehouse.dw.us.postwh.com dbname=ducklake user=root sslmode=require"
+```
+
+Most Postgres clients expose the same `options` connection parameter. These settings only apply when the connection opens. Running SQL `SET` commands later doesn't resize its worker.
+
+## Understand the DuckDB defaults
+
+PostHog sizes DuckDB from the selected worker and provides managed scratch storage. These are the effective defaults:
+
+| DuckDB setting | Effective default | How it works |
+|---|---|---|
+| `threads` | Worker CPU count | Sets the maximum parallelism available to the query |
+| `memory_limit` | 90 GB (83.8 GiB) on the default worker | Limits DuckDB's buffer manager; PostHog derives it from the selected worker memory while reserving headroom for results, metadata, and the worker process |
+| `temp_directory` | Worker-local temporary storage | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
+| `max_temp_directory_size` | 90% of available temporary disk | Limits how much spill data DuckDB can write |
+| `preserve_insertion_order` | `true` | Preserves insertion order where possible; setting it to `false` can reduce memory use for large imports and exports when result order doesn't matter |
+| `ducklake_max_retry_count` | `100` | Retries optimistic write conflicts caused by concurrent writers |
+| `http_retries` | `10` with exponential backoff | Retries transient object-storage throttling instead of failing immediately |
+
+Inspect the effective settings on your connection with:
+
+```sql
+SELECT name, value, description
+FROM duckdb_settings()
+WHERE name IN (
+    'threads',
+    'memory_limit',
+    'temp_directory',
+    'max_temp_directory_size',
+    'preserve_insertion_order',
+    'ducklake_max_retry_count',
+    'http_retries'
+);
+```
+
+Prefer the `duckgres.worker_*` connection options over raising `threads` or `memory_limit` with SQL: changing a DuckDB setting doesn't add resources to the worker. Benchmark representative queries before and after resizing because not every query can use more cores or memory.
