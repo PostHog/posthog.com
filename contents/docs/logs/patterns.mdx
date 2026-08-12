@@ -2,9 +2,9 @@
 title: Log patterns
 ---
 
-Log patterns automatically group similar log lines into templates, so you can see the shape of your log traffic at a glance instead of scrolling through thousands of individual lines.
+Log patterns group similar log lines into templates, so you read the shape of your log traffic instead of scrolling through thousands of individual lines.
 
-Pattern mining reads your log messages, masks variable parts (IDs, numbers, IP addresses), and clusters the results into templates. Each template represents a family of log lines that share the same structure but differ in their variable content.
+Pattern mining reads your log messages, masks the variable parts (IDs, numbers, IP addresses), and clusters what's left into templates. Each template stands for a family of lines that share a structure but differ in their variable content.
 
 For example, these three log lines:
 
@@ -21,6 +21,22 @@ User <*> not found
 ```
 
 This makes it easy to spot noisy log lines, new error shapes, and unexpected changes in your log traffic.
+
+## Why patterns matter
+
+Production logs have two problems, and they're different problems.
+
+**They're too big to read.** A busy service emits millions of lines a day. Nobody scrolls that, so you grep for a string you already suspect — which only ever finds problems you already know about.
+
+**They're too expensive to read.** Once an AI agent does the reading, every routine line you hand it costs tokens and crowds out the context it needs to write the fix. A 500,000-line window is on the order of 10 million tokens of mostly identical heartbeat, request, and retry lines. That's past what any context window holds, and expensive well before that.
+
+Patterns solve both by collapsing volume into structure:
+
+- **Compression, not summarization.** Templates are mined from your real lines. Nothing is paraphrased and nothing is invented — each pattern carries its own example lines and pivots back to the exact records it came from.
+- **No token cost.** Mining is deterministic. It doesn't call a model, so it doesn't bill AI spend, and the same input produces the same templates every time.
+- **Ranked by signal, not recency.** Every pattern carries its dominant severity, count, share of total volume, error count, and volume trend. The noisy and the anomalous both stand out without you knowing what to search for first.
+- **Readable by agents.** Your coding agent can [mine and diff patterns over MCP](#use-patterns-with-ai-agents), so it starts an investigation with a few dozen templates instead of burning its context window on raw lines.
+- **One step from the rest of your data.** A pattern pivots to its matching logs, and a log line pivots to the [session replay](/docs/logs/link-session-replay), [person](/docs/logs/link-person), and [error](/docs/error-tracking) behind it.
 
 ## Access the Patterns view
 
@@ -90,6 +106,31 @@ The **View matching logs** button tooltip tells you which mode is active:
 When a pattern's sample is unambiguous — a single service or a single canonical severity — the pivot also sets the corresponding service and severity filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
 
 Scoping is withheld when it could silently exclude matching lines, such as when the services list is at the miner's cap (possibly truncated) or the severity is non-canonical.
+
+## Use patterns with AI agents
+
+Patterns are the cheapest way to give a coding agent a whole log window. Instead of pasting raw lines into a prompt, the agent pulls templates over the [PostHog MCP server](/docs/logs/surfaces/mcp) and reads the shape of the traffic first:
+
+- **`logs-patterns`** – mine templates for a service, severity, and time range, with counts, error counts, and share of volume.
+- **`logs-patterns-diff`** – compare two time ranges and return which templates are new, gone, or spiking.
+- **`query-logs`** – once the agent knows which template matters, pull only the lines behind it.
+
+That order matters. Mining first turns an unreadable window into a ranked list the agent can reason about, then it spends its context budget on the handful of lines that earned it. Because the agent has your codebase in the same session, it can tie a template back to the log statement that emitted it and draft the fix.
+
+Prompts that work well:
+
+| Goal | Ask your agent |
+| --- | --- |
+| Get oriented | `Mine log patterns for the payments service over the last 24 hours` |
+| Find what a deploy changed | `Compare log patterns from the last hour against the same hour yesterday and show me what's new` |
+| Cut the noise | `Which log patterns are the highest volume? Which ones are safe to stop logging?` |
+| Drill in | `Show me the actual log lines behind the top error pattern` |
+
+<CalloutBox icon="IconInfo" title="Diffing beats thresholds" type="fyi">
+
+A new error template appearing at low volume is often a better early signal than an existing one doubling. Diffing two windows surfaces the first kind, which volume alerts miss.
+
+</CalloutBox>
 
 ## Sampling
 
