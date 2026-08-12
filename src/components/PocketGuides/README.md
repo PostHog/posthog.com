@@ -83,6 +83,15 @@ The hover markers and their hint line show at reading widths only – below ~672
 width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
 on phones.
 
+### Adding new content elements
+
+The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
+browser defaults – silently. When a guide introduces something new (a table was the first),
+check the rendered page, and prefer wrapping the element in the site's native styling over
+book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
+[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
+widths.
+
 ### One MDX trap worth knowing
 
 **Never start a line with an inline component.** MDX treats a line-leading JSX tag as a *block*,

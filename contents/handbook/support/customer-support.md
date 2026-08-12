@@ -159,7 +159,7 @@ Locate the user's profile in admin and send them a 2FA reset link. The link expi
 
 #### How do I handle a bug report or feature request?
 
-For feature requests from low priority users, [give them this link](https://github.com/PostHog/posthog/issues/new/choose) and suggest they open a feature request.
+For feature requests from low priority users, [give them this link](/roadmap) and suggest they open a feature request on our public roadmap.
 
 For bug reports from normal and high priority users (assuming you've confirmed it's a bug, and that there's not already an open bug report):
 

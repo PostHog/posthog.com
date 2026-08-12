@@ -11,6 +11,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 import {
     IconArchive,
     IconPencil,
@@ -54,6 +55,20 @@ type QuestionProps = {
 }
 
 export const CurrentQuestionContext = createContext<any>({})
+
+const createSupportTicket = async (
+    posthog: NonNullable<ReturnType<typeof usePostHog>>,
+    message: string,
+    traits: { name: string | null; email: string | null }
+) => {
+    if (!posthog.conversations?.isAvailable?.()) {
+        throw new Error('Conversations are not available')
+    }
+    // newTicket=true so each escalate creates a fresh support ticket
+    const ticket = await posthog.conversations.sendMessage(message, traits, true)
+    if (!ticket) throw new Error('Failed to create support ticket')
+    return ticket
+}
 
 const TopicSelect = (props: {
     selectedTopics: StrapiData<TopicData[]>
@@ -377,9 +392,35 @@ export function Question(props: QuestionProps) {
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const { appWindow } = useWindow()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
+    const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+    const [conversationsAvailable, setConversationsAvailable] = useState(false)
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
+
+    // posthog-js and its conversations widget load asynchronously, so a single
+    // isAvailable() check at render time can miss it — poll briefly instead
+    useEffect(() => {
+        if (!isModerator || !isInForum) return
+        const isAvailable = () => !!window?.posthog?.conversations?.isAvailable?.()
+        if (isAvailable()) {
+            setConversationsAvailable(true)
+            return
+        }
+        let attempts = 0
+        const interval = setInterval(() => {
+            attempts++
+            if (isAvailable()) {
+                setConversationsAvailable(true)
+                clearInterval(interval)
+            } else if (attempts >= 20) {
+                clearInterval(interval)
+            }
+        }, 500)
+        return () => clearInterval(interval)
+    }, [isModerator, isInForum])
 
     useEffect(() => {
         if (
@@ -433,6 +474,72 @@ export function Question(props: QuestionProps) {
     const handleReply = async (_values, _formData, data) => {
         if (data.askMax) {
             setMaxQuestions([...maxQuestions, { manual: false, withContext: true }])
+        }
+    }
+
+    const handleEscalateToSupport = async () => {
+        if (escalateState === 'sending' || escalateState === 'sent') return
+        setEscalateState('sending')
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
+        const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
+        const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
+        const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
+        const message = [
+            'Community question escalated by a moderator',
+            `Title: ${questionData.attributes.subject}`,
+            `Link: https://posthog.com/questions/${questionData.attributes.permalink}`,
+            `Author: ${authorName}${authorEmail ? ` (${authorEmail})` : ''}`,
+            topics ? `Topics: ${topics}` : null,
+            `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
+            // Widget tickets only deliver replies to the widget session that created them,
+            // which is a throwaway here — make sure support contacts the author directly
+            `Note: replies in this thread won't reach the author. Reply on the community question above (they'll be notified there)${
+                authorEmail ? `, or email them directly at ${authorEmail}` : ''
+            }.`,
+        ]
+            .filter(Boolean)
+            .join('\n')
+        try {
+            if (!posthog) throw new Error('PostHog is not loaded')
+            // Attribute the ticket to the question author so support replies reach them
+            const ticket = await createSupportTicket(posthog, message, {
+                name: authorName,
+                email: authorEmail || null,
+            })
+            setEscalateState('sent')
+            addToast({
+                title: 'Escalated to support',
+                // Default 3s is too short to read and click the ticket link
+                duration: 10000,
+                description: (
+                    <>
+                        A support ticket was created for this question.{' '}
+                        {ticket?.ticket_id && (
+                            <Link
+                                // Tickets live in the posthog.com project (id 2) on US Cloud
+                                to={`${
+                                    process.env.GATSBY_POSTHOG_UI_HOST || 'https://us.posthog.com'
+                                }/project/2/support/tickets/${ticket.ticket_id}`}
+                                external
+                                className="font-semibold underline"
+                            >
+                                View the ticket
+                            </Link>
+                        )}
+                    </>
+                ),
+            })
+        } catch (error) {
+            setEscalateState('error')
+            addToast({
+                title: 'Escalation failed',
+                description: "The support ticket couldn't be created. Please try again.",
+                error: true,
+            })
+            posthog?.captureException?.(error)
         }
     }
 
@@ -659,6 +766,25 @@ export function Question(props: QuestionProps) {
                                             >
                                                 View in Strapi
                                             </Link>
+                                            {conversationsAvailable && (
+                                                <OSButton
+                                                    variant="secondary"
+                                                    size="sm"
+                                                    onClick={handleEscalateToSupport}
+                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
+                                                >
+                                                    {escalateState === 'sending'
+                                                        ? 'Escalating…'
+                                                        : escalateState === 'sent'
+                                                        ? 'Escalated ✓'
+                                                        : 'Escalate to support'}
+                                                </OSButton>
+                                            )}
+                                            {escalateState === 'error' && (
+                                                <span className="text-red text-xs font-semibold">
+                                                    Couldn't create ticket. Try again?
+                                                </span>
+                                            )}
                                         </p>
                                     </div>
                                 </div>
