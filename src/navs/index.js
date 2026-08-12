@@ -6718,6 +6718,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Capture AI events',
+                    url: '/docs/ai-observability/capture-ai',
+                    icon: 'IconSend',
+                    color: 'teal',
+                    featured: true,
+                },
+                {
                     name: 'Self-driving',
                     url: '/docs/ai-observability/self-driving',
                     icon: 'IconBolt',

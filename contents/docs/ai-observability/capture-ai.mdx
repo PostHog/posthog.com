@@ -1,0 +1,142 @@
+---
+title: Capturing AI events with capture_ai
+sidebar: Docs
+showTitle: true
+---
+
+> 🚧 **Beta.** The `capture_ai` surface is frozen — signatures won't change —
+> but the operational limits listed below may. Available in
+> [posthog-python](/docs/libraries/python) and
+> [posthog-node](/docs/libraries/node).
+
+AI events are big. A single generation can carry megabytes of prompt context
+or base64 media — far past what analytics capture accepts. `capture_ai` sends
+AI events (`$ai_generation`, `$ai_span`, `$ai_trace`, `$ai_embedding`, ...)
+through a dedicated AI ingestion path with much higher payload limits, on an
+isolated queue that never delays or displaces your analytics events.
+
+Our [SDK integrations](/docs/ai-observability/installation) use it under the
+hood. Use it directly when you build AI events yourself
+([manual capture](/docs/ai-observability/installation/manual-capture)).
+
+## Capturing manually
+
+`capture_ai` takes exactly the same arguments as `capture` and returns the
+event's UUID — keep it if you want to correlate this capture with the trace
+you later query.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("<ph_project_api_key>", host="<ph_client_api_host>")
+
+uuid = posthog.capture_ai(
+    "$ai_generation",
+    distinct_id="user_123",
+    properties={
+        "$ai_trace_id": trace_id,
+        "$ai_model": "gpt-5",
+        "$ai_input": messages,
+        "$ai_output_choices": choices,
+    },
+)
+```
+
+```ts
+import { PostHog } from 'posthog-node'
+
+const posthog = new PostHog('<ph_project_api_key>', { host: '<ph_client_api_host>' })
+
+const uuid = posthog.captureAi({
+  distinctId: 'user_123',
+  event: '$ai_generation',
+  properties: {
+    $ai_trace_id: traceId,
+    $ai_model: 'gpt-5',
+    $ai_input: messages,
+    $ai_output_choices: choices,
+  },
+})
+```
+
+In Node, `captureAi` returns `undefined` when the client is disabled. In
+Python, `capture_ai` returns `None` when the event wasn't admitted (disabled
+client, or dropped by `before_send`).
+
+Send content as your provider produced it — provider-native message parts,
+including base64 and data URIs. The platform recognizes media at ingestion;
+you don't need to reshape payloads per provider.
+
+`capture_ai` is a pipe: it never redacts or truncates what you pass it.
+Payloads you build yourself are your responsibility;
+[privacy mode](/docs/ai-observability/privacy-mode) and the size limits below
+still apply.
+
+### Short-lived processes
+
+In serverless environments, use the awaitable variant so the event is
+delivered before the runtime freezes:
+
+```ts
+await posthog.captureAiImmediate({ distinctId: 'user_123', event: '$ai_generation', properties })
+```
+
+Python has no per-call immediate variant — use `sync_mode=True` or call
+`posthog.flush()` before exit, as with `capture`.
+
+## Full AI capture
+
+By default, PostHog's AI wrappers redact media and truncate very long strings
+before capture. Opt into full-fidelity capture with one flag:
+
+```python
+posthog = Posthog("<ph_project_api_key>", enable_full_ai_capture=True)
+```
+
+```ts
+const posthog = new PostHog('<ph_project_api_key>', { enableFullAiCapture: true })
+```
+
+What the flag changes — for wrapper-captured events only:
+
+| | `enable_full_ai_capture` off (default) | on |
+|---|---|---|
+| Delivery | analytics capture path | dedicated AI path |
+| Long strings | truncated | kept intact |
+| Media (base64 / data URIs) | type-aware placeholders, e.g. `[base64 audio redacted]` | passed through unmodified |
+| Privacy mode on | content stripped | content stripped |
+
+Notes:
+
+- [Privacy mode](/docs/ai-observability/privacy-mode) always wins: content
+  properties are stripped entirely, flag or no flag.
+- Truncation is skipped together with media passthrough because a cut through
+  base64 corrupts the media as surely as redacting it.
+- Very short base64 strings in media fields are kept even when redacting
+  (under 200 characters in Python, under 64 in Node).
+- In Node, the OpenTelemetry export path always redacts, regardless of this
+  flag.
+
+## Delivery and failure semantics
+
+- `capture_ai` never throws. Delivery failures surface through the SDK's
+  error hooks (`on_error` in Python), not the return value.
+- Every AI event carries a client-generated UUIDv7 (unless you pass your own
+  UUID), which is what the method returns. Retries after partial failures may
+  re-send an event; ingestion dedupes on the UUID, so you never see
+  duplicates.
+- Events exceeding the per-event size limit are dropped, logging only the
+  event name and byte size — payload content never reaches logs.
+
+## Current operational limits
+
+These are operating values, **not** API guarantees — they may change without
+notice as the AI ingestion pipeline evolves:
+
+| | |
+|---|---|
+| Per-event size cap | 8 MiB |
+| Endpoint | `/i/v0/ai/batch/` |
+| Batching | isolated queue, ~5 MiB target per batch (Node) |
+| Compression | Node: gzip (unless `disableCompression`); Python: opt-in `gzip=True` |
+| Retries | bounded, with backoff; failed batches are reported then discarded |
