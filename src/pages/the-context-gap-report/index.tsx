@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 import { Bang } from 'components/Icons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Hedgehog996 } from '@posthog/brand/hoggies'
-import { IconSparkles } from '@posthog/icons'
+import { IconSparkles, IconOpenSidebar } from '@posthog/icons'
 
 const PDF_PATH = '/brand/The-Context-Gap-Report.pdf'
 
@@ -26,6 +26,7 @@ Write a 30-page report called "The Context Gap" that:
 Cite every stat to its source report. Flag anything you can't verify instead of guessing at a number.`
 
 const CLAUDE_URL = `https://claude.ai/new?q=${encodeURIComponent(AGENT_PROMPT)}`
+const MAX_URL = `https://app.posthog.com/#panel=max:!${encodeURIComponent(AGENT_PROMPT)}`
 
 export default function ContextGapReport() {
     // components/Link treats any path starting with "/" as internal and ignores the `external`
@@ -178,11 +179,17 @@ export default function ContextGapReport() {
                         </div>
                     </div>
 
-                    <div className="flex">
+                    <div className="flex flex-wrap gap-3">
                         <CallToAction to={CLAUDE_URL} externalNoIcon size="md">
                             <span className="inline-flex items-center justify-center gap-2">
                                 <IconSparkles className="size-4" />
                                 Just ask Claude
+                            </span>
+                        </CallToAction>
+                        <CallToAction to={MAX_URL} externalNoIcon size="md">
+                            <span className="inline-flex items-center justify-center gap-2">
+                                <IconOpenSidebar className="size-4" />
+                                Just ask PostHog AI
                             </span>
                         </CallToAction>
                     </div>
