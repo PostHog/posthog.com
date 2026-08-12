@@ -51,7 +51,7 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             <p className="text-base leading-loose">
                 With each regression, an agent investigates and creates a report in your <strong>Inbox</strong>.{' '}
                 <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2} multiline>
-                    When there's code to fix, it <em>opens the pull request</em>.
+                    When there's code to fix, it <em>opens a pull request</em>.
                 </RoughAnnotation>{' '}
                 Your AI improves while you sleep.
             </p>

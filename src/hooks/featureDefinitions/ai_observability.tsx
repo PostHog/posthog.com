@@ -91,14 +91,8 @@ export const aiObservabilityFeatures = {
             name: 'User feedback',
             description: 'Capture ratings and comments from users on AI responses',
         },
-        session_replay: {
-            name: 'Session replay',
-            description: 'Watch recordings of users interacting with AI features',
-        },
-        product_analytics: {
-            name: 'Product analytics',
-            description: 'Analyze AI interactions alongside retention, funnels, and feature adoption',
-        },
+        // Session replay and product-analytics context live as `session_replay_link`
+        // and `user_profile_context` in the tracing section – no duplicate rows here.
         agent_reports: {
             name: 'Agent reports & pull requests',
             description:

@@ -27,8 +27,6 @@ export const braintrust = {
                 human_annotation: true,
                 // logFeedback API attaches user feedback to spans.
                 user_feedback: true,
-                session_replay: false,
-                product_analytics: false,
                 // Loop reviews experiments and suggests improvements; no production-watching PR pipeline.
                 agent_reports: 'Partial',
                 ai_gateway_proxy: true,

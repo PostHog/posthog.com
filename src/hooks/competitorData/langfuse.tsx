@@ -26,8 +26,6 @@ export const langfuse = {
                 human_annotation: true,
                 // User feedback via the scores API.
                 user_feedback: true,
-                session_replay: false,
-                product_analytics: false,
                 agent_reports: false,
                 feature_flags: false,
                 ai_gateway_proxy: false,

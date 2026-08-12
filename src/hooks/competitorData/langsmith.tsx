@@ -28,8 +28,6 @@ export const langsmith = {
                 human_annotation: true,
                 // Feedback API attaches user feedback to runs.
                 user_feedback: true,
-                session_replay: false,
-                product_analytics: false,
                 // Insights agent summarizes patterns; no PR pipeline.
                 agent_reports: 'Partial',
                 ai_gateway_proxy: false,
