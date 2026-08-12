@@ -121,14 +121,32 @@ There is no password to send, so don't ask for one. Instead, have the user write
 
 Ask for this instead:
 
-> While logged in to posthog.com, open your browser console and run `localStorage.getItem('jwt')` and copy the result. Then, in your terminal, run this — it will wait silently for you to paste the token and press Enter:
+> While logged in to posthog.com, open your browser console and run `copy(localStorage.getItem('jwt'))` — that puts the bare token on your clipboard. (`localStorage.getItem('jwt')` on its own also works, but the console prints the value wrapped in quotes, and those quotes are not part of the token.)
+>
+> Then, in your terminal, run this:
 >
 > ```bash
 > mkdir -p ~/.posthog && chmod 700 ~/.posthog
 > read -rs TOKEN && printf %s "$TOKEN" > ~/.posthog/strapi-jwt && chmod 600 ~/.posthog/strapi-jwt && unset TOKEN
 > ```
+>
+> The cursor will sit there with nothing showing — that's expected. Paste the token and press Enter.
+>
+> Two things people get wrong here, so say them explicitly:
+>
+> - **Leave the word `TOKEN` as-is.** It's a variable name, not a placeholder — don't substitute the token into the command. Typed as an argument it would land in shell history, which is exactly what this avoids.
+> - **Paste the token bare** — no surrounding quotes, no `Bearer` prefix. `read` stores the line literally, so quotes become part of the stored token and every upload then 401s.
 
 `read -rs` is what keeps this clean — the `-s` means the token is never echoed to the screen and never lands in their shell history. The file persists between sessions, so they only redo this when the token expires.
+
+Both mistakes above are silent — the file gets written either way. Verify with:
+
+```bash
+grep -c "['\"]" ~/.posthog/strapi-jwt   # want 0; anything else means quotes got included
+wc -c < ~/.posthog/strapi-jwt           # want roughly 180-220 bytes
+```
+
+Note that the `exp`-decode check further down does **not** catch a quoted token: it splits on `.`, so stray leading and trailing quotes fall outside the payload segment and it reports a perfectly valid expiry date for a token that will still 401. Use `grep` for that failure, not the decoder.
 
 That token is the same one every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key. It's valid for about 30 days.
 
