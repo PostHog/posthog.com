@@ -7,8 +7,8 @@ import {
     IconLightBulb,
     IconListTreeConnected,
     IconLlmPromptEvaluation,
-    IconPiggyBank,
     IconPlug,
+    IconSparkles,
     IconWarning,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -424,20 +424,20 @@ export const topFeatures: CarouselSlide[] = [
         },
     },
     {
-        slug: 'cost-analysis',
-        label: 'Cost analysis',
-        icon: <IconPiggyBank className="size-5" />,
+        slug: 'clusters',
+        label: 'Clusters',
+        icon: <IconSparkles className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-purple',
         layout: 'float',
-        heading: f.cost_analysis.headline,
+        heading: f.clusters.headline,
         description: (
             <>
-                <p>{f.cost_analysis.description}</p>
+                <p>{f.clusters.description}</p>
                 <div className="@container">
                     <LabeledList
-                        items={f.cost_analysis.features.map((item) => ({
+                        items={f.clusters.features.map((item) => ({
                             label: item.title,
                             description: item.description,
                         }))}
@@ -446,8 +446,8 @@ export const topFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.cost_analysis.images[0].src,
-            alt: f.cost_analysis.images[0].alt,
+            src: f.clusters.images[0].src,
+            alt: f.clusters.images[0].alt,
             glow: true,
         },
     },
@@ -516,8 +516,8 @@ export const topFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.performance_monitoring.images[0].src,
-            alt: f.performance_monitoring.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_5_17_12_PM_43640af689.png',
+            alt: 'Anomaly detection alerts configured on LLM insights',
             glow: true,
         },
     },

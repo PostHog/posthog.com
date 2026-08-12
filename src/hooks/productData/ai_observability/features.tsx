@@ -155,6 +155,36 @@ export const features = {
             },
         ],
     },
+    // Copy grounded in /docs/ai-observability/clusters.
+    clusters: {
+        title: 'Clusters',
+        headline: 'Discover patterns without reading every conversation',
+        description:
+            'Clusters group similar traces automatically and give each group a name, so you can see what users ask your AI to do – and where it struggles – at a glance.',
+        icon: <IconSparkles />,
+        color: 'purple',
+        images: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_5_18_24_PM_76f6c708fa.png',
+                alt: 'The clusters map with AI-named groups of traces and per-cluster metrics',
+            },
+        ],
+        features: [
+            {
+                title: 'AI-written summaries',
+                description: 'Each cluster gets a generated title and description of what its traces share',
+            },
+            {
+                title: 'Metrics per cluster',
+                description:
+                    'Average cost, latency, tokens, and error rate per group – expensive or failing patterns stand out',
+            },
+            {
+                title: 'Outliers flagged',
+                description: 'Traces that fit no cluster are surfaced as unusual behavior',
+            },
+        ],
+    },
     performance_monitoring: {
         title: 'Performance monitoring',
         headline: 'Performance monitoring',
