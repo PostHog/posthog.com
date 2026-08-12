@@ -241,11 +241,37 @@ const faqItems = [
         ),
     },
     {
-        trigger: 'Can I use my credits on self-driving features?',
+        trigger: 'Can I use my credits on all PostHog products?',
         content: (
             <p>
-                Yes. Your credits work across every PostHog product, including AI observability, the context warehouse,
-                and self-driving. Use them on whatever gives your startup the most value.
+                Unfortunately now. From 14 September 2026, startup credits can no longer be used towards bills incurred
+                on PostHog Desktop, or the Replay Vision, PostHog AI, and Inbox tools. This is due to the prohibitive
+                and unpredictable cost of token-based tools.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I use credits to claim a BAA under the Boost plan?',
+        content: (
+            <p>
+                Credits cannot be used to claim a BAA under the Boost plan due to legal risk. If you’d like to claim a
+                BAA, you can instead{' '}
+                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline font-semibold">
+                    contact us to discuss options
+                </Link>
+                . Credits can be used towards other aspects of the Boost package.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Why can I not use my credits on AI features?',
+        content: (
+            <p>
+                From 14 September 2026, startup credits can no longer be used towards bills incurred on AI-based tools
+                or products, including PostHog Desktop, or the Replay Vision, PostHog AI, and Inbox tools. This is due
+                to the prohibitive and unpredictable cost of token-based tools which makes these tools harder for us to
+                subsidize. If you joined before PostHog for Startups before 14 September 2026 then usage before this
+                cut-off can still be paid with credits.
             </p>
         ),
     },
@@ -278,19 +304,6 @@ const faqItems = [
                 Yes, but only if you signed up after Jan 1st 2023. If your startup meets the eligibility criteria but
                 you signed up to PostHog before Jan 1st, we won't apply the credits but are still happy to enroll you in
                 the rest of the program.
-            </p>
-        ),
-    },
-    {
-        trigger: 'Can I use credits to claim a BAA under the Boost plan?',
-        content: (
-            <p>
-                Unfortunately, no. Credits cannot be used to claim a BAA under the Boost plan due to legal risk. If
-                you'd like to claim a BAA, you can instead{' '}
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="underline font-semibold">
-                    contact us to discuss options
-                </Link>
-                . Credits can be used towards all other aspects of the Boost package.
             </p>
         ),
     },
@@ -408,7 +421,7 @@ const faqStructuredData = [
     },
     {
         question: 'How far does $50,000 in PostHog credits go?',
-        answer: 'It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events – mix and match across products however makes sense for your startup.',
+        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. That is just for starters, but credits cannot be used towards usage of AI tools such as PostHog Desktop or Replay Vision.',
     },
 ]
 
@@ -573,8 +586,8 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </h3>
                     <p>
                         A <em>very</em> long way. Here's what your credits are worth if you spent them all in one place,
-                        but you can mix and match in whatever way makes sense for your startup. We're not fussy. We just
-                        want you to spend the money.
+                        but you can mix and match them across most PostHog products. We're not fussy. We just want you
+                        to spend the money.
                     </p>
                     <div className="not-prose grid grid-cols-2 @2xl/reader-content:grid-cols-4 gap-4 my-6">
                         {creditBreakdown.map(({ Icon, color, amount, unit }) => (
