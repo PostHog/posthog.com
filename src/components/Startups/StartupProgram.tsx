@@ -244,9 +244,10 @@ const faqItems = [
         trigger: 'Can I use my credits on all PostHog products?',
         content: (
             <p>
-                Unfortunately now. From 14 September 2026, startup credits can no longer be used towards bills incurred
-                on PostHog Desktop, or the Replay Vision, PostHog AI, and Inbox tools. This is due to the prohibitive
-                and unpredictable cost of token-based tools.
+                Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills
+                incurred on AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox. This is due to the
+                prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else,
+                including AI observability and the context warehouse.
             </p>
         ),
     },
@@ -267,11 +268,10 @@ const faqItems = [
         trigger: 'Why can I not use my credits on AI features?',
         content: (
             <p>
-                From 14 September 2026, startup credits can no longer be used towards bills incurred on AI-based tools
-                or products, including PostHog Desktop, or the Replay Vision, PostHog AI, and Inbox tools. This is due
-                to the prohibitive and unpredictable cost of token-based tools which makes these tools harder for us to
-                subsidize. If you joined before PostHog for Startups before 14 September 2026 then usage before this
-                cut-off can still be paid with credits.
+                From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such
+                as PostHog Desktop, Replay Vision, PostHog AI, and Inbox. Token-based pricing makes the cost of these
+                tools prohibitive and unpredictable, which makes them harder for us to subsidize. If you joined PostHog
+                for Startups before September 14, 2026, usage before this cut-off can still be paid with credits.
             </p>
         ),
     },
@@ -408,8 +408,8 @@ const faqStructuredData = [
         answer: 'A product that improves itself without waiting to be prompted. PostHog watches how people use your product, finds what is worth fixing, writes the code, and opens a pull request – all you do is hit merge.',
     },
     {
-        question: 'Can I use my PostHog for Startups credits on self-driving features?',
-        answer: 'Yes. Your credits work across every PostHog product, including AI observability, the context warehouse, and self-driving. Use them on whatever gives your startup the most value.',
+        question: 'Can I use my PostHog for Startups credits on all PostHog products?',
+        answer: 'Almost all of them. From September 14, 2026, startup credits can no longer be used towards bills incurred on AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Credits still cover everything else, including AI observability and the context warehouse.',
     },
     {
         question: 'How do I apply to PostHog for Startups?',
@@ -421,7 +421,7 @@ const faqStructuredData = [
     },
     {
         question: 'How far does $50,000 in PostHog credits go?',
-        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. That is just for starters, but credits cannot be used towards usage of AI tools such as PostHog Desktop or Replay Vision.',
+        answer: 'A long way. It covers roughly 950 million events, more than 6 million session recordings, over 840 million LLM analytics events, or 396 million error tracking events. Credits cannot be used towards AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox.',
     },
 ]
 
@@ -444,13 +444,13 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
     return (
         <>
             <SEO
-                title="PostHog for Startups | $50K credits to build a self-driving product"
-                description="Get over $50,000 in credits to build a self-driving product with PostHog. Analytics, session replay, feature flags, AI, and agents that find and fix issues for you. Plus merch and partner perks. Apply in 2 minutes."
+                title="PostHog for Startups | $50K in credits for early-stage teams"
+                description="Get over $50,000 in PostHog credits for analytics, session replay, feature flags, and more, while you build a self-driving product. Plus merch and partner perks. Apply in 2 minutes."
                 image="/images/og/default.png"
                 structuredData={buildProductStructuredData({
                     name: 'PostHog for Startups',
                     description:
-                        'Over $50,000 in PostHog credits to build a self-driving product, plus exclusive merch and partner perks for early-stage teams.',
+                        'Over $50,000 in PostHog credits, plus exclusive merch and partner perks for early-stage teams building self-driving products.',
                     slug: 'startups',
                     faq: faqStructuredData,
                 })}
@@ -479,7 +479,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         {/* show is set explicitly because the scroll trigger's -15% rootMargin never
                             fires for a heading this close to the top of the pane. */}
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
-                            {creditValue} in credits to build a{' '}
+                            {creditValue} in credits while you build a{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(48, 164, 108, 0.2)"
@@ -497,8 +497,8 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                             <div className="min-w-0 @2xl/reader-content:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
                                     PostHog finds what's worth fixing, writes the code, and opens the pull request. You
-                                    get the credits to run it – plus swag and partner perks perfect for anyone building
-                                    AI products.
+                                    get credits for the whole platform – plus swag and partner perks perfect for anyone
+                                    building AI products.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {heroBullets.map((item) => (
@@ -552,7 +552,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </div>
 
                     <h3>
-                        Build a <Highlight>self-driving product</Highlight> with {creditValue} in credits
+                        Build a <Highlight>self-driving product</Highlight> with PostHog
                     </h3>
                     <p>
                         Building products used to mean manually writing code, running analysis, diagnosing bugs, and
@@ -586,8 +586,9 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                     </h3>
                     <p>
                         A <em>very</em> long way. Here's what your credits are worth if you spent them all in one place,
-                        but you can mix and match them across most PostHog products. We're not fussy. We just want you
-                        to spend the money.
+                        but you can mix and match them across most PostHog products. The exceptions are AI tools such as
+                        PostHog Desktop, Replay Vision, PostHog AI, and Inbox, which credits can't be used for.
+                        Otherwise we're not fussy. We just want you to spend the money.
                     </p>
                     <div className="not-prose grid grid-cols-2 @2xl/reader-content:grid-cols-4 gap-4 my-6">
                         {creditBreakdown.map(({ Icon, color, amount, unit }) => (
