@@ -6352,7 +6352,7 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/managed-warehouse/connect',
                         },
                         {
-                            name: 'Performance tuning',
+                            name: 'Performance',
                             url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
                         },
                     ],
