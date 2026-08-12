@@ -6706,6 +6706,11 @@ export const docsMenu = {
                             platformLogo: 'convex',
                         },
                         {
+                            name: 'OpenCode',
+                            url: '/docs/ai-observability/installation/opencode',
+                            icon: 'IconCode',
+                        },
+                        {
                             name: 'Pi Coding Agent',
                             url: '/docs/ai-observability/installation/pi',
                             icon: 'IconCode',

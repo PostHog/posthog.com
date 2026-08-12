@@ -6076,6 +6076,21 @@
             "source": "/product-analytics-explorer/pricing",
             "destination": "/product-analytics/pricing",
             "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
+            "statusCode": 301
         }
     ]
 }

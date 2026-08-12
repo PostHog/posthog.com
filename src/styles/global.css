@@ -3186,3 +3186,13 @@ html.warehouse-wizard-hint-dismissed .warehouse-wizard-hint .wizard-hint-collaps
 html.ai-observability-wizard-hint-dismissed .ai-observability-wizard-hint .wizard-hint-collapsed {
     display: flex;
 }
+
+/* `#:~:text=` fragment highlight. Same yellow as Tailwind's `yellow` token
+   (see tailwind.config.js), matching the site's search-result highlight
+   (mark[data-markjs='true']) at the same opacity for visual consistency. */
+::highlight(text-fragment-target) {
+    background-color: rgb(247 165 1 / 0.4);
+}
+.dark ::highlight(text-fragment-target) {
+    background-color: rgb(247 165 1 / 0.3);
+}
