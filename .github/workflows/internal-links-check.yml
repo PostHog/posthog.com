@@ -19,13 +19,21 @@ on:
                 default: 'true'
                 type: boolean
 
+concurrency:
+    group: internal-links-check
+    cancel-in-progress: true
+
 jobs:
     check-internal-links:
         runs-on: depot-ubuntu-latest-8
+        timeout-minutes: 60
 
         env:
+            # GATSBY_CPU_COUNT was pinned to 1 in 2022 (#12805) for memory headroom on
+            # 7GB GitHub runners. Depot-8 runners have far more RAM, and the preview
+            # build already runs fully parallel on the same runner size — single-threading
+            # here made this the slowest job in the repo (16-45 min).
             NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
-            GATSBY_CPU_COUNT: 1
 
         steps:
             - name: Checkout code

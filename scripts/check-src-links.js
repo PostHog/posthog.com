@@ -38,6 +38,7 @@ const CONFIG = {
         '/teams/', // powered by Strapi
         '/careers/', // powered by Ashby
         '/api/', // Vercel serverless functions
+        '/long-term-contract-template', // intentional placeholder link on the /trash joke page
     ],
     SOURCE_EXTENSIONS: /\.(tsx|ts|jsx|js)$/,
     LINK_PATTERNS: [/\b(?:to|href)=["'](\/[^"'\s]*)["']/g, /\b(?:to|href|url|link):\s*["'](\/[^"'\s]*)["']/g],
