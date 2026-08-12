@@ -72,11 +72,6 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
-        // This site registers ~10 source plugins (5x gatsby-source-filesystem, ashby, squeak,
-        // mapbox-locations, git-metadata, source-git). Gatsby otherwise runs each plugin's
-        // sourceNodes serially; this runs them concurrently. Node creation is independent of
-        // ordering, so output is unaffected — only wall-clock during "source and transform
-        // nodes" changes.
         PARALLEL_SOURCING: true,
     },
     siteMetadata: {
