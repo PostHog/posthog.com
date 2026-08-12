@@ -7,6 +7,7 @@ import { CallToAction } from 'components/CallToAction'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
+import WistiaEmbed from 'components/WistiaEmbed'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../context/App'
@@ -864,27 +865,8 @@ export default function SelfDrivingPage({
                                 <GetStarted selfDriving />
                             </div>
 
-                            <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
-                                <div className="h-64 overflow-hidden bg-accent @sm/reader-content:h-72 @xl/reader-content:h-80">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
-                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
-                                        className="dark:hidden w-full"
-                                        imgClassName="block w-full"
-                                    />
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
-                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
-                                        className="hidden dark:block w-full"
-                                        imgClassName="block w-full"
-                                    />
-                                </div>
-                                <CloudinaryImage
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
-                                    alt=""
-                                    aria-hidden
-                                    imgClassName="pointer-events-none absolute inset-x-0 bottom-0 z-30 block w-full max-w-none"
-                                />
+                            <div className="overflow-hidden rounded-md shadow-2xl">
+                                <WistiaEmbed mediaId="w7ia81gh5x" />
                             </div>
                         </section>
                     </div>
