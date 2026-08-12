@@ -56,52 +56,18 @@ type QuestionProps = {
 
 export const CurrentQuestionContext = createContext<any>({})
 
-// The site's posthog-js api_host is a CloudFront proxy that doesn't forward
-// /api/conversations/* (returns 403), so we can't use posthog.conversations.sendMessage()
-// and call the PostHog API host directly instead. Payload shape mirrors the SDK's.
-// TODO: switch back to posthog.conversations.sendMessage() once the proxy forwards conversations paths
-const CONVERSATIONS_API_HOST = 'https://us.i.posthog.com'
-
-const ESCALATE_TIMEOUT_MS = 15000
-
 const createSupportTicket = async (
     posthog: NonNullable<ReturnType<typeof usePostHog>>,
     message: string,
     traits: { name: string | null; email: string | null }
 ) => {
-    // Abort rather than hang forever if the API is unreachable
-    const abortController = new AbortController()
-    const timeout = setTimeout(() => abortController.abort(), ESCALATE_TIMEOUT_MS)
-    try {
-        const configResponse = await fetch(`${CONVERSATIONS_API_HOST}/array/${posthog.config.token}/config`, {
-            signal: abortController.signal,
-        })
-        if (!configResponse.ok) throw new Error(`Failed to fetch conversations config (${configResponse.status})`)
-        const remoteConfig = await configResponse.json()
-        const conversationsToken = remoteConfig?.conversations?.token
-        if (!conversationsToken) throw new Error('Conversations are not enabled for this project')
-        const response = await fetch(`${CONVERSATIONS_API_HOST}/api/conversations/v1/widget/message`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Conversations-Token': conversationsToken,
-            },
-            body: JSON.stringify({
-                message,
-                traits,
-                // null ticket_id + fresh widget_session_id = always create a new ticket
-                ticket_id: null,
-                widget_session_id: crypto.randomUUID(),
-                distinct_id: posthog.get_distinct_id?.(),
-                session_context: { current_url: window.location.href },
-            }),
-            signal: abortController.signal,
-        })
-        if (!response.ok) throw new Error(`Failed to create support ticket (${response.status})`)
-        return response.json()
-    } finally {
-        clearTimeout(timeout)
+    if (!posthog.conversations?.isAvailable?.()) {
+        throw new Error('Conversations are not available')
     }
+    // newTicket=true so each escalate creates a fresh support ticket
+    const ticket = await posthog.conversations.sendMessage(message, traits, true)
+    if (!ticket) throw new Error('Failed to create support ticket')
+    return ticket
 }
 
 const TopicSelect = (props: {
@@ -515,9 +481,9 @@ export function Question(props: QuestionProps) {
         if (escalateState === 'sending' || escalateState === 'sent') return
         setEscalateState('sending')
         const authorProfile = questionData.attributes.profile?.data
-        const authorName = authorProfile?.attributes?.firstName
-            ? `${authorProfile.attributes.firstName} ${authorProfile.attributes.lastName ?? ''}`.trim()
-            : 'Anonymous'
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
         const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
         const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
         const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
