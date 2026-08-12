@@ -337,6 +337,10 @@ export const aiObservability = {
             description: 'Watch how users interact with AI features in real sessions',
         },
         {
+            slug: 'feature-flags',
+            description: 'Roll out AI features gradually and switch models without a deploy',
+        },
+        {
             slug: 'experiments',
             description: 'A/B test prompts and models, measured on statistically significant results',
         },

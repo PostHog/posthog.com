@@ -255,17 +255,9 @@ export const aiObservabilityFeatures = {
                 name: 'Cost trends',
                 description: 'Historical cost over time',
             },
-            cost_by_user: {
-                name: 'Cost by user',
-                description: 'See what individual users cost you, tied to full person profiles',
-            },
             cost_by_custom_tags: {
                 name: 'Cost by custom tags',
                 description: 'Break down spending by feature, environment, or any metadata you attach',
-            },
-            cost_by_cohort: {
-                name: 'Cost by cohort',
-                description: 'Compare costs across behavioral user segments',
             },
         },
     },
