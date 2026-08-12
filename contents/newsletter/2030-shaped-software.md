@@ -49,7 +49,7 @@ Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B 
 
 This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI notes](https://openai.com/index/harness-engineering/) that agents struggle not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
 
-Context is what makes your agent special. The model is the same for everyone, your moat is [the source code, usage data, customer data, and product skills you feed it](/newsletter/software-factories#what-software-factories-are-missing). This means [context engineering](/newsletter/context-engineering), creating pipelines and flows to get fresh, valuable context to the agents when they need it.
+Context is what makes your agent special. The model is the same for everyone, your moat is [the source code, usage data, customer data,](/newsletter/software-factories#what-software-factories-are-missing) and product skills you feed it. This means [context engineering](/newsletter/context-engineering), creating pipelines and flows to get fresh, valuable context to the agents when they need it.
 
 ## Chat is the front door, generative UI inside
 
