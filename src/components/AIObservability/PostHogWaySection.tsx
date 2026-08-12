@@ -36,9 +36,9 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                <strong>AI Observability</strong> captures every generation as a regular PostHog event – giving you the
-                full context and connecting it to many other products. Evals score your live traffic and anomaly alerts
-                learn what normal looks like,{' '}
+                <strong>AI Observability</strong> captures the full context of each generation and connects it to other
+                PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts learn what
+                normal looks like,{' '}
                 <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} multiline>
                     so regressions in tool calling, response quality, or latency automatically turn into{' '}
                     <strong>signals</strong>
