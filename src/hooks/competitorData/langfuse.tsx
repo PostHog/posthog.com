@@ -44,7 +44,8 @@ export const langfuse = {
                     multi_model_support: true,
                     session_replay_link: false,
                     user_profile_context: 'Partial',
-                    sql_queries_on_traces: false,
+                    // ClickHouse-backed custom queries and dashboards, not alongside product events.
+                    sql_queries_on_traces: 'Partial',
                     trace_explorer_ui: 'Advanced',
                 },
             },
@@ -79,7 +80,7 @@ export const langfuse = {
                     cost_by_model: true,
                     cost_trends: true,
                     cost_by_user: 'Partial',
-                    cost_by_feature: false,
+                    cost_by_custom_tags: true,
                     cost_by_cohort: false,
                 },
             },

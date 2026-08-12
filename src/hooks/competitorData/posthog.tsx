@@ -639,7 +639,7 @@ export const posthog = {
                     cost_by_model: true,
                     cost_trends: true,
                     cost_by_user: true,
-                    cost_by_feature: true,
+                    cost_by_custom_tags: true,
                     cost_by_cohort: true,
                 },
             },

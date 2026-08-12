@@ -30,7 +30,8 @@ export const langsmith = {
                 user_feedback: true,
                 session_replay: false,
                 product_analytics: false,
-                agent_reports: false,
+                // Insights agent summarizes patterns; no PR pipeline.
+                agent_reports: 'Partial',
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -82,8 +83,8 @@ export const langsmith = {
                     cost_calculation: true,
                     cost_by_model: true,
                     cost_trends: true,
-                    cost_by_user: false,
-                    cost_by_feature: false,
+                    cost_by_user: 'Partial',
+                    cost_by_custom_tags: true,
                     cost_by_cohort: false,
                 },
             },

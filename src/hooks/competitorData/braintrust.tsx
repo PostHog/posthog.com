@@ -29,7 +29,8 @@ export const braintrust = {
                 user_feedback: true,
                 session_replay: false,
                 product_analytics: false,
-                agent_reports: false,
+                // Loop reviews experiments and suggests improvements; no production-watching PR pipeline.
+                agent_reports: 'Partial',
                 ai_gateway_proxy: true,
             },
             evaluations: {
@@ -70,7 +71,7 @@ export const braintrust = {
                     prompt_playground: true,
                     composable_prompts: false,
                     mcp_server_for_prompts: true,
-                    ab_test_prompt_versions: false,
+                    ab_test_prompt_versions: true,
                 },
             },
             costs: {
@@ -79,8 +80,8 @@ export const braintrust = {
                     cost_calculation: true,
                     cost_by_model: true,
                     cost_trends: true,
-                    cost_by_user: false,
-                    cost_by_feature: false,
+                    cost_by_user: 'Partial',
+                    cost_by_custom_tags: true,
                     cost_by_cohort: false,
                 },
             },

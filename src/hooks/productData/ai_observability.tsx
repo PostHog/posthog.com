@@ -297,10 +297,8 @@ export const aiObservability = {
                 name: 'Langsmith',
                 key: 'langsmith',
             },
-            {
-                name: 'Helicone',
-                key: 'helicone',
-            },
+            // Helicone removed per review – gateway-first and no longer a direct
+            // comparison target. Revisit adding Raindrop here instead.
             {
                 name: 'Braintrust',
                 key: 'braintrust',
