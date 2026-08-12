@@ -9,6 +9,7 @@ import {
     IconLlmPromptEvaluation,
     IconPlug,
     IconSparkles,
+    IconTrends,
     IconWarning,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -327,8 +328,8 @@ export const applications: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: f.performance_monitoring.images[0].src,
-            alt: f.performance_monitoring.images[0].alt,
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_5_17_12_PM_43640af689.png',
+            alt: 'Anomaly detection alerts configured on LLM insights',
             glow: true,
         },
     },
@@ -480,35 +481,40 @@ export const topFeatures: CarouselSlide[] = [
         },
     },
     {
-        slug: 'alerting',
-        label: 'Alerting',
-        icon: <IconBell className="size-5" />,
+        slug: 'insights',
+        label: 'Insights',
+        icon: <IconTrends className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-lilac',
         layout: 'float',
-        heading: 'Anomaly detection on any metric',
+        heading: 'Every PostHog insight works on LLM data',
         description: (
             <>
                 <p>
-                    Cost, latency, error rate, sentiment – any insight built on LLM events can alert, and anomaly
-                    detectors mean you set them up once instead of tuning thresholds forever.
+                    Generations, traces, and eval results are queryable like any PostHog events, so the whole insights
+                    toolkit applies to your AI data.
                 </p>
                 <div className="@container">
                     <LabeledList
                         items={[
                             {
-                                label: 'Learned baselines',
-                                description: 'Detectors learn what normal looks like – no fixed thresholds to tune',
-                            },
-                            {
-                                label: 'Sent where you work',
-                                description: 'Notifications go to Slack, email, or webhooks',
-                            },
-                            {
-                                label: 'Agent investigations (alpha)',
+                                label: 'Trends and breakdowns',
                                 description:
-                                    'An agent digs into firing alerts, writes up the cause, and suppresses false positives',
+                                    'Chart cost, latency, tokens, or error rate – broken down by model, feature, or user segment',
+                            },
+                            {
+                                label: 'Funnels and retention',
+                                description: 'See whether using your AI features changes activation and retention',
+                            },
+                            {
+                                label: 'SQL when you need it',
+                                description: "Query raw generation events directly when a chart isn't enough",
+                            },
+                            {
+                                label: 'Dashboards and alerts',
+                                description:
+                                    'Pin LLM insights next to product metrics, and put anomaly alerts on any of them',
                             },
                         ]}
                     />
@@ -516,8 +522,8 @@ export const topFeatures: CarouselSlide[] = [
             </>
         ),
         image: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_5_17_12_PM_43640af689.png',
-            alt: 'Anomaly detection alerts configured on LLM insights',
+            src: f.performance_monitoring.images[0].src,
+            alt: 'Generation latency and error rate insights built on LLM events',
             glow: true,
         },
     },
