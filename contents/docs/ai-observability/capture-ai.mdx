@@ -98,8 +98,12 @@ In Python, call `posthog.flush()` before exit (or enable `sync_mode`), just like
 
 ## Other platforms
 
-Not on Python or Node? Send AI events through [manual capture](/docs/ai-observability/installation/manual-capture) instead.
+Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one — same request format, different path:
+
+```shell
+POST <ph_client_api_host>/i/v0/ai/batch/
+```
 
 ## Limits
 
-Events up to **8MB** are accepted for now — larger events are dropped. This limit may change as the beta evolves.
+Events up to **8MB** are accepted for now — larger events are dropped. The limit will increase as the beta continues.
