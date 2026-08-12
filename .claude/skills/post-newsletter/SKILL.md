@@ -287,9 +287,11 @@ Prioritize backlinks as forward links should already be set. But, if the article
 After writing the file, invoke the `/suggest-links` skill passing the path to the new newsletter file as the argument. The skill will:
 
 - Suggest forward links (PostHog product/feature mentions to link in the new post)
-- Find backlink candidates in existing content and suggest exact inline edits with section anchors
+- Find backlink candidates in existing content and suggest exact inline edits
 
-Apply all **High priority** forward link suggestions. Apply backlink suggestions to all 3 candidate files.
+Apply all **High priority** forward link suggestions. For backlinks, apply the ones that genuinely fit — **there is no target number to hit.** A backlink that has to be argued for is one the author will delete, so treat any count in that skill's output as a target rather than a quota.
+
+The failure mode to avoid: padding the list to reach a number, and wrapping the link around the rhetorical payload of a sentence ("you will always be the bottleneck") rather than the concrete thing it names ("building a pipeline"). Both put the cost on the author to undo. Two backlinks that read naturally are a better result than five that need editing.
 
 ## Step 5: Verify against the source
 
