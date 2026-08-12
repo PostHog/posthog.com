@@ -97,6 +97,11 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
     )
 }
 
+// Borrows .article-content, overriding its red 'unstyled' alarm color and its fixed font
+// sizes – the book's type is em-based so the Aa control can scale everything together.
+const NATIVE_CONTENT =
+    'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
+
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
     // Em-based sizes AND margins: the reading-size control scales type and rhythm together.
@@ -113,13 +118,23 @@ export const proseComponents = {
     ),
     h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
+    // Lists and tables borrow the site's native docs styling (.article-content in global.css),
+    // wrapped per element because the class also styles headings/paragraphs, which the book owns.
     ul: (props: any) => (
-        <ul className="mb-[0.8em] mt-0 list-disc space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ul {...props} />
+        </div>
     ),
     ol: (props: any) => (
-        <ol className="mb-[0.8em] mt-0 list-decimal space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ol {...props} />
+        </div>
     ),
-    li: (props: any) => <li className="leading-relaxed" {...props} />,
+    table: (props: any) => (
+        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto`}>
+            <table {...props} />
+        </div>
+    ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
     inlineCode: (props: any) => (
         <code
