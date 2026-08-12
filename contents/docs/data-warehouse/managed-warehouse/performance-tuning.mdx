@@ -41,7 +41,7 @@ PostHog sizes DuckDB from the selected worker and provides managed scratch stora
 
 | DuckDB setting | Effective default | How it works |
 |---|---|---|
-| `threads` | Worker CPU count | Sets the maximum parallelism available to the query |
+| `threads` | 2.5× worker CPU, rounded up | Sets the maximum parallelism available to the query; the default 15-CPU worker gets 38 threads |
 | `memory_limit` | 90 GB (83.8 GiB) on the default worker | Limits DuckDB's buffer manager; PostHog derives it from the selected worker memory while reserving headroom for results, metadata, and the worker process |
 | `temp_directory` | Worker-local temporary storage | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
 | `max_temp_directory_size` | 90% of available temporary disk | Limits how much spill data DuckDB can write |
@@ -60,6 +60,12 @@ PostHog also caches object-storage byte ranges on managed local disk. This is se
 Prefetch and cache settings trade object-storage requests, memory, and latency. Benchmark representative cold and repeated scans before changing them.
 
 For more information about these and other settings, see [DuckDB's configuration reference](https://duckdb.org/docs/stable/configuration/overview).
+
+### Example: Tune threads for remote reads
+
+On the default 15-core worker, a simple query that reads many remote Parquet ranges but does little computation may run faster with `SET threads = 45`. Each DuckDB thread can make one HTTP request at a time, so more threads can overlap more network reads.
+
+Don't apply the same value to a CPU- or memory-bound `JOIN`, `GROUP BY`, sort, or window query. Extra threads can increase CPU contention and memory pressure, so keep these queries at the 38-thread default unless testing shows a benefit.
 
 Inspect the effective settings on your connection with:
 
