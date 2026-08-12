@@ -22,7 +22,7 @@ At PostHog, I am often spending a lot of time getting customers to talk to *me*.
 
 A note for the reader: I am handsome and charming. While that gets me nine-tenths of the way there, it falls short in traditional communication channels. I decided that if I was going to be competing for attention, the outreach needed to be short, attention grabbing, and valuable. If somebody laughs, 2x strength multiplier. I was already armed with a powerful weapon - the written word crafted via the neurotic casino that is my mind. If punching keys with my fingers or furiously tapping a screen to create words that people would read had been a viable and lucrative career, I would have pursued it. Instead, I opted to learn how to program and took to honing my penchant for writing on social media sites (mainly Twitter, somehow amassing excess of 30,000 followers for no reason) before retiring my sword.
 
-![A tweet from @callmeshitto reading: u can load the dishwasher any way u want really. the dishes will get clean. water goes everywhere in there](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/loading_the_dishwasher_cd48433f48.png)
+![A tweet reading: u can load the dishwasher any way u want really. the dishes will get clean. water goes everywhere in there](https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/loading_the_dishwasher_cd48433f48.png)
 
 In the past few months, I have dusted off the sword and added a secondary weapon: the merch code. Fact: people love free stuff. Fact: people love PostHog. Ground truth: people absolutely love free stuff from PostHog. So what does that look like in practice?
 
