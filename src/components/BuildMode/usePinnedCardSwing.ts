@@ -1,4 +1,5 @@
 import { RefObject, useEffect } from 'react'
+import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import { rand } from './utils'
 
 /** How far a card is allowed to swing off its resting angle, in degrees. */
@@ -42,11 +43,22 @@ const createPendulum = (index: number): Pendulum => ({
  * The resulting angles are written to the container as `--tilt-{index}` CSS
  * variables; cards consume their own via `transform`, so no card re-renders.
  * Cards must carry a `data-card-index` attribute for the hover jostle.
+ *
+ * The swing is decorative, so it's skipped entirely under `prefers-reduced-motion`.
  */
 export function usePinnedCardSwing(ref: RefObject<HTMLElement>, cardCount: number): void {
+    const prefersReducedMotion = usePrefersReducedMotion()
+
     useEffect(() => {
         const el = ref.current
         if (!el) return
+
+        // Written imperatively rather than as a CSS animation, so `motion-reduce:` can't
+        // suppress it — leave every card at rest and never start the loop instead.
+        if (prefersReducedMotion) {
+            for (let i = 0; i < cardCount; i++) el.style.setProperty(`--tilt-${i}`, '0deg')
+            return
+        }
 
         const pendulums = Array.from({ length: cardCount }, (_, i) => createPendulum(i))
 
@@ -136,5 +148,5 @@ export function usePinnedCardSwing(ref: RefObject<HTMLElement>, cardCount: numbe
             el.removeEventListener('pointerleave', onPointerLeave)
             if (raf !== null) cancelAnimationFrame(raf)
         }
-    }, [ref, cardCount])
+    }, [ref, cardCount, prefersReducedMotion])
 }

@@ -63,7 +63,19 @@ export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps)
         measure()
         const observer = new ResizeObserver(measure)
         observer.observe(row)
-        return () => observer.disconnect()
+
+        // The row's own box is fixed by its flex parent and clamped height, so it doesn't
+        // resize when only the pills inside it reflow — re-measure once the web font swaps
+        // in, which changes pill widths (and so which of them wrap) after the first paint.
+        let cancelled = false
+        document.fonts?.ready.then(() => {
+            if (!cancelled) measure()
+        })
+
+        return () => {
+            cancelled = true
+            observer.disconnect()
+        }
     }, [tags])
 
     const activeIsHidden = activeTag !== null && overflowTags.includes(activeTag)

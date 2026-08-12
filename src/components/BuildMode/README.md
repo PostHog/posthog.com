@@ -22,19 +22,19 @@ These components live under `src/components/` rather than beside the page becaus
 | File | Purpose |
 | --- | --- |
 | `types.ts` | `BuildModePost` — a `/newsletter/*` MDX node as shaped by the page query. |
-| `utils.ts` | `rand` (SSR-stable pseudo-random), `getSubtitle` (first sentence of the meta description/excerpt), `getAuthorName`, `getByline`. |
+| `utils.ts` | `rand` (SSR-stable pseudo-random), `getSubtitle` (first sentence of the meta description/excerpt — a boundary is `.`/`!`/`?` followed by the end or by whitespace and a non-lowercase character, so `?` openers end the dek and `e.g.` doesn't), `getAuthorName`, `getByline`. |
 | `Masthead.tsx` | The build mode wordmark and standing tagline (also exports `LOGO_SRC`). Currently unused by the page — superseded by `Hero` unless a variant brings it back. |
-| `Hero.tsx` | `HeroHeader` — wordmark + subscribe row (`SubscribeForm` fires `newsletter_subscribed` with a per-instance `placement`), rendered at the top and again as the footer — and `Hero`, the statement headline (static `bg-highlight` on "product builders") with the pitch as its deck. |
+| `Hero.tsx` | `HeroHeader` — wordmark + subscribe row (`SubscribeForm` fires `newsletter_subscribed` with a per-instance `placement`, and carries the same "we'll share your email with Substack" disclosure as `NewsletterForm`, since that event is what subscribes the reader), rendered at the top and again as the footer — and `Hero`, the statement headline (static `bg-highlight` on "product builders") with the pitch as its deck. |
 | `FeaturedPost.tsx` | The newest post: a "Hot off the press" annotation pointing down at it, image with `Tape` corners on the left, title, dek, byline on the right. |
 | `Tape.tsx` | Inline SVG strip of masking tape with torn ends. |
 | `PostImage.tsx` | A post's featured image, degrading through the shapes it can arrive in: processed Gatsby image → Cloudinary URL → raw URL → `IconNewspaper` placeholder. Shared by all three sections. |
-| `RecentPosts.tsx` | The scrollable pinboard row, dashed rules between cards: edge fade mask, arrow buttons, and the two hooks below. |
+| `RecentPosts.tsx` | The scrollable pinboard row, dashed rules between cards: edge fade mask, arrow buttons, and the two hooks below. Both arrows stay mounted and go `aria-disabled` (hidden, but shown again on `focus-visible`) at their edge — unmounting the button a keyboard user just activated would drop their focus to the body. |
 | `PinnedPostCard.tsx` | One pinned card — pushpin, square thumbnail, resting angle, caption. |
 | `usePinnedCardSwing.ts` | The swing physics (see below). |
 | `useScrollEdges.ts` | Tracks whether a scroller has content off either edge; also exposes `scrollByPage`. Drives the fade mask and the arrow buttons. |
 | `PostsGallery.tsx` | The all-posts section: heading with counts, search input, `TagFilter`, paginated grid (12 per page, resets on filter change), empty state. |
 | `GalleryCard.tsx` | One gallery tile. |
-| `TagFilter.tsx` | A single measured row of tag pills with an "All" reset (clicking the active tag clears it); pills that don't fit collapse into a "+N more" popover. |
+| `TagFilter.tsx` | A single measured row of tag pills with an "All" reset (clicking the active tag clears it); pills that don't fit collapse into a "+N more" popover. Re-measures on resize and once `document.fonts.ready` resolves — the row's own box doesn't change when only the pills reflow under a font swap. |
 | `usePostFilters.ts` | Search + single-tag filter state over a post list. Returns `tags` (most common first), `filteredPosts`, `isFiltered`, and `clear`. |
 
 ## How the swing works
@@ -49,6 +49,10 @@ per index from `rand`, so cards drift out of phase; moving the cursor onto a car
 properties, and each card composes its own into a `rotate(calc(...))`. Nothing re-renders while the
 row is in motion, and because the angles are derived from a deterministic `rand`, SSR and hydration
 agree. The rAF loop stops once every pendulum settles and input has been quiet for 200ms.
+
+The motion is decorative, so `usePinnedCardSwing` gates it on `usePrefersReducedMotion` and never
+starts the loop when the preference is set. It has to be gated in JS: the angles are written as inline
+custom properties rather than a CSS animation, so `motion-reduce:` can't reach them.
 
 ## Conventions
 

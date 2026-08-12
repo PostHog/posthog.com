@@ -9,7 +9,11 @@ export const rand = (index: number, salt: number): number => {
 /** First sentence of the post's meta description (or excerpt), used as a dek. */
 export const getSubtitle = (post: BuildModePost): string => {
     const description = post.frontmatter.seo?.metaDescription || post.excerpt || ''
-    return description.split('. ')[0].replace(/\.\s*$/, '')
+    // A sentence ends at `.`, `!`, or `?` that's followed by the end of the text, or by
+    // whitespace and something that isn't lowercase — so a question or exclamation opener
+    // ends the dek, while `e.g. gradual rollouts` reads as one sentence rather than two.
+    const firstSentence = description.match(/^.*?[.!?](?=\s+[^a-z]|\s*$)/)?.[0] ?? description
+    return firstSentence.replace(/\.\s*$/, '').trim()
 }
 
 export const getAuthorName = (post: BuildModePost): string | undefined => post.frontmatter.authors?.[0]?.name

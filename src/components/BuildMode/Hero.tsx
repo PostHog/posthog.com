@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
+import { IconInfo } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import OSButton from 'components/OSButton'
+import Tooltip from 'components/Tooltip'
 import { LOGO_SRC } from './Masthead'
 
-/** Email capture, same mechanics as NewsletterForm: a `newsletter_subscribed` event. */
+/**
+ * Email capture, same mechanics as NewsletterForm: a `newsletter_subscribed` event.
+ * That event is what subscribes the reader on Substack, so this carries the same
+ * third-party disclosure as every other subscribe surface on the site.
+ */
 function SubscribeForm({ className = '', placement }: { className?: string; placement: string }): JSX.Element {
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -16,24 +22,44 @@ function SubscribeForm({ className = '', placement }: { className?: string; plac
     }
 
     if (submitted) {
-        return <p className={`m-0 text-sm font-bold ${className}`}>You're in – see you in your inbox. 🦔</p>
+        return (
+            <p className={`m-0 text-sm font-bold ${className}`}>
+                You're in – look for build mode from Substack in your inbox. 🦔
+            </p>
+        )
     }
 
     return (
-        <form onSubmit={handleSubmit} className={`flex w-full max-w-sm items-center gap-2 ${className}`}>
-            <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@builder.com"
-                aria-label="Email address"
-                className="min-w-0 flex-1 rounded border border-input bg-input px-3 py-1.5 text-sm text-primary placeholder:text-muted focus:border-input-hover focus:outline-none"
-            />
-            <OSButton variant="primary" size="md">
-                Subscribe
-            </OSButton>
-        </form>
+        <div className={`w-full max-w-sm ${className}`}>
+            <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
+                <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@builder.com"
+                    aria-label="Email address"
+                    className="min-w-0 flex-1 rounded border border-input bg-input px-3 py-1.5 text-sm text-primary placeholder:text-muted focus:border-input-hover focus:outline-none"
+                />
+                <OSButton variant="primary" size="md">
+                    Subscribe
+                </OSButton>
+            </form>
+            <p className="m-0 mt-1.5 text-xs text-secondary">
+                We'll share your email with{' '}
+                <span className="inline-flex whitespace-nowrap">
+                    Substack
+                    <Tooltip
+                        content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
+                        tooltipClassName="max-w-md"
+                    >
+                        <span>
+                            <IconInfo className="relative -top-px ml-0.5 inline-block size-4" />
+                        </span>
+                    </Tooltip>
+                </span>
+            </p>
+        </div>
     )
 }
 
@@ -59,8 +85,8 @@ export default function Hero({ className = '' }: { className?: string }): JSX.El
                 <span className="box-decoration-clone rounded-xs bg-highlight px-2 text-red">product builders.</span>
             </h2>
             <p className="m-0 max-w-2xl text-lg text-secondary">
-                Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into
-                the strategies of top startups.
+                Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the
+                strategies of top startups.
             </p>
         </div>
     )
