@@ -82,5 +82,3 @@ WHERE name IN (
     'http_retry_backoff'
 );
 ```
-
-Prefer the `duckgres.worker_*` connection options over raising `threads` or `memory_limit` with SQL: changing a DuckDB setting doesn't add resources to the worker. Benchmark representative queries before and after resizing because not every query can use more cores or memory.
