@@ -58,7 +58,7 @@ export default function CommunityIncubatorForm(): JSX.Element {
 
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
-            <div className="bg-white shadow-2xl rounded-md p-6 space-y-4 transition-all max-w-[700px] mx-auto">
+            <div className="bg-white shadow-2xl rounded-md p-6 space-y-4 transition-all">
                 {!submitted ? (
                     <>
                         <fieldset className="border-0 p-0 m-0">

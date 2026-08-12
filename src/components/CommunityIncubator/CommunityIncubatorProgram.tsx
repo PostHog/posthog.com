@@ -501,15 +501,16 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                         <CollectiveCarousel />
                     </div>
 
-                    {/* Apply — reuses the existing CommunityIncubatorForm. */}
                     <div id="apply" className={`${contentSectionClasses} border-t border-primary pt-8 scroll-mt-24`}>
-                        <h2 className="mb-2">
-                            Apply to the <Highlight>incubator</Highlight>
-                        </h2>
-                        <p className="mb-6 max-w-2xl">
-                            Pick your track and show us what you've shipped. We review output, not résumés.
-                        </p>
-                        <CommunityIncubatorForm />
+                        <div className="max-w-[700px]">
+                            <h2 className="mb-2">
+                                Apply to the <Highlight>incubator</Highlight>
+                            </h2>
+                            <p className="mb-6">
+                                Pick your track and show us what you've shipped. We review output, not résumés.
+                            </p>
+                            <CommunityIncubatorForm />
+                        </div>
                     </div>
 
                     {/* FAQ — Accordion, matching /startups. */}
