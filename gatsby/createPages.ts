@@ -1120,6 +1120,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.referenceId}`,
+                    // Must match the type page paths created below.
+                    slugPrefix: node.referenceId,
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
             })
@@ -1132,6 +1134,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     description: node.info.description,
                     fullReference: node,
                     regex: `/docs/references/${node.id}`,
+                    // Must match the type page paths created below.
+                    slugPrefix: node.id,
                     // Null checks, only affects type crosslinking, won't break build
                     types: sdkTypesByReference?.[node.referenceId]?.[node.version] ?? [],
                 },
