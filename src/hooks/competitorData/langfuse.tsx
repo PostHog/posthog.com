@@ -18,7 +18,8 @@ export const langfuse = {
                 clustering: true,
                 trace_summarization: true,
                 llm_translation: false,
-                sentiment_classification: false,
+                // No built-in sentiment template – custom LLM-as-a-judge prompt only.
+                sentiment_classification: 'Partial',
                 privacy_mode: true,
                 agent_tracing: true,
                 prompt_management: true,
@@ -58,7 +59,8 @@ export const langfuse = {
                     prompt_playground: true,
                     composable_prompts: true,
                     mcp_server_for_prompts: true,
-                    ab_test_prompt_versions: false,
+                    // Dedicated A/B testing flow via prompt labels; the app code does the split.
+                    ab_test_prompt_versions: true,
                 },
             },
             evaluations: {

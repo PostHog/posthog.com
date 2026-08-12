@@ -18,7 +18,9 @@ export const braintrust = {
                 system_prompts: true,
                 clustering: true,
                 trace_summarization: true,
-                llm_translation: false,
+                // Manual per-message translation in the trace UI, session-only.
+                llm_translation: 'Partial',
+                // Topics pipeline has a built-in Sentiment facet (opt-in, usage-priced).
                 sentiment_classification: true,
                 privacy_mode: true,
                 agent_tracing: true,
@@ -27,8 +29,9 @@ export const braintrust = {
                 human_annotation: true,
                 // logFeedback API attaches user feedback to spans.
                 user_feedback: true,
-                // Loop reviews experiments and suggests improvements; no production-watching PR pipeline.
-                agent_reports: 'Partial',
+                // Loop is an on-demand chat assistant; automations are alerts/webhooks.
+                // Nothing autonomously watches production or files reports/PRs.
+                agent_reports: false,
                 ai_gateway_proxy: true,
             },
             evaluations: {
@@ -69,7 +72,9 @@ export const braintrust = {
                     prompt_playground: true,
                     composable_prompts: false,
                     mcp_server_for_prompts: true,
-                    ab_test_prompt_versions: true,
+                    // Versions and environments only – docs describe user-implemented
+                    // traffic routing, no built-in split or canary.
+                    ab_test_prompt_versions: false,
                 },
             },
             costs: {

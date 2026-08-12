@@ -20,7 +20,8 @@ export const langsmith = {
                 system_prompts: true,
                 trace_summarization: true,
                 llm_translation: false,
-                sentiment_classification: false,
+                // Evaluator template library covers satisfaction signals; no built-in classifier.
+                sentiment_classification: 'Partial',
                 privacy_mode: true,
                 agent_tracing: true,
                 prompt_management: true,
@@ -28,8 +29,9 @@ export const langsmith = {
                 human_annotation: true,
                 // Feedback API attaches user feedback to runs.
                 user_feedback: true,
-                // Insights agent summarizes patterns; no PR pipeline.
-                agent_reports: 'Partial',
+                // LangSmith Engine (public beta, May 2026): watches production traces,
+                // clusters failures, and opens fix PRs – strongest for LangChain-family stacks.
+                agent_reports: 'Beta',
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -62,7 +64,8 @@ export const langsmith = {
                     prompt_playground: true,
                     composable_prompts: false,
                     mcp_server_for_prompts: true,
-                    ab_test_prompt_versions: false,
+                    // DIY: tag runs with a version, split in your own code, compare in dashboards.
+                    ab_test_prompt_versions: 'Partial',
                 },
             },
             evaluations: {
