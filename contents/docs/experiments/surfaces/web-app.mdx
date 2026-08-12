@@ -1,0 +1,29 @@
+---
+title: Experiments in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where experiments are designed, launched, and read. Open **Experiments** to see every draft, running, and completed test in your project, then open one to configure its variants and metrics, watch exposures accumulate, and see whether the result is significant.
+
+Because the experiment sits next to the rest of your PostHog data, the results view isn't just a number. You can jump from a variant to the [session replays](/docs/session-replay) of the people who saw it, or break a metric down by any property you already capture.
+
+## Before you start
+
+1. **Set up Experiments** – [install a PostHog SDK](/docs/experiments/installation) so your app can serve variants.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Create an experiment](/docs/experiments/creating-an-experiment)** – define your hypothesis, variants, and metrics, and let PostHog create the backing [feature flag](/docs/feature-flags).
+- **[Test and launch](/docs/experiments/testing-and-launching)** – verify your implementation with variant overrides before you expose real users.
+- **[Analyze results](/docs/experiments/analyzing-results)** – read significance, credible or confidence intervals, and per-variant metric breakdowns.
+- **[Manage the lifecycle](/docs/experiments/managing-lifecycle)** – pause, resume, end, ship a winning variant, or archive a finished test.
+- **[Run no-code web experiments](/docs/experiments/no-code-web-experiments)** – change copy, styles, or images on your site from the toolbar, with no deploy.
+- **Analyze with [PostHog AI](/docs/experiments/analyze-experiments-ai)** – create experiments, summarize results, and compare behavior across variants in natural language. It's an interaction mode inside the web app, not a separate surface.
+
+## Related
+
+- Learn how users are assigned and counted in [exposures](/docs/experiments/exposures) and [traffic allocation](/docs/experiments/traffic-allocation).
+- Understand how the numbers are produced in [Bayesian](/docs/experiments/statistics-bayesian) and [frequentist](/docs/experiments/statistics-frequentist) statistics.
+- Do the same work from your editor over [MCP](/docs/experiments/surfaces/mcp).

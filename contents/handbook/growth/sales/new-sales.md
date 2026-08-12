@@ -20,7 +20,7 @@ Selling software, especially to larger companies, can be a complex process with 
   * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
   * Will PostHog solve this problem for them?
 * Timeline - When do they want to have a contract signed/solution in place?
-* Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
+* Pricing - We should know the rough size of the opportunity, and that is in line with expectations and budget of the customer.
 * Champion - Are you working with a champion who is going to sell internally?
   * Are they the buyer (see below) or do they know who the buyer is?
 * Decision - How are they evaluating us?  
@@ -280,7 +280,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/data/anonymous-vs-identified-events) events.
-   * Tracking pageviews in [single page apps](/docs/libraries/js/features#manually-capturing-pageviews-and-pageleaves-in-single-page-apps).
+   * Tracking pageviews in [single page apps](/tutorials/single-page-app-pageviews).
    * Deploying a [reverse proxy](/docs/advanced/proxy).
 2. Guide them on creating insights either based on:
    * Metrics they've shared that they need to see or;

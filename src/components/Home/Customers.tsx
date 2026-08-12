@@ -34,11 +34,9 @@ export const COL2 = [
 ]
 
 export const companyBreakdowns = {
-    VCsLoveThem: { col1: 'VCs love them', col2: 'Product engineers love them' },
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
-    highValue: { col1: "Companies with >1 $B's in their valuations", col2: 'Everyone else (for now)' },
     caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
     easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
     goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
@@ -46,7 +44,7 @@ export const companyBreakdowns = {
         col1: 'Companies you can explain to your parents',
         col2: 'Companies your parents will never understand',
     },
-    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
@@ -56,17 +54,6 @@ export const companyBreakdowns = {
 }
 
 export const companyAttributes: Record<string, string[]> = {
-    VCsLoveThem: [
-        'ycombinator',
-        'airbus',
-        'nationaldesignstudio',
-        'ukgovt',
-        'trust',
-        'lovable',
-        'startengine',
-        'researchgate',
-        'heygen',
-    ],
     colorful: [
         'ycombinator',
         'convex',
@@ -81,7 +68,6 @@ export const companyAttributes: Record<string, string[]> = {
     ],
     hardware: ['airbus', 'ukgovt', 'posthog'],
     planes: ['airbus', 'ukgovt'],
-    highValue: ['ukgovt', 'airbus', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'mistralai'],
     caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
     easyToYell: [
         'airbus',
@@ -226,7 +212,7 @@ export const companyAttributes: Record<string, string[]> = {
 
 export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
     const { getCustomers, hasCaseStudy } = useCustomers()
-    const [currentBreakdown, setCurrentBreakdown] = useState('VCsLoveThem')
+    const [currentBreakdown, setCurrentBreakdown] = useState('colorful')
     const [isAnimating, setIsAnimating] = useState(false)
     const logoRefs = React.useRef<Record<string, HTMLElement>>({})
 

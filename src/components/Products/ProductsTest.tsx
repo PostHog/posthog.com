@@ -23,15 +23,15 @@ const statusDotColor: Record<string, string> = {
 
 const sections = [
     {
-        title: 'Data platform',
+        title: 'Context warehouse',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
-        link: { label: 'Data stack README', url: '/data-stack' },
+        link: { label: 'Data stack README', url: '/context-warehouse' },
         groups: [
             {
                 label: 'Data I/O',
                 handles: ['data_in', 'data_out'],
-                afterLink: { label: 'View all integrations', url: '/data-stack/integrations-library' },
+                afterLink: { label: 'View all integrations', url: '/context-warehouse/integrations-library' },
             },
             {
                 label: 'Manage & query',
@@ -349,7 +349,7 @@ export default function ProductsTest(): JSX.Element {
                             {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
-                                to="/download"
+                                to="https://desktop.posthog.com/download"
                                 state={{ newWindow: true }}
                                 className="inline-flex items-center gap-2 bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md hover:opacity-90 no-underline"
                             >

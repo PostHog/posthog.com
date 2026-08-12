@@ -50,7 +50,7 @@ The `metrics` config also accepts `flushIntervalMs`, `maxSeriesPerFlush` (a card
 
 Metrics deliberately carry no user or session context: every distinct attribute value creates a new series, so attach low-cardinality dimensions like plan, route, or status. Never attach user IDs.
 
-> **Note:** `posthog.metrics` is currently available in posthog-js (web). Support in posthog-node and other SDKs is coming. If you're on another SDK, or not using PostHog SDKs at all, use the OpenTelemetry setup below.
+> **Note:** `posthog.metrics` is available in [posthog-js (web)](/docs/metrics/installation/javascript), [posthog-node](/docs/metrics/installation/nodejs), and [posthog-python](/docs/metrics/installation/python). See the [installation guides](/docs/metrics/installation) for per-platform setup. If you're on another SDK, or not using PostHog SDKs at all, use the OpenTelemetry setup below.
 
 ## Set up metrics with OpenTelemetry
 

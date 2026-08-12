@@ -1,52 +1,121 @@
 import React from 'react'
 import Link from 'components/Link'
+import Glow, { type GlowColor } from 'components/Glow'
+import ToolsTicker, { DEFAULT_HANDLES } from 'components/Home/ToolsTicker'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
+import { CARD_H3, SectionHeading } from '../helpers'
 import { SectionComponentProps } from '../types'
 
 interface PairItem {
     slug: string
     description: string
+    /** Optional className passed to AppIcon when parentIcon is used (e.g. "!size-6"). */
+    className?: string
 }
+
+const GLOW_COLORS: GlowColor[] = [
+    'yellow',
+    'blue',
+    'red',
+    'green',
+    'green-2',
+    'purple',
+    'orange',
+    'teal',
+    'seagreen',
+    'salmon',
+    'black',
+    'white',
+]
+
+/** Product colors are free-form strings; only some of them are valid glow colors. */
+const toGlowColor = (color?: string): GlowColor | undefined => GLOW_COLORS.find((glowColor) => glowColor === color)
 
 const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
     const pairsWith: PairItem[] = productData?.pairsWith || []
     if (!pairsWith.length) return null
 
+    // The ticker is the long tail, so drop anything already carded above (plus
+    // this product itself) or it just repeats what the reader has just read.
+    // `productData.handle` directly, because not every product surfaces in
+    // `allProducts` for the slug lookup to resolve — AI Observability doesn't,
+    // and was advertising itself in its own ticker.
+    const carded = new Set(
+        [
+            productData?.handle,
+            ...[productData?.slug, ...pairsWith.map((pair) => pair.slug)].map(
+                (slug) => allProducts.find((product: any) => product.slug === slug)?.handle
+            ),
+        ].filter(Boolean)
+    )
+    const tickerHandles = DEFAULT_HANDLES.filter((handle) => !carded.has(handle))
+
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Works with other PostHog products</h2>
-            <p className="text-base text-secondary leading-relaxed m-0 mb-4">
-                Use {productData?.name} with these other PostHog apps to maximize shareholder value.
-            </p>
-            <h3 className="mb-4 !text-base">Works with...</h3>
-            <ul className="list-none space-y-4">
+            <SectionHeading
+                lede={`Use ${productData?.name} with these other PostHog apps to maximize shareholder value.`}
+            >
+                Works with other PostHog tools
+            </SectionHeading>
+            <ul className="grid grid-cols-1 @xl/reader-content:grid-cols-2 gap-3 list-none m-0 p-0">
                 {pairsWith.map((pair) => {
                     const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
                     if (!productDetails) return null
 
+                    const glowColor = toGlowColor(productDetails.color)
+
+                    const card = (
+                        <Link
+                            to={`/${pair.slug}`}
+                            state={{ newWindow: true }}
+                            className="flex items-start gap-2.5 h-full border border-primary rounded bg-primary p-3 hover:bg-accent transition-colors"
+                        >
+                            <span
+                                className={`inline-block size-6 shrink-0 ${
+                                    productDetails.color ? `text-${productDetails.color}` : 'text-primary opacity-50'
+                                }`}
+                            >
+                                {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
+                                    <AppIcon name={productDetails.parentIcon} className={pair.className} />
+                                ) : (
+                                    productDetails.Icon && <productDetails.Icon className={pair.className} />
+                                )}
+                            </span>
+                            <span className="min-w-0">
+                                <strong className={`block underline ${CARD_H3}`}>{productDetails.name}</strong>
+                                <span className="block text-sm text-secondary leading-relaxed">{pair.description}</span>
+                            </span>
+                        </Link>
+                    )
+
                     return (
-                        <li key={pair.slug} className="">
-                            <Link to={`/${pair.slug}`} state={{ newWindow: true }} className="flex items-center gap-2">
-                                <span
-                                    className={`inline-block size-6 ${
-                                        productDetails.color
-                                            ? `text-${productDetails.color}`
-                                            : 'text-primary opacity-50'
-                                    }`}
+                        <li key={pair.slug} className="m-0">
+                            {glowColor ? (
+                                <Glow
+                                    color={glowColor}
+                                    size="sm"
+                                    intensity="gentle"
+                                    rounded="md"
+                                    hover
+                                    className="h-full"
                                 >
-                                    {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
-                                        <AppIcon name={productDetails.parentIcon} />
-                                    ) : (
-                                        productDetails.Icon && <productDetails.Icon />
-                                    )}
-                                </span>
-                                <h3 className="!text-lg font-bold text-primary underline">{productDetails.name}</h3>
-                            </Link>
-                            <p className="text-sm text-secondary m-0 pl-8">{pair.description}</p>
+                                    {card}
+                                </Glow>
+                            ) : (
+                                card
+                            )}
                         </li>
                     )
                 })}
             </ul>
+            {tickerHandles.length > 0 && (
+                <ToolsTicker
+                    handles={tickerHandles}
+                    label="And the rest of PostHog:"
+                    direction="right"
+                    className="mt-6"
+                />
+            )}
         </section>
     )
 }

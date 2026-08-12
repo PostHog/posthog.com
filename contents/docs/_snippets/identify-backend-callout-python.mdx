@@ -12,3 +12,5 @@
 >         capture("foo_viewed")
 >     return {"status": "ok"}
 > ```
+>
+> When possible, write a small piece of **middleware** that resolves your authenticated user, wrap a context around the request, and identifies it. Every `capture()` downstream is then attributed _automatically_. The SDK's Django middleware does this automatically and you can replicate it when using the plain Python SDK.

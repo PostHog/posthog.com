@@ -7,7 +7,6 @@ import { replacePath } from '../../../gatsby/utils'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import { useWindow } from '../../context/Window'
-import { useApp } from '../../context/App'
 
 interface MenuItem {
     name: string
@@ -61,6 +60,12 @@ interface TreeMenuProps {
      */
     rootHeading?: string
     activeUrl?: string
+    /**
+     * When true, parent (collapsible) rows only toggle open/closed on click instead of
+     * navigating. For landing sidebars that want expand-in-place categories. Only applies to
+     * the `listed` variant.
+     */
+    expandOnly?: boolean
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -85,7 +90,6 @@ const TreeLink = ({
     activeItem: MenuItem | undefined
 }) => {
     const active = menuItem === activeItem
-    const { siteSettings } = useApp()
     const httpExternal = isHttpExternal(menuItem.url)
     const arrow = showsExternalArrow(menuItem)
 
@@ -100,13 +104,9 @@ const TreeLink = ({
             to={menuItem.url}
             external={httpExternal}
             className={`${index === 0 ? '' : `pl-${4 + index * 3}`} ${
-                siteSettings.heaterMode
-                    ? active
-                        ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
-                        : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
-                    : active
-                    ? '!bg-accent hover:!bg-accent'
-                    : 'hover:!bg-accent/50'
+                active
+                    ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
+                    : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
             }`}
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
@@ -203,7 +203,6 @@ const SidebarLink = ({
     activeItem: MenuItem | undefined
 }) => {
     const active = menuItem === activeItem
-    const { siteSettings } = useApp()
     const httpExternal = isHttpExternal(menuItem.url)
     const arrow = showsExternalArrow(menuItem)
     const [hovering, setHovering] = useState(false)
@@ -221,12 +220,8 @@ const SidebarLink = ({
             // `outline-offset-[-2px]`: keep the focus ring inside the link so the scroll container doesn't clip it.
             className={`flex items-center gap-1 w-full min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                 active
-                    ? `${
-                          siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
-                      } !text-primary font-semibold`
-                    : `!text-primary ${
-                          siteSettings.heaterMode ? 'hover:bg-dark/10 dark:hover:bg-light/10' : 'hover:bg-accent/50'
-                      }`
+                    ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
+                    : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
@@ -289,7 +284,6 @@ function SidebarCollapsibleItem({
     onClick: (item: MenuItem) => void
 }) {
     const active = item === activeItem
-    const { siteSettings } = useApp()
     // Only auto-expand when a child page is active (e.g. a specific language).
     // Clicking the parent's own page navigates without forcing the menu open.
     const childActive = sectionContainsActive(item.children || [], activeItem)
@@ -316,14 +310,8 @@ function SidebarCollapsibleItem({
                     contextMenu={false}
                     className={`flex items-center gap-1 flex-1 min-w-0 px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
                         active
-                            ? `${
-                                  siteSettings.heaterMode ? 'bg-dark/15 dark:bg-light/15' : 'bg-accent'
-                              } !text-primary font-semibold`
-                            : `!text-primary ${
-                                  siteSettings.heaterMode
-                                      ? 'hover:bg-dark/10 dark:hover:bg-light/10'
-                                      : 'hover:bg-accent/50'
-                              }`
+                            ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
+                            : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
@@ -424,7 +412,14 @@ const renderSectionItems = (
     })
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true, variant = 'listed', appearance = 'os', rootHeading, activeUrl } = props
+    const {
+        watchPath = true,
+        variant = 'listed',
+        appearance = 'os',
+        rootHeading,
+        activeUrl,
+        expandOnly = false,
+    } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
@@ -522,7 +517,14 @@ export function TreeMenu(props: TreeMenuProps) {
                 const key = `${item.name}-${index}-${item.url}`
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                    <TreeMenuItem
+                        key={key}
+                        item={item}
+                        activeItem={activeItem}
+                        index={0}
+                        onClick={handleClick}
+                        expandOnly={expandOnly}
+                    />
                 ) : (
                     <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                 )
@@ -617,14 +619,15 @@ function TreeMenuItem({
     activeItem,
     index = 0,
     onClick,
+    expandOnly = false,
 }: {
     item: MenuItem
     activeItem: MenuItem | undefined
     index: number
     onClick: (item: MenuItem) => void
+    expandOnly?: boolean
 }) {
     const [open, setOpen] = useState(false)
-    const { siteSettings } = useApp()
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
@@ -646,17 +649,12 @@ function TreeMenuItem({
                     align="left"
                     width="full"
                     className={`${index === 0 ? '' : `pl-${2 + index * 4}`} ${
-                        siteSettings.heaterMode
-                            ? activeItem === item
-                                ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
-                                : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
-                            : activeItem === item
-                            ? '!bg-accent hover:!bg-accent'
-                            : 'hover:!bg-accent/50'
+                        activeItem === item
+                            ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
+                            : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
                     }`}
                     active={activeItem === item}
-                    to={item.url || item.children?.[0]?.url}
-                    asLink
+                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
@@ -689,6 +687,7 @@ function TreeMenuItem({
                                     activeItem={activeItem}
                                     index={index + 1}
                                     onClick={onClick}
+                                    expandOnly={expandOnly}
                                 />
                             ) : (
                                 <TreeLink

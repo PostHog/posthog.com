@@ -6,7 +6,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/robocop_8939115965.png
 tags:
   - Experiments
-  - Growth engineering
+  - Growth
 ---
 
 Every no-code A/B testing tool makes the same pitch: run experiments without relying on engineers.

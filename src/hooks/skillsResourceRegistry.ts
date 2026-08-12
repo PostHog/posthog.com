@@ -20,7 +20,7 @@ type AliasTarget = SkillResourceRef
 
 /** Maps vibed display strings from the original skills draft to canonical handles */
 export const SKILL_RESOURCE_ALIASES: Record<string, AliasTarget> = {
-    Conversations: { handle: 'support', label: 'Conversations' },
+    Conversations: { handle: 'support', label: 'Support' },
     'Session replay': { handle: 'session_replay' },
     Logs: { handle: 'logs' },
     'Error tracking': { handle: 'error_tracking' },

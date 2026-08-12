@@ -7,6 +7,7 @@ import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -69,7 +70,6 @@ import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
-import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
@@ -81,6 +81,7 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -136,7 +137,6 @@ export const shortcodes = {
     StarRepoButton,
     TracksCTA,
     Tweet,
-    ZendeskTicket,
     MaxCTA,
     SmallTeam,
     TeamMember,

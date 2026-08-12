@@ -35,6 +35,7 @@ import {
     IconExternal,
     IconPresent,
     IconSparkles,
+    IconShieldLock,
 } from '@posthog/icons'
 import { Fieldset } from 'components/OSFieldset'
 import { useFormik } from 'formik'
@@ -49,8 +50,9 @@ import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
 import OSButton from 'components/OSButton'
-import { IconNoEntry, IconStrapi } from 'components/OSIcons'
+import { IconDiscord, IconNoEntry, IconStrapi } from 'components/OSIcons'
 import Points from 'components/Points'
+import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { useWindow } from '../../../context/Window'
 
 dayjs.extend(relativeTime)
@@ -160,6 +162,7 @@ const Links = ({
                         error={errors.github}
                         label="GitHub"
                         name="github"
+                        placeholder="https://github.com/{username}"
                         value={formValues.github}
                         onChange={(e) => setFieldValue('github', e.target.value)}
                     />
@@ -186,6 +189,7 @@ const Links = ({
                         error={errors.twitter}
                         label="X"
                         name="twitter"
+                        placeholder="https://x.com/{username}"
                         value={formValues.twitter}
                         onChange={(e) => setFieldValue('twitter', e.target.value)}
                     />
@@ -212,6 +216,7 @@ const Links = ({
                         error={errors.linkedin}
                         label="LinkedIn"
                         name="linkedin"
+                        placeholder="https://linkedin.com/in/{username}"
                         value={formValues.linkedin}
                         onChange={(e) => setFieldValue('linkedin', e.target.value)}
                     />
@@ -258,6 +263,39 @@ const Links = ({
                     </li>
                 )
             )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.discord}
+                        label="Discord"
+                        name="discord"
+                        placeholder="https://discord.com/users/{id}"
+                        value={formValues.discord}
+                        onChange={(e) => setFieldValue('discord', e.target.value)}
+                        tooltip={
+                            <p className="max-w-72 text-sm m-0 leading-normal">
+                                To get your ID, enable <strong>Developer Mode</strong> in Discord's advanced settings,
+                                then right-click your name and choose <strong>Copy User ID</strong>.
+                            </p>
+                        }
+                    />
+                </li>
+            ) : (
+                profile.discord && (
+                    <li>
+                        <Tooltip
+                            delay={0}
+                            trigger={
+                                <Link to={profile.discord} externalNoIcon>
+                                    <IconDiscord className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                                </Link>
+                            }
+                        >
+                            {stripUrlPrefix(profile.discord)}
+                        </Tooltip>
+                    </li>
+                )
+            )}
         </ul>
     )
 }
@@ -270,6 +308,7 @@ const Input = ({
     error,
     dataScheme,
     tooltip,
+    placeholder,
 }: {
     label: string
     name: string
@@ -278,6 +317,7 @@ const Input = ({
     error?: string
     tooltip?: string | React.ReactNode
     dataScheme?: 'primary' | 'secondary' | 'tertiary'
+    placeholder?: string
 }) => {
     return (
         <OSInput
@@ -285,7 +325,7 @@ const Input = ({
             name={name}
             value={value}
             onChange={onChange}
-            placeholder={label}
+            placeholder={placeholder ?? label}
             direction="column"
             error={error}
             touched={!!error}
@@ -412,8 +452,9 @@ const AvatarBlock = ({
     )
 }
 
-const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember, isModerator }) => {
     const [showPronounsInput, setShowPronounsInput] = useState(!!values.pronouns)
+    const email = profile?.user?.data?.attributes?.email
 
     // Update showPronounsInput when values.pronouns changes
     useEffect(() => {
@@ -421,6 +462,23 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
     }, [values.pronouns])
     return (
         <div className="text-sm space-y-3">
+            {isModerator && email && (
+                <p className="flex justify-between m-0 gap-2 items-center">
+                    <span className="font-semibold inline-flex items-center gap-1 leading-none">
+                        Email
+                        <Tooltip
+                            delay={0}
+                            className="inline-flex items-center text-secondary"
+                            trigger={<IconShieldLock className="size-4" />}
+                        >
+                            Only visible to moderators
+                        </Tooltip>
+                    </span>
+                    <a href={`mailto:${email}`} className="truncate text-right underline font-medium">
+                        {email}
+                    </a>
+                </p>
+            )}
             {!isEditing && profile.reputation != null && (
                 <p className="flex justify-between items-center m-0">
                     <span className="font-semibold">Reputation</span>
@@ -1084,6 +1142,7 @@ const ValidationSchema = Yup.object().shape({
     github: Yup.string().url('Invalid URL').nullable(),
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
+    discord: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
     country: Yup.string().nullable(),
     location: Yup.string().nullable(),
@@ -1287,6 +1346,7 @@ export default function ProfilePage({ params }: PageProps) {
             twitter: profile?.twitter,
             linkedin: profile?.linkedin,
             github: profile?.github,
+            discord: profile?.discord,
             avatar: getAvatarURL(profile),
             firstName: profile?.firstName,
             lastName: profile?.lastName,
@@ -1500,7 +1560,8 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile.reputation != null ||
                                 profile.pineappleOnPizza !== null ||
                                 profile.pronouns ||
-                                profile.location) && (
+                                profile.location ||
+                                (isModerator && profile?.user?.data?.attributes?.email)) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
@@ -1509,6 +1570,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         values={values}
                                         errors={errors}
                                         isTeamMember={isTeamMember}
+                                        isModerator={isModerator}
                                     />
                                 </Block>
                             )}
@@ -1539,6 +1601,11 @@ export default function ProfilePage({ params }: PageProps) {
                                 </Block>
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isEditing && isCurrentUser && (
+                                <Block title="Connected accounts">
+                                    <ConnectedAccounts hideHeading stacked />
+                                </Block>
+                            )}
                             {isModerator && isEditing && (
                                 <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />

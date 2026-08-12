@@ -56,7 +56,7 @@ export const useProductLinks = () => {
             {
                 label: 'Context warehouse',
                 Icon: <GlassIcon path={CONTEXT_WAREHOUSE_SILHOUETTE} />,
-                url: '/data-stack',
+                url: '/context-warehouse',
                 source: 'desktop',
             },
             {
@@ -91,7 +91,7 @@ export const useProductLinks = () => {
 
 export const apps: AppItem[] = [
     {
-        label: 'Why PostHog?',
+        label: 'About us',
         Icon: <GlassIcon path={WHY_POSTHOG_SILHOUETTE} />,
         url: '/about',
         source: 'desktop',
@@ -200,8 +200,8 @@ function Desktop() {
     const desktopIconListClassName = 'list-none m-0 p-0 flex flex-col content-start pointer-events-auto'
     // Top padding is DESKTOP_TOP_OFFSET + 16; leave a matching bottom cushion so icons don't kiss the edge.
     const desktopIconListStyle = {
-        height: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
-        maxHeight: `calc(100vh - ${DESKTOP_TOP_OFFSET + 32}px)`,
+        height: `calc(100dvh - ${DESKTOP_TOP_OFFSET + 32}px)`,
+        maxHeight: `calc(100dvh - ${DESKTOP_TOP_OFFSET + 32}px)`,
     } as const
 
     const handleScreensaverDismiss = () => {

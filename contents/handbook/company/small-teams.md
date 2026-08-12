@@ -65,7 +65,7 @@ Team leads also take on a range of broader responsibilities that revolve around 
 
 Setting up support processes is a team lead responsibility, but if you need any assistance just contact the Support team directly.
 
-Team leads are responsible for creating Slack channels for their support function and ensuring integration with Zendesk, so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up SLA and support hero notifications.
+Team leads are responsible for creating a `#support-<team-name>` Slack channel and making sure their team is [set up for support](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support), so that the team can be alerted to support issues. Once the support process is set up, team leads are responsible for ensuring a sustainable and fair support rotation and setting up support hero notifications.
 
 To kick off any org change, run `/org-change` in Slack.
 
@@ -92,7 +92,7 @@ Some guidelines on how to do this are below, but if in doubt team leads should a
 
 **Typically, you must give at least 2-3 weeks notice of a product launch and you should reach out directly to marketing team leads if this is not possible.**
 
--   [ ] [Create a new launch plan issue](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md)
+-   [ ] [Create a new launch plan issue](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md)
 -   [ ] Continue to communicate timelines / updates in the Slack channel created
 
 ## Leading quarterly goal setting

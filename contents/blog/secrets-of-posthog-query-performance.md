@@ -13,7 +13,6 @@ author:
 category: Engineering
 tags:
   - Product updates
-  - Launch week
 ---
 
 We want PostHog to become the first choice for product analytics at any scale. To do that, users should have a smooth experience exploring their product data - including not waiting minutes for queries to load.

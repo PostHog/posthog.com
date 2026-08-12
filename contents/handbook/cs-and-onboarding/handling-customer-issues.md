@@ -10,18 +10,22 @@ Support and engineering are always available to help, but try to solve issues yo
 
 ## Raising issues
 
-### Zendesk
+### PostHog Support
 
-We use [Zendesk Support](https://posthoghelp.zendesk.com/agent) as our internal platform for support tickets. For specifics on how we use Zendesk, [see here](/handbook/engineering/support-hero#how-do-i-use-zendesk).
+We use [PostHog Support](https://us.posthog.com/project/2/support/tickets) as our support ticketing system. For specifics on how to work in it, see [Working in PostHog Support](/handbook/support/posthog-support).
 
 ### Tickets from Slack
 
-Customers can [create tickets from Slack](/handbook/engineering/support-hero#creating-zendesk-tickets-from-slack-posts) by adding the 🎫 emoji reaction (or mentioning `@SupportHog`). This means they can get help even when you're asleep or on holiday. Let your customer know about this, and remind them now and then.
+Customers can [create tickets from Slack](/handbook/support/posthog-support#how-do-tickets-get-created) by adding the 🎫 emoji reaction (or mentioning `@SupportHog`). This means they can get help even when you're asleep or on holiday. Let your customer know about this, and remind them now and then.
 
 
 If you're working on a ticket the customer raised in Slack, assign yourself as the owner in PostHog Support, and then either resolve it or assign it to Team Support if you need to escalate it.
 
 > Tip: Customer messages from SupportHog channels also go to [#support-managed-customers](https://posthog.slack.com/archives/C05MUMZLC13). Find the ticket there and follow the link to see the ticket in PostHog.
+
+### Tickets from email
+
+If a customer emails you directly and the conversation should live in support, [forward the email to one of our support addresses and cc the customer](/handbook/support/posthog-support#forwarding-customer-emails) — a ticket will be created and associated with them.
 
 ## Investigating issues
 
@@ -29,7 +33,7 @@ Ask for specifics: links to the insight, feature flag, or dashboard; a screensho
 
 If it helps, log in as the customer. Clicking a link from their PostHog instance will sometimes offer a "log in as" option. Otherwise, go to <PrivateLink url="https://us.posthog.com/admin/">US admin</PrivateLink> (<PrivateLink url="https://eu.posthog.com/admin/">EU admin</PrivateLink>), search for the org or user, and click "Log in as user". If you don't see that option, ask <TeamMember name="Dana Zou" photo /> to add you as a staff member in admin.
 
-Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-tips), and search Slack, PostHog Support, Zendesk, and GitHub for similar issues. If you've just joined, spend 30 mins to an hour investigating yourself before asking for help — onboarding is when you learn the products best. Use common sense based on urgency.
+Use our [docs](/docs), [troubleshooting tips](/handbook/support/troubleshooting-tips), and search Slack, PostHog Support, and GitHub for similar issues. If you've just joined, spend 30 mins to an hour investigating yourself before asking for help — onboarding is when you learn the products best. Use common sense based on urgency.
 
 Keep the customer in the loop while you investigate — progress, blockers, next steps.
 
@@ -78,11 +82,11 @@ Escalate to support or the [relevant engineering team](/handbook/engineering/fea
 
 Our support team are technical engineers and handle most tickets. When in doubt, escalate to support.
 
-If you're escalating to support, no action needed — the ticket stays in the support queue.
+If you're escalating to support, assign the ticket to the support team.
 
-If you're escalating to engineering, set the `esc.` dropdown in Zendesk's left sidebar to escalated and check the group assignee makes sense. You may need to [upgrade your Zendesk role to full agent](/handbook/engineering/support-hero#i-cant-assign-tickets-or-make-public-replies) — remember to downgrade after.
+If you're escalating to engineering, [assign the ticket to that team](/handbook/support/posthog-support#escalating-a-ticket) and check the team tag makes sense.
 
-Either way, leave an internal note explaining what you're escalating and why, plus what you've already tried. Even confirming you followed the customer's repro steps and saw the same issue is valuable context.
+Either way, attach a [private note](/handbook/support/posthog-support#private-notes) explaining what you're escalating and why, plus what you've already tried. Even confirming you followed the customer's repro steps and saw the same issue is valuable context.
 
 ## Auditing impersonations
 

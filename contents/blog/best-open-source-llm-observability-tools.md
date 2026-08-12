@@ -55,7 +55,7 @@ PostHog’s AI Observability app works with the rest of our dev tool suite. This
 
 Two features worth highlighting for teams iterating on LLM apps:
 
-- **[Prompt management](/docs/ai-observability/prompt-management) (beta):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
+- **[Prompt management](/docs/ai-observability/prompt-management):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
 
 - **[Evaluations](/docs/ai-observability/evals) (beta):** Score LLM outputs automatically or with human review to track quality over time – not just whether API calls succeed, but [whether they're actually good](/blog/stop-ai-slop).
 
@@ -183,6 +183,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>What is LLM observability?</summary>

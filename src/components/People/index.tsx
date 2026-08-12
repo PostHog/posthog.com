@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import Link from 'components/Link'
 import { SEO } from '../seo'
 import ReactMarkdown from 'react-markdown'
@@ -16,6 +16,7 @@ import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
 import { IconMapPin, IconList } from '@posthog/icons'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
+import { OSInput } from 'components/OSForm'
 
 export const TeamMember = (props: any) => {
     const {
@@ -281,13 +282,13 @@ export const TeamMember = (props: any) => {
 
 export default function People() {
     const [activeTab, setActiveTab] = useState<'list' | 'map'>('list')
+    const [searchQuery, setSearchQuery] = useState('')
     const [filterBaseMembers, setFilterBaseMembers] = useState<any[] | null>(null)
 
     const {
         team: { teamMembers },
         allTeams,
     } = useStaticQuery(teamQuery)
-    const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
     const teamSize = teamMembers.length - 1
 
@@ -298,18 +299,6 @@ export default function People() {
 
     const availableFilters = useMemo(
         () => [
-            {
-                label: 'People named',
-                operator: 'is',
-                options: [
-                    { label: 'Any', value: 'any' },
-                    { label: 'Ben', value: 'Ben' },
-                    { label: 'Daniel', value: 'Daniel' },
-                    { label: 'Alex', value: 'Alex' },
-                    { label: 'Pawel', value: 'Pawel' },
-                ],
-                filter: (person: any, value: string) => value === 'any' || person.firstName === value,
-            },
             {
                 label: 'Pineapple on pizza',
                 operator: 'is',
@@ -333,9 +322,16 @@ export default function People() {
         []
     )
 
-    useEffect(() => {
-        setFilteredTeamMembers(filterBaseMembers ?? teamMembers)
-    }, [filterBaseMembers, teamMembers])
+    const filteredTeamMembers = useMemo(() => {
+        const base = filterBaseMembers ?? teamMembers
+        const query = searchQuery.trim().toLowerCase()
+        if (!query) return base
+
+        return base.filter((person: any) => {
+            const name = [person.firstName, person.lastName].filter(Boolean).join(' ').toLowerCase()
+            return name.includes(query)
+        })
+    }, [filterBaseMembers, teamMembers, searchQuery])
 
     const handleFilterChange = (filteredData: any[]) => {
         setFilterBaseMembers(filteredData)
@@ -347,6 +343,19 @@ export default function People() {
             <div className="flex flex-wrap items-center gap-2 justify-between">
                 <h1 className="m-0">People</h1>
                 <div className="flex flex-wrap items-center gap-2">
+                    <OSInput
+                        label="Search people"
+                        showLabel={false}
+                        placeholder="Search people..."
+                        value={searchQuery}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                        onClear={() => setSearchQuery('')}
+                        showClearButton
+                        size="sm"
+                        width="fit"
+                        name="people-search"
+                        className="min-w-[12rem] !h-[34px] !box-border !px-2 !py-0 !text-sm !leading-none"
+                    />
                     <ViewerFilters
                         availableFilters={availableFilters}
                         dataToFilter={teamMembers}

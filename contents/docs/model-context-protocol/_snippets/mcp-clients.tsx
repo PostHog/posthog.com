@@ -4,8 +4,8 @@ import List from 'components/List'
 const MCPClients = () => {
     const codeEditors = [
         {
-            label: 'PostHog Code',
-            url: '/docs/posthog-code',
+            label: 'PostHog Desktop',
+            url: '/docs/posthog-desktop',
             icon: 'IconPostHog',
         },
         {
