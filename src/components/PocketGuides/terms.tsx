@@ -103,6 +103,12 @@ export const TERMS = {
             'Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong.',
         slug: '/docs/feature-flags',
     },
+    'user feedback': {
+        title: 'User feedback',
+        description:
+            'A native Surveys integration that collects thumbs up/down responses and written feedback attached directly to a given trace, so a rating sits next to the generation it was about.',
+        slug: '/docs/ai-observability/collect-user-feedback',
+    },
     'prompt management': {
         title: 'Prompt management',
         description:
@@ -123,14 +129,17 @@ interface TermProps {
     /** A key of `TERMS`, matched case-insensitively – authors capitalize a term that opens a
      * sentence. Typed as `string` because MDX authors aren't type-checked, and an unknown name
      * fails soft below rather than failing the build. */
-    name: string
+    name?: string
     /** Override the rendered text, e.g. to pluralize: <Term name="scout">scouts</Term>. */
     children?: React.ReactNode
     className?: string
 }
 
 /** Keys are lowercase; a term opening a sentence is written capitalized and still has to match. */
-function lookUp(name: string): TermDefinition | undefined {
+function lookUp(name?: string): TermDefinition | undefined {
+    if (!name) {
+        return undefined
+    }
     const terms: Record<string, TermDefinition> = TERMS
     return terms[name] ?? terms[name.toLowerCase()]
 }
