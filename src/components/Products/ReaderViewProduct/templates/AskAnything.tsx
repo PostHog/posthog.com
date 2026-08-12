@@ -51,6 +51,34 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
         )
     }, [query, productTools])
 
+    // Products with many tools can bucket them into use cases via
+    // `ai.toolGroups: [{ name, prefixes }]` – tools match on name prefix, and
+    // anything unmatched lands in a trailing "Everything else" group. Products
+    // without toolGroups keep the flat list.
+    const toolGroups: Array<{ name: string; prefixes: string[] }> = ai?.toolGroups ?? []
+    const groupedTools = useMemo(() => {
+        if (!toolGroups.length) return null
+        const remaining = new Set(filteredTools)
+        const groups = toolGroups.map((g) => {
+            const tools = filteredTools.filter((t) => g.prefixes.some((p) => t.name.startsWith(p)))
+            tools.forEach((t) => remaining.delete(t))
+            return { name: g.name, tools }
+        })
+        if (remaining.size) groups.push({ name: 'Everything else', tools: [...remaining] })
+        return groups.filter((g) => g.tools.length > 0)
+    }, [toolGroups, filteredTools])
+
+    const toolListItems = (tools: McpTool[]) =>
+        tools.map((t) => ({
+            label: <p className="text-xs font-mono font-normal">{t.name}</p>,
+            description: (
+                <>
+                    <strong className="block text-primary mb-1">{t.summary}</strong>
+                    {firstLine(t.description)}
+                </>
+            ),
+        }))
+
     if (!groups.length) return null
 
     return (
@@ -151,18 +179,15 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                             <div className="@container">
                                 {filteredTools.length === 0 ? (
                                     <p className="text-sm text-secondary italic m-0">No tools match your search.</p>
+                                ) : groupedTools ? (
+                                    groupedTools.map((group) => (
+                                        <div key={group.name} className="mb-6 last:mb-0">
+                                            <h4 className="text-base mt-0 mb-2">{group.name}</h4>
+                                            <LabeledList items={toolListItems(group.tools)} />
+                                        </div>
+                                    ))
                                 ) : (
-                                    <LabeledList
-                                        items={filteredTools.map((t) => ({
-                                            label: <p className="text-xs font-mono font-normal">{t.name}</p>,
-                                            description: (
-                                                <>
-                                                    <strong className="block text-primary mb-1">{t.summary}</strong>
-                                                    {firstLine(t.description)}
-                                                </>
-                                            ),
-                                        }))}
-                                    />
+                                    <LabeledList items={toolListItems(filteredTools)} />
                                 )}
                             </div>
                         </>

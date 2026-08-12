@@ -8,12 +8,12 @@ import { SectionLabel, InlineIcon } from 'components/ReplayVision/sectionHelpers
 
 // The manual AI-debugging workflow. Every step is on you — the logs just sit there.
 const steps: FlowStep[] = [
-    { label: '1. User reports\na weird answer', icon: IconWarning, actor: 'Human' },
+    { label: '1. User reports\nan issue', icon: IconWarning, actor: 'Human' },
     { label: '2. Read transcripts\none by one', icon: IconChat, actor: 'Human' },
     { label: '3. Spot the\npattern', icon: IconSearch, actor: 'Human' },
     { label: '4. Guess which\nchange broke it', icon: IconStethoscope, actor: 'Human' },
     { label: '5. Write\nthe fix', icon: IconCode, actor: 'Human' },
-    { label: '6. Ship\nand hope', icon: IconPullRequest, actor: 'Human' },
+    { label: '6. Ship\nand wait', icon: IconPullRequest, actor: 'Human' },
 ]
 
 const OldWaySection = ({ id }: SectionComponentProps) => {
@@ -32,12 +32,11 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                Your AI fails quietly – a wrong answer here, a slow reply there, a cost spike at the end of the month.
-                LLM logs tell you{' '}
+                Your AI fails quietly – a wrong answer here and a slow reply there. Traces tell you{' '}
                 <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5}>
                     <em>what it said</em>
                 </RoughAnnotation>
-                , but only if you go read them, conversation after conversation.
+                , but you have to go read them, one by one.
             </p>
 
             <FlowDiagram
@@ -48,8 +47,8 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             />
 
             <p className="text-base leading-loose">
-                You're the one who has to read the transcripts, spot the pattern, and figure out which change broke it –{' '}
-                <em>the tool just hands you the logs</em>.
+                Just to make a simple fix, you have to read the transcripts, spot the pattern, and figure out which
+                change broke it – <em>it's logs with a different schema</em>.
             </p>
         </section>
     )

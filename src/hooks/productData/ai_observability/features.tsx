@@ -229,8 +229,8 @@ export const features = {
         color: 'yellow',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
-                alt: 'AI Observability errors',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_08_12_at_4_26_05_PM_13782e124a.png',
+                alt: 'The AI observability errors view with failed generations and exception rates',
             },
         ],
         features: [

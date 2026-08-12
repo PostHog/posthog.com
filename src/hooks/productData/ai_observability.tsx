@@ -351,6 +351,18 @@ export const aiObservability = {
         imageAlt: 'PostHog AI and AI Observability',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
         mcpFeatures: ['llm_analytics'],
+        // AIO ships the most MCP tools of any product – bucket the tools tab by
+        // use case instead of one 80-row list. Prefix-matched against tool names.
+        toolGroups: [
+            {
+                name: 'Traces and costs',
+                prefixes: ['query-llm-', 'get-llm-total-costs', 'llma-personal-spend', 'llma-summarization-'],
+            },
+            { name: 'Evaluations and datasets', prefixes: ['llma-evaluation-', 'llma-dataset-', 'llma-score-'] },
+            { name: 'Reviews and annotation', prefixes: ['llma-trace-review-', 'llma-review-'] },
+            { name: 'Prompts and providers', prefixes: ['llma-prompt-', 'llma-provider-'] },
+            { name: 'Clustering and tagging', prefixes: ['llma-clustering-', 'llma-tagger-'] },
+        ],
         // Prompts lifted from contents/docs/ai-observability/query-traces-mcp.mdx.
         // Tool names verified against src/data/mcp-tools.json; groups without a
         // `tool` cover prompts whose tool routing isn't documented. Note that

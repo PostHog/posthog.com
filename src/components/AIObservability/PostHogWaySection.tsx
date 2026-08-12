@@ -16,7 +16,7 @@ const steps: FlowStep[] = [
         icon: IconLlmPromptEvaluation,
         actor: 'Machine',
     },
-    { label: 'Signal', description: 'raised to your Inbox', icon: IconBell, actor: 'Machine' },
+    { label: 'Alerts', description: 'report to your inbox', icon: IconBell, actor: 'Machine' },
     { label: 'Agent', description: 'investigates and opens the PR', icon: IconPullRequest, actor: 'Machine' },
     { label: 'You', description: 'review & merge', icon: IconCheckCircle, actor: 'Human' },
 ]
@@ -36,11 +36,12 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                <strong>AI Observability</strong> captures every generation as a regular PostHog event – prompt,
-                response, model, latency, cost, and the person behind it. Evals score your live traffic and anomaly
-                alerts learn what normal looks like, so quality slips become{' '}
+                <strong>AI Observability</strong> captures every generation as a regular PostHog event – giving you the
+                full context and connecting it to many other products. Evals score your live traffic and anomaly alerts
+                learn what normal looks like, so regressions in tool calling, response quality, or latency automatically
+                turn into{' '}
                 <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} multiline>
-                    <strong>findings, not reading assignments</strong>
+                    <strong>signals</strong>
                 </RoughAnnotation>
                 .
             </p>
@@ -48,12 +49,12 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             <FlowDiagram className="mb-5 @xl:hidden" steps={steps} headerLeft="The loop" headerRight="(cir. 2026–)" />
 
             <p className="text-base leading-loose">
-                When something slips, an agent investigates and raises a signal in your <strong>Inbox</strong> – and
-                where the fix is code, it{' '}
+                With each regression, an agent investigates and creates a report in your <strong>Inbox</strong>. When
+                there's code to fix, it{' '}
                 <RoughAnnotation type="underline" color="#30A46C" strokeWidth={2}>
                     <em>opens the pull request</em>
                 </RoughAnnotation>
-                . Your AI improves while you work on other things.
+                . Your AI improves while you sleep.
             </p>
         </section>
     )
