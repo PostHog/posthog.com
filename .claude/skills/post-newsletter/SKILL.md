@@ -119,36 +119,58 @@ There is no password to send, so don't ask for one. Instead, have the user write
 
 **Never ask the user to paste the token into the chat.** A pasted token is captured verbatim in the conversation transcript, and again in every tool call that uses it. Strapi JWTs are stateless, so this is not a small leak: signing out of posthog.com only clears the browser's `localStorage` and does **not** invalidate the token server-side. It stays usable for its full ~30-day life, and the only real revocation is rotating the Strapi instance's `jwtSecret` — which signs out every user of the site, so nobody will want to do it casually.
 
-Ask for this instead:
+**Give the user the block below verbatim.** Don't paraphrase or trim it — every line in it exists because a real person got stuck on that exact point. They are a writer setting up a publishing tool, not necessarily someone who reads shell scripts, so "obvious" details are not obvious.
 
-> While logged in to posthog.com, open your browser console and run `copy(localStorage.getItem('jwt'))` — that puts the bare token on your clipboard. (`localStorage.getItem('jwt')` on its own also works, but the console prints the value wrapped in quotes, and those quotes are not part of the token.)
+> **One-time setup — saving your posthog.com token**
 >
-> Then, in your terminal, run this:
+> You only do this once per token, and each token lasts about 30 days.
+>
+> **1. Copy the token from your browser.** While logged in to posthog.com, open the browser console (Chrome/Edge: F12 → Console tab; Safari: enable the Develop menu first) and run:
+>
+> ```js
+> copy(localStorage.getItem('jwt'))
+> ```
+>
+> It prints `undefined` — that's normal, `copy()` returns nothing. Your token is now on the clipboard. (Running `localStorage.getItem('jwt')` on its own also works, but it *displays* the token wrapped in quotes, and those quotes are not part of it.)
+>
+> **2. Run this in your terminal.** Copy both lines together and press Enter:
 >
 > ```bash
 > mkdir -p ~/.posthog && chmod 700 ~/.posthog
 > read -rs TOKEN && printf %s "$TOKEN" > ~/.posthog/strapi-jwt && chmod 600 ~/.posthog/strapi-jwt && unset TOKEN
 > ```
 >
-> The cursor will sit there with nothing showing — that's expected. Paste the token and press Enter.
+> **3. Paste the token and press Enter.** The cursor will sit on a blank line showing nothing at all — no prompt, no text as you paste. That's deliberate, not a hang. Paste, press Enter, and you'll get your normal prompt back.
 >
-> Two things people get wrong here, so say them explicitly:
+> Two details matter here, and both are easy to get wrong:
 >
-> - **Leave the word `TOKEN` as-is.** It's a variable name, not a placeholder — don't substitute the token into the command. Typed as an argument it would land in shell history, which is exactly what this avoids.
-> - **Paste the token bare** — no surrounding quotes, no `Bearer` prefix. `read` stores the line literally, so quotes become part of the stored token and every upload then 401s.
+> - **Leave the word `TOKEN` in the command exactly as written.** It is the name of a variable, not a blank to fill in. Do not replace it with your token.
+> - **Paste the token on its own** — no quotes around it, no `Bearer` in front, nothing else on the line. It should start with `eyJ`.
+>
+> **4. Check it worked:**
+>
+> ```bash
+> grep -c "['\"]" ~/.posthog/strapi-jwt   # want 0
+> wc -c < ~/.posthog/strapi-jwt           # want ~140
+> ```
+>
+> `0` and a number near 140 means you're set — you can ignore all of this until the token expires. Anything else, see below.
+>
+> | What you see | What happened | Fix |
+> | --- | --- | --- |
+> | `grep` prints `1` or more | Quotes got pasted along with the token | Re-run steps 2–3, paste without quotes |
+> | `wc` prints `0` | The paste didn't register | Re-run steps 2–3 |
+> | `wc` prints well under 100 | Only part of the token was copied | Re-copy with `copy(...)`, re-run steps 2–3 |
+> | `No such file or directory` | Step 2 didn't finish, or you pressed Enter without pasting | Re-run both lines of step 2 |
+> | Terminal seems frozen at step 3 | It's waiting for you — this is normal | Paste, press Enter |
 
-`read -rs` is what keeps this clean — the `-s` means the token is never echoed to the screen and never lands in their shell history. The file persists between sessions, so they only redo this when the token expires.
+Why it's built this way: `read -rs` takes the token as *input* rather than as a command argument, and `-s` stops it echoing. So it never appears on screen and never enters shell history. Keeping it in `~` rather than the repo means it can't be committed by accident.
 
-Both mistakes above are silent — the file gets written either way. Verify with:
+Both of the step-3 mistakes are **silent** — the file gets written either way, and nothing complains until an upload returns 401. That's why step 4 is not optional; walk the user through it rather than assuming.
 
-```bash
-grep -c "['\"]" ~/.posthog/strapi-jwt   # want 0; anything else means quotes got included
-wc -c < ~/.posthog/strapi-jwt           # want roughly 180-220 bytes
-```
+Note that the `exp`-decode check further down does **not** catch a quoted token: it splits on `.`, so stray leading and trailing quotes fall outside the payload segment and it reports a perfectly valid expiry for a token that will still 401. Use `grep` for that failure, not the decoder.
 
-Note that the `exp`-decode check further down does **not** catch a quoted token: it splits on `.`, so stray leading and trailing quotes fall outside the payload segment and it reports a perfectly valid expiry date for a token that will still 401. Use `grep` for that failure, not the decoder.
-
-That token is the same one every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key. It's valid for about 30 days.
+That token is the same one every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key.
 
 **Rules for handling it once it's on disk:**
 
@@ -163,16 +185,32 @@ That token is the same one every authenticated request from the site carries —
   print('expires', datetime.datetime.fromtimestamp(d['exp'], datetime.UTC))"
   ```
   Decode it in Python, not with `cut … | base64 -d`. JWT payloads are base64**url** with the padding stripped, and `base64 -d` both rejects the `-`/`_` characters and chokes on the missing padding — worse, it prints partial output before failing, so a `2>/dev/null` version looks like it works right up until it silently reports the wrong thing.
-- If `~/.posthog/strapi-jwt` doesn't exist, ask the user to create it with the snippet above. Don't fall back to asking them to paste it.
+- If `~/.posthog/strapi-jwt` doesn't exist, hand the user the setup block above. Don't fall back to asking them to paste it into the chat.
+- When a token expires, they re-run **only step 2 and 3** of that block — the directory already exists and the file is overwritten in place. Say that, rather than sending them through the whole thing again.
 
 If the user pastes a token into the chat anyway, use it to finish the job, but tell them plainly afterwards that it is now in the transcript, when it expires, and that logging out will not revoke it.
 
-**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work. Use the same on-disk pattern rather than taking a password through the chat:
+**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work. Use the same on-disk pattern rather than taking a password through the chat — again, hand this over verbatim:
 
+> **One-time setup — saving your posthog.com login**
+>
+> Run the first two lines together, replacing `you@example.com` with your own address:
+>
 > ```bash
 > mkdir -p ~/.posthog && chmod 700 ~/.posthog
 > printf 'you@example.com\n' > ~/.posthog/squeak-email
+> ```
+>
+> Then run this line on its own. As before, it waits silently — type or paste your password and press Enter. Leave `PW` exactly as written; it's a variable name, not a blank to fill in:
+>
+> ```bash
 > read -rs PW && printf %s "$PW" > ~/.posthog/squeak-password && chmod 600 ~/.posthog/squeak-password && unset PW
+> ```
+>
+> Check both files exist and neither is empty:
+>
+> ```bash
+> wc -c ~/.posthog/squeak-email ~/.posthog/squeak-password
 > ```
 
 Do not suggest `! export SQUEAK_EMAIL=…` — `!`-prefixed commands run in the **user's** shell, not yours, so the exported variables are invisible to your Bash tool and `${SQUEAK_EMAIL}` expands to an empty string.
