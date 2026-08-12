@@ -6,6 +6,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { CallToAction } from 'components/CallToAction'
 import CommunityIncubatorForm from 'components/CommunityIncubatorForm'
 import CollectiveCarousel from 'components/BuilderCollective/CollectiveCarousel'
+import TabbedCarousel, { type TabbedCarouselTab } from 'components/TabbedCarousel'
 import { HedgehogDj } from '@posthog/brand/hoggies'
 import {
     IconCheck,
@@ -13,33 +14,177 @@ import {
     IconPeople,
     IconCompass,
     IconMessage,
-    IconArrowRight,
     IconBuilding,
-    IconHome,
     IconHomeFilled,
 } from '@posthog/icons'
-import { RoughAnnotation } from 'components/Code/RoughAnnotation'
-import { PANEL_BG } from '../../constants/frostedSurfaces'
 
-// Frosted-glass "pane" — the site's own Aero-style surface (same treatment as reader panels and
-// app windows), with a soft shadow and the classic-skin bevel edge. Neutral so it blends with the
-// page rather than shouting. Shared by the three track cards below.
-const paneClasses = `rounded-md border border-primary ${PANEL_BG} shadow-md skin-classic:border-b-3`
+const contentSectionClasses = 'mx-4 my-4 @3xl:mx-8 @3xl:my-8 @7xl:mx-auto max-w-6xl'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
-// Emphasis span, matching the /startups page's red/yellow treatment.
+// Red/yellow emphasis used throughout the supporting section headings.
 const Highlight = ({ children }: { children: React.ReactNode }) => (
     <span className="text-red dark:text-yellow font-semibold">{children}</span>
+)
+
+// Background highlight used only for the hero title, matching /self-driving.
+const HeroHighlight = ({ children }: { children: React.ReactNode }) => (
+    <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
 )
 
 // Reused from the old MDX page: a two-column term/value row for the track fact sheets.
 const FactRow = ({ term, children }: { term: string; children: React.ReactNode }) => (
     <div className="grid grid-cols-[6rem_1fr] py-2 border-t border-primary/10 dark:border-primary-dark/10 first:border-t-0">
-        <dt className="text-base font-bold text-primary">{term}</dt>
-        <dd className="text-sm text-secondary pt-3">{children}</dd>
+        <dt className="m-0 text-base font-bold text-primary">{term}</dt>
+        <dd className="m-0 text-sm text-secondary">{children}</dd>
     </div>
 )
+
+const PhotoWithCaption = ({ src, alt, caption }: { src: string; alt: string; caption: string }) => (
+    <figure className="not-prose relative m-0 min-h-48 self-stretch overflow-hidden rounded-md">
+        <img src={src} alt={alt} className="absolute inset-0 size-full object-cover" />
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-b from-black/0 to-black/70 p-3 pt-12 text-sm font-medium leading-tight text-white">
+            {caption}
+        </figcaption>
+    </figure>
+)
+
+type Track = {
+    value: string
+    title: string
+    summary: string
+    bestFor: string
+    icon: React.ReactNode
+    color: string
+    activeText: string
+    progressBar: string
+    facts: { term: string; copy: React.ReactNode }[]
+    image: string
+    alt: string
+    caption: string
+}
+
+const tracks: Track[] = [
+    {
+        value: 'builder-groups',
+        title: 'Builder groups',
+        summary: "One organizer recruits local builders who mostly don't know each other yet.",
+        bestFor: 'Best fit for mid-career professionals',
+        icon: <IconPeople className="size-5" />,
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+        facts: [
+            {
+                term: 'Who',
+                copy: 'Career engineers, PMs, designers, founders, and people with day jobs who build on nights and weekends.',
+            },
+            { term: 'Makeup', copy: '1 organizer, 6+ attendees per session.' },
+            { term: 'Duration', copy: '5 sessions, evenings or weekends.' },
+            {
+                term: 'Support',
+                copy: (
+                    <>
+                        <strong>$1,000 grant</strong>, merch, support with finding a venue and promoting.
+                    </>
+                ),
+            },
+        ],
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/taj_phl_builder_group_f00b7c9abd.jpg',
+        alt: 'Builder group co-working in Philadelphia',
+        caption: 'Taj leading his builder group in Philadelphia',
+    },
+    {
+        value: 'builder-collectives',
+        title: 'Builder collectives',
+        summary: 'Friends who already ship together and are looking for support.',
+        bestFor: 'Best fit for early career builders',
+        icon: <IconBuilding className="size-5" />,
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        facts: [
+            {
+                term: 'Who',
+                copy: 'Crews building together as a lifestyle. Often students, early-career engineers, indie hackers, and tech founders.',
+            },
+            {
+                term: 'Makeup',
+                copy: "4+ core members, each with at least one project that's shipping and verifiably evolving.",
+            },
+            { term: 'Duration', copy: 'Three months. Weekly or biweekly sessions plus a public footprint.' },
+            {
+                term: 'Support',
+                copy: (
+                    <>
+                        <strong>$1,000 grant</strong> + merch. We'll ask you to host one PostHog-themed event.
+                    </>
+                ),
+            },
+        ],
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/austin_texas_4368805f1b.jpeg',
+        alt: 'Builder collective crew in Austin',
+        caption: 'Matt with the ATX Builders collective in Austin',
+    },
+    {
+        value: 'hacker-houses',
+        title: 'Hacker houses',
+        summary: 'A proven builder group or collective goes full-time on shipping for a fixed sprint.',
+        bestFor: 'Best for anyone who thrives in sprints',
+        icon: <IconHomeFilled className="size-5" />,
+        color: 'bg-teal',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+        facts: [
+            {
+                term: 'Who',
+                copy: 'A proven crew, from a builder group or collective, going all-in for the duration.',
+            },
+            { term: 'Makeup', copy: '4+ builders, 18+, with one named lead accountable for the house.' },
+            { term: 'Duration', copy: '5–14 days. A demo day. Not a lease. Not a vacation on our dime.' },
+            {
+                term: 'Support',
+                copy: (
+                    <>
+                        <strong>$1,000 per week</strong> for lodging and food, merch, social promotion, and 1:1s with
+                        PostHog team members.
+                    </>
+                ),
+            },
+        ],
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e.png',
+        alt: 'Builders working together in a coffee shop',
+        caption: 'A co-founder, product manager, graphic designer, developer, and webmaster take over a coffee shop',
+    },
+]
+
+const TrackSlide = ({ track }: { track: Track }) => (
+    <div className="grid min-h-full gap-6 p-4 @md:p-6 @lg:grid-cols-2 @lg:p-8">
+        <div className="min-w-0 pr-8 @lg:pr-0">
+            <p className="m-0 text-sm font-semibold text-red dark:text-yellow">{track.bestFor}</p>
+            <h3 className="mb-2 mt-1 text-2xl text-primary">{track.title}</h3>
+            <p className="mt-0 text-secondary">{track.summary}</p>
+            <dl className="not-prose m-0 rounded-md border border-primary bg-primary p-4">
+                {track.facts.map(({ term, copy }) => (
+                    <FactRow key={term} term={term}>
+                        {copy}
+                    </FactRow>
+                ))}
+            </dl>
+        </div>
+        <PhotoWithCaption src={track.image} alt={track.alt} caption={track.caption} />
+    </div>
+)
+
+const trackTabs: TabbedCarouselTab[] = tracks.map((track) => ({
+    value: track.value,
+    label: track.title,
+    icon: track.icon,
+    content: <TrackSlide track={track} />,
+    color: track.color,
+    activeText: track.activeText,
+    progressBar: track.progressBar,
+}))
 
 // "What we look for" — the core of this pass. Energetic, proof-over-promises, community-first.
 const lookFor: { Icon: IconComponent; color: string; title: string; copy: string }[] = [
@@ -189,7 +334,7 @@ const faqStructuredData = [
 export default function CommunityIncubatorProgram(): JSX.Element {
     const heroBullets = [
         '$1,000 cash grant to gather local builders and keep them shipping',
-        'Merch, intros, and shoutouts from our social media accounts',
+        'Merch, intros, and shoutouts across our online communities',
         'A path from hosting local meetups to participating in a hacker house',
     ]
 
@@ -215,34 +360,15 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                 hideTitle
                 className="overflow-x-hidden"
             >
-                <div className="@container h-full bg-[#EFF0EB] dark:bg-dark">
-                    {/* Cover banner — constrained to the content column and rounded so it reads as part of the
-                        page rather than a full-bleed band. Fixed 4:1 aspect keeps it short and avoids layout shift. */}
-                    <div className="m-4 @3xl:m-8 max-w-6xl">
-                        <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/w_2000,c_limit,q_auto,f_auto/incubator_7251f5dffb.png"
-                            alt="PostHog community incubator"
-                            className="w-full aspect-[4/1] object-cover object-center rounded-lg"
-                        />
-                    </div>
-
+                <div className="@container h-full">
                     {/* Hero intro — on the page background, with the HedgehogCodingGroup illustration beside the copy. */}
-                    <div className="m-4 @3xl:m-8 max-w-6xl">
-                        <p className="!m-0 mb-2 text-sm font-bold text-secondary">PostHog for Builders</p>
-                        <h1 className="!mt-0 mb-6 text-3xl @md:text-4xl font-bold leading-tight">
-                            We back builders who{' '}
-                            <RoughAnnotation
-                                type="highlight"
-                                color="rgba(48, 164, 108, 0.2)"
-                                strokeWidth={1}
-                                padding={2}
-                                delay={300}
-                                show
-                            >
-                                ship
-                            </RoughAnnotation>
-                        </h1>
-                        <div className="flex flex-col items-start gap-6 @2xl:flex-row @2xl:gap-8">
+                    <div className={contentSectionClasses}>
+                        <div className="not-prose">
+                            <h1 className="m-0 text-3xl font-bold !leading-tight @md/reader-content:text-4xl @3xl/reader-content:text-5xl">
+                                We back <HeroHighlight>builders who ship</HeroHighlight>
+                            </h1>
+                        </div>
+                        <div className="mt-6 flex flex-col items-start gap-6 @2xl:flex-row @2xl:gap-8">
                             <div className="min-w-0 @2xl:flex-1 max-w-2xl">
                                 <p className="mt-0 mb-4">
                                     Our thesis is to get builders in a room and support them to ship things. Get cash
@@ -294,7 +420,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                                     </Link>
                                     .
                                 </p>
-                                <ul className="mb-4 list-none space-y-1 p-0 text-[15px]">
+                                <ul className="not-prose mb-4 list-none space-y-1 p-0 text-[15px]">
                                     {heroBullets.map((item) => (
                                         <li key={item} className="relative pl-6">
                                             <IconCheck className="absolute left-0 top-0.5 size-4 text-green" />
@@ -316,64 +442,13 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                         </div>
                     </div>
 
-                    {/* Tracks — three frosted-glass panes (the site's own Aero surface), written out explicitly so
-                        each headline and line of copy is easy to edit by hand. The `data-scheme="tertiary"` backdrop
-                        gives the panes a subtly recessed tone, the way app windows sit on the desktop. */}
-                    <div
-                        data-scheme="tertiary"
-                        className="not-prose grid grid-cols-1 @md:grid-cols-3 gap-4 m-4 @3xl:m-8 max-w-6xl mb-8 @3xl:mb-12"
-                    >
-                        {/* Builder groups */}
-                        <a href="#builder-groups" className={`group block !no-underline p-5 ${paneClasses}`}>
-                            <IconPeople className="size-6 text-blue" />
-                            <h3 className="!m-0 mt-3 flex items-center gap-1 text-base font-bold text-primary">
-                                Builder groups
-                                <IconArrowRight className="size-4 text-secondary transition-transform group-hover:translate-x-0.5" />
-                            </h3>
-                            <p className="m-0 mt-1 text-sm text-secondary">
-                                Gather local builders for recurring co-working sessions.
-                            </p>
-                            <p className="m-0 mt-1 text-sm text-red dark:text-yellow font-semibold">
-                                Best fit for mid-career professionals.
-                            </p>
-                            <p className="m-0 mt-3 text-xs font-semibold text-secondary">$1,000 grant · 5+ sessions</p>
-                        </a>
-
-                        {/* Builder collectives */}
-                        <a href="#builder-collectives" className={`group block !no-underline p-5 ${paneClasses}`}>
-                            <IconBuilding className="size-6 text-purple" />
-                            <h3 className="!m-0 mt-3 flex items-center gap-1 text-base font-bold text-primary">
-                                Builder collectives
-                                <IconArrowRight className="size-4 text-secondary transition-transform group-hover:translate-x-0.5" />
-                            </h3>
-                            <p className="m-0 mt-1 text-sm text-secondary">
-                                Back a recognizable crew that already ships and seeks traction.
-                            </p>
-                            <p className="m-0 mt-1 text-sm text-red dark:text-yellow font-semibold">
-                                Best fit for early career builders.
-                            </p>
-                            <p className="m-0 mt-3 text-xs font-semibold text-secondary">$1,000 grant · 3 months</p>
-                        </a>
-
-                        {/* Hacker houses */}
-                        <a href="#hacker-houses" className={`group block !no-underline p-5 ${paneClasses}`}>
-                            <IconHomeFilled className="size-6 text-teal" />
-                            <h3 className="!m-0 mt-3 flex items-center gap-1 text-base font-bold text-primary">
-                                Hacker houses
-                                <IconArrowRight className="size-4 text-secondary transition-transform group-hover:translate-x-0.5" />
-                            </h3>
-                            <p className="m-0 mt-1 text-sm text-secondary">
-                                A proven builder group or collective goes full-time on shipping.
-                            </p>
-                            <p className="m-0 mt-1 text-sm text-red dark:text-yellow font-semibold">
-                                Best for anyone who thrives in sprints.
-                            </p>
-                            <p className="m-0 mt-3 text-xs font-semibold text-secondary">$1,000/week · 5–14 days</p>
-                        </a>
+                    {/* Tracks — the homepage carousel pattern combines each track's summary, facts, and photo. */}
+                    <div className={`not-prose ${contentSectionClasses} mb-8 @3xl:mb-12`}>
+                        <TabbedCarousel tabs={trackTabs} variant="hero" />
                     </div>
 
                     {/* What we look for — freshly written for this pass. */}
-                    <div className="m-4 @3xl:m-8 max-w-6xl">
+                    <div className={contentSectionClasses}>
                         <h2 className="mb-2">
                             Who we <Highlight>are looking for</Highlight>
                         </h2>
@@ -400,7 +475,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                         </p>
                     </div>
 
-                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary">
+                    <div className={`${contentSectionClasses} border-t border-primary`}>
                         <h2 className="mb-2">
                             Every track, <Highlight>same rules</Highlight>
                         </h2>
@@ -418,99 +493,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                         </div>
                     </div>
 
-                    {/* Builder groups — ported detail section. */}
-                    <div id="builder-groups" className="m-4 @3xl:m-8 max-w-6xl border-t border-primary scroll-mt-24">
-                        <h2 className="mb-2">Builder groups</h2>
-                        <p className="mb-6 max-w-3xl">
-                            One organizer recruits. Attendees mostly don't know each other yet.
-                        </p>
-                        <div className="grid @lg:grid-cols-2 gap-8 items-start mb-6">
-                            <dl className="m-0 border border-primary rounded-md bg-primary p-6">
-                                <FactRow term="Who">
-                                    Career engineers, PMs, designers, founders, people with day jobs who build on nights
-                                    and weekends.
-                                </FactRow>
-                                <FactRow term="Makeup">1 organizer, 6+ attendees per session.</FactRow>
-                                <FactRow term="Duration">5 sessions, evenings or weekends.</FactRow>
-                                <FactRow term="Support">
-                                    <strong>$1,000 grant</strong>, merch, support with finding a venue and promoting.
-                                </FactRow>
-                            </dl>
-                            <img
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/taj_phl_builder_group_f00b7c9abd.jpg"
-                                alt="Builder group co-working in Philadelphia"
-                                className="rounded-md object-cover h-full min-h-48 w-full"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Builder collectives — ported detail section. */}
-                    <div
-                        id="builder-collectives"
-                        className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8 scroll-mt-24"
-                    >
-                        <h2 className="mb-2">Builder collectives</h2>
-                        <p className="mb-6 max-w-3xl">Friends who already ship together and are looking for support.</p>
-                        <div className="grid @lg:grid-cols-2 gap-8 items-start mb-6">
-                            <dl className="m-0 border border-primary rounded-md bg-primary p-6">
-                                <FactRow term="Who">
-                                    Crews building together as a lifestyle. Often students, early-career engineers,
-                                    indie hackers, and tech founders.
-                                </FactRow>
-                                <FactRow term="Makeup">
-                                    4+ core members, each with at least one project that's shipping and verifiably
-                                    evolving.
-                                </FactRow>
-                                <FactRow term="Duration">
-                                    Three months. Weekly or biweekly sessions plus a public footprint.
-                                </FactRow>
-                                <FactRow term="Support">
-                                    <strong>$1,000 grant</strong> + merch. We'll ask you to host one PostHog-themed
-                                    event.
-                                </FactRow>
-                            </dl>
-                            <img
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/austin_texas_4368805f1b.jpeg"
-                                alt="Builder collective crew in Austin"
-                                className="rounded-md object-cover h-full min-h-48 w-full"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Hacker houses — ported detail section. */}
-                    <div
-                        id="hacker-houses"
-                        className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8 scroll-mt-24"
-                    >
-                        <h2 className="mb-2">Hacker houses</h2>
-                        <p className="mb-6 max-w-3xl">
-                            A curated cohort goes full-time on building for a fixed sprint.
-                        </p>
-                        <div className="grid @lg:grid-cols-2 gap-8 items-start mb-6">
-                            <dl className="m-0 border border-primary rounded-md bg-primary p-6">
-                                <FactRow term="Who">
-                                    A proven crew, from a builder group or collective, going all-in for the duration.
-                                </FactRow>
-                                <FactRow term="Makeup">
-                                    4+ builders, 18+, with one named lead accountable for the house.
-                                </FactRow>
-                                <FactRow term="Duration">
-                                    5–14 days. A demo day. Not a lease. Not a vacation on our dime.
-                                </FactRow>
-                                <FactRow term="Support">
-                                    <strong>$1,000 per week</strong> for lodging and food, merch, social promotion, and
-                                    1:1s with PostHog team members.
-                                </FactRow>
-                            </dl>
-                            <img
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e.png"
-                                alt="Builders working together"
-                                className="rounded-md object-cover h-full min-h-48 w-full"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
+                    <div className={`${contentSectionClasses} border-t border-primary pt-8`}>
                         <h2 className="mb-2">Global footprint</h2>
                         <p className="mb-6">
                             Builders are gathering in cities across the globe. You'd be in good company.
@@ -519,7 +502,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                     </div>
 
                     {/* Apply — reuses the existing CommunityIncubatorForm. */}
-                    <div id="apply" className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8 scroll-mt-24">
+                    <div id="apply" className={`${contentSectionClasses} border-t border-primary pt-8 scroll-mt-24`}>
                         <h2 className="mb-2">
                             Apply to the <Highlight>incubator</Highlight>
                         </h2>
@@ -530,7 +513,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                     </div>
 
                     {/* FAQ — Accordion, matching /startups. */}
-                    <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
+                    <div className={`${contentSectionClasses} border-t border-primary pt-8`}>
                         <h2 className="mb-4">FAQs</h2>
                         <Accordion data-scheme="primary" defaultValue="" items={faqItems} />
                     </div>
