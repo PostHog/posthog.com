@@ -365,10 +365,10 @@ const formSections = [
                 placeholder: 'https://discord.com/users/{id}',
                 type: 'url',
                 tooltip: (
-                    <>
+                    <p className="max-w-72 text-sm m-0 leading-normal">
                         To get your ID, enable <strong>Developer Mode</strong> in Discord's advanced settings, then
                         right-click your name and choose <strong>Copy User ID</strong>.
-                    </>
+                    </p>
                 ),
             },
         },
