@@ -31,6 +31,13 @@ const cloudinaryCache = {}
 // restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this
 // lets preview builds skip the multi-minute Cloudinary crawl in onPreInit below.
 const CLOUDINARY_CACHE_FILE = path.resolve(__dirname, '../.cloudinary-resources.json')
+// Copy persisted inside .cache, which Vercel's Gatsby framework cache preserves between
+// production deploys (the root file above is gitignored and outside that cache scope, so
+// production paid the full crawl on every deploy). Written with a fetchedAt stamp so a
+// restored copy older than a day triggers a fresh crawl instead of serving stale metadata
+// indefinitely; a missing entry only omits image dimensions (logged as a warning).
+const CLOUDINARY_PERSISTED_CACHE_FILE = path.resolve(__dirname, '../.cache/cloudinary-resources.json')
+const CLOUDINARY_PERSISTED_MAX_AGE_MS = 24 * 60 * 60 * 1000
 
 let templateListPromise: Promise<any[]> | null = null
 async function getTemplateList() {
@@ -107,6 +114,21 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         }
     }
 
+    // Vercel path: the Actions-cache file above never exists there, but .cache survives
+    // between production deploys, so a same-day copy skips the crawl.
+    if (fs.existsSync(CLOUDINARY_PERSISTED_CACHE_FILE)) {
+        try {
+            const { fetchedAt, resources } = JSON.parse(fs.readFileSync(CLOUDINARY_PERSISTED_CACHE_FILE, 'utf-8'))
+            if (resources && Date.now() - new Date(fetchedAt).getTime() < CLOUDINARY_PERSISTED_MAX_AGE_MS) {
+                Object.assign(cloudinaryCache, resources)
+                console.log(`Loaded ${Object.keys(resources).length} Cloudinary resources from persisted build cache`)
+                return
+            }
+        } catch {
+            // Corrupted/unreadable — fall through to a fresh crawl
+        }
+    }
+
     console.log('Fetching cloudinary data')
 
     const cloudinaryAuth = `Basic ${Buffer.from(
@@ -133,6 +155,17 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
 
     // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
     fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
+    // Best-effort copy into .cache for platforms (Vercel) that persist it between builds.
+    // onPreInit can run before gatsby creates .cache on a fully cold build, so make the dir.
+    try {
+        fs.mkdirSync(path.dirname(CLOUDINARY_PERSISTED_CACHE_FILE), { recursive: true })
+        fs.writeFileSync(
+            CLOUDINARY_PERSISTED_CACHE_FILE,
+            JSON.stringify({ fetchedAt: new Date().toISOString(), resources: cloudinaryCache })
+        )
+    } catch {
+        // Persisting this copy is an optimization only — never fail the build over it.
+    }
 }
 
 function getPublicID(image: string) {
