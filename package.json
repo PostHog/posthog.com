@@ -17,9 +17,9 @@
     "private": true,
     "scripts": {
         "prebuild-move": "pnpm generate-brand-assets",
-        "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
+        "build-move": "node scripts/prefetch-api-spec.mjs & gatsby build && bash ./src/scripts/move-index.sh",
         "prebuild": "pnpm generate-brand-assets",
-        "build": "gatsby build",
+        "build": "node scripts/prefetch-api-spec.mjs & gatsby build",
         "prebuild:minimal": "pnpm generate-brand-assets",
         "build:minimal": "GATSBY_MINIMAL=true gatsby build",
         "start": "./bin/start",
