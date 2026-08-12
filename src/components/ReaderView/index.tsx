@@ -805,6 +805,7 @@ interface LeftSidebarProps {
     children: React.ReactNode
     contentRef?: React.RefObject<HTMLElement>
     currentPath?: string
+    windowKey?: string
     isMdx?: boolean
     /** On narrow windows the sidebar renders as an off-canvas drawer instead
      *  of an inline column, driven by the props below. */
@@ -935,6 +936,7 @@ const SidebarTabButton = ({ tab, active, showLabel, stacked, onClick }: SidebarT
  * switching tabs instead of reloading from the top on each page.
  */
 const SIDEBAR_SCROLL_MEMORY = new Map<string, number>()
+const SIDEBAR_HOVERED_WINDOWS = new Set<string>()
 
 const sidebarScrollKeyFromPath = (path?: string): string => {
     if (!path) return 'default'
@@ -958,6 +960,7 @@ const LeftSidebar = ({
     children,
     contentRef,
     currentPath,
+    windowKey,
     isMdx = false,
     mobile = false,
     mobileOpen = false,
@@ -993,7 +996,23 @@ const LeftSidebar = ({
     // transitions and icon-row → icon-column layout flip share the same boolean.
     const isPinned = isNavVisible
     const [searchFocused, setSearchFocused] = useState(false)
-    const [hovered, setHovered] = useState(false)
+    const [hovered, setHovered] = useState(() => !!windowKey && SIDEBAR_HOVERED_WINDOWS.has(windowKey))
+    const panelRef = useRef<HTMLDivElement>(null)
+
+    // A ReaderView remount should not collapse a hovered sidebar during an
+    // in-window navigation. Keep it expanded for the first render, then clear
+    // stale memory after the browser recalculates which element is under the
+    // pointer. Keying by window prevents hover state leaking between windows.
+    useLayoutEffect(() => {
+        if (!hovered || !windowKey || mobile) return
+        const frame = requestAnimationFrame(() => {
+            if (!panelRef.current?.matches(':hover')) {
+                SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
+                setHovered(false)
+            }
+        })
+        return () => cancelAnimationFrame(frame)
+    }, [hovered, mobile, windowKey])
     // On mobile the panel is a drawer: it's fully expanded whenever open and
     // fully hidden otherwise, so pin/hover state is bypassed entirely.
     const expanded = mobile ? mobileOpen : isPinned || searchFocused || hovered
@@ -1059,9 +1078,13 @@ const LeftSidebar = ({
     }
 
     const handleMouseEnter = () => {
-        if (!isPinned && !mobile) setHovered(true)
+        if (!isPinned && !mobile) {
+            if (windowKey) SIDEBAR_HOVERED_WINDOWS.add(windowKey)
+            setHovered(true)
+        }
     }
     const handleMouseLeave = () => {
+        if (windowKey) SIDEBAR_HOVERED_WINDOWS.delete(windowKey)
         setHovered(false)
     }
 
@@ -1084,6 +1107,7 @@ const LeftSidebar = ({
             }`}
         >
             <div
+                ref={panelRef}
                 onTransitionEnd={(e) => {
                     if (e.propertyName === 'width' && e.target === e.currentTarget && !expanded) {
                         setDisplayExpanded(false)
@@ -1570,6 +1594,7 @@ function ReaderViewContent({
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
                         currentPath={appWindow?.path}
+                        windowKey={appWindow?.key}
                         isMdx={body?.type === 'mdx'}
                     >
                         {leftSidebar || (!hideMenu && <Menu parent={parent as MenuItem} />)}
