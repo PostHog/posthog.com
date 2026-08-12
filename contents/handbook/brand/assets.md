@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
+> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo and brand usage for third-parties
 
@@ -47,6 +47,7 @@ Each logo below is rendered live from our [`@posthog/brand`](https://github.com/
 -   On **light backgrounds, prefer the standard logo**, and only reach for the **dark logo** (solid black) when a single-color mark is required.
 -   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradients can't be reproduced.
 -   Use the **logomark** on its own only at small sizes — favicons, app icons — where the full lockup won't fit and the overlapping gradients would get too busy.
+-   Use a **square logomark** for avatars and integrations that require a square image. Its transparent square canvas keeps the logomark's proportions intact — never stretch the standard logomark to fill a square. Use the standard gradient version on light backgrounds, or the light solid-white version on dark backgrounds.
 -   Use the **stacked** logo for portrait or square placements where the standard (landscape) lockup is too wide.
 
 _Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the light logo instead).
@@ -148,7 +149,7 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">in this Figma file</PrivateLink>. This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+For team members we keep all our currently approved hedgehogs [in this Figma file](https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&t=pCzspik0QSSbaemg-1). This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
 
 Here's how:
 

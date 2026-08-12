@@ -37,7 +37,7 @@ This guide breaks down the strongest Braintrust alternatives: what each does wel
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals) to catch quality regressions. 
 
-You can also [manage and version prompts (beta)](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
+You can also [manage and version prompts](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
 
 The difference from Braintrust is what surrounds the traces. Braintrust is laser focused on evals. PostHog expands on what comes after that: the model shipped, so now what? 
 
@@ -51,7 +51,7 @@ Because traces are regular PostHog events, you can watch the [session replay](/s
 
 - [**Traces**](/docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
 
-- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
 - [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 
@@ -745,6 +745,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>What is the difference between AI observability and AI evals?</summary>
 
 [AI observability](/what-is-ai-observability) answers "what is my system doing in production?" capturing traces, latency, token counts, errors, costs, and user interactions. 
@@ -783,7 +796,7 @@ Every tool on this list bills differently, which makes price comparisons slipper
 | Tool | Bills by | Free tier | First paid step | Watch out for |
 | --- | --- | --- | --- | --- |
 | **Braintrust** | GB of processed data | 1 GB (~1M spans), 14-day retention | $249/month Pro (5 GB) | No middle tier between free and $249; $3/GB overages |
-| **PostHog** | Events | 100K AI events/month | Usage-based, no base fee ($6 per 100K) | Event count scales with instrumentation depth |
+| **PostHog** | Events | 100K AI events/month | Usage-based, no base fee (from $35 per 100K, dropping to $6 per 100K at high volume) | Event count scales with instrumentation depth |
 | **Langfuse** | Units (traces + observations + scores) | 50K units/month, hard cap | $29/month Core + $8 per 100K units | Eval scores count as billable units |
 | **LangSmith** | Seats + traces | 5K traces, 1 seat | $39/seat/month + $2.50 per 1K traces | Costs grow with headcount; base retention is 14 days |
 | **Arize Phoenix** | Free self-host; cloud by spans | 25K spans/month (cloud) | Cloud paid tiers vary | Self-hosting is free but you run the infrastructure |

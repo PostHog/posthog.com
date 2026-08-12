@@ -127,6 +127,16 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 > **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
 
+### Filter precedence: dashboard vs. tile level
+
+Individual tiles (insights) can have their own filters and date ranges configured separately from dashboard-level overrides. When both are set, **tile-level filters take precedence**:
+
+- **Scalar settings** like breakdown, interval, and filter test accounts: the tile's value completely replaces the dashboard override.
+- **Date ranges:** If a tile has its own `date_from` or `date_to` set, its entire date range is used and the dashboard date override is ignored.
+- **Property filters:** Filters from both levels are combined using AND logic. However, if a tile filter directly contradicts a dashboard filter on the same property key, the tile filter wins and the conflicting dashboard filter is dropped.
+
+The insight card displays a warning when tile filters are merging with or overriding dashboard filters.
+
 ## Dashboard options
 
 ### Editing the layout
@@ -348,6 +358,29 @@ The widget displays:
 - List of recent responses, each showing the respondent's name, submission time, and answers
 
 Clicking a response row opens the respondent's person page. Clicking **See more** opens the survey detail page in a new tab.
+
+#### Support widget
+
+The Support widget displays a list of recently updated support tickets from [Support](/docs/support). Each row shows the requester name and email, ticket number, channel source, last message preview, unread count, priority, status, assignee, and when the ticket was last updated.
+
+To add it, click the **Add...** dropdown and select **Recent tickets** under the **Support** group.
+
+**Tile filters:**
+
+- **Saved view** - Apply a saved Support view to refine which tickets are shown. When set, the saved view owns the ticket filters; the widget still sorts by most recently updated and applies its limit.
+- **Status** - Filter by ticket status (new, open, pending, on hold, resolved, or all). Default: all.
+- **Priority** - Filter by priority levels (low, medium, high, critical). Default: all.
+- **Assignee** - Filter to show only tickets assigned to specific team members or roles.
+
+When a saved view is active, the status, priority, and assignee filters are hidden since the saved view controls those settings.
+
+**Display settings (edit modal):**
+
+- **Number of tickets** - Maximum number of tickets to display. Default: 10, maximum: 25.
+
+You can update ticket assignees directly from the widget without leaving the dashboard.
+
+Clicking a row opens the ticket detail page in a new tab. Clicking the tile title navigates to **Support**.
 
 ### Sharing a dashboard
 

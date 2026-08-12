@@ -38,4 +38,13 @@
             siteSettings.reduceTransparency ? 'true' : 'false'
         )
     } catch (err) {}
+
+    // Hide dismissed WizardHint variants before first paint
+    try {
+        ;['warehouse-wizard-hint-dismissed', 'ai-observability-wizard-hint-dismissed'].forEach(function (key) {
+            if (localStorage.getItem(key) === '1') {
+                document.documentElement.classList.add(key)
+            }
+        })
+    } catch (err) {}
 })()

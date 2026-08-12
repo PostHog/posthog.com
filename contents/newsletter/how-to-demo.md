@@ -4,7 +4,7 @@ date: 2026-05-28
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1780424772/how_to_demo_hero_b2c8462dee.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/how_to_demo_hero_b2c8462dee.png
 featuredImageType: full
 tags:
   - Product engineers

@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { IconFlag, IconLightBulb, IconRocket, IconSearch, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
@@ -218,7 +218,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/data-stack/integrations-library?type=destination"
+                            to="/context-warehouse/integrations-library?type=destination"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
@@ -241,7 +241,7 @@ export const OnePlaceSlide = () => {
                         )}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
-                        <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
+                        <Link to="/context-warehouse" state={{ newWindow: true }} className="text-sm font-semibold">
                             Data stack README
                         </Link>
                     </div>
@@ -402,8 +402,8 @@ const emptyStateActions = [
 
 const PostHogAIEmptyState = () => (
     <div className="@container flex min-h-[242px] w-full flex-col items-center overflow-hidden rounded bg-[#F3F4F0] px-2 pt-5 text-center dark:bg-[#131316] @sm:px-3">
-        <Logo wordmark={false} className="h-7 w-[52px] dark:hidden" />
-        <Logo wordmark={false} variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" />
+        <Logo layout="logomark" className="h-7 w-[52px] dark:hidden" width="auto" />
+        <Logo layout="logomark" variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" width="auto" />
 
         <h3 className="mb-0 mt-5 text-lg font-bold leading-tight @sm:text-xl">Hello, builder!</h3>
 

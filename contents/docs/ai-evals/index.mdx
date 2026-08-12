@@ -327,7 +327,7 @@ You can also filter generations by evaluation results or create [insights](/docs
 
 When you create an evaluation, PostHog automatically provisions a default report configuration. Reports summarize evaluation results over time, so you can track quality trends without any additional setup.
 
-Reports are available for **boolean evaluations** (LLM-as-a-judge and code-based) and **sentiment analysis evaluations** that target generations. Evaluations targeting traces don't support reports.
+Reports are available for all evaluation types – **LLM-as-a-judge**, **code-based**, and **sentiment analysis** – on any target.
 
 ### Default report configuration
 
@@ -396,7 +396,7 @@ Once the issue is resolved, open the evaluation and toggle it back on.
 
 Each evaluation run counts as one AI Observability event toward your quota.
 
-**LLM judge evaluations** use an LLM to score your generations. Add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to run evaluations.
+**LLM judge evaluations** use an LLM to score your generations and require a provider API key. Add your own key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to enable LLM-judge evaluations.
 
 If a provider API key is missing or deleted, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 

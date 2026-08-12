@@ -207,3 +207,12 @@ Both the shared metrics list and the selection modal include a search bar that f
   alt="Shared metrics"
   classes="rounded"
 />
+
+### Duplicating a shared metric as single-use
+
+When you duplicate a shared metric from the metric actions menu, a dialog presents two options:
+
+- **Duplicate as single-use metric** – Creates an inline copy of the metric that belongs only to the current experiment. You can then edit it freely without affecting the original shared metric or any other experiment that uses it.
+- **Duplicate as shared metric** – Opens the shared metric form so you can customize and save a new shared metric, available to all experiments.
+
+This is useful when you want to use a shared metric as a starting template and tweak it for a specific experiment without creating another shared metric. The copy includes `(copy)` in its name, and any breakdowns configured on the shared metric are automatically carried over to the new inline copy.

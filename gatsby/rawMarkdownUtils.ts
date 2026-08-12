@@ -10,6 +10,13 @@ import {
     preprocessHtmlForTabs,
 } from './turndownService'
 
+// Prepended to every generated .md file so LLM crawlers landing on a single page
+// still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
+const AGENT_SIGNPOST =
+    "> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt\n\n"
+
+const withAgentSignpost = (markdown: string): string => `${AGENT_SIGNPOST}${markdown}`
+
 export const generateRawMarkdownPages = async (
     docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
 ) => {
@@ -62,7 +69,7 @@ export const generateRawMarkdownPages = async (
                 fs.mkdirSync(dirPath, { recursive: true })
             }
 
-            fs.writeFileSync(outputPath, markdown, 'utf8')
+            fs.writeFileSync(outputPath, withAgentSignpost(markdown), 'utf8')
             console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
         } catch (error) {
@@ -172,7 +179,7 @@ ${jsonContent}
 `
 
                 // Write the file
-                fs.writeFileSync(filePath, markdownContent, 'utf8')
+                fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
                 console.log(`Generated: open-api-spec/${filename}`)
             }
         })
@@ -324,7 +331,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const markdownContent = markdownNodes.join('\n\n')
 
-    fs.writeFileSync(filePath, markdownContent, 'utf8')
+    fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
 }
 
 // Function to generate llms.txt file according to spec
@@ -350,8 +357,8 @@ const PLATFORM_ITEMS: PlatformItem[] = [
             'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
     },
     {
-        name: 'PostHog Code',
-        slug: 'code',
+        name: 'PostHog Desktop',
+        slug: 'desktop',
         layer: 'product',
         oneLiner:
             "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",
@@ -447,6 +454,24 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         layer: 'tool',
         oneLiner: 'The interface humans and agents use to understand the product.',
     },
+    {
+        name: 'Support',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+    },
+    {
+        name: 'Customer analytics',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/customer-analytics/start-here',
+        oneLiner: 'Accounts, usage metrics, and customer journeys — the account-level context behind every signal.',
+    },
+    {
+        name: 'Replay Vision',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+    },
 ]
 
 const CONTEXT_BLURB =
@@ -494,11 +519,12 @@ ${CONTEXT_WAREHOUSE_BLURB}
 
 ---
 
+Self-driving in depth — signals, Inbox, scouts, and the PR loop: https://posthog.com/docs/self-driving.md
 Pricing: every tool has a generous free tier, then usage-based pricing. Exact numbers: https://posthog.com/pricing.md
 All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
 `
 
-    fs.writeFileSync(path.join(publicPath, 'platform.md'), content, 'utf8')
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), withAgentSignpost(content), 'utf8')
     console.log('Generated: platform.md')
 }
 
@@ -532,8 +558,121 @@ For features, screenshots, and details, see ${pageLinkFor(item)}.
         const outputPath = path.join(publicPath, `${item.slug}.md`)
         const dirPath = path.dirname(outputPath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
-        fs.writeFileSync(outputPath, content, 'utf8')
+        fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
         console.log(`Generated: ${item.slug}.md`)
+    }
+}
+
+type ChangelogRoadmapNode = {
+    strapiID?: number | string
+    title: string
+    description?: string
+    date: string
+    cta?: { label?: string; url?: string }
+    teams?: { data?: Array<{ attributes?: { name?: string } }> }
+    topic?: { data?: { attributes?: { label?: string } } }
+}
+
+type ChangelogVideoNode = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+// How many months of entries the top-level changelog.md covers. Full history is
+// available in the per-year archives (public/changelog/{year}.md).
+const CHANGELOG_MD_MONTHS = 12
+
+// Generates /changelog.md (and per-year archives) directly from the build-time Roadmap
+// nodes, like generatePricingMd/generatePlatformMd. The /changelog page itself renders a
+// virtualized UI, so the HTML-scrape path used for docs pages can't produce useful
+// markdown for it — this is the canonical machine-readable changelog for LLMs/agents.
+export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: ChangelogVideoNode[] = []) => {
+    console.log('Generating changelog markdown files...')
+
+    const publicPath = path.resolve(__dirname, '../public')
+
+    const monthKey = (date: string) => date.slice(0, 7) // YYYY-MM
+    const monthTitle = (key: string) =>
+        new Date(`${key}-15T00:00:00Z`).toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+    const dayTitle = (date: string) =>
+        new Date(date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+
+    const cleanDescription = (md?: string) =>
+        (md || '')
+            .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+            .replace(/\]\(\//g, '](https://posthog.com/') // absolutize relative links
+            .trim()
+
+    const absoluteUrl = (url?: string) => (url && url.startsWith('/') ? `https://posthog.com${url}` : url)
+
+    const entryMarkdown = (roadmap: ChangelogRoadmapNode) => {
+        const team = roadmap.teams?.data?.[0]?.attributes?.name
+        const topic = roadmap.topic?.data?.attributes?.label
+        const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
+        const description = cleanDescription(roadmap.description)
+        const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+
+        return [`### ${roadmap.title}`, `_${meta}_`, description, cta].filter(Boolean).join('\n\n')
+    }
+
+    // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)
+    const months = new Map<string, { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }>()
+    const getMonth = (key: string) => {
+        if (!months.has(key)) months.set(key, { roadmaps: [], videos: [] })
+        return months.get(key) as { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }
+    }
+    roadmaps
+        .filter((roadmap) => roadmap?.title && roadmap?.date)
+        .forEach((roadmap) => getMonth(monthKey(roadmap.date)).roadmaps.push(roadmap))
+    videos
+        .filter((video) => video?.videoId && video?.publishedAt)
+        .forEach((video) => getMonth(monthKey(video.publishedAt)).videos.push(video))
+
+    const sortedMonthKeys = [...months.keys()].sort().reverse()
+    if (sortedMonthKeys.length === 0) {
+        console.warn('No changelog entries found; skipping changelog markdown generation')
+        return
+    }
+
+    const monthMarkdown = (key: string) => {
+        const { roadmaps: monthRoadmaps, videos: monthVideos } = getMonth(key)
+        const videoLines = monthVideos
+            .map((video) => `- 📺 [${video.title}](https://www.youtube.com/watch?v=${video.videoId})`)
+            .join('\n')
+        return [`## ${monthTitle(key)}`, videoLines, ...monthRoadmaps.map(entryMarkdown)].filter(Boolean).join('\n\n')
+    }
+
+    const years = [...new Set(sortedMonthKeys.map((key) => key.slice(0, 4)))].sort().reverse()
+    const yearArchiveLinks = years.map((year) => `[${year}](https://posthog.com/changelog/${year}.md)`).join(' · ')
+
+    const header = (scope: string) => `# PostHog changelog
+
+New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated on every deploy.
+
+- Canonical page: https://posthog.com/changelog
+- RSS feed: https://posthog.com/changelog.rss
+- Full history by year: ${yearArchiveLinks}
+
+`
+
+    // Top-level changelog.md: the most recent CHANGELOG_MD_MONTHS months
+    const recentMonthKeys = sortedMonthKeys.slice(0, CHANGELOG_MD_MONTHS)
+    const changelogMd =
+        header(`This file covers the last ${recentMonthKeys.length} months.`) +
+        recentMonthKeys.map(monthMarkdown).join('\n\n') +
+        '\n'
+    fs.writeFileSync(path.join(publicPath, 'changelog.md'), withAgentSignpost(changelogMd), 'utf8')
+    console.log('Generated: changelog.md')
+
+    // Per-year archives: public/changelog/{year}.md
+    const changelogDir = path.join(publicPath, 'changelog')
+    if (!fs.existsSync(changelogDir)) fs.mkdirSync(changelogDir, { recursive: true })
+    for (const year of years) {
+        const yearMonthKeys = sortedMonthKeys.filter((key) => key.startsWith(year))
+        const yearMd = header(`This file covers ${year}.`) + yearMonthKeys.map(monthMarkdown).join('\n\n') + '\n'
+        fs.writeFileSync(path.join(changelogDir, `${year}.md`), withAgentSignpost(yearMd), 'utf8')
+        console.log(`Generated: changelog/${year}.md`)
     }
 }
 
@@ -602,6 +741,7 @@ export const generateLlmsTxt = (pages) => {
         'docs-hog': 'Hog (Query Language)',
         'docs-model-context-protocol': 'Model Context Protocol (MCP)',
         'docs-ai-engineering': 'AI Engineering',
+        templates: 'Self-driving scout templates',
     }
 
     const formatSectionTitle = (section: string): string => {
@@ -682,6 +822,16 @@ ${PLATFORM_ITEMS.filter((i) => i.layer === 'tool')
 **Context** — ${CONTEXT_BLURB}
 
 **Context warehouse** — ${CONTEXT_WAREHOUSE_BLURB}
+
+`
+
+    // Changelog — high-value for agents deciding what PostHog can do today
+    llmsTxtContent += `## Changelog
+
+What's new in PostHog — new features, products, and tools, updated with every deploy. Check this before assuming a capability doesn't exist.
+
+- [Changelog (last 12 months, Markdown)](https://posthog.com/changelog.md)
+- [Changelog RSS feed](https://posthog.com/changelog.rss)
 
 `
 
@@ -975,6 +1125,6 @@ All prices are in USD, excluding taxes.
         fs.mkdirSync(publicPath, { recursive: true })
     }
 
-    fs.writeFileSync(pricingMdPath, content, 'utf8')
+    fs.writeFileSync(pricingMdPath, withAgentSignpost(content), 'utf8')
     console.log('Generated: pricing.md')
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import {
+    IconApps,
     IconBook,
+    IconBuilding,
     IconCompass,
     IconCopy,
     IconGraduationCap,
@@ -9,6 +11,7 @@ import {
     IconPeople,
     IconPlug,
     IconPuzzle,
+    IconShield,
 } from '@posthog/icons'
 import { capitalizeFirstLetter } from '../../utils'
 
@@ -21,6 +24,13 @@ type TypeConfig = {
 
 // Presentation and search aliases for categories already present in the Algolia index.
 const typeConfig: TypeConfig[] = [
+    {
+        type: 'tools',
+        label: 'Tools',
+        icon: <IconApps />,
+        aliases: ['tools', 'tool', 'products', 'product', 'platform'],
+    },
+    { type: 'pages', label: 'Pages', icon: <IconBook />, aliases: ['pages', 'website'] },
     { type: 'docs', label: 'Docs', icon: <IconBook />, aliases: ['docs', 'documentation', 'reference', 'manual'] },
     { type: 'apps', label: 'Apps', icon: <IconPuzzle />, aliases: ['apps'] },
     {
@@ -34,9 +44,21 @@ const typeConfig: TypeConfig[] = [
         type: 'handbook',
         label: 'Handbook',
         icon: <IconCompass />,
-        aliases: ['handbook', 'company', 'culture'],
+        aliases: ['handbook', 'culture'],
     },
     { type: 'customers', label: 'Customers', icon: <IconHeart />, aliases: ['customers'] },
+    {
+        type: 'company',
+        label: 'Company',
+        icon: <IconBuilding />,
+        aliases: ['company', 'about', 'careers', 'jobs'],
+    },
+    {
+        type: 'legal',
+        label: 'Legal',
+        icon: <IconShield />,
+        aliases: ['legal', 'privacy', 'terms', 'dpa', 'baa'],
+    },
     { type: 'templates', label: 'Templates', icon: <IconCopy />, aliases: ['templates'] },
     {
         type: 'community',

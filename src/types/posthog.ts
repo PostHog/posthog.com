@@ -8,6 +8,8 @@ export type PostHog = {
     captureException: (...args: any[]) => void
     createPersonProfile: (...args: any[]) => void
     getEarlyAccessFeatures: (...args: any[]) => void
+    getSurveys: (...args: any[]) => void
+    updateEarlyAccessFeatureEnrollment: (...args: any[]) => void
     getFeatureFlag: (...args: any[]) => any
     getFeatureFlagPayload: (...args: any[]) => any
     get_distinct_id: (...args: any[]) => string
@@ -19,5 +21,4 @@ export type PostHog = {
     register_once: (...args: any[]) => void
     setPersonProperties: (...args: any[]) => void
     set_config: (...args: any[]) => void
-    updateEarlyAccessFeatureEnrollment: (...args: any[]) => void
 }

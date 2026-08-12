@@ -46,6 +46,24 @@ Experiments require feature flags to meet specific requirements. You may see val
 
 - **"Feature flag must have a variant with key 'control'"**: One of your variants must have the key `control`. This is used as the baseline for comparison.
 
+## Why am I getting an error that my metric's event has not been ingested?
+
+When you save an experiment's primary or secondary metrics, PostHog checks that every event the metric references has been ingested by your project at least once. If it hasn't, saving fails with an error like:
+
+> Event(s) `purchase_completed` not found. No events with these names have been ingested by this project.
+
+This is a guardrail against typos and against metrics that point at events you haven't shipped yet, since those metrics would silently return no data for the whole experiment.
+
+You'll rarely see this in the UI, because the metric event picker only lets you choose events PostHog has already seen. It usually shows up when you create or update an experiment through the API, the [MCP server](/docs/model-context-protocol), or another programmatic client.
+
+To fix it:
+
+- **Check the event name for typos.** Confirm the exact name under [data management](https://app.posthog.com/data-management/events).
+- **Send the event first.** If the event is new, capture it once from your app so PostHog creates its definition, then add the metric.
+- **Bypass the check deliberately.** If you're setting up a metric ahead of the event shipping, pass `allow_unknown_events: true` when creating or updating the experiment. The metric saves, but shows no data until the event starts arriving.
+
+This check applies to metrics defined directly on an experiment. [Shared metrics](/docs/experiments/metrics#shared-metrics) are not validated this way, so a shared metric can reference an event that has never been ingested.
+
 ## How can I run experiments with my custom feature flag setup?
 
 See our docs on [how to run an experiment without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
@@ -146,6 +164,27 @@ You can check your current exposure count on the experiment results page. If you
 - Verify your feature flag implementation.
 - Consider increasing your feature flag's rollout percentage.
 - Ensure your exposure events are firing correctly.
+
+## Why can't I freeze my experiment's exposure?
+
+The [freeze exposure](/docs/experiments/managing-lifecycle#freezing-exposure) action has several requirements. The action is hidden or disabled when:
+
+- **The experiment isn't running** – Draft experiments haven't started collecting exposures, ended experiments are already complete, and paused experiments need to be resumed first.
+- **The experiment is group-aggregated** – It targets groups (like companies or organizations) instead of persons, and the person-based snapshot cohort can't freeze group-level enrollment.
+- **The experiment has a holdout or early access conditions** – Both are evaluated before release conditions, so new users would continue entering through those paths.
+- **Exposure is already frozen** – Unfreeze first if you need to rebuild the snapshot.
+
+A freeze can also be rejected after you confirm the dialog, once PostHog has scanned the exposure data:
+
+- **Too many exposed users** – The scan is bounded by a cap on the number of exposed users and a timeout, so very large experiments are rejected rather than frozen.
+- **Anonymous users** – If more than about 5% of exposed users have no person profile (anonymous or personless traffic), freezing is rejected because those users would silently lose their variant.
+- **No exposures yet** – There's no one to snapshot.
+
+These causes are structural, so retrying won't help. Freezing also takes longer the more exposed users your experiment has. A slow freeze isn't a failed one, so wait for the confirmation dialog to finish.
+
+## Does freezing affect local evaluation SDKs?
+
+Frozen experiments use static cohorts to restrict enrollment. Since static cohorts can't be evaluated locally by SDKs using [local evaluation](/docs/feature-flags/local-evaluation), the flag falls back to server-side evaluation via `/decide`. If your SDK is configured with `only_evaluate_locally`, it returns the flag's default value instead. This is standard behavior for any flag using static cohorts, not specific to freezing.
 
 ## Diagnosing sample ratio mismatch (SRM)
 
