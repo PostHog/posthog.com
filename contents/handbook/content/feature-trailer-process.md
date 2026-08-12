@@ -6,8 +6,6 @@ showTitle: true
 
 Feature trailers exist primarily as social-first videos to create excitement, interest, and awareness around new PostHog products and features. If you want one made, here's how the process works and what to expect.
 
-There's no formal request ticket or issue process for this – it all starts with a conversation in Slack. We also can't say yes to every video request, since the team's capacity is limited.
-
 ## Types of feature trailers
 
 There are two types of feature trailer, depending on how much time you have and what you're trying to achieve:
@@ -15,7 +13,7 @@ There are two types of feature trailer, depending on how much time you have and 
 1. **Teaser (under 30 seconds).** Pure vibes, not a story. It shows a single user experience and is designed to create buzz and excitement about a new feature.
 2. **Use case video (30–90 seconds).** Narrative-based, showing the full breadth of what a feature or product can do. It tells a story.
 
-The team can also make longer demo videos (90+ seconds), though these aren't feature trailers. They're a much bigger project that can take 4+ weeks, and work best on a product that's already stable and heavily used – where the UI is finalized and unlikely to change. That's why we tend to avoid them for launches and announcements, unless the product itself is already finalized and you have plenty of notice.
+> The team can also make longer demo videos (e.g. 3 to 5 minutes or more), though these aren't feature trailers. They're a much bigger project that can take 4+ weeks, and work best on a product that's already stable – i.e. UI is finalized and unlikely to change. That's why we tend to avoid them for launches and announcements.
 
 ## How to request a video
 
@@ -25,7 +23,7 @@ Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01
 
 ### 2. Talk through scope and timeline
 
-The team will advise on what else is in progress and whether your timeline is realistic. If it's a yes, you'll move on to a storyboard.
+The team will advise on what else is in progress and whether your timeline is realistic. If it's a yes, you'll move on to a storyboard. Ideal notice period is four weeks.
 
 ### 3. Create a storyboard
 
@@ -37,7 +35,7 @@ Use [this storyboard template](https://docs.google.com/document/d/1ONoytWmzDFMTN
 
 ### 4. Review the storyboard together
 
-You'll meet with Geordi, Andy, and the video team to talk through the storyboard and make any changes. Once everyone's happy with it, Geordi will turn it into a scratch edit – a rough moving version of the storyboard with a draft voiceover or script. It'll have plenty of missing pieces, but it gives you something to react to.
+You'll meet with Jordo and Andy to talk through the storyboard and make any changes. Once everyone's happy with it, Jordo will turn it into a scratch edit – a rough moving version of the storyboard with a draft voiceover and script. It'll have plenty of missing pieces, but it gives you something to react to.
 
 ### 5. Iterate on the script and visuals
 
