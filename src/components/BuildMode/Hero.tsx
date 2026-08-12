@@ -64,20 +64,21 @@ function SubscribeForm({ className = '', placement }: { className?: string; plac
 }
 
 /**
- * Wordmark left, subscribe right — rendered at the top of the page and again
- * as the footer. `placement` tags the subscribe event so the two convert separately.
+ * Wordmark, plus an optional subscribe form. Used as the page header (wordmark
+ * only) and again as the footer (wordmark + subscribe). `placement` tags the
+ * subscribe event so header and footer convert separately.
  */
-export function HeroHeader({ placement }: { placement: string }): JSX.Element {
+export function HeroHeader({ placement }: { placement?: string }): JSX.Element {
     return (
         <div className="flex flex-col items-start gap-4 py-4 @2xl:flex-row @2xl:items-center @2xl:justify-between @2xl:gap-8">
             <img src={LOGO_SRC} alt="build mode" className="h-auto w-32 shrink-0 grow-0" />
-            <SubscribeForm placement={placement} />
+            {placement ? <SubscribeForm placement={placement} /> : null}
         </div>
     )
 }
 
-/** The statement hero: the tagline as display type, the pitch as its deck. */
-export default function Hero({ className = '' }: { className?: string }): JSX.Element {
+/** The statement hero: the tagline as display type, the pitch as its deck, then subscribe. */
+export default function Hero({ className = '', placement }: { className?: string; placement: string }): JSX.Element {
     return (
         <div className={`flex flex-col items-start gap-5 ${className}`}>
             <h2 className="m-0 max-w-3xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
@@ -88,6 +89,7 @@ export default function Hero({ className = '' }: { className?: string }): JSX.El
                 Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the
                 strategies of top startups.
             </p>
+            <SubscribeForm placement={placement} />
         </div>
     )
 }

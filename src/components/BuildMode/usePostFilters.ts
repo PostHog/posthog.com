@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { BuildModePost } from './types'
 
+export type PostSort = 'newest' | 'popular'
+
 /** Fields a post is searched across. */
 const searchableText = (post: BuildModePost): string =>
     [
@@ -20,6 +22,8 @@ export function usePostFilters(posts: BuildModePost[]): {
     setQuery: (query: string) => void
     activeTag: string | null
     setActiveTag: (tag: string | null) => void
+    sort: PostSort
+    setSort: (sort: PostSort) => void
     /** Every tag in use, most common first. */
     tags: string[]
     filteredPosts: BuildModePost[]
@@ -28,6 +32,7 @@ export function usePostFilters(posts: BuildModePost[]): {
 } {
     const [query, setQuery] = useState('')
     const [activeTag, setActiveTag] = useState<string | null>(null)
+    const [sort, setSort] = useState<PostSort>('newest')
 
     const tags = useMemo(() => {
         const counts: Record<string, number> = {}
@@ -39,18 +44,24 @@ export function usePostFilters(posts: BuildModePost[]): {
 
     const filteredPosts = useMemo(() => {
         const q = query.trim().toLowerCase()
-        return posts.filter((post) => {
+        const filtered = posts.filter((post) => {
             if (activeTag && !post.frontmatter.tags?.includes(activeTag)) return false
             if (!q) return true
             return searchableText(post).includes(q)
         })
-    }, [posts, query, activeTag])
+        if (sort !== 'popular') return filtered
+        // Builds without POSTHOG_APP_API_KEY see all zeros, and the stable sort
+        // preserves the query's date order — a recency fallback for free.
+        return [...filtered].sort((a, b) => (b.fields.pageViews ?? 0) - (a.fields.pageViews ?? 0))
+    }, [posts, query, activeTag, sort])
 
     return {
         query,
         setQuery,
         activeTag,
         setActiveTag,
+        sort,
+        setSort,
         tags,
         filteredPosts,
         isFiltered: filteredPosts.length !== posts.length,

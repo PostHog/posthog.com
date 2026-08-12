@@ -1,23 +1,143 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IconSearch } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { OSInput } from 'components/OSForm'
+import { Select } from 'components/RadixUI/Select'
 import GalleryCard from './GalleryCard'
 import TagFilter from './TagFilter'
 import { BuildModePost } from './types'
-import { usePostFilters } from './usePostFilters'
+import { PostSort, usePostFilters } from './usePostFilters'
 
 /** 4 rows of the 3-column grid. */
 const POSTS_PER_PAGE = 12
 
-/** Searchable, tag-filterable, paginated grid of every post. */
+function SortSelect({ sort, setSort }: { sort: PostSort; setSort: (sort: PostSort) => void }): JSX.Element {
+    return (
+        <Select
+            ariaLabel="Sort by"
+            prefix="Sort"
+            value={sort}
+            onValueChange={(value) => setSort(value as PostSort)}
+            groups={[
+                {
+                    label: 'Sort',
+                    items: [
+                        { value: 'newest', label: 'Recent' },
+                        { value: 'popular', label: 'Popular' },
+                    ],
+                },
+            ]}
+        />
+    )
+}
+
+function SearchField({
+    query,
+    setQuery,
+    onBlur,
+    onKeyDown,
+    placeholder = 'Search posts',
+    tabIndex,
+}: {
+    query: string
+    setQuery: (query: string) => void
+    onBlur?: () => void
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    placeholder?: string
+    tabIndex?: number
+}): JSX.Element {
+    return (
+        <div className="relative h-8">
+            <IconSearch className="pointer-events-none absolute left-2 top-1/2 z-10 size-4 -translate-y-1/2 text-secondary" />
+            <OSInput
+                label="Search posts"
+                showLabel={false}
+                type="search"
+                name="build-mode-search"
+                placeholder={placeholder}
+                value={query}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+                onClear={() => setQuery('')}
+                showClearButton
+                size="sm"
+                width="full"
+                tabIndex={tabIndex}
+                onBlur={onBlur}
+                onKeyDown={onKeyDown}
+                className="!box-border !h-8 !py-0 pl-7"
+                containerClassName="h-8"
+            />
+        </div>
+    )
+}
+
+function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query: string) => void }): JSX.Element {
+    const [open, setOpen] = useState(false)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const expanded = open || query.length > 0
+
+    useEffect(() => {
+        if (expanded) containerRef.current?.querySelector('input')?.focus()
+    }, [expanded])
+
+    return (
+        <div
+            ref={containerRef}
+            className={`relative flex h-8 items-center transition-[width] duration-200 ease-out ${
+                expanded ? 'w-56 @2xl:w-72' : 'w-8'
+            }`}
+        >
+            <div
+                className={`flex size-8 shrink-0 items-center justify-center transition-opacity duration-150 ${
+                    expanded ? 'pointer-events-none absolute opacity-0' : 'opacity-100'
+                }`}
+            >
+                <OSButton
+                    size="md"
+                    icon={<IconSearch />}
+                    zoomHover={false}
+                    aria-label="Search posts"
+                    tooltip="Search posts"
+                    onClick={() => setOpen(true)}
+                    className="!size-8 !p-0"
+                />
+            </div>
+            <div
+                className={`h-8 w-full min-w-0 transition-opacity duration-150 ${
+                    expanded ? 'opacity-100 delay-75' : 'pointer-events-none absolute opacity-0'
+                }`}
+            >
+                <SearchField
+                    query={query}
+                    setQuery={setQuery}
+                    placeholder={expanded ? 'Search posts' : ''}
+                    tabIndex={expanded ? undefined : -1}
+                    onBlur={() => {
+                        if (!query) setOpen(false)
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                            setQuery('')
+                            setOpen(false)
+                            e.currentTarget.blur()
+                        }
+                    }}
+                />
+            </div>
+        </div>
+    )
+}
+
+/** Searchable, tag-filterable, paginated grid of posts. */
 export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX.Element {
-    const { query, setQuery, activeTag, setActiveTag, tags, filteredPosts, isFiltered, clear } = usePostFilters(posts)
+    const { query, setQuery, activeTag, setActiveTag, sort, setSort, tags, filteredPosts, isFiltered, clear } =
+        usePostFilters(posts)
     const [page, setPage] = useState(1)
 
-    // Changing the search or tag re-filters the list — jump back to the first page
+    // Changing the search, tag, or sort re-filters the list — jump back to the first page
     useEffect(() => {
         setPage(1)
-    }, [query, activeTag])
+    }, [query, activeTag, sort])
 
     const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE))
     const currentPage = Math.min(page, totalPages)
@@ -33,15 +153,9 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
                         {isFiltered ? ` of ${posts.length}` : ''})
                     </span>
                 </h2>
-                <div className="relative @2xl:w-72">
-                    <IconSearch className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
-                    <input
-                        type="search"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search posts"
-                        className="w-full rounded border border-input bg-primary py-1.5 pl-8 pr-3 text-sm text-primary placeholder:text-muted focus:border-primary focus:outline-none"
-                    />
+                <div className="flex items-center justify-end gap-2">
+                    <SortSelect sort={sort} setSort={setSort} />
+                    <ExpandingSearch query={query} setQuery={setQuery} />
                 </div>
             </div>
             <TagFilter tags={tags} activeTag={activeTag} onChange={setActiveTag} />

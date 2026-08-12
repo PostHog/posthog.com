@@ -5,7 +5,7 @@ import Tape from './Tape'
 import { BuildModePost } from './types'
 import { getByline, getSubtitle } from './utils'
 
-/** The newest post, taped up at the top of the page: image left, title and dek right. */
+/** The newest post, taped up: image left, title, dek, and byline right. */
 export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Element {
     return (
         <div className="min-w-0">
@@ -33,23 +33,23 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
             <Link
                 to={post.fields.slug}
                 state={{ newWindow: true }}
-                className="group flex flex-col gap-5 no-underline text-primary @2xl:flex-row @2xl:items-center @2xl:gap-8"
+                className="group flex flex-col gap-5 no-underline text-primary @2xl:flex-row @2xl:items-start @2xl:gap-8"
             >
                 {/* Image keeps its own aspect ratio — no fixed frame, no cropping */}
-                <div className="relative shrink-0 @2xl:w-[44%]">
+                <div className="relative shrink-0 @2xl:w-[46%]">
                     <Tape className="absolute -left-5 -top-3 z-10 w-16 -rotate-[28deg] @2xl:w-20" />
                     <Tape className="absolute -right-5 -top-3 z-10 w-16 rotate-[24deg] @2xl:w-20" />
                     <div className="overflow-hidden rounded-sm border border-primary bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)]">
                         <PostImage post={post} className="w-full" imgClassName="block h-auto w-full" width={1000} />
                     </div>
                 </div>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 max-w-xl flex-1">
                     {/* Underline is always on but transparent — text-decoration-color transitions where a bare `underline` toggle can't */}
-                    <h1 className="m-0 text-2xl font-bold leading-tight underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl @4xl:text-4xl">
+                    <h1 className="m-0 text-2xl font-bold leading-tight underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl">
                         {post.frontmatter.title}
                     </h1>
-                    <p className="m-0 mt-3 text-lg text-secondary @2xl:text-xl">{getSubtitle(post)}</p>
-                    <p className="m-0 mt-4 text-sm font-medium uppercase text-muted">
+                    <p className="m-0 mt-3 text-lg text-secondary">{getSubtitle(post)}</p>
+                    <p className="m-0 mt-4 text-sm font-medium uppercase tracking-wide text-muted">
                         {getByline(post, post.frontmatter.shortDate)}
                     </p>
                 </div>

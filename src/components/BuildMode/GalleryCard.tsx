@@ -16,7 +16,7 @@ export default function GalleryCard({ post }: { post: BuildModePost }): JSX.Elem
                 <PostImage
                     post={post}
                     className="!absolute inset-0 h-full w-full"
-                    imgClassName="h-full w-full object-cover"
+                    imgClassName="h-full w-full object-contain"
                 />
             </div>
             <div className="flex flex-1 flex-col p-4">

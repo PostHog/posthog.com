@@ -5,21 +5,11 @@ import ReaderView from 'components/ReaderView'
 import FeaturedPost from 'components/BuildMode/FeaturedPost'
 import Hero, { HeroHeader } from 'components/BuildMode/Hero'
 import PostsGallery from 'components/BuildMode/PostsGallery'
-import RecentPosts from 'components/BuildMode/RecentPosts'
 import { BuildModePost } from 'components/BuildMode/types'
-
-/** How many posts hang on the pinboard below the featured one. */
-const PINNED_COUNT = 8
 
 export default function BuildModePage({ data }: { data: { posts: { nodes: BuildModePost[] } } }): JSX.Element {
     const posts = data.posts.nodes.filter((post) => post.frontmatter?.title)
-    const [featured, ...rest] = posts
-    // Most-viewed posts (fields.pageViews — sourced from PostHog at build time).
-    // Builds without POSTHOG_APP_API_KEY see all zeros, and the stable sort
-    // preserves the query's date order — a recency fallback for free.
-    const pinned = [...rest]
-        .sort((a, b) => (b.fields.pageViews ?? 0) - (a.fields.pageViews ?? 0))
-        .slice(0, PINNED_COUNT)
+    const featured = posts[0]
 
     return (
         <>
@@ -30,18 +20,17 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
             <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
                 <div className="@container not-prose text-pretty text-primary">
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-20 @xl:px-8">
-                        <HeroHeader placement="build-mode-header" />
-                        <Hero className="mt-16" />
+                        <HeroHeader />
+                        <Hero className="mt-4" placement="build-mode-header" />
                         {featured && (
-                            <header className="mt-24">
+                            <header className="mt-16">
                                 <FeaturedPost post={featured} />
                             </header>
                         )}
-                        <hr className="my-8 h-px border-none bg-red/40" />
-                        <RecentPosts posts={pinned} />
-                        <hr className="my-8 h-px border-none bg-red/40" />
-                        <PostsGallery posts={posts} />
-                        <hr className="my-8 h-px border-none bg-red/40" />
+                        <div className="mt-16">
+                            <PostsGallery posts={posts} />
+                        </div>
+                        <hr className="my-16 h-px border-none bg-red/40" />
                         <HeroHeader placement="build-mode-footer" />
                     </div>
                 </div>

@@ -11,7 +11,7 @@ export type BuildModePost = {
     excerpt?: string
     frontmatter: {
         title: string
-        /** `MMM D` – used where space is tight (featured, pinned cards). */
+        /** `MMM D` – used where space is tight (featured). */
         shortDate: string
         /** `MMM D, YYYY` – used in the gallery. */
         fullDate: string
