@@ -2,7 +2,7 @@ name: Deploy preview to Cloudflare Pages
 
 on:
     pull_request:
-        types: [opened, synchronize, reopened, labeled]
+        types: [opened, synchronize, reopened]
 
 concurrency:
     group: deploy-preview-${{ github.event.pull_request.number }}
