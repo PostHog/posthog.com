@@ -6233,6 +6233,10 @@ export const docsMenu = {
                             url: '/docs/data-warehouse/join',
                         },
                         {
+                            name: 'Sync to person properties',
+                            url: '/docs/data-warehouse/warehouse-properties',
+                        },
+                        {
                             name: 'Visualize with insights',
                             url: '/docs/data-warehouse/insights',
                         },
