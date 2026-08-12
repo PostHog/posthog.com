@@ -4,17 +4,18 @@ sidebar: Handbook
 showTitle: true
 ---
 
-If you want a video made to promote a new feature or product, here's how the process works and what to expect.
+Feature trailers exist primarily as social-first videos to create excitement, interest, and awareness around new PostHog products and features. If you want one made, here's how the process works and what to expect.
 
 There's no formal request ticket or issue process for this – it all starts with a conversation in Slack. We also can't say yes to every video request, since the team's capacity is limited.
 
 ## Types of feature trailers
 
-There are three types of video the team can make, depending on how much time you have and what you're trying to achieve:
+There are two types of feature trailer, depending on how much time you have and what you're trying to achieve:
 
 1. **Teaser (under 30 seconds).** Pure vibes, not a story. It shows a single user experience and is designed to create buzz and excitement about a new feature.
 2. **Use case video (30–90 seconds).** Narrative-based, showing the full breadth of what a feature or product can do. It tells a story.
-3. **Demo video (90+ seconds).** A much bigger project that can take 4+ weeks. We wouldn't recommend this for a launch – it's better suited to a product that's already shipped and being used heavily.
+
+The team can also make longer demo videos (90+ seconds), though these aren't feature trailers. They're a much bigger project that can take 4+ weeks, and work best on a product that's already stable and heavily used – where the UI is finalized and unlikely to change. That's why we tend to avoid them for launches and announcements, unless the product itself is already finalized and you have plenty of notice.
 
 ## How to request a video
 
