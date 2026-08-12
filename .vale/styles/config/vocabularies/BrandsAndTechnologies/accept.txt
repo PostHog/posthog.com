@@ -474,3 +474,7 @@ MCPcat
 [Rr]esync(s|ed|ing)?
 [Ss]hard(s|ed|ing)?
 Altinity
+[Bb]ackreference(s)?
+[Ll]ookahead(s)?
+[Ll]ookaround(s)?
+[Ll]ookbehind(s)?
