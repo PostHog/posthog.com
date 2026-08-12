@@ -302,8 +302,8 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Every generation is a regular PostHog event, so your LLM data works with trends, funnels, SQL, and
-                    dashboards – no export step.
+                    Every generation has an associated PostHog event, so your LLM data works with trends, funnels, SQL,
+                    and dashboards – no export step.
                 </p>
                 <div className="@container">
                     <LabeledList
