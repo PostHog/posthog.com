@@ -754,5 +754,12 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/avdhoot-fulsundar/",
         "profile_id": 47036
+    },
+    {
+        "handle": "jake-sciotto",
+        "name": "Jake Sciotto",
+        "role": "Customer Success Manager",
+        "link_type": "twitter",
+        "link_url": "https://twitter.com/callmeshitto"
     }
 ]
