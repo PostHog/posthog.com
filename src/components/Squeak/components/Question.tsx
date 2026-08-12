@@ -1,4 +1,3 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState, createContext, useEffect, useContext, useRef } from 'react'
 import { Replies } from './Replies'
 import { Profile } from './Profile'
@@ -12,6 +11,7 @@ import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 import {
     IconArchive,
     IconPencil,
@@ -25,10 +25,7 @@ import {
 import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
-import { Check2, Close } from 'components/Icons'
-import Modal from 'components/Modal'
-import Checkbox from 'components/Checkbox'
-import { CallToAction } from 'components/CallToAction'
+import { Check2 } from 'components/Icons'
 import { navigate } from 'gatsby'
 import { Logo } from '@posthog/brand/logo'
 import Avatar from './Avatar'
@@ -37,7 +34,6 @@ import EditWrapper from './EditWrapper'
 import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import ZendeskTicket from 'components/ZendeskTicket'
 import { TopicSelector } from './TopicSelector'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
@@ -59,6 +55,20 @@ type QuestionProps = {
 }
 
 export const CurrentQuestionContext = createContext<any>({})
+
+const createSupportTicket = async (
+    posthog: NonNullable<ReturnType<typeof usePostHog>>,
+    message: string,
+    traits: { name: string | null; email: string | null }
+) => {
+    if (!posthog.conversations?.isAvailable?.()) {
+        throw new Error('Conversations are not available')
+    }
+    // newTicket=true so each escalate creates a fresh support ticket
+    const ticket = await posthog.conversations.sendMessage(message, traits, true)
+    if (!ticket) throw new Error('Failed to create support ticket')
+    return ticket
+}
 
 const TopicSelect = (props: {
     selectedTopics: StrapiData<TopicData[]>
@@ -163,71 +173,6 @@ const TopicSelect = (props: {
                 )}
             </Listbox>
         </div>
-    )
-}
-
-const EscalateButton = ({ escalate, escalated }) => {
-    const [modalOpen, setModalOpen] = useState(false)
-    const [showResponse, setShowResponse] = useState(false)
-    const [response, setResponse] = useState(
-        "Howdy! We've escalated your question to our support desk. An engineer will be in touch soon."
-    )
-
-    const handleConfirm = () => {
-        escalate(showResponse && response)
-        setModalOpen(false)
-    }
-
-    return (
-        <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="border-input border absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent max-w-lg w-full rounded-md">
-                    <button onClick={() => setModalOpen(false)} className="absolute top-3 right-3">
-                        <Close className="w-4 h-4" />
-                    </button>
-
-                    <div className="p-4 pb-0">
-                        <h3 className="mb-2 mt-0">Escalate thread</h3>
-                        <p className="text-base mt-2 mb-4">
-                            Please confirm that you'd like to escalate this thread to Zendesk
-                        </p>
-                        <Checkbox
-                            className="!text-base"
-                            value="Notify subscribers"
-                            checked={showResponse}
-                            onChange={(e) => setShowResponse(e.target.checked)}
-                        />
-                        {showResponse && (
-                            <>
-                                <p className="text-sm p-2 mt-4 mb-3 border border-primary dark:border-primary text-center rounded-md bg-light dark:bg-dark font-semibold">
-                                    Response will come from Max, the support hog
-                                </p>
-                                <div className="flex space-x-2 items-start mb-6">
-                                    <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Squeak/images/max.png"
-                                        width={40}
-                                        height={40}
-                                        className="rounded-full flex-shrink-0 bg-light dark:bg-dark border border-input"
-                                    />
-                                    <textarea
-                                        rows={5}
-                                        placeholder="Message from Max"
-                                        className="w-full p-2 rounded-md border border-input text-black bg-white"
-                                        value={response}
-                                        onChange={(e) => setResponse(e.target.value)}
-                                    />
-                                </div>
-                            </>
-                        )}
-                    </div>
-                    <div className="p-4 mt-4 border-t border-input flex justify-end">
-                        <CallToAction onClick={handleConfirm} size="sm" type="outline">
-                            {showResponse ? 'Escalate and notify' : 'Escalate'}
-                        </CallToAction>
-                    </div>
-                </div>
-            </Modal>
-        </>
     )
 }
 
@@ -447,9 +392,35 @@ export function Question(props: QuestionProps) {
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
     const { appWindow } = useWindow()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
+    const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+    const [conversationsAvailable, setConversationsAvailable] = useState(false)
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
+
+    // posthog-js and its conversations widget load asynchronously, so a single
+    // isAvailable() check at render time can miss it — poll briefly instead
+    useEffect(() => {
+        if (!isModerator || !isInForum) return
+        const isAvailable = () => !!window?.posthog?.conversations?.isAvailable?.()
+        if (isAvailable()) {
+            setConversationsAvailable(true)
+            return
+        }
+        let attempts = 0
+        const interval = setInterval(() => {
+            attempts++
+            if (isAvailable()) {
+                setConversationsAvailable(true)
+                clearInterval(interval)
+            } else if (attempts >= 20) {
+                clearInterval(interval)
+            }
+        }, 500)
+        return () => clearInterval(interval)
+    }, [isModerator, isInForum])
 
     useEffect(() => {
         if (
@@ -478,7 +449,6 @@ export function Question(props: QuestionProps) {
         voteReply,
         archive,
         pinTopics,
-        escalate,
         mutate,
         removeTopic,
     } = useQuestion(id, { data: question })
@@ -507,9 +477,74 @@ export function Question(props: QuestionProps) {
         }
     }
 
+    const handleEscalateToSupport = async () => {
+        if (escalateState === 'sending' || escalateState === 'sent') return
+        setEscalateState('sending')
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
+        const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
+        const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
+        const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
+        const message = [
+            'Community question escalated by a moderator',
+            `Title: ${questionData.attributes.subject}`,
+            `Link: https://posthog.com/questions/${questionData.attributes.permalink}`,
+            `Author: ${authorName}${authorEmail ? ` (${authorEmail})` : ''}`,
+            topics ? `Topics: ${topics}` : null,
+            `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
+            // Widget tickets only deliver replies to the widget session that created them,
+            // which is a throwaway here — make sure support contacts the author directly
+            `Note: replies in this thread won't reach the author. Reply on the community question above (they'll be notified there)${
+                authorEmail ? `, or email them directly at ${authorEmail}` : ''
+            }.`,
+        ]
+            .filter(Boolean)
+            .join('\n')
+        try {
+            if (!posthog) throw new Error('PostHog is not loaded')
+            // Attribute the ticket to the question author so support replies reach them
+            const ticket = await createSupportTicket(posthog, message, {
+                name: authorName,
+                email: authorEmail || null,
+            })
+            setEscalateState('sent')
+            addToast({
+                title: 'Escalated to support',
+                // Default 3s is too short to read and click the ticket link
+                duration: 10000,
+                description: (
+                    <>
+                        A support ticket was created for this question.{' '}
+                        {ticket?.ticket_id && (
+                            <Link
+                                // Tickets live in the posthog.com project (id 2) on US Cloud
+                                to={`${
+                                    process.env.GATSBY_POSTHOG_UI_HOST || 'https://us.posthog.com'
+                                }/project/2/support/tickets/${ticket.ticket_id}`}
+                                external
+                                className="font-semibold underline"
+                            >
+                                View the ticket
+                            </Link>
+                        )}
+                    </>
+                ),
+            })
+        } catch (error) {
+            setEscalateState('error')
+            addToast({
+                title: 'Escalation failed',
+                description: "The support ticket couldn't be created. Please try again.",
+                error: true,
+            })
+            posthog?.captureException?.(error)
+        }
+    }
+
     const archived = questionData?.attributes.archived
     const slugs = questionData?.attributes?.slugs
-    const escalated = questionData?.attributes.escalated
     const isQuestionAuthor = questionData?.attributes.profile?.data?.id === user?.profile?.id
     const publishedAt = questionData?.attributes?.publishedAt
 
@@ -568,7 +603,6 @@ export function Question(props: QuestionProps) {
                                             selectedTopics={questionData.attributes.pinnedTopics}
                                         />
                                     )}
-                                    <EscalateButton escalate={escalate} escalated={escalated} />
                                     {!archived ? (
                                         <OSButton
                                             onClick={() => archive(!archived)}
@@ -732,16 +766,30 @@ export function Question(props: QuestionProps) {
                                             >
                                                 View in Strapi
                                             </Link>
+                                            {conversationsAvailable && (
+                                                <OSButton
+                                                    variant="secondary"
+                                                    size="sm"
+                                                    onClick={handleEscalateToSupport}
+                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
+                                                >
+                                                    {escalateState === 'sending'
+                                                        ? 'Escalating…'
+                                                        : escalateState === 'sent'
+                                                        ? 'Escalated ✓'
+                                                        : 'Escalate to support'}
+                                                </OSButton>
+                                            )}
+                                            {escalateState === 'error' && (
+                                                <span className="text-red text-xs font-semibold">
+                                                    Couldn't create ticket. Try again?
+                                                </span>
+                                            )}
                                         </p>
                                     </div>
                                 </div>
-                                <div
-                                    className={`grid gap-x-4 mt-4 border-t divide-x divide-border border-border ${
-                                        questionData.attributes.zendeskTicketID ? 'grid-cols-2' : ''
-                                    }`}
-                                >
-                                    <ZendeskTicket question={questionData} questionID={questionData.id} />
-                                    <div className={`pt-4 ${questionData.attributes.zendeskTicketID ? 'pl-4' : ''}`}>
+                                <div className="mt-4 border-t border-border">
+                                    <div className="pt-4">
                                         <div className="flex items-center justify-between mb-2">
                                             <h4 className="text-xs text-primary opacity-70 p-0 m-0 font-semibold uppercase">
                                                 Forum topics
