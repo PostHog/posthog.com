@@ -758,8 +758,6 @@
     {
         "handle": "jake-sciotto",
         "name": "Jake Sciotto",
-        "role": "Customer Success Manager",
-        "link_type": "twitter",
-        "link_url": "https://twitter.com/callmeshitto"
+        "role": "Customer Success Manager"
     }
 ]

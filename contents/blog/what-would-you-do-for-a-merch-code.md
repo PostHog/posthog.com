@@ -27,17 +27,17 @@ A note for the reader: I am handsome and charming. While that gets me nine-tenth
 
 ![A tweet from @callmeshitto reading: u can load the dishwasher any way u want really. the dishes will get clean. water goes everywhere in there](TODO_CLOUDINARY_DISHWASHER_TWEET_URL)
 
-In the past few months, I have dusted off the sword and added a secondary weapon: the merch code. Fact: people love free stuff. Fact: people love PostHog. Absolute ground truth: people absolutely love free stuff from PostHog. So what does that look like in practice?
+In the past few months, I have dusted off the sword and added a secondary weapon: the merch code. Fact: people love free stuff. Fact: people love PostHog. Ground truth: people absolutely love free stuff from PostHog. So what does that look like in practice?
 
 Messages that have driven results (meaningful quick calls or interactions that drove continued engagement):
 
-> hi there [customer employee name]. trade proposal - 30 minutes of your time some posthog merch. hit me with a 🟩 or ⛔
+> hi there [customer employee name]. trade proposal - 30 minutes of your time for some posthog merch. hit me with a 🟩 or ⛔
 
 > hi [customer employee name] remember me? i have returned with a dashboard for you. re: mobile app, sorry i am late. take it for a spin and let me know what you think. also i impersonated you to create this dashboard, if you hate it it looks like you created it and if you love it then it was me.
 
 > completely (well semi-related) unrelated ping here but wanted to let you know [customer employee name] that you are in the top 10 of _literally all posthog users_ when it comes to using the posthog mcp. i'd love to get a little time with you to ask about how you're using the mcp. in exchange for your time, i'd love to give you a code for some merch.
 
-> hey folks happy friday! I know it's been quiet but wanted to check in and see if there was anything that you were working on that you needed help with or any feedback you might have for the platform. One of the things that I've been enjoying is seeing how many users are using the platform and what their number of sessions looks like hand out a gold medal 🥇 to [customer employee name] as top user. i sent you a code for a t-shirt via [posthog.com/merch](/merch)
+> hey folks happy friday! I know it's been quiet but wanted to check in and see if there was anything that you were working on that you needed help with or any feedback you might have for the platform. One of the things that I've been enjoying is seeing how many users are using the platform and what their number of sessions looks like. handing out a gold medal 🥇 to [customer employee name] as top user. i sent you a code for a t-shirt via [posthog.com/merch](/merch)
 
 My take is that these types of outreach messages had a high success rate because they deviate so severely from the traditional corporate speak bullshit that drives people nuts. I am on calls wearing a TUMMY ACHE SURVIVOR graphic tee with raccoons on it making it rain merch codes for valuable feedback, you are sending twice-polished emails proposing our execs talk to each other. We are not the same.
 
