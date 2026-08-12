@@ -13,6 +13,7 @@ We run two special programs for early-stage teams. The primary place for discuss
 | Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
+| Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
 | Community                   | —                                                     | Tim's Whatsapp, priority support                      |
 | Apply via…                  | [Startup page](/startups)                             | [Secret YC page](https://app.posthog.com/startups/yc) |
@@ -27,6 +28,8 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 -   A monthly newsletter for founders
 
 > ❗Credits **cannot** be used toward a BAA under the Boost plan.
+
+> ❗From September 14, 2026, credits **cannot** be used toward AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Teams that joined before that date can still pay for usage incurred before the cut-off with credits.
 
 > ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
 
@@ -98,10 +101,11 @@ We send a short, founder-focused newsletter once per month to all program partic
 
 ## Credit usage
 
-Credits can be used for almost all PostHog tools and add-ons, including [platform packages](/platform-packages).
+Credits can be used for most PostHog tools and add-ons, including [platform packages](/platform-packages).
 
 -   **Startups**: ❌ Cannot use credits toward a BAA due to legal risk.
 -   **YC teams**: ✅ Can use credits for a BAA under the Boost plan.
+-   **AI tools**: ❌ From September 14, 2026, credits cannot be used toward AI tools such as PostHog Desktop, Replay Vision, PostHog AI, and Inbox, due to the prohibitive and unpredictable nature of token-based pricing. Usage incurred before the cut-off can still be paid with credits.
 
 Credits are valid are not transferable, and don’t carry over or convert to cash. They are valid for 12 months and that timer begins at application. Once expired or fully used, teams are moved to standard billing.
 

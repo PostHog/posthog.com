@@ -1105,7 +1105,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             acc[referenceId] = {}
         }
 
-        acc[referenceId][version] = types.types.map(({ name }) => name)
+        // Drop falsy or literal "null" names so TypeLink never emits a /types/null link
+        // to a page that is never created.
+        acc[referenceId][version] = types.types
+            .map(({ name }) => name)
+            .filter((name) => name && name !== 'null')
 
         return acc
     }, {} as Record<string, Record<string, any>>)
@@ -1145,7 +1149,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     result.data.allSdkTypes.nodes.forEach((node) => {
         node.types?.forEach((type) => {
-            if (type.id && (type.properties || type.example)) {
+            if (type.id && type.id !== 'null' && (type.properties || type.example)) {
                 if (node.version.includes('latest')) {
                     createPage({
                         path: `/docs/references/${node.referenceId}/types/${type.id}`,
