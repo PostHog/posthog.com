@@ -81,7 +81,7 @@ export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps)
     const activeIsHidden = activeTag !== null && overflowTags.includes(activeTag)
 
     return (
-        <div className="my-4 flex items-start gap-1">
+        <div className="my-3 flex items-start gap-1 @2xl:my-4">
             <div ref={rowRef} className="flex max-h-8 min-w-0 flex-1 flex-wrap gap-1 overflow-hidden">
                 <TagPill label="All" active={!activeTag} onClick={() => onChange(null)} />
                 {tags.map((tag) => (

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { IconSearch } from '@posthog/icons'
+import { IconSearch, IconSort } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 import { OSInput } from 'components/OSForm'
+import MenuBar from 'components/RadixUI/MenuBar'
 import { Select } from 'components/RadixUI/Select'
 import GalleryCard from './GalleryCard'
 import TagFilter from './TagFilter'
@@ -24,6 +25,28 @@ function SortSelect({ sort, setSort }: { sort: PostSort; setSort: (sort: PostSor
                     items: [
                         { value: 'newest', label: 'Recent' },
                         { value: 'popular', label: 'Popular' },
+                    ],
+                },
+            ]}
+        />
+    )
+}
+
+function SortMenu({ sort, setSort }: { sort: PostSort; setSort: (sort: PostSort) => void }): JSX.Element {
+    return (
+        <MenuBar
+            menus={[
+                {
+                    trigger: <IconSort className="size-4" />,
+                    hideChevron: true,
+                    items: [
+                        { type: 'item', label: 'Recent', onClick: () => setSort('newest'), active: sort === 'newest' },
+                        {
+                            type: 'item',
+                            label: 'Popular',
+                            onClick: () => setSort('popular'),
+                            active: sort === 'popular',
+                        },
                     ],
                 },
             ]}
@@ -145,23 +168,28 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
 
     return (
         <section>
-            <div className="flex flex-col justify-between gap-3 @2xl:flex-row @2xl:items-center">
-                <h2 className="m-0 text-lg font-bold">
+            <div className="flex items-center justify-between gap-2">
+                <h2 className="m-0 min-w-0 shrink truncate text-lg font-bold">
                     All posts{' '}
                     <span className="text-sm font-medium text-muted">
                         ({filteredPosts.length}
                         {isFiltered ? ` of ${posts.length}` : ''})
                     </span>
                 </h2>
-                <div className="flex items-center justify-end gap-2">
-                    <SortSelect sort={sort} setSort={setSort} />
+                <div className="flex shrink-0 items-center gap-2">
+                    <div className="@md:hidden">
+                        <SortMenu sort={sort} setSort={setSort} />
+                    </div>
+                    <div className="hidden @md:block">
+                        <SortSelect sort={sort} setSort={setSort} />
+                    </div>
                     <ExpandingSearch query={query} setQuery={setQuery} />
                 </div>
             </div>
             <TagFilter tags={tags} activeTag={activeTag} onChange={setActiveTag} />
             {filteredPosts.length > 0 ? (
                 <>
-                    <div className="grid grid-cols-1 gap-6 @lg:grid-cols-2 @3xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-4 @lg:grid-cols-2 @lg:gap-6 @3xl:grid-cols-3">
                         {visiblePosts.map((post) => (
                             <GalleryCard key={post.id} post={post} />
                         ))}

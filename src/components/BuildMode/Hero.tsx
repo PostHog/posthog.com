@@ -70,7 +70,7 @@ function SubscribeForm({ className = '', placement }: { className?: string; plac
  */
 export function HeroHeader({ placement }: { placement?: string }): JSX.Element {
     return (
-        <div className="flex flex-col items-start gap-4 py-4 @2xl:flex-row @2xl:items-center @2xl:justify-between @2xl:gap-8">
+        <div className="flex flex-col items-start gap-4 py-2 @2xl:flex-row @2xl:items-center @2xl:justify-between @2xl:gap-8 @2xl:py-4">
             <img src={LOGO_SRC} alt="build mode" className="h-auto w-32 shrink-0 grow-0" />
             {placement ? <SubscribeForm placement={placement} /> : null}
         </div>
@@ -80,7 +80,7 @@ export function HeroHeader({ placement }: { placement?: string }): JSX.Element {
 /** The statement hero: the tagline as display type, the pitch as its deck, then subscribe. */
 export default function Hero({ className = '', placement }: { className?: string; placement: string }): JSX.Element {
     return (
-        <div className={`flex flex-col items-start gap-5 ${className}`}>
+        <div className={`flex flex-col items-start gap-3 @2xl:gap-5 ${className}`}>
             <h1 className="m-0 max-w-3xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
                 Tools, tactics, and taste for{' '}
                 <span className="box-decoration-clone rounded-xs bg-highlight px-2 text-red">product builders.</span>

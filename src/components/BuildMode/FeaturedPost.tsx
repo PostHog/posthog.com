@@ -10,7 +10,7 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
     return (
         <div className="min-w-0">
             {/* Hand-drawn-style annotation pointing down at the newest post */}
-            <div className="mb-6 flex items-start gap-2 pl-1">
+            <div className="mb-3 flex items-start gap-2 pl-1 @2xl:mb-6">
                 <span className="-rotate-2 text-lg font-bold italic text-red-2-dark @2xl:text-xl">
                     Hot off the press
                 </span>
@@ -33,7 +33,7 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
             <Link
                 to={post.fields.slug}
                 state={{ newWindow: true }}
-                className="group flex flex-col gap-5 no-underline text-primary @2xl:flex-row @2xl:items-start @2xl:gap-8"
+                className="group flex flex-col gap-3 no-underline text-primary @2xl:flex-row @2xl:items-start @2xl:gap-8"
             >
                 {/* Image keeps its own aspect ratio — no fixed frame, no cropping */}
                 <div className="relative shrink-0 @2xl:w-[46%]">
@@ -45,11 +45,11 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
                 </div>
                 <div className="min-w-0 max-w-xl flex-1">
                     {/* Underline is always on but transparent — text-decoration-color transitions where a bare `underline` toggle can't */}
-                    <h2 className="m-0 text-2xl font-bold leading-tight underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl">
+                    <h2 className="m-0 text-xl font-bold leading-snug underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl @2xl:leading-tight">
                         {post.frontmatter.title}
                     </h2>
-                    <p className="m-0 mt-3 text-lg text-secondary">{getSubtitle(post)}</p>
-                    <p className="m-0 mt-4 text-sm font-medium uppercase tracking-wide text-muted">
+                    <p className="m-0 mt-2 text-base text-secondary @2xl:mt-3 @2xl:text-lg">{getSubtitle(post)}</p>
+                    <p className="m-0 mt-2 text-sm font-medium uppercase tracking-wide text-muted @2xl:mt-4">
                         {getByline(post, post.frontmatter.shortDate)}
                     </p>
                 </div>

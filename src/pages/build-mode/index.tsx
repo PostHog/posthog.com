@@ -19,18 +19,18 @@ export default function BuildModePage({ data }: { data: { posts: { nodes: BuildM
             />
             <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
                 <div className="@container not-prose text-pretty text-primary">
-                    <div className="relative mx-auto w-full max-w-6xl px-4 pb-20 @xl:px-8">
+                    <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
                         <HeroHeader />
-                        <Hero className="mt-4" placement="build-mode-header" />
+                        <Hero className="mt-2 @2xl:mt-4" placement="build-mode-header" />
                         {featured && (
-                            <header className="mt-16">
+                            <header className="mt-8 @2xl:mt-16">
                                 <FeaturedPost post={featured} />
                             </header>
                         )}
-                        <div className="mt-16">
+                        <div className="mt-8 @2xl:mt-16">
                             <PostsGallery posts={posts} />
                         </div>
-                        <hr className="my-16 h-px border-none bg-red/40" />
+                        <hr className="my-10 h-px border-none bg-red/40 @2xl:my-16" />
                         <HeroHeader placement="build-mode-footer" />
                     </div>
                 </div>
