@@ -132,7 +132,7 @@ Prompts that work well:
 
 A new error template at low volume is often a better early signal than an existing template that doubles. A diff of two windows finds the first kind. Volume alerts miss it.
 
-Read the line counts before you trust a new template. When a window holds only a few lines, the miner cannot tell which parts of the message vary. It can then leave a timestamp in the template. The same log statement appears twice: once as new, and once as gone.
+Read the example lines for a template before you treat it as a real change. A template can hold a value that the miner did not mask. That value becomes part of the template identity. One log statement can then show as new in one window, and gone in the other.
 
 </CalloutBox>
 
