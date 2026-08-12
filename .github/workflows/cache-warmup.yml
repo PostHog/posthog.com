@@ -11,14 +11,11 @@ concurrency:
     group: cache-warmup
     cancel-in-progress: true
 
-env:
-    NODE_OPTIONS: '--max_old_space_size=12288'
-
 jobs:
     warm-cache:
         name: Refresh Cloudinary cache
         runs-on: depot-ubuntu-latest-8
-        timeout-minutes: 45
+        timeout-minutes: 10
         permissions:
             contents: read
 
@@ -26,27 +23,14 @@ jobs:
             - name: Checkout
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-            - name: Set up pnpm
-              uses: pnpm/action-setup@c5ba7f7862a0f64c1b1a05fbac13e0b8e86ba08c # v4
-
-            - name: Set up Node.js
-              uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-              with:
-                  node-version: '22'
-                  cache: 'pnpm'
-
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
-
-            # Build cold (no Gatsby cache) purely to run onPreInit's Cloudinary crawl, which
-            # writes .cloudinary-resources.json for preview builds to restore.
-            - name: Build site
-              run: pnpm build
+            # Dependency-free crawl of the Cloudinary resource list. Writes the same
+            # .cloudinary-resources.json that gatsby/onCreateNode.ts's onPreInit produces,
+            # without running a full Gatsby build (which this workflow previously did,
+            # ~15-20 minutes per day, purely for this file). Cloud name comes from the
+            # committed .env.production.
+            - name: Refresh Cloudinary metadata
+              run: node scripts/refresh-cloudinary-cache.mjs
               env:
-                  GATSBY_MINIMAL: 'true'
-                  # Provide Cloudinary creds so onPreInit crawls the resource list and writes
-                  # .cloudinary-resources.json for preview builds to restore (cloud name comes
-                  # from the committed .env.production).
                   CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
                   CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
