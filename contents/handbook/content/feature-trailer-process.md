@@ -25,7 +25,7 @@ There are two types of feature trailer, depending on how much time you have and 
 
 Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01R387F6H5) explaining what you want to create and why. There's no official request process – just start the conversation.
 
-**Important:** Videos typically take two weeks to make, but a minimum of four weeks is necessary if you want to hit a specific date. This is because we need to fit things around existing video work, and leave time to agree a creative direction before production can start.
+> **Important:** Videos typically take two weeks to make, but a minimum of four weeks is necessary if you want to hit a specific date. This is because we need to fit things around existing video work, and leave time to agree a creative direction before production can start.
 
 ### 2. Talk through scope and timeline
 
