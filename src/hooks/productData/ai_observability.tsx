@@ -5,7 +5,6 @@ import {
     IconConfetti,
     IconCursorClick,
     IconEye,
-    IconInfo,
     IconList,
     IconLlmAnalytics,
     IconMagic,
@@ -13,7 +12,10 @@ import {
     IconPieChart,
     IconRocket,
     IconSparkles,
+    IconWarning,
 } from '@posthog/icons'
+import OldWaySection from 'components/AIObservability/OldWaySection'
+import PostHogWaySection from 'components/AIObservability/PostHogWaySection'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
@@ -58,11 +60,18 @@ export const aiObservability = {
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'eli5',
-            name: 'What does it do?',
-            hideFromNav: true,
+            slug: 'old-way',
+            name: 'The old way',
+            component: OldWaySection,
             group: 'divided',
-            icon: <IconInfo className="size-4" />,
+            icon: <IconWarning className="size-4" />,
+        },
+        {
+            slug: 'posthog-way',
+            name: 'The PostHog way',
+            component: PostHogWaySection,
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
         },
         {
             slug: 'use-cases',
@@ -121,7 +130,8 @@ export const aiObservability = {
         title: 'Observe and fix AI in production',
         description:
             'Trace generations, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
-        eli5: 'AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Evaluations and anomaly alerting sit atop that data allowing you to understand usage patterns and issues without reading thousands of conversations. You can connect these results to self-driving and have your AI fix and improve itself.',
+        // eli5 retired in favor of the old-way/PostHog-way sections – same story,
+        // told as the two flow diagrams.
         textColor: 'text-white',
         layout: 'overlay',
     },
