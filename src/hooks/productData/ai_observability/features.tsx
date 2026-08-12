@@ -269,7 +269,7 @@ export const features = {
         color: 'blue',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_2_04072538a6.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/evals_3_0bd750f334.png',
                 alt: 'Online evals overview with pass rate and configured evaluations',
             },
         ],
@@ -368,7 +368,7 @@ export const features = {
         color: 'green',
         images: [
             {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_2_24b53e214b.png',
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/self_driving_3_832275c1ac.png',
                 alt: 'Scout templates in the AI observability Self-driving tab',
             },
         ],
