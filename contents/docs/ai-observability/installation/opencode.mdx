@@ -25,107 +25,33 @@ tableOfContents: [
         depth: 1,
     },
     {
+        url: 'configuration-options',
+        value: 'Configuration options',
+        depth: 1,
+    },
+    {
         url: 'verify-traces-and-generations',
         value: 'Verify traces and generations',
         depth: 1,
     },
     {
-        url: 'configuration-options',
-        value: 'Configuration options',
+        url: 'next-steps',
+        value: 'Next steps',
         depth: 1,
     },
 ]
 ---
 
-[OpenCode](https://opencode.ai) is an open-source AI coding agent that runs in your terminal. The [`@posthog/opencode`](https://github.com/PostHog/posthog-opencode) plugin captures LLM generations, tool executions, and conversation traces as `$ai_generation`, `$ai_span`, and `$ai_trace` events and sends them to PostHog.
+<!--
+This page imports shared onboarding content from the main PostHog repo.
+Source: https://github.com/PostHog/posthog/blob/master/docs/onboarding/ai-observability/opencode.tsx
+See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs/onboarding-docs
+-->
 
-## Prerequisites
+import { OpenCodeInstallation } from 'onboarding/ai-observability/opencode.tsx'
+import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
+import { addNextStepsStep } from './_snippets/shared-helpers.tsx'
 
-You need:
-
-- [OpenCode](https://opencode.ai/docs) installed
-- A [PostHog account](https://app.posthog.com/signup) with a project token
-
-## Install the plugin
-
-Add `@posthog/opencode` to the `plugin` array in your `opencode.json` file:
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@posthog/opencode"]
-}
-```
-
-Use `opencode.json` in your project root for a project-level install, or `~/.config/opencode/opencode.json` for a global install. OpenCode installs the package automatically when it starts and caches it in `~/.cache/opencode/node_modules/`.
-
-## Configure PostHog
-
-Set environment variables with your PostHog project token and host. You can find both in your [PostHog project settings](https://app.posthog.com/settings/project).
-
-```bash
-export POSTHOG_API_KEY="<ph_project_token>"
-export POSTHOG_HOST="<ph_client_api_host>"
-```
-
-> **Tip:** Add these environment variables to your shell profile, such as `~/.zshrc` or `~/.bashrc`, so they persist across sessions.
-
-If `POSTHOG_API_KEY` isn't set, the plugin doesn't capture or send events.
-
-## Run a session
-
-Start OpenCode as normal and use it for a task:
-
-```bash
-opencode
-```
-
-The plugin initializes automatically and captures events for every LLM call, tool execution, and completed prompt.
-
-## Verify traces and generations
-
-After running a few prompts through OpenCode:
-
-1. Go to [**AI Observability**](https://app.posthog.com/ai-observability) in PostHog.
-2. Confirm that traces and generations appear within a few minutes.
-
-## Configuration options
-
-Configure the plugin with environment variables:
-
-| Variable | Default | Description |
-|---|---|---|
-| `POSTHOG_API_KEY` | _(required)_ | Your PostHog project token |
-| `POSTHOG_HOST` | `https://us.i.posthog.com` | PostHog ingestion host |
-| `POSTHOG_PRIVACY_MODE` | `false` | When `true`, the plugin doesn't send LLM content, prompts, or tool inputs and outputs. Token counts, costs, latency, and model metadata are still captured. |
-| `POSTHOG_ENABLED` | `true` | Set to `false` to disable the plugin |
-| `POSTHOG_DISTINCT_ID` | Machine hostname | Distinct ID included in all events |
-| `POSTHOG_PROJECT_NAME` | Current directory name | Project name included in all events |
-| `POSTHOG_TAGS` | _(none)_ | Custom tags added to all events in `key1:val1,key2:val2` format |
-| `POSTHOG_MAX_ATTRIBUTE_LENGTH` | `12000` | Maximum length for serialized tool input and output attributes |
-
-### Privacy mode
-
-When `POSTHOG_PRIVACY_MODE=true`, all LLM content, user prompts, tool inputs, and tool outputs are redacted. Token counts, costs, latency, and model metadata are still captured.
-
-The plugin always redacts sensitive keys matching terms such as `api_key`, `token`, `secret`, `password`, `authorization`, `credential`, and `private_key`, regardless of privacy mode.
-
-### What gets captured
-
-The plugin captures three types of events:
-
-- **`$ai_generation`** - Each LLM call, including the model, provider, token usage, cost, stop reason, and input and output messages in [OpenAI chat format](/docs/ai-observability/generations)
-- **`$ai_span`** - Each tool execution, including the tool name, input parameters, output result, duration, parent generation, and error details ([learn more](/docs/ai-observability/spans))
-- **`$ai_trace`** - Each completed prompt, including aggregated token totals, latency, input and output state, and error status ([learn more](/docs/ai-observability/traces))
-
-## Next steps
-
-Now that you're capturing OpenCode sessions, continue with these resources to learn what else AI Observability enables in PostHog.
-
-| Resource | Description |
-|----------|-------------|
-| [Basics](/docs/ai-observability/basics) | Learn how LLM calls become events in PostHog. |
-| [Generations](/docs/ai-observability/generations) | Read about the `$ai_generation` event and its properties. |
-| [Traces](/docs/ai-observability/traces) | Explore the trace hierarchy and use it to debug LLM calls. |
-| [Spans](/docs/ai-observability/spans) | Review spans and their role in representing individual operations. |
-| [Analyze LLM performance](/docs/ai-observability/dashboard) | Create dashboards to analyze LLM performance. |
+<OnboardingContentWrapper>
+    <OpenCodeInstallation modifySteps={addNextStepsStep} />
+</OnboardingContentWrapper>
