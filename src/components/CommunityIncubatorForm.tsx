@@ -65,7 +65,7 @@ export default function CommunityIncubatorForm(): JSX.Element {
                             <legend className="text-black font-semibold mb-2">
                                 Select the track you’re applying for
                             </legend>
-                            <div className="grid @sm/reader-content-container:grid-cols-3 gap-2">
+                            <div className="grid @md/reader-content-container:grid-cols-3 gap-2">
                                 {TRACKS.map((track) => (
                                     <label key={track.value} className="relative cursor-pointer">
                                         <input
