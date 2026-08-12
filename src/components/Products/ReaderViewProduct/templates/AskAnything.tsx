@@ -52,19 +52,20 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
     }, [query, productTools])
 
     // Products with many tools can bucket them into use cases via
-    // `ai.toolGroups: [{ name, prefixes }]` – tools match on name prefix, and
-    // anything unmatched lands in a trailing "Everything else" group. Products
-    // without toolGroups keep the flat list.
-    const toolGroups: Array<{ name: string; prefixes: string[] }> = ai?.toolGroups ?? []
+    // `ai.toolGroups: [{ name, summary, prefixes }]` – one row per use case with
+    // the tools that accomplish it (à la Replay Vision), matched on name prefix.
+    // Unmatched tools land in a trailing "Everything else" group. Products
+    // without toolGroups keep the flat per-tool list.
+    const toolGroups: Array<{ name: string; summary?: string; prefixes: string[] }> = ai?.toolGroups ?? []
     const groupedTools = useMemo(() => {
         if (!toolGroups.length) return null
         const remaining = new Set(filteredTools)
         const groups = toolGroups.map((g) => {
             const tools = filteredTools.filter((t) => g.prefixes.some((p) => t.name.startsWith(p)))
             tools.forEach((t) => remaining.delete(t))
-            return { name: g.name, tools }
+            return { name: g.name, summary: g.summary, tools }
         })
-        if (remaining.size) groups.push({ name: 'Everything else', tools: [...remaining] })
+        if (remaining.size) groups.push({ name: 'Everything else', summary: undefined, tools: [...remaining] })
         return groups.filter((g) => g.tools.length > 0)
     }, [toolGroups, filteredTools])
 
@@ -180,12 +181,21 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                 {filteredTools.length === 0 ? (
                                     <p className="text-sm text-secondary italic m-0">No tools match your search.</p>
                                 ) : groupedTools ? (
-                                    groupedTools.map((group) => (
-                                        <div key={group.name} className="mb-6 last:mb-0">
-                                            <h4 className="text-base mt-0 mb-2">{group.name}</h4>
-                                            <LabeledList items={toolListItems(group.tools)} />
-                                        </div>
-                                    ))
+                                    <LabeledList
+                                        items={groupedTools.map((group) => ({
+                                            label: group.name,
+                                            description: (
+                                                <>
+                                                    {group.summary && (
+                                                        <p className="text-primary mb-2">{group.summary}</p>
+                                                    )}
+                                                    <span className="font-mono text-[13px] text-secondary">
+                                                        {group.tools.map((t) => t.name).join(' · ')}
+                                                    </span>
+                                                </>
+                                            ),
+                                        }))}
+                                    />
                                 ) : (
                                     <LabeledList items={toolListItems(filteredTools)} />
                                 )}

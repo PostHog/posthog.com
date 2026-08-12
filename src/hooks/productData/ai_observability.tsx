@@ -351,17 +351,38 @@ export const aiObservability = {
         imageAlt: 'PostHog AI and AI Observability',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
         mcpFeatures: ['llm_analytics'],
-        // AIO ships the most MCP tools of any product – bucket the tools tab by
-        // use case instead of one 80-row list. Prefix-matched against tool names.
+        // AIO ships the most MCP tools of any product – the tools tab shows one
+        // row per use case (à la Replay Vision) instead of an 80-row list.
+        // Tools are prefix-matched against these groups.
         toolGroups: [
             {
-                name: 'Traces and costs',
+                name: 'Cost breakdown analysis',
+                summary:
+                    'Pull total spend, break it down by model or user, then open the exact traces behind a spike and have them summarized.',
                 prefixes: ['query-llm-', 'get-llm-total-costs', 'llma-personal-spend', 'llma-summarization-'],
             },
-            { name: 'Evaluations and datasets', prefixes: ['llma-evaluation-', 'llma-dataset-', 'llma-score-'] },
-            { name: 'Reviews and annotation', prefixes: ['llma-trace-review-', 'llma-review-'] },
-            { name: 'Prompts and providers', prefixes: ['llma-prompt-', 'llma-provider-'] },
-            { name: 'Clustering and tagging', prefixes: ['llma-clustering-', 'llma-tagger-'] },
+            {
+                name: 'Eval suite setup',
+                summary:
+                    'Create evaluations, curate datasets, and track pass rates – an agent can stand up a full eval suite from one conversation.',
+                prefixes: ['llma-evaluation-', 'llma-dataset-', 'llma-score-'],
+            },
+            {
+                name: 'Team trace review',
+                summary: 'Build review queues, assign traces, and record structured verdicts without opening the app.',
+                prefixes: ['llma-trace-review-', 'llma-review-'],
+            },
+            {
+                name: 'Prompt shipping',
+                summary: 'Version, label, and deploy prompts, and manage provider keys – prompt ops from your editor.',
+                prefixes: ['llma-prompt-', 'llma-provider-'],
+            },
+            {
+                name: 'Traffic classification',
+                summary:
+                    'Set up clustering jobs and taggers so recurring patterns in your traffic get labeled automatically.',
+                prefixes: ['llma-clustering-', 'llma-tagger-'],
+            },
         ],
         // Prompts lifted from contents/docs/ai-observability/query-traces-mcp.mdx.
         // Tool names verified against src/data/mcp-tools.json; groups without a
