@@ -35,7 +35,7 @@ Patterns solve both by collapsing volume into structure:
 - **Compression, not summarization.** Templates are mined from your real lines. Nothing is paraphrased and nothing is invented – each pattern carries its own example lines and pivots back to the exact records it came from.
 - **No token cost.** Mining is deterministic. It doesn't call a model, so it doesn't bill AI spend, and the same input produces the same templates every time.
 - **Ranked by signal, not recency.** Every pattern carries its dominant severity, count, share of total volume, error count, and volume trend. The noisy and the anomalous both stand out without you knowing what to search for first.
-- **Readable by agents.** Your coding agent can [mine and diff patterns over MCP](#use-patterns-with-ai-agents), so it starts an investigation with a few dozen templates instead of burning its context window on raw lines.
+- **Readable by agents.** Your coding agent can [mine and diff patterns over MCP](#use-patterns-with-ai-agents), so it starts an investigation with up to 200 ranked templates instead of burning its context window on raw lines.
 - **One step from the rest of your data.** A pattern pivots to its matching logs, and a log line pivots to the [session replay](/docs/logs/link-session-replay), [person](/docs/logs/link-person), and [error](/docs/error-tracking) behind it.
 
 ## Access the patterns view
@@ -117,6 +117,8 @@ Patterns are the cheapest way to give a coding agent a whole log window. Instead
 
 That order matters. Mining first turns an unreadable window into a ranked list the agent can reason about, then it spends its context budget on the handful of lines that earned it. Because the agent has your codebase in the same session, it can tie a template back to the log statement that emitted it and draft the fix.
 
+Scope the mine to one service when you can. An unscoped mine of a busy project returns all 200 templates with their sample lines and regexes. This costs tens of thousands of tokens.
+
 Prompts that work well:
 
 | Goal | Ask your agent |
@@ -128,7 +130,9 @@ Prompts that work well:
 
 <CalloutBox icon="IconInfo" title="Diffing beats thresholds" type="fyi">
 
-A new error template appearing at low volume is often a better early signal than an existing one doubling. Diffing two windows surfaces the first kind, which volume alerts miss.
+A new error template at low volume is often a better early signal than an existing template that doubles. A diff of two windows finds the first kind. Volume alerts miss it.
+
+Read the line counts before you trust a new template. When a window holds only a few lines, the miner cannot tell which parts of the message vary. It can then leave a timestamp in the template. The same log statement appears twice: once as new, and once as gone.
 
 </CalloutBox>
 
@@ -143,6 +147,12 @@ When your log volume is large, PostHog mines patterns from a representative samp
 Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations.
 
 To improve accuracy, narrow your filters. A specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+
+### Pattern limit
+
+Pattern mining returns at most 200 patterns for each query, ranked by volume. On a busy stream, the view shows the 200 largest templates and omits the rest. The table does not mark when this happens. A smaller pattern can be missing even when the sample covers its lines.
+
+To see smaller patterns, filter to one service or one severity level. A narrower stream spends the whole limit on fewer templates.
 
 ## Tips
 
