@@ -5,10 +5,12 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author:
+    - jon-mccallum
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
-category: Product
+category: General
 tags:
     - Logs
 seo:
@@ -18,7 +20,7 @@ seo:
     }
 ---
 
-Debugging has quietly changed shape. A year ago you read your logs. Now, more often than not, an agent reads them for you – you describe the bug in your editor, it goes and looks.
+Debugging has quietly changed shape. A year ago you read your logs. Now an agent reads them for you – you describe the bug in your editor, it goes and looks.
 
 Which surfaces a problem that was always there but never cost you money before. Logs have two failure modes, and they are different failure modes.
 
@@ -60,7 +62,7 @@ Click **View matching logs** on any pattern and you land in the Logs view filter
 
 This is the property that matters when an agent is doing the reading. An agent working from a summary will confidently cite evidence that doesn't exist. An agent working from templates can only point at lines you can go and open.
 
-## It costs nothing to run
+## No model, no token bill
 
 Pattern mining is deterministic. It doesn't call a model, so it doesn't bill AI spend, and the same window produces the same templates every time.
 
@@ -80,7 +82,7 @@ That last one is usually your incident.
 
 The highest-value question after a release isn't "how many errors do we have." It's "what is different now."
 
-Mine patterns for the hour after the deploy, mine them for the same hour yesterday, and diff: which templates are new, which are gone, which are spiking. A brand-new error template at low volume is frequently a better early signal than an existing one doubling – and it's precisely the thing a volume threshold never fires on.
+Mine patterns for the hour after the deploy, mine them for the same hour yesterday, and diff: which templates are new, which are gone, which are spiking. A brand-new error template at low volume is a better early signal than an existing one doubling – and it's precisely the thing a volume threshold never fires on.
 
 ## Your agent can do this itself
 
@@ -96,7 +98,7 @@ In practice, asking your agent to "compare log patterns from the last hour again
 
 ## The side effect: a smaller logging bill
 
-Once you can see which templates dominate your volume, most teams find that a small handful of log statements produce the bulk of their ingest – and that a good fraction of those were never going to be read by anyone.
+Once you can see which templates dominate your volume, the distribution is usually lopsided: a handful of log statements produce the bulk of your ingest, and a good fraction of those were never going to be read by anyone.
 
 Patterns give you the list. From there you either fix the statement at the source, or drop it with a [sampling rule](/docs/logs/best-practices#sample-strategically) and keep paying for the lines you'd open.
 
