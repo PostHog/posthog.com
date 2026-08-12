@@ -147,6 +147,22 @@ export default function DataModeling(): JSX.Element {
                     <li>Implement data retention policies</li>
                     <li>Apply GDPR/CCPA compliance rules</li>
                 </ul>
+
+                <hr />
+
+                <h2>Semantic layer: define metrics once, trust them everywhere</h2>
+                <p>
+                    Ask three AI tools "what's our MRR?" and you can get three different numbers, because the definition
+                    lives in people's heads.
+                </p>
+                <p>
+                    The semantic layer fixes this: it's a per-project catalog of governed metrics, table certifications,
+                    and reviewed joins that every agent, and human, reads from the same place. Define a metric once,
+                    approve it once, and every session returns the same number.
+                </p>
+                <p>
+                    <Link to="/docs/semantic-layer">Read the Docs →</Link>
+                </p>
             </ReaderView>
         </>
     )
