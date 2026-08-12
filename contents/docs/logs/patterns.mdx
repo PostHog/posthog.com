@@ -141,12 +141,22 @@ Read the line counts before you trust a new template. When a window holds only a
 When your log volume is large, PostHog mines patterns from a representative sample rather than every line. A banner at the top of the Patterns view explains:
 
 - How many lines were sampled out of the total matching your filters
-- What percentage of the time window the sample covers
+- What share of the matching lines fell inside the sampled time slices
 - That counts are estimates extrapolated to the full window
 
 Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations.
 
 To improve accuracy, narrow your filters. A specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+
+### How sampling works
+
+Pattern mining narrows the logs in two steps.
+
+First, it bounds the scan. A wide window can hold more rows than one query can read. The miner therefore divides the window into evenly spaced time slices and reads only those. This keeps the sample spread across the window instead of concentrated at one end.
+
+Second, it samples the rows in those slices. The miner selects rows by a hash of each log's ID, not by a random draw. The same query over the same data returns the same templates every time.
+
+The miner then builds templates from the sample with Drain3, an open-source log clustering library. It scales each pattern's count from the sample up to the full window. A pattern seen a few times in the sample can therefore report a large estimate. A pattern rarer than the sample rate can be absent altogether.
 
 ### Pattern limit
 
