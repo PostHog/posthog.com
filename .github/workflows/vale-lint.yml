@@ -13,6 +13,12 @@ on:
                 required: true
                 type: string
 
+# Cancel superseded runs on PR pushes. Manual dispatches get a unique group via
+# run_id, so they are never queued or cancelled.
+concurrency:
+    group: vale-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
 permissions:
     contents: read
     pull-requests: write

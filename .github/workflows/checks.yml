@@ -3,6 +3,11 @@ name: Non-Blocking Basic Checks
 on:
     - pull_request
 
+# Cancel superseded runs when a PR gets new pushes.
+concurrency:
+    group: checks-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
 jobs:
     standard_checks:
         name: Spelling

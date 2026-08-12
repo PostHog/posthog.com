@@ -8,6 +8,12 @@ on:
     schedule:
         - cron: '41 14 * * 1'
 
+# Cancel superseded runs on PR pushes. Non-PR runs (master push, weekly cron) get a
+# unique group via run_id, so they are never queued or cancelled.
+concurrency:
+    group: codeql-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
 jobs:
     analyze:
         name: Analyze (${{ matrix.language }})

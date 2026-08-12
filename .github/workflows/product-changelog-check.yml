@@ -9,6 +9,11 @@ on:
             - 'scripts/check-product-changelogs.js'
             - '.github/workflows/product-changelog-check.yml'
 
+# Cancel superseded runs when a PR gets new pushes.
+concurrency:
+    group: product-changelog-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
 permissions:
     contents: read
 

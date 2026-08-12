@@ -6,6 +6,12 @@ on:
 
 name: Security
 
+# Cancel superseded runs on PR pushes. Master-push runs get a unique group via
+# run_id, so they are never queued or cancelled.
+concurrency:
+    group: security-${{ github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
 permissions:
     contents: read
 
