@@ -18,7 +18,7 @@ seo:
     }
 ---
 
-Debugging has quietly changed shape. A year ago you read your logs. Now, more often than not, an agent reads them for you — you describe the bug in your editor, it goes and looks.
+Debugging has quietly changed shape. A year ago you read your logs. Now, more often than not, an agent reads them for you – you describe the bug in your editor, it goes and looks.
 
 Which surfaces a problem that was always there but never cost you money before. Logs have two failure modes, and they are different failure modes.
 
@@ -26,11 +26,11 @@ Which surfaces a problem that was always there but never cost you money before. 
 
 **They're too expensive to hand to an AI.** A 500,000-line window is on the order of 10 million tokens, and the overwhelming majority of it is the same heartbeat, request, and retry lines repeating. That's more than any context window holds, and it's expensive long before it's impossible. Every routine line your agent reads is budget it isn't spending on the fix.
 
-The instinct is to reach for summarization — have a model read the logs and describe them. That trades one problem for a worse one. A summary is a paraphrase, and you can't debug from a paraphrase. You need the actual line, the actual timestamp, the actual request ID.
+The instinct is to reach for summarization – have a model read the logs and describe them. That trades one problem for a worse one. A summary is a paraphrase, and you can't debug from a paraphrase. You need the actual line, the actual timestamp, the actual request ID.
 
 [Log patterns](/docs/logs/patterns) take the other route: compress, don't summarize.
 
-## What pattern mining actually does
+## What pattern mining does
 
 It reads your log messages, masks the parts that vary, and clusters what's left into templates.
 
@@ -50,13 +50,13 @@ User <*> not found
 
 Do that across a whole window and millions of lines collapse into a few dozen templates, each carrying its severity, how often it fired, its share of total volume, how many of those were errors, and a sparkline of its volume over time.
 
-That's the whole trick, and it's an old one — log template mining predates the current AI wave by a decade. What changed is who's reading the output and what their attention costs.
+That's the whole trick, and it's an old one – log template mining predates the current AI wave by a decade. What changed is who's reading the output and what their attention costs.
 
 ## Compression, not summarization
 
-Nothing is paraphrased and nothing is invented. Every template is derived from lines that actually exist in your logs, it carries real example lines, and it pivots straight back to the records it came from.
+Nothing is paraphrased and nothing is invented. Every template is derived from lines that exist in your logs, it carries real example lines, and it pivots straight back to the records it came from.
 
-Click **View matching logs** on any pattern and you land in the Logs view filtered to exactly those lines — via a validated regex compiled from the template, or a literal-text filter when the regex can't be verified against the pattern's own examples. It arrives as a normal, visible, removable filter chip, not a black box.
+Click **View matching logs** on any pattern and you land in the Logs view filtered to exactly those lines – via a validated regex compiled from the template, or a literal-text filter when the regex can't be verified against the pattern's own examples. It arrives as a normal, visible, removable filter chip, not a black box.
 
 This is the property that matters when an agent is doing the reading. An agent working from a summary will confidently cite evidence that doesn't exist. An agent working from templates can only point at lines you can go and open.
 
@@ -80,7 +80,7 @@ That last one is usually your incident.
 
 The highest-value question after a release isn't "how many errors do we have." It's "what is different now."
 
-Mine patterns for the hour after the deploy, mine them for the same hour yesterday, and diff: which templates are new, which are gone, which are spiking. A brand-new error template at low volume is frequently a better early signal than an existing one doubling — and it's precisely the thing a volume threshold never fires on.
+Mine patterns for the hour after the deploy, mine them for the same hour yesterday, and diff: which templates are new, which are gone, which are spiking. A brand-new error template at low volume is frequently a better early signal than an existing one doubling – and it's precisely the thing a volume threshold never fires on.
 
 ## Your agent can do this itself
 
@@ -96,13 +96,13 @@ In practice, asking your agent to "compare log patterns from the last hour again
 
 ## The side effect: a smaller logging bill
 
-Once you can see which templates dominate your volume, most teams find that a small handful of log statements produce the bulk of their ingest — and that a good fraction of those were never going to be read by anyone.
+Once you can see which templates dominate your volume, most teams find that a small handful of log statements produce the bulk of their ingest – and that a good fraction of those were never going to be read by anyone.
 
-Patterns give you the list. From there you either fix the statement at the source, or drop it with a [sampling rule](/docs/logs/best-practices#sample-strategically) and keep paying for the lines you'd actually open.
+Patterns give you the list. From there you either fix the statement at the source, or drop it with a [sampling rule](/docs/logs/best-practices#sample-strategically) and keep paying for the lines you'd open.
 
 ## Try it
 
-If you already send logs to PostHog, open the [Logs page](https://app.posthog.com/logs) and switch to the **Patterns** tab — it uses whatever date range, service, and severity filters you've got applied. If you don't, PostHog Logs is [OpenTelemetry-native](/docs/logs/installation), so there's no proprietary SDK to adopt: point an OTLP client at us and your lines start arriving.
+If you already send logs to PostHog, open the [Logs page](https://app.posthog.com/logs) and switch to the **Patterns** tab – it uses whatever date range, service, and severity filters you've got applied. If you don't, PostHog Logs is [OpenTelemetry-native](/docs/logs/installation), so there's no proprietary SDK to adopt: point an OTLP client at us and your lines start arriving.
 
 Then stop pasting logs into your agent. Hand it the shape instead.
 
