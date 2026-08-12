@@ -264,6 +264,38 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
+## Contracts for customers on time-limited plans
+
+Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
+
+This is not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. Time-limited plans only make usage *cheaper*, so there is real spend and a real discount to offer from day one.
+
+### Don't touch the plan to close the deal
+
+Never extend, swap, or cancel a customer's coupon or beta plan as a negotiating lever, and never promise to carry its benefits into the contract term. Campaign benefits expire automatically and move the customer onto the standard paid plan with nobody doing anything. Every manual exception replaces that with a bespoke plan configuration plus something a human has to remember to undo months later, which is how we end up with legacy plans we then spend months migrating people off.
+
+There is nothing to trade here anyway: the customer keeps their plan to its original expiry *and* gets the annual discount.
+
+### The contract itself is standard
+
+Start date follows the [normal rules](/handbook/growth/sales/contracts#creating-an-order-form) — current or next billing period. Discounts follow the [standard levers](#how-our-discounts-work). Do not future-date the term to line up with the plan's expiry: that leaves the customer paying undiscounted list until the term begins, which is a worse offer than not signing at all.
+
+### Size the credits for the step-up
+
+This is the part that needs care. Because the plan ends partway through the term, credits burn at one rate before that date and a faster rate after it. Sizing on today's spend systematically undersizes the deal, and the customer finishes the term with unused credits and renews flat.
+
+**If the plan has a known end date** — campaign coupons always do — blend the two rates:
+
+> (months remaining on the plan × current monthly run rate) + (remaining months of the term × post-plan monthly run rate)
+
+Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
+
+**If the plan has no fixed end date** — beta plans, where we may change pricing at any time — don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing lands.
+
+### Tell the customer about the step-up
+
+Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
+
 ## Credit over/under usage for contracts
 
 ### When they don't have enough credit to cover their term
