@@ -230,6 +230,8 @@ Note that surveys rely on feature flags internally, so `advanced_disable_feature
 
 You can send enriched analytics data for feature flags to help uncover replays where people interact with a flag, target people who've interacted with a feature, or build cohorts of people who've viewed a feature.
 
+These events also add two charts to the flag's [**Usage** tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used) – one for views and one for interactions – so you can compare how many people saw a feature against how many used it. PostHog checks for these events periodically, so the charts don't appear immediately.
+
 To enable this, you can either use our `<PosthogFeature>` [React component](/docs/libraries/react#feature-flags-react-component) (which implements this for you), or implement it yourself.
 
 To do it yourself, there are 3 things you need to do:
@@ -553,7 +555,7 @@ We offer a pre-built `sampleByEvent` function to sample by event name. You can i
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleByEvent } from 'posthog-js/lib/src/customizations'
+import { sampleByEvent } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   // capture only half of dead click and web vitals events
@@ -603,7 +605,7 @@ We offer a pre-built `sampleByDistinctId` function to sample a percentage of eve
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleByDistinctId } from 'posthog-js/lib/src/customizations'
+import { sampleByDistinctId } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   before_send: sampleByDistinctId(0.4)
@@ -633,7 +635,7 @@ We offer a pre-built `sampleBySessionId` function to sample a percentage of even
 <MultiLanguage>
 
 ```ts file=Import
-import { sampleBySessionId } from 'posthog-js/lib/src/customizations'
+import { sampleBySessionId } from 'posthog-js/customizations'
 
 posthog.init('<ph_project_token>', {
   before_send: sampleBySessionId(0.25)

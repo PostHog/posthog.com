@@ -21,6 +21,7 @@ import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
+import { replayVision } from './productData/replay_vision'
 
 const initialProducts = [
     productAnalytics,
@@ -39,6 +40,7 @@ const initialProducts = [
     workflows,
     inbox,
     endpoints,
+    replayVision,
 ]
 
 export default function useProducts() {
@@ -53,7 +55,10 @@ export default function useProducts() {
             initialProducts.map((product) => {
                 const billingData =
                     product.billingData ||
-                    billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+                    billingProducts.find(
+                        (billingProduct: any) =>
+                            billingProduct.type === ((product as any).billingType || product.handle)
+                    )
                 const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
                 const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
                 const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to

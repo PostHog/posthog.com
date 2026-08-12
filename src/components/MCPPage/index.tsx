@@ -166,7 +166,7 @@ function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
             title: 'Lives in your editor',
-            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you already work.',
+            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Desktop. Wherever you already work.',
             icon: <IconCode />,
             color: 'blue',
         },
@@ -647,7 +647,7 @@ function MCPCTA(): JSX.Element {
                         </span>
                     </p>
                     <p className="text-secondary m-0 mb-4 text-[13px]">
-                        One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Code, and friends.
+                        One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Desktop, and friends.
                     </p>
                     <div className="mb-4">
                         <WizardCommand command="mcp add" slim />
@@ -747,7 +747,7 @@ export default function MCPPage(): JSX.Element {
                     <Q text="Where does the MCP run?" />
                     <p>
                         We know{' '}
-                        <Link to="/code" state={{ newWindow: true }}>
+                        <Link to="/desktop" state={{ newWindow: true }}>
                             which code editor we prefer
                         </Link>
                         , but the MCP is flexible to most common tools.

@@ -10,7 +10,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
 import WizardCommand from 'components/WizardCommand'
-import SelfDrivingLoop from 'components/SelfDrivingLoop'
+import LiveSelfDrivingLoop from 'components/LiveSelfDrivingLoop'
 import { IconMessage, IconLaptop, IconMagic, IconCode, IconTerminal } from '@posthog/icons'
 
 PostHog makes your product self-driving. It watches how people actually use your product, finds what's worth fixing, opens a pull request, and measures whether the change worked. You review and merge. Turning it on takes one command:
@@ -31,13 +31,13 @@ It runs as a loop. Scouts and signal sources emit signals, signals group into re
 
 When a report is actionable, PostHog opens a pull request for you to review and merge; when it needs your input, it surfaces the report in your inbox instead. PostHog then checks whether the change worked and feeds the result back into the next pass.
 
-<SelfDrivingLoop />
+<LiveSelfDrivingLoop />
 
 Self-driving works because the signals that drive the loop live in your product data, and that's exactly what PostHog has.
 
 A general-purpose coding agent has your code, but not your context. PostHog ties everything together into a [context warehouse](/docs/self-driving/context): your product usage data, your data warehouse, and the context your agents need, in one place. That's what helps your agents do their best work.
 
-We don't just sell this loop, we run it. A troop of 35 scouts watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds it](https://github.com/PostHog/posthog.com/pulls). If self-driving ever stops being worth it, we'll be the first to know.
+We don't just sell this loop, we run it. A troop of more than 90 scouts – the canonical fleet plus dozens our own teams have written – watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds it](https://github.com/PostHog/posthog.com/pulls). If self-driving ever stops being worth it, we'll be the first to know.
 
 To see the loop play out on a single bug, from first signal to measured fix, read the [anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr).
 
@@ -55,13 +55,14 @@ Once data is flowing, PostHog continuously monitors your product and reports beg
 
 </QuestLogItem>
 
-<QuestLogItem title="Learn the concepts" subtitle="Context, scouts, signals, reports, inbox" icon="IconCode2">
+<QuestLogItem title="Learn the concepts" subtitle="Context, signals, sources, scouts, reports, inbox" icon="IconCode2">
 
 There's a small set of terms worth knowing. Here's a breakdown:
 
 - **[Context](/docs/self-driving/context)** – everything your agents need to know about your product, tied together in your context warehouse. The context a general-purpose agent doesn't have.
-- **[Scouts](/docs/self-driving/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing.
-- **[Signals](/docs/self-driving/signals)** – what a scout emits: a structured finding, with the evidence behind it and a suggested action. Error tracking, session replay, and tools like Zendesk and Linear emit signals too.
+- **[Signals](/docs/self-driving/signals)** – a structured finding: what's happening, the evidence behind it, and a suggested action. Everything the loop does starts from one.
+- **[Signal sources](/docs/self-driving/inbox/sources)** – built-in pipelines that watch one stream continuously and turn every qualifying item into a signal. Error tracking, session replay, and logs inside PostHog, plus tools like Zendesk, Linear, and Sentry.
+- **[Scouts](/docs/self-driving/scouts)** – scheduled agents that watch a slice of your data and raise a hand when something's worth knowing. Where a source is exhaustive, a scout uses judgement about what to surface – [when to use which](/docs/self-driving/signals#sources-or-scouts).
 - **[Reports](/docs/self-driving/reports)** – related signals grouped into one item of work, so you deal with the real problem instead of a noisy stream of findings.
 - **[Inbox](/docs/self-driving/inbox)** – where reports and pull requests land for you to review, steer, and merge.
 
@@ -87,7 +88,7 @@ The full [PostHog app](https://app.posthog.com), in your browser. Explore your d
 
 ### <IconCode className="text-green w-7 -mt-1 inline-block" /> Code
 
-[PostHog Code](/docs/posthog-code) is a desktop app for driving parallel agents that edit your product. The same inbox, reports, and scouts live there too.
+[PostHog Desktop](/docs/posthog-desktop) is a desktop app for driving parallel agents that edit your product. The same inbox, reports, and scouts live there too.
 
 ### <IconMagic className="text-purple w-7 -mt-1 inline-block" /> MCP
 
@@ -123,6 +124,16 @@ We hold it to a simple standard: you pay a flat **$15 per pull request**, your f
 
 <OSButton variant="primary" asLink to="/docs/self-driving/pricing">
   How pricing works
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Learn by use case" subtitle="Pocket guides" icon="IconBook">
+
+The [pocket guides](/pocket-guides) teach self-driving through real scouts: each use case walks through the report a scout files, the pull request it becomes, and the scout file itself – ending in a one-click way to add it to your own product.
+
+<OSButton variant="primary" asLink to="/pocket-guides">
+  Open the pocket guides
 </OSButton>
 
 </QuestLogItem>

@@ -46,11 +46,11 @@ If you do decide to move, look at how each tool fits into your workflow. Helicon
 
 ### What is PostHog?
 
-**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/code)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
+**[PostHog](/)** (that's us 👋) is the leading platform for self-driving products. You can use our desktop ([Code](/desktop)), [web](/ai), [Slack](/slack), and [MCP](/mcp) products to leverage tools like [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more.
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors – including per-user cost attribution, so you can see what individual customers cost you, just like Helicone's per-key tracking. 
 
-You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals), [manage and version prompts (beta)](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
+You can also score outputs with [LLM-as-a-judge or code-based evals](/docs/ai-evals), [manage and version prompts](/docs/prompt-management) without redeploying code, and query trace data with SQL or through the [MCP server](/mcp) directly from your editor.
 
 The architectural difference from Helicone is that PostHog instruments via SDK rather than sitting in your request path as a proxy. 
 
@@ -64,7 +64,7 @@ That means more setup (the [install wizard](/wizard) helps) and no gateway featu
 
 - [**AI evals**](/docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
 
-- [**Prompt management**](/docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](/docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 
 - [**SQL access**](/docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 
@@ -624,6 +624,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <WizardCTA />
 
 ## Frequently asked questions
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
 
 <details>
 <summary>Is Helicone shutting down?</summary>

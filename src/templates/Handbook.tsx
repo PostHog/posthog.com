@@ -1,6 +1,7 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import { graphql } from 'gatsby'
+import { useLocation } from '@reach/router'
 import { Blockquote } from 'components/BlockQuote'
 import { MdxCodeBlock } from 'components/CodeBlock'
 import { Heading } from 'components/Heading'
@@ -28,6 +29,8 @@ import { IconWarning, IconCheck, IconX } from '@posthog/icons'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
+import WarehouseWizardHint from 'components/WarehouseWizardHint'
+import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
 import NewsletterForm from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -353,6 +356,22 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const sourceFields = postHogSource?.sourceFields ?? null
     const sourceTables = postHogSource?.tables ?? null
     const posthog = usePostHog()
+    const { pathname } = useLocation()
+    // Hand-written source docs use this template (not DataWarehouseSource). Show the
+    // warehouse wizard nudge on data-warehouse source URLs and on CDP source pages
+    // linked to a postHogSource.
+    const showWarehouseWizardHint =
+        !!postHogSource ||
+        pathname === '/docs/data-warehouse/sources' ||
+        pathname.startsWith('/docs/data-warehouse/sources/')
+
+    // Same nudge for AI observability SDK installation pages. The coding-agent integrations
+    // (Claude Code, OpenClaw, Pi) are excluded: they instrument the agent itself, so running
+    // the wizard in a project doesn't set them up. The installation index has its own
+    // AI wizard section in the MDX.
+    const showAIObservabilityWizardHint =
+        pathname.startsWith('/docs/ai-observability/installation/') &&
+        !['claude-code', 'openclaw', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
@@ -437,6 +456,10 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                     : null),
             }}
             title={title}
+            belowTitle={
+                (showWarehouseWizardHint && <WarehouseWizardHint />) ||
+                (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
+            }
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
             commits={commits}

@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
@@ -433,7 +433,6 @@ export const Main = () => {
         compact,
     } = useLayoutData()
     const { pathname } = useLocation()
-    const { websiteTheme } = useValues(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -503,11 +502,15 @@ export const Main = () => {
                                     className="h-5 mx-6 relative"
                                 />
                             ) : (
-                                <Logo
-                                    variant={websiteTheme === 'dark' ? 'mono' : 'gradient'}
-                                    color={websiteTheme === 'dark' ? 'white' : undefined}
-                                    className="h-[24px] relative px-2 box-content"
-                                />
+                                <>
+                                    <Logo className="h-[24px] relative px-2 box-content dark:hidden" width="auto" />
+                                    <Logo
+                                        variant="mono"
+                                        color="white"
+                                        className="hidden h-[24px] relative px-2 box-content dark:block"
+                                        width="auto"
+                                    />
+                                </>
                             )}
                         </Link>
                     </div>

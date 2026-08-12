@@ -4,7 +4,7 @@ date: 2026-07-09
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1783662227/stop_being_the_code_review_bottleneck_hero_a734a37558.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/stop_being_the_code_review_bottleneck_hero_a734a37558.png
 featuredImageType: full
 tags:
   - Product engineers
@@ -23,7 +23,7 @@ Agents are writing code faster than any human can review.
 
 The naive solution would be for developers to review code faster. The 500 IQ take is for developers to review as little code as possible.
 
-If you need to be involved in every code review, you will always be the bottleneck. Instead, put yourself outside of the code review loop by building a pipeline that delegates tasks to agents.
+If you need to be involved in every code review, you will always be the bottleneck. Instead, put yourself outside of the code review loop by building a pipeline that [delegates tasks to agents](/newsletter/agent-autonomy#level-2-agent-delegation).
 
 We asked engineers at PostHog how they’ve been reviewing [AI-generated code](/newsletter/ai-coding-mistakes) to keep shipping fast without losing quality.
 
@@ -35,7 +35,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 ![Slack thread asking devs how they review agent-generated code, with a joke reply meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662228/stop_being_the_code_review_bottleneck_1_slack_thread_8ca1a6a450.jpg)
 
-The goal is to offload the simpler reviews to agents, and flag if something genuinely needs a human.
+The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-a-month#humans-dont-need-to-review-every-pr).
 
 The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of their own blind spots.[^1]
 
@@ -43,7 +43,7 @@ For the same reason, it’s better to have multiple agents with different instru
 
 Here’s how one of our engineers, [Paul D’Ambra](/community/profiles/30173), makes his own custom agent review system work:
 
-![qa-swarm review-triage agent pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662229/stop_being_the_code_review_bottleneck_1_qa_swarm_diagram_d728ab2551.png)
+![qa-swarm review-triage agent pipeline diagram](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/v1783662229/stop_being_the_code_review_bottleneck_1_qa_swarm_diagram_d728ab2551.png)
 
 1. First, **[qa-swarm](https://github.com/pauldambra/dotfiles/tree/main/ai/skills/qa-swarm)** spawns four reviewer agents, each with their own special instructions:
 
@@ -133,7 +133,7 @@ We still use #dev-stamp-exchange when the agent can’t auto-accept or route, bu
 
 ### Steal this
 
-The code for StampHog is available [here](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
+The code for StampHog is available [in the PostHog repo](https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/). Many of its inner workings are specific to PostHog, so instead of copying it, here's a prompt to start customizing one for your repo based on ours:
 
 ```llm
 Read https://github.com/PostHog/posthog/blob/master/tools/pr-approval-agent/README.md and build the equivalent for the repo at <path>. 
@@ -181,13 +181,18 @@ Every PR must ship with its own tests and end with a way to observe it working d
 
 This approach is especially valuable for frontend work since deterministic tests don’t always capture the visual or behavioral functionality you’re looking for.
 
-[Pawel Cebula](/community/profiles/33209) says it’s a huge timesaver to have an agent take screenshots and GIFs for each step, with something like this:
+You can use this prompt to copy the [qa-frontend](https://github.com/PostHog/posthog/blob/master/.agents/skills/qa-frontend/SKILL.md) skill [Pawel Cebula](/community/profiles/33209) created for this. It’s a huge timesaver to have an agent run the code and take screenshots and GIFs for you:
 
 ```llm
-For each PR with frontend work, run the affected screens and capture evidence from the branch's final state: a screenshot of each relevant state (empty, loading, error, populated) and a GIF of the key interaction end to end. Where behavior changes, include before/after. 
+Read https://github.com/PostHog/posthog/blob/master/.agents/skills/qa-frontend/SKILL.md and build the equivalent for the repo at <path>. Copy the architecture and preserve every safety invariant it states exactly.
 
-Attach it all to the PR so the change can be reviewed by observation, not by reading the diff — and re-capture if the code changes after.
+Its file-classification, route-finding, local-stack/login, and evidence-upload rules are calibrated to PostHog — re-derive for me: mine my repo for the diff-pattern → frontend-test-type map, route heuristics, and the "never auto-edit" deny-list (from my high-blast-radius areas). Propose the full config for my sign-off before writing any code.
+
+Ask me whatever you can't derive from the repo — at minimum: which browser MCP to drive, how my local stack starts and on what URL, how the app authenticates locally, and how PR mode checks out PRs and posts comments (platform + CLI/token).
+
+Leave the result as uncommitted files on my working tree.
 ```
+
 
 <NewsletterForm />
 

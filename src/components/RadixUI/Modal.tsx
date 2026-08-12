@@ -26,9 +26,12 @@ const Modal = ({
     className = '',
     contentClassName = '',
     showCloseButton = true,
+    title: titleProp,
+    maxWidth,
 }: ModalProps): JSX.Element => {
     const { appWindow, activeInternalMenu } = useWindow()
-    const title = appWindow?.meta?.title || activeInternalMenu?.name
+    // Prefer an explicit title prop; fall back to the active window/menu name.
+    const title = titleProp || appWindow?.meta?.title || activeInternalMenu?.name
     return (
         <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -39,6 +42,7 @@ const Modal = ({
             <RadixDialog.Portal>
                 <RadixDialog.Overlay className="bg-black/50 data-[state=open]:animate-fadeIn data-[state=closed]:animate-fadeOut fixed inset-0 z-50" />
                 <RadixDialog.Content
+                    style={maxWidth ? { width: maxWidth, maxWidth: '95vw' } : undefined}
                     className={`data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded bg-primary text-primary z-50 ${contentClassName}`}
                 >
                     <div data-scheme="primary">

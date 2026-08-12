@@ -9,7 +9,6 @@ featuredImageType: full
 tags:
   - Feature flags
   - Product engineers
-  - Feature management
 crosspost:
   - Blog
 ---

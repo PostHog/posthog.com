@@ -33,7 +33,7 @@ names map to handles in [`skillsResourceRegistry.ts`](../../hooks/skillsResource
 
 ```ts
 { handle: "session_replay" }
-{ handle: "support", label: "Conversations" }
+{ handle: "support", label: "Support" }
 { handle: "product_analytics", label: "Cohorts", href: "/docs/data/cohorts" }
 ```
 

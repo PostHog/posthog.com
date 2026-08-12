@@ -5,7 +5,6 @@ import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import { LottieAnimation } from 'components/About/v2/LottieAnimations'
 import { Letterhead } from 'components/About/v2/Letterhead'
-import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT, CUSTOMER_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
@@ -39,7 +38,6 @@ const mdxComponents = {
     DifferentHighlights,
     HappyHog,
     Letterhead,
-    Logo: () => <Logo wordmark={false} className="inline-block" />,
     CloudinaryImage,
     ProductCount,
     CustomerCount,
@@ -66,7 +64,7 @@ export default function About({ data }: AboutProps) {
                     description: 'Learn about PostHog',
                 }}
             >
-                <div className="bg-primary min-h-full px-4 @xl:px-8 py-4">
+                <div className="min-h-full px-4 @xl:px-8 py-4">
                     <div className="max-w-3xl mx-auto pb-12">
                         <MDXProvider components={mdxComponents}>
                             <MDXRenderer>{data.mdx.body}</MDXRenderer>

@@ -28,6 +28,18 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
    - Once connected, Gong automatically joins and records your Zoom calls into the shared library.
 3. **Granola** – Install the [Granola](https://www.granola.ai/) app and connect it to your calendar. It runs on your laptop and transcribes whatever call you're in (including your Zoom calls), so you get notes and a transcript without adding another bot to the meeting.
 
+### AI investigation tools
+
+The fastest way to dig into an account is an AI agent wired into our tools. Not mandated, but many of us lean on it daily, and setting it up early will speed things up.
+
+- **PostHog Desktop** – PostHog's agent workspace. Runs coding agents on top of product data with PostHog skills built in.
+- **Claude Code** – a terminal agent you point at customer data, tickets, and repos. Install the PostHog plugin with `claude plugin install posthog@claude-plugins-official`.
+- **MCPs** – connect the following MCPs to your AI agent:
+  - PostHog MCP
+  - Slack
+  - GitHub
+  - Granola
+
 ### Tools through Google and Single Sign-On (SSO)
 
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/)
@@ -36,7 +48,7 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
 - [QuoteHog](https://quote.posthog.net/)
 - [Salesforce](https://posthog.lightning.force.com/)
 - [Vitally](https://posthog.vitally-eu.io/) - once you've logged in once with Google ask your Team Lead to upgrade your role to Team Member
-- [Zendesk](https://posthoghelp.zendesk.com/agent/dashboard)
+- [PostHog Support](https://us.posthog.com/project/2/support/tickets)
 - [Zoom](https://zoom.com/)
 - *Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 
@@ -84,4 +96,24 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
 - <PrivateLink url='https://posthog.slack.com/archives/C07TQR0V16U'>#ask-max</PrivateLink> - bot focused on internal processes and questions.
 - <PrivateLink url='https://posthog.slack.com/archives/C0AP5NXF8D7'>#demo-posthog-anything</PrivateLink> - show off something cool or see how others are demoing things.
-- <PrivateLink url='https://posthog.slack.com/archives/C0B5QBS29QU'>#coming-soon</PrivateLink> - see what's coming soon - a schedule of upcoming product launches.
+
+### Internal tools
+Why should engineers have all the fun? We routinely build our own internal tooling.
+
+- <PrivateLink url='https://demohog.vercel.app/'>DemoHog</PrivateLink> - sample data for demo calls.
+- <PrivateLink url='https://hogflix.dev/'>HogFlix</PrivateLink> - demo app.
+- <PrivateLink url='https://github.com/PostHog/hedgeground'>Hedgeground</PrivateLink> - LLM-focused demo app.
+- <PrivateLink url='https://reinvented-won.vercel.app/'>Wheel of Names</PrivateLink> - randomly pick a person.
+- <PrivateLink url='https://posthog-academy.vercel.app/'>Academy</PrivateLink> - training platform.
+- <PrivateLink url='https://quote.posthog.com'>QuoteHog</PrivateLink> - create quotes for customers.
+- <PrivateLink url='https://github.com/PostHog/hogspy'>HogSpy</PrivateLink> - Chrome extension for extra debugging info about PostHog usage.
+- <PrivateLink url='https://github.com/PostHog/learn'>Learn</PrivateLink> - prompts for PostHog Code on how to use PostHog effectively.
+- <PrivateLink url='https://github.com/PostHog/yahe'>Yet Another Hog Spy</PrivateLink> - Chrome extension to identify SDKs used on a website.
+- <PrivateLink url='https://gotwatchtower.com/'>WatchTower</PrivateLink> - alerts for your accounts.
+- <PrivateLink url='https://github.com/PostHog/blake-bot'>Blake Bot</PrivateLink> - Slack bot to retrieve customer data.
+- <PrivateLink url='https://github.com/PostHog/vitally-mcp-server'>Vitally MCP Server</PrivateLink> - expose Vitally data over MCP (public version also available).
+- <PrivateLink url='https://github.com/PostHog/skills'>Claude Skills</PrivateLink> - miscellaneous skills for retrieving data.
+- <PrivateLink url='https://stakeholdermap.vercel.app'>Stakeholder Mapping</PrivateLink> - visualise accounts from Vitally data.
+- <PrivateLink url='https://github.com/PostHog/forage'>Forage</PrivateLink> - outbound sales tooling.
+- <PrivateLink url='https://sdkscanner.posthog.dev/'>SDK Scanner</PrivateLink> - spy on tools used by customers.
+- <PrivateLink url='https://github.com/PostHog/md-crm'>MD CRM</PrivateLink> - markdown CRM.

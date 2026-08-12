@@ -35,7 +35,7 @@ Keep search behavior and selection ordering in `index.tsx`. Extracted components
 
 ### Actions
 
-`actions.tsx` defines command-palette actions through `useSpotlightActions`. It includes theme, wallpaper, hedgehog, retro, heater, performance, cursor, click behavior, and boring-mode toggles, plus copy-desktop-link, close-windows, screensaver, and confetti actions.
+`actions.tsx` defines command-palette actions through `useSpotlightActions`. It includes theme, wallpaper, hedgehog, retro, reduce transparency, performance, cursor, click behavior, and boring-mode toggles, plus copy-desktop-link, close-windows, screensaver, and confetti actions.
 
 Actions appear for short matching queries. One-shot actions close the palette, while actions with `keepOpen` can be repeated. Add an action by providing an id, label, icon, keywords, `perform`, and optional `keepOpen` value.
 

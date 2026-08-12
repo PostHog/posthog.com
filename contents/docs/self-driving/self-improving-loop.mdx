@@ -6,7 +6,7 @@ showTitle: true
 ---
 
 import { CallToAction } from 'components/CallToAction'
-import SelfDrivingLoop from 'components/SelfDrivingLoop'
+import LiveSelfDrivingLoop from 'components/LiveSelfDrivingLoop'
 
 <CalloutBox icon="IconFlask" title="Open beta" type="action">
 
@@ -16,11 +16,11 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/self-driving) has the loop at a glance. This page is how it works under the hood, stage by stage. Prefer it concrete? [Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) follows one bug through every stage below.
 
-<SelfDrivingLoop />
+<LiveSelfDrivingLoop />
 
 ## Collect signals
 
-The loop starts with [signals](/docs/self-driving/signals), which come from two kinds of source you can turn on independently. **Signal sources** are built-in pipelines that watch one stream continuously, like error tracking, session replay, health checks, Zendesk, GitHub Issues, and Linear. **[Scouts](/docs/self-driving/scouts)** run on a schedule and explore your product data more holistically. A single problem usually shows up as several signals at once.
+The loop starts with [signals](/docs/self-driving/signals), which come from two kinds of source you can turn on independently. **Signal sources** are built-in pipelines that watch one stream continuously and process every qualifying item in it, like error tracking, session replay, health checks, Zendesk, GitHub Issues, and Linear. **[Scouts](/docs/self-driving/scouts)** run on a schedule, explore your product data more holistically, and use judgement about what's worth surfacing. Sources trade judgement for exhaustive coverage and scouts trade coverage for judgement, so most projects run both – [sources or scouts?](/docs/self-driving/signals#sources-or-scouts) covers when to reach for which. A single problem usually shows up as several signals at once.
 
 ## Group into reports
 

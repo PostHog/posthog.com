@@ -37,11 +37,11 @@ We’ll call 1-3 ‘warm’ outbound and 4-6 ‘cold’ outbound.
 
 Our model is:
 
-- TAMs do warm outbound to group 1-2
-- BDRs (<TeamMember name="Lorena Viana" />, <TeamMember name="Andreas Ford" />, and <TeamMember name="Melad Khajepour" />) do warmish outbound to groups 3-5
+- TAMs do warm outbound to group 1-2, and BDRs are experimenting with group 1 as requested. 
+- BDRs (<TeamMember name="Lorena Viana" />, <TeamMember name="Andreas Ford" />, and <TeamMember name="Melad Khajepour" />) do warmish outbound to groups 3-6
 - TAEs do cold outbound to a top 10 list in groups 5-6
 
-Our focus today is on inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Lorena Viana" /> is leading our experiments today with the <SmallTeam slug="demand-gen" />.
+Our focus today is on inbound leads, getting much better at warm outbound (we have a huge number of leads that we could be converting better), and experimenting with colder outbound. <TeamMember name="Lorena Viana" /> is leading our experiments today with the <SmallTeam slug="sales-cs" />.
 
 Check out the [leads page](/handbook/growth/sales/lead-scoring) for more detail on lead types, where they go, and the specific outbound campaigns we're running. These are changing very frequently as we figure out what does and doesn't work. 
 
@@ -320,7 +320,6 @@ graph TD
 
     SF --> VITALLY[Vitally]
     CIO[Customer.io] --> VITALLY
-    ZENDESK[Zendesk] --> VITALLY
     GMAIL[Gmail] --> VITALLY
     STRIPE[Stripe] --> VITALLY
 ```

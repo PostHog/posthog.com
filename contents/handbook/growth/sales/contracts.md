@@ -58,7 +58,7 @@ You will likely need to use <PrivateLink url="https://quote.posthog.com">QuoteHo
 
 We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature. Ask <TeamMember name="Mine Katsu" showOnlyFirstName photo /> or <TeamMember name="Simon Fisher" showOnlyFirstName photo /> for access if you don't have it.
 
-1. The <PrivateLink url="https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B">order form template</PrivateLink> to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
+1. The <PrivateLink url="https://app.pandadoc.com/a/#/templates/EKqx7pa5VroDQhkNcHyYzd">order form template</PrivateLink> to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
     1. Replace `<MM YYYY>` with the month and year the contract starts (e.g. March 2023)
@@ -85,7 +85,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
             - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
-            - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it.
+            - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it. If the order form won't be signed before that period's invoice is issued, don't hold the backdated start date. Move the start date to the beginning of the next billing period instead, and tell the customer the new credits apply from then. See [contract timing rules](#contract-timing-rules) below, and [timing your renewals with billing](/handbook/cs-and-onboarding/renewals#timing-your-renewals-with-billing) for how to avoid getting into this position.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
 
@@ -158,7 +158,7 @@ For newly purchased credits to cover the intended invoice automatically, both of
 
 Occasionally, customers will want to sign an MSA instead of referencing our terms in an order form. 
 
-1. Download a copy of the [PostHog Cloud MSA](https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit#heading=h.y38xfjgcg4xm) as a Word Document (legal teams prefer this format) and share it with your Customer contact.
+1. Download a fresh copy of the <PrivateLink url="https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit">PostHog Cloud MSA</PrivateLink> as a Word Document (legal teams prefer this format) and share it with your Customer contact. Download it from Drive every time — never reuse a copy saved locally or one from a previous deal, as the template is revised regularly.
 2. They may want to propose changes (also known as 'redlines'). Work with Hector or Fraser to get these agreed.
 3. Create a new document in PandaDoc, you can choose to either import from Google Drive or upload from your local machine. This should be the clean, non-redlined document as agreed by both parties.
 4. Change the name to be `PostHog Cloud MSA - CUSTOMER LEGAL NAME`.
@@ -185,9 +185,9 @@ We offer HIPAA Compliance on PostHog Cloud and as such health companies will req
 In some cases, prospective or current customers require a mutual Non-disclosure Agreement (MNDA) in place before conversastion or product activity can proceed. Terms already specify Confidentiality and if there is still a situation where a documented agreement is requested this can be easily accommodated. 
 
 - Access PandaDoc and Create a New Document
-- Use the current PostHog - NDA template
+- Use the current PostHog - NDA template, which is kept in <PrivateLink url="https://docs.google.com/document/d/1K-1ErUrHbvNs8ed8CXSQIuA0xJdg55sC/edit">Google Drive</PrivateLink> — pull it fresh rather than reusing a copy from a previous deal
 - Add your desired contact as a recipient and follow the usual PandaDoc process
 - When document is complete, it will be stored in the Document library and can also be attached to the Salesforce account for future reference
 
 ### Trust center approvals
-Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted. 
+Requests that originate from the [Trust Center](https://trust.posthog.com/) automatically get sent an NDA in the request from SafeBase to PandaDoc. Once the document is fully signed, access will automatically be granted.
