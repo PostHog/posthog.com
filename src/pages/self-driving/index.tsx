@@ -862,11 +862,34 @@ export default function SelfDrivingPage({
                                     PostHog instruments your codebase, then combines that context with product data like
                                     analytics events, errors, and recordings to understand problems and propose fixes.
                                 </p>
-                                <GetStarted selfDriving />
+                                <GetStarted
+                                    selfDriving
+                                    demoTo="/self-driving#see-how-it-works"
+                                    demoNewWindow={false}
+                                />
                             </div>
 
-                            <div className="overflow-hidden rounded-md shadow-2xl">
-                                <WistiaEmbed mediaId="w7ia81gh5x" />
+                            <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
+                                <div className="h-64 overflow-hidden bg-accent @sm/reader-content:h-72 @xl/reader-content:h-80">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_light_9aa9eed335.png"
+                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
+                                        className="dark:hidden w-full"
+                                        imgClassName="block w-full"
+                                    />
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/inbox_dark_216a157762.png"
+                                        alt="The Inbox surfacing reports and pull requests across PostHog Desktop and the cloud"
+                                        className="hidden dark:block w-full"
+                                        imgClassName="block w-full"
+                                    />
+                                </div>
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/self_driving_with_road_3ff29b8dc3.png"
+                                    alt=""
+                                    aria-hidden
+                                    imgClassName="pointer-events-none absolute inset-x-0 bottom-0 z-30 block w-full max-w-none"
+                                />
                             </div>
                         </section>
                     </div>
@@ -972,6 +995,14 @@ export default function SelfDrivingPage({
                                 <SelfDrivingTicker prs={selfDrivingPRs} />
                             </div>
                         )}
+
+                        {/* See how it works */}
+                        <h3 id="see-how-it-works" className={sectionHeadingClassName}>
+                            See how it works
+                        </h3>
+                        <div className="not-prose mt-8 mb-12 overflow-hidden rounded-md shadow-2xl">
+                            <WistiaEmbed mediaId="w7ia81gh5x" />
+                        </div>
 
                         {/* Works in your workflow */}
                         <h3 className={sectionHeadingClassName}>Works in your workflow</h3>
