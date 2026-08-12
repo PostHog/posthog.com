@@ -7,9 +7,6 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: >-
-  TODO_CLOUDINARY_FEATURED_IMAGE_URL
-featuredImageType: full
 category: Inside PostHog
 tags:
   - Culture
