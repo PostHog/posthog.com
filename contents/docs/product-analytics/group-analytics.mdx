@@ -49,11 +49,12 @@ Group analytics is a paid add-on. Here's how billing works:
 
 <CalloutBox icon="IconInfo" title="All identified events count toward billing" type="fyi">
 
-Once you subscribe to group analytics, billing applies to **all identified events** in your project, not just events with group properties attached. This is because group analytics enables infrastructure that processes all identified events to support group-level analysis.
+Once you subscribe to group analytics, billing applies to **all identified events across every project in your organization**, not just events with group properties attached. This is because group analytics enables infrastructure that processes all identified events to support group-level analysis.
 
 </CalloutBox>
 
 - Billing starts when you enable group analytics from your [billing page](https://app.posthog.com/organization/billing), not when you add group analytics code to your application.
+- The add-on is subscribed per organization, so it applies to every project in that organization. You can't limit it to a single project, even if only one of your projects defines group types.
 - Usage is based on captured [identified events](/docs/product-analytics/identify), even if they don't include group properties.
 - Billing stops when you unsubscribe from the billing page. You don't need to remove group analytics code from your application to stop billing.
 
