@@ -257,10 +257,9 @@ export const TeamMember = (props: any) => {
                                         {/* Show first team's crest */}
                                         {teamData[0] && teamCrestMap?.[teamData[0].attributes.name] && (
                                             <CloudinaryImage
-                                                width={160}
                                                 src={teamCrestMap[teamData[0].attributes.name]}
                                                 alt={`${teamData[0].attributes.name} Team`}
-                                                imgClassName="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                                imgClassName="absolute -right-1 bottom-0 size-[20cqw] @[12rem]:size-[30cqw] object-contain transition-all"
                                             />
                                         )}
                                     </div>
