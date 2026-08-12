@@ -4,6 +4,7 @@ import usePostHog from 'hooks/usePostHog'
 const { IconCheck } = require('@posthog/icons') as { IconCheck: React.FC<any> }
 import { useRef, useState } from 'react'
 import { CallToAction } from './CallToAction'
+import { OSInput, OSTextarea } from 'components/OSForm'
 import { cn } from '../utils'
 
 const TRACKS = [
@@ -26,8 +27,6 @@ const TRACKS = [
         accent: 'peer-checked:border-teal peer-checked:bg-teal/10',
     },
 ]
-
-const inputClasses = 'w-full border border-light rounded px-4 py-2 bg-[#E5E7E0] text-lg text-black'
 
 export default function CommunityIncubatorForm(): JSX.Element {
     const formRef = useRef<HTMLFormElement>(null)
@@ -89,49 +88,68 @@ export default function CommunityIncubatorForm(): JSX.Element {
                                 ))}
                             </div>
                         </fieldset>
-                        <input name="name" type="text" placeholder="Your name" className={inputClasses} required />
-                        <input name="email" type="email" placeholder="Your email" className={inputClasses} required />
-                        <input
+                        <OSInput
+                            label="Name"
+                            name="name"
+                            type="text"
+                            placeholder="Your name"
+                            showLabel={false}
+                            required
+                        />
+                        <OSInput
+                            label="Email"
+                            name="email"
+                            type="email"
+                            placeholder="Your email"
+                            showLabel={false}
+                            required
+                        />
+                        <OSInput
+                            label="City"
                             name="city"
                             type="text"
                             placeholder="What city are you based in?"
-                            className={inputClasses}
+                            showLabel={false}
                             required
                         />
                         <div className="grid @sm/reader-content-container:grid-cols-2 gap-4">
-                            <input
+                            <OSInput
+                                label="LinkedIn"
                                 name="linkedin"
                                 type="url"
                                 placeholder="LinkedIn URL"
-                                className={inputClasses}
+                                showLabel={false}
                                 required
                             />
-                            <input
+                            <OSInput
+                                label="GitHub"
                                 name="github"
                                 type="text"
                                 placeholder="GitHub handle"
-                                className={inputClasses}
+                                showLabel={false}
                                 required
                             />
                         </div>
-                        <textarea
+                        <OSTextarea
+                            label="Things you've shipped"
                             name="project_urls"
                             placeholder="URLs of things you've shipped (one per line)"
-                            className={inputClasses}
+                            showLabel={false}
                             rows={3}
                             required
                         />
-                        <textarea
+                        <OSTextarea
+                            label="Why do you want to do this?"
                             name="motivation"
-                            placeholder="Why do you want to do this? Tell us about your crew, your city, and what you're building."
-                            className={inputClasses}
+                            placeholder="Tell us about your crew, your city, and what you're building."
+                            showLabel={false}
                             rows={4}
                             required
                         />
                         <CallToAction
                             type="primary"
                             size="lg"
-                            className="w-full"
+                            className="w-full mt-4"
                             to="#"
                             onClick={() => {
                                 formRef.current?.requestSubmit()
