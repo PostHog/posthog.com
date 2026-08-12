@@ -392,9 +392,9 @@ export const features = {
     },
     native_integrations: {
         title: 'Native integrations',
-        headline: 'Simple SDKs for popular LLM providers',
+        headline: 'Instrument any LLM stack',
         description:
-            'Instrument any LLM. Use PostHog-maintained wrappers for popular providers, or manual capture for everything else.',
+            'PostHog-maintained wrappers for the major providers, 40+ documented integrations across gateways and agent frameworks, and manual capture for anything we missed.',
         // The provider grid itself lives in `slides.tsx` – it needs the logo imports.
         footnote: 'Using another LLM observability tool? Analyze that data alongside product usage in PostHog.',
     },

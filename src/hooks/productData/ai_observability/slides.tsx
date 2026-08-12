@@ -69,27 +69,52 @@ const nativeIntegrations: Array<{
     },
 ]
 
-const additionalProviders = [
-    'AWS Bedrock',
-    'Perplexity',
-    'Azure',
-    'Databricks',
-    'Groq',
-    'Lepton',
-    'Mistral AI',
-    'Deepseek',
-    'Cohere',
-    'xAI',
-    'Fireworks',
-    'And more...',
+// Every documented integration beyond the logo tiles above – one entry per page
+// under /docs/ai-observability/installation, so the slide never undersells coverage.
+const additionalProviders: Array<{ name: string; slug: string }> = [
+    { name: 'AutoGen', slug: 'autogen' },
+    { name: 'AWS Bedrock', slug: 'aws-bedrock' },
+    { name: 'Azure OpenAI', slug: 'azure-openai' },
+    { name: 'Cerebras', slug: 'cerebras' },
+    { name: 'Claude Agent SDK', slug: 'claude-agent-sdk' },
+    { name: 'Claude Code', slug: 'claude-code' },
+    { name: 'Cloudflare AI Gateway', slug: 'cloudflare-ai-gateway' },
+    { name: 'Cohere', slug: 'cohere' },
+    { name: 'Convex', slug: 'convex' },
+    { name: 'CrewAI', slug: 'crewai' },
+    { name: 'Dedalus', slug: 'dedalus' },
+    { name: 'DeepSeek', slug: 'deepseek' },
+    { name: 'DSPy', slug: 'dspy' },
+    { name: 'Eve', slug: 'eve' },
+    { name: 'Fireworks AI', slug: 'fireworks-ai' },
+    { name: 'Groq', slug: 'groq' },
+    { name: 'Helicone', slug: 'helicone' },
+    { name: 'Hugging Face', slug: 'hugging-face' },
+    { name: 'Instructor', slug: 'instructor' },
+    { name: 'LangGraph', slug: 'langgraph' },
+    { name: 'Mastra', slug: 'mastra' },
+    { name: 'Mirascope', slug: 'mirascope' },
+    { name: 'Mistral AI', slug: 'mistral' },
+    { name: 'Ollama', slug: 'ollama' },
+    { name: 'OpenAI Agents SDK', slug: 'openai-agents' },
+    { name: 'OpenClaw', slug: 'openclaw' },
+    { name: 'OpenTelemetry', slug: 'opentelemetry' },
+    { name: 'Perplexity', slug: 'perplexity' },
+    { name: 'Pi', slug: 'pi' },
+    { name: 'Portkey', slug: 'portkey' },
+    { name: 'Pydantic AI', slug: 'pydantic-ai' },
+    { name: 'Semantic Kernel', slug: 'semantic-kernel' },
+    { name: 'smolagents', slug: 'smolagents' },
+    { name: 'Together AI', slug: 'together-ai' },
+    { name: 'xAI', slug: 'xai' },
 ]
 
 /**
  * "Supports OpenAI, Anthropic, …" teaser rows for the install CTAs. The wizard
  * instruments LLM providers here, not app frameworks, so the shared
  * `WizardFrameworksTeaser` gets this list instead of the installation taxonomy.
- * Square glyphs only (wordmark logos read as smudges at 24px); Databricks and
- * Lepton stay in the on-page "We also support" list – no logo or docs page yet.
+ * Square glyphs only (wordmark logos read as smudges at 24px). A subset of the
+ * full integration list – the Integrations slide shows everything.
  */
 const providerTeaser: Array<{ slug: string; label: string; image?: string }> = [
     { slug: 'openai', label: 'OpenAI', image: OpenAIGlyph },
@@ -155,11 +180,19 @@ const IntegrationGrid = () => (
             ))}
         </ul>
         <div className="mt-6">
-            <h4 className="text-base mb-2">We also support</h4>
-            <ul className="grid grid-cols-2 @lg:grid-cols-4 gap-x-4 gap-y-1 list-none p-0 m-0 text-[15px] text-secondary">
+            <h4 className="text-base mb-2">
+                Plus {additionalProviders.length} more providers, gateways, and agent frameworks
+            </h4>
+            <ul className="grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 gap-x-4 gap-y-1 list-none p-0 m-0 text-[14px]">
                 {additionalProviders.map((provider) => (
-                    <li key={provider} className="m-0">
-                        {provider}
+                    <li key={provider.slug} className="m-0">
+                        <Link
+                            to={`/docs/ai-observability/installation/${provider.slug}`}
+                            state={{ newWindow: true }}
+                            className="text-secondary hover:text-primary"
+                        >
+                            {provider.name}
+                        </Link>
                     </li>
                 ))}
             </ul>
