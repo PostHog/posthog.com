@@ -81,10 +81,10 @@ export function HeroHeader({ placement }: { placement?: string }): JSX.Element {
 export default function Hero({ className = '', placement }: { className?: string; placement: string }): JSX.Element {
     return (
         <div className={`flex flex-col items-start gap-5 ${className}`}>
-            <h2 className="m-0 max-w-3xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
+            <h1 className="m-0 max-w-3xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
                 Tools, tactics, and taste for{' '}
                 <span className="box-decoration-clone rounded-xs bg-highlight px-2 text-red">product builders.</span>
-            </h2>
+            </h1>
             <p className="m-0 max-w-2xl text-lg text-secondary">
                 Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the
                 strategies of top startups.

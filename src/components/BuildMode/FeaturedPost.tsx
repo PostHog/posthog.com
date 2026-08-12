@@ -45,9 +45,9 @@ export default function FeaturedPost({ post }: { post: BuildModePost }): JSX.Ele
                 </div>
                 <div className="min-w-0 max-w-xl flex-1">
                     {/* Underline is always on but transparent — text-decoration-color transitions where a bare `underline` toggle can't */}
-                    <h1 className="m-0 text-2xl font-bold leading-tight underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl">
+                    <h2 className="m-0 text-2xl font-bold leading-tight underline decoration-transparent transition-colors duration-200 group-hover:decoration-current @2xl:text-3xl">
                         {post.frontmatter.title}
-                    </h1>
+                    </h2>
                     <p className="m-0 mt-3 text-lg text-secondary">{getSubtitle(post)}</p>
                     <p className="m-0 mt-4 text-sm font-medium uppercase tracking-wide text-muted">
                         {getByline(post, post.frontmatter.shortDate)}
