@@ -1,7 +1,6 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { GatsbyNode } from 'gatsby'
-const axios = require('axios')
 
 export { createPages } from './gatsby/createPages'
 export { onCreateNode, onPreInit } from './gatsby/onCreateNode'
@@ -130,26 +129,5 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         actions.setWebpackConfig({
             plugins: [new EmitWebpackGraphPlugin(path.resolve(__dirname, 'bundle-report', 'webpack-graph.json'))],
         })
-    }
-}
-
-exports.createPages = async ({ actions }) => {
-    const { createPage } = actions
-
-    try {
-        const response = await axios.get('https://jobs.ashbyhq.com/supabase')
-        const jobData = JSON.parse(response.data)
-        const jobs = jobData?.jobBoard?.jobPostings || []
-
-        // Create the jobs page with the data
-        createPage({
-            path: '/jobs',
-            component: require.resolve('./src/templates/jobs.tsx'),
-            context: {
-                jobs: jobs,
-            },
-        })
-    } catch (error) {
-        console.error('Error fetching jobs:', error)
     }
 }
