@@ -304,7 +304,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     })
 
-    const createRoadmapItems = async (page = 1) => {
+    const fetchRoadmapPage = async (page: number) => {
         const roadmapQuery = qs.stringify(
             {
                 pagination: {
@@ -339,7 +339,21 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         )
         const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
-        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
+        return await fetch(roadmapsURL).then((res) => res.json())
+    }
+    // Page 1 tells us the page count, then the remaining pages fetch concurrently
+    // instead of one after another (~0.6s per page, 10 pages).
+    const createRoadmapItems = async () => {
+        const firstPage = await fetchRoadmapPage(1)
+        const pageCount = firstPage.meta?.pagination?.pageCount || 1
+        const remainingPages = await Promise.all(
+            Array.from({ length: pageCount - 1 }, (_, i) => fetchRoadmapPage(i + 2))
+        )
+        for (const { data: roadmaps } of [firstPage, ...remainingPages]) {
+            createRoadmapPageNodes(roadmaps)
+        }
+    }
+    const createRoadmapPageNodes = (roadmaps) => {
         roadmaps.forEach((roadmap) => {
             const {
                 id,
@@ -380,7 +394,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
             createNode(roadmapNode)
         })
-        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     const sourceChangelogVideos = async () => {
         const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
