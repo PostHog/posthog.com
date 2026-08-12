@@ -150,7 +150,7 @@ Simple reviews have become like linting. Humans shouldn't be doing either.
 
 For example, if someone told you 12 months ago that a line should be wrapped at a particular character, you would say, "Hey, I've updated the linter, you can ignore this." Agents can basically do this for logic problems and laziness faster, more effectively, and more consistently than a human.
 
-This means we can have a world where humans review code less. And the code reviews they do are more effective as a result. We're continuing to work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
+This means we can have [a world where humans review code less](/newsletter/software-factories#what-is-a-software-factory). And the code reviews they do are more effective as a result. We're continuing to work on tools and agentic flows we can use in CI to make it safe to operate at this new, increased speed.
 
 ## Agents need to test more of the code
 
