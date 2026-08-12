@@ -29,7 +29,7 @@ export function Frontispiece(): JSX.Element | null {
         return null
     }
     return (
-        <div aria-hidden="true" className="mb-[1.2em] mt-[0.4em] flex justify-center @lg:justify-start">
+        <div aria-hidden="true" className="mb-[1.2em] mt-[2em] flex justify-center @lg:justify-start">
             {/* Em-based cap: the specimen scales with the reader's Aa control like everything else. */}
             <Art className="h-auto w-full max-w-[14em]" />
         </div>

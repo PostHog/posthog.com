@@ -80,6 +80,10 @@ export function ScreenshotFigure({
     if (!shot?.src) {
         return null
     }
+    // The annotator prints a key for every numbered set, including an empty one – which on an
+    // unannotated figure is a bare "Key" heading under the image. No set, no key: the figure's
+    // own caption and legend are what carry a plain screenshot.
+    const hasAnnotations = Boolean(set && shot.annotations?.[set]?.items?.length)
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <ProductImageAnnotations
@@ -87,7 +91,7 @@ export function ScreenshotFigure({
                 screenshot={screenshot}
                 set={set}
                 type={type}
-                showKey={showKey}
+                showKey={showKey ?? hasAnnotations}
                 alt={alt}
                 // The frame already supplies the border and ground, so the product page's
                 // drop shadow would read as a second frame inside it.

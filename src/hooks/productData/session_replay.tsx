@@ -147,6 +147,42 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            // Coordinates are percentages of this 1110x640 image, measured against the light
+            // variant – the dark one is the same screen at the same size, so they hold for both.
+            annotations: {
+                inspector: {
+                    type: 'numbered',
+                    items: [
+                        {
+                            x: 16,
+                            y: 36,
+                            title: 'The recording',
+                            description:
+                                'The session played back. It is the rendered page, not a video file, which is why it stays sharp and searchable.',
+                        },
+                        {
+                            x: 76,
+                            y: 8.7,
+                            title: 'Inspector',
+                            description:
+                                'Overview, Inspector, and Network waterfall – the three views onto the same session.',
+                        },
+                        {
+                            x: 61.5,
+                            y: 22.3,
+                            title: 'The session at a glance',
+                            description: 'Clicks, keystrokes, and errors counted before you play anything.',
+                        },
+                        {
+                            x: 92.5,
+                            y: 39.8,
+                            title: 'Your events, timestamped',
+                            description:
+                                'Autocapture, pageviews, web vitals, and your own events, in order, each seeking the player to that moment.',
+                        },
+                    ],
+                },
+            },
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',

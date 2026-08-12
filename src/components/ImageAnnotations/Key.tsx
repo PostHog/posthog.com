@@ -33,7 +33,7 @@ function ImageAnnotationsKey({ title = 'Key', className = '' }: ImageAnnotations
                                 {type === 'numbered' ? index + 1 : ''}
                             </span>
                             <div className="leading-tight pt-0.5">
-                                <span className="text-[15px] font-semibold">{annotation.title}</span>
+                                <span className="text-[15px] font-semibold text-primary">{annotation.title}</span>
                                 {annotation.description && (
                                     <p className="text-sm text-secondary mt-0.5 mb-0 leading-normal">
                                         {annotation.description}
