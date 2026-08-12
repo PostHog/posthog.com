@@ -115,28 +115,60 @@ Uploads go through the posthog.com Strapi backend, which needs a bearer token.
 400 BadRequestError: "PostHog employees must log in with PostHog"
 ```
 
-There is no password to send, so don't ask for one. Ask the user to hand you the session token the site is already using:
+There is no password to send, so don't ask for one. Instead, have the user write the session token to a file that you read directly.
 
-> While logged in to posthog.com, open your browser console and run `localStorage.getItem('jwt')`, then paste the result here.
+**Never ask the user to paste the token into the chat.** A pasted token is captured verbatim in the conversation transcript, and again in every tool call that uses it. Strapi JWTs are stateless, so this is not a small leak: signing out of posthog.com only clears the browser's `localStorage` and does **not** invalidate the token server-side. It stays usable for its full ~30-day life, and the only real revocation is rotating the Strapi instance's `jwtSecret` — which signs out every user of the site, so nobody will want to do it casually.
 
-That's the same token every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key. It's valid for about 30 days, so a token from an earlier session in the same conversation is usually still good.
+Ask for this instead:
 
-**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work:
+> While logged in to posthog.com, open your browser console and run `localStorage.getItem('jwt')` and copy the result. Then, in your terminal, run this — it will wait silently for you to paste the token and press Enter:
+>
+> ```bash
+> mkdir -p ~/.posthog && chmod 700 ~/.posthog
+> read -rs TOKEN && printf %s "$TOKEN" > ~/.posthog/strapi-jwt && chmod 600 ~/.posthog/strapi-jwt && unset TOKEN
+> ```
 
-> Please run: `! export SQUEAK_EMAIL=you@example.com SQUEAK_PASSWORD=yourpassword`
+`read -rs` is what keeps this clean — the `-s` means the token is never echoed to the screen and never lands in their shell history. The file persists between sessions, so they only redo this when the token expires.
 
-Note that `!`-prefixed commands run in the **user's** shell, not yours — the exported variables will NOT be visible to your Bash tool, and `${SQUEAK_EMAIL}` will expand to an empty string. Read the values out of the user's message and pass them inline instead.
+That token is the same one every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key. It's valid for about 30 days.
+
+**Rules for handling it once it's on disk:**
+
+- Read it inline at the point of use: `-H "Authorization: Bearer $(cat ~/.posthog/strapi-jwt)"`. The transcript then records the command, not the secret.
+- **Never `echo`, `cat`, or `print` the token itself**, and never paste its value into a later command — that would defeat the whole mechanism. This includes "just checking" that the file looks right.
+- To check whether it's expired, decode only the `exp` claim, never the token:
+  ```bash
+  python3 -c "
+  import base64, json, datetime, pathlib
+  c = (pathlib.Path.home() / '.posthog/strapi-jwt').read_text().strip().split('.')[1]
+  d = json.loads(base64.urlsafe_b64decode(c + '=' * (-len(c) % 4)))
+  print('expires', datetime.datetime.fromtimestamp(d['exp'], datetime.UTC))"
+  ```
+  Decode it in Python, not with `cut … | base64 -d`. JWT payloads are base64**url** with the padding stripped, and `base64 -d` both rejects the `-`/`_` characters and chokes on the missing padding — worse, it prints partial output before failing, so a `2>/dev/null` version looks like it works right up until it silently reports the wrong thing.
+- If `~/.posthog/strapi-jwt` doesn't exist, ask the user to create it with the snippet above. Don't fall back to asking them to paste it.
+
+If the user pastes a token into the chat anyway, use it to finish the job, but tell them plainly afterwards that it is now in the transcript, when it expires, and that logging out will not revoke it.
+
+**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work. Use the same on-disk pattern rather than taking a password through the chat:
+
+> ```bash
+> mkdir -p ~/.posthog && chmod 700 ~/.posthog
+> printf 'you@example.com\n' > ~/.posthog/squeak-email
+> read -rs PW && printf %s "$PW" > ~/.posthog/squeak-password && chmod 600 ~/.posthog/squeak-password && unset PW
+> ```
+
+Do not suggest `! export SQUEAK_EMAIL=…` — `!`-prefixed commands run in the **user's** shell, not yours, so the exported variables are invisible to your Bash tool and `${SQUEAK_EMAIL}` expands to an empty string.
 
 Then upload all images with a shell script:
 
 ```bash
-# Staff: use the JWT the user pasted.
-JWT='eyJhbGciOi...'
+# Staff: read the JWT from disk. Never inline the token itself here.
+JWT=$(cat ~/.posthog/strapi-jwt)
 
 # Non-staff only: exchange credentials for a JWT.
 # JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
 #   -H "Content-Type: application/json" \
-#   -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
+#   -d "{\"identifier\":\"$(cat ~/.posthog/squeak-email)\",\"password\":\"$(cat ~/.posthog/squeak-password)\"}" \
 #   | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
 
 # Upload hero (if local file provided)
@@ -164,7 +196,7 @@ print(d[0]['url'] if isinstance(d, list) else 'ERROR ' + json.dumps(d)[:400])
 }
 ```
 
-If an upload returns `401 Unauthorized`, the token has expired — ask for a fresh one rather than retrying.
+If an upload returns `401 Unauthorized`, the token has expired — ask the user to rewrite `~/.posthog/strapi-jwt` with a fresh one (same snippet as in 3c) rather than retrying, and don't let them shortcut it by pasting the new token into the chat.
 
 Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
 
