@@ -32,7 +32,6 @@ import TeamRoadmap from 'components/TeamRoadmap'
 import { Marquee } from 'components/Products/Marquee'
 import RecentChange from '../RecentChange'
 import TeamMembers from '../TeamMembers'
-import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
 import { PairsWith } from 'components/Products/PairsWith'
@@ -409,22 +408,6 @@ export const ProductOS = () => {
                 </section>
             </div>
 
-            <div className="hidden max-w-7xl mx-auto px-5">
-                <section id="questions" className="mb-20">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
-
-                    <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
-
-                    <div className="text-center mb-8">
-                        <CallToAction href={`/questions/${product.slug}`} type="secondary" size="sm">
-                            View {product.lowercase} questions
-                        </CallToAction>
-                    </div>
-
-                    <Questions topicIds={[27]} />
-                    {/*<Questions topicIds={[27, 38, 46, 36, 25, 51, 26, 54, 47]} /> */}
-                </section>
-            </div>
             <div className="max-w-7xl mx-auto relative">
                 <section className="mb-20">
                     <CTA />

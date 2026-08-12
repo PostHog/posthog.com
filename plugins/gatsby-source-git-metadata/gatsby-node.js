@@ -5,6 +5,7 @@ const files = {}
 
 const PATHS_PER_QUERY = 100
 const CONCURRENCY = 8
+const MAX_ATTEMPTS = 5
 
 const historyQuery = (owner, repo, paths, commitLimit) => {
     const selections = paths
@@ -63,6 +64,20 @@ async function fetchChunk({ owner, repo, paths, commitLimit, token }) {
     return result
 }
 
+async function fetchChunkWithRetry(args, reporter, index) {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            return await fetchChunk(args)
+        } catch (error) {
+            if (attempt >= MAX_ATTEMPTS) throw error
+            // Full jitter: GitHub drops connections under load, so spread out retries
+            const delay = Math.round(Math.random() * 1000 * 2 ** attempt)
+            reporter.warn(`[git-metadata] chunk ${index + 1} failed (${error.message}), retrying in ${delay}ms`)
+            await new Promise((resolve) => setTimeout(resolve, delay))
+        }
+    }
+}
+
 exports.onPreInit = async function ({ reporter }, options = {}) {
     const {
         owner = 'PostHog',
@@ -91,7 +106,10 @@ exports.onPreInit = async function ({ reporter }, options = {}) {
         chunks.map((chunk, index) =>
             limit(async () => {
                 reporter.info(`[git-metadata] fetching ${chunk.length} files (${index + 1}/${chunks.length})`)
-                Object.assign(files, await fetchChunk({ owner, repo, paths: chunk, commitLimit, token }))
+                Object.assign(
+                    files,
+                    await fetchChunkWithRetry({ owner, repo, paths: chunk, commitLimit, token }, reporter, index)
+                )
             })
         )
     )
