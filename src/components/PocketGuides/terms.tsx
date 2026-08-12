@@ -103,6 +103,30 @@ export const TERMS = {
             'Feature flags let you ship code without shipping the feature. Wrap a change in a flag, roll it out to 1% of users, watch what happens, and turn it off the moment something looks wrong.',
         slug: '/docs/feature-flags',
     },
+    exception: {
+        title: 'Exception',
+        description:
+            'Error tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve – each one carrying the affected person, their session replay, and the events around it.',
+        slug: '/docs/error-tracking',
+    },
+    'cost calculation': {
+        title: 'Cost calculation',
+        description:
+            "PostHog computes each call's cost from input and output tokens, cached token reads and writes, and any per-request or web-search charges, using the provider and model on the event.",
+        slug: '/docs/ai-observability/calculating-costs',
+    },
+    'AI Observability dashboard': {
+        title: 'AI Observability dashboard',
+        description:
+            'An overview of your LLM usage and performance, with insights on users, generations, cost, latency, and errors available out of the box.',
+        slug: '/docs/ai-observability/dashboard',
+    },
+    'errors tab': {
+        title: 'Errors tab',
+        description:
+            'Groups and aggregates error messages from your LLM application, normalizing away ids and timestamps so the same underlying failure lands as one issue you can prioritize.',
+        slug: '/docs/ai-observability/errors',
+    },
     'user feedback': {
         title: 'User feedback',
         description:
