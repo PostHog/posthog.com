@@ -487,6 +487,10 @@ module.exports = {
                 // scripts, and unrelated frontend/skills code paths. They never become
                 // pages — see shouldBlockNodeFromTransformation above and onCreateNode.
                 patterns: ['docs/published/**', 'docs/onboarding/**', 'products/*/skills/*/SKILL.md'],
+                // Git sparse-checkout equivalents of `patterns` (non-cone syntax). With these
+                // set, the plugin does a blobless sparse clone that downloads and writes out
+                // only these paths instead of the monorepo's entire working tree.
+                sparsePatterns: ['/docs/published/', '/docs/onboarding/', '/products/*/skills/*/SKILL.md'],
             },
         },
         // {
