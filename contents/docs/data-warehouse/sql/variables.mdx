@@ -61,7 +61,7 @@ If person scope isn't what you want, bind the columns yourself instead.
 
 ### Binding filters to columns
 
-For any other table, view, or join – or to override the defaults above – tell PostHog which of your columns each filter applies to by binding them:
+For any other table, view, or join (or to override the defaults above), tell PostHog which of your columns each filter applies to by binding them:
 
 ```sql
 select *
@@ -76,6 +76,48 @@ Each argument binds one of your query's expressions to a filter key with `AS`:
 - `null AS key` opts the query out of filtering on that key. For example, `null AS timestamp` opts out of date filtering.
 
 If a filter is active but not bound, the query shows an error instead of silently ignoring the filter. This way a filtered dashboard never shows unfiltered data. Cohort filters and SQL expression filters can't be bound and show an error too.
+
+[Test account filtering](/docs/product-analytics/trends/filters#filtering-internal-and-test-users) works the same way: when it's on for the insight, or forced on by the dashboard's own toggle, the properties your test account filters use need bindings too.
+
+### Applying the dashboard interval
+
+Use `{filters.interval}` where a time unit goes, for example in `dateTrunc`:
+
+```sql
+select dateTrunc({filters.interval('week')}, timestamp) as period, count() as event_count
+from events
+where {filters}
+group by period
+order by period
+```
+
+The placeholder becomes the dashboard's interval as a string constant, like `'week'`. The argument sets your default for when the dashboard doesn't set an interval. Without an argument, the default is `'day'`. Valid intervals are `second`, `minute`, `hour`, `day`, `week`, `month`, `quarter`, and `year`.
+
+### Applying the dashboard breakdown
+
+When the dashboard sets a breakdown, `{filters.breakdown(...)}` becomes the expression you bound to that breakdown key:
+
+```sql
+select {filters.breakdown(properties.plan AS 'plan')} as breakdown, count() as event_count
+from events
+where {filters}
+group by breakdown
+```
+
+Bindings work like the column-bound form above: bind an expression to each breakdown key you support, or `null AS 'plan'` to opt out of one. Without a breakdown set, the placeholder becomes `null` and the query returns a single group, so it still runs outside the dashboard. A breakdown on an unbound key shows an error.
+
+The placeholder supports a single plain breakdown. Cohort breakdowns, numeric binning, and multiple breakdowns show an error. The breakdown value shows up as a regular column in your results. Chart series don't split on it automatically.
+
+The filter placeholders combine. This query takes its date range, property filters, interval, and breakdown from the dashboard:
+
+```sql
+select dateTrunc({filters.interval('week')}, day) as period,
+       {filters.breakdown(account_plan AS 'plan')} as breakdown,
+       count() as order_count
+from my_revenue_view
+where {filters(day AS timestamp, account_id AS 'account_id')}
+group by period, breakdown
+```
 
 ## Dashboard date range filter variables
 
