@@ -4,7 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Feature trailers exist primarily as social-first videos to create excitement, interest, and awareness around new PostHog products and features. If you want one made, here's how the process works and what to expect.
+Feature trailers are social-first videos designed to create excitement, interest, and awareness around new PostHog products and features. They can also be used as short demo videos for product pages and docs. 
+
+If you want one made, here's how the process works and what to expect.
 
 ## Types of feature trailers
 
@@ -13,7 +15,7 @@ There are two types of feature trailer, depending on how much time you have and 
 | Type | Description | Production time | Example |
 |---|---|---|---|
 | **Teaser** (under 30 seconds) | Pure vibes, not a story. It shows a single user experience and is designed to create buzz and excitement about a new feature. | Up to a week and a half | [PostHog Code teaser](https://youtu.be/fsCEXfe5vKA) |
-| **Use case video** (30–90 seconds) | Narrative-based, showing the full breadth of what a feature or product can do. It tells a story. | Up to two weeks | [Slack app feature trailer](https://youtu.be/SaVTePqaPeM) |
+| **Use case video** (30–90 seconds) | Narrative-based, showing a single specific use case for PostHog product or feature. Ideally based on our own usage of the product. | Up to two weeks | [Slack app feature trailer](https://youtu.be/SaVTePqaPeM) |
 
 > The team can also make longer demo videos (e.g. 3 to 5 minutes or more), though these aren't feature trailers. They're a much bigger project that can take 4+ weeks, and work best on a product that's already stable – i.e. UI is finalized and unlikely to change. That's why we tend to avoid them for launches and announcements.
 
