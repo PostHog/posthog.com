@@ -1,0 +1,104 @@
+---
+title: An AI bill nobody can explain
+shortTitle: Unexplained AI bills
+subtitle: Sort AI costs by feature, model, and customer. Your bill shouldn't just be a total that goes up.
+bookOrder: 3
+cta:
+  kind: prompt
+  label: Build this with PostHog AI
+  note: It builds the insights and the dashboard, then tells you which breakdown dominates.
+  requires:
+    label: Needs AI Observability instrumented.
+  prompt: >-
+    Build me an AI cost dashboard from my $ai_generation events. First list the custom properties
+    on those events and pick the one that identifies which feature made the call. Include daily
+    total $ai_total_cost_usd; cost broken down by that feature property, by $ai_model, and by the
+    top 20 distinct_ids; cost per trace using distinct $ai_trace_id as the denominator; and the
+    input-to-output token ratio over time. Exclude events from dev and local environments. Then
+    tell me which single breakdown accounts for the largest share of the last 7 days.
+---
+
+<LeftPage>
+
+<DivergenceFigure
+    n={1}
+    caption="Three features on one bill. The total went up 60% and only one of them changed."
+    markerAt={0.4}
+    markerLabel="agent update"
+    series={[
+        {
+            label: 'Support summarizer',
+            note: 'flat at ~$40/day',
+            values: [0.3, 0.32, 0.29, 0.31, 0.3, 0.33, 0.31, 0.3, 0.32, 0.31],
+        },
+        {
+            label: 'Docs search',
+            note: 'flat at ~$25/day',
+            values: [0.2, 0.19, 0.21, 0.2, 0.22, 0.2, 0.19, 0.21, 0.2, 0.2],
+        },
+        {
+            label: 'Onboarding agent',
+            note: '$35 → $190/day',
+            emphasis: true,
+            values: [0.28, 0.3, 0.29, 0.31, 0.45, 0.62, 0.75, 0.84, 0.9, 0.93],
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# An AI bill nobody can explain
+
+If your AI bill is one mysterious number, you need to break it down. Cost attribution turns single number bills into detailed, feature-by-feature breakdowns.
+
+PostHog already [computes](/docs/ai-observability/calculating-costs) `$ai_total_cost_usd` on every <Term name="generation" />, cache reads included. All it needs from you is dimensions to split by.
+
+## Add properties
+
+To make sense of your AI bill, PostHog supports properties:
+- Use a <Term name="custom property" /> to name specific features
+- Default properties like `$ai_model` and `$ai_provider` are included automatically
+- `distinct_id` tells you which customers your spend goes to
+
+Once you've added properties, your AI bill is no longer one line: <SeeFig n={1} /> – three surfaces on the same account, two of them steady, one that quadrupled after a change in your onboarding agent.
+
+## Divide by requests
+
+A rising AI bill has two possible causes: more people used it, or each use got more expensive.
+
+Every call carries a `$ai_trace_id` that groups it with one interaction. Distinct <Term name="trace">traces</Term> give you the denominator to divide by: 
+- More traces means you're growing. 
+- More cost per trace means something regressed. 
+
+If your product is a multi-turn chat, `$ai_session_id` groups traces into a whole conversation, and cost per session is the number you should pay attention to.
+
+The input-to-output token ratio is worth the same treatment. Output tokens rising means the model got chattier. Input tokens rising while output holds means your context is growing – a prompt that keeps accreting instructions, a retrieval step returning more documents than it used to, or a conversation history nobody truncates.
+
+## What the breakdown catches
+
+Four things account for most surprise bills, and each one has a different signature in the split:
+
+| What happened | How it shows up |
+| --- | --- |
+| A model swap | Cost steps up on one `$ai_model`, volume unchanged |
+| A prompt that grew | `$ai_input_tokens` climbs, output holds |
+| Caching stopped hitting | Cost per call rises while token counts stay flat |
+| A retry loop | Generations per trace climbs, cost per trace with it |
+
+That last one is the expensive one, because it looks like usage. Every failed attempt bills, and if your code retries silently the only trace of the failure is the invoice.
+
+## Build the dashboard
+
+Build all of this data into a [dashboard](/docs/ai-observability/dashboard) you can open when you need to understand your AI spend.
+
+<Action />
+
+<SeeAlso>
+
+See also: [Self-driving AI spend that jumps overnight](/pocket-guides/self-driving/ai-spend-that-jumps)
+
+</SeeAlso>
+
+</RightPage>

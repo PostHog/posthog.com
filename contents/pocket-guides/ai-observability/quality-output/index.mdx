@@ -5,7 +5,7 @@ subtitle: Error rate says your AI feature is fine, but evaluations tell you whet
 bookOrder: 2
 cta:
   kind: prompt
-  label: Set this up with PostHog AI
+  label: Build this with PostHog AI
   note: It creates the eval disabled, so you can read it before it starts scoring anything.
   requires:
     label: Needs AI Observability instrumented, plus an LLM provider key for the judge.
@@ -70,39 +70,36 @@ cta:
 
 # Wrong answers that never error
 
-We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you own stays green.
+We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you monitor stays green.
 
-Every number you already have describes how the model performed – its speed, cost, and responsiveness. None of them describe whether what it said was true, the only one checking that is the user reading the output.
+You probably have numbers that describe how the model performed – its speed, cost, and responsiveness. The piece your missing is whether what it said was true.
 
-## What scores the answer itself
+## What scores a model's output
 
-An <Term name="evaluation" /> scores the output, which is the half your other signals can't see. AI Observability (AIO) runs three kinds against your live traffic:
-
+An <Term name="evaluation" /> scores the model's output. AI Observability (AIO) runs three kinds of evaluations against your live traffic:
 - An <Term name="LLM-as-a-judge" /> that scores each generation against a prompt you write
 - A <Term name="code-based evaluation">code-based rule</Term> that checks something you can express exactly
 - Built-in <Term name="sentiment analysis" /> that classifies how the user sounds
 
 Each result lands on the generation it scored, with the reason it passed or failed – <SeeFig n={1} /> is an example of that list in the app.
 
-## What a quality drop looks like
+## What quality drop looks like
 
 When you've collected enough of those scores, you get a pass rate: one number for how often your AI feature gets it right. If you watch a pass rate over time, a bad change stops being invisible.
 
-In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off a cliff, at the moment a prompt changed. Without an evaluation running, the first you'd hear of that is a customer email, weeks later.
+In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off at the moment a prompt changed. Without an evaluation running, the first you'd hear of that is a customer email, weeks later.
 
-## Write the criteria you'd actually check
+## How to write evaluation criteria
 
-But numbers are only worth watching if the check behind it asks something _real_. Sentiment needs nothing from you, but the other two are checks you write – a prompt for the judge and code for the deterministic rule.
+Numbers are only worth watching if the check behind it asks something _real_. Sentiment needs nothing from you, but the other two are checks you write – a prompt for the judge and code for the deterministic rule.
 
-Asking "Is this good?" isn't good enough. It produces a number that moves for reasons you can't name. Ask for the specific failure you're worried about instead:
+Asking "Is this good?" isn't going to cut it. Vague questions produce numbers that move for reasons you can't name. Ask for the specific failure you're worried about instead:
 
 - **For a support bot:** does the answer contradict the retrieved context?
 - **For a code assistant:** does it call a function that doesn't exist in the file?
 - **For a summarizer:** does it introduce a name that wasn't in the source?
 
 Each of those is checkable, so when the pass rate drops you know which behavior changed.
-
-A judge scores by making an LLM call, so sample rather than grade everything – 10% catches a real regression within a day, and code-based and sentiment evals are free enough to run on all of it. Either way, exclude development traffic and internal users, which fail for reasons that aren't your product.
 
 ## Split by model and prompt version
 
@@ -113,6 +110,8 @@ Splitting by model is free: `$ai_model` is already on every generation. Splittin
 ## Run your first eval
 
 The prompt below sets up a judge on a retrieval-backed feature, with the criteria from earlier: does the answer contradict, invent, or refuse what the context supports? Swap those for the failure your product actually has – the structure is what matters.
+
+Tailor the prompt as needed, for your specific product or use case.
 
 <Action />
 
