@@ -78,8 +78,8 @@ export const features = {
         ],
     },
     trace_monitoring: {
-        title: 'Traces',
-        headline: 'Traces',
+        title: 'Tracing',
+        headline: 'Trace every conversation end to end',
         description:
             'Debug entire conversations, not just individual calls. Every trace is a timeline of its generations and spans, with the person, total cost, and total latency attached.',
         icon: <IconListTreeConnected />,
@@ -90,26 +90,28 @@ export const features = {
                 alt: 'An LLM trace with its timeline, tree, and generation detail',
             },
         ],
+        // Merged tracing + generations flow – the two were separate top features
+        // saying the same thing.
         features: [
             {
                 icon: <IconListTreeConnected />,
-                title: 'Multi-turn conversation history',
-                description: 'Track prompts, completions, and token counts for every interaction',
+                title: 'Trace timeline',
+                description: 'A waterfall of every span and generation, with latency and cost at each step',
             },
             {
-                icon: <IconUser />,
-                title: 'User attribution',
-                description: 'Trace AI interactions to specific users and organizations',
+                icon: <IconSparkles />,
+                title: 'Full conversation context',
+                description: 'The exact input and output of every call, including multi-turn history and tool calls',
+            },
+            {
+                icon: <IconTag />,
+                title: 'Tokens and cost',
+                description: 'Token counts per call, with cost calculated automatically from model pricing',
             },
             {
                 icon: <IconRewindPlay />,
                 title: 'Integrated session recordings',
                 description: 'Jump from a trace to the session recording and watch what the response did in your UI',
-            },
-            {
-                icon: <IconTag />,
-                title: 'Metadata tracking',
-                description: 'Add custom properties like conversation ID, session, or feature',
             },
             {
                 icon: <IconShield />,
@@ -139,12 +141,12 @@ export const features = {
             {
                 icon: <IconTarget />,
                 title: 'Cost per user',
-                description: 'See which users or organizations are driving your LLM costs',
+                description: 'See which users or organizations drive spend, with full person profiles behind each',
             },
             {
                 icon: <IconSparkles />,
-                title: 'Feature-level costs',
-                description: 'Understand the economics of each AI-powered feature',
+                title: 'Cost by custom tags',
+                description: 'Break down spending by feature, environment, or any metadata you attach',
             },
             {
                 icon: <IconPiggyBank />,
@@ -219,8 +221,8 @@ export const features = {
         ],
     },
     errors: {
-        title: 'Errors',
-        headline: 'Errors',
+        title: 'Error analysis',
+        headline: 'Error analysis',
         description:
             'Debug failed LLM calls and monitor exception rates with the full story: prompt, response, parameters, and metadata – the context agents use to fix what broke.',
         icon: <IconWarning />,
@@ -229,6 +231,20 @@ export const features = {
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/errors_screenshot_e413f3f20b.png',
                 alt: 'AI Observability errors',
+            },
+        ],
+        features: [
+            {
+                title: 'Failed generations',
+                description: 'Every failed call listed with its prompt, parameters, and provider error',
+            },
+            {
+                title: 'Error tracking integration',
+                description: 'LLM exceptions become issues you can triage, assign, and resolve',
+            },
+            {
+                title: 'Error rate alerts',
+                description: 'Anomaly detection fires when failures spike above your normal',
             },
         ],
     },

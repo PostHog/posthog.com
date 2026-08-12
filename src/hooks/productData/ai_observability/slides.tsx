@@ -1,15 +1,14 @@
 import React from 'react'
 import {
+    IconBell,
     IconBolt,
     IconBrowser,
+    IconDashboard,
     IconLightBulb,
     IconListTreeConnected,
     IconLlmPromptEvaluation,
     IconPiggyBank,
     IconPlug,
-    IconSparkles,
-    IconTrends,
-    IconUser,
     IconWarning,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -205,9 +204,10 @@ const IntegrationGrid = () => (
 )
 
 /**
- * Applications = the ways you show up to the product (dashboard, editor/MCP),
- * ending with Self-driving – where the product shows up to you instead.
- * Capability detail belongs in `topFeatures`.
+ * Applications = the interfaces you reach the product through (editor/MCP, the
+ * app UI, queries and alerts), ending with Self-driving – where the product
+ * comes to you instead. The features and flows themselves live in `topFeatures`;
+ * nothing here should repeat them.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -250,14 +250,55 @@ export const applications: CarouselSlide[] = [
         ),
     },
     {
-        slug: 'analyze',
-        label: 'Analyze',
-        icon: <IconTrends className="size-5" />,
+        slug: 'in-the-app',
+        label: 'In the app',
+        icon: <IconDashboard className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-blue',
         layout: 'float',
-        heading: 'Analyze cost, usage, and performance',
+        heading: 'One UI for every generation, trace, and user',
+        description: (
+            <>
+                <p>
+                    The AI observability tabs cover the day-to-day: a ready-made dashboard, browsable generations and
+                    traces, and per-user roll-ups.
+                </p>
+                <div className="@container">
+                    <LabeledList
+                        items={[
+                            {
+                                label: 'Dashboard',
+                                description: 'Cost, usage, latency, and errors charted the moment events arrive',
+                            },
+                            {
+                                label: 'Trace explorer',
+                                description: 'Drill from the list into any conversation, span by span',
+                            },
+                            {
+                                label: 'Users and sessions',
+                                description: "Spot power users, watch sessions, and see who's hitting errors",
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.generations.images[0].src,
+            alt: f.generations.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'query-alert',
+        label: 'Query & alert',
+        icon: <IconBell className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'float',
+        heading: 'LLM data is PostHog data – query and alert on it',
         description: (
             <>
                 <p>
@@ -268,10 +309,6 @@ export const applications: CarouselSlide[] = [
                     <LabeledList
                         items={[
                             {
-                                label: 'Ready-made dashboard',
-                                description: 'Cost, usage, latency, and errors charted the moment events arrive',
-                            },
-                            {
                                 label: 'Any insight, any metric',
                                 description: 'Break down spend by model, latency by feature, or errors by user segment',
                             },
@@ -279,6 +316,10 @@ export const applications: CarouselSlide[] = [
                                 label: 'Anomaly alerts',
                                 description:
                                     'Detectors learn what normal looks like and notify you when cost, latency, or errors spike',
+                            },
+                            {
+                                label: 'Slack, email, or webhooks',
+                                description: 'Alerts and scheduled reports land where your team already lives',
                             },
                         ]}
                     />
@@ -288,70 +329,6 @@ export const applications: CarouselSlide[] = [
         image: {
             src: f.performance_monitoring.images[0].src,
             alt: f.performance_monitoring.images[0].alt,
-            glow: true,
-        },
-    },
-    {
-        slug: 'debug',
-        label: 'Debug',
-        icon: <IconWarning className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-yellow',
-        layout: 'float',
-        heading: 'Debug generations when they go wrong',
-        description: (
-            <>
-                <p>
-                    Find the generation that failed or stalled, and read the exact prompt, response, model parameters,
-                    and metadata behind it.
-                </p>
-                <div className="@container">
-                    <LabeledList
-                        items={[
-                            {
-                                label: 'Trace timeline',
-                                description:
-                                    'A waterfall of every span and generation, with latency and cost at each step',
-                            },
-                            { label: f.errors.title, description: f.errors.description },
-                            { label: f.sessions.title, description: f.sessions.description },
-                        ]}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.trace_monitoring.images[0].src,
-            alt: f.trace_monitoring.images[0].alt,
-            glow: true,
-        },
-    },
-    {
-        slug: 'evaluate',
-        label: 'Evaluate',
-        icon: <IconLlmPromptEvaluation className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-seagreen',
-        layout: 'float',
-        heading: 'Evaluate AI quality in production',
-        description: (
-            <>
-                <p>{f.evaluations.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.evaluations.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.evaluations.images[0].src,
-            alt: f.evaluations.images[0].alt,
             glow: true,
         },
     },
@@ -385,10 +362,14 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
+/**
+ * Top features = the flows people buy the product for: tracing, cost analysis,
+ * evaluations, error analysis, alerting. Interfaces live in `applications`.
+ */
 export const topFeatures: CarouselSlide[] = [
     {
-        slug: 'traces',
-        label: 'Traces',
+        slug: 'tracing',
+        label: 'Tracing',
         icon: <IconListTreeConnected className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -411,34 +392,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.trace_monitoring.images[0].src,
             alt: f.trace_monitoring.images[0].alt,
-            glow: true,
-        },
-    },
-    {
-        slug: 'generations',
-        label: 'Generations',
-        icon: <IconSparkles className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-yellow',
-        layout: 'float',
-        heading: f.generations.headline,
-        description: (
-            <>
-                <p>{f.generations.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.generations.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.generations.images[0].src,
-            alt: f.generations.images[0].alt,
             glow: true,
         },
     },
@@ -471,8 +424,8 @@ export const topFeatures: CarouselSlide[] = [
         },
     },
     {
-        slug: 'costs',
-        label: 'Costs',
+        slug: 'cost-analysis',
+        label: 'Cost analysis',
         icon: <IconPiggyBank className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
@@ -499,23 +452,65 @@ export const topFeatures: CarouselSlide[] = [
         },
     },
     {
-        slug: 'performance',
-        label: 'Performance',
-        icon: <IconTrends className="size-5" />,
+        slug: 'error-analysis',
+        label: 'Error analysis',
+        icon: <IconWarning className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-red',
+        layout: 'float',
+        heading: 'Every failure, with the context to fix it',
+        description: (
+            <>
+                <p>{f.errors.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.errors.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.errors.images[0].src,
+            alt: f.errors.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'alerting',
+        label: 'Alerting',
+        icon: <IconBell className="size-5" />,
         color: 'bg-light dark:bg-dark',
         activeText: 'text-primary',
         progressBar: 'bg-lilac',
         layout: 'float',
-        heading: f.performance_monitoring.headline,
+        heading: 'Anomaly detection on any metric',
         description: (
             <>
-                <p>{f.performance_monitoring.description}</p>
+                <p>
+                    Cost, latency, error rate, sentiment – any insight built on LLM events can alert, and anomaly
+                    detectors mean you set them up once instead of tuning thresholds forever.
+                </p>
                 <div className="@container">
                     <LabeledList
-                        items={f.performance_monitoring.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
+                        items={[
+                            {
+                                label: 'Learned baselines',
+                                description: 'Detectors learn what normal looks like – no fixed thresholds to tune',
+                            },
+                            {
+                                label: 'Sent where you work',
+                                description: 'Notifications go to Slack, email, or webhooks',
+                            },
+                            {
+                                label: 'Agent investigations (alpha)',
+                                description:
+                                    'An agent digs into firing alerts, writes up the cause, and suppresses false positives',
+                            },
+                        ]}
                     />
                 </div>
             </>
@@ -523,34 +518,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.performance_monitoring.images[0].src,
             alt: f.performance_monitoring.images[0].alt,
-            glow: true,
-        },
-    },
-    {
-        slug: 'users',
-        label: 'Users',
-        icon: <IconUser className="size-5" />,
-        color: 'bg-light dark:bg-dark',
-        activeText: 'text-primary',
-        progressBar: 'bg-red',
-        layout: 'float',
-        heading: f.users.headline,
-        description: (
-            <>
-                <p>{f.users.description}</p>
-                <div className="@container">
-                    <LabeledList
-                        items={f.users.features.map((item) => ({
-                            label: item.title,
-                            description: item.description,
-                        }))}
-                    />
-                </div>
-            </>
-        ),
-        image: {
-            src: f.users.images[0].src,
-            alt: f.users.images[0].alt,
             glow: true,
         },
     },
