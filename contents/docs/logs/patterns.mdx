@@ -20,7 +20,7 @@ Become a single pattern:
 User <*> not found
 ```
 
-This surfaces noisy log lines, new error shapes, and unexpected changes in your log traffic.
+Multiply that across a real log volume and thousands of lines collapse into a few dozen templates. Noisy lines, new error shapes, and sudden changes in traffic become obvious.
 
 ## Why patterns matter
 
@@ -103,7 +103,7 @@ The **View matching logs** button tooltip tells you which mode is active:
 
 ### Automatic service and severity scoping
 
-When a pattern's sample is unambiguous – a single service or a single canonical severity – the pivot also sets the corresponding service and severity filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
+When a pattern's sample points to a single service or a single canonical severity, the pivot also sets those filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
 
 Scoping is withheld when it could silently exclude matching lines, such as when the services list is at the miner's cap (possibly truncated) or the severity is non-canonical.
 
@@ -134,15 +134,15 @@ A new error template appearing at low volume is often a better early signal than
 
 ## Sampling
 
-When your log volume is large, patterns are mined from a representative sample rather than every line. A banner at the top of the Patterns view explains:
+When your log volume is large, PostHog mines patterns from a representative sample rather than every line. A banner at the top of the Patterns view explains:
 
 - How many lines were sampled out of the total matching your filters
 - What percentage of the time window the sample covers
 - That counts are estimates extrapolated to the full window
 
-Hover any count to see the raw sample figure the estimate was derived from. Estimated counts are prefixed with `~` to indicate they're extrapolations.
+Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations.
 
-To improve accuracy, narrow your filters – a specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+To improve accuracy, narrow your filters. A specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
 
 ## Tips
 
