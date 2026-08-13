@@ -179,9 +179,9 @@ Supported on the following SDKs:
 | React Native | 4.52.0+ |
 | Flutter | 5.24.3+ |
 
-There are two modes for how minimum duration is enforced, controlled by the `strictMinimumDuration` configuration option. This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
+Use this to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
-#### Strict mode (default)
+#### How minimum duration is enforced
 
 In strict mode (`strictMinimumDuration: true`), the minimum duration is checked against the **actual buffered recording data** (from first to last timestamp), not the session age. We only start sending the recording once we have the minimum duration of continuous data in the buffer.
 
@@ -272,9 +272,7 @@ Since posthog-js 1.369.0, all of these controls live in [trigger groups](#trigge
 
 If you're using the controls below, upgrade to a current SDK and migrate your configuration to trigger groups.
 
-<details>
-
-<summary>Migrating to trigger groups</summary>
+### Migrating to trigger groups
 
 If you have existing legacy trigger settings (URL triggers, event triggers, feature flags, sampling, and match type configured outside of trigger groups), you can automatically convert them to trigger groups.
 
@@ -292,11 +290,8 @@ You can edit the groups after creating them.
 >
 > This preserves the original behavior where recording starts if **any** condition matches **or** the session was sampled.
 
-</details>
 
-<details>
-
-<summary>Project-wide match type</summary>
+### Project-wide match type and sampling
 
 Since version 1.238.0 of the web SDK you can control how multiple triggers are combined, choosing whether recording will start when all triggers match or when any trigger matches. In the legacy configuration, match type and sampling apply to the project as a whole rather than per group.
 
@@ -316,11 +311,8 @@ To fix this, either lower your sample rate or switch to "all" matching.
 
 This trap does not apply to trigger groups, where the sample rate is applied after a group's conditions match rather than as another condition alongside them.
 
-</details>
 
-<details>
-
-<summary id="legacy-minimum-duration-mode">Legacy minimum duration mode</summary>
+### Legacy minimum duration mode
 
 In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
@@ -343,9 +335,8 @@ For example, with a 12 second minimum:
 - After 6 more seconds on page B (12 seconds total session age), we start sending the recording
 - Result: You get 6 seconds of recording from page B, but miss the 6 seconds from page A
 
-Use legacy mode if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes. Use [strict mode](#strict-mode-default) if you want to only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users.
+Use legacy mode if you want to capture as much session data as possible and are okay with potentially missing early parts of sessions after page refreshes. Use [strict mode](#how-minimum-duration-is-enforced) if you want to only record sessions where users actually spend the minimum duration on a single page, accepting that you may miss more bouncing users.
 
-</details>
 
 ## Billing limits
 
