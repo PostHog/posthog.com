@@ -157,7 +157,10 @@ your <Term name="inbox" /> and the pull request it becomes…
 ```
 
 Block components (`<Watches />`, `<Enable />`, the figures) are meant to start their own line.
-Only inline ones – `<Term>` – need to stay mid-sentence.
+Only inline ones – `<Term>` and `<SeeFig>` – need to stay mid-sentence. Cite a figure the way the
+guides already do (`The whole system is <SeeFig n={1} />`), never as `<SeeFig n={1} /> is the…`:
+the leading tag drops the rest of the paragraph out of the prose map, so it renders as a bare
+text node in the container's default black – invisible in dark mode.
 
 There is a mirror-image trap at the site level: the `gatsby-remark-inline-jsx-paragraphs` plugin
 wraps any *standalone single-line self-closing* component in a `<p>` so docs prose keeps its

@@ -159,22 +159,21 @@ export const sessionReplay = {
                             x: 20.5,
                             y: 29.5,
                             title: 'The sessions list',
-                            description:
-                                'Every recording matching your filters. Each row is one session: who it was, how long it ran, and where they were.',
+                            description: 'Recordings to watch based on your filters.',
                         },
                         {
                             x: 55,
                             y: 72,
                             title: 'The player',
                             description:
-                                'The session played back, as the person saw it. Play, pause, and seek like any video – or skip the parts where nothing happened.',
+                                'Plays back sessions like a video, showing scrolling and mouse movement. You can scrub through like a video, too.',
                         },
                         {
                             x: 75,
                             y: 54,
-                            title: 'The event list',
+                            title: 'The inspector panel',
                             description:
-                                'Everything PostHog recorded during the session, in order. Click an entry and the player jumps to that moment.',
+                                'The right side panel shows you events captured to PostHog, synced with the playback timestamps. This panel also contains network, performance, and other tools. More about them below.',
                         },
                     ],
                 },
