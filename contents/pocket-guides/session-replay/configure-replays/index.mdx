@@ -1,17 +1,16 @@
 ---
 # Shell. Prose is lifted from the docs pages listed in <SeeAlso> at the foot of the page –
-# facts are accurate, the editorial pass is yours. TODOs mark the figures and anything a
-# person should decide rather than copy.
+# facts are accurate, the editorial pass is yours. TODOs mark anything a person should decide
+# rather than copy.
 #
-# "What this costs you if you skip it" is copied verbatim from the internal handbook, still in
-# CS voice: handbook/cs-and-onboarding/health-checks.md:44-46. The 2-second minimum is the
-# house recommendation, and a missing one is logged as a deployment-health flag in
+# The billing consequence under "Minimum duration" is the house recommendation from
+# handbook/cs-and-onboarding/health-checks.md:44-46, rewritten for the reader – a missing
+# minimum duration is logged as a deployment-health flag in
 # handbook/growth/sales/account-allocation.md:321.
 #
-# "Most people don't know what's possible" is copied verbatim from the internal handbook, still
-# in CS voice: handbook/cs-and-onboarding/churn-reasons.md:62 (privacy is a listed churn reason)
-# and handbook/growth/use-case-selling/customer-experience.md:205 (security policies that
-# prohibit replay outright).
+# "When replay isn't an option" is the honest counterpart from
+# handbook/growth/use-case-selling/customer-experience.md:205, where security policies that
+# prohibit replay are a listed disqualifier.
 title: Configure replays
 shortTitle: Configure replays
 subtitle: Decide which sessions you record, what those recordings capture, and how long you keep them.
@@ -25,109 +24,103 @@ bookOrder: 2
 
 # Configure replays
 
-Two things have to be true before a session is recorded: a PostHog SDK is installed with session recording enabled, and recording is switched on in your project settings. Once both are, the library starts recording sessions by default.
+Three decisions stand between recording nothing and recording well: which sessions you keep, what those recordings capture, and how long they live.
 
-Recording everything is rarely what you want, and it's the main driver of cost.
+All three apply at capture time. Recording rules only affect sessions recorded after you change them, and a replay captured unmasked stays unmasked – there is no retroactive pass over what you already have. Set them before real traffic arrives.
 
-## Set the rules before the traffic
+## Which sessions you record
 
-Recording rules apply at capture time, so they only affect sessions recorded after you change them. A session you recorded at the wrong setting stays recorded that way.
+Recording everything is rarely what you want, and it's the main driver of cost. Start by capturing 100% of sessions and decrease from there. That's the fastest way to see how many sessions you're recording and how much data you're collecting.
 
-Start by capturing 100% of sessions and decrease from there. That's the fastest way to see how many sessions you're recording and how much data you're collecting.
-
-## Sampling
+### Sampling
 
 Sampling records a percentage of all sessions. It's deterministic: when a session starts, PostHog hashes the session ID into a number between 0 and 1 and compares it to your sample rate. Under the rate, the session is recorded.
 
 Because the same session ID always produces the same number, the decision holds for the whole session, including across page refreshes. What you can't do is choose *which* sessions get picked – the hash decides.
 
-## Triggers
+### Triggers
 
 You can also record on a condition instead of a coin flip: a URL, an event (an exception, say), a feature flag, or a <Term name="cohort" />. Trigger groups are the flexible form – each group carries its own URLs, events, flags, sample rate, minimum duration, and match type, and a session is recorded if it matches any group.
 
 One trap worth knowing: "any" matching with 100% sampling records every session, and your other conditions stop mattering – the sampling condition alone matches everything. Lower the rate or switch to "all" matching.
 
-## Minimum duration
+### Minimum duration
 
 A minimum duration drops sessions too short to be useful – under two seconds, say, where someone bounced before the page settled.
 
-TODO: decide whether `strictMinimumDuration` (total session age vs. recorded activity) belongs in
-a pocket guide or is a docs-only detail. Leaning docs-only.
+It's the setting most worth having. Every session counts for billing, so without a floor you collect a pile of short, low-value recordings and pay for all of them. Two seconds is the house recommendation, and the same settings page carries the other tuning options.
 
-## What gets captured
+## What's masked, and what isn't
 
-Replays help you understand your users, but you need to protect their privacy.
+PostHog's privacy controls run in the browser or the mobile app. Masked data is never sent over the network to PostHog – it doesn't arrive and get hidden, it never leaves the device.
 
-Session Replay offers privacy controls that run in the browser or the mobile app. It lets you control what's captured and sent in these ways:
-
-- tk... Clyde fill this in.
-
-
-Masked data is never sent over the network to PostHog – it doesn't arrive and get hidden, it never leaves the device.
-
-Which is also the reason to get this right before you record real traffic: a replay captured unmasked stays unmasked.
-
-## The defaults
+### The defaults
 
 Any input element is highly likely to contain sensitive text, so inputs are masked by default. General text is not.
 
 That asymmetry is what surprises people. If your app renders an email address, an invoice, or someone's name as ordinary text, it's in the replay until you say otherwise.
 
-You can find the details in this reference page.
+### Mask first, unmask later
 
-## Masking more
+Take the safer posture: mask everything, then reveal what you've confirmed is safe. Set `maskAllInputs` and `maskTextSelector: "*"`, then let `maskTextFn` reveal only elements carrying a data attribute you control.
 
-Three levers, roughly in order of bluntness. `maskTextSelector: "*"` masks all non-input text. A CSS selector – `.email, #sensitive` – masks specific elements, and masking an element applies to its children, so `:not` selectors don't do what you want. And `maskTextFn` decides per string, which is how you mask only text that looks like an email.
+The alternative – masking more each time you notice something – means every feature you ship is exposed until somebody remembers it. Masking first makes the default safe and revealing deliberate.
+
+### The levers
+
+`maskTextSelector: "*"` masks all non-input text. A CSS selector – `.email, #sensitive` – masks specific elements, and masking an element applies to its children, so `:not` selectors don't do what you want. And `maskTextFn` decides per string, which is how you mask only text that looks like an email.
 
 For anything that isn't text or an input, add the class `ph-no-capture`. The element is replaced by a block of the same size in playback – tell your team, so nobody reports the blank rectangle as a bug. It also stops <Term name="autocapture" /> events firing from that element.
 
-## Masking by exception
-
-The inverse is often the safer posture: mask everything, then unmask what you've confirmed is safe. Set `maskAllInputs` and `maskTextSelector: "*"`, then let `maskTextFn` reveal only elements carrying a data attribute you control.
-
-TODO: pick one of these two postures as the guide's recommendation and say so. A guide that lists
-both without choosing leaves the reader where they started.
-
-## The URL bar counts
+### The URL bar counts
 
 The replay player shows the page URL on the timeline, and query strings carry auth tokens and user identifiers. The `maskCapturedNetworkRequestFn` callback runs against the captured page URL as well as network requests, so one config redacts both – in the browser, before anything is sent.
 
-## The browser panels
-
-[Console logs](/docs/session-replay/console-log-recording) and [network requests](/docs/session-replay/network-recording) are opt-in, so those tabs in the inspector are only as full as your capture config. The [Network waterfall](/docs/session-replay/how-to-watch-recordings) tab adds the page performance score and asset breakdown.
-
-## Mobile, and network bodies
+### Mobile screens
 
 Native Android and iOS record a wireframe of the view hierarchy; screenshot mode captures the real screen instead, which means it can capture anything on it. React Native and Flutter always record in screenshot mode, so masking there isn't optional.
 
-Request and response bodies are a switch of their own, and off for exactly this reason: turning network capture on doesn't turn them on with it.
+## What else you can turn on
 
-## Most people don't know what's possible
+Everything above removes data. These add it – each one off until you switch it on, and each with its own cost and privacy consequence.
 
-Make sure they know what privacy controls PostHog offers. We're anonymous by default, Session Replay masks sensitive data, and many customers don't realize what's possible.
+### Console logs
 
-TODO: the honest counterpart – some security policies prohibit session replay outright, and this
-is the page that should say so.
+[Console logs](/docs/session-replay/console-log-recording), info, warnings, and errors from your application. Useful for debugging and providing extra context on what is happening in your user's browser or mobile device environment.
 
-## How long it's kept
+### Network requests
+
+[Network requests and responses](/docs/session-replay/network-recording), providing insights into network performance and potential issues.
+
+Request and response bodies are a switch of their own: turning network capture on doesn't turn them on with it. Bodies are where auth tokens and personal data live, so redact them with `maskCapturedNetworkRequestFn` before you enable them.
+
+### Canvas
+
+Canvas elements aren't covered by DOM-based masking, so PostHog doesn't capture them automatically. Once you're sure they're free of PII – or you've set up [canvas masking](/docs/session-replay/canvas-recording) – you can enable it in your replay settings. Canvas records at four frames per second.
+
+### Iframes
+
+[Iframes](/docs/session-replay/iframes) record when they're same-origin, or when you can install `posthog-js` inside them and set `recordCrossOriginIframes` with the right content security policy. Third-party embeds you don't control – Typeform, YouTube, Stripe Checkout – can't be recorded, and show up as empty elements.
+
+## How long recordings are kept
 
 Retention is a project setting, and the ceiling depends on your plan: 30 days on Free, 90 on pay-as-you-go, a year on Boost and Scale, up to five years on Enterprise.
 
 Changing it only affects recordings captured from that point on – existing recordings keep the retention they were captured with. Once a recording is deleted it can't be restored, which is the point if you're subject to data protection regulations. To keep one past its expiry, export it to JSON.
 
-## What this costs you if you skip it
-
-When Session replay is enabled it will capture all sessions by default. As every session is counted for billing purposes, customers may end up with a bunch of low value short recordings and still be paying for them.
-
-If a customer has Session replay enabled, log in as them and look at their session replay [settings](/docs/session-replay/how-to-control-which-sessions-you-record). At a minimum we recommend setting the minimum duration to 2 seconds or more but there are other tuning options which they may also benefit from.
-
-## What this costs you
+## What it costs
 
 Session replay is free up to a monthly allowance of web and mobile recordings, then priced per recording. Recording rules and data retention are the two biggest levers on the bill, and you can set a billing limit so a traffic spike can't surprise you.
 
+## When replay isn't an option
+
+Some security policies prohibit session replay outright, and no amount of masking changes that.
+
+If that's your situation, the rest of PostHog doesn't depend on it. Events, feature flags, experiments, and error tracking all work without a single recording – you lose the picture of what the person saw, not the data about what they did.
+
 <SeeAlso>
 
-See also: [Install session replay](/docs/session-replay/installation) · [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) · [Privacy controls](/docs/session-replay/privacy) · [Network recording](/docs/session-replay/network-recording) · [Mobile replay](/docs/session-replay/mobile) · [Recording retention](/docs/session-replay/recording-retention) · [Pricing](/session-replay/pricing)
+See also: [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) · [Privacy controls](/docs/session-replay/privacy) · [Network recording](/docs/session-replay/network-recording) · [Mobile replay](/docs/session-replay/mobile) · [Recording retention](/docs/session-replay/recording-retention) · [Pricing](/session-replay/pricing)
 
 </SeeAlso>
 
