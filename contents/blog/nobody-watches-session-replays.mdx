@@ -11,7 +11,7 @@ tags:
   - studies
 seo:
   metaTitle: "Nobody watches their session replays – a study of 7.7 million views"
-  metaDescription: "We studied 7.65 million session replay views. The median lasts 17 seconds, the average company records 28 hours a quarter, and almost no one presses play." 
+  metaDescription: "We timed 7.65M session replay views. The median lasts 17 seconds, and 99.8% of recordings are never opened. Here's the data, and the fix" 
 ---
 
 Here's an uncomfortable truth about session replay: while we all know it's a useful (dare I say fundamental) way to understand user behavior and diagnose UX issues, almost nobody opens it.
@@ -40,11 +40,11 @@ Even if you're generous and use the median recording length – a more civilised
 
 And this is the optimistic framing, because it only counts the replays somebody even bothered to open in the first place.
 
-![Never opened](https://res.cloudinary.com/dmukukwp6/image/upload/03_never_opened_5b042c0ad6.png)
+![Never opened](https://res.cloudinary.com/dmukukwp6/image/upload/03_never_opened_d04cec3e41.png)
 
-Over those same 90 days, our customers captured around 2 billion session recordings. The number that got opened even once? About 4.2 million.
+Over those same 90 days, our customers captured around 2.5 billion session recordings. The number that got opened even once? About 4.2 million.
 
-That's fewer than 1 in 400 – or, to put it less politely, roughly 99.8% of recorded sessions are watched by no one, ever.
+That's fewer than 1 in 600 – or, to put it less politely, roughly 99.8% of recorded sessions are watched by no one, ever.
 
 You could argue an unwatched recording is harmless – a tree falling in an empty forest (one that bills you for storage). But those sessions aren't always blank. In fact, they might be full of people getting stuck, clicking things that don't work, or rage-tapping their way out of your product. 
 
@@ -92,4 +92,4 @@ So while you were watching 17 seconds of one recording, something else was readi
 
 ---
 
-*A few notes for the people who read footnotes. Watch-time, viewer, backlog, and Replay Vision figures are cross-tenant across PostHog's customer base, last 90 days to ~August 12, 2026; watch time is a median because the mean is dragged around by players left open for hours. "Captured" is the sum of daily per-customer recording counts (~2 billion over the period); "opened" is distinct recordings loaded into the player at least once (~4.2 million). Footage hours estimate recordings × the ~5-minute median recording length. The per-company backlog uses the median company (~340 recordings); the average is far higher because a handful of large customers dominate. We deliberately left per-page frustration rates out: those events live inside each customer's own project, not ours, so any "average rage-click rate" would only reflect posthog.com itself – not a benchmark worth quoting.*
+*A few notes for the people who read footnotes. Watch-time, viewer, backlog, and Replay Vision figures are cross-tenant across PostHog's customer base, last 90 days to ~August 12, 2026; watch time is a median because the mean is dragged around by players left open for hours. "Captured" is the sum of daily per-customer web recording counts (~2.5 billion over the period; a further ~0.5 billion mobile recordings and ~52 million zero-duration recordings are set aside so the denominator matches the web-player "opened" count of ~4.2 million). Footage hours estimate recordings × the ~5-minute median recording length. The per-company backlog uses the median company (~340 recordings); the average is far higher because a handful of large customers dominate. We deliberately left per-page frustration rates out: those events live inside each customer's own project, not ours, so any "average rage-click rate" would only reflect posthog.com itself – not a benchmark worth quoting.*
