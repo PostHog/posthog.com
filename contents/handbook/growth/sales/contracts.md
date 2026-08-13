@@ -44,6 +44,8 @@ When building a quote for an annual plan conversion or renewal, consider:
 
 2. Is there opportunity to adopt additional products? How does that affect future usage?
 
+3. Is the customer on a plan that expires partway through the term? Campaigns, beta plans, and promotional free tier increases all suppress usage today and step up on a known date, so their current spend is not their post-plan spend. See [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
+
 You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
 The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
@@ -88,6 +90,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
             - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it. If the order form won't be signed before that period's invoice is issued, don't hold the backdated start date. Move the start date to the beginning of the next billing period instead, and tell the customer the new credits apply from then. See [contract timing rules](#contract-timing-rules) below, and [timing your renewals with billing](/handbook/cs-and-onboarding/renewals#timing-your-renewals-with-billing) for how to avoid getting into this position.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract.
+        - **Campaigns and beta plans** - Do not apply the startup rule above. These customers are already paying us — their plan makes usage cheaper, not free — so future-dating the term would leave them on undiscounted list pricing until it starts. Set the start date normally and size the credits for the point at which their plan expires instead. See [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
 
     - **Contract.Term** - The term in months of the contract (12 months by default)
 
