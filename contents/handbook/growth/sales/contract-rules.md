@@ -268,7 +268,7 @@ In order to qualify for this, the customer needs to send us the full quote docum
 
 Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
 
-This is not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
+This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/sales/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
 
 ### Don't touch the plan to close the deal
 
