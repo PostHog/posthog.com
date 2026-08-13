@@ -39,7 +39,9 @@ When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you
 
 The replay page is <SeeFig n={1} />: the sessions you can watch on the left, the one you picked playing back in the middle, and everything PostHog recorded about it on the right.
 
-The inspector <SeeFig n={2} /> lets you watch replays in context.
+## Inspector tools
+
+The inspector <SeeFig n={2} /> lets you watch replays in context of your PostHog data.
 
 Session Replay aggregates all of the tools needed to understand what is happening in your user's environment:
 - **[Events](/docs/session-replay/how-to-watch-recordings)** – a list of all the pages visited, events captured, errors encountered during the recording.
@@ -57,11 +59,13 @@ You can jump from a <Term name="funnel" /> drop-off to a session replay, and fro
 
 ## Where the recording comes from
 
-Recordings come from your PostHog SDKs: web, React Native, iOS, Android, and Flutter. Recording is a project setting as well as an SDK one, so it has to be switched on in project settings before anything is captured.
+Recordings come from your PostHog SDKs: web, React Native, iOS, Android, and Flutter.
 
 These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost and performance implications minimal.
 
 Native Android and iOS record a wireframe of the view hierarchy rather than the real look and feel, unless you turn on screenshot mode; React Native and Flutter always record in screenshot mode.
+
+## Install and turn it on
 
 None of it works until a PostHog SDK is in your app. The wizard installs and configures one for you, or you can [install it yourself](/docs/session-replay/installation).
 
