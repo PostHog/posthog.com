@@ -36,7 +36,7 @@ Get a mix. At minimum:
 
 - Your team: they have usage and customer context.
 - Someone from the [billing team](/teams/billing): they understand what's possible with the current billing architecture and whether changes are worth the engineering time.
-- Someone from [blitzscale](/teams/blitzscale): whoever has the most industry context on your product and/or pricing experience.
+- Someone from [Blitzscale](/teams/blitzscale): whoever has the most industry context on your product and/or pricing experience.
 - If it's your first pricing RFC, your onboarding buddy PM.
 
 ### Review process
@@ -91,7 +91,7 @@ PMMs typically write the emails but if your product doesn't have one, <PrivateLi
 
 If the price is going up, the email should say so plainly. Don't talk around it.
 
-Build it in [workflows](/docs/workflows): an email step, a static cohort of the grandfathered orgs' owners and admins, and a batch trigger filtered on that cohort. Exclude managed accounts. Those customers are getting a conversation instead.
+Build it in [Workflows](/docs/workflows): an email step, a static cohort of the grandfathered orgs' owners and admins, and a batch trigger filtered on that cohort. Exclude managed accounts. Those customers are getting a conversation instead.
 
 You can schedule the send or send it manually on the day, once you know the migration went fine.
 
