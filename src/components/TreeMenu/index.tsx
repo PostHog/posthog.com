@@ -357,7 +357,7 @@ function SidebarCollapsibleItem({
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
     const url = currentUrl.replace(/\/$/, '')
     for (const item of items) {
-        if (item.url?.replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
+        if (item.url?.split('?')[0].replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
             return item
         }
         if (item.children?.length) {
