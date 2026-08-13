@@ -117,7 +117,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         const res = await fetch(
             `https://api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
+            }/resources/image/upload?max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
             { headers: { Authorization: cloudinaryAuth } }
         )
         const { resources, next_cursor, error } = await res.json()
