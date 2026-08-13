@@ -57,7 +57,7 @@ Prefetch and cache settings trade object-storage requests, memory, and latency. 
 
 For more information about these and other settings, see [DuckDB's configuration reference](https://duckdb.org/docs/stable/configuration/overview).
 
-### Tuning threads
+### Example: Tuning threads
 
 The default 15-core worker starts DuckDB with 38 threads. A simple query that reads many remote Parquet ranges but does little computation may run faster with a higher value, such as `SET threads = 60`. Each DuckDB thread can make one HTTP request at a time, so more threads can overlap more network reads.
 
