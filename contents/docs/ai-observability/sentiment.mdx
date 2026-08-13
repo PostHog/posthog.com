@@ -2,14 +2,6 @@
 title: Sentiment classification
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Sentiment classification is in beta" type="action">
-
-Sentiment classification is currently in beta. We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop this feature.
-
-</CalloutBox>
-
 Sentiment classification automatically labels user messages in your LLM [traces](/docs/ai-observability/traces) and [generations](/docs/ai-observability/generations) as **positive**, **neutral**, or **negative**. This helps you understand how users feel during conversations with your AI features without reading every message.
 
 ## Why use sentiment classification?
@@ -35,7 +27,7 @@ Sentiment classification runs as a [sentiment analysis evaluation](/docs/ai-eval
 
 The **Sentiment** tab in AI Observability provides a dedicated card-based interface for browsing user messages by sentiment.
 
-Each card displays a single user message with a colored accent bar — green for positive, red for negative. Click a card to expand it and see surrounding messages for context.
+Each card displays a single user message with a colored accent bar – green for positive, red for negative. Click a card to expand it and see surrounding messages for context.
 
 Use the controls at the top of the tab to:
 
@@ -70,7 +62,7 @@ Sentiment is classified at the individual message level. Each user message withi
 
 ## Privacy
 
-Sentiment classification runs on PostHog's infrastructure using a local ONNX model. Your data is not sent to any third-party AI provider. The model only processes user messages (the `$ai_input` property) — it does not process LLM outputs.
+Sentiment classification runs on PostHog's infrastructure using a local ONNX model. Your data is not sent to any third-party AI provider. The model only processes user messages (the `$ai_input` property) – it does not process LLM outputs.
 
 ## Requirements
 
