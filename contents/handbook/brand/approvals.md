@@ -31,7 +31,7 @@ When in doubt, ask in the `#design-review` Slack channel. Lottie and Cory are, f
 - <SmallTeam slug="editorial" /> – Blog, email copy, messaging guidelines, social presence.
 - <SmallTeam slug="marketing" /> – Email copy, external partnerships, influencers.
 - <SmallTeam slug="youtube" /> – Video production, editing.
-- <SmallTeam slug="builder-relations" /> – In-person events, PostHog speaking engagements, meetups.
+- <SmallTeam slug="builder-relations" /> – In-person events, PostHog speaking engagements, meetups, the forum, and Discord.
 - <SmallTeam slug="wizard-and-docs" /> – Docs, obviously. 
 - **Everyone** – Handbook updates. 
 
