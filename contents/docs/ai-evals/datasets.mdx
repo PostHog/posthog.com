@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconFlask" title="Datasets are in beta" type="action">
 
-Datasets are currently in beta and rolling out gradually. If you don't see **Datasets** in AI Evals yet, [let us know](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) – we'd also love your feedback as we develop the feature.
+Datasets are currently in beta. We'd love your [feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we develop the feature.
 
 </CalloutBox>
 
@@ -50,10 +50,7 @@ Both `expected_output` and `source_output` are optional, so you can save a case 
 
 ## Creating a dataset
 
-1. Go to **AI Evals** > **Datasets**
-2. Click **New dataset**
-3. Give it a name (unique within the project), an optional description, and optional metadata
-4. Click **Create dataset**
+You can create a dataset in the PostHog UI or with the [PostHog MCP server](/docs/model-context-protocol).
 
 ## Adding items
 
@@ -61,36 +58,13 @@ Both `expected_output` and `source_output` are optional, so you can save a case 
 
 The fastest way to build a useful dataset is to harvest real traffic. On a [trace](/docs/ai-observability/traces), click **Add to dataset** and pick a dataset. PostHog pre-fills the item with the trace's input, its output as `source_output`, and the trace provenance fields, so you can jump back to where the case came from.
 
-Use the pencil side-action instead to open the item editor before saving – useful when you want to write the `expected_output` while the failure is still in front of you.
-
 ### Manually
 
 Open a dataset and add an item directly, filling in **Input**, **Expected output**, and **Metadata** as JSON.
 
-### Programmatically
-
-See [Programmatic access](#programmatic-access) below.
-
 ## Versioning
 
-Datasets are append-only. Nothing you do to an item destroys what was there before.
-
-- **Editing an item** creates a new item version (`version` increments by 1) and a new dataset revision.
-- **Archiving or restoring an item** also creates a new version – archival is a state change recorded in the version history, not a deletion.
-- **No-op edits are free.** If your update resolves to content identical to the current version, PostHog returns the existing version instead of creating a duplicate.
-- **Dataset name, description, and metadata edits don't create a revision.** Only item changes move the revision forward.
-
-### Viewing a past revision
-
-On a dataset, use the revision selector to switch from **Latest** to any historical revision. The list then shows the exact snapshot at that revision, read-only – editing is disabled while you're viewing history, and a **Revision _n_** tag plus a banner make it obvious you aren't on the latest data. Click **View latest** to go back.
-
-You can also open a single item's version history to compare its input, expected output, source output, and metadata across versions, and restore an earlier version's content.
-
-### Concurrent edits
-
-Item mutations use optimistic concurrency. You send the `base_version` you last read, and if someone else – or another agent – changed the item in the meantime, the request is rejected with a `stale_version` conflict that tells you the current version. Reload and retry rather than clobbering their change.
-
-Other conflicts work the same way, each with a stable code you can branch on: `dataset_archived`, `dataset_name_conflict`, `dataset_item_archived`, `dataset_item_active`, `client_item_id_conflict`, and `limit_reached`.
+Every item change creates an immutable version and a new dataset revision. You can view past revisions and restore an earlier version of an item without losing its history.
 
 ### Archiving
 
@@ -149,18 +123,7 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 ## Limits
 
-| Limit                      | Value                                                                   |
-| -------------------------- | ----------------------------------------------------------------------- |
-| Datasets per project       | 100                                                                     |
-| Items per dataset          | 5,000                                                                   |
-| Versions per item          | 100 (one slot is reserved so you can always restore)                    |
-| Item payload size          | 40 KB across `input`, `expected_output`, `source_output`, and `metadata` |
-| Dataset metadata size      | 1 MB                                                                    |
-| Dataset name / description | 400 / 10,000 characters                                                 |
-| Export size                | 250 MB                                                                  |
-| Export requests            | 10 per minute                                                           |
-
-If you hit a limit, the response includes a `limit_reached` code with the resource, current count, and limit. Get in touch if you need more headroom.
+PostHog applies limits to datasets to prevent abuse. These limits are subject to change.
 
 ## Coming soon: offline evals reporting
 
