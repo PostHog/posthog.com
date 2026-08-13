@@ -36,11 +36,11 @@ Current software factories that incorporate agents look something like this:
 
 ![A flowchart of the software factory pipeline: decide, build and test, review, deploy, use, with most stages being replaced by agents](https://res.cloudinary.com/dmukukwp6/image/upload/software_factories_pipeline_1518a5af30.png)
 
-- Humans **decide** what to build and put it into a ticketing system.
-- Agents pull tickets, **build and test** PRs that satisfy the requirements, then submit them for CI and review.
-- If the PR is approved, the code is **deployed** to production via CD.
-- If it’s rejected, it goes back to an agent for further **iteration** until it gets approved.
-- Once the code is in production, **users** engage with it and emit data, feedback, and signals that inform what gets built next.
+1. Humans **decide** what to build and put it into a ticketing system.
+2. Agents pull tickets, **build and test** PRs that satisfy the requirements, then submit them for CI and review.
+3. If the PR is approved, the code is **deployed** to production via CD.
+4. If it’s rejected, it goes back to an agent for further **iteration** until it gets approved.
+5. Once the code is in production, **users** engage with it and emit data, feedback, and signals that inform what gets built next.
 
 Since it’s just a metaphor, there’s no actual criteria for what counts as a software factory. It’s easier to think about it as a spectrum based on **how much of the code is produced by agents**, and **how closely humans still read the code**:
 
