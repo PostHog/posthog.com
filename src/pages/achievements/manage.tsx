@@ -94,10 +94,22 @@ async function fetchAchievementGroups(jwt: string): Promise<AchievementGroup[]> 
 }
 
 function IconPreview({ src }: { src: string }) {
-    if (src.startsWith('https://res.cloudinary.com')) {
-        return <CloudinaryImage width={48} height={48} src={src as CloudinaryURL} />
+    let url: URL
+    try {
+        url = new URL(src)
+    } catch {
+        return null
     }
-    return <img src={src} width={48} height={48} alt="Icon preview" className="rounded" />
+
+    if (url.protocol === 'https:' && url.hostname === 'res.cloudinary.com') {
+        return <CloudinaryImage width={48} height={48} src={url.href as CloudinaryURL} />
+    }
+
+    if (url.protocol === 'blob:') {
+        return <img src={url.href} width={48} height={48} alt="Icon preview" className="rounded" />
+    }
+
+    return null
 }
 
 function AchievementForm({
