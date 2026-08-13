@@ -24,6 +24,8 @@ This isn't an exhaustive list. If something here is irrelevant, remove it. If so
 
 This should be formatted in a way that is easy to read and review. A spreadsheet is the common way and can be linked to in the RFC (<PrivateLink url="https://docs.google.com/spreadsheets/d/1zztCzjKz8BKM2Yr82OSROjVVZQujLjkodTMmZr-PFzk/edit?gid=2107116200#gid=2107116200">Example spreadsheet</PrivateLink>).
 
+Your pricing is also constrained by the product architectures billing supports: standalone products, product variants, a base product with add-ons, or bundled products (avoid this last one). Each determines whether free limits and monthly billing limits are separate or shared, so check the <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/pricing-rfc.md#product-definition">product definition guide</PrivateLink> in the billing repo while working through your pricing.
+
 ### Write it
 
 Open an RFC in <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">requests-for-comments-internal</PrivateLink>. Include the breakdown above, what this does to existing customers, and your analysis / spreadsheet, and be explicit about what you're *not* changing. Deferring a decision is fine but mention it and why you've decided to defer. We don't want to be changing prices too often so there should be a reason why we're not bundling the changes together.
