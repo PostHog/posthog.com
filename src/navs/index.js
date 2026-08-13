@@ -2327,8 +2327,8 @@ export const docsMenu = {
                     url: '/docs/cli',
                 },
                 {
-                    name: 'Code',
-                    url: '/desktop',
+                    name: 'Desktop',
+                    url: '/docs/posthog-desktop',
                 },
                 {
                     name: 'Concepts',
