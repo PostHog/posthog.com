@@ -25,6 +25,9 @@ const Compatibility = ({ productData }: { productData: any }) => {
 }
 
 const GettingStarted = ({ id, productData }: SectionComponentProps) => {
+    const installCommand = productData?.wizardCommand
+        ? `${INSTALL_COMMAND} ${productData.wizardCommand}`
+        : INSTALL_COMMAND
     return (
         <section id={id} className="scroll-mt-20 not-prose mb-20">
             <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get started – free</h2>
@@ -41,7 +44,17 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                             <strong>
                                 ${productData.startsAt}/{productData.unit}
                             </strong>{' '}
-                            and reduces with volume.
+                            and reduces with volume
+                            {productData.pricingFloor ? (
+                                <>
+                                    {' '}
+                                    to{' '}
+                                    <strong>
+                                        ${productData.pricingFloor}/{productData.unit}
+                                    </strong>
+                                </>
+                            ) : null}
+                            .
                         </span>
                     </>
                 ) : null}
@@ -51,8 +64,8 @@ const GettingStarted = ({ id, productData }: SectionComponentProps) => {
                 <ScriptInstallCallout
                     title="Install with AI"
                     description="Run this command in your terminal or AI editor."
-                    command={INSTALL_COMMAND}
-                    footer={<WizardFrameworksTeaser />}
+                    command={installCommand}
+                    footer={<WizardFrameworksTeaser rows={productData?.wizardSupports} />}
                 />
                 <div className="border border-primary rounded p-5 bg-primary">
                     <h3 className="text-lg font-bold text-primary mt-0 mb-2">Install without AI</h3>
