@@ -10,10 +10,18 @@ bookOrder: 1
 <ScreenshotFigure
     n={1}
     product="session_replay"
+    screenshot="player-overview"
+    set="layout"
+    caption="The replay page: pick a session on the left, watch it in the middle, read what happened on the right."
+/>
+
+<ScreenshotFigure
+    n={2}
+    product="session_replay"
     screenshot="home"
     set="inspector"
     alt="A session playing back on the left, with the inspector's event list beside it"
-    caption="The player: the session on the left, everything PostHog recorded about it on the right."
+    caption="The player up close: the session on the left, everything PostHog recorded about it on the right."
     legend="The event list is built from your events, so it's the same activity you'd query – not a separate recording of it."
 />
 
@@ -27,7 +35,11 @@ Session replay records what real users do in your product and plays it back like
 
 ## Anatomy of a replay
 
-The player is <SeeFig n={1} />: the <Term name="session" /> playing back on one side, and everything PostHog recorded about it on the other – the events in order, with clicks, keystrokes, and errors counted before you play anything. Console logs and the network waterfall are opt-in, so those tabs are only as full as your capture config.
+A session replay is more than a screen recording. It records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back _like_ video.
+
+<SeeFig n={1} /> is the whole page: the sessions you can watch on the left, the one you picked playing back in the middle, and everything PostHog recorded about it on the right.
+
+<SeeFig n={2} /> is that right-hand side up close – the events in order, with clicks, keystrokes, and errors counted before you play anything. Console logs and the network waterfall are opt-in, so those tabs are only as full as your capture config.
 
 PostHog already captures your <Term name="event">events</Term>, so every replay is enriched with information about:
 - The <Term name="person" /> and their <Term name="person property">properties</Term>

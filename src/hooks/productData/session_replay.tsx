@@ -141,6 +141,45 @@ export const sessionReplay = {
                 },
             },
         },
+        'player-overview': {
+            // Store the bare delivery URL: CloudinaryImage falls back to a plain <img> for any
+            // src containing a comma, and that branch drops `className` – which is where the
+            // dark/light toggle lives, so an inline-transformation URL renders both variants.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
+            alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
+            // Coordinates are percentages of this 2578x1300 image. The light and dark variants
+            // show different sessions but the same three panels at the same size, so one set of
+            // panel-level coordinates holds for both.
+            annotations: {
+                layout: {
+                    type: 'numbered',
+                    items: [
+                        {
+                            x: 20.5,
+                            y: 29.5,
+                            title: 'The sessions list',
+                            description:
+                                'Every recording matching your filters. Each row is one session: who it was, how long it ran, and where they were.',
+                        },
+                        {
+                            x: 55,
+                            y: 72,
+                            title: 'The player',
+                            description:
+                                'The session played back, as the person saw it. Play, pause, and seek like any video – or skip the parts where nothing happened.',
+                        },
+                        {
+                            x: 75,
+                            y: 54,
+                            title: 'The event list',
+                            description:
+                                'Everything PostHog recorded during the session, in order. Click an entry and the player jumps to that moment.',
+                        },
+                    ],
+                },
+            },
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
