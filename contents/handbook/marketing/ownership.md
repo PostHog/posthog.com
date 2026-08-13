@@ -44,7 +44,7 @@ Just ask in #team-marketing in Slack and tag <TeamMember name="Joe Martin" photo
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-You should speak to <SmallTeam slug="irl-events" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
+You should speak to <SmallTeam slug="builder-relations" />, our resident party planners. Read the [events strategy handbook](/handbook/marketing/events) for more. 
 </details>
 
 <details>
@@ -78,7 +78,7 @@ Refer them to [our partnerships waitlist](/partnerships) and let <SmallTeam slug
 
 If it's an [influencer](/handbook/marketing/influencers), newsletter or podcast, refer them to <TeamMember name="Adlet Smykov" />.
 
-If it's an event, speak to <SmallTeam slug="irl-events" />.
+If it's an event, speak to <SmallTeam slug="builder-relations" />.
 </details>
 
 <details>

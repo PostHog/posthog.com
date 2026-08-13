@@ -37,7 +37,9 @@ Shipping is also done through Micromerch (in partnership with Shiphero) - they c
 
 ### Customers
 
-Create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
+The quickest way is to ask JokerHog in Slack – tag `@.JokerHog` in any channel and ask it for a merch code (e.g. "can you make me a merch code for $50 for a contributor?"). It creates the discount code in Shopify and replies with the code, so you don't need to log in yourself.
+
+If you'd rather do it manually, create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
 
 To log into Shopify using 1Password:
 
