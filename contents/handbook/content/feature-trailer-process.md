@@ -37,6 +37,8 @@ As the requester, you'll put together a short storyboard of what you want the vi
 
 Use [this storyboard template](https://docs.google.com/document/d/1ONoytWmzDFMTN61KhVdtLCVA6_0SYuUf_eSmkj33mhU/edit?tab=t.3a3la71j8gql) as a starting point – copy it and adapt it for your video.
 
+Also note any existing assets for the product – webpage, blog post, social post, artwork, custom hoggies, etc – and provide URLs if you have them. The team can reuse these rather than starting from scratch.
+
 > **The storyboard doesn't need to be polished.** It doesn't need a creative vision or production-quality assets. All it needs to do is convey the narrative beats you want the video to hit. For example, the storyboard for [PostHog self-driving](/self-driving) laid out: show the before and after, show a user solving the problem, ship the fix, then reveal that it was actually fixed autonomously using PostHog self-driving. Each beat just needs a note and a screenshot or rough screen recording.
 
 ### 4. Review the storyboard together
