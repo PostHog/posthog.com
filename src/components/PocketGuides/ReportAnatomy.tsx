@@ -24,8 +24,23 @@ export interface ReportAnatomyProps {
     headline?: string
 }
 
-/** A numbered annotation: appears on figure hover, opens its gloss on hover or tap. */
-export function AnatomyMarker({ n, label, gloss }: { n: number; label: string; gloss: string }): JSX.Element {
+/**
+ * A numbered annotation: appears on figure hover, opens its gloss on hover or tap.
+ * `visibility` defaults to the anatomy figures' hover-reveal (which ReaderWrapper hides on
+ * narrow readers); pass 'always' for markers that anchor a spot on an image, where a hidden
+ * marker would leave nothing to point at.
+ */
+export function AnatomyMarker({
+    n,
+    label,
+    gloss,
+    visibility = 'on-figure-hover',
+}: {
+    n: number
+    label: string
+    gloss: string
+    visibility?: 'on-figure-hover' | 'always'
+}): JSX.Element {
     const [open, setOpen] = React.useState(false)
     const posthog = usePostHog()
     const onOpenChange = (next: boolean) => {
@@ -34,6 +49,10 @@ export function AnatomyMarker({ n, label, gloss }: { n: number; label: string; g
             posthog?.capture('pocket_guide_interaction', { kind: 'marker_gloss', marker: label })
         }
     }
+    const visibilityClasses =
+        visibility === 'on-figure-hover'
+            ? 'anatomy-marker opacity-0 transition-opacity duration-200 focus-visible:opacity-100 group-hover/anatomy:opacity-100'
+            : ''
     return (
         <Tooltip
             delay={100}
@@ -46,7 +65,7 @@ export function AnatomyMarker({ n, label, gloss }: { n: number; label: string; g
                     type="button"
                     onClick={() => onOpenChange(!open)}
                     aria-label={`${n}. ${label} – ${gloss}`}
-                    className="anatomy-marker inline-flex size-4 shrink-0 cursor-help select-none items-center justify-center rounded-full bg-orange align-middle font-bold leading-none text-white opacity-0 transition-opacity duration-200 focus-visible:opacity-100 group-hover/anatomy:opacity-100"
+                    className={`inline-flex size-4 shrink-0 cursor-help select-none items-center justify-center rounded-full bg-orange align-middle font-bold leading-none text-white ${visibilityClasses}`}
                 >
                     <span className="text-[10px]">{n}</span>
                 </button>

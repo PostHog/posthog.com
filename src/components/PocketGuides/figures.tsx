@@ -2,8 +2,9 @@ import React from 'react'
 
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
 
+import CloudinaryImage from 'components/CloudinaryImage'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
-import ProductImageAnnotations from 'components/ImageAnnotations/FromProduct'
+import type { Annotation } from 'components/ImageAnnotations'
 import { useProductScreenshot } from 'components/ImageAnnotations/useProductScreenshot'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
@@ -12,9 +13,11 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
-import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
+import ReportAnatomy, { AnatomyHint, AnatomyMarker } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
 import { useTemplate } from './bookContext'
+
+type CloudinarySrc = `https://res.cloudinary.com/${string}`
 
 /** The loop, drawn. Wording from /docs/self-driving/self-improving-loop. */
 const LOOP_STAGES = [
@@ -57,8 +60,6 @@ export function ScreenshotFigure({
     product,
     screenshot,
     set,
-    type,
-    showKey,
     alt,
 }: {
     n?: number
@@ -70,37 +71,52 @@ export function ScreenshotFigure({
     screenshot: string
     /** Named annotation set on the screenshot – omit for an unannotated image. */
     set?: string
-    type?: 'dots' | 'numbered'
-    showKey?: boolean
     alt?: string
 }): JSX.Element | null {
-    // Checked here as well as inside the annotator: without it a missing screenshot key would
-    // print an empty frame and its caption, which reads as a broken figure rather than none.
+    // Checked so a missing screenshot key skips the figure entirely – an empty frame with a
+    // caption reads as a broken figure rather than none.
     const shot = useProductScreenshot(product, screenshot)
     if (!shot?.src) {
         return null
     }
-    // The annotator prints a key for every numbered set, including an empty one – which on an
-    // unannotated figure is a bare "Key" heading under the image. No set, no key: the figure's
-    // own caption and legend are what carry a plain screenshot.
-    const hasAnnotations = Boolean(set && shot.annotations?.[set]?.items?.length)
+    const items: Annotation[] = (set && shot.annotations?.[set]?.items) || []
+    // The frame already supplies the border and ground, so the product page's drop shadow
+    // would read as a second frame inside it.
+    const imgClasses = 'rounded max-w-full h-auto'
     return (
-        <Fig n={n} caption={caption} legend={legend}>
-            <ProductImageAnnotations
-                product={product}
-                screenshot={screenshot}
-                set={set}
-                type={type}
-                showKey={showKey ?? hasAnnotations}
-                alt={alt}
-                // Core yellow, matching the book's other teaching apparatus (the loop's Signal
-                // stage above) rather than the product pages' red – so the markers read as part
-                // of the page, not an overlay from somewhere else.
-                markerClassName="bg-[#FFA81C] text-black"
-                // The frame already supplies the border and ground, so the product page's
-                // drop shadow would read as a second frame inside it.
-                imgClassName="rounded"
-            />
+        <Fig n={n} caption={caption} legend={legend ?? (items.length > 0 ? <AnatomyHint /> : undefined)}>
+            <div className="relative leading-[0]">
+                <CloudinaryImage
+                    src={shot.src as CloudinarySrc}
+                    alt={alt ?? shot.alt ?? ''}
+                    className={shot.srcDark ? 'dark:hidden w-full' : 'w-full'}
+                    imgClassName={imgClasses}
+                />
+                {shot.srcDark && (
+                    <CloudinaryImage
+                        src={shot.srcDark as CloudinarySrc}
+                        alt={alt ?? shot.alt ?? ''}
+                        className="hidden dark:inline-block w-full"
+                        imgClassName={imgClasses}
+                    />
+                )}
+                {/* The same markers the anatomy figures use, kept always-visible: on an image
+                    they anchor a spot, so a marker hidden until hover leaves nothing to find. */}
+                {items.map((item, index) => (
+                    <span
+                        key={index}
+                        className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: `${item.x}%`, top: `${item.y}%` }}
+                    >
+                        <AnatomyMarker
+                            n={index + 1}
+                            label={item.title}
+                            gloss={item.description ?? ''}
+                            visibility="always"
+                        />
+                    </span>
+                ))}
+            </div>
         </Fig>
     )
 }
