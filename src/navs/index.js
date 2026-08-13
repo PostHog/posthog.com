@@ -2428,7 +2428,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'Install PostHog',
-                            url: '/docs/getting-started/install?tab=snippet',
+                            url: '/docs/getting-started/install',
                         },
                         {
                             name: 'Send events',
