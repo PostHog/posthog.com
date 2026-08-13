@@ -14,6 +14,8 @@ Need access first? [Join the waitlist](/context-warehouse/managed-warehouse), th
 
 Each active connection gets a dedicated DuckDB worker. The default worker fits most queries, but you can request more CPU or memory for large scans, joins, aggregations, sorts, and window functions.
 
+The cluster also automatically caches object-storage byte ranges on node-local NVMe storage, so workers on the same node can reuse recently read data instead of fetching it again. This is separate from DuckDB's per-worker in-memory cache.
+
 ## Choose a worker size
 
 Pass these settings when you open the connection:
@@ -50,8 +52,6 @@ PostHog sizes DuckDB from the selected worker and provides managed scratch stora
 | `enable_external_file_cache` | `true` | Caches external-file byte ranges in memory under `memory_limit`, so repeated scans can avoid object-storage reads |
 | `parquet_metadata_cache` | `false` | Doesn't retain parsed Parquet footer and schema metadata; enabling it can help repeated scans of the same files |
 | `preserve_insertion_order` | `true` | Preserves insertion order where possible; setting it to `false` can reduce memory use for large imports and exports when result order doesn't matter |
-
-PostHog also caches object-storage byte ranges on managed local disk. This is separate from DuckDB's in-memory external file cache and needs no client configuration.
 
 Prefetch and cache settings trade object-storage requests, memory, and latency. Benchmark representative cold and repeated scans before changing them.
 
