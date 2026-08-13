@@ -29,10 +29,10 @@ This routing takes precedence over the agent's generic query-writing behavior. T
 |------|--------------|--------------|--------|
 | `data-catalog-metric-run` | Runs a governed metric. Executable metrics return results, the compiled query, and a `posthog_url` deep link; markdown metrics return calculation steps in `instructions`. Accepts `date_from`/`date_to`/`interval` overrides (rejected for `HogQLQuery` metrics) and a `refresh` cache option. | – | `data_catalog:read`, `query:read` |
 | `data-catalog-metric-create` | Creates a metric, or refines the one already holding that name (upserts on `name`). Always lands `proposed`. The definition is an executable query or a `MarkdownDefinition`. | – | `data_catalog:write` |
-| `data-catalog-metric-update` | Updates a metric's fields. Editing an approved metric's definition resets it to `proposed`. | – | `data_catalog:write` |
+| `data-catalog-metric-update` | Updates a metric's fields, including renaming it via `new_name` (which frees the old name and breaks references to it). Editing an approved metric's definition, name, description, or unit resets it to `proposed`. | – | `data_catalog:write` |
 | `data-catalog-metric-approve` | Blesses a metric as canonical. Blocked while the metric is drifted from its source insight. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 
-There's deliberately no "list metrics" tool: agents discover metrics with `execute-sql` over `system.information_schema.metrics` – see the [SQL reference](/docs/semantic-layer/query).
+There's deliberately no "list metrics" tool: agents discover metrics with `execute-sql` over `system.information_schema.metrics` – see the [SQL reference](/docs/semantic-layer/query). There's also no delete tool: agents can propose and update metrics, but [deleting one](/docs/semantic-layer/metrics#renaming-and-deleting) is a human act, done from the Data Catalog UI or the API.
 
 ## Certification tools
 
