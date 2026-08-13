@@ -132,6 +132,8 @@ Phoenix is an open source AI observability platform. It provides tracing, evalua
 
 Arize doesn’t provide a free hosted version of Phoenix. Their product, AX Pro, starts at $50 per month for 10k spans and up to 3 users.
 
+In August 2026, Dynatrace announced an agreement to acquire Arize. Phoenix remains open source, but its roadmap now sits with an enterprise observability vendor.
+
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
 #### What makes Phoenix special?
