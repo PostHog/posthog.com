@@ -10,7 +10,7 @@ Full AI capture is in public beta, available in [posthog-python](/docs/libraries
 
 </CalloutBox>
 
-AI events can get big — a single generation can carry megabytes of prompt context or base64-encoded media, more than regular event capture accepts. To handle this, PostHog sends AI events like `$ai_generation` and `$ai_embedding` through a dedicated ingestion path that accepts events up to **8MB**.
+AI events can get big – a single generation can carry megabytes of prompt context or base64-encoded media, more than regular event capture accepts. To handle this, PostHog sends AI events like `$ai_generation` and `$ai_embedding` through a dedicated ingestion path that accepts events up to **8MB**.
 
 During the beta, this path is opt-in. How you opt in depends on how you capture AI events today.
 
@@ -86,7 +86,7 @@ const uuid = posthog.captureAi({
 
 </MultiLanguage>
 
-Send content as your provider produced it, including base64 and data URIs — there's no need to reshape payloads. `capture_ai` captures exactly what you pass it, without truncating or redacting anything, though [privacy mode](/docs/ai-observability/privacy-mode) still applies.
+Send content as your provider produced it, including base64 and data URIs – there's no need to reshape payloads. `capture_ai` captures exactly what you pass it, without truncating or redacting anything, though [privacy mode](/docs/ai-observability/privacy-mode) still applies.
 
 In serverless and other short-lived environments, use the awaitable variant in Node so the event is delivered before the runtime exits:
 
@@ -98,7 +98,7 @@ In Python, call `posthog.flush()` before exit (or enable `sync_mode`), just like
 
 ## Other platforms
 
-Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one — same request format, different path:
+Not on Python or Node? Build events with [manual capture](/docs/ai-observability/installation/manual-capture) and point your capture requests at the dedicated AI endpoint instead of the regular one – same request format, different path:
 
 ```shell
 POST <ph_client_api_host>/i/v0/ai/batch/
@@ -106,4 +106,4 @@ POST <ph_client_api_host>/i/v0/ai/batch/
 
 ## Limits
 
-Events up to **8MB** are accepted for now — larger events are dropped. The limit will increase as the beta continues.
+Events up to **8MB** are accepted for now – larger events are dropped. The limit will increase as the beta continues.
