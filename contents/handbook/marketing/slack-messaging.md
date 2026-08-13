@@ -10,7 +10,7 @@ We share [Slack channels with many of our customers and partners](/handbook/grow
 
 This is a powerful way to amplify [product announcements](/handbook/marketing/product-announcements) and other comms directly to the people building on PostHog, alongside our usual [email](/handbook/marketing/email-comms) and [in-app](/handbook/marketing/in-app) channels.
 
-> **Slack broadcasts do not reach our [PostHog Discord](https://posthog.com/questions).** The Discord community is managed by the IRL Events team, not Marketing, and is a separate audience. If you want your message to reach Discord too, coordinate with the IRL Events team.
+> **Slack broadcasts do not reach our [PostHog Discord](https://posthog.com/questions).** The Discord community is managed by the Builder Relations team, not Marketing, and is a separate audience. If you want your message to reach Discord too, coordinate with the Builder Relations team.
 
 ## When to use a Slack broadcast
 
