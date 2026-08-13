@@ -64,6 +64,10 @@ const faqStructuredData = [
         question: 'Can I apply with my personal email?',
         answer: 'Short answer: no. Use your school-issued email, so we can confirm you are a student.',
     },
+    {
+        question: 'Is this open to other schools outside the Bay Area?',
+        answer: 'At the moment we are focusing on making sure PostHog for Students offers a really valuable, in person presence. As such we cannot commit to extending the program further. Still want to talk to us? Check out our community incubator.',
+    },
 ]
 
 // Visible FAQ, rendered with the same Accordion as /startups. Keep in sync with faqStructuredData above.
@@ -118,6 +122,20 @@ const faqItems = [
             <p>
                 Use your school-issued email – a .edu or other university-associated address – so we can confirm you're
                 a student.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Is this open to other schools outside the Bay Area?',
+        content: (
+            <p>
+                At the moment we're focusing on making sure PostHog for Students offers a really valuable, in person
+                presence. As such we can't commit to extending the program further. Still want to talk to us? Check out
+                our{' '}
+                <Link to="/community-incubator" state={{ newWindow: true }} className="underline font-semibold">
+                    community incubator
+                </Link>
+                .
             </p>
         ),
     },
@@ -230,8 +248,8 @@ const semesterEvents: { Icon: IconComponent; color: string; when: string; title:
         Icon: IconGraduationCap,
         color: 'text-blue',
         when: 'On campus or Remote',
-        title: 'Check-in & mentorship',
-        copy: "A follow-up with our team. Gather your group for a Q&A, 1:1 mentorship, career and industry advice, and intros. Whatever's most useful to you.",
+        title: 'Ask us anything',
+        copy: 'Gather your group for an AMA with us. It can cover anything from career advice to demos. Whatever is most useful for you.',
     },
 ]
 
@@ -289,6 +307,7 @@ export default function StudentProgram(): JSX.Element {
                             >
                                 {selectedSchool ? `at ${selectedSchool}` : 'on campus'}
                             </RoughAnnotation>
+                            {'*'}
                         </h1>
 
                         {/* Text takes the flexible column; the illustration gets a fixed slot */}
@@ -307,7 +326,7 @@ export default function StudentProgram(): JSX.Element {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="flex flex-wrap items-center gap-3">
+                                <div className="flex flex-col items-start gap-2">
                                     <CallToAction to="#campus" size="sm">
                                         Bring PostHog to {campusTarget}
                                     </CallToAction>
@@ -327,16 +346,6 @@ export default function StudentProgram(): JSX.Element {
                     </section>
                     <hr className="border-t border-primary m-0 mb-6 mt-8" />
 
-                    <h3>
-                        What we want <Highlight>to offer</Highlight>
-                    </h3>
-                    <p>
-                        PostHog for Students isn't credits and it isn't a course. It's a curated series of events we
-                        want to help you run on {campus}, in partnership with a club or student org. Each semester we
-                        want to bring a PostHog team member to talk about building products and companies, then follow
-                        up for Q&A later in the semester. It's about learning how things get built and meeting the
-                        people behind the tools we use every day.
-                    </p>
                     <div className="not-prose grid grid-cols-2 @2xl/reader-content:grid-cols-4 gap-3 my-6">
                         {steps.map((step, i) => (
                             <div key={step} className="border border-primary rounded-md bg-primary p-4">
@@ -349,9 +358,15 @@ export default function StudentProgram(): JSX.Element {
                     </div>
 
                     <h3>
-                        What a semester with us <Highlight>looks like</Highlight>
+                        What we bring <Highlight>to campus</Highlight>
                     </h3>
-                    <p>Twice a semester, we'll pop by for</p>
+                    <p>
+                        PostHog for Students isn't a limp online course ending in a LinkedIn certificate nobody cares
+                        about. It's a curated series of IRL events we'll help you run on {campus}, in partnership with a
+                        club or student org, unique to your interests. Each semester we'll bring PostHog team members to
+                        talk about building products and companies, then follow up for a Q&A later in the semester. It's
+                        about learning how things actually get built and meeting the people who do the building.
+                    </p>
                     <div className="not-prose grid @md/reader-content:grid-cols-2 gap-4 my-6">
                         {semesterEvents.map(({ Icon, color, when, title, copy }) => (
                             <div key={title} className="border border-primary rounded-md bg-primary p-4">
