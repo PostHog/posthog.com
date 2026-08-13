@@ -1,0 +1,103 @@
+---
+title: "Nobody watches their session replays. We studied 7.7 million views to prove it"
+date: 2026-08-12
+author:
+  - natalia-amorim
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/general_blog_post_template_2d68884778.png
+featuredImageType: full
+category: General
+tags:
+  - studies
+seo:
+  metaTitle: "Nobody watches their session replays — a study of 7.7 million views"
+  metaDescription: "The median replay gets 17 seconds of attention. Last quarter PostHog customers recorded 1.77 billion of them. We dug into the gap — and what to do about it."
+---
+
+Here's an uncomfortable truth about session replay: while we all know they're a useful (dare I say fundamental) way to understand user behavior and diagnose UX issues, almost nobody watches them.
+
+Not you. Not your PM. Definitely not the manager who swore at standup they'd "go through a few sessions this week."
+
+We'd know – [we sell one](/session-replay).
+
+But don't take our word for it – look at the **7.65 million replay-viewing sessions** across PostHog's entire customer base over the last 90 days.
+
+> **A quick note on the data.** The *watching* numbers (how long people watch, what Replay Vision scans) span PostHog's whole customer base. The *frustration* numbers (rageclicks, dead clicks) are just us, measured on posthog.com and the PostHog app itself. We pointed the camera at our own product. Felt appropriate for a post about ignoring your users.
+
+## How long people actually watch a replay
+
+![Distribution of how long people watch a session replay, with a huge spike under 30 seconds](https://res.cloudinary.com/dmukukwp6/image/upload/01_watch_time_distribution_0147e128fd.png)
+
+<Caption>Two-thirds of all replay views are over within 30 seconds.</Caption>
+
+Every time anyone opened the player and actually watched something, we timed it. 
+
+The median session lasted **17 seconds**. Two-thirds were over inside 30. Meanwhile, the average recording those people were dipping into runs **28 minutes** long.
+
+![The gap between what you watch and what got recorded](https://res.cloudinary.com/dmukukwp6/image/upload/02_the_gap_1eb5ad2a2d.png)
+
+<Caption>17 seconds watched, 28 minutes recorded. Even the median recording is five minutes.</Caption>
+
+Even if you're generous and use the median recording length – a more civilised five minutes – you're still looking at someone sampling about 6% of it before moving on.
+
+And this is the *optimistic* framing, because it only counts the replays somebody even bothered to open in the first place.
+
+![99.93% of recorded sessions are never opened by anyone](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/03_never_opened.png)
+
+<Caption>Of 1.77 billion recordings captured in 90 days, 0.0738% were ever opened by a human.</Caption>
+
+**99.93% of recorded sessions are watched by no one, ever.**
+
+## The problem: you're missing your users having a bad time
+
+![Frustration signals on PostHog's own app: 43.6% of sessions have a dead click, 7.1% have a rageclick](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/04_frustration_headline.png)
+
+<Caption>Frustration on PostHog's own app, last 90 days.</Caption>
+
+On our own app, over the last 90 days, **43.6% of sessions contained a dead click** (someone clicking a thing that looks clickable and does nothing) and **7.1% contained a rageclick**, the rapid-fire clicking of a person who has officially Had Enough™. In plain terms, that's 179 dead clicks and 9 rageclicks for every 1,000 pageviews.
+
+![Rageclicks by device: desktop rages more than mobile](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/08_rage_by_device.png)
+
+<Caption>We expected mobile to be angriest. It's the calmest.</Caption>
+
+We assumed mobile users would be the angriest. They're the calmest. Desktop clocks 9.34 rageclicks per 1,000 pageviews; mobile just 6.66. It turns out rage needs a mouse.
+
+![Heatmap of when people watch replays: weekday mornings, US/Pacific](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/09_viewing_heatmap.png)
+
+<Caption>Replay-watching by hour (US/Pacific) and weekday.</Caption>
+
+Replay-watching peaks Monday to Friday, 6–9am Pacific – the narrow window where American and European working hours overlap – and collapses to a quarter of that on weekends.
+
+Which makes sense, and also perfectly captures the problem: watching your session replays is a 9-to-5 job, layered on top of everyone's actual 9-to-5 job, that no one has ever once had time to finish.
+
+## This isn't a PostHog problem
+
+Before the part where we tell you what we built, some honesty: this is everyone's problem, and everyone knows it.
+
+Hotjar, FullStory, LogRocket, Microsoft Clarity, Contentsquare – every session replay tool, us included, hands you an ocean of footage and a single play button. And over the last couple of years, nearly all of them have shipped some flavour of AI that watches sessions so you don't have to.
+
+FullStory has StoryAI; Contentsquare auto-summarises; Clarity has a Copilot. The list goes on.
+
+But watching was only ever half the job. A tidy AI summary still hands you a to-do list. And a to-do list is just a smaller, better-organised pile of things nobody has time to do.
+
+## So we stopped watching. And then we fixed the other half.
+
+That's why we built [Replay Vision](/replay-vision). You tell it what to look for, it reads *every* session – scoring frustration, flagging dead-ends, classifying what users came to do, summarising what happened – and then it can open the pull request with the fix in it. You hit merge.
+
+![What teams point Replay Vision at, by scanner type](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/10_scanner_mix.png)
+
+<Caption>What teams point Replay Vision at, share of scans by scanner type.</Caption>
+
+It's about six weeks old, and it's already going faster than we expected. In the last 90 days it ran **644,000 scans** for **1,931 teams**, generating 264,000 observations at an average confidence of 0.91 — and **89% of those observations flagged a genuine friction point.**
+
+![Replay Vision in its first 90 days: 644K scans, 1,931 teams, 89% flagged real friction](https://res.cloudinary.com/dmukukwp6/image/upload/replay_study/11_replay_vision_stats.png)
+
+<Caption>Replay Vision, first 90 days.</Caption>
+
+Put bluntly: in six weeks, an AI nobody had to babysit found more systematic frustration than the humans behind 7.7 million manual views managed in the same window. Adoption went from 108 teams in July to 1,915 in August. People, it seems, are extremely ready to stop watching replays.
+
+**Want to point it at your own 99.93%? [Try Replay Vision →](/replay-vision)**
+
+---
+
+*A few notes for the people who read footnotes. Watch-time and Replay Vision figures are cross-tenant across PostHog's customer base, last 90 days to ~August 12, 2026; watch time is reported as a median because the mean is dragged around by players left open for hours. Frustration data (rageclicks, dead clicks) is PostHog's own product traffic only — not a universal website benchmark. The human-years figure is an order-of-magnitude estimate: there's no single "total duration captured" field, so we extrapolated viewed-recording lengths onto all 1.77 billion captured recordings. Engagement score is our own internal metric, and a median of zero says as much about how we calculate it as about human interest.*
