@@ -32,7 +32,7 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                Your AI fails quietly – a wrong answer here, a failed tool call there. Traces tell you what it did,{' '}
+                Your AI fails quietly – a hallucination here, a failed tool call there. Traces tell you what it did,{' '}
                 <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} multiline>
                     <em>but you have to go read them, one by one</em>
                 </RoughAnnotation>
