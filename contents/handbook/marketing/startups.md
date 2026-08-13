@@ -6,7 +6,7 @@ showTitle: true
 
 > **Want to apply for our startups program?** [Sign-up here](/startups), or [apply on Bookface if you're in Y Combinator](https://bookface.ycombinator.com/deals/687). 
 
-We run two special programs for early-stage teams, plus [external partnerships](#external-partnerships) with Lenny's Product Pass and Every. The primary place for discussing these is the [#project-startups-and-yc](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack.
+We run two special programs for early-stage teams, plus external partnerships with [Lenny's Product Pass and Every.to](#external-partnerships). The primary place for discussing these is the [#project-startups-and-students](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack, where we also discuss [PostHog for Students](/students).
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
@@ -73,12 +73,12 @@ Subscribers with [Lenny's Newsletter](https://www.lennysnewsletter.com/) Product
 
 Product exclusions are the same as for the PostHog for Startups plan, including PostHog Desktop, Inbox, and Replay Vision. See [posthog.com/startups](/startups) for more detail.
 
-### Every
+### Every.to
 
 Subscribers to [Every](https://every.to/) get:
 
 -   $2,000 in credits for core products
--   $2,000 in credits for AI products (the same four products excluded from startup credits: PostHog Desktop, Replay Vision, PostHog AI, and Inbox)
+-   $2,000 in credits for AI products, with the same exclusions as for the PostHog for Startups program
 
 ## What happens after companies apply?
 
