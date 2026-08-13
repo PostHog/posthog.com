@@ -6,6 +6,7 @@ import { useToast } from '../../../context/Toast'
 import { SQUEAK_HOST } from 'lib/strapi'
 import { isPostHogEmail } from 'lib/employee'
 import { IconCheck } from '@posthog/icons'
+import { beginOAuthFlow } from './Classic/posthogOAuthFlow'
 
 // Account-settings section for linking/unlinking PostHog OAuth.
 //  - Employee accounts (provider 'posthog') are OAuth-only: shown connected,
@@ -37,6 +38,8 @@ const ConnectedAccounts: React.FC<{ hideHeading?: boolean; stacked?: boolean }> 
         // The OAuth redirect page reads this intent and links to the current
         // account (rather than starting a fresh sign-in).
         localStorage.setItem('posthog_oauth_intent', 'link')
+        // Remember where the user started so a completed link returns them here.
+        beginOAuthFlow(window.location.pathname + window.location.search)
         window.location.href = `${SQUEAK_HOST}/api/connect/posthog`
     }
 

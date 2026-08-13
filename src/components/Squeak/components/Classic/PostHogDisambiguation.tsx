@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import Input from 'components/OSForm/input'
 import Wizard from 'components/Wizard'
 import { IconSpinner } from '@posthog/icons'
+import { OAUTH_MODE_KEY } from './posthogOAuthFlow'
 
 interface PostHogDisambiguationProps {
     pendingToken: string
@@ -17,7 +18,17 @@ interface PostHogDisambiguationProps {
 // to an account we skip straight to the link form.
 const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingToken, emailInUse, onSuccess }) => {
     const { createWithProvider, linkExisting } = useUser()
-    const [mode, setMode] = useState<'choose' | 'link'>(emailInUse ? 'link' : 'choose')
+    // Keep the chosen screen durable so a remount reopens it instead of resetting.
+    const [mode, setMode] = useState<'choose' | 'link'>(() => {
+        if (typeof window !== 'undefined') {
+            const saved = sessionStorage.getItem(OAUTH_MODE_KEY)
+            if (saved === 'choose' || saved === 'link') return saved
+        }
+        return emailInUse ? 'link' : 'choose'
+    })
+    useEffect(() => {
+        sessionStorage.setItem(OAUTH_MODE_KEY, mode)
+    }, [mode])
     const [identifier, setIdentifier] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null)
