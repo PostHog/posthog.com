@@ -115,7 +115,7 @@ const query = (id: string | number, isModerator: boolean) =>
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
     const posthog = usePostHog()
-    const { mutate: globalMutate } = useSWRConfig()
+    const { cache, mutate: globalMutate } = useSWRConfig()
 
     const key =
         isValidating || options?.data
@@ -156,9 +156,16 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
     const questionID = typeof id !== 'string' ? id : question?.id
 
     // Revalidates this question along with any question lists (e.g. the questions table) that are
-    // mounted elsewhere, so changes show up without a page refresh
+    // mounted elsewhere, so changes show up without a page refresh.
+    // Note: we iterate cache keys and mutate each one directly instead of passing a filter function
+    // to mutate() — SWR's filter-based mutate skips useSWRInfinite caches (keys prefixed with $inf$),
+    // which is exactly what the questions table uses.
     const mutateQuestions = () =>
-        globalMutate((key) => typeof key === 'string' && key.includes('/api/questions?'))
+        Promise.all(
+            Array.from(cache.keys())
+                .filter((key) => typeof key === 'string' && key.includes('/api/questions?'))
+                .map((key) => globalMutate(key))
+        )
 
     const reply = async (body: string) => {
         try {
