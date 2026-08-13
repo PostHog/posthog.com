@@ -36,9 +36,9 @@ When launched, our partnership with Lenny's Newsletter offered their annual subs
 
 Redemption page: `/coupons/lenny`
 
-## When a coupon customer wants an annual contract
+## When a campaign customer wants an annual contract
 
-Coupon benefits reduce a customer's bill, they don't zero it, so coupon holders are paying customers who can convert to an annual contract at any point during the campaign period. When they do, we leave the coupon alone: it runs to its original expiry and expires automatically, and the contract is sized to account for the step-up when it does. We don't extend, swap, or cancel campaign benefits to win a deal.
+Campaign benefits reduce a customer's bill, they don't zero it, so these customer are paying customers who can convert to an annual contract at any point during the campaign period. When they do, the campaign offer continues to run to its original expiry and expires automatically, and the contract is sized to account for the step-up when it does. We don't extend, swap, or cancel campaign benefits to win a deal.
 
 Sales owns the detail — see [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
 
