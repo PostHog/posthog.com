@@ -28,13 +28,18 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
+#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
 - **$250-499k:** 35% base discount
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
+
+> Two things to be clear on when working out which tier applies:
+>
+> - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment and timing of cash levers below, not a bigger volume tier.
 
 #### 2. Length of commitment discount (additive)
 - **1-year commitment:** No additional discount
