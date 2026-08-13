@@ -57,7 +57,13 @@ const surfaces = [
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
     },
-    // TODO: Desktop (PostHog Desktop) slots in here once GA
+    {
+        name: 'Desktop',
+        url: '/docs/posthog-desktop',
+        icon: 'IconCoffee',
+        color: 'brown',
+        description: 'Run tasks, review code, and use any model from your desktop.',
+    },
 ]
 
 export const DocsIndex = () => {
