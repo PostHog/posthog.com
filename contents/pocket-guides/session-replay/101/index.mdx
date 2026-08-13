@@ -39,14 +39,15 @@ A session replay is more than a screen recording. It records what happens in a u
 
 The replay page is <SeeFig n={1} />: the sessions you can watch on the left, the one you picked playing back in the middle, and everything PostHog recorded about it on the right.
 
-The inspector <SeeFig n={2} /> lets you watch replays in context. Its toolbar filters the panel down to one kind of context at a time:
+The inspector <SeeFig n={2} /> lets you watch replays in context.
 
-- **Events** – a list of all the events that happened during the recording.
-- **Console** – console logs, info, warnings, and errors from your application. Useful for debugging and providing extra context on what is happening in your user's browser or mobile device environment.
-- **Network** – network requests and responses, providing insights into network performance and potential issues.
-- **Comments** – written notes on a particular time on a session recording, so you can highlight what you see.
+Session Replay aggregates all of the tools needed to understand what is happening in your user's environment:
+- **[Events](/docs/session-replay/how-to-watch-recordings)** – a list of all the pages visited, events captured, errors encountered during the recording.
+- **[Console](/docs/session-replay/console-log-recording)** – console logs, info, warnings, and errors from your application. Useful for debugging and providing extra context on what is happening in your user's browser or mobile device environment.
+- **[Network](/docs/session-replay/network-recording)** – network requests and responses, providing insights into network performance and potential issues.
+- **[Comments](/docs/data/comments)** – written notes on a particular time on a session recording, so you can highlight what you see.
 
-Console logs and network requests are opt-in, so those tabs are only as full as your capture config. The **Network waterfall** tab beside the inspector adds the page performance score and asset breakdown.
+Console logs and network requests are opt-in, so those tabs are only as full as your capture config. The **[Network waterfall](/docs/session-replay/how-to-watch-recordings)** tab beside the inspector adds the page performance score and asset breakdown.
 
 PostHog already captures your <Term name="event">events</Term>, so every replay is enriched with information about:
 - The <Term name="person" /> and their <Term name="person property">properties</Term>
