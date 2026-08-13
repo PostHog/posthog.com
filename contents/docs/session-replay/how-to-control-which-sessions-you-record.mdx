@@ -268,9 +268,14 @@ To record both patterns independently at different rates, use two groups rather 
 
 ## Legacy controls
 
-Since posthog-js 1.369.0, all of these controls live in [trigger groups](#trigger-groups). The project-wide settings below are retained for backward compatibility, and are used by earlier SDK versions and by projects that have no trigger groups configured.
+Since posthog-js 1.369.0, all of these controls live in [trigger groups](#trigger-groups). The settings below are kept for backward compatibility. You get them in either of these cases:
 
-If you're using the controls below, upgrade to a current SDK and migrate your configuration to trigger groups.
+| Your SDK | What you get |
+| --- | --- |
+| posthog-js before 1.369.0 | Always the legacy controls below |
+| posthog-js 1.369.0 or later | Trigger groups, unless your project has no groups configured |
+
+If you are using the controls below, upgrade to a current SDK and migrate your configuration to trigger groups.
 
 ### Migrating to trigger groups
 
@@ -293,7 +298,9 @@ You can edit the groups after creating them.
 
 ### Project-wide match type and sampling
 
-Since version 1.238.0 of the web SDK you can control how multiple triggers are combined, choosing whether recording will start when all triggers match or when any trigger matches. In the legacy configuration, match type and sampling apply to the project as a whole rather than per group.
+**Applies to posthog-js 1.238.0 through 1.368.x, and to 1.369.0 or later when no trigger groups are configured.** Match type arrived in 1.238.0. Before that, you could not choose how triggers combined.
+
+In this configuration, match type and sampling apply to the project as a whole rather than per group. You choose whether recording starts when all triggers match, or when any trigger matches.
 
 For example if you set an event trigger for Exception events, a URL trigger for the checkout page, and sampling to 20%.
 
@@ -301,7 +308,7 @@ For example if you set an event trigger for Exception events, a URL trigger for 
 
 **With all matching**, you'll capture 20% of any session on the checkout page that has an exception event.
 
-<CalloutBox icon="IconWarning" title="100% sampling with ANY matching records every session" type="caution">
+<CalloutBox icon="IconWarning" title="Legacy only: 100% sampling with ANY matching records every session" type="caution">
 
 If you use "any" matching with 100% sampling and other conditions (URL triggers, event triggers, or feature flags), the 100% sampling causes every session to be recorded. Your other conditions become ineffective because the sampling condition alone matches every session.
 
@@ -313,6 +320,8 @@ This trap does not apply to trigger groups, where the sample rate is applied aft
 
 
 ### Legacy minimum duration mode
+
+**Applies to posthog-js 1.291.0 or later with a `defaults` earlier than `2025-11-30`, or with no `defaults` set. Before 1.291.0 there was no strict mode, so this was the only behavior.**
 
 In legacy mode (`strictMinimumDuration: false` or not set), the minimum duration is checked against the **total session age**. When a session starts, the browser records the start time. If the minimum duration has passed since the session start time, the recording data is sent to the backend.
 
