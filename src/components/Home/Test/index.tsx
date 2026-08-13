@@ -9,7 +9,9 @@ import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSectio
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
-import { IconHeadset, IconPlayFilled } from '@posthog/icons'
+import ErrorBoundary from 'components/ErrorBoundary'
+import { SignupCTA } from 'components/SignupCTA'
+import { IconHeadset, IconPlayFilled, IconSparkles } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
 import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
@@ -28,6 +30,32 @@ import HeroCTA from 'components/Home/HeroCTA'
 import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { cn } from '../../../utils'
+
+/**
+ * Static hero shown if the carousel throws (for example a Typecaast shadow-DOM player faulting
+ * during reconciliation). It keeps the signup CTA reachable instead of leaving a dead hero.
+ */
+function HeroCarouselFallback({ className }: { className?: string }) {
+    return (
+        <div className={cn('@container', className)}>
+            <div className="min-h-[300px] @[820px]:min-h-[400px] p-2 rounded-md bg-purple flex">
+                <div className="flex flex-col justify-center gap-3 bg-light dark:bg-dark flex-1 w-full shadow-2xl rounded p-6 @md:p-8">
+                    <p className="flex items-center gap-1.5 text-secondary text-sm font-semibold m-0">
+                        <IconSparkles className="size-4" /> PostHog AI
+                    </p>
+                    <h2 className="text-2xl font-bold m-0">Ask PostHog anything</h2>
+                    <p className="text-secondary m-0 max-w-md">
+                        PostHog has 250+ data and analysis tools that are stitched together on-the-fly to answer any
+                        customer usage or data question you have.
+                    </p>
+                    <div>
+                        <SignupCTA size="md" state={{ initialTab: 'signup' }} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
 function LazyHeroCarousel({ className }: { className?: string }) {
@@ -49,7 +77,13 @@ function LazyHeroCarousel({ className }: { className?: string }) {
         return <div className={`@container ${className} min-h-[300px] @[820px]:min-h-[400px]`} aria-hidden />
     }
 
-    return <Content className={className} />
+    // Contain a carousel crash to the hero so a player fault degrades to a static slide instead
+    // of unmounting the hero (and its signup CTA) and turning every later click into a dead click.
+    return (
+        <ErrorBoundary fallback={<HeroCarouselFallback className={className} />}>
+            <Content className={className} />
+        </ErrorBoundary>
+    )
 }
 
 const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
