@@ -43,9 +43,12 @@ PostHog sizes DuckDB from the selected worker and provides managed scratch stora
 |---|---|---|
 | `threads` | 2.5× worker CPU, rounded up | Sets the maximum parallelism available to the query; the default 15-CPU worker gets 38 threads |
 | `memory_limit` | 90 GB (83.8 GiB) on the default worker | Limits DuckDB's buffer manager; PostHog derives it from the selected worker memory while reserving headroom for results, metadata, and the worker process |
-| `temp_directory`, `max_temp_directory_size` | Worker-local storage with a 90% disk cap | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
-| `disable_parquet_prefetching`, `prefetch_all_parquet_files` | `false`, `false` (remote prefetching on) | Prefetches remote Parquet files by grouping nearby reads; disabling prefetching can reduce over-reading on selective scans but increase requests |
-| `enable_external_file_cache`, `parquet_metadata_cache` | `true`, `false` (data on, metadata off) | Caches external-file byte ranges in memory but not parsed Parquet metadata; metadata caching can help repeated scans of the same files |
+| `temp_directory` | Worker-local temporary storage | Lets supported joins, sorts, aggregations, and window functions spill to disk when they exceed memory |
+| `max_temp_directory_size` | 90% of available temporary disk | Caps how much spill data DuckDB can write |
+| `disable_parquet_prefetching` | `false` (prefetching on) | Groups nearby Parquet reads to reduce object-storage requests; disabling it can reduce over-reading on selective scans but increase requests |
+| `prefetch_all_parquet_files` | `false` (remote files only) | Restricts prefetching to remote files; managed warehouse Parquet is remote, so this doesn't turn prefetching off |
+| `enable_external_file_cache` | `true` | Caches external-file byte ranges in memory under `memory_limit`, so repeated scans can avoid object-storage reads |
+| `parquet_metadata_cache` | `false` | Doesn't retain parsed Parquet footer and schema metadata; enabling it can help repeated scans of the same files |
 | `preserve_insertion_order` | `true` | Preserves insertion order where possible; setting it to `false` can reduce memory use for large imports and exports when result order doesn't matter |
 
 PostHog also caches object-storage byte ranges on managed local disk. This is separate from DuckDB's in-memory external file cache and needs no client configuration.
