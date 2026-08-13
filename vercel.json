@@ -2317,6 +2317,11 @@
             "destination": "/docs/getting-started/install:ext?"
         },
         {
+            "source": "/docs/getting-started/project-token",
+            "destination": "/docs/settings/projects#find-your-project-api-key",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/integrate/ingest-live-data:ext(\\.md)?",
             "destination": "/docs/getting-started/send-events:ext?"
         },
