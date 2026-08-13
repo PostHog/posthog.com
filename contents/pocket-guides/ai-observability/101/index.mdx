@@ -50,7 +50,7 @@ Every `$ai_generation` event arrives with the following properties. You can atta
 | `$ai_latency`, `$ai_time_to_first_token` | How long the call took, and how long before anything appeared | `4.2s`, `0.8s` |
 | `$ai_is_error` | Whether the call failed | `false` |
 
-## What else you can ask
+## What else the data answers
 
 Because AIO events are PostHog events, they sit alongside the rest of your product data. So instead of asking general questions about your AI feature, you can ask broader questions about your product:
 
@@ -58,6 +58,8 @@ Because AIO events are PostHog events, they sit alongside the rest of your produ
 - **Who is it expensive for?** Break cost down by plan or company, using person properties you already send.
 - **What did this person see?** Jump to their <Term name="session replay" />, or the <Term name="exception" /> their request threw.
 - **Did the new prompt help?** Ship it behind a feature flag and read it as an experiment.
+
+Each of these is a question you ask. The same questions can be asked for you: a <Term name="scout" /> watches cost, latency, and eval pass rates on a schedule and files a report when one of them moves. That only works because the calls are instrumented – nothing can watch an event you never captured. Scouts are covered in [Volume 1's subject](/pocket-guides/self-driving).
 
 ## Apply a use case example
 
