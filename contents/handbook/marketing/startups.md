@@ -65,7 +65,7 @@ Alongside the two programs above, we run two external partnerships that offer Po
 
 ### Lenny's Product Pass
 
-Subscribers with [Lenny's Newsletter](https://www.lennysnewsletter.com/) Product Pass get:
+Subscribers with [Lenny's Newsletter](https://www.lennysnewsletter.com/) Product Pass who are new paying customers get:
 
 -   2x the free tier limits on all usage-based products
 -   The Scale add-on for free
@@ -77,8 +77,8 @@ Product exclusions are the same as for the PostHog for Startups plan, including 
 
 Subscribers to [Every](https://every.to/) get:
 
--   $2,000 in credits for core products
--   $2,000 in credits for AI products, with the same exclusions as for the PostHog for Startups program
+-   $2,000 in credits for core products (only for new paying customers), with the same exclusions as for the PostHog for Startups program
+-   $2,000 in credits for AI products, covering products excluded from the PostHog for Startups program
 
 ## What happens after companies apply?
 
