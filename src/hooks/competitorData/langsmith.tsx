@@ -49,7 +49,7 @@ export const langsmith = {
                     // Metadata-level user tracking, no behavioral profile.
                     user_profile_context: 'Partial',
                     sql_queries_on_traces: false,
-                    trace_explorer_ui: 'Advanced',
+                    trace_explorer_ui: true,
                 },
             },
             prompt_management: {

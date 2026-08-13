@@ -310,7 +310,7 @@ export const features = {
         title: 'Evaluations',
         headline: 'Evaluations',
         description:
-            'Score live generations as they happen across hallucinations, toxicity, relevance, or custom criteria. Catch regressions before users do.',
+            'Score live traces as they happen across hallucinations, sentiment, relevance, or custom criteria. Catch regressions before users do.',
         icon: <IconLlmPromptEvaluation />,
         color: 'blue',
         images: [
@@ -322,7 +322,7 @@ export const features = {
         features: [
             {
                 title: 'LLM-as-a-judge',
-                description: 'An LLM scores each generation against a prompt you define',
+                description: 'An LLM scores each trace against a prompt you define',
             },
             {
                 title: 'Code-based (Hog)',
@@ -425,9 +425,9 @@ export const features = {
                     'An agent reviews each batch of evaluation results and summarizes what it found, with example generations as evidence',
             },
             {
-                title: 'Anomaly investigations (alpha)',
+                title: 'Anomaly investigations',
                 description:
-                    'When an anomaly alert fires on cost, latency, or errors, an agent digs into the underlying traces and suppresses false positives',
+                    'When an anomaly alert fires on cost, latency, or errors, an agent digs into the underlying traces and finds the root cause of the anomaly',
             },
             {
                 title: 'Scouts',
@@ -442,7 +442,8 @@ export const features = {
         description:
             'PostHog-maintained wrappers for the major providers, 40+ documented integrations across gateways and agent frameworks, and manual capture for anything we missed.',
         // The provider grid itself lives in `slides.tsx` – it needs the logo imports.
-        footnote: 'Using another LLM observability tool? Analyze that data alongside product usage in PostHog.',
+        footnote:
+            'Already using another LLM observability tool? Send the same events to PostHog and see them next to retention, funnels, and replays – context that tool cannot show you.',
     },
     mcp: {
         title: 'MCP',
@@ -465,8 +466,9 @@ export const features = {
                 description: 'Evaluate cost, latency, and token usage across models to pick the right one per feature.',
             },
             {
-                title: 'Find expensive traces',
-                description: 'Drill into individual calls to identify optimization opportunities.',
+                title: 'Turn failure modes into evals',
+                description:
+                    'Let your agent explore traces, spot recurring failure modes, and create evaluations that catch them.',
             },
         ],
         children: <MCPInstall />,

@@ -9,7 +9,7 @@ import { SectionLabel } from 'components/ReplayVision/sectionHelpers'
 // The AI Observability loop: capture, score, watch, investigate, fix – you only
 // step in to review and merge.
 const steps: FlowStep[] = [
-    { label: 'AI Observability', description: 'captures every generation', icon: IconEye, actor: 'Machine' },
+    { label: 'AI Observability', description: 'captures every trace', icon: IconEye, actor: 'Machine' },
     {
         label: 'Evals & alerts',
         description: 'score and watch live traffic',
@@ -36,9 +36,9 @@ const PostHogWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                <strong>AI Observability</strong> captures the full context of each generation and connects it to other
-                PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts learn what
-                normal looks like,{' '}
+                <strong>AI Observability</strong> captures the full context of each trace and connects it to other
+                PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts tell you when
+                things are not normal,{' '}
                 <RoughAnnotation type="highlight" color="rgba(48, 164, 108, 0.2)" strokeWidth={1} padding={2} multiline>
                     so regressions in tool calling, response quality, or latency automatically turn into{' '}
                     <strong>signals</strong>

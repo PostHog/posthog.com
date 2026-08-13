@@ -269,8 +269,9 @@ export const applications: CarouselSlide[] = [
                     <LabeledList
                         items={[
                             {
-                                label: 'Dashboard',
-                                description: 'Cost, usage, latency, and errors charted the moment events arrive',
+                                label: 'Dashboards',
+                                description:
+                                    'Cost, usage, latency, and errors charted the moment events arrive – plus custom dashboards you build yourself',
                             },
                             {
                                 label: 'Trace explorer',

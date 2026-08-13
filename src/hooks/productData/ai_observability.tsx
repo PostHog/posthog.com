@@ -129,7 +129,7 @@ export const aiObservability = {
     overview: {
         title: 'Observe and fix AI in production',
         description:
-            'Trace generations, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
+            'Trace agent loops, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
         // eli5 retired in favor of the old-way/PostHog-way sections – same story,
         // told as the two flow diagrams.
         textColor: 'text-white',
@@ -202,7 +202,7 @@ export const aiObservability = {
     useCases: {
         intro: 'Different teams pull different answers from the same LLM data.',
         rows: [
-            ['AI Engineers', 'Debug traces span by span and compare models on cost, latency, and quality'],
+            ['AI Engineers', 'Debug traces span by span and set up evals to catch quality regressions'],
             ['Product Engineers', 'Tie failed generations and latency spikes back to the users who hit them'],
             ['PMs', 'See which AI features get used – and whether using them changes retention'],
             ['Finance & leadership', 'Attribute token spend to models, features, and individual customers'],

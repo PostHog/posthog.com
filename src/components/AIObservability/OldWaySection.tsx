@@ -9,7 +9,7 @@ import { SectionLabel, InlineIcon } from 'components/ReplayVision/sectionHelpers
 // The manual AI-debugging workflow. Every step is on you — the logs just sit there.
 const steps: FlowStep[] = [
     { label: '1. User reports\nan issue', icon: IconWarning, actor: 'Human' },
-    { label: '2. Read transcripts\none by one', icon: IconChat, actor: 'Human' },
+    { label: '2. Read traces\none by one', icon: IconChat, actor: 'Human' },
     { label: '3. Spot the\npattern', icon: IconSearch, actor: 'Human' },
     { label: '4. Guess which\nchange broke it', icon: IconStethoscope, actor: 'Human' },
     { label: '5. Write\nthe fix', icon: IconCode, actor: 'Human' },
@@ -32,7 +32,7 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             </SectionLabel>
 
             <p className="text-base leading-loose mb-5">
-                Your AI fails quietly – a wrong answer here and a slow reply there. Traces tell you what it said,{' '}
+                Your AI fails quietly – a wrong answer here, a failed tool call there. Traces tell you what it did,{' '}
                 <RoughAnnotation type="underline" color="currentColor" strokeWidth={1.5} multiline>
                     <em>but you have to go read them, one by one</em>
                 </RoughAnnotation>
@@ -47,8 +47,8 @@ const OldWaySection = ({ id }: SectionComponentProps) => {
             />
 
             <p className="text-base leading-loose">
-                Just to make a simple fix, you have to read the transcripts, spot the pattern, and figure out which
-                change broke it – <em>it's logs with a different schema</em>.
+                Just to make a simple fix, you have to read the traces, spot the pattern, and figure out which change
+                broke it – <em>it's logs with a different schema</em>.
             </p>
         </section>
     )

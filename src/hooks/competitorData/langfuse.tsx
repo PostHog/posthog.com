@@ -45,7 +45,7 @@ export const langfuse = {
                     user_profile_context: 'Partial',
                     // ClickHouse-backed custom queries and dashboards, not alongside product events.
                     sql_queries_on_traces: 'Partial',
-                    trace_explorer_ui: 'Advanced',
+                    trace_explorer_ui: true,
                 },
             },
             prompt_management: {
