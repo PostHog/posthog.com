@@ -87,6 +87,8 @@ Take activation, which at PostHog is a funnel. To make it SQL-only, someone must
 
 Storing the metric as the same funnel definition the insight uses, and running it through the same engine, makes that mismatch impossible. The metric and the dashboard execute identical queries. That guarantee is why we support insight-shaped metrics, not just SQL.
 
+So where does that definition live? When you create a metric from an insight, PostHog snapshots the insight's query and stores it on the metric server-side. That snapshot is what runs, which is how the metric and the insight stay in lockstep. It also means the metric can notice when it falls out of step: because the snapshot is stored but the insight keeps evolving, PostHog compares the two every time you read the metric and flags it as drifted if someone has changed the insight underneath it. Nothing runs in the background, the check happens live.
+
 ### "Why not write definitions in plain English?"
 
 A good part of it is. Users can define how the agent should calculate a given metric using a Markdown structure. However, plain English is limited because it is less deterministic than insight-backed and SQL-backed metrics.
