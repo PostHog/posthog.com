@@ -1,6 +1,8 @@
 import React from 'react'
 
 import Link from 'components/Link'
+import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
+import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
@@ -11,6 +13,16 @@ import { volumeArt } from './volumeArt'
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
+}
+
+/**
+ * The setup command, for the prerequisite a volume states once before anyone reaches a chapter.
+ * `subcommand` picks the wizard's flavor – omit it for the plain install, which is what a volume
+ * needs when its product ships with the SDK rather than behind its own wizard step.
+ */
+export function Setup({ subcommand }: { subcommand?: string }): JSX.Element {
+    const wizard = buildWizardCommand({ subcommand })
+    return <CopyableCommand className="my-[0.8em]" command={wizard.displayCommand} copyCommand={wizard.copyCommand} />
 }
 
 /** The small line above a title page's heading. */

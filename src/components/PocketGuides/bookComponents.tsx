@@ -13,7 +13,7 @@ import {
     ScoutFigure,
     ScreenshotFigure,
 } from './figures'
-import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
+import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Setup, Watches, proseComponents } from './bookPieces'
 
 export { EntryProvider } from './bookContext'
 
@@ -41,6 +41,7 @@ export const bookMdxComponents = {
     LoopFigure,
     Watches,
     Enable,
+    Setup,
     Contents,
     SeeAlso,
     Term,
