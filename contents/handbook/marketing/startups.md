@@ -75,9 +75,9 @@ Product exclusions are the same as for the PostHog for Startups plan, including 
 
 ### Every.to
 
-Subscribers to [Every](https://every.to/) who are new paying customers get:
+Subscribers to [Every](https://every.to/) get:
 
--   $2,000 in credits for core products, with the same exclusions as for the PostHog for Startups program
+-   $2,000 in credits for core products (only for new paying customers), with the same exclusions as for the PostHog for Startups program
 -   $2,000 in credits for AI products, covering products excluded from the PostHog for Startups program
 
 ## What happens after companies apply?
