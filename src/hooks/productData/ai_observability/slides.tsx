@@ -7,6 +7,7 @@ import {
     IconLightBulb,
     IconListTreeConnected,
     IconLlmPromptEvaluation,
+    IconPiggyBank,
     IconPlug,
     IconSparkles,
     IconTrends,
@@ -450,6 +451,34 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.clusters.images[0].src,
             alt: f.clusters.images[0].alt,
+            glow: true,
+        },
+    },
+    {
+        slug: 'cost',
+        label: 'Cost',
+        icon: <IconPiggyBank className="size-5" />,
+        color: 'bg-light dark:bg-dark',
+        activeText: 'text-primary',
+        progressBar: 'bg-yellow',
+        layout: 'float',
+        heading: f.cost_analysis.headline,
+        description: (
+            <>
+                <p>{f.cost_analysis.description}</p>
+                <div className="@container">
+                    <LabeledList
+                        items={f.cost_analysis.features.map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
+                    />
+                </div>
+            </>
+        ),
+        image: {
+            src: f.cost_analysis.images[0].src,
+            alt: f.cost_analysis.images[0].alt,
             glow: true,
         },
     },

@@ -10,7 +10,9 @@ import type { SectionComponentProps } from '../types'
 const firstLine = (s: string) => s.split('\n')[0]
 
 /** Opens PostHog AI pre-filled (and auto-submitted) with the prompt. */
-const maxPromptUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
+// Prompts copy to the clipboard rather than deep-linking into in-app PostHog AI –
+// the web runtime lags the MCP tool set, so pasting into your own agent is the
+// reliable path (per review on PR #19344).
 
 interface PromptGroup {
     title: string
@@ -31,6 +33,13 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const HogComponent = ai?.Hog
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
+    const [copiedPrompt, setCopiedPrompt] = useState<string | null>(null)
+
+    const copyPrompt = (p: string) => {
+        navigator.clipboard?.writeText(p)
+        setCopiedPrompt(p)
+        window.setTimeout(() => setCopiedPrompt((current) => (current === p ? null : current)), 2000)
+    }
 
     const productTools: McpTool[] = useMemo(() => {
         if (!mcpFeatures.length) return []
@@ -95,8 +104,8 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                     <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
                         PostHog Desktop
                     </Link>{' '}
-                    (our AI code editor), and in your product editor (using the MCP). Already signed in? Click a prompt
-                    to try it.
+                    (our AI code editor), and in your product editor (using the MCP). Click a prompt to copy it, then
+                    paste it into your agent.
                 </p>
             )}
             <ToggleGroup
@@ -146,13 +155,18 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                         <ul className="list-none pl-0 m-0 space-y-1 text-sm text-secondary italic leading-relaxed">
                                             {g.prompts.map((p) => (
                                                 <li key={p}>
-                                                    <Link
-                                                        to={maxPromptUrl(p)}
-                                                        externalNoIcon
-                                                        className="text-secondary hover:text-primary underline-offset-2 hover:underline"
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => copyPrompt(p)}
+                                                        className="text-left italic text-secondary hover:text-primary underline-offset-2 hover:underline bg-transparent border-0 p-0 cursor-pointer"
                                                     >
                                                         &ldquo;{p}&rdquo;
-                                                    </Link>
+                                                    </button>
+                                                    {copiedPrompt === p && (
+                                                        <span className="not-italic text-xs font-semibold text-green ml-2">
+                                                            Copied!
+                                                        </span>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>

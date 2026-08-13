@@ -164,11 +164,11 @@ export const aiObservability = {
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
-        // Robot hog reused from the /docs/ai-observability hero; the detective hog
-        // below is the product's identity and takes the more prominent hero slot.
+        // The detective hog is the product's identity – every hog slot on the
+        // page uses it (per review).
         default: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
-            alt: 'A hedgehog with a robot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+            alt: 'A hedgehog inspecting a trace with a magnifying glass',
         },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
@@ -347,8 +347,8 @@ export const aiObservability = {
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
-        imageAlt: 'PostHog AI and AI Observability',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+        imageAlt: 'A hedgehog inspecting a trace with a magnifying glass',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
         mcpFeatures: ['llm_analytics'],
         // AIO ships the most MCP tools of any product – the tools tab shows one
