@@ -1,11 +1,11 @@
 import React from 'react'
-import usePostHog from '../../hooks/usePostHog'
 import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconInfo } from '@posthog/icons'
 
-import Tooltip from 'components/RadixUI/Tooltip'
 import { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
+
+import { FigureMarker } from './FigureMarker'
 
 /**
  * The app's inbox card in miniature, annotated: markers fade in on figure hover (`group/anatomy`)
@@ -22,58 +22,6 @@ export interface ReportAnatomyProps {
     actionability?: string
     /** The card's two-line summary. */
     headline?: string
-}
-
-/**
- * A numbered annotation: appears on figure hover, opens its gloss on hover or tap.
- * `visibility` defaults to the anatomy figures' hover-reveal (which ReaderWrapper hides on
- * narrow readers); pass 'always' for markers that anchor a spot on an image, where a hidden
- * marker would leave nothing to point at.
- */
-export function AnatomyMarker({
-    n,
-    label,
-    gloss,
-    visibility = 'on-figure-hover',
-}: {
-    n: number
-    label: string
-    gloss: string
-    visibility?: 'on-figure-hover' | 'always'
-}): JSX.Element {
-    const [open, setOpen] = React.useState(false)
-    const posthog = usePostHog()
-    const onOpenChange = (next: boolean) => {
-        setOpen(next)
-        if (next) {
-            posthog?.capture('pocket_guide_interaction', { kind: 'marker_gloss', marker: label })
-        }
-    }
-    const visibilityClasses =
-        visibility === 'on-figure-hover'
-            ? 'anatomy-marker opacity-0 transition-opacity duration-200 focus-visible:opacity-100 group-hover/anatomy:opacity-100'
-            : ''
-    return (
-        <Tooltip
-            delay={100}
-            sideOffset={4}
-            open={open}
-            onOpenChange={onOpenChange}
-            contentClassName="max-w-[16rem] whitespace-normal text-left text-sm leading-snug"
-            trigger={
-                <button
-                    type="button"
-                    onClick={() => onOpenChange(!open)}
-                    aria-label={`${n}. ${label} – ${gloss}`}
-                    className={`inline-flex size-4 shrink-0 cursor-help select-none items-center justify-center rounded-full bg-orange align-middle font-bold leading-none text-white ${visibilityClasses}`}
-                >
-                    <span className="text-[10px]">{n}</span>
-                </button>
-            }
-        >
-            <span className="font-bold">{label}</span> – {gloss}
-        </Tooltip>
-    )
 }
 
 /** The standing invitation, set as a quiet second caption line. */
@@ -115,7 +63,7 @@ export default function ReportAnatomy({
                             <span className="inline-flex size-[1.6em] select-none items-center justify-center rounded-sm border border-orange bg-orange/10 text-[0.65em] font-semibold tabular-nums text-orange">
                                 {priority}
                             </span>
-                            <AnatomyMarker
+                            <FigureMarker
                                 n={1}
                                 label="Priority"
                                 gloss="how urgent the scout thinks this is, from P0 to P4"
@@ -126,14 +74,14 @@ export default function ReportAnatomy({
                             {/* 2 · The claim */}
                             <span className="text-[0.85em] font-semibold leading-snug text-primary">
                                 {report.title}{' '}
-                                <AnatomyMarker n={2} label="The claim" gloss="what the scout found, in one sentence" />
+                                <FigureMarker n={2} label="The claim" gloss="what the scout found, in one sentence" />
                             </span>
                             {/* 3 · What it saw */}
                             <span className="flex items-start gap-1.5">
                                 <span className="line-clamp-2 min-w-0 text-[0.75em] leading-snug text-secondary">
                                     {summary}
                                 </span>
-                                <AnatomyMarker
+                                <FigureMarker
                                     n={3}
                                     label="What it saw"
                                     gloss="a short preview of the evidence, the full version is inside the report"
@@ -143,7 +91,7 @@ export default function ReportAnatomy({
                             <span className="mt-0.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.7em] leading-none text-secondary">
                                 <span className="inline-flex items-center gap-1.5">
                                     {report.source}
-                                    <AnatomyMarker
+                                    <FigureMarker
                                         n={4}
                                         label="Who filed it"
                                         gloss="which scout wrote this report, and when it arrived"
@@ -160,7 +108,7 @@ export default function ReportAnatomy({
                                     >
                                         {actionability}
                                     </span>
-                                    <AnatomyMarker
+                                    <FigureMarker
                                         n={5}
                                         label="Where it stands"
                                         gloss='"Ready" means ready to review; "Actionable" means an agent can fix it, but no PR is open'
@@ -179,7 +127,7 @@ export default function ReportAnatomy({
                         <span className="select-none rounded border border-orange bg-orange px-2 py-1 text-[0.7em] font-semibold leading-none text-white">
                             Review
                         </span>
-                        <AnatomyMarker
+                        <FigureMarker
                             n={6}
                             label="Your move"
                             gloss="open the report, or archive it if it's not worth acting on"

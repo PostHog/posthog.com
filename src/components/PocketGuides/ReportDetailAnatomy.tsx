@@ -5,7 +5,7 @@ import Markdown from 'components/Markdown'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 import { SelfDrivingReport, WatchedSource } from 'components/SelfDrivingInbox/types'
 
-import { AnatomyMarker } from './ReportAnatomy'
+import { FigureMarker } from './FigureMarker'
 
 /** The report opened – the app's detail view in miniature, annotated like the card anatomy. */
 
@@ -69,7 +69,7 @@ export default function ReportDetailAnatomy({
                         <span className="min-w-0">
                             <span className="block text-[0.9em] font-bold leading-snug text-primary">
                                 {report.title}{' '}
-                                <AnatomyMarker
+                                <FigureMarker
                                     n={1}
                                     label="The header"
                                     gloss="the same claim as the card, plus the report's status and its actions"
@@ -99,7 +99,7 @@ export default function ReportDetailAnatomy({
                         <span className="select-none rounded border border-orange bg-orange px-2 py-1 text-[0.7em] font-semibold leading-none text-white">
                             Create PR
                         </span>
-                        <AnatomyMarker
+                        <FigureMarker
                             n={2}
                             label="Create PR"
                             gloss="sends the report to an agent, which writes the fix and opens a pull request for you to review"
@@ -112,7 +112,7 @@ export default function ReportDetailAnatomy({
                     <Section
                         label="Summary"
                         meta={
-                            <AnatomyMarker
+                            <FigureMarker
                                 n={3}
                                 label="Summary"
                                 gloss="everything the scout found: what changed, the numbers behind it, and why the harmless explanations don't hold"
@@ -130,7 +130,7 @@ export default function ReportDetailAnatomy({
                                 <Markdown className="min-w-0 text-[0.8em] leading-relaxed text-secondary [&>p]:m-0">
                                     {`**Suggested fix:** ${report.suggestedAction}`}
                                 </Markdown>
-                                <AnatomyMarker
+                                <FigureMarker
                                     n={4}
                                     label="Suggested fix"
                                     gloss="the change the agent proposes – if you create a PR, this becomes the pull request"
@@ -146,7 +146,7 @@ export default function ReportDetailAnatomy({
                             meta={
                                 <span className="inline-flex items-center gap-1.5">
                                     {watches.length} sources
-                                    <AnatomyMarker
+                                    <FigureMarker
                                         n={5}
                                         label="Evidence"
                                         gloss="the data sources the scout read to build this report"

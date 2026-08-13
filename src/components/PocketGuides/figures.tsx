@@ -13,9 +13,10 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
-import ReportAnatomy, { AnatomyHint, AnatomyMarker } from './ReportAnatomy'
+import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
 import { useTemplate } from './bookContext'
+import { FigureGlossKey, FigureGlossProvider, FigureMarker, useFigureGlossCollector } from './FigureMarker'
 
 type CloudinarySrc = `https://res.cloudinary.com/${string}`
 
@@ -39,11 +40,19 @@ interface FigProps {
     children?: React.ReactNode
 }
 
-/** `<Fig n={1} caption="…">` – any exhibit. The numbered frame and caption come from here. */
+/**
+ * `<Fig n={1} caption="…">` – any exhibit. The numbered frame and caption come from here.
+ * Markers inside register their glosses, which print as a numbered key under the exhibit on
+ * narrow readers – there, hover isn't available to reveal them in place.
+ */
 export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
+    const { register, glosses } = useFigureGlossCollector()
     return (
         <Figure number={n} caption={caption} legend={legend ? <span className="mt-1 block">{legend}</span> : undefined}>
-            {children}
+            <FigureGlossProvider value={register}>
+                {children}
+                <FigureGlossKey glosses={glosses} />
+            </FigureGlossProvider>
         </Figure>
     )
 }
@@ -108,7 +117,7 @@ export function ScreenshotFigure({
                         className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
                         style={{ left: `${item.x}%`, top: `${item.y}%` }}
                     >
-                        <AnatomyMarker
+                        <FigureMarker
                             n={index + 1}
                             label={item.title}
                             gloss={item.description ?? ''}

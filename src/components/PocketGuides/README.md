@@ -76,8 +76,8 @@ Headings map to the book's type scale: `#` is the page title, `##` a small-caps 
 ### Reusing a product page's screenshots
 
 A figure doesn't have to be drawn. `<ScreenshotFigure>` resolves an image – light, dark, alt text,
-and any named annotation sets – from `useProducts` via `components/ImageAnnotations`, so the book
-cites the same asset the marketing page uses instead of keeping its own copy of a URL:
+and any named annotation sets – from `useProducts`, so the book cites the same asset the marketing
+page uses instead of keeping its own copy of a URL:
 
 ```mdx
 <ScreenshotFigure
@@ -90,10 +90,12 @@ cites the same asset the marketing page uses instead of keeping its own copy of 
 ```
 
 `screenshot` is a key in that product hook's `screenshots` object; `set` is a named annotation set
-stored on it (`screenshots.overview.annotations['dev-tools']`), which renders as numbered markers
-plus a key. Omit `set` for a plain image, and use the figure's own `legend` instead. Annotation
-coordinates are authored with the internal tool at `/image-annotator` – see
-`components/ImageAnnotations/README.md`.
+stored on it (`screenshots.overview.annotations['dev-tools']`). The figure draws the image itself
+and places the book's own `FigureMarker` at each set coordinate – not the product pages' annotator,
+whose ringed pins and separate key belong to a different surface. Omit `set` for a plain image, and
+use the figure's own `legend` instead. Annotation coordinates are authored with the internal tool
+at `/image-annotator` – see `components/ImageAnnotations/README.md` for the product-page component
+that reads the same sets.
 
 Check the asset before you cite it. Product pages carry hero crops as well as full screenshots –
 `session_replay`'s `overview` is 1052×1374 because it's pinned to the corner of a hero and clipped
@@ -115,9 +117,20 @@ first block that cites it via `<SeeFig>`, and a figure nobody cites prints at th
 page. One exception: a figure-less page authored as two pages – the volume's front matter –
 renders `<LeftPage>` and `<RightPage>` as two columns at reading widths.
 
-The hover markers and their hint line show at reading widths only – below ~672px of container
-width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
-on phones.
+### Figure markers, and what phones get instead
+
+Every annotated figure – an anatomy diagram, an annotated screenshot – numbers its parts with
+`FigureMarker` (FigureMarker.tsx). A marker takes a `label` and a `gloss`, opens them on hover or
+tap, and registers them with the enclosing `<Fig>`.
+
+That registration is what makes the figures work without hover. At reading widths the markers
+fade in on figure hover and their gloss appears in place, with `<AnatomyHint />` inviting it.
+Below ~672px of container width there is no hover, so instead the markers stay visible and the
+figure prints every gloss as a numbered key under the exhibit, matching the numbers on it.
+Nothing to configure: use `FigureMarker` inside a `<Fig>` and both behaviors come with it.
+
+Markers over an image pass `visibility="always"` – there they anchor a spot rather than label a
+part, so one hidden until hover would leave nothing to find.
 
 ### Adding new content elements
 
@@ -181,6 +194,7 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
+| `FigureMarker.tsx` | The numbered marker every figure annotates with, and its narrow-reader key |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
