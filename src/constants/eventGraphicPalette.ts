@@ -98,3 +98,10 @@ export const eventGraphicStyle = (index: number): { hue: EventGraphicHue; varian
 
 /** Deterministic starting style for an event, so the list and detail views agree. */
 export const eventGraphicStyleIndex = (seed?: string): number => (seed ? hash(seed) : 0) % EVENT_GRAPHIC_STYLE_COUNT
+
+/**
+ * The hog is picked independently of the hue. An earlier draft paired one hog to each color, but per the
+ * brand team hog/hue pairings are no longer a thing — hedgehogs carry a single hue from the brand book —
+ * so the two rotate separately and Shuffle only cycles the color.
+ */
+export const eventGraphicHogIndex = (seed: string, count: number): number => (count > 0 ? hash(seed) % count : 0)

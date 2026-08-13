@@ -19,6 +19,7 @@ import {
     EVENT_GRAPHIC_CREAM_TO,
     EVENT_GRAPHIC_INK,
     EVENT_GRAPHIC_INK_MUTED,
+    eventGraphicHogIndex,
     eventGraphicStyle,
     eventGraphicStyleIndex,
     type EventGraphicVariant,
@@ -57,20 +58,23 @@ export type EventGraphicProps = {
     className?: string
 }
 
-// One hog per hue, so a given color always brings the same artwork — the pairing the brand team set up
-// in Figma. Ordered to match EVENT_GRAPHIC_HUES.
-const HUE_HOGS = [
-    HedgehogRoboHog, // blue
-    HedgehogMountie, // sky
-    HedgehogSailorHog, // ocean
-    HedgehogChef, // coral
-    HedgehogConstruction, // lime
-    HedgehogCardHog, // green
-    HedgehogIpad, // lilac
-    HedgehogSpeakerHog, // purple
-    HedgehogHogpatch, // teal
-    HedgehogBallHog, // tangerine
-    HedgehogBeaker, // yellow
+/**
+ * The fallback hogs used when an event has no speaker photo, picked independently of the hue — hog/color
+ * pairings are no longer part of the brand system. Edit this list to change which hogs are in rotation;
+ * the names come from `@posthog/brand`, which is generated from the Hoggies brand file.
+ */
+const FALLBACK_HOGS = [
+    HedgehogRoboHog,
+    HedgehogMountie,
+    HedgehogSailorHog,
+    HedgehogChef,
+    HedgehogConstruction,
+    HedgehogCardHog,
+    HedgehogIpad,
+    HedgehogSpeakerHog,
+    HedgehogHogpatch,
+    HedgehogBallHog,
+    HedgehogBeaker,
 ]
 
 /**
@@ -85,7 +89,17 @@ const FORMATS = {
         pad: 4,
         // Step down as the title gets longer, so it always fills the space without overflowing.
         titleSizes: [15, 12.5, 10.4, 8.7, 7.6],
+        // Narrower than the title so it stays clear of the artwork — display type can run over a hog and
+        // still read, but a smaller subtitle crossing it just looks like a mistake.
+        subtitleScale: 0.36,
+        subtitleWidth: 58,
+        // The square has the height to carry a subtitle without shrinking the title.
+        subtitleStepDown: 0,
         titleWidth: 76,
+        // A speaker portrait is much wider than the hog art, so the title column narrows to clear the
+        // face — and the title steps down with it, or long words break mid-word in the narrower column.
+        titleWidthSpeaker: 54,
+        speakerStepDown: 1,
         titleGap: 2.6,
         infoWidth: 46,
         date: 4,
@@ -105,7 +119,13 @@ const FORMATS = {
         artWidth: 54,
         artRight: -3,
         artBottom: 11,
-        barHeight: 12.5,
+        // The portrait is drawn much larger than the hog art so the face reads at a distance, sized off
+        // the reference frames. The reference artwork is framed head-left with the shoulder bleeding off
+        // the right edge, but uploaded avatars centre the head in a square crop, so the bleed here is
+        // smaller than the reference's — enough to keep the face whole rather than clipping it.
+        speakerWidth: 80,
+        speakerRight: -15,
+        barHeight: 13.95,
     },
     landscape: {
         aspect: '52.5%',
@@ -113,7 +133,13 @@ const FORMATS = {
         // The landscape canvas is short, so long titles have to step down harder than the square's
         // to keep the date block clear of the footer.
         titleSizes: [12.5, 10.5, 8.6, 6.9, 6],
+        subtitleScale: 0.36,
+        subtitleWidth: 62,
+        // Only 630px tall, so a subtitle has to buy its space back out of the title.
+        subtitleStepDown: 2,
         titleWidth: 84,
+        titleWidthSpeaker: 58,
+        speakerStepDown: 2,
         titleGap: 2,
         infoWidth: 32,
         date: 2.75,
@@ -133,16 +159,111 @@ const FORMATS = {
         artWidth: 27,
         artRight: -1,
         artBottom: 7,
-        barHeight: 9,
+        // No landscape speaker frame exists in the references, so these hold the square's proportions
+        // against the short edge: the portrait fills ~85% of the canvas height and bleeds off the right.
+        speakerWidth: 43,
+        speakerRight: -8,
+        barHeight: 7.3,
     },
 } as const
 
-const titleSizeFor = (title: string, sizes: readonly number[]): number => {
-    if (title.length <= 20) return sizes[0]
-    if (title.length <= 32) return sizes[1]
-    if (title.length <= 48) return sizes[2]
-    if (title.length <= 64) return sizes[3]
-    return sizes[4]
+/**
+ * Long event names are usually already two parts — "AI Demo Night: Building for Model Volatility" — so
+ * the leading clause becomes the display title and the remainder a subtitle. That keeps the title short
+ * and large, which is what the reference frames all do, without needing a separate field on the event.
+ *
+ * Only long names split: a short name already sets at the largest size, and breaking it would shrink it.
+ */
+const splitTitle = (title: string): { title: string; subtitle?: string } => {
+    if (title.length <= 28) return { title }
+    const at = title.indexOf(': ')
+    if (at < 4 || at > 40) return { title }
+    return { title: title.slice(0, at), subtitle: title.slice(at + 2) }
+}
+
+/**
+ * Advance width of each Squeak uppercase glyph, in ems, measured from the rendered font.
+ *
+ * A character count is not good enough here: Squeak's 'W' is 0.87em and its 'I' is 0.44em, so "WORKFLOWS"
+ * is nearly twice the width of "VOLATILITY" at the same length. Summing real advances is what keeps a
+ * long word inside its column — otherwise `break-words` splits it mid-word and it reads as a typo
+ * ("WORKFLOW / S"). Kerning makes the sum run ~2% wide, which errs towards a smaller, safer size.
+ */
+const SQUEAK_ADVANCE: Record<string, number> = {
+    A: 0.5609,
+    B: 0.5821,
+    C: 0.6233,
+    D: 0.5804,
+    E: 0.5378,
+    F: 0.5068,
+    G: 0.6327,
+    H: 0.579,
+    I: 0.4408,
+    J: 0.5335,
+    K: 0.6124,
+    L: 0.4292,
+    M: 0.8488,
+    N: 0.6479,
+    O: 0.6504,
+    P: 0.5549,
+    Q: 0.6553,
+    R: 0.5865,
+    S: 0.5788,
+    T: 0.439,
+    U: 0.5778,
+    V: 0.657,
+    W: 0.866,
+    X: 0.6473,
+    Y: 0.6177,
+    Z: 0.576,
+    '0': 0.5826,
+    '1': 0.4144,
+    '2': 0.542,
+    '3': 0.5719,
+    '4': 0.5738,
+    '5': 0.5499,
+    '6': 0.554,
+    '7': 0.5275,
+    '8': 0.5577,
+    '9': 0.5659,
+    ' ': 0.2275,
+    '&': 0.7285,
+    "'": 0.2019,
+    '"': 0.4025,
+    '!': 0.2256,
+    '?': 0.4966,
+    '.': 0.1989,
+    ',': 0.1979,
+    ':': 0.2329,
+    ';': 0.2339,
+    '-': 0.5427,
+    '–': 0.4768,
+    '—': 0.7061,
+    '/': 0.3794,
+    '(': 0.3418,
+    ')': 0.3408,
+    '+': 0.5405,
+    '@': 0.9575,
+    '#': 0.6968,
+    '%': 0.7549,
+}
+const SQUEAK_FALLBACK_ADVANCE = 0.6
+
+const squeakWidth = (word: string): number =>
+    word
+        .toUpperCase()
+        .split('')
+        .reduce((sum, char) => sum + (SQUEAK_ADVANCE[char] ?? SQUEAK_FALLBACK_ADVANCE), 0)
+
+/** Largest font size, in cqw, at which every word in `text` still fits inside a `columnWidth` column. */
+const fitToLongestWord = (text: string, columnWidth: number): number => {
+    const widest = text.split(/\s+/).reduce((max, word) => Math.max(max, squeakWidth(word)), 0)
+    return widest > 0 ? columnWidth / widest : Infinity
+}
+
+const titleSizeFor = (title: string, sizes: readonly number[], columnWidth: number, stepDown = 0): number => {
+    const tier = title.length <= 20 ? 0 : title.length <= 32 ? 1 : title.length <= 48 ? 2 : title.length <= 64 ? 3 : 4
+    return Math.min(sizes[Math.min(tier + stepDown, sizes.length - 1)], fitToLongestWord(title, columnWidth))
 }
 
 /**
@@ -179,7 +300,8 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
     const t = FORMATS[format]
     const resolvedIndex = styleIndex ?? eventGraphicStyleIndex(title)
     const { hue, variant } = eventGraphicStyle(resolvedIndex)
-    const Hog = HUE_HOGS[Math.abs(resolvedIndex) % HUE_HOGS.length]
+    const Hog = FALLBACK_HOGS[eventGraphicHogIndex(title, FALLBACK_HOGS.length)]
+    const { title: displayTitle, subtitle } = splitTitle(title)
 
     const light = variant === 'light'
     const onDarkIsWhite = hue.titleOnDark === '#FFFFFF'
@@ -188,6 +310,16 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
         ? `linear-gradient(180deg, ${EVENT_GRAPHIC_CREAM_FROM} 0%, ${EVENT_GRAPHIC_CREAM_TO} 100%)`
         : `linear-gradient(180deg, ${hue.from} 0%, ${hue.to} 100%)`
     const titleColor = light ? hue.titleOnLight : hue.titleOnDark
+    const titleWidth = speaker?.avatarUrl ? t.titleWidthSpeaker : t.titleWidth
+    const titleSize = titleSizeFor(
+        displayTitle,
+        t.titleSizes,
+        titleWidth,
+        (subtitle ? t.subtitleStepDown : 0) + (speaker?.avatarUrl ? t.speakerStepDown : 0)
+    )
+    const subtitleWidth = Math.min(t.subtitleWidth, titleWidth)
+    const subtitleSize = subtitle ? Math.min(titleSize * t.subtitleScale, fitToLongestWord(subtitle, subtitleWidth)) : 0
+    const titleGlow = `0 0 ${t.pad * 0.28}cqw ${light ? `${hue.titleOnLight}47` : `${hue.to}66`}`
     const ink = light ? EVENT_GRAPHIC_INK : hue.titleOnDark
     const inkMuted = light ? EVENT_GRAPHIC_INK_MUTED : onDarkIsWhite ? 'rgba(255,255,255,0.75)' : 'rgba(21,21,21,0.65)'
     const ruleColor = light ? 'rgba(57,65,80,0.35)' : onDarkIsWhite ? 'rgba(255,255,255,0.4)' : 'rgba(21,21,21,0.3)'
@@ -206,8 +338,10 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
     const barInk = light ? hue.titleOnDark : EVENT_GRAPHIC_INK
 
     const footerInk = hasBar ? barInk : light ? EVENT_GRAPHIC_INK : hue.titleOnDark
-    // The 4-color mark reads best on the white bar; everywhere else the mono mark keeps contrast.
-    const logoVariant = hasBar && !light ? 'gradient' : 'mono'
+    // Per the brand team the mark is mono everywhere except on white or cream, where it goes full color.
+    // That's cream with no bar, or the white bar drawn over an accent background.
+    const logoOnPaper = light !== hasBar
+    const logoVariant = logoOnPaper ? 'gradient' : 'mono'
 
     return (
         <div className={`@container overflow-hidden ${className}`}>
@@ -216,8 +350,8 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                 <div
                     className="absolute"
                     style={{
-                        width: `${t.artWidth}cqw`,
-                        right: `${t.artRight}cqw`,
+                        width: `${speaker?.avatarUrl ? t.speakerWidth : t.artWidth}cqw`,
+                        right: `${speaker?.avatarUrl ? t.speakerRight : t.artRight}cqw`,
                         bottom: `${hasBar ? 0 : t.artBottom}cqw`,
                     }}
                 >
@@ -275,16 +409,31 @@ const EventGraphic = forwardRef<HTMLDivElement, EventGraphicProps>(function Even
                     <h3
                         className="m-0 break-words font-squeak font-bold uppercase"
                         style={{
-                            width: `${t.titleWidth}cqw`,
-                            fontSize: `${titleSizeFor(title, t.titleSizes)}cqw`,
-                            lineHeight: 1.01,
+                            width: `${titleWidth}cqw`,
+                            fontSize: `${titleSize}cqw`,
+                            lineHeight: 0.9,
                             color: titleColor,
                             // Soft same-hue bloom behind the type, as the designs have it
-                            textShadow: `0 0 ${t.pad * 0.28}cqw ${light ? `${hue.titleOnLight}47` : `${hue.to}66`}`,
+                            textShadow: titleGlow,
                         }}
                     >
-                        {title}
+                        {displayTitle}
                     </h3>
+                    {subtitle && (
+                        <div
+                            className="break-words font-squeak font-bold uppercase"
+                            style={{
+                                width: `${subtitleWidth}cqw`,
+                                fontSize: `${subtitleSize}cqw`,
+                                lineHeight: 1,
+                                marginTop: `${t.pad * 0.32}cqw`,
+                                color: titleColor,
+                                textShadow: titleGlow,
+                            }}
+                        >
+                            {subtitle}
+                        </div>
+                    )}
 
                     <div
                         className={
