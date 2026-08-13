@@ -4651,10 +4651,6 @@ export const docsMenu = {
                             url: '/docs/session-replay/find-replays-ai',
                         },
                         {
-                            name: 'Summarize sessions',
-                            url: '/docs/session-replay/session-summaries-ai',
-                        },
-                        {
                             name: 'Integrations with PostHog products',
                             url: '/docs/session-replay/integrations',
                         },
@@ -7509,10 +7505,6 @@ export const docsMenu = {
                         {
                             name: 'Investigate web traffic',
                             url: '/docs/posthog-ai/investigate-web-traffic',
-                        },
-                        {
-                            name: 'Summarize session replays',
-                            url: '/docs/posthog-ai/session-summaries',
                         },
                     ],
                 },
