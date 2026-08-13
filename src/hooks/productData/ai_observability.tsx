@@ -350,6 +350,9 @@ export const aiObservability = {
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
         imageAlt: 'A hedgehog inspecting a trace with a magnifying glass',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
+        // Prompts copy to the clipboard instead of deep-linking into in-app
+        // PostHog AI while its web runtime lags the MCP tool set.
+        copyPrompts: true,
         mcpFeatures: ['llm_analytics'],
         // AIO ships the most MCP tools of any product – the tools tab shows one
         // row per use case (à la Replay Vision) instead of an 80-row list.
