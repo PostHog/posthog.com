@@ -102,7 +102,7 @@ PostHog team members who attended or presented at an event can share their feedb
 
 ## Sponsoring external events
 
-We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Speaking at events
 
@@ -113,7 +113,7 @@ For first-time yappers, reference the [speaker's guide](/handbook/marketing/spea
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
 
 ## Event submission form
 

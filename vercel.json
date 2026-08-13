@@ -470,6 +470,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
