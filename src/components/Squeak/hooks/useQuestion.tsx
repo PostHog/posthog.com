@@ -1,6 +1,6 @@
 import qs from 'qs'
 import { QuestionData, StrapiRecord, TopicData } from 'lib/strapi'
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 
@@ -115,6 +115,7 @@ const query = (id: string | number, isModerator: boolean) =>
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
     const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
     const posthog = usePostHog()
+    const { mutate: globalMutate } = useSWRConfig()
 
     const key =
         isValidating || options?.data
@@ -153,6 +154,11 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
     const questionData: StrapiRecord<QuestionData> | undefined = question || options?.data
     const questionID = typeof id !== 'string' ? id : question?.id
+
+    // Revalidates this question along with any question lists (e.g. the questions table) that are
+    // mounted elsewhere, so changes show up without a page refresh
+    const mutateQuestions = () =>
+        globalMutate((key) => typeof key === 'string' && key.includes('/api/questions?'))
 
     const reply = async (body: string) => {
         try {
@@ -418,7 +424,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
 
             await replyRes.json()
 
-            mutate()
+            mutateQuestions()
 
             posthog?.capture('squeak resolve', {
                 questionId: questionID,
@@ -434,7 +440,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 error: JSON.stringify(error),
             })
 
-            await mutate()
+            await mutateQuestions()
 
             throw error
         }
