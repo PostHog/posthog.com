@@ -6,7 +6,7 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+Marketing at PostHog is a collaborative effort across several teams. There are seven distinct teams that handle different aspects of marketing:
 
 - <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
 - <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
@@ -14,6 +14,7 @@ Marketing at PostHog is a collaborative effort across several teams. There are s
 - <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
 - <SmallTeam slug="youtube" /> – Leads video
 - <SmallTeam slug="wizard-and-docs" /> – Leads on documentation and the wizard
+- <SmallTeam slug="builder-relations" /> – Leads in-person events, the forum, and Discord
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
