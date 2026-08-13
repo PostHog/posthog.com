@@ -206,10 +206,11 @@ export const sessionReplay = {
                                 'Overview, Inspector, and Network waterfall – the three views onto the same session.',
                         },
                         {
-                            x: 61.5,
-                            y: 22.3,
-                            title: 'The session at a glance',
-                            description: 'Clicks, keystrokes, and errors counted before you play anything.',
+                            x: 45.3,
+                            y: 15.9,
+                            title: 'The inspector toolbar',
+                            description:
+                                'Filters the panel to events, console logs, network requests, comments, or the Doctor – each only as full as your capture config allows.',
                         },
                         {
                             x: 92.5,
