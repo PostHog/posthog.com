@@ -5437,6 +5437,10 @@
             "destination": "https://app.posthog.com/startups"
         },
         {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
+        },
+        {
             "source": "/yc-onboarding",
             "destination": "https://app.posthog.com/startups/yc"
         },
@@ -6070,6 +6074,26 @@
         {
             "source": "/wizard",
             "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/pricing",
+            "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
             "statusCode": 301
         }
     ]

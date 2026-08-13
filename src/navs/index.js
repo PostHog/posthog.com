@@ -1107,7 +1107,7 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/press',
                     },
                     {
-                        name: 'Startups & YC Programs',
+                        name: 'Startup programs and partnerships',
                         url: '/handbook/marketing/startups',
                     },
                     {
@@ -1431,36 +1431,49 @@ export const handbookSidebar = [
                 url: '',
                 children: [
                     {
-                        name: 'Customer success overview',
+                        name: 'Overview',
                         url: '/handbook/cs-and-onboarding/customer-success',
-                    },
-                    {
-                        name: 'Getting started with newly assigned customers',
-                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
-                    },
-                    {
-                        name: 'New starter onboarding',
-                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
                     },
                     {
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: 'Lifecycle of CSM engagement',
+                        name: 'Onboarding',
+                    },
+                    {
+                        name: 'New starters',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
+                        name: 'Team leads',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding-team-leads',
+                    },
+                    {
+                        name: 'Working with customers',
+                    },
+                    {
+                        name: 'Newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/getting-started-with-customers',
+                    },
+                    {
+                        name: 'Engagement lifecycle',
                         url: '/handbook/cs-and-onboarding/lifecycle-csm',
+                    },
+                    {
+                        name: 'Unengaged customers',
+                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
+                    },
+                    {
+                        name: 'Automation & AI',
                     },
                     {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
                     {
-                        name: 'Using AI to analyze customer issues',
+                        name: 'Analyzing customer issues',
                         url: '/handbook/cs-and-onboarding/using-ai-to-analyze-customer-issues',
-                    },
-                    {
-                        name: 'Engaging unengaged customers',
-                        url: '/handbook/cs-and-onboarding/engaging-unengaged-customers',
                     },
                 ],
             },
@@ -1627,12 +1640,16 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                     {
-                        name: 'Basic account review checklist',
+                        name: 'Basic implementation review',
                         url: '/handbook/cs-and-onboarding/foundation-check',
                     },
                     {
                         name: 'Handling customer issues',
                         url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
+                        name: 'Getting people to talk to you',
+                        url: '/handbook/account-management/getting-people-to-talk-to-you',
                     },
                     {
                         name: 'Health tracking',
@@ -6329,6 +6346,16 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/managed-warehouse/connect',
                     icon: 'IconTerminal',
                     color: 'seagreen',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/managed-warehouse/connect',
+                        },
+                        {
+                            name: 'Performance',
+                            url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
@@ -6687,6 +6714,11 @@ export const docsMenu = {
                             name: 'Convex',
                             url: '/docs/ai-observability/installation/convex',
                             platformLogo: 'convex',
+                        },
+                        {
+                            name: 'OpenCode',
+                            url: '/docs/ai-observability/installation/opencode',
+                            icon: 'IconCode',
                         },
                         {
                             name: 'Pi Coding Agent',
