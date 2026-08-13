@@ -637,9 +637,87 @@ function BulkAssignForm({ jwt, achievements }: { jwt: string; achievements: Achi
     )
 }
 
-export default function AchievementManager() {
-    const { user, isModerator, getJwt } = useUser()
+function LoadingState() {
+    return (
+        <div className="flex items-center justify-center h-full p-4">
+            <IconSpinner className="size-4 animate-spin" />
+        </div>
+    )
+}
+
+function AccessDenied() {
+    return (
+        <div className="flex items-center justify-center h-full p-4">
+            <div className="p-4 rounded border border-primary w-full">
+                <div className="flex items-center gap-3">
+                    <div className="bg-red/15 rounded-lg p-2">
+                        <IconLock className="size-5 text-red" />
+                    </div>
+                    <div>
+                        <p className="mt-0 mb-0 font-bold text-sm">Access denied</p>
+                        <p className="mb-0 text-xs text-secondary">
+                            Log in with a moderator account to manage achievements
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function ManagerContent({
+    jwt,
+    achievements,
+    groups,
+    onSaved,
+}: {
+    jwt: string | null
+    achievements: Achievement[]
+    groups: AchievementGroup[]
+    onSaved: () => void
+}) {
     const [activeTab, setActiveTab] = useState<Tab>('create')
+
+    return (
+        <ScrollArea>
+            <div className="p-4">
+                <div className="flex gap-1 mb-5 bg-accent p-1 rounded border border-primary">
+                    {(
+                        [
+                            { key: 'create' as Tab, label: 'Create / edit', icon: IconPencil },
+                            { key: 'assign' as Tab, label: 'Bulk assign', icon: IconPeople },
+                        ] as const
+                    ).map(({ key, label, icon: Icon }) => (
+                        <button
+                            key={key}
+                            type="button"
+                            onClick={() => setActiveTab(key)}
+                            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-md transition-all ${
+                                activeTab === key
+                                    ? 'bg-primary text-primary shadow-sm'
+                                    : 'text-secondary hover:text-primary'
+                            }`}
+                        >
+                            <Icon className="size-4" />
+                            {label}
+                        </button>
+                    ))}
+                </div>
+
+                {activeTab === 'create' && jwt && achievements.length > 0 && groups.length > 0 && (
+                    <AchievementForm jwt={jwt} achievements={achievements} groups={groups} onSaved={onSaved} />
+                )}
+
+                {activeTab === 'assign' && jwt && achievements.length > 0 && (
+                    <BulkAssignForm jwt={jwt} achievements={achievements} />
+                )}
+            </div>
+        </ScrollArea>
+    )
+}
+
+export default function AchievementManager() {
+    const { user, isModerator, getJwt, isValidating } = useUser()
     const [achievements, setAchievements] = useState<Achievement[]>([])
     const [groups, setGroups] = useState<AchievementGroup[]>([])
     const [loading, setLoading] = useState(true)
@@ -670,68 +748,16 @@ export default function AchievementManager() {
         }
     }, [isModerator, loadData])
 
-    if (!user || !isModerator) {
-        return (
-            <div data-scheme="secondary" className="h-full bg-primary text-primary">
-                <SEO title="Achievement Manager - PostHog" />
-                <div className="flex items-center justify-center h-full p-4">
-                    <div className="p-4 rounded border border-primary w-full">
-                        <div className="flex items-center gap-3">
-                            <div className="bg-red/15 rounded-lg p-2">
-                                <IconLock className="size-5 text-red" />
-                            </div>
-                            <div>
-                                <p className="mt-0 mb-0 font-bold text-sm">Access denied</p>
-                                <p className="mb-0 text-xs text-secondary">
-                                    Log in with a moderator account to manage achievements
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div data-scheme="secondary" className="h-full bg-primary text-primary border-t border-primary">
             <SEO title="Achievement Manager - PostHog" />
-            <ScrollArea>
-                <div className="p-4">
-                    <>
-                        <div className="flex gap-1 mb-5 bg-accent p-1 rounded border border-primary">
-                            {(
-                                [
-                                    { key: 'create' as Tab, label: 'Create / edit', icon: IconPencil },
-                                    { key: 'assign' as Tab, label: 'Bulk assign', icon: IconPeople },
-                                ] as const
-                            ).map(({ key, label, icon: Icon }) => (
-                                <button
-                                    key={key}
-                                    type="button"
-                                    onClick={() => setActiveTab(key)}
-                                    className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-md transition-all ${
-                                        activeTab === key
-                                            ? 'bg-primary text-primary shadow-sm'
-                                            : 'text-secondary hover:text-primary'
-                                    }`}
-                                >
-                                    <Icon className="size-4" />
-                                    {label}
-                                </button>
-                            ))}
-                        </div>
-
-                        {activeTab === 'create' && jwt && achievements.length > 0 && groups.length > 0 && (
-                            <AchievementForm jwt={jwt} achievements={achievements} groups={groups} onSaved={loadData} />
-                        )}
-
-                        {activeTab === 'assign' && jwt && achievements.length > 0 && (
-                            <BulkAssignForm jwt={jwt} achievements={achievements} />
-                        )}
-                    </>
-                </div>
-            </ScrollArea>
+            {isValidating ? (
+                <LoadingState />
+            ) : !user || !isModerator ? (
+                <AccessDenied />
+            ) : (
+                <ManagerContent jwt={jwt} achievements={achievements} groups={groups} onSaved={loadData} />
+            )}
         </div>
     )
 }
