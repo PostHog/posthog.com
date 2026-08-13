@@ -25,14 +25,14 @@ const OTHER = 'Other'
 const SCHOOLS = [
     'Stanford',
     'UC Berkeley',
+    'Caltech',
     'UCLA',
     'UC San Diego',
     'UC Davis',
     'UC Irvine',
     'UC Santa Barbara',
-    'UC Merced',
+    'SJSU',
     'Santa Clara University',
-    'UC Riverside',
     'UC Santa Cruz',
     'University of San Francisco',
 ]
