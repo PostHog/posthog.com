@@ -1107,7 +1107,7 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/press',
                     },
                     {
-                        name: 'Startups & YC Programs',
+                        name: 'Startup programs and partnerships',
                         url: '/handbook/marketing/startups',
                     },
                     {
