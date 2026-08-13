@@ -149,6 +149,8 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 
 Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
+> **Note:** [Trigger groups](#trigger-groups) carry their own sample rate, set per group and applied to the sessions that matched that group's conditions. The project-wide sample rate described here applies to the legacy recording conditions, used by SDK versions before 1.369.0 and as a fallback when no trigger groups are configured.
+
 Sampling is supported on the following SDKs:
 
 - **Web** - posthog-js 1.85.0+
@@ -183,6 +185,8 @@ This means:
 ## Combining controls
 
 Since version 1.238.0 of the web SDK you can control how multiple triggers are combined. Choosing whether recording will start when all triggers match or when any trigger matches.
+
+> **Note:** This section describes the legacy recording conditions, where match type and sampling are configured project-wide. [Trigger groups](#trigger-groups) set match type per group, and their sample rate is applied after a group's conditions match rather than as another condition alongside them.
 
 For example if you set an event trigger for Exception events, a URL trigger for the checkout page, and sampling to 20%.
 
@@ -240,7 +244,7 @@ You can edit the groups after creating them.
 
 ## Minimum duration
 
-In your [replay ingestion settings](https://app.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
+In your [replay ingestion settings](https://app.posthog.com/replay/settings#selectedSetting=replay-triggers), you can set a minimum duration for sessions to be recorded. Trigger groups carry their own minimum duration, set per group.
 
 Supported on the following SDKs:
 
