@@ -57,24 +57,26 @@ PostHog already <Term name="cost calculation">computes</Term> `$ai_total_cost_us
 
 ## Add properties
 
-To make sense of your AI bill, PostHog supports properties:
+You can take advantage of PostHog's properties to make sense of your AI bill:
 - Use a <Term name="custom property" /> to name specific features
 - Default properties like `$ai_model` and `$ai_provider` are included automatically
 - `distinct_id` tells you which customers your spend goes to
 
-Once you've added properties, your AI bill is no longer one line: <SeeFig n={1} /> – three surfaces on the same account, two of them steady, one that quadrupled after a change in your onboarding agent.
+Once you've added properties, your AI bill is no longer one line: <SeeFig n={1} /> – three surfaces on the same account, two of them steady, one that surfaces the change.
 
 ## Divide by requests
 
 A rising AI bill has two possible causes: more people used it, or each use got more expensive.
 
-Every call carries a `$ai_trace_id` that groups it with one interaction. Distinct <Term name="trace">traces</Term> give you the denominator to divide by: 
-- More traces means you're growing. 
-- More cost per trace means something regressed. 
+Every call carries an `$ai_trace_id` that groups it with one interaction. Distinct <Term name="trace">traces</Term> give you the denominator to divide by: 
+- More traces means you're growing
+- More cost per trace means something regressed
 
 If your product is a multi-turn chat, `$ai_session_id` groups traces into a whole conversation, and cost per session is the number you should pay attention to.
 
-The input-to-output token ratio is worth the same treatment. Output tokens rising means the model got chattier. Input tokens rising while output holds means your context is growing – a prompt that keeps accrediting instructions, a retrieval step returning more documents than it used to, or a conversation history nobody truncates.
+Input-to-output token ratio is worth the same teratment:
+- Output tokens rising means the model got chattier
+- Input tokens rising while output holds steady means your context is growing
 
 ## What the breakdown catches
 
@@ -87,11 +89,13 @@ Four things account for most surprise bills, and each one has a different signat
 | Caching stopped hitting | Cost per call rises while token counts stay flat |
 | A retry loop | Generations per trace climbs, cost per trace with it |
 
-That last one is the expensive one, because it looks like usage. Every failed attempt bills, and if your code retries silently the only trace of the failure is the invoice.
+Retry loops are the expensive ones, because it looks like usage. Every failed attempt bills, and if your code retries silently the only trace of the failure is the invoice.
 
 ## Build the dashboard
 
-Build all of this data into an <Term name="AI Observability dashboard">AI Observability dashboard</Term> you can open when you need to understand your AI spend.
+Add all of this data into an <Term name="AI Observability dashboard">AI Observability dashboard</Term> you can open when you need to understand your AI spend.
+
+The following prompt will build that dashboard for you:
 
 <Action />
 

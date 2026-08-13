@@ -25,7 +25,7 @@ bookOrder: 1
 
 # AI Observability 101
 
-Every LLM call your product makes is valuable performance and user insight. You can use PostHog AI Observability (AIO) to see what your model is doing in the wild, how much it costs, and whether the outputs it returns are what users want.
+Every LLM call in your product is valuable performance and user insight. You can use PostHog AI Observability (AIO) to see what your model is doing in the wild, how much it costs, and whether the outputs it returns are what users want.
 
 LLM calls arrive as PostHog events so you can put them in funnels, break them down by plan, or jump to the session replay of the user who made them.
 
@@ -36,11 +36,11 @@ There are three AIO event types: `$ai_trace`, `$ai_span`, and `$ai_generation`:
 - A <Term name="span" /> is a step around it that isn't a model call, like a retrieval or a tool.
 - A <Term name="generation" /> is one call to a model.
 
-Below, <SeeFig n={1} /> shows all three in one request.
+Below, <SeeFig n={1} /> shows all three in one request. It's best to read from bottom to top.
 
 ## What lands on a generation
 
-Every `$ai_generation` event arrives with the following properties. You can attach your own properties too:
+Every `$ai_generation` event arrives with the following properties. You can attach your own custom properties in addition to these:
 
 | Property | What it holds | Example |
 | --- | --- | --- |
@@ -52,9 +52,9 @@ Every `$ai_generation` event arrives with the following properties. You can atta
 
 ## What else you can ask
 
-Because AIO events are PostHog events, they sit alongside the rest of your product data. So questions about your AI feature just become questions about your product:
+Because AIO events are PostHog events, they sit alongside the rest of your product data. So instead of asking general questions about your AI feature, you can ask broader questions about your product:
 
-- **Does the AI feature keep people?** Put `$ai_generation` in a funnel or retention chart.
+- **Does the AI feature retain users?** Put `$ai_generation` in a funnel or retention chart.
 - **Who is it expensive for?** Break cost down by plan or company, using person properties you already send.
 - **What did this person see?** Jump to their <Term name="session replay" />, or the <Term name="exception" /> their request threw.
 - **Did the new prompt help?** Ship it behind a feature flag and read it as an experiment.

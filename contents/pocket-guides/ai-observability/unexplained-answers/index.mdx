@@ -1,5 +1,5 @@
 ---
-title: A wrong answer and no idea why
+title: Wrong answers with no obvious cause
 shortTitle: Unexplained answers
 subtitle: The answer was wrong, nothing errored, and the reason is sitting in the trace.
 bookOrder: 5
@@ -33,11 +33,11 @@ cta:
 
 <RightPage>
 
-# A wrong answer and no idea why
+# Wrong answers with no obvious cause
 
-Your docs assistant tells a user to authenticate with a header your API dropped two versions ago. Everything looks normal, the call succeeded.
+Your docs assistant tells a user to authenticate with a header your API dropped two versions ago. Everything looks normal and the call succeeded.
 
-So why did it say that? "The model hallucinated" is a guess that might send you off to rewrite a prompt that doesn't need chagning.
+So why did it say that? "The model hallucinated" is a guess that might send you off to rewrite a prompt that doesn't need changing.
 
 This use case outlines how to diagnose and fix a wrong answer that doesn't error.
 
@@ -51,8 +51,6 @@ A wrong answer has four common causes:
 | The context was incomplete | Nothing in the trace holds the fact the answer needed | What you fetch, and when |
 | A tool returned junk | The tool call errored or came back empty, and the answer carried on | The tool, or how you handle its failure |
 | The model ignored what it was given | Everything upstream is correct and the answer still isn't | The prompt, or the model |
-
-These are all different failure modes, spanning retrieval, context, tool calls, and the model itself.
 
 ## How the trace tells them apart
 
@@ -68,26 +66,25 @@ In <SeeFig n={1} />, the top hit from retrieval is `auth-v1`. The model was hand
 
 ## What else is attached
 
-Because AIO events are just PostHog events, a trace holds the rest of the story too:
-
+Because AIO events are like other PostHog events, a trace holds the rest of the story too:
 - The person who triggered it, and everything else they did that day.
 - Their <Term name="session replay" />, so you can watch what they did with the answer.
-- Any [exception](/docs/ai-observability/link-error-tracking) the request threw, on the same trace.
+- Any <Term name="exception" /> the request threw, on the same trace.
 
 So "a user says the bot was wrong" becomes the request, the document it was given, and the moment they gave up.
 
 ## Check whether it's a pattern
 
-One trace is an anecdote. Before you ship a fix, find out whether it's a class: 
+One trace is an anecdote. Before you ship a fix, find out whether it's systemic: 
 - Filter for the same failure over the last week
-- Check the [errors tab](/docs/ai-observability/errors) if it threw one
+- Check the <Term name="errors tab" /> if it threw one
 - See whether the same eval fails on the same shape of question
 
 If it is a pattern, it's worth automating. An AI observability <Term name="scout" /> watches these signals on a schedule and files an investigated report, so the next one arrives already read.
 
-## Find your bad traces with PostHog AI
+## Find traces with PostHog AI
 
-This prompt doesn't build anything. It pulls the traces most likely to be worth reading to the surface:
+This prompt pulls the traces most likely to be worth reading to the surface:
 
 - The ones from the last 24 hours that errored or failed an evaluation
 - Each with its person, model, input, output, and the eval's reasoning

@@ -72,7 +72,7 @@ cta:
 
 We've all encountered a confidently wrong model in the wild. If this happens in your product, it's likely that nothing ever errors, so every dashboard you monitor stays green.
 
-You probably have numbers that describe how the model performed – its speed, cost, and responsiveness. The piece your missing is whether what it said was true.
+You probably have numbers that describe how the model performed – its speed, cost, and responsiveness. The piece you're missing is whether what it said was true.
 
 ## What scores a model's output
 
@@ -91,7 +91,7 @@ In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off
 
 ## How to write evaluation criteria
 
-Numbers are only worth watching if the check behind it asks something _real_. Sentiment needs nothing from you, but the other two are checks you write – a prompt for the judge and code for the deterministic rule.
+Numbers are only worth watching if the check behind it asks something _real_. Sentiment is built-in, so you just need to write checks for the judge and deterministic rule.
 
 Asking "Is this good?" isn't going to cut it. Vague questions produce numbers that move for reasons you can't name. Ask for the specific failure you're worried about instead:
 
@@ -105,13 +105,13 @@ Each of those is checkable, so when the pass rate drops you know which behavior 
 
 One pass rate covering every model, prompt, and surface will hide almost any regression. The drop in <SeeFig n={2} /> only looks dramatic because one prompt broke on one model – averaged in with everything else that's working, it's hard to see what's going on.
 
-Splitting by model is free: `$ai_model` is already on every generation. Splitting by prompt version usually isn't – if your prompts live in code, nothing records which version answered which generation. <Term name="Prompt management" /> adds that link, so a drop points straight at the change that caused it.
+Splitting by model is free: `$ai_model` is already on every generation. 
+
+Splitting by prompt version means being able to see which prompt version caused a drop in pass rate. <Term name="Prompt management" /> lets you create and update LLM prompts directly in PostHog. This lets you iterate on prompts without deploying code, and see which ones are causing issues.
 
 ## Run your first eval
 
 The prompt below sets up a judge on a retrieval-backed feature, with the criteria from earlier: does the answer contradict, invent, or refuse what the context supports? Swap those for the failure your product actually has – the structure is what matters.
-
-Tailor the prompt as needed, for your specific product or use case.
 
 <Action />
 
