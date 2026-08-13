@@ -12,11 +12,13 @@ import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx";
 
 Heatmaps shows you how users are interacting with elements on your website or app.
 
-To start, ensure you enable the capturing of heatmap data in [your project settings](https://app.posthog.com/settings/project-heatmaps#heatmaps) or with the `enable_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js/config).
+To start, ensure you enable the capturing of heatmap data in [your project settings](https://app.posthog.com/settings/project-heatmaps#heatmaps) or with the `capture_heatmaps` key in the [JavaScript Web SDK initialization config](/docs/libraries/js/config).
 
-Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events.
+Heatmaps are only available for the JavaScript Web SDK and web frameworks built on it, like React and Next.js. They aren't available in our mobile SDKs.
 
-You can view heatmaps via the PostHog toolbar, or using the in-app Heatmap tool that's currently an opt-in beta.
+Heatmap data is captured along with other events, so it doesn't contribute to your bill, but the clickmap requires [autocapture](/docs/product-analytics/autocapture) and the scrollmap requires pageleave events. Heatmap data is retained for 90 days.
+
+You can view heatmaps via the PostHog toolbar, or in the [Heatmaps section in PostHog](https://app.posthog.com/heatmaps).
 
 ## Viewing heatmaps using the toolbar
 
@@ -24,38 +26,58 @@ To view your heatmaps, click the heatmap icon on the toolbar.
 
 ![Launch toolbar heatmaps](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/toolbar/toolbar-heatmap.png)
 
-There are three kinds of heatmaps in the toolbar:
+There are two independent overlays, and you can turn both on at the same time:
 
-1. **Heatmap:** which captures mouse movements, clicks, dead clicks, and rageclicks and shows you a heatmap of these interactions.
+1. **Heatmap:** a color gradient drawn from the coordinates where people interacted. Pick which interaction you want from the **Heatmap type** dropdown – **Clicks**, **Rageclicks**, **Dead clicks**, **Mouse moves**, or **Scroll depth**. You see one type at a time, not all of them combined.
 
-2. **Scrollmap:** which shows you how far users are scrolling down your page.
+2. **Clickmap:** AKA the OG heatmap. It uses autocapture to label each clickable element on the page with its exact click count. Toggle it with **Clickmaps (autocapture)**.
 
-3. **Clickmap:** AKA the OG heatmap. It uses autocapture to show you the elements users are clicking on your website.
+The distinction matters because the two are built from different data:
 
-## Viewing heatmaps in PostHog (beta)
+- The heatmap is **coordinate-based**. It records where the pointer was, so it shows activity anywhere on the page – including places where there's nothing to click. That makes it the right tool for spotting people trying to click a non-interactive element, or hovering somewhere you didn't expect.
+- The clickmap is **element-based**. It matches autocapture events back to the actual elements on the page, so counts are exact and attached to a specific button or link, but it only covers elements autocapture could identify. Use it when you want to compare CTAs or measure link performance.
 
-You can also view heatmaps directly in the PostHog. This method is currently in beta and provides almost the same functionality as the toolbar.
+### Which type to use
+
+| Heatmap type | What it shows | Use it to |
+| --- | --- | --- |
+| **Clicks** | Where clicks landed, by coordinate | See which areas of a page draw attention, including non-clickable ones |
+| **Rageclicks** | Repeated clicks in the same spot | Find elements people expect to be interactive but aren't, or that feel unresponsive |
+| **Dead clicks** | Clicks that produced no change on the page | Find broken or misleading affordances |
+| **Mouse moves** | Where the pointer traveled | Read attention and scanning patterns on a page |
+| **Scroll depth** | How far down the page people reached | Decide what content is above the fold and where people drop off |
+| **Clickmap** (separate overlay) | Per-element click and rageclick counts | Compare specific buttons and links with exact numbers |
+
+## Viewing heatmaps in PostHog
+
+You can also view heatmaps directly in PostHog, without installing the toolbar. This gives you the same heatmap types and the same configuration options (aggregation, viewport accuracy, color palette, fixed positioning) as the toolbar, and lets you save a heatmap to come back to.
 
 <DetailPostHogIPs />
 
 To view heatmaps in the app:
 
-1. Enable the [**In-App Heatmaps** feature preview](https://app.posthog.com/settings/user-feature-previews#heatmaps-ui)
 1. Go to the [Heatmaps section in PostHog](https://app.posthog.com/heatmaps)
-1. Type the URL of your website in the **Display URL** field
+1. Enter the address of the page you want to look at in the **Page URL** field
+1. Choose a background (see below)
 1. Optional: Use wildcard URL matching for the **Heatmap data URL** to combine data from similar pages
 
 ![Heatmaps in PostHog app interface](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/heatmaps_in_app_9b447c455e.png)
 
-The in-app heatmap viewer provides the same three types of heatmaps as the toolbar:
+Note that **Page URL** and **Heatmap data URL** do different jobs. The page URL decides which page gets drawn underneath the overlay, while the heatmap data URL decides which pages the interaction data is queried from. Keeping them separate is what lets you render one representative product page and overlay the combined data from all of them.
 
-1. **Heatmap:** Visual representation of mouse movements, clicks, dead clicks, and rageclicks
-2. **Scrollmap:** Shows how far users scroll down your page
-3. **Clickmap:** Displays click counts on specific elements with rageclick indicators
+## Backgrounds
 
-All configuration options available in the toolbar (aggregation, viewport accuracy, color palette, fixed positioning) are also available in the in-app version.
+The toolbar draws the overlay straight onto the live page you're browsing, so it needs no background. In the app, PostHog has no page to draw on, so it has to reproduce one for you. That reproduction is the **background**: the picture of your page that sits underneath the colored overlay.
 
-You can also generate a screenshot for heatmaps directly from [Session Replay](/docs/session-replay/how-to-watch-recordings) by clicking the **View heatmap** button above a recording.
+There are three ways to produce it, and you choose between them – it isn't automatic:
+
+- **Screenshot (default):** PostHog loads your page in a headless browser and captures a full-page image at each viewport width you asked for, then draws the overlay on top. This is the most reliable option because it doesn't depend on your site allowing itself to be embedded. Generation is asynchronous, so a new heatmap may show as processing for a moment.
+- **Iframe:** PostHog loads your live site in an `<iframe>` and draws the overlay over it. The page stays interactive and always reflects the current version of your site, but it only works if your site permits framing by PostHog and the URL is in your list of [authorized URLs](https://app.posthog.com/toolbar). See [troubleshooting](#heatmap-is-captured-but-site-is-not-showing) if you get a blank page.
+- **Session recording snapshot:** PostHog uses the DOM snapshot from a [session replay](/docs/session-replay) as the background. Pick this when the page is behind a login, since a recording captures the signed-in state that a headless screenshot and an iframe can't reach. In the creation flow, answer **Yes, this page requires login** to use it. Recording-backed heatmaps are temporary and aren't added to your saved heatmaps.
+
+You can switch between screenshot and iframe at any time with the **Capture method** setting, and regenerate a screenshot if the page has changed since it was captured.
+
+You can also start from the other direction and generate a heatmap from a specific recording in [session replay](/docs/session-replay/how-to-watch-recordings) by clicking the **View heatmap** button above the recording.
 
 ### Recording-mode clickmap
 
@@ -116,7 +138,9 @@ This enables you to drill down from aggregate heatmap data into specific user in
 
 ## Scrollmaps
 
-The scrollmap uses data from pageview and pageleave events to show how far down the page users are scrolling.
+The scrollmap is the **Scroll depth** heatmap type. Instead of a gradient, it draws horizontal bands down the page showing the percentage of people who scrolled at least that far, so you can see where your content stops being seen.
+
+It's the one type that isn't built from pointer coordinates. It uses data from pageview and pageleave events, so it needs pageleave events to be captured and scroll properties left enabled in the SDK. If either is missing, the toolbar warns you when you select the type.
 
 ![Scrollmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1716593249/posthog.com/contents/docs/toolbar/scrollmap.png)
 
@@ -192,14 +216,20 @@ For example, if the product pages on an ecommerce site use a URL format of `http
 
 ### Heatmap is captured, but site is not showing
 
-If you're viewing heatmaps [in-app](https://app.posthog.com/heatmaps) and the heatmap appears over a blank page, your site may be blocking it from being displayed in an `<iframe>`.
+If you're viewing heatmaps [in-app](https://app.posthog.com/heatmaps) with the **Iframe** capture method and the heatmap appears over a blank page, your site is blocking it from being displayed in an `<iframe>`.
 
-In app, PostHog overlays the heatmap over your site in an iframe. You can allow PostHog to place your site in an `<iframe>` by updating your `Content-Security-Policy` header.
+Sites block framing in one of two ways, and the fix differs:
+
+**`Content-Security-Policy`** – add PostHog to your `frame-ancestors` directive:
 
 | Region | Content Security Policy                                                   |
 | ------ | ------------------------------------------------------------------------- |
 | US     | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
 | EU     | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |
+
+**`X-Frame-Options`** – this header can't be relaxed for a specific origin, so there's no header you can add to allow PostHog. Either remove it in favor of a `Content-Security-Policy` with `frame-ancestors`, or use the **Screenshot** background instead, which doesn't rely on framing at all.
+
+PostHog checks these headers before loading the iframe and tells you which one is blocking, with a one-click option to switch to a screenshot.
 
 ### Screenshot or iframe heatmap fails to load
 
