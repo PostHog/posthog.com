@@ -659,11 +659,6 @@ function TreeMenuItem({
                     size="md"
                     hover="background"
                 >
-                    {hasChildren && (
-                        <motion.div animate={{ rotate: open ? 90 : 0 }} data-sidebar-label>
-                            <IconChevronRight className="size-4" />
-                        </motion.div>
-                    )}
                     <span
                         data-sidebar-label
                         className={`inline-flex items-center gap-1.5 ${open ? 'font-semibold' : ''}`}
@@ -671,6 +666,11 @@ function TreeMenuItem({
                         <span>{item.name}</span>
                         <Badge badge={item.badge} />
                     </span>
+                    {hasChildren && (
+                        <motion.div animate={{ rotate: open ? 90 : 0 }} data-sidebar-label>
+                            <IconChevronRight className="size-4" />
+                        </motion.div>
+                    )}
                 </OSButton>
             </Collapsible.Trigger>
 
