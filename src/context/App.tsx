@@ -1445,6 +1445,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/achievements/manage': {
+        size: {
+            min: {
+                width: 550,
+                height: 700,
+            },
+            max: {
+                width: 550,
+                height: 780,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        toolbar: true,
+    },
     '/community/achievements': {
         size: {
             min: {
