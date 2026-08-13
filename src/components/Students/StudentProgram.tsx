@@ -295,7 +295,7 @@ export default function StudentProgram(): JSX.Element {
                 <div className="max-w-4xl mx-auto">
                     <section className="not-prose w-full tracking-[-0.0125em]">
                         <p className="!m-0 mb-2 text-sm font-bold text-secondary">PostHog for Students</p>
-                        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl">
+                        <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl/reader-content:mb-8 @xl/reader-content:text-3xl @3xl/reader-content:text-4xl">
                             Curated events for the builders{' '}
                             <RoughAnnotation
                                 type="highlight"
