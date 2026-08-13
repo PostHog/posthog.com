@@ -123,7 +123,8 @@ export const applications: CarouselSlide[] = [
                             {
                                 label: 'Works anywhere MCP does',
                                 description:
-                                    "Cursor, Claude Code, PostHog Code, VS Code, or any MCP-compatible agent that has 'Code' in the title.",
+                                    // PostHog Code dropped, not renamed – "Desktop" would break the joke.
+                                    "Cursor, Claude Code, VS Code, or any MCP-compatible agent that has 'Code' in the title.",
                             },
                         ]}
                     />

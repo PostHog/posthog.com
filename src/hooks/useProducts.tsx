@@ -20,25 +20,27 @@ import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
-import { inbox } from './productData/inbox'
 import { replayVision } from './productData/replay_vision'
+import { support } from './productData/support'
+import { mcpAnalytics } from './productData/mcp_analytics'
 
 const initialProducts = [
     productAnalytics,
     sessionReplay,
     featureFlags,
     surveys,
+    support,
     dataWarehouse,
     realtimeDestinations,
     errorTracking,
     cdp,
     webAnalytics,
+    mcpAnalytics,
     experiments,
     posthog_ai,
     aiObservability,
     logs,
     workflows,
-    inbox,
     endpoints,
     replayVision,
 ]

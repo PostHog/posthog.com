@@ -1,156 +1,93 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import * as Icons from '@posthog/icons'
-import AskMax from 'components/AskMax'
-import ZoomHover from 'components/ZoomHover'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
-import { useApp } from '../../context/App'
+import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
+import PocketGuidesList from 'components/Docs/PocketGuidesList'
 
-// Quick-start entry cards for the docs hub
-const pathCards = [
-    {
-        name: 'Install PostHog',
-        description: 'Send your first event in minutes.',
-        url: '/docs/getting-started/install',
-        icon: 'IconRocket',
-        color: 'salmon',
-    },
-    {
-        name: 'Understand self-driving',
-        description: 'How your product learns to drive itself.',
-        url: '/docs/self-driving',
-        icon: 'IconStack',
-        color: 'red',
-    },
-]
-
-// The surfaces you can use PostHog from
+// Labels only – "Web" and "Slack" explain themselves, and a sentence each is just words to scan past.
 const surfaces = [
-    {
-        name: 'Web',
-        url: '/docs/self-driving/web',
-        icon: 'IconLaptop',
-        color: 'blue',
-        description: 'The PostHog you know and love, in your browser.',
-    },
-    {
-        name: 'Slack',
-        url: '/docs/slack',
-        icon: 'IconMessage',
-        color: 'salmon',
-        description: 'Ask questions and ship work from a shared channel.',
-    },
-    {
-        name: 'MCP',
-        url: '/docs/model-context-protocol',
-        icon: 'IconMagic',
-        color: 'purple',
-        description: 'Bring PostHog into Claude Code, Cursor, and more.',
-    },
-    {
-        name: 'CLI',
-        url: '/docs/cli',
-        icon: 'IconTerminal',
-        color: 'green',
-        description: 'Query your data and ship work from your terminal.',
-    },
-    // TODO: Desktop (PostHog Desktop) slots in here once GA
+    { name: 'Web', url: '/docs/self-driving/web', icon: 'IconLaptop', color: 'blue' },
+    { name: 'Slack', url: '/docs/slack', icon: 'IconMessage', color: 'salmon' },
+    { name: 'MCP', url: '/docs/model-context-protocol', icon: 'IconMagic', color: 'purple' },
+    { name: 'CLI', url: '/docs/cli', icon: 'IconTerminal', color: 'green' },
+    // Opens in its own window, the way every other /desktop link on the site does.
+    { name: 'Desktop', url: '/desktop', icon: 'IconScreen', color: 'red', newWindow: true },
 ]
 
-export const DocsIndex = () => {
-    const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
-    useEffect(() => {
-        setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
-    }, [])
+// OSButton `lg` metrics, a rung above the Tools chips. bg-primary would read as a white block here – the page is transparent.
+const SURFACE_CHIP =
+    'flex items-center gap-1 rounded-[6px] border border-primary bg-accent px-2 py-1.5 text-[15px] transition-colors hover:bg-primary'
 
-    const { websiteMode } = useApp()
-
+export const DocsIndex = (): JSX.Element => {
+    // No bg on the root: AppWindow already paints the frosted WINDOW_BG and an opaque one covers it.
     return (
-        <div data-scheme="secondary" className="bg-primary h-full text-primary border-t border-primary">
+        <div data-scheme="secondary" className="h-full text-primary border-t border-primary">
             <SEO title="Documentation - PostHog" />
-            <ScrollArea className={`${websiteMode ? '@container' : ''}`}>
-                <div className={`flex @4xl:flex-row flex-col gap-4 @4xl:gap-8 h-full py-2 @xl:py-4 px-2 @xl:px-4`}>
-                    <section className="flex-1">
+            <ScrollArea>
+                <div className="h-full py-2 @xl:py-4 px-2 @xl:px-4">
+                    <section className="min-w-0">
                         <h1 className="sr-only">PostHog documentation</h1>
                         <SearchUI
                             initialFilter="docs"
                             hideFilters
                             isRefinedClassName="bg-accent"
-                            className="mb-6 rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
+                            className="mb-5 rounded border border-primary bg-primary shadow-sm overflow-hidden [&_input]:bg-primary [&_input]:py-3 [&_input]:text-base"
                             autoFocus={false}
                         />
-                        <h2 className="text-lg mb-1">Get started</h2>
-                        <p className="text-sm opacity-70 mb-3">New to PostHog? Pick a starting point.</p>
-                        {/* Curated entry paths */}
-                        <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
-                            {pathCards.map((card) => {
-                                const Icon = (Icons[card.icon as keyof typeof Icons] as any) || Icons.IconBook
-                                return (
-                                    <ZoomHover key={card.name} className="[&>span]:w-full">
-                                        <Link
-                                            to={card.url}
-                                            className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full"
-                                        >
-                                            <Icon className={`size-6 shrink-0 text-${card.color}`} />
-                                            <div>
-                                                <div className="font-semibold leading-tight">{card.name}</div>
-                                                <div className="text-sm opacity-70 leading-tight mt-0.5">
-                                                    {card.description}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </ZoomHover>
-                                )
-                            })}
-                            {/* Ask PostHog AI opens the in-docs chat */}
-                            <ZoomHover className="[&>span]:w-full">
-                                <AskMax
-                                    linkOnly
-                                    className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex items-start gap-3 h-full w-full text-left"
-                                >
-                                    <Icons.IconSparkles className="size-6 shrink-0 text-purple" />
-                                    <div>
-                                        <div className="font-semibold leading-tight">Ask PostHog AI</div>
-                                        <div className="text-sm opacity-70 leading-tight mt-0.5">
-                                            Get answers without reading the docs.
-                                        </div>
-                                    </div>
-                                </AskMax>
-                            </ZoomHover>
+
+                        {/* No Ask PostHog AI button – the search bar above has its own. */}
+                        <div className="flex flex-wrap gap-3 mb-6">
+                            <OSButton asLink to="/docs/getting-started/install" variant="primary" size="lg">
+                                Install PostHog
+                            </OSButton>
+                            <OSButton asLink to="/docs/self-driving" variant="secondary" size="lg">
+                                Understand self-driving
+                            </OSButton>
                         </div>
 
-                        {/* Use PostHog from anywhere: the surfaces */}
-                        <h2 className="text-lg mb-1">Use PostHog from anywhere</h2>
-                        <p className="text-sm opacity-70 mb-3">Pick the surface that fits how you work.</p>
-                        <div data-scheme="primary" className="grid grid-cols-1 @md:grid-cols-3 gap-3 mb-6">
+                        {/* Orient first, then go deep: pocket guides answer "what should I build," which only lands once you know the surfaces and tools. */}
+                        <h2 className="text-lg mb-1">Surfaces</h2>
+                        <p className="mb-3 text-sm text-secondary">Where you use PostHog.</p>
+                        <div data-scheme="primary" className="flex flex-wrap gap-3 mb-6">
                             {surfaces.map((surface) => {
                                 const Icon = (Icons[surface.icon as keyof typeof Icons] as any) || Icons.IconBook
                                 return (
-                                    <ZoomHover key={surface.name} className="[&>span]:w-full">
-                                        <Link
-                                            to={surface.url}
-                                            className="bg-accent border border-transparent hover:border-primary px-4 py-4 rounded flex flex-col h-full w-full gap-1.5"
-                                        >
-                                            <div className="flex items-center gap-2">
-                                                <Icon className={`size-5 shrink-0 text-${surface.color}`} />
-                                                <span className="font-semibold leading-tight">{surface.name}</span>
-                                            </div>
-                                            <p className="text-sm opacity-70 leading-tight m-0">
-                                                {surface.description}
-                                            </p>
-                                        </Link>
-                                    </ZoomHover>
+                                    <Link
+                                        key={surface.name}
+                                        to={surface.url}
+                                        state={surface.newWindow ? { newWindow: true } : undefined}
+                                        className={SURFACE_CHIP}
+                                    >
+                                        <Icon className={`size-5 shrink-0 text-${surface.color}`} />
+                                        <span className="font-medium text-primary leading-tight">{surface.name}</span>
+                                    </Link>
                                 )
                             })}
                         </div>
 
-                        {/* Tools: the PostHog tools you use from any surface */}
                         <h2 className="text-lg mb-1">Tools</h2>
-                        <p className="text-sm opacity-70 mb-3">Use every PostHog tool from any surface.</p>
-                        <AppsList />
+                        <p className="mb-3 text-sm text-secondary">The PostHog tools you use, on any surface.</p>
+                        <AppsList variant="chips" className="mb-6" />
+
+                        <div className="flex items-baseline justify-between gap-4 mb-1">
+                            <h2 className="text-lg m-0">Pocket guides</h2>
+                            <Link
+                                to="/pocket-guides"
+                                state={{ newWindow: true }}
+                                className="shrink-0 text-sm text-secondary hover:underline"
+                            >
+                                All guides &rarr;
+                            </Link>
+                        </div>
+                        {/* Volume-neutral on purpose: a line about scouts would be wrong for the data warehouse volume. */}
+                        <p className="mb-3 max-w-xl text-sm text-secondary">
+                            PostHog use case guides. Pick one and learn how we solve it for you.
+                        </p>
+                        <PocketGuidesList />
                     </section>
                 </div>
             </ScrollArea>

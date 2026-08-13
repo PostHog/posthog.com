@@ -96,7 +96,7 @@
                         },
                         {
                             "type": "button",
-                            "label": "Open in PostHog Code"
+                            "label": "Open in PostHog Desktop"
                         }
                     ]
                 }

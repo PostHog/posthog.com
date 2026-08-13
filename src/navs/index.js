@@ -2327,7 +2327,7 @@ export const docsMenu = {
                     url: '/docs/cli',
                 },
                 {
-                    name: 'Code',
+                    name: 'Desktop',
                     url: '/desktop',
                 },
                 {
