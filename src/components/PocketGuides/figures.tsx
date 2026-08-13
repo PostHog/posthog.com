@@ -93,6 +93,10 @@ export function ScreenshotFigure({
                 type={type}
                 showKey={showKey ?? hasAnnotations}
                 alt={alt}
+                // Core yellow, matching the book's other teaching apparatus (the loop's Signal
+                // stage above) rather than the product pages' red – so the markers read as part
+                // of the page, not an overlay from somewhere else.
+                markerClassName="bg-[#FFA81C] text-black"
                 // The frame already supplies the border and ground, so the product page's
                 // drop shadow would read as a second frame inside it.
                 imgClassName="rounded"
