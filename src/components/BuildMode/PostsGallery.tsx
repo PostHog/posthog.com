@@ -15,6 +15,7 @@ const POSTS_PER_PAGE = 12
 function SortSelect({ sort, setSort }: { sort: PostSort; setSort: (sort: PostSort) => void }): JSX.Element {
     return (
         <Select
+            className="!border-transparent !bg-transparent !px-0 !text-secondary transition-colors hover:!text-primary [&_svg]:!size-4"
             ariaLabel="Sort by"
             prefix="Sort"
             value={sort}
@@ -87,7 +88,7 @@ function SearchField({
                 tabIndex={tabIndex}
                 onBlur={onBlur}
                 onKeyDown={onKeyDown}
-                className="!box-border !h-8 !py-0 pl-7"
+                className="!box-border !h-8 !bg-primary !py-0 pl-7 focus:!outline-none focus:!ring-0"
                 containerClassName="h-8"
             />
         </div>
@@ -106,8 +107,8 @@ function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query:
     return (
         <div
             ref={containerRef}
-            className={`relative flex h-8 items-center transition-[width] duration-200 ease-out ${
-                expanded ? 'w-56 @2xl:w-72' : 'w-8'
+            className={`relative flex h-8 items-center transition-[width,margin] duration-200 ease-out ${
+                expanded ? 'ml-2 w-56 @2xl:w-72' : 'w-8'
             }`}
         >
             <div
@@ -122,7 +123,7 @@ function ExpandingSearch({ query, setQuery }: { query: string; setQuery: (query:
                     aria-label="Search posts"
                     tooltip="Search posts"
                     onClick={() => setOpen(true)}
-                    className="!size-8 !p-0"
+                    className="!size-8 !p-0 !text-secondary hover:!text-primary"
                 />
             </div>
             <div
@@ -176,7 +177,7 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
                         {isFiltered ? ` of ${posts.length}` : ''})
                     </span>
                 </h2>
-                <div className="flex shrink-0 items-center gap-2">
+                <div className="flex shrink-0 items-center">
                     <div className="@md:hidden">
                         <SortMenu sort={sort} setSort={setSort} />
                     </div>
@@ -189,7 +190,7 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
             <TagFilter tags={tags} activeTag={activeTag} onChange={setActiveTag} />
             {filteredPosts.length > 0 ? (
                 <>
-                    <div className="grid grid-cols-1 gap-4 @lg:grid-cols-2 @lg:gap-6 @3xl:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-x-4 gap-y-8 @lg:grid-cols-2 @lg:gap-x-6 @lg:gap-y-10 @3xl:grid-cols-3">
                         {visiblePosts.map((post) => (
                             <GalleryCard key={post.id} post={post} />
                         ))}
