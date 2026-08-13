@@ -1455,10 +1455,13 @@ const appSettings: AppSettings = {
                 width: 550,
                 height: 780,
             },
+            fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,
         },
+        toolbar: true,
     },
     '/community/achievements': {
         size: {

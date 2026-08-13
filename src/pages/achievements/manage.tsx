@@ -694,7 +694,7 @@ export default function AchievementManager() {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary text-primary">
+        <div data-scheme="secondary" className="h-full bg-primary text-primary border-t border-primary">
             <SEO title="Achievement Manager - PostHog" />
             <ScrollArea>
                 <div className="p-4">
