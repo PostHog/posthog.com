@@ -114,12 +114,27 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     ).toString('base64')}`
 
     const fetchCloudinaryImages = async (nextCursor = null) => {
-        const { resources, next_cursor } = await fetch(
+        const res = await fetch(
             `https://api.cloudinary.com/v1_1/${
                 process.env.GATSBY_CLOUDINARY_CLOUD_NAME
             }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
             { headers: { Authorization: cloudinaryAuth } }
-        ).then((res) => res.json())
+        )
+        const { resources, next_cursor, error } = await res.json()
+
+        if (!resources) {
+            // The Admin API answers both auth failures and quota exhaustion with a JSON error
+            // body and no resource list, so log the status and the FeatureRateLimit headers to
+            // tell a rejected key (401) apart from a spent quota (420).
+            throw new Error(
+                `Cloudinary resource list failed: HTTP ${res.status} "${
+                    error?.message ?? 'no resources in response'
+                }" (rate limit ${res.headers.get('x-featureratelimit-remaining')}/${res.headers.get(
+                    'x-featureratelimit-limit'
+                )} remaining, resets ${res.headers.get('x-featureratelimit-reset')})`
+            )
+        }
+
         resources.forEach((resource) => {
             cloudinaryCache[resource.public_id] = resource
         })
