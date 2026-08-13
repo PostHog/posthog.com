@@ -8,15 +8,15 @@ The docs [glossary](/docs/glossary): searchable, JSON-backed, rendered by a sing
 
 - A search box that filters terms live as you type, matching against both the term name and its definition text.
 - Matches are highlighted with [`mark.js`](https://markjs.io/) (styled globally via `mark[data-markjs]` in `src/styles/global.css`).
-- An A–Z quick-nav that jumps to each letter's section. Letters with no terms are shown disabled.
+- An A-Z quick-nav that jumps to each letter's section. Letters with no terms are shown disabled.
 - A live result count ("Showing X of Y terms").
 
 ## How it works
 
 `glossary.json` is the single source of truth for the content:
 
-- `terms` – a flat, alphabetically ordered array of `{ term, slug, posthog, definition }`. `definition` is markdown (rendered with the site-wide `Markdown` component, so links work as usual). `posthog: true` renders the 🦔 marker for PostHog-specific terms. `slug` is the heading anchor, so `/docs/glossary#cohort` deep links keep working – don't change a slug without checking inbound links.
-- `letterNotes` – markdown blockquote content for letters with no terms (J, X, Z).
+- `terms` – a flat, alphabetically ordered array of `{ term, slug, posthog, definition }`. `definition` is Markdown (rendered with the site-wide `Markdown` component, so links work as usual). `posthog: true` renders the 🦔 marker for PostHog-specific terms. `slug` is the heading anchor, so `/docs/glossary#cohort` deep links keep working – don't change a slug without checking inbound links.
+- `letterNotes` – Markdown blockquote content for letters with no terms (J, X, Z).
 
 Because the JSON is imported statically, the whole glossary is server-rendered: the page works without JavaScript, and the term count and letter nav are correct on first paint. Filtering is React state over the data; filtered-out sections stay mounted and are hidden with CSS so anchors and the table-of-contents scrollspy keep working.
 
