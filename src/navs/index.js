@@ -635,6 +635,10 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
+                    {
+                        name: 'Feature trailer process',
+                        url: '/handbook/content/feature-trailer-process',
+                    },
                 ],
             },
             {
@@ -2327,8 +2331,8 @@ export const docsMenu = {
                     url: '/docs/cli',
                 },
                 {
-                    name: 'Code',
-                    url: '/desktop',
+                    name: 'Desktop',
+                    url: '/docs/posthog-desktop',
                 },
                 {
                     name: 'Concepts',
