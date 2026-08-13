@@ -3,7 +3,7 @@ import { IconInfo } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/Tooltip'
-import { LOGO_SRC } from './Masthead'
+import Wordmark from './Wordmark'
 
 /**
  * Email capture, same mechanics as NewsletterForm: a `newsletter_subscribed` event.
@@ -71,7 +71,7 @@ function SubscribeForm({ className = '', placement }: { className?: string; plac
 export function HeroHeader({ placement }: { placement?: string }): JSX.Element {
     return (
         <div className="flex flex-col items-start gap-4 py-2 @2xl:flex-row @2xl:items-center @2xl:justify-between @2xl:gap-8 @2xl:py-4">
-            <img src={LOGO_SRC} alt="build mode" className="h-auto w-32 shrink-0 grow-0" />
+            <Wordmark className="h-auto w-32" />
             {placement ? <SubscribeForm placement={placement} /> : null}
         </div>
     )
