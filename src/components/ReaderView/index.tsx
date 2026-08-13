@@ -432,7 +432,7 @@ export default function ReaderView({
     onSearch,
     showSurvey = false,
     parent,
-    showQuestions = true,
+    showQuestions = false,
     showAbout = false,
     sourceInstanceName,
     defaultNavVisible,
@@ -1353,7 +1353,7 @@ function ReaderViewContent({
     onSearch,
     showSurvey = false,
     parent,
-    showQuestions = true,
+    showQuestions = false,
     showAbout = false,
     sourceInstanceName,
     chrome = false,
@@ -1393,8 +1393,6 @@ function ReaderViewContent({
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
         : null
 
-    const previousPath = useRef<string | undefined>(undefined)
-
     useEffect(() => {
         const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
@@ -1421,29 +1419,100 @@ function ReaderViewContent({
             })
             await Promise.all(imageLoadPromises)
             await new Promise((resolve) => setTimeout(resolve, 100))
-            const targetElement = document.getElementById(hash.replace('#', ''))
-            if (targetElement) {
-                const detailsParent = targetElement.closest('details')
-                if (detailsParent) {
-                    detailsParent.open = true
+            if (hash) {
+                const targetElement = document.getElementById(hash.replace('#', ''))
+                if (targetElement) {
+                    const detailsParent = targetElement.closest('details')
+                    if (detailsParent) {
+                        detailsParent.open = true
+                    }
+                    scrollElement.scrollTo({
+                        top: targetElement.offsetTop || 0,
+                        behavior: 'smooth',
+                    })
+                    return
                 }
-                scrollElement.scrollTo({
-                    top: targetElement.offsetTop || 0,
-                    behavior: 'smooth',
-                })
             }
+            // Text fragment (`#:~:text=start[,end]`). Same shape as the anchor lookup above:
+            // hydration nukes the browser's native scroll, so we re-find and re-scroll ourselves.
+            // Chrome strips `:~:text=` from location.hash after processing — read the original URL
+            // from the navigation entry, which preserves it.
+            const container = contentRef.current
+            const navUrl = performance.getEntriesByType('navigation')[0]?.name
+            const textMatch = navUrl && /:~:text=([^&]+)/.exec(navUrl)
+            if (!container || !textMatch) return
+            const [textStart, textEnd] = textMatch[1]
+                .split(',')
+                .slice(0, 2)
+                .map((s) => {
+                    try {
+                        return decodeURIComponent(s)
+                    } catch {
+                        return s
+                    }
+                })
+            if (!textStart || textStart.endsWith('-') || (textEnd && textEnd.startsWith('-'))) return
+            const cssApi = typeof CSS !== 'undefined' ? (CSS as unknown as { highlights?: Map<string, unknown> }) : null
+            const HighlightCtor = (window as unknown as { Highlight?: new (...r: Range[]) => unknown }).Highlight
+
+            // Runs twice: once immediately, once after a short delay. Images and other
+            // async content can shift the target's position after the first scroll, so we
+            // re-walk the DOM and re-scroll to catch that. Repainting the highlight the
+            // second time also survives React re-renders that would detach the first Range.
+            // Instant `auto` scroll avoids racing with images during a smooth animation.
+            const scrollAndHighlight = () => {
+                const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT)
+                const nodes: Text[] = []
+                const offsets: number[] = []
+                let concat = ''
+                let n: Node | null
+                while ((n = walker.nextNode())) {
+                    nodes.push(n as Text)
+                    offsets.push(concat.length)
+                    concat += (n as Text).textContent || ''
+                }
+                const startIdx = concat.indexOf(textStart)
+                if (startIdx === -1) return
+                const endIdx = textEnd
+                    ? concat.indexOf(textEnd, startIdx + textStart.length) + textEnd.length
+                    : startIdx + textStart.length
+                if (endIdx <= 0) return
+                const locate = (pos: number) => {
+                    let i = 0
+                    for (let k = 1; k < offsets.length; k++) if (offsets[k] <= pos) i = k
+                    return { node: nodes[i], offset: pos - offsets[i] }
+                }
+                const range = document.createRange()
+                const s = locate(startIdx)
+                const e = locate(endIdx)
+                range.setStart(s.node, s.offset)
+                range.setEnd(e.node, e.offset)
+                const rangeRect = range.getBoundingClientRect()
+                const scrollRect = scrollElement.getBoundingClientRect()
+                scrollElement.scrollTo({
+                    top: Math.max(0, rangeRect.top - scrollRect.top + scrollElement.scrollTop - 80),
+                    behavior: 'auto',
+                })
+                // Paint highlight matching Chrome's default `::target-text`. Styled via
+                // `::highlight(text-fragment-target)` in global.css. Falls back to no
+                // highlight on older browsers.
+                if (cssApi?.highlights && HighlightCtor) {
+                    try {
+                        cssApi.highlights.set('text-fragment-target', new HighlightCtor(range))
+                    } catch {
+                        /* older browsers without CSS Custom Highlight — scroll only */
+                    }
+                }
+            }
+            scrollAndHighlight()
+            setTimeout(scrollAndHighlight, 400)
         }
 
-        const pathChanged = previousPath.current !== undefined && previousPath.current !== appWindow?.path
-        previousPath.current = appWindow?.path
+        const hasTextFragment = /:~:text=/.test(performance.getEntriesByType('navigation')[0]?.name || '')
 
-        if (hash) {
+        if (hash || hasTextFragment) {
             waitForImagesAndScroll()
-        } else if (pathChanged) {
-            // Reset-to-top only applies to same-window navigations to a new page. On first
-            // mount (and any effect re-runs before `appWindow` settles), the browser has
-            // already positioned us — for a `:~:text=` URL, native scroll-to-fragment;
-            // otherwise top of page. Don't fight the browser.
+        } else {
             scrollElement.scrollTo({
                 top: 0,
             })

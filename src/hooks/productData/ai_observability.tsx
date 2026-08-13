@@ -5,7 +5,6 @@ import {
     IconConfetti,
     IconCursorClick,
     IconEye,
-    IconInfo,
     IconList,
     IconLlmAnalytics,
     IconMagic,
@@ -13,10 +12,13 @@ import {
     IconPieChart,
     IconRocket,
     IconSparkles,
+    IconWarning,
 } from '@posthog/icons'
+import OldWaySection from 'components/AIObservability/OldWaySection'
+import PostHogWaySection from 'components/AIObservability/PostHogWaySection'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
-import { applications, topFeatures } from './ai_observability/slides'
+import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
 
 export const aiObservability = {
     ...getTool('ai_observability'),
@@ -32,12 +34,21 @@ export const aiObservability = {
     color: 'purple',
     colorSecondary: 'green-2',
     wizardSupport: true,
+    // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
+    // started install CTAs – the bare wizard installs a generic SDK instead of
+    // instrumenting LLM calls.
+    wizardCommand: 'ai-observability',
+    // The install CTAs list LLM providers instead of app frameworks – that's
+    // what the ai-observability wizard actually instruments.
+    wizardSupports,
+    // Volume-pricing floor shown in the Get started section (see /docs/ai-observability/start-here).
+    pricingFloor: '0.00006',
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
         title: 'AI Observability – Observe and optimize AI products in PostHog',
         description:
-            'Monitor and optimize AI products with AI Observability. Get full observability across every conversation. See model performance, cost, and errors.',
+            'Monitor and optimize AI products with AI Observability. Trace every generation, score quality with evals, alert on anomalies, and turn findings into PRs.',
     },
     /**
      * Sections rendered on the Product surface (`/ai-observability`). Each entry
@@ -49,11 +60,18 @@ export const aiObservability = {
     productMenu: [
         { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
         {
-            slug: 'eli5',
-            name: 'What does it do?',
-            hideFromNav: true,
+            slug: 'old-way',
+            name: 'The old way',
+            component: OldWaySection,
             group: 'divided',
-            icon: <IconInfo className="size-4" />,
+            icon: <IconWarning className="size-4" />,
+        },
+        {
+            slug: 'posthog-way',
+            name: 'The PostHog way',
+            component: PostHogWaySection,
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
         },
         {
             slug: 'use-cases',
@@ -109,10 +127,11 @@ export const aiObservability = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Observe and debug AI in production',
+        title: 'Observe and fix AI in production',
         description:
-            'Product analytics for LLMs. Inspect traces, spans, latency, usage, and per-user costs for AI-powered features – the context agents use to fix LLM behavior.',
-        eli5: "AI Observability records every call your product makes to an LLM – the prompt that went in, the response that came out, which model answered, how long it took, what it cost, and who it was for. Calls that belong to the same conversation or agent run are stitched together into a trace, so a multi-step interaction reads as one story instead of a pile of unrelated requests. It's all captured as regular PostHog events, which is why your LLM data sits next to your product analytics, replays, and errors instead of in a separate tool.",
+            'Trace agent loops, evaluate live traffic, and get alerted when cost, latency, or quality slips. Self-driving uses this context to automatically make improvements and fix issues.',
+        // eli5 retired in favor of the old-way/PostHog-way sections – same story,
+        // told as the two flow diagrams.
         textColor: 'text-white',
         layout: 'overlay',
     },
@@ -145,15 +164,16 @@ export const aiObservability = {
         footerClasses: 'max-w-[220px]',
     },
     hogs: {
+        // The detective hog is the product's identity – every hog slot on the
+        // page uses it (per review).
         default: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
             alt: 'A hedgehog inspecting a trace with a magnifying glass',
         },
-        // Reused from the /docs/ai-observability hero – AI Observability has no
-        // dedicated product hog yet.
+        // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_robo_hog_9c1c225c94.png',
-            alt: 'A hedgehog with a robot',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+            alt: 'A hedgehog inspecting a trace with a magnifying glass',
         },
     },
     slider: {
@@ -164,7 +184,7 @@ export const aiObservability = {
     volume: 100000,
     customers: {
         kilocode: {
-            headline: 'keeps visibility into what its AI coding platform is actually doing',
+            headline: 'keeps visibility into what its AI coding platform is doing',
             description:
                 'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
@@ -180,11 +200,11 @@ export const aiObservability = {
         },
     },
     useCases: {
-        intro: 'AI Observability is used across teams depending on your role.',
+        intro: 'Different teams pull different answers from the same LLM data.',
         rows: [
-            ['AI Engineers', 'Debug traces span by span and compare models on cost, latency, and quality'],
+            ['AI Engineers', 'Debug traces span by span and set up evals to catch quality regressions'],
             ['Product Engineers', 'Tie failed generations and latency spikes back to the users who hit them'],
-            ['PMs', 'See which AI features people actually use, and whether using them changes retention'],
+            ['PMs', 'See which AI features get used – and whether using them changes retention'],
             ['Finance & leadership', 'Attribute token spend to models, features, and individual customers'],
             ['Support Engineers', 'Read the exact conversation behind a ticket, then watch the session it happened in'],
         ],
@@ -220,7 +240,7 @@ export const aiObservability = {
         ],
     },
     answersHeadline: 'What can AI Observability help me discover?',
-    answersDescription: 'Track costs, performance, and usage of your AI features with detailed analytics',
+    answersDescription: 'Ask about the cost, performance, and usage of your AI features in plain English',
     questions: [
         {
             question: 'What are my LLM costs by customer?',
@@ -251,12 +271,13 @@ export const aiObservability = {
         summary: {
             them: [
                 {
-                    title: "You don't need any product insights",
-                    subtitle: 'and only want to track operational metrics',
+                    title: 'You want an AI gateway in the request path',
+                    subtitle:
+                        'Others can proxy your calls for caching, fallbacks, and rate limits – PostHog only observes',
                 },
                 {
-                    title: 'Deep mobile support',
-                    subtitle: "if you're building a mobile-specific product",
+                    title: 'You only want LLM ops metrics',
+                    subtitle: 'and will never need the product context – retention, funnels, replays – around them',
                 },
                 {
                     title: "You don't want to use an open source product",
@@ -264,7 +285,7 @@ export const aiObservability = {
             ],
             us: [
                 {
-                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your product self-driving',
+                    title: 'Agents can act on your LLM traces, costs, and errors – the context that makes your agent self-driving',
                 },
                 {
                     title: 'You want to understand LLM costs on a per user basis',
@@ -288,10 +309,8 @@ export const aiObservability = {
                 name: 'Langsmith',
                 key: 'langsmith',
             },
-            {
-                name: 'Helicone',
-                key: 'helicone',
-            },
+            // Helicone removed per review – gateway-first and no longer a direct
+            // comparison target. Revisit adding Raindrop here instead.
             {
                 name: 'Braintrust',
                 key: 'braintrust',
@@ -310,8 +329,8 @@ export const aiObservability = {
             description: 'Correlate AI usage with user behavior and business metrics',
         },
         {
-            slug: 'dashboards',
-            description: 'Build custom dashboards combining LLM and product metrics',
+            slug: 'error-tracking',
+            description: 'Failed LLM calls become issues you can triage, assign, and resolve',
         },
         {
             slug: 'session-replay',
@@ -319,15 +338,55 @@ export const aiObservability = {
         },
         {
             slug: 'feature-flags',
-            description: 'Roll out AI features gradually and test different models',
+            description: 'Roll out AI features gradually and switch models without a deploy',
+        },
+        {
+            slug: 'experiments',
+            description: 'A/B test prompts and models, measured on statistically significant results',
         },
     ],
     worksWith: ['product_analytics', 'dashboards', 'session_replay', 'feature_flags'],
     ai: {
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/llm_cde5a95040.png',
-        imageAlt: 'PostHog AI and AI Observability',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_07_30_T02_00_13_105_Z_20a891ad6d.png',
+        imageAlt: 'A hedgehog inspecting a trace with a magnifying glass',
         intro: 'Ask PostHog AI to check what your LLM calls cost, dig into traces, and compare models.',
+        // Prompts copy to the clipboard instead of deep-linking into in-app
+        // PostHog AI while its web runtime lags the MCP tool set.
+        copyPrompts: true,
         mcpFeatures: ['llm_analytics'],
+        // AIO ships the most MCP tools of any product – the tools tab shows one
+        // row per use case (à la Replay Vision) instead of an 80-row list.
+        // Tools are prefix-matched against these groups.
+        toolGroups: [
+            {
+                name: 'Cost breakdown analysis',
+                summary:
+                    'Pull total spend, break it down by model or user, then open the exact traces behind a spike and have them summarized.',
+                prefixes: ['query-llm-', 'get-llm-total-costs', 'llma-personal-spend', 'llma-summarization-'],
+            },
+            {
+                name: 'Eval suite setup',
+                summary:
+                    'Create evaluations, curate datasets, and track pass rates – an agent can stand up a full eval suite from one conversation.',
+                prefixes: ['llma-evaluation-', 'llma-dataset-', 'llma-score-'],
+            },
+            {
+                name: 'Team trace review',
+                summary: 'Build review queues, assign traces, and record structured verdicts without opening the app.',
+                prefixes: ['llma-trace-review-', 'llma-review-'],
+            },
+            {
+                name: 'Prompt shipping',
+                summary: 'Version, label, and deploy prompts, and manage provider keys – prompt ops from your editor.',
+                prefixes: ['llma-prompt-', 'llma-provider-'],
+            },
+            {
+                name: 'Traffic classification',
+                summary:
+                    'Set up clustering jobs and taggers so recurring patterns in your traffic get labeled automatically.',
+                prefixes: ['llma-clustering-', 'llma-tagger-'],
+            },
+        ],
         // Prompts lifted from contents/docs/ai-observability/query-traces-mcp.mdx.
         // Tool names verified against src/data/mcp-tools.json; groups without a
         // `tool` cover prompts whose tool routing isn't documented. Note that
@@ -358,8 +417,8 @@ export const aiObservability = {
             {
                 title: 'Compare models',
                 prompts: [
-                    'Compare token usage between GPT-4 and Claude for the search feature.',
-                    'Compare latency between GPT-4 and Claude for the chat feature',
+                    'Compare token usage between GPT and Claude for the search feature.',
+                    'Compare latency between GPT and Claude for the chat feature',
                     'How has LLM latency changed over the past 7 days?',
                 ],
             },

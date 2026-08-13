@@ -470,6 +470,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
@@ -5437,6 +5445,10 @@
             "destination": "https://app.posthog.com/startups"
         },
         {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
+        },
+        {
             "source": "/yc-onboarding",
             "destination": "https://app.posthog.com/startups/yc"
         },
@@ -6075,6 +6087,21 @@
         {
             "source": "/product-analytics-explorer/pricing",
             "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
             "statusCode": 301
         }
     ]
