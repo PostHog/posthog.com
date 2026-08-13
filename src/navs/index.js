@@ -635,6 +635,10 @@ export const handbookSidebar = [
                         name: 'Screen recording guide',
                         url: '/handbook/content/screen-recording-guide',
                     },
+                    {
+                        name: 'Feature trailer process',
+                        url: '/handbook/content/feature-trailer-process',
+                    },
                 ],
             },
             {
@@ -1107,7 +1111,7 @@ export const handbookSidebar = [
                         url: '/handbook/marketing/press',
                     },
                     {
-                        name: 'Startups & YC Programs',
+                        name: 'Startup programs and partnerships',
                         url: '/handbook/marketing/startups',
                     },
                     {
@@ -2327,8 +2331,8 @@ export const docsMenu = {
                     url: '/docs/cli',
                 },
                 {
-                    name: 'Code',
-                    url: '/desktop',
+                    name: 'Desktop',
+                    url: '/docs/posthog-desktop',
                 },
                 {
                     name: 'Concepts',
@@ -6346,6 +6350,16 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/managed-warehouse/connect',
                     icon: 'IconTerminal',
                     color: 'seagreen',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/managed-warehouse/connect',
+                        },
+                        {
+                            name: 'Performance',
+                            url: '/docs/data-warehouse/managed-warehouse/performance-tuning',
+                        },
+                    ],
                 },
                 {
                     name: 'Resources',
