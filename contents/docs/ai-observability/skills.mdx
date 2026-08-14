@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 import AgentSkillsList from 'components/AgentSkillsList'
+import CalloutBox from 'components/Docs/CalloutBox'
 
 PostHog ships agent skills for AI Observability that teach your coding agent how to investigate LLM traces, costs, clusters, evaluations, and failures through the [PostHog MCP server](/docs/model-context-protocol). They're the same skills PostHog's own background agents run.
 
@@ -14,14 +15,18 @@ PostHog ships agent skills for AI Observability that teach your coding agent how
 
 2. [Connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp). (The AI plugin in step 3 does this for you.)
 
-3. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) – it bundles every PostHog skill, these included, and keeps them up to date. Its README covers installation in Claude Code, Codex, Cursor, and Gemini CLI; our [MCP docs](/docs/model-context-protocol/claude-code) cover the Claude Code install too.
+3. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) – it bundles every PostHog skill and keeps them up to date. Its README covers installation in Claude Code, Codex, Cursor, and Gemini CLI.
+
+<CalloutBox icon="IconInfo" title="Want the skills directly?" type="fyi">
+
+Every PostHog skill also ships as `skills.zip` on the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest) – ready-to-use `SKILL.md` directories you can drop into your agent's skills folder (like `.claude/skills/` for Claude Code).
+
+</CalloutBox>
 
 Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
-
-Prefer PostHog to run these investigations for you and offer fixes when possible? Checkout [self-driving](/docs/ai-observability/self-driving).
 
 ## The skills
 
 <AgentSkillsList product="ai_observability" exclude={["feature-usage-feed"]} />
 
-That's it! We're actively making skills as release new features so stay tuned!
+Prefer PostHog to run these investigations for you and offer fixes when possible? Checkout [self-driving](/docs/ai-observability/self-driving).
