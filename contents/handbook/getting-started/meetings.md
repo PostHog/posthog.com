@@ -30,9 +30,11 @@ The Monday all-hands features a few regular sections and is recorded in [this do
 - **Announcements:** Revenue and churn updates, plus other major news
 - **Hiring:** Updates about headcount, who is starting soon, and new hiring roles
 - **Acknowledgements:** Opportunity to give [kudos](/handbook/company/kudos) to your colleagues
-- **Topic of the day:** [Exec team talks around a particular topic](/handbook/exec/all-hands-topics)
-- **Q&A with James & Tim:** Ask the founders anything you want
-- **Demos:** Show us what you've worked on last week
+- **Topic of the day:** [A talk, demos, or a curated session on a particular topic](/handbook/exec/all-hands-topics)
+- **Q&A with the Blitzscale team:** Ask anything you want
+- **Demos:** Show us what you've worked on last week - everyone's invited to demo, but sometimes we might ask for a particular theme or focus based on the all-hands topic
+
+Occasionally, when public holidays around the world overlap and a lot of people are out, we'll move the all-hands to another day that week. We use 35%+ of people being out as the threshold for rescheduling.
 
 ## How to give a good demo
 
