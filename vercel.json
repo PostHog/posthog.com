@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/.well-known/http-message-signatures-directory",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/http-message-signatures-directory+json"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -183,6 +192,16 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
         {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
@@ -468,6 +487,14 @@
         {
             "source": "/teams/logs",
             "destination": "/teams/apm"
+        },
+        {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
         },
         {
             "source": "/teams/query-performance",
@@ -5435,6 +5462,10 @@
         {
             "source": "/startups/apply",
             "destination": "https://app.posthog.com/startups"
+        },
+        {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
         },
         {
             "source": "/yc-onboarding",

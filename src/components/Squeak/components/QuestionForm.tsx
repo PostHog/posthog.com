@@ -14,7 +14,6 @@ import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
-import { useApp } from '../../../context/App'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { OSSelect } from 'components/OSForm'
@@ -127,7 +126,6 @@ function QuestionFormMain({
     const posthog = usePostHog()
     const { user, logout } = useUser()
     const { status } = useAppStatus()
-    const { websiteMode } = useApp()
 
     return (
         <div className={`flex-1 mb-1`}>
@@ -238,32 +236,13 @@ function QuestionFormMain({
 
                             {disclaimer && (
                                 <p className="text-xs text-center mt-4 ml-[50px] [text-wrap:_balance] opacity-60 mb-0 text-primary">
-                                    {websiteMode ? (
-                                        <a
-                                            href="/handbook/support/customer-support#community"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="font-semibold underline"
-                                        >
-                                            Community questions are independent of PostHog support
-                                        </a>
-                                    ) : (
-                                        <Link
-                                            to="/handbook/support/customer-support#community"
-                                            state={{ newWindow: true }}
-                                            className="font-semibold underline"
-                                        >
-                                            Community questions are independent of PostHog support
-                                        </Link>
-                                    )}
-                                    . If you have access to support through your PostHog plan, especially if you need to
-                                    share personal info, you can file a support ticket{' '}
+                                    Troubleshooting an issue or not sure how something works? Try{' '}
                                     <Link
                                         to="https://app.posthog.com#panel=support"
                                         externalNoIcon
                                         className="font-semibold underline"
                                     >
-                                        in the app
+                                        asking PostHog AI or creating a ticket
                                     </Link>{' '}
                                     instead.
                                 </p>

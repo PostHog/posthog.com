@@ -18,7 +18,7 @@ One row per metric in your project:
 | Column | Type | What it is |
 |--------|------|------------|
 | `id` | String | The metric's id. |
-| `name` | String | Write-once identifier, e.g. `mrr`. |
+| `name` | String | Identifier, e.g. `mrr`, unique among live metrics. Not permanent – a metric can be renamed, and deleting one frees its name for reuse. |
 | `display_name` | Nullable string | Human-friendly label. |
 | `description` | String | What the metric means – the text agents match questions against. |
 | `unit` | Nullable string | e.g. `usd`, `percent`. |

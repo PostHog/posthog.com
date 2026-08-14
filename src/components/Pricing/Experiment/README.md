@@ -104,17 +104,17 @@ than they would in most tests.
 
 ## Before launching
 
-Two things live in the PostHog app, not this repo:
+One thing still lives in the PostHog app, not this repo:
 
 1. **`homepage-cta` (experiment 399989, 5 variants)** has been running since Aug 4 and reaches
    ~68% of `/pricing` visitors via the homepage, the top inbound path. It won't bias the
    comparison, but it inflates variance and entangles the signup effect. Wait it out or share a
    holdout.
-2. **`enterprise-pricing-table`** is still active on `/pricing` at 100% control, left over from an
-   experiment archived in Jan 2024 — ~22k people evaluate it every two weeks. It's read in
-   `components/Pricing/Plans/index.tsx`. Disable the flag; the dead branch can then come out of
-   the code. Note that this code path is inside the **control** variant, so leave the removal until
-   the flag is off and prefer doing it before launch rather than mid-flight.
+
+**`enterprise-pricing-table`** used to be listed here too. Its dead branch has since been removed
+from `components/Pricing/Plans/index.tsx`. The branch only rendered under the `test` variant, which
+the flag had held at 0% since the experiment was archived in Jan 2024, so the control arm renders
+exactly as it did before — but the flag itself still needs disabling in the app.
 
 ## Unwinding this
 

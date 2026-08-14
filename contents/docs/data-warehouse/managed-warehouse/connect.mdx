@@ -71,3 +71,5 @@ A few things a Postgres veteran will notice are absent: server-side functions an
 ## Querying from PostHog
 
 You don't need an external client to use the warehouse. Once provisioned, it's available in PostHog's [SQL editor](/docs/data-warehouse/query) alongside your other sources, and PostHog's AI features can use it as context. External connections are for everything else – dashboards in your BI tool, notebooks, scheduled jobs, or ad-hoc `psql` sessions.
+
+For larger or latency-sensitive workloads, [tune the worker's CPU, memory, and idle lifetime](/docs/data-warehouse/managed-warehouse/performance-tuning).
