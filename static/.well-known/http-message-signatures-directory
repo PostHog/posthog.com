@@ -1,4 +1,5 @@
 {
+  "//": "Web Bot Auth signing keys for PostHogSessionReplayBot (see https://posthog.com/docs/session-replay/image-bot)",
   "keys": [
     {
       "crv": "Ed25519",
