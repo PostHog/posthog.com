@@ -691,7 +691,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/build-mode': {
+    '/newsletter': {
         size: {
             min: {
                 width: 700,

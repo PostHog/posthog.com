@@ -417,7 +417,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Newsletter',
-                    link: '/build-mode',
+                    link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
                 },
                 {

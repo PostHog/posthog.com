@@ -1,12 +1,12 @@
 # BuildMode
 
-The building blocks for `/build-mode` (`src/pages/build-mode/index.tsx`) — the newsletter's rebranded
+The building blocks for `/newsletter` (`src/pages/newsletter.tsx`) — the newsletter's rebranded
 home. The page itself is only the `ReaderView` shell, the layout, and the GraphQL query; everything it
 renders lives here.
 
 These components live under `src/components/` rather than beside the page because **every file under
 `src/pages/` becomes a route in Gatsby** — a colocated `FeaturedPost.tsx` would ship as
-`/build-mode/FeaturedPost`.
+`/newsletter/FeaturedPost`.
 
 ## The page, top to bottom
 

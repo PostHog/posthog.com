@@ -7,7 +7,7 @@ import Hero, { HeroHeader } from 'components/BuildMode/Hero'
 import PostsGallery from 'components/BuildMode/PostsGallery'
 import { BuildModePost } from 'components/BuildMode/types'
 
-export default function BuildModePage({ data }: { data: { posts: { nodes: BuildModePost[] } } }): JSX.Element {
+export default function NewsletterPage({ data }: { data: { posts: { nodes: BuildModePost[] } } }): JSX.Element {
     const posts = data.posts.nodes.filter((post) => post.frontmatter?.title)
     const featured = posts[0]
 
