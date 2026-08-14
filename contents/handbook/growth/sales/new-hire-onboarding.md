@@ -113,7 +113,6 @@ By the end of month 3:
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Ben](/community/profiles/30205), the lead responsible for Sales, CS, and Onboarding.
  - Meet with [Simon](/community/profiles/28895), CSM Lead
- - Meet with [Alex](community/profiles/33387), TAE Lead
  - PostHog integration exercise - by the end of week 1:
    - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
    - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
