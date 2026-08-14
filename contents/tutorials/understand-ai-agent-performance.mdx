@@ -78,6 +78,8 @@ Once data is flowing into PostHog, the first place I'd start is [clusters](/docs
 
 Clusters automatically group similar LLM traces or generations together, so you can discover common patterns in how users interact with your LLM features without reading every conversation manually.
 
+![Clusters in PostHog showing themes across AI traces and generations](/images/tutorials/understand-ai-agent-performance/clusters-overview.jpg)
+
 The Clusters tab shows the biggest themes across your traces and generations.
 
 This matters because users can ask for the same thing in a thousand different ways.
@@ -107,6 +109,8 @@ That's why clusters are the place to start. They tell you what users are actuall
 The important thing with clusters is understanding what your customers are asking, and why.
 
 Click on a card to jump into a cluster and look at the title.
+
+![A PostHog cluster detail page with its summary, metrics, visualization, and example traces](/images/tutorials/understand-ai-agent-performance/cluster-details.png)
 
 Each cluster card gives you the theme, a summary, and example traces to validate.
 
@@ -144,6 +148,8 @@ You probably don't need to do this for every trace, but you should review enough
 
 Note: I'd also watch a few [session replays](/session-replay) to get the full context of what the user was doing. Or if you're lazy like me, get [Replay Vision](/replay-vision) to do it for you.
 
+![A PostHog AI trace linked to a session replay](/images/tutorials/understand-ai-agent-performance/session-replay.png)
+
 If you haven't linked traces to replays yet, [set that up here](/docs/ai-observability/link-session-replay).
 
 The reason session replay is useful here is that it gives you visual validation for what your customer was trying to do, and the trace tells you what the user said to the agent. Those are usually, but not always, the same thing. Hence me calling it out.
@@ -164,6 +170,8 @@ That usually means adding two things:
 You can set this up by creating a [sentiment analysis evaluation](/docs/ai-evals#creating-a-sentiment-evaluation) in AI Evals.
 
 This helps you understand, at a glance, how customers feel while they're interacting with an AI feature.
+
+![The Sentiment tab in PostHog AI Observability](/images/tutorials/understand-ai-agent-performance/sentiment.png)
 
 The Sentiment tab helps you find positive or negative messages, then jump straight into the trace for context.
 
@@ -191,6 +199,8 @@ For example:
 One simple starting point is a [boolean (true or false) eval](/docs/ai-evals):
 
 > Did the agent successfully answer the user's question? True or false.
+
+![Creating a boolean evaluation in PostHog](/images/tutorials/understand-ai-agent-performance/evaluation.png)
 
 Create a boolean eval and give it a narrow job, a clear pass condition, and the context it needs to judge the answer.
 
@@ -224,6 +234,8 @@ The other key thing with evals is that you can generate insights from them.
 
 You can create [trend insights](/docs/product-analytics/insights) from `$ai_evaluation` events and add them to your [AI Observability dashboard](/docs/ai-observability/dashboard).
 
+![A trend insight showing AI evaluation results over time](/images/tutorials/understand-ai-agent-performance/evaluation-insight.png)
+
 Start with something like the Bank balance accuracy eval and chart its success rate over time. This gives you a baseline for your AI product's performance.
 
 For some more ideas, you might track:
@@ -237,6 +249,8 @@ For some more ideas, you might track:
 - Failure rate by prompt version
 - Failure rate by tool used
 - Cost per successful conversation
+
+![An AI Observability dashboard in PostHog](/images/tutorials/understand-ai-agent-performance/ai-observability-dashboard.png)
 
 Put the metrics you care about on one dashboard so the whole team is looking at the same definition of "better."
 
@@ -257,6 +271,8 @@ Dashboards are great, but let's be honest: They are often ignored.
 If an agent fails consistently in production, you probably don't want that failure sitting quietly in a dashboard waiting for someone to maybe look at it next Thursday. You want the right people to know.
 
 In PostHog, you can set up a [workflow](/docs/workflows/launch-workflow) so that when an eval fails, it sends the eval reasoning to Slack, email, or wherever your team works.
+
+![Creating a workflow for failed AI evaluations in PostHog](/images/tutorials/understand-ai-agent-performance/workflow-campaign.png)
 
 Trigger the workflow from a failed `$ai_evaluation` event, then route it to the channel your team actually watches.
 
@@ -280,6 +296,8 @@ You can (and should!) also include buttons like:
 
 - View the trace
 - Open the person profile
+
+![A workflow alert with links to the failed trace and person](/images/tutorials/understand-ai-agent-performance/workflow-alert.png)
 
 The alert should include the eval reasoning and links back to the trace and person, so someone can actually do something with it.
 
@@ -307,6 +325,8 @@ This is why traces are so important. If all you know is "the agent failed," that
 Each of those failures needs a different fix, and this is where the Playground becomes useful.
 
 Take the failed bank balance trace from the last step. Your product team can test different prompts or tool behavior in the Playground and see whether the agent now returns the right answer.
+
+![Testing a failed AI generation in the PostHog Playground](/images/tutorials/understand-ai-agent-performance/playground.png)
 
 Open a failed generation in the Playground to test prompt or model changes against the same production example.
 
