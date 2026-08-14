@@ -55,7 +55,7 @@ export default function ContextGapReport() {
                                     </span>
                                 </h1>
                                 <p className="!mt-0 !mb-0 text-base @sm:text-lg opacity-80">
-                                    We read 10 industry reports about the data market so you don't have to give anyone your email.
+                                    We read 10 industry reports so you don't have to give anyone your email.
                                 </p>
 
                                 <p className="not-prose text-sm text-secondary mt-2">
