@@ -14,7 +14,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ## Weekly schedule
 
-- **Monday** - PostHog News all-hands meeting. Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the doc is shared in the #general channel in Slack. We then go around and people are free to demo anything they've been working on recently. _The content of these meetings is always confidential._ All hands meetings are recorded too if you are out. Some teams also do sprint planning on a Monday. 
+- **Monday** - PostHog News all-hands meeting. Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the doc is shared in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) channel in Slack. We then go around and people are free to demo anything they've been working on recently. _The content of these meetings is always confidential._ All hands meetings are recorded too if you are out. Some teams also do sprint planning on a Monday. 
 - **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - A few things happen on wednesdays:
     - some teams do sprint planning here as well
@@ -28,13 +28,13 @@ You should have been invited to any relevant meetings as part of your [onboardin
 The Monday all-hands features a few regular sections and is recorded in [this document](https://docs.google.com/document/d/1JbA2W1CP2sA5vRVnS0UgyDgRz88mKpEVeinW6SYjO74/edit?usp=sharing).
 
 - **Announcements:** Revenue and churn updates, plus other major news
-- **Hiring:** Updates about headcount, who is starting soon, and new hiring roles
+- **Hiring & Anniversaries:** Updates about headcount, who is starting soon, new hiring roles, and who is celebrating a PostHog anniversary
 - **Acknowledgements:** Opportunity to give [kudos](/handbook/company/kudos) to your colleagues
-- **Topic of the day:** [A talk, demos, or a curated session on a particular topic](/handbook/exec/all-hands-topics)
-- **Q&A with the Blitzscale team:** Ask anything you want
-- **Demos:** Show us what you've worked on last week - everyone's invited to demo, but sometimes we might ask for a particular theme or focus based on the all-hands topic
+- **Topic of the day:** <SmallTeam slug="blitzscale" /> [talks around a particular topic](/handbook/exec/all-hands-topics)
+- **Q&A:** Ask <SmallTeam slug="blitzscale" /> anything you want
+- **Demos:** Show us what you've worked on last week - anyone can demo, though we sometimes ask for a particular theme to tie in with the topic of the day
 
-Occasionally, when public holidays around the world overlap and a lot of people are out, we'll move the all-hands to another day that week. We use 35%+ of people being out as the threshold for rescheduling.
+When public holidays overlap around the world and a lot of people are out, we'll move the all-hands to another day that week. Our rule of thumb is to reschedule when 35% or more of the team is away.
 
 ## How to give a good demo
 
