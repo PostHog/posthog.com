@@ -92,11 +92,11 @@ export default function ContextGapReport() {
                             </p>
 
                             <p>
-                                We wrote our own industry reporty to tell you why a context warehouse is the solution, using data from our competitors reports to make the point. You don't have to read everyone's reports to know what's important in data infrastructure (and hand over your email for the priveledge), just read ours, no email needed.
+                                We wrote our own industry reporty to tell you why a context warehouse is the solution, using data from our competitors reports to make the point. 
                             </p>
 
                             <p>
-                                Here's three reasons you should read it:
+                                You don't have to read everyone's reports to know what's important in data infrastructure (and hand over your email for the priveledge), just read ours:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
                                 <li>You don't have to read 300 pages to get the point.</li>
