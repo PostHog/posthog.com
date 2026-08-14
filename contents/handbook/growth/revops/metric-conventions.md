@@ -13,7 +13,7 @@ That only works if metrics are named well enough to find and distinguish. These 
 ## 1. Name shape
 
 ```
-<subject>[_<method>][_<segment>]
+<subject>[_<method>][_<segment>][_by_<dimension>]
 ```
 
 Fixed order, so names sort and scan predictably. Only `subject` is required.
@@ -23,6 +23,7 @@ Fixed order, so names sort and scan predictably. Only `subject` is required.
 | `subject` | What's measured, named as specifically as it needs to be | `mrr`, `arr`, `nrr`, `gdr`, `logo_retention`, `paying_customers` |
 | `method` | How it's computed over time | `current`, `monthly`, `quarterly`, `monthly_rolling`, `quarterly_annualized` |
 | `segment` | Population filter | `managed`, `ever_core` |
+| `by_<dimension>` | Breakdown column the metric returns, one row per value | `by_product` |
 
 The name says what the number *is*. Other info about the metric like who reads it, what it was built for etc may change while the number stays the same, so a name built on them may be inaccurate later on.
 
@@ -40,6 +41,8 @@ gdr_monthly_rolling
 The test: would this number exist if the workflow didn't? If yes, the workflow doesn't belong in the name. Something like a per-run cost for a specific internal system is different. There the system *is* the thing being measured, so it's part of the subject.
 
 **One metric with a dimension beats many near identical metrics.** If the same number exists for every product, make one metric that returns product as a column and filter it, rather than one metric per product. Give the agent the path to the number and let it narrow down.
+
+The dimension goes last in the name as `by_<dimension>`: `mrr_monthly_by_product` returns (month, product, mrr). A segment filters the population, a dimension is a column the metric returns, so `nrr_quarterly_annualized_managed` is one number per cohort while `mrr_monthly_by_product` is one row per product.
 
 **Adding a value that isn't in the table? Add it to the table.** 
 
