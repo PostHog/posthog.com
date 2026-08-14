@@ -14,24 +14,9 @@ Any agent that reads `SKILL.md` can use them – Claude Code, Codex, Cursor, Gem
 
 First, make sure there's LLM data to investigate – if you haven't instrumented yet, [install a PostHog SDK or provider integration](/docs/ai-observability/installation).
 
-Next, install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin). It bundles every PostHog skill – these included – together with the [PostHog MCP server](/docs/model-context-protocol) they call. In Claude Code that's one command:
+Next, [connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp) – the skills call `posthog:*` MCP tools, so your agent needs the server. (Installing all skills via the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) below wires up the MCP server for you.)
 
-```bash
-claude plugin install posthog
-```
-
-Run `/mcp`, pick the PostHog server, and log in with OAuth. The plugin also installs in [Codex](/docs/model-context-protocol/codex), Cursor, and Gemini CLI – the [plugin README](https://github.com/PostHog/ai-plugin) has each command.
-
-Prefer to wire it up yourself? [Connect the MCP server](/docs/ai-observability/surfaces/mcp) directly, then install skills from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest) – a zip of every PostHog skill (130+ across all products) as ready-to-use directories. Pull just the ones you want:
-
-```bash
-curl -L -o skills.zip https://github.com/PostHog/posthog/releases/download/agent-skills-latest/skills.zip
-unzip skills.zip 'exploring-llm-traces/*' -d .claude/skills/
-```
-
-Any skill name from the list below works the same way; use `~/.claude/skills/` instead to install for every project. Install from the release rather than copying repo folders – the zip ships each skill fully rendered, while some [repo sources](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) contain unrendered templates.
-
-Or skip the shell work entirely – paste this prompt into your agent and it does the setup:
+Then paste this prompt into your agent and it does the install. Pick just the AI Observability skills, or everything PostHog ships:
 
 <AgentSkillsInstallPrompt product="ai_observability" exclude={["feature-usage-feed"]} />
 

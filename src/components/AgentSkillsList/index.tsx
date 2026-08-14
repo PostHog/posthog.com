@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { SingleCodeBlock } from 'components/CodeBlock'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useAgentSkills } from '../../hooks/skills'
 
 type AgentSkillsListProps = {
@@ -13,11 +14,14 @@ type AgentSkillsListProps = {
 const MONOREPO_BASE = 'https://github.com/PostHog/posthog/tree/master'
 
 /**
- * A copyable paste-into-your-agent prompt for installing the listed skills from the
- * skills release zip. Skill names are interpolated from the same build-time data as
- * AgentSkillsList, so the prompt never drifts from the list rendered beside it.
+ * The install path for agent skills: a copyable paste-into-your-agent prompt with a
+ * toggle between just this product's skills (cherry-picked from the release zip) and
+ * every PostHog skill (via the AI plugin, falling back to the zip). Skill names are
+ * interpolated from the same build-time data as AgentSkillsList, so the prompt never
+ * drifts from the list rendered beside it.
  */
 export function AgentSkillsInstallPrompt({ product, exclude = [] }: AgentSkillsListProps): JSX.Element {
+    const [scope, setScope] = React.useState('product')
     const names = useAgentSkills()
         .filter((skill) => skill.product === product && !exclude.includes(skill.name))
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -29,7 +33,7 @@ export function AgentSkillsInstallPrompt({ product, exclude = [] }: AgentSkillsL
             ? `Extract only these skills: ${names.join(', ')}.`
             : `Extract only the AI Observability skills listed at https://posthog.com/docs/ai-observability/skills.`
 
-    const prompt = `Set up PostHog's AI Observability agent skills for me:
+    const productPrompt = `Set up PostHog's AI Observability agent skills for me:
 
 1. Download https://github.com/PostHog/posthog/releases/download/agent-skills-latest/skills.zip - a bundle of 100+ PostHog skills, one top-level directory per skill.
 2. ${extractLine}
@@ -38,10 +42,29 @@ export function AgentSkillsInstallPrompt({ product, exclude = [] }: AgentSkillsL
 
 These skills call PostHog MCP tools. If the PostHog MCP server isn't connected yet, tell me and point me to https://posthog.com/docs/model-context-protocol.`
 
+    const allPrompt = `Set up all of PostHog's agent skills for me:
+
+1. If this harness supports plugins, install the official PostHog AI plugin (https://github.com/PostHog/ai-plugin) - it bundles every PostHog skill together with the PostHog MCP server. Claude Code: run \`claude plugin install posthog\`, then tell me to run /mcp and authenticate with PostHog. Codex: \`codex plugin marketplace add PostHog/ai-plugin\`, then install PostHog from /plugins. Gemini CLI: \`gemini extensions install https://github.com/PostHog/ai-plugin\`. Cursor: tell me to install PostHog from the Cursor Marketplace. Once the plugin is installed, you're done - skip step 2.
+2. Otherwise, download https://github.com/PostHog/posthog/releases/download/agent-skills-latest/skills.zip and extract every top-level skill directory into your skills directory (ask me whether to install for this project or globally). Delete the zip, verify every skill contains a SKILL.md, and summarize what you installed. These skills call PostHog MCP tools - if the PostHog MCP server isn't connected yet, tell me and point me to https://posthog.com/docs/model-context-protocol.`
+
     return (
-        <SingleCodeBlock language="text" showCopy={true} showLineNumbers={false} label="Prompt">
-            {prompt}
-        </SingleCodeBlock>
+        <div className="mb-4">
+            <ToggleGroup
+                title="Skills to install"
+                hideTitle
+                size="sm"
+                className="mb-2"
+                options={[
+                    { label: 'AI Observability skills', value: 'product' },
+                    { label: 'All PostHog skills', value: 'all' },
+                ]}
+                value={scope}
+                onValueChange={(value) => value && setScope(value)}
+            />
+            <SingleCodeBlock language="text" showCopy={true} showLineNumbers={false} label="Prompt">
+                {scope === 'all' ? allPrompt : productPrompt}
+            </SingleCodeBlock>
+        </div>
     )
 }
 
