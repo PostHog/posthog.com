@@ -61,7 +61,7 @@ These skills call PostHog MCP tools. If the PostHog MCP server isn't connected y
                 value={scope}
                 onValueChange={(value) => value && setScope(value)}
             />
-            <SingleCodeBlock language="text" showCopy={true} showLineNumbers={false} label="Prompt">
+            <SingleCodeBlock language="text" showCopy={true} showAskAI={false} showLineNumbers={false} label="Prompt">
                 {scope === 'all' ? allPrompt : productPrompt}
             </SingleCodeBlock>
         </div>
