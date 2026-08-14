@@ -10,31 +10,19 @@ via the `posthog-main-repo` `gatsby-source-git` source – see `gatsby/onCreateN
 `useAgentSkills()` in `src/hooks/skills.tsx`. The list updates automatically on every site build;
 nothing here is hand-maintained.
 
-Also exports `AgentSkillsInstallPrompt` – the install path for the docs page: a copyable
-paste-into-your-agent prompt (rendered via `SingleCodeBlock`) with a `ToggleGroup` switching
-between two variants:
-
-- **AI Observability skills** (default) – tells the agent to cherry-pick this product's
-  skills from the `agent-skills-latest` release zip. Skill names are interpolated from the
-  same build-time data as the list, so the prompt and the list can never drift apart.
-- **All PostHog skills** – leads with the [PostHog AI plugin](https://github.com/PostHog/ai-plugin)
-  (which bundles every skill plus the MCP server), falling back to extracting the whole zip
-  for agents without plugin support.
-
-The toggle labels are AIO-specific; generalize them if another product page ever adopts it.
+Installation guidance lives in the docs page prose and points at the
+[PostHog AI plugin](https://github.com/PostHog/ai-plugin), whose README is the canonical,
+always-current install reference – deliberately not duplicated here or in the page.
 
 ## Usage
 
 Import directly in MDX (no global shortcode registration):
 
 ```mdx
-import AgentSkillsList, { AgentSkillsInstallPrompt } from 'components/AgentSkillsList'
+import AgentSkillsList from 'components/AgentSkillsList'
 
 <AgentSkillsList product="ai_observability" exclude={["feature-usage-feed"]} />
-<AgentSkillsInstallPrompt product="ai_observability" exclude={["feature-usage-feed"]} />
 ```
-
-Both components take the same props.
 
 ## Props
 

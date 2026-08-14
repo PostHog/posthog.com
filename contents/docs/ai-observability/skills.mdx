@@ -4,28 +4,24 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AgentSkillsList, { AgentSkillsInstallPrompt } from 'components/AgentSkillsList'
+import AgentSkillsList from 'components/AgentSkillsList'
 
-PostHog ships agent skills for AI Observability: folders of instructions in the open `SKILL.md` format that teach your coding agent how to investigate LLM traces, costs, clusters, evaluations, and failures through the [PostHog MCP server](/docs/model-context-protocol). They're the same skills PostHog's own background agents run.
-
-Any agent that reads `SKILL.md` can use them – Claude Code, Codex, Cursor, Gemini CLI, and others.
+PostHog ships agent skills for AI Observability that teach your coding agent how to investigate LLM traces, costs, clusters, evaluations, and failures through the [PostHog MCP server](/docs/model-context-protocol). They're the same skills PostHog's own background agents run.
 
 ## Set up
 
-First, make sure there's LLM data to investigate – if you haven't instrumented yet, [install a PostHog SDK or provider integration](/docs/ai-observability/installation).
+1. Make sure there's LLM data to investigate – if you haven't instrumented yet, [install a PostHog SDK or provider integration](/docs/ai-observability/installation).
 
-Next, [connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp) – the skills call `posthog:*` MCP tools, so your agent needs the server. (Installing all skills via the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) below wires up the MCP server for you.)
+2. [Connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp). (The AI plugin in step 3 does this for you.)
 
-Then paste this prompt into your agent and it does the install. Pick just the AI Observability skills, or everything PostHog ships:
+3. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) – it bundles every PostHog skill, these included, and keeps them up to date. Its README covers installation in Claude Code, Codex, Cursor, and Gemini CLI; our [MCP docs](/docs/model-context-protocol/claude-code) cover the Claude Code install too.
 
-<AgentSkillsInstallPrompt product="ai_observability" exclude={["feature-usage-feed"]} />
+Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
 
-Then just ask. Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
-
-Prefer PostHog to run these investigations for you? That's [self-driving](/docs/ai-observability/self-driving).
+Prefer PostHog to run these investigations for you and offer fixes when possible? Checkout [self-driving](/docs/ai-observability/self-driving).
 
 ## The skills
 
 <AgentSkillsList product="ai_observability" exclude={["feature-usage-feed"]} />
 
-This list is generated from the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) at build time – when a new skill ships, it shows up here. Each description is the skill's own frontmatter, written to tell an agent when to reach for it.
+That's it! We're actively making skills as release new features so stay tuned!
