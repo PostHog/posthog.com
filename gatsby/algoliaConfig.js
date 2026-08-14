@@ -74,8 +74,8 @@ const PAGE_TYPE_RULES = [
 const EXCLUDED_PAGE_PATTERNS = [
     /^\/(?:404|dev-404-page|offline-plugin-app-shell-fallback)(?:\/|$)/,
     /^\/(?:code|connect|posts|r)(?:\/|$)/,
-    /^\/(?:101|art-library|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
-    /^\/(?:community\/profiles\/me|data-stack\/dw-installation-platforms|team-updates)(?:\/|$)/,
+    /^\/(?:101|art-library|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|reset-password|trash|wip)(?:\/|$)/,
+    /^\/(?:community\/profiles\/me|team-updates)(?:\/|$)/,
     /\/(?:edit|new|orders|subscriptions)\/?$/,
     /\/[^/]*-diagram(?:\/|$)/,
     /\.[a-z0-9]{2,5}(?:\/|$)/i,
