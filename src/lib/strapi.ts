@@ -61,6 +61,7 @@ export type ProfileData = {
     biography: string | null
     company: string | null
     companyRole: string | null
+    discord: string | null
     github: string | null
     linkedin: string | null
     location: string | null
