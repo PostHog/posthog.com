@@ -102,6 +102,13 @@ interface ReaderViewProps {
     rightActionButtons?: React.ReactNode
     /** Hide the sidebar's app-options (gear) button. Defaults to false. */
     hideAppOptions?: boolean
+    /**
+     * Hide the "Copy page" markdown actions. For index pages that sit under a
+     * `MARKDOWN_CONTENT_PATHS` prefix but have no `.md` of their own (e.g.
+     * `/newsletter`), where the control would otherwise hold empty space while
+     * its existence check resolves. Defaults to false.
+     */
+    hideMarkdownActions?: boolean
     isEditing?: boolean
     onSearch?: (query: string) => void
     showSurvey?: boolean
@@ -428,6 +435,7 @@ export default function ReaderView({
     proseSize = 'sm',
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
@@ -463,6 +471,7 @@ export default function ReaderView({
                 proseSize={proseSize}
                 rightActionButtons={rightActionButtons}
                 hideAppOptions={hideAppOptions}
+                hideMarkdownActions={hideMarkdownActions}
                 isEditing={isEditing}
                 onSearch={onSearch}
                 showSurvey={showSurvey}
@@ -1349,6 +1358,7 @@ function ReaderViewContent({
     proseSize,
     rightActionButtons,
     hideAppOptions = false,
+    hideMarkdownActions = false,
     isEditing,
     onSearch,
     showSurvey = false,
@@ -1667,10 +1677,12 @@ function ReaderViewContent({
                                     {/* Raw markdown actions, for readers handing this page to an LLM.
                                         Self-hides on pages with no generated .md counterpart —
                                         see components/MarkdownActions/README.md. */}
-                                    <MarkdownActions
-                                        pageUrl={appWindow?.path ?? pathname}
-                                        className={`mb-2 transition-all ${contentWidthClass}`}
-                                    />
+                                    {!hideMarkdownActions && (
+                                        <MarkdownActions
+                                            pageUrl={appWindow?.path ?? pathname}
+                                            className={`mb-2 transition-all ${contentWidthClass}`}
+                                        />
+                                    )}
                                     {title && !hideTitle && (
                                         <h1
                                             className={`transition-all ${

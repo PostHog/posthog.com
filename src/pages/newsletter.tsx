@@ -17,7 +17,13 @@ export default function NewsletterPage({ data }: { data: { posts: { nodes: Build
                 title="build mode – PostHog"
                 description="Tools, tactics, and taste for product builders. Advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups."
             />
-            <ReaderView hideLeftSidebar hideRightSidebar showQuestions={false} hideMobileTableOfContents>
+            <ReaderView
+                hideLeftSidebar
+                hideRightSidebar
+                showQuestions={false}
+                hideMobileTableOfContents
+                hideMarkdownActions
+            >
                 <div className="@container not-prose text-pretty text-primary">
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
                         <HeroHeader />
