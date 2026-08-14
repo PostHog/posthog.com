@@ -6808,6 +6808,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Agent skills',
+                    url: '/docs/ai-observability/skills',
+                    icon: 'IconMagicWand',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'PostHog Desktop',
                     url: '/docs/ai-observability/surfaces/desktop',
                     icon: 'IconCode',

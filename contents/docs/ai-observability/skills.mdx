@@ -1,0 +1,27 @@
+---
+title: Agent skills for AI Observability
+sidebar: Docs
+showTitle: true
+---
+
+import AgentSkillsList from 'components/AgentSkillsList'
+
+PostHog ships agent skills for AI Observability: folders of instructions in the open `SKILL.md` format that teach your coding agent how to investigate LLM traces, costs, clusters, evaluations, and failures through the [PostHog MCP server](/docs/model-context-protocol). They're the same skills PostHog's own background agents run.
+
+Any agent that reads `SKILL.md` can use them – Claude Code, Codex, Cursor, Gemini CLI, and others.
+
+## Set up
+
+1. **Capture LLM data** – [install a PostHog SDK or provider integration](/docs/ai-observability/installation) so there are traces to investigate.
+2. **Connect the [PostHog MCP server](/docs/ai-observability/surfaces/mcp)** – skills call `posthog:*` MCP tools, so your agent needs the server installed.
+3. **Add a skill to your agent** – copy the skill's folder from [the PostHog repo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) into your agent's skills directory (`.claude/skills/` for Claude Code), or download every PostHog skill at once from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest).
+
+Then just ask. Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
+
+Prefer PostHog to run these investigations for you? That's [self-driving](/docs/ai-observability/self-driving).
+
+## The skills
+
+<AgentSkillsList product="ai_observability" exclude={["feature-usage-feed"]} />
+
+This list is generated from the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) at build time – when a new skill ships, it shows up here. Each description is the skill's own frontmatter, written to tell an agent when to reach for it.
