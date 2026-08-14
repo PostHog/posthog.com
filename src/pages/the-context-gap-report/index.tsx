@@ -37,7 +37,7 @@ export default function ContextGapReport() {
         <ReaderView hideLeftSidebar showQuestions={false}>
             <SEO
                 title="The Context Gap - PostHog"
-                description="42% of AI projects stall on bad data, not bad models. We read what every other data vendor already said about it and skipped the part where you give us your email."
+                description="We read 10 industry reports about the data market so you don't have to give anyone your email."
                 image={`/images/og/default.png`}
             />
             <div className="max-w-6xl mx-auto px-5 py-12">
@@ -55,8 +55,7 @@ export default function ContextGapReport() {
                                     </span>
                                 </h1>
                                 <p className="!mt-0 !mb-0 text-base @sm:text-lg opacity-80">
-                                    42% of AI projects stall on bad data, not bad models. We read what every other data
-                                    vendor already said about it, and skipped the part where you give us your email.
+                                    We read 10 industry reports about the data market so you don't have to give anyone your email.
                                 </p>
 
                                 <p className="not-prose text-sm text-secondary mt-2">
@@ -88,20 +87,16 @@ export default function ContextGapReport() {
                             </p>
 
                             <p>
-                                Reading industry reports back-to-back has one advantage: you notice the same problem
-                                everywhere.{' '}
+                                When you read industry reports back-to-back you notice every vendor is talking about the same problem:{' '}
                                 <strong>AI ambition is outrunning data readiness, trust, and governance.</strong>
                             </p>
 
                             <p>
-                                But each vendor is only looking at their own slice of the stack. At PostHog, we're
-                                zoomed out enough to see the whole problem and offer up a solution: build a context
-                                warehouse instead of another pipeline.
+                                We wrote our own industry reporty to tell you why a context warehouse is the solution, using data from our competitors reports to make the point. You don't have to read everyone's reports to know what's important in data infrastructure (and hand over your email for the priveledge), just read ours, no email needed.
                             </p>
 
                             <p>
-                                We wrote our own industry report to tell you why we're right. Here's three compelling
-                                bullet points to tell you why you should read it:
+                                Here's three reasons you should read it:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
                                 <li>You don't have to read 300 pages to get the point.</li>
