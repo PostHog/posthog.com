@@ -283,8 +283,9 @@ const faqItems = [
                 <Link to="https://app.posthog.com/startups" external className="underline font-semibold">
                     form
                 </Link>
-                . We will apply the credit automatically if you're eligible. If you're accepted into the startups
-                program, we will notify you by email.
+                . Apply from a PostHog account that uses your company email address. We will apply the credit
+                automatically if you're eligible. If you're accepted into the startups program, we will notify you by
+                email.
             </p>
         ),
     },
@@ -293,7 +294,21 @@ const faqItems = [
         content: (
             <p>
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
-                signed up any time from Jan 1st 2023 onwards.
+                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's
+                email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not
+                accepted.
+            </p>
+        ),
+    },
+    {
+        trigger: "What if we don't have a company email domain yet?",
+        content: (
+            <p>
+                You need one to apply, but you don't need credits to start. Every PostHog product has a{' '}
+                <Link to="/pricing" state={{ newWindow: true }} className="underline font-semibold">
+                    monthly free allowance
+                </Link>
+                , so you can build on PostHog for free and apply for the program once you have a company domain.
             </p>
         ),
     },
@@ -413,11 +428,15 @@ const faqStructuredData = [
     },
     {
         question: 'How do I apply to PostHog for Startups?',
-        answer: 'Sign up to a paid plan in PostHog (you are only charged for usage) and complete the startups application form. We apply the credit automatically if you are eligible and notify you by email once accepted.',
+        answer: 'Sign up to a paid plan in PostHog (you are only charged for usage) and complete the startups application form from an account that uses your company email address. We apply the credit automatically if you are eligible and notify you by email once accepted.',
     },
     {
         question: 'Who is eligible for PostHog for Startups?',
-        answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, and you need to have signed up any time from Jan 1st 2023 onwards.',
+        answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, you need to have signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.',
+    },
+    {
+        question: 'What if my startup does not have a company email domain yet?',
+        answer: 'You need a company email domain to apply, but you do not need credits to start. Every PostHog product has a monthly free allowance, so you can build on PostHog for free and apply for the program once you have a company domain.',
     },
     {
         question: 'How far does $50,000 in PostHog credits go?',
@@ -750,6 +769,7 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                                                 <ul className="pl-0 list-none ml-0">
                                                     <li>&lt;$5m in funding</li>
                                                     <li>&lt;2 years old</li>
+                                                    <li>Company email domain</li>
                                                 </ul>
                                             ),
                                             className: 'bg-[#FFF6DE] dark:bg-yellow/10 !border-l-2 !border-l-yellow',
