@@ -148,9 +148,9 @@ Data, like AI, is a tool. We use it when it makes sense to, but we don't use it 
 ![A water bottle with a sticker reading "There are so many things more important than profit"](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/profit_yuck_1945a5ea42.png)
 <Caption>My water bottle is a constant inspiration</Caption>
 
-## "How can we make more money?"
+## "How do you track ROI for these campaigns?"
 
-I personally do not care about, or track, the money we make very much. It is a great privilege of working here that I am able to say that out loud, but it would be true regardless. I don't find profit very interesting compared to everything else I could be thinking about, and every time I've been in a company that obsessed about daily revenue targets the people did not have a good time. I prefer to focus on things that are worth doing or interesting for reasons other than profit.
+I personally do not care about, or track, the money we make very much. I prefer to focus on things that are worth doing or interesting for reasons other than profit.
 
 If anything, the PostHog marketing team is often under pressure to [_spend_ more money](/blog/on-doing-more-weird). If you want to make more money, all I can say is: try charging more, or try [spending money to make money](/founders/actual-marketing-budget-2026).
 
