@@ -1,7 +1,6 @@
 import React from 'react'
 import { SectionComponentProps } from '../types'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { SectionHeading } from '../helpers'
 
 const Eli5 = ({ id, productData }: SectionComponentProps) => {
     const eli5 = productData?.overview?.eli5
@@ -10,11 +9,14 @@ const Eli5 = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">What does it do?</h2>
-            <div className="float-right ml-4 @2xl/reader-content:ml-8 @5xl/reader-content:-mt-8 w-48 @lg/reader-content:w-64 @2xl/reader-content:w-80 max-w-full">
-                <CloudinaryImage src={productData?.hogs?.mobileHog?.src} alt="Mobile hog" className="w-full" />
+            <SectionHeading>What does it do?</SectionHeading>
+            {/* Capped to a readable measure – around 75 characters a line. The
+                bullets used to sit in an 18rem column beside this copy, which
+                held it to roughly this width; without them it would run the full
+                container and hit 160+ characters a line on a wide monitor. */}
+            <div className="max-w-3xl text-lg leading-relaxed [&>p]:m-0 [&>p+p]:mt-4">
+                {typeof eli5 === 'string' ? <p>{eli5}</p> : eli5}
             </div>
-            <p>{eli5}</p>
         </section>
     )
 }

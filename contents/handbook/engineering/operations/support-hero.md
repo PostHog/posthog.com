@@ -16,7 +16,7 @@ Our support engineers, in the <SmallTeam slug="support" />, triage tickets for [
 
 ## When is my turn?
 
-Most engineering teams run an incident.io schedule, check out the [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
+Most engineering teams run a `Support Hero: {team}` rotation in incident.io, [defined in Terraform](/handbook/engineering/operations/on-call-rotation#managing-on-call-in-terraform) alongside the team's other [escalation schedules](/handbook/engineering/operations/on-call-rotation#escalation-schedules).
 
 The schedules consist of contiguous blocks, but that definitely doesn't mean working 24/7 – you should just work your normal hours.
 
@@ -69,7 +69,7 @@ It might be an intense week, but you're also going to solve so many real problem
 
 Check the `#papercuts` Slack channel during your rotation and pick up any reports that relate to your team's area. For each one, pick one of the following:
 
-- **Reply** to the reporter acknowledging the papercut, then either get a fix shipped or open a GitHub issue to track it if it needs more scoping. How you get the fix out is up to you – prompting PostHog Code is often the fastest path, but feel free to fix it however you like.
+- **Reply** to the reporter acknowledging the papercut, then either get a fix shipped or open a GitHub issue to track it if it needs more scoping. How you get the fix out is up to you – prompting PostHog Desktop is often the fastest path, but feel free to fix it however you like.
 - **React with ❌** to reject the papercut (for example, if the behavior is intentional). A brief reply explaining why is appreciated.
 - **React with ✅** once you've shipped a fix or improvement.
 

@@ -1,11 +1,9 @@
 ---
 name: post-newsletter
-description: Convert a Substack newsletter post into a native posthog.com newsletter file. Fetches the content from a Substack URL, formats it with correct frontmatter and markdown, applies internal links, and writes image placeholders. Omits Substack-specific sections (byline, related texts, job posts). Use when the user provides a newsletter.posthog.com URL and asks to post it natively.
+description: Convert a Substack newsletter post into a native posthog.com newsletter file. Fetches the content from a Substack URL, formats it with correct frontmatter and markdown, applies internal links, and re-hosts its images on Cloudinary. Omits Substack-specific sections (byline, related texts, job posts). Use when the user provides a newsletter.posthog.com URL and asks to post it natively.
 ---
 
 # Post Newsletter Natively
-
-> **Model:** Sonnet is fine for this skill. The steps are fairly programmatic — copy verbatim, apply mechanical link/image transformations, run scripted uploads — and don't require the nuanced judgment that `/suggest-links` (invoked in Step 4) needs, which should still be run on Opus or higher.
 
 Convert a Substack newsletter post into a native posthog.com markdown file under `contents/newsletter/`.
 
@@ -15,12 +13,19 @@ The user will provide a Substack URL: $ARGUMENTS
 
 Run these in parallel:
 
-1. **Fetch the newsletter content** using WebFetch with this prompt:
-   > "Extract the complete text of this newsletter. Include: title, subtitle, all body text verbatim, all links with their href URLs, all image alt text/descriptions, all section headers, and footnotes. Do not summarize — give full verbatim text."
+1. **Fetch the newsletter content from Substack's API**, not with WebFetch. WebFetch routes the page through a summarizing model that will usually refuse to reproduce a full article verbatim ("I can't reproduce the full text verbatim…") and hand back a summary instead — useless when the whole job is copying text exactly. Substack exposes the post as JSON with no auth:
+
+   ```bash
+   curl -sL "https://newsletter.posthog.com/api/v1/posts/{substack-slug}" -o /tmp/post.json
+   ```
+
+   The response includes `title`, `subtitle`, `post_date`, `cover_image`, and `body_html` — the article body as HTML. Write `body_html` to a file and convert it to markdown with a script (unwrap Substack's `<span>` soup, turn `<figure>` blocks into image markers carrying both the `src` and the `<figcaption>`, and convert `<a>` to `[text](href)`). This gives you exact text, exact links, and image positions in one pass, and it doubles as the ground truth for Step 5.
+
+   Keep the JSON and the converted markdown around — Step 3b and Step 5 both reuse them.
 
 2. **Read an existing newsletter** for frontmatter reference. Use a recent one, e.g. `contents/newsletter/building-ai-agents.md` or `contents/newsletter/vibe-designing.md`.
 
-3. **Check for an existing file** at the expected path. The filename should be a kebab-case slug of the article title under `contents/newsletter/`. Use Glob to check.
+3. **Check for an existing file** at the expected path. The filename is **the Substack post's own slug** (the last path segment of the URL), not a slug derived from the article title — the two often differ, e.g. `code-review-tips.md` holds "Stop being the code review bottleneck". Getting this wrong breaks the inbound `/newsletter/{slug}` links other posts already point at. Use Glob to confirm the file doesn't exist yet, and grep `contents/` for `/newsletter/{slug}` to see which posts already link to it.
 
 4. **Check for a suggested-links file** at the repo root — it follows the pattern `suggested-links-{slug}.md`. Read it if it exists.
 
@@ -58,7 +63,7 @@ seo:
 - Format section headers as `##` and subsections as `###`. **Do not modify header text** — copy it exactly as it appears in the source, including any numbering format (e.g. `1.`, `2.`, not `Rule 1:`, `Rule 2:`).
 - For quote blocks: Substack sometimes renders pull quotes or highlighted excerpts as italicized text in quotation marks (e.g. `*"Quote text here."*`). Convert these to markdown blockquotes: `> Quote text here.` — drop the surrounding quotation marks and italics.
 - Place `<NewsletterForm />` once mid-article (after the first major section) and once at the very end.
-- For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` so the user knows where to upload. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
+- For images: write a placeholder in the format `![PLACEHOLDER: description of image](PLACEHOLDER)` to mark the position. Step 3 replaces each one with a real Cloudinary URL, so none should survive into the finished file. **Detection tip:** a sentence that ends with a colon (`:`) followed by a blank line almost always precedes an inline image in the Substack source — treat those as image locations even if the scraper didn't return an `<img>` tag.
 - For image captions (italicized text directly below an image in Substack): use the `<Caption>` component instead of plain markdown italics, e.g. `<Caption>Caption text here</Caption>` — see `contents/newsletter/building-ai-agents.md` for examples. It renders centered by default, unlike bare `*italic*` text. If the caption contains a link, keep it as an inline `<a href="...">` tag inside the component (per "Preserve original links" below) rather than dropping it — this is easy to miss since the caption reads like a quote at first glance.
 - For code blocks: preserve the language and exact content.
 - For footnotes: use markdown footnote syntax — `[^1]` inline, and `[^1]: text` at the bottom.
@@ -92,27 +97,135 @@ Ask the user two things:
 
 ### 3b: Get images from Substack
 
-Fetch the Substack URL **once** for images — do not split this into a separate "descriptions" fetch and a separate "raw URLs" fetch. Two independent fetches can disagree on count or order (an image dropped from one but not the other), and zipping them back together by position silently shifts every image after the mismatch onto the wrong caption. This has happened before (PR #18012) and produced a missing image plus a run of wrong images for the rest of the post.
+Read the images out of the `body_html` you already fetched in Step 1 — you do not need another network fetch, and you should not use one. Deriving images from a second, independent fetch can disagree with the first on count or order (an image dropped from one but not the other), and zipping the two back together by position silently shifts every image after the mismatch onto the wrong caption. This has happened before (PR #18012) and produced a missing image plus a run of wrong images for the rest of the post. Taking the `src`, the preceding text, and the `<figcaption>` from a single parse of one `body_html` makes that class of bug impossible.
 
-Use one prompt that returns the URL and its anchor text together, per image:
-> "List every image in the article body, in order of appearance. For each one, give: (1) its exact `src` URL, (2) the sentence or heading immediately before it, quoted verbatim, and (3) a brief description of what it shows. Include only article body images, not avatar or profile images."
+For each `<figure>` in document order, pull: (1) the original image URL — prefer the `<a class="image-link" href="...">` wrapper, which points at the full-size `substack-post-media.s3.amazonaws.com` original, over the resized `substackcdn.com/image/fetch/...` `<img src>`; (2) the text immediately before it; (3) the `<figcaption>`, if any.
 
-Count the images returned against the number of `![PLACEHOLDER: ...]` entries already written in step 2. If the counts don't match, stop and tell the user which section appears to be missing an image instead of guessing.
+Count the images found against the number of `![PLACEHOLDER: ...]` entries already written in step 2. If the counts don't match, stop and tell the user which section appears to be missing an image instead of guessing.
+
+**Look at the images before you place them.** Download each one and Read it — the images are diagrams, and a caption-less diagram is easy to attach to the wrong section. Confirm what each one actually depicts matches the section it's going into. This is also the moment you'll catch text errors rendered into the image itself (a misspelled label, a stale product name); flag those to the user, since they can only be fixed by regenerating the asset.
 
 ### 3c: Authenticate and upload
 
-Ask the user for their **PostHog community credentials** (the account used to sign in at posthog.com/community — not their PostHog app login):
+Uploads go through the posthog.com Strapi backend, which needs a bearer token.
 
-> Please run: `! export SQUEAK_EMAIL=you@posthog.com SQUEAK_PASSWORD=yourpassword`
+**PostHog staff cannot use email/password — ask for a browser token instead.** Strapi refuses the password grant for any `@posthog.com` account, because staff accounts are SSO-only:
 
-Once credentials are set, authenticate and upload all images with a shell script:
+```
+400 BadRequestError: "PostHog employees must log in with PostHog"
+```
+
+There is no password to send, so don't ask for one. Instead, have the user write the session token to a file that you read directly.
+
+**Never ask the user to paste the token into the chat.** A pasted token is captured verbatim in the conversation transcript, and again in every tool call that uses it. Strapi JWTs are stateless, so this is not a small leak: signing out of posthog.com only clears the browser's `localStorage` and does **not** invalidate the token server-side. It stays usable for its full ~30-day life, and the only real revocation is rotating the Strapi instance's `jwtSecret` — which signs out every user of the site, so nobody will want to do it casually.
+
+**Give the user the block below verbatim.** Don't paraphrase or trim it — every line in it exists because a real person got stuck on that exact point. They are a writer setting up a publishing tool, not necessarily someone who reads shell scripts, so "obvious" details are not obvious.
+
+> **One-time setup — saving your posthog.com token**
+>
+> You only do this once per token, and each token lasts about 30 days.
+>
+> **1. Copy the token from your browser.** While logged in to posthog.com, open the browser console (Chrome/Edge: F12 → Console tab; Safari: enable the Develop menu first) and run:
+>
+> ```js
+> copy(localStorage.getItem('jwt'))
+> ```
+>
+> It prints `undefined` — that's normal, `copy()` returns nothing. Your token is now on the clipboard. (Running `localStorage.getItem('jwt')` on its own also works, but it *displays* the token wrapped in quotes, and those quotes are not part of it.)
+>
+> **2. Run this in your terminal.** Copy both lines together and press Enter:
+>
+> ```bash
+> mkdir -p ~/.posthog && chmod 700 ~/.posthog
+> read -rs TOKEN && printf %s "$TOKEN" > ~/.posthog/strapi-jwt && chmod 600 ~/.posthog/strapi-jwt && unset TOKEN
+> ```
+>
+> **3. Paste the token and press Enter.** The cursor will sit on a blank line showing nothing at all — no prompt, no text as you paste. That's deliberate, not a hang. Paste, press Enter, and you'll get your normal prompt back.
+>
+> Two details matter here, and both are easy to get wrong:
+>
+> - **Leave the word `TOKEN` in the command exactly as written.** It is the name of a variable, not a blank to fill in. Do not replace it with your token.
+> - **Paste the token on its own** — no quotes around it, no `Bearer` in front, nothing else on the line. It should start with `eyJ`.
+>
+> **4. Check it worked:**
+>
+> ```bash
+> grep -c "['\"]" ~/.posthog/strapi-jwt   # want 0
+> wc -c < ~/.posthog/strapi-jwt           # want ~140
+> ```
+>
+> `0` and a number near 140 means you're set — you can ignore all of this until the token expires. Anything else, see below.
+>
+> | What you see | What happened | Fix |
+> | --- | --- | --- |
+> | `grep` prints `1` or more | Quotes got pasted along with the token | Re-run steps 2–3, paste without quotes |
+> | `wc` prints `0` | The paste didn't register | Re-run steps 2–3 |
+> | `wc` prints well under 100 | Only part of the token was copied | Re-copy with `copy(...)`, re-run steps 2–3 |
+> | `No such file or directory` | Step 2 didn't finish, or you pressed Enter without pasting | Re-run both lines of step 2 |
+> | Terminal seems frozen at step 3 | It's waiting for you — this is normal | Paste, press Enter |
+
+Why it's built this way: `read -rs` takes the token as *input* rather than as a command argument, and `-s` stops it echoing. So it never appears on screen and never enters shell history. Keeping it in `~` rather than the repo means it can't be committed by accident.
+
+Both of the step-3 mistakes are **silent** — the file gets written either way, and nothing complains until an upload returns 401. That's why step 4 is not optional; walk the user through it rather than assuming.
+
+Note that the `exp`-decode check further down does **not** catch a quoted token: it splits on `.`, so stray leading and trailing quotes fall outside the payload segment and it reports a perfectly valid expiry for a token that will still 401. Use `grep` for that failure, not the decoder.
+
+That token is the same one every authenticated request from the site carries — `src/hooks/useUser.tsx` reads and writes it under the `jwt` key.
+
+**Rules for handling it once it's on disk:**
+
+- Read it inline at the point of use: `-H "Authorization: Bearer $(cat ~/.posthog/strapi-jwt)"`. The transcript then records the command, not the secret.
+- **Never `echo`, `cat`, or `print` the token itself**, and never paste its value into a later command — that would defeat the whole mechanism. This includes "just checking" that the file looks right.
+- To check whether it's expired, decode only the `exp` claim, never the token:
+  ```bash
+  python3 -c "
+  import base64, json, datetime, pathlib
+  c = (pathlib.Path.home() / '.posthog/strapi-jwt').read_text().strip().split('.')[1]
+  d = json.loads(base64.urlsafe_b64decode(c + '=' * (-len(c) % 4)))
+  print('expires', datetime.datetime.fromtimestamp(d['exp'], datetime.UTC))"
+  ```
+  Decode it in Python, not with `cut … | base64 -d`. JWT payloads are base64**url** with the padding stripped, and `base64 -d` both rejects the `-`/`_` characters and chokes on the missing padding — worse, it prints partial output before failing, so a `2>/dev/null` version looks like it works right up until it silently reports the wrong thing.
+- If `~/.posthog/strapi-jwt` doesn't exist, hand the user the setup block above. Don't fall back to asking them to paste it into the chat.
+- When a token expires, they re-run **only step 2 and 3** of that block — the directory already exists and the file is overwritten in place. Say that, rather than sending them through the whole thing again.
+
+If the user pastes a token into the chat anyway, use it to finish the job, but tell them plainly afterwards that it is now in the transcript, when it expires, and that logging out will not revoke it.
+
+**Only for non-staff accounts** (an external contributor signing in at posthog.com/community with a password) does the credential grant work. Use the same on-disk pattern rather than taking a password through the chat — again, hand this over verbatim:
+
+> **One-time setup — saving your posthog.com login**
+>
+> Run the first two lines together, replacing `you@example.com` with your own address:
+>
+> ```bash
+> mkdir -p ~/.posthog && chmod 700 ~/.posthog
+> printf 'you@example.com\n' > ~/.posthog/squeak-email
+> ```
+>
+> Then run this line on its own. As before, it waits silently — type or paste your password and press Enter. Leave `PW` exactly as written; it's a variable name, not a blank to fill in:
+>
+> ```bash
+> read -rs PW && printf %s "$PW" > ~/.posthog/squeak-password && chmod 600 ~/.posthog/squeak-password && unset PW
+> ```
+>
+> Check both files exist and neither is empty:
+>
+> ```bash
+> wc -c ~/.posthog/squeak-email ~/.posthog/squeak-password
+> ```
+
+Do not suggest `! export SQUEAK_EMAIL=…` — `!`-prefixed commands run in the **user's** shell, not yours, so the exported variables are invisible to your Bash tool and `${SQUEAK_EMAIL}` expands to an empty string.
+
+Then upload all images with a shell script:
 
 ```bash
-# Authenticate
-JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
-  -H "Content-Type: application/json" \
-  -d "{\"identifier\":\"${SQUEAK_EMAIL}\",\"password\":\"${SQUEAK_PASSWORD}\"}" \
-  | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
+# Staff: read the JWT from disk. Never inline the token itself here.
+JWT=$(cat ~/.posthog/strapi-jwt)
+
+# Non-staff only: exchange credentials for a JWT.
+# JWT=$(curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/auth/local" \
+#   -H "Content-Type: application/json" \
+#   -d "{\"identifier\":\"$(cat ~/.posthog/squeak-email)\",\"password\":\"$(cat ~/.posthog/squeak-password)\"}" \
+#   | python3 -c "import sys,json; print(json.load(sys.stdin)['jwt'])")
 
 # Upload hero (if local file provided)
 # curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
@@ -128,21 +241,42 @@ upload() {
   curl -s -X POST "https://better-animal-d658c56969.strapiapp.com/api/upload" \
     -H "Authorization: Bearer $JWT" \
     -F "files=@${tmpfile};filename=${name}.png" \
-    | python3 -c "import sys,json; d=json.load(sys.stdin); print(d[0]['url'])"
+    | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+# A failed upload returns an error object, not a list — surface it instead of
+# crashing on d[0], which hides the real cause (usually an expired token).
+print(d[0]['url'] if isinstance(d, list) else 'ERROR ' + json.dumps(d)[:400])
+"
   rm -f "$tmpfile"
 }
 ```
+
+If an upload returns `401 Unauthorized`, the token has expired — ask the user to rewrite `~/.posthog/strapi-jwt` with a fresh one (same snippet as in 3c) rather than retrying, and don't let them shortcut it by pasting the new token into the chat.
 
 Name each image descriptively: `{slug}-tip{N}-{description}` (e.g. `how-to-demo-tip4-phone-number`).
 
 The upload response returns a Cloudinary URL in the format:
 `https://res.cloudinary.com/dmukukwp6/image/upload/v1783662227/filename.png`
 
-**Strip the `/v<number>` version segment from the `featuredImage` URL before writing it to frontmatter.** The build derives a Cloudinary public ID from this URL by taking everything after `/upload/` (`gatsby/onCreateNode.ts` → `getPublicID`). If the version segment is left in (`.../upload/v1783662227/filename.png`), the derived public ID becomes `v1783662227/filename` instead of `filename`, which misses the Cloudinary metadata cache — so `gatsbyImageData` resolves to `null` and the hero image silently fails to render (while the direct image URL itself still returns 200). Always write the featured image as `https://res.cloudinary.com/dmukukwp6/image/upload/filename.png` — no `v.../` segment. (This only matters for `featuredImage`, which goes through the image transformer; body images are plain `<img>` tags and render fine with or without the version.)
+**Nothing may sit between `/upload/` and the filename in the `featuredImage` URL.** The build derives a Cloudinary public ID by taking *everything* after `/upload/` (`gatsby/onCreateNode.ts` → `getPublicID`), so any prefix gets baked into the ID, misses the Cloudinary metadata cache, and makes `gatsbyImageData` resolve to `null`. The hero then fails **silently** — `ReaderView` renders an empty `<GatsbyImage>` because `featuredImage` is still truthy, and there's no `publicURL` fallback. The direct image URL still returns 200, so you cannot catch this by checking the link.
+
+Two prefixes cause it, and the upload response hands you the first one:
+
+- **Version segment.** Uploads return `.../upload/v1783662227/filename.png` → ID becomes `v1783662227/filename`. Strip `v<digits>/`.
+- **Transformation params.** A URL copied from elsewhere on the site may carry them: `.../upload/q_auto,f_auto/filename.jpg` → ID becomes `q_auto,f_auto/filename`. Strip those too.
+
+A **missing file extension** breaks it differently but just as silently: `getPublicID` does `substring(0, lastIndexOf('.'))`, and with no dot that yields an empty string.
+
+Write it as `https://res.cloudinary.com/dmukukwp6/image/upload/<public-id>.<ext>`. Folder paths *inside* the public ID are fine and common (`.../upload/posthog.com/contents/images/foo/bar.png` works) — it's only a leading version or transform segment that breaks.
+
+This applies to `featuredImage` (and the other transformed frontmatter fields: `thumbnail`, `logo`, `logoDark`, `icon`). Body images are plain `<img>` tags and render fine either way.
+
+One false alarm to know about: PR previews restore a Cloudinary metadata cache that is only refreshed daily at 06:00 UTC (`.github/workflows/cache-warmup.yml`). An image uploaded after the last refresh is absent from that cache, so its hero can look blank **in the preview** even with a correct URL. Production builds crawl Cloudinary fresh and are unaffected. If the URL has no prefix and the hero is still blank in preview, suspect this before rewriting the URL.
 
 ### 3d: Update the markdown
 
-Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Remember to strip the `/v<number>` version segment from the `featuredImage` URL (see 3c). Match each uploaded image to its placeholder using the quoted anchor text from step 3b — find that exact sentence or heading in the file and insert the image there — never by list position or order. Before moving on, re-read the finished file and confirm each image's description actually matches the paragraph it now sits next to.
+Replace all `[PLACEHOLDER_...]` and `![PLACEHOLDER: ...](PLACEHOLDER)` entries with the real Cloudinary URLs and descriptive alt text. Remember that the `featuredImage` URL must have nothing between `/upload/` and the filename (see 3c). Match each uploaded image to its placeholder using the quoted anchor text from step 3b — find that exact sentence or heading in the file and insert the image there — never by list position or order. Before moving on, re-read the finished file and confirm each image's description actually matches the paragraph it now sits next to.
 
 **Indentation rule:** Example paragraphs and images that follow a numbered tip and illustrate it should be indented as list continuations (3 spaces for tips 1–9, 4 spaces for tips 10+). Checklists inside a tip should be wrapped in a blockquote (`>`).
 
@@ -153,9 +287,11 @@ Prioritize backlinks as forward links should already be set. But, if the article
 After writing the file, invoke the `/suggest-links` skill passing the path to the new newsletter file as the argument. The skill will:
 
 - Suggest forward links (PostHog product/feature mentions to link in the new post)
-- Find backlink candidates in existing content and suggest exact inline edits with section anchors
+- Find backlink candidates in existing content and suggest exact inline edits
 
-Apply all **High priority** forward link suggestions. Apply backlink suggestions to all 3 candidate files.
+Apply all **High priority** forward link suggestions. For backlinks, apply the ones that genuinely fit — **there is no target number to hit.** A backlink that has to be argued for is one the author will delete, so treat any count in that skill's output as a target rather than a quota.
+
+The failure mode to avoid: padding the list to reach a number, and wrapping the link around the rhetorical payload of a sentence ("you will always be the bottleneck") rather than the concrete thing it names ("building a pipeline"). Both put the cost on the author to undo. Two backlinks that read naturally are a better result than five that need editing.
 
 ## Step 5: Verify against the source
 
@@ -163,8 +299,9 @@ Before reporting to the user, spawn a subagent (via the Agent tool, `subagent_ty
 
 **Ground truth, in order of preference:**
 
-1. If the user provided a saved HTML export of the Substack page (rather than just the URL), use that as ground truth. It's large and mostly boilerplate — instruct the subagent to locate the article body (typically inside a `<div class="body markup">`-style container) and strip tags with a quick script rather than reading the whole file.
-2. Otherwise, have the subagent WebFetch the newsletter URL fresh. Note: WebFetch may refuse to reproduce full verbatim text for a copyrighted article and return only a summary with short quotes — if so, the subagent should say so explicitly and verify what it can (structure, links, image count and placement, footnote count) rather than silently downgrading to a shallow check.
+1. **The `body_html` you saved in Step 1.** This is the preferred ground truth: it comes from Substack's own API, so it's the authoritative source text rather than a model's rendering of the page. Point the subagent at the saved file and tell it to strip tags with a script rather than eyeballing raw HTML. Pass along the API JSON too, so it can check `title` and `post_date` against the frontmatter.
+2. A saved HTML export of the Substack page, if the user provided one. Large and mostly boilerplate — instruct the subagent to locate the article body (typically inside a `<div class="body markup">`-style container) and strip tags with a quick script rather than reading the whole file.
+3. Last resort: have the subagent WebFetch the newsletter URL fresh. Expect this to be weak — WebFetch will usually refuse to reproduce full verbatim text and return only a summary with short quotes. If that happens the subagent should say so explicitly and verify what it can (structure, links, image count and placement, footnote count) rather than silently downgrading to a shallow check.
 
 **Tell the subagent what's allowed to differ** so it doesn't flag intentional transformations as bugs:
 
@@ -181,6 +318,7 @@ Ask the subagent to go section by section and return a clear verdict (match / di
 
 After all edits, report:
 
-1. **Image placeholders** — list each one so the user knows what to upload.
+1. **Images** — confirm every image resolves, and name any still left as a placeholder (e.g. a hero the user never supplied) so it's clear what's outstanding. Flag any text error rendered into an image, since that needs the asset regenerated.
 2. **Sections omitted** — confirm what Substack-only content was removed.
 3. **Author slug** — flag if the author slug may not exist yet in the codebase (check with Grep for the slug in `contents/`).
+4. **Deliberate divergences from the source** — call out anything that intentionally doesn't match Substack (a typo fixed at the author's request, a regenerated image). A reviewer comparing the two versions will otherwise read these as conversion errors.

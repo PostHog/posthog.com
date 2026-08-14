@@ -7,20 +7,11 @@ import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Label from 'components/Label'
 import { BillingProductV2Type, BillingV2FeatureType } from 'types'
-import { product_type_to_max_events } from '../pricingLogic'
 import { Discount } from 'components/NotProductIcons'
 import Link from 'components/Link'
 import { IconInfo } from '@posthog/icons'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
-import pluralizeWord from 'pluralize'
-
-// Don't pluralize all-uppercase units like GB, MB, TB
-const pluralizeUnit = (unit: string, count: number): string => {
-    if (unit === unit.toUpperCase()) {
-        return unit
-    }
-    return pluralizeWord(unit, count)
-}
+import { pluralizeUnit } from '../utils'
 
 const Heading = ({ title, subtitle, className = '' }: { title?: string; subtitle?: string; className?: string }) => {
     return (
@@ -72,33 +63,17 @@ export const InclusionOnlyRow = ({ plans }) => (
     </Row>
 )
 
-const ENTERPRISE_PRICING_TABLE = 'enterprise-pricing-table'
-
 export const PricingTiers = ({ plans, unit, compact = false, type, test = false, showSubtotal = false }) => {
-    const posthog = usePostHog()
-    const [enterprise_flag_enabled, set_enterprise_flag_enabled] = useState(false)
-
     // Safety check: ensure plans exists and has content
     if (!plans || plans.length === 0) {
         console.warn('PricingTiers: No plans provided or plans is empty')
         return null
     }
 
-    const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
+    const freeAllocation = plans[0]?.free_allocation
+    const hasFreeAllocation = freeAllocation !== null && freeAllocation !== undefined
 
-    useEffect(() => {
-        posthog?.onFeatureFlags(() => {
-            if (posthog.getFeatureFlag(ENTERPRISE_PRICING_TABLE) === 'test') {
-                set_enterprise_flag_enabled(true)
-                // Filter out tiers above the max number of units we want to display
-                set_tiers(
-                    plans[plans.length - 1]?.tiers?.filter(({ up_to }) => up_to <= product_type_to_max_events[type])
-                )
-            } else {
-                set_enterprise_flag_enabled(false)
-            }
-        })
-    }, [posthog])
+    const [tiers, set_tiers] = useState(plans[plans.length - 1]?.tiers)
 
     useEffect(() => {
         set_tiers(plans[plans.length - 1]?.tiers)
@@ -128,7 +103,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                 index === 0 && up_to
                                     ? `First ${formatCompactNumber(up_to)} ${pluralizeUnit(unit, up_to)}`
                                     : index === 0 && !up_to
-                                    ? `Unlimited ${pluralizeUnit(unit, 2)}`
+                                    ? `${hasFreeAllocation ? 'Unlimited' : 'All'} ${pluralizeUnit(unit, 2)}`
                                     : !up_to
                                     ? `${formatCompactNumber(plans[plans.length - 1].tiers[index - 1]?.up_to)}+`
                                     : `${
@@ -148,7 +123,7 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                             <Title
                                 className={`${compact ? 'text-sm' : ''}`}
                                 title={
-                                    plans[0].free_allocation === up_to ? (
+                                    hasFreeAllocation && freeAllocation === up_to ? (
                                         <strong>Free</strong>
                                     ) : type === 'product_analytics' && index === tiers.length - 1 ? (
                                         // last row
@@ -201,15 +176,6 @@ export const PricingTiers = ({ plans, unit, compact = false, type, test = false,
                                     )
                                 }
                             />
-                            {!up_to && enterprise_flag_enabled && (
-                                <Link to="/talk-to-a-human">
-                                    <Label
-                                        className="ml-2 !font-bold"
-                                        text="Volume discounts available"
-                                        style="orangeNoBg"
-                                    />
-                                </Link>
-                            )}
                         </div>
                         {showSubtotal && (
                             <>

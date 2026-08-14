@@ -6,10 +6,10 @@
 
 - `useEarlyAccessFeatures` owns the feature data. It starts with Gatsby's build-time `EarlyAccessFeature` nodes, then revalidates with PostHog JS in the browser.
 - The hook supplies the feature stage, title, description, documentation URL, flag key, creation date, waitlist count, and waitlist survey payload.
-- `useFeatureOwnership` supplies the shared feature-to-small-team map. `roadmapTeamOverrides.ts` is the curated flag-key override and takes precedence over that map.
+- `useRoadmapEarlyAccessFeatures` resolves each feature's small team from the feature's assignee in PostHog (served by the public EAF endpoint as a display name): a `role` assignee matches a team by name or slug, and a `user` assignee matches a team member profile by full name and takes that person's team. It can filter the canonical roadmap to one team for embedded views such as `/ai`.
 - `allSqueakTeam` supplies display names, mini crests, and member profiles. Features without a match remain visible and can be filtered as `Unassigned`.
 
-Do not duplicate this data in the component or add hard-coded feature cards. Update the source early-access feature, shared ownership data, or the roadmap override map instead.
+Do not duplicate this data in the component, add hard-coded feature cards, or reintroduce a hard-coded feature-to-team map. To change a feature's team, change its assignee on the early access feature in the PostHog app.
 
 ## Board and cards
 
@@ -54,7 +54,7 @@ Cards and idea prompts share one right-side drawer contained by the Editor surfa
 
 The drawer animates only when it opens from a closed state or closes. Switching directly between features or between a feature and the pitch form replaces the drawer content without replaying the animation. Framer Motion uses a non-overshooting right-edge tween and respects reduced-motion preferences. The drawer creates an isolated, opaque paint layer so accelerated team imagery cannot bleed through it while it moves.
 
-The drawer is non-modal. Clicking another feature or idea card replaces its content without closing the shell or replaying the animation. Clicking elsewhere inside the roadmap's Editor surface closes it; clicks within the drawer itself do not. Escape remains disabled, and the standard `OSButton` window close control always dismisses it. This behavior uses one Editor-scoped click listener plus `data-roadmap-item` and `data-roadmap-drawer` markers—do not add a scrim or restore modal outside-click handling.
+The drawer is non-modal. Clicking another feature or idea card replaces its content without closing the shell or replaying the animation. Clicking elsewhere inside the roadmap's Editor surface closes it; clicks within the drawer itself do not. Escape remains disabled, and the standard `OSButton` window close control always dismisses it. This behavior uses one Editor-scoped click listener plus `data-roadmap-item` and `data-roadmap-drawer` markers – do not add a scrim or restore modal outside-click handling.
 
 The drawer contains the full description, documentation link, linked small team, complete avatar roster with tooltips, and the stage-specific action.
 

@@ -6,7 +6,7 @@ showTitle: true
 
 You volunteered or have been asked  to speak at a dev meetup, give a demo at a conference, or present PostHog to a virtual or in-person audience. Maybe you said yes before you thought too hard about it. That's fine — good talks happen this way. This guide is for preparing and delivering your talk.
 
->**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
+>**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
 
 ## **1. Know your room before you write a word**
 
@@ -86,7 +86,7 @@ A few principles for building out slides:
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
 * Speaking of speaker notes, you will save yourself time and head space if you always have notes.
 
-For feedback on design or help with navigating the [PostHog brand assets](https://posthog.com/handbook/company/brand-assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
+For feedback on design or help with navigating the [PostHog brand assets](/handbook/brand/assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
 
 ## **6. Practice out loud. Twice minimum.**
 
@@ -116,7 +116,7 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 * **Express an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
 * **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event.
-* **Tell the marketing team** — a 2-line Slack in [#team-irl-events](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
+* **Tell the marketing team** — a 2-line Slack in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
 * **Share your slides** — Share them on social, QR code, email, path of least resistance. Don't make people hunt.
 
 ---
@@ -130,4 +130,4 @@ If you receive a question that you believe is off-topic or unfitting for the set
 * Feb 2026 - <TeamMember name="Michael Matloka"/> - [10 learning from launching an agentic AI product at scale](https://www.figma.com/slides/zMNBsNihNxKyS6z7sSwiRK/10-learnings-from-launching-an-agentic-AI-product-at-scale?t=6hlWStUDlHsITOKo-6)  
 * Nov 2025 - <TeamMember name="James Hawkins"/> - [How to build a cult](https://drive.google.com/file/d/1BMgl2y817m5t43D6NCr9hstnGO1kKxJy/view)  
 * Oct 2025 - <TeamMember name="Joshua Snyder"/> - [Code that fixes itself](https://docs.google.com/presentation/d/1sYsmTPugdttQqshPa6yIKQcUu5Rje3-fPMbRGtyrfZg/edit?slide=id.p#slide=id.p)  
-* Oct 2024 - <TeamMember name="Michael Matloka"/> - [Parsing at the speed of light](http://figma.com/slides/y0rMgEaWbYe0nSpEhWkyY6/Parsing-at-the-speed-of-metal?node-id=1-536&t=uiCktez3IWxAKI8D-0) 
+* Oct 2024 - <TeamMember name="Michael Matloka"/> - [Parsing at the speed of light](http://figma.com/slides/y0rMgEaWbYe0nSpEhWkyY6/Parsing-at-the-speed-of-metal?node-id=1-536&t=uiCktez3IWxAKI8D-0)

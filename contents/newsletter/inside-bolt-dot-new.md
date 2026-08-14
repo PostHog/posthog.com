@@ -4,7 +4,7 @@ date: 2025-09-16
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bolt_c70d0ec00f.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/bolt_c70d0ec00f.jpg
 featuredImageType: full
 tags:
   - Product

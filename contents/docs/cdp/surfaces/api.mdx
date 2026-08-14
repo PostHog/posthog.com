@@ -1,0 +1,39 @@
+---
+title: Data pipelines API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API when you want pipelines to live in your own configuration rather than being clicked together in the UI – provisioning the same destinations across projects, keeping function definitions in version control, or wiring pipeline changes into your deploy process.
+
+## Before you start
+
+1. **Set up a pipeline** – [create a source, destination, or transformation](/docs/cdp/start-here) so there's something to manage.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What's available
+
+**Hog functions**
+
+Every source, transformation, destination, and web script is a Hog function, so a single set of endpoints covers all of them. You can list and filter functions by type, create one from a template or from raw Hog code, update its inputs and filters, reorder transformation execution, and delete it. See the [Hog functions API reference](/docs/api/hog-functions).
+
+**Batch exports**
+
+Batch exports have their own endpoints for listing, creating, updating, and deleting scheduled exports, plus inspecting individual runs. See the [batch exports API reference](/docs/api/batch-exports).
+
+## Authentication
+
+Use a [personal API key](/docs/api#authentication) with the appropriate scopes, passed as a bearer token:
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/hog_functions/
+```
+
+Reading requires `hog_function:read` and writing requires `hog_function:write`. Grant only what the integration needs – a key that can write functions can also change where your event data is sent.
+
+## Related
+
+- Build and monitor pipelines in the [web app](/docs/cdp/surfaces/web-app).
+- Do the same work conversationally over [MCP](/docs/cdp/surfaces/mcp).
+- See the full [PostHog API reference](/docs/api).

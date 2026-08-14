@@ -25,7 +25,7 @@ LinkedIn is the OG slop center, but it’s a popular channel with our ICP, impor
 
 - Be useful. Write the posts you want to read.
 
-- To drive clicks to links, either either say “link in comments” and add it to the post ~6 hours later or include an image in your post. The algorithm hates direct posts to links.
+- To drive clicks to links, either say “link in comments” and add it to the post ~6 hours later or include an image in your post. The algorithm hates direct posts to links.
 
 - A great graphic goes a lot way. “Zero-click” content like ByteByteGo gets thousands of likes with basically just a graphic. Information does better than memes.
 

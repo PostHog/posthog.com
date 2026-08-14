@@ -238,8 +238,8 @@ Around here we stopped calling ourselves an analytics company. We're (almost) ev
 
 We raised again – a $75m Series E led by Peak XV at a ~$1.4bn valuation. That technically makes us a unicorn. Total raised since 2020 is ~$194m, and we're ~140 people now. We also offered employees secondary, which we [wrote about](/blog/how-secondaries-actually-work).
 
-### Early 2026: PostHog Code
+### Early 2026: PostHog Desktop
 
-~200 people and a product list too long to keep reciting! [PostHog Code](/desktop) was probably our biggest launch yet.
+~200 people and a product list too long to keep reciting! [PostHog Desktop](/desktop) was probably our biggest launch yet.
 
 Our vision is now to make your product [self-driving](/self-driving). 

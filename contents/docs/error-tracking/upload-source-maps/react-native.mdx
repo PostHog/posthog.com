@@ -105,12 +105,21 @@ Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
 }
 ```
 
+If your project has a checked-in `ios/` directory, run or rerun the iOS prebuild after adding or upgrading the plugin:
+
+```bash
+npx expo prebuild --platform ios
+```
+
+This reapplies the config plugin to the existing **Bundle React Native code and images** build phase. When upgrading from `posthog-react-native` 4.61.0 or earlier to a newer version, the plugin automatically migrates the previously generated PostHog command. You do not need to edit `project.pbxproj` manually.
+
 The plugin accepts the following options:
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `disableSandboxing` | `boolean` | `true` | iOS only. When `true`, sets `ENABLE_USER_SCRIPT_SANDBOXING=NO` on your main app target's Xcode build configurations during `expo prebuild`. This lets the source map upload script read `.git/` (for release metadata) and lets stock Expo projects build without manually declaring input/output files on every script phase. |
 | `skipOnConflict` | `boolean` | `false` | Adds `--skip-on-conflict` to JavaScript source map uploads on iOS and Android. Use this when the same build can upload the same source maps more than once and you want duplicate uploads to be skipped instead of failing. Requires `posthog-react-native` 4.49.1 or later. When `uploadNativeSymbols` is enabled, it also applies to native iOS dSYM uploads: a build whose dSYM already exists in PostHog with different content skips the upload and keeps the existing symbols instead of failing. The dSYM behavior requires `posthog-react-native` 4.56.1 or later, `posthog-ios` 3.64.7 or later, and `posthog-cli` 0.7.12 or later. |
+| `dotenvFile` | `string` | – | Path to a dotenv file containing your `POSTHOG_CLI_*` credentials (API key, project ID, optional host), relative to the project root or absolute. During `expo prebuild` the path is wired into every upload hook as `POSTHOG_CLI_DOTENV_FILE` — an Xcode build setting on iOS and a `posthog.dotenvFile` entry in `android/gradle.properties` on Android — so the JavaScript source map, dSYM, and ProGuard/R8 mapping uploads all read credentials from the file regardless of how the native build is started. Real environment variables take precedence and a missing file only logs a warning, so the same config works unchanged in CI. Requires `posthog-react-native` 4.60.0 or later and `posthog-cli` 0.8.4 or later (older CLIs ignore the variable). |
 
 Example opting out of the sandbox change:
 
@@ -148,6 +157,25 @@ Example skipping duplicate JavaScript source map uploads:
 }
 ```
 
+Example reading CLI credentials from a gitignored `.env` file at build time:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      ["posthog-react-native/expo", { "dotenvFile": ".env" }]
+    ]
+  }
+}
+```
+
+```bash file=.env
+POSTHOG_CLI_API_KEY=phx_your_personal_api_key
+POSTHOG_CLI_PROJECT_ID=12345
+# EU Cloud only
+POSTHOG_CLI_HOST=https://eu.posthog.com
+```
+
 2. Android: Update the `/android/app/build.gradle` file from your app's root directory so that it looks like this:
 
 ```diff
@@ -165,7 +193,9 @@ android {
 
 3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
 
-To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, and select Bundle React Native code and images. Use the command that matches your installed `posthog-react-native` version.
+
+#### `posthog-react-native` 4.61.0 and earlier
 
 ```diff
 
@@ -173,6 +203,16 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 
 -`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 +/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
+```
+
+#### `posthog-react-native` newer than 4.61.0
+
+```diff
+
+...
+
+-`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
++`"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 ```
 
 If you are not using the Expo plugin (step 1), you will need to also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox.
@@ -207,6 +247,8 @@ Symbolicated native crashes need all three of these working together:
 ### Prerequisites
 
 Both platforms upload through `posthog-cli`, which must be installed and authenticated – the same setup covered in the **Download CLI** and **Authenticate** steps above. In CI/CD builds (such as EAS Build), set the `POSTHOG_CLI_API_KEY` and `POSTHOG_CLI_PROJECT_ID` environment variables (and `POSTHOG_CLI_HOST` for EU). See [authenticating the CLI](/docs/error-tracking/upload-source-maps/cli) for the full list.
+
+For local builds, the easiest way to supply these credentials is the `dotenvFile` plugin option described in the **Upload** step — it covers the native symbol uploads on both platforms too. On bare React Native, you get the same behavior by adding `posthog.dotenvFile=../.env` to `android/gradle.properties` (relative paths resolve against the `android/` directory; the mapping upload needs `posthog-android-gradle-plugin` 1.4.0 or later) and, on iOS, defining a `POSTHOG_CLI_DOTENV_FILE` build setting (for example `$(SRCROOT)/../.env`) on your app target.
 
 <Tab.Group tabs={['Expo', 'Bare React Native']}>
 <Tab.List>
@@ -294,7 +336,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.posthog:posthog-android-gradle-plugin:1.2.0")
+        classpath("com.posthog:posthog-android-gradle-plugin:1.4.0")
     }
 }
 ```

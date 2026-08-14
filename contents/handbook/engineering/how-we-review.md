@@ -10,7 +10,7 @@ Almost all PRs made to PostHog repositories need a review before merging. We do 
 
 ## Review requirements
 
-PRs can be written by humans or by agents (like PostHog Code). See [Creating PRs](/handbook/engineering/development-process#creating-prs) for how we distinguish AI-assisted human-authored PRs from fully automatically generated agent-authored PRs. Either way, the normal rule is that every PR needs a review before merging, and a human always merges. If you need an urgent review, ask in the `#dev-stamp-exchange` Slack channel. For true emergencies where no one else is available, an admin can bypass review requirements.
+PRs can be written by humans or by agents (like PostHog Desktop). See [Creating PRs](/handbook/engineering/development-process#creating-prs) for how we distinguish AI-assisted human-authored PRs from fully automatically generated agent-authored PRs. Either way, the normal rule is that every PR needs a review before merging, and a human always merges. If you need an urgent review, ask in the `#dev-stamp-exchange` Slack channel. For true emergencies where no one else is available, an admin can bypass review requirements.
 
 Who should review depends on who wrote the code:
 
