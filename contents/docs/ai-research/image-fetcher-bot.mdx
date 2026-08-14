@@ -49,10 +49,23 @@ The bot checks `robots.txt` before every fetch, so this takes effect on its next
 
 To slow it down instead of blocking it, set `Crawl-delay` in the same group. The bot uses whichever is longer, your value or its own interval.
 
+The bot also stops if any one of these refuses it:
+
+- `X-Robots-Tag: noai` or `noimageai` in the image response
+- `Content-Signal: ai-train=no` in `robots.txt`
+- `Content-Usage: train-ai=n` in the image response or in `robots.txt`
+- `tdm-reservation: 1` in the image response, or a rule covering the image in `/.well-known/tdmrep.json`
+
+One is enough. You don't need to set more than one.
+
 You can also block the user agent at your CDN or web server. If you do, the bot treats the block as final and stops requesting from your site.
+
+An opt-out applies to what the bot does next. It doesn't remove images the bot already downloaded, and an image that has already been used to train a model can't be taken back out of that model.
 
 Blocking the bot doesn't affect session recording. Your PostHog customers keep recording sessions as before, and their recordings still show images to anyone watching a replay. The only difference is that PostHog can't use those images for AI training.
 
 ## Questions
 
-If the bot is causing load on your site, or something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.
+To stop the bot, or to slow it down, use one of the methods above. The bot reads them itself on its next visit, so they work without waiting on us, and they keep working.
+
+If something here doesn't match what you're seeing in your logs, [contact us](/talk-to-a-human). Include the user agent and a timestamp so we can find the requests.
