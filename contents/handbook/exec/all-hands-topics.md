@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Someone from the Blitzscale team presents a topic of the day each week in the company all hands - it isn't always the same person. The main objective of this is to repeat and reinforce key messages:
+Someone from <SmallTeam slug="blitzscale" /> presents a topic of the day each week in the company all hands - it isn't always the same person. The main objective of this is to repeat and reinforce key messages:
 
 -   Make sure everyone knows what our mission is, and how their work contributes
 -   Make sure everyone knows what our strategy is, and how their work contributes
