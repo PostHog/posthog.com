@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/developer-marketing-questions/vibes-based-marketing.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vibes_based_marketing_aff77241ee.png
 featuredImageType: full
 category: Inside PostHog
 tags:
@@ -45,7 +45,7 @@ Non-marketers expect channel advice to be tiered somehow: start with small stuff
 
 "What you can do authentically" is harder to define, but is something you should know intuitively. If a channel or your usage of it doesn't _feel_ like an authentic extension of your brand or your internal culture, listen to that. At PostHog we don't avoid webinars and gated whitepapers because those channels are ineffective — it's just that we think they're kind of lame and don't feel very PostHoggy.
 
-![Two PostHog billboards](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/developer-marketing-questions/posthog-billboards.png)
+![Two PostHog billboards](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_billboards_e88ae00afe.png)
 <Caption>Credit for billboards belongs with <a href="/community/profiles/27881">Lottie</a></Caption>
 
 ## "OK, but what about those billboards?"
@@ -145,7 +145,7 @@ This isn't to say we are _data-blind_, however. Marketing is responsible for new
 
 Data, like AI, is a tool. We use it when it makes sense to, but we don't use it as the solution to every problem.
 
-![A water bottle with a sticker reading "There are so many things more important than profit"](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/developer-marketing-questions/profit-yuck.png)
+![A water bottle with a sticker reading "There are so many things more important than profit"](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/profit_yuck_1945a5ea42.png)
 <Caption>My water bottle is a constant inspiration</Caption>
 
 ## "How can we make more money?"
