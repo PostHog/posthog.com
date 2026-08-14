@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AgentSkillsList from 'components/AgentSkillsList'
+import AgentSkillsList, { AgentSkillsInstallPrompt } from 'components/AgentSkillsList'
 
 PostHog ships agent skills for AI Observability: folders of instructions in the open `SKILL.md` format that teach your coding agent how to investigate LLM traces, costs, clusters, evaluations, and failures through the [PostHog MCP server](/docs/model-context-protocol). They're the same skills PostHog's own background agents run.
 
@@ -30,6 +30,10 @@ unzip skills.zip 'exploring-llm-traces/*' -d .claude/skills/
 ```
 
 Any skill name from the list below works the same way; use `~/.claude/skills/` instead to install for every project. Install from the release rather than copying repo folders – the zip ships each skill fully rendered, while some [repo sources](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) contain unrendered templates.
+
+Or skip the shell work entirely – paste this prompt into your agent and it does the setup:
+
+<AgentSkillsInstallPrompt product="ai_observability" exclude={["feature-usage-feed"]} />
 
 Then just ask. Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
 

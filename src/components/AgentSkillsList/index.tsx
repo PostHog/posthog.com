@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import { useAgentSkills } from '../../hooks/skills'
 
 type AgentSkillsListProps = {
@@ -10,6 +11,39 @@ type AgentSkillsListProps = {
 }
 
 const MONOREPO_BASE = 'https://github.com/PostHog/posthog/tree/master'
+
+/**
+ * A copyable paste-into-your-agent prompt for installing the listed skills from the
+ * skills release zip. Skill names are interpolated from the same build-time data as
+ * AgentSkillsList, so the prompt never drifts from the list rendered beside it.
+ */
+export function AgentSkillsInstallPrompt({ product, exclude = [] }: AgentSkillsListProps): JSX.Element {
+    const names = useAgentSkills()
+        .filter((skill) => skill.product === product && !exclude.includes(skill.name))
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((skill) => skill.name)
+
+    // Local builds without the monorepo clone have no names – point the agent at the live list instead
+    const extractLine =
+        names.length > 0
+            ? `Extract only these skills: ${names.join(', ')}.`
+            : `Extract only the AI Observability skills listed at https://posthog.com/docs/ai-observability/skills.`
+
+    const prompt = `Set up PostHog's AI Observability agent skills for me:
+
+1. Download https://github.com/PostHog/posthog/releases/download/agent-skills-latest/skills.zip - a bundle of 100+ PostHog skills, one top-level directory per skill.
+2. ${extractLine}
+3. Move each extracted directory into your skills directory (Claude Code: .claude/skills/ in this project, or ~/.claude/skills/ for all projects - ask me which; other agents: your equivalent).
+4. Delete the zip, verify every installed skill contains a SKILL.md, and list what you installed.
+
+These skills call PostHog MCP tools. If the PostHog MCP server isn't connected yet, tell me and point me to https://posthog.com/docs/model-context-protocol.`
+
+    return (
+        <SingleCodeBlock language="text" showCopy={true} showLineNumbers={false} label="Prompt">
+            {prompt}
+        </SingleCodeBlock>
+    )
+}
 
 // Descriptions come verbatim from SKILL.md frontmatter and may contain `backticked` terms
 function renderInlineCode(text: string): React.ReactNode {

@@ -10,15 +10,23 @@ via the `posthog-main-repo` `gatsby-source-git` source – see `gatsby/onCreateN
 `useAgentSkills()` in `src/hooks/skills.tsx`. The list updates automatically on every site build;
 nothing here is hand-maintained.
 
+Also exports `AgentSkillsInstallPrompt` – a copyable paste-into-your-agent prompt (rendered
+via `SingleCodeBlock`) that instructs an agent to install the same skill set from the
+`agent-skills-latest` release zip. It interpolates the current skill names from the same
+build-time data, so the prompt and the list can never drift apart.
+
 ## Usage
 
 Import directly in MDX (no global shortcode registration):
 
 ```mdx
-import AgentSkillsList from 'components/AgentSkillsList'
+import AgentSkillsList, { AgentSkillsInstallPrompt } from 'components/AgentSkillsList'
 
 <AgentSkillsList product="ai_observability" exclude={["feature-usage-feed"]} />
+<AgentSkillsInstallPrompt product="ai_observability" exclude={["feature-usage-feed"]} />
 ```
+
+Both components take the same props.
 
 ## Props
 
