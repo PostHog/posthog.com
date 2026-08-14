@@ -19,7 +19,6 @@ const TRUST_LOGOS = [
     'airbus',
     'ukgovt',
     'elevenlabs',
-    'lovable',
     'supabase',
     'raycast',
     'clerk',
