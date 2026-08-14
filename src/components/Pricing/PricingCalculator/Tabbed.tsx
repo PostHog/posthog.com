@@ -85,9 +85,35 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
     )
 }
 
+// Keyed by handle, not type: products that are billed with another product share its `type`
+// (Web analytics is typed `product_analytics`), and they must not inherit its calculator.
 const productTabs = {
     product_analytics: ProductAnalyticsTab,
     replay_vision: ReplayVisionTab,
+}
+
+// Products billed on another product's meter (Web analytics on Product analytics events,
+// Experiments on Feature flags requests) have no volume or cost of their own – showing them a
+// slider and a $0 subtotal reads as a broken calculator. Explain the bundling and hand people
+// off to the tab that actually moves their bill instead.
+export const BilledWithNotice = ({ activeProduct, onViewBilledWithProduct }) => {
+    const { name, billedWith, pricingLead } = activeProduct
+    return (
+        <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
+            <p className="m-0">
+                {pricingLead ||
+                    `${name} is billed with ${billedWith}, so you get access to both products for the same price.`}
+            </p>
+            {onViewBilledWithProduct && (
+                <button
+                    onClick={onViewBilledWithProduct}
+                    className="text-red dark:text-yellow font-semibold mt-2 text-left"
+                >
+                    Estimate your price with the <span className="lowercase">{billedWith}</span> calculator
+                </button>
+            )}
+        </div>
+    )
 }
 
 export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData }) => {
@@ -127,14 +153,19 @@ export const TabContent = ({
     setProduct,
     analyticsData,
     setAnalyticsData,
+    onViewBilledWithProduct,
 }) => {
-    const { type, cost, volume, billingData, slider, costByTier, freeAllocationText } = activeProduct
+    const { handle, cost, volume, billingData, slider, costByTier, freeAllocationText } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
+
+    if (activeProduct.billedWith) {
+        return <BilledWithNotice activeProduct={activeProduct} onViewBilledWithProduct={onViewBilledWithProduct} />
+    }
 
     return (
         <>
             <div>
-                {productTabs[activeProduct.type]?.({
+                {productTabs[handle]?.({
                     activeProduct,
                     setVolume,
                     setProduct,
@@ -143,12 +174,7 @@ export const TabContent = ({
                     setAddons,
                     addons,
                 }) ||
-                    (activeProduct.name == 'Experiments' ? (
-                        <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
-                            Experiments is currently bundled with Feature flags and share a free tier and volume
-                            pricing.
-                        </div>
-                    ) : activeProduct.addonSliders ? (
+                    (activeProduct.addonSliders ? (
                         <StandaloneAddonsTab
                             activeProduct={activeProduct}
                             setVolume={setVolume}
@@ -163,7 +189,7 @@ export const TabContent = ({
                                             inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
                                             value={volume}
                                             thousandSeparator=","
-                                            onValueChange={({ floatValue }) => setVolume(type, floatValue)}
+                                            onValueChange={({ floatValue }) => setVolume(handle, floatValue)}
                                             customInput={AutosizeInput}
                                         />{' '}
                                         <span className="opacity-70 text-sm">{billingData.unit}s/month</span>
@@ -179,7 +205,7 @@ export const TabContent = ({
                                             marks={slider.marks}
                                             min={slider.min}
                                             max={slider.max}
-                                            onChange={(value) => setVolume(type, sliderCurve(value))}
+                                            onChange={(value) => setVolume(handle, sliderCurve(value))}
                                             value={inverseCurve(volume)}
                                         />
                                     </div>
@@ -221,7 +247,7 @@ export const TabContent = ({
                                             <PricingTiers
                                                 plans={[{ tiers: costByTier }]}
                                                 unit={billingData.unit}
-                                                type={type}
+                                                type={handle}
                                                 showSubtotal
                                             />
                                         </div>
@@ -294,6 +320,17 @@ export default function Tabbed() {
             .sort((a, b) => navOrder(a) - navOrder(b))
     }, [initialProducts])
     const activeProduct = products[activeTab]
+    // Only the plain single-slider tab shows a bare price in its top-right corner; the custom
+    // tabs (Product analytics, Replay Vision, standalone add-ons) label their own subtotal row
+    // at the bottom, and billed-with products have no subtotal at all.
+    const showSubtotalHeading =
+        !activeProduct?.billedWith && !productTabs[activeProduct?.handle] && !activeProduct?.addonSliders
+    // Products billed on another product's meter point at it with `billingType`, which is the
+    // handle of the product that owns the meter (Web analytics -> product_analytics).
+    const billedWithTabIndex = useMemo(() => {
+        if (!activeProduct?.billedWith) return -1
+        return products.findIndex((product) => !product.billedWith && product.handle === activeProduct.billingType)
+    }, [products, activeProduct])
 
     // Capture pricing calculator interactions for the experiment.
     const posthog = usePostHog()
@@ -411,7 +448,20 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
                     <ul className="list-none m-0 p-0 pb-2 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {products.map(
-                            ({ name, Icon, cost, color, billingData, handle, categoryName, pricingBadge }, index) => {
+                            (
+                                {
+                                    name,
+                                    Icon,
+                                    cost,
+                                    color,
+                                    billingData,
+                                    handle,
+                                    categoryName,
+                                    pricingBadge,
+                                    billedWith,
+                                },
+                                index
+                            ) => {
                                 const active = activeTab === index
                                 const addonsPrice = getAddonsCostForProduct(productAddons, billingData)
                                 return (
@@ -437,8 +487,10 @@ export default function Tabbed() {
                                                     )}
                                                 </span>
                                             </div>
-                                            {name == 'Experiments' ? (
-                                                <span className="opacity-25">--</span>
+                                            {billedWith ? (
+                                                <span className="opacity-50 font-normal text-xs pl-5 md:pl-0">
+                                                    Billed with <span className="lowercase">{billedWith}</span>
+                                                </span>
                                             ) : (
                                                 <div className="opacity-70 pl-5 md:pl-0">
                                                     {formatUSD(cost + addonsPrice)}
@@ -454,13 +506,14 @@ export default function Tabbed() {
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
                         <h3>Estimate your price</h3>
-                        {!activeProduct.name == 'Experiments' && (
-                            <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
-                        )}
+                        {showSubtotalHeading && <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>}
                     </div>
 
                     <TabContent
-                        key={activeProduct.type}
+                        key={activeProduct.handle}
+                        onViewBilledWithProduct={
+                            billedWithTabIndex === -1 ? undefined : () => setActiveTab(billedWithTabIndex)
+                        }
                         addons={productAddons}
                         setAddons={setProductAddons}
                         activeProduct={activeProduct}
