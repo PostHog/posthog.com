@@ -1,5 +1,5 @@
 ---
-title: Writing a blog post
+title: Blogs
 sidebar: Handbook
 showTitle: true
 ---
