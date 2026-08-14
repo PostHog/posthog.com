@@ -25,7 +25,7 @@ const SpotlightRow = forwardRef<HTMLLIElement, SpotlightRowProps>(function Spotl
             aria-selected={selected}
             onMouseMove={onActive}
             onClick={onSelect}
-            className={`flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 ${
+            className={`flex cursor-pointer items-center gap-3 rounded-md px-2.5 py-2 ${
                 selected ? 'bg-yellow/15 ring-1 ring-inset ring-yellow/40' : 'bg-primary'
             }`}
         >

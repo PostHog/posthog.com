@@ -746,7 +746,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : 'size-full'
                     } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
                         isCompositorActive ? MOTION_LAYER : ''
-                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
+                    } rounded-md ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
                         item.expanded ? 'shadow-none' : 'shadow-md'
                     } ${
                         item.expanded
@@ -842,7 +842,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                       item.appSettings?.size?.fixed
                                           ? 'overflow-x-hidden overflow-y-auto'
                                           : 'overflow-hidden'
-                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                  } rounded-md ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

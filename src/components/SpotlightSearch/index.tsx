@@ -375,7 +375,7 @@ function SpotlightSearchContent({
                                     animate={{ scale: 1, y: 0 }}
                                     exit={{ scale: 0.97, y: -8 }}
                                     transition={{ duration: 0.12, ease: [0.2, 0.2, 0.8, 1] }}
-                                    className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-2xl border border-primary bg-primary shadow-2xl"
+                                    className="@container flex h-fit w-full max-w-[680px] flex-col overflow-hidden rounded-md border border-primary bg-primary shadow-2xl"
                                     onMouseDown={(e) => e.stopPropagation()}
                                 >
                                     <RadixDialog.Title className="sr-only">Search PostHog.com</RadixDialog.Title>
