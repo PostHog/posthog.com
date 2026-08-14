@@ -42,7 +42,7 @@ The test: would this number exist if the workflow didn't? If yes, the workflow d
 
 **One metric with a dimension beats many near identical metrics.** If the same number exists for every product, make one metric that returns product as a column and filter it, rather than one metric per product. Give the agent the path to the number and let it narrow down.
 
-The dimension goes last in the name as by_<dimension>: mrr_monthly_by_product returns (month, product, mrr). A segment filters the population, a dimension is a column the metric returns, so nrr_quarterly_annualized_managed is one number per cohort while mrr_monthly_by_product is one row per product.
+The dimension goes last in the name as `by_<dimension>`: `mrr_monthly_by_product` returns (month, product, mrr). A segment filters the population, a dimension is a column the metric returns, so `nrr_quarterly_annualized_managed` is one number per cohort while `mrr_monthly_by_product` is one row per product.
 
 **Adding a value that isn't in the table? Add it to the table.** 
 
