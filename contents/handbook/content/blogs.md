@@ -6,13 +6,15 @@ showTitle: true
 
 Anyone at PostHog can write a blog post, and we'd love you to! You don't need approval or permission from the <SmallTeam slug="editorial" />.
 
-**Why write a blog?** Content is the main pillar of [our marketing strategy](/handbook/content), and blogs are a key piece of that.
+This page covers the basics, whatever your role or topic. If you're an engineer writing about something you built, [writing blogs as an engineer](/handbook/engineering/writing-blogs) goes deeper on tips for that sort of content.
 
-It's also good for your career! People who've written good blogs at PostHog have received lots of industry attention and discussion on socials. 
+## Why write a blog?
+
+Content is the main pillar of [our marketing strategy](/handbook/content), and blogs are a key piece of that.
+
+It's also good for your career! People who've written good blogs at PostHog have received lots of industry attention and discussion on socials.
 
 Finally, sometimes it's just useful to create a blog as a linkable artifact to explain a topic instead of repeating yourself dozens of times.
-
-This page covers the basics, whatever your role or topic. If you're an engineer writing about something you built, [writing blogs as an engineer](/handbook/engineering/writing-blogs) goes deeper on tips for that sort of content.
 
 ## Is my idea worth writing about?
 
@@ -56,7 +58,7 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 
 - **Be opinionated.** "It depends" is not a conclusion. See [avoid hedging](/handbook/content/posthog-style-guide#avoid-hedging).
 - **Show your work.** Real numbers, screenshots, and code. Our first-hand experience is super valuable evidence for an argument.
-- **Add 3–5 internal links** with descriptive anchor text. You can use the `/suggest-links` command in the posthog.com repo for this.
+- **Add 3 to 5 internal links** with descriptive anchor text. You can use the `/suggest-links` command in the posthog.com repo for this.
 - **Don't let AI write the whole thing.** We encourage using AI for research, outlining, and finding the weak spots in an argument, but avoid using it to actually write the sentences. Readers can tell, and we may ask you to rewrite it if it's too obvious.
 - **Check the style guide.** For mechanics – en dashes, sentence case, image sizes – see the [style guide](/handbook/content/posthog-style-guide). Don't worry about following it too much though, we'll fix anything you miss during review.
 
