@@ -14,11 +14,11 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ## Weekly schedule
 
-- **Monday** - PostHog News all-hands meeting. Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the doc is shared in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) channel in Slack. We then go around and people are free to demo anything they've been working on recently. _The content of these meetings is always confidential._ All hands meetings are recorded too if you are out. Some teams also do sprint planning on a Monday. 
+- **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._ Some teams also do sprint planning on a Monday. 
 - **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - A few things happen on wednesdays:
     - some teams do sprint planning here as well
-    - [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) happen every other week
+    - [Engineering tech talks/brown bags](/handbook/engineering/tech-talks) and a Marketing brown bag alternate every other week
     - There's a reserved slot for cross-team meetings every other week - avoid scheduling recurring meetings (standups, 1:1s, sprint planning) so you can use the slot when necessary
 - **Thursday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Friday** - extracurricular type meetings like [BookHog](/handbook/people/bookhog) often end up here!
@@ -28,9 +28,9 @@ You should have been invited to any relevant meetings as part of your [onboardin
 The Monday all-hands features a few regular sections and is recorded in [this document](https://docs.google.com/document/d/1JbA2W1CP2sA5vRVnS0UgyDgRz88mKpEVeinW6SYjO74/edit?usp=sharing).
 
 - **Announcements:** Revenue and churn updates, plus other major news
-- **Hiring & Anniversaries:** Updates about headcount, who is starting soon, new hiring roles, and who is celebrating a PostHog anniversary
+- **Hiring & anniversaries:** Updates about headcount, who is starting soon, new hiring roles, and who is celebrating a PostHog anniversary
 - **Acknowledgements:** Opportunity to give [kudos](/handbook/company/kudos) to your colleagues
-- **Topic of the day:** <SmallTeam slug="blitzscale" /> [talks around a particular topic](/handbook/exec/all-hands-topics)
+- **Topic of the day:** <SmallTeam slug="blitzscale" /> [talks through a particular topic](/handbook/exec/all-hands-topics)
 - **Q&A:** Ask <SmallTeam slug="blitzscale" /> anything you want
 - **Demos:** Show us what you've worked on last week - anyone can demo, though we sometimes ask for a particular theme to tie in with the topic of the day
 
