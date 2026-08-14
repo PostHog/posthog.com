@@ -6,7 +6,7 @@ showTitle: true
 
 We score every signup on how well it matches [who we build for](/handbook/who-we-build-for): AI-pilled software teams at any scale, backed by leading investors or real revenue.
 
-The ICP score is **definitional, not a revenue prediction**. A four-person seed-stage AI startup paying us $50/month can score high, or a large non-software enterprise paying us a lot can score low. The score tells us whether a signup is who we build for, not whether they'll be a big account next quarter.
+The ICP score is **definitional, not a revenue prediction**. A four-person seed-stage AI startup paying us $50/month can score high, or a large non-software enterprise paying us a lot can score low. The score tells us if a signup matches our definition of who we build for vs if they'll be a high mrr account in the next six months.
 
 ## How it works
 
