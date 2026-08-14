@@ -119,7 +119,7 @@ export default function McpToolsList({ feature, families = AIO_FAMILIES }: McpTo
                                 <li
                                     key={tool.name}
                                     title={tool.summary || tool.title}
-                                    className="!m-0 font-code text-xs border border-primary rounded-sm px-1.5 py-0.5 text-muted"
+                                    className="!m-0 font-code font-medium text-[13px] border border-primary rounded-sm px-1.5 py-0.5 bg-accent"
                                 >
                                     {tool.name}
                                 </li>
