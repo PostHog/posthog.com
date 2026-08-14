@@ -12,9 +12,17 @@ Any agent that reads `SKILL.md` can use them – Claude Code, Codex, Cursor, Gem
 
 ## Set up
 
-1. **Capture LLM data** – [install a PostHog SDK or provider integration](/docs/ai-observability/installation) so there are traces to investigate.
-2. **Connect the [PostHog MCP server](/docs/ai-observability/surfaces/mcp)** – skills call `posthog:*` MCP tools, so your agent needs the server installed.
-3. **Add a skill to your agent** – copy the skill's folder from [the PostHog repo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) into your agent's skills directory (`.claude/skills/` for Claude Code), or download every PostHog skill at once from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest).
+First, make sure there's LLM data to investigate – if you haven't instrumented yet, [install a PostHog SDK or provider integration](/docs/ai-observability/installation).
+
+Next, install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin). It bundles every PostHog skill – these included – together with the [PostHog MCP server](/docs/model-context-protocol) they call. In Claude Code that's one command:
+
+```bash
+claude plugin install posthog
+```
+
+Run `/mcp`, pick the PostHog server, and log in with OAuth. The plugin also installs in [Codex](/docs/model-context-protocol/codex), Cursor, and Gemini CLI – the [plugin README](https://github.com/PostHog/ai-plugin) has each command.
+
+Prefer to wire it up yourself? [Connect the MCP server](/docs/ai-observability/surfaces/mcp) directly, then copy a skill's folder from [the PostHog repo](https://github.com/PostHog/posthog/tree/master/products/ai_observability/skills) into your agent's skills directory (`.claude/skills/` for Claude Code), or download every PostHog skill at once from the [latest skills release](https://github.com/PostHog/posthog/releases/tag/agent-skills-latest).
 
 Then just ask. Each skill's description tells your agent when to load it, so "why did our LLM costs spike yesterday?" picks up `exploring-llm-costs` without you naming it.
 
