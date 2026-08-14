@@ -99,7 +99,7 @@ export default function ContextGapReport() {
                                 You don't have to read everyone's reports to know what's important in data infrastructure (and hand over your email for the priveledge), just read ours:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
-                                <li>You don't have to read 300 pages to get the point.</li>
+                                <li>It's only 2 pages, not 300 pages.</li>
                                 <li>It's on the right; click it, and it opens as a normal PDF.</li>
                                 <li>There's no form to fill out, no email to hand over.</li>
                             </ul>
