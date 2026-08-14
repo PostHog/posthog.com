@@ -620,8 +620,8 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Writing a blog post',
-                url: '/handbook/content/writing-blogs',
+                name: 'Blogs',
+                url: '/handbook/content/blogs',
             },
             {
                 name: 'Video',
