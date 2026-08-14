@@ -54,6 +54,7 @@ export function ReaderViewProvider({
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
     const [hasMounted, setHasMounted] = useState(false)
+    const [persistedStateLoaded, setPersistedStateLoaded] = useState(false)
 
     // Hydrate persisted state after mount
     useEffect(() => {
@@ -64,6 +65,7 @@ export function ReaderViewProvider({
         }
         const savedBackground = localStorage.getItem('background-image')
         if (savedBackground) setBackgroundImage(savedBackground)
+        setPersistedStateLoaded(true)
     }, [])
 
     const toggleNav = useCallback(() => {
@@ -121,13 +123,14 @@ export function ReaderViewProvider({
 
     // Monitor container size and update Nav visibility
     useEffect(() => {
+        if (!persistedStateLoaded) return
         if (!appWindow?.size?.width) return
 
         // Only update Nav visibility if user hasn't manually toggled it
         if (!navUserToggled) {
             setIsNavVisible(!!isWideEnoughForSidebar)
         }
-    }, [isWideEnoughForSidebar, navUserToggled])
+    }, [isWideEnoughForSidebar, navUserToggled, persistedStateLoaded])
 
     // Enable transitions after the initial render has painted.
     useEffect(() => {
