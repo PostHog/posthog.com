@@ -84,7 +84,7 @@ Requirements:
 - **`client_id`** must exactly match the URL where this document is hosted.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
-- **`token_endpoint_auth_method`** must be `"none"` (CIMD clients are public clients, no client secret).
+- **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 
@@ -95,8 +95,8 @@ Once your metadata document is live, you can start calling the API. The first re
 
 ### Link your partner app to a PostHog organization (optional)
 
-By default, a CIMD partner app is unverified and capped at 10 account requests per hour.
-You can link the app to a PostHog organization with a verification token to raise that to 100/hour and surface the partner integration to that org's admins.
+By default, a CIMD partner app is unverified.
+You can link the app to a PostHog organization with a verification token, which raises your [rate limits](#rate-limits) and surfaces the partner integration to that org's admins.
 
 1. In PostHog, go to **Organization settings → CIMD verification tokens** and click **Create token**. Copy the `phvt_…` value – it's only shown once.
 2. Add the token inside a `com.posthog` namespace in your CIMD metadata document:
@@ -116,7 +116,7 @@ You can link the app to a PostHog organization with a verification token to rais
    }
    ```
 
-3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and the rate limit is bumped.
+3. The next time PostHog refreshes the metadata document, the app is linked to the matching organization and your rate limits go up.
 
 The token is only used to prove ownership of the partner app – it isn't sent on API requests.
 You can rotate or revoke a token at any time from the same settings page.
@@ -398,6 +398,8 @@ The returned `url` is valid for 10 minutes and can only be opened once, so don't
 
 This endpoint is gated on the `provisioning_can_issue_deep_links` flag on your partner record, which is only enabled for partners admin-onboarded by PostHog. If you get a `deep_links_not_enabled` 403, ask PostHog to enable it for your CIMD app.
 
+Deep links also require `private_key_jwt` client authentication. A public client, identified only by a client_id anyone can send, has no deep-link budget because a deep link mints a full PostHog session.
+
 ### Rotate project credentials
 
 Rotate the project token for an existing provisioned project:
@@ -512,26 +514,84 @@ Common error codes:
 | `invalid_label_prefix` | 400 | `label_prefix` is not a string, is longer than 25 characters after trimming, or contains control or Unicode format characters |
 | `invalid_path` | 400 | Deep-link `path` is not a relative, same-origin in-app path beginning with a single `/` |
 | `invalid_scope` | 400 | Unrecognized scope requested |
-| `rate_limited` | 429 | Rate limit exceeded |
+| `rate_limited` | 429 | Rate limit exceeded. The `Retry-After` header says how many seconds to wait. See [rate limits](#rate-limits). |
 | `account_creation_failed` | 500 | Server error during account creation |
 
 ## Rate limits
 
-All provisioning endpoints are rate limited.
+Every provisioning endpoint has a per-partner budget: a burst you can spend at once, refilling continuously at an hourly rate. There is no fixed window, so you never wait for the top of the hour. When you run out, the response is a 429 with a `Retry-After` header saying exactly how many seconds until your next request can succeed.
 
-**CIMD registration** (first request from a new `client_id`):
+Requests that fail validation (4xx errors like `invalid_request`) are refunded, so debugging an integration doesn't spend your budget.
+
+### Your tier
+
+Budgets scale with how strongly your app identifies itself, on two axes:
+
+| Client authentication | Not linked to an org | Linked via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional) |
+| --- | --- | --- |
+| `none` (public, PKCE) | 1x | 2x |
+| `private_key_jwt` | 5x | 10x |
+
+Both upgrades are self-serve and take effect on your next request: declare `private_key_jwt` with a `jwks_uri` in your metadata document, or add a verification token. Nothing to wait for and nobody to ask.
+
+### Budgets
+
+At the 1x tier:
+
+| Endpoints | Burst | Refill |
+| --- | --- | --- |
+| Account requests | 5 | 10/hour |
+| Project provisioning (`/resources`) | 10 | 30/hour |
+| Everything else (token exchange, token refresh, reads, credential rotation, deep links) | 30 | 120/hour |
+
+So account requests, the tightest budget, run at 10/20/50/100 per hour across the four tiers. Token refreshes have their own budget, separate from token exchanges, so keeping many users' tokens alive never competes with onboarding new ones.
+
+Limits are per region: US and EU count separately.
+
+**CIMD registration** (first request from a new `client_id`) is limited separately:
 
 - 5 requests per minute per IP (burst)
 - 10 requests per hour per IP (sustained)
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
-**Account requests** (per partner, per hour):
+If the top tier still isn't enough for production use, open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic. PostHog can set per-endpoint overrides for your app.
 
-- 10/hour for unverified CIMD partners
-- 100/hour for partners linked to a PostHog organization via a [verification token](#link-your-partner-app-to-a-posthog-organization-optional)
+### Check your limits
 
-Open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic, if you need a higher limit for production use.
+Every response that counted against a budget includes `RateLimit-Limit`, `RateLimit-Remaining`, and `RateLimit-Reset` headers, so you can pace requests instead of reacting to 429s.
+
+To see everything at once, call the limits endpoint. It returns your tier, why you have it, and every endpoint's budget with current headroom:
+
+```bash
+# With an access token
+curl https://us.posthog.com/api/agentic/provisioning/limits \
+  -H "Authorization: Bearer pha_abc123..."
+
+# Or with your client_id (public clients)
+curl "https://us.posthog.com/api/agentic/provisioning/limits?client_id=https://yourapp.com/.well-known/posthog-client.json"
+```
+
+`private_key_jwt` clients POST instead, with the signed assertion in the form body, the same way the token endpoint takes it.
+
+**Response:**
+
+```json
+{
+  "tier": "public_attested",
+  "tier_basis": {
+    "client_authentication": "none",
+    "attested": true
+  },
+  "endpoints": {
+    "account_requests": { "per_hour": 20, "burst": 10, "remaining": 9, "reset": 180 },
+    "token_exchanges": { "per_hour": 40, "burst": 20, "remaining": 20, "reset": 0 },
+    "deep_links": { "blocked": true }
+  }
+}
+```
+
+`remaining` is whole tokens available now, and `reset` is seconds until the budget is full again. A `blocked` endpoint is unavailable at your tier; an `unlimited` one has a PostHog-set override.
 
 ## Full example
 
