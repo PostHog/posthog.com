@@ -3720,10 +3720,6 @@ export const docsMenu = {
                             ],
                         },
                         {
-                            name: 'Skills store',
-                            url: '/docs/ai-engineering/skills-store',
-                        },
-                        {
                             name: 'AI Observability',
                             url: 'https://posthog.com/docs/ai-observability',
                             external: true,
@@ -8068,6 +8064,24 @@ export const docsMenu = {
                     url: '/docs/logs/changelog',
                     icon: 'IconRocket',
                     color: 'purple',
+                },
+            ],
+        },
+        {
+            name: 'Skills',
+            icon: 'IconMagic',
+            color: 'purple',
+            url: '/docs/skills',
+            description: 'Store and share versioned agent skills, usable from any MCP-connected agent.',
+            children: [
+                {
+                    name: 'Skills',
+                },
+                {
+                    name: 'Overview',
+                    url: '/docs/skills',
+                    icon: 'IconHome',
+                    color: 'seagreen',
                 },
             ],
         },
