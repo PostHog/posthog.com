@@ -208,6 +208,22 @@ If `com.posthog.scopes` is omitted, your app can request any scope a user can gr
 
 CIMD app scopes are managed via the metadata document and are read-only in the PostHog admin UI.
 
+#### Scopes a user can decline
+
+Everything in `scopes` is required, and the user sees it locked on the consent screen. If part of what you ask for is for a feature they may not want, put those scopes in `optional_scopes` instead. Those appear as declinable, and the user can approve the rest without them.
+
+```json
+"com.posthog": {
+  "provisioning": true,
+  "scopes": ["insight:read", "project:read"],
+  "optional_scopes": ["session_recording:read"]
+}
+```
+
+Your ceiling is both lists together, so a token can carry anything in either one, and never anything outside them. Check the scopes on the token you get back before using a feature that depends on a declinable scope, because the user may have said no to it.
+
+`optional_scopes` needs a non-empty `scopes` alongside it: an app offering extras has to declare the base they sit on top of. Both lists are filtered the same way, so an unrecognized or internal scope is dropped from either. Unlike `scopes`, an `optional_scopes` list that ends up empty is fine, and just means you offer no declinable extras.
+
 ## API reference
 
 All endpoints are on `https://us.posthog.com` (US region) or `https://eu.posthog.com` (EU region).
