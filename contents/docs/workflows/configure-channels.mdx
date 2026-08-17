@@ -94,7 +94,7 @@ Push is the newest workflows channel and is in beta. It's rolling out gradually,
 
 <CalloutBox icon="IconInfo" title="Device tokens come from the mobile SDK" type="fyi">
 
-Push delivery requires your app to register each user's device token with PostHog through the mobile SDK ([iOS](/docs/libraries/ios/push-notifications), [Android](/docs/libraries/android#push-notifications)), which is also where you implement identity verification if you enable it below. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
+Push delivery requires your app to register each user's device token with PostHog through the mobile SDK ([iOS](/docs/workflows/push-notifications/ios), [Android](/docs/libraries/android#push-notifications)), which is also where you implement identity verification if you enable it below. Connecting a channel here sets up the credentials PostHog sends with. It doesn't collect tokens on its own.
 </CalloutBox>
 
 **Firebase Cloud Messaging (FCM)**
@@ -123,7 +123,7 @@ A device token says *where* to deliver a notification, not *who* the device belo
 | **Optional** | Tokens are verified and recorded, but devices can still register without one. Use this to confirm your app sends valid tokens before you require them. |
 | **Required** | Devices without a valid token can't register or unregister. Switch to this only once your app sends tokens, otherwise registration stops working. |
 
-When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/libraries/ios/push-notifications#identity-verification), [Android](/docs/libraries/android#identity-verification)).
+When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/workflows/push-notifications/ios#identity-verification), [Android](/docs/libraries/android#identity-verification)).
 
 Once configured, add a **Push** step in the [workflow builder](/docs/workflows/workflow-builder), set the notification title and body (with variables like `{{ person.name }}`), and optionally set platform-specific overrides.
 

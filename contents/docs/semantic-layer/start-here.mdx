@@ -41,9 +41,9 @@ Instead of letting every session re-derive MRR, catalog it:
 
 The metric now exists, but it has no authority yet. Every AI-created object in the catalog lands as `proposed` – that's the "AI generates" half of the model.
 
-<CalloutBox icon="IconInfo" title="Names are write-once" type="fyi">
+<CalloutBox icon="IconInfo" title="Names are references" type="fyi">
 
-A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique in your project. It can never be renamed or reused – even after deletion, the name stays reserved so a stored reference never silently changes meaning. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and stays editable.
+A metric's `name` is an identifier, like an API route: lowercase, no spaces, unique among your project's live metrics. You *can* rename or delete a metric later, but that frees the name and breaks anything that stored it – saved queries, API calls, links – so pick a name worth keeping. Pick `mrr`, not `monthly_recurring_revenue_v2_final`. The `display_name` is the human label and can change freely.
 
 </CalloutBox>
 

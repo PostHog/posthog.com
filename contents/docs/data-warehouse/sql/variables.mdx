@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-SQL variables enable you to dynamically set values in your queries. 
+SQL variables enable you to dynamically set values in your queries.
 
 ## Creating SQL variables
 
@@ -28,12 +28,12 @@ For example, you can create a List type variable with the code name `event_names
 Once created, variables can be used in queries with the `{variables.<variable-name>}` syntax like this:
 
 ```sql
-select * 
-from events 
+select *
+from events
 where event = {variables.event_names}
 ```
 
-You can set the value for the variable in the **Variables** dropdown. For example, below we set the "event names" variable to `$autocapture` on a dashboard. This means every instance of `{variables.event_names}` in the queries on the dashboard is replaced with `$autocapture`. 
+You can set the value for the variable in the **Variables** dropdown. For example, below we set the "event names" variable to `$autocapture` on a dashboard. This means every instance of `{variables.event_names}` in the queries on the dashboard is replaced with `$autocapture`.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_10_02_at_17_12_45_2x_0e6a9a873a.png"
@@ -124,8 +124,8 @@ group by period, breakdown
 Beyond the SQL variables you set up, you can access the dashboard's date range filters through the `filters.dateRange.from` and `filters.dateRange.to` variables like this:
 
 ```sql
-select * 
-from events 
+select *
+from events
 where event = {variables.event_names}
 and timestamp >= {filters.dateRange.from} and timestamp < {filters.dateRange.to}
 ```
@@ -136,3 +136,19 @@ and timestamp >= {filters.dateRange.from} and timestamp < {filters.dateRange.to}
   alt="Using dashboard filter variables in a SQL query"
   classes="rounded"
 />
+
+## How date ranges are resolved
+
+When you use `{filters.dateRange.from}`, `{filters.dateRange.to}`, or `{filters}`, PostHog resolves date values with day-level semantics to match how other insight types handle date ranges:
+
+- **Relative day-or-coarser `date_from` values** like `mStart` (start of month), `-7d` (last 7 days), or `wStart` (start of week) snap to the **start of the day** (midnight). This honors your project's week start day setting.
+- **Open-ended ranges** (where `date_to` is not set, like "This month" or "Last 7 days") resolve `date_to` to the **end of today**, preventing future-dated rows from being included.
+- **Date-only `date_to` values** (like `2024-01-15`) snap to the **end of that day**.
+
+**Exceptions:**
+
+- **Explicit datetimes** (like `2024-01-15T14:30:00`) are used exactly as provided.
+- **Sub-day rolling windows** (like `-1h` or `-30M`) keep their exact timestamps and remain open-ended.
+- **"All time"** (`date_from="all"`) remains fully unbounded with no upper or lower limits.
+
+When using the `{filters}` placeholder, snapped end-of-day upper bounds are compared inclusively (`<=`) while explicit datetime bounds use strict `<`.
