@@ -1,25 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'components/Link'
 import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
-import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
-import {
-    HOME_SILHOUETTE,
-    SELF_DRIVING_SILHOUETTE,
-    DOWNLOAD_SILHOUETTE,
-    DOCS_SILHOUETTE,
-    TALK_TO_A_HUMAN_SILHOUETTE,
-    WHY_POSTHOG_SILHOUETTE,
-    CHANGELOG_SILHOUETTE,
-    HANDBOOK_SILHOUETTE,
-    STORE_SILHOUETTE,
-    WORK_HERE_SILHOUETTE,
-    TRASH_SILHOUETTE,
-    CONTEXT_WAREHOUSE_SILHOUETTE,
-} from 'components/OSIcons/glyphs'
+import { GlassIcon, DemoIcon, RenderedIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DesktopIcon from './DesktopIcon'
+// TEMPORARY — icon set bake-off. Remove with OSIcons/iconSets.ts + OSIcons/RenderedIcon.tsx.
+import IconSetSwitcher from './IconSetSwitcher'
 import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
@@ -43,36 +31,36 @@ export const useProductLinks = () => {
         () => [
             {
                 label: 'Home',
-                Icon: <GlassIcon path={HOME_SILHOUETTE} />,
+                Icon: <RenderedIcon name="home" />,
                 url: '/',
                 source: 'desktop',
             },
             {
                 label: 'Self-driving product',
-                Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
+                Icon: <RenderedIcon name="self-driving" />,
                 url: '/self-driving',
                 source: 'desktop',
             },
             {
                 label: 'Context warehouse',
-                Icon: <GlassIcon path={CONTEXT_WAREHOUSE_SILHOUETTE} />,
+                Icon: <RenderedIcon name="context-warehouse" />,
                 url: '/context-warehouse',
                 source: 'desktop',
             },
             {
                 label: 'Pricing',
-                Icon: <PricingIcon />,
+                Icon: <RenderedIcon name="pricing" />,
                 url: '/pricing',
                 source: 'desktop',
             },
             {
                 label: 'Docs',
-                Icon: <GlassIcon path={DOCS_SILHOUETTE} fillRule="evenodd" />,
+                Icon: <RenderedIcon name="docs" />,
                 url: '/docs',
                 source: 'desktop',
             },
             {
-                // Not a glass glyph — a baked light/dark isometric image (see DemoIcon).
+                // No render supplied for demo.mov — still the baked light/dark isometric pair.
                 label: 'Demo',
                 Icon: <DemoIcon />,
                 url: '/demo',
@@ -80,7 +68,7 @@ export const useProductLinks = () => {
             },
             {
                 label: 'Talk to a human',
-                Icon: <GlassIcon path={TALK_TO_A_HUMAN_SILHOUETTE} />,
+                Icon: <RenderedIcon name="talk-to-a-human" />,
                 url: '/talk-to-a-human',
                 source: 'desktop',
             },
@@ -92,13 +80,13 @@ export const useProductLinks = () => {
 export const apps: AppItem[] = [
     {
         label: 'About us',
-        Icon: <GlassIcon path={WHY_POSTHOG_SILHOUETTE} />,
+        Icon: <RenderedIcon name="about-us" />,
         url: '/about',
         source: 'desktop',
     },
     {
         label: 'Changelog',
-        Icon: <GlassIcon path={CHANGELOG_SILHOUETTE} />,
+        Icon: <RenderedIcon name="changelog" />,
         url: '/changelog',
         source: 'desktop',
     },
@@ -110,25 +98,25 @@ export const apps: AppItem[] = [
     // },
     {
         label: 'Company handbook',
-        Icon: <GlassIcon path={HANDBOOK_SILHOUETTE} />,
+        Icon: <RenderedIcon name="handbook" />,
         url: '/handbook',
         source: 'desktop',
     },
     {
         label: 'Store',
-        Icon: <GlassIcon path={STORE_SILHOUETTE} />,
+        Icon: <RenderedIcon name="store" />,
         url: '/merch',
         source: 'desktop',
     },
     {
         label: 'Careers',
-        Icon: <GlassIcon path={WORK_HERE_SILHOUETTE} />,
+        Icon: <RenderedIcon name="careers" />,
         url: '/careers',
         source: 'desktop',
     },
     {
         label: 'Trash',
-        Icon: <GlassIcon path={TRASH_SILHOUETTE} fillRule="evenodd" />,
+        Icon: <RenderedIcon name="trash" />,
         url: '/trash',
         source: 'desktop',
     },
@@ -311,6 +299,8 @@ function Desktop() {
                 <HedgeHogModeEmbed />
             </ContextMenu>
             <NotificationsPanel />
+            {/* TEMPORARY — icon set bake-off overlay. Delete this line when a set is picked. */}
+            <IconSetSwitcher />
             {confetti && (
                 <div className="fixed inset-0 pointer-events-none">
                     <ReactConfetti
