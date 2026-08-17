@@ -73,10 +73,46 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterReport {
+      title: String
+      source: String
+      receivedAgo: String
+      body: String
+      suggestedAction: String
+      actionNote: String
+      affected: String
+    }
+    type FrontmatterWatches {
+      name: String
+      detail: String
+    }
+    type FrontmatterRequires {
+      label: String
+      level: String
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      report: FrontmatterReport
+      premise: String
+      tldr: String
+      # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.
+      shortTitle: String
+      # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
+      # pages in sequence. Declared so a book page can exist without a report block.
+      bookOrder: Int
+      watches: [FrontmatterWatches]
+      requires: [FrontmatterRequires]
+      # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
+      # inbox's category rail; the list of categories is derived from the templates that
+      # declare one, never hardcoded, so adding a template is a content-only change.
+      category: String
+      schedule: String
       seo: FrontmatterSEO
+      # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
+      # are declared here rather than left to inference – see components/SelfDrivingInbox.
+      name: String
+      allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
       lang: String
@@ -137,6 +173,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       maintainer: String,
       imageUrl: String,
     }
+    type EarlyAccessFeatureAssignee {
+      type: String,
+      name: String,
+    }
     type EarlyAccessFeature implements Node {
       name: String,
       description: String,
@@ -146,6 +186,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       featureId: String,
       waitlistCount: Int,
       payload: JSON,
+      assignee: EarlyAccessFeatureAssignee,
     }
     type Plugin implements Node {
       name: String,
@@ -614,6 +655,22 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         product: String
         unique_users: Int
         unique_orgs: Int
+    }
+    # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
+    # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.
+    type SitePage implements Node {
+        searchContentId: String @proxy(from: "context.id")
+    }
+    type Tool implements Node @dontInfer {
+        handle: String!
+        name: String!
+        description: String
+        searchDescription: String
+        searchTitle: String
+        slug: String
+        category: String
+        status: String
+        aliases: [String!]
     }
   `)
     createTypes([

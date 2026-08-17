@@ -2,10 +2,7 @@
 title: Prompt management
 ---
 
-import PromptsAlpha from "./_snippets/prompts-alpha.mdx"
 import { ProductScreenshot } from "components/ProductScreenshot"
-
-<PromptsAlpha />
 
 Prompt management lets you create and update LLM prompts directly in PostHog. When you use prompts through the SDK, they're fetched at runtime with caching and fallback support—so you can iterate on prompts without deploying code.
 
@@ -16,6 +13,7 @@ Prompt management lets you create and update LLM prompts directly in PostHog. Wh
 - **Track prompt usage** – Link prompts to generations to see which prompts drive which outputs
 - **Versioning** – Every change creates an immutable version you can view, compare, or restore
 - **Labels** – Point a label like `production` at a version and fetch by label, so saving a prompt and releasing it are separate steps
+- **Configuration** – Store model parameters or any settings next to the prompt and change them without a deploy
 - **[A/B testing](/docs/prompt-management/prompt-experiments)** – Compare prompt versions on cost, latency, and eval pass rate using PostHog Experiments
 
 ## Creating prompts
@@ -193,6 +191,78 @@ Moving a label takes effect on the PostHog API within seconds. SDK consumers pic
 
 If your PostHog instance predates prompt labels (self-hosted), the API ignores the `label` parameter and returns the latest version; the SDKs log a warning when this happens.
 
+## Configuration
+
+A prompt version can store a `config`: a JSON object with model parameters or any other settings your app reads at runtime. PostHog doesn't interpret it. Whatever you store is returned as-is when you fetch the prompt, so it can hold a model name, sampling parameters, tool definitions, a response schema, or anything else your app needs.
+
+Config is versioned together with the prompt content. Publishing a config change creates a new version, moving a label releases it, and rolling a label back rolls the config back too. You can publish a version that changes only the config, so tuning a parameter doesn't require touching the prompt text.
+
+Don't store secrets in the config. It's returned to anyone who can read the prompt.
+
+### In the app
+
+When editing a prompt, click **Add configuration** and enter a JSON object, for example:
+
+```json
+{
+  "model": "your-model-name",
+  "temperature": 0.7
+}
+```
+
+The config must be a JSON object. Click **Remove** next to the **Configuration** label to clear it. Either way, nothing changes until you publish, and the review dialog shows a diff of the config change first. When a version has a config, it's shown below the prompt content, and comparing versions also diffs the config.
+
+### With the API
+
+The create and publish endpoints accept a `config` field:
+
+```bash
+curl -X PATCH "https://us.posthog.com/api/environments/:project_id/llm_prompts/name/:prompt_name/" \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"config": {"model": "your-model-name", "temperature": 0.7}, "base_version": 3}'
+```
+
+Three things to know about publishing:
+
+- If you leave `config` out, the new version keeps the previous version's config. Text-only edits never drop it.
+- Send `"config": null` to remove it.
+- You can send `config` on its own, without `prompt` or `edits`. The prompt content carries forward unchanged.
+
+The MCP `prompt-create` and `prompt-update` tools accept `config` the same way.
+
+### In your code
+
+Fetched prompts expose the config, so your app can spread it into the LLM call:
+
+<MultiLanguage>
+
+```python
+result = prompts.get('support-system-prompt', with_metadata=True, label='production', fallback='You are a helpful assistant.')
+
+config = result.config or {}
+response = client.chat.completions.create(
+    model=config.get('model', 'your-default-model'),
+    temperature=config.get('temperature', 0),
+    messages=[{"role": "system", "content": result.prompt}],
+)
+```
+
+```typescript
+const result = await prompts.get('support-system-prompt', { label: 'production', fallback: 'You are a helpful assistant.' })
+
+const config = result.config ?? {}
+const response = await openai.chat.completions.create({
+    model: (config.model as string) ?? 'your-default-model',
+    temperature: (config.temperature as number) ?? 0,
+    messages: [{ role: 'system', content: result.prompt }],
+})
+```
+
+</MultiLanguage>
+
+`config` is `None` (Python) or `null` (JavaScript) when the version has no config, and it's missing entirely on fallback results, so read it defensively with defaults as above. The config is cached together with the prompt, including the stale-cache fallback.
+
 ## Using prompts in code
 
 ### Prerequisites
@@ -256,6 +326,9 @@ system_prompt = prompts.compile(result.prompt, {
     'user_name': 'Alice'
 })
 
+# Model parameters or other settings stored with the version (None when there are none)
+config = result.config or {}
+
 # Use in your LLM call
 # ... your OpenAI/Anthropic call here
 ```
@@ -306,6 +379,9 @@ const systemPrompt = prompts.compile(result.prompt, {
   tier: 'premium',
   userName: 'Alice'
 })
+
+// Model parameters or other settings stored with the version (null when there are none)
+const config = result.config ?? {}
 
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
@@ -360,4 +436,5 @@ Once linked, you can:
 ## Limits
 
 - **Maximum prompt size** - 1MB per prompt
+- **Maximum config size** - 1MB per version
 - **Maximum versions per prompt** - 2,000

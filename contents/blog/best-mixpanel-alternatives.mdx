@@ -90,7 +90,7 @@ Customers include [Supabase](/customers/supabase), [Lovable](/customers/lovable)
 
 - PostHog includes [error tracking](/error-tracking), [LLM observability](/llm-analytics), and [surveys](/surveys) natively; Mixpanel doesn't offer these at all.
 - PostHog charges up to 80% less for anonymous events; Mixpanel charges the same, higher rate for all events regardless.
-- PostHog has a built-in [data warehouse](/data-stack) for importing external data (Stripe, Zendesk, etc.); Mixpanel relies on warehouse connectors and requires you to get data into a third-party warehouse first.
+- PostHog has a built-in [data warehouse](/context-warehouse) for importing external data (Stripe, Zendesk, etc.); Mixpanel relies on warehouse connectors and requires you to get data into a third-party warehouse first.
 - Mixpanel's Experiments report is an Enterprise-only add-on; PostHog includes experiments on all plans with usage-based pricing.
 - PostHog offers SQL access for custom queries; Mixpanel doesn't have a native SQL editor, requiring you to export your data instead.
 
@@ -442,6 +442,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>What is Mixpanel used for?</summary>
 
 **Mixpanel** is a product analytics platform used to track user behavior, analyze conversion funnels, measure retention, and run A/B tests. Product, growth, and marketing teams use it to understand how users interact with their products and make data-driven decisions. Mixpanel has expanded significantly in recent years, adding session replay, heatmaps, feature flags, and experimentation.
@@ -472,7 +485,7 @@ For most teams, **PostHog** is the best alternative. It includes everything Mixp
 <details>
 <summary>Which Mixpanel alternative has the best free tier?</summary>
 
-**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, 1 million feature flag requests, and 1,500 survey responses per month. **[GA4](/blog/posthog-vs-ga4)** is free for up to 10M events/month but lacks session replay and experimentation. Mixpanel's free tier includes 1M events with a credit card on file.
+**PostHog** offers the most generous free tier: 1 million events, 5,000 session replays, 1 million feature flag requests, and 1,500 survey responses per month. **[GA4](/blog/posthog-vs-ga4)** is free for up to 10M events/month but lacks session replay and experimentation. **Mixpanel** is free for up to 1M events/month, with no credit card required.
 
 </details>
 

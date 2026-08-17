@@ -143,6 +143,54 @@ fun main() = application {
 }
 ```
 
+##### Configure Compose Desktop release builds
+
+If you package your app with Compose Desktop, add `jdk.unsupported` and a ProGuard configuration file to the `compose.desktop.application` block in your app module's `build.gradle.kts`:
+
+```kotlin file=composeApp/build.gradle.kts
+compose.desktop {
+    application {
+        buildTypes.release.proguard {
+            configurationFiles.from(project.file("compose-desktop.pro"))
+        }
+
+        nativeDistributions {
+            modules("jdk.unsupported")
+        }
+    }
+}
+```
+
+If you already configure `nativeDistributions.modules`, add `jdk.unsupported` to the existing list.
+
+Create `compose-desktop.pro` next to the module's `build.gradle.kts`:
+
+```text file=composeApp/compose-desktop.pro
+# PostHog uses Gson reflection for its queue and API payloads.
+-keepattributes Signature,*Annotation*
+-keep class com.posthog.** { *; }
+-keep class com.google.gson.** { *; }
+
+# Compose Desktop's ProGuard optimizer can produce invalid Okio bridge return types.
+-keep class okio.** { *; }
+
+# OkHttp probes optional platform and TLS provider classes at runtime.
+-dontwarn android.**
+-dontwarn dalvik.**
+-dontwarn javax.annotation.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.conscrypt.**
+-dontwarn org.openjsse.**
+-dontwarn org.codehaus.mojo.animal_sniffer.**
+-dontwarn com.jetbrains.SharedTextures
+
+-adaptresourcefilenames okhttp3/internal/publicsuffix/PublicSuffixDatabase.gz
+```
+
+Compose Desktop creates release distributions with ProGuard and a custom Java runtime built by `jlink`. The custom runtime doesn't include `jdk.unsupported` automatically, but Gson uses APIs from this module when it deserializes PostHog's queued events and API models. The ProGuard rules preserve reflection-based PostHog and Gson models, prevent invalid Okio bytecode optimization, and retain the OkHttp resources required at runtime.
+
+You must configure both settings in your application because Compose Desktop owns the application's ProGuard and `jlink` configuration. Dependencies such as the PostHog KMP SDK can't modify this release packaging configuration.
+
 On the JVM, the SDK persists its offline event queue and identity cache to disk under `~/.posthog-kmp`. If `user.home` isn't set (for example, in some containers), it falls back to the temp directory and logs a warning.
 
 ## Capturing events

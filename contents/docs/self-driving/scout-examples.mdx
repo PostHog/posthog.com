@@ -15,6 +15,12 @@ Self-driving is in open beta. It's improving quickly – expect rough edges, and
 
 A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostHog. There are two kinds: the **canonical** scouts PostHog ships with, and **custom** scouts you create for the patterns specific to your product. This page is a catalog of both, to spark ideas for what to point a scout at.
 
+<CalloutBox icon="IconBook" title="Prefer to learn by use case?" type="fyi">
+
+The [pocket guides](/pocket-guides) walk through real scouts end to end – the report each one files, the pull request it becomes, and a one-click way to add it to your own product.
+
+</CalloutBox>
+
 ## Canonical scouts
 
 PostHog ships a fleet of canonical scouts out of the box, each watching a common pattern. You turn each one on or off per project. Each scout is just a skill you can read (named `signals-scout-*`) – the table links straight to its `SKILL.md` in the [PostHog repo](https://github.com/PostHog/posthog/tree/master/products/signals/skills). Here's the full set:
@@ -24,17 +30,18 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [AI observability](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-ai-observability/SKILL.md) | Cost, latency, error, eval, and tool-usage trends and spikes across your AI traffic |
 | [Anomaly detection](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-anomaly-detection/SKILL.md) | Bursts, drops, flat-lines, and trend breaks in your most-viewed dashboards and insights |
 | [APM](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-apm/SKILL.md) | RED-metric regressions (error rate, p95 latency, volume) and new errors per service and operation |
+| [Conversations](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-conversations/SKILL.md) | Support delivery regressions – SLA breach rates, first-response latency, backlog inflow outpacing resolution, and channel or assignment concentration |
 | [CSP violations](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-csp-violations/SKILL.md) | Content Security Policy violation clusters, per-directive bursts, and suspicious third-party domains |
 | [Customer analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-customer-analytics/SKILL.md) | Churn-risk shapes on named accounts – engagement cliffs, dormancy, single-threaded champions |
+| [Customer analytics billing and usage](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-customer-analytics-billing-and-usage/SKILL.md) | Per-account product-mix shifts in usage and forecasted MRR that are masked by a stable account total |
 | [Data pipelines](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-data-pipelines/SKILL.md) | Delivery failures across CDP destinations, batch exports, and workflows, where config and reality disagree |
 | [Data warehouse](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-data-warehouse/SKILL.md) | Imports that quietly stop keeping their promise – failed source connections, stuck or silently stale syncs, row-volume cliffs, and failed materialized views |
 | [Error tracking](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) | Error spikes, stuck loops, and fingerprint clusters, triaged by how many users they hit |
 | [Experiments](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-experiments/SKILL.md) | Validity threats like sample-ratio mismatch, plus zombie experiments running past their useful life |
-| [Feature flags](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-feature-flags/SKILL.md) | Evaluation cliffs, ghost flags (keys no longer in code), and flag debt |
+| [Feature flags](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-feature-flags/SKILL.md) | Evaluation cliffs, ghost flags where code still calls a flag that no longer exists, and flag debt |
 | [General](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-general/SKILL.md) | Cross-product correlations and any surface no specialist covers |
 | [Health checks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-health-checks/SKILL.md) | Setup health issues – no live events, outdated SDKs, missing reverse proxy, failing warehouse models |
 | [Inbox validation](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md) | Whether a merged fix actually held, re-measured after a deployment soak window |
-| [Ingestion warnings](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-ingestion-warnings/SKILL.md) | Data that was dropped, mangled, or partially rejected during ingestion, including new warning types and broad error-severity clusters |
 | [Insight alerts](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-insight-alerts/SKILL.md) | Alert firings a human likely missed, especially ones the normal notification path stayed silent on |
 | [Logs](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-logs/SKILL.md) | Volume bursts, severity-distribution shifts, service silence, and new error message patterns |
 | [MCP tool calls](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-mcp-tool-calls/SKILL.md) | MCP tools that need improvement – broad failure rates, retry hammering, and slow or context-bloating responses |
@@ -45,6 +52,7 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [Session replay](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-session-replay/SKILL.md) | Recording capture integrity, plus rage-click and dead-click friction clusters |
 | [Skills store](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-skills-store/SKILL.md) | Static, verifiable skill-authoring problems such as vague descriptions, stale file links, bloated bodies, and committed secrets |
 | [Surveys](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-surveys/SKILL.md) | NPS and CSAT regressions, plus recurring themes in open-text responses |
+| [Tasks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-tasks/SKILL.md) | Agent task delivery health – runs failing, clustered by repo and error class, retry storms, and recurring asks that point at a product gap |
 | [Web analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
 | [Web vitals](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-vitals/SKILL.md) | Core Web Vitals regressions and other recent performance shifts in web traffic |
 
@@ -62,6 +70,7 @@ You can create your own scout for anything you care about. The job is the same e
 | **Own a funnel or a journey** | A scout can watch your key funnels and activation flows, flag a conversion or retention regression against the flow's own trailing baseline, and even propose the [experiment](/docs/experiments) to fix the weakest step. |
 | **Get a morning digest** | Most scouts stay quiet until something clears a bar. A digest scout inverts that: one report a day synthesizing its surface – your AI traffic, the day's merged PRs grouped into workstreams – where a quiet day gets a short "all green" and that's the product. |
 | **Turn free text into themes** | [Survey](/docs/surveys) responses, feedback submissions, support messages: instead of forwarding every item, a scout aggregates – "these six responses all describe the same checkout bug" is one actionable finding, not six noisy ones. |
+| **Score what you can't query** | Some metrics are judgment calls: whether a support reply resolved the question, whether generated content follows your guidelines, whether a summary sticks to its sources. A scout can judge a fresh sample on a schedule and [record each verdict as a structured measurement](/docs/self-driving/scouts#turn-a-scouts-judgment-into-a-metric), turning a subjective quality bar into a chartable time series. |
 | **Triage what already pages you** | If a detector already exists – billing spike alerts, an incident pipeline, a support channel where a bot classifies every ticket – a scout can be the judgment layer on top: bundling related items into one finding, weighing who's affected, and flagging the items nobody acted on. |
 | **Guard your SLOs** | If your team has explicit success-rate targets, a scout can score against the error budget instead of a trailing baseline – catching fast burns (an incident eating the budget right now) and slow burns (a success rate quietly creeping below target). |
 | **Notice when something *stops* happening** | Error tracking only sees code that throws – it can't see silence. A scout can pair an event that should keep firing (a compliance check in CI, a scheduled automation, even your own event capture) with a heartbeat that proves the system is otherwise alive, and flag when the heartbeat continues but the expected event goes quiet. |

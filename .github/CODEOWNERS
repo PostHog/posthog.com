@@ -15,4 +15,9 @@
 # Serverless API functions
 /api/ @PostHog/website
 
+# Editorial content
+/contents/blog/ @PostHog/editors
+/contents/newsletter/ @PostHog/editors
+/contents/tutorials/ @PostHog/editors
+
 /.github/CODEOWNERS @PostHog/website

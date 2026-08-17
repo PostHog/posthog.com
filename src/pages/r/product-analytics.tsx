@@ -15,7 +15,6 @@ import WistiaEmbed from 'components/WistiaEmbed'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import YCombinatorLogo from 'components/CustomerLogos/YCombinatorLogo'
 import SupabaseLogo from 'components/CustomerLogos/SupabaseLogo'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import ElevenLabsLogo from 'components/CustomerLogos/ElevenLabsLogo'
 import { IconRewindPlay, IconToggle, IconDatabase, IconChevronDown } from '@posthog/icons'
 
@@ -136,7 +135,6 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                 <div className="mb-12 max-w-7xl mx-auto">
                     <div className="flex flex-wrap items-center gap-x-12 gap-y-6 text-primary dark:text-primary-dark">
                         <SupabaseLogo className="fill-current object-contain max-w-full h-8" />
-                        <LovableLogo className="fill-current object-contain max-w-full h-6" />
                         <ElevenLabsLogo className="fill-current object-contain max-w-full h-8" />
                         <YCombinatorLogo className="fill-current object-contain max-w-full h-8" />
                     </div>
@@ -297,7 +295,7 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/product-analytics/build-insights-mcp"
+                                    to="/docs/product-analytics/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Explore AI features

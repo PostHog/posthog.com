@@ -39,9 +39,14 @@ The metric was created from an insight, and that insight's query has changed sin
 
 Compare the metric's `compiled_query` (from a run) with the insight's current query to see what changed. Until it's re-approved, results are labeled noncanonical.
 
-## I deleted a metric but can't reuse the name
+## I renamed or deleted a metric and references to it broke
 
-By design. Names are write-once and stay reserved after deletion, so a stored reference to a name can never silently point at a different definition. Pick a new name.
+By design. Renaming or deleting a metric frees its name, and anything that stored the old name – saved SQL over `system.information_schema.metrics`, API calls, links – stops resolving. After a rename, update those references to the new name.
+
+Two things to know before you rely on this:
+
+- **Deletion has no undo in the product.** Re-creating a metric with a deleted name starts completely fresh – the old definition, history, and approval don't come back.
+- **Renaming an approved metric resets it to `proposed`**, so it needs approving again under the new name.
 
 ## An agent keeps proposing a join we don't want
 
@@ -51,7 +56,7 @@ The flip side: **rejection has no undo** in the alpha. If you rejected a proposa
 
 ## Where's the UI?
 
-There isn't one yet. During the alpha the semantic layer is MCP tools and SQL only – no catalog page in the app. Also worth knowing:
+Open the command palette with `Cmd/Ctrl + K` and search for **Data Catalog**. From there you can browse and manage your metrics, certifications, and relationships – reviewing and promoting what agents have proposed without leaving PostHog. You can still do everything through MCP tools and SQL if you prefer. Also worth knowing:
 
 - Tool names and behavior may change between releases
 - The alpha is enabled per organization, not per user or project

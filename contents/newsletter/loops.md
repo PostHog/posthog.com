@@ -21,7 +21,7 @@ seo:
 
 When the creators of both OpenClaw and Claude Code speak, people listen. And last week [Peter Steinberger](https://x.com/steipete/status/2063697162748260627) and Boris Cherny were [both talking about](https://www.youtube.com/watch?v=PfWVVI9ALd8&t=1s) the same concept: loops.
 
-Their argument? You shouldn't be prompting agents to write code, but building loops that prompt themselves to write code, so agents can complete long running tasks and you can use multiple agents at once to go further, faster.
+Their argument? You shouldn't be prompting agents to write code, but [building loops that prompt themselves to write code](/newsletter/software-factories#what-is-a-software-factory), so agents can complete long running tasks and you can use multiple agents at once to go further, faster.
 
 ## What's needed to engineer a loop?
 
@@ -49,7 +49,7 @@ Good examples of loops include:
 
 - **Bug fixer.** The goal is to fix the bug. The context is the bug report and error trace. The evaluation is the test suite, snapshots, logs.
 
-- **Flaky test hunter.** The goal is to kill flaky tests. The context is CI history and retry logs. The eval is consecutive green runs.
+- **Flaky test hunter.** The goal is to [kill flaky tests](/blog/10k-prs-a-month#battling-the-bottleneck-of-ci). The context is CI history and retry logs. The eval is consecutive green runs.
 
 - **Performance autoresearcher.** The goal is to beat a benchmark. The context is the system, metrics, and budget. The eval is whether it is faster, better, etc. on that metric. We recently used Karpathy's autoresearcher loop and it [fixed a 3-year-old bug in our query engine](/blog/karpathy-autoresearch-query-engine-bug) and increased performance by 11%.
 
