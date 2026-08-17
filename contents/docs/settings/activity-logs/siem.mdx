@@ -102,7 +102,7 @@ Install the [PostHog Splunk add-on](https://github.com/PostHog/splunk-add-on). S
 
 ### 1. Install the add-on
 
-On **Splunk Cloud Platform**, go to **Apps** > **Find More Apps**, search for PostHog, and install.
+On **Splunk Cloud Platform**, go to **Apps** > **Find More Apps**, search for PostHog, and install. Splunk asks for your Splunk.com login to complete the install, which is a separate account from the one you use to sign in to Splunk Cloud. No restart is needed.
 
 On **Splunk Enterprise**, install from Splunkbase, or build it from source and copy the result into `$SPLUNK_HOME/etc/apps/`.
 
@@ -153,6 +153,8 @@ index=<your index> sourcetype="posthog:activity_log" | stats count by class_uid,
 ```
 
 Events are timestamped with when the activity happened in PostHog, not when Splunk indexed them, so a `timechart` reflects real history.
+
+Set the time range to **All time** for this first check. Splunk's default range covers the last 24 hours, and your history is older than that, so a narrower range shows only a fraction of what was collected and looks like a partial sync.
 
 ### Troubleshooting
 
