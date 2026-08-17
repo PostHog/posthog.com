@@ -15,8 +15,8 @@ A metric is a named, governed answer to a business question: one definition, one
 
 | Field | What it is |
 |-------|------------|
-| `name` | Identifier-safe handle (`mrr`, `weekly_active_teams`), unique per project. **Write-once and reserved forever**, even after deletion. |
-| `display_name` | Human-friendly label. Mutable, unlike `name`. |
+| `name` | Identifier-safe handle (`mrr`, `weekly_active_teams`), unique among your project's live metrics. [Renaming or deleting](#renaming-and-deleting) a metric frees its name, and references to the old name stop resolving. |
+| `display_name` | Human-friendly label. Change it freely – unlike `name`, nothing references it and editing it never resets approval. |
 | `description` | What the metric means and how to interpret it. This is load-bearing text – agents read it to decide whether the metric answers a question. |
 | `unit` | Unit of the result, e.g. `usd`, `percent`, `cents`. |
 | `owner` | The human accountable for the metric. |
@@ -27,9 +27,9 @@ A metric is a named, governed answer to a business question: one definition, one
 | `source_insight_short_id` | Set when the metric was created from an insight – the insight's query is snapshotted server-side. Mutually exclusive with `definition`. |
 | `created_source`, `ai_model`, `confidence`, `reasoning` | Provenance: whether a human (`user`) or an agent (`ai_generated`) authored it, and if an agent did, which model, how confident it was, and why. |
 
-<CalloutBox icon="IconInfo" title="Why names are reserved forever" type="fyi">
+<CalloutBox icon="IconInfo" title="Names are references" type="fyi">
 
-Agents and integrations store metric names and call them later. If a deleted name could be reused, a stored reference to `mrr` could silently start meaning something else. So names are write-once: deleting a metric retires its name permanently. Treat naming a metric like naming an API route.
+Agents and integrations store metric names and call them later – in saved SQL over `system.information_schema.metrics`, in run calls, in links. A name is only guaranteed stable while the metric lives under it: renaming or deleting the metric frees the name, stored references stop resolving, and a freed name can later be claimed by an unrelated metric. Treat naming a metric like naming an API route – the system won't stop you from breaking the contract, so keep it deliberately.
 
 </CalloutBox>
 
@@ -61,7 +61,17 @@ Use an executable definition whenever the metric is deterministic. Reach for mar
 
 Every metric lands as `proposed` – whether a human or an agent created it, and even when an existing name is refined (`data-catalog-metric-create` upserts on `name`). A human then approves it, which requires typing "confirm" and the `data_catalog_approval` scope.
 
-Editing an approved metric's definition resets it to `proposed`. A metric is never silently redefined: any change to what the number means goes back through a human.
+Editing an approved metric's definition, name, description, or unit resets it to `proposed`. A metric is never silently redefined: any change to what the number means goes back through a human. Cosmetic fields – `display_name`, `owner` – never reset approval.
+
+## Renaming and deleting
+
+Both are ways a name stops meaning what it used to, so both come with the same warning: anything that references the metric by name – saved SQL, API calls, links – stops working until it's updated.
+
+**Renaming.** Rename a metric from its page in the Data Catalog UI, or by updating `name` through the API or the [`data-catalog-metric-update`](/docs/semantic-layer/mcp-tools#metric-tools) tool. The old name is freed for a new metric to claim, and renaming an approved metric resets it to `proposed` – agents pick metrics by name, so a definition under a different name is a different promise, and it needs approving again.
+
+**Deleting.** Delete a metric from the Data Catalog UI or the API. Deleting requires only editor access (the `data_catalog:write` scope) and works on approved metrics too – no approval scope, no typed confirmation beyond the dialog. There's no undo in the product, and there's deliberately no MCP delete tool: agents can propose and update metrics, but retiring one is a human act.
+
+Deleting frees the name immediately. Creating a metric with a deleted name starts completely fresh – no definition, history, or approval carries over from the old one.
 
 ## Drift
 
@@ -101,10 +111,11 @@ Runs accept optional overrides: `date_from` (e.g. `-7d`), `date_to`, and `interv
 
 ## Naming metrics well
 
-Names are an API contract. Choose accordingly:
+Names are an API contract – one you uphold by convention, since [renaming and deleting](#renaming-and-deleting) can free a name at any time. Choose accordingly:
 
 - Lowercase, terse, unambiguous: `mrr`, `nrr`, `weekly_active_teams`
 - No versions or qualifiers in the name – that's what `description` and the lifecycle are for
+- Once a name is in use, keep it: every rename breaks whatever stored the old one
 - If two teams mean different things by "activation", make two metrics with honest names (`activation_signup`, `activation_first_insight`) rather than one contested one
 
 The description does the heavy lifting for discovery: agents match questions against it, so write it the way a teammate would ask the question.

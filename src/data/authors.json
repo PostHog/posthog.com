@@ -760,5 +760,13 @@
         "name": "Jake Sciotto",
         "role": "Customer Success Manager",
         "profile_id": 43452
+    },
+    {
+        "handle": "will-wearing",
+        "name": "Will Wearing",
+        "role": "Technical Account Manager",
+        "link_type": "github",
+        "link_url": "https://github.com/willwearing",
+        "profile_id": 41941
     }
 ]

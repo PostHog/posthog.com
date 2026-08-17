@@ -19,9 +19,11 @@ A scout is a scheduled agent that explores your PostHog data and raises a hand w
 
 A scout runs on a schedule. Each run, it looks at one slice of your data, decides whether anything is worth surfacing, and if so files what it found. A scout has three ways to do that:
 
-- **File a report directly.** When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from.
-- **Emit a signal.** When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report.
-- **Record structured data.** When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric).
+| Method | When it applies |
+|---|---|
+| **File a report directly** | When a scout finishes its research with a complete, well-formed finding, it authors a [report](/docs/self-driving/reports) straight into your [inbox](/docs/self-driving/inbox) – a title, a summary, the evidence behind it, and a call on how actionable it is. Most of the built-in scouts work this way, and a scout-authored report shows the scout's name in the inbox so you know where it came from. |
+| **Emit a signal** | When a finding is a weaker or partial observation – the kind that only becomes meaningful next to other findings – the scout emits a [signal](/docs/self-driving/signals) instead and lets the pipeline deduplicate it and group it with related signals into a report. |
+| **Record structured data** | When the job is scoring, classifying, or extracting rather than surfacing, a scout can record schema-checked structured records as events instead of filing anything to your inbox. See [turn a scout's judgment into a metric](#turn-a-scouts-judgment-into-a-metric). |
 
 For the first two, the bar is the same: a structured finding with the evidence behind it and a suggested action. The difference is whether the scout has already done enough research to stand behind the finding as a single inbox item, or whether the pipeline should consolidate it with others first. Measurements are different: they aren't findings at all, just data, and they skip the inbox entirely.
 
@@ -37,8 +39,10 @@ Because scouts run on a schedule, the loop keeps noticing problems and opportuni
 
 Every scout runs on its own schedule, which you set per scout without touching its instructions. There are two ways to express one:
 
-- **An interval** – how long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing.
-- **A cron expression** – a standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval.
+| Format | Description |
+|---|---|
+| **An interval** | How long to wait between runs, from every 30 minutes to every 30 days. This is the default, and a new scout starts at every 24 hours. Use it when you care about frequency rather than timing. |
+| **A cron expression** | A standard five-field expression that anchors runs to wall-clock slots, like `30 9 * * *` for every day at 09:30, `0 9,17 * * *` for twice a day, or `0 9 * * 1-5` on weekdays only. Occurrences have to be at least 30 minutes apart, the same floor as the interval. |
 
 Cron expressions are evaluated in your project's timezone, so a scout scheduled for 09:00 stays at 09:00 through daylight saving changes. Setting a cron expression takes precedence over the interval.
 
@@ -70,9 +74,11 @@ An inactivity pause never retries on its own – it stays in place until you ena
 
 Sometimes you don't want to change a scout – you want to tell it something. **Scout notes** are short steering messages you leave for the fleet, which every run reads as context alongside its own memory:
 
-- **Feedback on its output** – "the staging traffic spike you keep flagging is known noise, stop reporting it."
-- **A pointer** – "dig into the EU signup funnel this week, we think something regressed."
-- **Context it couldn't know** – "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected."
+| Type | Example |
+|---|---|
+| **Feedback on its output** | "the staging traffic spike you keep flagging is known noise, stop reporting it." |
+| **A pointer** | "dig into the EU signup funnel this week, we think something regressed." |
+| **Context it couldn't know** | "we shipped a new checkout on Tuesday, treat conversion shifts after that as expected." |
 
 A note can address one scout by name or the whole fleet, and you can give it an expiry date so time-boxed steering ("watch this closely this week") retires itself.
 
