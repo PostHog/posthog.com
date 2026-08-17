@@ -278,6 +278,22 @@ function Chip({ label, kind }: Ingredient) {
     )
 }
 
+// Shared "Tutorial" + "Skill" button row used on both recipe and modeling-skill cards.
+const CardActions = () => (
+    <div className="mt-auto flex gap-2 pt-4">
+        <div className="flex-1">
+            <CallToAction to="/tutorials" type="secondary" size="sm" width="full">
+                Tutorial
+            </CallToAction>
+        </div>
+        <div className="flex-1">
+            <CallToAction to="#" type="secondary" size="sm" width="full">
+                Skill
+            </CallToAction>
+        </div>
+    </div>
+)
+
 function RecipeCard({ recipe }: { recipe: Recipe }) {
     return (
         <div className="flex h-full flex-col bg-primary border border-primary border-b-4 rounded p-5 transition-all hover:-translate-y-0.5 hover:border-b-red">
@@ -295,18 +311,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
                 Self-driving development
             </p>
             <p className="text-[14.5px] text-secondary m-0">{recipe.uncover}</p>
-            <div className="mt-auto flex gap-2 pt-4">
-                <div className="flex-1">
-                    <CallToAction to="/tutorials" type="secondary" size="sm" width="full">
-                        Tutorial
-                    </CallToAction>
-                </div>
-                <div className="flex-1">
-                    <CallToAction to="#" type="secondary" size="sm" width="full">
-                        Download Skill
-                    </CallToAction>
-                </div>
-            </div>
+            <CardActions />
         </div>
     )
 }
@@ -321,6 +326,7 @@ function SkillCard({ skill }: { skill: ModelingSkill }) {
             <div className="border-t border-primary mt-4 mb-2" />
             <p className="text-[11px] font-bold uppercase tracking-wide text-green mt-2 mb-1">The rule it enforces</p>
             <p className="text-[14.5px] text-secondary m-0">{skill.rule}</p>
+            <CardActions />
         </div>
     )
 }
@@ -396,7 +402,7 @@ function UseCases(): JSX.Element {
                     </div>
 
                     <div className="mb-4">
-                        <div className="bg-accent border border-primary border-b-4 rounded p-5">
+                        <div className="flex flex-col bg-accent border border-primary border-b-4 rounded p-5">
                             <div className="flex flex-wrap items-center gap-2 mb-3">
                                 <span className="font-code text-[13.5px] font-bold leading-tight break-words text-red dark:text-yellow">
                                     {foundationsSkill.name}
@@ -411,6 +417,18 @@ function UseCases(): JSX.Element {
                                 The rule it enforces
                             </p>
                             <p className="text-[14.5px] text-secondary m-0">{foundationsSkill.rule}</p>
+                            <div className="mt-4 flex max-w-xs gap-2">
+                                <div className="flex-1">
+                                    <CallToAction to="/tutorials" type="secondary" size="sm" width="full">
+                                        Tutorial
+                                    </CallToAction>
+                                </div>
+                                <div className="flex-1">
+                                    <CallToAction to="#" type="secondary" size="sm" width="full">
+                                        Skill
+                                    </CallToAction>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
