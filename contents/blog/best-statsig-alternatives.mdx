@@ -110,7 +110,7 @@ By combining all these tools into one platform, PostHog eliminates the need for 
 
 - **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
-- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/product-analytics/sql) for power users.
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
 
 - **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
 
@@ -120,7 +120,7 @@ By combining all these tools into one platform, PostHog eliminates the need for 
 
 Statsig and PostHog are similar in some ways, but have different strengths.
 
-PostHog offers more powerful product analytics and session replay features, including support for [event autocapture](/docs/product-analytics/autocapture), writing [custom SQL insights](/docs/product-analytics/sql), and [session replay on mobile apps](/docs/session-replay/mobile). It also supports a handful of feature flag features not available with Statsig and offers user surveys.
+PostHog offers more powerful product analytics and session replay features, including support for [event autocapture](/docs/product-analytics/autocapture), writing [custom SQL insights](/docs/data-warehouse/sql), and [session replay on mobile apps](/docs/session-replay/mobile). It also supports a handful of feature flag features not available with Statsig and offers user surveys.
 
 Statsig, as its name suggests, is an experimentation tool first and foremost. While both tools support core testing features, like secondary metrics and multivariate tests, PostHog doesn't offer multi-armed bandit or mutually exclusive experiments.
 
@@ -154,7 +154,7 @@ Statsig, as its name suggests, is an experimentation tool first and foremost. Wh
 <summary>Main differences between PostHog and Statsig</summary>
 
 - PostHog is fully independent and open source; Statsig was acquired by OpenAI and its brand and customers are currently taken over by Amplitude.
-- PostHog has a [built-in data warehouse](/docs/data-warehouse) and [SQL access](/docs/product-analytics/sql) on every plan; Statsig's warehouse-native mode is gated behind its Enterprise tier.
+- PostHog has a [built-in data warehouse](/docs/data-warehouse) and [SQL access](/docs/data-warehouse/sql) on every plan; Statsig's warehouse-native mode is gated behind its Enterprise tier.
 - PostHog offers an [EU-hosted cloud](/eu) at no extra cost; Statsig's hosted product is US-only.
 - Statsig offers more advanced statistical methods (CUPED, sequential testing, multi-armed bandits); PostHog focuses on the core experimentation workflows.
 

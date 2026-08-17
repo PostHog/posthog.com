@@ -51,7 +51,7 @@ Its LLM observability product (known as [AI Observability](/docs/ai-observabilit
 
 #### What makes PostHog special?
 
-PostHog’s AI Observability app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s AI Observability app works with the rest of our dev tool suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/data-warehouse/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
 Two features worth highlighting for teams iterating on LLM apps:
 

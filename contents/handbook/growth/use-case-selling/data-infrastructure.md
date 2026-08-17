@@ -196,7 +196,7 @@ Usually **Data Warehouse** or **Batch Exports**. Two common patterns:
 - [ ] Verify batch export is running reliably with expected data freshness
 - [ ] Configure at least one [Realtime Destination](/docs/cdp/destinations) if they need event data in downstream tools (Slack alerts, CRM sync, ad platform conversions)
 - [ ] Build a "Unified Analytics" dashboard combining product events with business data
-- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/product-analytics/sql))
+- [ ] Introduce the data team to HogQL if they're SQL-comfortable ([HogQL docs](/docs/data-warehouse/sql))
 - [ ] Identify additional data sources to connect (CRM, other databases, ad platforms)
  
 ## Cross-sell pathways from this use case
