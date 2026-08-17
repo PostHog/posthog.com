@@ -14,9 +14,9 @@ seo:
   metaDescription: A practical guide to using traces, clusters, sentiment, evaluations, dashboards, and workflows to measure and improve an AI agent.
 ---
 
-If you're anything like literally every other tech company in the world right now, chances are you've already shipped, or are planning to ship, an AI product. Tools of the past make it hard (impossible?!) to understand how your product is performing. Users might return every day because your agent works brilliantly, or because it tells them the weather, which isn't that useful if you're a finance company...
+If you're anything like literally every other tech company in the world right now, chances are you've already shipped, or are planning to ship, an AI product. Tools of the past make it hard (impossible, really) to understand how your product is performing. Users might return every day because your agent works brilliantly, or because it tells them the weather, which isn't that useful if you're a finance company.
 
-This article is my attempt at tackling the real questions: When someone asks your agent to do something, does it actually succeed? And if it doesn't, how the hell do you improve it in a measurable way?
+This tutorial is about answering the real questions that matter when you ship an AI agent: When someone asks your agent to do something, does it actually succeed? And if it doesn't, how the hell do you improve it in a measurable way?
 
 ## The AI product improvement loop
 
@@ -32,7 +32,7 @@ Let's make this concrete. Imagine you've added an AI assistant to a banking app 
 
 Vibes are fun but hard to base business decisions on! So we're going to tie actual production data from real users to outcomes.
 
-![The seven-step AI product improvement loop, from capturing the right data through tracking whether the agent improved](/images/tutorials/understand-ai-agent-performance/ai-product-improvement-loop.png)
+![The seven-step AI product improvement loop, from capturing the right data through tracking whether the agent improved](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_50_29_648_Z_c98944d6bd.png)
 
 ## Step 1: Capture the right data in the right format
 
@@ -78,7 +78,7 @@ Once data is flowing into PostHog, the first place I'd start is [clusters](/docs
 
 Clusters automatically group similar LLM traces or generations together, so you can discover common patterns in how users interact with your LLM features without reading every conversation manually.
 
-![Clusters in PostHog showing themes across AI traces and generations](/images/tutorials/understand-ai-agent-performance/clusters-overview.jpg)
+![Clusters in PostHog showing themes across AI traces and generations](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_50_34_731_Z_53dc59d5c6.jpeg)
 
 The Clusters tab shows the biggest themes across your traces and generations.
 
@@ -110,7 +110,7 @@ The important thing with clusters is understanding what your customers are askin
 
 Click on a card to jump into a cluster and look at the title.
 
-![A PostHog cluster detail page with its summary, metrics, visualization, and example traces](/images/tutorials/understand-ai-agent-performance/cluster-details.png)
+![A PostHog cluster detail page with its summary, metrics, visualization, and example traces](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_50_33_753_Z_c36b0d6006.png)
 
 Each cluster card gives you the theme, a summary, and example traces to validate.
 
@@ -120,15 +120,15 @@ In our banking app, imagine you have a cluster called **Bank balance**.
 
 One person might ask:
 
-> How much money do I have in my bank account?
+_"How much money do I have in my bank account?"_
 
 Another person might ask:
 
-> I want to understand how much money I have in my account today.
+_"I want to understand how much money I have in my account today."_
 
 Someone else might ask:
 
-> Help me understand how much money I have across my different accounts.
+_"Help me understand how much money I have across my different accounts."_
 
 Those all probably belong in the same cluster.
 
@@ -148,7 +148,7 @@ You probably don't need to do this for every trace, but you should review enough
 
 Note: I'd also watch a few [session replays](/session-replay) to get the full context of what the user was doing. Or if you're lazy like me, get [Replay Vision](/replay-vision) to do it for you.
 
-![A PostHog AI trace linked to a session replay](/images/tutorials/understand-ai-agent-performance/session-replay.png)
+![A PostHog AI trace linked to a session replay](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_51_33_151_Z_241c3c2a76.png)
 
 If you haven't linked traces to replays yet, [set that up here](/docs/ai-observability/link-session-replay).
 
@@ -171,7 +171,7 @@ You can set this up by creating a [sentiment analysis evaluation](/docs/ai-evals
 
 This helps you understand, at a glance, how customers feel while they're interacting with an AI feature.
 
-![The Sentiment tab in PostHog AI Observability](/images/tutorials/understand-ai-agent-performance/sentiment.png)
+![The Sentiment tab in PostHog AI Observability](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_51_30_033_Z_a99eef47e2.png)
 
 The Sentiment tab helps you find positive or negative messages, then jump straight into the trace for context.
 
@@ -198,9 +198,9 @@ For example:
 
 One simple starting point is a [boolean (true or false) eval](/docs/ai-evals):
 
-> Did the agent successfully answer the user's question? True or false.
+_"Did the agent successfully answer the user's question? True or false."_
 
-![Creating a boolean evaluation in PostHog](/images/tutorials/understand-ai-agent-performance/evaluation.png)
+![Creating a boolean evaluation in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_50_36_709_Z_9c9d1606d1.png)
 
 Create a boolean eval and give it a narrow job, a clear pass condition, and the context it needs to judge the answer.
 
@@ -210,7 +210,7 @@ The important thing is to avoid creating evals that are too vague.
 
 "Was this a good response?" is less useful than:
 
-> Did the agent return the correct bank balance using the customer's live account data? True or false.
+_"Did the agent return the correct bank balance using the customer's live account data? True or false."_
 
 The closer your eval is to the user's actual job-to-be-done, the more useful it becomes.
 
@@ -234,7 +234,7 @@ The other key thing with evals is that you can generate insights from them.
 
 You can create [trend insights](/docs/product-analytics/insights) from `$ai_evaluation` events and add them to your [AI Observability dashboard](/docs/ai-observability/dashboard).
 
-![A trend insight showing AI evaluation results over time](/images/tutorials/understand-ai-agent-performance/evaluation-insight.png)
+![A trend insight showing AI evaluation results over time](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_50_35_720_Z_6f651c4c0a.png)
 
 Start with something like the Bank balance accuracy eval and chart its success rate over time. This gives you a baseline for your AI product's performance.
 
@@ -250,7 +250,7 @@ For some more ideas, you might track:
 - Failure rate by tool used
 - Cost per successful conversation
 
-![An AI Observability dashboard in PostHog](/images/tutorials/understand-ai-agent-performance/ai-observability-dashboard.png)
+![An AI Observability dashboard in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_49_49_601_Z_f26a16c467.png)
 
 Put the metrics you care about on one dashboard so the whole team is looking at the same definition of "better."
 
@@ -272,17 +272,17 @@ If an agent fails consistently in production, you probably don't want that failu
 
 In PostHog, you can set up a [workflow](/docs/workflows/launch-workflow) so that when an eval fails, it sends the eval reasoning to Slack, email, or wherever your team works.
 
-![Creating a workflow for failed AI evaluations in PostHog](/images/tutorials/understand-ai-agent-performance/workflow-campaign.png)
+![Creating a workflow for failed AI evaluations in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_51_38_974_Z_4be0a339ef.png)
 
 Trigger the workflow from a failed `$ai_evaluation` event, then route it to the channel your team actually watches.
 
 For example, let's say a user asks:
 
-> What's my bank account balance today?
+_"What's my bank account balance today?"_
 
 For whatever reason, the agent hallucinates and says:
 
-> You're really wealthy. You have $100 million.
+_"You're really wealthy. You have $100 million."_
 
 But the user does not have $100 million. They have minus $1,000 because buying PostHog merch is more fun than paying bills!
 
@@ -290,14 +290,14 @@ You can imagine the customer would be pretty unhappy.
 
 What you want is a short summary sent to the right channel, something like:
 
-> Chatbot failed because the user wanted to know how much money was in their bank account and the agent returned the wrong balance.
+_"Chatbot failed because the user wanted to know how much money was in their bank account and the agent returned the wrong balance."_
 
 You can (and should!) also include buttons like:
 
 - View the trace
 - Open the person profile
 
-![A workflow alert with links to the failed trace and person](/images/tutorials/understand-ai-agent-performance/workflow-alert.png)
+![A workflow alert with links to the failed trace and person](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_51_35_314_Z_fd6f857751.png)
 
 The alert should include the eval reasoning and links back to the trace and person, so someone can actually do something with it.
 
@@ -326,7 +326,7 @@ Each of those failures needs a different fix, and this is where the Playground b
 
 Take the failed bank balance trace from the last step. Your product team can test different prompts or tool behavior in the Playground and see whether the agent now returns the right answer.
 
-![Testing a failed AI generation in the PostHog Playground](/images/tutorials/understand-ai-agent-performance/playground.png)
+![Testing a failed AI generation in the PostHog Playground](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_08_17_T08_51_27_430_Z_989da41d0c.png)
 
 Open a failed generation in the Playground to test prompt or model changes against the same production example.
 
@@ -373,4 +373,4 @@ If you're manually watching every replay yourself, you're wasting time. Replay V
 
 It's doing for UX research what LLMs have done for development speed.
 
-Which is good, because otherwise we're all going to spend the next five years watching videos of people arguing with chatbots, and that would suuucckk!
+Which is good, because otherwise we're all going to spend the next five years watching videos of people arguing with chatbots. And that would suuuck.
