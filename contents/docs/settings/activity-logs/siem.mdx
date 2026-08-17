@@ -13,7 +13,9 @@ You can forward PostHog [activity logs](/docs/settings/activity-logs) into a sec
 
 PostHog exposes activity logs as a paginated API that your SIEM polls on a schedule, so you configure the integration in your SIEM rather than in PostHog.
 
-If you use Splunk, [skip to the Splunk steps](#splunk). An add-on does all of this for you. The rest of this page describes the API, which you need when integrating with a platform we do not ship an add-on for.
+There are two ways to configure a SIEM integration:
+- **Recommended setup:** Use the API
+- Use the [Splunk add-on](#splunk)
 
 ## Before you start
 
