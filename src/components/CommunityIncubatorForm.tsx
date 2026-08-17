@@ -11,7 +11,7 @@ const TRACKS = [
     {
         value: 'builder_group',
         label: 'Builder group',
-        description: 'Recruit local builders for 4 sessions',
+        description: 'Recruit local builders for 5 sessions',
         accent: 'peer-checked:border-red peer-checked:bg-red/10',
     },
     {

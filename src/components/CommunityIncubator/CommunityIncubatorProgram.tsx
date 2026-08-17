@@ -110,9 +110,9 @@ const tracks: Track[] = [
             },
             {
                 term: 'Makeup',
-                copy: "4+ core members, each with at least one project that's shipping and verifiably evolving.",
+                copy: "4+ core members, each with a project that's shipping and evolving.",
             },
-            { term: 'Duration', copy: 'Three months. Weekly or biweekly sessions plus a public footprint.' },
+            { term: 'Duration', copy: 'Three months. Biweekly sessions plus a public footprint.' },
             {
                 term: 'Support',
                 copy: (
@@ -122,7 +122,7 @@ const tracks: Track[] = [
                 ),
             },
         ],
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/austin_texas_4368805f1b.jpeg',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/atx_44_22627dfd50.jpeg',
         alt: 'Builder collective crew in Austin',
         caption: 'Matt with the ATX Builders collective in Austin',
     },
@@ -152,9 +152,9 @@ const tracks: Track[] = [
                 ),
             },
         ],
-        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e.png',
-        alt: 'Builders working together in a coffee shop',
-        caption: 'A co-founder, product manager, graphic designer, developer, and webmaster take over a coffee shop',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/DSC_05512_395b1b45ea.jpg',
+        alt: 'Builders working together in a tropical location',
+        caption: 'Richard and Matheus hacking by the pool',
     },
 ]
 
@@ -494,7 +494,7 @@ export default function CommunityIncubatorProgram(): JSX.Element {
                     </div>
 
                     <div className={`${contentSectionClasses} border-t border-primary pt-8`}>
-                        <h2 className="mb-2">Global footprint</h2>
+                        <h2 className="mb-2">Global spotlight</h2>
                         <p className="mb-6">
                             Builders are gathering in cities across the globe. You'd be in good company.
                         </p>
