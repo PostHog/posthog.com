@@ -105,6 +105,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # reading order, but not one of the "N guides" the cover prints. Declared so a book page can
       # exist without a report block.
       isPrimer: Boolean
+      # Groups a book's contents into named sections (e.g. "Ask a quick question" vs
+      # "Long-term modeling"). Pages without one print in a single flat list, as before.
+      section: String
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
       # The product surface a scout template belongs to, e.g. "Error tracking". Drives the

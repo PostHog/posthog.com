@@ -5,6 +5,7 @@ import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
+import { BookPageEntry } from './bookModel'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
@@ -57,32 +58,73 @@ export function Enable(): JSX.Element | null {
     return <EnableScout scout={template.scout} requires={template.requires} templateTitle={template.templateTitle} />
 }
 
-/** The contents list, built from the book itself. */
+/** One page's row: a link, a dotted leader, and its folio number. */
+function ContentsRow({ page }: { page: BookPageEntry }): JSX.Element {
+    return (
+        <li className="flex items-baseline gap-2">
+            <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
+                {page.title}
+            </Link>
+            {/* The dotted leader, so the row reads as a ToC line. */}
+            <span aria-hidden="true" className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50" />
+            <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
+                {String(page.page).padStart(2, '0')}
+            </span>
+        </li>
+    )
+}
+
+/**
+ * The contents list, built from the book itself. Groups into named sections when pages declare
+ * a `section` in frontmatter (consecutive by reading order); a book where no page does prints
+ * the same single flat list as before.
+ */
 export function Contents(): JSX.Element | null {
     const book = useEntry()
     if (!book) {
         return null
     }
-    return (
-        <ul className="m-0 list-none space-y-3 p-0">
-            {book.pages
-                .filter((page) => !page.isFrontMatter)
-                .map((page) => (
-                    <li key={page.url} className="flex items-baseline gap-2">
-                        <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
-                            {page.title}
-                        </Link>
-                        {/* The dotted leader, so the row reads as a ToC line. */}
-                        <span
-                            aria-hidden="true"
-                            className="min-w-6 flex-1 border-b border-dotted border-primary opacity-50"
-                        />
-                        <span className="shrink-0 text-[0.9em] tabular-nums text-secondary">
-                            {String(page.page).padStart(2, '0')}
-                        </span>
-                    </li>
+    const pages = book.pages.filter((page) => !page.isFrontMatter)
+
+    if (pages.every((page) => !page.section)) {
+        return (
+            <ul className="m-0 list-none space-y-3 p-0">
+                {pages.map((page) => (
+                    <ContentsRow key={page.url} page={page} />
                 ))}
-        </ul>
+            </ul>
+        )
+    }
+
+    // Group consecutive pages sharing a section – reading order already sorted them.
+    const groups: { section?: string; pages: BookPageEntry[] }[] = []
+    for (const page of pages) {
+        const current = groups[groups.length - 1]
+        if (current && current.section === page.section) {
+            current.pages.push(page)
+        } else {
+            groups.push({ section: page.section, pages: [page] })
+        }
+    }
+
+    return (
+        <div className="space-y-6">
+            {groups.map((group, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={group.section ?? i}>
+                    {group.section && (
+                        <p className="m-0 mb-2 text-[0.8em] font-bold uppercase tracking-wide text-secondary">
+                            {group.section}
+                        </p>
+                    )}
+                    <ul className="m-0 list-none space-y-3 p-0">
+                        {group.pages.map((page) => (
+                            <ContentsRow key={page.url} page={page} />
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
     )
 }
 
@@ -129,4 +171,14 @@ export const proseComponents = {
     ),
     a: ({ href, ...props }: any) => <Link to={href} state={{ newWindow: true }} className="underline" {...props} />,
     hr: () => <span aria-hidden="true" className="my-6 block w-16 border-t border-primary" />,
+    // A worked-example table inside a <Fig> – illustrative rows, not live data.
+    table: (props: any) => <table className="w-full border-collapse text-left text-[0.85em]" {...props} />,
+    thead: (props: any) => <thead className="border-b border-primary" {...props} />,
+    th: (props: any) => (
+        <th
+            className="py-1.5 pr-3 text-[0.85em] font-bold uppercase tracking-wide text-secondary last:pr-0"
+            {...props}
+        />
+    ),
+    td: (props: any) => <td className="border-b border-primary/30 py-1.5 pr-3 text-primary last:pr-0" {...props} />,
 }

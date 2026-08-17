@@ -45,6 +45,20 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
     )
 }
 
+/**
+ * A worked example illustrating what an answer looks like – arbitrary MDX content (usually a
+ * table) in a numbered frame. A named wrapper around `<Fig>`, not `<Fig>` itself: the reader's
+ * wrapper only positions a `<LeftPage>` child by its `<SeeFig>` citation when its component name
+ * ends in "Figure" – ambient `<Fig>` prints at the top of the page, uncited.
+ */
+export function ExampleFigure({ n = 1, caption, legend, children }: FigProps): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            {children}
+        </Fig>
+    )
+}
+
 /** This use case's report, as it lands in the inbox. */
 export function ReportFigure({
     n = 1,

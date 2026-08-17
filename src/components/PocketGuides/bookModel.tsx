@@ -22,6 +22,8 @@ export interface BookPageEntry {
     /** Arabic page number. Front matter is unnumbered, the way print leaves it. */
     page?: number
     isFrontMatter: boolean
+    /** Groups the Contents list into named sections. Undefined pages print in one flat list. */
+    section?: string
     /** Rich use case data (report, scout, watches), when this page is a use case. */
     template?: InboxTemplate
 }
@@ -41,6 +43,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                         title
                         shortTitle
                         bookOrder
+                        section
                     }
                 }
             }
@@ -73,6 +76,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                     shortTitle: node.frontmatter.shortTitle || node.frontmatter.title,
                     order,
                     isFrontMatter: order === 0,
+                    section: node.frontmatter.section || undefined,
                     template: byUrl.get(url),
                 }
             })

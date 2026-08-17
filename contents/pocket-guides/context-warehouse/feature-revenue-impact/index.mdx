@@ -1,0 +1,81 @@
+---
+title: Did the feature we shipped move revenue?
+shortTitle: Feature revenue impact
+subtitle: Compare flag-exposed vs control cohorts on downstream Stripe revenue and retention.
+bookOrder: 9
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: revenue and retention, flag-exposed vs control."
+    legend="Made up for illustration; yours would name your real flag and cohort sizes."
+>
+
+| Variant | Users | Revenue/user (post-exposure) | Retained (30d) |
+| -------- | ------ | ------------------------------ | ---------------- |
+| test     | 1,240  | $61.20                          | 71%               |
+| control  | 1,180  | $54.80                          | 65%               |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# Did the feature we shipped move revenue?
+
+Usage went up after launch. But did revenue? This skill splits users by feature-flag or
+experiment exposure and compares downstream Stripe revenue and retention between the exposed
+cohort and control, so a rollout's impact is measured in money as well as clicks.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: the exposed cohort earned $6.40 more per user
+after exposure and retained six points better, a real gap, reported alongside both cohort sizes
+so it's clear the difference isn't noise from a handful of accounts.
+
+## Doing this by hand
+
+1. **If this was a formal [PostHog Experiment](/docs/experiments)**, open its
+   [results page](/docs/experiments/analyzing-results) directly and add a Stripe revenue metric
+   there. PostHog computes exposed-vs-control for you natively, no SQL needed.
+2. **If it was a plain feature flag** instead, connect [Stripe](/docs/cdp/sources/stripe) via
+   [Data pipeline > Sources](/docs/data-warehouse/sources), then build a
+   [Trends](/docs/product-analytics/trends/overview) insight of `$feature_flag_called` broken down
+   by `$feature_flag_response` to see the exposure split.
+3. **Join to revenue by hand**, or open the [SQL editor](/docs/data-warehouse/sql) to compare
+   post-exposure revenue and retention between variants in one query.
+
+## How the Skill works
+
+The agent finds each person's variant from `$feature_flag_called` exposure events and their
+exposure timestamp, then compares Stripe revenue and a retention share earned *after* that
+timestamp between variants. It reports cohort sizes alongside the numbers, and is explicit that
+unless this came from a proper randomized experiment, the gap may reflect who was exposed rather
+than the feature itself, flagging PostHog's own experiment-results view as the cleaner tool when
+that applies.
+
+This is a before/after test tied to a specific flag or experiment. For ranking which *existing*
+features high-revenue customers already use, with no rollout involved, that's
+[Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue) instead.
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers finding exposure cohorts
+honestly and the starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue) ·
+[Channels & retention](/pocket-guides/context-warehouse/acquisition-channels-retention)
+
+</SeeAlso>
+
+</RightPage>

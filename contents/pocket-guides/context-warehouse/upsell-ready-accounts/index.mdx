@@ -1,0 +1,83 @@
+---
+title: Which accounts are ready to upsell?
+shortTitle: Upsell-ready accounts
+subtitle: Flag accounts consistently near or over their plan limits while still on a lower Stripe plan.
+bookOrder: 3
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: accounts pushing past their current plan's limits."
+    legend="Made up for illustration; yours would name your real accounts and plans."
+>
+
+| Account   | Plan    | Usage (30d) | Plan limit | Utilization |
+| --------- | ------- | ------------ | ----------- | ------------ |
+| Acme Co   | Growth  | 94,200        | 100,000      | 94%           |
+| Northwind | Growth  | 88,600        | 100,000      | 89%           |
+| Globex    | Starter | 9,400         | 10,000       | 94%           |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# Which accounts are ready to upsell?
+
+An account outgrowing its plan is an expansion conversation waiting to happen, if anyone
+notices in time. This skill compares real product usage against each account's current Stripe
+plan limits and flags the ones consistently pushing past them.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: Acme Co is running at 94% of its Growth
+plan's limit, month after month, a sustained pattern rather than a one-off spike. Globex is
+smaller in absolute terms but just as close to its own ceiling. Both are real conversations; a
+one-off spike that already dropped back is noise.
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe)** via
+   [Data pipeline > Sources](/docs/data-warehouse/sources) for each account's current plan.
+2. **Write down your own plan limits**: Stripe rarely stores these, so you'll need your pricing
+   page or internal docs.
+3. **Build a usage [Trends](/docs/product-analytics/trends/overview) insight**, broken down by
+   account or group, for the metric your limits apply to.
+4. **Cross-reference by hand** in a spreadsheet, or open the
+   [SQL editor](/docs/data-warehouse/sql) to join usage against plan in one query and skip the
+   spreadsheet.
+
+## How the Skill works
+
+The agent works out each account's current plan from Stripe, the numeric limit that plan implies
+(often not in Stripe itself, so it asks), and the PostHog metric that maps to the limited
+resource. It flags accounts where usage ÷ limit clears a threshold while they're not already on
+the top tier, preferring a "consistently over" signal across a few months over a one-off spike.
+Because this is most useful fresh, it offers to materialize the query so it refreshes on a
+schedule.
+
+This flags expansion by usage *against plan limits*. For account health measured as ARR versus
+engagement instead, that's
+[ARR vs engagement](/pocket-guides/context-warehouse/value-vs-engagement).
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers plan-limit mapping, the
+"consistently over" threshold, and the starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [ARR vs engagement](/pocket-guides/context-warehouse/value-vs-engagement) ·
+[Revenue metrics](/pocket-guides/context-warehouse/revenue-metrics)
+
+</SeeAlso>
+
+</RightPage>

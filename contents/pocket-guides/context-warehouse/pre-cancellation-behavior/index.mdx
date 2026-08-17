@@ -1,0 +1,82 @@
+---
+title: What do customers do right before they cancel?
+shortTitle: Pre-cancellation behavior
+subtitle: Find the shared usage pattern in the ~30 days before cancellation, for an early churn warning.
+bookOrder: 4
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: engagement in the weeks before cancellation, averaged across churned accounts."
+    legend="Made up for illustration; yours would use your own real engagement events."
+>
+
+| Weeks before cancellation | Avg. events / account |
+| --------------------------- | ----------------------- |
+| −4                           | 210                      |
+| −3                           | 175                      |
+| −2                           | 96                       |
+| −1                           | 41                       |
+| 0 (final week)               | 12                       |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# What do customers do right before they cancel?
+
+By the time a cancellation email lands, the warning signs were probably visible weeks earlier.
+This skill pulls cancellation dates from Stripe or Chargebee and examines the roughly 30 days of
+activity before each one, looking for the pattern that's shared across churned accounts.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: engagement doesn't fall off a cliff, it
+erodes, roughly halving every week for a month before cancellation. That decay curve is the
+early-warning signal. The cancellation date alone comes too late to act on.
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe) or [Chargebee](/docs/cdp/sources/chargebee)** via
+   [Data pipeline > Sources](/docs/data-warehouse/sources) for cancellation dates.
+2. **Pick a handful of recently churned accounts** and open each one in PostHog's
+   [Persons](/docs/data/persons) (or Groups) explorer to read their activity timeline in the weeks
+   before they left.
+3. **Look for the shared pattern by eye**: workable for a handful of accounts. Past that, the
+   [SQL editor](/docs/data-warehouse/sql) is faster than reading timelines one by one, since
+   averaging weeks-to-churn across dozens of accounts needs a self-join no native insight does for
+   you.
+
+## How the Skill works
+
+The agent finds each account's cancellation timestamp (Stripe's `canceled_at`, or the Chargebee
+equivalent), then indexes that account's activity to weeks-before-cancellation and averages
+across every churned account to reveal the shared decline. It offers two readings: the trend
+line itself, and a ranking of each account's *last* action before they left.
+
+This is behavioral churn prediction with no support data. If the question is specifically about
+support tickets predicting churn, that's
+[Tickets & churn](/pocket-guides/context-warehouse/support-tickets-churn) instead.
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers indexing activity to
+weeks-before-churn and the starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [Tickets & churn](/pocket-guides/context-warehouse/support-tickets-churn) ·
+[ARR vs engagement](/pocket-guides/context-warehouse/value-vs-engagement)
+
+</SeeAlso>
+
+</RightPage>

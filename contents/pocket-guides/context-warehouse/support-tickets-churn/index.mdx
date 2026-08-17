@@ -1,0 +1,80 @@
+---
+title: Do support tickets predict churn?
+shortTitle: Tickets & churn
+subtitle: A three-way join of PostHog engagement, Zendesk/Intercom tickets, and Stripe churn.
+bookOrder: 5
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: support topics ranked by the revenue that churned after them."
+    legend="Made up for illustration; yours would name your real ticket topics."
+>
+
+| Topic               | Accounts | Tickets | Churned revenue after |
+| -------------------- | --------- | -------- | ----------------------- |
+| Billing confusion    | 14        | 22       | $18,400                  |
+| API rate limits      | 9         | 15       | $12,900                  |
+| Missing integration  | 6         | 8        | $7,200                   |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# Do support tickets predict churn?
+
+Some support issues are noise; others are the last straw. This skill joins PostHog engagement,
+Zendesk or Intercom tickets and their topics, and Stripe churn, to rank the support issues that
+precede the most lost revenue.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: "Billing confusion" generated fewer tickets
+than the other topics but cost more in churned revenue than the next two combined. The ranking
+that matters is lost revenue, independent of ticket volume.
+
+## Doing this by hand
+
+1. **Connect [Zendesk](/docs/cdp/sources/zendesk) or [Intercom](/docs/cdp/sources/intercom), and
+   [Stripe](/docs/cdp/sources/stripe)**, via [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Pull your churned accounts list** from Stripe, and look each one up in your support tool's
+   own reporting (Zendesk Explore, or Intercom's reports) for their ticket topics.
+3. **Tally revenue by topic in a spreadsheet**: for more than a few dozen accounts this gets
+   tedious fast, since it's really a three-way join. The [SQL editor](/docs/data-warehouse/sql)
+   does it in one query once both sources are connected.
+
+## How the Skill works
+
+The agent needs three sources working together: ticket rows with a customer identifier and a
+topic field, churned subscriptions and their approximate lost revenue from Stripe, and a
+per-account engagement measure from PostHog. It joins tickets to churned accounts (often by
+email domain when tickets are logged per-company) and sums churned revenue per topic. It's
+explicit in the writeup that this is correlation: a high-volume topic among otherwise healthy
+accounts can still be fine.
+
+This requires support-tool data. For churn warning signs from product usage alone, with no
+tickets involved, that's
+[Pre-cancellation behavior](/pocket-guides/context-warehouse/pre-cancellation-behavior) instead.
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers the three-way join and the
+starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [Pre-cancellation behavior](/pocket-guides/context-warehouse/pre-cancellation-behavior) ·
+[ARR vs engagement](/pocket-guides/context-warehouse/value-vs-engagement)
+
+</SeeAlso>
+
+</RightPage>

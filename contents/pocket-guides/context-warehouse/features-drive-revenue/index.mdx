@@ -1,0 +1,86 @@
+---
+title: Which features drive revenue?
+shortTitle: Features & revenue
+subtitle: Rank features by the revenue of the customers who use them, by joining Stripe to feature-usage events.
+bookOrder: 1
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: features ranked by the revenue of the accounts that use them."
+    legend="Made up for illustration; yours would name your real features and dollar amounts."
+>
+
+| Feature                 | Accounts using | Revenue of users | Revenue/account |
+| ------------------------ | --------------- | ----------------- | ---------------- |
+| `invited_teammate`       | 812             | $612,400           | $754              |
+| `created_dashboard`      | 1,204           | $580,900           | $482              |
+| `exported_data`          | 340             | $301,200           | $886              |
+| `viewed_onboarding_tips` | 2,890           | $410,000           | $142              |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# Which features drive revenue?
+
+Feature usage and feature *value* aren't the same thing. This skill joins Stripe revenue to
+feature-usage events and ranks your features by the revenue of the accounts that actually use
+them, so the loudest feature in your analytics isn't mistaken for the most valuable one.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: `exported_data` isn't the most-used feature,
+but the accounts that use it are worth nearly twice as much per account as the ones using
+`invited_teammate`. Revenue per account is the signal worth acting on, ahead of raw event counts.
+
+## Doing this by hand
+
+1. **Connect [Stripe](/docs/cdp/sources/stripe).** In PostHog, go to
+   [Data pipeline > Sources](/docs/data-warehouse/sources) and connect Stripe if it isn't already
+   connected; you'll need a restricted API key with read access to Billing.
+2. **Find your feature [events](/docs/data/events).** Check Data management > Events for the
+   events that represent real feature use, not pageviews.
+3. **Write the join.** Open the [SQL editor](/docs/data-warehouse/sql) and join `events` to
+   `stripe_invoice` or `stripe_customer` on email. The schema tab on the left shows your
+   project's real column names.
+4. **Save it as an insight** so you don't have to re-run the query by hand next time.
+
+If you'd rather skip the join: pull your top customers by revenue from Stripe's own Reports tab,
+then look each one up in PostHog's [Persons](/docs/data/persons) explorer to see which features
+they've used. Slower, but no SQL required.
+
+## How the Skill works
+
+The agent finds your real feature-usage events, confirming with you which ones count as
+"features" since every product defines this differently. It works out how a PostHog person or
+group maps to a Stripe customer, and approximates MRR from active subscriptions or recent
+invoices. It joins the two, ranks features by the revenue of their users, and saves the result as
+a table insight instead of a one-off answer in chat.
+
+This ranks *existing* features by adopter revenue rather than testing a before/after change. For
+a specific rollout's revenue impact, see
+[Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact) instead.
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers finding the right join key, the
+MRR-approximation gotchas, and the starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact) ·
+[Channels & retention](/pocket-guides/context-warehouse/acquisition-channels-retention)
+
+</SeeAlso>
+
+</RightPage>

@@ -2,12 +2,13 @@
 title: Conversion metrics
 shortTitle: Conversion
 subtitle: Funnel conversion, drop-off, and time-to-convert, modeled instead of built as a one-off insight.
-bookOrder: 3
+bookOrder: 12
+section: Long-term modeling
 ---
 
 <LeftPage>
 
-<SkillFigure n={1} caption="The skill itself – the file an agent follows to build a conversion model." />
+<SkillFigure n={1} caption="The skill itself, the file an agent follows to build a conversion model." />
 
 </LeftPage>
 
@@ -17,26 +18,26 @@ bookOrder: 3
 
 A funnel is an ordered sequence of events; conversion is the share of units that entered step one
 and reached a later step. Four parameters define it: the steps, a conversion window, the
-aggregation unit, and the order mode – strict, ordered, or any order.
+aggregation unit, and the order mode: strict, ordered, or any order.
 
-## Two numbers, don't conflate them
+## Overall vs step-to-step conversion
 
-**Overall conversion** is reached step *k* divided by entered step one – the headline
+**Overall conversion** is reached step *k* divided by entered step one, the headline
 "signup → paid" rate. **Step-to-step conversion** is reached step *k* divided by reached step
-*k − 1* – it isolates where the drop-off actually is. A good model exposes both, plus
+*k − 1*. It isolates where the drop-off actually is. A good model exposes both, plus
 time-to-convert when latency matters.
 
 ## When to model it as a view
 
 Reach for a saved funnel insight when someone just wants to *see* the funnel. Build a warehouse
-view when the conversion metric needs to be **reused** – joined to other models, exposed in SQL,
+view when the conversion metric needs to be **reused**: joined to other models, exposed in SQL,
 or fed into revenue or activation models.
 
 ## Rules before you model
 
 - **Pin the conversion window explicitly.** No window, no funnel.
 - **Anchor each unit on its first step-one event**, so re-entries don't get double-counted.
-- **State your attribution** on breakdowns – first-touch, last-touch, and per-step all give
+- **State your attribution** on breakdowns: first-touch, last-touch, and per-step all give
   different numbers.
 
 ## The skill itself

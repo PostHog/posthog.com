@@ -1,0 +1,79 @@
+---
+title: Are our biggest accounts our happiest ones?
+shortTitle: ARR vs engagement
+subtitle: Compare account ARR from Salesforce/HubSpot against PostHog engagement, and flag the mismatches.
+bookOrder: 6
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="What the answer looks like: ARR plotted against real engagement, with the at-risk quadrant flagged."
+    legend="Made up for illustration; yours would name your real accounts."
+>
+
+| Account     | ARR     | Active days (30d) | Flag                     |
+| ------------ | -------- | ------------------- | ------------------------- |
+| Globex Corp  | $84,000   | 2                    | high ARR / low engagement |
+| Initech      | $76,500   | 4                    | high ARR / low engagement |
+| Acme Co      | $68,000   | 21                   | ok                         |
+
+</ExampleFigure>
+
+<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+
+</LeftPage>
+
+<RightPage>
+
+# Are our biggest accounts our happiest ones?
+
+Revenue and engagement should move together. When they don't, that's exactly the account worth
+worrying about. This skill compares each account's ARR from Salesforce or HubSpot against its
+PostHog engagement score and flags the high-ARR, low-engagement quadrant.
+
+## What the answer looks like
+
+The skill looks for patterns like <SeeFig n={1} />: Globex Corp pays more than Acme Co but logged
+activity on only 2 of the last 30 days. The gap between the two numbers is the risk to watch.
+
+## Doing this by hand
+
+1. **Connect [Salesforce](/docs/cdp/sources/salesforce) or [HubSpot](/docs/cdp/sources/hubspot)**
+   via [Data pipeline > Sources](/docs/data-warehouse/sources) for ARR.
+2. **Build an engagement [Trends](/docs/product-analytics/trends/overview) insight**, broken down
+   by group (account): active days or a count of key events.
+3. **Export both and join in a spreadsheet** on account name or domain, sorting by ARR to spot
+   the low-engagement outliers by eye. The [SQL editor](/docs/data-warehouse/sql) does the same
+   join live, so the list updates itself instead of going stale.
+
+## How the Skill works
+
+The agent confirms how you track accounts (a PostHog group, or persons aggregated by email
+domain), pulls ARR from the CRM, and defines a simple, explainable engagement score: active
+days, distinct active users, or a count of key events. It joins the two on account name or
+domain and flags accounts in the top ARR quartile with low engagement. Scoring is a judgment
+call, so it states exactly how the score was defined rather than presenting one number as
+gospel.
+
+This measures CRM-ARR versus engagement health. For expansion candidates based on usage against
+*plan limits* instead, that's
+[Upsell-ready accounts](/pocket-guides/context-warehouse/upsell-ready-accounts).
+
+## The skill itself
+
+<SeeFig n={2} /> is the actual file an agent follows. It covers defining an engagement score and
+the starter query to adapt to your schema.
+
+Copy it into your own agent.
+
+<SeeAlso>
+
+See also: [Upsell-ready accounts](/pocket-guides/context-warehouse/upsell-ready-accounts) ·
+[Tickets & churn](/pocket-guides/context-warehouse/support-tickets-churn)
+
+</SeeAlso>
+
+</RightPage>

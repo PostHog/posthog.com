@@ -1,13 +1,14 @@
 ---
 title: Revenue metrics
 shortTitle: Revenue
-subtitle: MRR, ARR, gross revenue, and churn – built on PostHog's managed revenue views, not raw Stripe tables.
-bookOrder: 2
+subtitle: MRR, ARR, gross revenue, and churn, built on PostHog's managed revenue views instead of raw Stripe tables.
+bookOrder: 11
+section: Long-term modeling
 ---
 
 <LeftPage>
 
-<SkillFigure n={1} caption="The skill itself – the file an agent follows to build a revenue model." />
+<SkillFigure n={1} caption="The skill itself, the file an agent follows to build a revenue model." />
 
 </LeftPage>
 
@@ -21,26 +22,26 @@ events. This skill turns that data into a model you can reuse everywhere.
 
 ## Model on the managed views, not raw tables
 
-PostHog auto-generates a curated view per source – `revenue_item` for gross revenue and MRR over
+PostHog auto-generates a curated view per source: `revenue_item` for gross revenue and MRR over
 time, `mrr` for a live snapshot, plus `customer`, `subscription`, and `product`. They already
 handle deferred-revenue recognition, currency, and a stable schema, so deriving revenue from raw
 Stripe tables means redoing work PostHog already did.
 
-## The gotchas that catch people out
+## Gotchas
 
 - **MRR is empty without a subscription config.** For event-based revenue, that's expected
-  behaviour, not a bug – say so instead of "fixing" it.
+  behaviour, not a bug. Say so instead of "fixing" it.
 - **The `mrr` view is a snapshot, not history.** For MRR over time, sum recurring `amount` per
   month from `revenue_item` instead.
 - **`amount` is already in base currency.** Only call `convertCurrency()` for a different target
   currency, or when working from raw events.
-- **The Revenue dashboard is being retired** (~2026-06-30) – model against the views and
+- **The Revenue dashboard is being retired** (~2026-06-30). Model against the views and
   properties, never the dashboard UI.
 
 ## The skill itself
 
 <SeeFig n={1} /> covers picking the right source, the subscription-config gotcha, currency
-handling, and linking revenue to persons and groups – with a HogQL recipe and a full dbt
+handling, and linking revenue to persons and groups, with a HogQL recipe and a full dbt
 `fct_mrr` / `fct_revenue_item` / `dim_customer` scaffold.
 
 Copy it into your own agent, or find it in the

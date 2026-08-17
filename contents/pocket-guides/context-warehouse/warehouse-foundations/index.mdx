@@ -2,13 +2,14 @@
 title: Warehouse foundations
 shortTitle: Foundations
 subtitle: The view-vs-dbt decision, the view-create workflow, and the rules every model in this guide follows.
-bookOrder: 1
+bookOrder: 10
 isPrimer: true
+section: Long-term modeling
 ---
 
 <LeftPage>
 
-<SkillFigure n={1} caption="The skill itself – the file an agent follows before building any model in this guide." />
+<SkillFigure n={1} caption="The skill itself, the file an agent follows before building any model in this guide." />
 
 </LeftPage>
 
@@ -16,32 +17,31 @@ isPrimer: true
 
 # Warehouse foundations
 
-Every skill in this guide turns a metric definition into a durable, reusable model – on PostHog's
-own data-warehouse views, or an external dbt project. This page is the mechanics every other skill
-assumes you've already read.
+Every skill in this guide turns a metric definition into a durable, reusable model, whether that's
+on PostHog's own data-warehouse views or an external dbt project. This page covers the mechanics
+every other skill assumes you've already read.
 
 ## Two stacks, one model
 
 A model is a named, queryable object that encodes a metric or dimension once, so every insight,
-dashboard, and downstream model reuses the same definition instead of re-deriving it. Build it as
-a **PostHog-native** saved query – optionally materialized into a physical table – via the
-`view-*` tools, or as a **dbt** model run in your own scheduler. You can run both stacks side by
-side across a project.
+dashboard, and downstream model can reuse it. Build it as a **PostHog-native** saved query
+(optionally materialized into a physical table) via the `view-*` tools, or as a **dbt** model run
+in your own scheduler. You can run both stacks side by side across a project.
 
-## Rules that bite hardest
+## Rules before you model
 
 - **Check for a governed definition first.** Before deriving MRR, activation, or any headline
   number, look for an approved canonical metric in the semantic layer.
 - **Alias every column in a PostHog view.** `view-create` rejects `SELECT *` and any unaliased
-  column – it's the number one reason a view fails to create.
+  column, the number one reason a view fails to create.
 - **Decide person vs group up front.** B2C models aggregate by person; B2B models aggregate by a
   group key. Pick it once per model and keep it consistent.
-- **dbt runs externally.** There's no native PostHog dbt connector – dbt runs against your own or
+- **dbt runs externally.** There's no native PostHog dbt connector. It runs against your own or
   PostHog's managed warehouse.
 
 ## The skill itself
 
-<SeeFig n={1} /> is the actual skill file – it covers the `view-create` → `view-materialize`
+<SeeFig n={1} /> is the actual skill file. It covers the `view-create` → `view-materialize`
 workflow, the dbt project skeleton, joins and dimensions, `convertCurrency()`, and the governance
 check every other skill in this guide points back to.
 
