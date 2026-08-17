@@ -23,7 +23,7 @@ Agents are writing code faster than any human can review.
 
 The naive solution would be for developers to review code faster. The 500 IQ take is for developers to review as little code as possible.
 
-If you need to be involved in every code review, you will always be the bottleneck. Instead, put yourself outside of the code review loop by building a pipeline that delegates tasks to agents.
+If you need to be involved in every code review, you will always be the bottleneck. Instead, put yourself outside of the code review loop by [building a pipeline](/newsletter/software-factories) that [delegates tasks to agents](/newsletter/agent-autonomy#level-2-agent-delegation).
 
 We asked engineers at PostHog how they’ve been reviewing [AI-generated code](/newsletter/ai-coding-mistakes) to keep shipping fast without losing quality.
 
@@ -35,7 +35,7 @@ The number one thing to add, if you haven’t yet, is a way for agents to review
 
 ![Slack thread asking devs how they review agent-generated code, with a joke reply meme](https://res.cloudinary.com/dmukukwp6/image/upload/v1783662228/stop_being_the_code_review_bottleneck_1_slack_thread_8ca1a6a450.jpg)
 
-The goal is to offload the simpler reviews to agents, and flag if something genuinely needs a human.
+The goal is to [offload the simpler reviews to agents, and flag if something genuinely needs a human](/blog/10k-prs-a-month#humans-dont-need-to-review-every-pr).
 
 The key is that the agent that wrote the code can’t be the one that reviews it. Agents are bad at checking their own work since they’re often unaware of their own blind spots.[^1]
 

@@ -37,7 +37,7 @@ In this guide, we'll compare the best Langfuse alternatives and look at where ea
 
 PostHog captures full traces of your LLM calls, so you can follow a request through every prompt, tool call, and model response. For each generation, it tracks token usage, cost, latency, and errors, and you can score outputs with LLM-as-a-judge or code-based evals to catch quality regressions over time. 
 
-You can query that trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts (beta)](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK. 
+You can query that trace data with SQL or through the [MCP server](/mcp) directly from your editor, and [manage and version prompts](/docs/prompt-management) without redeploying code. It [supports popular frameworks](/docs/ai-observability/installation), including OpenAI, Anthropic, LangChain, xAI, LlamaIndex, and the Vercel AI SDK. 
 
 The free tier includes 100K AI observability events per month, with usage-based pricing beyond that.
 
@@ -46,7 +46,7 @@ The free tier includes 100K AI observability events per month, with usage-based 
 
 PostHog is the only tool here where AI observability is one piece of a full product stack (analytics, replay, error tracking, flags, experiments, and more) so you can tie an AI change to a real product metric, not just a model metric. Set up takes minutes [with the wizard](/wizard), and agents (in [PostHog Code](/desktop) and beyond) can act on that context to help make your product self-driving.
 
-PostHog ships new AI observability features fast, including prompt management (beta) for versioning and experimenting with prompts without redeploying code, plus sentiment classification and trace summarization that Langfuse has no direct equivalent for.
+PostHog ships new AI observability features fast, including prompt management for versioning and experimenting with prompts without redeploying code, plus sentiment classification and trace summarization that Langfuse has no direct equivalent for.
 
 </details>
 
@@ -55,7 +55,7 @@ PostHog ships new AI observability features fast, including prompt management (b
 - [**Generations**](docs/ai-observability/generations): Monitor model performance, token usage, costs, latency, and errors across your AI features from a single view.
 - [**Traces**](docs/ai-observability/traces): Follow AI workflows from start to finish to understand how requests move through prompts, tools, and model calls.
 - [**AI evals**](docs/ai-evals/evaluations): Automatically score model outputs using LLM-as-a-judge or code-based checks to track quality and identify regressions over time.
-- [**Prompt management**](docs/prompt-management) *(beta):* Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
+- [**Prompt management**](docs/prompt-management): Create, version, and update prompts without redeploying code. Compare versions and understand how prompt changes affect outputs.
 - [**SQL access**](docs/sql): Query AI observability data with SQL and analyze it alongside product, user, and business data.
 - [**Session replay**](/docs/ai-observability/link-session-replay): Watch recordings of users interacting with AI features and investigate issues alongside the actions that triggered them.
 
@@ -86,7 +86,7 @@ PostHog ships new AI observability features fast, including prompt management (b
 <details>
 <summary>Main differences between PostHog and Langfuse</summary>
 
-- Langfuse includes production-ready prompt management with versioning and deployment controls. [PostHog's prompt management](/docs/prompt-management) is currently in beta.
+- Langfuse includes prompt management with versioning and deployment controls. [PostHog's prompt management](/docs/prompt-management) is newer, covering versioning, labels, configuration, runtime fetching, and A/B testing of prompt versions.
 - PostHog adds built-in [sentiment classification](docs/ai-observability/sentiment) (currently in beta) and [trace summarization](docs/ai-observability/summarization) on top of raw trace data. Langfuse has no direct, built-in equivalent for either.
 - Langfuse provides more detailed agent and multi-step tracing. PostHog supports traces and spans, but its tracing capabilities are less specialized.
 - PostHog connects LLM traces to product analytics covering funnels, retention, and feature adoption. Langfuse focuses primarily on LLM observability.
@@ -491,6 +491,19 @@ It's completely free to get started – no credit card required. Our [setup wiza
 ## Frequently asked questions
 
 <details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
 <summary>What is Langfuse used for?</summary>
 
 Langfuse is an open-source platform for [LLM observability](/blog/what-is-ai-observability). You use it to trace requests through your AI app, track cost and latency per call, version your prompts, and run evals on model outputs. It's built for engineers debugging and improving LLM features.
@@ -516,7 +529,7 @@ If your priority is prompt management, evaluation workflows, and annotation queu
 <details>
 <summary>Can PostHog replace Langfuse?</summary>
 
-For some teams, yes. PostHog covers tracing, cost tracking, latency monitoring, and evaluations, with prompt management in beta. Langfuse is stronger on annotation queues, evaluation datasets, and detailed agent tracing. If your priority is connecting AI performance to user behavior, PostHog is the better fit.
+For some teams, yes. PostHog covers tracing, cost tracking, latency monitoring, evaluations, and prompt management. Langfuse is stronger on annotation queues, evaluation datasets, and detailed agent tracing. If your priority is connecting AI performance to user behavior, PostHog is the better fit.
 
 </details>
 

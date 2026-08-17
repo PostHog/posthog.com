@@ -28,13 +28,18 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
+#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
 - **$250-499k:** 35% base discount
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
+
+> Two things to be clear on when working out which tier applies:
+>
+> - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment and timing of cash levers below, not a bigger volume tier.
 
 #### 2. Length of commitment discount (additive)
 - **1-year commitment:** No additional discount
@@ -133,11 +138,14 @@ For contracting purposes, these free credits should either be applied before the
 
 #### How to structure free credits in special terms
 
-There are two ways we structure free credits, and it's important to be clear which one applies, because they're added at different times and treated differently at contract start:
+There are three ways we structure free credits, and it's important to be clear which one applies, because they're added at different times and treated differently at contract start:
 
 1. **Fixed amount included in the 12 month term.** The free credits are part of the contract term and are added to the customer's balance alongside the purchased (prepaid) credits at contract start. Use this when a specific dollar amount of free credit is explicitly called out under Special Terms as part of the term.
 
 2. **Coverage for a specific number of months.** The free credits are *not* part of the contract term. We add enough free credits to cover the promised period (for example, up to the contract start date), top up if the customer comes up short before then, and add the prepaid credits only when the contract actually starts. Any free-credit balance still remaining at contract start is removed at that point. These credits can be added via billing admin as a one time credit and don't need to be called out as part of the term.
+
+3. **Fixed amount included in an extended term (contract buyouts).** The free credits are part of the contract term, but the term itself is longer than standard because it absorbs the buyout period: 12 months of paid usage plus a 6 month buyout becomes an 18 month term. Use this whenever we're buying a customer out of a competitor contract. See [contract buyouts](#contract-buyouts) for how to build the order form. **Note that this means you won't be able to top up free credits if customer uses them faster than originally planned. If you think this may be the case, default to option 2.**
+
 
 ### Margin negative deals
 
@@ -216,22 +224,39 @@ If your customer must pay via credit card, you absolutely _need_ to let Mine (Si
 
 > **Are you a potential customer who wants to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
 
-Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to let them use PostHog for free for up to 6 months. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time to get comfortable with the platform.
+Sometimes customers will be locked into a contract with a competitor, but want to switch to PostHog when their contract is up. In this case, we are willing to give them free PostHog credits for up to 6 months of their total PostHog contract value. This is beneficial to PostHog as well, as we can get them set up and using PostHog sooner, capitalizing on the momentum of their interest today, and giving them more time or resources to get comfortable with the platform.
 
 ### The guiding principle: The buyout amount needs to make financial sense
-When considering a contract buyout, the goal is to pay a little up front to make more money over the long term. It doesn't make sense to buy out a contract for $60k if the customer is only planning on spending $20k annually with PostHog.
+When considering a contract buyout, the goal is for PostHog to pay a little up front to make more money over a long-term customer relationship. It doesn't make sense to buy out a contract for $60k if the customer is only planning on spending $20k annually with PostHog.
 
 Some rules:
 
 -   They need to share a copy of their current contract/pricing/bank statement as proof.
--   They sign up to an annual contract worth $20k+/year, paid up front. Their PostHog contract starts when their current one expires.
--   Their usage in the overlap period needs to be proportionate to the contract they've signed, ie. if they sign a $50k contract and have 6 months to run, they get $25k of PostHog credit for free.
+-   They sign up to an annual contract worth $20k+/year, paid up front.
+-   Their usage in the overlap period needs to be proportionate to the contract they've signed with PostHog, ie. if they sign a $50k PostHog contract and have 6 months to run, they get $25k of PostHog credit for free.
 -   The competitor they're using has to be 'real', ie. not some random side project. As a general rule, anyone we have written a [comparison article](/blog/tags/comparisons) about counts.
 -   Any buyout is subject to team lead approval before it goes on an order form.
 -   We have final discretion on deciding who gets the deal.
 -   We can still provide a standard free trial period of 2-4 weeks before they sign the contract, as they will likely need to figure out whether PostHog is right for them before committing.
 
 > Normal commission rules apply here - commission is paid in the quarter in which the customer pays their invoice.
+
+### How to structure a buyout on the order form
+
+Buyouts used to get papered in one of two ways: future-dating the order form so the term began when the incumbent contract expired, or sprinkling extra free credits onto an otherwise normal order. Both cost us — the first is effectively extended payment terms and delays when the deal counts, the second cuts order value hard enough to flirt with margin negative. Neither is how we do it now.
+
+Instead, fold the buyout period into the contract term:
+
+-   **Contract term = standard term + buyout period.** A 12 month deal with a 6 month buyout is an 18 month term. A 2 year deal with a 6 month buyout is a 30 month term.
+-   **Credits are calculated as usual** — 12 months of estimated usage, multiplied by the number of years — and then the pro-rated buyout credit is added on top.
+-   **Exclude the buyout credits when calculating the discount** we offer the customer. The buyout credit is not a lever for a bigger discount.
+-   **Show the contracted discount on the order form, not the effective discount.** The effective discount (total paid ÷ total credit) will always look larger than the contracted one because of the free buyout credit. Quoting the effective number sets a false floor for the renewal.
+-   **Everything else is standard** — term start date, payment terms, and signature dates all follow our normal rules. There is no future-dating and no separate payment schedule.
+-   Call out the buyout credit in Special Terms: _"In consideration of Customer migrating to PostHog from its incumbent provider prior to the expiration of Customer's existing agreement with that provider, PostHog will provide a one-time credit in the amount of $NNNNN."_
+
+As a worked example: a customer expected to use ~$100k of credit a year, with 6 months left on their incumbent contract, at a 30% discount. They buy $100k of credit for $70k, we add $50k of buyout credit on top, and the order form is an 18 month term for $150k of total credit at a 30% discount. The effective discount lands north of 50%, which is expected and stays off the order form.
+
+This is also structure 3 in [how to structure free credits in special terms](#how-to-structure-free-credits-in-special-terms).
 
 ## New business renewal credits
 
@@ -244,6 +269,36 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
+## Contracts for customers on time-limited plans
+
+Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
+
+This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/sales/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
+
+### Don't touch the plan to close the deal
+
+Don't extend, swap, or cancel a customer's coupon or beta plan as a negotiating lever, or promise to carry its benefits into the contract term. Campaign benefits expire automatically and move the customer onto the standard paid plan with nobody doing anything. Every manual exception replaces that with a bespoke plan configuration plus something a human has to remember to undo months later, which is how we end up with legacy plans we then spend months migrating people off.
+
+### The contract itself is standard
+
+Start date follows the [normal rules](/handbook/growth/sales/contracts#creating-an-order-form). Discounts follow the [standard levers](#how-our-discounts-work). 
+
+### Size the credits for the step-up
+
+Because the plan may end partway through the term, credits burn at one rate before that date and a faster rate after it. Sizing on today's spend may undersize the deal.
+
+**If the plan has a known end date** you can blend the two rates:
+
+> (months remaining on the plan × current monthly run rate) + (remaining months of the term × post-plan monthly run rate)
+
+Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
+
+**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes.
+
+### Tell the customer about the step-up
+
+Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
+
 ## Credit over/under usage for contracts
 
 ### When they don't have enough credit to cover their term
@@ -255,6 +310,14 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 -   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
+
+#### How to actually cover the gap
+
+Where we've agreed to cover usage for free until the renewal date, do it by adding a one-off credit allocation to the customer's credit balance in billing admin. You don't need billing engineering to do this.
+
+Always add the credit _before_ the invoice is generated. If you wait for the invoice and credit it afterwards, we've charged the customer an amount we already knew we weren't going to collect.
+
+You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up the day before invoice is generated if it falls short. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract. Make sure to note this in other details field in the related Salesforce opportunity so the revops team can make sure the final credit balance is correct during contract setup.
 
 For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
 
@@ -285,7 +348,9 @@ We also sometimes receive unsolicited requests to vary our terms. In these insta
 
 ### How customers should suggest requested terms
 
-The customer should redline the current .docx version of the document in question. You can find the latest versions of the templates in the Team Internal Info tab in the #team-sales Slack channel (do not save versions locally).
+The customer should redline the current .docx version of the document in question. You can find the latest versions of the templates in the Legal Documents tab in the <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink> Slack channel, or here — <PrivateLink url="https://docs.google.com/document/d/155w70ZAHecVZcDqTq2_415dvaq2Bk-8QlEOozjq1hG8/edit">MSA</PrivateLink>, <PrivateLink url="https://docs.google.com/document/d/1z1so_nF9f6GS0uOtf-q_Mt7LZFQCukht/edit">DPA</PrivateLink>, <PrivateLink url="https://docs.google.com/document/d/1K-1ErUrHbvNs8ed8CXSQIuA0xJdg55sC/edit">NDA</PrivateLink> (do not save versions locally).
+
+> **Never send a template from a local copy, a previous deal, or a forwarded thread.** The templates are revised regularly and sometimes materially. Sending a stale template means negotiating from terms we no longer offer, and it's a lot of wasted legal time to unwind.
 
 > We don't accept redlines on our standard terms of service and if a customer has proposed this you should share the correct templates with them before involving legal.
 

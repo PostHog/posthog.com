@@ -131,7 +131,7 @@ import FlutterFeatureFlagsCode from '../../integrate/feature-flags-code/_snippet
 ### Bootstrapping flags
 
 import BootstrappingIntro from "../../feature-flags/snippets/bootstrapping-intro.mdx"
-import MobileBootstrapBehavior from "../../feature-flags/snippets/mobile-bootstrap-behavior.mdx"
+import MobileBootstrapBehavior from "../_snippets/mobile-bootstrap-behavior.mdx"
 
 <BootstrappingIntro />
 
@@ -155,7 +155,7 @@ The values are forwarded to the native iOS and Android SDKs:
 
 <MobileBootstrapBehavior />
 
-On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. See the [bootstrapping guide](/docs/feature-flags/bootstrapping) for the cross-SDK overview.
+On Flutter web, `bootstrap` is not applied, so configure it in your `posthog.init({...})` snippet instead. See the [SDK bootstrapping guide](/docs/libraries/bootstrapping) for the cross-SDK overview.
 
 ### Setting properties for flag evaluation
 
@@ -197,11 +197,17 @@ To set up [session replay web](/docs/session-replay) or [mobile session replay](
 If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).
 This is needed as Flutter renders your app using a browser canvas element.
 
+On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) applies inside that canvas too — declare `session_recording.canvasCapture.maskRegionsFn` in the `posthog.init` call in your `web/index.html` to enable it (requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+). See [masking on Flutter Web](/docs/session-replay/privacy) under the Flutter tab.
+
 ## Surveys
 
 > **Note:** Surveys are supported in Flutter for **Web**, **iOS**, and **Android** platforms.
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Push notifications
+
+The Flutter SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 ## Flush
 

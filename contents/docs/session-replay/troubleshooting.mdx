@@ -64,7 +64,7 @@ These three properties together describe replay status. Read them as a set, not 
 | Property                          | What it tells you                                                                                                   |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `$has_recording`                  | `true` once PostHog has confirmed a recording exists for the session. The strongest positive signal.                |
-| `$recording_status`               | The SDK's current state: `active`, `buffering`, `disabled`, `sampled`, or `paused`.                                 |
+| `$recording_status`               | The SDK's current state. See the [full list of values](#recording_status-values) below.                             |
 | `$session_recording_start_reason` | Why recording started (or didn't). Useful for distinguishing "we chose not to record" from "we tried but couldn't". |
 
 #### `$recording_status` values
@@ -76,6 +76,10 @@ These three properties together describe replay status. Read them as a set, not 
 | `disabled`  | Recording is turned off – either in [your project replay settings](https://app.posthog.com/settings/project-replay) or via SDK config at runtime. |
 | `sampled`   | This session was included by the configured replay sample rate – recording started.                                                               |
 | `paused`    | Recording is temporarily paused for this session (consent gate, programmatic `pause()`, or a max-duration cap).                                   |
+| `lazy_loading`    | Recording is enabled and the SDK is still fetching the recorder script. Normal on the first events of a pageload (including the initial `$pageview`). If it persists across a whole session, the script never finished loading (check `$sdk_debug_recording_script_not_loaded`). |
+| `awaiting_config` | The SDK is waiting for fresh remote config before starting the recorder.                                                                                                                                                                                                        |
+| `missing_config`  | The remote config fetch failed. Recording will not start until the page is reloaded.                                                                                                                                                                                            |
+| `rrweb_error`     | The recorder failed to start. `$sdk_debug_replay_rrweb_error` contains the error message.                                                                                                                                                                                       |
 
 #### `$session_recording_start_reason` values
 
@@ -93,6 +97,7 @@ These three properties together describe replay status. Read them as a set, not 
 | `true`           | any                   | any                                                                 | A recording exists. If you can't find it, the issue is UI filtering, retention, or it's still processing.                                                    |
 | `null` / `false` | `active` or `sampled` | `recording_initialized` / `sampling_override` / `linked_flag_match` | Recording is running but PostHog hasn't confirmed ingestion yet, check a later event.                                                                        |
 | `null` / `false` | `buffering`           | any                                                                 | The SDK is waiting on a [trigger](/docs/session-replay/how-to-control-which-sessions-you-record) or duration threshold, check the trigger status properties. |
+| `null` / `false` | `lazy_loading`        | any                                                                 | The recorder script was still loading when this event fired. Normal on early events in a session, check a later event.                                       |
 | `null` / `false` | `disabled`            | any                                                                 | Replay is off, either in [project settings](https://app.posthog.com/settings/project-replay) or via SDK config like `disable_session_recording: true`.       |
 | `null` / `false` | any                   | `sampled_out`                                                       | Your sample rate excluded this session – increase the sample rate or use a trigger to guarantee capture for important flows.                                 |
 | `null` / `false` | `paused`              | any                                                                 | Recording was paused mid-session – usually a consent flow or a programmatic `posthog.sessionRecording.pause()` call.                                         |
@@ -104,11 +109,11 @@ A normal session's `$recording_status` typically progresses like this:
 ```text
 disabled ──── (config or setting turns replay off)
 
-buffering ──► active ──► (recording captured, $has_recording flips to true on later events)
-    │            │
-    │            └──► paused ──► active   (consent flow, programmatic control)
-    │
-    └──► (session ends before a trigger matches, buffer discarded, no recording stored)
+lazy_loading ──► buffering ──► active ──► (recording captured, $has_recording flips to true on later events)
+                     │            │
+                     │            └──► paused ──► active   (consent flow, programmatic control)
+                     │
+                     └──► (session ends before a trigger matches, buffer discarded, no recording stored)
 ```
 
 `sampled` is an alternative entry point meaning "this session was rolled into the sample" and it behaves like `active` from a capture standpoint.
@@ -222,6 +227,16 @@ Session Replay relies on the `$session_id` property added to events by the web S
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events.
 
+## Filters return recordings that don't seem to match
+
+Three filter behaviors are intentional but can be surprising when a recording shows up that doesn't look like it matches:
+
+**Person filters match the whole person, including older sessions.** Filtering by a person property (like an email) matches every session belonging to that person, across all of their identifiers. When an anonymous session is later linked to a person via `identify()` or `alias()`, that older session starts matching the person's filters too, even though no event inside it carries the filtered property. To see why a specific recording matched, open it and check the highlighted matching events in the player sidebar.
+
+**"Did not perform event" filters only look within the selected date range.** A filter like "users who did not perform `signed_up`" excludes sessions where that event happened inside the queried date range (plus a day of margin). Someone who performed the event before the range still appears. To exclude people based on their full history, use a [cohort](/docs/data/cohorts) with an event condition instead.
+
+**Group filters match any event in the session.** Filtering recordings by a group matches every session containing at least one event tagged with that group, regardless of who sent it. A single group-tagged event inside an otherwise unrelated session is enough for the recording to match.
+
 ## Recording not found
 
 There are several valid reasons why recordings aren't captured. To keep the site fast we don't actively confirm a recording has been captured before showing the "view recording" button.
@@ -287,6 +302,14 @@ Due to the complexity of browser rendering and replay, some web resources are un
 - **Object elements** – Most object elements cannot be played back. Non-HTML native plugins such as Flash or Silverlight cannot be recorded
 - **Heavy animations** – Some heavier animations such as SVG or Lottie animations may be _throttled_ or ignored entirely due to the performance overhead in recording and replaying
 - **Iframes** – iframes from the origins under your control **can** be recorded and played back. Third-party embeds you don't control (Typeform, YouTube, Stripe Checkout, Calendly, etc.) **cannot** be recorded – PostHog can't run inside a foreign domain and the same-origin policy blocks DOM access, so the iframe appears as an empty element. There is no per-domain allowlist for this. See [iframe recording](/docs/session-replay/iframes#third-party-embeds-typeform-youtube-stripe-etc) for more info.
+
+## Flutter Web canvas masking not applied
+
+If you use [canvas masking on Flutter Web](/docs/session-replay/privacy) and content appears unmasked or the canvas stays blank:
+
+- Check your app is wrapped in `PostHogWidget` — without it, canvas frames are skipped entirely (blank canvas) rather than recorded unmasked, and a console warning explains the fix.
+- Frames captured between page load and Flutter booting are only covered when `session_recording.canvasCapture.maskRegionsFn` is declared in `posthog.init` — without the declaration, masking starts at the first `PostHogMaskWidget` mount and the recording restarts once at that point (the replay shows a split).
+- Canvas masking requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+ — on an older posthog-js, frames record unmasked and the plugin logs a console warning telling you to upgrade.
 
 ## Angular performance
 
