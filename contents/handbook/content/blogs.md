@@ -56,6 +56,7 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 
 ### Everything else
 
+- **Break text into short paragraphs.** Blogs usually only have 2-3 sentences per paragraph since longer chunks of text don't look good online. You can draft your blog in this [Google Docs template](https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit) that lets you see how it will look on posthog.com) to preview how it will look on posthog.com as you write.
 - **Be opinionated.** "It depends" is not a conclusion. See [avoid hedging](/handbook/content/posthog-style-guide#avoid-hedging).
 - **Show your work.** Real numbers, screenshots, and code. Our first-hand experience is super valuable evidence for an argument.
 - **Add 3 to 5 internal links** with descriptive anchor text. You can use the `/suggest-links` command in the posthog.com repo for this.
@@ -64,15 +65,17 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 
 ## Submitting for review
 
-You can either submit as:
+All blogs must be reviewed by someone on the Editorial Team before publishing.
 
-1. **Google Docs.** Start from a Google Doc (we also have a [blog post template](https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit) that lets you see how it will look on posthog.com) and share it in [`#team-editorial`](https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X).
+Before you submit, make sure you have:
+1. A **hero image** (grab a template from the [blog graphics Figma](https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&type=design&mode=design), or [request art](/handbook/brand/art-requests) for something custom), correct [frontmatter](/handbook/content/metadata), and a post that follows the [style guide](/handbook/content/posthog-style-guide). Check the deployment preview on your PR to see how it renders.
+2. An author entry in [`src/data/authors.json`](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json). The `handle` you add there is what goes in the `author` field of your frontmatter – see [metadata](/handbook/content/metadata) for the format.
 
-2. **A pull request.** Add your `.md` file to [`/contents/blog`](https://github.com/PostHog/posthog.com/tree/master/contents/blog) in the [posthog.com repo](https://github.com/PostHog/posthog.com) and drop the link in `#team-editorial`. If you're already talking to an editor, add them as a reviewer too.
+To submit, simply create **a pull request.** Add your `.md` file to [`/contents/blog`](https://github.com/PostHog/posthog.com/tree/master/contents/blog) in the [posthog.com repo](https://github.com/PostHog/posthog.com). It will automatically add the Editorial Team as reviewers. 
 
-Someone will pick it up shortly. Expect one or two rounds of feedback.
+If you're already talking to an editor about this blog post, add them individually as a reviewer, too. Otherwise, someone will pick it up shortly. Expect one or two rounds of feedback. If you don't hear back from us within a day, ping the [`#team-editorial`](https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X) channel in slack.
 
-Before you submit, make sure you have a **hero image** (grab a template from the [blog graphics Figma](https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&type=design&mode=design), or [request art](/handbook/brand/art-requests) for something custom), correct [frontmatter](/handbook/content/metadata), and a post that follows the [style guide](/handbook/content/posthog-style-guide). Check the deployment preview on your PR to see how it renders.
+Once it's approved, go ahead and merge to publish!
 
 
 ## Resources
