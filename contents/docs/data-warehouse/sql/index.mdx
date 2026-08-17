@@ -112,7 +112,7 @@ WHERE event = '$pageview'
    AND properties.$current_url LIKE '%/blog%'
 ```
 
-To have the insight or dashboard date range and other filters apply to the insight, include [`{filters}` variable](/docs/data-warehouse/sql/variables) in your query like this:
+To have the insight or dashboard date range and other filters apply to the insight, include the [`{filters}` placeholder](/docs/data-warehouse/sql/variables) in your query like this:
 
 ```sql
 SELECT *
@@ -121,6 +121,8 @@ WHERE event = '$pageview'
    AND properties.$current_url LIKE '%/blog%'
    AND {filters}
 ```
+
+When viewing a saved SQL insight that uses `{filters}`, you can adjust the date range and add property filters directly on the insight page without opening the SQL editor. Changes re-run the query immediately but are not saved until you explicitly save the insight. Clicking **Edit** carries any unsaved filter changes into the SQL editor where you can save them.
 
 `WHERE` is also useful for querying across multiple tables. For example, if you have the Hubspot connector set up, you can get a count of events for contacts with a query like this:
 

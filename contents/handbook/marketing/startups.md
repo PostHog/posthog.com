@@ -10,7 +10,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired               | Must be in YC, <$25m raised                           |
+| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC, <$25m raised, company email domain     |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
 | Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) |
@@ -20,7 +20,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 
 ## PostHog for Startups
 
-Any company that is <2 years old and has raised less than $5M in funding is eligible to apply and claim the following:
+Any company that is <2 years old and has raised less than $5M in funding is eligible to apply, from a PostHog account that uses the company's email domain, and claim the following:
 
 -   $50,000 in PostHog credits (valid for 12 months)
 -   One unique welcome pack for founders
@@ -34,6 +34,8 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 > ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
 
 All applications are **automatically approved**, then **manually reviewed** for eligibility.
+
+Applications from free or disposable email domains (gmail.com, outlook.com, and similar) are rejected automatically at submission. This applies to both programs. Founders who don't have a company domain yet can still use the monthly free allowance on every product and apply once they have one.
 
 We track all PostHog for Startups applications in [this Zapier table](http://tables.zapier.com/app/tables/t/01JRARGWTSDYCGNS12HXN3B6DY) and [this Zap](https://zapier.com/editor/291861515/published?conversationId=6e76ea6b-ef2d-4851-9520-55be39df1232).
 
@@ -55,7 +57,7 @@ You can find the copy for the latest deal on Bookface in this [doc](https://docs
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
-YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), where we ask for a screenshot from Bookface to prove their eligibility.
+YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain, and we ask for a screenshot from Bookface to prove their eligibility.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
 
