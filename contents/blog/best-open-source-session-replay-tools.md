@@ -89,13 +89,13 @@ OpenReplay is a developer-friendly tool. It allows engineers to see how users ar
 
 ### How much does OpenReplay cost?
 
-OpenReplay has three cloud plans and a free self-hosted option. 
+OpenReplay offers three ways to deploy, plus a custom enterprise option. There's no free cloud tier – if you want OpenReplay for free, you need to host it yourself.
 
-- The **Free** cloud plan is $0 and includes up to 1,000 sessions/month, 2 users, 1 project, and 30-day data retention. 
-- The **Serverless** plan is $5.95 per 1,000 sessions/month with unlimited users and projects, also with 30-day retention. 
-- The **Dedicated** plan starts at $0.25/hour (roughly $179/month) and gives you a dedicated VM with configurable data retention, SSO/SAML, conditional recording, and data residency across 35+ regions. 
+- The **open source** edition is free and includes all core features, but you host it on your own infrastructure and manage storage, scaling, and retention yourself. 
+- **Dedicated** is a fully managed, single-tenant instance starting at $199/month, billed hourly at $0.276/hour. It has no limits on users, recordings, or retention, and adds SSO, custom data retention, and data residency across 50 regions. Bigger instances start at $399/month (up to 200,000 sessions/month) and $799/month (up to 500,000 sessions/month). 
+- **Serverless** is a usage-based option where you pay only for the sessions you record. OpenReplay doesn't publish a rate for it, so you'll need to ask. 
 
-The **self-hosted open source edition** is completely free and includes all core features.
+**Enterprise** covers self-hosting at scale, with a custom SLA, dedicated support, and volume pricing on a multi-year contract. Pricing is on request.
 
 > #### Bottom line
 >
