@@ -75,13 +75,17 @@ Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well
   "logo_uri": "https://yourapp.com/logo.png",
   "token_endpoint_auth_method": "none",
   "grant_types": ["authorization_code"],
-  "response_types": ["code"]
+  "response_types": ["code"],
+  "com.posthog": {
+    "provisioning": true
+  }
 }
 ```
 
 Requirements:
 
 - **`client_id`** must exactly match the URL where this document is hosted.
+- **`com.posthog.provisioning`** must be `true` to use the provisioning API. Your `client_id` is a public URL, so a request that names it proves nothing about who sent it. Declaring the opt-in in the document, which only you can publish, is what grants your app provisioning access. It must be the JSON literal `true`, not the string `"true"`.
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
 - **`token_endpoint_auth_method`** must be `"none"` (a public client, no client secret) or `"private_key_jwt"` with an HTTPS `jwks_uri`. With `private_key_jwt`, your app authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits).
@@ -91,7 +95,60 @@ Requirements:
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
-Once your metadata document is live, you can start calling the API. The first request auto-registers your app and returns HTTP 202; retry after a few seconds.
+### Register your app
+
+Once your metadata document is live, register it. PostHog fetches the document, validates it, and turns on provisioning access if it declares `com.posthog.provisioning`.
+
+This call is not authenticated, because an app that hasn't registered yet has no credential to present. That's why the opt-in lives in your document rather than in this request.
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -H "API-Version: 0.1d" \
+  -d '{"client_id": "https://yourapp.com/.well-known/posthog-client.json"}'
+```
+
+**Response** (HTTP 200):
+
+```json
+{
+  "client_id": "https://yourapp.com/.well-known/posthog-client.json",
+  "registered": true,
+  "client_type": "public",
+  "token_endpoint_auth_method": "none",
+  "jwks_uri": null,
+  "scopes": ["insight:read", "project:read"],
+  "provisioning": {
+    "active": true,
+    "can_create_accounts": true,
+    "can_provision_resources": true
+  },
+  "capabilities": {
+    "account_requests": true,
+    "github_grants": false,
+    "wizard_runs": false
+  },
+  "checks": [
+    { "name": "metadata_document", "ok": true, "detail": "Fetched and validated" },
+    { "name": "provisioning_enabled", "ok": true, "detail": "Active" },
+    {
+      "name": "jwks",
+      "ok": true,
+      "detail": "No jwks_uri, so this client authenticates with PKCE only and cannot use the GitHub grant endpoints"
+    }
+  ]
+}
+```
+
+`scopes` is your [scope ceiling](#declare-oauth-scopes-for-your-app-optional): the scopes you declared, or every scope a user can grant if you declared none. `capabilities` says which endpoints you can call, including the ones PostHog has to enable for you.
+
+Each check is reported separately, so a setup problem names its own cause instead of arriving as a bare 401 later. If registration fails, you get HTTP 400 with `"registered": false`, the same `checks` array, and an `error` object whose message is the first failed check.
+
+Call this endpoint again whenever you want to re-check your setup. It re-fetches your document and re-reports every check. Registering again never reactivates an app PostHog has deactivated.
+
+You can also verify a signed assertion end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
+
+Until your app is registered, the other endpoints return HTTP 401 with a message pointing back here.
 
 ### Link your partner app to a PostHog organization (optional)
 
@@ -111,6 +168,7 @@ You can link the app to a PostHog organization with a verification token, which 
      "grant_types": ["authorization_code"],
      "response_types": ["code"],
      "com.posthog": {
+       "provisioning": true,
        "verification_token": "phvt_..."
      }
    }
@@ -137,6 +195,7 @@ You can declare which OAuth scopes your partner app needs by adding a `scopes` f
   "grant_types": ["authorization_code"],
   "response_types": ["code"],
   "com.posthog": {
+    "provisioning": true,
     "verification_token": "phvt_...",
     "scopes": ["insight:read", "project:read", "person:read"]
   }
@@ -508,6 +567,7 @@ Common error codes:
 |---|---|---|
 | `invalid_request` | 400 | Missing or invalid field |
 | `unauthorized` | 401 | Authentication failed |
+| `registration_failed` | 400 | [Registration](#register-your-app) did not complete. The `checks` array in the same response says which step failed |
 | `forbidden` | 403 | Partner not authorized for this action |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
@@ -548,10 +608,11 @@ So account requests, the tightest budget, run at 10/20/50/100 per hour across th
 
 Limits are per region: US and EU count separately.
 
-**CIMD registration** (first request from a new `client_id`) is limited separately:
+**[Registration](#register-your-app)** is limited separately, because it fetches your document while you wait:
 
-- 5 requests per minute per IP (burst)
-- 10 requests per hour per IP (sustained)
+- 30 registration calls per hour per `client_id`
+- 120 registration calls per hour per IP
+- 5 requests per minute per IP, and 10 per hour per IP, for a `client_id` PostHog has never seen
 - 100 new client registrations per hour globally
 - 5 new client registrations per domain per hour
 
