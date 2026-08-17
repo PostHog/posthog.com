@@ -105,6 +105,14 @@ Add the `posthog-react-native/expo` plugin under the `expo.plugins`.
 }
 ```
 
+If your project has a checked-in `ios/` directory, run or rerun the iOS prebuild after adding or upgrading the plugin:
+
+```bash
+npx expo prebuild --platform ios
+```
+
+This reapplies the config plugin to the existing **Bundle React Native code and images** build phase. When upgrading from `posthog-react-native` 4.61.0 or earlier to a newer version, the plugin automatically migrates the previously generated PostHog command. You do not need to edit `project.pbxproj` manually.
+
 The plugin accepts the following options:
 
 | Option | Type | Default | Description |
@@ -185,7 +193,9 @@ android {
 
 3. iOS: Update the `/ios/$yourProjectName.xcodeproj/project.pbxproj` file (replace `$yourProjectName` with your project's actual name). You need to locate the `Bundle React Native code and images` build step.
 
-To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, select Bundle React Native code and images, and apply the changes shown below.
+To do this through Xcode, open your project in Xcode, go to the project settings, navigate to Build Phases, and select Bundle React Native code and images. Use the command that matches your installed `posthog-react-native` version.
+
+#### `posthog-react-native` 4.61.0 and earlier
 
 ```diff
 
@@ -193,6 +203,16 @@ To do this through Xcode, open your project in Xcode, go to the project settings
 
 -`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 +/bin/sh `"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
+```
+
+#### `posthog-react-native` newer than 4.61.0
+
+```diff
+
+...
+
+-`"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
++`"$NODE_BINARY" --print "require('path').join(require('path').dirname(require.resolve('posthog-react-native')), '..', 'tooling', 'posthog-xcode.sh')"` `"$NODE_BINARY" --print "require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'"`
 ```
 
 If you are not using the Expo plugin (step 1), you will need to also disable User Script Sandboxing for the upload script to work. In Xcode, go to Build Settings, search for **User Script Sandboxing** (`ENABLE_USER_SCRIPT_SANDBOXING`) and set it to **No**. This is required because the script needs to read `.git/` for release metadata and execute `posthog-cli`, which are not allowed under Xcode's script sandbox.

@@ -5,6 +5,14 @@
 
 # Brands and companies
 PostHog
+Alation
+Atlan
+Contentsquare
+Firebolt
+[Hh]elicone
+Luma
+Runware
+Tecton
 ABsmartly
 Accoil
 [Aa]coustic
@@ -149,7 +157,7 @@ Knative
 [Kk]oala
 Kubernetes
 Kudosity
-Langfuse
+[Ll]angfuse
 LaunchDarkly
 [Ll]aunchpad
 Lightdash
@@ -302,6 +310,15 @@ mprocs
 Turborepo
 
 # Acronyms, languages, frameworks, protocols, etc.
+CSMs
+[Hh]yperscalers
+[Oo]mnichannel
+[Rr]emarketing
+[Rr]etargeting
+ecomm
+eval
+orgs
+wishlist
 A/A
 A/B
 ACLs
@@ -453,5 +470,12 @@ MCPcat
 [Pp]ageleave
 [Pp]roxied
 [Uu]nproxied
+[Uu]nscoped
 [Uu]ndercount(s|ed|ing)?
 [Rr]esync(s|ed|ing)?
+[Ss]hard(s|ed|ing)?
+Altinity
+[Bb]ackreference(s)?
+[Ll]ookahead(s)?
+[Ll]ookaround(s)?
+[Ll]ookbehind(s)?

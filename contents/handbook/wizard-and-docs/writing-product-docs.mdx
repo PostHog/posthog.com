@@ -9,7 +9,7 @@ This guide explains how to write and structure your tool's documentation. A **to
 The structure in this guide shows users how a tool feeds [self-driving](/docs/self-driving), so it follows [PostHog's four layers](/handbook/brand/foundations):
 
 - **Tools** are what you document.
-- **Products** are the surfaces a tool runs on – Web, Slack, MCP, PostHog Code. That's the [Surfaces](#surfaces) section.
+- **Products** are the surfaces a tool runs on – Web, Slack, MCP, PostHog Desktop. That's the [Surfaces](#surfaces) section.
 - **Context** is the data that feeds the tool and the self-driving loop. That's the [Context](#context) section.
 
 If the terminology here is confusing at all, check out the [glossary](/docs/glossary).
@@ -28,22 +28,20 @@ Every docs page should fit into one of the following categories:
 
 1. [Overview](#overview) – The landing page for your tool's docs. Think of it as a one-pager for your tool.
 2. [Get started](#get-started) – The minimal steps and context needed to get your tool up and running.
-3. [Surfaces](#surfaces) – Where and how people use your tool, across each product (surface) it runs on: the web app, Slack, MCP, PostHog Code. Every tool runs on at least one.
+3. [Surfaces](#surfaces) – Where and how people use your tool, across each product (surface) it runs on: the web app, Slack, MCP, PostHog Desktop. Every tool runs on at least one.
 4. [Context](#context) – The data that feeds your tool, and where it comes from.
 5. [Resources](#resources) – Standalone "lookup" pages like pricing, troubleshooting, and references.
 
 We recommend using [Support](/docs/support) docs as a reference. They're the clearest example of this structure, so they're a good template when writing docs for a new tool or improving an existing one.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_07_20_at_17_28_48_5cdac00d46.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_07_20_at_17_30_00_3f154717ea.png"
-    alt="Support docs"
-    padding={false}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_07_20_at_17_28_48_5cdac00d46.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_07_20_at_17_30_00_3f154717ea.png"
+  alt="Support docs"
+  padding={false}
 />
 
-<Caption>
-Support is a good template for docs structure
-</Caption>
+<Caption>Support is a good template for docs structure</Caption>
 
 <CalloutBox icon="IconInfo" title="Adapt it to your tool" type="fyi">
 
@@ -58,9 +56,9 @@ That said, stick to this structure first. It’s worked well for other tools, bo
 The sidebar navigation mirrors the docs structure. The hierarchy drives how users discover and navigate docs. Here's how it looks for Support, our reference example:
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support1_efb384ae51.png"
-    alt="Support docs sidebar navigation, showing the section groups: Overview, Get started, Surfaces, Channels, Imports, and Resources"
-    padding={false}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support1_efb384ae51.png"
+  alt="Support docs sidebar navigation, showing the section groups: Overview, Get started, Surfaces, Channels, Imports, and Resources"
+  padding={false}
 />
 
 Support fills the **Context** role with two top-level sections – **Channels** and **Imports** – because each is distinct enough to stand on its own. Your tool might need only one context section, or might name it something else. Ordering and grouping are controlled by array position and header-only nodes in [`src/navs/index.js`](https://github.com/PostHog/posthog.com/blob/master/src/navs/index.js).
@@ -70,9 +68,9 @@ Support fills the **Context** role with two top-level sections – **Channels** 
 This is your tool's book cover – a busy engineer scanning it should learn in seconds what it is, where they use it, where its data comes from, and how it feeds Self-driving.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support2_47bc235d7c.png"
-    alt="Support overview page"
-    padding={false}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support2_47bc235d7c.png"
+  alt="Support overview page"
+  padding={false}
 />
 
 Include the following on this page, keeping it straightforward and concise. No walls of text:
@@ -88,7 +86,7 @@ Include the following on this page, keeping it straightforward and concise. No w
 
 ## Get started
 
-**Get started** is a category, not a page. It groups the pages that get new users up and running as quickly as possible, with *just* enough context to understand what's going on. Those pages are:
+**Get started** is a category, not a page. It groups the pages that get new users up and running as quickly as possible, with _just_ enough context to understand what's going on. Those pages are:
 
 - A **Start here** page
 - An **Install** or setup page (if your tool needs one)
@@ -100,9 +98,9 @@ Keep advanced or complex features out of these pages. Those belong on the releva
 A high-level map of the adoption journey – the milestones to succeed with your tool, like a video game's quest log. It acts as a syllabus: users invest more when they can see what they're signing up for. These are high-converting pages for paid ads, so they matter. Build it with the `QuestLog` component.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support3_543a55c537.png"
-    alt="Support start here page, built with the QuestLog component"
-    padding={false}
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/support3_543a55c537.png"
+  alt="Support start here page, built with the QuestLog component"
+  padding={false}
 />
 
 Include the following, keeping advanced details to dedicated pages in surfaces, context, or resources:
@@ -128,7 +126,7 @@ SDK installation pages share a special architecture: they render the same conten
 
 ## Surfaces
 
-*Where and how* people use your tool – the web app, Slack, MCP, PostHog Code, or the API. Each of these is a **product** (surface); there's one page per product, framed around what the user does there. This section is always called "Surfaces," and it's where AI-driven work lives now (MCP and PostHog Code are products too – there's no separate "PostHog AI" category). Name pages after the action: "Use [Tool] in/on [Product]."
+_Where and how_ people use your tool – the web app, Slack, MCP, PostHog Desktop, or the API. Each of these is a **product** (surface); there's one page per product, framed around what the user does there. This section is always called "Surfaces," and it's where AI-driven work lives now (MCP and PostHog Desktop are products too – there's no separate "PostHog AI" category). Name pages after the action: "Use [Tool] in/on [Product]."
 
 Include the following pages for this section:
 
@@ -137,7 +135,7 @@ Include the following pages for this section:
 - How the surface connects to the others
 - Screenshots of the tool on that surface
 
-**Examples:** [Web app](/docs/support/inbox), [Slack](/docs/support/surfaces/slack), [MCP](/docs/support/surfaces/mcp), [PostHog Code](/docs/support/surfaces/code), [API](/docs/support/javascript-api)
+**Examples:** [Web app](/docs/support/inbox), [Slack](/docs/support/surfaces/slack), [MCP](/docs/support/surfaces/mcp), [PostHog Desktop](/docs/support/surfaces/desktop), [API](/docs/support/javascript-api)
 
 ## Context
 

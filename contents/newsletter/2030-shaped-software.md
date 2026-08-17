@@ -43,13 +43,13 @@ If a human can do something with your product, agents should be able to do it to
 
 Missing capabilities are a failure mode. Say you ask an agent to set up an [A/B test](/experiments). It creates the [feature flag](/feature-flags), builds the insight, wires up the events, and stops because you never exposed a tool to create the experiment. It now has to ask you to do that part which defeats the purpose of using agents.
 
-![Agent-first infrastructure diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_7820f5d295.jpg)
+![Agent-first infrastructure diagram](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/image_7820f5d295.jpg)
 
 <Caption>Agent-first infrastructure</Caption>
 
 This doesn't mean that tools are all you need. It won't be enough to just let Claude use your product on its own. Relying entirely on a model provider is too much risk. Building your own harness lets you guarantee quality, protect your brand, and make continuous improvements. Even [OpenAI notes](https://openai.com/index/harness-engineering/) that agents struggle not because they are incapable, but because they lack "the tools, abstractions, and internal structure required to make progress toward high-level goals."
 
-Context is what makes your agent special. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](/newsletter/context-engineering), creating pipelines and flows to get fresh, valuable context to the agents when they need it.
+Context is what makes your agent special. The model is the same for everyone, your moat is the source code, usage data, customer data, and product skills you feed it. This means [context engineering](/newsletter/context-engineering), creating [pipelines and flows to get fresh, valuable context to the agents](/newsletter/software-factories#what-software-factories-are-missing) when they need it.
 
 ## Chat is the front door, generative UI inside
 

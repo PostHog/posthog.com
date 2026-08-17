@@ -28,7 +28,6 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
-import LovableLogo from 'components/CustomerLogos/LovableLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -592,28 +591,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         logo: HostAILogo,
         height: 12,
-    },
-    lovable: {
-        name: 'Lovable',
-        toolsUsed: ['ai_observability', 'experiments', 'feature_flags'],
-        industries: ['Devtool'],
-        users: ['Engineering'],
-        notes: 'AI app & website builder',
-        featured: true,
-        logo: LovableLogo,
-        height: 8,
-        quotes: {
-            viktor_eriksson: {
-                name: 'Viktor Eriksson',
-                role: 'Software Engineer',
-                image: {
-                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg',
-                },
-                quotes: [
-                    "PostHog is super cool because it is such a broad platform. If you're building a new product or at a startup, it's a no-brainer to use PostHog. It's the only all-in-one platform like it for developers.",
-                ],
-            },
-        },
     },
     jaxxon: {
         name: 'Jaxxon',

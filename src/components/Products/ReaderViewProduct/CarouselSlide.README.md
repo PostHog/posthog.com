@@ -134,7 +134,7 @@ Used when `slide.image` is an object instead of a string shorthand.
 | `srcMobileBreakpoint` | `'2xl' \| '3xl' \| '4xl'` | `'2xl'` | Breakpoint at which `srcMobile` is swapped for `src`. All values reference the named `reader-content` container. Use `'3xl'` or `'4xl'` when the desktop image is very wide and should stay hidden longer. |
 | `ref` | `string` | none | Lookup key into `productData.screenshots`. The matching entry's `src`/`srcDark`/`alt` are merged in as defaults; any other fields on this object override them. **Use this when you want the screenshots catalog to remain the single source of truth for image URLs but you need to override styling on this slide.** |
 | `alt` | `string` | catalog `alt` → `productData.name` | Alt text for the `<img>`. |
-| `maxWidth` | `string` | layout-dependent | Tailwind max-width class. `stack` defaults to `@2xl/reader-content:max-w-3xl`; `float` defaults to `max-w-md @2xl:max-w-sm @3xl:max-w-md`. Override examples: `'max-w-none'` (full width), `'max-w-2xl'`. |
+| `maxWidth` | `string` | layout-dependent | Width / max-width utilities for the image wrapper. `stack` defaults to `@2xl/reader-content:max-w-3xl`; `float` defaults to `w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2` (percentage-based once floated so prose stays proportional while resizing). Override examples: `'max-w-none'` (full width), `'@2xl:w-[40%]'`. |
 | `align` | `'left' \| 'center' \| 'right'` | `'left'` | Alignment of the image within its container (only meaningful when `maxWidth` is narrower than container). |
 | `frameless` | `boolean` | `false` | `stack` layout only. Removes the frame's **background** (`bg-tan dark:bg-dark`) and **border** (`border-t border-primary`). Padding is controlled independently by `framePadding` — when `frameless: true`, padding defaults to `''` instead of `p-4`. |
 | `framePadding` | `string` | `'p-4'` (framed) / `''` (frameless) | Replaces the default `p-4` frame padding. Accepts any Tailwind spacing class, including responsive container-query variants. Use this to add desktop-only padding (e.g. `'@3xl/reader-content:pt-4 @3xl/reader-content:px-4'`) without needing `!important` overrides. |
@@ -180,7 +180,7 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 - **Stack image defaults (img)**: `h-auto border border-secondary rounded-md`. Skipped when `frameless: true` (becomes just `h-auto`). Override via `imgClassName`.
 - **Stack image max-width**: `@2xl/reader-content:max-w-3xl` (left-aligned within its container). Good for landscape screenshots.
 - **Float image position**: floats right at `@2xl/reader-content` with margin offsets that escalate at `@2xl` / `@3xl` / `@4xl/reader-content`. Stacks above prose at narrower sizes.
-- **Float image max-width**: `max-w-md @2xl:max-w-sm @3xl:max-w-md` (responsive — narrower when wedged into the float position).
+- **Float image width**: `w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2` (percentage of the slide once floated, so the text column doesn't get crushed mid-resize).
 - **Theme-aware image**: when `siteSettings.theme === 'dark'` and `image.srcDark` exists, `srcDark` is used. Otherwise falls through to `src`.
 - **Image alt fallback**: `image.alt` ⟶ `productData.name`.
 - **Float glow color fallback**: `productData.color` (the product's brand color).

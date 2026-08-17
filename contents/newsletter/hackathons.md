@@ -17,7 +17,7 @@ seo:
     You should run more hackathons. Here’s how to do them well.
 ---
 
-PostHog hackathons have generated millions in revenue. [Session Replay](/session-replay), [Data Warehouse](/data-stack), [Logs](/logs), [Workflows](/workflows), and [PostHog AI](/ai) wouldn’t exist without them.
+PostHog hackathons have generated millions in revenue. [Session Replay](/session-replay), [Data Warehouse](/context-warehouse), [Logs](/logs), [Workflows](/workflows), and [PostHog AI](/ai) wouldn’t exist without them.
 
 We take multiple days out of every year to do them. They are days our team looks forward to all year. They’re an integral part of our culture.
 

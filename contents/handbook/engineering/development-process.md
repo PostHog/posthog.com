@@ -274,6 +274,8 @@ Branch protection on the `posthog` repo requires a review and green CI before an
 - The PR author is a member of the PostHog GitHub org (no fork PRs from external contributors).
 - You're a full Slack workspace member with a `@posthog.com` email.
 
+It bypasses required reviews and checks, but **not** [commit signing](/handbook/engineering/security#commit-signing). A PR carrying an unsigned commit can't be force-merged, so sign your commits before reaching for this during an incident.
+
 **Everything is audited.** Each force-merge posts an audit message to Slack, comments on the PR recording who triggered it and the reason, and writes a tamper-proof (object-locked) record, alongside an EventBridge event and a CloudWatch metric that alarms on unusual volume. Accountability is after the fact, so expect to justify any force-merge — and cover it in the [post-mortem](/handbook/engineering/operations/post-mortems) if it was part of an incident.
 
 ### Deploy notification bot

@@ -1,4 +1,5 @@
 import React from 'react'
+import { IconCheck } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import { SectionComponentProps } from '../types'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -9,22 +10,30 @@ interface ComparisonItem {
     subtitleUrl?: string
 }
 
-const ItemList = ({ items }: { items: ComparisonItem[] }) => (
-    <ul className="list-none m-0 p-0">
+const ItemList = ({ items, iconClassName }: { items: ComparisonItem[]; iconClassName: string }) => (
+    <ul className="list-none m-0 p-0 divide-y divide-primary">
         {items.map((item, index) => (
-            <li key={index} className="m-0 py-2 border-b border-primary last:border-b-0">
-                <span className="font-semibold text-primary">{item.title}</span>
-                {item.subtitle && (
-                    <span className="text-secondary ml-2 italic text-sm">
-                        {item.subtitleUrl ? (
-                            <a href={item.subtitleUrl} target="_blank" rel="noopener noreferrer" className="underline">
-                                {item.subtitle}
-                            </a>
-                        ) : (
-                            item.subtitle
-                        )}
-                    </span>
-                )}
+            <li key={index} className="flex items-start gap-2.5 py-2.5 first:pt-0 last:pb-0">
+                <IconCheck className={`size-5 shrink-0 mt-0.5 ${iconClassName}`} />
+                <div>
+                    <span className="font-semibold text-primary leading-snug">{item.title}</span>
+                    {item.subtitle && (
+                        <span className="block text-secondary text-sm mt-0.5">
+                            {item.subtitleUrl ? (
+                                <a
+                                    href={item.subtitleUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="underline"
+                                >
+                                    {item.subtitle}
+                                </a>
+                            ) : (
+                                item.subtitle
+                            )}
+                        </span>
+                    )}
+                </div>
             </li>
         ))}
     </ul>
@@ -36,37 +45,37 @@ const ComparisonSummary = ({ id, productData }: SectionComponentProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-64 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
-                <div className="relative z-20 pt-8">
-                    <h2 className="text-4xl font-bold text-white mb-2 text-center">PostHog vs...</h2>
-                    <p className="text-xl text-white max-w-4xl mx-auto mb-8 text-center">An honest comparison tl;dr:</p>
+            <h2 className="text-3xl @md/reader-content:text-4xl font-bold text-primary m-0 leading-tight">
+                PostHog vs...
+            </h2>
+            <p className="text-secondary mt-1 mb-6">An honest comparison, tl;dr:</p>
+            <div className="@container">
+                <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-4 items-start">
+                    <div className="border border-primary rounded bg-primary p-5">
+                        <h3 className="text-lg font-bold text-primary mt-0 mb-3">Choose a competitor if...</h3>
+                        <ItemList items={summary.them || []} iconClassName="text-muted" />
+                    </div>
+                    <div className="border border-primary rounded bg-primary p-5">
+                        <h3 className="text-lg font-bold text-primary mt-0 mb-3">
+                            Go with{' '}
+                            <Logo
+                                layout="logomark"
+                                variant="mono"
+                                color="currentColor"
+                                className="text-primary h-6 w-auto inline-block -mb-1 mx-0.5"
+                                width="auto"
+                            />{' '}
+                            if...
+                        </h3>
+                        <ItemList items={summary.us || []} iconClassName="text-green" />
+                    </div>
                 </div>
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/mascots_e1d975b193.png"
                     alt="PostHog's mascot and what competitor's mascots would look like if they had Lottie"
-                    className="relative z-10"
-                    imgClassName="max-h-[218px]"
+                    className="block mx-auto mt-6"
+                    imgClassName="max-h-32 @2xl:max-h-40"
                 />
-            </div>
-            <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-6">
-                <div>
-                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">Choose a competitor if...</h3>
-                    <ItemList items={summary.them || []} />
-                </div>
-                <div>
-                    <h3 className="text-lg font-bold text-primary mt-0 mb-2">
-                        Go with{' '}
-                        <Logo
-                            layout="logomark"
-                            variant="mono"
-                            color="currentColor"
-                            className="text-primary h-6 inline-block -mb-1 mx-0.5"
-                            width="auto"
-                        />{' '}
-                        if...
-                    </h3>
-                    <ItemList items={summary.us || []} />
-                </div>
             </div>
         </section>
     )

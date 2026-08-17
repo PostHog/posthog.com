@@ -170,6 +170,10 @@ const linklist: IProps[] = [
                 url: '/tutorials',
             },
             {
+                title: 'Pocket guides',
+                url: '/pocket-guides',
+            },
+            {
                 title: 'Integrations',
                 url: '/cdp',
             },
@@ -192,10 +196,6 @@ const linklist: IProps[] = [
             {
                 title: 'Merch',
                 url: '/merch',
-            },
-            {
-                title: 'Contributors',
-                url: '/contributors',
             },
             {
                 title: 'Newsletter',
@@ -271,7 +271,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Changelog',
-                url: '/changelogå',
+                url: '/changelog',
             },
             {
                 title: 'People',

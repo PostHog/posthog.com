@@ -1,8 +1,5 @@
 import { GatsbyNode } from 'gatsby'
 
-import fs from 'fs'
-import path from 'path'
-import parseLinkHeader from 'parse-link-header'
 import qs from 'qs'
 import { ApiInfoModel, MenuBuilder, OpenAPIParser } from 'redoc'
 import type {
@@ -11,6 +8,7 @@ import type {
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
+import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -154,137 +152,66 @@ const findAllReferencedSchemas = (items: any[], allSchemas: Record<string, any>)
     }
 }
 
-// The API schema endpoint takes ~9s server-side to generate its ~13MB response, which
-// would otherwise be the longest wait in "source and transform nodes". The build script
-// starts scripts/prefetch-api-spec.mjs before gatsby boots; loadApiSpec() consumes its
-// output, waiting briefly on the in-flight marker before falling back to fetching
-// inline. primeApiSpec() is called (not awaited) from onPreBootstrap; sourceApiEndpoints
-// below awaits the same promise, so failures still surface exactly where they used to.
-const API_SPEC_PREFETCH_FILE = path.resolve(__dirname, '../.api-spec-prefetch.json')
-const API_SPEC_PREFETCH_PENDING = `${API_SPEC_PREFETCH_FILE}.pending`
-// Anything older belongs to a previous (crashed) run — ignore it and fetch inline.
-const API_SPEC_PREFETCH_MAX_AGE_MS = 5 * 60 * 1000
+export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
+    const { createNode } = actions
 
-const readFreshPrefetchedSpec = (expectedUrl: string): any | null => {
-    try {
-        const stat = fs.statSync(API_SPEC_PREFETCH_FILE)
-        if (Date.now() - stat.mtimeMs < API_SPEC_PREFETCH_MAX_AGE_MS) {
-            const envelope = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_FILE, 'utf-8'))
-            // Only trust a prefetch fetched from the URL this build is configured for — a
-            // leftover from a run against a different POSTHOG_OPEN_API_SPEC_URL (or the
-            // pre-envelope file format) must not leak into this build's api_endpoint nodes.
-            if (envelope?.url === expectedUrl && envelope.spec) {
-                return envelope.spec
-            }
-        }
-    } catch {
-        // Missing or unreadable — caller falls back.
-    }
-    return null
-}
-
-const isPrefetchInFlight = (expectedUrl: string): boolean => {
-    try {
-        const stat = fs.statSync(API_SPEC_PREFETCH_PENDING)
-        if (Date.now() - stat.mtimeMs >= API_SPEC_PREFETCH_MAX_AGE_MS) {
-            return false
-        }
-        const marker = JSON.parse(fs.readFileSync(API_SPEC_PREFETCH_PENDING, 'utf-8'))
-        return marker?.url === expectedUrl
-    } catch {
-        return false
-    }
-}
-
-async function loadApiSpec(): Promise<any> {
     const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
-
-    const prefetched = readFreshPrefetchedSpec(openApiSpecUrl)
-    if (prefetched) return prefetched
-
-    // A prefetch for this same URL started alongside this build may still be in
-    // flight — give it a bounded window to land before fetching inline.
-    for (let waited = 0; isPrefetchInFlight(openApiSpecUrl) && waited < 20000; waited += 250) {
-        await new Promise((resolve) => setTimeout(resolve, 250))
-        const spec = readFreshPrefetchedSpec(openApiSpecUrl)
-        if (spec) return spec
-    }
-
-    return fetch(openApiSpecUrl, {
+    const spec = await fetch(openApiSpecUrl, {
         headers: {
             Accept: 'application/json',
         },
     }).then((res) => res.json())
-}
 
-let apiSpecPromise: Promise<any> | null = null
-export function primeApiSpec(): void {
-    if (!apiSpecPromise) {
-        apiSpecPromise = loadApiSpec()
-        // Swallow rejections on a side-listener so an early failure doesn't raise an
-        // unhandled rejection before sourceNodes awaits the original promise.
-        apiSpecPromise.catch(() => {})
-    }
-}
+    const parser = new OpenAPIParser(spec)
+    const menu = MenuBuilder.buildStructure(parser, {} as any)
 
-export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
-    const { createNode } = actions
+    const allSchemas = spec.components?.schemas || {}
 
-    const sourceApiEndpoints = async () => {
-        primeApiSpec()
-        const spec = await apiSpecPromise
-
-        const parser = new OpenAPIParser(spec)
-        const menu = MenuBuilder.buildStructure(parser, {} as any)
-
-        const allSchemas = spec.components?.schemas || {}
-
-        let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
-        const maxEndpointItems = 20
-        all_endpoints = all_endpoints.flatMap((endpoint) => {
-            if (endpoint.items.length > maxEndpointItems) {
-                const chunks = []
-                for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
-                    const pos = Math.floor(i / maxEndpointItems)
-                    const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
-                    const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
-                    const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
-                    const chunk = {
-                        ...endpoint,
-                        name,
-                        items: endpoint.items.slice(i, i + maxEndpointItems),
-                        next,
-                        previous,
-                    }
-                    chunks.push(chunk)
+    let all_endpoints = menu[menu.length - 1]['items'] // all grouped endpoints
+    const maxEndpointItems = 20
+    all_endpoints = all_endpoints.flatMap((endpoint) => {
+        if (endpoint.items.length > maxEndpointItems) {
+            const chunks = []
+            for (let i = 0; i < endpoint.items.length; i += maxEndpointItems) {
+                const pos = Math.floor(i / maxEndpointItems)
+                const next = i + maxEndpointItems < endpoint.items.length && `${endpoint.name}-${pos + 2}`
+                const name = pos === 0 ? endpoint.name : `${endpoint.name}-${pos + 1}`
+                const previous = pos === 0 ? null : pos === 1 ? endpoint.name : `${endpoint.name}-${pos}`
+                const chunk = {
+                    ...endpoint,
+                    name,
+                    items: endpoint.items.slice(i, i + maxEndpointItems),
+                    next,
+                    previous,
                 }
-                return chunks
+                chunks.push(chunk)
             }
-            return endpoint
-        })
-        all_endpoints.forEach((endpoint) => {
-            const components = findAllReferencedSchemas(endpoint.items, allSchemas)
+            return chunks
+        }
+        return endpoint
+    })
+    all_endpoints.forEach((endpoint) => {
+        const components = findAllReferencedSchemas(endpoint.items, allSchemas)
 
-            const node = {
-                id: createNodeId(`api_endpoint-${endpoint.name}`),
-                internal: {
-                    type: `api_endpoint`,
-                    contentDigest: createContentDigest({
-                        items: endpoint.items,
-                    }),
-                },
-                items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
-                components: JSON.stringify(components),
-                url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
-                name: endpoint.name,
-                nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
-                previousURL: (endpoint as any).previous
-                    ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
-                    : null,
-            }
-            createNode(node)
-        })
-    }
+        const node = {
+            id: createNodeId(`api_endpoint-${endpoint.name}`),
+            internal: {
+                type: `api_endpoint`,
+                contentDigest: createContentDigest({
+                    items: endpoint.items,
+                }),
+            },
+            items: JSON.stringify(endpoint.items.map((item) => item.operationSpec)),
+            components: JSON.stringify(components),
+            url: '/docs/api/' + endpoint.name.replace(/_/g, '-'),
+            name: endpoint.name,
+            nextURL: endpoint.next ? '/docs/api/' + endpoint.next.replace(/_/g, '-') : null,
+            previousURL: (endpoint as any).previous
+                ? '/docs/api/' + (endpoint as any).previous.replace(/_/g, '-')
+                : null,
+        }
+        createNode(node)
+    })
 
     // --- Begin parallel sourcing of independent data ---
     const sourceProductUsageStats = async () => {
@@ -363,7 +290,21 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
         createNode(node)
     }
-    const fetchRoadmapPage = async (page: number) => {
+
+    tools.forEach((tool) => {
+        createNode({
+            ...tool,
+            id: createNodeId(`tool-${tool.handle}`),
+            parent: null,
+            children: [],
+            internal: {
+                type: 'Tool',
+                contentDigest: createContentDigest(tool),
+            },
+        })
+    })
+
+    const createRoadmapItems = async (page = 1) => {
         const roadmapQuery = qs.stringify(
             {
                 pagination: {
@@ -398,58 +339,48 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         )
         const roadmapsURL = `${process.env.GATSBY_SQUEAK_API_HOST}/api/roadmaps?${roadmapQuery}`
-        return await fetch(roadmapsURL).then((res) => res.json())
-    }
-    // Page 1 tells us the page count, then the remaining pages fetch concurrently
-    // instead of one after another (~0.6s per page, 10 pages).
-    const createRoadmapItems = async () => {
-        const firstPage = await fetchRoadmapPage(1)
-        const pageCount = firstPage.meta?.pagination?.pageCount || 1
-        const remainingPages = await Promise.all(
-            Array.from({ length: pageCount - 1 }, (_, i) => fetchRoadmapPage(i + 2))
-        )
-        for (const { data: roadmaps } of [firstPage, ...remainingPages]) {
-            roadmaps.forEach((roadmap) => {
-                const {
-                    id,
-                    attributes: { image, projectedCompletion, dateCompleted, category, ...other },
-                } = roadmap
+        const { data: roadmaps, meta } = await fetch(roadmapsURL).then((res) => res.json())
+        roadmaps.forEach((roadmap) => {
+            const {
+                id,
+                attributes: { image, projectedCompletion, dateCompleted, category, ...other },
+            } = roadmap
 
-                const date = dateCompleted || projectedCompletion
-                const year = date && Number(dayjs(date).format('YYYY'))
+            const date = dateCompleted || projectedCompletion
+            const year = date && Number(dayjs(date).format('YYYY'))
 
-                const cloudinaryMedia = {
-                    ...image,
-                    cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
-                    publicId: image?.data?.attributes?.provider_metadata?.public_id,
-                    originalHeight: image?.data?.attributes?.height,
-                    originalWidth: image?.data?.attributes?.width,
-                    originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
-                }
+            const cloudinaryMedia = {
+                ...image,
+                cloudName: process.env.GATSBY_CLOUDINARY_CLOUD_NAME,
+                publicId: image?.data?.attributes?.provider_metadata?.public_id,
+                originalHeight: image?.data?.attributes?.height,
+                originalWidth: image?.data?.attributes?.width,
+                originalFormat: (image?.data?.attributes?.ext || '').replace('.', ''),
+            }
 
-                const data = {
-                    strapiID: id,
-                    date,
-                    media: cloudinaryMedia,
-                    type: category,
-                    year,
-                    projectedCompletion,
-                    dateCompleted,
-                    ...other,
-                }
-                const roadmapNode = {
-                    id: createNodeId(`roadmap-${id}`),
-                    parent: null,
-                    children: [],
-                    internal: {
-                        type: `Roadmap`,
-                        contentDigest: createContentDigest(data),
-                    },
-                    ...data,
-                }
-                createNode(roadmapNode)
-            })
-        }
+            const data = {
+                strapiID: id,
+                date,
+                media: cloudinaryMedia,
+                type: category,
+                year,
+                projectedCompletion,
+                dateCompleted,
+                ...other,
+            }
+            const roadmapNode = {
+                id: createNodeId(`roadmap-${id}`),
+                parent: null,
+                children: [],
+                internal: {
+                    type: `Roadmap`,
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            }
+            createNode(roadmapNode)
+        })
+        if (meta?.pagination?.pageCount > meta?.pagination?.page) await createRoadmapItems(page + 1)
     }
     const sourceChangelogVideos = async () => {
         const changelogPlaylistVideos = await fetchChangelogPlaylistVideos()
@@ -1003,157 +934,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const githubHeaders: HeadersInit = { Authorization: `token ${process.env.GITHUB_API_KEY}` }
 
-        const fetchIssuesPromise = fetch(
-            'https://api.github.com/repos/posthog/posthog/issues?sort=comments&per_page=5',
-            {
-                headers: githubHeaders,
-            }
-        ).then((res) => res.json())
-
-        const fetchPullsPromise = fetch(
-            'https://api.github.com/repos/posthog/posthog/pulls?sort=popularity&per_page=5',
-            {
-                headers: githubHeaders,
-            }
-        ).then((res) => res.json())
-
-        const fetchIntegrationsPromise = fetch(
-            'https://raw.githubusercontent.com/PostHog/integrations-repository/main/integrations.json',
-            { headers: githubHeaders }
-        ).then((res) => res.json())
-
-        const createGitHubStatsNode = async (owner, repo) => {
-            const [repoStats, contributors, commits] = await Promise.all([
-                fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-                    headers: githubHeaders,
-                }).then((res) => res.json()),
-                fetch(`https://api.github.com/repos/${owner}/${repo}/contributors?per_page=1`, {
-                    headers: githubHeaders,
-                }).then((res) => {
-                    const link = parseLinkHeader(res.headers.get('link'))
-                    const number = link?.last?.page
-                    return number && Number(number)
-                }),
-                fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`, {
-                    headers: githubHeaders,
-                }).then((res) => {
-                    const link = parseLinkHeader(res.headers.get('link'))
-                    const number = link?.last?.page
-                    return number && Number(number)
-                }),
-            ])
-            const { stargazers_count, forks_count } = repoStats
-
-            const data = {
-                owner,
-                repo,
-                stars: stargazers_count,
-                forks: forks_count,
-                commits,
-                contributors,
-            }
-
-            const node = {
-                id: createNodeId(`github-stats-${repo}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `GitHubStats`,
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            }
-            createNode(node)
-        }
-
-        const [postHogIssues, postHogPulls, integrations] = await Promise.all([
-            fetchIssuesPromise,
-            fetchPullsPromise,
-            fetchIntegrationsPromise,
-            createGitHubStatsNode('posthog', 'posthog'),
-            createGitHubStatsNode('posthog', 'posthog.com'),
-        ]).then(([issues, pulls, integrations]) => [issues, pulls, integrations])
-
-        postHogIssues.forEach((issue) => {
-            const { html_url, title, number, user, comments, reactions, labels, body, updated_at } = issue
-            const data = {
-                url: html_url,
-                title,
-                number,
-                comments,
-                user: {
-                    username: user?.login,
-                    avatar: user?.avatar_url,
-                    url: user?.html_url,
-                },
-                reactions,
-                labels,
-                body,
-                updated_at,
-            }
-            if (data.reactions) {
-                data.reactions.plus1 = data.reactions['+1']
-                data.reactions.minus1 = data.reactions['-1']
-            }
-            const node = {
-                id: createNodeId(`posthog-issue-${title}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `PostHogIssue`,
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            }
-            createNode(node)
-        })
-
-        postHogPulls.forEach((issue) => {
-            const { html_url, title, number, user, labels, body, updated_at } = issue
-            const data = {
-                url: html_url,
-                title,
-                number,
-                user: {
-                    username: user?.login,
-                    avatar: user?.avatar_url,
-                    url: user?.html_url,
-                },
-                labels,
-                body,
-                updated_at,
-            }
-
-            const node = {
-                id: createNodeId(`posthog-pull-${title}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `PostHogPull`,
-                    contentDigest: createContentDigest(data),
-                },
-                ...data,
-            }
-            createNode(node)
-        })
-
-        integrations.forEach((integration) => {
-            const { name, url, ...other } = integration
-            const node = {
-                id: createNodeId(`integration-${name}`),
-                parent: null,
-                children: [],
-                internal: {
-                    type: `Integration`,
-                    contentDigest: createContentDigest(integration),
-                },
-                url: url.replace('https://posthog.com', ''),
-                name,
-                ...other,
-            }
-            createNode(node)
-        })
-
         const extractIntroSection = (markdown: string): string => {
             const headingMatch = markdown.match(/^#{1,2}\s+/m)
 
@@ -1576,6 +1356,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         // API key at build time, or no linked survey).
                         waitlistCount: payload.survey_id != null ? waitlistCounts[payload.survey_id] ?? null : null,
                         payload,
+                        // Display name of the assigned person or role in PostHog; the roadmap
+                        // resolves it to a small team (see useRoadmapEarlyAccessFeatures).
+                        assignee: feature.assignee || null,
                     })
                 })
         } catch (error) {
@@ -1672,7 +1455,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     }
 
     await Promise.all([
-        sourceApiEndpoints(),
         createProductDataNode(),
         createRoadmapItems(),
         sourceEarlyAccessFeatures(),

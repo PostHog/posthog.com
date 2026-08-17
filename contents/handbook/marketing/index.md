@@ -6,7 +6,7 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+Marketing at PostHog is a collaborative effort across several teams. There are seven distinct teams that handle different aspects of marketing:
 
 - <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
 - <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
@@ -14,17 +14,15 @@ Marketing at PostHog is a collaborative effort across several teams. There are s
 - <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
 - <SmallTeam slug="youtube" /> – Leads video
 - <SmallTeam slug="wizard-and-docs" /> – Leads on documentation and the wizard
+- <SmallTeam slug="builder-relations" /> – Leads in-person events, the forum, and Discord
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
 ## Slack channels to know
 
-To keep up with what's shipped and what's about to ship across the company, join:
+To keep up with what's shipped across the company, join [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. **Owned by the Marketing team** and posted as a daily digest.
-
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the relevant channel. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
+The channel is populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into it. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* checkbox on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
 
 > **Tip:** The [`@posthog` Slack app](/docs/slack-app) can also answer questions about our own product data. `@PostHog` it in any channel to pull metrics or PR something to the website.
 

@@ -6,6 +6,8 @@ import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 interface PairItem {
     slug: string
     description: string
+    /** Optional className passed to AppIcon when parentIcon is used (e.g. "!size-8"). */
+    className?: string
 }
 
 interface PairsWithSlideProps {
@@ -50,9 +52,9 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                                     }`}
                                 >
                                     {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
-                                        <AppIcon name={productDetails.parentIcon} />
+                                        <AppIcon name={productDetails.parentIcon} className={pair.className} />
                                     ) : (
-                                        productDetails.Icon && <productDetails.Icon />
+                                        productDetails.Icon && <productDetails.Icon className={pair.className} />
                                     )}
                                 </span>
                                 <h3 className="text-2xl font-bold text-primary mb-2">{productDetails.name}</h3>
