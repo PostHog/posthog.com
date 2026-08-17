@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
-import { ProfileData, SQUEAK_HOST } from 'lib/strapi'
+import { ProfileData, SQUEAK_HOST, Wallet } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import Link from 'components/Link'
 import { useToast } from '../context/Toast'
@@ -45,16 +45,8 @@ export type User = {
     role: {
         type: 'authenticated' | 'public' | 'moderator'
     }
-    wallet: {
-        balance: number
-        transactions: {
-            id: number
-            amount: number
-            date: Date
-            type: 'achievement' | 'gift'
-            metadata: any
-        }[]
-    }
+    // Absent until the user first earns points — Strapi only creates the component on write
+    wallet?: Wallet
     imageGenerationRateLimit?: {
         remaining: number
         limit: number
