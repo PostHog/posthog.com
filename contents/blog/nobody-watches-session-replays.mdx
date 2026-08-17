@@ -14,23 +14,21 @@ seo:
   metaDescription: "We timed 7.65M session replay views. The median lasts 17 seconds, and 99.8% of recordings are never opened. Here's the data, and the fix" 
 ---
 
-Here's an uncomfortable truth about session replay: while we all know it's a useful tool for understanding user behavior and diagnosing UX issues – I would even argue it should be a fundamental part of any product team's stack – almost nobody opens it.
+Here's an uncomfortable truth about session replay: while we all know it's a useful tool for understanding user behavior and diagnosing UX issues, almost nobody opens it.
 
 You aren't watching them, neither is your PM, and definitely not the manager who swore at standup they'd "go through a few sessions this week."
 
 Which is an awkward thing to admit, [because we sell one](/session-replay).
 
-So naturally we had to ask: chat, are we cooked? We pulled **7.65 million** replay-viewing sessions* [^1] to find out we are (but don't worry, there's a silver lining at the end).
+So naturally we had to ask: chat, are we cooked? We pulled **7.65 million** replay-viewing sessions[^1] to find out we are (but don't worry, there's a silver lining at the end).
 
 ## How long people actually watch a replay
 
 ![Hook](https://res.cloudinary.com/dmukukwp6/image/upload/01_hook_17s_05cd1e07c1.png)
 
-Every time anyone opened the player and actually watched something, we timed it. 
+Every time anyone opened the player and actually watched something, we timed it. The median session lasted **17 seconds**. Two-thirds were over inside 30. 
 
-The median session lasted **17 seconds**. Two-thirds were over inside 30. 
-
-![Distribution of how long people watch a session replay, with a huge spike under 30 seconds](https://res.cloudinary.com/dmukukwp6/image/upload/02_watch_time_de4cc8f943.png)
+![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/03_retention_46e97d2721.png)
 
 Meanwhile, the average recording those people were dipping into runs **28 minutes** long.
 
@@ -52,11 +50,11 @@ You could argue an unwatched recording is harmless – a tree falling in an empt
 
 Don't get me wrong: it's not that people are lazy; it's that the backlog is physically unwatchable.
 
+![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/05_backlog_b22c7321ba.png)
+
 The typical company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
 
 And that's the *median* company. The average one – dragged up by the big customers – captured closer to **1,260 hours**: around 31 work-weeks of doing nothing but watching.
-
-![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/05_backlog_b22c7321ba.png)
 
 But we still wanted to know: who are users actually watching replays? (bless their hearts)
 
@@ -69,8 +67,6 @@ And then there's the single most devoted replay-watcher on all of PostHog, who o
 The handful who do watch aren't exactly savouring it. When people change the playback speed, they floor it – nearly one in five jumps straight to 8× or 16×.
 
 ![Playback speed](https://res.cloudinary.com/dmukukwp6/image/upload/08_speed_6f14e64653.png)
-
-![Replay retention](https://res.cloudinary.com/dmukukwp6/image/upload/03_retention_46e97d2721.png)
 
 ## This isn't a PostHog problem
 
@@ -86,11 +82,13 @@ It's about six weeks old, and adoption is going faster than we expected.
 
 In the last 30 days it ran over **750,000 scans**. Turns out that once watching stops being a person's job, people are more than happy to hand it over.
 
-![Replay Vision in action](https://res.cloudinary.com/dmukukwp6/image/upload/10_scanner_mix_68b0015fdb.png)
+![Replay Vision](https://res.cloudinary.com/dmukukwp6/image/upload/10_scanner_mix_68b0015fdb.png)
 
 So while you were watching 17 seconds of one recording, something else was reading all of them.
 
 **Want to point it at your own 99.8%? [Try Replay Vision →](/replay-vision)**
+
+<WizardCTA />
 
 ---
 
