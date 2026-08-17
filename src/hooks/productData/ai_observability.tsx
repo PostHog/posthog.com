@@ -188,11 +188,6 @@ export const aiObservability = {
             description:
                 'Everything we do is about speed. PostHog helps us move fast without losing visibility into what’s actually happening.',
         },
-        lovable: {
-            headline: 'compared us to every other observability tool, just to be sure',
-            description:
-                "If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers.",
-        },
         posthog: {
             headline: 'monitors the usage and performance of PostHog AI with AI Observability',
             description:

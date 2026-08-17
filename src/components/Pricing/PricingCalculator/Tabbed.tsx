@@ -290,7 +290,9 @@ export default function Tabbed() {
             return index === -1 ? Infinity : index
         }
         return initialProducts
-            .filter((product) => !!product.unit && !product.hideFromPricingTableAndCalculator)
+            .filter(
+                (product) => !!product.unit && !product.hideFromPricingTableAndCalculator && !product.hideFromCalculator
+            )
             .sort((a, b) => navOrder(a) - navOrder(b))
     }, [initialProducts])
     const activeProduct = products[activeTab]
@@ -314,21 +316,7 @@ export default function Tabbed() {
         })
     }
 
-    const initialProductAddons = useMemo(() => {
-        const initialAddons = []
-        for (const product of products) {
-            if (product.billingData?.addons?.length > 0) {
-                product.billingData.addons.forEach((addon) => {
-                    initialAddons.push({
-                        type: addon.type,
-                        checked: addonDefaults[addon.type]?.checked || false,
-                        totalCost: 0,
-                    })
-                })
-            }
-        }
-        return initialAddons
-    }, [])
+    const initialProductAddons = useMemo(() => buildProductAddons(products, addonDefaults), [])
     const initialPlatformAddons = useMemo(() => {
         const initialAddons = []
         platform.addons.forEach((addon) => {
