@@ -447,7 +447,7 @@ function UseCases(): JSX.Element {
                         <Link to="/docs/posthog-desktop/skills" className="font-semibold">
                             PostHog Desktop
                         </Link>
-                        , then ask for the model you want. More on{' '}
+                        , then ask for the model you want, the Skills are already pre-loaded. More on{' '}
                         <Link to="/docs/data-warehouse/views" className="font-semibold">
                             views
                         </Link>{' '}
