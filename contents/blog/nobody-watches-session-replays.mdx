@@ -44,7 +44,7 @@ And this is the optimistic framing, because it only counts the replays somebody 
 
 Over those same 90 days, fewer than 1 in 600 recordings was opened – or, to put it less politely, roughly 99.8% of recorded sessions are watched by no one, ever.
 
-You could argue an unwatched recording is harmless – a tree falling in an empty forest (one that bills you for storage). But those sessions aren't always blank. In fact, they might be full of people getting stuck, clicking things that don't work, or rage-tapping their way out of your product. 
+You could argue an unwatched recording is harmless – a tree falling in an empty forest (one that bills you for storage). But those sessions aren't always blank. In fact, they might be full of people getting stuck, clicking things that don't work, or rage-clicking their way out of your product. 
 
 > Every session you don't watch could be hiding the one problem that decides whether a user stays or leaves, and you'll never know it's there.
 
@@ -56,9 +56,9 @@ Don't get me wrong: it's not that people are lazy; it's that the backlog is phys
 
 The typical company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
 
-And that's the *median* company. The average one – dragged up by the big customers – captured closer to **1,260 hours**: around 31 work-weeks of doing nothing but watching.
+And that's the *median* company. The average one – dragged up by the big customers – captured closer to **1,260 hours**, which amounts to around 31 work-weeks of doing nothing but watching.
 
-But we still wanted to know: who are users actually watching replays? (bless their hearts)
+But we still wanted to know: who are users actually watching? (bless their hearts)
 
 ![Who watches replays?](https://res.cloudinary.com/dmukukwp6/image/upload/06_who_watches_ac7345efed.png)
 
@@ -80,15 +80,17 @@ But watching was only ever half the job. A tidy AI summary still hands you a to-
 
 That's why we built [Replay Vision](/replay-vision). 
 
-You tell it what to look for, it scans through the sessions – scoring frustration, flagging dead-ends, classifying what users came to do, summarising what happened – and then it can open the pull request with the fix in it. You hit merge.
+You tell it what to look for, and it reads every session for exactly that – scoring frustration, flagging dead-ends, classifying what users came to do, summarising what happened, or answering any other question about your users you can put into words.
 
-It's about six weeks old, and adoption is going faster than we expected.
+![Replay Vision](https://res.cloudinary.com/dmukukwp6/image/upload/03_retention_46e97d2721.png)
 
-In the last 30 days it ran over **750,000 scans**. Turns out that once watching stops being a person's job, people are more than happy to hand it over.
+*Those are just the examples we reach for most; it is fully customizable to your needs, there's no fixed menu of things it can do.*
 
-![Replay Vision](https://res.cloudinary.com/dmukukwp6/image/upload/10_scanner_mix_68b0015fdb.png)
+It reads at a pace no person can match. Since launch six weeks ago, it has watched **1,291,000 recordings** – around **51 years** of footage. To get through that much yourself, you'd have had to start watching in **1975** and never stop.
 
-So while you were watching 17 seconds of one recording, something else was reading all of them.
+And if you're already [using PostHog to make your product self-driving](/self-driving), you can connect it end to end: Replay Vision surfaces the issue, PostHog picks it up and opens the pull request with the fix, and all you do is review and merge.
+
+We said earlier we were cooked. Well, turns out we don't have to be, and neither do you.
 
 **Want to point it at your own 99.8%? [Try Replay Vision →](/replay-vision)**
 
