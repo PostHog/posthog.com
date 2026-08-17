@@ -33,10 +33,10 @@ Automatic mappings uploading is handled through the Gradle build process on Andr
 Install the [PostHog Android Gradle Plugin](https://github.com/PostHog/posthog-android/blob/main/posthog-android-gradle-plugin/CHANGELOG.md) on your app's `build.gradle.kts` file.
 
 ```kotlin
-// Available through mavenCentral(), use the latest version
+// Available through mavenCentral()
 plugins {
     id("com.android.application")
-    id("com.posthog.android") version "1.5.0"
+    id("com.posthog.android") version "$version"
     ...
 }
 ```
