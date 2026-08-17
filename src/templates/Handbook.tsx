@@ -386,8 +386,6 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     const productSurfaceData = docsProductSlug
         ? allProducts
               .filter((p: any) => p.slug?.split('/').pop() === docsProductSlug)
-              // Multiple products can share a slug (e.g. UI-only cards like "AI Evals" that
-              // link into another product's page) - prefer the canonical one with a productMenu.
               .sort((a: any, b: any) => (b.productMenu?.length ? 1 : 0) - (a.productMenu?.length ? 1 : 0))[0]
         : null
     const isProductDocsPage = !!productSurfaceData?.productMenu?.length
