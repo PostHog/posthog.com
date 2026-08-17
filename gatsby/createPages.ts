@@ -765,7 +765,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.postCategories.nodes.forEach(
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
-            if (!isHub) {
+            if (!isHub && categoryFolder !== 'newsletter') {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -1107,9 +1107,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         // Drop falsy or literal "null" names so TypeLink never emits a /types/null link
         // to a page that is never created.
-        acc[referenceId][version] = types.types
-            .map(({ name }) => name)
-            .filter((name) => name && name !== 'null')
+        acc[referenceId][version] = types.types.map(({ name }) => name).filter((name) => name && name !== 'null')
 
         return acc
     }, {} as Record<string, Record<string, any>>)

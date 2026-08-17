@@ -21,12 +21,16 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 const SIDEBAR_PINNED_KEY = 'reader-sidebar-pinned'
+// Declaring here as a variable lets it survive re-renders - navigating between pages will not reset it.
+let persistedPinnedMemory: boolean | null = null
 
 const readPersistedPinned = (): boolean | null => {
     if (typeof window === 'undefined') return null
+    if (persistedPinnedMemory !== null) return persistedPinnedMemory
     const raw = localStorage.getItem(SIDEBAR_PINNED_KEY)
-    if (raw === 'true') return true
-    if (raw === 'false') return false
+    if (raw === 'true') persistedPinnedMemory = true
+    if (raw === 'false') persistedPinnedMemory = false
+    if (persistedPinnedMemory !== null) return persistedPinnedMemory
     return null
 }
 
@@ -45,8 +49,8 @@ export function ReaderViewProvider({
     // control cluster + off-canvas drawer. Only treat as narrow once the width
     // is actually known so SSR/first paint defaults to the desktop layout.
     const isNarrow = !!appWindow?.size?.width && appWindow.size.width < 672
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? true)
-    const [navUserToggled, setNavUserToggled] = useState(false)
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? persistedPinnedMemory ?? true)
+    const [navUserToggled, setNavUserToggled] = useState(persistedPinnedMemory !== null)
     // @6xl breakpoint is 72rem = 1152px
     const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
     const [isTocVisible, setIsTocVisible] = useState(true)
@@ -54,6 +58,7 @@ export function ReaderViewProvider({
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
     const [hasMounted, setHasMounted] = useState(false)
+    const [persistedStateLoaded, setPersistedStateLoaded] = useState(persistedPinnedMemory !== null)
 
     // Hydrate persisted state after mount
     useEffect(() => {
@@ -64,12 +69,14 @@ export function ReaderViewProvider({
         }
         const savedBackground = localStorage.getItem('background-image')
         if (savedBackground) setBackgroundImage(savedBackground)
+        setPersistedStateLoaded(true)
     }, [])
 
     const toggleNav = useCallback(() => {
         setNavUserToggled(true)
         setIsNavVisible((prev) => {
             const next = !prev
+            persistedPinnedMemory = next
             if (typeof window !== 'undefined') {
                 localStorage.setItem(SIDEBAR_PINNED_KEY, String(next))
             }
@@ -121,13 +128,14 @@ export function ReaderViewProvider({
 
     // Monitor container size and update Nav visibility
     useEffect(() => {
+        if (!persistedStateLoaded) return
         if (!appWindow?.size?.width) return
 
         // Only update Nav visibility if user hasn't manually toggled it
         if (!navUserToggled) {
             setIsNavVisible(!!isWideEnoughForSidebar)
         }
-    }, [isWideEnoughForSidebar, navUserToggled])
+    }, [isWideEnoughForSidebar, navUserToggled, persistedStateLoaded])
 
     // Enable transitions after the initial render has painted.
     useEffect(() => {
