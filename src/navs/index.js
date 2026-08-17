@@ -2316,28 +2316,23 @@ export const docsMenu = {
                 },
                 {
                     name: 'Slack',
-                    url: 'https://posthog.com/docs/slack',
-                    external: true,
+                    url: '/docs/slack',
                 },
                 {
                     name: 'Web app',
-                    url: 'https://posthog.com/docs/self-driving/web',
-                    external: true,
+                    url: '/docs/self-driving/web',
                 },
                 {
                     name: 'MCP',
-                    url: 'https://posthog.com/docs/model-context-protocol',
-                    external: true,
+                    url: '/docs/model-context-protocol',
                 },
                 {
                     name: 'CLI',
-                    url: 'https://posthog.com/docs/cli',
-                    external: true,
+                    url: '/docs/cli',
                 },
                 {
                     name: 'Desktop',
-                    url: 'https://posthog.com/docs/posthog-desktop',
-                    external: true,
+                    url: '/docs/posthog-desktop',
                 },
                 {
                     name: 'Concepts',
@@ -3656,71 +3651,58 @@ export const docsMenu = {
                         },
                         {
                             name: 'Model Context Protocol (MCP)',
-                            url: 'https://posthog.com/docs/model-context-protocol',
-                            external: true,
+                            url: '/docs/model-context-protocol',
                             children: [
                                 {
                                     name: 'Overview',
-                                    url: 'https://posthog.com/docs/model-context-protocol',
-                                    external: true,
+                                    url: '/docs/model-context-protocol',
                                 },
                                 {
                                     name: 'Use cases',
-                                    url: 'https://posthog.com/docs/model-context-protocol/use-cases',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/use-cases',
                                 },
                                 {
                                     name: 'MCP tools reference',
-                                    url: 'https://posthog.com/docs/model-context-protocol/tools',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/tools',
                                 },
                                 {
                                     name: 'FAQ and advanced setup',
-                                    url: 'https://posthog.com/docs/model-context-protocol/faq',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/faq',
                                 },
                                 {
                                     name: 'Enterprise auth (ID-JAG)',
-                                    url: 'https://posthog.com/docs/model-context-protocol/enterprise-managed-authorization',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/enterprise-managed-authorization',
                                 },
                                 {
                                     name: 'Code editors',
                                 },
                                 {
                                     name: 'Claude Code',
-                                    url: 'https://posthog.com/docs/model-context-protocol/claude-code',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/claude-code',
                                 },
                                 {
                                     name: 'Claude Desktop',
-                                    url: 'https://posthog.com/docs/model-context-protocol/claude-desktop',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/claude-desktop',
                                 },
                                 {
                                     name: 'Codex',
-                                    url: 'https://posthog.com/docs/model-context-protocol/codex',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/codex',
                                 },
                                 {
                                     name: 'Cursor',
-                                    url: 'https://posthog.com/docs/model-context-protocol/cursor',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/cursor',
                                 },
                                 {
                                     name: 'VS Code',
-                                    url: 'https://posthog.com/docs/model-context-protocol/vscode',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/vscode',
                                 },
                                 {
                                     name: 'Windsurf',
-                                    url: 'https://posthog.com/docs/model-context-protocol/windsurf',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/windsurf',
                                 },
                                 {
                                     name: 'Zed',
-                                    url: 'https://posthog.com/docs/model-context-protocol/zed',
-                                    external: true,
+                                    url: '/docs/model-context-protocol/zed',
                                 },
                                 {
                                     name: 'Platforms',
