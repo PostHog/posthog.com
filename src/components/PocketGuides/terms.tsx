@@ -91,6 +91,12 @@ export const TERMS = {
             'Runs deterministic code you write against each generation, returning a pass/fail result. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.',
         slug: '/docs/ai-evals',
     },
+    hog: {
+        title: 'Hog',
+        description:
+            "PostHog's own programming language, the one that also powers realtime destinations. It reads like JavaScript with := for assignment and runs inside PostHog, so there's no service of your own to keep alive. Not to be confused with HogQL, the SQL-like language for querying your data.",
+        slug: '/docs/hog',
+    },
     'custom property': {
         title: 'Custom property',
         description:

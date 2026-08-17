@@ -43,3 +43,4 @@ __pycache__
 /.claude/worktrees/
 /.claude/settings.local.json
 .env*
+.claude/launch.json

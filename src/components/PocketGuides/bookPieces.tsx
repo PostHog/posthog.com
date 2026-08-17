@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Link from 'components/Link'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
@@ -136,6 +137,21 @@ export const proseComponents = {
         </div>
     ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
+    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`,
+    // so `pre` only has to get out of the way – a div inside it would be invalid nesting.
+    // Without this a fence renders unstyled and runs past the page column.
+    pre: ({ children }: any) => <>{children}</>,
+    code: ({ className, children }: any) => (
+        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+            <SingleCodeBlock
+                language={String(className ?? '').replace('language-', '') || 'text'}
+                showCopy
+                showAskAI={false}
+            >
+                {String(children).replace(/\n$/, '')}
+            </SingleCodeBlock>
+        </div>
+    ),
     inlineCode: (props: any) => (
         <code
             className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] dark:bg-accent-dark"

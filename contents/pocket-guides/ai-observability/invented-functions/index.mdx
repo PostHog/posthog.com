@@ -1,0 +1,165 @@
+---
+title: Catch a code assistant inventing functions
+shortTitle: Invented functions
+subtitle: The suggestion named a function you don't have. Nothing errored, and the eval that catches it is free to run.
+bookOrder: 3
+cta:
+  kind: prompt
+  label: Build this with PostHog AI
+  note: It creates the eval disabled, so you can read it before it starts scoring anything.
+  requires:
+    label: Needs AI Observability instrumented.
+  prompt: >-
+    Create a code-based (Hog) evaluation on my $ai_generation events for a code assistant. It
+    should return null when the generation has no input context to check a call against, and fail
+    when the output calls a function that appears nowhere in that context, printing the function
+    name as the reason. Enable Allows N/A, sample at 100%, exclude generations where the
+    environment property is dev or local, and show me the pass rate over the last 30 days broken
+    down by model and by prompt version.
+---
+
+<LeftPage>
+
+<EvalRunsFigure
+    n={1}
+    caption="The eval's runs tab: one row per generation it scored, with whatever the eval printed."
+    runs={[
+        {
+            time: '14:02:11',
+            target: 'gen_8f21c4',
+            result: 'True',
+            reasoning: 'No calls to undefined helpers',
+        },
+        {
+            time: '14:01:58',
+            target: 'gen_8f21b9',
+            result: 'False',
+            reasoning: 'Called formatCurrency, not defined in the provided context',
+        },
+        {
+            time: '14:01:40',
+            target: 'gen_8f21a2',
+            result: 'N/A',
+            reasoning: 'No file context on this generation',
+        },
+    ]}
+/>
+
+<DivergenceFigure
+    n={2}
+    caption="Prompt v12 shipped on the 4th. Volume held, nothing errored, and the assistant started making things up."
+    markerAt={0.44}
+    markerLabel="prompt v12"
+    series={[
+        {
+            label: 'Generations',
+            note: 'flat at ~9,000/day',
+            values: [0.5, 0.53, 0.49, 0.52, 0.5, 0.54, 0.51, 0.5, 0.52, 0.51],
+        },
+        {
+            label: 'Eval pass rate',
+            note: '94% → 71%',
+            emphasis: true,
+            values: [0.92, 0.94, 0.91, 0.93, 0.74, 0.7, 0.72, 0.69, 0.71, 0.7],
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Catch a code assistant inventing functions
+
+The coding assistant you built suggests a call to `formatCurrency()`, a function that doesn't exist. The syntax of the call is valid, the tone of the conversation is confident, and the call looks like it succeeded. 
+
+This use case walks through one <Term name="code-based evaluation">code-based evaluation</Term> end to end: the eval itself, the generations it can't score, and what its pass rate does when a prompt change goes wrong.
+
+## What an eval can answer
+
+Whether the assistant called something that doesn't exist is a yes or no question. You can answer it by comparing the file it was given to the code it wrote back.
+
+That's what a <Term name="code-based evaluation">code-based eval</Term> is perfect for: code you write that runs against each generation and returns pass or fail. No model is involved, so it costs nothing to run. You can score every generation rather than sampling a slice of them, and a failure that only turns up a few times is still visible.
+
+## Write the eval
+
+The eval runs inside PostHog rather than on your servers, so you write it in <Term name="hog">Hog</Term>, the language PostHog compiles and runs itself. Nothing of yours has to be awake for a generation to get scored.
+
+You don't have to write it by hand either. **Generate with AI** in the code editor opens PostHog AI with your evaluation loaded and drafts the Hog for you, which is what the prompt at the end of this guide does.
+
+The eval hands three things to you:
+- `input` – what the model was given, the file included
+- `output` – what it wrote back
+- `properties` – everything else on the event
+
+Return `true` to pass and `false` to fail. Whatever you `print()` becomes the reason stored next to the result, so print something you'd want to read a week later.
+
+Start with one function you keep seeing invented. The eval looks for a call to it in the output, then looks for the same name in the file the model was given. In one and not the other means the model made it up.
+
+```hog
+let context := ifNull(input, '')
+let suggestion := ifNull(output, '')
+
+// Asked with no file attached, so there is nothing to check the call against
+if (length(context) == 0) {
+    print('No file context on this generation')
+    return null
+}
+
+// Called it, but the file it was given never defines it
+if (suggestion ilike '%formatCurrency(%' and context !ilike '%formatCurrency%') {
+    print('Called formatCurrency, not defined in the provided context')
+    return false
+}
+
+print('No calls to undefined helpers')
+return true
+```
+
+Add the next function as another `if`. Once you're checking a dozen of them, pull the names into a list and loop over it.
+
+## Settings the eval needs
+
+If someone asked a question with no file attached, there's nothing to compare the call against. Marking it pass or fail either way puts a number in your pass rate that isn't true, which is why the eval returns `null` there.
+
+The code is only part of an eval. These settings decide what it runs against:
+
+- **Allows N/A** – turn it on, so a `null` is recorded as N/A instead of counted
+- **Sampling rate** – set it to 100%. There's no per-call cost to ration
+- **Property filters** – keep your own dev and local traffic out of the number
+
+Then, test it on a sample. This runs the eval against a subset of recent generations and shows the pass, fail, or N/A each one would get, along with anything you printed. Nothing is written, so you can keep editing until the reasons read the way you want.
+
+## Read the runs
+
+Every result lands on the generation it scored:
+- **Reasoning** is your `print()` output
+- **Result** is `true` or `false` (names `formatCurrency`)
+- **Target** points back to the generation so you can open that <Term name="trace" /> and read the file the assistant was actually handed
+
+An example of these results are outlined in <SeeFig n={1} /> below.
+
+## When it starts failing
+
+Once enough generations have been scored you have a pass rate: how often your assistant only calls things that exist.
+
+In <SeeFig n={2} />, generations hold flat at around 9,000 a day and nothing errors, while the pass rate drops from 94% to 71% the day prompt v12 shipped. That prompt told the model to reuse existing helpers where it could, so it invented them to comply. Without the eval running, the first you'd hear is a developer complaining weeks later. You can also split the pass rate by `$ai_model` and by prompt version to see which one broke.
+
+## Build it with PostHog AI
+
+This prompt builds the evaluation from this guide:
+- The N/A guard for generations with no context to check against
+- The comparison that fails an undefined call, with the function name as the reason
+- The pass rate over 30 days, split by model and prompt version
+
+Swap the function list for the ones your own assistant keeps inventing:
+
+<Action />
+
+<SeeAlso>
+
+See also: [Evaluations](/docs/ai-evals) · [Hog](/docs/hog) · [Score your AI's answers with evals](/pocket-guides/ai-observability/quality-output)
+
+</SeeAlso>
+
+</RightPage>

@@ -78,7 +78,7 @@ You probably have numbers that describe how the model performed – its speed, c
 
 An <Term name="evaluation" /> scores the model's output. AI Observability (AIO) runs three kinds of evaluations against your live traffic:
 - An <Term name="LLM-as-a-judge" /> that scores each generation against a prompt you write
-- A <Term name="code-based evaluation">code-based rule</Term> that checks something you can express exactly
+- A <Term name="code-based evaluation">code-based eval</Term> that checks something you can express exactly
 - Built-in <Term name="sentiment analysis" /> that classifies how the user sounds
 
 Each result lands on the generation it scored, with the reason it passed or failed – <SeeFig n={1} /> is an example of that list in the app.
@@ -91,7 +91,7 @@ In <SeeFig n={2} />, volume and errors hold steady while the pass rate falls off
 
 ## How to write evaluation criteria
 
-Numbers are only worth watching if the check behind it asks something _real_. Sentiment is built-in, so you just need to write checks for the judge and deterministic rule.
+Numbers are only worth watching if the eval behind it asks something _real_. Sentiment is built-in, so you only write the judge and the code-based eval yourself.
 
 Asking "Is this good?" isn't going to cut it. Vague questions produce numbers that move for reasons you can't name. Ask for the specific failure you're worried about instead:
 
