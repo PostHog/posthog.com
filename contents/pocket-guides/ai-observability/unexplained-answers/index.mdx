@@ -1,5 +1,5 @@
 ---
-title: Wrong answers with no obvious cause
+title: Debug a wrong answer with traces
 shortTitle: Wrong answers
 subtitle: The answer was wrong, nothing errored, and the reason is sitting in the trace.
 bookOrder: 5
@@ -33,7 +33,7 @@ cta:
 
 <RightPage>
 
-# Wrong answers with no obvious cause
+# Debug a wrong answer with traces
 
 Your docs assistant tells a user to authenticate with a header your API dropped two versions ago. Everything looks normal and the call succeeded.
 
@@ -75,7 +75,7 @@ So "a user says the bot was wrong" becomes the request, the document it was give
 
 ## Check whether it's a pattern
 
-One trace is an anecdote. Before you ship a fix, find out whether it's systemic: 
+A single trace is an anecdote. Before you ship a fix, find out whether it's systemic:
 - Filter for the same failure over the last week
 - Check the <Term name="errors tab" /> if it threw one
 - See whether the same eval fails on the same shape of question
@@ -94,7 +94,7 @@ This prompt pulls the traces most likely to be worth reading to the surface:
 
 <SeeAlso>
 
-See also: [Traces](/docs/ai-observability/traces) · [Link to session replay](/docs/ai-observability/link-session-replay) · [Errors](/docs/ai-observability/errors)
+See also: [Traces](/docs/ai-observability/traces) · [Link to Session Replay](/docs/ai-observability/link-session-replay) · [Errors](/docs/ai-observability/errors)
 
 </SeeAlso>
 

@@ -55,6 +55,12 @@ export const TERMS = {
             'Generations are events that capture LLM calls and their responses. They represent interactions and conversations with an AI model, tracked as `$ai_generation` events.',
         slug: '/docs/ai-observability/generations',
     },
+    'ai session': {
+        title: 'AI session',
+        description:
+            'Sessions group related traces together through the $ai_session_id property, so a multi-turn conversation reads as one thread. This is separate from the PostHog session behind a session replay, and you set it yourself when you capture.',
+        slug: '/docs/ai-observability/sessions',
+    },
     trace: {
         title: 'Trace',
         description:

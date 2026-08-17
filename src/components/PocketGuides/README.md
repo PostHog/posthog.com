@@ -44,7 +44,7 @@ Frontmatter carries structured data; the body carries every word.
 
 ```mdx
 ---
-title: Feature flag debt
+title: Remove the feature flags you already rolled out
 shortTitle: Flag debt      # tab label, falls back to title
 bookOrder: 3               # reading order; 0 is the front matter, omit to keep a draft unlisted
 ---
@@ -57,7 +57,7 @@ bookOrder: 3               # reading order; 0 is the front matter, omit to keep 
 
 <RightPage>
 
-# Feature flag debt
+# Remove the feature flags you already rolled out
 
 Prose, **markdown**, and <Term name="scout" /> definitions.
 
