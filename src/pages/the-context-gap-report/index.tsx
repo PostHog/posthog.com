@@ -99,9 +99,9 @@ export default function ContextGapReport() {
                                 You don't have to read everyone's reports to know what's important in data infrastructure, just read ours:
                             </p>
                             <ul className="list-disc pl-5 space-y-1">
-                                <li>It's only 2 pages, not 300 pages.</li>
-                                <li>Click it, and it opens as a normal PDF.</li>
-                                <li>There's no form to fill out, no email to hand over.</li>
+                                <li>It's only 2 pages, not 300.</li>
+                                <li>It's still a PDF, so it still feels professional.</li>
+                                <li>Not gated behind a form, no need to give us your email</li>
                             </ul>
 
                             <CalloutBox icon="IconDatabase" title="Why is a context warehouse the answer?" type="fyi">
@@ -154,7 +154,7 @@ export default function ContextGapReport() {
                     <h2 className="text-2xl mb-3">Prefer the 30-page version?</h2>
                     <p className="mb-6 max-w-2xl">
                         Copy the prompt below into your own agent, or hand it straight to Claude, and it'll go build the
-                        long version, sources and all. Consider it the director's cut.
+                        long version, sources and all. Consider it the corporate version.
                     </p>
 
                     <div className="relative">
