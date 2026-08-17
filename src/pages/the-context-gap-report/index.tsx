@@ -106,9 +106,9 @@ export default function ContextGapReport() {
 
                             <CalloutBox icon="IconDatabase" title="Why is a context warehouse the answer?" type="fyi">
                                 <p>
-                                    A <Link to="/context-warehouse">context warehouse</Link> is a data warehouse plus
-                                    the pipeline that feeds it, modeling and querying in one system, optimized for
-                                    agents as the user.
+                                    A <Link to="/context-warehouse">context warehouse</Link> is a data warehouse, plus
+                                    the pipeline, modeling, and query tools - in one system, optimized for
+                                    agents.
                                 </p>
                             </CalloutBox>
                         </div>
