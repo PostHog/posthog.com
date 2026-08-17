@@ -13,7 +13,7 @@ These components live under `src/components/` rather than beside the page becaus
 | Section | Components |
 | --- | --- |
 | Header | `HeroHeader` (wordmark; also repeated as the page footer with subscribe), `Hero` (the statement: tagline as display type + pitch + subscribe), and `FeaturedPost` (the newest post, taped up) |
-| All posts | `PostsGallery` — Recent/Popular dropdown + expanding search + `TagFilter` over a paginated grid of `GalleryCard`s (12 per page). |
+| Everything else | `PostsGallery` — Recent/Popular dropdown + expanding search + `TagFilter` over a paginated grid of `GalleryCard`s (12 per page). The featured (newest) post is omitted from this list. |
 | Footer | A second `HeroHeader` (`placement="build-mode-footer"`) after the gallery |
 
 ## Files
@@ -36,7 +36,7 @@ These components live under `src/components/` rather than beside the page becaus
 | `PinnedPostCard.tsx` | One pinned card — pushpin, square thumbnail, resting angle, caption. Currently unused by the page. |
 | `usePinnedCardSwing.ts` | The swing physics (see below). Currently unused by the page. |
 | `useScrollEdges.ts` | Tracks whether a scroller has content off either edge; also exposes `scrollByPage`. Currently unused by the page. |
-| `PostsGallery.tsx` | The all-posts section: heading with counts, Recent/Popular dropdown, search that expands from an icon into an `OSInput`, `TagFilter`, paginated grid (12 per page, resets on filter or sort change), empty state. |
+| `PostsGallery.tsx` | The "Everything else" section: heading with counts, Recent/Popular dropdown, search that expands from an icon into an `OSInput`, `TagFilter`, paginated grid (12 per page, resets on filter or sort change), empty state. |
 | `GalleryCard.tsx` | One gallery tile. |
 | `TagFilter.tsx` | A single measured row of tag pills with an "All" reset (clicking the active tag clears it); pills that don't fit collapse into a "+N more" popover. Re-measures on resize and once `document.fonts.ready` resolves — the row's own box doesn't change when only the pills reflow under a font swap. |
 | `usePostFilters.ts` | Search + single-tag filter + Recent/Popular sort over a post list. Popularity is `fields.pageViews` (PostHog at build time; falls back to recency when the build has no `POSTHOG_APP_API_KEY`). Returns `tags` (most common first), `filteredPosts`, `isFiltered`, and `clear`. |
