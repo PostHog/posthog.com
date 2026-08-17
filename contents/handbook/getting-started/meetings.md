@@ -14,7 +14,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ## Weekly schedule
 
-- **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._ Some teams also do sprint planning on a Monday. 
+- **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._ 
 - **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - A few things happen on wednesdays:
     - some teams do sprint planning here as well
