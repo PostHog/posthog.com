@@ -52,6 +52,7 @@ type QuestionProps = {
     subscribeButton?: boolean
     isInForum?: boolean
     onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
+    refreshList?: () => void
 }
 
 export const CurrentQuestionContext = createContext<any>({})
@@ -387,7 +388,16 @@ const AskMax = ({
 }
 
 export function Question(props: QuestionProps) {
-    const { id, question, showSlug, buttonText, showActions = true, isInForum = false, onPinTopics, ...other } = props
+    const {
+        id,
+        question,
+        showSlug,
+        buttonText,
+        showActions = true,
+        isInForum = false,
+        onPinTopics,
+        refreshList,
+    } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator } = useUser()
@@ -451,7 +461,7 @@ export function Question(props: QuestionProps) {
         pinTopics,
         mutate,
         removeTopic,
-    } = useQuestion(id, { data: question })
+    } = useQuestion(id, { data: question, onResolve: refreshList })
 
     useEffect(() => {
         if (questionData) {

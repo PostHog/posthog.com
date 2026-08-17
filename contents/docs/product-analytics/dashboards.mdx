@@ -98,7 +98,7 @@ A few things to keep in mind:
 
 New dashboards are set to _No date range override_ by default. This means all insights use the date range applied in their configuration.
 
-Changing the date range on a dashboard forces all the insights to use the same date range, but this doesn't impact the date range that's shown when viewing an individual insight.
+Changing the date range on a dashboard forces all the insights to use the same date range, unless a tile [overrides or ignores dashboard filters](#overriding-filters-at-the-tile-level). This doesn't impact the date range that's shown when viewing an individual insight.
 
 The date range can be accessed in SQL insights through the [`filters` variable](/docs/data-warehouse/sql/variables) like `filters.dateRange.from` and `filters.dateRange.to`.
 
@@ -127,6 +127,22 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 > **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
 
+### Overriding filters at the tile level
+
+You can override dashboard-level filters for individual tiles. This lets one insight use different settings while the rest of the dashboard uses the dashboard-level filters.
+
+To configure tile-level overrides:
+
+1. Click the **⋯** menu on any insight card.
+2. Select **Override tile filters**.
+3. Configure any of the available overrides:
+   - **Date range** – Use a different time period for this tile.
+   - **Interval** – Change the grouping interval (hour, day, week, or month). Select "inherit" to use the dashboard's interval.
+   - **Properties** – Add property filters specific to this tile. These combine with dashboard filters using AND logic.
+   - **Breakdown** – Split the data by a different property than the dashboard setting.
+
+Some controls may be disabled depending on the insight type. For example, interval is only available for time-series insights, and breakdown isn't supported by all chart types.
+
 ### Filter precedence: dashboard vs. tile level
 
 Individual tiles (insights) can have their own filters and date ranges configured separately from dashboard-level overrides. When both are set, **tile-level filters take precedence**:
@@ -136,6 +152,14 @@ Individual tiles (insights) can have their own filters and date ranges configure
 - **Property filters:** Filters from both levels are combined using AND logic. However, if a tile filter directly contradicts a dashboard filter on the same property key, the tile filter wins and the conflicting dashboard filter is dropped.
 
 The insight card displays a warning when tile filters are merging with or overriding dashboard filters.
+
+### Ignoring dashboard filters entirely
+
+To completely detach a tile from all dashboard filters, toggle **Ignore dashboard filters** on in the tile's filter override modal (**⋯** → **Override tile filters**).
+
+When enabled, the tile ignores the dashboard's date range, properties, breakdown, interval, and test account filter. Tile-level overrides still apply, and [dashboard variables](/docs/data-warehouse/sql/variables) continue to work.
+
+Tiles ignoring dashboard filters display an **Ignores dashboard filters** indicator in the card heading.
 
 ## Dashboard options
 
