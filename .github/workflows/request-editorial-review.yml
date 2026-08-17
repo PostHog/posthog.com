@@ -1,0 +1,70 @@
+name: Request editorial review
+
+# Requests a review from @PostHog/editors on PRs touching editorial content
+# (blog, newsletter, tutorials).
+#
+# Why a workflow instead of CODEOWNERS: CODEOWNERS entries do two things at
+# once — they request a reviewer AND they feed the `require_code_owner_review`
+# gate on the master ruleset, which blocks merge until an owner approves. That
+# flag is repo-wide, so it can't be enabled for @PostHog/website's paths
+# (/gatsby/, /api/, ...) and disabled for editorial content. A review requested
+# by a workflow carries no merge requirement, which is what we want here:
+# editors get told, but content authors aren't gated on them.
+#
+# Only `opened` and `ready_for_review`: a review request disappears once the
+# reviewer responds, so re-requesting on every push (as `synchronize` would)
+# would nag editors who have already looked at the PR.
+#
+# `pull_request_target` gives a write token for fork/bot PRs. Safe: no checkout
+# of PR code, minimal permissions, and filenames are only matched against grep
+# patterns — never executed or interpolated into a command.
+# nosemgrep: github-actions-pull-request-target
+on:
+    pull_request_target:
+        types: [opened, ready_for_review]
+
+permissions:
+    contents: read
+    pull-requests: write
+
+concurrency:
+    group: request-editorial-review-${{ github.event.pull_request.number }}
+    cancel-in-progress: true
+
+jobs:
+    request-review:
+        # Drafts aren't ready for an editor's time; `ready_for_review` catches
+        # them when they are.
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        steps:
+            - name: Request @PostHog/editors on editorial content
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
+                  REPO: ${{ github.repository }}
+              run: |
+                  set -euo pipefail
+
+                  # --paginate: a handful of PRs touch more than 100 files
+                  files=$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files" \
+                    --jq '.[].filename')
+
+                  if ! grep -qE '^contents/(blog|newsletter|tutorials)/' <<< "$files"; then
+                    echo "No editorial content touched; nothing to do."
+                    exit 0
+                  fi
+
+                  # Requesting a review from someone who has already reviewed, or
+                  # from the PR author, is rejected by the API. Neither is worth
+                  # failing the run over, so treat any error as non-fatal and
+                  # surface the response instead.
+                  if gh api "repos/$REPO/pulls/$PR_NUMBER/requested_reviewers" \
+                    --method POST \
+                    -f 'team_reviewers[]=editors' > /tmp/response.json 2>/tmp/error.txt; then
+                    echo "Requested review from @PostHog/editors."
+                  else
+                    echo "::warning::Could not request @PostHog/editors — see below."
+                    cat /tmp/error.txt
+                  fi
