@@ -92,7 +92,7 @@ export default function ContextGapReport() {
                             </p>
 
                             <p>
-                                We wrote our own industry reporty to tell you why a context warehouse is the thing our competitors have been looking for, backed up by their own data. 
+                                We wrote our own industry report to tell you why a context warehouse is the thing our competitors have been looking for, backed up by their own data. 
                             </p>
 
                             <p>
