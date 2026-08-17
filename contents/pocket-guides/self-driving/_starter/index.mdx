@@ -36,6 +36,11 @@ requires:
 # The product surface this belongs to. Drives grouping wherever guides are listed.
 schedule: Daily
 
+# Only when PostHog already ships this scout as a template in the app. Set it to the template's
+# key and the CTA opens that template (which carries its tags and schedule) instead of encoding
+# the SKILL.md below into the link. Leave it out for a scout that exists only in this guide.
+# appTemplate: costly-users
+
 # The report the scout would file. This is the most important thing you write –
 # see components/SelfDrivingInbox/README.md for the full field contract.
 report:

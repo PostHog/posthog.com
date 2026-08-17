@@ -31,6 +31,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         }
                         category
                         schedule
+                        appTemplate
                         report {
                             title
                             source
@@ -103,6 +104,7 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                                   description: scoutNode.frontmatter?.description,
                                   raw: scoutNode.rawBody,
                                   schedule: node.frontmatter.schedule,
+                                  appTemplate: node.frontmatter.appTemplate,
                               }
                             : undefined,
                     }

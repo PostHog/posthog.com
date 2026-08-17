@@ -1,0 +1,142 @@
+---
+title: Read one daily summary of your AI features
+shortTitle: Daily digest
+subtitle: 'What changed across cost, errors, users, and evals yesterday, in one report.'
+bookOrder: 5
+appTemplate: daily-digest
+filters:
+  type:
+    - self-driving
+watches:
+  - name: AI Observability
+    detail: Usage, cost, latency, and error measures for the last complete day, against the previous day and the 7-day baseline.
+  - name: Online evaluations
+    detail: Pass rates and failure surges on your enabled evals, so a quality drop shows up next to a cost change.
+  - name: Your codebase
+    detail: Read-only, to name the file or commit behind a likely cause instead of leaving you to find it.
+requires:
+  - label: AI Observability instrumented, so $ai_generation events are arriving
+    level: required
+  - label: At least a week of traffic, so there is a baseline to compare yesterday against
+    level: recommended
+  - label: Online evaluations configured, to include answer quality in the digest
+    level: optional
+  - label: Your codebase connected via GitHub, to tie a change to the commit behind it
+    level: optional
+schedule: Daily
+report:
+  title: 'AI observability daily digest: 2026-03-14'
+  source: Scout · AI observability
+  receivedAgo: 5h
+  affected: 3 findings, 5 surfaces checked
+  body: >-
+    Cost per conversation rose from $0.11 to $0.19 on the `summarize` workflow while volume held
+    flat, traced to a system-prompt edit that invalidated the cache prefix.
+
+
+    The `extract-fields` eval pass rate fell from 94% to 78% after yesterday's model swap, with
+    failures concentrated on documents over 8k tokens. Errors and user-level spend were unchanged.
+  suggestedAction: >-
+    Restore the cached prefix on the `summarize` prompt, and gate the `extract-fields` model swap
+    behind a length check until the eval recovers.
+  actionNote: An agent opens the pull request. You review and merge.
+---
+
+<LeftPage>
+
+<ReportFigure
+    n={1}
+    caption="Your inbox, reading yesterday's digest."
+    legend="1 – Which scout wrote it, and when. 2 – What the agent proposes doing about it. 3 – A digest arrives every day, unlike every other scout in this book."
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="The digest as a report card. Same shape as every other report in your inbox, so it triages the same way."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Cost per conversation up 73% on one workflow, and one eval down 16 points after a model swap"
+/>
+
+<ScoutFigure n={3} caption="The scout itself. The file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Read one daily summary of your AI features
+
+Checking on an AI feature means opening four things: the cost chart, the error list, the spend
+per user, and the eval results. Each one is fine on its own. Together they are a morning you
+spend reading dashboards that mostly say nothing changed.
+
+This scout reads all four for you and writes one report a day.
+
+## What the scout looks at
+
+It compares the last complete 24 hours against the previous 24 hours and the recent 7-day
+baseline, using the same weekday when your traffic is seasonal. Complete periods only, because a
+partial day reads as a collapse every time.
+
+Across four surfaces:
+
+- **Cost and usage.** What you spent, on what, and whether the unit cost moved.
+- **Errors and traces.** New or changed failure patterns, confirmed by opening a real trace.
+- **Costly users.** User-level spend that reveals a controllable cause, not just a leaderboard.
+- **Evaluations.** Pass-rate regressions and failure surges on the evals you have enabled.
+
+## The one that reports every day
+
+Most scouts in this book are quiet by default. They run, find nothing worth your attention, and
+write nothing. That is the point of them.
+
+This one is the exception, and it is deliberate. A digest that skips the quiet days is a digest
+you stop trusting, because silence becomes ambiguous: did nothing happen, or did the scout fail?
+So every run leaves exactly one report. On a day with nothing to say, that report reads `No
+material regressions` and lists the surfaces it checked.
+
+What it will not do is pad. Findings are capped at three bullets, ordered by impact, and a
+recurring issue only comes back when it got worse, recovered, relapsed, or gained new evidence.
+Routine metrics and unchanged leaderboards never appear.
+
+If you want a scout that stays silent, the other chapters in this volume are that shape. Run
+this one when you want a standing daily read on the whole surface.
+
+## The report in your inbox
+
+A <Term name="scout" /> writes a <Term name="report" /> the same way here as anywhere else, so
+the digest triages like the rest of your inbox. <SeeFig n={2} /> breaks the card down part by
+part.
+
+## The pull request you merge
+
+When a finding is worth acting on, PostHog dispatches an agent to open a pull request with the
+report and evidence attached as context. You review and merge it like any other PR. Nothing
+merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See
+self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are the heart of the self-driving system. They are instructions an agent follows on a
+schedule, and <SeeFig n={3} /> is the actual skill file for this one.
+
+This scout's signal sources come from the following product data:
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
+<Watches />
+
+## The schedule it runs on
+
+This scout runs **daily at 9:00 AM** by default, and you can change that when you add it. Unlike
+the rest of the volume, every run writes.
+
+## Add this to your scout troop
+
+<!-- The requirement checklist comes from `requires:` in this file's frontmatter. The CTA opens
+    the daily digest template in PostHog – see `appTemplate` above. -->
+<Enable />
+
+</RightPage>

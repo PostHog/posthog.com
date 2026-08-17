@@ -1,0 +1,156 @@
+---
+title: Find the AI failures that return a 200
+shortTitle: Error patterns
+subtitle: 'Your error rate is fine. The model still ignored half the instructions.'
+bookOrder: 7
+appTemplate: error-patterns
+filters:
+  type:
+    - self-driving
+watches:
+  - name: AI Observability
+    detail: Full traces, not just error flags, so a failure that returned successfully still shows up.
+  - name: Online evaluations
+    detail: Eval failures and negative feedback, used to find traces worth reading rather than to score them.
+  - name: Trace clusters
+    detail: Semantically similar traces, so one failure mode can be counted across the requests it affects.
+requires:
+  - label: AI Observability instrumented, so $ai_generation events are arriving
+    level: required
+  - label: Traces carrying a feature, workflow, or span name, so failures can be grouped by use case
+    level: required
+  - label: Online evaluations or user feedback, to surface failures that never error
+    level: recommended
+schedule: Daily
+report:
+  title: 'AI error pattern: the summarizer drops the last section on long documents'
+  source: Scout · error patterns
+  receivedAgo: 6h
+  affected: ~19% of summarize requests over 8k tokens
+  body: >-
+    Across 22 traces read from the `summarize` workflow, 14 ended with the final document section
+    missing from the output. Every one carried a `max_tokens` stop reason on the last generation
+    and returned HTTP 200, so none of them appear in the error rate.
+
+
+    The pattern is confined to inputs over roughly 8k tokens and has grown from ~4% to ~19% of
+    that segment since the prompt template changed on the 11th. Shorter documents are unaffected.
+  suggestedAction: >-
+    Raise the output token budget for long inputs, or chunk the document and summarize per
+    section, and add an eval that fails when the last section is missing.
+  actionNote: An agent opens the pull request. You review and merge.
+---
+
+<LeftPage>
+
+<TraceFigure
+    n={1}
+    caption="What the scout read: one failing trace. Nothing here is an error, and the answer is still wrong."
+    legend="The last generation stopped on its token limit, so the final section never made it into the output. The trace returned 200."
+    rows={[
+        { kind: 'trace', label: 'summarize_document', meta: '200 OK · 4.1s · $0.031', depth: 0 },
+        { kind: 'span', label: 'load_document', meta: '11,400 tokens in', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_1', meta: 'stop: end_turn · 780 out', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_2', meta: 'stop: end_turn · 812 out', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_3', meta: 'stop: max_tokens · 1,024 out', depth: 1 },
+    ]}
+/>
+
+<AnatomyFigure
+    n={2}
+    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+    headline="14 of 22 long-document summaries truncated on max_tokens, all returning 200, growing since the prompt change"
+/>
+
+<DetailFigure
+    n={3}
+    caption="The report opened. From here, you can review the evidence and open a pull request."
+    priority="P1"
+    status="Ready"
+    actionability="Actionable"
+/>
+
+<ScoutFigure n={4} caption="The scout itself. The file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# Find the AI failures that return a 200
+
+Error tracking catches the failures your code knows about: the timeout, the 429, the malformed
+response that threw. Those are the easy half.
+
+The other half return successfully. The model ignored an instruction, answered from the wrong
+context, called a tool with the wrong arguments, looped, or stopped halfway through and returned
+what it had. Every one of those is a 200 with a plausible-looking body, and none of them move
+your error rate.
+
+This scout reads real traces and finds the failures that never errored.
+
+## What the scout looks at
+
+Your summarizer is returning 200 on every request and your error rate is flat. Is it working?
+
+- If the outputs are complete and the evals hold, yes. The scout stays _quiet_.
+- If one shape of input keeps producing truncated answers, that's a failure mode with no error
+  attached. The scout _**reports**_.
+
+<SeeFig n={1} /> is one of the traces it read. Nothing in it is an error.
+
+## Why it reads traces instead of counting errors
+
+An error count tells you how often something threw. It cannot tell you what went wrong first,
+and in a multi-step trace that distinction is the whole diagnosis: a tool call that returned bad
+arguments produces three downstream symptoms, and counting symptoms gets you three findings
+instead of one cause.
+
+So the scout works one use case at a time, opens up to 25 traces per run, and groups them by the
+first thing that went wrong. Queries choose what to read. Reading establishes the failure mode.
+
+It will not infer a silent failure from text matching alone. A response containing "I don't know"
+is not evidence of anything on its own.
+
+## The report in your inbox
+
+When your product emits <Term name="signal">signals</Term> that a failure mode is new or growing,
+a <Term name="scout" /> opens a <Term name="report" />. <SeeFig n={2} /> breaks the card down part
+by part. Click **Review** and the report opens <SeeFig n={3} /> with the full evidence, the raw
+signals, and options to take action.
+
+One report per root failure, not one per trace or error string.
+
+## The pull request you merge
+
+When you're ready to open a pull request, PostHog dispatches an agent to do it for you with the
+report and evidence attached as context. You review and merge it like any other PR. Nothing
+merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See
+self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are the heart of the self-driving system. They are instructions an agent follows on a
+schedule, and <SeeFig n={4} /> is the actual skill file for this one.
+
+This scout's signal sources come from the following product data:
+
+<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
+<Watches />
+
+## The schedule it runs on
+
+This scout runs **daily at 9:00 AM** by default. You can choose to run it every 30 minutes up to
+once a day. It only writes when something is wrong, so most days it's silent.
+
+## Add this to your scout troop
+
+<!-- The requirement checklist comes from `requires:` in this file's frontmatter. The CTA opens
+    the error patterns template in PostHog – see `appTemplate` above. -->
+<Enable />
+
+</RightPage>
