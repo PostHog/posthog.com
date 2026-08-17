@@ -10,7 +10,7 @@ This page is the wire-level contract for the `@posthog/mcp` SDK. Every event the
 
 | Event name                | When it fires                                                                     | Notable extras                                                                                                                                                                                                       |
 | ------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$mcp_tool_call`          | Every `tools/call` request                                                        | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_status` (on errors), optionally `$mcp_intent`/`$mcp_intent_source` |
+| `$mcp_tool_call`          | Every `tools/call` request                                                        | `$mcp_tool_name`, `$mcp_tool_description`, `$mcp_parameters`, `$mcp_response`, `$mcp_duration_ms`, `$mcp_is_error`, `$mcp_error_type`/`$mcp_error_message` (on errors), optionally `$mcp_intent`/`$mcp_intent_source` |
 | `$mcp_tools_list`         | Every `tools/list` response                                                       | `$mcp_listed_tool_names` (string[] of advertised tool names), `$mcp_response` (the response envelope as sent, including `nextCursor` and the 2026-07-28 `ttlMs`/`cacheScope` directives)                             |
 | `$mcp_initialize`         | Every client/server handshake                                                     | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version`, `$mcp_protocol_version`                                                                                                        |
 | `$mcp_resources_list`     | Every `resources/list` request                                                    | —                                                                                                                                                                                                                    |
@@ -51,12 +51,6 @@ Present on most `mcp_*` events.
 | `$mcp_parameters`        | object                              | Sanitized request arguments. Excludes the SDK-injected `context` and `conversation_id` arguments.                                                                                                     |
 | `$mcp_response`          | object                              | Sanitized tool result                                                                                                                                                                                 |
 | `$mcp_conversation_id`   | string                              | Present when `enableConversationId` is on. See [Conversation IDs](/docs/mcp-analytics/conversation-id).                                                                                               |
-
-<CalloutBox icon="IconInfo" title="Properties you'll see on PostHog's own MCP server" type="fyi">
-
-PostHog's hosted MCP server is instrumented with this SDK, but stamps extra properties of its own on top — among them `$mcp_error_status` (the upstream HTTP status of a failed call), `$mcp_region`, `$mcp_transport`, and `$mcp_auth_method`. Those aren't part of the SDK's contract and won't appear on your own server's events, so don't build queries that depend on them for your data.
-
-</CalloutBox>
 
 ## Exception properties
 
