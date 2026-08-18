@@ -488,7 +488,7 @@ The response is the same as before but the query is faster, which helps provide 
 
 ## Further reading
 
-- [Choose an embedded analytics architecture](/docs/data/embedded-analytics)
+- [Project setup for embedded analytics](/docs/data/embedded-analytics)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
 - [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
