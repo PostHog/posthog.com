@@ -74,7 +74,7 @@ function BlogHeader({ placement }: { placement?: string }): JSX.Element {
 function BlogHero({ className = '' }: { className?: string }): JSX.Element {
     return (
         <div className={`flex flex-col items-start gap-3 @2xl:gap-5 ${className}`}>
-            <h1 className="m-0 max-w-3xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
+            <h1 className="m-0 max-w-4xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
                 Lessons, opinions, and updates from the{' '}
                 <span className="box-decoration-clone rounded-xs bg-blue/20 px-2 text-blue dark:text-blue-2">
                     team behind PostHog.
