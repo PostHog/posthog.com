@@ -37,18 +37,25 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
 import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
 
-const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
+// fullUrl keeps the query string when comparing; includeNav also matches ?nav= links (skipped by default)
+const recursiveSearch = (
+    array: MenuItem[] | undefined,
+    value: string,
+    { fullUrl = false, includeNav = false } = {}
+): boolean => {
     if (!array) return false
 
     for (let i = 0; i < array.length; i++) {
         const element = array[i]
 
-        if (element.url?.split('?')[0] === value) {
+        const isNavLink = element.url?.includes('?nav=')
+        const url = fullUrl ? element.url : isNavLink && !includeNav ? undefined : element.url?.split('?')[0]
+        if (url && url === value) {
             return true
         }
 
         if (element.children) {
-            const found = recursiveSearch(element.children, value)
+            const found = recursiveSearch(element.children, value, { fullUrl, includeNav })
             if (found) {
                 return true
             }
@@ -240,10 +247,35 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
-        return internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = item?.path
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+        const currentURL = item?.path
+        const search = item?.location?.search
+
+        // 1. A nav link with this exact URL + query wins (e.g. ?nav=self-driving)
+        if (search) {
+            const fullURL = `${currentURL}${search}`
+            const contextMatch = internalMenu?.find(
+                (menuItem: MenuItem) =>
+                    menuItem.url === fullURL || recursiveSearch(menuItem.children, fullURL, { fullUrl: true })
+            )
+            if (contextMatch) return contextMatch
+        }
+
+        // 2. A section whose own URL is this page wins (if it has children to show)
+        const dedicated = internalMenu?.find(
+            (menuItem: MenuItem) => menuItem.url?.split('?')[0] === currentURL && menuItem.children?.length
+        )
+        if (dedicated) return dedicated
+
+        // 3. Otherwise, first section that links to this page (?nav= links don't count)
+        const linked = internalMenu?.find((menuItem: MenuItem) => recursiveSearch(menuItem.children, currentURL))
+        if (linked) return linked
+
+        // 4. Last resort: allow ?nav= links and bare section URLs
+        return internalMenu?.find(
+            (menuItem: MenuItem) =>
+                currentURL === menuItem.url?.split('?')[0] ||
+                recursiveSearch(menuItem.children, currentURL, { includeNav: true })
+        )
     }, [internalMenu, item])
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
@@ -468,7 +500,8 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             setActiveHistoryIndex(history.length)
         }
         setActiveInternalMenu(getActiveInternalMenu())
-    }, [item?.path])
+        // re-run when only the query changes (e.g. ?nav=self-driving)
+    }, [item?.path, item?.location?.search])
 
     const goBack = useCallback(() => {
         if (canGoBack) {

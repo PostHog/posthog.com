@@ -2284,6 +2284,234 @@ export const companyMenu = {
     ],
 }
 
+// PostHog Desktop docs nav — used by its own docs section and nested inside Self-driving
+const posthogDesktopNav = [
+    {
+        name: 'Getting started',
+    },
+    {
+        name: 'Quick Tour',
+        url: '/docs/posthog-desktop',
+        icon: 'IconRewindPlay',
+        color: 'orange',
+        featured: true,
+    },
+    {
+        name: 'Download',
+        url: '/docs/posthog-desktop/download-posthog-desktop',
+        icon: 'IconDownload',
+        color: 'blue',
+        featured: true,
+    },
+    {
+        name: 'Features',
+    },
+    {
+        name: 'Any model and any harness',
+        url: '/docs/posthog-desktop/use-any-model-and-harness',
+        icon: 'IconGraduationCap',
+        color: 'green',
+    },
+    {
+        name: 'Skills',
+        url: '/docs/posthog-desktop/skills',
+        icon: 'IconMagic',
+        color: 'purple',
+    },
+    {
+        name: 'Command Center',
+        url: '/docs/posthog-desktop/command-center',
+        icon: 'IconGridMasonry',
+        color: 'orange',
+    },
+    {
+        name: 'Tasks',
+        url: '/docs/posthog-desktop/tasks',
+        icon: 'IconListCheck',
+        color: 'blue',
+    },
+    {
+        name: 'PostHog integration',
+        url: '/docs/posthog-desktop/posthog-integration',
+        icon: 'IconSparkles',
+        color: 'seagreen',
+    },
+    {
+        name: 'Git + GitHub integration',
+        url: '/docs/posthog-desktop/git-github-integration',
+        icon: 'IconGitBranch',
+        color: 'green',
+    },
+    {
+        name: 'Code review',
+        url: '/docs/posthog-desktop/code-review',
+        icon: 'IconCode',
+        color: 'blue',
+    },
+    {
+        name: 'Environments',
+        url: '/docs/posthog-desktop/environments',
+        icon: 'IconServer',
+        color: 'purple',
+    },
+    {
+        name: 'Cloud runs',
+        url: '/docs/posthog-desktop/cloud-runs',
+        icon: 'IconCloud',
+        color: 'blue',
+    },
+    {
+        name: 'Worktrees',
+        url: '/docs/posthog-desktop/worktrees',
+        icon: 'IconGitRepository',
+        color: 'orange',
+    },
+    {
+        name: 'AI-generated content',
+        url: '/docs/posthog-desktop/ai-generated-content',
+        icon: 'IconAI',
+        color: 'purple',
+    },
+    {
+        name: 'Settings',
+        url: '/docs/posthog-desktop/settings',
+        icon: 'IconGear',
+        color: 'seagreen',
+    },
+    {
+        name: 'Resources',
+    },
+    {
+        name: 'Pricing',
+        url: '/docs/posthog-desktop/pricing',
+        icon: 'IconPiggyBank',
+        color: 'green',
+    },
+    {
+        name: 'Open source',
+        url: '/docs/posthog-desktop/open-source',
+        icon: 'IconGithub',
+        color: 'seagreen',
+    },
+    {
+        name: 'Community',
+        url: '/docs/posthog-desktop/community',
+        icon: 'IconPeople',
+        color: 'purple',
+    },
+]
+
+// PostHog Slack docs nav — used by its own docs section and nested inside Self-driving
+const posthogSlackNav = [
+    {
+        name: 'PostHog Slack',
+    },
+    {
+        name: 'Overview',
+        url: '/docs/slack',
+        icon: 'IconHome',
+        color: 'seagreen',
+        badge: {
+            title: 'Beta',
+            className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+        },
+    },
+    {
+        name: 'Setup',
+        url: '/docs/slack/setup',
+        icon: 'IconWrench',
+        color: 'blue',
+    },
+    {
+        name: 'Commands',
+        url: '/docs/slack/commands',
+        icon: 'IconTerminal',
+        color: 'purple',
+    },
+    {
+        name: 'Pricing',
+        url: '/docs/slack/pricing',
+        icon: 'IconShield',
+        color: 'red',
+    },
+]
+
+// PostHog MCP docs nav — used inside AI engineering and nested inside Self-driving
+const posthogMcpNav = [
+    {
+        name: 'Overview',
+        url: '/docs/model-context-protocol',
+    },
+    {
+        name: 'Use cases',
+        url: '/docs/model-context-protocol/use-cases',
+    },
+    {
+        name: 'MCP tools reference',
+        url: '/docs/model-context-protocol/tools',
+    },
+    {
+        name: 'FAQ and advanced setup',
+        url: '/docs/model-context-protocol/faq',
+    },
+    {
+        name: 'Enterprise auth (ID-JAG)',
+        url: '/docs/model-context-protocol/enterprise-managed-authorization',
+    },
+    {
+        name: 'Code editors',
+    },
+    {
+        name: 'Claude Code',
+        url: '/docs/model-context-protocol/claude-code',
+    },
+    {
+        name: 'Claude Desktop',
+        url: '/docs/model-context-protocol/claude-desktop',
+    },
+    {
+        name: 'Codex',
+        url: '/docs/model-context-protocol/codex',
+    },
+    {
+        name: 'Cursor',
+        url: '/docs/model-context-protocol/cursor',
+    },
+    {
+        name: 'VS Code',
+        url: '/docs/model-context-protocol/vscode',
+    },
+    {
+        name: 'Windsurf',
+        url: '/docs/model-context-protocol/windsurf',
+    },
+    {
+        name: 'Zed',
+        url: '/docs/model-context-protocol/zed',
+    },
+    {
+        name: 'Platforms',
+    },
+    {
+        name: 'Lovable',
+        url: '/docs/integrations/lovable',
+    },
+    {
+        name: 'Replit',
+        url: '/docs/integrations/replit',
+    },
+    {
+        name: 'v0',
+        url: '/docs/integrations/v0',
+    },
+]
+
+// Copies a product nav for nesting under Self-driving: drops section labels and adds ?nav=self-driving,
+// which keeps the Self-driving sidebar active for that visit (plain URLs resolve to the product's own sidebar).
+// To add a page, edit the product's nav array above — every copy of it derives from there.
+const selfDrivingNestedNav = (items) =>
+    items.filter((item) => item.url).map((item) => ({ ...item, url: `${item.url}?nav=self-driving` }))
+
 export const docsMenu = {
     name: 'Docs',
     url: '/docs',
@@ -2319,25 +2547,29 @@ export const docsMenu = {
                 {
                     name: 'Products',
                 },
+                // ?nav=self-driving keeps the Self-driving sidebar when opened from here
                 {
                     name: 'Slack',
-                    url: '/docs/slack',
+                    url: '/docs/slack?nav=self-driving',
+                    children: selfDrivingNestedNav(posthogSlackNav),
                 },
                 {
                     name: 'Web app',
-                    url: '/docs/self-driving/web',
+                    url: '/docs/self-driving/web?nav=self-driving',
                 },
                 {
                     name: 'MCP',
-                    url: '/docs/model-context-protocol',
+                    url: '/docs/model-context-protocol?nav=self-driving',
+                    children: selfDrivingNestedNav(posthogMcpNav),
                 },
                 {
                     name: 'CLI',
-                    url: '/docs/cli',
+                    url: '/docs/cli?nav=self-driving',
                 },
                 {
                     name: 'Desktop',
-                    url: '/docs/posthog-desktop',
+                    url: '/docs/posthog-desktop?nav=self-driving',
+                    children: selfDrivingNestedNav(posthogDesktopNav),
                 },
                 {
                     name: 'Concepts',
@@ -3655,74 +3887,7 @@ export const docsMenu = {
                         {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/model-context-protocol',
-                            children: [
-                                {
-                                    name: 'Overview',
-                                    url: '/docs/model-context-protocol',
-                                },
-                                {
-                                    name: 'Use cases',
-                                    url: '/docs/model-context-protocol/use-cases',
-                                },
-                                {
-                                    name: 'MCP tools reference',
-                                    url: '/docs/model-context-protocol/tools',
-                                },
-                                {
-                                    name: 'FAQ and advanced setup',
-                                    url: '/docs/model-context-protocol/faq',
-                                },
-                                {
-                                    name: 'Enterprise auth (ID-JAG)',
-                                    url: '/docs/model-context-protocol/enterprise-managed-authorization',
-                                },
-                                {
-                                    name: 'Code editors',
-                                },
-                                {
-                                    name: 'Claude Code',
-                                    url: '/docs/model-context-protocol/claude-code',
-                                },
-                                {
-                                    name: 'Claude Desktop',
-                                    url: '/docs/model-context-protocol/claude-desktop',
-                                },
-                                {
-                                    name: 'Codex',
-                                    url: '/docs/model-context-protocol/codex',
-                                },
-                                {
-                                    name: 'Cursor',
-                                    url: '/docs/model-context-protocol/cursor',
-                                },
-                                {
-                                    name: 'VS Code',
-                                    url: '/docs/model-context-protocol/vscode',
-                                },
-                                {
-                                    name: 'Windsurf',
-                                    url: '/docs/model-context-protocol/windsurf',
-                                },
-                                {
-                                    name: 'Zed',
-                                    url: '/docs/model-context-protocol/zed',
-                                },
-                                {
-                                    name: 'Platforms',
-                                },
-                                {
-                                    name: 'Lovable',
-                                    url: '/docs/integrations/lovable',
-                                },
-                                {
-                                    name: 'Replit',
-                                    url: '/docs/integrations/replit',
-                                },
-                                {
-                                    name: 'v0',
-                                    url: '/docs/integrations/v0',
-                                },
-                            ],
+                            children: posthogMcpNav,
                         },
                         {
                             name: 'AI Observability',
@@ -7631,121 +7796,7 @@ export const docsMenu = {
             color: 'yellow',
             url: '/docs/posthog-desktop',
             description: 'AI coding environment with deep PostHog integration.',
-            children: [
-                {
-                    name: 'Getting started',
-                },
-                {
-                    name: 'Quick Tour',
-                    url: '/docs/posthog-desktop',
-                    icon: 'IconRewindPlay',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Download',
-                    url: '/docs/posthog-desktop/download-posthog-desktop',
-                    icon: 'IconDownload',
-                    color: 'blue',
-                    featured: true,
-                },
-                {
-                    name: 'Features',
-                },
-                {
-                    name: 'Any model and any harness',
-                    url: '/docs/posthog-desktop/use-any-model-and-harness',
-                    icon: 'IconGraduationCap',
-                    color: 'green',
-                },
-                {
-                    name: 'Skills',
-                    url: '/docs/posthog-desktop/skills',
-                    icon: 'IconMagic',
-                    color: 'purple',
-                },
-                {
-                    name: 'Command Center',
-                    url: '/docs/posthog-desktop/command-center',
-                    icon: 'IconGridMasonry',
-                    color: 'orange',
-                },
-                {
-                    name: 'Tasks',
-                    url: '/docs/posthog-desktop/tasks',
-                    icon: 'IconListCheck',
-                    color: 'blue',
-                },
-                {
-                    name: 'PostHog integration',
-                    url: '/docs/posthog-desktop/posthog-integration',
-                    icon: 'IconSparkles',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Git + GitHub integration',
-                    url: '/docs/posthog-desktop/git-github-integration',
-                    icon: 'IconGitBranch',
-                    color: 'green',
-                },
-                {
-                    name: 'Code review',
-                    url: '/docs/posthog-desktop/code-review',
-                    icon: 'IconCode',
-                    color: 'blue',
-                },
-                {
-                    name: 'Environments',
-                    url: '/docs/posthog-desktop/environments',
-                    icon: 'IconServer',
-                    color: 'purple',
-                },
-                {
-                    name: 'Cloud runs',
-                    url: '/docs/posthog-desktop/cloud-runs',
-                    icon: 'IconCloud',
-                    color: 'blue',
-                },
-                {
-                    name: 'Worktrees',
-                    url: '/docs/posthog-desktop/worktrees',
-                    icon: 'IconGitRepository',
-                    color: 'orange',
-                },
-                {
-                    name: 'AI-generated content',
-                    url: '/docs/posthog-desktop/ai-generated-content',
-                    icon: 'IconAI',
-                    color: 'purple',
-                },
-                {
-                    name: 'Settings',
-                    url: '/docs/posthog-desktop/settings',
-                    icon: 'IconGear',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Pricing',
-                    url: '/docs/posthog-desktop/pricing',
-                    icon: 'IconPiggyBank',
-                    color: 'green',
-                },
-                {
-                    name: 'Open source',
-                    url: '/docs/posthog-desktop/open-source',
-                    icon: 'IconGithub',
-                    color: 'seagreen',
-                },
-                {
-                    name: 'Community',
-                    url: '/docs/posthog-desktop/community',
-                    icon: 'IconPeople',
-                    color: 'purple',
-                },
-            ],
+            children: posthogDesktopNav,
         },
         {
             name: 'PostHog Slack',
@@ -7757,39 +7808,7 @@ export const docsMenu = {
                 title: 'Beta',
                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
             },
-            children: [
-                {
-                    name: 'PostHog Slack',
-                },
-                {
-                    name: 'Overview',
-                    url: '/docs/slack',
-                    icon: 'IconHome',
-                    color: 'seagreen',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Setup',
-                    url: '/docs/slack/setup',
-                    icon: 'IconWrench',
-                    color: 'blue',
-                },
-                {
-                    name: 'Commands',
-                    url: '/docs/slack/commands',
-                    icon: 'IconTerminal',
-                    color: 'purple',
-                },
-                {
-                    name: 'Pricing',
-                    url: '/docs/slack/pricing',
-                    icon: 'IconShield',
-                    color: 'red',
-                },
-            ],
+            children: posthogSlackNav,
         },
         {
             name: 'Workflows',
