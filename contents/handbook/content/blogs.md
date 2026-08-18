@@ -38,7 +38,7 @@ The title is the most important part of the blog. It's what someone judges in se
 - [WTF is a forward deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer) asks about a trendy job title and promises more than a boring definition.
 - [How we're spending our marketing budget in 2026 (with actual $ figures)](/founders/actual-marketing-budget-2026) is good because of the "with actual $ figures".
 
-Avoid being vague or boring ("Our approach to marketing spend"), and don't put being funny/clever above being clear.
+Avoid being vague or boring ("Our approach to marketing spend"); if a generic B2B SaaS company would write it, we shouldn't, but don't put being funny/clever above being clear.
 
 ### Intro
 
