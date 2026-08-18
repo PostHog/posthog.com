@@ -11,26 +11,29 @@ import usePostHog from '../../hooks/usePostHog'
  * the inbox exhibit – draws from here, so the apparatus reads the same across volumes.
  */
 
-/** The dot itself. Presentational, so a figure can place a number without a gloss. */
+/** The dot itself. One definition of the look, whether it's placed (`span`) or clicked (`button`). */
 export function MarkerChip({
     n,
     size = 'md',
+    as: Tag = 'span',
     className = '',
     ...rest
 }: {
     n: number
     /** `sm` sits inline in body text; `md` overlays a figure. */
     size?: 'sm' | 'md'
+    /** `button` for an interactive marker – FigureMarker's trigger is this same chip, clickable. */
+    as?: 'span' | 'button'
     className?: string
-} & React.HTMLAttributes<HTMLSpanElement>): JSX.Element {
+} & React.ButtonHTMLAttributes<HTMLElement>): JSX.Element {
     const sizeClasses = size === 'sm' ? 'size-4 text-[10px]' : 'size-5 text-[11px]'
     return (
-        <span
+        <Tag
             className={`inline-flex shrink-0 select-none items-center justify-center rounded-full bg-orange font-bold leading-none text-white ${sizeClasses} ${className}`}
             {...rest}
         >
             {n}
-        </span>
+        </Tag>
     )
 }
 
@@ -104,14 +107,15 @@ export function FigureMarker({
             onOpenChange={onOpenChange}
             contentClassName="max-w-[16rem] whitespace-normal text-left text-sm leading-snug"
             trigger={
-                <button
+                <MarkerChip
+                    as="button"
                     type="button"
+                    n={n}
+                    size="sm"
                     onClick={() => onOpenChange(!open)}
                     aria-label={`${n}. ${label} – ${gloss}`}
-                    className={`inline-flex size-4 shrink-0 cursor-help select-none items-center justify-center rounded-full bg-orange align-middle font-bold leading-none text-white ${visibilityClasses}`}
-                >
-                    <span className="text-[10px]">{n}</span>
-                </button>
+                    className={`cursor-help align-middle ${visibilityClasses}`}
+                />
             }
         >
             <span className="font-bold">{label}</span> – {gloss}

@@ -12,32 +12,31 @@ import { IconArrowUpRight, IconRewindPlay } from '@posthog/icons'
  */
 
 /** The shared chrome: bordered, rounded, and vertically centered on the text baseline. */
+const CHROME_CLASSES =
+    'mx-0.5 inline-flex translate-y-[0.05em] items-center gap-1 rounded border border-primary bg-primary px-1.5 py-0.5 align-baseline text-[0.8em] font-semibold leading-none text-primary'
+
 function Chrome({ children }: { children: React.ReactNode }): JSX.Element {
+    return <span className={`${CHROME_CLASSES} select-none whitespace-nowrap`}>{children}</span>
+}
+
+/** The recording buttons, singular and plural – one drawing, so they can't drift apart. */
+function RecordingButton({ label }: { label: string }): JSX.Element {
     return (
-        <span className="mx-0.5 inline-flex translate-y-[0.05em] select-none items-center gap-1 whitespace-nowrap rounded border border-primary bg-primary px-1.5 py-0.5 align-baseline text-[0.8em] font-semibold leading-none text-primary">
-            {children}
-        </span>
+        <Chrome>
+            {label}
+            <IconRewindPlay className="size-[1.1em] shrink-0" aria-hidden="true" />
+        </Chrome>
     )
 }
 
 /** The button above a persons list: watch every session behind the number, back to back. */
 export function ViewRecordings(): JSX.Element {
-    return (
-        <Chrome>
-            View recordings
-            <IconRewindPlay className="size-[1.1em] shrink-0" aria-hidden="true" />
-        </Chrome>
-    )
+    return <RecordingButton label="View recordings" />
 }
 
 /** The per-person button inside that list: jump straight to one session. */
 export function ViewRecording(): JSX.Element {
-    return (
-        <Chrome>
-            View recording
-            <IconRewindPlay className="size-[1.1em] shrink-0" aria-hidden="true" />
-        </Chrome>
-    )
+    return <RecordingButton label="View recording" />
 }
 
 /**
@@ -49,7 +48,7 @@ export function AskAI({ q }: { q: string }): JSX.Element {
     return (
         <a
             href={`https://app.posthog.com/#panel=max:${encodeURIComponent(q)}`}
-            className="group/ask mx-0.5 inline-flex translate-y-[0.05em] items-center gap-1 rounded border border-primary bg-primary px-1.5 py-0.5 align-baseline text-[0.8em] font-semibold leading-none text-primary no-underline hover:border-orange hover:text-orange"
+            className={`group/ask ${CHROME_CLASSES} no-underline hover:border-orange hover:text-orange`}
         >
             {q}
             <IconArrowUpRight

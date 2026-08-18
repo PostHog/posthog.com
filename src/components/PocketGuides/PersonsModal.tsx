@@ -1,8 +1,8 @@
 import React from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconCopy, IconRewindPlay } from '@posthog/icons'
 
+import AnatomyFrame from './AnatomyFrame'
 import { FigureMarker } from './FigureMarker'
 
 /**
@@ -66,54 +66,44 @@ export interface PersonsModalProps {
 }
 
 export default function PersonsModal({ count = 'More than 100 unique persons' }: PersonsModalProps): JSX.Element {
-    const reducedMotion = useReducedMotion()
-    const animate = !reducedMotion
-
     return (
-        <div className="group/anatomy relative @container">
-            <motion.div
-                initial={animate ? { opacity: 0, y: 6 } : false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4"
-            >
-                {/* The modal's header: the count on the left, the all-of-them button on the right. */}
-                <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[0.75em] font-bold leading-snug text-primary">{count}</span>
-                    <span className="inline-flex shrink-0 select-none items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 rounded border border-primary bg-primary px-2 py-1 text-[0.65em] font-bold leading-none text-primary">
-                            View recordings
-                            <IconRewindPlay className="size-3" aria-hidden="true" />
-                        </span>
+        <AnatomyFrame className="rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
+            {/* The modal's header: the count on the left, the all-of-them button on the right. */}
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-[0.75em] font-bold leading-snug text-primary">{count}</span>
+                <span className="inline-flex shrink-0 select-none items-center gap-1.5">
+                    <span className="inline-flex items-center gap-1 rounded border border-primary bg-primary px-2 py-1 text-[0.65em] font-bold leading-none text-primary">
+                        View recordings
+                        <IconRewindPlay className="size-3" aria-hidden="true" />
+                    </span>
+                    <FigureMarker
+                        n={2}
+                        label="View recordings"
+                        gloss="watch their sessions as they flowed through this funnel"
+                        visibility="always"
+                    />
+                </span>
+            </div>
+
+            <div className="space-y-1.5">
+                {/* Invented addresses on example.com – never paste real ones out of a screenshot. */}
+                <PersonRow
+                    initial="A"
+                    email="ana@example.com"
+                    distinctId="wWratLxRfKGsXHkS…WDfk3jPZ9Gbgjto"
+                    marker={
                         <FigureMarker
-                            n={2}
-                            label="View recordings"
-                            gloss="watch their sessions as they flowed through this funnel"
+                            n={1}
+                            label="The people behind the number"
+                            gloss="every person the step counted, not a sample of them"
                             visibility="always"
                         />
-                    </span>
-                </div>
-
-                <div className="space-y-1.5">
-                    {/* Invented addresses on example.com – never paste real ones out of a screenshot. */}
-                    <PersonRow
-                        initial="A"
-                        email="ana@example.com"
-                        distinctId="wWratLxRfKGsXHkS…WDfk3jPZ9Gbgjto"
-                        marker={
-                            <FigureMarker
-                                n={1}
-                                label="The people behind the number"
-                                gloss="every person the step counted, not a sample of them"
-                                visibility="always"
-                            />
-                        }
-                    />
-                    <PersonRow initial="J" email="jordan@example.com" distinctId="tnHphQQPtYSCBRNP…8oDqFsQbw4AG6Ta" />
-                    <PersonRow initial="S" email="sam@example.org" distinctId="nrejD9nmwEPRd7PE…ASxux7Tn25y8M6h" />
-                    <PersonRow initial="P" email="priya@example.net" distinctId="wmKv4hcghqoTCi3…Xq7bLm2ZfPd9Nsa" />
-                </div>
-            </motion.div>
-        </div>
+                    }
+                />
+                <PersonRow initial="J" email="jordan@example.com" distinctId="tnHphQQPtYSCBRNP…8oDqFsQbw4AG6Ta" />
+                <PersonRow initial="S" email="sam@example.org" distinctId="nrejD9nmwEPRd7PE…ASxux7Tn25y8M6h" />
+                <PersonRow initial="P" email="priya@example.net" distinctId="wmKv4hcghqoTCi3…Xq7bLm2ZfPd9Nsa" />
+            </div>
+        </AnatomyFrame>
     )
 }

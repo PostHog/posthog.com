@@ -105,7 +105,7 @@ export function ScreenshotFigure({
     if (!shot?.src) {
         return null
     }
-    const items: Annotation[] = annotations ?? (set && shot.annotations?.[set]?.items) ?? []
+    const items: Annotation[] = annotations ?? (set ? shot.annotations?.[set]?.items : undefined) ?? []
     // The frame already supplies the border and ground, so the product page's drop shadow
     // would read as a second frame inside it.
     const imgClasses = 'rounded max-w-full h-auto'

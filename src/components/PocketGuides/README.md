@@ -65,11 +65,18 @@ after the prose.
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
 | `<ScoutFigure n caption>` | This use case's `SKILL.md` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
+| `<PersonsModalFigure n caption count>` | The persons modal behind a funnel step, in miniature |
+| `<TriggerGroupFigure n caption>` | The app's trigger group form, in miniature |
+| `<RedirectLoopFigure n caption>` | The redirect trap, animated on a CSS timeline |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
 | `<Enable />` | The one-click CTA – the book's only real button |
+| `<Setup subcommand="…" />` | The wizard install command, copyable – for a volume's prerequisite |
 | `<Contents />` | The contents list, built from the book itself |
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
+| `<ViewRecordings />` / `<ViewRecording />` | An app button drawn inline in a sentence (UIButton.tsx) |
+| `<AskAI q="…" />` | A question linked straight into PostHog AI, drawn as a control |
+| `<ScannerTemplate name template type asks answers property>` | A Replay Vision template, linked into the editor pre-filled |
 
 Headings map to the book's type scale: `#` is the page title, `##` a small-caps section heading.
 
@@ -198,7 +205,13 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `FigureMarker.tsx` | The numbered marker every figure annotates with, and its narrow-reader key |
+| `AnatomyFrame.tsx` | The shell every annotated miniature shares: hover scope, @container, entrance fade |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
+| `ReportAnatomy.tsx` / `ReportDetailAnatomy.tsx` | The inbox card and its opened detail view, in miniature |
+| `PersonsModal.tsx` / `TriggerGroupForm.tsx` | App surfaces drawn in miniature for the replay volume |
+| `RedirectLoop.tsx` | The redirect trap, animated in CSS |
+| `UIButton.tsx` | App controls drawn inline in a sentence, plus AskAI and ScannerTemplate links |
+| `volumeArt.tsx` | One hoggie per volume, shared by the shelf cover and the title page |
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in
