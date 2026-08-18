@@ -14,7 +14,7 @@ Content is the main pillar of [our marketing strategy](/handbook/content), and b
 
 It's also good for your career! People who've written good blogs at PostHog have received lots of industry attention and discussion on socials.
 
-Finally, sometimes it's just useful to create a blog as a linkable artifact to explain a topic instead of repeating yourself dozens of times.
+Finally, sometimes it's just useful to create a blog as a linkable artifact to explain a topic instead of repeating yourself dozens of times. It can be an "in" to talk to customers or an explanation of how something works at PostHog.
 
 ## Is my idea worth writing about?
 
