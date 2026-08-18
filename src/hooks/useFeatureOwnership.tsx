@@ -56,6 +56,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'ai-plugin': {
         feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
         owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
         label: false,
     },
     alerts: {
