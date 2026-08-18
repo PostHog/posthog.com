@@ -247,17 +247,17 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
--   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
--   `#brand-mentions`
--   `#do-more-weird`
--   `#newsletters`
--   `#team-blitzscale`
--   `#dev`
--   `#general`
--   `#alerts`
--   `#industry-news`
--   `#changelog` - keep up with all the cool things we're shipping across the team
+-   [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U) - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
+-   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
+-   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
+-   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
+-   [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4)
+-   [#dev](https://posthog.slack.com/archives/C0113360FFV)
+-   [#general](https://posthog.slack.com/archives/CSPHFDZH8)
+-   [#alerts](https://posthog.slack.com/archives/C0185UNBSJZ)
+-   [#industry-news](https://posthog.slack.com/archives/C01NWR6F58F)
+-   [#changelog](https://posthog.slack.com/archives/C099B0YCULT) - keep up with all the cool things we're shipping across the team
 
 ### Social channels
 
