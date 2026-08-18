@@ -13,6 +13,12 @@ The MCP TypeScript SDK has two majors. `@posthog/mcp` supports both, and detects
 
 Use `@posthog/mcp` 0.11.2 or later on v2. Earlier versions captured nothing, silently.
 
+<CalloutBox icon="IconFlask" title="TypeScript today, Python soon" type="fyi">
+
+This page covers the MCP **TypeScript** SDK. The [Python SDK](/docs/mcp-analytics/installation#python) is still in active development: it emits the same `$mcp_*` events, but doesn't support the `2026-07-28` revision yet. That support is on the way.
+
+</CalloutBox>
+
 ## Setup
 
 Same call as v1. The only difference is where `McpServer` comes from, and that v2 registers tools with `registerTool()` instead of the removed `server.tool()`:
