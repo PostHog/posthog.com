@@ -14,11 +14,11 @@ seo:
   metaDescription: "We timed 7.65M session replay views. The median lasts 17 seconds, and 99.8% of recordings are never opened. Here's the data, and the fix" 
 ---
 
-Here's an uncomfortable truth about session replay: while we all know it's a useful tool for understanding user behavior and diagnosing UX issues, almost nobody opens it.
+Here's an uncomfortable truth about session replay: while we all know replays are a useful tool for understanding user behavior and diagnosing UX issues, almost nobody watches them.
 
 You aren't watching them, neither is your PM, and definitely not the manager who swore at standup they'd "go through a few sessions this week."
 
-Which is an awkward thing to admit, [because we sell one](/session-replay).
+Which is an awkward thing to admit, [because we sell it](/session-replay).
 
 So naturally we had to ask: chat, are we cooked? We pulled **7.65 million** replay-viewing sessions[^1] to find out.
 
@@ -54,7 +54,7 @@ Don't get me wrong: it's not that people are lazy; it's that the backlog is phys
 
 ![Company backlog](https://res.cloudinary.com/dmukukwp6/image/upload/05_backlog_b22c7321ba.png)
 
-The typical company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
+The median company on PostHog captured around **340 recordings** in the last 90 days – at a typical five minutes each, that's roughly **28 hours of footage**, or about three and a half working days of nonstop watching just to clear one quarter.
 
 And that's the *median* company. The average one – dragged up by the big customers – captured closer to **1,260 hours**, which amounts to around 31 work-weeks of doing nothing but watching.
 
@@ -74,7 +74,7 @@ The handful who do watch aren't exactly savouring it. When people change the pla
 
 ## This isn't a PostHog problem
 
-[Hotjar](/blog/posthog-vs-hotjar), [FullStory](/blog/posthog-vs-fullstory), [LogRocket](/blog/posthog-vs-logrocket), [Microsoft Clarity](/blog/best-microsoft-clarity-alternatives), [Contentsquare](/blog/posthog-vs-contentsquare) – every session replay tool, us included, hands you an ocean of footage and a single play button. Over the last couple of years, nearly all of them have shipped some flavour of AI session summary feature that watches sessions so you don't have to.
+[Hotjar](/blog/posthog-vs-hotjar), [FullStory](/blog/posthog-vs-fullstory), [LogRocket](/blog/posthog-vs-logrocket), [Microsoft Clarity](/blog/best-microsoft-clarity-alternatives), [Contentsquare](/blog/posthog-vs-contentsquare) – every session replay tool hands you an ocean of footage and a single play button. Over the last couple of years, nearly all of them have shipped some flavour of AI session summary feature that watches sessions so you don't have to.
 
 But watching was only ever half the job. A tidy AI summary still hands you a to-do list. And a to-do list is just a smaller, better-organised pile of things nobody has time to do.
 
@@ -88,9 +88,9 @@ You tell it what to look for, and it reads every session for exactly that – sc
 
 It reads at a pace no person can match. Since launch six weeks ago, it has watched **1,291,000 recordings** – around **51 years** of footage. To get through that much yourself, you'd have had to start watching in **1975** and never stop.
 
-And if you're already [using PostHog to make your product self-driving](/self-driving), you can connect it end to end: Replay Vision surfaces the issue, PostHog picks it up and opens the pull request with the fix, and all you do is review and merge.
+And if you [enable PostHog Self-Driving](/self-driving) as well, you can connect it end to end: Replay Vision surfaces the issue, PostHog picks it up and opens the pull request with the fix, and all you do is review and merge.
 
-We said earlier we were cooked.. well, turns out we don't have to be, and neither do you.
+We said earlier we were cooked... well, turns out we don't have to be, and neither do you.
 
 **Want to point it at your own 99.8%? [Try Replay Vision →](/replay-vision)**
 
