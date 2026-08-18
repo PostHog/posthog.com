@@ -14,7 +14,7 @@ This is a separate feature from [resource access control](/docs/settings/access-
 
 ## How it works
 
-Each event or person property has a default access level, plus optional member and role overrides. PostHog checks in this order:
+Each event or person property has a default access level, plus optional member and role overrides. Access levels are checked in this order:
 
 1. A rule for that member
 2. A rule for one of that member's roles
@@ -24,30 +24,51 @@ Organization admins always have full access.
 
 Levels:
 
-- **Read & write** – Can query the property and update person property values in the UI or API. This is the default.
-- **Read only** – Can query the property, but can't change person property values.
+- **Read & write** – Can query the property, edit person property values on a person's page, and update its definition (description, visibility, tags).
+- **Read only** – Can query the property but can't edit person property values.
 - **No access** – Can't view, query, or filter by the property. Explicit SQL reads return `NULL`, and whole-property objects omit the key.
 
-For event properties, **Read only** and **Read & write** behave the same because captured events can't be edited.
-
-Group properties aren't restricted at query time.
+**Note:** Group and session properties aren't supported yet.
 
 ## Set access for a property
 
 1. Go to [Property definitions](https://app.posthog.com/data-management/properties)
 2. Open the property and click **Edit**
-3. Under **Access control**, set the default level
-4. On the **Members** or **Roles** tab, add overrides
+3. Set permissions under **Access control**
 
-Project admins and organization admins can change these rules.
+Only project admins and organization admins can change these rules.
 
-## Hide PII from vendors
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_def_access_control_light_e1aa06d386.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_def_access_control_dark_d6d1f88e08.png"
+    alt="Access control settings on a property definition"
+    classes="rounded"
+/>
 
-To share event data with vendors while hiding a property that contains PII, such as `email`:
+You can also review and configure all existing property rules in the project's [access control settings](https://app.posthog.com/settings/project-access).
 
-1. Create a role for the vendor
-2. Open the property definition (create one if it doesn't exist)
-3. Under **Access control**, open the **Roles** tab, add an override for that role, and set it to **No access**
-4. Save the property definition
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_access_control_settings_light_6b896d7650.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_access_control_settings_dark_9226f3e63f.png"
+    alt="Property rules in the project access control settings"
+    classes="rounded"
+/>
 
-Repeat for each property you need to hide.
+## Prevent a role from exporting your user base
+
+**Use case**: You want to prevent members of a specific role from querying and exporting email addresses.
+
+**Setup**:
+
+1. Open the project's [access control settings](https://app.posthog.com/settings/project-access)
+2. Open the **Roles** tab and select the role
+3. Under **Property rules**, click **Add rule**
+4. Select the person property that contains email addresses and set it to **No access**
+5. Members with that role can't query the property or use it in filters
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_role_access_control_light_f273f3fd1e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_role_access_control_dark_1194cb3bac.png"
+    alt="Email property rules set to No access for the Contractor role"
+    classes="rounded"
+/>
