@@ -24,8 +24,8 @@ Our audience is [the people we build for](/handbook/who-we-build-for) including 
 
 - **Blog**: An opinion, story, guide, or comparison. Most common.
 - **[Newsletter](/handbook/content/newsletter)**: build mode, our weekly Substack issue. Usually more for trending dev topics and designed to be highly actionable. Talk to <TeamMember name="Ian Vanagas" /> first if you want to write one since they're much higher lift than blogs.
-- **Tutorial**: Anything that's like "how to do X in PostHog" with code, usually goes in `/contents/tutorials`.
-- **[Docs](/handbook/wizard-and-docs/docs-style-guide)**: References for how a specific feature works, shorter than tutorials.
+- **Tutorial**: Anything that's like "how to do X in PostHog." Usually guides with a single path to follow along through them. Go in `/contents/tutorials`.
+- **[Docs](/handbook/wizard-and-docs/docs-style-guide)**: Features, context, resources, and references for tools. Canonical and structured. 
 
 
 ## Tips for writing good blogs
