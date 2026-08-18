@@ -10,6 +10,7 @@ import { IconCake } from '@posthog/icons'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import Link from 'components/Link'
+import { findProfileByName } from 'components/TeamMember'
 
 const TeamMemberLink = (person) => {
     const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, color } =
@@ -116,9 +117,7 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
         }
     `)
 
-    const person = nodes.find(
-        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
-    )
+    const person = findProfileByName(nodes, name)
 
     return person ? <TeamMemberLink {...person} /> : null
 }
