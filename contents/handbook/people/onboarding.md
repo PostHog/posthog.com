@@ -263,23 +263,36 @@ Below are a list of Slack channels you may find helpful:
 
 We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
 
--   `#food`
--   `#kids`
--   `#no-context-posthog`
--   `#random`
--   `#whereintheworld`
--   `#devel-random`
--   `#books-and-films`
--   `#climbing`
--   `#coffee-snobs`
--   `#dad-jokes`
--   `#fitness`
--   `#hoglife`
--   `#rockets`
--   `#stonks`
--   `#cycling`
--   `#listening-to`
--   `#design-inspiration`
+#### Watercooler
+
+-   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
+-   [#design-inspiration](https://posthog.slack.com/archives/C01KEAGD601)
+-   [#devel-random](https://posthog.slack.com/archives/C02EJABQ39R)
+-   [#food](https://posthog.slack.com/archives/C02EYG134RW)
+-   [#hoglife](https://posthog.slack.com/archives/C033D5NTA22)
+-   [#kids](https://posthog.slack.com/archives/C076X3C284D)
+-   [#memespo](https://posthog.slack.com/archives/C0AD19VV7MH)
+-   [#no-context-posthog](https://posthog.slack.com/archives/C0790T52ZHT)
+-   [#random](https://posthog.slack.com/archives/CT2BU33N1)
+-   [#whereintheworld](https://posthog.slack.com/archives/C01D3U32PUN)
+
+#### Hobbies and interests
+
+-   [#aviation](https://posthog.slack.com/archives/C076ZQFM42U)
+-   [#books-and-films](https://posthog.slack.com/archives/C01HEH7FXRN)
+-   [#cars-and-driving](https://posthog.slack.com/archives/C068GE7G8BB)
+-   [#climbing](https://posthog.slack.com/archives/C08QQ4HGV8R)
+-   [#coffee-snobs](https://posthog.slack.com/archives/C0732DWLUA0)
+-   [#cycling](https://posthog.slack.com/archives/C01P1NBUZDY)
+-   [#fitness](https://posthog.slack.com/archives/C03PH4UTD9V)
+-   [#gaming](https://posthog.slack.com/archives/C01HBHP6BRA)
+-   [#golf](https://posthog.slack.com/archives/C09LN9LAR3M)
+-   [#homelab](https://posthog.slack.com/archives/C03PJA57E3V)
+-   [#listening-to](https://posthog.slack.com/archives/C01EJ20SK42)
+-   [#pets](https://posthog.slack.com/archives/C02G88X9R2R)
+-   [#rockets](https://posthog.slack.com/archives/C01LREJ3NPL)
+-   [#running](https://posthog.slack.com/archives/C08HBBYT9DW)
+-   [#stonks](https://posthog.slack.com/archives/C01L9FZBRPD)
 
 ### Location specific channels
 
