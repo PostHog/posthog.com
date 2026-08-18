@@ -138,7 +138,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Run an Indexer scanner across sessions, then filter on the outcome facet for "incomplete" or "abandoned." Group the results by user ID to spot the same Tab-Hopper returning across multiple sessions. Do with this information what you wish.`,
+                body: `Run a Classifier scanner across sessions, then filter on the outcome facet for "incomplete" or "abandoned." Group the results by user ID to spot the same Tab-Hopper returning across multiple sessions. Do with this information what you wish.`,
             },
         ],
     },

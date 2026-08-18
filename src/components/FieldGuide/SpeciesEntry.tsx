@@ -9,9 +9,21 @@ import { Species, SpeciesSection } from './speciesData'
 const PLATE_PAPER = '#F0ECD9'
 const CORAL = '#E1554E'
 
-// The "If you spot one" section names a Replay Vision scanner — link that phrase
-// once per species page to the Replay Vision product page.
-const SCANNER_RE = /((?:Monitor|Classifier|Indexer|Summarizer) scanner)/
+// The "If you spot one" section names a Replay Vision scanner type — link that
+// phrase to the matching section of the scanner-types docs.
+const SCANNER_DOC = '/docs/replay-vision/scanner-types'
+const SCANNER_ANCHOR: Record<string, string> = {
+    Monitor: '#monitor',
+    Classifier: '#classifier',
+    Scorer: '#scorer',
+    Summarizer: '#summarizer',
+}
+const SCANNER_RE = new RegExp(`((?:${Object.keys(SCANNER_ANCHOR).join('|')}) scanner)`)
+
+function scannerHref(phrase: string): string {
+    const type = phrase.split(' ')[0]
+    return `${SCANNER_DOC}${SCANNER_ANCHOR[type] ?? ''}`
+}
 
 function renderSectionBody(section: SpeciesSection): React.ReactNode {
     if (section.label !== 'If you spot one') return section.body
@@ -19,7 +31,7 @@ function renderSectionBody(section: SpeciesSection): React.ReactNode {
     if (parts.length < 3) return section.body
     return parts.map((part, i) =>
         SCANNER_RE.test(part) && i === 1 ? (
-            <Link key={i} to="/replay-vision" state={{ newWindow: true }} className="se-link">
+            <Link key={i} to={scannerHref(part)} state={{ newWindow: true }} className="se-link">
                 {part}
             </Link>
         ) : (

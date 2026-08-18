@@ -37,10 +37,17 @@ export default function HowToUse(): JSX.Element {
     return (
         <section className="htu" id="how-to-use">
             <div className="htu-inner">
-                {/* PDF not uploaded yet — drop the file at static/field-guide-to-wild-users.pdf to activate. */}
-                <a href="/field-guide-to-wild-users.pdf" download className="htu-ebook">
-                    Prefer reading it as an ebook? Download the PDF
-                </a>
+                <aside className="htu-ebook-callout">
+                    <p className="htu-ebook-text">
+                        <strong>Prefer reading it as an ebook?</strong> Take the whole guide with you into the field.{' '}
+                        {/* PDF not uploaded yet — drop the file at static/field-guide-to-wild-users.pdf to activate. */}
+                        <a href="/field-guide-to-wild-users.pdf" download className="htu-ebook-link">
+                            Download the PDF
+                        </a>
+                        .
+                    </p>
+                </aside>
+
                 <h2 className="htu-title">How to use this guide</h2>
                 <p className="htu-p htu-p--full">
                     Each species in this guide follows the same structure, which has been refined over many years of
@@ -98,11 +105,13 @@ export default function HowToUse(): JSX.Element {
                 <div className="htu-closing">
                     <p className="htu-closing-text">
                         These are the species we have seen often enough to name. There are more in your own product,
-                        waiting to be catalogued. Replay Vision keeps watching while you build.
+                        waiting to be catalogued. The watching does not stop when you close this guide.{' '}
+                        <Link to="/replay-vision" state={{ newWindow: true }} className="htu-closing-link">
+                            Replay Vision
+                        </Link>{' '}
+                        keeps its eye on every session while you build, and brings the ones worth your attention back to
+                        you.
                     </p>
-                    <Link to="/replay-vision" state={{ newWindow: true }} className="htu-closing-cta">
-                        Start at posthog.com/replay-vision →
-                    </Link>
                     <Link to="/field-guide/closing-note" state={{ newWindow: true }} className="htu-closing-more">
                         Read the full closing note
                     </Link>
@@ -127,24 +136,33 @@ export default function HowToUse(): JSX.Element {
                     margin: 0 0 1.25rem;
                     color: ${INK};
                 }
-                .htu-ebook {
-                    display: inline-block;
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    font-size: 14px;
-                    letter-spacing: 0.2px;
-                    color: ${INK};
-                    background: var(--yellow, #F7A501);
-                    border: 1.5px solid ${INK};
-                    border-bottom-width: 3px;
-                    border-radius: 6px;
-                    padding: 0.6rem 1.1rem;
-                    margin: 0 0 1.75rem;
-                    text-decoration: none;
-                    transition: transform 120ms ease, box-shadow 120ms ease;
+                .htu-ebook-callout {
+                    display: flex;
+                    align-items: center;
+                    gap: clamp(0.75rem, 2cqw, 1.25rem);
+                    background: rgba(247, 165, 1, 0.14);
+                    border: 1px solid rgba(69, 28, 1, 0.2);
+                    border-left: 4px solid var(--yellow, #F7A501);
+                    border-radius: 8px;
+                    padding: clamp(0.85rem, 2.5cqw, 1.35rem) clamp(1rem, 3cqw, 1.75rem);
+                    margin: 0 0 2rem;
                 }
-                .htu-ebook:hover { transform: translateY(-1px); box-shadow: 2px 3px 0 rgba(69, 28, 1, 0.18); }
-                .htu-ebook:active { transform: translateY(1px); box-shadow: none; }
+                .htu-ebook-icon { font-size: clamp(22px, 3cqw, 30px); line-height: 1; flex-shrink: 0; }
+                .htu-ebook-text {
+                    margin: 0;
+                    font-size: clamp(14px, 1.7cqw, 16px);
+                    line-height: 1.55;
+                    color: ${INK};
+                }
+                .htu-ebook-text strong { font-weight: 700; }
+                .htu-ebook-link {
+                    color: ${INK};
+                    font-weight: 700;
+                    text-decoration: none;
+                    border-bottom: 2px solid ${CORAL};
+                    padding-bottom: 1px;
+                }
+                .htu-ebook-link:hover { color: ${CORAL}; }
                 .htu-p {
                     font-size: clamp(14px, 1.7cqw, 16px);
                     line-height: 1.65;
@@ -202,13 +220,13 @@ export default function HowToUse(): JSX.Element {
                     gap: 0.6rem;
                     text-align: center;
                     padding: 1rem 0.75rem;
-                    border: 1px solid rgba(69, 28, 1, 0.15);
+                    border: 1px solid ${CORAL};
                     border-radius: 6px;
                     background: rgba(255, 255, 255, 0.35);
                     text-decoration: none;
-                    transition: border-color 150ms ease, transform 150ms ease;
+                    transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
                 }
-                .htu-card:hover { border-color: ${CORAL}; transform: translateY(-2px); }
+                .htu-card:hover { border-color: ${CORAL}; transform: translateY(-2px); box-shadow: 0 4px 0 rgba(225, 85, 78, 0.25); }
                 .htu-card-img {
                     height: 64px;
                     display: flex;
@@ -245,19 +263,14 @@ export default function HowToUse(): JSX.Element {
                     margin: 0 auto 1.25rem;
                     color: ${INK};
                 }
-                .htu-closing-cta {
-                    display: inline-block;
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 0.6px;
-                    font-size: 13px;
+                .htu-closing-link {
                     color: ${INK};
-                    text-decoration: none;
-                    border-bottom: 2px solid ${CORAL};
-                    padding-bottom: 2px;
+                    font-weight: 600;
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                    text-decoration-thickness: 1px;
                 }
-                .htu-closing-cta:hover { color: ${CORAL}; }
+                .htu-closing-link:hover { color: ${CORAL}; }
                 .htu-closing-more {
                     display: block;
                     margin-top: 1rem;

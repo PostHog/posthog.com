@@ -177,7 +177,7 @@ export default function Hero(): JSX.Element {
 
             <p className="fg-map-note">
                 Ranges are illustrative and the cartography wholly invented; the species observe no borders and neither,
-                it seems, did our mapmaker. Please do not navigate by it.
+                it seems, did our mapmaker.
             </p>
 
             <div className="fg-title-block">
@@ -185,7 +185,7 @@ export default function Hero(): JSX.Element {
                 <p className="fg-subtitle">
                     Observed in their natural habitat: the{' '}
                     <Link to="/session-replay" state={{ newWindow: true }} className="fg-subtitle-link">
-                        Session replay
+                        Session Replay
                     </Link>
                 </p>
             </div>
@@ -272,7 +272,7 @@ export default function Hero(): JSX.Element {
                     font-size: clamp(9px, 1.05cqw, 12px);
                     line-height: 1.4;
                     opacity: 0.5;
-                    max-width: 62ch;
+                    max-width: none;
                     margin: 0.75rem auto 0;
                     padding-inline: 1rem;
                     color: ${INK};
