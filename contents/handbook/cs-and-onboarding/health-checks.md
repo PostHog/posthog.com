@@ -67,6 +67,15 @@ As with `identify()` above users may also end up calling `posthog.group()` more 
 
 You should get in touch and let them know that they only need to call `posthog.group()` [once per group per session](/docs/product-analytics/group-analytics#how-to-create-groups), or when the group changes.
 
+Before you reach out, work out *why* the volume is high — the fix differs:
+
+- **Which library are the events coming from?**  Server-side SDKs have no browser state to deduplicate against, so their group identify methods always send an event.  Only the JavaScript Web SDK deduplicates.
+- **Are the calls passing properties?**  In the Web SDK, `posthog.group()` only captures a `$groupidentify` when the group key is new or changed *or* when properties are passed.  So `group('company', id)` on a key the browser has already stored sends nothing, but `group('company', id, { plan: 'pro' })` sends one every single time — even if the group was already identified and `plan` was already `pro`.  An empty object counts as properties, so `group('company', id, {})` also sends on every call.
+- **Are those properties actually changing?**  If they aren't changing meaningfully, recommend passing properties only where they're loaded or updated, and calling bare `group(type, key)` everywhere else.
+- **What posthog-js version are they on?**  This deduplication behavior is new.  Before posthog-js 1.364.7, `posthog.group()` *without* properties sent nothing at all, so the group was never created in PostHog.  A customer on an older version passing `{}` may be deliberately working around that — they need to upgrade before dropping the properties argument.
+
+There's also a [skill for investigating identify and groupidentify volume](https://us.posthog.com/project/2/skills/investigating-identify-and-groupidentify-volume) you can use to dig into this.
+
 To see where duplicate groupidentify calls are being generated, you can use the following SQL:
 
 ```
