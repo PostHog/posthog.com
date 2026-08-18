@@ -238,9 +238,10 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
         addWindow(
             (
                 <SideProjectForm
-                    // Keyed per project: a fixed key would let React reuse a still-open form's
-                    // state, so submitting could overwrite one project with another's values
-                    key={project ? `side-project-form-${project.id ?? project.title}` : 'side-project-form'}
+                    // The key must match the appSettings entry exactly or the window system
+                    // won't apply the fixed-modal config; the form itself re-seeds its state
+                    // when the target project changes, since React reuses the instance
+                    key="side-project-form"
                     location={{
                         pathname: project ? `side-project-form-${project.id ?? project.title}` : 'side-project-form',
                     }}

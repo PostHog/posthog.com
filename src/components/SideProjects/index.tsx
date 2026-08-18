@@ -392,11 +392,18 @@ export const SideProjectForm = ({
     const [submitting, setSubmitting] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
+    // The element key must stay "side-project-form" so the window system resolves the fixed
+    // modal's appSettings, which means React reuses this instance when one project's form
+    // replaces another's – re-seed the state whenever the target project changes so a submit
+    // can't write a stale project's values to the new record
     useEffect(() => {
+        setValues(toFormValues(project))
+        setFeaturedImage(project?.projectThumbnail ? { id: 0, url: project.projectThumbnail } : undefined)
+        setError(null)
         if (appWindow) {
             setWindowTitle(appWindow, project ? 'Edit project' : 'Add a project')
         }
-    }, [])
+    }, [project?.id ?? project?.title ?? ''])
 
     const closeForm = () => {
         onCancel?.()
