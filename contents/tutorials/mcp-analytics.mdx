@@ -4,6 +4,7 @@ date: 2026-07-07
 author:
   - arda-eren
   - lucas-faria
+  - georgis
 showTitle: true
 tags:
   - product analytics
@@ -32,7 +33,7 @@ The full source code for the manual approach is available in this [GitHub reposi
 
 ## The quick way: the `@posthog/mcp` SDK
 
-[`@posthog/mcp`](/docs/mcp-analytics) wraps your MCP server and captures analytics automatically – no per-tool instrumentation. It supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`.
+[`@posthog/mcp`](/docs/mcp-analytics) wraps your MCP server and captures analytics automatically – no per-tool instrumentation. It supports any TypeScript MCP server, on [either major](/docs/mcp-analytics/sdk-v2) of the MCP SDK.
 
 The fastest way to set it up is our wizard, which installs the package, adds your `posthog-node` client, and wires up the `instrument()` call for you (it also works with [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor):
 
@@ -46,7 +47,9 @@ npm install @posthog/mcp posthog-node
 
 Then call `instrument(server, posthog)` once at startup. You bring your own `posthog-node` client and pass it in as the second argument:
 
-```typescript
+<MultiLanguage>
+
+```typescript file="MCP SDK v1"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -61,7 +64,24 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
 instrument(server, posthog)
 ```
 
-That's it. From the first tool call, the SDK emits PostHog events automatically, all prefixed with `$mcp_*` so they never collide with your other data and all sharing a `$session_id` derived from the MCP protocol session:
+```typescript file="MCP SDK v2"
+import { McpServer } from "@modelcontextprotocol/server"
+import { PostHog } from "posthog-node"
+import { instrument } from "@posthog/mcp"
+
+const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
+
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+  host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
+})
+
+// Register your tools with registerTool() – their handlers run untouched.
+instrument(server, posthog)
+```
+
+</MultiLanguage>
+
+That's it. From the first tool call, the SDK emits PostHog events automatically, all prefixed with `$mcp_*` so they never collide with your other data and all sharing a `$session_id` derived from the MCP protocol session (on `2026-07-28` there is no protocol session – see [sessions on SDK v2](/docs/mcp-analytics/sdk-v2#sessions-on-2026-07-28)):
 
 - `$mcp_tool_call` for every tool invocation (with parameters, response, duration, and error status)
 - `$mcp_tools_list` for every `tools/list` response, so you can compare advertised vs. called tools
@@ -73,10 +93,13 @@ It also unlocks signals the manual approach can't easily capture, each a one-lin
 - **[Agent intent](/docs/mcp-analytics/intent)** – the *why* behind each call, captured as `$mcp_intent`
 - **[Identifying users](/docs/mcp-analytics/identifying-users)** – attribute calls to a real user behind the agent
 - **[Missing capabilities](/docs/mcp-analytics/missing-capability)** – a queryable feed of things agents wished your server supported
+- **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – `enableConversationId: true`, which is how you get a shared `$session_id` on MCP SDK v2 serving `2026-07-28`, since that revision has no protocol session of its own
 
 Remember to drain queued events on shutdown by calling `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` handler, since you own the client's lifecycle.
 
 > **Note:** `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – so pin a specific version while we iterate. Running a custom dispatcher with no server object to wrap? See [Custom servers](/docs/mcp-analytics/custom-servers).
+
+On MCP SDK v2, one thing does need changing: if your `identify`, `intentFallback`, `eventProperties` or `beforeSend` callbacks read HTTP headers, read them through the exported `getRequestHeaders(extra)`. The two majors put headers in different places, and a v1-shaped read returns `undefined` on v2 – so `identify()` returns `null` and every event goes out anonymous. See [MCP SDK v2](/docs/mcp-analytics/sdk-v2).
 
 To go deeper, see the [getting started guide](/docs/mcp-analytics/start-here), the [installation docs](/docs/mcp-analytics/installation), and the [event reference](/docs/mcp-analytics/events).
 

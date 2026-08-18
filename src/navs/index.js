@@ -7123,6 +7123,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'MCP SDK v2',
+                    url: '/docs/mcp-analytics/sdk-v2',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
                     name: 'Custom servers',
                     url: '/docs/mcp-analytics/custom-servers',
                     icon: 'IconServer',
