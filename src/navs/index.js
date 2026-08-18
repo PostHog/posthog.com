@@ -2276,6 +2276,7 @@ export const companyMenu = {
             ],
         },
         { name: 'Careers', icon: 'IconLaptop', color: 'purple', url: '/careers' },
+        { name: 'Side projects', icon: 'IconRocket', color: 'purple', url: '/side-projects' },
     ],
 }
 
@@ -6256,6 +6257,10 @@ export const docsMenu = {
                         {
                             name: 'Join data across sources',
                             url: '/docs/data-warehouse/join',
+                        },
+                        {
+                            name: 'Sync to person properties',
+                            url: '/docs/data-warehouse/warehouse-properties',
                         },
                         {
                             name: 'Visualize with insights',
