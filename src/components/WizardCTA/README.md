@@ -42,6 +42,22 @@ Two props, depending on how much of the command you want to own.
 
 Use `copyCommand` alongside it when the clipboard should differ from the display.
 
+## Replacing the image
+
+`image` swaps the wizard hedgehog for any URL:
+
+```mdx
+<WizardCTA image="https://res.cloudinary.com/dmukukwp6/image/upload/some_other_hog.png" />
+```
+
+**It scales, but it does not crop.** The image gets the banner's responsive widths (`w-36` up to `w-48`, tracking the banner's own width rather than the viewport's, since the banner sits inside resizable windows), and the height follows whatever aspect ratio you give it. So:
+
+- A roughly square, transparent PNG — like the hedgehogs — drops straight in and needs nothing.
+- A markedly wider or taller image still fits the width, but its height changes the banner's height with it. Pass `imageClassName` to size it yourself, e.g. `imageClassName="w-24 @lg:w-32"` for something tall, or a fixed `h-*` plus `object-contain`.
+- A photo or an image with a solid background will look wrong against the tan texture. Use a cutout with transparency.
+
+Set `imageAlt` whenever the image conveys meaning. It defaults to the hedgehog's alt text for the default image and to `''` (decorative) for a replacement, so a swapped-in image never inherits a description of a different picture.
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -51,6 +67,9 @@ Use `copyCommand` alongside it when the clipboard should differ from the display
 | `copyCommand` | `string?` | – | Clipboard override, if it should differ from what's displayed |
 | `title` | `string?` | "Install PostHog with one command" | Bold headline |
 | `subtitle` | `string?` | "Paste this into your terminal and make AI do all the work." | Supporting line |
+| `image` | `string?` | wizard hedgehog | Image URL; prefer a transparent PNG on Cloudinary |
+| `imageAlt` | `string?` | hedgehog alt, or `''` for a replacement | Alt text; set it if the image carries meaning |
+| `imageClassName` | `string?` | `w-36 @lg:w-32 @xl:w-40 @2xl:w-48` | Sizing classes, replacing the responsive width defaults |
 | `learnMoreTo` | `string?` | `/wizard` | "Learn more" link target under the command |
 | `className` | `string?` | – | Extra classes on the outer wrapper |
 

@@ -4,6 +4,16 @@ import PlatformInstall from 'components/PlatformInstall'
 
 const DEFAULT_TITLE = 'Install PostHog with one command'
 const DEFAULT_SUBTITLE = 'Paste this into your terminal and make AI do all the work.'
+const DEFAULT_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png'
+const DEFAULT_IMAGE_ALT = 'PostHog Wizard hedgehog'
+
+/**
+ * Container-query widths for the image, so it tracks the banner's own width rather than the
+ * viewport's — the banner lives inside resizable app windows. Height is left to the image's aspect
+ * ratio; a replacement that isn't roughly as wide as it is tall will change the banner's height, so
+ * `imageClassName` can override this wholesale.
+ */
+const DEFAULT_IMAGE_CLASSES = 'w-36 @lg:w-32 @xl:w-40 @2xl:w-48'
 
 /**
  * Wizard install banner for prose (blog posts, docs) and the `/r/*` landing pages.
@@ -28,6 +38,9 @@ export default function WizardCTA({
     copyCommand,
     title = DEFAULT_TITLE,
     subtitle = DEFAULT_SUBTITLE,
+    image = DEFAULT_IMAGE,
+    imageAlt,
+    imageClassName = DEFAULT_IMAGE_CLASSES,
     learnMoreTo,
     className = '',
 }: {
@@ -42,6 +55,16 @@ export default function WizardCTA({
     copyCommand?: string
     title?: string
     subtitle?: string
+    /** Image URL, replacing the wizard hedgehog. Prefer a transparent PNG on Cloudinary. */
+    image?: string
+    /**
+     * Alt text for `image`. Defaults to the hedgehog's alt for the default image and to `''` for a
+     * replacement — a swapped-in image is treated as decorative rather than silently inheriting a
+     * description of a different picture. Set it whenever the image carries meaning.
+     */
+    imageAlt?: string
+    /** Sizing/positioning classes for the image, replacing the responsive width defaults. */
+    imageClassName?: string
     /** "Learn more" link target under the command. Defaults to `/wizard`. */
     learnMoreTo?: string
     className?: string
@@ -73,9 +96,9 @@ export default function WizardCTA({
                     </div>
                     <div className="shrink-0">
                         <img
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png"
-                            alt="PostHog Wizard hedgehog"
-                            className="w-36 @lg:w-32 @xl:w-40 @2xl:w-48"
+                            src={image}
+                            alt={imageAlt ?? (image === DEFAULT_IMAGE ? DEFAULT_IMAGE_ALT : '')}
+                            className={`object-contain ${imageClassName}`}
                         />
                     </div>
                 </div>
