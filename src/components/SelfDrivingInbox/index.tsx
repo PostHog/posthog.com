@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { skillsByOwner } from 'components/PocketGuides/skillFiles'
+
 import { InboxTemplate, UNCATEGORIZED } from './types'
 
 export function useSelfDrivingTemplates(): InboxTemplate[] {
@@ -65,10 +67,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
     return useMemo(() => {
         const nodes = data?.guides?.nodes || []
 
-        // Keyed by the guide slug that owns each scout: /pocket-guides/x/SKILL -> /pocket-guides/x
-        const scoutsByTemplate = new Map<string, any>(
-            (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
-        )
+        // Keyed by the guide slug that owns each scout – same convention the session replay
+        // volume uses for its skill, so the slug rule lives in PocketGuides/skillFiles.
+        const scoutsByTemplate = skillsByOwner(data?.scouts?.nodes)
 
         return (
             nodes

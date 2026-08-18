@@ -17,6 +17,7 @@ import {
     TriggerGroupFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Setup, Watches, proseComponents } from './bookPieces'
+import SkillFile from './SkillFile'
 import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
@@ -56,6 +57,7 @@ export const bookMdxComponents = {
     AskAI,
     CTA,
     ScannerTemplate,
+    SkillFile,
     Term,
     ...proseComponents,
 }

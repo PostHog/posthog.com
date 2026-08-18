@@ -104,6 +104,36 @@ export const TERMS = {
             'PostHog can automatically capture a variety of events in your app – clicks, form submissions, pageviews – without specific tracking code.',
         slug: '/docs/product-analytics/autocapture',
     },
+    scanner: {
+        title: 'Scanner',
+        description:
+            'A scanner is a Replay Vision probe you configure once: a prompt describing what to look for, a type deciding the shape of the answer, and filters choosing which recordings it runs against.',
+        slug: '/docs/replay-vision/scanner-types',
+    },
+    observation: {
+        title: 'Observation',
+        description:
+            "One scanner applied to one recording. Each observation is saved as a `$recording_observed` event, so a scanner's output behaves like any other event in PostHog.",
+        slug: '/docs/replay-vision/observations',
+    },
+    masking: {
+        title: 'Masking',
+        description:
+            'Masking replaces content with asterisks or a blank box before it leaves the device, so what you mask never reaches PostHog. It applies at capture time – a replay recorded unmasked stays that way.',
+        slug: '/docs/session-replay/privacy',
+    },
+    'trigger group': {
+        title: 'Trigger group',
+        description:
+            'A set of conditions that decide whether a session is recorded, with its own sample rate and minimum duration. Groups are ORed, so a session records if it matches any of them.',
+        slug: '/docs/session-replay/how-to-control-which-sessions-you-record',
+    },
+    'rage click': {
+        title: 'Rage click',
+        description:
+            'Several clicks in quick succession on the same element – PostHog captures it as a `$rageclick` event, and it usually means something looked clickable and did nothing.',
+        slug: '/docs/session-replay/how-to-watch-recordings',
+    },
     'replay vision': {
         title: 'Replay Vision',
         description:

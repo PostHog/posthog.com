@@ -20,18 +20,7 @@ You need a reverse proxy to reliably capture replays.
 
 Ad blockers keep lists of know analytics domains and block requests to them. This will often result in incomplete or missing replays being captured. Using a reverse proxy lets you route through your own domain, so captures are not blocked.
 
-## What gets blocked
-
-These are the destinations required for Session Replay to work. They're also commonly blocked by ad blockers. When you set up a reverse proxy, these are the destinations to proxy.
-
-| Serves | US Cloud | EU Cloud |
-| --- | --- | --- |
-| The SDK, the replay recorder, and your project's config<br />`/static/*` and `/array/*` | `us-assets.i.posthog.com` | `eu-assets.i.posthog.com` |
-| Everything else: events, recorded session data, feature flags | `us.i.posthog.com` | `eu.i.posthog.com` |
-
-Nothing errors when a recording is blocked. The recording just never appears in PostHog which is frustrating to debug.
-
-## Setting one up with PostHog
+## Set up a reverse proxy
 
 PostHog runs a free, managed proxy for you. It sits on a subdomain you own, and PostHog handles the SSL
 certificate, the routing, and the maintenance.
@@ -45,6 +34,7 @@ or `ph` is already on the block lists you're trying to avoid.
 
 **Turn your DNS provider's own proxy off.** On Cloudflare that's the grey cloud, not the orange
 one. Leaving it on breaks certificate provisioning.
+
 
 ## Limits of a proxy
 

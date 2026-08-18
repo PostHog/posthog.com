@@ -49,7 +49,7 @@ Four things can watch replays on your behalf:
 | Robot | What it does | What you get |
 | --- | --- | --- |
 | Session summary | PostHog AI reads the event stream of one session, or twenty, and writes what happened | A written account, and the pattern across a batch |
-| <Term name="replay vision">Replay Vision</Term> scanner | Our model that watches every matching replay, continuously | An observation per session, saved as a `$recording_observed` event you can query |
+| <Term name="replay vision">Replay Vision</Term> <Term name="scanner" /> | Our model that watches every matching replay, continuously | An <Term name="observation" /> per session, saved as a `$recording_observed` event you can query |
 | Session Replay <Term name="signal" /> | Spots rage clicks and friction, raises them | A <Term name="report" /> in your <Term name="inbox" />, grouped with related findings |
 | <Term name="scout">Scout</Term> | Queries anything in PostHog on a schedule – events, insights, warehouse tables, and the observations above | A report too, but only when the answer to its question changes |
 
@@ -66,7 +66,7 @@ Rather than watching them all to spot a pattern, ask for the batch and let it su
 - <AskAI q="What are users struggling with on the pricing page?" />
 - <AskAI q="Summarize sessions from enterprise users who churned" />
 
-It's at its best on [experiments](/docs/experiments). Metrics tell you which variant won, summaries tell you why.
+It's at its best on <Term name="experiment">experiments</Term>. Metrics tell you which variant won, summaries tell you why.
 
 - <AskAI q="What behavioral differences do you see between variant A and variant B?" />
 
@@ -74,7 +74,7 @@ Summarizing a session also marks up its player timeline: green segments where th
 
 ## Set up a scanner
 
-A scanner is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
+A <Term name="scanner" /> is three things: a **prompt** saying what to look for, a **type** saying what shape the answer takes, and **filters** saying which recordings it runs against. PostHog then asks that question of every matching session, forever.
 
 Here are some templates to give you inspiration and get you started.
 
@@ -106,7 +106,7 @@ WHERE event = '$recording_observed'
 
 Signals and scouts make your product <Term name="self-driving" />.
 
-A <Term name="signal" /> is a finding with its evidence attached. Session Replay raises them two ways: it spots rage clicks and friction on its own, and any scanner can hand over what it finds by flipping **Emit findings as Signals** in the editor. Related signals group into a <Term name="report" /> in your <Term name="inbox" />, so one problem arrives as one item rather than three.
+A <Term name="signal" /> is a finding with its evidence attached. Session Replay raises them two ways: it spots <Term name="rage click">rage clicks</Term> and friction on its own, and any scanner can hand over what it finds by flipping **Emit findings as Signals** in the editor. Related signals group into a <Term name="report" /> in your <Term name="inbox" />, so one problem arrives as one item rather than three.
 
 A <Term name="scout" /> lets agents monitor those signals and act on them on your behalf – dig into the root cause, then draft a pull request <SeeFig n={1} />. You stay in control of what ships.
 
