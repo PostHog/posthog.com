@@ -173,6 +173,14 @@ function CampusMixerForm({ school, setSchool, campusTarget }: CampusMixerFormPro
         }
 
         if (emailInput && emailInput.value) {
+            // Also write identity to the person profile: the site runs person_profiles
+            // 'identified_only', so without this anonymous applicants have no
+            // person.properties.email for downstream automations to key on.
+            posthog?.setPersonProperties?.({
+                email: emailInput.value,
+                name: nameInput?.value,
+                school,
+            })
             posthog?.capture('student_mixer_application', {
                 name: nameInput?.value,
                 email: emailInput.value,
