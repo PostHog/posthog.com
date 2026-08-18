@@ -26,14 +26,7 @@ export const objectAccessControlLight =
 export const objectAccessControlDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_dark_17f1adda40.png";
 
-PostHog's access control system manages permissions at three levels: organization, project, and resource.
-
-## Data and property access
-
-Resource access controls who can open dashboards, flags, and other product surfaces. Separate controls restrict the data itself:
-
-- **[Warehouse access control](/docs/settings/warehouse-access-control)** – Restrict who can query warehouse tables and views, including through [PostHog AI](/docs/posthog-ai) and the API.
-- **[Hiding sensitive properties](/docs/settings/hiding-sensitive-properties)** – Hide event and person properties from filters and queries. Requires the [Enterprise plan](/platform-packages).
+PostHog's access control system allows you to manage permissions at three levels: organization, project, and resource. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
 
 ## Levels of access control
 
@@ -113,23 +106,22 @@ Currently, resource access controls are available for:
 - Insights
 - LLM analytics
 - Logs
+- Managed data warehouse sources
+- Warehouse tables and views
 - Notebooks
 - Session recordings
 - Surveys
 - Traces
 - Toolbar
-- Data warehouse sources
-- Warehouse tables
-- Warehouse views
 - Web analytics
 - Workflows
 - (more resource types coming soon – looking for others? Let us know!)
 
-<CalloutBox icon="IconWarning" title="Native tables, replay, and profiles are not restricted yet" type="caution">
+Resource access controls limit who can open product surfaces in the UI or execute the corresponding MCP tools.
 
-Resource access controls limit who can open product surfaces in the PostHog UI and API. They don't restrict querying PostHog's native tables (`events`, `sessions`, `persons`, `groups`), viewing session replays, or opening person and group profiles.
+<CalloutBox icon="IconWarning" title="Native tables aren't restricted yet" type="caution">
 
-[Warehouse tables and views](/docs/settings/warehouse-access-control) are restricted at query time, including through [PostHog AI](/docs/posthog-ai) and the API. You can also [hide event and person properties](/docs/settings/hiding-sensitive-properties).
+Queries to the core PostHog tables (`events`, `sessions`, `persons`, `groups`) through the SQL editor or MCP still work. To prevent queries from returning sensitive event or person properties (for example, `email`), configure [property access control](/docs/settings/property-access-control).
 
 </CalloutBox>
 
@@ -177,6 +169,16 @@ You cannot set resource-level access controls for organization admins, as they a
   alt="Resource access control"
   classes="rounded"
 />
+
+## Warehouse access control
+
+When you connect external sources to PostHog through the [Data Warehouse](/docs/data-warehouse), you can configure who can query the data synced into PostHog. Apply access controls to all sources or to a specific one, table, or view. See [warehouse access control](/docs/settings/warehouse-access-control) for details.
+
+## Property access control
+
+Event or person data may contain sensitive properties (for example, email addresses). To prevent someone from exporting your entire user base, configure [property access control](/docs/settings/property-access-control).
+
+When a property is restricted, explicit reads return `NULL`, and results that include all properties omit it. This applies in both the SQL editor and MCP.
 
 ## How object access control precedence works
 
@@ -239,7 +241,19 @@ Here are some practical examples of how to configure access controls for differe
 
 #### Hide PII from vendors
 
-Restrict properties such as `email` from a vendor role. See [hiding sensitive properties](/docs/settings/hiding-sensitive-properties#hide-pii-from-vendors).
+**Scenario**: You want to share your event data with vendors while restricting access to a property containing PII (e.g. `email`).
+
+**Setup**:
+
+1. Create a role for the vendor (e.g. "Vendor", "External collaborator")
+2. Create a property definition for the property if one does not already exist, otherwise edit the existing definition
+3. Navigate to the "Roles" tab under the "Access control" section of the property definition page
+4. Find your vendor role and select "Add override"
+5. Select "No access"
+6. Save the property definition
+7. Any member with the vendor role will not be able to access the PII property
+
+To restrict additional properties, repeat steps 2–6 for each one.
 
 ## Feature availability
 

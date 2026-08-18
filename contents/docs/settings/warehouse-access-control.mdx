@@ -9,16 +9,9 @@ availability:
   enterprise: full
 ---
 
-You can restrict who can access warehouse sources and query warehouse tables and views. Organization, project, and resource access (dashboards, flags, and the rest) lives on [access control](/docs/settings/access-control). To hide event and person properties, see [hiding sensitive properties](/docs/settings/hiding-sensitive-properties).
+You can restrict who can access warehouse sources and query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Organization, project, and resource access lives on [access control](/docs/settings/access-control). To hide event and person properties, see [property access control](/docs/settings/property-access-control).
 
-## What's covered
-
-- Warehouse tables, whether synced from a source or self-managed
-- Warehouse views, including [materialized views](/docs/data-warehouse/views/materialize)
-
-## What's not covered yet
-
-You can't yet restrict querying of PostHog's native tables (`events`, `sessions`, `persons`, `groups`). Session replay and person and group profiles are also unrestricted at the data layer. You can still hide individual [event and person properties](/docs/settings/hiding-sensitive-properties).
+You can't yet restrict querying the core PostHog tables (`events`, `sessions`, `persons`, `groups`). Session Replay and person and group profiles are also unrestricted at the data layer.
 
 ## Warehouse tables and views
 
@@ -46,12 +39,12 @@ Same four levels as other resources:
 For tables synced from a source (Stripe, Postgres, HubSpot, and so on), PostHog checks in this order:
 
 1. A rule on that table
-2. A rule for all tables and views
-3. A rule on that table's source
+2. A rule on that table's source
+3. A rule for all tables and views
 4. A rule for all sources
 5. The default
 
-Self-managed tables (S3, file uploads, direct connections) have no source, so steps 3 and 4 don't apply.
+Self-managed tables (S3, file uploads, direct connections) have no source, so steps 2 and 4 don't apply.
 
 Restricting a source to **No access** blocks querying every table synced from it, unless a table-level rule overrides it.
 
@@ -59,13 +52,13 @@ For example, Stripe set to **Viewer** with no table rules means every Stripe tab
 
 ### Views and materialized views
 
-Access is on the view, not the tables it reads.
+Granting access to a regular view doesn't bypass access controls on the tables it reads. If an underlying table is denied, the query fails.
 
-Granting a view while denying its underlying tables only works for [materialized views](/docs/data-warehouse/views/materialize). A regular view expands to its SQL and hits the table check, so the query still fails.
+For [materialized views](/docs/data-warehouse/views/materialize), access is checked on the view itself. Use a materialized view to expose selected data from a restricted table.
 
 ### Shared links
 
-[Shared insights, dashboards, and notebooks](/docs/product-analytics/sharing) run without warehouse access control. Publishing the link is the access decision.
+[Shared insights, dashboards, and notebooks](/docs/product-analytics/sharing) run without warehouse access control.
 
 ## Feature availability
 

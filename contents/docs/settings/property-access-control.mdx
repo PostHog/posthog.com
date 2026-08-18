@@ -1,5 +1,5 @@
 ---
-title: Hiding sensitive properties with access control
+title: Property access control
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-Hide event and person properties from members who shouldn't see them. Restricted properties don't show up in filters, and SQL returns them as null.
+Use property access control to hide sensitive event and person properties from members who shouldn't see them. Restricted properties don't appear in filters and are masked in SQL.
 
 This is a separate feature from [resource access control](/docs/settings/access-control) and [warehouse access control](/docs/settings/warehouse-access-control). It requires the [Enterprise plan](/platform-packages).
 
@@ -24,11 +24,11 @@ Organization admins always have full access.
 
 Levels:
 
-- **Read & write** – Can query the property, and update person property values in the UI or API. This is the default.
-- **Read only** – Can query the property, but cannot change person property values.
-- **No access** – Hidden. Can't be queried or filtered on. In SQL, the property reads as null rather than erroring.
+- **Read & write** – Can query the property and update person property values in the UI or API. This is the default.
+- **Read only** – Can query the property, but can't change person property values.
+- **No access** – Can't view, query, or filter by the property. Explicit SQL reads return `NULL`, and whole-property objects omit the key.
 
-Read only vs Read & write only differs for person properties you can edit. Event properties are captured data, so both levels can query them.
+For event properties, **Read only** and **Read & write** behave the same because captured events can't be edited.
 
 Group properties aren't restricted at query time.
 

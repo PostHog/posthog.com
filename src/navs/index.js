@@ -3905,8 +3905,8 @@ export const docsMenu = {
                                     url: '/docs/settings/warehouse-access-control',
                                 },
                                 {
-                                    name: 'Hiding sensitive properties',
-                                    url: '/docs/settings/hiding-sensitive-properties',
+                                    name: 'Property access control',
+                                    url: '/docs/settings/property-access-control',
                                 },
                             ],
                         },
