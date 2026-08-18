@@ -193,6 +193,21 @@
     ],
     "redirects": [
         {
+            "source": "/questions/topic/max",
+            "destination": "/questions/topic/ai",
+            "statusCode": 301
+        },
+        {
+            "source": "/community/latest",
+            "destination": "/community",
+            "statusCode": 301
+        },
+        {
+            "source": "/old-home",
+            "destination": "/",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
             "statusCode": 301
