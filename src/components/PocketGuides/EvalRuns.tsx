@@ -37,7 +37,10 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                 <thead>
                     <tr>
                         <th className={HEAD}>Timestamp</th>
-                        <th className={HEAD}>
+                        {/* aria-label pins the column-header name to the short word: without it the
+                            marker button's long gloss folds into the header and a screen reader
+                            repeats the whole sentence on every row. The button stays its own control. */}
+                        <th className={HEAD} aria-label="Target">
                             Target{' '}
                             <AnatomyMarker
                                 n={1}
@@ -45,7 +48,7 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                                 gloss="The generation that was scored. Click through to the trace it belongs to."
                             />
                         </th>
-                        <th className={HEAD}>
+                        <th className={HEAD} aria-label="Result">
                             Result{' '}
                             <AnatomyMarker
                                 n={2}
@@ -53,7 +56,7 @@ export default function EvalRuns({ runs }: { runs: EvalRun[] }): JSX.Element {
                                 gloss="Pass or fail. N/A and Skipped are their own outcomes – a generation the eval couldn't judge isn't a failure."
                             />
                         </th>
-                        <th className={`${HEAD} pr-0`}>
+                        <th className={`${HEAD} pr-0`} aria-label="Reasoning">
                             Reasoning{' '}
                             <AnatomyMarker
                                 n={3}
