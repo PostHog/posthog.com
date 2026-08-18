@@ -247,30 +247,30 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
+-   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY)
+-   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F)
 -   [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U) - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   [#general](https://posthog.slack.com/archives/CSPHFDZH8)
 -   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
 -   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
 -   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
 -   [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4)
 -   [#dev](https://posthog.slack.com/archives/C0113360FFV)
--   [#general](https://posthog.slack.com/archives/CSPHFDZH8)
 -   [#alerts](https://posthog.slack.com/archives/C0185UNBSJZ)
 -   [#industry-news](https://posthog.slack.com/archives/C01NWR6F58F)
 -   [#changelog](https://posthog.slack.com/archives/C099B0YCULT) - keep up with all the cool things we're shipping across the team
+-   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 
 ### Social channels
 
 We encourage you to join and create channels focused around different types of hobbies and interests. We explicitly don't allow channels based on categories that we legally (and rightly!) can't discriminate against in the hiring process, such as gender, sex, political affiliation, religion, and age. 
 
-#### Watercooler
+#### Daily chit-chat
 
--   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
+-   [#casual-ask-posthog-anything](https://posthog.slack.com/archives/C0B5F648MDE)
 -   [#design-inspiration](https://posthog.slack.com/archives/C01KEAGD601)
 -   [#devel-random](https://posthog.slack.com/archives/C02EJABQ39R)
--   [#food](https://posthog.slack.com/archives/C02EYG134RW)
 -   [#hoglife](https://posthog.slack.com/archives/C033D5NTA22)
--   [#kids](https://posthog.slack.com/archives/C076X3C284D)
 -   [#memespo](https://posthog.slack.com/archives/C0AD19VV7MH)
 -   [#no-context-posthog](https://posthog.slack.com/archives/C0790T52ZHT)
 -   [#random](https://posthog.slack.com/archives/CT2BU33N1)
@@ -284,19 +284,23 @@ We encourage you to join and create channels focused around different types of h
 -   [#climbing](https://posthog.slack.com/archives/C08QQ4HGV8R)
 -   [#coffee-snobs](https://posthog.slack.com/archives/C0732DWLUA0)
 -   [#cycling](https://posthog.slack.com/archives/C01P1NBUZDY)
+-   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
+-   [#food](https://posthog.slack.com/archives/C02EYG134RW)
 -   [#fitness](https://posthog.slack.com/archives/C03PH4UTD9V)
 -   [#gaming](https://posthog.slack.com/archives/C01HBHP6BRA)
 -   [#golf](https://posthog.slack.com/archives/C09LN9LAR3M)
 -   [#homelab](https://posthog.slack.com/archives/C03PJA57E3V)
+-   [#kids](https://posthog.slack.com/archives/C076X3C284D)
 -   [#listening-to](https://posthog.slack.com/archives/C01EJ20SK42)
 -   [#pets](https://posthog.slack.com/archives/C02G88X9R2R)
 -   [#rockets](https://posthog.slack.com/archives/C01LREJ3NPL)
 -   [#running](https://posthog.slack.com/archives/C08HBBYT9DW)
 -   [#stonks](https://posthog.slack.com/archives/C01L9FZBRPD)
+-   [#wedding-planners](https://posthog.slack.com/archives/C082AS81RD0)
 
 ### Location specific channels
 
-Join wherever you're based, plus anywhere you travel often - they're the easiest way to find teammates for a coffee, a coworking day, or dinner while you're in town. Where a location has both a country-wide and a city channel, the country one comes first.
+Join wherever you're based, plus anywhere you travel often - posting in these channels is the easiest way to find teammates for a coffee, a coworking day, or dinner while you're in town.
 
 -   **Austria:** [#vienna](https://posthog.slack.com/archives/C09GE5B5AQ2)
 -   **Canada:** [#canada](https://posthog.slack.com/archives/C09GRQL9FUN)
@@ -309,6 +313,4 @@ Join wherever you're based, plus anywhere you travel often - they're the easiest
 -   **Portugal:** [#lisbon](https://posthog.slack.com/archives/C097A897XP1)
 -   **Spain:** [#spain](https://posthog.slack.com/archives/C090ADXGJGH), [#barcelona](https://posthog.slack.com/archives/C09E9Q37YCA)
 -   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5)
--   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC)
-
-Can't see your city? Create the channel - we're happy for these to multiply as the team spreads out.
+-   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF),  [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG)
