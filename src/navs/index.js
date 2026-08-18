@@ -6845,6 +6845,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Skills',
+                    url: '/docs/ai-observability/skills',
+                    icon: 'IconMagicWand',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
                     name: 'API',
                     url: '/docs/ai-observability/surfaces/api',
                     icon: 'IconBrackets',

@@ -435,6 +435,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       sourcePath: String
       mcpTools: [String]
     }
+    type McpTool implements Node @dontInfer {
+      name: String
+      title: String
+      summary: String
+      category: String
+      feature: String
+    }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
       sourceId: String
