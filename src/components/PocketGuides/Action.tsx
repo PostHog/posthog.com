@@ -23,7 +23,7 @@ function destination(cta: BookPageCta): { href: string; kind: string } {
 
 /**
  * A chapter's one action, for volumes whose answer isn't a scout. Same job as `<Enable />`:
- * every use case ends on something the reader can do, authored in `cta:` frontmatter so the
+ * every use case ends on something the reader can do, authored in `pocketGuideCta:` frontmatter so the
  * pinned bar and the page's own block never drift apart.
  */
 export default function Action(): JSX.Element | null {

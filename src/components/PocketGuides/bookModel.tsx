@@ -33,7 +33,7 @@ export interface BookPageEntry {
     cta?: BookPageCta
 }
 
-/** A non-scout chapter's CTA, authored in frontmatter so the pinned bar can read it too. */
+/** A non-scout chapter's CTA, authored in `pocketGuideCta:` frontmatter so the pinned bar can read it too. */
 export interface BookPageCta {
     /** `prompt` hands the reader a PostHog AI prompt; `link` sends them somewhere. */
     kind?: 'prompt' | 'link'
@@ -64,8 +64,8 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                     frontmatter {
                         title
                         shortTitle
-                        bookOrder
-                        cta {
+                        pocketGuideOrder
+                        pocketGuideCta {
                             kind
                             label
                             prompt
@@ -87,18 +87,18 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
         const byUrl = new Map(templates.map((template) => [normalizeUrl(template.url), template]))
 
         const pages = (data?.pages?.nodes || [])
-            // This volume only. SKILL files and `_` starters aren't pages; no `bookOrder` keeps
+            // This volume only. SKILL files and `_` starters aren't pages; no `pocketGuideOrder` keeps
             // a draft unlisted.
             .filter(
                 (node: any) =>
                     volumeIdFromUrl(node.fields.slug) === volumeId &&
                     !node.fields.slug.endsWith('/SKILL') &&
                     !/\/_/.test(node.fields.slug) &&
-                    typeof node.frontmatter?.bookOrder === 'number'
+                    typeof node.frontmatter?.pocketGuideOrder === 'number'
             )
             .map((node: any) => {
                 const url = normalizeUrl(node.fields.slug)
-                const order = node.frontmatter.bookOrder
+                const order = node.frontmatter.pocketGuideOrder
                 return {
                     url,
                     title: node.frontmatter.title,
@@ -106,7 +106,7 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
                     order,
                     isFrontMatter: order === 0,
                     template: byUrl.get(url),
-                    cta: node.frontmatter.cta || undefined,
+                    cta: node.frontmatter.pocketGuideCta || undefined,
                 }
             })
             .sort((a: BookPageEntry, b: BookPageEntry) => a.order - b.order)

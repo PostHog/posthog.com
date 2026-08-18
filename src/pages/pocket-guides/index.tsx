@@ -17,7 +17,7 @@ function useGuideCounts(): Record<string, number> {
                     }
                     frontmatter {
                         title
-                        bookOrder
+                        pocketGuideOrder
                     }
                 }
             }
@@ -33,7 +33,7 @@ function useGuideCounts(): Record<string, number> {
         }
         // Reading order says what a page is: 0 is the front matter, 1 the 101, 2+ the use cases.
         // Counting those rather than scout reports keeps volumes whose answer isn't a scout honest.
-        if (node.frontmatter.bookOrder >= 2) {
+        if (node.frontmatter.pocketGuideOrder >= 2) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

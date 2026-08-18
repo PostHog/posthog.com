@@ -41,10 +41,10 @@ contents/pocket-guides/<volume>/<slug>/
 
 - **Copy `contents/pocket-guides/self-driving/_starter/`** to begin – it's a commented skeleton
   of both files, kept out of every gallery by the `_` prefix.
-- **Frontmatter carries the structured data**: `title`, `shortTitle`, `bookOrder` (reading
+- **Frontmatter carries the structured data**: `title`, `shortTitle`, `pocketGuideOrder` (reading
   order; 0 is the front matter, omit to keep a draft unlisted), the `report` block that renders
   as the inbox figures, `watches`, `requires`, `category`, and `schedule`.
-- **A non-scout chapter carries a `cta:` block instead** – `kind: prompt` with the PostHog AI
+- **A non-scout chapter carries a `pocketGuideCta:` block instead** – `kind: prompt` with the PostHog AI
   prompt itself, or `kind: link` with a destination – rendered by `<Action />` where the chapter
   wants it, and repeated in the reader's pinned bar automatically.
 - **A new volume is a directory plus a row in `src/constants/pocketGuides.ts`.** The reader reads
