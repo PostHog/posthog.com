@@ -14,7 +14,10 @@ cta:
     when the answer contradicts the retrieved context, when it invents a fact the context doesn't
     support, or when it refuses a question the context clearly answers. Sample at 10%, exclude
     generations where the environment property is dev or local, and show me the pass rate over the
-    last 30 days broken down by model and by prompt version.
+    last 30 days broken down by $ai_model and by my prompt-version property if my generations have
+    one. If my project has no real $ai_generation traffic yet, create the eval disabled anyway,
+    skip the breakdowns, and tell me
+    how to instrument AI observability using the wizard or manual install.
 ---
 
 <LeftPage>

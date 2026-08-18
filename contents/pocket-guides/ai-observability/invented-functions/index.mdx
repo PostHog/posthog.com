@@ -15,7 +15,8 @@ cta:
     when the output calls a function that appears nowhere in that context, printing the function
     name as the reason. Enable Allows N/A, sample at 100%, exclude generations where the
     environment property is dev or local, and show me the pass rate over the last 30 days broken
-    down by model and by prompt version.
+    down by $ai_model and by my prompt-version property if my generations have one. If my project
+    has no real $ai_generation traffic yet, create the eval disabled anyway, skip the breakdowns, and tell me how to instrument AI observability using the wizard or manual install.
 ---
 
 <LeftPage>
@@ -85,7 +86,7 @@ That's what a <Term name="code-based evaluation">code-based eval</Term> is perfe
 
 The eval runs inside PostHog rather than on your servers, so you write it in <Term name="hog">Hog</Term>, the language PostHog compiles and runs itself. Nothing of yours has to be awake for a generation to get scored.
 
-You don't have to write it by hand either. **Generate with AI** in the code editor opens PostHog AI with your evaluation loaded and drafts the Hog for you, which is what the prompt at the end of this guide does.
+You don't have to write it by hand either. **Generate with AI** in the code editor opens PostHog AI with your evaluation loaded and drafts the Hog for you. The prompt at the end of this guide takes the same route.
 
 The eval hands three things to you:
 - `input` – what the model was given, the file included
@@ -133,17 +134,17 @@ Then, test it on a sample. This runs the eval against a subset of recent generat
 ## Read the runs
 
 Every result lands on the generation it scored:
-- **Reasoning** is your `print()` output
-- **Result** is `true` or `false` (names `formatCurrency`)
+- **Reasoning** is your `print()` output – the middle row names `formatCurrency`, so you know what to look for
+- **Result** is `True`, `False`, or `N/A`
 - **Target** points back to the generation so you can open that <Term name="trace" /> and read the file the assistant was actually handed
 
-An example of these results are outlined in <SeeFig n={1} /> below.
+An example of these results is outlined in <SeeFig n={1} /> below.
 
 ## When it starts failing
 
 Once enough generations have been scored you have a pass rate: how often your assistant only calls things that exist.
 
-In <SeeFig n={2} />, generations hold flat at around 9,000 a day and nothing errors, while the pass rate drops from 94% to 71% the day prompt v12 shipped. That prompt told the model to reuse existing helpers where it could, so it invented them to comply. Without the eval running, the first you'd hear is a developer complaining weeks later. You can also split the pass rate by `$ai_model` and by prompt version to see which one broke.
+In <SeeFig n={2} />, generations hold flat at around 9,000 a day and nothing errors, while the pass rate drops from 94% to 71% the day prompt v12 shipped. That prompt told the model to reuse existing helpers where it could, so it invented them to comply. Without the eval running, the first you'd hear is a developer complaining weeks later. You can also split the pass rate by `$ai_model` and `$ai_prompt_version` to see which one broke.
 
 ## Build it with PostHog AI
 
