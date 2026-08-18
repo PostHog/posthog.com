@@ -141,12 +141,26 @@ export const sessionReplay = {
                 },
             },
         },
+        'player-overview': {
+            // Store the bare delivery URL: CloudinaryImage falls back to a plain <img> for any
+            // src containing a comma, and that branch drops `className` – which is where the
+            // dark/light toggle lives, so an inline-transformation URL renders both variants.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
+            alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
+            // 2578x1300. The light and dark variants show different sessions but the same three
+            // panels at the same size, so one set of panel-level coordinates holds for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
+        },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_dark_f5371a996f.png',
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
+            // 1110x640, measured against the light variant – the dark one is the same screen at
+            // the same size, so coordinates hold for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',

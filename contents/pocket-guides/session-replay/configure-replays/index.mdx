@@ -1,0 +1,96 @@
+---
+# Scoped to trigger groups only. Retention, cost, "what else you can turn on", and "when replay
+# isn't an option" were cut from this page – they're in git if any of them earns a home later.
+#
+# Masking moved to Protecting user privacy.
+title: Control which sessions to record
+shortTitle: Which sessions to record
+subtitle: Configure which sessions to record and keep costs low.
+bookOrder: 2
+---
+
+<RightPage>
+
+# Control which sessions to record
+
+If you get thousands or millions of visitors a day, you can't watch _every_ replay. PostHog gives you a few knobs to keep only the useful sessions and keep costs low.
+
+## Trigger groups
+
+Sessions are recorded when they meet the conditions of a <Term name="trigger group" />. These rules decide when a session recording _begins_ and _ends_.
+
+<TriggerGroupFigure
+    n={1}
+    caption="One trigger group: the conditions that start a recording, and the sample rate and minimum duration that thin it."
+/>
+
+## The controls
+
+| Control | Reach for it when |
+| --- | --- |
+| Sample rate | Select N% of sessions to record at random. |
+| Minimum duration | Discard sessions that are too short or are bounces. |
+| Event triggers | Only sessions where something specific happened, like someone visiting the pricing page. |
+| URL patterns | Only record sessions that match your URL patterns, like checkout. |
+| Feature flag | You're rolling something out and want the sessions of the people who got it. |
+
+## How groups play together
+
+It can be difficult to understand exactly how these rules play together. A few things hold in every case:
+- Groups are combined with `OR` logic, so a session records if it matches any of them
+- Inside a group, the `match type` decides whether a session needs any of the conditions or all of them
+- The sample rate is applied last to the matching set of sessions.
+
+## Examples
+
+Each one is a trigger group you can hand to PostHog AI and have it set up for you.
+
+<details>
+
+<summary>Record every checkout session, and 5% of everything else</summary>
+
+Two groups. The first has a URL pattern for your checkout path and a 100% sample rate. The second has no conditions at all and a 5% sample rate.
+
+A session on checkout matches the first group and records. Everything else falls to the second, where the sample rate decides. A session that matches both still only records once.
+
+<AskAI q="Set up Session Replay trigger groups: record 100% of sessions that visit my checkout URL, and 5% of everything else" />
+
+</details>
+
+<details>
+
+<summary>Record sessions where a paying customer hit an exception</summary>
+
+One group, match type set to **all**: an event trigger on your exception event, plus a feature flag you've rolled out to paying customers.
+
+With **any** instead, you'd get every exception from every user, plus every session from a paying customer – a much larger net than you meant to cast.
+
+<AskAI q="Set up a Session Replay trigger group that records only sessions where a user on my paying-customer feature flag hit an exception" />
+
+</details>
+
+<details>
+
+<summary>Everything is being recorded and you don't know why</summary>
+
+Check for a group with no conditions on it. An empty group matches every session, so its sample rate becomes your recording rate for the whole project, and any narrower group you've set up stops mattering.
+
+This is also what you get if you delete your last group – PostHog replaces it with a "Record all sessions" group at 100% rather than leaving you recording nothing.
+
+</details>
+
+## Sane defaults
+
+If you don't know what to set yet, start here:
+
+- **Record 100% of sessions.** Turn the sample rate down once you know how much you're actually recording, not before. Be realistic about how many you plan to watch.
+- **Set a minimum duration of 2 seconds or more.** A one-second bounce is billed like any other recording with nothing in it to watch, this will reduce junk volume.
+
+
+<SeeAlso>
+
+See also: [Control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record) · [Recording retention](/docs/session-replay/recording-retention) · [Pricing](/session-replay/pricing) · [Privacy controls](/pocket-guides/session-replay/protecting-user-privacy)
+
+</SeeAlso>
+
+</RightPage>

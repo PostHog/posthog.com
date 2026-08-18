@@ -2,7 +2,11 @@ import React from 'react'
 
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
 
+import CloudinaryImage from 'components/CloudinaryImage'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
+import type { Annotation } from 'components/ImageAnnotations'
+import type { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
+import { useProductScreenshot } from 'components/ImageAnnotations/useProductScreenshot'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
 import Divergence, { DivergenceSeries } from './Divergence'
@@ -10,9 +14,15 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import PersonsModal, { PersonsModalProps } from './PersonsModal'
+import RedirectLoop from './RedirectLoop'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
+import TriggerGroupForm, { TriggerGroupFormProps } from './TriggerGroupForm'
 import { useTemplate } from './bookContext'
+import { FigureGlossKey, FigureGlossProvider, FigureMarker, useFigureGlossCollector } from './FigureMarker'
+
+type CloudinarySrc = `https://res.cloudinary.com/${string}`
 
 /** The loop, drawn. Wording from /docs/self-driving/self-improving-loop. */
 const LOOP_STAGES = [
@@ -34,12 +44,106 @@ interface FigProps {
     children?: React.ReactNode
 }
 
-/** `<Fig n={1} caption="…">` – any exhibit. The numbered frame and caption come from here. */
+/**
+ * `<Fig n={1} caption="…">` – any exhibit. The numbered frame and caption come from here.
+ * Markers inside register their glosses, which print as a numbered key under the exhibit on
+ * narrow readers – there, hover isn't available to reveal them in place.
+ */
 export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
+    const { register, glosses } = useFigureGlossCollector()
     return (
         <Figure number={n} caption={caption} legend={legend ? <span className="mt-1 block">{legend}</span> : undefined}>
-            {children}
+            <FigureGlossProvider value={register}>
+                {children}
+                <FigureGlossKey glosses={glosses} />
+            </FigureGlossProvider>
         </Figure>
+    )
+}
+
+/**
+ * A screenshot a product page already ships, framed as a book figure. The image is resolved from
+ * `useProducts`, so the book never holds its own copy of a URL – update the product hook and every
+ * figure citing it follows.
+ *
+ * Annotation copy belongs with the page that says it, so write the markers inline:
+ *
+ *     <ScreenshotFigure n={1} product="session_replay" screenshot="home" caption="…"
+ *         annotations={[{ x: 16, y: 36, title: 'The player', description: 'What it does.' }]} />
+ *
+ * `set` is the other way in: it reuses a named annotation set already stored on the product hook,
+ * for figures that should stay in step with a product page. Inline `annotations` win if both are
+ * given. Coordinates for either are percentages of the image – /image-annotator picks them off a
+ * screenshot for you.
+ */
+export function ScreenshotFigure({
+    n = 1,
+    caption,
+    legend,
+    product,
+    screenshot,
+    set,
+    annotations,
+    alt,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    /** Product handle, e.g. "session_replay". */
+    product: string
+    /** Key in that product's `screenshots` object, e.g. "overview". */
+    screenshot: string
+    /** Named annotation set on the screenshot – for reusing a product page's markers. */
+    set?: string
+    /** Markers written inline, in page order. Takes precedence over `set`. */
+    annotations?: Annotation[]
+    alt?: string
+}): JSX.Element | null {
+    // Checked so a missing screenshot key skips the figure entirely – an empty frame with a
+    // caption reads as a broken figure rather than none.
+    const shot = useProductScreenshot(product, screenshot)
+    if (!shot?.src) {
+        return null
+    }
+    const items: Annotation[] = annotations ?? (set ? shot.annotations?.[set]?.items : undefined) ?? []
+    // The frame already supplies the border and ground, so the product page's drop shadow
+    // would read as a second frame inside it.
+    const imgClasses = 'rounded max-w-full h-auto'
+    return (
+        <Fig n={n} caption={caption} legend={legend ?? (items.length > 0 ? <AnatomyHint /> : undefined)}>
+            <div className="relative leading-[0]">
+                <CloudinaryImage
+                    src={shot.src as CloudinarySrc}
+                    alt={alt ?? shot.alt ?? ''}
+                    className={shot.srcDark ? 'dark:hidden w-full' : 'w-full'}
+                    imgClassName={imgClasses}
+                />
+                {shot.srcDark && (
+                    <CloudinaryImage
+                        src={shot.srcDark as CloudinarySrc}
+                        alt={alt ?? shot.alt ?? ''}
+                        className="hidden dark:inline-block w-full"
+                        imgClassName={imgClasses}
+                    />
+                )}
+                {/* The same markers the anatomy figures use, kept always-visible: on an image
+                    they anchor a spot, so a marker hidden until hover leaves nothing to find. */}
+                {items.map((item, index) => (
+                    <span
+                        key={index}
+                        className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: `${item.x}%`, top: `${item.y}%` }}
+                    >
+                        <FigureMarker
+                            n={index + 1}
+                            label={item.title}
+                            gloss={item.description ?? ''}
+                            visibility="always"
+                        />
+                    </span>
+                ))}
+            </div>
+        </Fig>
     )
 }
 
@@ -86,6 +190,7 @@ export function AnatomyFigure({
     status,
     actionability,
     headline,
+    report,
 }: {
     n?: number
     caption: string
@@ -94,15 +199,22 @@ export function AnatomyFigure({
     status?: string
     actionability?: string
     headline?: string
+    /**
+     * A report written inline, for pages outside the self-driving volume that want to show the
+     * card without being a use case themselves. Use-case pages leave this off and the report
+     * comes from their own frontmatter.
+     */
+    report?: SelfDrivingReport
 }): JSX.Element | null {
     const template = useTemplate()
-    if (!template) {
+    const shown = report ?? template?.report
+    if (!shown) {
         return null
     }
     return (
         <Fig n={n} caption={caption} legend={legend ?? <AnatomyHint />}>
             <ReportAnatomy
-                report={template.report}
+                report={shown}
                 priority={priority}
                 status={status}
                 actionability={actionability}
@@ -201,6 +313,59 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** One trigger group's form: the fields that decide which sessions get recorded. */
+export function TriggerGroupFigure({
+    n = 1,
+    caption,
+    legend,
+    ...group
+}: TriggerGroupFormProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <TriggerGroupForm {...group} />
+        </Fig>
+    )
+}
+
+export function PersonsModalFigure({
+    n = 1,
+    caption,
+    legend,
+    ...modal
+}: PersonsModalProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <PersonsModal {...modal} />
+        </Fig>
+    )
+}
+
+export function RedirectLoopFigure({
+    n = 1,
+    caption,
+    legend,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <RedirectLoop />
         </Fig>
     )
 }

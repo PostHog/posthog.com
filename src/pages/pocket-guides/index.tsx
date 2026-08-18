@@ -4,9 +4,9 @@ import SEO from 'components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { FIRST_GUIDE_BOOK_ORDER, POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
-/** Report-bearing guides per volume (the 101 doesn't count), so the cover is never stale. */
+/** Guides per volume, so the cover is never stale – everything from the first guide's order on. */
 function useGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
@@ -17,9 +17,7 @@ function useGuideCounts(): Record<string, number> {
                     }
                     frontmatter {
                         title
-                        report {
-                            title
-                        }
+                        bookOrder
                     }
                 }
             }
@@ -33,8 +31,8 @@ function useGuideCounts(): Record<string, number> {
         if (!volume || !guide || guide.startsWith('_') || !node.frontmatter?.title) {
             continue
         }
-        // A report in the frontmatter is what makes a page a guide; the 101 has none.
-        if (node.frontmatter.report?.title) {
+        // Unnumbered pages are drafts kept out of the book, so they're not guides either.
+        if ((node.frontmatter.bookOrder ?? 0) >= FIRST_GUIDE_BOOK_ORDER) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

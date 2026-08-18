@@ -1,19 +1,52 @@
 import React from 'react'
 
+import { MdxCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
+import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
+import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
 import { useEntry, useTemplate } from './bookContext'
+import { volumeIdFromUrl } from './bookModel'
+import { volumeArt } from './volumeArt'
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
     return <span className="whitespace-nowrap text-orange">Fig.&nbsp;{n}</span>
 }
 
+/**
+ * The setup command, for the prerequisite a volume states once before anyone reaches a chapter.
+ * `subcommand` picks the wizard's flavor – omit it for the plain install, which is what a volume
+ * needs when its product ships with the SDK rather than behind its own wizard step.
+ */
+export function Setup({ subcommand }: { subcommand?: string }): JSX.Element {
+    const wizard = buildWizardCommand({ subcommand })
+    return <CopyableCommand className="my-[0.8em]" command={wizard.displayCommand} copyCommand={wizard.copyCommand} />
+}
+
 /** The small line above a title page's heading. */
 export function Eyebrow({ children }: { children: React.ReactNode }): JSX.Element {
     return <p className="mb-1 text-[0.8em] font-bold uppercase tracking-wide text-secondary">{children}</p>
+}
+
+/**
+ * The volume's specimen on its title page – the same hoggie the shelf cover carries, so a book
+ * still looks like itself once it's open. Not a numbered figure: it illustrates the volume rather
+ * than teaching anything, and the title page keeps its two-column layout only while figure-less.
+ */
+export function Frontispiece(): JSX.Element | null {
+    const Art = volumeArt(volumeIdFromUrl(useEntry()?.entry.url ?? ''))
+    if (!Art) {
+        return null
+    }
+    return (
+        <div aria-hidden="true" className="mb-[1.2em] mt-[2em] flex justify-center @lg:justify-start">
+            {/* Em-based cap: the specimen scales with the reader's Aa control like everything else. */}
+            <Art className="h-auto w-full max-w-[14em]" />
+        </div>
+    )
 }
 
 /** The signal sources this scout reads, from the use case's `watches` frontmatter. */
@@ -133,6 +166,35 @@ export const proseComponents = {
     table: (props: any) => (
         <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto`}>
             <table {...props} />
+        </div>
+    ),
+    // Collapsibles are the one native-styling exception: global.css scopes `details` to `.prose`,
+    // which the book opts out of, and `.article-content` never covers it. So the panel is styled
+    // here instead – em-based like everything else, with the site's own chevron token.
+    details: (props: any) => (
+        <details
+            className="mb-[0.5em] overflow-hidden rounded border border-primary bg-accent text-[1em] dark:bg-accent-dark [&[open]>summary]:border-b [&[open]>summary]:border-primary [&[open]>summary::before]:rotate-90"
+            {...props}
+        />
+    ),
+    summary: (props: any) => (
+        <summary
+            className="relative cursor-pointer list-none py-1.5 pl-8 pr-3 text-[0.95em] font-bold leading-snug text-primary before:absolute before:left-3 before:top-[0.45em] before:size-4 before:bg-bullet-chevron-light before:bg-contain before:bg-center before:bg-no-repeat before:transition-transform before:duration-200 marker:content-[''] dark:before:bg-bullet-chevron-dark [&::-webkit-details-marker]:hidden"
+            {...props}
+        />
+    ),
+    // The site's own code block, same as every other template wires up – syntax highlighting,
+    // copy button, and language tabs all come along. The wrapper sets a text color: the block's
+    // header inherits `currentColor` at half opacity, and the book container sets none, so
+    // without this the language label renders near-invisible against its own background.
+    pre: (props: any) => (
+        <div className="text-primary">
+            <MdxCodeBlock {...props} />
+        </div>
+    ),
+    MultiLanguage: (props: any) => (
+        <div className="text-primary">
+            <MdxCodeBlock {...props} />
         </div>
     ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,

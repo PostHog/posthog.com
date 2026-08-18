@@ -19,6 +19,7 @@ import {
     useBookFontSize,
     useBookPages,
     usePageTurnKeys,
+    volumeIdFromUrl,
 } from './bookModel'
 
 /** The page body: the reader's wrapper interleaves each figure after the block citing it. */
@@ -41,10 +42,11 @@ interface BookPageProps {
 
 /** Any page of a pocket guide: the layout is fixed, every word comes from the MDX. */
 export default function BookPage({ slug, body }: BookPageProps): JSX.Element | null {
-    const pages = useBookPages()
+    const url = normalizeUrl(slug)
+    // The page's own volume is the book it's in – tabs, contents, and turns stay inside it.
+    const pages = useBookPages(volumeIdFromUrl(url))
     const { fontSize, stepFontSize } = useBookFontSize()
 
-    const url = normalizeUrl(slug)
     const index = pages.findIndex((page) => page.url === url)
     const entry = pages[index]
     const previous = pages[index - 1]

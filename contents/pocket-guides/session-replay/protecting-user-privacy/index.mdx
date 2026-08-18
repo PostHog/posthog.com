@@ -1,0 +1,68 @@
+---
+# Concepts only, no tabs. Every SDK snippet and every per-platform instruction lives in the
+# SKILL.md beside this file, rendered by <SkillFile /> at the foot of the page.
+#
+# The one place platforms genuinely differ for a reader is where they start and whether reveal
+# exists at all – that's the table, not five panels of prose.
+title: Protecting user privacy
+shortTitle: Privacy
+subtitle: Masking happens on the device, before anything is sent. Decide it before real traffic arrives.
+bookOrder: 3
+---
+
+<RightPage>
+
+# Protecting user privacy
+
+Session Replay gives you insights into user behavior, but it can also turn creepy if you're not careful.
+
+Here are the important privacy controls you should know for each platform, but don't sweat the implementation details, there's a skill you can copy at the end of the guide.
+
+## Mask first, allow explicitly
+
+If a page could contain sensitive data, mask **all** text, then unmask safe content explicitly.
+
+The other order is whack-a-mole. Mask fields as you notice them and every screen you forget is recorded in full, and you find out by watching a replay you shouldn't have been able to see.
+
+<Term name="masking">Masking</Term> spreads to everything inside the element you put it on, so you mark a layout, a screen, or a component rather than each field in it. A field someone adds inside a masked layout next month is masked the day it ships.
+
+## Where each platform starts
+
+Web is the only one that starts exposed. Everywhere else the SDK masks first and your job is revealing what you've checked.
+
+| Platform | Out of the box | Can you reveal one thing? |
+| --- | --- | --- |
+| Web | Inputs masked, all other text recorded as it appears | Yes, but through a callback rather than a selector |
+| Android | Text and images masked, recorded as a wireframe | Yes, and revealing beats masking |
+| iOS | Text and images masked, recorded as a wireframe | Yes, and revealing beats masking |
+| React Native | Text, inputs, and images masked, always a screenshot | No – only an app-wide default |
+| Flutter | Text and images masked, always a screenshot | No – only an app-wide default |
+
+## Blocking is not masking
+
+Masking asterisks the text and keeps the layout. Blocking replaces the element with a blank box, and also stops autocapture events firing from inside it – so you lose the clicks as well as the pixels.
+
+Mask unless you need the thing gone completely.
+
+## Blindspots
+
+Mask every sensitive screen and you've covered what's visible. Four things are still going out.
+
+- **The URL.** The player shows it and the timeline lists it. Query strings carry auth tokens, emails, and user IDs, and no amount of text masking touches them.
+- **Network payloads.** Request and response bodies and headers, if you've turned network capture on. One callback covers both these and the URL.
+- **Canvas.** If you record canvas, you're recording pixels. No selector reaches inside one.
+- **Element attributes.** A masked element can still ship a `title`, an `alt`, or a `value` carrying the thing you masked. Masking attributes costs replay fidelity, so it's off by default.
+
+## Take this skill with you
+
+Pass it to your agent and implement masking before capturing session replays in production. Mask everything by default, then, based on what you need to see, reveal fields and components individually.
+
+<SkillFile />
+
+<SeeAlso>
+
+See also: [Privacy controls](/docs/session-replay/privacy) · [Mobile replay](/docs/session-replay/mobile) · [Network recording](/docs/session-replay/network-recording) · [Control which sessions to record](/pocket-guides/session-replay/configure-replays)
+
+</SeeAlso>
+
+</RightPage>
