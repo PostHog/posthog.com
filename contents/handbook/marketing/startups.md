@@ -10,7 +10,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC, <$25m raised, company email domain     |
+| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
 | Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, Replay Vision, PostHog AI, Inbox) |
@@ -57,7 +57,10 @@ You can find the copy for the latest deal on Bookface in this [doc](https://docs
 
 > ✅ Credits **can** be used to claim a BAA under the Boost plan.
 
-YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain, and we ask for a screenshot from Bookface to prove their eligibility.
+YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain. To prove their eligibility, we ask for:
+
+-   A [YC founder verification link](https://www.ycombinator.com/verify), which founders can create at [ycombinator.com/verify/manage](https://www.ycombinator.com/verify/manage). We check it automatically against YC's API: the link must be valid and can't have been used by another organization before. If the check shows the founder's batch and company match the application, it's verified automatically. Mismatches are flagged for manual review rather than rejected, and if YC is unreachable the application goes through flagged for a manual check.
+-   A screenshot from Bookface showing they've marked themselves as using the PostHog deal.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
 
