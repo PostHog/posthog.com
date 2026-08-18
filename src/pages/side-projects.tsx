@@ -26,8 +26,13 @@ import { useWindow } from '../context/Window'
 const VISIBLE_TAG_COUNT = 10
 
 const formatPrettyUrl = (url: string): string => {
-    const { hostname, pathname } = new URL(url, 'https://posthog.com')
-    return `${hostname}${pathname === '/' ? '' : pathname}`.replace(/\/$/, '')
+    // A malformed stored URL must degrade to its raw text, not crash every visitor's gallery
+    try {
+        const { hostname, pathname } = new URL(url, 'https://posthog.com')
+        return `${hostname}${pathname === '/' ? '' : pathname}`.replace(/\/$/, '')
+    } catch {
+        return url
+    }
 }
 
 const TagPill = ({
@@ -446,10 +451,10 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                     {loading
                                         ? 'Loading…'
                                         : hasActiveFilters
-                                        ? `${filteredCurrent.length + filteredAlumni.length} of ${
-                                              projects.length
-                                          } projects`
-                                        : `${projects.length} projects`}
+                                          ? `${filteredCurrent.length + filteredAlumni.length} of ${
+                                                projects.length
+                                            } projects`
+                                          : `${projects.length} projects`}
                                 </span>
                                 {hasActiveFilters && (
                                     <button

@@ -89,7 +89,8 @@ export const normalizeTags = (tags?: string[]): string[] => {
     const seen = new Set<string>()
     const normalized: string[] = []
     tags?.forEach((tag) => {
-        const canonical = TAG_ALIASES[tag] || tag
+        // Own-property check: a tag like "constructor" must not hit Object.prototype
+        const canonical = (Object.prototype.hasOwnProperty.call(TAG_ALIASES, tag) && TAG_ALIASES[tag]) || tag
         if (!seen.has(canonical)) {
             seen.add(canonical)
             normalized.push(canonical)
@@ -214,8 +215,9 @@ export const SideProjectGraphic = ({
             >
                 <div className="grid min-h-0 flex-1 grid-cols-[7fr_3fr]">
                     <div className="flex min-w-0 flex-col justify-between">
+                        {/* The card's only rendering of the title – it must stay in the accessibility
+                            tree so the project link has an identifiable name */}
                         <div
-                            aria-hidden="true"
                             className={`m-0 break-words font-squeak font-bold uppercase leading-[0.95] ${
                                 title.length > 24 ? 'text-[6.5cqw]' : title.length > 13 ? 'text-[8cqw]' : 'text-[10cqw]'
                             }`}
@@ -400,8 +402,19 @@ export const SideProjectForm = ({
     const setValue = (key: keyof SideProjectFormValues) => (event: React.ChangeEvent<HTMLInputElement>) =>
         setValues((prev) => ({ ...prev, [key]: event.target.value }))
 
-    // Absolute http(s) URLs or site-relative paths like /deskhog (per the internal-link convention)
-    const isValidProjectUrl = (value: string): boolean => /^(https?:\/\/|\/)/.test(value)
+    // Absolute http(s) URLs or site-relative paths like /deskhog (per the internal-link convention).
+    // Must actually parse: a bare "http://" would throw when the card formats it for display
+    const isValidProjectUrl = (value: string): boolean => {
+        if (!/^(https?:\/\/|\/)/.test(value)) {
+            return false
+        }
+        try {
+            new URL(value, 'https://posthog.com')
+            return true
+        } catch {
+            return false
+        }
+    }
 
     const githubUrl = values.githubUrl.trim()
     const liveUrl = values.liveUrl.trim()
@@ -409,11 +422,11 @@ export const SideProjectForm = ({
     const canSubmit =
         Boolean(
             values.title.trim() &&
-                values.description.trim() &&
-                values.projectAuthor.trim() &&
-                (githubUrl || liveUrl) &&
-                (!githubUrl || isValidProjectUrl(githubUrl)) &&
-                (!liveUrl || isValidProjectUrl(liveUrl))
+            values.description.trim() &&
+            values.projectAuthor.trim() &&
+            (githubUrl || liveUrl) &&
+            (!githubUrl || isValidProjectUrl(githubUrl)) &&
+            (!liveUrl || isValidProjectUrl(liveUrl))
         ) && !submitting
 
     const handleSubmit = async (event: React.FormEvent) => {
