@@ -6,57 +6,54 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Embedded analytics, also called customer-facing analytics, shows your customers data about their own users.
+You can use PostHog to power analytics dashboards inside your product. Capture your customers' events in PostHog, query the data, and display the results in your own UI. This is often easier than building and maintaining your own infrastructure.
 
-Before building it, decide how to separate each customer's data. You can store every customer's data in one PostHog project or create a project for each customer.
+This is called embedded analytics, or customer-facing analytics. You can store all customer data in one PostHog project and filter it by customer, or create a separate project for each customer.
+
+## How person profiles can merge
+
+[Person profiles](/docs/data/persons) and [distinct IDs](/docs/getting-started/identify-users) are scoped to a project. If two customers use the same distinct ID, PostHog treats them as the same person.
+
+For example, suppose your platform lets customers publish apps and see pageviews and conversions in a built-in dashboard. Two customer apps identify the same visitor with the user ID `123`. If both apps send data to one PostHog project, the events appear in one person profile and timeline. Funnels and other per-user insights can then combine activity from both apps.
+
+Prevent this by including the customer ID in each identified user's distinct ID:
+
+```ts
+posthog.identify(`${customerId}:${user.id}`)
+```
+
+This prevents identified users from different customers from sharing a profile. Anonymous activity can still merge if customer workspaces share browser storage, because the browser SDK can use the same anonymous distinct ID across those workspaces.
+
+Once distinct IDs are unique to each customer, a single project works well for dashboards embedded in your product. A project per customer is better when you plan to provide direct PostHog access or need project-level data separation.
 
 <CalloutBox icon="IconLightBulb" type="info" title="Our recommendation">
 
-Use a **project per customer** for user-level analytics or when you need to isolate customer data. Use a **single project** for aggregate metrics that don't rely on person profiles.
+Use one project with customer-scoped distinct IDs when customers only view analytics inside your product. Use a project per customer when customers need access to PostHog.
 
 </CalloutBox>
 
 | | Single project | Project per customer |
 |---|---|---|
 | **Data** | Store all customer data together and filter it by a `customer_id` property. | Store each customer's data in a separate project. |
-| **Best for** | Aggregate metrics that don't rely on person profiles. | User-level analytics, data isolation, or direct customer access to PostHog. |
-| **Person profiles** | Shared across customers and may merge. | Separate for each customer. |
-| **Setup** | Use one project and one project token. | Create projects with the [projects API](/docs/api/projects). |
+| **Best for** | Dashboards displayed inside your product. | Giving customers direct access to PostHog. |
+| **Person profiles** | Require customer-scoped distinct IDs to prevent merging. | Automatically separated by project. |
+| **Querying** | Pass a customer identifier to an Endpoint or the Query API. | Query each customer's project. |
 | **Plan** | Available without an add-on. | Requires the [Boost add-on](/platform-packages) for unlimited projects. |
 
-## Store all customers in one project
+## Use one project with customer filters
 
-Add a customer identifier, such as `customer_id`, to each event. Then pass it as a filter or variable when you query data with [Endpoints](/docs/endpoints) or the [Query API](/docs/api/queries).
+Add a customer identifier, such as `customer_id`, to every event. You can then retrieve data for a specific customer in two ways:
 
-This approach works well for aggregate metrics. It doesn't isolate person profiles between customers.
+- Create an [Endpoint with a variable](/docs/endpoints/guide-variables) and pass the customer ID when you call it. This lets one Endpoint serve every customer.
+- Use the [Query API](/docs/api/queries) and filter the query by the customer ID.
 
-### Understand how person profiles can merge
+Run these requests from your backend. Use the authenticated customer's ID rather than accepting an arbitrary ID from the client.
 
-[Person profiles](/docs/data/persons) are scoped to a project. If two customers use the same distinct ID, such as a numeric user ID of `1`, PostHog treats them as the same person.
-
-You can prevent identified users from merging by including the customer ID in the distinct ID:
-
-```ts
-posthog.identify(`${customerId}:${user.id}`)
-```
-
-This doesn't fully isolate anonymous activity. The browser SDK stores an anonymous distinct ID in browser storage. If one person visits multiple customer workspaces that share this storage, their anonymous events can use the same ID. When you call [`identify()`](/docs/product-analytics/identify), PostHog merges those events into the identified profile.
-
-Merged profiles can:
-
-- Mix attribution data, such as UTM parameters and referrers, between customers.
-- Skew metrics that count unique users.
-- Create privacy or legal concerns by mixing customer data.
-
-Use a project per customer if these risks apply to your use case.
+Because all data remains in one project, don't give customers direct PostHog access. Project members can query the project's underlying data even when [resource access controls](/docs/settings/access-control#3-resource-level) hide specific resources.
 
 ## Create a project for each customer
 
-A separate project keeps each customer's events and person profiles apart. Use this approach when you:
-
-- Provide user-level analytics.
-- Need to isolate customer data for privacy, legal, or compliance reasons.
-- Give customers direct access to PostHog.
+A separate project keeps each customer's events and person profiles apart. Use this setup when customers need to log in to PostHog or when you need a project boundary between their data.
 
 ### Create projects with the API
 
@@ -74,10 +71,11 @@ Free organizations include one project. The [Boost add-on](/platform-packages) i
 
 If customers log in to PostHog:
 
-- Use [access control](/docs/settings/access-control) to give each customer access only to their project.
+- Use [project access control](/docs/settings/access-control#2-project-level) to give each customer access only to their project. You can [manage access control through the API](/docs/settings/access-control#api-support).
+- Disable [full organization member visibility](/docs/settings/organizations#member-list-visibility) so customers only see themselves and members of their project.
 - [Enforce two-factor authentication](/docs/settings/account-settings#enabling-2fa) to protect customer data.
 
-### Understand billing
+### Billing
 
 Billing is organization-wide, so usage is combined across all projects. For example, 100 projects sending 20,000 events each count as 2 million events, not 100 separate free tiers.
 
