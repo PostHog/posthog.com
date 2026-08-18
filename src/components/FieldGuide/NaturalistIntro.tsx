@@ -24,9 +24,13 @@ export default function NaturalistIntro(): JSX.Element {
                     <p className="ni-eyebrow">From the naturalist</p>
                     <p className="ni-lead">
                         Watching users used to mean sitting at a single session recording, waiting. Most of the time,
-                        nothing happened. Replay Vision changed that. It reviews every session on its own and surfaces
-                        the ones worth opening: a rage-click at checkout, a fourteenth reload of a dead page. What
-                        follows is a catalog of the species it keeps finding. There are more in your product right now.
+                        nothing happened.{' '}
+                        <Link to="/replay-vision" state={{ newWindow: true }} className="ni-inline-link">
+                            Replay Vision
+                        </Link>{' '}
+                        changed that. It reviews every session on its own and surfaces the ones worth opening: a
+                        rage-click at checkout, a fourteenth reload of a dead page. What follows is a catalog of the
+                        species it keeps finding. There are more in your product right now.
                     </p>
                     <Link to="/field-guide/foreword" state={{ newWindow: true }} className="ni-link">
                         Read the full foreword →
@@ -109,6 +113,14 @@ export default function NaturalistIntro(): JSX.Element {
                     padding-bottom: 2px;
                 }
                 .ni-link:hover { color: ${CORAL}; }
+                .ni-inline-link {
+                    color: ${INK};
+                    font-weight: 600;
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                    text-decoration-thickness: 1px;
+                }
+                .ni-inline-link:hover { color: ${CORAL}; }
                 @container (max-width: 640px) {
                     .ni-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
                 }

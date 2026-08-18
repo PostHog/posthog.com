@@ -211,12 +211,16 @@ export default function HowToUse(): JSX.Element {
                     padding: 0;
                     display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                    grid-auto-rows: 1fr;
                     gap: clamp(0.5rem, 2cqw, 1rem);
                 }
+                .htu-grid > li { display: flex; }
                 .htu-card {
+                    flex: 1;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    justify-content: center;
                     gap: 0.6rem;
                     text-align: center;
                     padding: 1rem 0.75rem;
@@ -248,6 +252,11 @@ export default function HowToUse(): JSX.Element {
                     font-size: 11px;
                     line-height: 1.2;
                     color: ${INK};
+                    /* Reserve two lines so single- and double-line names align */
+                    min-height: 2.4em;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
 
                 .htu-closing {
