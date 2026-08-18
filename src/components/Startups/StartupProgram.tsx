@@ -294,9 +294,8 @@ const faqItems = [
         content: (
             <p>
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
-                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's
-                email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not
-                accepted.
+                signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's email
+                domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.
             </p>
         ),
     },
@@ -660,14 +659,10 @@ export default function StartupProgram({ partnerSlug = null }: StartupProgramPro
                         >
                             ElevenLabs
                         </Link>
-                        ,{' '}
+                        , and{' '}
                         <Link to="/customers/hasura" state={{ newWindow: true }} className="!text-inherit underline">
                             Hasura
                         </Link>
-                        , and{' '}
-                        <Link to="/customers/lovable" state={{ newWindow: true }} className="!text-inherit underline">
-                            Lovable
-                        </Link>{' '}
                         – and built for engineers, with 30k+ stars and 500+ contributors on GitHub.
                     </p>
 

@@ -134,10 +134,10 @@ const BenefitsUnexpected: React.FC = () => {
                     </div>
                 </aside>
                 <div className="order-1 md:order-2 relative">
-                    <h3 className="text-2xl mt-0 mb-2">Monthly co-working or café credit</h3>
+                    <h3 className="text-2xl mt-0 mb-2">Co-working or café credits on us</h3>
                     <p className="max-w-lg mb-3">
-                        Use $300/mo toward a co-working space or coffee shops if that's where you do your best work.
-                        Charge it to your company card – everyone gets one.
+                        If heading out to a co-working space or getting some overpriced coffee from boogie coffee shops is how you do your best work,
+                        you get to charge it to your company card – everyone gets one.
                     </p>
                 </div>
             </div>
@@ -152,8 +152,8 @@ const BenefitsUnexpected: React.FC = () => {
                         get together. We have a special budget for you to do this.
                     </p>
                     <p>
-                        Recent small team off-sites have been in Sicily, Munich, Valencia, Sedona (Arizona), and Palm
-                        Springs (California).
+                        Recent small team off-sites have been in Sicily, Lisbon, Santiago, Cartagena,
+                        Sedona (Arizona), and Palm Springs (California).
                     </p>
                 </div>
                 <aside>
@@ -183,34 +183,12 @@ const BenefitsUnexpected: React.FC = () => {
                 </aside>
                 <div className="relative order-1 md:order-2">
                     <h3 className="text-2xl mt-0 mb-2">
-                        Access to the <span className="text-red dark:text-yellow">Hedge House</span>
+                        Access to the <span className="text-red dark:text-yellow">Hedge Houses</span>
                     </h3>
                     <p className="max-w-lg mb-3">
-                        Work with co-workers (or by yourself) in Cambridge, UK and stay for free whenever you want.
+                        We have a dedicated [coworking space](https://posthog.com/handbook/people/hogpatch) in San Francisco (SF) where you'll often find YC founders/members and some of our team working together. In London, we have a house where you can both work and relax, giving you options for collaborative or solo work in the city. There's also a house in Cambridge, UK available for employees to work from or stay at.  
                     </p>
                 </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 md:items-center gap-4 md:gap-8 lg:gap-12">
-                <div className="relative">
-                    <h3 className="text-2xl mt-0 mb-2">Local meetup budget</h3>
-                    <p className="max-w-lg mb-3">
-                        You're encouraged to meet up with other team members who you don't work with on a regular basis
-                        with a generous quarterly budget.
-                    </p>
-                </div>
-                <aside className="relative">
-                    <div className="border-8 border-white shadow-xl rounded relative rotate-1 leading-[0]">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e.png"
-                            alt=""
-                        />
-                        <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/70 p-2 pt-12 text-sm text-balance leading-tight">
-                            A co-founder, product manager, graphic designer, developer, and webmaster take over a coffee
-                            shop
-                        </div>
-                    </div>
-                </aside>
             </div>
         </section>
     )

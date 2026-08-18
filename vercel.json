@@ -532,7 +532,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -5637,7 +5642,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",
