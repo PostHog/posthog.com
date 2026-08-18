@@ -69,8 +69,8 @@ contents/pocket-guides/<volume>/<slug>/
 A reader who clicks out to the docs mid-page usually doesn't come back. So when a guide names
 something the reader might not know, define it in place:
 
-- **`<Term>`** for a concept – the definition appears on hover, with a "Read the docs" button for
-  anyone who wants the full page.
+- **`<Term>`** for a concept – the definition appears on hover, and clicking the term opens the
+  docs page that owns it.
 - **Figure markers** for parts of a screen – hovering a numbered marker glosses that element.
 - **Plain links** only for things the reader is meant to go *do*, like an install guide, or for a
   neighbouring guide.

@@ -131,8 +131,9 @@ export const proseComponents = {
             <ol {...props} />
         </div>
     ),
+    // Cells get primary directly – the wrapper's secondary is for prose, and table text is data.
     table: (props: any) => (
-        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto`}>
+        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto [&_td]:text-primary [&_th]:text-primary`}>
             <table {...props} />
         </div>
     ),
@@ -152,9 +153,11 @@ export const proseComponents = {
             </SingleCodeBlock>
         </div>
     ),
+    // text-primary, not inherited: the chips sit on a tinted background inside secondary-colored
+    // prose, and the small mono face can't afford the double contrast loss.
     inlineCode: (props: any) => (
         <code
-            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] dark:bg-accent-dark"
+            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] text-primary dark:bg-accent-dark"
             {...props}
         />
     ),

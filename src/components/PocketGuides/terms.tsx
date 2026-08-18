@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Link from 'components/Link'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 import usePostHog from '../../hooks/usePostHog'
 
@@ -14,7 +15,7 @@ export interface TermDefinition {
     title: string
     /** One or two sentences, quoted from the owning docs page. */
     description: string
-    /** The docs page that owns this concept; becomes the card's "Read the docs" link. */
+    /** The docs page that owns this concept; the term itself links there. */
     slug: string
 }
 
@@ -191,19 +192,30 @@ export default function Term({ name, children, className = '' }: TermProps): JSX
     }
 
     return (
-        <Link
-            to={definition.slug}
-            state={{ newWindow: true }}
-            onMouseEnter={() => posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })}
-            // "Read the docs", not "Continue reading": the reader IS reading – this link leaves
-            // the pocket guide for the docs page that owns the term.
-            preview={{ ...definition, ctaLabel: 'Read the docs' }}
-            // Orange dotted + help cursor is the "defined term" affordance; navigation links keep
-            // a solid text-color underline. Color is what separates the two at body size – the
-            // orange matches the book's other teaching apparatus (figure markers, the spine).
-            className={`cursor-help underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`}
+        // A small tooltip, not the site's glossary preview card: the whole word is the link, so
+        // the card carries no button of its own – the arrow under the word says where it belongs.
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <Link
+                    to={definition.slug}
+                    state={{ newWindow: true }}
+                    onMouseEnter={() =>
+                        posthog?.capture('pocket_guide_interaction', { kind: 'term_hover', term: name })
+                    }
+                    // Orange dotted is the "defined term" affordance; navigation links keep a solid
+                    // text-color underline. Color is what separates the two at body size – the
+                    // orange matches the book's other teaching apparatus (figure markers, the spine).
+                    className={`underline decoration-orange decoration-dotted decoration-from-font underline-offset-4 ${className}`}
+                >
+                    {children ?? name}
+                </Link>
+            }
+            contentClassName="max-w-72 select-text px-3 py-2 text-left leading-normal"
         >
-            {children ?? name}
-        </Link>
+            <p className="m-0 text-[0.8125rem] font-bold text-primary">{definition.title}</p>
+            <p className="m-0 mt-0.5 text-[0.8125rem] leading-snug text-secondary">{definition.description}</p>
+        </Tooltip>
     )
 }
