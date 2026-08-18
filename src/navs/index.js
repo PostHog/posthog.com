@@ -2952,7 +2952,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Embedded analytics',
-                            url: '/docs/data/embedded-analytics',
+                            url: '/docs/data/embedded-analytics-projects',
                         },
                         {
                             name: 'Data management',

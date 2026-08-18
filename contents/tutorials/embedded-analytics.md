@@ -13,7 +13,7 @@ If you're building a B2B2C product, *your users* might want analytics about *the
 
 This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog's [queries API](/docs/api/queries), and then displaying it with Recharts.
 
-> **Before you start:** This tutorial stores all customer data in one project and filters it by a customer property. This doesn't isolate person profiles between customers. If you need user-level analytics or data isolation, [create a project for each customer](/docs/data/embedded-analytics).
+> **Before you start:** This tutorial stores all customer data in one project and filters it by a customer property. This doesn't isolate person profiles between customers. If you need user-level analytics or data isolation, [create a project for each customer](/docs/data/embedded-analytics-projects).
 
 > **Note:** In this tutorial, we include a `name` parameter with each query. This makes it easier to identify and debug queries in the [query log](/docs/data/query-log), which is especially useful when building customer-facing analytics.
 
@@ -488,7 +488,7 @@ The response is the same as before but the query is faster, which helps provide 
 
 ## Further reading
 
-- [Project setup for embedded analytics](/docs/data/embedded-analytics)
+- [Project setup for embedded analytics](/docs/data/embedded-analytics-projects)
 - [How to use Recharts to visualize analytics data (with examples)](/tutorials/recharts)
 - [How to use React Charts to visualize analytics data (with examples)](/tutorials/react-charts)
 - [The basics of SQL for analytics](/product-engineers/sql-for-analytics)
