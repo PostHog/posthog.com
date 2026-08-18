@@ -1,6 +1,6 @@
 ---
 title: The best web analytics tools for developers, compared
-date: 2026-08-11
+date: 2026-08-18
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -47,14 +47,14 @@ For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools only te
 
 It also [makes your product self-driving](/self-driving).
 
-| What makes PostHog good for developers | |
-| --- | --- |
-| **Install** | One `posthog-js` snippet, the package for your framework, or let the [setup wizard](/wizard) handle it |
-| **Capture** | Autocapture for pageviews and clicks, plus custom events |
-| **Data access** | SQL, REST API, the [MCP server](/mcp), and [data warehouse](/docs/data-warehouse) exports |
-| **Privacy** | Cookieless option and [reverse-proxy](/docs/advanced/proxy) support so ad blockers don't gut your data |
-| **Pricing** | [Transparent and usage-based](/pricing), with credits for [eligible startups](/startups) |
-| **License** | Open source (MIT) |
+**What makes PostHog good for developers:**
+ 
+-   **Install:** One `posthog-js` snippet, the package for your framework, or let the [setup wizard](/wizard) handle it
+-   **Capture:** Autocapture for pageviews and clicks, plus custom events
+-   **Data access:** SQL, REST API, the [MCP server](/mcp), and [data warehouse](/docs/data-warehouse) exports
+-   **Privacy:** Cookieless option and [reverse-proxy](/docs/advanced/proxy) support so ad blockers don't gut your data
+-   **Pricing:** [Transparent and usage-based](/pricing), with credits for [eligible startups](/startups)
+-   **License:** Open source (MIT)
 
 **Not ideal if:** all you'll ever want is a bare visit counter with nothing else attached – that's more platform than you need.
 
@@ -66,13 +66,13 @@ It also [makes your product self-driving](/self-driving).
  
 **Plausible** is the go-to for privacy: cookieless by default, GDPR- and CCPA-friendly, and no cookie banner required. It's a lightweight, open-source tool that offers readable traffic reporting with nothing to configure.
 
-| What makes Plausible good for developers | |
-| --- | --- |
-| **Install** | Single `<script>` tag (~1 KB) or npm package |
-| **Capture** | Automatic pageviews; custom events set up manually |
-| **Data access** | Stats API for pulling your numbers |
-| **Privacy** | Cookieless by default, no cookie banner |
-| **License** | Open source (AGPL v3) |
+**What makes Plausible good for developers:**
+ 
+-   **Install:** Single `<script>` tag (~1 KB) or npm package
+-   **Capture:** Automatic pageviews; custom events set up manually
+-   **Data access:** Stats API for pulling your numbers
+-   **Privacy:** Cookieless by default, no cookie banner
+-   **License:** Open source (AGPL v3)
 
 **Not ideal if:** you need to connect traffic to what users actually do next, since it's traffic-only by design.
  
@@ -82,13 +82,13 @@ It also [makes your product self-driving](/self-driving).
  
 **Fathom** is the fastest to get running: drop in one script and you have clean, privacy-safe traffic data with no configuration. It strips web analytics down to the essentials and stays out of your way.
 
-| What makes Fathom good for developers | |
-| --- | --- |
-| **Install** | Single `<script>` tag; custom domain to slip past ad blockers |
-| **Capture** | Automatic pageviews plus manual event tracking |
-| **Data access** | REST API |
-| **Privacy** | Cookieless, GDPR/CCPA-friendly by default |
-| **License** | Proprietary (the old Fathom Lite was open source) |
+**What makes Fathom good for developers:**
+ 
+-   **Install:** Single `<script>` tag; custom domain to slip past ad blockers
+-   **Capture:** Automatic pageviews plus manual event tracking
+-   **Data access:** REST API
+-   **Privacy:** Cookieless, GDPR/CCPA-friendly by default
+-   **License:** Proprietary (the old Fathom Lite was open source)
 
 **Not ideal if:** you want funnels, retention, or any behavioral data beyond traffic.
  
@@ -98,13 +98,13 @@ It also [makes your product self-driving](/self-driving).
 
 **Google Analytics 4** is the natural pick if you live in Google Ads; it's free and wired directly into Google's ad and search ecosystem. The tradeoff is the learning curve and traffic data that stays siloed from product behavior.
 
-| What makes Google Analytics 4 good for developers | |
-| --- | --- |
-| **Install** | `gtag.js` snippet or Google Tag Manager |
-| **Capture** | Enhanced-measurement auto-events plus custom events |
-| **Data access** | Free BigQuery export for raw events and the Data API – but reports sample above high thresholds |
-| **Privacy** | Cookie-based with Consent Mode; IP addresses aren't stored |
-| **License** | Proprietary |
+**What makes Google Analytics 4 good for developers:**
+ 
+-   **Install:** `gtag.js` snippet or Google Tag Manager
+-   **Capture:** Enhanced-measurement auto-events plus custom events
+-   **Data access:** Free BigQuery export for raw events and the Data API – but reports sample above high thresholds
+-   **Privacy:** Cookie-based with Consent Mode; IP addresses aren't stored
+-   **License:** Proprietary
 
 **Not ideal if:** you want something quick to learn and developer-friendly.
 
@@ -114,13 +114,13 @@ It also [makes your product self-driving](/self-driving).
 
 **Matomo** is the best choice when owning your data matters most. It's a feature-rich GA alternative that keeps your analytics out of Google's ecosystem and adds extras like heatmaps and recordings.
 
-| What makes Matomo good for developers | |
-| --- | --- |
-| **Install** | JS tracker, server-side, or import from server logs |
-| **Capture** | Pageviews and events; heatmaps and recordings as add-ons |
-| **Data access** | Reporting API plus direct access to the raw data |
-| **Privacy** | Cookieless mode available; GDPR tooling built in |
-| **License** | Open source (GPL v3) |
+**What makes Matomo good for developers:**
+ 
+-   **Install:** JS tracker, server-side, or import from server logs
+-   **Capture:** Pageviews and events; heatmaps and recordings as add-ons
+-   **Data access:** Reporting API plus direct access to the raw data
+-   **Privacy:** Cookieless mode available; GDPR tooling built in
+-   **License:** Open source (GPL v3)
 
 **Not ideal if:** you'd rather not manage a heavier, feature-dense platform.
 
@@ -130,13 +130,13 @@ It also [makes your product self-driving](/self-driving).
  
 **Umami** is the tidiest option for a small or personal site: minimal, open-source, and fast, with a single clean dashboard. It gives you the basics and nothing you'd have to think about.
  
-| What makes Umami good for developers | |
-| --- | --- |
-| **Install** | Single `<script>` tag; runs on Node + PostgreSQL/MySQL |
-| **Capture** | Automatic pageviews plus custom events |
-| **Data access** | REST API |
-| **Privacy** | Cookieless, no consent banner needed |
-| **License** | Open source (MIT) |
+**What makes Umami good for developers:**
+ 
+-   **Install:** Single `<script>` tag; runs on Node + PostgreSQL/MySQL
+-   **Capture:** Automatic pageviews plus custom events
+-   **Data access:** REST API
+-   **Privacy:** Cookieless, no consent banner needed
+-   **License:** Open source (MIT)
 
 **Not ideal if:** you need anything beyond basic traffic counts.
 
