@@ -5712,7 +5712,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Kotlin Multiplatform',
-                            url: '/docs/error-tracking/upload-source-maps/kmp',
+                            url: '/docs/error-tracking/upload-debug-symbols/kmp',
                         },
                         {
                             name: 'Rust',

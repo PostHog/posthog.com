@@ -60,7 +60,7 @@ const UploadSymbolSetsPlatforms = () => {
         },
         {
             label: 'Kotlin Multiplatform',
-            url: '/docs/error-tracking/upload-source-maps/kmp',
+            url: '/docs/error-tracking/upload-debug-symbols/kmp',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg',
         },
         {

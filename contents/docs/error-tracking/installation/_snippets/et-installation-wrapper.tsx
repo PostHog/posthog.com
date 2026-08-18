@@ -158,7 +158,7 @@ export const ErrorTrackingKMPInstallationWrapper = () => (
         <KMPErrorTrackingInstallation
             modifySteps={(steps) =>
                 addNextStepsStep(steps, undefined, {
-                    mappingsUrl: '/docs/error-tracking/upload-source-maps/kmp',
+                    mappingsUrl: '/docs/error-tracking/upload-debug-symbols/kmp',
                     mappingsLabel: 'Upload debug symbols',
                     mappingsDescription:
                         'Upload the debug symbols for each KMP target so PostHog can generate accurate stack traces.',

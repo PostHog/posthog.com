@@ -5809,6 +5809,11 @@
             "destination": "/docs/error-tracking/pricing:ext?"
         },
         {
+            "source": "/docs/error-tracking/upload-source-maps/kmp:ext(\\.md)?",
+            "destination": "/docs/error-tracking/upload-debug-symbols/kmp:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/what-is-a-product-engineer",
             "destination": "/product-engineer/what-is-a-product-engineer"
         },
