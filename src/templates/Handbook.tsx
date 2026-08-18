@@ -31,6 +31,7 @@ import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
+import AskAIInput from 'components/AskAIInput'
 import Tooltip from 'components/Tooltip'
 import NewsletterForm from 'components/NewsletterForm'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -373,6 +374,26 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         pathname.startsWith('/docs/ai-observability/installation/') &&
         !['claude-code', 'openclaw', 'opencode', 'pi'].includes(pathname.split('/').filter(Boolean).pop() ?? '')
 
+    // Every docs article gets an inline "ask PostHog AI about this page" input under the title.
+    // Gated on the MDX slug (not `pathname`) so the /docs/data-warehouse/sources/* alias pages —
+    // which render /docs/cdp/sources/* content — are covered either way. Scoped to /docs so the
+    // handbook and the Using PostHog manual, which share this template, stay unchanged.
+    const showAskAI = typeof slug === 'string' && slug.startsWith('/docs/')
+
+    const wizardHint =
+        (showWarehouseWizardHint && <WarehouseWizardHint />) ||
+        (showAIObservabilityWizardHint && <AIObservabilityWizardHint />) ||
+        null
+    // Left undefined when there's nothing to show — ReaderView renders a spacer div for any
+    // truthy `belowTitle`, and a fragment would always be truthy.
+    const belowTitle =
+        wizardHint || showAskAI ? (
+            <>
+                {wizardHint}
+                {showAskAI && <AskAIInput placeholder="Ask PostHog AI about this page..." />}
+            </>
+        ) : undefined
+
     // Track product interest for cross-subdomain cookie
     useProductInterestFromPathname(slug)
 
@@ -455,10 +476,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
                     : null),
             }}
             title={title}
-            belowTitle={
-                (showWarehouseWizardHint && <WarehouseWizardHint />) ||
-                (showAIObservabilityWizardHint && <AIObservabilityWizardHint />)
-            }
+            belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
             commits={commits}
