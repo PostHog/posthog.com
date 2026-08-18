@@ -2,12 +2,12 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
-import FeaturedPost from 'components/BuildMode/FeaturedPost'
+import FeaturedPost from 'components/PostsIndex/FeaturedPost'
 import Hero, { HeroHeader } from 'components/BuildMode/Hero'
-import PostsGallery from 'components/BuildMode/PostsGallery'
-import { BuildModePost } from 'components/BuildMode/types'
+import PostsGallery from 'components/PostsIndex/PostsGallery'
+import { PostSummary } from 'components/PostsIndex/types'
 
-export default function NewsletterPage({ data }: { data: { posts: { nodes: BuildModePost[] } } }): JSX.Element {
+export default function NewsletterPage({ data }: { data: { posts: { nodes: PostSummary[] } } }): JSX.Element {
     const posts = data.posts.nodes.filter((post) => post.frontmatter?.title)
     const featured = posts[0]
 
@@ -34,7 +34,7 @@ export default function NewsletterPage({ data }: { data: { posts: { nodes: Build
                             </header>
                         )}
                         <div className="mt-8 @2xl:mt-16">
-                            <PostsGallery posts={posts.slice(1)} />
+                            <PostsGallery posts={posts.slice(1)} searchName="build-mode-search" />
                         </div>
                         <hr className="my-10 h-px border-none bg-red/40 @2xl:my-16" />
                         <HeroHeader placement="build-mode-footer" />

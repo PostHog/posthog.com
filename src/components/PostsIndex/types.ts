@@ -1,7 +1,7 @@
 import { ImageDataLike } from 'gatsby-plugin-image'
 
 /** A `/newsletter/*` MDX node, shaped by the `/newsletter` page query. */
-export type BuildModePost = {
+export type PostSummary = {
     id: string
     fields: {
         slug: string
