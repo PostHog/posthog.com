@@ -9,13 +9,20 @@ const DEFAULT_SUBTITLE = 'Paste this into your terminal and make AI do all the w
  * Wizard install banner for prose (blog posts, docs) and the `/r/*` landing pages.
  *
  * Every piece of copy has a prop defaulting to the value it was previously hard-coded to, so bare
- * `<WizardCTA />` call sites keep rendering exactly what they always have while an individual post
- * can retarget the command — e.g. `<WizardCTA selfDriving />` or
- * `<WizardCTA command="ai-observability" />`. Command building itself stays in
- * [`PlatformInstall`](../PlatformInstall) so the displayed and copied strings can't drift.
+ * `<WizardCTA />` call sites keep rendering exactly what they always have while an author editing a
+ * post can retarget it inline. Two levels of control, deliberately:
+ *
+ * - `command="self-driving"` appends a subcommand, keeping the `-y`/`@latest` pinning on copy.
+ * - `fullCommand="npx @posthog/wizard self-driving"` states the whole thing, shown and copied
+ *   verbatim, for when the built form isn't what you want.
+ *
+ * Command assembly itself stays in [`PlatformInstall`](../PlatformInstall) so the displayed and
+ * copied strings can't drift.
  */
 export default function WizardCTA({
     command,
+    fullCommand,
+    copyCommand,
     selfDriving = false,
     title = DEFAULT_TITLE,
     subtitle = DEFAULT_SUBTITLE,
@@ -24,6 +31,13 @@ export default function WizardCTA({
 }: {
     /** Wizard subcommand appended to the command, e.g. "ai-observability" or "warehouse". */
     command?: string
+    /**
+     * The entire command, shown and copied verbatim. Overrides `command`/`selfDriving` and skips the
+     * `-y`/`@latest` pinning, so include them yourself if you want them.
+     */
+    fullCommand?: string
+    /** Clipboard override, if it should differ from what's displayed. */
+    copyCommand?: string
     /** Shorthand for `command="self-driving"`. Takes precedence over `command`. */
     selfDriving?: boolean
     title?: string
@@ -52,6 +66,8 @@ export default function WizardCTA({
                         <PlatformInstall
                             variant="inline"
                             command={command}
+                            fullCommand={fullCommand}
+                            copyCommand={copyCommand}
                             selfDriving={selfDriving}
                             secondaryTo={learnMoreTo}
                         />
