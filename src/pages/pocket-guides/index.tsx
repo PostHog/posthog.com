@@ -4,10 +4,9 @@ import SEO from 'components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { FIRST_GUIDE_BOOK_ORDER, POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
-/** Guides per volume, so the cover is never stale. Every volume opens the same way – front
- *  matter at `bookOrder: 0`, a 101 at 1 – so the guides are what follows: page 2 onwards. */
+/** Guides per volume, so the cover is never stale – everything from the first guide's order on. */
 function useGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
@@ -33,7 +32,7 @@ function useGuideCounts(): Record<string, number> {
             continue
         }
         // Unnumbered pages are drafts kept out of the book, so they're not guides either.
-        if ((node.frontmatter.bookOrder ?? 0) >= 2) {
+        if ((node.frontmatter.bookOrder ?? 0) >= FIRST_GUIDE_BOOK_ORDER) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

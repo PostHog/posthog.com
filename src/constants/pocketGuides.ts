@@ -16,6 +16,12 @@ export interface PocketGuideVolume {
     comingSoon?: boolean
 }
 
+/**
+ * Every volume opens the same way: front matter at `bookOrder: 0`, a 101 at 1. Guides are what
+ * follows. Authors assigning `bookOrder` in a volume's MDX frontmatter count from here.
+ */
+export const FIRST_GUIDE_BOOK_ORDER = 2
+
 export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
     {
         id: 'self-driving',
