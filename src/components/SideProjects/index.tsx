@@ -270,6 +270,8 @@ const transformStrapiSideProject = (entry: StrapiEntry): SideProject => ({
 export const useSideProjects = (): {
     projects: SideProject[]
     loading: boolean
+    // A failed fetch, as opposed to a legitimately empty gallery – lets the page offer a retry
+    error: boolean
     refreshProjects: () => void
     deleteProject: (projectId: number) => void
 } => {
@@ -277,8 +279,11 @@ export const useSideProjects = (): {
     const { addToast } = useToast()
     const [projects, setProjects] = useState<SideProject[]>([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     const fetchProjects = useCallback(async () => {
+        setLoading(true)
+        setError(false)
         try {
             const collected: SideProject[] = []
             let page = 1
@@ -298,6 +303,7 @@ export const useSideProjects = (): {
             setProjects(collected)
         } catch (error) {
             console.warn('Failed to fetch side projects:', error)
+            setError(true)
         } finally {
             setLoading(false)
         }
@@ -332,7 +338,7 @@ export const useSideProjects = (): {
         }
     }
 
-    return { projects, loading, refreshProjects: fetchProjects, deleteProject }
+    return { projects, loading, error, refreshProjects: fetchProjects, deleteProject }
 }
 
 type SideProjectFormValues = {

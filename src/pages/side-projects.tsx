@@ -174,7 +174,7 @@ const byMostRecent = (a: SideProject, b: SideProject): number => {
 }
 
 function SideProjectsPage({ location }: { location: { search: string } }): JSX.Element {
-    const { projects, loading, refreshProjects, deleteProject } = useSideProjects()
+    const { projects, loading, error, refreshProjects, deleteProject } = useSideProjects()
     const profiles = useCreatorProfiles()
     const { isModerator } = useUser()
     const canEdit = isModerator
@@ -238,7 +238,9 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
         addWindow(
             (
                 <SideProjectForm
-                    key="side-project-form"
+                    // Keyed per project: a fixed key would let React reuse a still-open form's
+                    // state, so submitting could overwrite one project with another's values
+                    key={project ? `side-project-form-${project.id ?? project.title}` : 'side-project-form'}
                     location={{
                         pathname: project ? `side-project-form-${project.id ?? project.title}` : 'side-project-form',
                     }}
@@ -267,13 +269,14 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
 
     // Tags ranked by how many projects use them; one-off tags stay searchable but don't clutter the bar
     const rankedTags = useMemo(() => {
-        const counts: Record<string, number> = {}
+        // Map instead of a plain object so tags named like Object.prototype members count correctly
+        const counts = new Map<string, number>()
         projects.forEach((project) => {
             normalizeTags(project.tags).forEach((tag) => {
-                counts[tag] = (counts[tag] || 0) + 1
+                counts.set(tag, (counts.get(tag) || 0) + 1)
             })
         })
-        return Object.entries(counts)
+        return Array.from(counts.entries())
             .filter(([, count]) => count >= 2)
             .sort(([tagA, countA], [tagB, countB]) => countB - countA || tagA.localeCompare(tagB))
             .map(([tag, count]) => ({ tag, count }))
@@ -524,15 +527,26 @@ function SideProjectsPage({ location }: { location: { search: string } }): JSX.E
                                     ))}
                                 </div>
 
-                                {/* No results message */}
-                                {filteredCurrent.length === 0 && filteredAlumni.length === 0 && (
-                                    <div className="py-12 text-center">
-                                        <p className="m-0 text-secondary">No projects match the current filters.</p>
-                                        <OSButton size="md" className="mt-2" onClick={clearFilters}>
-                                            Clear filters
-                                        </OSButton>
-                                    </div>
-                                )}
+                                {/* No results message – a failed fetch shouldn't masquerade as an empty gallery */}
+                                {filteredCurrent.length === 0 &&
+                                    filteredAlumni.length === 0 &&
+                                    (error && projects.length === 0 ? (
+                                        <div className="py-12 text-center">
+                                            <p className="m-0 text-secondary">
+                                                Couldn't load projects – check your connection and try again.
+                                            </p>
+                                            <OSButton size="md" className="mt-2" onClick={refreshProjects}>
+                                                Try again
+                                            </OSButton>
+                                        </div>
+                                    ) : (
+                                        <div className="py-12 text-center">
+                                            <p className="m-0 text-secondary">No projects match the current filters.</p>
+                                            <OSButton size="md" className="mt-2" onClick={clearFilters}>
+                                                Clear filters
+                                            </OSButton>
+                                        </div>
+                                    ))}
 
                                 {/* Alumni section, collapsed by default */}
                                 {alumniProjects.length > 0 && (
