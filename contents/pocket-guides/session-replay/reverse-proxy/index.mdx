@@ -16,12 +16,6 @@ bookOrder: 4
 
 # Reverse proxy
 
-<!-- Source for the framing: contents/docs/advanced/proxy.mdx:11 – ad blockers maintain lists of
-    known analytics domains; routing through your own domain, which they haven't catalogued,
-    typically increases event capture by 10-30% depending on your user base.
-    That 10-30% figure isn't on this page. It's the number that justifies the work, if you want it.
-    Also there, :15 – you don't need a proxy to start, but set one up before production. -->
-
 You need a reverse proxy to reliably capture replays.
 
 Ad blockers keep lists of know analytics domains and block requests to them. This will often result in incomplete or missing replays being captured. Using a reverse proxy lets you route through your own domain, so captures are not blocked.
@@ -30,24 +24,21 @@ Ad blockers keep lists of know analytics domains and block requests to them. Thi
 
 These are the destinations required for Session Replay to work. They're also commonly blocked by ad blockers. When you set up a reverse proxy, these are the destinations to proxy.
 
-| Host | Serves |
-| --- | --- |
-| `us-assets.i.posthog.com` | `/static/*` – the SDK and the replay recorder – and `/array/*`, your project's config |
-| `us.i.posthog.com` | Everything else: your events, the recorded session data, and feature flag evaluation |
+| Serves | US Cloud | EU Cloud |
+| --- | --- | --- |
+| The SDK, the replay recorder, and your project's config<br />`/static/*` and `/array/*` | `us-assets.i.posthog.com` | `eu-assets.i.posthog.com` |
+| Everything else: events, recorded session data, feature flags | `us.i.posthog.com` | `eu.i.posthog.com` |
 
-On EU Cloud, `eu-assets.i.posthog.com` and `eu.i.posthog.com`.
-
-Nothing errors when a recording is blocked. The recording just never appears in PostHog. If you're leaning on Session Replay to help with debugging or understanding user behavior, you may be missing out on valuable insights.
+Nothing errors when a recording is blocked. The recording just never appears in PostHog which is frustrating to debug.
 
 ## Setting one up with PostHog
 
-PostHog runs a managed proxy for you. It sits on a subdomain you own, and PostHog handles the SSL
-certificate, the routing, and the maintenance. It's free on PostHog Cloud and all you need is
-access to your DNS.
+PostHog runs a free, managed proxy for you. It sits on a subdomain you own, and PostHog handles the SSL
+certificate, the routing, and the maintenance.
 
 <CTA to="https://app.posthog.com/settings/organization-proxy">Set up a managed proxy</CTA>
 
-Two things to get right, because both quietly defeat the point:
+Two important things to decide with your team:
 
 **Pick a boring subdomain.** Anything containing `analytics`, `tracking`, `telemetry`, `posthog`,
 or `ph` is already on the block lists you're trying to avoid.
@@ -55,32 +46,9 @@ or `ph` is already on the block lists you're trying to avoid.
 **Turn your DNS provider's own proxy off.** On Cloudflare that's the grey cloud, not the orange
 one. Leaving it on breaks certificate provisioning.
 
-If it doesn't come up, the **Diagnose** option in the proxy's ⋯ menu checks the DNS record, the
-certificate, and whether events are actually flowing. Full setup and troubleshooting is in
-[managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy).
+## Limits of a proxy
 
-<details>
-
-<summary>Two constraints worth knowing before you enable it</summary>
-
-Traffic routes through Cloudflare, a listed subprocessor in our DPA.
-
-And the managed proxy is not HIPAA-compliant, so a BAA with PostHog doesn't cover it – run your own if you handle PHI.
-
-</details>
-
-## Rolling your own reverse proxy
-
-If the managed proxy doesn't fit, you can [set up your own](/docs/advanced/proxy). We have guides for:
-
-| | |
-| --- | --- |
-| Edge and CDN | [Cloudflare](/docs/advanced/proxy/cloudflare) · [AWS CloudFront](/docs/advanced/proxy/cloudfront) |
-| Hosting | [Vercel](/docs/advanced/proxy/vercel) · [Netlify](/docs/advanced/proxy/netlify) · [Railway](/docs/advanced/proxy/railway) |
-| Frameworks | [Next.js rewrites](/docs/advanced/proxy/nextjs) · [Next.js proxy file](/docs/advanced/proxy/nextjs-middleware) · [Nuxt](/docs/advanced/proxy/nuxt) · [Remix](/docs/advanced/proxy/remix) · [SvelteKit](/docs/advanced/proxy/sveltekit) · [Node](/docs/advanced/proxy/node) |
-| Servers and infra | [nginx](/docs/advanced/proxy/nginx) · [Caddy](/docs/advanced/proxy/caddy) · [Kubernetes](/docs/advanced/proxy/kubernetes-ingress-controller) · [Pomerium](/docs/advanced/proxy/pomerium) |
-
-## Where a proxy doesn't save you
+The managed proxy routes traffic through Cloudflare, a listed subprocessor in our DPA. It's also not HIPAA-compliant, so a BAA with PostHog doesn't cover it – run your own if you handle PHI.
 
 DNS-level blocking follows your subdomain's CNAME chain, sees where it really points, and drops the request before the browser is involved. That needs a custom resolver like NextDNS or Pi-hole, so it's a small share of users, and no proxy gets around it. Browser extensions can't do this – they only see HTTP requests after DNS has already resolved.
 
