@@ -2276,6 +2276,7 @@ export const companyMenu = {
             ],
         },
         { name: 'Careers', icon: 'IconLaptop', color: 'purple', url: '/careers' },
+        { name: 'Side projects', icon: 'IconRocket', color: 'purple', url: '/side-projects' },
     ],
 }
 
@@ -5614,6 +5615,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/error-tracking/installation/kmp',
+                        },
+                        {
                             name: 'Unity',
                             url: '/docs/error-tracking/installation/unity',
                         },
@@ -5705,6 +5710,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/error-tracking/upload-source-maps/ios',
+                        },
+                        {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/error-tracking/upload-debug-symbols/kmp',
                         },
                         {
                             name: 'Rust',
@@ -6248,6 +6257,10 @@ export const docsMenu = {
                         {
                             name: 'Join data across sources',
                             url: '/docs/data-warehouse/join',
+                        },
+                        {
+                            name: 'Sync to person properties',
+                            url: '/docs/data-warehouse/warehouse-properties',
                         },
                         {
                             name: 'Visualize with insights',
@@ -6829,6 +6842,13 @@ export const docsMenu = {
                     url: '/docs/ai-observability/surfaces/desktop',
                     icon: 'IconCode',
                     color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Skills',
+                    url: '/docs/ai-observability/skills',
+                    icon: 'IconMagicWand',
+                    color: 'purple',
                     featured: true,
                 },
                 {
