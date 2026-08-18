@@ -29,7 +29,9 @@ export default function TraceTree({ rows }: { rows: TraceTreeRow[] }): JSX.Eleme
                 const kind = KIND[row.kind]
                 return (
                     <motion.li
-                        key={row.label}
+                        // Labels aren't unique – a trace can hold two calls to the same model, so
+                        // the row index disambiguates. Safe here: rows are static and never reorder.
+                        key={`${row.kind}-${row.label}-${index}`}
                         // Indent, plus a rule down the left: the tree reads as a hierarchy without
                         // drawing box characters that a screen reader would have to say out loud.
                         className={`flex flex-wrap items-baseline gap-x-2 gap-y-0.5 py-1 text-[0.75em] leading-snug ${
