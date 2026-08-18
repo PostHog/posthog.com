@@ -9,11 +9,15 @@ import {
     LeakFigure,
     LedgerFigure,
     LoopFigure,
+    PersonsModalFigure,
+    RedirectLoopFigure,
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
+    TriggerGroupFigure,
 } from './figures'
 import { Contents, Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Setup, Watches, proseComponents } from './bookPieces'
+import { AskAI, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -37,13 +41,20 @@ export const bookMdxComponents = {
     LedgerFigure,
     LeakFigure,
     ScoutFigure,
+    PersonsModalFigure,
     ScreenshotFigure,
+    TriggerGroupFigure,
+    RedirectLoopFigure,
     LoopFigure,
     Watches,
     Enable,
     Setup,
     Contents,
     SeeAlso,
+    ViewRecordings,
+    ViewRecording,
+    AskAI,
+    ScannerTemplate,
     Term,
     ...proseComponents,
 }

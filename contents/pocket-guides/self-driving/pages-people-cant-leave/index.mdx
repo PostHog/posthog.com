@@ -1,0 +1,151 @@
+---
+title: The page people can't leave
+shortTitle: Dead ends
+subtitle: 'Where do people give up without anything going wrong?'
+bookOrder: 5
+filters:
+  type:
+    - self-driving
+watches:
+  - name: Session Replay
+    detail: >-
+      Rage clicks, dead clicks, and the recordings themselves – the only place a failure that
+      never threw leaves a trace.
+  - name: Replay Vision
+    detail: >-
+      Your scanners' verdicts on the same sessions, when you run them, so the report can cite a
+      dead-end count rather than infer one.
+  - name: Your product events
+    detail: >-
+      Where sessions end, and whether the people who reach a page can go anywhere afterwards –
+      compared with the last two weeks.
+requires:
+  - label: Session Replay enabled, since the recordings are the evidence rather than the colour
+    level: required
+  - label: >-
+      A Replay Vision dead-end monitor or session-outcome classifier, which turns "people leave
+      here" into a verdict per session rather than an inference from where clicking stopped
+    level: required
+  - label: >-
+      Error Tracking instrumented, so a page that's throwing gets left to your error signals
+      instead of reported twice
+    level: recommended
+  - label: Your codebase connected via GitHub, to match a new dead end against the deploy that made it
+    level: recommended
+  - label: >-
+      Conversion or navigation events on the pages you care about, if you have them – they're
+      what separates leaving from finishing
+    level: optional
+schedule: Daily
+report:
+  title: Accounts that left onboarding midway can no longer finish it
+  source: Scout · dead-end pages
+  receivedAgo: 5h
+  affected: ~180 accounts stuck, ~40 more each day
+  body: >-
+    Sessions reaching `/onboarding/step-1` now end there 41% of the time, up from 9% across the
+    trailing two weeks. Signup volume is unchanged and nothing threw.
+
+
+    These are returning accounts, not new ones. Onboarding creates the workspace at step two and
+    writes `onboarding_complete` at step four. Anyone who leaves between the two has a workspace
+    but an incomplete account, so the route guard sends every later visit back to step one.
+
+
+    Step two then tries to create the workspace again and gets a 409 – the name is taken by the
+    workspace they created last time. The form renders it as a validation message under the name
+    field, so it reads as their mistake. There's no resume, no skip, and nothing in onboarding
+    that can see or delete the workspace already sitting on the account.
+
+
+    The recordings are people trying variations of their own company name against the same wall.
+    Median four attempts before the tab closes. Twenty-three accounts have now done this on three
+    or more separate days.
+  suggestedAction: >-
+    Have step two adopt the existing workspace instead of creating a second one, and let the guard
+    resume at the first unfinished step. The 409 is correct – treating it as user error is what
+    makes it a trap.
+  actionNote: An agent opens the pull request – you review and merge.
+---
+
+<LeftPage>
+
+<AnatomyFigure
+    n={1}
+    caption="The report card in your inbox. The claim and the triage sit on the card; the recordings sit inside the report."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+    headline="Accounts that left onboarding midway can't get past step two. The workspace they created last time blocks them, and the name it holds is their own"
+/>
+
+<DetailFigure
+    n={2}
+    caption="The report opened. The recordings are the evidence here, so they're what you review first."
+    priority="P2"
+    status="Ready"
+    actionability="Actionable"
+/>
+
+<ScoutFigure n={3} caption="The scout itself – the file an agent follows on a schedule." />
+
+</LeftPage>
+
+<RightPage>
+
+# The page people can't leave
+
+Some failures throw an exception. Someone gets paged, a ticket gets filed, and the fix is obvious.
+
+Others don't. People land on a page, try a few things, and leave because they're stuck. No exceptions, no explosions, just bad business logic or poorly designed UX.
+
+This scout watches for pages that quietly become dead ends.
+
+## What the scout looks at
+
+This scout looks at results from a Replay Vision scanner. Replay Vision scanner answers a question you configure by watching every session you capture, forever and on repeat. The output becomes a queriable signal that this scout uses to identify dead ends.
+
+<ScannerTemplate name="Dead ends" template="dead_end" type="Monitor" asks="Did the user appear stuck on a page?" answers="Every session comes back yes or no" property="scanner_output_verdict" />
+
+To support this verdict, the scout looks for the shape a single session can't show:
+
+- **The same person, more than once.** Someone who abandons a flow and never returns is normal.
+  Someone who comes back, lands on the same step, and leaves again is stuck.
+- **No completion event between the visits.** They aren't finishing it later somewhere else.
+- **What they did before giving up.** Rage clicks on a button that won't advance, the same field
+  retyped three times, clicks on nav links that bounce straight back, a reload, then nothing. This
+  is the part only a recording has – the events say they left, the replay says what they tried.
+
+## The report in your inbox
+
+When people keep getting sent back to a page they can't get past, a <Term name="scout" /> opens a <Term name="report" /> <SeeFig n={1} />. Click **Review** and it opens <SeeFig n={2} /> with the repeat visits, the recordings, and what the app was doing instead.
+
+The recordings carry more weight here than in most reports. The numbers tell you people leave. The sessions tell you what they tried first, which is usually what names the cause.
+
+## The pull request you merge
+
+When you're ready, PostHog dispatches an agent with the report and its evidence as context. You
+review and merge like any other PR – nothing merges without you.
+
+Reports are free. Pull requests are **$15 each**, with your first three a month **free**. See
+self-driving [Pricing](/docs/self-driving/pricing).
+
+## The scout itself
+
+Scouts are instructions an agent follows on a schedule – <SeeFig n={3} /> is the skill file for
+this one.
+
+It reads several <Term name="signal source">signal sources</Term>. Error Tracking is the odd one out: the scout checks it to decide when to stay quiet.
+
+Scanners can answer a lot more than this. [Replay Vision](/pocket-guides/session-replay/replay-vision) covers what else you can ask them.
+
+## The schedule it runs on
+
+This scout runs **daily** by default. Dead ends build over days rather than minutes, so a shorter
+interval mostly adds noise. It only writes when something is wrong, so most days it's silent.
+
+## Add this to your scout troop
+
+<Enable />
+
+</RightPage>

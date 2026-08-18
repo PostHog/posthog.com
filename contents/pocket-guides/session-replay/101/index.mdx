@@ -7,22 +7,67 @@ bookOrder: 1
 
 <LeftPage>
 
+<!-- Marker coordinates are percentages of the image. Grab new ones from /image-annotator. -->
+
 <ScreenshotFigure
     n={1}
     product="session_replay"
     screenshot="player-overview"
-    set="layout"
     caption="The replay page: pick a session on the left, watch it in the middle, read what happened on the right."
+    annotations={[
+        {
+            x: 20.5,
+            y: 29.5,
+            title: 'The sessions list',
+            description: 'Recordings to watch based on your filters.',
+        },
+        {
+            x: 55,
+            y: 72,
+            title: 'The player',
+            description:
+                'Plays back sessions like a video, showing scrolling and mouse movement. You can scrub through like a video, too.',
+        },
+        {
+            x: 75,
+            y: 54,
+            title: 'The inspector panel',
+            description:
+                'The right side panel shows you events captured to PostHog, synced with the playback timestamps. This panel also contains network, performance, and other tools. More about them below.',
+        },
+    ]}
 />
 
 <ScreenshotFigure
     n={2}
     product="session_replay"
     screenshot="home"
-    set="inspector"
     alt="A session playing back on the left, with the inspector's event list beside it"
     caption="The player up close: the session on the left, everything PostHog recorded about it on the right."
     legend="The event list is built from your events, so it's the same activity you'd query – not a separate recording of it."
+    annotations={[
+        {
+            x: 16,
+            y: 36,
+            title: "The session you're watching",
+            description:
+                'The session played back. It is the rendered page, not a video file, which is why it stays sharp and searchable.',
+        },
+        {
+            x: 79,
+            y: 8.6,
+            title: 'Flip between Overview, Inspector, Network waterfall, Observations, and create Linked issues',
+            description:
+                'Three views onto the same session, plus two more that appear when they have something to show.',
+        },
+        {
+            x: 92.5,
+            y: 39.8,
+            title: 'Follow the events and people in this replay across PostHog',
+            description:
+                'The same events you query everywhere else, in order. Each one seeks the player to that moment, and leads back out to the person, the exception, or the insight it belongs to.',
+        },
+    ]}
 />
 
 </LeftPage>
@@ -35,35 +80,28 @@ Session replay records what real users do in your product and plays it back like
 
 ## Anatomy of a replay
 
-When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you'll be greeted with a player with all your recordings. You'll spend a lot of time here, so let's go on a tour.
+When you head to [Session Replay](https://us.posthog.com/replay) in PostHog, you'll be greeted with a player <SeeFig n={1} /> with all your recordings. You'll spend a lot of time here, so let's go on a tour.
 
-The replay page is <SeeFig n={1} />: the sessions you can watch on the left, the one you picked playing back in the middle, and everything PostHog recorded about it on the right.
+Select a session on the left and it plays back in the middle, with everything PostHog knows about it on the right. That context is what makes PostHog's Session Replay powerful.
 
-## Inspector tools
+## Session context
 
-The inspector <SeeFig n={2} /> lets you watch replays in context of your PostHog data.
 
-Session Replay aggregates all of the tools needed to understand what is happening in your user's environment:
-- **[Events](/docs/session-replay/how-to-watch-recordings)** – a list of all the pages visited, events captured, errors encountered during the recording.
-- **[Console](/docs/session-replay/console-log-recording)** – console logs, info, warnings, and errors from your application. Useful for debugging and providing extra context on what is happening in your user's browser or mobile device environment.
-- **[Network](/docs/session-replay/network-recording)** – network requests and responses, providing insights into network performance and potential issues.
-- **[Comments](/docs/data/comments)** – written notes on a particular time on a session recording, so you can highlight what you see.
+The right-hand inspector <SeeFig n={2} /> lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
 
-PostHog already captures your <Term name="event">events</Term>, so every replay is enriched with information about:
-- User actions like clicks, scrolls, form inputs, page views – and everything else you capture
-- The <Term name="person" /> and their <Term name="person property">properties</Term>
-- <Term name="exception">Exceptions</Term> they encountered in the timeline
-- <Term name="feature flag">Feature flag</Term> and <Term name="experiment" /> evaluation results
+- **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
+- **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, [console logs](/docs/session-replay/console-log-recording), [network requests](/docs/session-replay/network-recording), and comments, filterable down to one kind at a time.
+- **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
+- **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
+- **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
 
-You can jump from a <Term name="funnel" /> drop-off to a session replay, and from your replay timeline right to an Error Tracking issue
+## What's actually recorded
 
-## Where the recording comes from
+Recordings come from your PostHog SDKs: JavaScript web, React Native, iOS, Android, and Flutter.
 
-Recordings come from your PostHog SDKs: web, React Native, iOS, Android, and Flutter.
+These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep **cost** low and minimize **performance implications**.
 
-These replays are not videos on the web. The SDK takes a full snapshot of the page's DOM, then records only what changes – clicks, scrolls, mutations – and the player rebuilds the page from that stream. This helps keep cost and performance implications minimal.
-
-Native Android and iOS record a wireframe of the view hierarchy rather than the real look and feel, unless you turn on screenshot mode; React Native and Flutter always record in screenshot mode.
+Native Android and iOS record a **wireframe** of the view hierarchy rather than the real look and feel, unless you turn on screenshot mode; React Native and Flutter always record in screenshot mode.
 
 ## Install and turn it on
 
@@ -71,8 +109,7 @@ None of it works until a PostHog SDK is in your app. The wizard installs and con
 
 <Setup />
 
-Recording is a project setting as well as an SDK one, so switch it on in [project settings](https://app.posthog.com/settings/project-replay) before you expect to see anything. We'll go over configuring which sessions you keep, what they capture, and privacy in the next page.
-
+Recording is a project setting as well as an SDK one, so switch it on in [project settings](https://app.posthog.com/settings/project-replay) before you expect to see anything. We'll go over configuration decisions in [the next page](/pocket-guides/session-replay/configure-replays).
 <SeeAlso>
 
 See also: [Session replay](/docs/session-replay) · [Get started](/docs/session-replay/start-here) · [Installation](/docs/session-replay/installation) · [Mobile replay](/docs/session-replay/mobile) · [Replay Vision](/docs/replay-vision)

@@ -1,0 +1,76 @@
+---
+# Scaffolded from /docs/session-replay/how-to-watch-recordings and /docs/session-replay/sharing.
+# Facts check out; the editorial pass is yours.
+#
+# Split from "Finding the replay you need": that page gets you to the right session, this one is
+# what you do once it's playing. Sharing lives here rather than there, because passing a replay
+# on is part of watching it, not part of finding it.
+title: Watching replays yourself
+shortTitle: Watching replays yourself
+subtitle: The player is a DVR with your event stream welded to it. Most of what it does isn't obvious.
+bookOrder: 6
+---
+
+<RightPage>
+
+# Watching replays yourself
+
+Everything on this page is about spending less time per replay. The session replay player has a bunch of hotkeys that let you fly through replays without ever leaving the keyboard (a great flex during planning meetings).
+
+Just know that you can also get a robot to watch replays for you, so you never have to learn any of this. If that sounds more like you, learn more on [the next section](/pocket-guides/session-replay/replay-vision).
+
+## Playback controls
+
+- Change the playback speed. Most sessions are watchable at 2x or faster.
+- **Skip inactivity** jumps the parts where nobody did anything. It's in the **...** menu.
+- Play, pause, and seek as normal. Hold `alt` to move the seek buttons to 1 millisecond steps.
+- Controls sit in one of two layouts: **floating**, the default, which overlays the recording and appears on hover, or **pinned**, which sits below and stays visible. Your choice persists across sessions.
+
+Most of the player is reachable from the keyboard:
+
+| Key | Does |
+| --- | --- |
+| `c` | Comment at the current timestamp |
+| `e` | Emoji reaction |
+| `s` | Screenshot |
+| `x` | Clip a short GIF around the current moment |
+| `n` | Next recording in the list |
+| `t` | Cinema mode |
+| `f` | Fullscreen |
+
+## Watching as a team
+
+Press `c` to comment at the current timestamp, so the note lands on the moment rather than on the session. Press `e` for an emoji reaction when the moment doesn't need words.
+
+A comment can also be added as a task, which turns "someone should look at this" into something that gets tracked.
+
+## Watching on a TV
+
+Kiosk mode plays recordings back-to-back in fullscreen with nobody driving. It's built for the big screens.
+
+Before it starts you can filter by visited page, date range, minimum active duration, and feature flag value. Test accounts are always excluded.
+
+The setup screen is skippable. The filters are all query parameters, so a configured kiosk is a bookmark. Fresh recordings are fetched every ten, so a screen left running all day doesn't loop the same sessions.
+
+## Capturing a screenshot
+
+Screenshots (`s`), GIF clips around the current timestamp (`x`), and MP4 export for a whole session.
+
+## Passing it on
+
+Sessions are useful context for the whole team. **Create issue** on the player opens a ticket in Linear, GitHub, GitLab, or Jira without leaving the recording.
+
+Connect the tool once in your project settings and pick the projects or repositories you want issues to land in.
+
+Two things make this better than pasting a link into the ticket yourself:
+
+- The issue already carries a link back to the replay, so whoever picks it up sees what happened rather than your description of what happened.
+- The link works in both directions. Once an issue is attached, it shows up in the replay's sidebar, so the next person to open that session knows it's already been reported.
+
+<SeeAlso>
+
+See also: [How to watch recordings](/docs/session-replay/how-to-watch-recordings) · [Integrations](/docs/session-replay/integrations) · [Sharing replays](/docs/session-replay/sharing) · [Finding the replay you need](/pocket-guides/session-replay/finding-replays)
+
+</SeeAlso>
+
+</RightPage>

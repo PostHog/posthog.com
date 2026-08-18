@@ -5,6 +5,7 @@ import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posth
 import CloudinaryImage from 'components/CloudinaryImage'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 import type { Annotation } from 'components/ImageAnnotations'
+import type { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
 import { useProductScreenshot } from 'components/ImageAnnotations/useProductScreenshot'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
@@ -13,8 +14,11 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import PersonsModal, { PersonsModalProps } from './PersonsModal'
+import RedirectLoop from './RedirectLoop'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
+import TriggerGroupForm, { TriggerGroupFormProps } from './TriggerGroupForm'
 import { useTemplate } from './bookContext'
 import { FigureGlossKey, FigureGlossProvider, FigureMarker, useFigureGlossCollector } from './FigureMarker'
 
@@ -58,9 +62,19 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
 }
 
 /**
- * A screenshot a product page already ships, framed as a book figure. The image and its
- * annotation sets are resolved from `useProducts`, so the book never holds its own copy of a
- * URL – update the product hook and every figure citing it follows.
+ * A screenshot a product page already ships, framed as a book figure. The image is resolved from
+ * `useProducts`, so the book never holds its own copy of a URL – update the product hook and every
+ * figure citing it follows.
+ *
+ * Annotation copy belongs with the page that says it, so write the markers inline:
+ *
+ *     <ScreenshotFigure n={1} product="session_replay" screenshot="home" caption="…"
+ *         annotations={[{ x: 16, y: 36, title: 'The player', description: 'What it does.' }]} />
+ *
+ * `set` is the other way in: it reuses a named annotation set already stored on the product hook,
+ * for figures that should stay in step with a product page. Inline `annotations` win if both are
+ * given. Coordinates for either are percentages of the image – /image-annotator picks them off a
+ * screenshot for you.
  */
 export function ScreenshotFigure({
     n = 1,
@@ -69,6 +83,7 @@ export function ScreenshotFigure({
     product,
     screenshot,
     set,
+    annotations,
     alt,
 }: {
     n?: number
@@ -78,8 +93,10 @@ export function ScreenshotFigure({
     product: string
     /** Key in that product's `screenshots` object, e.g. "overview". */
     screenshot: string
-    /** Named annotation set on the screenshot – omit for an unannotated image. */
+    /** Named annotation set on the screenshot – for reusing a product page's markers. */
     set?: string
+    /** Markers written inline, in page order. Takes precedence over `set`. */
+    annotations?: Annotation[]
     alt?: string
 }): JSX.Element | null {
     // Checked so a missing screenshot key skips the figure entirely – an empty frame with a
@@ -88,7 +105,7 @@ export function ScreenshotFigure({
     if (!shot?.src) {
         return null
     }
-    const items: Annotation[] = (set && shot.annotations?.[set]?.items) || []
+    const items: Annotation[] = annotations ?? (set && shot.annotations?.[set]?.items) ?? []
     // The frame already supplies the border and ground, so the product page's drop shadow
     // would read as a second frame inside it.
     const imgClasses = 'rounded max-w-full h-auto'
@@ -173,6 +190,7 @@ export function AnatomyFigure({
     status,
     actionability,
     headline,
+    report,
 }: {
     n?: number
     caption: string
@@ -181,15 +199,22 @@ export function AnatomyFigure({
     status?: string
     actionability?: string
     headline?: string
+    /**
+     * A report written inline, for pages outside the self-driving volume that want to show the
+     * card without being a use case themselves. Use-case pages leave this off and the report
+     * comes from their own frontmatter.
+     */
+    report?: SelfDrivingReport
 }): JSX.Element | null {
     const template = useTemplate()
-    if (!template) {
+    const shown = report ?? template?.report
+    if (!shown) {
         return null
     }
     return (
         <Fig n={n} caption={caption} legend={legend ?? <AnatomyHint />}>
             <ReportAnatomy
-                report={template.report}
+                report={shown}
                 priority={priority}
                 status={status}
                 actionability={actionability}
@@ -288,6 +313,59 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** One trigger group's form: the fields that decide which sessions get recorded. */
+export function TriggerGroupFigure({
+    n = 1,
+    caption,
+    legend,
+    ...group
+}: TriggerGroupFormProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <TriggerGroupForm {...group} />
+        </Fig>
+    )
+}
+
+export function PersonsModalFigure({
+    n = 1,
+    caption,
+    legend,
+    ...modal
+}: PersonsModalProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <PersonsModal {...modal} />
+        </Fig>
+    )
+}
+
+export function RedirectLoopFigure({
+    n = 1,
+    caption,
+    legend,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <RedirectLoop />
         </Fig>
     )
 }

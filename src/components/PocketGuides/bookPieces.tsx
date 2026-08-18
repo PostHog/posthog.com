@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { MdxCodeBlock } from 'components/CodeBlock'
 import Link from 'components/Link'
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
@@ -165,6 +166,35 @@ export const proseComponents = {
     table: (props: any) => (
         <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto`}>
             <table {...props} />
+        </div>
+    ),
+    // Collapsibles are the one native-styling exception: global.css scopes `details` to `.prose`,
+    // which the book opts out of, and `.article-content` never covers it. So the panel is styled
+    // here instead – em-based like everything else, with the site's own chevron token.
+    details: (props: any) => (
+        <details
+            className="mb-[0.5em] overflow-hidden rounded border border-primary bg-accent text-[1em] dark:bg-accent-dark [&[open]>summary]:border-b [&[open]>summary]:border-primary [&[open]>summary::before]:rotate-90"
+            {...props}
+        />
+    ),
+    summary: (props: any) => (
+        <summary
+            className="relative cursor-pointer list-none py-1.5 pl-8 pr-3 text-[0.95em] font-bold leading-snug text-primary before:absolute before:left-3 before:top-[0.45em] before:size-4 before:bg-bullet-chevron-light before:bg-contain before:bg-center before:bg-no-repeat before:transition-transform before:duration-200 marker:content-[''] dark:before:bg-bullet-chevron-dark [&::-webkit-details-marker]:hidden"
+            {...props}
+        />
+    ),
+    // The site's own code block, same as every other template wires up – syntax highlighting,
+    // copy button, and language tabs all come along. The wrapper sets a text color: the block's
+    // header inherits `currentColor` at half opacity, and the book container sets none, so
+    // without this the language label renders near-invisible against its own background.
+    pre: (props: any) => (
+        <div className="text-primary">
+            <MdxCodeBlock {...props} />
+        </div>
+    ),
+    MultiLanguage: (props: any) => (
+        <div className="text-primary">
+            <MdxCodeBlock {...props} />
         </div>
     ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,

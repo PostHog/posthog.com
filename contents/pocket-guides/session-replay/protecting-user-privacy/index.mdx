@@ -1,0 +1,385 @@
+---
+# Shared opening, forked body. The tab strip sits once at the top; below it each platform gets its
+# own headings, because the argument genuinely differs – web starts exposed and has to be
+# inverted, every mobile SDK starts masked and has to be selectively revealed.
+#
+# Section numbers restart per platform: hidden panels are display:none, and CSS counters skip
+# those, so only the panel on screen takes numbers.
+#
+# Markdown inside a <Tab.Panel> must start at column 0. Indent it and MDX v1 reads it as a code
+# block and the page stops building.
+title: Protecting user privacy
+shortTitle: Privacy
+subtitle: Masking happens on the device, before anything is sent. Decide it before real traffic arrives.
+bookOrder: 3
+---
+
+import Tab from 'components/Tab'
+
+<RightPage>
+
+# Protecting user privacy
+
+Session Replay gives you insights into user behavior, but it can also turn creepy if you're not careful. Before enabling replays, you should make sure nothing sensitive is going to be captured. Masked content never reaches PostHog and a replay captured cannot be amended.
+
+Each platform's rendering is different so each SDK has different concepts and privacy controls.
+
+<Tab.Group tabs={['Web', 'Android', 'iOS', 'React Native', 'Flutter']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>Android</Tab>
+<Tab>iOS</Tab>
+<Tab>React Native</Tab>
+<Tab>Flutter</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+## Defaults
+
+Inputs are masked by default. PostHog assumes anything typed is sensitive. Text outside inputs is **not** masked: page copy, table rows, and user-saved content are all recorded as they appear.
+
+## Deny first, allow explicitly
+
+If a page could contain sensitive data, mask **all** text, then unmask safe content explicitly.
+
+`ph-mask` masks an element and everything rendered inside it. It's on by default, so there's no config to write – put the class on whatever you need covered:
+
+```html
+<!-- a whole page -->
+<body class="ph-mask">
+
+<!-- every route under a layout -->
+<main class="account-layout ph-mask">
+
+<!-- one component, and everything rendered inside it -->
+<section class="ph-mask">
+    <h2>Ana Ramírez</h2>
+    <p>ana@example.com</p>
+</section>
+```
+
+A field someone adds inside a masked layout next month is masked the day it ships. Nobody has to remember anything.
+
+If your whole product handles sensitive data, `maskTextSelector: '*'` masks every page and you allow back from there. It's a heavy default. Your own marketing pages get masked too, so only reach for it when that's really the case.
+
+## Allow by marking it safe
+
+There's no unmask selector on web. You allow by putting a mark in your markup and checking for it:
+
+```js-web
+posthog.init('<ph_project_token>', {
+    session_recording: {
+        maskTextFn: (text, element) =>
+            element?.closest('[data-ph-no-mask]') ? text : '*'.repeat(text.length),
+    },
+})
+```
+
+```html
+<section class="ph-mask">
+    <div data-ph-no-mask>
+        <!-- recorded, and so is everything else in here -->
+        <h2>Billing</h2>
+        <p>Card ending 4242</p>
+    </div>
+    <!-- masked -->
+    <p>ana@example.com</p>
+</section>
+```
+
+`data-ph-no-mask` mirrors the `ph-no-mask` marker the Android SDK ships, and follows the same shape as `data-ph-no-autocapture`. Nothing in the SDK knows that name – you're the one giving it meaning in the callback – so pick a different one if you like, and keep it consistent.
+
+Use `closest` so the mark works on a whole component. Put it on a wrapper and everything inside is allowed, the same way masking spreads. Reading `element.dataset` directly only allows the single element holding the text, so you'd be back to marking every field.
+
+`maskTextFn` only runs where something was already going to be masked. So the allowlist can only open up areas you covered, and it never runs on pages you didn't mark.
+
+You can't pick a field back out with a selector. `:not()` won't work, because matching walks up to the nearest masked ancestor and stops there. Use the mark.
+
+## Blocking is different from masking
+
+`ph-no-capture` doesn't asterisk an element, it replaces it with a blank box of the same size:
+
+```html
+<div class="ph-no-capture">Never recorded at all</div>
+```
+
+It also stops autocapture events firing from inside that element, so you lose the clicks as well as the pixels. Mask unless you need the thing gone entirely.
+
+## Levers cheatsheet
+
+Everything the web SDK gives you, and what it starts as.
+
+| Lever | Default | What it does |
+| --- | --- | --- |
+| `ph-mask` class | on | Masks text in that element and everything inside it. No config needed. |
+| `maskTextSelector` | off | The same, by CSS selector. `'*'` masks the whole app. |
+| `maskTextFn` | off | Runs on every element already being masked. Return the text to allow it. |
+| `maskAllInputs` | **on** | Asterisks every input. |
+| `maskInputOptions` | `password` | Which input types to mask when `maskAllInputs` is off. |
+| `maskInputFn` | off | Per-input callback, same shape as `maskTextFn`. |
+| `ph-ignore-input` class | on | Stops capturing what someone types into that input as they type it. |
+| `ph-no-capture` class | on | Blanks the element entirely, and kills autocapture from inside it. |
+| `blockSelector` | off | The same as `ph-no-capture`, by CSS selector. |
+| `maskAllElementAttributes` | off | Masks attribute values. Costs replay fidelity, so it's a deliberate trade. |
+| `maskAttributeFn` | off | Per-attribute callback. Ignored when the option above is on. |
+| `maskCapturedNetworkRequestFn` | off | Redacts the page URL and network headers and bodies. |
+
+The three class names are configurable – `maskTextClass`, `blockClass`, and `ignoreClass` – but the defaults are what everything above assumes.
+
+## Blindspots
+
+Mask every sensitive layout and you've covered what's on screen. Four things are still going out.
+
+- **The URL.** The player shows it and the timeline lists it. Query strings carry auth tokens, emails, and user IDs, and no amount of text masking touches them.
+- **Network payloads.** Request and response bodies and headers, if you've turned network capture on. The same callback redacts both these and the URL, so one function covers both.
+- **Canvas.** If you record canvas, you're recording pixels. No selector reaches inside one.
+- **Element attributes.** A masked element can still ship a `title`, an `alt`, or a `value` carrying the thing you masked. Masking attributes costs replay fidelity, so it's off by default.
+
+</Tab.Panel>
+<Tab.Panel>
+
+## Defaults
+
+Text and images are masked already. You're marking exceptions in both directions.
+
+Your app is recorded as a wireframe – its shape, not its real look – unless you turn on screenshot mode.
+
+## Mask a view, or a whole screen
+
+Tag the view, or use the modifier on a composable:
+
+```xml
+<ImageView
+    android:id="@+id/imvProfilePhoto"
+    android:tag="ph-no-capture" />
+```
+
+```android_kotlin
+Text(
+    text = balance,
+    modifier = Modifier.postHogMask(),
+)
+```
+
+Both cover everything inside the view you set them on. Put it on a field and you mask a field. Put it on the root of a screen and you mask the screen:
+
+```android_kotlin
+@Composable
+fun AccountScreen() {
+    Column(modifier = Modifier.postHogMask()) {
+        // every balance, name, and address below is masked
+    }
+}
+```
+
+Do that on the screens that handle sensitive data rather than marking each field on them.
+
+## Allow explicitly
+
+Unlike web, there is a marker for revealing:
+
+```xml
+<TextView
+    android:id="@+id/tvPublicLabel"
+    android:tag="ph-no-mask" />
+```
+
+```android_kotlin
+Text(
+    text = "Always visible",
+    modifier = Modifier.postHogUnmask(),
+)
+```
+
+Revealing beats masking. A revealed child shows through a masked parent, so you can mask a whole screen and open up a single panel you've checked.
+
+## What screenshot mode changes
+
+A wireframe is a privacy floor you get for free. Screenshot mode captures the screen as it actually appeared – a better recording, and a different risk. Turn it on and every view you haven't marked is captured as your user saw it.
+
+</Tab.Panel>
+<Tab.Panel>
+
+## Defaults
+
+Text and images are masked already. You're marking exceptions in both directions.
+
+Your app is recorded as a wireframe – its shape, not its real look – unless you turn on screenshot mode.
+
+## Mask a view, or a whole screen
+
+Set the accessibility identifier on UIKit views, or use the modifier in SwiftUI:
+
+```ios_swift
+imvProfilePhoto.accessibilityIdentifier = "ph-no-capture"
+```
+
+```ios_swift
+Text(balance)
+    .postHogMask()
+```
+
+Both cover everything inside the view you set them on. Put it on a field and you mask a field. Put it on the root of a screen and you mask the screen:
+
+```ios_swift
+struct AccountScreen: View {
+    var body: some View {
+        VStack {
+            // every balance, name, and address below is masked
+        }
+        .postHogMask()
+    }
+}
+```
+
+Do that on the screens that handle sensitive data rather than marking each field on them.
+
+## Allow explicitly
+
+Unlike web, there is a marker for revealing:
+
+```ios_swift
+Text("Always visible")
+    .postHogNoMask()
+```
+
+Revealing beats masking. A revealed child shows through a masked parent, so you can mask a whole screen and open up a single panel you've checked.
+
+Apps built with Xcode 26 use a new SwiftUI rendering model, and both modifiers behave inconsistently on primitive views like `Text` and `Image`. Check what you actually get rather than assuming.
+
+## What screenshot mode changes
+
+A wireframe is a privacy floor you get for free. Screenshot mode captures the screen as it actually appeared – a better recording, and a different risk. Turn it on and every view you haven't marked is captured as your user saw it.
+
+</Tab.Panel>
+<Tab.Panel>
+
+## Defaults
+
+Text, inputs, and images are all masked already. On iOS, sandboxed system screens – image pickers, contact pickers – are masked for you too.
+
+Password inputs stay masked no matter what you configure. That auto-detection reads platform semantics like `secureTextEntry`, so a custom input built on something other than a standard platform text field won't be spotted, and you have to mask it yourself.
+
+There is no wireframe mode here. React Native always records screenshots of the real screen, so what your masking misses is captured as your user saw it.
+
+## Mask a component, or a whole screen
+
+Wrap it, or label it:
+
+```jsx
+import { PostHogMaskView } from 'posthog-react-native'
+
+<PostHogMaskView>
+    <Text>{balance}</Text>
+</PostHogMaskView>
+```
+
+```jsx
+<Text accessibilityLabel="ph-no-capture">Sensitive!</Text>
+```
+
+Wrapping covers everything inside. Wrap one field and you mask a field. Wrap a screen's root and you mask the screen:
+
+```jsx
+export function AccountScreen() {
+    return (
+        <PostHogMaskView>
+            {/* every balance, name, and address below is masked */}
+        </PostHogMaskView>
+    )
+}
+```
+
+Do that on the screens that handle sensitive data rather than marking each field on them.
+
+## Allowing is all-or-nothing
+
+There is no reveal marker on this SDK. Android and iOS have one; you don't.
+
+What you can change is the app-wide default:
+
+```ts
+sessionReplayConfig: {
+    maskAllTextInputs: false,      // reveals text and inputs, everywhere
+    maskAllImages: false,          // reveals images, everywhere
+    maskAllSandboxedViews: false,  // iOS only
+},
+```
+
+That's rarely what you want. Leave the defaults on and mask by exception.
+
+## What the SDK can't see for you
+
+<!-- Thin on purpose – React Native's blind spots are mostly the shared ones (URLs, network
+    bodies). Worth checking whether native modules rendering their own views need calling out. -->
+
+Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.
+
+</Tab.Panel>
+<Tab.Panel>
+
+## Defaults
+
+Text and images are masked already. Platform views – web views, maps, camera previews – are covered with a black box, because they're composited outside the widget tree and PostHog can't inspect them.
+
+There is no wireframe mode here. Flutter always records screenshots of the real screen, so what your masking misses is captured as your user saw it.
+
+## Mask a widget, or a whole screen
+
+Wrap it:
+
+```dart
+PostHogMaskWidget(
+    child: Text(balance),
+)
+```
+
+Everything inside the wrapped widget is covered. Wrap one field and you mask a field. Wrap a screen's root and you mask the screen:
+
+```dart
+class AccountScreen extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+        return PostHogMaskWidget(
+            // every balance, name, and address below is masked
+            child: Column(children: [...]),
+        );
+    }
+}
+```
+
+Do that on the screens that handle sensitive data rather than marking each field on them.
+
+## Allowing is all-or-nothing
+
+There is no reveal marker on this SDK. Android and iOS have one; you don't.
+
+What you can change is the app-wide default:
+
+```dart
+config.sessionReplayConfig.maskAllTexts = false;   // reveals text and inputs, everywhere
+config.sessionReplayConfig.maskAllImages = false;  // reveals images, everywhere
+```
+
+That's rarely what you want. Leave the defaults on and mask by exception.
+
+## What the widget tree can't see
+
+Masking works off the widget tree, and two things aren't in it.
+
+Text painted by a custom painter isn't a widget, so `maskAllTexts` can't find it. Wrap it by hand.
+
+Flutter web draws your whole app as pixels inside a canvas, which is a different masking path again – the same rules apply, but they're enforced inside the canvas rather than over your widgets.
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+<SeeAlso>
+
+See also: [Privacy controls](/docs/session-replay/privacy) · [Mobile replay](/docs/session-replay/mobile) · [Network recording](/docs/session-replay/network-recording) · [Control which sessions to record](/pocket-guides/session-replay/configure-replays)
+
+</SeeAlso>
+
+</RightPage>

@@ -148,36 +148,9 @@ export const sessionReplay = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_light_902aadff54.png',
             srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_player_overview_dark_d03f1adf30.png',
             alt: 'The session replay page: the list of recordings on the left, the player in the middle, the event list on the right',
-            // Coordinates are percentages of this 2578x1300 image. The light and dark variants
-            // show different sessions but the same three panels at the same size, so one set of
-            // panel-level coordinates holds for both.
-            annotations: {
-                layout: {
-                    type: 'numbered',
-                    items: [
-                        {
-                            x: 20.5,
-                            y: 29.5,
-                            title: 'The sessions list',
-                            description: 'Recordings to watch based on your filters.',
-                        },
-                        {
-                            x: 55,
-                            y: 72,
-                            title: 'The player',
-                            description:
-                                'Plays back sessions like a video, showing scrolling and mouse movement. You can scrub through like a video, too.',
-                        },
-                        {
-                            x: 75,
-                            y: 54,
-                            title: 'The inspector panel',
-                            description:
-                                'The right side panel shows you events captured to PostHog, synced with the playback timestamps. This panel also contains network, performance, and other tools. More about them below.',
-                        },
-                    ],
-                },
-            },
+            // 2578x1300. The light and dark variants show different sessions but the same three
+            // panels at the same size, so one set of panel-level coordinates holds for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_light_9225f869dc.jpg',
@@ -185,43 +158,9 @@ export const sessionReplay = {
             alt: 'Session replay screenshot',
             classes: 'justify-start items-end pr-4 @lg:pr-6',
             imgClasses: 'rounded-tr-md shadow-2xl',
-            // Coordinates are percentages of this 1110x640 image, measured against the light
-            // variant – the dark one is the same screen at the same size, so they hold for both.
-            annotations: {
-                inspector: {
-                    type: 'numbered',
-                    items: [
-                        {
-                            x: 16,
-                            y: 36,
-                            title: 'The recording',
-                            description:
-                                'The session played back. It is the rendered page, not a video file, which is why it stays sharp and searchable.',
-                        },
-                        {
-                            x: 76,
-                            y: 8.7,
-                            title: 'Inspector',
-                            description:
-                                'Overview, Inspector, and Network waterfall – the three views onto the same session.',
-                        },
-                        {
-                            x: 45.3,
-                            y: 15.9,
-                            title: 'The inspector toolbar',
-                            description:
-                                'Filters the panel to events, console logs, network requests, comments, or the Doctor – each only as full as your capture config allows.',
-                        },
-                        {
-                            x: 92.5,
-                            y: 39.8,
-                            title: 'Your events, timestamped',
-                            description:
-                                'Autocapture, pageviews, web vitals, and your own events, in order, each seeking the player to that moment.',
-                        },
-                    ],
-                },
-            },
+            // 1110x640, measured against the light variant – the dark one is the same screen at
+            // the same size, so coordinates hold for both.
+            // The pocket guide annotates this inline – see contents/pocket-guides/session-replay/101.
             playlist: {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_light_5919aed63e.png',
                 srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/recording_list_dark_169d60d6fb.png',
