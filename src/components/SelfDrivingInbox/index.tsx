@@ -1,7 +1,29 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { InboxTemplate, UNCATEGORIZED } from './types'
+import scoutSkillsData from '../../data/scout-skills.json'
+
+import { InboxTemplate, ScoutSpec, UNCATEGORIZED } from './types'
+
+interface ScoutSkillsData {
+    skills: Record<string, { name: string; description: string; raw: string }> | null
+}
+
+/**
+ * A guide that names an `appTemplate` shows a scout PostHog already ships, so its file is fetched
+ * from the monorepo at build time (`gatsby/utils/fetchScoutSkills.ts`) rather than kept as a second
+ * copy here. Guides with their own scout keep using their sibling `SKILL.md`.
+ *
+ * Returns undefined when the fetch failed, which leaves the scout figure unrendered rather than
+ * showing a scout that may no longer match what the app creates.
+ */
+function scoutFromAppTemplate(appTemplate: string, schedule?: string): ScoutSpec | undefined {
+    const skill = (scoutSkillsData as ScoutSkillsData).skills?.[appTemplate]
+    if (!skill) {
+        return undefined
+    }
+    return { name: skill.name, description: skill.description, raw: skill.raw, schedule, appTemplate }
+}
 
 export function useSelfDrivingTemplates(): InboxTemplate[] {
     const data = useStaticQuery(graphql`
@@ -98,13 +120,14 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                         tldr: node.frontmatter.tldr,
                         watches: node.frontmatter.watches,
                         requires: node.frontmatter.requires,
-                        scout: scoutNode
+                        scout: node.frontmatter.appTemplate
+                            ? scoutFromAppTemplate(node.frontmatter.appTemplate, node.frontmatter.schedule)
+                            : scoutNode
                             ? {
                                   name: scoutNode.frontmatter?.name,
                                   description: scoutNode.frontmatter?.description,
                                   raw: scoutNode.rawBody,
                                   schedule: node.frontmatter.schedule,
-                                  appTemplate: node.frontmatter.appTemplate,
                               }
                             : undefined,
                     }

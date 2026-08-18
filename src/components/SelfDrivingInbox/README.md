@@ -41,19 +41,29 @@ takes name and description as separate form fields.
 
 ### When PostHog already ships this scout as a template
 
-Set `appTemplate: <key>` in the guide's `index.mdx` and both CTAs point at that template in the
-app (`/ai-observability/self-driving#template=<key>`) instead of encoding this `SKILL.md` into a
-`#createScout=` link. Keys are the template keys in the monorepo's
-`aiObservabilityScoutTemplates.ts` – today `daily-digest`, `costly-users`, `error-patterns`.
+Set `appTemplate: <key>` in the guide's `index.mdx` and **write no `SKILL.md` at all**. Keys are the
+template keys in the monorepo's `aiObservabilityScoutTemplates.ts` – today `daily-digest`,
+`costly-users`, `error-patterns`.
 
-Reach for it whenever a template exists, because **the `#createScout=` payload is prefill-only:
-it carries name, description, and body, and deliberately no config**. A scout created from the
-encoded link gets the default schedule and none of the template's tags, so it never appears on
-the AI observability tab the guide just taught. The app's own copy carries both.
+Two things follow from that one line:
 
-The trade-off is that the `SKILL.md` on the page stops being what the button creates: the app's
-template is. The file is still what the page renders and what the agent mirror serves, so if the
-two drift, the page is lying about what the button does. Keep them saying the same thing.
+- **Both CTAs point at that template in the app**
+  (`/ai-observability/self-driving#template=<key>`) instead of encoding a `SKILL.md` into a
+  `#createScout=` link. That matters because **the `#createScout=` payload is prefill-only: it
+  carries name, description, and body, and deliberately no config**. A scout created from the
+  encoded link gets the default schedule and none of the template's tags, so it never appears on
+  the AI observability tab the guide just taught. The app's own copy carries both.
+- **The scout file is fetched from the monorepo at build time**, by
+  `gatsby/utils/fetchScoutSkills.ts` (same shape as `fetchMCPTools.ts`: raw from `refs/heads/master`,
+  15s timeout, written to a gitignored `src/data/scout-skills.json`). The monorepo file at
+  `products/ai_observability/backend/scouts/<name>.md` is the only copy — the app imports it too.
+
+This is what stops a guide describing a scout the button doesn't create. Hand-writing a second copy
+here was tried and drifted within one sitting: different headings, a dropped section, and invented
+numeric thresholds that appeared nowhere in the app.
+
+If the fetch fails, `skills` is null, the guide's `scout` is undefined, and `ScoutFigure` renders
+nothing. The page still builds. Showing a possibly-stale scout would be worse than showing none.
 
 Two guards keep sibling files from becoming pages, and both must agree if you rename anything:
 `gatsby/createPages.ts` skips slugs ending `/SKILL` or containing a `_`-prefixed segment, and the
