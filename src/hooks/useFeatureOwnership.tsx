@@ -53,6 +53,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['ai-gateway'],
         label: false,
     },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['self-driving'],
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['analytics-platform'],
