@@ -19,6 +19,7 @@ import {
     // Mobile SDK installations
     IOSInstallation,
     AndroidInstallation,
+    KMPErrorTrackingInstallation,
     FlutterInstallation,
     ReactNativeInstallation,
 } from 'onboarding/error-tracking'
@@ -146,6 +147,21 @@ export const ErrorTrackingAndroidInstallationWrapper = () => (
                     mappingsLabel: 'Upload mapping files',
                     mappingsDescription:
                         "Great, you're capturing exceptions! The next step is to upload ProGuard/R8 mapping files so PostHog can deobfuscate your stack traces.",
+                })
+            }
+        />
+    </OnboardingContentWrapper>
+)
+
+export const ErrorTrackingKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={{}}>
+        <KMPErrorTrackingInstallation
+            modifySteps={(steps) =>
+                addNextStepsStep(steps, undefined, {
+                    mappingsUrl: '/docs/error-tracking/upload-source-maps/kmp',
+                    mappingsLabel: 'Upload debug symbols',
+                    mappingsDescription:
+                        'Upload the debug symbols for each KMP target so PostHog can generate accurate stack traces.',
                 })
             }
         />

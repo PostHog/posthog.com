@@ -5614,6 +5614,10 @@ export const docsMenu = {
                             url: '/docs/error-tracking/installation/flutter',
                         },
                         {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/error-tracking/installation/kmp',
+                        },
+                        {
                             name: 'Unity',
                             url: '/docs/error-tracking/installation/unity',
                         },
@@ -5705,6 +5709,10 @@ export const docsMenu = {
                         {
                             name: 'iOS',
                             url: '/docs/error-tracking/upload-source-maps/ios',
+                        },
+                        {
+                            name: 'Kotlin Multiplatform',
+                            url: '/docs/error-tracking/upload-source-maps/kmp',
                         },
                         {
                             name: 'Rust',

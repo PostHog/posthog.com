@@ -429,18 +429,36 @@ To automatically capture screen views on Android, set `captureScreenViews = true
 
 ## Error tracking
 
-Capture handled exceptions with their stack traces so they show up in [error tracking](/docs/error-tracking):
+PostHog KMP 0.4.0 and higher can automatically capture unhandled exceptions. Pass an `ErrorTrackingConfig` when you initialize PostHog:
+
+```kotlin
+import com.posthog.kmp.ErrorTrackingConfig
+
+val config = PostHogConfig(
+    apiKey = "<ph_project_token>",
+    errorTracking = ErrorTrackingConfig(
+        autoCapture = true,
+        inAppIncludes = listOf("com.example"),
+    ),
+)
+```
+
+On Android, iOS, and JVM, this captures unhandled exceptions. On Kotlin/JS and Kotlin/Wasm, it captures unhandled errors and unhandled promise rejections. It does not capture browser console errors.
+
+Capture handled exceptions with their stack traces by calling `captureException`:
 
 ```kotlin
 try {
     riskyOperation()
-} catch (e: Exception) {
+} catch (error: Exception) {
     PostHog.captureException(
-        throwable = e,
+        throwable = error,
         additionalProperties = mapOf("context" to "checkout_flow"),
     )
 }
 ```
+
+Follow the [Kotlin Multiplatform error tracking guide](/docs/error-tracking/installation/kmp) for setup and verification. Upload [target-specific debug symbols](/docs/error-tracking/upload-source-maps/kmp) to get readable stack traces from minified and native builds.
 
 ## Session replay
 
@@ -582,6 +600,19 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
 | `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
+| `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures error tracking. |
+
+### Error tracking options
+
+Pass an `ErrorTrackingConfig` to `PostHogConfig.errorTracking`.
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `autoCapture` | `Boolean` | `false` | Automatically captures unhandled exceptions. |
+| `inAppIncludes` | `List<String>` | `emptyList()` | Package or bundle prefixes to mark as in-app frames (Android, JVM, and iOS). |
+| `ignoredExceptionTypes` | `List<KClass<out Throwable>>` | `emptyList()` | Exception types that the SDK should not capture (Android, JVM, and iOS). |
+| `inAppExcludes` | `List<String>` | `emptyList()` | Package or bundle prefixes to mark as external frames (iOS only). |
+| `inAppByDefault` | `Boolean` | `true` | Marks unmatched stack frames as in-app frames (iOS only). |
 
 ### Session recording options
 
