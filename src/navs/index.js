@@ -1273,6 +1273,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/overview',
             },
             {
+                name: 'Metric conventions',
+                url: '/handbook/growth/revops/metric-conventions',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
