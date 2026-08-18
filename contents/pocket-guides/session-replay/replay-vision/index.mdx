@@ -51,7 +51,7 @@ Four things can watch replays on your behalf:
 | Session summary | PostHog AI reads the event stream of one session, or twenty, and writes what happened | A written account, and the pattern across a batch |
 | <Term name="replay vision">Replay Vision</Term> scanner | Our model that watches every matching replay, continuously | An observation per session, saved as a `$recording_observed` event you can query |
 | Session replay <Term name="signal" /> | Spots rage clicks and friction, raises them | A <Term name="report" /> in your <Term name="inbox" />, grouped with related findings |
-| <Term name="scout" /> | Queries anything in PostHog on a schedule – events, insights, warehouse tables, and the observations above | A report too, but only when the answer to its question changes |
+| <Term name="scout">Scout</Term> | Queries anything in PostHog on a schedule – events, insights, warehouse tables, and the observations above | A report too, but only when the answer to its question changes |
 
 Only the scanner watches the video. The other three read events, so they know what people did but not what the screen showed them.
 

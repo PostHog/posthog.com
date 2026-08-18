@@ -12,6 +12,10 @@ import usePostHog from '../../hooks/usePostHog'
  */
 
 /** The dot itself. One definition of the look, whether it's placed (`span`) or clicked (`button`). */
+/*
+ * The dot is `#FFA81C` rather than the `orange` token (`#EB9D2A`), which reads yellow against a
+ * screenshot – see b2fa710a2, where this colour was chosen for exactly that reason.
+ */
 export function MarkerChip({
     n,
     size = 'md',
@@ -29,7 +33,7 @@ export function MarkerChip({
     const sizeClasses = size === 'sm' ? 'size-4 text-[10px]' : 'size-5 text-[11px]'
     return (
         <Tag
-            className={`inline-flex shrink-0 select-none items-center justify-center rounded-full bg-orange font-bold leading-none text-white ${sizeClasses} ${className}`}
+            className={`inline-flex shrink-0 select-none items-center justify-center rounded-full bg-[#FFA81C] font-bold leading-none text-black ${sizeClasses} ${className}`}
             {...rest}
         >
             {n}
