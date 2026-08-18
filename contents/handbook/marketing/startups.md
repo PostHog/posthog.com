@@ -59,7 +59,7 @@ You can find the copy for the latest deal on Bookface in this [doc](https://docs
 
 YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc), from a PostHog account that uses the company's email domain. To prove their eligibility, we ask for:
 
--   A [YC founder verification link](https://www.ycombinator.com/verify), which founders can create at [ycombinator.com/verify/manage](https://www.ycombinator.com/verify/manage). We check it automatically against YC's API: the link must be valid and can't have been used by another organization before. If the check shows the founder's batch and company match the application, it's verified automatically. Mismatches are flagged for manual review rather than rejected, and if YC is unreachable the application goes through flagged for a manual check.
+-   A [YC founder verification link](https://www.ycombinator.com/verify), which founders can create at [ycombinator.com/verify/manage](https://www.ycombinator.com/verify/manage) with their company details and batch visible (phone number, personal email, and social profiles can be left off). We check the link automatically against YC's API when the application is submitted: it must be valid and can't have been used by another organization before. If the link shows the founder's batch and company matching the application, it's verified automatically. Missing company details or mismatches are flagged for manual review rather than rejected, and if YC is unreachable the application goes through flagged for a manual check.
 -   A screenshot from Bookface showing they've marked themselves as using the PostHog deal.
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
