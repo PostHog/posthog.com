@@ -61,14 +61,18 @@ This setup works with the ingress-nginx controller, the most widely used Ingress
 
 <Step title="Create the upstream CA secret">
 
-Create a Secret from your system's trusted certificate authorities so ingress-nginx can verify PostHog's upstream certificates:
+Download the Mozilla CA bundle, then create a Secret from it so ingress-nginx can verify PostHog's upstream certificates:
+
+```bash
+curl --fail --location https://curl.se/ca/cacert.pem --output ca-certificates.crt
+```
 
 ```bash
 kubectl create secret generic posthog-upstream-ca \
-  --from-file=ca.crt=/etc/ssl/certs/ca-certificates.crt
+  --from-file=ca.crt=ca-certificates.crt
 ```
 
-Change the file path if your operating system stores its CA bundle elsewhere. The Secret and Ingress resources must use the same namespace. The example below uses the `default` namespace.
+If you already have a CA bundle locally, you can use its path instead of downloading this file. The Secret and Ingress resources must use the same namespace. The example below uses the `default` namespace.
 
 </Step>
 
