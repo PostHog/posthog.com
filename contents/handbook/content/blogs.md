@@ -35,7 +35,7 @@ Our audience is [the people we build for](/handbook/who-we-build-for) including 
 The title is the most important part of the blog. It's what someone judges in search results, in a feed, and in an AI answer. Some that worked well, and why:
 
 - [I wrote a 70x faster SQL parser while barely looking at the code](/blog/sql-parser) has a specific, surprising number and makes you curious about how.
-- [WTF is a forward deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer) asks about a trendy job title and promises more than a boring definition.
+- [WTF is a forward deployed engineer? (and why everyone is hiring them)](/blog/forward-deployed-engineer) asks about a trendy job title and promises more than a boring definition. It ranked for the "forward deployed engineer" search term which means it gets a lot of traffic from Google.
 - [How we're spending our marketing budget in 2026 (with actual $ figures)](/founders/actual-marketing-budget-2026) is good because of the "with actual $ figures".
 
 Avoid being vague or boring ("Our approach to marketing spend"); if a generic B2B SaaS company would write it, we shouldn't, but don't put being funny/clever above being clear.
