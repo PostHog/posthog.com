@@ -8,27 +8,27 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 You can use PostHog to power analytics dashboards inside your product. Capture your customers' events in PostHog, query the data, and display the results in your own UI. This is often easier than building and maintaining your own infrastructure.
 
-This is called [embedded analytics](/tutorials/embedded-analytics), or customer-facing analytics. You can store all customer data in one PostHog project and filter it by customer, or create a separate project for each customer. This guide compares both approaches and helps you choose the right setup for your use case.
+This is called [embedded analytics](/tutorials/embedded-analytics), or customer-facing analytics. You can store all customer data in one PostHog project and filter it by customer, or create a separate project for each customer. This guide compares both approaches to help you choose the right setup.
 
 ## How person profiles can merge
 
-[Person profiles](/docs/data/persons) and [distinct IDs](/docs/getting-started/identify-users) are scoped to a project. If two customers use the same distinct ID, PostHog treats them as the same person.
+[Person profiles](/docs/data/persons) are scoped to a project. If users from different customers have the same [distinct ID](/docs/getting-started/identify-users), PostHog treats them as the same person and combines their events in one profile.
 
-For example, suppose your platform lets customers publish apps and see pageviews and conversions in a built-in dashboard. Two customer apps identify the same visitor with the user ID `123`. If both apps send data to one PostHog project, the events appear in one person profile and timeline. Funnels and other per-user insights can then combine activity from both apps.
+For example, suppose you're building a vibe-coding platform where customers can publish web apps that you manage. You want to use PostHog to show each customer a dashboard with their app's pageviews, users, and conversions. If the same person signs in to two customer apps and your platform identifies them as user `123` in both, that user's events from both apps appear in one person profile. Funnels and other per-user insights would count activity across both apps as belonging to one user.
 
-Prevent this by including the customer ID in each identified user's distinct ID:
+One way to prevent this is to include the customer ID in each identified user's distinct ID:
 
 ```ts
 posthog.identify(`${customerId}:${user.id}`)
 ```
 
-This prevents identified users from different customers from sharing a profile. Anonymous activity can still merge if customer workspaces share browser storage, because the browser SDK can use the same anonymous distinct ID across those workspaces.
+This prevents identified users from different customers from sharing a profile. Anonymous activity can still merge if those websites use the same project token and share browser storage.
 
-Once distinct IDs are unique to each customer, a single project works well for dashboards embedded in your product. A project per customer is better when you plan to provide direct PostHog access or need project-level data separation.
+By default, the web SDK persists the anonymous distinct ID in a cookie. If that cookie is available to both websites, the SDK uses the same anonymous distinct ID. See [JavaScript web persistence and cookies](/docs/libraries/js/persistence) for details.
 
 <CalloutBox icon="IconLightBulb" type="info" title="Our recommendation">
 
-Use one project with customer-scoped distinct IDs when customers only view analytics inside your product. Use a project per customer when customers need access to PostHog.
+A project per customer is better when you plan to give customers direct PostHog access or need to fully isolate customer data for security or compliance reasons.
 
 </CalloutBox>
 
@@ -38,42 +38,44 @@ Use one project with customer-scoped distinct IDs when customers only view analy
 | **Best for** | Dashboards displayed inside your product. | Giving customers direct access to PostHog. |
 | **Person profiles** | Require customer-scoped distinct IDs to prevent merging. | Automatically separated by project. |
 | **Querying** | Pass a customer identifier to an Endpoint or the Query API. | Query each customer's project. |
-| **Plan** | Available without an add-on. | Requires the [Boost add-on](/platform-packages) for unlimited projects. |
+| **Plan** | Available on the free plan. | Requires the [Boost plan](/platform-packages) for unlimited projects. |
 
-## Use one project with customer filters
+## Filter customer data in one project
 
-Add a customer identifier, such as `customer_id`, to every event. You can then retrieve data for a specific customer in two ways:
+Add a customer identifier, such as `customer_id`, as an event property on every event. You can then retrieve data for a specific customer in two ways:
 
-- Create an [Endpoint with a variable](/docs/endpoints/guide-variables) and pass the customer ID when you call it. This lets one Endpoint serve every customer.
-- Use the [Query API](/docs/api/queries) and filter the query by the customer ID.
+- **Recommended** – Create an [Endpoint with a variable](/docs/endpoints/guide-variables) and pass the customer ID when you call it.
+- Use the [Query API](/docs/api/queries) and filter the query by the customer ID. Keep in mind that the Query API has [project-level rate limits](/docs/api/queries#rate-limits).
 
-Run these requests from your backend. Use the authenticated customer's ID rather than accepting an arbitrary ID from the client.
-
-Because all data remains in one project, don't give customers direct PostHog access. Project members can query the project's underlying data even when [resource access controls](/docs/settings/access-control#3-resource-level) hide specific resources.
+Run these requests from your backend. Make sure you don't accept an arbitrary ID from the client.
 
 ## Create a project for each customer
 
-A separate project keeps each customer's events and person profiles apart. Use this setup when customers need to log in to PostHog or when you need a project boundary between their data.
+A separate project isolates each customer's events and person profiles. Use this setup when customers need to log in to PostHog or when you need a strict data boundary between customers.
 
 ### Create projects with the API
 
-Create a project when you add a customer by calling the [projects API](/docs/api/projects). Get your organization ID from the [`/api/organizations/@current`](https://app.posthog.com/api/organizations/@current) endpoint.
+Create a project when you add a customer by calling the [projects API](/docs/api/projects).
 
-Each project has its own [project token](/docs/settings/projects) for event ingestion. Use its project ID to call Endpoints or the Query API.
+Each project has its own [project token](/docs/settings/projects) for event ingestion.
 
-<CalloutBox icon="IconWarning" type="caution" title="Requires the Boost add-on">
+To query a customer's data, use that project's ID when calling Endpoints or the Query API.
 
-Free organizations include one project. The [Boost add-on](/platform-packages) includes unlimited projects.
+With this setup, analyzing data across all customers is more difficult because PostHog queries are scoped to one project. For example, to calculate daily active users across all customer apps, you would need to query each project separately and combine the results.
+
+<CalloutBox icon="IconInfo" type="fyi" title="Requires the Boost plan">
+
+Free organizations are limited to one project. The [Boost plan](/platform-packages) includes unlimited projects.
 
 </CalloutBox>
 
 ### Give customers access
 
-If customers log in to PostHog:
+If you store each customer's data in a separate project and want to give them access to PostHog:
 
-- Use [project access control](/docs/settings/access-control#2-project-level) to give each customer access only to their project. You can [manage access control through the API](/docs/settings/access-control#api-support).
+- Use [project access control](/docs/settings/access-control#2-project-level) to invite each customer to only their project.
+- [Manage access control through the API](/docs/settings/access-control#api-support) to automate this setup.
 - Disable [full organization member visibility](/docs/settings/organizations#member-list-visibility) so customers only see themselves and members of their project.
-- [Enforce two-factor authentication](/docs/settings/account-settings#enabling-2fa) to protect customer data.
 
 ### Billing
 
