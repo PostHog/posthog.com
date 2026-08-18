@@ -13,8 +13,11 @@ const DEFAULT_SUBTITLE = 'Paste this into your terminal and make AI do all the w
  * post can retarget it inline. Two levels of control, deliberately:
  *
  * - `command="self-driving"` appends a subcommand, keeping the `-y`/`@latest` pinning on copy.
- * - `fullCommand="npx @posthog/wizard self-driving"` states the whole thing, shown and copied
+ * - `fullCommand="npx @posthog/wizard self-driving"` replaces the command outright, shown and copied
  *   verbatim, for when the built form isn't what you want.
+ *
+ * `PlatformInstall`'s `selfDriving` flag is deliberately not re-exposed here — it is just shorthand
+ * for `command="self-driving"`, and two spellings of one thing is a worse API than one.
  *
  * Command assembly itself stays in [`PlatformInstall`](../PlatformInstall) so the displayed and
  * copied strings can't drift.
@@ -23,7 +26,6 @@ export default function WizardCTA({
     command,
     fullCommand,
     copyCommand,
-    selfDriving = false,
     title = DEFAULT_TITLE,
     subtitle = DEFAULT_SUBTITLE,
     learnMoreTo,
@@ -38,8 +40,6 @@ export default function WizardCTA({
     fullCommand?: string
     /** Clipboard override, if it should differ from what's displayed. */
     copyCommand?: string
-    /** Shorthand for `command="self-driving"`. Takes precedence over `command`. */
-    selfDriving?: boolean
     title?: string
     subtitle?: string
     /** "Learn more" link target under the command. Defaults to `/wizard`. */
@@ -68,7 +68,6 @@ export default function WizardCTA({
                             command={command}
                             fullCommand={fullCommand}
                             copyCommand={copyCommand}
-                            selfDriving={selfDriving}
                             secondaryTo={learnMoreTo}
                         />
                     </div>

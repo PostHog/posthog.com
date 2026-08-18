@@ -23,34 +23,31 @@ Every prop is optional and defaults to the copy above, so a post can retarget th
 
 ## Setting the command
 
-There are two levels, depending on how much you want to own:
+Two props, depending on how much of the command you want to own.
 
-`command` appends a subcommand to the built command, which keeps the copy-button pinning (`-y` and `@latest`) that stops readers from running a stale wizard:
+**`command` appends a wizard subcommand.** Use this for the normal case — a documented wizard subcommand like `self-driving`, `ai-observability`, or `warehouse` (see [the wizard docs](/docs/ai-engineering/ai-wizard) for the list). You get the copy-button pinning for free: `-y` auto-confirms the npx prompt and `@latest` stops readers running a stale wizard, neither of which clutters the displayed command.
 
 ```mdx
 <WizardCTA command="self-driving" />   →  shows  npx @posthog/wizard self-driving
                                           copies npx -y @posthog/wizard@latest self-driving
 ```
 
-`selfDriving` is shorthand for that same subcommand:
+**`fullCommand` replaces the command outright.** Whatever you type is what shows in the box and what lands on the reader's clipboard — nothing is appended and nothing is pinned, so include `-y`/`@latest` yourself if you want them. It does not have to be a wizard command at all:
 
 ```mdx
-<WizardCTA selfDriving />
+<WizardCTA fullCommand="npx -y @posthog/wizard@latest self-driving --debug" />
+
+<WizardCTA fullCommand="pip install posthog" title="Install the Python SDK" />
 ```
 
-`fullCommand` states the whole thing instead. It is shown and copied verbatim — nothing is appended and nothing is pinned, so add `-y`/`@latest` yourself if you want them. Reach for this when the built form isn't what you need:
-
-```mdx
-<WizardCTA fullCommand="npx @posthog/wizard self-driving --debug" />
-```
+Use `copyCommand` alongside it when the clipboard should differ from the display.
 
 ## Props
 
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| `command` | `string?` | – | Wizard subcommand appended to `npx @posthog/wizard`, e.g. `"ai-observability"` |
-| `selfDriving` | `boolean?` | `false` | Shorthand for `command="self-driving"`; takes precedence over `command` |
-| `fullCommand` | `string?` | – | The entire command, shown and copied verbatim. Overrides `command`/`selfDriving` and skips the `-y`/`@latest` pinning |
+| `command` | `string?` | – | Wizard subcommand appended to `npx @posthog/wizard`, e.g. `"self-driving"` |
+| `fullCommand` | `string?` | – | The entire command, shown and copied verbatim. Overrides `command` and skips the `-y`/`@latest` pinning |
 | `copyCommand` | `string?` | – | Clipboard override, if it should differ from what's displayed |
 | `title` | `string?` | "Install PostHog with one command" | Bold headline |
 | `subtitle` | `string?` | "Paste this into your terminal and make AI do all the work." | Supporting line |
