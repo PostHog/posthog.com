@@ -5,35 +5,54 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconFlask, IconGraph, IconToggle, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import { DownloadButton } from '../../../src/pages/desktop'
+import { DownloadCTA, DownloadList } from 'components/Code/DownloadContent'
 
-PostHog Desktop is a desktop coding agent that understands your product and business, not only your source code. Here's a quick tour of how it works.
+PostHog Desktop brings coding agents, product context, and team processes into one app. Organize work in spaces, ask agents to produce code or interactive canvases, then automate the work you want to repeat.
 
-<QuestLog firstSpeechBubble="Let's tour PostHog Desktop!" lastSpeechBubble="You're ready to ship with agents!">
+<QuestLog firstSpeechBubble="Let's tour PostHog Desktop!" lastSpeechBubble="You're ready to build with agents!">
 
 <QuestLogItem
-title="Start your first task"
-subtitle="Required"
+title="Work in a space"
+subtitle="Foundation"
+icon="IconDashboard"
+>
+
+A **space** keeps related work together. Its feed contains agent sessions and canvases, while its `CONTEXT.md` gives agents the product and repository background they need.
+
+An **agent session** is one ongoing interaction with an agent. It includes your instructions, the agent's responses and progress, its code changes, and any resulting pull request.
+
+Use your personal space for private work. Create a shared space when a project, product area, or recurring workflow belongs to the team. People can follow its agent sessions, join threads, and use the same shared context when they continue the work.
+
+| A space contains | What it gives you |
+|---|---|
+| **Agent sessions** | Conversations with agents and the work they produce |
+| **Canvases** | Interactive apps built around your PostHog data |
+| **CONTEXT.md** | Shared background for work started in that space |
+
+<OSButton variant="primary" asLink to="/docs/posthog-desktop/spaces">
+  Explore spaces and canvases
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Ask an agent"
+subtitle="Build"
 icon="IconTerminal"
 >
 
-A **task** is the unit of work in PostHog Desktop. Type a prompt, choose where the agent should work, and send it off.
+Describe the outcome you want, choose a repository, and send the task. Pick Pi, Claude Code, or Codex, then decide where the agent should work:
 
-Tasks persist across restarts, can move between your computer and the cloud, and stay tied to a specific repository.
+- **Local** for a focused change on your current branch
+- **Dedicated checkout** for isolated local work on its own branch
+- **Cloud** for work that should continue after you close the app
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/x_0,y_0,w_1340,h_410,c_crop/Screenshot_2026_05_04_at_4_43_01_PM_eea6fe87a8.png"
 classes="rounded"
 alt="Starting a task in PostHog Desktop"
 />
-
-| Mode | Where it runs | Best for |
-|---|---|---|
-| **Cloud** | PostHog-managed sandbox | Long-running tasks you want to walk away from |
-| **Local** | Your computer, current branch | Quick, focused changes |
-| **Worktree** | Your computer, dedicated branch and folder | Parallel work on the same repo |
 
 <OSButton variant="primary" asLink to="/docs/posthog-desktop/tasks">
   Learn about tasks
@@ -42,46 +61,37 @@ alt="Starting a task in PostHog Desktop"
 </QuestLogItem>
 
 <QuestLogItem
-title="Give the agent PostHog context"
-subtitle="Recommended"
+title="Bring in product context"
+subtitle="Understand"
 icon="IconSparkles"
 >
 
-PostHog Desktop can reason with product data while it works. As you write code or stage a diff, the [enricher](/docs/posthog-desktop/posthog-integration#enricher) detects PostHog SDK calls and pulls live data from your project.
+PostHog Desktop gives the agent more than source code. After you sign in, it can use:
 
-That gives the agent context like flag rollouts, experiment status, event volume, and error frequency next to the code that emits them.
+- **Live product context** beside PostHog SDK calls, including event activity, flag rollout, and Experiment status
+- **PostHog skills** for instrumentation, Experiments, warehouse work, and AI Observability
+- **PostHog's MCP server** to query insights, dashboards, Feature Flags, errors, and other project data
+- **Other MCP servers** for services such as issue trackers, design tools, and internal APIs
 
-You can ask the agent product-aware questions that cut across PostHog:
+This lets you ask questions that cross product data and code, such as:
 
-### <IconGraph className="text-blue w-7 -mt-1 inline-block" /> Product Analytics
+> "This error increased after our last release. Which customers are affected, and did conversion change?"
 
-_"Are we capturing the right events for this new feature roll out, and can we compare adoption to what we shipped before?"_
-
-### <IconWarning className="text-yellow w-7 -mt-1 inline-block" /> Error Tracking
-
-_"This error keeps showing up in production. What's the impact on conversion and revenue? Should we fix it now or defer it?"_
-
-### <IconToggle className="text-seagreen w-7 -mt-1 inline-block" /> Feature Flags
-
-_"Can you add a feature flag to the new checkout page, implement `isFeatureEnabled`, and roll it out to everyone with an `@example.com` email first?"_
-
-### <IconFlask className="text-purple w-7 -mt-1 inline-block" /> Experiments
-
-_"Can you scaffold an experiment with variants, a traffic split, and goal metrics so we can measure this change properly?"_
+> "Is this flag safe to remove, and which branches still depend on it?"
 
 <OSButton variant="primary" asLink to="/docs/posthog-desktop/posthog-integration">
-  Learn about the PostHog integration
+  Explore the PostHog integration
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-title="Ship your first PR"
-subtitle="Required"
+title="Ship code"
+subtitle="Produce"
 icon="IconCode"
 >
 
-Every task has a built-in diff panel. Use it to read edits side by side, leave inline feedback, manage staged files, and follow up on PR comments without leaving the app.
+Review edits in the diff panel, comment on a line, and ask the agent to make a correction. When the change is ready, PostHog Desktop can commit it, push the branch, and open a pull request without leaving the task.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_04_30_at_2_14_45_PM_aec0c02d2b.png"
@@ -89,23 +99,39 @@ classes="rounded"
 alt="Diff panel in PostHog Desktop"
 />
 
-When you're happy, click **Create PR**. PostHog Desktop commits, pushes, generates a title and body that respect your repo's `PULL_REQUEST_TEMPLATE.md`, and opens the PR through the GitHub CLI.
+<OSButton variant="secondary" asLink to="/docs/posthog-desktop/code-review">
+  Review and ship code
+</OSButton>
 
-<OSButton variant="primary" asLink to="/docs/posthog-desktop/code-review">
-  Learn about code review
+</QuestLogItem>
+
+<QuestLogItem
+title="Build a canvas"
+subtitle="Produce"
+icon="IconGraph"
+>
+
+Ask for a report, product tool, or interactive dashboard that does not fit a standard insight. A canvas can combine PostHog data with filters, shared state, and approved actions. Comment on a specific part, compare versions, revert a change, and share the result with your team.
+
+<ProductScreenshot
+imageLight="/images/docs/posthog-desktop/canvas.png"
+classes="rounded"
+alt="Interactive canvas for exploring compute pricing"
+/>
+
+<OSButton variant="secondary" asLink to="/docs/posthog-desktop/spaces#canvases">
+  Build with canvases
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
 title="Run agents in parallel"
-subtitle="Recommended"
-icon="IconLayoutDashboard"
+subtitle="Scale"
+icon="IconGridMasonry"
 >
 
-Open **Command Center** to run multiple agent sessions side by side. Each cell is an independent task with its own conversation, branch, and workspace.
-
-Use it to plan several features in parallel, fan out a batch of small fixes, or watch a long cloud run while you work locally on something else.
+Open **Command Center** to keep several independent tasks in one grid. Use it to compare approaches, split a project into smaller pieces, clear a batch of fixes, or see which agents need input.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/pasted_image_2026_05_04_T23_04_17_757_Z_2d9d7b46b7.png"
@@ -113,65 +139,29 @@ classes="rounded"
 alt="Command Center showing multiple agent tasks in a grid"
 />
 
-<OSButton variant="primary" asLink to="/docs/posthog-desktop/command-center">
-  Learn about Command Center
-</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-title="Hand work to the cloud"
-subtitle="Recommended"
-icon="IconCloud"
->
-
-Cloud runs put tasks in sandboxes managed by PostHog. Close the app, switch networks, or shut your laptop, and the agent keeps going.
+Mix local tasks, dedicated checkouts, and cloud runs in the same view. Long cloud work keeps going when your computer is offline, while the status summary shows what is running or waiting when you return.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_05_05_T00_51_48_152_Z_24fe877fde.png"
 classes="rounded"
-alt="Command Center showing multiple agent tasks in a grid"
+alt="A cloud task running in PostHog Desktop"
 />
 
-When you're ready, hand the task back to local for review. PostHog Desktop brings over the changes, branch, and conversation history.
-
-<OSButton variant="primary" asLink to="/docs/posthog-desktop/cloud-runs">
-  Learn about cloud runs
+<OSButton variant="primary" asLink to="/docs/posthog-desktop/command-center">
+  Run agents in parallel
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-title="Kick off tasks from Slack"
-subtitle="Recommended"
-icon="IconChat"
+title="Respond to product signals"
+subtitle="Automate"
+icon="IconBolt"
 >
 
-Mention `@PostHog` in any Slack channel, describe what you want done, and the agent picks up the work. It replies in-thread as it runs.
+Self-driving agents investigate product signals such as error spikes, support reports, and unexpected behavior. They research the impact, create an actionable report in the Inbox, and can open a pull request when a code fix is possible.
 
-This is useful for fixes that come up while you're away from your computer or when a teammate spots something that should become a coding task.
-
-<ProductScreenshot
-imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
-classes="rounded"
-alt="A PostHog Desktop task running in a Slack thread"
-/>
-
-<OSButton variant="primary" asLink to="/docs/slack">
-  Learn about Slack
-</OSButton>
-
-</QuestLogItem>
-
-<QuestLogItem
-title="Let Inbox open PRs for you"
-subtitle="Recommended"
-icon="IconInbox"
->
-
-The [inbox](/docs/self-driving/inbox) is the autopilot version of PostHog Desktop. Connect signal sources like Error Tracking, Support tickets, Session Replay, GitHub issues, or Linear issues.
-
-PostHog Desktop researches each new signal, prioritizes it by user impact, and opens a PR when a code fix is possible. Your job is to review and merge.
+Review each report, assign it to the right person, or let the agent continue with the fix. This turns product data into work without waiting for someone to notice the problem and reconstruct its context.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
@@ -180,22 +170,50 @@ alt="The PostHog Desktop Inbox with researched and actionable reports"
 />
 
 <OSButton variant="primary" asLink to="/docs/self-driving/inbox">
-  Tour Inbox
+  Explore the Inbox
 </OSButton>
 
 </QuestLogItem>
 
 <QuestLogItem
-title="Try PostHog Desktop"
+title="Work with your team"
+subtitle="Collaborate"
+icon="IconPeople"
+>
+
+Shared spaces give a team one feed for agent sessions, canvases, and decisions. Mention a teammate in a thread, share a link to the relevant work, or leave feedback where the agent produced it.
+
+You can also mention `@PostHog` in Slack to start a task from a conversation. The agent replies in the thread while PostHog Desktop keeps the task, code, and review workflow together.
+
+<ProductScreenshot
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_05_04_at_4_47_08_PM_b8ba794fdc.png"
+classes="rounded"
+alt="A PostHog Desktop task running in a Slack thread"
+/>
+
+<OSButton variant="primary" asLink to="/docs/slack">
+  Start tasks from Slack
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Download PostHog Desktop"
 subtitle="Next step"
 icon="IconDownload"
 >
 
-Ready to take it for a spin? Download PostHog Desktop and connect your first repo. PostHog Desktop will be available for download in Summer 2026. 
+Download PostHog Desktop, sign in, and choose your first repository. There is no waitlist or invite code.
 
-<div className="@container bg-blue/10 border border-blue rounded-md pb-8 pt-0 px-8 shadow-xl">
-  <DownloadButton />
+<div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
+  <DownloadCTA />
 </div>
+
+## All platforms
+
+<DownloadList />
+
+See [download PostHog Desktop](/docs/posthog-desktop/download-posthog-desktop) for platform packages, updates, and eligibility.
 
 </QuestLogItem>
 </QuestLog>

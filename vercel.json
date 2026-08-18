@@ -198,6 +198,11 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
             "statusCode": 301

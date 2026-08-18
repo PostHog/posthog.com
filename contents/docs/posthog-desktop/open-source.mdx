@@ -4,32 +4,36 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog Desktop is open source under the MIT license. The full source for the desktop app, the agent framework, and the bundled PostHog skills lives at [github.com/PostHog/code](https://github.com/PostHog/code).
+PostHog Desktop is open source under the MIT license. Its source is in the [`PostHog/posthog`](https://github.com/PostHog/posthog) monorepo at `products/desktop`.
 
-## What's open
+`products/desktop` is a pnpm workspace with its own lockfile. You need Node 22 or later and pnpm 10.
 
-The repo is a monorepo containing:
+## Project structure
 
 | Component | Location |
 |---|---|
 | Desktop app | `apps/code` |
-| Agent framework | `packages/agent` |
-| PostHog enricher | `packages/enricher` |
-| Bundled skills | `apps/code/plugins/posthog/skills` |
+| Web app | `apps/web` |
+| Business logic | `packages/core` |
+| React UI | `packages/ui` |
+| Agent harness and extensions | `packages/harness`, `packages/agent` |
+| PostHog enrichment service | `packages/enricher` |
+| Git, filesystem, terminal, and watcher services | `packages/workspace-server` |
+| Bundled PostHog skills | `plugins/posthog/skills` |
 
-## Contributing
+Shared packages contain the application logic. PostHog Desktop and the web host bind their platform-specific implementations. Read `products/desktop/AGENTS.md` before you contribute.
 
-We welcome external contributions. To get started:
+## Contribute
 
-1. Read [CONTRIBUTING.md](https://github.com/PostHog/code/blob/main/CONTRIBUTING.md) in the repo
-2. Browse issues labeled [`good first issue`](https://github.com/PostHog/code/labels/good%20first%20issue)
-3. Open a PR from a `feat/*` or `fix/*` branch – `pnpm typecheck`, `pnpm lint`, and `pnpm test` should all pass
-4. Drop into the [PostHog Discord](https://discord.gg/posthog) if you want to chat through an idea before writing code
+1. Read [CONTRIBUTING.md](https://github.com/PostHog/posthog/blob/master/products/desktop/CONTRIBUTING.md)
+2. Browse [open desktop issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3Adesktop)
+3. Open a pull request after `pnpm typecheck`, `pnpm lint`, and `pnpm test` pass from `products/desktop`
+4. Join the [PostHog Discord](https://discord.gg/posthog) to discuss an idea
 
-## Reporting bugs
+## Report a bug
 
-Found something broken? [Open an issue](https://github.com/PostHog/code/issues/new) with the version you're running (visible in **Settings → About**) and steps to reproduce.
+[Open an issue](https://github.com/PostHog/posthog/issues/new) with the app version from **Settings** > **About** and reproduction steps.
 
 ## License
 
-PostHog Desktop is released under the [MIT license](https://github.com/PostHog/code/blob/main/LICENSE).
+PostHog Desktop is released under the [MIT license](https://github.com/PostHog/posthog/blob/master/products/desktop/LICENSE).

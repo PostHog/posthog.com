@@ -1,0 +1,73 @@
+---
+title: Spaces and canvases
+---
+
+A **space** groups related agent sessions and the background an agent needs to work there. An **agent session** is an ongoing interaction with an agent, including your instructions, its responses and progress, its code changes, and any resulting pull request. A **canvas** is an app the agent builds and renders against your PostHog data.
+
+## Spaces
+
+You get one **personal** space, listed above the shared ones. Use it for private work. Every other space is shared with your project, so teammates see its agent sessions and can join a thread.
+
+Star the spaces you use most. `⌘1` opens your personal space and `⌘2` through `⌘9` open starred spaces in order. `⌘⇧S` jumps to the space search box.
+
+### Create a space
+
+Creating a space takes three steps: name it, describe what it is about, and pick the repositories it works with.
+
+The description of a space helps fill out the space's `CONTEXT.md` for you. Choose **Skip** to create the space on its own, and the intro card in the feed offers `CONTEXT.md` again later.
+
+### The feed
+
+A space opens on its feed, a single list of the agent sessions and canvases in that space. Each row carries its status, who started it, whether it ran locally or in the cloud, and any pull request it opened, with checks.
+
+A space header also holds recent agent sessions and **CONTEXT.md**.
+
+### Threads and mentions
+
+Each feed row opens a thread. Threads are for people: you see human messages and the artifacts the agent produced, such as canvases and pull requests, without the agent's full turn-by-turn output. Open the session itself for that.
+
+Type `@` to mention a teammate or the agent. Mentioning a teammate notifies them, and mentions of you appear in your activity feed alongside sessions you created or messaged in.
+
+The activity panel beside a session has **Timeline**, **Artifacts**, and **Comments** tabs. Unread items are marked, and you can mark what is visible or everything as read.
+
+## CONTEXT.md
+
+Each space can hold a `CONTEXT.md` with background that helps agents work effectively. Its four sections are an overview, key files, conventions, gotchas, and related PostHog resources.
+
+`CONTEXT.md` is stored in PostHog and edited in the app, so it applies to every session in the space no matter which checkout runs.
+
+The initial setup of your `CONTEXT.md` uses your repository and queries PostHog for related Feature Flags, Experiments, Surveys, notebooks, and insights.
+
+## Canvases
+
+A canvas turns a request into an interactive app built around your PostHog data. Describe what you need, and the agent builds it inside PostHog Desktop. You do not need to write SQL, set up a frontend, or fit the work into a standard dashboard.
+
+<ProductScreenshot
+imageLight="/images/docs/posthog-desktop/canvas.png"
+classes="rounded"
+alt="Interactive canvas for exploring compute pricing"
+/>
+
+Use canvases to answer recurring questions or give a team one place to complete a workflow. For example:
+
+- Track release health across adoption, errors, support reports, and open pull requests
+- Build a customer lookup tool for support
+- Create a weekly product report with the metrics and commentary your team cares about
+- Compare a feature rollout with the behavior and feedback behind the numbers
+- Give a team an interactive scoreboard with filters and shared state
+
+A canvas can combine saved insights with new queries, add controls such as filters and date ranges, remember a viewer's choices, and share state with the team. When needed, it can also capture events or offer approved actions rather than only display data.
+
+### Build and improve a canvas
+
+Ask for a canvas in any session, or start one from the canvas view. The agent builds a working first version against the PostHog project you selected.
+
+Use comments to request changes. Select a specific part of the canvas to anchor your feedback, or comment on the whole app. Each rebuild creates a version, so you can compare changes and revert if the result gets worse.
+
+Share the finished canvas with your team. It stays in its space beside the sessions and context that produced it, so people can understand why it exists and continue improving it.
+
+Canvas code runs in isolation and gets only the data access and actions it declares. If a build needs approval, PostHog Desktop asks on the canvas instead of making you find the underlying session.
+
+## Share spaces and canvases
+
+**Copy link** gives you an HTTPS link that attempts to open the space, thread, or canvas in PostHog Desktop. If the app does not open, the browser shows options to try again or download PostHog Desktop. Recipients still need access to the shared content.

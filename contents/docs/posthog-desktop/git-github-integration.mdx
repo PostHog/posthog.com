@@ -74,7 +74,7 @@ When a cloud task opens a PR, PostHog Desktop auto-detects the URL from the agen
 
 ### Create PR fails at the push step
 
-Check that your branch has a remote configured and that `gh auth status` reports you as authenticated. Force-push is never used. If the remote has diverged, resolve it manually before retrying.
+Check that your branch has a remote configured and that `gh auth status` reports you as authenticated. The **Push** action never force-pushes, so if the remote has diverged, resolve that before you retry.
 
 ### Generated text is empty
 
@@ -86,4 +86,4 @@ PostHog Desktop looks for templates in standard GitHub locations like `.github/P
 
 ### Cloud task did not link its PR
 
-PostHog Desktop extracts the link from the PR URL in the agent's tool output. If the agent opened the PR through a path that hides the URL, the link may not be attached automatically, but the PR still exists on GitHub.
+Check the task's branch on GitHub. The pull request can still exist even when its link does not appear in PostHog Desktop.

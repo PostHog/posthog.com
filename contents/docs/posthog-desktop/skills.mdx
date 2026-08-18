@@ -2,11 +2,13 @@
 title: PostHog Desktop skills
 ---
 
-PostHog Desktop loads the same skills Claude Code uses: from your machine, from the repo you are in, and from any marketplace plugins you have installed. It also includes PostHog-maintained skills for things like event capture, feature flags, experiments, and error tracking, so the agent already knows how to work with PostHog.
+Skills give agents a repeatable way to complete specific work. Use one to apply your team's conventions, follow a proven debugging process, or handle a PostHog task without explaining the same steps in every prompt.
 
-## Getting started
+PostHog Desktop includes skills for common PostHog work. You can also install community skills, create your own, or share a skill with your team. Under the hood, each skill is a directory with a `SKILL.md` file.
 
-To view all available skills, choose **Skills** from the left sidebar. Select any individual skill to see its details.
+## Get started
+
+Open **Skills** from the left sidebar. Select a skill to read it. Use the **Installed**, **Team**, and **Marketplace** tabs to filter the list.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2026_04_24_at_10_20_25_AM_3122a5985b.png"
@@ -14,38 +16,48 @@ classes="rounded"
 alt="PostHog Desktop skills view"
 />
 
-## Your skills
-
-PostHog Desktop picks up skills from three places:
+## Skill sources
 
 | Source | Location |
 |---|---|
+| **Bundled** | Included with PostHog Desktop. PostHog skills cover instrumentation, Experiments, Data Warehouse, and AI Observability |
 | **User** | `~/.claude/skills/` |
-| **Repository** | `.claude/skills/` in the current repo |
-| **Marketplace** | Plugins installed via `~/.claude/plugins/installed_plugins.json` |
+| **Repository** | `.claude/skills/` in a repository you add to PostHog Desktop |
+| **Team** | Shared through your PostHog project |
+| **Marketplace** | The [skills.sh](https://skills.sh) community index, installed in your user directory |
 
-Any directory in these locations that contains a `SKILL.md` with valid YAML frontmatter will appear in the Skills sidebar and be available to the agent.
+A directory with a valid `SKILL.md` and YAML `frontmatter` appears in Skills and is available to the agent.
 
-Codex sessions pick up the bundled PostHog skills automatically. PostHog Desktop syncs them to `~/.agents/skills/` so the Codex CLI can find them.
+Resources under `.pi/` belong to the [Pi harness](/docs/posthog-desktop/use-any-model-and-harness) and require repository trust. PostHog Desktop does not load them until you trust the repository. See [repository trust](/docs/posthog-desktop/mcp-servers#repository-trust-for-pi-servers).
+
+Codex sessions also use bundled PostHog skills. PostHog Desktop mirrors them to `~/.agents/skills/` for the Codex CLI.
 
 ## Bundled skills
 
-PostHog Desktop comes with a set of first-party skills for common PostHog workflows. A few of our favorites:
+PostHog Desktop includes skills for common PostHog work:
 
-- `instrument-product-analytics` - add event capture to a codebase
-- `instrument-error-tracking` - wire up exception tracking with source maps
-- `instrument-feature-flags` - gate functionality behind feature flags
-- `creating-experiments` - set up an A/B test end to end
-- `diagnosing-failed-warehouse-syncs` - troubleshoot broken warehouse pipelines
-- `exploring-llm-traces` - debug LLM agent traces
+- `instrument-product-analytics` for adding event capture
+- `instrument-error-tracking` for adding error capture and source maps
+- `instrument-feature-flags` for adding [Feature Flags](/docs/feature-flags)
+- `creating-experiments` for setting up an A/B test
+- `diagnosing-failed-warehouse-syncs` for debugging warehouse syncs
+- `exploring-llm-traces` for investigating LLM traces
 
-Bundled skills are published independently from the app and update on their own schedule, so you don't need a new build of PostHog Desktop to get the latest versions.
+See [PostHog integration](/docs/posthog-desktop/posthog-integration) for the full list.
 
-## How it works
+Bundled skills update separately from PostHog Desktop. You do not need an app update to receive them.
 
-Bundled PostHog skills are packaged with the app at build time and re-fetched in the background every 30 minutes while the app is running. If a download fails (no network, restrictive proxy, etc.) the previously-cached skills stay in place and the app retries on the next interval.
+## Create a skill
 
-Your user, repo, and marketplace skills aren't polled. They're discovered when a new agent session starts. If you add or edit a skill on disk, PostHog Desktop picks it up the next time you kick off a task.
+Create a skill from the Skills view and edit it in PostHog Desktop. The editor includes a file tree and `frontmatter` editor. Save the skill in your user directory for personal use, commit it under `.claude/skills/` for repository use, or publish it to your team.
+
+Keep skills narrow. Describe when to use the skill and list the steps or commands the agent should follow.
+
+## Skill updates
+
+Bundled skills update automatically without an app release. Changes to your own skills appear in the Skills view immediately.
+
+A running task keeps the version it started with. Start a new task to use a skill you added or changed.
 
 ## Troubleshooting
 
@@ -53,20 +65,20 @@ Your user, repo, and marketplace skills aren't polled. They're discovered when a
 
 Check that the skill:
 
-- Lives in a directory with a `SKILL.md` file at its root
-- Starts with valid YAML frontmatter
-- Includes at least `name` and `description` fields
+- Is in a directory with `SKILL.md` at its root
+- Starts with valid YAML `frontmatter`
+- Defines at least `name` and `description`
 
-Skills with missing or malformed frontmatter are skipped silently.
+PostHog Desktop skips skills with missing or invalid `frontmatter`.
 
-### Skill changes are not appearing
+### Repository skills do not load
 
-Start a new task. User and repo skills are scanned when a session starts, not in real time.
+Skills under `.claude/skills/` require the repository to be added to PostHog Desktop. Resources under `.pi/` also require repository trust. Look for the trust control above the composer.
 
-### The PostHog marketplace plugin is missing
+### A changed skill does not affect a task
 
-This is expected. PostHog Desktop ships its own bundled copy of the PostHog plugin and skips any marketplace-installed version to avoid duplicates.
+Start a new task. A task uses the skills available when it started.
 
-### Bundled skills seem out of date
+### Bundled skills are out of date
 
-Background updates require network access. When you're offline or behind a restrictive proxy, the app keeps using the last-downloaded set until it can reach the release endpoint again.
+Bundled skill updates need network access. When PostHog Desktop cannot check for an update, it keeps using the last version it downloaded.

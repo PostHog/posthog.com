@@ -5,9 +5,7 @@ title: PostHog Desktop pricing
 import { CalloutBox } from "components/Docs/CalloutBox";
 import { PostHogDesktopPricing } from "components/PostHogDesktopPricing";
 
-PostHog Desktop usage consumes **AI credits**, with credit consumption anchored to underlying token costs. PostHog Desktop credits carry **no markup**: They reflect the underlying LLM provider's cost exactly, with nothing added on top.
-
-For reference, **100 AI credits = $1**.
+PostHog Desktop usage consumes **AI credits**. Credit use depends on the model, token use, and resources required to complete the task.
 
 Each time you interact with PostHog Desktop, such as writing code, querying your PostHog data, or asking an ad-hoc question, credits are spent based on the resources required to complete your request.
 
@@ -19,7 +17,7 @@ The following table shows token costs per model and token type **per 1M tokens**
 
 <PostHogDesktopPricing />
 
-Prices are passed through from the underlying model providers at cost and may change as providers update their rates.
+Rates may change as providers update their prices.
 
 ## What consumes AI credits
 
@@ -33,11 +31,10 @@ All usage is charged as credits, after your $20 monthly free tier.
 
 ## How AI credit usage works
 
-AI credits are based on the **underlying token costs**, which reflect the effort required to complete your request.
+AI credit use reflects the model and tokens required to complete your request.
 
 - Simple, short tasks use very few tokens, and therefore very few credits.
 - More complex tasks that span many files or multiple iterations use more tokens and consume more credits.
-- Because we charge no markup, your credits reflect exactly what the underlying model costs.
 - You can pick [any model and any harness](/docs/posthog-desktop/use-any-model-and-harness), so you're free to choose a cheaper model for simpler tasks.
 
 While exact usage varies, credit consumption usually scales with complexity. You'll always see **real-time cost information** while using PostHog Desktop.
@@ -78,7 +75,7 @@ The **Plan & usage** tab in the app shows your spend in real time. The in-app bi
 You're always in control of your AI credit usage:
 
 - **Real-time tracking:** See costs as you go
-- **Default & custom billing limit:** PostHog sets a default **$50 billing limit** so you don't accidentally rack up costs without a ceiling. You can customize your billing limit at any time.
+- **Billing limit:** Set a limit to prevent additional use after your organization reaches the amount you choose. You can change it at any time.
 - **Usage alerts:** Get notified when you hit key thresholds through automated billing emails
 
 When you reach your billing limit, you won't be able to send messages until you raise it. Increase your billing limit to continue using PostHog Desktop.
