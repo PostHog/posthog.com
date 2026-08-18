@@ -2,6 +2,8 @@ import React from 'react'
 
 import { IconArrowUpRight, IconRewindPlay } from '@posthog/icons'
 
+import OSButton from 'components/OSButton'
+
 /**
  * A button from the app, drawn inline in a sentence – "click <ViewRecordings /> to watch them".
  * Sized in `em` so it rides the line at whatever reading size the Aa control is set to, rather
@@ -105,5 +107,22 @@ export function ScannerTemplate({
                 {answers} · <code className="text-[0.95em]">{property}</code>
             </span>
         </a>
+    )
+}
+
+/**
+ * The book's "go do it" button: `<CTA to="https://app.posthog.com/…">Set up a proxy</CTA>`.
+ *
+ * The self-driving volume has `<Enable />`, which prefills a scout – this is the plain version for
+ * volumes without a template behind them. One per section at most; a page of buttons is a page
+ * with no button.
+ */
+export function CTA({ to, children }: { to: string; children: React.ReactNode }): JSX.Element {
+    return (
+        <span className="not-prose my-[0.8em] block">
+            <OSButton asLink to={to} external variant="primary" size="md">
+                {children}
+            </OSButton>
+        </span>
     )
 }

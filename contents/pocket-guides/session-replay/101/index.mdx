@@ -44,7 +44,6 @@ bookOrder: 1
     screenshot="home"
     alt="A session playing back on the left, with the inspector's event list beside it"
     caption="The player up close: the session on the left, everything PostHog recorded about it on the right."
-    legend="The event list is built from your events, so it's the same activity you'd query – not a separate recording of it."
     annotations={[
         {
             x: 16,
@@ -87,13 +86,15 @@ Select a session on the left and it plays back in the middle, with everything Po
 ## Session context
 
 
-The right-hand inspector <SeeFig n={2} /> lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
+The right-hand inspector lets you watch replays in context of your PostHog data. They add context so you can answer the who, what, when, where, and how of each replay. You can follow from replay to persons, events, logs, errors, and more.
 
 - **[Overview](/docs/session-replay/how-to-watch-recordings)** – who this is. The <Term name="person" /> and their <Term name="person property">properties</Term>, the screen they were on, which <Term name="experiment" /> variants they got, and who else on your team has already watched this replay.
 - **[Inspector](/docs/session-replay/how-to-watch-recordings)** – events and errors captured during the session on a synced timeline. Your <Term name="event">events</Term>, [console logs](/docs/session-replay/console-log-recording), [network requests](/docs/session-replay/network-recording), and comments, filterable down to one kind at a time.
 - **[Network waterfall](/docs/session-replay/network-recording)** – what the page was waiting on. Every request laid out by time, so a slow screen in the replay has something to blame.
 - **[Observations](/docs/replay-vision/observations)** – what <Term name="replay vision">Replay Vision</Term> found in this session without you watching it.
 - **[Linked issues](/docs/session-replay/integrations)** – create or find related issues in your issue tracking tool.
+
+You'll find them all on the right of the player <SeeFig n={2} />.
 
 ## What's actually recorded
 

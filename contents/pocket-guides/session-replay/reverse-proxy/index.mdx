@@ -41,27 +41,23 @@ Nothing errors when a recording is blocked. The recording just never appears in 
 
 ## Setting one up with PostHog
 
-<!-- Source: contents/docs/advanced/proxy/_snippets/managed-reverse-proxy.mdx throughout –
-      :14      free on PostHog Cloud, needs DNS access
-      :22-36   create the proxy, and the neutral-subdomain warning (:32)
-      :40-52   the CNAME record, and the grey-cloud warning (:48)
-      :56      waiting -> issuing -> live, 2-5 min, up to 30
-      :74-96   api_host + ui_host, and why both
-      :110-118 the Diagnose tool and what it checks
-      :6-8     Cloudflare as subprocessor, and not HIPAA-compliant (repeated at :184) -->
+PostHog runs a managed proxy for you. It sits on a subdomain you own, and PostHog handles the SSL
+certificate, the routing, and the maintenance. It's free on PostHog Cloud and all you need is
+access to your DNS.
 
-PostHog offers a built-in managed proxy that runs on a subdomain you own, and PostHog handles the SSL certificate, the routing, and the maintenance. It's free on PostHog Cloud. All you need is access to your DNS.
+<CTA to="https://app.posthog.com/settings/organization-proxy">Set up a managed proxy</CTA>
 
-1. In [organization proxy settings](https://app.posthog.com/settings/organization-proxy), create a new managed proxy and give it a subdomain you control.
-2. At your DNS provider, add a CNAME from that subdomain to the proxy domain PostHog generates.
-3. Wait. The status goes **waiting** → **issuing** → **live**, usually in 2-5 minutes, up to 30 if DNS propagation is slow.
-4. Point your SDK at it with `api_host`, and set `ui_host` to PostHog's own domain so things like the toolbar keep working.
+Two things to get right, because both quietly defeat the point:
 
-Two things to get right:
+**Pick a boring subdomain.** Anything containing `analytics`, `tracking`, `telemetry`, `posthog`,
+or `ph` is already on the block lists you're trying to avoid.
 
-**Pick a boring subdomain.** Anything containing `analytics`, `tracking`, `telemetry`, `posthog`, or `ph` is already on most block lists you're trying to avoid. A blocked proxy achieves nothing.
+**Turn your DNS provider's own proxy off.** On Cloudflare that's the grey cloud, not the orange
+one. Leaving it on breaks certificate provisioning.
 
-**Turn your DNS provider's own proxy off.** Leaving it on interferes with routing and with certificate provisioning.
+If it doesn't come up, the **Diagnose** option in the proxy's ⋯ menu checks the DNS record, the
+certificate, and whether events are actually flowing. Full setup and troubleshooting is in
+[managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy).
 
 <details>
 

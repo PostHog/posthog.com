@@ -43,6 +43,8 @@ It can be difficult to understand exactly how these rules play together. A few t
 
 ## Examples
 
+Each one is a trigger group you can hand to PostHog AI and have it set up for you.
+
 <details>
 
 <summary>Record every checkout session, and 5% of everything else</summary>
@@ -50,6 +52,8 @@ It can be difficult to understand exactly how these rules play together. A few t
 Two groups. The first has a URL pattern for your checkout path and a 100% sample rate. The second has no conditions at all and a 5% sample rate.
 
 A session on checkout matches the first group and records. Everything else falls to the second, where the sample rate decides. A session that matches both still only records once.
+
+<AskAI q="Set up session replay trigger groups: record 100% of sessions that visit my checkout URL, and 5% of everything else" />
 
 </details>
 
@@ -60,6 +64,8 @@ A session on checkout matches the first group and records. Everything else falls
 One group, match type set to **all**: an event trigger on your exception event, plus a feature flag you've rolled out to paying customers.
 
 With **any** instead, you'd get every exception from every user, plus every session from a paying customer – a much larger net than you meant to cast.
+
+<AskAI q="Set up a session replay trigger group that records only sessions where a user on my paying-customer feature flag hit an exception" />
 
 </details>
 
