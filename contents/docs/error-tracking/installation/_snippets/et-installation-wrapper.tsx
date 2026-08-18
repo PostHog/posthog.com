@@ -161,7 +161,8 @@ export const ErrorTrackingKMPInstallationWrapper = () => (
                     mappingsUrl: '/docs/error-tracking/upload-debug-symbols/kmp',
                     mappingsLabel: 'Upload debug symbols',
                     mappingsDescription:
-                        'Upload the debug symbols for each KMP target so PostHog can generate accurate stack traces.',
+                        "If you ship minified or native code on a supported KMP target, upload that target's debug symbols so PostHog can generate accurate stack traces.",
+                    mappingsBadge: 'optional',
                 })
             }
         />

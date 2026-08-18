@@ -429,7 +429,9 @@ To automatically capture screen views on Android, set `captureScreenViews = true
 
 ## Error tracking
 
-PostHog KMP 0.4.0 and higher can automatically capture unhandled exceptions. Pass an `ErrorTrackingConfig` when you initialize PostHog:
+PostHog KMP 0.4.0 and higher can automatically capture unhandled exceptions. First, enable **Enable exception autocapture** in your project's [Error Tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). This project setting acts as a server-side kill switch, so the SDK does not automatically capture exceptions when it is disabled.
+
+Then, pass an `ErrorTrackingConfig` when you initialize PostHog:
 
 ```kotlin
 import com.posthog.kmp.ErrorTrackingConfig
