@@ -43,7 +43,7 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator'
+        type: 'authenticated' | 'public' | 'moderator' | 'champion'
     }
     wallet: {
         balance: number
@@ -77,7 +77,13 @@ export type DisambiguationResult = {
 type UserContextValue = {
     isLoading: boolean
     user: User | null
+    // Moderator only. Use for anything destructive, anything with monetary value,
+    // anything exposing PII (emails), and any admin surface outside the forum.
     isModerator: boolean
+    isChampion: boolean
+    // Moderators and community champions. Use for reversible forum moderation:
+    // hiding/restoring content, marking solutions, re-topicing, escalating.
+    canModerate: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
     getJwt: () => Promise<string | null>
@@ -133,6 +139,8 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
+    isChampion: false,
+    canModerate: false,
     setUser: () => {
         // noop
     },
@@ -909,6 +917,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
+        isChampion: user?.role?.type === 'champion',
+        canModerate: user?.role?.type === 'moderator' || user?.role?.type === 'champion',
         isLoading,
         getJwt,
         login,

@@ -1159,6 +1159,14 @@ export default function ProfilePage({ params }: PageProps) {
     const [giftNote, setGiftNote] = useState('')
     const [giftSubmitting, setGiftSubmitting] = useState(false)
     const [giftConfirming, setGiftConfirming] = useState(false)
+    const [rolePopoverOpen, setRolePopoverOpen] = useState(false)
+    const [roleInfo, setRoleInfo] = useState<{
+        role: string | null
+        assignableRoles: string[]
+        editable: boolean
+    } | null>(null)
+    const [roleLoading, setRoleLoading] = useState(false)
+    const [roleSubmitting, setRoleSubmitting] = useState(false)
 
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
@@ -1240,6 +1248,72 @@ export default function ProfilePage({ params }: PageProps) {
             source: 'ProfilePage',
             error: JSON.stringify(error),
         })
+    }
+
+    // Roles are read on demand rather than with the profile, so the extra request only
+    // happens when a moderator actually opens the control.
+    const fetchRole = async () => {
+        setRoleLoading(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/${id}/role`, {
+                headers: { Authorization: `Bearer ${jwt}` },
+            })
+            if (!response.ok) throw new Error(`Failed to load role: ${response.status}`)
+            setRoleInfo(await response.json())
+        } catch (err) {
+            console.error(err)
+            addToast({ description: "Couldn't load this user's role", error: true, duration: 3000 })
+        } finally {
+            setRoleLoading(false)
+        }
+    }
+
+    const handleRoleChange = async (type: string) => {
+        setRoleSubmitting(true)
+        try {
+            const jwt = await getJwt()
+            const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/${id}/role`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${jwt}`,
+                },
+                body: JSON.stringify({ data: { type } }),
+            })
+
+            const body = await response.json().catch(() => null)
+
+            if (response.ok) {
+                setRoleInfo((prev) => (prev ? { ...prev, role: type } : prev))
+                await mutate()
+                setRolePopoverOpen(false)
+                addToast({
+                    description: (
+                        <>
+                            <IconCheck className="text-green size-4 inline-block mr-1" />
+                            {type === 'champion'
+                                ? `${firstName || 'This user'} is now a community champion`
+                                : `Community champion removed from ${firstName || 'this user'}`}
+                        </>
+                    ),
+                    duration: 3000,
+                })
+            } else {
+                // Strapi puts the reason in error.message — surface it, since the useful
+                // rejections ("Cannot change the role of a moderator") are all specific.
+                addToast({
+                    description: body?.error?.message || 'Failed to update role',
+                    error: true,
+                    duration: 5000,
+                })
+            }
+        } catch (err) {
+            console.error(err)
+            addToast({ description: 'Failed to update role', error: true, duration: 3000 })
+        } finally {
+            setRoleSubmitting(false)
+        }
     }
 
     const handleBlock = async (blockUser: boolean) => {
@@ -1837,6 +1911,71 @@ export default function ProfilePage({ params }: PageProps) {
                                                 >
                                                     Send gift
                                                 </OSButton>
+                                            )}
+                                        </div>
+                                    </Popover>
+                                    <Popover
+                                        dataScheme="primary"
+                                        open={rolePopoverOpen}
+                                        onOpenChange={(open) => {
+                                            setRolePopoverOpen(open)
+                                            if (open) fetchRole()
+                                        }}
+                                        trigger={
+                                            <span>
+                                                <OSButton
+                                                    asLink
+                                                    size="md"
+                                                    tooltip={<>View/adjust role</>}
+                                                    icon={<IconShieldLock />}
+                                                    iconClassName="size-5"
+                                                />
+                                            </span>
+                                        }
+                                        contentClassName="w-72 !p-0 overflow-hidden border border-primary rounded-md"
+                                    >
+                                        <div className="p-4 border-b border-primary">
+                                            <h4 className="text-sm font-bold m-0">Community role</h4>
+                                            <p className="text-xs text-secondary m-0">
+                                                Champions can hide spam, mark answers, re-topic threads, and escalate to
+                                                PostHog.
+                                            </p>
+                                        </div>
+                                        <div className="p-4 space-y-2">
+                                            {roleLoading || !roleInfo ? (
+                                                <p className="text-sm m-0 text-secondary">Loading…</p>
+                                            ) : !roleInfo.editable ? (
+                                                <p className="text-sm m-0">
+                                                    This user is a <strong>moderator</strong>. Moderator access is
+                                                    managed by the employee sync, not here.
+                                                </p>
+                                            ) : (
+                                                <>
+                                                    <p className="text-sm m-0">
+                                                        Current role: <strong>{roleInfo.role ?? 'unknown'}</strong>
+                                                    </p>
+                                                    {roleInfo.role === 'champion' ? (
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="secondary"
+                                                            width="full"
+                                                            disabled={roleSubmitting}
+                                                            onClick={() => handleRoleChange('authenticated')}
+                                                        >
+                                                            {roleSubmitting ? 'Removing…' : 'Remove champion'}
+                                                        </OSButton>
+                                                    ) : (
+                                                        <OSButton
+                                                            size="md"
+                                                            variant="primary"
+                                                            width="full"
+                                                            disabled={roleSubmitting}
+                                                            onClick={() => handleRoleChange('champion')}
+                                                        >
+                                                            {roleSubmitting ? 'Making champion…' : 'Make champion'}
+                                                        </OSButton>
+                                                    )}
+                                                </>
                                             )}
                                         </div>
                                     </Popover>

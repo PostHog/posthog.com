@@ -268,14 +268,14 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
     const deleteTimeoutRef = useRef<NodeJS.Timeout | null>(null)
     const toastCreatedAtRef = useRef<number | null>(null)
     const { addToast, removeToast } = useToast()
-    const { user } = useUser()
+    const { user, canModerate } = useUser()
     const isModerator = user?.role?.type === 'moderator'
     const isAuthor = user?.profile?.id === questionProfile?.data?.id
     const isReplyAuthor = user?.profile?.id === profile?.data?.id
     const isTeamMember = profile?.data?.attributes?.teams?.data?.length > 0
     const resolvable =
         !resolved &&
-        (isAuthor || isModerator) &&
+        (isAuthor || canModerate) &&
         topics?.data?.every((topic) => !topic.attributes.label.startsWith('#'))
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -420,7 +420,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         <span className="border rounded-sm text-[#008200cc] text-xs font-semibold py-0.5 px-1 uppercase">
                             Solution
                         </span>
-                        {(isAuthor || isModerator) && (
+                        {(isAuthor || canModerate) && (
                             <button
                                 onClick={() => handleResolve(false, null)}
                                 className="text-sm font-semibold text-red dark:text-yellow"
@@ -431,7 +431,8 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                     </>
                 )}
                 <div className="!ml-auto flex items-center space-x-1">
-                    {isModerator && (
+                    {/* Hiding a reply is reversible, so champions get it too. Deleting is not. */}
+                    {canModerate && (
                         <OSButton
                             size="sm"
                             tooltip={
@@ -506,9 +507,9 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                                 </div>
                             )}
                             <Markdown>{body}</Markdown>
-                            {!publishedAt && isModerator && (
+                            {!publishedAt && canModerate && (
                                 <p className="font-bold text-sm mt-2 mb-4 italic p-2 bg-accent border border-primary rounded">
-                                    This reply is unpublished and only visible to moderators
+                                    This reply is unpublished and only visible to moderators and champions
                                 </p>
                             )}
                         </div>
@@ -525,7 +526,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         )}
 
                         <div className="space-y-1 mt-2">
-                            {(isModerator || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
+                            {(canModerate || resolvable) && !(resolved && resolvedBy?.data?.id === id) && (
                                 <OSButton
                                     onClick={async () => {
                                         setResolving(true)

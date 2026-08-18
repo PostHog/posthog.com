@@ -9,10 +9,14 @@ type UseQuestionOptions = {
     onResolve?: () => void
 }
 
-const query = (id: string | number, isModerator: boolean) =>
+// `canModerate` (moderators + champions) controls seeing unpublished content — a
+// champion who hides a thread still needs to see it to be able to restore it.
+// `isModerator` separately controls asking for the author's email, which champions
+// are not allowed to read.
+const query = (id: string | number, { canModerate, isModerator }: { canModerate: boolean; isModerator: boolean }) =>
     qs.stringify(
         {
-            publicationState: isModerator ? 'preview' : 'live',
+            publicationState: canModerate ? 'preview' : 'live',
             filters: {
                 ...(typeof id === 'string'
                     ? {
@@ -60,7 +64,7 @@ const query = (id: string | number, isModerator: boolean) =>
                 },
                 replies: {
                     sort: ['createdAt:asc'],
-                    publicationState: isModerator ? 'preview' : 'live',
+                    publicationState: canModerate ? 'preview' : 'live',
                     populate: {
                         edits: {
                             sort: ['date:desc'],
@@ -114,13 +118,13 @@ const query = (id: string | number, isModerator: boolean) =>
     )
 
 export const useQuestion = (id: number | string, options?: UseQuestionOptions) => {
-    const { getJwt, fetchUser, user, isModerator, isValidating } = useUser()
+    const { getJwt, fetchUser, user, isModerator, canModerate, isValidating } = useUser()
     const posthog = usePostHog()
 
     const key =
         isValidating || options?.data
             ? null
-            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, isModerator)}`
+            : `${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${query(id, { canModerate, isModerator })}`
 
     const {
         data: question,
@@ -377,6 +381,96 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
+    // Hides or restores the whole thread. Mirrors handlePublishReply — moderators and
+    // champions use this to take spam and abuse off the site. Reversible: unpublishing
+    // only clears publishedAt, so nothing is lost.
+    const handlePublishQuestion = async (published: boolean) => {
+        try {
+            posthog?.capture('squeak publish question start', {
+                questionId: questionID,
+                published,
+            })
+
+            if (questionData) {
+                mutate(
+                    {
+                        ...questionData,
+                        attributes: {
+                            ...questionData.attributes,
+                            publishedAt: published ? null : new Date().toISOString(),
+                        },
+                    } as StrapiRecord<QuestionData>,
+                    false
+                )
+            }
+
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}`, {
+                method: 'PUT',
+                // Send publishedAt on its own: the Strapi controller only appends to the
+                // `edits` history when the payload is exactly { body }, and the champion
+                // field allowlist rejects anything outside it.
+                body: JSON.stringify({
+                    data: {
+                        publishedAt: published ? null : new Date(),
+                    },
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    Authorization: `Bearer ${await getJwt()}`,
+                },
+            })
+
+            if (!res.ok) {
+                const errorText = await res.text()
+                throw new Error(`Failed to update question data: ${res.status} ${errorText}`)
+            }
+
+            mutate()
+
+            posthog?.capture('squeak publish question', {
+                questionId: questionID,
+                published,
+            })
+        } catch (error) {
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.handlePublishQuestion',
+                questionId: questionID,
+                published,
+                error: JSON.stringify(error),
+            })
+
+            await mutate()
+
+            throw error
+        }
+    }
+
+    // Flags the thread for a PostHog employee to triage in Slack. Champions can't create
+    // a support ticket the way the moderator button does, because that needs the author's
+    // email — so this goes through Strapi, which has it server-side.
+    const escalate = async (note?: string) => {
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}/escalate`, {
+            method: 'POST',
+            body: JSON.stringify({ data: { note } }),
+            headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${await getJwt()}`,
+            },
+        })
+
+        if (!res.ok) {
+            const errorText = await res.text()
+            posthog?.capture('squeak error', {
+                source: 'useQuestion.escalate',
+                questionId: questionID,
+                error: errorText,
+            })
+            throw new Error(`Failed to escalate question: ${res.status} ${errorText}`)
+        }
+
+        posthog?.capture('squeak escalate question', { questionId: questionID })
+    }
+
     const handleResolve = async (resolved: boolean, resolvedBy: number | null) => {
         try {
             posthog?.capture('squeak resolve start', {
@@ -622,6 +716,8 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         isLoading: isValidating || (isLoading && !questionData),
         isError: error,
         handlePublishReply,
+        handlePublishQuestion,
+        escalate,
         handleResolve,
         handleReplyDelete,
         voteReply,

@@ -35,6 +35,7 @@ import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TopicSelector } from './TopicSelector'
+import ChampionTools from './ChampionTools'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
@@ -400,7 +401,7 @@ export function Question(props: QuestionProps) {
     } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator } = useUser()
+    const { user, notifications, setNotifications, isModerator, canModerate } = useUser()
     const { appWindow } = useWindow()
     const { addToast } = useToast()
     const posthog = usePostHog()
@@ -461,6 +462,8 @@ export function Question(props: QuestionProps) {
         pinTopics,
         mutate,
         removeTopic,
+        handlePublishQuestion,
+        escalate,
     } = useQuestion(id, { data: question, onResolve: refreshList })
 
     useEffect(() => {
@@ -584,9 +587,9 @@ export function Question(props: QuestionProps) {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
-                    {!publishedAt && isModerator && (
+                    {!publishedAt && canModerate && (
                         <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent border border-primary rounded">
-                            This thread is unpublished and only visible to moderators
+                            This thread is unpublished and only visible to moderators and champions
                         </p>
                     )}
                     <div
@@ -832,6 +835,14 @@ export function Question(props: QuestionProps) {
                                 </div>
                             </div>
                         </div>
+                    )}
+                    {canModerate && isInForum && (
+                        <ChampionTools
+                            question={questionData}
+                            onPublishChange={handlePublishQuestion}
+                            onEscalate={escalate}
+                            onRemoveTopic={removeTopic}
+                        />
                     )}
                 </div>
             </div>
