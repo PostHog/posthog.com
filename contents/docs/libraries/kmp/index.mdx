@@ -429,7 +429,7 @@ To automatically capture screen views on Android, set `captureScreenViews = true
 
 ## Error tracking
 
-PostHog KMP 0.4.0 and higher can automatically capture unhandled exceptions. First, enable **Enable exception autocapture** in your project's [Error Tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). This project setting acts as a server-side kill switch, so the SDK does not automatically capture exceptions when it is disabled.
+The PostHog Kotlin Multiplatform SDK 0.4.0 and higher can automatically capture unhandled exceptions. First, turn on **Enable exception autocapture** in your project's [Error Tracking settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). This server-side option acts as a kill switch, so the SDK does not automatically capture exceptions when it is disabled.
 
 Then, pass an `ErrorTrackingConfig` when you initialize PostHog:
 
@@ -460,7 +460,7 @@ try {
 }
 ```
 
-Follow the [Kotlin Multiplatform error tracking guide](/docs/error-tracking/installation/kmp) for setup and verification. Upload [target-specific debug symbols](/docs/error-tracking/upload-debug-symbols/kmp) to get readable stack traces from minified and native builds.
+Follow the [Kotlin Multiplatform Error Tracking guide](/docs/error-tracking/installation/kmp) for setup and verification. Upload [target-specific debug symbols](/docs/error-tracking/upload-debug-symbols/kmp) to get readable stack traces from minified and native builds.
 
 ## Session replay
 
@@ -602,9 +602,9 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `personProfiles` | `PersonProfiles` | `IDENTIFIED_ONLY` | When person profiles are created: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
 | `sessionRecording` | `SessionRecordingConfig?` | `null` | Enables and configures session replay (Android and iOS). |
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
-| `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures error tracking. |
+| `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
 
-### Error tracking options
+### Error Tracking options
 
 Pass an `ErrorTrackingConfig` to `PostHogConfig.errorTracking`.
 

@@ -108,6 +108,6 @@ The deployed JavaScript files must be the files modified by `sourcemap inject`. 
 
 <CalloutBox icon="IconInfo" title="JVM desktop builds" type="fyi">
 
-Compose Desktop's default release configuration keeps readable class names, source file names, and line numbers, so it does not need a mapping upload. PostHog KMP cannot deobfuscate custom-obfuscated JVM desktop builds because those builds do not include the map ID required to match an exception with its mapping file.
+Compose Desktop's default release configuration keeps readable class names, source file names, and line numbers, so it does not need a mapping upload. The PostHog Kotlin Multiplatform SDK cannot restore readable stack traces for JVM desktop builds that use custom obfuscation because those builds do not include the map ID required to match an exception with its mapping file.
 
 </CalloutBox>
