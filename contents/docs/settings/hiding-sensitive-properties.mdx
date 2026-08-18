@@ -1,0 +1,53 @@
+---
+title: Hiding sensitive properties with access control
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  enterprise: full
+---
+
+Hide event and person properties from members who shouldn't see them. Restricted properties don't show up in filters, and SQL returns them as null.
+
+This is a separate feature from [resource access control](/docs/settings/access-control) and [warehouse access control](/docs/settings/warehouse-access-control). It requires the [Enterprise plan](/platform-packages).
+
+## How it works
+
+Each event or person property has a default access level, plus optional member and role overrides. PostHog checks in this order:
+
+1. A rule for that member
+2. A rule for one of that member's roles
+3. The property's default
+
+Organization admins always have full access.
+
+Levels:
+
+- **Read & write** – Can query the property, and update person property values in the UI or API. This is the default.
+- **Read only** – Can query the property, but cannot change person property values.
+- **No access** – Hidden. Can't be queried or filtered on. In SQL, the property reads as null rather than erroring.
+
+Read only vs Read & write only differs for person properties you can edit. Event properties are captured data, so both levels can query them.
+
+Group properties aren't restricted at query time.
+
+## Set access for a property
+
+1. Go to [Property definitions](https://app.posthog.com/data-management/properties)
+2. Open the property and click **Edit**
+3. Under **Access control**, set the default level
+4. On the **Members** or **Roles** tab, add overrides
+
+Project admins and organization admins can change these rules.
+
+## Hide PII from vendors
+
+To share event data with vendors while hiding a property that contains PII, such as `email`:
+
+1. Create a role for the vendor
+2. Open the property definition (create one if it doesn't exist)
+3. Under **Access control**, open the **Roles** tab, add an override for that role, and set it to **No access**
+4. Save the property definition
+
+Repeat for each property you need to hide.

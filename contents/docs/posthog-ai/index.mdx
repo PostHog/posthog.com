@@ -42,7 +42,7 @@ PostHog AI lives in the PostHog web app, in a chat sidebar and in inline entry p
 
 ## Where its data comes from
 
-PostHog AI answers from your project's data, the context you attach to a conversation, and what it has saved to memory. It reads through your existing [access controls](/docs/settings/access-control), so it can only see what you can see.
+PostHog AI answers from your project's data, the context you attach to a conversation, and what it has saved to memory. It respects [warehouse access control](/docs/settings/warehouse-access-control) and [property access](/docs/settings/hiding-sensitive-properties), so it can't query warehouse tables, views, or properties you don't have access to.
 
 <div className="not-prose grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-6 gap-y-6 my-6">
 
