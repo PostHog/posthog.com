@@ -9,57 +9,85 @@ availability:
   enterprise: full
 ---
 
-You can restrict who can access warehouse sources and query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Organization, project, and resource access lives on [access control](/docs/settings/access-control). To hide event and person properties, see [property access control](/docs/settings/property-access-control).
+You can restrict who can query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Denied tables and views are removed from the [HogQL](/docs/hogql) schema and can't be queried from any surface, including the SQL editor, [PostHog AI](/docs/posthog-ai), and MCP.
 
-You can't yet restrict querying the core PostHog tables (`events`, `sessions`, `persons`, `groups`). Session Replay and person and group profiles are also unrestricted at the data layer.
+## Access levels
 
-## Warehouse tables and views
+Warehouse sources, tables, and views use the same four levels as other resources:
 
-Denied tables and views are removed from the HogQL schema. Queries against them fail in the SQL editor, insights, [PostHog AI](/docs/posthog-ai), and the API.
-
-### Where to set it
-
-- **A specific table or view:** `...` menu in the SQL editor schema tree
-- **A view:** Data models page
-- **A synced table:** `...` menu on the source's **Schemas** tab
-- **A source:** **Access control** on the source page
-- **All tables and views, or all sources:** Project [access control](/docs/settings/access-control) settings
-
-### Access levels
-
-Same four levels as other resources:
-
-- **No access** – Hidden from the schema and can't be queried
-- **Viewer** – Can query. Can't sync, delete, or reconfigure a table.
-- **Editor** – Can query and manage the table or view
+- **No access** – Hidden and can't be queried
+- **Viewer** – Can query, but can't sync, delete, or reconfigure
+- **Editor** – Can query, change source configuration, and edit table or view metadata
 - **Manager** – Can change access controls
 
-### How table access is resolved
+## Restrict all sources, tables, or views
 
-For tables synced from a source (Stripe, Postgres, HubSpot, and so on), PostHog checks in this order:
+In project [access control settings](https://app.posthog.com/settings/project-access), you can restrict:
 
-1. A rule on that table
-2. A rule on that table's source
-3. A rule for all tables and views
-4. A rule for all sources
-5. The default
+- **Managed data warehouse sources** – Applies to external sources and the tables they sync. It doesn't apply to self-managed tables.
+- **Data warehouse tables and views** – Applies to all tables and views, including self-managed tables.
 
-Self-managed tables (S3, file uploads, direct connections) have no source, so steps 2 and 4 don't apply.
+<!-- TODO(alex): Add light and dark screenshots from the new Access control UI showing the controls for all managed data warehouse sources and all data warehouse tables and views.
+<ProductScreenshot
+    imageLight="TODO_CLOUDINARY_URL_LIGHT"
+    imageDark="TODO_CLOUDINARY_URL_DARK"
+    alt="Access control settings for managed data warehouse sources and data warehouse tables and views"
+    classes="rounded"
+/>
+-->
 
-Restricting a source to **No access** blocks querying every table synced from it, unless a table-level rule overrides it.
+## Restrict a specific source
 
-For example, Stripe set to **Viewer** with no table rules means every Stripe table is Viewer. Then `stripe_customers` set to **Editor** makes that table Editor; the rest stay Viewer.
+Open a source and select **Access control** to restrict the source and every table it syncs. A member or role override on a specific table can grant access to that table without granting access to the rest of the source.
 
-### Views and materialized views
+<!-- TODO(alex): Add light and dark screenshots of Access control in a source configuration.
+<ProductScreenshot
+    imageLight="TODO_CLOUDINARY_URL_LIGHT"
+    imageDark="TODO_CLOUDINARY_URL_DARK"
+    alt="Access control settings for a specific data warehouse source"
+    classes="rounded"
+/>
+-->
 
-Granting access to a regular view doesn't bypass access controls on the tables it reads. If an underlying table is denied, the query fails.
+## Restrict a specific table or view
 
-For [materialized views](/docs/data-warehouse/views/materialize), access is checked on the view itself. Use a materialized view to expose selected data from a restricted table.
+In the SQL editor, open the `...` menu beside a table, view, or materialized view in the schema tree and select **Access control**. You can also configure access and review all rules in the project's access control settings.
 
-### Shared links
+<!-- TODO(alex): Add light and dark screenshots of Access control for a table or view in the SQL editor.
+<ProductScreenshot
+    imageLight="TODO_CLOUDINARY_URL_LIGHT"
+    imageDark="TODO_CLOUDINARY_URL_DARK"
+    alt="Access control settings for a specific table or view in the SQL editor"
+    classes="rounded"
+/>
+-->
 
-[Shared insights, dashboards, and notebooks](/docs/product-analytics/sharing) run without warehouse access control.
+## How table access is resolved
+
+For a table synced from a source, PostHog uses the most specific configured access rule in this order:
+
+1. Table override
+2. Source
+3. All data warehouse tables and views
+4. All managed data warehouse sources
+
+This lets a source-level rule apply to every table it syncs while still allowing a member or role override on a specific table.
+
+For example, you can set a Stripe source to **No access**, then give an analyst role **Viewer** access to `stripe_customers`. Analysts can query `stripe_customers`, but the rest of the Stripe tables stay hidden.
+
+Source-level rules only apply to tables synced from [external sources](/docs/data-warehouse/sources).
+
+## Give access to selected data with a materialized view
+
+To share selected rows or columns without granting access to the entire table:
+
+1. Create a query that returns only the data you want to share
+2. Save it as a [materialized view](/docs/data-warehouse/views/materialize)
+3. Grant access to the materialized view
+4. Restrict access to the source or table you want to hide
+
+A regular view doesn't provide this isolation. Its SQL reads the underlying table at query time, so the query fails if the member can't access that table.
 
 ## Feature availability
 
-Warehouse access control uses the same plans as [access control](/docs/settings/access-control#feature-availability). Role-based rules require the [Enterprise plan](/platform-packages).
+Warehouse access control is part of [access control](/docs/settings/access-control), available on the [Boost, Scale, and Enterprise plans](/platform-packages).
