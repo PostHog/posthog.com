@@ -171,7 +171,7 @@ export default function PostsGallery({ posts }: { posts: BuildModePost[] }): JSX
         <section>
             <div className="flex items-center justify-between gap-2">
                 <h2 className="m-0 min-w-0 shrink truncate text-lg font-bold">
-                    All posts{' '}
+                    Everything else{' '}
                     <span className="text-sm font-medium text-muted">
                         ({filteredPosts.length}
                         {isFiltered ? ` of ${posts.length}` : ''})

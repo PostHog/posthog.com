@@ -465,6 +465,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Incubator',
+                    link: '/community-incubator',
+                    icon: <Icons.IconFlask className="size-4 text-seagreen" />,
+                },
+                {
+                    type: 'item',
                     label: 'Cool tech jobs',
                     link: '/cool-tech-jobs',
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
