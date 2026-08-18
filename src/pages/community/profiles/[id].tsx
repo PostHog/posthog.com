@@ -756,22 +756,6 @@ const ModeratorFields = ({ setFieldValue, values, errors }) => {
                 </div>
             </div>
             <div>
-                <label className="text-[15px]">Show comments</label>
-                <p className="text-xs text-secondary m-0 mb-2">
-                    Let visitors comment on your profile. You'll get comment notifications via email.
-                </p>
-                <ToggleGroup
-                    title="Show comments"
-                    hideTitle
-                    options={[
-                        { label: 'Yes', value: 'yes' },
-                        { label: 'No', value: 'no' },
-                    ]}
-                    value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
-                    onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
-                />
-            </div>
-            <div>
                 <ToggleGroup
                     title="T-shirt fit"
                     options={[
@@ -1361,7 +1345,6 @@ export default function ProfilePage({ params }: PageProps) {
             color: profile?.color,
             backgroundImage: profile?.backgroundImage,
             companyRole: profile?.companyRole,
-            amaEnabled: profile?.amaEnabled,
             tShirt: profile?.tShirt || { fit: null, size: null, additionalInfo: null },
         },
         onSubmit: async ({ avatar, images, ...values }) => {
@@ -1699,21 +1682,6 @@ export default function ProfilePage({ params }: PageProps) {
                                     />
                                 </div>
                             ) : null}
-
-                            {profile.amaEnabled && (
-                                <div className="mt-6">
-                                    <Block title="Comments">
-                                        <Questions
-                                            initialView={'question-form'}
-                                            slug={window?.location?.pathname}
-                                            profileId={undefined}
-                                            showForm
-                                            disclaimer={false}
-                                            autoFocus={false}
-                                        />
-                                    </Block>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>

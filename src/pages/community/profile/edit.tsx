@@ -7,7 +7,6 @@ import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
 import Layout from 'components/Layout'
 import { communityMenu } from '../../../navs'
 import Link from 'components/Link'
-import Switch from 'components/Toggle'
 import { CallToAction } from 'components/CallToAction'
 import { useToast } from '../../../context/Toast'
 import { navigate } from 'gatsby'
@@ -415,25 +414,6 @@ const formSections = [
                 label: 'Height',
                 className: 'w-full',
                 component: HeightField,
-            },
-            amaEnabled: {
-                className: 'w-full',
-                component: ({ values, setFieldValue }) => {
-                    return (
-                        <div className="flex space-x-2 space-between w-full">
-                            <div className="flex-grow">
-                                <p className="font-bold m-0">Show comments</p>
-                                <p className="m-0">
-                                    Let visitors comment on your profile. You'll get comment notifications via email.
-                                </p>
-                            </div>
-                            <Switch
-                                checked={values.amaEnabled}
-                                onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
-                            />
-                        </div>
-                    )
-                },
             },
         },
     },

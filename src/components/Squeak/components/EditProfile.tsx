@@ -8,7 +8,6 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
-import Toggle from 'components/Toggle'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 
@@ -106,21 +105,6 @@ const fields = {
             />
         ),
         className: 'w-full',
-    },
-    amaEnabled: {
-        hideLabel: true,
-        component: ({ values, setFieldValue }) => {
-            return (
-                <div className="flex space-x-2 mb-6">
-                    <Toggle
-                        label="Ask me anything"
-                        checked={values.amaEnabled}
-                        onChange={() => setFieldValue('amaEnabled', !values.amaEnabled)}
-                        tooltip="Allows community members to ask you questions directly on your profile page"
-                    />
-                </div>
-            )
-        },
     },
 }
 
@@ -225,7 +209,6 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
         location,
         country,
         pronouns,
-        amaEnabled,
         height,
     } = user?.profile || {}
 
@@ -315,7 +298,6 @@ export const EditProfile: React.FC<EditProfileProps> = ({ onSubmit }) => {
                 pronouns,
                 height,
                 biography,
-                amaEnabled,
             }}
             validationSchema={ValidationSchema}
             onSubmit={handleSubmit}
