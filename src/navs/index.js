@@ -620,7 +620,7 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Blogs',
+                name: 'Writing blogs',
                 url: '/handbook/content/blogs',
             },
             {
