@@ -109,7 +109,7 @@ This sometimes surprises people, but the marketing team at PostHog is not often 
 
 This isn't to say we are _data-blind_, however. Marketing is responsible for new user sign-ups and we track that figure and a few others closely. But where we can, we prefer to judge the success of things by other factors, like "Did users say they enjoyed this?" and "Do _we_ want to do this again?"
 
-At a previous startup I worked at we discussed this a lot. Leadership wanted a metric to track the ROI of product marketers and required us to log how we spent time in 15 minute intervals. As a result, perverse incentives emerged and people spending more time in meetings where work was _collaboratively performed_, but little was done. 
+At a previous startup I worked at we discussed this a lot. Leadership wanted a metric to track the ROI of product marketers and required us to log how we spent time in 15 minute intervals. As a result, perverse incentives emerged and people started spending more time in meetings where work was _collaboratively performed_, but little was done. 
 
 At PostHog, we take [the opposite approach](/newsletter/collaboration-sucks) and treat data, like AI, as a tool to use when appropriate, not as the go-to solution for every problem.
 
