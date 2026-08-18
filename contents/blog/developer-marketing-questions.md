@@ -8,7 +8,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/vibes_based_marketing_aff77241ee.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/vibes_based_marketing_aff77241ee.png
 featuredImageType: full
 category: Inside PostHog
 tags:
