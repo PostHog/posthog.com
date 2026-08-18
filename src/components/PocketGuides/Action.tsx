@@ -101,7 +101,15 @@ function Prerequisite({ requires }: { requires: NonNullable<BookPageCta['require
 }
 
 /** Pinned shortcut to the action, for a reader convinced before the end of the chapter. */
-export function ActionBar({ cta, title }: { cta: BookPageCta; title: string }): JSX.Element | null {
+export function ActionBar({
+    cta,
+    title,
+    guide,
+}: {
+    cta: BookPageCta
+    title: string
+    guide: string
+}): JSX.Element | null {
     const posthog = usePostHog()
     if (!cta.label) {
         return null
@@ -117,9 +125,7 @@ export function ActionBar({ cta, title }: { cta: BookPageCta; title: string }): 
                 external
                 variant="primary"
                 size="sm"
-                onClick={() =>
-                    posthog?.capture('pocket_guide_interaction', { kind, guide: title, placement: 'pinned_bar' })
-                }
+                onClick={() => posthog?.capture('pocket_guide_interaction', { kind, guide, placement: 'pinned_bar' })}
             >
                 {cta.label}
             </OSButton>

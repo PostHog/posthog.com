@@ -95,7 +95,7 @@ export default function BookPage({ slug, body }: BookPageProps): JSX.Element | n
                         entry.template?.scout ? (
                             <EnableScoutBar scout={entry.template.scout} templateTitle={entry.template.templateTitle} />
                         ) : entry.cta ? (
-                            <ActionBar cta={entry.cta} title={entry.title} />
+                            <ActionBar cta={entry.cta} title={entry.title} guide={entry.url} />
                         ) : undefined
                     }
                 >
