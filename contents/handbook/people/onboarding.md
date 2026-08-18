@@ -283,7 +283,30 @@ We encourage you to join and create channels focused around different types of h
 
 ### Location specific channels
 
--   `#london`
--   `#germany`
--   `#sf-bay-area`
-    etc.
+Grouped by country, with city and regional channels nested underneath. Join wherever you're based, plus anywhere you visit often - they're the easiest way to find teammates for a coffee, a coworking day, or a dinner while you're in town.
+
+-   Austria
+    -   <PrivateLink url="https://posthog.slack.com/archives/C09GE5B5AQ2">#vienna</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C09GRQL9FUN">#canada</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C04DDUWSH29">#france</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C06GGF6AAHG">#germany</PrivateLink>
+-   Hungary
+    -   <PrivateLink url="https://posthog.slack.com/archives/C09K36PQY73">#budapest</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C09LM32PB25">#ireland</PrivateLink>
+-   Netherlands
+    -   <PrivateLink url="https://posthog.slack.com/archives/C096RNZF75H">#amsterdam</PrivateLink>
+-   Portugal
+    -   <PrivateLink url="https://posthog.slack.com/archives/C097A897XP1">#lisbon</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C090ADXGJGH">#spain</PrivateLink>
+    -   <PrivateLink url="https://posthog.slack.com/archives/C09E9Q37YCA">#barcelona</PrivateLink>
+-   United Kingdom
+    -   <PrivateLink url="https://posthog.slack.com/archives/C028MN3UUP5">#london</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C02J5E678LF">#united-states</PrivateLink>
+    -   <PrivateLink url="https://posthog.slack.com/archives/C0AF8M87ZRC">#austin-area</PrivateLink>
+    -   <PrivateLink url="https://posthog.slack.com/archives/C036JMK2065">#nyc</PrivateLink>
+    -   <PrivateLink url="https://posthog.slack.com/archives/C034FCE7RCG">#sf-bay-area</PrivateLink>
+    -   <PrivateLink url="https://posthog.slack.com/archives/C080RPNHHL1">#seattle-area</PrivateLink>
+
+Some channels cover a wider region rather than a single country:
+
+-   <PrivateLink url="https://posthog.slack.com/archives/C085FD96WAK">#latam</PrivateLink>
