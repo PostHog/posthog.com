@@ -1,6 +1,6 @@
 import React from 'react'
 import ParseHtml from '../Utilities/parseHtml'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import useProduct from 'hooks/useProduct'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 

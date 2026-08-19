@@ -1,5 +1,5 @@
-import { Fieldset } from 'components/OSFieldset'
-import { OSSelect, OSTextarea } from 'components/OSForm'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
+import { OSSelect, OSTextarea } from 'components/shared/forms/OSForm'
 import React, { useEffect, useState } from 'react'
 import qs from 'qs'
 

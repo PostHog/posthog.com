@@ -8,15 +8,15 @@ import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
 import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import uploadImage from '../util/uploadImage'
 import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
-import Input from 'components/OSForm/input'
-import { OSSelect } from 'components/OSForm'
+import Input from 'components/shared/forms/OSForm/input'
+import { OSSelect } from 'components/shared/forms/OSForm'
 
 type QuestionFormValues = {
     subject: string

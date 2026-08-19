@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { cn } from '../../../utils'
 
 type CloudinaryImageSrc = `https://res.cloudinary.com/${string}`

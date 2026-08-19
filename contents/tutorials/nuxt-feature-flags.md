@@ -9,7 +9,7 @@ tags:
   - feature flags
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 import NuxtApiKeysSecurity from "../docs/integrate/_snippets/nuxt-api-keys-security.mdx"
 export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/events-light.png"
 export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-feature-flags/events-dark.png"

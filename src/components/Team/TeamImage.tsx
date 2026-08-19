@@ -1,6 +1,6 @@
 import React from 'react'
-import ImageDrop, { Image } from 'components/ImageDrop'
-import CloudinaryImage from 'components/CloudinaryImage'
+import ImageDrop, { Image } from 'components/shared/forms/ImageDrop'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 export default function TeamImage({
     values,
     setFieldValue,

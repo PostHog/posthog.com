@@ -1,4 +1,4 @@
-import { OSSelect } from 'components/OSForm'
+import { OSSelect } from 'components/shared/forms/OSForm'
 import React, { useEffect, useState } from 'react'
 
 export default function TeamSelect({ value, onChange }) {

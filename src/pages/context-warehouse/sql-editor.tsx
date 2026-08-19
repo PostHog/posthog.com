@@ -4,8 +4,8 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import OSTable from 'components/OSTable'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
+import OSTable from 'components/shared/ui/OSTable'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />

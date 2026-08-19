@@ -1,7 +1,7 @@
 import React from 'react'
 import useProduct from 'hooks/useProduct'
 import { Accordion } from 'components/RadixUI/Accordion'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { IconCursor, IconHeadset, IconQuestion } from '@posthog/icons'
 
 export default function ProductSidebar({ type }: { type: string }): JSX.Element | null {

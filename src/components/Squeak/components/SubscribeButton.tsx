@@ -5,7 +5,7 @@ import { useQuestion } from '../hooks/useQuestion'
 import { IconBell } from '@posthog/icons'
 import SideModal from 'components/Modal/SideModal'
 import Authentication from './Authentication'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 export const Button = ({
     className,

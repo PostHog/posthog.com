@@ -2,7 +2,7 @@ import React from 'react'
 import { OverviewSlideProps } from './types'
 import { IconSparkles } from '@posthog/icons'
 import { AppIcon } from 'components/OSIcons/AppIcon'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import useProduct from 'hooks/useProduct'
 
 interface Skill {

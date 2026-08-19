@@ -1,7 +1,7 @@
 import React from 'react'
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 import { ImageReading1, ImageReading2 } from 'components/Home/Decorations'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export const BedtimeReadingSection = () => (
     <div id="bedtime-reading">

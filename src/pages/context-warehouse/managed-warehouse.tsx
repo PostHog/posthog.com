@@ -4,8 +4,8 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
 import {
     IconDatabaseBolt,

@@ -1,5 +1,5 @@
 import React from 'react'
-import TabbedCarousel from 'components/TabbedCarousel'
+import TabbedCarousel from 'components/shared/animation/TabbedCarousel'
 import CarouselSlide from 'components/Products/ReaderViewProduct/CarouselSlide'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { applications } from 'hooks/productData/replay_vision/slides'

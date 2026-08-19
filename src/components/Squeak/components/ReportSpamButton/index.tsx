@@ -3,7 +3,7 @@ import { IconCheck, IconWarning } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../../../context/App'
 import Tooltip from 'components/RadixUI/Tooltip'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 export default function ReportSpamButton({ type, id }: { type: 'reply' | 'question'; id: number }): JSX.Element {
     const { user, reportSpam } = useUser()

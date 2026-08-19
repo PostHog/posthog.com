@@ -4,7 +4,7 @@ import { DemoScheduler } from 'components/DemoScheduler'
 import SalesRep from '../Utilities/SalesRep'
 import TeamMembers from '../Utilities/TeamMembers'
 import Logos from '../Utilities/Logos'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface ColumnsTemplateProps {
     title: string

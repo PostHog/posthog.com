@@ -3,7 +3,7 @@ import React from 'react'
 import Section from './Section'
 import { Change } from '../../templates/Changelog'
 import { UnderConsideration } from 'components/Roadmap/UnderConsideration'
-import { Fieldset } from 'components/OSFieldset'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
 
 export default function Roadmap({
     hasUnderConsideration,

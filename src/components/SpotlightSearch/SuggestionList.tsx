@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconFilter, IconSparkles } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 import type { SpotlightAction } from './actions'
 import { configForType } from './categories'
 import type { SuggestionItem } from './types'

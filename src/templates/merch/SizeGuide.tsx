@@ -1,5 +1,5 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import { ZoomImage } from 'components/ZoomImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import { ZoomImage } from 'components/shared/media/ZoomImage'
 import React, { useState } from 'react'
 
 const sizeGuides = {

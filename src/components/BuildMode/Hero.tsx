@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IconInfo } from '@posthog/icons'
 import usePostHog from 'hooks/usePostHog'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/Tooltip'
 import Wordmark from './Wordmark'
 

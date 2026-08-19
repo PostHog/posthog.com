@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Toast as RadixToast } from 'radix-ui'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { IconUndo } from '@posthog/icons'
 import './css/toast.css'
 

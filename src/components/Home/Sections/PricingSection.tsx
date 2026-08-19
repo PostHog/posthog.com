@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 import Pricing from 'components/Home/New/Pricing'
 import { ImageMoney } from 'components/Home/Decorations'
 

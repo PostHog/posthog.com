@@ -21,14 +21,14 @@ import { useAppActions, useAppSettings } from '../../context/App'
 
 import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
 
 function TaskBarMenu() {

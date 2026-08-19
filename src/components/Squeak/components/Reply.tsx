@@ -28,7 +28,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import EditWrapper from './EditWrapper'
 import { useApp } from '../../../context/App'
 import ReportSpamButton from './ReportSpamButton'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import LevelBadge from './LevelBadge'
 import { useToast } from '../../../context/Toast'
 

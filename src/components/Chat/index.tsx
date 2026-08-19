@@ -5,10 +5,10 @@ import { IconDocument, IconX, IconCode, IconChevronDown } from '@posthog/icons'
 import { motion, useDragControls } from 'framer-motion'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { useApp } from '../../context/App'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
 import { Popover } from 'components/RadixUI/Popover'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 
 // Draggable, non-modal frame for the global chat overlay. Starts docked to the

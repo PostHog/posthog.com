@@ -1,6 +1,6 @@
 import { IconPlus } from '@posthog/icons'
 import Link from 'components/Link'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'

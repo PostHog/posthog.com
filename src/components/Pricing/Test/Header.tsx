@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import { Stars } from './Reviews'
 import { Link as ScrollLink } from 'react-scroll'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 export default function Header() {
     // const { allReviews } = useStaticQuery(graphql`

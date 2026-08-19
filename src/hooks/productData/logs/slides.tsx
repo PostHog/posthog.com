@@ -9,8 +9,8 @@ import {
     IconRewindPlay,
     IconBell,
 } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import Glow from 'components/shared/animation/Glow'
 import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'

@@ -1,5 +1,5 @@
 import React from 'react'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 
 type Feature = {
     title: string

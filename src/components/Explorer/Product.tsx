@@ -8,7 +8,7 @@ import {
     IconMessage,
     IconPeople,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import useProduct from 'hooks/useProduct'
 import React from 'react'
 

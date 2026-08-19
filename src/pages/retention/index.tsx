@@ -3,7 +3,7 @@ import React from 'react'
 import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { DataVizNav } from '../../hooks/useDataVizNavigation'
 
 const LeftSidebarContent = () => {

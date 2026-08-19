@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ASCIIBox } from './TerminalSection'
 import Link from 'components/Link'
-import { DebugContainerQuery } from "components/DebugContainerQuery"
+import { DebugContainerQuery } from "components/shared/layout/DebugContainerQuery"
 
 interface Chapter {
     title: string

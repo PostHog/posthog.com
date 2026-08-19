@@ -1,6 +1,6 @@
 import React from 'react'
-import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import OSButton from 'components/shared/ui/OSButton'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 
 // Detective hedgehog watching a wall of monitors.

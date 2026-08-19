@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import PlatformInstall from 'components/PlatformInstall'
 
 const MCP_URL = 'https://mcp.posthog.com/mcp'

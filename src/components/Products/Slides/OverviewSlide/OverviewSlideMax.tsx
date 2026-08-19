@@ -1,5 +1,5 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export const skills = [
     'Understand and explore your product data in depth',

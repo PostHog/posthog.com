@@ -4,7 +4,7 @@ import SEO from 'components/seo'
 import { IconNotebook, IconHandMoney, IconHandwave, IconScreen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Subfeature } from 'components/Products/Subfeature'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import PostQuote from 'components/Academy/PostQuote'
 import { AppIcon } from 'components/OSIcons/AppIcon'
 

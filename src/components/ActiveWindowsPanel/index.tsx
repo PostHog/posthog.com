@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { useApp } from '../../context/App'
 import SidePanel from 'components/SidePanel'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { navigate } from 'gatsby'
 import { IconCheck, IconCopy } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 
 export default function ActiveWindowsPanel() {
     const {

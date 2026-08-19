@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../../context/App'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export default function MyProfilePage() {

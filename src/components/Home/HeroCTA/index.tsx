@@ -1,5 +1,5 @@
 import React from 'react'
-import { RenderInClient } from 'components/RenderInClient'
+import { RenderInClient } from 'components/shared/layout/RenderInClient'
 import usePostHog from '../../../hooks/usePostHog'
 import { DEFAULT_HERO_CTA_VARIANT, resolveHeroCtaVariant } from './variants'
 

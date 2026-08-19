@@ -1,5 +1,5 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import AnimateIntoView from 'components/AnimateIntoView'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import AnimateIntoView from 'components/shared/animation/AnimateIntoView'
 import { CallToAction } from 'components/CallToAction'
 import { SignupCTA } from 'components/SignupCTA'
 import { StaticImage } from 'gatsby-plugin-image'

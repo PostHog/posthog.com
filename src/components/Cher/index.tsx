@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import React, { useEffect, useState } from 'react'
 import MediaPlayer from 'components/MediaPlayer'

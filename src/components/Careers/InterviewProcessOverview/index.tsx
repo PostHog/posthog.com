@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useState, useRef } from 'react'
 import InterviewProcess from 'components/Job/InterviewProcess'
 import { StaticImage } from 'gatsby-plugin-image'

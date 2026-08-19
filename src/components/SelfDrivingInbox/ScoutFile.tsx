@@ -3,7 +3,7 @@ import usePostHog from '../../hooks/usePostHog'
 
 import { IconMinus, IconPlus } from '@posthog/icons'
 
-import { SingleCodeBlock } from 'components/CodeBlock'
+import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
 
 import { ScoutSpec } from './types'
 

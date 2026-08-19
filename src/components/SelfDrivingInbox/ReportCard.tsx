@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 
 import { SelfDrivingReport } from './types'
 

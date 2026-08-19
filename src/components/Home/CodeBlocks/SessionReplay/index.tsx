@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import CodeBlock from 'components/Home/CodeBlock'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'

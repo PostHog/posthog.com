@@ -1,4 +1,4 @@
-import OSTabs from 'components/OSTabs'
+import OSTabs from 'components/shared/ui/OSTabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { navigate } from 'gatsby'
 import React from 'react'

@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import * as Portal from '@radix-ui/react-portal'
 import { IconChevronRight } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface SidePanelProps {
     isOpen: boolean

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState, useCallback, useContext, useMemo } from 'react'
 import MarkdownLogo from './MarkdownLogo'
 import { useDropzone } from 'react-dropzone'
-import Spinner from 'components/Spinner'
+import Spinner from 'components/shared/ui/Spinner'
 import Markdown from './Markdown'
 import slugify from 'slugify'
 import { Edit } from 'components/Icons'
@@ -13,8 +13,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { IconFeatures, IconImage, IconX } from '@posthog/icons'
 import { graphql, useStaticQuery } from 'gatsby'
 import groupBy from 'lodash.groupby'
-import OSTextarea from 'components/OSForm/textarea'
-import OSButton from 'components/OSButton'
+import OSTextarea from 'components/shared/forms/OSForm/textarea'
+import OSButton from 'components/shared/ui/OSButton'
 
 const buttons = [
     {

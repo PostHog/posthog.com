@@ -3,7 +3,7 @@ import { useUser } from 'hooks/useUser'
 import RichText from './RichText'
 import { useFormik } from 'formik'
 import transformValues from '../util/transformValues'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { CurrentQuestionContext } from './Question'
 
 export default function EditWrapper({

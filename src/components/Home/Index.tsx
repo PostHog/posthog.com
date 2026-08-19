@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export default function Home(): JSX.Element {

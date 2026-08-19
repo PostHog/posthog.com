@@ -1,5 +1,5 @@
 import { IconCheck } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'

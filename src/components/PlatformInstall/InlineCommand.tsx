@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { IconCopy, IconChevronRight, IconCheck, IconArrowUpRight } from '@posthog/icons'
 import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import { useCopyConfettiZIndex, fireCopyConfetti } from './confetti'
 
 export type InlineCommandProps = {

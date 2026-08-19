@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ProductComparisonTable from 'components/ProductComparisonTable'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { SectionComponentProps } from '../types'
 
 /** Collapsed height cap. Roughly one screenful of rows. */

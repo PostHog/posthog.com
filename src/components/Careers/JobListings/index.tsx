@@ -5,14 +5,14 @@ import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { formatTeamName, slugifyTeamName } from 'lib/utils'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { TeamsSidebar } from 'components/Job/TeamsSidebar'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import CloudinaryImage from 'components/CloudinaryImage'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Mark from 'mark.js'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useWindow } from '../../../context/Window'
-import { OSInput } from 'components/OSForm'
+import { OSInput } from 'components/shared/forms/OSForm'
 
 const query = graphql`
     query JobListings {

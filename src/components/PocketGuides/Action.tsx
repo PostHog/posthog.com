@@ -2,10 +2,10 @@ import React from 'react'
 
 import usePostHog from '../../hooks/usePostHog'
 
-import { SingleCodeBlock } from 'components/CodeBlock'
+import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 import { useEntry } from './bookContext'
 import { BookPageCta } from './bookModel'

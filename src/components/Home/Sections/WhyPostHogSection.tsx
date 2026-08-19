@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 import SupportSmallTeamLink from 'components/Home/SupportSmallTeamLink'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export const WhyPostHogSection = () => (
     <div id="why-posthog">

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import { darkTheme, lightTheme } from 'components/CodeBlock/theme'
+import { darkTheme, lightTheme } from 'components/shared/ui/CodeBlock/theme'
 import { useApp } from '../../context/App'
 import { IconChevronDown, IconTerminal } from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import AutosizeInput from 'react-input-autosize'
 
 export interface QueryScenario {

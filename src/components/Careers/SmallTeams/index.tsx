@@ -3,10 +3,10 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Link from 'components/Link'
 import slugify from 'slugify'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
-import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import OSButton from 'components/shared/ui/OSButton'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 export const SmallTeams = () => {
     const {

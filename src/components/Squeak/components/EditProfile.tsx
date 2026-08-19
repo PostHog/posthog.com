@@ -8,7 +8,7 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from '../util/getAvatar'
 import usePostHog from 'hooks/usePostHog'
 import { Avatar as DefaultAvatar } from 'components/Community/Sidebar'
-import Toggle from 'components/Toggle'
+import Toggle from 'components/shared/forms/Toggle'
 import { IconInfo } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 

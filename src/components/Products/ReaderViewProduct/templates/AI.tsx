@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { SectionComponentProps } from '../types'
 
 const DEFAULT_IMAGE = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_hogs_d4c45b4550.png'

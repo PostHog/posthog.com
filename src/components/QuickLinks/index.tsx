@@ -1,5 +1,5 @@
 import { useLayoutData } from 'components/Layout/hooks'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 import { groupMenuItems } from 'lib/utils'
 import React from 'react'
 

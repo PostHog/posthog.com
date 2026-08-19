@@ -1,13 +1,13 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import { MixtapeFormValues, YTPlayer, Track } from './types'
-import { Fieldset } from 'components/OSFieldset'
-import { OSInput } from 'components/OSForm'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
+import { OSInput } from 'components/shared/forms/OSForm'
 import CassetteTape from './CassetteTape'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconArrowUpRight, IconCheck, IconSpinner, IconTrash } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import CreatableMultiSelect from 'components/CreatableMultiSelect'
+import OSButton from 'components/shared/ui/OSButton'
+import CreatableMultiSelect from 'components/shared/forms/CreatableMultiSelect'
 import {
     DndContext,
     closestCenter,

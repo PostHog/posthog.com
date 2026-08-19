@@ -62,7 +62,7 @@ import {
     IconBolt,
     IconSparkles,
 } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import useProducts from 'hooks/useProducts'
 import { CallToAction } from 'components/CallToAction'
 import { Feature } from 'components/Roadmap'
@@ -70,7 +70,7 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import { graphql } from 'gatsby'
 import { useStaticQuery } from 'gatsby'
 import { AnimatePresence, motion } from 'framer-motion'
-import Slider from 'components/Slider'
+import Slider from 'components/shared/layout/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
 import Link from 'components/Link'

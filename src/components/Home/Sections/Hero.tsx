@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
-import TabbedCarousel, { type TabbedCarouselTab } from 'components/TabbedCarousel'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import TabbedCarousel, { type TabbedCarouselTab } from 'components/shared/animation/TabbedCarousel'
 import {
     OnePlaceSlide,
     UnderstandUsageSlide,
@@ -9,7 +9,7 @@ import {
 } from 'components/Home/HeroCarousel/slides'
 import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import { CTAs } from 'components/CTAs'
 import { RollingWords, rollingWordsDuration, type RollingWordStep } from './RollingWords'
 

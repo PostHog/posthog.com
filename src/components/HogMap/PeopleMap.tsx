@@ -14,7 +14,7 @@ import {
     DEFAULT_SPREAD_RADIUS,
 } from './hogMapUtils'
 import { buildMemberQuery, useCoordsByQuery, GeocodedArea, Coordinates } from './usePeopleGeo'
-import Toggle from 'components/Toggle'
+import Toggle from 'components/shared/forms/Toggle'
 import { IconPineapple, IconPeople, IconDecisionTree } from '@posthog/icons'
 
 type BadgeType = 'none' | 'pineapple' | 'team'

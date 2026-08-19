@@ -1,5 +1,5 @@
 import React from 'react'
-import { Blockquote } from 'components/BlockQuote'
+import { Blockquote } from 'components/shared/typography/BlockQuote'
 
 // Single source of truth for the standard "About PostHog" description.
 // Used by ReaderView (the auto-appended "About" blockquote on content pages)

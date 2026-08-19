@@ -16,7 +16,7 @@ import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
-import { scrollToElement } from 'components/ScrollToElement'
+import { scrollToElement } from 'components/shared/layout/ScrollToElement'
 
 /**
  * The control variant of the pricing page experiment: `/pricing` exactly as it shipped before

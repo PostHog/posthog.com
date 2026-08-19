@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 
 export interface WizardSupportedFrameworksProps {

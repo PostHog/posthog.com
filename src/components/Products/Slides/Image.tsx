@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { ZoomImage } from 'components/ZoomImage'
-import CloudinaryImage from 'components/CloudinaryImage'
+import { ZoomImage } from 'components/shared/media/ZoomImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export interface Image {
     src: string

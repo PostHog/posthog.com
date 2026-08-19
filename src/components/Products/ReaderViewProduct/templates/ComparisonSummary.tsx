@@ -2,7 +2,7 @@ import React from 'react'
 import { IconCheck } from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
 import { SectionComponentProps } from '../types'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 interface ComparisonItem {
     title: string

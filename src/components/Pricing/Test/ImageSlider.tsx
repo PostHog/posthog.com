@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { ZoomImage } from 'components/ZoomImage'
+import { ZoomImage } from 'components/shared/media/ZoomImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 interface Image {
     src: string

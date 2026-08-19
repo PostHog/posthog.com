@@ -1,6 +1,6 @@
 import React from 'react'
-import OSTable from 'components/OSTable'
-import CloudinaryImage from 'components/CloudinaryImage'
+import OSTable from 'components/shared/ui/OSTable'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { SectionHeading } from '../helpers'
 import { SectionComponentProps } from '../types'
 

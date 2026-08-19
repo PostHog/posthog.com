@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
-import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import OSButton from 'components/shared/ui/OSButton'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 interface SuggestedLink {
   title: string

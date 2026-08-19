@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 

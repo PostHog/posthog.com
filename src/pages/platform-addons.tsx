@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useState } from 'react'
 import { pricingMenu } from '../navs'
 import Layout from 'components/Layout'

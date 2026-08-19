@@ -4,11 +4,11 @@ import { CallToAction } from 'components/CallToAction'
 import { SEO } from 'components/seo'
 import { IconArrowRightDown, IconArrowUpRight } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Editor from 'components/Editor'
 import { graphql, useStaticQuery } from 'gatsby'
-import { ScrollToElement } from 'components/ScrollToElement'
-import OSTable from 'components/OSTable'
+import { ScrollToElement } from 'components/shared/layout/ScrollToElement'
+import OSTable from 'components/shared/ui/OSTable'
 
 const ServiceLink = ({ label, to }: { label: string; to: string }) => (
     <ScrollToElement targetId={to} as="span" className="group font-semibold cursor-pointer whitespace-nowrap underline">

@@ -1,5 +1,5 @@
 import { IconInfo } from '@posthog/icons'
-import Slider from 'components/Slider'
+import Slider from 'components/shared/layout/Slider'
 import Tooltip from 'components/Tooltip'
 import React from 'react'
 

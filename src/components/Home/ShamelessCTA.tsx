@@ -1,6 +1,6 @@
 import React from 'react'
 import CTA from 'components/Home/CTA'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 

@@ -1,4 +1,4 @@
-import Chip from 'components/Chip'
+import Chip from 'components/shared/ui/Chip'
 import React from 'react'
 import { BlogCategories, CategoryInterface } from '../constants/categories'
 

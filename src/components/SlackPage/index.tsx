@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'

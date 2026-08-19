@@ -1,4 +1,4 @@
-import { InlineCode } from 'components/InlineCode'
+import { InlineCode } from 'components/shared/typography/InlineCode'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 

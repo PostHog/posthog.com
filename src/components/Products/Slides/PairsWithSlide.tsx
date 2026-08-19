@@ -1,5 +1,5 @@
 import React from 'react'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import Link from 'components/Link'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 

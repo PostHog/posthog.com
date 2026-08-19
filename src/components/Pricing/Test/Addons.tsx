@@ -5,7 +5,7 @@ import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
 import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { pricingMenu } from 'navs'
 import Layout from 'components/Layout'
 import { IconAdvanced } from '@posthog/icons'
@@ -16,7 +16,7 @@ import groupBy from 'lodash.groupby'
 import { EXCLUDED_ADDON_TYPES } from '../../../constants/addons'
 
 import { Accordion } from 'components/RadixUI/Accordion'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 interface AddonProps {
     name: string
     icon_key: keyof typeof Icons

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Skeleton } from './Views/Default'
-import Spinner from 'components/Spinner'
+import Spinner from 'components/shared/ui/Spinner'
 import { child, container } from 'components/CallToAction'
 
 import Link from 'components/Link'

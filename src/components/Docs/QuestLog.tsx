@@ -3,7 +3,7 @@ import * as Icons from '@posthog/icons'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Slugger from 'github-slugger'
-import ElementScrollLink, { ScrollSpyProvider, ScrollSpyContext } from 'components/ElementScrollLink'
+import ElementScrollLink, { ScrollSpyProvider, ScrollSpyContext } from 'components/shared/layout/ElementScrollLink'
 
 export interface QuestLogItemProps {
     title: string

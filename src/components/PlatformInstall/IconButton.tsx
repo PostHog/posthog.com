@@ -1,5 +1,5 @@
 import React from 'react'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
 

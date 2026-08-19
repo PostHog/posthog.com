@@ -1,4 +1,4 @@
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import React from 'react'
 
 export const benefits = [

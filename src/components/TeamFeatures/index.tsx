@@ -2,7 +2,7 @@ import React from 'react'
 import { useFeatureOwnership } from '../../hooks/useFeatureOwnership'
 import SmallTeam from '../SmallTeam'
 import Link from '../Link'
-import { Fieldset } from 'components/OSFieldset'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
 
 interface TeamFeaturesProps {
     teamSlug: string

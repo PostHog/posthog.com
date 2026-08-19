@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
 import { CallToAction } from 'components/CallToAction'
-import { RenderInClient } from 'components/RenderInClient'
+import { RenderInClient } from 'components/shared/layout/RenderInClient'
 import usePostHog from '../../hooks/usePostHog'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 /**
  * A signup CTA that directs to the correct region (EU or US) based on feature flag.

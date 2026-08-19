@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { YCBadge } from '../AboutStory/yc-badge'
 import React from 'react'
 import { James, Tim } from 'components/Signatures'

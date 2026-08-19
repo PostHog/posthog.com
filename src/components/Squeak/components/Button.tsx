@@ -1,5 +1,5 @@
 import { child, container } from 'components/CallToAction'
-import Spinner from 'components/Spinner'
+import Spinner from 'components/shared/ui/Spinner'
 import React, { ButtonHTMLAttributes } from 'react'
 
 export default function Button({

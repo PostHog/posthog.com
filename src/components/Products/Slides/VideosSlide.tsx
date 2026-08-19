@@ -3,10 +3,10 @@ import WistiaCustomPlayer from 'components/WistiaCustomPlayer'
 import { useApp } from '../../../context/App'
 import { IconCollapse45, IconCopy, IconArrowRightDown } from '@posthog/icons'
 import { useWistiaThumbnail } from '../../../hooks/useWistiaThumbnail'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import SmallTeam from 'components/SmallTeam'
 import { useToast } from '../../../context/Toast'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 
 interface VideoChapter {

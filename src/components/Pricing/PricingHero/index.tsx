@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Header } from '../../Header'
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 
 export const PricingHero = () => {
     return (

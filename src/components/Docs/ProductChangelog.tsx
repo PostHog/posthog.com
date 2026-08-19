@@ -8,7 +8,7 @@ import { ChangelogPRMetadata } from 'components/ChangelogPRMetadata'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../context/App'
 import { IconPencil, IconPlus, IconShieldLock } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import RoadmapWindow from 'components/Roadmap/RoadmapWindow'
 

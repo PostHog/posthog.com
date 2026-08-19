@@ -7,14 +7,14 @@ import { IconApple } from 'components/OSIcons'
 import Editor from 'components/Editor'
 import WizardCommand from 'components/WizardCommand'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CTAs, GetStarted } from 'components/Home/Test'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { productUsageTabs } from 'components/Home/HeroCarousel/tabs'
 import Tooltip from 'components/RadixUI/Tooltip'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 const statusDotColor: Record<string, string> = {
     beta: 'bg-yellow',
     alpha: 'bg-orange',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
-import Slider from 'components/Slider'
+import Slider from 'components/shared/layout/Slider'
 
 export const Tab: React.FC & {
     Group: typeof HeadlessTab.Group

@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 
 LLM-powered apps differ in three key ways when compared to regular SaaS apps:
 

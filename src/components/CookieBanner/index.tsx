@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'

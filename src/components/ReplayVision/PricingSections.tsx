@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IconCheck } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Link from 'components/Link'
 import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'

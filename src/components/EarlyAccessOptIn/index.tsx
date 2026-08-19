@@ -1,5 +1,5 @@
 import React from 'react'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 /**
  * Which stage the early access feature is in, which drives the call to action:

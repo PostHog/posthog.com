@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useMemo, useState, useCallback, useEffect, useLayoutEffect } from 'react'
 import Link from 'components/Link'

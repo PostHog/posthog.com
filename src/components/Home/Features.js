@@ -1,6 +1,6 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
-import SliderNav from 'components/SliderNav'
+import SliderNav from 'components/shared/ui/SliderNav'
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useRef, useState } from 'react'
 import Slider from 'react-slick'

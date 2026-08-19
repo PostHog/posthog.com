@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CopyAnchor } from 'components/Heading'
+import { CopyAnchor } from 'components/shared/typography/Heading'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Slugger from 'github-slugger'

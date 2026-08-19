@@ -3,8 +3,8 @@ import React from 'react'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
-import OSButton from 'components/OSButton'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import OSButton from 'components/shared/ui/OSButton'
 
 export default function Dashboards() {
     const dashboardsProduct = useProduct({ handle: 'dashboards' }) as any

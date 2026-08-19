@@ -1,6 +1,6 @@
 import React from 'react'
-import TabbedCarousel from 'components/TabbedCarousel'
-import type { TabbedCarouselTab } from 'components/TabbedCarousel'
+import TabbedCarousel from 'components/shared/animation/TabbedCarousel'
+import type { TabbedCarouselTab } from 'components/shared/animation/TabbedCarousel'
 
 // "Your product, fixing itself" section. Uses the same tabbed carousel layout as
 // the "How a product improves itself" section on /self-driving. The section

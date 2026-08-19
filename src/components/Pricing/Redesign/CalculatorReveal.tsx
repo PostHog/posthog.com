@@ -3,7 +3,7 @@ import { useLocation } from '@reach/router'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
-import { scrollToElement } from 'components/ScrollToElement'
+import { scrollToElement } from 'components/shared/layout/ScrollToElement'
 import usePostHog from 'hooks/usePostHog'
 
 const PANEL_ID = 'calculator-panel'

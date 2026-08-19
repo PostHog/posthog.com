@@ -4,7 +4,7 @@ import React from 'react'
 import { SEO } from 'components/seo'
 import Layout from 'components/Layout'
 import { Posts } from 'components/Blog'
-import Pagination from 'components/Pagination'
+import Pagination from 'components/shared/ui/Pagination'
 import { NewsletterForm } from 'components/NewsletterForm'
 import { communityMenu } from '../../navs'
 

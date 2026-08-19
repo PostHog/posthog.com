@@ -1,6 +1,6 @@
 import React from 'react'
 import useProduct from 'hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import ParseHtml from '../Utilities/parseHtml'
 import Logos from '../Utilities/Logos'
 

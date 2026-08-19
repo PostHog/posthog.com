@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { IconCheck } from '@posthog/icons'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import useCloud from 'hooks/useCloud'
 import usePostHogInstance from 'hooks/usePostHogInstance'
 import { usePlatform } from './usePlatform'

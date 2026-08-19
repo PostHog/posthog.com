@@ -6,8 +6,8 @@ import Link from 'components/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Logo } from '@posthog/brand/logo'
 import SEO from 'components/seo'
-import OSButton from 'components/OSButton'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import OSButton from 'components/shared/ui/OSButton'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 

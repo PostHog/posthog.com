@@ -1,7 +1,7 @@
 import React from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { IconMap, IconRewindPlay, IconSearch, IconSparkles } from '@posthog/icons'
 
 const modes = [

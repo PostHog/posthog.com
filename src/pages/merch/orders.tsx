@@ -3,10 +3,10 @@ import { useFormik } from 'formik'
 import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
-import Input from 'components/OSForm/input'
+import Input from 'components/shared/forms/OSForm/input'
 import Link from 'components/Link'
 import { IconSpinner } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export default function MerchOrders(): JSX.Element {
     const [errorMessage, setErrorMessage] = useState('')

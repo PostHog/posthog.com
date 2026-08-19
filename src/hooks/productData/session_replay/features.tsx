@@ -1,6 +1,6 @@
 import React from 'react'
 import CodeBlock from 'components/Home/CodeBlock'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import SnippetRenderer from 'components/SnippetRenderer'
 
 export const features = {

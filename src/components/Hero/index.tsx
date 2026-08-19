@@ -1,4 +1,4 @@
-import { Heading } from 'components/Heading'
+import { Heading } from 'components/shared/typography/Heading'
 import GithubSlugger from 'github-slugger'
 import React from 'react'
 

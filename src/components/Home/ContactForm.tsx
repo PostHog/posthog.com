@@ -9,7 +9,7 @@ import { animateScroll as scroll } from 'react-scroll'
 import { motion } from 'framer-motion'
 import TextareaAutosize from 'react-textarea-autosize'
 import Confetti from 'react-confetti'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 import usePostHog from '../../hooks/usePostHog'
 
 const inputContainerClasses = `text-sm`

@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { Check } from 'components/Icons/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import addToMailchimp from 'gatsby-plugin-mailchimp'

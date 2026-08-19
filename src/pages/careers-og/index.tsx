@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const query = graphql`

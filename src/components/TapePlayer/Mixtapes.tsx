@@ -3,7 +3,7 @@ import CassetteTape from './CassetteTape'
 import { useMixtapes } from '../../hooks/useMixtapes'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
-import { OSSelect } from 'components/OSForm'
+import { OSSelect } from 'components/shared/forms/OSForm'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
 export default function Mixtapes({

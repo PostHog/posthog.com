@@ -1,6 +1,6 @@
 import AshbyOpenRoles from 'components/AshbyOpenRoles'
 import React from 'react'
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 import { JobListings } from '../JobListings'
 
 export const OpenRoles = () => {

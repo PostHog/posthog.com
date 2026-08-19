@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useLocation } from '@reach/router'
 import { Calculator } from 'components/Pricing/Test/Calculator'
 import { SidebarList, SidebarListItem, Discounts } from 'components/Pricing/PricingExperiment'
-import { scrollToElement } from 'components/ScrollToElement'
+import { scrollToElement } from 'components/shared/layout/ScrollToElement'
 
 /**
  * The pricing calculator as a plain, always-visible section — the `redesign` variant's

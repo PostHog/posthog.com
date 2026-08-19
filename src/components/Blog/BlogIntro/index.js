@@ -1,5 +1,5 @@
 import React from 'react'
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 import BlogAuthor from '../BlogAuthor'
 import { FeaturedImageFull, FeaturedImageStandard } from '../BlogFeaturedImage'
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { IconCheck, IconArrowLeft, IconArrowRight, IconRevert } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 export interface DecisionTreeOption {
     value: string

@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 import { cn } from '../../utils'
 import { Checkout } from './Checkout'

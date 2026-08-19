@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { useUser } from 'hooks/useUser'
 import { PlaceItem, PlaceReview } from './types'
 import { getPlaceIcon } from './PlacesMap'

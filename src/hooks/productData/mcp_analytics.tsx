@@ -8,7 +8,7 @@ import {
     IconSparkles,
     IconGraph,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { getTool } from '../../data/tools'
 
 // MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app

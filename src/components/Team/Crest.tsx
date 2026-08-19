@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'components/Modal'
 import TeamPatch from 'components/TeamPatch'
-import ImageDrop, { Image } from 'components/ImageDrop'
+import ImageDrop, { Image } from 'components/shared/forms/ImageDrop'
 import Select from 'components/Select'
 import { CallToAction } from 'components/CallToAction'
 import { IconX } from '@posthog/icons'

@@ -8,10 +8,10 @@ import {
     IconClosedCaptionsFilled,
 } from 'components/OSIcons'
 import { Select } from 'components/RadixUI/Select'
-import Input from 'components/OSForm/input'
-import OSButton from 'components/OSButton'
+import Input from 'components/shared/forms/OSForm/input'
+import OSButton from 'components/shared/ui/OSButton'
 import usePostHog from 'hooks/usePostHog'
-import Glow, { type GlowColor } from 'components/Glow'
+import Glow, { type GlowColor } from 'components/shared/animation/Glow'
 
 interface WistiaCustomPlayerProps {
     mediaId: string

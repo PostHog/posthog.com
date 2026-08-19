@@ -6,8 +6,8 @@ import NextIcon from '../../contents/images/docs/integrate/frameworks/nextjs.svg
 import ReactIcon from '../../contents/images/docs/integrate/react.svg'
 import SvelteIcon from '../../contents/images/docs/integrate/frameworks/svelte.svg'
 import AstroIcon from '../../contents/images/docs/integrate/frameworks/astro.svg'
-import CloudinaryImage from './CloudinaryImage'
-import { DebugContainerQuery } from './DebugContainerQuery'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 const Row = ({ children }: { children: React.ReactNode }) => {
     return <li className="flex items-center gap-1">{children}</li>

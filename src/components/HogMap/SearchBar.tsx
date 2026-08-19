@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import type mapboxgl from 'mapbox-gl'
 import { addPlace } from './data'
 import { PlaceType } from './types'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface SearchBarProps {
     token?: string

@@ -1,6 +1,6 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import Glow from 'components/shared/animation/Glow'
 import { useApp } from '../../../context/App'
 import type { CarouselSlide as CarouselSlideType, ImageConfig } from './types'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { CallToAction } from 'components/CallToAction'
@@ -28,7 +28,7 @@ import {
     IconPlug,
     IconCursorClick,
 } from '@posthog/icons'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
 import Logo1984 from '../../images/1984.svg'

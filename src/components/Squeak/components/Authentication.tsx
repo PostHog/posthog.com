@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import ResetPassword from './auth/ResetPassword'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 export const inputClasses = `rounded-md border border-black/30 dark:border-white/30 block mb-5 py-2 px-4 w-full text-base text-black`

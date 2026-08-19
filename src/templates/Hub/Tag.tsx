@@ -10,7 +10,7 @@ import SEO from 'components/seo'
 import { CallToAction } from 'components/CallToAction'
 import { getTagIcon } from 'components/BlogLanding/tagOptions'
 import MenuBar from 'components/RadixUI/MenuBar'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 const rootOptions = {
     founders: {

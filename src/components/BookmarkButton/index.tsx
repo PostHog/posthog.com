@@ -1,5 +1,5 @@
 import { IconBookmarkSolid, IconBookmark } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../context/App'

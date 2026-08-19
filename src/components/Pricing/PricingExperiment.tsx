@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useCallback } from 'react'
 import { Quote } from 'components/Pricing/Quote'
 import cntl from 'cntl'
@@ -15,7 +15,7 @@ import Header from './Test/Header'
 import PricingHero from './Test/PricingHero'
 import FreeTier from './Test/FreeTier'
 import { useInView } from 'react-intersection-observer'
-import { scrollToElement } from 'components/ScrollToElement'
+import { scrollToElement } from 'components/shared/layout/ScrollToElement'
 
 export const SidebarList = ({ children }: { children: React.ReactNode }) => (
     <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>

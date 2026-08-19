@@ -6,7 +6,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { CallToAction } from 'components/CallToAction'
 import CommunityIncubatorForm from 'components/CommunityIncubatorForm'
 import CollectiveCarousel from 'components/BuilderCollective/CollectiveCarousel'
-import TabbedCarousel, { type TabbedCarouselTab } from 'components/TabbedCarousel'
+import TabbedCarousel, { type TabbedCarouselTab } from 'components/shared/animation/TabbedCarousel'
 import { HedgehogDj } from '@posthog/brand/hoggies'
 import {
     IconCheck,

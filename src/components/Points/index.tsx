@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Fieldset } from 'components/OSFieldset'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import RewardCard from './RewardCard'

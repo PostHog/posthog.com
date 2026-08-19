@@ -18,7 +18,7 @@ import {
     IconArrowLeft,
     IconArrowRight,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
 import useProducts from 'hooks/useProducts'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCustomers } from '../../hooks/useCustomers'
-import CloudinaryImage from '../CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 interface OSQuoteProps {
     customer: string
