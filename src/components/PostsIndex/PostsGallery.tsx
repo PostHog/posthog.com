@@ -170,11 +170,13 @@ export default function PostsGallery({
     heading = 'Everything else',
     searchName = 'posts-search',
     accent = 'red',
+    tagOrderOverride = [],
 }: {
     posts: PostSummary[]
     heading?: string
     searchName?: string
     accent?: Accent
+    tagOrderOverride?: string[]
 }): JSX.Element {
     const { query, setQuery, activeTag, setActiveTag, sort, setSort, tags, filteredPosts, isFiltered, clear } =
         usePostFilters(posts)
@@ -209,7 +211,13 @@ export default function PostsGallery({
                     <ExpandingSearch query={query} setQuery={setQuery} name={searchName} />
                 </div>
             </div>
-            <TagFilter tags={tags} activeTag={activeTag} onChange={setActiveTag} accent={accent} />
+            <TagFilter
+                tags={tags}
+                activeTag={activeTag}
+                onChange={setActiveTag}
+                accent={accent}
+                tagOrderOverride={tagOrderOverride}
+            />
             {filteredPosts.length > 0 ? (
                 <>
                     <div className="grid grid-cols-1 gap-x-4 gap-y-8 @lg:grid-cols-2 @lg:gap-x-6 @lg:gap-y-10 @3xl:grid-cols-3">

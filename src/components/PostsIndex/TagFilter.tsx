@@ -33,6 +33,18 @@ type TagFilterProps = {
     activeTag: string | null
     onChange: (tag: string | null) => void
     accent?: Accent
+    tagOrderOverride?: string[]
+}
+
+function sortTags(tags: string[], tagOrderOverride: string[]): string[] {
+    return tags.sort((a, b) => {
+        const aIndex = tagOrderOverride.indexOf(a)
+        const bIndex = tagOrderOverride.indexOf(b)
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex
+        if (aIndex !== -1) return -1
+        if (bIndex !== -1) return 1
+        return 0
+    })
 }
 
 /**
@@ -40,10 +52,18 @@ type TagFilterProps = {
  * Pills that don't fit the row are clipped (max-h + overflow-hidden) and collected
  * into a "more" popover; a ResizeObserver re-measures as the window resizes.
  */
-export default function TagFilter({ tags, activeTag, onChange, accent = 'red' }: TagFilterProps): JSX.Element {
+export default function TagFilter({
+    tags,
+    activeTag,
+    onChange,
+    accent = 'red',
+    tagOrderOverride = [],
+}: TagFilterProps): JSX.Element {
     const rowRef = useRef<HTMLDivElement>(null)
     const [overflowTags, setOverflowTags] = useState<string[]>([])
     const [menuOpen, setMenuOpen] = useState(false)
+
+    const sortedTags = sortTags(tags, tagOrderOverride)
 
     useLayoutEffect(() => {
         const row = rowRef.current
@@ -87,7 +107,7 @@ export default function TagFilter({ tags, activeTag, onChange, accent = 'red' }:
         <div className="my-3 flex items-start gap-1 @2xl:my-4">
             <div ref={rowRef} className="flex max-h-8 min-w-0 flex-1 flex-wrap gap-1 overflow-hidden">
                 <TagPill label="All" active={!activeTag} activeClassName={pillActive} onClick={() => onChange(null)} />
-                {tags.map((tag) => (
+                {sortedTags.map((tag) => (
                     <TagPill
                         key={tag}
                         label={tag}

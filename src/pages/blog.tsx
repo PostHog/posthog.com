@@ -12,6 +12,8 @@ import usePostHog from 'hooks/usePostHog'
 
 const RSS_URL = 'https://posthog.com/rss.xml'
 
+const TAG_ORDER_OVERRIDE = ['Product updates', 'Explainers', 'Engineering', 'AI', 'CEO diaries']
+
 /** Copies the RSS feed URL — the blog's stand-in for the newsletter's subscribe form. */
 function CopyRSSButton({ placement }: { placement: string }): JSX.Element {
     const posthog = usePostHog()
@@ -118,7 +120,7 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
                             )}
                         </div>
                         <div className="mt-8 @2xl:mt-16">
-                            <PostsGallery posts={posts.slice(1)} accent="blue" />
+                            <PostsGallery posts={posts.slice(1)} accent="blue" tagOrderOverride={TAG_ORDER_OVERRIDE} />
                         </div>
                         <hr className="my-10 h-px border-none bg-blue/40 @2xl:my-16" />
                         <BlogHeader placement="blog-footer" />
