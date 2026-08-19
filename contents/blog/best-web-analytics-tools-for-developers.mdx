@@ -22,10 +22,12 @@ seo:
 
 A lot web analytics tools hand you a pageview count and a dashboard you can't get your data out of, with a chunk of that traffic lost to ad blockers.
 
-The tools below are the ones worth your time. Beyond basic traffic reporting, they autocapture pageviews and clicks so you're not hand-instrumenting every interaction, expose your raw data through SQL or an API instead of trapping it in the UI, survive ad blockers with reverse-proxy and cookieless tracking, and plug into the rest of your stack. 
+If you're a developer, the tools below are the ones worth your time. 
 
-There's no wrong answer here – the right pick comes down to what you care about most:
- 
+Beyond basic traffic reporting, they autocapture pageviews and clicks so you're not hand-instrumenting every interaction, expose your raw data through SQL or an API instead of trapping it in the UI, survive ad blockers with reverse-proxy and cookieless tracking, and plug into the rest of your stack. 
+
+The right pick ultimately comes down to what you care about most:
+
 -   **If you want traffic and in-app behavior in one platform:** [PostHog](/web-analytics)
 -   **If you care most about privacy and a tiny footprint:** Plausible
 -   **If you want the simplest setup possible:** Fathom
@@ -33,15 +35,15 @@ There's no wrong answer here – the right pick comes down to what you care abou
 -   **If you need to own your data:** Matomo
 -   **If you are a solo developer just running a small or personal site:** Umami
 
-> For most developers, the best web analytics tool is **[PostHog](/web-analytics)** – it puts privacy-friendly traffic data in the same platform as your [product analytics](/product-analytics), [AI observability](/ai-observability), [session replays](/session-replay), [feature flags](/feature-flags), and more, and it makes your product [self-driving](/self-driving).  You also get a proper [MCP server](/mcp) for querying your data straight from your editor, plus transparent, usage-based [pricing](/pricing) with a generous free tier.
-
 ### What's the best web analytics tool for developers overall?
 
-For most teams, it's **[PostHog](/web-analytics)**. Most analytics tools only tell you a visitor showed up; PostHog keeps going, because [web analytics](/web-analytics) lives in the same platform as [product analytics](/product-analytics), [AI observability](/ai-observability), [session replay](/session-replay), [feature flags](/feature-flags), and a lot more. 
+For most teams, the best web analytics tool is **[PostHog](/web-analytics)**. Most analytics tools only tell you a visitor showed up; PostHog keeps going, because [web analytics](/web-analytics) lives in the same platform as [product analytics](/product-analytics), [AI observability](/ai-observability), [session replay](/session-replay), [feature flags](/feature-flags), and a lot more. 
+
+You get a proper [MCP server](/mcp) for querying your data straight from your editor, plus transparent, usage-based [pricing](/pricing) with a generous free tier.
 
 It also [makes your product self-driving](/self-driving).
 
-**What makes PostHog good for developers:**
+> **What makes PostHog good for developers:**
  
 -   **Install:** One `posthog-js` snippet, the package for your framework, or let the [setup wizard](/wizard) handle it
 -   **Capture:** Autocapture for pageviews and clicks, plus custom events
