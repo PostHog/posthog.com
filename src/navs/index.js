@@ -7758,7 +7758,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Open source',
+                    name: 'Contribute',
                     url: '/docs/posthog-desktop/open-source',
                     icon: 'IconGithub',
                     color: 'seagreen',
