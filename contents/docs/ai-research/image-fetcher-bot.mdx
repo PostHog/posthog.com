@@ -1,10 +1,10 @@
 ---
-title: Session replay image bot
+title: Image fetcher bot
 ---
 
 PostHog runs a bot that downloads images referenced by session recordings. This page explains what it does, how to identify it, and how to block it.
 
-The bot is called `PostHogSessionReplayBot`.
+The bot is called `PostHogImageFetcherBot`.
 
 ## What it does
 
@@ -23,7 +23,7 @@ If nobody records PostHog sessions on your site, the bot has no reason to visit 
 Look for this user agent:
 
 ```
-PostHogSessionReplayBot/1.0 (+https://posthog.com/docs/session-replay/image-bot)
+PostHogImageFetcherBot/1.0 (+https://posthog.com/docs/ai-research/image-fetcher-bot)
 ```
 
 The user agent is the way to identify the bot. We don't publish a list of IP addresses, because the addresses can change and a list you can't rely on is worse than no list. If you need a stable range to add to an allowlist, [contact us](/talk-to-a-human) and tell us what you need it for.
@@ -42,7 +42,7 @@ The user agent is the way to identify the bot. We don't publish a list of IP add
 To block it in `robots.txt`:
 
 ```
-User-agent: PostHogSessionReplayBot
+User-agent: PostHogImageFetcherBot
 Disallow: /
 ```
 
