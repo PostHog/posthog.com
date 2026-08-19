@@ -768,5 +768,13 @@
         "link_type": "github",
         "link_url": "https://github.com/willwearing",
         "profile_id": 41941
+    },
+    {
+        "handle": "georgis",
+        "name": "Georgis Andonis",
+        "role": "Product Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/georgis-andonis/",
+        "profile_id": 35171
     }
 ]

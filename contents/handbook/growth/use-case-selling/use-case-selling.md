@@ -46,7 +46,7 @@ Each use case has a full playbook with discovery questions, competitive position
 | Data Warehouse | Data Infrastructure | |
 | Data Pipelines / Batch Exports | Data Infrastructure | Growth & Marketing |
 | Endpoints *beta* | Data Infrastructure | |
-| Semantic layer *alpha* | Data Infrastructure | |
+| Semantic layer *beta* | Data Infrastructure | |
 | Logs | Observability | Customer Experience |
 | Distributed tracing *alpha* | Observability | Release Engineering |
 | Metrics *alpha* | Observability | |

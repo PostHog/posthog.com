@@ -193,6 +193,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
             "statusCode": 301
