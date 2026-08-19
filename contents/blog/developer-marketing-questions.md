@@ -23,7 +23,7 @@ One of the baffling things about leading the marketing team at PostHog is how of
 
 There is no grand unified theory of marketing, here or anywhere else. Anyone who pretends otherwise is lying to you. Best I can figure, the only thing that makes marketing at PostHog different is that we're more transparent about this than most. And I've never even been to San Francisco!
 
-Regardless, I keep getting asked to hop on quick calls with founders and developers to talk about marketing. I'm always happy to chat, but I thought it would be helpful to write down ~~the answers~~ my thoughts on the most common questions I get. All of it comes with the caveat that these are just my thoughts and that marketing a PostHog is a team effort. 
+Regardless, I keep getting asked to hop on quick calls with founders and developers to talk about marketing. I'm always happy to chat, but I thought it would be helpful to write down ~~the answers~~ my thoughts on the most common questions I get. All of it comes with the caveat that these are just my thoughts and that marketing at PostHog is a team effort. 
 
 ## "I built something and told people about it. What should I do now?"
 
