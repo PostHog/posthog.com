@@ -8,7 +8,7 @@ We're moving our canonical numbers into PostHog's [semantic layer](/docs/semanti
 
 That only works if metrics are named well enough to find and distinguish. These are the ground rules for creating one.
 
-**Names are reserved but not permanent.** You can [rename a metric](/docs/semantic-layer/metrics#renaming-and-deleting), redefine one under the same name, and reuse a deleted name later with a new definition. Renaming frees the old name and breaks anything that stored it — saved SQL, run URLs, links — and sends an approved metric back to `proposed` for re-approval. So treat the name as a reference other things point at, and pick one worth keeping.
+**Names are reserved but not permanent.** You can [rename a metric](/docs/semantic-layer/metrics#renaming-and-deleting), redefine one under the same name, and reuse a deleted name later with a new definition. Renaming frees the old name and breaks anything that stored it – saved SQL, run URLs, links – and sends an approved metric back to `proposed` for re-approval. So treat the name as a reference other things point at, and pick one worth keeping.
 
 ## 1. Name shape
 

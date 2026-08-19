@@ -29,7 +29,7 @@ The result: your agents build the catalog for you during normal work, and nothin
 
 ## Typed confirmations
 
-Every promoting or vetoing action requires the user to reply with the literal word "confirm" before it executes. Each ships as a `-prepare` / `-execute` [tool pair](/docs/semantic-layer/mcp-tools#how-confirmations-work): `-prepare` returns a signed confirmation hash, and `-execute` runs only once you've typed the word.
+Every promoting or vetoing action requires you to reply with the literal word "confirm" before it executes. Each ships as a `-prepare` / `-execute` [tool pair](/docs/semantic-layer/mcp-tools#how-confirmations-work): `-prepare` returns a signed confirmation hash, and `-execute` runs only once you've typed the word.
 
 - `data-catalog-metric-approve-prepare` / `-execute` – additionally blocked while the metric is drifted
 - `data-catalog-certification-certify-prepare` / `-execute`
