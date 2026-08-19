@@ -8,13 +8,13 @@ You can send `$http_log` events from anywhere that can make an HTTP request: an 
 
 ## The payload
 
-Send events to the [capture API](/docs/api/capture) like any other event. This is the canonical shape:
+Send events to the [capture API](/docs/api/capture) like any other event. Here's the shape:
 
 ```json
 {
   "api_key": "<ph_project_api_key>",
   "event": "$http_log",
-  "distinct_id": "http_log_5f8ab21c93de4a7b8f01",
+  "distinct_id": "http_log_5f8ab21c93de4a7b8f0142cc93de4a7b8f01",
   "properties": {
     "$process_person_profile": false,
     "$current_url": "https://example.com/pricing?utm_source=newsletter",
@@ -62,7 +62,7 @@ A single page view fans out into many sub-resource requests (JS, CSS, images, fo
 
 ## Cloudflare Worker example
 
-A pass-through [Worker](/docs/libraries/cloudflare-workers) that reports each request in the background, without delaying responses. Works on every Cloudflare plan. Store your project token as a Worker variable, and add a route like `example.com/*` so it runs on your traffic.
+This pass-through [Worker](/docs/libraries/cloudflare-workers) reports each request in the background, so it never delays a response. It works on every Cloudflare plan. Store your project token as a Worker variable, and add a route like `example.com/*` so it runs on your traffic.
 
 ```js
 export default {
@@ -113,13 +113,13 @@ async function hash(input) {
 }
 ```
 
-Only traffic proxied through Cloudflare (orange-cloud DNS) reaches Workers. On an Enterprise plan, consider [Logpush](#cloudflare-logpush-example-enterprise-plan) instead – it keeps log delivery off the request path entirely.
+Only traffic proxied through Cloudflare (orange-cloud DNS) reaches Workers. `cloudflare_bot_score` only populates if your zone has Cloudflare Bot Management; without it, the optional chaining leaves the property out. On an Enterprise plan, consider [Logpush](#cloudflare-logpush-example-enterprise-plan) instead – it keeps log delivery off the request path entirely.
 
 ## Cloudflare Logpush example (Enterprise plan)
 
 [Cloudflare Logpush](https://developers.cloudflare.com/logs/logpush/) pushes the **HTTP requests** dataset to an HTTP endpoint as gzipped, newline-delimited JSON batches. PostHog's capture API expects individual events, so the pattern is a small relay Worker: Logpush delivers batches to the Worker, and the Worker maps each record to a `$http_log` event and forwards them to the [batch API](/docs/api/capture#batch-events). Unlike the pass-through Worker above, nothing runs on your visitors' request path.
 
-Deploy this as a Worker and note its URL (a `workers.dev` URL works). It reuses the `hash` helper from the example above.
+Deploy this as a Worker and note its URL (a `workers.dev` URL works).
 
 ```js
 export default {
@@ -192,6 +192,13 @@ async function toHttpLogEvent(record) {
         },
     }
 }
+async function hash(input) {
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input))
+    return [...new Uint8Array(digest)]
+        .slice(0, 16)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('')
+}
 ```
 
 Then create the Logpush job on your zone, under **Analytics & Logs > Logpush > Create a Logpush job**:
@@ -206,7 +213,7 @@ Logpush also supports a sampling rate in the job settings if you want to cap vol
 
 ## Server middleware example
 
-The same idea from your own server, here as Express middleware. Fire the capture request after the response is finished so logging never blocks the request path.
+The same idea from your own server, shown as Express middleware. Fire the capture request after the response finishes so logging never blocks the request path. Behind a load balancer or proxy, configure [`trust proxy`](https://expressjs.com/en/guide/behind-proxies.html) first, so `req.ip`, `req.hostname`, and `req.protocol` reflect the client rather than the proxy.
 
 ```js
 import crypto from 'node:crypto'
@@ -249,6 +256,6 @@ app.use((req, res, next) => {
 If you'd rather not write the capture call yourself:
 
 - **Vercel logs source** – in PostHog, go to **Data pipeline > Sources** and add the **Vercel logs** source, then point a Vercel log drain at the generated endpoint. Distinct ID hashing, person processing, and page-route filtering are settings on the source.
-- Sources for other providers are in the works – check **Data pipeline > Sources** for what's available in your project.
+- Check **Data pipeline > Sources** in your project for other managed sources as we add them.
 
 Once events are flowing, head to [bot and traffic detection](/docs/web-analytics/bot-detection) for the classification functions and virtual properties you can query them with.
