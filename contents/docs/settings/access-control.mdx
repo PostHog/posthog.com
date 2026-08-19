@@ -18,13 +18,13 @@ export const projectAccessControlLight =
 export const projectAccessControlDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_project_dark_d05334884e.png";
 export const resourceAccessControlLight =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_light_7ccb0f5311.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/resource_access_control_light_638d035213.png";
 export const resourceAccessControlDark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_resource_dark_aa8806bb1d.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/resource_access_control_dark_fd4a9382dd.png";
 export const objectAccessControlLight =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_light_864b64cfa3.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/object_access_control_light_5c740b9e38.png";
 export const objectAccessControlDark =
-  "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_object_dark_17f1adda40.png";
+  "https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/object_access_control_dark_03278b80ea.png";
 
 PostHog's access control system allows you to manage permissions at three levels: organization, project, and resource. This hierarchical approach provides granular control over who can view and edit different parts of PostHog.
 
@@ -107,6 +107,7 @@ Currently, resource access controls are available for:
 - LLM analytics
 - Logs
 - Managed data warehouse sources
+- Warehouse tables and views
 - Notebooks
 - Session recordings
 - Surveys
@@ -116,15 +117,11 @@ Currently, resource access controls are available for:
 - Workflows
 - (more resource types coming soon – looking for others? Let us know!)
 
-<CalloutBox icon="IconWarning" title="Access controls don't yet apply to underlying data" type="caution">
+Resource access controls limit who can open product surfaces in the UI or execute the corresponding MCP tools.
 
-Resource access controls limit access to resources in the PostHog UI and API, but they do **not** yet limit access to the underlying data. We don't currently support restricting:
+<CalloutBox icon="IconWarning" title="Native tables aren't restricted yet" type="caution">
 
-- **Querying data** – any project member can query events, data warehouse tables, and other data via SQL/HogQL, including through the [PostHog AI assistant](/docs/posthog-ai) and the API. For example, a user with "No access" to data warehouse sources can't open the SQL editor, but can still ask PostHog AI to query those tables on their behalf.
-- **Viewing session replays**
-- **Accessing person and group profiles**
-
-Data-level access control support is planned and actively being worked on.
+Queries to the core PostHog tables (`events`, `sessions`, `persons`, `groups`) through the SQL editor or MCP still work. To prevent queries from returning sensitive event or person properties (for example, `email`), configure [property access control](/docs/settings/property-access-control).
 
 </CalloutBox>
 
@@ -173,17 +170,15 @@ You cannot set resource-level access controls for organization admins, as they a
   classes="rounded"
 />
 
-### 4. Property level
+## Warehouse access control
 
-Property access controls let you restrict who can view and edit properties on events and persons. These can be managed by using **Property definitions**.
+When you connect external sources to PostHog through the [Data Warehouse](/docs/data-warehouse), you can configure who can query the data synced into PostHog. Apply access controls to all sources or to a specific one, table, or view. See [warehouse access control](/docs/settings/warehouse-access-control) for details.
 
-Property level access controls have the following levels:
+## Property access control
 
-- **Read & write** – Can view and query the property, and update its value via the UI or API.
-- **Read** – Can view and query the property, but cannot change its value.
-- **No access** – The property is completely hidden from the user, and cannot be queried or filtered on.
+Event or person data may contain sensitive properties (for example, email addresses). To prevent someone from exporting your entire user base, configure [property access control](/docs/settings/property-access-control).
 
-Currently event, person, and group properties are supported.
+When a property is restricted, explicit reads return `NULL`, and results that include all properties omit it. This applies in both the SQL editor and MCP.
 
 ## How object access control precedence works
 
