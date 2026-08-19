@@ -70,7 +70,11 @@ export function Contents(): JSX.Element | null {
                 .filter((page) => !page.isFrontMatter)
                 .map((page) => (
                     <li key={page.url} className="flex items-baseline gap-2">
-                        <Link to={page.url} className="min-w-0 text-[1em] text-primary hover:underline">
+                        <Link
+                            to={page.url}
+                            wrapperClassName="min-w-0"
+                            className="text-[1em] text-primary hover:underline"
+                        >
                             {page.title}
                         </Link>
                         {/* The dotted leader, so the row reads as a ToC line. */}
