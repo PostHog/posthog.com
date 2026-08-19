@@ -107,7 +107,7 @@ The email should come from you or the PMM, not a generic address.
 
 #### Docs, blogs, and the pricing page
 
-The pricing calculator updates from the billing migration, but check it renders. Then have an agent comb the [posthog.com repo](https://github.com/PostHog/posthog.com) for the old price. It shows up in more places than you'd expect: product docs, comparison blog posts, "best X tools" roundups with worked cost examples, and SEO descriptions. Some pages carry a "pricing current as of" date that needs bumping too.
+The [pricing page](/pricing) calculator updates from the billing migration, but double-check it renders. Most product page calculators pull from the same billing API, so they update too. The exception is a product with a custom pricing logic (like `/replay-vision/pricing` for a launch promo). Check that's not the case for your product. Additionally, have an agent comb the [posthog.com repo](https://github.com/PostHog/posthog.com) for the old price. It shows up in more places than you'd expect: product docs, comparison blog posts, "best X tools" roundups with worked cost examples, and SEO descriptions. Some pages carry a "pricing current as of" date that needs bumping too.
 
 #### Paid ads
 
