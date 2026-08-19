@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: false
 ---
 
-> 🎨 **Need artwork or merch?** Please request it using the [request templates](https://github.com/PostHog/marketing/issues/new/choose). Do not request art or merch over Slack or email.
+> 🎨 **Need artwork or merch?** Please request it using the [request templates in the PostHog/marketing repo](https://github.com/PostHog/marketing/issues/new/choose) — this is the only place art and brand request issues should be opened. Do not open them in the posthog.com repo, and do not request art or merch over Slack or email.
 
 All artwork and merch requests are handled by <TeamMember name="Lottie Coxon" />, <TeamMember name="Heidi Berton" />, and <TeamMember name="Daniel Hawkins" /> on the Graphics team.
 
