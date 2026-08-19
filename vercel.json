@@ -18,8 +18,14 @@
         {
             "source": "/.well-known/posthog.com.json",
             "headers": [
-                { "key": "Content-Type", "value": "application/json" },
-                { "key": "Cache-Control", "value": "public, max-age=600" }
+                {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=600"
+                }
             ]
         },
         {
