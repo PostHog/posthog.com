@@ -36,27 +36,7 @@ import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
 import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
-
-const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
-    if (!array) return false
-
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-
-        if (element.url?.split('?')[0] === value) {
-            return true
-        }
-
-        if (element.children) {
-            const found = recursiveSearch(element.children, value)
-            if (found) {
-                return true
-            }
-        }
-    }
-
-    return false
-}
+import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
 const snapThreshold = -50
 
@@ -232,7 +212,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const parent =
         (appMenu as Menu).find(({ children, url }) => {
             const currentURL = item?.path
-            return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+            return currentURL === url?.split('?')[0] || containsURL(children, currentURL)
         }) ||
         appMenu.find(({ url }) => url === `/${item?.path?.split('/')[1]}`) ||
         appMenu.find(({ name }) => name === 'Docs')
@@ -240,17 +220,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
-        const currentURL = item?.path
-        // A URL can be the root of its own section and also a link inside an earlier section. Match the
-        // section that owns the URL first, so the earlier link does not shadow it. A section without
-        // children has no sidebar of its own, so it stays out of this pass.
-        const owner = internalMenu?.find(
-            (menuItem: MenuItem) => menuItem.children?.length && currentURL === menuItem.url?.split('?')[0]
-        )
-        if (owner) return owner
-        return internalMenu?.find((menuItem: MenuItem) => {
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+        return getActiveMenuSection<MenuItem>(internalMenu, item?.path)
     }, [internalMenu, item])
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
