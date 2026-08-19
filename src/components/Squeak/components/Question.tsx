@@ -35,7 +35,6 @@ import ReportSpamButton from './ReportSpamButton'
 import OSButton from 'components/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TopicSelector } from './TopicSelector'
-import ChampionTools from './ChampionTools'
 import { XIcon } from 'lucide-react'
 import { useToast } from '../../../context/Toast'
 import { useWindow } from '../../../context/Window'
@@ -401,7 +400,7 @@ export function Question(props: QuestionProps) {
     } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator, canModerate } = useUser()
+    const { user, notifications, setNotifications, isModerator, isChampion, canModerate } = useUser()
     const { appWindow } = useWindow()
     const { addToast } = useToast()
     const posthog = usePostHog()
@@ -462,7 +461,6 @@ export function Question(props: QuestionProps) {
         pinTopics,
         mutate,
         removeTopic,
-        handlePublishQuestion,
         escalate,
     } = useQuestion(id, { data: question, onResolve: refreshList })
 
@@ -493,6 +491,31 @@ export function Question(props: QuestionProps) {
     const handleEscalateToSupport = async () => {
         if (escalateState === 'sending' || escalateState === 'sent') return
         setEscalateState('sending')
+
+        // Champions take a different path. Opening a support ticket attributes it to the
+        // question author, which needs their email — and champions aren't allowed to read
+        // it. Escalating through Strapi lets the server attach the email and post it to
+        // Slack, where a moderator decides whether it becomes a ticket.
+        if (isChampion) {
+            try {
+                await escalate()
+                setEscalateState('sent')
+                addToast({
+                    title: 'Escalated',
+                    description: 'A PostHog moderator has been notified in Slack and will take a look.',
+                })
+            } catch (error) {
+                setEscalateState('error')
+                addToast({
+                    title: 'Escalation failed',
+                    description: "The moderators couldn't be notified. Please try again.",
+                    error: true,
+                })
+                posthog?.captureException?.(error)
+            }
+            return
+        }
+
         const authorProfile = questionData.attributes.profile?.data
         const authorName =
             [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
@@ -587,9 +610,9 @@ export function Question(props: QuestionProps) {
                     </div>
                 )}
                 <div className={`flex flex-col w-full`}>
-                    {!publishedAt && canModerate && (
+                    {!publishedAt && isModerator && (
                         <p className="font-bold text-sm m-0 mb-4 italic p-2 bg-accent border border-primary rounded">
-                            This thread is unpublished and only visible to moderators and champions
+                            This thread is unpublished and only visible to moderators
                         </p>
                     )}
                     <div
@@ -736,11 +759,16 @@ export function Question(props: QuestionProps) {
                             isInForum={isInForum}
                         />
                     </div>
-                    {isModerator && isInForum && (
+                    {/*
+                     * Shared by moderators and community champions. Champions are not
+                     * PostHog employees, so anything identifying or admin-only stays
+                     * behind isModerator inside — see the gates below.
+                     */}
+                    {canModerate && isInForum && (
                         <div className="p-4 pb-0">
                             <div className="bg-accent rounded-md p-6 text-primary border border-border">
                                 <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
-                                    Moderator tools
+                                    Moderation tools
                                 </h4>
                                 <div className="grid grid-cols-2">
                                     <div>
@@ -752,34 +780,47 @@ export function Question(props: QuestionProps) {
                                                 ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
                                                 : 'Anonymous'}
                                         </Link>
-                                        <input
-                                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
-                                            type="text"
-                                            value={
-                                                questionData?.attributes?.profile?.data?.attributes?.user?.data
-                                                    ?.attributes?.email
-                                            }
-                                            readOnly
-                                            onFocus={(e) => e.target.select()}
-                                        />
+                                        {/* Author's email — staff only. The API also withholds it from champions. */}
+                                        {isModerator && (
+                                            <input
+                                                className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                                                type="text"
+                                                value={
+                                                    questionData?.attributes?.profile?.data?.attributes?.user?.data
+                                                        ?.attributes?.email
+                                                }
+                                                readOnly
+                                                onFocus={(e) => e.target.select()}
+                                            />
+                                        )}
                                     </div>
                                     <div className="w-full relative">
                                         <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
-                                            <Link
-                                                className="font-bold"
-                                                to={questionData.attributes.permalink}
-                                                externalNoIcon
-                                            >
-                                                View in PostHog
-                                            </Link>
-                                            <Link
-                                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
-                                                externalNoIcon
-                                                className="font-bold"
-                                            >
-                                                View in Strapi
-                                            </Link>
-                                            {conversationsAvailable && (
+                                            {/* Internal tooling links — staff only. */}
+                                            {isModerator && (
+                                                <>
+                                                    <Link
+                                                        className="font-bold"
+                                                        to={questionData.attributes.permalink}
+                                                        externalNoIcon
+                                                    >
+                                                        View in PostHog
+                                                    </Link>
+                                                    <Link
+                                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                                        externalNoIcon
+                                                        className="font-bold"
+                                                    >
+                                                        View in Strapi
+                                                    </Link>
+                                                </>
+                                            )}
+                                            {/*
+                                             * Moderators need the conversations widget to open a
+                                             * support ticket. Champions escalate through Strapi
+                                             * instead, so they don't wait on it.
+                                             */}
+                                            {(isChampion || conversationsAvailable) && (
                                                 <OSButton
                                                     variant="secondary"
                                                     size="sm"
@@ -795,7 +836,9 @@ export function Question(props: QuestionProps) {
                                             )}
                                             {escalateState === 'error' && (
                                                 <span className="text-red text-xs font-semibold">
-                                                    Couldn't create ticket. Try again?
+                                                    {isChampion
+                                                        ? "Couldn't notify moderators. Try again?"
+                                                        : "Couldn't create ticket. Try again?"}
                                                 </span>
                                             )}
                                         </p>
@@ -835,14 +878,6 @@ export function Question(props: QuestionProps) {
                                 </div>
                             </div>
                         </div>
-                    )}
-                    {canModerate && isInForum && (
-                        <ChampionTools
-                            question={questionData}
-                            onPublishChange={handlePublishQuestion}
-                            onEscalate={escalate}
-                            onRemoveTopic={removeTopic}
-                        />
                     )}
                 </div>
             </div>
