@@ -52,7 +52,7 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 ### Drafting
 
 - **Preview as you write.** Draft in this [Google Docs template](https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit) to see roughly how the post will look on posthog.com.
-- **Don't let AI write the whole thing.** We encourage using AI for research, outlining, and finding the weak spots in an argument, but avoid using it to actually write the sentences. Readers can tell, and we may ask you to rewrite it if it's too obvious.
+- **Don't let AI write the whole thing.** We encourage using AI for research, outlining, and finding the weak spots in an argument, but avoid using it to actually write the sentences. Readers can tell, and we will ask you to rewrite it if it's too obvious.
 - **Consider adding internal links for SEO.** The [SEO guide](/handbook/content/seo-guide) covers how many to add and what anchor text to use.
 - **Don't sweat the mechanics.** En dashes, sentence case, image sizes – we'll fix anything you miss during review.
 
