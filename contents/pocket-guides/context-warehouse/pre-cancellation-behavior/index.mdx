@@ -23,8 +23,6 @@ section: Ask a quick question
 
 </ExampleFigure>
 
-<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
-
 </LeftPage>
 
 <RightPage>
@@ -39,7 +37,7 @@ activity before each one, looking for a pattern that's shared across churned acc
 
 The Skill looks for patterns like <SeeFig n={1} />: engagement doesn't fall off a cliff, it
 erodes, roughly halving every week for a month before cancellation. That decay curve is the
-early-warning signal so you can start re-engaging your user when their engagement first begins to dip.
+early-warning signal so you can start re-engaging users when their engagement first begins to dip.
 
 ## Doing this by hand
 
@@ -49,7 +47,7 @@ early-warning signal so you can start re-engaging your user when their engagemen
    [Persons](/docs/data/persons) (or Groups) explorer to read their activity timeline in the weeks
    before they left.
 3. **Look for the shared pattern**: Use the
-   [SQL editor](/docs/data-warehouse/sql) or ask PostHog AI, to
+   [SQL editor](/docs/data-warehouse/sql) or ask PostHog AI to
    average the number of weeks-to-churn across the accounts you've selected.
 
 ## Get an agent to do the work
@@ -62,6 +60,8 @@ line itself, and a ranking of each account's *last* action before they left.
 This is behavioral churn prediction with no support data. If the question is specifically about
 support tickets predicting churn, that's
 [Tickets & churn](/pocket-guides/context-warehouse/support-tickets-churn) instead.
+
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
 
 <SeeAlso>
 
