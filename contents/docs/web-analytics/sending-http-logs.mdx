@@ -52,7 +52,7 @@ Anything else from your log line (data center region, cache status, TLS fingerpr
 
 Server requests carry no PostHog cookie, so you decide the `distinct_id` yourself:
 
-- **Use a derived, per-client ID**: a hash of IP, host, and user agent gives one stable identity per client, which keeps unique-visitor counts meaningful. Prefix it with `http_log_` so log traffic is easy to recognize.
+- **Use a derived, per-client ID**: a hash of IP, host, and user agent gives one stable identity per client, which keeps unique-visitor counts meaningful. Prefix it with `http_log_` so you can recognize log traffic in queries.
 - **Avoid a single shared ID** (all traffic counts as one visitor) and **avoid random per-request IDs** (every request counts as a new visitor).
 - **Send events as anonymous** (`$process_person_profile: false`). High-cardinality log traffic would otherwise create a person profile per distinct ID, which adds cost and slows person-joined queries. Bot detection reads event properties, not the profile, so nothing is lost.
 
@@ -60,9 +60,9 @@ Server requests carry no PostHog cookie, so you decide the `distinct_id` yoursel
 
 A single page view fans out into many sub-resource requests (JS, CSS, images, fonts). If you only care about page and API traffic, skip requests whose path ends in an asset extension before sending. Keeping paths with no extension (plus `.html`) gets you close to a document-level stream at a fraction of the volume.
 
-## Example: Cloudflare Worker
+## Cloudflare Worker example
 
-A pass-through [Worker](/docs/libraries/cloudflare-workers) that reports each request in the background, without delaying responses. Works on every Cloudflare plan. Store your project API key as a Worker variable, and add a route like `example.com/*` so it runs on your traffic.
+A pass-through [Worker](/docs/libraries/cloudflare-workers) that reports each request in the background, without delaying responses. Works on every Cloudflare plan. Store your project token as a Worker variable, and add a route like `example.com/*` so it runs on your traffic.
 
 ```js
 export default {
@@ -82,7 +82,7 @@ async function sendHttpLog(request, response, env) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            api_key: env.POSTHOG_PROJECT_API_KEY,
+            api_key: env.POSTHOG_PROJECT_TOKEN,
             event: '$http_log',
             distinct_id: `http_log_${await hash(`${ip}:${url.hostname}:${userAgent}`)}`,
             properties: {
@@ -115,7 +115,7 @@ async function hash(input) {
 
 Only traffic proxied through Cloudflare (orange-cloud DNS) reaches Workers.
 
-## Example: server middleware
+## Server middleware example
 
 The same idea from your own server, here as Express middleware. Fire the capture request after the response is finished so logging never blocks the request path.
 
@@ -134,7 +134,7 @@ app.use((req, res, next) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                api_key: process.env.POSTHOG_PROJECT_API_KEY,
+                api_key: process.env.POSTHOG_PROJECT_TOKEN,
                 event: '$http_log',
                 distinct_id: distinctId,
                 properties: {
