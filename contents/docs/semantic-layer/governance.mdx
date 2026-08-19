@@ -4,11 +4,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
+import BetaCallout from './_snippets/beta-callout'
 
 The semantic layer's whole design reduces to one sentence: **AI generates, a human owns.** This page explains how that principle is enforced – lifecycles, typed confirmations, API scopes, and provenance – and how to run it day to day.
 
-<AlphaCallout />
+<BetaCallout />
 
 ## AI generates, a human owns
 
@@ -29,13 +29,13 @@ The result: your agents build the catalog for you during normal work, and nothin
 
 ## Typed confirmations
 
-Every promoting or vetoing tool requires the user to reply with the literal word "confirm" before it executes:
+Every promoting or vetoing action requires the user to reply with the literal word "confirm" before it executes. Each ships as a `-prepare` / `-execute` [tool pair](/docs/semantic-layer/mcp-tools#how-confirmations-work): `-prepare` returns a signed confirmation hash, and `-execute` runs only once you've typed the word.
 
-- `data-catalog-metric-approve` – additionally blocked while the metric is drifted
-- `data-catalog-certification-certify`
-- `data-catalog-certification-deprecate`
-- `data-catalog-relationship-accept`
-- `data-catalog-relationship-reject`
+- `data-catalog-metric-approve-prepare` / `-execute` – additionally blocked while the metric is drifted
+- `data-catalog-certification-certify-prepare` / `-execute`
+- `data-catalog-certification-deprecate-prepare` / `-execute`
+- `data-catalog-relationship-accept-prepare` / `-execute`
+- `data-catalog-relationship-reject-prepare` / `-execute`
 
 The point is simple: an agent can't autocomplete your signature. However agentic your workflow gets, the moment something becomes canonical is always a human typing a word.
 
@@ -48,7 +48,7 @@ Two scopes split proposing from promoting:
 | `data_catalog` | Read and write: search the catalog, run metrics, propose metrics/certifications/relationships, update drafts |
 | `data_catalog_approval` | Promote and veto: approve metrics, certify or deprecate tables, accept or reject relationships |
 
-Practical setup: the API key you hand your MCP server or CI agent gets `data_catalog` only – it can build and use the catalog but never bless anything. Your own key carries both scopes, so approvals happen through you. (`data-catalog-metric-run` also needs `query:read`, and `data-catalog-relationship-accept` needs `warehouse_view:write` to create the join.)
+Practical setup: the API key you hand your MCP server or CI agent gets `data_catalog` only – it can build and use the catalog but never bless anything. Your own key carries both scopes, so approvals happen through you. (`data-catalog-metric-run` also needs `query:read`, and `data-catalog-relationship-accept-prepare` / `-execute` needs `warehouse_view:write` to create the join. `data-catalog-metrics-refresh-from-insight-create` needs `insight:read` to re-read the source insight.)
 
 ## Provenance
 
