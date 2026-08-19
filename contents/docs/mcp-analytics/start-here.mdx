@@ -33,7 +33,7 @@ MCP Analytics gives you visibility into how AI agents actually use the MCP serve
 - 🧵 The full session, end to end
 - 🚧 Capabilities the agent wished existed (with `reportMissing`)
 
-The SDK supports any TypeScript MCP server built on `@modelcontextprotocol/sdk`. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
+The SDK supports any TypeScript MCP server, on [either major](/docs/mcp-analytics/sdk-v2) of the MCP SDK. The fastest way to get set up is our wizard, which installs the package and wires up `instrument()` for you (it also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt):
 
 <WizardCommand command="mcp-analytics" />
 
@@ -163,9 +163,11 @@ Copy-paste queries
 By default each event is attributed to the MCP connection's session ID. To attribute calls to a real user – for per-user retention, group analytics, and person properties – wire an `identify` callback:
 
 ```ts
+import { instrument, getRequestHeaders } from "@posthog/mcp"
+
 instrument(server, posthog, {
   identify: async (request, extra) => {
-    const token = extra?.requestInfo?.headers?.authorization
+    const token = getRequestHeaders(extra)?.["authorization"]
     const user = token ? await resolveUserFromToken(token) : null
     return user ? { distinctId: user.id, properties: { name: user.name } } : null
   },
