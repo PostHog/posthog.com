@@ -74,7 +74,8 @@ function BlogHeader({ placement }: { placement?: string }): JSX.Element {
 function BlogHero({ className = '' }: { className?: string }): JSX.Element {
     return (
         <div className={`flex flex-col items-start gap-3 @2xl:gap-5 ${className}`}>
-            <h1 className="m-0 max-w-4xl text-4xl font-bold leading-[1.05] @2xl:text-5xl @4xl:text-6xl">
+            <BlogHeader />
+            <h1 className="m-0 max-w-4xl text-2xl font-bold leading-[1.05] @2xl:text-3xl @4xl:text-4xl">
                 Lessons, opinions, and updates from the{' '}
                 <span className="box-decoration-clone rounded-xs bg-blue/20 px-2 text-blue dark:text-blue-2">
                     team behind PostHog.
@@ -108,13 +109,14 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
             >
                 <div className="@container not-prose text-pretty text-primary">
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
-                        <BlogHeader />
-                        <BlogHero className="mt-2 @2xl:mt-4" />
-                        {featured && (
-                            <header className="mt-8 @2xl:mt-16">
-                                <FeaturedPost post={featured} accent="blue" />
-                            </header>
-                        )}
+                        <div className="mt-2 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
+                            <BlogHero className="mt-2 @2xl:mt-0" />
+                            {featured && (
+                                <header className="mt-12 @2xl:mt-0">
+                                    <FeaturedPost orientation="vertical" post={featured} accent="blue" />
+                                </header>
+                            )}
+                        </div>
                         <div className="mt-8 @2xl:mt-16">
                             <PostsGallery posts={posts.slice(1)} accent="blue" />
                         </div>

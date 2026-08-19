@@ -11,14 +11,16 @@ export default function FeaturedPost({
     post,
     annotation = 'Hot off the press',
     accent = 'red',
+    orientation = 'horizontal',
 }: {
     post: PostSummary
     annotation?: string
     accent?: Accent
+    orientation?: 'horizontal' | 'vertical'
 }): JSX.Element {
     const annotationColor = accents[accent].annotation
     return (
-        <div className="min-w-0">
+        <div className={`min-w-0 ${orientation === 'vertical' ? 'flex flex-col' : ''}`}>
             {/* Hand-drawn-style annotation pointing down at the newest post */}
             <div className="mb-3 flex items-start gap-2 pl-1 @2xl:mb-6">
                 <span className={`-rotate-2 text-lg font-bold italic @2xl:text-xl ${annotationColor}`}>
@@ -43,10 +45,12 @@ export default function FeaturedPost({
             <Link
                 to={post.fields.slug}
                 state={{ newWindow: true }}
-                className="group flex flex-col gap-3 no-underline text-primary @2xl:flex-row @2xl:items-start @2xl:gap-8"
+                className={`group flex no-underline text-primary flex-col gap-8 ${
+                    orientation === 'vertical' ? '' : 'flex-col @2xl:flex-row @2xl:items-start @2xl:gap-8'
+                }`}
             >
                 {/* Image keeps its own aspect ratio — no fixed frame, no cropping */}
-                <div className="relative shrink-0 @2xl:w-[46%]">
+                <div className={`relative shrink-0 ${orientation === 'vertical' ? '' : '@2xl:w-[46%]'}`}>
                     <Tape className="absolute -left-5 -top-3 z-10 w-16 -rotate-[28deg] @2xl:w-20" />
                     <Tape className="absolute -right-5 -top-3 z-10 w-16 rotate-[24deg] @2xl:w-20" />
                     <div className="overflow-hidden rounded-sm border border-primary bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)]">
