@@ -52,10 +52,13 @@ const deployments: { key: DeploymentKey; label: string; regions: string[] | null
     { key: 'eu', label: 'PostHog EU Cloud', regions: ['Germany', 'France'] },
 ]
 
-function detailLabel(url: string): string {
-    return url.toLowerCase().includes('subprocessor') || url.toLowerCase().includes('sub-processor')
-        ? "Vendor's own subprocessor list"
-        : 'Trust center'
+// Each vendor's `details` array lists their trust center first and their own subprocessor
+// list second. Prefer the URL's own wording, but fall back to that ordering for opaque links
+// (e.g. Microsoft's servicetrust DocumentPage URL) that name neither document in the path.
+function detailLabel(url: string, index: number): string {
+    const namesSubprocessorList =
+        url.toLowerCase().includes('subprocessor') || url.toLowerCase().includes('sub-processor')
+    return namesSubprocessorList || index > 0 ? "Vendor's own subprocessor list" : 'Trust center'
 }
 
 function SubprocessorsPage(): JSX.Element {
@@ -132,7 +135,7 @@ function SubprocessorsPage(): JSX.Element {
                         content:
                             subprocessor.details.length > 0 ? (
                                 <div className="space-y-1">
-                                    {subprocessor.details.map((detail) => (
+                                    {subprocessor.details.map((detail, index) => (
                                         <div key={detail}>
                                             <a
                                                 href={detail}
@@ -141,7 +144,7 @@ function SubprocessorsPage(): JSX.Element {
                                                 title={detail}
                                                 className="[overflow-wrap:anywhere]"
                                             >
-                                                {detailLabel(detail)}
+                                                {detailLabel(detail, index)}
                                             </a>
                                         </div>
                                     ))}
