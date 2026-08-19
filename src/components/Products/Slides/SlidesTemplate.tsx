@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SEO, { buildProductStructuredData } from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/shared/layout/seo'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import ResponsiveSlideContent from 'components/Presentation/ResponsiveSlideContent'

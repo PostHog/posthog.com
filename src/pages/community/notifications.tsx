@@ -2,14 +2,14 @@ import Layout from 'components/Layout'
 import { communityMenu } from '../../navs'
 import React, { useEffect } from 'react'
 import { useUser } from 'hooks/useUser'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import { IconX } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import { navigate } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 dayjs.extend(relativeTime)
 dayjs.extend(isSameOrAfter)
 

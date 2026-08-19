@@ -1,7 +1,7 @@
 import React from 'react'
 import { IRoadmap } from 'components/Roadmap'
 import { InProgress } from 'components/Roadmap/InProgress'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useRoadmap } from 'hooks/useRoadmap'
 
 export default function TeamRoadmap({ team }: { team?: string }) {

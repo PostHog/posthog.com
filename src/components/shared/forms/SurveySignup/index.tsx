@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Input from 'components/shared/forms/OSForm/input'
 import OSButton from 'components/shared/ui/OSButton'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconCheckCircle } from '@posthog/icons'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { useApp } from '../../../../context/App'

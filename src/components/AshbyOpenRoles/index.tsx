@@ -1,5 +1,5 @@
 import { RightArrow } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 

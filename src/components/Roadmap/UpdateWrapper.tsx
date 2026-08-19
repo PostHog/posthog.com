@@ -1,5 +1,5 @@
 import { IconEllipsis } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import RoadmapForm, { socialDefaults, Status } from 'components/RoadmapForm'
 import Tooltip from 'components/Tooltip'
 import { useUser } from 'hooks/useUser'

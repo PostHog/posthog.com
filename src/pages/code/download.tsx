@@ -1,5 +1,5 @@
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { DownloadContent } from 'components/Code/DownloadContent'
 import React from 'react'
 

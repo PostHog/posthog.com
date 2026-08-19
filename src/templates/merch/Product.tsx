@@ -14,7 +14,7 @@ import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
 import { getProductMetafield } from './utils'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { IconSpinner } from '@posthog/icons'
 
 type ProductPageProps = {

@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Logo } from '@posthog/brand/logo'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'

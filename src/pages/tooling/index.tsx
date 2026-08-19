@@ -1,7 +1,7 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import Editor from 'components/Editor'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import {
     StickerCloudCross,
     StickerFork,

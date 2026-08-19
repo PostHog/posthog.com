@@ -1,6 +1,6 @@
 import React from 'react'
 import { MenuItem } from 'components/PostLayout/Menu'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export const DocLinks = ({ menu }: { menu: any[] }) => {
     const organized: { [key: string]: any[] } = {}

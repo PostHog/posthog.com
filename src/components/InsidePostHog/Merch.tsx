@@ -2,7 +2,7 @@ import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 
 export default function Merch() {

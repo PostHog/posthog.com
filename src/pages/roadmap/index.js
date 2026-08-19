@@ -1,6 +1,6 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import EarlyAccessFeaturesSection from 'components/Roadmap/EarlyAccessFeaturesSection'
 import { ROADMAP_STAGE_STYLES } from 'components/Roadmap/roadmapStageStyles'
 

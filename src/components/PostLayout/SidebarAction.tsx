@@ -1,7 +1,7 @@
 import { ISidebarAction } from './types'
 import React from 'react'
 import Tooltip from 'components/Tooltip'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import slugify from 'slugify'
 
 export const sidebarButtonClasses =

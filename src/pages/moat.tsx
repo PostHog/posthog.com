@@ -1,5 +1,5 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import WhyPostHogViewer from 'components/WhyPostHog'
 
 export default function Moat(): JSX.Element {

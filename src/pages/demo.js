@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SignupCTA } from 'components/SignupCTA'

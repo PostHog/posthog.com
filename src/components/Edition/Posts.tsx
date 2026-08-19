@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { usePosts } from './hooks/usePosts'
 import { useUser } from 'hooks/useUser'
 import { Login } from 'components/Community/Sidebar'

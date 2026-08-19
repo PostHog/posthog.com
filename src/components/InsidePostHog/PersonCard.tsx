@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 
 export default function PersonCard({ name, stat, image, url }) {

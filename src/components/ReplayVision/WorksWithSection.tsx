@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconRewindPlay, IconGraph, IconDashboard } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { InlineCode } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 

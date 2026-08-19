@@ -12,7 +12,7 @@ import {
     IconRocket,
 } from '@posthog/icons'
 import CodeBlock from 'components/Home/CodeBlock'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 
 export const features = {

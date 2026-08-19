@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 const BenefitsUnexpected: React.FC = () => {

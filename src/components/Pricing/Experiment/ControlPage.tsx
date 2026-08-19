@@ -12,7 +12,7 @@ import CTA from 'components/Home/CTA.js'
 // to build.
 import Philosophy from '../../../pages/pricing/philosophy'
 import { useLocation } from '@reach/router'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'

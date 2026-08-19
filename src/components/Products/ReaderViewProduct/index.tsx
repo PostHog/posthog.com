@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
 import { useProductInterest } from 'hooks/useProductInterest'

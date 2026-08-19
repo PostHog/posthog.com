@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
     Digit0,
@@ -21,7 +21,7 @@ import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql, useStaticQuery } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../../constants'
 import { CallToAction } from 'components/CallToAction'

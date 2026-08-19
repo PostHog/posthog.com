@@ -1,11 +1,11 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { handbookSidebar } from '../navs'
 import chapters from '../navs/handbook.json'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export const Handbook: React.FC = () => {
     return (

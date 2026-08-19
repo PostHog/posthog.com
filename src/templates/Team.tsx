@@ -1,7 +1,7 @@
 import Layout from 'components/Layout'
 import { graphql } from 'gatsby'
 import React from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { companyMenu } from '../navs'
 import Team from 'components/Team'
 

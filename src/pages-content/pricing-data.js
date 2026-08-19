@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import imgEnterprise1 from '../images/plan-enterprise1.svg'
 import imgEnterprise2 from '../images/plan-enterprise2.svg'
 

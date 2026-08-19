@@ -2,10 +2,10 @@ import { HedgehogCodingGroup } from '@posthog/brand/hoggies'
 import { IconArrowUpRight, IconChevronDown, IconPencil, IconSearch, IconSpinner, IconTrash } from '@posthog/icons'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import Editor from 'components/Editor'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import OSButton from 'components/shared/ui/OSButton'
 import { OSInput, OSSelect } from 'components/shared/forms/OSForm'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import {
     SideProjectForm,
     SideProjectGraphic,

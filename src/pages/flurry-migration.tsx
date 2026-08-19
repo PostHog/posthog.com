@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import SalesHogs from '../images/sales-hogs.png'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Check2 } from 'components/Icons'

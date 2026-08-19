@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import SEO from 'components/seo'
-import Link from 'components/Link'
+import SEO from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'

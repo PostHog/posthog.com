@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import PostImage from './PostImage'
 import { BuildModePost } from './types'
 import { getByline, getSubtitle } from './utils'

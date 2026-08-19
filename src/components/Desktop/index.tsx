@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
 import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
 import {

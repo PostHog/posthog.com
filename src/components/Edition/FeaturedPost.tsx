@@ -2,7 +2,7 @@ import { CallToAction } from 'components/CallToAction'
 import dayjs from 'dayjs'
 import React, { useContext } from 'react'
 import { PostsContext } from './Posts'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const Skeleton = () => {
     return (

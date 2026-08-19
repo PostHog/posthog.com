@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ResetPassword from 'components/Squeak/components/Classic/ResetPassword'
 import React from 'react'
 

@@ -11,7 +11,7 @@ import AutosizeInput from 'react-input-autosize'
 import qs from 'qs'
 import Tooltip from 'components/Tooltip'
 import { StaticImage } from 'gatsby-plugin-image'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Addons } from '../Tabbed'
 
 const getTotalAnalyticsVolume = (analyticsData: any) => {

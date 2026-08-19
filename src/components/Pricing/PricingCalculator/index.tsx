@@ -3,7 +3,7 @@ import { pricingSliderLogic } from 'components/Pricing/PricingSlider/pricingSlid
 import { IconExternal, IconInfo } from '@posthog/icons'
 import { useValues } from 'kea'
 import React, { useEffect, useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/Tooltip'
 import useProducts from './../Products'
 import Toggle from 'components/shared/forms/Toggle'

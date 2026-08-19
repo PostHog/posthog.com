@@ -1,5 +1,5 @@
 import Hub from 'components/Hub'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import React from 'react'
 
 export default function ProductEngineers() {

@@ -1,10 +1,10 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
 import {
     Hedgehog996,

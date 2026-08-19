@@ -4,7 +4,7 @@ import OSButton from 'components/shared/ui/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../context/App'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 export default function ArtLibrary(): JSX.Element {
     const { isModerator, user, isValidating } = useUser()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IconHandMoney, IconHeadset, IconShield } from '@posthog/icons'
 import { motion, useReducedMotion } from 'framer-motion'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { PlatformPackageList, PlatformFeatureTable } from 'components/Pricing/Platform/PlatformPackageComparison'
 
 const PANEL_ID = 'platform-packages-panel'

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { SEO } from 'components/seo'
-import Link from 'components/Link'
+import { SEO } from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import * as Icons from '@posthog/icons'
 import AskMax from 'components/AskMax'
 import ZoomHover from 'components/shared/animation/ZoomHover'

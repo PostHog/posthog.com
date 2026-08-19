@@ -2,11 +2,11 @@ import { TooltipContent, TooltipContentProps } from 'components/GlossaryElement'
 import Tooltip from 'components/Tooltip'
 import { Link as GatsbyLink } from 'gatsby'
 import React, { useMemo } from 'react'
-import usePostHog from '../../hooks/usePostHog'
+import usePostHog from 'hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
-import { useAppSettings } from '../../context/App'
-import { useWindow } from '../../context/Window'
+import { useAppSettings } from '../../../../context/App'
+import { useWindow } from '../../../../context/Window'
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {

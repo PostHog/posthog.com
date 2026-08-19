@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCustomers } from 'hooks/useCustomers'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 /**
  * High-profile customers, curated for the pricing page.

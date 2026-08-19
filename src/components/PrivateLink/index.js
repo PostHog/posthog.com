@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconLock } from '@posthog/icons'
 import Tooltip from 'components/RadixUI/Tooltip'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export const PrivateLink = ({ url, children }) => {
     return (

@@ -34,7 +34,7 @@ import {
     IconPlay,
     IconUserPaths,
 } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { motion } from 'framer-motion'
 import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'

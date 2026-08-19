@@ -15,7 +15,7 @@ import {
 } from '@posthog/icons'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Glow from 'components/shared/animation/Glow'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import PlatformInstall from 'components/PlatformInstall'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'

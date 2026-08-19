@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../../context/App'
 import OSButton from 'components/shared/ui/OSButton'

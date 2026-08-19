@@ -1,8 +1,8 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useState } from 'react'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { heading } from 'components/Home/classes'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/Tooltip'
 
 const APP_LEGAL_URL = 'https://app.posthog.com/legal'

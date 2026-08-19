@@ -15,7 +15,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'

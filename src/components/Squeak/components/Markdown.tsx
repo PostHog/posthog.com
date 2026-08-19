@@ -6,7 +6,7 @@ import { ZoomImage } from 'components/shared/media/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 import { cn } from '../../../utils'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const replaceMentions = (body: string) => {
     return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {

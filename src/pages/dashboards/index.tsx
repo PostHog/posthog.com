@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import OSButton from 'components/shared/ui/OSButton'

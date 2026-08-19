@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React, { useContext } from 'react'
 import { PostsContext } from './Posts'
 

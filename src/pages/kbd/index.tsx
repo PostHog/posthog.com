@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Fieldset } from 'components/shared/forms/OSFieldset'
 import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'

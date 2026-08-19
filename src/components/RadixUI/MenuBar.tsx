@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Menubar as RadixMenubar } from 'radix-ui'
 import { IconChevronDown, IconChevronRight } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ScrollArea from './ScrollArea'
 import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 import { useAppSettings } from '../../context/App'

@@ -1,5 +1,5 @@
 import cntl from 'cntl'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Logo } from '@posthog/brand/logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'

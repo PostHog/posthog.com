@@ -6,7 +6,7 @@ import OSButton2 from 'components/shared/ui/OSButton/OSButton2'
 import { useQuestions } from 'hooks/useQuestions'
 import { SectionComponentProps } from '../types'
 import { SectionHeading } from '../helpers'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useApp } from '../../../../context/App'
 import SmallTeam from 'components/SmallTeam'
 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { IconSparksJoy } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'

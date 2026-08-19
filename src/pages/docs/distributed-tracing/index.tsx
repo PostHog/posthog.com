@@ -1,9 +1,9 @@
 import React from 'react'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import ResourceItem from 'components/Docs/ResourceItem'
 import Intro from 'components/Docs/Intro'
 import ReaderView from 'components/ReaderView'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export const Content = () => {
     return (

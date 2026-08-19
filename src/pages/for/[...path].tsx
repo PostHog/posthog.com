@@ -8,7 +8,7 @@ import StackedTemplate from 'components/Presentation/Templates/StackedTemplate'
 import ColumnsTemplate from 'components/Presentation/Templates/ColumnsTemplate'
 import ProductTemplate from 'components/Presentation/Templates/ProductTemplate'
 import { DemoScheduler } from 'components/DemoScheduler'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 // Import configuration files
 import defaultConfig from '../../presentations/default.json'

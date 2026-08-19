@@ -1,6 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/shared/animation/ZoomHover'

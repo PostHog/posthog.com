@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 
 import { IconBook, IconChevronLeft, IconChevronRight, IconList } from '@posthog/icons'
 
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export interface BookTab {
     label: string

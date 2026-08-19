@@ -5,7 +5,7 @@ import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
 import Product from 'components/Explorer/Product'
 

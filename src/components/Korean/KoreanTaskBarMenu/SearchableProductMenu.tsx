@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { IconSearch } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { APP_COUNT } from 'constants/index'
 import * as Icons from '@posthog/icons'
 import { translateKo } from '../../../pages/ko/_translations'

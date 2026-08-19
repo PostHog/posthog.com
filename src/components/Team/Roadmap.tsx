@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 import Section from './Section'
 import { Change } from '../../templates/Changelog'

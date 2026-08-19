@@ -3,7 +3,7 @@ import { Skeleton } from './Views/Default'
 import Spinner from 'components/shared/ui/Spinner'
 import { child, container } from 'components/CallToAction'
 
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useLocation } from '@reach/router'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import dayjs from 'dayjs'

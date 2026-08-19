@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useApp } from '../../../context/App'
 import { IconDemoThumb, AppIcon } from 'components/OSIcons'
 import { AppItem } from 'components/OSIcons/AppIcon'

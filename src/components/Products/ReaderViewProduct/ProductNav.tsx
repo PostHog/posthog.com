@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/shared/layout/ElementScrollLink'
 import { ProductNavItem } from './types'
 

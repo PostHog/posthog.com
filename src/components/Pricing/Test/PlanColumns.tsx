@@ -1,5 +1,5 @@
 import { IconCheck, IconChevronDown } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/Tooltip'
 import React, { useState } from 'react'
 import { CTA as PlanCTA } from '../Plans'

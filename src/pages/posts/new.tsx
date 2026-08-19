@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NewPost from 'components/Edition/NewPost'
 import Layout from 'components/Layout'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { communityMenu } from '../../navs'
 import { useUser } from 'hooks/useUser'
 import { navigate } from 'gatsby'

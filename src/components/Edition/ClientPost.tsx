@@ -1,7 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import ClientPostMarkdown from 'components/Squeak/components/ClientPostMarkdown'
 import { ZoomImage } from 'components/shared/media/ZoomImage'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import dayjs from 'dayjs'
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useState } from 'react'
@@ -13,7 +13,7 @@ import Upvote from './Upvote'
 import { Questions } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import { Contributors } from '../../templates/BlogPost'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export const Post = ({ imageURL, title, date, belowTitle, body, cta, transformImageUri }) => {
     return (

@@ -1,9 +1,9 @@
 import React from 'react'
 import Layout from 'components/Layout'
 import { heading } from 'components/Home/classes'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { sexyLegalMenu } from '../navs'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 

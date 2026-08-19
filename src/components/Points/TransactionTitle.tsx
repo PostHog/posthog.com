@@ -3,7 +3,7 @@ import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy } from '@posth
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const transactionTypeIcons: Record<string, React.ReactNode> = {
     gift: <IconPresent className="size-5 text-purple" />,

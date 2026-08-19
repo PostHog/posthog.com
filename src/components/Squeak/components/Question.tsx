@@ -9,7 +9,7 @@ import { QuestionForm } from './QuestionForm'
 import { useQuestion } from '../hooks/useQuestion'
 import QuestionSkeleton from './QuestionSkeleton'
 import SubscribeButton from './SubscribeButton'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 import {

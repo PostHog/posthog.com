@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { IconCheck } from '@posthog/icons'
 import OSButton from 'components/shared/ui/OSButton'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import PricingEstimator, { estimateReplayVisionPricing, BillingTier } from './PricingEstimator'

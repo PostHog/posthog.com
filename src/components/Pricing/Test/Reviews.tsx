@@ -1,7 +1,7 @@
 import React from 'react'
 import { section, SectionHeader } from './Sections'
 import { IconStarFilled, IconStar } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { graphql, useStaticQuery } from 'gatsby'
 import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 

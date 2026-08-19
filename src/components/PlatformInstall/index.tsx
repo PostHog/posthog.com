@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { IconInfo, IconQuestion } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { cn } from '../../utils'
 import ZoomHover from 'components/shared/animation/ZoomHover'

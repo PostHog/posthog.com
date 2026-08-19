@@ -1,5 +1,5 @@
 import { Check, ClosedIssue, OpenIssue, Plus } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React, { useEffect, useState } from 'react'
 import { IRoadmap } from '.'
 import { Question } from 'components/Squeak'

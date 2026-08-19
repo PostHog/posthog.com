@@ -1,7 +1,7 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
 import { LEVELS } from 'components/Squeak/util/getLevel'
 

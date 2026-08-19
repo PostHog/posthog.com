@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown, { Components } from 'react-markdown'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 interface MarkdownProps {
     children: string

@@ -2,7 +2,7 @@ import React from 'react'
 import { IconCheckCircle } from '@posthog/icons'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 

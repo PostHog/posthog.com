@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import TeamPatch from 'components/TeamPatch'
 import { StickerPineappleYes, StickerPineappleNo, StickerPineapple } from 'components/Stickers/Stickers'
 import { TeamMembers } from 'components/Job/Sidebar'

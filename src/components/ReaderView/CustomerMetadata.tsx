@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useCustomers } from 'hooks/useCustomers'
 import useProduct from 'hooks/useProduct'
 import { IconArrowUpRight } from '@posthog/icons'

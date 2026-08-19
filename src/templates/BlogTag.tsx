@@ -1,7 +1,7 @@
 import PostLayout from 'components/PostLayout'
 import { graphql } from 'gatsby'
 import React, { useEffect, useState } from 'react'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import Layout from 'components/Layout'
 import { Posts, PostToggle } from 'components/Blog'
 import Pagination from 'components/shared/ui/Pagination'

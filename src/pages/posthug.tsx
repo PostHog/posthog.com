@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import HugHog from 'components/HugHog'
 import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { motion } from 'framer-motion'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'

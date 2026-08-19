@@ -1,8 +1,8 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
-import { TreeMenu } from 'components/TreeMenu'
-import SEO from 'components/seo'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
+import SEO from 'components/shared/layout/seo'
 import IntegrationsLibrary from 'components/IntegrationsLibrary'
 
 const LeftSidebarContent = () => {

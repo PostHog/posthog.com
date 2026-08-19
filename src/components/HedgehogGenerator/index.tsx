@@ -1,7 +1,7 @@
 import { useUser } from 'hooks/useUser'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { IconArrowRightDown, IconCheck } from '@posthog/icons'
 import { useToast } from '../../context/Toast'
 import { OSInput } from 'components/shared/forms/OSForm'

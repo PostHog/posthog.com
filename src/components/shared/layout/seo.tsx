@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
-import { useApp } from '../context/App'
-import { useWindow } from '../context/Window'
-import { isMarkdownContentPath } from '../constants'
+import { useApp } from '../../../context/App'
+import { useWindow } from '../../../context/Window'
+import { isMarkdownContentPath } from 'constants'
 
 interface SEOProps {
     title: string

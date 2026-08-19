@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import CassetteTape from './CassetteTape'
 import { useMixtapes } from '../../hooks/useMixtapes'
 import { useUser } from 'hooks/useUser'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { OSSelect } from 'components/shared/forms/OSForm'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 

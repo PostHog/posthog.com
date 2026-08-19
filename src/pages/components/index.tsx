@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { IconDice, IconDictator, IconBrush } from 'components/OSIcons/Icons'
 import { AppIcon } from 'components/OSIcons'
 import { IconPencil, IconUser, IconArrowRight, IconInfo, IconSearch } from '@posthog/icons'
@@ -10,12 +10,19 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/shared/ui/OSButton'
 import { useCustomers } from 'hooks/useCustomers'
-import { OSInput, OSTextarea, OSSelect, Combobox, TeamMemberMultiSelect, SelectedMember } from 'components/shared/forms/OSForm'
+import {
+    OSInput,
+    OSTextarea,
+    OSSelect,
+    Combobox,
+    TeamMemberMultiSelect,
+    SelectedMember,
+} from 'components/shared/forms/OSForm'
 import { Fieldset } from 'components/shared/forms/OSFieldset'
 import { Checkbox } from 'components/RadixUI/Checkbox'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
 import { Logo } from '@posthog/brand/logo'
 

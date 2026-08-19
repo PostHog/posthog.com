@@ -1,5 +1,5 @@
 import { GitHub } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 import { IRoadmap } from '.'
 

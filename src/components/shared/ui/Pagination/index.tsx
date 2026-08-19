@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 
 function paginate({ current, max, base }: { current: number; max: number; base: string }) {

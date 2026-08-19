@@ -15,7 +15,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
 import SizeGuide from './SizeGuide'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 type ProductPanelProps = {
     className?: string

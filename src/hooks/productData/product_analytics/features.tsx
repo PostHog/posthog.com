@@ -11,7 +11,7 @@ import {
     IconPeople,
     IconPlug,
 } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 
 export const features = {

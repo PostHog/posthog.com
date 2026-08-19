@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { CallToAction } from 'components/CallToAction'
 import { IconSpinner } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'

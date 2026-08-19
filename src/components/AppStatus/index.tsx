@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { getStatusColor, getStatusDescription, useAppStatus } from 'hooks/useAppStatus'
 import React from 'react'
 

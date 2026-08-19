@@ -2,7 +2,7 @@ import ContactSales from 'components/ContactSales'
 import { IconSend } from '@posthog/icons'
 import React from 'react'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 const formConfig = {
     type: 'lead' as const,

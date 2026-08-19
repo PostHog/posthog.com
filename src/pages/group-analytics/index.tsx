@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import useProduct from 'hooks/useProduct'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { allProductsData } from 'components/Pricing/Pricing'

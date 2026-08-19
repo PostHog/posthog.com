@@ -1,7 +1,7 @@
 import { navigate } from 'gatsby'
 import React from 'react'
 import useProduct from './useProduct'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 
 // Define the navigation structure with handles
 // Section headers are strings without handles, product items are handles

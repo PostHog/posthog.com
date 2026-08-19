@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { DataVizNav } from '../../hooks/useDataVizNavigation'

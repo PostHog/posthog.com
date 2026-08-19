@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ZoomHover from 'components/shared/animation/ZoomHover'
 import slugify from 'slugify'
 import { DEFAULT_TAG_ICON, getTagIcon } from './tagOptions'

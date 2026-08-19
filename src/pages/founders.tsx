@@ -1,6 +1,6 @@
 import Hub from 'components/Hub'
-import Link from 'components/Link'
-import SEO from 'components/seo'
+import Link from 'components/shared/ui/Link'
+import SEO from 'components/shared/layout/seo'
 import React from 'react'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/shared/layout/RenderInClient'

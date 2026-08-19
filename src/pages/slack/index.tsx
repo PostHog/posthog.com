@@ -1,6 +1,6 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
-import SEO, { buildProductStructuredData } from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/shared/layout/seo'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from 'components/RadixUI/Accordion'
@@ -8,7 +8,7 @@ import TabbedCarousel from 'components/shared/animation/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/shared/animation/TabbedCarousel'
 import OSTable from 'components/shared/ui/OSTable'
 import WistiaEmbed from 'components/shared/media/WistiaEmbed'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import {
     IconBell,

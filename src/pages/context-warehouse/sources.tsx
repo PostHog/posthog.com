@@ -1,9 +1,9 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
-import { TreeMenu } from 'components/TreeMenu'
-import SEO from 'components/seo'
-import Link from 'components/Link'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
+import SEO from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import DWInstallationPlatforms from './dw-installation-platforms'
 

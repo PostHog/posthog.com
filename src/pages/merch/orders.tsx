@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
 import Input from 'components/shared/forms/OSForm/input'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconSpinner } from '@posthog/icons'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { StrapiRecord, ProfileData } from 'lib/strapi'
 import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 type ProfileProps = {
     className?: string

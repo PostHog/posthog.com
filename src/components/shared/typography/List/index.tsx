@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ZoomHover from 'components/shared/animation/ZoomHover'
 import React, { useEffect, useState } from 'react'
 import * as NewIcons from '@posthog/icons'

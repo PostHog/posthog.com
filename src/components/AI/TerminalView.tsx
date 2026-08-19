@@ -1,5 +1,5 @@
 import React from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import TerminalLayout from 'components/AI/TerminalLayout'
 import TerminalSection, { ASCIIBox, wrapText, SectionDivider } from 'components/AI/TerminalSection'
 import TerminalFeatures from 'components/AI/TerminalFeatures'
@@ -10,7 +10,7 @@ import TerminalRoadmap from 'components/AI/TerminalRoadmap'
 import TerminalCapabilities from 'components/AI/TerminalCapabilities'
 import { posthog_ai } from 'hooks/productData/posthog_ai'
 import { skills, skillTitle } from 'components/Products/Slides/OverviewSlide/OverviewSlideMax'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const ASCII_HEADER = `    Welcome to
 ███████╗  ██████╗  ███████╗ ████████╗ ██╗  ██╗  ██████╗   ██████╗      █████╗  ██╗

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
 import Tabs from 'components/RadixUI/Tabs'
 import {

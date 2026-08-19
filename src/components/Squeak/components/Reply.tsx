@@ -6,7 +6,7 @@ import { StrapiRecord, ReplyData } from 'lib/strapi'
 import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
 import { CurrentQuestionContext } from './Question'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import {

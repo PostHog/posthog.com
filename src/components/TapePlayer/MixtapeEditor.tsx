@@ -26,7 +26,7 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { cassetteLabelBackgrounds } from '../../data/cassetteBackgrounds'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../context/Toast'
 import { Link, navigate } from 'gatsby'

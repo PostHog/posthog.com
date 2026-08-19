@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 import SearchBar from './SearchBar'
 

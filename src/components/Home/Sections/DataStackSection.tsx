@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Markdown from 'components/shared/typography/Markdown'
 import { ImageDW, TooltipDW } from 'components/Home/Decorations'
 

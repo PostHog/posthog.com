@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 import Stickers from 'components/ProfileStickers'
 import slugify from 'slugify'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Masonry from 'react-masonry-css'
 
 const TeamMemberLink = (person) => {

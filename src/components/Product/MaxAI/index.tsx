@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import {
     IconBook,
     IconChat,
@@ -28,7 +28,7 @@ import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import Profile from '../../Team/Profile'

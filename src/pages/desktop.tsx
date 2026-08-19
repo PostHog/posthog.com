@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import SEO, { buildProductStructuredData } from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/shared/layout/seo'
 import Editor from 'components/Editor'
 import {
     IconAI,
@@ -54,7 +54,7 @@ import {
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import WistiaEmbed from 'components/shared/media/WistiaEmbed'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadContent } from 'components/Code/DownloadContent'

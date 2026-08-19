@@ -1,5 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { topicIcons } from 'components/Questions/TopicsTable'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import React from 'react'

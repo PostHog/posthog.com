@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { YouTube, LinkedIn } from 'components/Icons'
 
 export default function Lawyers() {

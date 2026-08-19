@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'

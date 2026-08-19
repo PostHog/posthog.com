@@ -1,6 +1,6 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { IconNotebook, IconHandMoney, IconHandwave, IconScreen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Subfeature } from 'components/Products/Subfeature'

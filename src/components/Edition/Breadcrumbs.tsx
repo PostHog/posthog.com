@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { capitalize } from 'instantsearch.js/es/lib/utils'
 import React from 'react'
 import slugify from 'slugify'

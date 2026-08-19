@@ -1,4 +1,4 @@
-import Link from '../Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 
 const TypeLink = ({

@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction, child, container, TrackedCTA } from 'components/CallToAction'
 import { Check2 } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState, useCallback, useEffect } from 'react'
 import { NewsletterForm } from 'components/NewsletterForm'

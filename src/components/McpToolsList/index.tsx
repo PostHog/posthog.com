@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 type McpTool = {
     name: string

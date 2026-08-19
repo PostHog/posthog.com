@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
 import SourceConfiguration from 'components/Product/Sources/Configuration'

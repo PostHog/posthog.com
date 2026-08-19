@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'

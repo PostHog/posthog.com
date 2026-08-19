@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CallToAction } from 'components/CallToAction'
 import Markdown from 'components/Squeak/components/Markdown'
 

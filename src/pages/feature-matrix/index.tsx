@@ -1,6 +1,6 @@
 import React from 'react'
 import OSButton from 'components/shared/ui/OSButton'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
 // Import product data to get competitor lists
@@ -15,7 +15,7 @@ import { workflows } from 'hooks/productData/workflows'
 import { logs } from 'hooks/productData/logs'
 import { endpoints } from 'hooks/productData/endpoints'
 import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { internalToolsNav } from '../../navs/internalTools'
 
 // Create table of contents for right sidebar

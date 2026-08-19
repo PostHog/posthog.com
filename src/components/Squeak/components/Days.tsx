@@ -5,7 +5,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 dayjs.extend(relativeTime)
 import Avatar from './Avatar'
 import getAvatarURL from '../util/getAvatar'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const Edit = ({ image, color, name, date, profileID, text }) => {
     return (

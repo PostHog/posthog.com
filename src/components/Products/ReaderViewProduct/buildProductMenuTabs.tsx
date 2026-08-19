@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { IconBook, IconPiggyBank, IconPresent } from '@posthog/icons'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'

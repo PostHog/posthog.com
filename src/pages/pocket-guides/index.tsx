@@ -1,6 +1,6 @@
 import Explorer from 'components/Explorer'
 import Cover from 'components/PocketGuides/Cover'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 

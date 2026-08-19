@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import useProduct from 'hooks/useProduct'
 
