@@ -94,12 +94,8 @@ describe('the real docs nav', () => {
         assert.equal(sectionFor('/docs/posthog-desktop'), 'PostHog Desktop')
         assert.equal(sectionFor('/docs/posthog-desktop/pricing'), 'PostHog Desktop')
         assert.equal(sectionFor('/docs/slack'), 'PostHog Slack')
-    })
-
-    test('MCP falls to AI engineering, which lists its pages', () => {
-        // The standalone "PostHog MCP" section has no children, so it cannot win pass 2. AI
-        // engineering nests posthogMcpNav, so the MCP pages are reachable from there.
-        assert.equal(sectionFor('/docs/model-context-protocol'), 'AI engineering')
+        assert.equal(sectionFor('/docs/model-context-protocol'), 'PostHog MCP')
+        assert.equal(sectionFor('/docs/model-context-protocol/tools'), 'PostHog MCP')
     })
 
     test('the same product page keeps the Self-driving sidebar when opened from there', () => {

@@ -3245,6 +3245,7 @@ export const docsMenu = {
             color: 'purple',
             url: '/docs/model-context-protocol',
             description: 'Connect PostHog to Claude, Cursor, and other agents',
+            children: posthogMcpNav,
         },
         {
             name: 'PostHog CLI',
