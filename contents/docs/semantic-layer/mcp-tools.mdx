@@ -38,7 +38,7 @@ There's deliberately no "list metrics" tool: agents discover metrics with `execu
 
 | Tool | What it does | Confirmation | Scopes |
 |------|--------------|--------------|--------|
-| `data-catalog-certification-propose` | Proposes a trust mark on a warehouse table or view. Address the target by id or by name – an ambiguous name returns the candidate ids to pick from. | – | `data_catalog:write` |
+| `data-catalog-certification-propose` | Proposes a trust mark on a warehouse table or view. Address the target by id or by name – an ambiguous name returns the candidate ids to pick from. Pass `proposed_status` (`certified` by default, or `deprecated`) to say whether the proposal asks to trust the source or to avoid it. | – | `data_catalog:write` |
 | `data-catalog-certification-certify` | Marks a table or view as `certified` (prefer this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 | `data-catalog-certification-deprecate` | Marks a table or view as `deprecated` (avoid this source). | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
 
