@@ -1,6 +1,6 @@
 ---
 title: Building a semantic layer: What it is and how we did it at PostHog
-date: 2026-07-30
+date: 2026-08-19
 rootPage: /blog
 sidebar: Blog
 showTitle: true
