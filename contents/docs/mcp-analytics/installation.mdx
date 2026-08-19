@@ -65,7 +65,7 @@ If you use the typed `McpServer` wrapper, pass it in directly — the SDK will u
 
 <MultiLanguage>
 
-```ts file="MCP SDK v1"
+```ts file=SDK-v1
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -83,7 +83,7 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 })
 ```
 
-```ts file="MCP SDK v2"
+```ts file=SDK-v2
 import { McpServer } from "@modelcontextprotocol/server"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"

@@ -49,7 +49,7 @@ Then call `instrument(server, posthog)` once at startup. You bring your own `pos
 
 <MultiLanguage>
 
-```typescript file="MCP SDK v1"
+```typescript file=SDK-v1
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
@@ -64,7 +64,7 @@ const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
 instrument(server, posthog)
 ```
 
-```typescript file="MCP SDK v2"
+```typescript file=SDK-v2
 import { McpServer } from "@modelcontextprotocol/server"
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
