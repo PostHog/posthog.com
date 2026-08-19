@@ -2,7 +2,7 @@
 title: PostHog integration for PostHog Desktop
 ---
 
-PostHog Desktop brings your PostHog context into the agent in real time, including product data, Feature Flags, Experiments, and errors. If you don't use PostHog, PostHog Desktop still works as a general-purpose coding agent. The integration adds context, it isn't a hard dependency.
+PostHog Desktop brings your PostHog context into the agent in real time, including product data, Feature Flags, Experiments, and errors. If you don't use PostHog, PostHog Desktop still works as a general-purpose coding agent. The integration adds context but isn't a hard dependency.
 
 ## Built-in PostHog skills
 
@@ -22,17 +22,6 @@ PostHog's [MCP server](/docs/model-context-protocol) is wired up out of the box.
 You don't need to install or configure the MCP server separately. It's authenticated with the same session you use to sign in.
 
 Connect other MCP servers for your issue tracker, error tracker, or internal APIs. See [MCP servers](/docs/posthog-desktop/mcp-servers).
-
-## Analyze your token usage
-
-PostHog Desktop tracks its own LLM spend through PostHog [AI observability](/docs/ai-observability), so you can see exactly where your tokens go. The breakdown covers spend by product, tool, and model over the last 30 days, along with tips on where to optimize.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/token_spend_light_d4eadddc4b.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/token_spend_dark_94f13c4e9d.png"
-    classes="rounded"
-    alt="Token spend in PostHog Desktop broken down by product, tool, and model"
-/>
 
 ## Live product context
 

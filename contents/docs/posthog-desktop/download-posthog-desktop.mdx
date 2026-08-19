@@ -4,7 +4,7 @@ title: Download PostHog Desktop
 
 import { DownloadCTA, DownloadList } from 'components/Code/DownloadContent'
 
-Download PostHog Desktop, sign in with your PostHog account, and choose a repository. There is no waitlist or invite code.
+Download PostHog Desktop, sign in with your PostHog account, and choose a repository.
 
 <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
   <DownloadCTA />
@@ -14,24 +14,20 @@ Download PostHog Desktop, sign in with your PostHog account, and choose a reposi
 
 <DownloadList />
 
-Releases include macOS DMG and zip builds for Apple Silicon and Intel, a Windows NSIS installer, and Linux AppImage, .deb, and .rpm packages. Each option opens the current PostHog Desktop releases so you can choose the latest matching asset. The same page has notes for every release.
+Releases include macOS builds for Apple Silicon and Intel, a Windows installer, and Linux AppImage, `.deb`, and `.rpm` packages. Each option opens the current PostHog Desktop releases so you can choose the latest matching asset.
 
 ## Eligibility
 
-Anyone can download the app. PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for credit pricing and the monthly free tier.
+Anyone can download the app. PostHog Desktop usage consumes AI credits from your PostHog organization. See [pricing](/docs/posthog-desktop/pricing) for current rates and the monthly free tier.
 
-Organizations on the PostHog **startup plan** cannot use AI credits for PostHog Desktop yet. The app shows an eligibility notice instead of allowing tasks to start. You can still download the app, sign in, and browse it.
+Organizations on the PostHog **startup plan** cannot use AI credits for PostHog Desktop yet. The app shows an eligibility notice instead of allowing tasks to start. You can still download the app and sign in.
 
 ## Updates
 
-macOS and Windows update automatically. PostHog Desktop checks at startup, downloads new versions in the background, and installs them the next time you quit. The app shows release notes after an update.
+On macOS and Windows, PostHog Desktop checks for updates at startup. Automatic downloads are on by default, and updates install the next time you quit. Turn off automatic downloads or select **Check now** in **Settings** > **General** when you want to control the timing.
 
-Linux does not update automatically. Download a new package when you want to update.
+Linux does not update automatically. Download a new package from the releases page when you want to update.
 
-See [updates](/docs/posthog-desktop/updates) for required updates and release behavior.
+PostHog Desktop can require an update when an older build is no longer safe or reliable. Other updates install in the background or appear as dismissible notices.
 
-## Open source
-
-PostHog Desktop is open source under the MIT license. Its source is in the [`PostHog/posthog`](https://github.com/PostHog/posthog) monorepo at `products/desktop`. See [open source](/docs/posthog-desktop/open-source) for the project structure and contribution guide.
-
-Before you report a bug, search [open desktop issues](https://github.com/PostHog/posthog/issues?q=is%3Aissue+is%3Aopen+label%3Adesktop). If there is no match, [open an issue](https://github.com/PostHog/posthog/issues/new) with your OS, app version from **Settings** > **About**, and reproduction steps.
+See what changed in each build on the [release notes](https://github.com/PostHog/posthog/releases?q=desktop&expanded=true).

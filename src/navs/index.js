@@ -7752,12 +7752,6 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Updates and releases',
-                    url: '/docs/posthog-desktop/updates',
-                    icon: 'IconDownload',
-                    color: 'blue',
-                },
-                {
                     name: 'Contribute',
                     url: '/docs/posthog-desktop/open-source',
                     icon: 'IconGithub',

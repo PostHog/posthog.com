@@ -8,35 +8,25 @@ A **space** groups related agent sessions and the background an agent needs to w
 
 You get one **personal** space, listed above the shared ones. Use it for private work. Every other space is shared with your project, so teammates see its agent sessions and can join a thread.
 
-Star the spaces you use most. `⌘1` opens your personal space and `⌘2` through `⌘9` open starred spaces in order. `⌘⇧S` jumps to the space search box.
-
 ### Create a space
 
-Creating a space takes three steps: name it, describe what it is about, and pick the repositories it works with.
-
-The description of a space helps fill out the space's `CONTEXT.md` for you. Choose **Skip** to create the space on its own, and the intro card in the feed offers `CONTEXT.md` again later.
+Give the space a name and description, then choose the repositories it works with. PostHog Desktop can use that description to draft its `CONTEXT.md`, which you can edit later.
 
 ### The feed
 
-A space opens on its feed, a single list of the agent sessions and canvases in that space. Each row carries its status, who started it, whether it ran locally or in the cloud, and any pull request it opened, with checks.
-
-A space header also holds recent agent sessions and **CONTEXT.md**.
+A space opens on a feed of its agent sessions and canvases. Use it to follow work, open results, and see when an agent or teammate needs input.
 
 ### Threads and mentions
 
-Each feed row opens a thread. Threads are for people: you see human messages and the artifacts the agent produced, such as canvases and pull requests, without the agent's full turn-by-turn output. Open the session itself for that.
+Open an item in the feed to discuss the work in a thread and review artifacts such as canvases and pull requests. Open the agent session when you need its full conversation.
 
-Type `@` to mention a teammate or the agent. Mentioning a teammate notifies them, and mentions of you appear in your activity feed alongside sessions you created or messaged in.
-
-The activity panel beside a session has **Timeline**, **Artifacts**, and **Comments** tabs. Unread items are marked, and you can mark what is visible or everything as read.
+Type `@` to mention a teammate or the agent. Teammates receive a notification and can continue the work from the same thread.
 
 ## CONTEXT.md
 
-Each space can hold a `CONTEXT.md` with background that helps agents work effectively. Its four sections are an overview, key files, conventions, gotchas, and related PostHog resources.
+Each space can hold a `CONTEXT.md` with the project background, conventions, and product information agents need. It is stored in PostHog and applies to every agent session in the space, no matter where the task runs.
 
-`CONTEXT.md` is stored in PostHog and edited in the app, so it applies to every session in the space no matter which checkout runs.
-
-The initial setup of your `CONTEXT.md` uses your repository and queries PostHog for related Feature Flags, Experiments, Surveys, notebooks, and insights.
+PostHog Desktop can draft it from the space's repositories and selected PostHog project. Edit it in the app as the project changes.
 
 ## Canvases
 
@@ -66,7 +56,6 @@ Use comments to request changes. Select a specific part of the canvas to anchor 
 
 Share the finished canvas with your team. It stays in its space beside the sessions and context that produced it, so people can understand why it exists and continue improving it.
 
-Canvas code runs in isolation and gets only the data access and actions it declares. If a build needs approval, PostHog Desktop asks on the canvas instead of making you find the underlying session.
 
 ## Share spaces and canvases
 

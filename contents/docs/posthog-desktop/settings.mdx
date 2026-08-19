@@ -2,17 +2,15 @@
 title: PostHog Desktop settings
 ---
 
-PostHog Desktop settings cover the configuration you might otherwise set in a CLI or config file. Search Settings to find a specific option.
+Use Settings to customize PostHog Desktop and choose defaults for new agent sessions. Search Settings to find a specific option.
 
 ## General
 
-Set your PostHog account, theme, and defaults for new tasks. This includes the [autonomy mode](/docs/posthog-desktop/tasks#autonomy-modes), effort level, composer behavior, and diff view. You can also keep your machine awake while agents run and check [update](/docs/posthog-desktop/updates) status.
+Set your PostHog account, theme, and defaults for new tasks. This includes the [autonomy mode](/docs/posthog-desktop/tasks#autonomy-modes), effort level, composer behavior, and diff view. You can also keep your machine awake while agents run and manage [updates](/docs/posthog-desktop/download-posthog-desktop#updates).
 
 ## Notifications
 
-Choose push notifications, dock badge, dock bounce, a completion sound, and volume. There are 11 sounds and a test button.
-
-Spoken narration also appears here. The agent speaks short status updates. It is rolling out and may not be available in your build.
+Choose push notifications, dock behavior, completion sounds, and spoken narration.
 
 ## Personalization
 
@@ -22,7 +20,7 @@ This section also contains hedgehog mode and sound effects.
 
 ## AI-generated content
 
-PostHog Desktop generates a handful of fields you'd normally write by hand:
+PostHog Desktop can generate:
 
 - **Branch names** – Derived from your task title, so the name on disk reflects the work it contains
 - **Commit messages** – A concise imperative subject line that respects your repository's commit conventions
@@ -60,9 +58,7 @@ Every task includes tools for checking and adjusting the agent's work without sw
 
 ### Terminal
 
-The terminal opens in the task's working directory. Local tasks use your repository, while tasks using a dedicated checkout use that checkout. Run tests, migrations, `git log`, or a development server from a real shell. File changes appear to the agent like any other edit.
-
-In **Settings** > **Terminal**, choose a font and toggle GPU rendering. GPU rendering improves output performance but can cause graphical problems on some machines.
+The terminal opens in the task's working directory. Local tasks use your repository, while worktree tasks use their isolated working directory. Run tests, migrations, `git log`, or a development server from a real shell. File changes appear to the agent like any other edit.
 
 ### Editor
 
@@ -80,9 +76,7 @@ Mission Control shows running agents over your other windows, so you can watch p
 
 ### Spoken narration
 
-With narration enabled, the agent speaks short status updates while it works. Parallel tasks queue narration, and PostHog Desktop plays the latest update when the queue backs up.
-
-Turn on narration in **Settings** > **Notifications**. It is rolling out and may not be available in your build.
+With narration enabled, the agent speaks short status updates while it works. Turn it on in **Settings** > **Notifications**.
 
 ### Shortcuts and sidebar
 

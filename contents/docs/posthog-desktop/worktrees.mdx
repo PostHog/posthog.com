@@ -64,13 +64,3 @@ Example:
 ```
 
 This file also uses `.gitignore` syntax. It only creates links to files that are ignored by git.
-
-## How it works
-
-When you create a worktree, PostHog Desktop:
-
-1. Creates the git worktree with pre/post-checkout hooks disabled
-2. Symlinks the Claude config (`.claude/` directory and `CLAUDE.local.md`)
-3. Creates symlinks from `.worktreelink`
-4. Copies files from `.worktreeinclude`, using CoW copy when possible
-5. Runs and awaits post-checkout hooks

@@ -8,7 +8,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
 import { DownloadCTA, DownloadList } from 'components/Code/DownloadContent'
 
-PostHog Desktop brings coding agents, product context, and team processes into one app. Organize work in spaces, ask agents to produce code or interactive canvases, then automate the work you want to repeat.
+PostHog Desktop brings coding agents, product context, and team processes into one app. Organize work in spaces, ask agents to produce code or interactive canvases, and turn product signals into action.
 
 <QuestLog firstSpeechBubble="Let's tour PostHog Desktop!" lastSpeechBubble="You're ready to build with agents!">
 
@@ -23,12 +23,6 @@ A **space** keeps related work together. Its feed contains agent sessions and ca
 An **agent session** is one ongoing interaction with an agent. It includes your instructions, the agent's responses and progress, its code changes, and any resulting pull request.
 
 Use your personal space for private work. Create a shared space when a project, product area, or recurring workflow belongs to the team. People can follow its agent sessions, join threads, and use the same shared context when they continue the work.
-
-| A space contains | What it gives you |
-|---|---|
-| **Agent sessions** | Conversations with agents and the work they produce |
-| **Canvases** | Interactive apps built around your PostHog data |
-| **CONTEXT.md** | Shared background for work started in that space |
 
 <OSButton variant="primary" asLink to="/docs/posthog-desktop/spaces">
   Explore spaces and canvases
@@ -45,7 +39,7 @@ icon="IconTerminal"
 Describe the outcome you want, choose a repository, and send the task. Pick Pi, Claude Code, or Codex, then decide where the agent should work:
 
 - **Local** for a focused change on your current branch
-- **Dedicated checkout** for isolated local work on its own branch
+- **Worktree** for isolated local work on its own branch
 - **Cloud** for work that should continue after you close the app
 
 <ProductScreenshot
@@ -139,7 +133,19 @@ classes="rounded"
 alt="Command Center showing multiple agent tasks in a grid"
 />
 
-Mix local tasks, dedicated checkouts, and cloud runs in the same view. Long cloud work keeps going when your computer is offline, while the status summary shows what is running or waiting when you return.
+<OSButton variant="primary" asLink to="/docs/posthog-desktop/command-center">
+  Run agents in parallel
+</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem
+title="Keep work running in the cloud"
+subtitle="Continue"
+icon="IconCloud"
+>
+
+Send a task to the cloud when it should keep running after you close the app. Return later to review the result, open a pull request, or move the work back to your computer.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_05_05_T00_51_48_152_Z_24fe877fde.png"
@@ -147,8 +153,8 @@ classes="rounded"
 alt="A cloud task running in PostHog Desktop"
 />
 
-<OSButton variant="primary" asLink to="/docs/posthog-desktop/command-center">
-  Run agents in parallel
+<OSButton variant="primary" asLink to="/docs/posthog-desktop/cloud-runs">
+  Run a task in the cloud
 </OSButton>
 
 </QuestLogItem>
@@ -161,7 +167,7 @@ icon="IconBolt"
 
 Self-driving agents investigate product signals such as error spikes, support reports, and unexpected behavior. They research the impact, create an actionable report in the Inbox, and can open a pull request when a code fix is possible.
 
-Review each report, assign it to the right person, or let the agent continue with the fix. This turns product data into work without waiting for someone to notice the problem and reconstruct its context.
+Review each report, assign it to the right person, or let the agent continue with the fix. This turns product data into work before someone has to investigate it manually.
 
 <ProductScreenshot
 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/c_crop,x_112,y_75,w_iw_sub_224,h_ih_sub_222/Screenshot_2026_05_04_at_4_48_19_PM_9652a9fb7c.png"
@@ -203,7 +209,7 @@ subtitle="Next step"
 icon="IconDownload"
 >
 
-Download PostHog Desktop, sign in, and choose your first repository. There is no waitlist or invite code.
+Download PostHog Desktop, sign in, and choose your first repository.
 
 <div className="max-w-lg @container bg-blue/10 border border-blue rounded-md p-6 shadow-xl not-prose">
   <DownloadCTA />

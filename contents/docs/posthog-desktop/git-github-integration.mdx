@@ -1,89 +1,44 @@
 ---
-title: PostHog Git + GitHub integration
+title: PostHog Desktop Git and GitHub integration
 ---
 
-PostHog Desktop has Git and GitHub support built directly into the UI, so you can perform common operations like committing, pushing, and opening a PR without using the agent.
+PostHog Desktop includes Git and GitHub actions for reviewing changes, committing them, pushing a branch, and opening a pull request without handing control back to the agent.
 
-## Setup
+## Set up GitHub
 
-PostHog Desktop uses the [GitHub CLI](https://cli.github.com) (`gh`) for all GitHub operations. To use PR features, install `gh` and authenticate:
+PostHog Desktop uses the [GitHub CLI](https://cli.github.com) (`gh`) for pull request actions. Install it and sign in:
 
 ```bash
 gh auth login
 ```
 
-If `gh` isn't installed or authenticated, native git operations like commit, push, and branch still work. You'll only lose the GitHub-specific actions.
+Git operations such as commit, push, and branch switching still work without `gh`. GitHub pull request actions do not.
 
-## The Git menu
+## Commit and push changes
 
-The Git menu lives in the bottom of the task panel and adapts to your current state. It shows **Commit** when you have staged changes, **Push** when you're ahead of the remote, **Create PR** when one doesn't exist yet, and so on.
+Open the Git menu at the bottom of a task. Its primary action changes with the state of your branch, such as **Commit**, **Push**, or **Create PR**.
 
-You can do all of the following without handing control to the agent.
+Use it to:
 
-### Git
+- Create or switch branches
+- Stage, discard, and commit changes
+- Push a branch or sync it with its remote
+- Open the [diff panel](/docs/posthog-desktop/code-review)
 
-- Create and switch branches
-- Stage and unstage individual files
-- Discard changes to a single file
-- Commit with a manual or auto-generated message
-- Push and publish new branches
-- Sync (pull, then push) to stay up to date with the remote
-- View diffs for staged, unstaged, and branch-level changes, with word-level highlighting, whitespace toggling, and word wrap
+The **Push** action does not force-push. Resolve a diverged remote branch before retrying it.
 
-### GitHub
+## Open a pull request
 
-- Create a PR in one click (branch, commit, push, open)
-- Open PRs in draft state
-- View changed files and diffs in the review panel
-- See review comments inline against the diff
-- Reply to review comments
-- Change PR state: close, reopen, mark ready for review, or convert back to draft
+Select **Create PR** when the change is ready. PostHog Desktop commits any staged changes, pushes the branch, and opens the pull request through `gh`.
 
-## Creating a PR
+Leave the commit message, pull request title, or description empty when you want PostHog Desktop to generate it. Generated text uses the diff, existing branch commits, repository conventions, and `.github/PULL_REQUEST_TEMPLATE.md` when present. You can edit everything before submitting and choose whether to open a draft.
 
-Click **Create PR** and PostHog Desktop runs the whole sequence in order:
+After a pull request is linked, its status and actions appear in the task header. Use the [code review panel](/docs/posthog-desktop/code-review) to read the diff, reply to comments, or ask the agent to make a fix.
 
-1. Creates a new branch if you're still on main
-2. Generates a commit message (if you left it blank)
-3. Commits your changes
-4. Pushes to the remote, publishing the branch if needed
-5. Generates a PR title and body (if you left them blank)
-6. Opens the PR via the GitHub CLI
-
-If any step fails, previous steps are rolled back so you don't end up in a half-committed state.
-
-Tick **Draft** in the create-PR dialog to open the PR in draft state.
-
-### Auto-generated messages and PR bodies
-
-When you leave the commit message, PR title, or PR body empty, PostHog Desktop fills them in for you based on:
-
-- The actual diff of your changes
-- Your repo's commit conventions, e.g. conventional commits if detected
-- Existing commits on the branch (for PR titles and bodies)
-- Your `.github/PULL_REQUEST_TEMPLATE.md`, if present
-- A summary of the agent session, when there is one
-
-You can always edit the generated text before submitting.
-
-## Cloud tasks
-
-When a cloud task opens a PR, PostHog Desktop auto-detects the URL from the agent's output and attaches it to the task. The PR status appears in the task header with the same action menu as a local PR, plus a **Continue locally** button to hand the branch off to your machine.
+Cloud tasks show the same pull request controls and a **Continue locally** action for moving the work to your computer.
 
 ## Troubleshooting
 
-### Create PR fails at the push step
-
-Check that your branch has a remote configured and that `gh auth status` reports you as authenticated. The **Push** action never force-pushes, so if the remote has diverged, resolve that before you retry.
-
-### Generated text is empty
-
-Auto-generated commit messages, PR titles, and PR bodies require network access. When you're offline, fill the fields in by hand. The create-PR flow works the same way.
-
-### PR template is not used
-
-PostHog Desktop looks for templates in standard GitHub locations like `.github/PULL_REQUEST_TEMPLATE.md`. Templates in non-standard paths won't be picked up.
-
-### Cloud task did not link its PR
-
-Check the task's branch on GitHub. The pull request can still exist even when its link does not appear in PostHog Desktop.
+- Run `gh auth status` if a GitHub action fails.
+- Check that the branch has a remote before pushing.
+- Keep pull request templates in a [location supported by GitHub](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository).

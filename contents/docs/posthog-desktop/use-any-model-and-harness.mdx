@@ -18,18 +18,13 @@ Local Pi tasks use the custom resources on your machine. [Cloud runs](/docs/post
 
 ## Other harnesses
 
-Both harnesses run local tasks and [cloud runs](/docs/posthog-desktop/cloud-runs). A cloud run can use a different harness than the task started with.
-
-| Harness | Best for |
-|---|---|
-| **Claude Code** | General-purpose coding and long-context refactors |
-| **Codex** | Reasoning-heavy debugging and a second opinion |
+Claude Code and Codex both run local tasks and [cloud runs](/docs/posthog-desktop/cloud-runs). Choose either harness in the composer. A cloud run can use a different harness than the task started with.
 
 ## Choose a model
 
 Open the model picker in the task composer before you send a prompt or while a task is running. The picker changes as providers add models, so it is the current source of truth.
 
-PostHog Desktop offers models from Anthropic, OpenAI, and other providers. Some models roll out gradually and may not appear in every account.
+PostHog Desktop offers models from Anthropic, OpenAI, and other providers. The model picker shows what is currently available.
 
 See [pricing](/docs/posthog-desktop/pricing) for current rates and included usage.
 
@@ -46,7 +41,7 @@ Models with extended thinking expose an effort level. Higher effort takes longer
 
 The picker shows only the levels supported by the selected model.
 
-Some models also offer **Fast mode**, which reduces reasoning time for small, well-specified edits. Fast mode is rolling out and may not appear in your build.
+The picker shows **Fast mode** when the selected model supports it. Fast mode reduces reasoning time for small, well-specified edits.
 
 ## Authentication
 
