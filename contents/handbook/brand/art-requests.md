@@ -22,21 +22,21 @@ They can help you with things like:
 
 They get a lot of work requests, so they use two separate project boards to organize work – [one for merch](https://github.com/orgs/PostHog/projects/178) and [one for other art projects](https://github.com/orgs/PostHog/projects/65/views/2). This reflects that merch projects often have much longer timelines and need to be handled differently. 
 
-Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the marketing repo](https://github.com/PostHog/marketing/issues/new/choose) – one template for merch, one for other art requests. Each template automatically assigns work to the correct project board. 
+Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the marketing repo](https://github.com/PostHog/marketing/issues/new/choose) – one template for merch, one for other art requests. The templates assign the right people and apply the right labels, but they do **not** add the issue to a project board – see below for how issues get onto the board.
 
 ### Art board automations
 
-The Art & Brand Planning board uses GitHub Actions to keep work moving:
+The Art & Brand Planning board uses automations to keep work moving. Each behavior below names the thing that controls it, so you know where to look when something misbehaves. Everything except the first item is a GitHub Actions workflow living in the [marketing repo](https://github.com/PostHog/marketing/tree/main/.github/workflows); the board is org-level, so the workflows act on board issues wherever those issues live.
 
-- **Reminders** — A daily job (9 AM UTC) posts one-time comments on issues that have been stuck in...
+- **Getting on the board** — controlled by the board itself, not by the Actions workflows or the issue templates. Items are added via the board's built-in auto-add workflow (board → **⋯** → **Workflows** → "Auto-add to project") or by hand, and land in the **No Status** column by default. Every automation below only applies to issues that are on the board – an issue that never gets added is invisible to all of them.
+- **Done → closed** — controlled by `art-board-status-change.yml`. It polls the board every 30 minutes and closes (as completed) any issue whose Status is **Done**, so expect up to ~30 minutes' delay after moving a card.
+- **Assignee sync** — also `art-board-status-change.yml`. When an issue is moved to **"Assigned: Daniel"**, **"Assigned: Lottie"**, or **"Assigned: Heidi"**, the other default assignees are removed so only the owner remains. It only ever removes assignees, never adds them, and it is driven by the board column – not the labels. Requests filed by the Graphics team themselves keep all assignees, and other columns (like "Assigned: Cleo") are untouched, as Cleo has a different workload.
+- **Artist labels** — controlled by `sync-artist-labels.yml`. Every 30 minutes, open issues in an "Assigned: ..." column get the matching `Lottie` / `Heidi` / `Daniel` label (and lose it when moved elsewhere), so work can be filtered per person. The label mirrors the column, never the other way around.
+- **Reminders** — controlled by `art-board-reminders.yml` (via the reusable `art-board-reminder.yml`). Daily at 9 AM UTC it posts a comment on issues stuck in...
   - **Feedback/Review** for 10+ days: asks if any feedback is needed to move the task forward.
   - **No Status** for 7+ days: asks someone to pick it up or assign it to a column.
-- **Status changes** — A job polls the board every 30 minutes and reacts to Status changes:
-  - **Moved to "Done"** → the issue is automatically closed (as completed).
-  - **Moved to "Assigned: Daniel", "Assigned: Lottie", or "Assigned: Heidi"** → other default assignees are removed so only the assigned person is on the issue. Internal requests (from the design team) keep all assignees.
-  - These changes do not impact the "Assigned: Cleo" column, as Cleo has a different workload.
-- **Artist labels** — Every 30 minutes, open issues in an "Assigned: ..." column get a matching label for that artist, so the work can be filtered per person.
-- Workflows run under the **Art Board Bot** GitHub App and live in the [marketing repo](https://github.com/PostHog/marketing) under `.github/workflows/` (`art-board-reminder.yml`, `art-board-reminders.yml`, `art-board-status-change.yml`, `sync-artist-labels.yml`). The board is org-level, so they act on art board issues wherever those issues live.
+  - Each issue only ever gets one reminder of each type, and snoozed items are skipped.
+- **Credentials** — the workflows authenticate as the **Art Board Bot** GitHub App. Its credentials are org-level Actions secrets scoped to the marketing repo, and the app installation needs access to every repo that holds board issues. If all the workflows suddenly start failing at the "Get app token" step, one of those two things is the cause.
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
