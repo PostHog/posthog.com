@@ -21,13 +21,6 @@ export const MAX_SESSION_REPLAY = ONE_FIFTY_THOUSAND
 export const MAX_FEATURE_FLAGS = TEN_MILLION
 export const MAX_SURVEYS = HUNDRED_THOUSAND
 
-export const product_type_to_max_events = {
-    product_analytics: MAX_PRODUCT_ANALYTICS,
-    session_replay: MAX_SESSION_REPLAY,
-    feature_flags: MAX_FEATURE_FLAGS,
-    surveys: MAX_SURVEYS,
-}
-
 export const pricingLogic = kea<pricingLogicType>({
     actions: {
         setAvailablePlans: (plans: BillingV2PlanType[]) => ({ plans }),

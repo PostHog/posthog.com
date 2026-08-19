@@ -105,6 +105,8 @@ export const SEO = ({
                     href={href.startsWith('http') ? href : `${siteUrl}${href.startsWith('/') ? href : `/${href}`}`}
                 />
             ))}
+            {/* Site-wide signpost so LLM crawlers on any page can discover the Markdown index. */}
+            <link rel="llms.txt" href={`${siteUrl}/llms.txt`} />
             {isMarkdownContentPath(pathname) && (
                 <link rel="alternate" type="text/markdown" href={`${siteUrl}${pathname.replace(/\/$/, '')}.md`} />
             )}

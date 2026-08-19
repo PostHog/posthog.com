@@ -766,7 +766,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.postCategories.nodes.forEach(
         ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
             const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
-            if (!isHub) {
+            if (!isHub && categoryFolder !== 'newsletter') {
                 createPage({
                     path: `/${categoryFolder}`,
                     component: PostListingTemplate,
@@ -1105,14 +1105,19 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     // Each row crosslinks against its own types, so a versioned page describes that version.
     const typesByRow = result.data.allSdkTypes.nodes.reduce(
         (acc, node) => {
-            acc[node.id] = (node.types ?? []).filter(typeHasPage).map(({ name }) => name)
+            acc[node.id] = (node.types ?? [])
+                .filter(typeHasPage)
+                .map(({ name }) => name)
+                // A type with no usable name can't be linked to, so keep it out of the allowlist.
+                .filter((name) => name && name !== 'null')
             return acc
         },
         {} as Record<string, string[]>
     )
 
     result.data.allSdkReferences.nodes.forEach((node) => {
-        const path = `/docs/references/${slugPrefixFor(node)}`
+        const slugPrefix = slugPrefixFor(node)
+        const path = `/docs/references/${slugPrefix}`
 
         createPage({
             path,
@@ -1122,6 +1127,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 description: node.info.description,
                 fullReference: node,
                 regex: path,
+                // Must match the type page paths created below.
+                slugPrefix,
                 // Null checks, only affects type crosslinking, won't break build
                 types: typesByRow[node.id] ?? [],
             },

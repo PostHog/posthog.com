@@ -84,6 +84,9 @@ export interface SdkTypeData {
 export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
+    // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
+    // referenceId, versioned → id). Not `info.slugPrefix`, which is a spec field, unused here.
+    slugPrefix: string
 }
 
 export interface VersionsData {
@@ -143,15 +146,13 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 }
 
 export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
-    const { fullReference } = pageContext
+    const { fullReference, slugPrefix } = pageContext
     const location = useLocation()
 
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.referenceId)
     const validTypes = pageContext.types
     const isLatest = isLatestVersion(fullReference.version)
-    // Crosslinks stay on this page's own version, so a pinned page describes that version.
-    const slugPrefix = isLatest ? fullReference.referenceId : fullReference.id
     // Versioned copies are duplicates of the unversioned page, which is the one worth indexing.
     const canonicalPath = `/docs/references/${fullReference.referenceId}`
     const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)

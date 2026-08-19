@@ -8,16 +8,35 @@ whole thing uses PostHog fonts and tokens only.
 are layout and vocabulary, the words all live in `contents/pocket-guides/`.
 
 ```
-contents/pocket-guides/self-driving/
-├── index.mdx              bookOrder: 0 – the front matter (title page + contents)
-├── 101/index.mdx          bookOrder: 1 – the primer
+contents/pocket-guides/<volume>/
+├── index.mdx              pocketGuideOrder: 0 – the front matter (title page + contents)
+├── 101/index.mdx          pocketGuideOrder: 1 – the primer
 └── <use-case>/
-    ├── index.mdx          bookOrder: 2+ – one use case
-    └── SKILL.md           the scout itself, rendered as a figure
+    ├── index.mdx          pocketGuideOrder: 2+ – one use case
+    └── SKILL.md           the scout itself, rendered as a figure (scout volumes only)
 ```
 
 `gatsby/createPages.ts` already routes everything under `contents/pocket-guides/` through
 `src/templates/Template.tsx`, which hands any `/pocket-guides/` slug to `BookPage`.
+
+**One reader, many volumes.** The volume id is the second path segment, and `BookPage` reads it
+off the slug (`volumeIdFromUrl`) to build that book's reading order. A new volume is a directory
+plus a row in `src/constants/pocketGuides.ts` – no reader changes. The shelf counts a volume's
+use cases by `pocketGuideOrder >= 2`, so a volume whose chapters aren't scouts still counts correctly.
+
+**Teach inside the book.** A reader who leaves for the docs mid-page usually doesn't come back, so
+a concept they might not know should be a `<Term>` (definition on hover, with its own "Read the
+docs" button) or an annotated figure marker – not a link in the prose. Keep plain links for things
+the reader is meant to go *do*, like an install guide. Term definitions are quoted from the docs
+page that owns the concept, so this can't drift into a second source of truth.
+
+**Every use case ends in a CTA, and only use cases have one.** Front matter and the 101 send
+people onward with ordinary links in the prose – a CTA there devalues the one that matters.
+Which CTA depends on the volume: self-driving chapters enable a scout (`<Enable />`, driven by
+the sibling SKILL.md), and every other volume authors its own in the `pocketGuideCta:` frontmatter block and
+renders it with `<Action />` – today a PostHog AI prompt (`kind: prompt`) or a plain destination
+(`kind: link`). Both shapes also drive the pinned bar at the foot of the reader, so the page's
+action and the shortcut to it can't drift apart.
 
 ## Authoring a page
 
@@ -25,9 +44,9 @@ Frontmatter carries structured data; the body carries every word.
 
 ```mdx
 ---
-title: Feature flag debt
+title: Remove the feature flags you already rolled out
 shortTitle: Flag debt      # tab label, falls back to title
-bookOrder: 3               # reading order; 0 is the front matter, omit to keep a draft unlisted
+pocketGuideOrder: 3               # reading order; 0 is the front matter, omit to keep a draft unlisted
 ---
 
 <LeftPage>
@@ -38,7 +57,7 @@ bookOrder: 3               # reading order; 0 is the front matter, omit to keep 
 
 <RightPage>
 
-# Feature flag debt
+# Remove the feature flags you already rolled out
 
 Prose, **markdown**, and <Term name="scout" /> definitions.
 
@@ -61,10 +80,13 @@ after the prose.
 | `<Eyebrow>` | The small line above a title-page heading |
 | `<Fig n caption legend>` | Any exhibit, in a numbered frame |
 | `<ReportFigure n caption legend>` | This use case's report, drawn as its inbox moment |
-| `<ScoutFigure n caption>` | This use case's `SKILL.md` |
+| `<ScoutFigure n caption>` | This use case's `SKILL.md`, from its self-driving `InboxTemplate` |
+| `<SkillFigure n caption>` | This page's own `SKILL.md`, for guides with no `InboxTemplate` |
 | `<LoopFigure n caption>` | The self-driving loop diagram |
+| `<TraceFigure n caption rows>` | One LLM trace, nested – generations and spans with their numbers |
 | `<Watches />` | The signal sources from this page's `watches` frontmatter |
-| `<Enable />` | The one-click CTA – the book's only real button |
+| `<Enable />` | The scout CTA – one click to add this page's scout |
+| `<Action />` | The CTA for volumes whose answer isn't a scout, from `pocketGuideCta:` frontmatter |
 | `<Contents />` | The contents list, built from the book itself |
 | `<SeeAlso>` | A print footnote at the foot of the column |
 | `<Term name="scout">` | An orange dotted-underline definition with a hover card |
@@ -82,6 +104,15 @@ renders `<LeftPage>` and `<RightPage>` as two columns at reading widths.
 The hover markers and their hint line show at reading widths only – below ~672px of container
 width they're hidden (there is no hover on touch), so a figure's caption has to carry it alone
 on phones.
+
+### Adding new content elements
+
+The page container is `not-prose`, so any element the prose map doesn't cover renders with bare
+browser defaults – silently. When a guide introduces something new (a table was the first),
+check the rendered page, and prefer wrapping the element in the site's native styling over
+book-specific styles: see how `ul`/`ol`/`table` borrow `.article-content` in
+[bookPieces.tsx](./bookPieces.tsx). Then test the Aa reading-size control at desktop and phone
+widths.
 
 ### One MDX trap worth knowing
 
@@ -115,10 +146,10 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
   controls are book tabs on the page's left edge (shelf link, a Contents popover, an Aa
   reading-size control), a centered reading column, click-to-turn page margins, and a foot line
   with prev/next turns, "All guides" (except where prev already is the shelf), and "p. N of M".
-- **One model drives everything.** `bookModel.tsx`'s `useBookPages()` reads every page's
-  `bookOrder` and produces the reading order; the bar, contents, and page turns all derive from
-  it. Front matter is unnumbered; arabic numbering starts at the page after it, so inserting a
-  chapter renumbers what follows without anyone editing a number by hand.
+- **One model drives everything.** `bookModel.tsx`'s `useBookPages(volumeId)` reads every page's
+  `pocketGuideOrder` and produces that volume's reading order; the bar, contents, and page turns all
+  derive from it. Front matter is unnumbered; arabic numbering starts at the page after it, so
+  inserting a chapter renumbers what follows without anyone editing a number by hand.
 - **Turning pages** – the margin turn zones, the bar chevrons, the foot links, and the
   left/right arrow keys all walk the same sequence.
 
@@ -133,10 +164,14 @@ shows after the `.mdx` file itself changes (or `pnpm clean`).
 | `ReaderWrapper.tsx` | The figure-interleaving MDX wrapper + LeftPage/RightPage markers |
 | `figures.tsx` | Fig and every `<XxxFigure>` exhibit |
 | `bookPieces.tsx` | SeeFig, Eyebrow, Watches, Enable, Contents, SeeAlso, prose styling |
+| `Action.tsx` | The non-scout CTA and its pinned bar, from `pocketGuideCta:` frontmatter |
+| `terms.tsx` | The book's vocabulary – `<Term>` and every hover-card definition |
 | `bookContext.tsx` | EntryProvider + useEntry/useTemplate (page data for figures) |
-| `bookModel.tsx` | Reading order, page numbers, tabs, arrow-key turns |
+| `bookModel.tsx` | Volume id, reading order, page numbers, tabs, arrow-key turns |
+| `useSkillFile.ts` | Pairs a page with its sibling `SKILL.md`, for `<SkillFigure>` |
 | `Figure.tsx` | A framed, captioned exhibit – "Fig. 1 – …" |
 | `InboxFigure.tsx` | One use case's inbox moment, annotated |
+| `TraceTree.tsx` | An LLM trace drawn as nested rows – the AI Observability volume's hero |
 
 Volume metadata lives in `src/constants/pocketGuides.ts` (data-only so `gatsby/` can import it).
 The report frontmatter contract and the `.md` agent-mirror constraints are documented in

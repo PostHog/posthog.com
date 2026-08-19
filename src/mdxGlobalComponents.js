@@ -70,7 +70,6 @@ import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
-import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
@@ -138,7 +137,6 @@ export const shortcodes = {
     StarRepoButton,
     TracksCTA,
     Tweet,
-    ZendeskTicket,
     MaxCTA,
     SmallTeam,
     TeamMember,

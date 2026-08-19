@@ -15,6 +15,13 @@ import {
     preprocessHtmlForTabs,
 } from './turndownService'
 
+// Prepended to every generated .md file so LLM crawlers landing on a single page
+// still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
+const AGENT_SIGNPOST =
+    "> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt\n\n"
+
+const withAgentSignpost = (markdown: string): string => `${AGENT_SIGNPOST}${markdown}`
+
 export const generateRawMarkdownPages = async (
     docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
 ) => {
@@ -67,7 +74,7 @@ export const generateRawMarkdownPages = async (
                 fs.mkdirSync(dirPath, { recursive: true })
             }
 
-            fs.writeFileSync(outputPath, markdown, 'utf8')
+            fs.writeFileSync(outputPath, withAgentSignpost(markdown), 'utf8')
             console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
         } catch (error) {
@@ -177,7 +184,7 @@ ${jsonContent}
 `
 
                 // Write the file
-                fs.writeFileSync(filePath, markdownContent, 'utf8')
+                fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
                 console.log(`Generated: open-api-spec/${filename}`)
             }
         })
@@ -331,7 +338,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const markdownContent = markdownNodes.join('\n\n')
 
-    fs.writeFileSync(filePath, markdownContent, 'utf8')
+    fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
 }
 
 /** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
@@ -562,7 +569,7 @@ Pricing: every tool has a generous free tier, then usage-based pricing. Exact nu
 All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
 `
 
-    fs.writeFileSync(path.join(publicPath, 'platform.md'), content, 'utf8')
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), withAgentSignpost(content), 'utf8')
     console.log('Generated: platform.md')
 }
 
@@ -596,7 +603,7 @@ For features, screenshots, and details, see ${pageLinkFor(item)}.
         const outputPath = path.join(publicPath, `${item.slug}.md`)
         const dirPath = path.dirname(outputPath)
         if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
-        fs.writeFileSync(outputPath, content, 'utf8')
+        fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
         console.log(`Generated: ${item.slug}.md`)
     }
 }
@@ -700,7 +707,7 @@ New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated o
         header(`This file covers the last ${recentMonthKeys.length} months.`) +
         recentMonthKeys.map(monthMarkdown).join('\n\n') +
         '\n'
-    fs.writeFileSync(path.join(publicPath, 'changelog.md'), changelogMd, 'utf8')
+    fs.writeFileSync(path.join(publicPath, 'changelog.md'), withAgentSignpost(changelogMd), 'utf8')
     console.log('Generated: changelog.md')
 
     // Per-year archives: public/changelog/{year}.md
@@ -709,7 +716,7 @@ New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated o
     for (const year of years) {
         const yearMonthKeys = sortedMonthKeys.filter((key) => key.startsWith(year))
         const yearMd = header(`This file covers ${year}.`) + yearMonthKeys.map(monthMarkdown).join('\n\n') + '\n'
-        fs.writeFileSync(path.join(changelogDir, `${year}.md`), yearMd, 'utf8')
+        fs.writeFileSync(path.join(changelogDir, `${year}.md`), withAgentSignpost(yearMd), 'utf8')
         console.log(`Generated: changelog/${year}.md`)
     }
 }
@@ -1163,6 +1170,6 @@ All prices are in USD, excluding taxes.
         fs.mkdirSync(publicPath, { recursive: true })
     }
 
-    fs.writeFileSync(pricingMdPath, content, 'utf8')
+    fs.writeFileSync(pricingMdPath, withAgentSignpost(content), 'utf8')
     console.log('Generated: pricing.md')
 }

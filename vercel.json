@@ -7,6 +7,15 @@
     },
     "headers": [
         {
+            "source": "/.well-known/http-message-signatures-directory",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "application/http-message-signatures-directory+json"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -183,6 +192,21 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-ai/session-summaries:ext(\\.md)?",
+            "destination": "/docs/replay-vision:ext?",
+            "statusCode": 301
+        },
         {
             "source": "/docs/web-analytics/scroll-depth:ext(\\.md)?",
             "destination": "/docs/web-analytics/dashboard:ext?",
@@ -470,6 +494,14 @@
             "destination": "/teams/apm"
         },
         {
+            "source": "/teams/irl-events",
+            "destination": "/teams/builder-relations"
+        },
+        {
+            "source": "/teams/irl-events/:path*",
+            "destination": "/teams/builder-relations/:path*"
+        },
+        {
             "source": "/teams/query-performance",
             "destination": "/teams/analytics-platform"
         },
@@ -488,6 +520,14 @@
             "statusCode": 301
         },
         {
+            "source": "/teams/product-led-sales",
+            "destination": "/teams/sales-product-led"
+        },
+        {
+            "source": "/teams/product-led-sales/:path*",
+            "destination": "/teams/sales-product-led/:path*"
+        },
+        {
             "source": "/teams/customer-success",
             "destination": "/teams/customer-success-eu"
         },
@@ -497,7 +537,12 @@
         },
         {
             "source": "/docs/prompt-management/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-engineering/skills-store:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
             "statusCode": 301
         },
         {
@@ -5429,6 +5474,10 @@
             "destination": "https://app.posthog.com/startups"
         },
         {
+            "source": "/students/apply",
+            "destination": "https://app.posthog.com/students"
+        },
+        {
             "source": "/yc-onboarding",
             "destination": "https://app.posthog.com/startups/yc"
         },
@@ -5598,7 +5647,7 @@
         },
         {
             "source": "/docs/llm-analytics/skills-store:ext(\\.md)?",
-            "destination": "/docs/ai-engineering/skills-store:ext?"
+            "destination": "/docs/skills:ext?"
         },
         {
             "source": "/docs/llm-analytics/:path*",
@@ -6062,6 +6111,26 @@
         {
             "source": "/wizard",
             "destination": "/docs/ai-engineering/ai-wizard",
+            "statusCode": 301
+        },
+        {
+            "source": "/product-analytics-explorer/pricing",
+            "destination": "/product-analytics/pricing",
+            "statusCode": 301
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/company",
+            "destination": "/about",
+            "statusCode": 301
+        },
+        {
+            "source": "/contact-us",
+            "destination": "/talk-to-a-human",
             "statusCode": 301
         }
     ]

@@ -1,0 +1,70 @@
+---
+title: Which leads deserve the sales team's time?
+shortTitle: Lead scoring
+subtitle: Score CRM leads by recent product usage and surface the warmest ones sales hasn't contacted yet.
+pocketGuideOrder: 8
+section: Ask a quick question
+---
+
+<LeftPage>
+
+<ExampleFigure
+    n={1}
+    caption="Example data: leads scored by product usage, sorted by who's warmest right now."
+>
+
+| Lead              | Score | Last seen  | Stage |
+| ------------------ | ------ | ----------- | ------ |
+| jane@acme.com       | 34     | 2 days ago  | MQL     |
+| sam@northwind.io    | 29     | 1 day ago   | MQL     |
+| priya@globex.com    | 26     | 6 hours ago | Trial   |
+
+</ExampleFigure>
+
+</LeftPage>
+
+<RightPage>
+
+# Which leads deserve the sales team's time?
+
+A CRM full of leads doesn't tell sales who to call first; product usage does. This Skill scores
+CRM leads by recent product usage and surfaces the warmest ones sales hasn't yet reached: a
+product-qualified-lead list.
+
+## Example data and how to read it
+
+The Skill looks for patterns like <SeeFig n={1} />: Priya was seen 6 hours ago and is still
+listed as a trial, not yet a marketing-qualified lead: exactly the kind of engaged, uncontacted
+account this list exists to surface before someone else notices.
+
+## Doing this by hand
+
+1. **Connect [HubSpot](/docs/cdp/sources/hubspot) or [Salesforce](/docs/cdp/sources/salesforce)**
+   via [Data pipeline > Sources](/docs/data-warehouse/sources).
+2. **Define your key [events](/docs/data/events)** under Data management > Events: define what
+   signals real intent for you.
+3. **For a ranked list**, check each lead's activity in the [Persons](/docs/data/persons) 
+   explorer, or use the [SQL editor](/docs/data-warehouse/sql), or ask PostHog AI to score every lead
+   in one query.
+
+## Get an agent to do the work
+
+Copy the Skill below and add it to your agent. The agent defines, with you, the handful of events that signal real intent. Then it scores each
+lead by recency and frequency of those events, weighted however you like. It joins the score to
+CRM lead records on email and filters to leads not yet marked contacted. The scoring stays
+transparent on purpose so that everyone using it can see where it comes from.
+
+This ranks individual leads to action right now. For analyzing which onboarding *steps* drive
+trial-to-paid conversion in aggregate instead, that's
+[Onboarding conversion](/pocket-guides/context-warehouse/onboarding-conversion).
+
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
+
+<SeeAlso>
+
+See also: [Onboarding conversion](/pocket-guides/context-warehouse/onboarding-conversion) ·
+[Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue)
+
+</SeeAlso>
+
+</RightPage>

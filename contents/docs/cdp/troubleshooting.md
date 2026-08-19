@@ -4,10 +4,6 @@ title: Customer Data Platform troubleshooting
 
 This page covers troubleshooting for CDP. For setup, see the [installation guides](/docs/cdp/sources).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## My transformation or destination isn't working, what do I do?
 
 1. Wait 60 seconds, then check that the transformation or destination is enabled with the correct configuration options in the [data pipeline tab](https://app.posthog.com/data-management/destinations). You can find the correct configuration options in the [transformation or destination's documentation](/docs/cdp) by searching for it in the destinations, transformations, or filtering sections of the docs.

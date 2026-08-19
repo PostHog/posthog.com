@@ -27,6 +27,10 @@ export const isLatestVersion = (version?: string): boolean => Boolean(version?.i
 
 export const hasConcreteVersion = (version?: string): boolean => Boolean(version) && version !== VERSION_PLACEHOLDER
 
-/** A type only gets a page when it has properties or an example — link allowlists must match. */
+/**
+ * A type only gets a page when it has properties or an example — link allowlists must match.
+ * The literal `"null"` id is excluded too, or TypeLink emits a /types/null link to a page that
+ * is never created.
+ */
 export const typeHasPage = (type?: { id?: string; properties?: unknown; example?: unknown }): boolean =>
-    Boolean(type?.id && (type.properties || type.example))
+    Boolean(type?.id && type.id !== 'null' && (type.properties || type.example))
