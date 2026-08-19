@@ -18,6 +18,8 @@ They can help you with things like:
 - Branded merch 
 - Animated UI elements
 
+> 💡 **You might not need a request at all.** [brand.posthog.com](https://brand.posthog.com) has ready-made brand assets — logos, colors, hedgehogs, and crests — that any team can use without filing an issue. The [hedgehog library](#hedgehog-library) below covers approved hogs too.
+
 They get a lot of work requests, so they use two separate project boards to organize work – [one for merch](https://github.com/orgs/PostHog/projects/178) and [one for other art projects](https://github.com/orgs/PostHog/projects/65/views/2). This reflects that merch projects often have much longer timelines and need to be handled differently. 
 
 Whenever you want to request a new merch design or other artwork, you should [use the relevant design request templates in the marketing repo](https://github.com/PostHog/marketing/issues/new/choose) – one template for merch, one for other art requests. Each template automatically assigns work to the correct project board. 
@@ -38,7 +40,9 @@ The Art & Brand Planning board uses GitHub Actions to keep work moving:
 
 To establish a clear connection between the task and the working file, designers will create a frame containing a link to the task. They should then add a link to that frame within the task for easy reference.
 
-Lottie and Daniel usually ask for two weeks minimum notice, but can often work faster on things if needed. If your request is genuinely urgent, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Daniel, and/or [Cory](https://posthog.com/community/profiles/30200).
+Please give **two weeks notice** for new briefs — this is the preferred minimum, and more time is always better. For reference, the team receives roughly 25-30 new art requests a month, so new briefs are rarely picked up the day they land. A **one-week turnaround is only possible for actual emergencies.** If your request is a genuine emergency, please share your request issue in [#team-graphics channel](https://posthog.slack.com/archives/C0AU440KS6P) and mention Lottie, Daniel, and/or [Cory](/community/profiles/30200).
+
+If you need to chase for an update on a request, the best place to do it is a comment on the issue itself, not a Slack DM. Comments keep the context with the brief, notify the assigned artist, and the team triages from the project board.
 
 ## Hedgehog library
 
