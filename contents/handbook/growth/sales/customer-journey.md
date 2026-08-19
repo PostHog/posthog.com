@@ -32,7 +32,7 @@ This is a rough articulation of the phases a paid and "sales-sized" customer mov
 
 ### At risk is a status, not a phase
 
-An account in any postsales phase can be at risk. At risk does not change the phase or reassign the account. The current owner runs the churn save. 
+An account in any postsales phase can be at risk. At risk does not change the phase or reassign the account. When both a TAM and a CSM are on the account, they co-own the churn save. Otherwise the current owner runs it. Going at risk is not a reason to add a TAM.
 
 ## Coverage map
 

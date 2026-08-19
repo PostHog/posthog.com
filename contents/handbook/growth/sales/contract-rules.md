@@ -28,13 +28,18 @@ In our consumption-based pricing model, the first way for a customer to reduce s
 
 Beyond optimization, we offer discounts based on four levers:
 
-#### 1. Volume discount (based on credit purchase amount - Customers **must** qualify for this discount before receiving discounts 2 through 4)
+#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 through 4)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
 - **$250-499k:** 35% base discount
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
+
+> Two things to be clear on when working out which tier applies:
+>
+> - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment and timing of cash levers below, not a bigger volume tier.
 
 #### 2. Length of commitment discount (additive)
 - **1-year commitment:** No additional discount
@@ -264,6 +269,36 @@ In order for this to not mess up later renewals, the way we do this is by giving
 
 In order to qualify for this, the customer needs to send us the full quote document from the competitor.
 
+## Contracts for customers on time-limited plans
+
+Some customers are on a plan that is cheaper than list pricing and has an end date — a [campaign coupon](/handbook/marketing/campaigns-and-coupons) (Lenny's Newsletter grants a free Scale package and 2x free tier limits for 12 months), a beta plan for a product we haven't finished pricing, or a promotional increase to their free tier. These customers are paying us today, and they will pay more for the same usage once the plan ends.
+
+This covers pricing packages granted in Billing, not the [Stripe coupons and discounts](/handbook/growth/sales/billing#coupons-and-discounts) we apply per contract (legacy 30% off, non-profit discounts, and so on). This is also not the same situation as the [startup plan](#startup-plan-discounts). Startup credits make usage free, which is why we future-date that contract to sit after the free period. 
+
+### Don't touch the plan to close the deal
+
+Don't extend, swap, or cancel a customer's coupon or beta plan as a negotiating lever, or promise to carry its benefits into the contract term. Campaign benefits expire automatically and move the customer onto the standard paid plan with nobody doing anything. Every manual exception replaces that with a bespoke plan configuration plus something a human has to remember to undo months later, which is how we end up with legacy plans we then spend months migrating people off.
+
+### The contract itself is standard
+
+Start date follows the [normal rules](/handbook/growth/sales/contracts#creating-an-order-form). Discounts follow the [standard levers](#how-our-discounts-work). 
+
+### Size the credits for the step-up
+
+Because the plan may end partway through the term, credits burn at one rate before that date and a faster rate after it. Sizing on today's spend may undersize the deal.
+
+**If the plan has a known end date** you can blend the two rates:
+
+> (months remaining on the plan × current monthly run rate) + (remaining months of the term × post-plan monthly run rate)
+
+Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
+
+**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes.
+
+### Tell the customer about the step-up
+
+Their costs rise on a known date whether or not they sign, so it belongs in the conversation. It's a reason to commit now, rather than something for them to discover at renewal. Sizing it properly often moves them into a better volume discount tier as well, which is a much better trade than giving away the plan benefits.
+
 ## Credit over/under usage for contracts
 
 ### When they don't have enough credit to cover their term
@@ -275,6 +310,14 @@ We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/a
 -   If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
 -   If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date. This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     -   Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September. We need a new 12-month order form in place with a Contract Start Date of September 1st.
+
+#### How to actually cover the gap
+
+Where we've agreed to cover usage for free until the renewal date, do it by adding a one-off credit allocation to the customer's credit balance in billing admin. You don't need billing engineering to do this.
+
+Always add the credit _before_ the invoice is generated. If you wait for the invoice and credit it afterwards, we've charged the customer an amount we already knew we weren't going to collect.
+
+You don't need to get the amount exactly right. Add your best estimate of the remaining usage and top it up the day before invoice is generated if it falls short. Over-allocating is fine: the balance resets at the actual contract end date, so anything left over doesn't carry into the new contract. Make sure to note this in other details field in the related Salesforce opportunity so the revops team can make sure the final credit balance is correct during contract setup.
 
 For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the credit purchase amount.
 

@@ -7,10 +7,14 @@ import { CallToAction } from 'components/CallToAction'
 import TabbedCarousel from 'components/TabbedCarousel'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
+import WistiaEmbed from 'components/WistiaEmbed'
 import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../context/App'
 import { GetStarted } from 'components/Home/Test'
+import Cover from 'components/PocketGuides/Cover'
+import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
+import { volumeById } from '../../constants/pocketGuides'
 import { CatalogLayers } from 'components/ContextWarehouseCatalog'
 import {
     IconArrowUpRight,
@@ -708,6 +712,44 @@ const humanRoles: HumanRole[] = [
     },
 ]
 
+/** The pocket guides, pitched where a reader has just seen what self-driving does. */
+const PocketGuidesSection = (): JSX.Element | null => {
+    const volume = volumeById('self-driving')
+    const guides = useSelfDrivingTemplates()
+    if (!volume) {
+        return null
+    }
+    return (
+        <section className="not-prose my-12">
+            <h3 className={sectionHeadingClassName}>Learn it by use case</h3>
+            <div
+                className={`flex flex-col items-center gap-8 overflow-hidden rounded-md border border-primary p-6 @md/reader-content:flex-row @md/reader-content:items-start @md/reader-content:p-8 ${WINDOW_BG}`}
+            >
+                <div className="w-[200px] shrink-0">
+                    <Cover volume={volume} count={guides.length} />
+                </div>
+                <div className="min-w-0">
+                    <p className="m-0 text-base font-bold text-primary">The pocket guide to self-driving</p>
+                    <p className="m-0 mt-2 max-w-xl text-base leading-relaxed text-secondary">
+                        A quick overview of self-driving, plus real use cases. Each one walks through the report a scout
+                        files, the pull request it becomes, and the scout itself. You can also add each use case as a
+                        custom scout to your own product.
+                    </p>
+                    <CallToAction
+                        to="/pocket-guides"
+                        state={{ newWindow: true }}
+                        type="secondary"
+                        size="md"
+                        className="mt-4"
+                    >
+                        Read the pocket guides
+                    </CallToAction>
+                </div>
+            </div>
+        </section>
+    )
+}
+
 const QuestionsSection = (): JSX.Element => {
     const { openNewChat } = useApp()
 
@@ -726,6 +768,15 @@ const QuestionsSection = (): JSX.Element => {
                         </Link>
                         <p className="m-0 mt-1 text-base text-secondary">
                             Read how Inbox, signal sources, scouts, reports, and pull requests fit together.
+                        </p>
+                    </li>
+                    <li className="list-decimal">
+                        <Link to="/pocket-guides" state={{ newWindow: true }} className="font-bold underline">
+                            Read a pocket guide
+                        </Link>
+                        <p className="m-0 mt-1 text-base text-secondary">
+                            Use case books that walk through real scouts – each one ends in a one-click way to add it to
+                            your product.
                         </p>
                     </li>
                     <li className="list-decimal">
@@ -808,11 +859,14 @@ export default function SelfDrivingPage({
                                     and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
                                 </p>
                                 <p className="mb-0 mt-4 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                    PostHog instruments your codebase, then combines that context with
-                                    product data like analytics events, errors, and recordings to understand problems and
-                                    propose fixes.
+                                    PostHog instruments your codebase, then combines that context with product data like
+                                    analytics events, errors, and recordings to understand problems and propose fixes.
                                 </p>
-                                <GetStarted selfDriving />
+                                <GetStarted
+                                    selfDriving
+                                    demoTo="/self-driving#see-how-it-works"
+                                    demoNewWindow={false}
+                                />
                             </div>
 
                             <div className="relative overflow-hidden rounded-md border border-primary bg-primary shadow-2xl">
@@ -942,6 +996,14 @@ export default function SelfDrivingPage({
                             </div>
                         )}
 
+                        {/* See how it works */}
+                        <h3 id="see-how-it-works" className={sectionHeadingClassName}>
+                            See how it works
+                        </h3>
+                        <div className="not-prose mt-8 mb-12 overflow-hidden rounded-md shadow-2xl">
+                            <WistiaEmbed mediaId="w7ia81gh5x" />
+                        </div>
+
                         {/* Works in your workflow */}
                         <h3 className={sectionHeadingClassName}>Works in your workflow</h3>
                         <p className="mb-0">
@@ -965,6 +1027,8 @@ export default function SelfDrivingPage({
 
                         <AutomaticToolingSection />
                         <ContextWarehouseSection />
+
+                        <PocketGuidesSection />
 
                         {/* So, what's left for you? */}
                         <h3 className={sectionHeadingClassName}>So, what's left for you?</h3>

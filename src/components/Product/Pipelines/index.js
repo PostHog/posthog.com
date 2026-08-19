@@ -9,7 +9,6 @@ import { IconSearch, IconPlug, IconArrowRightDown } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import TeamMembers from '../TeamMembers'
 import SideModal from 'components/Modal/SideModal'
-import Questions from '../Questions'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { docsMenu } from '../../../navs'
 import { MDXProvider } from '@mdx-js/react'
@@ -869,23 +868,6 @@ function PipelinesPage({ location }) {
                     our customer data platform.
                 </p>
                 <TeamMembers teamName={team} setActiveProfile={setActiveProfile} />
-            </section>
-
-            <section
-                id="questions"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}
-            >
-                <h3 className="text-3xl lg:text-4xl text-center mb-2">Questions?</h3>
-
-                <p className="text-center mb-4">See more questions (or ask your own!) in our community forums.</p>
-
-                <div className="text-center mb-8">
-                    <CallToAction href={`/questions/cdp`} type="secondary" size="sm">
-                        View CDP &amp; data pipeline questions
-                    </CallToAction>
-                </div>
-
-                <Questions topicIds={[383]} />
             </section>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>

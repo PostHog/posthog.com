@@ -1,0 +1,52 @@
+---
+title: Push notifications
+---
+
+PostHog mobile SDKs can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. Sends go out through the FCM or APNs channel you connect in [Workflows > Channels](/docs/workflows/configure-channels?tab=Push).
+
+<CalloutBox icon="IconInfo" title="Push notifications are in beta" type="fyi">
+
+Push is a beta feature of [PostHog Workflows](/docs/workflows). It's rolling out gradually and isn't available in every project yet. To request access or send feedback, [reach out in-app](https://app.posthog.com/#panel=support%3Afeedback%3A%3Alow%3Atrue).
+</CalloutBox>
+
+<CalloutBox icon="IconInfo" title="What the SDK does and doesn't do" type="fyi">
+
+The SDK registers the device token with PostHog and captures opens. You still own the platform setup: set up remote notifications (for example with Firebase Cloud Messaging) and request notification permission from the user. The SDK doesn't do that for you.
+
+</CalloutBox>
+
+## Requirements
+
+- A connected **FCM** or **APNs** channel in PostHog whose Firebase project (FCM) or bundle id (APNs) matches your app. See [Configure a workflows channel](/docs/workflows/configure-channels?tab=Push).
+- Platform push set up in your app and notification permission requested from the user.
+
+## Set up
+
+Follow the guide for your SDK:
+
+- [iOS](/docs/workflows/push-notifications/ios)
+- [Android](/docs/workflows/push-notifications/android)
+- [React Native](/docs/workflows/push-notifications/react-native)
+- [Flutter](/docs/workflows/push-notifications/flutter)
+
+## Identity verification
+
+A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
+
+Your **backend** mints that token. The SDK never signs one itself. Generate an EC (P-256) key pair, keep the private key on your backend, and paste the public key into the channel's **Public key** field when you turn on identity verification. Your backend signs an ES256 JWT with the private key, with the user's `distinct_id` as `sub`, the `appId` your provider receives as `app_id` (your Firebase project ID or APNs bundle ID), `aud` set to `posthog:push_identity`, and a short `exp`. PostHog verifies the token with the public key you registered, so the private key never leaves your control.
+
+Generate the key pair once with any standard tool, for example openssl:
+
+```bash
+openssl ecparam -name prime256v1 -genkey -noout -out push-identity-private.pem   # keep this on your backend
+openssl ec -in push-identity-private.pem -pubout -out push-identity-public.pem   # paste this into the Public key field
+```
+
+Your app supplies the token through a `pushIdentityProvider` callback. See the per-platform guide above for the exact signature.
+
+Notes:
+
+- Registration verifies the token against the public key you registered, so a token signed with any other private key is rejected with a 401.
+- If you leave the **Public key** field blank, registration instead verifies the token against your project's Feature flags secure API key (Settings → Feature flags) using HS256, a shared secret you sign with directly. The public key flow is preferred because the signing key stays on your backend.
+- The SDK calls your provider when it needs a token and caches the result in memory per `(distinctId, appId)`, re-requesting on identity change and when a request is rejected. Always call the completion exactly once.
+- If your provider doesn't respond in time (10 seconds), the SDK falls back to sending without a token. On a channel set to **Required** that request is rejected, so make sure your provider reliably returns a token before switching the channel to Required.

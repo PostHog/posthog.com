@@ -52,7 +52,17 @@ function LazyHeroCarousel({ className }: { className?: string }) {
     return <Content className={className} />
 }
 
-const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?: 'center' | 'start' }) => (
+const SecondaryActions = ({
+    justify = 'center',
+    demoTo = '/demo',
+    demoNewWindow = true,
+}: {
+    className?: string
+    justify?: 'center' | 'start'
+    demoTo?: string
+    /** In-page anchors should scroll the current window rather than opening a new one. */
+    demoNewWindow?: boolean
+}) => (
     <p
         className={`!text-sm mt-4 mb-0 flex w-full max-w-md flex-wrap items-center gap-2 ${
             justify === 'start' ? 'justify-start' : 'justify-center'
@@ -67,7 +77,11 @@ const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?
             <span className="underline font-semibold">MCP</span>
         </Link>
         <span className="text-secondary">•</span>
-        <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
+        <Link
+            to={demoTo}
+            state={demoNewWindow ? { newWindow: true } : undefined}
+            className="text-secondary hover:text-primary"
+        >
             <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
             <span className="underline font-semibold">Watch a demo</span>
         </Link>
@@ -84,13 +98,17 @@ const SecondaryActions = ({ justify = 'center' }: { className?: string; justify?
 export const GetStarted = ({
     selfDriving,
     showSecondaryActions = true,
+    demoTo,
+    demoNewWindow,
 }: {
     selfDriving?: boolean
     showSecondaryActions?: boolean
+    demoTo?: string
+    demoNewWindow?: boolean
 }) => (
     <div className="mt-6 flex flex-col items-center @xl:items-start">
         <PlatformInstall schema={wizardInstallSchema} selfDriving={selfDriving} />
-        {showSecondaryActions ? <SecondaryActions /> : null}
+        {showSecondaryActions ? <SecondaryActions demoTo={demoTo} demoNewWindow={demoNewWindow} /> : null}
     </div>
 )
 

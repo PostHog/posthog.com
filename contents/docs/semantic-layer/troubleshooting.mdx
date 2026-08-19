@@ -4,23 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
+import BetaCallout from './_snippets/beta-callout'
 
-<AlphaCallout />
-
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
+<BetaCallout />
 
 ## I don't see the semantic layer tools in my MCP client
 
-The alpha is enabled per organization. If the `data-catalog-*` tools are missing:
+If the `data-catalog-*` tools are missing:
 
-1. Confirm your organization is in the alpha – [contact support](https://app.posthog.com/home#supportModal) to request access.
-2. Reconnect or restart your MCP client after enablement; clients cache the tool list.
-3. Check your API key has the `data_catalog` scope.
-
-Similarly, if `system.information_schema.metrics` raises "Unknown table", the alpha isn't enabled for your organization yet.
+1. Check your API key has the `data_catalog` scope.
+2. Reconnect or restart your MCP client; clients cache the tool list, so a key or scope change won't show up until they refresh it.
 
 ## My agent can't approve a metric
 
@@ -34,27 +27,31 @@ Three causes, in order of likelihood:
 
 The metric was created from an insight, and that insight's query has changed since the snapshot (or the insight was deleted). To resolve:
 
-- **Keep the new definition:** update the metric to re-snapshot the insight's current query, then re-approve.
+- **Keep the new definition:** re-snapshot the insight's current query into the metric with `data-catalog-metrics-refresh-from-insight-create`, then re-approve.
 - **Keep the old definition:** unlink the metric from the insight (set `source_insight_short_id` to null) so it stands on its own definition, then re-approve.
 
 Compare the metric's `compiled_query` (from a run) with the insight's current query to see what changed. Until it's re-approved, results are labeled noncanonical.
 
-## I deleted a metric but can't reuse the name
+## I renamed or deleted a metric and references to it broke
 
-By design. Names are write-once and stay reserved after deletion, so a stored reference to a name can never silently point at a different definition. Pick a new name.
+By design. Renaming or deleting a metric frees its name, and anything that stored the old name – saved SQL over `system.information_schema.metrics`, API calls, links – stops resolving. After a rename, update those references to the new name.
+
+Two things to know before you rely on this:
+
+- **Deletion has no undo in the product.** Re-creating a metric with a deleted name starts completely fresh – the old definition, history, and approval don't come back.
+- **Renaming an approved metric resets it to `proposed`**, so it needs approving again under the new name.
 
 ## An agent keeps proposing a join we don't want
 
-Reject the proposal with `data-catalog-relationship-reject`. Rejection persists forever and the pair is never re-proposed – in either direction.
+Reject the proposal with `data-catalog-relationship-reject-prepare` / `-execute`. Rejection persists forever and the pair is never re-proposed – in either direction.
 
-The flip side: **rejection has no undo** in the alpha. If you rejected a proposal by mistake and need the join anyway, create it directly as a [data warehouse join](/docs/data-warehouse/join) – the catalog's rejection only suppresses re-proposals, not manual joins.
+The flip side: **rejection has no undo** in beta. If you rejected a proposal by mistake and need the join anyway, create it directly as a [data warehouse join](/docs/data-warehouse/join) – the catalog's rejection only suppresses re-proposals, not manual joins.
 
 ## Where's the UI?
 
 Open the command palette with `Cmd/Ctrl + K` and search for **Data Catalog**. From there you can browse and manage your metrics, certifications, and relationships – reviewing and promoting what agents have proposed without leaving PostHog. You can still do everything through MCP tools and SQL if you prefer. Also worth knowing:
 
 - Tool names and behavior may change between releases
-- The alpha is enabled per organization, not per user or project
 - `last_run_at` is updated at most every 30 minutes, so treat it as approximate
 
-Feedback on any of this shapes what the beta looks like – [tell us what's missing](https://app.posthog.com/home#supportModal).
+Feedback on any of this shapes what general availability looks like – [tell us what's missing](https://app.posthog.com/home#supportModal).

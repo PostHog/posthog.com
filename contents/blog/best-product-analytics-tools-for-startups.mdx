@@ -301,7 +301,7 @@ If [you're pre-PMF and just need funnels and retention](/founders/early-stage-an
 
 The platform has expanded well beyond analytics. It now includes session replay, feature flags, A/B testing (Amplitude Experiment), and Guides & Surveys. A Unified Browser SDK lets you initialize analytics, replay, experiments, and guides in a single call.
 
-[Amplitude](/blog/best-amplitude-alternatives) uses a monthly tracked user (MTU) billing model. One user who triggers 500 events costs the same as one who triggers 5 – attractive for products with high per-user engagement. However, anonymous users count as MTUs until merged, which can inflate costs for products with lots of anonymous traffic.
+[Amplitude](/blog/best-amplitude-alternatives) bills on event volume, with 2 million events per month included free. That puts it on the same footing as PostHog and Mixpanel, so the comparison comes down to what's bundled. Amplitude gates advanced analytics behind plan tiers and add-ons, and only publishes pricing for events on its Plus plan.
 
 ### Key features
 
@@ -322,9 +322,9 @@ For data already in a warehouse, connect Snowflake, BigQuery, or Redshift direct
 
 | Plan | Price | Includes |
 |---|---|---|
-| Starter | Free | 50K MTUs, 10M events, unlimited flags, session replay, AI chat |
-| Plus | From $49/mo (annual) | 300K MTUs or 25M events, behavioral cohorts, saved charts, web experiments |
-| Growth | Contact sales | Custom MTUs, causal insights, predictive audiences, feature experimentation |
+| Free | Free | 2M events and 1K session replay per month, unlimited flags, AI chat |
+| Plus | Usage-based, first 2M events free | Custom events and formulas, 20 behavioral cohorts, alerts, heatmaps, web experiments |
+| Growth | Contact sales | Causal insights, predictive audiences, feature experimentation, SSO |
 | Enterprise | Contact sales | Cross-product analytics, multi-armed bandits, warehouse-native, EU residency |
 
 Guides & Surveys, extra session replay volume, and additional automated syncs are available as add-ons on Plus plans.
@@ -333,7 +333,7 @@ Guides & Surveys, extra session replay volume, and additional automated syncs ar
 <summary>Amplitude is for you if...</summary>
 
 - Retention curves and cohort comparisons are your primary analytical workflow
-- Your product has high per-user engagement (MTU billing rewards lots of events per user)
+- You want the largest free event allowance to start with (2M/month)
 - You want experiment exposure events excluded from your analytics bill
 - You need governance and taxonomy tools as your data team grows
 
@@ -342,8 +342,7 @@ Guides & Surveys, extra session replay volume, and additional automated syncs ar
 <details>
 <summary>Amplitude is not for you if...</summary>
 
-- Your product has lots of anonymous traffic – anonymous users count as distinct MTUs until merged, inflating costs
-- You want simple, transparent pricing – Growth/Enterprise require sales conversations
+- You want simple, transparent pricing – only the Plus plan has published rates, and Growth/Enterprise/Add-ons require sales conversations
 - You need error tracking or logs – Amplitude doesn't offer either
 - You're pre-PMF and just need basic funnels and retention – the depth of tooling can be more than you need right now
 
@@ -565,7 +564,7 @@ Some tools give you the full product at low volume. Others gate core features be
 |---|---|---|---|---|---|
 | **PostHog** | 1M events/mo | Events (per product) | Yes | All-in-one platform | Nothing – it's bundled |
 | **Mixpanel** | 1M events/mo | Events | Yes | Pure funnel/cohort analysis | Replay, flags, surveys, errors |
-| **Amplitude** | 10K MTUs | MTUs | Partial | Retention depth | Replay, flags, surveys, errors |
+| **Amplitude** | 2M events/mo | Events | Partial | Retention depth | Error tracking, logs |
 | **Heap** | 10K sessions/mo | Sessions | Yes | Retroactive autocapture | Flags, surveys, errors |
 | **Fullstory** | 10K sessions/mo | Contact sales | No | Replay-first analysis | Flags, surveys, errors |
 | **Pendo** | 500 MAUs | MAUs | Free tier | Analytics + in-app guides | Replay, flags, errors |
@@ -637,7 +636,7 @@ A tracking plan is a document that defines every event you track, its properties
 
 Match tool to stage: [activation metrics](/product-engineers/activation-metrics) pre-PMF, retention cohorts post-PMF. 
 
-Compare pricing models against your product's usage pattern: events (PostHog, Mixpanel), MTUs (Amplitude), MAUs (Pendo). 
+Compare pricing models against your product's usage pattern: events (PostHog, Mixpanel, Amplitude), sessions (Heap), MAUs (Pendo). 
 
 Check whether you need adjacent tools (replay, flags, experiments, surveys, error tracking...) in the same platform or are fine managing separate vendors. 
 

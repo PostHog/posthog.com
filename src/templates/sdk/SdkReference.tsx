@@ -73,6 +73,9 @@ export interface SdkReferenceData {
 export interface PageContext {
     fullReference: SdkReferenceData
     types: string[]
+    // Slug segment type cross-links resolve under, owned by gatsby/createPages.ts (latest →
+    // referenceId, versioned → id). Not `info.slugPrefix`, which is a spec field, unused here.
+    slugPrefix: string
 }
 
 export interface VersionsData {
@@ -132,7 +135,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 }
 
 export default function SdkReference({ pageContext, data }: { pageContext: PageContext; data: VersionsData }) {
-    const { fullReference } = pageContext
+    const { fullReference, slugPrefix } = pageContext
     const location = useLocation()
 
     // Get the language for this SDK reference
@@ -360,7 +363,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                         </Accordion>
                                                     )}
                                                     <Parameters
-                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        slugPrefix={slugPrefix}
                                                         params={func.params}
                                                         validTypes={validTypes}
                                                     />
@@ -369,7 +372,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                                 <div className="lg:sticky top-[108px] space-y-6">
                                                     <FunctionExamples examples={func.examples} language={sdkLanguage} />
                                                     <FunctionReturn
-                                                        slugPrefix={`${currentReferenceId}-${fullReference.info.version}`}
+                                                        slugPrefix={slugPrefix}
                                                         returnType={func.returnType}
                                                         validTypes={validTypes}
                                                     />

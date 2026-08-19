@@ -139,7 +139,7 @@ Unleash is particularly popular with privacy-conscious organizations since user 
 
 ### How much does it cost?
 
-Unleash's open-source self-hosted version is free with unlimited feature flags. A self-service Enterprise plan starts at $75 per seat per month with a 5-seat minimum, available as cloud-hosted or self-hosted. Custom Enterprise pricing is available for annual contracts and dedicated support. 
+Unleash's open-source self-hosted version is free with unlimited feature flags. A self-service Enterprise plan starts at $75 per seat per month, available as cloud-hosted or self-hosted (with a 5-seat minimum). Custom Enterprise pricing is available for annual contracts and dedicated support. 
 
 > ### Bottom line
 >

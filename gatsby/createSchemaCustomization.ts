@@ -73,10 +73,62 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type AuthorsJson implements Node {
       profile: SqueakProfile @link(by: "squeakId", from: "profile_id")
     }
+    type FrontmatterReport {
+      title: String
+      source: String
+      receivedAgo: String
+      body: String
+      suggestedAction: String
+      actionNote: String
+      affected: String
+    }
+    type FrontmatterWatches {
+      name: String
+      detail: String
+    }
+    type FrontmatterRequires {
+      label: String
+      level: String
+    }
+    # A pocket-guide chapter's one action. Scout chapters carry a scout instead – this is how a
+    # volume whose answer isn't a scout still ends on something to do.
+    type FrontmatterPocketGuideCtaRequires {
+      label: String
+    }
+    type FrontmatterPocketGuideCta {
+      kind: String
+      label: String
+      prompt: String
+      href: String
+      note: String
+      requires: FrontmatterPocketGuideCtaRequires
+    }
     type Frontmatter {
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
+      report: FrontmatterReport
+      premise: String
+      tldr: String
+      # Short name for tight surfaces like the pocket guide's index tabs. Falls back to title.
+      shortTitle: String
+      # Position in a pocket guide's reading order. 0 is the front matter; the rest are numbered
+      # pages in sequence. Declared so a book page can exist without a report block.
+      pocketGuideOrder: Int
+      watches: [FrontmatterWatches]
+      requires: [FrontmatterRequires]
+      # Prefixed like pocketGuideOrder: this shared Frontmatter type covers every MDX file on the site,
+      # so a plain "cta" key would be one blog post away from a shape conflict.
+      pocketGuideCta: FrontmatterPocketGuideCta
+      # The product surface a scout template belongs to, e.g. "Error tracking". Drives the
+      # inbox's category rail; the list of categories is derived from the templates that
+      # declare one, never hardcoded, so adding a template is a content-only change.
+      category: String
+      schedule: String
       seo: FrontmatterSEO
+      # A scout template's SKILL.md sibling carries the canonical monorepo frontmatter, so these
+      # are declared here rather than left to inference – see components/SelfDrivingInbox.
+      name: String
+      allowed_tools: [String]
       featureFlag: String
       hideFromIndex: Boolean
       lang: String
@@ -398,6 +450,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       description: String
       sourcePath: String
       mcpTools: [String]
+    }
+    type McpTool implements Node @dontInfer {
+      name: String
+      title: String
+      summary: String
+      category: String
+      feature: String
     }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")

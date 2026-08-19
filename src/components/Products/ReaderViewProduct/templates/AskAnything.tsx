@@ -31,6 +31,17 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
     const HogComponent = ai?.Hog
     const [tab, setTab] = useState<'prompts' | 'tools'>('prompts')
     const [query, setQuery] = useState('')
+    // AIO opts into copy-to-clipboard prompts (in-app PostHog AI's web runtime
+    // lags the MCP tool set for now – see PR #19344 review); other products keep
+    // the deep-link behavior.
+    const copyPrompts = !!ai?.copyPrompts
+    const [copiedPrompt, setCopiedPrompt] = useState<string | null>(null)
+
+    const copyPrompt = (p: string) => {
+        navigator.clipboard?.writeText(p)
+        setCopiedPrompt(p)
+        window.setTimeout(() => setCopiedPrompt((current) => (current === p ? null : current)), 2000)
+    }
 
     const productTools: McpTool[] = useMemo(() => {
         if (!mcpFeatures.length) return []
@@ -51,6 +62,35 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
         )
     }, [query, productTools])
 
+    // Products with many tools can bucket them into use cases via
+    // `ai.toolGroups: [{ name, summary, prefixes }]` – one row per use case with
+    // the tools that accomplish it (à la Replay Vision), matched on name prefix.
+    // Unmatched tools land in a trailing "Everything else" group. Products
+    // without toolGroups keep the flat per-tool list.
+    const toolGroups: Array<{ name: string; summary?: string; prefixes: string[] }> = ai?.toolGroups ?? []
+    const groupedTools = useMemo(() => {
+        if (!toolGroups.length) return null
+        const remaining = new Set(filteredTools)
+        const groups = toolGroups.map((g) => {
+            const tools = filteredTools.filter((t) => g.prefixes.some((p) => t.name.startsWith(p)))
+            tools.forEach((t) => remaining.delete(t))
+            return { name: g.name, summary: g.summary, tools }
+        })
+        if (remaining.size) groups.push({ name: 'Everything else', summary: undefined, tools: [...remaining] })
+        return groups.filter((g) => g.tools.length > 0)
+    }, [toolGroups, filteredTools])
+
+    const toolListItems = (tools: McpTool[]) =>
+        tools.map((t) => ({
+            label: <p className="text-xs font-mono font-normal">{t.name}</p>,
+            description: (
+                <>
+                    <strong className="block text-primary mb-1">{t.summary}</strong>
+                    {firstLine(t.description)}
+                </>
+            ),
+        }))
+
     if (!groups.length) return null
 
     return (
@@ -66,8 +106,10 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                     <Link to="/desktop" state={{ newWindow: true }} className="font-semibold underline">
                         PostHog Desktop
                     </Link>{' '}
-                    (our AI code editor), and in your product editor (using the MCP). Already signed in? Click a prompt
-                    to try it.
+                    (our AI code editor), and in your product editor (using the MCP).{' '}
+                    {copyPrompts
+                        ? 'Click a prompt to copy it, then paste it into your agent.'
+                        : 'Already signed in? Click a prompt to try it.'}
                 </p>
             )}
             <ToggleGroup
@@ -117,13 +159,30 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                                         <ul className="list-none pl-0 m-0 space-y-1 text-sm text-secondary italic leading-relaxed">
                                             {g.prompts.map((p) => (
                                                 <li key={p}>
-                                                    <Link
-                                                        to={maxPromptUrl(p)}
-                                                        externalNoIcon
-                                                        className="text-secondary hover:text-primary underline-offset-2 hover:underline"
-                                                    >
-                                                        &ldquo;{p}&rdquo;
-                                                    </Link>
+                                                    {copyPrompts ? (
+                                                        <>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => copyPrompt(p)}
+                                                                className="text-left italic text-secondary hover:text-primary underline-offset-2 hover:underline bg-transparent border-0 p-0 cursor-pointer"
+                                                            >
+                                                                &ldquo;{p}&rdquo;
+                                                            </button>
+                                                            {copiedPrompt === p && (
+                                                                <span className="not-italic text-xs font-semibold text-green ml-2">
+                                                                    Copied!
+                                                                </span>
+                                                            )}
+                                                        </>
+                                                    ) : (
+                                                        <Link
+                                                            to={maxPromptUrl(p)}
+                                                            externalNoIcon
+                                                            className="text-secondary hover:text-primary underline-offset-2 hover:underline"
+                                                        >
+                                                            &ldquo;{p}&rdquo;
+                                                        </Link>
+                                                    )}
                                                 </li>
                                             ))}
                                         </ul>
@@ -151,18 +210,24 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                             <div className="@container">
                                 {filteredTools.length === 0 ? (
                                     <p className="text-sm text-secondary italic m-0">No tools match your search.</p>
-                                ) : (
+                                ) : groupedTools ? (
                                     <LabeledList
-                                        items={filteredTools.map((t) => ({
-                                            label: <p className="text-xs font-mono font-normal">{t.name}</p>,
+                                        items={groupedTools.map((group) => ({
+                                            label: group.name,
                                             description: (
                                                 <>
-                                                    <strong className="block text-primary mb-1">{t.summary}</strong>
-                                                    {firstLine(t.description)}
+                                                    {group.summary && (
+                                                        <p className="text-primary mb-2">{group.summary}</p>
+                                                    )}
+                                                    <span className="font-mono text-[13px] text-secondary">
+                                                        {group.tools.map((t) => t.name).join(' · ')}
+                                                    </span>
                                                 </>
                                             ),
                                         }))}
                                     />
+                                ) : (
+                                    <LabeledList items={toolListItems(filteredTools)} />
                                 )}
                             </div>
                         </>
