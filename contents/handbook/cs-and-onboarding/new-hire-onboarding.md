@@ -29,7 +29,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
-- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). The hands-on labs walk you through creating your own free PostHog project and using every core product against it.
+- Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide and work through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise). The quickest way to get there is the [hands-on labs](#learning-posthog), where you set up your own free PostHog project and use every core product against data you generated.
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
@@ -114,7 +114,7 @@ This is the bar for end of month 1.
 
 PostHog has a lot of products, and you can't learn them all upfront, so trying to will just frustrate you. The lenses in Week 1 are the bar for each product you do learn. This section is how to figure out which products to focus on, how to get hands-on, and what to do when you hit something you don't know.
 
-**Do the hands-on labs first.** The [CSM labs](https://github.com/PostHog/onboarding-csm-lab) are a self-contained course. You create your own free PostHog project, instrument a small app from zero, and use product analytics, session replay, feature flags and experiments against data you generated. Then you diagnose twelve real customer failure modes, taken straight from [health checks](/handbook/cs-and-onboarding/health-checks) and the [basic implementation review](/handbook/cs-and-onboarding/foundation-check). Each drill ends with writing the reply you'd actually send the customer. The labs are modular, with foundations first and then flex toward whatever your book uses.
+**The fastest route to hands-on is the CSM labs.** The [labs](https://github.com/PostHog/onboarding-csm-lab) are a self-contained course that takes you from reading about the products to actually using them. You create your own free PostHog project, instrument a small app from zero, and use product analytics, session replay, feature flags, and experiments against data you generated yourself - so the first time you see a funnel drop off or a replay with no events, it's your own, not a customer's. From there you work through twelve real customer failure modes drawn from [health checks](/handbook/cs-and-onboarding/health-checks) and the [basic implementation review](/handbook/cs-and-onboarding/foundation-check), each ending in the reply you'd actually send. They're modular, so you can do the foundations and then flex toward whatever your book uses.
 
 **Find out the products your customers are using.** Once you have your book of business, you can see this in Vitally in a few places: the product usage widget in the CSM dashboard, the paid products widget in the default 360 dashboard, or the `paid products` trait. These look at paid usage only and won't include free-tier usage, though most of our customers aren't in free tier anyway. There's no point going deep on session replay initially if none of your customers use it, so use your book to guide what to prioritise first.
 
@@ -126,8 +126,7 @@ PostHog has a lot of products, and you can't learn them all upfront, so trying t
 - Search Slack — you'll find that someone might've already asked the same question or documented the answer in a thread
 - Post in #team-customer-success
 
-Below is a per-product reading list to work through. It pairs with the labs, since the labs teach by doing and the reading list is the
-reference you return to. Add and modify as you go - products are added frequently and the list goes out of date fast.
+Below is a per-product reading list to work through. The labs teach by doing; this is the reference you come back to when you need the detail. Add and modify as you go - products are added frequently and the list goes out of date fast.
 
 ### Product analytics
 1. [Quick primer on Product analytics](https://www.loom.com/share/645de3987e4947ba8164b4d7b7cc719b?sid=ae5f8a50-dc56-4cc4-93d5-d398b398d5a0)
