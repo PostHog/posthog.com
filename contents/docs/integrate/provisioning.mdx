@@ -638,18 +638,23 @@ If the top tier still isn't enough for production use, open a [support request](
 
 Every response that counted against a budget includes `RateLimit-Limit`, `RateLimit-Remaining`, and `RateLimit-Reset` headers, so you can pace requests instead of reacting to 429s.
 
-To see everything at once, call the limits endpoint. It returns your tier, why you have it, and every endpoint's budget with current headroom:
+To see everything at once, call the limits endpoint. It returns your tier, why you have it, and every endpoint's budget with current headroom.
+
+The endpoint is `POST` only, and you have to prove the request is yours. Send an access token, or authenticate as your client the same way you do at the token endpoint:
 
 ```bash
-# With an access token
-curl https://us.posthog.com/api/agentic/provisioning/limits \
+# With an access token. Public clients use this after their first token exchange.
+curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
   -H "Authorization: Bearer pha_abc123..."
 
-# Or with your client_id (public clients)
-curl "https://us.posthog.com/api/agentic/provisioning/limits?client_id=https://yourapp.com/.well-known/posthog-client.json"
+# Or as a private_key_jwt client, with the signed assertion in the form body
+curl -X POST https://us.posthog.com/api/agentic/provisioning/limits \
+  -d "client_id=https://yourapp.com/.well-known/posthog-client.json" \
+  -d "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer" \
+  -d "client_assertion=eyJhbGci..."
 ```
 
-`private_key_jwt` clients POST instead, with the signed assertion in the form body, the same way the token endpoint takes it.
+A `client_id` on its own is not enough. Your `client_id` is published, so accepting it here would let anyone read your limits and spend your budget for this endpoint. Requests that only carry a `client_id` get a 401.
 
 **Response:**
 
