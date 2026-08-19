@@ -4,7 +4,7 @@ date: 2026-08-18
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/[PLACEHOLDER_this-post-will-save-you-tokens].png
+  https://res.cloudinary.com/dmukukwp6/image/upload/tokenmin_blog_75f434b397.png
 featuredImageType: full
 tags:
   - Product engineers
