@@ -3899,6 +3899,20 @@ export const docsMenu = {
                         {
                             name: 'Access control',
                             url: '/docs/settings/access-control',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/settings/access-control',
+                                },
+                                {
+                                    name: 'Warehouse access control',
+                                    url: '/docs/settings/warehouse-access-control',
+                                },
+                                {
+                                    name: 'Property access control',
+                                    url: '/docs/settings/property-access-control',
+                                },
+                            ],
                         },
                         {
                             name: 'Activity logs',
