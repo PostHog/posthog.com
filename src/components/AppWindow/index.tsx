@@ -240,8 +240,15 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
+        const currentURL = item?.path
+        // A URL can be the root of its own section and also a link inside an earlier section. Match the
+        // section that owns the URL first, so the earlier link does not shadow it. A section without
+        // children has no sidebar of its own, so it stays out of this pass.
+        const owner = internalMenu?.find(
+            (menuItem: MenuItem) => menuItem.children?.length && currentURL === menuItem.url?.split('?')[0]
+        )
+        if (owner) return owner
         return internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = item?.path
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
     }, [internalMenu, item])
