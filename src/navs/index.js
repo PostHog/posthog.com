@@ -2506,11 +2506,8 @@ const posthogMcpNav = [
     },
 ]
 
-// Copies a product nav for nesting under Self-driving: drops section labels and adds ?nav=self-driving,
-// which keeps the Self-driving sidebar active for that visit (plain URLs resolve to the product's own sidebar).
-// To add a page, edit the product's nav array above — every copy of it derives from there.
-const selfDrivingNestedNav = (items) =>
-    items.filter((item) => item.url).map((item) => ({ ...item, url: `${item.url}?nav=self-driving` }))
+// Nested trees can't render url-less divider rows, so drop them when nesting a product nav
+const nestedNav = (items) => items.filter((item) => item.url)
 
 export const docsMenu = {
     name: 'Docs',
@@ -2547,29 +2544,28 @@ export const docsMenu = {
                 {
                     name: 'Products',
                 },
-                // ?nav=self-driving keeps the Self-driving sidebar when opened from here
                 {
                     name: 'Slack',
-                    url: '/docs/slack?nav=self-driving',
-                    children: selfDrivingNestedNav(posthogSlackNav),
+                    url: '/docs/slack',
+                    children: nestedNav(posthogSlackNav),
                 },
                 {
                     name: 'Web app',
-                    url: '/docs/self-driving/web?nav=self-driving',
+                    url: '/docs/self-driving/web',
                 },
                 {
                     name: 'MCP',
-                    url: '/docs/model-context-protocol?nav=self-driving',
-                    children: selfDrivingNestedNav(posthogMcpNav),
+                    url: '/docs/model-context-protocol',
+                    children: nestedNav(posthogMcpNav),
                 },
                 {
                     name: 'CLI',
-                    url: '/docs/cli?nav=self-driving',
+                    url: '/docs/cli',
                 },
                 {
                     name: 'Desktop',
-                    url: '/docs/posthog-desktop?nav=self-driving',
-                    children: selfDrivingNestedNav(posthogDesktopNav),
+                    url: '/docs/posthog-desktop',
+                    children: nestedNav(posthogDesktopNav),
                 },
                 {
                     name: 'Concepts',
@@ -3245,7 +3241,6 @@ export const docsMenu = {
             color: 'purple',
             url: '/docs/model-context-protocol',
             description: 'Connect PostHog to Claude, Cursor, and other agents',
-            children: posthogMcpNav,
         },
         {
             name: 'PostHog CLI',
@@ -7797,7 +7792,6 @@ export const docsMenu = {
             color: 'yellow',
             url: '/docs/posthog-desktop',
             description: 'AI coding environment with deep PostHog integration.',
-            children: posthogDesktopNav,
         },
         {
             name: 'PostHog Slack',
@@ -7809,7 +7803,6 @@ export const docsMenu = {
                 title: 'Beta',
                 className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
             },
-            children: posthogSlackNav,
         },
         {
             name: 'Workflows',

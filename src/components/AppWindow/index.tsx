@@ -221,7 +221,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
-        return getActiveMenuSection<MenuItem>(internalMenu, item?.path, item?.location?.search)
+        return getActiveMenuSection<MenuItem>(internalMenu, item?.path)
     }, [internalMenu, item])
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
@@ -446,8 +446,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
             setActiveHistoryIndex(history.length)
         }
         setActiveInternalMenu(getActiveInternalMenu())
-        // re-run when only the query changes (e.g. ?nav=self-driving)
-    }, [item?.path, item?.location?.search])
+    }, [item?.path])
 
     const goBack = useCallback(() => {
         if (canGoBack) {

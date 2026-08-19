@@ -17,8 +17,7 @@ interface NamedNode extends MenuNode {
 
 const docsSections = docsMenu.children as NamedNode[]
 
-const sectionFor = (url: string, search?: string): string | undefined =>
-    getActiveMenuSection<NamedNode>(docsSections, url, search)?.name
+const sectionFor = (url: string): string | undefined => getActiveMenuSection<NamedNode>(docsSections, url)?.name
 
 /** Every URL in the tree, with the querystring removed. */
 const collectURLs = (items: NamedNode[] | undefined, found: Set<string> = new Set()): Set<string> => {
@@ -37,9 +36,8 @@ describe('getActiveMenuSection', () => {
             name: 'First',
             url: '/docs/first',
             children: [
-                { name: 'A plain link to Second', url: '/docs/second' },
-                { name: 'A context link to Third', url: '/docs/third?nav=first' },
-                { name: 'A plain link to Fourth', url: '/docs/fourth' },
+                { name: 'Home', url: '/docs/first' },
+                { name: 'A link to Second', url: '/docs/second' },
             ],
         },
         {
@@ -47,61 +45,36 @@ describe('getActiveMenuSection', () => {
             url: '/docs/second',
             children: [{ name: 'Pricing', url: '/docs/second/pricing' }],
         },
-        {
-            name: 'Third',
-            url: '/docs/third',
-            children: [{ name: 'Pricing', url: '/docs/third/pricing' }],
-        },
-        { name: 'Fourth', url: '/docs/fourth' },
+        { name: 'Third', url: '/docs/third' },
     ]
 
-    test('a ?nav= link wins when the page carries the same query', () => {
-        assert.equal(getActiveMenuSection(sections, '/docs/third', '?nav=first')?.name, 'First')
-    })
-
-    test('the section that owns a URL wins over an earlier section that links to it', () => {
-        assert.equal(getActiveMenuSection(sections, '/docs/second')?.name, 'Second')
-        assert.equal(getActiveMenuSection(sections, '/docs/third')?.name, 'Third')
+    test('the first section that lists a URL wins', () => {
+        assert.equal(getActiveMenuSection(sections, '/docs/first')?.name, 'First')
+        assert.equal(getActiveMenuSection(sections, '/docs/second')?.name, 'First')
         assert.equal(getActiveMenuSection(sections, '/docs/second/pricing')?.name, 'Second')
     })
 
-    test('a section without children loses to a section that links to the page', () => {
-        // Fourth owns /docs/fourth but has no sidebar to show, so First keeps the page.
-        assert.equal(getActiveMenuSection(sections, '/docs/fourth')?.name, 'First')
+    test('a section that only owns a URL, with no sidebar to show, is the last resort', () => {
+        assert.equal(getActiveMenuSection(sections, '/docs/third')?.name, 'Third')
     })
 
-    test('a section without children is still the last resort', () => {
-        const orphan: NamedNode[] = [{ name: 'Fourth', url: '/docs/fourth' }]
-
-        assert.equal(getActiveMenuSection(orphan, '/docs/fourth')?.name, 'Fourth')
-    })
-
-    test('a ?nav= link alone does not claim the page', () => {
-        const linkOnly: NamedNode[] = [
-            { name: 'First', url: '/docs/first', children: [{ name: 'Third', url: '/docs/third?nav=first' }] },
-        ]
-
-        // Pass 3 skips the ?nav= link, so only the pass 4 fallback can match it.
-        assert.equal(getActiveMenuSection(linkOnly, '/docs/third')?.name, 'First')
-        assert.equal(getActiveMenuSection(linkOnly, '/docs/nowhere'), undefined)
+    test('an unknown URL resolves to no section', () => {
+        assert.equal(getActiveMenuSection(sections, '/docs/nowhere'), undefined)
     })
 })
 
 describe('the real docs nav', () => {
-    // Self-driving is the first section and it links to all of these, so before pass 2 they all
-    // rendered the Self-driving sidebar.
-    test('a product page uses its own sidebar', () => {
-        assert.equal(sectionFor('/docs/posthog-desktop'), 'PostHog Desktop')
-        assert.equal(sectionFor('/docs/posthog-desktop/pricing'), 'PostHog Desktop')
-        assert.equal(sectionFor('/docs/slack'), 'PostHog Slack')
-        assert.equal(sectionFor('/docs/model-context-protocol'), 'PostHog MCP')
-        assert.equal(sectionFor('/docs/model-context-protocol/tools'), 'PostHog MCP')
-    })
-
-    test('the same product page keeps the Self-driving sidebar when opened from there', () => {
-        assert.equal(sectionFor('/docs/posthog-desktop', '?nav=self-driving'), 'Self-driving')
-        assert.equal(sectionFor('/docs/slack', '?nav=self-driving'), 'Self-driving')
-        assert.equal(sectionFor('/docs/model-context-protocol', '?nav=self-driving'), 'Self-driving')
+    // Self-driving is the single home for its products (Slack, Desktop, MCP, CLI, Web) — the
+    // standalone sections for those products are flat drop-down links with no sidebar of their own.
+    test('product pages always use the Self-driving sidebar', () => {
+        assert.equal(sectionFor('/docs/slack'), 'Self-driving')
+        assert.equal(sectionFor('/docs/slack/setup'), 'Self-driving')
+        assert.equal(sectionFor('/docs/posthog-desktop'), 'Self-driving')
+        assert.equal(sectionFor('/docs/posthog-desktop/pricing'), 'Self-driving')
+        assert.equal(sectionFor('/docs/model-context-protocol'), 'Self-driving')
+        assert.equal(sectionFor('/docs/model-context-protocol/tools'), 'Self-driving')
+        assert.equal(sectionFor('/docs/cli'), 'Self-driving')
+        assert.equal(sectionFor('/docs/self-driving/web'), 'Self-driving')
     })
 
     test('Self-driving pages use the Self-driving sidebar', () => {
@@ -121,10 +94,17 @@ describe('the real docs nav', () => {
         }
     })
 
-    test('every docs URL resolves to a section with a sidebar to render', () => {
+    test('every docs URL listed in a sidebar resolves to a section with a sidebar to render', () => {
+        const inSomeSidebar = new Set<string>()
+        for (const section of docsSections) {
+            collectURLs(section.children, inSomeSidebar)
+        }
+
         for (const url of collectURLs(docsSections)) {
             const section = getActiveMenuSection<NamedNode>(docsSections, url)
-            assert.ok(section?.children?.length, `${url} resolves to "${section?.name}", which has no children`)
+            if (inSomeSidebar.has(url)) {
+                assert.ok(section?.children?.length, `${url} resolves to "${section?.name}", which has no children`)
+            }
         }
     })
 })
