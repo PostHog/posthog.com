@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import WindowTabs from 'components/WindowTabs'
 import { Fieldset } from 'components/shared/forms/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
