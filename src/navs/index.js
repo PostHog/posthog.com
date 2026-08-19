@@ -7009,6 +7009,14 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+                    name: 'Pocket guides',
+                    url: '/pocket-guides/ai-observability',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+                    },
+                },
+                {
                     name: 'Calculating LLM costs',
                     url: '/docs/ai-observability/calculating-costs',
                     icon: 'IconBalance',
