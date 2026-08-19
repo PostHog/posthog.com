@@ -7,6 +7,7 @@ import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
+import { productUrl } from 'data/tools'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 type TranslateFn = (value: string) => string
@@ -276,7 +277,8 @@ const ProductStatusLink = ({
     translate?: TranslateFn
 }) => {
     if (!product) return null
-    const { Icon, color, name, slug, status } = product
+    const { Icon, color, name, status } = product
+    const url = productUrl(product)
 
     const content = (
         <>
@@ -299,7 +301,7 @@ const ProductStatusLink = ({
         </>
     )
 
-    if (status === 'WIP' || !slug) {
+    if (status === 'WIP' || !url) {
         return (
             <span
                 className={`inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap relative top-0.5 ${className}`}
@@ -311,7 +313,7 @@ const ProductStatusLink = ({
 
     return (
         <Link
-            to={`/${slug}`}
+            to={url}
             state={{ newWindow: true }}
             className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium whitespace-nowrap relative top-0.5 ${className}`}
         >

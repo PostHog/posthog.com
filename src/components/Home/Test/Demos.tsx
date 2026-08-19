@@ -7,6 +7,7 @@ import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import useProduct from 'hooks/useProduct'
+import { productUrl } from 'data/tools'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import OSTable from 'components/OSTable'
@@ -61,7 +62,7 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
                         iconClassName={`text-${product.color}`}
                         color={product.color}
                         className="font-medium text-primary hover:text-primary"
-                        to={`/${product.slug}`}
+                        to={productUrl(product)}
                         state={{ newWindow: true }}
                         asLink
                     >

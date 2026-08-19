@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import useProduct from '../../hooks/useProduct'
+import { productUrl } from '../../data/tools'
 import { IconArrowRight, IconArrowUpRight, IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { IconApple } from 'components/OSIcons'
 import Editor from 'components/Editor'
@@ -272,11 +273,12 @@ const AIDemos = () => {
 
 const ProductRow = ({ product }: { product: any }) => {
     const isWIP = product.status === 'WIP'
+    const url = productUrl(product)
 
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault()
-        if (isWIP) return
-        navigate(`/${product.slug}`, { state: { newWindow: true } })
+        if (isWIP || !url) return
+        navigate(url, { state: { newWindow: true } })
     }
 
     return (
