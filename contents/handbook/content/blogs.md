@@ -73,11 +73,7 @@ Once it's approved, go ahead and merge to publish!
 ## Resources
 
 - [Blog post template](https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit) – if you'd rather draft in Google Docs
-- [Style guide](/handbook/content/posthog-style-guide) – how we write
 - [Brand foundations](/handbook/brand/foundations) – how we sound
-- [Writing metadata](/handbook/content/metadata) – frontmatter, folders, and tags
-- [SEO best practices](/handbook/content/seo-guide) – structure, headlines, and internal linking
-- [Social media](/handbook/content/social-media) and [LinkedIn](/handbook/content/linkedin) – how to distribute it
 - [Blog graphics Figma](https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&type=design&mode=design) – hero image templates
 - [Art and branding requests](/handbook/brand/art-requests) – for custom artwork
 - [MDX components](/handbook/engineering/posthog-com/markdown) – callouts, screenshots, and videos you can use in Markdown
