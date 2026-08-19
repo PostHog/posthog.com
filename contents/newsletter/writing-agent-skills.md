@@ -19,7 +19,7 @@ seo:
     and knowing when not to write one.
 ---
 
-We’re officially skill-pilled. PostHog teams have published 226 skills to our internal [skill store](/docs/ai-engineering/skills-store), and we have 187 `SKILL.md` files across 28 different products in our codebase. Everyone uses skills to both improve PostHog and their own workflows.
+We’re officially skill-pilled. PostHog teams have published 226 skills to our internal [skill store](/docs/skills), and we have 187 `SKILL.md` files across 28 different products in our codebase. Everyone uses skills to both improve PostHog and their own workflows.
 
 They’re essential because agents have amnesia. Every conversation, they rediscover your codebase and workflows from scratch. They pick the wrong tool, fall for the same gotchas, and repeat old mistakes. They figure it out eventually, but only after wasting time and tokens.
 

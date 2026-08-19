@@ -459,6 +459,18 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Students',
+                    link: '/students',
+                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Incubator',
+                    link: '/community-incubator',
+                    icon: <Icons.IconFlask className="size-4 text-seagreen" />,
+                },
+                {
+                    type: 'item',
                     label: 'Cool tech jobs',
                     link: '/cool-tech-jobs',
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
@@ -531,6 +543,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Careers',
                     link: '/careers',
                     icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'Side projects',
+                    link: '/side-projects',
+                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
                 },
                 {
                     type: 'item',

@@ -53,6 +53,16 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['ai-gateway'],
         label: false,
     },
+    'ai-plugin': {
+        feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
+        owner: ['self-driving'],
+        notes: (
+            <>
+                <TeamMember name="Georgiy Tarasov" /> is the point owner.
+            </>
+        ),
+        label: false,
+    },
     alerts: {
         feature: 'Alerts',
         owner: ['analytics-platform'],
@@ -123,7 +133,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     comments: {
         feature: 'Comments/Discussions',
-        owner: ['platform-features'],
+        owner: ['conversations'],
         label: 'feature/comments',
     },
     'csp-tracking': {

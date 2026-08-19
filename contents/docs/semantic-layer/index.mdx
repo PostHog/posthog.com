@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import AlphaCallout from './_snippets/alpha-callout'
+import BetaCallout from './_snippets/beta-callout'
 
 Ask three AI tools "what's our MRR?" and you get three different queries and three different numbers. Not because the tools are bad, but because what "MRR" means at your company lives in people's heads. Every agent session reinvents the definition from scratch, and every reinvention is slightly different.
 
@@ -14,7 +14,7 @@ The guiding principle: **AI generates, a human owns.** Agents can propose metric
 
 One naming note: the semantic layer is powered by PostHog's data catalog, so you'll see `data-catalog` in MCP tool names (like `data-catalog-metric-run`) and API scopes (`data_catalog`, `data_catalog_approval`).
 
-<AlphaCallout />
+<BetaCallout />
 
 ## What's in the semantic layer
 
@@ -22,7 +22,7 @@ The catalog holds three kinds of governed facts:
 
 ### Metrics
 
-A [metric](/docs/semantic-layer/metrics) is a canonical business measure: a write-once name like `mrr`, a description, a unit, an owner, and a definition that's either an executable query or a set of calculation steps. Metrics move through a `proposed` → `approved` lifecycle, and PostHog detects when an approved definition drifts from the insight it was created from.
+A [metric](/docs/semantic-layer/metrics) is a canonical business measure: a name like `mrr`, a description, a unit, an owner, and a definition that's either an executable query or a set of calculation steps. Metrics move through a `proposed` → `approved` lifecycle, and PostHog detects when an approved definition drifts from the insight it was created from.
 
 ### Table certifications
 

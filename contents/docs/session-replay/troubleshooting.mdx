@@ -4,10 +4,6 @@ title: Session Replay troubleshooting
 
 This page covers troubleshooting for Session Replay. For setup, see the [installation guides](/docs/session-replay/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Update `posthog-js`
 
 Having trouble with recordings? The most common solution is to update `posthog-js` to the latest version.
@@ -226,6 +222,16 @@ The most common reason for this is that you're trying to filter by events that w
 Session Replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events.
+
+## Filters return recordings that don't seem to match
+
+Three filter behaviors are intentional but can be surprising when a recording shows up that doesn't look like it matches:
+
+**Person filters match the whole person, including older sessions.** Filtering by a person property (like an email) matches every session belonging to that person, across all of their identifiers. When an anonymous session is later linked to a person via `identify()` or `alias()`, that older session starts matching the person's filters too, even though no event inside it carries the filtered property. To see why a specific recording matched, open it and check the highlighted matching events in the player sidebar.
+
+**"Did not perform event" filters only look within the selected date range.** A filter like "users who did not perform `signed_up`" excludes sessions where that event happened inside the queried date range (plus a day of margin). Someone who performed the event before the range still appears. To exclude people based on their full history, use a [cohort](/docs/data/cohorts) with an event condition instead.
+
+**Group filters match any event in the session.** Filtering recordings by a group matches every session containing at least one event tagged with that group, regardless of who sent it. A single group-tagged event inside an otherwise unrelated session is enough for the recording to match.
 
 ## Recording not found
 

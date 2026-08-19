@@ -26,12 +26,19 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         hasStaticPage: true,
     },
     {
+        id: 'ai-observability',
+        title: 'AI Observability',
+        description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
+        token: 'purple',
+        volume: 2,
+    },
+    {
         id: 'context-warehouse',
         title: 'Context Warehouse',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
         token: 'blue',
-        volume: 2,
+        volume: 3,
     },
 ]
 

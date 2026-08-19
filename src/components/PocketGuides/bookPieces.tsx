@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Link from 'components/Link'
+import { SingleCodeBlock } from 'components/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 
@@ -139,6 +140,11 @@ export function SeeAlso({ children }: { children: React.ReactNode }): JSX.Elemen
     )
 }
 
+// Borrows .article-content, overriding its red 'unstyled' alarm color and its fixed font
+// sizes – the book's type is em-based so the Aa control can scale everything together.
+const NATIVE_CONTENT =
+    'article-content !text-secondary [&_li]:![font-size:1em] [&_p]:![font-size:1em] [&_li]:!leading-relaxed [&_p]:!leading-relaxed [&_li]:![list-style-type:revert] [&_ul]:![list-style-type:revert] [&_ol]:![list-style-type:revert] [&_ul]:[padding-left:revert] [&_ol]:[padding-left:revert]'
+
 /** Prose defaults. The page container is `not-prose`, so every tag is styled here. */
 export const proseComponents = {
     // Em-based sizes AND margins: the reading-size control scales type and rhythm together.
@@ -155,17 +161,45 @@ export const proseComponents = {
     ),
     h3: (props: any) => <h3 className="mb-[0.3em] mt-[0.65em] text-[1em] font-bold text-primary" {...props} />,
     p: (props: any) => <p className="mb-[0.8em] text-[1em] leading-relaxed text-secondary last:mb-0" {...props} />,
+    // Lists and tables borrow the site's native docs styling (.article-content in global.css),
+    // wrapped per element because the class also styles headings/paragraphs, which the book owns.
     ul: (props: any) => (
-        <ul className="mb-[0.8em] mt-0 list-disc space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ul {...props} />
+        </div>
     ),
     ol: (props: any) => (
-        <ol className="mb-[0.8em] mt-0 list-decimal space-y-1 pl-5 text-[1em] text-secondary" {...props} />
+        <div className={NATIVE_CONTENT}>
+            <ol {...props} />
+        </div>
     ),
-    li: (props: any) => <li className="leading-relaxed" {...props} />,
+    // Cells get primary directly – the wrapper's secondary is for prose, and table text is data.
+    table: (props: any) => (
+        <div className={`${NATIVE_CONTENT} my-[0.8em] overflow-x-auto [&_td]:text-primary [&_th]:text-primary`}>
+            <table {...props} />
+        </div>
+    ),
     strong: (props: any) => <strong className="font-bold text-primary" {...props} />,
+    // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`,
+    // so `pre` only has to get out of the way – a div inside it would be invalid nesting.
+    // Without this a fence renders unstyled and runs past the page column.
+    pre: ({ children }: any) => <>{children}</>,
+    code: ({ className, children }: any) => (
+        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+            <SingleCodeBlock
+                language={String(className ?? '').replace('language-', '') || 'text'}
+                showCopy
+                showAskAI={false}
+            >
+                {String(children).replace(/\n$/, '')}
+            </SingleCodeBlock>
+        </div>
+    ),
+    // text-primary, not inherited: the chips sit on a tinted background inside secondary-colored
+    // prose, and the small mono face can't afford the double contrast loss.
     inlineCode: (props: any) => (
         <code
-            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] dark:bg-accent-dark"
+            className="rounded border border-primary bg-accent px-1 py-0.5 text-[0.85em] text-primary dark:bg-accent-dark"
             {...props}
         />
     ),

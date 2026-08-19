@@ -736,13 +736,13 @@ importers:
 
   plugins/gatsby-remark-video: {}
 
+  plugins/gatsby-source-git-metadata: {}
+
   plugins/gatsby-source-squeak:
     dependencies:
       gatsby-source-filesystem:
         specifier: ^4.20.0
         version: 4.25.0(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.2)(webpack-hot-middleware@2.26.1))
-
-  plugins/gatsby-source-strapi-pages: {}
 
   plugins/gatsby-transformer-cloudinary:
     dependencies:

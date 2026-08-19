@@ -10,8 +10,10 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import EvalRuns, { EvalRun } from './EvalRuns'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
+import TraceTree, { TraceTreeRow } from './TraceTree'
 import { useEntry, useTemplate } from './bookContext'
 import { normalizeUrl } from './bookModel'
 import { useSkillFiles } from './useSkillFile'
@@ -235,6 +237,44 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** The evaluation's runs tab, annotated – what a scored generation looks like in the app. */
+export function EvalRunsFigure({
+    n = 1,
+    caption,
+    legend,
+    runs,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    runs: EvalRun[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend ?? <AnatomyHint />}>
+            <EvalRuns runs={runs} />
+        </Fig>
+    )
+}
+
+/** One trace, drawn: the calls a single interaction made, and what each one cost. */
+export function TraceFigure({
+    n = 1,
+    caption,
+    legend,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    rows: TraceTreeRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <TraceTree rows={rows} />
         </Fig>
     )
 }

@@ -349,7 +349,7 @@ export default function ProductsTest(): JSX.Element {
                             {/*
                         <div className="flex flex-wrap items-center gap-3 not-prose">
                             <Link
-                                to="/download"
+                                to="https://desktop.posthog.com/download"
                                 state={{ newWindow: true }}
                                 className="inline-flex items-center gap-2 bg-dark text-white dark:bg-white dark:text-dark font-semibold text-sm px-4 py-2.5 rounded-md hover:opacity-90 no-underline"
                             >

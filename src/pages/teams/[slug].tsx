@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { graphql, useStaticQuery, navigate } from 'gatsby'
 import { useUser } from 'hooks/useUser'
-import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock } from '@posthog/icons'
+import { IconPencil, IconInfo, IconX, IconCrown, IconShieldLock, IconArchive } from '@posthog/icons'
 import dayjs from 'dayjs'
 import OSButton from 'components/OSButton'
 import ReaderView from 'components/ReaderView'
@@ -490,6 +490,31 @@ export default function TeamPage(props: TeamPageProps) {
         setEditing(false)
     }
 
+    const publishedAt = (team as any)?.attributes?.publishedAt
+
+    const handleUnpublishTeam = async () => {
+        if (!(team as any)?.id || !publishedAt) return
+        const confirmed = window.confirm(
+            'Unpublishing will remove this team from the site on the next build. You can republish it later. No data will be lost.'
+        )
+        if (!confirmed) return
+
+        await updateTeam({ publishedAt: null })
+        addToast({
+            title: 'Team unpublished',
+            description: 'This change will appear on the next build.',
+        })
+    }
+
+    const handlePublishTeam = async () => {
+        if (!(team as any)?.id || publishedAt) return
+        await updateTeam({ publishedAt: new Date().toISOString() })
+        addToast({
+            title: 'Team published',
+            description: 'This change will appear on the next build.',
+        })
+    }
+
     // Data calculations
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -560,18 +585,34 @@ export default function TeamPage(props: TeamPageProps) {
     const editButton = isModerator ? (
         <>
             {!editing && (
-                <OSButton
-                    size="md"
-                    tooltip={
-                        <>
-                            <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" /> Edit
-                            team details
-                        </>
-                    }
-                    tooltipDelay={0}
-                    icon={<IconPencil />}
-                    onClick={() => setEditing(true)}
-                />
+                <>
+                    <OSButton
+                        size="md"
+                        tooltip={
+                            <>
+                                <IconShieldLock className="size-5 relative top-[-2px] inline-block text-secondary" />{' '}
+                                Edit team details
+                            </>
+                        }
+                        tooltipDelay={0}
+                        icon={<IconPencil />}
+                        onClick={() => setEditing(true)}
+                    />
+                    {(team as any)?.id &&
+                        (publishedAt ? (
+                            <Tooltip
+                                trigger={<OSButton size="md" icon={<IconArchive />} onClick={handleUnpublishTeam} />}
+                                delay={0}
+                            >
+                                <IconShieldLock className="size-6 inline-block relative -top-px text-secondary" />{' '}
+                                Unpublish team
+                            </Tooltip>
+                        ) : (
+                            <OSButton size="md" variant="primary" onClick={handlePublishTeam}>
+                                Publish
+                            </OSButton>
+                        ))}
+                </>
             )}
         </>
     ) : null
