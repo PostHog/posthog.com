@@ -34,6 +34,7 @@ export const webAnalytics = {
     wizardSupport: true,
     billedWith: 'Product Analytics',
     billedWithSlug: 'product-analytics',
+    hideFromCalculator: true,
     shortDescription: 'Privacy-focused web analytics',
     pricingDescription:
         'Web Analytics is billed as Product Analytics events, so you get access to both products for the same price. 1 million events free monthly. Anonymous events cost 10x less than identified. Most sites never pay anything. Even high-traffic sites pay way less than GA 360.',

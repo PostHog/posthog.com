@@ -1,8 +1,8 @@
 ---
-title: Feature flag debt
+title: Remove the feature flags you already rolled out
 shortTitle: Flag debt
 subtitle: 'Which flags are still evaluating for decisions you already made?'
-bookOrder: 3
+pocketGuideOrder: 3
 filters:
   type:
     - self-driving
@@ -100,7 +100,7 @@ report:
 
 <RightPage>
 
-# Feature flag debt
+# Remove the feature flags you already rolled out
 
 Every fully rolled out flag is a decision you've already made. Once the flag is fully rolled out, the flag chooses the same code branch every time, and the losing branch becomes dead code. If you don't clean it up, every evaluation is still billed, and the dead code clutters your codebase.
 

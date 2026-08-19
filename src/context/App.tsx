@@ -1411,6 +1411,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // Add/edit form from /side-projects. Not a route — opened via addWindow.
+    'side-project-form': {
+        size: {
+            min: {
+                width: 560,
+                height: 400,
+            },
+            max: {
+                width: 560,
+                height: 800,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     'application-success': {
         size: {
             min: {

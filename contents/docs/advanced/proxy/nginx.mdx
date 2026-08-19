@@ -71,25 +71,37 @@ server {
     listen [::]:80;
     server_name e.yourdomain.com;
 
+    resolver 8.8.8.8 8.8.4.4 valid=300s;
+    resolver_timeout 5s;
+
+    set $posthog_api_host us.i.posthog.com;
+    set $posthog_assets_host us-assets.i.posthog.com;
+
     location /static/ {
-        proxy_pass https://us-assets.i.posthog.com/static/;
-        proxy_set_header Host us-assets.i.posthog.com;
+        proxy_pass https://$posthog_assets_host;
+        proxy_set_header Host $posthog_assets_host;
         proxy_ssl_server_name on;
-        proxy_ssl_name us-assets.i.posthog.com;
+        proxy_ssl_name $posthog_assets_host;
+        proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 
     location /array/ {
-        proxy_pass https://us-assets.i.posthog.com/array/;
-        proxy_set_header Host us-assets.i.posthog.com;
+        proxy_pass https://$posthog_assets_host;
+        proxy_set_header Host $posthog_assets_host;
         proxy_ssl_server_name on;
-        proxy_ssl_name us-assets.i.posthog.com;
+        proxy_ssl_name $posthog_assets_host;
+        proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 
     location / {
-        proxy_pass https://us.i.posthog.com/;
-        proxy_set_header Host us.i.posthog.com;
+        proxy_pass https://$posthog_api_host;
+        proxy_set_header Host $posthog_api_host;
         proxy_ssl_server_name on;
-        proxy_ssl_name us.i.posthog.com;
+        proxy_ssl_name $posthog_api_host;
+        proxy_ssl_verify on;
+        proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 }
 ```
@@ -98,10 +110,14 @@ Replace `e.yourdomain.com` with your subdomain. Replace `us` with `eu` for EU re
 
 Here's what each directive does:
 
-- `proxy_pass`: The upstream URL nginx forwards requests to. The trailing slash is important—it tells nginx to replace the matched location path.
+- `resolver`: Re-resolves PostHog's upstream domains every five minutes so nginx picks up DNS changes without a reload. Use a DNS resolver available from your server if it cannot reach the resolvers shown above.
+- `set`: Stores each upstream hostname in a variable. nginx only re-resolves names used through variables in `proxy_pass`.
+- `proxy_pass`: The upstream URL nginx forwards requests to. Omitting a URI preserves the complete request path.
 - `proxy_set_header Host`: Sets the Host header sent to PostHog. Without this, PostHog receives your domain and can't route the request, causing 401 errors.
 - `proxy_ssl_server_name on`: Enables Server Name Indication (SNI) for the upstream SSL connection. Required because PostHog uses virtual hosting.
 - `proxy_ssl_name`: The hostname to use for SNI. Must match the upstream domain.
+- `proxy_ssl_verify on`: Verifies that the upstream certificate is valid for the hostname in `proxy_ssl_name`.
+- `proxy_ssl_trusted_certificate`: Points nginx to the operating system's trusted certificate authorities. Change this path if your distribution stores its CA bundle elsewhere.
 
 Enable the site by creating a symlink:
 
@@ -231,28 +247,40 @@ http {
         resolver 8.8.8.8 8.8.4.4 valid=300s;
         resolver_timeout 5s;
 
+        set $posthog_api_host "${POSTHOG_CLOUD_REGION}.i.posthog.com";
+        set $posthog_assets_host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
+
         location /static/ {
-            proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/static/;
-            proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
+            proxy_pass https://$posthog_assets_host;
+            proxy_set_header Host $posthog_assets_host;
             proxy_ssl_server_name on;
+            proxy_ssl_name $posthog_assets_host;
+            proxy_ssl_verify on;
+            proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
             add_header 'Access-Control-Allow-Origin' '*' always;
         }
 
         location /array/ {
-            proxy_pass https://${POSTHOG_CLOUD_REGION}-assets.i.posthog.com/array/;
-            proxy_set_header Host "${POSTHOG_CLOUD_REGION}-assets.i.posthog.com";
+            proxy_pass https://$posthog_assets_host;
+            proxy_set_header Host $posthog_assets_host;
             proxy_ssl_server_name on;
+            proxy_ssl_name $posthog_assets_host;
+            proxy_ssl_verify on;
+            proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
             add_header 'Access-Control-Allow-Origin' '*' always;
         }
 
         location / {
-            proxy_pass https://${POSTHOG_CLOUD_REGION}.i.posthog.com;
-            proxy_set_header Host "${POSTHOG_CLOUD_REGION}.i.posthog.com";
+            proxy_pass https://$posthog_api_host;
+            proxy_set_header Host $posthog_api_host;
             proxy_ssl_server_name on;
+            proxy_ssl_name $posthog_api_host;
+            proxy_ssl_verify on;
+            proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
             add_header 'Access-Control-Allow-Origin' '*' always;
@@ -261,7 +289,7 @@ http {
 }
 ```
 
-The `resolver` directive configures DNS resolution for the upstream domains. This is required in containers because nginx resolves hostnames at startup, and container DNS may not be available immediately.
+The `resolver` directive and hostname variables make nginx refresh the upstream IP addresses every five minutes. The trusted certificate bundle included in the Alpine image lets nginx verify PostHog's upstream certificates.
 
 </Step>
 
