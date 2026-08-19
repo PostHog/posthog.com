@@ -6,7 +6,7 @@ import React from 'react'
 
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
-/** Report-bearing guides per volume (the 101 doesn't count), so the cover is never stale. */
+/** Use cases per volume, so the cover is never stale. Front matter and the 101 don't count. */
 function useGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
@@ -17,9 +17,7 @@ function useGuideCounts(): Record<string, number> {
                     }
                     frontmatter {
                         title
-                        report {
-                            title
-                        }
+                        pocketGuideOrder
                     }
                 }
             }
@@ -33,8 +31,9 @@ function useGuideCounts(): Record<string, number> {
         if (!volume || !guide || guide.startsWith('_') || !node.frontmatter?.title) {
             continue
         }
-        // A report in the frontmatter is what makes a page a guide; the 101 has none.
-        if (node.frontmatter.report?.title) {
+        // Reading order says what a page is: 0 is the front matter, 1 the 101, 2+ the use cases.
+        // Counting those rather than scout reports keeps volumes whose answer isn't a scout honest.
+        if (node.frontmatter.pocketGuideOrder >= 2) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

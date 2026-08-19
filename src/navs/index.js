@@ -1273,6 +1273,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/overview',
             },
             {
+                name: 'Metric conventions',
+                url: '/handbook/growth/revops/metric-conventions',
+            },
+            {
                 name: 'Revenue adjustments',
                 url: '/handbook/growth/revops/revenue-adjustments',
             },
@@ -7119,6 +7123,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'MCP SDK v2',
+                    url: '/docs/mcp-analytics/sdk-v2',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
                     name: 'Custom servers',
                     url: '/docs/mcp-analytics/custom-servers',
                     icon: 'IconServer',
@@ -8323,7 +8333,17 @@ export const docsMenu = {
                         },
                         {
                             name: 'Customer-facing analytics',
-                            url: '/docs/endpoints/customer-facing-analytics',
+                            url: '/docs/data/embedded-analytics-projects',
+                            children: [
+                                {
+                                    name: 'Project setup',
+                                    url: '/docs/data/embedded-analytics-projects',
+                                },
+                                {
+                                    name: 'Build with Endpoints',
+                                    url: '/docs/endpoints/customer-facing-analytics',
+                                },
+                            ],
                         },
                         {
                             name: 'Enrich internal tools with PostHog data',

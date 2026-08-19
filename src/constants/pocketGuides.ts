@@ -26,12 +26,11 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         hasStaticPage: true,
     },
     {
-        id: 'data-warehouse',
-        title: 'Data warehouse',
-        description: 'Getting your other systems into PostHog, and asking questions across all of it.',
-        token: 'blue',
+        id: 'ai-observability',
+        title: 'AI Observability',
+        description: 'Tracing every LLM call, scoring what comes back, and seeing what users do with it.',
+        token: 'purple',
         volume: 2,
-        comingSoon: true,
     },
 ]
 
