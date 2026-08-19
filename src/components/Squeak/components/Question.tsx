@@ -57,20 +57,6 @@ type QuestionProps = {
 
 export const CurrentQuestionContext = createContext<any>({})
 
-const createSupportTicket = async (
-    posthog: NonNullable<ReturnType<typeof usePostHog>>,
-    message: string,
-    traits: { name: string | null; email: string | null }
-) => {
-    if (!posthog.conversations?.isAvailable?.()) {
-        throw new Error('Conversations are not available')
-    }
-    // newTicket=true so each escalate creates a fresh support ticket
-    const ticket = await posthog.conversations.sendMessage(message, traits, true)
-    if (!ticket) throw new Error('Failed to create support ticket')
-    return ticket
-}
-
 const TopicSelect = (props: {
     selectedTopics: StrapiData<TopicData[]>
     onPinTopics?: (topics: StrapiRecord<TopicData>[]) => void
@@ -400,37 +386,14 @@ export function Question(props: QuestionProps) {
     } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
-    const { user, notifications, setNotifications, isModerator, isChampion, canModerate } = useUser()
+    const { user, notifications, setNotifications, isModerator, canModerate } = useUser()
     const { appWindow } = useWindow()
     const { addToast } = useToast()
     const posthog = usePostHog()
     const [escalateState, setEscalateState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-    const [conversationsAvailable, setConversationsAvailable] = useState(false)
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
-
-    // posthog-js and its conversations widget load asynchronously, so a single
-    // isAvailable() check at render time can miss it — poll briefly instead
-    useEffect(() => {
-        if (!isModerator || !isInForum) return
-        const isAvailable = () => !!window?.posthog?.conversations?.isAvailable?.()
-        if (isAvailable()) {
-            setConversationsAvailable(true)
-            return
-        }
-        let attempts = 0
-        const interval = setInterval(() => {
-            attempts++
-            if (isAvailable()) {
-                setConversationsAvailable(true)
-                clearInterval(interval)
-            } else if (attempts >= 20) {
-                clearInterval(interval)
-            }
-        }, 500)
-        return () => clearInterval(interval)
-    }, [isModerator, isInForum])
 
     useEffect(() => {
         if (
@@ -488,91 +451,32 @@ export function Question(props: QuestionProps) {
         }
     }
 
+    /**
+     * Posts the thread to the escalation Slack channel for a PostHog employee to pick
+     * up and route — support ticket, another team, or handled in the thread.
+     *
+     * This used to open a support ticket directly through the conversations widget.
+     * Two reasons it doesn't any more: replies on those tickets only reached the
+     * throwaway widget session rather than the question author, and champions can't
+     * use that path at all because attributing the ticket needs the author's email,
+     * which they aren't allowed to read. Strapi has the email server-side, so one
+     * request works for both roles and the email never reaches the browser.
+     */
     const handleEscalateToSupport = async () => {
         if (escalateState === 'sending' || escalateState === 'sent') return
         setEscalateState('sending')
-
-        // Champions take a different path. Opening a support ticket attributes it to the
-        // question author, which needs their email — and champions aren't allowed to read
-        // it. Escalating through Strapi lets the server attach the email and post it to
-        // Slack, where a moderator decides whether it becomes a ticket.
-        if (isChampion) {
-            try {
-                await escalate()
-                setEscalateState('sent')
-                addToast({
-                    title: 'Escalated',
-                    description: 'A PostHog moderator has been notified in Slack and will take a look.',
-                })
-            } catch (error) {
-                setEscalateState('error')
-                addToast({
-                    title: 'Escalation failed',
-                    description: "The moderators couldn't be notified. Please try again.",
-                    error: true,
-                })
-                posthog?.captureException?.(error)
-            }
-            return
-        }
-
-        const authorProfile = questionData.attributes.profile?.data
-        const authorName =
-            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
-            'Anonymous'
-        const authorEmail = authorProfile?.attributes?.user?.data?.attributes?.email
-        const moderatorName = [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ')
-        const topics = questionData.attributes.topics?.data?.map((topic) => topic.attributes.label).join(', ')
-        const message = [
-            'Community question escalated by a moderator',
-            `Title: ${questionData.attributes.subject}`,
-            `Link: https://posthog.com/questions/${questionData.attributes.permalink}`,
-            `Author: ${authorName}${authorEmail ? ` (${authorEmail})` : ''}`,
-            topics ? `Topics: ${topics}` : null,
-            `Escalated by: ${moderatorName || 'Moderator'} (${user?.email})`,
-            // Widget tickets only deliver replies to the widget session that created them,
-            // which is a throwaway here — make sure support contacts the author directly
-            `Note: replies in this thread won't reach the author. Reply on the community question above (they'll be notified there)${
-                authorEmail ? `, or email them directly at ${authorEmail}` : ''
-            }.`,
-        ]
-            .filter(Boolean)
-            .join('\n')
         try {
-            if (!posthog) throw new Error('PostHog is not loaded')
-            // Attribute the ticket to the question author so support replies reach them
-            const ticket = await createSupportTicket(posthog, message, {
-                name: authorName,
-                email: authorEmail || null,
-            })
+            await escalate()
             setEscalateState('sent')
             addToast({
                 title: 'Escalated to support',
-                // Default 3s is too short to read and click the ticket link
-                duration: 10000,
-                description: (
-                    <>
-                        A support ticket was created for this question.{' '}
-                        {ticket?.ticket_id && (
-                            <Link
-                                // Tickets live in the posthog.com project (id 2) on US Cloud
-                                to={`${
-                                    process.env.GATSBY_POSTHOG_UI_HOST || 'https://us.posthog.com'
-                                }/project/2/support/tickets/${ticket.ticket_id}`}
-                                external
-                                className="font-semibold underline"
-                            >
-                                View the ticket
-                            </Link>
-                        )}
-                    </>
-                ),
+                description: 'The PostHog team has been notified in Slack and will pick this up.',
             })
         } catch (error) {
             setEscalateState('error')
             addToast({
                 title: 'Escalation failed',
-                description: "The support ticket couldn't be created. Please try again.",
+                description: "The team couldn't be notified. Please try again.",
                 error: true,
             })
             posthog?.captureException?.(error)
@@ -815,30 +719,21 @@ export function Question(props: QuestionProps) {
                                                     </Link>
                                                 </>
                                             )}
-                                            {/*
-                                             * Moderators need the conversations widget to open a
-                                             * support ticket. Champions escalate through Strapi
-                                             * instead, so they don't wait on it.
-                                             */}
-                                            {(isChampion || conversationsAvailable) && (
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="sm"
-                                                    onClick={handleEscalateToSupport}
-                                                    disabled={escalateState === 'sending' || escalateState === 'sent'}
-                                                >
-                                                    {escalateState === 'sending'
-                                                        ? 'Escalating…'
-                                                        : escalateState === 'sent'
-                                                        ? 'Escalated ✓'
-                                                        : 'Escalate to support'}
-                                                </OSButton>
-                                            )}
+                                            <OSButton
+                                                variant="secondary"
+                                                size="sm"
+                                                onClick={handleEscalateToSupport}
+                                                disabled={escalateState === 'sending' || escalateState === 'sent'}
+                                            >
+                                                {escalateState === 'sending'
+                                                    ? 'Escalating…'
+                                                    : escalateState === 'sent'
+                                                    ? 'Escalated ✓'
+                                                    : 'Escalate to support'}
+                                            </OSButton>
                                             {escalateState === 'error' && (
                                                 <span className="text-red text-xs font-semibold">
-                                                    {isChampion
-                                                        ? "Couldn't notify moderators. Try again?"
-                                                        : "Couldn't create ticket. Try again?"}
+                                                    Couldn't notify the team. Try again?
                                                 </span>
                                             )}
                                         </p>
