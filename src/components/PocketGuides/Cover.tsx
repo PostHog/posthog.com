@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
+import { HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
@@ -10,6 +10,7 @@ import { PocketGuideVolume } from '../../constants/pocketGuides'
 const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     'self-driving': HedgehogImTheDriver,
     'ai-observability': HedgehogXRay,
+    'context-warehouse': HedgehogDollHouse,
 }
 
 interface CoverProps {

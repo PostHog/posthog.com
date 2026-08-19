@@ -60,7 +60,8 @@ const frameContents = [
 
     {
         title: 'Taught people how to actually use post-its',
-        content: "A company will not find success unless they are in the top 1 percentile of using post-its. You can learn how to do that <a href='https://posthog.com/academy' target='_blank'>too</a>.",
+        content:
+            "A company will not find success unless they are in the top 1 percentile of using post-its. You can learn how to do that <a href='https://posthog.com/academy' target='_blank'>too</a>.",
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/postblock_76a0980525"

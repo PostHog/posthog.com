@@ -620,6 +620,10 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
+                name: 'Writing blogs',
+                url: '/handbook/content/blogs',
+            },
+            {
                 name: 'Video',
                 url: '/handbook/marketing/video',
                 children: [
