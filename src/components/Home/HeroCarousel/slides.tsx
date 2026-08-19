@@ -8,7 +8,7 @@ import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
-import { productUrl } from 'data/tools'
+import { productUrl } from '../../../data/tools'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 const pickedSourceSlugs = [
