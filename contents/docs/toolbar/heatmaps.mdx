@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx";
+import { PostHogIPsInline } from 'components/Docs/PostHogIPs'
 
 Heatmaps shows you how users are interacting with elements on your website or app.
 
@@ -36,7 +36,7 @@ There are three kinds of heatmaps in the toolbar:
 
 You can also view heatmaps directly in the PostHog. This method is currently in beta and provides almost the same functionality as the toolbar.
 
-<DetailPostHogIPs />
+If your site sits behind a firewall, WAF, or bot protection, see [firewalls, WAFs, and bot protection](#firewalls-wafs-and-bot-protection) before you start. PostHog needs to reach the page to capture it.
 
 To view heatmaps in the app:
 
@@ -188,6 +188,51 @@ For example, if the product pages on an ecommerce site use a URL format of `http
 
 ![Toolbar heatmaps popover menu being used to add a wildcard into the URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-heatmap-wildcard.png)
 
+## Firewalls, WAFs, and bot protection
+
+Capturing a heatmap involves two different sources, and a firewall or bot protection rule can block either one.
+
+**PostHog's own servers** fetch your page to check whether it can be embedded in an `<iframe>`. These requests come from PostHog's fixed IPs:
+
+<PostHogIPsInline />
+
+**A third-party headless browser service** ([Browserless](https://www.browserless.io)) then loads and renders your page for the screenshot. These requests come from that service's worker fleet rather than from PostHog, and they use a default `HeadlessChrome` user agent.
+
+Allowing only PostHog's IPs isn't enough, because the render never comes from them. When a WAF blocks the render, the screenshot ends up showing whatever error page your site returned.
+
+### Allow the request by its header
+
+Every heatmap screenshot request sends this header:
+
+```
+X-PostHog-Heatmap-Screenshot: 1
+```
+
+Matching on it is the most stable option, because it doesn't change when the rendering service rotates its IPs. Write a rule that allows requests carrying this header, rather than allowing headless browsers as a whole.
+
+The header identifies the request, but it doesn't authenticate it. Anyone can send it, so pair it with the IP allowlist below if the rule needs to be tamper-resistant.
+
+### Allow the rendering service's IPs
+
+Browserless publishes the current IPs of its worker fleet. PostHog Cloud US renders from the `sfo` region:
+
+```bash
+curl -s https://api.browserless.io/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ workerIps { sfo lon ams lastUpdate } }"}'
+```
+
+If you aren't sure which region applies to you, allow all three.
+
+Two things to watch:
+
+- Allow the individual addresses, not the blocks that contain them. They sit inside shared DigitalOcean ranges, so allowing a whole `/16` would also admit every other tenant in that range.
+- The fleet changes every few months. Refresh the list on a schedule, and use the `lastUpdate` field to detect when it has drifted.
+
+### Scope the exclusion to one page
+
+If you'd rather not maintain an IP list at all, scope your bot protection exclusion to the specific URL you're capturing. The rest of your site keeps full protection.
+
 ## Troubleshooting
 
 ### Heatmap is captured, but site is not showing
@@ -206,3 +251,5 @@ In app, PostHog overlays the heatmap over your site in an iframe. You can allow 
 If screenshot generation fails or your site blocks iframe embedding (due to auth walls, bot protection, or `Content-Security-Policy` restrictions), PostHog automatically searches for recent session recordings that visited the same page and suggests up to three of them.
 
 Click any suggested recording to open the session player, then click **View heatmap** to view heatmap data overlaid on the recording snapshot. This provides an alternative path to heatmap data when traditional rendering methods don't work.
+
+If the screenshot renders but shows an error page from your own site, a firewall or bot protection rule is blocking the render. See [firewalls, WAFs, and bot protection](#firewalls-wafs-and-bot-protection).

@@ -1,8 +1,11 @@
 // Single source of truth for PostHog's IP addresses: the fixed, public set PostHog
 // connects from when reaching a customer-controlled endpoint (webhook destinations,
-// data warehouse sources, batch exports, and WAF-protected sites for features like
-// heatmaps). These are PostHog's outbound/egress IPs; from the customer's side they
-// arrive as inbound connections to allowlist.
+// data warehouse sources, and batch exports). These are PostHog's outbound/egress IPs;
+// from the customer's side they arrive as inbound connections to allowlist.
+//
+// These cover only what PostHog requests directly. Heatmap screenshots are rendered by a
+// third-party headless browser service that has its own IPs, so allowlisting these is not
+// sufficient for that feature. See contents/docs/toolbar/heatmaps.mdx.
 //
 // If they ever change, update them here only. Every docs surface renders them via
 // the components in components/Docs/PostHogIPs.
