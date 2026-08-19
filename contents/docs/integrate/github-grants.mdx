@@ -22,7 +22,7 @@ Two conditions, and the second is not self-serve:
 1. You must be a **confidential client**. A public client is identified only by a `client_id` anyone can send, which proves nothing, so it gets a `403` no matter what it sends. See [becoming a confidential client](#becoming-a-confidential-client).
 2. PostHog must grant your partner record `can_use_github_grants` (and `can_start_wizard_runs` for the run itself). Registering yourself does not set these – publishing a metadata document that declares `private_key_jwt` would otherwise clear a confidential-only gate with no PostHog involvement at all.
 
-**We don't grant this by default.** These endpoints let you broker your users' GitHub access and open pull requests on their repositories, so it's a level of trust we extend deliberately rather than to anyone who registers. Email [team-growth@posthog.com](mailto:team-growth@posthog.com) and tell us what you're building, who your users are, and what you want the wizard to do for them. If it's a fit we'll enable the capability and give you the client ID of the PostHog GitHub App your users authorize against, which you can't get any other way.
+**We don't grant this by default.** These endpoints let you broker your users' GitHub access and open pull requests on their repositories, so it's a level of trust we extend deliberately rather than to anyone who registers. Open a [support request](https://us.posthog.com/#panel=support%3Asupport%3Alogin%3A%3Atrue) in the app, choosing **Authentication** as the topic, and tell us what you're building, who your users are, and what you want the wizard to do for them. If it's a fit we'll enable the capability and give you the client ID of the PostHog GitHub App your users authorize against, which you can't get any other way.
 
 The rest of the [provisioning API](/docs/integrate/provisioning) is self-serve, and stays that way whether or not we say yes.
 
@@ -305,7 +305,11 @@ function clientAssertion() {
 
 Send it as `client_assertion`, alongside `client_assertion_type` set to `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, on `account_requests`, `oauth/token` (both grant types), and the GitHub grant endpoints. Both go in the JSON body, except on `GET` requests, which have no body and take them as query parameters instead.
 
-> **Each assertion is single use.** PostHog remembers the `jti` until the assertion would have expired, so reusing one gets rejected as a replay. Mint a fresh assertion per request, including on retries.
+<CalloutBox icon="IconInfo" title="Each assertion is single use" type="fyi">
+
+PostHog remembers the `jti` until the assertion would have expired, so reusing one gets rejected as a replay. Mint a fresh assertion per request, including on retries.
+
+</CalloutBox>
 
 The `aud` must name the region you are calling. An assertion minted for `us.posthog.com` is not accepted by `eu.posthog.com`.
 
@@ -317,7 +321,7 @@ Rotation is yours to do, and needs an overlap window because PostHog caches your
 2. Publish **both** public keys in your JWK Set, and start signing with the new one. Anything holding a cached copy of the old set still verifies your old key, so nothing breaks mid-rotation.
 3. After an hour, drop the old key from the set.
 
-Skipping step 2 means assertions signed with the new key fail against every cached copy of the old set until it expires.
+Skipping step 2 is not instantly fatal. An assertion naming a `kid` PostHog has not seen makes it re-fetch your JWK Set once and retry the lookup, so a rotation you forgot to overlap usually recovers by itself. That forced re-fetch is capped at one per minute per `jwks_uri`, though, so assertions arriving inside that window are still rejected. Treat it as a safety net rather than the plan.
 
 Once your set holds more than one key, the `kid` header becomes mandatory: PostHog will not try each key in turn, so a rotated-out key stops working rather than lingering.
 

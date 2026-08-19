@@ -212,7 +212,11 @@ The token is only used to prove ownership of the partner app – it isn't sent o
 You can rotate or revoke a token at any time from the same settings page.
 Revocation clears the link on the next metadata refresh, so a leaked or stale token can't keep an app linked to your org.
 
-> **Note:** The legacy top-level `posthog_verification_token` field is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
+<CalloutBox icon="IconInfo" title="The legacy top-level field still works" type="fyi">
+
+`posthog_verification_token` at the top level is still supported as a fallback. PostHog reads `com.posthog.verification_token` first and falls back to the top-level field if the nested one is absent or unrecognized. New integrations should use the `com.posthog` namespace.
+
+</CalloutBox>
 
 ### Declare OAuth scopes for your app (optional)
 
