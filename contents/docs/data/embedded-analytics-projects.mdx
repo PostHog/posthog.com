@@ -8,7 +8,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 You can use PostHog to power analytics dashboards inside your product. Capture your customers' events in PostHog, query the data, and display the results in your own UI. This is often easier than building and maintaining your own infrastructure.
 
-This is called [embedded analytics](/tutorials/embedded-analytics), or customer-facing analytics. You can store all customer data in one PostHog project and filter it by customer, or create a separate project for each customer. This guide compares both approaches to help you choose the right setup.
+This is called [embedded analytics](/tutorials/embedded-analytics), or customer-facing analytics. You have three options: store all customer data in one PostHog project and filter it by customer, create a separate project for each customer inside your organization, or provision a separate PostHog account that each customer owns. This guide compares them to help you choose the right setup.
 
 ## How person profiles can merge
 
@@ -28,17 +28,19 @@ By default, the web SDK persists the anonymous distinct ID in a cookie. If that 
 
 <CalloutBox icon="IconLightBulb" type="info" title="Our recommendation">
 
-A project per customer is better when you plan to give customers direct PostHog access or need to fully isolate customer data for security or compliance reasons.
+Use a single project when you render the dashboards yourself inside your product.
+
+Separate your customers when you plan to give them direct PostHog access, or when you need to fully isolate customer data for security or compliance reasons. If you separate them, start with the [provisioning API](/docs/integrate/provisioning): each customer gets their own organization, so you avoid both the Boost plan requirement and the combined billing described below.
 
 </CalloutBox>
 
-| | Single project | Project per customer |
-|---|---|---|
-| **Data** | Store all customer data together and filter it by a `customer_id` property. | Store each customer's data in a separate project. |
-| **Best for** | Dashboards displayed inside your product. | Giving customers direct access to PostHog. |
-| **Person profiles** | Require customer-scoped distinct IDs to prevent merging. | Automatically separated by project. |
-| **Querying** | Pass a customer identifier to an Endpoint or the Query API. | Query each customer's project. |
-| **Plan** | Available on the free plan. | Requires the [Boost plan](/platform-packages) for unlimited projects. |
+| | Single project | Project per customer | Account per customer |
+|---|---|---|---|
+| **Data** | Store all customer data together and filter it by a `customer_id` property. | Store each customer's data in a separate project inside your organization. | Store each customer's data in a separate organization that the customer owns. |
+| **Best for** | Dashboards displayed inside your product. | Giving customers direct access to PostHog. | Giving customers their own PostHog account with no signup flow. |
+| **Person profiles** | Require customer-scoped distinct IDs to prevent merging. | Automatically separated by project. | Automatically separated by organization. |
+| **Querying** | Pass a customer identifier to an Endpoint or the Query API. | Query each customer's project. | Query each customer's project with the OAuth token they granted you. |
+| **Plan** | Available on the free plan. | Requires the [Boost plan](/platform-packages) for unlimited projects. | Available on the free plan. Each customer's organization gets its own [free tier](/pricing). |
 
 ## Filter customer data in one project
 
@@ -83,9 +85,47 @@ Billing is organization-wide, so usage is combined across all projects. For exam
 
 Account for this combined usage when pricing your product.
 
+## Provision an account for each customer
+
+The [provisioning API](/docs/integrate/provisioning) creates a complete PostHog account for a customer from your backend. The customer never sees a signup form. You get back a project token to start sending events immediately, plus an OAuth access token to query their data.
+
+The difference from the setup above is who owns the data. The account belongs to your customer, in their own organization, rather than sitting in yours.
+
+### Register your app
+
+You register by hosting a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd) at an HTTPS URL on your domain. That URL becomes your client ID. There is no signup form and no client secret, and the flow uses PKCE instead.
+
+### Create an account per customer
+
+For each customer, make three calls:
+
+1. `POST /account_requests` with the customer's email creates the account and returns an authorization code.
+2. `POST /oauth/token` exchanges that code for access and refresh tokens.
+3. `POST /resources` returns the project token and host for the customer's new project.
+
+If the email already belongs to a PostHog user, the response asks you to redirect them for consent instead of creating an account silently.
+
+Use the access token to call [Endpoints](/docs/endpoints/guide-variables) or the [Query API](/docs/api/queries) against that customer's project. The token carries only the [scopes](/docs/integrate/provisioning#available-scopes) the customer consented to.
+
+### Deep link customers into PostHog
+
+`POST /deep_links` returns a single-use URL that signs the customer into their own project, so you don't need to send invites or hide your organization's member list. This endpoint is only enabled for partners that PostHog has onboarded, so ask us to turn it on for your app.
+
+### Customer billing
+
+Each provisioned account is its own organization, billed to your customer and starting on the [free tier](/pricing). Usage does not roll up into your bill, and you don't need the Boost plan for unlimited projects.
+
+### Tradeoffs
+
+- Your customer owns the account, so they can revoke your access or change their plan.
+- Analyzing data across customers is harder than with projects, because each customer is a separate organization.
+- Account creation is rate limited to 10 requests per hour, or 100 once you link your app to a PostHog organization with a [verification token](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional).
+
 ## Further reading
 
 - [Set up embedded analytics with Next.js and Recharts](/tutorials/embedded-analytics)
+- [Provisioning API reference](/docs/integrate/provisioning)
+- [How to build a PostHog integration with the provisioning API](/blog/embedded-analytics-provisioning-api)
 - [Build customer-facing analytics with Endpoints](/docs/endpoints/customer-facing-analytics)
 - [Compare Endpoints and the Query API](/docs/endpoints/endpoints-vs-query-api)
 - [Manage PostHog projects](/docs/settings/projects)
