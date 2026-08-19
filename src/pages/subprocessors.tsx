@@ -7,9 +7,12 @@ import subprocessors from '../data/subprocessors.json'
 
 type TabKey = 'all' | 'core' | 'ai' | 'internal'
 
+type DeploymentKey = 'all' | 'us' | 'eu'
+
 type SubprocessorRecord = {
     name: string
     reason: string
+    duration?: string
     location: string
     details: string[]
     regions: string[]
@@ -19,6 +22,7 @@ const internalSubprocessors: SubprocessorRecord[] = [
     {
         name: 'Hiberly Ltd.',
         reason: 'Provision of the PostHog services',
+        duration: 'Duration of the agreement',
         location: 'United Kingdom',
         details: [],
         regions: ['United Kingdom'],
@@ -26,6 +30,7 @@ const internalSubprocessors: SubprocessorRecord[] = [
     {
         name: 'PostHog GmbH',
         reason: 'Provision of the PostHog services',
+        duration: 'Duration of the agreement',
         location: 'Germany',
         details: [],
         regions: ['Germany'],
@@ -33,13 +38,29 @@ const internalSubprocessors: SubprocessorRecord[] = [
 ]
 
 const tabs: { key: TabKey; label: string }[] = [
+    { key: 'all', label: 'All Subprocessors' },
     { key: 'core', label: 'Third-Party Subprocessors (Core Services)' },
     { key: 'ai', label: 'Third-Party AI Subprocessors (Only if AI Features are Enabled)' },
     { key: 'internal', label: 'Internal Subprocessors' },
 ]
 
+// Maps each PostHog Cloud deployment to the data regions its data reaches.
+// A vendor that operates worldwide ("Global") applies to every deployment.
+const deployments: { key: DeploymentKey; label: string; regions: string[] | null }[] = [
+    { key: 'all', label: 'All regions', regions: null },
+    { key: 'us', label: 'PostHog US Cloud', regions: ['USA'] },
+    { key: 'eu', label: 'PostHog EU Cloud', regions: ['Germany', 'France'] },
+]
+
+function detailLabel(url: string): string {
+    return url.toLowerCase().includes('subprocessor') || url.toLowerCase().includes('sub-processor')
+        ? "Vendor's own subprocessor list"
+        : 'Trust center'
+}
+
 function SubprocessorsPage(): JSX.Element {
-    const [activeTab, setActiveTab] = useState<TabKey>('core')
+    const [activeTab, setActiveTab] = useState<TabKey>('all')
+    const [activeDeployment, setActiveDeployment] = useState<DeploymentKey>('all')
 
     const coreSubprocessors = useMemo(
         () => subprocessors.filter((subprocessor) => subprocessor.type === 'cloud') as unknown as SubprocessorRecord[],
@@ -50,21 +71,31 @@ function SubprocessorsPage(): JSX.Element {
         []
     )
 
+    const matchesDeployment = (record: SubprocessorRecord): boolean => {
+        const regions = deployments.find((deployment) => deployment.key === activeDeployment)?.regions
+        if (!regions) {
+            return true
+        }
+        // "Global" vendors process data in every region, so they apply to every deployment.
+        if (record.regions.includes('Global')) {
+            return true
+        }
+        return record.regions.some((region) => regions.includes(region))
+    }
+
     const activeRows = useMemo(() => {
-        if (activeTab === 'all') {
-            return [...coreSubprocessors, ...aiSubprocessors, ...internalSubprocessors]
-        }
-
-        if (activeTab === 'core') {
-            return coreSubprocessors
-        }
-
-        if (activeTab === 'ai') {
-            return aiSubprocessors
-        }
-
-        return internalSubprocessors
-    }, [activeTab, aiSubprocessors, coreSubprocessors])
+        const thirdParty =
+            activeTab === 'all'
+                ? [...coreSubprocessors, ...aiSubprocessors]
+                : activeTab === 'core'
+                ? coreSubprocessors
+                : activeTab === 'ai'
+                ? aiSubprocessors
+                : []
+        // Internal subprocessors are PostHog's own legal entities, so they apply to every deployment.
+        const internal = activeTab === 'all' || activeTab === 'internal' ? internalSubprocessors : []
+        return [...thirdParty.filter(matchesDeployment), ...internal]
+    }, [activeTab, activeDeployment, aiSubprocessors, coreSubprocessors])
 
     const tableColumns = useMemo(
         () => [
@@ -85,7 +116,14 @@ function SubprocessorsPage(): JSX.Element {
                         content: <span className="font-semibold">{subprocessor.name}</span>,
                     },
                     {
-                        content: subprocessor.reason,
+                        content: (
+                            <div>
+                                <div>{subprocessor.reason}</div>
+                                {subprocessor.duration && (
+                                    <div className="text-sm opacity-70 mt-1">{subprocessor.duration}</div>
+                                )}
+                            </div>
+                        ),
                     },
                     {
                         content: <div dangerouslySetInnerHTML={{ __html: subprocessor.location }} />,
@@ -100,9 +138,10 @@ function SubprocessorsPage(): JSX.Element {
                                                 href={detail}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                title={detail}
                                                 className="[overflow-wrap:anywhere]"
                                             >
-                                                {detail}
+                                                {detailLabel(detail)}
                                             </a>
                                         </div>
                                     ))}
@@ -145,20 +184,40 @@ function SubprocessorsPage(): JSX.Element {
                     the applicable contract for services between us and Customer.
                 </p>
 
-                <div className="not-prose mt-6 flex justify-between items-end">
-                    <div>
-                        <div className="flex flex-wrap gap-2">
-                            {tabs.map((tab) => (
+                <p>
+                    Use the filters below to show only the Subprocessors that apply to your setup. Select your PostHog
+                    Cloud region to hide vendors that do not process your data, and note that AI Subprocessors apply only
+                    while AI Features are enabled. The <strong>Additional information</strong> column links to each
+                    vendor's own subprocessor list and trust center.
+                </p>
+
+                <div className="not-prose mt-6 space-y-3">
+                    {activeTab !== 'internal' && (
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-sm font-semibold mr-1">Deployment region:</span>
+                            {deployments.map((deployment) => (
                                 <OSButton
-                                    key={tab.key}
-                                    onClick={() => setActiveTab(tab.key)}
-                                    active={activeTab === tab.key}
+                                    key={deployment.key}
+                                    onClick={() => setActiveDeployment(deployment.key)}
+                                    active={activeDeployment === deployment.key}
                                     className="border border-primary"
                                 >
-                                    {tab.label}
+                                    {deployment.label}
                                 </OSButton>
                             ))}
                         </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                        {tabs.map((tab) => (
+                            <OSButton
+                                key={tab.key}
+                                onClick={() => setActiveTab(tab.key)}
+                                active={activeTab === tab.key}
+                                className="border border-primary"
+                            >
+                                {tab.label}
+                            </OSButton>
+                        ))}
                     </div>
                 </div>
 
@@ -183,7 +242,7 @@ function SubprocessorsPage(): JSX.Element {
 
                 {activeRows.length === 0 && (
                     <p className="not-prose mt-3 text-sm opacity-70">
-                        No subprocessors matched your selected category.
+                        No subprocessors matched your selected category and region.
                     </p>
                 )}
 
