@@ -87,7 +87,7 @@ const CommunityQuestions = ({ id, productData }: SectionComponentProps) => {
                                     Read the pocket guide
                                 </Link>
                                 <p className="text-secondary text-base">
-                                    A use case book you read start to finish. Each chapter ends in something to go do.
+                                    PostHog use cases, in your pocket. Each chapter ends with a quick start.
                                 </p>
                             </li>
                         )}
