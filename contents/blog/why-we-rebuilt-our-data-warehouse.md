@@ -72,7 +72,7 @@ Here's what we built:
 
 - **Fully single-tenant DuckDB instances:** Every organization gets their own. It's not shared with anyone else.
 - **A lifecycle service:** Instances sleep when idle and wake up when a query arrives. 
-- **A Postgres Wire protocol endpoint:** Most modern data stack tooling speaks Postgres, so does our warehouse. You connect with `psql`, point your BI tool at it, wire up PostHog Code or Claude via MCP, and it just works. We translate the Postgres catalog so your tools can introspect the schema, and queries run as DuckDB SQL.
+- **A Postgres Wire protocol endpoint:** Most modern data stack tooling speaks Postgres, so does our warehouse. You connect with `psql`, point your BI tool at it, wire up PostHog Desktop or Claude via MCP, and it just works. We translate the Postgres catalog so your tools can introspect the schema, and queries run as DuckDB SQL.
 - **DuckHog:** DuckHog is a DuckDB extension that lets you point local compute at your warehouse data. Pull a subset locally, work with it using DuckDB, pandas, polars, or whatever you prefer, then write results back. For agents iterating quickly on data, this is a better pattern than sending every query to the cluster. It's possible because of DuckDB's extension model; add capabilities without forking the codebase or painful UDF deployments. The SQLite of the OLAP world, it just works.
 - **DuckLake as our catalog:** Underneath this is DuckLake, which separates storage from compute. Your data lives in S3 independent of whatever's querying it, so we're not locked into DuckDB forever.
 
