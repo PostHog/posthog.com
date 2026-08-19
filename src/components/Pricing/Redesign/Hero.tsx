@@ -85,7 +85,7 @@ const TuftLayer = ({ tufts, className }: { tufts: typeof FRONT_TUFTS; className:
 export default function Hero(): JSX.Element {
     return (
         <div className="@container not-prose mb-8 @3xl:mb-12">
-            <div className="paper-desk border border-primary rounded-lg overflow-hidden relative">
+            <div className="paper-desk border border-primary rounded-md overflow-hidden relative">
                 {/* `flex-col-reverse` puts the art above the copy once the layout stacks, while leaving
                     the DOM order headline-first for screen readers and tab order. */}
                 <div className="relative z-10 flex flex-col-reverse @2xl:flex-row @2xl:items-center gap-6 @2xl:gap-8 p-6 @2xl:p-8 @4xl:p-10">

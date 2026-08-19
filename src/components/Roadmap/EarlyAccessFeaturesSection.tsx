@@ -252,7 +252,7 @@ const RoadmapOverlayPanel = ({
                         <RadixDialog.Content forceMount asChild onEscapeKeyDown={(event) => event.preventDefault()}>
                             <motion.aside
                                 data-roadmap-drawer=""
-                                className="absolute inset-y-4 right-4 z-50 isolate w-[min(430px,calc(100%-2rem))] overflow-hidden rounded-lg border border-primary bg-primary text-primary shadow-2xl [backface-visibility:hidden] [contain:paint] [will-change:transform] focus:outline-none"
+                                className="absolute inset-y-4 right-4 z-50 isolate w-[min(430px,calc(100%-2rem))] overflow-hidden rounded-md border border-primary bg-primary text-primary shadow-2xl [backface-visibility:hidden] [contain:paint] [will-change:transform] focus:outline-none"
                                 initial={shouldReduceMotion ? { x: 0 } : { x: 'calc(100% + 1rem)' }}
                                 animate={{ x: 0 }}
                                 exit={shouldReduceMotion ? { x: 0 } : { x: 'calc(100% + 1rem)' }}
@@ -471,7 +471,7 @@ const RoadmapLane = ({
     return (
         <section
             aria-labelledby={`roadmap-${definition.stage}-title`}
-            className="flex h-min w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col self-start overflow-hidden rounded-lg border border-primary bg-accent @5xl:w-auto"
+            className="flex h-min w-[min(340px,calc(100cqw-2rem))] shrink-0 snap-start flex-col self-start overflow-hidden rounded-md border border-primary bg-accent @5xl:w-auto"
         >
             <header className="shrink-0 border-b border-primary bg-primary px-3 py-3">
                 <div className="flex items-center gap-2">
@@ -928,7 +928,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
 
     return (
         <div ref={roadmapRootRef} className="relative flex min-w-0 flex-col gap-3">
-            <div className="shrink-0 rounded-lg border border-primary bg-primary px-3 py-2.5" data-scheme="primary">
+            <div className="shrink-0 rounded-md border border-primary bg-primary px-3 py-2.5" data-scheme="primary">
                 <div className="flex flex-col gap-2 @3xl:flex-row @3xl:items-center">
                     <Input
                         label="Search roadmap"
@@ -940,7 +940,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
                         showClearButton
                         onClear={() => setQuery('')}
-                        className="!h-10 !rounded-[8px]"
+                        className="!h-10 !rounded-md"
                         containerClassName="w-full min-w-0 @3xl:max-w-md @3xl:shrink-0"
                     />
                     <div className="min-w-0 w-full @3xl:w-auto @3xl:max-w-xs @3xl:shrink [&>div]:w-full">
@@ -950,7 +950,7 @@ export default function EarlyAccessFeaturesSection(): JSX.Element | null {
                             value={teamFilter}
                             onValueChange={setTeamFilter}
                             groups={[{ label: 'Team', items: teamOptions }]}
-                            className="!h-10 w-full max-w-full overflow-hidden !rounded-[8px] px-3 [&>span]:min-w-0 [&>span]:truncate"
+                            className="!h-10 w-full max-w-full overflow-hidden !rounded-md px-3 [&>span]:min-w-0 [&>span]:truncate"
                         />
                     </div>
                     <span className="ml-auto shrink-0 whitespace-nowrap text-sm text-secondary">
