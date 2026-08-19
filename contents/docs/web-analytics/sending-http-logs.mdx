@@ -113,7 +113,96 @@ async function hash(input) {
 }
 ```
 
-Only traffic proxied through Cloudflare (orange-cloud DNS) reaches Workers.
+Only traffic proxied through Cloudflare (orange-cloud DNS) reaches Workers. On an Enterprise plan, consider [Logpush](#cloudflare-logpush-example-enterprise-plan) instead – it keeps log delivery off the request path entirely.
+
+## Cloudflare Logpush example (Enterprise plan)
+
+[Cloudflare Logpush](https://developers.cloudflare.com/logs/logpush/) pushes the **HTTP requests** dataset to an HTTP endpoint as gzipped, newline-delimited JSON batches. PostHog's capture API expects individual events, so the pattern is a small relay Worker: Logpush delivers batches to the Worker, and the Worker maps each record to a `$http_log` event and forwards them to the [batch API](/docs/api/capture#batch-events). Unlike the pass-through Worker above, nothing runs on your visitors' request path.
+
+Deploy this as a Worker and note its URL (a `workers.dev` URL works). It reuses the `hash` helper from the example above.
+
+```js
+export default {
+    async fetch(request, env) {
+        if (request.method !== 'POST') {
+            return new Response('Method not allowed', { status: 405 })
+        }
+        if (request.headers.get('authorization') !== `Bearer ${env.LOGPUSH_SECRET}`) {
+            return new Response('Unauthorized', { status: 401 })
+        }
+
+        // Logpush bodies are gzipped. Sniff the magic bytes rather than trusting headers.
+        const buf = await request.arrayBuffer()
+        const bytes = new Uint8Array(buf)
+        const text =
+            bytes[0] === 0x1f && bytes[1] === 0x8b
+                ? await new Response(new Response(buf).body.pipeThrough(new DecompressionStream('gzip'))).text()
+                : new TextDecoder().decode(buf)
+
+        const events = []
+        for (const line of text.split('\n')) {
+            if (!line.trim()) {
+                continue
+            }
+            let record
+            try {
+                record = JSON.parse(line)
+            } catch {
+                continue
+            }
+            // Also skips Logpush's {"content":"tests"} validation probe.
+            if (!record.ClientRequestHost) {
+                continue
+            }
+            events.push(await toHttpLogEvent(record))
+        }
+
+        for (let i = 0; i < events.length; i += 500) {
+            await fetch('<ph_client_api_host>/batch/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ api_key: env.POSTHOG_PROJECT_TOKEN, batch: events.slice(i, i + 500) }),
+            })
+        }
+        return new Response('OK')
+    },
+}
+
+async function toHttpLogEvent(record) {
+    const host = record.ClientRequestHost
+    const uri = record.ClientRequestURI || '/'
+    const ip = record.ClientIP || ''
+    const userAgent = record.ClientRequestUserAgent || ''
+    return {
+        event: '$http_log',
+        distinct_id: `http_log_${await hash(`${ip}:${host}:${userAgent}`)}`,
+        timestamp: record.EdgeStartTimestamp,
+        properties: {
+            $process_person_profile: false,
+            $current_url: `https://${host}${uri}`,
+            $host: host,
+            $pathname: uri.split('?')[0],
+            $referrer: record.ClientRequestReferer || undefined,
+            $ip: ip,
+            $raw_user_agent: userAgent,
+            method: record.ClientRequestMethod,
+            status_code: record.EdgeResponseStatus,
+            cloudflare_country: record.ClientCountry,
+            cloudflare_ray_id: record.RayID,
+        },
+    }
+}
+```
+
+Then create the Logpush job on your zone, under **Analytics & Logs > Logpush > Create a Logpush job**:
+
+1. Pick the **HTTP requests** dataset and the **HTTP destination**.
+2. Set the destination to your Worker URL, passing the shared secret as a header parameter: `https://<your-worker>.workers.dev?header_Authorization=Bearer%20<secret>`. Store the same secret as the Worker's `LOGPUSH_SECRET` variable.
+3. Select at least these fields: `EdgeStartTimestamp`, `ClientIP`, `ClientRequestHost`, `ClientRequestMethod`, `ClientRequestURI`, `ClientRequestUserAgent`, `ClientRequestReferer`, `EdgeResponseStatus`, `ClientCountry`, `RayID`. Without `ClientRequestUserAgent`, bot detection classifies everything as `Automation`.
+4. In the advanced options, set the timestamp format to **RFC3339** so `EdgeStartTimestamp` maps directly onto the event timestamp.
+5. Cloudflare validates the destination by sending a gzipped test file when you create the job. The Worker acknowledges it automatically (records without `ClientRequestHost` are skipped).
+
+Logpush also supports a sampling rate in the job settings if you want to cap volume at the source.
 
 ## Server middleware example
 
