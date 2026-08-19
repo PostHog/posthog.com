@@ -11,6 +11,7 @@ type DeploymentKey = 'all' | 'us' | 'eu'
 
 type SubprocessorRecord = {
     name: string
+    type: 'cloud' | 'ai' | 'internal'
     reason: string
     duration?: string
     location: string
@@ -21,6 +22,7 @@ type SubprocessorRecord = {
 const internalSubprocessors: SubprocessorRecord[] = [
     {
         name: 'Hiberly Ltd.',
+        type: 'internal',
         reason: 'Provision of the PostHog services',
         duration: 'Duration of the agreement',
         location: 'United Kingdom',
@@ -29,6 +31,7 @@ const internalSubprocessors: SubprocessorRecord[] = [
     },
     {
         name: 'PostHog GmbH',
+        type: 'internal',
         reason: 'Provision of the PostHog services',
         duration: 'Duration of the agreement',
         location: 'Germany',
@@ -113,7 +116,7 @@ function SubprocessorsPage(): JSX.Element {
     const tableRows = useMemo(
         () =>
             activeRows.map((subprocessor) => ({
-                key: subprocessor.name,
+                key: `${subprocessor.type}:${subprocessor.name}`,
                 cells: [
                     {
                         content: <span className="font-semibold">{subprocessor.name}</span>,
