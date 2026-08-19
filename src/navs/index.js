@@ -8327,7 +8327,17 @@ export const docsMenu = {
                         },
                         {
                             name: 'Customer-facing analytics',
-                            url: '/docs/endpoints/customer-facing-analytics',
+                            url: '/docs/data/embedded-analytics-projects',
+                            children: [
+                                {
+                                    name: 'Project setup',
+                                    url: '/docs/data/embedded-analytics-projects',
+                                },
+                                {
+                                    name: 'Build with Endpoints',
+                                    url: '/docs/endpoints/customer-facing-analytics',
+                                },
+                            ],
                         },
                         {
                             name: 'Enrich internal tools with PostHog data',
