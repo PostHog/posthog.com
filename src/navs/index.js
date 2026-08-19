@@ -2284,7 +2284,7 @@ export const companyMenu = {
     ],
 }
 
-// PostHog Desktop docs nav — used by its own docs section and nested inside Self-driving
+// PostHog Desktop docs nav — nested inside Self-driving
 const posthogDesktopNav = [
     {
         name: 'Getting started',
@@ -2401,7 +2401,7 @@ const posthogDesktopNav = [
     },
 ]
 
-// PostHog Slack docs nav — used by its own docs section and nested inside Self-driving
+// PostHog Slack docs nav — nested inside Self-driving
 const posthogSlackNav = [
     {
         name: 'PostHog Slack',
