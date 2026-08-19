@@ -180,6 +180,7 @@ function SubprocessorsPage(): JSX.Element {
                                 key={tab.key}
                                 onClick={() => setActiveTab(tab.key)}
                                 active={activeTab === tab.key}
+                                aria-pressed={activeTab === tab.key}
                                 className="border border-primary"
                             >
                                 {tab.label}
