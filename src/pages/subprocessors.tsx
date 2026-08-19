@@ -7,8 +7,6 @@ import subprocessors from '../data/subprocessors.json'
 
 type TabKey = 'all' | 'core' | 'ai' | 'internal'
 
-type DeploymentKey = 'all' | 'us' | 'eu'
-
 type SubprocessorRecord = {
     name: string
     type: 'cloud' | 'ai' | 'internal'
@@ -47,14 +45,6 @@ const tabs: { key: TabKey; label: string }[] = [
     { key: 'internal', label: 'Internal Subprocessors' },
 ]
 
-// Maps each PostHog Cloud deployment to the data regions its data reaches.
-// A vendor that operates worldwide ("Global") applies to every deployment.
-const deployments: { key: DeploymentKey; label: string; regions: string[] | null }[] = [
-    { key: 'all', label: 'All regions', regions: null },
-    { key: 'us', label: 'PostHog US Cloud', regions: ['USA'] },
-    { key: 'eu', label: 'PostHog EU Cloud', regions: ['Germany', 'France'] },
-]
-
 // Each vendor's `details` array lists their trust center first and their own subprocessor
 // list second. Prefer the URL's own wording, but fall back to that ordering for opaque links
 // (e.g. Microsoft's servicetrust DocumentPage URL) that name neither document in the path.
@@ -66,7 +56,6 @@ function detailLabel(url: string, index: number): string {
 
 function SubprocessorsPage(): JSX.Element {
     const [activeTab, setActiveTab] = useState<TabKey>('all')
-    const [activeDeployment, setActiveDeployment] = useState<DeploymentKey>('all')
 
     const coreSubprocessors = useMemo(
         () => subprocessors.filter((subprocessor) => subprocessor.type === 'cloud') as unknown as SubprocessorRecord[],
@@ -77,31 +66,18 @@ function SubprocessorsPage(): JSX.Element {
         []
     )
 
-    const matchesDeployment = (record: SubprocessorRecord): boolean => {
-        const regions = deployments.find((deployment) => deployment.key === activeDeployment)?.regions
-        if (!regions) {
-            return true
-        }
-        // "Global" vendors process data in every region, so they apply to every deployment.
-        if (record.regions.includes('Global')) {
-            return true
-        }
-        return record.regions.some((region) => regions.includes(region))
-    }
-
     const activeRows = useMemo(() => {
-        const thirdParty =
-            activeTab === 'all'
-                ? [...coreSubprocessors, ...aiSubprocessors]
-                : activeTab === 'core'
-                ? coreSubprocessors
-                : activeTab === 'ai'
-                ? aiSubprocessors
-                : []
-        // Internal subprocessors are PostHog's own legal entities, so they apply to every deployment.
-        const internal = activeTab === 'all' || activeTab === 'internal' ? internalSubprocessors : []
-        return [...thirdParty.filter(matchesDeployment), ...internal]
-    }, [activeTab, activeDeployment, aiSubprocessors, coreSubprocessors])
+        if (activeTab === 'all') {
+            return [...coreSubprocessors, ...aiSubprocessors, ...internalSubprocessors]
+        }
+        if (activeTab === 'core') {
+            return coreSubprocessors
+        }
+        if (activeTab === 'ai') {
+            return aiSubprocessors
+        }
+        return internalSubprocessors
+    }, [activeTab, aiSubprocessors, coreSubprocessors])
 
     const tableColumns = useMemo(
         () => [
@@ -191,28 +167,13 @@ function SubprocessorsPage(): JSX.Element {
                 </p>
 
                 <p>
-                    Use the filters below to show only the Subprocessors that apply to your setup. Select your PostHog
-                    Cloud region to hide vendors that do not process your data, and note that AI Subprocessors apply only
-                    while AI Features are enabled. The <strong>Additional information</strong> column links to each
-                    vendor's own subprocessor list and trust center.
+                    Use the tabs below to view the Subprocessors that apply to your setup. AI Subprocessors apply only
+                    while AI Features are enabled, and each row's <strong>Location of processing</strong> shows where the
+                    vendor processes data for US Cloud and EU Cloud. The <strong>Additional information</strong> column
+                    links to each vendor's own subprocessor list and trust center.
                 </p>
 
-                <div className="not-prose mt-6 space-y-3">
-                    {activeTab !== 'internal' && (
-                        <div className="flex flex-wrap items-center gap-2">
-                            <span className="text-sm font-semibold mr-1">Deployment region:</span>
-                            {deployments.map((deployment) => (
-                                <OSButton
-                                    key={deployment.key}
-                                    onClick={() => setActiveDeployment(deployment.key)}
-                                    active={activeDeployment === deployment.key}
-                                    className="border border-primary"
-                                >
-                                    {deployment.label}
-                                </OSButton>
-                            ))}
-                        </div>
-                    )}
+                <div className="not-prose mt-6">
                     <div className="flex flex-wrap gap-2">
                         {tabs.map((tab) => (
                             <OSButton
@@ -248,7 +209,7 @@ function SubprocessorsPage(): JSX.Element {
 
                 {activeRows.length === 0 && (
                     <p className="not-prose mt-3 text-sm opacity-70">
-                        No subprocessors matched your selected category and region.
+                        No subprocessors matched your selected category.
                     </p>
                 )}
 
