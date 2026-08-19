@@ -77,6 +77,8 @@ By default, your experiment rolls out to 100% of participants. You can adjust th
 
 For more advanced release conditions – such as targeting specific user properties, cohorts, or groups – click **Manage distribution** or **Manage release conditions** _after_ saving your experiment as a draft. This modifies the [release conditions](/docs/feature-flags/creating-feature-flags#release-conditions) for the underlying feature flag.
 
+To target on data that lives outside your product, like a plan tier in Stripe or an account owner in Salesforce, sync that table into the [data warehouse](/docs/data-warehouse) and map its columns onto person or group properties with [warehouse properties](/docs/data-warehouse/warehouse-properties). The properties then work in release conditions like any other.
+
 > **Note:** If you select a server-side event, you may see a warning that no feature flag information can be detected with the event. To resolve this issue, see [step 2 of adding your experiment code and how to submit feature flag information with your events](/docs/experiments/adding-experiment-code#step-2-server-side-only-add-the-feature-flag-property-to-your-events).
 >
 > <ProductScreenshot
