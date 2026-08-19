@@ -28,8 +28,8 @@ type ErrorSpec = {
 }
 
 /**
- * Mirrors the "Error handling on posthog.com" table in wizard-provisioning-rfc.md. Every code gets the
- * manual-signup fallback; only restartable ones also get a fresh "Connect GitHub" action.
+ * Every code gets the manual-signup fallback; only restartable ones also get a fresh
+ * "Connect GitHub" action.
  */
 const ERRORS: Record<ProvisioningErrorCode, ErrorSpec> = {
     github_denied: { message: 'GitHub authorization was cancelled, so we stopped there.', restartable: true },

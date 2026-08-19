@@ -54,8 +54,6 @@ const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
-`"none"` makes HogFarm a *public* client, and PKCE is all it needs.
-
 With the file live, I register it. That's the call that turns the JSON into an OAuth app, and it's the first thing you do. It's one request with nothing in it but the document URL:
 
 ```bash
