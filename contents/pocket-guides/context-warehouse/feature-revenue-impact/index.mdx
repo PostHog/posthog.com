@@ -10,8 +10,7 @@ section: Ask a quick question
 
 <ExampleFigure
     n={1}
-    caption="What the answer looks like: revenue and retention, flag-exposed vs control."
-    legend="Made up for illustration; yours would name your real flag and cohort sizes."
+    caption="Example data: revenue and retention, flag-exposed vs control."
 >
 
 | Variant | Users | Revenue/user (post-exposure) | Retained (30d) |
@@ -21,7 +20,7 @@ section: Ask a quick question
 
 </ExampleFigure>
 
-<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
 
 </LeftPage>
 
@@ -29,15 +28,15 @@ section: Ask a quick question
 
 # Did the feature we shipped move revenue?
 
-Usage went up after launch. But did revenue? This skill splits users by feature-flag or
+Usage went up after launch. But did revenue? This Skill splits users by feature-flag or
 experiment exposure and compares downstream Stripe revenue and retention between the exposed
 cohort and control, so a rollout's impact is measured in money as well as clicks.
 
-## What the answer looks like
+## Example data and how to read it
 
-The skill looks for patterns like <SeeFig n={1} />: the exposed cohort earned $6.40 more per user
-after exposure and retained six points better, a real gap, reported alongside both cohort sizes
-so it's clear the difference isn't noise from a handful of accounts.
+The Skill looks for patterns like <SeeFig n={1} />: the exposed cohort earned $6.40 more per user
+after exposure and retained six points better. This shows the experiment was successful, and reporting both cohort sizes
+shows it's clear the difference from a large sample size, not noise from a handful of accounts.
 
 ## Doing this by hand
 
@@ -48,12 +47,12 @@ so it's clear the difference isn't noise from a handful of accounts.
    [Data pipeline > Sources](/docs/data-warehouse/sources), then build a
    [Trends](/docs/product-analytics/trends/overview) insight of `$feature_flag_called` broken down
    by `$feature_flag_response` to see the exposure split.
-3. **Join to revenue by hand**, or open the [SQL editor](/docs/data-warehouse/sql) to compare
+3. **Join to revenue** using the [SQL editor](/docs/data-warehouse/sql) or asking PostHog AI to compare
    post-exposure revenue and retention between variants in one query.
 
-## How the Skill works
+## Get an agent to do the work
 
-The agent finds each person's variant from `$feature_flag_called` exposure events and their
+Copy the Skill below and add it to your agent. The agent finds each person's variant from `$feature_flag_called` exposure events and their
 exposure timestamp, then compares Stripe revenue and a retention share earned *after* that
 timestamp between variants. It reports cohort sizes alongside the numbers, and is explicit that
 unless this came from a proper randomized experiment, the gap may reflect who was exposed rather
@@ -63,13 +62,6 @@ that applies.
 This is a before/after test tied to a specific flag or experiment. For ranking which *existing*
 features high-revenue customers already use, with no rollout involved, that's
 [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue) instead.
-
-## The skill itself
-
-<SeeFig n={2} /> is the actual file an agent follows. It covers finding exposure cohorts
-honestly and the starter query to adapt to your schema.
-
-Copy it into your own agent.
 
 <SeeAlso>
 

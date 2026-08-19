@@ -10,8 +10,7 @@ section: Ask a quick question
 
 <ExampleFigure
     n={1}
-    caption="What the answer looks like: channels ranked by the revenue of the customers who stuck around."
-    legend="Made up for illustration; yours would name your real channels."
+    caption="Example data: channels ranked by the revenue of the customers who stuck around."
 >
 
 | Channel        | Customers | Retained revenue | CAC   |
@@ -22,7 +21,7 @@ section: Ask a quick question
 
 </ExampleFigure>
 
-<SkillFigure n={2} caption="The skill itself, the file an agent follows to answer this question." />
+<SkillFigure n={2} caption="The Skill itself, copy and paste this into your agent to answer the question." />
 
 </LeftPage>
 
@@ -30,13 +29,13 @@ section: Ask a quick question
 
 # Which channels bring customers who stick?
 
-The cheapest channel for signups is rarely the best channel for revenue. This skill ranks
+The cheapest channel for signups is rarely the best channel for revenue. This Skill ranks
 first-touch acquisition channels by retained Stripe revenue and CAC payback, using ad spend from
-Google or Meta, so budget follows customers who last rather than customers who convert once.
+Google or Meta, so you can allocate budget where you attract customers who last, rather than customers who convert once.
 
-## What the answer looks like
+## Example data and how to read it
 
-The skill looks for patterns like <SeeFig n={1} />: paid social brought in the most customers,
+The Skill looks for patterns like <SeeFig n={1} />: paid social brought in the most customers,
 but organic search and content brought in more *retained* revenue at a fraction of the CAC, the
 real signal for where budget belongs.
 
@@ -49,29 +48,20 @@ real signal for where budget belongs.
    [`$initial_utm_source`](/docs/data/utm-segmentation)**: native to PostHog, no join needed for
    this part.
 3. **Pull revenue and spend per channel separately** from Stripe's and your ad platform's own
-   reports, then match them up by hand against the signup breakdown. This is the most
-   join-dependent question in this guide. Doing it across three sources by hand is realistically
-   a spreadsheet exercise; the [SQL editor](/docs/data-warehouse/sql) is worth it here.
+   reports, then match them up using the [SQL editor](/docs/data-warehouse/sql) or PostHog AI.
 
-## How the Skill works
+## Get an agent to do the work
 
-The agent attributes each person to a channel from first-touch UTM properties, pulls revenue and
+Copy the Skill below and add it to your agent. The agent attributes each person to a channel from first-touch UTM properties, pulls revenue and
 a retention proxy from Stripe, and spend by campaign from Google or Meta Ads. It builds this in
-pieces (validating each part before combining) because retention windows and CAC method are
-real modeling choices. It states which choices it made rather than presenting one number as
+pieces (validating each part before combining) because retention windows and CAC method are 
+modeling choices. It states which choices it made rather than presenting one number as
 definitive, and offers to refine them with you.
 
 This is about acquisition source and marketing spend. For in-product feature revenue instead,
 that's [Features & revenue](/pocket-guides/context-warehouse/features-drive-revenue); for a
 specific rollout's revenue impact, that's
 [Feature revenue impact](/pocket-guides/context-warehouse/feature-revenue-impact).
-
-## The skill itself
-
-<SeeFig n={2} /> is the actual file an agent follows. It covers building the multi-step join
-piece by piece, and the starter query to adapt to your schema.
-
-Copy it into your own agent.
 
 <SeeAlso>
 
