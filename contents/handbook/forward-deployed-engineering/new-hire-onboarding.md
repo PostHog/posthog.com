@@ -6,23 +6,23 @@ showTitle: true
 
 Welcome to the PostHog Forward Deployed Engineering team! We only hire about 1 in 400 applicants, so you've done well to make it here!
 
-Onboarding here is mostly self-serve - we won't sit you in a room for training for two weeks, and unlike a lot of companies, we'd prefer you get up and running with quickly. If you're not sure who's supposed to make something below happen, the person responsible is almost certainly you.
+Onboarding here is mostly self-serve – we won't sit you in a room for training for two weeks, and unlike a lot of companies, we'd prefer you get up and running with quickly. If you're not sure who's supposed to make something below happen, the person responsible is almost certainly you.
 
-Below is a rough plan for your first month - use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
+Below is a rough plan for your first month – use it as a guide, not a contract. The handbook itself is a work in progress, so you'll find gaps as you ramp up, things you needed to know that weren't written down. That's normal, and when you find a gap your job is to fill it in so the next person has it easier.
 
-## Day 1 - Welcome!
+## Day 1
 
 - Meet with Simon who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.)
 - If you start on a Monday, join your first FDE standup.
     - We fill in a GitHub issue every week before this meeting so we are prepared for the discussion topics. Ask one of your fellow FDEs to add your GitHub handle to the automation which creates the sprint issue.
-- If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT). 
+- If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/11.30am ET). 
     - Advice: You should keep a fun fact about yourself in your back pocket and be prepared to have a strong opinion on whether pineapple belongs on pizza. 
 
 **General onboarding / tool set up**
 
 - Complete your onboarding tasks <PrivateLink url="https://ops.posthog.dev/">in our ops platform</PrivateLink> to get yourself set up as a PostHog employee. It's okay if you don't manage to get this all completed on Day 1.
 - Install your favorite LLM of choice.
-- Set up tools like Zoom, Gong, Granola and Calendly so that you can talk with customers in our standard way. Our Sales and CSM collegagues have a guide on how to set up our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack). Ask Simon for access to these.
+- Set up tools like Zoom, Gong, Granola and Calendly so that you can talk with customers in our standard way. Our Sales and CSM colleagues have a guide on how to set up our [canonical call stack](/handbook/growth/sales/sales-and-cs-tools#our-canonical-call-stack). Ask Simon for access to these.
 - Read the [FDE sections](/handbook/forward-deployed-engineering/overview) of the handbook.
 
 ## Rest of week 1
@@ -56,7 +56,7 @@ Once connected, you can ask your AI of choice questions about the vault and proc
 
 - Read, in order: README → FDE manifesto → AGENTS.md → engagement process
 - How we work: standards, judgment, and the culture
-- Common FDE work patterns - for each of the implementation areas you covered in week 1 use the vault to find customer engagements where we have solved problems related to those areas.  What had drifted from our recommended best practice?  What did we do about it?
+- Common FDE work patterns – for each of the implementation areas you covered in week 1 use the vault to find customer engagements where we have solved problems related to those areas.  What had drifted from our recommended best practice?  What did we do about it?
 
 At the end of the week, revisit the [DevShip repo](https://github.com/PostHog/devship-app) from the SuperDay.  Seed the project in a new PostHog project and rerun the audit using the knowledge you have obtained from your first two weeks here.  Share a write up highlighting any gaps in your original submission (ask the team if you don't still have this to hand). 
 - If you have time, ask the PostHog Wizard to complete an automated audit. This is typically how other teams [self-serves discovery](/handbook/forward-deployed-engineering/how-to-get-fde-involved) before bringing the scope conversation back to the FDE team.
@@ -66,7 +66,7 @@ At the end of the week, revisit the [DevShip repo](https://github.com/PostHog/de
 
 ## Weeks 3 and 4 – start working with customers
 
-> We will normally do in-person onboarding in week 3 - this will mainly be focused around a review of your first couple of weeks, how the wider GTM organisation works as well as in-person work on the below.
+> We will normally do in-person onboarding in week 3 – this will mainly be focused around a review of your first couple of weeks, how the wider GTM organization works as well as in-person work on the below.
 
 This is when you start working with your customers. Ask the vault for the current in-flight engagements we have, and then work with the FDE on that engagement to see which tasks you can pick up.  Ask for their review once you're done.
 
