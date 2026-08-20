@@ -63,31 +63,11 @@ function BlogWordmark(): JSX.Element {
  * and again as the footer (wordmark + CTA). `placement` tags the copy event so
  * header and footer convert separately.
  */
-function BlogHeader({ placement }: { placement?: string }): JSX.Element {
+function BlogHeader({ placement, includeCTA = true }: { placement?: string; includeCTA?: boolean }): JSX.Element {
     return (
-        <div className="flex flex-col items-start gap-4 py-2 @2xl:flex-row @2xl:items-center @2xl:justify-between @2xl:gap-8 @2xl:py-4">
+        <div className="flex flex-row items-center justify-between gap-4 py-2 flex-wrap">
             <BlogWordmark />
-            {placement ? <CopyRSSButton placement={placement} /> : null}
-        </div>
-    )
-}
-
-/** The statement hero: headline as display type, the pitch as its deck, then the RSS CTA. */
-function BlogHero({ className = '' }: { className?: string }): JSX.Element {
-    return (
-        <div className={`flex flex-col items-start gap-3 @2xl:gap-5 ${className}`}>
-            <BlogHeader />
-            <h1 className="m-0 max-w-4xl text-2xl font-bold leading-[1.05] @2xl:text-3xl @4xl:text-4xl">
-                Lessons, opinions, and updates from the{' '}
-                <span className="box-decoration-clone rounded-xs bg-blue/20 px-2 text-blue dark:text-blue-2">
-                    team behind PostHog.
-                </span>
-            </h1>
-            <p className="m-0 max-w-2xl text-lg text-secondary">
-                How we build products, what we get wrong, and what we're shipping next – straight from the people doing
-                the work.
-            </p>
-            <CopyRSSButton placement="blog-hero" />
+            {includeCTA && placement ? <CopyRSSButton placement={placement} /> : null}
         </div>
     )
 }
@@ -99,7 +79,7 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
     return (
         <>
             <SEO
-                title="Blog – PostHog"
+                title="Blog - PostHog"
                 description="Lessons, opinions, and updates from the team behind PostHog. How we build products, what we get wrong, and what we're shipping next."
             />
             <ReaderView
@@ -110,12 +90,13 @@ export default function BlogPage({ data }: { data: { posts: { nodes: PostSummary
                 hideMarkdownActions
             >
                 <div className="@container not-prose text-pretty text-primary">
+                    <BlogHeader placement="blog-header" includeCTA={false} />
                     <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 @2xl:pb-20 @xl:px-8">
-                        <div className="mt-2 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
-                            <BlogHero className="mt-2 @2xl:mt-0" />
+                        <div className="mt-2 @lg:mt-10 flex @2xl:flex-row flex-col items-center gap-8 @2xl:gap-16">
+                            {/* <BlogHero className="mt-2 @2xl:mt-0" /> */}
                             {featured && (
                                 <header className="mt-12 @2xl:mt-0">
-                                    <FeaturedPost orientation="vertical" post={featured} accent="blue" />
+                                    <FeaturedPost calloutPosition="right" post={featured} accent="blue" />
                                 </header>
                             )}
                         </div>

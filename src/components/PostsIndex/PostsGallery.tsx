@@ -195,11 +195,14 @@ export default function PostsGallery({
         <section>
             <div className="flex items-center justify-between gap-2">
                 <h2 className="m-0 min-w-0 shrink truncate text-lg font-bold">
-                    {heading}{' '}
-                    <span className="text-sm font-medium text-muted">
-                        ({filteredPosts.length}
-                        {isFiltered ? ` of ${posts.length}` : ''})
-                    </span>
+                    {heading}
+                    {isFiltered && (
+                        <span className="text-sm font-medium text-muted">
+                            {' '}
+                            ({filteredPosts.length}
+                            {isFiltered ? ` of ${posts.length}` : ''})
+                        </span>
+                    )}
                 </h2>
                 <div className="flex shrink-0 items-center">
                     <div className="@md:hidden">
