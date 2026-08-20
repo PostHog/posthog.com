@@ -17,7 +17,7 @@ export const AVATAR_FALLBACK_URL =
 
 export const PRODUCT_COUNT = 10
 export const APP_COUNT = 34 // total of /products - ai agents.md and cdp readme.md
-export const CUSTOMER_COUNT = 190254
+export const CUSTOMER_COUNT = 500000
 
 // screensaver
 export const INACTIVITY_TIMEOUTS = {
