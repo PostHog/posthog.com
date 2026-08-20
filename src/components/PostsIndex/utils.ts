@@ -21,5 +21,18 @@ export const getAuthorName = (post: PostSummary): string | undefined => post.fro
 /** `MMM D · Author` byline, with the separator dropped when there's no author. */
 export const getByline = (post: PostSummary, date: string): string => {
     const author = getAuthorName(post)
-    return author ? `${date} · ${author}` : date
+    let byline = date
+    if (author) {
+        byline += ` · ${author}`
+    }
+    if (post.fields.wordCount && post.fields.wordCount > 0) {
+        byline += ` · ${getReadingTime(post)}`
+    }
+    return byline
+}
+
+export const getReadingTime = (post: PostSummary): string => {
+    const wordCount = post.fields.wordCount || 0
+    const readingTime = Math.ceil(wordCount / 200)
+    return readingTime > 1 ? `${readingTime} min read` : '1 min read'
 }

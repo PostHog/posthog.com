@@ -59,6 +59,7 @@ export const query = graphql`
                 id
                 fields {
                     slug
+                    wordCount
                     pageViews
                 }
                 excerpt(pruneLength: 200)

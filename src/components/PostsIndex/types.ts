@@ -4,6 +4,7 @@ import { ImageDataLike } from 'gatsby-plugin-image'
 export type PostSummary = {
     id: string
     fields: {
+        wordCount: number
         slug: string
         /** Recent pageview count sourced from PostHog at build time; 0 when the build ran without POSTHOG_APP_API_KEY. */
         pageViews?: number | null

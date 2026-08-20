@@ -118,7 +118,7 @@ export const query = graphql`
             filter: {
                 isFuture: { eq: false }
                 fields: { slug: { regex: "/^/blog/" } }
-                frontmatter: { date: { ne: null } }
+                frontmatter: { date: { ne: null }, tags: { nin: ["Comparisons"] } }
             }
             sort: { order: DESC, fields: [frontmatter___date] }
         ) {
@@ -127,6 +127,7 @@ export const query = graphql`
                 fields {
                     slug
                     pageViews
+                    wordCount
                 }
                 excerpt(pruneLength: 200)
                 frontmatter {
