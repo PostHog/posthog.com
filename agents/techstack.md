@@ -20,6 +20,18 @@ pnpm check-links-post-build     # Verify links after build
 pnpm format                     # Prettier for js/ts/tsx/json/css
 ```
 
+## GitHub CLI
+
+PR work needs [`gh`](https://cli.github.com/) v2.0+, authenticated (`gh auth status`), plus two extensions:
+
+```bash
+gh extension install github/gh-stack     # stacked PRs
+gh extension install Addono/gh-attach    # image upload for PR bodies
+```
+
+- **`gh stack`** – create and manage [stacked PRs](https://docs.github.com/en/pull-requests/get-started/about-stacked-prs). Note that `gh pr merge` does not work on a stacked PR; use `gh stack merge --yes`. Run every command non-interactively: `gh stack view --json`, `gh stack submit --auto`, and always pass branch names to `init`, `add`, and `checkout`.
+- **`gh attach`** – upload an image and get a URL you can embed in a PR body. `gh` has no other way to do this. See [browser screenshots](browser-screenshots.md#putting-the-images-in-the-pr).
+
 ## Project structure
 
 ```

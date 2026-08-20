@@ -1,12 +1,13 @@
 # PR tour
 
-Every PR description must contain a PR tour. A PR tour is a guided walkthrough of the diff. It moves through the change feature by feature, in the order a reviewer should read it. A reviewer who follows the tour from top to bottom must understand every hunk in the diff before they open the "Files changed" tab.
+Nearly every PR description must contain a PR tour – see "When to write one" below for the exceptions. A PR tour is a guided walkthrough of the diff. It moves through the change feature by feature, in the order a reviewer should read it. A reviewer who follows the tour from top to bottom must understand every hunk in the diff before they open the "Files changed" tab.
 
 Writing a good tour costs real effort. That is the point. The burden of explaining a change sits with the submitter, not the reviewer.
 
 ## When to write one
 
 - Required for every PR that touches more than two files or more than ~50 changed lines.
+- Never required for a [content PR](../AGENTS.md#content-prs) – a change under `contents/` plus the navigation entries it needs. Prose does not need a guided walkthrough of itself, however long the diff is.
 - Optional for trivial PRs (a typo fix, a one-line copy edit). If you skip the tour, say so in one line: "No tour: single-line copy fix."
 - Update the affected stops every time you push a change that alters the diff. A stale tour is worse than no tour.
 

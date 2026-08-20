@@ -1,10 +1,12 @@
 # Reviewer's guide
 
-Every PR description must contain a "Reviewer's guide" section. This section is written for the reviewer, and it has three jobs:
+Nearly every PR description must contain a "Reviewer's guide" section. This section is written for the reviewer, and it has three jobs:
 
 1. Prove the testing that was done.
 2. Show the visual evidence.
 3. Point the reviewer at the risk.
+
+Two PRs do not need one: a trivial PR (a typo fix, a one-line copy edit), and a [content PR](../AGENTS.md#content-prs) – a change under `contents/` plus the navigation entries it needs. A content PR that touches navigation still owes the reviewer before/after screenshots of the nav.
 
 Place the guide at the end of the PR description, after the [PR tour](pr-tour.md), inside a fold:
 
@@ -46,6 +48,8 @@ List anything you did **not** test in a "Not tested" line below the table, with 
 
 Required for any visual change. Provide before/after screenshots for every affected area, following the grid below. All apps are resizable, so a single desktop-width capture proves nothing.
 
+Read the [browser screenshots guide](browser-screenshots.md) before you start. It covers how to drive a browser, which tool paints what, and how to upload the images with `gh attach` – `gh` cannot attach an image to a PR body on its own.
+
 ```markdown
 ### Screenshots
 
@@ -59,7 +63,7 @@ Required for any visual change. Provide before/after screenshots for every affec
 | Dark, wide window | <img src="..." width="300"> | <img src="..." width="300"> |
 ```
 
-If your environment cannot take screenshots, that is a blocker. Ask your user to supply them. Do not open the PR without them.
+If your environment cannot take screenshots, that is a blocker. Ask your user to supply them. Do not open the PR without them. A state you tried to capture and could not – a menu the tool will not paint, a width you cannot set – goes in the "Not tested" line with the reason. Never leave a cell of the grid silently empty.
 
 ## Section 3: What to look at
 
