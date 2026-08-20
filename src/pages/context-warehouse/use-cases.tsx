@@ -66,8 +66,8 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With a <strong>revenue-weighted feature ranking</strong>, PostHog nudges accounts toward your
-                        highest-revenue features automatically. Activation improves while you sleep.
+                        Joins Stripe revenue to your feature-usage events and ranks every feature by how much its users
+                        pay. You get <strong>a feature-by-revenue table</strong>, saved as a PostHog insight.
                     </>
                 ),
             },
@@ -80,8 +80,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With the <strong>steps that predict conversion</strong>, PostHog nudges stalled users forward
-                        automatically. Turning more trials into customers.
+                        Builds your onboarding funnel, flags who reached a first Stripe payment, and compares payers
+                        against non-payers at each step. You get <strong>a funnel insight</strong> showing exactly where
+                        trials stall.
                     </>
                 ),
             },
@@ -94,8 +95,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With a live list of <strong>accounts outgrowing their plan</strong>, PostHog triggers upgrade
-                        prompts and outreach automatically. Growing revenue without the dashboard-watching.
+                        Compares real usage against each account's Stripe plan limits and flags the ones consistently
+                        over or near the ceiling. You get <strong>a ranked list of upgrade candidates</strong>, saved as
+                        an insight.
                     </>
                 ),
             },
@@ -103,7 +105,7 @@ const sections: Section[] = [
     },
     {
         title: 'See churn coming',
-        subtitle: 'Catch the warning signs weeks before the cancellation lands.',
+        subtitle: 'Spot the signals that show up before an account cancels, not after.',
         Icon: IconWarning,
         iconColor: 'text-red',
         recipes: [
@@ -116,8 +118,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With an <strong>early-warning signal for churn</strong>, PostHog triggers save flows before
-                        at-risk accounts leave. Cutting churn while you sleep.
+                        Pulls cancellation dates from Stripe or Chargebee and looks at the 30 days of activity before
+                        each one. You get <strong>an insight showing the usage pattern</strong> that precedes a
+                        cancellation.
                     </>
                 ),
             },
@@ -130,8 +133,8 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With issues ranked by <strong>the revenue they cost you</strong>, PostHog triggers proactive
-                        outreach to fix the worst friction. Protecting revenue automatically.
+                        Joins PostHog engagement, support tickets, and Stripe churn to rank ticket topics by the revenue
+                        lost afterward. You get <strong>an insight ranking support issues</strong> by their cost.
                     </>
                 ),
             },
@@ -144,8 +147,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With <strong>ARR mapped against real engagement</strong>, PostHog flags at-risk revenue and
-                        expansion targets. Protecting your biggest accounts before they wobble.
+                        Plots each account's ARR against its PostHog engagement score and flags the high-ARR,
+                        low-engagement outliers. You get <strong>a value-vs-engagement matrix</strong>, saved as an
+                        insight.
                     </>
                 ),
             },
@@ -167,8 +171,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With channels ranked by <strong>retained revenue</strong>, PostHog shifts budget toward the ones
-                        that bring customers who last. Spending smarter, no guesswork.
+                        Ranks first-touch acquisition channels by retained Stripe revenue and CAC payback, using ad
+                        spend from Google or Meta. You get <strong>a channel-ranking insight</strong>, not just a signup
+                        count.
                     </>
                 ),
             },
@@ -181,8 +186,8 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With leads scored by <strong>real product usage</strong>, PostHog alerts sales the moment one
-                        heats up. Filling the pipeline while you sleep.
+                        Scores CRM leads by recent product usage and surfaces the warmest ones sales hasn't contacted
+                        yet. You get <strong>a ranked PQL list</strong>, saved as an insight sales can check daily.
                     </>
                 ),
             },
@@ -195,8 +200,9 @@ const sections: Section[] = [
                 ],
                 uncover: (
                     <>
-                        With revenue <strong>tied to each rollout</strong>, PostHog ramps the winners and rolls back the
-                        rest automatically. Shipping what moves money, hands-off.
+                        Splits users by feature-flag or experiment exposure and compares downstream Stripe revenue and
+                        retention between the exposed group and control. You get <strong>a before/after insight</strong>{' '}
+                        showing whether the rollout paid off.
                     </>
                 ),
             },
@@ -225,7 +231,7 @@ const foundationsSkill: ModelingSkill = {
             data catalog so nobody builds a rival copy.
         </>
     ),
-    rule: 'Decide person vs. group once. That choice is load-bearing across every model you build after it.',
+    rule: 'Decide person vs. group once. That choice shapes every model you build after it.',
 }
 
 const modelingSkills: ModelingSkill[] = [
@@ -239,13 +245,13 @@ const modelingSkills: ModelingSkill[] = [
         name: 'modeling-conversion-metrics',
         href: '/pocket-guides/context-warehouse/conversion-metrics',
         builds: 'Funnel and step conversion rates, drop-off, and time-to-convert.',
-        rule: 'A conversion rate means nothing until you pin the time box. Signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
+        rule: 'Pin the time box first: signup to paid within 30 minutes and within 30 days are different metrics, not the same one measured loosely.',
     },
     {
         name: 'modeling-activation-metrics',
         href: '/pocket-guides/context-warehouse/activation-metrics',
         builds: 'An activated flag per user or account, plus an activation rate.',
-        rule: "Activation is not an event you declare. It's the early behavior that predicts whether people stick around, so test it against retention lift. If it doesn't lift, it isn't activation.",
+        rule: "Activation is the early behavior that predicts whether people stick around — test it against retention lift. If it doesn't lift, it isn't activation.",
     },
     {
         name: 'modeling-product-usage-metrics',
@@ -269,8 +275,8 @@ const modelingSkills: ModelingSkill[] = [
         ),
         rule: (
             <>
-                One row per entity, or a duplicate key silently fans out every fact it touches. And don't hand-roll
-                currency, <Mono>convertCurrency()</Mono> already ships with PostHog.
+                One row per entity — a duplicate key multiplies every fact joined to it. And don't hand-roll currency:{' '}
+                <Mono>convertCurrency()</Mono> already ships with PostHog.
             </>
         ),
     },
@@ -418,8 +424,7 @@ function UseCases(): JSX.Element {
                             <p className="text-[15px] text-secondary mt-1 mb-0">
                                 A query answers the question today. A model answers it every day, with one definition
                                 reused by every insight, dashboard, and query downstream. These six Skills teach your
-                                coding agent how to build them, and each one carries an opinion about how to get it
-                                right.
+                                coding agent how to build them.
                             </p>
                         </div>
 
@@ -481,8 +486,8 @@ function UseCases(): JSX.Element {
                                 <h3 className="mt-0 mb-3 text-2xl font-bold">Got a different question?</h3>
                                 <p className="mt-0 mb-4 text-secondary">
                                     With <strong className="text-primary">800+ warehouse sources</strong> including
-                                    payments, CRMs, support desks, ad platforms, your production database, the questions
-                                    you can ask are endless.{' '}
+                                    payments, CRMs, support desks, ad platforms, your production database, chances are
+                                    your question is already answerable.{' '}
                                     <Link
                                         to="/docs/data-warehouse/sources"
                                         state={{ newWindow: true }}
