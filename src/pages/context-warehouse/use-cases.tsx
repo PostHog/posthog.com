@@ -40,7 +40,6 @@ interface Recipe {
 
 interface Section {
     title: string
-    subtitle: React.ReactNode
     Icon: IconComponent
     iconColor: string
     recipes: Recipe[]
@@ -49,11 +48,6 @@ interface Section {
 const sections: Section[] = [
     {
         title: 'Turn product usage into revenue',
-        subtitle: (
-            <>
-                Connect what people <em>do</em> to what they <em>pay</em>.
-            </>
-        ),
         Icon: IconTrending,
         iconColor: 'text-green',
         recipes: [
@@ -64,12 +58,8 @@ const sections: Section[] = [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Joins Stripe revenue to your feature-usage events and ranks every feature by how much its users
-                        pay. You get <strong>a feature-by-revenue table</strong>, saved as a PostHog insight.
-                    </>
-                ),
+                uncover:
+                    "Join PostHog's usage data to Stripe to discover which features drive the most revenue per user.",
             },
             {
                 question: 'Which onboarding steps turn trials into paying customers?',
@@ -78,13 +68,7 @@ const sections: Section[] = [
                     { label: 'PostHog funnels', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Builds your onboarding funnel, flags who reached a first Stripe payment, and compares payers
-                        against non-payers at each step. You get <strong>a funnel insight</strong> showing exactly where
-                        trials stall.
-                    </>
-                ),
+                uncover: 'Build a funnel, flag who pays, and find the correlations so you can optimize the onboarding.',
             },
             {
                 question: 'Which accounts are ready to upsell?',
@@ -93,19 +77,13 @@ const sections: Section[] = [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Stripe plans', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Compares real usage against each account's Stripe plan limits and flags the ones consistently
-                        over or near the ceiling. You get <strong>a ranked list of upgrade candidates</strong>, saved as
-                        an insight.
-                    </>
-                ),
+                uncover:
+                    'Compare product usage against current plan limits in Stripe to automatically flag users ready to be upsold.',
             },
         ],
     },
     {
         title: 'See churn coming',
-        subtitle: 'Spot the signals that show up before an account cancels, not after.',
         Icon: IconWarning,
         iconColor: 'text-red',
         recipes: [
@@ -116,13 +94,8 @@ const sections: Section[] = [
                     { label: 'PostHog events', kind: 'ph' },
                     { label: 'Stripe / Chargebee', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Pulls cancellation dates from Stripe or Chargebee and looks at the 30 days of activity before
-                        each one. You get <strong>an insight showing the usage pattern</strong> that precedes a
-                        cancellation.
-                    </>
-                ),
+                uncover:
+                    'Pull cancellation data from Stripe or Chargebee and examine the usage patterns preceding them to spot early-warning signals.',
             },
             {
                 question: 'Do support tickets predict churn?',
@@ -131,12 +104,8 @@ const sections: Section[] = [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'Zendesk / Intercom', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Joins PostHog engagement, support tickets, and Stripe churn to rank ticket topics by the revenue
-                        lost afterward. You get <strong>an insight ranking support issues</strong> by their cost.
-                    </>
-                ),
+                uncover:
+                    'Was that last ticket the last straw? This skill joins data from PostHog, Zendesk, Chargebee, and Stripe to spot which support trends lead to churn.',
             },
             {
                 question: 'Are our biggest accounts our happiest ones?',
@@ -145,19 +114,13 @@ const sections: Section[] = [
                     { label: 'PostHog groups', kind: 'ph' },
                     { label: 'Salesforce / HubSpot', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Plots each account's ARR against its PostHog engagement score and flags the high-ARR,
-                        low-engagement outliers. You get <strong>a value-vs-engagement matrix</strong>, saved as an
-                        insight.
-                    </>
-                ),
+                uncover:
+                    'Map ARR against engagement to flag at-risk accounts and protect your biggest accounts before they wobble.',
             },
         ],
     },
     {
         title: 'Spend smarter on growth',
-        subtitle: 'Point marketing and sales at the customers who stick around.',
         Icon: IconTarget,
         iconColor: 'text-blue',
         recipes: [
@@ -169,13 +132,7 @@ const sections: Section[] = [
                     { label: 'Stripe', kind: 'ext' },
                     { label: 'Google / Meta Ads', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Ranks first-touch acquisition channels by retained Stripe revenue and CAC payback, using ad
-                        spend from Google or Meta. You get <strong>a channel-ranking insight</strong>, not just a signup
-                        count.
-                    </>
-                ),
+                uncover: 'Rank marketing channels by the revenue they bring in, so you can spend budget better.',
             },
             {
                 question: "Which leads deserve the sales team's time?",
@@ -184,12 +141,8 @@ const sections: Section[] = [
                     { label: 'PostHog usage', kind: 'ph' },
                     { label: 'HubSpot / Salesforce', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Scores CRM leads by recent product usage and surfaces the warmest ones sales hasn't contacted
-                        yet. You get <strong>a ranked PQL list</strong>, saved as an insight sales can check daily.
-                    </>
-                ),
+                uncover:
+                    'Score leads by usage and highlight the warmest ones that Sales have overlooked to create a PQL list.',
             },
             {
                 question: 'Did the feature we shipped move revenue?',
@@ -198,13 +151,8 @@ const sections: Section[] = [
                     { label: 'PostHog experiments', kind: 'ph' },
                     { label: 'Stripe', kind: 'ext' },
                 ],
-                uncover: (
-                    <>
-                        Splits users by feature-flag or experiment exposure and compares downstream Stripe revenue and
-                        retention between the exposed group and control. You get <strong>a before/after insight</strong>{' '}
-                        showing whether the rollout paid off.
-                    </>
-                ),
+                uncover:
+                    'Usage went up after launch. But did revenue? This skill creates an experiment to find out and ship what works.',
             },
         ],
     },
@@ -375,12 +323,8 @@ function UseCases(): JSX.Element {
                                     </h1>
                                     <p className="!mb-0 !mt-5 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
                                         Your warehouse already holds all your PostHog data. Add an external source or
-                                        two and you can answer questions neither could answer alone.
-                                    </p>
-                                    <p className="!mb-0 !mt-2 max-w-lg text-base leading-relaxed text-secondary @xl/reader-content:text-[17px]">
-                                        <strong className="text-primary">PostHog events</strong> +{' '}
-                                        <strong className="text-primary">your business data</strong> = the answers
-                                        you've been looking for.
+                                        two and you can answer questions neither could answer alone - these skills show
+                                        you how.
                                     </p>
                                 </div>
 
@@ -405,7 +349,6 @@ function UseCases(): JSX.Element {
                                     />
                                     {section.title}
                                 </h2>
-                                <p className="text-[15px] text-secondary mt-1 mb-0">{section.subtitle}</p>
                             </div>
                             <div className="grid grid-cols-1 @md:grid-cols-2 @xl:grid-cols-3 gap-4">
                                 {section.recipes.map((recipe, ri) => (
@@ -422,9 +365,9 @@ function UseCases(): JSX.Element {
                                 From a one-off answer to a model that lasts
                             </h2>
                             <p className="text-[15px] text-secondary mt-1 mb-0">
-                                A query answers the question today. A model answers it every day, with one definition
-                                reused by every insight, dashboard, and query downstream. These six Skills teach your
-                                coding agent how to build them.
+                                A query answers the question today. A model answers it every day. These skills turn a
+                                metric definition into a durable, reusable model, strengthened by an opinion on what
+                                good looks like, just for spiciness.
                             </p>
                         </div>
 
