@@ -42,7 +42,7 @@ Separate your customers when you plan to give them direct PostHog access, or whe
 | **Querying** | Pass a customer identifier to an Endpoint or the Query API. | Query each customer's project. | Query each customer's project with the OAuth token they granted you. |
 | **Plan** | Available on the free plan. | Requires the [Boost plan](/platform-packages) for unlimited projects. | Available on the free plan. Each customer's organization gets its own [free tier](/pricing). |
 
-## Filter customer data in one project
+## Option 1: Filter customer data in one project
 
 Add a customer identifier, such as `customer_id`, as an event property on every event. You can then retrieve data for a specific customer in two ways:
 
@@ -51,7 +51,7 @@ Add a customer identifier, such as `customer_id`, as an event property on every 
 
 Run these requests from your backend. Make sure you don't accept an arbitrary ID from the client.
 
-## Create a project for each customer
+## Option 2: Create a project for each customer
 
 A separate project isolates each customer's events and person profiles. Use this setup when customers need to log in to PostHog or when you need a strict data boundary between customers.
 
@@ -85,41 +85,17 @@ Billing is organization-wide, so usage is combined across all projects. For exam
 
 Account for this combined usage when pricing your product.
 
-## Provision an account for each customer
+## Option 3: Provision an account for each customer
 
-The [provisioning API](/docs/integrate/provisioning) creates a complete PostHog account for a customer from your backend. The customer never sees a signup form. You get back a project token to start sending events immediately, plus an OAuth access token to query their data.
+The [provisioning API](/docs/integrate/provisioning) creates a complete PostHog account for a customer from your backend, so the customer never sees a signup form. You get back a project token to start sending events, plus an OAuth access token to query their data and deep link them into their own project.
 
-The difference from the setup above is who owns the data. The account belongs to your customer, in their own organization, rather than sitting in yours.
+The difference from option 2 is who owns the data. Each account is your customer's own organization rather than a project inside yours, which changes three things:
 
-### Register your app
+- **Billing.** Usage bills to your customer and starts on the [free tier](/pricing). It doesn't roll up into your bill, and you don't need the Boost plan.
+- **Access.** A deep link signs the customer into their own project, so you don't send invites or hide your organization's member list. Deep linking is only enabled for partners that PostHog has onboarded.
+- **Control.** Your customer can revoke your access or change their plan, and you get only the [scopes](/docs/integrate/provisioning#available-scopes) they consent to.
 
-You register by hosting a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd) at an HTTPS URL on your domain. That URL becomes your client ID. There is no signup form and no client secret, and the flow uses PKCE instead.
-
-### Create an account per customer
-
-For each customer, make three calls:
-
-1. `POST /account_requests` with the customer's email creates the account and returns an authorization code.
-2. `POST /oauth/token` exchanges that code for access and refresh tokens.
-3. `POST /resources` returns the project token and host for the customer's new project.
-
-If the email already belongs to a PostHog user, the response asks you to redirect them for consent instead of creating an account silently.
-
-Use the access token to call [Endpoints](/docs/endpoints/guide-variables) or the [Query API](/docs/api/queries) against that customer's project. The token carries only the [scopes](/docs/integrate/provisioning#available-scopes) the customer consented to.
-
-### Deep link customers into PostHog
-
-`POST /deep_links` returns a single-use URL that signs the customer into their own project, so you don't need to send invites or hide your organization's member list. This endpoint is only enabled for partners that PostHog has onboarded, so ask us to turn it on for your app.
-
-### Customer billing
-
-Each provisioned account is its own organization, billed to your customer and starting on the [free tier](/pricing). Usage does not roll up into your bill, and you don't need the Boost plan for unlimited projects.
-
-### Tradeoffs
-
-- Your customer owns the account, so they can revoke your access or change their plan.
-- Analyzing data across customers is harder than with projects, because each customer is a separate organization.
-- Account creation is rate limited to 10 requests per hour, or 100 once you link your app to a PostHog organization with a [verification token](/docs/integrate/provisioning#link-your-partner-app-to-a-posthog-organization-optional).
+Analyzing data across customers is harder than with option 2, because each customer is a separate organization.
 
 ## Further reading
 
