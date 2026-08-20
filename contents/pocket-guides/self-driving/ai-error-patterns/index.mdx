@@ -1,8 +1,8 @@
 ---
-title: Find the AI failures that return a 200
+title: Find AI failures that return a 200
 shortTitle: Error patterns
 subtitle: 'Your error rate is fine. The model still ignored half the instructions.'
-pocketGuideOrder: 7
+pocketGuideOrder: 6
 appTemplate: error-patterns
 filters:
   type:
@@ -43,34 +43,62 @@ report:
 
 <LeftPage>
 
-<TraceFigure
+<DivergenceFigure
     n={1}
-    caption="What the scout read: one failing trace. Nothing here is an error, and the answer is still wrong."
-    legend="The last generation stopped on its token limit, so the final section never made it into the output. The trace returned 200."
-    rows={[
-        { kind: 'trace', label: 'summarize_document', meta: '200 OK · 4.1s · $0.031', depth: 0 },
-        { kind: 'span', label: 'load_document', meta: '11,400 tokens in', depth: 1 },
-        { kind: 'generation', label: 'summarize_section_1', meta: 'stop: end_turn · 780 out', depth: 1 },
-        { kind: 'generation', label: 'summarize_section_2', meta: 'stop: end_turn · 812 out', depth: 1 },
-        { kind: 'generation', label: 'summarize_section_3', meta: 'stop: max_tokens · 1,024 out', depth: 1 },
+    caption="Two weeks of the summarize workflow. One of these lines is on your dashboard."
+    markerAt={0.4}
+    markerLabel="prompt template change"
+    series={[
+        {
+            label: 'Error rate',
+            note: 'flat at ~0.4%',
+            values: [0.08, 0.07, 0.09, 0.08, 0.08, 0.09, 0.07, 0.08, 0.09, 0.08],
+        },
+        {
+            label: 'Summaries missing the last section',
+            note: '4% → 19%',
+            emphasis: true,
+            values: [0.2, 0.19, 0.21, 0.2, 0.44, 0.62, 0.74, 0.85, 0.91, 0.95],
+        },
     ]}
 />
 
-<AnatomyFigure
+<TraceFigure
     n={2}
-    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
-    priority="P1"
-    status="Ready"
-    actionability="Actionable"
-    headline="14 of 22 long-document summaries truncated on max_tokens, all returning 200, growing since the prompt change"
+    caption="One of the 14. Every generation succeeded, and the summary still comes back short."
+    rows={[
+        {
+            kind: 'trace',
+            label: 'summarize_document',
+            meta: '200 OK · 4.1s · $0.031',
+            depth: 0,
+            marker: {
+                n: 1,
+                label: 'The status',
+                gloss: 'The request succeeded. Nothing here will ever reach your error rate, because nothing threw.',
+            },
+        },
+        { kind: 'span', label: 'load_document', meta: '11,400 tokens in', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_1', meta: 'stop: end_turn · 780 out', depth: 1 },
+        { kind: 'generation', label: 'summarize_section_2', meta: 'stop: end_turn · 812 out', depth: 1 },
+        {
+            kind: 'generation',
+            label: 'summarize_section_3',
+            meta: 'stop: max_tokens · 1,024 out',
+            depth: 1,
+            marker: {
+                n: 2,
+                label: 'What broke first',
+                gloss: 'end_turn means the model finished. max_tokens means it ran out of room and was cut off mid-section. That single word is the whole diagnosis.',
+            },
+        },
+    ]}
 />
 
-<DetailFigure
+<ReportFigure
     n={3}
-    caption="The report opened. From here, you can review the evidence and open a pull request."
-    priority="P1"
-    status="Ready"
-    actionability="Actionable"
+    caption="What lands in your inbox when the scout finds it."
+    legend="Hover over the figure to learn about each element."
 />
 
 <ScoutFigure n={4} caption="The scout itself. The file an agent follows on a schedule." />
@@ -79,43 +107,73 @@ report:
 
 <RightPage>
 
-# Find the AI failures that return a 200
+# Find AI failures that return a 200
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Your error rate is a flat green line. LGTM. Also, your AI summarizer has been quietly dropping the last section of every long document for two weeks.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Both of those are true at the same time, and that's the trouble with error rates – they count the failures your code noticed. They say nothing about the ones it didn't.
 
-## What the scout looks at
+## Your error rate only counts what threw
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <SeeFig n={1} />
+PostHog error tracking does good work with the errors it gets. Set `$ai_is_error` and it normalizes the message, so `Request req_abc123 failed` and `Request req_xyz789 failed` collapse into one issue with counts for traces, users, and days seen.
 
-## Why it reads traces instead of counting errors
+That catches your timeouts, your 429s, and the malformed response that blew up your parser. It catches none of this:
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- The model ignored an instruction
+- It answered from the wrong document
+- A tool came back empty and it carried on regardless
+- Its context window ran out and stopped three quarters of the way through
 
-## The report in your inbox
+Every one of those can return 200 with a plausible-looking body.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <SeeFig n={2} /> Ut enim ad minim veniam, quis nostrud. <SeeFig n={3} />
+Which is how you end up with the <SeeFig n={1} /> scenario: an error rate that looks normal, and the failure nobody is paying attention to.
 
-## The pull request you merge
+## Which traces to read
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+You can't possibly read every trace yourself, so you need a filter. Here's some examples of filters, and how each would have done against your summarizer's failure:
 
-## The scout itself
+- **Errors.** Nothing – it's hidden.
+- **A failed <Term name="evaluation" />.** Only if someone already wrote an eval asking "did this cover the whole document?" You can only catch what you thought to check.
+- **Negative <Term name="user feedback" />.** You may get a few, from the people who noticed and bothered to say so.
+- **Token outliers.** This one lands. Every cut-off generation stops on the same number: your output limit. Sort by output tokens and they're all sitting together at the top.
+- **Trace clusters.** Won't necesarily find it, but it will stop you reading five copies of the same trace.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <SeeFig n={4} />
+So sort by output tokens and take the top of the pile. You now have a reading list, but you still don't know what's wrong.
 
-<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
-<Watches />
+## Group by what broke first
 
-## The schedule it runs on
+The top of that pile is 22 `summarize` traces. You read them and fourteen come back with the last section of the document missing from the summary. The other eight are long documents that summarized fine.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+But those fourteen don't look alike from the outside. One user said it cut off mid-sentence but another said it skipped the risks section entirely. An eval failed on "does this mention the deadline?"
 
-## Add this to your scout troop
+So now you have three complaints with three shapes. If you group by what you can see, you have three findings you can't act on.
 
-<!-- The requirement checklist comes from `requires:` in this file's frontmatter. The CTA
-    opens the matching template in PostHog – see `appTemplate` above. -->
+What you don't know is they're one bug. To see that, you need the earliest thing that went wrong in each <Term name="trace" />, not the thing you noticed last.
+
+## Anatomy of a trace
+
+So open a trace – <SeeFig n={2} />.
+
+The document went in at 11,400 tokens. Sections one and two came back clean, `end_turn` on both. Section three stopped on `max_tokens`.
+
+There it is. This wasn't the prompt, the model, or retrieval. The output budget ran out mid-section and the code shipped whatever it had.
+
+But nothing threw, so the only evidence you have is one word in a stop reason, and you had to open the trace to find it.
+
+## Automate the traces
+
+You aren't going to read 25 traces every morning – so hand it to a <Term name="scout" />. It reads traces on a schedule, up to 25 in a run, and only writes when a failure mode shows up across independent requests.
+
+When it does, you get a <Term name="report" /> with the workflow, the comparison window, what broke first, how often it happens against the whole population, and an action to take. That report will look something like <SeeFig n={3} />.
+
+From there, you can fix it yourself, or choose to have PostHog open a PR to fix it for you.
+
+## Add the scout
+
+The scout itself is just a file an agent follows on a schedule, and <SeeFig n={4} /> is the one this guide is about.
+
+The custom scout for this already lives in PostHog. You just have to enable it, and it's set to run daily at 9:00 AM.
+
 <Enable />
 
 </RightPage>

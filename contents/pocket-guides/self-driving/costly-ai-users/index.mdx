@@ -1,8 +1,8 @@
 ---
-title: Find the users whose AI spend is not normal
+title: Find costly AI users
 shortTitle: Costly users
 subtitle: 'Your biggest spender is probably fine. The one whose cost per trace tripled is not.'
-pocketGuideOrder: 6
+pocketGuideOrder: 5
 appTemplate: costly-users
 filters:
   type:
@@ -42,27 +42,69 @@ report:
 
 <LeftPage>
 
-<ReportFigure
+<FactorSplitFigure
     n={1}
-    caption="Your inbox, reading this report."
-    legend="1 – Which scout wrote it, and when. 2 – What the agent proposes doing about it. 3 – Most runs write nothing; a report is the exception."
+    caption="Two users, the same monthly spend, and only one of them is a problem. The bar is cost per trace."
+    totalLabel="Monthly spend"
+    factorLabels={['Traces', 'Cost per trace']}
+    rows={[
+        {
+            label: 'User A',
+            total: '$400',
+            factors: ['10,000', '$0.04'],
+            weight: 0.31,
+            verdict: 'Growth',
+            tone: 'healthy',
+        },
+        {
+            label: 'User B',
+            total: '$400',
+            factors: ['3,000', '$0.13'],
+            weight: 1,
+            verdict: 'Regression',
+            tone: 'concern',
+        },
+    ]}
 />
 
-<AnatomyFigure
+<TraceFigure
     n={2}
-    caption="Once surfaced, your inbox surfaces this report card. The card includes its claim and triage, with the evidence sitting inside the report itself."
-    priority="P1"
-    status="Ready"
-    actionability="Actionable"
-    headline="Four accounts at 5 generations per request against a population median of 1.3, every retry billed"
+    caption="One request from User B. Four attempts at the extraction step, every one of them billed, and one answer at the end."
+    rows={[
+        { kind: 'trace', label: 'document_qa', meta: '200 OK · 14.2s · $0.131', depth: 0 },
+        { kind: 'span', label: 'load_document', meta: '9,200 tokens in', depth: 1 },
+        {
+            kind: 'generation',
+            label: 'extract_fields',
+            meta: 'stop: max_tokens · $0.024',
+            depth: 1,
+            marker: {
+                n: 1,
+                label: 'The stop reason',
+                gloss: 'max_tokens means the model ran out of room mid-answer. It produced tokens, so the provider bills for it. A 429 would have cost nothing.',
+            },
+        },
+        { kind: 'generation', label: 'extract_fields · retry 1', meta: 'stop: max_tokens · $0.024', depth: 1 },
+        { kind: 'generation', label: 'extract_fields · retry 2', meta: 'stop: max_tokens · $0.025', depth: 1 },
+        { kind: 'generation', label: 'extract_fields · retry 3', meta: 'stop: max_tokens · $0.024', depth: 1 },
+        {
+            kind: 'generation',
+            label: 'answer_question',
+            meta: 'stop: end_turn · $0.034',
+            depth: 1,
+            marker: {
+                n: 2,
+                label: 'The one that worked',
+                gloss: 'One generation produced the answer. The four above it produced nothing you could ship, and all four billed.',
+            },
+        },
+    ]}
 />
 
-<DetailFigure
+<ReportFigure
     n={3}
-    caption="The report opened. From here, you can review the evidence and open a pull request."
-    priority="P1"
-    status="Ready"
-    actionability="Actionable"
+    caption="What lands in your inbox when the scout finds it."
+    legend="Hover over the figure to learn about each element."
 />
 
 <ScoutFigure n={4} caption="The scout itself. The file an agent follows on a schedule." />
@@ -71,43 +113,74 @@ report:
 
 <RightPage>
 
-# Find the users whose AI spend is not normal
+# Find costly AI users
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Tokenmaxxing is so in right now. But tokenmaxxing and value-minning? Less cool.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+A token leaderboard shows you your heaviest users – it doesn't show you your most expensive ones. A costly user is the one that should worry you: same work, same impact, more money.
 
-## What the scout looks at
+## Sorting by spend tells you almost nothing
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <SeeFig n={1} />
+Your top spender is at $400 this month. Is that good or bad?
 
-## Where this differs from the cost chapter
+You probably have no idea, and it isn't because you're missing data. It's because spend is two numbers multiplied together: how much someone used your product, and what each use cost you.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+## Divide by something
 
-## The report in your inbox
+PostHog does most of this for you. Every AI observability event carries `$ai_trace_id`, and one <Term name="trace" /> is one full interaction:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <SeeFig n={2} /> Ut enim ad minim veniam, quis nostrud. <SeeFig n={3} />
+- The model call
+- Retrieval
+- Tool calls
 
-## The pull request you merge
+So you already have a denominator to divide by, and that $400 splits into two very different stories. In <SeeFig n={1} />, two users have the same spend, but User A is the one using your AI product efficiently.
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This approach works well for traces. If you're building a multi-turn experience like a chatbot, use `$ai_session_id` instead. It groups traces into a whole conversation, and cost per session is the number that matters.
 
-## The scout itself
+## Averages are great at hiding things
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <SeeFig n={4} />
+Watching cost per trace across your whole product works well for regressions that hit everyone, like a bad deploy or a model swap.
 
-<!-- Rendered from the `watches:` list in this file's frontmatter – edit it there. -->
-<Watches />
+The trouble is the ones that don't. A retry loop that only fires on documents over 8k tokens hits the handful of accounts that send long documents. Average that in with thousands of healthy traces and it disappears.
 
-## The schedule it runs on
+So one comparison isn't enough. You need two: how a user's cost per trace compares to everyone else's, and how it compares to their own last week. A user who doubled against themselves is worth a look even if they're nowhere near the top of your bill.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+## What makes a user expensive
 
-## Add this to your scout troop
+There's a neat line between two kinds of cost problems.
 
-<!-- The requirement checklist comes from `requires:` in this file's frontmatter. The CTA
-    opens the matching template in PostHog – see `appTemplate` above. -->
+**Something you deployed triggered the cost change.** This can happen from swapping a model or a broken cache prefix. To spot this, you just have to look at your AI bill, because everyone's will move on the same day. [Tell an AI cost spike from real growth](/pocket-guides/self-driving/ai-spend-that-jumps) is the chapter that covers this.
+
+**A user's own input triggers the bill change.** These vary by user: maybe someone sent a 40 page PDF or kept a conversation going for six hours. Nothing about your code change, but what it costs to serve those people did. This is the tokenmaxxing, value-minning user.
+
+## Anatomy of a trace
+
+Back to User B in Fig. 1: cost per trace up 3x, routed through the same workflow. You know where the spend is going. You just don't know why yet.
+
+So you open User B's trace, and <SeeFig n={2} /> is what you find.
+
+There's five <Term name="generation">generations</Term> in a request that should take one, against a population median of 1.3. _There's your retry loop._
+
+Except a retry loop isn't automatically expensive. A 429 rejection bills nothing, because the provider never started generating. A generation that ran, produced tokens, and hit `max_tokens` bills in full. So check the stop reason before you blame the retries.
+
+Every attempt here stopped on `max_tokens`, and every one carries cost. That's the finding: the provider billed four times to produce nothing, because the extraction step retries on malformed output and never gives up loudly.
+
+Now you know what to fix.
+
+## You are not going to do this every morning
+
+Who has time to rank users, work out the population baseline, compare every candidate against it, then split by model and workflow? And that's before you open a single trace. Then do it all again tomorrow.
+
+So hand it to a <Term name="scout" />. A scout runs on a schedule and you only heart about it when something needs your attention.
+
+When it finds something, you get a <Term name="report" /> with the comparison window, the numbers you need to judge it, the cause it found in the traces, and what action to take. <SeeFig n={3} />
+
+## Add the scout
+
+The scout itself is just a file an agent follows on a schedule, and <SeeFig n={4} /> is the one this guide is about.
+
+The custom scout for this already lives in PostHog. You just have to enable it, and it's set to run daily at 9:00 AM.
+
 <Enable />
 
 </RightPage>
