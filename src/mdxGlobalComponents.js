@@ -29,14 +29,12 @@ import FeatureOwnershipTable from './components/FeatureOwnershipTable'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { AdvisoryAnchor } from 'components/shared/typography/Heading'
-import { HiddenSection } from './components/HiddenSection'
 import { HubSpotForm } from './components/HubSpotForm'
 import ImageSlider from 'components/shared/media/ImageSlider'
 import { KeyboardShortcut } from 'components/shared/ui/KeyboardShortcut'
 import { Label } from './components/Label'
 import Link from 'components/shared/ui/Link'
 import { List } from 'components/shared/typography/List'
-import { LPCTA } from './components/LPCTA'
 import { MaxCTA } from './components/MaxCTA'
 import OSButton from 'components/shared/ui/OSButton'
 import { OSQuote } from './components/OSQuote'
@@ -102,10 +100,8 @@ export const shortcodes = {
     FormulaScreenshot,
     GDPRForm,
     AdvisoryAnchor,
-    HiddenSection,
     HubSpotForm,
     KeyboardShortcut,
-    LPCTA,
     Label,
     List,
     OverflowXSection,
