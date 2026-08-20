@@ -287,11 +287,11 @@ The `<AskMax>` component opens the PostHog AI chat window directly on the websit
 />
 ```
 
-Use `<AskAIInput>` for troubleshooting sections:
+`<AskAIInput>` renders a question box that opens the PostHog AI chat window seeded with what the reader typed, plus the current page as context. **Every docs page already gets one automatically under the title**, so don't add it by hand to a page under `/docs` – you'll end up with two.
+
+The shortcode is still available for pages outside `/docs` that want one:
 
 ```mdx
-## Have a question? Ask PostHog AI
-
 <AskAIInput placeholder="Ask about error tracking..." />
 ```
 

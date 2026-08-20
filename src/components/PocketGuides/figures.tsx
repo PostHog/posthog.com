@@ -10,9 +10,13 @@ import Figure from './Figure'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import EvalRuns, { EvalRun } from './EvalRuns'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
-import { useTemplate } from './bookContext'
+import TraceTree, { TraceTreeRow } from './TraceTree'
+import { useEntry, useTemplate } from './bookContext'
+import { normalizeUrl } from './bookModel'
+import { useSkillFiles } from './useSkillFile'
 
 /** The loop, drawn. Wording from /docs/self-driving/self-improving-loop. */
 const LOOP_STAGES = [
@@ -40,6 +44,20 @@ export function Fig({ n, caption, legend, children }: FigProps): JSX.Element {
         <Figure number={n} caption={caption} legend={legend ? <span className="mt-1 block">{legend}</span> : undefined}>
             {children}
         </Figure>
+    )
+}
+
+/**
+ * A worked example illustrating what an answer looks like – arbitrary MDX content (usually a
+ * table) in a numbered frame. A named wrapper around `<Fig>`, not `<Fig>` itself: the reader's
+ * wrapper only positions a `<LeftPage>` child by its `<SeeFig>` citation when its component name
+ * ends in "Figure" – ambient `<Fig>` prints at the top of the page, uncited.
+ */
+export function ExampleFigure({ n = 1, caption, legend, children }: FigProps): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            {children}
+        </Fig>
     )
 }
 
@@ -73,6 +91,24 @@ export function ScoutFigure({ n = 2, caption }: { n?: number; caption: string })
     return (
         <Fig n={n} caption={caption}>
             <ScoutFile scout={template.scout} />
+        </Fig>
+    )
+}
+
+/**
+ * A page's own `SKILL.md`, for guides that aren't self-driving scouts and so have no
+ * `InboxTemplate` to pull one from. Paired by directory, the same way self-driving's scouts are.
+ */
+export function SkillFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element | null {
+    const entry = useEntry()?.entry
+    const skills = useSkillFiles()
+    const skill = entry ? skills.get(normalizeUrl(entry.url)) : undefined
+    if (!skill?.raw) {
+        return null
+    }
+    return (
+        <Fig n={n} caption={caption}>
+            <ScoutFile scout={{ name: skill.name ?? '', description: skill.description ?? '', raw: skill.raw }} />
         </Fig>
     )
 }
@@ -201,6 +237,44 @@ export function DivergenceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <Divergence series={series} markerAt={markerAt} markerLabel={markerLabel} />
+        </Fig>
+    )
+}
+
+/** The evaluation's runs tab, annotated – what a scored generation looks like in the app. */
+export function EvalRunsFigure({
+    n = 1,
+    caption,
+    legend,
+    runs,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    runs: EvalRun[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend ?? <AnatomyHint />}>
+            <EvalRuns runs={runs} />
+        </Fig>
+    )
+}
+
+/** One trace, drawn: the calls a single interaction made, and what each one cost. */
+export function TraceFigure({
+    n = 1,
+    caption,
+    legend,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    rows: TraceTreeRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <TraceTree rows={rows} />
         </Fig>
     )
 }

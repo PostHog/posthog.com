@@ -22,7 +22,7 @@ For those servers, use **`PostHogMCP`** instead. It's a subclass of the [`postho
 ```ts
 import { PostHogMCP } from "@posthog/mcp"
 
-const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHogMCP(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
   // standard posthog-node options apply, e.g. beforeSend, enableExceptionAutocapture
 })
