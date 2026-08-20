@@ -1002,13 +1002,6 @@ const LeftSidebar = ({
     const [activeTab, setActiveTab] = useState(initialTab)
     const activeMenu = hasTabs ? menuTabs!.find((t) => t.value === activeTab)?.menu : null
 
-    // reset to the page's default tab on navigation — stale tab state left the sidebar empty
-    const initialTabRef = useRef(initialTab)
-    initialTabRef.current = initialTab
-    useEffect(() => {
-        setActiveTab(initialTabRef.current)
-    }, [currentPath])
-
     // `isPinned` is the persisted user preference (toggled via the bottom-row
     // toggle button, written to localStorage in ReaderViewContext). When NOT
     // pinned the inner panel collapses to 48px and only expands as an overlay
