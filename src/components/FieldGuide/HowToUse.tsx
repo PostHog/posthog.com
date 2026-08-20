@@ -78,29 +78,53 @@ export default function HowToUse(): JSX.Element {
                 <h3 id="the-species" className="htu-subtitle">
                     The species
                 </h3>
-                <ul className="htu-grid">
-                    {ALL_SPECIES.map((s) => (
-                        <li key={s.slug}>
-                            <Link
-                                to={s.route}
-                                state={{ newWindow: true }}
-                                className="htu-card"
-                                aria-label={`${s.name} — open field guide entry`}
-                            >
-                                <span className="htu-card-img">
-                                    {s.heroImage ? (
-                                        <img src={s.heroImage} alt={s.name} loading="lazy" />
-                                    ) : (
-                                        <span className="htu-card-pending" aria-hidden="true">
-                                            ?
-                                        </span>
-                                    )}
-                                </span>
-                                <span className="htu-card-name">{s.name}</span>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <figure className="htu-plate">
+                    {/* Roughens the aged-paper edge so the plate reads as a torn book page */}
+                    <svg className="htu-plate-defs" aria-hidden="true" focusable="false">
+                        <filter id="fg-torn">
+                            <feTurbulence
+                                type="fractalNoise"
+                                baseFrequency="0.012 0.016"
+                                numOctaves={3}
+                                seed={4}
+                                result="noise"
+                            />
+                            <feDisplacementMap
+                                in="SourceGraphic"
+                                in2="noise"
+                                scale={12}
+                                xChannelSelector="R"
+                                yChannelSelector="G"
+                            />
+                        </filter>
+                    </svg>
+                    <ul className="htu-plate-grid">
+                        {ALL_SPECIES.map((s) => (
+                            <li key={s.slug}>
+                                <Link
+                                    to={s.route}
+                                    state={{ newWindow: true }}
+                                    className="htu-specimen"
+                                    aria-label={`${s.name} — open field guide entry`}
+                                >
+                                    <span className="htu-specimen-img">
+                                        {s.heroImage ? (
+                                            <img src={s.heroImage} alt={s.name} loading="lazy" />
+                                        ) : (
+                                            <span className="htu-specimen-pending" aria-hidden="true">
+                                                ?
+                                            </span>
+                                        )}
+                                    </span>
+                                    <span className="htu-specimen-name">{s.name}</span>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                    <figcaption className="htu-plate-caption">
+                        Plate XI · A census of the common product user, drawn from life
+                    </figcaption>
+                </figure>
 
                 <div className="htu-closing">
                     <p className="htu-closing-text">
@@ -206,58 +230,95 @@ export default function HowToUse(): JSX.Element {
                     margin: 2.5rem 0 1.25rem;
                     color: ${INK};
                 }
-                .htu-grid {
+                .htu-plate-defs { position: absolute; width: 0; height: 0; }
+                .htu-plate {
+                    position: relative;
+                    margin: 0;
+                    padding: clamp(1.75rem, 4cqw, 3.25rem) clamp(1.5rem, 4cqw, 3rem) clamp(2rem, 4cqw, 2.75rem);
+                    isolation: isolate;
+                }
+                /* Aged, torn book page sitting behind the specimens */
+                .htu-plate::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: radial-gradient(120px 90px at 17% 20%, rgba(120, 82, 30, 0.07), transparent 70%),
+                        radial-gradient(150px 110px at 83% 66%, rgba(120, 82, 30, 0.06), transparent 70%),
+                        radial-gradient(90px 70px at 62% 14%, rgba(120, 82, 30, 0.05), transparent 70%),
+                        linear-gradient(158deg, #f6f2e1 0%, #efe8cf 55%, #e6ddc0 100%);
+                    border: 1px solid rgba(69, 28, 1, 0.3);
+                    box-shadow: inset 0 0 44px rgba(69, 28, 1, 0.1), 0 12px 30px rgba(69, 28, 1, 0.2);
+                    filter: url(#fg-torn);
+                }
+                .htu-plate-grid {
                     list-style: none;
                     margin: 0;
                     padding: 0;
                     display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                    grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
                     grid-auto-rows: 1fr;
-                    gap: clamp(0.5rem, 2cqw, 1rem);
+                    gap: clamp(1rem, 3cqw, 2rem) clamp(0.5rem, 2cqw, 1.25rem);
                 }
-                .htu-grid > li { display: flex; }
-                .htu-card {
+                .htu-plate-grid > li { display: flex; }
+                .htu-specimen {
                     flex: 1;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: center;
-                    gap: 0.6rem;
+                    justify-content: flex-start;
+                    gap: 0.5rem;
                     text-align: center;
-                    padding: 1rem 0.75rem;
-                    border: 1px solid ${CORAL};
-                    border-radius: 6px;
-                    background: rgba(255, 255, 255, 0.35);
                     text-decoration: none;
-                    transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+                    padding: 0.25rem;
+                    transition: transform 150ms ease;
                 }
-                .htu-card:hover { border-color: ${CORAL}; transform: translateY(-2px); box-shadow: 0 4px 0 rgba(225, 85, 78, 0.25); }
-                .htu-card-img {
-                    height: 64px;
+                .htu-specimen:hover { transform: translateY(-3px); }
+                .htu-specimen-img {
+                    height: clamp(58px, 9cqw, 84px);
                     display: flex;
-                    align-items: center;
+                    align-items: flex-end;
                     justify-content: center;
                 }
-                .htu-card-img img { max-height: 64px; max-width: 90%; width: auto; height: auto; }
-                .htu-card-pending {
-                    font-family: 'RoundHog', sans-serif;
-                    font-weight: 800;
-                    font-size: 32px;
-                    color: rgba(69, 28, 1, 0.3);
+                .htu-specimen-img img {
+                    max-height: 100%;
+                    max-width: 92%;
+                    width: auto;
+                    height: auto;
+                    filter: drop-shadow(1px 3px 2px rgba(69, 28, 1, 0.22));
                 }
-                .htu-card-name {
+                .htu-specimen-pending {
+                    align-self: center;
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
-                    text-transform: uppercase;
-                    letter-spacing: 0.4px;
-                    font-size: 11px;
-                    line-height: 1.2;
+                    font-size: 34px;
+                    color: rgba(69, 28, 1, 0.28);
+                }
+                .htu-specimen-name {
+                    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+                    font-style: italic;
+                    font-size: clamp(12px, 1.5cqw, 14px);
+                    line-height: 1.25;
                     color: ${INK};
                     /* Reserve two lines so single- and double-line names align */
-                    min-height: 2.4em;
+                    min-height: 2.5em;
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     justify-content: center;
+                }
+                .htu-specimen:hover .htu-specimen-name {
+                    color: ${CORAL};
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                }
+                .htu-plate-caption {
+                    margin-top: clamp(1.25rem, 3cqw, 2rem);
+                    text-align: center;
+                    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+                    font-style: italic;
+                    font-size: clamp(11px, 1.3cqw, 13px);
+                    letter-spacing: 0.3px;
+                    color: rgba(69, 28, 1, 0.6);
                 }
 
                 .htu-closing {
