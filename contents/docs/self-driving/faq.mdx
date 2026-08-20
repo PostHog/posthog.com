@@ -84,10 +84,20 @@ If you need guaranteed handling of a specific stream, use a [signal source](/doc
 Everything is a toggle, and every dollar has a ceiling:
 
 - Turn individual [signal sources](/docs/self-driving/inbox/sources) and [scouts](/docs/self-driving/scouts) on or off per project.
+- Turn **PR generation** off entirely, or set the priority it starts at, in your [inbox](/docs/self-driving/inbox) settings.
+- Cap how much arrives with a daily report limit, also in your inbox settings.
 - You pay a flat $15 per pull request. Reports are free, and your first three PRs each month are free.
 - A default $150 billing limit is set for you, and you can lower it. When you hit the limit, PR generation pauses until the next billing period.
 
 See [pricing](/docs/self-driving/pricing) for the full picture.
+
+## Can I get the findings without the pull requests?
+
+Yes. Turn off **PR generation** in your [inbox](/docs/self-driving/inbox) settings and nothing opens a PR – reports still arrive, still notify your team, and you decide what to do with them. Reports are free, so this costs nothing.
+
+If you want PRs for the urgent things only, leave it on and set the threshold instead: agents start work on reports at or above the priority you pick, and a teammate can set their own threshold for reports that suggest them as reviewer.
+
+Either way, a report is written for a human to read rather than as a spec another agent can execute. If you want your own coding agents working from the same context, give them the [PostHog MCP](/docs/model-context-protocol).
 
 ## Convinced, or at least curious?
 
