@@ -58,7 +58,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Put a threshold alert on the average score and send it to whoever owns checkout; when the average climbs, something on the payment path has broken, and the score is already pointing at it.`,
+                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Filter it to your checkout and payment sessions, put a threshold alert on the average score, and route it to whoever owns that flow; when the average climbs, something on the path to purchase has broken, and the reasoning behind the worst-scoring sessions will show you where.`,
             },
         ],
     },
@@ -340,7 +340,7 @@ export const PENDING_SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `This one rewards a Summarizer scanner over a verdict or a tag. Point it at sessions from users returning after a long absence, and for each one it writes what they came back to do and where the product had moved since they left.
+                body: `This one rewards a Summarizer scanner over a verdict or a tag. Filter to sessions from users returning after a long absence, and for each one it writes what they set out to do and where they got stuck, since intent and friction points are part of what a summary returns.
 
 Schedule a weekday digest of those summaries to Slack. Every Monday you get a short brief on what your long-dormant customers came looking for and could no longer find.`,
             },
