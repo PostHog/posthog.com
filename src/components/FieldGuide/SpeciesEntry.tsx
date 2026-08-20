@@ -25,18 +25,41 @@ function scannerHref(phrase: string): string {
     return `${SCANNER_DOC}${SCANNER_ANCHOR[type] ?? ''}`
 }
 
-function renderSectionBody(section: SpeciesSection): React.ReactNode {
-    if (section.label !== 'If you spot one') return section.body
-    const parts = section.body.split(SCANNER_RE)
-    if (parts.length < 3) return section.body
-    return parts.map((part, i) =>
-        SCANNER_RE.test(part) && i === 1 ? (
-            <Link key={i} to={scannerHref(part)} state={{ newWindow: true }} className="se-link">
-                {part}
-            </Link>
-        ) : (
-            <React.Fragment key={i}>{part}</React.Fragment>
-        )
+// Render one paragraph, linking the first scanner phrase when this section allows
+// it and one hasn't been linked yet. Returns [node, didLinkHere].
+function renderParagraph(text: string, canLink: boolean): [React.ReactNode, boolean] {
+    if (!canLink || !SCANNER_RE.test(text)) return [text, false]
+    const parts = text.split(SCANNER_RE)
+    let used = false
+    const nodes = parts.map((part, i) => {
+        if (!used && SCANNER_RE.test(part)) {
+            used = true
+            return (
+                <Link key={i} to={scannerHref(part)} state={{ newWindow: true }} className="se-link">
+                    {part}
+                </Link>
+            )
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>
+    })
+    return [nodes, used]
+}
+
+function SectionBody({ section }: { section: SpeciesSection }): JSX.Element {
+    const allowLinks = section.label === 'If you spot one'
+    let linked = false
+    return (
+        <>
+            {section.body.split('\n\n').map((para, i) => {
+                const [node, didLink] = renderParagraph(para, allowLinks && !linked)
+                if (didLink) linked = true
+                return (
+                    <p key={i} className="se-section-body">
+                        {node}
+                    </p>
+                )
+            })}
+        </>
     )
 }
 
@@ -84,7 +107,7 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         {species.sections.map((s) => (
                             <section key={s.label} className="se-section">
                                 <h2 className="se-section-label">{s.label}</h2>
-                                <p className="se-section-body">{renderSectionBody(s)}</p>
+                                <SectionBody section={s} />
                             </section>
                         ))}
                     </div>
@@ -192,6 +215,7 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                         margin: 0;
                         color: ${INK};
                     }
+                    .se-section-body + .se-section-body { margin-top: 0.65rem; }
                     .se-link {
                         color: ${INK};
                         text-decoration: underline;

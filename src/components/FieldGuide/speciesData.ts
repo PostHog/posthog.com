@@ -58,7 +58,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Set up a Monitor scanner. The Rage-Clicker is one of the most reliably detected species, and each sighting represents revenue actively walking out the door.`,
+                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Put a threshold alert on the daily average and send it to whoever owns checkout; when the average climbs, something on the payment path has broken, and the score is already pointing at it.`,
             },
         ],
     },
@@ -98,7 +98,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Set up a Monitor scanner with the prompt "Did this session include three or more reloads of the same URL within a short window?" When it fires, follow the URL. It's almost always a slow endpoint, a hung request, or a status page that hasn't caught up to reality.`,
+                body: `Ask a Monitor scanner whether the user reloaded the same URL three or more times in quick succession. When the verdict is yes, open the reasoning; its citations drop you on the exact reload, nearly always a slow endpoint, a hung request, or a status page lagging behind reality. The Pilgrim will never complain, so the citation is the closest thing to a bug report you are going to get.`,
             },
         ],
     },
@@ -138,7 +138,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Run a Classifier scanner across sessions, then filter on the outcome facet for "incomplete" or "abandoned." Group the results by user ID to spot the same Tab-Hopper returning across multiple sessions. Do with this information what you wish.`,
+                body: `The Tab-Hopper is defined by leaving and coming back, so one session tells you little. Run a Monitor scanner for the within-session tell, a long idle gap followed by a return to the same task, then save the verdict-yes users as a cohort. The cohort is where the species lives. Watch whether the same people reappear across sessions, and whether they ever finish; when one does finish, three weeks late, the cohort is how you will know.`,
             },
         ],
     },
@@ -178,7 +178,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Set up a Classifier scanner with the prompt: "What form field was the user on when they disengaged?" The scanner tags each session with a specific field name, and shows you the most common tags, effectively giving you a ranked list of the fields breaking your funnel, with the worst offenders at the top.`,
+                body: `A verdict won't help here; you want the field name. A Classifier scanner asked "Which form field was the user on when they gave up?" tags each abandoned session with the exact culprit, so turn on freeform tags, since you cannot predict every field name in advance. Sort the tags by frequency and you have a ranked list of the fields breaking your funnel, worst offender first. Usually it is the one nobody wanted to add.`,
             },
         ],
     },
@@ -218,7 +218,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Filter to sessions that include /pricing, then configure a Classifier scanner with the prompt: "What plan, tier, or feature do visitors focus on most?" The results page will show you what your buyers are stuck on. Pair the same session list with your CRM, and your sales team has a warm-lead queue with context attached.`,
+                body: `First narrow to sessions that touched /pricing, then run a Classifier scanner asking "Which plan, tier, or feature did this visitor keep returning to?" The tags tell you what your buyers are weighing. Save the users behind a given tag as a cohort and hand it to sales, and the follow-up arrives already knowing which tier the Loiterer was stuck on. That beats a cold "just checking in."`,
             },
         ],
     },
@@ -258,7 +258,9 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Configure a Monitor scanner with the prompt: "Did users dismiss the onboarding tutorial in under five seconds without engaging any step?" When the verdict is yes, pick a user and check several session recordings coming from them. The pattern is almost always there: confusion about a feature the tutorial would have covered, two clicks away from where they gave up.`,
+                body: `A Monitor scanner catches the moment the user dismisses onboarding in under five seconds without engaging a single step. Save the yes-users as a cohort and set it beside your activation numbers.
+
+If the Skippers activate anyway, your onboarding is optional and you can safely shorten it. If they don't, you have found both the people to win back and the feature to do it with, since it is the one the tutorial was trying to show them.`,
             },
         ],
     },
@@ -299,7 +301,7 @@ export const PENDING_SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Configure a Classifier scanner with the prompt: "Which modal, popup, or overlay did this user dismiss without engaging with its content?" You will get a ranked list of the ones your users are bouncing off without reading.`,
+                body: `A Classifier scanner with freeform tags, asked "Which modal, popup, or overlay did this user dismiss without reading?", returns a ranked list of the interruptions your users bounce off. Read it as a list of things you made them close. The one at the top is the one to cut first.`,
             },
         ],
     },
@@ -336,7 +338,9 @@ export const PENDING_SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Configure a Classifier scanner with the prompt: "What feature, setting, or page did this returning user seem unable to find?" A few days later, you will see what your long-absent customers are searching for and not finding.`,
+                body: `This one rewards a Summarizer scanner over a verdict or a tag. Point it at sessions from users returning after a long absence, and for each one it writes what they came back to do and where the product had moved since they left.
+
+Schedule a weekday digest of those summaries to Slack. Every Monday you get a short brief on what your long-dormant customers came looking for and could no longer find.`,
             },
         ],
     },
@@ -373,7 +377,7 @@ export const PENDING_SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Configure a Classifier scanner with the prompt: "What URL did the user try to load when they hit the 404?" The per-scanner page surfaces the most-tagged URLs, giving you a ranked list of your most-broken paths. A surprising portion will trace back to your own marketing emails and outdated docs.`,
+                body: `You can count the 404s themselves in analytics; what that misses is where the Wanderer meant to go. A Classifier scanner asking "What was the user trying to reach when they landed on the 404?" tags each dead end with its intended destination. The ranked tags are your most-broken paths, and a surprising share trace back to your own old emails and outdated docs, which is the good news, since those you control.`,
             },
         ],
     },
@@ -410,7 +414,7 @@ export const PENDING_SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Configure a Monitor scanner with the prompt: "Did this user open developer tools within the first thirty seconds of their session?" When the verdict is yes, treat the session as a warm signal; it’s probably worth a closer look, both for what the visitor was doing and for what your product was showing them.`,
+                body: `You will not catch this one opening the console; the recording cannot see the developer tools. What it can see is what they saw, since with console and network capture on, PostHog records the errors and requests from the session. Run a Monitor scanner asking "Did this session surface a console error, or a request exposing keys or internal endpoints?" A yes is worth your attention on two counts. The visitor is often evaluating you closely, and the leak is one they found before you did.`,
             },
         ],
     },
