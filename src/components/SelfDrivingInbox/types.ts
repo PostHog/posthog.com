@@ -49,7 +49,7 @@ export interface InboxTemplate {
     category: string
     /** Route to the guide page, e.g. /pocket-guides/self-driving/silent-failure-core-action */
     url: string
-    /** The template's own title, e.g. "Silent failure in your core action" */
+    /** The template's own title, e.g. "Catch a core action failing without errors" */
     templateTitle: string
     /** Short name for tight surfaces like the index tabs. Fall back to `templateTitle`. */
     templateShortTitle?: string

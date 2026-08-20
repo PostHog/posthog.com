@@ -620,6 +620,10 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
+                name: 'Writing blogs',
+                url: '/handbook/content/blogs',
+            },
+            {
                 name: 'Video',
                 url: '/handbook/marketing/video',
                 children: [
@@ -4060,6 +4064,20 @@ export const docsMenu = {
                         {
                             name: 'Access control',
                             url: '/docs/settings/access-control',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/settings/access-control',
+                                },
+                                {
+                                    name: 'Warehouse access control',
+                                    url: '/docs/settings/warehouse-access-control',
+                                },
+                                {
+                                    name: 'Property access control',
+                                    url: '/docs/settings/property-access-control',
+                                },
+                            ],
                         },
                         {
                             name: 'Activity logs',
@@ -6603,8 +6621,8 @@ export const docsMenu = {
             icon: 'IconListCheck',
             description: 'Govern your metrics, certify your tables, and give every AI agent the same source of truth',
             badge: {
-                title: 'Alpha',
-                className: 'uppercase !bg-red/10 !text-red !dark:text-white !dark:bg-red/50',
+                title: 'Beta',
+                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
             },
             children: [
                 {
@@ -6615,6 +6633,10 @@ export const docsMenu = {
                     url: '/docs/semantic-layer',
                     icon: 'IconHome',
                     color: 'seagreen',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Getting started',
@@ -7282,6 +7304,12 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'MCP SDK v2',
+                    url: '/docs/mcp-analytics/sdk-v2',
+                    icon: 'IconCode',
+                    color: 'purple',
                 },
                 {
                     name: 'Custom servers',
@@ -8340,7 +8368,17 @@ export const docsMenu = {
                         },
                         {
                             name: 'Customer-facing analytics',
-                            url: '/docs/endpoints/customer-facing-analytics',
+                            url: '/docs/data/embedded-analytics-projects',
+                            children: [
+                                {
+                                    name: 'Project setup',
+                                    url: '/docs/data/embedded-analytics-projects',
+                                },
+                                {
+                                    name: 'Build with Endpoints',
+                                    url: '/docs/endpoints/customer-facing-analytics',
+                                },
+                            ],
                         },
                         {
                             name: 'Enrich internal tools with PostHog data',

@@ -819,7 +819,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                                       // the content here instead of clipping whatever doesn't fit.
                                       item.appSettings?.size?.fixed
                                           ? 'overflow-x-hidden overflow-y-auto'
-                                          : 'overflow-hidden'
+                                          : 'overflow-clip'
                                   } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'

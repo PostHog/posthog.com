@@ -237,3 +237,6 @@ If you do decide to come, we ask that you make the trip worthwhile - attend a co
 
 ### Sponsorships
 If you believe an open-source project is fundamentally important to the success of PostHog then we should set up a recurring sponsorship. In this case, see the [open-source sponsorship Marketing initiative](/handbook/marketing/open-source-sponsorship).
+
+#### Open-source sponsorship for individuals
+You can also sponsor open-source projects that have helped you personally, using your monthly `User Limit`. You don't need approval - just apply the guiding principles above, as you would for any other spend.

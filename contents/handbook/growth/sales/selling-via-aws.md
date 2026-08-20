@@ -57,6 +57,7 @@ Since AWS Marketplace can be a pain to navigate, we're using Clazar to manage th
    - Set as **upfront payment** (non-FPS offer)
    - Enter the negotiated price
    - Currency: USD (can do EUR, GBP, JPY if needed)
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 6. **Choose EULA type:**
    - Use **Standard Contract for AWS Marketplace** unless legal says otherwise
    - If custom EULA needed, upload the PDF (max 5 docs)
@@ -82,6 +83,7 @@ If you need more control or Salesforce isn't cooperating:
    - Add your product dimensions
    - Set prices for each dimension
    - For annual deals, configure as single upfront payment
+   - **PostHog credits are post-discount** – the credit balance we apply equals the discounted amount the customer pays through AWS, not the pre-discount list value
 7. **Legal terms:**
    - Select EULA type (Standard Contract or Custom)
    - Upload any additional documents if needed

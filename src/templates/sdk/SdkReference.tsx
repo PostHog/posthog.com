@@ -8,7 +8,7 @@ import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
+import { getLanguageFromSdkId, hasConcreteVersion, isLatestVersion } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
 import Chip from '../../components/Chip'
 import ReaderView from 'components/ReaderView'
@@ -68,6 +68,17 @@ export interface SdkReferenceData {
     }
     classes: Class[]
     categories: string[]
+    /** Only selected by some queries — see `createPages.ts` / `onPostBuild.ts`. */
+    types?: SdkTypeData[]
+}
+
+export interface SdkTypeData {
+    id: string
+    name: string
+    description?: string
+    path?: string
+    properties?: Parameter[]
+    example?: string
 }
 
 export interface PageContext {
@@ -139,13 +150,16 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
     const location = useLocation()
 
     // Get the language for this SDK reference
-    const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
+    const sdkLanguage = getLanguageFromSdkId(fullReference.referenceId)
     const validTypes = pageContext.types
+    const isLatest = isLatestVersion(fullReference.version)
+    // Versioned copies are duplicates of the unversioned page, which is the one worth indexing.
+    const canonicalPath = `/docs/references/${fullReference.referenceId}`
+    const hasConcreteVersionLabel = hasConcreteVersion(fullReference.info.version)
 
     const sdkVersions = data.allSdkReferences.nodes
 
-    // Get versions for current referenceId
-    const currentReferenceId = fullReference.info.id
+    const currentReferenceId = fullReference.referenceId
     // Sort versions by version string (descending)
     const availableVersions = sdkVersions
         .filter((version) => version.referenceId === currentReferenceId)
@@ -258,7 +272,8 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
 
     return (
         <ReaderView markdownContent={JSON.stringify(fullReference, null, 2)}>
-            <SEO title={`${fullReference.info.title} - PostHog`} />
+            {/* Versioned pages age out of the build, so only the unversioned page is indexable. */}
+            <SEO title={`${fullReference.info.title} - PostHog`} canonicalUrl={canonicalPath} noindex={!isLatest} />
             <section>
                 <div className="mb-8 relative">
                     <div className="flex items-center mt-0 flex-wrap justify-between">
@@ -274,7 +289,7 @@ export default function SdkReference({ pageContext, data }: { pageContext: PageC
                                             <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none gap-2">
                                                 <span>
                                                     {getCurrentVersion()}
-                                                    {getCurrentVersion() === 'latest' && (
+                                                    {isLatest && hasConcreteVersionLabel && (
                                                         <span className="text-xs text-primary/60 dark:text-primary-dark/60">
                                                             {' '}
                                                             ({fullReference.info.version})
