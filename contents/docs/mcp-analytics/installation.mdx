@@ -50,7 +50,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new Server({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -72,7 +72,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
@@ -90,7 +90,7 @@ import { instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com",
 })
 
@@ -115,7 +115,7 @@ import { createMcpHandler } from "mcp-handler"
 import { PostHog, instrument } from "@posthog/mcp"
 
 // Create the client once at module scope (not per request).
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -172,7 +172,7 @@ import { McpModule } from "@rekog/mcp-nest"
 import { PostHog, instrumentMutator } from "@posthog/mcp"
 
 // Create the client once at module scope.
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY, {
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
 })
 
@@ -375,7 +375,7 @@ The `posthog-node` client queues and batches events asynchronously, and you own 
 import { PostHog } from "posthog-node"
 import { instrument } from "@posthog/mcp"
 
-const posthog = new PostHog(process.env.POSTHOG_PROJECT_API_KEY)
+const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN)
 instrument(server, posthog)
 
 process.on("SIGTERM", async () => {
