@@ -73,7 +73,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Slider from 'components/shared/layout/Slider'
 import { PlayerEvents, DotLottiePlayer } from '@dotlottie/react-player'
 import { MenuContainer } from 'components/PostLayout/MobileNav'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 type Product = {
     name: string

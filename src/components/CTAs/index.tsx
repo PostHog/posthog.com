@@ -3,7 +3,7 @@ import { CallToAction } from 'components/CallToAction'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import IntegrationPrompt from 'components/IntegrationPrompt'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import { IconMCP } from 'components/OSIcons'
 

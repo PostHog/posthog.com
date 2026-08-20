@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CallToAction } from 'components/CallToAction'
 import CommunityCTA from 'components/CommunityCTA'
 import TutorialsSlider from 'components/TutorialsSlider'

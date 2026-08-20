@@ -1,7 +1,7 @@
 import ElementScrollLink, { ScrollSpyProvider } from 'components/shared/layout/ElementScrollLink'
 import '@fontsource/source-code-pro'
 import { CodeBlock, SingleCodeBlock } from 'components/shared/ui/CodeBlock'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import 'core-js/features/array/at'
 import { graphql } from 'gatsby'
 import { getCookie, setCookie } from 'lib/utils'

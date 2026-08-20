@@ -3,7 +3,7 @@ import cntl from 'cntl'
 import { PaperPlaneArrow, ThumbsDownOutline, ThumbsUpOutline } from 'components/Icons/Icons'
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import TextareaAutosize from 'react-textarea-autosize'
 
 const button = cntl`

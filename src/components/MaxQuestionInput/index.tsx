@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { navigate } from 'gatsby'

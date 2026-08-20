@@ -1,6 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import React, { useEffect } from 'react'
 
 const SAFE_DEEP_LINK_PATH = /^[a-zA-Z0-9/_-]{1,128}$/

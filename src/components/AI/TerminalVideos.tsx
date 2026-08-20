@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ASCIIBox } from './TerminalSection'
-import Link from 'components/Link'
-import { DebugContainerQuery } from "components/shared/layout/DebugContainerQuery"
+import Link from 'components/shared/ui/Link'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 interface Chapter {
     title: string
@@ -32,21 +32,11 @@ function VideoThumbnail({ video, videoKey }: { video: Video; videoKey: string })
     const videoUrl = `/videos/play?source=wistia&videoId=${video.wistia}`
 
     return (
-        <Link
-            to={videoUrl}
-            state={{ newWindow: true }}
-            className="block text-left transition-all hover:scale-[1.02]"
-        >
+        <Link to={videoUrl} state={{ newWindow: true }} className="block text-left transition-all hover:scale-[1.02]">
             {video.customThumb ? (
-                <img
-                    src={video.customThumb}
-                    alt={video.title}
-                    className="w-full h-auto block"
-                />
+                <img src={video.customThumb} alt={video.title} className="w-full h-auto block" />
             ) : (
-                <div className="text-[rgba(238,239,233,0.9)] text-sm">
-                    {video.title}
-                </div>
+                <div className="text-[rgba(238,239,233,0.9)] text-sm">{video.title}</div>
             )}
         </Link>
     )

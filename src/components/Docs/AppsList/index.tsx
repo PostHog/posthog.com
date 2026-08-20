@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import useProducts from '../../../hooks/useProducts'
 
 // A few products have a marketing slug that doesn't map to /docs/<slug>.

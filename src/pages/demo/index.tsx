@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Explorer from 'components/Explorer'
 import MediaPlayer from 'components/MediaPlayer'
 
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 export default function Demo(): JSX.Element {
     return (

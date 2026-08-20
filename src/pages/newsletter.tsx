@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
 import FeaturedPost from 'components/BuildMode/FeaturedPost'
 import Hero, { HeroHeader } from 'components/BuildMode/Hero'

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { getWizardFrameworkRows } from 'constants/installation-taxonomy'
 

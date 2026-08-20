@@ -3,10 +3,10 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import { IconChevronRight, IconPlus, IconArrowUpRight } from '@posthog/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
-import { replacePath } from '../../../gatsby/utils'
+import { replacePath } from '../../../../../gatsby/utils'
 import OSButton from 'components/shared/ui/OSButton'
-import Link from 'components/Link'
-import { useWindow } from '../../context/Window'
+import Link from 'components/shared/ui/Link'
+import { useWindow } from '../../../../context/Window'
 
 interface MenuItem {
     name: string

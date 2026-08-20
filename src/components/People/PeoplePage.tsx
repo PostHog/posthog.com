@@ -1,6 +1,6 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import People from 'components/People'
 
 interface PeoplePageProps {

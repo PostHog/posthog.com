@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Input from 'components/shared/forms/OSForm/input'
 import { getLogo } from '../../../constants/logos'
 import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxonomy'

@@ -1,9 +1,9 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 const SideProjectInsurance: React.FC = () => {
     return (

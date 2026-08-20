@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconRewindPlay, IconBolt, IconNotebook, IconPullRequest, IconCheckCircle, IconTrends } from '@posthog/icons'
 
 /**

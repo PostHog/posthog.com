@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import useRoadmapEarlyAccessFeatures, { RoadmapEarlyAccessFeature } from 'hooks/useRoadmapEarlyAccessFeatures'
 import { ROADMAP_STAGE_STYLES } from 'components/Roadmap/roadmapStageStyles'
 

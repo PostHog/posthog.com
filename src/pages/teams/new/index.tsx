@@ -3,8 +3,8 @@ import React, { useState, useRef, useMemo } from 'react'
 import { useUser } from 'hooks/useUser'
 import OSButton from 'components/shared/ui/OSButton'
 import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
-import SEO from 'components/seo'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
+import SEO from 'components/shared/layout/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 
 type TeamPageProps = {

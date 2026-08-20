@@ -1,6 +1,6 @@
 import React from 'react'
 import MediaPlayer from 'components/MediaPlayer'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { useVideos } from '../../hooks/useVideos'
 
 export default function VideoPlayer({ location }: { location: Location }): JSX.Element {

@@ -1,6 +1,6 @@
 import { ITopic } from './types'
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export default function Topics({ topics }: { topics: ITopic[] }) {
     const buttonClasses = `px-4 py-2 inline-block bg-accent-light border-black/80 rounded-sm font-semibold text-sm leading-none`

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import { IconBold, IconMusicEighthNote } from 'components/OSIcons'
 import NoHatingAllowed from 'components/NoHatingAllowed'

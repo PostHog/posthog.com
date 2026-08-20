@@ -34,7 +34,7 @@ import { mergeRegister } from '@lexical/utils'
 import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export default function MDXEditor({
     body,

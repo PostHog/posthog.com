@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import Editor from 'components/Editor'
 import OSTable from 'components/shared/ui/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'

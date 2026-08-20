@@ -1,6 +1,6 @@
 import React from 'react'
 import Viewer from 'components/Viewer'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { whyPostHogNav } from '../../navs/whyPostHog'
 import WhyPostHogHeader from './Header'
 

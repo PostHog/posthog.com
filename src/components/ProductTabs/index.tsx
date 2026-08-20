@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OSTabs from 'components/shared/ui/OSTabs'
 import useProduct from 'hooks/useProduct'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import OSButton from 'components/shared/ui/OSButton'
 import { APP_COUNT } from '../../constants'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 interface DemoCard {
     top: string
@@ -29,7 +29,7 @@ const demoQuestions: DemoCard[] = [
     },
     {
         top: "What's the right SQL syntax for this query?",
-        bottom: 'Write and debug SQL queries (so you don\'t have to)',
+        bottom: "Write and debug SQL queries (so you don't have to)",
     },
     {
         top: 'Find the top 10 orgs by number of active users',
@@ -70,26 +70,17 @@ export default function TerminalDemo(): JSX.Element {
                     const url = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
                     return (
-                        <Link
-                            key={idx}
-                            to={url}
-                            externalNoIcon
-                            className="block group"
-                        >
+                        <Link key={idx} to={url} externalNoIcon className="block group">
                             <div className="flex items-center gap-3 p-4 bg-[rgba(0,0,0,0.3)] border border-[#333] group-hover:border-[#00FF00] group-hover:bg-[rgba(0,255,0,0.05)]">
                                 {/* Prompt indicator */}
-                                <div className="text-[#00FF00] text-sm font-mono shrink-0">
-                                    $
-                                </div>
+                                <div className="text-[#00FF00] text-sm font-mono shrink-0">$</div>
 
                                 {/* Question with underline */}
                                 <div className="flex-1 min-w-0">
                                     <div className="text-[rgba(238,239,233,0.9)] text-sm font-mono border-b border-dashed border-[#666] group-hover:border-[#00FF00] pb-1">
                                         {card.top}
                                     </div>
-                                    <div className="text-[#666] text-sm mt-2 leading-relaxed">
-                                        {card.bottom}
-                                    </div>
+                                    <div className="text-[#666] text-sm mt-2 leading-relaxed">{card.bottom}</div>
                                 </div>
 
                                 {/* Go button */}

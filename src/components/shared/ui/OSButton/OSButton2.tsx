@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ZoomHover from 'components/shared/animation/ZoomHover'
 
 interface OSButton2Props {

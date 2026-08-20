@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData, SQUEAK_HOST } from 'lib/strapi'
 import usePostHog from './usePostHog'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useToast } from '../context/Toast'
 
 // Sentinel value used by posthog-js for cookieless tracking mode

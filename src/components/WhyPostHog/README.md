@@ -34,7 +34,7 @@ the page).
 
 ```tsx
 import WhyPostHogViewer from 'components/WhyPostHog'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 export default function MyPage() {
     return (

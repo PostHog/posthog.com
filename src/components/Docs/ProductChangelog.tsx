@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRoadmaps } from 'hooks/useRoadmaps'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import dayjs from 'dayjs'
 import Markdown from 'components/Squeak/components/Markdown'
 import { ChangelogEmojiReactions } from 'components/EmojiReactions'

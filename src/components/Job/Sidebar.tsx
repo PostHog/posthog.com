@@ -1,7 +1,7 @@
 import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { kebabCase, slugifyTeamName } from 'lib/utils'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ReactCountryFlag from 'react-country-flag'
 import { ContributorImageSmall } from 'components/PostLayout/Contributors'
 import SidebarSection from 'components/PostLayout/SidebarSection'

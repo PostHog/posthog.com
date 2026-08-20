@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import { SEO } from 'components/seo'
-import Link from 'components/Link'
+import { SEO } from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import OSButton from 'components/shared/ui/OSButton'
 import OSTable from 'components/shared/ui/OSTable'
 import subprocessors from '../data/subprocessors.json'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Tooltip from 'components/RadixUI/Tooltip'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import ZoomHover from 'components/shared/animation/ZoomHover'
 import { IconArrowUpRight, IconExternal } from '@posthog/icons'
 

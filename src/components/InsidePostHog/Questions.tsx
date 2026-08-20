@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconArrowRight, IconInfo } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/Tooltip'
 import { useQuestions } from 'hooks/useQuestions'
 import { useUser } from 'hooks/useUser'

@@ -1,5 +1,5 @@
 import { RightArrow } from 'components/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { usePost } from './hooks'
 import React from 'react'
 import { ICrumb } from './types'

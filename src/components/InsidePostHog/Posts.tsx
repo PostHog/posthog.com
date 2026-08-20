@@ -1,7 +1,7 @@
 import { CallToAction } from 'components/CallToAction'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import { tagsHideFromIndex } from 'components/Edition/Posts'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React from 'react'
 
 const PostPreviewSkeleton = () => {

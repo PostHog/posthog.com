@@ -1,7 +1,7 @@
 import Section from './Section'
 import React from 'react'
 import Crest from './Crest'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconArrowLeft } from '@posthog/icons'
 import TeamName from './TeamName'
 import Description from './Description'

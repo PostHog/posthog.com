@@ -13,7 +13,7 @@ import {
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconReactNative, IconFlutter } from 'components/OSIcons'
 import OSButton from 'components/shared/ui/OSButton'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 
 export const features = {

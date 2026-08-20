@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useUser } from 'hooks/useUser'
 import React, { useContext, useEffect, useState } from 'react'
 import { PostsContext, sortOptions } from '../Posts'

@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useQuestions } from 'hooks/useQuestions'
 import { IconCheckCircle, IconMessage } from '@posthog/icons'
 import dayjs from 'dayjs'

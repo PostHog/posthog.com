@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import slugify from 'slugify'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 

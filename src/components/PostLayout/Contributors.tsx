@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/Tooltip'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import React from 'react'

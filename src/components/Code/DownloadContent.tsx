@@ -1,5 +1,5 @@
 import { CallToAction, TrackedCTA } from 'components/CallToAction'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React, { useEffect, useState } from 'react'
 
 const DOWNLOAD_URL = 'https://code.posthog.com/download'

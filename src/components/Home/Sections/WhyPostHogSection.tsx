@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Markdown from 'components/shared/typography/Markdown'
 import SupportSmallTeamLink from 'components/Home/SupportSmallTeamLink'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'

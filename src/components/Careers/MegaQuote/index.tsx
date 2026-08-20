@@ -9,7 +9,7 @@ import useTeam from 'hooks/useTeam'
 import { IconCake } from '@posthog/icons'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const TeamMemberLink = (person) => {
     const { firstName, lastName, country, startDate, pineappleOnPizza, squeakId, avatar, teams, leadTeams, color } =

@@ -3,7 +3,7 @@ import { IconBrackets, IconBrowser, IconClock, IconDecisionTree, IconLaptop, Ico
 import { IconEnvelope } from 'components/OSIcons'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Glow from 'components/shared/animation/Glow'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'

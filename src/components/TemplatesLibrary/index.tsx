@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useStaticQuery, graphql, navigate } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconSearch } from '@posthog/icons'
 import dayjs from 'dayjs'
 

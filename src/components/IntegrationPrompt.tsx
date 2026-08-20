@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from './Link'
+import Link from 'components/shared/ui/Link'
 import WizardCommand from './WizardCommand'
 import { IconCheck, IconChevronRight, IconArrowUpRight, IconTerminal } from '@posthog/icons'
 import NextIcon from '../../contents/images/docs/integrate/frameworks/nextjs.svg'

@@ -10,7 +10,7 @@ import {
     LogomarkWindsurf,
     LogomarkZed,
 } from 'components/OSIcons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
 import { IconArrowUpRight } from '@posthog/icons'
 import { buildWizardCommand } from './buildCommand'

@@ -3,9 +3,9 @@ import FooterCTA from 'components/FooterCTA'
 import { graphql, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import Layout from '../Layout'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { navigate } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import List from 'components/shared/typography/List'
 
 const filters = [

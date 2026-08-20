@@ -1,6 +1,6 @@
 import { IconCheck, IconX } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Logo } from '@posthog/brand/logo'
 import React, { useState } from 'react'
 const companies = {

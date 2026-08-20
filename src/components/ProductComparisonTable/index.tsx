@@ -1,7 +1,7 @@
 import React from 'react'
 import OSTable from 'components/shared/ui/OSTable'
 import { Logo } from '@posthog/brand/logo'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
 

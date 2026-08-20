@@ -1,6 +1,6 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 export default function HogPatch(): JSX.Element {
     return (

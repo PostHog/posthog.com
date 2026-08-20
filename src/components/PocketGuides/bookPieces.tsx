@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'

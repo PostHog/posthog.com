@@ -1,7 +1,7 @@
 import React from 'react'
 import Editor from 'components/Editor'
-import { SEO } from 'components/seo'
-import Link from 'components/Link'
+import { SEO } from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import TemplatesLibrary from 'components/TemplatesLibrary'
 
 export default function TemplatesPage(): JSX.Element {

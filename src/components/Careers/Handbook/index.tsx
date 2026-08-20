@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CallToAction } from 'components/CallToAction'
 import chapters from '../../../navs/handbook.json'
 import { StaticImage } from 'gatsby-plugin-image'

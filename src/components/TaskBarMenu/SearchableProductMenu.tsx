@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react'
 import { IconSearch } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
 
 interface Product {

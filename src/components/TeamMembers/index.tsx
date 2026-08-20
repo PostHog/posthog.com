@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import qs from 'qs'
 import { useUser } from 'hooks/useUser'
 import { Close, Plus } from 'components/Icons'

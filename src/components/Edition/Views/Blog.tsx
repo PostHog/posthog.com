@@ -3,7 +3,7 @@ import { PostsContext } from '../Posts'
 import FeaturedPost from '../FeaturedPost'
 import PostsGrid from '../PostsGrid'
 import LandingPageNotice from '../LandingPageNotice'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { NewsletterForm } from 'components/NewsletterForm'
 
 export default function Blog({ title = 'Blog' }) {

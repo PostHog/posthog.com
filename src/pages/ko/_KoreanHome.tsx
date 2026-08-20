@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
 import {
     Digit0,
@@ -20,7 +20,7 @@ import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { graphql, useStaticQuery } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import usePostHog from 'hooks/usePostHog'
 import { APP_COUNT } from '../../constants'
 import { CallToAction, child as ctaChild, container as ctaContainer } from 'components/CallToAction'

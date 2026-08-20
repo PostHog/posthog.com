@@ -1,10 +1,10 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { shortcodes } from '../mdxGlobalComponents'
 // Note: MDX components are handled globally via mdxGlobalComponents
 

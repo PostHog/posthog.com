@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import OSTable from 'components/shared/ui/OSTable'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'

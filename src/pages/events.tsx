@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'

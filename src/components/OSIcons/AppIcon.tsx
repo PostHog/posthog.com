@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { BaseIcon, type IconProps } from './Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useRef } from 'react'
 import useTheme from '../../hooks/useTheme'
 import { useAppSettings } from '../../context/App'

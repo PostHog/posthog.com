@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { EventsContent } from '../events'
 
 export default function ClientSideEventPage({ params }: PageProps) {

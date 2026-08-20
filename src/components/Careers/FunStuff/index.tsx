@@ -1,6 +1,6 @@
 import React from 'react'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const FunThing: React.FC<{
     image: React.ReactNode

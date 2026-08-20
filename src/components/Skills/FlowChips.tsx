@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconGraph } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useFlowToolResolver } from 'hooks/skills'
 
 /**

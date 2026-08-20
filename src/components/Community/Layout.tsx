@@ -1,7 +1,7 @@
 import Layout from 'components/Layout'
 import PostLayout from 'components/PostLayout'
 import { TableOfContents } from 'components/PostLayout/types'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import React from 'react'
 import Sidebar from './Sidebar'
 import { communityMenu } from '../../navs'

@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconAsterisk,
@@ -45,7 +45,7 @@ import { FAQ } from 'components/Products/FAQ'
 import Install from '../Install'
 import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import { PRODUCT_COUNT } from '../../../constants'
 

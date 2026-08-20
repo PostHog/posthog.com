@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import CalloutBox from 'components/Docs/CalloutBox'
 import { CallToAction } from 'components/CallToAction'
 import { IconOpenSidebar, IconMagicWand } from '@posthog/icons'

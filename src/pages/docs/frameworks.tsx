@@ -1,8 +1,8 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 
-import { SEO } from 'components/seo'
-import Link from 'components/Link'
+import { SEO } from 'components/shared/layout/seo'
+import Link from 'components/shared/ui/Link'
 import List from 'components/shared/typography/List'
 import ReaderView from 'components/ReaderView'
 import useFrameworkList from 'hooks/docs/useFrameworkList'

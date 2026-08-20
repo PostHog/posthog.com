@@ -8,7 +8,7 @@ import { Blockquote } from 'components/shared/typography/BlockQuote'
 import { dedent } from '../../utils'
 import Tab from 'components/Tab'
 import { Markdown } from 'components/Squeak/components/Markdown'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const transformPosthogLink = (href: string | undefined): string | undefined => {
     if (!href) return href

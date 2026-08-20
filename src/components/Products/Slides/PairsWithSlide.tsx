@@ -1,6 +1,6 @@
 import React from 'react'
 import ZoomHover from 'components/shared/animation/ZoomHover'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 
 interface PairItem {

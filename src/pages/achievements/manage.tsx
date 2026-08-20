@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import Link from 'components/Link'
-import SEO from 'components/seo'
+import Link from 'components/shared/ui/Link'
+import SEO from 'components/shared/layout/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/shared/ui/OSButton'
 import { OSInput, OSTextarea, OSSelect } from 'components/shared/forms/OSForm'

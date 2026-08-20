@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { QuestionData, StrapiResult } from 'lib/strapi'
 import Tooltip from 'components/Tooltip'
 import Markdown from 'components/Squeak/components/Markdown'

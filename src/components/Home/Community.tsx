@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Particles from 'react-tsparticles'
 import { loadStarsPreset } from 'tsparticles-preset-stars'
 import { useValues } from 'kea'

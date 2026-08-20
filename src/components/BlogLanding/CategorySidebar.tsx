@@ -1,5 +1,5 @@
 import React from 'react'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import { useCategoryMenu } from './useCategoryMenu'
 import { LandingVariantProps } from './types'
 

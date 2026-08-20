@@ -10,7 +10,7 @@ import Input from 'components/shared/forms/OSForm/input'
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import PostHogButton from './PostHogButton'
 import { isPostHogEmail } from 'lib/employee'
 

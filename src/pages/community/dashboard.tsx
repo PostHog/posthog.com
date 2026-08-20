@@ -4,7 +4,7 @@ import { useUser } from 'hooks/useUser'
 import CommunityLayout, { SectionTitle } from 'components/Community/Layout'
 import QuestionsTable from 'components/Questions/QuestionsTable'
 import { useQuestions } from 'hooks/useQuestions'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import useTopicsNav from '../../navs/useTopicsNav'
 
 export default function CommunityPage() {

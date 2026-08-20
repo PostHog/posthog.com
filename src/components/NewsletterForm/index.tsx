@@ -6,7 +6,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { child, container } from 'components/CallToAction'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 interface NewsletterFormProps {

@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { CTA as PlanCTA } from 'components/Pricing/Plans'
 
 const PricingPhilosophy = (): JSX.Element => {

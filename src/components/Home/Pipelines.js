@@ -1,5 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import React from 'react'
 import { heading, section } from './classes'

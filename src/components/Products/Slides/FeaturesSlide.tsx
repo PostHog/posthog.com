@@ -3,7 +3,7 @@ import Tabs from 'components/RadixUI/Tabs'
 import ProductImage, { Image } from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconBrain } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import SmallTeam from 'components/SmallTeam'
 
 interface Feature {

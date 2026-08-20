@@ -4,7 +4,7 @@ import { navigate } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
 import Editor from 'components/Editor'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 interface KoreanMDXViewerProps {
     mdxBody: string

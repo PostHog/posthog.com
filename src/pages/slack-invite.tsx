@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Spinner from 'components/shared/ui/Spinner'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 
 function Slack() {
     /* This component will redirect the user to the Slack users group. */

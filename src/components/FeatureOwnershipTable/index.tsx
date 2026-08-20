@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react'
 import { useFeatureOwnership } from '../../hooks/useFeatureOwnership'
 import SmallTeam from '../SmallTeam'
-import Link from '../Link'
+import Link from 'components/shared/ui/Link'
 import { OSInput } from 'components/shared/forms/OSForm'
 import Mark from 'mark.js'
 

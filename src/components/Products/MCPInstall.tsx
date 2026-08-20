@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import OSButton from 'components/shared/ui/OSButton'
 import PlatformInstall from 'components/PlatformInstall'
 

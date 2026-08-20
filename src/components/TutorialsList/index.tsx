@@ -1,7 +1,7 @@
 import ResourceItem from 'components/Docs/ResourceItem'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 export default function TutorialsList({ topic, slugs }: { topic?: string; slugs?: string[] }): any {
     const {

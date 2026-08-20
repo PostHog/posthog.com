@@ -1,6 +1,6 @@
 import { TrackedCTA } from 'components/CallToAction/index.tsx'
 import { Check2 } from 'components/Icons/Icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import CallToAction from 'components/MainNav/Submenus/CallToAction'
 import React from 'react'
 import { SelfHostIcon } from '../Calculator'

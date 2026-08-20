@@ -1,9 +1,9 @@
 import React from 'react'
-import SEO, { buildProductStructuredData } from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/shared/layout/seo'
 import ReaderView from 'components/ReaderView'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
-import { TreeMenu } from 'components/TreeMenu'
+import { TreeMenu } from 'components/shared/ui/TreeMenu'
 import IntegrationsLibrary from 'components/IntegrationsLibrary'
 
 const LeftSidebarContent = () => {

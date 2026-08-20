@@ -1,7 +1,7 @@
 import React from 'react'
 import ReaderView from 'components/ReaderView'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { AppLink } from 'components/OSIcons/AppIcon'
 import { explorerGridColumns } from '../../constants'
 

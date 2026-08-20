@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { Fieldset } from 'components/shared/forms/OSFieldset'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { useUser } from 'hooks/useUser'
 import RewardCard from './RewardCard'
 import TransactionTitle from './TransactionTitle'

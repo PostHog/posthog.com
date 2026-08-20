@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Input from 'components/shared/forms/OSForm/input'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import mcpToolsData from '../../../../data/mcp-tools.json'

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import Editor from 'components/Editor'
 import OSButton from 'components/shared/ui/OSButton'
 import OSTable from 'components/shared/ui/OSTable'
 import { IconRefresh } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 
 const discountsData = {
     actualPricing: {

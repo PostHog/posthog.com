@@ -17,7 +17,7 @@ import {
     IconArrowRight,
     IconSpinner,
 } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Toggle from 'components/shared/forms/Toggle'
@@ -28,7 +28,7 @@ import { StickerEngineerRatio, StickerHourglass } from 'components/Stickers/Inde
 import { StickerDnd, StickerLaptop, StickerPalmTree, StickerPullRequest } from 'components/Stickers/Index'
 import { motion } from 'framer-motion'
 import { useLayoutData } from 'components/Layout/hooks'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import SideModal from 'components/Modal/SideModal'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'

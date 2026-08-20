@@ -1,4 +1,4 @@
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import dayjs from 'dayjs'
 import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'

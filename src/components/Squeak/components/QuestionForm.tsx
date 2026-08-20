@@ -14,7 +14,7 @@ import { fetchTopicGroups, topicGroupsSorted } from '../util/topicGroups'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
 import { useAppStatus } from 'hooks/useAppStatus'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Input from 'components/shared/forms/OSForm/input'
 import { OSSelect } from 'components/shared/forms/OSForm'
 

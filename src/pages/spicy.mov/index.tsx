@@ -1,7 +1,7 @@
 import React from 'react'
 import MediaPlayer from 'components/MediaPlayer'
 
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 
 export default function Spicy(): JSX.Element {
     return (

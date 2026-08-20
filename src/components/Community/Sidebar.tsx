@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { Authentication, EditProfile } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
 import Modal from 'components/Modal'

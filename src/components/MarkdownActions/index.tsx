@@ -1,5 +1,5 @@
 import { IconCopy, IconEye, IconExternal, IconCheck, IconChevronDown } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/shared/ui/OSButton'

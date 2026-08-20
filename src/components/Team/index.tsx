@@ -10,7 +10,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/RadixUI/Tooltip'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import SideModal from 'components/Modal/SideModal'
 import { TeamMember } from 'components/People'
 import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
@@ -36,7 +36,7 @@ import { Fieldset } from 'components/shared/forms/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTabs from 'components/shared/ui/OSTabs'
 import TeamImage from './TeamImage'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import {
     StickerPineappleYes,
     StickerPineappleNo,

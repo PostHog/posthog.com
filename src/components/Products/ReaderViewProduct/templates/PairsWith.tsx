@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Glow, { type GlowColor } from 'components/shared/animation/Glow'
 import ToolsTicker, { DEFAULT_HANDLES } from 'components/Home/ToolsTicker'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'

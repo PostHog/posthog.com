@@ -1,7 +1,7 @@
 import React from 'react'
 import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import slugify from 'slugify'
 
 interface PostQuoteProps {

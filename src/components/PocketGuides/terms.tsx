@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
 
 import usePostHog from '../../hooks/usePostHog'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, PageProps } from 'gatsby'
-import SEO from 'components/seo'
+import SEO from 'components/shared/layout/seo'
 import { EventsContent, transformStrapiEvent, Event as EventType } from '../pages/events'
 
 type EventPageData = {

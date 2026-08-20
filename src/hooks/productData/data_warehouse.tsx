@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconDatabase } from '@posthog/icons'
-import Link from 'components/Link'
+import Link from 'components/shared/ui/Link'
 import { getTool } from '../../data/tools'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.

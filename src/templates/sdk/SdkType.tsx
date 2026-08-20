@@ -1,6 +1,6 @@
 import React from 'react'
-import Link from '../../components/Link'
-import SEO from '../../components/seo'
+import Link from 'components/shared/ui/Link'
+import SEO from 'components/shared/layout/seo'
 import Parameters from '../../components/SdkReferences/Parameters'
 import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
 import { getLanguageFromSdkId, isLatestVersion } from '../../components/SdkReferences/utils'

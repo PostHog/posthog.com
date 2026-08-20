@@ -1,5 +1,5 @@
 import React from 'react'
-import { SEO } from 'components/seo'
+import { SEO } from 'components/shared/layout/seo'
 import Wizard from 'components/Wizard'
 import { Authentication } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
