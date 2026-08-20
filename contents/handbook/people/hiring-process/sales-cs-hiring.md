@@ -88,7 +88,15 @@ This is our usual first-round interview with a member of the People & Ops team.
 
 #### Small Team interview
 
-The small team interview with the relevant team lead usually lasts 45 minutes.  For this round, we will use scenario-based questions to assess your technical and customer skills, as well as your knowledge of PostHog. As part of this, we will ask you to give a quick pitch of PostHog (not a full demo).
+The small team interview with the relevant team lead usually lasts 45 minutes. How we run it depends on the role you're interviewing for.
+
+##### Technical Customer Success Manager (TCSM)
+
+For TCSM candidates, this round is scenario-based questions to assess your technical and customer skills. There's no demo or pitch. The focus is on how you reason through account scenarios and technical problems.
+
+##### Forward Deployed Engineer (FDE)
+
+For FDE candidates, this round uses scenario-based questions and includes a quick pitch of PostHog (not a full demo), to assess how you communicate the product to a customer.
 
 #### Culture and motivation interview
 
