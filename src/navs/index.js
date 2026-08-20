@@ -1868,6 +1868,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/overview',
             },
             {
+                name: 'Should I open an issue or a PR?',
+                url: '/handbook/engineering/posthog-com/issue-or-pr',
+            },
+            {
                 name: 'Developing the website',
                 url: '/handbook/engineering/posthog-com/developing-the-website',
             },
