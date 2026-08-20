@@ -58,7 +58,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Put a threshold alert on the daily average and send it to whoever owns checkout; when the average climbs, something on the payment path has broken, and the score is already pointing at it.`,
+                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Put a threshold alert on the average score and send it to whoever owns checkout; when the average climbs, something on the payment path has broken, and the score is already pointing at it.`,
             },
         ],
     },
@@ -138,7 +138,9 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `The Tab-Hopper is defined by leaving and coming back, so one session tells you little. Run a Monitor scanner for the within-session tell, a long idle gap followed by a return to the same task, then save the verdict-yes users as a cohort. The cohort is where the species lives. Watch whether the same people reappear across sessions, and whether they ever finish; when one does finish, three weeks late, the cohort is how you will know.`,
+                body: `The catch with the Tab-Hopper is that Replay Vision trims the idle stretches out of each recording before it looks, so the moment the user wanders off to another tab is the moment the video skips. You will not see the hop itself.
+
+What you can see is what it leaves behind, a task started and never finished. Run a Monitor scanner for "arrived to do something and left it incomplete," then save the verdict-yes users as a cohort. Whether the same people come back to try again is a question you answer with that cohort, not the video.`,
             },
         ],
     },
@@ -414,7 +416,9 @@ Schedule a weekday digest of those summaries to Slack. Every Monday you get a sh
             },
             {
                 label: 'If you spot one',
-                body: `You will not catch this one opening the console; the recording cannot see the developer tools. What it can see is what they saw, since with console and network capture on, PostHog records the errors and requests from the session. Run a Monitor scanner asking "Did this session surface a console error, or a request exposing keys or internal endpoints?" A yes is worth your attention on two counts. The visitor is often evaluating you closely, and the leak is one they found before you did.`,
+                body: `Like the Tab-Hopper, this one hides from the recording. The developer tools live outside the page, so the video never shows them opening. The session's raw events reach the model too, though, exceptions included, so the errors the Console-Opener came to read are on the record even when the console is not.
+
+Run a Monitor scanner for sessions that threw a visible error and then kept probing instead of leaving. A yes is usually one of two people. Either a technical evaluator taking you seriously, or a bug that reached the public before you did.`,
             },
         ],
     },
