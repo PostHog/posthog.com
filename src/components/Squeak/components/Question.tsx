@@ -457,10 +457,10 @@ export function Question(props: QuestionProps) {
      *
      * This used to open a support ticket directly through the conversations widget.
      * Two reasons it doesn't any more: replies on those tickets only reached the
-     * throwaway widget session rather than the question author, and champions can't
-     * use that path at all because attributing the ticket needs the author's email,
-     * which they aren't allowed to read. Strapi has the email server-side, so one
-     * request works for both roles and the email never reaches the browser.
+     * throwaway widget session rather than the question author, and community
+     * moderators can't use that path at all because attributing the ticket needs the
+     * author's email, which they aren't allowed to read. Strapi has the email
+     * server-side, so one request works for both roles and it never reaches the browser.
      */
     const handleEscalateToSupport = async () => {
         if (escalateState === 'sending' || escalateState === 'sent') return
@@ -664,9 +664,9 @@ export function Question(props: QuestionProps) {
                         />
                     </div>
                     {/*
-                     * Shared by moderators and community champions. Champions are not
-                     * PostHog employees, so anything identifying or admin-only stays
-                     * behind isModerator inside — see the gates below.
+                     * Shared by staff moderators and community moderators. The latter
+                     * are not PostHog employees, so anything identifying or admin-only
+                     * stays behind isModerator inside — see the gates below.
                      */}
                     {canModerate && isInForum && (
                         <div className="p-4 pb-0">
@@ -684,7 +684,7 @@ export function Question(props: QuestionProps) {
                                                 ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
                                                 : 'Anonymous'}
                                         </Link>
-                                        {/* Author's email — staff only. The API also withholds it from champions. */}
+                                        {/* Author's email — staff only. The API withholds it from community moderators too. */}
                                         {isModerator && (
                                             <input
                                                 className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"

@@ -43,7 +43,7 @@ export type User = {
         id: number
     } & ProfileData
     role: {
-        type: 'authenticated' | 'public' | 'moderator' | 'champion'
+        type: 'authenticated' | 'public' | 'moderator' | 'community_moderator'
     }
     wallet: {
         balance: number
@@ -80,9 +80,9 @@ type UserContextValue = {
     // Moderator only. Use for anything destructive, anything with monetary value,
     // anything exposing PII (emails), and any admin surface outside the forum.
     isModerator: boolean
-    isChampion: boolean
-    // Moderators and community champions. Use for reversible forum moderation:
-    // hiding/restoring content, marking solutions, re-topicing, escalating.
+    isCommunityModerator: boolean
+    // Staff moderators and community moderators. Use for forum moderation the
+    // community role is trusted with: managing topics and escalating threads.
     canModerate: boolean
     setUser: React.Dispatch<React.SetStateAction<User | null>>
     fetchUser: (token?: string | null) => Promise<User | null>
@@ -139,7 +139,7 @@ export const UserContext = createContext<UserContextValue>({
     isLoading: true,
     user: null,
     isModerator: false,
-    isChampion: false,
+    isCommunityModerator: false,
     canModerate: false,
     setUser: () => {
         // noop
@@ -917,8 +917,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         user,
         setUser,
         isModerator: user?.role?.type === 'moderator',
-        isChampion: user?.role?.type === 'champion',
-        canModerate: user?.role?.type === 'moderator' || user?.role?.type === 'champion',
+        isCommunityModerator: user?.role?.type === 'community_moderator',
+        canModerate: user?.role?.type === 'moderator' || user?.role?.type === 'community_moderator',
         isLoading,
         getJwt,
         login,

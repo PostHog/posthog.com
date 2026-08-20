@@ -1148,6 +1148,10 @@ const ValidationSchema = Yup.object().shape({
     location: Yup.string().nullable(),
 })
 
+// Role slugs are snake_case in Strapi (community_moderator) — don't show that raw.
+const formatRole = (role: string | null): string =>
+    role ? role.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()) : 'Unknown'
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
@@ -1292,9 +1296,9 @@ export default function ProfilePage({ params }: PageProps) {
                     description: (
                         <>
                             <IconCheck className="text-green size-4 inline-block mr-1" />
-                            {type === 'champion'
-                                ? `${firstName || 'This user'} is now a community champion`
-                                : `Community champion removed from ${firstName || 'this user'}`}
+                            {type === 'community_moderator'
+                                ? `${firstName || 'This user'} is now a community moderator`
+                                : `Community moderator role removed from ${firstName || 'this user'}`}
                         </>
                     ),
                     duration: 3000,
@@ -1937,8 +1941,8 @@ export default function ProfilePage({ params }: PageProps) {
                                         <div className="p-4 border-b border-primary">
                                             <h4 className="text-sm font-bold m-0">Community role</h4>
                                             <p className="text-xs text-secondary m-0">
-                                                Champions can hide spam, mark answers, re-topic threads, and escalate to
-                                                PostHog.
+                                                Community moderators can manage forum topics and escalate threads to
+                                                PostHog. They can't see member emails, block users, or delete content.
                                             </p>
                                         </div>
                                         <div className="p-4 space-y-2">
@@ -1952,9 +1956,9 @@ export default function ProfilePage({ params }: PageProps) {
                                             ) : (
                                                 <>
                                                     <p className="text-sm m-0">
-                                                        Current role: <strong>{roleInfo.role ?? 'unknown'}</strong>
+                                                        Current role: <strong>{formatRole(roleInfo.role)}</strong>
                                                     </p>
-                                                    {roleInfo.role === 'champion' ? (
+                                                    {roleInfo.role === 'community_moderator' ? (
                                                         <OSButton
                                                             size="md"
                                                             variant="secondary"
@@ -1962,7 +1966,9 @@ export default function ProfilePage({ params }: PageProps) {
                                                             disabled={roleSubmitting}
                                                             onClick={() => handleRoleChange('authenticated')}
                                                         >
-                                                            {roleSubmitting ? 'Removing…' : 'Remove champion'}
+                                                            {roleSubmitting
+                                                                ? 'Removing…'
+                                                                : 'Remove community moderator'}
                                                         </OSButton>
                                                     ) : (
                                                         <OSButton
@@ -1970,9 +1976,11 @@ export default function ProfilePage({ params }: PageProps) {
                                                             variant="primary"
                                                             width="full"
                                                             disabled={roleSubmitting}
-                                                            onClick={() => handleRoleChange('champion')}
+                                                            onClick={() => handleRoleChange('community_moderator')}
                                                         >
-                                                            {roleSubmitting ? 'Making champion…' : 'Make champion'}
+                                                            {roleSubmitting
+                                                                ? 'Making community moderator…'
+                                                                : 'Make community moderator'}
                                                         </OSButton>
                                                     )}
                                                 </>

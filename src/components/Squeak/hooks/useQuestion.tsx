@@ -377,9 +377,9 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
         }
     }
 
-    // Flags the thread for a PostHog employee to triage in Slack. Champions can't create
-    // a support ticket the way moderators do, because that attributes the ticket to the
-    // question author and so needs their email — which champions aren't allowed to read.
+    // Flags the thread for a PostHog employee to triage in Slack. Community moderators
+    // can't create a support ticket the way staff do, because that attributes the ticket
+    // to the question author and so needs their email, which they aren't allowed to read.
     // Going through Strapi keeps the email server-side.
     const escalate = async () => {
         const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions/${questionData?.id}/escalate`, {
