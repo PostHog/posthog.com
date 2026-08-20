@@ -38,7 +38,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'Habitat',
-                body: `Payment forms, "Submit" buttons, modal dialogs that have already been dismissed once. Rarely found in onboarding flows; almost always near the moment of intended conversion.`,
+                body: `Payment forms, "Submit" buttons, modal dialogs that have already been dismissed once. Rarely found in onboarding flows, almost always near the moment of intended conversion.`,
             },
             {
                 label: 'Field notes',
@@ -58,7 +58,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner rating each session 0 to 10 for visible frustration, from rapid repeated clicks on one control to retries that go nowhere, turns "users seem annoyed" into a number you can sort by. Filter it to your checkout and payment sessions, put a threshold alert on the average score, and route it to whoever owns that flow; when the average climbs, something on the path to purchase has broken, and the reasoning behind the worst-scoring sessions will show you where.`,
+                body: `Rage clicks are the textbook frustration signal, so score them. A Scorer scanner can rate each session 0 to 10 for visible frustration. Filter it to your checkout and payment sessions, put a threshold alert on the average score, and route it to whoever owns that flow. When the average climbs, something on the path to purchase has broken, and the reasoning behind the worst-scoring sessions will show you where.`,
             },
         ],
     },
@@ -86,7 +86,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'Resolution',
-                body: `Either the page eventually loads, validating the Pilgrim's worldview, or it does not, at which point the Pilgrim abandons silently and without complaint. Rarely files a support ticket. Believes it must have been their internet, which puts the internet provider in a worse position than you.`,
+                body: `Either the page eventually loads, validating the Pilgrim's worldview, or it does not, at which point the Pilgrim abandons silently and without complaint. Rarely files a support ticket. Believes it must have been their internet, which puts the internet provider in a worse position than yourself.`,
             },
             {
                 label: 'Hazards observed',
@@ -98,7 +98,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `Ask a Monitor scanner whether the user reloaded the same URL three or more times in quick succession. When the verdict is yes, open the reasoning; its citations drop you on the exact reload, nearly always a slow endpoint, a hung request, or a status page lagging behind reality. The Pilgrim will never complain, so the citation is the closest thing to a bug report you are going to get.`,
+                body: `Ask a Monitor scanner whether the user reloaded the same URL three or more times in quick succession. When the verdict is yes, start exploring why. You'll find the exact reload, nearly always a slow endpoint, or a status page lagging behind reality. The Pilgrim will never complain, so you won't get any bugs reported to you directly.`,
             },
         ],
     },
@@ -138,9 +138,9 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'If you spot one',
-                body: `The catch with the Tab-Hopper is that Replay Vision trims the idle stretches out of each recording before it looks, so the moment the user wanders off to another tab is the moment the video skips. You will not see the hop itself.
+                body: `You can't see the hop itself. Replay Vision cuts the idle moments out of each recording, and switching to another tab is an idle moment, so the wandering never shows up. What the scanner can catch is the aftermath: a task the user started and left unfinished.
 
-What you can see is what it leaves behind, a task started and never finished. Run a Monitor scanner for "arrived to do something and left it incomplete," then save the verdict-yes users as a cohort. Whether the same people come back to try again is a question you answer with that cohort, not the video.`,
+Run a Monitor scanner for exactly that and save the flagged users as a cohort. Then use the cohort to bring them back, whether that's an in-app nudge or a re-engagement email reminding them to finish what they started. A distracted user is not a lost one; they mostly need a reason to return to the tab.`,
             },
         ],
     },

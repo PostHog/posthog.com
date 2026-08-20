@@ -11,7 +11,16 @@ export default function Page(): JSX.Element {
             image="/images/field-guide/naturalist.png"
             signature="– Sir Bartholomew Hogworth, F.R.S. First Edition, 2026"
             paragraphs={[
-                `There is a particular kind of patience required to watch users. In my early years of fieldwork, before any of this was possible, I would sit at the edge of a single session recording and wait. Most yielded nothing. A handful would reveal something so quietly remarkable that it justified the previous forty hours of nothing in particular. By tradition, the rate of user species discovery is slow.`,
+                <>
+                    There is a particular kind of patience required to watch users. In my early years of fieldwork,
+                    before any of this was possible, I would sit at the edge of a single{' '}
+                    <Link to="/session-replay" state={{ newWindow: true }}>
+                        session recording
+                    </Link>{' '}
+                    and wait. Most yielded nothing. A handful would reveal something so quietly remarkable that it
+                    justified the previous forty hours of nothing in particular. By tradition, the rate of user species
+                    discovery is slow.
+                </>,
                 <>
                     Until the nice people of PostHog made{' '}
                     <Link to="/replay-vision" state={{ newWindow: true }}>

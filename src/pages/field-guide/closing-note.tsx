@@ -15,9 +15,9 @@ export default function Page(): JSX.Element {
                 `Replay Vision, which helped me compile this guide, remains in the field, and does not require my presence to continue. By the time this volume is printed, it will have observed more than I will read in a lifetime.`,
                 `If the reader has a product of their own, they will find species in it that this guide does not yet describe. I would encourage them, on Hogworth's own authority, to give those species names.`,
                 <>
-                    The work, for any reader who wishes to take it up, begins at{' '}
+                    The work, for any reader who wishes to take it up, begins with{' '}
                     <Link to="/replay-vision" state={{ newWindow: true }}>
-                        posthog.com/replay-vision
+                        Replay Vision
                     </Link>
                     .
                 </>,

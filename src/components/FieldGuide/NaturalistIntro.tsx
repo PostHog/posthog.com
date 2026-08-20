@@ -30,7 +30,8 @@ export default function NaturalistIntro(): JSX.Element {
                         </Link>{' '}
                         changed that. It reviews every session on its own and surfaces the ones worth opening: a
                         rage-click at checkout, a fourteenth reload of a dead page. What follows is a catalog of the
-                        species it keeps finding. There are more in your product right now.
+                        species it keeps finding. This guide contains the ones we found, and serves to inspire you to
+                        look for them in your own product, or discover entirely new worlds.
                     </p>
                     <Link to="/field-guide/foreword" state={{ newWindow: true }} className="ni-link">
                         Read the full foreword →

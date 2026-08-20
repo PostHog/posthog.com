@@ -17,7 +17,7 @@ const STRUCTURE: { label: string; body: string }[] = [
     },
     {
         label: 'Resolution',
-        body: 'What tends to happen to the species by the close of its session. Most outcomes fall into a small number of recognizable patterns.',
+        body: 'How the session ends for this species, whether that is conversion, abandonment, a support ticket, or a quiet return days later.',
     },
     {
         label: 'Hazards observed',
@@ -104,8 +104,7 @@ export default function HowToUse(): JSX.Element {
 
                 <div className="htu-closing">
                     <p className="htu-closing-text">
-                        These are the species we have seen often enough to name. There are more in your own product,
-                        waiting to be catalogued. The watching does not stop when you close this guide.{' '}
+                        The watching does not stop when you close this guide.{' '}
                         <Link to="/replay-vision" state={{ newWindow: true }} className="htu-closing-link">
                             Replay Vision
                         </Link>{' '}
@@ -184,11 +183,13 @@ export default function HowToUse(): JSX.Element {
                     align-items: center;
                 }
                 .htu-term {
+                    margin: 0;
                     font-family: 'RoundHog', sans-serif;
                     font-weight: 800;
                     text-transform: uppercase;
                     letter-spacing: 0.5px;
                     font-size: 12px;
+                    line-height: 1.3;
                     color: ${INK};
                 }
                 .htu-desc { margin: 0; font-size: clamp(13px, 1.6cqw, 15px); line-height: 1.55; }
