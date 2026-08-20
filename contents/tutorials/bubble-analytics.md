@@ -12,7 +12,7 @@ tags:
   - product analytics
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 export const ImgAutocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-light.png"
 export const ImgAutocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/bubble-analytics/autocapture-dark.png"
 

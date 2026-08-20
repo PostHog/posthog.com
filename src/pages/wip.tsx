@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Editor from 'components/Editor'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import SEO from 'components/seo'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'

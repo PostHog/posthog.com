@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Link from 'components/Link'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'

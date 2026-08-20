@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
 import { Accordion as RadixAccordionPrimitives } from 'radix-ui'
 

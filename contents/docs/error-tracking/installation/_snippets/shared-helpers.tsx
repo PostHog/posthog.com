@@ -1,7 +1,7 @@
 import React from 'react'
 import { StepDefinition } from 'onboarding/steps'
-import { ProductScreenshot } from 'components/ProductScreenshot'
-import OSButton from 'components/OSButton'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
+import OSButton from 'components/shared/ui/OSButton'
 import { CallToAction } from 'components/CallToAction'
 
 /**

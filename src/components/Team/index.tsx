@@ -32,9 +32,9 @@ import Header from './Header'
 import Profile, { ProfileData } from './Profile'
 import Roadmap from './Roadmap'
 import { Tabs } from 'radix-ui'
-import { Fieldset } from 'components/OSFieldset'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSTabs from 'components/OSTabs'
+import OSTabs from 'components/shared/ui/OSTabs'
 import TeamImage from './TeamImage'
 import Link from 'components/Link'
 import {
@@ -43,8 +43,8 @@ import {
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
-import ZoomHover from 'components/ZoomHover'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import ZoomHover from 'components/shared/animation/ZoomHover'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import { normalizeSlug } from './utils'
 
 const hedgehogImageWidth = 30

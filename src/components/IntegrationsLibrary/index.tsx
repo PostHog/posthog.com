@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useStaticQuery, graphql, navigate } from 'gatsby'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import { getLogo, getDarkClassForLogo } from 'constants/logos'

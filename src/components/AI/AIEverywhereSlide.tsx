@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconArrowUpRight, IconPlug } from '@posthog/icons'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { LOGOS } from 'constants/logos'
 

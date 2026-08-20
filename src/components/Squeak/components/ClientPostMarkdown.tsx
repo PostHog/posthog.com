@@ -2,7 +2,7 @@ import React from 'react'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
-import { ZoomImage } from 'components/ZoomImage'
+import { ZoomImage } from 'components/shared/media/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 

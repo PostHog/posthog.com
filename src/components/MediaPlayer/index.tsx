@@ -1,7 +1,7 @@
 import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { IconFullScreen, IconPlayhead, IconVolumeFull, IconVolumeHalf, IconVolumeMuted } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import React, { useEffect, useRef, useState } from 'react'
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {

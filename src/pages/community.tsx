@@ -20,8 +20,8 @@ import qs from 'qs'
 import slugify from 'slugify'
 import uniqBy from 'lodash/uniqBy'
 import { NewsletterForm } from 'components/NewsletterForm'
-import CloudinaryImage from 'components/CloudinaryImage'
-import OSButton from 'components/OSButton'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import OSButton from 'components/shared/ui/OSButton'
 const quote =
     // "Let your work shine as brightly as a hedgehog's quills, threading through life's challenges with perseverance."
     // 'Even the smallest hedgehog carries the wisdom of survival, showing us that even in a world full of thorns, one can embrace challenges with grace and courage.'

@@ -13,7 +13,7 @@ import { Navigation, Pagination, A11y } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }

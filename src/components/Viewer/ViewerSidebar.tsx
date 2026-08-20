@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { IconSidebarOpen, IconSidebarClose, IconSearch } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { InlineSearch } from 'components/Search/InlineSearch'
 import { useSearch } from 'components/Editor/SearchProvider'
 import { ViewerSearchResults } from './ViewerSearchResults'

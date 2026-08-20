@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 import { SEO } from 'components/seo'
 import ReaderView from 'components/ReaderView'

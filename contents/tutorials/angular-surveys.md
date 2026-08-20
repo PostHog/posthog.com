@@ -12,7 +12,7 @@ tags:
   - surveys
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/events-light.png"
 export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/events-dark.png"
 export const ImgSurveyResultsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/angular-surveys/survey-results-light.png"

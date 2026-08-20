@@ -7,7 +7,7 @@ import ReaderView from 'components/ReaderView'
 import Intro from 'components/Docs/Intro'
 import { docsMenu } from '../../navs'
 import QuickLinks from 'components/QuickLinks'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import {
     IconCheck,
     IconDatabase,
@@ -18,7 +18,7 @@ import {
     IconTrends,
     IconUser,
 } from '@posthog/icons'
-import Card from 'components/Card'
+import Card from 'components/shared/ui/Card'
 import ResourceItem from 'components/Docs/ResourceItem'
 import CustomerAnalyticsBetaWarning from '../../../contents/docs/customer-analytics/_snippets/customer-analytics-beta-warning.mdx'
 

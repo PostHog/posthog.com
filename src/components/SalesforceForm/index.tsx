@@ -7,7 +7,7 @@ import { IconCheck, IconSend } from '@posthog/icons'
 import * as Yup from 'yup'
 import Editor from 'components/Editor'
 import { Select } from 'components/RadixUI/Select'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 interface CustomFieldOption {

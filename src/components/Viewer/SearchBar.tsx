@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { IconSearch, IconX } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { useSearch } from './SearchProvider'
 import Mark from 'mark.js'
 import debounce from 'lodash/debounce'

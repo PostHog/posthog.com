@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import useProducts from './../Products'
-import Toggle from 'components/Toggle'
+import Toggle from 'components/shared/forms/Toggle'
 
 export const section = cntl`
     max-w-6xl

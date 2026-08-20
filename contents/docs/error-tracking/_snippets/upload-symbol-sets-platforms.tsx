@@ -1,5 +1,5 @@
 import React from 'react'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 
 const UploadSymbolSetsPlatforms = () => {
     const platforms = [

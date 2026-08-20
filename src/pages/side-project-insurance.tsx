@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { SignupCTA } from 'components/SignupCTA'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 export const ArrayCTA = () => {
     return (

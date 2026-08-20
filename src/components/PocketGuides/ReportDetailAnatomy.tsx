@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 import { productSource } from 'components/SelfDrivingInbox/sources'
 import { SelfDrivingReport, WatchedSource } from 'components/SelfDrivingInbox/types'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { getLogo } from 'constants/logos'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'

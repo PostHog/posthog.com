@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IconSearch } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { Popover } from 'components/RadixUI/Popover'
 import { ViewerSearchBar } from './SearchBar'
 

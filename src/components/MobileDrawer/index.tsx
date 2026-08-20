@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { IconX } from '@posthog/icons'
 
 interface MobileDrawerProps {

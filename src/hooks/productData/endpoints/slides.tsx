@@ -11,8 +11,8 @@ import {
     IconTrends,
 } from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
-import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import Glow from 'components/shared/animation/Glow'
 import EndpointsPlayground, { scenarios } from 'components/Docs/EndpointsPlayground'
 import PlatformInstall from 'components/PlatformInstall'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'

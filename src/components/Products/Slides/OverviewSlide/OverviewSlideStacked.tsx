@@ -1,5 +1,5 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { OverviewSlideProps } from './types'
 
 export default function OverviewSlideStacked({

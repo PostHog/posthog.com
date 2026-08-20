@@ -1,5 +1,5 @@
 import { useLocation } from '@reach/router'
-import Chip from 'components/Chip'
+import Chip from 'components/shared/ui/Chip'
 import usePostHog from '../../hooks/usePostHog'
 import queryString from 'query-string'
 import React, { useEffect, useState } from 'react'

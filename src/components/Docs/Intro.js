@@ -1,6 +1,6 @@
 import React from 'react'
 import { CallToAction } from '../CallToAction'
-import CloudinaryImage from '../CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export default function Intro({
     subheader,

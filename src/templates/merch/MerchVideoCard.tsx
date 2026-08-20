@@ -1,5 +1,5 @@
 import React from 'react'
-import WistiaEmbed from 'components/WistiaEmbed'
+import WistiaEmbed from 'components/shared/media/WistiaEmbed'
 
 const MERCH_VIDEO_ID = 'dibqzlkov4'
 const MERCH_VIDEO_ASPECT_RATIO = 960 / 402

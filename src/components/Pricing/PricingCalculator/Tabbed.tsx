@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { IconCopy, IconInfo, IconLightBulb } from '@posthog/icons'
-import Toggle from 'components/Toggle'
+import Toggle from 'components/shared/forms/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
 import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'

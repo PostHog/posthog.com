@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdxCodeBlock } from '../../CodeBlock'
+import { MdxCodeBlock } from 'components/shared/ui/CodeBlock'
 
 type ConfigVariant = 'cursor' | 'claude-desktop' | 'windsurf' | 'vscode' | 'claude-code' | 'zed' | 'codex'
 

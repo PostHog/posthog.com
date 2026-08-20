@@ -1,5 +1,5 @@
 import React from 'react'
-import { InlineCode } from 'components/InlineCode'
+import { InlineCode } from 'components/shared/typography/InlineCode'
 import { POSTHOG_IPS } from 'constants/posthogIPs'
 
 // Inline form: bold EU/US labels followed by comma-separated inline code chips.

@@ -3,7 +3,7 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import { explorerGridColumns } from '../../constants'
 
 export default function Trash(): JSX.Element {

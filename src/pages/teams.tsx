@@ -12,11 +12,11 @@ import { useUser } from 'hooks/useUser'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { Select } from 'components/RadixUI/Select'
 import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import { IconPlus, IconX } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 import { useWindow } from '../context/Window'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface TeamsProps {
     searchTerm?: string

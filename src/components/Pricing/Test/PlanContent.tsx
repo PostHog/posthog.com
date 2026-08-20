@@ -4,7 +4,7 @@ import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
-import ScrollToElement from 'components/ScrollToElement'
+import ScrollToElement from 'components/shared/layout/ScrollToElement'
 
 const SignupEmbed = (props: any) => {
     const { setWindowTitle } = useApp()

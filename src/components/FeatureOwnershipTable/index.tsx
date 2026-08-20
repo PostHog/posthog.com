@@ -2,7 +2,7 @@ import React, { useMemo, useState, useRef, useEffect } from 'react'
 import { useFeatureOwnership } from '../../hooks/useFeatureOwnership'
 import SmallTeam from '../SmallTeam'
 import Link from '../Link'
-import { OSInput } from '../OSForm'
+import { OSInput } from 'components/shared/forms/OSForm'
 import Mark from 'mark.js'
 
 // Helper function to extract text from React nodes

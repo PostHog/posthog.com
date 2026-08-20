@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
 import { useProductInterest } from 'hooks/useProductInterest'
-import ProgressBar from 'components/ProgressBar'
+import ProgressBar from 'components/shared/ui/ProgressBar'
 
 import type { ProductNavItem, SectionComponentProps } from './types'
 import { resolveTemplate } from './types'

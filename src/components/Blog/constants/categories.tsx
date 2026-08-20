@@ -1,5 +1,5 @@
 import { GitHub, LinkedIn, Twitter } from 'components/Icons/Icons'
-import { InlineCode } from 'components/InlineCode'
+import { InlineCode } from 'components/shared/typography/InlineCode'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 export interface CategoryInterface {

@@ -9,7 +9,7 @@ tags:
   - surveys
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 import NuxtApiKeysSecurity from "../docs/integrate/_snippets/nuxt-api-keys-security.mdx"
 export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
 export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"

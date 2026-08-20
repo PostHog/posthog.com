@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { IconX } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface ModalProps {
     trigger?: React.ReactNode

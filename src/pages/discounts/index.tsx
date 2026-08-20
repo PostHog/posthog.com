@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
-import OSButton from 'components/OSButton'
-import OSTable from 'components/OSTable'
+import OSButton from 'components/shared/ui/OSButton'
+import OSTable from 'components/shared/ui/OSTable'
 import { IconRefresh } from '@posthog/icons'
 import Link from 'components/Link'
 

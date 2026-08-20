@@ -1,6 +1,6 @@
 import React from 'react'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import { CodeBlock as CB } from 'components/CodeBlock'
+import { CodeBlock as CB } from 'components/shared/ui/CodeBlock'
 
 export default function CodeBlock({ code, language, hideNumbers, lineNumberStart, tooltips }) {
     const languages = [

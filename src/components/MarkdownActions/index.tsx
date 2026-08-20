@@ -2,7 +2,7 @@ import { IconCopy, IconEye, IconExternal, IconCheck, IconChevronDown } from '@po
 import Link from 'components/Link'
 import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { isMarkdownContentPath } from '../../constants'
 
 // `location.pathname` carries a trailing slash where `appWindow.path` doesn't, and

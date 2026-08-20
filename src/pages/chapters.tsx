@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
@@ -10,7 +10,7 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../navs'
 import Editor from 'components/Editor'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 export const HandbookToc: React.FC = () => {
     return (

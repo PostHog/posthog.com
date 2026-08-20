@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 
 interface DesktopIconProps {
     app: AppItem

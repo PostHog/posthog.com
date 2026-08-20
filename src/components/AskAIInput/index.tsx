@@ -7,7 +7,7 @@ import usePostHog from 'hooks/usePostHog'
 import { useApp } from '../../context/App'
 import { useLocation } from '@reach/router'
 import { useWindow } from '../../context/Window'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 interface AskAIInputProps {
     placeholder?: string

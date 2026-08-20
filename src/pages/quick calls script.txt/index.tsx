@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import Link from 'components/Link'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export default function QuickCallsScript(): JSX.Element {
     return (

@@ -4,7 +4,7 @@ import { heading } from 'components/Home/classes'
 import { SEO } from 'components/seo'
 import { sexyLegalMenu } from '../navs'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 
 const APP_LEGAL_URL = 'https://app.posthog.com/legal'

@@ -7,7 +7,7 @@ tags:
   - product analytics
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
+import { ProductScreenshot } from 'components/shared/media/ProductScreenshot'
 export const EventsInPostHogLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/go-analytics/events-light.png"
 export const EventsInPostHogDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/go-analytics/events-dark.png"
 export const InsightLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/go-analytics/insight-light.png"

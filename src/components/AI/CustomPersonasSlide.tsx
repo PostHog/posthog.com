@@ -3,8 +3,8 @@ import Markdown from 'components/Squeak/components/Markdown'
 import { IconCheck } from '@posthog/icons'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
-import OSTabs from "components/OSTabs"
-import CloudinaryImage from 'components/CloudinaryImage'
+import OSTabs from "components/shared/ui/OSTabs"
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 const content = {
   'founders': {

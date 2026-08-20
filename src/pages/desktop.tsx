@@ -31,15 +31,15 @@ import {
     IconWarning,
     IconX,
 } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { Accordion } from 'components/RadixUI/Accordion'
 import Modal from 'components/RadixUI/Modal'
 import Tooltip from 'components/RadixUI/Tooltip'
-import SlotMachineText from 'components/SlotMachineText'
+import SlotMachineText from 'components/shared/animation/SlotMachineText'
 import posthogIcon from '../images/posthog-icon-white.svg'
 import { LOGOS, type LogoKey } from 'constants/logos'
-import TabbedCarousel from 'components/TabbedCarousel'
-import type { TabbedCarouselTab } from 'components/TabbedCarousel'
+import TabbedCarousel from 'components/shared/animation/TabbedCarousel'
+import type { TabbedCarouselTab } from 'components/shared/animation/TabbedCarousel'
 import { ChoppyReveal } from 'components/Code/ChoppyReveal'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { IconPop } from 'components/Code/IconPop'
@@ -52,8 +52,8 @@ import {
     StickerAi,
     StickerRobot,
 } from 'components/Stickers/Stickers'
-import CloudinaryImage from 'components/CloudinaryImage'
-import WistiaEmbed from 'components/WistiaEmbed'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import WistiaEmbed from 'components/shared/media/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
 import { WaitlistForm } from 'components/WaitlistForm'

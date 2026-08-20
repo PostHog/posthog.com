@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconBrackets, IconCode, IconDashboard, IconLaptop, IconPlug, IconTerminal, IconTrends } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import MCPInstall from 'components/Products/MCPInstall'
 
 /**

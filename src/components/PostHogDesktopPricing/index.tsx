@@ -1,7 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 
 interface ModelPricing {
     prompt: string

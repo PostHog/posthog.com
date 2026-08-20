@@ -1,6 +1,6 @@
 import { CallToAction } from 'components/CallToAction'
 import ClientPostMarkdown from 'components/Squeak/components/ClientPostMarkdown'
-import { ZoomImage } from 'components/ZoomImage'
+import { ZoomImage } from 'components/shared/media/ZoomImage'
 import SEO from 'components/seo'
 import dayjs from 'dayjs'
 import { useUser } from 'hooks/useUser'

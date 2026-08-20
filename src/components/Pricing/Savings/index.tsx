@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 
 import checkIcon from '../../../images/check.svg'
 

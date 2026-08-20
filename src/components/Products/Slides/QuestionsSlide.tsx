@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import pluralizeWord from 'pluralize'
 import { Markdown } from 'components/Squeak/components/Markdown'
 

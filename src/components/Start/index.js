@@ -14,12 +14,12 @@ import { useWindow } from '../../context/Window'
 import CodeBlock from '../Home/CodeBlock'
 import ContactForm from '../Home/ContactForm'
 import { useLocation } from '@reach/router'
-import OSTabs from 'components/OSTabs'
+import OSTabs from 'components/shared/ui/OSTabs'
 import WizardCommand from 'components/WizardCommand'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import Loading from 'components/Loading'
-import ProgressBar from 'components/ProgressBar'
+import ProgressBar from 'components/shared/ui/ProgressBar'
 
 const AIInstall = ({ setActiveTab }) => (
     <div

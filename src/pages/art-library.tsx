@@ -1,6 +1,6 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../context/App'

@@ -7,7 +7,7 @@ import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 type TranslateFn = (value: string) => string
 const identity = (value: string) => value

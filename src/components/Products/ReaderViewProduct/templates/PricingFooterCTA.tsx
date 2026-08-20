@@ -1,6 +1,6 @@
 import React from 'react'
-import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
+import OSButton from 'components/shared/ui/OSButton'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { SectionComponentProps } from '../types'
 
 const PricingFooterCTA = ({ id, productData }: SectionComponentProps) => {

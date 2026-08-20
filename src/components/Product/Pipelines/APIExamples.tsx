@@ -1,6 +1,6 @@
 import React from 'react'
 import { Accordion } from 'components/Products/Accordion'
-import { CodeBlock } from 'components/CodeBlock'
+import { CodeBlock } from 'components/shared/ui/CodeBlock'
 
 const generateConfigInputs = (schema: any[]) => {
     if (!schema) return '{}'

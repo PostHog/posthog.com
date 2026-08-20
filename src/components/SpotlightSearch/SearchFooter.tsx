@@ -1,5 +1,5 @@
 import React from 'react'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 
 export default function SearchFooter({
     filterMenuOpen,

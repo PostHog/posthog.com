@@ -5,7 +5,7 @@ import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import { LottieAnimation } from 'components/About/v2/LottieAnimations'
 import { Letterhead } from 'components/About/v2/Letterhead'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { PRODUCT_COUNT, CUSTOMER_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
 import SEO from 'components/seo'
@@ -15,7 +15,7 @@ import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 const CustomerCount = () => <span>{CUSTOMER_COUNT}+</span>
 

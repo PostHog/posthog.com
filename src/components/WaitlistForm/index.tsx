@@ -1,7 +1,7 @@
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import useProduct from '../../hooks/useProduct'
-import SurveySignup from 'components/SurveySignup'
+import SurveySignup from 'components/shared/forms/SurveySignup'
 
 // The "PostHog Desktop waitlist" survey — the same list the /roadmap card and the in-app
 // feature previews collect into, so every PostHog Desktop sign-up lands in one place.

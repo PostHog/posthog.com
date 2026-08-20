@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
-import OSButton from 'components/OSButton'
-import OSTable from 'components/OSTable'
+import OSButton from 'components/shared/ui/OSButton'
+import OSTable from 'components/shared/ui/OSTable'
 import subprocessors from '../data/subprocessors.json'
 
 type TabKey = 'all' | 'core' | 'ai' | 'internal'

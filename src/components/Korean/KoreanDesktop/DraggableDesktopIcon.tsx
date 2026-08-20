@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { motion, useDragControls } from 'framer-motion'
 import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import { useApp } from '../../../context/App'
 
 interface DraggableDesktopIconProps {

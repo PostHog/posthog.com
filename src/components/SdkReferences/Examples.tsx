@@ -1,6 +1,6 @@
 import React from 'react'
-import { SingleCodeBlock } from '../CodeBlock'
-import languageMap from '../CodeBlock/languages'
+import { SingleCodeBlock } from 'components/shared/ui/CodeBlock'
+import languageMap from 'components/shared/ui/CodeBlock/languages'
 import Tab from 'components/Tab'
 
 interface Example {

@@ -10,7 +10,7 @@ import { IconArrowRightDown } from '@posthog/icons'
 import { sexyLegalMenu } from '../navs'
 import Lawyers from 'components/Lawyers'
 import { Tweet } from 'components/Tweet'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 const privacyClasses = cntl`
   full-privacy-policy

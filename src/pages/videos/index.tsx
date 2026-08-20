@@ -10,7 +10,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useExplorerLayout } from '../../hooks/useExplorerLayout'
 import { useMenuSelectOptions } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon, AppIconName } from 'components/OSIcons/AppIcon'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import { Video } from '../../data/videos'
 import { useVideos } from '../../hooks/useVideos'
 

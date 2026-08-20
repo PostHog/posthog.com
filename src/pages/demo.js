@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
 import { SEO } from 'components/seo'
 import React from 'react'

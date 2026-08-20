@@ -6,7 +6,7 @@ import Link from 'components/Link'
 import Fuse from 'fuse.js'
 import { IconBookmark, IconEllipsis } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import MenuBar from 'components/RadixUI/MenuBar'
 
 const EditButton = ({ url, title, description }: { url: string; title: string; description: string }) => {

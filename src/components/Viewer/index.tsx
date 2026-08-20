@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IconGear, IconTextWidthFixed, IconTextWidth, IconRefresh } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
 import { SearchProvider } from './SearchProvider'
@@ -13,11 +13,11 @@ import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
 import BookmarkButton from 'components/BookmarkButton'
 import MediaPlayer from 'components/MediaPlayer'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { Popover } from 'components/RadixUI/Popover'
 import Slider from 'components/RadixUI/Slider'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 interface ViewerProps {
     slug?: string

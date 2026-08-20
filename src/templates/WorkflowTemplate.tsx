@@ -4,7 +4,7 @@ import ReaderView from 'components/ReaderView'
 import { SEO } from 'components/seo'
 import { TreeMenu } from 'components/TreeMenu'
 import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import TemplateCTAs from 'components/TemplateCTAs'
 
 export default function WorkflowTemplate({ data }) {

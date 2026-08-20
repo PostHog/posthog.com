@@ -1,9 +1,9 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React from 'react'
 
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 import ReaderView from 'components/ReaderView'
 import useServicesList from 'hooks/docs/useServicesList'
 

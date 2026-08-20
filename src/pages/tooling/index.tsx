@@ -9,7 +9,7 @@ import {
     StickerRun,
     StickerServers,
 } from 'components/Stickers/Stickers'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import WizardCommand from 'components/WizardCommand'
 
 export default function Tooling(): JSX.Element {

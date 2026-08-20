@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IconPresent, IconReceipt, IconBadge, IconCheck, IconCopy } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import dayjs from 'dayjs'
 import type { TransactionMetadata } from './types'
 import Link from 'components/Link'

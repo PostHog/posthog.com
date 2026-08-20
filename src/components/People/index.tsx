@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { AVATAR_FALLBACK_URL } from 'constants/index'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import React, { useState, useMemo, useEffect, useCallback } from 'react'
@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
 import Tooltip from 'components/RadixUI/Tooltip'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
@@ -16,7 +16,7 @@ import { useInView } from 'react-intersection-observer'
 import PeopleMap from 'components/HogMap/PeopleMap'
 import { IconMapPin, IconList } from '@posthog/icons'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
-import { OSInput } from 'components/OSForm'
+import { OSInput } from 'components/shared/forms/OSForm'
 import {
     useGeocodedArea,
     useCoordsByQuery,

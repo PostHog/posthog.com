@@ -1,4 +1,4 @@
-import Slider from 'components/Slider'
+import Slider from 'components/shared/layout/Slider'
 import React, { useState } from 'react'
 import { Link } from 'react-scroll'
 

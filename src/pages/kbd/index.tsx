@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { Fieldset } from 'components/OSFieldset'
-import KeyboardShortcut from 'components/KeyboardShortcut'
-import CloudinaryImage from 'components/CloudinaryImage'
+import { Fieldset } from 'components/shared/forms/OSFieldset'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 interface ShortcutItem {
     keys: string[] | string[][]

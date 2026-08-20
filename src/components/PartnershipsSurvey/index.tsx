@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import usePostHog from 'hooks/usePostHog'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import * as Yup from 'yup'
 import { IconCheckCircle } from '@posthog/icons'
 

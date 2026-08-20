@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
 import { createCartQuery, shopifyStorefrontUrl, shopifyHeaders } from '../../lib/shopify'

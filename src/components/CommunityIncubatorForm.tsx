@@ -4,7 +4,7 @@ import usePostHog from 'hooks/usePostHog'
 const { IconCheck } = require('@posthog/icons') as { IconCheck: React.FC<any> }
 import { useRef, useState } from 'react'
 import { CallToAction } from './CallToAction'
-import { OSInput, OSTextarea } from 'components/OSForm'
+import { OSInput, OSTextarea } from 'components/shared/forms/OSForm'
 import { cn } from '../utils'
 
 const TRACKS = [

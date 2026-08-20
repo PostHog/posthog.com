@@ -1,5 +1,5 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { HedgehogSailorHog } from '@posthog/brand/hoggies'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
-import Input from 'components/OSForm/input'
+import Input from 'components/shared/forms/OSForm/input'
 import * as yup from 'yup'
 
 const emailSchema = yup.object().shape({

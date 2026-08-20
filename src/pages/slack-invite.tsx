@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Spinner from 'components/Spinner'
+import Spinner from 'components/shared/ui/Spinner'
 import { SEO } from 'components/seo'
 
 function Slack() {

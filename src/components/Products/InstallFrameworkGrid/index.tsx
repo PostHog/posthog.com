@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Link from 'components/Link'
-import Input from 'components/OSForm/input'
+import Input from 'components/shared/forms/OSForm/input'
 import { getLogo } from '../../../constants/logos'
 import { TAXONOMY, type InstallItem } from '../../../constants/installation-taxonomy'
 

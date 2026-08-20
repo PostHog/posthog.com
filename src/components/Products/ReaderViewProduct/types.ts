@@ -1,5 +1,5 @@
 import React from 'react'
-import type { GlowColor } from 'components/Glow'
+import type { GlowColor } from 'components/shared/animation/Glow'
 
 /**
  * A single entry in a product's `productMenu` (or `pricingMenu`). Defined on

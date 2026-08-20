@@ -17,12 +17,12 @@ import engineeringManagersConfig from '../../presentations/engineering-managers.
 import productManagersConfig from '../../presentations/product-managers.json'
 import productDirectorsConfig from '../../presentations/product-directors.json'
 import { useWindow } from '../../context/Window'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import PricingTemplate from 'components/Presentation/Templates/PricingTemplate'
 import BookingTemplate from 'components/Presentation/Templates/BookingTemplate'
 import { DotLottiePlayer } from '@dotlottie/react-player'
 import Logos from 'components/Presentation/Utilities/Logos'
-import ProgressBar from 'components/ProgressBar'
+import ProgressBar from 'components/shared/ui/ProgressBar'
 const Loading = () => {
     const lottieRef = useRef(null)
     return (

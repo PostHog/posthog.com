@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 import Slider from 'react-slick'
-import SliderNav from '../../SliderNav'
+import SliderNav from 'components/shared/ui/SliderNav'
 
 import './index.css'
 import { Application, Culture, Offer, Superday, Technical } from '../Images'

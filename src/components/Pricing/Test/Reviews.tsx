@@ -3,7 +3,7 @@ import { section, SectionHeader } from './Sections'
 import { IconStarFilled, IconStar } from '@posthog/icons'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 export const Stars = ({ rating }) => {
     return (

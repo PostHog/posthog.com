@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useToast } from '../../context/Toast'
 import usePostHog from '../../hooks/usePostHog'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconX } from '@posthog/icons'
 

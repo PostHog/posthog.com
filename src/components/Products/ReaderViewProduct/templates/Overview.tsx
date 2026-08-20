@@ -1,9 +1,9 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { SectionComponentProps } from '../types'
-import Glow from 'components/Glow'
+import Glow from 'components/shared/animation/Glow'
 import { CTAs } from 'components/CTAs'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 const Overview = ({ id, productData }: SectionComponentProps) => {
     const { name, Icon, overview, screenshots, status, hogs } = productData ?? {}

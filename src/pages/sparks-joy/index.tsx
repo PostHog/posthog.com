@@ -5,7 +5,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
 import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 
 export default function SparkJoy(): JSX.Element {
     return (

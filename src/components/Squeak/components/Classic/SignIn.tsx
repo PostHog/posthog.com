@@ -5,7 +5,7 @@ import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
-import Input from '../../../../components/OSForm/input'
+import Input from 'components/shared/forms/OSForm/input'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'

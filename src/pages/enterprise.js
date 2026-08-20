@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction/index.tsx'
 import React from 'react'
 import { SignupCTA } from 'components/SignupCTA'

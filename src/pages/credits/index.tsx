@@ -9,7 +9,7 @@ import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { graphql, useStaticQuery } from 'gatsby'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import { CUSTOMER_COUNT } from '../../constants'
 
 type FieldsetItem = {

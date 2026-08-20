@@ -1,5 +1,5 @@
 import React from 'react'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import WizardCommand from 'components/WizardCommand'
 
 export default function WizardCTA(): JSX.Element {

@@ -2,12 +2,12 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
-import OSButton from 'components/OSButton'
-import { OSInput, OSSelect } from 'components/OSForm'
+import OSButton from 'components/shared/ui/OSButton'
+import { OSInput, OSSelect } from 'components/shared/forms/OSForm'
 import { internalToolsNav } from '../../navs/internalTools'
 import { useUser } from 'hooks/useUser'
 import useProducts from 'hooks/useProducts'
-import ImageAnnotations, { type Annotation, type AnnotationType } from 'components/ImageAnnotations'
+import ImageAnnotations, { type Annotation, type AnnotationType } from 'components/shared/media/ImageAnnotations'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
 import { IconTrash, IconCopy, IconChevronDown } from '@posthog/icons'
@@ -169,7 +169,7 @@ ${item('            ')}
 
 // 2. Render anywhere — the image (light + dark) stays in sync with the hook.
 //    In MDX, import it at the top of the file first (like Tab):
-import ImageAnnotations from 'components/ImageAnnotations'
+import ImageAnnotations from 'components/shared/media/ImageAnnotations'
 
 <ImageAnnotations.FromProduct product="${productHandle}" screenshot="${screenshotKey}" set="${setName}" />`
         }
@@ -200,7 +200,7 @@ import ImageAnnotations from 'components/ImageAnnotations'
 </ImageAnnotations>`
                 : ''
 
-        return `import ImageAnnotations from 'components/ImageAnnotations'
+        return `import ImageAnnotations from 'components/shared/media/ImageAnnotations'
 
 export const annotations = [
 ${item('    ')}

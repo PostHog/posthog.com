@@ -4,7 +4,7 @@ import usePostHog from '../../hooks/usePostHog'
 import { CopyableCommand } from 'components/PlatformInstall/CopyableCommand'
 import Link from 'components/Link'
 
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 import { productSource } from './sources'
 

@@ -13,8 +13,8 @@ tags:
   - product os
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
-import {ProductVideo} from 'components/ProductVideo'
+import {ProductScreenshot} from 'components/shared/media/ProductScreenshot'
+import {ProductVideo} from 'components/shared/media/ProductVideo'
 
 Many software development teams use multiple environments to split up their code, such as development, staging, and production. This ensures changes in development don’t affect production, helps teams test before release, and increases the quality of code that reaches end users.
 

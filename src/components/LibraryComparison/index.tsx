@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import CheckIcon from '../../images/check.svg'
 import XIcon from '../../images/x.svg'
 import Link from '../Link'
-import OSTable from '../OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 
 type LibraryNode = {
     fields: {

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
-import Input from 'components/OSForm/input'
+import Input from 'components/shared/forms/OSForm/input'
 import Wizard from 'components/Wizard'
 import { IconSpinner } from '@posthog/icons'
 

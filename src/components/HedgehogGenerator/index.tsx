@@ -4,10 +4,10 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import SEO from 'components/seo'
 import { IconArrowRightDown, IconCheck } from '@posthog/icons'
 import { useToast } from '../../context/Toast'
-import { OSInput } from 'components/OSForm'
+import { OSInput } from 'components/shared/forms/OSForm'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 dayjs.extend(duration)
 

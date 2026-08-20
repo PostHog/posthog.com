@@ -1,7 +1,7 @@
 import React from 'react'
 import SEO from 'components/seo'
 import WhyPostHogViewer from 'components/WhyPostHog'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 
 export default function Why(): JSX.Element {
     return (

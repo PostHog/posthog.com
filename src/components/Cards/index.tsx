@@ -1,6 +1,6 @@
 import { IconChevronDown, IconLogomark } from '@posthog/icons'
 import React, { useRef } from 'react'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 type CardProps = {
     top: string

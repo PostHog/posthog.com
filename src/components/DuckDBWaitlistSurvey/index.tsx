@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import OSButton from 'components/OSButton'
-import SurveySignup from 'components/SurveySignup'
+import OSButton from 'components/shared/ui/OSButton'
+import SurveySignup from 'components/shared/forms/SurveySignup'
 
 // "DuckDB managed warehouse waitlist" — linked to the managed-duckdb-data-warehouse
 // feature flag, so this page, the /roadmap card, and the in-app feature previews all

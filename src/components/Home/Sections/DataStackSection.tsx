@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import Markdown from 'components/Markdown'
+import Markdown from 'components/shared/typography/Markdown'
 import { ImageDW, TooltipDW } from 'components/Home/Decorations'
 
 export const DataStackSection = () => (

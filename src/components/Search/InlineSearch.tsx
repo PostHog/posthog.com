@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { IconSearch, IconX } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Link from 'components/Link'
 import { useSearch } from 'components/Editor/SearchProvider'
 import Mark from 'mark.js'

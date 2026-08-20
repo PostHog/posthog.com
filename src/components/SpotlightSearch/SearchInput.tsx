@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconFilter, IconSearch, IconX } from '@posthog/icons'
-import KeyboardShortcut from 'components/KeyboardShortcut'
-import Spinner from 'components/Spinner'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
+import Spinner from 'components/shared/ui/Spinner'
 import { configForType } from './categories'
 
 type SearchInputProps = {

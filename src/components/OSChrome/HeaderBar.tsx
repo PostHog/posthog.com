@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { motion, Variants } from 'framer-motion'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import {
     IconHome,
     IconSidebarOpen,
@@ -32,7 +32,7 @@ import Loading from 'components/Loading'
 import { Popover } from 'components/RadixUI/Popover'
 import { FileMenu } from 'components/RadixUI/FileMenu'
 import BookmarkButton from 'components/BookmarkButton'
-import KeyboardShortcut from 'components/KeyboardShortcut'
+import KeyboardShortcut from 'components/shared/ui/KeyboardShortcut'
 interface HeaderBarProps {
     isNavVisible?: boolean
     isTocVisible?: boolean

@@ -1,6 +1,6 @@
 import cntl from 'cntl'
 import React from 'react'
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 import BlogAuthor from '../BlogAuthor'
 import { PlainIntro } from '../BlogIntro'
 

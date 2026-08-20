@@ -1,7 +1,7 @@
 import Team from 'components/Team'
 import React, { useState, useRef, useMemo } from 'react'
 import { useUser } from 'hooks/useUser'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'

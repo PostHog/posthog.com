@@ -6,7 +6,7 @@ contentMaxWidthClass: max-w-5xl
 ---
 
 import { IconLaptop, IconMagic, IconCode, IconBrackets, IconServer, IconFilter, IconRewindPlay, IconBolt, IconNotebook, IconPerson, IconCheckCircle, IconWarning } from '@posthog/icons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import CustomSelfDrivingLoop from 'components/CustomSelfDrivingLoop'
 
 Logs is an OpenTelemetry-native log store, so there are no PostHog-specific SDKs to adopt – point any OTLP client at PostHog and your log records start arriving. Search them by service, severity, and attribute, group similar lines into [patterns](/docs/logs/patterns) to see what changed, and open any record to have [PostHog AI](/docs/logs/explain-logs-ai) explain it.

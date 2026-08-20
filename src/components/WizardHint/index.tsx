@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconX, IconChevronDown } from '@posthog/icons'
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import WizardCommand from 'components/WizardCommand'
 
 const HEDGEHOG_SRC = 'https://res.cloudinary.com/dmukukwp6/image/upload/wizard_3f8bb7a240.png'

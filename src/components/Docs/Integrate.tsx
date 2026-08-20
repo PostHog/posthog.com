@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import List from 'components/List'
+import List from 'components/shared/typography/List'
 import { getLogo } from '../../constants/logos'
 
 type LibraryNode = {

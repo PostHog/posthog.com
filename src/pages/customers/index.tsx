@@ -3,7 +3,7 @@ import SEO from 'components/seo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import ViewerFilters from 'components/Viewer/ViewerFilters'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 import { IconArrowUpRight } from '@posthog/icons'
 

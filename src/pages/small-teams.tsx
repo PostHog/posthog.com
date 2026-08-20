@@ -3,8 +3,8 @@ import Editor from 'components/Editor'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
-import OSButton from 'components/OSButton'
-import OSTable from 'components/OSTable'
+import OSButton from 'components/shared/ui/OSButton'
+import OSTable from 'components/shared/ui/OSTable'
 const SmallTeamsPage = () => {
     const [searchTerm, setSearchTerm] = useState('')
 

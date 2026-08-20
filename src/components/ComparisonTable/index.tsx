@@ -1,5 +1,5 @@
 import React from 'react'
-import { OverflowXSection } from 'components/OverflowXSection'
+import { OverflowXSection } from 'components/shared/layout/OverflowXSection'
 
 export const ComparisonTable = ({ column1, column2, children }) => {
     return (

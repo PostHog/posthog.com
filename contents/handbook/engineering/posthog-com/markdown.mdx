@@ -44,10 +44,10 @@ The simplest entry point. It resolves the image (light + dark) and an optional n
 
 <!-- prettier-ignore -->
 ```tsx
-import ImageAnnotations from 'components/ImageAnnotations'
+import ImageAnnotations from 'components/shared/media/ImageAnnotations'
 ```
 
-import ImageAnnotations from 'components/ImageAnnotations'
+import ImageAnnotations from 'components/shared/media/ImageAnnotations'
 
 <ImageAnnotations.FromProduct product="session_replay" screenshot="overview" set="dev-tools" />
 
@@ -110,7 +110,7 @@ If the image isn't in a hook (or you want a one-off), define the annotations inl
 
 <!-- prettier-ignore -->
 ```tsx
-import ImageAnnotations from 'components/ImageAnnotations'
+import ImageAnnotations from 'components/shared/media/ImageAnnotations'
 
 export const annotations = [
 { x: 27.2, y: 9.8, title: 'Debug views' },

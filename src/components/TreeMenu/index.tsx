@@ -4,7 +4,7 @@ import { IconChevronRight, IconPlus, IconArrowUpRight } from '@posthog/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Link from 'components/Link'
 import { useWindow } from '../../context/Window'
 

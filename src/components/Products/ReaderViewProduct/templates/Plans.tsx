@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion'
 import groupBy from 'lodash.groupby'
 import { IconCheck, IconX } from '@posthog/icons'
 import useProduct from 'hooks/useProduct'
-import OSButton from 'components/OSButton'
-import Toggle from 'components/Toggle'
+import OSButton from 'components/shared/ui/OSButton'
+import Toggle from 'components/shared/forms/Toggle'
 import { SectionComponentProps } from '../types'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 import Link from 'components/Link'
 
 type PlanFeatureValue = string | number | boolean

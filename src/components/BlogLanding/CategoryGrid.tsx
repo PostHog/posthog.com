@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import ZoomHover from 'components/ZoomHover'
+import ZoomHover from 'components/shared/animation/ZoomHover'
 import slugify from 'slugify'
 import { DEFAULT_TAG_ICON, getTagIcon } from './tagOptions'
 import { useCategoryTags } from './useCategoryTags'

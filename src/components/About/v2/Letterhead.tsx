@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 export const Letterhead = () => {
     return (

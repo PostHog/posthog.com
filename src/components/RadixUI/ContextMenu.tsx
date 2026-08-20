@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ContextMenu as RadixContextMenu } from 'radix-ui'
-import KeyboardShortcut from "components/KeyboardShortcut"
+import KeyboardShortcut from "components/shared/ui/KeyboardShortcut"
 
 export interface ContextMenuItemProps {
     type: 'item' | 'separator'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Structure } from '../../Structure'
+import { Structure } from 'components/shared/layout/Structure'
 import { mergeClassList } from '../../../lib/utils'
 import compensationImg from './images/compensation.svg'
 import hackerHouseImg from './images/hacker-house.svg'

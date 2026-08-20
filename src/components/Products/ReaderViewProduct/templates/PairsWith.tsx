@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import Glow, { type GlowColor } from 'components/Glow'
+import Glow, { type GlowColor } from 'components/shared/animation/Glow'
 import ToolsTicker, { DEFAULT_HANDLES } from 'components/Home/ToolsTicker'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 import { CARD_H3, SectionHeading } from '../helpers'

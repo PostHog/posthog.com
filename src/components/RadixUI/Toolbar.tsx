@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as RadixToolbar from '@radix-ui/react-toolbar'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import { Select } from './Select'
 
 export type ToolbarItem = {

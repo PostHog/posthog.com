@@ -12,7 +12,7 @@ import {
     IconPlug,
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconReactNative, IconFlutter } from 'components/OSIcons'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 

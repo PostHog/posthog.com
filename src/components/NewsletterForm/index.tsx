@@ -1,4 +1,4 @@
-import CloudinaryImage from 'components/CloudinaryImage'
+import CloudinaryImage from 'components/shared/media/CloudinaryImage'
 import React, { useEffect, useState } from 'react'
 import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
@@ -7,7 +7,7 @@ import Tooltip from 'components/Tooltip'
 import { IconInfo } from '@posthog/icons'
 import { child, container } from 'components/CallToAction'
 import Link from 'components/Link'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { DebugContainerQuery } from 'components/shared/layout/DebugContainerQuery'
 
 interface NewsletterFormProps {
     className?: string

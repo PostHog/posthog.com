@@ -1,5 +1,5 @@
 import React from 'react'
-import TabbedCarousel from 'components/TabbedCarousel'
+import TabbedCarousel from 'components/shared/animation/TabbedCarousel'
 import CarouselSlide from '../CarouselSlide'
 import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '../types'
 

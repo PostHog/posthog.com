@@ -2,7 +2,7 @@ import { navigate } from 'gatsby'
 import React, { useContext } from 'react'
 import { PostsContext } from './Posts'
 import * as Icons from '@posthog/icons'
-import Slider from 'components/Slider'
+import Slider from 'components/shared/layout/Slider'
 
 const Tag = ({ name, active, onClick, icon, color }) => {
     const Icon = Icons[icon]

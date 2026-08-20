@@ -1,10 +1,10 @@
 import React from 'react'
 import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
-import OSTable from 'components/OSTable'
+import OSTable from 'components/shared/ui/OSTable'
 import { IconArrowUpRight } from '@posthog/icons'
 import { Link } from 'gatsby'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 
 const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
 

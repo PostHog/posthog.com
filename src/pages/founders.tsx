@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import React from 'react'
 import usePostHog from 'hooks/usePostHog'
-import { RenderInClient } from 'components/RenderInClient'
+import { RenderInClient } from 'components/shared/layout/RenderInClient'
 import SidebarExplorer from 'components/BlogLanding/variants/SidebarExplorer'
 
 // Kill switch, not an A/B test: disabling it in PostHog reverts everyone to the old hub.

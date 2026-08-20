@@ -3,7 +3,7 @@ import { section, SectionHeader } from './Sections'
 import * as Icons from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from './PricingAccordion'
-import ScrollToElement from 'components/ScrollToElement'
+import ScrollToElement from 'components/shared/layout/ScrollToElement'
 
 export const PaidPricing = () => {
     const [expanded, setExpanded] = useState(false)

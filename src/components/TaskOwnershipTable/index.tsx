@@ -2,7 +2,7 @@ import React, { useMemo, useState, useRef, useEffect } from 'react'
 import { useTaskOwnership } from '../../hooks/useTaskOwnership'
 import SmallTeam from '../SmallTeam'
 import TeamMember from '../TeamMember'
-import { OSInput } from '../OSForm'
+import { OSInput } from 'components/shared/forms/OSForm'
 import Mark from 'mark.js'
 
 interface TaskOwnershipTableProps {

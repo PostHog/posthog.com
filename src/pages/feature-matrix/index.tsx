@@ -1,5 +1,5 @@
 import React from 'react'
-import OSButton from 'components/OSButton'
+import OSButton from 'components/shared/ui/OSButton'
 import SEO from 'components/seo'
 import ProductComparisonTable from 'components/ProductComparisonTable'
 
