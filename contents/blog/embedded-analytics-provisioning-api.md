@@ -27,7 +27,7 @@ The code is [on GitHub](https://github.com/Brooker-Fam/hogfarm) and there's a [l
 
 ## Registering your OAuth client
 
-To register my OAuth client, I added a small JSON file. The first time I called the API, PostHog fetched the file and registered my OAuth app. It's called a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd), or CIMD.
+To register my OAuth client, I added a small JSON file on my own domain and pointed PostHog at it. There's no signup form: the file's URL *is* my `client_id`. It's called a [Client ID Metadata Document](/docs/api/oauth#client-id-metadata-document-cimd), or CIMD.
 
 It looks like this:
 
@@ -54,14 +54,28 @@ const verifier = base64url(randomBytes(32))
 const challenge = base64url(sha256(verifier))
 ```
 
+With the file live, I register it. That's the call that turns the JSON into an OAuth app, and it's the first thing you do. It's one request with nothing in it but the document URL:
+
+```bash
+curl -X POST https://us.posthog.com/api/agentic/provisioning/client_registration \
+  -H "Content-Type: application/json" \
+  -d '{"client_id": "https://hogfarm-guava-tri.vercel.app/.well-known/posthog-client-v6.json"}'
+```
+
+The [provisioning docs have an interactive version](/docs/integrate/provisioning#register-your-client) that does the same thing in the browser, if you'd rather paste a URL than assemble the call.
+
+What I'd flag is the response, because it's more useful than a bare success. It reports each check separately, so a broken setup tells you which piece is wrong instead of surfacing later as an opaque `401`, and a `capabilities` block spells out which endpoints you qualify for. Discovering that from a `403` three calls in is much less pleasant.
+
+The one thing worth knowing up front: registration is per region. US and EU are separate deployments with separate databases, so if you serve both you register twice, and PostHog won't do the second one for you.
+
 ## Creating an account the farmer never sees
 
-With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background. The API is pre-1.0, so every call pins the version with the `API-Version: 0.1d` header.
+With HogFarm registered, the first call creates the farmer's PostHog account. I request the account on their behalf and PostHog provisions it in the background.
 
 ```ts
 await fetch(`${HOST}/api/agentic/provisioning/account_requests`, {
   method: "POST",
-  headers: { "API-Version": "0.1d", "Content-Type": "application/json" },
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     id: crypto.randomUUID(),
     email,
@@ -79,7 +93,8 @@ There are a few cases to handle for this response:
 
 - **A new email** comes back as `{ type: "oauth", oauth: { code } }`. The account gets created and linked quietly, I get a code on the spot, and the farmer gets a welcome email to set their password.
 - **An email that's already a PostHog user** comes back as `{ type: "requires_auth", requires_auth: { url } }`. They have to consent in the browser first, so I send them to `url` and PostHog redirects back to my `redirect_uri` with a code.
-- **The very first call from a new CIMD client** comes back as a `202` with `{ type: "registering" }`. PostHog fetches the metadata document in the background, so I wait the `retry_after` seconds and call again. This happens once per deployment, and it caught me off guard the first time (see below).
+
+These are the only two cases: an email that already has a PostHog account always goes through the browser, whatever my app is allowed to do. Proving I control HogFarm is not the same as proving I control somebody's inbox, so PostHog will not quietly attach an existing account to me. Plan for the redirect as a normal branch.
 
 ## Getting the farmer's project key
 
@@ -88,8 +103,8 @@ The account exists but it's empty. Two calls fix that: one to trade the code for
 ```ts
 const res = await fetch(`${HOST}/api/agentic/oauth/token`, {
   method: "POST",
-  headers: { "API-Version": "0.1d", "Content-Type": "application/x-www-form-urlencoded" },
-  body: new URLSearchParams({ grant_type: "authorization_code", code, code_verifier: verifier }),
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: new URLSearchParams({ grant_type: "authorization_code", code, code_verifier: verifier, client_id: clientId }),
 })
 const { access_token: accessToken, refresh_token: refreshToken } = await res.json()
 ```
@@ -100,19 +115,17 @@ The next call provisions a project:
 await fetch(`${HOST}/api/agentic/provisioning/resources`, {
   method: "POST",
   headers: {
-    "API-Version": "0.1d",
     "Content-Type": "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
   body: JSON.stringify({
-    service_id: "free",
     label_prefix: farmName,
     configuration: { project_name: `${farmName} site` },
   }),
 })
 ```
 
-The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away. `service_id: "free"` gives a free-tier project with no card required, which is all HogFarm needs.
+The response carries `complete.access_configuration.api_key` (the `phc_` token) and `host`, plus a top-level `id`: the team id for the project it just created, which I hold onto for every read below (it shows up as `teamId`). That key goes into the farm site HogFarm generates, so visits start landing in PostHog right away.
 
 Access tokens last an hour, so anything long-lived means holding onto the refresh token. I store both encrypted in Postgres with AES-256-GCM, and the key lives only in the environment, never in the database.
 
@@ -207,7 +220,8 @@ I drop that URL in an iframe and the farmer watches real visitors move through t
 
 These are the things that weren't obvious until I hit them:
 
-- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and the first call just failed. PostHog couldn't fetch the metadata document through the SSO gate. If registration never finishes, open the `.well-known` URL in an incognito window and make sure it loads.
+- **Your CIMD URL has to be reachable.** I deployed behind Vercel's default deployment protection and registration just failed. PostHog couldn't fetch the metadata document through the SSO gate. The registration endpoint tells you this directly, as a failed `metadata_document` check, but if you're staring at one, open the `.well-known` URL in an incognito window and make sure it loads.
+- **Register in both regions if you serve both.** US and EU are separate deployments with separate databases. Registering against `us.posthog.com` does nothing for `eu.posthog.com`, and PostHog won't do it for you. I only serve US, so I register once, but the day I add EU it's a second call.
 - **Don't reach for `historical_migration` to seed backdated events.** I seed a week of demo pageviews so a new farm's dashboard isn't empty on day one, and my first instinct was the `historical_migration` flag since the timestamps are in the past. That flag routes the batch to a throttled ingestion pipeline that can take many minutes to become queryable, so the dashboard sat empty right after provisioning, the opposite of what I wanted. The regular capture pipeline takes backdated timestamps fine (it stores the event timestamp, not arrival time) and they show up in seconds. For a week-old seed, skip the flag.
 
 ## Give the gift of PostHog to your users

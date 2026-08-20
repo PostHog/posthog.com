@@ -49,6 +49,27 @@ For native apps that grab a dynamically assigned local port at runtime (per [RFC
 
 PostHog caches your metadata document according to the `Cache-Control: max-age` header you return. If you add a new redirect URI after your client has already been used, the previously cached document stays in effect until its TTL elapses. Return a shorter `max-age` to have changes picked up sooner.
 
+### Public and confidential CIMD clients
+
+A CIMD client can never hold a client secret, because there is no registration step in which PostHog could deliver one. `token_endpoint_auth_method` therefore takes one of two values:
+
+- `"none"` (the default if you omit it) – a public client, identified by its `client_id` and relying on PKCE.
+- `"private_key_jwt"` – a confidential client. Also publish a `jwks_uri` pointing at an HTTPS URL that serves your public keys as a JWK Set, and sign a short-lived assertion ([RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523)) per request. Nothing secret is ever transmitted, and you rotate keys yourself by publishing a new one.
+
+```json
+{
+  "client_id": "https://myapp.example.com/oauth-client",
+  "client_name": "My App",
+  "redirect_uris": ["https://myapp.example.com/oauth/callback"],
+  "token_endpoint_auth_method": "private_key_jwt",
+  "jwks_uri": "https://myapp.example.com/.well-known/jwks.json"
+}
+```
+
+Because the document is re-read on each refresh, you can move between the two at any time by editing it. Your `client_id` does not change.
+
+Confidential client authentication is used by the [provisioning API](/docs/integrate/provisioning#choosing-an-authentication-method), where some endpoints accept confidential clients only.
+
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
 ## Server metadata discovery
