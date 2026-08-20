@@ -72,7 +72,7 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
 
 ## Recordings across multiple tabs and windows
 
-PostHog records all tabs and windows of your site into one recording. A user opens a link in a second tab, and PostHog adds that tab to the same recording. PostHog starts a new recording only when the [session ends](/docs/data/sessions#how-does-posthog-define-a-session).
+PostHog records all tabs and windows of your site into one recording. A user opens a link in a second tab, and PostHog adds that tab to the same recording. PostHog starts a second recording only when a [new session](/docs/data/sessions#how-does-posthog-define-a-session) begins.
 
 PostHog assigns one `$session_id` to the session, and a separate `$window_id` to each tab. Every tab sends its events under the same `$session_id`. The player reads the `$window_id` to show you which tab each moment came from.
 
