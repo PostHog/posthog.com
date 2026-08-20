@@ -135,7 +135,7 @@ Once you've picked your stack, the install pattern is similar across servers:
 2. **Use the AI wizard if available.** PostHog, Linear, and Notion all have one-click installers from their docs that handle config and OAuth. Save yourself the JSON wrangling.
 3. **For manual setup, edit your client's config file.** Claude Desktop uses `claude_desktop_config.json`, Cursor uses `~/.cursor/mcp.json`, and so on. Each server's docs show the exact JSON snippet.
 4. **Start with read-only mode.** Most servers support it. Ship-stop-ship-stop is the right pattern when you're learning what an agent will actually do with new tools.
-5. **Watch your token budget.** Every server adds [tool definitions to your context window](/newsletter/this-post-will-save-you-tokens#3-audit-your-mcp-servers). Ten servers with five tools each is fifty tool definitions before you've asked anything.
+5. **Watch your token budget.** Every server adds [tool definitions to your context window](/newsletter/tokenminning#3-audit-your-mcp-servers). Ten servers with five tools each is fifty tool definitions before you've asked anything.
 
 ## Is PostHog right for you?
 
