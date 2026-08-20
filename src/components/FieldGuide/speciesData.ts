@@ -118,7 +118,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'Habitat',
-                body: `Power-user workflows. Multi-account setups. Anywhere comparison is required. The Tab-Hopper is also frequently observed in the wild on Slack, Linear, and three different documentation sites simultaneously.`,
+                body: `Multi-account setups. Anywhere comparison is required. The Tab-Hopper is also frequently observed in the wild on Slack, Linear, and three different documentation sites simultaneously.`,
             },
             {
                 label: 'Field notes',
@@ -130,7 +130,7 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'Hazards observed',
-                body: `No single failure to blame. The product worked. The user has the attention budget of a fruit fly on espresso, and your product is one of seven things asking for it.`,
+                body: `No single failure to blame. The product worked. The user has the attention span of a fruit fly on espresso, and your product is one of seven things asking for it.`,
             },
             {
                 label: 'Conservation status',
