@@ -37,9 +37,9 @@ PostHog autocapture automatically tracks the following events for you:
 
 ### Capturing screen views
 
-Screen views aren't captured automatically. Add the `PosthogObserver` to your app's `navigatorObservers`. Without it, your app sends no `$screen` events at all.
+Screen views aren't captured automatically. Add the `PosthogObserver` to your app yourself. Without it, your app sends no `$screen` events at all.
 
-This works with any routing package, not just the plain `Navigator` API. Routing packages like `go_router`, `auto_route`, and `routerino` build on `Navigator`, so the observer still belongs on your `MaterialApp`.
+This works with any routing package, not just the plain `Navigator` API. Add the observer wherever your router takes navigator observers, as shown below for `MaterialApp` and `go_router`.
 
 > Note: Screen names come from each route's `RouteSettings.name`. Most routing packages set this for you. If yours doesn't, name your routes so `$screen` events are readable.
 
