@@ -71,14 +71,20 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
     const [view, setView] = useState('Article')
     const { fullWidthContent } = useLayoutData()
 
+    // Prefer the tutorial's own featured image for social previews, falling back to the OG image
+    // generated at build time. SEO absolutizes relative paths when imageType isn't 'absolute'.
+    const featuredImageURL = featuredImage?.publicURL
+
     return (
         <article className="@container">
             <SEO
                 title={title + ' - PostHog'}
                 description={description || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
-                imageType="absolute"
+                image={
+                    featuredImageURL || `${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`
+                }
+                imageType={featuredImageURL ? 'relative' : 'absolute'}
             />
             <div className="flex flex-col-reverse items-start @3xl:flex-row gap-8 2xl:gap-12">
                 <div className="flex-1 transition-all pt-8 w-full">
