@@ -17,6 +17,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { OSInput, OSTextarea } from 'components/OSForm'
+import PlaceAutocomplete from 'components/PlaceAutocomplete'
 import ConnectedAccounts from 'components/Squeak/components/ConnectedAccounts'
 import { PROFILE_COLORS } from 'constants/profileColors'
 
@@ -184,6 +185,21 @@ const formSections = [
             location: {
                 label: 'Location',
                 className: 'w-full sm:w-1/2',
+                component: ({ values, setFieldValue, error }) => (
+                    <PlaceAutocomplete
+                        value={values.location || ''}
+                        onChange={(value) => setFieldValue('location', value)}
+                        onSelect={(place) => {
+                            setFieldValue('location', place.label)
+                            // Keeps the flag and the map pin in sync with the place picked
+                            if (place.countryCode) {
+                                setFieldValue('country', place.countryCode)
+                            }
+                        }}
+                        error={error}
+                        tooltip="Pick a suggestion to show up in the right place on the people map."
+                    />
+                ),
             },
             pineappleOnPizza: {
                 className: 'w-full sm:w-1/2',

@@ -46,6 +46,7 @@ import transformValues from 'components/Squeak/util/transformValues'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
 import { Select } from 'components/RadixUI/Select'
 import OSInput from 'components/OSForm/input'
+import PlaceAutocomplete from 'components/PlaceAutocomplete'
 import { useToast } from '../../../context/Toast'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import LevelBadge from 'components/Squeak/components/LevelBadge'
@@ -533,12 +534,18 @@ const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMemb
                 )
             )}
             {isEditing ? (
-                <Input
-                    label="Location"
-                    name="location"
-                    value={values.location}
-                    onChange={(e) => setFieldValue('location', e.target.value)}
+                <PlaceAutocomplete
+                    value={values.location || ''}
+                    onChange={(value) => setFieldValue('location', value)}
+                    onSelect={(place) => {
+                        setFieldValue('location', place.label)
+                        // Keeps the flag and the map pin in sync with the place picked
+                        if (place.countryCode) {
+                            setFieldValue('country', place.countryCode)
+                        }
+                    }}
                     error={errors.location}
+                    tooltip="Pick a suggestion to show up in the right place on the people map."
                 />
             ) : (
                 profile.location && (
