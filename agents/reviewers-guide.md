@@ -48,7 +48,7 @@ List anything you did **not** test in a "Not tested" line below the table, with 
 
 Required for any visual change. Provide before/after screenshots for every affected area, following the grid below. All apps are resizable, so a single desktop-width capture proves nothing.
 
-Read the [browser screenshots guide](browser-screenshots.md) before you start. It covers how to drive a browser, which tool paints what, and how to upload the images with `gh attach` – `gh` cannot attach an image to a PR body on its own.
+Read the [browser screenshots guide](browser-screenshots.md) before you start. It covers how to drive a browser, which tool paints what, and how to get the images into the PR body – `gh` has no command for attaching an image, so use your own tooling for that if you have any, and the guide's `curl` fallback if you do not.
 
 ```markdown
 ### Screenshots

@@ -92,22 +92,46 @@ The PR must state that the console shows no **new** errors. Do not compare again
 
 ## Putting the images in the PR
 
-`gh` cannot attach an image to a PR body on its own. GitHub's uploader is a web endpoint, not part of the REST API. Use the `gh attach` extension, which is listed with the other CLI tools in the [tech stack guide](techstack.md#github-cli):
+**If you have your own skill or tooling for uploading an image to a PR, use that instead.** This section is the fallback for when you have nothing.
+
+`gh` has no command for this, but the endpoint its web UI uses is reachable with `curl`:
 
 ```bash
-gh attach upload <path> --target PostHog/posthog.com#<pr> --format url
+FILE=before-nav-light-wide.png
+MIME=image/png                                  # image/jpeg for a .jpg
+REPO=PostHog/posthog.com
+TOKEN=$(gh auth token)
+
+curl -s "https://uploads.github.com/user-attachments/assets?name=$FILE&content_type=$MIME&repository_id=$(gh api "repos/$REPO" --jq .id)" \
+  -X POST -H "Authorization: Bearer $TOKEN" \
+  -H "Accept: application/json" --data-binary "@$FILE"
 ```
 
-It prints a URL you embed in the PR body:
+It returns the attachment URL:
+
+```json
+{ "url": "https://github.com/user-attachments/assets/8203f673-85b5-4d46-9fa8-f5e1e160e8f5" }
+```
+
+Put that URL in an `<img>` tag in the PR body:
 
 ```markdown
-<img src="https://github.com/PostHog/posthog.com/releases/download/_gh-attach-assets/before-nav-light-wide.png" width="380">
+<img src="https://github.com/user-attachments/assets/8203f673-85b5-4d46-9fa8-f5e1e160e8f5" width="380">
 ```
 
-Two things to know:
+These are the same attachment URLs the web UI creates when a human drags an image into a comment. GitHub rewrites them at render time into a signed `private-user-images.githubusercontent.com` URL and wraps them in a link.
 
-- The command uploads to a release named `_gh-attach-assets` on the target repo, and creates that release the first time it runs. Never delete that release – it would break the images in every PR that uses it.
-- Upload the files, then edit the whole body in one pass with `gh pr edit <pr> --body-file <file>`. Keep the body in a file so you can regenerate it.
+Three things to know:
+
+- **The asset 404s until the PR body references it.** Upload, embed, and only then check the URL. A 404 straight after upload is normal and does not mean the upload failed.
+- **Do not follow the redirect with the auth header attached.** `curl -L` forwards `Authorization` to S3, which rejects the signature with a 403. Once the asset is public, plain `curl -L` with no header works.
+- **Upload everything first, then edit the body once.** Keep the body in a file and apply it with `gh pr edit <pr> --body-file <file>`, so you can regenerate it without hand-patching.
+
+To confirm an image really renders, compare the served byte count against the local file:
+
+```bash
+curl -sL -o /dev/null -w '%{http_code} %{size_download}\n' "<attachment-url>"
+```
 
 ## Checklist
 
