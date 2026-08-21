@@ -1,5 +1,5 @@
 import { IconChevronDown } from '@posthog/icons'
-import { CallToAction, TrackedCTA, child, container } from 'components/CallToAction'
+import { CallToAction, child, container } from 'components/CallToAction'
 import Link from 'components/Link'
 import { Popover } from 'components/RadixUI/Popover'
 import usePostHog from 'hooks/usePostHog'
@@ -62,60 +62,61 @@ export function DownloadButtons({ className = '', align = 'start', size = 'md' }
     }
 
     const otherPlatforms = [...PLATFORMS, ...PACKAGES].filter((p) => p.key !== platform?.key)
+    // Mirrors the horizontal padding CallToAction would have applied at this size.
+    const labelPadding = size === 'sm' ? 'px-3' : 'px-4'
 
     return (
         <div className={`flex flex-wrap items-center gap-2 ${justify} ${className}`}>
             {/*
-                Split button: the download action and the platform chevron are two separate
-                CallToActions, squared off where they meet so they read as one control. Each
-                segment keeps its own container/child pair, because the CTA's raised look
-                depends on that two-layer structure.
+                Split button: one CallToAction face holding two hit areas, rather than two
+                buttons sitting next to each other. The CTA's raised look comes from a hover
+                transform on the face, so giving each segment its own face made them lift
+                independently and let their heights drift apart. Sharing a single face locks
+                the two together; the padding that would normally sit on the face moves onto
+                the segments so each one is fully clickable.
             */}
-            <div className="flex items-center">
-                <TrackedCTA
-                    event={{ name: 'clicked code download', platform: platform?.key || 'unknown' }}
-                    type="primary"
-                    size={size}
-                    to={platform?.url || DOWNLOAD_URL}
-                    className="!rounded-r-none"
-                    childClassName="!rounded-r-none"
-                >
-                    {platform ? `Download for ${platform.os}` : 'Download'}
-                </TrackedCTA>
+            <div className={container('primary', size)}>
+                <div className={child('primary', 'auto', '!flex items-stretch !px-0', size)}>
+                    <Link
+                        to={platform?.url || DOWNLOAD_URL}
+                        className={`flex items-center whitespace-nowrap !text-black !no-underline dark:!text-black ${labelPadding}`}
+                        onClick={() => {
+                            posthog?.createPersonProfile?.()
+                            posthog?.capture('clicked code download', { platform: platform?.key || 'unknown' })
+                        }}
+                    >
+                        {platform ? `Download for ${platform.os}` : 'Download'}
+                    </Link>
 
-                <Popover
-                    dataScheme="secondary"
-                    align="end"
-                    contentClassName="min-w-[13rem]"
-                    trigger={
-                        <button
-                            aria-label="Download for another platform"
-                            className={`${container('primary', size)} !rounded-l-none`}
-                        >
-                            <span className={child('primary', 'auto', '!rounded-l-none !px-2 flex', size)}>
-                                {/* h-5 matches the text segment's line box, so both halves are the same height */}
-                                <span className="flex h-5 items-center">
-                                    <IconChevronDown className="size-4" />
-                                </span>
-                            </span>
-                        </button>
-                    }
-                >
-                    <ul className="m-0 list-none p-0 text-left">
-                        {otherPlatforms.map((p) => (
-                            <li key={p.key}>
-                                <Link
-                                    to={p.url}
-                                    externalNoIcon
-                                    className="block rounded px-2 py-1.5 text-sm !text-primary !no-underline hover:bg-accent"
-                                    onClick={() => posthog?.capture('clicked code download', { platform: p.key })}
-                                >
-                                    {p.label}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </Popover>
+                    <Popover
+                        dataScheme="secondary"
+                        align="end"
+                        contentClassName="min-w-[13rem]"
+                        trigger={
+                            <button
+                                aria-label="Download for another platform"
+                                className="flex items-center border-l border-button px-2 dark:border-button-dark"
+                            >
+                                <IconChevronDown className="size-4" />
+                            </button>
+                        }
+                    >
+                        <ul className="m-0 list-none p-0 text-left">
+                            {otherPlatforms.map((p) => (
+                                <li key={p.key}>
+                                    <Link
+                                        to={p.url}
+                                        externalNoIcon
+                                        className="block rounded px-2 py-1.5 text-sm !text-primary !no-underline hover:bg-accent"
+                                        onClick={() => posthog?.capture('clicked code download', { platform: p.key })}
+                                    >
+                                        {p.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </Popover>
+                </div>
             </div>
 
             <CallToAction type="secondary" size={size} to="/docs/posthog-desktop" state={{ newWindow: true }}>
