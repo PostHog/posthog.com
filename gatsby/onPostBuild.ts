@@ -15,6 +15,7 @@ import {
     generateChangelogMd,
     generateLlmsTxt,
     generateSdkReferencesMarkdown,
+    generateSdkTypeMarkdown,
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
@@ -554,6 +555,17 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
                         id
                         title
                     }
+                    types {
+                        example
+                        id
+                        name
+                        path
+                        properties {
+                            description
+                            name
+                            type
+                        }
+                    }
                     version
                 }
             }
@@ -562,6 +574,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql, reporter
 
     sdkReferencesQuery.data.allSdkReferences.nodes.forEach((node) => {
         generateSdkReferencesMarkdown(node)
+        generateSdkTypeMarkdown(node)
     })
 
     // Generate pricing.md from billing API data

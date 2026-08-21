@@ -16,6 +16,8 @@ import { TreeMenu } from 'components/TreeMenu'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import TemplateCTAs from 'components/TemplateCTAs'
 import BookPage from 'components/PocketGuides/BookPage'
+import { volumeIdFromUrl } from 'components/PocketGuides/bookModel'
+import { volumeById } from '../constants/pocketGuides'
 
 const A = (props) => <Link {...props} />
 
@@ -100,7 +102,8 @@ export default function Template({ data }) {
         return (
             <>
                 <SEO
-                    title={`${title} – Self-driving pocket guide`}
+                    // Named for its own volume: the shelf holds more than one book.
+                    title={`${title} – ${volumeById(volumeIdFromUrl(slug))?.title ?? 'PostHog'} pocket guide`}
                     description={pageData?.frontmatter?.subtitle || description || excerpt}
                     image="/images/og/default.png"
                 />

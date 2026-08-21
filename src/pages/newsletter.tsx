@@ -34,7 +34,7 @@ export default function NewsletterPage({ data }: { data: { posts: { nodes: Build
                             </header>
                         )}
                         <div className="mt-8 @2xl:mt-16">
-                            <PostsGallery posts={posts} />
+                            <PostsGallery posts={posts.slice(1)} />
                         </div>
                         <hr className="my-10 h-px border-none bg-red/40 @2xl:my-16" />
                         <HeroHeader placement="build-mode-footer" />

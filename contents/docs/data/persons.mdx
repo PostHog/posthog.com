@@ -65,6 +65,8 @@ These properties only tell PostHog how to update person data during ingestion â€
 
 To control costs, you can [configure anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for events that don't need person profiles.
 
+A [data warehouse](/docs/data-warehouse) table can also enrich profiles that already exist. See [warehouse properties](/docs/data-warehouse/warehouse-properties). It never creates a profile, so a customer who has not used your product yet stays out of PostHog until they do.
+
 ## Duplicate person profiles
 
 If your [`identify`](/docs/product-analytics/identify) implementation has gaps, a single real-world user can end up with multiple person profiles. For example, if a user visits your app on a phone and a laptop but `identify` is only called on one device, each device creates its own profile with a separate anonymous distinct ID. This usually points to a misconfiguration â€” when `identify` is called correctly on every device and session, PostHog merges these into one profile automatically.
@@ -128,10 +130,12 @@ Clicking on a person in the [People tab](https://app.posthog.com/persons) opens 
 
 - Search for the person via their unique ID. For example, their email.
 - Click on the person's ID
-- Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action.
+- Click **Delete person** to remove them and all their associated data. You will be prompted to confirm this action. You can also choose to delete their session recordings at this step.
 
 <DistinctIdReuseWarning />
 
 ### Via the API
 
-You can also delete persons data via the API. See the [Data Deletion docs](/docs/privacy/data-deletion) for more information.
+You can also delete persons data via the API. When deleting a person, you can pass `delete_events=true` to delete their events and `delete_recordings=true` to delete their [session recordings](/docs/session-replay). Recording deletion uses crypto-shredding to permanently destroy encryption keys, making the recordings unrecoverable.
+
+See the [data deletion docs](/docs/privacy/data-storage#data-deletion) for more information.

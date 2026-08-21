@@ -212,6 +212,17 @@ Both options require editor access to the target dashboard.
 
 When you copy an insight, it's the same underlying insight appearing on multiple dashboards (as [noted above](#creating-a-new-dashboard)). Any changes to the insight are reflected everywhere it appears. This is different from duplicating an insight, which creates an independent copy.
 
+### Removing and deleting insights
+
+Removing an insight from a dashboard only removes it from the current dashboard – the insight itself still exists in PostHog and on any other dashboards where it appears.
+
+When you remove an insight, a toast notification appears with two options:
+
+- **Undo** – Restores the insight to the dashboard.
+- **Delete insight everywhere** – Permanently deletes the insight from PostHog and removes it from every dashboard it appears on. This opens a confirmation dialog that lists any other dashboards using the insight before you confirm.
+
+Deletion can be undone after confirming. The **Delete insight everywhere** option only appears if you have editor access to the insight. If you only have view access, you can remove the insight from the dashboard but won't see the delete option.
+
 ### Adding text cards
 
 Click the dropdown on the **Add...** button and select **Text card** to add a text card to your dashboard.

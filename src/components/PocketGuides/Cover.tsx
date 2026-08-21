@@ -1,7 +1,7 @@
 import Link from 'components/Link'
 import React from 'react'
 
-import { HedgehogDataThief, HedgehogImTheDriver } from '@posthog/brand/hoggies'
+import { HedgehogDollHouse, HedgehogImTheDriver, HedgehogXRay } from '@posthog/brand/hoggies'
 import { Logo } from '@posthog/brand/logo'
 
 import { PocketGuideVolume } from '../../constants/pocketGuides'
@@ -9,7 +9,8 @@ import { PocketGuideVolume } from '../../constants/pocketGuides'
 /** Cover art per volume, so a new volume picks an existing hoggie instead of commissioning one. */
 const VOLUME_ART: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
     'self-driving': HedgehogImTheDriver,
-    'data-warehouse': HedgehogDataThief,
+    'ai-observability': HedgehogXRay,
+    'context-warehouse': HedgehogDollHouse,
 }
 
 interface CoverProps {
@@ -29,12 +30,21 @@ function Frame({ token, children }: { token: string; children: React.ReactNode }
 }
 
 function Masthead({ title }: { title: string }): JSX.Element {
+    // A long word can't wrap, so it breaks mid-word at the display size. Step the scale down
+    // instead – the cover is only ~230px wide and "AI Observability" is one 13-letter word.
+    const long = title.length > 12
     return (
         <header>
             {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
             <Logo.Wordmark color="black" className="h-5 w-auto @[240px]:h-6" />
             <p className="m-0 mt-1.5 text-[11px] uppercase tracking-[0.14em] text-gray">Pocket guide to</p>
-            <h3 className="m-0 mt-1.5 text-2xl font-bold leading-tight text-black @[240px]:text-3xl">{title}</h3>
+            <h3
+                className={`m-0 mt-1.5 font-bold leading-tight text-black ${
+                    long ? 'text-xl @[240px]:text-2xl' : 'text-2xl @[240px]:text-3xl'
+                }`}
+            >
+                {title}
+            </h3>
         </header>
     )
 }

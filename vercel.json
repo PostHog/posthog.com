@@ -34,6 +34,15 @@
             ]
         },
         {
+            "source": "/(.*\\.md)",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                }
+            ]
+        },
+        {
             "source": "/(.*)",
             "headers": [
                 {
@@ -192,6 +201,16 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/session-replay/image-bot:ext(\\.md)?",
+            "destination": "/docs/ai-research/image-fetcher-bot:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
+            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "statusCode": 301
+        },
         {
             "source": "/docs/session-replay/session-summaries-ai:ext(\\.md)?",
             "destination": "/docs/replay-vision:ext?",
