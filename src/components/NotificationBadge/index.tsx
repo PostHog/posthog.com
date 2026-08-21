@@ -79,7 +79,7 @@ export default function NotificationBadge({ count, max = 99, color = 'red', clas
                     initial="hidden"
                     animate="shown"
                     exit="hidden"
-                    className={`absolute -top-0.5 -right-0.5 z-10 flex items-center justify-center min-w-[12px] h-[12px] px-[2px] rounded-full ring-[1.5px] ring-white text-[8px] font-bold leading-none tabular-nums ${COLORS[color]} ${className}`}
+                    className={`absolute -top-1 -right-1 z-10 box-border flex h-[15px] min-w-[15px] origin-center transform-gpu items-center justify-center rounded-full border-[1.5px] border-white px-[3px] text-[8px] font-bold leading-none tabular-nums will-change-transform ${COLORS[color]} ${className}`}
                 >
                     {display && <span aria-hidden="true">{display}</span>}
                     <span className="sr-only">{display ? `${display} unread` : 'unread'}</span>
