@@ -12,6 +12,8 @@ We don't offer discounts to customers paying monthly, irrespective of commitment
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
+### The discount levers & why they matter to us
+
 Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
 
 1. **Volume:** The amount of credits purchased. *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
@@ -58,6 +60,7 @@ Beyond optimization, we offer discounts based on three levers:
 **For renewals:** +5% additional discount
 - Early renewal commitment. Available in the last 6 months of the contract term and 60+ days before it expires. For a standard 12-month term that means months 7-10, up to 60 days out. 
 - Eligibility is measured against the current term's natural end date, not against when the customer's credits happen to run out. A customer who consumes credits early can [top up or start a new term early](#starting-a-new-term-early), but that doesn't move the window.
+- Eligibility is judged at signature. The customer must still be on prepaid credits when they sign. If credits ran out first and they've already rolled onto pay-as-you-go, the +5% doesn't apply, because that's a re-entry into a credit plan rather than an early renewal. A customer who signs inside the window and then runs out before the new term starts keeps the discount.
 - This discount applies to the full credit purchase on the order form. On a multi-year renewal the +5% applies to the whole term's credits. This is deliberate: an early, fully prepaid, multi-year renewal is the best deal we offer.
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
