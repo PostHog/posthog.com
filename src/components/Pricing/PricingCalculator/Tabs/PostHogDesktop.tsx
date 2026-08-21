@@ -7,6 +7,14 @@ import Link from 'components/Link'
 import { LogSlider, inverseCurve, sliderCurve } from 'components/Pricing/PricingSlider/Slider'
 import { formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
+import {
+    ComputeRateCard,
+    PUBLISHED_COMPUTE_RATE_CARD,
+    PUBLISHED_RATES_DATE,
+    SANDBOX_CPU_CORES,
+    SANDBOX_MEMORY_GIB,
+    hourlyComputeUsd,
+} from 'lib/posthogDesktopCompute'
 
 /*
  * PostHog Desktop's tab in the /pricing calculator. Registered in `productTabs` in Tabbed.tsx
@@ -18,27 +26,18 @@ import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorL
  * from a token table. A single "credits per month" slider would hide exactly the distinction the
  * page needs to make, so the tab asks for the two inputs separately and adds them up.
  *
+ * Cloud time is priced from the same rate card as the table on `/docs/posthog-desktop/pricing`:
+ * live from `/api/posthog-desktop-pricing`, falling back to the published snapshot in
+ * `lib/posthogDesktopCompute`. Neither the rate nor the fallback is duplicated here, so the two
+ * surfaces can't quote different numbers.
+ *
  * Denominations, following the Replay Vision tab: the UI works in hours and dollars, shared state
  * (`product.volume`, the tab-list subtotal, the generated calculator URL) stays in credits — the
  * billing unit — so `setVolume` restores and `calculatePrice` agree with us.
  */
 
-/**
- * Every cloud task gets the same sandbox; sizes aren't customizable yet. The rate card prices
- * CPU and memory per second, so the shape has to come from somewhere, and it isn't in the API.
- * If tasks ever get resizable, this becomes another input rather than a constant.
- */
-const SANDBOX_CPU_CORES = 0.5
-const SANDBOX_MEMORY_GIB = 16
-const SECONDS_PER_HOUR = 3600
-
 /** 100 credits = $1. */
 const CREDITS_PER_USD = 100
-
-interface ComputeRateCard {
-    cpu_core_second_usd: string
-    memory_gib_second_usd: string
-}
 
 interface PricingResponse {
     compute: ComputeRateCard | null
@@ -51,15 +50,6 @@ const fetchPricing = async (url: string): Promise<PricingResponse> => {
     }
     return response.json() as Promise<PricingResponse>
 }
-
-/**
- * What one hour of cloud task time costs, from the live rate card. Shares the
- * `/api/posthog-desktop-pricing` route with the model table on the Desktop pricing docs, so the
- * two can't quote different numbers.
- */
-const hourlyComputeUsd = (compute: ComputeRateCard): number =>
-    SANDBOX_CPU_CORES * SECONDS_PER_HOUR * Number(compute.cpu_core_second_usd) +
-    SANDBOX_MEMORY_GIB * SECONDS_PER_HOUR * Number(compute.memory_gib_second_usd)
 
 const Row = ({
     label,
@@ -133,7 +123,12 @@ export default function PostHogDesktopTab({
         [creditTiers]
     )
 
-    const computeRate = pricing?.compute ? hourlyComputeUsd(pricing.compute) : null
+    // The API reports no card until the sandbox rate card is published, and returns nothing at all
+    // when it's down. Neither means cloud time is free, so fall back to the published rates rather
+    // than dropping the row — an estimate that silently omits compute is the one wrong answer here.
+    const liveCompute = pricing?.compute ?? null
+    const computeRate = hourlyComputeUsd(liveCompute ?? PUBLISHED_COMPUTE_RATE_CARD)
+    const isPublishedRate = liveCompute === null
 
     const [hours, setHours] = useState(20)
     // Null until the rate card settles. Seeding this at mount would be wrong: the seed splits the
@@ -142,7 +137,7 @@ export default function PostHogDesktopTab({
     // rates land. Waiting one tick costs a skeleton and keeps the arithmetic honest.
     const [tokenSpend, setTokenSpend] = useState<number | null>(null)
 
-    const computeSpend = computeRate === null ? 0 : hours * computeRate
+    const computeSpend = hours * computeRate
     const credits = tokenSpend === null ? 0 : Math.round((computeSpend + tokenSpend) * CREDITS_PER_USD)
     const { total, costByTier } = useMemo(() => calculatePrice(credits, creditTiers), [credits, creditTiers])
 
@@ -176,23 +171,21 @@ export default function PostHogDesktopTab({
                 sandbox they run on.
             </div>
 
-            {computeRate !== null && (
-                <Row
-                    label="Cloud task time"
-                    suffix="hours/month"
-                    value={hours}
-                    onChange={(value) => setHours(Math.round(value))}
-                    slider={{ min: 1, max: 500, marks: [1, 10, 100, 500] }}
-                    cost={computeSpend}
-                    note={
-                        <>
-                            Every task gets {SANDBOX_CPU_CORES} CPU cores and {SANDBOX_MEMORY_GIB} GiB, so cloud time
-                            works out at about {formatUSD(computeRate)}/hour. Tasks you run on your own machine cost
-                            nothing.
-                        </>
-                    }
-                />
-            )}
+            <Row
+                label="Cloud task time"
+                suffix="hours/month"
+                value={hours}
+                onChange={(value) => setHours(Math.round(value))}
+                slider={{ min: 1, max: 500, marks: [1, 10, 100, 500] }}
+                cost={computeSpend}
+                note={
+                    <>
+                        Every task gets {SANDBOX_CPU_CORES} CPU cores and {SANDBOX_MEMORY_GIB} GiB, so cloud time works
+                        out at about {formatUSD(computeRate)}/hour. Tasks you run on your own machine cost nothing.
+                        {isPublishedRate && <> Based on the rates published {PUBLISHED_RATES_DATE}.</>}
+                    </>
+                }
+            />
 
             <Row
                 label="AI tokens"

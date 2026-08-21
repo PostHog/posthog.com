@@ -2,6 +2,7 @@ import React from 'react'
 import useSWR from 'swr'
 
 import OSTable from 'components/OSTable'
+import { ComputeRateCard, PUBLISHED_COMPUTE_RATE_CARD, PUBLISHED_RATES_DATE } from 'lib/posthogDesktopCompute'
 
 interface ModelPricing {
     prompt: string
@@ -14,11 +15,6 @@ interface Model {
     id: string
     display_name: string
     pricing: ModelPricing
-}
-
-interface ComputeRateCard {
-    cpu_core_second_usd: string
-    memory_gib_second_usd: string
 }
 
 interface PricingResponse {
@@ -205,10 +201,9 @@ const FALLBACK_PRICING: PricingResponse = {
             },
         },
     ],
-    compute: {
-        cpu_core_second_usd: '0.000075',
-        memory_gib_second_usd: '0.000008',
-    },
+    // Shared with the Desktop tab in the /pricing calculator, which quotes the same card as an
+    // hourly rate — see `lib/posthogDesktopCompute`.
+    compute: PUBLISHED_COMPUTE_RATE_CARD,
 }
 
 const creditsPerMillionTokens = (rate: string | null): string => {
@@ -250,7 +245,9 @@ export const PostHogDesktopPricing = (): React.ReactElement => {
 
     return (
         <>
-            {isFallback && <p>Live pricing is temporarily unavailable. Showing rates published August 21, 2026.</p>}
+            {isFallback && (
+                <p>Live pricing is temporarily unavailable. Showing rates published {PUBLISHED_RATES_DATE}.</p>
+            )}
             <OSTable columns={[{ name: 'Model' }, ...TOKEN_COLUMNS]} rows={rows} width="full" />
             {pricing.compute && (
                 <>
