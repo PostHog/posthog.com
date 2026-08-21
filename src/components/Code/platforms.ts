@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
 
 export const DOWNLOAD_URL = 'https://code.posthog.com/download'
-// Desktop ships from the PostHog monorepo under `desktop-v*` tags. The old
-// PostHog/code repo was archived in August 2026, so its releases are frozen.
+// Desktop ships from the PostHog monorepo under `desktop-v*` tags, interleaved
+// with agent-skills and posthog-cli releases, so `?q=desktop` narrows the list to
+// ours. Two ways to get this wrong: `/releases/latest` resolves to whichever
+// component shipped most recently rather than to desktop, and `?q=desktop-v`
+// matches nothing at all because the search doesn't handle the hyphen. The old
+// PostHog/code repo is archived, so it is not an option either.
 export const RELEASES_URL = 'https://github.com/PostHog/posthog/releases?q=desktop&expanded=true'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
