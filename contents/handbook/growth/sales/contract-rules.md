@@ -24,9 +24,9 @@ We don't use the framework's fourth lever **length of commitment**: see more inf
 
 In our consumption-based pricing model, the first way for a customer to reduce spend is to ensure that they are only sending data to us which is valuable to them. There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 
-Beyond optimization, we offer discounts based on four levers:
+Beyond optimization, we offer discounts based on three levers:
 
-#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 through 4)
+#### 1. Volume discount (based on credit purchase amount per contract year - Customers **must** qualify for this discount before receiving discounts 2 and 3)
 - **$25-59k:** 20% base discount
 - **$60-99k:** 25% base discount
 - **$100-249k:** 30% base discount
@@ -37,7 +37,7 @@ Beyond optimization, we offer discounts based on four levers:
 > Two things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
-> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment and timing of cash levers below, not a bigger volume tier.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment lever below, not a bigger volume tier.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
@@ -172,7 +172,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
+As it's often difficult to right-size the credit needed for a longer term plan, as a standard we let customers buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan) at whichever is better for them: the discount tier from the original order form, or the tier the additional purchase qualifies for on its own. Purchases are priced independently and are never added together to reach a higher tier — see when they don't have enough credit to cover their term. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
 
 ## Price guarantees & lock-ins
 
