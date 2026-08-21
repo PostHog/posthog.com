@@ -627,8 +627,12 @@ function TreeMenuItem({
     const hasChildren = item.children && item.children.length > 0
     // A row with both a `url` and children (e.g. "Model Context Protocol") must
     // not navigate and expand from one click — that flashes the section open,
-    // then redirects. Expand only; the nested "Overview" child carries the link.
-    const collapseOnly = expandOnly || Boolean(hasChildren && item.url)
+    // then redirects. Expand only when a child repeats the parent `url` (an
+    // "Overview" child), so the parent page stays reachable from that child.
+    // Rows whose children don't carry the parent url keep navigating, or the
+    // parent page would lose its only link in the menu.
+    const collapseOnly =
+        expandOnly || Boolean(hasChildren && item.url && item.children?.some((child) => child.url === item.url))
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
 
