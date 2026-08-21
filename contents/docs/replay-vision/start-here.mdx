@@ -11,11 +11,9 @@ You should already have [Session Replay](/docs/session-replay) recording session
 
 ## AI wizard
 
-The fastest way to get set up is our wizard. Run it in your project directory and it reads your codebase, installs the PostHog SDK if you don't have it yet, and creates three scanners written for your product: one that watches your key flow for breakage, one that watches for user frustration, and one that summarizes sessions. It also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt:
+The fastest way to get set up is our wizard. Run it in your project directory and it reads your codebase, installs the PostHog SDK if you don't have it yet, turns Session Replay on, and creates three scanners written for your product: one that watches your key flow for breakage, one that watches for user frustration, and one that summarizes sessions. It also works for [LLM coding agents](/blog/envoy-wizard-llm-agent) like Cursor and Bolt:
 
 <WizardCommand command="replay-vision" />
-
-The wizard sets up the client side of recording, but it doesn't flip the **Record user sessions** toggle in your project settings. Turn that on yourself if it isn't already, otherwise there are no recordings for the scanners to watch.
 
 The scanners it creates are ordinary scanners. You can edit the prompt, filters, and sampling rate afterwards, or delete them and start over.
 
