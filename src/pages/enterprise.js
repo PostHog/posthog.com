@@ -81,7 +81,7 @@ export default function Enterprise() {
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/enterprise/soc-2type2.webp"
                                 height={140}
-                                width={140}
+                                width={110}
                                 alt="SOC 2 Type 2 certified"
                                 placeholder="blurred"
                             />
