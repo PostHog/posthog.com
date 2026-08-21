@@ -81,12 +81,37 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     error_tracking: {
         __capturePostHogExceptions: true,
     },
-    // Drop exceptions coming from local dev servers so developers' local
-    // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
-    // don't pollute production error tracking. Real users are never on localhost.
+    // Drop exceptions that no one can act on, so they don't create issues and
+    // signals that cost the team triage time. Real product errors pass through.
     before_send: function (event) {
+        if (!event || event.event !== '$exception') {
+            return event
+        }
+        // Local dev servers: developers' own exceptions (e.g. Gatsby dev-server
+        // ChunkLoadErrors on hot recompiles). Real users are never on localhost.
         var hostname = window.location.hostname
-        if (event && event.event === '$exception' && (hostname === 'localhost' || hostname === '127.0.0.1')) {
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return null
+        }
+        var exceptions = (event.properties && event.properties.$exception_list) || []
+        // Generic fetch failures from browser extensions, ad blockers, and flaky
+        // networks. Match the exact message so a spike in "Failed to fetch
+        // dynamically imported module" (a real deploy problem) still gets through.
+        var isFailedToFetch = exceptions.some(function (ex) {
+            return ex && ex.type === 'TypeError' && ex.value === 'Failed to fetch'
+        })
+        if (isFailedToFetch) {
+            return null
+        }
+        // No in-app frame means none of our own code is in the stack, so the
+        // fault is injected script (e.g. a Chrome extension) the site cannot fix.
+        var hasInAppFrame = exceptions.some(function (ex) {
+            var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || []
+            return frames.some(function (frame) {
+                return frame && frame.in_app
+            })
+        })
+        if (!hasInAppFrame) {
             return null
         }
         return event
