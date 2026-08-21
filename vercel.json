@@ -942,8 +942,8 @@
             "destination": "/docs/error-tracking:ext?"
         },
         {
-            "source": "/docs/integrations/slack:ext(\\.md)?",
-            "destination": "/docs/libraries/slack:ext?"
+            "source": "/docs/libraries/slack:ext(\\.md)?",
+            "destination": "/docs/integrations/slack:ext?"
         },
         {
             "source": "/docs/libraries/github:ext(\\.md)?",

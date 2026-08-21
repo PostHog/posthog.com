@@ -3051,6 +3051,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Discord',
+                            url: '/docs/integrations/discord',
+                        },
+                        {
                             name: 'Framer',
                             url: '/docs/libraries/framer',
                         },
@@ -3092,7 +3096,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Slack',
-                            url: '/docs/libraries/slack',
+                            url: '/docs/integrations/slack',
                         },
                         {
                             name: 'Vercel',

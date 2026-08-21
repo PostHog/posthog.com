@@ -19,6 +19,8 @@ You install the app once per GitHub organization or personal account. Every Post
 2. GitHub asks which organization or account to install the app on, and which repositories it can access.
 3. After you approve, GitHub sends you back to PostHog and the project shows the connection with the account name and its repository access.
 
+<!-- TODO(screenshot): GitHub settings in PostHog Desktop showing the project connection and personal account sections -->
+
 The app requests read access to metadata and read and write access to code, issues, and pull requests. GitHub shows the exact list on the install screen.
 
 ### If you're not an organization owner
@@ -26,6 +28,8 @@ The app requests read access to metadata and read and write access to code, issu
 GitHub only lets organization owners install apps. If you're a member, GitHub records an install request and emails the owners instead of installing.
 
 PostHog tracks that request. The GitHub settings in PostHog and PostHog Desktop show a **waiting for approval** notice with a message you can copy and send to an owner. Once an owner approves the request, the notice changes to **approved** and you click **Finish connecting** to link the installation to your project. Nothing else needs to happen on the GitHub side.
+
+<!-- TODO(screenshot): the waiting-for-approval notice with the copy-message button -->
 
 If you can't reach an owner, a PostHog project admin can also connect GitHub for the project. Use **Ask a project admin** in PostHog Desktop, or **Request access** on the integration page in PostHog, to email them.
 
@@ -35,6 +39,8 @@ GitHub asks whether the app can see **all repositories** in the account or **onl
 
 - With **all repositories**, PostHog shows the total count instead of listing every repository. New repositories are visible to PostHog automatically.
 - With **selected repositories**, PostHog lists the repositories you picked.
+
+<!-- TODO(screenshot): a connection row showing "All repositories in PostHog (706)" -->
 
 To change the selection later, click **Manage on GitHub** next to the connection. That opens the installation's settings page on GitHub, and PostHog picks up the change on the next refresh.
 
@@ -61,6 +67,8 @@ The GitHub App installs once per organization, so a second PostHog project can't
 - If this was the last connection to the installation, PostHog also uninstalls the app from the GitHub organization or account and removes every personal link to it.
 
 The confirmation dialog tells you which case applies before you confirm.
+
+<!-- TODO(screenshot): the disconnect confirmation dialog -->
 
 If you uninstall the app directly on GitHub instead, PostHog notices and marks the connection **removed from GitHub**. Click **Remove** to clear it, then connect again if you still need it.
 
