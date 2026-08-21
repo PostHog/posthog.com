@@ -13,11 +13,12 @@ We don't offer discounts to customers paying monthly, irrespective of commitment
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount. We follow the [4 discount levers framework](http://transparentsalesleader.com/), being transparent about what drives our discounting:
 
 Our general principle is that discounts are earned, not given. Each lever represents real benefit to both parties:
-**Volume:** The amount of credits purchased - *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
-**Timing of Cash:** When we receive payment - *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
-**Ability to Forecast:** Mutual agreement to timing - *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
 
-We don't use the framework's fourth lever **length of commitment**: see more info on this below under [contract term length](#contract-term-length)
+1. **Volume:** The amount of credits purchased. *Larger deals have economies of scale. Our cost to serve a $500k customer is not 10x a $50k customer, so we can share those savings*
+2. **Timing of Cash:** When we receive payment. *Money today is worth more than money tomorrow. Cash in hand lets us invest in product, hire engineers, and grow the business faster*
+3. **Ability to Forecast:** Mutual agreement to timing. *When both parties commit to specific dates (contract close, renewal timing), it helps us plan resources and helps customers secure budget*
+
+We don't use the framework's fourth lever, **length of commitment** - see [contract term length](#contract-term-length) below.
 
 
 ### How our discounts work
@@ -37,7 +38,7 @@ Beyond optimization, we offer discounts based on three levers:
 > Two things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
-> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for the longer term is the length of commitment lever below, not a bigger volume tier.
+> - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
@@ -56,7 +57,7 @@ Beyond optimization, we offer discounts based on three levers:
 
 **For renewals:** +5% additional discount
 - Early renewal commitment. Available in the last 6 months of the contract term and 60+ days before it expires. For a standard 12-month term that means months 7-10, up to 60 days out. 
-- Eligibility is measured against the current term's natural end date, not against when the customer's credits happen to run out. A customer who consumes credits early can top up or start a new term early. 
+- Eligibility is measured against the current term's natural end date, not against when the customer's credits happen to run out. A customer who consumes credits early can [top up or start a new term early](#starting-a-new-term-early), but that doesn't move the window.
 - This discount applies to the full credit purchase on the order form. On a multi-year renewal the +5% applies to the whole term's credits. This is deliberate: an early, fully prepaid, multi-year renewal is the best deal we offer.
 
 **If timelines change:** We will handle these on a case by case basis, but the default is to withdraw the additional discount if the customer does not sign an order form by the time that was originally agreed. 
@@ -72,17 +73,17 @@ We cap terms at 36 months because our products and pricing evolve quickly: a con
 Customers wanting a better rate can buy more credits (lever 1), pay for more of the term upfront (lever 2), or commit to a mutual timeline (lever 3).
 
 ### Starting a new term early
+
 Sometimes a customer's usage grows faster than the credits they bought, and they exhaust the term's credits with months left to run. They have two options.
 
-1. Top up the current term. They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
-2. Start a new term. The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption. 
+1. **Top up the current term.** They buy additional credits that expire with the existing term on a new order form. Available in the first half of the term.
+2. **Start a new term.** The current order form is replaced by a new term. The new purchase must be sized in good faith against the full new term: a credible forecast of usage across all 12 months, not a bridge to the next conversation. A customer expecting their usage to settle below its current peak can price against that, provided they're candid about the assumption.
 
-Both options price on the volume lever alone. Neither carries the early renewal discount. The +5% is earned by committing to a renewal date far enough ahead that we can forecast it. If a term ends early because the customer used it up, it’s not a forecast and therefore not eligible for the 5% discount.
-
+Running out of credit early neither creates nor destroys eligibility for the early renewal discount, because eligibility is always measured against the term's natural end date. A top-up prices on the volume lever alone. A new term earns the +5% only if it's signed inside the normal [early renewal window](#3-ability-to-forecast---mutual-commitment-to-timing-additive) — in the last 6 months of the original term, 60+ days before its natural end date, and while the customer is still on prepaid credits. Burning through credits faster than planned doesn't open that window sooner.
 
 ### One-off credits
 
-One-off free credits appear on order forms in three cases: contract buyouts, new business renewal credits (competitor win-backs), and startup plan roll-offs. We don't generally add free credits to close a deal, bridge a coverage gap, or substitute for a discount the levers don't provide. A one off credit is a larger discount wearing a disguise, and it breaks the transparency the levers exist to protect.
+One-off free credits appear on order forms in three cases: [contract buyouts](#contract-buyouts), [new business renewal credits](#new-business-renewal-credits) (competitor win-backs), and [startup plan roll-offs](#startup-plan-discounts). We don't generally add free credits to close a deal, bridge a coverage gap, or substitute for a discount the levers don't provide. A one-off credit is a larger discount wearing a disguise, and it breaks the transparency the levers exist to protect.
 
 ### Why we require up-front payment for credit purchases
 
@@ -172,7 +173,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-As it's often difficult to right-size the credit needed for a longer term plan, as a standard we let customers buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan) at whichever is better for them: the discount tier from the original order form, or the tier the additional purchase qualifies for on its own. Purchases are priced independently and are never added together to reach a higher tier — see when they don't have enough credit to cover their term. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in #sales-alerts to help notify account owners about this.
+As it's often difficult to right-size the credit needed for a longer term plan, as a standard we let customers buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan) at whichever is better for them: the discount tier from the original order form, or the tier the additional purchase qualifies for on its own. Purchases are priced independently and are never added together to reach a higher tier — see [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term). Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
 ## Price guarantees & lock-ins
 
@@ -316,13 +317,12 @@ Their costs rise on a known date whether or not they sign, so it belongs in the 
 
 We have CreditBot alerts set up in <PrivateLink url="https://posthog.slack.com/archives/C071PGWKBQS">#sales-alerts</PrivateLink> when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining. The Vitally account owner (AE or CSM) will be tagged in this message. It's best to be proactive here so that the customer is right-sized well before the credit runs out:
 
--   If they run out of credit in the first half of the term, they can purchase additional credits that expire with the current term. Each purchase is priced independently. We do not add it to previous purchases to reach a higher discount tier, whichever of these two is better for the customer: 1. Tier from initial order form, or 2. Tier the additional purchase amount qualifies by itself 
-
-Example: a customer buys $105k of credits (30% tier). Later they add $400k which qualifies for 35% on its own (not treated as $505K). If the same customer adds $30k in credits, it would qualify for 20% on its own which is lower than the original purchase tier, so they keep the original 30% discount rate from their initial order
-
--   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends while still on prepaid credits qualifies for the early renewal discount. The renewal order form can start when the credits run out rather than waiting for the original end date.
--   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. CreditBot gives account owners months of runway warning, so a customer paying list price for a gap is a customer we failed to engage early. 
-
+-   If they run out of credit in the first half of the term, they can purchase additional credits that expire with the current term. Each purchase is priced independently — we don't add it to previous purchases to reach a higher discount tier. The customer gets whichever of these two is better for them:
+    -   The tier from their initial order form
+    -   The tier the additional purchase amount qualifies for by itself
+    -   Example: a customer buys $105k of credits (30% tier). Later they add $400k, which qualifies for 35% on its own (not treated as $505k). If the same customer adds $30k in credits, that qualifies for 20% on its own, which is lower than the original purchase tier, so they keep the original 30% rate from their initial order form.
+-   If they will run out of credit in the second half of the 12 month contract term, they should sign a renewal order form. Signing 60+ days before the current term ends while still on prepaid credits qualifies for the [early renewal discount](#3-ability-to-forecast---mutual-commitment-to-timing-additive). The renewal order form can start when the credits run out rather than waiting for the original end date.
+-   If credits run out before a renewal order form is in effect, the account rolls onto our standard pay-as-you-go rates until the new term starts. We don't cover gap usage for free. CreditBot gives account owners months of runway warning, so a customer paying list price for a gap is a customer we failed to engage early.
 
 ### When they will end the contract term with credit remaining
 
