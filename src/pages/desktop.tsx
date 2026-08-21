@@ -401,16 +401,7 @@ function HeroSection() {
                 }}
             >
                 {showDownload ? (
-                    <FeatureFlagged
-                        flag={DESKTOP_LAUNCH_FLAG}
-                        fallback={
-                            <div className="w-full max-w-lg mx-auto py-8">
-                                <WaitlistForm />
-                            </div>
-                        }
-                    >
-                        <DownloadButtons className="w-full py-8" align="center" />
-                    </FeatureFlagged>
+                    <DownloadButtons className="w-full py-8" align="center" />
                 ) : (
                     <>
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
@@ -452,18 +443,22 @@ function HeroSection() {
                                 <FeatureFlagged
                                     flag={DESKTOP_LAUNCH_FLAG}
                                     fallback={
-                                        <OSButton
-                                            asLink
-                                            to="/desktop#download"
-                                            variant="primary"
-                                            size="md"
-                                            onClick={(event) => {
-                                                event.preventDefault()
-                                                swapToDownload()
-                                            }}
-                                        >
-                                            Join the waitlist
-                                        </OSButton>
+                                        <div className="@container max-w-sm">
+                                            <WaitlistForm />
+                                            <p className="mt-4 text-sm text-secondary">
+                                                Have an invite code?{' '}
+                                                <Link
+                                                    to="/desktop#download"
+                                                    className="font-bold underline"
+                                                    onClick={(event) => {
+                                                        event.preventDefault()
+                                                        swapToDownload()
+                                                    }}
+                                                >
+                                                    Get started
+                                                </Link>
+                                            </p>
+                                        </div>
                                     }
                                 >
                                     <DownloadButtons />
