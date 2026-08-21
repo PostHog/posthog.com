@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react'
 
-export const DOWNLOAD_URL = 'https://code.posthog.com/download'
-// Desktop ships from the PostHog monorepo under `desktop-v*` tags, interleaved
-// with agent-skills and posthog-cli releases, so `?q=desktop` narrows the list to
-// ours. Two ways to get this wrong: `/releases/latest` resolves to whichever
-// component shipped most recently rather than to desktop, and `?q=desktop-v`
-// matches nothing at all because the search doesn't handle the hyphen. The old
-// PostHog/code repo is archived, so it is not an option either.
-export const RELEASES_URL = 'https://github.com/PostHog/posthog/releases?q=desktop&expanded=true'
+export const DOWNLOAD_URL = 'https://desktop.posthog.com/download'
+export const RELEASES_URL = 'https://posthog.com/desktop/releases'
 
 type OS = 'mac' | 'windows' | 'linux' | 'unknown'
 type Arch = 'arm64' | 'x64' | 'unknown'
 
-// code.posthog.com is a Cloudflare Worker that redirects to the matching asset
-// on the latest published release. Arch is detected client-side and passed as
-// an explicit path because browsers don't send the Sec-CH-UA-Arch hint on
-// cross-origin navigation, so the worker can't tell an Intel Mac from Apple
-// Silicon on its own.
-// `label` names the exact build (used in the platform dropdown); `os` is the short
-// form the primary button uses, so it stays a button rather than a paragraph.
+interface UserAgentData {
+    mobile: boolean
+    platform: string
+    getHighEntropyValues?: (hints: string[]) => Promise<{ architecture?: string }>
+}
+
+type NavigatorWithUserAgentData = Navigator & { userAgentData?: UserAgentData }
+
+const getUserAgentData = (): UserAgentData | undefined => (navigator as NavigatorWithUserAgentData).userAgentData
+
 export const PLATFORMS = [
     { key: 'mac-arm64', os: 'macOS', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
     { key: 'mac-x64', os: 'macOS', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
@@ -27,10 +24,21 @@ export const PLATFORMS = [
     { key: 'linux-arm64', os: 'Linux', label: 'Linux (Arm64)', url: `${DOWNLOAD_URL}/linux/arm64` },
 ] as const
 
-// Linux package builds, offered alongside the plain binaries but never auto-detected.
 export const PACKAGES = [
-    { key: 'linux-deb', label: 'Linux (.deb)', url: `${DOWNLOAD_URL}/linux/deb` },
-    { key: 'linux-rpm', label: 'Linux (.rpm)', url: `${DOWNLOAD_URL}/linux/rpm` },
+    { key: 'linux-deb-x64', label: 'Linux x64 (.deb)', arch: 'x64', url: `${DOWNLOAD_URL}/linux/deb/x64` },
+    {
+        key: 'linux-deb-arm64',
+        label: 'Linux Arm64 (.deb)',
+        arch: 'arm64',
+        url: `${DOWNLOAD_URL}/linux/deb/arm64`,
+    },
+    { key: 'linux-rpm-x64', label: 'Linux x64 (.rpm)', arch: 'x64', url: `${DOWNLOAD_URL}/linux/rpm/x64` },
+    {
+        key: 'linux-rpm-arm64',
+        label: 'Linux Arm64 (.rpm)',
+        arch: 'arm64',
+        url: `${DOWNLOAD_URL}/linux/rpm/arm64`,
+    },
 ] as const
 
 export type Platform = (typeof PLATFORMS)[number]
@@ -43,8 +51,8 @@ export function getPlatform(key: PlatformKey): Platform {
 function detectIsMobile(): boolean {
     if (typeof navigator === 'undefined') return false
 
-    const uaData = (navigator as any)?.userAgentData
-    const ua = (navigator.userAgent || (navigator as any).vendor || '').toLowerCase()
+    const uaData = getUserAgentData()
+    const ua = (navigator.userAgent || navigator.vendor || '').toLowerCase()
 
     // iPadOS reports a desktop Mac user agent, so touch points are what give it away.
     return (
@@ -57,8 +65,8 @@ function detectIsMobile(): boolean {
 function detectOS(): OS {
     if (typeof navigator === 'undefined' || detectIsMobile()) return 'unknown'
 
-    const uaData = (navigator as any)?.userAgentData
-    const ua = (navigator.userAgent || (navigator as any).vendor || '').toLowerCase()
+    const uaData = getUserAgentData()
+    const ua = (navigator.userAgent || navigator.vendor || '').toLowerCase()
     const platform = (uaData?.platform || navigator.platform || '').toLowerCase()
     if (platform.includes('mac') || ua.includes('mac')) return 'mac'
     if (platform.includes('win') || ua.includes('win')) return 'windows'
@@ -66,35 +74,32 @@ function detectOS(): OS {
     return 'unknown'
 }
 
+function detectArchFromUserAgent(os: OS): Arch {
+    if (os !== 'linux') return 'unknown'
+
+    const ua = (navigator.userAgent || '').toLowerCase()
+    return ua.includes('aarch64') || ua.includes('arm64') ? 'arm64' : 'x64'
+}
+
 async function detectArch(os: OS): Promise<Arch> {
     try {
-        const uaData = (navigator as any)?.userAgentData
+        const uaData = getUserAgentData()
         if (uaData?.getHighEntropyValues) {
             const { architecture } = await uaData.getHighEntropyValues(['architecture'])
             if (architecture === 'arm') return 'arm64'
             if (architecture === 'x86') return 'x64'
         }
     } catch {
-        // ignore — fall through to defaults
+        return detectArchFromUserAgent(os)
     }
-    if (os === 'linux') {
-        const ua = (navigator.userAgent || '').toLowerCase()
-        return ua.includes('aarch64') || ua.includes('arm64') ? 'arm64' : 'x64'
-    }
-    return 'unknown'
+    return detectArchFromUserAgent(os)
 }
 
 export interface DetectedDevice {
-    /** The build matching this device, or `null` if we can't confidently match one. */
     platform: Platform | null
-    /** Phones and tablets, which can't run PostHog Desktop at all. */
     isMobile: boolean
 }
 
-/**
- * What the visitor is browsing on. During SSR this reports no platform and not
- * mobile, so the server-rendered markup is the neutral "pick a platform" state.
- */
 export function useDetectedDevice(): DetectedDevice {
     const [os, setOS] = useState<OS>('unknown')
     const [arch, setArch] = useState<Arch>('unknown')
