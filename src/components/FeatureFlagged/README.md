@@ -32,7 +32,7 @@ import { FeatureFlagged } from 'components/FeatureFlagged'
 
 Flags resolve in the browser, so this component **fails closed**: during SSR and until `onFeatureFlags` fires, the fallback is what renders. Flagged content never flashes to visitors who shouldn't see it, at the cost of a beat before it appears for those who should.
 
-Because the fallback is what gets server-rendered, avoid gating anything that needs to be in the static HTML for SEO — flag-gated content is invisible to crawlers.
+Because the fallback is what gets server-rendered, avoid gating anything that needs to be in the static HTML for SEO – flag-gated content is invisible to crawlers.
 
 Built on [`useActiveFeatureFlags`](../../hooks/useActiveFeatureFlags.ts), which subscribes to flag changes and returns `null` until they load.
 
