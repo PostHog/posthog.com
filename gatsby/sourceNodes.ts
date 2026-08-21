@@ -9,6 +9,7 @@ import type {
 } from '../src/templates/merch/types'
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
+import { deriveSourceSlug } from './sourceSlug'
 import dayjs from 'dayjs'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
@@ -1247,17 +1248,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
             for (const config of configs) {
                 const displayName = config.label || config.name
-                if (!displayName) continue
-                // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
-                // matches the committed doc file (e.g. `active-campaign`, not the label-derived
-                // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
-                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
-                const labelSlug = displayName
-                    .toLowerCase()
-                    .replace(/\./g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/[^a-z0-9-]/g, '')
-                const slug = docsSlug || labelSlug
+                // Skip incomplete records. Without a slug the source pages and nav links
+                // resolve to `/docs/.../sources/null`, which returns 404.
+                const slug = deriveSourceSlug(config)
+                if (!slug) {
+                    console.warn(`Skipping data warehouse source with no usable slug: ${JSON.stringify(config.name)}`)
+                    continue
+                }
 
                 createNode({
                     id: createNodeId(`posthog-source-${config.name}`),
