@@ -14,7 +14,7 @@ showTitle: true
 
 ### Customer Success Managers
 
-Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals. Don't assign yourself as the CSM on an account - assigning a CSM automatically adds the account to the segment. Allocation is up to Dana, Phil and Simon — see [assigning tagged accounts to a new owner](/handbook/growth/sales/account-allocation#assigning-tagged-accounts-to-a-new-owner) for how accounts reach your book.
+Each CSM is assigned customer accounts accumulating to ~$2.5m ARR to work with.  We use the CSM Managed Segment in Vitally to track this against goals. Don't assign yourself as the CSM on an account - assigning a CSM automatically adds the account to the segment. Allocation is up to Dana, Phil and Simon – see [assigning tagged accounts to a new owner](/handbook/growth/sales/account-allocation#assigning-tagged-accounts-to-a-new-owner) for how accounts reach your book.
 
 ## Weekly Customer Success standup
 
