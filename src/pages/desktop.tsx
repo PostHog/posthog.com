@@ -482,7 +482,7 @@ function HeroSection() {
                                         className="w-full hidden dark:block"
                                         imgClassName="w-full h-auto rounded-lg"
                                     />
-                                    <div className="pointer-events-none absolute -bottom-3 -right-4 h-24 @xl/editor:h-32">
+                                    <div className="pointer-events-none absolute -bottom-8 -right-4 h-24 @xl/editor:h-32">
                                         <CloudinaryImage
                                             src="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_hogs_41ec7dc243.png"
                                             alt="Two hedgehogs building something together"
@@ -1831,14 +1831,15 @@ const SupportedLLMs = () => {
                     />
                 </div>
 
-                {/* Right: subheading (the open-source one), copy, and the hand-drawn cost stat */}
+                {/* Right: subheading (the open-weight one), copy, and the hand-drawn cost stat */}
                 <div>
-                    <h3 className="text-xl font-bold mb-3">Open source models got good? (awkward)</h3>
+                    <h3 className="text-xl font-bold mb-3">Open weight models got good?</h3>
                     <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
                         We support
                     </p>
                     <div className="mb-4 flex flex-wrap items-baseline gap-2">
                         <ModelChip>GLM-5.2</ModelChip>
+                        <ModelChip>Kimi 3</ModelChip>
                         <span className="text-sm font-medium italic text-secondary">
                             …and more, if you have{' '}
                             <Link
@@ -1853,7 +1854,7 @@ const SupportedLLMs = () => {
                     </div>
                     <p className="mb-3 leading-relaxed">
                         The gap between free and frontier went from “lol” to “wait…” real quick. For a big slice of
-                        coding work, open source models now perform the same for a tenth of the price.
+                        coding work, open weight models now perform the same for a tenth of the price.
                     </p>
                     <p className="mb-6 leading-relaxed">
                         PostHog Desktop runs both, so you can choose the best model for the work and your budget.
@@ -2091,15 +2092,19 @@ const InboxCallout = () => {
 const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <FeatureFlagged
-                flag={DESKTOP_LAUNCH_FLAG}
-                fallback={<p className="m-0">PostHog Desktop is launching in Summer 2026.</p>}
-            >
-                <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
-            </FeatureFlagged>
-            <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
+            <div className="grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
+                    <h2 className="mt-0 mb-2 text-2xl font-bold">Try it</h2>
+                    <FeatureFlagged
+                        flag={DESKTOP_LAUNCH_FLAG}
+                        fallback={
+                            <p className="mb-4 text-base leading-loose">PostHog Desktop is launching in Summer 2026.</p>
+                        }
+                    >
+                        <p className="mb-4 text-base leading-loose">
+                            Download PostHog Desktop and sign in with your PostHog account.
+                        </p>
+                    </FeatureFlagged>
                     <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
                         <DownloadButtons />
                     </FeatureFlagged>
