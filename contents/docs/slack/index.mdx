@@ -8,7 +8,7 @@ The PostHog Slack app is in beta. Commands, scopes, and behavior are still movin
 
 </CalloutBox>
 
-`@PostHog` brings PostHog into any Slack channel or thread. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol). You can also send the bot a direct message – no mention needed – for a private one-on-one conversation.
+`@PostHog` brings PostHog into any Slack channel, thread, or DM. Mention the bot with a question about your product data and it answers in-thread using the PostHog [MCP](/docs/model-context-protocol). You can also send the bot a direct message – no mention needed – for a private one-on-one conversation.
 
 Mention `@PostHog` with a fix, an edit, or a feature idea and it plans the work in a sandboxed environment, edits files, runs your checks, and opens a draft PR. The same agent that powers [PostHog AI](/docs/posthog-ai) and [PostHog Desktop](/desktop), just summoned from where your team already chats.
 
@@ -18,7 +18,7 @@ classes="rounded"
 alt="A PostHog Desktop task running in a Slack thread"
 />
 
-Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup).You'll need to connect:
+Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup). You'll need to connect:
 - A Slack workspace connection for each project
 - A personal GitHub connection for each teammate who wants to ship PRs.
 
@@ -44,7 +44,7 @@ to the onboarding flow to lift the drop-off between step 2 and step 3
 
 If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes ; after that, re-mention the bot to try again.
 
-Once the agent finishes, it posts a final summary of its work to the thread.
+Once the agent finishes, it posts a final summary of its work to the thread. Every reply from the bot includes a footer with links to the run on web and desktop, the model and reasoning effort used, and a **Configure** link that opens the [App Home tab](#the-app-home-tab).
 
 ## Follow-ups in a thread
 
@@ -54,7 +54,54 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 
 Anyone in the thread can send follow-ups. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
 
-Heads up: the resulting PR is still authored under whoever started the task – their personal GitHub integration is the one wired up – so a teammate's follow-up edits land under the original requester's name. If you want the PR credited to you, start your own task.
+Follow-ups are properly multiplayer: each turn runs under the identity of whoever sent it. The agent switches to the sender's own GitHub and PostHog integrations before the turn runs, so commits and PRs land under the name of the person who actually asked for them – not the person who started the thread.
+
+### Reply without tagging the bot
+
+Once a task is running in a thread, the bot can also pick up replies that don't mention `@PostHog`. Whether it does is up to whoever started the thread – set your preference in the [App Home tab](#the-app-home-tab) under **Thread follow-ups**:
+
+| Option | What happens |
+|---|---|
+| **Leave them alone** (default) | Untagged replies are ignored – mention `@PostHog` to reach the agent |
+| **Ask them first** | If the bot thinks a reply is meant for it, it asks first with a prompt only the replier can see |
+| **Pick them up automatically** | If the bot thinks a reply is meant for it, it answers without asking |
+
+The setting applies to every reply in threads you started, including your own. The bot is deliberately conservative about what counts as "meant for it" – teammates talking to each other are left alone.
+
+## DM the bot
+
+You don't need a channel to talk to the bot – open a DM with **PostHog** and message it directly. Everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and attachments. It's a good place for quick tasks (or embarrassing questions) you'd rather not spam a channel with.
+
+In a DM, drop the mention from commands: `project <id>` instead of `@PostHog project <id>`.
+
+## Pick a model
+
+Tasks run on **Claude Opus 5** by default. To use a different model, just ask for it as part of your message:
+
+```
+@PostHog investigate the checkout drop-off and use fable for it
+```
+
+Any model available in [PostHog Desktop](/desktop) works, and you can request a reasoning effort the same way ("do this with max effort"). To change your default, set a personal preference in the [App Home tab](#the-app-home-tab) under **AI model** – the precedence is: model named in the message → your personal preference → the default.
+
+You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family means starting a new thread. Each reply's footer shows the model and reasoning effort actually used.
+
+## Attachments, files, and canvases
+
+Attach files to your message and the agent reads them: images (PNG, JPG, GIF, WebP), PDFs, and plain-text files like logs, markdown, CSV, JSON, and YAML. Up to five attachments per message, 10 MB each.
+
+The agent can produce artifacts of its own too – uploading files back to the thread, or creating a Slack canvas when the output is a longer document.
+
+## The App Home tab
+
+Open the PostHog app's **Home** tab in Slack (or click **Configure** in the footer of any bot reply) to manage your setup in one place:
+
+- **Workspace activity** – tasks, PRs opened and merged, merge rate, and most active teammates. Visible to Slack workspace admins and owners only.
+- **Project routing** – your personal default project, plus the workspace-wide default (editable by Slack admins).
+- **AI model** – your personal model and reasoning effort preference.
+- **Thread follow-ups** – how the bot treats [untagged replies](#reply-without-tagging-the-bot) in threads you started.
+- **Linked accounts** – your PostHog account link and personal GitHub connections.
+- **Tasks** – the tasks you've started from Slack, filterable by repo and status, with links to the thread, web, and desktop.
 
 ## See Slack tasks in PostHog Desktop
 

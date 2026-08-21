@@ -479,7 +479,7 @@ const compareRows: CompareRow[] = [
     {
         label: 'Models',
         ai: "Auto-picked from OpenAI and Anthropic (we tune so you don't have to).",
-        slack: 'Auto-picked from OpenAI and Anthropic.',
+        slack: 'Defaults to Claude Opus 5. Ask for another model right in your message ("use fable for this"), or set a personal default in the App Home tab.',
         code: 'You pick: Claude Code or Codex, with reasoning effort dialed in per task.',
     },
 ]
@@ -596,8 +596,19 @@ const faqItems = [
         trigger: 'Does the PostHog Slack app work in DMs?',
         content: (
             <p>
-                No. But if you want to @PostHog for quick tasks (or embarrassing questions) without spamming your team,
-                you can add it to a private channel with just you and the bot.
+                Yes. DM the bot directly for quick tasks (or embarrassing questions) without spamming your team –
+                everything that works in a channel mention works in a DM: data questions, coding tasks, follow-ups, and
+                attachments.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Do I have to tag the bot on every message?',
+        content: (
+            <p>
+                Only to start. Once a task is running in a thread, the bot can pick up untagged replies too – whoever
+                started the thread chooses between "leave them alone" (the default), "ask them first", and "pick them up
+                automatically" in the App Home tab.
             </p>
         ),
     },
@@ -642,7 +653,8 @@ const faqItems = [
                         is rougher than it should be.
                     </li>
                     <li>
-                        No screenshot input yet – the bot reads text only. Paste descriptions instead of images for now.
+                        Attachments are capped at five per message, 10 MB each – images, PDFs, and plain-text files
+                        only.
                     </li>
                     <li>
                         Prompt construction and review-bot trust heuristics are being actively iterated. Behavior may
@@ -764,7 +776,10 @@ export default function SlackAppPage(): JSX.Element {
                     />
                     <p>You don't need to know any of this to use it. But here's what happens after you hit send:</p>
                     <ol>
-                        <li>The agent scans the thread for relevant content (text only, for now).</li>
+                        <li>
+                            The agent scans the thread for relevant content – including attached images, PDFs, and text
+                            files.
+                        </li>
                         <li>It plans the work, edits files, and runs checks inside a sandboxed environment.</li>
                         <li>It opens a draft PR with a detailed description, and links it back into the thread.</li>
                         <li>
