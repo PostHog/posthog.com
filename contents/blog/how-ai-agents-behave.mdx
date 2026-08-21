@@ -87,11 +87,9 @@ You can also step through any agent session tool call by tool call – the agent
 
 Every number in this post came out of those views, pointed at our own server.
 
-There's also no separate system to learn. Every call lands as a single $mcp_tool_call event on your normal events table, so the purpose-built views are there if you want them – and if you'd rather write SQL, build a dashboard, or point product analytics at it like any other event, that works too.
+There's also no separate system to learn. Every call lands as a single `$mcp_tool_call` event on your normal events table, so the purpose-built views are there if you want them – and if you'd rather write SQL, build a dashboard, or point product analytics at it like any other event, that works too.
 
-And it doesn't just watch. Your tool calls can serve as a signal source for [Self-driving](/self-driving). A scout watches $mcp_tool_call telemetry for tools that need attention – high failure rates, agents retrying the same call, slow or bloated responses – weighs them by volume and reach, and files a report. If it's a server you own, that report can hand off to a coding agent that opens a pull request. 
-
-**Want to see the agents using *your* product? [Explore MCP analytics →](/docs/mcp-analytics)**
+And it doesn't just watch. Your tool calls can serve as a signal source for [Self-driving](/self-driving). A scout watches `$mcp_tool_call` telemetry for tools that need attention – high failure rates, agents retrying the same call, slow or bloated responses – weighs them by volume and reach, and files a report. If it's a server you own, that report can hand off to a coding agent that opens a pull request. 
 
 <WizardCTA
  command="mcp-analytics"
