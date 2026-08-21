@@ -1,12 +1,26 @@
 ---
-title: ICP scoring
+title: ICP fit score
 sidebar: Handbook
 showTitle: true
 ---
 
-We score every signup on how well it matches [who we build for](/handbook/who-we-build-for): AI-pilled software teams at any scale, backed by leading investors or real revenue.
+We score every signup on how well it matches [who we build for](/handbook/who-we-build-for): AI-pilled software teams at any scale, backed by leading investors or real revenue. This is the **ICP fit score** — "fit" because it answers exactly one question: does this company match our definition?
 
-The ICP score is **definitional, not a revenue prediction**. A four-person seed-stage AI startup paying us $50/month can score high, or a large non-software enterprise paying us a lot can score low. The score tells us if a signup matches our definition of who we build for vs if they'll be a high mrr account in the next six months.
+The fit score is **definitional, not a revenue prediction**. A four-person seed-stage AI startup paying us $50/month can score high, or a large non-software enterprise paying us a lot can score low. A separate expected-revenue score (planned) will answer "what is this signup likely to be worth?" — the two are consumed together as a fit × revenue quadrant and will disagree on purpose for some accounts.
+
+## Where it lands
+
+The score is stamped on the **organization** in our internal PostHog project as three properties, written at signup and refreshed on re-enrichment:
+
+| Property | Values |
+|---|---|
+| `icp_fit_score` | 0–100, or **absent** when there is no numeric score — never read a missing score as 0 |
+| `icp_fit_status` | `scored` / `disqualified` / `insufficient_data` / `not_found` — check this first; it says whether the score exists and why not |
+| `icp_fit_version` | The formula version the score was computed under (e.g. `v0.5`) |
+
+Per-component points, metadata flags, and the curated-list version are stored on the enrichment record (warehouse-queryable) rather than as organization properties. A numeric score is also mirrored to the signup person's profile as `icp_fit_score` / `icp_fit_version`.
+
+Not to be confused with the legacy `icp_score` property: that is the old Clay-era formula on a −5..21 scale, still written in parallel until its existing consumers (cohorts, flags, scanners) migrate to `icp_fit_score`. Thresholds do not translate between the two — roughly, legacy `> 8` corresponds to fit `> 40`.
 
 ## How it works
 
