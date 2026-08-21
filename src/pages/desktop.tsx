@@ -53,11 +53,12 @@ import {
     StickerRobot,
 } from 'components/Stickers/Stickers'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Glow from 'components/Glow'
 import WistiaEmbed from 'components/WistiaEmbed'
 import Link from 'components/Link'
 import { IconDiscord } from 'components/OSIcons/Icons'
+import { WaitlistForm } from 'components/WaitlistForm'
 import { DownloadButtons } from 'components/Code/DownloadButtons'
-import { DownloadContent, DownloadCTA } from 'components/Code/DownloadContent'
 import { DESKTOP_LAUNCH_FLAG } from 'components/Code/flags'
 import { FeatureFlagged } from 'components/FeatureFlagged'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
@@ -401,12 +402,7 @@ function HeroSection() {
                 }}
             >
                 {showDownload ? (
-                    <FeatureFlagged
-                        flag={DESKTOP_LAUNCH_FLAG}
-                        fallback={<DownloadContent className="w-full mx-auto py-8 text-center" />}
-                    >
-                        <DownloadButtons className="w-full py-8" align="center" />
-                    </FeatureFlagged>
+                    <DownloadButtons className="w-full py-8" align="center" />
                 ) : (
                     <>
                         <h1 className="!mt-0 mb-4 text-xl font-bold leading-tight @xl:mb-8 @xl:text-3xl">
@@ -426,11 +422,11 @@ function HeroSection() {
                             </RoughAnnotation>
                         </h1>
 
-                        <div className="flex flex-col items-start @4xl/editor:flex-row @4xl/editor:gap-8">
+                        <div className="flex flex-col items-start gap-8 @4xl/editor:flex-row">
                             <div className="@4xl/editor:flex-[0_0_280px]">
                                 <p>
-                                    All the PostHog you already use, plus a coding agent that can act on your data. Real
-                                    usage in, pull requests out.
+                                    A multiplayer workspace for you, your team, and your agents – with your product data
+                                    as context, and PostHog tools to ship and measure.
                                 </p>
                                 <ul className="mb-4 list-none space-y-0.5 p-0 text-[15px]">
                                     {[
@@ -448,28 +444,53 @@ function HeroSection() {
                                 <FeatureFlagged
                                     flag={DESKTOP_LAUNCH_FLAG}
                                     fallback={
-                                        <OSButton
-                                            asLink
-                                            to="/desktop#download"
-                                            variant="primary"
-                                            size="md"
-                                            onClick={(event) => {
-                                                event.preventDefault()
-                                                swapToDownload()
-                                            }}
-                                        >
-                                            View downloads
-                                        </OSButton>
+                                        <div className="@container max-w-sm">
+                                            <WaitlistForm />
+                                            <p className="mt-4 text-sm text-secondary">
+                                                Have an invite code?{' '}
+                                                <Link
+                                                    to="/desktop#download"
+                                                    className="font-bold underline"
+                                                    onClick={(event) => {
+                                                        event.preventDefault()
+                                                        swapToDownload()
+                                                    }}
+                                                >
+                                                    Get started
+                                                </Link>
+                                            </p>
+                                        </div>
                                     }
                                 >
                                     <DownloadButtons />
                                 </FeatureFlagged>
                             </div>
 
+                            {/* Product shot with the glow + overhanging hog treatment the product pages
+                                use (see Products/ReaderViewProduct/templates/Overview). */}
                             <div className="w-full min-w-0 @4xl/editor:flex-1">
-                                <div className="overflow-hidden rounded-md shadow-xl not-prose">
-                                    <WistiaEmbed mediaId="vm9mn1m4dv" />
-                                </div>
+                                <Glow color="blue" className="not-prose">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_light_160e744e82.png"
+                                        alt="A canvas of survey results open in PostHog Desktop"
+                                        className="w-full dark:hidden"
+                                        imgClassName="w-full h-auto rounded-lg"
+                                    />
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/desktop_surveys_canvas_dark_085ef34c25.png"
+                                        alt="A canvas of survey results open in PostHog Desktop"
+                                        className="w-full hidden dark:block"
+                                        imgClassName="w-full h-auto rounded-lg"
+                                    />
+                                    <div className="pointer-events-none absolute -bottom-8 -right-4 h-24 @xl/editor:h-32">
+                                        <CloudinaryImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/multiplayer_hogs_41ec7dc243.png"
+                                            alt="Two hedgehogs building something together"
+                                            className="h-full"
+                                            imgClassName="h-full w-auto"
+                                        />
+                                    </div>
+                                </Glow>
                             </div>
                         </div>
                     </>
@@ -1810,14 +1831,15 @@ const SupportedLLMs = () => {
                     />
                 </div>
 
-                {/* Right: subheading (the open-source one), copy, and the hand-drawn cost stat */}
+                {/* Right: subheading (the open-weight one), copy, and the hand-drawn cost stat */}
                 <div>
-                    <h3 className="text-xl font-bold mb-3">Open source models got good? (awkward)</h3>
+                    <h3 className="text-xl font-bold mb-3">Open weight models got good?</h3>
                     <p className="m-0 mb-1.5 text-xs font-semibold uppercase tracking-wide text-secondary">
                         We support
                     </p>
                     <div className="mb-4 flex flex-wrap items-baseline gap-2">
                         <ModelChip>GLM-5.2</ModelChip>
+                        <ModelChip>Kimi 3</ModelChip>
                         <span className="text-sm font-medium italic text-secondary">
                             …and more, if you have{' '}
                             <Link
@@ -1832,7 +1854,7 @@ const SupportedLLMs = () => {
                     </div>
                     <p className="mb-3 leading-relaxed">
                         The gap between free and frontier went from “lol” to “wait…” real quick. For a big slice of
-                        coding work, open source models now perform the same for a tenth of the price.
+                        coding work, open weight models now perform the same for a tenth of the price.
                     </p>
                     <p className="mb-6 leading-relaxed">
                         PostHog Desktop runs both, so you can choose the best model for the work and your budget.
@@ -2070,11 +2092,20 @@ const InboxCallout = () => {
 const TLDR = () => {
     return (
         <section className="relative mb-12 @xl:mb-16 px-4 @xl:px-8">
-            <h2 className="text-2xl font-bold mb-2">Try it</h2>
-            <p className="m-0">Download PostHog Desktop and sign in with your PostHog account.</p>
-            <div className="mt-2 grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
+            <div className="grid items-center gap-8 @2xl:grid-cols-2 @2xl:gap-12">
                 <div className="@container bg-blue/10 border border-blue rounded-md px-8 py-6 shadow-xl">
-                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+                    <h2 className="mt-0 mb-2 text-2xl font-bold">Try it</h2>
+                    <FeatureFlagged
+                        flag={DESKTOP_LAUNCH_FLAG}
+                        fallback={
+                            <p className="mb-4 text-base leading-loose">PostHog Desktop is launching in Summer 2026.</p>
+                        }
+                    >
+                        <p className="mb-4 text-base leading-loose">
+                            Download PostHog Desktop and sign in with your PostHog account.
+                        </p>
+                    </FeatureFlagged>
+                    <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
                         <DownloadButtons />
                     </FeatureFlagged>
                 </div>
@@ -2129,8 +2160,32 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    Yep, we renamed it. Writing code turned out to be just one part of building a product – so we added
-                    things like canvases and multiplayer to make room for the rest of the work.
+                    Yep, we renamed it. Writing code turned out to be one small part of building a product, so we made
+                    room for the rest of it: shared spaces where your team and your agents work together, and canvases
+                    they can build to answer a question.
+                </p>
+            </div>
+        ),
+    },
+    {
+        trigger: 'What are spaces and canvases?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    A{' '}
+                    <a href="/docs/posthog-desktop/spaces" className="underline">
+                        space
+                    </a>{' '}
+                    is where a project lives. It holds the agent sessions, the canvases, and a <code>CONTEXT.md</code>{' '}
+                    with the background an agent needs. Your personal space stays private. Shared spaces let teammates
+                    follow the work in a feed, reply in a thread, and pick up where an agent left off.
+                </p>
+                <p>
+                    A canvas is an interactive app an agent builds around your PostHog data. Ask for one in plain
+                    English and you get a working first version, with no SQL and no frontend work. They're for the
+                    questions a normal dashboard can't answer, like a release health board or a customer lookup tool for
+                    support. Comment on any part of it to ask for changes, and every rebuild is a version you can revert
+                    to.
                 </p>
             </div>
         ),
@@ -2144,9 +2199,9 @@ const FAQ_ITEMS = [
                     and helps with things like writing SQL and analyzing user behavior through natural-language prompts.
                 </p>
                 <p>
-                    PostHog Desktop is a desktop app focused on shipping code. It orchestrates multiple coding agents
-                    from different providers (Anthropic, OpenAI) and turns product signals – errors, support tickets,
-                    session replay trends – into PRs.
+                    PostHog Desktop is a desktop app for building. It runs coding agents on models from Anthropic,
+                    OpenAI, and other providers, and turns product signals like error spikes and support reports into
+                    pull requests.
                 </p>
                 <p>
                     In a nutshell:{' '}
@@ -2191,11 +2246,17 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    PostHog Desktop is built on top of two{' '}
+                    You pick a{' '}
                     <a href="/docs/posthog-desktop/use-any-model-and-harness" className="underline">
-                        harnesses
+                        harness
                     </a>
-                    : Claude Code and Codex. You can pick the harness, model, and reasoning effort per task.
+                    , a model, and a reasoning effort for every task. The harness options are Pi, which is PostHog's
+                    own, plus Claude Code and Codex. Pi is the one to reach for when you want your own skills, MCP
+                    servers, and extensions in the loop.
+                </p>
+                <p>
+                    Models come from Anthropic, OpenAI, and other providers. The picker in the app is always the current
+                    list. You sign in with your PostHog account, so there are no API keys to juggle.
                 </p>
                 <p>
                     If you'd rather keep your existing editor, the PostHog MCP server works with any MCP-compatible
@@ -2205,16 +2266,42 @@ const FAQ_ITEMS = [
         ),
     },
     {
+        trigger: 'Can I teach it how my team works?',
+        content: (
+            <div className="space-y-3">
+                <p>
+                    <a href="/docs/posthog-desktop/skills" className="underline">
+                        Skills
+                    </a>{' '}
+                    give the agent a repeatable process for one specific job, so you stop explaining the same steps
+                    every week. PostHog ships skills for instrumentation, experiments, error tracking, and more. You can
+                    also install community ones, write your own, or publish one to your team.
+                </p>
+                <p>
+                    For the bigger picture, every space has a <code>CONTEXT.md</code> holding your conventions and
+                    product background. It applies to every session in that space, wherever the task runs, and PostHog
+                    Desktop can draft the first version from your repos.
+                </p>
+            </div>
+        ),
+    },
+    {
         trigger: "What if I don't use PostHog yet?",
         content: (
-            <p>
-                PostHog Desktop runs on top of PostHog, so you'll need to be on PostHog first. The good news: PostHog is
-                free up to{' '}
-                <a href="/pricing" className="underline">
-                    generous limits
-                </a>
-                , and installation takes about 90 seconds with the wizard.
-            </p>
+            <div className="space-y-3">
+                <p>
+                    It still works. Without PostHog it's a general-purpose coding agent, and the product context is a
+                    bonus on top rather than a hard requirement. You do need a PostHog account to sign in, since that's
+                    what pays for model usage.
+                </p>
+                <p>
+                    That said, the context is the whole point. PostHog is free up to{' '}
+                    <a href="/pricing" className="underline">
+                        generous limits
+                    </a>
+                    , and the wizard gets you set up in about 90 seconds.
+                </p>
+            </div>
         ),
     },
     {
@@ -2222,7 +2309,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    You can always just tell it what to do. But Code also has an Inbox: PostHog's{' '}
+                    You can always just tell it what to do. But PostHog Desktop also has an Inbox: PostHog's{' '}
                     <a href="/self-driving" className="underline">
                         self-driving
                     </a>{' '}
@@ -2233,8 +2320,8 @@ const FAQ_ITEMS = [
                     The full ranking, signal sources, and priority thresholds live in the{' '}
                     <a href="/docs/self-driving" className="underline">
                         self-driving docs
-                    </a>{' '}
-                    – Code is where you review and action what it surfaces.
+                    </a>
+                    . PostHog Desktop is where you review and action what it surfaces.
                 </p>
             </div>
         ),
@@ -2277,17 +2364,19 @@ const FAQ_ITEMS = [
                     integration.
                 </p>
                 <p>
-                    The local{' '}
                     <a href="/docs/posthog-desktop/posthog-integration" className="underline">
-                        enricher
+                        Live product context
                     </a>{' '}
-                    uses tree-sitter to detect PostHog SDK calls right on your machine – no source code is uploaded for
-                    that.{' '}
+                    is worked out on your machine. PostHog Desktop spots event capture, feature flag checks, and SDK
+                    setup in your files, then fetches only the matching metadata from the project you picked. No source
+                    code is uploaded for that.
+                </p>
+                <p>
                     <a href="/docs/posthog-desktop/cloud-runs" className="underline">
                         Cloud tasks
                     </a>{' '}
-                    run in a PostHog-managed sandbox with configurable network rules (trusted allowlist, full internet,
-                    or custom).
+                    run in a PostHog-managed sandbox, and you set the network rules: a trusted allowlist, the whole
+                    internet, or your own list of domains.
                 </p>
             </div>
         ),
@@ -2295,11 +2384,21 @@ const FAQ_ITEMS = [
     {
         trigger: 'Is my PostHog data safe?',
         content: (
-            <p>
-                Yes. PostHog Desktop queries your data through the PostHog API using your personal API key. Data is
-                never stored, cached, or sent anywhere other than to PostHog&apos;s servers, and you control exactly
-                what the agent can access through your API key&apos;s permissions.
-            </p>
+            <div className="space-y-3">
+                <p>
+                    Yes. PostHog Desktop reads your data through the account you signed in with, so there are no API
+                    keys to manage or leak. The project switcher in the bottom-left corner sets which project the agent
+                    can see, and data isn&apos;t sent anywhere other than PostHog&apos;s servers.
+                </p>
+                <p>
+                    The first time an agent reaches for an unapproved{' '}
+                    <a href="/docs/posthog-desktop/mcp-servers" className="underline">
+                        MCP tool
+                    </a>
+                    , it asks. Allow it once, allow it for the session, or block it, and set a standing rule per server
+                    once you know what you want.
+                </p>
+            </div>
         ),
     },
     {
@@ -2344,14 +2443,15 @@ const FAQ_ITEMS = [
         content: (
             <p>
                 <a href="/docs/posthog-desktop/open-source" className="underline">
-                    Yes – MIT licensed
+                    Yes, MIT licensed
                 </a>
-                , with the monorepo{' '}
+                . The source lives in{' '}
                 <a href="https://github.com/PostHog/posthog/tree/master/products/desktop" className="underline">
-                    on GitHub
-                </a>
-                . The desktop app, agent framework, enrichment service, and bundled skills all live there. macOS,
-                Windows, and Linux builds are maintained by PostHog.
+                    <code>products/desktop</code>
+                </a>{' '}
+                in the PostHog monorepo, alongside the contributing and architecture guides. PostHog builds and ships it
+                for macOS (Apple Silicon and Intel), Windows, and Linux (AppImage, <code>.deb</code>, and{' '}
+                <code>.rpm</code>).
             </p>
         ),
     },
@@ -2379,7 +2479,7 @@ function FAQ() {
 export function DownloadButton() {
     return (
         <div className="py-6">
-            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<DownloadCTA />}>
+            <FeatureFlagged flag={DESKTOP_LAUNCH_FLAG} fallback={<WaitlistForm />}>
                 <DownloadButtons />
             </FeatureFlagged>
         </div>
