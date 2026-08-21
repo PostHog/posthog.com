@@ -1,7 +1,5 @@
 ---
 title: Should I open an issue or a PR?
-sidebar: Handbook
-showTitle: true
 ---
 
 There are two ways to get a change into the website, depending on what you're changing.
@@ -36,13 +34,13 @@ Then let the website team pick the fix. It's often not the obvious one, and some
 
 ## If you've already opened a code PR
 
-We'll probably close it and open an issue in its place so the idea doesn't get lost. That's not a comment on the work. The volume of website PRs is well past what the team can review, most of them are AI-generated, and when one gets merged that isn't quite right, it comes back to us later as something to fix.
+We'll close it and open an issue in its place so the idea doesn't get lost. That's not a comment on the work. The volume of website PRs is well past what the team can review, most of them are AI-generated, and when one gets merged that isn't quite right, it comes back to us later as something to fix.
 
 If you think your change is an exception, ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink> before you build it and we'll figure it out with you.
 
 ## If something's broken
 
-Post in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink>. A broken pricing page shouldn't wait for for triage.
+Post in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-website</PrivateLink>. A broken pricing page shouldn't wait for triage.
 
 ## Contributing from outside PostHog
 
