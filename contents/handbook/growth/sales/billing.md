@@ -104,7 +104,21 @@ At this point they will be notified about this automatically via the billing ser
 
 #### Repeated failed payments
 
-After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+A customer has *repeated* failed payments when payments have failed across three or more consecutive billing periods, or when a second late payment occurs within six months of a previous one that reached Step 3 (suspended access).
+
+At this point, catching up on the overdue balance isn't enough. We need payment predictability before restoring access, otherwise we're back here next month.
+
+**Step 1: collect the overdue balance.** Access stays suspended until the outstanding invoice is paid. Send the payment link and the invoice PDF from the Stripe invoice page.
+
+**Step 2: require a contract pre-commitment before restoring access.** Move the customer off pay-as-you-go onto a contract with payment upfront. The account's sales contact can size the commitment with the customer to base it on their trailing usage and what's realistic for them.
+
+Make it explicit in your outreach that if we can't agree a pre-commitment, the account will be downgraded to the Free tier and subject to that tier's usage limits.
+
+**Step 3: set a drop dead date.** Once the overdue invoice is paid, give the customer a specific calendar date roughly 4 weeks out to get the contract signed or move to Free. Put the date in writing. If it passes with no commitment, downgrade.
+
+> Restoring access before the contract is signed is a judgement call for the account owner, but set and communicate the drop-dead date at the same time.
+
+RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
