@@ -3,12 +3,12 @@ title: What to do after installing PostHog in 5 steps
 sidebar: Docs
 showTitle: true
 author:
-- ian-vanagas
+  - ian-vanagas
 date: 2022-11-15
 tags:
-- configuration
-- experimentation
-- product os
+  - configuration
+  - experimentation
+  - product os
 ---
 
 You created a PostHog account and installed it on your site, but what’s next? This tutorial goes over what to do after signing up and installing PostHog (we are assuming you’ve done both).
@@ -17,7 +17,7 @@ You created a PostHog account and installed it on your site, but what’s next? 
 
 To get the best possible understanding of your product, you need as much data as possible. Capturing the most possible events helps you do this. PostHog makes it easy.
 
-Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically.
+Autocapture is enabled by default if you've installed either [the PostHog snippet](/docs/integrate#snippet) or [`posthog-js`](/docs/integrate/client/js). That means your product will send pageviews, button clicks, inputs, and more to PostHog automatically. 
 
 > With either of these installed, you can also **enable session recordings** in “Project Settings”, under "Recordings.”
 
@@ -91,7 +91,7 @@ client.Enqueue(posthog.Capture{
 
 </MultiLanguage>
 
-To figure out which events you should capture, think about which areas have the biggest impact on your product or [north star metrics](/blog/north-star-metrics). As a minimum, we recommend capturing events such as:
+To figure out which events you should capture, think about which areas have the biggest impact on your product or [north star metrics](/blog/north-star-metrics). As a minimum, we recommend capturing events such as: 
 
 - signups
 - logins
@@ -103,7 +103,7 @@ Once you've started capturing events, you can create actions (a combination of o
 
 ![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/action.png)
 
-Be sure to add properties to your events to better capture variables such as the value, type, or version. For example, you might want to know which version of the product someone is using or if they are a customer or not. Properties can help you here, and you can set them for users as well.
+Be sure to add properties to your events to better capture variables such as the value, type, or version. For example, you might want to know which version of the product someone is using or if they are a customer or not. Properties can help you here, and you can set them for users as well. 
 
 Finally, you may also want to connect to external services like [Stripe](/tutorials/stripe-payment-data) or [HubSpot](/apps/hubspot-connector) to get data. You can do that using [apps](/apps). To install an app, search for it in “browse apps,” then configure and activate it.
 
@@ -136,7 +136,7 @@ To invite your teammates, go to your instance homepage, click the "Invite" butto
 
 ![Invite](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/invite.png)
 
-To make sure they don’t mess up all your hard work, you can change their access levels in your organization settings. Setting them to “Member” will prevent them from deleting or changing the settings in your project or instances. You can also set up projects you don’t want others to access as private in the project settings.
+To make sure they don’t mess up all your hard work, you can change their access levels in your organization settings. Setting them to “Member” will prevent them from deleting or changing the settings in your project or instances. You can also set up projects you don’t want others to access as private in the project settings. 
 
 When working with others, you likely will want to [filter out](/tutorials/filter-internal-users) events they trigger when doing analysis. To set this up, go to ”Project Settings”, scroll down to “filter out internal and test users”  and add filters such as host does not include local development addresses and email does not include your company’s domain.
 
@@ -150,7 +150,7 @@ If there are key events or actions you want to track, such as a potential custom
 
 ![Webhook](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/next-steps-after-installing/hook.png)
 
-You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/libraries/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.”
+You can also subscribe to dashboards in Slack or via email. Just go to your dashboard, click the three dots to the left of share, click “subscribe,” and “new subscription.” If you want to send dashboards to Slack, you’ll need to configure our [Slack integration](/docs/libraries/slack). If you want dashboards by email, just fill in the details like the name, email, and recurrence, then click “create subscription.” 
 
 Finally, if you want your data backed up or sent to an external service such as [BigQuery](/apps/bigquery-export), [S3](/apps/s3-export), or [Snowflake](/apps/snowflake-export), you can use one of our many [“data-out” apps](/apps). Just go to “browse apps,” search for the one you want, configure it, and start sending the data to the other places you want it.
 

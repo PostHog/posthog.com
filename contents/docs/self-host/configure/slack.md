@@ -8,6 +8,7 @@ showTitle: true
 
 PostHog has built in support for sending Slack notifications via Actions or Subscriptions. For self-hosted PostHog instances, a Slack App is required so that Teams can add PostHog to their Slack workspace via the standard Oauth flows.
 
+
 ## General configuration
 
 > 🚧 In addition to the Slack App configuration it is important that the instance `SITE_URL` is correctly set. This is used by Slack's Oauth flow to ensure that only your instance uses the Slack App.
