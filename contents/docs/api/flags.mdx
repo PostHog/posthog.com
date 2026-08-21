@@ -10,6 +10,8 @@ It is a POST-only public endpoint that uses your [project token](https://app.pos
 
 > **Note:** Make sure to send API requests to the correct domain. These are `https://us.i.posthog.com` for US Cloud, `https://eu.i.posthog.com` for EU Cloud, and your self-hosted domain for self-hosted instances. Confirm yours by checking your URL from your PostHog instance.
 
+`/flags` does not return all the flags in your project. PostHog filters the response by each flag's [evaluation runtime](#runtime-detection) and by the [evaluation contexts](#evaluation-contexts) that you send. PostHog detects the runtime from your request headers and user-agent, not from the request body. If a flag that you expect is missing from the response, examine these two filters first.
+
 import APIFeatureFlagsCode from '../integrate/feature-flags-code/_snippets/feature-flags-code-api.mdx'
 
 <APIFeatureFlagsCode />
