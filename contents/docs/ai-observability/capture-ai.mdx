@@ -6,7 +6,7 @@ import CalloutBox from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconFlask" title="Public beta" type="fyi">
 
-Full AI capture is in public beta, available in [posthog-python](/docs/libraries/python) and [posthog-node](/docs/libraries/node). We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we roll it out.
+Full AI capture is in public beta, available in [posthog-python](/docs/libraries/python) 7.39+ and [posthog-node](/docs/libraries/node) 5.49+ (with `@posthog/ai` 8.8+). We'd love to [hear your feedback](https://app.posthog.com/ai-observability#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) as we roll it out.
 
 </CalloutBox>
 
@@ -16,7 +16,7 @@ During the beta, this path is opt-in. How you opt in depends on how you capture 
 
 ## Using the SDK integrations
 
-By default, our [SDK integrations](/docs/ai-observability/installation) truncate very long strings and redact base64 media before capture. To capture everything in full, pass a single flag when creating your PostHog client:
+By default, our [SDK integrations](/docs/ai-observability/installation) redact base64 media and may truncate very long strings before capture. To capture everything in full, pass a single flag when creating your PostHog client:
 
 <MultiLanguage>
 
@@ -86,7 +86,7 @@ const uuid = posthog.captureAi({
 
 </MultiLanguage>
 
-Send content as your provider produced it, including base64 and data URIs – there's no need to reshape payloads. `capture_ai` captures exactly what you pass it, without truncating or redacting anything, though [privacy mode](/docs/ai-observability/privacy-mode) still applies.
+Send content as your provider produced it, including base64 and data URIs – there's no need to reshape payloads. `capture_ai` captures exactly what you pass it, without truncating or redacting anything. [Privacy mode](/docs/ai-observability/privacy-mode) doesn't apply here, so leave out any content you don't want stored.
 
 In serverless and other short-lived environments, use the awaitable variant in Node so the event is delivered before the runtime exits:
 
@@ -106,4 +106,4 @@ POST <ph_client_api_host>/i/v0/ai/batch/
 
 ## Limits
 
-Events up to **8MB** are accepted for now – larger events are dropped. The limit will increase as the beta continues.
+Events up to **8MB** are accepted for now. The SDKs drop larger events before sending and log an error instead. The limit will increase as the beta continues.
