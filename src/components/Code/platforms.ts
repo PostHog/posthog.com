@@ -11,12 +11,14 @@ type Arch = 'arm64' | 'x64' | 'unknown'
 // an explicit path because browsers don't send the Sec-CH-UA-Arch hint on
 // cross-origin navigation, so the worker can't tell an Intel Mac from Apple
 // Silicon on its own.
+// `label` names the exact build (used in the platform dropdown); `os` is the short
+// form the primary button uses, so it stays a button rather than a paragraph.
 export const PLATFORMS = [
-    { key: 'mac-arm64', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
-    { key: 'mac-x64', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
-    { key: 'windows-x64', label: 'Windows', url: `${DOWNLOAD_URL}/windows` },
-    { key: 'linux-x64', label: 'Linux (x64)', url: `${DOWNLOAD_URL}/linux/x64` },
-    { key: 'linux-arm64', label: 'Linux (Arm64)', url: `${DOWNLOAD_URL}/linux/arm64` },
+    { key: 'mac-arm64', os: 'macOS', label: 'macOS (Apple Silicon)', url: `${DOWNLOAD_URL}/mac/arm64` },
+    { key: 'mac-x64', os: 'macOS', label: 'macOS (Intel)', url: `${DOWNLOAD_URL}/mac/intel` },
+    { key: 'windows-x64', os: 'Windows', label: 'Windows', url: `${DOWNLOAD_URL}/windows` },
+    { key: 'linux-x64', os: 'Linux', label: 'Linux (x64)', url: `${DOWNLOAD_URL}/linux/x64` },
+    { key: 'linux-arm64', os: 'Linux', label: 'Linux (Arm64)', url: `${DOWNLOAD_URL}/linux/arm64` },
 ] as const
 
 // Linux package builds, offered alongside the plain binaries but never auto-detected.
@@ -32,18 +34,25 @@ export function getPlatform(key: PlatformKey): Platform {
     return PLATFORMS.find((p) => p.key === key) as Platform
 }
 
-function detectOS(): OS {
-    if (typeof navigator === 'undefined') return 'unknown'
+function detectIsMobile(): boolean {
+    if (typeof navigator === 'undefined') return false
 
     const uaData = (navigator as any)?.userAgentData
     const ua = (navigator.userAgent || (navigator as any).vendor || '').toLowerCase()
 
-    const isMobile =
+    // iPadOS reports a desktop Mac user agent, so touch points are what give it away.
+    return (
         uaData?.mobile === true ||
         /android|iphone|ipad|ipod|windows phone/i.test(ua) ||
         (/mac/i.test(ua) && typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 1)
-    if (isMobile) return 'unknown'
+    )
+}
 
+function detectOS(): OS {
+    if (typeof navigator === 'undefined' || detectIsMobile()) return 'unknown'
+
+    const uaData = (navigator as any)?.userAgentData
+    const ua = (navigator.userAgent || (navigator as any).vendor || '').toLowerCase()
     const platform = (uaData?.platform || navigator.platform || '').toLowerCase()
     if (platform.includes('mac') || ua.includes('mac')) return 'mac'
     if (platform.includes('win') || ua.includes('win')) return 'windows'
@@ -69,17 +78,26 @@ async function detectArch(os: OS): Promise<Arch> {
     return 'unknown'
 }
 
+export interface DetectedDevice {
+    /** The build matching this device, or `null` if we can't confidently match one. */
+    platform: Platform | null
+    /** Phones and tablets, which can't run PostHog Desktop at all. */
+    isMobile: boolean
+}
+
 /**
- * The build matching the visitor's device, or `null` during SSR and on any
- * device we can't confidently match (mobile, unrecognized user agents).
+ * What the visitor is browsing on. During SSR this reports no platform and not
+ * mobile, so the server-rendered markup is the neutral "pick a platform" state.
  */
-export function useDetectedPlatform(): Platform | null {
+export function useDetectedDevice(): DetectedDevice {
     const [os, setOS] = useState<OS>('unknown')
     const [arch, setArch] = useState<Arch>('unknown')
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
         const detected = detectOS()
         setOS(detected)
+        setIsMobile(detectIsMobile())
         detectArch(detected).then(setArch)
     }, [])
 
@@ -96,5 +114,5 @@ export function useDetectedPlatform(): Platform | null {
                 : 'linux-x64'
             : null
 
-    return key ? getPlatform(key) : null
+    return { platform: key ? getPlatform(key) : null, isMobile }
 }
